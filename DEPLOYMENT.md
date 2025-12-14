@@ -21,22 +21,17 @@ This guide explains how to host your screener for free on GitHub Pages and how t
     git push -u origin main
     ```
 
-3.  **Enable GitHub Pages**:
-    *   Go to your repository settings on GitHub.
-    *   Click **Pages** (left sidebar).
-    *   Under **Build and deployment**, select **Source** -> **GitHub Actions**.
-    *   *Wait!* Using a standard Next.js Static Export is easier.
-    *   Actually, let's configure `next.config.mjs` for Static Export first.
+3.  **Deploy Configuration (Already Done Locally)**:
+    *   I have configured `next.config.js` for you.
+    *   I have created a `.github/workflows/deploy.yml` file.
+    *   **Action Required**: You just need to push these changes (Steps below).
+    *   Once pushed, go to your Repository -> **Settings** -> **Pages**.
+    *   Ensure source is set to **GitHub Actions** (if not already selecting it).
 
-### Configure for Static Export
-Ensure your `next.config.mjs` has:
-```javascript
-const nextConfig = {
-  output: 'export',
-  // ...
-};
-```
-(I have already done this for you if you check the project files, but double check).
+4.  **Accessing the Site**:
+    *   After you push, wait about 1-2 minutes.
+    *   Your website will look like: `https://riperdy-tech.github.io/stock-screener/`
+    *   **Send this link to your friend!**
 
 ## 2. Weekly Update Workflow
 
