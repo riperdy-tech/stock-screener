@@ -17,10 +17,9 @@ This guide explains how to host your screener for free on GitHub Pages and how t
     git add .
     git commit -m "Initial commit"
     git branch -M main
-    git remote add origin https://github.com/YOUR_USERNAME/stock-screener.git
+    git remote add origin https://github.com/riperdy-tech/stock-screener.git
     git push -u origin main
     ```
-    *(Replace `YOUR_USERNAME` with your actual GitHub username)*
 
 3.  **Enable GitHub Pages**:
     *   Go to your repository settings on GitHub.
