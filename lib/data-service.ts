@@ -49,7 +49,10 @@ function parseCSV(text: string): any[] {
 export async function fetchStocks(): Promise<StockCandidate[]> {
     try {
         // Fetch CSV instead of JSON
-        const response = await fetch(`/data/stocks.csv?t=${new Date().getTime()}`);
+        // Fix for GitHub Pages: URL needs to include the repo name in production
+        const isProd = process.env.NODE_ENV === 'production';
+        const basePath = isProd ? '/stock-screener' : '';
+        const response = await fetch(`${basePath}/data/stocks.csv?t=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error("Failed to fetch stock data");
         }
