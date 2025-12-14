@@ -113,7 +113,6 @@ export const TRANSLATIONS = {
         scanning: "스캔 중",
         saved: "저장됨",
         gems: "보석",
-        gems: "보석",
         skipped: "건너뜀",
         processing: "처리 중",
 
