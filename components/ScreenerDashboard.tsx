@@ -8,8 +8,9 @@ import { ScreeningResult } from "@/lib/blueprint";
 import { FilterSidebar, FilterState, DEFAULT_FILTERS } from "./FilterSidebar";
 import { LogConsole } from "./LogConsole";
 import { LanguageToggle } from "./LanguageToggle";
-import { Terminal, RefreshCw, Search, Globe } from "lucide-react";
+import { Terminal, RefreshCw, Search, Globe, Filter } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
+import Link from "next/link";
 
 export function ScreenerDashboard() {
     const { t, language, setLanguage } = useLanguage();
@@ -20,6 +21,8 @@ export function ScreenerDashboard() {
     const [search, setSearch] = useState("");
     const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS); // Restore Filter State
     const [selectedStock, setSelectedStock] = useState<ScreeningResult | null>(null);
+    const [lastUpdatedFile, setLastUpdatedFile] = useState<string | null>(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     // Initial Load (Once on mount)
     useEffect(() => {
@@ -30,8 +33,9 @@ export function ScreenerDashboard() {
         if (cached) {
             try {
                 const parsed = JSON.parse(cached);
-                if (Array.isArray(parsed) && parsed.length > 0) {
-                    setRawResults(parsed);
+                if (parsed.data && Array.isArray(parsed.data) && parsed.data.length > 0) {
+                    setRawResults(parsed.data);
+                    if (parsed.lastUpdated) setLastUpdatedFile(parsed.lastUpdated);
                     setLoading(false);
                     return; // Exit, using cache
                 }
@@ -48,7 +52,9 @@ export function ScreenerDashboard() {
     async function loadData(silent = false) {
         if (!silent) setLoading(true);
         try {
-            const rawData = await fetchStocks();
+            const { data: rawData, lastUpdated: updateDate } = await fetchStocks();
+            
+            if (updateDate) setLastUpdatedFile(updateDate);
 
             // ADAPTER: Convert CSV Flat Object to ScreeningResult
             const adaptedData = (rawData as any[]).map(item => {
@@ -115,7 +121,7 @@ export function ScreenerDashboard() {
 
             // PERSIST SNAPSHOT
             try {
-                localStorage.setItem("stock_data_cache", JSON.stringify(finalData));
+                localStorage.setItem("stock_data_cache", JSON.stringify({ data: finalData, lastUpdated: updateDate }));
             } catch (e) {
                 console.error("Cache save failed (quota?)", e);
             }
@@ -192,56 +198,80 @@ export function ScreenerDashboard() {
 
     return (
         <div className="flex min-h-screen bg-background text-foreground animate-in fade-in duration-500">
-            {/* 1. Permanent Sidebar */}
+            {/* Mobile Sidebar Overlay */}
+            {isSidebarOpen && (
+                <div 
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 md:hidden"
+                />
+            )}
+            
+            {/* 1. Permanent/Sliding Sidebar */}
             <FilterSidebar
                 filters={filters}
                 setFilters={setFilters}
-                isOpen={true}
-                onClose={() => { }}
+                isOpen={isSidebarOpen}
+                onClose={() => setIsSidebarOpen(false)}
                 totalResults={filteredResults.length}
             />
 
             {/* 2. Main Content Area */}
-            <main className="flex-1 flex flex-col h-screen overflow-hidden">
+            <main className="flex-1 flex flex-col h-screen overflow-hidden relative w-full">
                 {/* Header */}
-                <header className="h-16 border-b border-border flex items-center justify-between px-6 bg-card shrink-0">
-                    <div className="flex items-center gap-4">
-                        <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                            {t('appTitle')}
-                        </h1>
-                        <span className="text-xs text-muted-foreground uppercase tracking-widest font-mono">
-                            Manual Mode
-                        </span>
+                <header className="py-3 md:h-16 border-b border-border/50 flex flex-col md:flex-row flex-shrink-0 items-start md:items-center justify-between px-4 md:px-6 bg-card/70 backdrop-blur-xl sticky top-0 z-30 shadow-sm gap-3 md:gap-0">
+                    <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
+                        <div className="flex items-center gap-2 md:gap-4">
+                            <h1 className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent truncate max-w-[150px] sm:max-w-none">
+                                {t('appTitle')}
+                            </h1>
+                            <span className="hidden sm:inline-block text-xs text-muted-foreground uppercase tracking-widest font-mono border border-border px-2 py-1 rounded">
+                                Phase 1
+                            </span>
+                        </div>
+                        
+                        <div className="flex md:hidden items-center gap-2 shrink-0">
+                             <button onClick={() => setIsSidebarOpen(true)} className="flex items-center gap-1.5 px-2.5 py-1.5 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors text-xs font-medium border border-border/50">
+                                <Filter className="h-3.5 w-3.5" />
+                                Filters
+                            </button>
+                        </div>
+                        
+                        <Link href="/phase2" className="hidden lg:flex text-sm text-primary hover:underline ml-4 font-medium items-center gap-2">
+                           → To Phase 2 (TradingView)
+                        </Link>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                        {/* Manual Refresh Button */}
-                        <button
-                            onClick={() => loadData(false)}
-                            disabled={loading}
-                            className="flex items-center gap-2 px-3 py-1.5 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-medium mr-2"
-                            title="Refresh Data from CSV"
-                        >
-                            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-                            {loading ? 'Refreshing...' : 'Refresh Data'}
-                        </button>
+                    <div className="flex flex-wrap md:flex-nowrap items-center gap-2 w-full md:w-auto justify-between md:justify-end">
+                        <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
+                            {/* Manual Refresh Button */}
+                            <button
+                                onClick={() => loadData(false)}
+                                disabled={loading}
+                                className="flex items-center gap-2 px-2.5 md:px-3 py-1.5 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-xs md:text-sm font-medium mr-0 md:mr-2"
+                                title="Refresh Data from CSV"
+                            >
+                                <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
+                                <span className="hidden sm:inline">{loading ? 'Refreshing...' : 'Refresh Data'}</span>
+                            </button>
 
-                        {/* Language Toggle */}
-                        <LanguageToggle />
+                            {/* Language Toggle */}
+                            <LanguageToggle />
 
-                        <button
-                            onClick={() => setShowLogs(true)}
-                            className="p-2 text-muted-foreground hover:text-primary hover:bg-secondary rounded-md transition-colors"
-                            title={t('viewLogs')}
-                        >
-                            <Terminal className="h-4 w-4" />
-                        </button>
-                        <div className="relative w-64">
-                            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                            <button
+                                onClick={() => setShowLogs(true)}
+                                className="p-1.5 md:p-2 text-muted-foreground hover:text-primary hover:bg-secondary rounded-md transition-colors border border-transparent border-border/50 md:border-none"
+                                title={t('viewLogs')}
+                            >
+                                <Terminal className="h-4 w-4" />
+                            </button>
+                        </div>
+
+                        <div className="relative w-full md:w-64 mt-1 md:mt-0">
+                            <Search className="absolute left-2.5 top-2 h-4 w-4 text-muted-foreground" />
                             <input
                                 type="text"
                                 placeholder={t('searchPlaceholder')}
-                                className="w-full bg-secondary/50 border-none rounded-md pl-9 pr-4 py-2 text-sm focus:ring-1 focus:ring-primary"
+                                className="w-full bg-secondary/50 border border-border/50 md:border-none rounded-md pl-9 pr-4 py-1.5 md:py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:bg-secondary transition-all"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -250,7 +280,7 @@ export function ScreenerDashboard() {
                 </header>
 
                 {/* Content with Scroll */}
-                <div className="flex-1 overflow-y-auto p-6 scroll-smooth">
+                <div className="flex-1 overflow-y-auto p-4 md:p-6 scroll-smooth">
                     <div className="mb-6">
                         <h2 className="text-2xl font-bold flex items-center gap-2">
                             {t('marketOpp')}
@@ -274,11 +304,13 @@ export function ScreenerDashboard() {
                     ) : (
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
-                                {currentData.map((result) => (
+                                {currentData.map((result, i) => (
                                     <StockCard
                                         key={result.candidate.symbol}
                                         result={result}
                                         onClick={() => setSelectedStock(result)}
+                                        index={i}
+                                        lastUpdated={lastUpdatedFile}
                                     />
                                 ))}
                             </div>

@@ -1,6 +1,7 @@
 import { Filter, X, HelpCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
+import clsx from "clsx";
 
 export interface FilterState {
     minMarketCap: number; // Millions
@@ -75,41 +76,46 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
     };
 
     return (
-        <div className="w-80 bg-card border-r border-border flex flex-col h-screen sticky top-0 overflow-hidden shrink-0">
-            <div className="p-4 border-b border-border flex justify-between items-center bg-muted/20">
+        <div className={clsx(
+            "fixed inset-y-0 left-0 z-50 w-80 bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-screen overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
+            isOpen ? "translate-x-0" : "-translate-x-full"
+        )}>
+            <div className="p-4 border-b border-border/50 flex justify-between items-center bg-muted/40">
                 <div className="flex items-center gap-2 font-semibold">
                     <Filter className="h-5 w-5 text-primary" />
                     {t('filters')}
                 </div>
-                {/* Permanent Sidebar - No Close Button */}
+                <button onClick={onClose} className="md:hidden p-1.5 focus:outline-none hover:bg-destructive/20 hover:text-destructive rounded-md transition-colors border border-transparent hover:border-destructive/30">
+                     <X className="h-4 w-4" />
+                </button>
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-6">
 
                 {/* Size & Price */}
                 <Section title={t('sizePrice')}>
-                    <InputGroup label={t('minMarketCap')} value={localFilters.minMarketCap} onChange={(v) => handleChange("minMarketCap", v)} strictValue={STRICT_FILTERS.minMarketCap} field="minMarketCap" defs={filterDefs} />
-                    <InputGroup label={t('maxMarketCap')} value={localFilters.maxMarketCap} onChange={(v) => handleChange("maxMarketCap", v)} strictValue={STRICT_FILTERS.maxMarketCap} field="maxMarketCap" defs={filterDefs} />
-                    <InputGroup label={t('maxPrice')} value={localFilters.maxPrice} onChange={(v) => handleChange("maxPrice", v)} strictValue={STRICT_FILTERS.maxPrice} field="maxPrice" defs={filterDefs} />
-                    <InputGroup label={t('maxFloat')} value={localFilters.maxFloat} onChange={(v) => handleChange("maxFloat", v)} strictValue={STRICT_FILTERS.maxFloat} field="maxFloat" defs={filterDefs} />
+                    <InputGroup label={t('minMarketCap')} value={localFilters.minMarketCap} onChange={(v) => handleChange("minMarketCap", v)} strictValue={STRICT_FILTERS.minMarketCap} field="minMarketCap" defs={filterDefs} min={0} max={5000} step={10} />
+                    <InputGroup label={t('maxMarketCap')} value={localFilters.maxMarketCap} onChange={(v) => handleChange("maxMarketCap", v)} strictValue={STRICT_FILTERS.maxMarketCap} field="maxMarketCap" defs={filterDefs} min={0} max={10000} step={100} />
+                    <InputGroup label={t('maxPrice')} value={localFilters.maxPrice} onChange={(v) => handleChange("maxPrice", v)} strictValue={STRICT_FILTERS.maxPrice} field="maxPrice" defs={filterDefs} min={0} max={1000} step={1} />
+                    <InputGroup label={t('maxFloat')} value={localFilters.maxFloat} onChange={(v) => handleChange("maxFloat", v)} strictValue={STRICT_FILTERS.maxFloat} field="maxFloat" defs={filterDefs} min={0} max={5000} step={10} />
                 </Section>
 
                 {/* Growth & Margins */}
                 <Section title={t('growthEff')}>
-                    <InputGroup label={t('minRevGrowth')} value={localFilters.minRevenueGrowth} onChange={(v) => handleChange("minRevenueGrowth", v)} strictValue={STRICT_FILTERS.minRevenueGrowth} field="minRevenueGrowth" defs={filterDefs} />
-                    <InputGroup label={t('minGrossMargin')} value={localFilters.minGrossMargin} onChange={(v) => handleChange("minGrossMargin", v)} strictValue={STRICT_FILTERS.minGrossMargin} field="minGrossMargin" defs={filterDefs} />
-                    <InputGroup label={t('minROIC')} value={localFilters.minROIC} onChange={(v) => handleChange("minROIC", v)} strictValue={STRICT_FILTERS.minROIC} field="minROIC" defs={filterDefs} />
+                    <InputGroup label={t('minRevGrowth')} value={localFilters.minRevenueGrowth} onChange={(v) => handleChange("minRevenueGrowth", v)} strictValue={STRICT_FILTERS.minRevenueGrowth} field="minRevenueGrowth" defs={filterDefs} min={-50} max={200} step={1} />
+                    <InputGroup label={t('minGrossMargin')} value={localFilters.minGrossMargin} onChange={(v) => handleChange("minGrossMargin", v)} strictValue={STRICT_FILTERS.minGrossMargin} field="minGrossMargin" defs={filterDefs} min={-50} max={100} step={1} />
+                    <InputGroup label={t('minROIC')} value={localFilters.minROIC} onChange={(v) => handleChange("minROIC", v)} strictValue={STRICT_FILTERS.minROIC} field="minROIC" defs={filterDefs} min={-50} max={100} step={1} />
                 </Section>
 
                 {/* Valuation */}
                 <Section title={t('valuation')}>
-                    <InputGroup label={t('maxPS')} value={localFilters.maxPS} onChange={(v) => handleChange("maxPS", v)} strictValue={STRICT_FILTERS.maxPS} field="maxPS" defs={filterDefs} />
-                    <InputGroup label={t('maxPEG')} value={localFilters.maxPEG} onChange={(v) => handleChange("maxPEG", v)} strictValue={STRICT_FILTERS.maxPEG} field="maxPEG" defs={filterDefs} />
+                    <InputGroup label={t('maxPS')} value={localFilters.maxPS} onChange={(v) => handleChange("maxPS", v)} strictValue={STRICT_FILTERS.maxPS} field="maxPS" defs={filterDefs} min={0} max={50} step={0.5} />
+                    <InputGroup label={t('maxPEG')} value={localFilters.maxPEG} onChange={(v) => handleChange("maxPEG", v)} strictValue={STRICT_FILTERS.maxPEG} field="maxPEG" defs={filterDefs} min={0} max={10} step={0.1} />
                 </Section>
 
                 {/* Inside Skin */}
                 <Section title={t('ownership')}>
-                    <InputGroup label={t('minInsider')} value={localFilters.minInsiderOwnership} onChange={(v) => handleChange("minInsiderOwnership", v)} strictValue={STRICT_FILTERS.minInsiderOwnership} field="minInsiderOwnership" defs={filterDefs} />
+                    <InputGroup label={t('minInsider')} value={localFilters.minInsiderOwnership} onChange={(v) => handleChange("minInsiderOwnership", v)} strictValue={STRICT_FILTERS.minInsiderOwnership} field="minInsiderOwnership" defs={filterDefs} min={0} max={100} step={1} />
                 </Section>
 
                 <div className="text-center text-xs text-muted-foreground mt-8 pb-20">
@@ -118,7 +124,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
             </div>
 
             {/* Sticky Actions Footer */}
-            <div className="p-4 border-t border-border bg-card sticky bottom-0">
+            <div className="p-4 border-t border-border/50 bg-card/50 backdrop-blur-xl sticky bottom-0 z-10 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]">
                 <div className="flex gap-2">
                     <button
                         onClick={handleApply}
@@ -149,32 +155,54 @@ function Section({ title, children }: { title: string, children: React.ReactNode
     )
 }
 
-function InputGroup({ label, value, onChange, hint, strictValue, field, defs }: { label: string, value: number, onChange: (v: string) => void, hint?: string, strictValue?: number, field?: string, defs?: Record<string, string> }) {
+function InputGroup({ label, value, onChange, hint, strictValue, field, defs, min = 0, max = 100, step = 1 }: { label: string, value: number, onChange: (v: string) => void, hint?: string, strictValue?: number, field?: string, defs?: Record<string, string>, min?: number, max?: number, step?: number }) {
+    // Dynamically colorize the slider thumb. If it's stricter than the strict limit, it glows warning color!
+    const isStrict = strictValue !== undefined && (
+        (label.includes('max') && value <= strictValue) ||
+        (label.includes('min') && value >= strictValue)
+    );
+
     return (
-        <div>
-            <div className="flex justify-between items-baseline mb-1">
+        <div className="group/input mb-2">
+            <div className="flex justify-between items-baseline mb-2">
                 <div className="flex items-center gap-1.5 group relative cursor-help w-fit">
-                    <label className="text-xs text-muted-foreground block">{label}</label>
-                    {field && <HelpCircle className="h-3 w-3 text-gray-600 group-hover:text-primary transition-colors" />}
+                    <label className="text-xs font-medium text-muted-foreground group-hover/input:text-foreground transition-colors">{label}</label>
+                    {field && <HelpCircle className="h-3 w-3 text-muted-foreground/50 group-hover:text-primary transition-colors" />}
 
                     {/* Tooltip */}
                     {field && defs && (
-                        <div className="absolute left-0 bottom-full mb-2 w-48 p-2 bg-[#1a1a1a] border border-gray-700 rounded-md text-xs text-gray-300 shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
+                        <div className="absolute left-0 bottom-full mb-2 w-48 p-2 bg-[#1a1a1a]/95 backdrop-blur-md border border-border shadow-2xl rounded-md text-xs text-gray-300 opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
                             {defs[field] || "Filter criteria"}
-                            <div className="absolute bottom-[-4px] left-4 w-2 h-2 bg-[#1a1a1a] border-r border-b border-gray-700 transform rotate-45"></div>
+                            <div className="absolute bottom-[-4px] left-4 w-2 h-2 bg-[#1a1a1a] border-r border-b border-border transform rotate-45"></div>
                         </div>
                     )}
                 </div>
 
-                {strictValue !== undefined && (
-                    <span className="text-[10px] text-primary/70 font-mono">Strict: {strictValue}</span>
-                )}
+                <div className="flex items-center gap-2">
+                    {strictValue !== undefined && (
+                        <span className="text-[10px] text-muted-foreground/80 font-mono opacity-0 group-hover/input:opacity-100 transition-opacity">Strict: {strictValue}</span>
+                    )}
+                    <input
+                        type="number"
+                        value={value}
+                        onChange={(e) => onChange(e.target.value)}
+                        className="w-16 bg-secondary/30 border border-border/50 rounded px-1.5 py-1 text-xs text-right focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-mono"
+                    />
+                </div>
             </div>
+            
+            {/* The Range Slider */}
             <input
-                type="number"
+                type="range"
+                min={min}
+                max={max}
+                step={step}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-full bg-secondary/30 border border-border rounded px-3 py-2 text-sm focus:outline-none focus:border-primary/50 transition-colors"
+                className={`w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer outline-none transition-all
+                [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 
+                [&::-webkit-slider-thumb]:rounded-full ${isStrict ? '[&::-webkit-slider-thumb]:bg-warning [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(237,137,54,0.8)]' : '[&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(59,130,246,0.6)]'}
+                hover:[&::-webkit-slider-thumb]:scale-125 hover:[&::-webkit-slider-thumb]:transition-transform`}
             />
             {hint && <div className="text-[10px] text-muted-foreground/60 mt-1">{hint}</div>}
         </div>

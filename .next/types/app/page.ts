@@ -1,4 +1,4 @@
-// File: C:\Users\riper\Documents\Stock Screener\app\page.tsx
+// File: C:\Users\riper\Downloads\Stock Screener\Stock Screener\app\page.tsx
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

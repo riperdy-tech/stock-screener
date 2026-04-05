@@ -46,7 +46,7 @@ function parseCSV(text: string): any[] {
     });
 }
 
-export async function fetchStocks(): Promise<StockCandidate[]> {
+export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdated: string | null }> {
     try {
         // Fetch CSV instead of JSON
         // Fix for GitHub Pages: URL needs to include the repo name in production
@@ -58,8 +58,18 @@ export async function fetchStocks(): Promise<StockCandidate[]> {
         }
         const text = await response.text();
         const rawData = parseCSV(text);
+        
+        const lastMod = response.headers.get('Last-Modified');
+        let lastUpdated = null;
+        if (lastMod) {
+            const d = new Date(lastMod);
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            lastUpdated = `${yyyy}-${mm}-${dd}`;
+        }
 
-        return rawData.map(row => ({
+        const mappedData = rawData.map(row => ({
             symbol: row['Symbol'] || '',
             name: (row['Name'] || '').replace(/"/g, ''), // Cleanup quotes
             sector: row['Sector'] || 'Unknown',
@@ -86,8 +96,10 @@ export async function fetchStocks(): Promise<StockCandidate[]> {
             _failCodes: (row['Fail Codes'] || '').split(',').filter((c: string) => c),
             _reasons: [] // We don't export reasons to CSV to save space, maybe add later?
         })) as any[]; // Cast to any to pass "extra" fields to the dashboard adapter
+        
+        return { data: mappedData, lastUpdated };
     } catch (error) {
         console.error("Error loading stocks:", error);
-        return [];
+        return { data: [], lastUpdated: null };
     }
 }
