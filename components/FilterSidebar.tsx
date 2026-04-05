@@ -25,16 +25,16 @@ interface FilterSidebarProps {
 }
 
 export const DEFAULT_FILTERS: FilterState = {
-    minMarketCap: 0,
-    maxMarketCap: 100000, // Effectively infinite
-    maxPrice: 10000,
-    minRevenueGrowth: -100,
-    minGrossMargin: -100,
-    minROIC: -100,
-    maxPS: 1000,
-    maxPEG: 1000,
-    minInsiderOwnership: 0,
-    maxFloat: 5000, // 5B shares
+    minMarketCap: 50,
+    maxMarketCap: 2000,
+    maxPrice: 25,
+    minRevenueGrowth: 20,
+    minGrossMargin: 30,
+    minROIC: 15,
+    maxPS: 10,
+    maxPEG: 1.5,
+    minInsiderOwnership: 15,
+    maxFloat: 50,
 };
 
 export const STRICT_FILTERS: FilterState = {
