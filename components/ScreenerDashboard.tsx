@@ -6,16 +6,14 @@ import { StockCard } from "./StockCard";
 import { fetchStocks } from "@/lib/data-service";
 import { ScreeningResult } from "@/lib/blueprint";
 import { FilterSidebar, FilterState, DEFAULT_FILTERS } from "./FilterSidebar";
-import { LogConsole } from "./LogConsole";
 import { LanguageToggle } from "./LanguageToggle";
-import { Terminal, RefreshCw, Search, Globe, Filter } from "lucide-react";
+import { Search, Globe, Filter } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
 
 export function ScreenerDashboard() {
     const { t, language, setLanguage } = useLanguage();
     const [loading, setLoading] = useState(true);
-    const [showLogs, setShowLogs] = useState(false);
 
     const [rawResults, setRawResults] = useState<ScreeningResult[]>([]);
     const [search, setSearch] = useState("");
@@ -214,33 +212,14 @@ export function ScreenerDashboard() {
                         </div>
                         
                         <Link href="/phase2" className="hidden md:flex text-sm text-primary hover:underline ml-4 font-medium items-center gap-2">
-                           → To Phase 2 (TradingView)
+                           → To Phase 2
                         </Link>
                     </div>
 
                     <div className="flex flex-wrap md:flex-nowrap items-center gap-2 w-full md:w-auto justify-between md:justify-end">
                         <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
-                            {/* Manual Refresh Button */}
-                            <button
-                                onClick={() => loadData(false)}
-                                disabled={loading}
-                                className="flex items-center gap-2 px-2.5 md:px-3 py-1.5 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-xs md:text-sm font-medium mr-0 md:mr-2"
-                                title="Refresh Data from CSV"
-                            >
-                                <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
-                                <span className="hidden sm:inline">{loading ? 'Refreshing...' : 'Refresh Data'}</span>
-                            </button>
-
                             {/* Language Toggle */}
                             <LanguageToggle />
-
-                            <button
-                                onClick={() => setShowLogs(true)}
-                                className="p-1.5 md:p-2 text-muted-foreground hover:text-primary hover:bg-secondary rounded-md transition-colors border border-transparent border-border/50 md:border-none"
-                                title={t('viewLogs')}
-                            >
-                                <Terminal className="h-4 w-4" />
-                            </button>
                         </div>
 
                         <div className="relative w-full md:w-64 mt-1 md:mt-0">
@@ -269,7 +248,6 @@ export function ScreenerDashboard() {
 
                     {loading && rawResults.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-64 text-muted-foreground animate-pulse">
-                            <RefreshCw className="h-8 w-8 mb-4 animate-spin" />
                             <p>{t('initEngine')}</p>
                         </div>
                     ) : filteredResults.length === 0 ? (
@@ -333,7 +311,6 @@ export function ScreenerDashboard() {
                     onClose={() => setSelectedStock(null)}
                 />
             )}
-            <LogConsole isOpen={showLogs} onClose={() => setShowLogs(false)} />
         </div>
     );
 }

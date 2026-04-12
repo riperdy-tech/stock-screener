@@ -88,6 +88,11 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
         setFilters(ZERO_BASE_FILTERS);
     };
 
+    const handleStrict = () => {
+        setLocalFilters(STRICT_FILTERS);
+        setFilters(STRICT_FILTERS);
+    };
+
     return (
         <div className={clsx(
             "fixed inset-y-0 left-0 z-50 w-80 bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-[100dvh] overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
@@ -146,8 +151,14 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         {t('apply')}
                     </button>
                     <button
+                        onClick={handleStrict}
+                        className="flex-1 px-2 py-2 bg-accent/20 hover:bg-accent/40 text-accent font-medium text-xs rounded border border-accent/30 transition-colors"
+                    >
+                        {t('strict') || "Strict"}
+                    </button>
+                    <button
                         onClick={handleReset}
-                        className="flex-1 px-3 py-2 bg-muted hover:bg-destructive/10 hover:text-destructive text-muted-foreground text-xs font-medium rounded border border-border transition-colors"
+                        className="flex-1 px-2 py-2 bg-muted hover:bg-destructive/10 hover:text-destructive text-muted-foreground text-xs font-medium rounded border border-border transition-colors"
                     >
                         {t('reset')}
                     </button>

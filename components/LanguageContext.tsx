@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { TRANSLATIONS, Language, FILTER_DEFS_EN, FILTER_DEFS_KO } from "@/lib/i18n";
+import { TRANSLATIONS, Language, FILTER_DEFS_EN, FILTER_DEFS_KO, FILTER_DEFS_ZH } from "@/lib/i18n";
 
 interface LanguageContextType {
     language: Language;
@@ -18,7 +18,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     // Load from localStorage if available
     useEffect(() => {
         const saved = localStorage.getItem('app-language') as Language;
-        if (saved && (saved === 'en' || saved === 'ko')) {
+        if (saved && (saved === 'en' || saved === 'ko' || saved === 'zh')) {
             setLanguage(saved);
         }
     }, []);
@@ -32,7 +32,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         return TRANSLATIONS[language][key] || TRANSLATIONS['en'][key] || key;
     };
 
-    const filterDefs = language === 'ko' ? FILTER_DEFS_KO : FILTER_DEFS_EN;
+    const filterDefs = language === 'ko' ? FILTER_DEFS_KO : language === 'zh' ? FILTER_DEFS_ZH : FILTER_DEFS_EN;
 
     return (
         <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t, filterDefs }}>
