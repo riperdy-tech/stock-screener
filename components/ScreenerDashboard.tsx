@@ -230,13 +230,16 @@ export function ScreenerDashboard() {
                         </div>
                         
                         <div className="flex md:hidden items-center gap-2 shrink-0">
+                             <Link href="/phase2" className="flex items-center gap-1 px-2.5 py-1.5 bg-primary/10 text-primary rounded-md hover:bg-primary/20 transition-colors text-xs font-medium border border-primary/20">
+                                → Phase 2
+                             </Link>
                              <button onClick={() => setIsSidebarOpen(true)} className="flex items-center gap-1.5 px-2.5 py-1.5 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors text-xs font-medium border border-border/50">
                                 <Filter className="h-3.5 w-3.5" />
                                 Filters
                             </button>
                         </div>
                         
-                        <Link href="/phase2" className="hidden lg:flex text-sm text-primary hover:underline ml-4 font-medium items-center gap-2">
+                        <Link href="/phase2" className="hidden md:flex text-sm text-primary hover:underline ml-4 font-medium items-center gap-2">
                            → To Phase 2 (TradingView)
                         </Link>
                     </div>

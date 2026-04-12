@@ -116,28 +116,28 @@ export function Phase2Dashboard() {
     }
 
     return (
-        <div className="flex-1 overflow-y-auto p-6 bg-background text-foreground animate-in fade-in duration-500">
-            <header className="mb-8 border-b border-border pb-4 flex justify-between items-end">
-                <div>
+        <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-background text-foreground animate-in fade-in duration-500">
+            <header className="mb-6 border-b border-border pb-4 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                <div className="w-full">
                     <div className="mb-2">
                         <Link href="/" className="text-sm text-primary hover:underline font-medium flex items-center gap-2">
                            ← Back to Phase 1 (Screener)
                         </Link>
                     </div>
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
+                    <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
                         Phase 2: Automated Validation View
                     </h1>
-                    <p className="text-muted-foreground flex items-center gap-2">
+                    <p className="text-muted-foreground flex flex-wrap items-center gap-2 text-xs md:text-sm">
                         Read-only presentation mapping the direct outputs of the Hybrid Python Engine.
-                        <span className="px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 rounded text-xs">Fully Automated</span>
+                        <span className="px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 rounded text-xs whitespace-nowrap">Fully Automated</span>
                     </p>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 w-full md:w-auto">
                     <button 
                         onClick={() => setShowOnlyElite(!showOnlyElite)}
-                        className={`px-4 py-2 text-sm font-semibold rounded outline-none flex items-center gap-2 transition-colors ${showOnlyElite ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'bg-secondary text-secondary-foreground border border-border hover:bg-secondary/80'}`}
+                        className={`w-full md:w-auto px-4 py-2 text-sm font-semibold rounded outline-none flex justify-center items-center gap-2 transition-colors ${showOnlyElite ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'bg-secondary text-secondary-foreground border border-border hover:bg-secondary/80'}`}
                     >
-                        <CheckCircle className="h-4 w-4" />
+                        <CheckCircle className="h-4 w-4 shrink-0" />
                         {showOnlyElite ? "Showing Elite Only" : "Showing All Candidates"}
                     </button>
                 </div>
@@ -324,7 +324,7 @@ export function Phase2Dashboard() {
                                     
                                     {/* PHASE 1 CONTEXT PANEL */}
                                     <td className="px-4 py-4 align-top border-r border-border bg-secondary/20">
-                                        <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+                                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-4 gap-y-2 text-xs">
                                             <div><span className="text-muted-foreground border-b border-dotted" title="Free Cash Flow Yield: Indicates strong cash generation relative to market cap.">FCF Yield:</span> <span className="font-mono float-right block">{formatMetric(row['FCF Yield'], true)}</span></div>
                                             <div><span className="text-muted-foreground border-b border-dotted" title="Book to Market Ratio: Value investing metric comparing net assets to market price.">B/M Ratio:</span> <span className="font-mono float-right block">{formatMetric(row['Book-to-Market Ratio'])}</span></div>
                                             <div><span className="text-muted-foreground border-b border-dotted" title="Revenue Growth: Year over Year top-line sales growth.">Rev Growth:</span> <span className="font-mono float-right block">{formatMetric(row['Rev Growth'], true)}</span></div>

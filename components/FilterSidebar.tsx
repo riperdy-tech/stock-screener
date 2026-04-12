@@ -90,7 +90,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
     return (
         <div className={clsx(
-            "fixed inset-y-0 left-0 z-50 w-80 bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-screen overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
+            "fixed inset-y-0 left-0 z-50 w-80 bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-[100dvh] overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
             isOpen ? "translate-x-0" : "-translate-x-full"
         )}>
             <div className="p-4 border-b border-border/50 flex justify-between items-center bg-muted/40">
@@ -193,7 +193,7 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
 
                 <div className="flex items-center gap-2">
                     {strictValue !== undefined && (
-                        <span className="text-[10px] text-muted-foreground/80 font-mono opacity-0 group-hover/input:opacity-100 transition-opacity">Strict: {strictValue}</span>
+                        <span className="text-[10px] text-muted-foreground/80 font-mono">Strict: {strictValue}</span>
                     )}
                     <input
                         type="number"
