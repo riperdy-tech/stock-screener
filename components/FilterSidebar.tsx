@@ -37,6 +37,19 @@ export const DEFAULT_FILTERS: FilterState = {
     maxFloat: 50,
 };
 
+export const ZERO_BASE_FILTERS: FilterState = {
+    minMarketCap: 0,
+    maxMarketCap: 10000,
+    maxPrice: 1000,
+    minRevenueGrowth: -50,
+    minGrossMargin: -50,
+    minROIC: -50,
+    maxPS: 50,
+    maxPEG: 10,
+    minInsiderOwnership: 0,
+    maxFloat: 5000,
+};
+
 export const STRICT_FILTERS: FilterState = {
     minMarketCap: 50,
     maxMarketCap: 2000,
@@ -71,8 +84,8 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
     };
 
     const handleReset = () => {
-        setLocalFilters(DEFAULT_FILTERS);
-        setFilters(DEFAULT_FILTERS);
+        setLocalFilters(ZERO_BASE_FILTERS);
+        setFilters(ZERO_BASE_FILTERS);
     };
 
     return (

@@ -60,8 +60,8 @@ def get_fdr_tickers():
         clean_tickers = []
         for t in tickers:
             t_str = str(t)
-            # Skip Preferreds, Warrants, Units
-            if ' ' in t_str or 'PR' in t_str or 'WS' in t_str:
+            # Skip Preferreds, Warrants, Units safely without killing valid ticker strings like "PRO" or "NEWS"
+            if ' ' in t_str or '-PR' in t_str or '.PR' in t_str or '-WS' in t_str or '.WS' in t_str:
                 continue
             
             # Normalize for Yahoo (Dot to Dash)
@@ -155,8 +155,7 @@ def process_stock(ticker_symbol):
         balance_sheet = stock.balance_sheet
         cashflow = stock.cashflow
         
-        if financials.empty or balance_sheet.empty or cashflow.empty:
-            return None
+        # We proceed even if financials are empty to ensure all stocks pulled from market are visible
 
         # ROIC
         try:

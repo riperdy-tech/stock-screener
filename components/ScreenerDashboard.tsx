@@ -152,19 +152,19 @@ export function ScreenerDashboard() {
             if (filters.minMarketCap > 0 && mcapM < filters.minMarketCap) return false;
             // if (filters.maxMarketCap > 0 && mcapM > filters.maxMarketCap) return false; // Optional max cap check
 
-            if (filters.maxPrice > 0 && c.price > filters.maxPrice) return false;
+            if (filters.maxPrice > 0 && filters.maxPrice < 1000 && c.price > filters.maxPrice) return false;
 
             if (c.revenueGrowth < filters.minRevenueGrowth) return false;
             if (c.grossMargin < filters.minGrossMargin) return false;
             if (c.roic < filters.minROIC) return false;
             if (c.insiderOwnership < filters.minInsiderOwnership) return false;
 
-            if (c.pegRatio > filters.maxPEG) return false;
-            if (c.priceToSales > filters.maxPS) return false;
+            if (filters.maxPEG < 10 && c.pegRatio > filters.maxPEG) return false;
+            if (filters.maxPS < 50 && c.priceToSales > filters.maxPS) return false;
 
             if (filters.maxFloat > 0 && r.metrics?.float) {
                 const floatM = r.metrics.float / 1_000_000;
-                if (floatM > filters.maxFloat) return false;
+                if (filters.maxFloat < 5000 && floatM > filters.maxFloat) return false;
             }
 
             return true;

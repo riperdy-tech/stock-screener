@@ -28,7 +28,7 @@ def get_fdr_tickers():
         clean_tickers = []
         for t in tickers:
             t_str = str(t)
-            if ' ' in t_str or 'PR' in t_str or 'WS' in t_str:
+            if ' ' in t_str or '-PR' in t_str or '.PR' in t_str or '-WS' in t_str or '.WS' in t_str:
                 continue
             norm = t_str.replace('.', '-')
             clean_tickers.append(norm)
