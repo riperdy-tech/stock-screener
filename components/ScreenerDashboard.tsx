@@ -26,27 +26,8 @@ export function ScreenerDashboard() {
 
     // Initial Load (Once on mount)
     useEffect(() => {
-        // PER USER REQUEST:
-        // "The website shall only change # of assets, if the 'refresh data' button is clicked."
-        // We try to load cached data from LocalStorage first.
-        const cached = localStorage.getItem("stock_data_cache");
-        if (cached) {
-            try {
-                const parsed = JSON.parse(cached);
-                if (parsed.data && Array.isArray(parsed.data) && parsed.data.length > 0) {
-                    setRawResults(parsed.data);
-                    if (parsed.lastUpdated) setLastUpdatedFile(parsed.lastUpdated);
-                    setLoading(false);
-                    return; // Exit, using cache
-                }
-            } catch (e) {
-                console.warn("Invalid cache, falling back to fetch");
-                // Fallthrough to loadData triggers fetch
-            }
-        }
-
-        // If no cache, we fetch fresh data automatically once
-        loadData();
+        // Always load exactly what's exported to avoid caching staleness
+        loadData(true);
     }, []);
 
     async function loadData(silent = false) {
@@ -119,13 +100,6 @@ export function ScreenerDashboard() {
                 return d;
             });
 
-            // PERSIST SNAPSHOT
-            try {
-                localStorage.setItem("stock_data_cache", JSON.stringify({ data: finalData, lastUpdated: updateDate }));
-            } catch (e) {
-                console.error("Cache save failed (quota?)", e);
-            }
-
             setRawResults(finalData as unknown as ScreeningResult[]);
         } catch (err) {
             console.error("Failed to load or adapt data:", err);
@@ -154,9 +128,9 @@ export function ScreenerDashboard() {
 
             if (filters.maxPrice > 0 && filters.maxPrice < 1000 && c.price > filters.maxPrice) return false;
 
-            if (c.revenueGrowth < filters.minRevenueGrowth) return false;
-            if (c.grossMargin < filters.minGrossMargin) return false;
-            if (c.roic < filters.minROIC) return false;
+            if (filters.minRevenueGrowth > -50 && c.revenueGrowth < filters.minRevenueGrowth) return false;
+            if (filters.minGrossMargin > -50 && c.grossMargin < filters.minGrossMargin) return false;
+            if (filters.minROIC > -50 && c.roic < filters.minROIC) return false;
             if (c.insiderOwnership < filters.minInsiderOwnership) return false;
 
             if (filters.maxPEG < 10 && c.pegRatio > filters.maxPEG) return false;
