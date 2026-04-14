@@ -6,9 +6,10 @@ import clsx from "clsx";
 interface StockDetailModalProps {
     result: ScreeningResult;
     onClose: () => void;
+    onAskGemini?: (ticker: string) => void;
 }
 
-export function StockDetailModal({ result, onClose }: StockDetailModalProps) {
+export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailModalProps) {
     const { t } = useLanguage();
     const { candidate, reasons, flags, score } = result;
 
@@ -49,29 +50,17 @@ export function StockDetailModal({ result, onClose }: StockDetailModalProps) {
                                     <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="w-4 h-4 rounded-sm" />
                                     <span className="text-xs font-bold hidden sm:inline">TradingView</span>
                                 </a>
-                                <a
-                                    href={`https://finance.yahoo.com/quote/${candidate.symbol}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#720e9e]/10 hover:bg-[#720e9e]/20 text-[#720e9e] transition-all shadow-sm border border-[#720e9e]/20"
-                                    title={t('openYF')}
-                                >
-                                    <img src="https://www.google.com/s2/favicons?domain=yahoo.com&sz=32" alt="YF" className="w-4 h-4 rounded-sm" />
-                                    <span className="text-xs font-bold hidden sm:inline">Yahoo Finance</span>
-                                </a>
-                                <a
-                                    href={`https://gemini.google.com/app`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <button
+                                    onClick={() => onAskGemini && onAskGemini(candidate.symbol)}
                                     className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 text-blue-600 dark:text-blue-400 transition-all shadow-sm border border-blue-500/20"
-                                    title="Ask Gemini about this stock"
+                                    title="Ask AI about this stock"
                                 >
                                     <Sparkles className="w-4 h-4" />
-                                    <span className="text-xs font-bold hidden sm:inline">{t('askGemini')}</span>
-                                </a>
+                                    <span className="text-xs font-bold hidden sm:inline">Ask AI</span>
+                                </button>
                             </div>
                             <div className={clsx("px-3 py-1 rounded-full text-xs font-bold tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
-                                {result.passed ? "GEM CANDIDATE" : "WATCHLIST"}
+                                {result.passed ? "GEM CANDIDATE" : "REVIEWING"}
                             </div>
                         </div>
                     </div>
@@ -80,10 +69,7 @@ export function StockDetailModal({ result, onClose }: StockDetailModalProps) {
                     </button>
                 </div>
 
-                <div className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-                    {/* Left Column: Analysis */}
-                    <div className="lg:col-span-2 space-y-8">
+                <div className="p-6 space-y-8">
 
                         {/* Score & Synthesis */}
                         <div className="flex items-center gap-6 p-6 bg-secondary/30 rounded-xl border border-border/50">
@@ -112,20 +98,21 @@ export function StockDetailModal({ result, onClose }: StockDetailModalProps) {
                                 <Activity className="h-5 w-5 text-primary" /> {t('phase1')}
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <DetailRow label={t('revGrowth')} value={`${candidate.revenueGrowth}%`} target={`> ${QUANT_THRESHOLDS.MIN_REVENUE_GROWTH}%`} pass={candidate.revenueGrowth >= QUANT_THRESHOLDS.MIN_REVENUE_GROWTH} />
-                                <DetailRow label={t('roic')} value={`${candidate.roic}%`} target={`> ${QUANT_THRESHOLDS.MIN_ROIC}%`} pass={candidate.roic >= QUANT_THRESHOLDS.MIN_ROIC} />
-                                <DetailRow label={t('grossMargin')} value={`${candidate.grossMargin}%`} target={`> 30% / 50%`} pass={candidate.grossMargin >= 30} />
-                                <DetailRow label={t('mcap')} value={`$${(candidate.marketCap / 1e9).toFixed(2)}B`} target={`< $2B`} pass={candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} warning={candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} />
-                                <DetailRow label={t('pegRatio')} value={candidate.pegRatio} target={`< ${QUANT_THRESHOLDS.MAX_PEG}`} pass={candidate.pegRatio <= QUANT_THRESHOLDS.MAX_PEG} />
-                                <DetailRow label={t('insiderOwn')} value={`${candidate.insiderOwnership.toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP}%`} pass={candidate.insiderOwnership >= QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP} />
+                                <DetailRow label={t('revGrowth')} value={`${Number(candidate.revenueGrowth).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_REVENUE_GROWTH}%`} pass={candidate.revenueGrowth >= QUANT_THRESHOLDS.MIN_REVENUE_GROWTH} />
+                                <DetailRow label={t('roic')} value={`${Number(candidate.roic).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_ROIC}%`} pass={candidate.roic >= QUANT_THRESHOLDS.MIN_ROIC} />
+                                <DetailRow label={t('grossMargin')} value={`${Number(candidate.grossMargin).toFixed(1)}%`} target={`> 30% / 50%`} pass={candidate.grossMargin >= 30} />
+                                <DetailRow label={t('mcap')} value={`$${(candidate.marketCap / 1e9).toFixed(1)}B`} target={`< $2B`} pass={candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} warning={candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} />
+                                <DetailRow label={t('pegRatio')} value={`${Number(candidate.pegRatio).toFixed(1)}x`} target={`< ${QUANT_THRESHOLDS.MAX_PEG}`} pass={candidate.pegRatio <= QUANT_THRESHOLDS.MAX_PEG} />
+                                <DetailRow label={t('insiderOwn')} value={`${Number(candidate.insiderOwnership).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP}%`} pass={candidate.insiderOwnership >= QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP} />
                             </div>
                         </div>
 
                         {/* Phase 2: Kill List */}
                         <div>
-                            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-danger">
+                            <h3 className="text-xl font-bold mb-1 flex items-center gap-2 text-danger">
                                 <AlertOctagon className="h-5 w-5" /> {t('phase2')}
                             </h3>
+                            <p className="text-xs text-muted-foreground mb-4">Disqualifying red flags that override high quant scores. Any flag here means the stock fails the blueprint.</p>
                             <div className="bg-danger/5 border border-danger/20 rounded-xl p-4">
                                 {flags.length === 0 ? (
                                     <div className="flex items-center gap-2 text-success">
@@ -148,35 +135,6 @@ export function StockDetailModal({ result, onClose }: StockDetailModalProps) {
                             </div>
                         </div>
 
-                    </div>
-
-                    {/* Right Column: Benchmarks */}
-                    <div className="space-y-6">
-                        <div className="bg-secondary/20 p-6 rounded-xl border border-border">
-                            <h3 className="text-lg font-bold mb-4">{t('historicalBenchmarks')}</h3>
-                            <p className="text-xs text-muted-foreground mb-4">Comparing {candidate.symbol} to key "Day Before" snapshots of legendary compounders.</p>
-
-                            <div className="space-y-4">
-                                <BenchmarkRow name="Monster (2004)" metric={t('grossMargin')} value="46%" current={`${candidate.grossMargin}%`} pass={candidate.grossMargin >= 46} />
-                                <BenchmarkRow name="Amazon (2002)" metric={t('revGrowth')} value="20%+" current={`${candidate.revenueGrowth}%`} pass={candidate.revenueGrowth >= 20} />
-                                <BenchmarkRow name="Domino's (2010)" metric="P/E" value="10x" current={`${candidate.peRatio}x`} pass={candidate.peRatio <= 15} />
-                            </div>
-                        </div>
-
-                        <div className="bg-card p-6 rounded-xl border border-border">
-                            <h3 className="text-lg font-bold mb-2">{t('verdict')}</h3>
-                            <ul className="space-y-2 text-sm">
-                                {reasons.length === 0 && flags.length === 0 ? (
-                                    <li className="text-success">{t('strongCandidate')}</li>
-                                ) : (
-                                    (result.failCodes || result.reasons).map((item, i) => (
-                                        <li key={i} className="text-muted-foreground">• {result.failCodes ? t(item as any) : item}</li>
-                                    ))
-                                )}
-                            </ul>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -196,20 +154,6 @@ function DetailRow({ label, value, target, pass, warning }: { label: string, val
                 <div className={clsx("text-xs font-bold", pass ? "text-success" : warning ? "text-warning" : "text-danger")}>
                     {pass ? t('pass') : warning ? t('watch') : t('fail')}
                 </div>
-            </div>
-        </div>
-    )
-}
-
-function BenchmarkRow({ name, metric, value, current, pass }: { name: string, metric: string, value: string, current: string, pass: boolean }) {
-    return (
-        <div className="flex items-center justify-between text-sm">
-            <div>
-                <div className="font-semibold">{name}</div>
-                <div className="text-xs text-muted-foreground">{metric}: {value}</div>
-            </div>
-            <div className={clsx("px-2 py-1 rounded text-xs font-mono", pass ? "bg-success/10 text-success" : "bg-secondary text-muted-foreground")}>
-                {current}
             </div>
         </div>
     )

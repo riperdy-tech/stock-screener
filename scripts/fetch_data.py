@@ -352,6 +352,7 @@ def main():
                         flat = {
                             "Symbol": r['symbol'],
                             "Name": r['name'],
+                            "Description": r.get('description', ''),
                             "Price": r['price'],
                             "Market Cap": r['marketCap'],
                             "Sector": r['sector'],
@@ -412,6 +413,7 @@ def main():
             flat = {
                 "Symbol": r['symbol'],
                 "Name": r['name'],
+                "Description": r.get('description', ''),
                 "Price": r['price'],
                 "Market Cap": r['marketCap'],
                 "Sector": r['sector'],

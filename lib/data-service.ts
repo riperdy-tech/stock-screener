@@ -8,16 +8,9 @@ function parseCSV(text: string): any[] {
     const headers = lines[0].split(',').map(h => h.trim());
 
     return lines.slice(1).map(line => {
-        const values = line.split(','); // WARNING: This breaks if commas in Name. But for MVP manual mode it's okay. 
-        // Ideally we'd use a regex or library, but trying to keep it light.
-        // Actually, Python pandas CSV export handles quotes. We should handle quotes basic.
-
-        // Simple regex for CSV splitting ignoring commas inside quotes
-        const matches = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
-        // Fallback to simple split if regex fails or is too complex for this context
-        // Let's stick to simple split for now, assuming stock names don't have commas usually?
-        // Actually, "Company, Inc." is common. 
-        // Let's try a better split:
+        // Trim Windows line endings
+        line = line.replace(/\r$/, '');
+        if (!line.trim()) return null;
 
         let row: Record<string, any> = {};
         let currentVal = '';
@@ -43,7 +36,7 @@ function parseCSV(text: string): any[] {
         }
 
         return row;
-    });
+    }).filter(Boolean);
 }
 
 export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdated: string | null }> {
@@ -72,6 +65,7 @@ export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdat
         const mappedData = rawData.map(row => ({
             symbol: row['Symbol'] || '',
             name: (row['Name'] || '').replace(/"/g, ''), // Cleanup quotes
+            description: (row['Description'] || '').replace(/"/g, ''),
             sector: row['Sector'] || 'Unknown',
             industry: row['Industry'] || 'Unknown',
             price: parseFloat(row['Price']) || 0,

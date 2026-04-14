@@ -67,14 +67,14 @@ export function StockCard({ result, onClick, index = 0, lastUpdated }: StockCard
                 </div>
             )}
 
-            {/* Scan Status Dot */}
+            {/* Scan Status Dot — top-left beside symbol */}
             <div className={clsx(
-                "absolute top-4 right-4 w-2.5 h-2.5 rounded-full z-10 transition-colors",
-                result.passed ? "bg-primary shadow-[0_0_12px_var(--primary)]" :
-                    result.score > 80 ? "bg-warning shadow-[0_0_12px_rgba(237,137,54,0.8)]" :
-                        "bg-danger/50"
+                "absolute top-3 left-3 w-2 h-2 rounded-full z-20 transition-colors",
+                result.passed ? "bg-success shadow-[0_0_10px_var(--success)]" :
+                    result.score > 80 ? "bg-warning shadow-[0_0_10px_rgba(237,137,54,0.8)]" :
+                        "bg-danger/40"
             )}
-                title={result.passed ? "Gem Candidate" : result.score > 80 ? "High Potential (Score > 80)" : "Weak Match"}
+                title={result.passed ? "Gem Candidate" : result.score > 80 ? "High Potential" : "Weak Match"}
             />
             
             </div>
