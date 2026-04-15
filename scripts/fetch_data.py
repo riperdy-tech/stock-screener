@@ -8,6 +8,7 @@ import logging
 import requests
 import io
 import math
+from datetime import datetime
 
 # Setup logging
 # Log to both file (for frontend) and console
@@ -114,6 +115,17 @@ def safe_float(val, default=0.0):
     except:
         return default
 
+def safe_get_df(df, row_name, col_idx):
+    """Safely get a value from a DataFrame by row name and column index."""
+    try:
+        if df is not None and not df.empty and row_name in df.index:
+            val = df.loc[row_name].iloc[col_idx]
+            if isinstance(val, (int, float)) and not (math.isnan(val) or math.isinf(val)):
+                return float(val)
+    except:
+        pass
+    return None
+
 # Helper for timeout
 def get_session():
     s = requests.Session()
@@ -202,9 +214,150 @@ def process_stock(ticker_symbol):
         # Beneish M-Score
         data.beneish_m_score = -2.0 
         
-        return data
+        return (data, stock)
 
     except Exception as e:
+        return None
+
+def extract_financial_detail(ticker_symbol, yf_ticker):
+    """
+    Extract detailed financial data from a yfinance Ticker object.
+    Returns a dict suitable for saving as JSON, or None on failure.
+    Reuses the already-created Ticker object to avoid duplicate API calls.
+    """
+    try:
+        info = yf_ticker.info
+        income_stmt = yf_ticker.income_stmt
+        q_income_stmt = yf_ticker.quarterly_income_stmt
+        cash_flow_stmt = yf_ticker.cash_flow
+        bs = yf_ticker.balance_sheet
+
+        # Next earnings date
+        next_earnings = None
+        try:
+            cal = yf_ticker.calendar
+            if cal is not None:
+                # calendar can be a dict or DataFrame depending on yfinance version
+                if isinstance(cal, dict):
+                    ed = cal.get('Earnings Date')
+                    if ed and len(ed) > 0:
+                        next_earnings = str(ed[0])[:10]
+                elif isinstance(cal, pd.DataFrame) and 'Earnings Date' in cal.index:
+                    ed = cal.loc['Earnings Date'].iloc[0]
+                    next_earnings = str(ed)[:10]
+        except:
+            pass  # Some tickers don't have calendar data
+
+        def extract_income_metrics(df, num_periods):
+            if df is None or df.empty:
+                return []
+            rows = []
+            num_cols = min(num_periods, len(df.columns))
+            for i in range(num_cols):
+                date_str = str(df.columns[i])[:10]
+                rows.append({
+                    "Date": date_str,
+                    "TotalRevenue": safe_get_df(df, "Total Revenue", i),
+                    "GrossProfit": safe_get_df(df, "Gross Profit", i),
+                    "OperatingIncome": safe_get_df(df, "Operating Income", i) or safe_get_df(df, "EBIT", i),
+                    "NetIncome": safe_get_df(df, "Net Income", i)
+                })
+            return rows
+
+        annual_financials = extract_income_metrics(income_stmt, 2)
+        quarterly_financials = extract_income_metrics(q_income_stmt, 4)
+
+        # Cash flow items
+        ocf = safe_get_df(cash_flow_stmt, "Operating Cash Flow", 0)
+        capex = safe_get_df(cash_flow_stmt, "Capital Expenditure", 0)
+        fcf = safe_get_df(cash_flow_stmt, "Free Cash Flow", 0)
+        if fcf is None and ocf is not None and capex is not None:
+            fcf = ocf + capex
+        sbc = safe_get_df(cash_flow_stmt, "Stock Based Compensation", 0)
+
+        # Balance sheet items
+        total_cash = safe_get_df(bs, "Cash And Cash Equivalents", 0)
+        if total_cash is None:
+            total_cash = safe_float(info.get("totalCash"), 0)
+        total_debt = safe_get_df(bs, "Total Debt", 0)
+        if total_debt is None:
+            total_debt = safe_float(info.get("totalDebt"), 0)
+
+        shares = info.get("impliedSharesOutstanding") or info.get("sharesOutstanding") or 0
+        market_cap = safe_float(info.get("marketCap"), 0)
+        current_price = safe_float(info.get("currentPrice"), 0) or safe_float(info.get("previousClose"), 0)
+
+        # Enterprise Value
+        ev = market_cap
+        if total_debt is not None and total_cash is not None:
+            ev = market_cap + total_debt - total_cash
+
+        # TTM calculations from quarterly data
+        ttm_revenue = None
+        if len(quarterly_financials) == 4 and all(q["TotalRevenue"] is not None for q in quarterly_financials):
+            ttm_revenue = sum(q["TotalRevenue"] for q in quarterly_financials)
+        elif len(annual_financials) > 0:
+            ttm_revenue = annual_financials[0]["TotalRevenue"]
+
+        ttm_gp = None
+        if len(quarterly_financials) == 4 and all(q["GrossProfit"] is not None for q in quarterly_financials):
+            ttm_gp = sum(q["GrossProfit"] for q in quarterly_financials)
+        elif len(annual_financials) > 0:
+            ttm_gp = annual_financials[0]["GrossProfit"]
+
+        ttm_ebit = None
+        if len(quarterly_financials) == 4 and all(q["OperatingIncome"] is not None for q in quarterly_financials):
+            ttm_ebit = sum(q["OperatingIncome"] for q in quarterly_financials)
+        elif len(annual_financials) > 0:
+            ttm_ebit = annual_financials[0]["OperatingIncome"]
+
+        yoy_rev_growth = safe_float(info.get("revenueGrowth"), 0) * 100
+        fcf_margin = 0
+        if fcf is not None and ttm_revenue is not None and ttm_revenue > 0:
+            fcf_margin = (fcf / ttm_revenue) * 100
+
+        rule_of_40 = yoy_rev_growth + fcf_margin
+
+        ev_sales = (ev / ttm_revenue) if (ev and ttm_revenue and ttm_revenue > 0) else None
+        ev_gp = (ev / ttm_gp) if (ev and ttm_gp and ttm_gp > 0) else None
+        ev_ebit = (ev / ttm_ebit) if (ev and ttm_ebit and ttm_ebit > 0) else None
+
+        gross_margin_pct = (ttm_gp / ttm_revenue * 100) if (ttm_gp and ttm_revenue and ttm_revenue > 0) else None
+
+        core_anchor = None
+        if ev_sales is not None and ev_gp is not None:
+            core_anchor = (0.4 * ev_sales) + (0.4 * ev_gp)
+
+        detail = {
+            "Ticker": ticker_symbol,
+            "Data_Fetched_Date": datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "Next_Earnings_Date": next_earnings,
+            "Price": current_price,
+            "Shares_Outstanding": shares,
+            "Market_Cap": market_cap,
+            "Enterprise_Value_EV": ev,
+            "Total_Cash": total_cash,
+            "Total_Debt": total_debt,
+            "SBC_Stock_Based_Comp": sbc,
+            "Free_Cash_Flow_TTM": fcf,
+            "Annual_Income_Statement": annual_financials,
+            "Quarterly_Income_Statement": quarterly_financials,
+            "Calculated_Metrics": {
+                "TTM_Revenue": ttm_revenue,
+                "TTM_Gross_Margin_%": gross_margin_pct,
+                "YoY_Revenue_Growth_%": yoy_rev_growth,
+                "FCF_Margin_%": fcf_margin,
+                "Rule_of_40": rule_of_40,
+                "EV_to_Sales": ev_sales,
+                "EV_to_Gross_Profit": ev_gp,
+                "EV_to_EBIT": ev_ebit,
+                "Core_Anchor_Multiple_0.4Sales_0.4GP": core_anchor
+            }
+        }
+
+        return sanitize(detail)
+    except Exception as e:
+        logging.warning(f"Financial detail extraction failed for {ticker_symbol}: {e}")
         return None
 
 def is_potential_100_bagger(stock):
@@ -275,6 +428,20 @@ def main():
     tickers = list(set(tickers))
     
     import os
+    import shutil
+    # Create financials directory for per-ticker detail data (AI Prompt Exporter)
+    os.makedirs('public/data/financials', exist_ok=True)
+    
+    # Clear existing financial detail JSONs to ensure no stale data remains
+    print("Clearing old financial data cache...")
+    for filename in os.listdir('public/data/financials'):
+        file_path = os.path.join('public/data/financials', filename)
+        try:
+            if os.path.isfile(file_path) and filename.endswith('.json'):
+                os.unlink(file_path)
+        except Exception as e:
+            print(f"Failed to delete {file_path}: {e}")
+
     # Write PID to file for control
     with open("public/data/scanner.pid", "w") as f:
         f.write(str(os.getpid()))
@@ -297,10 +464,11 @@ def main():
             print(f"[{processed_count}/{len(tickers)}] Scan: {ticker}...", end="\r")
             
             # 1. PROCESS STOCK
-            result = process_stock(ticker)
-            if not result:
+            process_result = process_stock(ticker)
+            if not process_result:
                 skipped_count += 1
                 continue
+            result, yf_ticker = process_result
                 
             # 2. APPLY "100-BAGGER" RULES
             screening_result = is_potential_100_bagger(result)
@@ -338,6 +506,16 @@ def main():
                 }
             }
             results.append(result_obj)
+
+            # Save per-ticker financial detail for AI Prompt Exporter
+            try:
+                detail = extract_financial_detail(ticker, yf_ticker)
+                if detail:
+                    detail_path = os.path.join('public', 'data', 'financials', f'{ticker}.json')
+                    with open(detail_path, 'w') as f:
+                        json.dump(detail, f)
+            except Exception as e:
+                pass  # Don't let detail failure stop the scan
             
             if screening_result:
                 passed_count += 1

@@ -7,6 +7,9 @@ import os
 import random
 import argparse
 import FinanceDataReader as fdr
+import json
+import math
+from datetime import datetime
 
 def get_fdr_tickers():
     print("--- FETCHING TICKER LISTS VIA FINANCE DATA READER ---")
@@ -76,6 +79,129 @@ def get_ttm_sum(df_q, df_a, row_name):
     except Exception:
         pass
     return np.nan
+
+def safe_get_df(df, row_name, col_idx):
+    """Safely get a value from a DataFrame by row name and column index."""
+    try:
+        if df is not None and not df.empty and row_name in df.index:
+            val = df.loc[row_name].iloc[col_idx]
+            if isinstance(val, (int, float)) and not (math.isnan(val) or math.isinf(val)):
+                return float(val)
+    except:
+        pass
+    return None
+
+def sanitize(obj):
+    if isinstance(obj, float):
+        if math.isnan(obj) or math.isinf(obj):
+            return None
+    if isinstance(obj, dict):
+        return {k: sanitize(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [sanitize(v) for v in obj]
+    return obj
+
+def extract_financial_detail(ticker_symbol, yf_ticker):
+    """
+    Extract detailed financial data from a yfinance Ticker object.
+    """
+    try:
+        info = yf_ticker.info
+        income_stmt = yf_ticker.income_stmt
+        q_income_stmt = yf_ticker.quarterly_income_stmt
+        cash_flow_stmt = yf_ticker.cash_flow
+        bs = yf_ticker.balance_sheet
+
+        # Next earnings date
+        next_earnings = None
+        try:
+            cal = yf_ticker.calendar
+            if cal is not None:
+                if isinstance(cal, dict):
+                    ed = cal.get('Earnings Date')
+                    if ed and len(ed) > 0:
+                        next_earnings = str(ed[0])[:10]
+                elif isinstance(cal, pd.DataFrame) and 'Earnings Date' in cal.index:
+                    ed = cal.loc['Earnings Date'].iloc[0]
+                    next_earnings = str(ed)[:10]
+        except: pass
+
+        def extract_income_metrics(df, num_periods):
+            if df is None or df.empty: return []
+            rows = []
+            num_cols = min(num_periods, len(df.columns))
+            for i in range(num_cols):
+                date_str = str(df.columns[i])[:10]
+                rows.append({
+                    "Date": date_str,
+                    "TotalRevenue": safe_get_df(df, "Total Revenue", i),
+                    "GrossProfit": safe_get_df(df, "Gross Profit", i),
+                    "OperatingIncome": safe_get_df(df, "Operating Income", i) or safe_get_df(df, "EBIT", i),
+                    "NetIncome": safe_get_df(df, "Net Income", i)
+                })
+            return rows
+
+        annual_financials = extract_income_metrics(income_stmt, 2)
+        quarterly_financials = extract_income_metrics(q_income_stmt, 4)
+
+        fcf = safe_get_df(cash_flow_stmt, "Free Cash Flow", 0)
+        if fcf is None:
+            ocf = safe_get_df(cash_flow_stmt, "Operating Cash Flow", 0)
+            capex = safe_get_df(cash_flow_stmt, "Capital Expenditure", 0)
+            if ocf is not None and capex is not None: fcf = ocf + capex
+        
+        sbc = safe_get_df(cash_flow_stmt, "Stock Based Compensation", 0)
+        total_cash = safe_get_df(bs, "Cash And Cash Equivalents", 0) or info.get("totalCash", 0)
+        total_debt = safe_get_df(bs, "Total Debt", 0) or info.get("totalDebt", 0)
+        shares = info.get("impliedSharesOutstanding") or info.get("sharesOutstanding") or 0
+        market_cap = info.get("marketCap", 0)
+        current_price = info.get("currentPrice", info.get("previousClose", 0))
+
+        ev = market_cap
+        if total_debt is not None and total_cash is not None:
+            ev = market_cap + total_debt - total_cash
+
+        ttm_revenue = sum(q["TotalRevenue"] for q in quarterly_financials) if len(quarterly_financials) == 4 and all(q["TotalRevenue"] is not None for q in quarterly_financials) else (annual_financials[0]["TotalRevenue"] if annual_financials else None)
+        ttm_gp = sum(q["GrossProfit"] for q in quarterly_financials) if len(quarterly_financials) == 4 and all(q["GrossProfit"] is not None for q in quarterly_financials) else (annual_financials[0]["GrossProfit"] if annual_financials else None)
+        ttm_ebit = sum(q["OperatingIncome"] for q in quarterly_financials) if len(quarterly_financials) == 4 and all(q["OperatingIncome"] is not None for q in quarterly_financials) else (annual_financials[0]["OperatingIncome"] if annual_financials else None)
+
+        yoy_rev_growth = info.get("revenueGrowth", 0) * 100
+        fcf_margin = (fcf / ttm_revenue * 100) if (fcf and ttm_revenue and ttm_revenue > 0) else 0
+        rule_of_40 = yoy_rev_growth + fcf_margin
+        ev_sales = (ev / ttm_revenue) if (ev and ttm_revenue and ttm_revenue > 0) else None
+        ev_gp = (ev / ttm_gp) if (ev and ttm_gp and ttm_gp > 0) else None
+        ev_ebit = (ev / ttm_ebit) if (ev and ttm_ebit and ttm_ebit > 0) else None
+        gross_margin_pct = (ttm_gp / ttm_revenue * 100) if (ttm_gp and ttm_revenue and ttm_revenue > 0) else None
+        core_anchor = (0.4 * ev_sales + 0.4 * ev_gp) if ev_sales and ev_gp else None
+
+        detail = {
+            "Ticker": ticker_symbol,
+            "Data_Fetched_Date": datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "Next_Earnings_Date": next_earnings,
+            "Price": current_price,
+            "Shares_Outstanding": shares,
+            "Market_Cap": market_cap,
+            "Enterprise_Value_EV": ev,
+            "Total_Cash": total_cash,
+            "Total_Debt": total_debt,
+            "SBC_Stock_Based_Comp": sbc,
+            "Free_Cash_Flow_TTM": fcf,
+            "Annual_Income_Statement": annual_financials,
+            "Quarterly_Income_Statement": quarterly_financials,
+            "Calculated_Metrics": {
+                "TTM_Revenue": ttm_revenue,
+                "TTM_Gross_Margin_%": gross_margin_pct,
+                "YoY_Revenue_Growth_%": yoy_rev_growth,
+                "FCF_Margin_%": fcf_margin,
+                "Rule_of_40": rule_of_40,
+                "EV_to_Sales": ev_sales,
+                "EV_to_Gross_Profit": ev_gp,
+                "EV_to_EBIT": ev_ebit,
+                "Core_Anchor_Multiple_0.4Sales_0.4GP": core_anchor
+            }
+        }
+        return sanitize(detail)
+    except Exception: return None
 
 def main():
     parser = argparse.ArgumentParser(description="Phase 1 Stock Screener")
@@ -426,6 +552,16 @@ def main():
                 'Insider Buying': automated_insider,
                 'Phase 2 Decision': ""
             })
+
+            # Save detail JSON for AI Prompt Exporter
+            try:
+                detail = extract_financial_detail(ticker, stock)
+                if detail:
+                    os.makedirs('public/data/financials', exist_ok=True)
+                    detail_path = os.path.join('public', 'data', 'financials', f'{ticker}.json')
+                    with open(detail_path, 'w') as f:
+                        json.dump(detail, f)
+            except: pass
 
         except Exception as e:
             # Silently skip errors (or log them to file if needed)

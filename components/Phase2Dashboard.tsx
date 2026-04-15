@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { CheckCircle, Search, ExternalLink, RefreshCw, Box } from "lucide-react";
+import { CheckCircle, Search, ExternalLink, RefreshCw, Box, Bot, Copy, Check, X } from "lucide-react";
 import Link from "next/link";
+import { buildPrompt } from "@/lib/prompt-builder";
 
 // Helper to parse CSV manually on the frontend
 function parseCSV(text: string) {
@@ -65,6 +66,59 @@ export function Phase2Dashboard() {
         insider: 'All',
         decision: 'All'
     });
+
+    // AI Prompt States
+    const [aiModalOpen, setAiModalOpen] = useState(false);
+    const [aiLoading, setAiLoading] = useState(false);
+    const [aiResult, setAiResult] = useState<string | null>(null);
+    const [selectedAiTicker, setSelectedAiTicker] = useState("");
+    const [copied, setCopied] = useState(false);
+
+    const handleAiReview = async (row: any) => {
+        const ticker = row.Ticker;
+        setSelectedAiTicker(ticker);
+        setAiModalOpen(true);
+        setAiLoading(true);
+        setAiResult(null);
+        setCopied(false);
+
+        // Map Phase 2 row to buildPrompt expected format
+        const mockResult: any = {
+            candidate: {
+                symbol: row.Ticker,
+                name: row.Name,
+                sector: row.Sector,
+                price: parseFloat(row.Price),
+                marketCap: parseFloat(row['Market Cap']),
+                revenueGrowth: parseFloat(row['Rev Growth']),
+                grossMargin: parseFloat(row['Gross Margin']),
+                roic: parseFloat(row.ROIC),
+                pegRatio: parseFloat(row.PEG),
+                insiderOwnership: parseFloat(row['Insider Own']),
+                zScore: parseFloat(row['Z-Score'])
+            },
+            industry: row.Industry,
+            score: 0,
+            passed: true
+        };
+
+        try {
+            const prompt = await buildPrompt(ticker, mockResult);
+            setAiResult(prompt);
+        } catch (e: any) {
+            setAiResult("Error: " + e.message);
+        } finally {
+            setAiLoading(false);
+        }
+    };
+
+    const copyToClipboard = () => {
+        if (aiResult) {
+            navigator.clipboard.writeText(aiResult);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        }
+    };
 
     // Filter down to the "Elite" Cohort
     const eliteRows = data.rows.filter(row => 
@@ -320,6 +374,14 @@ export function Phase2Dashboard() {
                                         <div className="mt-3 text-sm font-semibold text-accent">
                                             ${formatMetric(row.Price)}
                                         </div>
+                                        
+                                        <button 
+                                            onClick={() => handleAiReview(row)}
+                                            className="mt-3 px-3 py-1.5 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 rounded text-xs font-bold flex items-center gap-2 group/btn transition-all"
+                                        >
+                                            <Bot className="h-3.5 w-3.5 group-hover/btn:scale-110 transition-transform" />
+                                            AI PROMPT
+                                        </button>
                                     </td>
                                     
                                     {/* PHASE 1 CONTEXT PANEL */}
@@ -374,6 +436,62 @@ export function Phase2Dashboard() {
                             ))}
                         </tbody>
                     </table>
+                </div>
+            )}
+
+            {/* AI Prompt Modal */}
+            {aiModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-card border border-border w-full max-w-2xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+                        <header className="p-4 border-b border-border flex justify-between items-center bg-secondary/30">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-accent/20 rounded-lg">
+                                    <Bot className="h-5 w-5 text-accent" />
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-lg">AI Analysis Prompt</h3>
+                                    <p className="text-xs text-muted-foreground">Valuation Engine Brief: {selectedAiTicker}</p>
+                                </div>
+                            </div>
+                            <button 
+                                onClick={() => setAiModalOpen(false)}
+                                className="p-2 hover:bg-secondary rounded-full transition-colors"
+                            >
+                                <X className="h-5 w-5" />
+                            </button>
+                        </header>
+                        
+                        <div className="flex-1 overflow-y-auto p-6 font-mono text-xs leading-relaxed">
+                            {aiLoading ? (
+                                <div className="h-64 flex flex-col items-center justify-center gap-4">
+                                    <RefreshCw className="h-8 w-8 animate-spin text-primary" />
+                                    <p className="text-muted-foreground animate-pulse text-[11px] uppercase tracking-widest font-bold">Analyzing Financials...</p>
+                                </div>
+                            ) : (
+                                <pre className="whitespace-pre-wrap whitespace-pre text-foreground/90 bg-secondary/20 p-4 rounded-lg border border-border/50">
+                                    {aiResult}
+                                </pre>
+                            )}
+                        </div>
+                        
+                        <footer className="p-4 border-t border-border bg-secondary/10 flex justify-between items-center">
+                            <p className="text-[10px] text-muted-foreground italic px-2">
+                                * Copy this prompt and paste it into ChatGPT/Claude for deep valuation.
+                            </p>
+                            <button
+                                onClick={copyToClipboard}
+                                disabled={aiLoading || !aiResult}
+                                className={`px-6 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all active:scale-95 ${
+                                    copied 
+                                    ? 'bg-success text-success-foreground' 
+                                    : 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20'
+                                }`}
+                            >
+                                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                                {copied ? 'COPIED!' : 'COPY PROMPT'}
+                            </button>
+                        </footer>
+                    </div>
                 </div>
             )}
         </div>

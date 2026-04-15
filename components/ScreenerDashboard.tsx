@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
 import { fetchStocks } from "@/lib/data-service";
+import { buildPrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
 import { FilterSidebar, FilterState, DEFAULT_FILTERS } from "./FilterSidebar";
 import { LanguageToggle } from "./LanguageToggle";
@@ -38,21 +39,16 @@ export function ScreenerDashboard() {
         }
     };
 
-    const handleAiReview = async (ticker: string) => {
+    const handleAiReview = async (result: ScreeningResult) => {
+        const ticker = result.candidate.symbol;
         setSelectedAiTicker(ticker);
         setAiModalOpen(true);
         setAiLoading(true);
         setAiResult(null);
         setCopied(false);
         try {
-            const res = await fetch('/api/generate-prompt', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ticker })
-            });
-            const data = await res.json();
-            if (data.error) setAiResult("Error: " + data.error);
-            else setAiResult(data.prompt);
+            const prompt = await buildPrompt(ticker, result);
+            setAiResult(prompt);
         } catch (e: any) {
             setAiResult("Error: " + e.message);
         } finally {
@@ -454,7 +450,7 @@ export function ScreenerDashboard() {
                 <StockDetailModal
                     result={selectedStock}
                     onClose={() => setSelectedStock(null)}
-                    onAskGemini={handleAiReview}
+                    onAskGemini={(ticker: string) => handleAiReview(selectedStock)}
                 />
             )}
 
