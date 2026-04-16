@@ -6,7 +6,7 @@ import { StockCard } from "./StockCard";
 import { fetchStocks } from "@/lib/data-service";
 import { buildPrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
-import { FilterSidebar, FilterState, DEFAULT_FILTERS } from "./FilterSidebar";
+import { FilterSidebar, FilterState, STRICT_FILTERS } from "./FilterSidebar";
 import { LanguageToggle } from "./LanguageToggle";
 import { Sparkles, RefreshCw, X, Search, Filter, Settings, Copy, Check } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
@@ -19,7 +19,7 @@ export function ScreenerDashboard() {
 
     const [rawResults, setRawResults] = useState<ScreeningResult[]>([]);
     const [search, setSearch] = useState("");
-    const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS); // Restore Filter State
+    const [filters, setFilters] = useState<FilterState>(STRICT_FILTERS); // Restore Filter State
     const [selectedStock, setSelectedStock] = useState<ScreeningResult | null>(null);
     const [lastUpdatedFile, setLastUpdatedFile] = useState<string | null>(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -116,6 +116,18 @@ export function ScreenerDashboard() {
 
     // Initial Load (Once on mount)
     useEffect(() => {
+        // Load filters from localStorage
+        if (typeof window !== 'undefined') {
+            const savedFilters = localStorage.getItem('screener_filters');
+            if (savedFilters) {
+                try {
+                    setFilters(JSON.parse(savedFilters));
+                } catch (e) {
+                    console.error("Failed to parse saved filters", e);
+                }
+            }
+        }
+
         loadData(true);
 
         // Auto-refresh prices ONLY silently every 5 minutes
@@ -125,6 +137,13 @@ export function ScreenerDashboard() {
 
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
+
+    // Save filters to localStorage whenever they change
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('screener_filters', JSON.stringify(filters));
+        }
+    }, [filters]);
 
     async function refreshPricesOnly() {
         const tickers = rawResults.map(r => r.candidate.symbol);
