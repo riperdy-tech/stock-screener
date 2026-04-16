@@ -105,7 +105,7 @@ export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdat
             _financialData: (() => {
                 const fd = row['Financial_Data'];
                 if (!fd) return null;
-                try { return JSON.parse(atob(fd)); } catch(e) { return null; }
+                try { return JSON.parse(decodeURIComponent(escape(atob(fd)))); } catch(e) { return null; }
             })(),
             _reasons: [] // We don't export reasons to CSV to save space, maybe add later?
         })) as any[]; // Cast to any to pass "extra" fields to the dashboard adapter
