@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
 import { fetchStocks } from "@/lib/data-service";
-import { buildPrompt } from "@/lib/prompt-builder";
+import { buildPrompt, buildSimplePrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
 import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS } from "./FilterSidebar";
 import { LanguageToggle } from "./LanguageToggle";
@@ -33,13 +33,21 @@ export function ScreenerDashboard() {
     const [selectedAiTicker, setSelectedAiTicker] = useState<string | null>(null);
     const [aiLoading, setAiLoading] = useState(false);
     const [aiResult, setAiResult] = useState<string | null>(null);
+    const [aiSimpleResult, setAiSimpleResult] = useState<string | null>(null);
 
     const [copied, setCopied] = useState(false);
-    const copyToClipboard = () => {
-        if (aiResult) {
-            navigator.clipboard.writeText(aiResult);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
+    const [copiedSimple, setCopiedSimple] = useState(false);
+
+    const copyToClipboard = (text: string, isSimple: boolean) => {
+        if (text) {
+            navigator.clipboard.writeText(text);
+            if (isSimple) {
+                setCopiedSimple(true);
+                setTimeout(() => setCopiedSimple(false), 2000);
+            } else {
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            }
         }
     };
 
@@ -49,10 +57,14 @@ export function ScreenerDashboard() {
         setAiModalOpen(true);
         setAiLoading(true);
         setAiResult(null);
+        setAiSimpleResult(null);
         setCopied(false);
+        setCopiedSimple(false);
         try {
             const prompt = await buildPrompt(ticker, result);
+            const simplePrompt = await buildSimplePrompt(ticker, result);
             setAiResult(prompt);
+            setAiSimpleResult(simplePrompt);
         } catch (e: any) {
             setAiResult("Error: " + e.message);
         } finally {
@@ -505,22 +517,44 @@ export function ScreenerDashboard() {
                                     <p className="text-sm text-foreground/80 font-medium">
                                         To calculate intrinsic value of the stock, copy paste below prompt to your AI of choice.
                                     </p>
-                                    <div className="relative flex-1 min-h-[300px] sm:min-h-[400px] bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
-                                        <div className="bg-secondary/40 px-3 sm:px-5 py-2.5 border-b border-border flex justify-between items-center shrink-0">
-                                            <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-semibold">Generated Prompt Payload</span>
-                                            <button
-                                                onClick={copyToClipboard}
-                                                className="flex items-center gap-2 text-xs font-bold bg-primary hover:bg-primary/90 text-primary-foreground px-3 py-1.5 rounded-md transition-colors shadow-sm"
-                                            >
-                                                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                                                {copied ? 'COPIED!' : 'COPY PROMPT'}
-                                            </button>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 min-h-[350px] sm:min-h-[450px]">
+                                        {/* Simple Prompt Box */}
+                                        <div className="relative flex-1 bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
+                                            <div className="bg-secondary/40 px-3 sm:px-5 py-2.5 border-b border-border flex justify-between items-center shrink-0">
+                                                <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-semibold">SIMPLE VERSION</span>
+                                                <button
+                                                    onClick={() => copyToClipboard(aiSimpleResult!, true)}
+                                                    className="flex items-center gap-2 text-xs font-bold bg-primary hover:bg-primary/90 text-primary-foreground px-3 py-1.5 rounded-md transition-colors shadow-sm"
+                                                >
+                                                    {copiedSimple ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                                                    {copiedSimple ? 'COPIED!' : 'COPY PROMPT'}
+                                                </button>
+                                            </div>
+                                            <textarea
+                                                readOnly
+                                                value={aiSimpleResult || ""}
+                                                className="flex-1 w-full h-full bg-transparent p-4 sm:p-5 text-sm font-mono resize-none focus:outline-none focus:ring-0 text-foreground/90 overflow-y-auto leading-relaxed"
+                                            />
                                         </div>
-                                        <textarea
-                                            readOnly
-                                            value={aiResult}
-                                            className="flex-1 w-full bg-transparent p-4 sm:p-5 text-sm font-mono resize-none focus:outline-none focus:ring-0 text-foreground/90 overflow-y-auto leading-relaxed"
-                                        />
+
+                                        {/* Detailed Prompt Box */}
+                                        <div className="relative flex-1 bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
+                                            <div className="bg-secondary/40 px-3 sm:px-5 py-2.5 border-b border-border flex justify-between items-center shrink-0">
+                                                <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-semibold">DETAILED VERSION</span>
+                                                <button
+                                                    onClick={() => copyToClipboard(aiResult!, false)}
+                                                    className="flex items-center gap-2 text-xs font-bold bg-primary hover:bg-primary/90 text-primary-foreground px-3 py-1.5 rounded-md transition-colors shadow-sm"
+                                                >
+                                                    {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                                                    {copied ? 'COPIED!' : 'COPY PROMPT'}
+                                                </button>
+                                            </div>
+                                            <textarea
+                                                readOnly
+                                                value={aiResult || ""}
+                                                className="flex-1 w-full h-full bg-transparent p-4 sm:p-5 text-sm font-mono resize-none focus:outline-none focus:ring-0 text-foreground/90 overflow-y-auto leading-relaxed"
+                                            />
+                                        </div>
                                     </div>
                                     <div className="grid grid-cols-3 gap-3 sm:gap-4 shrink-0 mt-2">
                                         <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#1A73E8] hover:bg-[#1557B0] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
