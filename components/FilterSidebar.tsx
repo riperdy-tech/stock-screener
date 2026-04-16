@@ -152,7 +152,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                     </button>
                     <button
                         onClick={handleStrict}
-                        className="flex-1 px-2 py-2 bg-accent/20 hover:bg-accent/40 text-accent font-medium text-xs rounded border border-accent/30 transition-colors"
+                        className="flex-1 px-2 py-2 bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 font-bold text-xs rounded border border-orange-500/30 transition-colors"
                     >
                         {t('strict') || "Strict"}
                     </button>

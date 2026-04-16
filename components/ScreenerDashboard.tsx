@@ -505,7 +505,7 @@ export function ScreenerDashboard() {
                                     <p className="text-sm text-foreground/80 font-medium">
                                         To calculate intrinsic value of the stock, copy paste below prompt to your AI of choice.
                                     </p>
-                                    <div className="relative flex-1 min-h-0 bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
+                                    <div className="relative flex-1 min-h-[300px] sm:min-h-[400px] bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
                                         <div className="bg-secondary/40 px-3 sm:px-5 py-2.5 border-b border-border flex justify-between items-center shrink-0">
                                             <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-semibold">Generated Prompt Payload</span>
                                             <button
@@ -524,15 +524,15 @@ export function ScreenerDashboard() {
                                     </div>
                                     <div className="grid grid-cols-3 gap-3 sm:gap-4 shrink-0 mt-2">
                                         <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#1A73E8] hover:bg-[#1557B0] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
-                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="w-8 h-8 rounded-md shrink-0 shadow-sm" />
+                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
                                             <span className="text-sm font-bold tracking-wide">Gemini</span>
                                         </a>
                                         <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#D97757] hover:bg-[#C26547] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
-                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="w-8 h-8 rounded-md shrink-0 shadow-sm" />
+                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
                                             <span className="text-sm font-bold tracking-wide">Claude</span>
                                         </a>
                                         <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#10A37F] hover:bg-[#0E906F] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
-                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="w-8 h-8 rounded-md shrink-0 shadow-sm" />
+                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
                                             <span className="text-sm font-bold tracking-wide">ChatGPT</span>
                                         </a>
                                     </div>
