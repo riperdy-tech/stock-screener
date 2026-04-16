@@ -56,7 +56,7 @@ export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailMo
                                     title="Ask AI about this stock"
                                 >
                                     <Sparkles className="w-4 h-4" />
-                                    <span className="text-xs font-bold hidden sm:inline">Ask AI</span>
+                                    <span className="text-xs font-bold hidden sm:inline">Generate AI Prompt</span>
                                 </button>
                             </div>
                             <div className={clsx("px-3 py-1 rounded-full text-xs font-bold tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
@@ -87,7 +87,30 @@ export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailMo
                                 <p className={clsx("text-sm font-medium", result.passed ? "text-success" : "text-danger")}>
                                     {result.passed
                                         ? t('verdictPass')
-                                        : t('verdictFail')}
+                                        : (
+                                        <div className="mt-2 text-foreground">
+                                            <span className="font-bold text-danger">Missed Criteria:</span>
+                                            <ul className="list-disc pl-5 mt-1 text-xs text-foreground/80 font-normal space-y-1">
+                                                {(result.failCodes && result.failCodes.length > 0) ? result.failCodes.map(code => {
+                                                    const failReasonMap: Record<string, string> = {
+                                                        FAIL_MCAP: "Market Cap outside $50M - $2B range",
+                                                        FAIL_PRICE: "Share Price >= $25",
+                                                        FAIL_GROWTH: "Revenue Growth < 20%",
+                                                        FAIL_GM: "Gross margin below sector targets",
+                                                        FAIL_GM_TREND: "Gross Margin declining vs 3-year avg",
+                                                        FAIL_ROIC: "ROIC < 15%",
+                                                        FAIL_PS: "Price/Sales ratio too high",
+                                                        FAIL_PEG: "PEG ratio > 1.5",
+                                                        FAIL_FLOAT: "Floating shares > 50M",
+                                                        FAIL_INSIDER: "Insider Ownership < 15%"
+                                                    };
+                                                    return <li key={code}>{failReasonMap[code] || code}</li>;
+                                                }) : (
+                                                    <li>Failed strict Gem criteria.</li>
+                                                )}
+                                            </ul>
+                                        </div>
+                                        )}
                                 </p>
                             </div>
                         </div>

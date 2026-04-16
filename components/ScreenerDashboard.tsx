@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
 import { fetchStocks } from "@/lib/data-service";
@@ -23,6 +23,10 @@ export function ScreenerDashboard() {
     const [selectedStock, setSelectedStock] = useState<ScreeningResult | null>(null);
     const [lastUpdatedFile, setLastUpdatedFile] = useState<string | null>(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    
+    // Maintain a ref to current rawResults for the setInterval closure
+    const rawResultsRef = useRef<ScreeningResult[]>([]);
+    useEffect(() => { rawResultsRef.current = rawResults; }, [rawResults]);
 
     // AI Review State
     const [aiModalOpen, setAiModalOpen] = useState(false);
@@ -146,7 +150,7 @@ export function ScreenerDashboard() {
     }, [filters]);
 
     async function refreshPricesOnly() {
-        const tickers = rawResults.map(r => r.candidate.symbol);
+        const tickers = rawResultsRef.current.map(r => r.candidate.symbol);
         if (tickers.length === 0) return;
 
         try {
@@ -192,6 +196,7 @@ export function ScreenerDashboard() {
                     candidate: {
                         symbol: item.symbol,
                         name: item.name,
+                        description: item.description,
                         price: item.price,
                         marketCap: item.marketCap,
                         sector: item.sector,
@@ -495,35 +500,38 @@ export function ScreenerDashboard() {
                                 </div>
                             ) : aiResult ? (
                                 <div className="flex flex-col flex-1 min-h-0 gap-3 sm:gap-4">
-                                    <div className="relative flex-1 min-h-0 bg-background border border-border rounded-lg overflow-hidden flex flex-col">
-                                        <div className="bg-secondary/50 px-3 sm:px-4 py-2 border-b border-border flex justify-between items-center shrink-0">
-                                            <span className="text-xs font-mono text-muted-foreground">Generated Prompt Payload</span>
+                                    <p className="text-sm text-foreground/80 font-medium">
+                                        To calculate intrinsic value of the stock, copy paste below prompt to your AI of choice.
+                                    </p>
+                                    <div className="relative flex-1 min-h-0 bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
+                                        <div className="bg-secondary/40 px-3 sm:px-5 py-2.5 border-b border-border flex justify-between items-center shrink-0">
+                                            <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-semibold">Generated Prompt Payload</span>
                                             <button
                                                 onClick={copyToClipboard}
-                                                className="flex items-center gap-1.5 text-xs font-medium bg-background border border-border hover:bg-secondary px-2 sm:px-3 py-1 rounded transition-colors"
+                                                className="flex items-center gap-2 text-xs font-bold bg-primary hover:bg-primary/90 text-primary-foreground px-3 py-1.5 rounded-md transition-colors shadow-sm"
                                             >
-                                                {copied ? <Check className="h-3.5 w-3.5 text-success" /> : <Copy className="h-3.5 w-3.5" />}
-                                                {copied ? 'Copied!' : 'Copy'}
+                                                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                                                {copied ? 'COPIED!' : 'COPY PROMPT'}
                                             </button>
                                         </div>
                                         <textarea
                                             readOnly
                                             value={aiResult}
-                                            className="flex-1 w-full bg-transparent p-3 sm:p-4 text-xs font-mono resize-none focus:outline-none focus:ring-0 text-foreground/80 overflow-y-auto"
+                                            className="flex-1 w-full bg-transparent p-4 sm:p-5 text-sm font-mono resize-none focus:outline-none focus:ring-0 text-foreground/90 overflow-y-auto leading-relaxed"
                                         />
                                     </div>
-                                    <div className="grid grid-cols-3 gap-2 sm:gap-3 shrink-0">
-                                        <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 sm:gap-2 bg-[#1A73E8] hover:bg-[#1557B0] text-white py-2.5 sm:py-3 rounded-lg font-semibold transition-colors shadow text-xs sm:text-sm">
-                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32" alt="Gemini" className="w-4 h-4 rounded-sm shrink-0" />
-                                            <span className="hidden sm:inline">Go to</span> Gemini
+                                    <div className="grid grid-cols-3 gap-3 sm:gap-4 shrink-0 mt-2">
+                                        <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#1A73E8] hover:bg-[#1557B0] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
+                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="w-8 h-8 rounded-md shrink-0 shadow-sm" />
+                                            <span className="text-sm font-bold tracking-wide">Gemini</span>
                                         </a>
-                                        <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 sm:gap-2 bg-[#D97757] hover:bg-[#C26547] text-white py-2.5 sm:py-3 rounded-lg font-semibold transition-colors shadow text-xs sm:text-sm">
-                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" className="w-4 h-4 rounded-sm shrink-0" />
-                                            <span className="hidden sm:inline">Go to</span> Claude
+                                        <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#D97757] hover:bg-[#C26547] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
+                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="w-8 h-8 rounded-md shrink-0 shadow-sm" />
+                                            <span className="text-sm font-bold tracking-wide">Claude</span>
                                         </a>
-                                        <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 sm:gap-2 bg-[#10A37F] hover:bg-[#0E906F] text-white py-2.5 sm:py-3 rounded-lg font-semibold transition-colors shadow text-xs sm:text-sm">
-                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=32" alt="ChatGPT" className="w-4 h-4 rounded-sm shrink-0" />
-                                            <span className="hidden sm:inline">Go to</span> ChatGPT
+                                        <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#10A37F] hover:bg-[#0E906F] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
+                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="w-8 h-8 rounded-md shrink-0 shadow-sm" />
+                                            <span className="text-sm font-bold tracking-wide">ChatGPT</span>
                                         </a>
                                     </div>
                                 </div>
