@@ -32,7 +32,18 @@ export function StockCard({ result, onClick, index = 0, lastUpdated }: StockCard
             <div className="relative z-10 bg-card/80 backdrop-blur-xl h-full rounded-xl p-4 border border-border/80 group-hover:border-primary/40 transition-colors shadow-inner">
                 <div className="flex justify-between items-start mb-2">
                     <div>
-                        <h3 className="text-xl font-bold group-hover:text-primary transition-colors tracking-tight">{candidate.symbol}</h3>
+                        <div className="flex items-center gap-2.5">
+                            <h3 className="text-xl font-bold group-hover:text-primary transition-colors tracking-tight">{candidate.symbol}</h3>
+                            {/* Scan Status Dot */}
+                            <div className={clsx(
+                                "w-2 h-2 rounded-full shrink-0 transition-colors",
+                                result.passed ? "bg-success shadow-[0_0_10px_var(--success)]" :
+                                    result.score > 80 ? "bg-warning shadow-[0_0_10px_rgba(237,137,54,0.8)]" :
+                                        "bg-danger/50"
+                            )}
+                                title={result.passed ? "Gem Candidate" : result.score > 80 ? "High Potential" : "Weak Match"}
+                            />
+                        </div>
                         <p className="text-xs text-muted-foreground truncate max-w-[120px]" title={candidate.name}>{candidate.name}</p>
                     </div>
                     <div className="text-right">
@@ -67,15 +78,7 @@ export function StockCard({ result, onClick, index = 0, lastUpdated }: StockCard
                 </div>
             )}
 
-            {/* Scan Status Dot — top-left beside symbol */}
-            <div className={clsx(
-                "absolute top-3 left-3 w-2 h-2 rounded-full z-20 transition-colors",
-                result.passed ? "bg-success shadow-[0_0_10px_var(--success)]" :
-                    result.score > 80 ? "bg-warning shadow-[0_0_10px_rgba(237,137,54,0.8)]" :
-                        "bg-danger/40"
-            )}
-                title={result.passed ? "Gem Candidate" : result.score > 80 ? "High Potential" : "Weak Match"}
-            />
+
             
             </div>
         </div>
