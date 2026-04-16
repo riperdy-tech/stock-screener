@@ -32,6 +32,8 @@ interface FinancialDetail {
     Total_Debt: number | null;
     SBC_Stock_Based_Comp: number | null;
     Free_Cash_Flow_TTM: number | null;
+    Operating_Cash_Flow: number | null;
+    Capital_Expenditure: number | null;
     Annual_Income_Statement: IncomeRow[];
     Quarterly_Income_Statement: IncomeRow[];
     Calculated_Metrics: {
@@ -75,12 +77,14 @@ function formatFinancialData(d: FinancialDetail): string {
 
     lines.push(`── MARKET SNAPSHOT ──────────────────────`);
     lines.push(`  Stock Price          : ${fmt(d.Price, '$')}`);
-    lines.push(`  Shares Outstanding  : ${fmt(d.Shares_Outstanding)}`);
+    lines.push(`  Fully Diluted Shares: ${fmt(d.Shares_Outstanding)}`);
     lines.push(`  Market Cap          : ${fmt(d.Market_Cap, '$')}`);
     lines.push(`  Enterprise Value    : ${fmt(d.Enterprise_Value_EV, '$')}`);
     lines.push(`  Total Cash          : ${fmt(d.Total_Cash, '$')}`);
     lines.push(`  Total Debt          : ${fmt(d.Total_Debt, '$')}`);
     lines.push(`  Stock-Based Comp    : ${fmt(d.SBC_Stock_Based_Comp, '$')}`);
+    lines.push(`  Operating Cash Flow : ${fmt(d.Operating_Cash_Flow, '$')}`);
+    lines.push(`  CapEx               : ${fmt(d.Capital_Expenditure, '$')}`);
     lines.push(`  Free Cash Flow TTM  : ${fmt(d.Free_Cash_Flow_TTM, '$')}`);
     lines.push(``);
 
@@ -831,7 +835,15 @@ Universal/Growth Module (Reverse DCF/Expectations): For standard cash-flow gener
 
 REQUIRED OUTPUT STRUCTURE
 
-Executive Summary & Asset Classification: Ticker, Market Cap, EV, and Capital Structure briefing. Justify the selected valuation module in under 3 sentences based on economic essence.
+0. Global Research Requirements (SEARCH ONLINE): 
+Before starting the valuation, you MUST search online for the following unstructured data points for the target ticker:
+- Segment Revenue Breakdown (Which business lines drive the numbers?)
+- Forward CAPEX Guidance (What has management promised for the next 1-2 years?)
+- Unit Economics & KPIs (Installed base, ARPU, attach rates, or churn if applicable)
+- Regulatory & Tech Status (Clinical trial stages, FDA status, or technology validation milestones)
+- Peer Group Multiples (Search for 3-5 direct competitors and find their current EV/Sales and EV/EBIT multiples)
+
+1. Executive Summary & Asset Classification: Ticker, Market Cap, EV, and Capital Structure briefing. Justify the selected valuation module in under 3 sentences based on economic essence.
 
 Core Valuation Module Execution: (Detailed quantitative breakdown of the chosen model).
 

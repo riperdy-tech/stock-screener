@@ -341,6 +341,8 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
             "Total_Debt": total_debt,
             "SBC_Stock_Based_Comp": sbc,
             "Free_Cash_Flow_TTM": fcf,
+            "Operating_Cash_Flow": ocf,
+            "Capital_Expenditure": capex,
             "Annual_Income_Statement": annual_financials,
             "Quarterly_Income_Statement": quarterly_financials,
             "Calculated_Metrics": {
@@ -503,7 +505,9 @@ def main():
                     "dilution": result.shares_outstanding_growth_3yr_cagr,
                     "psRatio": result.price_to_sales,
                     "pegRatio": result.peg_ratio,
-                    "float": result.float_shares
+                    "float": result.float_shares,
+                    "ocf": detail.get("Operating_Cash_Flow") if detail else None,
+                    "capex": detail.get("Capital_Expenditure") if detail else None
                 }
             }
             results.append(result_obj)
@@ -549,6 +553,8 @@ def main():
                             "Z-Score": r['metrics'].get('zScore'),
                             "P/S": r['metrics'].get('psRatio'),
                             "Float": r['metrics'].get('float'),
+                            "OCF": r['metrics'].get('ocf'),
+                            "CAPEX": r['metrics'].get('capex'),
                             "Financial_Data": r.get('financialData', '')
                         }
                         csv_data.append(flat)
@@ -614,6 +620,8 @@ def main():
                 "Z-Score": r['metrics'].get('zScore'),
                 "P/S": r['metrics'].get('psRatio'),
                 "Float": r['metrics'].get('float'),
+                "OCF": r['metrics'].get('ocf'),
+                "CAPEX": r['metrics'].get('capex'),
                 "Financial_Data": r.get('financialData', '')
             }
             csv_data.append(flat)

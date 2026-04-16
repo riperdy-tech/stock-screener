@@ -97,6 +97,8 @@ export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdat
             peRatio: 0,
             priceToSales: parseFloat(row['P/S']) || 0,
             floatShares: parseFloat(row['Float']) || 0,
+            ocf: parseFloat(row['OCF']) || 0,
+            capex: parseFloat(row['CAPEX']) || 0,
 
             // Add extra fields needed for ScreeningResult mapping in Dashboard
             _status: row['Status'],
