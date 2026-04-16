@@ -227,7 +227,9 @@ export function ScreenerDashboard() {
                     reasons: item._reasons || [],
                     failCodes: item._failCodes || [],
                     flags: [],
-                    financialData: item._financialData
+                    financialData: item._financialData,
+                    description: item.description,
+                    industry: item.industry
                 };
             });
 
