@@ -1,42 +1,56 @@
 import { type StockCandidate } from "./blueprint";
 
-// Basic CSV Parser (assuming simple structure without complex quotes for now)
 function parseCSV(text: string): any[] {
-    const lines = text.trim().split('\n');
-    if (lines.length < 2) return [];
-
-    const headers = lines[0].split(',').map(h => h.trim());
-
-    return lines.slice(1).map(line => {
-        // Trim Windows line endings
-        line = line.replace(/\r$/, '');
-        if (!line.trim()) return null;
-
-        let row: Record<string, any> = {};
-        let currentVal = '';
-        let inQuotes = false;
-        let colIndex = 0;
-
-        for (let i = 0; i < line.length; i++) {
-            const char = line[i];
-            if (char === '"') {
-                inQuotes = !inQuotes;
-            } else if (char === ',' && !inQuotes) {
-                const key = headers[colIndex];
-                if (key) row[key] = currentVal.trim();
-                currentVal = '';
-                colIndex++;
+    const rows: any[] = [];
+    let row: string[] = [];
+    let currentVal = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+        
+        if (char === '"') {
+            if (inQuotes && nextChar === '"') {
+                currentVal += '"';
+                i++; // Skip the escaped quote
             } else {
-                currentVal += char;
+                inQuotes = !inQuotes;
+            }
+        } else if (char === ',' && !inQuotes) {
+            row.push(currentVal.trim());
+            currentVal = '';
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+            if (char === '\r' && nextChar === '\n') {
+                i++;
+            }
+            if (currentVal || row.length > 0) {
+                row.push(currentVal.trim());
+                rows.push(row);
+            }
+            row = [];
+            currentVal = '';
+        } else {
+            currentVal += char;
+        }
+    }
+    if (currentVal || row.length > 0) {
+        row.push(currentVal.trim());
+        rows.push(row);
+    }
+    
+    if (rows.length < 2) return [];
+    const headers = rows[0];
+    
+    return rows.slice(1).map(r => {
+        const obj: Record<string, any> = {};
+        for (let i = 0; i < headers.length; i++) {
+            if (headers[i]) {
+                obj[headers[i]] = r[i] || '';
             }
         }
-        // Last value
-        if (colIndex < headers.length) {
-            row[headers[colIndex]] = currentVal.trim();
-        }
-
-        return row;
-    }).filter(Boolean);
+        return obj;
+    });
 }
 
 export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdated: string | null }> {
@@ -81,14 +95,18 @@ export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdat
 
             // These might be missing in CSV, set defaults
             peRatio: 0,
-            priceToSales: 0,
-            floatShares: 0,
+            priceToSales: parseFloat(row['P/S']) || 0,
+            floatShares: parseFloat(row['Float']) || 0,
 
             // Add extra fields needed for ScreeningResult mapping in Dashboard
             _status: row['Status'],
             _score: parseFloat(row['Score']) || 0,
             _failCodes: (row['Fail Codes'] || '').split(',').filter((c: string) => c),
-            _financialData: row['Financial_Data'] ? JSON.parse(atob(row['Financial_Data'])) : null,
+            _financialData: (() => {
+                const fd = row['Financial_Data'];
+                if (!fd) return null;
+                try { return JSON.parse(atob(fd)); } catch(e) { return null; }
+            })(),
             _reasons: [] // We don't export reasons to CSV to save space, maybe add later?
         })) as any[]; // Cast to any to pass "extra" fields to the dashboard adapter
         

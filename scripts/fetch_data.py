@@ -533,7 +533,7 @@ def main():
                         flat = {
                             "Symbol": r['symbol'],
                             "Name": r['name'],
-                            "Description": r.get('description', ''),
+                            "Description": r.get('description', '').replace('\n', ' ').replace('\r', ''),
                             "Price": r['price'],
                             "Market Cap": r['marketCap'],
                             "Sector": r['sector'],
@@ -547,6 +547,8 @@ def main():
                             "Insider Own": r['metrics'].get('insiderOwnership'),
                             "PEG": r['metrics'].get('pegRatio'),
                             "Z-Score": r['metrics'].get('zScore'),
+                            "P/S": r['metrics'].get('psRatio'),
+                            "Float": r['metrics'].get('float'),
                             "Financial_Data": r.get('financialData', '')
                         }
                         csv_data.append(flat)
@@ -595,7 +597,7 @@ def main():
             flat = {
                 "Symbol": r['symbol'],
                 "Name": r['name'],
-                "Description": r.get('description', ''),
+                "Description": r.get('description', '').replace('\n', ' ').replace('\r', ''),
                 "Price": r['price'],
                 "Market Cap": r['marketCap'],
                 "Sector": r['sector'],
@@ -610,6 +612,8 @@ def main():
                 "Insider Own": r['metrics'].get('insiderOwnership'),
                 "PEG": r['metrics'].get('pegRatio'),
                 "Z-Score": r['metrics'].get('zScore'),
+                "P/S": r['metrics'].get('psRatio'),
+                "Float": r['metrics'].get('float'),
                 "Financial_Data": r.get('financialData', '')
             }
             csv_data.append(flat)
