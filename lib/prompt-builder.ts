@@ -58,21 +58,8 @@ function fmt(val: any, prefix = '', suffix = '', decimals = 2): string {
     return `${prefix}${n.toFixed(decimals)}${suffix}`;
 }
 
-// ─── Data Fetcher ─────────────────────────────────────────
-
-async function fetchFinancialDetail(ticker: string): Promise<FinancialDetail | null> {
-    try {
-        const isProd = process.env.NODE_ENV === 'production';
-        const basePath = isProd ? '/stock-screener' : '';
-        const res = await fetch(`${basePath}/data/financials/${ticker.toUpperCase()}.json?t=${Date.now()}`);
-        if (!res.ok) return null;
-        const contentType = res.headers.get('content-type');
-        if (contentType && !contentType.includes('json')) return null;
-        return await res.json();
-    } catch {
-        return null;
-    }
-}
+// ─── Data Fetcher (Deprecated) ──────────────────────────────
+// Now relies on embedded data in stocks.csv for immediate zero-latency access.
 
 // ─── Format: Rich Financial Data (from get_ticker_data) ───
 
@@ -192,8 +179,8 @@ function formatScreenerData(result: ScreeningResult): string {
 // ─── Main Export ──────────────────────────────────────────
 
 export async function buildPrompt(ticker: string, result: ScreeningResult): Promise<string> {
-    // Try to load rich financial detail (pre-computed during scan)
-    const financialDetail = await fetchFinancialDetail(ticker);
+    // Rely on rich financial detail embedded inside the CSV data pipeline
+    const financialDetail = result.financialData;
 
     // Use rich data if available, otherwise fall back to screener summary
     const dataBrief = financialDetail

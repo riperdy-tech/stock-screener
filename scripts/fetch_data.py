@@ -9,6 +9,7 @@ import requests
 import io
 import math
 from datetime import datetime
+import base64
 
 # Setup logging
 # Log to both file (for frontend) and console
@@ -511,6 +512,8 @@ def main():
             try:
                 detail = extract_financial_detail(ticker, yf_ticker)
                 if detail:
+                    json_str = json.dumps(detail)
+                    result_obj["financialData"] = base64.b64encode(json_str.encode('utf-8')).decode('utf-8')
                     detail_path = os.path.join('public', 'data', 'financials', f'{ticker}.json')
                     with open(detail_path, 'w') as f:
                         json.dump(detail, f)
@@ -543,7 +546,8 @@ def main():
                             "ROIC": r['metrics'].get('roic'),
                             "Insider Own": r['metrics'].get('insiderOwnership'),
                             "PEG": r['metrics'].get('pegRatio'),
-                            "Z-Score": r['metrics'].get('zScore')
+                            "Z-Score": r['metrics'].get('zScore'),
+                            "Financial_Data": r.get('financialData', '')
                         }
                         csv_data.append(flat)
                     
@@ -605,7 +609,8 @@ def main():
                 "ROIC": r['metrics'].get('roic'),
                 "Insider Own": r['metrics'].get('insiderOwnership'),
                 "PEG": r['metrics'].get('pegRatio'),
-                "Z-Score": r['metrics'].get('zScore')
+                "Z-Score": r['metrics'].get('zScore'),
+                "Financial_Data": r.get('financialData', '')
             }
             csv_data.append(flat)
             

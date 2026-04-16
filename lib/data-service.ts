@@ -88,6 +88,7 @@ export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdat
             _status: row['Status'],
             _score: parseFloat(row['Score']) || 0,
             _failCodes: (row['Fail Codes'] || '').split(',').filter((c: string) => c),
+            _financialData: row['Financial_Data'] ? JSON.parse(atob(row['Financial_Data'])) : null,
             _reasons: [] // We don't export reasons to CSV to save space, maybe add later?
         })) as any[]; // Cast to any to pass "extra" fields to the dashboard adapter
         

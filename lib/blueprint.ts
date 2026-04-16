@@ -41,6 +41,7 @@ export interface ScreeningResult {
     metrics?: ScreeningMetrics; // Optional because mock data might miss it
     industry?: string;
     description?: string;
+    financialData?: any;
 }
 
 // Phase 1: Quantitative Filters

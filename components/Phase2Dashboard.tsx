@@ -442,7 +442,7 @@ export function Phase2Dashboard() {
             {/* AI Prompt Modal */}
             {aiModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-card border border-border w-full max-w-2xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+                    <div className="bg-card border border-border w-full sm:max-w-[95vw] lg:max-w-7xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
                         <header className="p-4 border-b border-border flex justify-between items-center bg-secondary/30">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-accent/20 rounded-lg">

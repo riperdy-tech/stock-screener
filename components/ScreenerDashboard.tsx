@@ -202,7 +202,8 @@ export function ScreenerDashboard() {
                     score: item._score,
                     reasons: item._reasons || [],
                     failCodes: item._failCodes || [],
-                    flags: []
+                    flags: [],
+                    financialData: item._financialData
                 };
             });
 
@@ -457,7 +458,7 @@ export function ScreenerDashboard() {
             {/* AI Modal Overlay */}
             {aiModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-card w-full sm:max-w-4xl h-[92vh] sm:h-auto sm:max-h-[85vh] rounded-t-2xl sm:rounded-xl border border-border shadow-2xl flex flex-col overflow-hidden">
+                    <div className="bg-card w-full sm:max-w-[95vw] lg:max-w-7xl h-[92vh] sm:h-auto sm:max-h-[90vh] rounded-t-2xl sm:rounded-xl border border-border shadow-2xl flex flex-col overflow-hidden">
                         <div className="flex items-center justify-between p-4 border-b border-border bg-secondary/30 shrink-0">
                             <h3 className="text-base sm:text-lg font-bold flex items-center gap-2 text-foreground">
                                 <Sparkles className="h-5 w-5 text-accent shrink-0" />
