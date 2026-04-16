@@ -186,6 +186,15 @@ export async function buildPrompt(ticker: string, result: ScreeningResult): Prom
 ■ High-Beta / Optionality / Product-Platform Hybrid Edition
 ────────────────────────────────────────────────────────
 
+[MANDATORY RESEARCH: SEARCH ONLINE]
+Before starting the valuation, you MUST search online for the target ticker (${ticker}) to find:
+- Segment Revenue Breakdown (business line specifics)
+- Forward CAPEX Guidance (management's 1-2 year promise)
+- Unit Economics & KPIs (Installed base, ARPU, attach rates, etc.)
+- Regulatory & Technology Status (Clinical/FDA/Tech milestones)
+- Peer Group Multiples (EV/Sales and EV/EBIT for 3-5 competitors)
+────────────────────────────────────────────────────────
+
 역할
 너는 고옵션가치 / 하이베타 / 초기상용화 / 설치기반 / 생태계형 /
 product-platform hybrid 기업을 평가하는 Expectation-Driven Valuation 엔진이다.
