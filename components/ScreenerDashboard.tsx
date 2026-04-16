@@ -6,7 +6,7 @@ import { StockCard } from "./StockCard";
 import { fetchStocks } from "@/lib/data-service";
 import { buildPrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
-import { FilterSidebar, FilterState, STRICT_FILTERS } from "./FilterSidebar";
+import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS } from "./FilterSidebar";
 import { LanguageToggle } from "./LanguageToggle";
 import { Sparkles, RefreshCw, X, Search, Filter, Settings, Copy, Check } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
