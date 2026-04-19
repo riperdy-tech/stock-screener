@@ -1,4 +1,5 @@
 import { type ScreeningResult } from './blueprint';
+import { type Market } from './data-service';
 
 /**
  * Client-side prompt builder for the AI Prompt Exporter.
@@ -51,13 +52,37 @@ interface FinancialDetail {
 
 // ─── Helpers ──────────────────────────────────────────────
 
-function fmt(val: any, prefix = '', suffix = '', decimals = 2): string {
+function fmt(val: any, market: Market | 'None' = 'US', isPrice = false, decimals = 2): string {
     if (val === null || val === undefined) return 'N/A';
     const n = Number(val);
     if (isNaN(n)) return String(val);
-    if (Math.abs(n) >= 1e9) return `${prefix}${(n / 1e9).toFixed(decimals)}B${suffix}`;
-    if (Math.abs(n) >= 1e6) return `${prefix}${(n / 1e6).toFixed(decimals)}M${suffix}`;
-    return `${prefix}${n.toFixed(decimals)}${suffix}`;
+
+    const prefix = market === 'None' ? '' : market === 'India' ? '₹' : market === 'Korea' ? '₩' : '$';
+
+    if (isPrice) {
+        return `${prefix}${n.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}`;
+    }
+
+    if (market === 'None') {
+        return `${n.toFixed(decimals)}`;
+    }
+
+    if (market === 'India') {
+        if (Math.abs(n) >= 1e7) return `${prefix}${(n / 1e7).toFixed(decimals)} Cr.`;
+        return `${prefix}${n.toLocaleString(undefined, { maximumFractionDigits: decimals })}`;
+    }
+
+    if (market === 'Korea') {
+        if (Math.abs(n) >= 1e12) return `${(n / 1e12).toFixed(decimals)}조원`;
+        if (Math.abs(n) >= 1e8) return `${(n / 1e8).toFixed(decimals)}억원`;
+        if (Math.abs(n) >= 1e4) return `${(n / 1e4).toFixed(decimals)}만원`;
+        return `${prefix}${n.toLocaleString(undefined, { maximumFractionDigits: decimals })}`;
+    }
+
+    // US/Default scaling
+    if (Math.abs(n) >= 1e9) return `${prefix}${(n / 1e9).toFixed(decimals)}B`;
+    if (Math.abs(n) >= 1e6) return `${prefix}${(n / 1e6).toFixed(decimals)}M`;
+    return `${prefix}${n.toFixed(decimals)}`;
 }
 
 // ─── Data Fetcher (Deprecated) ──────────────────────────────
@@ -65,7 +90,7 @@ function fmt(val: any, prefix = '', suffix = '', decimals = 2): string {
 
 // ─── Format: Rich Financial Data (from get_ticker_data) ───
 
-function formatFinancialData(d: FinancialDetail): string {
+function formatFinancialData(d: FinancialDetail, market: Market = 'US'): string {
     const lines: string[] = [];
 
     lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
@@ -76,29 +101,34 @@ function formatFinancialData(d: FinancialDetail): string {
     lines.push(``);
 
     lines.push(`── MARKET SNAPSHOT ──────────────────────`);
-    lines.push(`  Stock Price          : ${fmt(d.Price, '$')}`);
-    lines.push(`  Fully Diluted Shares: ${fmt(d.Shares_Outstanding)}`);
-    lines.push(`  Market Cap          : ${fmt(d.Market_Cap, '$')}`);
-    lines.push(`  Enterprise Value    : ${fmt(d.Enterprise_Value_EV, '$')}`);
-    lines.push(`  Total Cash          : ${fmt(d.Total_Cash, '$')}`);
-    lines.push(`  Total Debt          : ${fmt(d.Total_Debt, '$')}`);
-    lines.push(`  Stock-Based Comp    : ${fmt(d.SBC_Stock_Based_Comp, '$')}`);
-    lines.push(`  Operating Cash Flow : ${fmt(d.Operating_Cash_Flow, '$')}`);
-    lines.push(`  CapEx               : ${fmt(d.Capital_Expenditure, '$')}`);
-    lines.push(`  Free Cash Flow TTM  : ${fmt(d.Free_Cash_Flow_TTM, '$')}`);
+    lines.push(`  Stock Price          : ${fmt(d.Price, market, true)}`);
+    lines.push(`  Fully Diluted Shares: ${fmt(d.Shares_Outstanding, 'None')} ${market === 'Korea' ? '(Units)' : ''}`);
+    lines.push(`  Market Cap          : ${fmt(d.Market_Cap, market)}`);
+    lines.push(`  Enterprise Value    : ${fmt(d.Enterprise_Value_EV, market)}`);
+    lines.push(`  Total Cash          : ${fmt(d.Total_Cash, market)}`);
+    lines.push(`  Total Debt          : ${fmt(d.Total_Debt, market)}`);
+    lines.push(`  Stock-Based Comp    : ${fmt(d.SBC_Stock_Based_Comp, market)}`);
+    lines.push(`  Operating Cash Flow : ${fmt(d.Operating_Cash_Flow, market)}`);
+    lines.push(`  CapEx               : ${fmt(d.Capital_Expenditure, market)}`);
+    lines.push(`  Free Cash Flow TTM  : ${fmt(d.Free_Cash_Flow_TTM, market)}`);
     lines.push(``);
+
+    const formatWithSuffix = (val: any, mkt: Market | 'None', suffix: string, decimals = 2) => {
+        const formatted = fmt(val, mkt, false, decimals);
+        return formatted === 'N/A' ? 'N/A' : `${formatted}${suffix}`;
+    };
 
     const m = d.Calculated_Metrics || {} as any;
     lines.push(`── CALCULATED METRICS (TTM) ─────────────`);
-    lines.push(`  TTM Revenue         : ${fmt(m.TTM_Revenue, '$')}`);
-    lines.push(`  Gross Margin        : ${fmt(m['TTM_Gross_Margin_%'], '', '%')}`);
-    lines.push(`  YoY Revenue Growth  : ${fmt(m['YoY_Revenue_Growth_%'], '', '%')}`);
-    lines.push(`  FCF Margin          : ${fmt(m['FCF_Margin_%'], '', '%')}`);
-    lines.push(`  Rule of 40          : ${fmt(m.Rule_of_40, '', 'pts')}`);
-    lines.push(`  EV / Sales          : ${fmt(m.EV_to_Sales, '', 'x')}`);
-    lines.push(`  EV / Gross Profit   : ${fmt(m.EV_to_Gross_Profit, '', 'x')}`);
-    lines.push(`  EV / EBIT           : ${fmt(m.EV_to_EBIT, '', 'x')}`);
-    lines.push(`  Core Anchor Multiple: ${fmt(m['Core_Anchor_Multiple_0.4Sales_0.4GP'], '', 'x')}`);
+    lines.push(`  TTM Revenue         : ${fmt(m.TTM_Revenue, market)}`);
+    lines.push(`  Gross Margin        : ${formatWithSuffix(m['TTM_Gross_Margin_%'], 'None', '%', 1)}`);
+    lines.push(`  YoY Revenue Growth  : ${formatWithSuffix(m['YoY_Revenue_Growth_%'], 'None', '%', 1)}`);
+    lines.push(`  FCF Margin          : ${formatWithSuffix(m['FCF_Margin_%'], 'None', '%', 1)}`);
+    lines.push(`  Rule of 40          : ${formatWithSuffix(m.Rule_of_40, 'None', ' pts', 1)}`);
+    lines.push(`  EV / Sales          : ${formatWithSuffix(m.EV_to_Sales, 'None', 'x', 2)}`);
+    lines.push(`  EV / Gross Profit   : ${formatWithSuffix(m.EV_to_Gross_Profit, 'None', 'x', 2)}`);
+    lines.push(`  EV / EBIT           : ${formatWithSuffix(m.EV_to_EBIT, 'None', 'x', 2)}`);
+    lines.push(`  Core Anchor Multiple: ${formatWithSuffix(m['Core_Anchor_Multiple_0.4Sales_0.4GP'], 'None', 'x', 2)}`);
     lines.push(``);
 
     const annuals: IncomeRow[] = d.Annual_Income_Statement || [];
@@ -106,10 +136,10 @@ function formatFinancialData(d: FinancialDetail): string {
         lines.push(`── ANNUAL INCOME STATEMENT ──────────────`);
         annuals.forEach((row) => {
             lines.push(`  Period: ${row.Date}`);
-            lines.push(`    Revenue          : ${fmt(row.TotalRevenue, '$')}`);
-            lines.push(`    Gross Profit     : ${fmt(row.GrossProfit, '$')}`);
-            lines.push(`    Operating Income : ${fmt(row.OperatingIncome, '$')}`);
-            lines.push(`    Net Income       : ${fmt(row.NetIncome, '$')}`);
+            lines.push(`    Revenue          : ${fmt(row.TotalRevenue, market)}`);
+            lines.push(`    Gross Profit     : ${fmt(row.GrossProfit, market)}`);
+            lines.push(`    Operating Income : ${fmt(row.OperatingIncome, market)}`);
+            lines.push(`    Net Income       : ${fmt(row.NetIncome, market)}`);
         });
         lines.push(``);
     }
@@ -119,10 +149,10 @@ function formatFinancialData(d: FinancialDetail): string {
         lines.push(`── QUARTERLY INCOME STATEMENT ───────────`);
         quarters.forEach((row) => {
             lines.push(`  Quarter: ${row.Date}`);
-            lines.push(`    Revenue          : ${fmt(row.TotalRevenue, '$')}`);
-            lines.push(`    Gross Profit     : ${fmt(row.GrossProfit, '$')}`);
-            lines.push(`    Operating Income : ${fmt(row.OperatingIncome, '$')}`);
-            lines.push(`    Net Income       : ${fmt(row.NetIncome, '$')}`);
+            lines.push(`    Revenue          : ${fmt(row.TotalRevenue, market)}`);
+            lines.push(`    Gross Profit     : ${fmt(row.GrossProfit, market)}`);
+            lines.push(`    Operating Income : ${fmt(row.OperatingIncome, market)}`);
+            lines.push(`    Net Income       : ${fmt(row.NetIncome, market)}`);
         });
         lines.push(``);
     }
@@ -133,7 +163,7 @@ function formatFinancialData(d: FinancialDetail): string {
 
 // ─── Format: Screener Data (fallback when no financial detail) ───
 
-function formatScreenerData(result: ScreeningResult): string {
+function formatScreenerData(result: ScreeningResult, market: Market = 'US'): string {
     const c = result.candidate;
     const lines: string[] = [];
 
@@ -153,8 +183,8 @@ function formatScreenerData(result: ScreeningResult): string {
     lines.push(``);
 
     lines.push(`── MARKET SNAPSHOT ──────────────────────`);
-    lines.push(`  Stock Price         : ${fmt(c.price, '$')}`);
-    lines.push(`  Market Cap          : ${fmt(c.marketCap, '$')}`);
+    lines.push(`  Stock Price         : ${fmt(c.price, market, true)}`);
+    lines.push(`  Market Cap          : ${fmt(c.marketCap, market)}`);
     lines.push(``);
 
     lines.push(`── KEY METRICS (from Screener) ──────────`);
@@ -173,13 +203,18 @@ function formatScreenerData(result: ScreeningResult): string {
 // ─── Main Export ──────────────────────────────────────────
 
 export async function buildPrompt(ticker: string, result: ScreeningResult): Promise<string> {
+    // Determine market context from ticker suffix
+    let market: Market = 'US';
+    if (ticker.endsWith('.NS') || ticker.endsWith('.BO')) market = 'India';
+    if (ticker.endsWith('.KS') || ticker.endsWith('.KQ')) market = 'Korea';
+
     // Rely on rich financial detail embedded inside the CSV data pipeline
     const financialDetail = result.financialData;
 
     // Use rich data if available, otherwise fall back to screener summary
     const dataBrief = financialDetail
-        ? formatFinancialData(financialDetail)
-        : formatScreenerData(result);
+        ? formatFinancialData(financialDetail as FinancialDetail, market)
+        : formatScreenerData(result, market);
 
     return `────────────────────────────────────────────────────────
 ■ SOTA Expectation-Driven Valuation Engine v3.4
@@ -188,6 +223,7 @@ export async function buildPrompt(ticker: string, result: ScreeningResult): Prom
 
 [MANDATORY RESEARCH: SEARCH ONLINE]
 Before starting the valuation, you MUST search online for the target ticker (${ticker}) to find:
+- For data shown as N/A and for additional data required to analyze, AI to search online for available info
 - Segment Revenue Breakdown (business line specifics)
 - Forward CAPEX Guidance (management's 1-2 year promise)
 - Unit Economics & KPIs (Installed base, ARPU, attach rates, etc.)
@@ -823,10 +859,15 @@ ${dataBrief}`;
 // ─── Simple Version Export ────────────────────────────────
 
 export async function buildSimplePrompt(ticker: string, result: ScreeningResult): Promise<string> {
+    // Determine market context from ticker suffix
+    let market: Market = 'US';
+    if (ticker.endsWith('.NS') || ticker.endsWith('.BO')) market = 'India';
+    if (ticker.endsWith('.KS') || ticker.endsWith('.KQ')) market = 'Korea';
+
     const financialDetail = result.financialData;
     const dataBrief = financialDetail
-        ? formatFinancialData(financialDetail)
-        : formatScreenerData(result);
+        ? formatFinancialData(financialDetail as FinancialDetail, market)
+        : formatScreenerData(result, market);
 
     return `SYSTEM INSTRUCTION
 You are a Chief Investment Strategist at a top-tier global Investment Bank (IB) and a Quantitative-Fundamental Hedge Fund (HF). Your mission is to activate the "Expectation-Driven Valuation Engine v4.0" for a target stock provided by the user. You must dynamically select the valuation path best suited to the company's specific characteristics, generating precise quantitative analysis and piercing qualitative investment memos. The output must be delivered in Markdown format, maintaining a professional, academic, and institutional research tone.
@@ -846,6 +887,7 @@ REQUIRED OUTPUT STRUCTURE
 
 0. Global Research Requirements (SEARCH ONLINE): 
 Before starting the valuation, you MUST search online for the following unstructured data points for the target ticker:
+- For data shown as N/A and for additional data required to analyze, AI to search online for available info
 - Segment Revenue Breakdown (Which business lines drive the numbers?)
 - Forward CAPEX Guidance (What has management promised for the next 1-2 years?)
 - Unit Economics & KPIs (Installed base, ARPU, attach rates, or churn if applicable)

@@ -3,15 +3,16 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
-import { fetchStocks } from "@/lib/data-service";
+import { fetchStocks, Market } from "@/lib/data-service";
 import { buildPrompt, buildSimplePrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
-import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS } from "./FilterSidebar";
+import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS } from "./FilterSidebar";
 import { LanguageToggle } from "./LanguageToggle";
 import { Sparkles, RefreshCw, X, Search, Filter, Settings, Copy, Check } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import clsx from "clsx";
 
 export function ScreenerDashboard() {
     const { t, language, setLanguage } = useLanguage();
@@ -23,6 +24,7 @@ export function ScreenerDashboard() {
     const [selectedStock, setSelectedStock] = useState<ScreeningResult | null>(null);
     const [lastUpdatedFile, setLastUpdatedFile] = useState<string | null>(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [selectedMarket, setSelectedMarket] = useState<Market>('US');
     
     // Maintain a ref to current rawResults for the setInterval closure
     const rawResultsRef = useRef<ScreeningResult[]>([]);
@@ -144,11 +146,11 @@ export function ScreenerDashboard() {
             }
         }
 
-        loadData(true);
+        loadData(true, selectedMarket);
 
         // Auto-refresh prices ONLY silently every 5 minutes
         const interval = setInterval(() => {
-            refreshPricesOnly();
+            refreshPricesOnly(selectedMarket);
         }, 5 * 60 * 1000);
 
         return () => clearInterval(interval); // Cleanup on unmount
@@ -161,7 +163,17 @@ export function ScreenerDashboard() {
         }
     }, [filters]);
 
-    async function refreshPricesOnly() {
+    // Re-load data when market changes
+    useEffect(() => {
+        // Reset filters when switching away from US (since strict filters usually don't apply)
+        if (selectedMarket !== 'US') {
+            setFilters(ZERO_BASE_FILTERS);
+            setSearch("");
+        }
+        loadData(false, selectedMarket);
+    }, [selectedMarket]);
+
+    async function refreshPricesOnly(market: Market) {
         const tickers = rawResultsRef.current.map(r => r.candidate.symbol);
         if (tickers.length === 0) return;
 
@@ -193,10 +205,10 @@ export function ScreenerDashboard() {
         }
     }
 
-    async function loadData(silent = false) {
+    async function loadData(silent = false, market: Market) {
         if (!silent) setLoading(true);
         try {
-            const { data: rawData, lastUpdated: updateDate } = await fetchStocks();
+            const { data: rawData, lastUpdated: updateDate } = await fetchStocks(market);
             
             if (updateDate) setLastUpdatedFile(updateDate);
 
@@ -225,14 +237,12 @@ export function ScreenerDashboard() {
                     },
                     // We reconstruct metrics object for the Detail Modal if needed
                     metrics: {
-                        revenueGrowth: item.revenueGrowth / 100, // CSV had %, convert back to decimal if app expects decimal?
-                        // WAIT: App expects %, but JSON had decimals?
-                        // Let's check:
-                        // JSON: metrics.revenueGrowth = 0.25 (25%)
-                        // Dashboard: (metrics.revenueGrowth || 0) * 100
-                        // CSV: "25.0" (Already %)
-                        // So if CSV gives 25, we don't multiply by 100?
-                        // Let's adjust the candidate mapping above.
+                        revenueGrowth: item.revenueGrowth,
+                        grossMargin: item.grossMargin,
+                        roic: item.roic,
+                        float: item.floatShares,
+                        ocf: item.ocf,
+                        capex: item.capex
                     },
                     passed: item._status === "Pass",
                     score: item._score,
@@ -245,29 +255,7 @@ export function ScreenerDashboard() {
                 };
             });
 
-            // Fix Percentage Units:
-            // CSV exports raw numbers (e.g. 25.5 for 25.5%).
-            // Dashboard Adapter previously multiplied by 100.
-            // We should Ensure `candidate` has Correct % values.
-            const finalData = adaptedData.map(d => {
-                // In CSV mode, fetchStocks returns the number directly from the CSV column.
-                // Fetch_data.py exports: r['metrics'].get('revenueGrowth') which IS decimal in JSON logic?
-                // Wait, fetch_data.py `process_stock` returns decimals?
-                // Let's assume CSV has DECIMALS because we just dumped the python dict values.
-                // Python `stock_data.revenue_growth_ttm` is usually decimal (0.25).
-                // So CSV has 0.25.
-                // So we DOES need to multiply by 100.
-
-                const cand = d.candidate as any;
-                cand.revenueGrowth = (cand.revenueGrowth || 0) * 100;
-                cand.grossMargin = (cand.grossMargin || 0) * 100;
-                cand.roic = (cand.roic || 0) * 100;
-                cand.insiderOwnership = (cand.insiderOwnership || 0) * 100;
-
-                return d;
-            });
-
-            setRawResults(finalData as unknown as ScreeningResult[]);
+            setRawResults(adaptedData as unknown as ScreeningResult[]);
         } catch (err) {
             console.error("Failed to load or adapt data:", err);
             setRawResults([]);
@@ -289,15 +277,27 @@ export function ScreenerDashboard() {
             if (!searchMatch) return false;
 
             // 2. Sidebar Filters
-            const mcapM = c.marketCap / 1_000_000;
-            if (filters.minMarketCap > 0 && mcapM < filters.minMarketCap) return false;
-            // if (filters.maxMarketCap > 0 && mcapM > filters.maxMarketCap) return false; // Optional max cap check
+            // Scaling Market Cap: 
+            // US: c.marketCap is in $, filters.minMarketCap is in M $. So mcapM = marketCap / 1M.
+            // India: c.marketCap is in Cr. filters.minMarketCap is in Cr. So mcapM = marketCap. 
+            // Korea: c.marketCap is in B ₩. filters.minMarketCap is in B ₩. So mcapM = marketCap.
+            let mcapValue = c.marketCap;
+            if (selectedMarket === 'US') {
+                mcapValue = c.marketCap / 1_000_000;
+            } else if (selectedMarket === 'India') {
+                mcapValue = c.marketCap / 10_000_000; // Crores
+            } else if (selectedMarket === 'Korea') {
+                mcapValue = c.marketCap / 1_000_000_000; // Billions
+            }
+            
+            if (filters.minMarketCap > 0 && mcapValue < filters.minMarketCap) return false;
+            // if (filters.maxMarketCap > 0 && mcapValue > filters.maxMarketCap) return false;
 
             if (filters.maxPrice > 0 && filters.maxPrice < 1000 && c.price > filters.maxPrice) return false;
 
-            if (filters.minRevenueGrowth > -50 && c.revenueGrowth < filters.minRevenueGrowth) return false;
-            if (filters.minGrossMargin > -50 && c.grossMargin < filters.minGrossMargin) return false;
-            if (filters.minROIC > -50 && c.roic < filters.minROIC) return false;
+            if (filters.minRevenueGrowth > -50 && !(selectedMarket !== 'US' && c.revenueGrowth === 0) && c.revenueGrowth < filters.minRevenueGrowth) return false;
+            if (filters.minGrossMargin > -50 && !(selectedMarket !== 'US' && c.grossMargin === 0) && c.grossMargin < filters.minGrossMargin) return false;
+            if (filters.minROIC > -50 && !(selectedMarket !== 'US' && c.roic === 0) && c.roic < filters.minROIC) return false;
             if (c.insiderOwnership < filters.minInsiderOwnership) return false;
 
             if (filters.maxPEG < 10 && c.pegRatio > filters.maxPEG) return false;
@@ -310,7 +310,7 @@ export function ScreenerDashboard() {
 
             return true;
         });
-    }, [rawResults, search, filters]);
+    }, [rawResults, search, filters, selectedMarket]);
 
 
     // Pagination Logic
@@ -352,6 +352,7 @@ export function ScreenerDashboard() {
                 filters={filters}
                 setFilters={setFilters}
                 isOpen={isSidebarOpen}
+                market={selectedMarket}
                 onClose={() => setIsSidebarOpen(false)}
                 totalResults={filteredResults.length}
             />
@@ -385,15 +386,29 @@ export function ScreenerDashboard() {
                         </Link>
                     </div>
 
+                    {/* Market Selector - Segmented Control */}
+                    <div className="flex bg-secondary/50 p-1 rounded-lg border border-border/50 shadow-inner scale-90 md:scale-100">
+                        {(['US', 'India', 'Korea'] as Market[]).map((m) => (
+                            <button
+                                key={m}
+                                onClick={() => setSelectedMarket(m)}
+                                className={clsx(
+                                    "px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-300 flex items-center gap-2",
+                                    selectedMarket === m 
+                                        ? "bg-primary text-primary-foreground shadow-lg scale-105" 
+                                        : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                                )}
+                            >
+                                <span>{m === 'US' ? '🇺🇸' : m === 'India' ? '🇮🇳' : '🇰🇷'}</span>
+                                <span className={clsx(selectedMarket === m ? "block" : "hidden sm:block")}>
+                                    {m === 'US' ? t('usStocks') : m === 'India' ? t('indiaStocks') : t('koreaStocks')}
+                                </span>
+                            </button>
+                        ))}
+                    </div>
+
                     <div className="flex flex-wrap md:flex-nowrap items-center gap-2 w-full md:w-auto justify-between md:justify-end">
                         <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
-                            <button 
-                                onClick={() => setSettingsModalOpen(true)}
-                                className="px-3 py-1.5 text-xs font-semibold rounded outline-none flex justify-center items-center gap-1.5 transition-colors bg-secondary text-secondary-foreground border border-border hover:bg-secondary/80 mr-2"
-                                title="Admin Settings"
-                            >
-                                <Settings className="h-4 w-4 shrink-0" /> Admin
-                            </button>
                             {/* Language Toggle */}
                             <LanguageToggle />
                         </div>
@@ -434,7 +449,7 @@ export function ScreenerDashboard() {
                         <div className="flex flex-col items-center justify-center h-64 text-muted-foreground border border-dashed border-border rounded-xl">
                             <p className="text-lg">⚠</p>
                             <p>{t('noStocks')}</p>
-                            <button onClick={() => setFilters(DEFAULT_FILTERS)} className="mt-4 text-primary text-sm hover:underline">{t('resetFilters')}</button>
+                            <button onClick={() => setFilters(ZERO_BASE_FILTERS)} className="mt-4 text-primary text-sm hover:underline">{t('resetFilters')}</button>
                         </div>
                     ) : (
                         <>
@@ -446,6 +461,7 @@ export function ScreenerDashboard() {
                                         onClick={() => setSelectedStock(result)}
                                         index={i}
                                         lastUpdated={lastUpdatedFile}
+                                        market={selectedMarket}
                                     />
                                 ))}
                             </div>
@@ -488,6 +504,7 @@ export function ScreenerDashboard() {
             {selectedStock && (
                 <StockDetailModal
                     result={selectedStock}
+                    market={selectedMarket}
                     onClose={() => setSelectedStock(null)}
                     onAskGemini={(ticker: string) => handleAiReview(selectedStock)}
                 />

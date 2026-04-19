@@ -18,6 +18,10 @@ export const TRANSLATIONS = {
         gems: "gems",
         skipped: "skipped",
         processing: "Processing",
+        // Market Selector
+        usStocks: "US Stocks",
+        indiaStocks: "India Stocks",
+        koreaStocks: "Korea Stocks",
 
         // Dashboard
         marketOpp: "Market Opportunities",
@@ -40,9 +44,9 @@ export const TRANSLATIONS = {
         ownership: "Ownership",
 
         // Filter Labels
-        minMarketCap: "Min Market Cap ($M)",
-        maxMarketCap: "Max Market Cap ($M)",
-        maxPrice: "Max Share Price ($)",
+        minMarketCap: "Min Market Cap",
+        maxMarketCap: "Max Market Cap",
+        maxPrice: "Max Share Price",
         maxFloat: "Max Float (Millions)",
         minRevGrowth: "Min Revenue Growth (%)",
         minGrossMargin: "Min Gross Margin (%)",
@@ -116,6 +120,10 @@ export const TRANSLATIONS = {
         gems: "보석",
         skipped: "건너뜀",
         processing: "처리 중",
+        // Market Selector
+        usStocks: "미국 주식",
+        indiaStocks: "인도 주식",
+        koreaStocks: "한국 주식",
 
         // Dashboard
         marketOpp: "시장 기회",
@@ -138,9 +146,9 @@ export const TRANSLATIONS = {
         ownership: "지분 구조",
 
         // Filter Labels
-        minMarketCap: "최소 시가총액 ($M)",
-        maxMarketCap: "최대 시가총액 ($M)",
-        maxPrice: "최대 주가 ($)",
+        minMarketCap: "최소 시가총액",
+        maxMarketCap: "최대 시가총액",
+        maxPrice: "최대 주가",
         maxFloat: "최대 유동주식수 (백만)",
         minRevGrowth: "최소 매출성장률 (%)",
         minGrossMargin: "최소 매출총이익률 (%)",
@@ -211,6 +219,10 @@ export const TRANSLATIONS = {
         gems: "寶石",
         skipped: "已跳過",
         processing: "處理中",
+        // Market Selector
+        usStocks: "美國股票",
+        indiaStocks: "印度股票",
+        koreaStocks: "韓國股票",
         marketOpp: "市場機會",
         showing: "顯示中",
         assets: "個資產",
@@ -227,9 +239,9 @@ export const TRANSLATIONS = {
         growthEff: "成長與效率",
         valuation: "估值",
         ownership: "股權",
-        minMarketCap: "最小市值 ($M)",
-        maxMarketCap: "最大市值 ($M)",
-        maxPrice: "最高股價 ($)",
+        minMarketCap: "最小市值",
+        maxMarketCap: "最大市值",
+        maxPrice: "最高股價",
         maxFloat: "最大流通股 (百萬)",
         minRevGrowth: "最小營收成長 (%)",
         minGrossMargin: "最小毛利率 (%)",

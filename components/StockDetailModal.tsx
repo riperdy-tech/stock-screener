@@ -1,15 +1,17 @@
 import { X, Activity, AlertOctagon, Sparkles } from "lucide-react";
 import { type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
 import { useLanguage } from "@/components/LanguageContext";
+import { Market, formatKoreanWon } from "@/lib/data-service";
 import clsx from "clsx";
 
 interface StockDetailModalProps {
     result: ScreeningResult;
     onClose: () => void;
     onAskGemini?: (ticker: string) => void;
+    market?: Market;
 }
 
-export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailModalProps) {
+export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }: StockDetailModalProps) {
     const { t } = useLanguage();
     const { candidate, reasons, flags, score } = result;
 
@@ -22,8 +24,12 @@ export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailMo
                     <div>
                         <div className="flex flex-col gap-1">
                             <div className="flex items-center gap-3">
-                                <h2 className="text-3xl font-bold">{candidate.symbol}</h2>
-                                <span className="text-xl text-muted-foreground font-light px-2 border-l border-border">{candidate.name}</span>
+                                <h2 className="text-3xl font-bold">
+                                    {market === 'Korea' ? candidate.name : candidate.symbol.replace(/\.(NS|BO)$/, '')}
+                                </h2>
+                                <span className="text-xl text-muted-foreground font-light px-2 border-l border-border">
+                                    {market === 'Korea' ? candidate.symbol.split('.')[0] : candidate.name}
+                                </span>
                             </div>
 
                             <div className="flex items-center gap-2 text-sm text-primary/80 font-medium mt-1">
@@ -93,15 +99,23 @@ export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailMo
                                             <ul className="list-disc pl-5 mt-1 text-xs text-foreground/80 font-normal space-y-1">
                                                 {(result.failCodes && result.failCodes.length > 0) ? result.failCodes.map(code => {
                                                     const failReasonMap: Record<string, string> = {
-                                                        FAIL_MCAP: "Market Cap outside $50M - $2B range",
-                                                        FAIL_PRICE: "Share Price >= $25",
+                                                        FAIL_MCAP: market === 'India' 
+                                                            ? "Market Cap outside 400Cr - 16,000Cr range" 
+                                                            : market === 'Korea'
+                                                                ? "Market Cap outside 70B - 2.8T KRW range"
+                                                                : "Market Cap outside $50M - $2B range",
+                                                        FAIL_PRICE: market === 'India'
+                                                            ? "Share Price too high"
+                                                            : market === 'Korea'
+                                                                ? "Share Price too high" 
+                                                                : "Share Price >= $25",
                                                         FAIL_GROWTH: "Revenue Growth < 20%",
                                                         FAIL_GM: "Gross margin below sector targets",
                                                         FAIL_GM_TREND: "Gross Margin declining vs 3-year avg",
                                                         FAIL_ROIC: "ROIC < 15%",
                                                         FAIL_PS: "Price/Sales ratio too high",
                                                         FAIL_PEG: "PEG ratio > 1.5",
-                                                        FAIL_FLOAT: "Floating shares > 50M",
+                                                        FAIL_FLOAT: "Floating shares too high for small-cap play",
                                                         FAIL_INSIDER: "Insider Ownership < 15%"
                                                     };
                                                     return <li key={code}>{failReasonMap[code] || code}</li>;
@@ -121,12 +135,23 @@ export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailMo
                                 <Activity className="h-5 w-5 text-primary" /> {t('phase1')}
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <DetailRow label={t('revGrowth')} value={`${Number(candidate.revenueGrowth).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_REVENUE_GROWTH}%`} pass={candidate.revenueGrowth >= QUANT_THRESHOLDS.MIN_REVENUE_GROWTH} />
-                                <DetailRow label={t('roic')} value={`${Number(candidate.roic).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_ROIC}%`} pass={candidate.roic >= QUANT_THRESHOLDS.MIN_ROIC} />
-                                <DetailRow label={t('grossMargin')} value={`${Number(candidate.grossMargin).toFixed(1)}%`} target={`> 30% / 50%`} pass={candidate.grossMargin >= 30} />
-                                <DetailRow label={t('mcap')} value={`$${(candidate.marketCap / 1e9).toFixed(1)}B`} target={`< $2B`} pass={candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} warning={candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} />
-                                <DetailRow label={t('pegRatio')} value={`${Number(candidate.pegRatio).toFixed(1)}x`} target={`< ${QUANT_THRESHOLDS.MAX_PEG}`} pass={candidate.pegRatio <= QUANT_THRESHOLDS.MAX_PEG} />
-                                <DetailRow label={t('insiderOwn')} value={`${Number(candidate.insiderOwnership).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP}%`} pass={candidate.insiderOwnership >= QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP} />
+                                <DetailRow label={t('revGrowth')} value={market !== 'US' && candidate.revenueGrowth === 0 ? 'N/A' : `${Number(candidate.revenueGrowth).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_REVENUE_GROWTH}%`} pass={market !== 'US' && candidate.revenueGrowth === 0 ? true : candidate.revenueGrowth >= QUANT_THRESHOLDS.MIN_REVENUE_GROWTH} />
+                                <DetailRow label={t('roic')} value={market !== 'US' && candidate.roic === 0 ? 'N/A' : `${Number(candidate.roic).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_ROIC}%`} pass={market !== 'US' && candidate.roic === 0 ? true : candidate.roic >= QUANT_THRESHOLDS.MIN_ROIC} />
+                                <DetailRow label={t('grossMargin')} value={market !== 'US' && candidate.grossMargin === 0 ? 'N/A' : `${Number(candidate.grossMargin).toFixed(1)}%`} target={`> 30% / 50%`} pass={market !== 'US' && candidate.grossMargin === 0 ? true : candidate.grossMargin >= 30} />
+                                <DetailRow 
+                                    label={t('mcap')} 
+                                    value={market === 'India' 
+                                        ? `${(candidate.marketCap / 10_000_000).toLocaleString(undefined, {maximumFractionDigits: 0})} Cr.` 
+                                        : market === 'Korea'
+                                            ? formatKoreanWon(candidate.marketCap, 2)
+                                            : `$${(candidate.marketCap / 1e9).toFixed(1)}B`
+                                    } 
+                                    target={market === 'India' ? '< 16000Cr' : market === 'Korea' ? '< 2.8조원' : '< $2B'} 
+                                    pass={market === 'India' ? (candidate.marketCap / 10_000_000) <= 16000 : market === 'Korea' ? (candidate.marketCap / 1_000_000_000) <= 2800 : candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} 
+                                    warning={market === 'India' ? (candidate.marketCap / 10_000_000) > 16000 : market === 'Korea' ? (candidate.marketCap / 1_000_000_000) > 2800 : candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} 
+                                />
+                                <DetailRow label={t('pegRatio')} value={market !== 'US' && candidate.pegRatio === 0 ? 'N/A' : `${Number(candidate.pegRatio).toFixed(1)}x`} target={`< ${QUANT_THRESHOLDS.MAX_PEG}`} pass={market !== 'US' && candidate.pegRatio === 0 ? true : candidate.pegRatio <= QUANT_THRESHOLDS.MAX_PEG} />
+                                <DetailRow label={t('insiderOwn')} value={market !== 'US' && candidate.insiderOwnership === 0 ? 'N/A' : `${Number(candidate.insiderOwnership).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP}%`} pass={market !== 'US' && candidate.insiderOwnership === 0 ? true : candidate.insiderOwnership >= QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP} />
                             </div>
                         </div>
 
@@ -152,7 +177,7 @@ export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailMo
                                 )}
                                 {/* Always show Z-Score context */}
                                 <div className="mt-4 pt-4 border-t border-danger/10 text-sm flex justify-between">
-                                    <span>Altman Z-Score: <span className="font-mono font-bold">{candidate.zScore}</span></span>
+                                    <span>Altman Z-Score: <span className="font-mono font-bold">{market !== 'US' && candidate.zScore === 0 ? 'N/A' : candidate.zScore}</span></span>
                                     <span className="text-muted-foreground">({t('target')}: &gt; 1.8)</span>
                                 </div>
                             </div>

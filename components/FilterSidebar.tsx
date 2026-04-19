@@ -1,6 +1,7 @@
 import { Filter, X, HelpCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
+import { Market } from "@/lib/data-service";
 import clsx from "clsx";
 
 export interface FilterState {
@@ -22,6 +23,7 @@ interface FilterSidebarProps {
     isOpen: boolean;
     onClose: () => void;
     totalResults: number;
+    market: Market;
 }
 
 export const DEFAULT_FILTERS: FilterState = {
@@ -63,7 +65,7 @@ export const STRICT_FILTERS: FilterState = {
     maxFloat: 50,
 };
 
-export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults }: FilterSidebarProps) {
+export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market }: FilterSidebarProps) {
     const { t, filterDefs } = useLanguage();
 
     // Local state for Manual Apply
@@ -112,10 +114,34 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
                 {/* Size & Price */}
                 <Section title={t('sizePrice')}>
-                    <InputGroup label={t('minMarketCap')} value={localFilters.minMarketCap} onChange={(v) => handleChange("minMarketCap", v)} strictValue={STRICT_FILTERS.minMarketCap} field="minMarketCap" defs={filterDefs} min={0} max={5000} step={10} />
-                    <InputGroup label={t('maxMarketCap')} value={localFilters.maxMarketCap} onChange={(v) => handleChange("maxMarketCap", v)} strictValue={STRICT_FILTERS.maxMarketCap} field="maxMarketCap" defs={filterDefs} min={0} max={10000} step={100} />
-                    <InputGroup label={t('maxPrice')} value={localFilters.maxPrice} onChange={(v) => handleChange("maxPrice", v)} strictValue={STRICT_FILTERS.maxPrice} field="maxPrice" defs={filterDefs} min={0} max={1000} step={1} />
-                    <InputGroup label={t('maxFloat')} value={localFilters.maxFloat} onChange={(v) => handleChange("maxFloat", v)} strictValue={STRICT_FILTERS.maxFloat} field="maxFloat" defs={filterDefs} min={0} max={5000} step={10} />
+                    <InputGroup 
+                        label={`${t('minMarketCap')} (${market === 'India' ? 'Cr.' : market === 'Korea' ? 'B ₩' : 'M $'})`} 
+                        value={localFilters.minMarketCap} 
+                        onChange={(v) => handleChange("minMarketCap", v)} 
+                        strictValue={STRICT_FILTERS.minMarketCap} field="minMarketCap" defs={filterDefs} 
+                        min={0} max={market === 'India' ? 50000 : market === 'Korea' ? 100000 : 5000} step={market === 'US' ? 10 : 100} 
+                    />
+                    <InputGroup 
+                        label={`${t('maxMarketCap')} (${market === 'India' ? 'Cr.' : market === 'Korea' ? 'B ₩' : 'B $'})`} 
+                        value={localFilters.maxMarketCap} 
+                        onChange={(v) => handleChange("maxMarketCap", v)} 
+                        strictValue={STRICT_FILTERS.maxMarketCap} field="maxMarketCap" defs={filterDefs} 
+                        min={0} max={market === 'India' ? 100000 : market === 'Korea' ? 200000 : 10000} step={100} 
+                    />
+                    <InputGroup 
+                        label={`${t('maxPrice')} (${market === 'India' ? '₹' : market === 'Korea' ? '₩' : '$'})`} 
+                        value={localFilters.maxPrice} 
+                        onChange={(v) => handleChange("maxPrice", v)} 
+                        strictValue={STRICT_FILTERS.maxPrice} field="maxPrice" defs={filterDefs} 
+                        min={0} max={market === 'India' ? 50000 : market === 'Korea' ? 1000000 : 1000} step={market === 'US' ? 1 : 10} 
+                    />
+                    <InputGroup 
+                        label={`${t('maxFloat')} (M)`} 
+                        value={localFilters.maxFloat} 
+                        onChange={(v) => handleChange("maxFloat", v)} 
+                        strictValue={STRICT_FILTERS.maxFloat} field="maxFloat" defs={filterDefs} 
+                        min={0} max={5000} step={10} 
+                    />
                 </Section>
 
                 {/* Growth & Margins */}
@@ -154,7 +180,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         onClick={handleStrict}
                         className="flex-1 px-2 py-2 bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 font-bold text-xs rounded border border-orange-500/30 transition-colors"
                     >
-                        {t('strict') || "Strict"}
+                        Strict (US only)
                     </button>
                     <button
                         onClick={handleReset}

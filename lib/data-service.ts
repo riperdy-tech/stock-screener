@@ -1,5 +1,12 @@
 import { type StockCandidate } from "./blueprint";
 
+export function formatKoreanWon(n: number, decimals: number = 2) {
+    if (Math.abs(n) >= 1e12) return `${(n / 1e12).toLocaleString(undefined, {maximumFractionDigits: decimals})}조원`;
+    if (Math.abs(n) >= 1e8) return `${(n / 1e8).toLocaleString(undefined, {maximumFractionDigits: decimals})}억원`;
+    if (Math.abs(n) >= 1e4) return `${(n / 1e4).toLocaleString(undefined, {maximumFractionDigits: decimals})}만원`;
+    return `${n.toLocaleString(undefined, {maximumFractionDigits: decimals})}원`;
+}
+
 function parseCSV(text: string): any[] {
     const rows: any[] = [];
     let row: string[] = [];
@@ -53,18 +60,37 @@ function parseCSV(text: string): any[] {
     });
 }
 
-export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdated: string | null }> {
+export type Market = 'US' | 'India' | 'Korea';
+
+export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockCandidate[], lastUpdated: string | null }> {
     try {
-        // Fetch CSV instead of JSON
-        // Fix for GitHub Pages: URL needs to include the repo name in production
         const isProd = process.env.NODE_ENV === 'production';
         const basePath = isProd ? '/stock-screener' : '';
-        const response = await fetch(`${basePath}/data/stocks.csv?t=${new Date().getTime()}`);
+        const filename = market === 'US' ? 'stocks.csv' : 'stocks_intl.csv';
+        
+        const response = await fetch(`${basePath}/data/${filename}?t=${new Date().getTime()}`);
         if (!response.ok) {
-            throw new Error("Failed to fetch stock data");
+            throw new Error(`Failed to fetch ${market} stock data`);
         }
         const text = await response.text();
-        const rawData = parseCSV(text);
+        let rawData = parseCSV(text);
+
+        // ROBUST MARKET FILTERING:
+        // Ensure each tab ONLY shows its own data regardless of the source file.
+        if (market === 'India') {
+            rawData = rawData.filter(r => (r['Symbol'] || '').endsWith('.NS'));
+        } else if (market === 'Korea') {
+            rawData = rawData.filter(r => {
+                const s = r['Symbol'] || '';
+                return s.endsWith('.KS') || s.endsWith('.KQ');
+            });
+        } else if (market === 'US') {
+            // US tab should filter OUT international suffixes to be safe
+            rawData = rawData.filter(r => {
+                const s = r['Symbol'] || '';
+                return !s.endsWith('.NS') && !s.endsWith('.KS') && !s.endsWith('.KQ');
+            });
+        }
         
         const lastMod = response.headers.get('Last-Modified');
         let lastUpdated = null;
@@ -76,41 +102,47 @@ export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdat
             lastUpdated = `${yyyy}-${mm}-${dd}`;
         }
 
-        const mappedData = rawData.map(row => ({
-            symbol: row['Symbol'] || '',
-            name: (row['Name'] || '').replace(/"/g, ''), // Cleanup quotes
-            description: (row['Description'] || '').replace(/"/g, ''),
-            sector: row['Sector'] || 'Unknown',
-            industry: row['Industry'] || 'Unknown',
-            price: parseFloat(row['Price']) || 0,
-            marketCap: parseFloat(row['Market Cap']) || 0,
+        const mappedData = rawData.map(row => {
+            // Percent values in CSV are decimals (e.g. 0.25 for 25%).
+            // Use 100 as multiplier for dashboard cards which expect integers.
+            const multiplier = 100;
 
-            // Metrics (Handle missing/NaN)
-            revenueGrowth: parseFloat(row['Rev Growth']) || 0,
-            grossMargin: parseFloat(row['Gross Margin']) || 0,
-            roic: parseFloat(row['ROIC']) || 0,
-            insiderOwnership: parseFloat(row['Insider Own']) || 0,
-            pegRatio: parseFloat(row['PEG']) || 0,
-            zScore: parseFloat(row['Z-Score']) || 0,
+            const base = {
+                symbol: row['Symbol'] || '',
+                name: (row['Name'] || '').replace(/"/g, ''),
+                description: (row['Description'] || '').replace(/"/g, ''),
+                sector: row['Sector'] || 'Unknown',
+                industry: row['Industry'] || 'Unknown',
+                price: parseFloat(row['Price']) || 0,
+                marketCap: parseFloat(row['Market Cap']) || 0,
 
-            // These might be missing in CSV, set defaults
-            peRatio: 0,
-            priceToSales: parseFloat(row['P/S']) || 0,
-            floatShares: parseFloat(row['Float']) || 0,
-            ocf: parseFloat(row['OCF']) || 0,
-            capex: parseFloat(row['CAPEX']) || 0,
+                // Metrics (Convert decimals to % points)
+                revenueGrowth: (parseFloat(row['Rev Growth']) || 0) * multiplier,
+                grossMargin: (parseFloat(row['Gross Margin']) || 0) * multiplier,
+                roic: (parseFloat(row['ROIC']) || 0) * multiplier,
+                insiderOwnership: (parseFloat(row['Insider Own']) || 0) * multiplier,
+                
+                pegRatio: parseFloat(row['PEG']) || 0,
+                zScore: parseFloat(row['Z-Score']) || 0,
+                peRatio: 0,
+                priceToSales: parseFloat(row['P/S']) || 0,
+                floatShares: parseFloat(row['Float']) || 0,
+                ocf: parseFloat(row['OCF']) || 0,
+                capex: parseFloat(row['CAPEX']) || 0,
 
-            // Add extra fields needed for ScreeningResult mapping in Dashboard
-            _status: row['Status'],
-            _score: parseFloat(row['Score']) || 0,
-            _failCodes: (row['Fail Codes'] || '').split(',').filter((c: string) => c),
-            _financialData: (() => {
-                const fd = row['Financial_Data'];
-                if (!fd) return null;
-                try { return JSON.parse(decodeURIComponent(escape(atob(fd)))); } catch(e) { return null; }
-            })(),
-            _reasons: [] // We don't export reasons to CSV to save space, maybe add later?
-        })) as any[]; // Cast to any to pass "extra" fields to the dashboard adapter
+                // Adapter Metadata
+                _status: row['Status'],
+                _score: parseFloat(row['Score']) || 0,
+                _failCodes: (row['Fail Codes'] || '').split(',').filter((c: string) => c),
+                _financialData: (() => {
+                    const fd = row['Financial_Data'];
+                    if (!fd) return null;
+                    try { return JSON.parse(decodeURIComponent(escape(atob(fd)))); } catch(e) { return null; }
+                })(),
+                _reasons: []
+            };
+            return base;
+        }) as any[];
         
         return { data: mappedData, lastUpdated };
     } catch (error) {
