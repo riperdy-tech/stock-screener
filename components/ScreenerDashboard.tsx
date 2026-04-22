@@ -8,7 +8,7 @@ import { buildPrompt, buildSimplePrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
 import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS } from "./FilterSidebar";
 import { LanguageToggle } from "./LanguageToggle";
-import { Sparkles, RefreshCw, X, Search, Filter, Settings, Copy, Check } from 'lucide-react';
+import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -74,63 +74,7 @@ export function ScreenerDashboard() {
         }
     };
 
-    // Global Admin Settings State
-    const [settingsModalOpen, setSettingsModalOpen] = useState(false);
-    const [adminPassword, setAdminPassword] = useState("");
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [settingsData, setSettingsData] = useState<any>(null);
-    const [newApiKey, setNewApiKey] = useState("");
-    const [newQuota, setNewQuota] = useState("");
-    const [settingsError, setSettingsError] = useState("");
-    const [settingsSuccess, setSettingsSuccess] = useState("");
 
-    const fetchSettings = async (pwd: string) => {
-        try {
-            const res = await fetch('/api/settings', { headers: { 'x-admin-password': pwd } });
-            if (res.status === 401) {
-                setSettingsError("Incorrect Password");
-                return;
-            }
-            const data = await res.json();
-            setSettingsData(data);
-            setNewQuota(data.dailyLimit.toString());
-            setLoggedIn(true);
-            setSettingsError("");
-            if (typeof window !== 'undefined') localStorage.setItem('adminPwd', pwd);
-        } catch (e: any) {
-            setSettingsError(e.message);
-        }
-    };
-
-    const handleLogin = () => fetchSettings(adminPassword);
-
-    const handleSaveSettings = async () => {
-        setSettingsError("");
-        setSettingsSuccess("");
-        try {
-            const res = await fetch('/api/settings', {
-                method: 'POST',
-                headers: { 'x-admin-password': adminPassword, 'Content-Type': 'application/json' },
-                body: JSON.stringify({ apiKey: newApiKey || undefined, dailyLimit: newQuota })
-            });
-            if (res.ok) {
-                setSettingsSuccess("Settings Saved Globally!");
-                setNewApiKey("");
-                fetchSettings(adminPassword);
-            } else {
-                setSettingsError("Failed to save.");
-            }
-        } catch (e: any) {
-            setSettingsError(e.message);
-        }
-    };
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const savedPwd = localStorage.getItem('adminPwd');
-            if (savedPwd) setAdminPassword(savedPwd);
-        }
-    }, []);
 
     // Initial Load (Once on mount)
     useEffect(() => {
@@ -288,6 +232,8 @@ export function ScreenerDashboard() {
                 mcapValue = c.marketCap / 10_000_000; // Crores
             } else if (selectedMarket === 'Korea') {
                 mcapValue = c.marketCap / 1_000_000_000; // Billions
+            } else if (selectedMarket === 'Taiwan') {
+                mcapValue = c.marketCap / 100_000_000; // 億元
             }
             
             if (filters.minMarketCap > 0 && mcapValue < filters.minMarketCap) return false;
@@ -386,22 +332,21 @@ export function ScreenerDashboard() {
                         </Link>
                     </div>
 
-                    {/* Market Selector - Segmented Control */}
-                    <div className="flex bg-secondary/50 p-1 rounded-lg border border-border/50 shadow-inner scale-90 md:scale-100">
-                        {(['US', 'India', 'Korea'] as Market[]).map((m) => (
+                    <div className="flex bg-secondary/50 p-1 rounded-lg border border-border/50 shadow-inner scale-90 md:scale-100 overflow-x-auto no-scrollbar max-w-[280px] sm:max-w-none">
+                        {(['US', 'India', 'Korea', 'Taiwan'] as Market[]).map((m) => (
                             <button
                                 key={m}
                                 onClick={() => setSelectedMarket(m)}
                                 className={clsx(
-                                    "px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-300 flex items-center gap-2",
+                                    "px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-300 flex items-center gap-2 whitespace-nowrap",
                                     selectedMarket === m 
                                         ? "bg-primary text-primary-foreground shadow-lg scale-105" 
                                         : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                                 )}
                             >
-                                <span>{m === 'US' ? '🇺🇸' : m === 'India' ? '🇮🇳' : '🇰🇷'}</span>
+                                <span>{m === 'US' ? '🇺🇸' : m === 'India' ? '🇮🇳' : m === 'Korea' ? '🇰🇷' : '🇹🇼'}</span>
                                 <span className={clsx(selectedMarket === m ? "block" : "hidden sm:block")}>
-                                    {m === 'US' ? t('usStocks') : m === 'India' ? t('indiaStocks') : t('koreaStocks')}
+                                    {m === 'US' ? t('usStocks') : m === 'India' ? t('indiaStocks') : m === 'Korea' ? t('koreaStocks') : t('taiwanStocks')}
                                 </span>
                             </button>
                         ))}
@@ -594,72 +539,7 @@ export function ScreenerDashboard() {
                 </div>
             )}
 
-            {/* Admin Settings Modal Overlay */}
-            {settingsModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-card w-full max-w-md rounded-xl border border-border shadow-2xl flex flex-col overflow-hidden">
-                        <div className="flex items-center justify-between p-4 border-b border-border bg-secondary/30">
-                            <h3 className="text-lg font-bold flex items-center gap-2 text-foreground">
-                                <Settings className="h-5 w-5 text-accent" />
-                                Global Admin Settings
-                            </h3>
-                            <button onClick={() => setSettingsModalOpen(false)} className="text-muted-foreground hover:text-foreground">
-                                <X className="h-5 w-5" />
-                            </button>
-                        </div>
-                        <div className="p-6 overflow-y-auto">
-                            {settingsError && <div className="text-destructive font-semibold text-sm mb-4">{settingsError}</div>}
-                            {settingsSuccess && <div className="text-success font-semibold text-sm mb-4">{settingsSuccess}</div>}
-                            
-                            {!loggedIn ? (
-                                <div className="flex flex-col gap-4">
-                                    <label className="text-sm font-semibold">Admin Password:</label>
-                                    <input 
-                                        type="password" 
-                                        value={adminPassword} 
-                                        onChange={e => setAdminPassword(e.target.value)} 
-                                        className="bg-background border rounded px-3 py-2 text-sm text-foreground focus:outline-accent" 
-                                        placeholder="Enter password..."
-                                        onKeyDown={(e) => { if (e.key === 'Enter') handleLogin() }}
-                                    />
-                                    <button onClick={handleLogin} className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-2 rounded text-sm w-full transition-colors">Unlock Vault</button>
-                                </div>
-                            ) : (
-                                <div className="flex flex-col gap-6">
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-semibold">Daily Token Quota Status</label>
-                                        <div className="w-full bg-secondary rounded-full h-4 overflow-hidden border border-border">
-                                            <div className="bg-accent h-4 transition-all duration-500" style={{ width: `${Math.min(100, (settingsData?.tokensUsed / settingsData?.dailyLimit) * 100 || 0)}%` }}></div>
-                                        </div>
-                                        <div className="text-xs text-muted-foreground font-mono text-right w-full">{settingsData?.tokensUsed?.toLocaleString()} / {settingsData?.dailyLimit?.toLocaleString()} tokens used</div>
-                                    </div>
-                                    <div className="flex flex-col gap-2 border-t border-border pt-4">
-                                        <label className="text-sm font-semibold">Update Gemini API Key</label>
-                                        <p className="text-xs font-mono text-muted-foreground mb-1">Current key: {settingsData?.apiKey}</p>
-                                        <input 
-                                            type="password" 
-                                            value={newApiKey} 
-                                            onChange={e => setNewApiKey(e.target.value)} 
-                                            className="bg-background border rounded px-3 py-2 text-sm text-foreground focus:outline-accent" 
-                                            placeholder="Paste new API key here to override..."
-                                        />
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-semibold">Daily Token Limit</label>
-                                        <input 
-                                            type="number" 
-                                            value={newQuota} 
-                                            onChange={e => setNewQuota(e.target.value)} 
-                                            className="bg-background border rounded px-3 py-2 text-sm text-foreground focus:outline-accent font-mono" 
-                                        />
-                                    </div>
-                                    <button onClick={handleSaveSettings} className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold py-2 rounded text-sm w-full mt-2 shadow-sm transition-colors">Force Save Globally</button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            )}
+
         </div>
     );
 }

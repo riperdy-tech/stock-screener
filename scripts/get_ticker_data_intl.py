@@ -306,6 +306,98 @@ def fetch_korea_data(segment_symbol):
     except Exception as e:
         return {"error": f"Korea fetch failed: {str(e)}"}
 
+def fetch_taiwan_data(symbol):
+    try:
+        import yfinance as yf
+        stock = yf.Ticker(symbol)
+        info = stock.info
+        
+        mcap = safe_float(info.get('marketCap'), 0)
+        price = safe_float(info.get('currentPrice', info.get('previousClose')), 0)
+        shares = info.get('impliedSharesOutstanding') or info.get('sharesOutstanding') or 0
+        
+        income_stmt = stock.income_stmt
+        q_income_stmt = stock.quarterly_income_stmt
+        cash_flow_stmt = stock.cashflow
+        bs = stock.balance_sheet
+        
+        def safe_get_df(df, row_name, col_idx):
+            try:
+                if df is not None and not df.empty and row_name in df.index:
+                    val = df.loc[row_name].iloc[col_idx]
+                    if isinstance(val, (int, float)) and not np.isnan(val): return float(val)
+            except: pass
+            return None
+
+        def extract_income(df, num):
+            if df is None or df.empty: return []
+            res = []
+            for i in range(min(num, len(df.columns))):
+                res.append({
+                    "Date": str(df.columns[i])[:10],
+                    "TotalRevenue": safe_get_df(df, "Total Revenue", i),
+                    "GrossProfit": safe_get_df(df, "Gross Profit", i),
+                    "OperatingIncome": safe_get_df(df, "Operating Income", i) or safe_get_df(df, "EBIT", i),
+                    "NetIncome": safe_get_df(df, "Net Income", i)
+                })
+            return res
+            
+        annuals = extract_income(income_stmt, 2)
+        quarters = extract_income(q_income_stmt, 4)
+        
+        ocf = safe_get_df(cash_flow_stmt, "Operating Cash Flow", 0)
+        capex = safe_get_df(cash_flow_stmt, "Capital Expenditure", 0)
+        fcf = safe_get_df(cash_flow_stmt, "Free Cash Flow", 0)
+        sbc = safe_get_df(cash_flow_stmt, "Stock Based Compensation", 0)
+        if fcf is None and ocf is not None and capex is not None: fcf = ocf + capex
+        
+        total_cash = safe_get_df(bs, "Cash And Cash Equivalents", 0) or safe_float(info.get("totalCash"), 0)
+        total_debt = safe_get_df(bs, "Total Debt", 0) or safe_float(info.get("totalDebt"), 0)
+        
+        ev = mcap
+        if total_debt is not None and total_cash is not None:
+            ev = mcap + total_debt - total_cash
+            
+        ttm_rev = sum(q["TotalRevenue"] for q in quarters) if (len(quarters) == 4 and all(q.get("TotalRevenue") is not None for q in quarters)) else (annuals[0].get("TotalRevenue", 0) if annuals else 0)
+        ttm_gp = sum(q["GrossProfit"] for q in quarters) if (len(quarters) == 4 and all(q.get("GrossProfit") is not None for q in quarters)) else (annuals[0].get("GrossProfit", None) if annuals else None)
+        ttm_ebit = sum(q["OperatingIncome"] for q in quarters) if (len(quarters) == 4 and all(q.get("OperatingIncome") is not None for q in quarters)) else (annuals[0].get("OperatingIncome", None) if annuals else None)
+        
+        growth = safe_float(info.get("revenueGrowth"), 0) * 100
+        fcf_margin = (fcf / ttm_rev * 100) if (fcf and ttm_rev and ttm_rev > 0) else 0
+        roic = (ttm_ebit / ev * 100) if (ttm_ebit and ev and ev > 0) else 0
+        
+        return {
+            "Ticker": symbol,
+            "Price": price,
+            "Shares_Outstanding": shares,
+            "Market_Cap": mcap,
+            "Enterprise_Value_EV": ev,
+            "Total_Cash": total_cash,
+            "Total_Debt": total_debt,
+            "SBC_Stock_Based_Comp": sbc,
+            "Operating_Cash_Flow": ocf,
+            "Capital_Expenditure": capex,
+            "Free_Cash_Flow_TTM": fcf,
+            "Annual_Income_Statement": annuals,
+            "Quarterly_Income_Statement": quarters,
+            "Data_Fetched_Date": datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "Calculated_Metrics": {
+                "TTM_Revenue": ttm_rev,
+                "TTM_Gross_Profit": ttm_gp,
+                "TTM_Gross_Margin_%": (ttm_gp / ttm_rev * 100) if (ttm_gp and ttm_rev and ttm_rev > 0) else None,
+                "YoY_Revenue_Growth_%": growth,
+                "FCF_Margin_%": fcf_margin,
+                "ROIC_%": roic,
+                "Rule_of_40": growth + fcf_margin,
+                "EV_to_Sales": (ev / ttm_rev) if (ev and ttm_rev and ttm_rev > 0) else None,
+                "EV_to_Gross_Profit": (ev / ttm_gp) if (ev and ttm_gp and ttm_gp > 0) else None,
+                "EV_to_EBIT": (ev / ttm_ebit) if (ev and ttm_ebit and ttm_ebit > 0) else None,
+                "Core_Anchor_Multiple": None
+            }
+        }
+    except Exception as e:
+        return {"error": f"Taiwan fetch failed: {str(e)}"}
+
 def clean_data(d):
     if isinstance(d, dict): return {k: clean_data(v) for k, v in d.items()}
     if isinstance(d, list): return [clean_data(v) for v in d]
@@ -322,6 +414,8 @@ if __name__ == "__main__":
         res = fetch_india_data(ticker.replace('.NS', ''))
     elif ticker.endswith('.KS') or ticker.endswith('.KQ'):
         res = fetch_korea_data(ticker.split('.')[0])
+    elif ticker.endswith('.TW') or ticker.endswith('.TWO'):
+        res = fetch_taiwan_data(ticker)
     else:
         if ticker.isdigit() and len(ticker) == 6:
             res = fetch_korea_data(ticker)
@@ -329,3 +423,4 @@ if __name__ == "__main__":
             res = fetch_india_data(ticker)
             
     print(json.dumps(clean_data(res)))
+

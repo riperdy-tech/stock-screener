@@ -57,10 +57,10 @@ function fmt(val: any, market: Market | 'None' = 'US', isPrice = false, decimals
     const n = Number(val);
     if (isNaN(n)) return String(val);
 
-    const prefix = market === 'None' ? '' : market === 'India' ? '₹' : market === 'Korea' ? '₩' : '$';
+    const prefix = market === 'None' ? '' : market === 'India' ? '₹' : market === 'Korea' ? '₩' : market === 'Taiwan' ? 'NT$' : '$';
 
     if (isPrice) {
-        return `${prefix}${n.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}`;
+        return `${prefix}${n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}`;
     }
 
     if (market === 'None') {
@@ -69,14 +69,21 @@ function fmt(val: any, market: Market | 'None' = 'US', isPrice = false, decimals
 
     if (market === 'India') {
         if (Math.abs(n) >= 1e7) return `${prefix}${(n / 1e7).toFixed(decimals)} Cr.`;
-        return `${prefix}${n.toLocaleString(undefined, { maximumFractionDigits: decimals })}`;
+        return `${prefix}${n.toLocaleString('en-US', { maximumFractionDigits: decimals })}`;
     }
 
     if (market === 'Korea') {
         if (Math.abs(n) >= 1e12) return `${(n / 1e12).toFixed(decimals)}조원`;
         if (Math.abs(n) >= 1e8) return `${(n / 1e8).toFixed(decimals)}억원`;
         if (Math.abs(n) >= 1e4) return `${(n / 1e4).toFixed(decimals)}만원`;
-        return `${prefix}${n.toLocaleString(undefined, { maximumFractionDigits: decimals })}`;
+        return `${prefix}${n.toLocaleString('en-US', { maximumFractionDigits: decimals })}`;
+    }
+
+    if (market === 'Taiwan') {
+        if (Math.abs(n) >= 1e12) return `${(n / 1e12).toFixed(decimals)}兆元`;
+        if (Math.abs(n) >= 1e8) return `${(n / 1e8).toFixed(decimals)}億元`;
+        if (Math.abs(n) >= 1e4) return `${(n / 1e4).toFixed(decimals)}萬元`;
+        return `${prefix}${n.toLocaleString('en-US', { maximumFractionDigits: decimals })}`;
     }
 
     // US/Default scaling

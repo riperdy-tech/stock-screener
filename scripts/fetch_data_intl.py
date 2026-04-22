@@ -50,16 +50,45 @@ def get_krx_tickers():
         logging.error(f"Failed to fetch KRX: {e}")
         return pd.DataFrame()
 
+def get_taiwan_tickers():
+    logging.info("Fetching TWSE (Taiwan) ticker list...")
+    try:
+        import requests
+        # Filter for standard 4-digit numeric tickers (e.g., 2330)
+        res = requests.get('https://openapi.twse.com.tw/v1/opendata/t187ap03_L', verify=False, timeout=10)
+        data = res.json()
+        tickers = []
+        for d in data:
+            code = str(d.get('公司代號', '')).strip()
+            if code.isdigit() and len(code) == 4:
+                tickers.append({
+                    'Symbol': f"{code}.TW",
+                    'Name': d.get('公司名稱', ''),
+                    'Sector': d.get('產業別', 'Taiwan Equity')
+                })
+        logging.info(f"Found {len(tickers)} Taiwan tickers.")
+        return tickers
+    except Exception as e:
+        logging.error(f"Failed to fetch TWSE: {e}")
+        return []
+
 def main():
     logging.info("Starting International Production Scan (Rollout)...")
     
     india_tickers = get_nifty_500_tickers()
     korea_df = get_krx_tickers()
+    taiwan_tickers = get_taiwan_tickers()
     
+    logging.info(f"--- UNIVERSE SUMMARY ---")
+    logging.info(f"India (NIFTY 500): {len(india_tickers)} tickers")
+    logging.info(f"Korea (KRX): {len(korea_df)} tickers")
+    logging.info(f"Taiwan (TWSE): {len(taiwan_tickers)} tickers")
+    logging.info(f"------------------------")
+
     results = []
     
-    # Process India
-    logging.info(f"Processing {len(india_tickers)} India stocks...")
+    # 1. Process India
+    logging.info(f"=== PHASE 1: INDIA ({len(india_tickers)} stocks) ===")
     for i, symbol in enumerate(india_tickers):
         try:
             logging.info(f"[{i+1}/{len(india_tickers)}] Scanning India: {symbol}...")
@@ -101,8 +130,8 @@ def main():
         except Exception as e:
             logging.error(f"Failed to process {symbol}: {e}")
 
-    # Process Korea
-    logging.info(f"Processing {len(korea_df)} Korea stocks...")
+    # 2. Process Korea
+    logging.info(f"=== PHASE 2: KOREA ({len(korea_df)} stocks) ===")
     for i, (_, row) in enumerate(korea_df.iterrows()):
         symbol = row['Code']
         try:
@@ -131,6 +160,46 @@ def main():
                 "Market Cap": detail.get('Market_Cap', 0),
                 "Sector": row.get('Sector', 'Korea Equity'),
                 "Industry": row.get('Industry', 'Unknown'),
+                "Rev Growth": (calc.get('YoY_Revenue_Growth_%') or 0) / 100,
+                "Gross Margin": (calc.get('TTM_Gross_Margin_%') or 0) / 100,
+                "ROIC": (calc.get('ROIC_%') or 0) / 100,
+                "Financial_Data": base64.b64encode(json.dumps(detail).encode('utf-8')).decode('utf-8')
+            }
+            results.append(summary)
+            
+            if len(results) % 10 == 0:
+                pd.DataFrame(results).to_csv('public/data/stocks_intl.csv', index=False)
+                
+        except Exception as e:
+            logging.error(f"Failed to process {symbol}: {e}")
+
+    # 3. Process Taiwan
+    logging.info(f"=== PHASE 3: TAIWAN ({len(taiwan_tickers)} stocks) ===")
+    for i, tw_stock in enumerate(taiwan_tickers):
+        symbol = tw_stock['Symbol']
+        try:
+            logging.info(f"[{i+1}/{len(taiwan_tickers)}] Scanning Taiwan: {symbol}...")
+            raw_data = deep_fetcher.fetch_taiwan_data(symbol)
+            if "error" in raw_data:
+                logging.warning(f"Skipping {symbol}: {raw_data['error']}")
+                continue
+            
+            detail = deep_fetcher.clean_data(raw_data)
+            detail['Name'] = tw_stock['Name']
+            
+            # Save deep JSON
+            detail_path = os.path.join('public', 'data', 'financials', f'{symbol}.json')
+            with open(detail_path, 'w') as f:
+                json.dump(detail, f)
+                
+            calc = detail.get('Calculated_Metrics', {})
+            summary = {
+                "Symbol": symbol,
+                "Name": tw_stock['Name'],
+                "Price": detail.get('Price', 0),
+                "Market Cap": detail.get('Market_Cap', 0),
+                "Sector": tw_stock.get('Sector', 'Taiwan Equity'),
+                "Industry": "Unknown",
                 "Rev Growth": (calc.get('YoY_Revenue_Growth_%') or 0) / 100,
                 "Gross Margin": (calc.get('TTM_Gross_Margin_%') or 0) / 100,
                 "ROIC": (calc.get('ROIC_%') or 0) / 100,

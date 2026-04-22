@@ -1,10 +1,17 @@
 import { type StockCandidate } from "./blueprint";
 
 export function formatKoreanWon(n: number, decimals: number = 2) {
-    if (Math.abs(n) >= 1e12) return `${(n / 1e12).toLocaleString(undefined, {maximumFractionDigits: decimals})}조원`;
-    if (Math.abs(n) >= 1e8) return `${(n / 1e8).toLocaleString(undefined, {maximumFractionDigits: decimals})}억원`;
-    if (Math.abs(n) >= 1e4) return `${(n / 1e4).toLocaleString(undefined, {maximumFractionDigits: decimals})}만원`;
-    return `${n.toLocaleString(undefined, {maximumFractionDigits: decimals})}원`;
+    if (Math.abs(n) >= 1e12) return `${(n / 1e12).toLocaleString('en-US', {maximumFractionDigits: decimals})}조원`;
+    if (Math.abs(n) >= 1e8) return `${(n / 1e8).toLocaleString('en-US', {maximumFractionDigits: decimals})}억원`;
+    if (Math.abs(n) >= 1e4) return `${(n / 1e4).toLocaleString('en-US', {maximumFractionDigits: decimals})}만원`;
+    return `${n.toLocaleString('en-US', {maximumFractionDigits: decimals})}원`;
+}
+
+export function formatTaiwanNTD(n: number, decimals: number = 2) {
+    if (Math.abs(n) >= 1e12) return `${(n / 1e12).toLocaleString('en-US', {maximumFractionDigits: decimals})}兆元`;
+    if (Math.abs(n) >= 1e8) return `${(n / 1e8).toLocaleString('en-US', {maximumFractionDigits: decimals})}億元`;
+    if (Math.abs(n) >= 1e4) return `${(n / 1e4).toLocaleString('en-US', {maximumFractionDigits: decimals})}萬元`;
+    return `${n.toLocaleString('en-US', {maximumFractionDigits: decimals})}元`;
 }
 
 function parseCSV(text: string): any[] {
@@ -60,7 +67,7 @@ function parseCSV(text: string): any[] {
     });
 }
 
-export type Market = 'US' | 'India' | 'Korea';
+export type Market = 'US' | 'India' | 'Korea' | 'Taiwan';
 
 export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockCandidate[], lastUpdated: string | null }> {
     try {
@@ -84,11 +91,16 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
                 const s = r['Symbol'] || '';
                 return s.endsWith('.KS') || s.endsWith('.KQ');
             });
+        } else if (market === 'Taiwan') {
+            rawData = rawData.filter(r => {
+                const s = r['Symbol'] || '';
+                return s.endsWith('.TW') || s.endsWith('.TWO');
+            });
         } else if (market === 'US') {
             // US tab should filter OUT international suffixes to be safe
             rawData = rawData.filter(r => {
                 const s = r['Symbol'] || '';
-                return !s.endsWith('.NS') && !s.endsWith('.KS') && !s.endsWith('.KQ');
+                return !s.endsWith('.NS') && !s.endsWith('.KS') && !s.endsWith('.KQ') && !s.endsWith('.TW') && !s.endsWith('.TWO');
             });
         }
         

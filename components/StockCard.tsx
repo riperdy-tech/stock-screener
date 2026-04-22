@@ -9,11 +9,11 @@ interface StockCardProps {
     onClick: () => void;
     index?: number;
     lastUpdated?: string | null;
-    market?: 'US' | 'India' | 'Korea';
+    market?: 'US' | 'India' | 'Korea' | 'Taiwan';
 }
 
 import { useLanguage } from "./LanguageContext";
-import { formatKoreanWon } from "@/lib/data-service";
+import { formatKoreanWon, formatTaiwanNTD } from "@/lib/data-service";
 
 export function StockCard({ result, onClick, index = 0, lastUpdated, market = 'US' }: StockCardProps) {
     const { t } = useLanguage();
@@ -38,7 +38,9 @@ export function StockCard({ result, onClick, index = 0, lastUpdated, market = 'U
                             <h3 className="text-xl font-bold group-hover:text-primary transition-colors tracking-tight truncate max-w-[150px]">
                                 {market === 'Korea' 
                                     ? (candidate.name === candidate.symbol ? candidate.symbol.split('.')[0] : candidate.name) 
-                                    : candidate.symbol.replace(/\.(NS|BO)$/, '')}
+                                    : market === 'Taiwan'
+                                        ? candidate.name
+                                        : candidate.symbol.replace(/\.(NS|BO)$/, '')}
                             </h3>
                             {/* Scan Status Dot */}
                             <div className={clsx(
@@ -50,15 +52,12 @@ export function StockCard({ result, onClick, index = 0, lastUpdated, market = 'U
                                 title={result.passed ? "Gem Candidate" : result.score > 80 ? "High Potential" : "Weak Match"}
                             />
                         </div>
-                        <p className="text-xs text-muted-foreground truncate max-w-[120px]" title={candidate.name}>
-                            {market === 'Korea' ? candidate.symbol : candidate.name}
-                        </p>
                     </div>
                     <div className="text-right">
                         <div className="font-mono text-base font-semibold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                            {market === 'India' ? '₹' : market === 'Korea' ? '₩' : '$'}{candidate.price.toLocaleString(undefined, { 
-                                minimumFractionDigits: market === 'Korea' ? 0 : 2,
-                                maximumFractionDigits: market === 'Korea' ? 0 : 2
+                            {market === 'India' ? '₹' : market === 'Korea' ? '₩' : market === 'Taiwan' ? 'NT$' : '$'}{candidate.price.toLocaleString('en-US', { 
+                                minimumFractionDigits: (market === 'Korea' || market === 'Taiwan') ? 0 : 2,
+                                maximumFractionDigits: (market === 'Korea' || market === 'Taiwan') ? 0 : 2
                             })}
                         </div>
                         <div className={clsx("text-xs font-semibold flex items-center justify-end gap-0.5 mt-0.5", candidate.revenueGrowth >= 0 ? 'text-success' : 'text-danger')}>
@@ -79,10 +78,12 @@ export function StockCard({ result, onClick, index = 0, lastUpdated, market = 'U
                     <span className="text-muted-foreground block mb-0.5">{t('mcap')}</span>
                     <span className="font-mono font-bold">
                         {market === 'India' 
-                            ? `${(candidate.marketCap / 10_000_000).toLocaleString(undefined, {maximumFractionDigits: 0})} Cr.` 
+                            ? `${(candidate.marketCap / 10_000_000).toLocaleString('en-US', {maximumFractionDigits: 0})} Cr.` 
                             : market === 'Korea'
                                 ? formatKoreanWon(candidate.marketCap, 2)
-                                : `$${(candidate.marketCap / 1_000_000_000).toFixed(1)}B`
+                                : market === 'Taiwan'
+                                    ? formatTaiwanNTD(candidate.marketCap, 2)
+                                    : `$${(candidate.marketCap / 1_000_000_000).toFixed(1)}B`
                         }
                     </span>
                 </div>

@@ -472,6 +472,13 @@ def main():
                 skipped_count += 1
                 continue
             result, yf_ticker = process_result
+
+            # PRE-FETCH DETAIL (to avoid UnboundLocalError)
+            detail = None
+            try:
+                detail = extract_financial_detail(ticker, yf_ticker)
+            except Exception:
+                pass
                 
             # 2. APPLY "100-BAGGER" RULES
             screening_result = is_potential_100_bagger(result)
@@ -513,16 +520,16 @@ def main():
             results.append(result_obj)
 
             # Save per-ticker financial detail for AI Prompt Exporter
-            try:
-                detail = extract_financial_detail(ticker, yf_ticker)
-                if detail:
+            if detail:
+                try:
                     json_str = json.dumps(detail)
                     result_obj["financialData"] = base64.b64encode(json_str.encode('utf-8')).decode('utf-8')
                     detail_path = os.path.join('public', 'data', 'financials', f'{ticker}.json')
                     with open(detail_path, 'w') as f:
                         json.dump(detail, f)
-            except Exception as e:
-                pass  # Don't let detail failure stop the scan
+                except Exception:
+                    pass
+
             
             if screening_result:
                 passed_count += 1

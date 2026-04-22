@@ -1,7 +1,7 @@
 import { X, Activity, AlertOctagon, Sparkles } from "lucide-react";
 import { type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
 import { useLanguage } from "@/components/LanguageContext";
-import { Market, formatKoreanWon } from "@/lib/data-service";
+import { Market, formatKoreanWon, formatTaiwanNTD } from "@/lib/data-service";
 import clsx from "clsx";
 
 interface StockDetailModalProps {
@@ -25,10 +25,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                         <div className="flex flex-col gap-1">
                             <div className="flex items-center gap-3">
                                 <h2 className="text-3xl font-bold">
-                                    {market === 'Korea' ? candidate.name : candidate.symbol.replace(/\.(NS|BO)$/, '')}
+                                    {market === 'Korea' ? candidate.name : market === 'Taiwan' ? candidate.name : candidate.symbol.replace(/\.(NS|BO)$/, '')}
                                 </h2>
                                 <span className="text-xl text-muted-foreground font-light px-2 border-l border-border">
-                                    {market === 'Korea' ? candidate.symbol.split('.')[0] : candidate.name}
+                                    {market === 'Korea' ? candidate.symbol.split('.')[0] : market === 'Taiwan' ? candidate.symbol : candidate.name}
                                 </span>
                             </div>
 
@@ -103,10 +103,12 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                                             ? "Market Cap outside 400Cr - 16,000Cr range" 
                                                             : market === 'Korea'
                                                                 ? "Market Cap outside 70B - 2.8T KRW range"
-                                                                : "Market Cap outside $50M - $2B range",
+                                                                : market === 'Taiwan'
+                                                                    ? "Market Cap outside 1.6億 - 640億 NTD range"
+                                                                    : "Market Cap outside $50M - $2B range",
                                                         FAIL_PRICE: market === 'India'
                                                             ? "Share Price too high"
-                                                            : market === 'Korea'
+                                                            : market === 'Korea' || market === 'Taiwan'
                                                                 ? "Share Price too high" 
                                                                 : "Share Price >= $25",
                                                         FAIL_GROWTH: "Revenue Growth < 20%",
@@ -141,14 +143,16 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                 <DetailRow 
                                     label={t('mcap')} 
                                     value={market === 'India' 
-                                        ? `${(candidate.marketCap / 10_000_000).toLocaleString(undefined, {maximumFractionDigits: 0})} Cr.` 
+                                        ? `${(candidate.marketCap / 10_000_000).toLocaleString('en-US', {maximumFractionDigits: 0})} Cr.` 
                                         : market === 'Korea'
                                             ? formatKoreanWon(candidate.marketCap, 2)
-                                            : `$${(candidate.marketCap / 1e9).toFixed(1)}B`
+                                            : market === 'Taiwan'
+                                                ? formatTaiwanNTD(candidate.marketCap, 2)
+                                                : `$${(candidate.marketCap / 1e9).toFixed(1)}B`
                                     } 
-                                    target={market === 'India' ? '< 16000Cr' : market === 'Korea' ? '< 2.8조원' : '< $2B'} 
-                                    pass={market === 'India' ? (candidate.marketCap / 10_000_000) <= 16000 : market === 'Korea' ? (candidate.marketCap / 1_000_000_000) <= 2800 : candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} 
-                                    warning={market === 'India' ? (candidate.marketCap / 10_000_000) > 16000 : market === 'Korea' ? (candidate.marketCap / 1_000_000_000) > 2800 : candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} 
+                                    target={market === 'India' ? '< 16000Cr' : market === 'Korea' ? '< 2.8조원' : market === 'Taiwan' ? '< 640億元' : '< $2B'} 
+                                    pass={market === 'India' ? (candidate.marketCap / 10_000_000) <= 16000 : market === 'Korea' ? (candidate.marketCap / 1_000_000_000) <= 2800 : market === 'Taiwan' ? (candidate.marketCap / 100_000_000) <= 640 : candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} 
+                                    warning={market === 'India' ? (candidate.marketCap / 10_000_000) > 16000 : market === 'Korea' ? (candidate.marketCap / 1_000_000_000) > 2800 : market === 'Taiwan' ? (candidate.marketCap / 100_000_000) > 640 : candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} 
                                 />
                                 <DetailRow label={t('pegRatio')} value={market !== 'US' && candidate.pegRatio === 0 ? 'N/A' : `${Number(candidate.pegRatio).toFixed(1)}x`} target={`< ${QUANT_THRESHOLDS.MAX_PEG}`} pass={market !== 'US' && candidate.pegRatio === 0 ? true : candidate.pegRatio <= QUANT_THRESHOLDS.MAX_PEG} />
                                 <DetailRow label={t('insiderOwn')} value={market !== 'US' && candidate.insiderOwnership === 0 ? 'N/A' : `${Number(candidate.insiderOwnership).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP}%`} pass={market !== 'US' && candidate.insiderOwnership === 0 ? true : candidate.insiderOwnership >= QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP} />

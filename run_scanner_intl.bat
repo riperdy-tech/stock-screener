@@ -1,10 +1,10 @@
 @echo off
 echo ===================================================
-echo     INTERNATIONAL STOCK SCANNER (India + Korea)
+echo     INTERNATIONAL STOCK SCANNER (India + Korea + Taiwan)
 echo ===================================================
 echo.
-echo This script fetches data for NIFTY 500 and KRX stocks.
-echo It uses nsepython and FinanceDataReader.
+echo This script fetches data for NIFTY 500, KRX, and TWSE stocks.
+echo It uses nsepython, FinanceDataReader, and TWSE Open Data.
 echo.
 echo Press any key to START SCAN...
 pause

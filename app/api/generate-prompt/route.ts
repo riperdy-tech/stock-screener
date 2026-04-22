@@ -85,10 +85,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Ticker is required' }, { status: 400 });
     }
 
-    const scriptPath = path.join(process.cwd(), 'scripts', 'get_ticker_data.py');
+    const isIntl = ticker.includes('.') && (ticker.endsWith('.NS') || ticker.endsWith('.KS') || ticker.endsWith('.KQ'));
+    const scriptName = isIntl ? 'get_ticker_data_intl.py' : 'get_ticker_data.py';
+    const scriptPath = path.join(process.cwd(), 'scripts', scriptName);
     
     // Execute python script depending on 'py' or 'python'
-    // Trying 'py' first since windows user usually has it mapped
     let stdoutData;
     try {
         const { stdout } = await execPromise(`py "${scriptPath}" --ticker ${ticker.toUpperCase()}`);

@@ -22,6 +22,7 @@ export const TRANSLATIONS = {
         usStocks: "US Stocks",
         indiaStocks: "India Stocks",
         koreaStocks: "Korea Stocks",
+        taiwanStocks: "Taiwan Stocks",
 
         // Dashboard
         marketOpp: "Market Opportunities",
@@ -124,6 +125,7 @@ export const TRANSLATIONS = {
         usStocks: "미국 주식",
         indiaStocks: "인도 주식",
         koreaStocks: "한국 주식",
+        taiwanStocks: "대만 주식",
 
         // Dashboard
         marketOpp: "시장 기회",
@@ -223,6 +225,7 @@ export const TRANSLATIONS = {
         usStocks: "美國股票",
         indiaStocks: "印度股票",
         koreaStocks: "韓國股票",
+        taiwanStocks: "台灣股票",
         marketOpp: "市場機會",
         showing: "顯示中",
         assets: "個資產",

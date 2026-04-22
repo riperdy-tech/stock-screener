@@ -1,0 +1,785 @@
+﻿diff --git a/app/api/generate-prompt/route.ts b/app/api/generate-prompt/route.ts
+index 9aef63c..f7f5e08 100644
+--- a/app/api/generate-prompt/route.ts
++++ b/app/api/generate-prompt/route.ts
+@@ -85,10 +85,11 @@ export async function POST(req: NextRequest) {
+       return NextResponse.json({ error: 'Ticker is required' }, { status: 400 });
+     }
+ 
+-    const scriptPath = path.join(process.cwd(), 'scripts', 'get_ticker_data.py');
++    const isIntl = ticker.includes('.') && (ticker.endsWith('.NS') || ticker.endsWith('.KS') || ticker.endsWith('.KQ'));
++    const scriptName = isIntl ? 'get_ticker_data_intl.py' : 'get_ticker_data.py';
++    const scriptPath = path.join(process.cwd(), 'scripts', scriptName);
+     
+     // Execute python script depending on 'py' or 'python'
+-    // Trying 'py' first since windows user usually has it mapped
+     let stdoutData;
+     try {
+         const { stdout } = await execPromise(`py "${scriptPath}" --ticker ${ticker.toUpperCase()}`);
+diff --git a/components/FilterSidebar.tsx b/components/FilterSidebar.tsx
+index 866b3ae..658eca9 100644
+--- a/components/FilterSidebar.tsx
++++ b/components/FilterSidebar.tsx
+@@ -1,6 +1,7 @@
+ import { Filter, X, HelpCircle } from "lucide-react";
+ import { useState, useEffect } from "react";
+ import { useLanguage } from "./LanguageContext";
++import { Market } from "@/lib/data-service";
+ import clsx from "clsx";
+ 
+ export interface FilterState {
+@@ -22,6 +23,7 @@ interface FilterSidebarProps {
+     isOpen: boolean;
+     onClose: () => void;
+     totalResults: number;
++    market: Market;
+ }
+ 
+ export const DEFAULT_FILTERS: FilterState = {
+@@ -63,7 +65,7 @@ export const STRICT_FILTERS: FilterState = {
+     maxFloat: 50,
+ };
+ 
+-export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults }: FilterSidebarProps) {
++export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market }: FilterSidebarProps) {
+     const { t, filterDefs } = useLanguage();
+ 
+     // Local state for Manual Apply
+@@ -112,10 +114,34 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
+ 
+                 {/* Size & Price */}
+                 <Section title={t('sizePrice')}>
+-                    <InputGroup label={t('minMarketCap')} value={localFilters.minMarketCap} onChange={(v) => handleChange("minMarketCap", v)} strictValue={STRICT_FILTERS.minMarketCap} field="minMarketCap" defs={filterDefs} min={0} max={5000} step={10} />
+-                    <InputGroup label={t('maxMarketCap')} value={localFilters.maxMarketCap} onChange={(v) => handleChange("maxMarketCap", v)} strictValue={STRICT_FILTERS.maxMarketCap} field="maxMarketCap" defs={filterDefs} min={0} max={10000} step={100} />
+-                    <InputGroup label={t('maxPrice')} value={localFilters.maxPrice} onChange={(v) => handleChange("maxPrice", v)} strictValue={STRICT_FILTERS.maxPrice} field="maxPrice" defs={filterDefs} min={0} max={1000} step={1} />
+-                    <InputGroup label={t('maxFloat')} value={localFilters.maxFloat} onChange={(v) => handleChange("maxFloat", v)} strictValue={STRICT_FILTERS.maxFloat} field="maxFloat" defs={filterDefs} min={0} max={5000} step={10} />
++                    <InputGroup 
++                        label={`${t('minMarketCap')} (${market === 'India' ? 'Cr.' : market === 'Korea' ? 'B ?? : 'M $'})`} 
++                        value={localFilters.minMarketCap} 
++                        onChange={(v) => handleChange("minMarketCap", v)} 
++                        strictValue={STRICT_FILTERS.minMarketCap} field="minMarketCap" defs={filterDefs} 
++                        min={0} max={market === 'India' ? 50000 : market === 'Korea' ? 100000 : 5000} step={market === 'US' ? 10 : 100} 
++                    />
++                    <InputGroup 
++                        label={`${t('maxMarketCap')} (${market === 'India' ? 'Cr.' : market === 'Korea' ? 'B ?? : 'B $'})`} 
++                        value={localFilters.maxMarketCap} 
++                        onChange={(v) => handleChange("maxMarketCap", v)} 
++                        strictValue={STRICT_FILTERS.maxMarketCap} field="maxMarketCap" defs={filterDefs} 
++                        min={0} max={market === 'India' ? 100000 : market === 'Korea' ? 200000 : 10000} step={100} 
++                    />
++                    <InputGroup 
++                        label={`${t('maxPrice')} (${market === 'India' ? '?? : market === 'Korea' ? '?? : '$'})`} 
++                        value={localFilters.maxPrice} 
++                        onChange={(v) => handleChange("maxPrice", v)} 
++                        strictValue={STRICT_FILTERS.maxPrice} field="maxPrice" defs={filterDefs} 
++                        min={0} max={market === 'India' ? 50000 : market === 'Korea' ? 1000000 : 1000} step={market === 'US' ? 1 : 10} 
++                    />
++                    <InputGroup 
++                        label={`${t('maxFloat')} (M)`} 
++                        value={localFilters.maxFloat} 
++                        onChange={(v) => handleChange("maxFloat", v)} 
++                        strictValue={STRICT_FILTERS.maxFloat} field="maxFloat" defs={filterDefs} 
++                        min={0} max={5000} step={10} 
++                    />
+                 </Section>
+ 
+                 {/* Growth & Margins */}
+diff --git a/components/ScreenerDashboard.tsx b/components/ScreenerDashboard.tsx
+index 7e216fa..8bbe7c6 100644
+--- a/components/ScreenerDashboard.tsx
++++ b/components/ScreenerDashboard.tsx
+@@ -3,15 +3,16 @@
+ import { useState, useEffect, useMemo, useRef } from "react";
+ import { StockDetailModal } from "./StockDetailModal";
+ import { StockCard } from "./StockCard";
+-import { fetchStocks } from "@/lib/data-service";
++import { fetchStocks, Market } from "@/lib/data-service";
+ import { buildPrompt, buildSimplePrompt } from "@/lib/prompt-builder";
+ import { ScreeningResult } from "@/lib/blueprint";
+-import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS } from "./FilterSidebar";
++import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS } from "./FilterSidebar";
+ import { LanguageToggle } from "./LanguageToggle";
+ import { Sparkles, RefreshCw, X, Search, Filter, Settings, Copy, Check } from 'lucide-react';
+ import { useLanguage } from "./LanguageContext";
+ import Link from "next/link";
+ import ReactMarkdown from "react-markdown";
++import clsx from "clsx";
+ 
+ export function ScreenerDashboard() {
+     const { t, language, setLanguage } = useLanguage();
+@@ -23,6 +24,7 @@ export function ScreenerDashboard() {
+     const [selectedStock, setSelectedStock] = useState<ScreeningResult | null>(null);
+     const [lastUpdatedFile, setLastUpdatedFile] = useState<string | null>(null);
+     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
++    const [selectedMarket, setSelectedMarket] = useState<Market>('US');
+     
+     // Maintain a ref to current rawResults for the setInterval closure
+     const rawResultsRef = useRef<ScreeningResult[]>([]);
+@@ -144,11 +146,11 @@ export function ScreenerDashboard() {
+             }
+         }
+ 
+-        loadData(true);
++        loadData(true, selectedMarket);
+ 
+         // Auto-refresh prices ONLY silently every 5 minutes
+         const interval = setInterval(() => {
+-            refreshPricesOnly();
++            refreshPricesOnly(selectedMarket);
+         }, 5 * 60 * 1000);
+ 
+         return () => clearInterval(interval); // Cleanup on unmount
+@@ -161,7 +163,17 @@ export function ScreenerDashboard() {
+         }
+     }, [filters]);
+ 
+-    async function refreshPricesOnly() {
++    // Re-load data when market changes
++    useEffect(() => {
++        // Reset filters when switching away from US (since strict filters usually don't apply)
++        if (selectedMarket !== 'US') {
++            setFilters(ZERO_BASE_FILTERS);
++            setSearch("");
++        }
++        loadData(false, selectedMarket);
++    }, [selectedMarket]);
++
++    async function refreshPricesOnly(market: Market) {
+         const tickers = rawResultsRef.current.map(r => r.candidate.symbol);
+         if (tickers.length === 0) return;
+ 
+@@ -193,10 +205,10 @@ export function ScreenerDashboard() {
+         }
+     }
+ 
+-    async function loadData(silent = false) {
++    async function loadData(silent = false, market: Market) {
+         if (!silent) setLoading(true);
+         try {
+-            const { data: rawData, lastUpdated: updateDate } = await fetchStocks();
++            const { data: rawData, lastUpdated: updateDate } = await fetchStocks(market);
+             
+             if (updateDate) setLastUpdatedFile(updateDate);
+ 
+@@ -245,29 +257,7 @@ export function ScreenerDashboard() {
+                 };
+             });
+ 
+-            // Fix Percentage Units:
+-            // CSV exports raw numbers (e.g. 25.5 for 25.5%).
+-            // Dashboard Adapter previously multiplied by 100.
+-            // We should Ensure `candidate` has Correct % values.
+-            const finalData = adaptedData.map(d => {
+-                // In CSV mode, fetchStocks returns the number directly from the CSV column.
+-                // Fetch_data.py exports: r['metrics'].get('revenueGrowth') which IS decimal in JSON logic?
+-                // Wait, fetch_data.py `process_stock` returns decimals?
+-                // Let's assume CSV has DECIMALS because we just dumped the python dict values.
+-                // Python `stock_data.revenue_growth_ttm` is usually decimal (0.25).
+-                // So CSV has 0.25.
+-                // So we DOES need to multiply by 100.
+-
+-                const cand = d.candidate as any;
+-                cand.revenueGrowth = (cand.revenueGrowth || 0) * 100;
+-                cand.grossMargin = (cand.grossMargin || 0) * 100;
+-                cand.roic = (cand.roic || 0) * 100;
+-                cand.insiderOwnership = (cand.insiderOwnership || 0) * 100;
+-
+-                return d;
+-            });
+-
+-            setRawResults(finalData as unknown as ScreeningResult[]);
++            setRawResults(adaptedData as unknown as ScreeningResult[]);
+         } catch (err) {
+             console.error("Failed to load or adapt data:", err);
+             setRawResults([]);
+@@ -289,9 +279,21 @@ export function ScreenerDashboard() {
+             if (!searchMatch) return false;
+ 
+             // 2. Sidebar Filters
+-            const mcapM = c.marketCap / 1_000_000;
+-            if (filters.minMarketCap > 0 && mcapM < filters.minMarketCap) return false;
+-            // if (filters.maxMarketCap > 0 && mcapM > filters.maxMarketCap) return false; // Optional max cap check
++            // Scaling Market Cap: 
++            // US: c.marketCap is in $, filters.minMarketCap is in M $. So mcapM = marketCap / 1M.
++            // India: c.marketCap is in Cr. filters.minMarketCap is in Cr. So mcapM = marketCap. 
++            // Korea: c.marketCap is in B ?? filters.minMarketCap is in B ?? So mcapM = marketCap.
++            let mcapValue = c.marketCap;
++            if (selectedMarket === 'US') {
++                mcapValue = c.marketCap / 1_000_000;
++            } else if (selectedMarket === 'India') {
++                mcapValue = c.marketCap / 10_000_000; // Crores
++            } else if (selectedMarket === 'Korea') {
++                mcapValue = c.marketCap / 1_000_000_000; // Billions
++            }
++            
++            if (filters.minMarketCap > 0 && mcapValue < filters.minMarketCap) return false;
++            // if (filters.maxMarketCap > 0 && mcapValue > filters.maxMarketCap) return false;
+ 
+             if (filters.maxPrice > 0 && filters.maxPrice < 1000 && c.price > filters.maxPrice) return false;
+ 
+@@ -310,7 +312,7 @@ export function ScreenerDashboard() {
+ 
+             return true;
+         });
+-    }, [rawResults, search, filters]);
++    }, [rawResults, search, filters, selectedMarket]);
+ 
+ 
+     // Pagination Logic
+@@ -352,6 +354,7 @@ export function ScreenerDashboard() {
+                 filters={filters}
+                 setFilters={setFilters}
+                 isOpen={isSidebarOpen}
++                market={selectedMarket}
+                 onClose={() => setIsSidebarOpen(false)}
+                 totalResults={filteredResults.length}
+             />
+@@ -385,6 +388,27 @@ export function ScreenerDashboard() {
+                         </Link>
+                     </div>
+ 
++                    {/* Market Selector - Segmented Control */}
++                    <div className="flex bg-secondary/50 p-1 rounded-lg border border-border/50 shadow-inner scale-90 md:scale-100">
++                        {(['US', 'India', 'Korea'] as Market[]).map((m) => (
++                            <button
++                                key={m}
++                                onClick={() => setSelectedMarket(m)}
++                                className={clsx(
++                                    "px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-300 flex items-center gap-2",
++                                    selectedMarket === m 
++                                        ? "bg-primary text-primary-foreground shadow-lg scale-105" 
++                                        : "text-muted-foreground hover:text-foreground hover:bg-secondary"
++                                )}
++                            >
++                                <span>{m === 'US' ? '?눣?눡' : m === 'India' ? '?눒?눛' : '?눖?눟'}</span>
++                                <span className={clsx(selectedMarket === m ? "block" : "hidden sm:block")}>
++                                    {m === 'US' ? t('usStocks') : m === 'India' ? t('indiaStocks') : t('koreaStocks')}
++                                </span>
++                            </button>
++                        ))}
++                    </div>
++
+                     <div className="flex flex-wrap md:flex-nowrap items-center gap-2 w-full md:w-auto justify-between md:justify-end">
+                         <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
+                             <button 
+@@ -434,7 +458,7 @@ export function ScreenerDashboard() {
+                         <div className="flex flex-col items-center justify-center h-64 text-muted-foreground border border-dashed border-border rounded-xl">
+                             <p className="text-lg">??/p>
+                             <p>{t('noStocks')}</p>
+-                            <button onClick={() => setFilters(DEFAULT_FILTERS)} className="mt-4 text-primary text-sm hover:underline">{t('resetFilters')}</button>
++                            <button onClick={() => setFilters(ZERO_BASE_FILTERS)} className="mt-4 text-primary text-sm hover:underline">{t('resetFilters')}</button>
+                         </div>
+                     ) : (
+                         <>
+@@ -446,6 +470,7 @@ export function ScreenerDashboard() {
+                                         onClick={() => setSelectedStock(result)}
+                                         index={i}
+                                         lastUpdated={lastUpdatedFile}
++                                        market={selectedMarket}
+                                     />
+                                 ))}
+                             </div>
+@@ -488,6 +513,7 @@ export function ScreenerDashboard() {
+             {selectedStock && (
+                 <StockDetailModal
+                     result={selectedStock}
++                    market={selectedMarket}
+                     onClose={() => setSelectedStock(null)}
+                     onAskGemini={(ticker: string) => handleAiReview(selectedStock)}
+                 />
+diff --git a/components/StockCard.tsx b/components/StockCard.tsx
+index 362dda8..6096801 100644
+--- a/components/StockCard.tsx
++++ b/components/StockCard.tsx
+@@ -9,11 +9,14 @@ interface StockCardProps {
+     onClick: () => void;
+     index?: number;
+     lastUpdated?: string | null;
++    market?: Market;
+ }
+ 
++import { Market } from "@/lib/data-service";
++
+ import { useLanguage } from "./LanguageContext";
+ 
+-export function StockCard({ result, onClick, index = 0, lastUpdated }: StockCardProps) {
++export function StockCard({ result, onClick, index = 0, lastUpdated, market = 'US' }: StockCardProps) {
+     const { t } = useLanguage();
+     if (!result || !result.candidate) return null;
+     const { candidate } = result;
+@@ -48,7 +51,7 @@ export function StockCard({ result, onClick, index = 0, lastUpdated }: StockCard
+                     </div>
+                     <div className="text-right">
+                         <div className="font-mono text-base font-semibold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+-                            ${candidate.price.toFixed(2)}
++                            {market === 'India' ? '?? : market === 'Korea' ? '?? : '$'}{candidate.price.toLocaleString(undefined, { minimumFractionDigits: market === 'Korea' ? 0 : 2 })}
+                         </div>
+                         <div className={clsx("text-xs font-semibold flex items-center justify-end gap-0.5 mt-0.5", candidate.revenueGrowth >= 0 ? 'text-success' : 'text-danger')}>
+                             {candidate.revenueGrowth >= 0 ? <ArrowUpRight className="h-3 w-3 inline" /> : <ArrowDownRight className="h-3 w-3 inline" />}
+@@ -67,7 +70,12 @@ export function StockCard({ result, onClick, index = 0, lastUpdated }: StockCard
+                 <div className="text-right">
+                     <span className="text-muted-foreground block mb-0.5">{t('mcap')}</span>
+                     <span className="font-mono font-bold">
+-                        ${(candidate.marketCap / 1_000_000_000).toFixed(1)}B
++                        {market === 'India' 
++                            ? `${(candidate.marketCap / 10_000_000).toLocaleString(undefined, {maximumFractionDigits: 0})} Cr.` 
++                            : market === 'Korea'
++                                ? `${(candidate.marketCap / 1_000_000_000).toLocaleString(undefined, {maximumFractionDigits: 0})} B ??
++                                : `$${(candidate.marketCap / 1_000_000_000).toFixed(1)}B`
++                        }
+                     </span>
+                 </div>
+             </div>
+diff --git a/components/StockDetailModal.tsx b/components/StockDetailModal.tsx
+index a83db67..dd210dc 100644
+--- a/components/StockDetailModal.tsx
++++ b/components/StockDetailModal.tsx
+@@ -1,15 +1,17 @@
+ import { X, Activity, AlertOctagon, Sparkles } from "lucide-react";
+ import { type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
+ import { useLanguage } from "@/components/LanguageContext";
++import { Market } from "@/lib/data-service";
+ import clsx from "clsx";
+ 
+ interface StockDetailModalProps {
+     result: ScreeningResult;
+     onClose: () => void;
+     onAskGemini?: (ticker: string) => void;
++    market?: Market;
+ }
+ 
+-export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailModalProps) {
++export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }: StockDetailModalProps) {
+     const { t } = useLanguage();
+     const { candidate, reasons, flags, score } = result;
+ 
+@@ -93,15 +95,23 @@ export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailMo
+                                             <ul className="list-disc pl-5 mt-1 text-xs text-foreground/80 font-normal space-y-1">
+                                                 {(result.failCodes && result.failCodes.length > 0) ? result.failCodes.map(code => {
+                                                     const failReasonMap: Record<string, string> = {
+-                                                        FAIL_MCAP: "Market Cap outside $50M - $2B range",
+-                                                        FAIL_PRICE: "Share Price >= $25",
++                                                        FAIL_MCAP: market === 'India' 
++                                                            ? "Market Cap outside 400Cr - 16,000Cr range" 
++                                                            : market === 'Korea'
++                                                                ? "Market Cap outside 70B - 2.8T KRW range"
++                                                                : "Market Cap outside $50M - $2B range",
++                                                        FAIL_PRICE: market === 'India'
++                                                            ? "Share Price too high"
++                                                            : market === 'Korea'
++                                                                ? "Share Price too high" 
++                                                                : "Share Price >= $25",
+                                                         FAIL_GROWTH: "Revenue Growth < 20%",
+                                                         FAIL_GM: "Gross margin below sector targets",
+                                                         FAIL_GM_TREND: "Gross Margin declining vs 3-year avg",
+                                                         FAIL_ROIC: "ROIC < 15%",
+                                                         FAIL_PS: "Price/Sales ratio too high",
+                                                         FAIL_PEG: "PEG ratio > 1.5",
+-                                                        FAIL_FLOAT: "Floating shares > 50M",
++                                                        FAIL_FLOAT: "Floating shares too high for small-cap play",
+                                                         FAIL_INSIDER: "Insider Ownership < 15%"
+                                                     };
+                                                     return <li key={code}>{failReasonMap[code] || code}</li>;
+@@ -124,7 +134,18 @@ export function StockDetailModal({ result, onClose, onAskGemini }: StockDetailMo
+                                 <DetailRow label={t('revGrowth')} value={`${Number(candidate.revenueGrowth).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_REVENUE_GROWTH}%`} pass={candidate.revenueGrowth >= QUANT_THRESHOLDS.MIN_REVENUE_GROWTH} />
+                                 <DetailRow label={t('roic')} value={`${Number(candidate.roic).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_ROIC}%`} pass={candidate.roic >= QUANT_THRESHOLDS.MIN_ROIC} />
+                                 <DetailRow label={t('grossMargin')} value={`${Number(candidate.grossMargin).toFixed(1)}%`} target={`> 30% / 50%`} pass={candidate.grossMargin >= 30} />
+-                                <DetailRow label={t('mcap')} value={`$${(candidate.marketCap / 1e9).toFixed(1)}B`} target={`< $2B`} pass={candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} warning={candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} />
++                                <DetailRow 
++                                    label={t('mcap')} 
++                                    value={market === 'India' 
++                                        ? `${(candidate.marketCap / 10_000_000).toLocaleString(undefined, {maximumFractionDigits: 0})} Cr.` 
++                                        : market === 'Korea'
++                                            ? `${(candidate.marketCap / 1_000_000_000).toLocaleString(undefined, {maximumFractionDigits: 0})} B ??
++                                            : `$${(candidate.marketCap / 1e9).toFixed(1)}B`
++                                    } 
++                                    target={market === 'India' ? '< 16000Cr' : market === 'Korea' ? '< 2800B' : '< $2B'} 
++                                    pass={market === 'India' ? (candidate.marketCap / 10_000_000) <= 16000 : market === 'Korea' ? (candidate.marketCap / 1_000_000_000) <= 2800 : candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} 
++                                    warning={market === 'India' ? (candidate.marketCap / 10_000_000) > 16000 : market === 'Korea' ? (candidate.marketCap / 1_000_000_000) > 2800 : candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} 
++                                />
+                                 <DetailRow label={t('pegRatio')} value={`${Number(candidate.pegRatio).toFixed(1)}x`} target={`< ${QUANT_THRESHOLDS.MAX_PEG}`} pass={candidate.pegRatio <= QUANT_THRESHOLDS.MAX_PEG} />
+                                 <DetailRow label={t('insiderOwn')} value={`${Number(candidate.insiderOwnership).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP}%`} pass={candidate.insiderOwnership >= QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP} />
+                             </div>
+diff --git a/lib/data-service.ts b/lib/data-service.ts
+index d2b3fad..973defb 100644
+--- a/lib/data-service.ts
++++ b/lib/data-service.ts
+@@ -53,18 +53,30 @@ function parseCSV(text: string): any[] {
+     });
+ }
+ 
+-export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdated: string | null }> {
++export type Market = 'US' | 'India' | 'Korea';
++
++export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockCandidate[], lastUpdated: string | null }> {
+     try {
+-        // Fetch CSV instead of JSON
+-        // Fix for GitHub Pages: URL needs to include the repo name in production
+         const isProd = process.env.NODE_ENV === 'production';
+         const basePath = isProd ? '/stock-screener' : '';
+-        const response = await fetch(`${basePath}/data/stocks.csv?t=${new Date().getTime()}`);
++        const filename = market === 'US' ? 'stocks.csv' : 'stocks_intl.csv';
++        
++        const response = await fetch(`${basePath}/data/${filename}?t=${new Date().getTime()}`);
+         if (!response.ok) {
+-            throw new Error("Failed to fetch stock data");
++            throw new Error(`Failed to fetch ${market} stock data`);
+         }
+         const text = await response.text();
+-        const rawData = parseCSV(text);
++        let rawData = parseCSV(text);
++
++        // Filter by Market Ticker Suffix for International CSV
++        if (market === 'India') {
++            rawData = rawData.filter(r => (r['Symbol'] || '').endsWith('.NS'));
++        } else if (market === 'Korea') {
++            rawData = rawData.filter(r => {
++                const s = r['Symbol'] || '';
++                return s.endsWith('.KS') || s.endsWith('.KQ');
++            });
++        }
+         
+         const lastMod = response.headers.get('Last-Modified');
+         let lastUpdated = null;
+@@ -76,41 +88,47 @@ export async function fetchStocks(): Promise<{ data: StockCandidate[], lastUpdat
+             lastUpdated = `${yyyy}-${mm}-${dd}`;
+         }
+ 
+-        const mappedData = rawData.map(row => ({
+-            symbol: row['Symbol'] || '',
+-            name: (row['Name'] || '').replace(/"/g, ''), // Cleanup quotes
+-            description: (row['Description'] || '').replace(/"/g, ''),
+-            sector: row['Sector'] || 'Unknown',
+-            industry: row['Industry'] || 'Unknown',
+-            price: parseFloat(row['Price']) || 0,
+-            marketCap: parseFloat(row['Market Cap']) || 0,
++        const mappedData = rawData.map(row => {
++            // Percent values in CSV are decimals (e.g. 0.25 for 25%).
++            // Use 100 as multiplier for dashboard cards which expect integers.
++            const multiplier = 100;
+ 
+-            // Metrics (Handle missing/NaN)
+-            revenueGrowth: parseFloat(row['Rev Growth']) || 0,
+-            grossMargin: parseFloat(row['Gross Margin']) || 0,
+-            roic: parseFloat(row['ROIC']) || 0,
+-            insiderOwnership: parseFloat(row['Insider Own']) || 0,
+-            pegRatio: parseFloat(row['PEG']) || 0,
+-            zScore: parseFloat(row['Z-Score']) || 0,
++            const base = {
++                symbol: row['Symbol'] || '',
++                name: (row['Name'] || '').replace(/"/g, ''),
++                description: (row['Description'] || '').replace(/"/g, ''),
++                sector: row['Sector'] || 'Unknown',
++                industry: row['Industry'] || 'Unknown',
++                price: parseFloat(row['Price']) || 0,
++                marketCap: parseFloat(row['Market Cap']) || 0,
+ 
+-            // These might be missing in CSV, set defaults
+-            peRatio: 0,
+-            priceToSales: parseFloat(row['P/S']) || 0,
+-            floatShares: parseFloat(row['Float']) || 0,
+-            ocf: parseFloat(row['OCF']) || 0,
+-            capex: parseFloat(row['CAPEX']) || 0,
++                // Metrics (Convert decimals to % points)
++                revenueGrowth: (parseFloat(row['Rev Growth']) || 0) * multiplier,
++                grossMargin: (parseFloat(row['Gross Margin']) || 0) * multiplier,
++                roic: (parseFloat(row['ROIC']) || 0) * multiplier,
++                insiderOwnership: (parseFloat(row['Insider Own']) || 0) * multiplier,
++                
++                pegRatio: parseFloat(row['PEG']) || 0,
++                zScore: parseFloat(row['Z-Score']) || 0,
++                peRatio: 0,
++                priceToSales: parseFloat(row['P/S']) || 0,
++                floatShares: parseFloat(row['Float']) || 0,
++                ocf: parseFloat(row['OCF']) || 0,
++                capex: parseFloat(row['CAPEX']) || 0,
+ 
+-            // Add extra fields needed for ScreeningResult mapping in Dashboard
+-            _status: row['Status'],
+-            _score: parseFloat(row['Score']) || 0,
+-            _failCodes: (row['Fail Codes'] || '').split(',').filter((c: string) => c),
+-            _financialData: (() => {
+-                const fd = row['Financial_Data'];
+-                if (!fd) return null;
+-                try { return JSON.parse(decodeURIComponent(escape(atob(fd)))); } catch(e) { return null; }
+-            })(),
+-            _reasons: [] // We don't export reasons to CSV to save space, maybe add later?
+-        })) as any[]; // Cast to any to pass "extra" fields to the dashboard adapter
++                // Adapter Metadata
++                _status: row['Status'],
++                _score: parseFloat(row['Score']) || 0,
++                _failCodes: (row['Fail Codes'] || '').split(',').filter((c: string) => c),
++                _financialData: (() => {
++                    const fd = row['Financial_Data'];
++                    if (!fd) return null;
++                    try { return JSON.parse(decodeURIComponent(escape(atob(fd)))); } catch(e) { return null; }
++                })(),
++                _reasons: []
++            };
++            return base;
++        }) as any[];
+         
+         return { data: mappedData, lastUpdated };
+     } catch (error) {
+diff --git a/lib/i18n.ts b/lib/i18n.ts
+index fd52e9f..06990b9 100644
+--- a/lib/i18n.ts
++++ b/lib/i18n.ts
+@@ -18,6 +18,10 @@ export const TRANSLATIONS = {
+         gems: "gems",
+         skipped: "skipped",
+         processing: "Processing",
++        // Market Selector
++        usStocks: "US Stocks",
++        indiaStocks: "India Stocks",
++        koreaStocks: "Korea Stocks",
+ 
+         // Dashboard
+         marketOpp: "Market Opportunities",
+@@ -40,9 +44,9 @@ export const TRANSLATIONS = {
+         ownership: "Ownership",
+ 
+         // Filter Labels
+-        minMarketCap: "Min Market Cap ($M)",
+-        maxMarketCap: "Max Market Cap ($M)",
+-        maxPrice: "Max Share Price ($)",
++        minMarketCap: "Min Market Cap",
++        maxMarketCap: "Max Market Cap",
++        maxPrice: "Max Share Price",
+         maxFloat: "Max Float (Millions)",
+         minRevGrowth: "Min Revenue Growth (%)",
+         minGrossMargin: "Min Gross Margin (%)",
+@@ -116,6 +120,10 @@ export const TRANSLATIONS = {
+         gems: "蹂댁꽍",
+         skipped: "嫄대꼫?",
+         processing: "泥섎━ 以?,
++        // Market Selector
++        usStocks: "誘멸뎅 二쇱떇",
++        indiaStocks: "?몃룄 二쇱떇",
++        koreaStocks: "?쒓뎅 二쇱떇",
+ 
+         // Dashboard
+         marketOpp: "?쒖옣 湲고쉶",
+@@ -138,9 +146,9 @@ export const TRANSLATIONS = {
+         ownership: "吏遺?援ъ“",
+ 
+         // Filter Labels
+-        minMarketCap: "理쒖냼 ?쒓?珥앹븸 ($M)",
+-        maxMarketCap: "理쒕? ?쒓?珥앹븸 ($M)",
+-        maxPrice: "理쒕? 二쇨? ($)",
++        minMarketCap: "理쒖냼 ?쒓?珥앹븸",
++        maxMarketCap: "理쒕? ?쒓?珥앹븸",
++        maxPrice: "理쒕? 二쇨?",
+         maxFloat: "理쒕? ?좊룞二쇱떇??(諛깅쭔)",
+         minRevGrowth: "理쒖냼 留ㅼ텧?깆옣瑜?(%)",
+         minGrossMargin: "理쒖냼 留ㅼ텧珥앹씠?듬쪧 (%)",
+@@ -211,6 +219,10 @@ export const TRANSLATIONS = {
+         gems: "野띄윹",
+         skipped: "藥꿱럼??,
+         processing: "?뺟릤訝?,
++        // Market Selector
++        usStocks: "獰롥쐦?←ⅷ",
++        indiaStocks: "?겼벧?←ⅷ",
++        koreaStocks: "?볟쐦?←ⅷ",
+         marketOpp: "躍귛졃艅잍쐝",
+         showing: "窈?ㅊ訝?,
+         assets: "?뗨퀒??,
+@@ -227,9 +239,9 @@ export const TRANSLATIONS = {
+         growthEff: "?먬빓?뉑븞??,
+         valuation: "鴉겼?,
+         ownership: "?→쵈",
+-        minMarketCap: "?弱뤷툊??($M)",
+-        maxMarketCap: "?鸚㎩툊??($M)",
+-        maxPrice: "?遙섋궊??($)",
++        minMarketCap: "?弱뤷툊??,
++        maxMarketCap: "?鸚㎩툊??,
++        maxPrice: "?遙섋궊??,
+         maxFloat: "?鸚㎪탛?싪궊 (?얕맟)",
+         minRevGrowth: "?弱뤹뇾?뜻닇??(%)",
+         minGrossMargin: "?弱뤸캒?⑴럤 (%)",
+diff --git a/lib/prompt-builder.ts b/lib/prompt-builder.ts
+index 7060fe1..8595e30 100644
+--- a/lib/prompt-builder.ts
++++ b/lib/prompt-builder.ts
+@@ -1,4 +1,5 @@
+ import { type ScreeningResult } from './blueprint';
++import { type Market } from './data-service';
+ 
+ /**
+  * Client-side prompt builder for the AI Prompt Exporter.
+@@ -51,13 +52,36 @@ interface FinancialDetail {
+ 
+ // ??? Helpers ??????????????????????????????????????????????
+ 
+-function fmt(val: any, prefix = '', suffix = '', decimals = 2): string {
++function fmt(val: any, market: Market | 'None' = 'US', isPrice = false, decimals = 2): string {
+     if (val === null || val === undefined) return 'N/A';
+     const n = Number(val);
+     if (isNaN(n)) return String(val);
+-    if (Math.abs(n) >= 1e9) return `${prefix}${(n / 1e9).toFixed(decimals)}B${suffix}`;
+-    if (Math.abs(n) >= 1e6) return `${prefix}${(n / 1e6).toFixed(decimals)}M${suffix}`;
+-    return `${prefix}${n.toFixed(decimals)}${suffix}`;
++
++    const prefix = market === 'None' ? '' : market === 'India' ? '?? : market === 'Korea' ? '?? : '$';
++
++    if (isPrice) {
++        return `${prefix}${n.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}`;
++    }
++
++    if (market === 'None') {
++        return `${n.toFixed(decimals)}`;
++    }
++
++    if (market === 'India') {
++        if (Math.abs(n) >= 1e7) return `${prefix}${(n / 1e7).toFixed(decimals)} Cr.`;
++        return `${prefix}${n.toLocaleString(undefined, { maximumFractionDigits: decimals })}`;
++    }
++
++    if (market === 'Korea') {
++        if (Math.abs(n) >= 1e12) return `${prefix}${(n / 1e12).toFixed(decimals)}T`;
++        if (Math.abs(n) >= 1e9) return `${prefix}${(n / 1e9).toFixed(decimals)}B`;
++        return `${prefix}${n.toLocaleString(undefined, { maximumFractionDigits: decimals })}`;
++    }
++
++    // US/Default scaling
++    if (Math.abs(n) >= 1e9) return `${prefix}${(n / 1e9).toFixed(decimals)}B`;
++    if (Math.abs(n) >= 1e6) return `${prefix}${(n / 1e6).toFixed(decimals)}M`;
++    return `${prefix}${n.toFixed(decimals)}`;
+ }
+ 
+ // ??? Data Fetcher (Deprecated) ??????????????????????????????
+@@ -65,7 +89,7 @@ function fmt(val: any, prefix = '', suffix = '', decimals = 2): string {
+ 
+ // ??? Format: Rich Financial Data (from get_ticker_data) ???
+ 
+-function formatFinancialData(d: FinancialDetail): string {
++function formatFinancialData(d: FinancialDetail, market: Market = 'US'): string {
+     const lines: string[] = [];
+ 
+     lines.push(`?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺?곣봺`);
+@@ -76,29 +100,29 @@ function formatFinancialData(d: FinancialDetail): string {
+     lines.push(``);
+ 
+     lines.push(`?? MARKET SNAPSHOT ??????????????????????`);
+-    lines.push(`  Stock Price          : ${fmt(d.Price, '$')}`);
+-    lines.push(`  Fully Diluted Shares: ${fmt(d.Shares_Outstanding)}`);
+-    lines.push(`  Market Cap          : ${fmt(d.Market_Cap, '$')}`);
+-    lines.push(`  Enterprise Value    : ${fmt(d.Enterprise_Value_EV, '$')}`);
+-    lines.push(`  Total Cash          : ${fmt(d.Total_Cash, '$')}`);
+-    lines.push(`  Total Debt          : ${fmt(d.Total_Debt, '$')}`);
+-    lines.push(`  Stock-Based Comp    : ${fmt(d.SBC_Stock_Based_Comp, '$')}`);
+-    lines.push(`  Operating Cash Flow : ${fmt(d.Operating_Cash_Flow, '$')}`);
+-    lines.push(`  CapEx               : ${fmt(d.Capital_Expenditure, '$')}`);
+-    lines.push(`  Free Cash Flow TTM  : ${fmt(d.Free_Cash_Flow_TTM, '$')}`);
++    lines.push(`  Stock Price          : ${fmt(d.Price, market, true)}`);
++    lines.push(`  Fully Diluted Shares: ${fmt(d.Shares_Outstanding, 'US')} ${market === 'Korea' ? '(Units)' : ''}`);
++    lines.push(`  Market Cap          : ${fmt(d.Market_Cap, market)}`);
++    lines.push(`  Enterprise Value    : ${fmt(d.Enterprise_Value_EV, market)}`);
++    lines.push(`  Total Cash          : ${fmt(d.Total_Cash, market)}`);
++    lines.push(`  Total Debt          : ${fmt(d.Total_Debt, market)}`);
++    lines.push(`  Stock-Based Comp    : ${fmt(d.SBC_Stock_Based_Comp, market)}`);
++    lines.push(`  Operating Cash Flow : ${fmt(d.Operating_Cash_Flow, market)}`);
++    lines.push(`  CapEx               : ${fmt(d.Capital_Expenditure, market)}`);
++    lines.push(`  Free Cash Flow TTM  : ${fmt(d.Free_Cash_Flow_TTM, market)}`);
+     lines.push(``);
+ 
+     const m = d.Calculated_Metrics || {} as any;
+     lines.push(`?? CALCULATED METRICS (TTM) ?????????????`);
+-    lines.push(`  TTM Revenue         : ${fmt(m.TTM_Revenue, '$')}`);
+-    lines.push(`  Gross Margin        : ${fmt(m['TTM_Gross_Margin_%'], '', '%')}`);
+-    lines.push(`  YoY Revenue Growth  : ${fmt(m['YoY_Revenue_Growth_%'], '', '%')}`);
+-    lines.push(`  FCF Margin          : ${fmt(m['FCF_Margin_%'], '', '%')}`);
+-    lines.push(`  Rule of 40          : ${fmt(m.Rule_of_40, '', 'pts')}`);
+-    lines.push(`  EV / Sales          : ${fmt(m.EV_to_Sales, '', 'x')}`);
+-    lines.push(`  EV / Gross Profit   : ${fmt(m.EV_to_Gross_Profit, '', 'x')}`);
+-    lines.push(`  EV / EBIT           : ${fmt(m.EV_to_EBIT, '', 'x')}`);
+-    lines.push(`  Core Anchor Multiple: ${fmt(m['Core_Anchor_Multiple_0.4Sales_0.4GP'], '', 'x')}`);
++    lines.push(`  TTM Revenue         : ${fmt(m.TTM_Revenue, market)}`);
++    lines.push(`  Gross Margin        : ${fmt(m['TTM_Gross_Margin_%'], market, false, 1)}%`);
++    lines.push(`  YoY Revenue Growth  : ${fmt(m['YoY_Revenue_Growth_%'], market, false, 1)}%`);
++    lines.push(`  FCF Margin          : ${fmt(m['FCF_Margin_%'], market, false, 1)}%`);
++    lines.push(`  Rule of 40          : ${fmt(m.Rule_of_40, market, false, 1)} pts`);
++    lines.push(`  EV / Sales          : ${fmt(m.EV_to_Sales, market, false, 2)}x`);
++    lines.push(`  EV / Gross Profit   : ${fmt(m.EV_to_Gross_Profit, market, false, 2)}x`);
++    lines.push(`  EV / EBIT           : ${fmt(m.EV_to_EBIT, market, false, 2)}x`);
++    lines.push(`  Core Anchor Multiple: ${fmt(m['Core_Anchor_Multiple_0.4Sales_0.4GP'], market, false, 2)}x`);
+     lines.push(``);
+ 
+     const annuals: IncomeRow[] = d.Annual_Income_Statement || [];
+@@ -106,10 +130,10 @@ function formatFinancialData(d: FinancialDetail): string {
+         lines.push(`?? ANNUAL INCOME STATEMENT ??????????????`);
+         annuals.forEach((row) => {
+             lines.push(`  Period: ${row.Date}`);
+-            lines.push(`    Revenue          : ${fmt(row.TotalRevenue, '$')}`);
+-            lines.push(`    Gross Profit     : ${fmt(row.GrossProfit, '$')}`);
+-            lines.push(`    Operating Income : ${fmt(row.OperatingIncome, '$')}`);
+-            lines.push(`    Net Income       : ${fmt(row.NetIncome, '$')}`);
++            lines.push(`    Revenue          : ${fmt(row.TotalRevenue, market)}`);
++            lines.push(`    Gross Profit     : ${fmt(row.GrossProfit, market)}`);
++            lines.push(`    Operating Income : ${fmt(row.OperatingIncome, market)}`);
++            lines.push(`    Net Income       : ${fmt(row.NetIncome, market)}`);
+         });
+         lines.push(``);
+     }
+@@ -133,7 +157,7 @@ function formatFinancialData(d: FinancialDetail): string {
+ 
+ // ??? Format: Screener Data (fallback when no financial detail) ???
+ 
+-function formatScreenerData(result: ScreeningResult): string {
++function formatScreenerData(result: ScreeningResult, market: Market = 'US'): string {
+     const c = result.candidate;
+     const lines: string[] = [];
+ 
+@@ -153,8 +177,8 @@ function formatScreenerData(result: ScreeningResult): string {
+     lines.push(``);
+ 
+     lines.push(`?? MARKET SNAPSHOT ??????????????????????`);
+-    lines.push(`  Stock Price         : ${fmt(c.price, '$')}`);
+-    lines.push(`  Market Cap          : ${fmt(c.marketCap, '$')}`);
++    lines.push(`  Stock Price         : ${fmt(c.price, market, true)}`);
++    lines.push(`  Market Cap          : ${fmt(c.marketCap, market)}`);
+     lines.push(``);
+ 
+     lines.push(`?? KEY METRICS (from Screener) ??????????`);
+@@ -173,13 +197,18 @@ function formatScreenerData(result: ScreeningResult): string {
+ // ??? Main Export ??????????????????????????????????????????
+ 
+ export async function buildPrompt(ticker: string, result: ScreeningResult): Promise<string> {
++    // Determine market context from ticker suffix
++    let market: Market = 'US';
++    if (ticker.endsWith('.NS') || ticker.endsWith('.BO')) market = 'India';
++    if (ticker.endsWith('.KS') || ticker.endsWith('.KQ')) market = 'Korea';
++
+     // Rely on rich financial detail embedded inside the CSV data pipeline
+     const financialDetail = result.financialData;
+ 
+     // Use rich data if available, otherwise fall back to screener summary
+     const dataBrief = financialDetail
+-        ? formatFinancialData(financialDetail)
+-        : formatScreenerData(result);
++        ? formatFinancialData(financialDetail as FinancialDetail, market)
++        : formatScreenerData(result, market);
+ 
+     return `????????????????????????????????????????????????????????
+ ??SOTA Expectation-Driven Valuation Engine v3.4
+@@ -823,10 +852,15 @@ ${dataBrief}`;
+ // ??? Simple Version Export ????????????????????????????????
+ 
+ export async function buildSimplePrompt(ticker: string, result: ScreeningResult): Promise<string> {
++    // Determine market context from ticker suffix
++    let market: Market = 'US';
++    if (ticker.endsWith('.NS') || ticker.endsWith('.BO')) market = 'India';
++    if (ticker.endsWith('.KS') || ticker.endsWith('.KQ')) market = 'Korea';
++
+     const financialDetail = result.financialData;
+     const dataBrief = financialDetail
+-        ? formatFinancialData(financialDetail)
+-        : formatScreenerData(result);
++        ? formatFinancialData(financialDetail as FinancialDetail, market)
++        : formatScreenerData(result, market);
+ 
+     return `SYSTEM INSTRUCTION
+ You are a Chief Investment Strategist at a top-tier global Investment Bank (IB) and a Quantitative-Fundamental Hedge Fund (HF). Your mission is to activate the "Expectation-Driven Valuation Engine v4.0" for a target stock provided by the user. You must dynamically select the valuation path best suited to the company's specific characteristics, generating precise quantitative analysis and piercing qualitative investment memos. The output must be delivered in Markdown format, maintaining a professional, academic, and institutional research tone.
+diff --git a/scripts/__pycache__/fetch_data.cpython-314.pyc b/scripts/__pycache__/fetch_data.cpython-314.pyc
+index df27878..8ed2e17 100644
+Binary files a/scripts/__pycache__/fetch_data.cpython-314.pyc and b/scripts/__pycache__/fetch_data.cpython-314.pyc differ
