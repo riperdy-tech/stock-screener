@@ -1,6 +1,8 @@
 import { X, Activity, AlertOctagon, Sparkles } from "lucide-react";
 import { type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
 import { useLanguage } from "@/components/LanguageContext";
+import ReactMarkdown from "react-markdown";
+import { useEffect, useState } from "react";
 import { Market, formatKoreanWon, formatTaiwanNTD } from "@/lib/data-service";
 import clsx from "clsx";
 
@@ -14,6 +16,81 @@ interface StockDetailModalProps {
 export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }: StockDetailModalProps) {
     const { t } = useLanguage();
     const { candidate, reasons, flags, score } = result;
+
+    const [savedReport, setSavedReport] = useState<any>(null);
+
+    useEffect(() => {
+        let isMounted = true;
+        const checkReport = () => {
+            fetch(`/data/reports/${candidate.symbol}.json?t=${new Date().getTime()}`)
+                .then(res => {
+                    if (res.ok) return res.json();
+                    throw new Error("Not found");
+                })
+                .then(data => {
+                    if (isMounted) {
+                        setSavedReport((prev: any) => {
+                            if (!prev || prev.timestamp !== data.timestamp) {
+                                return data;
+                            }
+                            return prev;
+                        });
+                    }
+                })
+                .catch(() => {
+                    // Ignore 404s while polling
+                });
+        };
+        
+        checkReport();
+        const interval = setInterval(checkReport, 5000); // Check every 5 seconds
+        
+        const downloadDsResult = () => {
+        if (!savedReport) return;
+        const text = `Date: ${savedReport.timestamp}\nCost: $${savedReport.cost}\n\n${savedReport.content}`;
+        const blob = new Blob([text], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${candidate.symbol}_deepseek_report.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    const copyDsResult = () => {
+        if (!savedReport) return;
+        navigator.clipboard.writeText(savedReport.content);
+        alert("Copied!");
+    };
+
+    return () => {
+            isMounted = false;
+            clearInterval(interval);
+        };
+    }, [candidate.symbol]);
+
+
+    const downloadDsResult = () => {
+        if (!savedReport) return;
+        const text = `Date: ${savedReport.timestamp}\nCost: $${savedReport.cost}\n\n${savedReport.content}`;
+        const blob = new Blob([text], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${candidate.symbol}_deepseek_report.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    const copyDsResult = () => {
+        if (!savedReport) return;
+        navigator.clipboard.writeText(savedReport.content);
+        alert("Copied!");
+    };
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
@@ -159,7 +236,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                             </div>
                         </div>
 
-                        {/* Phase 2: Kill List */}
+                                                {/* Phase 2: Kill List */}
                         <div>
                             <h3 className="text-xl font-bold mb-1 flex items-center gap-2 text-danger">
                                 <AlertOctagon className="h-5 w-5" /> {t('phase2')}
@@ -187,6 +264,32 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                             </div>
                         </div>
 
+                        {/* Deepseek AI Report */}
+                        {savedReport && (
+                            <div>
+                                <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-blue-400">
+                                    <Sparkles className="h-5 w-5" /> AI Valuation Report (Deepseek V4.0 Pro)
+                                </h3>
+                                <div className="bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
+                                    <div className="bg-blue-500/10 px-4 py-3 border-b border-blue-500/20 flex justify-between items-center shrink-0 flex-wrap gap-2">
+                                        <span className="text-xs text-muted-foreground">
+                                            Generated on: {new Date(savedReport.timestamp).toLocaleString()} | Cost: ${savedReport.cost} | Tokens: {savedReport.usage?.total_tokens}
+                                        </span>
+                                        <div className="flex gap-2 items-center">
+                                            <button onClick={downloadDsResult} className="flex items-center gap-1 text-xs bg-secondary hover:bg-secondary/80 px-3 py-1.5 rounded-md shadow-sm border border-border transition-colors font-semibold">Download .txt</button>
+                                            <button onClick={copyDsResult} className="flex items-center gap-1 text-xs bg-[#4d6bfe] hover:bg-[#3b54d1] text-white px-3 py-1.5 rounded-md shadow-sm transition-colors font-semibold">Copy Result</button>
+                                        </div>
+                                    </div>
+                                    <div className="p-5 overflow-y-auto max-h-[600px] custom-scrollbar">
+                                        <div className="prose prose-invert prose-sm max-w-none text-foreground/90 leading-relaxed prose-headings:text-foreground prose-a:text-blue-400">
+                                            <ReactMarkdown>
+                                                {savedReport.content}
+                                            </ReactMarkdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                 </div>
             </div>
         </div>
@@ -195,6 +298,26 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
 
 function DetailRow({ label, value, target, pass, warning }: { label: string, value: string | number, target: string, pass: boolean, warning?: boolean }) {
     const { t } = useLanguage();
+    const downloadDsResult = () => {
+        if (!savedReport) return;
+        const text = `Date: ${savedReport.timestamp}\nCost: $${savedReport.cost}\n\n${savedReport.content}`;
+        const blob = new Blob([text], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${candidate.symbol}_deepseek_report.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    const copyDsResult = () => {
+        if (!savedReport) return;
+        navigator.clipboard.writeText(savedReport.content);
+        alert("Copied!");
+    };
+
     return (
         <div className="flex items-center justify-between p-3 bg-secondary/20 rounded-lg">
             <div>
