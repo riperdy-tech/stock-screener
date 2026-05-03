@@ -19,7 +19,8 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
         const fetchLogs = async () => {
             try {
                 // Add timestamp to prevent caching
-                const res = await fetch(`/data/scan.log?t=${Date.now()}`);
+                const basePath = process.env.NODE_ENV === 'production' ? '/stock-screener' : '';
+                const res = await fetch(`${basePath}/data/scan.log?t=${Date.now()}`);
                 if (res.ok) {
                     const text = await res.text();
                     setLogs(text);

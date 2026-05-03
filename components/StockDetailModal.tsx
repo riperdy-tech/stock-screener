@@ -22,7 +22,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
     useEffect(() => {
         let isMounted = true;
         const checkReport = () => {
-            fetch(`/data/reports/${candidate.symbol}.json?t=${new Date().getTime()}`)
+            const basePath = process.env.NODE_ENV === 'production' ? '/stock-screener' : '';
+            fetch(`${basePath}/data/reports/${candidate.symbol}.json?t=${new Date().getTime()}`)
                 .then(res => {
                     if (res.ok) return res.json();
                     throw new Error("Not found");
