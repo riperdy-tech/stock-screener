@@ -122,8 +122,16 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                 </div>
 
                 {/* Footer */}
-                <div className="px-4 py-2 border-t border-gray-800 bg-[#111] text-xs text-gray-500 flex justify-between">
-                    <span>Source: public/data/scan.log</span>
+                <div className="px-4 py-2 border-t border-gray-800 bg-[#111] text-xs text-gray-500 flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                        <span>Source: public/data/scan.log</span>
+                        <div className="flex items-center gap-1.5">
+                            <div className={`h-1.5 w-1.5 rounded-full ${process.env.NEXT_PUBLIC_SUPABASE_URL ? 'bg-green-500' : 'bg-red-500'}`} />
+                            <span className={process.env.NEXT_PUBLIC_SUPABASE_URL ? 'text-gray-400' : 'text-red-400'}>
+                                {process.env.NEXT_PUBLIC_SUPABASE_URL ? 'Supabase Connected' : 'Supabase Disconnected (Keys Missing)'}
+                            </span>
+                        </div>
+                    </div>
                     <span>Updating in real-time...</span>
                 </div>
             </div>
