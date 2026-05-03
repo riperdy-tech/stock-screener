@@ -60,6 +60,13 @@ logging.basicConfig(
     force=True # Force reconfiguration
 )
 
+# Prevent Supabase/HTTPX from logging their own requests (avoid infinite loops)
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("httpcore").setLevel(logging.WARNING)
+logging.getLogger("supabase").setLevel(logging.WARNING)
+logging.getLogger("postgrest").setLevel(logging.WARNING)
+
+
 # Force flush on every log for real-time viewing
 def flush_handlers():
     for h in logging.getLogger().handlers:
