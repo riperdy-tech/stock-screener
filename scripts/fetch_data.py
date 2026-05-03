@@ -16,7 +16,7 @@ import base64
 log_file = "public/data/scan.log"
 
 # Create handlers
-file_handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
+file_handler = logging.FileHandler(log_file, mode='a', encoding='utf-8')
 console_handler = logging.StreamHandler(sys.stdout)
 
 logging.basicConfig(
@@ -432,18 +432,20 @@ def main():
     
     import os
     import shutil
-    # Create financials directory for per-ticker detail data (AI Prompt Exporter)
+    # Create financials directory for per-ticker detail data
     os.makedirs('public/data/financials', exist_ok=True)
     
-    # Clear existing financial detail JSONs to ensure no stale data remains
-    print("Clearing old financial data cache...")
-    for filename in os.listdir('public/data/financials'):
-        file_path = os.path.join('public/data/financials', filename)
+    # Load existing data to prevent wiping out the database
+    existing_data = {}
+    if os.path.exists('public/data/stocks.json'):
         try:
-            if os.path.isfile(file_path) and filename.endswith('.json'):
-                os.unlink(file_path)
+            with open('public/data/stocks.json', 'r') as f:
+                loaded = json.load(f)
+                for item in loaded:
+                    existing_data[item['symbol']] = item
+            print(f"Loaded {len(existing_data)} existing records.")
         except Exception as e:
-            print(f"Failed to delete {file_path}: {e}")
+            print(f"Failed to load existing stocks.json: {e}")
 
     # Write PID to file for control
     with open("public/data/scanner.pid", "w") as f:
@@ -451,7 +453,6 @@ def main():
 
     print(f"Scanning Universe: {len(tickers)} stocks.")
     
-    results = []
     processed_count = 0
     passed_count = 0
     skipped_count = 0
@@ -464,7 +465,10 @@ def main():
                 time.sleep(1)
                 
             processed_count += 1
-            print(f"[{processed_count}/{len(tickers)}] Scan: {ticker}...", end="\r")
+            progress_msg = f"[{processed_count}/{len(tickers)}] Scan: {ticker}..."
+            print(progress_msg, end="\r")
+            if processed_count % 5 == 0 or processed_count == 1:
+                logging.info(progress_msg)
             
             # 1. PROCESS STOCK
             process_result = process_stock(ticker)
@@ -500,6 +504,7 @@ def main():
                 "status": "Pass" if screening_result else "Fail", 
                 "reasons": result.fail_reasons,
                 "failCodes": result.fail_codes,
+                "Last_Updated": datetime.now().strftime("%Y-%m-%d %H:%M"),
                 "metrics": {
                     "roic": result.roic,
                     "revenueGrowth": result.revenue_growth_ttm,
@@ -517,7 +522,7 @@ def main():
                     "capex": detail.get("Capital_Expenditure") if detail else None
                 }
             }
-            results.append(result_obj)
+            existing_data[ticker] = result_obj
 
             # Save per-ticker financial detail for AI Prompt Exporter
             if detail:
@@ -540,7 +545,7 @@ def main():
                 try:
                     # CSV Data Construction
                     csv_data = []
-                    for r in results: 
+                    for r in existing_data.values(): 
                         flat = {
                             "Symbol": r['symbol'],
                             "Name": r['name'],
@@ -552,6 +557,7 @@ def main():
                             "Score": r['score'],
                             "Status": r['status'],
                             "Fail Codes": ",".join(r['failCodes']) if r['failCodes'] else "",
+                            "Last_Updated": r.get('Last_Updated', ''),
                             "Rev Growth": r['metrics'].get('revenueGrowth'),
                             "Gross Margin": r['metrics'].get('grossMargin'),
                             "ROIC": r['metrics'].get('roic'),
@@ -596,7 +602,7 @@ def main():
     
     print(f"\nScan Complete. Processed {processed_count}. Passed {passed_count}. Skipped {skipped_count}.")
     
-    final_results = sanitize(results)
+    final_results = sanitize(list(existing_data.values()))
     
     # 1. JSON Save
     with open('public/data/stocks.json', 'w') as f:
@@ -618,6 +624,7 @@ def main():
                 "Score": r['score'],
                 "Status": r['status'],
                 "Fail Codes": ",".join(r['failCodes']) if r['failCodes'] else "",
+                "Last_Updated": r.get('Last_Updated', ''),
                 # FLATTEN METRICS
                 "Rev Growth": r['metrics'].get('revenueGrowth'),
                 "Gross Margin": r['metrics'].get('grossMargin'),

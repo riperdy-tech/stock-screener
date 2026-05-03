@@ -48,6 +48,7 @@ def compile_csv():
                 "Market Cap": detail.get('Market_Cap', 0),
                 "Sector": detail.get('Sector', 'International Equity'),
                 "Industry": detail.get('Industry', 'Unknown'),
+                "Last_Updated": detail.get('Data_Fetched_Date', ''),
                 "Rev Growth": (calc.get('YoY_Revenue_Growth_%') or 0) / 100,
                 "Gross Margin": (calc.get('TTM_Gross_Margin_%') or 0) / 100,
                 "ROIC": (calc.get('ROIC_%') or 0) / 100,

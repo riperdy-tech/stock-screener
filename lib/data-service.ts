@@ -127,6 +127,7 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
                 industry: row['Industry'] || 'Unknown',
                 price: parseFloat(row['Price']) || 0,
                 marketCap: parseFloat(row['Market Cap']) || 0,
+                lastUpdated: row['Last_Updated'] || undefined,
 
                 // Metrics (Convert decimals to % points)
                 revenueGrowth: (parseFloat(row['Rev Growth']) || 0) * multiplier,

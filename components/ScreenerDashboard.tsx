@@ -8,7 +8,8 @@ import { buildPrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
 import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS } from "./FilterSidebar";
 import { LanguageToggle } from "./LanguageToggle";
-import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check } from 'lucide-react';
+import { LogConsole } from "./LogConsole";
+import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -24,6 +25,7 @@ export function ScreenerDashboard() {
     const [selectedStock, setSelectedStock] = useState<ScreeningResult | null>(null);
     const [lastUpdatedFile, setLastUpdatedFile] = useState<string | null>(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isLogOpen, setIsLogOpen] = useState(false);
     const [selectedMarket, setSelectedMarket] = useState<Market>('US');
     
     // Maintain a ref to current rawResults for the setInterval closure
@@ -144,13 +146,6 @@ export function ScreenerDashboard() {
         }
 
         loadData(true, selectedMarket);
-
-        // Auto-refresh prices ONLY silently every 5 minutes
-        const interval = setInterval(() => {
-            refreshPricesOnly(selectedMarket);
-        }, 5 * 60 * 1000);
-
-        return () => clearInterval(interval); // Cleanup on unmount
     }, []);
 
     // Save filters to localStorage whenever they change
@@ -169,38 +164,6 @@ export function ScreenerDashboard() {
         }
         loadData(false, selectedMarket);
     }, [selectedMarket]);
-
-    async function refreshPricesOnly(market: Market) {
-        const tickers = rawResultsRef.current.map(r => r.candidate.symbol);
-        if (tickers.length === 0) return;
-
-        try {
-            const res = await fetch('/api/live-prices', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tickers })
-            });
-            const { prices } = await res.json();
-            
-            if (prices && Object.keys(prices).length > 0) {
-                setRawResults(prev => prev.map(r => {
-                    const livePrice = prices[r.candidate.symbol];
-                    if (livePrice) {
-                        return {
-                            ...r,
-                            candidate: {
-                                ...r.candidate,
-                                price: livePrice
-                            }
-                        };
-                    }
-                    return r;
-                }));
-            }
-        } catch (err) {
-            console.error("Failed to refresh prices:", err);
-        }
-    }
 
     async function loadData(silent = false, market: Market) {
         if (!silent) setLoading(true);
@@ -407,6 +370,10 @@ export function ScreenerDashboard() {
 
                     <div className="flex flex-wrap md:flex-nowrap items-center gap-2 w-full md:w-auto justify-between md:justify-end">
                         <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
+                            <button onClick={() => setIsLogOpen(true)} className="flex items-center gap-1.5 px-3 py-1.5 bg-[#111] hover:bg-[#222] text-green-500 rounded-md transition-colors text-xs font-mono border border-green-500/30">
+                                <Terminal className="h-3.5 w-3.5" />
+                                <span className="hidden sm:inline">View Logs</span>
+                            </button>
                             {/* Language Toggle */}
                             <LanguageToggle />
                         </div>
@@ -429,13 +396,9 @@ export function ScreenerDashboard() {
                     <div className="mb-6">
                         <h2 className="text-2xl font-bold flex items-center gap-3">
                             {t('marketOpp')}
-                            <span className="flex items-center gap-1.5 text-xs font-mono font-medium text-success bg-success/10 border border-success/20 px-2 py-0.5 rounded-full" title="Prices auto-refresh every 5 minutes">
-                                <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse inline-block"></span>
-                                LIVE
-                            </span>
                         </h2>
                         <p className="text-muted-foreground text-sm">
-                            {t('showing')} {filteredResults.length > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredResults.length)} / {filteredResults.length} {t('assets')} · Auto-refreshes every 5 min
+                            {t('showing')} {filteredResults.length > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredResults.length)} / {filteredResults.length} {t('assets')}
                         </p>
                     </div>
 
@@ -631,6 +594,8 @@ export function ScreenerDashboard() {
                     </div>
                 </div>
             )}
+
+            <LogConsole isOpen={isLogOpen} onClose={() => setIsLogOpen(false)} />
         </div>
     );
 }

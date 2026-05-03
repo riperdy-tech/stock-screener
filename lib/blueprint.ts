@@ -14,6 +14,7 @@ export interface StockCandidate {
     zScore: number;
     insiderOwnership: number; // %
     floatShares: number;
+    lastUpdated?: string;
 }
 
 export interface ScreeningMetrics {

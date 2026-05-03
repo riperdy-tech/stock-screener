@@ -113,6 +113,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                 <span>{candidate.sector}</span>
                                 <span className="text-muted-foreground">•</span>
                                 <span>{result.industry || t('industry')}</span>
+                                {candidate.lastUpdated && (
+                                    <>
+                                        <span className="text-muted-foreground">•</span>
+                                        <span className="text-muted-foreground font-mono text-xs" title="Last Updated">
+                                            ↻ {candidate.lastUpdated}
+                                        </span>
+                                    </>
+                                )}
                             </div>
 
                             <p className="text-xs text-muted-foreground mt-2 max-w-2xl leading-relaxed">
