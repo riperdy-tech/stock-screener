@@ -11,6 +11,12 @@ import math
 from datetime import datetime
 import base64
 
+import os
+from dotenv import load_dotenv
+
+# Load .env.local if present
+load_dotenv(".env.local")
+
 # Setup logging
 # Log to both file (for frontend) and console
 log_file = "public/data/scan.log"
@@ -19,10 +25,38 @@ log_file = "public/data/scan.log"
 file_handler = logging.FileHandler(log_file, mode='a', encoding='utf-8')
 console_handler = logging.StreamHandler(sys.stdout)
 
+handlers = [file_handler, console_handler]
+
+# Supabase Realtime Handler
+class SupabaseHandler(logging.Handler):
+    def __init__(self):
+        super().__init__()
+        self.supabase = None
+        supabase_url = os.environ.get("NEXT_PUBLIC_SUPABASE_URL")
+        supabase_key = os.environ.get("SUPABASE_SERVICE_KEY")
+        if supabase_url and supabase_key:
+            try:
+                from supabase import create_client
+                self.supabase = create_client(supabase_url, supabase_key)
+            except Exception as e:
+                print(f"Failed to init Supabase logging: {e}")
+
+    def emit(self, record):
+        if not self.supabase:
+            return
+        log_entry = self.format(record)
+        try:
+            self.supabase.table("scan_logs").insert({"message": log_entry}).execute()
+        except Exception:
+            pass
+
+sb_handler = SupabaseHandler()
+handlers.append(sb_handler)
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[file_handler, console_handler],
+    handlers=handlers,
     force=True # Force reconfiguration
 )
 

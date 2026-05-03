@@ -26,9 +26,12 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install yfinance pandas numpy requests finance-datareader
+          pip install yfinance pandas numpy requests finance-datareader supabase python-dotenv
           
       - name: Run Data Fetchers
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
           # Add the scripts you want to run automatically here
           # For example, to run the main fetcher:

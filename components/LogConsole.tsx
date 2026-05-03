@@ -16,9 +16,12 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
     useEffect(() => {
         if (!isOpen) return;
 
-        const fetchLogs = async () => {
+        let supabaseClient: any;
+        let channel: any;
+
+        const setupLogStream = async () => {
+            // 1. Fetch initial baseline from static file
             try {
-                // Add timestamp to prevent caching
                 const basePath = process.env.NODE_ENV === 'production' ? '/stock-screener' : '';
                 const res = await fetch(`${basePath}/data/scan.log?t=${Date.now()}`);
                 if (res.ok) {
@@ -26,14 +29,37 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                     setLogs(text);
                 }
             } catch (e) {
-                console.error("Failed to fetch logs");
+                console.error("Failed to fetch initial logs");
+            }
+
+            // 2. Subscribe to Supabase for live updates
+            const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+            const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+            
+            if (supabaseUrl && supabaseKey) {
+                try {
+                    const { createClient } = await import('@supabase/supabase-js');
+                    supabaseClient = createClient(supabaseUrl, supabaseKey);
+                    
+                    channel = supabaseClient
+                        .channel('log-stream')
+                        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'scan_logs' }, (payload: any) => {
+                            setLogs((prev) => prev + '\n' + payload.new.message);
+                        })
+                        .subscribe();
+                } catch (e) {
+                    console.error("Supabase stream failed", e);
+                }
             }
         };
 
-        fetchLogs(); // Initial
-        const interval = setInterval(fetchLogs, 1000); // Poll every second
+        setupLogStream();
 
-        return () => clearInterval(interval);
+        return () => {
+            if (supabaseClient && channel) {
+                supabaseClient.removeChannel(channel);
+            }
+        };
     }, [isOpen]);
 
     useEffect(() => {
