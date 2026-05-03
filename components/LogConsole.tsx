@@ -41,6 +41,18 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                     const { createClient } = await import('@supabase/supabase-js');
                     supabaseClient = createClient(supabaseUrl, supabaseKey);
                     
+                    // 2.1 Fetch recent logs from Supabase that might not be in the static file yet
+                    const { data: recentLogs } = await supabaseClient
+                        .from('scan_logs')
+                        .select('message')
+                        .order('id', { ascending: false })
+                        .limit(50);
+                    
+                    if (recentLogs && recentLogs.length > 0) {
+                        const recentText = [...recentLogs].reverse().map((l: any) => l.message).join('\n');
+                        setLogs((prev) => prev + '\n\n--- [LIVE LOGS RESUMED] ---\n' + recentText);
+                    }
+
                     channel = supabaseClient
                         .channel('log-stream')
                         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'scan_logs' }, (payload: any) => {
