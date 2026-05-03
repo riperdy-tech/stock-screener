@@ -62,7 +62,7 @@ export function ScreenerDashboard() {
     const handleDeepseekRun = async () => {
         if (!dsPassword) { setDsError("Please enter password"); return; }
         setDsLoading(true); setDsError("");
-        setBackgroundDsTask({ ticker: selectedAiTicker, status: 'running' });
+        setBackgroundDsTask({ ticker: selectedAiTicker || "Unknown", status: 'running' });
         try {
             const res = await fetch("/api/deepseek", {
                 method: "POST",
@@ -78,10 +78,10 @@ export function ScreenerDashboard() {
             setDsResult(data);
             setShowDsPassword(false);
             setDsPassword("");
-            setBackgroundDsTask({ ticker: selectedAiTicker, status: 'completed' });
+            setBackgroundDsTask({ ticker: selectedAiTicker || "Unknown", status: 'completed' });
         } catch (e: any) {
             setDsError(e.message);
-            setBackgroundDsTask({ ticker: selectedAiTicker, status: 'error', message: e.message });
+            setBackgroundDsTask({ ticker: selectedAiTicker || "Unknown", status: 'error', message: e.message });
         } finally {
             setDsLoading(false);
         }
