@@ -443,15 +443,18 @@ def main():
                 loaded = json.load(f)
                 for item in loaded:
                     existing_data[item['symbol']] = item
-            print(f"Loaded {len(existing_data)} existing records.")
+            logging.info(f"Loaded {len(existing_data)} existing records.")
+            flush_handlers()
         except Exception as e:
-            print(f"Failed to load existing stocks.json: {e}")
+            logging.error(f"Failed to load existing stocks.json: {e}")
+            flush_handlers()
 
     # Write PID to file for control
     with open("public/data/scanner.pid", "w") as f:
         f.write(str(os.getpid()))
 
-    print(f"Scanning Universe: {len(tickers)} stocks.")
+    logging.info(f"Scanning Universe: {len(tickers)} stocks.")
+    flush_handlers()
     
     processed_count = 0
     passed_count = 0
@@ -469,6 +472,7 @@ def main():
             print(progress_msg, end="\r")
             if processed_count % 5 == 0 or processed_count == 1:
                 logging.info(progress_msg)
+                flush_handlers()
             
             # 1. PROCESS STOCK
             process_result = process_stock(ticker)
@@ -538,7 +542,8 @@ def main():
             
             if screening_result:
                 passed_count += 1
-                print(f"FOUND GEM: {ticker}                               ")
+                logging.info(f"FOUND GEM: {ticker}")
+                flush_handlers()
 
             # INCREMENTAL CSV SAVE (Every 5 stocks)
             if processed_count % 5 == 0:
@@ -591,16 +596,20 @@ def main():
 
                     if not safe_replace(temp_csv, final_csv):
                          logging.error(f"Could not update {final_csv}. Close Excel if open!")
+                         flush_handlers()
                     
                 except Exception as e:
                     logging.error(f"Save failed: {e}")
+                    flush_handlers()
                     pass
 
     except KeyboardInterrupt:
-        print("\n\nScan stopped by user (Ctrl+C). Exiting safely...")
+        logging.info("Scan stopped by user (Ctrl+C). Exiting safely...")
+        flush_handlers()
         sys.exit(0)
     
-    print(f"\nScan Complete. Processed {processed_count}. Passed {passed_count}. Skipped {skipped_count}.")
+    logging.info(f"Scan Complete. Processed {processed_count}. Passed {passed_count}. Skipped {skipped_count}.")
+    flush_handlers()
     
     final_results = sanitize(list(existing_data.values()))
     
@@ -642,15 +651,18 @@ def main():
             
         df_csv = pd.DataFrame(csv_data)
         df_csv.to_csv('public/data/stocks.csv', index=False)
-        print("Saved to public/data/stocks.csv")
+        logging.info("Saved to public/data/stocks.csv")
+        flush_handlers()
     except Exception as e:
-        print(f"CSV Save Failed: {e}")
+        logging.error(f"CSV Save Failed: {e}")
+        flush_handlers()
     
     # Cleanup PID
     if os.path.exists("public/data/scanner.pid"):
         os.remove("public/data/scanner.pid")
         
-    print("Saved to public/data/stocks.json")
+    logging.info("Saved to public/data/stocks.json")
+    flush_handlers()
 
 if __name__ == "__main__":
     main()
