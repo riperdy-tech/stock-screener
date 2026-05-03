@@ -225,13 +225,14 @@ export async function buildPrompt(ticker: string, result: ScreeningResult): Prom
 
     let rs2Content = "";
     try {
+        const basePath = process.env.NODE_ENV === 'production' ? '/stock-screener' : '';
         if (typeof window !== "undefined") {
-            const response = await fetch('/RS2.txt');
+            const response = await fetch(`${basePath}/RS2.txt`);
             rs2Content = await response.text();
         } else {
             // Server side or edge
             const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-            const response = await fetch(`${baseUrl}/RS2.txt`);
+            const response = await fetch(`${baseUrl}${basePath}/RS2.txt`);
             rs2Content = await response.text();
         }
     } catch (e) {
