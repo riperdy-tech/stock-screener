@@ -39,16 +39,20 @@ def get_fdr_tickers():
     Uses FinanceDataReader to get the master list of all US Stocks.
     """
     logging.info("--- FETCHING TICKER LISTS VIA FINANCE DATA READER ---")
+    flush_handlers()
     
     # 1. Fetch main exchanges
     try:
         logging.info("Fetching NASDAQ...")
+        flush_handlers()
         df_nasdaq = fdr.StockListing('NASDAQ')
         
         logging.info("Fetching NYSE...")
+        flush_handlers()
         df_nyse = fdr.StockListing('NYSE')
         
         logging.info("Fetching AMEX...")
+        flush_handlers()
         df_amex = fdr.StockListing('AMEX') 
 
         # 2. Combine them
@@ -69,11 +73,12 @@ def get_fdr_tickers():
             # Normalize for Yahoo (Dot to Dash)
             norm = t_str.replace('.', '-')
             clean_tickers.append(norm)
-        
         logging.info(f"Total Common Stock Tickers: {len(clean_tickers)}")
+        flush_handlers()
         return clean_tickers
     except Exception as e:
         logging.error(f"FDR Fetch failed: {e}. Fallback to S&P 600.")
+        flush_handlers()
         return [] # Simplified fallback handling for now
 
 
