@@ -15,6 +15,7 @@ export function ReportsDashboard() {
     const [filterAction, setFilterAction] = useState("ALL");
     const [filterConviction, setFilterConviction] = useState(0);
     const [filterArchetype, setFilterArchetype] = useState("ALL");
+    const [filterValuation, setFilterValuation] = useState("ALL");
 
     useEffect(() => {
         fetchReports();
@@ -42,9 +43,10 @@ export function ReportsDashboard() {
         const meta = r.metadata || {};
         const matchesAction = filterAction === "ALL" || meta.action === filterAction;
         const matchesArchetype = filterArchetype === "ALL" || meta.archetype === filterArchetype;
+        const matchesValuation = filterValuation === "ALL" || meta.valuation_status === filterValuation;
         const matchesConviction = (meta.conviction || 0) >= filterConviction;
         
-        return matchesSearch && matchesAction && matchesArchetype && matchesConviction;
+        return matchesSearch && matchesAction && matchesArchetype && matchesValuation && matchesConviction;
     });
 
     const downloadReport = (report: any) => {
@@ -95,11 +97,11 @@ export function ReportsDashboard() {
                 )}>
                     {/* Filter Bar */}
                     <div className="p-4 border-b border-white/5 space-y-3 bg-[#0d1117]">
-                        <div className="flex gap-2">
+                        <div className="grid grid-cols-2 gap-2">
                             <select 
                                 value={filterAction} 
                                 onChange={(e) => setFilterAction(e.target.value)}
-                                className="flex-1 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-xs font-bold text-blue-400 focus:outline-none"
+                                className="bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-xs font-bold text-blue-400 focus:outline-none"
                             >
                                 <option value="ALL">ALL ACTIONS</option>
                                 <option value="BUY">BUY</option>
@@ -108,9 +110,20 @@ export function ReportsDashboard() {
                                 <option value="SELL">SELL</option>
                             </select>
                             <select 
+                                value={filterValuation} 
+                                onChange={(e) => setFilterValuation(e.target.value)}
+                                className="bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-xs font-bold text-green-400 focus:outline-none"
+                            >
+                                <option value="ALL">ALL VALUATIONS</option>
+                                <option value="UNDERVALUED">UNDERVALUED</option>
+                                <option value="FAIR_TO_UNDERVALUED">FAIR/UNDER</option>
+                                <option value="FAIR">FAIR</option>
+                                <option value="OVERVALUED">OVERVALUED</option>
+                            </select>
+                            <select 
                                 value={filterArchetype} 
                                 onChange={(e) => setFilterArchetype(e.target.value)}
-                                className="flex-1 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-xs font-bold text-muted-foreground focus:outline-none"
+                                className="col-span-2 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-xs font-bold text-muted-foreground focus:outline-none"
                             >
                                 <option value="ALL">ALL ARCHETYPES</option>
                                 <option value="Stable Incumbent">STABLE</option>
@@ -143,35 +156,59 @@ export function ReportsDashboard() {
                             </div>
                         ) : (
                             <div className="flex flex-col">
-                                {filteredReports.map((report) => (
-                                    <button
-                                        key={report.id || report.ticker + report.created_at}
-                                        onClick={() => setSelectedReport(report)}
-                                        className={clsx(
-                                            "w-full text-left p-4 border-b border-white/5 transition-all hover:bg-white/5 flex items-center justify-between group",
-                                            selectedReport?.id === report.id ? "bg-accent/10 border-r-2 border-r-accent" : ""
-                                        )}
-                                    >
-                                        <div className="flex flex-col gap-1 min-w-0">
-                                            <div className="flex items-center gap-2">
-                                                <span className="text-lg font-black tracking-tighter text-foreground group-hover:text-accent transition-colors">
-                                                    {report.ticker}
-                                                </span>
-                                                {report.status === 'pending' && (
-                                                    <span className="text-[9px] bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded font-bold uppercase animate-pulse">Thinking</span>
-                                                )}
+                                {filteredReports.map((report) => {
+                                    const meta = report.metadata || {};
+                                    const upside = parseFloat(meta.upside || 0);
+                                    const isPositive = upside > 0;
+                                    const isHighUpside = upside > 15;
+
+                                    return (
+                                        <button
+                                            key={report.id || report.ticker + report.created_at}
+                                            onClick={() => setSelectedReport(report)}
+                                            className={clsx(
+                                                "w-full text-left p-4 border-b border-white/5 transition-all hover:bg-white/5 flex items-center justify-between group relative",
+                                                selectedReport?.id === report.id ? "bg-blue-500/5 border-r-2 border-r-blue-500" : ""
+                                            )}
+                                        >
+                                            <div className="flex flex-col gap-1.5 min-w-0">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-lg font-black tracking-tighter text-foreground group-hover:text-blue-400 transition-colors">
+                                                        {report.ticker}
+                                                    </span>
+                                                    {meta.valuation_status && (
+                                                        <span className={clsx(
+                                                            "text-[8px] px-1.5 py-0.5 rounded-sm font-black uppercase tracking-wider",
+                                                            meta.valuation_status.includes('UNDERVALUED') ? "bg-green-500/20 text-green-400 border border-green-500/20" :
+                                                            meta.valuation_status === 'OVERVALUED' ? "bg-red-500/20 text-red-400 border border-red-500/20" :
+                                                            "bg-white/5 text-muted-foreground border border-white/10"
+                                                        )}>
+                                                            {meta.valuation_status.replace(/_/g, ' ')}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-bold">
+                                                    <Calendar className="h-3 w-3 opacity-50" />
+                                                    {new Date(report.created_at).toLocaleDateString()}
+                                                    <span className="opacity-20">•</span>
+                                                    <span className="text-blue-400/60 uppercase tracking-tighter">{meta.archetype || 'Report'}</span>
+                                                </div>
                                             </div>
-                                            <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-medium">
-                                                <Calendar className="h-3 w-3" />
-                                                {new Date(report.created_at).toLocaleDateString()}
-                                                <span className="opacity-30">|</span>
-                                                <DollarSign className="h-3 w-3" />
-                                                {report.cost || '0.00'}
+                                            
+                                            <div className="flex flex-col items-end gap-1.5">
+                                                <div className={clsx(
+                                                    "px-2 py-1 rounded-lg text-[11px] font-black tracking-tighter shadow-sm",
+                                                    isPositive ? "bg-green-500/10 text-green-400 border border-green-500/20" : "bg-red-500/10 text-red-400 border border-red-500/20"
+                                                )}>
+                                                    {isPositive ? '+' : ''}{upside.toFixed(1)}%
+                                                </div>
+                                                <div className="text-[9px] font-black text-muted-foreground/40 tracking-widest uppercase">
+                                                    UPSIDE
+                                                </div>
                                             </div>
-                                        </div>
-                                        <ChevronRight className={clsx("h-4 w-4 text-muted-foreground transition-transform", selectedReport?.id === report.id ? "translate-x-1 text-accent" : "")} />
-                                    </button>
-                                ))}
+                                        </button>
+                                    );
+                                })}
                             </div>
                         )}
                     </div>
@@ -219,6 +256,29 @@ export function ReportsDashboard() {
                                     <ArrowLeft className="h-4 w-4" /> BACK TO LIST
                                 </button>
                                 
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                                    <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+                                        <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Conviction</div>
+                                        <div className="text-3xl font-black text-blue-500 tracking-tighter">{selectedReport.metadata?.conviction || 'N/A'}</div>
+                                        <div className="text-[9px] font-bold text-blue-500/40 uppercase mt-1">Scale 0-15</div>
+                                    </div>
+                                    <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+                                        <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Intrinsic Upside</div>
+                                        <div className={clsx(
+                                            "text-3xl font-black tracking-tighter",
+                                            (selectedReport.metadata?.upside || 0) > 0 ? "text-green-400" : "text-red-400"
+                                        )}>
+                                            {(selectedReport.metadata?.upside || 0) > 0 ? '+' : ''}{selectedReport.metadata?.upside || '0.0'}%
+                                        </div>
+                                        <div className="text-[9px] font-bold text-muted-foreground/40 uppercase mt-1">vs Target Price</div>
+                                    </div>
+                                    <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+                                        <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Archetype</div>
+                                        <div className="text-xl font-black text-white tracking-tighter uppercase whitespace-nowrap">{selectedReport.metadata?.archetype || 'N/A'}</div>
+                                        <div className="text-[9px] font-bold text-muted-foreground/40 uppercase mt-1">Risk Profile</div>
+                                    </div>
+                                </div>
+
                                 <div className="flex justify-between items-start mb-8">
                                     <div>
                                         <h2 className="text-4xl font-black tracking-tighter text-foreground mb-2 flex items-center gap-4">
