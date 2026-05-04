@@ -76,12 +76,23 @@ export function ScreenerDashboard() {
                 })
             });
 
-            if (!res.ok) {
-                const data = await res.json();
-                throw new Error(data.error || `Server error: ${res.status}`);
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || `Server error: ${res.status}`);
+
+            if (data.status === 'queued') {
+                // Background worker started
+                setDsLoading(false);
+                setDsPassword("");
+                setShowDsPassword(false);
+                setBackgroundDsTask({ 
+                    ticker: selectedAiTicker || "Unknown", 
+                    status: 'running', 
+                    message: `Deepseek V4.0 Pro is thinking for ${selectedAiTicker}... This may take 2-3 minutes.` 
+                });
+                return;
             }
 
-            const dsResultData = await res.json();
+            const dsResultData = data;
             setDsResult(dsResultData);
             setDsLoading(false);
             setDsPassword("");
