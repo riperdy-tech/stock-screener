@@ -393,9 +393,15 @@ export function ScreenerDashboard() {
 
                     <div className="flex flex-wrap md:flex-nowrap items-center gap-2 w-full md:w-auto justify-between md:justify-end">
                         <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
-                            <button onClick={() => setIsLogOpen(true)} className="flex items-center gap-1.5 px-3 py-1.5 bg-[#111] hover:bg-[#222] text-green-500 rounded-md transition-colors text-xs font-mono border border-green-500/30">
-                                <Terminal className="h-3.5 w-3.5" />
-                                <span className="hidden sm:inline">View Logs</span>
+                            <button 
+                                onClick={() => setIsLogOpen(true)} 
+                                className="flex items-center gap-2 px-3.5 py-1.5 bg-secondary/50 hover:bg-secondary text-foreground/80 hover:text-foreground rounded-lg transition-all duration-300 text-xs font-bold border border-border/50 backdrop-blur-md shadow-sm active:scale-95"
+                            >
+                                <div className="relative">
+                                    <Terminal className="h-4 w-4" />
+                                    <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_5px_var(--success)]"></span>
+                                </div>
+                                <span className="hidden sm:inline tracking-tight">System Logs</span>
                             </button>
                             {/* Language Toggle */}
                             <LanguageToggle />
