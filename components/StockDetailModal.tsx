@@ -19,6 +19,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
     const { candidate, reasons, flags, score } = result;
 
     const [savedReport, setSavedReport] = useState<any>(null);
+    const [reportHistory, setReportHistory] = useState<any[]>([]);
+    const [showReports, setShowReports] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
@@ -40,13 +42,15 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                     .from('ai_reports')
                     .select('*')
                     .eq('ticker', candidate.symbol)
-                    .single();
+                    .order('created_at', { ascending: false });
                 
-                if (data && !error) {
-                    dbReport = {
-                        ...data,
-                        timestamp: data.created_at // Map created_at to timestamp for consistency
+                if (data && data.length > 0 && !error) {
+                    setReportHistory(data);
+                    const latestDb = {
+                        ...data[0],
+                        timestamp: data[0].created_at
                     };
+                    dbReport = latestDb;
                 }
             } catch (e) {}
 
@@ -268,33 +272,58 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                             </div>
                         </div>
 
-                                                {/* Phase 2: Kill List */}
-                        <div>
-                            <h3 className="text-xl font-bold mb-1 flex items-center gap-2 text-danger">
-                                <AlertOctagon className="h-5 w-5" /> {t('phase2')}
-                            </h3>
-                            <p className="text-xs text-muted-foreground mb-4">Disqualifying red flags that override high quant scores. Any flag here means the stock fails the blueprint.</p>
-                            <div className="bg-danger/5 border border-danger/20 rounded-xl p-4">
-                                {flags.length === 0 ? (
-                                    <div className="flex items-center gap-2 text-success">
-                                        <span className="text-lg">✓</span> {t('noFatalFlaws')}
-                                    </div>
-                                ) : (
-                                    <ul className="space-y-2">
-                                        {flags.map((flag, i) => (
-                                            <li key={i} className="flex items-center gap-2 text-danger font-medium">
-                                                <X className="h-4 w-4" /> {flag}
-                                            </li>
-                                        ))}
-                                    </ul>
+                                                {/* REPORTS Action Section */}
+                        <div className="flex items-center gap-4 border-b border-border pb-4">
+                            <button 
+                                onClick={() => setShowReports(!showReports)}
+                                className={clsx(
+                                    "flex items-center gap-2 px-6 py-2.5 rounded-lg font-bold transition-all shadow-sm border",
+                                    showReports ? "bg-primary text-primary-foreground border-primary" : "bg-secondary hover:bg-secondary/80 text-foreground border-border"
                                 )}
-                                {/* Always show Z-Score context */}
-                                <div className="mt-4 pt-4 border-t border-danger/10 text-sm flex justify-between">
-                                    <span>Altman Z-Score: <span className="font-mono font-bold">{market !== 'US' && candidate.zScore === 0 ? 'N/A' : candidate.zScore}</span></span>
-                                    <span className="text-muted-foreground">({t('target')}: &gt; 1.8)</span>
+                            >
+                                <Activity className="h-4 w-4" />
+                                {showReports ? "CLOSE REPORTS" : "VIEW REPORTS"}
+                            </button>
+                            <span className="text-xs text-muted-foreground italic font-medium">
+                                {reportHistory.length} analyses available in cloud
+                            </span>
+                        </div>
+
+                        {showReports && (
+                            <div className="bg-secondary/20 rounded-xl border border-border p-4 animate-in slide-in-from-top-2 duration-300">
+                                <h3 className="text-sm font-bold uppercase tracking-wider mb-3 text-muted-foreground flex items-center gap-2">
+                                    <Sparkles className="h-4 w-4" /> AI Research History
+                                </h3>
+                                <div className="space-y-3">
+                                    {reportHistory.length === 0 ? (
+                                        <div className="text-xs text-muted-foreground p-4 text-center border border-dashed border-border rounded-lg">
+                                            No AI reports found for this stock yet.
+                                        </div>
+                                    ) : reportHistory.map((report, idx) => (
+                                        <div 
+                                            key={report.created_at} 
+                                            className="flex items-center justify-between p-3 bg-card border border-border rounded-lg hover:border-primary/40 transition-colors group"
+                                        >
+                                            <div className="flex flex-col gap-0.5">
+                                                <span className="text-sm font-bold">Deepseek V4-Pro Analysis</span>
+                                                <span className="text-[10px] text-muted-foreground font-mono">
+                                                    {new Date(report.created_at).toLocaleString()} | Cost: ${report.cost || '0.00'}
+                                                </span>
+                                            </div>
+                                            <button 
+                                                onClick={() => {
+                                                    setSavedReport({...report, timestamp: report.created_at});
+                                                    setShowReports(false);
+                                                }}
+                                                className="text-xs font-bold text-primary group-hover:underline px-3 py-1 bg-primary/10 rounded"
+                                            >
+                                                OPEN REPORT
+                                            </button>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
-                        </div>
+                        )}
 
                         {/* Deepseek AI Report */}
                         {savedReport && (

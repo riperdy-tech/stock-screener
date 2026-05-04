@@ -445,7 +445,7 @@ export function ScreenerDashboard() {
                                         result={result}
                                         onClick={() => setSelectedStock(result)}
                                         index={i}
-                                        lastUpdated={lastUpdatedFile}
+                                        lastUpdated={result.Last_Updated || lastUpdatedFile}
                                         market={selectedMarket}
                                     />
                                 ))}
