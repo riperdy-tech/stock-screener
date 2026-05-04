@@ -413,6 +413,40 @@ Must pass 37 audit points across:
 * SECTION 12. Final Execution Opinion (Action, Conviction, Weight%, Strategy)
 
 ════════════════════════════════════════════════════════════════
+■ [DATA_BLOCK] - MANDATORY FOR SYSTEM PARSING
+════════════════════════════════════════════════════════════════
+
+(At the very end of your response, after the Final Execution Opinion, you MUST include this exact block. Do not use markdown code blocks here, just the raw tag and valid JSON.)
+
+[DATA_BLOCK]
+{
+  "ticker": "TICKER",
+  "action": "BUY/ACCUMULATE/HOLD/SELL",
+  "conviction": 10.5,
+  "archetype": "ARCHETYPE_NAME",
+  "target_price": 0.00,
+  "current_price": 0.00,
+  "upside": 0.00,
+  "sector": "SECTOR_NAME",
+  "moat_score": 0.0,
+  "moat_direction": "WIDENING/STABLE/NARROWING",
+  "financial_strength": "EXCELLENT/GOOD/ADEQUATE/WEAK/CONCERNING",
+  "risk_rating": "LOW/MEDIUM/HIGH",
+  "sections": [
+    {"id": "overview", "title": "0. Analysis Overview"},
+    {"id": "macro", "title": "1. Macro Context"},
+    {"id": "baserate", "title": "1.5. Base Rate Check"},
+    {"id": "business", "title": "2. Business Quality"},
+    {"id": "valuation", "title": "3. Valuation Engine"},
+    {"id": "scenarios", "title": "4. Scenario Engine"},
+    {"id": "conviction", "title": "5. Conviction & Sizing"},
+    {"id": "risks", "title": "7. Risks & Catalysts"},
+    {"id": "redteam", "title": "9. Red Team"},
+    {"id": "opinion", "title": "12. Final Opinion"}
+  ]
+}
+
+════════════════════════════════════════════════════════════════
 ■ FINAL MANDATORY RULES (v2.0)
 ════════════════════════════════════════════════════════════════
 

@@ -71,24 +71,23 @@ def run_worker():
         reasoning = message.get('reasoning_content', '')
         usage = data.get('usage', {})
 
-        # --- SMART CLEANER ---
-        # If the AI returns a JSON string instead of raw markdown, extract the text.
-        try:
-            # Check if it's wrapped in markdown code blocks ```json ... ```
-            cleaned_content = content.strip()
-            if cleaned_content.startswith("```json"):
-                cleaned_content = cleaned_content.replace("```json", "").replace("```", "").strip()
-            elif cleaned_content.startswith("```"):
-                cleaned_content = cleaned_content.replace("```", "").strip()
+        # --- SMART CLEANER & METADATA EXTRACTION ---
+        metadata = {}
+        if "[DATA_BLOCK]" in content:
+            try:
+                parts = content.split("[DATA_BLOCK]")
+                content = parts[0].strip()
+                # Extract the JSON string from after the tag
+                json_part = parts[1].strip()
+                # Clean up any trailing markers from the template
+                json_part = json_part.split("════════════════")[0].strip()
+                metadata = json.loads(json_part)
+                print(f"Extracted metadata for {ticker}: {metadata.get('action')}, Conviction: {metadata.get('conviction')}")
+            except Exception as e:
+                print(f"Metadata parsing failed: {e}")
 
-            # Try to parse as actual JSON
-            parsed = json.loads(cleaned_content)
-            if isinstance(parsed, dict):
-                # If there's a 'report' or 'content' key, use that.
-                content = parsed.get('report') or parsed.get('content') or parsed.get('analysis') or content
-        except:
-            # Not JSON, keep as is
-            pass
+        # Final cleanup of leftover formatting tags
+        content = content.replace("```json", "").replace("```markdown", "").replace("```", "").strip()
         # --------------------
         
         # Pricing
@@ -100,11 +99,12 @@ def run_worker():
         from datetime import datetime, timezone
         update_data = {
             "content": content,
+            "metadata": metadata,
             "reasoning": reasoning,
             "usage": usage,
             "cost": float(f"{total_cost:.4f}"),
             "status": "completed",
-            "created_at": datetime.now(timezone.utc).isoformat()
+            "completed_at": datetime.now(timezone.utc).isoformat()
         }
         
         print(f"Saving results to Supabase for {ticker}...")
