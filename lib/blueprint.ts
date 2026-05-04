@@ -43,6 +43,7 @@ export interface ScreeningResult {
     industry?: string;
     description?: string;
     financialData?: any;
+    Last_Updated?: string;
 }
 
 // Phase 1: Quantitative Filters
