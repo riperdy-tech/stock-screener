@@ -58,13 +58,15 @@ export function ScreenerDashboard() {
     const [dsError, setDsError] = useState("");
     
     const [backgroundDsTask, setBackgroundDsTask] = useState<{ticker: string, status: 'running' | 'completed' | 'error', message?: string} | null>(null);
+    const [backgroundDsTask, setBackgroundDsTask] = useState<{ticker: string, status: 'running' | 'completed' | 'error' | 'success', message?: string} | null>(null);
     
     const handleDeepseekRun = async () => {
         if (!dsPassword) { setDsError("Please enter password"); return; }
         setDsLoading(true); setDsError("");
         setBackgroundDsTask({ ticker: selectedAiTicker || "Unknown", status: 'running' });
         try {
-            const res = await fetch("/api/deepseek", {
+            console.log("Starting analysis for:", selectedAiTicker);
+            const res = await fetch("/api/analysis", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -73,14 +75,25 @@ export function ScreenerDashboard() {
                     prompt: aiResult
                 })
             });
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || "Failed to run Deepseek");
-            setDsResult(data);
-            setShowDsPassword(false);
+
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.error || `Server error: ${res.status}`);
+            }
+
+            const dsResultData = await res.json();
+            setDsResult(dsResultData);
+            setDsLoading(false);
             setDsPassword("");
-            setBackgroundDsTask({ ticker: selectedAiTicker || "Unknown", status: 'completed' });
+            setShowDsPassword(false);
+            
+            // Background task update
+            setBackgroundDsTask({ ticker: selectedAiTicker || "Unknown", status: 'success' });
+            
         } catch (e: any) {
-            setDsError(e.message);
+            console.error("Analysis Error:", e);
+            setDsError(`Connection Error: ${e.message}. (Check if your internet or ad-blocker is blocking the request)`);
+            setDsLoading(false);
             setBackgroundDsTask({ ticker: selectedAiTicker || "Unknown", status: 'error', message: e.message });
         } finally {
             setDsLoading(false);
