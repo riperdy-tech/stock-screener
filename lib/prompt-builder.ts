@@ -225,7 +225,7 @@ export async function buildPrompt(ticker: string, result: ScreeningResult): Prom
 
     let rs2Content = "";
     try {
-        const basePath = process.env.NODE_ENV === 'production' ? '/stock-screener' : '';
+        const basePath = '';
         if (typeof window !== "undefined") {
             const response = await fetch(`${basePath}/RS2.txt`);
             rs2Content = await response.text();

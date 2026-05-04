@@ -71,8 +71,7 @@ export type Market = 'US' | 'India' | 'Korea' | 'Taiwan';
 
 export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockCandidate[], lastUpdated: string | null }> {
     try {
-        const isProd = process.env.NODE_ENV === 'production';
-        const basePath = isProd ? '/stock-screener' : '';
+        const basePath = '';
         const filename = market === 'US' ? 'stocks.csv' : 'stocks_intl.csv';
         
         const response = await fetch(`${basePath}/data/${filename}?t=${new Date().getTime()}`);

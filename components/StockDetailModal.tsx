@@ -22,7 +22,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
     useEffect(() => {
         let isMounted = true;
         const checkReport = () => {
-            const basePath = process.env.NODE_ENV === 'production' ? '/stock-screener' : '';
+            const basePath = '';
             fetch(`${basePath}/data/reports/${candidate.symbol}.json?t=${new Date().getTime()}`)
                 .then(res => {
                     if (res.ok) return res.json();

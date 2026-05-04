@@ -1,8 +1,7 @@
-const isProd = process.env.NODE_ENV === 'production';
-
 const nextConfig = {
-    output: 'export',
-    basePath: isProd ? '/stock-screener' : '',
+    // Settings optimized for Vercel deployment
+    // (Static export and sub-folder path removed to enable API routes)
+    basePath: '',
     images: {
         unoptimized: true,
     }
