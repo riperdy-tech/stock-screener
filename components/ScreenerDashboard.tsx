@@ -357,17 +357,16 @@ export function ScreenerDashboard() {
                         </div>
                         
                         <div className="flex md:hidden items-center gap-2 shrink-0">
-                             <Link href="/reports" className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-accent to-accent/80 text-white rounded-lg hover:shadow-lg hover:shadow-accent/20 transition-all text-[10px] font-black border border-accent/50 shadow-sm active:scale-95">
-                                <Sparkles className="h-3 w-3" />
+                             <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500 transition-all text-[11px] font-black shadow-[0_0_15px_rgba(37,99,235,0.4)] active:scale-95">
+                                <Sparkles className="h-3.5 w-3.5" />
                                 REPORTS
                              </Link>
-                             <button onClick={() => setIsSidebarOpen(true)} className="flex items-center gap-1.5 px-2.5 py-1.5 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors text-xs font-medium border border-border/50">
-                                <Filter className="h-3.5 w-3.5" />
-                                Filters
+                             <button onClick={() => setIsSidebarOpen(true)} className="p-2 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition-colors border border-border/50">
+                                <Filter className="h-4 w-4" />
                             </button>
                         </div>
                         
-                        <Link href="/reports" className="hidden md:flex text-sm bg-accent/20 text-accent hover:bg-accent/30 px-4 py-1.5 rounded-full font-black items-center gap-2 tracking-tighter border border-accent/30 transition-all hover:scale-105 active:scale-95 ml-6">
+                        <Link href="/reports" className="hidden md:flex text-sm bg-blue-600 text-white hover:bg-blue-500 px-6 py-2 rounded-full font-black items-center gap-2 tracking-tighter shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all hover:scale-105 active:scale-95 ml-6">
                            <Sparkles className="h-4 w-4" /> RECENT REPORTS
                         </Link>
                     </div>
@@ -549,14 +548,20 @@ export function ScreenerDashboard() {
                                         {dsResult && (
                                             <div className="relative flex-1 bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
                                                 <div className="bg-blue-500/10 px-3 sm:px-5 py-2.5 border-b border-blue-500/20 flex justify-between items-center shrink-0 flex-wrap gap-2">
-                                                    <span className="text-xs font-mono text-blue-400 uppercase tracking-wider font-semibold">Deepseek Output</span>
-                                                    <div className="flex gap-2 items-center">
-                                                        <span className="text-[10px] text-muted-foreground mr-2">
-                                                            {new Date(dsResult.timestamp).toLocaleString()} | Cost: ${dsResult.cost} | Tokens: {dsResult.usage?.total_tokens}
-                                                        </span>
-                                                        <button onClick={downloadDsResult} className="flex items-center gap-1 text-xs bg-secondary hover:bg-secondary/80 px-2 py-1 rounded">Download .txt</button>
-                                                        <button onClick={copyDsResult} className="flex items-center gap-1 text-xs bg-primary text-primary-foreground px-2 py-1 rounded">Copy Result</button>
+                                                    <span className="text-xs font-mono text-blue-400 uppercase tracking-wider font-semibold">QUANT REPORT</span>
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="flex flex-col">
+                                                            <h1 className="text-xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                                                                QUANT <span className="text-blue-500">PRO</span>
+                                                            </h1>
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest">Global Terminal</span>
+                                                                <div className="h-1 w-1 rounded-full bg-green-500 animate-pulse" />
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    <button onClick={downloadDsResult} className="flex items-center gap-1 text-xs bg-secondary hover:bg-secondary/80 px-2 py-1 rounded">Download .txt</button>
+                                                    <button onClick={copyDsResult} className="flex items-center gap-1 text-xs bg-primary text-primary-foreground px-2 py-1 rounded">Copy Result</button>
                                                 </div>
                                                 <div className="flex-1 overflow-y-auto p-4 sm:p-5">
                                                     <div className="prose prose-invert prose-sm max-w-none text-foreground/90 leading-relaxed prose-headings:text-foreground prose-a:text-blue-400">
