@@ -4,6 +4,7 @@ import { useLanguage } from "@/components/LanguageContext";
 import ReactMarkdown from "react-markdown";
 import { useEffect, useState } from "react";
 import { Market, formatKoreanWon, formatTaiwanNTD } from "@/lib/data-service";
+import { supabase } from "@/lib/supabase";
 import clsx from "clsx";
 
 interface StockDetailModalProps {
@@ -21,26 +22,54 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
 
     useEffect(() => {
         let isMounted = true;
-        const checkReport = () => {
+        const checkReport = async () => {
             const basePath = '';
-            fetch(`${basePath}/data/reports/${candidate.symbol}.json?t=${new Date().getTime()}`)
-                .then(res => {
-                    if (res.ok) return res.json();
-                    throw new Error("Not found");
-                })
-                .then(data => {
-                    if (isMounted) {
-                        setSavedReport((prev: any) => {
-                            if (!prev || prev.timestamp !== data.timestamp) {
-                                return data;
-                            }
-                            return prev;
-                        });
-                    }
-                })
-                .catch(() => {
-                    // Ignore 404s while polling
-                });
+            let fileReport: any = null;
+            let dbReport: any = null;
+
+            // 1. Check Static File (Local/Pushed)
+            try {
+                const res = await fetch(`${basePath}/data/reports/${candidate.symbol}.json?t=${new Date().getTime()}`);
+                if (res.ok) fileReport = await res.json();
+            } catch (e) {}
+
+            // 2. Check Supabase Database (Live/Cloud)
+            try {
+                const { data, error } = await supabase
+                    .from('ai_reports')
+                    .select('*')
+                    .eq('ticker', candidate.symbol)
+                    .single();
+                
+                if (data && !error) {
+                    dbReport = {
+                        ...data,
+                        timestamp: data.created_at // Map created_at to timestamp for consistency
+                    };
+                }
+            } catch (e) {}
+
+            // 3. Compare and Choose the Latest
+            if (isMounted) {
+                let latest = null;
+                if (fileReport && dbReport) {
+                    // Show whichever is newer
+                    const fileTime = new Date(fileReport.timestamp).getTime();
+                    const dbTime = new Date(dbReport.timestamp).getTime();
+                    latest = dbTime > fileTime ? dbReport : fileReport;
+                } else {
+                    latest = dbReport || fileReport;
+                }
+
+                if (latest) {
+                    setSavedReport((prev: any) => {
+                        if (!prev || prev.timestamp !== latest.timestamp) {
+                            return latest;
+                        }
+                        return prev;
+                    });
+                }
+            }
         };
         
         checkReport();

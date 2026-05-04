@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { supabase } from '@/lib/supabase';
 
 export async function POST(req: Request) {
     try {
@@ -56,8 +57,28 @@ export async function POST(req: Request) {
             cost: totalCost.toFixed(4)
         };
 
-        // Save to public/data/reports/[ticker].json (Optional Cache)
-        // Note: This will fail on read-only environments like Vercel, which is fine.
+        // --- PERSISTENCE LAYER ---
+
+        // 1. Save to Supabase (Structural Fix for Vercel/Online)
+        try {
+            const { error: sbError } = await supabase
+                .from('ai_reports')
+                .upsert({
+                    ticker,
+                    content,
+                    reasoning,
+                    usage,
+                    cost: parseFloat(totalCost.toFixed(4)),
+                    created_at: resultData.timestamp
+                });
+            
+            if (sbError) throw sbError;
+            console.log(`Successfully saved report for ${ticker} to Supabase.`);
+        } catch (sbErr) {
+            console.error("Failed to save to Supabase:", sbErr);
+        }
+
+        // 2. Save to public/data/reports/[ticker].json (Optional Backup for Local Dev)
         try {
             const reportsDir = path.join(process.cwd(), 'public', 'data', 'reports');
             if (!fs.existsSync(reportsDir)) {
