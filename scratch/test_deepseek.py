@@ -1,7 +1,7 @@
 import requests
 import json
 
-url = "http://localhost:3001/api/deepseek"
+url = "http://localhost:3000/api/deepseek"
 payload = {
     "password": "RSYS",
     "ticker": "ELVA",

@@ -42,10 +42,9 @@ export async function POST(req: Request) {
         const reasoning = data.choices?.[0]?.message?.reasoning_content || "";
         const usage = data.usage || { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 };
         
-        // Deepseek pricing (approx): input $0.14/1M, output $0.28/1M, or similar for reasoner
-        // $0.55 / 1M input, $2.19 / 1M output for reasoner
-        const inputCost = (usage.prompt_tokens / 1_000_000) * 0.55;
-        const outputCost = (usage.completion_tokens / 1_000_000) * 2.19;
+        // Deepseek V4-Pro pricing: input $1.74/1M, output $3.48/1M
+        const inputCost = (usage.prompt_tokens / 1_000_000) * 1.74;
+        const outputCost = (usage.completion_tokens / 1_000_000) * 3.48;
         const totalCost = inputCost + outputCost;
 
         const resultData = {

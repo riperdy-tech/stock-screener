@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   fetch-and-push:
@@ -34,16 +35,10 @@ jobs:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
           # Add the scripts you want to run automatically here
-          # For example, to run the main fetcher:
           python scripts/fetch_data.py
           
-          # To run international fetchers:
-          # python scripts/fetch_data_intl.py
-          
-          # To compile international CSV:
-          # python scripts/compile_intl_csv.py
-          
       - name: Commit and Push Changes
+        id: push_changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -56,7 +51,26 @@ jobs:
           git add public/data/scan.log || true
           
           # Commit if there are changes
-          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update: Scheduled stock data refresh"
-          
-          # Push to the current branch
-          git push
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "Auto-update: Scheduled stock data refresh"
+            
+            # Pull latest changes and rebase to avoid push conflicts
+            git pull --rebase origin main
+            
+            # Push to the current branch
+            git push origin main
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+        outputs:
+          changes: ${{ steps.push_changes.outputs.changes }}
+
+      - name: Trigger Deployment
+        if: steps.push_changes.outputs.changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Triggering deployment workflow..."
+          gh workflow run deploy.yml --ref main

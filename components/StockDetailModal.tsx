@@ -45,26 +45,6 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
         
         checkReport();
         const interval = setInterval(checkReport, 5000); // Check every 5 seconds
-        
-        const downloadDsResult = () => {
-        if (!savedReport) return;
-        const text = `Date: ${savedReport.timestamp}\nCost: $${savedReport.cost}\n\n${savedReport.content}`;
-        const blob = new Blob([text], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${candidate.symbol}_deepseek_report.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    };
-
-    const copyDsResult = () => {
-        if (!savedReport) return;
-        navigator.clipboard.writeText(savedReport.content);
-        alert("Copied!");
-    };
 
     return () => {
             isMounted = false;

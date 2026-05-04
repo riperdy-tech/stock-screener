@@ -17,6 +17,9 @@ echo.
 echo Committing changes...
 git commit -m "Update stock data: Scheduled country refresh results"
 
+echo Pulling latest changes from remote...
+git pull --rebase origin main
+
 echo.
 echo Pushing to GitHub...
 git push origin main
