@@ -78,9 +78,12 @@ export function ReportsDashboard() {
                 </div>
             </header>
 
-            <div className="flex-1 flex overflow-hidden">
-                {/* List Sidebar */}
-                <div className="w-full md:w-80 border-r border-white/5 overflow-y-auto no-scrollbar bg-[#0d1117]/50">
+            <div className="flex-1 flex overflow-hidden relative">
+                {/* List Sidebar - Hidden on mobile if report selected */}
+                <div className={clsx(
+                    "w-full md:w-80 border-r border-white/5 overflow-y-auto no-scrollbar bg-[#0d1117]/50 transition-all",
+                    selectedReport && "hidden md:block"
+                )}>
                     {loading ? (
                         <div className="flex flex-col items-center justify-center h-64 gap-4 text-muted-foreground">
                             <RefreshCw className="h-6 w-6 animate-spin text-accent" />
@@ -126,9 +129,19 @@ export function ReportsDashboard() {
                 </div>
 
                 {/* Report Content Viewer */}
-                <main className="flex-1 bg-[#0a0c10] overflow-y-auto no-scrollbar relative">
+                <main className={clsx(
+                    "flex-1 bg-[#0a0c10] overflow-y-auto no-scrollbar relative transition-all",
+                    !selectedReport && "hidden md:block"
+                )}>
                     {selectedReport ? (
-                        <div className="p-6 md:p-12 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div className="p-4 md:p-12 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+                            {/* Mobile Back Button */}
+                            <button 
+                                onClick={() => setSelectedReport(null)}
+                                className="md:hidden flex items-center gap-2 mb-8 text-blue-400 font-bold text-sm bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-transform"
+                            >
+                                <ArrowLeft className="h-4 w-4" /> BACK TO LIST
+                            </button>
                             <div className="flex justify-between items-start mb-8">
                                 <div>
                                     <h2 className="text-4xl font-black tracking-tighter text-foreground mb-2 flex items-center gap-4">
