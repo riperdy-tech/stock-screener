@@ -57,7 +57,6 @@ export function ScreenerDashboard() {
     const [dsResult, setDsResult] = useState<any>(null);
     const [dsError, setDsError] = useState("");
     
-    const [backgroundDsTask, setBackgroundDsTask] = useState<{ticker: string, status: 'running' | 'completed' | 'error', message?: string} | null>(null);
     const [backgroundDsTask, setBackgroundDsTask] = useState<{ticker: string, status: 'running' | 'completed' | 'error' | 'success', message?: string} | null>(null);
     
     const handleDeepseekRun = async () => {
