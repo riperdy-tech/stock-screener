@@ -40,7 +40,20 @@ export function ReportsDashboard() {
 
     const filteredReports = reports.filter(r => {
         const matchesSearch = r.ticker.toLowerCase().includes(search.toLowerCase());
-        const meta = r.metadata || {};
+        
+        // Dynamic Metadata Extraction (Fallback if DB column missing)
+        let meta = r.metadata || {};
+        if (!r.metadata && r.content) {
+            try {
+                const blockMatch = r.content.match(/\[DATA_BLOCK\]\s*([\s\S]*?)(?=\s*\[\/DATA_BLOCK\]|$)/i);
+                if (blockMatch && blockMatch[1]) {
+                    meta = JSON.parse(blockMatch[1].trim());
+                }
+            } catch (e) {
+                console.warn("Failed to parse dynamic metadata for", r.ticker);
+            }
+        }
+
         const matchesAction = filterAction === "ALL" || meta.action === filterAction;
         const matchesArchetype = filterArchetype === "ALL" || meta.archetype === filterArchetype;
         const matchesValuation = filterValuation === "ALL" || meta.valuation_status === filterValuation;
@@ -157,7 +170,17 @@ export function ReportsDashboard() {
                         ) : (
                             <div className="flex flex-col">
                                 {filteredReports.map((report) => {
-                                    const meta = report.metadata || {};
+                                    // Dynamic Metadata Extraction
+                                    let meta = report.metadata || {};
+                                    if (!report.metadata && report.content) {
+                                        try {
+                                            const blockMatch = report.content.match(/\[DATA_BLOCK\]\s*([\s\S]*?)(?=\s*\[\/DATA_BLOCK\]|$)/i);
+                                            if (blockMatch && blockMatch[1]) {
+                                                meta = JSON.parse(blockMatch[1].trim());
+                                            }
+                                        } catch (e) {}
+                                    }
+                                    
                                     const upside = parseFloat(meta.upside || 0);
                                     const isPositive = upside > 0;
                                     const isHighUpside = upside > 15;
@@ -248,36 +271,53 @@ export function ReportsDashboard() {
                             </div>
 
                             <div className="flex-1 p-4 md:p-12 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
-                                {/* Mobile Back Button */}
-                                <button 
-                                    onClick={() => setSelectedReport(null)}
-                                    className="md:hidden flex items-center gap-2 mb-8 text-blue-400 font-bold text-sm bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-transform"
-                                >
-                                    <ArrowLeft className="h-4 w-4" /> BACK TO LIST
-                                </button>
-                                
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-                                    <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
-                                        <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Conviction</div>
-                                        <div className="text-3xl font-black text-blue-500 tracking-tighter">{selectedReport.metadata?.conviction || 'N/A'}</div>
-                                        <div className="text-[9px] font-bold text-blue-500/40 uppercase mt-1">Scale 0-15</div>
-                                    </div>
-                                    <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
-                                        <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Intrinsic Upside</div>
-                                        <div className={clsx(
-                                            "text-3xl font-black tracking-tighter",
-                                            (selectedReport.metadata?.upside || 0) > 0 ? "text-green-400" : "text-red-400"
-                                        )}>
-                                            {(selectedReport.metadata?.upside || 0) > 0 ? '+' : ''}{selectedReport.metadata?.upside || '0.0'}%
-                                        </div>
-                                        <div className="text-[9px] font-bold text-muted-foreground/40 uppercase mt-1">vs Target Price</div>
-                                    </div>
-                                    <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
-                                        <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Archetype</div>
-                                        <div className="text-xl font-black text-white tracking-tighter uppercase whitespace-nowrap">{selectedReport.metadata?.archetype || 'N/A'}</div>
-                                        <div className="text-[9px] font-bold text-muted-foreground/40 uppercase mt-1">Risk Profile</div>
-                                    </div>
-                                </div>
+                                {/* Dynamic Metadata Extraction for View */}
+                                {(() => {
+                                    let meta = selectedReport.metadata || {};
+                                    if (!selectedReport.metadata && selectedReport.content) {
+                                        try {
+                                            const blockMatch = selectedReport.content.match(/\[DATA_BLOCK\]\s*([\s\S]*?)(?=\s*\[\/DATA_BLOCK\]|$)/i);
+                                            if (blockMatch && blockMatch[1]) {
+                                                meta = JSON.parse(blockMatch[1].trim());
+                                            }
+                                        } catch (e) {}
+                                    }
+
+                                    return (
+                                        <>
+                                            {/* Mobile Back Button */}
+                                            <button 
+                                                onClick={() => setSelectedReport(null)}
+                                                className="md:hidden flex items-center gap-2 mb-8 text-blue-400 font-bold text-sm bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-transform"
+                                            >
+                                                <ArrowLeft className="h-4 w-4" /> BACK TO LIST
+                                            </button>
+
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                                                <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+                                                    <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Conviction</div>
+                                                    <div className="text-3xl font-black text-blue-500 tracking-tighter">{meta.conviction || 'N/A'}</div>
+                                                    <div className="text-[9px] font-bold text-blue-500/40 uppercase mt-1">Scale 0-15</div>
+                                                </div>
+                                                <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+                                                    <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Intrinsic Upside</div>
+                                                    <div className={clsx(
+                                                        "text-3xl font-black tracking-tighter",
+                                                        (parseFloat(meta.upside || 0)) > 0 ? "text-green-400" : "text-red-400"
+                                                    )}>
+                                                        {(parseFloat(meta.upside || 0)) > 0 ? '+' : ''}{meta.upside || '0.0'}%
+                                                    </div>
+                                                    <div className="text-[9px] font-bold text-muted-foreground/40 uppercase mt-1">vs Target Price</div>
+                                                </div>
+                                                <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+                                                    <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Archetype</div>
+                                                    <div className="text-xl font-black text-white tracking-tighter uppercase whitespace-nowrap">{meta.archetype || 'N/A'}</div>
+                                                    <div className="text-[9px] font-bold text-muted-foreground/40 uppercase mt-1">Risk Profile</div>
+                                                </div>
+                                            </div>
+                                        </>
+                                    );
+                                })()}
 
                                 <div className="flex justify-between items-start mb-8">
                                     <div>
