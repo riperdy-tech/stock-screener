@@ -104,7 +104,7 @@ def run_worker():
             "usage": usage,
             "cost": float(f"{total_cost:.4f}"),
             "status": "completed",
-            "completed_at": datetime.now(timezone.utc).isoformat()
+            "created_at": datetime.now(timezone.utc).isoformat()
         }
         
         print(f"Saving results to Supabase for {ticker}...")
