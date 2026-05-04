@@ -18,7 +18,19 @@ def run_worker():
 
     supabase = create_client(url, key)
     
-    # 1. Find the oldest pending request
+    # 1. First, clear any "zombie" jobs that have been pending for more than 10 minutes
+    # This prevents the queue from being blocked by old, failed runs.
+    try:
+        from datetime import datetime, timedelta, timezone
+        ten_mins_ago = (datetime.now(timezone.utc) - timedelta(minutes=10)).isoformat()
+        supabase.table("ai_reports").update({
+            "status": "error",
+            "content": "Analysis timed out or worker crashed."
+        }).eq("status", "pending").lt("created_at", ten_mins_ago).execute()
+    except Exception as e:
+        print(f"Queue cleanup failed: {e}")
+
+    # 2. Find the oldest legitimate pending request
     res = supabase.table("ai_reports").select("*").eq("status", "pending").order("created_at").limit(1).execute()
     
     if not res.data:
@@ -26,14 +38,14 @@ def run_worker():
         return
         
     job = res.data[0]
+    job_id = job.get('id') # Use internal ID for precision
     ticker = job['ticker']
     prompt = job['prompt']
     
-    print(f"Processing analysis for {ticker}...")
+    print(f"Processing analysis for {ticker} (Job ID: {job_id})...")
 
-    # 2. Call Deepseek
+    # 3. Call Deepseek
     try:
-        # Using the DeepSeek-V4-Pro model with thinking enabled
         response = requests.post(
             "https://api.deepseek.com/chat/completions",
             headers={
@@ -43,11 +55,9 @@ def run_worker():
             json={
                 "model": "deepseek-v4-pro",
                 "messages": [{"role": "user", "content": prompt}],
-                "thinking": {
-                    "type": "enabled"
-                }
+                "thinking": {"type": "enabled"}
             },
-            timeout=600 # V4-Pro thinking can take a while
+            timeout=600
         )
         
         if response.status_code != 200:
@@ -59,30 +69,35 @@ def run_worker():
         reasoning = message.get('reasoning_content', '')
         usage = data.get('usage', {})
         
-        # Deepseek V4-Pro Pricing (Adjusted based on standard V4 tiers)
-        # Input: $1.74 / 1M, Output: $3.48 / 1M
+        # Pricing
         input_cost = (usage.get('prompt_tokens', 0) / 1_000_000) * 1.74
         output_cost = (usage.get('completion_tokens', 0) / 1_000_000) * 3.48
         total_cost = input_cost + output_cost
 
-        # 3. Update Supabase with results
-        supabase.table("ai_reports").update({
+        # 4. Update Supabase
+        update_data = {
             "content": content,
             "reasoning": reasoning,
             "usage": usage,
             "cost": float(f"{total_cost:.4f}"),
             "status": "completed",
-            "created_at": "now()" # Update timestamp to when it finished
-        }).eq("ticker", ticker).execute()
+            "created_at": "now()"
+        }
         
-        print(f"Analysis for {ticker} completed and saved.")
+        if job_id:
+            supabase.table("ai_reports").update(update_data).eq("id", job_id).execute()
+        else:
+            supabase.table("ai_reports").update(update_data).eq("ticker", ticker).eq("status", "pending").execute()
+            
+        print(f"Analysis for {ticker} completed.")
 
     except Exception as e:
         print(f"Error processing {ticker}: {e}")
-        supabase.table("ai_reports").update({
-            "status": "error",
-            "content": f"Analysis failed: {str(e)}"
-        }).eq("ticker", ticker).execute()
+        error_msg = f"Analysis failed: {str(e)}"
+        if job_id:
+            supabase.table("ai_reports").update({"status": "error", "content": error_msg}).eq("id", job_id).execute()
+        else:
+            supabase.table("ai_reports").update({"status": "error", "content": error_msg}).eq("ticker", ticker).eq("status", "pending").execute()
 
 if __name__ == "__main__":
     run_worker()
