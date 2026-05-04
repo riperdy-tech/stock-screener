@@ -75,29 +75,34 @@ def run_worker():
         total_cost = input_cost + output_cost
 
         # 4. Update Supabase
+        from datetime import datetime, timezone
         update_data = {
             "content": content,
             "reasoning": reasoning,
             "usage": usage,
             "cost": float(f"{total_cost:.4f}"),
             "status": "completed",
-            "created_at": "now()"
+            "created_at": datetime.now(timezone.utc).isoformat()
         }
         
+        print(f"Saving results to Supabase for {ticker}...")
         if job_id:
-            supabase.table("ai_reports").update(update_data).eq("id", job_id).execute()
+            res = supabase.table("ai_reports").update(update_data).eq("id", job_id).execute()
         else:
-            supabase.table("ai_reports").update(update_data).eq("ticker", ticker).eq("status", "pending").execute()
+            res = supabase.table("ai_reports").update(update_data).eq("ticker", ticker).eq("status", "pending").execute()
             
-        print(f"Analysis for {ticker} completed.")
+        print(f"Analysis for {ticker} completed successfully.")
 
     except Exception as e:
-        print(f"Error processing {ticker}: {e}")
+        print(f"CRITICAL ERROR processing {ticker}: {e}")
         error_msg = f"Analysis failed: {str(e)}"
-        if job_id:
-            supabase.table("ai_reports").update({"status": "error", "content": error_msg}).eq("id", job_id).execute()
-        else:
-            supabase.table("ai_reports").update({"status": "error", "content": error_msg}).eq("ticker", ticker).eq("status", "pending").execute()
+        try:
+            if job_id:
+                supabase.table("ai_reports").update({"status": "error", "content": error_msg}).eq("id", job_id).execute()
+            else:
+                supabase.table("ai_reports").update({"status": "error", "content": error_msg}).eq("ticker", ticker).eq("status", "pending").execute()
+        except Exception as db_err:
+            print(f"Failed to even save the error status to DB: {db_err}")
 
 if __name__ == "__main__":
     run_worker()
