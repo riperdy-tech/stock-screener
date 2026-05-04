@@ -272,21 +272,28 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                             </div>
                         </div>
 
-                                                {/* REPORTS Action Section */}
-                        <div className="flex items-center gap-4 border-b border-border pb-4">
+                                                {/* REPORTS Action Section - Made prominent and sticky-friendly */}
+                        <div className="flex flex-col sm:flex-row items-center gap-3 border-y border-border/50 py-4 my-2">
                             <button 
                                 onClick={() => setShowReports(!showReports)}
                                 className={clsx(
-                                    "flex items-center gap-2 px-6 py-2.5 rounded-lg font-bold transition-all shadow-sm border",
-                                    showReports ? "bg-primary text-primary-foreground border-primary" : "bg-secondary hover:bg-secondary/80 text-foreground border-border"
+                                    "w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-xl font-black transition-all shadow-lg active:scale-95 border-2",
+                                    showReports 
+                                        ? "bg-primary text-primary-foreground border-primary" 
+                                        : "bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/80 hover:to-secondary text-foreground border-border/50"
                                 )}
                             >
-                                <Activity className="h-4 w-4" />
-                                {showReports ? "CLOSE REPORTS" : "VIEW REPORTS"}
+                                <Activity className="h-5 w-5" />
+                                {showReports ? "CLOSE ANALYSIS" : "VIEW REPORTS"}
                             </button>
-                            <span className="text-xs text-muted-foreground italic font-medium">
-                                {reportHistory.length} analyses available in cloud
-                            </span>
+                            <div className="flex flex-col items-center sm:items-start">
+                                <span className="text-[10px] sm:text-xs text-muted-foreground font-bold uppercase tracking-widest">
+                                    Analysis History
+                                </span>
+                                <span className="text-[10px] text-primary font-mono font-bold">
+                                    {reportHistory.length} Cloud Records Found
+                                </span>
+                            </div>
                         </div>
 
                         {showReports && (
