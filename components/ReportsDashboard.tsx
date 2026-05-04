@@ -180,6 +180,8 @@ export function ReportsDashboard() {
                                             {selectedReport.content
                                                 .replace(/^```(markdown|json|text)?/i, '')
                                                 .replace(/```$/, '')
+                                                .replace(/\\n/g, '\n')
+                                                .replace(/\\t/g, '\t')
                                                 .trim()}
                                         </ReactMarkdown>
                                     </div>
