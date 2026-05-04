@@ -70,6 +70,26 @@ def run_worker():
         content = message['content']
         reasoning = message.get('reasoning_content', '')
         usage = data.get('usage', {})
+
+        # --- SMART CLEANER ---
+        # If the AI returns a JSON string instead of raw markdown, extract the text.
+        try:
+            # Check if it's wrapped in markdown code blocks ```json ... ```
+            cleaned_content = content.strip()
+            if cleaned_content.startswith("```json"):
+                cleaned_content = cleaned_content.replace("```json", "").replace("```", "").strip()
+            elif cleaned_content.startswith("```"):
+                cleaned_content = cleaned_content.replace("```", "").strip()
+
+            # Try to parse as actual JSON
+            parsed = json.loads(cleaned_content)
+            if isinstance(parsed, dict):
+                # If there's a 'report' or 'content' key, use that.
+                content = parsed.get('report') or parsed.get('content') or parsed.get('analysis') or content
+        except:
+            # Not JSON, keep as is
+            pass
+        # --------------------
         
         # Pricing
         input_cost = (usage.get('prompt_tokens', 0) / 1_000_000) * 1.74
