@@ -28,16 +28,23 @@ export async function POST(req: Request) {
         const ghToken = process.env.GH_PAT || process.env.GITHUB_TOKEN;
         if (ghToken) {
             try {
-                await fetch(`https://api.github.com/repos/riperdy-tech/stock-screener/dispatches`, {
+                const ghRes = await fetch(`https://api.github.com/repos/riperdy-tech/stock-screener/dispatches`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${ghToken}`,
                         'Accept': 'application/vnd.github.v3+json',
                         'Content-Type': 'application/json',
+                        'User-Agent': 'StockScreener-App'
                     },
                     body: JSON.stringify({ event_type: 'trigger-ai-analysis' })
                 });
-                console.log("GitHub Worker triggered successfully.");
+                
+                if (!ghRes.ok) {
+                    const errText = await ghRes.text();
+                    console.error("GitHub Dispatch Failed:", ghRes.status, errText);
+                } else {
+                    console.log("GitHub Worker triggered successfully.");
+                }
             } catch (ghErr) {
                 console.warn("Could not trigger GitHub Action automatically:", ghErr);
             }
