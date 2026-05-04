@@ -563,10 +563,13 @@ export function ScreenerDashboard() {
                                                     <button onClick={downloadDsResult} className="flex items-center gap-1 text-xs bg-secondary hover:bg-secondary/80 px-2 py-1 rounded">Download .txt</button>
                                                     <button onClick={copyDsResult} className="flex items-center gap-1 text-xs bg-primary text-primary-foreground px-2 py-1 rounded">Copy Result</button>
                                                 </div>
-                                                <div className="flex-1 overflow-y-auto p-4 sm:p-5">
-                                                    <div className="prose prose-invert prose-sm max-w-none text-foreground/90 leading-relaxed prose-headings:text-foreground prose-a:text-blue-400">
+                                                <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-slate-950/40 backdrop-blur-md">
+                                                    <div className="prose prose-invert prose-blue max-w-none break-words whitespace-pre-wrap font-sans text-slate-100 leading-relaxed text-base sm:text-lg">
                                                         <ReactMarkdown>
-                                                            {dsResult.content}
+                                                            {dsResult.content
+                                                                .replace(/^```(markdown|json|text)?/i, '')
+                                                                .replace(/```$/, '')
+                                                                .trim()}
                                                         </ReactMarkdown>
                                                     </div>
                                                 </div>

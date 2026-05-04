@@ -165,18 +165,22 @@ export function ReportsDashboard() {
                                     </div>
                                 </div>
                             ) : (
-                                <div className="prose prose-invert prose-blue max-w-none">
-                                    <div className="bg-[#161b22] border border-white/5 rounded-2xl p-6 md:p-8 shadow-2xl shadow-black/50">
+                                <div className="prose prose-invert prose-blue max-w-none font-sans">
+                                    <div className="bg-slate-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 md:p-10 shadow-2xl shadow-black/50 whitespace-pre-wrap break-words text-slate-100 text-base sm:text-lg leading-relaxed">
                                         <ReactMarkdown 
                                             components={{
-                                                h1: ({node, ...props}) => <h1 className="text-2xl font-bold mt-8 mb-4 text-foreground border-b border-white/5 pb-2" {...props} />,
-                                                h2: ({node, ...props}) => <h2 className="text-xl font-bold mt-6 mb-3 text-accent" {...props} />,
-                                                p: ({node, ...props}) => <p className="mb-4 text-foreground/90 leading-relaxed" {...props} />,
-                                                li: ({node, ...props}) => <li className="mb-1 text-foreground/90" {...props} />,
-                                                code: ({node, ...props}) => <code className="bg-white/10 px-1 rounded text-accent" {...props} />
+                                                h1: ({node, ...props}) => <h1 className="text-3xl font-black mt-10 mb-6 text-foreground tracking-tight border-b border-white/10 pb-4" {...props} />,
+                                                h2: ({node, ...props}) => <h2 className="text-2xl font-bold mt-8 mb-4 text-blue-400" {...props} />,
+                                                h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-6 mb-3 text-slate-100" {...props} />,
+                                                p: ({node, ...props}) => <p className="mb-6 text-slate-300 leading-relaxed font-medium" {...props} />,
+                                                li: ({node, ...props}) => <li className="mb-2 text-slate-300 font-medium" {...props} />,
+                                                code: ({node, ...props}) => <code className="bg-blue-500/10 px-1.5 py-0.5 rounded text-blue-300 font-mono text-sm" {...props} />
                                             }}
                                         >
-                                            {selectedReport.content}
+                                            {selectedReport.content
+                                                .replace(/^```(markdown|json|text)?/i, '')
+                                                .replace(/```$/, '')
+                                                .trim()}
                                         </ReactMarkdown>
                                     </div>
                                 </div>
