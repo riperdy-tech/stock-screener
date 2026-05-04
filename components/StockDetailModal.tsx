@@ -19,6 +19,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
     const { candidate, reasons, flags, score } = result;
 
     const [savedReport, setSavedReport] = useState<any>(null);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
@@ -107,14 +108,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
             <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card border border-border rounded-xl shadow-2xl animate-in zoom-in-95 duration-200">
 
                 {/* Header */}
-                <div className="sticky top-0 z-10 flex items-center justify-between p-6 bg-card border-b border-border">
-                    <div>
+                <div className="sticky top-0 z-10 flex items-center justify-between p-4 sm:p-6 bg-card border-b border-border">
+                    <div className="flex-1 min-w-0">
                         <div className="flex flex-col gap-1">
                             <div className="flex items-center gap-3">
-                                <h2 className="text-3xl font-bold">
+                                <h2 className="text-xl sm:text-3xl font-bold truncate">
                                     {market === 'Korea' ? candidate.name : market === 'Taiwan' ? candidate.name : candidate.symbol.replace(/\.(NS|BO)$/, '')}
                                 </h2>
-                                <span className="text-xl text-muted-foreground font-light px-2 border-l border-border">
+                                <span className="text-base sm:text-xl text-muted-foreground font-light px-2 border-l border-border truncate">
                                     {market === 'Korea' ? candidate.symbol.split('.')[0] : market === 'Taiwan' ? candidate.symbol : candidate.name}
                                 </span>
                             </div>
@@ -133,9 +134,22 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                 )}
                             </div>
 
-                            <p className="text-xs text-muted-foreground mt-2 max-w-2xl leading-relaxed">
-                                {result.description || t('noDesc')}
-                            </p>
+                            <div className="mt-2 group">
+                                <p className={clsx(
+                                    "text-xs text-muted-foreground leading-relaxed transition-all duration-300",
+                                    !isExpanded && (result.description || "").length > 120 ? "line-clamp-2" : ""
+                                )}>
+                                    {result.description || t('noDesc')}
+                                </p>
+                                {(result.description || "").length > 120 && (
+                                    <button 
+                                        onClick={() => setIsExpanded(!isExpanded)}
+                                        className="text-[10px] font-bold text-primary hover:text-primary/80 mt-1 uppercase tracking-wider"
+                                    >
+                                        {isExpanded ? "Show Less" : "Read More"}
+                                    </button>
+                                )}
+                            </div>
                         </div>
 
                         <div className="flex items-center gap-4 mt-4">
