@@ -96,11 +96,8 @@ def run_worker():
         total_cost = input_cost + output_cost
 
         # 4. Update Supabase
-        from datetime import datetime, timezone
         update_data = {
             "content": content,
-            "metadata": metadata,
-            "reasoning": reasoning,
             "usage": usage,
             "cost": float(f"{total_cost:.4f}"),
             "status": "completed",
