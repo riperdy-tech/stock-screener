@@ -33,7 +33,7 @@ def run_worker():
 
     # 2. Call Deepseek
     try:
-        # Use deepseek-reasoner for the 'Thinking' model
+        # Using the DeepSeek-V4-Pro model with thinking enabled
         response = requests.post(
             "https://api.deepseek.com/chat/completions",
             headers={
@@ -41,11 +41,13 @@ def run_worker():
                 "Authorization": f"Bearer {deepseek_key}"
             },
             json={
-                "model": "deepseek-reasoner",
+                "model": "deepseek-v4-pro",
                 "messages": [{"role": "user", "content": prompt}],
-                "stream": False
+                "thinking": {
+                    "type": "enabled"
+                }
             },
-            timeout=300
+            timeout=600 # V4-Pro thinking can take a while
         )
         
         if response.status_code != 200:
@@ -57,10 +59,10 @@ def run_worker():
         reasoning = message.get('reasoning_content', '')
         usage = data.get('usage', {})
         
-        # Deepseek Reasoner Pricing (Estimated for V3/R1)
-        # Input: $0.55 / 1M, Output: $2.19 / 1M
-        input_cost = (usage.get('prompt_tokens', 0) / 1_000_000) * 0.55
-        output_cost = (usage.get('completion_tokens', 0) / 1_000_000) * 2.19
+        # Deepseek V4-Pro Pricing (Adjusted based on standard V4 tiers)
+        # Input: $1.74 / 1M, Output: $3.48 / 1M
+        input_cost = (usage.get('prompt_tokens', 0) / 1_000_000) * 1.74
+        output_cost = (usage.get('completion_tokens', 0) / 1_000_000) * 3.48
         total_cost = input_cost + output_cost
 
         # 3. Update Supabase with results
