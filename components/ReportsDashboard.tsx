@@ -300,7 +300,8 @@ export function ReportsDashboard() {
                                 </div>
                             )}
                         </div>
-                    ) : (
+                    </>
+                ) : (
                         <div className="h-full flex flex-col items-center justify-center text-muted-foreground p-12 text-center">
                             <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mb-6 border border-white/5">
                                 <FileText className="h-10 w-10 opacity-20" />
