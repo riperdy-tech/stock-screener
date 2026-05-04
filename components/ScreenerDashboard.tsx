@@ -357,7 +357,7 @@ export function ScreenerDashboard() {
                         </div>
                         
                         <div className="flex md:hidden items-center gap-2 shrink-0">
-                             <Link href="/reports" className="flex items-center gap-1.5 px-2.5 py-1.5 bg-accent/10 text-accent rounded-md hover:bg-accent/20 transition-colors text-xs font-black border border-accent/20 shadow-sm">
+                             <Link href="/reports" className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-accent to-accent/80 text-white rounded-lg hover:shadow-lg hover:shadow-accent/20 transition-all text-[10px] font-black border border-accent/50 shadow-sm active:scale-95">
                                 <Sparkles className="h-3 w-3" />
                                 REPORTS
                              </Link>
@@ -367,7 +367,7 @@ export function ScreenerDashboard() {
                             </button>
                         </div>
                         
-                        <Link href="/reports" className="hidden md:flex text-sm text-accent hover:underline ml-6 font-bold items-center gap-2 tracking-tight">
+                        <Link href="/reports" className="hidden md:flex text-sm bg-accent/20 text-accent hover:bg-accent/30 px-4 py-1.5 rounded-full font-black items-center gap-2 tracking-tighter border border-accent/30 transition-all hover:scale-105 active:scale-95 ml-6">
                            <Sparkles className="h-4 w-4" /> RECENT REPORTS
                         </Link>
                     </div>
