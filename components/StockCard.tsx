@@ -77,5 +77,3 @@ export function StockCard({ result, onClick, index = 0, lastUpdated, market = 'U
         </div>
     );
 }
-
-}
