@@ -12,6 +12,9 @@ export function ReportsDashboard() {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [selectedReport, setSelectedReport] = useState<any>(null);
+    const [filterAction, setFilterAction] = useState("ALL");
+    const [filterConviction, setFilterConviction] = useState(0);
+    const [filterArchetype, setFilterArchetype] = useState("ALL");
 
     useEffect(() => {
         fetchReports();
@@ -34,9 +37,15 @@ export function ReportsDashboard() {
         }
     };
 
-    const filteredReports = reports.filter(r => 
-        r.ticker.toLowerCase().includes(search.toLowerCase())
-    );
+    const filteredReports = reports.filter(r => {
+        const matchesSearch = r.ticker.toLowerCase().includes(search.toLowerCase());
+        const meta = r.metadata || {};
+        const matchesAction = filterAction === "ALL" || meta.action === filterAction;
+        const matchesArchetype = filterArchetype === "ALL" || meta.archetype === filterArchetype;
+        const matchesConviction = (meta.conviction || 0) >= filterConviction;
+        
+        return matchesSearch && matchesAction && matchesArchetype && matchesConviction;
+    });
 
     const downloadReport = (report: any) => {
         const element = document.createElement("a");
@@ -81,10 +90,49 @@ export function ReportsDashboard() {
             <div className="flex-1 flex overflow-hidden relative">
                 {/* List Sidebar - Hidden on mobile if report selected */}
                 <div className={clsx(
-                    "w-full md:w-80 border-r border-white/5 overflow-y-auto no-scrollbar bg-[#0d1117]/50 transition-all",
-                    selectedReport && "hidden md:block"
+                    "w-full md:w-96 border-r border-white/5 overflow-y-auto no-scrollbar bg-[#0d1117]/50 transition-all flex flex-col",
+                    selectedReport && "hidden md:flex"
                 )}>
-                    {loading ? (
+                    {/* Filter Bar */}
+                    <div className="p-4 border-b border-white/5 space-y-3 bg-[#0d1117]">
+                        <div className="flex gap-2">
+                            <select 
+                                value={filterAction} 
+                                onChange={(e) => setFilterAction(e.target.value)}
+                                className="flex-1 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-xs font-bold text-blue-400 focus:outline-none"
+                            >
+                                <option value="ALL">ALL ACTIONS</option>
+                                <option value="BUY">BUY</option>
+                                <option value="ACCUMULATE">ACCUMULATE</option>
+                                <option value="HOLD">HOLD</option>
+                                <option value="SELL">SELL</option>
+                            </select>
+                            <select 
+                                value={filterArchetype} 
+                                onChange={(e) => setFilterArchetype(e.target.value)}
+                                className="flex-1 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-xs font-bold text-muted-foreground focus:outline-none"
+                            >
+                                <option value="ALL">ALL ARCHETYPES</option>
+                                <option value="Stable Incumbent">STABLE</option>
+                                <option value="Quality Compounder">COMPOUNDER</option>
+                                <option value="Cyclical">CYCLICAL</option>
+                                <option value="Product-Platform Hybrid">HYBRID</option>
+                                <option value="Option-Led / High-Beta">HIGH-BETA</option>
+                            </select>
+                        </div>
+                        <div className="flex items-center gap-3 px-1">
+                            <span className="text-[10px] font-black text-muted-foreground uppercase whitespace-nowrap">Min Conviction: {filterConviction}</span>
+                            <input 
+                                type="range" min="0" max="15" step="0.5" 
+                                value={filterConviction} 
+                                onChange={(e) => setFilterConviction(parseFloat(e.target.value))}
+                                className="flex-1 h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto">
+                        {loading ? (
                         <div className="flex flex-col items-center justify-center h-64 gap-4 text-muted-foreground">
                             <RefreshCw className="h-6 w-6 animate-spin text-accent" />
                             <span className="text-xs font-bold uppercase tracking-widest">Fetching Cloud...</span>
@@ -128,20 +176,47 @@ export function ReportsDashboard() {
                     )}
                 </div>
 
-                {/* Report Content Viewer */}
                 <main className={clsx(
-                    "flex-1 bg-[#0a0c10] overflow-y-auto no-scrollbar relative transition-all",
-                    !selectedReport && "hidden md:block"
+                    "flex-1 bg-[#0a0c10] overflow-y-auto no-scrollbar relative transition-all flex",
+                    !selectedReport && "hidden md:flex"
                 )}>
                     {selectedReport ? (
-                        <div className="p-4 md:p-12 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            {/* Mobile Back Button */}
-                            <button 
-                                onClick={() => setSelectedReport(null)}
-                                className="md:hidden flex items-center gap-2 mb-8 text-blue-400 font-bold text-sm bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-transform"
-                            >
-                                <ArrowLeft className="h-4 w-4" /> BACK TO LIST
-                            </button>
+                        <>
+                            {/* Table of Contents Sidebar (Desktop) */}
+                            <div className="hidden xl:block w-64 shrink-0 border-r border-white/5 p-8 sticky top-0 h-screen overflow-y-auto no-scrollbar">
+                                <h3 className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-6">Table of Contents</h3>
+                                <div className="space-y-4">
+                                    {(selectedReport.metadata?.sections || [
+                                        {id: "overview", title: "Overview"},
+                                        {id: "macro", title: "Macro Context"},
+                                        {id: "business", title: "Business Quality"},
+                                        {id: "valuation", title: "Valuation"},
+                                        {id: "scenarios", title: "Scenarios"},
+                                        {id: "risks", title: "Risks & Catalysts"},
+                                        {id: "redteam", title: "Red Team"}
+                                    ]).map((section: any) => (
+                                        <button 
+                                            key={section.id}
+                                            onClick={() => {
+                                                const el = document.getElementById(section.id);
+                                                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                            }}
+                                            className="block text-left text-xs font-bold text-muted-foreground hover:text-white transition-colors"
+                                        >
+                                            {section.title}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="flex-1 p-4 md:p-12 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                {/* Mobile Back Button */}
+                                <button 
+                                    onClick={() => setSelectedReport(null)}
+                                    className="md:hidden flex items-center gap-2 mb-8 text-blue-400 font-bold text-sm bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-transform"
+                                >
+                                    <ArrowLeft className="h-4 w-4" /> BACK TO LIST
+                                </button>
                             <div className="flex justify-between items-start mb-8">
                                 <div>
                                     <h2 className="text-4xl font-black tracking-tighter text-foreground mb-2 flex items-center gap-4">
@@ -182,8 +257,32 @@ export function ReportsDashboard() {
                                     <div className="bg-slate-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 md:p-10 shadow-2xl shadow-black/50 whitespace-pre-wrap break-words text-slate-100 text-base sm:text-lg leading-relaxed">
                                         <ReactMarkdown 
                                             components={{
-                                                h1: ({node, ...props}) => <h1 className="text-3xl font-black mt-10 mb-6 text-foreground tracking-tight border-b border-white/10 pb-4" {...props} />,
-                                                h2: ({node, ...props}) => <h2 className="text-2xl font-bold mt-8 mb-4 text-blue-400" {...props} />,
+                                                h1: ({node, ...props}) => {
+                                                    const text = props.children?.toString() || "";
+                                                    const id = text.includes("Overview") ? "overview" : 
+                                                              text.includes("Macro") ? "macro" : 
+                                                              text.includes("Base Rate") ? "baserate" :
+                                                              text.includes("Business") ? "business" :
+                                                              text.includes("Valuation") ? "valuation" :
+                                                              text.includes("Scenarios") ? "scenarios" :
+                                                              text.includes("Risks") ? "risks" :
+                                                              text.includes("Red Team") ? "redteam" :
+                                                              text.includes("Opinion") ? "opinion" : "";
+                                                    return <h1 id={id} className="text-3xl font-black mt-10 mb-6 text-foreground tracking-tight border-b border-white/10 pb-4" {...props} />;
+                                                },
+                                                h2: ({node, ...props}) => {
+                                                    const text = props.children?.toString() || "";
+                                                    const id = text.includes("Overview") ? "overview" : 
+                                                              text.includes("Macro") ? "macro" : 
+                                                              text.includes("Base Rate") ? "baserate" :
+                                                              text.includes("Business") ? "business" :
+                                                              text.includes("Valuation") ? "valuation" :
+                                                              text.includes("Scenarios") ? "scenarios" :
+                                                              text.includes("Risks") ? "risks" :
+                                                              text.includes("Red Team") ? "redteam" :
+                                                              text.includes("Opinion") ? "opinion" : "";
+                                                    return <h2 id={id} className="text-2xl font-bold mt-8 mb-4 text-blue-400" {...props} />;
+                                                },
                                                 h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-6 mb-3 text-slate-100" {...props} />,
                                                 p: ({node, ...props}) => <p className="mb-6 text-slate-300 leading-relaxed font-medium" {...props} />,
                                                 li: ({node, ...props}) => <li className="mb-2 text-slate-300 font-medium" {...props} />,
