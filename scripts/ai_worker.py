@@ -59,7 +59,7 @@ def run_worker():
                 "temperature": 0.6,
                 "max_tokens": 65536
             },
-            timeout=600
+            timeout=1200
         )
         
         if response.status_code != 200:
