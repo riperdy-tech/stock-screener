@@ -57,7 +57,7 @@ def run_worker():
                 "messages": [{"role": "user", "content": prompt}],
                 "thinking": {"type": "enabled"},
                 "temperature": 0.6,
-                "max_tokens": 16384
+                "max_tokens": 65536
             },
             timeout=600
         )
