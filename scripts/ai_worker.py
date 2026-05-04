@@ -55,7 +55,9 @@ def run_worker():
             json={
                 "model": "deepseek-v4-pro",
                 "messages": [{"role": "user", "content": prompt}],
-                "thinking": {"type": "enabled"}
+                "thinking": {"type": "enabled"},
+                "temperature": 0.1,
+                "max_tokens": 16384
             },
             timeout=600
         )
