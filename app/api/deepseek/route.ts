@@ -56,19 +56,27 @@ export async function POST(req: Request) {
             cost: totalCost.toFixed(4)
         };
 
-        // Save to public/data/reports/[ticker].json
-        const reportsDir = path.join(process.cwd(), 'public', 'data', 'reports');
-        if (!fs.existsSync(reportsDir)) {
-            fs.mkdirSync(reportsDir, { recursive: true });
+        // Save to public/data/reports/[ticker].json (Optional Cache)
+        // Note: This will fail on read-only environments like Vercel, which is fine.
+        try {
+            const reportsDir = path.join(process.cwd(), 'public', 'data', 'reports');
+            if (!fs.existsSync(reportsDir)) {
+                fs.mkdirSync(reportsDir, { recursive: true });
+            }
+            const filePath = path.join(reportsDir, `${ticker}.json`);
+            fs.writeFileSync(filePath, JSON.stringify(resultData, null, 2), 'utf-8');
+            console.log(`Successfully saved report for ${ticker} to disk.`);
+        } catch (fsError) {
+            console.warn(`Note: Could not save report to disk (Expected on Vercel):`, fsError);
         }
-        
-        const filePath = path.join(reportsDir, `${ticker}.json`);
-        fs.writeFileSync(filePath, JSON.stringify(resultData, null, 2), 'utf-8');
 
         return NextResponse.json(resultData);
 
     } catch (e: any) {
-        console.error("Deepseek API Error:", e);
-        return NextResponse.json({ error: e.message || "Internal Server Error" }, { status: 500 });
+        console.error("Deepseek API Route Error:", e);
+        return NextResponse.json({ 
+            error: e.message || "Internal Server Error",
+            details: "Check server logs for full stack trace"
+        }, { status: 500 });
     }
 }
