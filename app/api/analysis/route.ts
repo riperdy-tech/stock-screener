@@ -26,28 +26,42 @@ export async function POST(req: Request) {
         // 2. Trigger the GitHub Action Worker
         // Note: This requires a GITHUB_PAT in your environment variables
         const ghToken = process.env.GH_PAT || process.env.GITHUB_TOKEN;
-        if (ghToken) {
-            try {
-                const ghRes = await fetch(`https://api.github.com/repos/riperdy-tech/stock-screener/dispatches`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${ghToken}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json',
-                        'User-Agent': 'StockScreener-App'
-                    },
-                    body: JSON.stringify({ event_type: 'trigger-ai-analysis' })
-                });
-                
-                if (!ghRes.ok) {
-                    const errText = await ghRes.text();
-                    console.error("GitHub Dispatch Failed:", ghRes.status, errText);
-                } else {
-                    console.log("GitHub Worker triggered successfully.");
-                }
-            } catch (ghErr) {
-                console.warn("Could not trigger GitHub Action automatically:", ghErr);
+        
+        if (!ghToken) {
+            return NextResponse.json({ 
+                status: 'error', 
+                error: "System Configuration Error: GitHub Token (GH_PAT) not found in Vercel environment. Please check your Vercel settings." 
+            }, { status: 500 });
+        }
+
+        try {
+            const ghRes = await fetch(`https://api.github.com/repos/riperdy-tech/stock-screener/dispatches`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${ghToken}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json',
+                    'User-Agent': 'StockScreener-App'
+                },
+                body: JSON.stringify({ event_type: 'trigger-ai-analysis' })
+            });
+            
+            if (!ghRes.ok) {
+                const errText = await ghRes.text();
+                console.error("GitHub Dispatch Failed:", ghRes.status, errText);
+                return NextResponse.json({ 
+                    status: 'error', 
+                    error: `GitHub rejected the request (${ghRes.status}): ${errText}. Check if your token has 'workflow' scope.` 
+                }, { status: 500 });
             }
+            
+            console.log("GitHub Worker triggered successfully.");
+        } catch (ghErr: any) {
+            console.warn("Could not trigger GitHub Action automatically:", ghErr);
+            return NextResponse.json({ 
+                status: 'error', 
+                error: `Network error triggering GitHub: ${ghErr.message}` 
+            }, { status: 500 });
         }
 
         return NextResponse.json({ 
