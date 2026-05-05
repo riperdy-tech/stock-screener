@@ -8,7 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import clsx from "clsx";
 
 // Simple metadata normalizer — prefers stored metadata column, 
-// falls back to content scraping ONLY if metadata column is missing (legacy reports)
+// falls back to [DATA_BLOCK] extraction, then text scraping for legacy reports
 const getMeta = (report: any): any => {
     // If worker already saved structured metadata, use it directly
     if (report.metadata && typeof report.metadata === 'object' && Object.keys(report.metadata).length > 0) {
@@ -21,24 +21,62 @@ const getMeta = (report: any): any => {
         };
     }
     
-    // Legacy fallback: try [DATA_BLOCK] extraction from raw content (old reports)
-    if (report.content) {
-        try {
-            const match = report.content.match(/\[DATA_BLOCK\]\s*(\{[\s\S]*?\})\s*$/);
-            if (match && match[1]) {
-                const parsed = JSON.parse(match[1].trim());
-                return {
-                    conviction: parseFloat(parsed.conviction) || 0,
-                    upside: parseFloat(String(parsed.upside || '0').replace('%', '')) || 0,
-                    action: (parsed.action || '').toUpperCase(),
-                    archetype: parsed.archetype || '',
-                    valuation_status: parsed.valuation_status || '',
-                };
-            }
-        } catch {}
+    const content = report.content || '';
+    
+    // Fallback 1: try [DATA_BLOCK] JSON extraction
+    try {
+        const match = content.match(/\[DATA_BLOCK\]\s*(\{[\s\S]*?\})\s*$/);
+        if (match && match[1]) {
+            const parsed = JSON.parse(match[1].trim());
+            return {
+                conviction: parseFloat(parsed.conviction) || 0,
+                upside: parseFloat(String(parsed.upside || '0').replace('%', '')) || 0,
+                action: (parsed.action || '').toUpperCase(),
+                archetype: parsed.archetype || '',
+                valuation_status: parsed.valuation_status || '',
+            };
+        }
+    } catch {}
+    
+    // Fallback 2: scrape from report text (legacy reports without [DATA_BLOCK])
+    let conviction = 0;
+    let upside = 0;
+    let action = '';
+    let archetype = '';
+    let valuation_status = '';
+    
+    // Action: "Action: ACCUMULATE" or "Action: BUY"
+    const actionMatch = content.match(/Action\s*:\s*(BUY|ACCUMULATE|HOLD|SELL)/i);
+    if (actionMatch) action = actionMatch[1].toUpperCase();
+    
+    // Conviction: "Conviction 10.5" or "final Conviction X.X"
+    const convMatch = content.match(/Conviction\s+(\d+\.?\d*)/i);
+    if (convMatch) conviction = parseFloat(convMatch[1]) || 0;
+    
+    // Upside: "15–22% upside" or "XX% upside" or "XX–YY% upside"
+    const upsideRange = content.match(/(\d+(?:\.\d+)?)[–-](\d+(?:\.\d+)?)%\s*upside/i);
+    if (upsideRange) {
+        upside = parseFloat(upsideRange[2]) || 0; // take upper end of range
+    } else {
+        const upsideSingle = content.match(/(\d+(?:\.\d+)?)%\s*upside/i);
+        if (upsideSingle) upside = parseFloat(upsideSingle[1]) || 0;
     }
     
-    return { conviction: 0, upside: 0, action: '', archetype: '', valuation_status: '' };
+    // Valuation Status: "Valuation Status: FAIR TO UNDERVALUED"
+    const valMatch = content.match(/Valuation\s+Status\s*:\s*(.+?)(?:\n|$)/i);
+    if (valMatch) {
+        const raw = valMatch[1].trim().toUpperCase();
+        if (raw.includes('UNDERVALUED') && raw.includes('FAIR')) valuation_status = 'FAIR_TO_UNDERVALUED';
+        else if (raw.includes('UNDERVALUED')) valuation_status = 'UNDERVALUED';
+        else if (raw.includes('FAIR')) valuation_status = 'FAIR';
+        else if (raw.includes('OVERVALUED')) valuation_status = 'OVERVALUED';
+    }
+    
+    // Archetype: "Product-Platform Hybrid" in subtitle line after ticker
+    const archMatch = content.match(/\|\s*(Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led\s*\/?\s*High-Beta|Regulatory)\s*\|/i);
+    if (archMatch) archetype = archMatch[1].trim();
+    
+    return { conviction, upside, action, archetype, valuation_status };
 };
 
 export function ReportsDashboard() {
