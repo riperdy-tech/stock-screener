@@ -1,12 +1,22 @@
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-
-// Public client — uses the anon key. Safe for browser reads (dashboard, reports page).
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-// Admin client — uses the service key. Only call this from server-side API routes.
-// Never expose this in client components.
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || '';
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
+
+// Guard: createClient throws with empty strings — this prevents a full app crash
+// if environment variables are missing in the deployment environment.
+const createSafeClient = (url: string, key: string) => {
+    if (!url || !key) {
+        console.error('Supabase client not initialized: missing URL or key.');
+        // Return a dummy object that won't crash on access
+        return null as any;
+    }
+    return createClient(url, key);
+};
+
+// Public client — anon key, safe for browser reads.
+export const supabase = createSafeClient(supabaseUrl, supabaseAnonKey);
+
+// Admin client — service key, server-side API routes only.
+export const supabaseAdmin = createSafeClient(supabaseUrl, supabaseServiceKey);
