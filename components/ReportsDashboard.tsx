@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Search, Sparkles, Calendar, DollarSign, Activity, ChevronRight, RefreshCw, ArrowLeft, Download, FileText, Bot } from "lucide-react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
@@ -183,7 +183,7 @@ export function ReportsDashboard() {
     }, [selectedReport?.content]);
 
     // Scroll to a heading by ID
-    const scrollToHeading = useCallback((headingId: string) => {
+    const scrollToHeading = (headingId: string) => {
         const mainPanel = document.getElementById('main-scroll-panel');
         const target = document.getElementById(headingId);
         if (target && mainPanel) {
@@ -191,7 +191,7 @@ export function ReportsDashboard() {
             const targetRect = target.getBoundingClientRect();
             mainPanel.scrollBy({ top: targetRect.top - panelRect.top - 32, behavior: 'smooth' });
         }
-    }, []);
+    };
 
     const downloadReport = (report: any) => {
         const element = document.createElement("a");
