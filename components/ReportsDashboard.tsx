@@ -404,7 +404,7 @@ export function ReportsDashboard() {
                                     const rawLines = (selectedReport.content || "").split('\n');
                                     const headings: {id: string, title: string, level: number}[] = [];
                                     
-                                    rawLines.forEach((line, idx) => {
+                                    rawLines.forEach((line: string, idx: number) => {
                                         const trimmed = line.trim();
                                         // Match # Markdown OR "SECTION X" lines
                                         if (trimmed.startsWith('#')) {
