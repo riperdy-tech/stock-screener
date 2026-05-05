@@ -307,8 +307,8 @@ export function ReportsDashboard() {
                                             {(() => {
                                                 const headings = (selectedReport.content || "")
                                                     .split('\n')
-                                                    .filter(line => line.startsWith('#'))
-                                                    .map((line, index) => {
+                                                    .filter((line: string) => line.startsWith('#'))
+                                                    .map((line: string, index: number) => {
                                                         const level = line.match(/^#+/)?.[0].length || 1;
                                                         const title = line.replace(/^#+\s*/, '').trim();
                                                         const id = `heading-${index}`;
