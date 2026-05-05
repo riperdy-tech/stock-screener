@@ -7,22 +7,71 @@ import { supabase } from "@/lib/supabase";
 import ReactMarkdown from 'react-markdown';
 import clsx from "clsx";
 
-// Normalize markdown content for consistent TOC parsing:
-// Converts h3-h6 (### to ######) to bold text so only h1/h2 remain as headings.
-// This ensures TOC always works even if DeepSeek ignores format rules.
+// ─── Robust Markdown Normalizer ───────────────────────────
+// DeepSeek produces wildly inconsistent formatting across stocks.
+// This pre-processor enforces a clean, unified structure for TOC and rendering.
 function normalizeContent(raw: string): string {
     if (!raw) return '';
-    return raw
-        .split('\n')
-        .map(line => {
-            const match = line.match(/^(#{3,6})\s+(.+)/);
-            if (match) {
-                const text = match[2];
-                return `**${text}**`;
-            }
-            return line;
-        })
-        .join('\n');
+    const lines = raw.split('\n');
+    const result: string[] = [];
+    
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
+        
+        // 1. Strip unicode box-drawing border lines entirely
+        if (/^[═╔╗╚╝║╠╣╦╩╬]{3,}$/.test(trimmed)) continue;
+        
+        // 2. Convert horizontal rule lines to markdown ---
+        if (/^[─━]{3,}$/.test(trimmed)) {
+            result.push('---');
+            continue;
+        }
+        
+        // 3. Convert "■ SECTION X. TITLE" → "## SECTION X. TITLE"
+        const sectionMatch = trimmed.match(/^■\s*(SECTION|LAYER)\s+(\d[\d.]*[A-Za-z]?)\.?\s*(.*)/i);
+        if (sectionMatch) {
+            result.push(`## ${sectionMatch[1].toUpperCase()} ${sectionMatch[2]}. ${sectionMatch[3]}`.trim());
+            continue;
+        }
+        
+        // 4. Convert "■ INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0 ■" → "# TITLE"
+        const titleMatch = trimmed.match(/^■\s*(INTEGRATED INVESTMENT ANALYSIS ENGINE[^■]*)\s*■?$/i);
+        if (titleMatch) {
+            result.push(`# ${titleMatch[1].trim()}`);
+            continue;
+        }
+        
+        // 5. Convert "■ Some Other Title ■" → "## Some Other Title"
+        const genericHeader = trimmed.match(/^■\s+(.+?)\s*■?$/);
+        if (genericHeader && trimmed.replace(/■/g, '').trim().length > 10) {
+            result.push(`## ${genericHeader[1].trim()}`);
+            continue;
+        }
+        
+        // 6. Convert h3-h6 to bold text
+        const hMatch = trimmed.match(/^(#{3,6})\s+(.+)/);
+        if (hMatch) {
+            result.push(`**${hMatch[2]}**`);
+            continue;
+        }
+        
+        // 7. Convert old-style "SECTION X. TITLE" (without ## or ■) to "## SECTION X. TITLE"
+        const oldSection = trimmed.match(/^SECTION\s+(\d[\d.]*[A-Za-z]?)\.?\s+(.*)/i);
+        if (oldSection) {
+            result.push(`## SECTION ${oldSection[1]}. ${oldSection[2]}`);
+            continue;
+        }
+        
+        // 8. Ensure markdown tables have blank line before them (ReactMarkdown needs this)
+        if (trimmed.startsWith('|') && result.length > 0 && result[result.length - 1] !== '') {
+            result.push('');
+        }
+        
+        result.push(line);
+    }
+    
+    return result.join('\n');
 }
 
 // Safely extract text from React children (handles strings, arrays, nested elements)
@@ -557,7 +606,7 @@ export function ReportsDashboard() {
                                                     </div>
                                                 </div>
                                             ) : (
-                                                <div className="prose prose-invert prose-blue max-w-none">
+                                                <div className="prose prose-invert prose-blue max-w-none report-prose">
                                                     <ReactMarkdown 
                                                         components={{
                                                             h1: ({node, ...props}) => {
