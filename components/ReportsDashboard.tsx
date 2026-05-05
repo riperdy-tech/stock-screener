@@ -281,7 +281,9 @@ export function ReportsDashboard() {
                                                 const mainPanel = document.getElementById('main-scroll-panel');
                                                 const target = document.getElementById(`section-${section.id}`);
                                                 if (target && mainPanel) {
-                                                    mainPanel.scrollTo({ top: target.offsetTop - 32, behavior: 'smooth' });
+                                                    const panelTop = mainPanel.getBoundingClientRect().top;
+                                                    const targetTop = target.getBoundingClientRect().top;
+                                                    mainPanel.scrollBy({ top: targetTop - panelTop - 24, behavior: 'smooth' });
                                                 }
                                             }}
                                             className="block text-left text-[10px] font-black text-muted-foreground hover:text-blue-400 transition-colors uppercase tracking-widest py-1"
