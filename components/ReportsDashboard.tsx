@@ -8,25 +8,46 @@ import ReactMarkdown from 'react-markdown';
 import clsx from "clsx";
 
 // Robust metadata extractor — grabs the JSON object between [DATA_BLOCK] and the separator/end
+// Robust metadata extractor — grabs the JSON object or scrapes text patterns
 const extractMeta = (content: string): any => {
     if (!content) return {};
+    let meta: any = {};
+    
     try {
-        // Match the JSON object directly — stops at the ════ separator or end of string
         const match = content.match(/\[DATA_BLOCK\]\s*(\{[\s\S]*?\})\s*(?:═|$)/);
-        if (match && match[1]) return JSON.parse(match[1].trim());
+        if (match && match[1]) meta = JSON.parse(match[1].trim());
     } catch (e) {
-        // fallback: try to find any JSON object after [DATA_BLOCK]
         try {
             const idx = content.indexOf('[DATA_BLOCK]');
             if (idx !== -1) {
                 const after = content.slice(idx + 12).trim();
                 const end = after.indexOf('═');
                 const jsonStr = end !== -1 ? after.slice(0, end) : after;
-                return JSON.parse(jsonStr.trim());
+                meta = JSON.parse(jsonStr.trim());
             }
         } catch {}
     }
-    return {};
+
+    // FALLBACK: Scrape from text if fields are missing
+    if (!meta.conviction) {
+        const convMatch = content.match(/Conviction Score.*?\((?:0–15|0-15).*?\):\s*(\d+(?:\.\d+)?)/i);
+        if (convMatch) meta.conviction = convMatch[1];
+    }
+    if (!meta.upside) {
+        const upsideMatch = content.match(/Expected Price.*?\d+.*?(\d+(?:\.\d+)?%)/i) || 
+                           content.match(/Upside.*?:?\s*(\d+(?:\.\d+)?%?)/i);
+        if (upsideMatch) meta.upside = upsideMatch[1].replace('%', '');
+    }
+    if (!meta.action) {
+        const actionMatch = content.match(/(?:Decision|Rating|Action).*?:\s*(BUY|SELL|HOLD|ACCUMULATE)/i);
+        if (actionMatch) meta.action = actionMatch[1].toUpperCase();
+    }
+    if (!meta.archetype) {
+        const archMatch = content.match(/Lynch Classification.*?:?\s*(.*?)(?:\n|$)/i);
+        if (archMatch) meta.archetype = archMatch[1].trim();
+    }
+
+    return meta;
 };
 
 export function ReportsDashboard() {
@@ -305,53 +326,58 @@ export function ReportsDashboard() {
                                         </h3>
                                         <div className="space-y-1">
                                             {(() => {
-                                                const headings = (selectedReport.content || "")
-                                                    .split('\n')
-                                                    .filter((line: string) => line.startsWith('#'))
-                                                    .map((line: string, index: number) => {
-                                                        const level = line.match(/^#+/)?.[0].length || 1;
-                                                        const title = line.replace(/^#+\s*/, '').trim();
-                                                        const id = `heading-${index}`;
-                                                        return { id, title, level };
-                                                    });
+                                                const rawLines = (selectedReport.content || "").split('\n');
+                                                const headings: {id: string, title: string, level: number}[] = [];
+                                                
+                                                rawLines.forEach((line: string, idx: number) => {
+                                                    const trimmed = line.trim();
+                                                    if (trimmed.startsWith('#')) {
+                                                        const level = trimmed.match(/^#+/)?.[0].length || 1;
+                                                        const title = trimmed.replace(/^#+\s*/, '').trim();
+                                                        headings.push({ id: `h-${idx}`, title, level });
+                                                    } else if (trimmed.toUpperCase().startsWith('SECTION')) {
+                                                        headings.push({ id: `h-${idx}`, title: trimmed, level: 1 });
+                                                    }
+                                                });
 
                                                 if (headings.length === 0) {
                                                     return <p className="text-[10px] text-muted-foreground uppercase">No sections detected</p>;
                                                 }
 
-                                                    return headings.map((h: any) => (
-                                                        <button 
-                                                            key={h.id}
-                                                            onClick={() => {
-                                                                const mainPanel = document.getElementById('main-scroll-panel');
-                                                                const target = document.getElementById(h.id);
-                                                                if (target && mainPanel) {
-                                                                    const panelTop = mainPanel.getBoundingClientRect().top;
-                                                                    const targetTop = target.getBoundingClientRect().top;
-                                                                    mainPanel.scrollBy({ top: targetTop - panelTop - 32, behavior: 'smooth' });
-                                                                }
-                                                            }}
-                                                            className={clsx(
-                                                                "group flex items-start gap-3 w-full text-left py-2.5 px-3 rounded-lg transition-all duration-300 relative",
-                                                                activeHeading === h.id ? "bg-blue-500/10" : "hover:bg-white/[0.03]",
-                                                                h.level === 1 ? "text-[11px] font-black" : "text-[10px] font-bold pl-6 opacity-60 hover:opacity-100"
-                                                            )}
-                                                        >
-                                                            {activeHeading === h.id && (
-                                                                <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-blue-500 rounded-full" />
-                                                            )}
-                                                            <span className={clsx(
-                                                                "shrink-0 w-1.5 h-1.5 rounded-full mt-1.5 transition-all duration-500",
-                                                                activeHeading === h.id ? "bg-blue-500 scale-125 shadow-[0_0_10px_rgba(59,130,246,0.5)]" : "bg-blue-500/20 group-hover:bg-blue-500/50"
-                                                            )}></span>
-                                                            <span className={clsx(
-                                                                "uppercase tracking-wider leading-tight transition-colors duration-300",
-                                                                activeHeading === h.id ? "text-white" : "text-muted-foreground group-hover:text-white"
-                                                            )}>
-                                                                {h.title}
-                                                            </span>
-                                                        </button>
-                                                    ));
+                                                return headings.map((h: any) => (
+                                                    <button 
+                                                        key={h.id}
+                                                        onClick={() => {
+                                                            const mainPanel = document.getElementById('main-scroll-panel');
+                                                            const target = document.getElementById(h.id);
+                                                            console.log("Navigating to:", h.id, target);
+                                                            if (target && mainPanel) {
+                                                                const panelTop = mainPanel.getBoundingClientRect().top;
+                                                                const targetTop = target.getBoundingClientRect().top;
+                                                                mainPanel.scrollBy({ top: targetTop - panelTop - 32, behavior: 'smooth' });
+                                                            }
+                                                        }}
+                                                        className={clsx(
+                                                            "group flex items-start gap-3 w-full text-left py-2.5 px-3 rounded-lg transition-all duration-300 relative",
+                                                            activeHeading === h.id ? "bg-blue-500/10" : "hover:bg-white/[0.03]",
+                                                            h.level === 1 ? "text-[11px] font-black" : "text-[10px] font-bold pl-6 opacity-60 hover:opacity-100"
+                                                        )}
+                                                    >
+                                                        {activeHeading === h.id && (
+                                                            <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-blue-500 rounded-full" />
+                                                        )}
+                                                        <span className={clsx(
+                                                            "shrink-0 w-1.5 h-1.5 rounded-full mt-1.5 transition-all duration-500",
+                                                            activeHeading === h.id ? "bg-blue-500 scale-125 shadow-[0_0_10px_rgba(59,130,246,0.5)]" : "bg-blue-500/20 group-hover:bg-blue-500/50"
+                                                        )}></span>
+                                                        <span className={clsx(
+                                                            "uppercase tracking-wider leading-tight transition-colors duration-300",
+                                                            activeHeading === h.id ? "text-white" : "text-muted-foreground group-hover:text-white"
+                                                        )}>
+                                                            {h.title}
+                                                        </span>
+                                                    </button>
+                                                ));
                                             })()}
                                         </div>
                                     </div>
@@ -373,7 +399,22 @@ export function ReportsDashboard() {
                             <div className="flex-1 p-6 md:p-16 lg:p-20 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
                                 {(() => {
                                     const meta = selectedReport.metadata || extractMeta(selectedReport.content);
-                                    let headingIndex = 0;
+                                    
+                                    // PRE-PARSE HEADINGS for stability
+                                    const rawLines = (selectedReport.content || "").split('\n');
+                                    const headings: {id: string, title: string, level: number}[] = [];
+                                    
+                                    rawLines.forEach((line, idx) => {
+                                        const trimmed = line.trim();
+                                        // Match # Markdown OR "SECTION X" lines
+                                        if (trimmed.startsWith('#')) {
+                                            const level = trimmed.match(/^#+/)?.[0].length || 1;
+                                            const title = trimmed.replace(/^#+\s*/, '').trim();
+                                            headings.push({ id: `h-${idx}`, title, level });
+                                        } else if (trimmed.toUpperCase().startsWith('SECTION')) {
+                                            headings.push({ id: `h-${idx}`, title: trimmed, level: 1 });
+                                        }
+                                    });
 
                                     return (
                                         <article className="relative">
@@ -448,10 +489,24 @@ export function ReportsDashboard() {
                                                 <div className="prose prose-invert prose-blue max-w-none">
                                                     <ReactMarkdown 
                                                         components={{
-                                                            h1: ({node, ...props}) => <h1 id={`heading-${headingIndex++}`} className="text-4xl font-black mt-24 mb-8 text-white tracking-tight border-b border-white/10 pb-6 uppercase" {...props} />,
-                                                            h2: ({node, ...props}) => <h2 id={`heading-${headingIndex++}`} className="text-2xl font-black mt-16 mb-6 text-blue-400 tracking-wide uppercase" {...props} />,
+                                                            h1: ({node, ...props}) => {
+                                                                const title = String(props.children || "");
+                                                                const h = headings.find(h => h.title === title);
+                                                                return <h1 id={h?.id} className="text-4xl font-black mt-24 mb-8 text-white tracking-tight border-b border-white/10 pb-6 uppercase" {...props} />;
+                                                            },
+                                                            h2: ({node, ...props}) => {
+                                                                const title = String(props.children || "");
+                                                                const h = headings.find(h => h.title === title);
+                                                                return <h2 id={h?.id} className="text-2xl font-black mt-16 mb-6 text-blue-400 tracking-wide uppercase" {...props} />;
+                                                            },
                                                             h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-10 mb-4 text-white tracking-tight" {...props} />,
-                                                            p: ({node, ...props}) => <p className="text-lg text-slate-300 leading-[1.8] mb-8 font-medium" {...props} />,
+                                                            p: ({node, ...props}) => {
+                                                                const text = String(props.children || "");
+                                                                // If it's a SECTION line that isn't a markdown header, give it an ID
+                                                                const isSection = text.toUpperCase().startsWith('SECTION');
+                                                                const h = isSection ? headings.find(h => h.title === text) : null;
+                                                                return <p id={h?.id} className={clsx("text-lg leading-[1.8] mb-8 font-medium", isSection ? "text-blue-500 font-black text-2xl uppercase mt-20" : "text-slate-300")} {...props} />;
+                                                            },
                                                             ul: ({node, ...props}) => <ul className="space-y-4 mb-10 list-none pl-0" {...props} />,
                                                             li: ({node, ...props}) => (
                                                                 <li className="flex items-start gap-4 text-lg text-slate-400 font-medium leading-[1.8]">
