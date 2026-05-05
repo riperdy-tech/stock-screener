@@ -90,15 +90,25 @@ export function ReportsDashboard() {
                     </div>
                 </div>
 
-                <div className="relative w-64">
-                    <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-                    <input 
-                        type="text" 
-                        placeholder="Search tickers..." 
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-accent transition-all"
-                    />
+                <div className="flex items-center gap-4">
+                    <button 
+                        onClick={fetchReports}
+                        disabled={loading}
+                        className="p-2 bg-white/5 hover:bg-white/10 rounded-xl text-muted-foreground hover:text-blue-400 transition-all border border-white/10 active:scale-90"
+                        title="Force Sync Cloud Data"
+                    >
+                        <RefreshCw className={clsx("h-4 w-4", loading && "animate-spin text-blue-500")} />
+                    </button>
+                    <div className="relative w-64">
+                        <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                        <input 
+                            type="text" 
+                            placeholder="Search tickers..." 
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-accent transition-all"
+                        />
+                    </div>
                 </div>
             </header>
 
@@ -183,20 +193,20 @@ export function ReportsDashboard() {
                                     
                                     const upside = parseFloat(meta.upside || 0);
                                     const isPositive = upside > 0;
-                                    const isHighUpside = upside > 15;
+                                    const createdAt = new Date(report.created_at);
 
                                     return (
                                         <button
-                                            key={report.id || report.ticker + report.created_at}
+                                            key={report.id}
                                             onClick={() => setSelectedReport(report)}
                                             className={clsx(
-                                                "w-full text-left p-4 border-b border-white/5 transition-all hover:bg-white/5 flex items-center justify-between group relative",
-                                                selectedReport?.id === report.id ? "bg-blue-500/5 border-r-2 border-r-blue-500" : ""
+                                                "w-full text-left p-4 border-b border-white/5 transition-all hover:bg-white/5 flex items-center justify-between group relative cursor-pointer active:bg-white/10",
+                                                selectedReport?.id === report.id ? "bg-blue-500/10 border-r-4 border-r-blue-500 shadow-[inset_0_0_20px_rgba(59,130,246,0.1)]" : ""
                                             )}
                                         >
-                                            <div className="flex flex-col gap-1.5 min-w-0">
+                                            <div className="flex flex-col gap-1 min-w-0">
                                                 <div className="flex items-center gap-2">
-                                                    <span className="text-lg font-black tracking-tighter text-foreground group-hover:text-blue-400 transition-colors">
+                                                    <span className="text-xl font-black tracking-tighter text-foreground group-hover:text-blue-400 transition-colors">
                                                         {report.ticker}
                                                     </span>
                                                     {meta.valuation_status && (
@@ -210,24 +220,22 @@ export function ReportsDashboard() {
                                                         </span>
                                                     )}
                                                 </div>
-                                                <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-bold">
-                                                    <Calendar className="h-3 w-3 opacity-50" />
-                                                    {new Date(report.created_at).toLocaleDateString()}
-                                                    <span className="opacity-20">•</span>
-                                                    <span className="text-blue-400/60 uppercase tracking-tighter">{meta.archetype || 'Report'}</span>
+                                                <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-black uppercase tracking-tight">
+                                                    <Calendar className="h-3.5 w-3.5 opacity-50 text-blue-500" />
+                                                    {createdAt.toLocaleDateString()} 
+                                                    <span className="text-white/20 font-normal">@</span>
+                                                    <span className="text-blue-400/80">{createdAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                                 </div>
                                             </div>
                                             
-                                            <div className="flex flex-col items-end gap-1.5">
+                                            <div className="flex flex-col items-end gap-1">
                                                 <div className={clsx(
-                                                    "px-2 py-1 rounded-lg text-[11px] font-black tracking-tighter shadow-sm",
-                                                    isPositive ? "bg-green-500/10 text-green-400 border border-green-500/20" : "bg-red-500/10 text-red-400 border border-red-500/20"
+                                                    "px-2 py-1 rounded-lg text-xs font-black tracking-tighter shadow-md border",
+                                                    isPositive ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-red-500/20 text-red-400 border-red-500/30"
                                                 )}>
                                                     {isPositive ? '+' : ''}{upside.toFixed(1)}%
                                                 </div>
-                                                <div className="text-[9px] font-black text-muted-foreground/40 tracking-widest uppercase">
-                                                    UPSIDE
-                                                </div>
+                                                <span className="text-[8px] font-black text-muted-foreground tracking-[0.2em] uppercase opacity-40">ALPHA</span>
                                             </div>
                                         </button>
                                     );
@@ -259,10 +267,13 @@ export function ReportsDashboard() {
                                         <button 
                                             key={section.id}
                                             onClick={() => {
-                                                const el = document.getElementById(section.id);
-                                                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                                const container = document.getElementById('report-scroll-container');
+                                                const target = document.getElementById(`section-${section.id}`);
+                                                if (target && container) {
+                                                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                                }
                                             }}
-                                            className="block text-left text-xs font-bold text-muted-foreground hover:text-white transition-colors"
+                                            className="block text-left text-[10px] font-black text-muted-foreground hover:text-blue-400 transition-colors uppercase tracking-widest"
                                         >
                                             {section.title}
                                         </button>
@@ -270,7 +281,7 @@ export function ReportsDashboard() {
                                 </div>
                             </div>
 
-                            <div className="flex-1 p-4 md:p-12 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+                            <div id="report-scroll-container" className="flex-1 p-4 md:p-12 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 overflow-y-auto no-scrollbar">
                                 {/* Dynamic Metadata Extraction for View */}
                                 {(() => {
                                     let meta = selectedReport.metadata || {};
@@ -360,29 +371,31 @@ export function ReportsDashboard() {
                                             <ReactMarkdown 
                                                 components={{
                                                     h1: ({node, ...props}) => {
-                                                        const text = props.children?.toString() || "";
-                                                        const id = text.includes("Overview") ? "overview" : 
-                                                                  text.includes("Macro") ? "macro" : 
-                                                                  text.includes("Base Rate") ? "baserate" :
-                                                                  text.includes("Business") ? "business" :
-                                                                  text.includes("Valuation") ? "valuation" :
-                                                                  text.includes("Scenarios") ? "scenarios" :
-                                                                  text.includes("Risks") ? "risks" :
-                                                                  text.includes("Red Team") ? "redteam" :
-                                                                  text.includes("Opinion") ? "opinion" : "";
+                                                        const text = String(props.children || "").toLowerCase();
+                                                        let id = "";
+                                                        if (text.includes("overview")) id = "section-overview";
+                                                        else if (text.includes("macro")) id = "section-macro";
+                                                        else if (text.includes("business")) id = "section-business";
+                                                        else if (text.includes("valuation")) id = "section-valuation";
+                                                        else if (text.includes("scenario")) id = "section-scenarios";
+                                                        else if (text.includes("risk") || text.includes("catalyst")) id = "section-risks";
+                                                        else if (text.includes("red team")) id = "section-redteam";
+                                                        else if (text.includes("opinion") || text.includes("final")) id = "section-opinion";
+                                                        
                                                         return <h1 id={id} className="text-3xl font-black mt-10 mb-6 text-foreground tracking-tight border-b border-white/10 pb-4" {...props} />;
                                                     },
                                                     h2: ({node, ...props}) => {
-                                                        const text = props.children?.toString() || "";
-                                                        const id = text.includes("Overview") ? "overview" : 
-                                                                  text.includes("Macro") ? "macro" : 
-                                                                  text.includes("Base Rate") ? "baserate" :
-                                                                  text.includes("Business") ? "business" :
-                                                                  text.includes("Valuation") ? "valuation" :
-                                                                  text.includes("Scenarios") ? "scenarios" :
-                                                                  text.includes("Risks") ? "risks" :
-                                                                  text.includes("Red Team") ? "redteam" :
-                                                                  text.includes("Opinion") ? "opinion" : "";
+                                                        const text = String(props.children || "").toLowerCase();
+                                                        let id = "";
+                                                        if (text.includes("overview")) id = "section-overview";
+                                                        else if (text.includes("macro")) id = "section-macro";
+                                                        else if (text.includes("business")) id = "section-business";
+                                                        else if (text.includes("valuation")) id = "section-valuation";
+                                                        else if (text.includes("scenario")) id = "section-scenarios";
+                                                        else if (text.includes("risk") || text.includes("catalyst")) id = "section-risks";
+                                                        else if (text.includes("red team")) id = "section-redteam";
+                                                        else if (text.includes("opinion") || text.includes("final")) id = "section-opinion";
+
                                                         return <h2 id={id} className="text-2xl font-bold mt-8 mb-4 text-blue-400" {...props} />;
                                                     },
                                                     h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-6 mb-3 text-slate-100" {...props} />,

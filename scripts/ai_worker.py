@@ -22,11 +22,11 @@ def run_worker():
     # This prevents the queue from being blocked by old, failed runs.
     try:
         from datetime import datetime, timedelta, timezone
-        ten_mins_ago = (datetime.now(timezone.utc) - timedelta(minutes=10)).isoformat()
+        sixty_mins_ago = (datetime.now(timezone.utc) - timedelta(minutes=60)).isoformat()
         supabase.table("ai_reports").update({
             "status": "error",
-            "content": "Analysis timed out or worker crashed."
-        }).eq("status", "pending").lt("created_at", ten_mins_ago).execute()
+            "content": "Analysis timed out (60 min+). Please check worker logs."
+        }).eq("status", "pending").lt("created_at", sixty_mins_ago).execute()
     except Exception as e:
         print(f"Queue cleanup failed: {e}")
 

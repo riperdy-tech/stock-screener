@@ -10,10 +10,9 @@ export async function POST(req: Request) {
         }
 
         // 1. Create a "Pending" request in Supabase
-        // This is the "structural" hand-off to the background worker.
         const { error: sbError } = await supabase
             .from('ai_reports')
-            .upsert({
+            .insert({
                 ticker,
                 content: "Analysis in progress... please wait.",
                 status: 'pending',
