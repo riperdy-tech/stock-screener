@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Search, Sparkles, Calendar, DollarSign, Activity, ChevronRight, RefreshCw, ArrowLeft, Download, FileText, Bot } from "lucide-react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
@@ -59,6 +59,39 @@ export function ReportsDashboard() {
             setLoading(false);
         }
     };
+
+    const [activeHeading, setActiveHeading] = useState<string | null>(null);
+
+    // Track active section on scroll
+    useEffect(() => {
+        if (!selectedReport) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveHeading(entry.target.id);
+                    }
+                });
+            },
+            { 
+                root: document.getElementById('main-scroll-panel'),
+                rootMargin: '-10% 0% -80% 0%', // Trigger when heading is near top
+                threshold: 0 
+            }
+        );
+
+        // Observer headings after they render
+        const timer = setTimeout(() => {
+            const headings = document.querySelectorAll('article h1, article h2');
+            headings.forEach((h) => observer.observe(h));
+        }, 500);
+
+        return () => {
+            observer.disconnect();
+            clearTimeout(timer);
+        };
+    }, [selectedReport]);
 
     const filteredReports = reports.filter(r => {
         const matchesSearch = r.ticker.toLowerCase().includes(search.toLowerCase());
@@ -256,179 +289,214 @@ export function ReportsDashboard() {
                 <main
                     id="main-scroll-panel"
                     className={clsx(
-                        "flex-1 bg-[#0a0c10] overflow-y-auto no-scrollbar relative transition-all flex",
+                        "flex-1 bg-[#0a0c10] overflow-y-auto no-scrollbar relative transition-all",
                         !selectedReport && "hidden md:flex"
                     )}
                 >
                     {selectedReport ? (
-                        <>
-                            {/* Table of Contents Sidebar (Desktop) */}
-                            <div className="hidden xl:block w-64 shrink-0 border-r border-white/5 p-8 sticky top-0 h-screen overflow-y-auto no-scrollbar">
-                                <h3 className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-6">Table of Contents</h3>
-                                <div className="space-y-4">
-                                    {(selectedReport.metadata?.sections || [
-                                        {id: "overview", title: "Overview"},
-                                        {id: "macro", title: "Macro Context"},
-                                        {id: "business", title: "Business Quality"},
-                                        {id: "valuation", title: "Valuation"},
-                                        {id: "scenarios", title: "Scenarios"},
-                                        {id: "risks", title: "Risks & Catalysts"},
-                                        {id: "redteam", title: "Red Team"}
-                                    ]).map((section: any) => (
-                                        <button 
-                                            key={section.id}
-                                            onClick={() => {
-                                                const mainPanel = document.getElementById('main-scroll-panel');
-                                                const target = document.getElementById(`section-${section.id}`);
-                                                if (target && mainPanel) {
-                                                    const panelTop = mainPanel.getBoundingClientRect().top;
-                                                    const targetTop = target.getBoundingClientRect().top;
-                                                    mainPanel.scrollBy({ top: targetTop - panelTop - 24, behavior: 'smooth' });
-                                                }
-                                            }}
-                                            className="block text-left text-[10px] font-black text-muted-foreground hover:text-blue-400 transition-colors uppercase tracking-widest py-1"
-                                        >
-                                            {section.title}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
+                        <div className="flex h-full">
+                            {/* Table of Contents Sidebar (Professional Sticky) */}
+                            <aside className="hidden xl:block w-72 shrink-0 border-r border-white/5 bg-[#0a0c10] p-8 sticky top-0 h-screen overflow-y-auto no-scrollbar">
+                                <div className="space-y-8">
+                                    <div>
+                                        <h3 className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                                            <span className="w-4 h-[1px] bg-blue-500/30"></span>
+                                            Report Structure
+                                        </h3>
+                                        <div className="space-y-1">
+                                            {(() => {
+                                                const headings = (selectedReport.content || "")
+                                                    .split('\n')
+                                                    .filter(line => line.startsWith('#'))
+                                                    .map((line, index) => {
+                                                        const level = line.match(/^#+/)?.[0].length || 1;
+                                                        const title = line.replace(/^#+\s*/, '').trim();
+                                                        const id = `heading-${index}`;
+                                                        return { id, title, level };
+                                                    });
 
-                            <div className="flex-1 p-4 md:p-12 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
-                                {/* Dynamic Metadata Extraction for View */}
+                                                if (headings.length === 0) {
+                                                    return <p className="text-[10px] text-muted-foreground uppercase">No sections detected</p>;
+                                                }
+
+                                                    return headings.map((h) => (
+                                                        <button 
+                                                            key={h.id}
+                                                            onClick={() => {
+                                                                const mainPanel = document.getElementById('main-scroll-panel');
+                                                                const target = document.getElementById(h.id);
+                                                                if (target && mainPanel) {
+                                                                    const panelTop = mainPanel.getBoundingClientRect().top;
+                                                                    const targetTop = target.getBoundingClientRect().top;
+                                                                    mainPanel.scrollBy({ top: targetTop - panelTop - 32, behavior: 'smooth' });
+                                                                }
+                                                            }}
+                                                            className={clsx(
+                                                                "group flex items-start gap-3 w-full text-left py-2.5 px-3 rounded-lg transition-all duration-300 relative",
+                                                                activeHeading === h.id ? "bg-blue-500/10" : "hover:bg-white/[0.03]",
+                                                                h.level === 1 ? "text-[11px] font-black" : "text-[10px] font-bold pl-6 opacity-60 hover:opacity-100"
+                                                            )}
+                                                        >
+                                                            {activeHeading === h.id && (
+                                                                <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-blue-500 rounded-full" />
+                                                            )}
+                                                            <span className={clsx(
+                                                                "shrink-0 w-1.5 h-1.5 rounded-full mt-1.5 transition-all duration-500",
+                                                                activeHeading === h.id ? "bg-blue-500 scale-125 shadow-[0_0_10px_rgba(59,130,246,0.5)]" : "bg-blue-500/20 group-hover:bg-blue-500/50"
+                                                            )}></span>
+                                                            <span className={clsx(
+                                                                "uppercase tracking-wider leading-tight transition-colors duration-300",
+                                                                activeHeading === h.id ? "text-white" : "text-muted-foreground group-hover:text-white"
+                                                            )}>
+                                                                {h.title}
+                                                            </span>
+                                                        </button>
+                                                    ));
+                                            })()}
+                                        </div>
+                                    </div>
+
+                                    {/* Action Shortcuts */}
+                                    <div className="pt-8 border-t border-white/5">
+                                        <button 
+                                            onClick={() => downloadReport(selectedReport)}
+                                            className="w-full flex items-center justify-between group bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-xl p-4 transition-all"
+                                        >
+                                            <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Download .TXT</span>
+                                            <Download className="h-4 w-4 text-blue-400 group-hover:translate-y-0.5 transition-transform" />
+                                        </button>
+                                    </div>
+                                </div>
+                            </aside>
+
+                            {/* Report Content */}
+                            <div className="flex-1 p-6 md:p-16 lg:p-20 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
                                 {(() => {
                                     const meta = selectedReport.metadata || extractMeta(selectedReport.content);
+                                    let headingIndex = 0;
 
                                     return (
-                                        <>
+                                        <article className="relative">
                                             {/* Mobile Back Button */}
                                             <button 
                                                 onClick={() => setSelectedReport(null)}
-                                                className="md:hidden flex items-center gap-2 mb-8 text-blue-400 font-bold text-sm bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-transform"
+                                                className="md:hidden flex items-center gap-2 mb-12 text-blue-400 font-bold text-[10px] bg-blue-500/10 px-5 py-2.5 rounded-full w-fit active:scale-95 transition-all tracking-[0.2em]"
                                             >
-                                                <ArrowLeft className="h-4 w-4" /> BACK TO LIST
+                                                <ArrowLeft className="h-3.5 w-3.5" /> RETURN TO LIST
                                             </button>
 
-                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-                                                <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
-                                                    <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Conviction</div>
-                                                    <div className="text-3xl font-black text-blue-500 tracking-tighter">{meta.conviction || 'N/A'}</div>
-                                                    <div className="text-[9px] font-bold text-blue-500/40 uppercase mt-1">Scale 0-15</div>
-                                                </div>
-                                                <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
-                                                    <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Intrinsic Upside</div>
-                                                    <div className={clsx(
-                                                        "text-3xl font-black tracking-tighter",
-                                                        (parseFloat(meta.upside || 0)) > 0 ? "text-green-400" : "text-red-400"
-                                                    )}>
-                                                        {(parseFloat(meta.upside || 0)) > 0 ? '+' : ''}{meta.upside || '0.0'}%
+                                            {/* Header Section */}
+                                            <header className="mb-16 border-b border-white/10 pb-16">
+                                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                                                    <div>
+                                                        <div className="flex items-center gap-3 mb-4">
+                                                            <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black rounded-md tracking-widest uppercase">
+                                                                {meta.archetype || 'Asset Research'}
+                                                            </span>
+                                                            <span className="w-1 h-1 rounded-full bg-white/20"></span>
+                                                            <span className="text-muted-foreground text-[10px] font-bold uppercase tracking-widest">
+                                                                {new Date(selectedReport.created_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
+                                                            </span>
+                                                        </div>
+                                                        <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white mb-6">
+                                                            {selectedReport.ticker}
+                                                        </h1>
+                                                        <p className="text-xl text-muted-foreground font-medium max-w-2xl leading-relaxed">
+                                                            Comprehensive investment analysis powered by Deepseek V4.0 Pro engine.
+                                                        </p>
                                                     </div>
-                                                    <div className="text-[9px] font-bold text-muted-foreground/40 uppercase mt-1">vs Target Price</div>
+
+                                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 shrink-0">
+                                                        <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 min-w-[140px]">
+                                                            <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-3 opacity-50">Conviction</div>
+                                                            <div className="text-4xl font-black text-blue-500 tracking-tighter">{meta.conviction || '0'}</div>
+                                                        </div>
+                                                        <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 min-w-[140px]">
+                                                            <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-3 opacity-50">Upside</div>
+                                                            <div className={clsx(
+                                                                "text-4xl font-black tracking-tighter",
+                                                                (parseFloat(meta.upside || 0)) > 0 ? "text-green-400" : "text-red-400"
+                                                            )}>
+                                                                {meta.upside || '0.0'}%
+                                                            </div>
+                                                        </div>
+                                                        <div className="hidden sm:block bg-white/[0.02] border border-white/5 rounded-2xl p-6 min-w-[140px]">
+                                                            <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-3 opacity-50">Rating</div>
+                                                            <div className="text-4xl font-black text-white tracking-tighter uppercase">{meta.action || 'HOLD'}</div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
-                                                    <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">Archetype</div>
-                                                    <div className="text-xl font-black text-white tracking-tighter uppercase whitespace-nowrap">{meta.archetype || 'N/A'}</div>
-                                                    <div className="text-[9px] font-bold text-muted-foreground/40 uppercase mt-1">Risk Profile</div>
+                                            </header>
+
+                                            {/* Report Content */}
+                                            {selectedReport.status === 'pending' ? (
+                                                <div className="flex flex-col items-center justify-center py-32 gap-8 text-center bg-white/[0.02] border border-white/5 rounded-[40px]">
+                                                    <div className="relative">
+                                                        <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full animate-pulse"></div>
+                                                        <RefreshCw className="h-16 w-16 text-blue-500 animate-spin relative z-10" />
+                                                        <Bot className="h-8 w-8 absolute top-4 left-4 text-white relative z-10" />
+                                                    </div>
+                                                    <div>
+                                                        <h3 className="text-3xl font-black text-white mb-3">AI Engine Processing...</h3>
+                                                        <p className="text-muted-foreground text-lg max-w-sm font-medium">
+                                                            Generating high-fidelity research for {selectedReport.ticker}. 
+                                                            This typically takes 2-4 minutes.
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </>
+                                            ) : (
+                                                <div className="prose prose-invert prose-blue max-w-none">
+                                                    <ReactMarkdown 
+                                                        components={{
+                                                            h1: ({node, ...props}) => <h1 id={`heading-${headingIndex++}`} className="text-4xl font-black mt-24 mb-8 text-white tracking-tight border-b border-white/10 pb-6 uppercase" {...props} />,
+                                                            h2: ({node, ...props}) => <h2 id={`heading-${headingIndex++}`} className="text-2xl font-black mt-16 mb-6 text-blue-400 tracking-wide uppercase" {...props} />,
+                                                            h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-10 mb-4 text-white tracking-tight" {...props} />,
+                                                            p: ({node, ...props}) => <p className="text-lg text-slate-300 leading-[1.8] mb-8 font-medium" {...props} />,
+                                                            ul: ({node, ...props}) => <ul className="space-y-4 mb-10 list-none pl-0" {...props} />,
+                                                            li: ({node, ...props}) => (
+                                                                <li className="flex items-start gap-4 text-lg text-slate-400 font-medium leading-[1.8]">
+                                                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500/40 mt-3 shrink-0"></span>
+                                                                    {props.children}
+                                                                </li>
+                                                            ),
+                                                            blockquote: ({node, ...props}) => (
+                                                                <blockquote className="border-l-4 border-blue-500/50 bg-blue-500/5 px-8 py-6 rounded-r-3xl italic text-xl text-slate-200 mb-10" {...props} />
+                                                            ),
+                                                            code: ({node, ...props}) => (
+                                                                <code className="bg-slate-800/50 px-2 py-0.5 rounded text-blue-300 font-mono text-base" {...props} />
+                                                            )
+                                                        }}
+                                                    >
+                                                        {(selectedReport.content || "")
+                                                            .replace(/^```(markdown|json|text)?/i, '')
+                                                            .replace(/```$/, '')
+                                                            .replace(/\\n/g, '\n')
+                                                            .replace(/\\t/g, '\t')
+                                                            .trim()}
+                                                    </ReactMarkdown>
+
+                                                    {/* Footer stats */}
+                                                    <footer className="mt-24 pt-12 border-t border-white/5 flex flex-wrap gap-8 text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">
+                                                        <div className="flex items-center gap-2"><DollarSign className="h-3 w-3" /> Compute Cost: ${selectedReport.cost || '0.00'}</div>
+                                                        <div className="flex items-center gap-2"><Activity className="h-3 w-3" /> Token Density: {selectedReport.usage?.total_tokens || 0} units</div>
+                                                        <div className="flex items-center gap-2"><Calendar className="h-3 w-3" /> Processed At: {new Date(selectedReport.created_at).toISOString()}</div>
+                                                    </footer>
+                                                </div>
+                                            )}
+                                        </article>
                                     );
                                 })()}
-
-                                <div className="flex justify-between items-start mb-8">
-                                    <div>
-                                        <h2 className="text-4xl font-black tracking-tighter text-foreground mb-2 flex items-center gap-4">
-                                            {selectedReport.ticker}
-                                            <span className="text-sm font-normal bg-accent/10 text-accent px-3 py-1 rounded-full tracking-normal">
-                                                Deepseek V4.0 Pro
-                                            </span>
-                                        </h2>
-                                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                                            <span className="flex items-center gap-1.5"><Calendar className="h-4 w-4" /> {new Date(selectedReport.created_at).toLocaleString()}</span>
-                                            <span className="flex items-center gap-1.5"><DollarSign className="h-4 w-4" /> Cost: ${selectedReport.cost}</span>
-                                            <span className="flex items-center gap-1.5"><Activity className="h-4 w-4" /> {selectedReport.usage?.total_tokens || 0} Tokens</span>
-                                        </div>
-                                    </div>
-                                    <button 
-                                        onClick={() => downloadReport(selectedReport)}
-                                        className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-xl text-xs font-bold transition-all border border-white/10"
-                                    >
-                                        <Download className="h-4 w-4" /> DOWNLOAD .TXT
-                                    </button>
-                                </div>
-
-                                {selectedReport.status === 'pending' ? (
-                                    <div className="flex flex-col items-center justify-center py-20 gap-6 text-center">
-                                        <div className="relative">
-                                            <RefreshCw className="h-12 w-12 text-accent animate-spin" />
-                                            <Bot className="h-6 w-6 absolute top-3 left-3 text-white" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-xl font-bold mb-2">Deepseek is currently thinking...</h3>
-                                            <p className="text-muted-foreground text-sm max-w-sm">
-                                                The analysis for {selectedReport.ticker} is being processed in the cloud. This usually takes 2-4 minutes.
-                                            </p>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className="prose prose-invert prose-blue max-w-none font-sans">
-                                        <div className="bg-slate-950/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 md:p-10 shadow-2xl shadow-black/50 whitespace-pre-wrap break-words text-slate-100 text-base sm:text-lg leading-relaxed">
-                                            <ReactMarkdown 
-                                                components={{
-                                                    h1: ({node, ...props}) => {
-                                                        const text = String(props.children || "").toLowerCase();
-                                                        let id = "";
-                                                        if (text.includes("overview")) id = "section-overview";
-                                                        else if (text.includes("macro")) id = "section-macro";
-                                                        else if (text.includes("business")) id = "section-business";
-                                                        else if (text.includes("valuation")) id = "section-valuation";
-                                                        else if (text.includes("scenario")) id = "section-scenarios";
-                                                        else if (text.includes("risk") || text.includes("catalyst")) id = "section-risks";
-                                                        else if (text.includes("red team")) id = "section-redteam";
-                                                        else if (text.includes("opinion") || text.includes("final")) id = "section-opinion";
-                                                        
-                                                        return <h1 id={id} className="text-3xl font-black mt-10 mb-6 text-foreground tracking-tight border-b border-white/10 pb-4" {...props} />;
-                                                    },
-                                                    h2: ({node, ...props}) => {
-                                                        const text = String(props.children || "").toLowerCase();
-                                                        let id = "";
-                                                        if (text.includes("overview")) id = "section-overview";
-                                                        else if (text.includes("macro")) id = "section-macro";
-                                                        else if (text.includes("business")) id = "section-business";
-                                                        else if (text.includes("valuation")) id = "section-valuation";
-                                                        else if (text.includes("scenario")) id = "section-scenarios";
-                                                        else if (text.includes("risk") || text.includes("catalyst")) id = "section-risks";
-                                                        else if (text.includes("red team")) id = "section-redteam";
-                                                        else if (text.includes("opinion") || text.includes("final")) id = "section-opinion";
-
-                                                        return <h2 id={id} className="text-2xl font-bold mt-8 mb-4 text-blue-400" {...props} />;
-                                                    },
-                                                    h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-6 mb-3 text-slate-100" {...props} />,
-                                                    p: ({node, ...props}) => <p className="mb-6 text-slate-300 leading-relaxed font-medium" {...props} />,
-                                                    li: ({node, ...props}) => <li className="mb-2 text-slate-300 font-medium" {...props} />,
-                                                    code: ({node, ...props}) => <code className="bg-blue-500/10 px-1.5 py-0.5 rounded text-blue-300 font-mono text-sm" {...props} />
-                                                }}
-                                            >
-                                                {(selectedReport.content || "")
-                                                    .replace(/^```(markdown|json|text)?/i, '')
-                                                    .replace(/```$/, '')
-                                                    .replace(/\\n/g, '\n')
-                                                    .replace(/\\t/g, '\t')
-                                                    .trim()}
-                                            </ReactMarkdown>
-                                        </div>
-                                    </div>
-                                )}
                             </div>
-                        </>
+                        </div>
                     ) : (
                         <div className="h-full w-full flex flex-col items-center justify-center text-muted-foreground p-12 text-center">
-                            <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mb-6 border border-white/5">
+                            <div className="w-24 h-24 bg-white/5 rounded-[32px] flex items-center justify-center mb-8 border border-white/5 shadow-2xl">
                                 <FileText className="h-10 w-10 opacity-20" />
                             </div>
-                            <h3 className="text-xl font-bold text-foreground/50 mb-2">Select a Report to View</h3>
-                            <p className="text-sm max-w-xs opacity-40">
-                                All your AI investment analyses are stored securely in the cloud. Select one from the left to start reading.
+                            <h3 className="text-2xl font-black text-white/50 mb-3 tracking-tight">Select Analysis Report</h3>
+                            <p className="text-base max-w-sm opacity-30 font-medium">
+                                Secure cloud repository for automated equity research. 
+                                Choose a ticker to visualize high-fidelity investment signals.
                             </p>
                         </div>
                     )}
