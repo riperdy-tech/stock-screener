@@ -737,6 +737,9 @@ False conservatism audit 재계산 조건
 - current monetization과 future optionality 혼합 금지
 - 보고서 외 설명 금지
 - 결과는 영어로 모두 출력한다.
+- ## (h2)만 사용하여 섹션 제목을 표시한다. ### (h3) 또는 그 이하의 heading level을 절대 사용하지 않는다.
+- 모든 섹션 제목은 영어로 "SECTION X. TITLE" 형식을 따른다.
+- subsection이 필요하면 ### 대신 **굵은 텍스트**를 사용한다.
 
 ### Company Ticker: ${ticker.toUpperCase()}
 

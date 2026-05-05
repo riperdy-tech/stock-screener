@@ -7,6 +7,24 @@ import { supabase } from "@/lib/supabase";
 import ReactMarkdown from 'react-markdown';
 import clsx from "clsx";
 
+// Normalize markdown content for consistent TOC parsing:
+// Converts h3-h6 (### to ######) to bold text so only h1/h2 remain as headings.
+// This ensures TOC always works even if DeepSeek ignores format rules.
+function normalizeContent(raw: string): string {
+    if (!raw) return '';
+    return raw
+        .split('\n')
+        .map(line => {
+            const match = line.match(/^(#{3,6})\s+(.+)/);
+            if (match) {
+                const text = match[2];
+                return `**${text}**`;
+            }
+            return line;
+        })
+        .join('\n');
+}
+
 // Safely extract text from React children (handles strings, arrays, nested elements)
 function reactNodeToText(node: any): string {
     if (typeof node === 'string') return node;
@@ -375,7 +393,8 @@ export function ReportsDashboard() {
                                         </h3>
                                         <div className="space-y-1">
                                             {(() => {
-                                                const rawLines = (selectedReport.content || "").split('\n');
+                                                const normalized = normalizeContent(selectedReport.content || "");
+                                                const rawLines = normalized.split('\n');
                                                 const headings: {id: string, title: string, level: number}[] = [];
                                                 
                                                 rawLines.forEach((line: string, idx: number) => {
@@ -451,8 +470,9 @@ export function ReportsDashboard() {
                                 {(() => {
                                     const meta = getMeta(selectedReport);
                                     
-                                    // PRE-PARSE HEADINGS for stability
-                                    const rawLines = (selectedReport.content || "").split('\n');
+                                    // PRE-PARSE HEADINGS for stability (use normalized content)
+                                    const normalizedContent = normalizeContent(selectedReport.content || "");
+                                    const rawLines = normalizedContent.split('\n');
                                     const headings: {id: string, title: string, level: number}[] = [];
                                     
                                     rawLines.forEach((line: string, idx: number) => {
@@ -573,12 +593,14 @@ export function ReportsDashboard() {
                                                             )
                                                         }}
                                                     >
-                                                        {(selectedReport.content || "")
-                                                            .replace(/^```(markdown|json|text)?/i, '')
-                                                            .replace(/```$/, '')
-                                                            .replace(/\\n/g, '\n')
-                                                            .replace(/\\t/g, '\t')
-                                                            .trim()}
+                                                        {normalizeContent(
+                                                            (selectedReport.content || "")
+                                                                .replace(/^```(markdown|json|text)?/i, '')
+                                                                .replace(/```$/, '')
+                                                                .replace(/\\n/g, '\n')
+                                                                .replace(/\\t/g, '\t')
+                                                                .trim()
+                                                        )}
                                                     </ReactMarkdown>
 
                                                     {/* Footer stats */}
