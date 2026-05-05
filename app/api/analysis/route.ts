@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabaseAdmin as supabase } from '@/lib/supabase';
 
 export async function POST(req: Request) {
     try {
@@ -9,16 +9,16 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Unauthorized: Invalid password" }, { status: 401 });
         }
 
-        // 1. Create a "Pending" request in Supabase
+        // 1. Create or update a "Pending" request in Supabase
         const { error: sbError } = await supabase
             .from('ai_reports')
-            .insert({
+            .upsert({
                 ticker,
                 content: "Analysis in progress... please wait.",
                 status: 'pending',
                 prompt: prompt,
                 created_at: new Date().toISOString()
-            });
+            }, { onConflict: 'ticker' });
 
         if (sbError) throw sbError;
 
