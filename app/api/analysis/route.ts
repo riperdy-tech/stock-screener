@@ -9,16 +9,19 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Unauthorized: Invalid password" }, { status: 401 });
         }
 
-        // 1. Create or update a "Pending" request in Supabase
+        // 1. Clear any existing record for this ticker (pending or error), then insert fresh.
+        // This avoids all upsert/conflict constraint issues regardless of DB schema.
+        await supabase.from('ai_reports').delete().eq('ticker', ticker);
+
         const { error: sbError } = await supabase
             .from('ai_reports')
-            .upsert({
+            .insert({
                 ticker,
                 content: "Analysis in progress... please wait.",
                 status: 'pending',
                 prompt: prompt,
                 created_at: new Date().toISOString()
-            }, { onConflict: 'ticker' });
+            });
 
         if (sbError) throw sbError;
 
