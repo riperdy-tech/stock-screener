@@ -68,7 +68,7 @@ export function ReportsDashboard() {
 
         const observer = new IntersectionObserver(
             (entries) => {
-                entries.forEach((entry) => {
+                entries.forEach((entry: IntersectionObserverEntry) => {
                     if (entry.isIntersecting) {
                         setActiveHeading(entry.target.id);
                     }
@@ -84,7 +84,7 @@ export function ReportsDashboard() {
         // Observer headings after they render
         const timer = setTimeout(() => {
             const headings = document.querySelectorAll('article h1, article h2');
-            headings.forEach((h) => observer.observe(h));
+            headings.forEach((h: Element) => observer.observe(h));
         }, 500);
 
         return () => {
@@ -93,7 +93,7 @@ export function ReportsDashboard() {
         };
     }, [selectedReport]);
 
-    const filteredReports = reports.filter(r => {
+    const filteredReports = reports.filter((r: any) => {
         const matchesSearch = r.ticker.toLowerCase().includes(search.toLowerCase());
         const meta = r.metadata || extractMeta(r.content);
         const matchesAction = filterAction === "ALL" || meta.action === filterAction;
@@ -220,7 +220,7 @@ export function ReportsDashboard() {
                             </div>
                         ) : (
                             <div className="flex flex-col">
-                                {filteredReports.map((report) => {
+                                {filteredReports.map((report: any) => {
                                     // Dynamic Metadata Extraction
                                     let meta = report.metadata || {};
                                     if (!report.metadata && report.content) {
@@ -319,7 +319,7 @@ export function ReportsDashboard() {
                                                     return <p className="text-[10px] text-muted-foreground uppercase">No sections detected</p>;
                                                 }
 
-                                                    return headings.map((h) => (
+                                                    return headings.map((h: any) => (
                                                         <button 
                                                             key={h.id}
                                                             onClick={() => {
