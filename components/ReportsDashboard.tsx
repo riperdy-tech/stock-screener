@@ -7,6 +7,28 @@ import { supabase } from "@/lib/supabase";
 import ReactMarkdown from 'react-markdown';
 import clsx from "clsx";
 
+// Robust metadata extractor — grabs the JSON object between [DATA_BLOCK] and the separator/end
+const extractMeta = (content: string): any => {
+    if (!content) return {};
+    try {
+        // Match the JSON object directly — stops at the ════ separator or end of string
+        const match = content.match(/\[DATA_BLOCK\]\s*(\{[\s\S]*?\})\s*(?:═|$)/);
+        if (match && match[1]) return JSON.parse(match[1].trim());
+    } catch (e) {
+        // fallback: try to find any JSON object after [DATA_BLOCK]
+        try {
+            const idx = content.indexOf('[DATA_BLOCK]');
+            if (idx !== -1) {
+                const after = content.slice(idx + 12).trim();
+                const end = after.indexOf('═');
+                const jsonStr = end !== -1 ? after.slice(0, end) : after;
+                return JSON.parse(jsonStr.trim());
+            }
+        } catch {}
+    }
+    return {};
+};
+
 export function ReportsDashboard() {
     const [reports, setReports] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
@@ -40,25 +62,11 @@ export function ReportsDashboard() {
 
     const filteredReports = reports.filter(r => {
         const matchesSearch = r.ticker.toLowerCase().includes(search.toLowerCase());
-        
-        // Dynamic Metadata Extraction (Fallback if DB column missing)
-        let meta = r.metadata || {};
-        if (!r.metadata && r.content) {
-            try {
-                const blockMatch = r.content.match(/\[DATA_BLOCK\]\s*([\s\S]*?)(?=\s*\[\/DATA_BLOCK\]|$)/i);
-                if (blockMatch && blockMatch[1]) {
-                    meta = JSON.parse(blockMatch[1].trim());
-                }
-            } catch (e) {
-                console.warn("Failed to parse dynamic metadata for", r.ticker);
-            }
-        }
-
+        const meta = r.metadata || extractMeta(r.content);
         const matchesAction = filterAction === "ALL" || meta.action === filterAction;
         const matchesArchetype = filterArchetype === "ALL" || meta.archetype === filterArchetype;
         const matchesValuation = filterValuation === "ALL" || meta.valuation_status === filterValuation;
         const matchesConviction = (meta.conviction || 0) >= filterConviction;
-        
         return matchesSearch && matchesAction && matchesArchetype && matchesValuation && matchesConviction;
     });
 
@@ -245,10 +253,13 @@ export function ReportsDashboard() {
                     </div>
                 </div>
 
-                <main className={clsx(
-                    "flex-1 bg-[#0a0c10] overflow-y-auto no-scrollbar relative transition-all flex",
-                    !selectedReport && "hidden md:flex"
-                )}>
+                <main
+                    id="main-scroll-panel"
+                    className={clsx(
+                        "flex-1 bg-[#0a0c10] overflow-y-auto no-scrollbar relative transition-all flex",
+                        !selectedReport && "hidden md:flex"
+                    )}
+                >
                     {selectedReport ? (
                         <>
                             {/* Table of Contents Sidebar (Desktop) */}
@@ -267,13 +278,13 @@ export function ReportsDashboard() {
                                         <button 
                                             key={section.id}
                                             onClick={() => {
-                                                const container = document.getElementById('report-scroll-container');
+                                                const mainPanel = document.getElementById('main-scroll-panel');
                                                 const target = document.getElementById(`section-${section.id}`);
-                                                if (target && container) {
-                                                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                                if (target && mainPanel) {
+                                                    mainPanel.scrollTo({ top: target.offsetTop - 32, behavior: 'smooth' });
                                                 }
                                             }}
-                                            className="block text-left text-[10px] font-black text-muted-foreground hover:text-blue-400 transition-colors uppercase tracking-widest"
+                                            className="block text-left text-[10px] font-black text-muted-foreground hover:text-blue-400 transition-colors uppercase tracking-widest py-1"
                                         >
                                             {section.title}
                                         </button>
@@ -281,18 +292,10 @@ export function ReportsDashboard() {
                                 </div>
                             </div>
 
-                            <div id="report-scroll-container" className="flex-1 p-4 md:p-12 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 overflow-y-auto no-scrollbar">
+                            <div className="flex-1 p-4 md:p-12 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
                                 {/* Dynamic Metadata Extraction for View */}
                                 {(() => {
-                                    let meta = selectedReport.metadata || {};
-                                    if (!selectedReport.metadata && selectedReport.content) {
-                                        try {
-                                            const blockMatch = selectedReport.content.match(/\[DATA_BLOCK\]\s*([\s\S]*?)(?=\s*\[\/DATA_BLOCK\]|$)/i);
-                                            if (blockMatch && blockMatch[1]) {
-                                                meta = JSON.parse(blockMatch[1].trim());
-                                            }
-                                        } catch (e) {}
-                                    }
+                                    const meta = selectedReport.metadata || extractMeta(selectedReport.content);
 
                                     return (
                                         <>
