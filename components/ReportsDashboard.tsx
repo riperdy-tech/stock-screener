@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Search, Sparkles, Calendar, DollarSign, Activity, ChevronRight, RefreshCw, ArrowLeft, Download, FileText, Bot } from "lucide-react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
@@ -163,35 +163,6 @@ export function ReportsDashboard() {
         const matchesConviction = meta.conviction >= filterConviction;
         return matchesSearch && matchesAction && matchesArchetype && matchesValuation && matchesConviction;
     });
-
-    // Shared heading parsing — computed once, used by TOC and ReactMarkdown
-    const reportHeadings = useMemo(() => {
-        if (!selectedReport?.content) return [];
-        const rawLines = selectedReport.content.split('\n');
-        const headings: { id: string; title: string; level: number }[] = [];
-        rawLines.forEach((line: string, idx: number) => {
-            const trimmed = line.trim();
-            if (trimmed.startsWith('#')) {
-                const level = trimmed.match(/^#+/)?.[0].length || 1;
-                const title = trimmed.replace(/^#+\s*/, '').trim();
-                if (title) headings.push({ id: `h-${idx}`, title, level });
-            } else if (trimmed.toUpperCase().startsWith('SECTION')) {
-                headings.push({ id: `h-${idx}`, title: trimmed, level: 1 });
-            }
-        });
-        return headings;
-    }, [selectedReport?.content]);
-
-    // Scroll to a heading by ID
-    const scrollToHeading = (headingId: string) => {
-        const mainPanel = document.getElementById('main-scroll-panel');
-        const target = document.getElementById(headingId);
-        if (target && mainPanel) {
-            const panelRect = mainPanel.getBoundingClientRect();
-            const targetRect = target.getBoundingClientRect();
-            mainPanel.scrollBy({ top: targetRect.top - panelRect.top - 32, behavior: 'smooth' });
-        }
-    };
 
     const downloadReport = (report: any) => {
         const element = document.createElement("a");
@@ -385,13 +356,38 @@ export function ReportsDashboard() {
                                             Report Structure
                                         </h3>
                                         <div className="space-y-1">
-                                            {reportHeadings.length === 0 ? (
-                                                <p className="text-[10px] text-muted-foreground uppercase">No sections detected</p>
-                                            ) : (
-                                                reportHeadings.map((h: any) => (
+                                            {(() => {
+                                                const rawLines = (selectedReport.content || "").split('\n');
+                                                const headings: {id: string, title: string, level: number}[] = [];
+                                                
+                                                rawLines.forEach((line: string, idx: number) => {
+                                                    const trimmed = line.trim();
+                                                    if (trimmed.startsWith('#')) {
+                                                        const level = trimmed.match(/^#+/)?.[0].length || 1;
+                                                        const title = trimmed.replace(/^#+\s*/, '').trim();
+                                                        headings.push({ id: `h-${idx}`, title, level });
+                                                    } else if (trimmed.toUpperCase().startsWith('SECTION')) {
+                                                        headings.push({ id: `h-${idx}`, title: trimmed, level: 1 });
+                                                    }
+                                                });
+
+                                                if (headings.length === 0) {
+                                                    return <p className="text-[10px] text-muted-foreground uppercase">No sections detected</p>;
+                                                }
+
+                                                return headings.map((h: any) => (
                                                     <button 
                                                         key={h.id}
-                                                        onClick={() => scrollToHeading(h.id)}
+                                                        onClick={() => {
+                                                            const mainPanel = document.getElementById('main-scroll-panel');
+                                                            const target = document.getElementById(h.id);
+                                                            console.log("Navigating to:", h.id, target);
+                                                            if (target && mainPanel) {
+                                                                const panelTop = mainPanel.getBoundingClientRect().top;
+                                                                const targetTop = target.getBoundingClientRect().top;
+                                                                mainPanel.scrollBy({ top: targetTop - panelTop - 32, behavior: 'smooth' });
+                                                            }
+                                                        }}
                                                         className={clsx(
                                                             "group flex items-start gap-3 w-full text-left py-2.5 px-3 rounded-lg transition-all duration-300 relative",
                                                             activeHeading === h.id ? "bg-blue-500/10" : "hover:bg-white/[0.03]",
@@ -412,7 +408,8 @@ export function ReportsDashboard() {
                                                             {h.title}
                                                         </span>
                                                     </button>
-                                                ))}
+                                                ));
+                                            })()}
                                         </div>
                                     </div>
 
@@ -433,6 +430,22 @@ export function ReportsDashboard() {
                             <div className="flex-1 p-6 md:p-16 lg:p-20 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
                                 {(() => {
                                     const meta = getMeta(selectedReport);
+                                    
+                                    // PRE-PARSE HEADINGS for stability
+                                    const rawLines = (selectedReport.content || "").split('\n');
+                                    const headings: {id: string, title: string, level: number}[] = [];
+                                    
+                                    rawLines.forEach((line: string, idx: number) => {
+                                        const trimmed = line.trim();
+                                        // Match # Markdown OR "SECTION X" lines
+                                        if (trimmed.startsWith('#')) {
+                                            const level = trimmed.match(/^#+/)?.[0].length || 1;
+                                            const title = trimmed.replace(/^#+\s*/, '').trim();
+                                            headings.push({ id: `h-${idx}`, title, level });
+                                        } else if (trimmed.toUpperCase().startsWith('SECTION')) {
+                                            headings.push({ id: `h-${idx}`, title: trimmed, level: 1 });
+                                        }
+                                    });
 
                                     return (
                                         <article className="relative">
@@ -509,12 +522,12 @@ export function ReportsDashboard() {
                                                         components={{
                                                             h1: ({node, ...props}) => {
                                                                 const title = reactNodeToText(props.children);
-                                                                const h = reportHeadings.find(h => h.title === title);
+                                                                const h = headings.find(h => h.title === title);
                                                                 return <h1 id={h?.id} className="text-4xl font-black mt-24 mb-8 text-white tracking-tight border-b border-white/10 pb-6 uppercase" {...props} />;
                                                             },
                                                             h2: ({node, ...props}) => {
                                                                 const title = reactNodeToText(props.children);
-                                                                const h = reportHeadings.find(h => h.title === title);
+                                                                const h = headings.find(h => h.title === title);
                                                                 return <h2 id={h?.id} className="text-2xl font-black mt-16 mb-6 text-blue-400 tracking-wide uppercase" {...props} />;
                                                             },
                                                             h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-10 mb-4 text-white tracking-tight" {...props} />,
@@ -522,7 +535,7 @@ export function ReportsDashboard() {
                                                                 const text = reactNodeToText(props.children);
                                                                 // If it's a SECTION line that isn't a markdown header, give it an ID
                                                                 const isSection = text.toUpperCase().startsWith('SECTION');
-                                                                const h = isSection ? reportHeadings.find(h => h.title === text) : null;
+                                                                const h = isSection ? headings.find(h => h.title === text) : null;
                                                                 return <p id={h?.id} className={clsx("text-lg leading-[1.8] mb-8 font-medium", isSection ? "text-blue-500 font-black text-2xl uppercase mt-20" : "text-slate-300")} {...props} />;
                                                             },
                                                             ul: ({node, ...props}) => <ul className="space-y-4 mb-10 list-none pl-0" {...props} />,
