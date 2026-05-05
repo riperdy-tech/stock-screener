@@ -104,6 +104,24 @@ export function ReportsDashboard() {
         fetchReports();
     }, []);
 
+    // Poll Supabase when viewing a pending report — auto-refresh when analysis completes
+    useEffect(() => {
+        if (!selectedReport || selectedReport.status !== 'pending') return;
+        const interval = setInterval(async () => {
+            const { data } = await supabase
+                .from('ai_reports')
+                .select('*')
+                .eq('id', selectedReport.id)
+                .single();
+            if (data && data.status !== 'pending') {
+                // Update the report in the list and selected report
+                setReports(prev => prev.map(r => r.id === data.id ? data : r));
+                setSelectedReport(data);
+            }
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [selectedReport?.id, selectedReport?.status]);
+
     const fetchReports = async () => {
         setLoading(true);
         try {
@@ -364,6 +382,8 @@ export function ReportsDashboard() {
                                                     const trimmed = line.trim();
                                                     if (trimmed.startsWith('#')) {
                                                         const level = trimmed.match(/^#+/)?.[0].length || 1;
+                                                        // Only show h1 and h2 in TOC (skip h3+ sub-sections like 2.1, 2.2)
+                                                        if (level > 2) return;
                                                         const title = trimmed.replace(/^#+\s*/, '').trim();
                                                         headings.push({ id: `h-${idx}`, title, level });
                                                     } else if (trimmed.toUpperCase().startsWith('SECTION')) {

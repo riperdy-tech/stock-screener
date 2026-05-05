@@ -348,16 +348,13 @@ export function ScreenerDashboard() {
                 <header className="py-3 md:h-16 border-b border-border/50 flex flex-col md:flex-row flex-shrink-0 items-start md:items-center justify-between px-4 md:px-6 bg-card/70 backdrop-blur-xl sticky top-0 z-30 shadow-sm gap-3 md:gap-0">
                     <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
                         <div className="flex items-center gap-2 md:gap-4">
-                            <h1 className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent truncate max-w-[150px] sm:max-w-none">
+                            <h1 className="text-lg md:text-xl font-bold text-foreground truncate max-w-[150px] sm:max-w-none">
                                 {t('appTitle')}
                             </h1>
-                            <span className="hidden sm:inline-block text-xs text-muted-foreground uppercase tracking-widest font-mono border border-border px-2 py-1 rounded">
-                                Phase 1
-                            </span>
                         </div>
                         
                         <div className="flex md:hidden items-center gap-2 shrink-0">
-                             <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500 transition-all text-[11px] font-black shadow-[0_0_15px_rgba(37,99,235,0.4)] active:scale-95">
+                             <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 rounded-full transition-all text-[11px] font-black active:scale-95">
                                 <Sparkles className="h-3.5 w-3.5" />
                                 REPORTS
                              </Link>
@@ -366,7 +363,7 @@ export function ScreenerDashboard() {
                             </button>
                         </div>
                         
-                        <Link href="/reports" className="hidden md:flex text-sm bg-blue-600 text-white hover:bg-blue-500 px-6 py-2 rounded-full font-black items-center gap-2 tracking-tighter shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all hover:scale-105 active:scale-95 ml-6">
+                        <Link href="/reports" className="hidden md:flex text-sm bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 px-6 py-2 rounded-full font-black items-center gap-2 tracking-tighter transition-all active:scale-95 ml-6">
                            <Sparkles className="h-4 w-4" /> RECENT REPORTS
                         </Link>
                     </div>
