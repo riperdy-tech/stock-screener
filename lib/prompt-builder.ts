@@ -240,5 +240,6 @@ export async function buildPrompt(ticker: string, result: ScreeningResult): Prom
         rs2Content = "Failed to load RS2.txt prompt template.";
     }
 
-    return `${rs2Content}\n\n### Company Ticker: ${ticker.toUpperCase()}\n\n${dataBrief}`;
-}
+    return `${rs2Content}\n\n### Company Ticker: ${ticker.toUpperCase()}\n\n${dataBrief}\n\n[DATA_BLOCK]\nAfter your full analysis above, append EXACTLY this JSON block (no markdown fences, no extra text) on its own line:\n{"conviction":<0-15 number>,"upside":"<number%>","action":"<BUY|ACCUMULATE|HOLD|SELL>","archetype":"<Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led / High-Beta|Regulatory>","valuation_status":"<UNDERVALUED|FAIR_TO_UNDERVALUED|FAIR|OVERVALUED>"}\nReplace angle-bracket placeholders with your actual assessment values. Only this JSON object on the line after [DATA_BLOCK].`;
+}`;
+

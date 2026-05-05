@@ -740,7 +740,12 @@ False conservatism audit 재계산 조건
 
 ### Company Ticker: ${ticker.toUpperCase()}
 
-${formatFinancialData(financialData)}`;
+${formatFinancialData(financialData)}
+
+[DATA_BLOCK]
+After your full analysis above, append EXACTLY this JSON block (no markdown fences, no extra text) on its own line:
+{"conviction":<0-15 number>,"upside":"<number%>","action":"<BUY|ACCUMULATE|HOLD|SELL>","archetype":"<Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led / High-Beta|Regulatory>","valuation_status":"<UNDERVALUED|FAIR_TO_UNDERVALUED|FAIR|OVERVALUED>"}
+Replace angle-bracket placeholders with your actual assessment values. Only this JSON object on the line after [DATA_BLOCK].`;
 
     const promptTemplate = customTemplate 
         ? `${customTemplate}\n\n${formatFinancialData(financialData)}`

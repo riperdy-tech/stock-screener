@@ -1,5 +1,6 @@
 import os
 import json
+import re
 import requests
 import time
 from supabase import create_client
@@ -73,21 +74,43 @@ def run_worker():
 
         # --- SMART CLEANER & METADATA EXTRACTION ---
         metadata = {}
-        if "[DATA_BLOCK]" in content:
+        
+        # Extract [DATA_BLOCK] JSON using regex (robust against formatting variance)
+        block_match = re.search(r'\[DATA_BLOCK\]\s*(\{[\s\S]*?\})\s*$', content)
+        if block_match:
             try:
-                parts = content.split("[DATA_BLOCK]")
-                content = parts[0].strip()
-                # Extract the JSON string from after the tag
-                json_part = parts[1].strip()
-                # Clean up any trailing markers from the template
-                json_part = json_part.split("════════════════")[0].strip()
-                metadata = json.loads(json_part)
-                print(f"Extracted metadata for {ticker}: {metadata.get('action')}, Conviction: {metadata.get('conviction')}")
-            except Exception as e:
-                print(f"Metadata parsing failed: {e}")
+                metadata = json.loads(block_match.group(1))
+                # Strip the [DATA_BLOCK] and its JSON from the main content
+                content = content[:block_match.start()].strip()
+                print(f"Extracted metadata for {ticker}: action={metadata.get('action')}, conviction={metadata.get('conviction')}, upside={metadata.get('upside')}")
+            except json.JSONDecodeError as e:
+                print(f"Metadata JSON parse failed for {ticker}: {e}")
+                # Try to salvage: find anything that looks like a JSON object after [DATA_BLOCK]
+                fallback = re.search(r'\[DATA_BLOCK\]\s*(\{[^}]+\})', content)
+                if fallback:
+                    try:
+                        metadata = json.loads(fallback.group(1))
+                        content = content[:fallback.start()].strip()
+                        print(f"Salvaged partial metadata for {ticker}")
+                    except:
+                        pass
 
-        # Final cleanup of leftover formatting tags
-        content = content.replace("```json", "").replace("```markdown", "").replace("```", "").strip()
+        # Ensure metadata fields are normalized
+        if metadata:
+            metadata['conviction'] = float(metadata.get('conviction', 0))
+            metadata['action'] = str(metadata.get('action', 'HOLD')).upper()
+            metadata['archetype'] = str(metadata.get('archetype', ''))
+            metadata['valuation_status'] = str(metadata.get('valuation_status', ''))
+            upside_val = str(metadata.get('upside', '0')).replace('%', '').strip()
+            try:
+                metadata['upside'] = float(upside_val)
+            except ValueError:
+                metadata['upside'] = 0.0
+
+        # Clean up any leftover markdown fences or formatting artifacts
+        content = re.sub(r'^```(?:markdown|json|text)?\s*', '', content, flags=re.MULTILINE)
+        content = re.sub(r'```\s*$', '', content)
+        content = content.strip()
         # --------------------
         
         # Pricing
@@ -101,6 +124,7 @@ def run_worker():
             "usage": usage,
             "cost": float(f"{total_cost:.4f}"),
             "status": "completed",
+            "metadata": metadata if metadata else None,
             "created_at": datetime.now(timezone.utc).isoformat()
         }
         

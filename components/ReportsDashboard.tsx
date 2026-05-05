@@ -7,47 +7,38 @@ import { supabase } from "@/lib/supabase";
 import ReactMarkdown from 'react-markdown';
 import clsx from "clsx";
 
-// Robust metadata extractor — grabs the JSON object between [DATA_BLOCK] and the separator/end
-// Robust metadata extractor — grabs the JSON object or scrapes text patterns
-const extractMeta = (content: string): any => {
-    if (!content) return {};
-    let meta: any = {};
+// Simple metadata normalizer — prefers stored metadata column, 
+// falls back to content scraping ONLY if metadata column is missing (legacy reports)
+const getMeta = (report: any): any => {
+    // If worker already saved structured metadata, use it directly
+    if (report.metadata && typeof report.metadata === 'object' && Object.keys(report.metadata).length > 0) {
+        return {
+            conviction: parseFloat(report.metadata.conviction) || 0,
+            upside: parseFloat(report.metadata.upside) || 0,
+            action: (report.metadata.action || '').toUpperCase(),
+            archetype: report.metadata.archetype || '',
+            valuation_status: report.metadata.valuation_status || '',
+        };
+    }
     
-    try {
-        const match = content.match(/\[DATA_BLOCK\]\s*(\{[\s\S]*?\})\s*(?:═|$)/);
-        if (match && match[1]) meta = JSON.parse(match[1].trim());
-    } catch (e) {
+    // Legacy fallback: try [DATA_BLOCK] extraction from raw content (old reports)
+    if (report.content) {
         try {
-            const idx = content.indexOf('[DATA_BLOCK]');
-            if (idx !== -1) {
-                const after = content.slice(idx + 12).trim();
-                const end = after.indexOf('═');
-                const jsonStr = end !== -1 ? after.slice(0, end) : after;
-                meta = JSON.parse(jsonStr.trim());
+            const match = report.content.match(/\[DATA_BLOCK\]\s*(\{[\s\S]*?\})\s*$/);
+            if (match && match[1]) {
+                const parsed = JSON.parse(match[1].trim());
+                return {
+                    conviction: parseFloat(parsed.conviction) || 0,
+                    upside: parseFloat(String(parsed.upside || '0').replace('%', '')) || 0,
+                    action: (parsed.action || '').toUpperCase(),
+                    archetype: parsed.archetype || '',
+                    valuation_status: parsed.valuation_status || '',
+                };
             }
         } catch {}
     }
-
-    // FALLBACK: Scrape from text if fields are missing
-    if (!meta.conviction) {
-        const convMatch = content.match(/Conviction Score.*?\((?:0–15|0-15).*?\):\s*(\d+(?:\.\d+)?)/i);
-        if (convMatch) meta.conviction = convMatch[1];
-    }
-    if (!meta.upside) {
-        const upsideMatch = content.match(/Expected Price.*?\d+.*?(\d+(?:\.\d+)?%)/i) || 
-                           content.match(/Upside.*?:?\s*(\d+(?:\.\d+)?%?)/i);
-        if (upsideMatch) meta.upside = upsideMatch[1].replace('%', '');
-    }
-    if (!meta.action) {
-        const actionMatch = content.match(/(?:Decision|Rating|Action).*?:\s*(BUY|SELL|HOLD|ACCUMULATE)/i);
-        if (actionMatch) meta.action = actionMatch[1].toUpperCase();
-    }
-    if (!meta.archetype) {
-        const archMatch = content.match(/Lynch Classification.*?:?\s*(.*?)(?:\n|$)/i);
-        if (archMatch) meta.archetype = archMatch[1].trim();
-    }
-
-    return meta;
+    
+    return { conviction: 0, upside: 0, action: '', archetype: '', valuation_status: '' };
 };
 
 export function ReportsDashboard() {
@@ -116,11 +107,11 @@ export function ReportsDashboard() {
 
     const filteredReports = reports.filter((r: any) => {
         const matchesSearch = r.ticker.toLowerCase().includes(search.toLowerCase());
-        const meta = r.metadata || extractMeta(r.content);
+        const meta = getMeta(r);
         const matchesAction = filterAction === "ALL" || meta.action === filterAction;
         const matchesArchetype = filterArchetype === "ALL" || meta.archetype === filterArchetype;
         const matchesValuation = filterValuation === "ALL" || meta.valuation_status === filterValuation;
-        const matchesConviction = (meta.conviction || 0) >= filterConviction;
+        const matchesConviction = meta.conviction >= filterConviction;
         return matchesSearch && matchesAction && matchesArchetype && matchesValuation && matchesConviction;
     });
 
@@ -242,18 +233,9 @@ export function ReportsDashboard() {
                         ) : (
                             <div className="flex flex-col">
                                 {filteredReports.map((report: any) => {
-                                    // Dynamic Metadata Extraction
-                                    let meta = report.metadata || {};
-                                    if (!report.metadata && report.content) {
-                                        try {
-                                            const blockMatch = report.content.match(/\[DATA_BLOCK\]\s*([\s\S]*?)(?=\s*\[\/DATA_BLOCK\]|$)/i);
-                                            if (blockMatch && blockMatch[1]) {
-                                                meta = JSON.parse(blockMatch[1].trim());
-                                            }
-                                        } catch (e) {}
-                                    }
+                                    const meta = getMeta(report);
                                     
-                                    const upside = parseFloat(meta.upside || 0);
+                                    const upside = meta.upside;
                                     const isPositive = upside > 0;
                                     const createdAt = new Date(report.created_at);
 
@@ -398,7 +380,7 @@ export function ReportsDashboard() {
                             {/* Report Content */}
                             <div className="flex-1 p-6 md:p-16 lg:p-20 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
                                 {(() => {
-                                    const meta = selectedReport.metadata || extractMeta(selectedReport.content);
+                                    const meta = getMeta(selectedReport);
                                     
                                     // PRE-PARSE HEADINGS for stability
                                     const rawLines = (selectedReport.content || "").split('\n');
