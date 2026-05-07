@@ -57,10 +57,24 @@ jobs:
           else
             git commit -m "Auto-update: Scheduled stock data refresh"
             
-            # Pull latest changes and rebase to avoid push conflicts
-            git pull --rebase origin main
+            # Pull latest and rebase — with retry & fallback strategy
+            echo "Pulling latest from origin/main..."
+            if ! git pull --rebase --autostash origin main; then
+              echo "Rebase failed — trying merge strategy instead..."
+              git rebase --abort 2>/dev/null || true
+              git pull --no-rebase origin main || true
+            fi
             
-            # Push to the current branch
-            git push origin main
+            # Push with retry (handles transient network issues)
+            for i in 1 2 3; do
+              echo "Push attempt $i..."
+              if git push origin main; then
+                echo "Push succeeded"
+                break
+              fi
+              echo "Push attempt $i failed, retrying in 10s..."
+              sleep 10
+            done
+            
             echo "changes=true" >> $GITHUB_OUTPUT
           fi
