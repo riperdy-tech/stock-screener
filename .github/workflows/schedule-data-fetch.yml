@@ -2,8 +2,8 @@ name: Scheduled Data Fetch
 
 on:
   schedule:
-    # Runs at 00:00 UTC every 2 days
-    - cron: '0 0 */2 * *'
+    # Runs at 09:30 UTC every 2 days (4 hours before NYSE open)
+    - cron: '30 9 */2 * *'
   # Allows you to trigger it manually from the Actions tab
   workflow_dispatch:
 
