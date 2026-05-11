@@ -414,38 +414,76 @@ Must pass 37 audit points across:
 * SECTION 12. Final Execution Opinion (Action, Conviction, Weight%, Strategy)
 
 ════════════════════════════════════════════════════════════════
-■ [DATA_BLOCK] - MANDATORY FOR SYSTEM PARSING
+■ [DATA_BLOCK] — MANDATORY FOR SYSTEM PARSING (v3.0)
 ════════════════════════════════════════════════════════════════
 
-(At the very end of your response, after the Final Execution Opinion, you MUST include this exact block. Do not use markdown code blocks here, just the raw tag and valid JSON.)
+At the very end of your response, after the Final Execution Opinion, you MUST include EXACTLY this JSON structure. NO markdown fences. NO extra text. The JSON must be multi-line with proper indentation as shown. Replace ALL angle-bracket placeholders with actual values.
 
 [DATA_BLOCK]
 {
-  "ticker": "TICKER",
-  "action": "BUY/ACCUMULATE/HOLD/SELL",
-  "conviction": 10.5,
-  "archetype": "ARCHETYPE_NAME",
-  "target_price": 0.00,
-  "current_price": 0.00,
-  "upside": 0.00,
-  "valuation_status": "UNDERVALUED/FAIR_TO_UNDERVALUED/FAIR/OVERVALUED",
-  "sector": "SECTOR_NAME",
-  "moat_score": 0.0,
-  "moat_direction": "WIDENING/STABLE/NARROWING",
-  "financial_strength": "EXCELLENT/GOOD/ADEQUATE/WEAK/CONCERNING",
-  "risk_rating": "LOW/MEDIUM/HIGH",
-  "sections": [
-    {"id": "overview", "title": "0. Analysis Overview"},
-    {"id": "macro", "title": "1. Macro Context"},
-    {"id": "baserate", "title": "1.5. Base Rate Check"},
-    {"id": "business", "title": "2. Business Quality"},
-    {"id": "valuation", "title": "3. Valuation Engine"},
-    {"id": "scenarios", "title": "4. Scenario Engine"},
-    {"id": "conviction", "title": "5. Conviction & Sizing"},
-    {"id": "risks", "title": "7. Risks & Catalysts"},
-    {"id": "redteam", "title": "9. Red Team"},
-    {"id": "opinion", "title": "12. Final Opinion"}
-  ]
+  "classification": {
+    "archetype": "<Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led / High-Beta|Regulatory>",
+    "valuation_engine": "<Engine 1|Engine 2|Engine 3|Engine 4|Engine 5>",
+    "sector": "<SECTOR_NAME>",
+    "moat_score": <0.0-10.0>,
+    "moat_direction": "<WIDENING|STABLE|NARROWING>",
+    "financial_strength": "<EXCELLENT|GOOD|ADEQUATE|WEAK|CONCERNING>",
+    "summary": "<2-3 sentence company snapshot: what they do, competitive position, key differentiator>"
+  },
+  "macro": {
+    "dominant_regime": "<Goldilocks|Reflation|Stagflation|Recession>",
+    "regime_probability": <0.0-1.0>,
+    "rate_sensitivity": <-3 to +3 integer>,
+    "dollar_sensitivity": <-3 to +3 integer>,
+    "macro_impact_score": <-3.0 to +3.0 float>,
+    "summary": "<2-3 sentence summary: how macro environment specifically impacts THIS stock's outlook>"
+  },
+  "valuation": {
+    "current_price": <number>,
+    "intrinsic_value": <number>,
+    "margin_of_safety_pct": <number, e.g. 18.6>,
+    "valuation_status": "<UNDERVALUED|FAIR_TO_UNDERVALUED|FAIR|OVERVALUED>",
+    "core_value": <number>,
+    "execution_value": <number>,
+    "ecosystem_value": <number>,
+    "drag_value": <number>,
+    "ev_to_sales": <number>,
+    "ev_to_gross_profit": <number>,
+    "fcf_yield_pct": <number>,
+    "summary": "<2-3 sentence valuation thesis: why the stock is mispriced and what the market is missing>"
+  },
+  "scenarios": {
+    "bear_price": <number>,
+    "bear_probability": <0.0-1.0>,
+    "base_price": <number>,
+    "base_probability": <0.0-1.0>,
+    "bull_execution_price": <number>,
+    "bull_execution_probability": <0.0-1.0>,
+    "bull_ecosystem_price": <number>,
+    "bull_ecosystem_probability": <0.0-1.0>,
+    "expected_price": <number>,
+    "summary": "<2-3 sentence summary: key driver behind each scenario and probability rationale>"
+  },
+  "growth": {
+    "revenue_growth_1y_pct": <number>,
+    "revenue_growth_3y_cagr_pct": <number>,
+    "eps_growth_1y_pct": <number>,
+    "margin_trajectory": "<Expanding|Stable|Contracting>",
+    "free_cash_flow_1y_pct": <number>,
+    "rule_of_40": <number>,
+    "summary": "<2-3 sentence summary: what drives growth numbers and the sustainability of the trajectory>"
+  },
+  "verdict": {
+    "conviction": <0.0-15.0>,
+    "action": "<BUY|ACCUMULATE|HOLD|SELL>",
+    "upside_pct": <number, e.g. 18.6>,
+    "rating": "<Overpriced|Fair|Underpriced>",
+    "top_risk": "<single most impactful risk factor>",
+    "top_catalyst": "<single most impactful catalyst>",
+    "position_size_pct": <0.0-10.0>,
+    "model_confidence": "<High|Medium|Low>",
+    "summary": "<2-3 sentence investment thesis: why this stock, why now, and what needs monitoring>"
+  }
 }
 
 ════════════════════════════════════════════════════════════════

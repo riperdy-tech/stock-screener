@@ -747,9 +747,73 @@ False conservatism audit 재계산 조건
 ${formatFinancialData(financialData)}
 
 [DATA_BLOCK]
-After your full analysis above, append EXACTLY this JSON block (no markdown fences, no extra text) on its own line:
-{"conviction":<0-15 number>,"upside":"<number%>","action":"<BUY|ACCUMULATE|HOLD|SELL>","archetype":"<Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led / High-Beta|Regulatory>","valuation_status":"<UNDERVALUED|FAIR_TO_UNDERVALUED|FAIR|OVERVALUED>"}
-Replace angle-bracket placeholders with your actual assessment values. Only this JSON object on the line after [DATA_BLOCK].`;
+After your full analysis above, you MUST append EXACTLY this JSON structure (NO markdown fences, NO extra text, multi-line with proper indentation). Replace ALL angle-bracket placeholders with actual numerical or string values from your analysis.
+
+{
+  "classification": {
+    "archetype": "<Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led / High-Beta|Regulatory>",
+    "valuation_engine": "<Engine 1|Engine 2|Engine 3|Engine 4|Engine 5>",
+    "sector": "<SECTOR_NAME>",
+    "moat_score": <0.0-10.0>,
+    "moat_direction": "<WIDENING|STABLE|NARROWING>",
+    "financial_strength": "<EXCELLENT|GOOD|ADEQUATE|WEAK|CONCERNING>",
+    "summary": "<2-3 sentence company snapshot>"
+  },
+  "macro": {
+    "dominant_regime": "<Goldilocks|Reflation|Stagflation|Recession>",
+    "regime_probability": <0.0-1.0>,
+    "rate_sensitivity": <-3 to +3 integer>,
+    "dollar_sensitivity": <-3 to +3 integer>,
+    "macro_impact_score": <-3.0 to +3.0 float>,
+    "summary": "<2-3 sentence macro impact on this stock>"
+  },
+  "valuation": {
+    "current_price": <number>,
+    "intrinsic_value": <number>,
+    "margin_of_safety_pct": <number>,
+    "valuation_status": "<UNDERVALUED|FAIR_TO_UNDERVALUED|FAIR|OVERVALUED>",
+    "core_value": <number>,
+    "execution_value": <number>,
+    "ecosystem_value": <number>,
+    "drag_value": <number>,
+    "ev_to_sales": <number>,
+    "ev_to_gross_profit": <number>,
+    "fcf_yield_pct": <number>,
+    "summary": "<2-3 sentence valuation thesis>"
+  },
+  "scenarios": {
+    "bear_price": <number>,
+    "bear_probability": <0.0-1.0>,
+    "base_price": <number>,
+    "base_probability": <0.0-1.0>,
+    "bull_execution_price": <number>,
+    "bull_execution_probability": <0.0-1.0>,
+    "bull_ecosystem_price": <number>,
+    "bull_ecosystem_probability": <0.0-1.0>,
+    "expected_price": <number>,
+    "summary": "<2-3 sentence scenario rationale>"
+  },
+  "growth": {
+    "revenue_growth_1y_pct": <number>,
+    "revenue_growth_3y_cagr_pct": <number>,
+    "eps_growth_1y_pct": <number>,
+    "margin_trajectory": "<Expanding|Stable|Contracting>",
+    "free_cash_flow_1y_pct": <number>,
+    "rule_of_40": <number>,
+    "summary": "<2-3 sentence growth outlook>"
+  },
+  "verdict": {
+    "conviction": <0.0-15.0>,
+    "action": "<BUY|ACCUMULATE|HOLD|SELL>",
+    "upside_pct": <number>,
+    "rating": "<Overpriced|Fair|Underpriced>",
+    "top_risk": "<single most impactful risk>",
+    "top_catalyst": "<single most impactful catalyst>",
+    "position_size_pct": <0.0-10.0>,
+    "model_confidence": "<High|Medium|Low>",
+    "summary": "<2-3 sentence investment thesis>"
+  }
+}`;
 
     const promptTemplate = customTemplate 
         ? `${customTemplate}\n\n${formatFinancialData(financialData)}`
