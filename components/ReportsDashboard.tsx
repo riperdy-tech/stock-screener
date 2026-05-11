@@ -171,7 +171,29 @@ export function ReportsDashboard() {
         fetchReports();
     }, []);
 
-    // Poll Supabase when viewing a pending report — auto-refresh when analysis completes
+    // Global background poll — detects status changes (pending→completed) even when no report selected
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            try {
+                const { data } = await supabase
+                    .from('ai_reports')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                if (data) {
+                    setReports(data);
+                    // Also sync selectedReport if its status changed externally
+                    setSelectedReport((prev: any) => {
+                        if (!prev) return prev;
+                        const updated = data.find((r: any) => r.id === prev.id);
+                        return updated || prev;
+                    });
+                }
+            } catch {}
+        }, 15000);
+        return () => clearInterval(interval);
+    }, []);
+
+    // Faster 5s poll when actively viewing a pending report
     useEffect(() => {
         if (!selectedReport || selectedReport.status !== 'pending') return;
         const interval = setInterval(async () => {
