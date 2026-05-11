@@ -73,34 +73,19 @@
 }
 
 /* ─── Report Prose Overrides ─────────────────────────── */
-/* Fix table rendering in AI reports */
-.report-prose table {
-    @apply w-full border-collapse my-6 text-sm;
+/* Fallback styles for any elements not handled by ReactMarkdown components */
+.report-prose {
+    @apply text-slate-300;
 }
-.report-prose thead {
-    @apply border-b-2 border-white/20;
+.report-prose a {
+    @apply text-blue-400 underline decoration-blue-400/30 underline-offset-2 hover:text-blue-300 transition-colors;
 }
-.report-prose th {
-    @apply text-left px-4 py-2.5 text-[11px] font-black uppercase tracking-wider text-blue-400;
+.report-prose img {
+    @apply rounded-xl max-w-full;
 }
-.report-prose td {
-    @apply px-4 py-2 border-b border-white/5 text-slate-300;
+.report-prose pre {
+    @apply whitespace-pre-wrap break-words;
 }
-.report-prose tr:last-child td {
-    @apply border-b-0;
-}
-.report-prose hr {
-    @apply border-white/10 my-8;
-}
-.report-prose p {
-    @apply leading-[1.75] text-[15px];
-}
-.report-prose strong {
-    @apply text-white font-bold;
-}
-.report-prose ul {
-    @apply space-y-1.5;
-}
-.report-prose li {
-    @apply text-[15px] leading-[1.7];
+.report-prose code {
+    @apply break-all;
 }
