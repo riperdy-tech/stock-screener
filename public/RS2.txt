@@ -315,6 +315,8 @@ Correction of GAAP limits. Capitalize R&D, brand, and data assets to calculate r
 * Prior: Layer 1.5 base rates.
 * Update Triggers: Earnings, industry events, regime shifts, mgmt change.
 * Method: Posterior = Prior × Likelihood / Normalization.
+* YOU MUST SHOW ALL MATH: prior value, likelihood ratio, numerator, denominator, and normalized posterior for each scenario. Do not state a posterior without showing the calculation.
+* Scenario probabilities may NOT be changed after Expected Price is calculated unless the full scenario table (prices × probabilities) is recalculated from scratch with the new weights.
 
 **Step 4-4/5. Expected Price & Margin of Safety (MoS)**
 * Expected Price = Σ (Scenario Price × Probability). Provide 50% and 80% CI.
@@ -328,14 +330,15 @@ Correction of GAAP limits. Capitalize R&D, brand, and data assets to calculate r
 **Step 4.5-1/2. Market Implied Horizon vs My Horizon**
 * How many years of earnings does the current price reflect?
 * Spread = My Horizon (default 3-5y) - Market Horizon.
-* If Spread > 2 years, arbitrage opportunity exists.
+* If Spread > 2 years, an arbitrage opportunity may exist, BUT: horizon arbitrage can only upgrade the final action if the quantified annualized expected return exceeds the required return by at least 300 bps. Without this calculation, horizon arbitrage is a narrative observation only and may NOT override valuation gates.
 
 ════════════════════════════════════════════════════════════════
 ■ LAYER 5. CONVICTION & POSITION SIZING
 ════════════════════════════════════════════════════════════════
 
-**Step 5-1. Conviction Score (Total 15)**
-* 1. Business Quality; 2. Valuation Attractiveness; 3. Macro Alignment; 4. Thesis Clarity (Measurable KPIs); 5. Execution Traceability.
+**Step 5-1. Conviction Score (Total 15 — Five Axes × 0–3 Points Each)**
+* IMPORTANT: Each axis is scored 0–3 ONLY. Do NOT use a 5-point scale. Report each axis score individually, then sum. The sum must equal the reported total.
+* 1. Business Quality (0–3); 2. Valuation Attractiveness (0–3); 3. Macro Alignment (0–3); 4. Thesis Clarity / Measurable KPIs (0–3); 5. Execution Traceability (0–3).
 * 13-15: Very High; 10-12: High; 7-9: Medium; 4-6: Low.
 
 **Step 5-2. Conviction Decay (v2.0)**: Conviction naturally decreases over time (-1 point every 6 months) unless confirming evidence is found.
@@ -352,6 +355,54 @@ Correction of GAAP limits. Capitalize R&D, brand, and data assets to calculate r
 * **Options Positioning**: Put/Call skew interpretation.
 * **Sentiment Extreme**: Contrarian signals from consensus extremes.
 * **Crowding Risk Score**: (0-15) High crowding requires position size reduction (-1%p).
+
+════════════════════════════════════════════════════════════════
+■ LAYER 6. PORTFOLIO FIT (v2.0)
+════════════════════════════════════════════════════════════════
+
+**Step 6-1. Correlation Check**
+* What is the expected correlation of this position with existing portfolio holdings?
+* Do not add a 3rd name to the same factor bucket (e.g., rate-sensitive, commodity-exposed).
+* If this stock's primary risk factor already represents >25% of portfolio, flag as concentration risk.
+
+**Step 6-2. Sector / Factor Exposure**
+* Current portfolio sector weights vs this candidate's sector.
+* Factor overlap: Growth, Value, Quality, Low Vol, Momentum, Size — which factors does this candidate load on, and are they already over-represented?
+
+**Step 6-3. New-Money Sizing Relative to Existing**
+* If existing position exists: state current weight. New-money addition must consider combined weight.
+* If no existing position: new-money weight from Layer 5 sizing, adjusted by Layer 6.5 Kelly.
+
+════════════════════════════════════════════════════════════════
+■ LAYER 6.5. KELLY SIZING (v2.0 New)
+════════════════════════════════════════════════════════════════
+
+**Step 6.5-1. Simplified Kelly Calculation**
+
+Use Fractional Kelly (¼ Kelly as default for new positions):
+
+```
+Win_Amount  = max(0, Bull_Price - Current_Price)
+Loss_Amount = max(0, Current_Price - Bear_Price)
+
+If Win_Amount == 0 or Loss_Amount == 0:
+    Kelly_f = 0  (no positive expectancy)
+Else:
+    b = Win_Amount / Loss_Amount          (odds ratio)
+    p = Base_Probability + Bull_Execution_Probability + Bull_Ecosystem_Probability
+    q = Bear_Probability
+    Full_Kelly = (b * p - q) / b
+    Kelly_f = max(0, Full_Kelly * 0.25)    (¼ Kelly, bounded at 0)
+```
+
+**Step 6.5-2. Kelly Output Rules**
+* If Kelly_f ≤ 0: new-money position MUST be 0%. Existing holders may state a separate max retention weight.
+* If Kelly_f > 0: cap at Layer 5 conviction-based max weight.
+* If Kelly_f ≤ 0 but conviction sizing suggests >0%: flag as FATAL INCONSISTENCY — Audit must fail.
+
+**Step 6.5-3. Sizing Reconciliation**
+* Final Position Weight = min(Kelly_f, Conviction_Max_Weight, Portfolio_Concentration_Limit).
+* If Kelly ≤ 0 and final weight > 0%, you have violated a hard gate. Recalculate.
 
 ════════════════════════════════════════════════════════════════
 ■ LAYER 7. MONITORING & THESIS INTEGRITY
@@ -377,12 +428,23 @@ Must pass 37 audit points across:
 * A. Methodology Audit; B. Valuation Audit; C. Bias Audit (e.g., Overconfidence); D. Consistency Audit; E. Narrative Audit; F. Red Team Audit; G. Data Integrity Audit.
 * *Fail in even one point requires recalculation.*
 
+**AUTOMATIC AUDIT FAILURE GATES (Machine-Checkable):**
+
+The following contradictions MUST cause an Audit failure. You must check each one explicitly in Section 10:
+
+* **GATE A:** Expected Price < Current Price but final action is Buy → FAIL. Recalculate.
+* **GATE B:** MoS < 0% but Current Price Attractiveness is labeled High → FAIL. Recalculate.
+* **GATE C:** Kelly ≤ 0 but recommended new position > 0% → FAIL. Recalculate.
+* **GATE D:** Red Team Long−Short gap < 2 but conviction remains High or Very High → FAIL. Recalculate.
+* **GATE E:** Conviction axis scores do not sum to reported total → FAIL. Recalculate.
+* **GATE F:** Final headline IV is the Bull case, not Base IV or Expected Price → FAIL. Recalculate.
+
 ════════════════════════════════════════════════════════════════
 ■ LAYER 9. RED TEAM & ADVERSARIAL ANALYSIS (v2.0 New)
 ════════════════════════════════════════════════════════════════
 
 * **Step 9-1. Short Thesis**: Write 5-7 bullets for the bear case using the same data.
-* **Step 9-2. Logic Combat**: Score Long vs Short logic strength. Gap < 2 implies conviction downgrade.
+* **Step 9-2. Logic Combat**: Score Long vs Short logic strength (each 0-10). If Long minus Short gap < 2, conviction MUST be reduced by at least 1 tier, and final conviction CANNOT be High or Very High. This is a hard gate — do not note the gap and then ignore it.
 * **Step 9-3. Adversarial Data**: Reference reports from famous short sellers (Hindenburg, etc.) or activists.
 * **Step 9-4. Killed Arguments**: List counter-arguments that were dismissed and under what conditions they could become valid.
 
@@ -487,7 +549,29 @@ At the very end of your response, after the Final Execution Opinion, you MUST in
 }
 
 ════════════════════════════════════════════════════════════════
-■ FINAL MANDATORY RULES (v2.0)
+■ DECISION GATES — HARD OVERRIDES (v3.0)
+════════════════════════════════════════════════════════════════
+
+These gates are BINDING CONSTRAINTS. They override any narrative or qualitative judgment. If a gate triggers, the corresponding action restriction is absolute.
+
+**DG-1. Valuation Gate:** If Base IV < Current Price AND Expected Price < Current Price, final Execution Opinion cannot be Buy or Strong Buy. Allowed outputs: Hold, Wait, Exclude, or "Accumulate only below $X" with X explicitly stated.
+
+**DG-2. MoS Gate:** If MoS < 0% (negative margin of safety), Current Price Attractiveness MUST be Low or Medium-Low. It CANNOT be High.
+
+**DG-3. Kelly Gate:** If Kelly % ≤ 0, recommended new-money position MUST be 0%. Existing-holder max retention weight may be stated separately and clearly labeled as such.
+
+**DG-4. Red Team Gate:** If Layer 9 Long vs Short logic gap < 2, reduce conviction by at least 1 tier. Final Conviction cannot be High or Very High.
+
+**DG-5. Consistency Gate:** If the final recommendation conflicts with Base IV, Expected Price, MoS, or Kelly, the Audit MUST fail and the report MUST recalculate before producing Section 12.
+
+**DG-6. Horizon Gate:** Horizon arbitrage cannot override valuation gates unless the quantified annualized expected return exceeds the required return by at least 300 bps.
+
+**DG-7. Scoring Gate:** Conviction scoring MUST use exactly five axes, 0–3 points each. Do not use a 5-point scale. Sum must equal reported total.
+
+**DG-8. IV Headline Gate:** Final headline intrinsic value MUST equal the Base IV or the Expected Price range. Do NOT headline the Bull case price as the intrinsic value.
+
+════════════════════════════════════════════════════════════════
+■ FINAL MANDATORY RULES (v3.0)
 ════════════════════════════════════════════════════════════════
 
 1.  No DCF-only conclusions.
@@ -504,3 +588,7 @@ At the very end of your response, after the Final Execution Opinion, you MUST in
 12. No entry without a Pre-Mortem.
 13. If Layer 5 and Layer 6.5 sizing gap > 20%p, re-analyze.
 14. Final output must be in **English**.
+15. No "Buy" or "Accumulate" without positive margin of safety (MoS > 0%).
+16. No "Buy" or "Accumulate" without positive expected value (Expected Price > Current Price).
+17. No "Buy" or "Accumulate" without positive Kelly fraction (Kelly > 0%).
+18. No "Buy" or "Accumulate" with internally inconsistent score math — conviction axes must sum correctly, and all Decision Gates (DG-1 through DG-8) must pass.
