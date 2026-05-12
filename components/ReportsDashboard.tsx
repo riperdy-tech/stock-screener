@@ -87,31 +87,40 @@ function reactNodeToText(node: any): string {
 
 // Simple metadata normalizer — prefers stored metadata column, 
 // falls back to [DATA_BLOCK] extraction, then text scraping for legacy reports
+// Note: worker stores nested { verdict: { conviction, action, upside_pct, ... }, classification: { archetype }, valuation: { valuation_status } }
 const getMeta = (report: any): any => {
     // If worker already saved structured metadata, use it directly
     if (report.metadata && typeof report.metadata === 'object' && Object.keys(report.metadata).length > 0) {
+        const m = report.metadata;
+        // Handle nested v3.0 schema
+        const verdict = m.verdict || {};
+        const classification = m.classification || {};
+        const valuation = m.valuation || {};
         return {
-            conviction: parseFloat(report.metadata.conviction) || 0,
-            upside: parseFloat(report.metadata.upside) || 0,
-            action: (report.metadata.action || '').toUpperCase(),
-            archetype: report.metadata.archetype || '',
-            valuation_status: report.metadata.valuation_status || '',
+            conviction: parseFloat(verdict.conviction) || parseFloat(m.conviction) || 0,
+            upside: parseFloat(verdict.upside_pct) || parseFloat(verdict.upside) || parseFloat(m.upside_pct) || parseFloat(m.upside) || 0,
+            action: (verdict.action || m.action || '').toUpperCase(),
+            archetype: classification.archetype || m.archetype || '',
+            valuation_status: valuation.valuation_status || m.valuation_status || '',
         };
     }
     
     const content = report.content || '';
     
-    // Fallback 1: try [DATA_BLOCK] JSON extraction
+    // Fallback 1: try [DATA_BLOCK] JSON extraction (handles nested v3.0 schema)
     try {
         const match = content.match(/\[DATA_BLOCK\]\s*(\{[\s\S]*?\})\s*$/);
         if (match && match[1]) {
             const parsed = JSON.parse(match[1].trim());
+            const verdict = parsed.verdict || {};
+            const classification = parsed.classification || {};
+            const valuation = parsed.valuation || {};
             return {
-                conviction: parseFloat(parsed.conviction) || 0,
-                upside: parseFloat(String(parsed.upside || '0').replace('%', '')) || 0,
-                action: (parsed.action || '').toUpperCase(),
-                archetype: parsed.archetype || '',
-                valuation_status: parsed.valuation_status || '',
+                conviction: parseFloat(verdict.conviction) || parseFloat(parsed.conviction) || 0,
+                upside: parseFloat(String(verdict.upside_pct || verdict.upside || parsed.upside_pct || parsed.upside || '0').replace('%', '')) || 0,
+                action: (verdict.action || parsed.action || '').toUpperCase(),
+                archetype: classification.archetype || parsed.archetype || '',
+                valuation_status: valuation.valuation_status || parsed.valuation_status || '',
             };
         }
     } catch {}
