@@ -14,6 +14,49 @@ export function formatTaiwanNTD(n: number, decimals: number = 2) {
     return `${n.toLocaleString('en-US', {maximumFractionDigits: decimals})}元`;
 }
 
+function parseFlexibleNumber(value: any): number | null {
+    if (value === null || value === undefined || value === '') return null;
+    if (typeof value === 'number') return Number.isFinite(value) ? value : null;
+    const cleaned = String(value).replace(/[%,$,x]/g, '').trim();
+    if (!cleaned || cleaned.toLowerCase() === 'n/a' || cleaned.toLowerCase() === 'nan') return null;
+    const parsed = Number(cleaned);
+    return Number.isFinite(parsed) ? parsed : null;
+}
+
+function parseNumberList(value: any): number[] {
+    if (!value) return [];
+    if (Array.isArray(value)) return value.map(parseFlexibleNumber).filter((n): n is number => n !== null);
+
+    const raw = String(value).trim();
+    if (!raw) return [];
+
+    try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+            return parsed
+                .map((item) => typeof item === 'object'
+                    ? parseFlexibleNumber(item.Close ?? item.close ?? item.Price ?? item.price ?? item.value)
+                    : parseFlexibleNumber(item))
+                .filter((n): n is number => n !== null);
+        }
+    } catch (e) {
+        // Fall through to delimiter parsing.
+    }
+
+    return raw
+        .split(/[|;\s]+/)
+        .map(parseFlexibleNumber)
+        .filter((n): n is number => n !== null);
+}
+
+function firstNumber(...values: any[]): number | null {
+    for (const value of values) {
+        const parsed = parseFlexibleNumber(value);
+        if (parsed !== null) return parsed;
+    }
+    return null;
+}
+
 function parseCSV(text: string): any[] {
     const rows: any[] = [];
     let row: string[] = [];
@@ -118,39 +161,51 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
             // Use 100 as multiplier for dashboard cards which expect integers.
             const multiplier = 100;
 
+            const financialData = (() => {
+                const fd = row['Financial_Data'];
+                if (!fd) return null;
+                try { return JSON.parse(decodeURIComponent(escape(atob(fd)))); } catch(e) { return null; }
+            })();
+
             const base = {
                 symbol: row['Symbol'] || '',
                 name: (row['Name'] || '').replace(/"/g, ''),
                 description: (row['Description'] || '').replace(/"/g, ''),
                 sector: row['Sector'] || 'Unknown',
                 industry: row['Industry'] || 'Unknown',
-                price: parseFloat(row['Price']) || 0,
-                marketCap: parseFloat(row['Market Cap']) || 0,
+                price: parseFlexibleNumber(row['Price']) || 0,
+                marketCap: parseFlexibleNumber(row['Market Cap']) || 0,
                 lastUpdated: row['Last_Updated'] || undefined,
 
                 // Metrics (Convert decimals to % points)
-                revenueGrowth: (parseFloat(row['Rev Growth']) || 0) * multiplier,
-                grossMargin: (parseFloat(row['Gross Margin']) || 0) * multiplier,
-                roic: (parseFloat(row['ROIC']) || 0) * multiplier,
-                insiderOwnership: (parseFloat(row['Insider Own']) || 0) * multiplier,
+                revenueGrowth: (parseFlexibleNumber(row['Rev Growth']) || 0) * multiplier,
+                grossMargin: (parseFlexibleNumber(row['Gross Margin']) || 0) * multiplier,
+                roic: (parseFlexibleNumber(row['ROIC']) || 0) * multiplier,
+                insiderOwnership: (parseFlexibleNumber(row['Insider Own']) || 0) * multiplier,
                 
-                pegRatio: parseFloat(row['PEG']) || 0,
-                zScore: parseFloat(row['Z-Score']) || 0,
-                peRatio: 0,
-                priceToSales: parseFloat(row['P/S']) || 0,
-                floatShares: parseFloat(row['Float']) || 0,
-                ocf: parseFloat(row['OCF']) || 0,
-                capex: parseFloat(row['CAPEX']) || 0,
+                pegRatio: parseFlexibleNumber(row['PEG']) || 0,
+                zScore: parseFlexibleNumber(row['Z-Score']) || 0,
+                peRatio: firstNumber(row['P/E'], row['PE'], row['Trailing P/E'], row['Current P/E']) || 0,
+                priceToSales: parseFlexibleNumber(row['P/S']) || 0,
+                floatShares: parseFlexibleNumber(row['Float']) || 0,
+                ocf: parseFlexibleNumber(row['OCF']) || 0,
+                capex: parseFlexibleNumber(row['CAPEX']) || 0,
+
+                // Optional fields used by the YouTube multi-strategy filter.
+                epsTtm: firstNumber(row['EPS TTM'], row['EPS_TTM'], row['Trailing EPS'], row['EPS']),
+                previousEpsTtm: firstNumber(row['Previous EPS TTM'], row['Previous_EPS_TTM'], row['Prior EPS TTM']),
+                forwardEpsEstimate: firstNumber(row['Forward EPS'], row['Forward_EPS'], row['Forward EPS Estimate'], row['Next Year EPS']),
+                priceToBook: firstNumber(row['P/B'], row['PB'], row['Price/Book'], row['Price to Book']),
+                fiveYearAveragePe: firstNumber(row['5Y Avg P/E'], row['5Y Average P/E'], row['PE 5Y Avg'], row['P/E 5Y Avg']),
+                monthlyMa20: firstNumber(row['20M MA'], row['20 Month MA'], row['20-Month MA'], row['Monthly MA 20']),
+                monthlyCloses: parseNumberList(row['Monthly Closes'] || row['Monthly_Closes'] || row['Monthly Prices'] || row['Monthly_Prices']),
+                quarterlyEps: parseNumberList(row['Quarterly EPS'] || row['Quarterly_EPS']),
 
                 // Adapter Metadata
                 _status: row['Status'],
-                _score: parseFloat(row['Score']) || 0,
+                _score: parseFlexibleNumber(row['Score']) || 0,
                 _failCodes: (row['Fail Codes'] || '').split(',').filter((c: string) => c),
-                _financialData: (() => {
-                    const fd = row['Financial_Data'];
-                    if (!fd) return null;
-                    try { return JSON.parse(decodeURIComponent(escape(atob(fd)))); } catch(e) { return null; }
-                })(),
+                _financialData: financialData,
                 _reasons: []
             };
             return base;
