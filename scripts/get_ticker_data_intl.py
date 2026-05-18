@@ -1,4 +1,3 @@
-import nsepython as nse
 import FinanceDataReader as fdr
 import argparse
 import json
@@ -27,139 +26,7 @@ def is_reported(col_str):
             return False
     return True
 
-def fetch_india_data(symbol):
-    try:
-        # Quote data for Price
-        price_data = nse.nsefetch(f'https://www.nseindia.com/api/quote-equity?symbol={symbol}')
-        price = price_data.get('priceInfo', {}).get('lastPrice', 0)
-        issued_size = float(price_data.get('securityInfo', {}).get('issuedSize', 0))
-        mcap = price * issued_size
-        
-        # Deep financials from Screener.in (Consolidated)
-        url = f"https://www.screener.in/company/{symbol}/consolidated/"
-        dfs = pd.read_html(url)
-        
-        # Table indices: 0: Quarterly, 1: Annual, 6: Balance Sheet, 7: Cash Flow
-        q_df = dfs[0].set_index(dfs[0].columns[0])
-        a_df = dfs[1].set_index(dfs[1].columns[0])
-        bs_df = dfs[6].set_index(dfs[6].columns[0])
-        cf_df = dfs[7].set_index(dfs[7].columns[0])
-        
-        def clean_val(v):
-            if isinstance(v, str):
-                v = v.replace(',', '').replace('%', '').replace('+', '').replace('\xa0', '')
-            try: return float(v)
-            except: return 0.0
 
-        def get_val_safe(df, row_prefix, col):
-            for idx in df.index:
-                if str(idx).replace(" ", "").lower().startswith(str(row_prefix).replace(" ", "").lower()):
-                    if col in df.columns:
-                        return clean_val(df.loc[idx, col])
-            return None
-
-        def get_val_with_fallbacks(df, prefixes, col):
-            for p in prefixes:
-                val = get_val_safe(df, p, col)
-                if val is not None and val != 0:
-                    return val
-            return None
-
-        # Reported columns only
-        q_cols = [c for c in q_df.columns if is_reported(c)][-4:]
-        a_cols = [c for c in a_df.columns if is_reported(c)]
-        if "TTM" in a_cols: a_cols.remove("TTM")
-        a_cols = a_cols[-2:]
-
-        # Cash & Debt (from Balance Sheet table - last available reported column)
-        bs_cols = [c for c in bs_df.columns if is_reported(c)]
-        last_bs_col = bs_cols[-1]
-        raw_debt = get_val_safe(bs_df, 'Borrowings', last_bs_col)
-        total_debt = raw_debt * 10000000 if raw_debt else 0
-        total_cash = 0 # No reliable summary proxy for India cash
-
-        # Cash Flow (from CF table - last available reported column)
-        cf_cols = [c for c in cf_df.columns if is_reported(c)]
-        last_cf_col = cf_cols[-1]
-        raw_ocf = get_val_safe(cf_df, 'Cash from Operating Activity', last_cf_col)
-        raw_fcf = get_val_safe(cf_df, 'Free Cash Flow', last_cf_col)
-        
-        ocf = raw_ocf * 10000000 if raw_ocf else 0
-        fcf_val = raw_fcf * 10000000 if raw_fcf else 0
-        capex = ocf - fcf_val if (ocf is not None and fcf_val is not None) else 0
-
-        quarters = []
-        for col in q_cols:
-            tr = get_val_with_fallbacks(q_df, ["Sales", "Revenue", "Interest Earned", "Total Income"], col)
-            oi = get_val_with_fallbacks(q_df, ["Operating Profit", "Financing Profit", "Profit before tax"], col)
-            ni = get_val_safe(q_df, 'Net Profit', col)
-            quarters.append({
-                "Date": col,
-                "TotalRevenue": tr * 10000000 if tr else None,
-                "GrossProfit": None,
-                "OperatingIncome": oi * 10000000 if oi else None,
-                "NetIncome": ni * 10000000 if ni else None
-            })
-            
-        annuals = []
-        for col in a_cols:
-            tr = get_val_with_fallbacks(a_df, ["Sales", "Revenue", "Interest Earned", "Total Income"], col)
-            oi = get_val_with_fallbacks(a_df, ["Operating Profit", "Financing Profit", "Profit before tax"], col)
-            ni = get_val_safe(a_df, 'Net Profit', col)
-            annuals.append({
-                "Date": col,
-                "TotalRevenue": tr * 10000000 if tr else None,
-                "GrossProfit": None,
-                "OperatingIncome": oi * 10000000 if oi else None,
-                "NetIncome": ni * 10000000 if ni else None
-            })
-            
-        ttm_rev = sum(q['TotalRevenue'] for q in quarters if q['TotalRevenue']) if quarters else 0
-        ttm_gp = None
-        ttm_ebit = sum(q['OperatingIncome'] for q in quarters if q['OperatingIncome']) if quarters else 0
-        
-        # YoY Growth
-        growth = 0
-        if len(quarters) >= 4 and quarters[0]['TotalRevenue']:
-             growth = (quarters[-1]['TotalRevenue'] - quarters[0]['TotalRevenue']) / quarters[0]['TotalRevenue'] * 100
-        
-        ev = mcap + total_debt - total_cash
-        ev_sales = ev / ttm_rev if (ev and ttm_rev) else None
-        ev_gp = ev / ttm_gp if (ev and ttm_gp) else None
-        fcf_margin = (fcf_val / ttm_rev * 100) if (fcf_val and ttm_rev) else 0
-        roic = (ttm_ebit / ev * 100) if (ev and ev > 0) else 0
-
-        return {
-            "Ticker": symbol,
-            "Price": price,
-            "Shares_Outstanding": issued_size,
-            "Market_Cap": mcap,
-            "Enterprise_Value_EV": ev,
-            "Total_Cash": total_cash,
-            "Total_Debt": total_debt,
-            "SBC_Stock_Based_Comp": 0,
-            "Operating_Cash_Flow": ocf,
-            "Capital_Expenditure": capex,
-            "Free_Cash_Flow_TTM": fcf_val,
-            "Annual_Income_Statement": annuals,
-            "Quarterly_Income_Statement": quarters,
-            "Data_Fetched_Date": datetime.now().strftime("%Y-%m-%d %H:%M"),
-            "Calculated_Metrics": {
-                "TTM_Revenue": ttm_rev,
-                "TTM_Gross_Profit": ttm_gp,
-                "TTM_Gross_Margin_%": None,
-                "YoY_Revenue_Growth_%": growth,
-                "FCF_Margin_%": fcf_margin,
-                "ROIC_%": roic,
-                "Rule_of_40": (growth or 0) + (fcf_margin or 0),
-                "EV_to_Sales": ev_sales,
-                "EV_to_Gross_Profit": ev_gp,
-                "EV_to_EBIT": (ev / ttm_ebit) if (ev and ttm_ebit) else None,
-                "Core_Anchor_Multiple": None
-            }
-        }
-    except Exception as e:
-        return {"error": f"India fetch failed: {str(e)}"}
 
 def fetch_korea_data(segment_symbol):
     try:
@@ -410,9 +277,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     ticker = args.ticker.upper()
-    if ticker.endswith('.NS'):
-        res = fetch_india_data(ticker.replace('.NS', ''))
-    elif ticker.endswith('.KS') or ticker.endswith('.KQ'):
+    if ticker.endswith('.KS') or ticker.endswith('.KQ'):
         res = fetch_korea_data(ticker.split('.')[0])
     elif ticker.endswith('.TW') or ticker.endswith('.TWO'):
         res = fetch_taiwan_data(ticker)
@@ -420,7 +285,7 @@ if __name__ == "__main__":
         if ticker.isdigit() and len(ticker) == 6:
             res = fetch_korea_data(ticker)
         else:
-            res = fetch_india_data(ticker)
+            res = {"error": "Unknown ticker format"}
             
     print(json.dumps(clean_data(res)))
 

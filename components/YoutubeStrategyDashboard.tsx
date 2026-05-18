@@ -110,19 +110,18 @@ function MetricPill({ label, value }: { label: string; value: string }) {
 
 export function YoutubeStrategyDashboard() {
     const [loading, setLoading] = useState(true);
-    const [market, setMarket] = useState<Market>("US");
     const [search, setSearch] = useState("");
     const [strategyFilter, setStrategyFilter] = useState<YoutubeStrategyFilter>("any");
     const [rows, setRows] = useState<StrategyRow[]>([]);
     const [lastUpdated, setLastUpdated] = useState<string | null>(null);
 
     useEffect(() => {
-        loadData(market);
-    }, [market]);
+        loadData();
+    }, []);
 
-    async function loadData(selectedMarket: Market) {
+    async function loadData() {
         setLoading(true);
-        const { data, lastUpdated: updated } = await fetchStocks(selectedMarket);
+        const { data, lastUpdated: updated } = await fetchStocks('US');
         const adapted = (data as any[]).map(adaptToScreeningResult);
         const evaluated = adapted.map((result) => ({
             result,
@@ -179,20 +178,8 @@ export function YoutubeStrategyDashboard() {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
-                        {(["US", "Korea", "Taiwan"] as Market[]).map((m) => (
-                            <button
-                                key={m}
-                                onClick={() => setMarket(m)}
-                                className={clsx(
-                                    "px-3 py-2 rounded-lg text-xs font-black border transition-all",
-                                    market === m ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/40 text-muted-foreground border-border hover:text-foreground"
-                                )}
-                            >
-                                {m}
-                            </button>
-                        ))}
                         <button
-                            onClick={() => loadData(market)}
+                            onClick={() => loadData()}
                             className="px-3 py-2 rounded-lg text-xs font-black border border-border bg-secondary/40 hover:bg-secondary flex items-center gap-2"
                         >
                             <RefreshCw className={clsx("h-4 w-4", loading && "animate-spin")} /> Refresh
