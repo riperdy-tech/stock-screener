@@ -2,8 +2,8 @@ name: Scheduled Data Fetch
 
 on:
   schedule:
-    # Runs at 09:30 UTC every 2 days (4 hours before NYSE open)
-    - cron: '30 9 */2 * *'
+    # Runs at 09:30 UTC every day
+    - cron: '30 9 * * *'
   # Allows you to trigger it manually from the Actions tab
   workflow_dispatch:
 
@@ -36,6 +36,8 @@ jobs:
         run: |
           # Add the scripts you want to run automatically here
           python scripts/fetch_data.py
+          python scripts/fetch_sec_data.py
+          python scripts/fetch_data_intl.py
           
       - name: Commit and Push Changes
         id: push_changes

@@ -307,7 +307,9 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
                     "TotalRevenue": safe_get_df(df, "Total Revenue", i),
                     "GrossProfit": safe_get_df(df, "Gross Profit", i),
                     "OperatingIncome": safe_get_df(df, "Operating Income", i) or safe_get_df(df, "EBIT", i),
-                    "NetIncome": safe_get_df(df, "Net Income", i)
+                    "NetIncome": safe_get_df(df, "Net Income", i),
+                    "BasicEPS": safe_get_df(df, "Basic EPS", i),
+                    "DilutedEPS": safe_get_df(df, "Diluted EPS", i)
                 })
             return rows
 
@@ -375,6 +377,23 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
         if ev_sales is not None and ev_gp is not None:
             core_anchor = (0.4 * ev_sales) + (0.4 * ev_gp)
 
+        # YouTube Strategy Additional Metrics
+        eps_ttm = safe_float(info.get("trailingEps"), None)
+        forward_eps = safe_float(info.get("forwardEps"), None)
+        price_to_book = safe_float(info.get("priceToBook"), None)
+        five_year_avg_pe = safe_float(info.get("fiveYearAvgPE") or info.get("trailingPE"), None)
+
+        monthly_closes = []
+        ma_20_month = None
+        try:
+            hist = yf_ticker.history(period="2y", interval="1mo")
+            if not hist.empty and 'Close' in hist.columns:
+                monthly_closes = [float(x) for x in hist['Close'].dropna().tolist()]
+                if len(monthly_closes) >= 20:
+                    ma_20_month = sum(monthly_closes[-20:]) / 20.0
+        except:
+            pass
+
         detail = {
             "Ticker": ticker_symbol,
             "Data_Fetched_Date": datetime.now().strftime("%Y-%m-%d %H:%M"),
@@ -400,8 +419,14 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
                 "EV_to_Sales": ev_sales,
                 "EV_to_Gross_Profit": ev_gp,
                 "EV_to_EBIT": ev_ebit,
-                "Core_Anchor_Multiple_0.4Sales_0.4GP": core_anchor
-            }
+                "Core_Anchor_Multiple_0.4Sales_0.4GP": core_anchor,
+                "EPS_TTM": eps_ttm,
+                "Forward_EPS_Estimate": forward_eps,
+                "Price_to_Book": price_to_book,
+                "PE_5Y_Avg": five_year_avg_pe,
+                "Monthly_MA_20": ma_20_month
+            },
+            "Monthly_Closes": monthly_closes
         }
 
         return sanitize(detail)

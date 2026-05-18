@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
 import { Market } from "@/lib/data-service";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 export interface FilterState {
     minMarketCap: number; // Millions
@@ -67,6 +68,7 @@ export const STRICT_FILTERS: FilterState = {
 
 export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market }: FilterSidebarProps) {
     const { t, filterDefs } = useLanguage();
+    const router = useRouter();
 
     // Local state for Manual Apply
     const [localFilters, setLocalFilters] = useState<FilterState>(filters);
@@ -111,6 +113,23 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-6">
+
+                {/* Strategy Presets */}
+                <Section title="Strategy Presets">
+                    <select 
+                        className="w-full bg-secondary/40 border border-border/70 text-foreground font-semibold rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer transition-colors hover:border-primary/50"
+                        onChange={(e) => {
+                            const val = e.target.value;
+                            if (val === 'strict') handleStrict();
+                            else if (val === 'youtube') router.push('/youtube-strategy');
+                            e.target.value = ''; // Reset selection visual
+                        }}
+                    >
+                        <option value="" className="bg-background text-muted-foreground">Select a strategy preset...</option>
+                        <option value="strict" className="bg-background text-foreground font-semibold">Strict 100-Bagger (US Only)</option>
+                        <option value="youtube" className="bg-background text-foreground font-semibold">YouTube Strategy</option>
+                    </select>
+                </Section>
 
                 {/* Size & Price */}
                 <Section title={t('sizePrice')}>
@@ -175,12 +194,6 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         className="flex-1 px-3 py-2 bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-bold rounded shadow transition-colors"
                     >
                         {t('apply')}
-                    </button>
-                    <button
-                        onClick={handleStrict}
-                        className="flex-1 px-2 py-2 bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 font-bold text-xs rounded border border-orange-500/30 transition-colors"
-                    >
-                        Strict (US only)
                     </button>
                     <button
                         onClick={handleReset}

@@ -369,7 +369,7 @@ export function ScreenerDashboard() {
                     </div>
 
                     <div className="flex bg-secondary/50 p-1 rounded-lg border border-border/50 shadow-inner scale-90 md:scale-100 overflow-x-auto no-scrollbar max-w-[280px] sm:max-w-none">
-                        {(['US', 'India', 'Korea', 'Taiwan'] as Market[]).map((m) => (
+                        {(['US', 'Korea', 'Taiwan'] as Market[]).map((m) => (
                             <button
                                 key={m}
                                 onClick={() => setSelectedMarket(m)}

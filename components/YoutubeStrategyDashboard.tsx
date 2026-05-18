@@ -179,7 +179,7 @@ export function YoutubeStrategyDashboard() {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
-                        {(["US", "India", "Korea", "Taiwan"] as Market[]).map((m) => (
+                        {(["US", "Korea", "Taiwan"] as Market[]).map((m) => (
                             <button
                                 key={m}
                                 onClick={() => setMarket(m)}

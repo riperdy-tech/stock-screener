@@ -110,7 +110,7 @@ function parseCSV(text: string): any[] {
     });
 }
 
-export type Market = 'US' | 'India' | 'Korea' | 'Taiwan';
+export type Market = 'US' | 'Korea' | 'Taiwan';
 
 export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockCandidate[], lastUpdated: string | null }> {
     try {
@@ -126,9 +126,7 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
 
         // ROBUST MARKET FILTERING:
         // Ensure each tab ONLY shows its own data regardless of the source file.
-        if (market === 'India') {
-            rawData = rawData.filter(r => (r['Symbol'] || '').endsWith('.NS'));
-        } else if (market === 'Korea') {
+        if (market === 'Korea') {
             rawData = rawData.filter(r => {
                 const s = r['Symbol'] || '';
                 return s.endsWith('.KS') || s.endsWith('.KQ');
@@ -142,7 +140,7 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
             // US tab should filter OUT international suffixes to be safe
             rawData = rawData.filter(r => {
                 const s = r['Symbol'] || '';
-                return !s.endsWith('.NS') && !s.endsWith('.KS') && !s.endsWith('.KQ') && !s.endsWith('.TW') && !s.endsWith('.TWO');
+                return !s.endsWith('.KS') && !s.endsWith('.KQ') && !s.endsWith('.TW') && !s.endsWith('.TWO');
             });
         }
         

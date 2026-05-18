@@ -85,7 +85,7 @@ function getQuarterlyEpsSeries(result: ScreeningResult): number[] {
     const fd = (result.financialData || {}) as AnyRecord;
 
     const directSeries = c.quarterlyEps || c.quarterlyEPS || fd.Quarterly_EPS || fd.QuarterlyEPS;
-    if (Array.isArray(directSeries)) {
+    if (Array.isArray(directSeries) && directSeries.length > 0) {
         return directSeries
             .map((value) => {
                 if (typeof value === "object") {
@@ -93,6 +93,13 @@ function getQuarterlyEpsSeries(result: ScreeningResult): number[] {
                 }
                 return asNumber(value);
             })
+            .filter((value): value is number => value !== null);
+    }
+
+    const fdDirectSeries = fd.Quarterly_EPS || fd.QuarterlyEPS;
+    if (Array.isArray(fdDirectSeries) && fdDirectSeries.length > 0) {
+        return fdDirectSeries
+            .map((value) => asNumber(value))
             .filter((value): value is number => value !== null);
     }
 
@@ -128,7 +135,8 @@ function getEpsTtm(result: ScreeningResult, quarterlyEps: number[]): number | nu
         fd.EPS_TTM,
         fd.TTM_EPS,
         fd.trailingEps,
-        fd.epsTtm
+        fd.epsTtm,
+        fd.Calculated_Metrics?.EPS_TTM
     );
     if (explicit !== null) return explicit;
 
@@ -164,7 +172,7 @@ function getMonthlyCloses(result: ScreeningResult): number[] {
     ];
 
     for (const candidate of candidates) {
-        if (!Array.isArray(candidate)) continue;
+        if (!Array.isArray(candidate) || candidate.length === 0) continue;
         const closes = candidate
             .map((item) => {
                 if (typeof item === "object") {
@@ -219,10 +227,39 @@ function detectMonthlyDoubleBottom(monthlyCloses: number[], tolerance = 0.08, mi
     return false;
 }
 
-function consecutiveQuarterlyEpsIncrease(quarterlyEps: number[], quarters = 4): boolean {
-    if (quarterlyEps.length < quarters) return false;
-    const recent = quarterlyEps.slice(-quarters);
-    return recent.every((value, index) => index === 0 || value > recent[index - 1]);
+    return false;
+}
+
+function getEpsYoyGrowth(result: ScreeningResult): number | null {
+    const c = result.candidate as AnyRecord;
+    const fd = (result.financialData || {}) as AnyRecord;
+    return firstNumber(
+        c.epsYoyGrowth,
+        fd.Calculated_Metrics?.EPS_YoY_Growth,
+        fd.EPS_YoY_Growth
+    );
+}
+
+function getPriorYearTtmEps(result: ScreeningResult): number | null {
+    const c = result.candidate as AnyRecord;
+    const fd = (result.financialData || {}) as AnyRecord;
+    return firstNumber(
+        c.priorYearTtmEps,
+        fd.Calculated_Metrics?.Prior_Year_TTM_EPS,
+        fd.Prior_Year_TTM_EPS
+    );
+}
+
+function getRevenueYoyGrowth(result: ScreeningResult): number | null {
+    const c = result.candidate as AnyRecord;
+    const fd = (result.financialData || {}) as AnyRecord;
+    return firstNumber(
+        c.revenueYoyGrowth,
+        c.revenueGrowth, // Fallback to generic rev growth
+        fd.Calculated_Metrics?.YoY_Revenue_Growth_Pct,
+        fd.Calculated_Metrics?.YoY_Revenue_Growth,
+        fd.Calculated_Metrics?.Revenue_YoY_Growth
+    );
 }
 
 function getForwardEpsEstimate(result: ScreeningResult): number | null {
@@ -237,7 +274,8 @@ function getForwardEpsEstimate(result: ScreeningResult): number | null {
         fd.forwardEpsEstimate,
         fd.Forward_EPS,
         fd.Analyst_Estimates?.Forward_EPS,
-        fd.Earnings_Estimates?.Forward_EPS
+        fd.Earnings_Estimates?.Forward_EPS,
+        fd.Calculated_Metrics?.Forward_EPS_Estimate
     );
 }
 
@@ -310,6 +348,10 @@ export function evaluateYoutubeStrategy(result: ScreeningResult): YoutubeStrateg
     ]) ?? movingAverage(monthlyCloses, 20);
     const hasDoubleBottom = detectMonthlyDoubleBottom(monthlyCloses);
     const hasMonthlyDeclines = hasConsecutiveMonthlyDeclines(monthlyCloses, 3);
+    const epsYoyGrowth = getEpsYoyGrowth(result);
+    const priorYearTtmEps = getPriorYearTtmEps(result);
+    const revenueYoyGrowth = getRevenueYoyGrowth(result);
+
     const currentPrice = firstNumber(c.price, fd.Price) || 0;
     const largeCap = (firstNumber(c.marketCap, fd.Market_Cap) || 0) >= getLargeCapThreshold(c.symbol || "");
     const epsPositive = epsTtm !== null && epsTtm > 0;
@@ -317,12 +359,35 @@ export function evaluateYoutubeStrategy(result: ScreeningResult): YoutubeStrateg
 
     const earningsReasons: string[] = [];
     if (!largeCap) earningsReasons.push("Market cap is below the large-cap blue-chip threshold.");
-    if (!epsPositive) earningsReasons.push("EPS TTM is not positive or is unavailable.");
-    if (quarterlyEps.length < 4) earningsReasons.push("At least four quarters of EPS data are required.");
-    if (quarterlyEps.length >= 4 && !consecutiveQuarterlyEpsIncrease(quarterlyEps)) {
-        earningsReasons.push("EPS has not increased in each of the last four quarters.");
+    
+    // Fallback: If we lack explicit YoY momentum fields, we check if EPS is positive and growing overall.
+    // If SEC data is populated, it will use the explicit fields.
+    const hasExplicitYoY = epsYoyGrowth !== null && priorYearTtmEps !== null && revenueYoyGrowth !== null;
+
+    let earningsMomentumPassed = false;
+    if (hasExplicitYoY) {
+        if (epsYoyGrowth! <= 0 && !(epsNegative && epsYoyGrowth! > 0)) {
+            earningsReasons.push("Latest quarter diluted EPS YoY growth must be > 0 (or loss narrowing).");
+        }
+        if (epsTtm! <= priorYearTtmEps!) {
+            earningsReasons.push("Latest TTM EPS must be > prior-year TTM EPS.");
+        }
+        if (revenueYoyGrowth! <= 0) {
+            earningsReasons.push("Latest quarter revenue YoY growth must be > 0.");
+        }
+        if (earningsReasons.length === 0 || (earningsReasons.length === 1 && !largeCap)) {
+            // We only fail if the actual momentum rules fail, or if it's not a large cap.
+            earningsMomentumPassed = largeCap && epsYoyGrowth! > 0 && epsTtm! > priorYearTtmEps! && revenueYoyGrowth! > 0;
+        }
+    } else {
+        // Fallback Yahoo logic: Check if EPS is positive and Revenue YoY > 0
+        if (!epsPositive) earningsReasons.push("EPS TTM is not positive.");
+        if (revenueYoyGrowth === null || revenueYoyGrowth <= 0) earningsReasons.push("Requires positive Revenue YoY growth.");
+        
+        // As a rough proxy for TTM EPS > Prior Year TTM EPS, we check if net income grew if we have 8 quarters.
+        // But since we often don't, we just require positive EPS and positive Rev growth for the fallback.
+        earningsMomentumPassed = largeCap && epsPositive && (revenueYoyGrowth !== null && revenueYoyGrowth > 0);
     }
-    const earningsMomentumPassed = largeCap && epsPositive && consecutiveQuarterlyEpsIncrease(quarterlyEps);
 
     const valueReasons: string[] = [];
     const undervaluedByBook = priceToBook !== null && priceToBook < 1;
