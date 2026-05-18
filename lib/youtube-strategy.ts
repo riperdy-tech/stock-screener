@@ -73,6 +73,13 @@ function normalizeRows(rows: any[] | undefined | null): AnyRecord[] {
         .sort((a, b) => String(a.Date || a.date || "").localeCompare(String(b.Date || b.date || "")));
 }
 
+function getLargeCapThreshold(symbol: string): number {
+    if (symbol.endsWith(".NS") || symbol.endsWith(".BO")) return 500_000_000_000; // roughly 50,000 Cr INR
+    if (symbol.endsWith(".KS") || symbol.endsWith(".KQ")) return 10_000_000_000_000; // roughly 10T KRW
+    if (symbol.endsWith(".TW") || symbol.endsWith(".TWO")) return 300_000_000_000; // roughly 300B NTD
+    return 10_000_000_000; // US default: $10B
+}
+
 function getQuarterlyEpsSeries(result: ScreeningResult): number[] {
     const c = result.candidate as AnyRecord;
     const fd = (result.financialData || {}) as AnyRecord;
@@ -101,12 +108,11 @@ function getQuarterlyEpsSeries(result: ScreeningResult): number[] {
     if (!shares || shares <= 0 || rows.length === 0) return [];
 
     return rows
-        .map((row) => firstNumber(row.EPS, row.BasicEPS, row.DilutedEPS, row.NetIncome, row.netIncome))
-        .map((value, idx) => {
-            const row = rows[idx];
+        .map((row) => {
             const directEps = firstNumber(row.EPS, row.BasicEPS, row.DilutedEPS);
             if (directEps !== null) return directEps;
-            return value === null ? null : value / shares;
+            const netIncome = firstNumber(row.NetIncome, row.netIncome);
+            return netIncome === null ? null : netIncome / shares;
         })
         .filter((value): value is number => value !== null);
 }
@@ -297,7 +303,7 @@ export function evaluateYoutubeStrategy(result: ScreeningResult): YoutubeStrateg
     const currentPe = getCurrentPe(result, epsTtm);
     const fiveYearAveragePe = getFiveYearAveragePe(result);
     const monthlyCloses = getMonthlyCloses(result);
-    const monthlyMa20 = firstPathNumber(fd, [
+    const monthlyMa20 = firstNumber(c.monthlyMa20, c.monthlyMA20) ?? firstPathNumber(fd, [
         "Monthly_MA_20",
         "monthlyMa20",
         "Calculated_Metrics.Monthly_MA_20",
@@ -305,7 +311,7 @@ export function evaluateYoutubeStrategy(result: ScreeningResult): YoutubeStrateg
     const hasDoubleBottom = detectMonthlyDoubleBottom(monthlyCloses);
     const hasMonthlyDeclines = hasConsecutiveMonthlyDeclines(monthlyCloses, 3);
     const currentPrice = firstNumber(c.price, fd.Price) || 0;
-    const largeCap = (firstNumber(c.marketCap, fd.Market_Cap) || 0) >= 10_000_000_000;
+    const largeCap = (firstNumber(c.marketCap, fd.Market_Cap) || 0) >= getLargeCapThreshold(c.symbol || "");
     const epsPositive = epsTtm !== null && epsTtm > 0;
     const epsNegative = epsTtm !== null && epsTtm < 0;
 
