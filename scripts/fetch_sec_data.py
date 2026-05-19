@@ -102,7 +102,8 @@ def parse_facts(ticker, cik, input_dir):
         "ticker": ticker,
         "EPS_YoY_Growth": None,
         "Prior_Year_TTM_EPS": None,
-        "Revenue_YoY_Growth": None
+        "Revenue_YoY_Growth": None,
+        "Consecutive_YoY_EPS_Growth": 0
     }
     
     if len(eps_series) >= 8:
@@ -122,6 +123,26 @@ def parse_facts(ticker, cik, input_dir):
             metrics["EPS_YoY_Growth"] = (latest_q['val'] - prior_year_q['val']) / abs(prior_year_q['val'])
         
         metrics["Prior_Year_TTM_EPS"] = prior_ttm_eps
+        
+        # Calculate how many consecutive quarters (looking back up to 4 quarters) have YoY EPS growth
+        consecutive_growth = 0
+        for i in range(1, 5):
+            curr_q = eps_series[-i]
+            prev_year_q = next((q for q in prior_4 if q['fp'] == curr_q['fp']), None)
+            
+            # Since prior_4 only contains exactly 4 quarters, if we go back further than 1 year, we might need a larger window.
+            # Let's dynamically find the same quarter from the entire eps_series instead of just prior_4.
+            prev_year_q_dynamic = next((q for q in eps_series[:-i] if q['fp'] == curr_q['fp'] and q['fy'] == curr_q['fy'] - 1), None)
+            
+            if prev_year_q_dynamic and prev_year_q_dynamic['val'] != 0:
+                yoy = (curr_q['val'] - prev_year_q_dynamic['val']) / abs(prev_year_q_dynamic['val'])
+                if yoy > 0:
+                    consecutive_growth += 1
+                else:
+                    break
+            else:
+                break
+        metrics["Consecutive_YoY_EPS_Growth"] = consecutive_growth
         
     if len(rev_series) >= 5:
         latest_q_rev = rev_series[-1]
@@ -173,6 +194,7 @@ def main():
             fd["Calculated_Metrics"]["EPS_YoY_Growth"] = m["EPS_YoY_Growth"]
             fd["Calculated_Metrics"]["Prior_Year_TTM_EPS"] = m["Prior_Year_TTM_EPS"]
             fd["Calculated_Metrics"]["Revenue_YoY_Growth"] = m["Revenue_YoY_Growth"]
+            fd["Calculated_Metrics"]["Consecutive_YoY_EPS_Growth"] = m["Consecutive_YoY_EPS_Growth"]
             
             s['financialData'] = base64.b64encode(json.dumps(fd).encode('utf-8')).decode('utf-8')
             updated_count += 1

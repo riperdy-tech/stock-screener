@@ -361,6 +361,25 @@ export function evaluateYoutubeStrategy(result: ScreeningResult): YoutubeStrateg
     // If SEC data is populated, it will use the explicit fields.
     const hasExplicitYoY = epsYoyGrowth !== null && priorYearTtmEps !== null && revenueYoyGrowth !== null;
 
+    // SEC EDGAR calculated metric
+    const consecutiveSecGrowth = fd.Calculated_Metrics?.Consecutive_YoY_EPS_Growth || 0;
+    
+    // Calculate fallback consecutive growth if Yahoo data provides enough quarterly history
+    let fallbackConsecutiveGrowth = 0;
+    if (quarterlyEps.length >= 8) {
+        for (let i = 0; i < 4; i++) {
+            const currentQ = quarterlyEps[quarterlyEps.length - 1 - i];
+            const prevYearQ = quarterlyEps[quarterlyEps.length - 1 - i - 4];
+            if (currentQ > prevYearQ && prevYearQ > 0) {
+                fallbackConsecutiveGrowth++;
+            } else {
+                break;
+            }
+        }
+    }
+    
+    const consecutiveGrowth = Math.max(consecutiveSecGrowth, fallbackConsecutiveGrowth);
+
     let earningsMomentumPassed = false;
     if (hasExplicitYoY) {
         if (epsYoyGrowth! <= 0 && !(epsNegative && epsYoyGrowth! > 0)) {
@@ -372,18 +391,19 @@ export function evaluateYoutubeStrategy(result: ScreeningResult): YoutubeStrateg
         if (revenueYoyGrowth! <= 0) {
             earningsReasons.push("Latest quarter revenue YoY growth must be > 0.");
         }
+        if (consecutiveGrowth < 4) {
+            earningsReasons.push(`Requires 4 consecutive quarters of YoY EPS growth (found ${consecutiveGrowth}).`);
+        }
         if (earningsReasons.length === 0 || (earningsReasons.length === 1 && !largeCap)) {
-            // We only fail if the actual momentum rules fail, or if it's not a large cap.
-            earningsMomentumPassed = largeCap && epsYoyGrowth! > 0 && epsTtm! > priorYearTtmEps! && revenueYoyGrowth! > 0;
+            earningsMomentumPassed = largeCap && epsYoyGrowth! > 0 && epsTtm! > priorYearTtmEps! && revenueYoyGrowth! > 0 && consecutiveGrowth >= 4;
         }
     } else {
-        // Fallback Yahoo logic: Check if EPS is positive and Revenue YoY > 0
         if (!epsPositive) earningsReasons.push("EPS TTM is not positive.");
         if (revenueYoyGrowth === null || revenueYoyGrowth <= 0) earningsReasons.push("Requires positive Revenue YoY growth.");
-        
-        // As a rough proxy for TTM EPS > Prior Year TTM EPS, we check if net income grew if we have 8 quarters.
-        // But since we often don't, we just require positive EPS and positive Rev growth for the fallback.
-        earningsMomentumPassed = largeCap && epsPositive && (revenueYoyGrowth !== null && revenueYoyGrowth > 0);
+        if (consecutiveGrowth < 4) {
+            earningsReasons.push(`Requires 4 consecutive quarters of YoY EPS growth (found ${consecutiveGrowth}).`);
+        }
+        earningsMomentumPassed = largeCap && epsPositive && (revenueYoyGrowth !== null && revenueYoyGrowth > 0) && consecutiveGrowth >= 4;
     }
 
     const valueReasons: string[] = [];
