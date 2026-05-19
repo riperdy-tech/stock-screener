@@ -57,7 +57,7 @@ function fmt(val: any, market: Market | 'None' = 'US', isPrice = false, decimals
     const n = Number(val);
     if (isNaN(n)) return String(val);
 
-    const prefix = market === 'None' ? '' : market === 'India' ? '₹' : market === 'Korea' ? '₩' : market === 'Taiwan' ? 'NT$' : '$';
+    const prefix = market === 'None' ? '' : market === 'Korea' ? '₩' : market === 'Taiwan' ? 'NT$' : '$';
 
     if (isPrice) {
         return `${prefix}${n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}`;
@@ -67,10 +67,7 @@ function fmt(val: any, market: Market | 'None' = 'US', isPrice = false, decimals
         return `${n.toFixed(decimals)}`;
     }
 
-    if (market === 'India') {
-        if (Math.abs(n) >= 1e7) return `${prefix}${(n / 1e7).toFixed(decimals)} Cr.`;
-        return `${prefix}${n.toLocaleString('en-US', { maximumFractionDigits: decimals })}`;
-    }
+
 
     if (market === 'Korea') {
         if (Math.abs(n) >= 1e12) return `${(n / 1e12).toFixed(decimals)}조원`;
@@ -212,7 +209,6 @@ function formatScreenerData(result: ScreeningResult, market: Market = 'US'): str
 export async function buildPrompt(ticker: string, result: ScreeningResult): Promise<string> {
     // Determine market context from ticker suffix
     let market: Market = 'US';
-    if (ticker.endsWith('.NS') || ticker.endsWith('.BO')) market = 'India';
     if (ticker.endsWith('.KS') || ticker.endsWith('.KQ')) market = 'Korea';
 
     // Rely on rich financial detail embedded inside the CSV data pipeline

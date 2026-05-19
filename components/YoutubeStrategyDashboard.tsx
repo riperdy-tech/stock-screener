@@ -69,19 +69,15 @@ function adaptToScreeningResult(item: any): ScreeningResult {
     };
 }
 
-function formatMarketCap(value: number, market: Market): string {
+function formatMarketCap(value: number): string {
     if (!value) return "N/A";
-    if (market === "India") return `${(value / 10_000_000).toLocaleString("en-US", { maximumFractionDigits: 0 })} Cr.`;
-    if (market === "Korea") return `${(value / 1_000_000_000).toLocaleString("en-US", { maximumFractionDigits: 0 })}B ₩`;
-    if (market === "Taiwan") return `${(value / 100_000_000).toLocaleString("en-US", { maximumFractionDigits: 0 })}億元`;
     return `$${(value / 1_000_000_000).toFixed(1)}B`;
 }
 
-function formatPrice(value: number, market: Market): string {
-    const prefix = market === "India" ? "₹" : market === "Korea" ? "₩" : market === "Taiwan" ? "NT$" : "$";
-    return `${prefix}${Number(value || 0).toLocaleString("en-US", {
-        minimumFractionDigits: market === "Korea" || market === "Taiwan" ? 0 : 2,
-        maximumFractionDigits: market === "Korea" || market === "Taiwan" ? 0 : 2,
+function formatPrice(value: number): string {
+    return `$${Number(value || 0).toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
     })}`;
 }
 
@@ -267,14 +263,14 @@ export function YoutubeStrategyDashboard() {
                                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                                         <div className="min-w-0">
                                             <div className="flex items-center gap-2 flex-wrap">
-                                                <h3 className="text-xl font-black tracking-tight">{market === "US" ? c.symbol.split(".")[0] : c.symbol}</h3>
+                                                <h3 className="text-xl font-black tracking-tight">{c.symbol.split(".")[0]}</h3>
                                                 <span className="text-xs text-muted-foreground truncate">{c.name}</span>
                                             </div>
                                             <p className="text-[11px] text-muted-foreground mt-1 uppercase font-bold tracking-tight">{c.sector} • {c.industry || result.industry || "Unknown"}</p>
                                         </div>
                                         <div className="text-left sm:text-right shrink-0">
-                                            <div className="font-mono text-lg font-black">{formatPrice(c.price, market)}</div>
-                                            <div className="text-[11px] text-muted-foreground">{formatMarketCap(c.marketCap, market)}</div>
+                                            <div className="font-mono text-lg font-black">{formatPrice(c.price)}</div>
+                                            <div className="text-[11px] text-muted-foreground">{formatMarketCap(c.marketCap)}</div>
                                         </div>
                                     </div>
 

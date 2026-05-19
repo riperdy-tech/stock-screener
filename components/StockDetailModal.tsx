@@ -212,16 +212,12 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                             <ul className="list-disc pl-5 mt-1 text-xs text-foreground/80 font-normal space-y-1">
                                                 {(result.failCodes && result.failCodes.length > 0) ? result.failCodes.map(code => {
                                                     const failReasonMap: Record<string, string> = {
-                                                        FAIL_MCAP: market === 'India' 
-                                                            ? "Market Cap outside 400Cr - 16,000Cr range" 
-                                                            : market === 'Korea'
-                                                                ? "Market Cap outside 70B - 2.8T KRW range"
+                                                        FAIL_MCAP: market === 'Korea' 
+                                                            ? "Market Cap outside 70B - 2.8T KRW range"
                                                                 : market === 'Taiwan'
                                                                     ? "Market Cap outside 1.6億 - 640億 NTD range"
                                                                     : "Market Cap outside $50M - $2B range",
-                                                        FAIL_PRICE: market === 'India'
-                                                            ? "Share Price too high"
-                                                            : market === 'Korea' || market === 'Taiwan'
+                                                        FAIL_PRICE: market === 'Korea' || market === 'Taiwan'
                                                                 ? "Share Price too high" 
                                                                 : "Share Price >= $25",
                                                         FAIL_GROWTH: "Revenue Growth < 20%",
@@ -255,17 +251,15 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                 <DetailRow label={t('grossMargin')} value={market !== 'US' && candidate.grossMargin === 0 ? 'N/A' : `${Number(candidate.grossMargin).toFixed(1)}%`} target={`> 30% / 50%`} pass={market !== 'US' && candidate.grossMargin === 0 ? true : candidate.grossMargin >= 30} />
                                 <DetailRow 
                                     label={t('mcap')} 
-                                    value={market === 'India' 
-                                        ? `${(candidate.marketCap / 10_000_000).toLocaleString('en-US', {maximumFractionDigits: 0})} Cr.` 
-                                        : market === 'Korea'
-                                            ? formatKoreanWon(candidate.marketCap, 2)
-                                            : market === 'Taiwan'
+                                    value={market === 'Korea' 
+                                        ? `${(candidate.marketCap / 1_000_000_000).toFixed(1)}B ₩`
+                                        : market === 'Taiwan'
                                                 ? formatTaiwanNTD(candidate.marketCap, 2)
                                                 : `$${(candidate.marketCap / 1e9).toFixed(1)}B`
                                     } 
-                                    target={market === 'India' ? '< 16000Cr' : market === 'Korea' ? '< 2.8조원' : market === 'Taiwan' ? '< 640億元' : '< $2B'} 
-                                    pass={market === 'India' ? (candidate.marketCap / 10_000_000) <= 16000 : market === 'Korea' ? (candidate.marketCap / 1_000_000_000) <= 2800 : market === 'Taiwan' ? (candidate.marketCap / 100_000_000) <= 640 : candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} 
-                                    warning={market === 'India' ? (candidate.marketCap / 10_000_000) > 16000 : market === 'Korea' ? (candidate.marketCap / 1_000_000_000) > 2800 : market === 'Taiwan' ? (candidate.marketCap / 100_000_000) > 640 : candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} 
+                                    target={market === 'Korea' ? '< 2.8조원' : market === 'Taiwan' ? '< 640億元' : '< $2B'} 
+                                    pass={market === 'Korea' ? (candidate.marketCap / 1_000_000_000) <= 2800 : market === 'Taiwan' ? (candidate.marketCap / 100_000_000) <= 640 : candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} 
+                                    warning={market === 'Korea' ? (candidate.marketCap / 1_000_000_000) > 2800 : market === 'Taiwan' ? (candidate.marketCap / 100_000_000) > 640 : candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} 
                                 />
                                 <DetailRow label={t('pegRatio')} value={market !== 'US' && candidate.pegRatio === 0 ? 'N/A' : `${Number(candidate.pegRatio).toFixed(1)}x`} target={`< ${QUANT_THRESHOLDS.MAX_PEG}`} pass={market !== 'US' && candidate.pegRatio === 0 ? true : candidate.pegRatio <= QUANT_THRESHOLDS.MAX_PEG} />
                                 <DetailRow label={t('insiderOwn')} value={market !== 'US' && candidate.insiderOwnership === 0 ? 'N/A' : `${Number(candidate.insiderOwnership).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP}%`} pass={market !== 'US' && candidate.insiderOwnership === 0 ? true : candidate.insiderOwnership >= QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP} />

@@ -227,9 +227,6 @@ function detectMonthlyDoubleBottom(monthlyCloses: number[], tolerance = 0.08, mi
     return false;
 }
 
-    return false;
-}
-
 function getEpsYoyGrowth(result: ScreeningResult): number | null {
     const c = result.candidate as AnyRecord;
     const fd = (result.financialData || {}) as AnyRecord;

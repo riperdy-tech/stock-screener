@@ -134,25 +134,25 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 {/* Size & Price */}
                 <Section title={t('sizePrice')}>
                     <InputGroup 
-                        label={`${t('minMarketCap')} (${market === 'India' ? 'Cr.' : market === 'Korea' ? 'B ₩' : 'M $'})`} 
+                        label={`${t('minMarketCap')} (${market === 'Korea' ? 'B ₩' : 'M $'})`} 
                         value={localFilters.minMarketCap} 
                         onChange={(v) => handleChange("minMarketCap", v)} 
                         strictValue={STRICT_FILTERS.minMarketCap} field="minMarketCap" defs={filterDefs} 
-                        min={0} max={market === 'India' ? 50000 : market === 'Korea' ? 100000 : 5000} step={market === 'US' ? 10 : 100} 
+                        min={0} max={market === 'Korea' ? 100000 : 5000} step={market === 'US' ? 10 : 100} 
                     />
                     <InputGroup 
-                        label={`${t('maxMarketCap')} (${market === 'India' ? 'Cr.' : market === 'Korea' ? 'B ₩' : 'B $'})`} 
+                        label={`${t('maxMarketCap')} (${market === 'Korea' ? 'B ₩' : 'B $'})`} 
                         value={localFilters.maxMarketCap} 
                         onChange={(v) => handleChange("maxMarketCap", v)} 
                         strictValue={STRICT_FILTERS.maxMarketCap} field="maxMarketCap" defs={filterDefs} 
-                        min={0} max={market === 'India' ? 100000 : market === 'Korea' ? 200000 : 10000} step={100} 
+                        min={0} max={market === 'Korea' ? 200000 : 10000} step={100} 
                     />
                     <InputGroup 
-                        label={`${t('maxPrice')} (${market === 'India' ? '₹' : market === 'Korea' ? '₩' : '$'})`} 
+                        label={`${t('maxPrice')} (${market === 'Korea' ? '₩' : '$'})`} 
                         value={localFilters.maxPrice} 
                         onChange={(v) => handleChange("maxPrice", v)} 
                         strictValue={STRICT_FILTERS.maxPrice} field="maxPrice" defs={filterDefs} 
-                        min={0} max={market === 'India' ? 50000 : market === 'Korea' ? 1000000 : 1000} step={market === 'US' ? 1 : 10} 
+                        min={0} max={market === 'Korea' ? 1000000 : 1000} step={market === 'US' ? 1 : 10} 
                     />
                     <InputGroup 
                         label={`${t('maxFloat')} (M)`} 

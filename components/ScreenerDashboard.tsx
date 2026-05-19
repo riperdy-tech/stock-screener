@@ -267,8 +267,6 @@ export function ScreenerDashboard() {
             let mcapValue = c.marketCap;
             if (selectedMarket === 'US') {
                 mcapValue = c.marketCap / 1_000_000;
-            } else if (selectedMarket === 'India') {
-                mcapValue = c.marketCap / 10_000_000; // Crores
             } else if (selectedMarket === 'Korea') {
                 mcapValue = c.marketCap / 1_000_000_000; // Billions
             } else if (selectedMarket === 'Taiwan') {
@@ -380,9 +378,9 @@ export function ScreenerDashboard() {
                                         : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                                 )}
                             >
-                                <span>{m === 'US' ? '🇺🇸' : m === 'India' ? '🇮🇳' : m === 'Korea' ? '🇰🇷' : '🇹🇼'}</span>
+                                <span>{m === 'US' ? '🇺🇸' : m === 'Korea' ? '🇰🇷' : '🇹🇼'}</span>
                                 <span className={clsx(selectedMarket === m ? "block" : "hidden sm:block")}>
-                                    {m === 'US' ? t('usStocks') : m === 'India' ? t('indiaStocks') : m === 'Korea' ? t('koreaStocks') : t('taiwanStocks')}
+                                    {m === 'US' ? t('usStocks') : m === 'Korea' ? t('koreaStocks') : t('taiwanStocks')}
                                 </span>
                             </button>
                         ))}

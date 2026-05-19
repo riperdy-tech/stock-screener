@@ -20,7 +20,7 @@ export const TRANSLATIONS = {
         processing: "Processing",
         // Market Selector
         usStocks: "US Stocks",
-        indiaStocks: "India Stocks",
+
         koreaStocks: "Korea Stocks",
         taiwanStocks: "Taiwan Stocks",
 

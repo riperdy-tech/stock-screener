@@ -55,7 +55,7 @@ export function StockCard({ result, onClick, index = 0, lastUpdated, market = 'U
                     
                     <div className="text-right shrink-0">
                         <div className="font-mono text-sm sm:text-base font-bold text-foreground leading-none mb-1">
-                            {market === 'India' ? '₹' : market === 'Korea' ? '₩' : market === 'Taiwan' ? 'NT$' : '$'}{candidate.price.toLocaleString('en-US', { 
+                            {market === 'Korea' ? '₩' : market === 'Taiwan' ? 'NT$' : '$'}{candidate.price.toLocaleString('en-US', { 
                                 minimumFractionDigits: (market === 'Korea' || market === 'Taiwan') ? 0 : 2,
                                 maximumFractionDigits: (market === 'Korea' || market === 'Taiwan') ? 0 : 2
                             })}
