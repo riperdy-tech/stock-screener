@@ -17,6 +17,28 @@ export interface StockCandidate {
     lastUpdated?: string;
 }
 
+// Phase 9: Reverse Screening Engine result (from stocks.json reverse object)
+export interface ReverseResult {
+    rev_archetype: string | null;
+    rev_archetype_secondary: string | null;
+    rev_quality: number | null;
+    rev_mos: number | null;
+    rev_survivability: number | null;
+    rev_impairment_prob: number | null;
+    rev_cagr_proxy: number | null;
+    rev_drawdown_proxy: number | null;
+    rev_efficiency: number | null;
+    rev_composite: number | null;
+    rev_band: string | null;
+    rev_rank: number | null;
+    rev_flags: string | null;
+    rev_data_quality: number | null;
+    rev_pro: string | null;
+    rev_con: string | null;
+    rev_nominated: boolean | null;
+    rev_route_confidence: string | null;
+}
+
 export interface ScreeningMetrics {
     roic: number;
     revenueGrowth: number;
@@ -44,6 +66,7 @@ export interface ScreeningResult {
     description?: string;
     financialData?: any;
     Last_Updated?: string;
+    reverse?: ReverseResult; // Phase 9: reverse screening engine result
 }
 
 // Phase 1: Quantitative Filters

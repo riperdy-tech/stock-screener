@@ -1,4 +1,4 @@
-import { Filter, X, HelpCircle } from "lucide-react";
+import { Filter, X, HelpCircle, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
 import { Market } from "@/lib/data-service";
@@ -18,6 +18,25 @@ export interface FilterState {
     maxFloat: number; // Millions
 }
 
+// Phase 10: Reverse Engine filter state
+export interface ReverseFilterState {
+    archetypes: string[];       // selected archetypes (empty = all)
+    bands: string[];            // selected bands (empty = all)
+    minComposite: number;       // 0-100
+    minMoS: number;             // 0-100
+    minSurvivability: number;   // 0-100
+    nominatedOnly: boolean;
+}
+
+export const DEFAULT_REVERSE_FILTERS: ReverseFilterState = {
+    archetypes: [],
+    bands: [],
+    minComposite: 0,
+    minMoS: 0,
+    minSurvivability: 0,
+    nominatedOnly: false,
+};
+
 interface FilterSidebarProps {
     filters: FilterState;
     setFilters: (f: FilterState) => void;
@@ -25,6 +44,17 @@ interface FilterSidebarProps {
     onClose: () => void;
     totalResults: number;
     market: Market;
+    // Phase 10: Reverse Engine mode
+    screenMode?: '100bagger' | 'reverse';
+    reverseFilters?: ReverseFilterState;
+    setReverseFilters?: (f: ReverseFilterState) => void;
+    onScreenModeChange?: (mode: '100bagger' | 'reverse') => void;
+    // Phase 11d: Deep-Dive controls
+    batchN?: number;
+    onBatchNChange?: (n: number) => void;
+    batchDispatching?: boolean;
+    batchStatus?: string | null;
+    onDeepDiveClick?: () => void;
 }
 
 export const DEFAULT_FILTERS: FilterState = {
@@ -66,17 +96,22 @@ export const STRICT_FILTERS: FilterState = {
     maxFloat: 50,
 };
 
-export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market }: FilterSidebarProps) {
+export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, onScreenModeChange, batchN, onBatchNChange, batchDispatching, batchStatus, onDeepDiveClick }: FilterSidebarProps) {
     const { t, filterDefs } = useLanguage();
     const router = useRouter();
 
     // Local state for Manual Apply
     const [localFilters, setLocalFilters] = useState<FilterState>(filters);
+    const [localReverseFilters, setLocalReverseFilters] = useState<ReverseFilterState>(reverseFilters || DEFAULT_REVERSE_FILTERS);
 
     // Sync local state when global filters change (e.g. initial load or external reset)
     useEffect(() => {
         setLocalFilters(filters);
     }, [filters]);
+
+    useEffect(() => {
+        if (reverseFilters) setLocalReverseFilters(reverseFilters);
+    }, [reverseFilters]);
 
     const handleChange = (key: keyof FilterState, value: string) => {
         const num = parseFloat(value);
@@ -97,6 +132,30 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
         setFilters(STRICT_FILTERS);
     };
 
+    // Phase 10: Reverse filter handlers
+    const toggleArchetype = (arch: string) => {
+        const next = localReverseFilters.archetypes.includes(arch)
+            ? localReverseFilters.archetypes.filter(a => a !== arch)
+            : [...localReverseFilters.archetypes, arch];
+        setLocalReverseFilters({ ...localReverseFilters, archetypes: next });
+    };
+
+    const toggleBand = (band: string) => {
+        const next = localReverseFilters.bands.includes(band)
+            ? localReverseFilters.bands.filter(b => b !== band)
+            : [...localReverseFilters.bands, band];
+        setLocalReverseFilters({ ...localReverseFilters, bands: next });
+    };
+
+    const handleReverseApply = () => {
+        if (setReverseFilters) setReverseFilters(localReverseFilters);
+    };
+
+    const handleReverseReset = () => {
+        setLocalReverseFilters(DEFAULT_REVERSE_FILTERS);
+        if (setReverseFilters) setReverseFilters(DEFAULT_REVERSE_FILTERS);
+    };
+
     return (
         <div className={clsx(
             "fixed inset-y-0 left-0 z-50 w-80 bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-[100dvh] overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
@@ -114,23 +173,161 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
             <div className="flex-1 overflow-y-auto p-4 space-y-6">
 
-                {/* Strategy Presets */}
+                {/* Strategy Presets — always visible */}
                 <Section title="Strategy Presets">
                     <select 
                         className="w-full bg-secondary/40 border border-border/70 text-foreground font-semibold rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer transition-colors hover:border-primary/50"
+                        value={screenMode === 'reverse' ? 'reverse' : ''}
                         onChange={(e) => {
                             const val = e.target.value;
-                            if (val === 'strict') handleStrict();
+                            if (val === 'strict') { handleStrict(); if (onScreenModeChange) onScreenModeChange('100bagger'); }
                             else if (val === 'youtube') router.push('/youtube-strategy');
-                            e.target.value = ''; // Reset selection visual
+                            else if (val === 'reverse') { if (onScreenModeChange) onScreenModeChange('reverse'); }
                         }}
                     >
                         <option value="" className="bg-background text-muted-foreground">Select a strategy preset...</option>
                         <option value="strict" className="bg-background text-foreground font-semibold">Strict 100-Bagger (US Only)</option>
+                        <option value="reverse" className="bg-background text-emerald-400 font-semibold">Reverse Engine</option>
                         <option value="youtube" className="bg-background text-foreground font-semibold">YouTube Strategy</option>
                     </select>
                 </Section>
 
+                {/* Phase 10: Reverse Engine controls (shown only in reverse mode) */}
+                {screenMode === 'reverse' && (
+                    <>
+                        <Section title="Archetype">
+                            <div className="flex flex-wrap gap-1.5">
+                                {['A','B','C','D','E','F','G','H','I'].map(arch => (
+                                    <button
+                                        key={arch}
+                                        onClick={() => toggleArchetype(arch)}
+                                        className={clsx(
+                                            "px-2.5 py-1 text-xs font-bold rounded-md border transition-all",
+                                            localReverseFilters.archetypes.includes(arch)
+                                                ? "bg-primary text-primary-foreground border-primary"
+                                                : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-primary/40"
+                                        )}
+                                    >
+                                        {arch}
+                                    </button>
+                                ))}
+                            </div>
+                        </Section>
+
+                        <Section title="Band">
+                            <div className="flex flex-wrap gap-1.5">
+                                {['High','Solid','Watchlist','Monitor','Reject-tier'].map(band => (
+                                    <button
+                                        key={band}
+                                        onClick={() => toggleBand(band)}
+                                        className={clsx(
+                                            "px-2.5 py-1 text-[10px] font-bold rounded-md border transition-all",
+                                            localReverseFilters.bands.includes(band)
+                                                ? band === 'High' ? "bg-emerald-500/30 text-emerald-400 border-emerald-500/50"
+                                                : band === 'Solid' ? "bg-blue-500/30 text-blue-400 border-blue-500/50"
+                                                : band === 'Watchlist' ? "bg-amber-500/30 text-amber-400 border-amber-500/50"
+                                                : band === 'Monitor' ? "bg-gray-500/30 text-gray-400 border-gray-500/50"
+                                                : "bg-muted/30 text-muted-foreground border-border/50"
+                                                : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-primary/40"
+                                        )}
+                                    >
+                                        {band}
+                                    </button>
+                                ))}
+                            </div>
+                        </Section>
+
+                        <Section title="Score Thresholds">
+                            <InputGroup
+                                label="Min Composite"
+                                value={localReverseFilters.minComposite}
+                                onChange={(v) => setLocalReverseFilters({ ...localReverseFilters, minComposite: parseFloat(v) || 0 })}
+                                min={0} max={100} step={1}
+                            />
+                            <InputGroup
+                                label="Min MoS"
+                                value={localReverseFilters.minMoS}
+                                onChange={(v) => setLocalReverseFilters({ ...localReverseFilters, minMoS: parseFloat(v) || 0 })}
+                                min={0} max={100} step={1}
+                            />
+                            <InputGroup
+                                label="Min Survivability"
+                                value={localReverseFilters.minSurvivability}
+                                onChange={(v) => setLocalReverseFilters({ ...localReverseFilters, minSurvivability: parseFloat(v) || 0 })}
+                                min={0} max={100} step={1}
+                            />
+                        </Section>
+
+                        <Section title="Nomination">
+                            <label className="flex items-center gap-2 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={localReverseFilters.nominatedOnly}
+                                    onChange={(e) => setLocalReverseFilters({ ...localReverseFilters, nominatedOnly: e.target.checked })}
+                                    className="w-4 h-4 rounded border-border accent-amber-500"
+                                />
+                                <span className="text-xs font-medium text-muted-foreground">★ Nominated only</span>
+                            </label>
+                        </Section>
+
+                        {/* Phase 11d: Deep-Dive */}
+                        <Section title="Deep-Dive (v3.2)">
+                            <div className="flex items-center gap-2">
+                                <select
+                                    value={(batchN && [5,10,25].includes(batchN)) ? batchN : 0}
+                                    onChange={(e) => { const v = Number(e.target.value); if (v > 0 && onBatchNChange) onBatchNChange(v); }}
+                                    className="bg-secondary/40 border border-border/70 text-foreground rounded-md px-2 py-1.5 text-xs font-bold focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                                >
+                                    <option value={0}>N</option>
+                                    <option value={5}>5</option>
+                                    <option value={10}>10</option>
+                                    <option value={25}>25</option>
+                                </select>
+                                <input
+                                    type="number"
+                                    min={1} max={30}
+                                    value={batchN || 25}
+                                    onChange={(e) => { const v = parseInt(e.target.value); if (v >= 1 && v <= 30 && onBatchNChange) onBatchNChange(v); }}
+                                    className="w-14 bg-secondary/40 border border-border/70 text-foreground rounded-md px-1.5 py-1.5 text-xs font-bold text-center focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                                />
+                            </div>
+                            <button
+                                onClick={onDeepDiveClick}
+                                disabled={batchDispatching}
+                                className="w-full mt-2 flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black rounded-lg transition-all active:scale-95 disabled:opacity-50"
+                            >
+                                <Sparkles className="h-3.5 w-3.5" />
+                                {batchDispatching ? 'Dispatching...' : `Deep-Dive Top ${batchN || 25}`}
+                            </button>
+                            {batchStatus && (
+                                <p className={clsx(
+                                    "text-[10px] mt-1",
+                                    batchStatus.startsWith("Error") ? "text-red-400" : "text-emerald-400"
+                                )}>{batchStatus}</p>
+                            )}
+                        </Section>
+
+                        {/* Reverse Apply/Reset */}
+                        <div className="flex gap-2 pt-2">
+                            <button
+                                onClick={handleReverseApply}
+                                className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded shadow transition-colors"
+                            >
+                                Apply Reverse
+                            </button>
+                            <button
+                                onClick={handleReverseReset}
+                                className="flex-1 px-2 py-2 bg-muted hover:bg-destructive/10 hover:text-destructive text-muted-foreground text-xs font-medium rounded border border-border transition-colors"
+                            >
+                                Reset
+                            </button>
+                        </div>
+                    </>
+                )}
+
+                {/* 100-Bagger controls (shown only in 100-bagger mode) */}
+                {screenMode !== 'reverse' && (
+                <>
                 {/* Size & Price */}
                 <Section title={t('sizePrice')}>
                     <InputGroup 
@@ -180,13 +377,16 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 <Section title={t('ownership')}>
                     <InputGroup label={t('minInsider')} value={localFilters.minInsiderOwnership} onChange={(v) => handleChange("minInsiderOwnership", v)} strictValue={STRICT_FILTERS.minInsiderOwnership} field="minInsiderOwnership" defs={filterDefs} min={0} max={100} step={1} />
                 </Section>
+                </>
+                )}
 
                 <div className="text-center text-xs text-muted-foreground mt-8 pb-20">
-                    {t('showing')} {totalResults} {t('assets')}
+                    {screenMode === 'reverse' ? `${totalResults} Reverse candidates` : `${t('showing')} ${totalResults} ${t('assets')}`}
                 </div>
             </div>
 
-            {/* Sticky Actions Footer */}
+            {/* Sticky Actions Footer — show only for 100-bagger mode */}
+            {screenMode !== 'reverse' && (
             <div className="p-4 border-t border-border/50 bg-card/50 backdrop-blur-xl sticky bottom-0 z-10 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]">
                 <div className="flex gap-2">
                     <button
@@ -203,6 +403,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                     </button>
                 </div>
             </div>
+            )}
         </div>
     );
 }

@@ -3,10 +3,11 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
-import { fetchStocks, Market } from "@/lib/data-service";
+import { fetchStocks, fetchReverseScores, Market } from "@/lib/data-service";
 import { buildPrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
-import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS } from "./FilterSidebar";
+import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS } from "./FilterSidebar";
+import { supabase } from "@/lib/supabase";
 import { LanguageToggle } from "./LanguageToggle";
 import { LogConsole } from "./LogConsole";
 import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal } from 'lucide-react';
@@ -27,6 +28,10 @@ export function ScreenerDashboard() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isLogOpen, setIsLogOpen] = useState(false);
     const [selectedMarket, setSelectedMarket] = useState<Market>('US');
+    
+    // Phase 10: Screen mode (mutually exclusive)
+    const [screenMode, setScreenMode] = useState<'100bagger' | 'reverse'>('100bagger');
+    const [reverseFilters, setReverseFilters] = useState<ReverseFilterState>(DEFAULT_REVERSE_FILTERS);
     
     // Maintain a ref to current rawResults for the setInterval closure
     const rawResultsRef = useRef<ScreeningResult[]>([]);
@@ -58,6 +63,15 @@ export function ScreenerDashboard() {
     const [dsError, setDsError] = useState("");
     
     const [backgroundDsTask, setBackgroundDsTask] = useState<{ticker: string, status: 'running' | 'completed' | 'error' | 'success', message?: string} | null>(null);
+
+    // Phase 11d: Batch deep-dive state
+    const [batchN, setBatchN] = useState(25);
+    const [showBatchConfirm, setShowBatchConfirm] = useState(false);
+    const [batchId, setBatchId] = useState<string | null>(null);
+    const [batchProgress, setBatchProgress] = useState<{ completed: number; failed: number; total: number } | null>(null);
+    const [batchDispatching, setBatchDispatching] = useState(false);
+    const [showBatchPassword, setShowBatchPassword] = useState(false);
+    const [batchStatus, setBatchStatus] = useState<string | null>(null); // user-visible feedback
     
     const handleDeepseekRun = async () => {
         if (!dsPassword) { setDsError("Please enter password"); return; }
@@ -130,6 +144,83 @@ export function ScreenerDashboard() {
         alert("Copied!");
     };
 
+    // Phase 11d: Batch deep-dive dispatch
+    const handleBatchDispatch = async () => {
+        if (!dsPassword) { setBatchStatus("Enter password first"); return; }
+        setShowBatchConfirm(false);
+        setBatchDispatching(true);
+        setBatchStatus("Dispatching...");
+
+        const topN = filteredResults
+            .filter(r => r.reverse && r.reverse.rev_band && r.reverse.rev_band !== 'Excluded')
+            .slice(0, batchN)
+            .map(r => r.candidate.symbol);
+
+        if (topN.length === 0) {
+            setBatchDispatching(false);
+            setBatchStatus("No candidates to dispatch");
+            return;
+        }
+
+        try {
+            const res = await fetch("/api/analysis/batch", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ tickers: topN, password: dsPassword })
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || `Server error: ${res.status}`);
+            setBatchId(data.batch_id);
+            setBatchProgress({ completed: 0, failed: 0, total: data.queued });
+            setBatchStatus(`Dispatched ${data.queued} analyses — waiting for workers...`);
+            // Persist to localStorage so progress survives refresh
+            localStorage.setItem('batch_id', data.batch_id);
+            localStorage.setItem('batch_total', String(data.queued));
+            setDsPassword("");
+        } catch (e: any) {
+            console.error("Batch dispatch error:", e);
+            setBatchStatus(`Error: ${e.message}`);
+        } finally {
+            setBatchDispatching(false);
+        }
+    };
+
+    // Phase 11d: Batch progress polling
+    useEffect(() => {
+        if (!batchId) return;
+        const poll = async () => {
+            try {
+                const { data, error } = await supabase
+                    .from('ai_reports')
+                    .select('status')
+                    .eq('batch_id', batchId);
+                if (error) return;
+                const completed = data.filter((r: any) => r.status === 'completed').length;
+                const failed = data.filter((r: any) => r.status === 'error').length;
+                setBatchProgress({ completed, failed, total: data.length });
+                // Auto-clear localStorage when all done
+                if (completed + failed >= data.length && data.length > 0) {
+                    localStorage.removeItem('batch_id');
+                    localStorage.removeItem('batch_total');
+                }
+            } catch (e) { /* silent */ }
+        };
+        poll();
+        const interval = setInterval(poll, 5000);
+        return () => clearInterval(interval);
+    }, [batchId]);
+
+    // Phase 11d: Resume batch on page load (survives refresh)
+    useEffect(() => {
+        const savedBatchId = localStorage.getItem('batch_id');
+        const savedTotal = localStorage.getItem('batch_total');
+        if (savedBatchId && savedTotal) {
+            setBatchId(savedBatchId);
+            setBatchProgress({ completed: 0, failed: 0, total: parseInt(savedTotal) });
+            setBatchStatus(`Resumed batch — polling...`);
+        }
+    }, []);
+
 
     const handleAiReview = async (result: ScreeningResult) => {
         const ticker = result.candidate.symbol;
@@ -195,13 +286,17 @@ export function ScreenerDashboard() {
             
             if (updateDate) setLastUpdatedFile(updateDate);
 
+            // Phase 9: Load reverse screening engine results
+            const reverseScores = market === 'US' ? await fetchReverseScores() : {};
+
             // ADAPTER: Convert CSV Flat Object to ScreeningResult
             const adaptedData = (rawData as any[]).map(item => {
                 // The item is now the flat CSV row parsed by data-service
                 // metrics are already top-level in 'item' due to data-service mapping
+                const sym = item.symbol || '';
                 return {
                     candidate: {
-                        symbol: item.symbol,
+                        symbol: sym,
                         name: item.name,
                         description: item.description,
                         price: item.price,
@@ -234,7 +329,8 @@ export function ScreenerDashboard() {
                     flags: [],
                     financialData: item._financialData,
                     description: item.description,
-                    industry: item.industry
+                    industry: item.industry,
+                    reverse: reverseScores[sym] || undefined, // Phase 9: attach reverse data
                 };
             });
 
@@ -249,6 +345,52 @@ export function ScreenerDashboard() {
 
     // Filtering Logic
     const filteredResults = useMemo(() => {
+        // Phase 10: Reverse Engine mode — exclusive reverse filters
+        if (screenMode === 'reverse') {
+            return rawResults.filter(r => {
+                const rev = r.reverse;
+                // Exclude stocks without reverse data or excluded/rejected bands
+                if (!rev || !rev.rev_band || rev.rev_band === 'Excluded') return false;
+
+                // Archetype filter
+                if (reverseFilters.archetypes.length > 0 && rev.rev_archetype) {
+                    if (!reverseFilters.archetypes.includes(rev.rev_archetype)) return false;
+                }
+
+                // Band filter
+                if (reverseFilters.bands.length > 0 && rev.rev_band) {
+                    if (!reverseFilters.bands.includes(rev.rev_band)) return false;
+                }
+
+                // Min composite
+                if (reverseFilters.minComposite > 0 && (rev.rev_composite == null || rev.rev_composite < reverseFilters.minComposite)) return false;
+
+                // Min MoS
+                if (reverseFilters.minMoS > 0 && (rev.rev_mos == null || rev.rev_mos < reverseFilters.minMoS)) return false;
+
+                // Min survivability
+                if (reverseFilters.minSurvivability > 0 && (rev.rev_survivability == null || rev.rev_survivability < reverseFilters.minSurvivability)) return false;
+
+                // Nominated only
+                if (reverseFilters.nominatedOnly && !rev.rev_nominated) return false;
+
+                // Search match (symbol/name)
+                const c = r.candidate;
+                const searchMatch = !search ||
+                    c.symbol.toLowerCase().includes(search.toLowerCase()) ||
+                    c.name.toLowerCase().includes(search.toLowerCase());
+                if (!searchMatch) return false;
+
+                return true;
+            }).sort((a, b) => {
+                // Sort by rev_composite descending
+                const compA = a.reverse?.rev_composite ?? 0;
+                const compB = b.reverse?.rev_composite ?? 0;
+                return compB - compA;
+            });
+        }
+
+        // 100-Bagger mode — existing behavior unchanged
         return rawResults.filter(r => {
             const c = r.candidate;
 
@@ -293,7 +435,7 @@ export function ScreenerDashboard() {
 
             return true;
         });
-    }, [rawResults, search, filters, selectedMarket]);
+    }, [rawResults, search, filters, selectedMarket, screenMode, reverseFilters]);
 
 
     // Pagination Logic
@@ -338,6 +480,18 @@ export function ScreenerDashboard() {
                 market={selectedMarket}
                 onClose={() => setIsSidebarOpen(false)}
                 totalResults={filteredResults.length}
+                screenMode={screenMode}
+                reverseFilters={reverseFilters}
+                setReverseFilters={setReverseFilters}
+                onScreenModeChange={setScreenMode}
+                batchN={batchN}
+                onBatchNChange={setBatchN}
+                batchDispatching={batchDispatching}
+                batchStatus={batchStatus}
+                onDeepDiveClick={() => {
+                    if (!dsPassword) { setShowBatchPassword(true); return; }
+                    setShowBatchConfirm(true);
+                }}
             />
 
             {/* 2. Main Content Area */}
@@ -417,6 +571,34 @@ export function ScreenerDashboard() {
 
                 {/* Content with Scroll */}
                 <div className="flex-1 overflow-y-auto p-4 md:p-6 scroll-smooth">
+                    {/* Phase 11d: Batch Progress Bar — visible in both modes */}
+                    {batchId && (
+                        <div className="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl animate-in fade-in">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                    <Sparkles className={clsx("h-5 w-5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-emerald-400" : "text-emerald-400 animate-pulse")} />
+                                    <div>
+                                        <span className="text-sm font-bold text-emerald-400">Batch Deep-Dive</span>
+                                        <span className="text-xs text-muted-foreground ml-3">
+                                            {batchProgress
+                                                ? `${batchProgress.completed} of ${batchProgress.total} complete${batchProgress.failed > 0 ? ` (${batchProgress.failed} failed)` : ''}`
+                                                : `Waiting for workers...`}
+                                        </span>
+                                    </div>
+                                </div>
+                                <button onClick={() => { setBatchProgress(null); setBatchId(null); setBatchStatus(null); localStorage.removeItem('batch_id'); localStorage.removeItem('batch_total'); }} className="text-muted-foreground hover:text-foreground text-xs">Dismiss</button>
+                            </div>
+                            {batchProgress && (
+                                <div className="w-full h-2 bg-secondary/50 rounded-full mt-2 overflow-hidden">
+                                    <div className="h-full bg-emerald-500 rounded-full transition-all duration-700"
+                                        style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
+                                </div>
+                            )}
+                            {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
+                                <p className="text-[11px] text-emerald-400 mt-2 font-medium">All done! Open any stock card to view its report.</p>
+                            )}
+                        </div>
+                    )}
                     <div className="mb-6">
                         <h2 className="text-2xl font-bold flex items-center gap-3">
                             {t('marketOpp')}
@@ -604,6 +786,90 @@ export function ScreenerDashboard() {
                                 </div>
                             ) : null}
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Phase 11d: Batch Password Prompt */}
+            {showBatchPassword && (
+                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
+                    <div className="bg-card border border-border rounded-xl shadow-2xl p-6 max-w-sm w-full animate-in zoom-in-95">
+                        <h3 className="text-lg font-bold mb-2">Enter Password</h3>
+                        <p className="text-xs text-muted-foreground mb-3">Required to dispatch deep-dive analyses.</p>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={dsPassword}
+                            onChange={(e) => setDsPassword(e.target.value)}
+                            className="w-full bg-secondary/40 border border-border rounded-lg px-3 py-2 text-sm mb-3 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                            onKeyDown={(e) => { if (e.key === 'Enter' && dsPassword) { setShowBatchPassword(false); setShowBatchConfirm(true); } }}
+                        />
+                        <div className="flex gap-2">
+                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 px-3 py-2 bg-muted text-muted-foreground text-xs font-bold rounded border border-border">Cancel</button>
+                            <button
+                                onClick={() => { setShowBatchPassword(false); setShowBatchConfirm(true); }}
+                                disabled={!dsPassword}
+                                className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded disabled:opacity-50"
+                            >Continue</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Phase 11d: Batch Confirm Dialog */}
+            {showBatchConfirm && (
+                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
+                    <div className="bg-card border border-border rounded-xl shadow-2xl p-6 max-w-sm w-full animate-in zoom-in-95">
+                        <h3 className="text-lg font-bold mb-2">Dispatch Deep-Dive Batch?</h3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                            This will dispatch <span className="font-bold text-foreground">{batchN}</span> deep-dive analyses
+                            via GitHub Actions. Each takes ~2-3 minutes. GitHub queues them automatically.
+                        </p>
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => setShowBatchConfirm(false)}
+                                className="flex-1 px-3 py-2 bg-muted text-muted-foreground text-xs font-bold rounded border border-border"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleBatchDispatch}
+                                className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded"
+                            >
+                                Dispatch {batchN}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Phase 11d: Batch Progress Panel */}
+            {batchId && (
+                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-emerald-500/30 rounded-xl shadow-2xl p-4 min-w-[300px] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
+                    <div className="flex justify-between items-start gap-4">
+                        <div className="flex items-start gap-3">
+                            <Sparkles className={clsx("h-5 w-5 mt-0.5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-emerald-400" : "text-emerald-400 animate-pulse")} />
+                            <div className="flex flex-col flex-1">
+                                <span className="font-bold text-sm text-foreground">Batch Deep-Dive</span>
+                                <span className="text-xs text-muted-foreground mt-1">
+                                    {batchProgress 
+                                        ? `${batchProgress.completed} of ${batchProgress.total} complete${batchProgress.failed > 0 ? ` (${batchProgress.failed} failed)` : ''}`
+                                        : `Waiting for workers... (${batchStatus || ''})`}
+                                </span>
+                                {batchProgress && (
+                                <div className="w-full h-2 bg-secondary/50 rounded-full mt-2 overflow-hidden">
+                                    <div className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+                                        style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
+                                </div>
+                                )}
+                                {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
+                                    <span className="text-[10px] text-emerald-400 mt-1.5 font-bold">All done! Open any stock card to view its report.</span>
+                                )}
+                            </div>
+                        </div>
+                        <button onClick={() => { setBatchProgress(null); setBatchId(null); setBatchStatus(null); localStorage.removeItem('batch_id'); localStorage.removeItem('batch_total'); }} className="text-muted-foreground hover:text-foreground shrink-0">
+                            <X className="h-5 w-5" />
+                        </button>
                     </div>
                 </div>
             )}

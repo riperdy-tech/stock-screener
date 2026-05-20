@@ -1,4 +1,4 @@
-import { type StockCandidate } from "./blueprint";
+import { type StockCandidate, type ReverseResult } from "./blueprint";
 
 export function formatKoreanWon(n: number, decimals: number = 2) {
     if (Math.abs(n) >= 1e12) return `${(n / 1e12).toLocaleString('en-US', {maximumFractionDigits: decimals})}조원`;
@@ -159,12 +159,6 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
             // Use 100 as multiplier for dashboard cards which expect integers.
             const multiplier = 100;
 
-            const financialData = (() => {
-                const fd = row['Financial_Data'];
-                if (!fd) return null;
-                try { return JSON.parse(decodeURIComponent(escape(atob(fd)))); } catch(e) { return null; }
-            })();
-
             const base = {
                 symbol: row['Symbol'] || '',
                 name: (row['Name'] || '').replace(/"/g, ''),
@@ -198,12 +192,15 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
                 monthlyMa20: firstNumber(row['20M MA'], row['20 Month MA'], row['20-Month MA'], row['Monthly MA 20']),
                 monthlyCloses: parseNumberList(row['Monthly Closes'] || row['Monthly_Closes'] || row['Monthly Prices'] || row['Monthly_Prices']),
                 quarterlyEps: parseNumberList(row['Quarterly EPS'] || row['Quarterly_EPS']),
+                consecutiveGrowth: parseFlexibleNumber(row['Consecutive Growth'] || row['Consecutive_Growth']) || 0,
+                epsYoyGrowth: parseFlexibleNumber(row['EPS YoY Growth'] || row['EPS_YoY_Growth']),
+                revenueYoyGrowth: parseFlexibleNumber(row['Revenue YoY Growth'] || row['Revenue_YoY_Growth']),
 
                 // Adapter Metadata
                 _status: row['Status'],
                 _score: parseFlexibleNumber(row['Score']) || 0,
                 _failCodes: (row['Fail Codes'] || '').split(',').filter((c: string) => c),
-                _financialData: financialData,
+                _financialData: null,
                 _reasons: []
             };
             return base;
@@ -213,5 +210,24 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
     } catch (error) {
         console.error("Error loading stocks:", error);
         return { data: [], lastUpdated: null };
+    }
+}
+
+// Phase 9: Load reverse screening engine results from stocks.json
+export async function fetchReverseScores(): Promise<Record<string, ReverseResult>> {
+    try {
+        const response = await fetch(`/data/stocks.json?t=${new Date().getTime()}`);
+        if (!response.ok) return {};
+        const stocks: any[] = await response.json();
+        const result: Record<string, ReverseResult> = {};
+        for (const stock of stocks) {
+            if (stock.reverse && stock.symbol) {
+                result[stock.symbol] = stock.reverse;
+            }
+        }
+        return result;
+    } catch (error) {
+        console.error("Error loading reverse scores:", error);
+        return {};
     }
 }

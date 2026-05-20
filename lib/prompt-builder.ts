@@ -210,14 +210,62 @@ export async function buildPrompt(ticker: string, result: ScreeningResult): Prom
     // Determine market context from ticker suffix
     let market: Market = 'US';
     if (ticker.endsWith('.KS') || ticker.endsWith('.KQ')) market = 'Korea';
+    else if (ticker.endsWith('.TW') || ticker.endsWith('.TWO')) market = 'Taiwan';
 
-    // Rely on rich financial detail embedded inside the CSV data pipeline
-    const financialDetail = result.financialData;
+    // Load rich financial detail dynamically from the JSON file
+    let financialDetail = result.financialData;
+    if (!financialDetail && typeof window !== "undefined") {
+        try {
+            const basePath = '';
+            const response = await fetch(`${basePath}/data/financials/${ticker.toUpperCase()}.json`);
+            if (response.ok) {
+                financialDetail = await response.json();
+            }
+        } catch (e) {
+            console.error(`Failed to dynamically fetch financials for ${ticker}`, e);
+        }
+    }
 
     // Use rich data if available, otherwise fall back to screener summary
     const dataBrief = financialDetail
         ? formatFinancialData(financialDetail as FinancialDetail, market)
         : formatScreenerData(result, market);
+
+    // Phase 11b: Reverse Engine priming block — injected between ticker header and financial data
+    let reversePriming = "";
+    const rev = result.reverse;
+    if (rev && rev.rev_band && rev.rev_band !== "Excluded") {
+        const parts: string[] = [];
+        parts.push("## Reverse Screening Engine — Pre-Analysis Context");
+        parts.push("");
+        parts.push("This stock was nominated by the reverse screening engine for deep analysis.");
+        parts.push("The engine's triage findings (NOT a verdict — your full v3.2 analysis decides):");
+        parts.push("");
+        if (rev.rev_archetype) {
+            const archStr = rev.rev_archetype_secondary
+                ? `${rev.rev_archetype} (+${rev.rev_archetype_secondary} transition)`
+                : rev.rev_archetype;
+            parts.push(`- Archetype: ${archStr}`);
+        }
+        if (rev.rev_composite != null) {
+            parts.push(`- Reverse composite score: ${Math.round(rev.rev_composite)}/100 (band: ${rev.rev_band}, rank: #${rev.rev_rank ?? "?"})`);
+        }
+        if (rev.rev_mos != null) parts.push(`- Margin-of-safety proxy: ${Math.round(rev.rev_mos)}/100`);
+        parts.push(`- Quality: ${rev.rev_quality ?? "?"}/100 | Survivability: ${rev.rev_survivability ?? "?"}/100 | Impairment prob: ${rev.rev_impairment_prob != null ? (rev.rev_impairment_prob * 100).toFixed(0) + "%" : "?"}`);
+        if (rev.rev_cagr_proxy != null) {
+            parts.push(`- CAGR proxy: ${rev.rev_cagr_proxy.toFixed(1)}% | Drawdown proxy: ${rev.rev_drawdown_proxy != null ? (rev.rev_drawdown_proxy * 100).toFixed(1) + "%" : "?"} | Efficiency: ${rev.rev_efficiency != null ? rev.rev_efficiency.toFixed(2) + "x" : "?"}`);
+        }
+        if (rev.rev_data_quality != null) parts.push(`- Data quality: ${rev.rev_data_quality}/5 | Route confidence: ${rev.rev_route_confidence ?? "?"}`);
+        if (rev.rev_pro) parts.push(`- Strongest reason flagged: ${rev.rev_pro}`);
+        if (rev.rev_con) parts.push(`- Strongest concern flagged: ${rev.rev_con}`);
+        if (rev.rev_flags) {
+            const flagList = rev.rev_flags.split(",").filter(f => f).join(", ");
+            parts.push(`- Flags: ${flagList}`);
+        }
+        parts.push("");
+        parts.push("Treat these as a starting hypothesis to verify and challenge, not as conclusions.");
+        reversePriming = parts.join("\n") + "\n";
+    }
 
     let rs2Content = "";
     try {
@@ -236,6 +284,6 @@ export async function buildPrompt(ticker: string, result: ScreeningResult): Prom
         rs2Content = "Failed to load RS2.txt prompt template.";
     }
 
-    return `${rs2Content}\n\n### Company Ticker: ${ticker.toUpperCase()}\n\n${dataBrief}\n\n[DATA_BLOCK]\nAfter your full analysis above, you MUST append EXACTLY this JSON structure (NO markdown fences, NO extra text, multi-line with proper indentation). Replace ALL angle-bracket placeholders with actual numerical or string values from your analysis.\n\n{\n  "classification": {\n    "archetype": "<Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led / High-Beta|Regulatory>",\n    "valuation_engine": "<Engine 1|Engine 2|Engine 3|Engine 4|Engine 5>",\n    "sector": "<SECTOR_NAME>",\n    "moat_score": <0.0-10.0>,\n    "moat_direction": "<WIDENING|STABLE|NARROWING>",\n    "financial_strength": "<EXCELLENT|GOOD|ADEQUATE|WEAK|CONCERNING>",\n    "summary": "<2-3 sentence company snapshot>"\n  },\n  "macro": {\n    "dominant_regime": "<Goldilocks|Reflation|Stagflation|Recession>",\n    "regime_probability": <0.0-1.0>,\n    "rate_sensitivity": <-3 to +3 integer>,\n    "dollar_sensitivity": <-3 to +3 integer>,\n    "macro_impact_score": <-3.0 to +3.0 float>,\n    "summary": "<2-3 sentence macro impact on this stock>"\n  },\n  "valuation": {\n    "current_price": <number>,\n    "intrinsic_value": <number>,\n    "margin_of_safety_pct": <number>,\n    "valuation_status": "<UNDERVALUED|FAIR_TO_UNDERVALUED|FAIR|OVERVALUED>",\n    "core_value": <number>,\n    "execution_value": <number>,\n    "ecosystem_value": <number>,\n    "drag_value": <number>,\n    "ev_to_sales": <number>,\n    "ev_to_gross_profit": <number>,\n    "fcf_yield_pct": <number>,\n    "summary": "<2-3 sentence valuation thesis>"\n  },\n  "scenarios": {\n    "bear_price": <number>,\n    "bear_probability": <0.0-1.0>,\n    "base_price": <number>,\n    "base_probability": <0.0-1.0>,\n    "bull_execution_price": <number>,\n    "bull_execution_probability": <0.0-1.0>,\n    "bull_ecosystem_price": <number>,\n    "bull_ecosystem_probability": <0.0-1.0>,\n    "expected_price": <number>,\n    "summary": "<2-3 sentence scenario rationale>"\n  },\n  "growth": {\n    "revenue_growth_1y_pct": <number>,\n    "revenue_growth_3y_cagr_pct": <number>,\n    "eps_growth_1y_pct": <number>,\n    "margin_trajectory": "<Expanding|Stable|Contracting>",\n    "free_cash_flow_1y_pct": <number>,\n    "rule_of_40": <number>,\n    "summary": "<2-3 sentence growth outlook>"\n  },\n  "verdict": {\n    "conviction": <0.0-15.0>,\n    "action": "<BUY|ACCUMULATE|HOLD|SELL>",\n    "upside_pct": <number>,\n    "rating": "<Overpriced|Fair|Underpriced>",\n    "top_risk": "<single most impactful risk>",\n    "top_catalyst": "<single most impactful catalyst>",\n    "position_size_pct": <0.0-10.0>,\n    "model_confidence": "<High|Medium|Low>",\n    "summary": "<2-3 sentence investment thesis>"\n  }\n}`;
+    return `${rs2Content}\n\n### Company Ticker: ${ticker.toUpperCase()}\n\n${reversePriming}${dataBrief}\n\n[DATA_BLOCK]\nAfter your full analysis above, you MUST append EXACTLY this JSON structure (NO markdown fences, NO extra text, multi-line with proper indentation). Replace ALL angle-bracket placeholders with actual numerical or string values from your analysis.\n\n{\n  "classification": {\n    "archetype": "<Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led / High-Beta|Regulatory>",\n    "valuation_engine": "<Engine 1|Engine 2|Engine 3|Engine 4|Engine 5>",\n    "sector": "<SECTOR_NAME>",\n    "moat_score": <0.0-10.0>,\n    "moat_direction": "<WIDENING|STABLE|NARROWING>",\n    "financial_strength": "<EXCELLENT|GOOD|ADEQUATE|WEAK|CONCERNING>",\n    "summary": "<2-3 sentence company snapshot>"\n  },\n  "macro": {\n    "dominant_regime": "<Goldilocks|Reflation|Stagflation|Recession>",\n    "regime_probability": <0.0-1.0>,\n    "rate_sensitivity": <-3 to +3 integer>,\n    "dollar_sensitivity": <-3 to +3 integer>,\n    "macro_impact_score": <-3.0 to +3.0 float>,\n    "summary": "<2-3 sentence macro impact on this stock>"\n  },\n  "valuation": {\n    "current_price": <number>,\n    "intrinsic_value": <number>,\n    "margin_of_safety_pct": <number>,\n    "valuation_status": "<UNDERVALUED|FAIR_TO_UNDERVALUED|FAIR|OVERVALUED>",\n    "core_value": <number>,\n    "execution_value": <number>,\n    "ecosystem_value": <number>,\n    "drag_value": <number>,\n    "ev_to_sales": <number>,\n    "ev_to_gross_profit": <number>,\n    "fcf_yield_pct": <number>,\n    "summary": "<2-3 sentence valuation thesis>"\n  },\n  "scenarios": {\n    "bear_price": <number>,\n    "bear_probability": <0.0-1.0>,\n    "base_price": <number>,\n    "base_probability": <0.0-1.0>,\n    "bull_execution_price": <number>,\n    "bull_execution_probability": <0.0-1.0>,\n    "bull_ecosystem_price": <number>,\n    "bull_ecosystem_probability": <0.0-1.0>,\n    "expected_price": <number>,\n    "summary": "<2-3 sentence scenario rationale>"\n  },\n  "growth": {\n    "revenue_growth_1y_pct": <number>,\n    "revenue_growth_3y_cagr_pct": <number>,\n    "eps_growth_1y_pct": <number>,\n    "margin_trajectory": "<Expanding|Stable|Contracting>",\n    "free_cash_flow_1y_pct": <number>,\n    "rule_of_40": <number>,\n    "summary": "<2-3 sentence growth outlook>"\n  },\n  "verdict": {\n    "conviction": <0.0-15.0>,\n    "action": "<BUY|ACCUMULATE|HOLD|SELL>",\n    "upside_pct": <number>,\n    "rating": "<Overpriced|Fair|Underpriced>",\n    "top_risk": "<single most impactful risk>",\n    "top_catalyst": "<single most impactful catalyst>",\n    "position_size_pct": <0.0-10.0>,\n    "model_confidence": "<High|Medium|Low>",\n    "summary": "<2-3 sentence investment thesis>"\n  }\n}`;
 }
 

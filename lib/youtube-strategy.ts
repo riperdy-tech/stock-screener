@@ -241,6 +241,7 @@ function getPriorYearTtmEps(result: ScreeningResult): number | null {
     const c = result.candidate as AnyRecord;
     const fd = (result.financialData || {}) as AnyRecord;
     return firstNumber(
+        c.previousEpsTtm,
         c.priorYearTtmEps,
         fd.Calculated_Metrics?.Prior_Year_TTM_EPS,
         fd.Prior_Year_TTM_EPS
@@ -361,8 +362,12 @@ export function evaluateYoutubeStrategy(result: ScreeningResult): YoutubeStrateg
     // If SEC data is populated, it will use the explicit fields.
     const hasExplicitYoY = epsYoyGrowth !== null && priorYearTtmEps !== null && revenueYoyGrowth !== null;
 
-    // SEC EDGAR calculated metric
-    const consecutiveSecGrowth = fd.Calculated_Metrics?.Consecutive_YoY_EPS_Growth || 0;
+    // SEC EDGAR/Naver calculated metric
+    const consecutiveSecGrowth = firstNumber(
+        c.consecutiveGrowth,
+        fd.Calculated_Metrics?.Consecutive_YoY_EPS_Growth,
+        fd.Calculated_Metrics?.Consecutive_Growth
+    ) || 0;
     
     // Calculate fallback consecutive growth if Yahoo data provides enough quarterly history
     let fallbackConsecutiveGrowth = 0;

@@ -107,7 +107,17 @@ def main():
                 "Rev Growth": (calc.get('YoY_Revenue_Growth_%') or 0) / 100,
                 "Gross Margin": (calc.get('TTM_Gross_Margin_%') or 0) / 100,
                 "ROIC": (calc.get('ROIC_%') or 0) / 100,
-                "Financial_Data": base64.b64encode(json.dumps(detail).encode('utf-8')).decode('utf-8')
+                "EPS TTM": calc.get("EPS_TTM"),
+                "Forward EPS": calc.get("Forward_EPS_Estimate") or calc.get("Forward_EPS"),
+                "P/B": calc.get("Price_to_Book") or calc.get("PB_Ratio"),
+                "5Y Avg P/E": calc.get("PE_5Y_Avg") or calc.get("PE_5Y_Average"),
+                "20M MA": calc.get("Monthly_MA_20"),
+                "Monthly Closes": json.dumps(detail.get("Monthly_Closes", [])),
+                "Quarterly EPS": json.dumps([q.get("BasicEPS") if q.get("BasicEPS") is not None else q.get("DilutedEPS") for q in detail.get("Quarterly_Income_Statement", [])] if detail.get("Quarterly_Income_Statement") else []),
+                "EPS YoY Growth": calc.get("EPS_YoY_Growth"),
+                "Revenue YoY Growth": calc.get("Revenue_YoY_Growth") or (calc.get('YoY_Revenue_Growth_%') or 0) / 100,
+                "Previous EPS TTM": calc.get("Prior_Year_TTM_EPS"),
+                "Consecutive Growth": calc.get("Consecutive_YoY_EPS_Growth", 0)
             }
             results.append(summary)
             
@@ -147,7 +157,17 @@ def main():
                 "Rev Growth": (calc.get('YoY_Revenue_Growth_%') or 0) / 100,
                 "Gross Margin": (calc.get('TTM_Gross_Margin_%') or 0) / 100,
                 "ROIC": (calc.get('ROIC_%') or 0) / 100,
-                "Financial_Data": base64.b64encode(json.dumps(detail).encode('utf-8')).decode('utf-8')
+                "EPS TTM": calc.get("EPS_TTM"),
+                "Forward EPS": calc.get("Forward_EPS_Estimate") or calc.get("Forward_EPS"),
+                "P/B": calc.get("Price_to_Book") or calc.get("PB_Ratio"),
+                "5Y Avg P/E": calc.get("PE_5Y_Avg") or calc.get("PE_5Y_Average"),
+                "20M MA": calc.get("Monthly_MA_20"),
+                "Monthly Closes": json.dumps(detail.get("Monthly_Closes", [])),
+                "Quarterly EPS": json.dumps([q.get("BasicEPS") if q.get("BasicEPS") is not None else q.get("DilutedEPS") for q in detail.get("Quarterly_Income_Statement", [])] if detail.get("Quarterly_Income_Statement") else []),
+                "EPS YoY Growth": calc.get("EPS_YoY_Growth"),
+                "Revenue YoY Growth": calc.get("Revenue_YoY_Growth") or (calc.get('YoY_Revenue_Growth_%') or 0) / 100,
+                "Previous EPS TTM": calc.get("Prior_Year_TTM_EPS"),
+                "Consecutive Growth": calc.get("Consecutive_YoY_EPS_Growth", 0)
             }
             results.append(summary)
             

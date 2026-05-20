@@ -173,6 +173,14 @@ def safe_get_df(df, row_name, col_idx):
         pass
     return None
 
+def safe_get_any_df(df, row_names, col_idx):
+    """Safely get the first available row value from a DataFrame."""
+    for row_name in row_names:
+        value = safe_get_df(df, row_name, col_idx)
+        if value is not None:
+            return value
+    return None
+
 # Helper for timeout
 def get_session():
     s = requests.Session()
@@ -197,6 +205,7 @@ def process_stock(ticker_symbol):
         data.market_cap = mcap
         data.price = safe_float(info.get('currentPrice'), 0.0)
         data.sector = info.get('sector', 'Unknown')
+        data.industry = info.get('industry') or 'Unknown'
         
         # Safe extractions
         rev_growth = safe_float(info.get('revenueGrowth'), 0.01)
@@ -323,6 +332,12 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
         if fcf is None and ocf is not None and capex is not None:
             fcf = ocf + capex
         sbc = safe_get_df(cash_flow_stmt, "Stock Based Compensation", 0)
+        depreciation_amortization = safe_get_any_df(cash_flow_stmt, [
+            "Depreciation And Amortization",
+            "Depreciation Amortization Depletion",
+            "Depreciation",
+            "Depreciation & Amortization",
+        ], 0)
 
         # Balance sheet items
         total_cash = safe_get_df(bs, "Cash And Cash Equivalents", 0)
@@ -360,6 +375,11 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
         elif len(annual_financials) > 0:
             ttm_ebit = annual_financials[0]["OperatingIncome"]
 
+        latest_annual_operating_income = annual_financials[0]["OperatingIncome"] if len(annual_financials) > 0 else None
+        ebitda = None
+        if latest_annual_operating_income is not None and depreciation_amortization is not None:
+            ebitda = latest_annual_operating_income + depreciation_amortization
+
         yoy_rev_growth = safe_float(info.get("revenueGrowth"), 0) * 100
         fcf_margin = 0
         if fcf is not None and ttm_revenue is not None and ttm_revenue > 0:
@@ -382,6 +402,7 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
         forward_eps = safe_float(info.get("forwardEps"), None)
         price_to_book = safe_float(info.get("priceToBook"), None)
         five_year_avg_pe = safe_float(info.get("fiveYearAvgPE") or info.get("trailingPE"), None)
+        beta = safe_float(info.get("beta"), None)
 
         monthly_closes = []
         ma_20_month = None
@@ -424,7 +445,10 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
                 "Forward_EPS_Estimate": forward_eps,
                 "Price_to_Book": price_to_book,
                 "PE_5Y_Avg": five_year_avg_pe,
-                "Monthly_MA_20": ma_20_month
+                "Monthly_MA_20": ma_20_month,
+                "Depreciation_Amortization": depreciation_amortization,
+                "EBITDA": ebitda,
+                "Beta": beta
             },
             "Monthly_Closes": monthly_closes
         }
@@ -594,7 +618,18 @@ def main():
                     "pegRatio": result.peg_ratio,
                     "float": result.float_shares,
                     "ocf": detail.get("Operating_Cash_Flow") if detail else None,
-                    "capex": detail.get("Capital_Expenditure") if detail else None
+                    "capex": detail.get("Capital_Expenditure") if detail else None,
+                    "epsTtm": detail.get("Calculated_Metrics", {}).get("EPS_TTM") if detail else None,
+                    "forwardEpsEstimate": detail.get("Calculated_Metrics", {}).get("Forward_EPS_Estimate") if detail else None,
+                    "priceToBook": detail.get("Calculated_Metrics", {}).get("Price_to_Book") if detail else None,
+                    "fiveYearAveragePe": detail.get("Calculated_Metrics", {}).get("PE_5Y_Avg") if detail else None,
+                    "monthlyMa20": detail.get("Calculated_Metrics", {}).get("Monthly_MA_20") if detail else None,
+                    "monthlyCloses": detail.get("Monthly_Closes", []) if detail else [],
+                    "quarterlyEps": [q.get("BasicEPS") if q.get("BasicEPS") is not None else q.get("DilutedEPS") for q in detail.get("Quarterly_Income_Statement", [])] if detail else [],
+                    "epsYoyGrowth": None,
+                    "revenueYoyGrowth": None,
+                    "previousEpsTtm": None,
+                    "consecutiveGrowth": 0
                 }
             }
             existing_data[ticker] = result_obj
@@ -602,8 +637,6 @@ def main():
             # Save per-ticker financial detail for AI Prompt Exporter
             if detail:
                 try:
-                    json_str = json.dumps(detail)
-                    result_obj["financialData"] = base64.b64encode(json_str.encode('utf-8')).decode('utf-8')
                     detail_path = os.path.join('public', 'data', 'financials', f'{ticker}.json')
                     with open(detail_path, 'w') as f:
                         json.dump(detail, f)
@@ -644,7 +677,17 @@ def main():
                             "Float": r['metrics'].get('float'),
                             "OCF": r['metrics'].get('ocf'),
                             "CAPEX": r['metrics'].get('capex'),
-                            "Financial_Data": r.get('financialData', '')
+                            "EPS TTM": r['metrics'].get('epsTtm'),
+                            "Forward EPS": r['metrics'].get('forwardEpsEstimate'),
+                            "P/B": r['metrics'].get('priceToBook'),
+                            "5Y Avg P/E": r['metrics'].get('fiveYearAveragePe'),
+                            "20M MA": r['metrics'].get('monthlyMa20'),
+                            "Monthly Closes": json.dumps(r['metrics'].get('monthlyCloses', [])),
+                            "Quarterly EPS": json.dumps(r['metrics'].get('quarterlyEps', [])),
+                            "EPS YoY Growth": r['metrics'].get('epsYoyGrowth'),
+                            "Revenue YoY Growth": r['metrics'].get('revenueYoyGrowth'),
+                            "Previous EPS TTM": r['metrics'].get('previousEpsTtm'),
+                            "Consecutive Growth": r['metrics'].get('consecutiveGrowth', 0)
                         }
                         csv_data.append(flat)
                     
@@ -687,7 +730,7 @@ def main():
     # 1. JSON Save
     with open('public/data/stocks.json', 'w') as f:
         json.dump(final_results, f, indent=2)
-
+ 
     # 2. CSV Save (User Requested Isolation)
     try:
         # Flatten for CSV
@@ -716,7 +759,17 @@ def main():
                 "Float": r['metrics'].get('float'),
                 "OCF": r['metrics'].get('ocf'),
                 "CAPEX": r['metrics'].get('capex'),
-                "Financial_Data": r.get('financialData', '')
+                "EPS TTM": r['metrics'].get('epsTtm'),
+                "Forward EPS": r['metrics'].get('forwardEpsEstimate'),
+                "P/B": r['metrics'].get('priceToBook'),
+                "5Y Avg P/E": r['metrics'].get('fiveYearAveragePe'),
+                "20M MA": r['metrics'].get('monthlyMa20'),
+                "Monthly Closes": json.dumps(r['metrics'].get('monthlyCloses', [])),
+                "Quarterly EPS": json.dumps(r['metrics'].get('quarterlyEps', [])),
+                "EPS YoY Growth": r['metrics'].get('epsYoyGrowth'),
+                "Revenue YoY Growth": r['metrics'].get('revenueYoyGrowth'),
+                "Previous EPS TTM": r['metrics'].get('previousEpsTtm'),
+                "Consecutive Growth": r['metrics'].get('consecutiveGrowth', 0)
             }
             csv_data.append(flat)
             

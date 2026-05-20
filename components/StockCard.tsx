@@ -73,6 +73,42 @@ export function StockCard({ result, onClick, index = 0, lastUpdated, market = 'U
                         <span>{lastUpdated}</span>
                     </div>
                 )}
+
+                {/* Phase 9: Reverse Engine Badges */}
+                {result.reverse && result.reverse.rev_band && result.reverse.rev_band !== 'Excluded' && (
+                    <div className="flex items-center gap-1.5 mt-3 pt-2 border-t border-primary/10 flex-wrap">
+                        <span className={clsx(
+                            "text-[10px] font-black px-1.5 py-0.5 rounded",
+                            result.reverse.rev_band === 'High' && "bg-emerald-500/20 text-emerald-400",
+                            result.reverse.rev_band === 'Solid' && "bg-blue-500/20 text-blue-400",
+                            result.reverse.rev_band === 'Watchlist' && "bg-amber-500/20 text-amber-400",
+                            result.reverse.rev_band === 'Monitor' && "bg-gray-500/20 text-gray-400",
+                            result.reverse.rev_band === 'Reject-tier' && "bg-muted/20 text-muted-foreground",
+                        )}>
+                            {result.reverse.rev_band}
+                        </span>
+                        {result.reverse.rev_archetype && (
+                            <span className="text-[10px] font-mono bg-secondary/50 px-1 rounded" title="Archetype">
+                                {result.reverse.rev_archetype}
+                            </span>
+                        )}
+                        {result.reverse.rev_composite != null && (
+                            <span className="text-[10px] font-mono text-primary/80" title="Composite">
+                                {Math.round(result.reverse.rev_composite)}
+                            </span>
+                        )}
+                        {result.reverse.rev_nominated && (
+                            <span className="text-[10px] font-black text-amber-400" title="Nominated for deep-dive">
+                                ★
+                            </span>
+                        )}
+                        {result.reverse.rev_efficiency != null && (
+                            <span className="text-[10px] text-muted-foreground/60 font-mono" title="CAGR/|DD| efficiency">
+                                {result.reverse.rev_efficiency.toFixed(1)}x
+                            </span>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

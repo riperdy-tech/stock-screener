@@ -1,0 +1,297 @@
+{
+  "sector_wacc": {
+    "Technology": 11,
+    "Healthcare": 10,
+    "Consumer Discretionary": 10,
+    "Consumer Staples": 8,
+    "Industrials": 9,
+    "Financials": 10,
+    "Energy": 11,
+    "Materials": 10,
+    "Utilities": 7,
+    "Real Estate": 8,
+    "Communication Services": 10
+  },
+  "thresholds": {
+    "stage0": {
+      "min_market_cap": 300000000,
+      "require_fields": [
+        "sector",
+        "price",
+        "marketCap"
+      ]
+    },
+    "stage1": {
+      "altman_z_min": 1.8,
+      "net_debt_to_ebitda_max": 4.0,
+      "dilution_max_pct": 10.0,
+      "fcf_negative_years_max": 4
+    }
+  },
+  "archetype_map": {
+    "sector_to_archetype_hint": {
+      "Financial Services": "G",
+      "Real Estate": "H",
+      "Utilities": "H",
+      "Energy": "C",
+      "Basic Materials": "C",
+      "Materials": "C",
+      "Healthcare": "F_or_other",
+      "Technology": "shape",
+      "Communication Services": "shape",
+      "Industrials": "C_or_shape",
+      "Consumer Cyclical": "C_or_shape",
+      "Consumer Defensive": "shape",
+      "Consumer Staples": "shape"
+    },
+    "industry_keywords": {
+      "G": [
+        "Bank",
+        "Insurance",
+        "Brokerage",
+        "Asset Management",
+        "Capital Markets"
+      ],
+      "H": [
+        "REIT",
+        "Pipeline",
+        "Infrastructure",
+        "Utilities"
+      ],
+      "C": [
+        "Mining",
+        "Steel",
+        "Semiconductor Equipment",
+        "Auto",
+        "Shipping",
+        "Oil & Gas",
+        "Chemicals"
+      ]
+    }
+  },
+  "quality_rubrics": {
+    "limited_score": 10,
+    "ab": {
+      "roic_spread": [
+        {"gt": 10, "score": 25},
+        {"gt": 5, "score": 15},
+        {"gt": 0, "score": 5}
+      ],
+      "growth_pct": [
+        {"gt": 12, "score": 25},
+        {"gte": 8, "score": 15},
+        {"gte": 4, "score": 5}
+      ],
+      "fcf_margin_pct": [
+        {"gt": 20, "score": 25},
+        {"gte": 10, "score": 15},
+        {"gte": 5, "score": 5}
+      ],
+      "net_debt_to_ebit": [
+        {"lt": 1.5, "score": 15},
+        {"lte": 3, "score": 5}
+      ],
+      "net_cash_score": 25
+    },
+    "c": {
+      "operating_margin_pct": [
+        {"gt": 15, "score": 15},
+        {"gte": 8, "score": 10},
+        {"gte": 3, "score": 5}
+      ]
+    },
+    "e": {
+      "revenue": [
+        {"gt": 50000000, "score": 15},
+        {"gt": 0, "score": 10},
+        {"gte": 0, "score": 5}
+      ],
+      "runway_months": [
+        {"gt": 36, "score": 25},
+        {"gte": 24, "score": 15},
+        {"gte": 18, "score": 5}
+      ]
+    },
+    "g": {
+      "roic_spread": [
+        {"gt": 5, "score": 20},
+        {"gt": 0, "score": 12}
+      ]
+    },
+    "h": {
+      "net_debt_to_ebit": [
+        {"lte": 4, "score": 15},
+        {"gt": 4, "score": 5}
+      ]
+    }
+  },
+  "mos": {
+    "percentile_bands": {
+      "fcf_yield": {
+        "direction": "higher_is_better",
+        "anchors": [
+          {"value": 0.015055310164320825, "score": 10},
+          {"value": 0.031871109564018694, "score": 25},
+          {"value": 0.05693554898255686, "score": 50},
+          {"value": 0.09554377772278386, "score": 75},
+          {"value": 0.1763873532247978, "score": 90}
+        ]
+      },
+      "ev_to_ebit": {
+        "direction": "lower_is_better",
+        "anchors": [
+          {"value": 60.42024203859366, "score": 10},
+          {"value": 30.29009198901674, "score": 25},
+          {"value": 17.672835667621776, "score": 50},
+          {"value": 11.437594011300286, "score": 75},
+          {"value": 7.060514225859054, "score": 90}
+        ]
+      },
+      "anchor_multiple": {
+        "direction": "lower_is_better",
+        "anchors": [
+          {"value": 19.66572527391751, "score": 10},
+          {"value": 8.655308960497027, "score": 25},
+          {"value": 4.483834469779813, "score": 50},
+          {"value": 2.5354957103689677, "score": 75},
+          {"value": 1.3919949667601814, "score": 90}
+        ]
+      }
+    },
+    "fcf_yield": {
+      "required_return_spread": 0.02,
+      "excellent_spread": 0.04,
+      "good_spread": 0.02,
+      "scores": {
+        "excellent": 100,
+        "good": 75,
+        "required": 50
+      }
+    },
+    "ev_to_ebit": [
+      {"lt": 8, "score": 90},
+      {"lte": 12, "score": 70},
+      {"lte": 18, "score": 50},
+      {"lte": 25, "score": 30}
+    ],
+    "anchor_multiple": [
+      {"lt": 6, "score": 90},
+      {"lte": 10, "score": 70},
+      {"lte": 15, "score": 50},
+      {"lte": 25, "score": 30}
+    ],
+    "ev_sales_caps": [
+      {"gt": 20, "cap": 30},
+      {"gt": 12, "cap": 50},
+      {"gt": 8, "cap": 70}
+    ],
+    "negative_fcf_cap": 50
+  },
+  "survivability": {
+    "limited_score": 10,
+    "leverage": {
+      "net_cash_score": 20,
+      "net_debt_to_ebitda": [
+        {"lt": 1, "score": 20},
+        {"lt": 2, "score": 15},
+        {"lt": 3, "score": 10},
+        {"lte": 4, "score": 5},
+        {"gt": 4, "score": 0}
+      ],
+      "gh_zscore_proxy": [
+        {"gte": 3.0, "score": 20},
+        {"gte": 2.5, "score": 15},
+        {"gte": 1.8, "score": 10},
+        {"gte": 1.0, "score": 5},
+        {"lt": 1.0, "score": 0}
+      ]
+    },
+    "funding_gap_years": [
+      {"gt": 3, "score": 20},
+      {"gte": 2, "score": 15},
+      {"gte": 1.5, "score": 10},
+      {"gte": 1, "score": 5},
+      {"lt": 1, "score": 0}
+    ],
+    "drawdown_pct": [
+      {"lt": 25, "score": 20},
+      {"lt": 40, "score": 15},
+      {"lt": 55, "score": 10},
+      {"lte": 70, "score": 5},
+      {"gt": 70, "score": 0}
+    ],
+    "impairment_probability": [
+      {"gte": 80, "probability": 0.05},
+      {"gte": 60, "probability": 0.15},
+      {"gte": 40, "probability": 0.275},
+      {"gte": 20, "probability": 0.45},
+      {"lt": 20, "probability": 0.60}
+    ]
+  },
+  "cagr": {
+    "growth_caps": {
+      "_comment": "1-yr YoY proxy; real 3-yr CAGR is a Phase 6.1 backlog item.",
+      "A": 17,
+      "B": 28,
+      "C": 22,
+      "D": 28,
+      "E": 38,
+      "F": 38,
+      "G": 17,
+      "H": 22,
+      "I": 20
+    },
+    "rerating_divisor": 15,
+    "cagr_score_full_at": 20
+  },
+  "drawdown": {
+    "baseline": -0.30,
+    "beta_sensitivity": 0.3,
+    "low_survivability_threshold": 40,
+    "low_survivability_multiplier": 1.5,
+    "leverage_threshold": 3,
+    "leverage_adjustment": -0.10,
+    "floor": -0.85,
+    "efficiency_full_at": 0.5
+  },
+  "composite": {
+    "weights": {
+      "quality": 0.20,
+      "mos": 0.25,
+      "cagr": 0.30,
+      "survivability": 0.15,
+      "efficiency": 0.10
+    },
+    "haircuts": {
+      "low_data_quality": {
+        "threshold": 3,
+        "multiplier": 0.70
+      },
+      "low_route_confidence": {
+        "value": "low",
+        "multiplier": 0.85
+      }
+    },
+    "bands": {
+      "High": 70,
+      "Solid": 55,
+      "Watchlist": 40,
+      "Monitor": 25,
+      "Reject-tier": 0
+    }
+  },
+  "flags": {
+    "insider_heavy_threshold": 0.30,
+    "price_extended_ratio": 1.5,
+    "price_extended_min_ratio": 0.5,
+    "_stubs_note": "RECENT_DILUTION_PROXY, SHORT_INTEREST_EXTREME, CROWDED_LONG awaiting Phase 6.1 (inputs MISSING)"
+  },
+  "diversification": {
+    "single_archetype_pct": 40,
+    "single_sector_pct": 35,
+    "target_n": 25,
+    "min_n": 20,
+    "max_n": 30,
+    "_note": "country cap deferred — country field MISSING till Phase 6.1"
+  }
+}

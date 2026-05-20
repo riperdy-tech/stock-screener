@@ -190,28 +190,51 @@ def main():
     with open('public/data/sec_momentum.json', 'w') as f:
         json.dump(sec_data, f, indent=2)
         
-    # Merge into stocks.json Financial_Data
+    # Merge into individual detail JSON files and top-level stocks.json metrics
     updated_count = 0
     for s in stocks:
         sym = s['symbol']
         if sym in sec_data:
-            fd_str = s.get('financialData', '')
-            if fd_str:
-                fd = json.loads(base64.b64decode(fd_str).decode('utf-8'))
-            else:
-                fd = {"Calculated_Metrics": {}}
-                
+            m = sec_data[sym]
+            
+            # 1. Update top-level metrics for fast UI screening
+            if 'metrics' not in s or s['metrics'] is None:
+                s['metrics'] = {}
+            s['metrics']['epsYoyGrowth'] = m["EPS_YoY_Growth"]
+            s['metrics']['previousEpsTtm'] = m["Prior_Year_TTM_EPS"]
+            s['metrics']['revenueYoyGrowth'] = m["Revenue_YoY_Growth"]
+            s['metrics']['consecutiveGrowth'] = m["Consecutive_YoY_EPS_Growth"]
+            
+            # 2. Update individual financials JSON file
+            detail_path = os.path.join('public', 'data', 'financials', f'{sym}.json')
+            fd = None
+            if os.path.exists(detail_path):
+                try:
+                    with open(detail_path, 'r') as f:
+                        fd = json.load(f)
+                except Exception:
+                    pass
+            if not fd:
+                fd = {"Ticker": sym, "Calculated_Metrics": {}}
             if "Calculated_Metrics" not in fd:
                 fd["Calculated_Metrics"] = {}
                 
-            m = sec_data[sym]
             fd["Calculated_Metrics"]["EPS_YoY_Growth"] = m["EPS_YoY_Growth"]
             fd["Calculated_Metrics"]["Prior_Year_TTM_EPS"] = m["Prior_Year_TTM_EPS"]
             fd["Calculated_Metrics"]["Revenue_YoY_Growth"] = m["Revenue_YoY_Growth"]
             fd["Calculated_Metrics"]["Consecutive_YoY_EPS_Growth"] = m["Consecutive_YoY_EPS_Growth"]
             
-            s['financialData'] = base64.b64encode(json.dumps(fd).encode('utf-8')).decode('utf-8')
+            try:
+                with open(detail_path, 'w') as f:
+                    json.dump(fd, f)
+            except Exception:
+                pass
+                
             updated_count += 1
+            
+        # Clean up any leftover financialData keys if they exist from prior runs
+        if 'financialData' in s:
+            del s['financialData']
             
     with open('public/data/stocks.json', 'w') as f:
         json.dump(stocks, f, indent=2)
@@ -240,7 +263,17 @@ def main():
             "Float": r.get('metrics', {}).get('float'),
             "OCF": r.get('metrics', {}).get('ocf'),
             "CAPEX": r.get('metrics', {}).get('capex'),
-            "Financial_Data": r.get('financialData', '')
+            "EPS TTM": r.get('metrics', {}).get('epsTtm'),
+            "Forward EPS": r.get('metrics', {}).get('forwardEpsEstimate'),
+            "P/B": r.get('metrics', {}).get('priceToBook'),
+            "5Y Avg P/E": r.get('metrics', {}).get('fiveYearAveragePe'),
+            "20M MA": r.get('metrics', {}).get('monthlyMa20'),
+            "Monthly Closes": json.dumps(r.get('metrics', {}).get('monthlyCloses', [])),
+            "Quarterly EPS": json.dumps(r.get('metrics', {}).get('quarterlyEps', [])),
+            "EPS YoY Growth": r.get('metrics', {}).get('epsYoyGrowth'),
+            "Revenue YoY Growth": r.get('metrics', {}).get('revenueYoyGrowth'),
+            "Previous EPS TTM": r.get('metrics', {}).get('previousEpsTtm'),
+            "Consecutive Growth": r.get('metrics', {}).get('consecutiveGrowth', 0)
         }
         csv_data.append(flat)
     df_csv = pd.DataFrame(csv_data)
