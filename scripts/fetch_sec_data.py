@@ -132,7 +132,14 @@ def parse_facts(ticker, cik, input_dir):
             
             # Since prior_4 only contains exactly 4 quarters, if we go back further than 1 year, we might need a larger window.
             # Let's dynamically find the same quarter from the entire eps_series instead of just prior_4.
-            prev_year_q_dynamic = next((q for q in eps_series[:-i] if q['fp'] == curr_q['fp'] and q['fy'] == curr_q['fy'] - 1), None)
+            prev_year_q_dynamic = next(
+                (q for q in eps_series[:-i] 
+                 if q.get('fp') == curr_q.get('fp') 
+                 and q.get('fy') is not None 
+                 and curr_q.get('fy') is not None 
+                 and q.get('fy') == curr_q.get('fy') - 1), 
+                None
+            )
             
             if prev_year_q_dynamic and prev_year_q_dynamic['val'] != 0:
                 yoy = (curr_q['val'] - prev_year_q_dynamic['val']) / abs(prev_year_q_dynamic['val'])
@@ -146,7 +153,14 @@ def parse_facts(ticker, cik, input_dir):
         
     if len(rev_series) >= 5:
         latest_q_rev = rev_series[-1]
-        prior_year_q_rev = next((q for q in rev_series[:-1] if q['fp'] == latest_q_rev['fp'] and q['fy'] == latest_q_rev['fy'] - 1), None)
+        prior_year_q_rev = next(
+            (q for q in rev_series[:-1] 
+             if q.get('fp') == latest_q_rev.get('fp') 
+             and q.get('fy') is not None 
+             and latest_q_rev.get('fy') is not None 
+             and q.get('fy') == latest_q_rev.get('fy') - 1), 
+            None
+        )
         if prior_year_q_rev and prior_year_q_rev['val'] != 0:
             metrics["Revenue_YoY_Growth"] = (latest_q_rev['val'] - prior_year_q_rev['val']) / abs(prior_year_q_rev['val'])
 
