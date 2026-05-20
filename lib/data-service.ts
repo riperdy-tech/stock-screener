@@ -1,4 +1,5 @@
 import { type StockCandidate } from "./blueprint";
+import { calculateReverseEngineScore } from "./reverse-engine";
 
 export function formatKoreanWon(n: number, decimals: number = 2) {
     if (Math.abs(n) >= 1e12) return `${(n / 1e12).toLocaleString('en-US', {maximumFractionDigits: decimals})}조원`;
@@ -199,14 +200,21 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
                 monthlyCloses: parseNumberList(row['Monthly Closes'] || row['Monthly_Closes'] || row['Monthly Prices'] || row['Monthly_Prices']),
                 quarterlyEps: parseNumberList(row['Quarterly EPS'] || row['Quarterly_EPS']),
 
-                // Adapter Metadata
-                _status: row['Status'],
-                _score: parseFlexibleNumber(row['Score']) || 0,
-                _failCodes: (row['Fail Codes'] || '').split(',').filter((c: string) => c),
+                _legacyStatus: row['Status'],
+                _legacyScore: parseFlexibleNumber(row['Score']) || 0,
                 _financialData: financialData,
-                _reasons: []
             };
-            return base;
+
+            const reverseScore = calculateReverseEngineScore(base as any);
+
+            return {
+                ...base,
+                _status: reverseScore.passed ? "Pass" : "Review",
+                _score: reverseScore.score,
+                _failCodes: reverseScore.failCodes,
+                _reasons: [...reverseScore.reasons, ...reverseScore.warnings],
+                _reverseScore: reverseScore,
+            };
         }) as any[];
         
         return { data: mappedData, lastUpdated };
