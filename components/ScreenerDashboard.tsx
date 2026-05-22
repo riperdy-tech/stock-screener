@@ -572,7 +572,7 @@ export function ScreenerDashboard() {
                 {/* Content with Scroll */}
                 <div className="flex-1 overflow-y-auto p-4 md:p-6 scroll-smooth">
                     {/* Phase 11d: Batch Progress Bar — visible in both modes */}
-                    {batchId && (
+                    {screenMode === 'reverse' && batchId && (
                         <div className="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl animate-in fade-in">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
