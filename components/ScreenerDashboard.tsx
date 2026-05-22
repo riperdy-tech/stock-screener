@@ -68,7 +68,7 @@ export function ScreenerDashboard() {
     const [batchN, setBatchN] = useState(25);
     const [showBatchConfirm, setShowBatchConfirm] = useState(false);
     const [batchId, setBatchId] = useState<string | null>(null);
-    const [batchProgress, setBatchProgress] = useState<{ completed: number; failed: number; total: number } | null>(null);
+    const [batchProgress, setBatchProgress] = useState<{ completed: number; failed: number; total: number; tickers?: { ticker: string; status: string }[] } | null>(null);
     const [batchDispatching, setBatchDispatching] = useState(false);
     const [showBatchPassword, setShowBatchPassword] = useState(false);
     const [batchStatus, setBatchStatus] = useState<string | null>(null); // user-visible feedback
@@ -173,9 +173,6 @@ export function ScreenerDashboard() {
             setBatchId(data.batch_id);
             setBatchProgress({ completed: 0, failed: 0, total: data.queued });
             setBatchStatus(`Dispatched ${data.queued} analyses — waiting for workers...`);
-            // Persist to localStorage so progress survives refresh
-            localStorage.setItem('batch_id', data.batch_id);
-            localStorage.setItem('batch_total', String(data.queued));
             setDsPassword("");
         } catch (e: any) {
             console.error("Batch dispatch error:", e);
@@ -192,17 +189,12 @@ export function ScreenerDashboard() {
             try {
                 const { data, error } = await supabase
                     .from('ai_reports')
-                    .select('status')
+                    .select('ticker, status')
                     .eq('batch_id', batchId);
                 if (error) return;
                 const completed = data.filter((r: any) => r.status === 'completed').length;
                 const failed = data.filter((r: any) => r.status === 'error').length;
-                setBatchProgress({ completed, failed, total: data.length });
-                // Auto-clear localStorage when all done
-                if (completed + failed >= data.length && data.length > 0) {
-                    localStorage.removeItem('batch_id');
-                    localStorage.removeItem('batch_total');
-                }
+                setBatchProgress({ completed, failed, total: data.length, tickers: data });
             } catch (e) { /* silent */ }
         };
         poll();
@@ -210,15 +202,23 @@ export function ScreenerDashboard() {
         return () => clearInterval(interval);
     }, [batchId]);
 
-    // Phase 11d: Resume batch on page load (survives refresh)
+    // Phase 11d: Resume batch on page load — queries Supabase for latest batch (works for all users)
     useEffect(() => {
-        const savedBatchId = localStorage.getItem('batch_id');
-        const savedTotal = localStorage.getItem('batch_total');
-        if (savedBatchId && savedTotal) {
-            setBatchId(savedBatchId);
-            setBatchProgress({ completed: 0, failed: 0, total: parseInt(savedTotal) });
-            setBatchStatus(`Resumed batch — polling...`);
-        }
+        const checkLatestBatch = async () => {
+            try {
+                const { data, error } = await supabase
+                    .from('ai_reports')
+                    .select('batch_id')
+                    .not('batch_id', 'is', null)
+                    .order('created_at', { ascending: false })
+                    .limit(1);
+                if (error || !data || data.length === 0) return;
+                const latestBatchId = data[0].batch_id;
+                // Don't resume if already tracking this batch
+                setBatchId((prev) => prev || latestBatchId);
+            } catch (e) { /* silent */ }
+        };
+        checkLatestBatch();
     }, []);
 
 
@@ -586,12 +586,26 @@ export function ScreenerDashboard() {
                                         </span>
                                     </div>
                                 </div>
-                                <button onClick={() => { setBatchProgress(null); setBatchId(null); setBatchStatus(null); localStorage.removeItem('batch_id'); localStorage.removeItem('batch_total'); }} className="text-muted-foreground hover:text-foreground text-xs">Dismiss</button>
+                                <button onClick={() => { setBatchProgress(null); setBatchId(null); setBatchStatus(null); }} className="text-muted-foreground hover:text-foreground text-xs">Dismiss</button>
                             </div>
                             {batchProgress && (
                                 <div className="w-full h-2 bg-secondary/50 rounded-full mt-2 overflow-hidden">
                                     <div className="h-full bg-emerald-500 rounded-full transition-all duration-700"
                                         style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
+                                </div>
+                            )}
+                            {batchProgress?.tickers && (
+                                <div className="mt-2 flex flex-wrap gap-1 max-h-24 overflow-y-auto">
+                                    {batchProgress.tickers.map((t: any) => (
+                                        <span key={t.ticker} className={clsx(
+                                            "text-[10px] px-1.5 py-0.5 rounded font-mono",
+                                            t.status === 'completed' ? "bg-emerald-500/20 text-emerald-400" :
+                                            t.status === 'error' ? "bg-red-500/20 text-red-400" :
+                                            "bg-secondary/40 text-muted-foreground"
+                                        )}>
+                                            {t.ticker}{t.status === 'completed' ? ' ✓' : t.status === 'error' ? ' ✗' : ' …'}
+                                        </span>
+                                    ))}
                                 </div>
                             )}
                             {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
@@ -867,7 +881,7 @@ export function ScreenerDashboard() {
                                 )}
                             </div>
                         </div>
-                        <button onClick={() => { setBatchProgress(null); setBatchId(null); setBatchStatus(null); localStorage.removeItem('batch_id'); localStorage.removeItem('batch_total'); }} className="text-muted-foreground hover:text-foreground shrink-0">
+                        <button onClick={() => { setBatchProgress(null); setBatchId(null); setBatchStatus(null); }} className="text-muted-foreground hover:text-foreground shrink-0">
                             <X className="h-5 w-5" />
                         </button>
                     </div>
