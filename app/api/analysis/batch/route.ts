@@ -138,14 +138,12 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "No valid tickers could be inserted" }, { status: 500 });
         }
 
-        // ── Dispatch GitHub Actions (if token available) ──
+// ── Dispatch GitHub Actions with delay to prevent worker race condition ──
         let dispatched = 0;
         if (canDispatch) {
             for (const ticker of inserted) {
-            try {
-                const ghRes = await fetch(
-                    `https://api.github.com/repos/riperdy-tech/stock-screener/dispatches`,
-                    {
+                try {
+                    const ghRes = await fetch(`https://api.github.com/repos/riperdy-tech/stock-screener/dispatches`, {
                         method: 'POST',
                         headers: {
                             'Authorization': `Bearer ${ghToken}`,
@@ -154,14 +152,14 @@ export async function POST(req: Request) {
                             'User-Agent': 'StockScreener-App'
                         },
                         body: JSON.stringify({ event_type: 'trigger-ai-analysis' })
+                    });
+                    if (ghRes.ok) dispatched++;
+                    // Delay 3s between dispatches so each worker picks a different pending job
+                    if (dispatched < inserted.length) {
+                        await new Promise(resolve => setTimeout(resolve, 3000));
                     }
-                );
-
-                if (ghRes.ok) {
-                    dispatched++;
-                }
-            } catch (ghErr: any) {}
-        }
+                } catch (ghErr: any) {}
+            }
         }
 
         return NextResponse.json({
