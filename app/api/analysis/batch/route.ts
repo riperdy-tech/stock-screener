@@ -5,7 +5,7 @@ import { join } from 'path';
 
 const MAX_BATCH_SIZE = 30;
 
-function buildServerPrompt(ticker: string, rs2Content: string, reverse: any, financials: any): string {
+function buildServerPrompt(ticker: string, engineContent: string, reverse: any, financials: any): string {
     let reversePriming = "";
     if (reverse && reverse.rev_band && reverse.rev_band !== "Excluded") {
         const parts: string[] = [];
@@ -67,7 +67,7 @@ function buildServerPrompt(ticker: string, rs2Content: string, reverse: any, fin
 
     const dataBlock = `[DATA_BLOCK]\nAfter your full analysis above, you MUST append EXACTLY this JSON structure (NO markdown fences, NO extra text). Replace ALL angle-bracket placeholders with actual values.\n\n{\n  "classification": {\n    "archetype": "<Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led / High-Beta|Regulatory>",\n    "valuation_engine": "<Engine 1|Engine 2|Engine 3|Engine 4|Engine 5>",\n    "sector": "<SECTOR_NAME>",\n    "moat_score": <0.0-10.0>,\n    "moat_direction": "<WIDENING|STABLE|NARROWING>",\n    "financial_strength": "<EXCELLENT|GOOD|ADEQUATE|WEAK|CONCERNING>",\n    "summary": "<2-3 sentence company snapshot>"\n  },\n  "macro": {\n    "dominant_regime": "<Goldilocks|Reflation|Stagflation|Recession>",\n    "regime_probability": <0.0-1.0>,\n    "rate_sensitivity": <-3 to +3 integer>,\n    "dollar_sensitivity": <-3 to +3 integer>,\n    "macro_impact_score": <-3.0 to +3.0 float>,\n    "summary": "<2-3 sentence macro impact on this stock>"\n  },\n  "valuation": {\n    "current_price": <number>,\n    "intrinsic_value": <number>,\n    "margin_of_safety_pct": <number>,\n    "valuation_status": "<UNDERVALUED|FAIR_TO_UNDERVALUED|FAIR|OVERVALUED>",\n    "core_value": <number>,\n    "execution_value": <number>,\n    "ecosystem_value": <number>,\n    "drag_value": <number>,\n    "ev_to_sales": <number>,\n    "ev_to_gross_profit": <number>,\n    "fcf_yield_pct": <number>,\n    "summary": "<2-3 sentence valuation thesis>"\n  },\n  "scenarios": {\n    "bear_price": <number>,\n    "bear_probability": <0.0-1.0>,\n    "base_price": <number>,\n    "base_probability": <0.0-1.0>,\n    "bull_execution_price": <number>,\n    "bull_execution_probability": <0.0-1.0>,\n    "bull_ecosystem_price": <number>,\n    "bull_ecosystem_probability": <0.0-1.0>,\n    "expected_price": <number>,\n    "summary": "<2-3 sentence scenario rationale>"\n  },\n  "growth": {\n    "revenue_growth_1y_pct": <number>,\n    "revenue_growth_3y_cagr_pct": <number>,\n    "eps_growth_1y_pct": <number>,\n    "margin_trajectory": "<Expanding|Stable|Contracting>",\n    "free_cash_flow_1y_pct": <number>,\n    "rule_of_40": <number>,\n    "summary": "<2-3 sentence growth outlook>"\n  },\n  "verdict": {\n    "conviction": <0.0-15.0>,\n    "action": "<BUY|ACCUMULATE|HOLD|SELL>",\n    "upside_pct": <number>,\n    "rating": "<Overpriced|Fair|Underpriced>",\n    "top_risk": "<single most impactful risk>",\n    "top_catalyst": "<single most impactful catalyst>",\n    "position_size_pct": <0.0-10.0>,\n    "model_confidence": "<High|Medium|Low>",\n    "summary": "<2-3 sentence investment thesis>"\n  }\n}`;
 
-    return `${rs2Content}\n\n### Company Ticker: ${ticker.toUpperCase()}\n\n${reversePriming}${dataBrief}\n\n${dataBlock}`;
+    return `You are a world-class financial analyst. Follow the Integrated Stock Analysis Engine v3.2 framework below to produce a complete analysis of ${ticker.toUpperCase()}.\n\n${engineContent}\n\n### Company Ticker: ${ticker.toUpperCase()}\n\n${reversePriming}${dataBrief}`;
 }
 
 export async function POST(req: Request) {
@@ -93,9 +93,9 @@ export async function POST(req: Request) {
         const ghToken = process.env.GH_PAT || process.env.GITHUB_TOKEN;
         const canDispatch = !!ghToken;
 
-        // ── Load RS2.txt + stocks.json for prompt building ──
-        let rs2Content = "";
-        try { rs2Content = readFileSync(join(process.cwd(), 'public', 'RS2.txt'), 'utf-8'); } catch (e) {}
+        // ── Load v3.2 engine + stocks.json for prompt building ──
+        let engineContent = "";
+        try { engineContent = readFileSync(join(process.cwd(), 'Reference', 'integrated_stock_analysis_engine_v3_2.md'), 'utf-8'); } catch (e) {}
         let reverseMap: Record<string, any> = {};
         try {
             const stocks = JSON.parse(readFileSync(join(process.cwd(), 'public', 'data', 'stocks.json'), 'utf-8'));
@@ -112,7 +112,7 @@ export async function POST(req: Request) {
             // Load financial data + build full v3.2 prompt with reverse priming
             let financials: any = null;
             try { financials = JSON.parse(readFileSync(join(process.cwd(), 'public', 'data', 'financials', `${sym}.json`), 'utf-8')); } catch (e) {}
-            const prompt = buildServerPrompt(sym, rs2Content, reverseMap[sym] || null, financials);
+            const prompt = buildServerPrompt(sym, engineContent, reverseMap[sym] || null, financials);
 
             await supabase.from('ai_reports').delete().eq('ticker', sym);
 
