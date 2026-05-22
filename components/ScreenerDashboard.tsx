@@ -158,7 +158,7 @@ export function ScreenerDashboard() {
 
         if (topN.length === 0) {
             setBatchDispatching(false);
-            setBatchStatus("No candidates to dispatch");
+            setBatchStatus("All selected stocks already analyzed.");
             return;
         }
 
@@ -172,7 +172,8 @@ export function ScreenerDashboard() {
             if (!res.ok) throw new Error(data.error || `Server error: ${res.status}`);
             setBatchId(data.batch_id);
             setBatchProgress({ completed: 0, failed: 0, total: data.queued });
-            setBatchStatus(`Dispatched ${data.queued} analyses — waiting for workers...`);
+            const msg = `Dispatched ${data.queued} analyses${data.skipped ? ` (${data.skipped} skipped — already analyzed)` : ''} — waiting for workers...`;
+            setBatchStatus(msg);
             setDsPassword("");
         } catch (e: any) {
             console.error("Batch dispatch error:", e);

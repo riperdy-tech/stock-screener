@@ -104,16 +104,29 @@ export async function POST(req: Request) {
 
         const now = new Date().toISOString();
         const inserted: string[] = [];
+        const skipped: string[] = [];
 
         for (const ticker of tickers) {
             const sym = String(ticker).trim().toUpperCase();
             if (!sym) continue;
+
+            // Check if this ticker already has a completed or pending analysis
+            const { data: existing } = await supabase
+                .from('ai_reports')
+                .select('status')
+                .eq('ticker', sym)
+                .limit(1);
+            if (existing && existing.length > 0 && (existing[0].status === 'completed' || existing[0].status === 'pending')) {
+                skipped.push(sym);
+                continue;
+            }
 
             // Load financial data + build full v3.2 prompt with reverse priming
             let financials: any = null;
             try { financials = JSON.parse(readFileSync(join(process.cwd(), 'public', 'data', 'financials', `${sym}.json`), 'utf-8')); } catch (e) {}
             const prompt = buildServerPrompt(sym, engineContent, reverseMap[sym] || null, financials);
 
+            // Only delete if we're inserting a new analysis
             await supabase.from('ai_reports').delete().eq('ticker', sym);
 
             const { error: sbError } = await supabase
@@ -166,6 +179,7 @@ export async function POST(req: Request) {
             batch_id: batchId,
             queued: inserted.length,
             dispatched,
+            skipped: skipped.length > 0 ? skipped.length : undefined,
             ...(!canDispatch ? { note: "GitHub token not configured — rows inserted as pending; worker picks up on cron." } : {}),
         });
 
