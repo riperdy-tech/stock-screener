@@ -72,6 +72,7 @@ export function ScreenerDashboard() {
     const [batchDispatching, setBatchDispatching] = useState(false);
     const [showBatchPassword, setShowBatchPassword] = useState(false);
     const [batchStatus, setBatchStatus] = useState<string | null>(null); // user-visible feedback
+    const [selectedTickers, setSelectedTickers] = useState<Set<string>>(new Set());
     
     const handleDeepseekRun = async () => {
         if (!dsPassword) { setDsError("Please enter password"); return; }
@@ -151,14 +152,16 @@ export function ScreenerDashboard() {
         setBatchDispatching(true);
         setBatchStatus("Dispatching...");
 
-        const topN = filteredResults
-            .filter(r => r.reverse && r.reverse.rev_band && r.reverse.rev_band !== 'Excluded')
-            .slice(0, batchN)
-            .map(r => r.candidate.symbol);
+        const topN = selectedTickers.size > 0
+            ? Array.from(selectedTickers)
+            : filteredResults
+                .filter(r => r.reverse && r.reverse.rev_band && r.reverse.rev_band !== 'Excluded')
+                .slice(0, batchN)
+                .map(r => r.candidate.symbol);
 
         if (topN.length === 0) {
             setBatchDispatching(false);
-            setBatchStatus("All selected stocks already analyzed.");
+            setBatchStatus("No stocks selected.");
             return;
         }
 
@@ -484,7 +487,7 @@ export function ScreenerDashboard() {
                 screenMode={screenMode}
                 reverseFilters={reverseFilters}
                 setReverseFilters={setReverseFilters}
-                onScreenModeChange={setScreenMode}
+                onScreenModeChange={(mode) => { setScreenMode(mode); setSelectedTickers(new Set()); }}
                 batchN={batchN}
                 onBatchNChange={setBatchN}
                 batchDispatching={batchDispatching}
@@ -493,6 +496,7 @@ export function ScreenerDashboard() {
                     if (!dsPassword) { setShowBatchPassword(true); return; }
                     setShowBatchConfirm(true);
                 }}
+                selectedCount={selectedTickers.size}
             />
 
             {/* 2. Main Content Area */}
@@ -637,14 +641,39 @@ export function ScreenerDashboard() {
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
                                 {currentData.map((result, i) => (
-                                    <StockCard
-                                        key={result.candidate.symbol}
-                                        result={result}
-                                        onClick={() => setSelectedStock(result)}
-                                        index={i}
-                                        lastUpdated={result.Last_Updated || lastUpdatedFile}
-                                        market={selectedMarket}
-                                    />
+                                    <div key={result.candidate.symbol} className="relative group/card">
+                                        {/* Selection checkbox — reverse mode only */}
+                                        {screenMode === 'reverse' && (
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    const sym = result.candidate.symbol;
+                                                    setSelectedTickers(prev => {
+                                                        const next = new Set(prev);
+                                                        next.has(sym) ? next.delete(sym) : next.add(sym);
+                                                        return next;
+                                                    });
+                                                }}
+                                                className={clsx(
+                                                    "absolute top-2 right-2 z-20 w-6 h-6 rounded-md border-2 flex items-center justify-center transition-all",
+                                                    selectedTickers.has(result.candidate.symbol)
+                                                        ? "bg-emerald-500 border-emerald-500 text-white"
+                                                        : "bg-background/60 border-border/50 hover:border-emerald-400"
+                                                )}
+                                            >
+                                                {selectedTickers.has(result.candidate.symbol) && (
+                                                    <span className="text-xs font-bold">✓</span>
+                                                )}
+                                            </button>
+                                        )}
+                                        <StockCard
+                                            result={result}
+                                            onClick={() => setSelectedStock(result)}
+                                            index={i}
+                                            lastUpdated={result.Last_Updated || lastUpdatedFile}
+                                            market={selectedMarket}
+                                        />
+                                    </div>
                                 ))}
                             </div>
 
@@ -837,8 +866,10 @@ export function ScreenerDashboard() {
                     <div className="bg-card border border-border rounded-xl shadow-2xl p-6 max-w-sm w-full animate-in zoom-in-95">
                         <h3 className="text-lg font-bold mb-2">Dispatch Deep-Dive Batch?</h3>
                         <p className="text-sm text-muted-foreground mb-4">
-                            This will dispatch <span className="font-bold text-foreground">{batchN}</span> deep-dive analyses
-                            via GitHub Actions. Each takes ~2-3 minutes. GitHub queues them automatically.
+                            {selectedTickers.size > 0
+                                ? <>This will dispatch <span className="font-bold text-foreground">{selectedTickers.size} selected</span> stock(s) for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
+                                : <>This will dispatch the top <span className="font-bold text-foreground">{batchN}</span> stocks for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
+                            }
                         </p>
                         <div className="flex gap-2">
                             <button

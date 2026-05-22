@@ -55,6 +55,7 @@ interface FilterSidebarProps {
     batchDispatching?: boolean;
     batchStatus?: string | null;
     onDeepDiveClick?: () => void;
+    selectedCount?: number;
 }
 
 export const DEFAULT_FILTERS: FilterState = {
@@ -96,7 +97,7 @@ export const STRICT_FILTERS: FilterState = {
     maxFloat: 50,
 };
 
-export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, onScreenModeChange, batchN, onBatchNChange, batchDispatching, batchStatus, onDeepDiveClick }: FilterSidebarProps) {
+export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, onScreenModeChange, batchN, onBatchNChange, batchDispatching, batchStatus, onDeepDiveClick, selectedCount }: FilterSidebarProps) {
     const { t, filterDefs } = useLanguage();
     const router = useRouter();
 
@@ -272,6 +273,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
                         {/* Phase 11d: Deep-Dive */}
                         <Section title="Deep-Dive (v3.2)">
+                            <p className="text-[10px] text-muted-foreground mb-2">Click cards to select stocks, or use N below for top-ranked.</p>
                             <div className="flex items-center gap-2">
                                 <select
                                     value={(batchN && [5,10,25].includes(batchN)) ? batchN : 0}
@@ -297,7 +299,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                 className="w-full mt-2 flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black rounded-lg transition-all active:scale-95 disabled:opacity-50"
                             >
                                 <Sparkles className="h-3.5 w-3.5" />
-                                {batchDispatching ? 'Dispatching...' : `Deep-Dive Top ${batchN || 25}`}
+                                {batchDispatching ? 'Dispatching...' : selectedCount && selectedCount > 0 ? `Deep-Dive Selected (${selectedCount})` : `Deep-Dive Top ${batchN || 25}`}
                             </button>
                             {batchStatus && (
                                 <p className={clsx(
