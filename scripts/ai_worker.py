@@ -28,18 +28,42 @@ def run_worker():
             "status": "error",
             "content": "Analysis timed out (60 min+). Please check worker logs."
         }).eq("status", "pending").lt("created_at", sixty_mins_ago).execute()
+        # Also clean up stuck 'processing' jobs
+        supabase.table("ai_reports").update({
+            "status": "error",
+            "content": "Analysis timed out (60 min+) while processing."
+        }).eq("status", "processing").lt("created_at", sixty_mins_ago).execute()
     except Exception as e:
         print(f"Queue cleanup failed: {e}")
 
-    # 2. Find the oldest legitimate pending request
-    res = supabase.table("ai_reports").select("*").eq("status", "pending").order("created_at").limit(1).execute()
+    # 2. Atomically claim a pending job (prevents worker race conditions)
+    max_attempts = 3
+    job = None
+    for attempt in range(max_attempts):
+        res = supabase.table("ai_reports").select("*").eq("status", "pending").order("created_at").limit(1).execute()
+        
+        if not res.data:
+            print("No pending requests found.")
+            return
+            
+        candidate = res.data[0]
+        job_id = candidate.get('id')
+        
+        # Atomic claim: only take it if still pending (other workers can't steal it)
+        claim = supabase.table("ai_reports").update({"status": "processing"}).eq("id", job_id).eq("status", "pending").execute()
+        
+        if claim.data and len(claim.data) > 0:
+            job = claim.data[0]
+            print(f"Claimed job for {job['ticker']} (Job ID: {job_id}) on attempt {attempt + 1}")
+            break
+        else:
+            print(f"Job {job_id} already claimed by another worker, retrying...")
+            time.sleep(2)
     
-    if not res.data:
-        print("No pending requests found.")
+    if not job:
+        print("Could not claim any pending job after retries.")
         return
         
-    job = res.data[0]
-    job_id = job.get('id') # Use internal ID for precision
     ticker = job['ticker']
     prompt = job['prompt']
     

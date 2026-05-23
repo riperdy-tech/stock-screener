@@ -116,7 +116,7 @@ export async function POST(req: Request) {
                 .select('status')
                 .eq('ticker', sym)
                 .limit(1);
-            if (existing && existing.length > 0 && (existing[0].status === 'completed' || existing[0].status === 'pending')) {
+            if (existing && existing.length > 0 && (existing[0].status === 'completed' || existing[0].status === 'pending' || existing[0].status === 'processing')) {
                 skipped.push(sym);
                 continue;
             }
@@ -167,10 +167,6 @@ export async function POST(req: Request) {
                         body: JSON.stringify({ event_type: 'trigger-ai-analysis' })
                     });
                     if (ghRes.ok) dispatched++;
-                    // Delay 3s between dispatches so each worker picks a different pending job
-                    if (dispatched < inserted.length) {
-                        await new Promise(resolve => setTimeout(resolve, 3000));
-                    }
                 } catch (ghErr: any) {}
             }
         }
