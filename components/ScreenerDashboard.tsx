@@ -10,7 +10,7 @@ import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_
 import { supabase } from "@/lib/supabase";
 import { LanguageToggle } from "./LanguageToggle";
 import { LogConsole } from "./LogConsole";
-import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal } from 'lucide-react';
+import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal, HelpCircle } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -27,6 +27,7 @@ export function ScreenerDashboard() {
     const [lastUpdatedFile, setLastUpdatedFile] = useState<string | null>(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isLogOpen, setIsLogOpen] = useState(false);
+    const [showHelp, setShowHelp] = useState(false);
     const [selectedMarket, setSelectedMarket] = useState<Market>('US');
     
     // Phase 10: Screen mode (mutually exclusive)
@@ -509,6 +510,13 @@ export function ScreenerDashboard() {
                             <h1 className="text-lg md:text-xl font-bold text-foreground truncate max-w-[150px] sm:max-w-none">
                                 {t('appTitle')}
                             </h1>
+                            <button 
+                                onClick={() => setShowHelp(true)}
+                                className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-full transition-colors"
+                                title="How scoring works"
+                            >
+                                <HelpCircle className="h-4 w-4" />
+                            </button>
                         </div>
                         
                         <div className="flex md:hidden items-center gap-2 shrink-0">
@@ -939,6 +947,58 @@ export function ScreenerDashboard() {
                         <button onClick={() => setBackgroundDsTask(null)} className="text-muted-foreground hover:text-foreground">
                             <X className="h-5 w-5" />
                         </button>
+                    </div>
+                </div>
+            )}
+
+            {/* Help Modal */}
+            {showHelp && (
+                <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setShowHelp(false)}>
+                    <div className="bg-card border border-border/50 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto p-6" onClick={e => e.stopPropagation()}>
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-lg font-bold">How Scoring Works</h2>
+                            <button onClick={() => setShowHelp(false)} className="p-2 hover:bg-secondary rounded-full transition-colors">
+                                <X className="h-4 w-4" />
+                            </button>
+                        </div>
+                        <div className="space-y-4 text-sm text-muted-foreground">
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Stage 0–1 — Exclusion & Elimination</h3>
+                                <p>Filters out ETFs/funds and stocks below $300M market cap. Hard gates: Altman Z-score &lt; 1.8 (bankruptcy risk), net debt/EBITDA &gt; 4.0×, data quality &lt; 2.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Stage 2 — Archetype Routing</h3>
+                                <p>Classifies survivors into 9 archetypes (A–I) based on sector, industry keywords, and financial shape. Determines scoring rubrics and growth ceilings (A=17%, B=28%, C=22%, E=38%…).</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Stage 3 — Quality Score (0–100)</h3>
+                                <p>A/B (compounders): ROIC spread over WACC, revenue growth, FCF margin, net debt. C (cyclicals): operating margin. E (early-stage): revenue, cash runway. G/H (financials/REITs): ROIC spread, leverage.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Stage 4 — Margin of Safety (0–100)</h3>
+                                <p>Percentile-ranked valuation: FCF yield, EV/EBIT, and anchor multiple (0.4× EV/Sales + 0.4× EV/GP) — each ranked against the universe.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Stage 5 — Survivability (0–100)</h3>
+                                <p>Balance-sheet stress test: leverage (net debt/EBITDA), funding (cash runway or self-funding), and max drawdown from ~2yr monthly closes. Maps to impairment probability.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Stage 6 — CAGR Proxy + Base-Rate Ceiling</h3>
+                                <p>3-year revenue CAGR (from 5 annual periods) is primary growth. Forward EPS adds a capped secondary nudge (20% weight). If revenue CAGR exceeds the archetype ceiling, flagged HIGH_GROWTH_UNVERIFIED.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Stage 7 — Full Composite (0–100)</h3>
+                                <p>Weighted blend: 30% CAGR + 25% MoS + 20% Quality + 15% Survivability + 10% Efficiency. Haircuts for impairment risk, sparse data, low confidence, and extreme growth. Bands: High ≥70, Solid ≥55, Watchlist ≥40, Monitor ≥25.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Stage 8 — Advisory Flags</h3>
+                                <p>Metadata only (never change scores): INSIDER_HEAVY, PRICE_EXTENDED, SHORT_INTEREST_EXTREME, CROWDED_LONG, GROWTH_UNVERIFIED.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Stage 9 — Diversified Nomination (Top 25)</h3>
+                                <p>Walks the ranked survivor list, capping single archetype ≤40%, single sector ≤35%, single country ≤60%. Result: a diversified top 25 across archetypes, sectors, and countries.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
