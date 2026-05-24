@@ -147,6 +147,7 @@ class StockData:
         self.description = "No description available."
         self.insider_ownership = 0.0
         self.float_shares = float('inf')
+        self.country = "Unknown"
         self.shares_outstanding_growth_3yr_cagr = 0.0
         self.altman_z_score = 0.0
         self.beneish_m_score = -99.0 
@@ -206,6 +207,7 @@ def process_stock(ticker_symbol):
         data.price = safe_float(info.get('currentPrice'), 0.0)
         data.sector = info.get('sector', 'Unknown')
         data.industry = info.get('industry') or 'Unknown'
+        data.country = info.get('country') or 'Unknown'
         
         # Safe extractions
         rev_growth = safe_float(info.get('revenueGrowth'), 0.01)
@@ -322,7 +324,7 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
                 })
             return rows
 
-        annual_financials = extract_income_metrics(income_stmt, 2)
+        annual_financials = extract_income_metrics(income_stmt, 5)  # Phase 6.1a: extended for real multi-year CAGR
         quarterly_financials = extract_income_metrics(q_income_stmt, 4)
 
         # Cash flow items
@@ -448,7 +450,11 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
                 "Monthly_MA_20": ma_20_month,
                 "Depreciation_Amortization": depreciation_amortization,
                 "EBITDA": ebitda,
-                "Beta": beta
+                "Beta": beta,
+                "Short_Percent_Float": safe_float(info.get("shortPercentOfFloat"), None),
+                "Held_Percent_Institutions": safe_float(info.get("heldPercentInstitutions"), None),
+                "Dividend_Yield": safe_float(info.get("dividendYield"), None),
+                "Payout_Ratio": safe_float(info.get("payoutRatio"), None)
             },
             "Monthly_Closes": monthly_closes
         }
@@ -599,6 +605,7 @@ def main():
                 "peRatio": 0,
                 "sector": result.sector,
                 "industry": result.industry,
+                "country": result.country,
                 "score": score,
                 "status": "Pass" if screening_result else "Fail", 
                 "reasons": result.fail_reasons,
@@ -663,6 +670,7 @@ def main():
                             "Market Cap": r['marketCap'],
                             "Sector": r['sector'],
                             "Industry": r['industry'],
+                            "Country": r.get('country', 'Unknown'),
                             "Score": r['score'],
                             "Status": r['status'],
                             "Fail Codes": ",".join(r['failCodes']) if r['failCodes'] else "",

@@ -28,6 +28,7 @@ REVERSE_FIELDS = [
     "rev_con",
     "rev_nominated",
     "rev_route_confidence",
+    "growth_window",
 ]
 
 
@@ -115,6 +116,39 @@ def build_joined_record(stock, financial_detail):
         "Monthly_Closes": (financial_detail or {}).get("Monthly_Closes"),
         "_financial_detail_present": financial_detail is not None,
     }
+
+
+def compute_multi_year_revenue_cagr(annual_income_statement):
+    """Compute multi-year revenue CAGR from annual income statement rows.
+
+    Newest-first: rev[0] is most recent year, rev[1] is prior year, etc.
+    Guard: any denominator rev <= 0 or None → falls back one tier.
+    Returns (cagr_pct, growth_window) or (None, "1yr") for fallback.
+    """
+    annual = annual_income_statement or []
+    revenues = []
+    for row in annual:
+        if not isinstance(row, dict):
+            break
+        rev = as_number(row.get("TotalRevenue"))
+        if rev is None or rev <= 0:
+            break
+        revenues.append(rev)
+
+    # Try 4-period true 3yr CAGR: (rev[0]/rev[3])**(1/3) - 1
+    if len(revenues) >= 4:
+        if revenues[3] is not None and revenues[3] > 0:
+            cagr = ((revenues[0] / revenues[3]) ** (1.0 / 3.0) - 1) * 100
+            return round(cagr, 2), "3yr"
+
+    # Fall back to 3-period 2yr CAGR: (rev[0]/rev[2])**(1/2) - 1
+    if len(revenues) >= 3:
+        if revenues[2] is not None and revenues[2] > 0:
+            cagr = ((revenues[0] / revenues[2]) ** (1.0 / 2.0) - 1) * 100
+            return round(cagr, 2), "2yr"
+
+    # Insufficient data — caller falls back to 1yr YoY
+    return None, "1yr"
 
 
 def latest_ebit_proxy(financial_detail):
@@ -258,6 +292,124 @@ def append_note(existing, note):
     return f"{existing}; {note}"
 
 
+def _is_internal_caveat(note):
+    """True if note is an engine-internal caveat, not a real investment concern."""
+    internal_patterns = [
+        "haircuts omitted",
+        "inputs unavailable",
+        "deferred to Phase",
+        "Phase 6",
+        "Phase 3",
+        "v3.2 required",
+        "metrics.dilution is unreliable",
+        "metrics.dilution unreliable",
+        "true EBITDA history unavailable",
+        "EBIT proxy; true EBITDA",
+        "EBIT used as EBITDA fallback",
+        "dilution drag omitted",
+        "drawdown leverage adjustment skipped",
+        "protected: drawdown",
+        "Beta missing; sector-median beta fallback",
+        "survivability customer/counterparty",
+        "limited survivability customer",
+        "limited survivability dilution",
+        "Archetype suspensions applied",
+        "Dilution eliminator deferred",
+        "forward EPS secondary contribution",
+        "dilution drag omitted from CAGR",
+        "EV/EBIT uses EBIT proxy",
+        "EBIT used as EBITDA fallback",
+        "MoS unavailable: no positive FCF",
+        "Negative FCF caps MoS",
+        "No positive FCF; FCF-yield",
+    ]
+    note_lower = note.lower()
+    return any(pattern.lower() in note_lower for pattern in internal_patterns)
+
+
+def clean_rev_con(existing_con, reverse_result):
+    """Remove internal caveats from rev_con. Fall back to strongest genuine concern or neutral."""
+    if not existing_con:
+        return _fallback_concern(reverse_result)
+
+    notes = [n.strip() for n in existing_con.split(";") if n.strip()]
+    kept = [n for n in notes if not _is_internal_caveat(n)]
+
+    if not kept:
+        return _fallback_concern(reverse_result)
+
+    # Deduplicate near-duplicates
+    deduped = []
+    for n in kept:
+        if not any(n.lower() in d.lower() or d.lower() in n.lower() for d in deduped):
+            deduped.append(n)
+
+    return "; ".join(deduped)  # all real concerns, no internal noise
+
+
+def _fallback_concern(reverse_result):
+    """Return the strongest genuine concern from scores, or a clean neutral."""
+    dq = reverse_result.get("rev_data_quality") or 0
+    imp = reverse_result.get("rev_impairment_prob") or 0
+    surv = reverse_result.get("rev_survivability") or 0
+    mos = reverse_result.get("rev_mos") or 0
+    flags = (reverse_result.get("rev_flags") or "").lower()
+
+    if dq <= 1:
+        return "Very sparse financial data — scores carry high uncertainty"
+    if imp > 0.20:
+        return f"Elevated impairment risk ({imp:.0%}) — balance-sheet stress possible"
+    if surv < 40:
+        return "Low survivability score — funding or leverage stress"
+    if mos < 30:
+        return "Limited margin of safety — valuation premium"
+    if "high_growth_unverified" in flags:
+        return "Revenue growth exceeds base-rate ceiling — elevated expectations"
+    if dq < 3:
+        return "Some data gaps — due diligence recommended"
+    return "No major concern flagged at triage"
+
+
+def clean_rev_pro(mos_reason, route_reason):
+    """Build a clean, deduplicated rev_pro (thesis) sentence from available signals."""
+    if not mos_reason and not route_reason:
+        return "Composite score driven by balanced fundamentals"
+    if not mos_reason:
+        return _clean_route_reason(route_reason)
+    if not route_reason:
+        return mos_reason
+
+    # Check for significant term overlap (e.g. both mention "FCF yield")
+    mos_words = set(w.lower().strip(".,;:()%") for w in mos_reason.split())
+    route_words = set(w.lower().strip(".,;:()%") for w in route_reason.split())
+    stop = {"a", "the", "is", "and", "or", "in", "of", "to", "for", "with", "at", "by", "on", "+", "-", ""}
+    overlap = mos_words & route_words - stop
+
+    if len(overlap) >= 2:
+        # Significant overlap — use the more specific (MoS) reason alone
+        return mos_reason
+    return f"{mos_reason} + {_clean_route_reason(route_reason)}"
+
+
+def _clean_route_reason(reason):
+    """Shorten verbose route reasons to clean phrases."""
+    # Map common verbose route reasons to concise labels
+    mappings = {
+        "Positive FCF, ROIC above WACC+5, and revenue growth > 8%": "high ROIC and revenue growth",
+        "Positive FCF but below quality-compounder growth/ROIC bar": "positive FCF, moderate growth profile",
+        "Negative FCF; weak option-led/unprofitable shape": "negative FCF, early-stage profile",
+        "Ambiguous financial shape; conservative stable-incumbent default": "conservative stable-incumbent profile",
+        "Pre-revenue/negative-gross-margin option-led shape": "pre-revenue, option-led profile",
+        "Healthcare with near-zero revenue; noisy binary/regulatory proxy": "healthcare binary/regulatory profile",
+        "Industry keyword route": "",
+        "sector": "",
+    }
+    for verbose, concise in mappings.items():
+        if verbose in reason:
+            return concise
+    return reason
+
+
 def latest_annual_income(financial_detail, field_name):
     annual = (financial_detail or {}).get("Annual_Income_Statement") or []
     if not annual or not isinstance(annual[0], dict):
@@ -312,7 +464,11 @@ def route_archetype(stock, financial_detail, config):
         return "C", "medium", f"{sector} sector-level cyclical route"
 
     fcf = as_number((financial_detail or {}).get("Free_Cash_Flow_TTM"))
-    revenue_growth = as_number(calculated.get("YoY_Revenue_Growth_%"))
+    # Phase 6.1c: real multi-year CAGR with 1yr YoY fallback
+    multi_yr_cagr, growth_window = compute_multi_year_revenue_cagr(
+        (financial_detail or {}).get("Annual_Income_Statement")
+    )
+    revenue_growth = multi_yr_cagr if multi_yr_cagr is not None else as_number(calculated.get("YoY_Revenue_Growth_%"))
     roic = as_number(metrics.get("roic"))
     wacc = get_sector_wacc(sector, config)
 
@@ -492,10 +648,15 @@ def score_ab_quality(stock, financial_detail, config, context):
         returns = score_by_threshold((roic * 100) - wacc, rubric["roic_spread"], 0)
 
     growth = as_number(calculated.get("YoY_Revenue_Growth_%"))
-    if growth is None:
+    # Phase 6.1c: prefer real multi-year CAGR over 1yr YoY for growth-quality scoring
+    multi_yr_cagr, _ = compute_multi_year_revenue_cagr(
+        (financial_detail or {}).get("Annual_Income_Statement")
+    )
+    quality_growth = multi_yr_cagr if multi_yr_cagr is not None else growth
+    if quality_growth is None:
         growth_score = limited_dimension(context, "growth quality", "YoY_Revenue_Growth_% missing")
     else:
-        growth_score = score_by_threshold(growth, rubric["growth_pct"], 0)
+        growth_score = score_by_threshold(quality_growth, rubric["growth_pct"], 0)
 
     fcf_margin = as_number(calculated.get("FCF_Margin_%"))
     if fcf_margin is None:
@@ -787,9 +948,28 @@ def apply_stage8_flags(stock, financial_detail, reverse_result, config):
                     f"PRICE_EXTENDED: current price {direction} (mean-reversion risk, short ~2yr window)",
                 )
 
-    # --- RECENT_DILUTION_PROXY: STUBBED (metrics.dilution unreliable; awaiting Phase 6.1) ---
-    # --- SHORT_INTEREST_EXTREME: STUBBED (short_percent_of_float MISSING; awaiting Phase 6.1) ---
-    # --- CROWDED_LONG: STUBBED (held_percent_institutions MISSING; awaiting Phase 6.1) ---
+    # --- SHORT_INTEREST_EXTREME (Phase 6.1c: Short_Percent_Float now available) ---
+    calculated = (financial_detail or {}).get("Calculated_Metrics") or {}
+    short_float = as_number(calculated.get("Short_Percent_Float"))
+    si_threshold = flag_config.get("short_interest_threshold", 0.20)
+    if short_float is not None and short_float > si_threshold:
+        append_flag(reverse_result, "SHORT_INTEREST_EXTREME")
+        reverse_result["rev_con"] = append_note(
+            reverse_result.get("rev_con"),
+            f"SHORT_INTEREST_EXTREME: short interest {short_float:.1%} > {si_threshold:.0%} (squeeze/crowding risk)",
+        )
+
+    # --- CROWDED_LONG (Phase 6.1c: Held_Percent_Institutions now available) ---
+    inst_held = as_number(calculated.get("Held_Percent_Institutions"))
+    cl_threshold = flag_config.get("crowded_long_threshold", 0.98)
+    if inst_held is not None and inst_held > cl_threshold:
+        append_flag(reverse_result, "CROWDED_LONG")
+        reverse_result["rev_con"] = append_note(
+            reverse_result.get("rev_con"),
+            f"CROWDED_LONG: institutional ownership {inst_held:.1%} > {cl_threshold:.1%} (exit-crowding risk)",
+        )
+
+    # --- RECENT_DILUTION_PROXY: STUBBED (no real share-count history; Phase 6.1 dividend/payout fields don't measure dilution) ---
 
 
 def calculate_forward_eps_growth(financial_detail):
@@ -862,38 +1042,75 @@ def net_debt_to_real_ebitda(financial_detail):
 def apply_stage6_score(stock, financial_detail, reverse_result, config, beta_medians, global_beta_median):
     archetype = reverse_result.get("rev_archetype")
     calculated = (financial_detail or {}).get("Calculated_Metrics") or {}
-    revenue_growth = as_number(calculated.get("YoY_Revenue_Growth_%"))
+    # Phase 6.1c: real multi-year CAGR with 1yr YoY fallback; tag growth_window
+    multi_yr_cagr, growth_window = compute_multi_year_revenue_cagr(
+        (financial_detail or {}).get("Annual_Income_Statement")
+    )
+    reverse_result["growth_window"] = growth_window
+    revenue_growth_1yr = as_number(calculated.get("YoY_Revenue_Growth_%"))
+    revenue_growth = multi_yr_cagr if multi_yr_cagr is not None else revenue_growth_1yr
     forward_eps_growth = calculate_forward_eps_growth(financial_detail)
-    growth_candidates = [value for value in (revenue_growth, forward_eps_growth) if value is not None]
-    growth = max(growth_candidates) if growth_candidates else 0.0
 
     cap = (config.get("cagr") or {}).get("growth_caps", {}).get(archetype, 20)
 
-    # Fix 2: GROWTH_UNVERIFIED — extreme growth > 2x ceiling flags artifact suspicion
+    # Phase 6.1d: PRIMARY growth = revenue CAGR (tested against ceiling).
+    # Forward EPS is a secondary, capped contributor — it can nudge the CAGR proxy
+    # but CANNOT single-handedly drive HIGH_GROWTH_UNVERIFIED.
+    if revenue_growth is not None:
+        primary_growth = revenue_growth
+    elif forward_eps_growth is not None:
+        primary_growth = min(forward_eps_growth, cap)
+    else:
+        primary_growth = 0.0
+
     growth_2x_cap = cap * 2
-    if growth > growth_2x_cap:
+
+    # GROWTH_UNVERIFIED on primary (>2x ceiling)
+    if primary_growth > growth_2x_cap:
         append_flag(reverse_result, "GROWTH_UNVERIFIED")
         reverse_result["rev_con"] = append_note(
             reverse_result.get("rev_con"),
-            f"GROWTH_UNVERIFIED: raw growth {growth:.1f}% > 2x archetype cap {cap}%",
+            f"GROWTH_UNVERIFIED: primary revenue CAGR {primary_growth:.1f}% > 2x archetype cap {cap}%",
         )
 
-    if growth > cap:
-        growth = cap
+    # GROWTH_UNVERIFIED also on extreme forward EPS (still surfaced, just not gate-driving)
+    if forward_eps_growth is not None and forward_eps_growth > growth_2x_cap:
+        if "GROWTH_UNVERIFIED" not in (reverse_result.get("rev_flags") or ""):
+            append_flag(reverse_result, "GROWTH_UNVERIFIED")
+        reverse_result["rev_con"] = append_note(
+            reverse_result.get("rev_con"),
+            f"GROWTH_UNVERIFIED: forward EPS estimate {forward_eps_growth:.1f}% > 2x archetype cap {cap}% (EPS extreme, secondary signal)",
+        )
+
+    # HGUV base-rate ceiling test on PRIMARY (revenue CAGR) only
+    primary_capped = primary_growth
+    if primary_growth > cap:
+        primary_capped = cap
         append_flag(reverse_result, "HIGH_GROWTH_UNVERIFIED")
         reverse_result["rev_con"] = append_note(
             reverse_result.get("rev_con"),
-            f"HIGH_GROWTH_UNVERIFIED: growth capped at {cap}% for archetype {archetype}",
+            f"HIGH_GROWTH_UNVERIFIED: revenue CAGR {primary_growth:.1f}% capped at {cap}% for archetype {archetype}",
         )
 
-    if not growth_candidates:
+    if revenue_growth is None and forward_eps_growth is None:
         reverse_result["rev_con"] = append_note(
             reverse_result.get("rev_con"),
-            "CAGR growth component limited: YoY revenue and forward EPS growth unavailable",
+            "CAGR growth component limited: revenue CAGR and forward EPS growth unavailable",
         )
 
+    # CAGR proxy = primary (capped) + modest forward EPS boost (capped at ceiling, 20% weight)
+    eps_boost = 0.0
+    if forward_eps_growth is not None and forward_eps_growth > 0:
+        eps_boost = min(forward_eps_growth, cap) * 0.20
+        if eps_boost > 0:
+            reverse_result["rev_con"] = append_note(
+                reverse_result.get("rev_con"),
+                f"forward EPS secondary contribution +{eps_boost:.1f}% (capped at {cap}%, 20% weight)",
+            )
+    cagr_growth = primary_capped + eps_boost
+
     rerating = (as_number(reverse_result.get("rev_mos")) or 0) / config["cagr"]["rerating_divisor"]
-    reverse_result["rev_cagr_proxy"] = round(growth + rerating, 2)
+    reverse_result["rev_cagr_proxy"] = round(cagr_growth + rerating, 2)
     reverse_result["rev_con"] = append_note(
         reverse_result.get("rev_con"),
         "dilution drag omitted from CAGR proxy because metrics.dilution is unreliable",
@@ -1178,6 +1395,7 @@ def apply_stage9_nomination(stocks, config):
     target_n = div_config.get("target_n", 25)
     max_archetype_pct = div_config.get("single_archetype_pct", 40) / 100.0
     max_sector_pct = div_config.get("single_sector_pct", 35) / 100.0
+    max_country_pct = div_config.get("single_country_pct", 60) / 100.0
 
     # Reset all nominations
     for stock in stocks:
@@ -1219,6 +1437,14 @@ def apply_stage9_nomination(stocks, config):
         if sec_count > max_sector_pct * target_n:
             watchlisted.append((stock, f"sector {sector} capped at {sec_count} (max {int(max_sector_pct * target_n)})"))
             continue
+
+        # Check country cap (Phase 6.1c — Country now 96% populated; exempt Unknown/null)
+        country = stock.get("country") or "Unknown"
+        if country != "Unknown":
+            ctry_count = sum(1 for s in test_set if (s.get("country") or "Unknown") == country)
+            if ctry_count > max_country_pct * target_n:
+                watchlisted.append((stock, f"country {country} capped at {ctry_count} (max {int(max_country_pct * target_n)})"))
+                continue
 
         nominated.append(stock)
 
@@ -1435,6 +1661,9 @@ def attach_reverse_results(stocks, config, previous_scores=None):
     limited_dimensions_total = 0
     mos_low_data_cap_count = 0
     high_growth_unverified_count = 0
+    high_growth_unverified_by_arch = {key: 0 for key in "ABCDEFGHI"}
+    growth_unverified_count = 0
+    inst_held_values = []  # Phase 6.1c: collect for distribution measurement
     beta_usage_counts = {"real": 0, "sector_median": 0}
     composite_breakdowns = {}
     reverse_scores = {}
@@ -1511,12 +1740,9 @@ def attach_reverse_results(stocks, config, previous_scores=None):
                     stock, financial_detail, reverse_result, config
                 )
                 mos, mos_reason = calculate_mos(stock, financial_detail, reverse_result, config)
-                if mos_reason and reverse_result.get("rev_pro"):
-                    reverse_result["rev_pro"] = f"{mos_reason} + {reverse_result['rev_pro']}"
-                elif mos_reason:
-                    reverse_result["rev_pro"] = mos_reason
-                elif not reverse_result.get("rev_pro"):
-                    reverse_result["rev_pro"] = "Full composite based on CAGR/MoS/Quality/Survivability/Efficiency"
+                # Phase polish: build clean deduplicated rev_pro
+                route_reason = reverse_result.get("rev_pro")
+                reverse_result["rev_pro"] = clean_rev_pro(mos_reason, route_reason)
 
                 quality_sums[reverse_result["rev_archetype"]] += reverse_result["rev_quality"]
                 quality_counts[reverse_result["rev_archetype"]] += 1
@@ -1588,11 +1814,23 @@ def attach_reverse_results(stocks, config, previous_scores=None):
                 reverse_result["rev_band"] = band_from_composite(reverse_result["rev_composite"], config)
                 if "HIGH_GROWTH_UNVERIFIED" in (reverse_result.get("rev_flags") or ""):
                     high_growth_unverified_count += 1
+                    arch = reverse_result.get("rev_archetype")
+                    if arch in high_growth_unverified_by_arch:
+                        high_growth_unverified_by_arch[arch] += 1
+                if "GROWTH_UNVERIFIED" in (reverse_result.get("rev_flags") or ""):
+                    growth_unverified_count += 1
                 if ticker in ("ACN", "TSM"):
                     composite_breakdowns[ticker] = breakdown
 
                 # Stage 8: advisory flags (AFTER band/composite — metadata only)
                 apply_stage8_flags(stock, financial_detail, reverse_result, config)
+
+            # Phase 6.1c: collect institutional ownership for distribution measurement
+            if reverse_result.get("rev_band") not in ("Excluded", "Reject", None):
+                calculated = (financial_detail or {}).get("Calculated_Metrics") or {}
+                ih = as_number(calculated.get("Held_Percent_Institutions"))
+                if ih is not None:
+                    inst_held_values.append(ih)
 
         stock["reverse"] = reverse_result
         reverse_scores[ticker] = reverse_result.copy()
@@ -1606,6 +1844,54 @@ def attach_reverse_results(stocks, config, previous_scores=None):
     g_leavers, g_leaver_examples = leaver_destinations(previous_scores, stocks, "G")
     h_leavers, h_leaver_examples = leaver_destinations(previous_scores, stocks, "H")
     ebitda_counts = ebitda_usage_counts(stocks)
+
+    # Phase 6.1c: measure institutional distribution, set CROWDED_LONG threshold at ~p95
+    inst_distribution = {}
+    if inst_held_values:
+        sorted_inst = sorted(inst_held_values)
+        n = len(sorted_inst)
+        inst_distribution = {
+            "count": n,
+            "p50": round(sorted_inst[int(n * 0.50)], 4),
+            "p75": round(sorted_inst[int(n * 0.75)], 4),
+            "p90": round(sorted_inst[int(n * 0.90)], 4),
+            "p95": round(sorted_inst[int(n * 0.95)], 4),
+            "p99": round(sorted_inst[int(n * 0.99)], 4),
+            "max": round(sorted_inst[-1], 4),
+        }
+        # Override config threshold with measured p95
+        measured_p95 = inst_distribution["p95"]
+        if "flags" in config:
+            config["flags"]["crowded_long_threshold"] = measured_p95
+        # Re-apply CROWDED_LONG with measured threshold for all survivors
+        for stock in stocks:
+            rev = stock.get("reverse") or {}
+            if rev.get("rev_band") in ("Excluded", "Reject", None):
+                continue
+            fd = load_financial_detail(stock["symbol"])
+            calculated = (fd or {}).get("Calculated_Metrics") or {}
+            inst_held = as_number(calculated.get("Held_Percent_Institutions"))
+            flags = (rev.get("rev_flags") or "").split(",")
+            flags = [f for f in flags if f != "CROWDED_LONG"]
+            if inst_held is not None and inst_held > measured_p95:
+                flags.append("CROWDED_LONG")
+                rev["rev_con"] = append_note(
+                    rev.get("rev_con"),
+                    f"CROWDED_LONG: institutional ownership {inst_held:.1%} > {measured_p95:.1%} (exit-crowding risk, p95 threshold)",
+                )
+            rev["rev_flags"] = ",".join([f for f in flags if f]) if flags else None
+    else:
+        inst_distribution = {"count": 0}
+
+    # Phase polish: clean rev_con — remove engine-internal caveats, keep real concerns
+    for stock in stocks:
+        rev = stock.get("reverse") or {}
+        original_con = rev.get("rev_con")
+        if original_con:
+            rev["rev_con"] = clean_rev_con(original_con, rev)
+
+    # Rebuild reverse_scores snapshot AFTER cleanup (was snapshotted too early at line 1835)
+    reverse_scores = {stock["symbol"]: stock["reverse"].copy() for stock in stocks}
 
     mean_quality_by_archetype = {}
     for archetype in "ABCDEFGHI":
@@ -1632,12 +1918,14 @@ def attach_reverse_results(stocks, config, previous_scores=None):
         and (stock.get("reverse") or {}).get("rev_archetype") == "I"
     )
 
-    # Stage 8 flag counts
+    # Stage 8 flag counts (recomputed after potential CROWDED_LONG re-apply)
     flag_counts = {
         "GROWTH_UNVERIFIED": 0,
         "HIGH_GROWTH_UNVERIFIED": 0,
         "INSIDER_HEAVY": 0,
         "PRICE_EXTENDED": 0,
+        "SHORT_INTEREST_EXTREME": 0,
+        "CROWDED_LONG": 0,
     }
     for stock in stocks:
         rev = stock.get("reverse") or {}
@@ -1658,14 +1946,25 @@ def attach_reverse_results(stocks, config, previous_scores=None):
                 "name": stock.get("name", ""),
                 "archetype": rev.get("rev_archetype"),
                 "sector": stock.get("sector", "Unknown"),
+                "country": stock.get("country", "Unknown"),
                 "composite": rev.get("rev_composite"),
             })
 
     nominated_arch_mix = {}
     nominated_sector_mix = {}
+    nominated_country_mix = {}
     for nd in nominated_details:
         nominated_arch_mix[nd["archetype"]] = nominated_arch_mix.get(nd["archetype"], 0) + 1
         nominated_sector_mix[nd["sector"]] = nominated_sector_mix.get(nd["sector"], 0) + 1
+        nominated_country_mix[nd["country"]] = nominated_country_mix.get(nd["country"], 0) + 1
+
+    # Growth window distribution (Phase 6.1c)
+    growth_window_counts = {"3yr": 0, "2yr": 0, "1yr": 0}
+    for stock in stocks:
+        rev = stock.get("reverse") or {}
+        gw = rev.get("growth_window", "1yr")
+        if gw in growth_window_counts:
+            growth_window_counts[gw] += 1
 
     diagnostics = {
         "total_stocks": len(stocks),
@@ -1690,6 +1989,8 @@ def attach_reverse_results(stocks, config, previous_scores=None):
         "limited_dimensions_total": limited_dimensions_total,
         "mos_low_data_cap_count": mos_low_data_cap_count,
         "high_growth_unverified_count": high_growth_unverified_count,
+        "high_growth_unverified_by_arch": high_growth_unverified_by_arch,
+        "growth_unverified_count": growth_unverified_count,
         "beta_usage_counts": beta_usage_counts,
         "composite_breakdowns": composite_breakdowns,
         "before_top25": top25_from_scores(previous_scores),
@@ -1709,7 +2010,10 @@ def attach_reverse_results(stocks, config, previous_scores=None):
         "nominated_details": nominated_details,
         "nominated_arch_mix": nominated_arch_mix,
         "nominated_sector_mix": nominated_sector_mix,
+        "nominated_country_mix": nominated_country_mix,
         "nomination_result": nomination_result,
+        "growth_window_counts": growth_window_counts,
+        "inst_distribution": inst_distribution,
     }
     return reverse_scores, joined_records, diagnostics
 
@@ -1759,9 +2063,20 @@ def main():
     print(f"Limited dimensions total: {diagnostics['limited_dimensions_total']}")
     print(f"MoS low-data cap count: {diagnostics['mos_low_data_cap_count']}")
     print(f"HIGH_GROWTH_UNVERIFIED count: {diagnostics['high_growth_unverified_count']}")
+    print(f"HIGH_GROWTH_UNVERIFIED by archetype: {diagnostics['high_growth_unverified_by_arch']}")
+    print(f"GROWTH_UNVERIFIED count: {diagnostics['growth_unverified_count']}")
     print(f"Beta usage counts: {diagnostics['beta_usage_counts']}")
     print(f"Composite breakdowns: {diagnostic_repr(diagnostics['composite_breakdowns'])}")
     print(f"ETFs detected: {diagnostics['etf_count']}")
+    print(f"\n--- Phase 6.1c: Growth Window Mix ---")
+    print(f"growth_window counts: {diagnostics['growth_window_counts']}")
+    print(f"\n--- Phase 6.1c: Institutional Ownership Distribution ---")
+    idist = diagnostics["inst_distribution"]
+    if idist.get("count", 0) > 0:
+        print(f"  n={idist['count']}  p50={idist['p50']:.1%}  p75={idist['p75']:.1%}  p90={idist['p90']:.1%}  p95={idist['p95']:.1%}  p99={idist['p99']:.1%}  max={idist['max']:.1%}")
+        print(f"  CROWDED_LONG threshold set to p95 = {idist['p95']:.1%}")
+    else:
+        print(f"  No institutional data available")
     print("Full composite: CAGR/MoS/Quality/Survivability/Efficiency with available haircuts")
     print(f"Top 50 archetype mix: {diagnostics['top50_mix']}")
     print(f"Top 10 composites: {diagnostics['top10_composites']}")
@@ -1770,7 +2085,12 @@ def main():
 
     # ── Stage 8 flag counts ──
     print("\n--- Stage 8 flag counts (survivors only) ---")
-    for flag_name in ["GROWTH_UNVERIFIED", "HIGH_GROWTH_UNVERIFIED", "INSIDER_HEAVY", "PRICE_EXTENDED"]:
+    survivor_total = sum(1 for s in stocks if (s.get("reverse") or {}).get("rev_band") not in ("Excluded", "Reject", None))
+    print(f"  Survivor pool: {survivor_total}")
+    print(f"  HIGH_GROWTH_UNVERIFIED overall: {diagnostics['high_growth_unverified_count']}/{survivor_total} ({round(diagnostics['high_growth_unverified_count']/survivor_total*100,1)}%)" if survivor_total > 0 else "  HIGH_GROWTH_UNVERIFIED overall: N/A")
+    print(f"  HIGH_GROWTH_UNVERIFIED by archetype: {diagnostics['high_growth_unverified_by_arch']}")
+    print(f"  GROWTH_UNVERIFIED: {diagnostics['growth_unverified_count']}")
+    for flag_name in ["INSIDER_HEAVY", "PRICE_EXTENDED", "SHORT_INTEREST_EXTREME", "CROWDED_LONG"]:
         count = diagnostics["flag_counts"].get(flag_name, 0)
         print(f"  {flag_name}: {count}")
 
@@ -1780,18 +2100,21 @@ def main():
     print(f"  Nominated: {nr['nominated_count']} | Watchlisted: {nr['watchlisted_count']}")
     print(f"  Archetype mix: {diagnostics['nominated_arch_mix']}")
     print(f"  Sector mix: {diagnostics['nominated_sector_mix']}")
+    print(f"  Country mix: {diagnostics['nominated_country_mix']}")
 
     # Prove caps respected
     total_n = nr["nominated_count"]
     if total_n > 0:
         max_arch = max(diagnostics["nominated_arch_mix"].values()) if diagnostics["nominated_arch_mix"] else 0
         max_sec = max(diagnostics["nominated_sector_mix"].values()) if diagnostics["nominated_sector_mix"] else 0
-        print(f"  Max archetype share: {max_arch}/{total_n} ({round(max_arch/total_n*100)}%) — cap: ≤40%")
-        print(f"  Max sector share: {max_sec}/{total_n} ({round(max_sec/total_n*100)}%) — cap: ≤35%")
+        max_ctry = max(diagnostics["nominated_country_mix"].values()) if diagnostics["nominated_country_mix"] else 0
+        print(f"  Max archetype share: {max_arch}/{total_n} ({round(max_arch/total_n*100)}%) -- cap: <=40%")
+        print(f"  Max sector share: {max_sec}/{total_n} ({round(max_sec/total_n*100)}%) -- cap: <=35%")
+        print(f"  Max country share: {max_ctry}/{total_n} ({round(max_ctry/total_n*100)}%) -- cap: <=60%")
 
     print(f"\n  Nominated 25:")
     for nd in diagnostics["nominated_details"]:
-        print(f"    {nd['ticker']:6s}  {nd['archetype']}  {nd['sector'][:28]:28s}  composite={nd['composite']}")
+        print(f"    {nd['ticker']:6s}  {nd['archetype']}  {nd['sector'][:25]:25s}  {nd.get('country','?')[:5]:5s}  composite={nd['composite']}")
 
     if nr["watchlisted_count"] <= 15:
         print(f"\n  Watchlisted (capped by diversification):")

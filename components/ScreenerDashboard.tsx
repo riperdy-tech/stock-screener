@@ -450,7 +450,8 @@ export function ScreenerDashboard() {
         setCurrentPage(1);
     }, [search, filters]);
 
-    const totalPages = Math.ceil(filteredResults.length / ITEMS_PER_PAGE);
+    const filteredCount = filteredResults.length;
+    const totalPages = Math.ceil(filteredCount / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const currentData = filteredResults.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
@@ -483,7 +484,7 @@ export function ScreenerDashboard() {
                 isOpen={isSidebarOpen}
                 market={selectedMarket}
                 onClose={() => setIsSidebarOpen(false)}
-                totalResults={filteredResults.length}
+                totalResults={filteredCount}
                 screenMode={screenMode}
                 reverseFilters={reverseFilters}
                 setReverseFilters={setReverseFilters}
@@ -623,7 +624,7 @@ export function ScreenerDashboard() {
                             {t('marketOpp')}
                         </h2>
                         <p className="text-muted-foreground text-sm">
-                            {t('showing')} {filteredResults.length > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredResults.length)} / {filteredResults.length} {t('assets')}
+                            {t('showing')} {filteredCount > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)} / {filteredCount} {t('assets')}
                         </p>
                     </div>
 
@@ -631,7 +632,7 @@ export function ScreenerDashboard() {
                         <div className="flex flex-col items-center justify-center h-64 text-muted-foreground animate-pulse">
                             <p>{t('initEngine')}</p>
                         </div>
-                    ) : filteredResults.length === 0 ? (
+                    ) : filteredCount === 0 ? (
                         <div className="flex flex-col items-center justify-center h-64 text-muted-foreground border border-dashed border-border rounded-xl">
                             <p className="text-lg">⚠</p>
                             <p>{t('noStocks')}</p>
