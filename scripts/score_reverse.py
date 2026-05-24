@@ -244,8 +244,12 @@ def stage1_eliminators(stock, financial_detail, data_quality, thresholds):
     notes = []
 
     z_score = as_number(metrics.get("zScore"))
-    if z_score is not None and z_score < thresholds["altman_z_min"]:
-        rejects.append(f"bankruptcy risk: zScore {z_score:.2f} < {thresholds['altman_z_min']}")
+    # Sector-aware Z-score threshold: asset-light sectors use lower boundaries, Financials/REITs exempt
+    sector = stock.get("sector") or "Unknown"
+    sector_z_map = thresholds.get("sector_altman_z_min") or {}
+    z_min = sector_z_map.get(sector, thresholds.get("altman_z_min", 1.8))
+    if z_score is not None and z_score < z_min:
+        rejects.append(f"bankruptcy risk: zScore {z_score:.2f} < {z_min} (sector {sector})")
 
     total_debt = as_number((financial_detail or {}).get("Total_Debt"))
     total_cash = as_number((financial_detail or {}).get("Total_Cash"))

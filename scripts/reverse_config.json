@@ -23,6 +23,17 @@
     },
     "stage1": {
       "altman_z_min": 1.8,
+      "sector_altman_z_min": {
+        "_comment": "Sector-aware Z-score thresholds. Altman Z structurally invalid for Financials/REITs; asset-light sectors use Z'' ~1.2 boundary. Unknown/blank exempt (0.0).",
+        "Financial Services": 0.0,
+        "Real Estate": 0.0,
+        "Technology": 1.2,
+        "Healthcare": 1.2,
+        "Communication Services": 1.2,
+        "Consumer Cyclical": 1.5,
+        "Consumer Defensive": 1.5,
+        "Unknown": 0.0
+      },
       "net_debt_to_ebitda_max": 4.0,
       "dilution_max_pct": 10.0,
       "fcf_negative_years_max": 4
