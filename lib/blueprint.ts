@@ -39,6 +39,22 @@ export interface ReverseResult {
     rev_route_confidence: string | null;
 }
 
+// WS1-T2a..T8/T9: Paradigm dimension result (from stocks.json paradigm object)
+export interface ParadigmResult {
+    pdm_themes: string[];
+    pdm_theme_primary: string | null;
+    pdm_membership_score: number | null;
+    pdm_momentum_score: number | null;
+    pdm_economics_gate: number | null;
+    pdm_signal: number | null;
+    pdm_band: string | null; // "high" | "mid" | "watch" | "skip" | "no_data"
+    pdm_rank: number | null;
+    pdm_confidence: number | null;
+    pdm_pro: string | null;
+    pdm_con: string | null;
+    pdm_flags: string[];
+}
+
 export interface ScreeningMetrics {
     roic: number;
     revenueGrowth: number;
@@ -67,6 +83,7 @@ export interface ScreeningResult {
     financialData?: any;
     Last_Updated?: string;
     reverse?: ReverseResult; // Phase 9: reverse screening engine result
+    paradigm?: ParadigmResult; // WS1-T2..T9: paradigm dimension result
 }
 
 // Phase 1: Quantitative Filters

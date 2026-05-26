@@ -1,0 +1,256 @@
+{
+  "_README": "v2 — Opus-curated config additions for paradigm themes. Changes from v1: (1) industry names corrected to Yahoo/Morningstar taxonomy actually used in stocks.json; (2) tickers absent from stocks.json removed; (3) TSLA added to BOTH physical_ai and energy_transition per operator (multi-theme allowed); (4) INTU removed from physical_ai (was an error); (5) added 3 new themes: quantum_computing, space_economy, nuclear_renaissance; (6) removed ambiguous acronyms DLP/ASIC/GIP from keywords; (7) refined cloud_software negative_keywords (dropped 'professional services firm', kept 'IT consulting'). Multi-theme seeds intentional — same ticker can appear under multiple themes; the composite scorer (T2a) will tag the stock with every theme whose composite passes >=2.",
+  "themes": {
+    "ai_compute": {
+      "keywords": [
+        "NVIDIA", "GPU", "accelerator", "AI training", "AI inference",
+        "hyperscaler", "HBM", "high bandwidth memory", "CoWoS",
+        "AI chip", "AI accelerator", "neural processing unit", "NPU",
+        "tensor processing unit", "TPU", "data center GPU", "AI compute",
+        "AI infrastructure", "foundation model infrastructure",
+        "training cluster", "inference at scale", "AI semiconductor",
+        "AI silicon", "model training", "model inference"
+      ],
+      "negative_keywords": [
+        "AI-powered features", "smart home", "intelligent search",
+        "AI assistant", "AI-driven marketing", "AI-enhanced"
+      ],
+      "member_rules": {
+        "gics_industries": [
+          "Semiconductors",
+          "Semiconductor Equipment & Materials",
+          "Computer Hardware"
+        ],
+        "seed_tickers": [
+          "NVDA", "AMD", "AVGO", "TSM", "ASML",
+          "AMAT", "KLAC", "LRCX", "MU", "MRVL",
+          "ARM", "SMCI", "ANET", "DELL", "CRDO"
+        ]
+      }
+    },
+    "physical_ai": {
+      "keywords": [
+        "robotics", "robot", "humanoid", "autonomous vehicle",
+        "self-driving", "ADAS", "lidar", "computer vision",
+        "industrial automation", "warehouse automation",
+        "autonomous delivery", "robotic surgery", "robotic arm",
+        "mobile robot", "drone", "UAV", "factory automation",
+        "edge AI", "machine vision", "collaborative robot", "cobot"
+      ],
+      "negative_keywords": [
+        "robotic process automation", "RPA software",
+        "process automation software", "virtual assistant",
+        "chatbot", "software automation"
+      ],
+      "member_rules": {
+        "gics_industries": [
+          "Aerospace & Defense",
+          "Auto Manufacturers",
+          "Auto Parts",
+          "Specialty Industrial Machinery",
+          "Farm & Heavy Construction Machinery",
+          "Medical Devices"
+        ],
+        "seed_tickers": [
+          "TSLA", "ISRG", "TER", "ROK", "EMR",
+          "AUR", "MBLY", "CGNX", "KTOS", "AVAV"
+        ]
+      }
+    },
+    "glp1_metabolic": {
+      "keywords": [
+        "GLP-1", "semaglutide", "tirzepatide", "Ozempic", "Wegovy",
+        "Mounjaro", "Zepbound", "incretin", "GIP receptor",
+        "dual agonist", "obesity drug", "anti-obesity",
+        "weight loss medication", "metabolic disease",
+        "type 2 diabetes therapeutic", "bariatric pharmaceutical",
+        "amylin analog", "retatrutide"
+      ],
+      "negative_keywords": [
+        "diet plan", "weight management coaching",
+        "lifestyle program", "metformin",
+        "diabetes monitoring device"
+      ],
+      "member_rules": {
+        "gics_industries": [
+          "Drug Manufacturers - General",
+          "Drug Manufacturers - Specialty & Generic",
+          "Biotechnology"
+        ],
+        "seed_tickers": [
+          "NVO", "LLY", "PFE", "MRK", "AMGN",
+          "VKTX", "ALT", "STRC", "AZN", "NVS"
+        ]
+      }
+    },
+    "cloud_software": {
+      "keywords": [
+        "SaaS", "software-as-a-service", "cloud software",
+        "subscription software", "ARR", "annual recurring revenue",
+        "cloud platform", "PaaS", "IaaS", "cloud-native",
+        "multi-tenant", "vertical SaaS", "enterprise SaaS",
+        "cloud infrastructure", "DevOps platform",
+        "observability platform", "data cloud", "API platform"
+      ],
+      "negative_keywords": [
+        "perpetual license", "on-premise only", "IT consulting"
+      ],
+      "member_rules": {
+        "gics_industries": [
+          "Software - Application",
+          "Software - Infrastructure",
+          "Internet Content & Information"
+        ],
+        "seed_tickers": [
+          "CRM", "NOW", "SNOW", "MDB", "DDOG",
+          "NET", "ZS", "CRWD", "OKTA", "TEAM",
+          "WDAY", "ADBE", "INTU", "HUBS", "DBX"
+        ]
+      }
+    },
+    "energy_transition": {
+      "keywords": [
+        "renewable energy", "solar power", "wind power",
+        "battery storage", "energy storage system", "grid storage",
+        "EV battery", "lithium-ion battery", "grid modernization",
+        "smart grid", "electrification", "decarbonization",
+        "clean energy", "green hydrogen", "carbon capture",
+        "CCUS", "geothermal energy", "biofuel",
+        "energy transition", "lithium production", "rare earth"
+      ],
+      "negative_keywords": [
+        "coal mining", "tar sands", "oil refining",
+        "natural gas exploration", "fossil fuel extraction"
+      ],
+      "member_rules": {
+        "gics_industries": [
+          "Solar",
+          "Utilities - Renewable",
+          "Other Industrial Metals & Mining",
+          "Specialty Industrial Machinery"
+        ],
+        "seed_tickers": [
+          "ENPH", "FSLR", "SEDG", "NEE", "BEP",
+          "RUN", "ARRY", "PLUG", "QS", "ALB",
+          "SQM", "LAC", "EOSE", "STEM", "TSLA"
+        ]
+      }
+    },
+    "cybersecurity": {
+      "keywords": [
+        "cybersecurity", "cyber security", "threat detection",
+        "endpoint security", "SIEM", "SOAR", "zero trust",
+        "identity and access management", "IAM",
+        "vulnerability management", "security operations",
+        "MDR", "XDR", "EDR", "network security",
+        "cloud security", "application security",
+        "security software", "penetration testing",
+        "security analytics", "ransomware protection",
+        "data loss prevention"
+      ],
+      "negative_keywords": [
+        "physical security", "surveillance camera",
+        "security guard services", "alarm monitoring",
+        "home security system"
+      ],
+      "member_rules": {
+        "gics_industries": [
+          "Software - Application",
+          "Software - Infrastructure"
+        ],
+        "seed_tickers": [
+          "CRWD", "PANW", "ZS", "OKTA", "FTNT",
+          "S", "CHKP", "RBRK", "QLYS", "RPD",
+          "TENB", "VRNS", "NET"
+        ]
+      }
+    },
+    "quantum_computing": {
+      "label": "Quantum Computing",
+      "description": "Companies developing quantum computing hardware (trapped-ion, superconducting, photonic, neutral-atom), quantum software/algorithms, or post-quantum cryptography. Largely pre-revenue; the economics gate will be especially important here.",
+      "status": "watch",
+      "keywords": [
+        "quantum computing", "qubit", "quantum hardware",
+        "quantum software", "quantum error correction",
+        "post-quantum cryptography", "post-quantum encryption",
+        "trapped ion", "superconducting qubit", "photonic quantum",
+        "quantum annealing", "quantum supremacy", "quantum advantage",
+        "quantum networking", "neutral atom quantum",
+        "logical qubit", "quantum simulation"
+      ],
+      "negative_keywords": [
+        "quantum dot", "quantum leap", "quantum mechanics",
+        "quantum chemistry", "quantum fund", "quantum field"
+      ],
+      "member_rules": {
+        "gics_industries": [
+          "Semiconductors",
+          "Computer Hardware",
+          "Software - Application",
+          "Software - Infrastructure",
+          "Information Technology Services"
+        ],
+        "seed_tickers": [
+          "IONQ", "RGTI", "QBTS", "QUBT", "ARQQ", "IBM"
+        ]
+      }
+    },
+    "space_economy": {
+      "label": "Space Economy",
+      "description": "Launch services, satellites, satellite communications, space-based imagery/intelligence, space defense, and supporting infrastructure (ground stations, hypersonic). Excludes traditional aerospace/airline business.",
+      "status": "watch",
+      "keywords": [
+        "satellite", "launch vehicle", "rocket", "space station",
+        "orbital", "lunar", "space-based", "low Earth orbit",
+        "geosynchronous orbit", "payload", "satellite imagery",
+        "space defense", "spaceflight", "hypersonic",
+        "ground station", "satellite communications",
+        "reusable rocket", "deep space", "Earth observation"
+      ],
+      "negative_keywords": [
+        "office space", "parking space", "retail space",
+        "ad space", "shelf space"
+      ],
+      "member_rules": {
+        "gics_industries": [
+          "Aerospace & Defense",
+          "Communication Equipment"
+        ],
+        "seed_tickers": [
+          "RKLB", "LMT", "BA", "NOC", "RTX", "LHX",
+          "SPCE", "ASTS", "IRDM", "VSAT", "PL", "HEI", "TDG"
+        ]
+      }
+    },
+    "nuclear_renaissance": {
+      "label": "Nuclear Renaissance",
+      "description": "Companies enabling the resurgence of nuclear power — large reactors, small modular reactors (SMRs), advanced reactors, uranium mining + enrichment, nuclear fuel cycle, and nuclear utilities. Driven by AI-data-center power demand and decarbonization mandates.",
+      "status": "watch",
+      "keywords": [
+        "nuclear power", "nuclear reactor", "small modular reactor",
+        "SMR", "uranium", "nuclear fuel", "uranium enrichment",
+        "U-235", "nuclear renaissance", "advanced reactor",
+        "molten salt reactor", "thorium reactor", "microreactor",
+        "HALEU", "nuclear utility", "fission energy",
+        "nuclear baseload"
+      ],
+      "negative_keywords": [
+        "nuclear weapon", "nuclear war", "nuclear medicine",
+        "nuclear family", "nuclear option"
+      ],
+      "member_rules": {
+        "gics_industries": [
+          "Utilities - Regulated Electric",
+          "Utilities - Independent Power Producers",
+          "Utilities - Diversified",
+          "Other Industrial Metals & Mining",
+          "Engineering & Construction"
+        ],
+        "seed_tickers": [
+          "CCJ", "NXE", "UEC", "DNN", "LEU", "SMR",
+          "OKLO", "BWXT", "CEG", "VST", "GEV", "TLN"
+        ]
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { type StockCandidate, type ReverseResult } from "./blueprint";
+import { type StockCandidate, type ReverseResult, type ParadigmResult } from "./blueprint";
 
 export function formatKoreanWon(n: number, decimals: number = 2) {
     if (Math.abs(n) >= 1e12) return `${(n / 1e12).toLocaleString('en-US', {maximumFractionDigits: decimals})}조원`;
@@ -228,6 +228,25 @@ export async function fetchReverseScores(): Promise<Record<string, ReverseResult
         return result;
     } catch (error) {
         console.error("Error loading reverse scores:", error);
+        return {};
+    }
+}
+
+// WS1-T2..T9: Load paradigm dimension results from stocks.json
+export async function fetchParadigmScores(): Promise<Record<string, ParadigmResult>> {
+    try {
+        const response = await fetch(`/data/stocks.json?t=${new Date().getTime()}`);
+        if (!response.ok) return {};
+        const stocks: any[] = await response.json();
+        const result: Record<string, ParadigmResult> = {};
+        for (const stock of stocks) {
+            if (stock.paradigm && stock.symbol) {
+                result[stock.symbol] = stock.paradigm;
+            }
+        }
+        return result;
+    } catch (error) {
+        console.error("Error loading paradigm scores:", error);
         return {};
     }
 }

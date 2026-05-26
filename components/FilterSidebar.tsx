@@ -37,6 +37,56 @@ export const DEFAULT_REVERSE_FILTERS: ReverseFilterState = {
     nominatedOnly: false,
 };
 
+// WS1-T6+: Paradigm dimension filter state
+export interface ParadigmFilterState {
+    themes: string[];          // selected themes (empty = all)
+    bands: string[];           // pdm_band selection (empty = all)
+    industryQuery: string;     // substring match on industry (case-insensitive)
+    minSignal: number;         // 0-100
+    minMembership: number;     // 0-100
+    minMomentum: number;       // 0-100
+    minGate: number;           // 0-100
+    acceleratingOnly: boolean;
+    macroWarningOnly: boolean;
+    bridgedOnly: boolean;      // gate_bridged_forward in flags
+    multiThemeOnly: boolean;   // pdm_themes.length > 1
+}
+
+export const DEFAULT_PARADIGM_FILTERS: ParadigmFilterState = {
+    themes: [],
+    bands: [],
+    industryQuery: "",
+    minSignal: 0,
+    minMembership: 0,
+    minMomentum: 0,
+    minGate: 0,
+    acceleratingOnly: false,
+    macroWarningOnly: false,
+    bridgedOnly: false,
+    multiThemeOnly: false,
+};
+
+// All 9 themes from paradigm_config.json
+export const PARADIGM_THEMES = [
+    "ai_compute",
+    "physical_ai",
+    "glp1_metabolic",
+    "cloud_software",
+    "energy_transition",
+    "cybersecurity",
+    "quantum_computing",
+    "space_economy",
+    "nuclear_renaissance",
+];
+
+export const PARADIGM_BAND_LABELS: Record<string, string> = {
+    high: "STRONG",
+    mid: "SOLID",
+    watch: "WATCH",
+    skip: "PASS",
+    no_data: "NO DATA",
+};
+
 interface FilterSidebarProps {
     filters: FilterState;
     setFilters: (f: FilterState) => void;
@@ -45,10 +95,13 @@ interface FilterSidebarProps {
     totalResults: number;
     market: Market;
     // Phase 10: Reverse Engine mode
-    screenMode?: '100bagger' | 'reverse';
+    screenMode?: '100bagger' | 'reverse' | 'paradigm';
     reverseFilters?: ReverseFilterState;
     setReverseFilters?: (f: ReverseFilterState) => void;
-    onScreenModeChange?: (mode: '100bagger' | 'reverse') => void;
+    onScreenModeChange?: (mode: '100bagger' | 'reverse' | 'paradigm') => void;
+    // WS1-T6+: Paradigm filters
+    paradigmFilters?: ParadigmFilterState;
+    setParadigmFilters?: (f: ParadigmFilterState) => void;
     // Phase 11d: Deep-Dive controls
     batchN?: number;
     onBatchNChange?: (n: number) => void;
@@ -97,13 +150,14 @@ export const STRICT_FILTERS: FilterState = {
     maxFloat: 50,
 };
 
-export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, onScreenModeChange, batchN, onBatchNChange, batchDispatching, batchStatus, onDeepDiveClick, selectedCount }: FilterSidebarProps) {
+export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, onScreenModeChange, paradigmFilters, setParadigmFilters, batchN, onBatchNChange, batchDispatching, batchStatus, onDeepDiveClick, selectedCount }: FilterSidebarProps) {
     const { t, filterDefs } = useLanguage();
     const router = useRouter();
 
     // Local state for Manual Apply
     const [localFilters, setLocalFilters] = useState<FilterState>(filters);
     const [localReverseFilters, setLocalReverseFilters] = useState<ReverseFilterState>(reverseFilters || DEFAULT_REVERSE_FILTERS);
+    const [localParadigmFilters, setLocalParadigmFilters] = useState<ParadigmFilterState>(paradigmFilters || DEFAULT_PARADIGM_FILTERS);
 
     // Sync local state when global filters change (e.g. initial load or external reset)
     useEffect(() => {
@@ -113,6 +167,10 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
     useEffect(() => {
         if (reverseFilters) setLocalReverseFilters(reverseFilters);
     }, [reverseFilters]);
+
+    useEffect(() => {
+        if (paradigmFilters) setLocalParadigmFilters(paradigmFilters);
+    }, [paradigmFilters]);
 
     const handleChange = (key: keyof FilterState, value: string) => {
         const num = parseFloat(value);
@@ -157,6 +215,30 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
         if (setReverseFilters) setReverseFilters(DEFAULT_REVERSE_FILTERS);
     };
 
+    // WS1-T6+: Paradigm filter handlers
+    const toggleParadigmTheme = (theme: string) => {
+        const next = localParadigmFilters.themes.includes(theme)
+            ? localParadigmFilters.themes.filter(t => t !== theme)
+            : [...localParadigmFilters.themes, theme];
+        setLocalParadigmFilters({ ...localParadigmFilters, themes: next });
+    };
+
+    const toggleParadigmBand = (band: string) => {
+        const next = localParadigmFilters.bands.includes(band)
+            ? localParadigmFilters.bands.filter(b => b !== band)
+            : [...localParadigmFilters.bands, band];
+        setLocalParadigmFilters({ ...localParadigmFilters, bands: next });
+    };
+
+    const handleParadigmApply = () => {
+        if (setParadigmFilters) setParadigmFilters(localParadigmFilters);
+    };
+
+    const handleParadigmReset = () => {
+        setLocalParadigmFilters(DEFAULT_PARADIGM_FILTERS);
+        if (setParadigmFilters) setParadigmFilters(DEFAULT_PARADIGM_FILTERS);
+    };
+
     return (
         <div className={clsx(
             "fixed inset-y-0 left-0 z-50 w-80 bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-[100dvh] overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
@@ -176,19 +258,21 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
                 {/* Strategy Presets — always visible */}
                 <Section title="Strategy Presets">
-                    <select 
+                    <select
                         className="w-full bg-secondary/40 border border-border/70 text-foreground font-semibold rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer transition-colors hover:border-primary/50"
-                        value={screenMode === 'reverse' ? 'reverse' : ''}
+                        value={screenMode === 'reverse' ? 'reverse' : screenMode === 'paradigm' ? 'paradigm' : ''}
                         onChange={(e) => {
                             const val = e.target.value;
                             if (val === 'strict') { handleStrict(); if (onScreenModeChange) onScreenModeChange('100bagger'); }
                             else if (val === 'youtube') router.push('/youtube-strategy');
                             else if (val === 'reverse') { if (onScreenModeChange) onScreenModeChange('reverse'); }
+                            else if (val === 'paradigm') { if (onScreenModeChange) onScreenModeChange('paradigm'); }
                         }}
                     >
                         <option value="" className="bg-background text-muted-foreground">Select a strategy preset...</option>
                         <option value="strict" className="bg-background text-foreground font-semibold">Strict 100-Bagger (US Only)</option>
                         <option value="reverse" className="bg-background text-emerald-400 font-semibold">Reverse Engine</option>
+                        <option value="paradigm" className="bg-background text-purple-400 font-semibold">Paradigm (Secular Themes)</option>
                         <option value="youtube" className="bg-background text-foreground font-semibold">YouTube Strategy</option>
                     </select>
                 </Section>
@@ -327,8 +411,149 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                     </>
                 )}
 
+                {/* WS1-T6+: Paradigm controls (shown only in paradigm mode) */}
+                {screenMode === 'paradigm' && (
+                    <>
+                        <Section title="Conviction Tier (Band)">
+                            <div className="flex flex-wrap gap-1.5">
+                                {[
+                                    { id: 'high', label: 'STRONG', cls: 'bg-emerald-500/30 text-emerald-400 border-emerald-500/50' },
+                                    { id: 'mid', label: 'SOLID', cls: 'bg-blue-500/30 text-blue-400 border-blue-500/50' },
+                                    { id: 'watch', label: 'WATCH', cls: 'bg-amber-500/30 text-amber-400 border-amber-500/50' },
+                                    { id: 'skip', label: 'PASS', cls: 'bg-gray-500/30 text-gray-400 border-gray-500/50' },
+                                ].map(({ id, label, cls }) => (
+                                    <button
+                                        key={id}
+                                        onClick={() => toggleParadigmBand(id)}
+                                        className={clsx(
+                                            "px-2.5 py-1 text-[10px] font-bold rounded-md border transition-all",
+                                            localParadigmFilters.bands.includes(id)
+                                                ? cls
+                                                : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-primary/40"
+                                        )}
+                                    >
+                                        {label}
+                                    </button>
+                                ))}
+                            </div>
+                        </Section>
+
+                        <Section title="Themes">
+                            <div className="flex flex-wrap gap-1.5">
+                                {PARADIGM_THEMES.map(theme => (
+                                    <button
+                                        key={theme}
+                                        onClick={() => toggleParadigmTheme(theme)}
+                                        className={clsx(
+                                            "px-2 py-1 text-[10px] font-mono rounded-md border transition-all",
+                                            localParadigmFilters.themes.includes(theme)
+                                                ? "bg-purple-500/30 text-purple-300 border-purple-500/50"
+                                                : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-purple-400/40"
+                                        )}
+                                    >
+                                        {theme}
+                                    </button>
+                                ))}
+                            </div>
+                        </Section>
+
+                        <Section title="Industry">
+                            <input
+                                type="text"
+                                placeholder="filter (e.g. Semi, Software, Solar)"
+                                value={localParadigmFilters.industryQuery}
+                                onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, industryQuery: e.target.value })}
+                                className="w-full bg-secondary/40 border border-border/70 text-foreground text-xs rounded-md px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-purple-500"
+                            />
+                            <p className="text-[10px] text-muted-foreground mt-1">Case-insensitive substring match on Yahoo industry name.</p>
+                        </Section>
+
+                        <Section title="Score Thresholds (0-100)">
+                            <InputGroup
+                                label="Min Signal (mem*mom*gate)"
+                                value={localParadigmFilters.minSignal}
+                                onChange={(v) => setLocalParadigmFilters({ ...localParadigmFilters, minSignal: parseFloat(v) || 0 })}
+                                min={0} max={100} step={1}
+                            />
+                            <InputGroup
+                                label="Min Membership"
+                                value={localParadigmFilters.minMembership}
+                                onChange={(v) => setLocalParadigmFilters({ ...localParadigmFilters, minMembership: parseFloat(v) || 0 })}
+                                min={0} max={100} step={1}
+                            />
+                            <InputGroup
+                                label="Min Momentum"
+                                value={localParadigmFilters.minMomentum}
+                                onChange={(v) => setLocalParadigmFilters({ ...localParadigmFilters, minMomentum: parseFloat(v) || 0 })}
+                                min={0} max={100} step={1}
+                            />
+                            <InputGroup
+                                label="Min Economics Gate"
+                                value={localParadigmFilters.minGate}
+                                onChange={(v) => setLocalParadigmFilters({ ...localParadigmFilters, minGate: parseFloat(v) || 0 })}
+                                min={0} max={100} step={1}
+                            />
+                        </Section>
+
+                        <Section title="Flag Filters">
+                            <label className="flex items-center gap-2 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={localParadigmFilters.acceleratingOnly}
+                                    onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, acceleratingOnly: e.target.checked })}
+                                    className="w-4 h-4 rounded border-border accent-emerald-500"
+                                />
+                                <span className="text-xs font-medium text-muted-foreground">↑ Accelerating only</span>
+                            </label>
+                            <label className="flex items-center gap-2 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={localParadigmFilters.bridgedOnly}
+                                    onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, bridgedOnly: e.target.checked })}
+                                    className="w-4 h-4 rounded border-border accent-blue-500"
+                                />
+                                <span className="text-xs font-medium text-muted-foreground">Forward-EPS bridged only</span>
+                            </label>
+                            <label className="flex items-center gap-2 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={localParadigmFilters.multiThemeOnly}
+                                    onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, multiThemeOnly: e.target.checked })}
+                                    className="w-4 h-4 rounded border-border accent-purple-500"
+                                />
+                                <span className="text-xs font-medium text-muted-foreground">Multi-theme only (2+ themes)</span>
+                            </label>
+                            <label className="flex items-center gap-2 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={localParadigmFilters.macroWarningOnly}
+                                    onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, macroWarningOnly: e.target.checked })}
+                                    className="w-4 h-4 rounded border-border accent-red-500"
+                                />
+                                <span className="text-xs font-medium text-muted-foreground">⚠ Macro warning only</span>
+                            </label>
+                        </Section>
+
+                        {/* Paradigm Apply/Reset */}
+                        <div className="flex gap-2 pt-2">
+                            <button
+                                onClick={handleParadigmApply}
+                                className="flex-1 px-3 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold rounded shadow transition-colors"
+                            >
+                                Apply Paradigm
+                            </button>
+                            <button
+                                onClick={handleParadigmReset}
+                                className="flex-1 px-2 py-2 bg-muted hover:bg-destructive/10 hover:text-destructive text-muted-foreground text-xs font-medium rounded border border-border transition-colors"
+                            >
+                                Reset
+                            </button>
+                        </div>
+                    </>
+                )}
+
                 {/* 100-Bagger controls (shown only in 100-bagger mode) */}
-                {screenMode !== 'reverse' && (
+                {screenMode !== 'reverse' && screenMode !== 'paradigm' && (
                 <>
                 {/* Size & Price */}
                 <Section title={t('sizePrice')}>
@@ -383,12 +608,14 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 )}
 
                 <div className="text-center text-xs text-muted-foreground mt-8 pb-20">
-                    {screenMode === 'reverse' ? `${totalResults} Reverse candidates` : `${t('showing')} ${totalResults} ${t('assets')}`}
+                    {screenMode === 'reverse' ? `${totalResults} Reverse candidates`
+                        : screenMode === 'paradigm' ? `${totalResults} Paradigm candidates`
+                        : `${t('showing')} ${totalResults} ${t('assets')}`}
                 </div>
             </div>
 
             {/* Sticky Actions Footer — show only for 100-bagger mode */}
-            {screenMode !== 'reverse' && (
+            {screenMode !== 'reverse' && screenMode !== 'paradigm' && (
             <div className="p-4 border-t border-border/50 bg-card/50 backdrop-blur-xl sticky bottom-0 z-10 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]">
                 <div className="flex gap-2">
                     <button

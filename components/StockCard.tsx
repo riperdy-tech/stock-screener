@@ -67,13 +67,6 @@ export function StockCard({ result, onClick, index = 0, lastUpdated, market = 'U
                     </div>
                 </div>
 
-                {lastUpdated && (
-                    <div className="text-[10px] text-muted-foreground/60 font-mono mt-3 pt-2 border-t border-border/10 flex justify-between items-center">
-                        <span className="uppercase tracking-tighter text-[9px]">{candidate.sector}</span>
-                        <span>{lastUpdated}</span>
-                    </div>
-                )}
-
                 {/* Phase 9: Reverse Engine Badges */}
                 {result.reverse && result.reverse.rev_band && result.reverse.rev_band !== 'Excluded' && (
                     <div className="flex items-center gap-1.5 mt-3 pt-2 border-t border-primary/10 flex-wrap">
@@ -109,6 +102,61 @@ export function StockCard({ result, onClick, index = 0, lastUpdated, market = 'U
                         )}
                     </div>
                 )}
+
+                {/* WS1: Paradigm Dimension Badges (theme-tagged stocks only) */}
+                {result.paradigm && result.paradigm.pdm_themes && result.paradigm.pdm_themes.length > 0 && (() => {
+                    const band = result.paradigm.pdm_band;
+                    const bandLabel = band === 'high' ? 'STRONG'
+                        : band === 'mid' ? 'SOLID'
+                        : band === 'watch' ? 'WATCH'
+                        : band === 'skip' ? 'PASS'
+                        : 'NO DATA';
+                    const bandTitle = `Paradigm conviction tier (${band}) - signal ${result.paradigm.pdm_signal ?? 'n/a'}/100. STRONG = all 3 pillars converge; SOLID = mid; WATCH = weak signal worth tracking; PASS = gate or momentum kills it.`;
+                    return (
+                    <div className="flex items-center gap-1.5 mt-2 pt-2 border-t border-purple-500/10 flex-wrap">
+                        <span className={clsx(
+                            "text-[10px] font-black px-1.5 py-0.5 rounded uppercase",
+                            band === 'high' && "bg-emerald-500/20 text-emerald-400",
+                            band === 'mid' && "bg-blue-500/20 text-blue-400",
+                            band === 'watch' && "bg-amber-500/20 text-amber-400",
+                            band === 'skip' && "bg-gray-500/20 text-gray-400",
+                            band === 'no_data' && "bg-muted/20 text-muted-foreground",
+                        )} title={bandTitle}>
+                            Paradigm {bandLabel}
+                        </span>
+                        {result.paradigm.pdm_theme_primary && (
+                            <span className="text-[10px] font-mono bg-purple-500/15 text-purple-300 px-1 rounded" title="Primary secular theme this stock is tagged with">
+                                {result.paradigm.pdm_theme_primary}
+                            </span>
+                        )}
+                        {result.paradigm.pdm_signal != null && (
+                            <span className="text-[10px] font-mono text-primary/80" title="3-factor signal: membership x momentum x economics gate (0-100)">
+                                Sig {result.paradigm.pdm_signal}
+                            </span>
+                        )}
+                        {result.paradigm.pdm_themes.length > 1 && (
+                            <span className="text-[10px] font-mono text-purple-400" title={`Tagged in ${result.paradigm.pdm_themes.length} themes: ${result.paradigm.pdm_themes.join(', ')}`}>
+                                +{result.paradigm.pdm_themes.length - 1} theme{result.paradigm.pdm_themes.length - 1 > 1 ? 's' : ''}
+                            </span>
+                        )}
+                        {result.paradigm.pdm_flags && result.paradigm.pdm_flags.some((f: string) => f.startsWith('macro_')) && (
+                            <span className="text-[10px] font-black text-red-400" title={`Macro warning active: ${result.paradigm.pdm_flags.filter((f: string) => f.startsWith('macro_')).join(', ')}. Investor caution suggested.`}>
+                                ⚠ Macro
+                            </span>
+                        )}
+                        {result.paradigm.pdm_flags && result.paradigm.pdm_flags.includes('accelerating') && (
+                            <span className="text-[10px] font-black text-emerald-400" title="Δ-percentile-rank momentum accelerating: stock's rank is improving fast vs the universe">
+                                ↑ Accel
+                            </span>
+                        )}
+                        {result.paradigm.pdm_flags && result.paradigm.pdm_flags.includes('decelerating') && (
+                            <span className="text-[10px] font-black text-red-400" title="Δ-percentile-rank momentum decelerating: stock's rank is falling fast vs the universe">
+                                ↓ Decel
+                            </span>
+                        )}
+                    </div>
+                    );
+                })()}
             </div>
         </div>
     );

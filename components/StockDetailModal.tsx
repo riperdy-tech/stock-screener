@@ -379,6 +379,68 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                             </div>
                         )}
 
+                        {/* WS1: Paradigm Dimension Breakdown */}
+                        {result.paradigm && (result.paradigm.pdm_themes?.length > 0 || result.paradigm.pdm_signal != null) && (
+                            <div>
+                                <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-purple-400">
+                                    <Activity className="h-5 w-5" /> Paradigm Dimension (Secular Themes)
+                                </h3>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                    <ReverseStat label="Signal" value={result.paradigm.pdm_signal != null ? result.paradigm.pdm_signal : '—'} />
+                                    <ReverseStat label="Band" value={result.paradigm.pdm_band || '—'} band={result.paradigm.pdm_band} />
+                                    <ReverseStat label="Primary Theme" value={result.paradigm.pdm_theme_primary || '—'} />
+                                    <ReverseStat label="Rank" value={result.paradigm.pdm_rank != null ? `#${result.paradigm.pdm_rank}` : '—'} />
+                                </div>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                    <ReverseStat label="Membership" value={result.paradigm.pdm_membership_score != null ? result.paradigm.pdm_membership_score : '—'} />
+                                    <ReverseStat label="Momentum" value={result.paradigm.pdm_momentum_score != null ? result.paradigm.pdm_momentum_score : '—'} />
+                                    <ReverseStat label="Economics Gate" value={result.paradigm.pdm_economics_gate != null ? result.paradigm.pdm_economics_gate : '—'} />
+                                    <ReverseStat label="Confidence" value={result.paradigm.pdm_confidence != null ? result.paradigm.pdm_confidence : '—'} />
+                                </div>
+                                {result.paradigm.pdm_themes && result.paradigm.pdm_themes.length > 0 && (
+                                    <div className="flex flex-wrap gap-1.5 mb-3">
+                                        <span className="text-xs font-bold text-muted-foreground mr-1">Themes:</span>
+                                        {result.paradigm.pdm_themes.map((theme: string) => (
+                                            <span key={theme} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                                                {theme}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                                {result.paradigm.pdm_flags && result.paradigm.pdm_flags.length > 0 && (
+                                    <div className="flex flex-wrap gap-1.5 mb-3">
+                                        <span className="text-xs font-bold text-muted-foreground mr-1">Flags:</span>
+                                        {result.paradigm.pdm_flags.map((flag: string) => {
+                                            const isMacro = flag.startsWith('macro_');
+                                            const isAccel = flag === 'accelerating' || flag === 'regime_shift_up';
+                                            const isDecel = flag === 'decelerating' || flag === 'regime_shift_down';
+                                            return (
+                                                <span key={flag} className={clsx(
+                                                    "text-[10px] font-mono px-1.5 py-0.5 rounded border",
+                                                    isMacro && "bg-red-500/15 text-red-400 border-red-500/40",
+                                                    isAccel && "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+                                                    isDecel && "bg-amber-500/15 text-amber-400 border-amber-500/30",
+                                                    !isMacro && !isAccel && !isDecel && "bg-secondary/50 text-muted-foreground border-border/30",
+                                                )}>
+                                                    {flag}
+                                                </span>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                                {result.paradigm.pdm_pro && (
+                                    <div className="text-xs text-emerald-400/80 mb-1 flex items-start gap-1">
+                                        <span className="font-bold shrink-0">Pro:</span> {result.paradigm.pdm_pro}
+                                    </div>
+                                )}
+                                {result.paradigm.pdm_con && (
+                                    <div className="text-xs text-amber-400/80 flex items-start gap-1">
+                                        <span className="font-bold shrink-0">Con:</span> {result.paradigm.pdm_con}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
                         {/* Deepseek AI Report */}
                         {savedReport && (
                             <div>

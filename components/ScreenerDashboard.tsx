@@ -3,10 +3,10 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
-import { fetchStocks, fetchReverseScores, Market } from "@/lib/data-service";
+import { fetchStocks, fetchReverseScores, fetchParadigmScores, Market } from "@/lib/data-service";
 import { buildPrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
-import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS } from "./FilterSidebar";
+import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS, ParadigmFilterState, DEFAULT_PARADIGM_FILTERS } from "./FilterSidebar";
 import { supabase } from "@/lib/supabase";
 import { LanguageToggle } from "./LanguageToggle";
 import { LogConsole } from "./LogConsole";
@@ -31,8 +31,9 @@ export function ScreenerDashboard() {
     const [selectedMarket, setSelectedMarket] = useState<Market>('US');
     
     // Phase 10: Screen mode (mutually exclusive)
-    const [screenMode, setScreenMode] = useState<'100bagger' | 'reverse'>('100bagger');
+    const [screenMode, setScreenMode] = useState<'100bagger' | 'reverse' | 'paradigm'>('100bagger');
     const [reverseFilters, setReverseFilters] = useState<ReverseFilterState>(DEFAULT_REVERSE_FILTERS);
+    const [paradigmFilters, setParadigmFilters] = useState<ParadigmFilterState>(DEFAULT_PARADIGM_FILTERS);
     
     // Maintain a ref to current rawResults for the setInterval closure
     const rawResultsRef = useRef<ScreeningResult[]>([]);
@@ -219,12 +220,35 @@ export function ScreenerDashboard() {
                     .limit(1);
                 if (error || !data || data.length === 0) return;
                 const latestBatchId = data[0].batch_id;
+                // Skip if user already dismissed this batch
+                try {
+                    const dismissed = JSON.parse(localStorage.getItem('dismissedBatchIds') || '[]');
+                    if (Array.isArray(dismissed) && dismissed.includes(latestBatchId)) return;
+                } catch { /* ignore parse */ }
                 // Don't resume if already tracking this batch
                 setBatchId((prev) => prev || latestBatchId);
             } catch (e) { /* silent */ }
         };
         checkLatestBatch();
     }, []);
+
+    // Auto-hide batch panel 8s after completion
+    useEffect(() => {
+        if (!batchId || !batchProgress) return;
+        const done = batchProgress.completed + batchProgress.failed >= batchProgress.total;
+        if (!done) return;
+        const t = setTimeout(() => {
+            try {
+                const dismissed = JSON.parse(localStorage.getItem('dismissedBatchIds') || '[]');
+                const next = Array.isArray(dismissed) ? Array.from(new Set([...dismissed, batchId])).slice(-50) : [batchId];
+                localStorage.setItem('dismissedBatchIds', JSON.stringify(next));
+            } catch { /* ignore */ }
+            setBatchProgress(null);
+            setBatchId(null);
+            setBatchStatus(null);
+        }, 8000);
+        return () => clearTimeout(t);
+    }, [batchId, batchProgress]);
 
 
     const handleAiReview = async (result: ScreeningResult) => {
@@ -293,6 +317,8 @@ export function ScreenerDashboard() {
 
             // Phase 9: Load reverse screening engine results
             const reverseScores = market === 'US' ? await fetchReverseScores() : {};
+            // WS1: Load paradigm dimension results
+            const paradigmScores = market === 'US' ? await fetchParadigmScores() : {};
 
             // ADAPTER: Convert CSV Flat Object to ScreeningResult
             const adaptedData = (rawData as any[]).map(item => {
@@ -336,6 +362,7 @@ export function ScreenerDashboard() {
                     description: item.description,
                     industry: item.industry,
                     reverse: reverseScores[sym] || undefined, // Phase 9: attach reverse data
+                    paradigm: paradigmScores[sym] || undefined, // WS1: attach paradigm data
                 };
             });
 
@@ -350,6 +377,60 @@ export function ScreenerDashboard() {
 
     // Filtering Logic
     const filteredResults = useMemo(() => {
+        // WS1-T6+: Paradigm mode — exclusive paradigm filters
+        if (screenMode === 'paradigm') {
+            return rawResults.filter(r => {
+                const p = r.paradigm;
+                // Exclude stocks without paradigm or with no theme tagging
+                if (!p || !p.pdm_themes || p.pdm_themes.length === 0) return false;
+
+                // Band filter
+                if (paradigmFilters.bands.length > 0 && p.pdm_band) {
+                    if (!paradigmFilters.bands.includes(p.pdm_band)) return false;
+                }
+
+                // Theme filter (any-match: stock passes if it shares any selected theme)
+                if (paradigmFilters.themes.length > 0) {
+                    const overlap = p.pdm_themes.some((t: string) => paradigmFilters.themes.includes(t));
+                    if (!overlap) return false;
+                }
+
+                // Industry substring filter
+                if (paradigmFilters.industryQuery.trim()) {
+                    const q = paradigmFilters.industryQuery.trim().toLowerCase();
+                    const ind = (r.candidate.industry || '').toLowerCase();
+                    if (!ind.includes(q)) return false;
+                }
+
+                // Score thresholds
+                if (paradigmFilters.minSignal > 0 && (p.pdm_signal == null || p.pdm_signal < paradigmFilters.minSignal)) return false;
+                if (paradigmFilters.minMembership > 0 && (p.pdm_membership_score == null || p.pdm_membership_score < paradigmFilters.minMembership)) return false;
+                if (paradigmFilters.minMomentum > 0 && (p.pdm_momentum_score == null || p.pdm_momentum_score < paradigmFilters.minMomentum)) return false;
+                if (paradigmFilters.minGate > 0 && (p.pdm_economics_gate == null || p.pdm_economics_gate < paradigmFilters.minGate)) return false;
+
+                // Flag filters
+                const flags = p.pdm_flags || [];
+                if (paradigmFilters.acceleratingOnly && !flags.includes('accelerating')) return false;
+                if (paradigmFilters.bridgedOnly && !flags.includes('gate_bridged_forward')) return false;
+                if (paradigmFilters.multiThemeOnly && p.pdm_themes.length < 2) return false;
+                if (paradigmFilters.macroWarningOnly && !flags.some((f: string) => f.startsWith('macro_'))) return false;
+
+                // Search match (symbol/name)
+                const c = r.candidate;
+                const searchMatch = !search ||
+                    c.symbol.toLowerCase().includes(search.toLowerCase()) ||
+                    c.name.toLowerCase().includes(search.toLowerCase());
+                if (!searchMatch) return false;
+
+                return true;
+            }).sort((a, b) => {
+                // Sort by pdm_signal descending (best opportunities first)
+                const sigA = a.paradigm?.pdm_signal ?? 0;
+                const sigB = b.paradigm?.pdm_signal ?? 0;
+                return sigB - sigA;
+            });
+        }
+
         // Phase 10: Reverse Engine mode — exclusive reverse filters
         if (screenMode === 'reverse') {
             return rawResults.filter(r => {
@@ -440,7 +521,7 @@ export function ScreenerDashboard() {
 
             return true;
         });
-    }, [rawResults, search, filters, selectedMarket, screenMode, reverseFilters]);
+    }, [rawResults, search, filters, selectedMarket, screenMode, reverseFilters, paradigmFilters]);
 
 
     // Pagination Logic
@@ -489,6 +570,8 @@ export function ScreenerDashboard() {
                 screenMode={screenMode}
                 reverseFilters={reverseFilters}
                 setReverseFilters={setReverseFilters}
+                paradigmFilters={paradigmFilters}
+                setParadigmFilters={setParadigmFilters}
                 onScreenModeChange={(mode) => { setScreenMode(mode); setSelectedTickers(new Set()); }}
                 batchN={batchN}
                 onBatchNChange={setBatchN}
@@ -907,8 +990,17 @@ export function ScreenerDashboard() {
                             <div className="flex flex-col flex-1">
                                 <span className="font-bold text-sm text-foreground">Batch Deep-Dive</span>
                                 <span className="text-xs text-muted-foreground mt-1">
-                                    {batchProgress 
-                                        ? `${batchProgress.completed} of ${batchProgress.total} complete${batchProgress.failed > 0 ? ` (${batchProgress.failed} failed)` : ''}`
+                                    {batchProgress
+                                        ? (() => {
+                                            const ok = batchProgress.completed;
+                                            const fail = batchProgress.failed;
+                                            const done = ok + fail;
+                                            const total = batchProgress.total;
+                                            if (done < total) return `${done} of ${total} done${fail > 0 ? ` (${fail} failed so far)` : ''}`;
+                                            if (fail === 0) return `All ${total} succeeded`;
+                                            if (ok === 0) return `All ${total} failed`;
+                                            return `${ok} succeeded, ${fail} failed (${total} total)`;
+                                          })()
                                         : `Waiting for workers... (${batchStatus || ''})`}
                                 </span>
                                 {batchProgress && (
@@ -918,11 +1010,22 @@ export function ScreenerDashboard() {
                                 </div>
                                 )}
                                 {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                    <span className="text-[10px] text-emerald-400 mt-1.5 font-bold">All done! Open any stock card to view its report.</span>
+                                    <span className="text-[10px] text-emerald-400 mt-1.5 font-bold">
+                                        {batchProgress.completed > 0 ? 'Open any stock card to view its report.' : 'No reports generated.'}{' '}Auto-closing in 8s.
+                                    </span>
                                 )}
                             </div>
                         </div>
-                        <button onClick={() => { setBatchProgress(null); setBatchId(null); setBatchStatus(null); }} className="text-muted-foreground hover:text-foreground shrink-0">
+                        <button onClick={() => {
+                            try {
+                                const dismissed = JSON.parse(localStorage.getItem('dismissedBatchIds') || '[]');
+                                const next = Array.isArray(dismissed) ? Array.from(new Set([...dismissed, batchId])).slice(-50) : [batchId];
+                                localStorage.setItem('dismissedBatchIds', JSON.stringify(next));
+                            } catch { /* ignore */ }
+                            setBatchProgress(null);
+                            setBatchId(null);
+                            setBatchStatus(null);
+                        }} className="text-muted-foreground hover:text-foreground shrink-0" title="Dismiss permanently">
                             <X className="h-5 w-5" />
                         </button>
                     </div>
@@ -962,6 +1065,22 @@ export function ScreenerDashboard() {
                             </button>
                         </div>
                         <div className="space-y-4 text-sm text-muted-foreground">
+                            {/* SCORECARD SYMBOL LEGEND (top) */}
+                            <div className="border border-purple-500/30 bg-purple-500/5 rounded-lg p-3">
+                                <h3 className="font-bold text-purple-300 mb-2 text-base">Scorecard Symbol Legend</h3>
+                                <p className="mb-2 text-xs">Each stock card may show badges from two systems: <b className="text-emerald-400">Reverse Engine</b> (green row) and <b className="text-purple-400">Paradigm</b> (purple row).</p>
+                                <div className="grid grid-cols-1 gap-1.5 text-xs">
+                                    <p><span className="font-bold text-emerald-400">[High] / [Solid] / [Watchlist] / [Monitor]</span> — Reverse Engine composite band (quality + value + survivability).</p>
+                                    <p><span className="font-bold text-emerald-400">[A]…[I]</span> — Archetype letter. <b>★</b> = nominated for deep-dive. <b>1.5x</b> = CAGR/|Drawdown| efficiency.</p>
+                                    <p className="pt-1 border-t border-purple-500/20"><span className="font-bold text-purple-300">[Paradigm STRONG]</span> = all 3 pillars converge (membership x momentum x economics gate, signal ≥ 30).</p>
+                                    <p><span className="font-bold text-blue-400">[Paradigm SOLID]</span> = mid-conviction (signal 15–29). <span className="font-bold text-amber-400">[Paradigm WATCH]</span> = weak (5–14, track but don't buy). <span className="font-bold text-gray-400">[Paradigm PASS]</span> = gate or momentum kills it (&lt;5).</p>
+                                    <p><span className="font-mono bg-purple-500/15 text-purple-300 px-1 rounded">theme_name</span> — primary secular theme this stock is tagged with.</p>
+                                    <p><span className="font-mono text-primary/80">Sig 36</span> — three-factor signal score 0–100. <span className="font-mono text-purple-400">+1 theme</span> — tagged in additional themes (hover to see all).</p>
+                                    <p><span className="font-black text-emerald-400">↑ Accel</span> — Δ-percentile-rank momentum rising fast vs universe. <span className="font-black text-red-400">↓ Decel</span> — falling fast.</p>
+                                    <p><span className="font-black text-red-400">⚠ Macro</span> — macro overlay flag active (e.g., 10Y Treasury &gt; 5%, yield curve inverted, credit stress). Operator caution suggested.</p>
+                                </div>
+                            </div>
+
                             <div>
                                 <h3 className="font-semibold text-foreground mb-1">Stage 0–1 — Exclusion & Elimination</h3>
                                 <p>Filters out ETFs/funds and stocks below $300M market cap. Hard gates: Altman Z-score &lt; 1.8 (bankruptcy risk), net debt/EBITDA &gt; 4.0×, data quality &lt; 2.</p>
@@ -997,6 +1116,37 @@ export function ScreenerDashboard() {
                             <div>
                                 <h3 className="font-semibold text-foreground mb-1">Stage 9 — Diversified Nomination (Top 25)</h3>
                                 <p>Walks the ranked survivor list, capping single archetype ≤40%, single sector ≤35%, single country ≤60%. Result: a diversified top 25 across archetypes, sectors, and countries.</p>
+                            </div>
+
+                            {/* PARADIGM DIMENSION — separate scoring lane */}
+                            <div className="border-t border-purple-500/30 pt-4 mt-4">
+                                <h3 className="font-bold text-purple-300 mb-1 text-base">Paradigm Dimension — Secular Themes</h3>
+                                <p className="mb-2">A <b>separate, parallel scoring lane</b> from the Reverse Engine above. The Reverse Engine asks "is this a quality, valued, survivable business?" The Paradigm Dimension asks "is this stock a real participant in a multi-year secular shift (AI compute, GLP-1 drugs, energy transition…) with both market validation AND real economics?"</p>
+                                <p className="mb-2 italic">Core formula: <b className="text-purple-300">Paradigm Signal = Theme Membership × Theme Momentum × Economics Gate</b>. All three pillars required; weak link kills the signal. Anti-Nikola by design — narrative-only stocks with no revenue are zeroed out.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Pillar 1 — Theme Membership (Composite ≥ 2 of 3 methods)</h3>
+                                <p>For each of 9 themes (ai_compute, physical_ai, glp1_metabolic, cloud_software, energy_transition, cybersecurity, quantum_computing, space_economy, nuclear_renaissance) three independent methods vote: <b>keyword match</b> on name+description, <b>GICS industry whitelist</b> (Yahoo taxonomy), and <b>operator-curated seed ticker list</b> with industry-adjacency propagation. Stock tagged if ≥2 methods agree. Multi-theme allowed (e.g., TSLA → physical_ai + energy_transition).</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Pillar 2 — Theme Momentum (Universe-relative, with acceleration)</h3>
+                                <p>From 24 monthly closes, computes percentile-rank composite over 4 lookback windows (1m/3m/6m/12m weighted 0.1/0.2/0.3/0.4) blended 60/40 with a Δ-percentile-rank acceleration component. Symmetric — catches both fast-up (↑ Accel) and fast-down (↓ Decel) regime shifts. Triggers regime_shift_up/down via 10-month MA crossover.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Pillar 3 — Economics Gate (The Nikola Filter)</h3>
+                                <p>Multiplicative: <code>(max(0, rev_quality − 25) / 75) × (max(0, rev_survivability − 50) / 50) × 100</code>. Either input below its floor → gate = 0 → signal = 0. Reads the frozen rev_* scores; no double-count. <b>Forward-EPS bridge</b> can lift gate up to 35 when survivability ≥ 25 AND forward EPS trajectory is positive — rescues scale-phase names (AMZN-1999 archetype). <b>Analyst-coverage uplift</b> adds up to +15 from yfinance recommendations + DeepSeek-narrated consensus (strict no-fabrication: confidence &lt; 0.6 collapses to null).</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Macro Overlay (T9)</h3>
+                                <p>Pulls 5 FRED series each run (DGS10, T10Y2Y, BAA10Y, NFCI, BAMLH0A0HYM2). Flags fire when thresholds breach: 10Y &gt; 5%, curve inverted, credit stress, financial conditions tightening. Currently <b>flags-only</b> (no automatic signal demotion); appended to every tagged stock's pdm_flags as visible warning. Per brief: macro is overlay, not load-bearing on paradigm scoring until macro engine matures.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Conviction Bands</h3>
+                                <p><b className="text-emerald-400">STRONG</b> (signal ≥ 30) — all 3 pillars align. <b className="text-blue-400">SOLID</b> (15–29) — mid-conviction. <b className="text-amber-400">WATCH</b> (5–14) — weak; track but don't buy. <b className="text-gray-400">PASS</b> (&lt;5) — gate or momentum killed it. <b>NO DATA</b> — at least one pillar missing inputs.</p>
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-foreground mb-1">Honest Limitations (per the brief)</h3>
+                                <p><b>This is not failsafe.</b> The system buys breakouts not bottoms (requires market validation), the gate is a snapshot of current economics (lags emerging winners by ~1 quarter), and survivor-bias is structural (seed lists picked because we already know the winners). True validation = forward-logging signals now and observing outcomes over 6/12/24 months. Use as a discipline tool, not a predictive oracle.</p>
                             </div>
                         </div>
                     </div>
