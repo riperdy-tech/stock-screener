@@ -793,8 +793,8 @@ def main():
         if not ticker:
             continue
 
-        # Check if this stock has a reverse object
-        has_reverse = "reverse" in stock and stock["reverse"] is not None
+        # Check if this stock has a reverse object (embedded or in sidecar)
+        has_reverse = ("reverse" in stock and stock["reverse"] is not None) or (ticker in reverse_scores)
         if has_reverse:
             stocks_with_reverse += 1
 
@@ -902,7 +902,13 @@ def main():
                 flags.append("override")
 
         # ── Economics gate (WS1-T4) ──────────────────────────────────────
-        reverse_obj = stock.get("reverse") if "reverse" in stock else None
+        # Source priority: embedded stock.reverse (when present) -> reverse_scores.json
+        # (the canonical reverse-engine output). Remote scanner runs sometimes
+        # write stocks.json WITHOUT embedded reverse, so the sidecar is the
+        # reliable source.
+        reverse_obj = stock.get("reverse")
+        if reverse_obj is None and ticker in reverse_scores:
+            reverse_obj = reverse_scores[ticker]
         raw_gate, gate_flag = compute_economics_gate(reverse_obj, config)
         if gate_flag is not None:
             flags.append(gate_flag)
