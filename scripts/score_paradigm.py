@@ -66,6 +66,7 @@ THEME_METRICS_JSON = DATA_DIR / "paradigm_theme_metrics.json"
 EPS_TRAJECTORY_JSON = DATA_DIR / "eps_trajectory.json"
 ANALYST_COVERAGE_JSON = DATA_DIR / "analyst_coverage.json"
 MACRO_STATE_JSON = DATA_DIR / "macro_state.json"
+THEME_LLM_JSON = DATA_DIR / "theme_assignments_llm.json"
 SIGNAL_LOG_JSONL = DATA_DIR / "paradigm_signal_log.jsonl"   # WS1-T7: append-only forward log
 RUN_LOG_JSONL = DATA_DIR / "paradigm_run_log.jsonl"          # WS1-T7: append-only per-run summary
 
@@ -763,6 +764,11 @@ def main():
         macro_state = load_json(MACRO_STATE_JSON)
         macro_flags_global = macro_state.get("triggered_flags", [])
 
+    # ── Optional: load LLM theme assignments (fallback classifier) ───────
+    llm_theme_assignments = {}
+    if THEME_LLM_JSON.exists():
+        llm_theme_assignments = load_json(THEME_LLM_JSON)
+
     # ── Config blocks for T8a/T8b/T8c/T9 (graceful defaults if absent) ───
     momentum_config = config.get("momentum", {})
     forward_bridge_config = config.get("forward_bridge", {})
@@ -871,7 +877,10 @@ def main():
             flags = result["pdm_flags"]
 
             if ticker in seed_tickers:
-                vote_seed = 1.0
+                # Operator-curated seeds = explicit affirmation; vote 2.0 means
+                # seed alone clears default threshold even when GICS + keyword
+                # both fail (mega-caps with non-matching industry strings).
+                vote_seed = 2.0
                 flags.append("seed")
             else:
                 # Adjacency rule: check if stock's industry matches industry of >=2 seed tickers
@@ -892,6 +901,26 @@ def main():
                 theme_tag_counts[tid] = theme_tag_counts.get(tid, 0) + 1
                 if tag_threshold < default_threshold and "hot_theme_expanded" not in flags:
                     flags.append("hot_theme_expanded")
+
+        # ── LLM fallback: apply DeepSeek-classified themes when rule-based ──
+        # composite failed to tag. LLM only fires when pdm_themes is empty
+        # (i.e., no theme cleared the threshold via rules). Adds llm_tagged flag.
+        if not result["pdm_themes"] and ticker in llm_theme_assignments:
+            llm_entry = llm_theme_assignments[ticker]
+            llm_themes = llm_entry.get("themes") or []
+            llm_conf = llm_entry.get("confidence") or 0.0
+            valid_theme_ids = {t["id"] for t in themes}
+            llm_themes = [t for t in llm_themes if t in valid_theme_ids]
+            if llm_themes and llm_conf >= 0.7:
+                for llm_tid in llm_themes:
+                    if llm_tid not in result["pdm_themes"]:
+                        result["pdm_themes"].append(llm_tid)
+                        theme_tag_counts[llm_tid] = theme_tag_counts.get(llm_tid, 0) + 1
+                    # Synthetic composite vote for ranking (treat LLM as 1.5)
+                    if llm_tid not in theme_scores:
+                        theme_scores[llm_tid] = 1.5
+                if "llm_tagged" not in flags:
+                    flags.append("llm_tagged")
 
         # ── Sort pdm_themes by composite descending, then config order ───
         theme_order = {t["id"]: idx for idx, t in enumerate(themes)}
@@ -1151,14 +1180,18 @@ def main():
     print("  WS1-T8/T9 flag counts:")
     for fn in ["accelerating", "decelerating", "regime_shift_up", "regime_shift_down",
                "gate_bridged_forward", "analyst_uplifted",
+               "hot_theme_expanded", "llm_tagged",
                "macro_yield_warning", "macro_curve_inverted", "macro_ig_credit_stress",
                "macro_conditions_tight", "macro_hy_credit_stress"]:
         print(f"    {fn:25s} {flag_counts.get(fn, 0)}")
     eps_loaded = len(eps_trajectory)
     analyst_loaded = len(analyst_coverage)
+    llm_loaded = len(llm_theme_assignments)
     macro_fetched_at = macro_state.get("fetched_at", "(not loaded)") if macro_state else "(not loaded)"
     print(f"  Sidecars: eps_trajectory={eps_loaded} tickers, "
-          f"analyst_coverage={analyst_loaded} tickers, macro_state={macro_fetched_at}")
+          f"analyst_coverage={analyst_loaded} tickers, "
+          f"theme_assignments_llm={llm_loaded} tickers, "
+          f"macro_state={macro_fetched_at}")
     if macro_flags_global:
         print(f"  Macro signals active: {macro_flags_global}")
     print()
