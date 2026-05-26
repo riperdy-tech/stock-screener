@@ -52,7 +52,7 @@ ANALYST_COVERAGE_JSON = DATA_DIR / "analyst_coverage.json"
 DEFAULT_MAX_CALLS = 100
 RATE_LIMIT_SECONDS = 0.5
 CONFIDENCE_THRESHOLD = 0.6
-ESTIMATED_COST_PER_CALL = 0.0003  # rough estimate for deepseek-chat
+ESTIMATED_COST_PER_CALL = 0.0003  # rough estimate for deepseek-v4-flash (replace if pro)
 
 # Suspicious attribution phrases to strip from narrative output
 ATTRIBUTION_PATTERNS = [
@@ -368,7 +368,7 @@ def main():
             print("ERROR: DEEPSEEK_API_KEY not found in environment or .env file.")
             print("Set DEEPSEEK_API_KEY in .env at the workspace root, or use --skip-narrative.")
             sys.exit(1)
-        model = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
+        model = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash")
     else:
         api_key = None
         model = None

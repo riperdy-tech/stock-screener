@@ -44,7 +44,7 @@ SECTORS_ENRICHED_JSON = DATA_DIR / "sectors_enriched.json"
 DEFAULT_MAX_CALLS = 100
 RATE_LIMIT_SECONDS = 0.5
 CONFIDENCE_THRESHOLD = 0.6
-ESTIMATED_COST_PER_CALL = 0.0003  # rough estimate for deepseek-chat
+ESTIMATED_COST_PER_CALL = 0.0003  # rough estimate for deepseek-v4-flash (replace if pro)
 
 
 def load_json(path):
@@ -207,7 +207,7 @@ def main():
         print("Set DEEPSEEK_API_KEY in .env at the workspace root.")
         sys.exit(1)
 
-    model = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
+    model = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash")
 
     # ── Load stocks ──────────────────────────────────────────────────────
     stocks = load_json(STOCKS_JSON)
