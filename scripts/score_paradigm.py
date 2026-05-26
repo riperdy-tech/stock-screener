@@ -62,6 +62,7 @@ OVERRIDES_JSON = DATA_DIR / "paradigm_overrides.json"
 SECTORS_ENRICHED_JSON = DATA_DIR / "sectors_enriched.json"
 PRICE_HISTORY_JSON = DATA_DIR / "price_history.json"
 THEME_METRICS_JSON = DATA_DIR / "paradigm_theme_metrics.json"
+# Same file is also read at start for dynamic-threshold feedback (prior run's metrics).
 EPS_TRAJECTORY_JSON = DATA_DIR / "eps_trajectory.json"
 ANALYST_COVERAGE_JSON = DATA_DIR / "analyst_coverage.json"
 MACRO_STATE_JSON = DATA_DIR / "macro_state.json"
@@ -768,6 +769,30 @@ def main():
     analyst_bridge_config = config.get("analyst_bridge", {})
     macro_overlay_config = config.get("macro_overlay", {})
 
+    # ── Dynamic per-theme composite threshold (T8a-dyn) ──────────────────
+    # Read prior run's theme metrics (if any) -> drop threshold to
+    # hot_composite_threshold for themes that were hot last run.
+    default_threshold = momentum_config.get("default_composite_threshold", 2.0)
+    hot_threshold = momentum_config.get("hot_composite_threshold", 1.5)
+    hot_mom_floor = momentum_config.get("hot_median_mom", 70)
+    hot_breadth_floor = momentum_config.get("hot_breadth_pct", 70)
+    theme_thresholds = {t["id"]: default_threshold for t in themes}
+    prior_metrics = {}
+    if THEME_METRICS_JSON.exists():
+        try:
+            prior_metrics = load_json(THEME_METRICS_JSON).get("themes", {})
+        except Exception:
+            prior_metrics = {}
+    hot_themes = []
+    for t in themes:
+        tid = t["id"]
+        pm = prior_metrics.get(tid) or {}
+        med = pm.get("median_momentum")
+        br = pm.get("breadth_pct")
+        if med is not None and br is not None and med >= hot_mom_floor and br >= hot_breadth_floor:
+            theme_thresholds[tid] = hot_threshold
+            hot_themes.append(tid)
+
     # ── Build stock lookup by symbol ─────────────────────────────────────
     stocks_by_symbol = {}
     for stock in stocks:
@@ -857,13 +882,16 @@ def main():
                         vote_seed = 0.5
                         flags.append("seed_adjacent")
 
-            # Composite
+            # Composite (per-theme threshold from dynamic feedback loop)
             composite_vote = vote_keyword + vote_gics + vote_seed
             theme_scores[tid] = composite_vote
 
-            if composite_vote >= 2.0:
+            tag_threshold = theme_thresholds.get(tid, default_threshold)
+            if composite_vote >= tag_threshold:
                 result["pdm_themes"].append(tid)
                 theme_tag_counts[tid] = theme_tag_counts.get(tid, 0) + 1
+                if tag_threshold < default_threshold and "hot_theme_expanded" not in flags:
+                    flags.append("hot_theme_expanded")
 
         # ── Sort pdm_themes by composite descending, then config order ───
         theme_order = {t["id"]: idx for idx, t in enumerate(themes)}
@@ -1114,6 +1142,12 @@ def main():
     for stock in stocks:
         for f in stock.get("paradigm", {}).get("pdm_flags") or []:
             flag_counts[f] += 1
+    if hot_themes:
+        print(f"  Dynamic threshold lowered ({hot_threshold}) for HOT themes: {hot_themes}")
+        print(f"  All other themes use default threshold: {default_threshold}")
+    else:
+        print(f"  Composite threshold: {default_threshold} for all themes (no hot themes detected from prior run)")
+    print()
     print("  WS1-T8/T9 flag counts:")
     for fn in ["accelerating", "decelerating", "regime_shift_up", "regime_shift_down",
                "gate_bridged_forward", "analyst_uplifted",

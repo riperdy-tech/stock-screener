@@ -26,7 +26,20 @@
           "SMCI",
           "ANET",
           "DELL",
-          "CRDO"
+          "CRDO",
+          "ACMR",
+          "ONTO",
+          "COHU",
+          "AEHR",
+          "ICHR",
+          "UCTT",
+          "AMBA",
+          "ALAB",
+          "SITM",
+          "NVMI",
+          "FORM",
+          "KLIC",
+          "AOSL"
         ]
       },
       "keywords": [
@@ -530,7 +543,11 @@
     "accel_weight": 0.4,
     "accelerating_threshold": 70,
     "decelerating_threshold": 30,
-    "_note": "WS1-T8a. pdm_momentum_score = static_weight * static_composite + accel_weight * delta_rank_acceleration. Acceleration is the cross-sectional re-rank of (rank_1m - rank_12m); symmetric. Flags accelerating (>=70) / decelerating (<=30) are informational. regime_shift_up/down booleans come from 10-month MA crossover with rising/falling trend confirmation."
+    "default_composite_threshold": 2.0,
+    "hot_composite_threshold": 1.5,
+    "hot_median_mom": 70,
+    "hot_breadth_pct": 70,
+    "_note": "WS1-T8a/T8a-dyn. Momentum = static_weight * static_composite + accel_weight * delta_rank_acceleration. Acceleration = cross-sectional re-rank of (rank_1m - rank_12m); symmetric. Flags accelerating (>=70) / decelerating (<=30). regime_shift_up/down booleans come from 10-month MA crossover with rising/falling trend confirmation. DYNAMIC THRESHOLD: theme tagging requires composite vote >= default_composite_threshold (2.0). If PRIOR run's paradigm_theme_metrics.json shows theme has median_momentum >= hot_median_mom AND breadth_pct >= hot_breadth_pct, threshold drops to hot_composite_threshold (1.5). Lets the system widen coverage on themes the market has already validated, while keeping precision on cold themes. Self-correcting feedback loop; first run uses default for all themes."
   },
   "forward_bridge": {
     "survivability_precondition": 25,
