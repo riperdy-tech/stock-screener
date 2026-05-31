@@ -147,13 +147,13 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                             <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base text-primary/80 font-medium mt-1">
                                 <span>{candidate.sector}</span>
-                                <span className="text-muted-foreground">•</span>
+                                <span className="text-muted-foreground">/</span>
                                 <span>{result.industry || t('industry')}</span>
                                 {candidate.lastUpdated && (
                                     <>
-                                        <span className="text-muted-foreground">•</span>
-                                        <span className="text-muted-foreground font-mono text-xs" title="Last Updated">
-                                            ↻ {candidate.lastUpdated}
+                                        <span className="text-muted-foreground">/</span>
+                                        <span className="text-muted-foreground font-mono text-sm" title="Last Updated">
+                                            Updated {candidate.lastUpdated}
                                         </span>
                                     </>
                                 )}
@@ -167,9 +167,9 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     {result.description || t('noDesc')}
                                 </p>
                                 {(result.description || "").length > 120 && (
-                                    <button 
+                                    <button
                                         onClick={() => setIsExpanded(!isExpanded)}
-                                        className="text-xs font-bold text-primary hover:text-primary/80 mt-1 uppercase tracking-wider"
+                                        className="text-sm font-bold text-primary hover:text-primary/80 mt-1 uppercase tracking-wider"
                                     >
                                         {isExpanded ? "Show Less" : "Read More"}
                                     </button>
@@ -188,7 +188,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     title={t('openTV')}
                                 >
                                     <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="w-4 h-4 rounded-sm" />
-                                    <span className="text-xs font-bold hidden sm:inline">TradingView</span>
+                                    <span className="text-sm font-bold hidden sm:inline">TradingView</span>
                                 </a>
                                 <button
                                     onClick={() => onAskGemini && onAskGemini(candidate.symbol)}
@@ -196,10 +196,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     title="Ask AI about this stock"
                                 >
                                     <Sparkles className="w-4 h-4" />
-                                    <span className="text-xs font-bold hidden sm:inline">Generate AI Prompt</span>
+                                    <span className="text-sm font-bold hidden sm:inline">Generate AI Prompt</span>
                                 </button>
                             </div>
-                            <div className={clsx("px-3 py-1 rounded-full text-xs font-bold tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
+                            <div className={clsx("px-3 py-1.5 rounded-full text-sm font-bold tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
                                 {result.passed ? "GEM CANDIDATE" : "REVIEWING"}
                             </div>
                         </div>
@@ -319,12 +319,12 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 <DetailRow 
                                     label={t('mcap')} 
                                     value={market === 'Korea' 
-                                        ? `${(candidate.marketCap / 1_000_000_000).toFixed(1)}B ₩`
+                                        ? `${(candidate.marketCap / 1_000_000_000).toFixed(1)}B KRW`
                                         : market === 'Taiwan'
                                                 ? formatTaiwanNTD(candidate.marketCap, 2)
                                                 : `$${(candidate.marketCap / 1e9).toFixed(1)}B`
                                     } 
-                                    target={market === 'Korea' ? '< 2.8조원' : market === 'Taiwan' ? '< 640億元' : '< $2B'} 
+                                    target={market === 'Korea' ? '< 2.8T KRW' : market === 'Taiwan' ? '< 640B TWD' : '< $2B'}
                                     pass={market === 'Korea' ? (candidate.marketCap / 1_000_000_000) <= 2800 : market === 'Taiwan' ? (candidate.marketCap / 100_000_000) <= 640 : candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} 
                                     warning={market === 'Korea' ? (candidate.marketCap / 1_000_000_000) > 2800 : market === 'Taiwan' ? (candidate.marketCap / 100_000_000) > 640 : candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} 
                                 />
@@ -349,10 +349,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 {showReports ? "CLOSE ANALYSIS" : "VIEW REPORTS"}
                             </button>
                             <div className="flex flex-col items-center sm:items-start">
-                                <span className="text-xs text-muted-foreground font-bold uppercase tracking-widest">
+                                <span className="text-sm text-muted-foreground font-bold uppercase tracking-widest">
                                     Analysis History
                                 </span>
-                                <span className="text-xs text-primary font-mono font-bold">
+                                <span className="text-sm text-primary font-mono font-bold">
                                     {reportHistory.length} Cloud Records Found
                                 </span>
                             </div>
@@ -361,12 +361,12 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {showReports && (
                             <div className="bg-secondary/20 rounded-xl border border-border p-4 animate-in slide-in-from-top-2 duration-300">
-                                <h3 className="text-sm font-bold uppercase tracking-wider mb-3 text-muted-foreground flex items-center gap-2">
+                                <h3 className="text-base font-bold uppercase tracking-wider mb-3 text-muted-foreground flex items-center gap-2">
                                     <Sparkles className="h-4 w-4" /> AI Research History
                                 </h3>
                                 <div className="space-y-3">
                                     {reportHistory.length === 0 ? (
-                                        <div className="text-xs text-muted-foreground p-4 text-center border border-dashed border-border rounded-lg">
+                                        <div className="text-sm text-muted-foreground p-4 text-center border border-dashed border-border rounded-lg">
                                             No AI reports found for this stock yet.
                                         </div>
                                     ) : reportHistory.map((report, idx) => (
@@ -376,7 +376,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         >
                                             <div className="flex flex-col gap-0.5">
                                                 <span className="text-sm font-bold">Deepseek V4-Pro Analysis</span>
-                                                <span className="text-xs text-muted-foreground font-mono">
+                                                <span className="text-sm text-muted-foreground font-mono">
                                                     {new Date(report.created_at).toLocaleString()} | Cost: ${report.cost || '0.00'}
                                                 </span>
                                             </div>
@@ -385,7 +385,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                                     setSavedReport({...report, timestamp: report.created_at});
                                                     setShowReports(false);
                                                 }}
-                                                className="text-xs font-bold text-primary group-hover:underline px-3 py-1 bg-primary/10 rounded"
+                                                className="text-sm font-bold text-primary group-hover:underline px-3 py-1.5 bg-primary/10 rounded"
                                             >
                                                 OPEN REPORT
                                             </button>
@@ -402,22 +402,22 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     <Activity className="h-5 w-5" /> Paradigm Dimension (Secular Themes)
                                 </h3>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                                    <ReverseStat label="Signal" value={result.paradigm.pdm_signal != null ? result.paradigm.pdm_signal : '—'} />
-                                    <ReverseStat label="Band" value={result.paradigm.pdm_band || '—'} band={result.paradigm.pdm_band} />
-                                    <ReverseStat label="Primary Theme" value={result.paradigm.pdm_theme_primary || '—'} />
-                                    <ReverseStat label="Rank" value={result.paradigm.pdm_rank != null ? `#${result.paradigm.pdm_rank}` : '—'} />
+                                    <ReverseStat label="Signal" value={result.paradigm.pdm_signal != null ? result.paradigm.pdm_signal : 'n/a'} />
+                                    <ReverseStat label="Band" value={result.paradigm.pdm_band || 'n/a'} band={result.paradigm.pdm_band} />
+                                    <ReverseStat label="Primary Theme" value={result.paradigm.pdm_theme_primary || 'n/a'} />
+                                    <ReverseStat label="Rank" value={result.paradigm.pdm_rank != null ? `#${result.paradigm.pdm_rank}` : 'n/a'} />
                                 </div>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                                    <ReverseStat label="Membership" value={result.paradigm.pdm_membership_score != null ? result.paradigm.pdm_membership_score : '—'} />
-                                    <ReverseStat label="Momentum" value={result.paradigm.pdm_momentum_score != null ? result.paradigm.pdm_momentum_score : '—'} />
-                                    <ReverseStat label="Economics Gate" value={result.paradigm.pdm_economics_gate != null ? result.paradigm.pdm_economics_gate : '—'} />
-                                    <ReverseStat label="Confidence" value={result.paradigm.pdm_confidence != null ? result.paradigm.pdm_confidence : '—'} />
+                                    <ReverseStat label="Membership" value={result.paradigm.pdm_membership_score != null ? result.paradigm.pdm_membership_score : 'n/a'} />
+                                    <ReverseStat label="Momentum" value={result.paradigm.pdm_momentum_score != null ? result.paradigm.pdm_momentum_score : 'n/a'} />
+                                    <ReverseStat label="Economics Gate" value={result.paradigm.pdm_economics_gate != null ? result.paradigm.pdm_economics_gate : 'n/a'} />
+                                    <ReverseStat label="Confidence" value={result.paradigm.pdm_confidence != null ? result.paradigm.pdm_confidence : 'n/a'} />
                                 </div>
                                 {result.paradigm.pdm_themes && result.paradigm.pdm_themes.length > 0 && (
                                     <div className="flex flex-wrap gap-1.5 mb-3">
-                                        <span className="text-xs font-bold text-muted-foreground mr-1">Themes:</span>
+                                        <span className="text-sm font-bold text-muted-foreground mr-1">Themes:</span>
                                         {result.paradigm.pdm_themes.map((theme: string) => (
-                                            <span key={theme} className="text-xs font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                                            <span key={theme} className="text-sm font-mono px-2.5 py-1 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
                                                 {theme}
                                             </span>
                                         ))}
@@ -425,14 +425,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 )}
                                 {result.paradigm.pdm_flags && result.paradigm.pdm_flags.length > 0 && (
                                     <div className="flex flex-wrap gap-1.5 mb-3">
-                                        <span className="text-xs font-bold text-muted-foreground mr-1">Flags:</span>
+                                        <span className="text-sm font-bold text-muted-foreground mr-1">Flags:</span>
                                         {result.paradigm.pdm_flags.map((flag: string) => {
                                             const isMacro = flag.startsWith('macro_');
                                             const isAccel = flag === 'accelerating' || flag === 'regime_shift_up';
                                             const isDecel = flag === 'decelerating' || flag === 'regime_shift_down';
                                             return (
                                                 <span key={flag} className={clsx(
-                                                    "text-xs font-mono px-2 py-0.5 rounded border",
+                                                    "text-sm font-mono px-2.5 py-1 rounded border",
                                                     isMacro && "bg-red-500/15 text-red-400 border-red-500/40",
                                                     isAccel && "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
                                                     isDecel && "bg-amber-500/15 text-amber-400 border-amber-500/30",
@@ -484,29 +484,29 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     <Activity className="h-5 w-5" /> Reverse Engine (v1.2)
                                 </h3>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                                    <ReverseStat label="Composite" value={result.reverse.rev_composite != null ? Math.round(result.reverse.rev_composite) : '—'} />
-                                    <ReverseStat label="Band" value={result.reverse.rev_band || '—'} band={result.reverse.rev_band} />
-                                    <ReverseStat label="Archetype" value={result.reverse.rev_archetype || '—'} 
-                                        sub={result.reverse.rev_archetype_secondary ? `→ ${result.reverse.rev_archetype_secondary}` : undefined} />
-                                    <ReverseStat label="Rank" value={result.reverse.rev_rank != null ? `#${result.reverse.rev_rank}` : '—'} />
+                                    <ReverseStat label="Composite" value={result.reverse.rev_composite != null ? Math.round(result.reverse.rev_composite) : 'n/a'} />
+                                    <ReverseStat label="Band" value={result.reverse.rev_band || 'n/a'} band={result.reverse.rev_band} />
+                                    <ReverseStat label="Archetype" value={result.reverse.rev_archetype || 'n/a'}
+                                        sub={result.reverse.rev_archetype_secondary ? `to ${result.reverse.rev_archetype_secondary}` : undefined} />
+                                    <ReverseStat label="Rank" value={result.reverse.rev_rank != null ? `#${result.reverse.rev_rank}` : 'n/a'} />
                                 </div>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                                    <ReverseStat label="Quality" value={result.reverse.rev_quality != null ? result.reverse.rev_quality : '—'} />
-                                    <ReverseStat label="MoS" value={result.reverse.rev_mos != null ? Math.round(result.reverse.rev_mos) : '—'} />
-                                    <ReverseStat label="Survivability" value={result.reverse.rev_survivability != null ? result.reverse.rev_survivability : '—'} />
-                                    <ReverseStat label="Data Quality" value={result.reverse.rev_data_quality != null ? `${result.reverse.rev_data_quality}/5` : '—'} />
+                                    <ReverseStat label="Quality" value={result.reverse.rev_quality != null ? result.reverse.rev_quality : 'n/a'} />
+                                    <ReverseStat label="MoS" value={result.reverse.rev_mos != null ? Math.round(result.reverse.rev_mos) : 'n/a'} />
+                                    <ReverseStat label="Survivability" value={result.reverse.rev_survivability != null ? result.reverse.rev_survivability : 'n/a'} />
+                                    <ReverseStat label="Data Quality" value={result.reverse.rev_data_quality != null ? `${result.reverse.rev_data_quality}/5` : 'n/a'} />
                                 </div>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                                    <ReverseStat label="CAGR Proxy" value={result.reverse.rev_cagr_proxy != null ? `${result.reverse.rev_cagr_proxy.toFixed(1)}%` : '—'} />
-                                    <ReverseStat label="Drawdown Proxy" value={result.reverse.rev_drawdown_proxy != null ? `${(result.reverse.rev_drawdown_proxy * 100).toFixed(1)}%` : '—'} />
-                                    <ReverseStat label="Efficiency" value={result.reverse.rev_efficiency != null ? `${result.reverse.rev_efficiency.toFixed(2)}x` : '—'} />
-                                    <ReverseStat label="Impairment Prob" value={result.reverse.rev_impairment_prob != null ? `${(result.reverse.rev_impairment_prob * 100).toFixed(0)}%` : '—'} 
+                                    <ReverseStat label="CAGR Proxy" value={result.reverse.rev_cagr_proxy != null ? `${result.reverse.rev_cagr_proxy.toFixed(1)}%` : 'n/a'} />
+                                    <ReverseStat label="Drawdown Proxy" value={result.reverse.rev_drawdown_proxy != null ? `${(result.reverse.rev_drawdown_proxy * 100).toFixed(1)}%` : 'n/a'} />
+                                    <ReverseStat label="Efficiency" value={result.reverse.rev_efficiency != null ? `${result.reverse.rev_efficiency.toFixed(2)}x` : 'n/a'} />
+                                    <ReverseStat label="Impairment Prob" value={result.reverse.rev_impairment_prob != null ? `${(result.reverse.rev_impairment_prob * 100).toFixed(0)}%` : 'n/a'}
                                         warn={result.reverse.rev_impairment_prob != null && result.reverse.rev_impairment_prob > 0.20} />
                                 </div>
                                 {result.reverse.rev_flags && (
                                     <div className="flex flex-wrap gap-1.5 mb-3">
                                         {result.reverse.rev_flags.split(',').filter(f => f).map((flag: string) => (
-                                            <span key={flag} className="text-xs font-mono px-2 py-0.5 rounded bg-secondary/50 text-muted-foreground border border-border/30">
+                                            <span key={flag} className="text-sm font-mono px-2.5 py-1 rounded bg-secondary/50 text-muted-foreground border border-border/30">
                                                 {flag}
                                             </span>
                                         ))}
@@ -523,8 +523,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     </div>
                                 )}
                                 {result.reverse.rev_nominated && (
-                                    <div className="mt-3 px-3 py-2 bg-amber-500/10 border border-amber-500/30 rounded-lg text-xs font-black text-amber-400 flex items-center gap-2">
-                                        ★ NOMINATED — queued for v3.2 deep-dive analysis
+                                    <div className="mt-3 px-3 py-2 bg-amber-500/10 border border-amber-500/30 rounded-lg text-sm font-black text-amber-400 flex items-center gap-2">
+                                        NOMINATED - queued for v3.2 deep-dive analysis
                                     </div>
                                 )}
                             </div>
@@ -538,12 +538,12 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 </h3>
                                 <div className="bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
                                     <div className="bg-blue-500/10 px-4 py-3 border-b border-blue-500/20 flex justify-between items-center shrink-0 flex-wrap gap-2">
-                                        <span className="text-xs text-muted-foreground">
+                                        <span className="text-sm text-muted-foreground">
                                             Generated on: {new Date(savedReport.timestamp).toLocaleString()} | Cost: ${savedReport.cost} | Tokens: {savedReport.usage?.total_tokens}
                                         </span>
                                         <div className="flex gap-2 items-center">
-                                            <button onClick={downloadDsResult} className="flex items-center gap-1 text-xs bg-secondary hover:bg-secondary/80 px-3 py-1.5 rounded-md shadow-sm border border-border transition-colors font-semibold">Download .txt</button>
-                                            <button onClick={copyDsResult} className="flex items-center gap-1 text-xs bg-[#4d6bfe] hover:bg-[#3b54d1] text-white px-3 py-1.5 rounded-md shadow-sm transition-colors font-semibold">Copy Result</button>
+                                            <button onClick={downloadDsResult} className="flex items-center gap-1 text-sm bg-secondary hover:bg-secondary/80 px-3 py-2 rounded-md shadow-sm border border-border transition-colors font-semibold">Download .txt</button>
+                                            <button onClick={copyDsResult} className="flex items-center gap-1 text-sm bg-[#4d6bfe] hover:bg-[#3b54d1] text-white px-3 py-2 rounded-md shadow-sm transition-colors font-semibold">Copy Result</button>
                                         </div>
                                     </div>
                                     <div className="p-5 overflow-y-auto max-h-[600px] custom-scrollbar">
@@ -565,7 +565,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 function ReverseStat({ label, value, sub, band, warn }: { label: string; value: string | number; sub?: string; band?: string | null; warn?: boolean }) {
     return (
         <div className="rounded-lg border border-border/50 bg-secondary/20 p-3">
-            <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{label}</div>
+            <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider">{label}</div>
             <div className={clsx(
                 "mt-1 font-mono text-lg font-black",
                 band === 'High' && "text-emerald-400",
@@ -574,7 +574,7 @@ function ReverseStat({ label, value, sub, band, warn }: { label: string; value: 
                 band === 'Monitor' && "text-gray-400",
                 warn && "text-amber-400",
             )}>{value}</div>
-            {sub && <div className="text-xs text-muted-foreground/70 mt-0.5">{sub}</div>}
+            {sub && <div className="text-sm text-muted-foreground/70 mt-0.5">{sub}</div>}
         </div>
     );
 }
@@ -590,7 +590,7 @@ function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: ReactN
     return (
         <div className={clsx("rounded-lg border p-4", toneClass)}>
             <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider">
+                <div className="flex items-center gap-2 text-sm font-black uppercase tracking-wider">
                     {icon}
                     {label}
                 </div>
@@ -613,7 +613,7 @@ function DetailRow({ label, value, target, pass, warning }: { label: string, val
                 <div className="font-mono text-lg font-black">{value}</div>
             </div>
             <div className="text-right">
-                <div className="text-xs opacity-70">{t('target')}: {target}</div>
+                <div className="text-sm opacity-70">{t('target')}: {target}</div>
                 <div className={clsx("text-sm font-bold", pass ? "text-success" : warning ? "text-warning" : "text-danger")}>
                     {pass ? t('pass') : warning ? t('watch') : t('fail')}
                 </div>
