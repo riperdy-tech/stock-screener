@@ -326,39 +326,39 @@ export function ReportsDashboard() {
     return (
         <div className="flex-1 flex flex-col h-screen overflow-hidden bg-[#0a0c10]">
             {/* Header */}
-            <header className="py-4 px-6 border-b border-white/5 bg-[#0d1117] flex items-center justify-between shrink-0">
-                <div className="flex items-center gap-6">
+            <header className="py-4 px-6 border-b border-white/5 bg-[#0d1117] flex flex-col gap-4 shrink-0 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex items-center gap-5">
                     <Link href="/" className="p-2 hover:bg-white/5 rounded-full transition-colors text-muted-foreground hover:text-foreground">
                         <ArrowLeft className="h-5 w-5" />
                     </Link>
                     <div>
-                        <h1 className="text-xl font-black tracking-tight text-foreground flex items-center gap-2">
-                            <Sparkles className="h-5 w-5 text-accent" />
+                        <h1 className="text-2xl font-black tracking-tight text-foreground flex items-center gap-2">
+                            <Sparkles className="h-6 w-6 text-accent" />
                             AI RESEARCH REPOSITORY
                         </h1>
-                        <p className="text-xs uppercase tracking-widest text-muted-foreground font-bold">
+                        <p className="text-sm uppercase tracking-widest text-muted-foreground font-bold">
                             Cloud-Stored Deepseek V4.0 Pro Analyses
                         </p>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center lg:w-auto">
                     <button 
                         onClick={fetchReports}
                         disabled={loading}
-                        className="p-2 bg-white/5 hover:bg-white/10 rounded-xl text-muted-foreground hover:text-blue-400 transition-all border border-white/10 active:scale-90"
+                        className="p-2.5 bg-white/5 hover:bg-white/10 rounded-lg text-muted-foreground hover:text-blue-400 transition-all border border-white/10 active:scale-90"
                         title="Force Sync Cloud Data"
                     >
                         <RefreshCw className={clsx("h-4 w-4", loading && "animate-spin text-blue-500")} />
                     </button>
-                    <div className="relative w-64">
-                        <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <div className="relative w-full sm:w-80">
+                        <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <input 
                             type="text" 
                             placeholder="Search tickers..." 
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-accent transition-all"
+                            className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-accent transition-all"
                         />
                     </div>
                 </div>
@@ -367,7 +367,7 @@ export function ReportsDashboard() {
             <div className="flex-1 flex overflow-hidden relative">
                 {/* List Sidebar - Hidden on mobile if report selected */}
                 <div className={clsx(
-                    "w-full md:w-96 border-r border-white/5 overflow-y-auto no-scrollbar bg-[#0d1117]/50 transition-all flex flex-col",
+                    "w-full md:w-[28rem] border-r border-white/5 overflow-y-auto no-scrollbar bg-[#0d1117]/50 transition-all flex flex-col",
                     selectedReport && "hidden md:flex"
                 )}>
                     {/* Filter Bar */}
@@ -376,7 +376,7 @@ export function ReportsDashboard() {
                             <select 
                                 value={filterAction} 
                                 onChange={(e) => setFilterAction(e.target.value)}
-                                className="bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-xs font-bold text-blue-400 focus:outline-none"
+                                className="bg-white/5 border border-white/10 rounded-lg px-2.5 py-2 text-sm font-bold text-blue-400 focus:outline-none"
                             >
                                 <option value="ALL">ALL ACTIONS</option>
                                 <option value="BUY">BUY</option>
@@ -387,7 +387,7 @@ export function ReportsDashboard() {
                             <select 
                                 value={filterValuation} 
                                 onChange={(e) => setFilterValuation(e.target.value)}
-                                className="bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-xs font-bold text-green-400 focus:outline-none"
+                                className="bg-white/5 border border-white/10 rounded-lg px-2.5 py-2 text-sm font-bold text-green-400 focus:outline-none"
                             >
                                 <option value="ALL">ALL VALUATIONS</option>
                                 <option value="UNDERVALUED">UNDERVALUED</option>
@@ -398,7 +398,7 @@ export function ReportsDashboard() {
                             <select 
                                 value={filterArchetype} 
                                 onChange={(e) => setFilterArchetype(e.target.value)}
-                                className="col-span-2 bg-white/5 border border-white/10 rounded-lg px-2 py-1.5 text-xs font-bold text-muted-foreground focus:outline-none"
+                                className="col-span-2 bg-white/5 border border-white/10 rounded-lg px-2.5 py-2 text-sm font-bold text-muted-foreground focus:outline-none"
                             >
                                 <option value="ALL">ALL ARCHETYPES</option>
                                 <option value="Stable Incumbent">STABLE</option>
@@ -409,7 +409,7 @@ export function ReportsDashboard() {
                             </select>
                         </div>
                         <div className="flex items-center gap-3 px-1">
-                            <span className="text-xs font-black text-muted-foreground uppercase whitespace-nowrap">Min Conviction: {filterConviction}</span>
+                            <span className="text-sm font-black text-muted-foreground uppercase whitespace-nowrap">Min Conviction: {filterConviction}</span>
                             <input 
                                 type="range" min="0" max="15" step="0.5" 
                                 value={filterConviction} 
@@ -423,7 +423,7 @@ export function ReportsDashboard() {
                         {loading ? (
                             <div className="flex flex-col items-center justify-center h-64 gap-4 text-muted-foreground">
                                 <RefreshCw className="h-6 w-6 animate-spin text-accent" />
-                                <span className="text-xs font-bold uppercase tracking-widest">Fetching Cloud...</span>
+                                <span className="text-sm font-bold uppercase tracking-widest">Fetching Cloud...</span>
                             </div>
                         ) : filteredReports.length === 0 ? (
                             <div className="p-12 text-center text-muted-foreground italic text-sm">
@@ -443,7 +443,7 @@ export function ReportsDashboard() {
                                             key={report.id}
                                             onClick={() => setSelectedReport(report)}
                                             className={clsx(
-                                                "w-full text-left p-4 border-b border-white/5 transition-all hover:bg-white/5 flex items-center justify-between group relative cursor-pointer active:bg-white/10",
+                                                "w-full text-left p-4 border-b border-white/5 transition-all hover:bg-white/5 flex items-center justify-between gap-4 group relative cursor-pointer active:bg-white/10",
                                                 selectedReport?.id === report.id ? "bg-blue-500/10 border-r-4 border-r-blue-500 shadow-[inset_0_0_20px_rgba(59,130,246,0.1)]" : ""
                                             )}
                                         >
@@ -454,7 +454,7 @@ export function ReportsDashboard() {
                                                     </span>
                                                     {meta.valuation_status && (
                                                         <span className={clsx(
-                                                            "text-[8px] px-1.5 py-0.5 rounded-sm font-black uppercase tracking-wider",
+                                                            "text-xs px-2 py-1 rounded-md font-black uppercase tracking-tight",
                                                             meta.valuation_status.includes('UNDERVALUED') ? "bg-green-500/20 text-green-400 border border-green-500/20" :
                                                             meta.valuation_status === 'OVERVALUED' ? "bg-red-500/20 text-red-400 border border-red-500/20" :
                                                             "bg-white/5 text-muted-foreground border border-white/10"
@@ -463,7 +463,7 @@ export function ReportsDashboard() {
                                                         </span>
                                                     )}
                                                 </div>
-                                                <div className="flex items-center gap-2 text-xs text-muted-foreground font-black uppercase tracking-tight">
+                                                <div className="flex items-center gap-2 text-sm text-muted-foreground font-bold uppercase tracking-tight">
                                                     <Calendar className="h-3.5 w-3.5 opacity-50 text-blue-500" />
                                                     {createdAt.toLocaleDateString()} 
                                                     <span className="text-white/20 font-normal">@</span>
@@ -473,12 +473,12 @@ export function ReportsDashboard() {
                                             
                                             <div className="flex flex-col items-end gap-1">
                                                 <div className={clsx(
-                                                    "px-2 py-1 rounded-lg text-xs font-black tracking-tighter shadow-md border",
+                                                    "px-2.5 py-1 rounded-lg text-sm font-black tracking-tight shadow-md border",
                                                     isPositive ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-red-500/20 text-red-400 border-red-500/30"
                                                 )}>
                                                     {isPositive ? '+' : ''}{upside.toFixed(1)}%
                                                 </div>
-                                                <span className="text-[8px] font-black text-muted-foreground tracking-[0.2em] uppercase opacity-40">ALPHA</span>
+                                                <span className="text-xs font-black text-muted-foreground tracking-[0.16em] uppercase opacity-60">ALPHA</span>
                                             </div>
                                         </button>
                                     );

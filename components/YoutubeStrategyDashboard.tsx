@@ -89,7 +89,7 @@ function StrategyBadge({ label }: { label: string }) {
         "Turnaround Scale-In": "bg-purple-500/15 text-purple-400 border-purple-500/30",
     };
     return (
-        <span className={clsx("rounded-full border px-2.5 py-1 text-xs font-black uppercase tracking-tight", styles[label] || "bg-secondary text-muted-foreground border-border")}>
+        <span className={clsx("rounded-full border px-3 py-1.5 text-xs font-black uppercase tracking-tight", styles[label] || "bg-secondary text-muted-foreground border-border")}>
             {label}
         </span>
     );
@@ -97,9 +97,9 @@ function StrategyBadge({ label }: { label: string }) {
 
 function MetricPill({ label, value }: { label: string; value: string }) {
     return (
-        <div className="rounded-lg bg-secondary/40 border border-border/50 px-3 py-2">
+        <div className="rounded-lg bg-secondary/40 border border-border/50 px-3.5 py-3">
             <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">{label}</div>
-            <div className="text-sm font-mono font-bold text-foreground">{value}</div>
+            <div className="mt-1 text-base font-mono font-black text-foreground">{value}</div>
         </div>
     );
 }
@@ -155,28 +155,28 @@ export function YoutubeStrategyDashboard() {
 
     return (
         <div className="min-h-screen bg-background text-foreground">
-            <header className="sticky top-0 z-30 border-b border-border/60 bg-card/80 backdrop-blur-xl px-4 md:px-6 py-4">
+            <header className="sticky top-0 z-30 border-b border-border/60 bg-card/85 backdrop-blur-xl px-4 md:px-6 py-4">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex items-start gap-3">
-                        <Link href="/" className="mt-1 rounded-lg border border-border bg-secondary/40 p-2 hover:bg-secondary transition-colors" title="Back to main screener">
-                            <ArrowLeft className="h-4 w-4" />
+                        <Link href="/" className="mt-1 rounded-lg border border-border bg-secondary/40 p-2.5 hover:bg-secondary transition-colors" title="Back to main screener">
+                            <ArrowLeft className="h-5 w-5" />
                         </Link>
                         <div>
-                            <h1 className="text-2xl font-black tracking-tight flex items-center gap-2">
-                                <BarChart3 className="h-6 w-6 text-primary" /> YouTube Strategy Filter
+                            <h1 className="text-3xl font-black tracking-tight flex items-center gap-2">
+                                <BarChart3 className="h-7 w-7 text-primary" /> YouTube Strategy Filter
                             </h1>
-                            <p className="text-sm text-muted-foreground max-w-3xl">
+                            <p className="mt-1 text-base leading-relaxed text-muted-foreground max-w-3xl">
                                 Implements the video summary as three independent strategies with the universal EPS-based position-size rule.
                                 Negative EPS names are capped at tiny risk sizes before any signal is considered.
                             </p>
-                            {lastUpdated && <p className="text-xs text-muted-foreground mt-1 font-mono">Data last updated: {lastUpdated}</p>}
+                            {lastUpdated && <p className="text-sm text-muted-foreground mt-2 font-mono">Data last updated: {lastUpdated}</p>}
                         </div>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
                         <button
                             onClick={() => loadData()}
-                            className="px-3 py-2 rounded-lg text-xs font-black border border-border bg-secondary/40 hover:bg-secondary flex items-center gap-2"
+                            className="px-4 py-2.5 rounded-lg text-sm font-black border border-border bg-secondary/40 hover:bg-secondary flex items-center gap-2"
                         >
                             <RefreshCw className={clsx("h-4 w-4", loading && "animate-spin")} /> Refresh
                         </button>
@@ -184,53 +184,53 @@ export function YoutubeStrategyDashboard() {
                 </div>
             </header>
 
-            <main className="p-4 md:p-6 space-y-6">
+            <main className="p-4 md:p-6 lg:p-8 space-y-6">
                 <section className="grid grid-cols-1 lg:grid-cols-5 gap-3">
                     {STRATEGY_FILTERS.map((filter) => (
                         <button
                             key={filter.value}
                             onClick={() => setStrategyFilter(filter.value)}
                             className={clsx(
-                                "rounded-xl border p-4 text-left transition-all hover:-translate-y-0.5",
+                                "rounded-lg border p-4 text-left transition-all hover:-translate-y-0.5",
                                 strategyFilter === filter.value ? "bg-primary/10 border-primary shadow-lg" : "bg-card border-border/70 hover:border-primary/40"
                             )}
                         >
                             <div className="flex justify-between items-start gap-2">
-                                <div className="text-sm font-black">{filter.label}</div>
-                                <div className="text-xs font-mono text-primary font-bold">{totals[filter.value]}</div>
+                                <div className="text-base font-black">{filter.label}</div>
+                                <div className="rounded-md bg-primary/10 px-2 py-1 text-sm font-mono text-primary font-black">{totals[filter.value]}</div>
                             </div>
-                            <div className="text-xs text-muted-foreground mt-1 leading-snug">{filter.description}</div>
+                            <div className="text-sm text-muted-foreground mt-2 leading-relaxed">{filter.description}</div>
                         </button>
                     ))}
                 </section>
 
                 <section className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <div className="rounded-xl border border-border/70 bg-card p-4 flex items-start gap-3">
+                    <div className="rounded-lg border border-border/70 bg-card p-4 flex items-start gap-3">
                         <TrendingUp className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
                         <div>
-                            <h3 className="text-sm font-black">Filter 1: Earnings Momentum</h3>
-                            <p className="text-xs text-muted-foreground">Large-cap blue chips require positive EPS and four consecutive quarters of EPS increases.</p>
+                            <h3 className="text-base font-black">Filter 1: Earnings Momentum</h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed">Large-cap blue chips require positive EPS and four consecutive quarters of EPS increases.</p>
                         </div>
                     </div>
-                    <div className="rounded-xl border border-border/70 bg-card p-4 flex items-start gap-3">
+                    <div className="rounded-lg border border-border/70 bg-card p-4 flex items-start gap-3">
                         <RotateCcw className="h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
                         <div>
-                            <h3 className="text-sm font-black">Filter 2: Deep Value Reversal</h3>
-                            <p className="text-xs text-muted-foreground">Requires P/B &lt; 1 or P/E below 5-year average, plus monthly double bottom and price above 20-month MA.</p>
+                            <h3 className="text-base font-black">Filter 2: Deep Value Reversal</h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed">Requires P/B &lt; 1 or P/E below 5-year average, plus monthly double bottom and price above 20-month MA.</p>
                         </div>
                     </div>
-                    <div className="rounded-xl border border-border/70 bg-card p-4 flex items-start gap-3">
+                    <div className="rounded-lg border border-border/70 bg-card p-4 flex items-start gap-3">
                         <Shield className="h-5 w-5 text-amber-400 shrink-0 mt-0.5" />
                         <div>
-                            <h3 className="text-sm font-black">Filter 3: Turnaround Seed</h3>
-                            <p className="text-xs text-muted-foreground">Negative EPS names can only get a 0.01% seed until actual EPS flips positive.</p>
+                            <h3 className="text-base font-black">Filter 3: Turnaround Seed</h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed">Negative EPS names can only get a 0.01% seed until actual EPS flips positive.</p>
                         </div>
                     </div>
                 </section>
 
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
                     <div>
-                        <h2 className="text-xl font-black">Matching Stocks</h2>
+                        <h2 className="text-2xl font-black">Matching Stocks</h2>
                         <p className="text-sm text-muted-foreground">Showing {filteredRows.length} / {rows.length} assets for {STRATEGY_FILTERS.find((f) => f.value === strategyFilter)?.label}</p>
                     </div>
                     <div className="relative w-full md:w-80">
@@ -239,7 +239,7 @@ export function YoutubeStrategyDashboard() {
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder="Search ticker or company"
-                            className="w-full rounded-lg border border-border bg-secondary/40 pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+                            className="w-full rounded-lg border border-border bg-secondary/40 pl-9 pr-3 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                 </div>
@@ -259,18 +259,18 @@ export function YoutubeStrategyDashboard() {
                         {filteredRows.map(({ result, evaluation }) => {
                             const c = result.candidate as any;
                             return (
-                                <article key={c.symbol} className="rounded-xl border border-border/70 bg-card p-4 shadow-sm hover:border-primary/40 transition-colors">
+                                <article key={c.symbol} className="rounded-lg border border-border/70 bg-card p-5 shadow-sm hover:border-primary/40 transition-colors">
                                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                                         <div className="min-w-0">
                                             <div className="flex items-center gap-2 flex-wrap">
-                                                <h3 className="text-xl font-black tracking-tight">{c.symbol.split(".")[0]}</h3>
-                                                <span className="text-xs text-muted-foreground truncate">{c.name}</span>
+                                                <h3 className="text-2xl font-black tracking-tight">{c.symbol.split(".")[0]}</h3>
+                                                <span className="text-sm text-muted-foreground truncate">{c.name}</span>
                                             </div>
-                                            <p className="text-xs text-muted-foreground mt-1 uppercase font-bold tracking-tight">{c.sector} • {c.industry || result.industry || "Unknown"}</p>
+                                            <p className="text-sm text-muted-foreground mt-1 uppercase font-bold tracking-tight">{c.sector} / {c.industry || result.industry || "Unknown"}</p>
                                         </div>
                                         <div className="text-left sm:text-right shrink-0">
                                             <div className="font-mono text-lg font-black">{formatPrice(c.price)}</div>
-                                            <div className="text-xs text-muted-foreground">{formatMarketCap(c.marketCap)}</div>
+                                            <div className="text-sm text-muted-foreground">{formatMarketCap(c.marketCap)}</div>
                                         </div>
                                     </div>
 
