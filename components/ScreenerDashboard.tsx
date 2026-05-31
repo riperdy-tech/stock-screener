@@ -6,7 +6,7 @@ import { StockCard } from "./StockCard";
 import { fetchStocks, fetchReverseScores, fetchParadigmScores, Market } from "@/lib/data-service";
 import { buildPrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
-import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS, ParadigmFilterState, DEFAULT_PARADIGM_FILTERS } from "./FilterSidebar";
+import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS, ParadigmFilterState, DEFAULT_PARADIGM_FILTERS, PARADIGM_BAND_LABELS } from "./FilterSidebar";
 import { evaluateYoutubeStrategy, matchesYoutubeStrategyFilter, YoutubeStrategyEvaluation, YoutubeStrategyFilter } from "@/lib/youtube-strategy";
 import { supabase } from "@/lib/supabase";
 import { LanguageToggle } from "./LanguageToggle";
@@ -335,6 +335,12 @@ export function ScreenerDashboard() {
         }
     }, [filters]);
 
+    useEffect(() => {
+        if (screenMode === 'youtube' && selectedMarket !== 'US') {
+            setSelectedMarket('US');
+        }
+    }, [screenMode, selectedMarket]);
+
     // Re-load data when market changes
     useEffect(() => {
         // Reset filters when switching away from US (since strict filters usually don't apply)
@@ -648,6 +654,65 @@ export function ScreenerDashboard() {
             : screenMode === 'youtube'
                 ? 'Screened by the video strategy playbooks: earnings momentum, deep-value reversal, and turnaround setups.'
                 : 'Screened by strict 100-bagger quantitative filters. Use the sidebar to tune growth, valuation, float, and ownership gates.';
+    const activeFilterChips = useMemo(() => {
+        if (screenMode === 'reverse') {
+            return [
+                ...reverseFilters.bands.map(band => `Band: ${band}`),
+                ...reverseFilters.archetypes.map(arch => `Archetype ${arch}`),
+                reverseFilters.minComposite > 0 ? `Composite >= ${reverseFilters.minComposite}` : null,
+                reverseFilters.minMoS > 0 ? `MoS >= ${reverseFilters.minMoS}` : null,
+                reverseFilters.minSurvivability > 0 ? `Survivability >= ${reverseFilters.minSurvivability}` : null,
+                reverseFilters.nominatedOnly ? 'Nominated only' : null,
+            ].filter((chip): chip is string => Boolean(chip));
+        }
+
+        if (screenMode === 'paradigm') {
+            return [
+                ...paradigmFilters.bands.map(band => `Band: ${PARADIGM_BAND_LABELS[band] || band}`),
+                ...paradigmFilters.themes.map(theme => `Theme: ${theme}`),
+                paradigmFilters.industryQuery.trim() ? `Industry: ${paradigmFilters.industryQuery.trim()}` : null,
+                paradigmFilters.minSignal > 0 ? `Signal >= ${paradigmFilters.minSignal}` : null,
+                paradigmFilters.minMembership > 0 ? `Membership >= ${paradigmFilters.minMembership}` : null,
+                paradigmFilters.minMomentum > 0 ? `Momentum >= ${paradigmFilters.minMomentum}` : null,
+                paradigmFilters.minGate > 0 ? `Gate >= ${paradigmFilters.minGate}` : null,
+                paradigmFilters.acceleratingOnly ? 'Accelerating' : null,
+                paradigmFilters.macroWarningOnly ? 'Macro warning' : null,
+                paradigmFilters.bridgedOnly ? 'Forward EPS bridge' : null,
+                paradigmFilters.multiThemeOnly ? 'Multi-theme' : null,
+            ].filter((chip): chip is string => Boolean(chip));
+        }
+
+        if (screenMode === 'youtube') {
+            const activeYoutubeFilter = YOUTUBE_FILTER_META.find(item => item.value === youtubeFilter);
+            return [activeYoutubeFilter?.label || 'Any Video Signal'];
+        }
+
+        return [
+            `Market cap >= ${filters.minMarketCap}${selectedMarket === 'US' ? 'M' : selectedMarket === 'Korea' ? 'B KRW' : '00M TWD'}`,
+            filters.maxPrice < 1000 ? `Price <= ${selectedMarket === 'US' ? '$' : ''}${filters.maxPrice}` : null,
+            filters.minRevenueGrowth > -50 ? `Growth >= ${filters.minRevenueGrowth}%` : null,
+            filters.minGrossMargin > -50 ? `Gross margin >= ${filters.minGrossMargin}%` : null,
+            filters.minROIC > -50 ? `ROIC >= ${filters.minROIC}%` : null,
+            filters.maxPS < 50 ? `P/S <= ${filters.maxPS}` : null,
+            filters.maxPEG < 10 ? `PEG <= ${filters.maxPEG}` : null,
+            filters.minInsiderOwnership > 0 ? `Insider >= ${filters.minInsiderOwnership}%` : null,
+            filters.maxFloat < 5000 ? `Float <= ${filters.maxFloat}M` : null,
+        ].filter((chip): chip is string => Boolean(chip));
+    }, [screenMode, reverseFilters, paradigmFilters, youtubeFilter, filters, selectedMarket]);
+    const visibleFilterChips = activeFilterChips.slice(0, 8);
+    const hiddenFilterChipCount = Math.max(activeFilterChips.length - visibleFilterChips.length, 0);
+    const resetActiveFilters = () => {
+        setSearch("");
+        if (screenMode === 'reverse') {
+            setReverseFilters(DEFAULT_REVERSE_FILTERS);
+        } else if (screenMode === 'paradigm') {
+            setParadigmFilters(DEFAULT_PARADIGM_FILTERS);
+        } else if (screenMode === 'youtube') {
+            setYoutubeFilter("any");
+        } else {
+            setFilters(ZERO_BASE_FILTERS);
+        }
+    };
     const totalPages = Math.ceil(filteredCount / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const currentData = filteredResults.slice(startIndex, startIndex + ITEMS_PER_PAGE);
@@ -836,6 +901,9 @@ export function ScreenerDashboard() {
                                         type="button"
                                         onClick={() => {
                                             setScreenMode(id);
+                                            if (id === 'youtube' && selectedMarket !== 'US') {
+                                                setSelectedMarket('US');
+                                            }
                                             setSelectedTickers(new Set());
                                         }}
                                         className="block text-left"
@@ -967,6 +1035,20 @@ export function ScreenerDashboard() {
                                 </div>
                                 <h2 className="mt-2 text-3xl font-black tracking-tight">{activeStrategy.title}</h2>
                                 <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{activeSummary}</p>
+                                {visibleFilterChips.length > 0 && (
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        {visibleFilterChips.map((chip) => (
+                                            <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-xs font-bold text-muted-foreground">
+                                                {chip}
+                                            </span>
+                                        ))}
+                                        {hiddenFilterChipCount > 0 && (
+                                            <span className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-xs font-bold text-muted-foreground">
+                                                +{hiddenFilterChipCount} more
+                                            </span>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                             <div className="grid grid-cols-3 gap-2 sm:min-w-[360px]">
                                 <SummaryMetric label="Showing" value={`${filteredCount > 0 ? startIndex + 1 : 0}-${Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}`} />
@@ -984,7 +1066,7 @@ export function ScreenerDashboard() {
                         <div className="flex flex-col items-center justify-center h-64 text-muted-foreground border border-dashed border-border rounded-xl">
                             <p className="text-lg">⚠</p>
                             <p>{t('noStocks')}</p>
-                            <button onClick={() => setFilters(ZERO_BASE_FILTERS)} className="mt-4 text-primary text-sm hover:underline">{t('resetFilters')}</button>
+                            <button onClick={resetActiveFilters} className="mt-4 text-primary text-sm hover:underline">{t('resetFilters')}</button>
                         </div>
                     ) : (
                         <>
