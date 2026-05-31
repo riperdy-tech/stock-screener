@@ -1,8 +1,8 @@
 import { X, Activity, Sparkles, Layers3, ShieldCheck, Telescope, Youtube } from "lucide-react";
-import { type ScreeningResult, QUANT_THRESHOLDS, type ReverseResult } from "@/lib/blueprint";
+import { type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
 import { useLanguage } from "@/components/LanguageContext";
 import ReactMarkdown from "react-markdown";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Market, formatKoreanWon, formatTaiwanNTD } from "@/lib/data-service";
 import { supabase } from "@/lib/supabase";
 import clsx from "clsx";
@@ -115,6 +115,18 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
         ? { high: "STRONG", mid: "SOLID", watch: "WATCH", skip: "PASS", no_data: "NO DATA" }[paradigm.pdm_band] || paradigm.pdm_band
         : "No tag";
     const youtubePrimary = youtubeEvaluation?.matchedStrategies[0] || "No match";
+    const sectionLinks = [
+        { id: "quant", label: "Quant" },
+        { id: "reports", label: "Reports" },
+        ...(paradigm && (paradigm.pdm_themes?.length > 0 || paradigm.pdm_signal != null) ? [{ id: "paradigm", label: "Paradigm" }] : []),
+        ...(youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0 ? [{ id: "youtube", label: "YouTube" }] : []),
+        ...(reverse && reverse.rev_band && reverse.rev_band !== 'Excluded' ? [{ id: "reverse", label: "Reverse" }] : []),
+        ...(savedReport ? [{ id: "ai-report", label: "AI Report" }] : []),
+    ];
+
+    const scrollToSection = (id: string) => {
+        document.getElementById(`scorecard-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
@@ -280,8 +292,23 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             />
                         </div>
 
+                        <nav className="sticky top-[112px] z-10 -mx-1 overflow-x-auto border-y border-border/60 bg-card/90 px-1 py-2 backdrop-blur-xl">
+                            <div className="flex min-w-max gap-2">
+                                {sectionLinks.map((section) => (
+                                    <button
+                                        key={section.id}
+                                        type="button"
+                                        onClick={() => scrollToSection(section.id)}
+                                        className="rounded-md border border-border/60 bg-secondary/30 px-3 py-1.5 text-sm font-bold text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+                                    >
+                                        {section.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </nav>
+
                         {/* Phase 1: Quant Metrics */}
-                        <div>
+                        <div id="scorecard-quant" className="scroll-mt-36">
                             <h3 className="text-2xl font-black mb-4 flex items-center gap-2">
                                 <Activity className="h-5 w-5 text-primary" /> {t('phase1')}
                             </h3>
@@ -307,7 +334,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         </div>
 
                                                 {/* REPORTS Action Section - Made prominent and sticky-friendly */}
-                        <div className="flex flex-col sm:flex-row items-center gap-3 border-y border-border/50 py-4 my-2">
+                        <div id="scorecard-reports" className="scroll-mt-36 flex flex-col sm:flex-row items-center gap-3 border-y border-border/50 py-4 my-2">
                             <button 
                                 onClick={() => setShowReports(!showReports)}
                                 className={clsx(
@@ -368,7 +395,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* WS1: Paradigm Dimension Breakdown */}
                         {result.paradigm && (result.paradigm.pdm_themes?.length > 0 || result.paradigm.pdm_signal != null) && (
-                            <div>
+                            <div id="scorecard-paradigm" className="scroll-mt-36">
                                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-purple-400">
                                     <Activity className="h-5 w-5" /> Paradigm Dimension (Secular Themes)
                                 </h3>
@@ -429,7 +456,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         )}
 
                         {youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0 && (
-                            <div>
+                            <div id="scorecard-youtube" className="scroll-mt-36">
                                 <h3 className="text-2xl font-black mb-4 flex items-center gap-2 text-red-300">
                                     <Activity className="h-5 w-5" /> YouTube Strategy Lens
                                 </h3>
@@ -450,7 +477,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* Phase 9: Reverse Engine Breakdown */}
                         {result.reverse && result.reverse.rev_band && result.reverse.rev_band !== 'Excluded' && (
-                            <div>
+                            <div id="scorecard-reverse" className="scroll-mt-36">
                                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-emerald-400">
                                     <Activity className="h-5 w-5" /> Reverse Engine (v1.2)
                                 </h3>
@@ -503,7 +530,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* Deepseek AI Report */}
                         {savedReport && (
-                            <div>
+                            <div id="scorecard-ai-report" className="scroll-mt-36">
                                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-blue-400">
                                     <Sparkles className="h-5 w-5" /> AI Valuation Report (Deepseek V4.0 Pro)
                                 </h3>
@@ -550,7 +577,7 @@ function ReverseStat({ label, value, sub, band, warn }: { label: string; value: 
     );
 }
 
-function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: React.ReactNode; label: string; value: string | number; detail: string; tone: "purple" | "emerald" | "sky" | "red" }) {
+function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: ReactNode; label: string; value: string | number; detail: string; tone: "purple" | "emerald" | "sky" | "red" }) {
     const toneClass = {
         purple: "border-purple-500/30 bg-purple-500/[0.06] text-purple-300",
         emerald: "border-emerald-500/30 bg-emerald-500/[0.06] text-emerald-300",
