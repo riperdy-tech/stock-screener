@@ -5,7 +5,7 @@ import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
 import { fetchStocks, fetchReverseScores, fetchParadigmScores, Market } from "@/lib/data-service";
 import { buildPrompt } from "@/lib/prompt-builder";
-import { ScreeningResult } from "@/lib/blueprint";
+import { ParadigmResult, ReverseResult, ScreeningResult } from "@/lib/blueprint";
 import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS, ParadigmFilterState, DEFAULT_PARADIGM_FILTERS, PARADIGM_BAND_LABELS } from "./FilterSidebar";
 import { evaluateYoutubeStrategy, matchesYoutubeStrategyFilter, YoutubeStrategyEvaluation, YoutubeStrategyFilter } from "@/lib/youtube-strategy";
 import { supabase } from "@/lib/supabase";
@@ -70,11 +70,62 @@ const YOUTUBE_FILTER_META: Array<{ value: YoutubeStrategyFilter; label: string; 
     { value: "turnaroundScaleIn", label: "Turnaround Scale-In", description: "Reported EPS flipped back above zero." },
 ];
 
+function adaptRowsToScreeningResults(
+    rawData: any[],
+    reverseScores: Record<string, ReverseResult> = {},
+    paradigmScores: Record<string, ParadigmResult> = {}
+): ScreeningResult[] {
+    return rawData.map(item => {
+        // The item is the flat CSV row parsed by data-service.
+        const sym = item.symbol || '';
+        return {
+            candidate: {
+                ...item,
+                symbol: sym,
+                name: item.name,
+                description: item.description,
+                price: item.price,
+                marketCap: item.marketCap,
+                sector: item.sector,
+                industry: item.industry,
+
+                revenueGrowth: item.revenueGrowth,
+                grossMargin: item.grossMargin,
+                roic: item.roic,
+                pegRatio: item.pegRatio,
+                priceToSales: item.priceToSales || 0,
+                insiderOwnership: item.insiderOwnership,
+                zScore: item.zScore,
+                peRatio: item.peRatio,
+            },
+            metrics: {
+                revenueGrowth: item.revenueGrowth,
+                grossMargin: item.grossMargin,
+                roic: item.roic,
+                float: item.floatShares,
+                ocf: item.ocf,
+                capex: item.capex
+            },
+            passed: item._status === "Pass",
+            score: item._score,
+            reasons: item._reasons || [],
+            failCodes: item._failCodes || [],
+            flags: [],
+            financialData: item._financialData,
+            description: item.description,
+            industry: item.industry,
+            reverse: reverseScores[sym] || undefined,
+            paradigm: paradigmScores[sym] || undefined,
+        };
+    }) as unknown as ScreeningResult[];
+}
+
 export function ScreenerDashboard() {
     const { t, language, setLanguage } = useLanguage();
     const [loading, setLoading] = useState(true);
 
     const [rawResults, setRawResults] = useState<ScreeningResult[]>([]);
+    const [youtubeResults, setYoutubeResults] = useState<ScreeningResult[]>([]);
     const [search, setSearch] = useState("");
     const [filters, setFilters] = useState<FilterState>(STRICT_FILTERS); // Restore Filter State
     const [selectedStock, setSelectedStock] = useState<ScreeningResult | null>(null);
@@ -326,6 +377,7 @@ export function ScreenerDashboard() {
         }
 
         loadData(true, selectedMarket);
+        loadYoutubeData();
     }, []);
 
     // Save filters to localStorage whenever they change
@@ -363,54 +415,7 @@ export function ScreenerDashboard() {
             // WS1: Load paradigm dimension results
             const paradigmScores = market === 'US' ? await fetchParadigmScores() : {};
 
-            // ADAPTER: Convert CSV Flat Object to ScreeningResult
-            const adaptedData = (rawData as any[]).map(item => {
-                // The item is now the flat CSV row parsed by data-service
-                // metrics are already top-level in 'item' due to data-service mapping
-                const sym = item.symbol || '';
-                return {
-                    candidate: {
-                        ...item,
-                        symbol: sym,
-                        name: item.name,
-                        description: item.description,
-                        price: item.price,
-                        marketCap: item.marketCap,
-                        sector: item.sector,
-                        industry: item.industry,
-
-                        revenueGrowth: item.revenueGrowth,
-                        grossMargin: item.grossMargin,
-                        roic: item.roic,
-                        pegRatio: item.pegRatio,
-                        priceToSales: item.priceToSales || 0,
-                        insiderOwnership: item.insiderOwnership,
-                        zScore: item.zScore,
-                        peRatio: item.peRatio,
-                    },
-                    // We reconstruct metrics object for the Detail Modal if needed
-                    metrics: {
-                        revenueGrowth: item.revenueGrowth,
-                        grossMargin: item.grossMargin,
-                        roic: item.roic,
-                        float: item.floatShares,
-                        ocf: item.ocf,
-                        capex: item.capex
-                    },
-                    passed: item._status === "Pass",
-                    score: item._score,
-                    reasons: item._reasons || [],
-                    failCodes: item._failCodes || [],
-                    flags: [],
-                    financialData: item._financialData,
-                    description: item.description,
-                    industry: item.industry,
-                    reverse: reverseScores[sym] || undefined, // Phase 9: attach reverse data
-                    paradigm: paradigmScores[sym] || undefined, // WS1: attach paradigm data
-                };
-            });
-
-            setRawResults(adaptedData as unknown as ScreeningResult[]);
+            setRawResults(adaptRowsToScreeningResults(rawData as any[], reverseScores, paradigmScores));
         } catch (err) {
             console.error("Failed to load or adapt data:", err);
             setRawResults([]);
@@ -418,13 +423,29 @@ export function ScreenerDashboard() {
         setLoading(false);
     }
 
+    async function loadYoutubeData() {
+        try {
+            const { data: rawData } = await fetchStocks('US');
+            const [reverseScores, paradigmScores] = await Promise.all([
+                fetchReverseScores(),
+                fetchParadigmScores(),
+            ]);
+            setYoutubeResults(adaptRowsToScreeningResults(rawData as any[], reverseScores, paradigmScores));
+        } catch (err) {
+            console.error("Failed to load YouTube strategy universe:", err);
+            setYoutubeResults([]);
+        }
+    }
+
+    const youtubeSourceResults = youtubeResults.length > 0 ? youtubeResults : rawResults;
+
     const youtubeEvaluations = useMemo(() => {
         const map = new Map<string, YoutubeStrategyEvaluation>();
-        rawResults.forEach(result => {
+        youtubeSourceResults.forEach(result => {
             map.set(result.candidate.symbol, evaluateYoutubeStrategy(result));
         });
         return map;
-    }, [rawResults]);
+    }, [youtubeSourceResults]);
 
     // Filtering Logic
     const filteredResults = useMemo(() => {
@@ -528,7 +549,7 @@ export function ScreenerDashboard() {
         }
 
         if (screenMode === 'youtube') {
-            return rawResults.filter(r => {
+            return youtubeSourceResults.filter(r => {
                 const evaluation = youtubeEvaluations.get(r.candidate.symbol);
                 if (!evaluation || !matchesYoutubeStrategyFilter(evaluation, youtubeFilter)) return false;
 
@@ -595,7 +616,7 @@ export function ScreenerDashboard() {
 
             return true;
         });
-    }, [rawResults, search, filters, selectedMarket, screenMode, reverseFilters, paradigmFilters, youtubeEvaluations, youtubeFilter]);
+    }, [rawResults, youtubeSourceResults, search, filters, selectedMarket, screenMode, reverseFilters, paradigmFilters, youtubeEvaluations, youtubeFilter]);
 
 
     // Pagination Logic
