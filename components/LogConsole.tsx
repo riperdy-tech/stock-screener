@@ -84,16 +84,16 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-            <div className="w-full max-w-4xl bg-[#0c0c0c] border border-gray-800 rounded-lg shadow-2xl flex flex-col h-[80vh] font-mono text-sm">
+            <div className="w-full max-w-5xl bg-[#0c0c0c] border border-gray-800 rounded-xl shadow-2xl flex flex-col h-[84vh] font-mono text-base">
 
                 {/* Header */}
-                <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800 bg-[#111]">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800 bg-[#111]">
                     <div className="flex items-center gap-2 text-green-500">
-                        <Terminal className="h-4 w-4" />
+                        <Terminal className="h-5 w-5" />
                         <span className="font-bold">System Logs</span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <label className="flex items-center gap-2 text-xs text-gray-400 cursor-pointer hover:text-white">
+                        <label className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer hover:text-white">
                             <input
                                 type="checkbox"
                                 checked={autoScroll}
@@ -109,9 +109,9 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                 </div>
 
                 {/* Log Content */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-1 text-gray-300">
+                <div className="flex-1 overflow-y-auto p-5 space-y-1 text-gray-300">
                     {logs ? (
-                        <pre className="whitespace-pre-wrap leading-relaxed">{logs}</pre>
+                        <pre className="whitespace-pre-wrap leading-7">{logs}</pre>
                     ) : (
                         <div className="flex flex-col items-center justify-center h-full text-gray-600 space-y-2">
                             <RefreshCw className="h-6 w-6 animate-spin" />
@@ -122,7 +122,7 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                 </div>
 
                 {/* Footer */}
-                <div className="px-4 py-2 border-t border-gray-800 bg-[#111] text-xs text-gray-500 flex justify-between items-center">
+                <div className="px-5 py-3 border-t border-gray-800 bg-[#111] text-sm text-gray-500 flex flex-col gap-2 justify-between sm:flex-row sm:items-center">
                     <div className="flex items-center gap-3">
                         <span>Source: public/data/scan.log</span>
                         <div className="flex items-center gap-1.5">
