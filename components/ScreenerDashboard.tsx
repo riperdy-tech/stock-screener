@@ -364,6 +364,7 @@ export function ScreenerDashboard() {
                 const sym = item.symbol || '';
                 return {
                     candidate: {
+                        ...item,
                         symbol: sym,
                         name: item.name,
                         description: item.description,
