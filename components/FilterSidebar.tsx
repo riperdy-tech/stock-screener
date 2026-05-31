@@ -2,8 +2,8 @@ import { Filter, X, HelpCircle, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
 import { Market } from "@/lib/data-service";
+import { YoutubeStrategyFilter } from "@/lib/youtube-strategy";
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
 
 export interface FilterState {
     minMarketCap: number; // Millions
@@ -95,13 +95,14 @@ interface FilterSidebarProps {
     totalResults: number;
     market: Market;
     // Phase 10: Reverse Engine mode
-    screenMode?: '100bagger' | 'reverse' | 'paradigm';
+    screenMode?: '100bagger' | 'reverse' | 'paradigm' | 'youtube';
     reverseFilters?: ReverseFilterState;
     setReverseFilters?: (f: ReverseFilterState) => void;
-    onScreenModeChange?: (mode: '100bagger' | 'reverse' | 'paradigm') => void;
     // WS1-T6+: Paradigm filters
     paradigmFilters?: ParadigmFilterState;
     setParadigmFilters?: (f: ParadigmFilterState) => void;
+    youtubeFilter?: YoutubeStrategyFilter;
+    setYoutubeFilter?: (f: YoutubeStrategyFilter) => void;
     // Phase 11d: Deep-Dive controls
     batchN?: number;
     onBatchNChange?: (n: number) => void;
@@ -110,6 +111,14 @@ interface FilterSidebarProps {
     onDeepDiveClick?: () => void;
     selectedCount?: number;
 }
+
+const YOUTUBE_FILTERS: Array<{ value: YoutubeStrategyFilter; label: string }> = [
+    { value: "any", label: "Any Video Signal" },
+    { value: "earningsMomentum", label: "Earnings Momentum" },
+    { value: "deepValueReversal", label: "Deep Value Reversal" },
+    { value: "turnaroundSeed", label: "Turnaround Seed" },
+    { value: "turnaroundScaleIn", label: "Turnaround Scale-In" },
+];
 
 export const DEFAULT_FILTERS: FilterState = {
     minMarketCap: 50,
@@ -150,9 +159,8 @@ export const STRICT_FILTERS: FilterState = {
     maxFloat: 50,
 };
 
-export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, onScreenModeChange, paradigmFilters, setParadigmFilters, batchN, onBatchNChange, batchDispatching, batchStatus, onDeepDiveClick, selectedCount }: FilterSidebarProps) {
+export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, paradigmFilters, setParadigmFilters, youtubeFilter = "any", setYoutubeFilter, batchN, onBatchNChange, batchDispatching, batchStatus, onDeepDiveClick, selectedCount }: FilterSidebarProps) {
     const { t, filterDefs } = useLanguage();
-    const router = useRouter();
 
     // Local state for Manual Apply
     const [localFilters, setLocalFilters] = useState<FilterState>(filters);
@@ -184,11 +192,6 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
     const handleReset = () => {
         setLocalFilters(ZERO_BASE_FILTERS);
         setFilters(ZERO_BASE_FILTERS);
-    };
-
-    const handleStrict = () => {
-        setLocalFilters(STRICT_FILTERS);
-        setFilters(STRICT_FILTERS);
     };
 
     // Phase 10: Reverse filter handlers
@@ -255,27 +258,18 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-6">
-
-                {/* Strategy Presets — always visible */}
-                <Section title="Strategy Presets">
-                    <select
-                        className="w-full bg-secondary/40 border border-border/70 text-foreground font-semibold rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer transition-colors hover:border-primary/50"
-                        value={screenMode === 'reverse' ? 'reverse' : screenMode === 'paradigm' ? 'paradigm' : ''}
-                        onChange={(e) => {
-                            const val = e.target.value;
-                            if (val === 'strict') { handleStrict(); if (onScreenModeChange) onScreenModeChange('100bagger'); }
-                            else if (val === 'youtube') router.push('/youtube-strategy');
-                            else if (val === 'reverse') { if (onScreenModeChange) onScreenModeChange('reverse'); }
-                            else if (val === 'paradigm') { if (onScreenModeChange) onScreenModeChange('paradigm'); }
-                        }}
-                    >
-                        <option value="" className="bg-background text-muted-foreground">Select a strategy preset...</option>
-                        <option value="strict" className="bg-background text-foreground font-semibold">Strict 100-Bagger (US Only)</option>
-                        <option value="reverse" className="bg-background text-emerald-400 font-semibold">Reverse Engine</option>
-                        <option value="paradigm" className="bg-background text-purple-400 font-semibold">Paradigm (Secular Themes)</option>
-                        <option value="youtube" className="bg-background text-foreground font-semibold">YouTube Strategy</option>
-                    </select>
-                </Section>
+                <div className="rounded-lg border border-border/60 bg-secondary/20 px-3 py-2">
+                    <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">Active lens</div>
+                    <div className="mt-0.5 text-sm font-bold text-foreground">
+                        {screenMode === 'reverse' ? 'Reverse Engine'
+                            : screenMode === 'paradigm' ? 'Paradigm Themes'
+                            : screenMode === 'youtube' ? 'YouTube Strategy'
+                            : '100-Bagger'}
+                    </div>
+                    <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+                        Filter set scoped to the current screening lens.
+                    </p>
+                </div>
 
                 {/* Phase 10: Reverse Engine controls (shown only in reverse mode) */}
                 {screenMode === 'reverse' && (
@@ -552,8 +546,32 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                     </>
                 )}
 
+                {screenMode === 'youtube' && (
+                    <>
+                        <Section title="Video Strategy">
+                            <div className="space-y-1.5">
+                                {YOUTUBE_FILTERS.map(filter => (
+                                    <button
+                                        key={filter.value}
+                                        type="button"
+                                        onClick={() => setYoutubeFilter?.(filter.value)}
+                                        className={clsx(
+                                            "w-full rounded-md border px-3 py-2 text-left text-xs font-bold transition-all",
+                                            youtubeFilter === filter.value
+                                                ? "border-red-500/50 bg-red-500/15 text-red-300"
+                                                : "border-border/50 bg-secondary/40 text-muted-foreground hover:border-red-400/40 hover:text-foreground"
+                                        )}
+                                    >
+                                        {filter.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </Section>
+                    </>
+                )}
+
                 {/* 100-Bagger controls (shown only in 100-bagger mode) */}
-                {screenMode !== 'reverse' && screenMode !== 'paradigm' && (
+                {screenMode !== 'reverse' && screenMode !== 'paradigm' && screenMode !== 'youtube' && (
                 <>
                 {/* Size & Price */}
                 <Section title={t('sizePrice')}>
@@ -610,12 +628,13 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 <div className="text-center text-xs text-muted-foreground mt-8 pb-20">
                     {screenMode === 'reverse' ? `${totalResults} Reverse candidates`
                         : screenMode === 'paradigm' ? `${totalResults} Paradigm candidates`
+                        : screenMode === 'youtube' ? `${totalResults} YouTube strategy candidates`
                         : `${t('showing')} ${totalResults} ${t('assets')}`}
                 </div>
             </div>
 
             {/* Sticky Actions Footer — show only for 100-bagger mode */}
-            {screenMode !== 'reverse' && screenMode !== 'paradigm' && (
+            {screenMode !== 'reverse' && screenMode !== 'paradigm' && screenMode !== 'youtube' && (
             <div className="p-4 border-t border-border/50 bg-card/50 backdrop-blur-xl sticky bottom-0 z-10 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]">
                 <div className="flex gap-2">
                     <button

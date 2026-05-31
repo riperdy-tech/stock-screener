@@ -216,6 +216,11 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
 // Phase 9: Load reverse screening engine results from stocks.json
 export async function fetchReverseScores(): Promise<Record<string, ReverseResult>> {
     try {
+        const scoreResponse = await fetch(`/data/reverse_scores.json?t=${new Date().getTime()}`);
+        if (scoreResponse.ok) {
+            return await scoreResponse.json();
+        }
+
         const response = await fetch(`/data/stocks.json?t=${new Date().getTime()}`);
         if (!response.ok) return {};
         const stocks: any[] = await response.json();

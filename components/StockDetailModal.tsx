@@ -326,59 +326,6 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                             </div>
                         )}
 
-                        {/* Phase 9: Reverse Engine Breakdown */}
-                        {result.reverse && result.reverse.rev_band && result.reverse.rev_band !== 'Excluded' && (
-                            <div>
-                                <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-emerald-400">
-                                    <Activity className="h-5 w-5" /> Reverse Engine (v1.2)
-                                </h3>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                                    <ReverseStat label="Composite" value={result.reverse.rev_composite != null ? Math.round(result.reverse.rev_composite) : '—'} />
-                                    <ReverseStat label="Band" value={result.reverse.rev_band || '—'} band={result.reverse.rev_band} />
-                                    <ReverseStat label="Archetype" value={result.reverse.rev_archetype || '—'} 
-                                        sub={result.reverse.rev_archetype_secondary ? `→ ${result.reverse.rev_archetype_secondary}` : undefined} />
-                                    <ReverseStat label="Rank" value={result.reverse.rev_rank != null ? `#${result.reverse.rev_rank}` : '—'} />
-                                </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                                    <ReverseStat label="Quality" value={result.reverse.rev_quality != null ? result.reverse.rev_quality : '—'} />
-                                    <ReverseStat label="MoS" value={result.reverse.rev_mos != null ? Math.round(result.reverse.rev_mos) : '—'} />
-                                    <ReverseStat label="Survivability" value={result.reverse.rev_survivability != null ? result.reverse.rev_survivability : '—'} />
-                                    <ReverseStat label="Data Quality" value={result.reverse.rev_data_quality != null ? `${result.reverse.rev_data_quality}/5` : '—'} />
-                                </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                                    <ReverseStat label="CAGR Proxy" value={result.reverse.rev_cagr_proxy != null ? `${result.reverse.rev_cagr_proxy.toFixed(1)}%` : '—'} />
-                                    <ReverseStat label="Drawdown Proxy" value={result.reverse.rev_drawdown_proxy != null ? `${(result.reverse.rev_drawdown_proxy * 100).toFixed(1)}%` : '—'} />
-                                    <ReverseStat label="Efficiency" value={result.reverse.rev_efficiency != null ? `${result.reverse.rev_efficiency.toFixed(2)}x` : '—'} />
-                                    <ReverseStat label="Impairment Prob" value={result.reverse.rev_impairment_prob != null ? `${(result.reverse.rev_impairment_prob * 100).toFixed(0)}%` : '—'} 
-                                        warn={result.reverse.rev_impairment_prob != null && result.reverse.rev_impairment_prob > 0.20} />
-                                </div>
-                                {result.reverse.rev_flags && (
-                                    <div className="flex flex-wrap gap-1.5 mb-3">
-                                        {result.reverse.rev_flags.split(',').filter(f => f).map((flag: string) => (
-                                            <span key={flag} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-secondary/50 text-muted-foreground border border-border/30">
-                                                {flag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                )}
-                                {result.reverse.rev_pro && (
-                                    <div className="text-xs text-emerald-400/80 mb-1 flex items-start gap-1">
-                                        <span className="font-bold shrink-0">Pro:</span> {result.reverse.rev_pro}
-                                    </div>
-                                )}
-                                {result.reverse.rev_con && (
-                                    <div className="text-xs text-amber-400/80 flex items-start gap-1">
-                                        <span className="font-bold shrink-0">Con:</span> {result.reverse.rev_con}
-                                    </div>
-                                )}
-                                {result.reverse.rev_nominated && (
-                                    <div className="mt-3 px-3 py-2 bg-amber-500/10 border border-amber-500/30 rounded-lg text-xs font-black text-amber-400 flex items-center gap-2">
-                                        ★ NOMINATED — queued for v3.2 deep-dive analysis
-                                    </div>
-                                )}
-                            </div>
-                        )}
-
                         {/* WS1: Paradigm Dimension Breakdown */}
                         {result.paradigm && (result.paradigm.pdm_themes?.length > 0 || result.paradigm.pdm_signal != null) && (
                             <div>
@@ -436,6 +383,59 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                 {result.paradigm.pdm_con && (
                                     <div className="text-xs text-amber-400/80 flex items-start gap-1">
                                         <span className="font-bold shrink-0">Con:</span> {result.paradigm.pdm_con}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Phase 9: Reverse Engine Breakdown */}
+                        {result.reverse && result.reverse.rev_band && result.reverse.rev_band !== 'Excluded' && (
+                            <div>
+                                <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-emerald-400">
+                                    <Activity className="h-5 w-5" /> Reverse Engine (v1.2)
+                                </h3>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                    <ReverseStat label="Composite" value={result.reverse.rev_composite != null ? Math.round(result.reverse.rev_composite) : '—'} />
+                                    <ReverseStat label="Band" value={result.reverse.rev_band || '—'} band={result.reverse.rev_band} />
+                                    <ReverseStat label="Archetype" value={result.reverse.rev_archetype || '—'} 
+                                        sub={result.reverse.rev_archetype_secondary ? `→ ${result.reverse.rev_archetype_secondary}` : undefined} />
+                                    <ReverseStat label="Rank" value={result.reverse.rev_rank != null ? `#${result.reverse.rev_rank}` : '—'} />
+                                </div>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                    <ReverseStat label="Quality" value={result.reverse.rev_quality != null ? result.reverse.rev_quality : '—'} />
+                                    <ReverseStat label="MoS" value={result.reverse.rev_mos != null ? Math.round(result.reverse.rev_mos) : '—'} />
+                                    <ReverseStat label="Survivability" value={result.reverse.rev_survivability != null ? result.reverse.rev_survivability : '—'} />
+                                    <ReverseStat label="Data Quality" value={result.reverse.rev_data_quality != null ? `${result.reverse.rev_data_quality}/5` : '—'} />
+                                </div>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                    <ReverseStat label="CAGR Proxy" value={result.reverse.rev_cagr_proxy != null ? `${result.reverse.rev_cagr_proxy.toFixed(1)}%` : '—'} />
+                                    <ReverseStat label="Drawdown Proxy" value={result.reverse.rev_drawdown_proxy != null ? `${(result.reverse.rev_drawdown_proxy * 100).toFixed(1)}%` : '—'} />
+                                    <ReverseStat label="Efficiency" value={result.reverse.rev_efficiency != null ? `${result.reverse.rev_efficiency.toFixed(2)}x` : '—'} />
+                                    <ReverseStat label="Impairment Prob" value={result.reverse.rev_impairment_prob != null ? `${(result.reverse.rev_impairment_prob * 100).toFixed(0)}%` : '—'} 
+                                        warn={result.reverse.rev_impairment_prob != null && result.reverse.rev_impairment_prob > 0.20} />
+                                </div>
+                                {result.reverse.rev_flags && (
+                                    <div className="flex flex-wrap gap-1.5 mb-3">
+                                        {result.reverse.rev_flags.split(',').filter(f => f).map((flag: string) => (
+                                            <span key={flag} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-secondary/50 text-muted-foreground border border-border/30">
+                                                {flag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                                {result.reverse.rev_pro && (
+                                    <div className="text-xs text-emerald-400/80 mb-1 flex items-start gap-1">
+                                        <span className="font-bold shrink-0">Pro:</span> {result.reverse.rev_pro}
+                                    </div>
+                                )}
+                                {result.reverse.rev_con && (
+                                    <div className="text-xs text-amber-400/80 flex items-start gap-1">
+                                        <span className="font-bold shrink-0">Con:</span> {result.reverse.rev_con}
+                                    </div>
+                                )}
+                                {result.reverse.rev_nominated && (
+                                    <div className="mt-3 px-3 py-2 bg-amber-500/10 border border-amber-500/30 rounded-lg text-xs font-black text-amber-400 flex items-center gap-2">
+                                        ★ NOMINATED — queued for v3.2 deep-dive analysis
                                     </div>
                                 )}
                             </div>

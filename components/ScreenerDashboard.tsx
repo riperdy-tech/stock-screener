@@ -7,14 +7,68 @@ import { fetchStocks, fetchReverseScores, fetchParadigmScores, Market } from "@/
 import { buildPrompt } from "@/lib/prompt-builder";
 import { ScreeningResult } from "@/lib/blueprint";
 import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS, ParadigmFilterState, DEFAULT_PARADIGM_FILTERS } from "./FilterSidebar";
+import { evaluateYoutubeStrategy, matchesYoutubeStrategyFilter, YoutubeStrategyEvaluation, YoutubeStrategyFilter } from "@/lib/youtube-strategy";
 import { supabase } from "@/lib/supabase";
 import { LanguageToggle } from "./LanguageToggle";
 import { LogConsole } from "./LogConsole";
-import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal, HelpCircle } from 'lucide-react';
+import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal, HelpCircle, Telescope, ShieldCheck, Layers3, Youtube } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import clsx from "clsx";
+
+type ScreenMode = '100bagger' | 'reverse' | 'paradigm' | 'youtube';
+type StrategyId = ScreenMode;
+
+const STRATEGY_META: Record<StrategyId, {
+    title: string;
+    eyebrow: string;
+    description: string;
+    metricLabel: string;
+    accent: string;
+    icon: typeof Sparkles;
+}> = {
+    '100bagger': {
+        title: '100-Bagger',
+        eyebrow: 'Growth filter',
+        description: 'Small-cap growth candidates screened against strict quantitative gates.',
+        metricLabel: 'strict matches',
+        accent: 'text-sky-400 border-sky-500/40 bg-sky-500/10',
+        icon: Telescope,
+    },
+    reverse: {
+        title: 'Reverse Engine',
+        eyebrow: 'Quality + value',
+        description: 'Ranks stocks by quality, margin of safety, survivability, and full composite.',
+        metricLabel: 'ranked names',
+        accent: 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10',
+        icon: ShieldCheck,
+    },
+    paradigm: {
+        title: 'Paradigm',
+        eyebrow: 'Secular themes',
+        description: 'Finds real participants in multi-year shifts like AI, GLP-1, energy, and security.',
+        metricLabel: 'theme-tagged',
+        accent: 'text-purple-300 border-purple-500/40 bg-purple-500/10',
+        icon: Layers3,
+    },
+    youtube: {
+        title: 'YouTube Strategy',
+        eyebrow: 'Video playbook',
+        description: 'Earnings momentum, deep-value reversal, and turnaround filters from the video strategy.',
+        metricLabel: 'video signals',
+        accent: 'text-red-300 border-red-500/40 bg-red-500/10',
+        icon: Youtube,
+    },
+};
+
+const YOUTUBE_FILTER_META: Array<{ value: YoutubeStrategyFilter; label: string; description: string }> = [
+    { value: "any", label: "Any Video Signal", description: "Any stock matching at least one video playbook." },
+    { value: "earningsMomentum", label: "Earnings Momentum", description: "Large-cap EPS and revenue momentum." },
+    { value: "deepValueReversal", label: "Deep Value Reversal", description: "Cheap valuation plus monthly reversal evidence." },
+    { value: "turnaroundSeed", label: "Turnaround Seed", description: "Negative EPS with improving forward EPS." },
+    { value: "turnaroundScaleIn", label: "Turnaround Scale-In", description: "Reported EPS flipped back above zero." },
+];
 
 export function ScreenerDashboard() {
     const { t, language, setLanguage } = useLanguage();
@@ -31,9 +85,10 @@ export function ScreenerDashboard() {
     const [selectedMarket, setSelectedMarket] = useState<Market>('US');
     
     // Phase 10: Screen mode (mutually exclusive)
-    const [screenMode, setScreenMode] = useState<'100bagger' | 'reverse' | 'paradigm'>('100bagger');
+    const [screenMode, setScreenMode] = useState<ScreenMode>('100bagger');
     const [reverseFilters, setReverseFilters] = useState<ReverseFilterState>(DEFAULT_REVERSE_FILTERS);
     const [paradigmFilters, setParadigmFilters] = useState<ParadigmFilterState>(DEFAULT_PARADIGM_FILTERS);
+    const [youtubeFilter, setYoutubeFilter] = useState<YoutubeStrategyFilter>("any");
     
     // Maintain a ref to current rawResults for the setInterval closure
     const rawResultsRef = useRef<ScreeningResult[]>([]);
@@ -75,6 +130,19 @@ export function ScreenerDashboard() {
     const [showBatchPassword, setShowBatchPassword] = useState(false);
     const [batchStatus, setBatchStatus] = useState<string | null>(null); // user-visible feedback
     const [selectedTickers, setSelectedTickers] = useState<Set<string>>(new Set());
+
+    const dismissBatchPanel = (id: string | null = batchId) => {
+        if (id) {
+            try {
+                const dismissed = JSON.parse(localStorage.getItem('dismissedBatchIds') || '[]');
+                const next = Array.isArray(dismissed) ? Array.from(new Set([...dismissed, id])).slice(-50) : [id];
+                localStorage.setItem('dismissedBatchIds', JSON.stringify(next));
+            } catch { /* ignore */ }
+        }
+        setBatchProgress(null);
+        setBatchId(null);
+        setBatchStatus(null);
+    };
     
     const handleDeepseekRun = async () => {
         if (!dsPassword) { setDsError("Please enter password"); return; }
@@ -208,44 +276,13 @@ export function ScreenerDashboard() {
         return () => clearInterval(interval);
     }, [batchId]);
 
-    // Phase 11d: Resume batch on page load — queries Supabase for latest batch (works for all users)
-    useEffect(() => {
-        const checkLatestBatch = async () => {
-            try {
-                const { data, error } = await supabase
-                    .from('ai_reports')
-                    .select('batch_id')
-                    .not('batch_id', 'is', null)
-                    .order('created_at', { ascending: false })
-                    .limit(1);
-                if (error || !data || data.length === 0) return;
-                const latestBatchId = data[0].batch_id;
-                // Skip if user already dismissed this batch
-                try {
-                    const dismissed = JSON.parse(localStorage.getItem('dismissedBatchIds') || '[]');
-                    if (Array.isArray(dismissed) && dismissed.includes(latestBatchId)) return;
-                } catch { /* ignore parse */ }
-                // Don't resume if already tracking this batch
-                setBatchId((prev) => prev || latestBatchId);
-            } catch (e) { /* silent */ }
-        };
-        checkLatestBatch();
-    }, []);
-
     // Auto-hide batch panel 8s after completion
     useEffect(() => {
         if (!batchId || !batchProgress) return;
         const done = batchProgress.completed + batchProgress.failed >= batchProgress.total;
         if (!done) return;
         const t = setTimeout(() => {
-            try {
-                const dismissed = JSON.parse(localStorage.getItem('dismissedBatchIds') || '[]');
-                const next = Array.isArray(dismissed) ? Array.from(new Set([...dismissed, batchId])).slice(-50) : [batchId];
-                localStorage.setItem('dismissedBatchIds', JSON.stringify(next));
-            } catch { /* ignore */ }
-            setBatchProgress(null);
-            setBatchId(null);
-            setBatchStatus(null);
+            dismissBatchPanel(batchId);
         }, 8000);
         return () => clearTimeout(t);
     }, [batchId, batchProgress]);
@@ -374,6 +411,13 @@ export function ScreenerDashboard() {
         setLoading(false);
     }
 
+    const youtubeEvaluations = useMemo(() => {
+        const map = new Map<string, YoutubeStrategyEvaluation>();
+        rawResults.forEach(result => {
+            map.set(result.candidate.symbol, evaluateYoutubeStrategy(result));
+        });
+        return map;
+    }, [rawResults]);
 
     // Filtering Logic
     const filteredResults = useMemo(() => {
@@ -476,6 +520,29 @@ export function ScreenerDashboard() {
             });
         }
 
+        if (screenMode === 'youtube') {
+            return rawResults.filter(r => {
+                const evaluation = youtubeEvaluations.get(r.candidate.symbol);
+                if (!evaluation || !matchesYoutubeStrategyFilter(evaluation, youtubeFilter)) return false;
+
+                const c = r.candidate;
+                const searchMatch = !search ||
+                    c.symbol.toLowerCase().includes(search.toLowerCase()) ||
+                    c.name.toLowerCase().includes(search.toLowerCase());
+                return searchMatch;
+            }).sort((a, b) => {
+                const aEval = youtubeEvaluations.get(a.candidate.symbol);
+                const bEval = youtubeEvaluations.get(b.candidate.symbol);
+                const aMatches = aEval?.matchedStrategies.length ?? 0;
+                const bMatches = bEval?.matchedStrategies.length ?? 0;
+                if (aMatches !== bMatches) return bMatches - aMatches;
+                const aSeed = aEval?.turnaroundSeed.passed ? 1 : 0;
+                const bSeed = bEval?.turnaroundSeed.passed ? 1 : 0;
+                if (aSeed !== bSeed) return aSeed - bSeed;
+                return (b.score || 0) - (a.score || 0);
+            });
+        }
+
         // 100-Bagger mode — existing behavior unchanged
         return rawResults.filter(r => {
             const c = r.candidate;
@@ -521,7 +588,7 @@ export function ScreenerDashboard() {
 
             return true;
         });
-    }, [rawResults, search, filters, selectedMarket, screenMode, reverseFilters, paradigmFilters]);
+    }, [rawResults, search, filters, selectedMarket, screenMode, reverseFilters, paradigmFilters, youtubeEvaluations, youtubeFilter]);
 
 
     // Pagination Logic
@@ -530,9 +597,56 @@ export function ScreenerDashboard() {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [search, filters]);
+    }, [search, filters, screenMode, reverseFilters, paradigmFilters, youtubeFilter, selectedMarket]);
 
     const filteredCount = filteredResults.length;
+    const youtubeTotals = useMemo(() => {
+        const evaluations = Array.from(youtubeEvaluations.values());
+        return {
+            any: evaluations.filter(e => e.matchedStrategies.length > 0).length,
+            earningsMomentum: evaluations.filter(e => e.earningsMomentum.passed).length,
+            deepValueReversal: evaluations.filter(e => e.deepValueReversal.passed).length,
+            turnaroundSeed: evaluations.filter(e => e.turnaroundSeed.passed).length,
+            turnaroundScaleIn: evaluations.filter(e => e.turnaroundScaleIn.passed).length,
+        };
+    }, [youtubeEvaluations]);
+    const strategyCounts = useMemo(() => ({
+        '100bagger': rawResults.filter(r => r.passed).length,
+        reverse: rawResults.filter(r => r.reverse && r.reverse.rev_band && r.reverse.rev_band !== 'Excluded').length,
+        paradigm: rawResults.filter(r => r.paradigm?.pdm_themes && r.paradigm.pdm_themes.length > 0).length,
+        youtube: youtubeTotals.any,
+    }), [rawResults, youtubeTotals]);
+    const reverseBandCounts = useMemo(() => {
+        const counts: Record<string, number> = {};
+        rawResults.forEach(r => {
+            const band = r.reverse?.rev_band;
+            if (band && band !== 'Excluded' && band !== 'Reject') counts[band] = (counts[band] || 0) + 1;
+        });
+        return counts;
+    }, [rawResults]);
+    const paradigmBandCounts = useMemo(() => {
+        const counts: Record<string, number> = {};
+        rawResults.forEach(r => {
+            const band = r.paradigm?.pdm_band;
+            if (band) counts[band] = (counts[band] || 0) + 1;
+        });
+        return counts;
+    }, [rawResults]);
+    const activeStrategy = STRATEGY_META[screenMode];
+    const activeMetric = screenMode === 'reverse'
+        ? 'Composite'
+        : screenMode === 'paradigm'
+            ? 'Paradigm signal'
+            : screenMode === 'youtube'
+                ? 'Video signal'
+                : '100-bagger score';
+    const activeSummary = screenMode === 'reverse'
+        ? 'Sorted by Reverse composite, with quality, valuation, survivability, and archetype filters available in the sidebar.'
+        : screenMode === 'paradigm'
+            ? 'Sorted by Paradigm signal. Cards keep Paradigm first so the theme thesis stays visible even beside other screens.'
+            : screenMode === 'youtube'
+                ? 'Screened by the video strategy playbooks: earnings momentum, deep-value reversal, and turnaround setups.'
+                : 'Screened by strict 100-bagger quantitative filters. Use the sidebar to tune growth, valuation, float, and ownership gates.';
     const totalPages = Math.ceil(filteredCount / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const currentData = filteredResults.slice(startIndex, startIndex + ITEMS_PER_PAGE);
@@ -572,7 +686,8 @@ export function ScreenerDashboard() {
                 setReverseFilters={setReverseFilters}
                 paradigmFilters={paradigmFilters}
                 setParadigmFilters={setParadigmFilters}
-                onScreenModeChange={(mode) => { setScreenMode(mode); setSelectedTickers(new Set()); }}
+                youtubeFilter={youtubeFilter}
+                setYoutubeFilter={setYoutubeFilter}
                 batchN={batchN}
                 onBatchNChange={setBatchN}
                 batchDispatching={batchDispatching}
@@ -668,6 +783,136 @@ export function ScreenerDashboard() {
 
                 {/* Content with Scroll */}
                 <div className="flex-1 overflow-y-auto p-4 md:p-6 scroll-smooth">
+                    <section className="mb-5">
+                        <div className="mb-3 flex flex-col gap-2 xl:flex-row xl:items-end xl:justify-between">
+                            <div>
+                                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-muted-foreground">Investing lens</div>
+                                <h2 className="text-xl font-black tracking-tight text-foreground">Strategy board</h2>
+                            </div>
+                            <p className="max-w-2xl text-xs leading-relaxed text-muted-foreground">
+                                Current strategy universe, primary rank metric, and cross-signal coverage at a glance.
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-1 gap-3 pb-2 lg:grid-cols-2 2xl:grid-cols-4">
+                            {(Object.keys(STRATEGY_META) as StrategyId[]).map((id) => {
+                                const meta = STRATEGY_META[id];
+                                const Icon = meta.icon;
+                                const isActive = id === screenMode;
+                                const count = strategyCounts[id];
+                                const content = (
+                                    <div className={clsx(
+                                        "h-full min-h-[132px] rounded-lg border p-3 text-left transition-all",
+                                        isActive
+                                            ? "border-primary/70 bg-primary/10 shadow-[0_0_0_1px_rgba(59,130,246,0.18)]"
+                                            : "border-border/70 bg-card/70 hover:border-primary/40 hover:bg-secondary/30"
+                                    )}>
+                                        <div className="flex items-start justify-between gap-3">
+                                            <div className={clsx("rounded-md border p-2", meta.accent)}>
+                                                <Icon className="h-4 w-4" />
+                                            </div>
+                                            <span className={clsx(
+                                                "rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-wider",
+                                                isActive ? "bg-primary text-primary-foreground" : "bg-secondary/60 text-muted-foreground"
+                                            )}>
+                                                {isActive ? 'Active' : 'Switch'}
+                                            </span>
+                                        </div>
+                                        <div className="mt-3">
+                                            <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">{meta.eyebrow}</div>
+                                            <div className="mt-0.5 text-sm font-black text-foreground">{meta.title}</div>
+                                            <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-muted-foreground">{meta.description}</p>
+                                        </div>
+                                        <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-2">
+                                            <span className="text-[10px] font-bold uppercase text-muted-foreground">{meta.metricLabel}</span>
+                                            <span className="font-mono text-sm font-black text-foreground">{count == null ? 'Open' : count.toLocaleString()}</span>
+                                        </div>
+                                    </div>
+                                );
+
+                                return (
+                                    <button
+                                        key={id}
+                                        type="button"
+                                        onClick={() => {
+                                            setScreenMode(id);
+                                            setSelectedTickers(new Set());
+                                        }}
+                                        className="block text-left"
+                                    >
+                                        {content}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                        <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+                            {screenMode === 'youtube' && YOUTUBE_FILTER_META.map(item => (
+                                <SubCard
+                                    key={item.value}
+                                    label={item.label}
+                                    value={youtubeTotals[item.value].toLocaleString()}
+                                    detail={item.description}
+                                    active={youtubeFilter === item.value}
+                                    tone="red"
+                                    onClick={() => setYoutubeFilter(item.value)}
+                                />
+                            ))}
+                            {screenMode === 'reverse' && ['High', 'Solid', 'Watchlist', 'Monitor', 'Reject-tier'].map(band => (
+                                <SubCard
+                                    key={band}
+                                    label={band}
+                                    value={(reverseBandCounts[band] || 0).toLocaleString()}
+                                    detail={band === 'High' ? 'Composite >= 70' : band === 'Solid' ? 'Composite 55-70' : band === 'Watchlist' ? 'Composite 40-55' : band === 'Monitor' ? 'Composite 25-40' : 'Below monitor band'}
+                                    active={reverseFilters.bands.includes(band)}
+                                    tone="emerald"
+                                    onClick={() => {
+                                        const bands = reverseFilters.bands.includes(band)
+                                            ? reverseFilters.bands.filter(b => b !== band)
+                                            : [...reverseFilters.bands, band];
+                                        setReverseFilters({ ...reverseFilters, bands });
+                                    }}
+                                />
+                            ))}
+                            {screenMode === 'paradigm' && [
+                                { id: 'high', label: 'STRONG' },
+                                { id: 'mid', label: 'SOLID' },
+                                { id: 'watch', label: 'WATCH' },
+                                { id: 'skip', label: 'PASS' },
+                                { id: 'no_data', label: 'NO DATA' },
+                            ].map(item => (
+                                <SubCard
+                                    key={item.id}
+                                    label={item.label}
+                                    value={(paradigmBandCounts[item.id] || 0).toLocaleString()}
+                                    detail="Paradigm conviction tier"
+                                    active={paradigmFilters.bands.includes(item.id)}
+                                    tone="purple"
+                                    onClick={() => {
+                                        const bands = paradigmFilters.bands.includes(item.id)
+                                            ? paradigmFilters.bands.filter(b => b !== item.id)
+                                            : [...paradigmFilters.bands, item.id];
+                                        setParadigmFilters({ ...paradigmFilters, bands });
+                                    }}
+                                />
+                            ))}
+                            {screenMode === '100bagger' && [
+                                { label: 'Strict Pass', value: strategyCounts['100bagger'].toLocaleString(), detail: 'Passed current strict status' },
+                                { label: 'Min Growth', value: `${filters.minRevenueGrowth}%`, detail: 'Revenue growth floor' },
+                                { label: 'Max Price', value: selectedMarket === 'US' ? `$${filters.maxPrice}` : String(filters.maxPrice), detail: 'Current price ceiling' },
+                                { label: 'Min ROIC', value: `${filters.minROIC}%`, detail: 'Return on invested capital' },
+                                { label: 'Max Float', value: `${filters.maxFloat}M`, detail: 'Float share ceiling' },
+                            ].map(item => (
+                                <SubCard
+                                    key={item.label}
+                                    label={item.label}
+                                    value={item.value}
+                                    detail={item.detail}
+                                    active={false}
+                                    tone="sky"
+                                />
+                            ))}
+                        </div>
+                    </section>
+
                     {/* Phase 11d: Batch Progress Bar — visible in both modes */}
                     {screenMode === 'reverse' && batchId && (
                         <div className="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl animate-in fade-in">
@@ -683,7 +928,7 @@ export function ScreenerDashboard() {
                                         </span>
                                     </div>
                                 </div>
-                                <button onClick={() => { setBatchProgress(null); setBatchId(null); setBatchStatus(null); }} className="text-muted-foreground hover:text-foreground text-xs">Dismiss</button>
+                                <button onClick={() => dismissBatchPanel()} className="text-muted-foreground hover:text-foreground text-xs">Dismiss</button>
                             </div>
                             {batchProgress && (
                                 <div className="w-full h-2 bg-secondary/50 rounded-full mt-2 overflow-hidden">
@@ -710,13 +955,24 @@ export function ScreenerDashboard() {
                             )}
                         </div>
                     )}
-                    <div className="mb-6">
-                        <h2 className="text-2xl font-bold flex items-center gap-3">
-                            {t('marketOpp')}
-                        </h2>
-                        <p className="text-muted-foreground text-sm">
-                            {t('showing')} {filteredCount > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)} / {filteredCount} {t('assets')}
-                        </p>
+                    <div className="mb-6 rounded-lg border border-border/70 bg-card/70 p-4">
+                        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                            <div className="min-w-0">
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <span className={clsx("rounded-md border px-2 py-1 text-[10px] font-black uppercase tracking-wider", activeStrategy.accent)}>
+                                        {activeStrategy.eyebrow}
+                                    </span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} market</span>
+                                </div>
+                                <h2 className="mt-2 text-2xl font-black tracking-tight">{activeStrategy.title}</h2>
+                                <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{activeSummary}</p>
+                            </div>
+                            <div className="grid grid-cols-3 gap-2 sm:min-w-[360px]">
+                                <SummaryMetric label="Showing" value={`${filteredCount > 0 ? startIndex + 1 : 0}-${Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}`} />
+                                <SummaryMetric label="Results" value={filteredCount.toLocaleString()} />
+                                <SummaryMetric label="Sorted by" value={activeMetric} />
+                            </div>
+                        </div>
                     </div>
 
                     {loading && rawResults.length === 0 ? (
@@ -764,6 +1020,8 @@ export function ScreenerDashboard() {
                                             index={i}
                                             lastUpdated={result.Last_Updated || lastUpdatedFile}
                                             market={selectedMarket}
+                                            screenMode={screenMode}
+                                            youtubeEvaluation={youtubeEvaluations.get(result.candidate.symbol)}
                                         />
                                     </div>
                                 ))}
@@ -1016,16 +1274,7 @@ export function ScreenerDashboard() {
                                 )}
                             </div>
                         </div>
-                        <button onClick={() => {
-                            try {
-                                const dismissed = JSON.parse(localStorage.getItem('dismissedBatchIds') || '[]');
-                                const next = Array.isArray(dismissed) ? Array.from(new Set([...dismissed, batchId])).slice(-50) : [batchId];
-                                localStorage.setItem('dismissedBatchIds', JSON.stringify(next));
-                            } catch { /* ignore */ }
-                            setBatchProgress(null);
-                            setBatchId(null);
-                            setBatchStatus(null);
-                        }} className="text-muted-foreground hover:text-foreground shrink-0" title="Dismiss permanently">
+                        <button onClick={() => dismissBatchPanel()} className="text-muted-foreground hover:text-foreground shrink-0" title="Dismiss">
                             <X className="h-5 w-5" />
                         </button>
                     </div>
@@ -1154,6 +1403,52 @@ export function ScreenerDashboard() {
             )}
 
             <LogConsole isOpen={isLogOpen} onClose={() => setIsLogOpen(false)} />
+        </div>
+    );
+}
+
+function SummaryMetric({ label, value }: { label: string; value: string | number }) {
+    return (
+        <div className="rounded-md border border-border/60 bg-secondary/20 px-3 py-2">
+            <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 truncate font-mono text-sm font-black text-foreground" title={String(value)}>{value}</div>
+        </div>
+    );
+}
+
+function SubCard({ label, value, detail, active, tone, onClick }: { label: string; value: string | number; detail: string; active: boolean; tone: 'sky' | 'emerald' | 'purple' | 'red'; onClick?: () => void }) {
+    const toneClass = {
+        sky: active ? "border-sky-500/60 bg-sky-500/15 text-sky-300" : "hover:border-sky-500/40",
+        emerald: active ? "border-emerald-500/60 bg-emerald-500/15 text-emerald-300" : "hover:border-emerald-500/40",
+        purple: active ? "border-purple-500/60 bg-purple-500/15 text-purple-300" : "hover:border-purple-500/40",
+        red: active ? "border-red-500/60 bg-red-500/15 text-red-300" : "hover:border-red-500/40",
+    }[tone];
+
+    const content = (
+        <>
+            <div className="flex items-start justify-between gap-2">
+                <span className="truncate text-[10px] font-black uppercase tracking-wider text-muted-foreground">{label}</span>
+                <span className="font-mono text-sm font-black text-foreground">{value}</span>
+            </div>
+            <p className="mt-1 line-clamp-2 text-[10px] leading-snug text-muted-foreground">{detail}</p>
+        </>
+    );
+
+    if (onClick) {
+        return (
+            <button
+                type="button"
+                onClick={onClick}
+                className={clsx("min-w-[150px] rounded-md border border-border/70 bg-card/60 px-3 py-2 text-left transition-all", toneClass)}
+            >
+                {content}
+            </button>
+        );
+    }
+
+    return (
+        <div className={clsx("min-w-[150px] rounded-md border border-border/70 bg-card/60 px-3 py-2", toneClass)}>
+            {content}
         </div>
     );
 }
