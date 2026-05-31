@@ -308,7 +308,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         </nav>
 
                         {/* Phase 1: Quant Metrics */}
-                        <div id="scorecard-quant" className="scroll-mt-36">
+                        <div id="scorecard-quant" className="scroll-mt-36 rounded-xl border border-border/60 bg-card/60 p-5 shadow-sm">
                             <h3 className="text-2xl font-black mb-4 flex items-center gap-2">
                                 <Activity className="h-5 w-5 text-primary" /> {t('phase1')}
                             </h3>
@@ -334,7 +334,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         </div>
 
                                                 {/* REPORTS Action Section - Made prominent and sticky-friendly */}
-                        <div id="scorecard-reports" className="scroll-mt-36 flex flex-col sm:flex-row items-center gap-3 border-y border-border/50 py-4 my-2">
+                        <div id="scorecard-reports" className="scroll-mt-36 rounded-xl border border-border/60 bg-card/60 p-5 shadow-sm">
+                            <div className="flex flex-col sm:flex-row items-center gap-3">
                             <button 
                                 onClick={() => setShowReports(!showReports)}
                                 className={clsx(
@@ -354,6 +355,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 <span className="text-xs text-primary font-mono font-bold">
                                     {reportHistory.length} Cloud Records Found
                                 </span>
+                            </div>
                             </div>
                         </div>
 
@@ -395,8 +397,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* WS1: Paradigm Dimension Breakdown */}
                         {result.paradigm && (result.paradigm.pdm_themes?.length > 0 || result.paradigm.pdm_signal != null) && (
-                            <div id="scorecard-paradigm" className="scroll-mt-36">
-                                <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-purple-400">
+                            <div id="scorecard-paradigm" className="scroll-mt-36 rounded-xl border border-purple-500/25 bg-purple-500/[0.04] p-5 shadow-sm">
+                                <h3 className="text-2xl font-black mb-4 flex items-center gap-2 text-purple-400">
                                     <Activity className="h-5 w-5" /> Paradigm Dimension (Secular Themes)
                                 </h3>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
@@ -456,7 +458,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         )}
 
                         {youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0 && (
-                            <div id="scorecard-youtube" className="scroll-mt-36">
+                            <div id="scorecard-youtube" className="scroll-mt-36 rounded-xl border border-red-500/25 bg-red-500/[0.04] p-5 shadow-sm">
                                 <h3 className="text-2xl font-black mb-4 flex items-center gap-2 text-red-300">
                                     <Activity className="h-5 w-5" /> YouTube Strategy Lens
                                 </h3>
@@ -477,8 +479,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* Phase 9: Reverse Engine Breakdown */}
                         {result.reverse && result.reverse.rev_band && result.reverse.rev_band !== 'Excluded' && (
-                            <div id="scorecard-reverse" className="scroll-mt-36">
-                                <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-emerald-400">
+                            <div id="scorecard-reverse" className="scroll-mt-36 rounded-xl border border-emerald-500/25 bg-emerald-500/[0.04] p-5 shadow-sm">
+                                <h3 className="text-2xl font-black mb-4 flex items-center gap-2 text-emerald-400">
                                     <Activity className="h-5 w-5" /> Reverse Engine (v1.2)
                                 </h3>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
@@ -530,8 +532,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* Deepseek AI Report */}
                         {savedReport && (
-                            <div id="scorecard-ai-report" className="scroll-mt-36">
-                                <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-blue-400">
+                            <div id="scorecard-ai-report" className="scroll-mt-36 rounded-xl border border-blue-500/25 bg-blue-500/[0.04] p-5 shadow-sm">
+                                <h3 className="text-2xl font-black mb-4 flex items-center gap-2 text-blue-400">
                                     <Sparkles className="h-5 w-5" /> AI Valuation Report (Deepseek V4.0 Pro)
                                 </h3>
                                 <div className="bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
@@ -545,7 +547,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         </div>
                                     </div>
                                     <div className="p-5 overflow-y-auto max-h-[600px] custom-scrollbar">
-                                        <div className="prose prose-invert prose-sm max-w-none text-foreground/90 leading-relaxed prose-headings:text-foreground prose-a:text-blue-400">
+                                        <div className="prose prose-invert max-w-none text-foreground/90 leading-relaxed prose-headings:text-foreground prose-a:text-blue-400">
                                             <ReactMarkdown>
                                                 {savedReport.content}
                                             </ReactMarkdown>
