@@ -336,7 +336,7 @@ export function ReportsDashboard() {
                             <Sparkles className="h-5 w-5 text-accent" />
                             AI RESEARCH REPOSITORY
                         </h1>
-                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">
+                        <p className="text-xs uppercase tracking-widest text-muted-foreground font-bold">
                             Cloud-Stored Deepseek V4.0 Pro Analyses
                         </p>
                     </div>
@@ -409,7 +409,7 @@ export function ReportsDashboard() {
                             </select>
                         </div>
                         <div className="flex items-center gap-3 px-1">
-                            <span className="text-[10px] font-black text-muted-foreground uppercase whitespace-nowrap">Min Conviction: {filterConviction}</span>
+                            <span className="text-xs font-black text-muted-foreground uppercase whitespace-nowrap">Min Conviction: {filterConviction}</span>
                             <input 
                                 type="range" min="0" max="15" step="0.5" 
                                 value={filterConviction} 
@@ -463,7 +463,7 @@ export function ReportsDashboard() {
                                                         </span>
                                                     )}
                                                 </div>
-                                                <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-black uppercase tracking-tight">
+                                                <div className="flex items-center gap-2 text-xs text-muted-foreground font-black uppercase tracking-tight">
                                                     <Calendar className="h-3.5 w-3.5 opacity-50 text-blue-500" />
                                                     {createdAt.toLocaleDateString()} 
                                                     <span className="text-white/20 font-normal">@</span>
@@ -501,13 +501,13 @@ export function ReportsDashboard() {
                             <aside className="hidden lg:block w-72 shrink-0 border-r border-white/5 bg-[#0a0c10] p-6 sticky top-0 h-screen overflow-y-auto no-scrollbar">
                                 <div className="space-y-6">
                                     <div>
-                                        <h3 className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em] mb-5 flex items-center gap-2">
+                                        <h3 className="text-xs font-black text-blue-500 uppercase tracking-[0.2em] mb-5 flex items-center gap-2">
                                             <span className="w-4 h-[1px] bg-blue-500/30"></span>
                                             Contents
                                         </h3>
                                         <nav className="space-y-0.5">
                                             {reportHeadings.length === 0 ? (
-                                                <p className="text-[10px] text-muted-foreground uppercase px-2">No sections detected</p>
+                                                <p className="text-xs text-muted-foreground uppercase px-2">No sections detected</p>
                                             ) : (
                                                 reportHeadings.map((h) => (
                                                     <button
@@ -541,7 +541,7 @@ export function ReportsDashboard() {
                                             onClick={() => downloadReport(selectedReport)}
                                             className="w-full flex items-center justify-between group bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-lg px-4 py-3 transition-all"
                                         >
-                                            <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Download .TXT</span>
+                                            <span className="text-xs font-black text-blue-400 uppercase tracking-widest">Download .TXT</span>
                                             <Download className="h-3.5 w-3.5 text-blue-400 group-hover:translate-y-0.5 transition-transform" />
                                         </button>
                                     </div>
@@ -558,7 +558,7 @@ export function ReportsDashboard() {
                                             {/* Mobile Back Button */}
                                             <button 
                                                 onClick={() => setSelectedReport(null)}
-                                                className="md:hidden flex items-center gap-2 mb-6 text-blue-400 font-bold text-[10px] bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-all tracking-[0.2em]"
+                                                className="md:hidden flex items-center gap-2 mb-6 text-blue-400 font-bold text-xs bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-all tracking-[0.2em]"
                                             >
                                                 <ArrowLeft className="h-3.5 w-3.5" /> RETURN TO LIST
                                             </button>
@@ -600,11 +600,11 @@ export function ReportsDashboard() {
                                                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                                                     <div>
                                                         <div className="flex items-center gap-3 mb-3">
-                                                            <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black rounded-md tracking-widest uppercase">
+                                                            <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black rounded-md tracking-widest uppercase">
                                                                 {meta.archetype || 'Asset Research'}
                                                             </span>
                                                             <span className="w-1 h-1 rounded-full bg-white/20"></span>
-                                                            <span className="text-muted-foreground text-[10px] font-bold uppercase tracking-widest">
+                                                            <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest">
                                                                 {new Date(selectedReport.created_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                                                             </span>
                                                         </div>
@@ -618,11 +618,11 @@ export function ReportsDashboard() {
 
                                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 shrink-0">
                                                         <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-[9px] font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-50">Conviction</div>
+                                                            <div className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Conviction</div>
                                                             <div className="text-3xl font-black text-blue-500 tracking-tighter">{meta.conviction || '0'}</div>
                                                         </div>
                                                         <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-[9px] font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-50">Upside</div>
+                                                            <div className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Upside</div>
                                                             <div className={clsx(
                                                                 "text-3xl font-black tracking-tighter",
                                                                 (parseFloat(meta.upside || 0)) > 0 ? "text-green-400" : "text-red-400"
@@ -631,7 +631,7 @@ export function ReportsDashboard() {
                                                             </div>
                                                         </div>
                                                         <div className="hidden sm:block bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-[9px] font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-50">Rating</div>
+                                                            <div className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Rating</div>
                                                             <div className="text-2xl font-black text-white tracking-tighter uppercase">{meta.action || 'HOLD'}</div>
                                                         </div>
                                                     </div>
@@ -701,7 +701,7 @@ export function ReportsDashboard() {
                                                             ),
                                                             thead: ({node, ...props}: any) => <thead className="bg-white/[0.03]" {...props} />,
                                                             tbody: ({node, ...props}: any) => <tbody className="divide-y divide-white/5" {...props} />,
-                                                            th: ({node, ...props}: any) => <th className="px-4 py-3 text-left text-[10px] md:text-xs font-black text-blue-400 uppercase tracking-wider border-b border-white/10" {...props} />,
+                                                            th: ({node, ...props}: any) => <th className="px-4 py-3 text-left text-xs font-black text-blue-400 uppercase tracking-wider border-b border-white/10" {...props} />,
                                                             td: ({node, ...props}: any) => <td className="px-4 py-2.5 text-slate-300 font-medium border-b border-white/5" {...props} />,
                                                         }}
                                                     >
@@ -716,7 +716,7 @@ export function ReportsDashboard() {
                                                     </ReactMarkdown>
 
                                                     {/* Footer stats */}
-                                                    <footer className="mt-24 pt-12 border-t border-white/5 flex flex-wrap gap-8 text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">
+                                                    <footer className="mt-24 pt-12 border-t border-white/5 flex flex-wrap gap-8 text-xs font-black text-muted-foreground uppercase tracking-[0.2em]">
                                                         <div className="flex items-center gap-2"><DollarSign className="h-3 w-3" /> Compute Cost: ${selectedReport.cost || '0.00'}</div>
                                                         <div className="flex items-center gap-2"><Activity className="h-3 w-3" /> Token Density: {selectedReport.usage?.total_tokens || 0} units</div>
                                                         <div className="flex items-center gap-2"><Calendar className="h-3 w-3" /> Processed At: {new Date(selectedReport.created_at).toISOString()}</div>

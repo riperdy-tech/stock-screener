@@ -6,15 +6,17 @@ import { useEffect, useState } from "react";
 import { Market, formatKoreanWon, formatTaiwanNTD } from "@/lib/data-service";
 import { supabase } from "@/lib/supabase";
 import clsx from "clsx";
+import { YoutubeStrategyEvaluation, formatStrategyNumber } from "@/lib/youtube-strategy";
 
 interface StockDetailModalProps {
     result: ScreeningResult;
     onClose: () => void;
     onAskGemini?: (ticker: string) => void;
     market?: Market;
+    youtubeEvaluation?: YoutubeStrategyEvaluation;
 }
 
-export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }: StockDetailModalProps) {
+export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', youtubeEvaluation }: StockDetailModalProps) {
     const { t } = useLanguage();
     const { candidate, reasons, flags, score } = result;
 
@@ -108,23 +110,23 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card border border-border rounded-xl shadow-2xl animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto bg-card border border-border rounded-xl shadow-2xl animate-in zoom-in-95 duration-200">
 
                 {/* Header */}
-                <div className="sticky top-0 z-10 flex items-center justify-between p-4 sm:p-6 bg-card border-b border-border">
+                <div className="sticky top-0 z-10 flex items-center justify-between p-4 sm:p-6 bg-card/95 backdrop-blur-xl border-b border-border">
                     <div className="flex-1 min-w-0">
                         <div className="flex flex-col gap-1">
                             <div className="flex items-center gap-3">
-                                <h2 className="text-xl sm:text-3xl font-bold truncate">
+                                <h2 className="text-2xl sm:text-4xl font-black truncate">
                                     {market === 'Korea' ? candidate.name : market === 'Taiwan' ? candidate.name : candidate.symbol.replace(/\.(NS|BO)$/, '')}
                                 </h2>
-                                <span className="text-base sm:text-xl text-muted-foreground font-light px-2 border-l border-border truncate">
+                                <span className="text-base sm:text-2xl text-muted-foreground font-medium px-2 border-l border-border truncate">
                                     {market === 'Korea' ? candidate.symbol.split('.')[0] : market === 'Taiwan' ? candidate.symbol : candidate.name}
                                 </span>
                             </div>
 
-                            <div className="flex items-center gap-2 text-sm text-primary/80 font-medium mt-1">
+                            <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base text-primary/80 font-medium mt-1">
                                 <span>{candidate.sector}</span>
                                 <span className="text-muted-foreground">•</span>
                                 <span>{result.industry || t('industry')}</span>
@@ -140,7 +142,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
 
                             <div className="mt-2 group">
                                 <p className={clsx(
-                                    "text-xs text-muted-foreground leading-relaxed transition-all duration-300",
+                                    "text-sm text-muted-foreground leading-relaxed transition-all duration-300",
                                     !isExpanded && (result.description || "").length > 120 ? "line-clamp-2" : ""
                                 )}>
                                     {result.description || t('noDesc')}
@@ -148,7 +150,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                 {(result.description || "").length > 120 && (
                                     <button 
                                         onClick={() => setIsExpanded(!isExpanded)}
-                                        className="text-[10px] font-bold text-primary hover:text-primary/80 mt-1 uppercase tracking-wider"
+                                        className="text-xs font-bold text-primary hover:text-primary/80 mt-1 uppercase tracking-wider"
                                     >
                                         {isExpanded ? "Show Less" : "Read More"}
                                     </button>
@@ -188,10 +190,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                     </button>
                 </div>
 
-                <div className="p-6 space-y-8">
+                <div className="p-4 sm:p-6 lg:p-8 space-y-8">
 
                         {/* Score & Synthesis */}
-                        <div className="flex items-center gap-6 p-6 bg-secondary/30 rounded-xl border border-border/50">
+                        <div className="flex flex-col gap-5 rounded-xl border border-border/50 bg-secondary/25 p-5 sm:flex-row sm:items-center sm:p-6">
                             <div className="relative flex items-center justify-center h-24 w-24 shrink-0">
                                 <svg className="h-full w-full -rotate-90" viewBox="0 0 36 36">
                                     <path className="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
@@ -202,14 +204,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                 </div>
                             </div>
                             <div>
-                                <h4 className="text-lg font-semibold mb-1">{t('blueprintAnalysis')}</h4>
-                                <p className={clsx("text-sm font-medium", result.passed ? "text-success" : "text-danger")}>
+                                <h4 className="text-xl font-black mb-1">{t('blueprintAnalysis')}</h4>
+                                <p className={clsx("text-base font-medium", result.passed ? "text-success" : "text-danger")}>
                                     {result.passed
                                         ? t('verdictPass')
                                         : (
                                         <div className="mt-2 text-foreground">
                                             <span className="font-bold text-danger">Missed Criteria:</span>
-                                            <ul className="list-disc pl-5 mt-1 text-xs text-foreground/80 font-normal space-y-1">
+                                            <ul className="list-disc pl-5 mt-2 text-sm text-foreground/80 font-normal space-y-1.5">
                                                 {(result.failCodes && result.failCodes.length > 0) ? result.failCodes.map(code => {
                                                     const failReasonMap: Record<string, string> = {
                                                         FAIL_MCAP: market === 'Korea' 
@@ -242,10 +244,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
 
                         {/* Phase 1: Quant Metrics */}
                         <div>
-                            <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                            <h3 className="text-2xl font-black mb-4 flex items-center gap-2">
                                 <Activity className="h-5 w-5 text-primary" /> {t('phase1')}
                             </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
                                 <DetailRow label={t('revGrowth')} value={market !== 'US' && candidate.revenueGrowth === 0 ? 'N/A' : `${Number(candidate.revenueGrowth).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_REVENUE_GROWTH}%`} pass={market !== 'US' && candidate.revenueGrowth === 0 ? true : candidate.revenueGrowth >= QUANT_THRESHOLDS.MIN_REVENUE_GROWTH} />
                                 <DetailRow label={t('roic')} value={market !== 'US' && candidate.roic === 0 ? 'N/A' : `${Number(candidate.roic).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_ROIC}%`} pass={market !== 'US' && candidate.roic === 0 ? true : candidate.roic >= QUANT_THRESHOLDS.MIN_ROIC} />
                                 <DetailRow label={t('grossMargin')} value={market !== 'US' && candidate.grossMargin === 0 ? 'N/A' : `${Number(candidate.grossMargin).toFixed(1)}%`} target={`> 30% / 50%`} pass={market !== 'US' && candidate.grossMargin === 0 ? true : candidate.grossMargin >= 30} />
@@ -376,15 +378,35 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                     </div>
                                 )}
                                 {result.paradigm.pdm_pro && (
-                                    <div className="text-xs text-emerald-400/80 mb-1 flex items-start gap-1">
+                                    <div className="text-sm text-emerald-400/80 mb-1 flex items-start gap-1">
                                         <span className="font-bold shrink-0">Pro:</span> {result.paradigm.pdm_pro}
                                     </div>
                                 )}
                                 {result.paradigm.pdm_con && (
-                                    <div className="text-xs text-amber-400/80 flex items-start gap-1">
+                                    <div className="text-sm text-amber-400/80 flex items-start gap-1">
                                         <span className="font-bold shrink-0">Con:</span> {result.paradigm.pdm_con}
                                     </div>
                                 )}
+                            </div>
+                        )}
+
+                        {youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0 && (
+                            <div>
+                                <h3 className="text-2xl font-black mb-4 flex items-center gap-2 text-red-300">
+                                    <Activity className="h-5 w-5" /> YouTube Strategy Lens
+                                </h3>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                    <ReverseStat label="Primary Match" value={youtubeEvaluation.matchedStrategies[0]} />
+                                    <ReverseStat label="Matches" value={youtubeEvaluation.matchedStrategies.length} />
+                                    <ReverseStat label="Risk Tier" value={youtubeEvaluation.riskTier === 'standard' ? 'Standard' : 'Tiny'} />
+                                    <ReverseStat label="Position Cap" value={youtubeEvaluation.maxPositionSize} />
+                                </div>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <ReverseStat label="EPS TTM" value={formatStrategyNumber(youtubeEvaluation.epsTtm)} />
+                                    <ReverseStat label="Forward EPS" value={formatStrategyNumber(youtubeEvaluation.forwardEpsEstimate)} />
+                                    <ReverseStat label="P/B" value={formatStrategyNumber(youtubeEvaluation.priceToBook)} />
+                                    <ReverseStat label="Current P/E" value={formatStrategyNumber(youtubeEvaluation.currentPe)} />
+                                </div>
                             </div>
                         )}
 
@@ -424,12 +446,12 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
                                     </div>
                                 )}
                                 {result.reverse.rev_pro && (
-                                    <div className="text-xs text-emerald-400/80 mb-1 flex items-start gap-1">
+                                    <div className="text-sm text-emerald-400/80 mb-1 flex items-start gap-1">
                                         <span className="font-bold shrink-0">Pro:</span> {result.reverse.rev_pro}
                                     </div>
                                 )}
                                 {result.reverse.rev_con && (
-                                    <div className="text-xs text-amber-400/80 flex items-start gap-1">
+                                    <div className="text-sm text-amber-400/80 flex items-start gap-1">
                                         <span className="font-bold shrink-0">Con:</span> {result.reverse.rev_con}
                                     </div>
                                 )}
@@ -475,17 +497,17 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US' }
 
 function ReverseStat({ label, value, sub, band, warn }: { label: string; value: string | number; sub?: string; band?: string | null; warn?: boolean }) {
     return (
-        <div className="p-2.5 bg-secondary/20 rounded-lg">
-            <div className="text-[10px] text-muted-foreground uppercase tracking-wider">{label}</div>
+        <div className="rounded-lg border border-border/50 bg-secondary/20 p-3">
+            <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{label}</div>
             <div className={clsx(
-                "font-mono font-bold text-sm",
+                "mt-1 font-mono text-lg font-black",
                 band === 'High' && "text-emerald-400",
                 band === 'Solid' && "text-blue-400",
                 band === 'Watchlist' && "text-amber-400",
                 band === 'Monitor' && "text-gray-400",
                 warn && "text-amber-400",
             )}>{value}</div>
-            {sub && <div className="text-[10px] text-muted-foreground/60 mt-0.5">{sub}</div>}
+            {sub && <div className="text-xs text-muted-foreground/70 mt-0.5">{sub}</div>}
         </div>
     );
 }
@@ -494,14 +516,14 @@ function DetailRow({ label, value, target, pass, warning }: { label: string, val
     const { t } = useLanguage();
 
     return (
-        <div className="flex items-center justify-between p-3 bg-secondary/20 rounded-lg">
+        <div className="flex items-center justify-between gap-4 rounded-lg border border-border/50 bg-secondary/20 p-3">
             <div>
-                <div className="text-xs text-muted-foreground">{label}</div>
-                <div className="font-mono font-semibold">{value}</div>
+                <div className="text-sm text-muted-foreground">{label}</div>
+                <div className="font-mono text-lg font-black">{value}</div>
             </div>
             <div className="text-right">
-                <div className="text-[10px] opacity-70">{t('target')}: {target}</div>
-                <div className={clsx("text-xs font-bold", pass ? "text-success" : warning ? "text-warning" : "text-danger")}>
+                <div className="text-xs opacity-70">{t('target')}: {target}</div>
+                <div className={clsx("text-sm font-bold", pass ? "text-success" : warning ? "text-warning" : "text-danger")}>
                     {pass ? t('pass') : warning ? t('watch') : t('fail')}
                 </div>
             </div>

@@ -259,14 +259,14 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
             <div className="flex-1 overflow-y-auto p-4 space-y-6">
                 <div className="rounded-lg border border-border/60 bg-secondary/20 px-3 py-2">
-                    <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">Active lens</div>
-                    <div className="mt-0.5 text-sm font-bold text-foreground">
+                    <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">Active lens</div>
+                    <div className="mt-0.5 text-base font-bold text-foreground">
                         {screenMode === 'reverse' ? 'Reverse Engine'
                             : screenMode === 'paradigm' ? 'Paradigm Themes'
                             : screenMode === 'youtube' ? 'YouTube Strategy'
                             : '100-Bagger'}
                     </div>
-                    <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                         Filter set scoped to the current screening lens.
                     </p>
                 </div>
@@ -300,7 +300,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                         key={band}
                                         onClick={() => toggleBand(band)}
                                         className={clsx(
-                                            "px-2.5 py-1 text-[10px] font-bold rounded-md border transition-all",
+                                            "px-2.5 py-1.5 text-xs font-bold rounded-md border transition-all",
                                             localReverseFilters.bands.includes(band)
                                                 ? band === 'High' ? "bg-emerald-500/30 text-emerald-400 border-emerald-500/50"
                                                 : band === 'Solid' ? "bg-blue-500/30 text-blue-400 border-blue-500/50"
@@ -351,7 +351,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
                         {/* Phase 11d: Deep-Dive */}
                         <Section title="Deep-Dive (v3.2)">
-                            <p className="text-[10px] text-muted-foreground mb-2">Click cards to select stocks, or use N below for top-ranked.</p>
+                            <p className="text-xs text-muted-foreground mb-2">Click cards to select stocks, or use N below for top-ranked.</p>
                             <div className="flex items-center gap-2">
                                 <select
                                     value={(batchN && [5,10,25].includes(batchN)) ? batchN : 0}
@@ -420,7 +420,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                         key={id}
                                         onClick={() => toggleParadigmBand(id)}
                                         className={clsx(
-                                            "px-2.5 py-1 text-[10px] font-bold rounded-md border transition-all",
+                                            "px-2.5 py-1.5 text-xs font-bold rounded-md border transition-all",
                                             localParadigmFilters.bands.includes(id)
                                                 ? cls
                                                 : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-primary/40"
@@ -439,7 +439,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                         key={theme}
                                         onClick={() => toggleParadigmTheme(theme)}
                                         className={clsx(
-                                            "px-2 py-1 text-[10px] font-mono rounded-md border transition-all",
+                                            "px-2 py-1.5 text-xs font-mono rounded-md border transition-all",
                                             localParadigmFilters.themes.includes(theme)
                                                 ? "bg-purple-500/30 text-purple-300 border-purple-500/50"
                                                 : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-purple-400/40"
@@ -459,7 +459,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                 onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, industryQuery: e.target.value })}
                                 className="w-full bg-secondary/40 border border-border/70 text-foreground text-xs rounded-md px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-purple-500"
                             />
-                            <p className="text-[10px] text-muted-foreground mt-1">Case-insensitive substring match on Yahoo industry name.</p>
+                            <p className="text-xs text-muted-foreground mt-1">Case-insensitive substring match on Yahoo industry name.</p>
                         </Section>
 
                         <Section title="Score Thresholds (0-100)">

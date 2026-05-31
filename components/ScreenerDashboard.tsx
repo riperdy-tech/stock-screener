@@ -706,7 +706,7 @@ export function ScreenerDashboard() {
                 <header className="py-3 md:h-16 border-b border-border/50 flex flex-col md:flex-row flex-shrink-0 items-start md:items-center justify-between px-4 md:px-6 bg-card/70 backdrop-blur-xl sticky top-0 z-30 shadow-sm gap-3 md:gap-0">
                     <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
                         <div className="flex items-center gap-2 md:gap-4">
-                            <h1 className="text-lg md:text-xl font-bold text-foreground truncate max-w-[150px] sm:max-w-none">
+                            <h1 className="text-xl md:text-2xl font-bold text-foreground truncate max-w-[150px] sm:max-w-none">
                                 {t('appTitle')}
                             </h1>
                             <button 
@@ -719,7 +719,7 @@ export function ScreenerDashboard() {
                         </div>
                         
                         <div className="flex md:hidden items-center gap-2 shrink-0">
-                             <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 rounded-full transition-all text-[11px] font-black active:scale-95">
+                             <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 rounded-full transition-all text-xs font-black active:scale-95">
                                 <Sparkles className="h-3.5 w-3.5" />
                                 REPORTS
                              </Link>
@@ -783,14 +783,14 @@ export function ScreenerDashboard() {
                 </header>
 
                 {/* Content with Scroll */}
-                <div className="flex-1 overflow-y-auto p-4 md:p-6 scroll-smooth">
+                    <div className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 scroll-smooth">
                     <section className="mb-5">
                         <div className="mb-3 flex flex-col gap-2 xl:flex-row xl:items-end xl:justify-between">
                             <div>
-                                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-muted-foreground">Investing lens</div>
-                                <h2 className="text-xl font-black tracking-tight text-foreground">Strategy board</h2>
+                                <div className="text-xs font-black uppercase tracking-[0.24em] text-muted-foreground">Investing lens</div>
+                                <h2 className="text-2xl font-black tracking-tight text-foreground">Strategy board</h2>
                             </div>
-                            <p className="max-w-2xl text-xs leading-relaxed text-muted-foreground">
+                            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
                                 Current strategy universe, primary rank metric, and cross-signal coverage at a glance.
                             </p>
                         </div>
@@ -802,7 +802,7 @@ export function ScreenerDashboard() {
                                 const count = strategyCounts[id];
                                 const content = (
                                     <div className={clsx(
-                                        "h-full min-h-[132px] rounded-lg border p-3 text-left transition-all",
+                                        "h-full min-h-[150px] rounded-lg border p-4 text-left transition-all",
                                         isActive
                                             ? "border-primary/70 bg-primary/10 shadow-[0_0_0_1px_rgba(59,130,246,0.18)]"
                                             : "border-border/70 bg-card/70 hover:border-primary/40 hover:bg-secondary/30"
@@ -812,20 +812,20 @@ export function ScreenerDashboard() {
                                                 <Icon className="h-4 w-4" />
                                             </div>
                                             <span className={clsx(
-                                                "rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-wider",
+                                                "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wider",
                                                 isActive ? "bg-primary text-primary-foreground" : "bg-secondary/60 text-muted-foreground"
                                             )}>
                                                 {isActive ? 'Active' : 'Switch'}
                                             </span>
                                         </div>
                                         <div className="mt-3">
-                                            <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">{meta.eyebrow}</div>
-                                            <div className="mt-0.5 text-sm font-black text-foreground">{meta.title}</div>
-                                            <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-muted-foreground">{meta.description}</p>
+                                            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{meta.eyebrow}</div>
+                                            <div className="mt-1 text-base font-black text-foreground">{meta.title}</div>
+                                            <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{meta.description}</p>
                                         </div>
                                         <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-2">
-                                            <span className="text-[10px] font-bold uppercase text-muted-foreground">{meta.metricLabel}</span>
-                                            <span className="font-mono text-sm font-black text-foreground">{count == null ? 'Open' : count.toLocaleString()}</span>
+                                            <span className="text-xs font-bold uppercase text-muted-foreground">{meta.metricLabel}</span>
+                                            <span className="font-mono text-base font-black text-foreground">{count == null ? 'Open' : count.toLocaleString()}</span>
                                         </div>
                                     </div>
                                 );
@@ -960,12 +960,12 @@ export function ScreenerDashboard() {
                         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                             <div className="min-w-0">
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <span className={clsx("rounded-md border px-2 py-1 text-[10px] font-black uppercase tracking-wider", activeStrategy.accent)}>
+                                    <span className={clsx("rounded-md border px-2.5 py-1 text-xs font-black uppercase tracking-wider", activeStrategy.accent)}>
                                         {activeStrategy.eyebrow}
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} market</span>
+                                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} market</span>
                                 </div>
-                                <h2 className="mt-2 text-2xl font-black tracking-tight">{activeStrategy.title}</h2>
+                                <h2 className="mt-2 text-3xl font-black tracking-tight">{activeStrategy.title}</h2>
                                 <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{activeSummary}</p>
                             </div>
                             <div className="grid grid-cols-3 gap-2 sm:min-w-[360px]">
@@ -988,7 +988,7 @@ export function ScreenerDashboard() {
                         </div>
                     ) : (
                         <>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+                            <div className="grid grid-cols-1 gap-4 mb-8 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                                 {currentData.map((result, i) => (
                                     <div key={result.candidate.symbol} className="relative group/card">
                                         {/* Selection checkbox — reverse mode only */}
@@ -1069,6 +1069,7 @@ export function ScreenerDashboard() {
                     market={selectedMarket}
                     onClose={() => setSelectedStock(null)}
                     onAskGemini={(ticker: string) => handleAiReview(selectedStock)}
+                    youtubeEvaluation={youtubeEvaluations.get(selectedStock.candidate.symbol)}
                 />
             )}
 
@@ -1411,8 +1412,8 @@ export function ScreenerDashboard() {
 function SummaryMetric({ label, value }: { label: string; value: string | number }) {
     return (
         <div className="rounded-md border border-border/60 bg-secondary/20 px-3 py-2">
-            <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-1 truncate font-mono text-sm font-black text-foreground" title={String(value)}>{value}</div>
+            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 truncate font-mono text-base font-black text-foreground" title={String(value)}>{value}</div>
         </div>
     );
 }
@@ -1428,10 +1429,10 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
     const content = (
         <>
             <div className="flex items-start justify-between gap-2">
-                <span className="truncate text-[10px] font-black uppercase tracking-wider text-muted-foreground">{label}</span>
-                <span className="font-mono text-sm font-black text-foreground">{value}</span>
+                <span className="truncate text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</span>
+                <span className="font-mono text-base font-black text-foreground">{value}</span>
             </div>
-            <p className="mt-1 line-clamp-2 text-[10px] leading-snug text-muted-foreground">{detail}</p>
+            <p className="mt-1 line-clamp-2 text-xs leading-snug text-muted-foreground">{detail}</p>
         </>
     );
 
@@ -1440,7 +1441,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
             <button
                 type="button"
                 onClick={onClick}
-                className={clsx("min-w-[150px] rounded-md border border-border/70 bg-card/60 px-3 py-2 text-left transition-all", toneClass)}
+                className={clsx("min-w-[170px] rounded-md border border-border/70 bg-card/60 px-3 py-2.5 text-left transition-all", toneClass)}
             >
                 {content}
             </button>
@@ -1448,7 +1449,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
     }
 
     return (
-        <div className={clsx("min-w-[150px] rounded-md border border-border/70 bg-card/60 px-3 py-2", toneClass)}>
+        <div className={clsx("min-w-[170px] rounded-md border border-border/70 bg-card/60 px-3 py-2.5", toneClass)}>
             {content}
         </div>
     );
