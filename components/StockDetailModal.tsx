@@ -1,4 +1,4 @@
-import { X, Activity, AlertOctagon, Sparkles } from "lucide-react";
+import { X, Activity, Sparkles, Layers3, ShieldCheck, Telescope, Youtube } from "lucide-react";
 import { type ScreeningResult, QUANT_THRESHOLDS, type ReverseResult } from "@/lib/blueprint";
 import { useLanguage } from "@/components/LanguageContext";
 import ReactMarkdown from "react-markdown";
@@ -108,6 +108,13 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
         navigator.clipboard.writeText(savedReport.content);
         alert("Copied!");
     };
+
+    const reverse = result.reverse;
+    const paradigm = result.paradigm;
+    const paradigmBand = paradigm?.pdm_band
+        ? { high: "STRONG", mid: "SOLID", watch: "WATCH", skip: "PASS", no_data: "NO DATA" }[paradigm.pdm_band] || paradigm.pdm_band
+        : "No tag";
+    const youtubePrimary = youtubeEvaluation?.matchedStrategies[0] || "No match";
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
@@ -242,6 +249,37 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         </div>
 
+                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+                            <SignalOverviewCard
+                                icon={<Layers3 className="h-4 w-4" />}
+                                label="Paradigm"
+                                value={paradigm?.pdm_signal != null ? Math.round(paradigm.pdm_signal) : "n/a"}
+                                detail={paradigm?.pdm_theme_primary || paradigmBand}
+                                tone="purple"
+                            />
+                            <SignalOverviewCard
+                                icon={<ShieldCheck className="h-4 w-4" />}
+                                label="Reverse"
+                                value={reverse?.rev_composite != null ? Math.round(reverse.rev_composite) : "n/a"}
+                                detail={reverse?.rev_band || "No score"}
+                                tone="emerald"
+                            />
+                            <SignalOverviewCard
+                                icon={<Telescope className="h-4 w-4" />}
+                                label="100-Bagger"
+                                value={Math.round(score)}
+                                detail={result.passed ? "Pass" : "Review"}
+                                tone="sky"
+                            />
+                            <SignalOverviewCard
+                                icon={<Youtube className="h-4 w-4" />}
+                                label="YouTube"
+                                value={youtubeEvaluation?.matchedStrategies.length || 0}
+                                detail={youtubePrimary}
+                                tone="red"
+                            />
+                        </div>
+
                         {/* Phase 1: Quant Metrics */}
                         <div>
                             <h3 className="text-2xl font-black mb-4 flex items-center gap-2">
@@ -283,10 +321,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 {showReports ? "CLOSE ANALYSIS" : "VIEW REPORTS"}
                             </button>
                             <div className="flex flex-col items-center sm:items-start">
-                                <span className="text-[10px] sm:text-xs text-muted-foreground font-bold uppercase tracking-widest">
+                                <span className="text-xs text-muted-foreground font-bold uppercase tracking-widest">
                                     Analysis History
                                 </span>
-                                <span className="text-[10px] text-primary font-mono font-bold">
+                                <span className="text-xs text-primary font-mono font-bold">
                                     {reportHistory.length} Cloud Records Found
                                 </span>
                             </div>
@@ -309,7 +347,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         >
                                             <div className="flex flex-col gap-0.5">
                                                 <span className="text-sm font-bold">Deepseek V4-Pro Analysis</span>
-                                                <span className="text-[10px] text-muted-foreground font-mono">
+                                                <span className="text-xs text-muted-foreground font-mono">
                                                     {new Date(report.created_at).toLocaleString()} | Cost: ${report.cost || '0.00'}
                                                 </span>
                                             </div>
@@ -350,7 +388,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     <div className="flex flex-wrap gap-1.5 mb-3">
                                         <span className="text-xs font-bold text-muted-foreground mr-1">Themes:</span>
                                         {result.paradigm.pdm_themes.map((theme: string) => (
-                                            <span key={theme} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                                            <span key={theme} className="text-xs font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
                                                 {theme}
                                             </span>
                                         ))}
@@ -365,7 +403,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                             const isDecel = flag === 'decelerating' || flag === 'regime_shift_down';
                                             return (
                                                 <span key={flag} className={clsx(
-                                                    "text-[10px] font-mono px-1.5 py-0.5 rounded border",
+                                                    "text-xs font-mono px-2 py-0.5 rounded border",
                                                     isMacro && "bg-red-500/15 text-red-400 border-red-500/40",
                                                     isAccel && "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
                                                     isDecel && "bg-amber-500/15 text-amber-400 border-amber-500/30",
@@ -439,7 +477,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 {result.reverse.rev_flags && (
                                     <div className="flex flex-wrap gap-1.5 mb-3">
                                         {result.reverse.rev_flags.split(',').filter(f => f).map((flag: string) => (
-                                            <span key={flag} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-secondary/50 text-muted-foreground border border-border/30">
+                                            <span key={flag} className="text-xs font-mono px-2 py-0.5 rounded bg-secondary/50 text-muted-foreground border border-border/30">
                                                 {flag}
                                             </span>
                                         ))}
@@ -508,6 +546,30 @@ function ReverseStat({ label, value, sub, band, warn }: { label: string; value: 
                 warn && "text-amber-400",
             )}>{value}</div>
             {sub && <div className="text-xs text-muted-foreground/70 mt-0.5">{sub}</div>}
+        </div>
+    );
+}
+
+function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: React.ReactNode; label: string; value: string | number; detail: string; tone: "purple" | "emerald" | "sky" | "red" }) {
+    const toneClass = {
+        purple: "border-purple-500/30 bg-purple-500/[0.06] text-purple-300",
+        emerald: "border-emerald-500/30 bg-emerald-500/[0.06] text-emerald-300",
+        sky: "border-sky-500/30 bg-sky-500/[0.06] text-sky-300",
+        red: "border-red-500/30 bg-red-500/[0.06] text-red-300",
+    }[tone];
+
+    return (
+        <div className={clsx("rounded-lg border p-4", toneClass)}>
+            <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider">
+                    {icon}
+                    {label}
+                </div>
+                <div className="font-mono text-2xl font-black text-foreground">{value}</div>
+            </div>
+            <div className="mt-2 truncate text-sm font-semibold text-muted-foreground" title={detail}>
+                {detail}
+            </div>
         </div>
     );
 }

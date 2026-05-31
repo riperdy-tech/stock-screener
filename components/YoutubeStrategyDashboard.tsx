@@ -89,7 +89,7 @@ function StrategyBadge({ label }: { label: string }) {
         "Turnaround Scale-In": "bg-purple-500/15 text-purple-400 border-purple-500/30",
     };
     return (
-        <span className={clsx("rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-tight", styles[label] || "bg-secondary text-muted-foreground border-border")}>
+        <span className={clsx("rounded-full border px-2.5 py-1 text-xs font-black uppercase tracking-tight", styles[label] || "bg-secondary text-muted-foreground border-border")}>
             {label}
         </span>
     );
@@ -98,7 +98,7 @@ function StrategyBadge({ label }: { label: string }) {
 function MetricPill({ label, value }: { label: string; value: string }) {
     return (
         <div className="rounded-lg bg-secondary/40 border border-border/50 px-3 py-2">
-            <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">{label}</div>
+            <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">{label}</div>
             <div className="text-sm font-mono font-bold text-foreground">{value}</div>
         </div>
     );
@@ -169,7 +169,7 @@ export function YoutubeStrategyDashboard() {
                                 Implements the video summary as three independent strategies with the universal EPS-based position-size rule.
                                 Negative EPS names are capped at tiny risk sizes before any signal is considered.
                             </p>
-                            {lastUpdated && <p className="text-[11px] text-muted-foreground mt-1 font-mono">Data last updated: {lastUpdated}</p>}
+                            {lastUpdated && <p className="text-xs text-muted-foreground mt-1 font-mono">Data last updated: {lastUpdated}</p>}
                         </div>
                     </div>
 
@@ -199,7 +199,7 @@ export function YoutubeStrategyDashboard() {
                                 <div className="text-sm font-black">{filter.label}</div>
                                 <div className="text-xs font-mono text-primary font-bold">{totals[filter.value]}</div>
                             </div>
-                            <div className="text-[11px] text-muted-foreground mt-1 leading-snug">{filter.description}</div>
+                            <div className="text-xs text-muted-foreground mt-1 leading-snug">{filter.description}</div>
                         </button>
                     ))}
                 </section>
@@ -266,18 +266,18 @@ export function YoutubeStrategyDashboard() {
                                                 <h3 className="text-xl font-black tracking-tight">{c.symbol.split(".")[0]}</h3>
                                                 <span className="text-xs text-muted-foreground truncate">{c.name}</span>
                                             </div>
-                                            <p className="text-[11px] text-muted-foreground mt-1 uppercase font-bold tracking-tight">{c.sector} • {c.industry || result.industry || "Unknown"}</p>
+                                            <p className="text-xs text-muted-foreground mt-1 uppercase font-bold tracking-tight">{c.sector} • {c.industry || result.industry || "Unknown"}</p>
                                         </div>
                                         <div className="text-left sm:text-right shrink-0">
                                             <div className="font-mono text-lg font-black">{formatPrice(c.price)}</div>
-                                            <div className="text-[11px] text-muted-foreground">{formatMarketCap(c.marketCap)}</div>
+                                            <div className="text-xs text-muted-foreground">{formatMarketCap(c.marketCap)}</div>
                                         </div>
                                     </div>
 
                                     <div className="flex flex-wrap gap-2 mt-4">
                                         {evaluation.matchedStrategies.map((label) => <StrategyBadge key={label} label={label} />)}
                                         <span className={clsx(
-                                            "rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-tight",
+                                            "rounded-full border px-2.5 py-1 text-xs font-black uppercase tracking-tight",
                                             evaluation.riskTier === "standard" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/25" : "bg-red-500/10 text-red-400 border-red-500/25"
                                         )}>
                                             {evaluation.maxPositionSize}

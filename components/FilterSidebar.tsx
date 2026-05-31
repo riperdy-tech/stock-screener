@@ -381,7 +381,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                             </button>
                             {batchStatus && (
                                 <p className={clsx(
-                                    "text-[10px] mt-1",
+                                    "text-xs mt-1",
                                     batchStatus.startsWith("Error") ? "text-red-400" : "text-emerald-400"
                                 )}>{batchStatus}</p>
                             )}
@@ -692,7 +692,7 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
 
                 <div className="flex items-center gap-2">
                     {strictValue !== undefined && (
-                        <span className="text-[10px] text-muted-foreground/80 font-mono">Strict: {strictValue}</span>
+                        <span className="text-xs text-muted-foreground/80 font-mono">Strict: {strictValue}</span>
                     )}
                     <input
                         type="number"
@@ -716,7 +716,7 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
                 [&::-webkit-slider-thumb]:rounded-full ${isStrict ? '[&::-webkit-slider-thumb]:bg-warning [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(237,137,54,0.8)]' : '[&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(59,130,246,0.6)]'}
                 hover:[&::-webkit-slider-thumb]:scale-125 hover:[&::-webkit-slider-thumb]:transition-transform`}
             />
-            {hint && <div className="text-[10px] text-muted-foreground/60 mt-1">{hint}</div>}
+            {hint && <div className="text-xs text-muted-foreground/60 mt-1">{hint}</div>}
         </div>
     )
 }

@@ -34,7 +34,7 @@ export function LanguageToggle() {
             >
                 <img src={current.flag} alt={current.code} className="w-4 h-3 rounded-sm opacity-90" />
                 <span className="text-xs font-bold text-foreground uppercase">{current.code}</span>
-                <span className="text-[10px] text-muted-foreground ml-1">▼</span>
+                <span className="text-xs text-muted-foreground ml-1">▼</span>
             </button>
             
             {open && (

@@ -941,7 +941,7 @@ export function ScreenerDashboard() {
                                 <div className="mt-2 flex flex-wrap gap-1 max-h-24 overflow-y-auto">
                                     {batchProgress.tickers.map((t: any) => (
                                         <span key={t.ticker} className={clsx(
-                                            "text-[10px] px-1.5 py-0.5 rounded font-mono",
+                                            "text-xs px-2 py-0.5 rounded font-mono",
                                             t.status === 'completed' ? "bg-emerald-500/20 text-emerald-400" :
                                             t.status === 'error' ? "bg-red-500/20 text-red-400" :
                                             "bg-secondary/40 text-muted-foreground"
@@ -952,7 +952,7 @@ export function ScreenerDashboard() {
                                 </div>
                             )}
                             {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                <p className="text-[11px] text-emerald-400 mt-2 font-medium">All done! Open any stock card to view its report.</p>
+                                <p className="text-xs text-emerald-400 mt-2 font-medium">All done! Open any stock card to view its report.</p>
                             )}
                         </div>
                     )}
@@ -1128,7 +1128,7 @@ export function ScreenerDashboard() {
                                                                 QUANT <span className="text-blue-500">PRO</span>
                                                             </h1>
                                                             <div className="flex items-center gap-2">
-                                                                <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest">Global Terminal</span>
+                                                                <span className="text-xs text-muted-foreground font-medium uppercase tracking-widest">Global Terminal</span>
                                                                 <div className="h-1 w-1 rounded-full bg-green-500 animate-pulse" />
                                                             </div>
                                                         </div>
@@ -1170,7 +1170,7 @@ export function ScreenerDashboard() {
                                                 <button onClick={handleDeepseekRun} disabled={dsLoading} className="w-full bg-[#4d6bfe] text-white text-xs py-1.5 rounded font-bold hover:bg-[#3b54d1]">
                                                     {dsLoading ? "Running..." : "Run Deepseek"}
                                                 </button>
-                                                {dsError && <span className="text-[10px] text-danger">{dsError}</span>}
+                                                {dsError && <span className="text-xs text-danger">{dsError}</span>}
                                             </div>
                                         ) : (
                                             <button onClick={() => setShowDsPassword(true)} className="flex flex-col items-center justify-center gap-2.5 bg-[#4d6bfe] hover:bg-[#3b54d1] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
@@ -1270,7 +1270,7 @@ export function ScreenerDashboard() {
                                 </div>
                                 )}
                                 {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                    <span className="text-[10px] text-emerald-400 mt-1.5 font-bold">
+                                    <span className="text-xs text-emerald-400 mt-1.5 font-bold">
                                         {batchProgress.completed > 0 ? 'Open any stock card to view its report.' : 'No reports generated.'}{' '}Auto-closing in 8s.
                                     </span>
                                 )}

@@ -524,7 +524,7 @@ export function ReportsDashboard() {
                                                             activeHeading === h.id ? "bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.5)]" : "bg-white/15 group-hover:bg-blue-400/50"
                                                         )}></span>
                                                         <span className={clsx(
-                                                            "text-[11px] leading-snug transition-colors duration-200 line-clamp-2",
+                                                            "text-xs leading-snug transition-colors duration-200 line-clamp-2",
                                                             h.level === 1 ? "font-bold uppercase tracking-wide" : "font-medium opacity-70",
                                                             activeHeading === h.id ? "text-blue-300" : "text-slate-400 group-hover:text-slate-200"
                                                         )}>
