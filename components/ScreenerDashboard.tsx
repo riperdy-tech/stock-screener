@@ -453,7 +453,11 @@ export function ScreenerDashboard() {
         }
     }
 
-    const youtubeSourceResults = selectedMarket === 'US' && rawResults.length > 0 ? rawResults : youtubeResults;
+    const youtubeSourceResults = youtubeResults.length > 0
+        ? youtubeResults
+        : selectedMarket === 'US'
+            ? rawResults
+            : [];
     const isYoutubeUniverseLoading = screenMode === 'youtube' && youtubeSourceResults.length === 0 && youtubeLoading;
 
     const youtubeEvaluations = useMemo(() => {
@@ -940,6 +944,9 @@ export function ScreenerDashboard() {
                                             setScreenMode(id);
                                             if (id === 'youtube' && selectedMarket !== 'US') {
                                                 setSelectedMarket('US');
+                                            }
+                                            if (id === 'youtube' && youtubeResults.length === 0 && !youtubeLoading) {
+                                                loadYoutubeData();
                                             }
                                             setSelectedTickers(new Set());
                                         }}

@@ -88,7 +88,7 @@ function getQuarterlyEpsSeries(result: ScreeningResult): number[] {
     if (Array.isArray(directSeries) && directSeries.length > 0) {
         return directSeries
             .map((value) => {
-                if (typeof value === "object") {
+                if (value && typeof value === "object") {
                     return firstNumber(value.EPS, value.eps, value.BasicEPS, value.DilutedEPS, value.value);
                 }
                 return asNumber(value);
