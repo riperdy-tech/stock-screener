@@ -299,7 +299,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         key={section.id}
                                         type="button"
                                         onClick={() => scrollToSection(section.id)}
-                                        className="rounded-md border border-border/60 bg-secondary/30 px-3 py-1.5 text-sm font-bold text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+                                        className="rounded-md border border-border/60 bg-secondary/30 px-3.5 py-2 text-base font-bold text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
                                     >
                                         {section.label}
                                     </button>
@@ -349,10 +349,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 {showReports ? "CLOSE ANALYSIS" : "VIEW REPORTS"}
                             </button>
                             <div className="flex flex-col items-center sm:items-start">
-                                <span className="text-sm text-muted-foreground font-bold uppercase tracking-widest">
+                                <span className="text-base text-muted-foreground font-bold uppercase tracking-widest">
                                     Analysis History
                                 </span>
-                                <span className="text-sm text-primary font-mono font-bold">
+                                <span className="text-base text-primary font-mono font-bold">
                                     {reportHistory.length} Cloud Records Found
                                 </span>
                             </div>
@@ -366,7 +366,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 </h3>
                                 <div className="space-y-3">
                                     {reportHistory.length === 0 ? (
-                                        <div className="text-sm text-muted-foreground p-4 text-center border border-dashed border-border rounded-lg">
+                                        <div className="text-base text-muted-foreground p-4 text-center border border-dashed border-border rounded-lg">
                                             No AI reports found for this stock yet.
                                         </div>
                                     ) : reportHistory.map((report, idx) => (
@@ -375,8 +375,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                             className="flex items-center justify-between p-3 bg-card border border-border rounded-lg hover:border-primary/40 transition-colors group"
                                         >
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="text-sm font-bold">Deepseek V4-Pro Analysis</span>
-                                                <span className="text-sm text-muted-foreground font-mono">
+                                                <span className="text-base font-bold">Deepseek V4-Pro Analysis</span>
+                                                <span className="text-base text-muted-foreground font-mono">
                                                     {new Date(report.created_at).toLocaleString()} | Cost: ${report.cost || '0.00'}
                                                 </span>
                                             </div>
@@ -385,7 +385,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                                     setSavedReport({...report, timestamp: report.created_at});
                                                     setShowReports(false);
                                                 }}
-                                                className="text-sm font-bold text-primary group-hover:underline px-3 py-1.5 bg-primary/10 rounded"
+                                                className="text-base font-bold text-primary group-hover:underline px-3 py-2 bg-primary/10 rounded"
                                             >
                                                 OPEN REPORT
                                             </button>
@@ -415,9 +415,9 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 </div>
                                 {result.paradigm.pdm_themes && result.paradigm.pdm_themes.length > 0 && (
                                     <div className="flex flex-wrap gap-1.5 mb-3">
-                                        <span className="text-sm font-bold text-muted-foreground mr-1">Themes:</span>
+                                        <span className="text-base font-bold text-muted-foreground mr-1">Themes:</span>
                                         {result.paradigm.pdm_themes.map((theme: string) => (
-                                            <span key={theme} className="text-sm font-mono px-2.5 py-1 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                                            <span key={theme} className="text-base font-mono px-3 py-1.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
                                                 {theme}
                                             </span>
                                         ))}
@@ -425,14 +425,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 )}
                                 {result.paradigm.pdm_flags && result.paradigm.pdm_flags.length > 0 && (
                                     <div className="flex flex-wrap gap-1.5 mb-3">
-                                        <span className="text-sm font-bold text-muted-foreground mr-1">Flags:</span>
+                                        <span className="text-base font-bold text-muted-foreground mr-1">Flags:</span>
                                         {result.paradigm.pdm_flags.map((flag: string) => {
                                             const isMacro = flag.startsWith('macro_');
                                             const isAccel = flag === 'accelerating' || flag === 'regime_shift_up';
                                             const isDecel = flag === 'decelerating' || flag === 'regime_shift_down';
                                             return (
                                                 <span key={flag} className={clsx(
-                                                    "text-sm font-mono px-2.5 py-1 rounded border",
+                                                    "text-base font-mono px-3 py-1.5 rounded border",
                                                     isMacro && "bg-red-500/15 text-red-400 border-red-500/40",
                                                     isAccel && "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
                                                     isDecel && "bg-amber-500/15 text-amber-400 border-amber-500/30",
@@ -445,12 +445,12 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     </div>
                                 )}
                                 {result.paradigm.pdm_pro && (
-                                    <div className="text-sm text-emerald-400/80 mb-1 flex items-start gap-1">
+                                    <div className="text-base text-emerald-400/80 mb-1 flex items-start gap-1">
                                         <span className="font-bold shrink-0">Pro:</span> {result.paradigm.pdm_pro}
                                     </div>
                                 )}
                                 {result.paradigm.pdm_con && (
-                                    <div className="text-sm text-amber-400/80 flex items-start gap-1">
+                                    <div className="text-base text-amber-400/80 flex items-start gap-1">
                                         <span className="font-bold shrink-0">Con:</span> {result.paradigm.pdm_con}
                                     </div>
                                 )}
@@ -506,24 +506,24 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 {result.reverse.rev_flags && (
                                     <div className="flex flex-wrap gap-1.5 mb-3">
                                         {result.reverse.rev_flags.split(',').filter(f => f).map((flag: string) => (
-                                            <span key={flag} className="text-sm font-mono px-2.5 py-1 rounded bg-secondary/50 text-muted-foreground border border-border/30">
+                                            <span key={flag} className="text-base font-mono px-3 py-1.5 rounded bg-secondary/50 text-muted-foreground border border-border/30">
                                                 {flag}
                                             </span>
                                         ))}
                                     </div>
                                 )}
                                 {result.reverse.rev_pro && (
-                                    <div className="text-sm text-emerald-400/80 mb-1 flex items-start gap-1">
+                                    <div className="text-base text-emerald-400/80 mb-1 flex items-start gap-1">
                                         <span className="font-bold shrink-0">Pro:</span> {result.reverse.rev_pro}
                                     </div>
                                 )}
                                 {result.reverse.rev_con && (
-                                    <div className="text-sm text-amber-400/80 flex items-start gap-1">
+                                    <div className="text-base text-amber-400/80 flex items-start gap-1">
                                         <span className="font-bold shrink-0">Con:</span> {result.reverse.rev_con}
                                     </div>
                                 )}
                                 {result.reverse.rev_nominated && (
-                                    <div className="mt-3 px-3 py-2 bg-amber-500/10 border border-amber-500/30 rounded-lg text-sm font-black text-amber-400 flex items-center gap-2">
+                                    <div className="mt-3 px-3.5 py-2.5 bg-amber-500/10 border border-amber-500/30 rounded-lg text-base font-black text-amber-400 flex items-center gap-2">
                                         NOMINATED - queued for v3.2 deep-dive analysis
                                     </div>
                                 )}
@@ -564,17 +564,17 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
 function ReverseStat({ label, value, sub, band, warn }: { label: string; value: string | number; sub?: string; band?: string | null; warn?: boolean }) {
     return (
-        <div className="rounded-lg border border-border/50 bg-secondary/20 p-3">
-            <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider">{label}</div>
+        <div className="rounded-lg border border-border/50 bg-secondary/20 p-4">
+            <div className="text-base font-bold text-muted-foreground uppercase tracking-wider">{label}</div>
             <div className={clsx(
-                "mt-1 font-mono text-lg font-black",
+                "mt-1.5 font-mono text-xl font-black leading-tight",
                 band === 'High' && "text-emerald-400",
                 band === 'Solid' && "text-blue-400",
                 band === 'Watchlist' && "text-amber-400",
                 band === 'Monitor' && "text-gray-400",
                 warn && "text-amber-400",
             )}>{value}</div>
-            {sub && <div className="text-sm text-muted-foreground/70 mt-0.5">{sub}</div>}
+            {sub && <div className="text-base text-muted-foreground/70 mt-1">{sub}</div>}
         </div>
     );
 }
@@ -588,15 +588,15 @@ function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: ReactN
     }[tone];
 
     return (
-        <div className={clsx("rounded-lg border p-4", toneClass)}>
+        <div className={clsx("rounded-lg border p-5", toneClass)}>
             <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-sm font-black uppercase tracking-wider">
+                <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider">
                     {icon}
                     {label}
                 </div>
                 <div className="font-mono text-2xl font-black text-foreground">{value}</div>
             </div>
-            <div className="mt-2 truncate text-sm font-semibold text-muted-foreground" title={detail}>
+            <div className="mt-2 truncate text-base font-semibold text-muted-foreground" title={detail}>
                 {detail}
             </div>
         </div>
@@ -607,14 +607,14 @@ function DetailRow({ label, value, target, pass, warning }: { label: string, val
     const { t } = useLanguage();
 
     return (
-        <div className="flex items-center justify-between gap-4 rounded-lg border border-border/50 bg-secondary/20 p-3">
+        <div className="flex items-center justify-between gap-4 rounded-lg border border-border/50 bg-secondary/20 p-4">
             <div>
-                <div className="text-sm text-muted-foreground">{label}</div>
-                <div className="font-mono text-lg font-black">{value}</div>
+                <div className="text-base font-semibold text-muted-foreground">{label}</div>
+                <div className="mt-0.5 font-mono text-xl font-black">{value}</div>
             </div>
             <div className="text-right">
-                <div className="text-sm opacity-70">{t('target')}: {target}</div>
-                <div className={clsx("text-sm font-bold", pass ? "text-success" : warning ? "text-warning" : "text-danger")}>
+                <div className="text-base opacity-70">{t('target')}: {target}</div>
+                <div className={clsx("text-base font-bold", pass ? "text-success" : warning ? "text-warning" : "text-danger")}>
                     {pass ? t('pass') : warning ? t('watch') : t('fail')}
                 </div>
             </div>
