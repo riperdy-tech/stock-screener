@@ -30,16 +30,16 @@ export function LanguageToggle() {
         <div ref={ref} className="relative z-50 inline-block text-left">
             <button
                 onClick={() => setOpen(!open)}
-                className="flex items-center gap-2 rounded-lg border border-border/50 bg-secondary/50 px-3 py-2 transition-colors hover:bg-secondary/80 focus:outline-none"
+                className="flex items-center gap-2 rounded-lg border border-border/50 bg-secondary/50 px-3.5 py-2.5 transition-colors hover:bg-secondary/80 focus:outline-none"
                 title="Select Language"
             >
-                <img src={current.flag} alt={current.code} className="h-3.5 w-5 rounded-sm opacity-90" />
-                <span className="text-sm font-bold uppercase text-foreground">{current.code}</span>
-                <ChevronDown className={clsx("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
+                <img src={current.flag} alt={current.code} className="h-4 w-6 rounded-sm opacity-90" />
+                <span className="text-base font-bold uppercase text-foreground">{current.code}</span>
+                <ChevronDown className={clsx("h-4 w-4 text-muted-foreground transition-transform", open && "rotate-180")} />
             </button>
 
             {open && (
-                <div className="absolute right-0 mt-2 w-40 origin-top-right overflow-hidden rounded-lg border border-border bg-card shadow-lg focus:outline-none">
+                <div className="absolute right-0 mt-2 w-48 origin-top-right overflow-hidden rounded-lg border border-border bg-card shadow-lg focus:outline-none">
                     <div className="flex flex-col py-1">
                         {languages.map((lng) => (
                             <button
@@ -49,11 +49,11 @@ export function LanguageToggle() {
                                     setOpen(false);
                                 }}
                                 className={clsx(
-                                    "flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors",
+                                    "flex w-full items-center gap-3 px-4 py-3 text-left text-base transition-colors",
                                     language === lng.code ? "bg-primary/20 font-bold text-primary" : "text-foreground hover:bg-secondary/80"
                                 )}
                             >
-                                <img src={lng.flag} alt={lng.code} className="h-3.5 w-5 rounded-sm opacity-90" />
+                                <img src={lng.flag} alt={lng.code} className="h-4 w-6 rounded-sm opacity-90" />
                                 <span>{lng.name}</span>
                             </button>
                         ))}

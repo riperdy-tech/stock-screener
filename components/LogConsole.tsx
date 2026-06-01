@@ -93,12 +93,12 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                         <span className="font-bold">System Logs</span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <label className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer hover:text-white">
+                        <label className="flex items-center gap-2 text-base text-gray-400 cursor-pointer hover:text-white">
                             <input
                                 type="checkbox"
                                 checked={autoScroll}
                                 onChange={(e) => setAutoScroll(e.target.checked)}
-                                className="rounded border-gray-700 bg-gray-900"
+                                className="h-5 w-5 rounded border-gray-700 bg-gray-900"
                             />
                             Auto-scroll
                         </label>
@@ -122,7 +122,7 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                 </div>
 
                 {/* Footer */}
-                <div className="px-5 py-3 border-t border-gray-800 bg-[#111] text-sm text-gray-500 flex flex-col gap-2 justify-between sm:flex-row sm:items-center">
+                <div className="px-5 py-3 border-t border-gray-800 bg-[#111] text-base text-gray-500 flex flex-col gap-2 justify-between sm:flex-row sm:items-center">
                     <div className="flex items-center gap-3">
                         <span>Source: public/data/scan.log</span>
                         <div className="flex items-center gap-1.5">
