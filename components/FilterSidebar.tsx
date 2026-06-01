@@ -352,11 +352,11 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         {/* Phase 11d: Deep-Dive */}
                         <Section title="Deep-Dive (v3.2)">
                             <p className="text-base text-muted-foreground mb-2">Click cards to select stocks, or use N below for top-ranked.</p>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-3">
                                 <select
                                     value={(batchN && [5,10,25].includes(batchN)) ? batchN : 0}
                                     onChange={(e) => { const v = Number(e.target.value); if (v > 0 && onBatchNChange) onBatchNChange(v); }}
-                                    className="bg-secondary/40 border border-border/70 text-foreground rounded-md px-2.5 py-2 text-base font-bold focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                                    className="rounded-md border border-border/70 bg-secondary/40 px-3.5 py-2.5 text-base font-bold text-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
                                 >
                                     <option value={0}>N</option>
                                     <option value={5}>5</option>
@@ -368,13 +368,13 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                     min={1} max={30}
                                     value={batchN || 25}
                                     onChange={(e) => { const v = parseInt(e.target.value); if (v >= 1 && v <= 30 && onBatchNChange) onBatchNChange(v); }}
-                                    className="w-20 bg-secondary/40 border border-border/70 text-foreground rounded-md px-2 py-2 text-base font-bold text-center focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                                    className="w-24 rounded-md border border-border/70 bg-secondary/40 px-3 py-2.5 text-center text-base font-bold text-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
                                 />
                             </div>
                             <button
                                 onClick={onDeepDiveClick}
                                 disabled={batchDispatching}
-                                className="w-full mt-2 flex items-center justify-center gap-1.5 px-3 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-base font-black rounded-lg transition-all active:scale-95 disabled:opacity-50"
+                                className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-3 text-base font-black text-white transition-all hover:bg-emerald-500 active:scale-95 disabled:opacity-50"
                             >
                                 <Sparkles className="h-4 w-4" />
                                 {batchDispatching ? 'Dispatching...' : selectedCount && selectedCount > 0 ? `Deep-Dive Selected (${selectedCount})` : `Deep-Dive Top ${batchN || 25}`}
@@ -388,16 +388,16 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         </Section>
 
                         {/* Reverse Apply/Reset */}
-                        <div className="flex gap-2 pt-2">
+                        <div className="flex gap-3 pt-2">
                             <button
                                 onClick={handleReverseApply}
-                                className="flex-1 px-3 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-base font-bold rounded shadow transition-colors"
+                                className="flex-1 rounded bg-emerald-600 px-4 py-3 text-base font-bold text-white shadow transition-colors hover:bg-emerald-500"
                             >
                                 Apply Reverse
                             </button>
                             <button
                                 onClick={handleReverseReset}
-                                className="flex-1 px-2 py-2.5 bg-muted hover:bg-destructive/10 hover:text-destructive text-muted-foreground text-base font-medium rounded border border-border transition-colors"
+                                className="flex-1 rounded border border-border bg-muted px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                             >
                                 Reset
                             </button>
@@ -439,7 +439,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                         key={theme}
                                         onClick={() => toggleParadigmTheme(theme)}
                                         className={clsx(
-                                            "px-2.5 py-2 text-base font-mono rounded-md border transition-all",
+                                            "rounded-md border px-3.5 py-2.5 text-base font-mono transition-all",
                                             localParadigmFilters.themes.includes(theme)
                                                 ? "bg-purple-500/30 text-purple-300 border-purple-500/50"
                                                 : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-purple-400/40"
@@ -529,16 +529,16 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         </Section>
 
                         {/* Paradigm Apply/Reset */}
-                        <div className="flex gap-2 pt-2">
+                        <div className="flex gap-3 pt-2">
                             <button
                                 onClick={handleParadigmApply}
-                                className="flex-1 px-3 py-2.5 bg-purple-600 hover:bg-purple-500 text-white text-base font-bold rounded shadow transition-colors"
+                                className="flex-1 rounded bg-purple-600 px-4 py-3 text-base font-bold text-white shadow transition-colors hover:bg-purple-500"
                             >
                                 Apply Paradigm
                             </button>
                             <button
                                 onClick={handleParadigmReset}
-                                className="flex-1 px-2 py-2.5 bg-muted hover:bg-destructive/10 hover:text-destructive text-muted-foreground text-base font-medium rounded border border-border transition-colors"
+                                className="flex-1 rounded border border-border bg-muted px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                             >
                                 Reset
                             </button>
@@ -636,16 +636,16 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
             {/* Sticky Actions Footer — show only for 100-bagger mode */}
             {screenMode !== 'reverse' && screenMode !== 'paradigm' && screenMode !== 'youtube' && (
             <div className="p-4 border-t border-border/50 bg-card/50 backdrop-blur-xl sticky bottom-0 z-10 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]">
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                     <button
                         onClick={handleApply}
-                        className="flex-1 px-3 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground text-base font-bold rounded shadow transition-colors"
+                        className="flex-1 rounded bg-primary px-4 py-3 text-base font-bold text-primary-foreground shadow transition-colors hover:bg-primary/90"
                     >
                         {t('apply')}
                     </button>
                     <button
                         onClick={handleReset}
-                        className="flex-1 px-2 py-2.5 bg-muted hover:bg-destructive/10 hover:text-destructive text-muted-foreground text-base font-medium rounded border border-border transition-colors"
+                        className="flex-1 rounded border border-border bg-muted px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                     >
                         {t('reset')}
                     </button>
@@ -698,7 +698,7 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
                         type="number"
                         value={value}
                         onChange={(e) => onChange(e.target.value)}
-                        className="w-28 bg-secondary/30 border border-border/50 rounded px-2.5 py-2 text-base text-right focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-mono"
+                        className="w-32 rounded border border-border/50 bg-secondary/30 px-3 py-2.5 text-right font-mono text-base transition-all focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     />
                 </div>
             </div>
