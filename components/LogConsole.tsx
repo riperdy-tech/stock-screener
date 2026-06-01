@@ -83,17 +83,22 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-            <div className="w-full max-w-5xl bg-[#0c0c0c] border border-gray-800 rounded-xl shadow-2xl flex flex-col h-[84vh] font-mono text-base">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+            <div className="flex h-[84vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#0c0c0c] font-mono text-base shadow-2xl">
 
                 {/* Header */}
-                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800 bg-[#111]">
-                    <div className="flex items-center gap-2 text-green-500">
-                        <Terminal className="h-5 w-5" />
-                        <span className="font-bold">System Logs</span>
+                <div className="flex flex-col gap-4 border-b border-gray-800 bg-[#111] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex items-start gap-3 text-green-500">
+                        <div className="rounded-lg border border-green-500/25 bg-green-500/10 p-2">
+                            <Terminal className="h-5 w-5" />
+                        </div>
+                        <div>
+                            <h2 className="text-xl font-black tracking-tight text-white">System Logs</h2>
+                            <p className="mt-1 text-base font-medium text-gray-400">Scanner runtime stream and cloud sync status.</p>
+                        </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <label className="flex items-center gap-2 text-base text-gray-400 cursor-pointer hover:text-white">
+                    <div className="flex items-center justify-between gap-4 sm:justify-end">
+                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-800 bg-white/[0.03] px-3.5 py-2.5 text-base text-gray-300 hover:text-white">
                             <input
                                 type="checkbox"
                                 checked={autoScroll}
@@ -102,31 +107,32 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                             />
                             Auto-scroll
                         </label>
-                        <button onClick={onClose} className="text-gray-500 hover:text-white transition-colors">
+                        <button onClick={onClose} className="rounded-lg border border-gray-800 bg-white/[0.03] p-2.5 text-gray-500 transition-colors hover:text-white">
                             <X className="h-5 w-5" />
                         </button>
                     </div>
                 </div>
 
                 {/* Log Content */}
-                <div className="flex-1 overflow-y-auto p-5 space-y-1 text-gray-300">
+                <div className="flex-1 space-y-1 overflow-y-auto p-5 text-gray-300">
                     {logs ? (
                         <pre className="whitespace-pre-wrap leading-7">{logs}</pre>
                     ) : (
-                        <div className="flex flex-col items-center justify-center h-full text-gray-600 space-y-2">
+                        <div className="flex h-full flex-col items-center justify-center space-y-3 text-center text-gray-500">
                             <RefreshCw className="h-6 w-6 animate-spin" />
-                            <p>Waiting for log stream...</p>
+                            <p className="text-lg font-bold text-gray-400">Waiting for log stream...</p>
+                            <p className="max-w-sm text-base leading-relaxed">Logs will appear here once the static scan file or live Supabase channel responds.</p>
                         </div>
                     )}
                     <div ref={endRef} />
                 </div>
 
                 {/* Footer */}
-                <div className="px-5 py-3 border-t border-gray-800 bg-[#111] text-base text-gray-500 flex flex-col gap-2 justify-between sm:flex-row sm:items-center">
-                    <div className="flex items-center gap-3">
+                <div className="flex flex-col gap-3 border-t border-gray-800 bg-[#111] px-5 py-4 text-base text-gray-500 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex flex-wrap items-center gap-3">
                         <span>Source: public/data/scan.log</span>
-                        <div className="flex items-center gap-1.5">
-                            <div className={`h-1.5 w-1.5 rounded-full ${process.env.NEXT_PUBLIC_SUPABASE_URL ? 'bg-green-500' : 'bg-red-500'}`} />
+                        <div className="flex items-center gap-2 rounded-full border border-gray-800 bg-white/[0.03] px-3 py-1.5">
+                            <div className={`h-2.5 w-2.5 rounded-full ${process.env.NEXT_PUBLIC_SUPABASE_URL ? 'bg-green-500' : 'bg-red-500'}`} />
                             <span className={process.env.NEXT_PUBLIC_SUPABASE_URL ? 'text-gray-400' : 'text-red-400'}>
                                 {process.env.NEXT_PUBLIC_SUPABASE_URL ? 'Supabase Connected' : 'Supabase Disconnected (Keys Missing)'}
                             </span>

@@ -918,7 +918,7 @@ export function ScreenerDashboard() {
                                                 <Icon className="h-5 w-5" />
                                             </div>
                                             <span className={clsx(
-                                                "rounded-full px-3 py-1.5 text-sm font-black uppercase tracking-wider",
+                                                "rounded-full px-3 py-1.5 text-base font-black uppercase tracking-wider",
                                                 isActive ? "bg-primary text-primary-foreground" : "bg-secondary/60 text-muted-foreground"
                                             )}>
                                                 {isActive ? 'Active' : 'Switch'}
@@ -930,7 +930,7 @@ export function ScreenerDashboard() {
                                             <p className="mt-1 line-clamp-2 text-base leading-relaxed text-muted-foreground">{meta.description}</p>
                                         </div>
                                         <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-2">
-                                            <span className="text-sm font-bold uppercase text-muted-foreground">{meta.metricLabel}</span>
+                                            <span className="text-base font-bold uppercase text-muted-foreground">{meta.metricLabel}</span>
                                             <span className="font-mono text-lg font-black text-foreground">{count == null ? 'Open' : count.toLocaleString()}</span>
                                         </div>
                                     </div>
@@ -1026,32 +1026,32 @@ export function ScreenerDashboard() {
                         </div>
                     </section>                    {/* Phase 11d: Batch Progress Bar */}
                     {screenMode === 'reverse' && batchId && (
-                        <div className="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl animate-in fade-in">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                    <Sparkles className={clsx("h-5 w-5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-emerald-400" : "text-emerald-400 animate-pulse")} />
+                        <div className="mb-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 animate-in fade-in">
+                            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                <div className="flex items-start gap-3">
+                                    <Sparkles className={clsx("mt-1 h-5 w-5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-emerald-400" : "text-emerald-400 animate-pulse")} />
                                     <div>
-                                        <span className="text-base font-bold text-emerald-400">Batch Deep-Dive</span>
-                                        <span className="text-sm text-muted-foreground ml-3">
+                                        <span className="text-lg font-black text-emerald-400">Batch Deep-Dive</span>
+                                        <span className="mt-1 block text-base text-muted-foreground sm:ml-3 sm:inline">
                                             {batchProgress
                                                 ? `${batchProgress.completed} of ${batchProgress.total} complete${batchProgress.failed > 0 ? ` (${batchProgress.failed} failed)` : ''}`
                                                 : `Waiting for workers...`}
                                         </span>
                                     </div>
                                 </div>
-                                <button onClick={() => dismissBatchPanel()} className="text-muted-foreground hover:text-foreground text-sm font-bold">Dismiss</button>
+                                <button onClick={() => dismissBatchPanel()} className="w-fit rounded-lg border border-border/60 px-3.5 py-2 text-base font-bold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">Dismiss</button>
                             </div>
                             {batchProgress && (
-                                <div className="w-full h-2 bg-secondary/50 rounded-full mt-2 overflow-hidden">
+                                <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-secondary/50">
                                     <div className="h-full bg-emerald-500 rounded-full transition-all duration-700"
                                         style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
                                 </div>
                             )}
                             {batchProgress?.tickers && (
-                                <div className="mt-2 flex flex-wrap gap-1 max-h-24 overflow-y-auto">
+                                <div className="mt-3 flex max-h-28 flex-wrap gap-2 overflow-y-auto">
                                     {batchProgress.tickers.map((t: any) => (
                                         <span key={t.ticker} className={clsx(
-                                            "text-sm px-2 py-1 rounded font-mono",
+                                            "rounded-md px-2.5 py-1.5 font-mono text-base font-bold",
                                             t.status === 'completed' ? "bg-emerald-500/20 text-emerald-400" :
                                             t.status === 'error' ? "bg-red-500/20 text-red-400" :
                                             "bg-secondary/40 text-muted-foreground"
@@ -1061,7 +1061,7 @@ export function ScreenerDashboard() {
                                 </div>
                             )}
                             {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                <p className="text-sm text-emerald-400 mt-2 font-medium">All done! Open any stock card to view its report.</p>
+                                <p className="mt-3 text-base font-bold text-emerald-400">All done! Open any stock card to view its report.</p>
                             )}
                         </div>
                     )}
@@ -1069,7 +1069,7 @@ export function ScreenerDashboard() {
                         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                             <div className="min-w-0">
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <span className={clsx("rounded-md border px-3 py-1.5 text-sm font-black uppercase tracking-wider", activeStrategy.accent)}>
+                                    <span className={clsx("rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider", activeStrategy.accent)}>
                                         {activeStrategy.eyebrow}
                                     </span>
                                     <span className="text-base font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} market</span>
@@ -1079,12 +1079,12 @@ export function ScreenerDashboard() {
                                 {visibleFilterChips.length > 0 && (
                                     <div className="mt-3 flex flex-wrap gap-2">
                                         {visibleFilterChips.map((chip) => (
-                                            <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-3 py-1.5 text-sm font-bold text-muted-foreground">
+                                            <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-3.5 py-2 text-base font-bold text-muted-foreground">
                                                 {chip}
                                             </span>
                                         ))}
                                         {hiddenFilterChipCount > 0 && (
-                                            <span className="rounded-full border border-border/70 bg-secondary/40 px-3 py-1.5 text-sm font-bold text-muted-foreground">
+                                            <span className="rounded-full border border-border/70 bg-secondary/40 px-3.5 py-2 text-base font-bold text-muted-foreground">
                                                 +{hiddenFilterChipCount} more
                                             </span>
                                         )}
@@ -1436,7 +1436,7 @@ export function ScreenerDashboard() {
                     <div className="bg-card border border-border/50 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[84vh] overflow-y-auto p-6 md:p-8" onClick={e => e.stopPropagation()}>
                         <div className="flex items-start justify-between gap-4 border-b border-border/60 pb-5">
                             <div>
-                                <p className="text-sm font-black uppercase tracking-[0.18em] text-muted-foreground">Scoring guide</p>
+                                <p className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">Scoring guide</p>
                                 <h2 className="mt-1 text-2xl font-black tracking-tight text-foreground">How the dashboard ranks stocks</h2>
                                 <p className="mt-2 max-w-3xl text-base leading-relaxed text-muted-foreground">
                                     The screener combines independent lenses. Use the active strategy panel for ranking, then open a stock card for the full scorecard.
@@ -1514,7 +1514,7 @@ function HelpCard({ title, body }: { title: string; body: string }) {
 function StageLine({ label, text }: { label: string; text: string }) {
     return (
         <div className="flex gap-3 rounded-lg border border-border/50 bg-background/30 p-3">
-            <span className="flex h-9 min-w-9 items-center justify-center rounded-md bg-primary/15 font-mono text-sm font-black text-primary">
+            <span className="flex h-10 min-w-10 items-center justify-center rounded-md bg-primary/15 font-mono text-base font-black text-primary">
                 {label}
             </span>
             <p>{text}</p>
@@ -1534,7 +1534,7 @@ function HelpPillar({ title, text }: { title: string; text: string }) {
 function SummaryMetric({ label, value }: { label: string; value: string | number }) {
     return (
         <div className="rounded-md border border-border/60 bg-secondary/20 px-3.5 py-3">
-            <div className="text-sm font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-lg font-black text-foreground" title={String(value)}>{value}</div>
         </div>
     );
