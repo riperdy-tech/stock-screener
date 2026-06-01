@@ -806,24 +806,24 @@ export function ScreenerDashboard() {
             {/* 2. Main Content Area */}
             <main className="flex-1 flex flex-col h-screen overflow-hidden relative w-full">
                 {/* Header */}
-                <header className="py-3 md:h-16 border-b border-border/50 flex flex-col md:flex-row flex-shrink-0 items-start md:items-center justify-between px-4 md:px-6 bg-card/70 backdrop-blur-xl sticky top-0 z-30 shadow-sm gap-3 md:gap-0">
+                <header className="py-3 md:min-h-20 border-b border-border/50 flex flex-col md:flex-row flex-shrink-0 items-start md:items-center justify-between px-4 md:px-6 bg-card/70 backdrop-blur-xl sticky top-0 z-30 shadow-sm gap-3 md:gap-0">
                     <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
                         <div className="flex items-center gap-2 md:gap-4">
-                            <h1 className="text-xl md:text-2xl font-bold text-foreground truncate max-w-[150px] sm:max-w-none">
+                            <h1 className="text-2xl md:text-3xl font-black text-foreground truncate max-w-[170px] sm:max-w-none">
                                 {t('appTitle')}
                             </h1>
                             <button 
                                 onClick={() => setShowHelp(true)}
-                                className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-full transition-colors"
+                                className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-full transition-colors"
                                 title="How scoring works"
                             >
-                                <HelpCircle className="h-4 w-4" />
+                                <HelpCircle className="h-5 w-5" />
                             </button>
                         </div>
                         
                         <div className="flex md:hidden items-center gap-2 shrink-0">
-                             <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 rounded-full transition-all text-sm font-black active:scale-95">
-                                <Sparkles className="h-3.5 w-3.5" />
+                             <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2.5 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 rounded-full transition-all text-base font-black active:scale-95">
+                                <Sparkles className="h-4 w-4" />
                                 REPORTS
                              </Link>
                              <button onClick={() => setIsSidebarOpen(true)} className="p-2 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition-colors border border-border/50">
@@ -831,7 +831,7 @@ export function ScreenerDashboard() {
                             </button>
                         </div>
                         
-                        <Link href="/reports" className="hidden md:flex text-sm bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 px-6 py-2 rounded-full font-black items-center gap-2 tracking-tighter transition-all active:scale-95 ml-6">
+                        <Link href="/reports" className="hidden md:flex text-base bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 px-6 py-2.5 rounded-full font-black items-center gap-2 tracking-tight transition-all active:scale-95 ml-6">
                            <Sparkles className="h-4 w-4" /> RECENT REPORTS
                         </Link>
                     </div>
@@ -842,7 +842,7 @@ export function ScreenerDashboard() {
                                 key={m}
                                 onClick={() => setSelectedMarket(m)}
                                 className={clsx(
-                                    "px-4 py-2 text-sm font-bold rounded-md transition-all duration-300 flex items-center gap-2 whitespace-nowrap",
+                                    "px-4 py-2.5 text-base font-bold rounded-md transition-all duration-300 flex items-center gap-2 whitespace-nowrap",
                                     selectedMarket === m 
                                         ? "bg-primary text-primary-foreground shadow-lg scale-105" 
                                         : "text-muted-foreground hover:text-foreground hover:bg-secondary"
@@ -859,10 +859,10 @@ export function ScreenerDashboard() {
                         <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
                             <button 
                                 onClick={() => setIsLogOpen(true)} 
-                                className="flex items-center gap-2 px-3.5 py-2 bg-secondary/50 hover:bg-secondary text-foreground/80 hover:text-foreground rounded-lg transition-all duration-300 text-sm font-bold border border-border/50 backdrop-blur-md shadow-sm active:scale-95"
+                                className="flex items-center gap-2 px-3.5 py-2.5 bg-secondary/50 hover:bg-secondary text-foreground/80 hover:text-foreground rounded-lg transition-all duration-300 text-base font-bold border border-border/50 backdrop-blur-md shadow-sm active:scale-95"
                             >
                                 <div className="relative">
-                                    <Terminal className="h-4 w-4" />
+                                    <Terminal className="h-5 w-5" />
                                     <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_5px_var(--success)]"></span>
                                 </div>
                                 <span className="hidden sm:inline tracking-tight">System Logs</span>
@@ -872,11 +872,11 @@ export function ScreenerDashboard() {
                         </div>
 
                         <div className="relative w-full md:w-64 mt-1 md:mt-0">
-                            <Search className="absolute left-2.5 top-2 h-4 w-4 text-muted-foreground" />
+                            <Search className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
                             <input
                                 type="text"
                                 placeholder={t('searchPlaceholder')}
-                                className="w-full bg-secondary/50 border border-border/50 md:border-none rounded-md pl-9 pr-4 py-1.5 md:py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:bg-secondary transition-all"
+                                className="w-full bg-secondary/50 border border-border/50 md:border-none rounded-md pl-10 pr-4 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-primary focus:bg-secondary transition-all"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -889,10 +889,10 @@ export function ScreenerDashboard() {
                     <section className="mb-5">
                         <div className="mb-3 flex flex-col gap-2 xl:flex-row xl:items-end xl:justify-between">
                             <div>
-                                <div className="text-sm font-black uppercase tracking-[0.18em] text-muted-foreground">Investing lens</div>
-                                <h2 className="text-2xl font-black tracking-tight text-foreground">Strategy board</h2>
+                                <div className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">Investing lens</div>
+                                <h2 className="text-3xl font-black tracking-tight text-foreground">Strategy board</h2>
                             </div>
-                            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                            <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
                                 Current strategy universe, primary rank metric, and cross-signal coverage at a glance.
                             </p>
                         </div>
@@ -904,30 +904,30 @@ export function ScreenerDashboard() {
                                 const count = strategyCounts[id];
                                 const content = (
                                     <div className={clsx(
-                                        "h-full min-h-[150px] rounded-lg border p-4 text-left transition-all",
+                                        "h-full min-h-[168px] rounded-lg border p-5 text-left transition-all",
                                         isActive
                                             ? "border-primary/70 bg-primary/10 shadow-[0_0_0_1px_rgba(59,130,246,0.18)]"
                                             : "border-border/70 bg-card/70 hover:border-primary/40 hover:bg-secondary/30"
                                     )}>
                                         <div className="flex items-start justify-between gap-3">
-                                            <div className={clsx("rounded-md border p-2", meta.accent)}>
-                                                <Icon className="h-4 w-4" />
+                                            <div className={clsx("rounded-md border p-2.5", meta.accent)}>
+                                                <Icon className="h-5 w-5" />
                                             </div>
                                             <span className={clsx(
-                                                "rounded-full px-2.5 py-1 text-sm font-black uppercase tracking-wider",
+                                                "rounded-full px-3 py-1.5 text-sm font-black uppercase tracking-wider",
                                                 isActive ? "bg-primary text-primary-foreground" : "bg-secondary/60 text-muted-foreground"
                                             )}>
                                                 {isActive ? 'Active' : 'Switch'}
                                             </span>
                                         </div>
                                         <div className="mt-3">
-                                            <div className="text-sm font-black uppercase tracking-wider text-muted-foreground">{meta.eyebrow}</div>
-                                            <div className="mt-1 text-base font-black text-foreground">{meta.title}</div>
-                                            <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{meta.description}</p>
+                                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{meta.eyebrow}</div>
+                                            <div className="mt-1 text-xl font-black text-foreground">{meta.title}</div>
+                                            <p className="mt-1 line-clamp-2 text-base leading-relaxed text-muted-foreground">{meta.description}</p>
                                         </div>
                                         <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-2">
                                             <span className="text-sm font-bold uppercase text-muted-foreground">{meta.metricLabel}</span>
-                                            <span className="font-mono text-base font-black text-foreground">{count == null ? 'Open' : count.toLocaleString()}</span>
+                                            <span className="font-mono text-lg font-black text-foreground">{count == null ? 'Open' : count.toLocaleString()}</span>
                                         </div>
                                     </div>
                                 );
