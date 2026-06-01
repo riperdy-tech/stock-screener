@@ -204,7 +204,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         </div>
                     </div>
-                    <button onClick={onClose} className="p-2 rounded-full hover:bg-secondary transition-colors self-start">
+                    <button onClick={onClose} className="p-2 rounded-full hover:bg-secondary transition-colors self-start" aria-label="Close stock scorecard">
                         <X className="h-6 w-6" />
                     </button>
                 </div>

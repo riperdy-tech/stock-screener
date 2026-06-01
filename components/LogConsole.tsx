@@ -107,7 +107,7 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                             />
                             Auto-scroll
                         </label>
-                        <button onClick={onClose} className="rounded-lg border border-gray-800 bg-white/[0.03] p-2.5 text-gray-500 transition-colors hover:text-white">
+                        <button onClick={onClose} className="rounded-lg border border-gray-800 bg-white/[0.03] p-2.5 text-gray-500 transition-colors hover:text-white" aria-label="Close system logs">
                             <X className="h-5 w-5" />
                         </button>
                     </div>

@@ -820,6 +820,7 @@ export function ScreenerDashboard() {
                                 onClick={() => setShowHelp(true)}
                                 className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-full transition-colors"
                                 title="How scoring works"
+                                aria-label="Open scoring guide"
                             >
                                 <HelpCircle className="h-5 w-5" />
                             </button>
@@ -830,7 +831,7 @@ export function ScreenerDashboard() {
                                 <Sparkles className="h-4 w-4" />
                                 REPORTS
                              </Link>
-                             <button onClick={() => setIsSidebarOpen(true)} className="p-2 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition-colors border border-border/50">
+                             <button onClick={() => setIsSidebarOpen(true)} className="p-2 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition-colors border border-border/50" aria-label="Open filters">
                                 <Filter className="h-4 w-4" />
                             </button>
                         </div>
@@ -864,6 +865,7 @@ export function ScreenerDashboard() {
                             <button 
                                 onClick={() => setIsLogOpen(true)} 
                                 className="flex items-center gap-2 px-3.5 py-2.5 bg-secondary/50 hover:bg-secondary text-foreground/80 hover:text-foreground rounded-lg transition-all duration-300 text-base font-bold border border-border/50 backdrop-blur-md shadow-sm active:scale-95"
+                                aria-label="Open system logs"
                             >
                                 <div className="relative">
                                     <Terminal className="h-5 w-5" />
@@ -1214,7 +1216,7 @@ export function ScreenerDashboard() {
                                 <Sparkles className="h-6 w-6 text-accent shrink-0" />
                                 <span className="truncate">Prompt Exporter: {selectedAiTicker}</span>
                             </h3>
-                            <button onClick={() => setAiModalOpen(false)} className="text-muted-foreground hover:text-foreground shrink-0 ml-2">
+                            <button onClick={() => setAiModalOpen(false)} className="text-muted-foreground hover:text-foreground shrink-0 ml-2" aria-label="Close AI prompt modal">
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
@@ -1408,7 +1410,7 @@ export function ScreenerDashboard() {
                                 )}
                             </div>
                         </div>
-                        <button onClick={() => dismissBatchPanel()} className="text-muted-foreground hover:text-foreground shrink-0" title="Dismiss">
+                        <button onClick={() => dismissBatchPanel()} className="text-muted-foreground hover:text-foreground shrink-0" title="Dismiss" aria-label="Dismiss batch progress">
                             <X className="h-5 w-5" />
                         </button>
                     </div>
@@ -1430,7 +1432,7 @@ export function ScreenerDashboard() {
                                 </span>
                             </div>
                         </div>
-                        <button onClick={() => setBackgroundDsTask(null)} className="text-muted-foreground hover:text-foreground">
+                        <button onClick={() => setBackgroundDsTask(null)} className="text-muted-foreground hover:text-foreground" aria-label="Dismiss analysis status">
                             <X className="h-5 w-5" />
                         </button>
                     </div>
@@ -1449,7 +1451,7 @@ export function ScreenerDashboard() {
                                     The screener combines independent lenses. Use the active strategy panel for ranking, then open a stock card for the full scorecard.
                                 </p>
                             </div>
-                            <button onClick={() => setShowHelp(false)} className="rounded-full border border-border/60 p-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                            <button onClick={() => setShowHelp(false)} className="rounded-full border border-border/60 p-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground" aria-label="Close scoring guide">
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
