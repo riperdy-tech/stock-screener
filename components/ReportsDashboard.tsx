@@ -336,7 +336,7 @@ export function ReportsDashboard() {
                             <Sparkles className="h-6 w-6 text-accent" />
                             AI RESEARCH REPOSITORY
                         </h1>
-                        <p className="text-sm uppercase tracking-widest text-muted-foreground font-bold">
+                        <p className="text-base uppercase tracking-widest text-muted-foreground font-bold">
                             Cloud-Stored Deepseek V4.0 Pro Analyses
                         </p>
                     </div>
@@ -376,7 +376,7 @@ export function ReportsDashboard() {
                             <select 
                                 value={filterAction} 
                                 onChange={(e) => setFilterAction(e.target.value)}
-                                className="bg-white/5 border border-white/10 rounded-lg px-2.5 py-2 text-sm font-bold text-blue-400 focus:outline-none"
+                                className="bg-white/5 border border-white/10 rounded-lg px-3.5 py-2.5 text-base font-bold text-blue-400 focus:outline-none"
                             >
                                 <option value="ALL">ALL ACTIONS</option>
                                 <option value="BUY">BUY</option>
@@ -387,7 +387,7 @@ export function ReportsDashboard() {
                             <select 
                                 value={filterValuation} 
                                 onChange={(e) => setFilterValuation(e.target.value)}
-                                className="bg-white/5 border border-white/10 rounded-lg px-2.5 py-2 text-sm font-bold text-green-400 focus:outline-none"
+                                className="bg-white/5 border border-white/10 rounded-lg px-3.5 py-2.5 text-base font-bold text-green-400 focus:outline-none"
                             >
                                 <option value="ALL">ALL VALUATIONS</option>
                                 <option value="UNDERVALUED">UNDERVALUED</option>
@@ -398,7 +398,7 @@ export function ReportsDashboard() {
                             <select 
                                 value={filterArchetype} 
                                 onChange={(e) => setFilterArchetype(e.target.value)}
-                                className="col-span-2 bg-white/5 border border-white/10 rounded-lg px-2.5 py-2 text-sm font-bold text-muted-foreground focus:outline-none"
+                                className="col-span-2 bg-white/5 border border-white/10 rounded-lg px-3.5 py-2.5 text-base font-bold text-muted-foreground focus:outline-none"
                             >
                                 <option value="ALL">ALL ARCHETYPES</option>
                                 <option value="Stable Incumbent">STABLE</option>
@@ -409,7 +409,7 @@ export function ReportsDashboard() {
                             </select>
                         </div>
                         <div className="flex items-center gap-3 px-1">
-                            <span className="text-sm font-black text-muted-foreground uppercase whitespace-nowrap">Min Conviction: {filterConviction}</span>
+                            <span className="text-base font-black text-muted-foreground uppercase whitespace-nowrap">Min Conviction: {filterConviction}</span>
                             <input 
                                 type="range" min="0" max="15" step="0.5" 
                                 value={filterConviction} 
@@ -423,10 +423,10 @@ export function ReportsDashboard() {
                         {loading ? (
                             <div className="flex flex-col items-center justify-center h-64 gap-4 text-muted-foreground">
                                 <RefreshCw className="h-6 w-6 animate-spin text-accent" />
-                                <span className="text-sm font-bold uppercase tracking-widest">Fetching Cloud...</span>
+                                <span className="text-base font-bold uppercase tracking-widest">Fetching Cloud...</span>
                             </div>
                         ) : filteredReports.length === 0 ? (
-                            <div className="p-12 text-center text-muted-foreground italic text-sm">
+                            <div className="p-12 text-center text-muted-foreground italic text-base">
                                 No reports found matching your search.
                             </div>
                         ) : (
@@ -454,7 +454,7 @@ export function ReportsDashboard() {
                                                     </span>
                                                     {meta.valuation_status && (
                                                         <span className={clsx(
-                                                            "text-sm px-2.5 py-1 rounded-md font-black uppercase tracking-tight",
+                                                            "text-base px-3 py-1.5 rounded-md font-black uppercase tracking-tight",
                                                             meta.valuation_status.includes('UNDERVALUED') ? "bg-green-500/20 text-green-400 border border-green-500/20" :
                                                             meta.valuation_status === 'OVERVALUED' ? "bg-red-500/20 text-red-400 border border-red-500/20" :
                                                             "bg-white/5 text-muted-foreground border border-white/10"
@@ -463,8 +463,8 @@ export function ReportsDashboard() {
                                                         </span>
                                                     )}
                                                 </div>
-                                                <div className="flex items-center gap-2 text-sm text-muted-foreground font-bold uppercase tracking-tight">
-                                                    <Calendar className="h-3.5 w-3.5 opacity-50 text-blue-500" />
+                                                <div className="flex items-center gap-2 text-base text-muted-foreground font-bold uppercase tracking-tight">
+                                                    <Calendar className="h-4 w-4 opacity-50 text-blue-500" />
                                                     {createdAt.toLocaleDateString()} 
                                                     <span className="text-white/20 font-normal">@</span>
                                                     <span className="text-blue-400/80">{createdAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
@@ -473,12 +473,12 @@ export function ReportsDashboard() {
                                             
                                             <div className="flex flex-col items-end gap-1">
                                                 <div className={clsx(
-                                                    "px-2.5 py-1 rounded-lg text-sm font-black tracking-tight shadow-md border",
+                                                    "px-3 py-1.5 rounded-lg text-base font-black tracking-tight shadow-md border",
                                                     isPositive ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-red-500/20 text-red-400 border-red-500/30"
                                                 )}>
                                                     {isPositive ? '+' : ''}{upside.toFixed(1)}%
                                                 </div>
-                                                <span className="text-sm font-black text-muted-foreground tracking-[0.14em] uppercase opacity-60">ALPHA</span>
+                                                <span className="text-base font-black text-muted-foreground tracking-[0.14em] uppercase opacity-60">ALPHA</span>
                                             </div>
                                         </button>
                                     );
@@ -501,20 +501,20 @@ export function ReportsDashboard() {
                             <aside className="hidden lg:block w-72 shrink-0 border-r border-white/5 bg-[#0a0c10] p-6 sticky top-0 h-screen overflow-y-auto no-scrollbar">
                                 <div className="space-y-6">
                                     <div>
-                                        <h3 className="text-sm font-black text-blue-500 uppercase tracking-[0.16em] mb-5 flex items-center gap-2">
+                                        <h3 className="text-base font-black text-blue-500 uppercase tracking-[0.16em] mb-5 flex items-center gap-2">
                                             <span className="w-4 h-[1px] bg-blue-500/30"></span>
                                             Contents
                                         </h3>
                                         <nav className="space-y-0.5">
                                             {reportHeadings.length === 0 ? (
-                                                <p className="text-sm text-muted-foreground uppercase px-2">No sections detected</p>
+                                                <p className="text-base text-muted-foreground uppercase px-2">No sections detected</p>
                                             ) : (
                                                 reportHeadings.map((h) => (
                                                     <button
                                                         key={h.id}
                                                         onClick={() => scrollToHeading(h.id)}
                                                         className={clsx(
-                                                            "group flex items-start gap-2.5 w-full text-left py-2 px-2.5 rounded-md transition-all duration-200",
+                                                            "group flex items-start gap-2.5 w-full text-left py-2.5 px-3 rounded-md transition-all duration-200",
                                                             activeHeading === h.id ? "bg-blue-500/10" : "hover:bg-white/[0.04]",
                                                             h.level === 2 && "pl-7"
                                                         )}
@@ -524,7 +524,7 @@ export function ReportsDashboard() {
                                                             activeHeading === h.id ? "bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.5)]" : "bg-white/15 group-hover:bg-blue-400/50"
                                                         )}></span>
                                                         <span className={clsx(
-                                                            "text-sm leading-snug transition-colors duration-200 line-clamp-2",
+                                                            "text-base leading-snug transition-colors duration-200 line-clamp-2",
                                                             h.level === 1 ? "font-bold uppercase tracking-wide" : "font-medium opacity-70",
                                                             activeHeading === h.id ? "text-blue-300" : "text-slate-400 group-hover:text-slate-200"
                                                         )}>
@@ -541,8 +541,8 @@ export function ReportsDashboard() {
                                             onClick={() => downloadReport(selectedReport)}
                                             className="w-full flex items-center justify-between group bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-lg px-4 py-3 transition-all"
                                         >
-                                            <span className="text-sm font-black text-blue-400 uppercase tracking-widest">Download .TXT</span>
-                                            <Download className="h-3.5 w-3.5 text-blue-400 group-hover:translate-y-0.5 transition-transform" />
+                                            <span className="text-base font-black text-blue-400 uppercase tracking-widest">Download .TXT</span>
+                                            <Download className="h-4 w-4 text-blue-400 group-hover:translate-y-0.5 transition-transform" />
                                         </button>
                                     </div>
                                 </div>
@@ -558,7 +558,7 @@ export function ReportsDashboard() {
                                             {/* Mobile Back Button */}
                                             <button 
                                                 onClick={() => setSelectedReport(null)}
-                                                className="md:hidden flex items-center gap-2 mb-6 text-blue-400 font-bold text-sm bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-all tracking-[0.16em]"
+                                                className="md:hidden flex items-center gap-2 mb-6 text-blue-400 font-bold text-base bg-blue-500/10 px-4 py-2.5 rounded-full w-fit active:scale-95 transition-all tracking-[0.16em]"
                                             >
                                                 <ArrowLeft className="h-3.5 w-3.5" /> RETURN TO LIST
                                             </button>
@@ -570,7 +570,7 @@ export function ReportsDashboard() {
                                                         onClick={() => setMobileTocOpen(!mobileTocOpen)}
                                                         className="w-full flex items-center justify-between px-5 py-3.5 text-left"
                                                     >
-                                                        <span className="text-sm font-black text-blue-400 uppercase tracking-[0.14em]">
+                                                        <span className="text-base font-black text-blue-400 uppercase tracking-[0.14em]">
                                                             Table of Contents ({reportHeadings.length} sections)
                                                         </span>
                                                         <ChevronRight className={clsx("h-4 w-4 text-blue-400 transition-transform duration-200", mobileTocOpen && "rotate-90")} />
@@ -582,7 +582,7 @@ export function ReportsDashboard() {
                                                                     key={h.id}
                                                                     onClick={() => scrollToHeading(h.id)}
                                                                     className={clsx(
-                                                                        "block w-full text-left py-2 text-sm transition-colors",
+                                                                        "block w-full text-left py-2.5 text-base transition-colors",
                                                                         h.level === 1 ? "font-bold text-slate-300" : "font-medium text-slate-500 pl-4",
                                                                         "hover:text-blue-400 active:text-blue-300"
                                                                     )}
@@ -600,11 +600,11 @@ export function ReportsDashboard() {
                                                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                                                     <div>
                                                         <div className="flex items-center gap-3 mb-3">
-                                                            <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-black rounded-md tracking-widest uppercase">
+                                                            <span className="px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-base font-black rounded-md tracking-widest uppercase">
                                                                 {meta.archetype || 'Asset Research'}
                                                             </span>
                                                             <span className="w-1 h-1 rounded-full bg-white/20"></span>
-                                                            <span className="text-muted-foreground text-sm font-bold uppercase tracking-widest">
+                                                            <span className="text-muted-foreground text-base font-bold uppercase tracking-widest">
                                                                 {new Date(selectedReport.created_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                                                             </span>
                                                         </div>
@@ -618,11 +618,11 @@ export function ReportsDashboard() {
 
                                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 shrink-0">
                                                         <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-sm font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Conviction</div>
+                                                            <div className="text-base font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Conviction</div>
                                                             <div className="text-3xl font-black text-blue-500 tracking-tighter">{meta.conviction || '0'}</div>
                                                         </div>
                                                         <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-sm font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Upside</div>
+                                                            <div className="text-base font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Upside</div>
                                                             <div className={clsx(
                                                                 "text-3xl font-black tracking-tighter",
                                                                 (parseFloat(meta.upside || 0)) > 0 ? "text-green-400" : "text-red-400"
@@ -631,7 +631,7 @@ export function ReportsDashboard() {
                                                             </div>
                                                         </div>
                                                         <div className="hidden sm:block bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-sm font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Rating</div>
+                                                            <div className="text-base font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Rating</div>
                                                             <div className="text-2xl font-black text-white tracking-tighter uppercase">{meta.action || 'HOLD'}</div>
                                                         </div>
                                                     </div>
@@ -701,7 +701,7 @@ export function ReportsDashboard() {
                                                             ),
                                                             thead: ({node, ...props}: any) => <thead className="bg-white/[0.03]" {...props} />,
                                                             tbody: ({node, ...props}: any) => <tbody className="divide-y divide-white/5" {...props} />,
-                                                            th: ({node, ...props}: any) => <th className="px-4 py-3 text-left text-sm font-black text-blue-400 uppercase tracking-wider border-b border-white/10" {...props} />,
+                                                            th: ({node, ...props}: any) => <th className="px-4 py-3 text-left text-base font-black text-blue-400 uppercase tracking-wider border-b border-white/10" {...props} />,
                                                             td: ({node, ...props}: any) => <td className="px-4 py-2.5 text-slate-300 font-medium border-b border-white/5" {...props} />,
                                                         }}
                                                     >
@@ -716,10 +716,10 @@ export function ReportsDashboard() {
                                                     </ReactMarkdown>
 
                                                     {/* Footer stats */}
-                                                    <footer className="mt-24 pt-12 border-t border-white/5 flex flex-wrap gap-8 text-sm font-black text-muted-foreground uppercase tracking-[0.16em]">
-                                                        <div className="flex items-center gap-2"><DollarSign className="h-3 w-3" /> Compute Cost: ${selectedReport.cost || '0.00'}</div>
-                                                        <div className="flex items-center gap-2"><Activity className="h-3 w-3" /> Token Density: {selectedReport.usage?.total_tokens || 0} units</div>
-                                                        <div className="flex items-center gap-2"><Calendar className="h-3 w-3" /> Processed At: {new Date(selectedReport.created_at).toISOString()}</div>
+                                                    <footer className="mt-24 pt-12 border-t border-white/5 flex flex-wrap gap-8 text-base font-black text-muted-foreground uppercase tracking-[0.16em]">
+                                                        <div className="flex items-center gap-2"><DollarSign className="h-4 w-4" /> Compute Cost: ${selectedReport.cost || '0.00'}</div>
+                                                        <div className="flex items-center gap-2"><Activity className="h-4 w-4" /> Token Density: {selectedReport.usage?.total_tokens || 0} units</div>
+                                                        <div className="flex items-center gap-2"><Calendar className="h-4 w-4" /> Processed At: {new Date(selectedReport.created_at).toISOString()}</div>
                                                     </footer>
                                                 </div>
                                             )}
