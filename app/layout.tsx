@@ -7,8 +7,8 @@ import { LanguageProvider } from "../components/LanguageContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Quant Screener",
-    description: "Advanced Quantitative Stock Screener",
+    title: "Stock Screener RT",
+    description: "Multi-strategy stock screener for 100-bagger, reverse-engine, paradigm, and YouTube strategy lenses.",
 };
 
 export default function RootLayout({
