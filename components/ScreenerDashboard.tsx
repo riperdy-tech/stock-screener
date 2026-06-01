@@ -813,7 +813,7 @@ export function ScreenerDashboard() {
                 <header className="py-3 md:min-h-20 border-b border-border/50 flex flex-col md:flex-row flex-shrink-0 items-start md:items-center justify-between px-4 md:px-6 bg-card/70 backdrop-blur-xl sticky top-0 z-30 shadow-sm gap-3 md:gap-0">
                     <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
                         <div className="flex items-center gap-2 md:gap-4">
-                            <h1 className="text-2xl md:text-3xl font-black text-foreground truncate max-w-[170px] sm:max-w-none">
+                            <h1 className="max-w-[min(58vw,22rem)] truncate text-2xl font-black text-foreground sm:max-w-none md:text-3xl">
                                 {t('appTitle')}
                             </h1>
                             <button 
@@ -840,7 +840,7 @@ export function ScreenerDashboard() {
                         </Link>
                     </div>
 
-                    <div className="flex bg-secondary/50 p-1 rounded-lg border border-border/50 shadow-inner scale-90 md:scale-100 overflow-x-auto no-scrollbar max-w-[280px] sm:max-w-none">
+                    <div className="flex w-full max-w-full overflow-x-auto rounded-lg border border-border/50 bg-secondary/50 p-1 shadow-inner no-scrollbar md:w-auto">
                         {(['US', 'Korea', 'Taiwan'] as Market[]).map((m) => (
                             <button
                                 key={m}
@@ -1368,7 +1368,7 @@ export function ScreenerDashboard() {
 
             {/* Phase 11d: Batch Progress Panel */}
             {batchId && (
-                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-emerald-500/30 rounded-xl shadow-2xl p-5 min-w-[360px] max-w-[min(420px,calc(100vw-2rem))] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
+                <div className="fixed bottom-4 right-4 z-[100] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col gap-3 rounded-xl border border-emerald-500/30 bg-[#1a1f2e] p-5 shadow-2xl animate-in slide-in-from-bottom-5 sm:bottom-6 sm:right-6">
                     <div className="flex justify-between items-start gap-4">
                         <div className="flex items-start gap-3">
                             <Sparkles className={clsx("h-5 w-5 mt-0.5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-emerald-400" : "text-emerald-400 animate-pulse")} />
@@ -1410,7 +1410,7 @@ export function ScreenerDashboard() {
 
             {/* Deepseek Task Alert */}
             {backgroundDsTask && (
-                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-blue-500/30 rounded-xl shadow-2xl p-5 min-w-[360px] max-w-[min(420px,calc(100vw-2rem))] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
+                <div className="fixed bottom-4 right-4 z-[100] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col gap-3 rounded-xl border border-blue-500/30 bg-[#1a1f2e] p-5 shadow-2xl animate-in slide-in-from-bottom-5 sm:bottom-6 sm:right-6">
                     <div className="flex justify-between items-start gap-4">
                         <div className="flex items-start gap-3">
                             <Sparkles className={clsx("h-5 w-5 mt-0.5", backgroundDsTask.status === 'running' ? "text-blue-400 animate-pulse" : backgroundDsTask.status === 'error' ? "text-danger" : "text-success")} />
