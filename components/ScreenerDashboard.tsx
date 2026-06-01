@@ -1058,26 +1058,26 @@ export function ScreenerDashboard() {
                             )}
                         </div>
                     )}
-                    <div className="mb-6 rounded-lg border border-border/70 bg-card/70 p-4">
+                    <div className="mb-6 rounded-lg border border-border/70 bg-card/70 p-5 shadow-sm">
                         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                             <div className="min-w-0">
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <span className={clsx("rounded-md border px-2.5 py-1 text-sm font-black uppercase tracking-wider", activeStrategy.accent)}>
+                                    <span className={clsx("rounded-md border px-3 py-1.5 text-sm font-black uppercase tracking-wider", activeStrategy.accent)}>
                                         {activeStrategy.eyebrow}
                                     </span>
-                                    <span className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} market</span>
+                                    <span className="text-base font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} market</span>
                                 </div>
                                 <h2 className="mt-2 text-3xl font-black tracking-tight">{activeStrategy.title}</h2>
-                                <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{activeSummary}</p>
+                                <p className="mt-1 max-w-3xl text-base leading-relaxed text-muted-foreground">{activeSummary}</p>
                                 {visibleFilterChips.length > 0 && (
                                     <div className="mt-3 flex flex-wrap gap-2">
                                         {visibleFilterChips.map((chip) => (
-                                            <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-sm font-bold text-muted-foreground">
+                                            <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-3 py-1.5 text-sm font-bold text-muted-foreground">
                                                 {chip}
                                             </span>
                                         ))}
                                         {hiddenFilterChipCount > 0 && (
-                                            <span className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-sm font-bold text-muted-foreground">
+                                            <span className="rounded-full border border-border/70 bg-secondary/40 px-3 py-1.5 text-sm font-bold text-muted-foreground">
                                                 +{hiddenFilterChipCount} more
                                             </span>
                                         )}
@@ -1093,21 +1093,23 @@ export function ScreenerDashboard() {
                     </div>
 
                     {(loading && rawResults.length === 0) || isYoutubeUniverseLoading ? (
-                        <div className="flex flex-col items-center justify-center h-64 text-muted-foreground animate-pulse">
-                            <p>{t('initEngine')}</p>
+                        <div className="flex min-h-72 flex-col items-center justify-center rounded-xl border border-border/70 bg-card/60 p-8 text-center text-muted-foreground animate-pulse">
+                            <RefreshCw className="mb-4 h-8 w-8 animate-spin text-primary" />
+                            <p className="text-xl font-black text-foreground">{t('initEngine')}</p>
+                            <p className="mt-2 max-w-md text-base leading-relaxed">Loading the latest screener universe and strategy overlays.</p>
                         </div>
                     ) : filteredCount === 0 ? (
-                        <div className="flex flex-col items-center justify-center h-64 text-muted-foreground border border-dashed border-border rounded-xl">
-                            <p className="text-lg font-black text-foreground">No matching stocks</p>
-                            <p className="mt-1 text-base">{t('noStocks')}</p>
-                            <button onClick={resetActiveFilters} className="mt-4 text-primary text-base font-bold hover:underline">{t('resetFilters')}</button>
+                        <div className="flex min-h-72 flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-8 text-center text-muted-foreground">
+                            <p className="text-2xl font-black text-foreground">No matching stocks</p>
+                            <p className="mt-2 max-w-md text-base leading-relaxed">{t('noStocks')}</p>
+                            <button onClick={resetActiveFilters} className="mt-5 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2.5 text-base font-black text-primary transition-colors hover:bg-primary/15">{t('resetFilters')}</button>
                         </div>
                     ) : (
                         <>
                             <div className="grid grid-cols-1 gap-4 mb-8 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                                 {currentData.map((result, i) => (
                                     <div key={result.candidate.symbol} className="relative group/card">
-                                        {/* Selection checkbox — reverse mode only */}
+                                        {/* Selection checkbox - reverse mode only */}
                                         {screenMode === 'reverse' && (
                                             <button
                                                 onClick={(e) => {
@@ -1146,11 +1148,11 @@ export function ScreenerDashboard() {
 
                             {/* Pagination Controls */}
                             {totalPages > 1 && (
-                                <div className="flex justify-center items-center gap-2 pb-8">
+                                <div className="flex flex-wrap items-center justify-center gap-2 pb-8">
                                     <button
                                         onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                                         disabled={currentPage === 1}
-                                        className="px-3 py-1 rounded border border-border disabled:opacity-50 hover:bg-secondary"
+                                        className="rounded-lg border border-border bg-card/70 px-4 py-2.5 text-base font-bold transition-colors hover:bg-secondary disabled:opacity-50"
                                     >
                                         {t('previous')}
                                     </button>
@@ -1159,7 +1161,7 @@ export function ScreenerDashboard() {
                                         <button
                                             key={p}
                                             onClick={() => setCurrentPage(p)}
-                                            className={`w-8 h-8 rounded flex items-center justify-center text-sm ${currentPage === p ? 'bg-primary text-primary-foreground font-bold' : 'hover:bg-secondary'}`}
+                                            className={`flex h-10 w-10 items-center justify-center rounded-lg text-base font-bold transition-colors ${currentPage === p ? 'bg-primary text-primary-foreground shadow-sm' : 'border border-border/60 bg-card/60 hover:bg-secondary'}`}
                                         >
                                             {p}
                                         </button>
@@ -1168,7 +1170,7 @@ export function ScreenerDashboard() {
                                     <button
                                         onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                                         disabled={currentPage === totalPages}
-                                        className="px-3 py-1 rounded border border-border disabled:opacity-50 hover:bg-secondary"
+                                        className="rounded-lg border border-border bg-card/70 px-4 py-2.5 text-base font-bold transition-colors hover:bg-secondary disabled:opacity-50"
                                     >
                                         {t('next')}
                                     </button>
@@ -1193,9 +1195,9 @@ export function ScreenerDashboard() {
             {aiModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
                     <div className="bg-card w-full sm:max-w-[95vw] lg:max-w-7xl h-[92vh] sm:h-auto sm:max-h-[90vh] rounded-t-2xl sm:rounded-xl border border-border shadow-2xl flex flex-col overflow-hidden">
-                        <div className="flex items-center justify-between p-4 border-b border-border bg-secondary/30 shrink-0">
-                            <h3 className="text-base sm:text-lg font-bold flex items-center gap-2 text-foreground">
-                                <Sparkles className="h-5 w-5 text-accent shrink-0" />
+                        <div className="flex items-center justify-between p-5 border-b border-border bg-secondary/30 shrink-0">
+                            <h3 className="text-xl font-black flex items-center gap-2 text-foreground">
+                                <Sparkles className="h-6 w-6 text-accent shrink-0" />
                                 <span className="truncate">Prompt Exporter: {selectedAiTicker}</span>
                             </h3>
                             <button onClick={() => setAiModalOpen(false)} className="text-muted-foreground hover:text-foreground shrink-0 ml-2">
@@ -1206,7 +1208,7 @@ export function ScreenerDashboard() {
                             {aiLoading ? (
                                 <div className="flex flex-col items-center justify-center flex-1 text-muted-foreground gap-4">
                                     <RefreshCw className="h-8 w-8 animate-spin text-accent" />
-                                    <p className="text-sm font-medium text-center">Injecting latest real-time statements and building prompt...</p>
+                                    <p className="text-base font-medium text-center">Injecting latest real-time statements and building prompt...</p>
                                 </div>
                             ) : aiResult ? (
                                 <div className="flex flex-col flex-1 min-h-0 gap-3 sm:gap-4">
@@ -1217,10 +1219,10 @@ export function ScreenerDashboard() {
                                         {/* Prompt Box */}
                                         <div className="relative flex-1 bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
                                             <div className="bg-secondary/40 px-3 sm:px-5 py-2.5 border-b border-border flex justify-between items-center shrink-0">
-                                                <span className="text-sm font-mono text-muted-foreground uppercase tracking-wider font-semibold">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
+                                                <span className="text-base font-mono text-muted-foreground uppercase tracking-wider font-semibold">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
                                                 <button
                                                     onClick={() => copyToClipboard(aiResult!)}
-                                                    className="flex items-center gap-2 text-sm font-bold bg-primary hover:bg-primary/90 text-primary-foreground px-3 py-2 rounded-md transition-colors shadow-sm"
+                                                    className="flex items-center gap-2 text-base font-bold bg-primary hover:bg-primary/90 text-primary-foreground px-3.5 py-2.5 rounded-md transition-colors shadow-sm"
                                                 >
                                                     {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                                                     {copied ? 'COPIED!' : 'COPY PROMPT'}
@@ -1237,20 +1239,20 @@ export function ScreenerDashboard() {
                                         {dsResult && (
                                             <div className="relative flex-1 bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
                                                 <div className="bg-blue-500/10 px-3 sm:px-5 py-2.5 border-b border-blue-500/20 flex justify-between items-center shrink-0 flex-wrap gap-2">
-                                                    <span className="text-sm font-mono text-blue-400 uppercase tracking-wider font-semibold">QUANT REPORT</span>
+                                                    <span className="text-base font-mono text-blue-400 uppercase tracking-wider font-semibold">QUANT REPORT</span>
                                                     <div className="flex items-center gap-3">
                                                         <div className="flex flex-col">
                                                             <h1 className="text-xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
                                                                 QUANT <span className="text-blue-500">PRO</span>
                                                             </h1>
                                                             <div className="flex items-center gap-2">
-                                                                <span className="text-sm text-muted-foreground font-medium uppercase tracking-widest">Global Terminal</span>
+                                                                <span className="text-base text-muted-foreground font-medium uppercase tracking-widest">Global Terminal</span>
                                                                 <div className="h-1 w-1 rounded-full bg-green-500 animate-pulse" />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button onClick={downloadDsResult} className="flex items-center gap-1 text-sm font-bold bg-secondary hover:bg-secondary/80 px-3 py-2 rounded">Download .txt</button>
-                                                    <button onClick={copyDsResult} className="flex items-center gap-1 text-sm font-bold bg-primary text-primary-foreground px-3 py-2 rounded">Copy Result</button>
+                                                    <button onClick={downloadDsResult} className="flex items-center gap-1 text-base font-bold bg-secondary hover:bg-secondary/80 px-3.5 py-2.5 rounded">Download .txt</button>
+                                                    <button onClick={copyDsResult} className="flex items-center gap-1 text-base font-bold bg-primary text-primary-foreground px-3.5 py-2.5 rounded">Copy Result</button>
                                                 </div>
                                                 <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-slate-950/40 backdrop-blur-md">
                                                     <div className="prose prose-invert prose-blue max-w-none break-words whitespace-pre-wrap font-sans text-slate-100 leading-relaxed text-base sm:text-lg">
@@ -1270,28 +1272,28 @@ export function ScreenerDashboard() {
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 shrink-0 mt-2">
                                         <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#1A73E8] hover:bg-[#1557B0] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
                                             <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                            <span className="text-sm font-bold tracking-wide">Gemini</span>
+                                            <span className="text-base font-bold tracking-wide">Gemini</span>
                                         </a>
                                         <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#D97757] hover:bg-[#C26547] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
                                             <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                            <span className="text-sm font-bold tracking-wide">Claude</span>
+                                            <span className="text-base font-bold tracking-wide">Claude</span>
                                         </a>
                                         <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#10A37F] hover:bg-[#0E906F] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
                                             <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                            <span className="text-sm font-bold tracking-wide">ChatGPT</span>
+                                            <span className="text-base font-bold tracking-wide">ChatGPT</span>
                                         </a>
                                         {showDsPassword ? (
                                             <div className="flex flex-col items-center justify-center gap-2 bg-[#4d6bfe]/20 border border-[#4d6bfe]/40 py-2 sm:py-2 rounded-xl px-2">
-                                                <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full text-sm p-2 rounded bg-background border border-border" />
-                                                <button onClick={handleDeepseekRun} disabled={dsLoading} className="w-full bg-[#4d6bfe] text-white text-sm py-2 rounded font-bold hover:bg-[#3b54d1]">
+                                                <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full text-base p-2.5 rounded bg-background border border-border" />
+                                                <button onClick={handleDeepseekRun} disabled={dsLoading} className="w-full bg-[#4d6bfe] text-white text-base py-2.5 rounded font-bold hover:bg-[#3b54d1]">
                                                     {dsLoading ? "Running..." : "Run Deepseek"}
                                                 </button>
-                                                {dsError && <span className="text-sm text-danger">{dsError}</span>}
+                                                {dsError && <span className="text-base text-danger">{dsError}</span>}
                                             </div>
                                         ) : (
                                             <button onClick={() => setShowDsPassword(true)} className="flex flex-col items-center justify-center gap-2.5 bg-[#4d6bfe] hover:bg-[#3b54d1] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
                                                 <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" alt="Deepseek" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                                <span className="text-sm font-bold tracking-wide">Deepseek V4.0 Pro</span>
+                                                <span className="text-base font-bold tracking-wide">Deepseek V4.0 Pro</span>
                                             </button>
                                         )}
                                     </div>
@@ -1305,23 +1307,23 @@ export function ScreenerDashboard() {
             {/* Phase 11d: Batch Password Prompt */}
             {showBatchPassword && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
-                    <div className="bg-card border border-border rounded-xl shadow-2xl p-6 max-w-sm w-full animate-in zoom-in-95">
-                        <h3 className="text-lg font-bold mb-2">Enter Password</h3>
-                        <p className="text-sm text-muted-foreground mb-3">Required to dispatch deep-dive analyses.</p>
+                    <div className="bg-card border border-border rounded-xl shadow-2xl p-6 max-w-md w-full animate-in zoom-in-95">
+                        <h3 className="text-2xl font-black mb-2">Enter Password</h3>
+                        <p className="text-base text-muted-foreground mb-4">Required to dispatch deep-dive analyses.</p>
                         <input
                             type="password"
                             placeholder="Password"
                             value={dsPassword}
                             onChange={(e) => setDsPassword(e.target.value)}
-                            className="w-full bg-secondary/40 border border-border rounded-lg px-3 py-2 text-sm mb-3 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                            className="w-full bg-secondary/40 border border-border rounded-lg px-3.5 py-2.5 text-base mb-4 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                             onKeyDown={(e) => { if (e.key === 'Enter' && dsPassword) { setShowBatchPassword(false); setShowBatchConfirm(true); } }}
                         />
                         <div className="flex gap-2">
-                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 px-3 py-2 bg-muted text-muted-foreground text-sm font-bold rounded border border-border">Cancel</button>
+                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 px-3.5 py-2.5 bg-muted text-muted-foreground text-base font-bold rounded border border-border">Cancel</button>
                             <button
                                 onClick={() => { setShowBatchPassword(false); setShowBatchConfirm(true); }}
                                 disabled={!dsPassword}
-                                className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold rounded disabled:opacity-50"
+                                className="flex-1 px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-base font-bold rounded disabled:opacity-50"
                             >Continue</button>
                         </div>
                     </div>
@@ -1331,9 +1333,9 @@ export function ScreenerDashboard() {
             {/* Phase 11d: Batch Confirm Dialog */}
             {showBatchConfirm && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
-                    <div className="bg-card border border-border rounded-xl shadow-2xl p-6 max-w-sm w-full animate-in zoom-in-95">
-                        <h3 className="text-lg font-bold mb-2">Dispatch Deep-Dive Batch?</h3>
-                        <p className="text-sm text-muted-foreground mb-4">
+                    <div className="bg-card border border-border rounded-xl shadow-2xl p-6 max-w-md w-full animate-in zoom-in-95">
+                        <h3 className="text-2xl font-black mb-2">Dispatch Deep-Dive Batch?</h3>
+                        <p className="text-base leading-relaxed text-muted-foreground mb-5">
                             {selectedTickers.size > 0
                                 ? <>This will dispatch <span className="font-bold text-foreground">{selectedTickers.size} selected</span> stock(s) for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
                                 : <>This will dispatch the top <span className="font-bold text-foreground">{batchN}</span> stocks for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
@@ -1342,13 +1344,13 @@ export function ScreenerDashboard() {
                         <div className="flex gap-2">
                             <button
                                 onClick={() => setShowBatchConfirm(false)}
-                                className="flex-1 px-3 py-2 bg-muted text-muted-foreground text-sm font-bold rounded border border-border"
+                                className="flex-1 px-3.5 py-2.5 bg-muted text-muted-foreground text-base font-bold rounded border border-border"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleBatchDispatch}
-                                className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold rounded"
+                                className="flex-1 px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-base font-bold rounded"
                             >
                                 Dispatch {batchN}
                             </button>
@@ -1359,13 +1361,13 @@ export function ScreenerDashboard() {
 
             {/* Phase 11d: Batch Progress Panel */}
             {batchId && (
-                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-emerald-500/30 rounded-xl shadow-2xl p-4 min-w-[340px] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
+                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-emerald-500/30 rounded-xl shadow-2xl p-5 min-w-[360px] max-w-[min(420px,calc(100vw-2rem))] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
                     <div className="flex justify-between items-start gap-4">
                         <div className="flex items-start gap-3">
                             <Sparkles className={clsx("h-5 w-5 mt-0.5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-emerald-400" : "text-emerald-400 animate-pulse")} />
                             <div className="flex flex-col flex-1">
-                                <span className="font-bold text-base text-foreground">Batch Deep-Dive</span>
-                                <span className="text-sm text-muted-foreground mt-1">
+                                <span className="font-bold text-lg text-foreground">Batch Deep-Dive</span>
+                                <span className="text-base text-muted-foreground mt-1">
                                     {batchProgress
                                         ? (() => {
                                             const ok = batchProgress.completed;
@@ -1386,7 +1388,7 @@ export function ScreenerDashboard() {
                                 </div>
                                 )}
                                 {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                    <span className="text-sm text-emerald-400 mt-1.5 font-bold">
+                                    <span className="text-base text-emerald-400 mt-1.5 font-bold">
                                         {batchProgress.completed > 0 ? 'Open any stock card to view its report.' : 'No reports generated.'}{' '}Auto-closing in 8s.
                                     </span>
                                 )}
@@ -1401,15 +1403,15 @@ export function ScreenerDashboard() {
 
             {/* Deepseek Task Alert */}
             {backgroundDsTask && (
-                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-blue-500/30 rounded-xl shadow-2xl p-4 min-w-[340px] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
+                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-blue-500/30 rounded-xl shadow-2xl p-5 min-w-[360px] max-w-[min(420px,calc(100vw-2rem))] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
                     <div className="flex justify-between items-start gap-4">
                         <div className="flex items-start gap-3">
                             <Sparkles className={clsx("h-5 w-5 mt-0.5", backgroundDsTask.status === 'running' ? "text-blue-400 animate-pulse" : backgroundDsTask.status === 'error' ? "text-danger" : "text-success")} />
                             <div className="flex flex-col">
-                                <span className="font-bold text-base text-foreground">
+                                <span className="font-bold text-lg text-foreground">
                                     {backgroundDsTask.status === 'running' ? `Analyzing ${backgroundDsTask.ticker}...` : backgroundDsTask.status === 'error' ? `Error analyzing ${backgroundDsTask.ticker}` : `Analysis Complete: ${backgroundDsTask.ticker}`}
                                 </span>
-                                <span className="text-sm text-muted-foreground mt-1">
+                                <span className="text-base text-muted-foreground mt-1">
                                     {backgroundDsTask.status === 'running' ? 'Deepseek V4.0 Pro is generating report.' : backgroundDsTask.status === 'error' ? backgroundDsTask.message : 'Report saved to scorecard!'}
                                 </span>
                             </div>
@@ -1524,9 +1526,9 @@ function HelpPillar({ title, text }: { title: string; text: string }) {
 
 function SummaryMetric({ label, value }: { label: string; value: string | number }) {
     return (
-        <div className="rounded-md border border-border/60 bg-secondary/20 px-3 py-2">
+        <div className="rounded-md border border-border/60 bg-secondary/20 px-3.5 py-3">
             <div className="text-sm font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-1 truncate font-mono text-base font-black text-foreground" title={String(value)}>{value}</div>
+            <div className="mt-1 truncate font-mono text-lg font-black text-foreground" title={String(value)}>{value}</div>
         </div>
     );
 }
@@ -1542,10 +1544,10 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
     const content = (
         <>
             <div className="flex items-start justify-between gap-2">
-                <span className="truncate text-sm font-black uppercase tracking-wider text-muted-foreground">{label}</span>
-                <span className="font-mono text-base font-black text-foreground">{value}</span>
+                <span className="truncate text-base font-black uppercase tracking-wider text-muted-foreground">{label}</span>
+                <span className="font-mono text-lg font-black text-foreground">{value}</span>
             </div>
-            <p className="mt-1 line-clamp-2 text-sm leading-snug text-muted-foreground">{detail}</p>
+            <p className="mt-1.5 line-clamp-2 text-base leading-snug text-muted-foreground">{detail}</p>
         </>
     );
 
@@ -1554,7 +1556,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
             <button
                 type="button"
                 onClick={onClick}
-                className={clsx("min-w-[170px] rounded-md border border-border/70 bg-card/60 px-3 py-2.5 text-left transition-all", toneClass)}
+                className={clsx("min-w-[190px] rounded-md border border-border/70 bg-card/60 px-3.5 py-3 text-left transition-all", toneClass)}
             >
                 {content}
             </button>
@@ -1562,7 +1564,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
     }
 
     return (
-        <div className={clsx("min-w-[170px] rounded-md border border-border/70 bg-card/60 px-3 py-2.5", toneClass)}>
+        <div className={clsx("min-w-[190px] rounded-md border border-border/70 bg-card/60 px-3.5 py-3", toneClass)}>
             {content}
         </div>
     );
