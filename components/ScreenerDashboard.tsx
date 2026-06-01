@@ -97,6 +97,18 @@ function adaptRowsToScreeningResults(
                 insiderOwnership: item.insiderOwnership,
                 zScore: item.zScore,
                 peRatio: item.peRatio,
+                floatShares: item.floatShares,
+                epsTtm: item.epsTtm,
+                previousEpsTtm: item.previousEpsTtm,
+                forwardEpsEstimate: item.forwardEpsEstimate,
+                priceToBook: item.priceToBook,
+                fiveYearAveragePe: item.fiveYearAveragePe,
+                monthlyMa20: item.monthlyMa20,
+                monthlyCloses: item.monthlyCloses,
+                quarterlyEps: item.quarterlyEps,
+                consecutiveGrowth: item.consecutiveGrowth,
+                epsYoyGrowth: item.epsYoyGrowth,
+                revenueYoyGrowth: item.revenueYoyGrowth,
             },
             metrics: {
                 revenueGrowth: item.revenueGrowth,
@@ -126,6 +138,7 @@ export function ScreenerDashboard() {
 
     const [rawResults, setRawResults] = useState<ScreeningResult[]>([]);
     const [youtubeResults, setYoutubeResults] = useState<ScreeningResult[]>([]);
+    const [youtubeLoading, setYoutubeLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [filters, setFilters] = useState<FilterState>(STRICT_FILTERS); // Restore Filter State
     const [selectedStock, setSelectedStock] = useState<ScreeningResult | null>(null);
@@ -424,20 +437,24 @@ export function ScreenerDashboard() {
     }
 
     async function loadYoutubeData() {
+        setYoutubeLoading(true);
         try {
             const { data: rawData } = await fetchStocks('US');
             const [reverseScores, paradigmScores] = await Promise.all([
-                fetchReverseScores(),
-                fetchParadigmScores(),
+                fetchReverseScores().catch(() => ({})),
+                fetchParadigmScores().catch(() => ({})),
             ]);
             setYoutubeResults(adaptRowsToScreeningResults(rawData as any[], reverseScores, paradigmScores));
         } catch (err) {
             console.error("Failed to load YouTube strategy universe:", err);
             setYoutubeResults([]);
+        } finally {
+            setYoutubeLoading(false);
         }
     }
 
-    const youtubeSourceResults = youtubeResults.length > 0 ? youtubeResults : rawResults;
+    const youtubeSourceResults = selectedMarket === 'US' && rawResults.length > 0 ? rawResults : youtubeResults;
+    const isYoutubeUniverseLoading = screenMode === 'youtube' && youtubeSourceResults.length === 0 && youtubeLoading;
 
     const youtubeEvaluations = useMemo(() => {
         const map = new Map<string, YoutubeStrategyEvaluation>();
@@ -1075,7 +1092,7 @@ export function ScreenerDashboard() {
                         </div>
                     </div>
 
-                    {loading && rawResults.length === 0 ? (
+                    {(loading && rawResults.length === 0) || isYoutubeUniverseLoading ? (
                         <div className="flex flex-col items-center justify-center h-64 text-muted-foreground animate-pulse">
                             <p>{t('initEngine')}</p>
                         </div>
