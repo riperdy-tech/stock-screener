@@ -145,14 +145,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 </span>
                             </div>
 
-                            <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base text-primary/80 font-medium mt-1">
+                            <div className="flex flex-wrap items-center gap-2 text-base sm:text-lg text-primary/80 font-medium mt-1">
                                 <span>{candidate.sector}</span>
                                 <span className="text-muted-foreground">/</span>
                                 <span>{result.industry || t('industry')}</span>
                                 {candidate.lastUpdated && (
                                     <>
                                         <span className="text-muted-foreground">/</span>
-                                        <span className="text-muted-foreground font-mono text-sm" title="Last Updated">
+                                        <span className="text-muted-foreground font-mono text-base" title="Last Updated">
                                             Updated {candidate.lastUpdated}
                                         </span>
                                     </>
@@ -161,7 +161,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                             <div className="mt-2 group">
                                 <p className={clsx(
-                                    "text-sm text-muted-foreground leading-relaxed transition-all duration-300",
+                                    "text-base text-muted-foreground leading-relaxed transition-all duration-300",
                                     !isExpanded && (result.description || "").length > 120 ? "line-clamp-2" : ""
                                 )}>
                                     {result.description || t('noDesc')}
@@ -169,7 +169,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 {(result.description || "").length > 120 && (
                                     <button
                                         onClick={() => setIsExpanded(!isExpanded)}
-                                        className="text-sm font-bold text-primary hover:text-primary/80 mt-1 uppercase tracking-wider"
+                                        className="text-base font-bold text-primary hover:text-primary/80 mt-1 uppercase tracking-wider"
                                     >
                                         {isExpanded ? "Show Less" : "Read More"}
                                     </button>
@@ -188,7 +188,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     title={t('openTV')}
                                 >
                                     <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="w-4 h-4 rounded-sm" />
-                                    <span className="text-sm font-bold hidden sm:inline">TradingView</span>
+                                    <span className="text-base font-bold hidden sm:inline">TradingView</span>
                                 </a>
                                 <button
                                     onClick={() => onAskGemini && onAskGemini(candidate.symbol)}
@@ -196,10 +196,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     title="Ask AI about this stock"
                                 >
                                     <Sparkles className="w-4 h-4" />
-                                    <span className="text-sm font-bold hidden sm:inline">Generate AI Prompt</span>
+                                    <span className="text-base font-bold hidden sm:inline">Generate AI Prompt</span>
                                 </button>
                             </div>
-                            <div className={clsx("px-3 py-1.5 rounded-full text-sm font-bold tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
+                            <div className={clsx("px-3 py-1.5 rounded-full text-base font-bold tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
                                 {result.passed ? "GEM CANDIDATE" : "REVIEWING"}
                             </div>
                         </div>
@@ -230,13 +230,13 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         : (
                                         <div className="mt-2 text-foreground">
                                             <span className="font-bold text-danger">Missed Criteria:</span>
-                                            <ul className="list-disc pl-5 mt-2 text-sm text-foreground/80 font-normal space-y-1.5">
+                                            <ul className="list-disc pl-5 mt-2 text-base text-foreground/80 font-normal space-y-1.5">
                                                 {(result.failCodes && result.failCodes.length > 0) ? result.failCodes.map(code => {
                                                     const failReasonMap: Record<string, string> = {
                                                         FAIL_MCAP: market === 'Korea' 
                                                             ? "Market Cap outside 70B - 2.8T KRW range"
                                                                 : market === 'Taiwan'
-                                                                    ? "Market Cap outside 1.6億 - 640億 NTD range"
+                                                                    ? "Market Cap outside 1.6B - 640B NTD range"
                                                                     : "Market Cap outside $50M - $2B range",
                                                         FAIL_PRICE: market === 'Korea' || market === 'Taiwan'
                                                                 ? "Share Price too high" 
@@ -538,16 +538,16 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 </h3>
                                 <div className="bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
                                     <div className="bg-blue-500/10 px-4 py-3 border-b border-blue-500/20 flex justify-between items-center shrink-0 flex-wrap gap-2">
-                                        <span className="text-sm text-muted-foreground">
+                                        <span className="text-base text-muted-foreground">
                                             Generated on: {new Date(savedReport.timestamp).toLocaleString()} | Cost: ${savedReport.cost} | Tokens: {savedReport.usage?.total_tokens}
                                         </span>
                                         <div className="flex gap-2 items-center">
-                                            <button onClick={downloadDsResult} className="flex items-center gap-1 text-sm bg-secondary hover:bg-secondary/80 px-3 py-2 rounded-md shadow-sm border border-border transition-colors font-semibold">Download .txt</button>
-                                            <button onClick={copyDsResult} className="flex items-center gap-1 text-sm bg-[#4d6bfe] hover:bg-[#3b54d1] text-white px-3 py-2 rounded-md shadow-sm transition-colors font-semibold">Copy Result</button>
+                                            <button onClick={downloadDsResult} className="flex items-center gap-1 text-base bg-secondary hover:bg-secondary/80 px-3 py-2 rounded-md shadow-sm border border-border transition-colors font-semibold">Download .txt</button>
+                                            <button onClick={copyDsResult} className="flex items-center gap-1 text-base bg-[#4d6bfe] hover:bg-[#3b54d1] text-white px-3 py-2 rounded-md shadow-sm transition-colors font-semibold">Copy Result</button>
                                         </div>
                                     </div>
                                     <div className="p-5 overflow-y-auto max-h-[600px] custom-scrollbar">
-                                        <div className="prose prose-invert max-w-none text-foreground/90 leading-relaxed prose-headings:text-foreground prose-a:text-blue-400">
+                                        <div className="prose prose-invert prose-lg max-w-none text-foreground/90 leading-relaxed prose-headings:text-foreground prose-p:text-base prose-p:leading-8 prose-li:text-base prose-li:leading-8 prose-a:text-blue-400">
                                             <ReactMarkdown>
                                                 {savedReport.content}
                                             </ReactMarkdown>
