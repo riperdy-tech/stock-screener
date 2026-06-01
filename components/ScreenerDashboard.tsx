@@ -296,7 +296,7 @@ export function ScreenerDashboard() {
             if (!res.ok) throw new Error(data.error || `Server error: ${res.status}`);
             setBatchId(data.batch_id);
             setBatchProgress({ completed: 0, failed: 0, total: data.queued });
-            const msg = `Dispatched ${data.queued} analyses${data.skipped ? ` (${data.skipped} skipped — already analyzed)` : ''} — waiting for workers...`;
+            const msg = `Dispatched ${data.queued} analyses${data.skipped ? ` (${data.skipped} skipped - already analyzed)` : ''} - waiting for workers...`;
             setBatchStatus(msg);
             setDsPassword("");
         } catch (e: any) {
@@ -805,7 +805,7 @@ export function ScreenerDashboard() {
                         </div>
                         
                         <div className="flex md:hidden items-center gap-2 shrink-0">
-                             <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 rounded-full transition-all text-xs font-black active:scale-95">
+                             <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 rounded-full transition-all text-sm font-black active:scale-95">
                                 <Sparkles className="h-3.5 w-3.5" />
                                 REPORTS
                              </Link>
@@ -825,13 +825,12 @@ export function ScreenerDashboard() {
                                 key={m}
                                 onClick={() => setSelectedMarket(m)}
                                 className={clsx(
-                                    "px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-300 flex items-center gap-2 whitespace-nowrap",
+                                    "px-4 py-2 text-sm font-bold rounded-md transition-all duration-300 flex items-center gap-2 whitespace-nowrap",
                                     selectedMarket === m 
                                         ? "bg-primary text-primary-foreground shadow-lg scale-105" 
                                         : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                                 )}
-                            >
-                                <span>{m === 'US' ? '🇺🇸' : m === 'Korea' ? '🇰🇷' : '🇹🇼'}</span>
+                            >                                <span className="font-black">{m}</span>
                                 <span className={clsx(selectedMarket === m ? "block" : "hidden sm:block")}>
                                     {m === 'US' ? t('usStocks') : m === 'Korea' ? t('koreaStocks') : t('taiwanStocks')}
                                 </span>
@@ -843,7 +842,7 @@ export function ScreenerDashboard() {
                         <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
                             <button 
                                 onClick={() => setIsLogOpen(true)} 
-                                className="flex items-center gap-2 px-3.5 py-1.5 bg-secondary/50 hover:bg-secondary text-foreground/80 hover:text-foreground rounded-lg transition-all duration-300 text-xs font-bold border border-border/50 backdrop-blur-md shadow-sm active:scale-95"
+                                className="flex items-center gap-2 px-3.5 py-2 bg-secondary/50 hover:bg-secondary text-foreground/80 hover:text-foreground rounded-lg transition-all duration-300 text-sm font-bold border border-border/50 backdrop-blur-md shadow-sm active:scale-95"
                             >
                                 <div className="relative">
                                     <Terminal className="h-4 w-4" />
@@ -873,7 +872,7 @@ export function ScreenerDashboard() {
                     <section className="mb-5">
                         <div className="mb-3 flex flex-col gap-2 xl:flex-row xl:items-end xl:justify-between">
                             <div>
-                                <div className="text-xs font-black uppercase tracking-[0.24em] text-muted-foreground">Investing lens</div>
+                                <div className="text-sm font-black uppercase tracking-[0.18em] text-muted-foreground">Investing lens</div>
                                 <h2 className="text-2xl font-black tracking-tight text-foreground">Strategy board</h2>
                             </div>
                             <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
@@ -898,19 +897,19 @@ export function ScreenerDashboard() {
                                                 <Icon className="h-4 w-4" />
                                             </div>
                                             <span className={clsx(
-                                                "rounded-full px-2.5 py-1 text-xs font-black uppercase tracking-wider",
+                                                "rounded-full px-2.5 py-1 text-sm font-black uppercase tracking-wider",
                                                 isActive ? "bg-primary text-primary-foreground" : "bg-secondary/60 text-muted-foreground"
                                             )}>
                                                 {isActive ? 'Active' : 'Switch'}
                                             </span>
                                         </div>
                                         <div className="mt-3">
-                                            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{meta.eyebrow}</div>
+                                            <div className="text-sm font-black uppercase tracking-wider text-muted-foreground">{meta.eyebrow}</div>
                                             <div className="mt-1 text-base font-black text-foreground">{meta.title}</div>
                                             <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{meta.description}</p>
                                         </div>
                                         <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-2">
-                                            <span className="text-xs font-bold uppercase text-muted-foreground">{meta.metricLabel}</span>
+                                            <span className="text-sm font-bold uppercase text-muted-foreground">{meta.metricLabel}</span>
                                             <span className="font-mono text-base font-black text-foreground">{count == null ? 'Open' : count.toLocaleString()}</span>
                                         </div>
                                     </div>
@@ -1001,24 +1000,22 @@ export function ScreenerDashboard() {
                                 />
                             ))}
                         </div>
-                    </section>
-
-                    {/* Phase 11d: Batch Progress Bar — visible in both modes */}
+                    </section>                    {/* Phase 11d: Batch Progress Bar */}
                     {screenMode === 'reverse' && batchId && (
                         <div className="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl animate-in fade-in">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                     <Sparkles className={clsx("h-5 w-5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-emerald-400" : "text-emerald-400 animate-pulse")} />
                                     <div>
-                                        <span className="text-sm font-bold text-emerald-400">Batch Deep-Dive</span>
-                                        <span className="text-xs text-muted-foreground ml-3">
+                                        <span className="text-base font-bold text-emerald-400">Batch Deep-Dive</span>
+                                        <span className="text-sm text-muted-foreground ml-3">
                                             {batchProgress
                                                 ? `${batchProgress.completed} of ${batchProgress.total} complete${batchProgress.failed > 0 ? ` (${batchProgress.failed} failed)` : ''}`
                                                 : `Waiting for workers...`}
                                         </span>
                                     </div>
                                 </div>
-                                <button onClick={() => dismissBatchPanel()} className="text-muted-foreground hover:text-foreground text-xs">Dismiss</button>
+                                <button onClick={() => dismissBatchPanel()} className="text-muted-foreground hover:text-foreground text-sm font-bold">Dismiss</button>
                             </div>
                             {batchProgress && (
                                 <div className="w-full h-2 bg-secondary/50 rounded-full mt-2 overflow-hidden">
@@ -1030,18 +1027,17 @@ export function ScreenerDashboard() {
                                 <div className="mt-2 flex flex-wrap gap-1 max-h-24 overflow-y-auto">
                                     {batchProgress.tickers.map((t: any) => (
                                         <span key={t.ticker} className={clsx(
-                                            "text-xs px-2 py-0.5 rounded font-mono",
+                                            "text-sm px-2 py-1 rounded font-mono",
                                             t.status === 'completed' ? "bg-emerald-500/20 text-emerald-400" :
                                             t.status === 'error' ? "bg-red-500/20 text-red-400" :
                                             "bg-secondary/40 text-muted-foreground"
-                                        )}>
-                                            {t.ticker}{t.status === 'completed' ? ' ✓' : t.status === 'error' ? ' ✗' : ' …'}
+                                        )}>                                            {t.ticker}{t.status === 'completed' ? ' done' : t.status === 'error' ? ' error' : ' pending'}
                                         </span>
                                     ))}
                                 </div>
                             )}
                             {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                <p className="text-xs text-emerald-400 mt-2 font-medium">All done! Open any stock card to view its report.</p>
+                                <p className="text-sm text-emerald-400 mt-2 font-medium">All done! Open any stock card to view its report.</p>
                             )}
                         </div>
                     )}
@@ -1049,22 +1045,22 @@ export function ScreenerDashboard() {
                         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                             <div className="min-w-0">
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <span className={clsx("rounded-md border px-2.5 py-1 text-xs font-black uppercase tracking-wider", activeStrategy.accent)}>
+                                    <span className={clsx("rounded-md border px-2.5 py-1 text-sm font-black uppercase tracking-wider", activeStrategy.accent)}>
                                         {activeStrategy.eyebrow}
                                     </span>
-                                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} market</span>
+                                    <span className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} market</span>
                                 </div>
                                 <h2 className="mt-2 text-3xl font-black tracking-tight">{activeStrategy.title}</h2>
                                 <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{activeSummary}</p>
                                 {visibleFilterChips.length > 0 && (
                                     <div className="mt-3 flex flex-wrap gap-2">
                                         {visibleFilterChips.map((chip) => (
-                                            <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-xs font-bold text-muted-foreground">
+                                            <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-sm font-bold text-muted-foreground">
                                                 {chip}
                                             </span>
                                         ))}
                                         {hiddenFilterChipCount > 0 && (
-                                            <span className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-xs font-bold text-muted-foreground">
+                                            <span className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-sm font-bold text-muted-foreground">
                                                 +{hiddenFilterChipCount} more
                                             </span>
                                         )}
@@ -1085,9 +1081,9 @@ export function ScreenerDashboard() {
                         </div>
                     ) : filteredCount === 0 ? (
                         <div className="flex flex-col items-center justify-center h-64 text-muted-foreground border border-dashed border-border rounded-xl">
-                            <p className="text-lg">⚠</p>
-                            <p>{t('noStocks')}</p>
-                            <button onClick={resetActiveFilters} className="mt-4 text-primary text-sm hover:underline">{t('resetFilters')}</button>
+                            <p className="text-lg font-black text-foreground">No matching stocks</p>
+                            <p className="mt-1 text-base">{t('noStocks')}</p>
+                            <button onClick={resetActiveFilters} className="mt-4 text-primary text-base font-bold hover:underline">{t('resetFilters')}</button>
                         </div>
                     ) : (
                         <>
@@ -1114,7 +1110,7 @@ export function ScreenerDashboard() {
                                                 )}
                                             >
                                                 {selectedTickers.has(result.candidate.symbol) && (
-                                                    <span className="text-xs font-bold">✓</span>
+                                                    <Check className="h-3.5 w-3.5" />
                                                 )}
                                             </button>
                                         )}
@@ -1197,17 +1193,17 @@ export function ScreenerDashboard() {
                                 </div>
                             ) : aiResult ? (
                                 <div className="flex flex-col flex-1 min-h-0 gap-3 sm:gap-4">
-                                    <p className="text-sm text-foreground/80 font-medium">
+                                    <p className="text-base text-foreground/80 font-medium">
                                         To calculate intrinsic value of the stock, copy paste below prompt to your AI of choice.
                                     </p>
                                     <div className="grid grid-cols-1 gap-4 flex-1 min-h-[350px] sm:min-h-[450px]">
                                         {/* Prompt Box */}
                                         <div className="relative flex-1 bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
                                             <div className="bg-secondary/40 px-3 sm:px-5 py-2.5 border-b border-border flex justify-between items-center shrink-0">
-                                                <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-semibold">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
+                                                <span className="text-sm font-mono text-muted-foreground uppercase tracking-wider font-semibold">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
                                                 <button
                                                     onClick={() => copyToClipboard(aiResult!)}
-                                                    className="flex items-center gap-2 text-xs font-bold bg-primary hover:bg-primary/90 text-primary-foreground px-3 py-1.5 rounded-md transition-colors shadow-sm"
+                                                    className="flex items-center gap-2 text-sm font-bold bg-primary hover:bg-primary/90 text-primary-foreground px-3 py-2 rounded-md transition-colors shadow-sm"
                                                 >
                                                     {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                                                     {copied ? 'COPIED!' : 'COPY PROMPT'}
@@ -1216,7 +1212,7 @@ export function ScreenerDashboard() {
                                             <textarea
                                                 readOnly
                                                 value={aiResult || ""}
-                                                className="flex-1 w-full h-full bg-transparent p-4 sm:p-5 text-sm font-mono resize-none focus:outline-none focus:ring-0 text-foreground/90 overflow-y-auto leading-relaxed"
+                                                className="flex-1 w-full h-full bg-transparent p-4 sm:p-5 text-base font-mono resize-none focus:outline-none focus:ring-0 text-foreground/90 overflow-y-auto leading-relaxed"
                                             />
                                         </div>
                                         
@@ -1224,20 +1220,20 @@ export function ScreenerDashboard() {
                                         {dsResult && (
                                             <div className="relative flex-1 bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
                                                 <div className="bg-blue-500/10 px-3 sm:px-5 py-2.5 border-b border-blue-500/20 flex justify-between items-center shrink-0 flex-wrap gap-2">
-                                                    <span className="text-xs font-mono text-blue-400 uppercase tracking-wider font-semibold">QUANT REPORT</span>
+                                                    <span className="text-sm font-mono text-blue-400 uppercase tracking-wider font-semibold">QUANT REPORT</span>
                                                     <div className="flex items-center gap-3">
                                                         <div className="flex flex-col">
                                                             <h1 className="text-xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
                                                                 QUANT <span className="text-blue-500">PRO</span>
                                                             </h1>
                                                             <div className="flex items-center gap-2">
-                                                                <span className="text-xs text-muted-foreground font-medium uppercase tracking-widest">Global Terminal</span>
+                                                                <span className="text-sm text-muted-foreground font-medium uppercase tracking-widest">Global Terminal</span>
                                                                 <div className="h-1 w-1 rounded-full bg-green-500 animate-pulse" />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button onClick={downloadDsResult} className="flex items-center gap-1 text-xs bg-secondary hover:bg-secondary/80 px-2 py-1 rounded">Download .txt</button>
-                                                    <button onClick={copyDsResult} className="flex items-center gap-1 text-xs bg-primary text-primary-foreground px-2 py-1 rounded">Copy Result</button>
+                                                    <button onClick={downloadDsResult} className="flex items-center gap-1 text-sm font-bold bg-secondary hover:bg-secondary/80 px-3 py-2 rounded">Download .txt</button>
+                                                    <button onClick={copyDsResult} className="flex items-center gap-1 text-sm font-bold bg-primary text-primary-foreground px-3 py-2 rounded">Copy Result</button>
                                                 </div>
                                                 <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-slate-950/40 backdrop-blur-md">
                                                     <div className="prose prose-invert prose-blue max-w-none break-words whitespace-pre-wrap font-sans text-slate-100 leading-relaxed text-base sm:text-lg">
@@ -1269,11 +1265,11 @@ export function ScreenerDashboard() {
                                         </a>
                                         {showDsPassword ? (
                                             <div className="flex flex-col items-center justify-center gap-2 bg-[#4d6bfe]/20 border border-[#4d6bfe]/40 py-2 sm:py-2 rounded-xl px-2">
-                                                <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full text-xs p-1.5 rounded bg-background border border-border" />
-                                                <button onClick={handleDeepseekRun} disabled={dsLoading} className="w-full bg-[#4d6bfe] text-white text-xs py-1.5 rounded font-bold hover:bg-[#3b54d1]">
+                                                <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full text-sm p-2 rounded bg-background border border-border" />
+                                                <button onClick={handleDeepseekRun} disabled={dsLoading} className="w-full bg-[#4d6bfe] text-white text-sm py-2 rounded font-bold hover:bg-[#3b54d1]">
                                                     {dsLoading ? "Running..." : "Run Deepseek"}
                                                 </button>
-                                                {dsError && <span className="text-xs text-danger">{dsError}</span>}
+                                                {dsError && <span className="text-sm text-danger">{dsError}</span>}
                                             </div>
                                         ) : (
                                             <button onClick={() => setShowDsPassword(true)} className="flex flex-col items-center justify-center gap-2.5 bg-[#4d6bfe] hover:bg-[#3b54d1] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
@@ -1294,7 +1290,7 @@ export function ScreenerDashboard() {
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
                     <div className="bg-card border border-border rounded-xl shadow-2xl p-6 max-w-sm w-full animate-in zoom-in-95">
                         <h3 className="text-lg font-bold mb-2">Enter Password</h3>
-                        <p className="text-xs text-muted-foreground mb-3">Required to dispatch deep-dive analyses.</p>
+                        <p className="text-sm text-muted-foreground mb-3">Required to dispatch deep-dive analyses.</p>
                         <input
                             type="password"
                             placeholder="Password"
@@ -1304,11 +1300,11 @@ export function ScreenerDashboard() {
                             onKeyDown={(e) => { if (e.key === 'Enter' && dsPassword) { setShowBatchPassword(false); setShowBatchConfirm(true); } }}
                         />
                         <div className="flex gap-2">
-                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 px-3 py-2 bg-muted text-muted-foreground text-xs font-bold rounded border border-border">Cancel</button>
+                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 px-3 py-2 bg-muted text-muted-foreground text-sm font-bold rounded border border-border">Cancel</button>
                             <button
                                 onClick={() => { setShowBatchPassword(false); setShowBatchConfirm(true); }}
                                 disabled={!dsPassword}
-                                className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded disabled:opacity-50"
+                                className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold rounded disabled:opacity-50"
                             >Continue</button>
                         </div>
                     </div>
@@ -1329,13 +1325,13 @@ export function ScreenerDashboard() {
                         <div className="flex gap-2">
                             <button
                                 onClick={() => setShowBatchConfirm(false)}
-                                className="flex-1 px-3 py-2 bg-muted text-muted-foreground text-xs font-bold rounded border border-border"
+                                className="flex-1 px-3 py-2 bg-muted text-muted-foreground text-sm font-bold rounded border border-border"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleBatchDispatch}
-                                className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded"
+                                className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold rounded"
                             >
                                 Dispatch {batchN}
                             </button>
@@ -1346,13 +1342,13 @@ export function ScreenerDashboard() {
 
             {/* Phase 11d: Batch Progress Panel */}
             {batchId && (
-                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-emerald-500/30 rounded-xl shadow-2xl p-4 min-w-[300px] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
+                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-emerald-500/30 rounded-xl shadow-2xl p-4 min-w-[340px] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
                     <div className="flex justify-between items-start gap-4">
                         <div className="flex items-start gap-3">
                             <Sparkles className={clsx("h-5 w-5 mt-0.5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-emerald-400" : "text-emerald-400 animate-pulse")} />
                             <div className="flex flex-col flex-1">
-                                <span className="font-bold text-sm text-foreground">Batch Deep-Dive</span>
-                                <span className="text-xs text-muted-foreground mt-1">
+                                <span className="font-bold text-base text-foreground">Batch Deep-Dive</span>
+                                <span className="text-sm text-muted-foreground mt-1">
                                     {batchProgress
                                         ? (() => {
                                             const ok = batchProgress.completed;
@@ -1373,7 +1369,7 @@ export function ScreenerDashboard() {
                                 </div>
                                 )}
                                 {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                    <span className="text-xs text-emerald-400 mt-1.5 font-bold">
+                                    <span className="text-sm text-emerald-400 mt-1.5 font-bold">
                                         {batchProgress.completed > 0 ? 'Open any stock card to view its report.' : 'No reports generated.'}{' '}Auto-closing in 8s.
                                     </span>
                                 )}
@@ -1388,15 +1384,15 @@ export function ScreenerDashboard() {
 
             {/* Deepseek Task Alert */}
             {backgroundDsTask && (
-                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-blue-500/30 rounded-xl shadow-2xl p-4 min-w-[300px] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
+                <div className="fixed bottom-6 right-6 z-[100] bg-[#1a1f2e] border border-blue-500/30 rounded-xl shadow-2xl p-4 min-w-[340px] flex flex-col gap-3 animate-in slide-in-from-bottom-5">
                     <div className="flex justify-between items-start gap-4">
                         <div className="flex items-start gap-3">
                             <Sparkles className={clsx("h-5 w-5 mt-0.5", backgroundDsTask.status === 'running' ? "text-blue-400 animate-pulse" : backgroundDsTask.status === 'error' ? "text-danger" : "text-success")} />
                             <div className="flex flex-col">
-                                <span className="font-bold text-sm text-foreground">
+                                <span className="font-bold text-base text-foreground">
                                     {backgroundDsTask.status === 'running' ? `Analyzing ${backgroundDsTask.ticker}...` : backgroundDsTask.status === 'error' ? `Error analyzing ${backgroundDsTask.ticker}` : `Analysis Complete: ${backgroundDsTask.ticker}`}
                                 </span>
-                                <span className="text-xs text-muted-foreground mt-1">
+                                <span className="text-sm text-muted-foreground mt-1">
                                     {backgroundDsTask.status === 'running' ? 'Deepseek V4.0 Pro is generating report.' : backgroundDsTask.status === 'error' ? backgroundDsTask.message : 'Report saved to scorecard!'}
                                 </span>
                             </div>
@@ -1411,97 +1407,65 @@ export function ScreenerDashboard() {
             {/* Help Modal */}
             {showHelp && (
                 <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setShowHelp(false)}>
-                    <div className="bg-card border border-border/50 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto p-6" onClick={e => e.stopPropagation()}>
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-lg font-bold">How Scoring Works</h2>
-                            <button onClick={() => setShowHelp(false)} className="p-2 hover:bg-secondary rounded-full transition-colors">
-                                <X className="h-4 w-4" />
+                    <div className="bg-card border border-border/50 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[84vh] overflow-y-auto p-6 md:p-8" onClick={e => e.stopPropagation()}>
+                        <div className="flex items-start justify-between gap-4 border-b border-border/60 pb-5">
+                            <div>
+                                <p className="text-sm font-black uppercase tracking-[0.18em] text-muted-foreground">Scoring guide</p>
+                                <h2 className="mt-1 text-2xl font-black tracking-tight text-foreground">How the dashboard ranks stocks</h2>
+                                <p className="mt-2 max-w-3xl text-base leading-relaxed text-muted-foreground">
+                                    The screener combines independent lenses. Use the active strategy panel for ranking, then open a stock card for the full scorecard.
+                                </p>
+                            </div>
+                            <button onClick={() => setShowHelp(false)} className="rounded-full border border-border/60 p-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                                <X className="h-5 w-5" />
                             </button>
                         </div>
-                        <div className="space-y-4 text-sm text-muted-foreground">
-                            {/* SCORECARD SYMBOL LEGEND (top) */}
-                            <div className="border border-purple-500/30 bg-purple-500/5 rounded-lg p-3">
-                                <h3 className="font-bold text-purple-300 mb-2 text-base">Scorecard Symbol Legend</h3>
-                                <p className="mb-2 text-xs">Each stock card may show badges from two systems: <b className="text-emerald-400">Reverse Engine</b> (green row) and <b className="text-purple-400">Paradigm</b> (purple row).</p>
-                                <div className="grid grid-cols-1 gap-1.5 text-xs">
-                                    <p><span className="font-bold text-emerald-400">[High] / [Solid] / [Watchlist] / [Monitor]</span> — Reverse Engine composite band (quality + value + survivability).</p>
-                                    <p><span className="font-bold text-emerald-400">[A]…[I]</span> — Archetype letter. <b>★</b> = nominated for deep-dive. <b>1.5x</b> = CAGR/|Drawdown| efficiency.</p>
-                                    <p className="pt-1 border-t border-purple-500/20"><span className="font-bold text-purple-300">[Paradigm STRONG]</span> = all 3 pillars converge (membership x momentum x economics gate, signal ≥ 30).</p>
-                                    <p><span className="font-bold text-blue-400">[Paradigm SOLID]</span> = mid-conviction (signal 15–29). <span className="font-bold text-amber-400">[Paradigm WATCH]</span> = weak (5–14, track but don't buy). <span className="font-bold text-gray-400">[Paradigm PASS]</span> = gate or momentum kills it (&lt;5).</p>
-                                    <p><span className="font-mono bg-purple-500/15 text-purple-300 px-1 rounded">theme_name</span> — primary secular theme this stock is tagged with.</p>
-                                    <p><span className="font-mono text-primary/80">Sig 36</span> — three-factor signal score 0–100. <span className="font-mono text-purple-400">+1 theme</span> — tagged in additional themes (hover to see all).</p>
-                                    <p><span className="font-black text-emerald-400">↑ Accel</span> — Δ-percentile-rank momentum rising fast vs universe. <span className="font-black text-red-400">↓ Decel</span> — falling fast.</p>
-                                    <p><span className="font-black text-red-400">⚠ Macro</span> — macro overlay flag active (e.g., 10Y Treasury &gt; 5%, yield curve inverted, credit stress). Operator caution suggested.</p>
-                                </div>
-                            </div>
 
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Stage 0–1 — Exclusion & Elimination</h3>
-                                <p>Filters out ETFs/funds and stocks below $300M market cap. Hard gates: Altman Z-score &lt; 1.8 (bankruptcy risk), net debt/EBITDA &gt; 4.0×, data quality &lt; 2.</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Stage 2 — Archetype Routing</h3>
-                                <p>Classifies survivors into 9 archetypes (A–I) based on sector, industry keywords, and financial shape. Determines scoring rubrics and growth ceilings (A=17%, B=28%, C=22%, E=38%…).</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Stage 3 — Quality Score (0–100)</h3>
-                                <p>A/B (compounders): ROIC spread over WACC, revenue growth, FCF margin, net debt. C (cyclicals): operating margin. E (early-stage): revenue, cash runway. G/H (financials/REITs): ROIC spread, leverage.</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Stage 4 — Margin of Safety (0–100)</h3>
-                                <p>Percentile-ranked valuation: FCF yield, EV/EBIT, and anchor multiple (0.4× EV/Sales + 0.4× EV/GP) — each ranked against the universe.</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Stage 5 — Survivability (0–100)</h3>
-                                <p>Balance-sheet stress test: leverage (net debt/EBITDA), funding (cash runway or self-funding), and max drawdown from ~2yr monthly closes. Maps to impairment probability.</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Stage 6 — CAGR Proxy + Base-Rate Ceiling</h3>
-                                <p>3-year revenue CAGR (from 5 annual periods) is primary growth. Forward EPS adds a capped secondary nudge (20% weight). If revenue CAGR exceeds the archetype ceiling, flagged HIGH_GROWTH_UNVERIFIED.</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Stage 7 — Full Composite (0–100)</h3>
-                                <p>Weighted blend: 30% CAGR + 25% MoS + 20% Quality + 15% Survivability + 10% Efficiency. Haircuts for impairment risk, sparse data, low confidence, and extreme growth. Bands: High ≥70, Solid ≥55, Watchlist ≥40, Monitor ≥25.</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Stage 8 — Advisory Flags</h3>
-                                <p>Metadata only (never change scores): INSIDER_HEAVY, PRICE_EXTENDED, SHORT_INTEREST_EXTREME, CROWDED_LONG, GROWTH_UNVERIFIED.</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Stage 9 — Diversified Nomination (Top 25)</h3>
-                                <p>Walks the ranked survivor list, capping single archetype ≤40%, single sector ≤35%, single country ≤60%. Result: a diversified top 25 across archetypes, sectors, and countries.</p>
-                            </div>
+                        <div className="mt-6 grid gap-4 md:grid-cols-2">
+                            <HelpCard
+                                title="Stock Cards"
+                                body="Paradigm appears first when available because it explains the market theme. The active strategy panel expands the lens you selected. Other signals stay visible as compact chips."
+                            />
+                            <HelpCard
+                                title="Reverse Engine"
+                                body="Ranks survivors by quality, margin of safety, survivability, growth proxy, and efficiency. Bands move from High to Solid to Watchlist to Monitor."
+                            />
+                            <HelpCard
+                                title="Paradigm"
+                                body="Scores whether a stock is a real participant in a secular shift. Theme membership, momentum, and economics all need to work together."
+                            />
+                            <HelpCard
+                                title="YouTube Strategy"
+                                body="Applies the video playbook inside the main dashboard: earnings momentum, deep-value reversal, turnaround seed, and turnaround scale-in."
+                            />
+                        </div>
 
-                            {/* PARADIGM DIMENSION — separate scoring lane */}
-                            <div className="border-t border-purple-500/30 pt-4 mt-4">
-                                <h3 className="font-bold text-purple-300 mb-1 text-base">Paradigm Dimension — Secular Themes</h3>
-                                <p className="mb-2">A <b>separate, parallel scoring lane</b> from the Reverse Engine above. The Reverse Engine asks "is this a quality, valued, survivable business?" The Paradigm Dimension asks "is this stock a real participant in a multi-year secular shift (AI compute, GLP-1 drugs, energy transition…) with both market validation AND real economics?"</p>
-                                <p className="mb-2 italic">Core formula: <b className="text-purple-300">Paradigm Signal = Theme Membership × Theme Momentum × Economics Gate</b>. All three pillars required; weak link kills the signal. Anti-Nikola by design — narrative-only stocks with no revenue are zeroed out.</p>
+                        <div className="mt-6 rounded-xl border border-border/70 bg-secondary/20 p-5">
+                            <h3 className="text-lg font-black text-foreground">Reverse Engine Stages</h3>
+                            <div className="mt-4 grid gap-3 text-base leading-relaxed text-muted-foreground md:grid-cols-2">
+                                <StageLine label="0-1" text="Exclude funds, very small companies, severe distress, and poor data quality before scoring." />
+                                <StageLine label="2" text="Route each survivor into an archetype so banks, REITs, compounders, cyclicals, and option-led names are judged differently." />
+                                <StageLine label="3-5" text="Score quality, valuation margin of safety, and survivability using the fields available for that archetype." />
+                                <StageLine label="6-7" text="Blend growth, margin of safety, quality, survivability, and efficiency into the final composite score." />
+                                <StageLine label="8" text="Show advisory flags such as crowded longs, extended prices, or unverifiable growth. Flags explain risk; they do not hide rows." />
+                                <StageLine label="9" text="Nominate a diversified top list with caps by archetype, sector, and country." />
                             </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Pillar 1 — Theme Membership (Composite ≥ 2 of 3 methods)</h3>
-                                <p>For each of 9 themes (ai_compute, physical_ai, glp1_metabolic, cloud_software, energy_transition, cybersecurity, quantum_computing, space_economy, nuclear_renaissance) three independent methods vote: <b>keyword match</b> on name+description, <b>GICS industry whitelist</b> (Yahoo taxonomy), and <b>operator-curated seed ticker list</b> with industry-adjacency propagation. Stock tagged if ≥2 methods agree. Multi-theme allowed (e.g., TSLA → physical_ai + energy_transition).</p>
+                        </div>
+
+                        <div className="mt-6 rounded-xl border border-purple-500/25 bg-purple-500/[0.05] p-5">
+                            <h3 className="text-lg font-black text-purple-200">Paradigm Signal</h3>
+                            <div className="mt-3 grid gap-3 text-base leading-relaxed text-muted-foreground md:grid-cols-3">
+                                <HelpPillar title="Membership" text="Does the company truly belong to a theme through keywords, industry fit, or curated seed lists?" />
+                                <HelpPillar title="Momentum" text="Is the stock gaining relative strength across 1, 3, 6, and 12 month windows?" />
+                                <HelpPillar title="Economics" text="Does the business quality and survivability support the story rather than just the narrative?" />
                             </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Pillar 2 — Theme Momentum (Universe-relative, with acceleration)</h3>
-                                <p>From 24 monthly closes, computes percentile-rank composite over 4 lookback windows (1m/3m/6m/12m weighted 0.1/0.2/0.3/0.4) blended 60/40 with a Δ-percentile-rank acceleration component. Symmetric — catches both fast-up (↑ Accel) and fast-down (↓ Decel) regime shifts. Triggers regime_shift_up/down via 10-month MA crossover.</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Pillar 3 — Economics Gate (The Nikola Filter)</h3>
-                                <p>Multiplicative: <code>(max(0, rev_quality − 25) / 75) × (max(0, rev_survivability − 50) / 50) × 100</code>. Either input below its floor → gate = 0 → signal = 0. Reads the frozen rev_* scores; no double-count. <b>Forward-EPS bridge</b> can lift gate up to 35 when survivability ≥ 25 AND forward EPS trajectory is positive — rescues scale-phase names (AMZN-1999 archetype). <b>Analyst-coverage uplift</b> adds up to +15 from yfinance recommendations + DeepSeek-narrated consensus (strict no-fabrication: confidence &lt; 0.6 collapses to null).</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Macro Overlay (T9)</h3>
-                                <p>Pulls 5 FRED series each run (DGS10, T10Y2Y, BAA10Y, NFCI, BAMLH0A0HYM2). Flags fire when thresholds breach: 10Y &gt; 5%, curve inverted, credit stress, financial conditions tightening. Currently <b>flags-only</b> (no automatic signal demotion); appended to every tagged stock's pdm_flags as visible warning. Per brief: macro is overlay, not load-bearing on paradigm scoring until macro engine matures.</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Conviction Bands</h3>
-                                <p><b className="text-emerald-400">STRONG</b> (signal ≥ 30) — all 3 pillars align. <b className="text-blue-400">SOLID</b> (15–29) — mid-conviction. <b className="text-amber-400">WATCH</b> (5–14) — weak; track but don't buy. <b className="text-gray-400">PASS</b> (&lt;5) — gate or momentum killed it. <b>NO DATA</b> — at least one pillar missing inputs.</p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-foreground mb-1">Honest Limitations (per the brief)</h3>
-                                <p><b>This is not failsafe.</b> The system buys breakouts not bottoms (requires market validation), the gate is a snapshot of current economics (lags emerging winners by ~1 quarter), and survivor-bias is structural (seed lists picked because we already know the winners). True validation = forward-logging signals now and observing outcomes over 6/12/24 months. Use as a discipline tool, not a predictive oracle.</p>
-                            </div>
+                        </div>
+
+                        <div className="mt-6 rounded-xl border border-border/70 bg-card/70 p-5 text-base leading-relaxed text-muted-foreground">
+                            <h3 className="text-lg font-black text-foreground">Honest Limitations</h3>
+                            <p className="mt-2">
+                                This is a disciplined triage tool, not an oracle. It favors evidence already visible in the data, so emerging winners can appear late and data-sparse names should still be deep-dived before any decision.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1512,10 +1476,39 @@ export function ScreenerDashboard() {
     );
 }
 
+function HelpCard({ title, body }: { title: string; body: string }) {
+    return (
+        <div className="rounded-xl border border-border/70 bg-secondary/20 p-4">
+            <h3 className="text-base font-black text-foreground">{title}</h3>
+            <p className="mt-2 text-base leading-relaxed text-muted-foreground">{body}</p>
+        </div>
+    );
+}
+
+function StageLine({ label, text }: { label: string; text: string }) {
+    return (
+        <div className="flex gap-3 rounded-lg border border-border/50 bg-background/30 p-3">
+            <span className="flex h-9 min-w-9 items-center justify-center rounded-md bg-primary/15 font-mono text-sm font-black text-primary">
+                {label}
+            </span>
+            <p>{text}</p>
+        </div>
+    );
+}
+
+function HelpPillar({ title, text }: { title: string; text: string }) {
+    return (
+        <div className="rounded-lg border border-purple-500/20 bg-background/30 p-3">
+            <h4 className="font-black text-purple-200">{title}</h4>
+            <p className="mt-1">{text}</p>
+        </div>
+    );
+}
+
 function SummaryMetric({ label, value }: { label: string; value: string | number }) {
     return (
         <div className="rounded-md border border-border/60 bg-secondary/20 px-3 py-2">
-            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="text-sm font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-base font-black text-foreground" title={String(value)}>{value}</div>
         </div>
     );
@@ -1532,10 +1525,10 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
     const content = (
         <>
             <div className="flex items-start justify-between gap-2">
-                <span className="truncate text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</span>
+                <span className="truncate text-sm font-black uppercase tracking-wider text-muted-foreground">{label}</span>
                 <span className="font-mono text-base font-black text-foreground">{value}</span>
             </div>
-            <p className="mt-1 line-clamp-2 text-xs leading-snug text-muted-foreground">{detail}</p>
+            <p className="mt-1 line-clamp-2 text-sm leading-snug text-muted-foreground">{detail}</p>
         </>
     );
 
