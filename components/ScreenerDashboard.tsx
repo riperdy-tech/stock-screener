@@ -1077,7 +1077,7 @@ export function ScreenerDashboard() {
                                 <h2 className="mt-2 text-3xl font-black tracking-tight">{activeStrategy.title}</h2>
                                 <p className="mt-1 max-w-3xl text-base leading-relaxed text-muted-foreground">{activeSummary}</p>
                                 {visibleFilterChips.length > 0 && (
-                                    <div className="mt-3 flex flex-wrap gap-2">
+                                    <div className="mt-3 flex flex-wrap items-center gap-2">
                                         {visibleFilterChips.map((chip) => (
                                             <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-3.5 py-2 text-base font-bold text-muted-foreground">
                                                 {chip}
@@ -1088,6 +1088,13 @@ export function ScreenerDashboard() {
                                                 +{hiddenFilterChipCount} more
                                             </span>
                                         )}
+                                        <button
+                                            type="button"
+                                            onClick={resetActiveFilters}
+                                            className="rounded-full border border-primary/40 bg-primary/10 px-3.5 py-2 text-base font-black text-primary transition-colors hover:bg-primary/15"
+                                        >
+                                            Reset filters
+                                        </button>
                                     </div>
                                 )}
                             </div>
