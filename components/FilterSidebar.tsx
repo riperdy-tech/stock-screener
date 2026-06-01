@@ -244,23 +244,23 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
     return (
         <div className={clsx(
-            "fixed inset-y-0 left-0 z-50 w-[min(24rem,100vw)] bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-[100dvh] overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
+            "fixed inset-y-0 left-0 z-50 w-[min(27rem,100vw)] bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-[100dvh] overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
             isOpen ? "translate-x-0" : "-translate-x-full"
         )}>
-            <div className="p-4 border-b border-border/50 flex justify-between items-center bg-muted/40">
-                <div className="flex items-center gap-2 text-base font-bold">
-                    <Filter className="h-5 w-5 text-primary" />
+            <div className="p-5 border-b border-border/50 flex justify-between items-center bg-muted/40">
+                <div className="flex items-center gap-2 text-xl font-black">
+                    <Filter className="h-6 w-6 text-primary" />
                     {t('filters')}
                 </div>
-                <button onClick={onClose} className="md:hidden p-1.5 focus:outline-none hover:bg-destructive/20 hover:text-destructive rounded-md transition-colors border border-transparent hover:border-destructive/30">
-                     <X className="h-4 w-4" />
+                <button onClick={onClose} className="md:hidden p-2 focus:outline-none hover:bg-destructive/20 hover:text-destructive rounded-md transition-colors border border-transparent hover:border-destructive/30">
+                     <X className="h-5 w-5" />
                 </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 space-y-6">
-                <div className="rounded-lg border border-border/60 bg-secondary/20 px-3.5 py-3">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                <div className="rounded-lg border border-border/60 bg-secondary/20 px-4 py-3.5">
                     <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Active lens</div>
-                    <div className="mt-0.5 text-base font-bold text-foreground">
+                    <div className="mt-1 text-lg font-black text-foreground">
                         {screenMode === 'reverse' ? 'Reverse Engine'
                             : screenMode === 'paradigm' ? 'Paradigm Themes'
                             : screenMode === 'youtube' ? 'YouTube Strategy'
@@ -338,7 +338,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         </Section>
 
                         <Section title="Nomination">
-                            <label className="flex items-center gap-2 cursor-pointer">
+                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2.5">
                                 <input
                                     type="checkbox"
                                     checked={localReverseFilters.nominatedOnly}
@@ -490,7 +490,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         </Section>
 
                         <Section title="Flag Filters">
-                            <label className="flex items-center gap-2 cursor-pointer">
+                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2.5">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.acceleratingOnly}
@@ -499,7 +499,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                 />
                                 <span className="text-base font-medium text-muted-foreground">Accelerating only</span>
                             </label>
-                            <label className="flex items-center gap-2 cursor-pointer">
+                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2.5">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.bridgedOnly}
@@ -508,7 +508,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                 />
                                 <span className="text-base font-medium text-muted-foreground">Forward-EPS bridged only</span>
                             </label>
-                            <label className="flex items-center gap-2 cursor-pointer">
+                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2.5">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.multiThemeOnly}
@@ -517,7 +517,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                 />
                                 <span className="text-base font-medium text-muted-foreground">Multi-theme only (2+ themes)</span>
                             </label>
-                            <label className="flex items-center gap-2 cursor-pointer">
+                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2.5">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.macroWarningOnly}
@@ -658,12 +658,12 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-foreground/80 border-b border-border pb-1">{title}</h3>
-            <div className="space-y-3 pl-1">
+        <section className="rounded-xl border border-border/60 bg-background/20 p-4 shadow-sm">
+            <h3 className="text-xl font-black text-foreground">{title}</h3>
+            <div className="mt-4 space-y-4">
                 {children}
             </div>
-        </div>
+        </section>
     )
 }
 
@@ -675,11 +675,11 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
     );
 
     return (
-        <div className="group/input mb-2">
-            <div className="flex justify-between items-baseline mb-2">
+        <div className="group/input">
+            <div className="mb-3 flex items-start justify-between gap-4">
                 <div className="flex items-center gap-1.5 group relative cursor-help w-fit">
-                    <label className="text-base font-medium text-muted-foreground group-hover/input:text-foreground transition-colors">{label}</label>
-                    {field && <HelpCircle className="h-4 w-4 text-muted-foreground/50 group-hover:text-primary transition-colors" />}
+                    <label className="text-base font-bold text-muted-foreground group-hover/input:text-foreground transition-colors">{label}</label>
+                    {field && <HelpCircle className="h-4 w-4 shrink-0 text-muted-foreground/50 group-hover:text-primary transition-colors" />}
 
                     {/* Tooltip */}
                     {field && defs && (
@@ -690,7 +690,7 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
                     )}
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex shrink-0 items-center gap-2">
                     {strictValue !== undefined && (
                         <span className="text-base text-muted-foreground/80 font-mono">Strict: {strictValue}</span>
                     )}
@@ -698,7 +698,7 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
                         type="number"
                         value={value}
                         onChange={(e) => onChange(e.target.value)}
-                        className="w-24 bg-secondary/30 border border-border/50 rounded px-2 py-1.5 text-base text-right focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-mono"
+                        className="w-28 bg-secondary/30 border border-border/50 rounded px-2.5 py-2 text-base text-right focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-mono"
                     />
                 </div>
             </div>
@@ -711,8 +711,8 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
                 step={step}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className={`w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer outline-none transition-all
-                [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
+                className={`w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer outline-none transition-all
+                [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5
                 [&::-webkit-slider-thumb]:rounded-full ${isStrict ? '[&::-webkit-slider-thumb]:bg-warning [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(237,137,54,0.8)]' : '[&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(59,130,246,0.6)]'}
                 hover:[&::-webkit-slider-thumb]:scale-125 hover:[&::-webkit-slider-thumb]:transition-transform`}
             />
