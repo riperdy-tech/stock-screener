@@ -177,29 +177,29 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-4 mt-4">
+                        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                             {/* External Links */}
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                                 <a
                                     href={`https://www.tradingview.com/symbols/${candidate.symbol}/`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#131722] hover:bg-[#2a2e39] text-white transition-all shadow-sm border border-[#2a2e39]"
+                                    className="flex items-center gap-2 rounded-md border border-[#2a2e39] bg-[#131722] px-4 py-2.5 text-white shadow-sm transition-all hover:bg-[#2a2e39]"
                                     title={t('openTV')}
                                 >
-                                    <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="w-4 h-4 rounded-sm" />
-                                    <span className="text-base font-bold hidden sm:inline">TradingView</span>
+                                    <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="h-5 w-5 rounded-sm" />
+                                    <span className="text-base font-bold">TradingView</span>
                                 </a>
                                 <button
                                     onClick={() => onAskGemini && onAskGemini(candidate.symbol)}
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 text-blue-600 dark:text-blue-400 transition-all shadow-sm border border-blue-500/20"
+                                    className="flex items-center gap-2 rounded-md border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-2.5 text-blue-600 shadow-sm transition-all hover:from-blue-500/20 hover:to-purple-500/20 dark:text-blue-400"
                                     title="Ask AI about this stock"
                                 >
-                                    <Sparkles className="w-4 h-4" />
-                                    <span className="text-base font-bold hidden sm:inline">Generate AI Prompt</span>
+                                    <Sparkles className="h-5 w-5" />
+                                    <span className="text-base font-bold">Generate AI Prompt</span>
                                 </button>
                             </div>
-                            <div className={clsx("px-3 py-1.5 rounded-full text-base font-bold tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
+                            <div className={clsx("w-fit rounded-full px-4 py-2 text-base font-bold tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
                                 {result.passed ? "GEM CANDIDATE" : "REVIEWING"}
                             </div>
                         </div>
@@ -224,7 +224,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                             <div>
                                 <h4 className="text-xl font-black mb-1">{t('blueprintAnalysis')}</h4>
-                                <p className={clsx("text-base font-medium", result.passed ? "text-success" : "text-danger")}>
+                                <div className={clsx("text-base font-medium", result.passed ? "text-success" : "text-danger")}>
                                     {result.passed
                                         ? t('verdictPass')
                                         : (
@@ -257,7 +257,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                             </ul>
                                         </div>
                                         )}
-                                </p>
+                                </div>
                             </div>
                         </div>
 
@@ -335,11 +335,11 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                                                 {/* REPORTS Action Section - Made prominent and sticky-friendly */}
                         <div id="scorecard-reports" className="scroll-mt-36 rounded-xl border border-border/60 bg-card/60 p-5 shadow-sm">
-                            <div className="flex flex-col sm:flex-row items-center gap-3">
+                            <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
                             <button 
                                 onClick={() => setShowReports(!showReports)}
                                 className={clsx(
-                                    "w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-xl font-black transition-all shadow-lg active:scale-95 border-2",
+                                    "flex w-full items-center justify-center gap-2 rounded-xl border-2 px-8 py-3.5 text-base font-black shadow-lg transition-all active:scale-95 sm:w-auto",
                                     showReports 
                                         ? "bg-primary text-primary-foreground border-primary" 
                                         : "bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/80 hover:to-secondary text-foreground border-border/50"
@@ -349,10 +349,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 {showReports ? "CLOSE ANALYSIS" : "VIEW REPORTS"}
                             </button>
                             <div className="flex flex-col items-center sm:items-start">
-                                <span className="text-base text-muted-foreground font-bold uppercase tracking-widest">
+                                <span className="text-base font-bold uppercase tracking-widest text-muted-foreground">
                                     Analysis History
                                 </span>
-                                <span className="text-base text-primary font-mono font-bold">
+                                <span className="font-mono text-lg font-bold text-primary">
                                     {reportHistory.length} Cloud Records Found
                                 </span>
                             </div>
@@ -372,7 +372,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     ) : reportHistory.map((report, idx) => (
                                         <div 
                                             key={report.created_at} 
-                                            className="flex items-center justify-between p-3 bg-card border border-border rounded-lg hover:border-primary/40 transition-colors group"
+                                            className="flex flex-col gap-3 rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 sm:flex-row sm:items-center sm:justify-between"
                                         >
                                             <div className="flex flex-col gap-0.5">
                                                 <span className="text-base font-bold">Deepseek V4-Pro Analysis</span>
@@ -385,7 +385,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                                     setSavedReport({...report, timestamp: report.created_at});
                                                     setShowReports(false);
                                                 }}
-                                                className="text-base font-bold text-primary group-hover:underline px-3 py-2 bg-primary/10 rounded"
+                                                className="w-full rounded bg-primary/10 px-3.5 py-2.5 text-base font-bold text-primary group-hover:underline sm:w-auto"
                                             >
                                                 OPEN REPORT
                                             </button>
@@ -537,13 +537,13 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     <Sparkles className="h-5 w-5" /> AI Valuation Report (Deepseek V4.0 Pro)
                                 </h3>
                                 <div className="bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
-                                    <div className="bg-blue-500/10 px-4 py-3 border-b border-blue-500/20 flex justify-between items-center shrink-0 flex-wrap gap-2">
-                                        <span className="text-base text-muted-foreground">
+                                    <div className="flex shrink-0 flex-col gap-3 border-b border-blue-500/20 bg-blue-500/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                                        <span className="text-base leading-relaxed text-muted-foreground">
                                             Generated on: {new Date(savedReport.timestamp).toLocaleString()} | Cost: ${savedReport.cost} | Tokens: {savedReport.usage?.total_tokens}
                                         </span>
-                                        <div className="flex gap-2 items-center">
-                                            <button onClick={downloadDsResult} className="flex items-center gap-1 text-base bg-secondary hover:bg-secondary/80 px-3 py-2 rounded-md shadow-sm border border-border transition-colors font-semibold">Download .txt</button>
-                                            <button onClick={copyDsResult} className="flex items-center gap-1 text-base bg-[#4d6bfe] hover:bg-[#3b54d1] text-white px-3 py-2 rounded-md shadow-sm transition-colors font-semibold">Copy Result</button>
+                                        <div className="flex flex-wrap items-center gap-2">
+                                            <button onClick={downloadDsResult} className="flex items-center gap-1 rounded-md border border-border bg-secondary px-3.5 py-2.5 text-base font-semibold shadow-sm transition-colors hover:bg-secondary/80">Download .txt</button>
+                                            <button onClick={copyDsResult} className="flex items-center gap-1 rounded-md bg-[#4d6bfe] px-3.5 py-2.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#3b54d1]">Copy Result</button>
                                         </div>
                                     </div>
                                     <div className="p-5 overflow-y-auto max-h-[600px] custom-scrollbar">

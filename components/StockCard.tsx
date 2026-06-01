@@ -96,7 +96,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                             <div className="min-w-0 flex-1">
                                 <div className="flex flex-wrap items-center gap-1.5">
                                     <span className={clsx(
-                                        "rounded px-3 py-1.5 text-sm font-black uppercase",
+                                        "rounded px-3 py-1.5 text-base font-black uppercase",
                                         paradigmBand === 'high' && "bg-emerald-500/20 text-emerald-400",
                                         paradigmBand === 'mid' && "bg-blue-500/20 text-blue-400",
                                         paradigmBand === 'watch' && "bg-amber-500/20 text-amber-400",
@@ -129,14 +129,14 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
 
                 <div className="mt-3 flex flex-wrap gap-1.5 border-t border-border/60 pt-3">
                     <SignalChip
-                        icon={<Telescope className="h-3 w-3" />}
+                        icon={<Telescope className="h-4 w-4" />}
                         label="100B"
                         value={`${Math.round(result.score)}`}
                         tone={result.passed ? "success" : result.score > 80 ? "warning" : "muted"}
                     />
                     {hasReverse && (
                         <SignalChip
-                            icon={<ShieldCheck className="h-3 w-3" />}
+                            icon={<ShieldCheck className="h-4 w-4" />}
                             label="REV"
                             value={reverse?.rev_composite != null ? `${Math.round(reverse.rev_composite)}` : reverse?.rev_band || "n/a"}
                             tone={reverse?.rev_band === 'High' ? "success" : reverse?.rev_band === 'Solid' ? "primary" : "muted"}
@@ -144,7 +144,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                     )}
                     {hasParadigm && (
                         <SignalChip
-                            icon={<Layers3 className="h-3 w-3" />}
+                            icon={<Layers3 className="h-4 w-4" />}
                             label="PDM"
                             value={paradigm?.pdm_signal != null ? `${Math.round(paradigm.pdm_signal)}` : paradigmLabel}
                             tone={paradigmBand === 'high' ? "success" : paradigmBand === 'mid' ? "primary" : paradigmBand === 'watch' ? "warning" : "muted"}
@@ -152,17 +152,17 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                     )}
                     {hasYoutube && (
                         <SignalChip
-                            icon={<Youtube className="h-3 w-3" />}
+                            icon={<Youtube className="h-4 w-4" />}
                             label="YT"
                             value={`${youtubeEvaluation.matchedStrategies.length}`}
                             tone={youtubeEvaluation.riskTier === 'standard' ? "primary" : "warning"}
                         />
                     )}
                     {paradigm?.pdm_flags?.some((f: string) => f.startsWith('macro_')) && (
-                        <span className="rounded border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-sm font-black text-red-400">Macro</span>
+                        <span className="rounded border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-base font-black text-red-400">Macro</span>
                     )}
                     {paradigm?.pdm_flags?.includes('accelerating') && (
-                        <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-sm font-black text-emerald-400">Accel</span>
+                        <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-base font-black text-emerald-400">Accel</span>
                     )}
                 </div>
             </div>
@@ -174,7 +174,7 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
     if (screenMode === 'reverse') {
         const reverse = result.reverse;
         if (!reverse || !reverse.rev_band || reverse.rev_band === 'Excluded') {
-            return <EmptyLens icon={<ShieldCheck className="h-3.5 w-3.5" />} label="No Reverse score for this stock" />;
+            return <EmptyLens icon={<ShieldCheck className="h-4 w-4" />} label="No Reverse score for this stock" />;
         }
         return (
             <div>
@@ -196,7 +196,7 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
     if (screenMode === 'paradigm') {
         const paradigm = result.paradigm;
         if (!paradigm?.pdm_themes?.length) {
-            return <EmptyLens icon={<Layers3 className="h-3.5 w-3.5" />} label="No secular-theme match" />;
+            return <EmptyLens icon={<Layers3 className="h-4 w-4" />} label="No secular-theme match" />;
         }
         return (
             <div>
@@ -217,7 +217,7 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
 
     if (screenMode === 'youtube') {
         if (!youtubeEvaluation || youtubeEvaluation.matchedStrategies.length === 0) {
-            return <EmptyLens icon={<Youtube className="h-3.5 w-3.5" />} label="No YouTube strategy match" />;
+            return <EmptyLens icon={<Youtube className="h-4 w-4" />} label="No YouTube strategy match" />;
         }
         return (
             <div>
@@ -259,7 +259,7 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
 function MiniMetric({ label, value }: { label: string; value: string | number }) {
     return (
         <div className="min-w-0 rounded-md bg-background/40 px-3 py-2">
-            <div className="truncate text-sm font-bold uppercase tracking-wide text-muted-foreground">{label}</div>
+            <div className="truncate text-base font-bold uppercase tracking-wide text-muted-foreground">{label}</div>
             <div className="mt-0.5 truncate font-mono text-base font-black text-foreground" title={String(value)}>{value}</div>
         </div>
     );
@@ -277,7 +277,7 @@ function EmptyLens({ icon, label }: { icon: ReactNode; label: string }) {
 function SignalChip({ icon, label, value, tone }: { icon: ReactNode; label: string; value: string; tone: 'success' | 'warning' | 'primary' | 'muted' }) {
     return (
         <span className={clsx(
-            "inline-flex items-center gap-1.5 rounded border px-3 py-1.5 text-sm font-black",
+            "inline-flex items-center gap-1.5 rounded border px-3 py-1.5 text-base font-black",
             tone === 'success' && "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
             tone === 'warning' && "border-amber-500/30 bg-amber-500/10 text-amber-400",
             tone === 'primary' && "border-blue-500/30 bg-blue-500/10 text-blue-400",
