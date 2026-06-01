@@ -454,7 +454,7 @@ export function ReportsDashboard() {
                                                     </span>
                                                     {meta.valuation_status && (
                                                         <span className={clsx(
-                                                            "text-xs px-2 py-1 rounded-md font-black uppercase tracking-tight",
+                                                            "text-sm px-2.5 py-1 rounded-md font-black uppercase tracking-tight",
                                                             meta.valuation_status.includes('UNDERVALUED') ? "bg-green-500/20 text-green-400 border border-green-500/20" :
                                                             meta.valuation_status === 'OVERVALUED' ? "bg-red-500/20 text-red-400 border border-red-500/20" :
                                                             "bg-white/5 text-muted-foreground border border-white/10"
@@ -478,7 +478,7 @@ export function ReportsDashboard() {
                                                 )}>
                                                     {isPositive ? '+' : ''}{upside.toFixed(1)}%
                                                 </div>
-                                                <span className="text-xs font-black text-muted-foreground tracking-[0.16em] uppercase opacity-60">ALPHA</span>
+                                                <span className="text-sm font-black text-muted-foreground tracking-[0.14em] uppercase opacity-60">ALPHA</span>
                                             </div>
                                         </button>
                                     );
@@ -501,13 +501,13 @@ export function ReportsDashboard() {
                             <aside className="hidden lg:block w-72 shrink-0 border-r border-white/5 bg-[#0a0c10] p-6 sticky top-0 h-screen overflow-y-auto no-scrollbar">
                                 <div className="space-y-6">
                                     <div>
-                                        <h3 className="text-xs font-black text-blue-500 uppercase tracking-[0.2em] mb-5 flex items-center gap-2">
+                                        <h3 className="text-sm font-black text-blue-500 uppercase tracking-[0.16em] mb-5 flex items-center gap-2">
                                             <span className="w-4 h-[1px] bg-blue-500/30"></span>
                                             Contents
                                         </h3>
                                         <nav className="space-y-0.5">
                                             {reportHeadings.length === 0 ? (
-                                                <p className="text-xs text-muted-foreground uppercase px-2">No sections detected</p>
+                                                <p className="text-sm text-muted-foreground uppercase px-2">No sections detected</p>
                                             ) : (
                                                 reportHeadings.map((h) => (
                                                     <button
@@ -524,7 +524,7 @@ export function ReportsDashboard() {
                                                             activeHeading === h.id ? "bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.5)]" : "bg-white/15 group-hover:bg-blue-400/50"
                                                         )}></span>
                                                         <span className={clsx(
-                                                            "text-xs leading-snug transition-colors duration-200 line-clamp-2",
+                                                            "text-sm leading-snug transition-colors duration-200 line-clamp-2",
                                                             h.level === 1 ? "font-bold uppercase tracking-wide" : "font-medium opacity-70",
                                                             activeHeading === h.id ? "text-blue-300" : "text-slate-400 group-hover:text-slate-200"
                                                         )}>
@@ -541,7 +541,7 @@ export function ReportsDashboard() {
                                             onClick={() => downloadReport(selectedReport)}
                                             className="w-full flex items-center justify-between group bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-lg px-4 py-3 transition-all"
                                         >
-                                            <span className="text-xs font-black text-blue-400 uppercase tracking-widest">Download .TXT</span>
+                                            <span className="text-sm font-black text-blue-400 uppercase tracking-widest">Download .TXT</span>
                                             <Download className="h-3.5 w-3.5 text-blue-400 group-hover:translate-y-0.5 transition-transform" />
                                         </button>
                                     </div>
@@ -558,7 +558,7 @@ export function ReportsDashboard() {
                                             {/* Mobile Back Button */}
                                             <button 
                                                 onClick={() => setSelectedReport(null)}
-                                                className="md:hidden flex items-center gap-2 mb-6 text-blue-400 font-bold text-xs bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-all tracking-[0.2em]"
+                                                className="md:hidden flex items-center gap-2 mb-6 text-blue-400 font-bold text-sm bg-blue-500/10 px-4 py-2 rounded-full w-fit active:scale-95 transition-all tracking-[0.16em]"
                                             >
                                                 <ArrowLeft className="h-3.5 w-3.5" /> RETURN TO LIST
                                             </button>
@@ -570,7 +570,7 @@ export function ReportsDashboard() {
                                                         onClick={() => setMobileTocOpen(!mobileTocOpen)}
                                                         className="w-full flex items-center justify-between px-5 py-3.5 text-left"
                                                     >
-                                                        <span className="text-xs font-black text-blue-400 uppercase tracking-[0.15em]">
+                                                        <span className="text-sm font-black text-blue-400 uppercase tracking-[0.14em]">
                                                             Table of Contents ({reportHeadings.length} sections)
                                                         </span>
                                                         <ChevronRight className={clsx("h-4 w-4 text-blue-400 transition-transform duration-200", mobileTocOpen && "rotate-90")} />
@@ -582,7 +582,7 @@ export function ReportsDashboard() {
                                                                     key={h.id}
                                                                     onClick={() => scrollToHeading(h.id)}
                                                                     className={clsx(
-                                                                        "block w-full text-left py-1.5 text-xs transition-colors",
+                                                                        "block w-full text-left py-2 text-sm transition-colors",
                                                                         h.level === 1 ? "font-bold text-slate-300" : "font-medium text-slate-500 pl-4",
                                                                         "hover:text-blue-400 active:text-blue-300"
                                                                     )}
@@ -600,11 +600,11 @@ export function ReportsDashboard() {
                                                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                                                     <div>
                                                         <div className="flex items-center gap-3 mb-3">
-                                                            <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black rounded-md tracking-widest uppercase">
+                                                            <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-black rounded-md tracking-widest uppercase">
                                                                 {meta.archetype || 'Asset Research'}
                                                             </span>
                                                             <span className="w-1 h-1 rounded-full bg-white/20"></span>
-                                                            <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest">
+                                                            <span className="text-muted-foreground text-sm font-bold uppercase tracking-widest">
                                                                 {new Date(selectedReport.created_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                                                             </span>
                                                         </div>
@@ -618,11 +618,11 @@ export function ReportsDashboard() {
 
                                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 shrink-0">
                                                         <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Conviction</div>
+                                                            <div className="text-sm font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Conviction</div>
                                                             <div className="text-3xl font-black text-blue-500 tracking-tighter">{meta.conviction || '0'}</div>
                                                         </div>
                                                         <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Upside</div>
+                                                            <div className="text-sm font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Upside</div>
                                                             <div className={clsx(
                                                                 "text-3xl font-black tracking-tighter",
                                                                 (parseFloat(meta.upside || 0)) > 0 ? "text-green-400" : "text-red-400"
@@ -631,7 +631,7 @@ export function ReportsDashboard() {
                                                             </div>
                                                         </div>
                                                         <div className="hidden sm:block bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-xs font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Rating</div>
+                                                            <div className="text-sm font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Rating</div>
                                                             <div className="text-2xl font-black text-white tracking-tighter uppercase">{meta.action || 'HOLD'}</div>
                                                         </div>
                                                     </div>
@@ -669,39 +669,39 @@ export function ReportsDashboard() {
                                                                 return <h2 id={id} className="text-xl md:text-2xl font-black mt-14 mb-4 text-blue-400 tracking-wide uppercase" {...props} />;
                                                             },
                                                             h3: ({node, ...props}: any) => <h3 className="text-lg font-bold mt-8 mb-3 text-white tracking-tight" {...props} />,
-                                                            p: ({node, ...props}: any) => <p className="text-sm md:text-base leading-[1.75] mb-5 text-slate-300 font-medium" {...props} />,
+                                                            p: ({node, ...props}: any) => <p className="text-base md:text-lg leading-[1.8] mb-5 text-slate-300 font-medium" {...props} />,
                                                             strong: ({node, ...props}: any) => <strong className="font-black text-slate-100" {...props} />,
                                                             em: ({node, ...props}: any) => <em className="italic text-blue-300/80" {...props} />,
                                                             hr: ({node, ...props}: any) => <hr className="my-10 border-white/10" {...props} />,
                                                             ul: ({node, ...props}: any) => <ul className="space-y-2 mb-6 list-none pl-0" {...props} />,
                                                             ol: ({node, ...props}: any) => <ol className="space-y-2 mb-6 list-decimal pl-6 text-slate-300" {...props} />,
                                                             li: ({node, ...props}: any) => (
-                                                                <li className="flex items-start gap-3 text-sm md:text-base text-slate-400 font-medium leading-[1.7]">
+                                                                <li className="flex items-start gap-3 text-base md:text-lg text-slate-400 font-medium leading-[1.75]">
                                                                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500/40 mt-[9px] shrink-0"></span>
                                                                     <span>{props.children}</span>
                                                                 </li>
                                                             ),
                                                             blockquote: ({node, ...props}: any) => (
-                                                                <blockquote className="border-l-[3px] border-blue-500/50 bg-blue-500/5 px-5 py-4 rounded-r-xl italic text-sm md:text-base text-slate-200 mb-6" {...props} />
+                                                                <blockquote className="border-l-[3px] border-blue-500/50 bg-blue-500/5 px-5 py-4 rounded-r-xl italic text-base md:text-lg text-slate-200 mb-6" {...props} />
                                                             ),
                                                             code: ({node, className, ...props}: any) => {
                                                                 const isInline = !className;
                                                                 if (isInline) {
-                                                                    return <code className="bg-slate-800/60 px-1.5 py-0.5 rounded text-blue-300 font-mono text-xs md:text-sm" {...props} />;
+                                                                    return <code className="bg-slate-800/60 px-1.5 py-0.5 rounded text-blue-300 font-mono text-sm md:text-base" {...props} />;
                                                                 }
-                                                                return <code className="block bg-slate-800/60 p-4 rounded-xl text-blue-200 font-mono text-xs md:text-sm overflow-x-auto mb-6" {...props} />;
+                                                                return <code className="block bg-slate-800/60 p-4 rounded-xl text-blue-200 font-mono text-sm md:text-base overflow-x-auto mb-6" {...props} />;
                                                             },
                                                             pre: ({node, ...props}: any) => (
-                                                                <pre className="bg-slate-800/40 border border-white/5 rounded-xl p-4 overflow-x-auto mb-6 text-xs md:text-sm" {...props} />
+                                                                <pre className="bg-slate-800/40 border border-white/5 rounded-xl p-4 overflow-x-auto mb-6 text-sm md:text-base" {...props} />
                                                             ),
                                                             table: ({node, ...props}: any) => (
                                                                 <div className="overflow-x-auto mb-8 rounded-xl border border-white/10">
-                                                                    <table className="w-full text-xs md:text-sm border-collapse" {...props} />
+                                                                    <table className="w-full text-sm md:text-base border-collapse" {...props} />
                                                                 </div>
                                                             ),
                                                             thead: ({node, ...props}: any) => <thead className="bg-white/[0.03]" {...props} />,
                                                             tbody: ({node, ...props}: any) => <tbody className="divide-y divide-white/5" {...props} />,
-                                                            th: ({node, ...props}: any) => <th className="px-4 py-3 text-left text-xs font-black text-blue-400 uppercase tracking-wider border-b border-white/10" {...props} />,
+                                                            th: ({node, ...props}: any) => <th className="px-4 py-3 text-left text-sm font-black text-blue-400 uppercase tracking-wider border-b border-white/10" {...props} />,
                                                             td: ({node, ...props}: any) => <td className="px-4 py-2.5 text-slate-300 font-medium border-b border-white/5" {...props} />,
                                                         }}
                                                     >
@@ -716,7 +716,7 @@ export function ReportsDashboard() {
                                                     </ReactMarkdown>
 
                                                     {/* Footer stats */}
-                                                    <footer className="mt-24 pt-12 border-t border-white/5 flex flex-wrap gap-8 text-xs font-black text-muted-foreground uppercase tracking-[0.2em]">
+                                                    <footer className="mt-24 pt-12 border-t border-white/5 flex flex-wrap gap-8 text-sm font-black text-muted-foreground uppercase tracking-[0.16em]">
                                                         <div className="flex items-center gap-2"><DollarSign className="h-3 w-3" /> Compute Cost: ${selectedReport.cost || '0.00'}</div>
                                                         <div className="flex items-center gap-2"><Activity className="h-3 w-3" /> Token Density: {selectedReport.usage?.total_tokens || 0} units</div>
                                                         <div className="flex items-center gap-2"><Calendar className="h-3 w-3" /> Processed At: {new Date(selectedReport.created_at).toISOString()}</div>

@@ -89,7 +89,7 @@ function StrategyBadge({ label }: { label: string }) {
         "Turnaround Scale-In": "bg-purple-500/15 text-purple-400 border-purple-500/30",
     };
     return (
-        <span className={clsx("rounded-full border px-3 py-1.5 text-xs font-black uppercase tracking-tight", styles[label] || "bg-secondary text-muted-foreground border-border")}>
+        <span className={clsx("rounded-full border px-3 py-1.5 text-sm font-black uppercase tracking-tight", styles[label] || "bg-secondary text-muted-foreground border-border")}>
             {label}
         </span>
     );
@@ -98,7 +98,7 @@ function StrategyBadge({ label }: { label: string }) {
 function MetricPill({ label, value }: { label: string; value: string }) {
     return (
         <div className="rounded-lg bg-secondary/40 border border-border/50 px-3.5 py-3">
-            <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">{label}</div>
+            <div className="text-sm text-muted-foreground uppercase font-bold tracking-wider">{label}</div>
             <div className="mt-1 text-base font-mono font-black text-foreground">{value}</div>
         </div>
     );
@@ -277,7 +277,7 @@ export function YoutubeStrategyDashboard() {
                                     <div className="flex flex-wrap gap-2 mt-4">
                                         {evaluation.matchedStrategies.map((label) => <StrategyBadge key={label} label={label} />)}
                                         <span className={clsx(
-                                            "rounded-full border px-2.5 py-1 text-xs font-black uppercase tracking-tight",
+                                            "rounded-full border px-2.5 py-1 text-sm font-black uppercase tracking-tight",
                                             evaluation.riskTier === "standard" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/25" : "bg-red-500/10 text-red-400 border-red-500/25"
                                         )}>
                                             {evaluation.maxPositionSize}
