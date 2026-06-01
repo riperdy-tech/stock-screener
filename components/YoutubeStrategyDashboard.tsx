@@ -89,7 +89,7 @@ function StrategyBadge({ label }: { label: string }) {
         "Turnaround Scale-In": "bg-purple-500/15 text-purple-400 border-purple-500/30",
     };
     return (
-        <span className={clsx("rounded-full border px-3.5 py-2 text-sm font-black uppercase tracking-tight", styles[label] || "bg-secondary text-muted-foreground border-border")}>
+        <span className={clsx("rounded-full border px-3.5 py-2 text-base font-black uppercase tracking-tight", styles[label] || "bg-secondary text-muted-foreground border-border")}>
             {label}
         </span>
     );
@@ -234,12 +234,12 @@ export function YoutubeStrategyDashboard() {
                         <p className="text-base text-muted-foreground">Showing {filteredRows.length} / {rows.length} assets for {STRATEGY_FILTERS.find((f) => f.value === strategyFilter)?.label}</p>
                     </div>
                     <div className="relative w-full md:w-80">
-                        <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                        <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
                         <input
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder="Search ticker or company"
-                            className="w-full rounded-lg border border-border bg-secondary/40 pl-9 pr-3 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-primary"
+                            className="w-full rounded-lg border border-border bg-secondary/40 py-3 pl-10 pr-3 text-base focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                 </div>
@@ -277,7 +277,7 @@ export function YoutubeStrategyDashboard() {
                                     <div className="flex flex-wrap gap-2 mt-4">
                                         {evaluation.matchedStrategies.map((label) => <StrategyBadge key={label} label={label} />)}
                                         <span className={clsx(
-                                            "rounded-full border px-3.5 py-2 text-sm font-black uppercase tracking-tight",
+                                            "rounded-full border px-3.5 py-2 text-base font-black uppercase tracking-tight",
                                             evaluation.riskTier === "standard" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/25" : "bg-red-500/10 text-red-400 border-red-500/25"
                                         )}>
                                             {evaluation.maxPositionSize}
