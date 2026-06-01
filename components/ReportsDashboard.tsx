@@ -328,7 +328,7 @@ export function ReportsDashboard() {
             {/* Header */}
             <header className="py-4 px-6 border-b border-white/5 bg-[#0d1117] flex flex-col gap-4 shrink-0 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex items-center gap-5">
-                    <Link href="/" className="p-2 hover:bg-white/5 rounded-full transition-colors text-muted-foreground hover:text-foreground">
+                    <Link href="/" className="p-2.5 hover:bg-white/5 rounded-full transition-colors text-muted-foreground hover:text-foreground" aria-label="Back to screener">
                         <ArrowLeft className="h-5 w-5" />
                     </Link>
                     <div>
@@ -346,19 +346,21 @@ export function ReportsDashboard() {
                     <button 
                         onClick={fetchReports}
                         disabled={loading}
-                        className="p-2.5 bg-white/5 hover:bg-white/10 rounded-lg text-muted-foreground hover:text-blue-400 transition-all border border-white/10 active:scale-90"
+                        className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-base font-black text-muted-foreground transition-all hover:bg-white/10 hover:text-blue-400 active:scale-95 disabled:opacity-60"
                         title="Force Sync Cloud Data"
+                        aria-label="Sync cloud reports"
                     >
-                        <RefreshCw className={clsx("h-4 w-4", loading && "animate-spin text-blue-500")} />
+                        <RefreshCw className={clsx("h-5 w-5", loading && "animate-spin text-blue-500")} />
+                        <span>{loading ? "Syncing" : "Sync"}</span>
                     </button>
                     <div className="relative w-full sm:w-80">
-                        <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Search className="absolute left-3 top-3.5 h-5 w-5 text-muted-foreground" />
                         <input 
                             type="text" 
                             placeholder="Search tickers..." 
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-accent transition-all"
+                            className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-11 pr-4 text-base transition-all focus:outline-none focus:ring-1 focus:ring-accent"
                         />
                     </div>
                 </div>
