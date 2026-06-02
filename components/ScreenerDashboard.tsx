@@ -1749,8 +1749,8 @@ function ResultsTable({
                 </span>
             </div>
             <div className="overflow-x-auto">
-                <table className="w-full min-w-[1120px] border-collapse text-left">
-                    <thead className="sticky top-0 z-[1] bg-card">
+                <table className="w-full min-w-[1240px] border-collapse text-left">
+                    <thead className="sticky top-0 z-[1] bg-card/95 backdrop-blur">
                         <tr className="border-b border-border/70">
                             {screenMode === 'reverse' && <TableHead className="w-14">Pick</TableHead>}
                             <TableHead>Stock</TableHead>
@@ -1759,6 +1759,7 @@ function ResultsTable({
                             <TableHead>{screenMode === 'reverse' ? 'Reverse' : screenMode === 'paradigm' ? 'Paradigm Lens' : screenMode === 'youtube' ? 'YouTube' : '100-Bagger'}</TableHead>
                             <TableHead>Other Signals</TableHead>
                             <TableHead className="text-right">Price</TableHead>
+                            <TableHead className="text-right">Market Cap</TableHead>
                             <TableHead className="text-right">Growth</TableHead>
                         </tr>
                     </thead>
@@ -1776,13 +1777,14 @@ function ResultsTable({
                                 minimumFractionDigits: market === 'US' ? 2 : 0,
                                 maximumFractionDigits: market === 'US' ? 2 : 0,
                             });
+                            const marketCap = formatTableMarketCap(Number(c.marketCap || 0), market);
                             const growth = Number(c.revenueGrowth || 0);
 
                             return (
                                 <tr
                                     key={symbol}
                                     onClick={() => onOpen(result)}
-                                    className="cursor-pointer border-b border-border/40 transition-colors hover:bg-secondary/25"
+                                    className="cursor-pointer border-b border-border/40 transition-colors odd:bg-background/10 hover:bg-secondary/30"
                                 >
                                     {screenMode === 'reverse' && (
                                         <td className="px-4 py-3 align-middle">
@@ -1805,9 +1807,14 @@ function ResultsTable({
                                         </td>
                                     )}
                                     <td className="px-4 py-4 align-middle">
-                                        <div className="flex min-w-0 flex-col">
-                                            <span className="font-mono text-lg font-black text-foreground">{ticker}</span>
-                                            <span className="max-w-[220px] truncate text-base font-semibold text-muted-foreground" title={c.name}>{c.name || symbol}</span>
+                                        <div className="flex min-w-0 items-center gap-3">
+                                            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border/70 bg-secondary/40 font-mono text-lg font-black text-primary">
+                                                {ticker.slice(0, 2)}
+                                            </span>
+                                            <div className="min-w-0">
+                                                <span className="block font-mono text-lg font-black text-foreground">{ticker}</span>
+                                                <span className="block max-w-[220px] truncate text-base font-semibold text-muted-foreground" title={c.name}>{c.name || symbol}</span>
+                                            </div>
                                         </div>
                                     </td>
                                     <td className="px-4 py-4 align-middle">
@@ -1851,6 +1858,9 @@ function ResultsTable({
                                     <td className="px-4 py-4 text-right align-middle font-mono text-base font-black text-foreground">
                                         {pricePrefix}{price}
                                     </td>
+                                    <td className="px-4 py-4 text-right align-middle font-mono text-base font-black text-muted-foreground">
+                                        {marketCap}
+                                    </td>
                                     <td className={clsx("px-4 py-4 text-right align-middle font-mono text-base font-black", growth >= 0 ? "text-success" : "text-danger")}>
                                         {growth.toFixed(1)}%
                                     </td>
@@ -1862,6 +1872,14 @@ function ResultsTable({
             </div>
         </div>
     );
+}
+
+function formatTableMarketCap(value: number, market: Market) {
+    if (!value || !Number.isFinite(value)) return 'n/a';
+    if (market === 'Korea') return `${(value / 1_000_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}B KRW`;
+    if (market === 'Taiwan') return `NT$${(value / 1_000_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}B`;
+    if (Math.abs(value) >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}B`;
+    return `$${(value / 1_000_000).toLocaleString('en-US', { maximumFractionDigits: 0 })}M`;
 }
 
 function getActiveTableMetric(result: ScreeningResult, screenMode: ScreenMode, youtube?: YoutubeStrategyEvaluation): { label: string; value: string } {
