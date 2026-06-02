@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef, type ReactNode } from "react";
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
 import { fetchStocks, fetchReverseScores, fetchParadigmScores, Market } from "@/lib/data-service";
@@ -11,7 +11,7 @@ import { evaluateYoutubeStrategy, matchesYoutubeStrategyFilter, YoutubeStrategyE
 import { supabase } from "@/lib/supabase";
 import { LanguageToggle } from "./LanguageToggle";
 import { LogConsole } from "./LogConsole";
-import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal, HelpCircle, Telescope, ShieldCheck, Layers3, Youtube } from 'lucide-react';
+import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal, HelpCircle, Telescope, ShieldCheck, Layers3, Youtube, LayoutGrid, Table2 } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -19,6 +19,7 @@ import clsx from "clsx";
 
 type ScreenMode = '100bagger' | 'reverse' | 'paradigm' | 'youtube';
 type StrategyId = ScreenMode;
+type ResultView = 'cards' | 'table';
 
 const STRATEGY_META: Record<StrategyId, {
     title: string;
@@ -153,6 +154,7 @@ export function ScreenerDashboard() {
     const [reverseFilters, setReverseFilters] = useState<ReverseFilterState>(DEFAULT_REVERSE_FILTERS);
     const [paradigmFilters, setParadigmFilters] = useState<ParadigmFilterState>(DEFAULT_PARADIGM_FILTERS);
     const [youtubeFilter, setYoutubeFilter] = useState<YoutubeStrategyFilter>("any");
+    const [resultView, setResultView] = useState<ResultView>('cards');
     
     // Maintain a ref to current rawResults for the setInterval closure
     const rawResultsRef = useRef<ScreeningResult[]>([]);
@@ -1108,10 +1110,38 @@ export function ScreenerDashboard() {
                                     </div>
                                 )}
                             </div>
-                            <div className="grid grid-cols-3 gap-2 sm:min-w-[360px]">
-                                <SummaryMetric label="Showing" value={`${filteredCount > 0 ? startIndex + 1 : 0}-${Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}`} />
-                                <SummaryMetric label="Results" value={filteredCount.toLocaleString()} />
-                                <SummaryMetric label="Sorted by" value={activeMetric} />
+                            <div className="flex flex-col gap-3 sm:min-w-[420px]">
+                                <div className="grid grid-cols-3 gap-2">
+                                    <SummaryMetric label="Showing" value={`${filteredCount > 0 ? startIndex + 1 : 0}-${Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}`} />
+                                    <SummaryMetric label="Results" value={filteredCount.toLocaleString()} />
+                                    <SummaryMetric label="Sorted by" value={activeMetric} />
+                                </div>
+                                <div className="grid grid-cols-2 rounded-lg border border-border/70 bg-secondary/30 p-1 shadow-inner">
+                                    <button
+                                        type="button"
+                                        onClick={() => setResultView('cards')}
+                                        className={clsx(
+                                            "flex items-center justify-center gap-2 rounded-md px-3 py-2.5 text-base font-black transition-colors",
+                                            resultView === 'cards' ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                                        )}
+                                        aria-pressed={resultView === 'cards'}
+                                    >
+                                        <LayoutGrid className="h-4 w-4" />
+                                        Cards
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setResultView('table')}
+                                        className={clsx(
+                                            "flex items-center justify-center gap-2 rounded-md px-3 py-2.5 text-base font-black transition-colors",
+                                            resultView === 'table' ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                                        )}
+                                        aria-pressed={resultView === 'table'}
+                                    >
+                                        <Table2 className="h-4 w-4" />
+                                        Table
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1130,45 +1160,64 @@ export function ScreenerDashboard() {
                         </div>
                     ) : (
                         <>
-                            <div className="grid grid-cols-1 gap-4 mb-8 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                                {currentData.map((result, i) => (
-                                    <div key={result.candidate.symbol} className="relative group/card">
-                                        {/* Selection checkbox - reverse mode only */}
-                                        {screenMode === 'reverse' && (
-                                            <button
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    const sym = result.candidate.symbol;
-                                                    setSelectedTickers(prev => {
-                                                        const next = new Set(prev);
-                                                        next.has(sym) ? next.delete(sym) : next.add(sym);
-                                                        return next;
-                                                    });
-                                                }}
-                                                className={clsx(
-                                                    "absolute top-2 right-2 z-20 w-6 h-6 rounded-md border-2 flex items-center justify-center transition-all",
-                                                    selectedTickers.has(result.candidate.symbol)
-                                                        ? "bg-emerald-500 border-emerald-500 text-white"
-                                                        : "bg-background/60 border-border/50 hover:border-emerald-400"
-                                                )}
-                                            >
-                                                {selectedTickers.has(result.candidate.symbol) && (
-                                                    <Check className="h-3.5 w-3.5" />
-                                                )}
-                                            </button>
-                                        )}
-                                        <StockCard
-                                            result={result}
-                                            onClick={() => setSelectedStock(result)}
-                                            index={i}
-                                            lastUpdated={result.Last_Updated || lastUpdatedFile}
-                                            market={selectedMarket}
-                                            screenMode={screenMode}
-                                            youtubeEvaluation={youtubeEvaluations.get(result.candidate.symbol)}
-                                        />
-                                    </div>
-                                ))}
-                            </div>
+                            {resultView === 'cards' ? (
+                                <div className="grid grid-cols-1 gap-4 mb-8 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                                    {currentData.map((result, i) => (
+                                        <div key={result.candidate.symbol} className="relative group/card">
+                                            {/* Selection checkbox - reverse mode only */}
+                                            {screenMode === 'reverse' && (
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        const sym = result.candidate.symbol;
+                                                        setSelectedTickers(prev => {
+                                                            const next = new Set(prev);
+                                                            next.has(sym) ? next.delete(sym) : next.add(sym);
+                                                            return next;
+                                                        });
+                                                    }}
+                                                    className={clsx(
+                                                        "absolute top-2 right-2 z-20 w-6 h-6 rounded-md border-2 flex items-center justify-center transition-all",
+                                                        selectedTickers.has(result.candidate.symbol)
+                                                            ? "bg-emerald-500 border-emerald-500 text-white"
+                                                            : "bg-background/60 border-border/50 hover:border-emerald-400"
+                                                    )}
+                                                    aria-label={`${selectedTickers.has(result.candidate.symbol) ? 'Deselect' : 'Select'} ${result.candidate.symbol}`}
+                                                >
+                                                    {selectedTickers.has(result.candidate.symbol) && (
+                                                        <Check className="h-3.5 w-3.5" />
+                                                    )}
+                                                </button>
+                                            )}
+                                            <StockCard
+                                                result={result}
+                                                onClick={() => setSelectedStock(result)}
+                                                index={i}
+                                                lastUpdated={result.Last_Updated || lastUpdatedFile}
+                                                market={selectedMarket}
+                                                screenMode={screenMode}
+                                                youtubeEvaluation={youtubeEvaluations.get(result.candidate.symbol)}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <ResultsTable
+                                    results={currentData}
+                                    market={selectedMarket}
+                                    screenMode={screenMode}
+                                    youtubeEvaluations={youtubeEvaluations}
+                                    selectedTickers={selectedTickers}
+                                    onToggleSelected={(symbol) => {
+                                        setSelectedTickers(prev => {
+                                            const next = new Set(prev);
+                                            next.has(symbol) ? next.delete(symbol) : next.add(symbol);
+                                            return next;
+                                        });
+                                    }}
+                                    onOpen={setSelectedStock}
+                                />
+                            )}
 
                             {/* Pagination Controls */}
                             {totalPages > 1 && (
@@ -1554,6 +1603,199 @@ function SummaryMetric({ label, value }: { label: string; value: string | number
             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-lg font-black text-foreground" title={String(value)}>{value}</div>
         </div>
+    );
+}
+
+function ResultsTable({
+    results,
+    market,
+    screenMode,
+    youtubeEvaluations,
+    selectedTickers,
+    onToggleSelected,
+    onOpen,
+}: {
+    results: ScreeningResult[];
+    market: Market;
+    screenMode: ScreenMode;
+    youtubeEvaluations: Map<string, YoutubeStrategyEvaluation>;
+    selectedTickers: Set<string>;
+    onToggleSelected: (symbol: string) => void;
+    onOpen: (result: ScreeningResult) => void;
+}) {
+    const pricePrefix = market === 'Korea' ? 'KRW ' : market === 'Taiwan' ? 'NT$' : '$';
+
+    return (
+        <div className="mb-8 overflow-hidden rounded-lg border border-border/70 bg-card/80 shadow-sm">
+            <div className="flex flex-col gap-1 border-b border-border/60 bg-secondary/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h3 className="text-lg font-black text-foreground">Scan Table</h3>
+                    <p className="text-base text-muted-foreground">Dense view for comparing the current page of results.</p>
+                </div>
+                <span className="text-base font-bold uppercase tracking-wider text-muted-foreground">
+                    Click any row for the full scorecard
+                </span>
+            </div>
+            <div className="overflow-x-auto">
+                <table className="w-full min-w-[1120px] border-collapse text-left">
+                    <thead className="sticky top-0 z-[1] bg-card">
+                        <tr className="border-b border-border/70">
+                            {screenMode === 'reverse' && <TableHead className="w-14">Pick</TableHead>}
+                            <TableHead>Stock</TableHead>
+                            <TableHead>Sector / Industry</TableHead>
+                            <TableHead>Paradigm</TableHead>
+                            <TableHead>{screenMode === 'reverse' ? 'Reverse' : screenMode === 'paradigm' ? 'Paradigm Lens' : screenMode === 'youtube' ? 'YouTube' : '100-Bagger'}</TableHead>
+                            <TableHead>Other Signals</TableHead>
+                            <TableHead className="text-right">Price</TableHead>
+                            <TableHead className="text-right">Growth</TableHead>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {results.map((result) => {
+                            const c = result.candidate as any;
+                            const symbol = c.symbol || '';
+                            const ticker = market === 'US' ? symbol.split('.')[0] : symbol;
+                            const paradigm = result.paradigm;
+                            const reverse = result.reverse;
+                            const youtube = youtubeEvaluations.get(symbol);
+                            const hasYoutube = !!(youtube && youtube.matchedStrategies.length > 0);
+                            const activeMetric = getActiveTableMetric(result, screenMode, youtube);
+                            const price = Number(c.price || 0).toLocaleString('en-US', {
+                                minimumFractionDigits: market === 'US' ? 2 : 0,
+                                maximumFractionDigits: market === 'US' ? 2 : 0,
+                            });
+                            const growth = Number(c.revenueGrowth || 0);
+
+                            return (
+                                <tr
+                                    key={symbol}
+                                    onClick={() => onOpen(result)}
+                                    className="cursor-pointer border-b border-border/40 transition-colors hover:bg-secondary/25"
+                                >
+                                    {screenMode === 'reverse' && (
+                                        <td className="px-4 py-3 align-middle">
+                                            <button
+                                                type="button"
+                                                onClick={(event) => {
+                                                    event.stopPropagation();
+                                                    onToggleSelected(symbol);
+                                                }}
+                                                className={clsx(
+                                                    "flex h-8 w-8 items-center justify-center rounded-md border-2 transition-all",
+                                                    selectedTickers.has(symbol)
+                                                        ? "border-emerald-500 bg-emerald-500 text-white"
+                                                        : "border-border/70 bg-background/60 hover:border-emerald-400"
+                                                )}
+                                                aria-label={`${selectedTickers.has(symbol) ? 'Deselect' : 'Select'} ${symbol}`}
+                                            >
+                                                {selectedTickers.has(symbol) && <Check className="h-4 w-4" />}
+                                            </button>
+                                        </td>
+                                    )}
+                                    <td className="px-4 py-4 align-middle">
+                                        <div className="flex min-w-0 flex-col">
+                                            <span className="font-mono text-lg font-black text-foreground">{ticker}</span>
+                                            <span className="max-w-[220px] truncate text-base font-semibold text-muted-foreground" title={c.name}>{c.name || symbol}</span>
+                                        </div>
+                                    </td>
+                                    <td className="px-4 py-4 align-middle">
+                                        <div className="max-w-[260px] truncate text-base font-semibold text-muted-foreground" title={`${c.sector || 'Unknown'} / ${c.industry || result.industry || 'Unknown'}`}>
+                                            {c.sector || 'Unknown'} / {c.industry || result.industry || 'Unknown'}
+                                        </div>
+                                    </td>
+                                    <td className="px-4 py-4 align-middle">
+                                        {paradigm?.pdm_themes?.length ? (
+                                            <div className="flex min-w-0 flex-col gap-1">
+                                                <TableBadge tone={paradigm.pdm_band === 'high' ? 'success' : paradigm.pdm_band === 'mid' ? 'primary' : paradigm.pdm_band === 'watch' ? 'warning' : 'muted'}>
+                                                    {paradigm.pdm_band?.toUpperCase() || 'THEME'}
+                                                </TableBadge>
+                                                <span className="max-w-[220px] truncate text-base font-mono text-purple-300" title={paradigm.pdm_themes.join(', ')}>
+                                                    {paradigm.pdm_theme_primary || paradigm.pdm_themes[0]}
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            <span className="text-base text-muted-foreground">No theme</span>
+                                        )}
+                                    </td>
+                                    <td className="px-4 py-4 align-middle">
+                                        <div className="flex min-w-[160px] flex-col">
+                                            <span className="font-mono text-xl font-black text-foreground">{activeMetric.value}</span>
+                                            <span className="text-base font-bold text-muted-foreground">{activeMetric.label}</span>
+                                        </div>
+                                    </td>
+                                    <td className="px-4 py-4 align-middle">
+                                        <div className="flex min-w-[230px] flex-wrap gap-1.5">
+                                            <TableBadge tone={result.passed ? 'success' : result.score > 80 ? 'warning' : 'muted'}>100B {Math.round(result.score || 0)}</TableBadge>
+                                            {reverse?.rev_band && reverse.rev_band !== 'Excluded' && (
+                                                <TableBadge tone={reverse.rev_band === 'High' ? 'success' : reverse.rev_band === 'Solid' ? 'primary' : 'muted'}>
+                                                    REV {reverse.rev_composite != null ? Math.round(reverse.rev_composite) : reverse.rev_band}
+                                                </TableBadge>
+                                            )}
+                                            {hasYoutube && (
+                                                <TableBadge tone={youtube.riskTier === 'standard' ? 'primary' : 'warning'}>YT {youtube.matchedStrategies.length}</TableBadge>
+                                            )}
+                                        </div>
+                                    </td>
+                                    <td className="px-4 py-4 text-right align-middle font-mono text-base font-black text-foreground">
+                                        {pricePrefix}{price}
+                                    </td>
+                                    <td className={clsx("px-4 py-4 text-right align-middle font-mono text-base font-black", growth >= 0 ? "text-success" : "text-danger")}>
+                                        {growth.toFixed(1)}%
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+}
+
+function getActiveTableMetric(result: ScreeningResult, screenMode: ScreenMode, youtube?: YoutubeStrategyEvaluation): { label: string; value: string } {
+    if (screenMode === 'reverse') {
+        return {
+            label: result.reverse?.rev_band || 'Reverse',
+            value: result.reverse?.rev_composite != null ? String(Math.round(result.reverse.rev_composite)) : 'n/a',
+        };
+    }
+    if (screenMode === 'paradigm') {
+        return {
+            label: result.paradigm?.pdm_theme_primary || result.paradigm?.pdm_band || 'Paradigm',
+            value: result.paradigm?.pdm_signal != null ? String(Math.round(result.paradigm.pdm_signal)) : 'n/a',
+        };
+    }
+    if (screenMode === 'youtube') {
+        return {
+            label: youtube?.matchedStrategies[0] || 'Video signal',
+            value: youtube?.matchedStrategies.length ? String(youtube.matchedStrategies.length) : 'n/a',
+        };
+    }
+    return {
+        label: result.passed ? 'Pass' : 'Review',
+        value: String(Math.round(result.score || 0)),
+    };
+}
+
+function TableHead({ children, className }: { children: ReactNode; className?: string }) {
+    return (
+        <th className={clsx("px-4 py-3 text-base font-black uppercase tracking-wider text-muted-foreground", className)}>
+            {children}
+        </th>
+    );
+}
+
+function TableBadge({ children, tone }: { children: ReactNode; tone: 'success' | 'warning' | 'primary' | 'muted' }) {
+    return (
+        <span className={clsx(
+            "inline-flex w-fit items-center rounded-md border px-2.5 py-1.5 text-base font-black leading-none",
+            tone === 'success' && "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+            tone === 'warning' && "border-amber-500/30 bg-amber-500/10 text-amber-400",
+            tone === 'primary' && "border-blue-500/30 bg-blue-500/10 text-blue-400",
+            tone === 'muted' && "border-border/60 bg-secondary/30 text-muted-foreground",
+        )}>
+            {children}
+        </span>
     );
 }
 
