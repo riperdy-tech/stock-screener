@@ -1268,11 +1268,16 @@ export function ScreenerDashboard() {
             {aiModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
                     <div className="bg-card w-full sm:max-w-[95vw] lg:max-w-7xl h-[92vh] sm:h-auto sm:max-h-[90vh] rounded-t-2xl sm:rounded-xl border border-border shadow-2xl flex flex-col overflow-hidden">
-                        <div className="flex items-center justify-between p-5 border-b border-border bg-secondary/30 shrink-0">
-                            <h3 className="text-xl font-black flex items-center gap-2 text-foreground">
-                                <Sparkles className="h-6 w-6 text-accent shrink-0" />
-                                <span className="truncate">Prompt Exporter: {selectedAiTicker}</span>
-                            </h3>
+                        <div className="flex items-start justify-between gap-4 p-5 border-b border-border bg-secondary/30 shrink-0">
+                            <div className="min-w-0">
+                                <p className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">Research handoff</p>
+                                <h3 className="mt-1 text-2xl font-black tracking-tight text-foreground sm:text-3xl">
+                                    Prompt Exporter: {selectedAiTicker}
+                                </h3>
+                                <p className="mt-1 text-base leading-relaxed text-muted-foreground">
+                                    Copy the prepared prompt, open a model, or run the protected Deepseek workflow.
+                                </p>
+                            </div>
                             <button onClick={() => setAiModalOpen(false)} className="text-muted-foreground hover:text-foreground shrink-0 ml-2" aria-label="Close AI prompt modal">
                                 <X className="h-5 w-5" />
                             </button>
@@ -1285,17 +1290,22 @@ export function ScreenerDashboard() {
                                 </div>
                             ) : aiResult ? (
                                 <div className="flex flex-col flex-1 min-h-0 gap-3 sm:gap-4">
-                                    <p className="text-base text-foreground/80 font-medium">
-                                        To calculate intrinsic value of the stock, copy paste below prompt to your AI of choice.
-                                    </p>
+                                    <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+                                        <PromptStat label="Ticker" value={selectedAiTicker || "Unknown"} sub="Active scorecard" />
+                                        <PromptStat label="Prompt" value={`${aiResult.length.toLocaleString()} chars`} sub="Ready to copy" />
+                                        <PromptStat label="Output" value={dsResult ? "Report ready" : "Manual or cloud"} sub={dsResult ? "Deepseek result loaded" : "Choose a model below"} />
+                                    </div>
                                     <div className="grid grid-cols-1 gap-4 flex-1 min-h-[350px] sm:min-h-[450px]">
                                         {/* Prompt Box */}
                                         <div className="relative flex-1 bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
-                                            <div className="bg-secondary/40 px-3 sm:px-5 py-2.5 border-b border-border flex justify-between items-center shrink-0">
-                                                <span className="text-base font-mono text-muted-foreground uppercase tracking-wider font-semibold">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
+                                            <div className="bg-secondary/40 px-3 sm:px-5 py-3 border-b border-border flex flex-col gap-3 shrink-0 sm:flex-row sm:items-center sm:justify-between">
+                                                <div>
+                                                    <span className="text-base font-mono text-muted-foreground uppercase tracking-wider font-semibold">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
+                                                    <p className="mt-1 text-base text-muted-foreground">Prepared analysis packet for valuation, scenarios, risks, and final verdict.</p>
+                                                </div>
                                                 <button
                                                     onClick={() => copyToClipboard(aiResult!)}
-                                                    className="flex items-center gap-2 text-base font-bold bg-primary hover:bg-primary/90 text-primary-foreground px-3.5 py-2.5 rounded-md transition-colors shadow-sm"
+                                                    className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-base font-black text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 sm:w-auto"
                                                 >
                                                     {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                                                     {copied ? 'COPIED!' : 'COPY PROMPT'}
@@ -1304,7 +1314,7 @@ export function ScreenerDashboard() {
                                             <textarea
                                                 readOnly
                                                 value={aiResult || ""}
-                                                className="flex-1 w-full h-full bg-transparent p-4 sm:p-5 text-base font-mono resize-none focus:outline-none focus:ring-0 text-foreground/90 overflow-y-auto leading-relaxed"
+                                                className="flex-1 w-full h-full bg-transparent p-4 sm:p-5 text-base font-mono resize-none focus:outline-none focus:ring-0 text-foreground/90 overflow-y-auto leading-8"
                                             />
                                         </div>
                                         
@@ -1343,17 +1353,17 @@ export function ScreenerDashboard() {
                                         )}
                                     </div>
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 shrink-0 mt-2">
-                                        <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#1A73E8] hover:bg-[#1557B0] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
+                                        <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#1A73E8]/90 px-3 py-4 text-white shadow-md transition-all hover:bg-[#1557B0] active:scale-95">
                                             <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                            <span className="text-base font-bold tracking-wide">Gemini</span>
+                                            <span className="text-base font-black tracking-wide">Gemini</span>
                                         </a>
-                                        <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#D97757] hover:bg-[#C26547] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
+                                        <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#D97757]/90 px-3 py-4 text-white shadow-md transition-all hover:bg-[#C26547] active:scale-95">
                                             <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                            <span className="text-base font-bold tracking-wide">Claude</span>
+                                            <span className="text-base font-black tracking-wide">Claude</span>
                                         </a>
-                                        <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2.5 bg-[#10A37F] hover:bg-[#0E906F] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
+                                        <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#10A37F]/90 px-3 py-4 text-white shadow-md transition-all hover:bg-[#0E906F] active:scale-95">
                                             <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                            <span className="text-base font-bold tracking-wide">ChatGPT</span>
+                                            <span className="text-base font-black tracking-wide">ChatGPT</span>
                                         </a>
                                         {showDsPassword ? (
                                             <div className="flex flex-col items-center justify-center gap-2 bg-[#4d6bfe]/20 border border-[#4d6bfe]/40 py-2 sm:py-2 rounded-xl px-2">
@@ -1364,9 +1374,9 @@ export function ScreenerDashboard() {
                                                 {dsError && <span className="text-base text-danger">{dsError}</span>}
                                             </div>
                                         ) : (
-                                            <button onClick={() => setShowDsPassword(true)} className="flex flex-col items-center justify-center gap-2.5 bg-[#4d6bfe] hover:bg-[#3b54d1] text-white py-4 sm:py-6 rounded-xl font-semibold transition-transform hover:scale-[1.02] active:scale-95 shadow-md">
+                                            <button onClick={() => setShowDsPassword(true)} className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#4d6bfe]/90 px-3 py-4 text-white shadow-md transition-all hover:bg-[#3b54d1] active:scale-95">
                                                 <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" alt="Deepseek" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                                <span className="text-base font-bold tracking-wide">Deepseek V4.0 Pro</span>
+                                                <span className="text-center text-base font-black tracking-wide">Deepseek V4.0 Pro</span>
                                             </button>
                                         )}
                                     </div>
@@ -1602,6 +1612,16 @@ function SummaryMetric({ label, value }: { label: string; value: string | number
         <div className="rounded-md border border-border/60 bg-secondary/20 px-3.5 py-3">
             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-lg font-black text-foreground" title={String(value)}>{value}</div>
+        </div>
+    );
+}
+
+function PromptStat({ label, value, sub }: { label: string; value: string; sub: string }) {
+    return (
+        <div className="rounded-lg border border-border/60 bg-secondary/20 p-4">
+            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 truncate font-mono text-xl font-black text-foreground" title={value}>{value}</div>
+            <div className="mt-1 truncate text-base font-semibold text-muted-foreground" title={sub}>{sub}</div>
         </div>
     );
 }
