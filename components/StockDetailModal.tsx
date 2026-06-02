@@ -553,14 +553,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     </div>
                                 )}
                                 {result.paradigm.pdm_pro && (
-                                    <div className="text-base text-emerald-400/80 mb-1 flex items-start gap-1">
-                                        <span className="font-bold shrink-0">Pro:</span> {result.paradigm.pdm_pro}
-                                    </div>
+                                    <InsightNote tone="positive" label="Pro" text={result.paradigm.pdm_pro} />
                                 )}
                                 {result.paradigm.pdm_con && (
-                                    <div className="text-base text-amber-400/80 flex items-start gap-1">
-                                        <span className="font-bold shrink-0">Con:</span> {result.paradigm.pdm_con}
-                                    </div>
+                                    <InsightNote tone="caution" label="Con" text={result.paradigm.pdm_con} />
                                 )}
                             </div>
                         )}
@@ -629,14 +625,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     </div>
                                 )}
                                 {result.reverse.rev_pro && (
-                                    <div className="text-base text-emerald-400/80 mb-1 flex items-start gap-1">
-                                        <span className="font-bold shrink-0">Pro:</span> {result.reverse.rev_pro}
-                                    </div>
+                                    <InsightNote tone="positive" label="Pro" text={result.reverse.rev_pro} />
                                 )}
                                 {result.reverse.rev_con && (
-                                    <div className="text-base text-amber-400/80 flex items-start gap-1">
-                                        <span className="font-bold shrink-0">Con:</span> {result.reverse.rev_con}
-                                    </div>
+                                    <InsightNote tone="caution" label="Con" text={result.reverse.rev_con} />
                                 )}
                                 {result.reverse.rev_nominated && (
                                     <div className="mt-3 px-3.5 py-2.5 bg-amber-500/10 border border-amber-500/30 rounded-lg text-base font-black text-amber-400 flex items-center gap-2">
@@ -689,17 +681,30 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
 function ReverseStat({ label, value, sub, band, warn }: { label: string; value: string | number; sub?: string; band?: string | null; warn?: boolean }) {
     return (
-        <div className="rounded-lg border border-border/50 bg-secondary/20 p-4">
-            <div className="text-base font-bold text-muted-foreground uppercase tracking-wider">{label}</div>
+        <div className="min-w-0 rounded-lg border border-border/50 bg-secondary/20 p-4">
+            <div className="truncate text-base font-bold text-muted-foreground uppercase tracking-wider">{label}</div>
             <div className={clsx(
-                "mt-1.5 font-mono text-xl font-black leading-tight",
+                "mt-1.5 break-words font-mono text-xl font-black leading-tight",
                 band === 'High' && "text-emerald-400",
                 band === 'Solid' && "text-blue-400",
                 band === 'Watchlist' && "text-amber-400",
                 band === 'Monitor' && "text-gray-400",
                 warn && "text-amber-400",
-            )}>{value}</div>
+            )} title={String(value)}>{value}</div>
             {sub && <div className="text-base text-muted-foreground/70 mt-1">{sub}</div>}
+        </div>
+    );
+}
+
+function InsightNote({ tone, label, text }: { tone: "positive" | "caution"; label: string; text: string }) {
+    return (
+        <div className={clsx(
+            "mt-3 rounded-lg border px-4 py-3 text-base leading-relaxed",
+            tone === "positive" && "border-emerald-500/25 bg-emerald-500/[0.06] text-emerald-300",
+            tone === "caution" && "border-amber-500/25 bg-amber-500/[0.06] text-amber-300",
+        )}>
+            <div className="text-base font-black uppercase tracking-wider">{label}</div>
+            <p className="mt-1 text-foreground/85">{text}</p>
         </div>
     );
 }
