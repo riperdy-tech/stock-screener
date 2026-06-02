@@ -137,6 +137,60 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
         ...(reverse && reverse.rev_band && reverse.rev_band !== 'Excluded' ? [{ id: "reverse", label: "Reverse" }] : []),
         ...(savedReport ? [{ id: "ai-report", label: "AI Report" }] : []),
     ];
+    const quantRows = [
+        {
+            label: t('revGrowth'),
+            value: market !== 'US' && candidate.revenueGrowth === 0 ? 'N/A' : `${Number(candidate.revenueGrowth).toFixed(1)}%`,
+            target: `> ${QUANT_THRESHOLDS.MIN_REVENUE_GROWTH}%`,
+            pass: market !== 'US' && candidate.revenueGrowth === 0 ? true : candidate.revenueGrowth >= QUANT_THRESHOLDS.MIN_REVENUE_GROWTH,
+        },
+        {
+            label: t('roic'),
+            value: market !== 'US' && candidate.roic === 0 ? 'N/A' : `${Number(candidate.roic).toFixed(1)}%`,
+            target: `> ${QUANT_THRESHOLDS.MIN_ROIC}%`,
+            pass: market !== 'US' && candidate.roic === 0 ? true : candidate.roic >= QUANT_THRESHOLDS.MIN_ROIC,
+        },
+        {
+            label: t('grossMargin'),
+            value: market !== 'US' && candidate.grossMargin === 0 ? 'N/A' : `${Number(candidate.grossMargin).toFixed(1)}%`,
+            target: '> 30% / 50%',
+            pass: market !== 'US' && candidate.grossMargin === 0 ? true : candidate.grossMargin >= 30,
+        },
+        {
+            label: t('mcap'),
+            value: market === 'Korea'
+                ? `${(candidate.marketCap / 1_000_000_000).toFixed(1)}B KRW`
+                : market === 'Taiwan'
+                    ? formatTaiwanNTD(candidate.marketCap, 2)
+                    : `$${(candidate.marketCap / 1e9).toFixed(1)}B`,
+            target: market === 'Korea' ? '< 2.8T KRW' : market === 'Taiwan' ? '< 640B TWD' : '< $2B',
+            pass: market === 'Korea'
+                ? (candidate.marketCap / 1_000_000_000) <= 2800
+                : market === 'Taiwan'
+                    ? (candidate.marketCap / 100_000_000) <= 640
+                    : candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP,
+            warning: market === 'Korea'
+                ? (candidate.marketCap / 1_000_000_000) > 2800
+                : market === 'Taiwan'
+                    ? (candidate.marketCap / 100_000_000) > 640
+                    : candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP,
+        },
+        {
+            label: t('pegRatio'),
+            value: market !== 'US' && candidate.pegRatio === 0 ? 'N/A' : `${Number(candidate.pegRatio).toFixed(1)}x`,
+            target: `< ${QUANT_THRESHOLDS.MAX_PEG}`,
+            pass: market !== 'US' && candidate.pegRatio === 0 ? true : candidate.pegRatio <= QUANT_THRESHOLDS.MAX_PEG,
+        },
+        {
+            label: t('insiderOwn'),
+            value: market !== 'US' && candidate.insiderOwnership === 0 ? 'N/A' : `${Number(candidate.insiderOwnership).toFixed(1)}%`,
+            target: `> ${QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP}%`,
+            pass: market !== 'US' && candidate.insiderOwnership === 0 ? true : candidate.insiderOwnership >= QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP,
+        },
+    ];
+    const quantPassCount = quantRows.filter(row => row.pass).length;
+    const quantWatchCount = quantRows.filter(row => !row.pass && row.warning).length;
+    const quantFailCount = quantRows.length - quantPassCount - quantWatchCount;
 
     const scrollToSection = (id: string) => {
         document.getElementById(`scorecard-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -322,14 +376,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             />
                         </div>
 
-                        <nav className="sticky top-[112px] z-10 -mx-1 overflow-x-auto border-y border-border/60 bg-card/90 px-1 py-2 backdrop-blur-xl">
+                        <nav aria-label="Scorecard sections" className="sticky top-[112px] z-10 -mx-1 overflow-x-auto border-y border-border/60 bg-card/95 px-1 py-2.5 backdrop-blur-xl">
                             <div className="flex min-w-max gap-2">
                                 {sectionLinks.map((section) => (
                                     <button
                                         key={section.id}
                                         type="button"
                                         onClick={() => scrollToSection(section.id)}
-                                        className="rounded-md border border-border/60 bg-secondary/30 px-3.5 py-2 text-base font-bold text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+                                        className="rounded-lg border border-border/60 bg-secondary/35 px-4 py-2.5 text-base font-black text-muted-foreground transition-colors hover:border-primary/50 hover:bg-secondary/70 hover:text-foreground"
                                     >
                                         {section.label}
                                     </button>
@@ -338,28 +392,30 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         </nav>
 
                         {/* Phase 1: Quant Metrics */}
-                        <div id="scorecard-quant" className="scroll-mt-36 rounded-xl border border-border/60 bg-card/60 p-5 shadow-sm">
-                            <h3 className="text-2xl font-black mb-4 flex items-center gap-2">
-                                <Activity className="h-5 w-5 text-primary" /> {t('phase1')}
-                            </h3>
-                            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-                                <DetailRow label={t('revGrowth')} value={market !== 'US' && candidate.revenueGrowth === 0 ? 'N/A' : `${Number(candidate.revenueGrowth).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_REVENUE_GROWTH}%`} pass={market !== 'US' && candidate.revenueGrowth === 0 ? true : candidate.revenueGrowth >= QUANT_THRESHOLDS.MIN_REVENUE_GROWTH} />
-                                <DetailRow label={t('roic')} value={market !== 'US' && candidate.roic === 0 ? 'N/A' : `${Number(candidate.roic).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_ROIC}%`} pass={market !== 'US' && candidate.roic === 0 ? true : candidate.roic >= QUANT_THRESHOLDS.MIN_ROIC} />
-                                <DetailRow label={t('grossMargin')} value={market !== 'US' && candidate.grossMargin === 0 ? 'N/A' : `${Number(candidate.grossMargin).toFixed(1)}%`} target={`> 30% / 50%`} pass={market !== 'US' && candidate.grossMargin === 0 ? true : candidate.grossMargin >= 30} />
-                                <DetailRow 
-                                    label={t('mcap')} 
-                                    value={market === 'Korea' 
-                                        ? `${(candidate.marketCap / 1_000_000_000).toFixed(1)}B KRW`
-                                        : market === 'Taiwan'
-                                                ? formatTaiwanNTD(candidate.marketCap, 2)
-                                                : `$${(candidate.marketCap / 1e9).toFixed(1)}B`
-                                    } 
-                                    target={market === 'Korea' ? '< 2.8T KRW' : market === 'Taiwan' ? '< 640B TWD' : '< $2B'}
-                                    pass={market === 'Korea' ? (candidate.marketCap / 1_000_000_000) <= 2800 : market === 'Taiwan' ? (candidate.marketCap / 100_000_000) <= 640 : candidate.marketCap <= QUANT_THRESHOLDS.MAX_MARKET_CAP} 
-                                    warning={market === 'Korea' ? (candidate.marketCap / 1_000_000_000) > 2800 : market === 'Taiwan' ? (candidate.marketCap / 100_000_000) > 640 : candidate.marketCap > QUANT_THRESHOLDS.MAX_MARKET_CAP} 
+                        <div id="scorecard-quant" className="scroll-mt-36 rounded-xl border border-border/60 bg-card/60 p-5 shadow-sm sm:p-6">
+                            <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                                <SectionHeading
+                                    icon={<Activity className="h-5 w-5 text-primary" />}
+                                    title={t('phase1')}
+                                    body="Strict 100-bagger gates are shown as scan rows so the pass, watch, and fail states are easier to compare."
                                 />
-                                <DetailRow label={t('pegRatio')} value={market !== 'US' && candidate.pegRatio === 0 ? 'N/A' : `${Number(candidate.pegRatio).toFixed(1)}x`} target={`< ${QUANT_THRESHOLDS.MAX_PEG}`} pass={market !== 'US' && candidate.pegRatio === 0 ? true : candidate.pegRatio <= QUANT_THRESHOLDS.MAX_PEG} />
-                                <DetailRow label={t('insiderOwn')} value={market !== 'US' && candidate.insiderOwnership === 0 ? 'N/A' : `${Number(candidate.insiderOwnership).toFixed(1)}%`} target={`> ${QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP}%`} pass={market !== 'US' && candidate.insiderOwnership === 0 ? true : candidate.insiderOwnership >= QUANT_THRESHOLDS.MIN_INSIDER_OWNERSHIP} />
+                                <div className="grid grid-cols-3 gap-2 sm:min-w-[22rem]">
+                                    <StatusCount label="Pass" value={quantPassCount} tone="positive" />
+                                    <StatusCount label="Watch" value={quantWatchCount} tone="warning" />
+                                    <StatusCount label="Fail" value={quantFailCount} tone="negative" />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+                                {quantRows.map(row => (
+                                    <DetailRow
+                                        key={row.label}
+                                        label={row.label}
+                                        value={row.value}
+                                        target={row.target}
+                                        pass={row.pass}
+                                        warning={row.warning}
+                                    />
+                                ))}
                             </div>
                         </div>
 
@@ -607,6 +663,38 @@ function ReverseStat({ label, value, sub, band, warn }: { label: string; value: 
                 warn && "text-amber-400",
             )}>{value}</div>
             {sub && <div className="text-base text-muted-foreground/70 mt-1">{sub}</div>}
+        </div>
+    );
+}
+
+function SectionHeading({ icon, title, body }: { icon: ReactNode; title: string; body: string }) {
+    return (
+        <div className="min-w-0">
+            <h3 className="flex items-center gap-2 text-2xl font-black tracking-tight">
+                {icon}
+                {title}
+            </h3>
+            <p className="mt-2 max-w-3xl text-base leading-relaxed text-muted-foreground">
+                {body}
+            </p>
+        </div>
+    );
+}
+
+function StatusCount({ label, value, tone }: { label: string; value: number; tone: "positive" | "warning" | "negative" }) {
+    return (
+        <div className="rounded-lg border border-border/60 bg-secondary/20 px-3 py-2.5 text-center">
+            <div className={clsx(
+                "font-mono text-2xl font-black leading-none",
+                tone === "positive" && "text-emerald-400",
+                tone === "warning" && "text-amber-400",
+                tone === "negative" && "text-red-400",
+            )}>
+                {value}
+            </div>
+            <div className="mt-1 text-base font-black uppercase tracking-wider text-muted-foreground">
+                {label}
+            </div>
         </div>
     );
 }
