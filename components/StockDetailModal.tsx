@@ -419,61 +419,79 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         </div>
 
-                                                {/* REPORTS Action Section - Made prominent and sticky-friendly */}
-                        <div id="scorecard-reports" className="scroll-mt-36 rounded-xl border border-border/60 bg-card/60 p-5 shadow-sm">
-                            <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
-                            <button 
-                                onClick={() => setShowReports(!showReports)}
-                                className={clsx(
-                                    "flex w-full items-center justify-center gap-2 rounded-xl border-2 px-8 py-3.5 text-base font-black shadow-lg transition-all active:scale-95 sm:w-auto",
-                                    showReports 
-                                        ? "bg-primary text-primary-foreground border-primary" 
-                                        : "bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/80 hover:to-secondary text-foreground border-border/50"
-                                )}
-                            >
-                                <Activity className="h-5 w-5" />
-                                {showReports ? "CLOSE ANALYSIS" : "VIEW REPORTS"}
-                            </button>
-                            <div className="flex flex-col items-center sm:items-start">
-                                <span className="text-base font-bold uppercase tracking-widest text-muted-foreground">
-                                    Analysis History
-                                </span>
-                                <span className="font-mono text-lg font-bold text-primary">
-                                    {reportHistory.length} Cloud Records Found
-                                </span>
-                            </div>
+                        <div id="scorecard-reports" className="scroll-mt-36 rounded-xl border border-border/60 bg-card/60 p-5 shadow-sm sm:p-6">
+                            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                                <SectionHeading
+                                    icon={<Sparkles className="h-5 w-5 text-blue-400" />}
+                                    title="Research Reports"
+                                    body="Open saved Deepseek research for this ticker, or generate a fresh prompt when the thesis needs another pass."
+                                />
+                                <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:justify-end">
+                                    <div className="rounded-lg border border-blue-500/25 bg-blue-500/[0.06] px-4 py-3">
+                                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">
+                                            Cloud records
+                                        </div>
+                                        <div className="mt-1 font-mono text-2xl font-black text-blue-400">
+                                            {reportHistory.length}
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => setShowReports(!showReports)}
+                                        className={clsx(
+                                            "flex min-h-16 w-full items-center justify-center gap-2 rounded-lg border px-5 py-3 text-base font-black shadow-sm transition-all active:scale-95 sm:w-auto",
+                                            showReports
+                                                ? "border-primary bg-primary text-primary-foreground"
+                                                : "border-border/60 bg-secondary/45 text-foreground hover:border-primary/40 hover:bg-secondary/70"
+                                        )}
+                                    >
+                                        <Activity className="h-5 w-5" />
+                                        {showReports ? "Close reports" : "View reports"}
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
                         {showReports && (
-                            <div className="bg-secondary/20 rounded-xl border border-border p-4 animate-in slide-in-from-top-2 duration-300">
-                                <h3 className="text-base font-bold uppercase tracking-wider mb-3 text-muted-foreground flex items-center gap-2">
-                                    <Sparkles className="h-4 w-4" /> AI Research History
-                                </h3>
+                            <div className="animate-in slide-in-from-top-2 rounded-xl border border-blue-500/20 bg-blue-500/[0.035] p-5 duration-300 sm:p-6">
+                                <div className="mb-4 flex flex-col gap-1">
+                                    <h3 className="flex items-center gap-2 text-xl font-black tracking-tight">
+                                        <Sparkles className="h-5 w-5 text-blue-400" /> Saved AI Research
+                                    </h3>
+                                    <p className="text-base leading-relaxed text-muted-foreground">
+                                        Pick the most recent report, or compare older records when the thesis has changed.
+                                    </p>
+                                </div>
                                 <div className="space-y-3">
                                     {reportHistory.length === 0 ? (
-                                        <div className="text-base text-muted-foreground p-4 text-center border border-dashed border-border rounded-lg">
+                                        <div className="rounded-lg border border-dashed border-border p-5 text-center text-base text-muted-foreground">
                                             No AI reports found for this stock yet.
                                         </div>
                                     ) : reportHistory.map((report, idx) => (
-                                        <div 
-                                            key={report.created_at} 
-                                            className="flex flex-col gap-3 rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 sm:flex-row sm:items-center sm:justify-between"
+                                        <div
+                                            key={report.created_at}
+                                            className="flex flex-col gap-4 rounded-lg border border-border/70 bg-card/90 p-4 shadow-sm transition-colors hover:border-primary/40 sm:flex-row sm:items-center sm:justify-between"
                                         >
-                                            <div className="flex flex-col gap-0.5">
-                                                <span className="text-base font-bold">Deepseek V4-Pro Analysis</span>
-                                                <span className="text-base text-muted-foreground font-mono">
-                                                    {new Date(report.created_at).toLocaleString()} | Cost: ${report.cost || '0.00'}
+                                            <div className="min-w-0">
+                                                <div className="flex flex-wrap items-center gap-2">
+                                                    <span className="text-lg font-black tracking-tight">Deepseek V4-Pro Analysis</span>
+                                                    {idx === 0 && (
+                                                        <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-base font-black text-emerald-400">
+                                                            Latest
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <span className="mt-1 block font-mono text-base text-muted-foreground">
+                                                    {new Date(report.created_at).toLocaleString()} / Cost: ${report.cost || '0.00'}
                                                 </span>
                                             </div>
-                                            <button 
+                                            <button
                                                 onClick={() => {
                                                     setSavedReport({...report, timestamp: report.created_at});
                                                     setShowReports(false);
                                                 }}
-                                                className="w-full rounded bg-primary/10 px-3.5 py-2.5 text-base font-bold text-primary group-hover:underline sm:w-auto"
+                                                className="w-full rounded-lg border border-primary/30 bg-primary/10 px-4 py-3 text-base font-black text-primary transition-colors hover:bg-primary/15 sm:w-auto"
                                             >
-                                                OPEN REPORT
+                                                Open report
                                             </button>
                                         </div>
                                     ))}
@@ -618,14 +636,21 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* Deepseek AI Report */}
                         {savedReport && (
-                            <div id="scorecard-ai-report" className="scroll-mt-36 rounded-xl border border-blue-500/25 bg-blue-500/[0.04] p-5 shadow-sm">
-                                <h3 className="text-2xl font-black mb-4 flex items-center gap-2 text-blue-400">
-                                    <Sparkles className="h-5 w-5" /> AI Valuation Report (Deepseek V4.0 Pro)
-                                </h3>
+                            <div id="scorecard-ai-report" className="scroll-mt-36 rounded-xl border border-blue-500/25 bg-blue-500/[0.04] p-5 shadow-sm sm:p-6">
+                                <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+                                    <SectionHeading
+                                        icon={<Sparkles className="h-5 w-5 text-blue-400" />}
+                                        title="AI Valuation Report"
+                                        body="Deepseek V4.0 Pro research output, kept in a larger reading pane for thesis review."
+                                    />
+                                    <div className="rounded-lg border border-blue-500/25 bg-blue-500/[0.06] px-4 py-3 font-mono text-base font-bold text-blue-300">
+                                        ${savedReport.cost} / {savedReport.usage?.total_tokens || "n/a"} tokens
+                                    </div>
+                                </div>
                                 <div className="bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
                                     <div className="flex shrink-0 flex-col gap-3 border-b border-blue-500/20 bg-blue-500/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                                         <span className="text-base leading-relaxed text-muted-foreground">
-                                            Generated on: {new Date(savedReport.timestamp).toLocaleString()} | Cost: ${savedReport.cost} | Tokens: {savedReport.usage?.total_tokens}
+                                            Generated {new Date(savedReport.timestamp).toLocaleString()}
                                         </span>
                                         <div className="flex flex-wrap items-center gap-2">
                                             <button onClick={downloadDsResult} className="flex items-center gap-1 rounded-md border border-border bg-secondary px-3.5 py-2.5 text-base font-semibold shadow-sm transition-colors hover:bg-secondary/80">Download .txt</button>
