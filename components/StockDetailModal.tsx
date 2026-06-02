@@ -24,6 +24,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
     const [reportHistory, setReportHistory] = useState<any[]>([]);
     const [showReports, setShowReports] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [reportCopied, setReportCopied] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
@@ -106,7 +107,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
     const copyDsResult = () => {
         if (!savedReport) return;
         navigator.clipboard.writeText(savedReport.content);
-        alert("Copied!");
+        setReportCopied(true);
+        setTimeout(() => setReportCopied(false), 2000);
     };
 
     const reverse = result.reverse;
@@ -571,7 +573,9 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         </span>
                                         <div className="flex flex-wrap items-center gap-2">
                                             <button onClick={downloadDsResult} className="flex items-center gap-1 rounded-md border border-border bg-secondary px-3.5 py-2.5 text-base font-semibold shadow-sm transition-colors hover:bg-secondary/80">Download .txt</button>
-                                            <button onClick={copyDsResult} className="flex items-center gap-1 rounded-md bg-[#4d6bfe] px-3.5 py-2.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#3b54d1]">Copy Result</button>
+                                            <button onClick={copyDsResult} className="flex items-center gap-1 rounded-md bg-[#4d6bfe] px-3.5 py-2.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#3b54d1]">
+                                                {reportCopied ? "Copied" : "Copy Result"}
+                                            </button>
                                         </div>
                                     </div>
                                     <div className="p-5 overflow-y-auto max-h-[600px] custom-scrollbar">

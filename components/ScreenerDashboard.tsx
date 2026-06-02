@@ -168,6 +168,7 @@ export function ScreenerDashboard() {
     
 
     const [copied, setCopied] = useState(false);
+    const [dsCopied, setDsCopied] = useState(false);
     
 
     const copyToClipboard = (text: string) => {
@@ -278,7 +279,8 @@ export function ScreenerDashboard() {
     const copyDsResult = () => {
         if (!dsResult) return;
         navigator.clipboard.writeText(dsResult.content);
-        alert("Copied!");
+        setDsCopied(true);
+        setTimeout(() => setDsCopied(false), 2000);
     };
 
     // Phase 11d: Batch deep-dive dispatch
@@ -361,6 +363,7 @@ export function ScreenerDashboard() {
         setAiLoading(true);
         setAiResult(null);
         setCopied(false);
+        setDsCopied(false);
         setDsResult(null);
         setDsError("");
         setShowDsPassword(false);
@@ -1335,7 +1338,9 @@ export function ScreenerDashboard() {
                                                         </div>
                                                     </div>
                                                     <button onClick={downloadDsResult} className="flex items-center gap-1 text-base font-bold bg-secondary hover:bg-secondary/80 px-3.5 py-2.5 rounded">Download .txt</button>
-                                                    <button onClick={copyDsResult} className="flex items-center gap-1 text-base font-bold bg-primary text-primary-foreground px-3.5 py-2.5 rounded">Copy Result</button>
+                                                    <button onClick={copyDsResult} className="flex items-center gap-1 text-base font-bold bg-primary text-primary-foreground px-3.5 py-2.5 rounded">
+                                                        {dsCopied ? "Copied" : "Copy Result"}
+                                                    </button>
                                                 </div>
                                                 <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-slate-950/40 backdrop-blur-md">
                                                     <div className="prose prose-invert prose-blue max-w-none break-words whitespace-pre-wrap font-sans text-slate-100 leading-relaxed text-base sm:text-lg">
