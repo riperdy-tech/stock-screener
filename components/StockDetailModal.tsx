@@ -115,6 +115,18 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
         ? { high: "STRONG", mid: "SOLID", watch: "WATCH", skip: "PASS", no_data: "NO DATA" }[paradigm.pdm_band] || paradigm.pdm_band
         : "No tag";
     const youtubePrimary = youtubeEvaluation?.matchedStrategies[0] || "No match";
+    const displayTicker = market === 'Korea' ? candidate.symbol.split('.')[0] : market === 'Taiwan' ? candidate.symbol : candidate.symbol.replace(/\.(NS|BO)$/, '');
+    const displayName = market === 'Korea' || market === 'Taiwan' ? candidate.name : candidate.name || candidate.symbol;
+    const marketCapDisplay = market === 'Korea'
+        ? `${(candidate.marketCap / 1_000_000_000).toFixed(1)}B KRW`
+        : market === 'Taiwan'
+            ? formatTaiwanNTD(candidate.marketCap, 2)
+            : `$${(candidate.marketCap / 1_000_000_000).toFixed(1)}B`;
+    const priceDisplay = market === 'Korea'
+        ? formatKoreanWon(candidate.price, 0)
+        : market === 'Taiwan'
+            ? formatTaiwanNTD(candidate.price, 2)
+            : `$${Number(candidate.price || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     const sectionLinks = [
         { id: "quant", label: "Quant" },
         { id: "reports", label: "Reports" },
@@ -130,7 +142,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto bg-card border border-border rounded-xl shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className="relative w-full max-w-7xl max-h-[94vh] overflow-y-auto bg-card border border-border rounded-xl shadow-2xl animate-in zoom-in-95 duration-200">
 
                 {/* Header */}
                 <div className="sticky top-0 z-10 flex items-center justify-between p-4 sm:p-6 bg-card/95 backdrop-blur-xl border-b border-border">
@@ -138,10 +150,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         <div className="flex flex-col gap-1">
                             <div className="flex items-center gap-3">
                                 <h2 className="text-2xl sm:text-4xl font-black truncate">
-                                    {market === 'Korea' ? candidate.name : market === 'Taiwan' ? candidate.name : candidate.symbol.replace(/\.(NS|BO)$/, '')}
+                                    {displayTicker}
                                 </h2>
                                 <span className="text-base sm:text-2xl text-muted-foreground font-medium px-2 border-l border-border truncate">
-                                    {market === 'Korea' ? candidate.symbol.split('.')[0] : market === 'Taiwan' ? candidate.symbol : candidate.name}
+                                    {displayName}
                                 </span>
                             </div>
 
@@ -210,6 +222,22 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                 </div>
 
                 <div className="p-4 sm:p-6 lg:p-8 space-y-8">
+                        <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+                            <QuoteMetric label="Price" value={priceDisplay} sub={selectedMarketLabel(market)} />
+                            <QuoteMetric label="Market Cap" value={marketCapDisplay} sub={candidate.sector || "Unknown sector"} />
+                            <QuoteMetric
+                                label="Revenue Growth"
+                                value={market !== 'US' && candidate.revenueGrowth === 0 ? "N/A" : `${Number(candidate.revenueGrowth || 0).toFixed(1)}%`}
+                                sub="YoY screen input"
+                                tone={Number(candidate.revenueGrowth || 0) >= 0 ? "positive" : "negative"}
+                            />
+                            <QuoteMetric
+                                label="ROIC"
+                                value={market !== 'US' && candidate.roic === 0 ? "N/A" : `${Number(candidate.roic || 0).toFixed(1)}%`}
+                                sub="Capital efficiency"
+                                tone={Number(candidate.roic || 0) >= QUANT_THRESHOLDS.MIN_ROIC ? "positive" : "muted"}
+                            />
+                        </div>
 
                         {/* Score & Synthesis */}
                         <div className="flex flex-col gap-5 rounded-xl border border-border/50 bg-secondary/25 p-5 sm:flex-row sm:items-center sm:p-6">
@@ -599,6 +627,29 @@ function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: ReactN
             <div className="mt-2 truncate text-base font-semibold text-muted-foreground" title={detail}>
                 {detail}
             </div>
+        </div>
+    );
+}
+
+function selectedMarketLabel(market: Market) {
+    if (market === 'Korea') return 'Korea market';
+    if (market === 'Taiwan') return 'Taiwan market';
+    return 'US market';
+}
+
+function QuoteMetric({ label, value, sub, tone = "muted" }: { label: string; value: string; sub: string; tone?: "positive" | "negative" | "muted" }) {
+    return (
+        <div className="min-w-0 rounded-lg border border-border/60 bg-secondary/20 p-4 shadow-sm">
+            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className={clsx(
+                "mt-2 truncate font-mono text-2xl font-black leading-none sm:text-3xl",
+                tone === "positive" && "text-emerald-400",
+                tone === "negative" && "text-red-400",
+                tone === "muted" && "text-foreground",
+            )} title={value}>
+                {value}
+            </div>
+            <div className="mt-2 truncate text-base font-semibold text-muted-foreground" title={sub}>{sub}</div>
         </div>
     );
 }
