@@ -1767,17 +1767,21 @@ function ResultsTable({
     onOpen: (result: ScreeningResult) => void;
 }) {
     const pricePrefix = market === 'Korea' ? 'KRW ' : market === 'Taiwan' ? 'NT$' : '$';
+    const lensMeta = getTableLensMeta(screenMode);
 
     return (
         <div className="mb-8 overflow-hidden rounded-lg border border-border/70 bg-card/80 shadow-sm">
             <div className="flex flex-col gap-1 border-b border-border/60 bg-secondary/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                     <h3 className="text-lg font-black text-foreground">Scan Table</h3>
-                    <p className="text-base text-muted-foreground">Dense view for comparing the current page of results.</p>
+                    <p className="text-base text-muted-foreground">Dense view for comparing the current page by {lensMeta.label}.</p>
                 </div>
-                <span className="text-base font-bold uppercase tracking-wider text-muted-foreground">
-                    Click any row for the full scorecard
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                    <TableBadge tone={lensMeta.tone}>{lensMeta.label}</TableBadge>
+                    <span className="text-base font-bold uppercase tracking-wider text-muted-foreground">
+                        Click any row for the full scorecard
+                    </span>
+                </div>
             </div>
             <div className="overflow-x-auto">
                 <table className="w-full min-w-[1240px] border-collapse text-left">
@@ -1868,7 +1872,8 @@ function ResultsTable({
                                         )}
                                     </td>
                                     <td className="px-4 py-4 align-middle">
-                                        <div className="flex min-w-[160px] flex-col">
+                                        <div className="flex min-w-[160px] flex-col gap-1">
+                                            <TableBadge tone={lensMeta.tone}>{lensMeta.shortLabel}</TableBadge>
                                             <span className="font-mono text-xl font-black text-foreground">{activeMetric.value}</span>
                                             <span className="text-base font-bold text-muted-foreground">{activeMetric.label}</span>
                                         </div>
@@ -1936,6 +1941,13 @@ function getActiveTableMetric(result: ScreeningResult, screenMode: ScreenMode, y
         label: result.passed ? 'Pass' : 'Review',
         value: String(Math.round(result.score || 0)),
     };
+}
+
+function getTableLensMeta(screenMode: ScreenMode): { label: string; shortLabel: string; tone: 'success' | 'warning' | 'primary' | 'muted' } {
+    if (screenMode === 'reverse') return { label: 'Reverse Engine', shortLabel: 'REV', tone: 'success' };
+    if (screenMode === 'paradigm') return { label: 'Paradigm Lens', shortLabel: 'PDM', tone: 'primary' };
+    if (screenMode === 'youtube') return { label: 'YouTube Strategy', shortLabel: 'YT', tone: 'warning' };
+    return { label: '100-Bagger', shortLabel: '100B', tone: 'primary' };
 }
 
 function TableHead({ children, className }: { children: ReactNode; className?: string }) {
