@@ -1463,21 +1463,30 @@ export function ScreenerDashboard() {
                                             </div>
                                         )}
                                     </div>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 shrink-0 mt-2">
-                                        <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#1A73E8]/90 px-3 py-4 text-white shadow-md transition-all hover:bg-[#1557B0] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                            <span className="text-base font-black tracking-wide">Gemini</span>
+                                    <div className="grid grid-cols-1 gap-3 shrink-0 sm:grid-cols-2 xl:grid-cols-4">
+                                        <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex min-h-24 items-center gap-3 rounded-lg border border-white/10 bg-[#1A73E8]/90 px-4 py-4 text-white shadow-md transition-all hover:bg-[#1557B0] active:scale-95">
+                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="w-9 h-9 rounded-md shrink-0 shadow-sm bg-white p-1" />
+                                            <span className="min-w-0">
+                                                <span className="block text-lg font-black tracking-tight">Gemini</span>
+                                                <span className="mt-0.5 block text-base font-bold text-white/80">Open manual chat</span>
+                                            </span>
                                         </a>
-                                        <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#D97757]/90 px-3 py-4 text-white shadow-md transition-all hover:bg-[#C26547] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                            <span className="text-base font-black tracking-wide">Claude</span>
+                                        <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex min-h-24 items-center gap-3 rounded-lg border border-white/10 bg-[#D97757]/90 px-4 py-4 text-white shadow-md transition-all hover:bg-[#C26547] active:scale-95">
+                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="w-9 h-9 rounded-md shrink-0 shadow-sm bg-white p-1" />
+                                            <span className="min-w-0">
+                                                <span className="block text-lg font-black tracking-tight">Claude</span>
+                                                <span className="mt-0.5 block text-base font-bold text-white/80">Open manual chat</span>
+                                            </span>
                                         </a>
-                                        <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#10A37F]/90 px-3 py-4 text-white shadow-md transition-all hover:bg-[#0E906F] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                            <span className="text-base font-black tracking-wide">ChatGPT</span>
+                                        <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex min-h-24 items-center gap-3 rounded-lg border border-white/10 bg-[#10A37F]/90 px-4 py-4 text-white shadow-md transition-all hover:bg-[#0E906F] active:scale-95">
+                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="w-9 h-9 rounded-md shrink-0 shadow-sm bg-white p-1" />
+                                            <span className="min-w-0">
+                                                <span className="block text-lg font-black tracking-tight">ChatGPT</span>
+                                                <span className="mt-0.5 block text-base font-bold text-white/80">Open manual chat</span>
+                                            </span>
                                         </a>
                                         {showDsPassword ? (
-                                            <div className="flex flex-col items-center justify-center gap-2 bg-[#4d6bfe]/20 border border-[#4d6bfe]/40 py-2 sm:py-2 rounded-xl px-2">
+                                            <div className="flex min-h-24 flex-col justify-center gap-2 rounded-lg border border-[#4d6bfe]/40 bg-[#4d6bfe]/20 px-3 py-3">
                                                 <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full text-base p-2.5 rounded bg-background border border-border" />
                                                 <button onClick={handleDeepseekRun} disabled={dsLoading} className="w-full bg-[#4d6bfe] text-white text-base py-2.5 rounded font-bold hover:bg-[#3b54d1]">
                                                     {dsLoading ? "Running..." : "Run Deepseek"}
@@ -1485,9 +1494,12 @@ export function ScreenerDashboard() {
                                                 {dsError && <span className="text-base text-danger">{dsError}</span>}
                                             </div>
                                         ) : (
-                                            <button onClick={() => setShowDsPassword(true)} className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#4d6bfe]/90 px-3 py-4 text-white shadow-md transition-all hover:bg-[#3b54d1] active:scale-95">
-                                                <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" alt="Deepseek" className="w-8 h-8 rounded-md shrink-0 shadow-sm bg-white p-1" />
-                                                <span className="text-center text-base font-black tracking-wide">Deepseek V4.0 Pro</span>
+                                            <button onClick={() => setShowDsPassword(true)} className="flex min-h-24 items-center gap-3 rounded-lg border border-white/10 bg-[#4d6bfe]/90 px-4 py-4 text-left text-white shadow-md transition-all hover:bg-[#3b54d1] active:scale-95">
+                                                <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" alt="Deepseek" className="w-9 h-9 rounded-md shrink-0 shadow-sm bg-white p-1" />
+                                                <span className="min-w-0">
+                                                    <span className="block text-lg font-black tracking-tight">Deepseek V4.0 Pro</span>
+                                                    <span className="mt-0.5 block text-base font-bold text-white/80">Run protected workflow</span>
+                                                </span>
                                             </button>
                                         )}
                                     </div>
