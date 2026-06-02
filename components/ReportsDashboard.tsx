@@ -806,15 +806,22 @@ export function ReportsDashboard() {
                             </div>
                         </div>
                     ) : (
-                        <div className="h-full w-full flex flex-col items-center justify-center text-muted-foreground p-12 text-center">
-                            <div className="w-24 h-24 bg-white/5 rounded-[32px] flex items-center justify-center mb-8 border border-white/5 shadow-2xl">
-                                <FileText className="h-10 w-10 opacity-20" />
+                        <div className="flex h-full w-full items-center justify-center p-6 text-center text-muted-foreground">
+                            <div className="w-full max-w-2xl rounded-2xl border border-white/10 bg-white/[0.03] p-8 shadow-2xl">
+                                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl border border-blue-500/20 bg-blue-500/[0.08] text-blue-400 shadow-lg">
+                                    <FileText className="h-9 w-9" />
+                                </div>
+                                <h3 className="mt-6 text-3xl font-black tracking-tight text-white">Select a Research Report</h3>
+                                <p className="mx-auto mt-3 max-w-lg text-base font-medium leading-relaxed text-muted-foreground">
+                                    Choose a ticker from the repository list to open the full Deepseek analysis, section navigation, conviction stats, and downloadable report.
+                                </p>
+                                <div className="mt-6 grid grid-cols-2 gap-3">
+                                    <ResearchStat label="Total" value={reportStats.total.toLocaleString()} sub="Cloud reports" />
+                                    <ResearchStat label="Shown" value={reportStats.filtered.toLocaleString()} sub="After filters" />
+                                    <ResearchStat label="Pending" value={reportStats.pending.toLocaleString()} sub="Cloud queue" />
+                                    <ResearchStat label="Avg Conviction" value={reportStats.avgConviction.toFixed(1)} sub="Filtered set" />
+                                </div>
                             </div>
-                            <h3 className="text-2xl font-black text-white/50 mb-3 tracking-tight">Select Analysis Report</h3>
-                            <p className="text-base max-w-sm opacity-30 font-medium">
-                                Secure cloud repository for automated equity research. 
-                                Choose a ticker to visualize high-fidelity investment signals.
-                            </p>
                         </div>
                     )}
                 </main>
