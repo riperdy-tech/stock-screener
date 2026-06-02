@@ -696,6 +696,23 @@ export function ScreenerDashboard() {
             : screenMode === 'youtube'
                 ? 'Screened by the video strategy playbooks: earnings momentum, deep-value reversal, and turnaround setups.'
                 : 'Screened by strict 100-bagger quantitative filters. Use the sidebar to tune growth, valuation, float, and ownership gates.';
+
+    const handleStrategySwitch = (id: StrategyId) => {
+        setScreenMode(id);
+        setSelectedTickers(new Set());
+
+        if (id === 'youtube') {
+            setYoutubeFilter("any");
+            setSearch("");
+            if (selectedMarket !== 'US') {
+                setSelectedMarket('US');
+            }
+            if (youtubeResults.length === 0 && !youtubeLoading) {
+                loadYoutubeData();
+            }
+        }
+    };
+
     const activeFilterChips = useMemo(() => {
         if (screenMode === 'reverse') {
             return [
@@ -942,16 +959,7 @@ export function ScreenerDashboard() {
                                     <button
                                         key={id}
                                         type="button"
-                                        onClick={() => {
-                                            setScreenMode(id);
-                                            if (id === 'youtube' && selectedMarket !== 'US') {
-                                                setSelectedMarket('US');
-                                            }
-                                            if (id === 'youtube' && youtubeResults.length === 0 && !youtubeLoading) {
-                                                loadYoutubeData();
-                                            }
-                                            setSelectedTickers(new Set());
-                                        }}
+                                        onClick={() => handleStrategySwitch(id)}
                                         className="block text-left"
                                     >
                                         {content}
