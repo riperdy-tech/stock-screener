@@ -241,6 +241,21 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
         setLocalParadigmFilters(DEFAULT_PARADIGM_FILTERS);
         if (setParadigmFilters) setParadigmFilters(DEFAULT_PARADIGM_FILTERS);
     };
+    const activeLensTitle = screenMode === 'reverse' ? 'Reverse Engine'
+        : screenMode === 'paradigm' ? 'Paradigm Themes'
+            : screenMode === 'youtube' ? 'YouTube Strategy'
+                : '100-Bagger';
+    const activeLensBody = screenMode === 'reverse'
+        ? 'Quality, valuation, survivability, and composite filters.'
+        : screenMode === 'paradigm'
+            ? 'Theme, conviction, momentum, and economics filters.'
+            : screenMode === 'youtube'
+                ? 'Video strategy playbooks update immediately.'
+                : 'Strict growth, valuation, float, and ownership gates.';
+    const resultLabel = screenMode === 'reverse' ? 'Reverse candidates'
+        : screenMode === 'paradigm' ? 'Paradigm candidates'
+            : screenMode === 'youtube' ? 'YouTube candidates'
+                : t('assets');
 
     return (
         <div className={clsx(
@@ -258,16 +273,21 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                <div className="rounded-lg border border-border/60 bg-secondary/20 px-4 py-3.5">
-                    <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Active lens</div>
-                    <div className="mt-1 text-lg font-black text-foreground">
-                        {screenMode === 'reverse' ? 'Reverse Engine'
-                            : screenMode === 'paradigm' ? 'Paradigm Themes'
-                            : screenMode === 'youtube' ? 'YouTube Strategy'
-                            : '100-Bagger'}
+                <div className="rounded-xl border border-border/60 bg-secondary/25 p-4">
+                    <div className="flex items-start justify-between gap-4">
+                        <div className="min-w-0">
+                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Active lens</div>
+                            <div className="mt-1 truncate text-xl font-black text-foreground">
+                                {activeLensTitle}
+                            </div>
+                        </div>
+                        <div className="shrink-0 text-right">
+                            <div className="font-mono text-3xl font-black leading-none text-primary">{totalResults.toLocaleString()}</div>
+                            <div className="mt-1 text-base font-bold uppercase tracking-wider text-muted-foreground">{resultLabel}</div>
+                        </div>
                     </div>
                     <p className="mt-1 text-base leading-relaxed text-muted-foreground">
-                        Filter set scoped to the current screening lens.
+                        {activeLensBody}
                     </p>
                 </div>
 
@@ -387,21 +407,6 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                             )}
                         </Section>
 
-                        {/* Reverse Apply/Reset */}
-                        <div className="flex gap-3 pt-2">
-                            <button
-                                onClick={handleReverseApply}
-                                className="flex-1 rounded bg-emerald-600 px-4 py-3 text-base font-bold text-white shadow transition-colors hover:bg-emerald-500"
-                            >
-                                Apply Reverse
-                            </button>
-                            <button
-                                onClick={handleReverseReset}
-                                className="flex-1 rounded border border-border bg-muted px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
-                            >
-                                Reset
-                            </button>
-                        </div>
                     </>
                 )}
 
@@ -528,21 +533,6 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                             </label>
                         </Section>
 
-                        {/* Paradigm Apply/Reset */}
-                        <div className="flex gap-3 pt-2">
-                            <button
-                                onClick={handleParadigmApply}
-                                className="flex-1 rounded bg-purple-600 px-4 py-3 text-base font-bold text-white shadow transition-colors hover:bg-purple-500"
-                            >
-                                Apply Paradigm
-                            </button>
-                            <button
-                                onClick={handleParadigmReset}
-                                className="flex-1 rounded border border-border bg-muted px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
-                            >
-                                Reset
-                            </button>
-                        </div>
                     </>
                 )}
 
@@ -633,24 +623,36 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 </div>
             </div>
 
-            {/* Sticky Actions Footer — show only for 100-bagger mode */}
-            {screenMode !== 'reverse' && screenMode !== 'paradigm' && screenMode !== 'youtube' && (
-            <div className="p-4 border-t border-border/50 bg-card/50 backdrop-blur-xl sticky bottom-0 z-10 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]">
-                <div className="flex gap-3">
-                    <button
-                        onClick={handleApply}
-                        className="flex-1 rounded bg-primary px-4 py-3 text-base font-bold text-primary-foreground shadow transition-colors hover:bg-primary/90"
-                    >
-                        {t('apply')}
-                    </button>
-                    <button
-                        onClick={handleReset}
-                        className="flex-1 rounded border border-border bg-muted px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
-                    >
-                        {t('reset')}
-                    </button>
+            {/* Sticky Actions Footer */}
+            {screenMode === 'reverse' && (
+                <SidebarActions
+                    primaryLabel="Apply Reverse"
+                    onPrimary={handleReverseApply}
+                    onReset={handleReverseReset}
+                    tone="emerald"
+                />
+            )}
+            {screenMode === 'paradigm' && (
+                <SidebarActions
+                    primaryLabel="Apply Paradigm"
+                    onPrimary={handleParadigmApply}
+                    onReset={handleParadigmReset}
+                    tone="purple"
+                />
+            )}
+            {screenMode === 'youtube' && (
+                <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-4 text-base font-bold text-muted-foreground shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+                    YouTube filters update instantly.
                 </div>
-            </div>
+            )}
+            {screenMode !== 'reverse' && screenMode !== 'paradigm' && screenMode !== 'youtube' && (
+                <SidebarActions
+                    primaryLabel={t('apply')}
+                    onPrimary={handleApply}
+                    onReset={handleReset}
+                    tone="primary"
+                    resetLabel={t('reset')}
+                />
             )}
         </div>
     );
@@ -665,6 +667,33 @@ function Section({ title, children }: { title: string, children: React.ReactNode
             </div>
         </section>
     )
+}
+
+function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "Reset" }: { primaryLabel: string; onPrimary: () => void; onReset: () => void; tone: "emerald" | "primary" | "purple"; resetLabel?: string }) {
+    const primaryClass = tone === "emerald"
+        ? "bg-emerald-600 text-white hover:bg-emerald-500"
+        : tone === "purple"
+            ? "bg-purple-600 text-white hover:bg-purple-500"
+            : "bg-primary text-primary-foreground hover:bg-primary/90";
+
+    return (
+        <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-4 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+            <div className="flex gap-3">
+                <button
+                    onClick={onPrimary}
+                    className={clsx("flex-1 rounded-lg px-4 py-3 text-base font-black shadow transition-colors", primaryClass)}
+                >
+                    {primaryLabel}
+                </button>
+                <button
+                    onClick={onReset}
+                    className="flex-1 rounded-lg border border-border bg-muted px-4 py-3 text-base font-bold text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                >
+                    {resetLabel}
+                </button>
+            </div>
+        </div>
+    );
 }
 
 function InputGroup({ label, value, onChange, hint, strictValue, field, defs, min = 0, max = 100, step = 1 }: { label: string, value: number, onChange: (v: string) => void, hint?: string, strictValue?: number, field?: string, defs?: Record<string, string>, min?: number, max?: number, step?: number }) {
