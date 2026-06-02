@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, RefreshCw, Search, Shield, TrendingUp, RotateCcw, BarChart3 } from "lucide-react";
+import { ArrowLeft, RefreshCw, Search, Shield, TrendingUp, RotateCcw, BarChart3, LayoutDashboard } from "lucide-react";
 import clsx from "clsx";
 import { ScreeningResult } from "@/lib/blueprint";
 import { fetchStocks, Market } from "@/lib/data-service";
@@ -104,6 +104,16 @@ function MetricPill({ label, value }: { label: string; value: string }) {
     );
 }
 
+function SummaryCard({ label, value, sub }: { label: string; value: string; sub: string }) {
+    return (
+        <div className="rounded-lg border border-border/70 bg-card/70 p-4">
+            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 font-mono text-2xl font-black text-foreground">{value}</div>
+            <div className="mt-1 text-base font-semibold text-muted-foreground">{sub}</div>
+        </div>
+    );
+}
+
 export function YoutubeStrategyDashboard() {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -152,6 +162,7 @@ export function YoutubeStrategyDashboard() {
         turnaroundSeed: rows.filter((row) => row.evaluation.turnaroundSeed.passed).length,
         turnaroundScaleIn: rows.filter((row) => row.evaluation.turnaroundScaleIn.passed).length,
     }), [rows]);
+    const activeFilter = STRATEGY_FILTERS.find((f) => f.value === strategyFilter);
 
     return (
         <div className="min-h-screen bg-background text-foreground">
@@ -174,6 +185,13 @@ export function YoutubeStrategyDashboard() {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
+                        <Link
+                            href="/"
+                            className="flex items-center justify-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2.5 text-base font-black text-primary transition-colors hover:bg-primary/15"
+                        >
+                            <LayoutDashboard className="h-4 w-4" />
+                            Open Integrated Screener
+                        </Link>
                         <button
                             onClick={() => loadData()}
                             className="px-4 py-2.5 rounded-lg text-base font-black border border-border bg-secondary/40 hover:bg-secondary flex items-center gap-2"
@@ -185,6 +203,13 @@ export function YoutubeStrategyDashboard() {
             </header>
 
             <main className="p-4 md:p-6 lg:p-8 space-y-6">
+                <section className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+                    <SummaryCard label="Universe" value={rows.length.toLocaleString()} sub="US assets loaded" />
+                    <SummaryCard label="Video Matches" value={totals.any.toLocaleString()} sub="Any strategy signal" />
+                    <SummaryCard label="Active View" value={filteredRows.length.toLocaleString()} sub={activeFilter?.label || "Filtered set"} />
+                    <SummaryCard label="Last Updated" value={lastUpdated || "N/A"} sub="CSV source date" />
+                </section>
+
                 <section className="grid grid-cols-1 gap-3 lg:grid-cols-5">
                     {STRATEGY_FILTERS.map((filter) => (
                         <button
