@@ -82,7 +82,8 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
 
     if (!isOpen) return null;
 
-    const lineCount = logs ? logs.split('\n').filter((line) => line.trim()).length : 0;
+    const logLines = logs ? logs.split('\n') : [];
+    const lineCount = logLines.filter((line) => line.trim()).length;
     const supabaseConnected = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
     return (
@@ -125,7 +126,11 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                 {/* Log Content */}
                 <div className="flex-1 space-y-1 overflow-y-auto bg-[#070707] p-5 font-mono text-gray-300">
                     {logs ? (
-                        <pre className="whitespace-pre-wrap text-base leading-8">{logs}</pre>
+                        <div className="space-y-1 text-base leading-8">
+                            {logLines.map((line, index) => (
+                                <LogLine key={`${index}-${line}`} line={line} />
+                            ))}
+                        </div>
                     ) : (
                         <div className="flex h-full flex-col items-center justify-center space-y-3 text-center text-gray-500">
                             <RefreshCw className="h-6 w-6 animate-spin" />
@@ -167,4 +172,35 @@ function LogStat({ icon, label, value, sub, tone = "neutral" }: { icon: ReactNod
             <div className="mt-1 truncate text-base font-medium text-gray-500" title={sub}>{sub}</div>
         </div>
     );
+}
+
+function LogLine({ line }: { line: string }) {
+    const normalized = line.toLowerCase();
+    const tone = normalized.includes("error") || normalized.includes("failed") || normalized.includes("exception")
+        ? "danger"
+        : normalized.includes("warn") || normalized.includes("skipped")
+            ? "warning"
+            : normalized.includes("success") || normalized.includes("completed") || normalized.includes("done")
+                ? "success"
+                : line.includes("---")
+                    ? "marker"
+                    : "neutral";
+
+    if (!line.trim()) {
+        return <div className="h-3" aria-hidden="true" />;
+    }
+
+    return (
+        <div className={`rounded-md border px-3 py-1.5 ${logLineToneClass(tone)}`}>
+            <span className="whitespace-pre-wrap break-words">{line}</span>
+        </div>
+    );
+}
+
+function logLineToneClass(tone: "neutral" | "success" | "danger" | "warning" | "marker") {
+    if (tone === "success") return "border-green-500/20 bg-green-500/[0.06] text-green-300";
+    if (tone === "danger") return "border-red-500/25 bg-red-500/[0.08] text-red-300";
+    if (tone === "warning") return "border-amber-500/25 bg-amber-500/[0.08] text-amber-300";
+    if (tone === "marker") return "border-blue-500/20 bg-blue-500/[0.08] text-blue-300";
+    return "border-transparent bg-transparent text-gray-300";
 }
