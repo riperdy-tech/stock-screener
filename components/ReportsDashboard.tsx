@@ -449,8 +449,29 @@ export function ReportsDashboard() {
                                 <span className="text-base font-bold uppercase tracking-widest">Fetching Cloud...</span>
                             </div>
                         ) : filteredReports.length === 0 ? (
-                            <div className="p-12 text-center text-muted-foreground italic text-base">
-                                No reports found matching your search.
+                            <div className="flex min-h-80 flex-col items-center justify-center gap-5 p-8 text-center text-muted-foreground">
+                                <div className="rounded-xl border border-blue-500/20 bg-blue-500/[0.06] p-4 text-blue-400">
+                                    <FileText className="h-8 w-8" />
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl font-black tracking-tight text-foreground">No reports match this view</h3>
+                                    <p className="mt-2 max-w-sm text-base leading-relaxed">
+                                        Try widening the repository filters or syncing the cloud records again.
+                                    </p>
+                                </div>
+                                <div className="grid w-full max-w-sm grid-cols-2 gap-2">
+                                    <EmptyReportStat label="Action" value={filterAction} />
+                                    <EmptyReportStat label="Valuation" value={filterValuation} />
+                                    <EmptyReportStat label="Archetype" value={filterArchetype} />
+                                    <EmptyReportStat label="Min Conviction" value={filterConviction.toFixed(1)} />
+                                </div>
+                                <button
+                                    onClick={fetchReports}
+                                    className="flex items-center gap-2 rounded-lg border border-blue-500/30 bg-blue-500/10 px-4 py-2.5 text-base font-black text-blue-400 transition-colors hover:bg-blue-500/15"
+                                >
+                                    <RefreshCw className="h-4 w-4" />
+                                    Sync reports
+                                </button>
                             </div>
                         ) : (
                             <div className="flex flex-col">
@@ -808,6 +829,15 @@ function ResearchStat({ label, value, sub }: { label: string; value: string; sub
             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-xl font-black text-white" title={value}>{value}</div>
             <div className="mt-1 truncate text-base font-semibold text-muted-foreground" title={sub}>{sub}</div>
+        </div>
+    );
+}
+
+function EmptyReportStat({ label, value }: { label: string; value: string }) {
+    return (
+        <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2.5">
+            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 truncate font-mono text-base font-black text-slate-200" title={value}>{value}</div>
         </div>
     );
 }
