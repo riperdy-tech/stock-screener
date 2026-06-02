@@ -1517,23 +1517,34 @@ export function ScreenerDashboard() {
             {/* Phase 11d: Batch Password Prompt */}
             {showBatchPassword && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
-                    <div className="bg-card border border-border rounded-xl shadow-2xl p-6 max-w-md w-full animate-in zoom-in-95">
-                        <h3 className="text-2xl font-black mb-2">Enter Password</h3>
-                        <p className="text-base text-muted-foreground mb-4">Required to dispatch deep-dive analyses.</p>
+                    <div className="w-full max-w-md animate-in zoom-in-95 rounded-2xl border border-border/70 bg-card p-6 shadow-2xl">
+                        <div className="flex items-start gap-3">
+                            <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/10 p-3 text-emerald-400">
+                                <Sparkles className="h-6 w-6" />
+                            </div>
+                            <div>
+                                <h3 className="text-2xl font-black tracking-tight">Protected Deep-Dive</h3>
+                                <p className="mt-1 text-base leading-relaxed text-muted-foreground">Enter the dispatch password before queuing v3.2 analyses.</p>
+                            </div>
+                        </div>
+                        <div className="my-5 grid grid-cols-2 gap-3">
+                            <DialogStat label="Selection" value={selectedTickers.size > 0 ? selectedTickers.size : batchN} />
+                            <DialogStat label="Source" value={selectedTickers.size > 0 ? "Selected" : "Top ranked"} />
+                        </div>
                         <input
                             type="password"
                             placeholder="Password"
                             value={dsPassword}
                             onChange={(e) => setDsPassword(e.target.value)}
-                            className="w-full bg-secondary/40 border border-border rounded-lg px-3.5 py-2.5 text-base mb-4 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                            className="mb-4 w-full rounded-lg border border-border bg-secondary/40 px-3.5 py-3 text-base focus:outline-none focus:ring-1 focus:ring-emerald-500"
                             onKeyDown={(e) => { if (e.key === 'Enter' && dsPassword) { setShowBatchPassword(false); setShowBatchConfirm(true); } }}
                         />
-                        <div className="flex gap-2">
-                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 px-3.5 py-2.5 bg-muted text-muted-foreground text-base font-bold rounded border border-border">Cancel</button>
+                        <div className="flex gap-3">
+                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 rounded-lg border border-border bg-muted px-3.5 py-3 text-base font-bold text-muted-foreground transition-colors hover:bg-secondary">Cancel</button>
                             <button
                                 onClick={() => { setShowBatchPassword(false); setShowBatchConfirm(true); }}
                                 disabled={!dsPassword}
-                                className="flex-1 px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-base font-bold rounded disabled:opacity-50"
+                                className="flex-1 rounded-lg bg-emerald-600 px-3.5 py-3 text-base font-black text-white transition-colors hover:bg-emerald-500 disabled:opacity-50"
                             >Continue</button>
                         </div>
                     </div>
@@ -1543,26 +1554,38 @@ export function ScreenerDashboard() {
             {/* Phase 11d: Batch Confirm Dialog */}
             {showBatchConfirm && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
-                    <div className="bg-card border border-border rounded-xl shadow-2xl p-6 max-w-md w-full animate-in zoom-in-95">
-                        <h3 className="text-2xl font-black mb-2">Dispatch Deep-Dive Batch?</h3>
-                        <p className="text-base leading-relaxed text-muted-foreground mb-5">
+                    <div className="w-full max-w-lg animate-in zoom-in-95 rounded-2xl border border-border/70 bg-card p-6 shadow-2xl">
+                        <div className="flex items-start gap-3">
+                            <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/10 p-3 text-emerald-400">
+                                <Sparkles className="h-6 w-6" />
+                            </div>
+                            <div>
+                                <h3 className="text-2xl font-black tracking-tight">Dispatch Deep-Dive Batch?</h3>
+                                <p className="mt-1 text-base leading-relaxed text-muted-foreground">
                             {selectedTickers.size > 0
                                 ? <>This will dispatch <span className="font-bold text-foreground">{selectedTickers.size} selected</span> stock(s) for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
                                 : <>This will dispatch the top <span className="font-bold text-foreground">{batchN}</span> stocks for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
                             }
-                        </p>
-                        <div className="flex gap-2">
+                                </p>
+                            </div>
+                        </div>
+                        <div className="my-5 grid grid-cols-3 gap-3">
+                            <DialogStat label="Queued" value={selectedTickers.size > 0 ? selectedTickers.size : batchN} />
+                            <DialogStat label="Runtime" value="2-3m each" />
+                            <DialogStat label="Runner" value="GitHub" />
+                        </div>
+                        <div className="flex gap-3">
                             <button
                                 onClick={() => setShowBatchConfirm(false)}
-                                className="flex-1 px-3.5 py-2.5 bg-muted text-muted-foreground text-base font-bold rounded border border-border"
+                                className="flex-1 rounded-lg border border-border bg-muted px-3.5 py-3 text-base font-bold text-muted-foreground transition-colors hover:bg-secondary"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleBatchDispatch}
-                                className="flex-1 px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-base font-bold rounded"
+                                className="flex-1 rounded-lg bg-emerald-600 px-3.5 py-3 text-base font-black text-white transition-colors hover:bg-emerald-500"
                             >
-                                Dispatch {batchN}
+                                Dispatch {selectedTickers.size > 0 ? selectedTickers.size : batchN}
                             </button>
                         </div>
                     </div>
@@ -1748,6 +1771,15 @@ function EmptyStateStat({ label, value }: { label: string; value: string | numbe
         <div className="rounded-lg border border-border/60 bg-secondary/20 px-4 py-3">
             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-xl font-black text-foreground" title={String(value)}>{value}</div>
+        </div>
+    );
+}
+
+function DialogStat({ label, value }: { label: string; value: string | number }) {
+    return (
+        <div className="rounded-lg border border-border/60 bg-secondary/20 px-3.5 py-3">
+            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 truncate font-mono text-lg font-black text-foreground" title={String(value)}>{value}</div>
         </div>
     );
 }
