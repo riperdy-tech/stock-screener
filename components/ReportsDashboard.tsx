@@ -314,6 +314,21 @@ export function ReportsDashboard() {
         return matchesSearch && matchesAction && matchesArchetype && matchesValuation && matchesConviction;
     });
 
+    const reportStats = useMemo(() => {
+        const completed = reports.filter((report: any) => report.status !== 'pending').length;
+        const pending = reports.length - completed;
+        const convictions = filteredReports.map((report: any) => getMeta(report).conviction).filter((value: number) => value > 0);
+        const avgConviction = convictions.length
+            ? convictions.reduce((sum: number, value: number) => sum + value, 0) / convictions.length
+            : 0;
+        return {
+            total: reports.length,
+            filtered: filteredReports.length,
+            pending,
+            avgConviction,
+        };
+    }, [reports, filteredReports]);
+
     const downloadReport = (report: any) => {
         const element = document.createElement("a");
         const file = new Blob([report.content], {type: 'text/plain'});
@@ -419,6 +434,12 @@ export function ReportsDashboard() {
                                 className="flex-1 h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
                             />
                         </div>
+                        <div className="grid grid-cols-2 gap-2 pt-1">
+                            <ResearchStat label="Shown" value={reportStats.filtered.toLocaleString()} sub={`${reportStats.total.toLocaleString()} total`} />
+                            <ResearchStat label="Pending" value={reportStats.pending.toLocaleString()} sub="Cloud queue" />
+                            <ResearchStat label="Avg Conviction" value={reportStats.avgConviction.toFixed(1)} sub="Filtered set" />
+                            <ResearchStat label="Reader" value={selectedReport ? selectedReport.ticker : "None"} sub="Active report" />
+                        </div>
                     </div>
 
                     <div className="flex-1 overflow-y-auto">
@@ -450,10 +471,15 @@ export function ReportsDashboard() {
                                             )}
                                         >
                                             <div className="flex flex-col gap-1 min-w-0">
-                                                <div className="flex items-center gap-2">
+                                                <div className="flex flex-wrap items-center gap-2">
                                                     <span className="text-xl font-black tracking-tighter text-foreground group-hover:text-blue-400 transition-colors">
                                                         {report.ticker}
                                                     </span>
+                                                    {report.status === 'pending' && (
+                                                        <span className="rounded-md border border-amber-500/30 bg-amber-500/15 px-3 py-1.5 text-base font-black uppercase tracking-tight text-amber-400">
+                                                            Pending
+                                                        </span>
+                                                    )}
                                                     {meta.valuation_status && (
                                                         <span className={clsx(
                                                             "text-base px-3 py-1.5 rounded-md font-black uppercase tracking-tight",
@@ -470,6 +496,16 @@ export function ReportsDashboard() {
                                                     {createdAt.toLocaleDateString()} 
                                                     <span className="text-white/20 font-normal">@</span>
                                                     <span className="text-blue-400/80">{createdAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                                </div>
+                                                <div className="flex flex-wrap items-center gap-2 pt-1">
+                                                    <span className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-1.5 text-base font-bold uppercase tracking-tight text-slate-300">
+                                                        {meta.action || 'ACTION N/A'}
+                                                    </span>
+                                                    {meta.archetype && (
+                                                        <span className="max-w-[15rem] truncate rounded-md border border-white/10 bg-white/[0.03] px-3 py-1.5 text-base font-bold text-muted-foreground" title={meta.archetype}>
+                                                            {meta.archetype}
+                                                        </span>
+                                                    )}
                                                 </div>
                                             </div>
                                             
@@ -744,6 +780,16 @@ export function ReportsDashboard() {
                     )}
                 </main>
             </div>
+        </div>
+    );
+}
+
+function ResearchStat({ label, value, sub }: { label: string; value: string; sub: string }) {
+    return (
+        <div className="rounded-lg border border-white/10 bg-white/[0.03] p-3">
+            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 truncate font-mono text-xl font-black text-white" title={value}>{value}</div>
+            <div className="mt-1 truncate text-base font-semibold text-muted-foreground" title={sub}>{sub}</div>
         </div>
     );
 }
