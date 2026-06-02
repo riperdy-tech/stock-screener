@@ -1311,32 +1311,47 @@ export function ScreenerDashboard() {
 
                             {/* Pagination Controls */}
                             {totalPages > 1 && (
-                                <div className="flex flex-wrap items-center justify-center gap-2 pb-8">
-                                    <button
-                                        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                                        disabled={currentPage === 1}
-                                        className="rounded-lg border border-border bg-card/70 px-4 py-2.5 text-base font-bold transition-colors hover:bg-secondary disabled:opacity-50"
-                                    >
-                                        {t('previous')}
-                                    </button>
+                                <div className="pb-8">
+                                    <div className="mx-auto flex max-w-4xl flex-col gap-3 rounded-xl border border-border/70 bg-card/75 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+                                        <div className="text-center sm:text-left">
+                                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Page {currentPage} of {totalPages}</div>
+                                            <div className="mt-1 text-lg font-black text-foreground">
+                                                Showing {filteredCount > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)} of {filteredCount.toLocaleString()}
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-wrap items-center justify-center gap-2">
+                                            <button
+                                                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                                                disabled={currentPage === 1}
+                                                className="rounded-lg border border-border bg-secondary/40 px-4 py-3 text-base font-black transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-45"
+                                            >
+                                                {t('previous')}
+                                            </button>
 
-                                    {getPageNumbers().map(p => (
-                                        <button
-                                            key={p}
-                                            onClick={() => setCurrentPage(p)}
-                                            className={`flex h-10 w-10 items-center justify-center rounded-lg text-base font-bold transition-colors ${currentPage === p ? 'bg-primary text-primary-foreground shadow-sm' : 'border border-border/60 bg-card/60 hover:bg-secondary'}`}
-                                        >
-                                            {p}
-                                        </button>
-                                    ))}
+                                            {getPageNumbers().map(p => (
+                                                <button
+                                                    key={p}
+                                                    onClick={() => setCurrentPage(p)}
+                                                    className={clsx(
+                                                        "flex h-11 min-w-11 items-center justify-center rounded-lg px-3 text-base font-black transition-colors",
+                                                        currentPage === p
+                                                            ? 'bg-primary text-primary-foreground shadow-sm'
+                                                            : 'border border-border/60 bg-secondary/30 text-muted-foreground hover:bg-secondary hover:text-foreground'
+                                                    )}
+                                                >
+                                                    {p}
+                                                </button>
+                                            ))}
 
-                                    <button
-                                        onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                                        disabled={currentPage === totalPages}
-                                        className="rounded-lg border border-border bg-card/70 px-4 py-2.5 text-base font-bold transition-colors hover:bg-secondary disabled:opacity-50"
-                                    >
-                                        {t('next')}
-                                    </button>
+                                            <button
+                                                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                                                disabled={currentPage === totalPages}
+                                                className="rounded-lg border border-border bg-secondary/40 px-4 py-3 text-base font-black transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-45"
+                                            >
+                                                {t('next')}
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             )}
                         </>
