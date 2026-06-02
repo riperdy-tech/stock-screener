@@ -630,6 +630,8 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                     onPrimary={handleReverseApply}
                     onReset={handleReverseReset}
                     tone="emerald"
+                    contextLabel="Reverse candidates"
+                    contextValue={totalResults}
                 />
             )}
             {screenMode === 'paradigm' && (
@@ -638,11 +640,22 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                     onPrimary={handleParadigmApply}
                     onReset={handleParadigmReset}
                     tone="purple"
+                    contextLabel="Paradigm candidates"
+                    contextValue={totalResults}
                 />
             )}
             {screenMode === 'youtube' && (
-                <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-4 text-base font-bold text-muted-foreground shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
-                    YouTube filters update instantly.
+                <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-4 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+                    <div className="flex items-center justify-between gap-4 rounded-lg border border-red-500/20 bg-red-500/[0.06] px-4 py-3">
+                        <div>
+                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Live YouTube filter</div>
+                            <div className="mt-1 text-base font-bold text-red-300">Updates instantly</div>
+                        </div>
+                        <div className="text-right">
+                            <div className="font-mono text-2xl font-black text-foreground">{totalResults.toLocaleString()}</div>
+                            <div className="text-base font-bold text-muted-foreground">matches</div>
+                        </div>
+                    </div>
                 </div>
             )}
             {screenMode !== 'reverse' && screenMode !== 'paradigm' && screenMode !== 'youtube' && (
@@ -652,6 +665,8 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                     onReset={handleReset}
                     tone="primary"
                     resetLabel={t('reset')}
+                    contextLabel={t('assets')}
+                    contextValue={totalResults}
                 />
             )}
         </div>
@@ -669,7 +684,7 @@ function Section({ title, children }: { title: string, children: React.ReactNode
     )
 }
 
-function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "Reset" }: { primaryLabel: string; onPrimary: () => void; onReset: () => void; tone: "emerald" | "primary" | "purple"; resetLabel?: string }) {
+function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "Reset", contextLabel, contextValue }: { primaryLabel: string; onPrimary: () => void; onReset: () => void; tone: "emerald" | "primary" | "purple"; resetLabel?: string; contextLabel?: string; contextValue?: number }) {
     const primaryClass = tone === "emerald"
         ? "bg-emerald-600 text-white hover:bg-emerald-500"
         : tone === "purple"
@@ -678,6 +693,18 @@ function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "
 
     return (
         <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-4 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+            {contextLabel && contextValue !== undefined && (
+                <div className="mb-3 flex items-center justify-between gap-4 rounded-lg border border-border/60 bg-secondary/25 px-4 py-3">
+                    <div>
+                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Current view</div>
+                        <div className="mt-1 text-base font-bold text-foreground">{contextLabel}</div>
+                    </div>
+                    <div className="text-right">
+                        <div className="font-mono text-2xl font-black text-primary">{contextValue.toLocaleString()}</div>
+                        <div className="text-base font-bold text-muted-foreground">results</div>
+                    </div>
+                </div>
+            )}
             <div className="flex gap-3">
                 <button
                     onClick={onPrimary}
