@@ -587,7 +587,7 @@ export function ReportsDashboard() {
                             </aside>
 
                             {/* Report Content */}
-                            <div className="flex-1 p-4 md:p-16 lg:p-20 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
+                            <div className="flex-1 p-4 md:p-16 lg:p-20 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
                                 {(() => {
                                     const meta = getMeta(selectedReport);
                                     
@@ -706,41 +706,41 @@ export function ReportsDashboard() {
                                                                 const id = idx >= 0 ? reportHeadings[idx].id : undefined;
                                                                 return <h2 id={id} className="text-xl md:text-2xl font-black mt-14 mb-4 text-blue-400 tracking-wide uppercase" {...props} />;
                                                             },
-                                                            h3: ({node, ...props}: any) => <h3 className="text-lg font-bold mt-8 mb-3 text-white tracking-tight" {...props} />,
-                                                            p: ({node, ...props}: any) => <p className="text-base md:text-lg leading-[1.8] mb-5 text-slate-300 font-medium" {...props} />,
+                                                            h3: ({node, ...props}: any) => <h3 className="text-xl font-black mt-8 mb-3 text-white tracking-tight" {...props} />,
+                                                            p: ({node, ...props}: any) => <p className="text-lg leading-[1.8] mb-5 text-slate-300 font-medium" {...props} />,
                                                             strong: ({node, ...props}: any) => <strong className="font-black text-slate-100" {...props} />,
                                                             em: ({node, ...props}: any) => <em className="italic text-blue-300/80" {...props} />,
                                                             hr: ({node, ...props}: any) => <hr className="my-10 border-white/10" {...props} />,
                                                             ul: ({node, ...props}: any) => <ul className="space-y-2 mb-6 list-none pl-0" {...props} />,
                                                             ol: ({node, ...props}: any) => <ol className="space-y-2 mb-6 list-decimal pl-6 text-slate-300" {...props} />,
                                                             li: ({node, ...props}: any) => (
-                                                                <li className="flex items-start gap-3 text-base md:text-lg text-slate-400 font-medium leading-[1.75]">
+                                                                <li className="flex items-start gap-3 text-lg text-slate-400 font-medium leading-[1.75]">
                                                                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500/40 mt-[9px] shrink-0"></span>
                                                                     <span>{props.children}</span>
                                                                 </li>
                                                             ),
                                                             blockquote: ({node, ...props}: any) => (
-                                                                <blockquote className="border-l-[3px] border-blue-500/50 bg-blue-500/5 px-5 py-4 rounded-r-xl italic text-base md:text-lg text-slate-200 mb-6" {...props} />
+                                                                <blockquote className="border-l-[3px] border-blue-500/50 bg-blue-500/5 px-5 py-4 rounded-r-xl italic text-lg text-slate-200 mb-6" {...props} />
                                                             ),
                                                             code: ({node, className, ...props}: any) => {
                                                                 const isInline = !className;
                                                                 if (isInline) {
-                                                                    return <code className="bg-slate-800/60 px-1.5 py-0.5 rounded text-blue-300 font-mono text-sm md:text-base" {...props} />;
+                                                                    return <code className="bg-slate-800/60 px-1.5 py-0.5 rounded text-blue-300 font-mono text-base" {...props} />;
                                                                 }
-                                                                return <code className="block bg-slate-800/60 p-4 rounded-xl text-blue-200 font-mono text-sm md:text-base overflow-x-auto mb-6" {...props} />;
+                                                                return <code className="block bg-slate-800/60 p-5 rounded-xl text-blue-200 font-mono text-base leading-7 overflow-x-auto mb-6" {...props} />;
                                                             },
                                                             pre: ({node, ...props}: any) => (
-                                                                <pre className="bg-slate-800/40 border border-white/5 rounded-xl p-4 overflow-x-auto mb-6 text-sm md:text-base" {...props} />
+                                                                <pre className="bg-slate-800/40 border border-white/5 rounded-xl p-5 overflow-x-auto mb-6 text-base leading-7" {...props} />
                                                             ),
                                                             table: ({node, ...props}: any) => (
                                                                 <div className="overflow-x-auto mb-8 rounded-xl border border-white/10">
-                                                                    <table className="w-full text-sm md:text-base border-collapse" {...props} />
+                                                                    <table className="w-full text-base border-collapse" {...props} />
                                                                 </div>
                                                             ),
                                                             thead: ({node, ...props}: any) => <thead className="bg-white/[0.03]" {...props} />,
                                                             tbody: ({node, ...props}: any) => <tbody className="divide-y divide-white/5" {...props} />,
                                                             th: ({node, ...props}: any) => <th className="px-4 py-3 text-left text-base font-black text-blue-400 uppercase tracking-wider border-b border-white/10" {...props} />,
-                                                            td: ({node, ...props}: any) => <td className="px-4 py-2.5 text-slate-300 font-medium border-b border-white/5" {...props} />,
+                                                            td: ({node, ...props}: any) => <td className="px-4 py-3 text-slate-300 font-medium border-b border-white/5 leading-7" {...props} />,
                                                         }}
                                                     >
                                                         {normalizeContent(
