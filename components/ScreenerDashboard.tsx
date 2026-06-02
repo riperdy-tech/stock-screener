@@ -1241,11 +1241,7 @@ export function ScreenerDashboard() {
                     </div>
 
                     {(loading && rawResults.length === 0) || isYoutubeUniverseLoading ? (
-                        <div className="flex min-h-72 flex-col items-center justify-center rounded-xl border border-border/70 bg-card/60 p-8 text-center text-muted-foreground animate-pulse">
-                            <RefreshCw className="mb-4 h-8 w-8 animate-spin text-primary" />
-                            <p className="text-xl font-black text-foreground">{t('initEngine')}</p>
-                            <p className="mt-2 max-w-md text-base leading-relaxed">Loading the latest screener universe and strategy overlays.</p>
-                        </div>
+                        <LoadingResultsState title={t('initEngine')} strategy={activeStrategy.title} view={resultView} />
                     ) : filteredCount === 0 ? (
                         <div className="flex min-h-72 flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-8 text-center text-muted-foreground">
                             <span className={clsx("rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider", activeStrategy.accent)}>
@@ -1752,6 +1748,48 @@ function EmptyStateStat({ label, value }: { label: string; value: string | numbe
         <div className="rounded-lg border border-border/60 bg-secondary/20 px-4 py-3">
             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-xl font-black text-foreground" title={String(value)}>{value}</div>
+        </div>
+    );
+}
+
+function LoadingResultsState({ title, strategy, view }: { title: string; strategy: string; view: ResultView }) {
+    return (
+        <div className="rounded-xl border border-border/70 bg-card/60 p-5 shadow-sm sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-start gap-3">
+                    <div className="rounded-lg border border-primary/30 bg-primary/10 p-3 text-primary">
+                        <RefreshCw className="h-6 w-6 animate-spin" />
+                    </div>
+                    <div>
+                        <p className="text-xl font-black text-foreground">{title}</p>
+                        <p className="mt-1 text-base leading-relaxed text-muted-foreground">
+                            Loading {strategy} data, overlays, and {view === 'table' ? 'table rows' : 'stock cards'}.
+                        </p>
+                    </div>
+                </div>
+                <span className="w-fit rounded-md border border-border/60 bg-secondary/30 px-3 py-1.5 text-base font-black uppercase tracking-wider text-muted-foreground">
+                    Preparing view
+                </span>
+            </div>
+            <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+                {[0, 1, 2].map((item) => (
+                    <div key={item} className="rounded-lg border border-border/60 bg-secondary/15 p-4">
+                        <div className="flex items-start justify-between gap-4">
+                            <div className="space-y-3">
+                                <div className="h-6 w-24 animate-pulse rounded bg-secondary" />
+                                <div className="h-4 w-44 animate-pulse rounded bg-secondary/70" />
+                            </div>
+                            <div className="h-8 w-16 animate-pulse rounded bg-secondary/70" />
+                        </div>
+                        <div className="mt-5 h-16 animate-pulse rounded-lg bg-secondary/50" />
+                        <div className="mt-4 grid grid-cols-3 gap-2">
+                            <div className="h-12 animate-pulse rounded bg-secondary/45" />
+                            <div className="h-12 animate-pulse rounded bg-secondary/45" />
+                            <div className="h-12 animate-pulse rounded bg-secondary/45" />
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
