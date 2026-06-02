@@ -1248,8 +1248,16 @@ export function ScreenerDashboard() {
                         </div>
                     ) : filteredCount === 0 ? (
                         <div className="flex min-h-72 flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-8 text-center text-muted-foreground">
-                            <p className="text-2xl font-black text-foreground">No matching stocks</p>
-                            <p className="mt-2 max-w-md text-base leading-relaxed">{t('noStocks')}</p>
+                            <span className={clsx("rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider", activeStrategy.accent)}>
+                                {activeStrategy.title}
+                            </span>
+                            <p className="mt-4 text-2xl font-black text-foreground">No matching stocks</p>
+                            <p className="mt-2 max-w-xl text-base leading-relaxed">{t('noStocks')}</p>
+                            <div className="mt-5 grid w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
+                                <EmptyStateStat label="Market" value={selectedMarket} />
+                                <EmptyStateStat label="Active Filters" value={visibleFilterChips.length + hiddenFilterChipCount} />
+                                <EmptyStateStat label="View" value={resultView === 'table' ? 'Table' : 'Cards'} />
+                            </div>
                             <button onClick={resetActiveFilters} className="mt-5 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2.5 text-base font-black text-primary transition-colors hover:bg-primary/15">{t('resetFilters')}</button>
                         </div>
                     ) : (
@@ -1735,6 +1743,15 @@ function SummaryMetric({ label, value }: { label: string; value: string | number
         <div className="rounded-md border border-border/60 bg-secondary/20 px-3.5 py-3">
             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-lg font-black text-foreground" title={String(value)}>{value}</div>
+        </div>
+    );
+}
+
+function EmptyStateStat({ label, value }: { label: string; value: string | number }) {
+    return (
+        <div className="rounded-lg border border-border/60 bg-secondary/20 px-4 py-3">
+            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 truncate font-mono text-xl font-black text-foreground" title={String(value)}>{value}</div>
         </div>
     );
 }
