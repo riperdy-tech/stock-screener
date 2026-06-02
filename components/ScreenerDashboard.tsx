@@ -133,6 +133,81 @@ function adaptRowsToScreeningResults(
     }) as unknown as ScreeningResult[];
 }
 
+function adaptStockJsonRowsToScreeningResults(
+    rawData: any[],
+    reverseScores: Record<string, ReverseResult> = {}
+): ScreeningResult[] {
+    return rawData.map(item => {
+        const metrics = item.metrics || {};
+        const sym = item.symbol || '';
+        return {
+            candidate: {
+                ...item,
+                symbol: sym,
+                name: item.name,
+                description: item.description,
+                price: item.price,
+                marketCap: item.marketCap,
+                sector: item.sector,
+                industry: item.industry,
+
+                revenueGrowth: metrics.revenueGrowth,
+                grossMargin: metrics.grossMargin,
+                roic: metrics.roic,
+                pegRatio: metrics.pegRatio,
+                priceToSales: metrics.psRatio || 0,
+                insiderOwnership: metrics.insiderOwnership,
+                zScore: metrics.zScore,
+                peRatio: item.peRatio,
+                floatShares: metrics.float,
+                epsTtm: metrics.epsTtm,
+                previousEpsTtm: metrics.previousEpsTtm,
+                forwardEpsEstimate: metrics.forwardEpsEstimate,
+                priceToBook: metrics.priceToBook,
+                fiveYearAveragePe: metrics.fiveYearAveragePe,
+                monthlyMa20: metrics.monthlyMa20,
+                monthlyCloses: metrics.monthlyCloses,
+                quarterlyEps: metrics.quarterlyEps,
+                consecutiveGrowth: metrics.consecutiveGrowth,
+                epsYoyGrowth: metrics.epsYoyGrowth,
+                revenueYoyGrowth: metrics.revenueYoyGrowth,
+            },
+            metrics: {
+                ...metrics,
+                psRatio: metrics.psRatio,
+                pegRatio: metrics.pegRatio,
+                float: metrics.float,
+                ocf: metrics.ocf,
+                capex: metrics.capex
+            },
+            passed: item.status === "Pass",
+            score: item.score,
+            reasons: item.reasons || [],
+            failCodes: item.failCodes || [],
+            flags: [],
+            financialData: {
+                Calculated_Metrics: {
+                    EPS_TTM: metrics.epsTtm,
+                    Forward_EPS_Estimate: metrics.forwardEpsEstimate,
+                    Price_to_Book: metrics.priceToBook,
+                    PE_5Y_Avg: metrics.fiveYearAveragePe,
+                    Monthly_MA_20: metrics.monthlyMa20,
+                    EPS_YoY_Growth: metrics.epsYoyGrowth,
+                    Prior_Year_TTM_EPS: metrics.previousEpsTtm,
+                    Revenue_YoY_Growth: metrics.revenueYoyGrowth,
+                    Consecutive_YoY_EPS_Growth: metrics.consecutiveGrowth,
+                },
+                Monthly_Closes: metrics.monthlyCloses,
+                Quarterly_EPS: metrics.quarterlyEps,
+            },
+            description: item.description,
+            industry: item.industry,
+            reverse: reverseScores[sym] || undefined,
+            paradigm: item.paradigm || undefined,
+        };
+    }) as unknown as ScreeningResult[];
+}
+
 export function ScreenerDashboard() {
     const { t, language, setLanguage } = useLanguage();
     const [loading, setLoading] = useState(true);
@@ -444,15 +519,27 @@ export function ScreenerDashboard() {
     async function loadYoutubeData() {
         setYoutubeLoading(true);
         try {
-            const { data: rawData } = await fetchStocks('US');
-            const [reverseScores, paradigmScores] = await Promise.all([
-                fetchReverseScores().catch(() => ({})),
-                fetchParadigmScores().catch(() => ({})),
-            ]);
-            setYoutubeResults(adaptRowsToScreeningResults(rawData as any[], reverseScores, paradigmScores));
-        } catch (err) {
-            console.error("Failed to load YouTube strategy universe:", err);
-            setYoutubeResults([]);
+            const response = await fetch(`/data/stocks.json?t=${new Date().getTime()}`);
+            if (!response.ok) throw new Error("Failed to fetch YouTube stock data");
+            const rawData = await response.json();
+            const reverseScores = await fetchReverseScores().catch(() => ({}));
+            const usRows = (rawData as any[]).filter(item => {
+                const symbol = item.symbol || '';
+                return !symbol.endsWith('.KS') && !symbol.endsWith('.KQ') && !symbol.endsWith('.TW') && !symbol.endsWith('.TWO');
+            });
+            setYoutubeResults(adaptStockJsonRowsToScreeningResults(usRows, reverseScores));
+        } catch (jsonErr) {
+            try {
+                const { data: rawData } = await fetchStocks('US');
+                const [reverseScores, paradigmScores] = await Promise.all([
+                    fetchReverseScores().catch(() => ({})),
+                    fetchParadigmScores().catch(() => ({})),
+                ]);
+                setYoutubeResults(adaptRowsToScreeningResults(rawData as any[], reverseScores, paradigmScores));
+            } catch (csvErr) {
+                console.error("Failed to load YouTube strategy universe:", jsonErr, csvErr);
+                setYoutubeResults([]);
+            }
         } finally {
             setYoutubeLoading(false);
         }

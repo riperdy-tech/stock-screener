@@ -34,6 +34,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
     const companyName = candidate.name || candidate.symbol;
     const pricePrefix = market === 'Korea' ? 'KRW ' : market === 'Taiwan' ? 'NT$' : '$';
     const revenueGrowth = Number(candidate.revenueGrowth || 0);
+    const marketCapLabel = formatCardMarketCap(Number(candidate.marketCap || 0), market);
     const paradigm = result.paradigm;
     const reverse = result.reverse;
     const hasParadigm = !!(paradigm?.pdm_themes && paradigm.pdm_themes.length > 0);
@@ -74,11 +75,14 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                     </div>
 
                     <div className="shrink-0 text-right">
-                        <div className="font-mono text-base font-black leading-none text-foreground">
+                        <div className="font-mono text-lg font-black leading-none text-foreground">
                             {pricePrefix}{candidate.price.toLocaleString('en-US', {
                                 minimumFractionDigits: (market === 'Korea' || market === 'Taiwan') ? 0 : 2,
                                 maximumFractionDigits: (market === 'Korea' || market === 'Taiwan') ? 0 : 2
                             })}
+                        </div>
+                        <div className="mt-1 font-mono text-base font-bold text-muted-foreground">
+                            {marketCapLabel}
                         </div>
                         <div className={clsx("mt-1 flex items-center justify-end gap-1 text-base font-black", revenueGrowth >= 0 ? 'text-success' : 'text-danger')}>
                             {revenueGrowth >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
@@ -168,6 +172,14 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
             </div>
         </div>
     );
+}
+
+function formatCardMarketCap(value: number, market: 'US' | 'India' | 'Korea' | 'Taiwan') {
+    if (!value || !Number.isFinite(value)) return 'MCap n/a';
+    if (market === 'Korea') return `${(value / 1_000_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}B KRW`;
+    if (market === 'Taiwan') return `NT$${(value / 1_000_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}B`;
+    if (Math.abs(value) >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}B`;
+    return `$${(value / 1_000_000).toLocaleString('en-US', { maximumFractionDigits: 0 })}M`;
 }
 
 function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: ScreeningResult; screenMode: ScreenMode; youtubeEvaluation?: YoutubeStrategyEvaluation }) {
