@@ -1566,7 +1566,7 @@ export function ScreenerDashboard() {
             )}
 
             {/* Phase 11d: Batch Progress Panel */}
-            {batchId && (
+            {batchId && screenMode !== 'reverse' && (
                 <div className="fixed bottom-4 right-4 z-[100] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col gap-3 rounded-xl border border-emerald-500/30 bg-[#1a1f2e] p-5 shadow-2xl animate-in slide-in-from-bottom-5 sm:bottom-6 sm:right-6">
                     <div className="flex justify-between items-start gap-4">
                         <div className="flex items-start gap-3">
