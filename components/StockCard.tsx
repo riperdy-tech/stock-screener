@@ -131,43 +131,46 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                     <ActiveLensPanel result={result} screenMode={screenMode} youtubeEvaluation={youtubeEvaluation} />
                 </div>
 
-                <div className="mt-3 flex flex-wrap gap-1.5 border-t border-border/60 pt-3">
-                    <SignalChip
-                        icon={<Telescope className="h-4 w-4" />}
-                        label="100B"
-                        value={`${Math.round(result.score)}`}
-                        tone={result.passed ? "success" : result.score > 80 ? "warning" : "muted"}
-                    />
-                    {hasReverse && (
+                <div className="mt-3 border-t border-border/60 pt-3">
+                    <div className="mb-2 text-base font-black uppercase tracking-wider text-muted-foreground">Other signals</div>
+                    <div className="flex flex-wrap gap-1.5">
                         <SignalChip
-                            icon={<ShieldCheck className="h-4 w-4" />}
-                            label="REV"
-                            value={reverse?.rev_composite != null ? `${Math.round(reverse.rev_composite)}` : reverse?.rev_band || "n/a"}
-                            tone={reverse?.rev_band === 'High' ? "success" : reverse?.rev_band === 'Solid' ? "primary" : "muted"}
+                            icon={<Telescope className="h-4 w-4" />}
+                            label="100B"
+                            value={`${Math.round(result.score)}`}
+                            tone={result.passed ? "success" : result.score > 80 ? "warning" : "muted"}
                         />
-                    )}
-                    {hasParadigm && (
-                        <SignalChip
-                            icon={<Layers3 className="h-4 w-4" />}
-                            label="PDM"
-                            value={paradigm?.pdm_signal != null ? `${Math.round(paradigm.pdm_signal)}` : paradigmLabel}
-                            tone={paradigmBand === 'high' ? "success" : paradigmBand === 'mid' ? "primary" : paradigmBand === 'watch' ? "warning" : "muted"}
-                        />
-                    )}
-                    {hasYoutube && (
-                        <SignalChip
-                            icon={<Youtube className="h-4 w-4" />}
-                            label="YT"
-                            value={`${youtubeEvaluation.matchedStrategies.length}`}
-                            tone={youtubeEvaluation.riskTier === 'standard' ? "primary" : "warning"}
-                        />
-                    )}
-                    {paradigm?.pdm_flags?.some((f: string) => f.startsWith('macro_')) && (
-                        <span className="rounded border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-base font-black text-red-400">Macro</span>
-                    )}
-                    {paradigm?.pdm_flags?.includes('accelerating') && (
-                        <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-base font-black text-emerald-400">Accel</span>
-                    )}
+                        {hasReverse && (
+                            <SignalChip
+                                icon={<ShieldCheck className="h-4 w-4" />}
+                                label="REV"
+                                value={reverse?.rev_composite != null ? `${Math.round(reverse.rev_composite)}` : reverse?.rev_band || "n/a"}
+                                tone={reverse?.rev_band === 'High' ? "success" : reverse?.rev_band === 'Solid' ? "primary" : "muted"}
+                            />
+                        )}
+                        {hasParadigm && (
+                            <SignalChip
+                                icon={<Layers3 className="h-4 w-4" />}
+                                label="PDM"
+                                value={paradigm?.pdm_signal != null ? `${Math.round(paradigm.pdm_signal)}` : paradigmLabel}
+                                tone={paradigmBand === 'high' ? "success" : paradigmBand === 'mid' ? "primary" : paradigmBand === 'watch' ? "warning" : "muted"}
+                            />
+                        )}
+                        {hasYoutube && (
+                            <SignalChip
+                                icon={<Youtube className="h-4 w-4" />}
+                                label="YT"
+                                value={`${youtubeEvaluation.matchedStrategies.length}`}
+                                tone={youtubeEvaluation.riskTier === 'standard' ? "primary" : "warning"}
+                            />
+                        )}
+                        {paradigm?.pdm_flags?.some((f: string) => f.startsWith('macro_')) && (
+                            <span className="rounded border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-base font-black text-red-400">Macro</span>
+                        )}
+                        {paradigm?.pdm_flags?.includes('accelerating') && (
+                            <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-base font-black text-emerald-400">Accel</span>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
