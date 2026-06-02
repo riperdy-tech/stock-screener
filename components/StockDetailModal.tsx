@@ -501,10 +501,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* WS1: Paradigm Dimension Breakdown */}
                         {result.paradigm && (result.paradigm.pdm_themes?.length > 0 || result.paradigm.pdm_signal != null) && (
-                            <div id="scorecard-paradigm" className="scroll-mt-36 rounded-xl border border-purple-500/25 bg-purple-500/[0.04] p-5 shadow-sm">
-                                <h3 className="text-2xl font-black mb-4 flex items-center gap-2 text-purple-400">
-                                    <Activity className="h-5 w-5" /> Paradigm Dimension (Secular Themes)
-                                </h3>
+                            <div id="scorecard-paradigm" className="scroll-mt-36 rounded-xl border border-purple-500/25 bg-purple-500/[0.04] p-5 shadow-sm sm:p-6">
+                                <div className="mb-5">
+                                    <SectionHeading
+                                        icon={<Layers3 className="h-5 w-5 text-purple-400" />}
+                                        title="Paradigm Dimension"
+                                        body="Secular-theme fit, momentum, and economics are shown first because they explain the stock's larger market setup."
+                                    />
+                                </div>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                                     <ReverseStat label="Signal" value={result.paradigm.pdm_signal != null ? result.paradigm.pdm_signal : 'n/a'} />
                                     <ReverseStat label="Band" value={result.paradigm.pdm_band || 'n/a'} band={result.paradigm.pdm_band} />
@@ -562,10 +566,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         )}
 
                         {youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0 && (
-                            <div id="scorecard-youtube" className="scroll-mt-36 rounded-xl border border-red-500/25 bg-red-500/[0.04] p-5 shadow-sm">
-                                <h3 className="text-2xl font-black mb-4 flex items-center gap-2 text-red-300">
-                                    <Activity className="h-5 w-5" /> YouTube Strategy Lens
-                                </h3>
+                            <div id="scorecard-youtube" className="scroll-mt-36 rounded-xl border border-red-500/25 bg-red-500/[0.04] p-5 shadow-sm sm:p-6">
+                                <div className="mb-5">
+                                    <SectionHeading
+                                        icon={<Youtube className="h-5 w-5 text-red-300" />}
+                                        title="YouTube Strategy Lens"
+                                        body="Video-playbook matches, EPS state, valuation setup, and position-size guardrail in one compact view."
+                                    />
+                                </div>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                                     <ReverseStat label="Primary Match" value={youtubeEvaluation.matchedStrategies[0]} />
                                     <ReverseStat label="Matches" value={youtubeEvaluation.matchedStrategies.length} />
@@ -583,10 +591,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* Phase 9: Reverse Engine Breakdown */}
                         {result.reverse && result.reverse.rev_band && result.reverse.rev_band !== 'Excluded' && (
-                            <div id="scorecard-reverse" className="scroll-mt-36 rounded-xl border border-emerald-500/25 bg-emerald-500/[0.04] p-5 shadow-sm">
-                                <h3 className="text-2xl font-black mb-4 flex items-center gap-2 text-emerald-400">
-                                    <Activity className="h-5 w-5" /> Reverse Engine (v1.2)
-                                </h3>
+                            <div id="scorecard-reverse" className="scroll-mt-36 rounded-xl border border-emerald-500/25 bg-emerald-500/[0.04] p-5 shadow-sm sm:p-6">
+                                <div className="mb-5">
+                                    <SectionHeading
+                                        icon={<ShieldCheck className="h-5 w-5 text-emerald-400" />}
+                                        title="Reverse Engine"
+                                        body="Composite ranking, archetype route, valuation margin, survivability, and impairment risk for the reverse-screening lens."
+                                    />
+                                </div>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                                     <ReverseStat label="Composite" value={result.reverse.rev_composite != null ? Math.round(result.reverse.rev_composite) : 'n/a'} />
                                     <ReverseStat label="Band" value={result.reverse.rev_band || 'n/a'} band={result.reverse.rev_band} />
