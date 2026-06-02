@@ -466,57 +466,75 @@ export function ReportsDashboard() {
                                             key={report.id}
                                             onClick={() => setSelectedReport(report)}
                                             className={clsx(
-                                                "w-full text-left p-4 border-b border-white/5 transition-all hover:bg-white/5 flex items-center justify-between gap-4 group relative cursor-pointer active:bg-white/10",
-                                                selectedReport?.id === report.id ? "bg-blue-500/10 border-r-4 border-r-blue-500 shadow-[inset_0_0_20px_rgba(59,130,246,0.1)]" : ""
+                                                "group relative flex w-full cursor-pointer flex-col gap-4 border-b border-white/5 p-5 text-left transition-all hover:bg-white/[0.045] active:bg-white/10",
+                                                selectedReport?.id === report.id ? "bg-blue-500/10 shadow-[inset_4px_0_0_rgba(59,130,246,0.95),inset_0_0_20px_rgba(59,130,246,0.1)]" : ""
                                             )}
                                         >
-                                            <div className="flex flex-col gap-1 min-w-0">
-                                                <div className="flex flex-wrap items-center gap-2">
-                                                    <span className="text-xl font-black tracking-tighter text-foreground group-hover:text-blue-400 transition-colors">
-                                                        {report.ticker}
-                                                    </span>
-                                                    {report.status === 'pending' && (
-                                                        <span className="rounded-md border border-amber-500/30 bg-amber-500/15 px-3 py-1.5 text-base font-black uppercase tracking-tight text-amber-400">
-                                                            Pending
+                                            <div className="flex items-start justify-between gap-4">
+                                                <div className="min-w-0">
+                                                    <div className="flex flex-wrap items-center gap-2">
+                                                        <span className="text-2xl font-black tracking-tight text-foreground transition-colors group-hover:text-blue-400">
+                                                            {report.ticker}
                                                         </span>
-                                                    )}
-                                                    {meta.valuation_status && (
-                                                        <span className={clsx(
-                                                            "text-base px-3 py-1.5 rounded-md font-black uppercase tracking-tight",
-                                                            meta.valuation_status.includes('UNDERVALUED') ? "bg-green-500/20 text-green-400 border border-green-500/20" :
-                                                            meta.valuation_status === 'OVERVALUED' ? "bg-red-500/20 text-red-400 border border-red-500/20" :
-                                                            "bg-white/5 text-muted-foreground border border-white/10"
-                                                        )}>
-                                                            {meta.valuation_status.replace(/_/g, ' ')}
-                                                        </span>
-                                                    )}
+                                                        {report.status === 'pending' && (
+                                                            <span className="rounded-md border border-amber-500/30 bg-amber-500/15 px-3 py-1.5 text-base font-black uppercase tracking-tight text-amber-400">
+                                                                Pending
+                                                            </span>
+                                                        )}
+                                                        {meta.valuation_status && (
+                                                            <span className={clsx(
+                                                                "rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-tight",
+                                                                meta.valuation_status.includes('UNDERVALUED') ? "border-green-500/20 bg-green-500/20 text-green-400" :
+                                                                meta.valuation_status === 'OVERVALUED' ? "border-red-500/20 bg-red-500/20 text-red-400" :
+                                                                "border-white/10 bg-white/5 text-muted-foreground"
+                                                            )}>
+                                                                {meta.valuation_status.replace(/_/g, ' ')}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                    <div className="mt-2 flex items-center gap-2 text-base font-bold uppercase tracking-tight text-muted-foreground">
+                                                        <Calendar className="h-4 w-4 text-blue-500 opacity-70" />
+                                                        {createdAt.toLocaleDateString()}
+                                                        <span className="text-white/20 font-normal">@</span>
+                                                        <span className="text-blue-400/80">{createdAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                                    </div>
                                                 </div>
-                                                <div className="flex items-center gap-2 text-base text-muted-foreground font-bold uppercase tracking-tight">
-                                                    <Calendar className="h-4 w-4 opacity-50 text-blue-500" />
-                                                    {createdAt.toLocaleDateString()} 
-                                                    <span className="text-white/20 font-normal">@</span>
-                                                    <span className="text-blue-400/80">{createdAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                                                </div>
-                                                <div className="flex flex-wrap items-center gap-2 pt-1">
-                                                    <span className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-1.5 text-base font-bold uppercase tracking-tight text-slate-300">
-                                                        {meta.action || 'ACTION N/A'}
-                                                    </span>
-                                                    {meta.archetype && (
-                                                        <span className="max-w-[15rem] truncate rounded-md border border-white/10 bg-white/[0.03] px-3 py-1.5 text-base font-bold text-muted-foreground" title={meta.archetype}>
-                                                            {meta.archetype}
-                                                        </span>
-                                                    )}
+
+                                                <div className="shrink-0 text-right">
+                                                    <div className={clsx(
+                                                        "rounded-lg border px-3 py-1.5 text-base font-black tracking-tight shadow-md",
+                                                        isPositive ? "border-green-500/30 bg-green-500/20 text-green-400" : "border-red-500/30 bg-red-500/20 text-red-400"
+                                                    )}>
+                                                        {isPositive ? '+' : ''}{upside.toFixed(1)}%
+                                                    </div>
+                                                    <span className="mt-1.5 block text-base font-black uppercase tracking-[0.14em] text-muted-foreground opacity-60">Alpha</span>
                                                 </div>
                                             </div>
-                                            
-                                            <div className="flex flex-col items-end gap-1">
-                                                <div className={clsx(
-                                                    "px-3 py-1.5 rounded-lg text-base font-black tracking-tight shadow-md border",
-                                                    isPositive ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-red-500/20 text-red-400 border-red-500/30"
-                                                )}>
-                                                    {isPositive ? '+' : ''}{upside.toFixed(1)}%
+
+                                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                                                <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-3">
+                                                    <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Action</div>
+                                                    <div className="mt-1 truncate text-lg font-black text-slate-200" title={meta.action || 'ACTION N/A'}>
+                                                        {meta.action || 'ACTION N/A'}
+                                                    </div>
                                                 </div>
-                                                <span className="text-base font-black text-muted-foreground tracking-[0.14em] uppercase opacity-60">ALPHA</span>
+                                                {meta.archetype && (
+                                                    <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-3">
+                                                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Archetype</div>
+                                                        <div className="mt-1 truncate text-lg font-black text-slate-300" title={meta.archetype}>
+                                                            {meta.archetype}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <div className="flex items-center justify-between gap-3 border-t border-white/5 pt-3 text-base font-bold text-muted-foreground">
+                                                <span className="truncate">
+                                                    {selectedReport?.id === report.id ? "Reading this report" : "Open report reader"}
+                                                </span>
+                                                <span className="text-blue-400 opacity-0 transition-opacity group-hover:opacity-100">
+                                                    View
+                                                </span>
                                             </div>
                                         </button>
                                     );
