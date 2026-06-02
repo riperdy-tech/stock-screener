@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Terminal, X, RefreshCw } from "lucide-react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Terminal, X, RefreshCw, Radio, FileText } from "lucide-react";
 
 interface LogConsoleProps {
     isOpen: boolean;
@@ -82,19 +82,22 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
 
     if (!isOpen) return null;
 
+    const lineCount = logs ? logs.split('\n').filter((line) => line.trim()).length : 0;
+    const supabaseConnected = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
-            <div className="flex h-[84vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#0c0c0c] font-mono text-base shadow-2xl">
+            <div className="flex h-[86vh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#0c0c0c] text-base shadow-2xl">
 
                 {/* Header */}
                 <div className="flex flex-col gap-4 border-b border-gray-800 bg-[#111] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-start gap-3 text-green-500">
                         <div className="rounded-lg border border-green-500/25 bg-green-500/10 p-2">
-                            <Terminal className="h-5 w-5" />
+                            <Terminal className="h-6 w-6" />
                         </div>
                         <div>
-                            <h2 className="text-xl font-black tracking-tight text-white">System Logs</h2>
-                            <p className="mt-1 text-base font-medium text-gray-400">Scanner runtime stream and cloud sync status.</p>
+                            <h2 className="text-2xl font-black tracking-tight text-white">System Logs</h2>
+                            <p className="mt-1 text-base font-medium leading-relaxed text-gray-400">Scanner runtime stream, static log baseline, and cloud sync status.</p>
                         </div>
                     </div>
                     <div className="flex items-center justify-between gap-4 sm:justify-end">
@@ -113,10 +116,16 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                     </div>
                 </div>
 
+                <div className="grid grid-cols-1 gap-3 border-b border-gray-800 bg-[#0f0f0f] px-5 py-4 sm:grid-cols-3">
+                    <LogStat icon={<FileText className="h-4 w-4" />} label="Static Source" value="scan.log" sub="public/data baseline" />
+                    <LogStat icon={<Radio className="h-4 w-4" />} label="Live Stream" value={supabaseConnected ? "Connected" : "Unavailable"} sub={supabaseConnected ? "Supabase channel ready" : "Missing public keys"} tone={supabaseConnected ? "success" : "danger"} />
+                    <LogStat icon={<Terminal className="h-4 w-4" />} label="Lines Loaded" value={lineCount.toLocaleString()} sub={logs ? "Non-empty log lines" : "Waiting for data"} />
+                </div>
+
                 {/* Log Content */}
-                <div className="flex-1 space-y-1 overflow-y-auto p-5 text-gray-300">
+                <div className="flex-1 space-y-1 overflow-y-auto bg-[#070707] p-5 font-mono text-gray-300">
                     {logs ? (
-                        <pre className="whitespace-pre-wrap leading-7">{logs}</pre>
+                        <pre className="whitespace-pre-wrap text-base leading-8">{logs}</pre>
                     ) : (
                         <div className="flex h-full flex-col items-center justify-center space-y-3 text-center text-gray-500">
                             <RefreshCw className="h-6 w-6 animate-spin" />
@@ -132,15 +141,30 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                     <div className="flex flex-wrap items-center gap-3">
                         <span>Source: public/data/scan.log</span>
                         <div className="flex items-center gap-2 rounded-full border border-gray-800 bg-white/[0.03] px-3 py-1.5">
-                            <div className={`h-2.5 w-2.5 rounded-full ${process.env.NEXT_PUBLIC_SUPABASE_URL ? 'bg-green-500' : 'bg-red-500'}`} />
-                            <span className={process.env.NEXT_PUBLIC_SUPABASE_URL ? 'text-gray-400' : 'text-red-400'}>
-                                {process.env.NEXT_PUBLIC_SUPABASE_URL ? 'Supabase Connected' : 'Supabase Disconnected (Keys Missing)'}
+                            <div className={`h-2.5 w-2.5 rounded-full ${supabaseConnected ? 'bg-green-500' : 'bg-red-500'}`} />
+                            <span className={supabaseConnected ? 'text-gray-400' : 'text-red-400'}>
+                                {supabaseConnected ? 'Supabase Connected' : 'Supabase Disconnected (Keys Missing)'}
                             </span>
                         </div>
                     </div>
                     <span>Updating in real-time...</span>
                 </div>
             </div>
+        </div>
+    );
+}
+
+function LogStat({ icon, label, value, sub, tone = "neutral" }: { icon: ReactNode; label: string; value: string; sub: string; tone?: "neutral" | "success" | "danger" }) {
+    return (
+        <div className="rounded-lg border border-gray-800 bg-white/[0.03] p-4">
+            <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider text-gray-500">
+                {icon}
+                {label}
+            </div>
+            <div className={`mt-2 truncate font-mono text-xl font-black ${tone === "success" ? "text-green-400" : tone === "danger" ? "text-red-400" : "text-white"}`} title={value}>
+                {value}
+            </div>
+            <div className="mt-1 truncate text-base font-medium text-gray-500" title={sub}>{sub}</div>
         </div>
     );
 }
