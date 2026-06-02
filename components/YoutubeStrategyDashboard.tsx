@@ -114,6 +114,15 @@ function SummaryCard({ label, value, sub }: { label: string; value: string; sub:
     );
 }
 
+function EmptyYoutubeStat({ label, value }: { label: string; value: string }) {
+    return (
+        <div className="rounded-lg border border-border/60 bg-secondary/25 px-4 py-3">
+            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 truncate font-mono text-lg font-black text-foreground" title={value}>{value}</div>
+        </div>
+    );
+}
+
 export function YoutubeStrategyDashboard() {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -275,9 +284,28 @@ export function YoutubeStrategyDashboard() {
                         <p className="text-xl font-black text-foreground">Evaluating YouTube strategy filters...</p>
                     </div>
                 ) : filteredRows.length === 0 ? (
-                    <div className="h-72 rounded-xl border border-dashed border-border bg-card/50 flex flex-col items-center justify-center text-muted-foreground gap-2 text-center px-6">
-                        <p className="text-2xl font-black text-foreground">No matching stocks found.</p>
-                        <p className="text-base max-w-2xl leading-relaxed">This can happen if the current CSV does not include enough EPS, P/B, 5-year P/E, monthly close, or forward EPS fields for the selected strategy.</p>
+                    <div className="flex min-h-80 flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 px-6 py-8 text-center text-muted-foreground">
+                        <span className="rounded-md border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-base font-black uppercase tracking-wider text-red-300">
+                            {activeFilter?.label || "YouTube Strategy"}
+                        </span>
+                        <p className="mt-4 text-2xl font-black text-foreground">No matching stocks found.</p>
+                        <p className="mt-2 max-w-2xl text-base leading-relaxed">This can happen if the current CSV does not include enough EPS, P/B, 5-year P/E, monthly close, or forward EPS fields for the selected strategy.</p>
+                        <div className="mt-5 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
+                            <EmptyYoutubeStat label="Universe" value={rows.length.toLocaleString()} />
+                            <EmptyYoutubeStat label="Filter" value={activeFilter?.label || "Any"} />
+                            <EmptyYoutubeStat label="Search" value={search.trim() || "None"} />
+                        </div>
+                        {(search || strategyFilter !== "any") && (
+                            <button
+                                onClick={() => {
+                                    setSearch("");
+                                    setStrategyFilter("any");
+                                }}
+                                className="mt-5 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2.5 text-base font-black text-primary transition-colors hover:bg-primary/15"
+                            >
+                                Clear YouTube filters
+                            </button>
+                        )}
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
