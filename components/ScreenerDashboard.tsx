@@ -757,6 +757,9 @@ export function ScreenerDashboard() {
         paradigm: rawResults.filter(r => r.paradigm?.pdm_themes && r.paradigm.pdm_themes.length > 0).length,
         youtube: youtubeTotals.any,
     }), [rawResults, youtubeTotals]);
+    const isBaseUniverseLoading = loading && rawResults.length === 0;
+    const isYoutubeCountLoading = youtubeLoading && youtubeSourceResults.length === 0;
+    const formatCount = (value: number, isLoading = isBaseUniverseLoading) => isLoading ? 'Loading' : value.toLocaleString();
     const reverseBandCounts = useMemo(() => {
         const counts: Record<string, number> = {};
         rawResults.forEach(r => {
@@ -1017,6 +1020,7 @@ export function ScreenerDashboard() {
                                 const Icon = meta.icon;
                                 const isActive = id === screenMode;
                                 const count = strategyCounts[id];
+                                const countLabel = formatCount(count, id === 'youtube' ? isYoutubeCountLoading : isBaseUniverseLoading);
                                 const content = (
                                     <div className={clsx(
                                         "h-full min-h-[168px] rounded-lg border p-5 text-left transition-all",
@@ -1042,7 +1046,7 @@ export function ScreenerDashboard() {
                                         </div>
                                         <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-2">
                                             <span className="text-base font-bold uppercase text-muted-foreground">{meta.metricLabel}</span>
-                                            <span className="font-mono text-lg font-black text-foreground">{count == null ? 'Open' : count.toLocaleString()}</span>
+                                            <span className="font-mono text-lg font-black text-foreground">{countLabel}</span>
                                         </div>
                                     </div>
                                 );
@@ -1064,7 +1068,7 @@ export function ScreenerDashboard() {
                                 <SubCard
                                     key={item.value}
                                     label={item.label}
-                                    value={youtubeTotals[item.value].toLocaleString()}
+                                    value={formatCount(youtubeTotals[item.value], isYoutubeCountLoading)}
                                     detail={item.description}
                                     active={youtubeFilter === item.value}
                                     tone="red"
@@ -1075,7 +1079,7 @@ export function ScreenerDashboard() {
                                 <SubCard
                                     key={band}
                                     label={band}
-                                    value={(reverseBandCounts[band] || 0).toLocaleString()}
+                                    value={formatCount(reverseBandCounts[band] || 0)}
                                     detail={band === 'High' ? 'Composite >= 70' : band === 'Solid' ? 'Composite 55-70' : band === 'Watchlist' ? 'Composite 40-55' : band === 'Monitor' ? 'Composite 25-40' : 'Below monitor band'}
                                     active={reverseFilters.bands.includes(band)}
                                     tone="emerald"
@@ -1097,7 +1101,7 @@ export function ScreenerDashboard() {
                                 <SubCard
                                     key={item.id}
                                     label={item.label}
-                                    value={(paradigmBandCounts[item.id] || 0).toLocaleString()}
+                                    value={formatCount(paradigmBandCounts[item.id] || 0)}
                                     detail="Paradigm conviction tier"
                                     active={paradigmFilters.bands.includes(item.id)}
                                     tone="purple"
@@ -1110,7 +1114,7 @@ export function ScreenerDashboard() {
                                 />
                             ))}
                             {screenMode === '100bagger' && [
-                                { label: 'Strict Pass', value: strategyCounts['100bagger'].toLocaleString(), detail: 'Passed current strict status' },
+                                { label: 'Strict Pass', value: formatCount(strategyCounts['100bagger']), detail: 'Passed current strict status' },
                                 { label: 'Min Growth', value: `${filters.minRevenueGrowth}%`, detail: 'Revenue growth floor' },
                                 { label: 'Max Price', value: selectedMarket === 'US' ? `$${filters.maxPrice}` : String(filters.maxPrice), detail: 'Current price ceiling' },
                                 { label: 'Min ROIC', value: `${filters.minROIC}%`, detail: 'Return on invested capital' },
