@@ -519,27 +519,15 @@ export function ScreenerDashboard() {
     async function loadYoutubeData() {
         setYoutubeLoading(true);
         try {
-            const response = await fetch(`/data/stocks.json?t=${new Date().getTime()}`);
-            if (!response.ok) throw new Error("Failed to fetch YouTube stock data");
-            const rawData = await response.json();
-            const reverseScores = await fetchReverseScores().catch(() => ({}));
-            const usRows = (rawData as any[]).filter(item => {
-                const symbol = item.symbol || '';
-                return !symbol.endsWith('.KS') && !symbol.endsWith('.KQ') && !symbol.endsWith('.TW') && !symbol.endsWith('.TWO');
-            });
-            setYoutubeResults(adaptStockJsonRowsToScreeningResults(usRows, reverseScores));
-        } catch (jsonErr) {
-            try {
-                const { data: rawData } = await fetchStocks('US');
-                const [reverseScores, paradigmScores] = await Promise.all([
-                    fetchReverseScores().catch(() => ({})),
-                    fetchParadigmScores().catch(() => ({})),
-                ]);
-                setYoutubeResults(adaptRowsToScreeningResults(rawData as any[], reverseScores, paradigmScores));
-            } catch (csvErr) {
-                console.error("Failed to load YouTube strategy universe:", jsonErr, csvErr);
-                setYoutubeResults([]);
-            }
+            const { data: rawData } = await fetchStocks('US');
+            const [reverseScores, paradigmScores] = await Promise.all([
+                fetchReverseScores().catch(() => ({})),
+                fetchParadigmScores().catch(() => ({})),
+            ]);
+            setYoutubeResults(adaptRowsToScreeningResults(rawData as any[], reverseScores, paradigmScores));
+        } catch (err) {
+            console.error("Failed to load YouTube strategy universe:", err);
+            setYoutubeResults([]);
         } finally {
             setYoutubeLoading(false);
         }
