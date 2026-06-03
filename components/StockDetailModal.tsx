@@ -376,7 +376,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             />
                         </div>
 
-                        <nav aria-label="Scorecard sections" className="sticky top-[112px] z-10 -mx-1 overflow-x-auto border-y border-border/60 bg-card/95 px-1 py-2.5 backdrop-blur-xl">
+                        <nav aria-label="Scorecard sections" className="sticky top-[228px] z-10 -mx-1 overflow-x-auto border-y border-border/60 bg-card/95 px-1 py-2.5 backdrop-blur-xl sm:top-[184px] lg:top-[156px]">
                             <div className="flex min-w-max gap-2">
                                 {sectionLinks.map((section, index) => (
                                     <button
