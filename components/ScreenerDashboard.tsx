@@ -797,8 +797,11 @@ export function ScreenerDashboard() {
     };
 
     const activeFilterChips = useMemo(() => {
+        const searchChip = search.trim() ? [`Search: ${search.trim()}`] : [];
+
         if (screenMode === 'reverse') {
             return [
+                ...searchChip,
                 ...reverseFilters.bands.map(band => `Band: ${band}`),
                 ...reverseFilters.archetypes.map(arch => `Archetype ${arch}`),
                 reverseFilters.minComposite > 0 ? `Composite >= ${reverseFilters.minComposite}` : null,
@@ -810,6 +813,7 @@ export function ScreenerDashboard() {
 
         if (screenMode === 'paradigm') {
             return [
+                ...searchChip,
                 ...paradigmFilters.bands.map(band => `Band: ${PARADIGM_BAND_LABELS[band] || band}`),
                 ...paradigmFilters.themes.map(theme => `Theme: ${theme}`),
                 paradigmFilters.industryQuery.trim() ? `Industry: ${paradigmFilters.industryQuery.trim()}` : null,
@@ -826,10 +830,11 @@ export function ScreenerDashboard() {
 
         if (screenMode === 'youtube') {
             const activeYoutubeFilter = YOUTUBE_FILTER_META.find(item => item.value === youtubeFilter);
-            return [activeYoutubeFilter?.label || 'Any Video Signal'];
+            return [...searchChip, activeYoutubeFilter?.label || 'Any Video Signal'];
         }
 
         return [
+            ...searchChip,
             `Market cap >= ${filters.minMarketCap}${selectedMarket === 'US' ? 'M' : selectedMarket === 'Korea' ? 'B KRW' : '00M TWD'}`,
             filters.maxPrice < 1000 ? `Price <= ${selectedMarket === 'US' ? '$' : ''}${filters.maxPrice}` : null,
             filters.minRevenueGrowth > -50 ? `Growth >= ${filters.minRevenueGrowth}%` : null,
@@ -840,7 +845,7 @@ export function ScreenerDashboard() {
             filters.minInsiderOwnership > 0 ? `Insider >= ${filters.minInsiderOwnership}%` : null,
             filters.maxFloat < 5000 ? `Float <= ${filters.maxFloat}M` : null,
         ].filter((chip): chip is string => Boolean(chip));
-    }, [screenMode, reverseFilters, paradigmFilters, youtubeFilter, filters, selectedMarket]);
+    }, [screenMode, reverseFilters, paradigmFilters, youtubeFilter, filters, selectedMarket, search]);
     const visibleFilterChips = activeFilterChips.slice(0, 8);
     const hiddenFilterChipCount = Math.max(activeFilterChips.length - visibleFilterChips.length, 0);
     const resetActiveFilters = () => {
@@ -1242,6 +1247,20 @@ export function ScreenerDashboard() {
                                 <EmptyStateStat label="Active Filters" value={visibleFilterChips.length + hiddenFilterChipCount} />
                                 <EmptyStateStat label="View" value={resultView === 'table' ? 'Table' : 'Cards'} />
                             </div>
+                            {visibleFilterChips.length > 0 && (
+                                <div className="mt-4 flex max-w-2xl flex-wrap justify-center gap-2">
+                                    {visibleFilterChips.map((chip) => (
+                                        <span key={chip} className="rounded-md border border-border/60 bg-secondary/35 px-3 py-1.5 text-base font-black text-muted-foreground">
+                                            {chip}
+                                        </span>
+                                    ))}
+                                    {hiddenFilterChipCount > 0 && (
+                                        <span className="rounded-md border border-border/60 bg-secondary/25 px-3 py-1.5 text-base font-black text-muted-foreground">
+                                            +{hiddenFilterChipCount} more
+                                        </span>
+                                    )}
+                                </div>
+                            )}
                             <button onClick={resetActiveFilters} className="mt-5 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2.5 text-base font-black text-primary transition-colors hover:bg-primary/15">{t('resetFilters')}</button>
                         </div>
                     ) : (
