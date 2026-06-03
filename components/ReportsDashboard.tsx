@@ -328,6 +328,20 @@ export function ReportsDashboard() {
             avgConviction,
         };
     }, [reports, filteredReports]);
+    const activeReportFilters = [
+        search.trim() ? `Search: ${search.trim()}` : null,
+        filterAction !== "ALL" ? `Action: ${filterAction}` : null,
+        filterValuation !== "ALL" ? `Valuation: ${filterValuation.replace(/_/g, ' ')}` : null,
+        filterArchetype !== "ALL" ? `Archetype: ${filterArchetype}` : null,
+        filterConviction > 0 ? `Conviction >= ${filterConviction.toFixed(1)}` : null,
+    ].filter((item): item is string => Boolean(item));
+    const resetReportFilters = () => {
+        setSearch("");
+        setFilterAction("ALL");
+        setFilterValuation("ALL");
+        setFilterArchetype("ALL");
+        setFilterConviction(0);
+    };
 
     const downloadReport = (report: any) => {
         const element = document.createElement("a");
@@ -433,6 +447,28 @@ export function ReportsDashboard() {
                                 onChange={(e) => setFilterConviction(parseFloat(e.target.value))}
                                 className="flex-1 h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
                             />
+                        </div>
+                        <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-3">
+                            <div className="mb-2 flex items-center justify-between gap-3">
+                                <span className="text-base font-black uppercase tracking-wider text-muted-foreground">Active filters</span>
+                                <button
+                                    type="button"
+                                    onClick={resetReportFilters}
+                                    disabled={activeReportFilters.length === 0}
+                                    className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1.5 text-base font-black text-muted-foreground transition-colors hover:bg-white/10 hover:text-slate-200 disabled:cursor-not-allowed disabled:opacity-45"
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                                {activeReportFilters.length > 0 ? activeReportFilters.map((filter) => (
+                                    <span key={filter} className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 text-base font-bold text-blue-300">
+                                        {filter}
+                                    </span>
+                                )) : (
+                                    <span className="text-base font-semibold text-muted-foreground">Showing all cloud reports.</span>
+                                )}
+                            </div>
                         </div>
                         <div className="grid grid-cols-2 gap-2 pt-1">
                             <ResearchStat label="Shown" value={reportStats.filtered.toLocaleString()} sub={`${reportStats.total.toLocaleString()} total`} />
