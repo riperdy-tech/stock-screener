@@ -665,8 +665,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         title="AI Valuation Report"
                                         body="Deepseek V4.0 Pro research output, kept in a larger reading pane for thesis review."
                                     />
-                                    <div className="rounded-lg border border-blue-500/25 bg-blue-500/[0.06] px-4 py-3 font-mono text-base font-bold text-blue-300">
-                                        ${savedReport.cost} / {savedReport.usage?.total_tokens || "n/a"} tokens
+                                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:min-w-[30rem]">
+                                        <ReportMetaStat label="Generated" value={new Date(savedReport.timestamp).toLocaleString()} />
+                                        <ReportMetaStat label="Cost" value={`$${savedReport.cost || '0.00'}`} />
+                                        <ReportMetaStat label="Tokens" value={`${savedReport.usage?.total_tokens || "n/a"}`} />
                                     </div>
                                 </div>
                                 <div className="bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
@@ -723,6 +725,15 @@ function InsightNote({ tone, label, text }: { tone: "positive" | "caution"; labe
         )}>
             <div className="text-base font-black uppercase tracking-wider">{label}</div>
             <p className="mt-1 text-foreground/85">{text}</p>
+        </div>
+    );
+}
+
+function ReportMetaStat({ label, value }: { label: string; value: string }) {
+    return (
+        <div className="min-w-0 rounded-lg border border-blue-500/25 bg-blue-500/[0.06] px-3 py-2.5">
+            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 truncate font-mono text-base font-black text-blue-300" title={value}>{value}</div>
         </div>
     );
 }
