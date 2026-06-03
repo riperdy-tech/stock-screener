@@ -480,9 +480,26 @@ export function ReportsDashboard() {
 
                     <div className="flex-1 overflow-y-auto">
                         {loading ? (
-                            <div className="flex flex-col items-center justify-center h-64 gap-4 text-muted-foreground">
-                                <RefreshCw className="h-6 w-6 animate-spin text-accent" />
-                                <span className="text-base font-bold uppercase tracking-widest">Fetching Cloud...</span>
+                            <div className="flex min-h-80 flex-col justify-center gap-4 p-6 text-muted-foreground">
+                                <div className="rounded-xl border border-blue-500/20 bg-blue-500/[0.05] p-5">
+                                    <div className="flex items-start gap-3">
+                                        <div className="rounded-lg border border-blue-500/25 bg-blue-500/10 p-3 text-blue-400">
+                                            <RefreshCw className="h-6 w-6 animate-spin" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-2xl font-black tracking-tight text-foreground">Fetching cloud reports</h3>
+                                            <p className="mt-1 text-base font-semibold leading-relaxed text-muted-foreground">
+                                                Loading Deepseek analyses, metadata, and queue status.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <ReportLoadingTile />
+                                    <ReportLoadingTile />
+                                    <ReportLoadingTile />
+                                    <ReportLoadingTile />
+                                </div>
                             </div>
                         ) : filteredReports.length === 0 ? (
                             <div className="flex min-h-80 flex-col items-center justify-center gap-5 p-8 text-center text-muted-foreground">
@@ -925,6 +942,16 @@ function EmptyReportStat({ label, value }: { label: string; value: string }) {
         <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2.5">
             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-base font-black text-slate-200" title={value}>{value}</div>
+        </div>
+    );
+}
+
+function ReportLoadingTile() {
+    return (
+        <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+            <div className="h-4 w-20 animate-pulse rounded bg-white/10" />
+            <div className="mt-3 h-7 w-14 animate-pulse rounded bg-white/15" />
+            <div className="mt-3 h-4 w-28 animate-pulse rounded bg-white/10" />
         </div>
     );
 }
