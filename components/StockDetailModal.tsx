@@ -819,17 +819,25 @@ function QuoteMetric({ label, value, sub, tone = "muted" }: { label: string; val
 
 function DetailRow({ label, value, target, pass, warning }: { label: string, value: string | number, target: string, pass: boolean, warning?: boolean }) {
     const { t } = useLanguage();
+    const statusLabel = pass ? t('pass') : warning ? t('watch') : t('fail');
 
     return (
-        <div className="flex items-center justify-between gap-4 rounded-lg border border-border/50 bg-secondary/20 p-4">
-            <div>
+        <div className="flex flex-col gap-3 rounded-lg border border-border/50 bg-secondary/20 p-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0">
                 <div className="text-base font-semibold text-muted-foreground">{label}</div>
-                <div className="mt-0.5 font-mono text-xl font-black">{value}</div>
+                <div className="mt-0.5 truncate font-mono text-xl font-black" title={String(value)}>{value}</div>
             </div>
-            <div className="text-right">
-                <div className="text-base opacity-70">{t('target')}: {target}</div>
-                <div className={clsx("text-base font-bold", pass ? "text-success" : warning ? "text-warning" : "text-danger")}>
-                    {pass ? t('pass') : warning ? t('watch') : t('fail')}
+            <div className="flex shrink-0 items-center justify-between gap-3 sm:flex-col sm:items-end">
+                <div className="rounded-md border border-border/60 bg-background/35 px-3 py-1.5 text-base font-bold text-muted-foreground">
+                    {t('target')}: {target}
+                </div>
+                <div className={clsx(
+                    "rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider",
+                    pass && "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+                    warning && !pass && "border-amber-500/30 bg-amber-500/10 text-amber-400",
+                    !pass && !warning && "border-red-500/30 bg-red-500/10 text-red-400",
+                )}>
+                    {statusLabel}
                 </div>
             </div>
         </div>
