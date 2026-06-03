@@ -1492,12 +1492,21 @@ export function ScreenerDashboard() {
                                             </span>
                                             </a>
                                             {showDsPassword ? (
-                                                <div className="flex min-h-24 flex-col justify-center gap-2 rounded-lg border border-[#4d6bfe]/40 bg-[#4d6bfe]/20 px-3 py-3">
-                                                <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full text-base p-2.5 rounded bg-background border border-border" />
-                                                <button onClick={handleDeepseekRun} disabled={dsLoading} className="w-full bg-[#4d6bfe] text-white text-base py-2.5 rounded font-bold hover:bg-[#3b54d1]">
-                                                    {dsLoading ? "Running..." : "Run Deepseek"}
-                                                </button>
-                                                {dsError && <span className="text-base text-danger">{dsError}</span>}
+                                                <div className="flex min-h-24 flex-col justify-center gap-3 rounded-lg border border-[#4d6bfe]/40 bg-[#4d6bfe]/20 px-4 py-4">
+                                                    <div>
+                                                        <div className="text-base font-black uppercase tracking-wider text-blue-200">Protected run</div>
+                                                        <div className="mt-1 text-base font-semibold text-white/75">Enter the workflow password to generate and save a report.</div>
+                                                    </div>
+                                                    <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full rounded-md border border-white/15 bg-background px-3.5 py-3 text-base font-bold text-foreground focus:outline-none focus:ring-2 focus:ring-[#4d6bfe]/50" />
+                                                    <div className="grid grid-cols-2 gap-2">
+                                                        <button onClick={() => setShowDsPassword(false)} disabled={dsLoading} className="rounded-md border border-white/15 bg-white/5 px-3 py-2.5 text-base font-bold text-white/80 transition-colors hover:bg-white/10 disabled:opacity-50">
+                                                            Cancel
+                                                        </button>
+                                                        <button onClick={handleDeepseekRun} disabled={dsLoading} className="rounded-md bg-[#4d6bfe] px-3 py-2.5 text-base font-black text-white transition-colors hover:bg-[#3b54d1] disabled:opacity-60">
+                                                            {dsLoading ? "Running..." : "Run Deepseek"}
+                                                        </button>
+                                                    </div>
+                                                    {dsError && <span className="rounded-md border border-danger/30 bg-danger/10 px-3 py-2 text-base font-bold text-danger">{dsError}</span>}
                                                 </div>
                                             ) : (
                                                 <button onClick={() => setShowDsPassword(true)} className="flex min-h-24 items-center gap-3 rounded-lg border border-white/10 bg-[#4d6bfe]/90 px-4 py-4 text-left text-white shadow-md transition-all hover:bg-[#3b54d1] active:scale-95">
