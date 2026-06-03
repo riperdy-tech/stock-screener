@@ -594,13 +594,15 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         body="Video-playbook matches, EPS state, valuation setup, and position-size guardrail in one compact view."
                                     />
                                 </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                <MetricGroupLabel label="Matched playbook" />
+                                <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
                                     <ReverseStat label="Primary Match" value={youtubeEvaluation.matchedStrategies[0]} />
                                     <ReverseStat label="Matches" value={youtubeEvaluation.matchedStrategies.length} />
                                     <ReverseStat label="Risk Tier" value={youtubeEvaluation.riskTier === 'standard' ? 'Standard' : 'Tiny'} />
                                     <ReverseStat label="Position Cap" value={youtubeEvaluation.maxPositionSize} />
                                 </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <MetricGroupLabel label="Evidence inputs" />
+                                <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
                                     <ReverseStat label="EPS TTM" value={formatStrategyNumber(youtubeEvaluation.epsTtm)} />
                                     <ReverseStat label="Forward EPS" value={formatStrategyNumber(youtubeEvaluation.forwardEpsEstimate)} />
                                     <ReverseStat label="P/B" value={formatStrategyNumber(youtubeEvaluation.priceToBook)} />
