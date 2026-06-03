@@ -311,6 +311,7 @@ export function YoutubeStrategyDashboard() {
                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                         {filteredRows.map(({ result, evaluation }) => {
                             const c = result.candidate as any;
+                            const primaryMatch = evaluation.matchedStrategies[0] || "Video signal";
                             return (
                                 <article key={c.symbol} className="rounded-lg border border-border/70 bg-card p-6 shadow-sm hover:border-primary/40 transition-colors">
                                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
@@ -321,9 +322,32 @@ export function YoutubeStrategyDashboard() {
                                             </div>
                                             <p className="text-base text-muted-foreground mt-1 uppercase font-bold tracking-tight">{c.sector} / {c.industry || result.industry || "Unknown"}</p>
                                         </div>
-                                        <div className="text-left sm:text-right shrink-0">
-                                            <div className="font-mono text-lg font-black">{formatPrice(c.price)}</div>
-                                            <div className="text-base text-muted-foreground">{formatMarketCap(c.marketCap)}</div>
+                                        <div className="min-w-[8.5rem] shrink-0 rounded-lg border border-border/60 bg-secondary/20 p-3 text-left sm:text-right">
+                                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Price</div>
+                                            <div className="mt-1 truncate font-mono text-xl font-black leading-none text-foreground sm:text-2xl" title={formatPrice(c.price)}>
+                                                {formatPrice(c.price)}
+                                            </div>
+                                            <div className="mt-3 flex items-center justify-between gap-3 border-t border-border/50 pt-2">
+                                                <span className="text-base font-bold text-muted-foreground">MCap</span>
+                                                <span className="truncate font-mono text-base font-black text-foreground" title={formatMarketCap(c.marketCap)}>
+                                                    {formatMarketCap(c.marketCap)}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-4 rounded-lg border border-red-500/20 bg-red-500/[0.04] p-4">
+                                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                            <div>
+                                                <div className="text-base font-black uppercase tracking-wider text-red-300">Primary video signal</div>
+                                                <div className="mt-1 text-lg font-black text-foreground">{primaryMatch}</div>
+                                            </div>
+                                            <span className={clsx(
+                                                "w-fit rounded-full border px-3.5 py-2 text-base font-black uppercase tracking-tight",
+                                                evaluation.riskTier === "standard" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/25" : "bg-red-500/10 text-red-400 border-red-500/25"
+                                            )}>
+                                                {evaluation.maxPositionSize}
+                                            </span>
                                         </div>
                                     </div>
 
@@ -333,7 +357,7 @@ export function YoutubeStrategyDashboard() {
                                             "rounded-full border px-3.5 py-2 text-base font-black uppercase tracking-tight",
                                             evaluation.riskTier === "standard" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/25" : "bg-red-500/10 text-red-400 border-red-500/25"
                                         )}>
-                                            {evaluation.maxPositionSize}
+                                            {evaluation.riskTier === "standard" ? "Standard Risk" : "Tiny Risk"}
                                         </span>
                                     </div>
 
