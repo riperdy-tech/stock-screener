@@ -245,29 +245,31 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         </div>
 
-                        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                            {/* External Links */}
-                            <div className="flex flex-wrap items-center gap-2">
-                                <a
-                                    href={`https://www.tradingview.com/symbols/${candidate.symbol}/`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 rounded-md border border-[#2a2e39] bg-[#131722] px-4 py-2.5 text-white shadow-sm transition-all hover:bg-[#2a2e39]"
-                                    title={t('openTV')}
-                                >
-                                    <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="h-5 w-5 rounded-sm" />
-                                    <span className="text-base font-bold">TradingView</span>
-                                </a>
-                                <button
-                                    onClick={() => onAskGemini && onAskGemini(candidate.symbol)}
-                                    className="flex items-center gap-2 rounded-md border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-2.5 text-blue-600 shadow-sm transition-all hover:from-blue-500/20 hover:to-purple-500/20 dark:text-blue-400"
-                                    title="Ask AI about this stock"
-                                >
-                                    <Sparkles className="h-5 w-5" />
-                                    <span className="text-base font-bold">Generate AI Prompt</span>
-                                </button>
+                        <div className="mt-4 flex flex-col gap-3 rounded-lg border border-border/60 bg-background/80 p-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+                            <div className="min-w-0">
+                                <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Primary Actions</div>
+                                <div className="mt-2 flex flex-wrap items-center gap-2">
+                                    <a
+                                        href={`https://www.tradingview.com/symbols/${candidate.symbol}/`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 rounded-md border border-[#2a2e39] bg-[#131722] px-4 py-2.5 text-white shadow-sm transition-all hover:bg-[#2a2e39]"
+                                        title={t('openTV')}
+                                    >
+                                        <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="h-5 w-5 rounded-sm" />
+                                        <span className="text-base font-bold">TradingView</span>
+                                    </a>
+                                    <button
+                                        onClick={() => onAskGemini && onAskGemini(candidate.symbol)}
+                                        className="flex items-center gap-2 rounded-md border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-2.5 text-blue-600 shadow-sm transition-all hover:from-blue-500/20 hover:to-purple-500/20 dark:text-blue-400"
+                                        title="Ask AI about this stock"
+                                    >
+                                        <Sparkles className="h-5 w-5" />
+                                        <span className="text-base font-bold">Generate AI Prompt</span>
+                                    </button>
+                                </div>
                             </div>
-                            <div className={clsx("w-fit rounded-full px-4 py-2 text-base font-bold tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
+                            <div className={clsx("w-fit rounded-full px-4 py-2 text-base font-black tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
                                 {result.passed ? "GEM CANDIDATE" : "REVIEWING"}
                             </div>
                         </div>
