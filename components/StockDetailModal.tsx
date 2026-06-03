@@ -308,15 +308,24 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     {score}
                                 </div>
                             </div>
-                            <div>
-                                <h4 className="text-xl font-black mb-1">{t('blueprintAnalysis')}</h4>
-                                <div className={clsx("text-base font-medium", result.passed ? "text-success" : "text-danger")}>
-                                    {result.passed
-                                        ? t('verdictPass')
-                                        : (
-                                        <div className="mt-2 text-foreground">
-                                            <span className="font-bold text-danger">Missed Criteria:</span>
-                                            <ul className="list-disc pl-5 mt-2 text-base text-foreground/80 font-normal space-y-1.5">
+                            <div className="min-w-0 flex-1">
+                                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                                    <h4 className="text-xl font-black">{t('blueprintAnalysis')}</h4>
+                                    <span className={clsx(
+                                        "w-fit rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider",
+                                        result.passed ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400" : "border-red-500/30 bg-red-500/10 text-red-400"
+                                    )}>
+                                        {result.passed ? "Gem candidate" : "Review required"}
+                                    </span>
+                                </div>
+                                {result.passed ? (
+                                    <p className="mt-3 rounded-lg border border-emerald-500/20 bg-emerald-500/[0.06] px-4 py-3 text-base font-semibold leading-relaxed text-emerald-300">
+                                        {t('verdictPass')}
+                                    </p>
+                                ) : (
+                                    <div className="mt-3 rounded-lg border border-red-500/20 bg-red-500/[0.05] px-4 py-3 text-foreground">
+                                        <div className="text-base font-black uppercase tracking-wider text-red-400">Missed Criteria</div>
+                                        <ul className="mt-2 list-disc space-y-1.5 pl-5 text-base font-normal text-foreground/80">
                                                 {(result.failCodes && result.failCodes.length > 0) ? result.failCodes.map(code => {
                                                     const failReasonMap: Record<string, string> = {
                                                         FAIL_MCAP: market === 'Korea' 
@@ -342,8 +351,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                                 )}
                                             </ul>
                                         </div>
-                                        )}
-                                </div>
+                                )}
                             </div>
                         </div>
 
