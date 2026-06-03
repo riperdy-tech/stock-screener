@@ -1684,14 +1684,27 @@ export function ScreenerDashboard() {
             {/* Deepseek Task Alert */}
             {backgroundDsTask && (
                 <div className="fixed bottom-4 right-4 z-[100] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col gap-3 rounded-xl border border-blue-500/30 bg-[#1a1f2e] p-5 shadow-2xl animate-in slide-in-from-bottom-5 sm:bottom-6 sm:right-6">
-                    <div className="flex justify-between items-start gap-4">
+                    <div className="flex items-start justify-between gap-4">
                         <div className="flex items-start gap-3">
                             <Sparkles className={clsx("h-5 w-5 mt-0.5", backgroundDsTask.status === 'running' ? "text-blue-400 animate-pulse" : backgroundDsTask.status === 'error' ? "text-danger" : "text-success")} />
-                            <div className="flex flex-col">
-                                <span className="font-bold text-lg text-foreground">
+                            <div className="min-w-0">
+                                <div className="mb-2 flex flex-wrap items-center gap-2">
+                                    <span className={clsx(
+                                        "rounded-md border px-2.5 py-1 text-base font-black uppercase tracking-wider",
+                                        backgroundDsTask.status === 'running' && "border-blue-500/30 bg-blue-500/10 text-blue-400",
+                                        backgroundDsTask.status === 'error' && "border-red-500/30 bg-red-500/10 text-red-400",
+                                        backgroundDsTask.status !== 'running' && backgroundDsTask.status !== 'error' && "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+                                    )}>
+                                        {backgroundDsTask.status === 'running' ? 'Running' : backgroundDsTask.status === 'error' ? 'Error' : 'Complete'}
+                                    </span>
+                                    <span className="rounded-md border border-border/60 bg-secondary/35 px-2.5 py-1 font-mono text-base font-black text-foreground">
+                                        {backgroundDsTask.ticker}
+                                    </span>
+                                </div>
+                                <span className="block truncate text-lg font-bold text-foreground" title={backgroundDsTask.ticker}>
                                     {backgroundDsTask.status === 'running' ? `Analyzing ${backgroundDsTask.ticker}...` : backgroundDsTask.status === 'error' ? `Error analyzing ${backgroundDsTask.ticker}` : `Analysis Complete: ${backgroundDsTask.ticker}`}
                                 </span>
-                                <span className="text-base text-muted-foreground mt-1">
+                                <span className="mt-1 block text-base leading-relaxed text-muted-foreground">
                                     {backgroundDsTask.status === 'running' ? 'Deepseek V4.0 Pro is generating report.' : backgroundDsTask.status === 'error' ? backgroundDsTask.message : 'Report saved to scorecard!'}
                                 </span>
                             </div>
