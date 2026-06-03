@@ -468,26 +468,39 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 </div>
                                 <div className="space-y-3">
                                     {reportHistory.length === 0 ? (
-                                        <div className="rounded-lg border border-dashed border-border p-5 text-center text-base text-muted-foreground">
-                                            No AI reports found for this stock yet.
+                                        <div className="rounded-lg border border-dashed border-border bg-card/55 p-5 text-center">
+                                            <div className="text-lg font-black tracking-tight text-foreground">No saved reports yet</div>
+                                            <p className="mx-auto mt-2 max-w-lg text-base leading-relaxed text-muted-foreground">
+                                                Use Generate AI Prompt in the primary actions rail to create the first research handoff for this ticker.
+                                            </p>
                                         </div>
                                     ) : reportHistory.map((report, idx) => (
                                         <div
                                             key={report.created_at}
                                             className="flex flex-col gap-4 rounded-lg border border-border/70 bg-card/90 p-4 shadow-sm transition-colors hover:border-primary/40 sm:flex-row sm:items-center sm:justify-between"
                                         >
-                                            <div className="min-w-0">
-                                                <div className="flex flex-wrap items-center gap-2">
-                                                    <span className="text-lg font-black tracking-tight">Deepseek V4-Pro Analysis</span>
-                                                    {idx === 0 && (
-                                                        <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-base font-black text-emerald-400">
-                                                            Latest
-                                                        </span>
-                                                    )}
-                                                </div>
-                                                <span className="mt-1 block font-mono text-base text-muted-foreground">
-                                                    {new Date(report.created_at).toLocaleString()} / Cost: ${report.cost || '0.00'}
+                                            <div className="flex min-w-0 gap-3">
+                                                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-blue-500/25 bg-blue-500/10 font-mono text-base font-black text-blue-400">
+                                                    #{idx + 1}
                                                 </span>
+                                                <div className="min-w-0">
+                                                    <div className="flex flex-wrap items-center gap-2">
+                                                        <span className="text-lg font-black tracking-tight">Deepseek V4-Pro Analysis</span>
+                                                        {idx === 0 && (
+                                                            <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-base font-black text-emerald-400">
+                                                                Latest
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                    <div className="mt-2 flex flex-wrap gap-2">
+                                                        <span className="rounded-md border border-border/60 bg-secondary/35 px-3 py-1.5 font-mono text-base font-bold text-muted-foreground">
+                                                            {new Date(report.created_at).toLocaleString()}
+                                                        </span>
+                                                        <span className="rounded-md border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 font-mono text-base font-bold text-blue-300">
+                                                            ${report.cost || '0.00'}
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <button
                                                 onClick={() => {
