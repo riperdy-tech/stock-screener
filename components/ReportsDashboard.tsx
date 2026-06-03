@@ -521,14 +521,22 @@ export function ReportsDashboard() {
                                                     </div>
                                                 </div>
 
-                                                <div className="shrink-0 text-right">
+                                                <div className="grid shrink-0 grid-cols-2 gap-2 text-right">
+                                                    <div className="rounded-lg border border-blue-500/25 bg-blue-500/10 px-3 py-2 shadow-md">
+                                                        <div className="font-mono text-lg font-black leading-none text-blue-400">
+                                                            {meta.conviction ? meta.conviction.toFixed(1) : '0.0'}
+                                                        </div>
+                                                        <span className="mt-1 block text-base font-black uppercase tracking-[0.12em] text-muted-foreground opacity-70">Conv</span>
+                                                    </div>
                                                     <div className={clsx(
-                                                        "rounded-lg border px-3 py-1.5 text-base font-black tracking-tight shadow-md",
+                                                        "rounded-lg border px-3 py-2 shadow-md",
                                                         isPositive ? "border-green-500/30 bg-green-500/20 text-green-400" : "border-red-500/30 bg-red-500/20 text-red-400"
                                                     )}>
-                                                        {isPositive ? '+' : ''}{upside.toFixed(1)}%
+                                                        <div className="font-mono text-lg font-black leading-none">
+                                                            {isPositive ? '+' : ''}{upside.toFixed(1)}%
+                                                        </div>
+                                                        <span className="mt-1 block text-base font-black uppercase tracking-[0.12em] text-muted-foreground opacity-70">Alpha</span>
                                                     </div>
-                                                    <span className="mt-1.5 block text-base font-black uppercase tracking-[0.14em] text-muted-foreground opacity-60">Alpha</span>
                                                 </div>
                                             </div>
 
@@ -553,8 +561,8 @@ export function ReportsDashboard() {
                                                 <span className="truncate">
                                                     {selectedReport?.id === report.id ? "Reading this report" : "Open report reader"}
                                                 </span>
-                                                <span className="text-blue-400 opacity-0 transition-opacity group-hover:opacity-100">
-                                                    View
+                                                <span className="inline-flex items-center gap-1.5 rounded-md border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 text-blue-400 opacity-80 transition-all group-hover:border-blue-500/40 group-hover:bg-blue-500/15 group-hover:opacity-100">
+                                                    View <ChevronRight className="h-4 w-4" />
                                                 </span>
                                             </div>
                                         </button>
