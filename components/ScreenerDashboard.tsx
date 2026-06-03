@@ -1534,7 +1534,12 @@ export function ScreenerDashboard() {
                             <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/10 p-3 text-emerald-400">
                                 <Sparkles className="h-6 w-6" />
                             </div>
-                            <div>
+                            <div className="min-w-0 flex-1">
+                                <div className="mb-2 flex flex-wrap items-center gap-2">
+                                    <span className="rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 text-base font-black uppercase tracking-wider text-emerald-400">
+                                        Step 1 of 2
+                                    </span>
+                                </div>
                                 <h3 className="text-2xl font-black tracking-tight">Protected Deep-Dive</h3>
                                 <p className="mt-1 text-base leading-relaxed text-muted-foreground">Enter the dispatch password before queuing v3.2 analyses.</p>
                             </div>
@@ -1551,6 +1556,9 @@ export function ScreenerDashboard() {
                             className="mb-4 w-full rounded-lg border border-border bg-secondary/40 px-3.5 py-3 text-base focus:outline-none focus:ring-1 focus:ring-emerald-500"
                             onKeyDown={(e) => { if (e.key === 'Enter' && dsPassword) { setShowBatchPassword(false); setShowBatchConfirm(true); } }}
                         />
+                        <div className="mb-4 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-3 text-base font-semibold leading-relaxed text-emerald-300">
+                            Nothing is dispatched yet. The next screen shows the final queue count before workers start.
+                        </div>
                         <div className="flex gap-3">
                             <button onClick={() => setShowBatchPassword(false)} className="flex-1 rounded-lg border border-border bg-muted px-3.5 py-3 text-base font-bold text-muted-foreground transition-colors hover:bg-secondary">Cancel</button>
                             <button
@@ -1571,7 +1579,15 @@ export function ScreenerDashboard() {
                             <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/10 p-3 text-emerald-400">
                                 <Sparkles className="h-6 w-6" />
                             </div>
-                            <div>
+                            <div className="min-w-0 flex-1">
+                                <div className="mb-2 flex flex-wrap items-center gap-2">
+                                    <span className="rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 text-base font-black uppercase tracking-wider text-emerald-400">
+                                        Step 2 of 2
+                                    </span>
+                                    <span className="rounded-md border border-border/60 bg-secondary/30 px-2.5 py-1 text-base font-black uppercase tracking-wider text-muted-foreground">
+                                        Final review
+                                    </span>
+                                </div>
                                 <h3 className="text-2xl font-black tracking-tight">Dispatch Deep-Dive Batch?</h3>
                                 <p className="mt-1 text-base leading-relaxed text-muted-foreground">
                             {selectedTickers.size > 0
