@@ -1672,18 +1672,22 @@ export function ScreenerDashboard() {
 
                         <div className="mt-6 grid gap-4 md:grid-cols-2">
                             <HelpCard
+                                index="01"
                                 title="Stock Cards"
                                 body="Paradigm appears first when available because it explains the market theme. The active strategy panel expands the lens you selected. Other signals stay visible as compact chips."
                             />
                             <HelpCard
+                                index="02"
                                 title="Reverse Engine"
                                 body="Ranks survivors by quality, margin of safety, survivability, growth proxy, and efficiency. Bands move from High to Solid to Watchlist to Monitor."
                             />
                             <HelpCard
+                                index="03"
                                 title="Paradigm"
                                 body="Scores whether a stock is a real participant in a secular shift. Theme membership, momentum, and economics all need to work together."
                             />
                             <HelpCard
+                                index="04"
                                 title="YouTube Strategy"
                                 body="Applies the video playbook inside the main dashboard: earnings momentum, deep-value reversal, turnaround seed, and turnaround scale-in."
                             />
@@ -1725,11 +1729,18 @@ export function ScreenerDashboard() {
     );
 }
 
-function HelpCard({ title, body }: { title: string; body: string }) {
+function HelpCard({ index, title, body }: { index: string; title: string; body: string }) {
     return (
         <div className="rounded-xl border border-border/70 bg-secondary/20 p-4">
-            <h3 className="text-base font-black text-foreground">{title}</h3>
-            <p className="mt-2 text-base leading-relaxed text-muted-foreground">{body}</p>
+            <div className="flex items-start gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 font-mono text-base font-black text-primary">
+                    {index}
+                </span>
+                <div>
+                    <h3 className="text-lg font-black text-foreground">{title}</h3>
+                    <p className="mt-1.5 text-base leading-relaxed text-muted-foreground">{body}</p>
+                </div>
+            </div>
         </div>
     );
 }
