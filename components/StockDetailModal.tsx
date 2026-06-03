@@ -204,11 +204,11 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                 <div className="sticky top-0 z-10 flex items-center justify-between p-4 sm:p-6 bg-card/95 backdrop-blur-xl border-b border-border">
                     <div className="flex-1 min-w-0">
                         <div className="flex flex-col gap-1">
-                            <div className="flex items-center gap-3">
-                                <h2 className="text-2xl sm:text-4xl font-black truncate">
+                            <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+                                <h2 className="truncate text-3xl font-black tracking-tight sm:text-4xl">
                                     {displayTicker}
                                 </h2>
-                                <span className="text-base sm:text-2xl text-muted-foreground font-medium px-2 border-l border-border truncate">
+                                <span className="truncate text-lg font-semibold text-muted-foreground sm:border-l sm:border-border sm:px-2 sm:text-2xl">
                                     {displayName}
                                 </span>
                             </div>
