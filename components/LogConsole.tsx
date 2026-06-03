@@ -191,8 +191,11 @@ function LogLine({ line }: { line: string }) {
     }
 
     return (
-        <div className={`rounded-md border px-3 py-1.5 ${logLineToneClass(tone)}`}>
-            <span className="whitespace-pre-wrap break-words">{line}</span>
+        <div className={`flex gap-3 rounded-md border px-3 py-2 ${logLineToneClass(tone)}`}>
+            <span className={`mt-0.5 shrink-0 rounded border px-2 py-1 text-base font-black leading-none ${logLineBadgeClass(tone)}`}>
+                {logLineLabel(tone)}
+            </span>
+            <span className="min-w-0 whitespace-pre-wrap break-words">{line}</span>
         </div>
     );
 }
@@ -203,4 +206,20 @@ function logLineToneClass(tone: "neutral" | "success" | "danger" | "warning" | "
     if (tone === "warning") return "border-amber-500/25 bg-amber-500/[0.08] text-amber-300";
     if (tone === "marker") return "border-blue-500/20 bg-blue-500/[0.08] text-blue-300";
     return "border-transparent bg-transparent text-gray-300";
+}
+
+function logLineBadgeClass(tone: "neutral" | "success" | "danger" | "warning" | "marker") {
+    if (tone === "success") return "border-green-500/25 bg-green-500/10 text-green-300";
+    if (tone === "danger") return "border-red-500/30 bg-red-500/10 text-red-300";
+    if (tone === "warning") return "border-amber-500/30 bg-amber-500/10 text-amber-300";
+    if (tone === "marker") return "border-blue-500/25 bg-blue-500/10 text-blue-300";
+    return "border-gray-800 bg-white/[0.03] text-gray-500";
+}
+
+function logLineLabel(tone: "neutral" | "success" | "danger" | "warning" | "marker") {
+    if (tone === "success") return "OK";
+    if (tone === "danger") return "ERR";
+    if (tone === "warning") return "WARN";
+    if (tone === "marker") return "NOTE";
+    return "LOG";
 }
