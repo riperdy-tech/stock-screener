@@ -1701,6 +1701,15 @@ export function ScreenerDashboard() {
                             </button>
                         </div>
 
+                        <div className="mt-6 rounded-xl border border-primary/20 bg-primary/[0.04] p-5">
+                            <div className="mb-3 text-base font-black uppercase tracking-[0.18em] text-primary">Recommended workflow</div>
+                            <div className="grid gap-3 md:grid-cols-3">
+                                <WorkflowStep label="1" title="Pick market" text="Start with US, Korea, or Taiwan so prices, caps, and data quality match the universe." />
+                                <WorkflowStep label="2" title="Choose lens" text="Use the visible strategy cards to switch between 100-Bagger, Reverse, Paradigm, or YouTube logic." />
+                                <WorkflowStep label="3" title="Open scorecard" text="Use the card or table row for the full thesis, signal breakdown, and AI research actions." />
+                            </div>
+                        </div>
+
                         <div className="mt-6 grid gap-4 md:grid-cols-2">
                             <HelpCard
                                 index="01"
@@ -1772,6 +1781,20 @@ function HelpCard({ index, title, body }: { index: string; title: string; body: 
                     <p className="mt-1.5 text-base leading-relaxed text-muted-foreground">{body}</p>
                 </div>
             </div>
+        </div>
+    );
+}
+
+function WorkflowStep({ label, title, text }: { label: string; title: string; text: string }) {
+    return (
+        <div className="rounded-lg border border-primary/15 bg-background/35 p-4">
+            <div className="flex items-center gap-2">
+                <span className="flex h-8 w-8 items-center justify-center rounded-md border border-primary/25 bg-primary/10 font-mono text-base font-black text-primary">
+                    {label}
+                </span>
+                <h3 className="text-lg font-black text-foreground">{title}</h3>
+            </div>
+            <p className="mt-2 text-base leading-relaxed text-muted-foreground">{text}</p>
         </div>
     );
 }
