@@ -1894,7 +1894,7 @@ function ResultsTable({
                                 <tr
                                     key={symbol}
                                     onClick={() => onOpen(result)}
-                                    className="cursor-pointer border-b border-border/40 transition-colors odd:bg-background/10 hover:bg-secondary/30"
+                                    className="group/row cursor-pointer border-b border-border/40 transition-colors odd:bg-background/10 hover:bg-primary/[0.06]"
                                 >
                                     {screenMode === 'reverse' && (
                                         <td className="px-4 py-3 align-middle">
@@ -1918,11 +1918,11 @@ function ResultsTable({
                                     )}
                                     <td className="px-4 py-4 align-middle">
                                         <div className="flex min-w-0 items-center gap-3">
-                                            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border/70 bg-secondary/40 font-mono text-lg font-black text-primary">
+                                            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-border/70 bg-secondary/40 font-mono text-lg font-black text-primary transition-colors group-hover/row:border-primary/50 group-hover/row:bg-primary/10">
                                                 {ticker.slice(0, 2)}
                                             </span>
                                             <div className="min-w-0">
-                                                <span className="block font-mono text-lg font-black text-foreground">{ticker}</span>
+                                                <span className="block font-mono text-xl font-black text-foreground">{ticker}</span>
                                                 <span className="block max-w-[220px] truncate text-base font-semibold text-muted-foreground" title={c.name}>{c.name || symbol}</span>
                                             </div>
                                         </div>
@@ -1966,14 +1966,21 @@ function ResultsTable({
                                             )}
                                         </div>
                                     </td>
-                                    <td className="px-4 py-4 text-right align-middle font-mono text-base font-black text-foreground">
+                                    <td className="px-4 py-4 text-right align-middle font-mono text-lg font-black text-foreground">
                                         {pricePrefix}{price}
                                     </td>
-                                    <td className="px-4 py-4 text-right align-middle font-mono text-base font-black text-muted-foreground">
+                                    <td className="px-4 py-4 text-right align-middle font-mono text-base font-black text-foreground/85">
                                         {marketCap}
                                     </td>
-                                    <td className={clsx("px-4 py-4 text-right align-middle font-mono text-base font-black", growth >= 0 ? "text-success" : "text-danger")}>
-                                        {growth.toFixed(1)}%
+                                    <td className="px-4 py-4 text-right align-middle">
+                                        <span className={clsx(
+                                            "inline-flex items-center justify-end rounded-md border px-2.5 py-1.5 font-mono text-base font-black",
+                                            growth >= 0
+                                                ? "border-emerald-500/30 bg-emerald-500/10 text-success"
+                                                : "border-red-500/30 bg-red-500/10 text-danger"
+                                        )}>
+                                            {growth >= 0 ? '+' : ''}{growth.toFixed(1)}%
+                                        </span>
                                     </td>
                                 </tr>
                             );
