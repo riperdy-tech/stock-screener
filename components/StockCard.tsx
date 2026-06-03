@@ -195,7 +195,7 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
     if (screenMode === 'reverse') {
         const reverse = result.reverse;
         if (!reverse || !reverse.rev_band || reverse.rev_band === 'Excluded') {
-            return <EmptyLens icon={<ShieldCheck className="h-4 w-4" />} label="No Reverse score for this stock" />;
+            return <EmptyLens icon={<ShieldCheck className="h-4 w-4" />} label="No Reverse score" detail="Outside the current reverse-engine scoring set." />;
         }
         return (
             <div>
@@ -217,7 +217,7 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
     if (screenMode === 'paradigm') {
         const paradigm = result.paradigm;
         if (!paradigm?.pdm_themes?.length) {
-            return <EmptyLens icon={<Layers3 className="h-4 w-4" />} label="No secular-theme match" />;
+            return <EmptyLens icon={<Layers3 className="h-4 w-4" />} label="No secular-theme match" detail="No paradigm theme has enough evidence yet." />;
         }
         return (
             <div>
@@ -238,7 +238,7 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
 
     if (screenMode === 'youtube') {
         if (!youtubeEvaluation || youtubeEvaluation.matchedStrategies.length === 0) {
-            return <EmptyLens icon={<Youtube className="h-4 w-4" />} label="No YouTube strategy match" />;
+            return <EmptyLens icon={<Youtube className="h-4 w-4" />} label="No YouTube strategy match" detail="EPS, value, or turnaround triggers are not active." />;
         }
         return (
             <div>
@@ -286,11 +286,14 @@ function MiniMetric({ label, value }: { label: string; value: string | number })
     );
 }
 
-function EmptyLens({ icon, label }: { icon: ReactNode; label: string }) {
+function EmptyLens({ icon, label, detail }: { icon: ReactNode; label: string; detail: string }) {
     return (
-        <div className="flex items-center gap-2 text-base text-muted-foreground">
-            {icon}
-            <span>{label}</span>
+        <div className="rounded-lg border border-border/60 bg-secondary/15 p-3">
+            <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider text-muted-foreground">
+                {icon}
+                <span>{label}</span>
+            </div>
+            <p className="mt-1 text-base leading-relaxed text-muted-foreground/75">{detail}</p>
         </div>
     );
 }
