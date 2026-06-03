@@ -1311,8 +1311,14 @@ export function ScreenerDashboard() {
                                     <div className="mx-auto flex max-w-4xl flex-col gap-3 rounded-xl border border-border/70 bg-card/75 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
                                         <div className="text-center sm:text-left">
                                             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Page {currentPage} of {totalPages}</div>
-                                            <div className="mt-1 text-lg font-black text-foreground">
-                                                Showing {filteredCount > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)} of {filteredCount.toLocaleString()}
+                                            <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+                                                <span className="rounded-md border border-primary/25 bg-primary/10 px-3 py-1.5 font-mono text-lg font-black text-primary">
+                                                    {filteredCount > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}
+                                                </span>
+                                                <span className="text-base font-bold text-muted-foreground">of {filteredCount.toLocaleString()} results</span>
+                                                <span className="rounded-md border border-border/60 bg-secondary/30 px-2.5 py-1.5 text-base font-black text-muted-foreground">
+                                                    {ITEMS_PER_PAGE} / page
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="flex flex-wrap items-center justify-center gap-2">
