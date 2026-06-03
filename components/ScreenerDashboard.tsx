@@ -1141,6 +1141,13 @@ export function ScreenerDashboard() {
                                 <button onClick={() => dismissBatchPanel()} className="w-fit rounded-lg border border-border/60 px-3.5 py-2 text-base font-bold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">Dismiss</button>
                             </div>
                             {batchProgress && (
+                                <div className="mt-3 grid grid-cols-3 gap-2">
+                                    <BatchMiniStat label="Done" value={batchProgress.completed} />
+                                    <BatchMiniStat label="Failed" value={batchProgress.failed} />
+                                    <BatchMiniStat label="Total" value={batchProgress.total} />
+                                </div>
+                            )}
+                            {batchProgress && (
                                 <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-secondary/50">
                                     <div className="h-full bg-emerald-500 rounded-full transition-all duration-700"
                                         style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
@@ -1662,10 +1669,17 @@ export function ScreenerDashboard() {
                                         : `Waiting for workers... (${batchStatus || ''})`}
                                 </span>
                                 {batchProgress && (
-                                <div className="w-full h-2 bg-secondary/50 rounded-full mt-2 overflow-hidden">
-                                    <div className="h-full bg-emerald-500 rounded-full transition-all duration-500"
-                                        style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
-                                </div>
+                                    <div className="mt-3 grid grid-cols-3 gap-2">
+                                        <BatchMiniStat label="Done" value={batchProgress.completed} />
+                                        <BatchMiniStat label="Failed" value={batchProgress.failed} />
+                                        <BatchMiniStat label="Total" value={batchProgress.total} />
+                                    </div>
+                                )}
+                                {batchProgress && (
+                                    <div className="w-full h-2 bg-secondary/50 rounded-full mt-2 overflow-hidden">
+                                        <div className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+                                            style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
+                                    </div>
                                 )}
                                 {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
                                     <span className="text-base text-emerald-400 mt-1.5 font-bold">
@@ -1874,6 +1888,15 @@ function DialogStat({ label, value }: { label: string; value: string | number })
         <div className="rounded-lg border border-border/60 bg-secondary/20 px-3.5 py-3">
             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-lg font-black text-foreground" title={String(value)}>{value}</div>
+        </div>
+    );
+}
+
+function BatchMiniStat({ label, value }: { label: string; value: string | number }) {
+    return (
+        <div className="rounded-md border border-emerald-500/20 bg-emerald-500/[0.055] px-3 py-2">
+            <div className="text-base font-black uppercase tracking-wider text-emerald-300/80">{label}</div>
+            <div className="mt-0.5 font-mono text-lg font-black text-emerald-300">{value}</div>
         </div>
     );
 }
