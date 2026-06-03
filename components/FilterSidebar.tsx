@@ -748,7 +748,9 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
 
                 <div className="flex shrink-0 items-center gap-2">
                     {strictValue !== undefined && (
-                        <span className="text-base text-muted-foreground/80 font-mono">Strict: {strictValue}</span>
+                        <span className="rounded border border-warning/30 bg-warning/10 px-2.5 py-1 font-mono text-base font-black text-warning">
+                            Strict {formatRangeBound(strictValue)}
+                        </span>
                     )}
                     <input
                         type="number"
@@ -772,7 +774,16 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
                 [&::-webkit-slider-thumb]:rounded-full ${isStrict ? '[&::-webkit-slider-thumb]:bg-warning [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(237,137,54,0.8)]' : '[&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(59,130,246,0.6)]'}
                 hover:[&::-webkit-slider-thumb]:scale-125 hover:[&::-webkit-slider-thumb]:transition-transform`}
             />
+            <div className="mt-2 flex items-center justify-between font-mono text-base font-bold text-muted-foreground/70">
+                <span>{formatRangeBound(min)}</span>
+                <span>{formatRangeBound(max)}</span>
+            </div>
             {hint && <div className="text-base text-muted-foreground/60 mt-1">{hint}</div>}
         </div>
     )
+}
+
+function formatRangeBound(value: number): string {
+    if (Math.abs(value) >= 1000) return value.toLocaleString();
+    return String(value);
 }
