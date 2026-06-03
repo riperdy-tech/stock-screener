@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, type ReactNode } from "react";
 import { Search, Sparkles, Calendar, DollarSign, Activity, ChevronRight, RefreshCw, ArrowLeft, Download, FileText, Bot } from "lucide-react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
@@ -837,10 +837,15 @@ export function ReportsDashboard() {
                                                     </ReactMarkdown>
 
                                                     {/* Footer stats */}
-                                                    <footer className="mt-24 pt-12 border-t border-white/5 flex flex-wrap gap-8 text-base font-black text-muted-foreground uppercase tracking-[0.16em]">
-                                                        <div className="flex items-center gap-2"><DollarSign className="h-4 w-4" /> Compute Cost: ${selectedReport.cost || '0.00'}</div>
-                                                        <div className="flex items-center gap-2"><Activity className="h-4 w-4" /> Token Density: {selectedReport.usage?.total_tokens || 0} units</div>
-                                                        <div className="flex items-center gap-2"><Calendar className="h-4 w-4" /> Processed At: {new Date(selectedReport.created_at).toISOString()}</div>
+                                                    <footer className="mt-24 border-t border-white/5 pt-12">
+                                                        <div className="mb-4 text-base font-black uppercase tracking-[0.16em] text-muted-foreground">
+                                                            Report Metadata
+                                                        </div>
+                                                        <div className="grid gap-3 sm:grid-cols-3">
+                                                            <ReportFooterStat icon={<DollarSign className="h-4 w-4" />} label="Compute Cost" value={`$${selectedReport.cost || '0.00'}`} />
+                                                            <ReportFooterStat icon={<Activity className="h-4 w-4" />} label="Token Density" value={`${selectedReport.usage?.total_tokens || 0} units`} />
+                                                            <ReportFooterStat icon={<Calendar className="h-4 w-4" />} label="Processed At" value={new Date(selectedReport.created_at).toISOString()} />
+                                                        </div>
                                                     </footer>
                                                 </div>
                                             )}
@@ -880,6 +885,20 @@ function ResearchStat({ label, value, sub }: { label: string; value: string; sub
             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-1 truncate font-mono text-xl font-black text-white" title={value}>{value}</div>
             <div className="mt-1 truncate text-base font-semibold text-muted-foreground" title={sub}>{sub}</div>
+        </div>
+    );
+}
+
+function ReportFooterStat({ icon, label, value }: { icon: ReactNode; label: string; value: string }) {
+    return (
+        <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+            <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider text-muted-foreground">
+                {icon}
+                {label}
+            </div>
+            <div className="mt-2 break-words font-mono text-base font-black leading-relaxed text-slate-200" title={value}>
+                {value}
+            </div>
         </div>
     );
 }
