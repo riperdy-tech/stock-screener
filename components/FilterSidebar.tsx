@@ -272,7 +272,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="filter-section-list flex-1 overflow-y-auto p-4 space-y-4">
                 <div className="rounded-xl border border-border/60 bg-secondary/25 p-4">
                     <div className="flex items-start justify-between gap-4">
                         <div className="min-w-0">
@@ -675,8 +675,8 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <section className="rounded-xl border border-border/60 bg-background/20 p-4 shadow-sm">
-            <h3 className="text-xl font-black text-foreground">{title}</h3>
+        <section className="filter-section rounded-xl border border-border/60 bg-background/20 p-4 shadow-sm">
+            <h3 className="filter-section-title flex items-center gap-3 text-xl font-black text-foreground">{title}</h3>
             <div className="mt-4 space-y-4">
                 {children}
             </div>

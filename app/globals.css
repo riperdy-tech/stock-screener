@@ -126,3 +126,29 @@
 .report-prose code {
     @apply break-all;
 }
+
+.filter-section-list {
+    counter-reset: filter-section;
+}
+
+.filter-section {
+    counter-increment: filter-section;
+}
+
+.filter-section-title::before {
+    content: counter(filter-section, decimal-leading-zero);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    border-radius: 0.5rem;
+    border: 1px solid hsl(var(--primary) / 0.25);
+    background: hsl(var(--primary) / 0.10);
+    color: hsl(var(--primary));
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1;
+}
