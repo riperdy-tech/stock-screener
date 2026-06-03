@@ -123,6 +123,27 @@ function EmptyYoutubeStat({ label, value }: { label: string; value: string }) {
     );
 }
 
+function YoutubeLoadingCard() {
+    return (
+        <div className="rounded-lg border border-border/60 bg-secondary/15 p-4">
+            <div className="flex items-start justify-between gap-4">
+                <div className="space-y-3">
+                    <div className="h-6 w-24 animate-pulse rounded bg-secondary" />
+                    <div className="h-4 w-52 animate-pulse rounded bg-secondary/70" />
+                </div>
+                <div className="h-12 w-24 animate-pulse rounded-lg bg-secondary/60" />
+            </div>
+            <div className="mt-5 h-20 animate-pulse rounded-lg bg-red-500/10" />
+            <div className="mt-4 grid grid-cols-4 gap-2">
+                <div className="h-12 animate-pulse rounded bg-secondary/45" />
+                <div className="h-12 animate-pulse rounded bg-secondary/45" />
+                <div className="h-12 animate-pulse rounded bg-secondary/45" />
+                <div className="h-12 animate-pulse rounded bg-secondary/45" />
+            </div>
+        </div>
+    );
+}
+
 export function YoutubeStrategyDashboard() {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -279,9 +300,22 @@ export function YoutubeStrategyDashboard() {
                 </div>
 
                 {loading ? (
-                    <div className="h-72 rounded-xl border border-dashed border-border bg-card/50 flex flex-col items-center justify-center text-muted-foreground gap-3">
-                        <RefreshCw className="h-8 w-8 animate-spin" />
-                        <p className="text-xl font-black text-foreground">Evaluating YouTube strategy filters...</p>
+                    <div className="rounded-xl border border-border/70 bg-card/60 p-5 shadow-sm sm:p-6">
+                        <div className="flex items-start gap-3">
+                            <div className="rounded-lg border border-red-500/25 bg-red-500/10 p-3 text-red-300">
+                                <RefreshCw className="h-6 w-6 animate-spin" />
+                            </div>
+                            <div>
+                                <p className="text-xl font-black text-foreground">Evaluating YouTube strategy filters</p>
+                                <p className="mt-1 text-base leading-relaxed text-muted-foreground">
+                                    Checking EPS, value reversal, moving-average, and turnaround signals.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2">
+                            <YoutubeLoadingCard />
+                            <YoutubeLoadingCard />
+                        </div>
                     </div>
                 ) : filteredRows.length === 0 ? (
                     <div className="flex min-h-80 flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 px-6 py-8 text-center text-muted-foreground">
