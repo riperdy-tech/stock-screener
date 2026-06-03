@@ -2089,6 +2089,15 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
                 <span className="font-mono text-lg font-black text-foreground">{value}</span>
             </div>
             <p className="mt-1.5 line-clamp-2 text-base leading-snug text-muted-foreground">{detail}</p>
+            {onClick && (
+                <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-2 text-base font-black uppercase tracking-wider text-muted-foreground">
+                    <span>{active ? 'Applied' : 'Click to filter'}</span>
+                    <span className={clsx(
+                        "h-2.5 w-2.5 rounded-full",
+                        active ? "bg-primary shadow-[0_0_10px_hsl(var(--primary)/0.75)]" : "bg-muted-foreground/40"
+                    )} />
+                </div>
+            )}
         </>
     );
 
