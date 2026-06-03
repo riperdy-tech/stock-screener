@@ -613,20 +613,23 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         body="Composite ranking, archetype route, valuation margin, survivability, and impairment risk for the reverse-screening lens."
                                     />
                                 </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                <MetricGroupLabel label="Ranking" />
+                                <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
                                     <ReverseStat label="Composite" value={result.reverse.rev_composite != null ? Math.round(result.reverse.rev_composite) : 'n/a'} />
                                     <ReverseStat label="Band" value={result.reverse.rev_band || 'n/a'} band={result.reverse.rev_band} />
                                     <ReverseStat label="Archetype" value={result.reverse.rev_archetype || 'n/a'}
                                         sub={result.reverse.rev_archetype_secondary ? `to ${result.reverse.rev_archetype_secondary}` : undefined} />
                                     <ReverseStat label="Rank" value={result.reverse.rev_rank != null ? `#${result.reverse.rev_rank}` : 'n/a'} />
                                 </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                <MetricGroupLabel label="Score drivers" />
+                                <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
                                     <ReverseStat label="Quality" value={result.reverse.rev_quality != null ? result.reverse.rev_quality : 'n/a'} />
                                     <ReverseStat label="MoS" value={result.reverse.rev_mos != null ? Math.round(result.reverse.rev_mos) : 'n/a'} />
                                     <ReverseStat label="Survivability" value={result.reverse.rev_survivability != null ? result.reverse.rev_survivability : 'n/a'} />
                                     <ReverseStat label="Data Quality" value={result.reverse.rev_data_quality != null ? `${result.reverse.rev_data_quality}/5` : 'n/a'} />
                                 </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                <MetricGroupLabel label="Forward risk" />
+                                <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
                                     <ReverseStat label="CAGR Proxy" value={result.reverse.rev_cagr_proxy != null ? `${result.reverse.rev_cagr_proxy.toFixed(1)}%` : 'n/a'} />
                                     <ReverseStat label="Drawdown Proxy" value={result.reverse.rev_drawdown_proxy != null ? `${(result.reverse.rev_drawdown_proxy * 100).toFixed(1)}%` : 'n/a'} />
                                     <ReverseStat label="Efficiency" value={result.reverse.rev_efficiency != null ? `${result.reverse.rev_efficiency.toFixed(2)}x` : 'n/a'} />
@@ -712,6 +715,14 @@ function ReverseStat({ label, value, sub, band, warn }: { label: string; value: 
                 warn && "text-amber-400",
             )} title={String(value)}>{value}</div>
             {sub && <div className="text-base text-muted-foreground/70 mt-1">{sub}</div>}
+        </div>
+    );
+}
+
+function MetricGroupLabel({ label }: { label: string }) {
+    return (
+        <div className="mb-2 text-base font-black uppercase tracking-[0.16em] text-muted-foreground">
+            {label}
         </div>
     );
 }
