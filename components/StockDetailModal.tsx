@@ -527,47 +527,53 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         body="Secular-theme fit, momentum, and economics are shown first because they explain the stock's larger market setup."
                                     />
                                 </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                <MetricGroupLabel label="Theme rank" />
+                                <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
                                     <ReverseStat label="Signal" value={result.paradigm.pdm_signal != null ? result.paradigm.pdm_signal : 'n/a'} />
                                     <ReverseStat label="Band" value={result.paradigm.pdm_band || 'n/a'} band={result.paradigm.pdm_band} />
                                     <ReverseStat label="Primary Theme" value={result.paradigm.pdm_theme_primary || 'n/a'} />
                                     <ReverseStat label="Rank" value={result.paradigm.pdm_rank != null ? `#${result.paradigm.pdm_rank}` : 'n/a'} />
                                 </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                                <MetricGroupLabel label="Signal drivers" />
+                                <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
                                     <ReverseStat label="Membership" value={result.paradigm.pdm_membership_score != null ? result.paradigm.pdm_membership_score : 'n/a'} />
                                     <ReverseStat label="Momentum" value={result.paradigm.pdm_momentum_score != null ? result.paradigm.pdm_momentum_score : 'n/a'} />
                                     <ReverseStat label="Economics Gate" value={result.paradigm.pdm_economics_gate != null ? result.paradigm.pdm_economics_gate : 'n/a'} />
                                     <ReverseStat label="Confidence" value={result.paradigm.pdm_confidence != null ? result.paradigm.pdm_confidence : 'n/a'} />
                                 </div>
                                 {result.paradigm.pdm_themes && result.paradigm.pdm_themes.length > 0 && (
-                                    <div className="flex flex-wrap gap-1.5 mb-3">
-                                        <span className="text-base font-bold text-muted-foreground mr-1">Themes:</span>
-                                        {result.paradigm.pdm_themes.map((theme: string) => (
-                                            <span key={theme} className="text-base font-mono px-3 py-1.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
-                                                {theme}
-                                            </span>
-                                        ))}
+                                    <div className="mb-3 rounded-lg border border-purple-500/20 bg-background/25 p-4">
+                                        <div className="mb-2 text-base font-black uppercase tracking-wider text-muted-foreground">Matched themes</div>
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {result.paradigm.pdm_themes.map((theme: string) => (
+                                                <span key={theme} className="text-base font-mono px-3 py-1.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                                                    {theme}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
                                 {result.paradigm.pdm_flags && result.paradigm.pdm_flags.length > 0 && (
-                                    <div className="flex flex-wrap gap-1.5 mb-3">
-                                        <span className="text-base font-bold text-muted-foreground mr-1">Flags:</span>
-                                        {result.paradigm.pdm_flags.map((flag: string) => {
-                                            const isMacro = flag.startsWith('macro_');
-                                            const isAccel = flag === 'accelerating' || flag === 'regime_shift_up';
-                                            const isDecel = flag === 'decelerating' || flag === 'regime_shift_down';
-                                            return (
-                                                <span key={flag} className={clsx(
-                                                    "text-base font-mono px-3 py-1.5 rounded border",
-                                                    isMacro && "bg-red-500/15 text-red-400 border-red-500/40",
-                                                    isAccel && "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
-                                                    isDecel && "bg-amber-500/15 text-amber-400 border-amber-500/30",
-                                                    !isMacro && !isAccel && !isDecel && "bg-secondary/50 text-muted-foreground border-border/30",
-                                                )}>
-                                                    {flag}
-                                                </span>
-                                            );
-                                        })}
+                                    <div className="mb-3 rounded-lg border border-border/50 bg-background/25 p-4">
+                                        <div className="mb-2 text-base font-black uppercase tracking-wider text-muted-foreground">Advisory flags</div>
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {result.paradigm.pdm_flags.map((flag: string) => {
+                                                const isMacro = flag.startsWith('macro_');
+                                                const isAccel = flag === 'accelerating' || flag === 'regime_shift_up';
+                                                const isDecel = flag === 'decelerating' || flag === 'regime_shift_down';
+                                                return (
+                                                    <span key={flag} className={clsx(
+                                                        "text-base font-mono px-3 py-1.5 rounded border",
+                                                        isMacro && "bg-red-500/15 text-red-400 border-red-500/40",
+                                                        isAccel && "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+                                                        isDecel && "bg-amber-500/15 text-amber-400 border-amber-500/30",
+                                                        !isMacro && !isAccel && !isDecel && "bg-secondary/50 text-muted-foreground border-border/30",
+                                                    )}>
+                                                        {flag}
+                                                    </span>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
                                 )}
                                 {result.paradigm.pdm_pro && (
