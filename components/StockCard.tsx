@@ -33,6 +33,10 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
     const ticker = market === 'US' ? candidate.symbol.split('.')[0] : candidate.symbol;
     const companyName = candidate.name || candidate.symbol;
     const pricePrefix = market === 'Korea' ? 'KRW ' : market === 'Taiwan' ? 'NT$' : '$';
+    const priceLabel = `${pricePrefix}${Number(candidate.price || 0).toLocaleString('en-US', {
+        minimumFractionDigits: (market === 'Korea' || market === 'Taiwan') ? 0 : 2,
+        maximumFractionDigits: (market === 'Korea' || market === 'Taiwan') ? 0 : 2
+    })}`;
     const revenueGrowth = Number(candidate.revenueGrowth || 0);
     const marketCapLabel = formatCardMarketCap(Number(candidate.marketCap || 0), market);
     const paradigm = result.paradigm;
@@ -74,19 +78,21 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                         </p>
                     </div>
 
-                    <div className="shrink-0 text-right">
-                        <div className="font-mono text-lg font-black leading-none text-foreground">
-                            {pricePrefix}{candidate.price.toLocaleString('en-US', {
-                                minimumFractionDigits: (market === 'Korea' || market === 'Taiwan') ? 0 : 2,
-                                maximumFractionDigits: (market === 'Korea' || market === 'Taiwan') ? 0 : 2
-                            })}
+                    <div className="min-w-[8.5rem] shrink-0 rounded-lg border border-border/60 bg-secondary/20 p-3 text-right">
+                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Price</div>
+                        <div className="mt-1 truncate font-mono text-xl font-black leading-none text-foreground sm:text-2xl" title={priceLabel}>
+                            {priceLabel}
                         </div>
-                        <div className="mt-1 font-mono text-base font-bold text-muted-foreground">
-                            {marketCapLabel}
+                        <div className="mt-3 flex items-center justify-between gap-3 border-t border-border/50 pt-2">
+                            <span className="text-base font-bold text-muted-foreground">MCap</span>
+                            <span className="truncate font-mono text-base font-black text-foreground" title={marketCapLabel}>{marketCapLabel}</span>
                         </div>
-                        <div className={clsx("mt-1 flex items-center justify-end gap-1 text-base font-black", revenueGrowth >= 0 ? 'text-success' : 'text-danger')}>
-                            {revenueGrowth >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
-                            {Math.abs(revenueGrowth).toFixed(1)}%
+                        <div className="mt-2 flex items-center justify-between gap-3">
+                            <span className="text-base font-bold text-muted-foreground">Rev</span>
+                            <span className={clsx("flex items-center justify-end gap-1 font-mono text-base font-black", revenueGrowth >= 0 ? 'text-success' : 'text-danger')}>
+                                {revenueGrowth >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
+                                {Math.abs(revenueGrowth).toFixed(1)}%
+                            </span>
                         </div>
                     </div>
                 </div>
