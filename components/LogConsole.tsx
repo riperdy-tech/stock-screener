@@ -84,6 +84,12 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
 
     const logLines = logs ? logs.split('\n') : [];
     const lineCount = logLines.filter((line) => line.trim()).length;
+    const severityCounts = logLines.reduce((counts, line) => {
+        if (!line.trim()) return counts;
+        const tone = classifyLogLine(line);
+        counts[tone] += 1;
+        return counts;
+    }, { neutral: 0, success: 0, danger: 0, warning: 0, marker: 0 } satisfies Record<LogTone, number>);
     const supabaseConnected = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
     return (
@@ -121,6 +127,14 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                     <LogStat icon={<FileText className="h-4 w-4" />} label="Static Source" value="scan.log" sub="public/data baseline" />
                     <LogStat icon={<Radio className="h-4 w-4" />} label="Live Stream" value={supabaseConnected ? "Connected" : "Unavailable"} sub={supabaseConnected ? "Supabase channel ready" : "Missing public keys"} tone={supabaseConnected ? "success" : "danger"} />
                     <LogStat icon={<Terminal className="h-4 w-4" />} label="Lines Loaded" value={lineCount.toLocaleString()} sub={logs ? "Non-empty log lines" : "Waiting for data"} />
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 border-b border-gray-800 bg-[#0b0b0b] px-5 py-3">
+                    <LogSeverityPill tone="danger" label="Errors" value={severityCounts.danger} />
+                    <LogSeverityPill tone="warning" label="Warnings" value={severityCounts.warning} />
+                    <LogSeverityPill tone="success" label="Success" value={severityCounts.success} />
+                    <LogSeverityPill tone="marker" label="Notes" value={severityCounts.marker} />
+                    <LogSeverityPill tone="neutral" label="Other" value={severityCounts.neutral} />
                 </div>
 
                 {/* Log Content */}
@@ -174,17 +188,10 @@ function LogStat({ icon, label, value, sub, tone = "neutral" }: { icon: ReactNod
     );
 }
 
+type LogTone = "neutral" | "success" | "danger" | "warning" | "marker";
+
 function LogLine({ line }: { line: string }) {
-    const normalized = line.toLowerCase();
-    const tone = normalized.includes("error") || normalized.includes("failed") || normalized.includes("exception")
-        ? "danger"
-        : normalized.includes("warn") || normalized.includes("skipped")
-            ? "warning"
-            : normalized.includes("success") || normalized.includes("completed") || normalized.includes("done")
-                ? "success"
-                : line.includes("---")
-                    ? "marker"
-                    : "neutral";
+    const tone = classifyLogLine(line);
 
     if (!line.trim()) {
         return <div className="h-3" aria-hidden="true" />;
@@ -200,7 +207,29 @@ function LogLine({ line }: { line: string }) {
     );
 }
 
-function logLineToneClass(tone: "neutral" | "success" | "danger" | "warning" | "marker") {
+function classifyLogLine(line: string): LogTone {
+    const normalized = line.toLowerCase();
+    return normalized.includes("error") || normalized.includes("failed") || normalized.includes("exception")
+        ? "danger"
+        : normalized.includes("warn") || normalized.includes("skipped")
+            ? "warning"
+            : normalized.includes("success") || normalized.includes("completed") || normalized.includes("done")
+                ? "success"
+                : line.includes("---")
+                    ? "marker"
+                    : "neutral";
+}
+
+function LogSeverityPill({ tone, label, value }: { tone: LogTone; label: string; value: number }) {
+    return (
+        <div className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-base font-black ${logLineBadgeClass(tone)}`}>
+            <span>{label}</span>
+            <span className="font-mono">{value.toLocaleString()}</span>
+        </div>
+    );
+}
+
+function logLineToneClass(tone: LogTone) {
     if (tone === "success") return "border-green-500/20 bg-green-500/[0.06] text-green-300";
     if (tone === "danger") return "border-red-500/25 bg-red-500/[0.08] text-red-300";
     if (tone === "warning") return "border-amber-500/25 bg-amber-500/[0.08] text-amber-300";
@@ -208,7 +237,7 @@ function logLineToneClass(tone: "neutral" | "success" | "danger" | "warning" | "
     return "border-transparent bg-transparent text-gray-300";
 }
 
-function logLineBadgeClass(tone: "neutral" | "success" | "danger" | "warning" | "marker") {
+function logLineBadgeClass(tone: LogTone) {
     if (tone === "success") return "border-green-500/25 bg-green-500/10 text-green-300";
     if (tone === "danger") return "border-red-500/30 bg-red-500/10 text-red-300";
     if (tone === "warning") return "border-amber-500/30 bg-amber-500/10 text-amber-300";
@@ -216,7 +245,7 @@ function logLineBadgeClass(tone: "neutral" | "success" | "danger" | "warning" | 
     return "border-gray-800 bg-white/[0.03] text-gray-500";
 }
 
-function logLineLabel(tone: "neutral" | "success" | "danger" | "warning" | "marker") {
+function logLineLabel(tone: LogTone) {
     if (tone === "success") return "OK";
     if (tone === "danger") return "ERR";
     if (tone === "warning") return "WARN";
