@@ -378,14 +378,17 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         <nav aria-label="Scorecard sections" className="sticky top-[112px] z-10 -mx-1 overflow-x-auto border-y border-border/60 bg-card/95 px-1 py-2.5 backdrop-blur-xl">
                             <div className="flex min-w-max gap-2">
-                                {sectionLinks.map((section) => (
+                                {sectionLinks.map((section, index) => (
                                     <button
                                         key={section.id}
                                         type="button"
                                         onClick={() => scrollToSection(section.id)}
-                                        className="rounded-lg border border-border/60 bg-secondary/35 px-4 py-2.5 text-base font-black text-muted-foreground transition-colors hover:border-primary/50 hover:bg-secondary/70 hover:text-foreground"
+                                        className="group flex items-center gap-2 rounded-lg border border-border/60 bg-secondary/35 px-3.5 py-2.5 text-base font-black text-muted-foreground transition-colors hover:border-primary/50 hover:bg-secondary/70 hover:text-foreground"
                                     >
-                                        {section.label}
+                                        <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border/60 bg-background/40 font-mono text-base font-black text-muted-foreground transition-colors group-hover:border-primary/40 group-hover:text-primary">
+                                            {String(index + 1).padStart(2, '0')}
+                                        </span>
+                                        <span>{section.label}</span>
                                     </button>
                                 ))}
                             </div>
