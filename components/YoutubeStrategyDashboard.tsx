@@ -309,7 +309,7 @@ export function YoutubeStrategyDashboard() {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                        {filteredRows.map(({ result, evaluation }) => {
+                        {filteredRows.map(({ result, evaluation }, index) => {
                             const c = result.candidate as any;
                             const primaryMatch = evaluation.matchedStrategies[0] || "Video signal";
                             return (
@@ -317,6 +317,9 @@ export function YoutubeStrategyDashboard() {
                                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                                         <div className="min-w-0">
                                             <div className="flex items-center gap-2 flex-wrap">
+                                                <span className="rounded-md border border-border/60 bg-secondary/40 px-2.5 py-1 font-mono text-base font-black text-muted-foreground">
+                                                    #{index + 1}
+                                                </span>
                                                 <h3 className="text-2xl font-black tracking-tight">{c.symbol.split(".")[0]}</h3>
                                                 <span className="text-base text-muted-foreground truncate">{c.name}</span>
                                             </div>
@@ -361,15 +364,21 @@ export function YoutubeStrategyDashboard() {
                                         </span>
                                     </div>
 
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-                                        <MetricPill label="EPS TTM" value={formatStrategyNumber(evaluation.epsTtm)} />
-                                        <MetricPill label="Forward EPS" value={formatStrategyNumber(evaluation.forwardEpsEstimate)} />
-                                        <MetricPill label="P/B" value={formatStrategyNumber(evaluation.priceToBook)} />
-                                        <MetricPill label="P/E vs 5Y" value={`${formatStrategyNumber(evaluation.currentPe)} / ${formatStrategyNumber(evaluation.fiveYearAveragePe)}`} />
-                                        <MetricPill label="20M MA" value={formatStrategyNumber(evaluation.monthlyMa20)} />
-                                        <MetricPill label="Double Bottom" value={evaluation.hasDoubleBottom ? "Yes" : "No"} />
-                                        <MetricPill label="3M Declines" value={evaluation.hasConsecutiveMonthlyDeclines ? "Yes" : "No"} />
-                                        <MetricPill label="Score" value={String(result.score || 0)} />
+                                    <div className="mt-4 rounded-lg border border-border/60 bg-secondary/10 p-4">
+                                        <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Strategy Evidence</div>
+                                            <div className="text-base font-semibold text-muted-foreground">Fundamental and technical inputs</div>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+                                            <MetricPill label="EPS TTM" value={formatStrategyNumber(evaluation.epsTtm)} />
+                                            <MetricPill label="Forward EPS" value={formatStrategyNumber(evaluation.forwardEpsEstimate)} />
+                                            <MetricPill label="P/B" value={formatStrategyNumber(evaluation.priceToBook)} />
+                                            <MetricPill label="P/E vs 5Y" value={`${formatStrategyNumber(evaluation.currentPe)} / ${formatStrategyNumber(evaluation.fiveYearAveragePe)}`} />
+                                            <MetricPill label="20M MA" value={formatStrategyNumber(evaluation.monthlyMa20)} />
+                                            <MetricPill label="Double Bottom" value={evaluation.hasDoubleBottom ? "Yes" : "No"} />
+                                            <MetricPill label="3M Declines" value={evaluation.hasConsecutiveMonthlyDeclines ? "Yes" : "No"} />
+                                            <MetricPill label="Score" value={String(result.score || 0)} />
+                                        </div>
                                     </div>
                                 </article>
                             );
