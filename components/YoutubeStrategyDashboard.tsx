@@ -322,7 +322,7 @@ export function YoutubeStrategyDashboard() {
                                             </div>
                                             <p className="text-base text-muted-foreground mt-1 uppercase font-bold tracking-tight">{c.sector} / {c.industry || result.industry || "Unknown"}</p>
                                         </div>
-                                        <div className="min-w-[8.5rem] shrink-0 rounded-lg border border-border/60 bg-secondary/20 p-3 text-left sm:text-right">
+                                        <div className="w-full shrink-0 rounded-lg border border-border/60 bg-secondary/20 p-3 text-left sm:min-w-[8.5rem] sm:w-auto sm:text-right">
                                             <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Price</div>
                                             <div className="mt-1 truncate font-mono text-xl font-black leading-none text-foreground sm:text-2xl" title={formatPrice(c.price)}>
                                                 {formatPrice(c.price)}

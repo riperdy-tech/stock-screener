@@ -54,7 +54,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
             className="group relative h-full cursor-pointer overflow-hidden rounded-lg border border-border/80 bg-card/95 shadow-inner transition-all duration-300 animate-in fade-in zoom-in-95 fill-mode-backwards hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-xl"
         >
             <div className="flex h-full flex-col p-4 sm:p-5">
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
                             <span
@@ -78,7 +78,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                         </p>
                     </div>
 
-                    <div className="min-w-[8.5rem] shrink-0 rounded-lg border border-border/60 bg-secondary/20 p-3 text-right">
+                    <div className="w-full shrink-0 rounded-lg border border-border/60 bg-secondary/20 p-3 text-left sm:min-w-[8.5rem] sm:w-auto sm:text-right">
                         <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Price</div>
                         <div className="mt-1 truncate font-mono text-xl font-black leading-none text-foreground sm:text-2xl" title={priceLabel}>
                             {priceLabel}
