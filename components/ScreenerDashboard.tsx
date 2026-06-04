@@ -22,54 +22,26 @@ type StrategyId = ScreenMode;
 type ResultView = 'cards' | 'table';
 
 const STRATEGY_META: Record<StrategyId, {
-    title: string;
-    eyebrow: string;
-    description: string;
-    metricLabel: string;
     accent: string;
     icon: typeof Sparkles;
 }> = {
     '100bagger': {
-        title: '100-Bagger',
-        eyebrow: 'Growth filter',
-        description: 'Small-cap growth candidates screened against strict quantitative gates.',
-        metricLabel: 'strict matches',
         accent: 'text-sky-400 border-sky-500/40 bg-sky-500/10',
         icon: Telescope,
     },
     reverse: {
-        title: 'Reverse Engine',
-        eyebrow: 'Quality + value',
-        description: 'Ranks stocks by quality, margin of safety, survivability, and full composite.',
-        metricLabel: 'ranked names',
         accent: 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10',
         icon: ShieldCheck,
     },
     paradigm: {
-        title: 'Paradigm',
-        eyebrow: 'Secular themes',
-        description: 'Finds real participants in multi-year shifts like AI, GLP-1, energy, and security.',
-        metricLabel: 'theme-tagged',
         accent: 'text-purple-300 border-purple-500/40 bg-purple-500/10',
         icon: Layers3,
     },
     youtube: {
-        title: 'YouTube Strategy',
-        eyebrow: 'Video playbook',
-        description: 'Earnings momentum, deep-value reversal, and turnaround filters from the video strategy.',
-        metricLabel: 'video signals',
         accent: 'text-red-300 border-red-500/40 bg-red-500/10',
         icon: Youtube,
     },
 };
-
-const YOUTUBE_FILTER_META: Array<{ value: YoutubeStrategyFilter; label: string; description: string }> = [
-    { value: "any", label: "Any Video Signal", description: "Any stock matching at least one video playbook." },
-    { value: "earningsMomentum", label: "Earnings Momentum", description: "Large-cap EPS and revenue momentum." },
-    { value: "deepValueReversal", label: "Deep Value Reversal", description: "Cheap valuation plus monthly reversal evidence." },
-    { value: "turnaroundSeed", label: "Turnaround Seed", description: "Negative EPS with improving forward EPS." },
-    { value: "turnaroundScaleIn", label: "Turnaround Scale-In", description: "Reported EPS flipped back above zero." },
-];
 
 function adaptRowsToScreeningResults(
     rawData: any[],
@@ -209,7 +181,7 @@ function adaptStockJsonRowsToScreeningResults(
 }
 
 export function ScreenerDashboard() {
-    const { t, language, setLanguage } = useLanguage();
+    const { t } = useLanguage();
     const [loading, setLoading] = useState(true);
 
     const [rawResults, setRawResults] = useState<ScreeningResult[]>([]);
@@ -747,7 +719,7 @@ export function ScreenerDashboard() {
     }), [rawResults, youtubeTotals]);
     const isBaseUniverseLoading = loading && rawResults.length === 0;
     const isYoutubeCountLoading = youtubeLoading && youtubeSourceResults.length === 0;
-    const formatCount = (value: number, isLoading = isBaseUniverseLoading) => isLoading ? 'Loading' : value.toLocaleString();
+    const formatCount = (value: number, isLoading = isBaseUniverseLoading) => isLoading ? t('loading') : value.toLocaleString();
     const reverseBandCounts = useMemo(() => {
         const counts: Record<string, number> = {};
         rawResults.forEach(r => {
@@ -764,21 +736,58 @@ export function ScreenerDashboard() {
         });
         return counts;
     }, [rawResults]);
-    const activeStrategy = STRATEGY_META[screenMode];
+    const strategyMeta = useMemo(() => ({
+        '100bagger': {
+            ...STRATEGY_META['100bagger'],
+            title: t('strategy100Title'),
+            eyebrow: t('strategy100Eyebrow'),
+            description: t('strategy100Description'),
+            metricLabel: t('strategy100Metric'),
+        },
+        reverse: {
+            ...STRATEGY_META.reverse,
+            title: t('strategyReverseTitle'),
+            eyebrow: t('strategyReverseEyebrow'),
+            description: t('strategyReverseDescription'),
+            metricLabel: t('strategyReverseMetric'),
+        },
+        paradigm: {
+            ...STRATEGY_META.paradigm,
+            title: t('strategyParadigmTitle'),
+            eyebrow: t('strategyParadigmEyebrow'),
+            description: t('strategyParadigmDescription'),
+            metricLabel: t('strategyParadigmMetric'),
+        },
+        youtube: {
+            ...STRATEGY_META.youtube,
+            title: t('strategyYoutubeTitle'),
+            eyebrow: t('strategyYoutubeEyebrow'),
+            description: t('strategyYoutubeDescription'),
+            metricLabel: t('strategyYoutubeMetric'),
+        },
+    }), [t]);
+    const youtubeFilterMeta = useMemo(() => [
+        { value: "any" as const, label: t('youtubeAny'), description: t('youtubeAnyDesc') },
+        { value: "earningsMomentum" as const, label: t('youtubeEarnings'), description: t('youtubeEarningsDesc') },
+        { value: "deepValueReversal" as const, label: t('youtubeDeepValue'), description: t('youtubeDeepValueDesc') },
+        { value: "turnaroundSeed" as const, label: t('youtubeSeed'), description: t('youtubeSeedDesc') },
+        { value: "turnaroundScaleIn" as const, label: t('youtubeScaleIn'), description: t('youtubeScaleInDesc') },
+    ], [t]);
+    const activeStrategy = strategyMeta[screenMode];
     const activeMetric = screenMode === 'reverse'
-        ? 'Composite'
+        ? t('metricComposite')
         : screenMode === 'paradigm'
-            ? 'Paradigm signal'
+            ? t('metricParadigmSignal')
             : screenMode === 'youtube'
-                ? 'Video signal'
-                : '100-bagger score';
+                ? t('metricVideoSignal')
+                : t('metric100Score');
     const activeSummary = screenMode === 'reverse'
-        ? 'Sorted by Reverse composite, with quality, valuation, survivability, and archetype filters available in the sidebar.'
+        ? t('summaryReverse')
         : screenMode === 'paradigm'
-            ? 'Sorted by Paradigm signal. Cards keep Paradigm first so the theme thesis stays visible even beside other screens.'
+            ? t('summaryParadigm')
             : screenMode === 'youtube'
-                ? 'Screened by the video strategy playbooks: earnings momentum, deep-value reversal, and turnaround setups.'
-                : 'Screened by strict 100-bagger quantitative filters. Use the sidebar to tune growth, valuation, float, and ownership gates.';
+                ? t('summaryYoutube')
+                : t('summary100');
 
     const handleStrategySwitch = (id: StrategyId) => {
         setScreenMode(id);
@@ -829,8 +838,8 @@ export function ScreenerDashboard() {
         }
 
         if (screenMode === 'youtube') {
-            const activeYoutubeFilter = YOUTUBE_FILTER_META.find(item => item.value === youtubeFilter);
-            return [...searchChip, activeYoutubeFilter?.label || 'Any Video Signal'];
+            const activeYoutubeFilter = youtubeFilterMeta.find(item => item.value === youtubeFilter);
+            return [...searchChip, activeYoutubeFilter?.label || t('youtubeAny')];
         }
 
         return [
@@ -845,7 +854,7 @@ export function ScreenerDashboard() {
             filters.minInsiderOwnership > 0 ? `Insider >= ${filters.minInsiderOwnership}%` : null,
             filters.maxFloat < 5000 ? `Float <= ${filters.maxFloat}M` : null,
         ].filter((chip): chip is string => Boolean(chip));
-    }, [screenMode, reverseFilters, paradigmFilters, youtubeFilter, filters, selectedMarket, search]);
+    }, [screenMode, reverseFilters, paradigmFilters, youtubeFilter, youtubeFilterMeta, filters, selectedMarket, search, t]);
     const visibleFilterChips = activeFilterChips.slice(0, 8);
     const hiddenFilterChipCount = Math.max(activeFilterChips.length - visibleFilterChips.length, 0);
     const resetActiveFilters = () => {
@@ -913,7 +922,7 @@ export function ScreenerDashboard() {
             />
 
             {/* 2. Main Content Area */}
-            <main className="flex-1 flex flex-col h-screen overflow-hidden relative w-full">
+            <main className="relative flex min-w-0 flex-1 flex-col overflow-x-hidden">
                 {/* Header */}
                 <header className="py-3 md:min-h-20 border-b border-border/50 flex flex-col md:flex-row flex-shrink-0 items-start md:items-center justify-between px-4 md:px-6 bg-card/70 backdrop-blur-xl sticky top-0 z-30 shadow-sm gap-3 md:gap-0">
                     <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
@@ -924,8 +933,8 @@ export function ScreenerDashboard() {
                             <button 
                                 onClick={() => setShowHelp(true)}
                                 className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-full transition-colors"
-                                title="How scoring works"
-                                aria-label="Open scoring guide"
+                                title={t('howScoringWorks')}
+                                aria-label={t('openScoringGuide')}
                             >
                                 <HelpCircle className="h-5 w-5" />
                             </button>
@@ -934,7 +943,7 @@ export function ScreenerDashboard() {
                         <div className="flex md:hidden items-center gap-2 shrink-0">
                              <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2.5 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 rounded-full transition-all text-base font-black active:scale-95">
                                 <Sparkles className="h-4 w-4" />
-                                REPORTS
+                                {t('recentReports')}
                              </Link>
                              <button onClick={() => setIsSidebarOpen(true)} className="p-2 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition-colors border border-border/50" aria-label="Open filters">
                                 <Filter className="h-4 w-4" />
@@ -942,7 +951,7 @@ export function ScreenerDashboard() {
                         </div>
                         
                         <Link href="/reports" className="hidden md:flex text-base bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 px-6 py-2.5 rounded-full font-black items-center gap-2 tracking-tight transition-all active:scale-95 ml-6">
-                           <Sparkles className="h-4 w-4" /> RECENT REPORTS
+                           <Sparkles className="h-4 w-4" /> {t('recentReports')}
                         </Link>
                     </div>
 
@@ -976,7 +985,7 @@ export function ScreenerDashboard() {
                                     <Terminal className="h-5 w-5" />
                                     <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_5px_var(--success)]"></span>
                                 </div>
-                                <span className="hidden sm:inline tracking-tight">System Logs</span>
+                                <span className="hidden sm:inline tracking-tight">{t('systemLogs')}</span>
                             </button>
                             {/* Language Toggle */}
                             <LanguageToggle />
@@ -996,27 +1005,27 @@ export function ScreenerDashboard() {
                 </header>
 
                 {/* Content with Scroll */}
-                    <div className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 scroll-smooth">
+                    <div className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-5 scroll-smooth">
                     <section className="mb-5">
                         <div className="mb-3 flex flex-col gap-2 xl:flex-row xl:items-end xl:justify-between">
                             <div>
-                                <div className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">Investing lens</div>
-                                <h2 className="text-3xl font-black tracking-tight text-foreground">Strategy board</h2>
+                                <div className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">{t('investingLens')}</div>
+                                <h2 className="text-2xl font-black tracking-tight text-foreground md:text-3xl">{t('strategyBoard')}</h2>
                             </div>
                             <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
-                                Current strategy universe, primary rank metric, and cross-signal coverage at a glance.
+                                {t('strategyBoardDesc')}
                             </p>
                         </div>
-                        <div className="grid grid-cols-1 gap-3 pb-2 lg:grid-cols-2 2xl:grid-cols-4">
-                            {(Object.keys(STRATEGY_META) as StrategyId[]).map((id) => {
-                                const meta = STRATEGY_META[id];
+                        <div className="grid grid-cols-1 gap-3 pb-2 md:grid-cols-2 xl:grid-cols-4">
+                            {(Object.keys(strategyMeta) as StrategyId[]).map((id) => {
+                                const meta = strategyMeta[id];
                                 const Icon = meta.icon;
                                 const isActive = id === screenMode;
                                 const count = strategyCounts[id];
                                 const countLabel = formatCount(count, id === 'youtube' ? isYoutubeCountLoading : isBaseUniverseLoading);
                                 const content = (
                                     <div className={clsx(
-                                        "h-full min-h-[168px] rounded-lg border p-5 text-left transition-all",
+                                        "h-full min-h-[136px] rounded-lg border p-4 text-left transition-all",
                                         isActive
                                             ? "border-primary/70 bg-primary/10 shadow-[0_0_0_1px_rgba(59,130,246,0.18)]"
                                             : "border-border/70 bg-card/70 hover:border-primary/40 hover:bg-secondary/30"
@@ -1029,7 +1038,7 @@ export function ScreenerDashboard() {
                                                 "rounded-full px-3 py-1.5 text-base font-black uppercase tracking-wider",
                                                 isActive ? "bg-primary text-primary-foreground" : "bg-secondary/60 text-muted-foreground"
                                             )}>
-                                                {isActive ? 'Active' : 'Switch'}
+                                                {isActive ? t('active') : t('switch')}
                                             </span>
                                         </div>
                                         <div className="mt-3">
@@ -1057,7 +1066,7 @@ export function ScreenerDashboard() {
                             })}
                         </div>
                         <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
-                            {screenMode === 'youtube' && YOUTUBE_FILTER_META.map(item => (
+                            {screenMode === 'youtube' && youtubeFilterMeta.map(item => (
                                 <SubCard
                                     key={item.value}
                                     label={item.label}
@@ -1107,11 +1116,11 @@ export function ScreenerDashboard() {
                                 />
                             ))}
                             {screenMode === '100bagger' && [
-                                { label: 'Strict Pass', value: formatCount(strategyCounts['100bagger']), detail: 'Passed current strict status' },
-                                { label: 'Min Growth', value: `${filters.minRevenueGrowth}%`, detail: 'Revenue growth floor' },
-                                { label: 'Max Price', value: selectedMarket === 'US' ? `$${filters.maxPrice}` : String(filters.maxPrice), detail: 'Current price ceiling' },
-                                { label: 'Min ROIC', value: `${filters.minROIC}%`, detail: 'Return on invested capital' },
-                                { label: 'Max Float', value: `${filters.maxFloat}M`, detail: 'Float share ceiling' },
+                                { label: t('strictPass'), value: formatCount(strategyCounts['100bagger']), detail: t('strictPassDesc') },
+                                { label: t('minGrowth'), value: `${filters.minRevenueGrowth}%`, detail: t('minGrowthDesc') },
+                                { label: t('maxPriceShort'), value: selectedMarket === 'US' ? `$${filters.maxPrice}` : String(filters.maxPrice), detail: t('maxPriceDesc') },
+                                { label: t('minRoicShort'), value: `${filters.minROIC}%`, detail: t('minRoicDesc') },
+                                { label: t('maxFloatShort'), value: `${filters.maxFloat}M`, detail: t('maxFloatDesc') },
                             ].map(item => (
                                 <SubCard
                                     key={item.label}
@@ -1178,7 +1187,7 @@ export function ScreenerDashboard() {
                                     <span className={clsx("rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider", activeStrategy.accent)}>
                                         {activeStrategy.eyebrow}
                                     </span>
-                                    <span className="text-base font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} market</span>
+                                    <span className="text-base font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} {t('selectedMarket')}</span>
                                 </div>
                                 <h2 className="mt-2 text-3xl font-black tracking-tight">{activeStrategy.title}</h2>
                                 <p className="mt-1 max-w-3xl text-base leading-relaxed text-muted-foreground">{activeSummary}</p>
@@ -1191,7 +1200,7 @@ export function ScreenerDashboard() {
                                         ))}
                                         {hiddenFilterChipCount > 0 && (
                                             <span className="rounded-full border border-border/70 bg-secondary/40 px-3.5 py-2 text-base font-bold text-muted-foreground">
-                                                +{hiddenFilterChipCount} more
+                                                +{hiddenFilterChipCount} {t('more')}
                                             </span>
                                         )}
                                         <button
@@ -1199,16 +1208,16 @@ export function ScreenerDashboard() {
                                             onClick={resetActiveFilters}
                                             className="rounded-full border border-primary/40 bg-primary/10 px-3.5 py-2 text-base font-black text-primary transition-colors hover:bg-primary/15"
                                         >
-                                            Reset filters
+                                            {t('resetFiltersShort')}
                                         </button>
                                     </div>
                                 )}
                             </div>
-                            <div className="flex flex-col gap-3 sm:min-w-[420px]">
+                            <div className="flex w-full flex-col gap-3 lg:max-w-[390px]">
                                 <div className="grid grid-cols-3 gap-2">
-                                    <SummaryMetric label="Showing" value={`${filteredCount > 0 ? startIndex + 1 : 0}-${Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}`} />
-                                    <SummaryMetric label="Results" value={filteredCount.toLocaleString()} />
-                                    <SummaryMetric label="Sorted by" value={activeMetric} />
+                                    <SummaryMetric label={t('showingRange')} value={`${filteredCount > 0 ? startIndex + 1 : 0}-${Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}`} />
+                                    <SummaryMetric label={t('results')} value={filteredCount.toLocaleString()} />
+                                    <SummaryMetric label={t('sortedBy')} value={activeMetric} />
                                 </div>
                                 <div className="grid grid-cols-2 rounded-lg border border-border/70 bg-secondary/30 p-1 shadow-inner">
                                     <button
@@ -1221,7 +1230,7 @@ export function ScreenerDashboard() {
                                         aria-pressed={resultView === 'cards'}
                                     >
                                         <LayoutGrid className="h-4 w-4" />
-                                        Cards
+                                        {t('cards')}
                                     </button>
                                     <button
                                         type="button"
@@ -1233,7 +1242,7 @@ export function ScreenerDashboard() {
                                         aria-pressed={resultView === 'table'}
                                     >
                                         <Table2 className="h-4 w-4" />
-                                        Table
+                                        {t('table')}
                                     </button>
                                 </div>
                             </div>
@@ -1247,12 +1256,12 @@ export function ScreenerDashboard() {
                             <span className={clsx("rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider", activeStrategy.accent)}>
                                 {activeStrategy.title}
                             </span>
-                            <p className="mt-4 text-2xl font-black text-foreground">No matching stocks</p>
+                            <p className="mt-4 text-2xl font-black text-foreground">{t('noMatchingStocks')}</p>
                             <p className="mt-2 max-w-xl text-base leading-relaxed">{t('noStocks')}</p>
                             <div className="mt-5 grid w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
-                                <EmptyStateStat label="Market" value={selectedMarket} />
-                                <EmptyStateStat label="Active Filters" value={visibleFilterChips.length + hiddenFilterChipCount} />
-                                <EmptyStateStat label="View" value={resultView === 'table' ? 'Table' : 'Cards'} />
+                                <EmptyStateStat label={t('selectedMarket')} value={selectedMarket} />
+                                <EmptyStateStat label={t('activeFilters')} value={visibleFilterChips.length + hiddenFilterChipCount} />
+                                <EmptyStateStat label={t('view')} value={resultView === 'table' ? t('table') : t('cards')} />
                             </div>
                             {visibleFilterChips.length > 0 && (
                                 <div className="mt-4 flex max-w-2xl flex-wrap justify-center gap-2">
@@ -1263,7 +1272,7 @@ export function ScreenerDashboard() {
                                     ))}
                                     {hiddenFilterChipCount > 0 && (
                                         <span className="rounded-md border border-border/60 bg-secondary/25 px-3 py-1.5 text-base font-black text-muted-foreground">
-                                            +{hiddenFilterChipCount} more
+                                            +{hiddenFilterChipCount} {t('more')}
                                         </span>
                                     )}
                                 </div>
@@ -1273,7 +1282,7 @@ export function ScreenerDashboard() {
                     ) : (
                         <>
                             {resultView === 'cards' ? (
-                                <div className="grid grid-cols-1 gap-4 mb-8 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                                <div className="grid grid-cols-1 gap-4 mb-8 lg:grid-cols-2 2xl:grid-cols-3">
                                     {currentData.map((result, i) => (
                                         <div key={result.candidate.symbol} className="relative group/card">
                                             {/* Selection checkbox - reverse mode only */}
@@ -1336,14 +1345,14 @@ export function ScreenerDashboard() {
                                 <div className="pb-8">
                                     <div className="mx-auto flex max-w-4xl flex-col gap-3 rounded-xl border border-border/70 bg-card/75 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
                                         <div className="text-center sm:text-left">
-                                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Page {currentPage} of {totalPages}</div>
+                                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{t('page')} {currentPage} {t('of')} {totalPages}</div>
                                             <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
                                                 <span className="rounded-md border border-primary/25 bg-primary/10 px-3 py-1.5 font-mono text-lg font-black text-primary">
                                                     {filteredCount > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}
                                                 </span>
-                                                <span className="text-base font-bold text-muted-foreground">of {filteredCount.toLocaleString()} results</span>
+                                                <span className="text-base font-bold text-muted-foreground">{t('of')} {filteredCount.toLocaleString()} {t('results')}</span>
                                                 <span className="rounded-md border border-border/60 bg-secondary/30 px-2.5 py-1.5 text-base font-black text-muted-foreground">
-                                                    {ITEMS_PER_PAGE} / page
+                                                    {ITEMS_PER_PAGE} / {t('perPage')}
                                                 </span>
                                             </div>
                                         </div>

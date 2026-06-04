@@ -241,20 +241,20 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
         setLocalParadigmFilters(DEFAULT_PARADIGM_FILTERS);
         if (setParadigmFilters) setParadigmFilters(DEFAULT_PARADIGM_FILTERS);
     };
-    const activeLensTitle = screenMode === 'reverse' ? 'Reverse Engine'
-        : screenMode === 'paradigm' ? 'Paradigm Themes'
-            : screenMode === 'youtube' ? 'YouTube Strategy'
-                : '100-Bagger';
+    const activeLensTitle = screenMode === 'reverse' ? t('strategyReverseTitle')
+        : screenMode === 'paradigm' ? t('strategyParadigmTitle')
+            : screenMode === 'youtube' ? t('strategyYoutubeTitle')
+                : t('strategy100Title');
     const activeLensBody = screenMode === 'reverse'
-        ? 'Quality, valuation, survivability, and composite filters.'
+        ? t('lensBodyReverse')
         : screenMode === 'paradigm'
-            ? 'Theme, conviction, momentum, and economics filters.'
+            ? t('lensBodyParadigm')
             : screenMode === 'youtube'
-                ? 'Video strategy playbooks update immediately.'
-                : 'Strict growth, valuation, float, and ownership gates.';
-    const resultLabel = screenMode === 'reverse' ? 'Reverse candidates'
-        : screenMode === 'paradigm' ? 'Paradigm candidates'
-            : screenMode === 'youtube' ? 'YouTube candidates'
+                ? t('lensBodyYoutube')
+                : t('lensBody100');
+    const resultLabel = screenMode === 'reverse' ? t('reverseCandidates')
+        : screenMode === 'paradigm' ? t('paradigmCandidates')
+            : screenMode === 'youtube' ? t('youtubeCandidates')
                 : t('assets');
 
     return (
@@ -276,7 +276,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 <div className="rounded-xl border border-border/60 bg-secondary/25 p-4">
                     <div className="flex items-start justify-between gap-4">
                         <div className="min-w-0">
-                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Active lens</div>
+                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{t('activeLens')}</div>
                             <div className="mt-1 truncate text-xl font-black text-foreground">
                                 {activeLensTitle}
                             </div>
@@ -616,9 +616,9 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 )}
 
                 <div className="text-center text-base text-muted-foreground mt-8 pb-20">
-                    {screenMode === 'reverse' ? `${totalResults} Reverse candidates`
-                        : screenMode === 'paradigm' ? `${totalResults} Paradigm candidates`
-                        : screenMode === 'youtube' ? `${totalResults} YouTube strategy candidates`
+                    {screenMode === 'reverse' ? `${totalResults} ${t('reverseCandidates')}`
+                        : screenMode === 'paradigm' ? `${totalResults} ${t('paradigmCandidates')}`
+                        : screenMode === 'youtube' ? `${totalResults} ${t('youtubeCandidates')}`
                         : `${t('showing')} ${totalResults} ${t('assets')}`}
                 </div>
             </div>
@@ -626,34 +626,40 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
             {/* Sticky Actions Footer */}
             {screenMode === 'reverse' && (
                 <SidebarActions
-                    primaryLabel="Apply Reverse"
+                    primaryLabel={t('applyReverse')}
                     onPrimary={handleReverseApply}
                     onReset={handleReverseReset}
                     tone="emerald"
-                    contextLabel="Reverse candidates"
+                    resetLabel={t('reset')}
+                    contextLabel={t('reverseCandidates')}
                     contextValue={totalResults}
+                    currentViewLabel={t('currentView')}
+                    resultsLabel={t('results')}
                 />
             )}
             {screenMode === 'paradigm' && (
                 <SidebarActions
-                    primaryLabel="Apply Paradigm"
+                    primaryLabel={t('applyParadigm')}
                     onPrimary={handleParadigmApply}
                     onReset={handleParadigmReset}
                     tone="purple"
-                    contextLabel="Paradigm candidates"
+                    resetLabel={t('reset')}
+                    contextLabel={t('paradigmCandidates')}
                     contextValue={totalResults}
+                    currentViewLabel={t('currentView')}
+                    resultsLabel={t('results')}
                 />
             )}
             {screenMode === 'youtube' && (
                 <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-4 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
                     <div className="flex items-center justify-between gap-4 rounded-lg border border-red-500/20 bg-red-500/[0.06] px-4 py-3">
                         <div>
-                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Live YouTube filter</div>
-                            <div className="mt-1 text-base font-bold text-red-300">Updates instantly</div>
+                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{t('liveYoutubeFilter')}</div>
+                            <div className="mt-1 text-base font-bold text-red-300">{t('updatesInstantly')}</div>
                         </div>
                         <div className="text-right">
                             <div className="font-mono text-2xl font-black text-foreground">{totalResults.toLocaleString()}</div>
-                            <div className="text-base font-bold text-muted-foreground">matches</div>
+                            <div className="text-base font-bold text-muted-foreground">{t('matches')}</div>
                         </div>
                     </div>
                 </div>
@@ -667,6 +673,8 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                     resetLabel={t('reset')}
                     contextLabel={t('assets')}
                     contextValue={totalResults}
+                    currentViewLabel={t('currentView')}
+                    resultsLabel={t('results')}
                 />
             )}
         </div>
@@ -684,7 +692,7 @@ function Section({ title, children }: { title: string, children: React.ReactNode
     )
 }
 
-function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "Reset", contextLabel, contextValue }: { primaryLabel: string; onPrimary: () => void; onReset: () => void; tone: "emerald" | "primary" | "purple"; resetLabel?: string; contextLabel?: string; contextValue?: number }) {
+function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "Reset", contextLabel, contextValue, currentViewLabel = "Current view", resultsLabel = "results" }: { primaryLabel: string; onPrimary: () => void; onReset: () => void; tone: "emerald" | "primary" | "purple"; resetLabel?: string; contextLabel?: string; contextValue?: number; currentViewLabel?: string; resultsLabel?: string }) {
     const primaryClass = tone === "emerald"
         ? "bg-emerald-600 text-white hover:bg-emerald-500"
         : tone === "purple"
@@ -696,12 +704,12 @@ function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "
             {contextLabel && contextValue !== undefined && (
                 <div className="mb-3 flex items-center justify-between gap-4 rounded-lg border border-border/60 bg-secondary/25 px-4 py-3">
                     <div>
-                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Current view</div>
+                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{currentViewLabel}</div>
                         <div className="mt-1 text-base font-bold text-foreground">{contextLabel}</div>
                     </div>
                     <div className="text-right">
                         <div className="font-mono text-2xl font-black text-primary">{contextValue.toLocaleString()}</div>
-                        <div className="text-base font-bold text-muted-foreground">results</div>
+                        <div className="text-base font-bold text-muted-foreground">{resultsLabel}</div>
                     </div>
                 </div>
             )}

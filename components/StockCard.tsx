@@ -5,6 +5,7 @@ import { YoutubeStrategyEvaluation, formatStrategyNumber } from "@/lib/youtube-s
 import { ArrowDownRight, ArrowUpRight, Layers3, ShieldCheck, Telescope, Youtube } from "lucide-react";
 import clsx from "clsx";
 import type { ReactNode } from "react";
+import { useLanguage } from "./LanguageContext";
 
 type ScreenMode = '100bagger' | 'reverse' | 'paradigm' | 'youtube';
 
@@ -27,6 +28,7 @@ const paradigmBandLabel: Record<string, string> = {
 };
 
 export function StockCard({ result, onClick, index = 0, market = 'US', screenMode = '100bagger', youtubeEvaluation }: StockCardProps) {
+    const { t } = useLanguage();
     if (!result || !result.candidate) return null;
 
     const { candidate } = result;
@@ -74,21 +76,21 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                             {companyName}
                         </p>
                         <p className="mt-1 truncate text-base text-muted-foreground/80">
-                            {candidate.sector || "Unknown sector"} / {candidate.industry || result.industry || "Unknown industry"}
+                            {candidate.sector || t('unknownSector')} / {candidate.industry || result.industry || t('unknownIndustry')}
                         </p>
                     </div>
 
                     <div className="w-full shrink-0 rounded-lg border border-border/60 bg-secondary/20 p-3 text-left sm:min-w-[8.5rem] sm:w-auto sm:text-right">
-                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Price</div>
+                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{t('price')}</div>
                         <div className="mt-1 truncate font-mono text-xl font-black leading-none text-foreground sm:text-2xl" title={priceLabel}>
                             {priceLabel}
                         </div>
                         <div className="mt-3 flex items-center justify-between gap-3 border-t border-border/50 pt-2">
-                            <span className="text-base font-bold text-muted-foreground">MCap</span>
+                            <span className="text-base font-bold text-muted-foreground">{t('mcap')}</span>
                             <span className="truncate font-mono text-base font-black text-foreground" title={marketCapLabel}>{marketCapLabel}</span>
                         </div>
                         <div className="mt-2 flex items-center justify-between gap-3">
-                            <span className="text-base font-bold text-muted-foreground">Rev</span>
+                            <span className="text-base font-bold text-muted-foreground">{t('growth')}</span>
                             <span className={clsx("flex items-center justify-end gap-1 font-mono text-base font-black", revenueGrowth >= 0 ? 'text-success' : 'text-danger')}>
                                 {revenueGrowth >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
                                 {Math.abs(revenueGrowth).toFixed(1)}%
@@ -128,7 +130,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                     ) : (
                         <div className="flex items-center gap-2 text-base text-muted-foreground">
                             <Layers3 className="h-4 w-4 text-purple-300/60" />
-                            No Paradigm theme tag
+                            {t('paradigmNoTag')}
                         </div>
                     )}
                 </div>
@@ -138,7 +140,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                 </div>
 
                 <div className="mt-3 border-t border-border/60 pt-3">
-                    <div className="mb-2 text-base font-black uppercase tracking-wider text-muted-foreground">Other signals</div>
+                    <div className="mb-2 text-base font-black uppercase tracking-wider text-muted-foreground">{t('otherSignals')}</div>
                     <div className="flex flex-wrap gap-1.5">
                         <SignalChip
                             icon={<Telescope className="h-4 w-4" />}
@@ -192,16 +194,18 @@ function formatCardMarketCap(value: number, market: 'US' | 'India' | 'Korea' | '
 }
 
 function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: ScreeningResult; screenMode: ScreenMode; youtubeEvaluation?: YoutubeStrategyEvaluation }) {
+    const { t } = useLanguage();
+
     if (screenMode === 'reverse') {
         const reverse = result.reverse;
         if (!reverse || !reverse.rev_band || reverse.rev_band === 'Excluded') {
-            return <EmptyLens icon={<ShieldCheck className="h-4 w-4" />} label="No Reverse score" detail="Outside the current reverse-engine scoring set." />;
+            return <EmptyLens icon={<ShieldCheck className="h-4 w-4" />} label={t('noReverseScore')} detail={t('reverseNoScoreDetail')} />;
         }
         return (
             <div>
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider text-emerald-400">
-                        <ShieldCheck className="h-4 w-4" /> Reverse Engine
+                        <ShieldCheck className="h-4 w-4" /> {t('strategyReverseTitle')}
                     </div>
                     <span className="font-mono text-base font-black text-foreground">{reverse.rev_composite != null ? Math.round(reverse.rev_composite) : 'n/a'}</span>
                 </div>
@@ -217,13 +221,13 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
     if (screenMode === 'paradigm') {
         const paradigm = result.paradigm;
         if (!paradigm?.pdm_themes?.length) {
-            return <EmptyLens icon={<Layers3 className="h-4 w-4" />} label="No secular-theme match" detail="No paradigm theme has enough evidence yet." />;
+            return <EmptyLens icon={<Layers3 className="h-4 w-4" />} label={t('noSecularTheme')} detail={t('noSecularThemeDetail')} />;
         }
         return (
             <div>
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider text-purple-300">
-                        <Layers3 className="h-4 w-4" /> Paradigm Lens
+                        <Layers3 className="h-4 w-4" /> {t('strategyParadigmTitle')}
                     </div>
                     <span className="font-mono text-base font-black text-foreground">{paradigm.pdm_signal != null ? Math.round(paradigm.pdm_signal) : 'n/a'}</span>
                 </div>
@@ -238,13 +242,13 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
 
     if (screenMode === 'youtube') {
         if (!youtubeEvaluation || youtubeEvaluation.matchedStrategies.length === 0) {
-            return <EmptyLens icon={<Youtube className="h-4 w-4" />} label="No YouTube strategy match" detail="EPS, value, or turnaround triggers are not active." />;
+            return <EmptyLens icon={<Youtube className="h-4 w-4" />} label={t('noYoutubeMatch')} detail={t('noYoutubeMatchDetail')} />;
         }
         return (
             <div>
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider text-red-300">
-                        <Youtube className="h-4 w-4" /> YouTube Strategy
+                        <Youtube className="h-4 w-4" /> {t('strategyYoutubeTitle')}
                     </div>
                     <span className="truncate text-right text-base font-black text-foreground" title={youtubeEvaluation.matchedStrategies.join(', ')}>
                         {youtubeEvaluation.matchedStrategies[0]}
@@ -264,12 +268,12 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
         <div>
             <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider text-sky-400">
-                    <Telescope className="h-4 w-4" /> 100-Bagger
+                    <Telescope className="h-4 w-4" /> {t('strategy100Title')}
                 </div>
                 <span className="font-mono text-base font-black text-foreground">{Math.round(result.score)}</span>
             </div>
             <div className="mt-3 grid grid-cols-3 gap-2">
-                <MiniMetric label="Status" value={result.passed ? 'Pass' : 'Review'} />
+                <MiniMetric label={t('status')} value={result.passed ? t('pass') : t('review')} />
                 <MiniMetric label="ROIC" value={`${Number(result.candidate.roic || 0).toFixed(0)}%`} />
                 <MiniMetric label="P/S" value={`${Number(result.candidate.priceToSales || 0).toFixed(1)}x`} />
             </div>
