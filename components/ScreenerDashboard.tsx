@@ -1006,17 +1006,17 @@ export function ScreenerDashboard() {
 
                 {/* Content with Scroll */}
                     <div className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-5 scroll-smooth">
-                    <section className="mb-5">
-                        <div className="mb-3 flex flex-col gap-2 xl:flex-row xl:items-end xl:justify-between">
+                    <section className="mb-4">
+                        <div className="mb-2 flex flex-col gap-1 xl:flex-row xl:items-end xl:justify-between">
                             <div>
-                                <div className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">{t('investingLens')}</div>
-                                <h2 className="text-2xl font-black tracking-tight text-foreground md:text-3xl">{t('strategyBoard')}</h2>
+                                <div className="text-xs font-black uppercase tracking-[0.18em] text-muted-foreground">{t('investingLens')}</div>
+                                <h2 className="text-xl font-black tracking-tight text-foreground md:text-2xl">{t('strategyBoard')}</h2>
                             </div>
-                            <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
+                            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
                                 {t('strategyBoardDesc')}
                             </p>
                         </div>
-                        <div className="grid grid-cols-1 gap-3 pb-2 md:grid-cols-2 xl:grid-cols-4">
+                        <div className="grid grid-cols-1 gap-2 pb-1 sm:grid-cols-2 xl:grid-cols-4">
                             {(Object.keys(strategyMeta) as StrategyId[]).map((id) => {
                                 const meta = strategyMeta[id];
                                 const Icon = meta.icon;
@@ -1025,30 +1025,23 @@ export function ScreenerDashboard() {
                                 const countLabel = formatCount(count, id === 'youtube' ? isYoutubeCountLoading : isBaseUniverseLoading);
                                 const content = (
                                     <div className={clsx(
-                                        "h-full min-h-[136px] rounded-lg border p-4 text-left transition-all",
+                                        "h-full rounded-lg border p-3 text-left transition-all",
                                         isActive
                                             ? "border-primary/70 bg-primary/10 shadow-[0_0_0_1px_rgba(59,130,246,0.18)]"
                                             : "border-border/70 bg-card/70 hover:border-primary/40 hover:bg-secondary/30"
                                     )}>
-                                        <div className="flex items-start justify-between gap-3">
-                                            <div className={clsx("rounded-md border p-2.5", meta.accent)}>
-                                                <Icon className="h-5 w-5" />
+                                        <div className="flex items-center gap-3">
+                                            <div className={clsx("shrink-0 rounded-md border p-2", meta.accent)}>
+                                                <Icon className="h-4 w-4" />
                                             </div>
-                                            <span className={clsx(
-                                                "rounded-full px-3 py-1.5 text-base font-black uppercase tracking-wider",
-                                                isActive ? "bg-primary text-primary-foreground" : "bg-secondary/60 text-muted-foreground"
-                                            )}>
-                                                {isActive ? t('active') : t('switch')}
-                                            </span>
-                                        </div>
-                                        <div className="mt-3">
-                                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{meta.eyebrow}</div>
-                                            <div className="mt-1 text-xl font-black text-foreground">{meta.title}</div>
-                                            <p className="mt-1 line-clamp-2 text-base leading-relaxed text-muted-foreground">{meta.description}</p>
-                                        </div>
-                                        <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-2">
-                                            <span className="text-base font-bold uppercase text-muted-foreground">{meta.metricLabel}</span>
-                                            <span className="font-mono text-lg font-black text-foreground">{countLabel}</span>
+                                            <div className="min-w-0 flex-1">
+                                                <div className="truncate text-xs font-black uppercase tracking-wider text-muted-foreground">{meta.eyebrow}</div>
+                                                <div className="truncate text-base font-black text-foreground">{meta.title}</div>
+                                            </div>
+                                            <div className="shrink-0 text-right">
+                                                <div className="font-mono text-base font-black text-foreground">{countLabel}</div>
+                                                <div className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">{meta.metricLabel}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 );
@@ -1065,7 +1058,7 @@ export function ScreenerDashboard() {
                                 );
                             })}
                         </div>
-                        <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+                        <div className="mt-2 grid grid-cols-2 gap-2 xl:grid-cols-5">
                             {screenMode === 'youtube' && youtubeFilterMeta.map(item => (
                                 <SubCard
                                     key={item.value}
@@ -1180,40 +1173,40 @@ export function ScreenerDashboard() {
                             )}
                         </div>
                     )}
-                    <div className="mb-6 rounded-lg border border-border/70 bg-card/70 p-5 shadow-sm">
-                        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="mb-4 rounded-lg border border-border/70 bg-card/70 p-4 shadow-sm">
+                        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                             <div className="min-w-0">
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <span className={clsx("rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider", activeStrategy.accent)}>
+                                    <span className={clsx("rounded-md border px-2.5 py-1 text-xs font-black uppercase tracking-wider", activeStrategy.accent)}>
                                         {activeStrategy.eyebrow}
                                     </span>
-                                    <span className="text-base font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} {t('selectedMarket')}</span>
+                                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} {t('selectedMarket')}</span>
                                 </div>
-                                <h2 className="mt-2 text-3xl font-black tracking-tight">{activeStrategy.title}</h2>
-                                <p className="mt-1 max-w-3xl text-base leading-relaxed text-muted-foreground">{activeSummary}</p>
+                                <h2 className="mt-1.5 text-2xl font-black tracking-tight">{activeStrategy.title}</h2>
+                                <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{activeSummary}</p>
                                 {visibleFilterChips.length > 0 && (
-                                    <div className="mt-3 flex flex-wrap items-center gap-2">
+                                    <div className="mt-2 flex flex-wrap items-center gap-1.5">
                                         {visibleFilterChips.map((chip) => (
-                                            <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-3.5 py-2 text-base font-bold text-muted-foreground">
+                                            <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-xs font-bold text-muted-foreground">
                                                 {chip}
                                             </span>
                                         ))}
                                         {hiddenFilterChipCount > 0 && (
-                                            <span className="rounded-full border border-border/70 bg-secondary/40 px-3.5 py-2 text-base font-bold text-muted-foreground">
+                                            <span className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-xs font-bold text-muted-foreground">
                                                 +{hiddenFilterChipCount} {t('more')}
                                             </span>
                                         )}
                                         <button
                                             type="button"
                                             onClick={resetActiveFilters}
-                                            className="rounded-full border border-primary/40 bg-primary/10 px-3.5 py-2 text-base font-black text-primary transition-colors hover:bg-primary/15"
+                                            className="rounded-full border border-primary/40 bg-primary/10 px-2.5 py-1 text-xs font-black text-primary transition-colors hover:bg-primary/15"
                                         >
                                             {t('resetFiltersShort')}
                                         </button>
                                     </div>
                                 )}
                             </div>
-                            <div className="flex w-full flex-col gap-3 lg:max-w-[390px]">
+                            <div className="flex w-full flex-col gap-2 lg:max-w-[360px]">
                                 <div className="grid grid-cols-3 gap-2">
                                     <SummaryMetric label={t('showingRange')} value={`${filteredCount > 0 ? startIndex + 1 : 0}-${Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}`} />
                                     <SummaryMetric label={t('results')} value={filteredCount.toLocaleString()} />
@@ -1224,7 +1217,7 @@ export function ScreenerDashboard() {
                                         type="button"
                                         onClick={() => setResultView('cards')}
                                         className={clsx(
-                                            "flex items-center justify-center gap-2 rounded-md px-3 py-2.5 text-base font-black transition-colors",
+                                            "flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-black transition-colors",
                                             resultView === 'cards' ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                                         )}
                                         aria-pressed={resultView === 'cards'}
@@ -1236,7 +1229,7 @@ export function ScreenerDashboard() {
                                         type="button"
                                         onClick={() => setResultView('table')}
                                         className={clsx(
-                                            "flex items-center justify-center gap-2 rounded-md px-3 py-2.5 text-base font-black transition-colors",
+                                            "flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-black transition-colors",
                                             resultView === 'table' ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                                         )}
                                         aria-pressed={resultView === 'table'}
@@ -1876,9 +1869,9 @@ function HelpPillar({ title, text }: { title: string; text: string }) {
 
 function SummaryMetric({ label, value }: { label: string; value: string | number }) {
     return (
-        <div className="rounded-md border border-border/60 bg-secondary/20 px-3.5 py-3">
-            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-1 truncate font-mono text-lg font-black text-foreground" title={String(value)}>{value}</div>
+        <div className="rounded-md border border-border/60 bg-secondary/20 px-3 py-2">
+            <div className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-0.5 truncate font-mono text-base font-black text-foreground" title={String(value)}>{value}</div>
         </div>
     );
 }
@@ -2202,13 +2195,13 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
 
     const content = (
         <>
-            <div className="flex items-start justify-between gap-2">
-                <span className="truncate text-base font-black uppercase tracking-wider text-muted-foreground">{label}</span>
-                <span className="font-mono text-lg font-black text-foreground">{value}</span>
+            <div className="flex items-center justify-between gap-2">
+                <span className="truncate text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</span>
+                <span className="font-mono text-base font-black text-foreground">{value}</span>
             </div>
-            <p className="mt-1.5 line-clamp-2 text-base leading-snug text-muted-foreground">{detail}</p>
+            <p className="mt-1 truncate text-xs leading-snug text-muted-foreground" title={detail}>{detail}</p>
             {onClick && (
-                <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-2 text-base font-black uppercase tracking-wider text-muted-foreground">
+                <div className="mt-2 flex items-center justify-between border-t border-border/50 pt-1.5 text-[11px] font-black uppercase tracking-wider text-muted-foreground">
                     <span>{active ? 'Applied' : 'Click to filter'}</span>
                     <span className={clsx(
                         "h-2.5 w-2.5 rounded-full",
@@ -2224,7 +2217,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
             <button
                 type="button"
                 onClick={onClick}
-                className={clsx("min-w-[190px] rounded-md border border-border/70 bg-card/60 px-3.5 py-3 text-left transition-all", toneClass)}
+                className={clsx("min-w-0 rounded-md border border-border/70 bg-card/60 px-3 py-2 text-left transition-all", toneClass)}
             >
                 {content}
             </button>
@@ -2232,7 +2225,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
     }
 
     return (
-        <div className={clsx("min-w-[190px] rounded-md border border-border/70 bg-card/60 px-3.5 py-3", toneClass)}>
+        <div className={clsx("min-w-0 rounded-md border border-border/70 bg-card/60 px-3 py-2", toneClass)}>
             {content}
         </div>
     );

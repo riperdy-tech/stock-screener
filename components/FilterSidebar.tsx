@@ -262,9 +262,9 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
             "fixed inset-y-0 left-0 z-50 w-[min(27rem,100vw)] bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-[100dvh] overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
             isOpen ? "translate-x-0" : "-translate-x-full"
         )}>
-            <div className="p-5 border-b border-border/50 flex justify-between items-center bg-muted/40">
-                <div className="flex items-center gap-2 text-xl font-black">
-                    <Filter className="h-6 w-6 text-primary" />
+            <div className="p-4 border-b border-border/50 flex justify-between items-center bg-muted/40">
+                <div className="flex items-center gap-2 text-lg font-black">
+                    <Filter className="h-5 w-5 text-primary" />
                     {t('filters')}
                 </div>
                 <button onClick={onClose} className="md:hidden p-2 focus:outline-none hover:bg-destructive/20 hover:text-destructive rounded-md transition-colors border border-transparent hover:border-destructive/30">
@@ -272,21 +272,21 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 </button>
             </div>
 
-            <div className="filter-section-list flex-1 overflow-y-auto p-4 space-y-4">
-                <div className="rounded-xl border border-border/60 bg-secondary/25 p-4">
+            <div className="filter-section-list flex-1 overflow-y-auto p-3 space-y-3">
+                <div className="rounded-lg border border-border/60 bg-secondary/25 p-3">
                     <div className="flex items-start justify-between gap-4">
                         <div className="min-w-0">
-                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{t('activeLens')}</div>
-                            <div className="mt-1 truncate text-xl font-black text-foreground">
+                            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{t('activeLens')}</div>
+                            <div className="mt-1 truncate text-base font-black text-foreground">
                                 {activeLensTitle}
                             </div>
                         </div>
                         <div className="shrink-0 text-right">
-                            <div className="font-mono text-3xl font-black leading-none text-primary">{totalResults.toLocaleString()}</div>
-                            <div className="mt-1 text-base font-bold uppercase tracking-wider text-muted-foreground">{resultLabel}</div>
+                            <div className="font-mono text-2xl font-black leading-none text-primary">{totalResults.toLocaleString()}</div>
+                            <div className="mt-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">{resultLabel}</div>
                         </div>
                     </div>
-                    <p className="mt-1 text-base leading-relaxed text-muted-foreground">
+                    <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
                         {activeLensBody}
                     </p>
                 </div>
@@ -683,9 +683,9 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <section className="filter-section rounded-xl border border-border/60 bg-background/20 p-4 shadow-sm">
-            <h3 className="filter-section-title flex items-center gap-3 text-xl font-black text-foreground">{title}</h3>
-            <div className="mt-4 space-y-4">
+        <section className="filter-section rounded-lg border border-border/60 bg-background/20 p-3 shadow-sm">
+            <h3 className="filter-section-title flex items-center gap-3 text-base font-black text-foreground">{title}</h3>
+            <div className="mt-3 space-y-3">
                 {children}
             </div>
         </section>
@@ -704,25 +704,25 @@ function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "
             {contextLabel && contextValue !== undefined && (
                 <div className="mb-3 flex items-center justify-between gap-4 rounded-lg border border-border/60 bg-secondary/25 px-4 py-3">
                     <div>
-                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{currentViewLabel}</div>
-                        <div className="mt-1 text-base font-bold text-foreground">{contextLabel}</div>
+                        <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{currentViewLabel}</div>
+                        <div className="mt-1 text-sm font-bold text-foreground">{contextLabel}</div>
                     </div>
                     <div className="text-right">
-                        <div className="font-mono text-2xl font-black text-primary">{contextValue.toLocaleString()}</div>
-                        <div className="text-base font-bold text-muted-foreground">{resultsLabel}</div>
+                        <div className="font-mono text-xl font-black text-primary">{contextValue.toLocaleString()}</div>
+                        <div className="text-xs font-bold text-muted-foreground">{resultsLabel}</div>
                     </div>
                 </div>
             )}
             <div className="flex gap-3">
                 <button
                     onClick={onPrimary}
-                    className={clsx("flex-1 rounded-lg px-4 py-3 text-base font-black shadow transition-colors", primaryClass)}
+                    className={clsx("flex-1 rounded-lg px-4 py-2.5 text-sm font-black shadow transition-colors", primaryClass)}
                 >
                     {primaryLabel}
                 </button>
                 <button
                     onClick={onReset}
-                    className="flex-1 rounded-lg border border-border bg-muted px-4 py-3 text-base font-bold text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                    className="flex-1 rounded-lg border border-border bg-muted px-4 py-2.5 text-sm font-bold text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                 >
                     {resetLabel}
                 </button>
@@ -740,14 +740,14 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
 
     return (
         <div className="group/input">
-            <div className="mb-3 flex items-start justify-between gap-4">
+            <div className="mb-2.5 flex items-start justify-between gap-3">
                 <div className="flex items-center gap-1.5 group relative cursor-help w-fit">
-                    <label className="text-base font-bold text-muted-foreground group-hover/input:text-foreground transition-colors">{label}</label>
+                    <label className="text-xs font-bold text-muted-foreground group-hover/input:text-foreground transition-colors">{label}</label>
                     {field && <HelpCircle className="h-4 w-4 shrink-0 text-muted-foreground/50 group-hover:text-primary transition-colors" />}
 
                     {/* Tooltip */}
                     {field && defs && (
-                        <div className="absolute left-0 bottom-full mb-2 w-56 p-3 bg-[#1a1a1a]/95 backdrop-blur-md border border-border shadow-2xl rounded-md text-base text-gray-300 opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
+                        <div className="absolute left-0 bottom-full mb-2 w-56 p-3 bg-[#1a1a1a]/95 backdrop-blur-md border border-border shadow-2xl rounded-md text-sm text-gray-300 opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
                             {defs[field] || "Filter criteria"}
                             <div className="absolute bottom-[-4px] left-4 w-2 h-2 bg-[#1a1a1a] border-r border-b border-border transform rotate-45"></div>
                         </div>
@@ -756,7 +756,7 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
 
                 <div className="flex shrink-0 items-center gap-2">
                     {strictValue !== undefined && (
-                        <span className="rounded border border-warning/30 bg-warning/10 px-2.5 py-1 font-mono text-base font-black text-warning">
+                        <span className="rounded border border-warning/30 bg-warning/10 px-2 py-0.5 font-mono text-xs font-black text-warning">
                             Strict {formatRangeBound(strictValue)}
                         </span>
                     )}
@@ -764,7 +764,7 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
                         type="number"
                         value={value}
                         onChange={(e) => onChange(e.target.value)}
-                        className="w-32 rounded border border-border/50 bg-secondary/30 px-3 py-2.5 text-right font-mono text-base transition-all focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                        className="w-24 rounded border border-border/50 bg-secondary/30 px-2 py-1.5 text-right font-mono text-xs transition-all focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     />
                 </div>
             </div>
@@ -777,16 +777,16 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
                 step={step}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className={`w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer outline-none transition-all
-                [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5
+                className={`w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer outline-none transition-all
+                [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
                 [&::-webkit-slider-thumb]:rounded-full ${isStrict ? '[&::-webkit-slider-thumb]:bg-warning [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(237,137,54,0.8)]' : '[&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(59,130,246,0.6)]'}
                 hover:[&::-webkit-slider-thumb]:scale-125 hover:[&::-webkit-slider-thumb]:transition-transform`}
             />
-            <div className="mt-2 flex items-center justify-between font-mono text-base font-bold text-muted-foreground/70">
+            <div className="mt-2 flex items-center justify-between font-mono text-xs font-bold text-muted-foreground/70">
                 <span>{formatRangeBound(min)}</span>
                 <span>{formatRangeBound(max)}</span>
             </div>
-            {hint && <div className="text-base text-muted-foreground/60 mt-1">{hint}</div>}
+            {hint && <div className="text-xs text-muted-foreground/60 mt-1">{hint}</div>}
         </div>
     )
 }
