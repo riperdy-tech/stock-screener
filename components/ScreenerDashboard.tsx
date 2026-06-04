@@ -924,50 +924,61 @@ export function ScreenerDashboard() {
             {/* 2. Main Content Area */}
             <main className="relative flex min-w-0 flex-1 flex-col overflow-x-hidden">
                 {/* Header */}
-                <header className="py-3 md:min-h-20 border-b border-border/50 flex flex-col md:flex-row flex-shrink-0 items-start md:items-center justify-between px-4 md:px-6 bg-card/70 backdrop-blur-xl sticky top-0 z-30 shadow-sm gap-3 md:gap-0">
-                    <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
+                <header className="sticky top-0 z-30 flex flex-shrink-0 flex-col gap-2 border-b border-border/50 bg-card/70 px-3 py-3 shadow-sm backdrop-blur-xl md:flex-row md:flex-wrap md:px-5">
+                    <div className="flex w-full items-center justify-between gap-3">
                         <div className="flex items-center gap-2 md:gap-4">
-                            <h1 className="max-w-[min(58vw,22rem)] truncate text-2xl font-black text-foreground sm:max-w-none md:text-3xl">
+                            <h1 className="max-w-[min(54vw,20rem)] truncate text-xl font-black text-foreground sm:max-w-none md:text-2xl">
                                 {t('appTitle')}
                             </h1>
                             <button 
                                 onClick={() => setShowHelp(true)}
-                                className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-full transition-colors"
+                                className="rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground"
                                 title={t('howScoringWorks')}
                                 aria-label={t('openScoringGuide')}
                             >
-                                <HelpCircle className="h-5 w-5" />
+                                <HelpCircle className="h-4 w-4" />
                             </button>
+                        </div>
+
+                        <div className="relative hidden w-full max-w-sm md:block">
+                            <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                            <input
+                                type="text"
+                                placeholder={t('searchPlaceholder')}
+                                className="w-full rounded-md border border-border/50 bg-secondary/45 py-2 pl-9 pr-3 text-sm transition-all focus:bg-secondary focus:outline-none focus:ring-1 focus:ring-primary"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
                         </div>
                         
                         <div className="flex md:hidden items-center gap-2 shrink-0">
-                             <Link href="/reports" className="flex items-center gap-1.5 px-4 py-2.5 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 rounded-full transition-all text-base font-black active:scale-95">
+                             <Link href="/reports" className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-black text-muted-foreground transition-all hover:bg-white/10 hover:text-foreground active:scale-95">
                                 <Sparkles className="h-4 w-4" />
                                 {t('recentReports')}
                              </Link>
-                             <button onClick={() => setIsSidebarOpen(true)} className="p-2 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition-colors border border-border/50" aria-label="Open filters">
+                             <button onClick={() => setIsSidebarOpen(true)} className="rounded-full border border-border/50 bg-secondary p-2 text-secondary-foreground transition-colors hover:bg-secondary/80" aria-label="Open filters">
                                 <Filter className="h-4 w-4" />
                             </button>
                         </div>
                         
-                        <Link href="/reports" className="hidden md:flex text-base bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10 px-6 py-2.5 rounded-full font-black items-center gap-2 tracking-tight transition-all active:scale-95 ml-6">
-                           <Sparkles className="h-4 w-4" /> {t('recentReports')}
+                        <Link href="/reports" className="hidden shrink-0 items-center gap-1.5 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-black text-muted-foreground transition-all hover:bg-white/10 hover:text-foreground active:scale-95 md:flex">
+                           <Sparkles className="h-3.5 w-3.5" /> {t('recentReports')}
                         </Link>
                     </div>
 
-                    <div className="flex w-full max-w-full overflow-x-auto rounded-lg border border-border/50 bg-secondary/50 p-1 shadow-inner no-scrollbar md:w-auto">
+                    <div className="flex w-full max-w-full flex-1 overflow-x-auto rounded-md border border-border/50 bg-secondary/45 p-0.5 shadow-inner no-scrollbar md:min-w-0 md:w-auto">
                         {(['US', 'Korea', 'Taiwan'] as Market[]).map((m) => (
                             <button
                                 key={m}
                                 onClick={() => setSelectedMarket(m)}
                                 className={clsx(
-                                    "px-4 py-2.5 text-base font-bold rounded-md transition-all duration-300 flex items-center gap-2 whitespace-nowrap",
+                                    "flex items-center gap-1.5 whitespace-nowrap rounded px-3 py-1.5 text-sm font-bold transition-all duration-200",
                                     selectedMarket === m 
-                                        ? "bg-primary text-primary-foreground shadow-lg scale-105" 
+                                                ? "bg-primary text-primary-foreground shadow"
                                         : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                                 )}
                             >                                <span className="font-black">{m}</span>
-                                <span className={clsx(selectedMarket === m ? "block" : "hidden sm:block")}>
+                                <span className="hidden 2xl:inline">
                                     {m === 'US' ? t('usStocks') : m === 'Korea' ? t('koreaStocks') : t('taiwanStocks')}
                                 </span>
                             </button>
@@ -978,11 +989,11 @@ export function ScreenerDashboard() {
                         <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
                             <button 
                                 onClick={() => setIsLogOpen(true)} 
-                                className="flex items-center gap-2 px-3.5 py-2.5 bg-secondary/50 hover:bg-secondary text-foreground/80 hover:text-foreground rounded-lg transition-all duration-300 text-base font-bold border border-border/50 backdrop-blur-md shadow-sm active:scale-95"
+                                className="flex items-center gap-1.5 rounded-md border border-border/50 bg-secondary/45 px-3 py-2 text-xs font-bold text-foreground/80 shadow-sm backdrop-blur-md transition-all duration-300 hover:bg-secondary hover:text-foreground active:scale-95"
                                 aria-label="Open system logs"
                             >
                                 <div className="relative">
-                                    <Terminal className="h-5 w-5" />
+                                    <Terminal className="h-4 w-4" />
                                     <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_5px_var(--success)]"></span>
                                 </div>
                                 <span className="hidden sm:inline tracking-tight">{t('systemLogs')}</span>
@@ -991,12 +1002,12 @@ export function ScreenerDashboard() {
                             <LanguageToggle />
                         </div>
 
-                        <div className="relative w-full md:w-64 mt-1 md:mt-0">
-                            <Search className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
+                        <div className="relative w-full md:hidden">
+                            <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                             <input
                                 type="text"
                                 placeholder={t('searchPlaceholder')}
-                                className="w-full bg-secondary/50 border border-border/50 md:border-none rounded-md pl-10 pr-4 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-primary focus:bg-secondary transition-all"
+                                className="w-full rounded-md border border-border/50 bg-secondary/50 py-2 pl-9 pr-3 text-sm transition-all focus:bg-secondary focus:outline-none focus:ring-1 focus:ring-primary"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
