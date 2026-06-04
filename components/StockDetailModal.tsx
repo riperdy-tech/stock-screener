@@ -1,5 +1,5 @@
-import { X, Activity, Sparkles, Layers3, ShieldCheck, Telescope, Youtube } from "lucide-react";
-import { type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
+import { X, Activity, Sparkles, Layers3, ShieldCheck, Telescope, Youtube, History } from "lucide-react";
+import { type ParadigmHistoryEvent, type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
 import { useLanguage } from "@/components/LanguageContext";
 import ReactMarkdown from "react-markdown";
 import { useEffect, useState, type ReactNode } from "react";
@@ -14,9 +14,10 @@ interface StockDetailModalProps {
     onAskGemini?: (ticker: string) => void;
     market?: Market;
     youtubeEvaluation?: YoutubeStrategyEvaluation;
+    paradigmHistory?: ParadigmHistoryEvent[];
 }
 
-export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', youtubeEvaluation }: StockDetailModalProps) {
+export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', youtubeEvaluation, paradigmHistory = [] }: StockDetailModalProps) {
     const { t } = useLanguage();
     const { candidate, reasons, flags, score } = result;
 
@@ -549,6 +550,22 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     <ReverseStat label="Economics Gate" value={result.paradigm.pdm_economics_gate != null ? result.paradigm.pdm_economics_gate : 'n/a'} />
                                     <ReverseStat label="Confidence" value={result.paradigm.pdm_confidence != null ? result.paradigm.pdm_confidence : 'n/a'} />
                                 </div>
+                                {paradigmHistory.length > 0 && (
+                                    <div className="mb-4 rounded-lg border border-purple-500/20 bg-background/25 p-4">
+                                        <div className="mb-2 flex items-center gap-2 text-base font-black uppercase tracking-wider text-muted-foreground">
+                                            <History className="h-4 w-4 text-purple-300" />
+                                            Recent changes
+                                        </div>
+                                        <div className="space-y-2">
+                                            {paradigmHistory.slice(0, 4).map(event => (
+                                                <div key={`${event.run_id}-${event.summary}`} className="flex flex-col gap-1 rounded-md border border-border/40 bg-secondary/20 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
+                                                    <span className="text-sm font-bold text-foreground">{formatParadigmHistoryEvent(event)}</span>
+                                                    <span className="font-mono text-xs font-bold text-muted-foreground">{event.snapshot_date}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                                 {result.paradigm.pdm_themes && result.paradigm.pdm_themes.length > 0 && (
                                     <div className="mb-3 rounded-lg border border-purple-500/20 bg-background/25 p-4">
                                         <div className="mb-2 text-base font-black uppercase tracking-wider text-muted-foreground">Matched themes</div>
@@ -819,6 +836,29 @@ function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: ReactN
             </div>
         </div>
     );
+}
+
+const paradigmBandLabel: Record<string, string> = {
+    high: "STRONG",
+    mid: "SOLID",
+    watch: "WATCH",
+    skip: "PASS",
+    no_data: "NO DATA",
+};
+
+function formatParadigmHistoryEvent(event: ParadigmHistoryEvent) {
+    if (event.event_type === 'band_change') {
+        return `Band ${formatParadigmBand(event.from_band)} -> ${formatParadigmBand(event.to_band)}`;
+    }
+    if (event.event_type === 'theme_change') {
+        return `Theme ${event.from_theme_primary || 'none'} -> ${event.to_theme_primary || 'none'}`;
+    }
+    return `Signal ${event.from_signal ?? 'n/a'} -> ${event.to_signal ?? 'n/a'}`;
+}
+
+function formatParadigmBand(band: string | null) {
+    if (!band) return 'NONE';
+    return paradigmBandLabel[band] || band.toUpperCase();
 }
 
 function selectedMarketLabel(market: Market) {

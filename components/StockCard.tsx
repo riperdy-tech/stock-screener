@@ -1,6 +1,6 @@
 "use client";
 
-import { ScreeningResult } from "@/lib/blueprint";
+import { ParadigmHistoryEvent, ScreeningResult } from "@/lib/blueprint";
 import { YoutubeStrategyEvaluation, formatStrategyNumber } from "@/lib/youtube-strategy";
 import { ArrowDownRight, ArrowUpRight, Layers3, ShieldCheck, Telescope, Youtube } from "lucide-react";
 import clsx from "clsx";
@@ -17,6 +17,7 @@ interface StockCardProps {
     market?: 'US' | 'India' | 'Korea' | 'Taiwan';
     screenMode?: ScreenMode;
     youtubeEvaluation?: YoutubeStrategyEvaluation;
+    paradigmHistory?: ParadigmHistoryEvent[];
 }
 
 const paradigmBandLabel: Record<string, string> = {
@@ -27,7 +28,7 @@ const paradigmBandLabel: Record<string, string> = {
     no_data: "NO DATA",
 };
 
-export function StockCard({ result, onClick, index = 0, market = 'US', screenMode = '100bagger', youtubeEvaluation }: StockCardProps) {
+export function StockCard({ result, onClick, index = 0, market = 'US', screenMode = '100bagger', youtubeEvaluation, paradigmHistory = [] }: StockCardProps) {
     const { t } = useLanguage();
     if (!result || !result.candidate) return null;
 
@@ -48,6 +49,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
     const paradigmLabel = paradigmBandLabel[paradigmBand] || 'NO DATA';
     const hasReverse = !!(reverse && reverse.rev_band && reverse.rev_band !== 'Excluded');
     const hasYoutube = !!(youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0);
+    const latestParadigmEvent = paradigmHistory[0];
 
     return (
         <div
@@ -125,6 +127,11 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                                     {paradigm?.pdm_theme_primary || paradigm?.pdm_themes?.[0]}
                                     {paradigm?.pdm_themes && paradigm.pdm_themes.length > 1 ? ` +${paradigm.pdm_themes.length - 1}` : ''}
                                 </div>
+                                {latestParadigmEvent && (
+                                    <div className="mt-1 truncate text-[11px] font-bold text-muted-foreground" title={formatParadigmHistoryEvent(latestParadigmEvent)}>
+                                        {formatParadigmHistoryEvent(latestParadigmEvent)}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     ) : (
@@ -191,6 +198,21 @@ function formatCardMarketCap(value: number, market: 'US' | 'India' | 'Korea' | '
     if (market === 'Taiwan') return `NT$${(value / 1_000_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}B`;
     if (Math.abs(value) >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}B`;
     return `$${(value / 1_000_000).toLocaleString('en-US', { maximumFractionDigits: 0 })}M`;
+}
+
+function formatParadigmHistoryEvent(event: ParadigmHistoryEvent) {
+    if (event.event_type === 'band_change') {
+        return `${formatParadigmBand(event.from_band)} -> ${formatParadigmBand(event.to_band)}`;
+    }
+    if (event.event_type === 'theme_change') {
+        return `Theme -> ${event.to_theme_primary || 'none'}`;
+    }
+    return `Signal ${event.from_signal ?? 'n/a'} -> ${event.to_signal ?? 'n/a'}`;
+}
+
+function formatParadigmBand(band: string | null) {
+    if (!band) return 'NONE';
+    return paradigmBandLabel[band] || band.toUpperCase();
 }
 
 function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: ScreeningResult; screenMode: ScreenMode; youtubeEvaluation?: YoutubeStrategyEvaluation }) {

@@ -1,4 +1,4 @@
-import { type StockCandidate, type ReverseResult, type ParadigmResult } from "./blueprint";
+import { type StockCandidate, type ReverseResult, type ParadigmHistoryPayload, type ParadigmResult } from "./blueprint";
 
 export function formatKoreanWon(n: number, decimals: number = 2) {
     if (Math.abs(n) >= 1e12) return `${(n / 1e12).toLocaleString('en-US', {maximumFractionDigits: decimals})}조원`;
@@ -253,5 +253,22 @@ export async function fetchParadigmScores(): Promise<Record<string, ParadigmResu
     } catch (error) {
         console.error("Error loading paradigm scores:", error);
         return {};
+    }
+}
+
+export async function fetchParadigmHistory(): Promise<ParadigmHistoryPayload> {
+    try {
+        const response = await fetch(`/data/paradigm_history.json?t=${new Date().getTime()}`);
+        if (!response.ok) return { last_updated: null, snapshot_date: null, events: [] };
+
+        const payload = await response.json();
+        return {
+            last_updated: payload.last_updated ?? null,
+            snapshot_date: payload.snapshot_date ?? null,
+            events: Array.isArray(payload.events) ? payload.events : [],
+        };
+    } catch (error) {
+        console.error("Error loading paradigm history:", error);
+        return { last_updated: null, snapshot_date: null, events: [] };
     }
 }

@@ -57,6 +57,7 @@ DATA_DIR = ROOT / "public" / "data"
 STOCKS_JSON = DATA_DIR / "stocks.json"
 REVERSE_SCORES_JSON = DATA_DIR / "reverse_scores.json"
 PARADIGM_SCORES_JSON = DATA_DIR / "paradigm_scores.json"
+PARADIGM_HISTORY_JSON = DATA_DIR / "paradigm_history.json"
 CONFIG_JSON = Path(__file__).resolve().with_name("paradigm_config.json")
 OVERRIDES_JSON = DATA_DIR / "paradigm_overrides.json"
 SECTORS_ENRICHED_JSON = DATA_DIR / "sectors_enriched.json"
@@ -122,6 +123,144 @@ def write_json(path, payload):
     with path.open("w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2)
         f.write("\n")
+
+
+BAND_ORDER = {
+    None: 0,
+    "no_data": 0,
+    "skip": 1,
+    "watch": 2,
+    "mid": 3,
+    "high": 4,
+}
+
+
+def normalize_state(symbol, name, paradigm, run_id, snapshot_date):
+    """Return the compact paradigm state stored in paradigm_history.json."""
+    return {
+        "symbol": symbol,
+        "name": name,
+        "run_id": run_id,
+        "snapshot_date": snapshot_date,
+        "pdm_band": paradigm.get("pdm_band"),
+        "pdm_signal": paradigm.get("pdm_signal"),
+        "pdm_rank": paradigm.get("pdm_rank"),
+        "pdm_theme_primary": paradigm.get("pdm_theme_primary"),
+        "pdm_themes": paradigm.get("pdm_themes") or [],
+    }
+
+
+def state_from_prior_score(symbol, paradigm):
+    """Convert an existing paradigm_scores.json entry into history state shape."""
+    return {
+        "symbol": symbol,
+        "name": None,
+        "run_id": None,
+        "snapshot_date": None,
+        "pdm_band": paradigm.get("pdm_band"),
+        "pdm_signal": paradigm.get("pdm_signal"),
+        "pdm_rank": paradigm.get("pdm_rank"),
+        "pdm_theme_primary": paradigm.get("pdm_theme_primary"),
+        "pdm_themes": paradigm.get("pdm_themes") or [],
+    }
+
+
+def describe_band_change(prev_band, next_band):
+    prev_rank = BAND_ORDER.get(prev_band, 0)
+    next_rank = BAND_ORDER.get(next_band, 0)
+    if next_rank > prev_rank:
+        return "upgrade"
+    if next_rank < prev_rank:
+        return "downgrade"
+    return "changed"
+
+
+def build_history_event(symbol, name, previous, current, run_id, snapshot_date):
+    """Build one user-facing event when a ticker's paradigm state materially changed."""
+    prev_band = previous.get("pdm_band")
+    next_band = current.get("pdm_band")
+    prev_themes = set(previous.get("pdm_themes") or [])
+    next_themes = set(current.get("pdm_themes") or [])
+    prev_signal = previous.get("pdm_signal")
+    next_signal = current.get("pdm_signal")
+
+    themes_added = sorted(next_themes - prev_themes)
+    themes_removed = sorted(prev_themes - next_themes)
+    primary_changed = previous.get("pdm_theme_primary") != current.get("pdm_theme_primary")
+    band_changed = prev_band != next_band
+
+    event_type = None
+    direction = "changed"
+    if band_changed:
+        event_type = "band_change"
+        direction = describe_band_change(prev_band, next_band)
+    elif themes_added or themes_removed or primary_changed:
+        event_type = "theme_change"
+    elif prev_signal is not None and next_signal is not None and abs(next_signal - prev_signal) >= 10:
+        event_type = "signal_change"
+        direction = "upgrade" if next_signal > prev_signal else "downgrade"
+
+    if event_type is None:
+        return None
+
+    if band_changed:
+        summary = f"Paradigm band {prev_band or 'none'} -> {next_band or 'none'}"
+    elif event_type == "theme_change":
+        summary = "Paradigm theme changed"
+    else:
+        summary = f"Paradigm signal {prev_signal} -> {next_signal}"
+
+    return {
+        "run_id": run_id,
+        "snapshot_date": snapshot_date,
+        "symbol": symbol,
+        "name": name,
+        "event_type": event_type,
+        "direction": direction,
+        "from_band": prev_band,
+        "to_band": next_band,
+        "from_signal": prev_signal,
+        "to_signal": next_signal,
+        "from_rank": previous.get("pdm_rank"),
+        "to_rank": current.get("pdm_rank"),
+        "from_theme_primary": previous.get("pdm_theme_primary"),
+        "to_theme_primary": current.get("pdm_theme_primary"),
+        "themes_added": themes_added,
+        "themes_removed": themes_removed,
+        "summary": summary,
+    }
+
+
+def update_paradigm_history(stocks, prior_scores, run_id, snapshot_date):
+    """Persist compact ticker-level paradigm transition history for the frontend."""
+    history = {}
+    if PARADIGM_HISTORY_JSON.exists():
+        history = load_json(PARADIGM_HISTORY_JSON)
+
+    events = history.get("events") or []
+    new_events = []
+
+    for stock in stocks:
+        symbol = stock.get("symbol")
+        if not symbol:
+            continue
+
+        paradigm = stock.get("paradigm") or {}
+        current = normalize_state(symbol, stock.get("name"), paradigm, run_id, snapshot_date)
+        previous = state_from_prior_score(symbol, prior_scores[symbol]) if symbol in prior_scores else None
+
+        if previous is not None:
+            event = build_history_event(symbol, stock.get("name"), previous, current, run_id, snapshot_date)
+            if event:
+                new_events.append(event)
+
+    output = {
+        "last_updated": run_id,
+        "snapshot_date": snapshot_date,
+        "events": (new_events + events)[:2000],
+    }
+    write_json(PARADIGM_HISTORY_JSON, output)
+    return len(new_events), output
 
 
 def keyword_matches(keyword, text):
@@ -725,6 +864,7 @@ def main():
     config = load_json(CONFIG_JSON)
     stocks = load_json(STOCKS_JSON)
     reverse_scores = load_json(REVERSE_SCORES_JSON) if REVERSE_SCORES_JSON.exists() else {}
+    prior_paradigm_scores = load_json(PARADIGM_SCORES_JSON) if PARADIGM_SCORES_JSON.exists() else {}
 
     themes = config.get("themes", [])
     bands_config = config.get("bands", {})
@@ -1063,6 +1203,15 @@ def main():
     # ── Compute rank (WS1-T5) ────────────────────────────────────────────
     compute_rank(stocks)
 
+    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    snapshot_date = (price_history or {}).get("snapshot_date", run_id[:8])
+    history_events_count, _history_payload = update_paradigm_history(
+        stocks,
+        prior_paradigm_scores,
+        run_id,
+        snapshot_date,
+    )
+
     # ── Write back to stocks.json ────────────────────────────────────────
     write_json(STOCKS_JSON, stocks)
 
@@ -1199,10 +1348,9 @@ def main():
     print(f"  Written: stocks.json (additive paradigm object)")
     print(f"  Written: paradigm_scores.json ({len(paradigm_scores)} tickers)")
     print(f"  Written: paradigm_theme_metrics.json ({len(theme_metrics)} themes)")
+    print(f"  Written: paradigm_history.json ({history_events_count} new events)")
 
     # ── WS1-T7: forward-logging hook ─────────────────────────────────────
-    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    snapshot_date = (price_history or {}).get("snapshot_date", run_id[:8])
     logged = append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snapshot_date)
     print(f"  Appended: paradigm_signal_log.jsonl ({logged} stock-rows, run_id={run_id})")
     print(f"  Appended: paradigm_run_log.jsonl (1 summary row)")

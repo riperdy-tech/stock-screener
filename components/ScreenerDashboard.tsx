@@ -3,9 +3,9 @@
 import { useState, useEffect, useMemo, useRef, useCallback, type ReactNode } from "react";
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
-import { fetchStocks, fetchReverseScores, fetchParadigmScores, Market } from "@/lib/data-service";
+import { fetchStocks, fetchReverseScores, fetchParadigmScores, fetchParadigmHistory, Market } from "@/lib/data-service";
 import { buildPrompt } from "@/lib/prompt-builder";
-import { ParadigmResult, ReverseResult, ScreeningResult } from "@/lib/blueprint";
+import { ParadigmHistoryEvent, ParadigmResult, ReverseResult, ScreeningResult } from "@/lib/blueprint";
 import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS, ParadigmFilterState, DEFAULT_PARADIGM_FILTERS, PARADIGM_BAND_LABELS } from "./FilterSidebar";
 import { evaluateYoutubeStrategy, matchesYoutubeStrategyFilter, YoutubeStrategyEvaluation, YoutubeStrategyFilter } from "@/lib/youtube-strategy";
 import { supabase } from "@/lib/supabase";
@@ -185,6 +185,7 @@ export function ScreenerDashboard() {
     const [loading, setLoading] = useState(true);
 
     const [rawResults, setRawResults] = useState<ScreeningResult[]>([]);
+    const [paradigmHistoryEvents, setParadigmHistoryEvents] = useState<ParadigmHistoryEvent[]>([]);
     const [youtubeResults, setYoutubeResults] = useState<ScreeningResult[]>([]);
     const [youtubeLoading, setYoutubeLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -501,11 +502,14 @@ export function ScreenerDashboard() {
             const reverseScores = market === 'US' ? await fetchReverseScores() : {};
             // WS1: Load paradigm dimension results
             const paradigmScores = market === 'US' ? await fetchParadigmScores() : {};
+            const paradigmHistory = market === 'US' ? await fetchParadigmHistory() : { events: [] };
 
             setRawResults(adaptRowsToScreeningResults(rawData as any[], reverseScores, paradigmScores));
+            setParadigmHistoryEvents(paradigmHistory.events);
         } catch (err) {
             console.error("Failed to load or adapt data:", err);
             setRawResults([]);
+            setParadigmHistoryEvents([]);
         }
         setLoading(false);
     }
@@ -758,6 +762,15 @@ export function ScreenerDashboard() {
         });
         return counts;
     }, [rawResults]);
+    const paradigmHistoryBySymbol = useMemo(() => {
+        const bySymbol = new Map<string, ParadigmHistoryEvent[]>();
+        paradigmHistoryEvents.forEach(event => {
+            const events = bySymbol.get(event.symbol) || [];
+            if (events.length < 5) events.push(event);
+            bySymbol.set(event.symbol, events);
+        });
+        return bySymbol;
+    }, [paradigmHistoryEvents]);
     const strategyMeta = useMemo(() => ({
         '100bagger': {
             ...STRATEGY_META['100bagger'],
@@ -1347,6 +1360,7 @@ export function ScreenerDashboard() {
                                                 market={selectedMarket}
                                                 screenMode={screenMode}
                                                 youtubeEvaluation={youtubeEvaluations.get(result.candidate.symbol)}
+                                                paradigmHistory={paradigmHistoryBySymbol.get(result.candidate.symbol)}
                                             />
                                         </div>
                                     ))}
@@ -1432,6 +1446,7 @@ export function ScreenerDashboard() {
                     onClose={() => setSelectedStock(null)}
                     onAskGemini={(ticker: string) => handleAiReview(selectedStock)}
                     youtubeEvaluation={youtubeEvaluations.get(selectedStock.candidate.symbol)}
+                    paradigmHistory={paradigmHistoryBySymbol.get(selectedStock.candidate.symbol)}
                 />
             )}
 

@@ -55,6 +55,32 @@ export interface ParadigmResult {
     pdm_flags: string[];
 }
 
+export interface ParadigmHistoryEvent {
+    run_id: string;
+    snapshot_date: string;
+    symbol: string;
+    name?: string | null;
+    event_type: "band_change" | "theme_change" | "signal_change";
+    direction: "upgrade" | "downgrade" | "changed";
+    from_band: string | null;
+    to_band: string | null;
+    from_signal: number | null;
+    to_signal: number | null;
+    from_rank: number | null;
+    to_rank: number | null;
+    from_theme_primary: string | null;
+    to_theme_primary: string | null;
+    themes_added: string[];
+    themes_removed: string[];
+    summary: string;
+}
+
+export interface ParadigmHistoryPayload {
+    last_updated: string | null;
+    snapshot_date: string | null;
+    events: ParadigmHistoryEvent[];
+}
+
 export interface ScreeningMetrics {
     roic: number;
     revenueGrowth: number;
