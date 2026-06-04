@@ -244,6 +244,7 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
         if (!youtubeEvaluation || youtubeEvaluation.matchedStrategies.length === 0) {
             return <EmptyLens icon={<Youtube className="h-4 w-4" />} label={t('noYoutubeMatch')} detail={t('noYoutubeMatchDetail')} />;
         }
+        const extraMatches = youtubeEvaluation.matchedStrategies.length - 1;
         return (
             <div>
                 <div className="flex items-center justify-between gap-3">
@@ -251,7 +252,7 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
                         <Youtube className="h-4 w-4" /> {t('strategyYoutubeTitle')}
                     </div>
                     <span className="truncate text-right text-sm font-black text-foreground" title={youtubeEvaluation.matchedStrategies.join(', ')}>
-                        {youtubeEvaluation.matchedStrategies[0]}
+                        {youtubeEvaluation.matchedStrategies[0]}{extraMatches > 0 ? ` +${extraMatches}` : ''}
                     </span>
                 </div>
                 <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">

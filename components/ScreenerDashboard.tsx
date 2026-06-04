@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, type ReactNode } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback, type ReactNode } from "react";
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
 import { fetchStocks, fetchReverseScores, fetchParadigmScores, Market } from "@/lib/data-service";
@@ -200,7 +200,7 @@ export function ScreenerDashboard() {
     const [screenMode, setScreenMode] = useState<ScreenMode>('100bagger');
     const [reverseFilters, setReverseFilters] = useState<ReverseFilterState>(DEFAULT_REVERSE_FILTERS);
     const [paradigmFilters, setParadigmFilters] = useState<ParadigmFilterState>(DEFAULT_PARADIGM_FILTERS);
-    const [youtubeFilter, setYoutubeFilter] = useState<YoutubeStrategyFilter>("any");
+    const [youtubeFilters, setYoutubeFilters] = useState<YoutubeStrategyFilter[]>(["any"]);
     const [resultView, setResultView] = useState<ResultView>('cards');
     
     // Maintain a ref to current rawResults for the setInterval closure
@@ -244,6 +244,28 @@ export function ScreenerDashboard() {
     const [showBatchPassword, setShowBatchPassword] = useState(false);
     const [batchStatus, setBatchStatus] = useState<string | null>(null); // user-visible feedback
     const [selectedTickers, setSelectedTickers] = useState<Set<string>>(new Set());
+
+    const toggleYoutubeFilter = (filter: YoutubeStrategyFilter) => {
+        setYoutubeFilters(prev => {
+            if (filter === "any") return ["any"];
+
+            const selected = prev.filter(value => value !== "any");
+            if (selected.includes(filter)) {
+                const next = selected.filter(value => value !== filter);
+                return next.length > 0 ? next : ["any"];
+            }
+
+            return [...selected, filter];
+        });
+    };
+
+    const matchesSelectedYoutubeFilters = useCallback((evaluation: YoutubeStrategyEvaluation) => {
+        if (youtubeFilters.includes("any")) {
+            return matchesYoutubeStrategyFilter(evaluation, "any");
+        }
+
+        return youtubeFilters.some(filter => matchesYoutubeStrategyFilter(evaluation, filter));
+    }, [youtubeFilters]);
 
     const dismissBatchPanel = (id: string | null = batchId) => {
         if (id) {
@@ -624,7 +646,7 @@ export function ScreenerDashboard() {
         if (screenMode === 'youtube') {
             return youtubeSourceResults.filter(r => {
                 const evaluation = youtubeEvaluations.get(r.candidate.symbol);
-                if (!evaluation || !matchesYoutubeStrategyFilter(evaluation, youtubeFilter)) return false;
+                if (!evaluation || !matchesSelectedYoutubeFilters(evaluation)) return false;
 
                 const c = r.candidate;
                 const searchMatch = !search ||
@@ -689,7 +711,7 @@ export function ScreenerDashboard() {
 
             return true;
         });
-    }, [rawResults, youtubeSourceResults, search, filters, selectedMarket, screenMode, reverseFilters, paradigmFilters, youtubeEvaluations, youtubeFilter]);
+    }, [rawResults, youtubeSourceResults, search, filters, selectedMarket, screenMode, reverseFilters, paradigmFilters, youtubeEvaluations, matchesSelectedYoutubeFilters]);
 
 
     // Pagination Logic
@@ -698,7 +720,7 @@ export function ScreenerDashboard() {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [search, filters, screenMode, reverseFilters, paradigmFilters, youtubeFilter, selectedMarket]);
+    }, [search, filters, screenMode, reverseFilters, paradigmFilters, youtubeFilters, selectedMarket]);
 
     const filteredCount = filteredResults.length;
     const youtubeTotals = useMemo(() => {
@@ -794,7 +816,7 @@ export function ScreenerDashboard() {
         setSelectedTickers(new Set());
 
         if (id === 'youtube') {
-            setYoutubeFilter("any");
+            setYoutubeFilters(["any"]);
             setSearch("");
             if (selectedMarket !== 'US') {
                 setSelectedMarket('US');
@@ -838,8 +860,11 @@ export function ScreenerDashboard() {
         }
 
         if (screenMode === 'youtube') {
-            const activeYoutubeFilter = youtubeFilterMeta.find(item => item.value === youtubeFilter);
-            return [...searchChip, activeYoutubeFilter?.label || t('youtubeAny')];
+            if (youtubeFilters.includes("any")) return [...searchChip, t('youtubeAny')];
+            return [
+                ...searchChip,
+                ...youtubeFilters.map(filter => youtubeFilterMeta.find(item => item.value === filter)?.label).filter((label): label is string => Boolean(label)),
+            ];
         }
 
         return [
@@ -854,7 +879,7 @@ export function ScreenerDashboard() {
             filters.minInsiderOwnership > 0 ? `Insider >= ${filters.minInsiderOwnership}%` : null,
             filters.maxFloat < 5000 ? `Float <= ${filters.maxFloat}M` : null,
         ].filter((chip): chip is string => Boolean(chip));
-    }, [screenMode, reverseFilters, paradigmFilters, youtubeFilter, youtubeFilterMeta, filters, selectedMarket, search, t]);
+    }, [screenMode, reverseFilters, paradigmFilters, youtubeFilters, youtubeFilterMeta, filters, selectedMarket, search, t]);
     const visibleFilterChips = activeFilterChips.slice(0, 8);
     const hiddenFilterChipCount = Math.max(activeFilterChips.length - visibleFilterChips.length, 0);
     const resetActiveFilters = () => {
@@ -864,7 +889,7 @@ export function ScreenerDashboard() {
         } else if (screenMode === 'paradigm') {
             setParadigmFilters(DEFAULT_PARADIGM_FILTERS);
         } else if (screenMode === 'youtube') {
-            setYoutubeFilter("any");
+            setYoutubeFilters(["any"]);
         } else {
             setFilters(ZERO_BASE_FILTERS);
         }
@@ -908,8 +933,8 @@ export function ScreenerDashboard() {
                 setReverseFilters={setReverseFilters}
                 paradigmFilters={paradigmFilters}
                 setParadigmFilters={setParadigmFilters}
-                youtubeFilter={youtubeFilter}
-                setYoutubeFilter={setYoutubeFilter}
+                youtubeFilters={youtubeFilters}
+                onYoutubeFilterToggle={toggleYoutubeFilter}
                 batchN={batchN}
                 onBatchNChange={setBatchN}
                 batchDispatching={batchDispatching}
@@ -1076,9 +1101,9 @@ export function ScreenerDashboard() {
                                     label={item.label}
                                     value={formatCount(youtubeTotals[item.value], isYoutubeCountLoading)}
                                     detail={item.description}
-                                    active={youtubeFilter === item.value}
+                                    active={youtubeFilters.includes(item.value)}
                                     tone="red"
-                                    onClick={() => setYoutubeFilter(item.value)}
+                                    onClick={() => toggleYoutubeFilter(item.value)}
                                 />
                             ))}
                             {screenMode === 'reverse' && ['High', 'Solid', 'Watchlist', 'Monitor', 'Reject-tier'].map(band => (

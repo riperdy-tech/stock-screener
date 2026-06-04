@@ -101,8 +101,8 @@ interface FilterSidebarProps {
     // WS1-T6+: Paradigm filters
     paradigmFilters?: ParadigmFilterState;
     setParadigmFilters?: (f: ParadigmFilterState) => void;
-    youtubeFilter?: YoutubeStrategyFilter;
-    setYoutubeFilter?: (f: YoutubeStrategyFilter) => void;
+    youtubeFilters?: YoutubeStrategyFilter[];
+    onYoutubeFilterToggle?: (f: YoutubeStrategyFilter) => void;
     // Phase 11d: Deep-Dive controls
     batchN?: number;
     onBatchNChange?: (n: number) => void;
@@ -159,7 +159,7 @@ export const STRICT_FILTERS: FilterState = {
     maxFloat: 50,
 };
 
-export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, paradigmFilters, setParadigmFilters, youtubeFilter = "any", setYoutubeFilter, batchN, onBatchNChange, batchDispatching, batchStatus, onDeepDiveClick, selectedCount }: FilterSidebarProps) {
+export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, paradigmFilters, setParadigmFilters, youtubeFilters = ["any"], onYoutubeFilterToggle, batchN, onBatchNChange, batchDispatching, batchStatus, onDeepDiveClick, selectedCount }: FilterSidebarProps) {
     const { t, filterDefs } = useLanguage();
 
     // Local state for Manual Apply
@@ -540,21 +540,25 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                     <>
                         <Section title="Video Strategy">
                             <div className="space-y-1.5">
-                                {YOUTUBE_FILTERS.map(filter => (
-                                    <button
-                                        key={filter.value}
-                                        type="button"
-                                        onClick={() => setYoutubeFilter?.(filter.value)}
-                                        className={clsx(
-                                            "w-full rounded-md border px-3 py-2.5 text-left text-base font-bold transition-all",
-                                            youtubeFilter === filter.value
-                                                ? "border-red-500/50 bg-red-500/15 text-red-300"
-                                                : "border-border/50 bg-secondary/40 text-muted-foreground hover:border-red-400/40 hover:text-foreground"
-                                        )}
-                                    >
-                                        {filter.label}
-                                    </button>
-                                ))}
+                                {YOUTUBE_FILTERS.map(filter => {
+                                    const isActive = youtubeFilters.includes(filter.value);
+                                    return (
+                                        <button
+                                            key={filter.value}
+                                            type="button"
+                                            onClick={() => onYoutubeFilterToggle?.(filter.value)}
+                                            className={clsx(
+                                                "flex w-full items-center justify-between gap-2 rounded-md border px-3 py-2.5 text-left text-base font-bold transition-all",
+                                                isActive
+                                                    ? "border-red-500/50 bg-red-500/15 text-red-300"
+                                                    : "border-border/50 bg-secondary/40 text-muted-foreground hover:border-red-400/40 hover:text-foreground"
+                                            )}
+                                        >
+                                            <span>{filter.label}</span>
+                                            {isActive && <span className="h-2 w-2 rounded-full bg-red-300" />}
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </Section>
                     </>
