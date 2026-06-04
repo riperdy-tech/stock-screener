@@ -1749,74 +1749,74 @@ export function ScreenerDashboard() {
                     <div className="bg-card border border-border/50 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[84vh] overflow-y-auto p-6 md:p-8" onClick={e => e.stopPropagation()}>
                         <div className="flex items-start justify-between gap-4 border-b border-border/60 pb-5">
                             <div>
-                                <p className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">Scoring guide</p>
-                                <h2 className="mt-1 text-2xl font-black tracking-tight text-foreground">How the dashboard ranks stocks</h2>
+                                <p className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">{t('scoringGuide')}</p>
+                                <h2 className="mt-1 text-2xl font-black tracking-tight text-foreground">{t('scoringGuideTitle')}</h2>
                                 <p className="mt-2 max-w-3xl text-base leading-relaxed text-muted-foreground">
-                                    The screener combines independent lenses. Use the active strategy panel for ranking, then open a stock card for the full scorecard.
+                                    {t('scoringGuideBody')}
                                 </p>
                             </div>
-                            <button onClick={() => setShowHelp(false)} className="rounded-full border border-border/60 p-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground" aria-label="Close scoring guide">
+                            <button onClick={() => setShowHelp(false)} className="rounded-full border border-border/60 p-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground" aria-label={t('closeScoringGuide')}>
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
 
                         <div className="mt-6 rounded-xl border border-primary/20 bg-primary/[0.04] p-5">
-                            <div className="mb-3 text-base font-black uppercase tracking-[0.18em] text-primary">Recommended workflow</div>
+                            <div className="mb-3 text-base font-black uppercase tracking-[0.18em] text-primary">{t('recommendedWorkflow')}</div>
                             <div className="grid gap-3 md:grid-cols-3">
-                                <WorkflowStep label="1" title="Pick market" text="Start with US, Korea, or Taiwan so prices, caps, and data quality match the universe." />
-                                <WorkflowStep label="2" title="Choose lens" text="Use the visible strategy cards to switch between 100-Bagger, Reverse, Paradigm, or YouTube logic." />
-                                <WorkflowStep label="3" title="Open scorecard" text="Use the card or table row for the full thesis, signal breakdown, and AI research actions." />
+                                <WorkflowStep label="1" title={t('workflowMarketTitle')} text={t('workflowMarketText')} />
+                                <WorkflowStep label="2" title={t('workflowLensTitle')} text={t('workflowLensText')} />
+                                <WorkflowStep label="3" title={t('workflowScorecardTitle')} text={t('workflowScorecardText')} />
                             </div>
                         </div>
 
                         <div className="mt-6 grid gap-4 md:grid-cols-2">
                             <HelpCard
                                 index="01"
-                                title="Stock Cards"
-                                body="Paradigm appears first when available because it explains the market theme. The active strategy panel expands the lens you selected. Other signals stay visible as compact chips."
+                                title={t('helpCardsTitle')}
+                                body={t('helpCardsBody')}
                             />
                             <HelpCard
                                 index="02"
-                                title="Reverse Engine"
-                                body="Ranks survivors by quality, margin of safety, survivability, growth proxy, and efficiency. Bands move from High to Solid to Watchlist to Monitor."
+                                title={t('helpReverseTitle')}
+                                body={t('helpReverseBody')}
                             />
                             <HelpCard
                                 index="03"
-                                title="Paradigm"
-                                body="Scores whether a stock is a real participant in a secular shift. Theme membership, momentum, and economics all need to work together."
+                                title={t('helpParadigmTitle')}
+                                body={t('helpParadigmBody')}
                             />
                             <HelpCard
                                 index="04"
-                                title="YouTube Strategy"
-                                body="Applies the video playbook inside the main dashboard: earnings momentum, deep-value reversal, turnaround seed, and turnaround scale-in."
+                                title={t('helpYoutubeTitle')}
+                                body={t('helpYoutubeBody')}
                             />
                         </div>
 
                         <div className="mt-6 rounded-xl border border-border/70 bg-secondary/20 p-5">
-                            <h3 className="text-lg font-black text-foreground">Reverse Engine Stages</h3>
+                            <h3 className="text-lg font-black text-foreground">{t('reverseStagesTitle')}</h3>
                             <div className="mt-4 grid gap-3 text-base leading-relaxed text-muted-foreground md:grid-cols-2">
-                                <StageLine label="0-1" text="Exclude funds, very small companies, severe distress, and poor data quality before scoring." />
-                                <StageLine label="2" text="Route each survivor into an archetype so banks, REITs, compounders, cyclicals, and option-led names are judged differently." />
-                                <StageLine label="3-5" text="Score quality, valuation margin of safety, and survivability using the fields available for that archetype." />
-                                <StageLine label="6-7" text="Blend growth, margin of safety, quality, survivability, and efficiency into the final composite score." />
-                                <StageLine label="8" text="Show advisory flags such as crowded longs, extended prices, or unverifiable growth. Flags explain risk; they do not hide rows." />
-                                <StageLine label="9" text="Nominate a diversified top list with caps by archetype, sector, and country." />
+                                <StageLine label="0-1" text={t('reverseStage01')} />
+                                <StageLine label="2" text={t('reverseStage2')} />
+                                <StageLine label="3-5" text={t('reverseStage35')} />
+                                <StageLine label="6-7" text={t('reverseStage67')} />
+                                <StageLine label="8" text={t('reverseStage8')} />
+                                <StageLine label="9" text={t('reverseStage9')} />
                             </div>
                         </div>
 
                         <div className="mt-6 rounded-xl border border-purple-500/25 bg-purple-500/[0.05] p-5">
-                            <h3 className="text-lg font-black text-purple-200">Paradigm Signal</h3>
+                            <h3 className="text-lg font-black text-purple-200">{t('paradigmSignalTitle')}</h3>
                             <div className="mt-3 grid gap-3 text-base leading-relaxed text-muted-foreground md:grid-cols-3">
-                                <HelpPillar title="Membership" text="Does the company truly belong to a theme through keywords, industry fit, or curated seed lists?" />
-                                <HelpPillar title="Momentum" text="Is the stock gaining relative strength across 1, 3, 6, and 12 month windows?" />
-                                <HelpPillar title="Economics" text="Does the business quality and survivability support the story rather than just the narrative?" />
+                                <HelpPillar title={t('paradigmMembershipTitle')} text={t('paradigmMembershipText')} />
+                                <HelpPillar title={t('paradigmMomentumTitle')} text={t('paradigmMomentumText')} />
+                                <HelpPillar title={t('paradigmEconomicsTitle')} text={t('paradigmEconomicsText')} />
                             </div>
                         </div>
 
                         <div className="mt-6 rounded-xl border border-border/70 bg-card/70 p-5 text-base leading-relaxed text-muted-foreground">
-                            <h3 className="text-lg font-black text-foreground">Honest Limitations</h3>
+                            <h3 className="text-lg font-black text-foreground">{t('honestLimitationsTitle')}</h3>
                             <p className="mt-2">
-                                This is a disciplined triage tool, not an oracle. It favors evidence already visible in the data, so emerging winners can appear late and data-sparse names should still be deep-dived before any decision.
+                                {t('honestLimitationsText')}
                             </p>
                         </div>
                     </div>
