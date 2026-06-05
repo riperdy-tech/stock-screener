@@ -198,30 +198,30 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="relative w-full max-w-7xl max-h-[94vh] overflow-y-auto bg-card border border-border rounded-xl shadow-2xl animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-3 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto bg-card border border-border rounded-lg shadow-xl animate-in zoom-in-95 duration-200">
 
                 {/* Header */}
-                <div className="sticky top-0 z-10 flex items-center justify-between p-4 sm:p-6 bg-card/95 backdrop-blur-xl border-b border-border">
+                <div className="sticky top-0 z-10 flex items-center justify-between p-3 sm:p-4 bg-card/95 backdrop-blur-xl border-b border-border">
                     <div className="flex-1 min-w-0">
                         <div className="flex flex-col gap-1">
                             <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
-                                <h2 className="truncate text-3xl font-black tracking-tight sm:text-4xl">
+                                <h2 className="truncate text-2xl font-black tracking-tight sm:text-2xl">
                                     {displayTicker}
                                 </h2>
-                                <span className="truncate text-lg font-semibold text-muted-foreground sm:border-l sm:border-border sm:px-2 sm:text-2xl">
+                                <span className="truncate text-sm font-semibold text-muted-foreground sm:border-l sm:border-border sm:px-2 sm:text-lg">
                                     {displayName}
                                 </span>
                             </div>
 
-                            <div className="flex flex-wrap items-center gap-2 text-base sm:text-lg text-primary/80 font-medium mt-1">
+                            <div className="flex flex-wrap items-center gap-1.5 text-sm text-primary/80 font-medium mt-1">
                                 <span>{candidate.sector}</span>
                                 <span className="text-muted-foreground">/</span>
                                 <span>{result.industry || t('industry')}</span>
                                 {candidate.lastUpdated && (
                                     <>
                                         <span className="text-muted-foreground">/</span>
-                                        <span className="text-muted-foreground font-mono text-base" title="Last Updated">
+                                        <span className="text-muted-foreground font-mono text-xs" title="Last Updated">
                                             Updated {candidate.lastUpdated}
                                         </span>
                                     </>
@@ -230,7 +230,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                             <div className="mt-2 group">
                                 <p className={clsx(
-                                    "text-base text-muted-foreground leading-relaxed transition-all duration-300",
+                                    "text-sm text-muted-foreground leading-relaxed transition-all duration-300",
                                     !isExpanded && (result.description || "").length > 120 ? "line-clamp-2" : ""
                                 )}>
                                     {result.description || t('noDesc')}
@@ -238,7 +238,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 {(result.description || "").length > 120 && (
                                     <button
                                         onClick={() => setIsExpanded(!isExpanded)}
-                                        className="text-base font-bold text-primary hover:text-primary/80 mt-1 uppercase tracking-wider"
+                                        className="text-xs font-bold text-primary hover:text-primary/80 mt-1 uppercase tracking-wider"
                                     >
                                         {isExpanded ? "Show Less" : "Read More"}
                                     </button>
@@ -246,41 +246,41 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         </div>
 
-                        <div className="mt-4 flex flex-col gap-3 rounded-lg border border-border/60 bg-background/80 p-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+                        <div className="mt-3 flex flex-col gap-2 rounded-md border border-border/60 bg-background/80 p-2.5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
                             <div className="min-w-0">
-                                <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Primary Actions</div>
+                                <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">Primary Actions</div>
                                 <div className="mt-2 flex flex-wrap items-center gap-2">
                                     <a
                                         href={`https://www.tradingview.com/symbols/${candidate.symbol}/`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-2 rounded-md border border-[#2a2e39] bg-[#131722] px-4 py-2.5 text-white shadow-sm transition-all hover:bg-[#2a2e39]"
+                                        className="flex items-center gap-2 rounded-md border border-[#2a2e39] bg-[#131722] px-3 py-2 text-white shadow-sm transition-all hover:bg-[#2a2e39]"
                                         title={t('openTV')}
                                     >
-                                        <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="h-5 w-5 rounded-sm" />
-                                        <span className="text-base font-bold">TradingView</span>
+                                        <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="h-4 w-4 rounded-sm" />
+                                        <span className="text-sm font-bold">TradingView</span>
                                     </a>
                                     <button
                                         onClick={() => onAskGemini && onAskGemini(candidate.symbol)}
-                                        className="flex items-center gap-2 rounded-md border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-2.5 text-blue-600 shadow-sm transition-all hover:from-blue-500/20 hover:to-purple-500/20 dark:text-blue-400"
+                                        className="flex items-center gap-2 rounded-md border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-3 py-2 text-blue-600 shadow-sm transition-all hover:from-blue-500/20 hover:to-purple-500/20 dark:text-blue-400"
                                         title="Ask AI about this stock"
                                     >
-                                        <Sparkles className="h-5 w-5" />
-                                        <span className="text-base font-bold">Generate AI Prompt</span>
+                                        <Sparkles className="h-4 w-4" />
+                                        <span className="text-sm font-bold">Generate AI Prompt</span>
                                     </button>
                                 </div>
                             </div>
-                            <div className={clsx("w-fit rounded-full px-4 py-2 text-base font-black tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
+                            <div className={clsx("w-fit rounded-full px-3 py-1.5 text-xs font-black tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
                                 {result.passed ? "GEM CANDIDATE" : "REVIEWING"}
                             </div>
                         </div>
                     </div>
-                    <button onClick={onClose} className="p-2 rounded-full hover:bg-secondary transition-colors self-start" aria-label="Close stock scorecard">
-                        <X className="h-6 w-6" />
+                    <button onClick={onClose} className="p-1.5 rounded-full hover:bg-secondary transition-colors self-start" aria-label="Close stock scorecard">
+                        <X className="h-5 w-5" />
                     </button>
                 </div>
 
-                <div className="p-4 sm:p-6 lg:p-8 space-y-8">
+                <div className="p-3 sm:p-4 lg:p-5 space-y-4">
                         <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
                             <QuoteMetric label="Price" value={priceDisplay} sub={selectedMarketLabel(market)} />
                             <QuoteMetric label="Market Cap" value={marketCapDisplay} sub={candidate.sector || "Unknown sector"} />
@@ -299,34 +299,34 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         </div>
 
                         {/* Score & Synthesis */}
-                        <div className="flex flex-col gap-5 rounded-xl border border-border/50 bg-secondary/25 p-5 sm:flex-row sm:items-center sm:p-6">
-                            <div className="relative flex items-center justify-center h-24 w-24 shrink-0">
+                        <div className="flex flex-col gap-3 rounded-lg border border-border/50 bg-secondary/25 p-3 sm:flex-row sm:items-center sm:p-4">
+                            <div className="relative flex items-center justify-center h-16 w-16 shrink-0">
                                 <svg className="h-full w-full -rotate-90" viewBox="0 0 36 36">
                                     <path className="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
                                     <path className={clsx(score > 80 ? "text-success" : score > 50 ? "text-warning" : "text-danger")} strokeDasharray={`${score}, 100`} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
                                 </svg>
-                                <div className="absolute inset-0 flex items-center justify-center text-2xl font-bold">
+                                <div className="absolute inset-0 flex items-center justify-center text-lg font-bold">
                                     {score}
                                 </div>
                             </div>
                             <div className="min-w-0 flex-1">
                                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                                    <h4 className="text-xl font-black">{t('blueprintAnalysis')}</h4>
+                                    <h4 className="text-base font-black">{t('blueprintAnalysis')}</h4>
                                     <span className={clsx(
-                                        "w-fit rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider",
+                                        "w-fit rounded-md border px-2.5 py-1 text-xs font-black uppercase tracking-wider",
                                         result.passed ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400" : "border-red-500/30 bg-red-500/10 text-red-400"
                                     )}>
                                         {result.passed ? "Gem candidate" : "Review required"}
                                     </span>
                                 </div>
                                 {result.passed ? (
-                                    <p className="mt-3 rounded-lg border border-emerald-500/20 bg-emerald-500/[0.06] px-4 py-3 text-base font-semibold leading-relaxed text-emerald-300">
+                                    <p className="mt-2 rounded-md border border-emerald-500/20 bg-emerald-500/[0.06] px-3 py-2 text-sm font-semibold leading-relaxed text-emerald-300">
                                         {t('verdictPass')}
                                     </p>
                                 ) : (
-                                    <div className="mt-3 rounded-lg border border-red-500/20 bg-red-500/[0.05] px-4 py-3 text-foreground">
-                                        <div className="text-base font-black uppercase tracking-wider text-red-400">Missed Criteria</div>
-                                        <ul className="mt-2 list-disc space-y-1.5 pl-5 text-base font-normal text-foreground/80">
+                                    <div className="mt-2 rounded-md border border-red-500/20 bg-red-500/[0.05] px-3 py-2 text-foreground">
+                                        <div className="text-xs font-black uppercase tracking-wider text-red-400">Missed Criteria</div>
+                                        <ul className="mt-1.5 list-disc space-y-1 pl-5 text-sm font-normal text-foreground/80">
                                                 {(result.failCodes && result.failCodes.length > 0) ? result.failCodes.map(code => {
                                                     const failReasonMap: Record<string, string> = {
                                                         FAIL_MCAP: market === 'Korea' 
@@ -387,16 +387,16 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             />
                         </div>
 
-                        <nav aria-label="Scorecard sections" className="sticky top-[228px] z-10 -mx-1 overflow-x-auto border-y border-border/60 bg-card/95 px-1 py-2.5 backdrop-blur-xl sm:top-[184px] lg:top-[156px]">
+                        <nav aria-label="Scorecard sections" className="sticky top-[168px] z-10 -mx-1 overflow-x-auto border-y border-border/60 bg-card/95 px-1 py-2.5 backdrop-blur-xl sm:top-[142px] lg:top-[128px]">
                             <div className="flex min-w-max gap-2">
                                 {sectionLinks.map((section, index) => (
                                     <button
                                         key={section.id}
                                         type="button"
                                         onClick={() => scrollToSection(section.id)}
-                                        className="group flex items-center gap-2 rounded-lg border border-border/60 bg-secondary/35 px-3.5 py-2.5 text-base font-black text-muted-foreground transition-colors hover:border-primary/50 hover:bg-secondary/70 hover:text-foreground"
+                                        className="group flex items-center gap-2 rounded-lg border border-border/60 bg-secondary/35 px-3 py-2 text-sm font-black text-muted-foreground transition-colors hover:border-primary/50 hover:bg-secondary/70 hover:text-foreground"
                                     >
-                                        <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border/60 bg-background/40 font-mono text-base font-black text-muted-foreground transition-colors group-hover:border-primary/40 group-hover:text-primary">
+                                        <span className="flex h-6 w-6 items-center justify-center rounded-md border border-border/60 bg-background/40 font-mono text-xs font-black text-muted-foreground transition-colors group-hover:border-primary/40 group-hover:text-primary">
                                             {String(index + 1).padStart(2, '0')}
                                         </span>
                                         <span>{section.label}</span>
@@ -406,20 +406,20 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         </nav>
 
                         {/* Phase 1: Quant Metrics */}
-                        <div id="scorecard-quant" className="scroll-mt-36 rounded-xl border border-border/60 bg-card/60 p-5 shadow-sm sm:p-6">
-                            <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                        <div id="scorecard-quant" className="scroll-mt-28 rounded-lg border border-border/60 bg-card/60 p-3 shadow-sm sm:p-4">
+                            <div className="mb-3 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                                 <SectionHeading
-                                    icon={<Activity className="h-5 w-5 text-primary" />}
+                                    icon={<Activity className="h-4 w-4 text-primary" />}
                                     title={t('phase1')}
                                     body="Strict 100-bagger gates are shown as scan rows so the pass, watch, and fail states are easier to compare."
                                 />
-                                <div className="grid grid-cols-3 gap-2 sm:min-w-[22rem]">
+                                <div className="grid grid-cols-3 gap-2 sm:min-w-[16rem]">
                                     <StatusCount label="Pass" value={quantPassCount} tone="positive" />
                                     <StatusCount label="Watch" value={quantWatchCount} tone="warning" />
                                     <StatusCount label="Fail" value={quantFailCount} tone="negative" />
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+                            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
                                 {quantRows.map(row => (
                                     <DetailRow
                                         key={row.label}
@@ -433,32 +433,32 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         </div>
 
-                        <div id="scorecard-reports" className="scroll-mt-36 rounded-xl border border-border/60 bg-card/60 p-5 shadow-sm sm:p-6">
-                            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                        <div id="scorecard-reports" className="scroll-mt-28 rounded-lg border border-border/60 bg-card/60 p-3 shadow-sm sm:p-4">
+                            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                                 <SectionHeading
-                                    icon={<Sparkles className="h-5 w-5 text-blue-400" />}
+                                    icon={<Sparkles className="h-4 w-4 text-blue-400" />}
                                     title="Research Reports"
                                     body="Open saved Deepseek research for this ticker, or generate a fresh prompt when the thesis needs another pass."
                                 />
                                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:justify-end">
-                                    <div className="rounded-lg border border-blue-500/25 bg-blue-500/[0.06] px-4 py-3">
-                                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">
+                                    <div className="rounded-lg border border-blue-500/25 bg-blue-500/[0.06] px-3 py-2">
+                                        <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">
                                             Cloud records
                                         </div>
-                                        <div className="mt-1 font-mono text-2xl font-black text-blue-400">
+                                        <div className="mt-1 font-mono text-lg font-black text-blue-400">
                                             {reportHistory.length}
                                         </div>
                                     </div>
                                     <button
                                         onClick={() => setShowReports(!showReports)}
                                         className={clsx(
-                                            "flex min-h-16 w-full items-center justify-center gap-2 rounded-lg border px-5 py-3 text-base font-black shadow-sm transition-all active:scale-95 sm:w-auto",
+                                            "flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm font-black shadow-sm transition-all active:scale-95 sm:w-auto",
                                             showReports
                                                 ? "border-primary bg-primary text-primary-foreground"
                                                 : "border-border/60 bg-secondary/45 text-foreground hover:border-primary/40 hover:bg-secondary/70"
                                         )}
                                     >
-                                        <Activity className="h-5 w-5" />
+                                        <Activity className="h-4 w-4" />
                                         {showReports ? "Close reports" : "View reports"}
                                     </button>
                                 </div>
@@ -466,46 +466,46 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         </div>
 
                         {showReports && (
-                            <div className="animate-in slide-in-from-top-2 rounded-xl border border-blue-500/20 bg-blue-500/[0.035] p-5 duration-300 sm:p-6">
+                            <div className="animate-in slide-in-from-top-2 rounded-xl border border-blue-500/20 bg-blue-500/[0.035] p-3 duration-300 sm:p-4">
                                 <div className="mb-4 flex flex-col gap-1">
-                                    <h3 className="flex items-center gap-2 text-xl font-black tracking-tight">
-                                        <Sparkles className="h-5 w-5 text-blue-400" /> Saved AI Research
+                                    <h3 className="flex items-center gap-2 text-base font-black tracking-tight">
+                                        <Sparkles className="h-4 w-4 text-blue-400" /> Saved AI Research
                                     </h3>
-                                    <p className="text-base leading-relaxed text-muted-foreground">
+                                    <p className="text-sm leading-relaxed text-muted-foreground">
                                         Pick the most recent report, or compare older records when the thesis has changed.
                                     </p>
                                 </div>
                                 <div className="space-y-3">
                                     {reportHistory.length === 0 ? (
-                                        <div className="rounded-lg border border-dashed border-border bg-card/55 p-5 text-center">
-                                            <div className="text-lg font-black tracking-tight text-foreground">No saved reports yet</div>
-                                            <p className="mx-auto mt-2 max-w-lg text-base leading-relaxed text-muted-foreground">
+                                        <div className="rounded-lg border border-dashed border-border bg-card/55 p-3 text-center">
+                                            <div className="text-base font-black tracking-tight text-foreground">No saved reports yet</div>
+                                            <p className="mx-auto mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground">
                                                 Use Generate AI Prompt in the primary actions rail to create the first research handoff for this ticker.
                                             </p>
                                         </div>
                                     ) : reportHistory.map((report, idx) => (
                                         <div
                                             key={report.created_at}
-                                            className="flex flex-col gap-4 rounded-lg border border-border/70 bg-card/90 p-4 shadow-sm transition-colors hover:border-primary/40 sm:flex-row sm:items-center sm:justify-between"
+                                            className="flex flex-col gap-3 rounded-lg border border-border/70 bg-card/90 p-3 shadow-sm transition-colors hover:border-primary/40 sm:flex-row sm:items-center sm:justify-between"
                                         >
                                             <div className="flex min-w-0 gap-3">
-                                                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-blue-500/25 bg-blue-500/10 font-mono text-base font-black text-blue-400">
+                                                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-blue-500/25 bg-blue-500/10 font-mono text-xs font-black text-blue-400">
                                                     #{idx + 1}
                                                 </span>
                                                 <div className="min-w-0">
                                                     <div className="flex flex-wrap items-center gap-2">
-                                                        <span className="text-lg font-black tracking-tight">Deepseek V4-Pro Analysis</span>
+                                                        <span className="text-base font-black tracking-tight">Deepseek V4-Pro Analysis</span>
                                                         {idx === 0 && (
-                                                            <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-base font-black text-emerald-400">
+                                                            <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-xs font-black text-emerald-400">
                                                                 Latest
                                                             </span>
                                                         )}
                                                     </div>
                                                     <div className="mt-2 flex flex-wrap gap-2">
-                                                        <span className="rounded-md border border-border/60 bg-secondary/35 px-3 py-1.5 font-mono text-base font-bold text-muted-foreground">
+                                                        <span className="rounded-md border border-border/60 bg-secondary/35 px-3 py-1.5 font-mono text-sm font-bold text-muted-foreground">
                                                             {new Date(report.created_at).toLocaleString()}
                                                         </span>
-                                                        <span className="rounded-md border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 font-mono text-base font-bold text-blue-300">
+                                                        <span className="rounded-md border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 font-mono text-sm font-bold text-blue-300">
                                                             ${report.cost || '0.00'}
                                                         </span>
                                                     </div>
@@ -516,7 +516,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                                     setSavedReport({...report, timestamp: report.created_at});
                                                     setShowReports(false);
                                                 }}
-                                                className="w-full rounded-lg border border-primary/30 bg-primary/10 px-4 py-3 text-base font-black text-primary transition-colors hover:bg-primary/15 sm:w-auto"
+                                                className="w-full rounded-md border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-black text-primary transition-colors hover:bg-primary/15 sm:w-auto"
                                             >
                                                 Open report
                                             </button>
@@ -528,10 +528,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* WS1: Paradigm Dimension Breakdown */}
                         {result.paradigm && (result.paradigm.pdm_themes?.length > 0 || result.paradigm.pdm_signal != null) && (
-                            <div id="scorecard-paradigm" className="scroll-mt-36 rounded-xl border border-purple-500/25 bg-purple-500/[0.04] p-5 shadow-sm sm:p-6">
-                                <div className="mb-5">
+                            <div id="scorecard-paradigm" className="scroll-mt-28 rounded-lg border border-purple-500/25 bg-purple-500/[0.04] p-3 shadow-sm sm:p-4">
+                                <div className="mb-3">
                                     <SectionHeading
-                                        icon={<Layers3 className="h-5 w-5 text-purple-400" />}
+                                        icon={<Layers3 className="h-4 w-4 text-purple-400" />}
                                         title="Paradigm Dimension"
                                         body="Secular-theme fit, momentum, and economics are shown first because they explain the stock's larger market setup."
                                     />
@@ -551,8 +551,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     <ReverseStat label="Confidence" value={result.paradigm.pdm_confidence != null ? result.paradigm.pdm_confidence : 'n/a'} />
                                 </div>
                                 {paradigmHistory.length > 0 && (
-                                    <div className="mb-4 rounded-lg border border-purple-500/20 bg-background/25 p-4">
-                                        <div className="mb-2 flex items-center gap-2 text-base font-black uppercase tracking-wider text-muted-foreground">
+                                    <div className="mb-3 rounded-md border border-purple-500/20 bg-background/25 p-3">
+                                        <div className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
                                             <History className="h-4 w-4 text-purple-300" />
                                             Recent changes
                                         </div>
@@ -567,11 +567,11 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     </div>
                                 )}
                                 {result.paradigm.pdm_themes && result.paradigm.pdm_themes.length > 0 && (
-                                    <div className="mb-3 rounded-lg border border-purple-500/20 bg-background/25 p-4">
-                                        <div className="mb-2 text-base font-black uppercase tracking-wider text-muted-foreground">Matched themes</div>
+                                    <div className="mb-3 rounded-md border border-purple-500/20 bg-background/25 p-3">
+                                        <div className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Matched themes</div>
                                         <div className="flex flex-wrap gap-1.5">
                                             {result.paradigm.pdm_themes.map((theme: string) => (
-                                                <span key={theme} className="text-base font-mono px-3 py-1.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                                                <span key={theme} className="text-xs font-mono px-2 py-1 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
                                                     {theme}
                                                 </span>
                                             ))}
@@ -579,8 +579,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     </div>
                                 )}
                                 {result.paradigm.pdm_flags && result.paradigm.pdm_flags.length > 0 && (
-                                    <div className="mb-3 rounded-lg border border-border/50 bg-background/25 p-4">
-                                        <div className="mb-2 text-base font-black uppercase tracking-wider text-muted-foreground">Advisory flags</div>
+                                    <div className="mb-3 rounded-md border border-border/50 bg-background/25 p-3">
+                                        <div className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Advisory flags</div>
                                         <div className="flex flex-wrap gap-1.5">
                                             {result.paradigm.pdm_flags.map((flag: string) => {
                                                 const isMacro = flag.startsWith('macro_');
@@ -588,7 +588,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                                 const isDecel = flag === 'decelerating' || flag === 'regime_shift_down';
                                                 return (
                                                     <span key={flag} className={clsx(
-                                                        "text-base font-mono px-3 py-1.5 rounded border",
+                                                        "text-xs font-mono px-2 py-1 rounded border",
                                                         isMacro && "bg-red-500/15 text-red-400 border-red-500/40",
                                                         isAccel && "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
                                                         isDecel && "bg-amber-500/15 text-amber-400 border-amber-500/30",
@@ -611,10 +611,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         )}
 
                         {youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0 && (
-                            <div id="scorecard-youtube" className="scroll-mt-36 rounded-xl border border-red-500/25 bg-red-500/[0.04] p-5 shadow-sm sm:p-6">
-                                <div className="mb-5">
+                            <div id="scorecard-youtube" className="scroll-mt-28 rounded-lg border border-red-500/25 bg-red-500/[0.04] p-3 shadow-sm sm:p-4">
+                                <div className="mb-3">
                                     <SectionHeading
-                                        icon={<Youtube className="h-5 w-5 text-red-300" />}
+                                        icon={<Youtube className="h-4 w-4 text-red-300" />}
                                         title="YouTube Strategy Lens"
                                         body="Video-playbook matches, EPS state, valuation setup, and position-size guardrail in one compact view."
                                     />
@@ -638,10 +638,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* Phase 9: Reverse Engine Breakdown */}
                         {result.reverse && result.reverse.rev_band && result.reverse.rev_band !== 'Excluded' && (
-                            <div id="scorecard-reverse" className="scroll-mt-36 rounded-xl border border-emerald-500/25 bg-emerald-500/[0.04] p-5 shadow-sm sm:p-6">
-                                <div className="mb-5">
+                            <div id="scorecard-reverse" className="scroll-mt-28 rounded-lg border border-emerald-500/25 bg-emerald-500/[0.04] p-3 shadow-sm sm:p-4">
+                                <div className="mb-3">
                                     <SectionHeading
-                                        icon={<ShieldCheck className="h-5 w-5 text-emerald-400" />}
+                                        icon={<ShieldCheck className="h-4 w-4 text-emerald-400" />}
                                         title="Reverse Engine"
                                         body="Composite ranking, archetype route, valuation margin, survivability, and impairment risk for the reverse-screening lens."
                                     />
@@ -672,7 +672,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 {result.reverse.rev_flags && (
                                     <div className="flex flex-wrap gap-1.5 mb-3">
                                         {result.reverse.rev_flags.split(',').filter(f => f).map((flag: string) => (
-                                            <span key={flag} className="text-base font-mono px-3 py-1.5 rounded bg-secondary/50 text-muted-foreground border border-border/30">
+                                            <span key={flag} className="text-xs font-mono px-2 py-1 rounded bg-secondary/50 text-muted-foreground border border-border/30">
                                                 {flag}
                                             </span>
                                         ))}
@@ -685,7 +685,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     <InsightNote tone="caution" label="Con" text={result.reverse.rev_con} />
                                 )}
                                 {result.reverse.rev_nominated && (
-                                    <div className="mt-3 px-3.5 py-2.5 bg-amber-500/10 border border-amber-500/30 rounded-lg text-base font-black text-amber-400 flex items-center gap-2">
+                                    <div className="mt-2 px-3 py-2 bg-amber-500/10 border border-amber-500/30 rounded-md text-sm font-black text-amber-400 flex items-center gap-2">
                                         NOMINATED - queued for v3.2 deep-dive analysis
                                     </div>
                                 )}
@@ -694,10 +694,10 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* Deepseek AI Report */}
                         {savedReport && (
-                            <div id="scorecard-ai-report" className="scroll-mt-36 rounded-xl border border-blue-500/25 bg-blue-500/[0.04] p-5 shadow-sm sm:p-6">
-                                <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+                            <div id="scorecard-ai-report" className="scroll-mt-28 rounded-lg border border-blue-500/25 bg-blue-500/[0.04] p-3 shadow-sm sm:p-4">
+                                <div className="mb-3 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
                                     <SectionHeading
-                                        icon={<Sparkles className="h-5 w-5 text-blue-400" />}
+                                        icon={<Sparkles className="h-4 w-4 text-blue-400" />}
                                         title="AI Valuation Report"
                                         body="Deepseek V4.0 Pro research output, kept in a larger reading pane for thesis review."
                                     />
@@ -708,19 +708,19 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     </div>
                                 </div>
                                 <div className="bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
-                                    <div className="flex shrink-0 flex-col gap-3 border-b border-blue-500/20 bg-blue-500/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-                                        <span className="text-base leading-relaxed text-muted-foreground">
+                                    <div className="flex shrink-0 flex-col gap-3 border-b border-blue-500/20 bg-blue-500/10 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
+                                        <span className="text-sm leading-relaxed text-muted-foreground">
                                             Generated {new Date(savedReport.timestamp).toLocaleString()}
                                         </span>
                                         <div className="flex flex-wrap items-center gap-2">
-                                            <button onClick={downloadDsResult} className="flex items-center gap-1 rounded-md border border-border bg-secondary px-3.5 py-2.5 text-base font-semibold shadow-sm transition-colors hover:bg-secondary/80">Download .txt</button>
-                                            <button onClick={copyDsResult} className="flex items-center gap-1 rounded-md bg-[#4d6bfe] px-3.5 py-2.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#3b54d1]">
+                                            <button onClick={downloadDsResult} className="flex items-center gap-1 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-semibold shadow-sm transition-colors hover:bg-secondary/80">Download .txt</button>
+                                            <button onClick={copyDsResult} className="flex items-center gap-1 rounded-md bg-[#4d6bfe] px-3 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#3b54d1]">
                                                 {reportCopied ? "Copied" : "Copy Result"}
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="p-5 overflow-y-auto max-h-[600px] custom-scrollbar">
-                                        <div className="prose prose-invert prose-lg max-w-none text-foreground/90 leading-relaxed prose-headings:text-foreground prose-p:text-base prose-p:leading-8 prose-li:text-base prose-li:leading-8 prose-a:text-blue-400">
+                                    <div className="p-4 overflow-y-auto max-h-[600px] custom-scrollbar">
+                                        <div className="prose prose-invert prose-sm max-w-none text-foreground/90 leading-relaxed prose-headings:text-foreground prose-p:text-sm prose-p:leading-6 prose-li:text-sm prose-li:leading-6 prose-a:text-blue-400">
                                             <ReactMarkdown>
                                                 {savedReport.content}
                                             </ReactMarkdown>
@@ -737,24 +737,24 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
 function ReverseStat({ label, value, sub, band, warn }: { label: string; value: string | number; sub?: string; band?: string | null; warn?: boolean }) {
     return (
-        <div className="min-w-0 rounded-lg border border-border/50 bg-secondary/20 p-4">
-            <div className="truncate text-base font-bold text-muted-foreground uppercase tracking-wider">{label}</div>
+        <div className="min-w-0 rounded-lg border border-border/50 bg-secondary/20 p-3">
+            <div className="truncate text-sm font-bold text-muted-foreground uppercase tracking-wider">{label}</div>
             <div className={clsx(
-                "mt-1.5 break-words font-mono text-xl font-black leading-tight",
+                "mt-1.5 break-words font-mono text-sm font-black leading-tight",
                 band === 'High' && "text-emerald-400",
                 band === 'Solid' && "text-blue-400",
                 band === 'Watchlist' && "text-amber-400",
                 band === 'Monitor' && "text-gray-400",
                 warn && "text-amber-400",
             )} title={String(value)}>{value}</div>
-            {sub && <div className="text-base text-muted-foreground/70 mt-1">{sub}</div>}
+            {sub && <div className="text-xs text-muted-foreground/70 mt-1">{sub}</div>}
         </div>
     );
 }
 
 function MetricGroupLabel({ label }: { label: string }) {
     return (
-        <div className="mb-2 text-base font-black uppercase tracking-[0.16em] text-muted-foreground">
+        <div className="mb-2 text-xs font-black uppercase tracking-[0.16em] text-muted-foreground">
             {label}
         </div>
     );
@@ -763,11 +763,11 @@ function MetricGroupLabel({ label }: { label: string }) {
 function InsightNote({ tone, label, text }: { tone: "positive" | "caution"; label: string; text: string }) {
     return (
         <div className={clsx(
-            "mt-3 rounded-lg border px-4 py-3 text-base leading-relaxed",
+            "mt-2 rounded-md border px-3 py-2 text-sm leading-relaxed",
             tone === "positive" && "border-emerald-500/25 bg-emerald-500/[0.06] text-emerald-300",
             tone === "caution" && "border-amber-500/25 bg-amber-500/[0.06] text-amber-300",
         )}>
-            <div className="text-base font-black uppercase tracking-wider">{label}</div>
+            <div className="text-xs font-black uppercase tracking-wider">{label}</div>
             <p className="mt-1 text-foreground/85">{text}</p>
         </div>
     );
@@ -776,8 +776,8 @@ function InsightNote({ tone, label, text }: { tone: "positive" | "caution"; labe
 function ReportMetaStat({ label, value }: { label: string; value: string }) {
     return (
         <div className="min-w-0 rounded-lg border border-blue-500/25 bg-blue-500/[0.06] px-3 py-2.5">
-            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-1 truncate font-mono text-base font-black text-blue-300" title={value}>{value}</div>
+            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-1 truncate font-mono text-xs font-black text-blue-300" title={value}>{value}</div>
         </div>
     );
 }
@@ -785,11 +785,11 @@ function ReportMetaStat({ label, value }: { label: string; value: string }) {
 function SectionHeading({ icon, title, body }: { icon: ReactNode; title: string; body: string }) {
     return (
         <div className="min-w-0">
-            <h3 className="flex items-center gap-2 text-2xl font-black tracking-tight">
+            <h3 className="flex items-center gap-2 text-lg font-black tracking-tight">
                 {icon}
                 {title}
             </h3>
-            <p className="mt-2 max-w-3xl text-base leading-relaxed text-muted-foreground">
+            <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">
                 {body}
             </p>
         </div>
@@ -800,14 +800,14 @@ function StatusCount({ label, value, tone }: { label: string; value: number; ton
     return (
         <div className="rounded-lg border border-border/60 bg-secondary/20 px-3 py-2.5 text-center">
             <div className={clsx(
-                "font-mono text-2xl font-black leading-none",
+                "font-mono text-lg font-black leading-none",
                 tone === "positive" && "text-emerald-400",
                 tone === "warning" && "text-amber-400",
                 tone === "negative" && "text-red-400",
             )}>
                 {value}
             </div>
-            <div className="mt-1 text-base font-black uppercase tracking-wider text-muted-foreground">
+            <div className="mt-1 text-xs font-black uppercase tracking-wider text-muted-foreground">
                 {label}
             </div>
         </div>
@@ -823,15 +823,15 @@ function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: ReactN
     }[tone];
 
     return (
-        <div className={clsx("rounded-lg border p-5", toneClass)}>
+        <div className={clsx("rounded-md border p-3", toneClass)}>
             <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider">
                     {icon}
                     {label}
                 </div>
-                <div className="font-mono text-2xl font-black text-foreground">{value}</div>
+                <div className="font-mono text-lg font-black text-foreground">{value}</div>
             </div>
-            <div className="mt-2 truncate text-base font-semibold text-muted-foreground" title={detail}>
+            <div className="mt-1 truncate text-sm font-semibold text-muted-foreground" title={detail}>
                 {detail}
             </div>
         </div>
@@ -869,17 +869,17 @@ function selectedMarketLabel(market: Market) {
 
 function QuoteMetric({ label, value, sub, tone = "muted" }: { label: string; value: string; sub: string; tone?: "positive" | "negative" | "muted" }) {
     return (
-        <div className="min-w-0 rounded-lg border border-border/60 bg-secondary/20 p-4 shadow-sm">
-            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+        <div className="min-w-0 rounded-lg border border-border/60 bg-secondary/20 p-3 shadow-sm">
+            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className={clsx(
-                "mt-2 truncate font-mono text-2xl font-black leading-none sm:text-3xl",
+                "mt-2 truncate font-mono text-lg font-black leading-none sm:text-2xl",
                 tone === "positive" && "text-emerald-400",
                 tone === "negative" && "text-red-400",
                 tone === "muted" && "text-foreground",
             )} title={value}>
                 {value}
             </div>
-            <div className="mt-2 truncate text-base font-semibold text-muted-foreground" title={sub}>{sub}</div>
+            <div className="mt-1 truncate text-sm font-semibold text-muted-foreground" title={sub}>{sub}</div>
         </div>
     );
 }
@@ -889,17 +889,17 @@ function DetailRow({ label, value, target, pass, warning }: { label: string, val
     const statusLabel = pass ? t('pass') : warning ? t('watch') : t('fail');
 
     return (
-        <div className="flex flex-col gap-3 rounded-lg border border-border/50 bg-secondary/20 p-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 rounded-lg border border-border/50 bg-secondary/20 p-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
-                <div className="text-base font-semibold text-muted-foreground">{label}</div>
-                <div className="mt-0.5 truncate font-mono text-xl font-black" title={String(value)}>{value}</div>
+                <div className="text-sm font-semibold text-muted-foreground">{label}</div>
+                <div className="mt-0.5 truncate font-mono text-sm font-black" title={String(value)}>{value}</div>
             </div>
             <div className="flex shrink-0 items-center justify-between gap-3 sm:flex-col sm:items-end">
-                <div className="rounded-md border border-border/60 bg-background/35 px-3 py-1.5 text-base font-bold text-muted-foreground">
+                <div className="rounded-md border border-border/60 bg-background/35 px-3 py-1.5 text-sm font-bold text-muted-foreground">
                     {t('target')}: {target}
                 </div>
                 <div className={clsx(
-                    "rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider",
+                    "rounded-md border px-2.5 py-1 text-xs font-black uppercase tracking-wider",
                     pass && "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
                     warning && !pass && "border-amber-500/30 bg-amber-500/10 text-amber-400",
                     !pass && !warning && "border-red-500/30 bg-red-500/10 text-red-400",

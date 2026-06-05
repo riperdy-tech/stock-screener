@@ -259,11 +259,11 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
     return (
         <div className={clsx(
-            "fixed inset-y-0 left-0 z-50 w-[min(27rem,100vw)] bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-[100dvh] overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
+            "fixed inset-y-0 left-0 z-50 w-[min(22.5rem,100vw)] bg-card/95 backdrop-blur-3xl border-r border-border/50 flex flex-col h-[100dvh] overflow-hidden shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.8)] transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-card/80",
             isOpen ? "translate-x-0" : "-translate-x-full"
         )}>
-            <div className="p-4 border-b border-border/50 flex justify-between items-center bg-muted/40">
-                <div className="flex items-center gap-2 text-lg font-black">
+            <div className="p-3 border-b border-border/50 flex justify-between items-center bg-muted/40">
+                <div className="flex items-center gap-2 text-base font-black">
                     <Filter className="h-5 w-5 text-primary" />
                     {t('filters')}
                 </div>
@@ -272,17 +272,17 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 </button>
             </div>
 
-            <div className="filter-section-list flex-1 overflow-y-auto p-3 space-y-3">
+            <div className="filter-section-list flex-1 overflow-y-auto p-2.5 space-y-2.5">
                 <div className="rounded-lg border border-border/60 bg-secondary/25 p-3">
-                    <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
                             <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{t('activeLens')}</div>
-                            <div className="mt-1 truncate text-base font-black text-foreground">
+                            <div className="mt-1 truncate text-sm font-black text-foreground">
                                 {activeLensTitle}
                             </div>
                         </div>
                         <div className="shrink-0 text-right">
-                            <div className="font-mono text-2xl font-black leading-none text-primary">{totalResults.toLocaleString()}</div>
+                            <div className="font-mono text-xl font-black leading-none text-primary">{totalResults.toLocaleString()}</div>
                             <div className="mt-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">{resultLabel}</div>
                         </div>
                     </div>
@@ -301,7 +301,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                         key={arch}
                                         onClick={() => toggleArchetype(arch)}
                                         className={clsx(
-                                            "px-3 py-2 text-base font-bold rounded-md border transition-all",
+                                            "px-2.5 py-1.5 text-sm font-bold rounded-md border transition-all",
                                             localReverseFilters.archetypes.includes(arch)
                                                 ? "bg-primary text-primary-foreground border-primary"
                                                 : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-primary/40"
@@ -320,7 +320,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                         key={band}
                                         onClick={() => toggleBand(band)}
                                         className={clsx(
-                                            "px-3 py-2 text-base font-bold rounded-md border transition-all",
+                                            "px-2.5 py-1.5 text-sm font-bold rounded-md border transition-all",
                                             localReverseFilters.bands.includes(band)
                                                 ? band === 'High' ? "bg-emerald-500/30 text-emerald-400 border-emerald-500/50"
                                                 : band === 'Solid' ? "bg-blue-500/30 text-blue-400 border-blue-500/50"
@@ -358,25 +358,25 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         </Section>
 
                         <Section title="Nomination">
-                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2.5">
+                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2">
                                 <input
                                     type="checkbox"
                                     checked={localReverseFilters.nominatedOnly}
                                     onChange={(e) => setLocalReverseFilters({ ...localReverseFilters, nominatedOnly: e.target.checked })}
-                                    className="w-5 h-5 rounded border-border accent-amber-500"
+                                    className="h-4 w-4 rounded border-border accent-amber-500"
                                 />
-                                <span className="text-base font-medium text-muted-foreground">Nominated only</span>
+                                <span className="text-sm font-medium text-muted-foreground">Nominated only</span>
                             </label>
                         </Section>
 
                         {/* Phase 11d: Deep-Dive */}
                         <Section title="Deep-Dive (v3.2)">
-                            <p className="text-base text-muted-foreground mb-2">Click cards to select stocks, or use N below for top-ranked.</p>
+                            <p className="text-sm text-muted-foreground mb-2">Click cards to select stocks, or use N below for top-ranked.</p>
                             <div className="flex items-center gap-3">
                                 <select
                                     value={(batchN && [5,10,25].includes(batchN)) ? batchN : 0}
                                     onChange={(e) => { const v = Number(e.target.value); if (v > 0 && onBatchNChange) onBatchNChange(v); }}
-                                    className="rounded-md border border-border/70 bg-secondary/40 px-3.5 py-2.5 text-base font-bold text-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                                    className="rounded-md border border-border/70 bg-secondary/40 px-3 py-2 text-sm font-bold text-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
                                 >
                                     <option value={0}>N</option>
                                     <option value={5}>5</option>
@@ -388,20 +388,20 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                     min={1} max={30}
                                     value={batchN || 25}
                                     onChange={(e) => { const v = parseInt(e.target.value); if (v >= 1 && v <= 30 && onBatchNChange) onBatchNChange(v); }}
-                                    className="w-24 rounded-md border border-border/70 bg-secondary/40 px-3 py-2.5 text-center text-base font-bold text-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                                    className="w-20 rounded-md border border-border/70 bg-secondary/40 px-2.5 py-2 text-center text-sm font-bold text-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
                                 />
                             </div>
                             <button
                                 onClick={onDeepDiveClick}
                                 disabled={batchDispatching}
-                                className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-3 text-base font-black text-white transition-all hover:bg-emerald-500 active:scale-95 disabled:opacity-50"
+                                className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-3 py-2 text-sm font-black text-white transition-all hover:bg-emerald-500 active:scale-95 disabled:opacity-50"
                             >
                                 <Sparkles className="h-4 w-4" />
                                 {batchDispatching ? 'Dispatching...' : selectedCount && selectedCount > 0 ? `Deep-Dive Selected (${selectedCount})` : `Deep-Dive Top ${batchN || 25}`}
                             </button>
                             {batchStatus && (
                                 <p className={clsx(
-                                    "text-base mt-1",
+                                    "text-sm mt-1",
                                     batchStatus.startsWith("Error") ? "text-red-400" : "text-emerald-400"
                                 )}>{batchStatus}</p>
                             )}
@@ -425,7 +425,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                         key={id}
                                         onClick={() => toggleParadigmBand(id)}
                                         className={clsx(
-                                            "px-3 py-2 text-base font-bold rounded-md border transition-all",
+                                            "px-2.5 py-1.5 text-sm font-bold rounded-md border transition-all",
                                             localParadigmFilters.bands.includes(id)
                                                 ? cls
                                                 : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-primary/40"
@@ -444,7 +444,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                         key={theme}
                                         onClick={() => toggleParadigmTheme(theme)}
                                         className={clsx(
-                                            "rounded-md border px-3.5 py-2.5 text-base font-mono transition-all",
+                                            "rounded-md border px-3 py-2 text-sm font-mono transition-all",
                                             localParadigmFilters.themes.includes(theme)
                                                 ? "bg-purple-500/30 text-purple-300 border-purple-500/50"
                                                 : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-purple-400/40"
@@ -462,9 +462,9 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                 placeholder="filter (e.g. Semi, Software, Solar)"
                                 value={localParadigmFilters.industryQuery}
                                 onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, industryQuery: e.target.value })}
-                                className="w-full bg-secondary/40 border border-border/70 text-foreground text-base rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500"
+                                className="w-full bg-secondary/40 border border-border/70 text-foreground text-sm rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500"
                             />
-                            <p className="text-base text-muted-foreground mt-1">Case-insensitive substring match on Yahoo industry name.</p>
+                            <p className="text-sm text-muted-foreground mt-1">Case-insensitive substring match on Yahoo industry name.</p>
                         </Section>
 
                         <Section title="Score Thresholds (0-100)">
@@ -495,41 +495,41 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         </Section>
 
                         <Section title="Flag Filters">
-                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2.5">
+                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.acceleratingOnly}
                                     onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, acceleratingOnly: e.target.checked })}
-                                    className="w-5 h-5 rounded border-border accent-emerald-500"
+                                    className="h-4 w-4 rounded border-border accent-emerald-500"
                                 />
-                                <span className="text-base font-medium text-muted-foreground">Accelerating only</span>
+                                <span className="text-sm font-medium text-muted-foreground">Accelerating only</span>
                             </label>
-                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2.5">
+                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.bridgedOnly}
                                     onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, bridgedOnly: e.target.checked })}
-                                    className="w-5 h-5 rounded border-border accent-blue-500"
+                                    className="h-4 w-4 rounded border-border accent-blue-500"
                                 />
-                                <span className="text-base font-medium text-muted-foreground">Forward-EPS bridged only</span>
+                                <span className="text-sm font-medium text-muted-foreground">Forward-EPS bridged only</span>
                             </label>
-                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2.5">
+                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.multiThemeOnly}
                                     onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, multiThemeOnly: e.target.checked })}
-                                    className="w-5 h-5 rounded border-border accent-purple-500"
+                                    className="h-4 w-4 rounded border-border accent-purple-500"
                                 />
-                                <span className="text-base font-medium text-muted-foreground">Multi-theme only (2+ themes)</span>
+                                <span className="text-sm font-medium text-muted-foreground">Multi-theme only (2+ themes)</span>
                             </label>
-                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2.5">
+                            <label className="flex items-center gap-3 cursor-pointer rounded-lg border border-border/50 bg-secondary/20 px-3 py-2">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.macroWarningOnly}
                                     onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, macroWarningOnly: e.target.checked })}
-                                    className="w-5 h-5 rounded border-border accent-red-500"
+                                    className="h-4 w-4 rounded border-border accent-red-500"
                                 />
-                                <span className="text-base font-medium text-muted-foreground">Macro warning only</span>
+                                <span className="text-sm font-medium text-muted-foreground">Macro warning only</span>
                             </label>
                         </Section>
 
@@ -548,7 +548,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                             type="button"
                                             onClick={() => onYoutubeFilterToggle?.(filter.value)}
                                             className={clsx(
-                                                "flex w-full items-center justify-between gap-2 rounded-md border px-3 py-2.5 text-left text-base font-bold transition-all",
+                                                "flex w-full items-center justify-between gap-2 rounded-md border px-3 py-2 text-left text-sm font-bold transition-all",
                                                 isActive
                                                     ? "border-red-500/50 bg-red-500/15 text-red-300"
                                                     : "border-border/50 bg-secondary/40 text-muted-foreground hover:border-red-400/40 hover:text-foreground"
@@ -619,7 +619,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 </>
                 )}
 
-                <div className="text-center text-base text-muted-foreground mt-8 pb-20">
+                <div className="text-center text-sm text-muted-foreground mt-8 pb-20">
                     {screenMode === 'reverse' ? `${totalResults} ${t('reverseCandidates')}`
                         : screenMode === 'paradigm' ? `${totalResults} ${t('paradigmCandidates')}`
                         : screenMode === 'youtube' ? `${totalResults} ${t('youtubeCandidates')}`
@@ -655,15 +655,15 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 />
             )}
             {screenMode === 'youtube' && (
-                <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-4 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
-                    <div className="flex items-center justify-between gap-4 rounded-lg border border-red-500/20 bg-red-500/[0.06] px-4 py-3">
+                <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-3 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+                    <div className="flex items-center justify-between gap-3 rounded-lg border border-red-500/20 bg-red-500/[0.06] px-3 py-2">
                         <div>
-                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{t('liveYoutubeFilter')}</div>
-                            <div className="mt-1 text-base font-bold text-red-300">{t('updatesInstantly')}</div>
+                            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{t('liveYoutubeFilter')}</div>
+                            <div className="mt-1 text-sm font-bold text-red-300">{t('updatesInstantly')}</div>
                         </div>
                         <div className="text-right">
-                            <div className="font-mono text-2xl font-black text-foreground">{totalResults.toLocaleString()}</div>
-                            <div className="text-base font-bold text-muted-foreground">{t('matches')}</div>
+                            <div className="font-mono text-xl font-black text-foreground">{totalResults.toLocaleString()}</div>
+                            <div className="text-xs font-bold text-muted-foreground">{t('matches')}</div>
                         </div>
                     </div>
                 </div>
@@ -687,9 +687,9 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <section className="filter-section rounded-lg border border-border/60 bg-background/20 p-3 shadow-sm">
-            <h3 className="filter-section-title flex items-center gap-3 text-base font-black text-foreground">{title}</h3>
-            <div className="mt-3 space-y-3">
+        <section className="filter-section rounded-md border border-border/60 bg-background/20 p-2.5 shadow-sm">
+            <h3 className="filter-section-title flex items-center gap-3 text-sm font-black text-foreground">{title}</h3>
+            <div className="mt-2 space-y-2.5">
                 {children}
             </div>
         </section>
@@ -704,15 +704,15 @@ function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "
             : "bg-primary text-primary-foreground hover:bg-primary/90";
 
     return (
-        <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-4 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+        <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-3 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
             {contextLabel && contextValue !== undefined && (
-                <div className="mb-3 flex items-center justify-between gap-4 rounded-lg border border-border/60 bg-secondary/25 px-4 py-3">
+                <div className="mb-3 flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-secondary/25 px-3 py-2">
                     <div>
                         <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{currentViewLabel}</div>
                         <div className="mt-1 text-sm font-bold text-foreground">{contextLabel}</div>
                     </div>
                     <div className="text-right">
-                        <div className="font-mono text-xl font-black text-primary">{contextValue.toLocaleString()}</div>
+                        <div className="font-mono text-lg font-black text-primary">{contextValue.toLocaleString()}</div>
                         <div className="text-xs font-bold text-muted-foreground">{resultsLabel}</div>
                     </div>
                 </div>
@@ -720,13 +720,13 @@ function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "
             <div className="flex gap-3">
                 <button
                     onClick={onPrimary}
-                    className={clsx("flex-1 rounded-lg px-4 py-2.5 text-sm font-black shadow transition-colors", primaryClass)}
+                    className={clsx("flex-1 rounded-md px-3 py-2 text-sm font-black shadow transition-colors", primaryClass)}
                 >
                     {primaryLabel}
                 </button>
                 <button
                     onClick={onReset}
-                    className="flex-1 rounded-lg border border-border bg-muted px-4 py-2.5 text-sm font-bold text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                    className="flex-1 rounded-md border border-border bg-muted px-3 py-2 text-sm font-bold text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                 >
                     {resetLabel}
                 </button>
@@ -744,10 +744,10 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
 
     return (
         <div className="group/input">
-            <div className="mb-2.5 flex items-start justify-between gap-3">
+            <div className="mb-1.5 flex items-start justify-between gap-3">
                 <div className="flex items-center gap-1.5 group relative cursor-help w-fit">
                     <label className="text-xs font-bold text-muted-foreground group-hover/input:text-foreground transition-colors">{label}</label>
-                    {field && <HelpCircle className="h-4 w-4 shrink-0 text-muted-foreground/50 group-hover:text-primary transition-colors" />}
+                    {field && <HelpCircle className="h-3.5 w-3.5 shrink-0 text-muted-foreground/50 group-hover:text-primary transition-colors" />}
 
                     {/* Tooltip */}
                     {field && defs && (
