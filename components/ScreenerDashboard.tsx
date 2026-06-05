@@ -11,7 +11,7 @@ import { evaluateYoutubeStrategy, matchesYoutubeStrategyFilter, YoutubeStrategyE
 import { supabase } from "@/lib/supabase";
 import { LanguageToggle } from "./LanguageToggle";
 import { LogConsole } from "./LogConsole";
-import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal, HelpCircle, Telescope, ShieldCheck, Layers3, Youtube, LayoutGrid, Table2 } from 'lucide-react';
+import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal, HelpCircle, Telescope, ShieldCheck, Layers3, Youtube, LayoutGrid, Table2, History } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -771,6 +771,7 @@ export function ScreenerDashboard() {
         });
         return bySymbol;
     }, [paradigmHistoryEvents]);
+    const recentParadigmEvents = useMemo(() => paradigmHistoryEvents.slice(0, 6), [paradigmHistoryEvents]);
     const strategyMeta = useMemo(() => ({
         '100bagger': {
             ...STRATEGY_META['100bagger'],
@@ -1323,6 +1324,53 @@ export function ScreenerDashboard() {
                         </div>
                     ) : (
                         <>
+                            {screenMode === 'paradigm' && (
+                                <div className="mb-4 rounded-lg border border-purple-500/20 bg-purple-500/[0.04] p-3">
+                                    <div className="mb-2 flex items-center justify-between gap-3">
+                                        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-purple-300">
+                                            <History className="h-4 w-4" />
+                                            Paradigm History
+                                        </div>
+                                        <span className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                                            {paradigmHistoryEvents.length.toLocaleString()} changes
+                                        </span>
+                                    </div>
+                                    {recentParadigmEvents.length > 0 ? (
+                                        <div className="grid grid-cols-1 gap-2 lg:grid-cols-3">
+                                            {recentParadigmEvents.map(event => (
+                                                <button
+                                                    key={`${event.run_id}-${event.symbol}-${event.summary}`}
+                                                    type="button"
+                                                    onClick={() => {
+                                                        const match = rawResults.find(result => result.candidate.symbol === event.symbol);
+                                                        if (match) setSelectedStock(match);
+                                                    }}
+                                                    className="min-w-0 rounded-md border border-border/60 bg-background/35 px-3 py-2 text-left transition-colors hover:border-purple-400/40 hover:bg-purple-500/10"
+                                                >
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="font-mono text-sm font-black text-foreground">{event.symbol}</span>
+                                                        <span className={clsx(
+                                                            "rounded px-2 py-0.5 text-[10px] font-black uppercase",
+                                                            event.direction === 'upgrade' && "bg-emerald-500/15 text-emerald-300",
+                                                            event.direction === 'downgrade' && "bg-red-500/15 text-red-300",
+                                                            event.direction === 'changed' && "bg-purple-500/15 text-purple-300",
+                                                        )}>
+                                                            {event.direction}
+                                                        </span>
+                                                    </div>
+                                                    <div className="mt-1 truncate text-xs font-semibold text-muted-foreground" title={event.summary}>
+                                                        {event.summary}
+                                                    </div>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="rounded-md border border-border/50 bg-background/30 px-3 py-2 text-sm font-semibold text-muted-foreground">
+                                            Baseline is active. No Paradigm upgrades, downgrades, or theme changes have been recorded since tracking started.
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                             {resultView === 'cards' ? (
                                 <div className="grid grid-cols-1 gap-4 mb-8 lg:grid-cols-2 2xl:grid-cols-3">
                                     {currentData.map((result, i) => (
