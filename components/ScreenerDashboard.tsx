@@ -265,7 +265,7 @@ export function ScreenerDashboard() {
             return matchesYoutubeStrategyFilter(evaluation, "any");
         }
 
-        return youtubeFilters.some(filter => matchesYoutubeStrategyFilter(evaluation, filter));
+        return youtubeFilters.every(filter => matchesYoutubeStrategyFilter(evaluation, filter));
     }, [youtubeFilters]);
 
     const dismissBatchPanel = (id: string | null = batchId) => {
@@ -875,10 +875,10 @@ export function ScreenerDashboard() {
 
         if (screenMode === 'youtube') {
             if (youtubeFilters.includes("any")) return [...searchChip, t('youtubeAny')];
-            return [
-                ...searchChip,
-                ...youtubeFilters.map(filter => youtubeFilterMeta.find(item => item.value === filter)?.label).filter((label): label is string => Boolean(label)),
-            ];
+            const labels = youtubeFilters
+                .map(filter => youtubeFilterMeta.find(item => item.value === filter)?.label)
+                .filter((label): label is string => Boolean(label));
+            return [...searchChip, `YT overlap: ${labels.join(' + ')}`];
         }
 
         return [
