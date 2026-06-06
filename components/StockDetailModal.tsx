@@ -466,46 +466,46 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         </div>
 
                         {showReports && (
-                            <div className="animate-in slide-in-from-top-2 rounded-xl border border-blue-500/20 bg-blue-500/[0.035] p-3 duration-300 sm:p-4">
-                                <div className="mb-4 flex flex-col gap-1">
-                                    <h3 className="flex items-center gap-2 text-base font-black tracking-tight">
+                            <div className="animate-in slide-in-from-top-2 rounded-lg border border-blue-500/20 bg-blue-500/[0.035] p-3 duration-300">
+                                <div className="mb-3 flex flex-col gap-1">
+                                    <h3 className="flex items-center gap-2 text-sm font-black tracking-tight">
                                         <Sparkles className="h-4 w-4 text-blue-400" /> Saved AI Research
                                     </h3>
-                                    <p className="text-sm leading-relaxed text-muted-foreground">
+                                    <p className="text-xs leading-relaxed text-muted-foreground">
                                         Pick the most recent report, or compare older records when the thesis has changed.
                                     </p>
                                 </div>
-                                <div className="space-y-3">
+                                <div className="space-y-2.5">
                                     {reportHistory.length === 0 ? (
                                         <div className="rounded-lg border border-dashed border-border bg-card/55 p-3 text-center">
-                                            <div className="text-base font-black tracking-tight text-foreground">No saved reports yet</div>
-                                            <p className="mx-auto mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground">
+                                            <div className="text-sm font-black tracking-tight text-foreground">No saved reports yet</div>
+                                            <p className="mx-auto mt-1.5 max-w-lg text-xs leading-relaxed text-muted-foreground">
                                                 Use Generate AI Prompt in the primary actions rail to create the first research handoff for this ticker.
                                             </p>
                                         </div>
                                     ) : reportHistory.map((report, idx) => (
                                         <div
                                             key={report.created_at}
-                                            className="flex flex-col gap-3 rounded-lg border border-border/70 bg-card/90 p-3 shadow-sm transition-colors hover:border-primary/40 sm:flex-row sm:items-center sm:justify-between"
+                                            className="flex flex-col gap-2.5 rounded-lg border border-border/70 bg-card/90 p-2.5 shadow-sm transition-colors hover:border-primary/40 sm:flex-row sm:items-center sm:justify-between"
                                         >
-                                            <div className="flex min-w-0 gap-3">
-                                                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-blue-500/25 bg-blue-500/10 font-mono text-xs font-black text-blue-400">
+                                            <div className="flex min-w-0 gap-2.5">
+                                                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-blue-500/25 bg-blue-500/10 font-mono text-[11px] font-black text-blue-400">
                                                     #{idx + 1}
                                                 </span>
                                                 <div className="min-w-0">
-                                                    <div className="flex flex-wrap items-center gap-2">
-                                                        <span className="text-base font-black tracking-tight">Deepseek V4-Pro Analysis</span>
+                                                    <div className="flex flex-wrap items-center gap-1.5">
+                                                        <span className="text-sm font-black tracking-tight">Deepseek V4-Pro Analysis</span>
                                                         {idx === 0 && (
                                                             <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-xs font-black text-emerald-400">
                                                                 Latest
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <div className="mt-2 flex flex-wrap gap-2">
-                                                        <span className="rounded-md border border-border/60 bg-secondary/35 px-3 py-1.5 font-mono text-sm font-bold text-muted-foreground">
+                                                    <div className="mt-1.5 flex flex-wrap gap-1.5">
+                                                        <span className="rounded-md border border-border/60 bg-secondary/35 px-2 py-1 font-mono text-xs font-bold text-muted-foreground">
                                                             {new Date(report.created_at).toLocaleString()}
                                                         </span>
-                                                        <span className="rounded-md border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 font-mono text-sm font-bold text-blue-300">
+                                                        <span className="rounded-md border border-blue-500/20 bg-blue-500/10 px-2 py-1 font-mono text-xs font-bold text-blue-300">
                                                             ${report.cost || '0.00'}
                                                         </span>
                                                     </div>
@@ -516,7 +516,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                                     setSavedReport({...report, timestamp: report.created_at});
                                                     setShowReports(false);
                                                 }}
-                                                className="w-full rounded-md border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-black text-primary transition-colors hover:bg-primary/15 sm:w-auto"
+                                                className="w-full rounded-md border border-primary/30 bg-primary/10 px-2.5 py-1.5 text-xs font-black text-primary transition-colors hover:bg-primary/15 sm:w-auto"
                                             >
                                                 Open report
                                             </button>

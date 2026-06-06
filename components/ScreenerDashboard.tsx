@@ -202,6 +202,7 @@ export function ScreenerDashboard() {
     const [reverseFilters, setReverseFilters] = useState<ReverseFilterState>(DEFAULT_REVERSE_FILTERS);
     const [paradigmFilters, setParadigmFilters] = useState<ParadigmFilterState>(DEFAULT_PARADIGM_FILTERS);
     const [youtubeFilters, setYoutubeFilters] = useState<YoutubeStrategyFilter[]>(["any"]);
+    const [strictPassOnly, setStrictPassOnly] = useState(false);
     const [resultView, setResultView] = useState<ResultView>('cards');
     
     // Maintain a ref to current rawResults for the setInterval closure
@@ -673,6 +674,7 @@ export function ScreenerDashboard() {
         // 100-Bagger mode — existing behavior unchanged
         return rawResults.filter(r => {
             const c = r.candidate;
+            if (strictPassOnly && !r.passed) return false;
 
             // 1. Search (Symbol or Name)
             const searchMatch = !search ||
@@ -715,7 +717,7 @@ export function ScreenerDashboard() {
 
             return true;
         });
-    }, [rawResults, youtubeSourceResults, search, filters, selectedMarket, screenMode, reverseFilters, paradigmFilters, youtubeEvaluations, matchesSelectedYoutubeFilters]);
+    }, [rawResults, youtubeSourceResults, search, filters, selectedMarket, screenMode, reverseFilters, paradigmFilters, youtubeEvaluations, matchesSelectedYoutubeFilters, strictPassOnly]);
 
 
     // Pagination Logic
@@ -724,7 +726,7 @@ export function ScreenerDashboard() {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [search, filters, screenMode, reverseFilters, paradigmFilters, youtubeFilters, selectedMarket]);
+    }, [search, filters, screenMode, reverseFilters, paradigmFilters, youtubeFilters, selectedMarket, strictPassOnly]);
 
     const filteredCount = filteredResults.length;
     const youtubeTotals = useMemo(() => {
@@ -883,6 +885,7 @@ export function ScreenerDashboard() {
 
         return [
             ...searchChip,
+            strictPassOnly ? t('strictPass') : null,
             `Market cap >= ${filters.minMarketCap}${selectedMarket === 'US' ? 'M' : selectedMarket === 'Korea' ? 'B KRW' : '00M TWD'}`,
             filters.maxPrice < 1000 ? `Price <= ${selectedMarket === 'US' ? '$' : ''}${filters.maxPrice}` : null,
             filters.minRevenueGrowth > -50 ? `Growth >= ${filters.minRevenueGrowth}%` : null,
@@ -893,7 +896,7 @@ export function ScreenerDashboard() {
             filters.minInsiderOwnership > 0 ? `Insider >= ${filters.minInsiderOwnership}%` : null,
             filters.maxFloat < 5000 ? `Float <= ${filters.maxFloat}M` : null,
         ].filter((chip): chip is string => Boolean(chip));
-    }, [screenMode, reverseFilters, paradigmFilters, youtubeFilters, youtubeFilterMeta, filters, selectedMarket, search, t]);
+    }, [screenMode, reverseFilters, paradigmFilters, youtubeFilters, youtubeFilterMeta, filters, selectedMarket, search, t, strictPassOnly]);
     const visibleFilterChips = activeFilterChips.slice(0, 8);
     const hiddenFilterChipCount = Math.max(activeFilterChips.length - visibleFilterChips.length, 0);
     const resetActiveFilters = () => {
@@ -905,6 +908,7 @@ export function ScreenerDashboard() {
         } else if (screenMode === 'youtube') {
             setYoutubeFilters(["any"]);
         } else {
+            setStrictPassOnly(false);
             setFilters(ZERO_BASE_FILTERS);
         }
     };
@@ -1159,7 +1163,7 @@ export function ScreenerDashboard() {
                                 />
                             ))}
                             {screenMode === '100bagger' && [
-                                { label: t('strictPass'), value: formatCount(strategyCounts['100bagger']), detail: t('strictPassDesc') },
+                                { label: t('strictPass'), value: formatCount(strategyCounts['100bagger']), detail: t('strictPassDesc'), active: strictPassOnly, onClick: () => setStrictPassOnly(value => !value) },
                                 { label: t('minGrowth'), value: `${filters.minRevenueGrowth}%`, detail: t('minGrowthDesc') },
                                 { label: t('maxPriceShort'), value: selectedMarket === 'US' ? `$${filters.maxPrice}` : String(filters.maxPrice), detail: t('maxPriceDesc') },
                                 { label: t('minRoicShort'), value: `${filters.minROIC}%`, detail: t('minRoicDesc') },
@@ -1170,8 +1174,9 @@ export function ScreenerDashboard() {
                                     label={item.label}
                                     value={item.value}
                                     detail={item.detail}
-                                    active={false}
+                                    active={Boolean(item.active)}
                                     tone="sky"
+                                    onClick={item.onClick}
                                 />
                             ))}
                         </div>
@@ -1500,15 +1505,15 @@ export function ScreenerDashboard() {
 
             {/* AI Modal Overlay */}
             {aiModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-card w-full sm:max-w-[95vw] lg:max-w-7xl h-[92vh] sm:h-auto sm:max-h-[90vh] rounded-t-2xl sm:rounded-xl border border-border shadow-2xl flex flex-col overflow-hidden">
-                        <div className="flex items-start justify-between gap-4 p-5 border-b border-border bg-secondary/30 shrink-0">
+                <div className="fixed inset-0 z-50 flex items-end justify-center bg-background/80 backdrop-blur-sm animate-in fade-in duration-200 sm:items-center sm:p-3">
+                    <div className="flex h-[94vh] w-full flex-col overflow-hidden rounded-t-xl border border-border bg-card shadow-2xl sm:h-[90vh] sm:max-w-[92vw] sm:rounded-xl lg:max-w-5xl">
+                        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-border bg-secondary/30 p-3 sm:p-4">
                             <div className="min-w-0">
-                                <p className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">Research handoff</p>
-                                <h3 className="mt-1 text-2xl font-black tracking-tight text-foreground sm:text-3xl">
+                                <p className="text-xs font-black uppercase tracking-[0.16em] text-muted-foreground">Research handoff</p>
+                                <h3 className="mt-0.5 text-xl font-black tracking-tight text-foreground sm:text-2xl">
                                     Prompt Exporter: {selectedAiTicker}
                                 </h3>
-                                <p className="mt-1 text-base leading-relaxed text-muted-foreground">
+                                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                                     Copy the prepared prompt, open a model, or run the protected Deepseek workflow.
                                 </p>
                             </div>
@@ -1516,30 +1521,30 @@ export function ScreenerDashboard() {
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
-                        <div className="p-3 sm:p-6 overflow-hidden flex flex-col flex-1 min-h-0 gap-3 sm:gap-4">
+                        <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-3 sm:p-4">
                             {aiLoading ? (
                                 <div className="flex flex-col items-center justify-center flex-1 text-muted-foreground gap-4">
                                     <RefreshCw className="h-8 w-8 animate-spin text-accent" />
                                     <p className="text-base font-medium text-center">Injecting latest real-time statements and building prompt...</p>
                                 </div>
                             ) : aiResult ? (
-                                <div className="flex flex-col flex-1 min-h-0 gap-3 sm:gap-4">
+                                <div className="flex min-h-0 flex-1 flex-col gap-3">
                                     <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
                                         <PromptStat label="Ticker" value={selectedAiTicker || "Unknown"} sub="Active scorecard" />
                                         <PromptStat label="Prompt" value={`${aiResult.length.toLocaleString()} chars`} sub="Ready to copy" />
                                         <PromptStat label="Output" value={dsResult ? "Report ready" : "Manual or cloud"} sub={dsResult ? "Deepseek result loaded" : "Choose a model below"} />
                                     </div>
-                                    <div className="grid grid-cols-1 gap-4 flex-1 min-h-[350px] sm:min-h-[450px]">
+                                    <div className="grid min-h-[260px] flex-1 grid-cols-1 gap-3 sm:min-h-[300px]">
                                         {/* Prompt Box */}
                                         <div className="relative flex-1 bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
-                                            <div className="bg-secondary/40 px-3 sm:px-5 py-3 border-b border-border flex flex-col gap-3 shrink-0 sm:flex-row sm:items-center sm:justify-between">
+                                            <div className="flex shrink-0 flex-col gap-2 border-b border-border bg-secondary/40 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between">
                                                 <div>
-                                                    <span className="text-base font-mono text-muted-foreground uppercase tracking-wider font-semibold">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
-                                                    <p className="mt-1 text-base text-muted-foreground">Prepared analysis packet for valuation, scenarios, risks, and final verdict.</p>
+                                                    <span className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
+                                                    <p className="mt-0.5 text-sm text-muted-foreground">Prepared analysis packet for valuation, scenarios, risks, and final verdict.</p>
                                                 </div>
                                                 <button
                                                     onClick={() => copyToClipboard(aiResult!)}
-                                                    className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-base font-black text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 sm:w-auto"
+                                                    className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-black text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 sm:w-auto"
                                                 >
                                                     {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                                                     {copied ? 'COPIED!' : 'COPY PROMPT'}
@@ -1548,33 +1553,33 @@ export function ScreenerDashboard() {
                                             <textarea
                                                 readOnly
                                                 value={aiResult || ""}
-                                                className="flex-1 w-full h-full bg-transparent p-4 sm:p-5 text-base font-mono resize-none focus:outline-none focus:ring-0 text-foreground/90 overflow-y-auto leading-8"
+                                                className="h-full w-full flex-1 resize-none overflow-y-auto bg-transparent p-3 font-mono text-xs leading-6 text-foreground/90 focus:outline-none focus:ring-0 sm:text-sm"
                                             />
                                         </div>
                                         
                                         {/* Deepseek Result Box */}
                                         {dsResult && (
                                             <div className="relative flex-1 bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
-                                                <div className="bg-blue-500/10 px-3 sm:px-5 py-2.5 border-b border-blue-500/20 flex justify-between items-center shrink-0 flex-wrap gap-2">
-                                                    <span className="text-base font-mono text-blue-400 uppercase tracking-wider font-semibold">QUANT REPORT</span>
+                                                <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-blue-500/20 bg-blue-500/10 px-3 py-2.5">
+                                                    <span className="font-mono text-xs font-semibold uppercase tracking-wider text-blue-400">QUANT REPORT</span>
                                                     <div className="flex items-center gap-3">
                                                         <div className="flex flex-col">
-                                                            <h1 className="text-xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                                                            <h1 className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-base font-black tracking-tight text-transparent">
                                                                 QUANT <span className="text-blue-500">PRO</span>
                                                             </h1>
                                                             <div className="flex items-center gap-2">
-                                                                <span className="text-base text-muted-foreground font-medium uppercase tracking-widest">Global Terminal</span>
+                                                                <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Global Terminal</span>
                                                                 <div className="h-1 w-1 rounded-full bg-green-500 animate-pulse" />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button onClick={downloadDsResult} className="flex items-center gap-1 text-base font-bold bg-secondary hover:bg-secondary/80 px-3.5 py-2.5 rounded">Download .txt</button>
-                                                    <button onClick={copyDsResult} className="flex items-center gap-1 text-base font-bold bg-primary text-primary-foreground px-3.5 py-2.5 rounded">
+                                                    <button onClick={downloadDsResult} className="flex items-center gap-1 rounded bg-secondary px-3 py-2 text-sm font-bold hover:bg-secondary/80">Download .txt</button>
+                                                    <button onClick={copyDsResult} className="flex items-center gap-1 rounded bg-primary px-3 py-2 text-sm font-bold text-primary-foreground">
                                                         {dsCopied ? "Copied" : "Copy Result"}
                                                     </button>
                                                 </div>
-                                                <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-slate-950/40 backdrop-blur-md">
-                                                    <div className="prose prose-invert prose-blue max-w-none break-words whitespace-pre-wrap font-sans text-slate-100 leading-relaxed text-base sm:text-lg">
+                                                <div className="flex-1 overflow-y-auto bg-slate-950/40 p-4 backdrop-blur-md sm:p-5">
+                                                    <div className="prose prose-invert prose-blue max-w-none break-words whitespace-pre-wrap font-sans text-sm leading-relaxed text-slate-100">
                                                         <ReactMarkdown>
                                                             {dsResult.content
                                                                 .replace(/^```(markdown|json|text)?/i, '')
@@ -1588,59 +1593,59 @@ export function ScreenerDashboard() {
                                             </div>
                                         )}
                                     </div>
-                                    <div className="shrink-0 rounded-xl border border-border/60 bg-secondary/20 p-3 sm:p-4">
-                                        <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                                    <div className="shrink-0 rounded-lg border border-border/60 bg-secondary/20 p-3">
+                                        <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
                                             <div>
-                                                <div className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">Choose output path</div>
-                                                <div className="mt-1 text-base font-semibold text-foreground">Open a manual model, or run the protected Deepseek workflow.</div>
+                                                <div className="text-xs font-black uppercase tracking-[0.16em] text-muted-foreground">Choose output path</div>
+                                                <div className="mt-0.5 text-sm font-semibold text-foreground">Open a manual model, or run the protected Deepseek workflow.</div>
                                             </div>
-                                            <div className="text-base font-bold text-muted-foreground">Prompt is ready to export</div>
+                                            <div className="text-xs font-bold text-muted-foreground">Prompt is ready to export</div>
                                         </div>
-                                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                                            <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex min-h-24 items-center gap-3 rounded-lg border border-white/10 bg-[#1A73E8]/90 px-4 py-4 text-white shadow-md transition-all hover:bg-[#1557B0] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="w-9 h-9 rounded-md shrink-0 shadow-sm bg-white p-1" />
+                                        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
+                                            <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 rounded-lg border border-white/10 bg-[#1A73E8]/90 px-3 py-2.5 text-white shadow-md transition-all hover:bg-[#1557B0] active:scale-95">
+                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="h-7 w-7 shrink-0 rounded-md bg-white p-1 shadow-sm" />
                                             <span className="min-w-0">
-                                                <span className="block text-lg font-black tracking-tight">Gemini</span>
-                                                <span className="mt-0.5 block text-base font-bold text-white/80">Open manual chat</span>
+                                                <span className="block text-sm font-black tracking-tight">Gemini</span>
+                                                <span className="mt-0.5 block text-xs font-bold text-white/80">Open manual chat</span>
                                             </span>
                                             </a>
-                                            <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex min-h-24 items-center gap-3 rounded-lg border border-white/10 bg-[#D97757]/90 px-4 py-4 text-white shadow-md transition-all hover:bg-[#C26547] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="w-9 h-9 rounded-md shrink-0 shadow-sm bg-white p-1" />
+                                            <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 rounded-lg border border-white/10 bg-[#D97757]/90 px-3 py-2.5 text-white shadow-md transition-all hover:bg-[#C26547] active:scale-95">
+                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="h-7 w-7 shrink-0 rounded-md bg-white p-1 shadow-sm" />
                                             <span className="min-w-0">
-                                                <span className="block text-lg font-black tracking-tight">Claude</span>
-                                                <span className="mt-0.5 block text-base font-bold text-white/80">Open manual chat</span>
+                                                <span className="block text-sm font-black tracking-tight">Claude</span>
+                                                <span className="mt-0.5 block text-xs font-bold text-white/80">Open manual chat</span>
                                             </span>
                                             </a>
-                                            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex min-h-24 items-center gap-3 rounded-lg border border-white/10 bg-[#10A37F]/90 px-4 py-4 text-white shadow-md transition-all hover:bg-[#0E906F] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="w-9 h-9 rounded-md shrink-0 shadow-sm bg-white p-1" />
+                                            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 rounded-lg border border-white/10 bg-[#10A37F]/90 px-3 py-2.5 text-white shadow-md transition-all hover:bg-[#0E906F] active:scale-95">
+                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="h-7 w-7 shrink-0 rounded-md bg-white p-1 shadow-sm" />
                                             <span className="min-w-0">
-                                                <span className="block text-lg font-black tracking-tight">ChatGPT</span>
-                                                <span className="mt-0.5 block text-base font-bold text-white/80">Open manual chat</span>
+                                                <span className="block text-sm font-black tracking-tight">ChatGPT</span>
+                                                <span className="mt-0.5 block text-xs font-bold text-white/80">Open manual chat</span>
                                             </span>
                                             </a>
                                             {showDsPassword ? (
-                                                <div className="flex min-h-24 flex-col justify-center gap-3 rounded-lg border border-[#4d6bfe]/40 bg-[#4d6bfe]/20 px-4 py-4">
+                                                <div className="flex min-h-16 flex-col justify-center gap-2 rounded-lg border border-[#4d6bfe]/40 bg-[#4d6bfe]/20 px-3 py-2.5">
                                                     <div>
-                                                        <div className="text-base font-black uppercase tracking-wider text-blue-200">Protected run</div>
-                                                        <div className="mt-1 text-base font-semibold text-white/75">Enter the workflow password to generate and save a report.</div>
+                                                        <div className="text-xs font-black uppercase tracking-wider text-blue-200">Protected run</div>
+                                                        <div className="mt-0.5 text-xs font-semibold text-white/75">Enter the workflow password to generate and save a report.</div>
                                                     </div>
-                                                    <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full rounded-md border border-white/15 bg-background px-3.5 py-3 text-base font-bold text-foreground focus:outline-none focus:ring-2 focus:ring-[#4d6bfe]/50" />
+                                                    <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full rounded-md border border-white/15 bg-background px-3 py-2 text-sm font-bold text-foreground focus:outline-none focus:ring-2 focus:ring-[#4d6bfe]/50" />
                                                     <div className="grid grid-cols-2 gap-2">
-                                                        <button onClick={() => setShowDsPassword(false)} disabled={dsLoading} className="rounded-md border border-white/15 bg-white/5 px-3 py-2.5 text-base font-bold text-white/80 transition-colors hover:bg-white/10 disabled:opacity-50">
+                                                        <button onClick={() => setShowDsPassword(false)} disabled={dsLoading} className="rounded-md border border-white/15 bg-white/5 px-3 py-2 text-sm font-bold text-white/80 transition-colors hover:bg-white/10 disabled:opacity-50">
                                                             Cancel
                                                         </button>
-                                                        <button onClick={handleDeepseekRun} disabled={dsLoading} className="rounded-md bg-[#4d6bfe] px-3 py-2.5 text-base font-black text-white transition-colors hover:bg-[#3b54d1] disabled:opacity-60">
+                                                        <button onClick={handleDeepseekRun} disabled={dsLoading} className="rounded-md bg-[#4d6bfe] px-3 py-2 text-sm font-black text-white transition-colors hover:bg-[#3b54d1] disabled:opacity-60">
                                                             {dsLoading ? "Running..." : "Run Deepseek"}
                                                         </button>
                                                     </div>
-                                                    {dsError && <span className="rounded-md border border-danger/30 bg-danger/10 px-3 py-2 text-base font-bold text-danger">{dsError}</span>}
+                                                    {dsError && <span className="rounded-md border border-danger/30 bg-danger/10 px-3 py-2 text-xs font-bold text-danger">{dsError}</span>}
                                                 </div>
                                             ) : (
-                                                <button onClick={() => setShowDsPassword(true)} className="flex min-h-24 items-center gap-3 rounded-lg border border-white/10 bg-[#4d6bfe]/90 px-4 py-4 text-left text-white shadow-md transition-all hover:bg-[#3b54d1] active:scale-95">
-                                                <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" alt="Deepseek" className="w-9 h-9 rounded-md shrink-0 shadow-sm bg-white p-1" />
+                                                <button onClick={() => setShowDsPassword(true)} className="flex min-h-16 items-center gap-2.5 rounded-lg border border-white/10 bg-[#4d6bfe]/90 px-3 py-2.5 text-left text-white shadow-md transition-all hover:bg-[#3b54d1] active:scale-95">
+                                                <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" alt="Deepseek" className="h-7 w-7 shrink-0 rounded-md bg-white p-1 shadow-sm" />
                                                 <span className="min-w-0">
-                                                    <span className="block text-lg font-black tracking-tight">Deepseek V4.0 Pro</span>
-                                                    <span className="mt-0.5 block text-base font-bold text-white/80">Run protected workflow</span>
+                                                    <span className="block text-sm font-black tracking-tight">Deepseek V4.0 Pro</span>
+                                                    <span className="mt-0.5 block text-xs font-bold text-white/80">Run protected workflow</span>
                                                 </span>
                                                 </button>
                                             )}
@@ -2046,10 +2051,10 @@ function LoadingResultsState({ title, strategy, view }: { title: string; strateg
 
 function PromptStat({ label, value, sub }: { label: string; value: string; sub: string }) {
     return (
-        <div className="rounded-lg border border-border/60 bg-secondary/20 p-4">
-            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-1 truncate font-mono text-xl font-black text-foreground" title={value}>{value}</div>
-            <div className="mt-1 truncate text-base font-semibold text-muted-foreground" title={sub}>{sub}</div>
+        <div className="rounded-lg border border-border/60 bg-secondary/20 p-3">
+            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-0.5 truncate font-mono text-base font-black text-foreground" title={value}>{value}</div>
+            <div className="mt-0.5 truncate text-xs font-semibold text-muted-foreground" title={sub}>{sub}</div>
         </div>
     );
 }

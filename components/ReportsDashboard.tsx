@@ -355,17 +355,17 @@ export function ReportsDashboard() {
     return (
         <div className="flex-1 flex flex-col h-screen overflow-hidden bg-[#0a0c10]">
             {/* Header */}
-            <header className="py-4 px-6 border-b border-white/5 bg-[#0d1117] flex flex-col gap-4 shrink-0 lg:flex-row lg:items-center lg:justify-between">
-                <div className="flex items-center gap-5">
-                    <Link href="/" className="p-2.5 hover:bg-white/5 rounded-full transition-colors text-muted-foreground hover:text-foreground" aria-label="Back to screener">
+            <header className="flex shrink-0 flex-col gap-3 border-b border-white/5 bg-[#0d1117] px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex items-center gap-3">
+                    <Link href="/" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground" aria-label="Back to screener">
                         <ArrowLeft className="h-5 w-5" />
                     </Link>
                     <div>
-                        <h1 className="text-2xl font-black tracking-tight text-foreground flex items-center gap-2">
-                            <Sparkles className="h-6 w-6 text-accent" />
+                        <h1 className="flex items-center gap-2 text-xl font-black tracking-tight text-foreground">
+                            <Sparkles className="h-5 w-5 text-accent" />
                             AI RESEARCH REPOSITORY
                         </h1>
-                        <p className="text-base uppercase tracking-widest text-muted-foreground font-bold">
+                        <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
                             Cloud-Stored Deepseek V4.0 Pro Analyses
                         </p>
                     </div>
@@ -375,21 +375,21 @@ export function ReportsDashboard() {
                     <button 
                         onClick={fetchReports}
                         disabled={loading}
-                        className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-base font-black text-muted-foreground transition-all hover:bg-white/10 hover:text-blue-400 active:scale-95 disabled:opacity-60"
+                        className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-black text-muted-foreground transition-all hover:bg-white/10 hover:text-blue-400 active:scale-95 disabled:opacity-60"
                         title="Force Sync Cloud Data"
                         aria-label="Sync cloud reports"
                     >
                         <RefreshCw className={clsx("h-5 w-5", loading && "animate-spin text-blue-500")} />
                         <span>{loading ? "Syncing" : "Sync"}</span>
                     </button>
-                    <div className="relative w-full sm:w-80">
-                        <Search className="absolute left-3 top-3.5 h-5 w-5 text-muted-foreground" />
+                    <div className="relative w-full sm:w-72">
+                        <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                         <input 
                             type="text" 
                             placeholder="Search tickers..." 
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-11 pr-4 text-base transition-all focus:outline-none focus:ring-1 focus:ring-accent"
+                            className="w-full rounded-lg border border-white/10 bg-white/5 py-2 pl-9 pr-3 text-sm transition-all focus:outline-none focus:ring-1 focus:ring-accent"
                         />
                     </div>
                 </div>
@@ -398,16 +398,16 @@ export function ReportsDashboard() {
             <div className="flex-1 flex overflow-hidden relative">
                 {/* List Sidebar - Hidden on mobile if report selected */}
                 <div className={clsx(
-                    "w-full md:w-[28rem] border-r border-white/5 overflow-y-auto no-scrollbar bg-[#0d1117]/50 transition-all flex flex-col",
+                    "w-full border-r border-white/5 bg-[#0d1117]/50 transition-all md:w-[24rem] flex flex-col",
                     selectedReport && "hidden md:flex"
                 )}>
                     {/* Filter Bar */}
-                    <div className="p-4 border-b border-white/5 space-y-3 bg-[#0d1117]">
+                    <div className="space-y-2.5 border-b border-white/5 bg-[#0d1117] p-3">
                         <div className="grid grid-cols-2 gap-2">
                             <select 
                                 value={filterAction} 
                                 onChange={(e) => setFilterAction(e.target.value)}
-                                className="bg-white/5 border border-white/10 rounded-lg px-3.5 py-2.5 text-base font-bold text-blue-400 focus:outline-none"
+                                className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-bold text-blue-400 focus:outline-none"
                             >
                                 <option value="ALL">ALL ACTIONS</option>
                                 <option value="BUY">BUY</option>
@@ -418,7 +418,7 @@ export function ReportsDashboard() {
                             <select 
                                 value={filterValuation} 
                                 onChange={(e) => setFilterValuation(e.target.value)}
-                                className="bg-white/5 border border-white/10 rounded-lg px-3.5 py-2.5 text-base font-bold text-green-400 focus:outline-none"
+                                className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-bold text-green-400 focus:outline-none"
                             >
                                 <option value="ALL">ALL VALUATIONS</option>
                                 <option value="UNDERVALUED">UNDERVALUED</option>
@@ -429,7 +429,7 @@ export function ReportsDashboard() {
                             <select 
                                 value={filterArchetype} 
                                 onChange={(e) => setFilterArchetype(e.target.value)}
-                                className="col-span-2 bg-white/5 border border-white/10 rounded-lg px-3.5 py-2.5 text-base font-bold text-muted-foreground focus:outline-none"
+                                className="col-span-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-bold text-muted-foreground focus:outline-none"
                             >
                                 <option value="ALL">ALL ARCHETYPES</option>
                                 <option value="Stable Incumbent">STABLE</option>
@@ -440,7 +440,7 @@ export function ReportsDashboard() {
                             </select>
                         </div>
                         <div className="flex items-center gap-3 px-1">
-                            <span className="text-base font-black text-muted-foreground uppercase whitespace-nowrap">Min Conviction: {filterConviction}</span>
+                            <span className="whitespace-nowrap text-xs font-black uppercase text-muted-foreground">Min Conviction: {filterConviction}</span>
                             <input 
                                 type="range" min="0" max="15" step="0.5" 
                                 value={filterConviction} 
@@ -450,23 +450,23 @@ export function ReportsDashboard() {
                         </div>
                         <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-3">
                             <div className="mb-2 flex items-center justify-between gap-3">
-                                <span className="text-base font-black uppercase tracking-wider text-muted-foreground">Active filters</span>
+                                <span className="text-xs font-black uppercase tracking-wider text-muted-foreground">Active filters</span>
                                 <button
                                     type="button"
                                     onClick={resetReportFilters}
                                     disabled={activeReportFilters.length === 0}
-                                    className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1.5 text-base font-black text-muted-foreground transition-colors hover:bg-white/10 hover:text-slate-200 disabled:cursor-not-allowed disabled:opacity-45"
+                                    className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-black text-muted-foreground transition-colors hover:bg-white/10 hover:text-slate-200 disabled:cursor-not-allowed disabled:opacity-45"
                                 >
                                     Reset
                                 </button>
                             </div>
                             <div className="flex flex-wrap gap-2">
                                 {activeReportFilters.length > 0 ? activeReportFilters.map((filter) => (
-                                    <span key={filter} className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 text-base font-bold text-blue-300">
+                                    <span key={filter} className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-1 text-xs font-bold text-blue-300">
                                         {filter}
                                     </span>
                                 )) : (
-                                    <span className="text-base font-semibold text-muted-foreground">Showing all cloud reports.</span>
+                                    <span className="text-xs font-semibold text-muted-foreground">Showing all cloud reports.</span>
                                 )}
                             </div>
                         </div>
@@ -557,24 +557,24 @@ export function ReportsDashboard() {
                                             key={report.id}
                                             onClick={() => setSelectedReport(report)}
                                             className={clsx(
-                                                "group relative flex w-full cursor-pointer flex-col gap-4 border-b border-white/5 p-5 text-left transition-all hover:bg-white/[0.045] active:bg-white/10",
+                                                "group relative flex w-full cursor-pointer flex-col gap-3 border-b border-white/5 p-3.5 text-left transition-all hover:bg-white/[0.045] active:bg-white/10",
                                                 selectedReport?.id === report.id ? "bg-blue-500/10 shadow-[inset_4px_0_0_rgba(59,130,246,0.95),inset_0_0_20px_rgba(59,130,246,0.1)]" : ""
                                             )}
                                         >
                                             <div className="flex items-start justify-between gap-4">
                                                 <div className="min-w-0">
                                                     <div className="flex flex-wrap items-center gap-2">
-                                                        <span className="text-2xl font-black tracking-tight text-foreground transition-colors group-hover:text-blue-400">
+                                                        <span className="text-lg font-black tracking-tight text-foreground transition-colors group-hover:text-blue-400">
                                                             {report.ticker}
                                                         </span>
                                                         {report.status === 'pending' && (
-                                                            <span className="rounded-md border border-amber-500/30 bg-amber-500/15 px-3 py-1.5 text-base font-black uppercase tracking-tight text-amber-400">
+                                                            <span className="rounded-md border border-amber-500/30 bg-amber-500/15 px-2 py-1 text-xs font-black uppercase tracking-tight text-amber-400">
                                                                 Pending
                                                             </span>
                                                         )}
                                                         {meta.valuation_status && (
                                                             <span className={clsx(
-                                                                "rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-tight",
+                                                                "rounded-md border px-2 py-1 text-xs font-black uppercase tracking-tight",
                                                                 meta.valuation_status.includes('UNDERVALUED') ? "border-green-500/20 bg-green-500/20 text-green-400" :
                                                                 meta.valuation_status === 'OVERVALUED' ? "border-red-500/20 bg-red-500/20 text-red-400" :
                                                                 "border-white/10 bg-white/5 text-muted-foreground"
@@ -583,7 +583,7 @@ export function ReportsDashboard() {
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <div className="mt-2 flex items-center gap-2 text-base font-bold uppercase tracking-tight text-muted-foreground">
+                                                    <div className="mt-1.5 flex items-center gap-2 text-xs font-bold uppercase tracking-tight text-muted-foreground">
                                                         <Calendar className="h-4 w-4 text-blue-500 opacity-70" />
                                                         {createdAt.toLocaleDateString()}
                                                         <span className="text-white/20 font-normal">@</span>
@@ -593,10 +593,10 @@ export function ReportsDashboard() {
 
                                                 <div className="grid shrink-0 grid-cols-2 gap-2 text-right">
                                                     <div className="rounded-lg border border-blue-500/25 bg-blue-500/10 px-3 py-2 shadow-md">
-                                                        <div className="font-mono text-lg font-black leading-none text-blue-400">
+                                                        <div className="font-mono text-base font-black leading-none text-blue-400">
                                                             {meta.conviction ? meta.conviction.toFixed(1) : '0.0'}
                                                         </div>
-                                                        <span className="mt-1 block text-base font-black uppercase tracking-[0.12em] text-muted-foreground opacity-70">Conv</span>
+                                                        <span className="mt-1 block text-[10px] font-black uppercase tracking-[0.12em] text-muted-foreground opacity-70">Conv</span>
                                                     </div>
                                                     <div className={clsx(
                                                         "rounded-lg border px-3 py-2 shadow-md",
@@ -653,10 +653,10 @@ export function ReportsDashboard() {
                     {selectedReport ? (
                         <div className="flex h-full">
                             {/* Table of Contents Sidebar (Desktop) */}
-                            <aside className="hidden lg:block w-72 shrink-0 border-r border-white/5 bg-[#0a0c10] p-6 sticky top-0 h-screen overflow-y-auto no-scrollbar">
-                                <div className="space-y-6">
+                            <aside className="sticky top-0 hidden h-screen w-60 shrink-0 overflow-y-auto border-r border-white/5 bg-[#0a0c10] p-4 lg:block">
+                                <div className="space-y-4">
                                     <div>
-                                        <h3 className="text-base font-black text-blue-500 uppercase tracking-[0.16em] mb-5 flex items-center gap-2">
+                                        <h3 className="mb-3 flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-blue-500">
                                             <span className="w-4 h-[1px] bg-blue-500/30"></span>
                                             Contents
                                         </h3>
@@ -669,7 +669,7 @@ export function ReportsDashboard() {
                                                         key={h.id}
                                                         onClick={() => scrollToHeading(h.id)}
                                                         className={clsx(
-                                                            "group flex items-start gap-2.5 w-full text-left py-2.5 px-3 rounded-md transition-all duration-200",
+                                                            "group flex w-full items-start gap-2.5 rounded-md px-2.5 py-2 text-left transition-all duration-200",
                                                             activeHeading === h.id ? "bg-blue-500/10" : "hover:bg-white/[0.04]",
                                                             h.level === 2 && "pl-7"
                                                         )}
@@ -679,7 +679,7 @@ export function ReportsDashboard() {
                                                             activeHeading === h.id ? "bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.5)]" : "bg-white/15 group-hover:bg-blue-400/50"
                                                         )}></span>
                                                         <span className={clsx(
-                                                            "text-base leading-snug transition-colors duration-200 line-clamp-2",
+                                                            "line-clamp-2 text-xs leading-snug transition-colors duration-200",
                                                             h.level === 1 ? "font-bold uppercase tracking-wide" : "font-medium opacity-70",
                                                             activeHeading === h.id ? "text-blue-300" : "text-slate-400 group-hover:text-slate-200"
                                                         )}>
@@ -704,7 +704,7 @@ export function ReportsDashboard() {
                             </aside>
 
                             {/* Report Content */}
-                            <div className="flex-1 p-4 md:p-16 lg:p-20 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
+                            <div className="mx-auto max-w-4xl flex-1 p-4 animate-in fade-in slide-in-from-bottom-8 duration-700 md:p-8 lg:p-10">
                                 {(() => {
                                     const meta = getMeta(selectedReport);
                                     
@@ -713,14 +713,14 @@ export function ReportsDashboard() {
                                             {/* Mobile Back Button */}
                                             <button 
                                                 onClick={() => setSelectedReport(null)}
-                                                className="md:hidden flex items-center gap-2 mb-6 text-blue-400 font-bold text-base bg-blue-500/10 px-4 py-2.5 rounded-full w-fit active:scale-95 transition-all tracking-[0.16em]"
+                                                className="mb-4 flex w-fit items-center gap-2 rounded-full bg-blue-500/10 px-3 py-2 text-xs font-bold tracking-[0.16em] text-blue-400 transition-all active:scale-95 md:hidden"
                                             >
                                                 <ArrowLeft className="h-3.5 w-3.5" /> RETURN TO LIST
                                             </button>
 
                                             {/* Mobile TOC (collapsible) */}
                                             {reportHeadings.length > 0 && (
-                                                <div className="lg:hidden mb-8 border border-white/10 rounded-xl bg-[#0d1117] overflow-hidden">
+                                                <div className="mb-5 overflow-hidden rounded-xl border border-white/10 bg-[#0d1117] lg:hidden">
                                                     <button
                                                         onClick={() => setMobileTocOpen(!mobileTocOpen)}
                                                         className="w-full flex items-center justify-between px-5 py-3.5 text-left"
@@ -751,43 +751,43 @@ export function ReportsDashboard() {
                                             )}
 
                                             {/* Header Section */}
-                                            <header className="mb-12 border-b border-white/10 pb-12">
-                                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                                            <header className="mb-7 border-b border-white/10 pb-7">
+                                                <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
                                                     <div>
-                                                        <div className="flex items-center gap-3 mb-3">
-                                                            <span className="px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-base font-black rounded-md tracking-widest uppercase">
+                                                        <div className="mb-2 flex items-center gap-2">
+                                                            <span className="rounded-md border border-blue-500/20 bg-blue-500/10 px-2.5 py-1 text-xs font-black uppercase tracking-widest text-blue-400">
                                                                 {meta.archetype || 'Asset Research'}
                                                             </span>
                                                             <span className="w-1 h-1 rounded-full bg-white/20"></span>
-                                                            <span className="text-muted-foreground text-base font-bold uppercase tracking-widest">
+                                                            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
                                                                 {new Date(selectedReport.created_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                                                             </span>
                                                         </div>
-                                                        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white mb-4">
+                                                        <h1 className="mb-2 text-4xl font-black tracking-tight text-white md:text-5xl">
                                                             {selectedReport.ticker}
                                                         </h1>
-                                                        <p className="text-base text-muted-foreground font-medium max-w-2xl leading-relaxed">
+                                                        <p className="max-w-2xl text-sm font-medium leading-relaxed text-muted-foreground">
                                                             Comprehensive investment analysis powered by Deepseek V4.0 Pro engine.
                                                         </p>
                                                     </div>
 
-                                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 shrink-0">
-                                                        <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-base font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Conviction</div>
-                                                            <div className="text-3xl font-black text-blue-500 tracking-tighter">{meta.conviction || '0'}</div>
+                                                    <div className="grid shrink-0 grid-cols-2 gap-2 sm:grid-cols-3">
+                                                        <div className="min-w-[92px] rounded-lg border border-white/5 bg-white/[0.02] p-3">
+                                                            <div className="mb-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-60">Conviction</div>
+                                                            <div className="text-2xl font-black tracking-tight text-blue-500">{meta.conviction || '0'}</div>
                                                         </div>
-                                                        <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-base font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Upside</div>
+                                                        <div className="min-w-[92px] rounded-lg border border-white/5 bg-white/[0.02] p-3">
+                                                            <div className="mb-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-60">Upside</div>
                                                             <div className={clsx(
-                                                                "text-3xl font-black tracking-tighter",
+                                                                "text-2xl font-black tracking-tight",
                                                                 (parseFloat(meta.upside || 0)) > 0 ? "text-green-400" : "text-red-400"
                                                             )}>
                                                                 {meta.upside || '0.0'}%
                                                             </div>
                                                         </div>
-                                                        <div className="hidden sm:block bg-white/[0.02] border border-white/5 rounded-xl p-4 min-w-[110px]">
-                                                            <div className="text-base font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-60">Rating</div>
-                                                            <div className="text-2xl font-black text-white tracking-tighter uppercase">{meta.action || 'HOLD'}</div>
+                                                        <div className="hidden min-w-[92px] rounded-lg border border-white/5 bg-white/[0.02] p-3 sm:block">
+                                                            <div className="mb-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-60">Rating</div>
+                                                            <div className="text-lg font-black uppercase tracking-tight text-white">{meta.action || 'HOLD'}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -795,15 +795,15 @@ export function ReportsDashboard() {
 
                                             {/* Report Content */}
                                             {selectedReport.status === 'pending' ? (
-                                                <div className="flex flex-col items-center justify-center py-32 gap-8 text-center bg-white/[0.02] border border-white/5 rounded-[40px]">
+                                                <div className="flex flex-col items-center justify-center gap-5 rounded-2xl border border-white/5 bg-white/[0.02] py-20 text-center">
                                                     <div className="relative">
                                                         <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full animate-pulse"></div>
                                                         <RefreshCw className="h-16 w-16 text-blue-500 animate-spin relative z-10" />
                                                         <Bot className="h-8 w-8 absolute top-4 left-4 text-white relative z-10" />
                                                     </div>
                                                     <div>
-                                                        <h3 className="text-3xl font-black text-white mb-3">AI Engine Processing...</h3>
-                                                        <p className="text-muted-foreground text-lg max-w-sm font-medium">
+                                                        <h3 className="mb-2 text-2xl font-black text-white">AI Engine Processing...</h3>
+                                                        <p className="max-w-sm text-sm font-medium text-muted-foreground">
                                                             Generating high-fidelity research for {selectedReport.ticker}. 
                                                             This typically takes 2-4 minutes.
                                                         </p>
@@ -816,28 +816,28 @@ export function ReportsDashboard() {
                                                             h1: ({node, ...props}: any) => {
                                                                 const idx = reportHeadings.findIndex(h => h.title === reactNodeToText(props.children));
                                                                 const id = idx >= 0 ? reportHeadings[idx].id : undefined;
-                                                                return <h1 id={id} className="text-3xl md:text-4xl font-black mt-20 mb-6 text-white tracking-tight border-b border-white/10 pb-4 uppercase" {...props} />;
+                                                                return <h1 id={id} className="mt-12 mb-4 border-b border-white/10 pb-3 text-2xl font-black uppercase tracking-tight text-white md:text-3xl" {...props} />;
                                                             },
                                                             h2: ({node, ...props}: any) => {
                                                                 const idx = reportHeadings.findIndex(h => h.title === reactNodeToText(props.children));
                                                                 const id = idx >= 0 ? reportHeadings[idx].id : undefined;
-                                                                return <h2 id={id} className="text-xl md:text-2xl font-black mt-14 mb-4 text-blue-400 tracking-wide uppercase" {...props} />;
+                                                                return <h2 id={id} className="mt-9 mb-3 text-lg font-black uppercase tracking-wide text-blue-400 md:text-xl" {...props} />;
                                                             },
-                                                            h3: ({node, ...props}: any) => <h3 className="text-xl font-black mt-8 mb-3 text-white tracking-tight" {...props} />,
-                                                            p: ({node, ...props}: any) => <p className="text-lg leading-[1.8] mb-5 text-slate-300 font-medium" {...props} />,
+                                                            h3: ({node, ...props}: any) => <h3 className="mt-6 mb-2.5 text-lg font-black tracking-tight text-white" {...props} />,
+                                                            p: ({node, ...props}: any) => <p className="mb-4 text-sm font-medium leading-7 text-slate-300 sm:text-base" {...props} />,
                                                             strong: ({node, ...props}: any) => <strong className="font-black text-slate-100" {...props} />,
                                                             em: ({node, ...props}: any) => <em className="italic text-blue-300/80" {...props} />,
                                                             hr: ({node, ...props}: any) => <hr className="my-10 border-white/10" {...props} />,
                                                             ul: ({node, ...props}: any) => <ul className="space-y-2 mb-6 list-none pl-0" {...props} />,
                                                             ol: ({node, ...props}: any) => <ol className="space-y-2 mb-6 list-decimal pl-6 text-slate-300" {...props} />,
                                                             li: ({node, ...props}: any) => (
-                                                                <li className="flex items-start gap-3 text-lg text-slate-400 font-medium leading-[1.75]">
+                                                                <li className="flex items-start gap-2.5 text-sm font-medium leading-7 text-slate-400 sm:text-base">
                                                                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500/40 mt-[9px] shrink-0"></span>
                                                                     <span>{props.children}</span>
                                                                 </li>
                                                             ),
                                                             blockquote: ({node, ...props}: any) => (
-                                                                <blockquote className="border-l-[3px] border-blue-500/50 bg-blue-500/5 px-5 py-4 rounded-r-xl italic text-lg text-slate-200 mb-6" {...props} />
+                                                                <blockquote className="mb-5 rounded-r-xl border-l-[3px] border-blue-500/50 bg-blue-500/5 px-4 py-3 text-sm italic text-slate-200 sm:text-base" {...props} />
                                                             ),
                                                             code: ({node, className, ...props}: any) => {
                                                                 const isInline = !className;

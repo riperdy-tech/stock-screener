@@ -231,6 +231,33 @@ def build_history_event(symbol, name, previous, current, run_id, snapshot_date):
     }
 
 
+def build_initial_history_event(symbol, name, current, run_id, snapshot_date):
+    """Record the first visible baseline for currently actionable paradigm names."""
+    band = current.get("pdm_band")
+    if band not in {"high", "mid", "watch"}:
+        return None
+
+    return {
+        "run_id": run_id,
+        "snapshot_date": snapshot_date,
+        "symbol": symbol,
+        "name": name,
+        "event_type": "band_change",
+        "direction": "upgrade",
+        "from_band": None,
+        "to_band": band,
+        "from_signal": None,
+        "to_signal": current.get("pdm_signal"),
+        "from_rank": None,
+        "to_rank": current.get("pdm_rank"),
+        "from_theme_primary": None,
+        "to_theme_primary": current.get("pdm_theme_primary"),
+        "themes_added": current.get("pdm_themes") or [],
+        "themes_removed": [],
+        "summary": f"Initial Paradigm {band or 'none'} watchlist entry",
+    }
+
+
 def update_paradigm_history(stocks, prior_scores, run_id, snapshot_date):
     """Persist compact ticker-level paradigm transition history for the frontend."""
     history = {}
@@ -239,6 +266,7 @@ def update_paradigm_history(stocks, prior_scores, run_id, snapshot_date):
 
     events = history.get("events") or []
     new_events = []
+    should_seed_baseline = len(events) == 0
 
     for stock in stocks:
         symbol = stock.get("symbol")
@@ -249,7 +277,11 @@ def update_paradigm_history(stocks, prior_scores, run_id, snapshot_date):
         current = normalize_state(symbol, stock.get("name"), paradigm, run_id, snapshot_date)
         previous = state_from_prior_score(symbol, prior_scores[symbol]) if symbol in prior_scores else None
 
-        if previous is not None:
+        if should_seed_baseline:
+            event = build_initial_history_event(symbol, stock.get("name"), current, run_id, snapshot_date)
+            if event:
+                new_events.append(event)
+        elif previous is not None:
             event = build_history_event(symbol, stock.get("name"), previous, current, run_id, snapshot_date)
             if event:
                 new_events.append(event)
