@@ -28,6 +28,18 @@ const paradigmBandLabel: Record<string, string> = {
     no_data: "NO DATA",
 };
 
+function isBaselineParadigmEvent(event: ParadigmHistoryEvent) {
+    return Boolean(
+        event.is_baseline ||
+        (
+            event.from_band == null &&
+            event.from_signal == null &&
+            event.from_rank == null &&
+            event.summary?.startsWith("Initial Paradigm")
+        )
+    );
+}
+
 export function StockCard({ result, onClick, index = 0, market = 'US', screenMode = '100bagger', youtubeEvaluation, paradigmHistory = [] }: StockCardProps) {
     const { t } = useLanguage();
     if (!result || !result.candidate) return null;
@@ -49,7 +61,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
     const paradigmLabel = paradigmBandLabel[paradigmBand] || 'NO DATA';
     const hasReverse = !!(reverse && reverse.rev_band && reverse.rev_band !== 'Excluded');
     const hasYoutube = !!(youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0);
-    const latestParadigmEvent = paradigmHistory[0];
+    const latestParadigmEvent = paradigmHistory.find(event => !isBaselineParadigmEvent(event));
 
     return (
         <div

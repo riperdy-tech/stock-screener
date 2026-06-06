@@ -58,6 +58,7 @@ export interface ParadigmResult {
 export interface ParadigmHistoryEvent {
     run_id: string;
     snapshot_date: string;
+    is_baseline?: boolean;
     symbol: string;
     name?: string | null;
     event_type: "band_change" | "theme_change" | "signal_change";

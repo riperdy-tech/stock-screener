@@ -117,6 +117,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
     const paradigmBand = paradigm?.pdm_band
         ? { high: "STRONG", mid: "SOLID", watch: "WATCH", skip: "PASS", no_data: "NO DATA" }[paradigm.pdm_band] || paradigm.pdm_band
         : "No tag";
+    const paradigmBaselineEvent = paradigmHistory.find(isBaselineParadigmEvent);
+    const paradigmRealHistory = paradigmHistory.filter(event => !isBaselineParadigmEvent(event));
     const youtubePrimary = youtubeEvaluation?.matchedStrategies[0] || "No match";
     const displayTicker = market === 'Korea' ? candidate.symbol.split('.')[0] : market === 'Taiwan' ? candidate.symbol : candidate.symbol.replace(/\.(NS|BO)$/, '');
     const displayName = market === 'Korea' || market === 'Taiwan' ? candidate.name : candidate.name || candidate.symbol;
@@ -550,14 +552,28 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     <ReverseStat label="Economics Gate" value={result.paradigm.pdm_economics_gate != null ? result.paradigm.pdm_economics_gate : 'n/a'} />
                                     <ReverseStat label="Confidence" value={result.paradigm.pdm_confidence != null ? result.paradigm.pdm_confidence : 'n/a'} />
                                 </div>
-                                {paradigmHistory.length > 0 && (
+                                {paradigmBaselineEvent && (
+                                    <div className="mb-3 rounded-md border border-purple-500/20 bg-background/25 p-3">
+                                        <div className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
+                                            <History className="h-4 w-4 text-purple-300" />
+                                            Current baseline
+                                        </div>
+                                        <div className="flex flex-col gap-1 rounded-md border border-border/40 bg-secondary/20 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
+                                            <span className="text-sm font-bold text-foreground">
+                                                Entered Paradigm snapshot as {formatParadigmBand(paradigmBaselineEvent.to_band)}.
+                                            </span>
+                                            <span className="font-mono text-xs font-bold text-muted-foreground">{paradigmBaselineEvent.snapshot_date}</span>
+                                        </div>
+                                    </div>
+                                )}
+                                {paradigmRealHistory.length > 0 && (
                                     <div className="mb-3 rounded-md border border-purple-500/20 bg-background/25 p-3">
                                         <div className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
                                             <History className="h-4 w-4 text-purple-300" />
                                             Recent changes
                                         </div>
                                         <div className="space-y-2">
-                                            {paradigmHistory.slice(0, 4).map(event => (
+                                            {paradigmRealHistory.slice(0, 4).map(event => (
                                                 <div key={`${event.run_id}-${event.summary}`} className="flex flex-col gap-1 rounded-md border border-border/40 bg-secondary/20 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
                                                     <span className="text-sm font-bold text-foreground">{formatParadigmHistoryEvent(event)}</span>
                                                     <span className="font-mono text-xs font-bold text-muted-foreground">{event.snapshot_date}</span>
@@ -845,6 +861,18 @@ const paradigmBandLabel: Record<string, string> = {
     skip: "PASS",
     no_data: "NO DATA",
 };
+
+function isBaselineParadigmEvent(event: ParadigmHistoryEvent) {
+    return Boolean(
+        event.is_baseline ||
+        (
+            event.from_band == null &&
+            event.from_signal == null &&
+            event.from_rank == null &&
+            event.summary?.startsWith("Initial Paradigm")
+        )
+    );
+}
 
 function formatParadigmHistoryEvent(event: ParadigmHistoryEvent) {
     if (event.event_type === 'band_change') {

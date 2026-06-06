@@ -228,6 +228,7 @@ def build_history_event(symbol, name, previous, current, run_id, snapshot_date):
         "themes_added": themes_added,
         "themes_removed": themes_removed,
         "summary": summary,
+        "is_baseline": False,
     }
 
 
@@ -255,7 +256,20 @@ def build_initial_history_event(symbol, name, current, run_id, snapshot_date):
         "themes_added": current.get("pdm_themes") or [],
         "themes_removed": [],
         "summary": f"Initial Paradigm {band or 'none'} watchlist entry",
+        "is_baseline": True,
     }
+
+
+def normalize_history_event(event):
+    """Backfill baseline semantics for history files created before is_baseline existed."""
+    if "is_baseline" not in event:
+        event["is_baseline"] = (
+            event.get("from_band") is None
+            and event.get("from_signal") is None
+            and event.get("from_rank") is None
+            and str(event.get("summary") or "").startswith("Initial Paradigm")
+        )
+    return event
 
 
 def update_paradigm_history(stocks, prior_scores, run_id, snapshot_date):
@@ -264,7 +278,7 @@ def update_paradigm_history(stocks, prior_scores, run_id, snapshot_date):
     if PARADIGM_HISTORY_JSON.exists():
         history = load_json(PARADIGM_HISTORY_JSON)
 
-    events = history.get("events") or []
+    events = [normalize_history_event(event) for event in (history.get("events") or [])]
     new_events = []
     should_seed_baseline = len(events) == 0
 

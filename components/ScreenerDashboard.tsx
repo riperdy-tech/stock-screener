@@ -21,6 +21,18 @@ type ScreenMode = '100bagger' | 'reverse' | 'paradigm' | 'youtube';
 type StrategyId = ScreenMode;
 type ResultView = 'cards' | 'table';
 
+function isParadigmBaselineEvent(event: ParadigmHistoryEvent) {
+    return Boolean(
+        event.is_baseline ||
+        (
+            event.from_band == null &&
+            event.from_signal == null &&
+            event.from_rank == null &&
+            event.summary?.startsWith("Initial Paradigm")
+        )
+    );
+}
+
 const STRATEGY_META: Record<StrategyId, {
     accent: string;
     icon: typeof Sparkles;
@@ -203,6 +215,10 @@ export function ScreenerDashboard() {
     const [paradigmFilters, setParadigmFilters] = useState<ParadigmFilterState>(DEFAULT_PARADIGM_FILTERS);
     const [youtubeFilters, setYoutubeFilters] = useState<YoutubeStrategyFilter[]>(["any"]);
     const [strictPassOnly, setStrictPassOnly] = useState(false);
+    const [showParadigmSnapshot, setShowParadigmSnapshot] = useState(false);
+    const [paradigmSnapshotSearch, setParadigmSnapshotSearch] = useState("");
+    const [paradigmSnapshotBand, setParadigmSnapshotBand] = useState("all");
+    const [paradigmSnapshotTheme, setParadigmSnapshotTheme] = useState("all");
     const [resultView, setResultView] = useState<ResultView>('cards');
     
     // Maintain a ref to current rawResults for the setInterval closure
@@ -764,6 +780,58 @@ export function ScreenerDashboard() {
         });
         return counts;
     }, [rawResults]);
+    const paradigmBaselineEvents = useMemo(
+        () => paradigmHistoryEvents.filter(isParadigmBaselineEvent),
+        [paradigmHistoryEvents]
+    );
+    const paradigmRealChangeEvents = useMemo(
+        () => paradigmHistoryEvents.filter(event => !isParadigmBaselineEvent(event)),
+        [paradigmHistoryEvents]
+    );
+    const paradigmChangeStats = useMemo(() => ({
+        total: paradigmRealChangeEvents.length,
+        upgrades: paradigmRealChangeEvents.filter(event => event.direction === "upgrade").length,
+        downgrades: paradigmRealChangeEvents.filter(event => event.direction === "downgrade").length,
+        themeChanges: paradigmRealChangeEvents.filter(event => event.event_type === "theme_change").length,
+    }), [paradigmRealChangeEvents]);
+    const paradigmSnapshotThemes = useMemo(() => {
+        const themes = new Set<string>();
+        paradigmBaselineEvents.forEach(event => {
+            const theme = event.to_theme_primary || event.themes_added?.[0];
+            if (theme) themes.add(theme);
+        });
+        return Array.from(themes).sort((a, b) => a.localeCompare(b));
+    }, [paradigmBaselineEvents]);
+    const paradigmSnapshotRows = useMemo(() => {
+        const bandOrder: Record<string, number> = { high: 0, mid: 1, watch: 2 };
+        const query = paradigmSnapshotSearch.trim().toLowerCase();
+
+        return paradigmBaselineEvents
+            .filter(event => {
+                const stock = rawResults.find(result => result.candidate.symbol === event.symbol);
+                const band = event.to_band || stock?.paradigm?.pdm_band || "";
+                const theme = event.to_theme_primary || stock?.paradigm?.pdm_theme_primary || "";
+
+                if (paradigmSnapshotBand !== "all" && band !== paradigmSnapshotBand) return false;
+                if (paradigmSnapshotTheme !== "all" && theme !== paradigmSnapshotTheme) return false;
+                if (!query) return true;
+
+                return (
+                    event.symbol.toLowerCase().includes(query) ||
+                    (event.name || stock?.candidate.name || "").toLowerCase().includes(query) ||
+                    theme.toLowerCase().includes(query)
+                );
+            })
+            .sort((a, b) => {
+                const stockA = rawResults.find(result => result.candidate.symbol === a.symbol);
+                const stockB = rawResults.find(result => result.candidate.symbol === b.symbol);
+                const bandA = a.to_band || stockA?.paradigm?.pdm_band || "watch";
+                const bandB = b.to_band || stockB?.paradigm?.pdm_band || "watch";
+                const bandDelta = (bandOrder[bandA] ?? 9) - (bandOrder[bandB] ?? 9);
+                if (bandDelta !== 0) return bandDelta;
+                return (a.to_rank ?? stockA?.paradigm?.pdm_rank ?? 99999) - (b.to_rank ?? stockB?.paradigm?.pdm_rank ?? 99999);
+            });
+    }, [paradigmBaselineEvents, paradigmSnapshotBand, paradigmSnapshotSearch, paradigmSnapshotTheme, rawResults]);
     const paradigmHistoryBySymbol = useMemo(() => {
         const bySymbol = new Map<string, ParadigmHistoryEvent[]>();
         paradigmHistoryEvents.forEach(event => {
@@ -773,7 +841,6 @@ export function ScreenerDashboard() {
         });
         return bySymbol;
     }, [paradigmHistoryEvents]);
-    const recentParadigmEvents = useMemo(() => paradigmHistoryEvents.slice(0, 6), [paradigmHistoryEvents]);
     const strategyMeta = useMemo(() => ({
         '100bagger': {
             ...STRATEGY_META['100bagger'],
@@ -1331,47 +1398,147 @@ export function ScreenerDashboard() {
                         <>
                             {screenMode === 'paradigm' && (
                                 <div className="mb-4 rounded-lg border border-purple-500/20 bg-purple-500/[0.04] p-3">
-                                    <div className="mb-2 flex items-center justify-between gap-3">
-                                        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-purple-300">
-                                            <History className="h-4 w-4" />
-                                            Paradigm History
+                                    <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                                        <div>
+                                            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-purple-300">
+                                                <History className="h-4 w-4" />
+                                                Paradigm Monitor
+                                            </div>
+                                            <p className="mt-1 text-xs font-semibold text-muted-foreground">
+                                                {paradigmChangeStats.total.toLocaleString()} new changes since baseline. {paradigmBaselineEvents.length.toLocaleString()} names in current snapshot.
+                                            </p>
                                         </div>
-                                        <span className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
-                                            {paradigmHistoryEvents.length.toLocaleString()} changes
-                                        </span>
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowParadigmSnapshot(value => !value)}
+                                            className="w-full rounded-md border border-purple-500/30 bg-purple-500/10 px-3 py-2 text-xs font-black uppercase tracking-wide text-purple-200 transition-colors hover:bg-purple-500/15 sm:w-auto"
+                                        >
+                                            {showParadigmSnapshot ? "Hide Snapshot" : "View Current Snapshot"}
+                                        </button>
                                     </div>
-                                    {recentParadigmEvents.length > 0 ? (
-                                        <div className="grid grid-cols-1 gap-2 lg:grid-cols-3">
-                                            {recentParadigmEvents.map(event => (
-                                                <button
-                                                    key={`${event.run_id}-${event.symbol}-${event.summary}`}
-                                                    type="button"
-                                                    onClick={() => {
-                                                        const match = rawResults.find(result => result.candidate.symbol === event.symbol);
-                                                        if (match) setSelectedStock(match);
-                                                    }}
-                                                    className="min-w-0 rounded-md border border-border/60 bg-background/35 px-3 py-2 text-left transition-colors hover:border-purple-400/40 hover:bg-purple-500/10"
-                                                >
-                                                    <div className="flex items-center justify-between gap-2">
-                                                        <span className="font-mono text-sm font-black text-foreground">{event.symbol}</span>
-                                                        <span className={clsx(
-                                                            "rounded px-2 py-0.5 text-[10px] font-black uppercase",
-                                                            event.direction === 'upgrade' && "bg-emerald-500/15 text-emerald-300",
-                                                            event.direction === 'downgrade' && "bg-red-500/15 text-red-300",
-                                                            event.direction === 'changed' && "bg-purple-500/15 text-purple-300",
-                                                        )}>
-                                                            {event.direction}
-                                                        </span>
-                                                    </div>
-                                                    <div className="mt-1 truncate text-xs font-semibold text-muted-foreground" title={event.summary}>
-                                                        {event.summary}
-                                                    </div>
-                                                </button>
-                                            ))}
+
+                                    <div className="mb-3 grid grid-cols-2 gap-2 lg:grid-cols-5">
+                                        <ParadigmMonitorStat label="New Changes" value={paradigmChangeStats.total} tone="purple" />
+                                        <ParadigmMonitorStat label="Upgrades" value={paradigmChangeStats.upgrades} tone="green" />
+                                        <ParadigmMonitorStat label="Downgrades" value={paradigmChangeStats.downgrades} tone="red" />
+                                        <ParadigmMonitorStat label="Theme Changes" value={paradigmChangeStats.themeChanges} tone="blue" />
+                                        <ParadigmMonitorStat label="Snapshot Names" value={paradigmBaselineEvents.length} tone="muted" />
+                                    </div>
+
+                                    {paradigmRealChangeEvents.length > 0 ? (
+                                        <div className="overflow-x-auto rounded-md border border-border/60 bg-background/35">
+                                            <table className="w-full min-w-[760px] text-left text-xs">
+                                                <thead className="border-b border-border/60 bg-secondary/35 text-[11px] uppercase tracking-wider text-muted-foreground">
+                                                    <tr>
+                                                        <th className="px-3 py-2">Ticker</th>
+                                                        <th className="px-3 py-2">Direction</th>
+                                                        <th className="px-3 py-2">Band</th>
+                                                        <th className="px-3 py-2">Signal / Rank</th>
+                                                        <th className="px-3 py-2">Theme</th>
+                                                        <th className="px-3 py-2">Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="divide-y divide-border/50">
+                                                    {paradigmRealChangeEvents.slice(0, 12).map(event => (
+                                                        <tr
+                                                            key={`${event.run_id}-${event.symbol}-${event.summary}`}
+                                                            className="cursor-pointer transition-colors hover:bg-purple-500/10"
+                                                            onClick={() => {
+                                                                const match = rawResults.find(result => result.candidate.symbol === event.symbol);
+                                                                if (match) setSelectedStock(match);
+                                                            }}
+                                                        >
+                                                            <td className="px-3 py-2 font-mono font-black text-foreground">{event.symbol}</td>
+                                                            <td className="px-3 py-2 font-bold capitalize text-muted-foreground">{event.direction}</td>
+                                                            <td className="px-3 py-2 font-mono text-muted-foreground">{`${event.from_band || "n/a"} -> ${event.to_band || "n/a"}`}</td>
+                                                            <td className="px-3 py-2 font-mono text-muted-foreground">{`${event.from_signal ?? "n/a"} -> ${event.to_signal ?? "n/a"} / #${event.to_rank ?? "n/a"}`}</td>
+                                                            <td className="px-3 py-2 text-muted-foreground">{event.to_theme_primary || event.from_theme_primary || "n/a"}</td>
+                                                            <td className="px-3 py-2 font-mono text-muted-foreground">{event.snapshot_date}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
                                         </div>
                                     ) : (
                                         <div className="rounded-md border border-border/50 bg-background/30 px-3 py-2 text-sm font-semibold text-muted-foreground">
                                             Baseline is active. No Paradigm upgrades, downgrades, or theme changes have been recorded since tracking started.
+                                        </div>
+                                    )}
+
+                                    {showParadigmSnapshot && (
+                                        <div className="mt-3 rounded-md border border-purple-500/20 bg-background/35 p-3">
+                                            <div className="mb-3 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
+                                                <div>
+                                                    <div className="text-xs font-black uppercase tracking-wider text-purple-200">Current Snapshot</div>
+                                                    <p className="mt-1 text-xs font-semibold text-muted-foreground">
+                                                        Baseline watchlist entries, sorted by band and rank. Showing {paradigmSnapshotRows.length.toLocaleString()} of {paradigmBaselineEvents.length.toLocaleString()}.
+                                                    </p>
+                                                </div>
+                                                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:w-[560px]">
+                                                    <input
+                                                        value={paradigmSnapshotSearch}
+                                                        onChange={(event) => setParadigmSnapshotSearch(event.target.value)}
+                                                        placeholder="Search ticker, name, theme..."
+                                                        className="rounded-md border border-border/60 bg-background px-3 py-2 text-xs font-semibold text-foreground outline-none focus:border-purple-400"
+                                                    />
+                                                    <select
+                                                        value={paradigmSnapshotBand}
+                                                        onChange={(event) => setParadigmSnapshotBand(event.target.value)}
+                                                        className="rounded-md border border-border/60 bg-background px-3 py-2 text-xs font-bold text-foreground outline-none focus:border-purple-400"
+                                                    >
+                                                        <option value="all">All bands</option>
+                                                        <option value="high">Strong</option>
+                                                        <option value="mid">Solid</option>
+                                                        <option value="watch">Watch</option>
+                                                    </select>
+                                                    <select
+                                                        value={paradigmSnapshotTheme}
+                                                        onChange={(event) => setParadigmSnapshotTheme(event.target.value)}
+                                                        className="rounded-md border border-border/60 bg-background px-3 py-2 text-xs font-bold text-foreground outline-none focus:border-purple-400"
+                                                    >
+                                                        <option value="all">All themes</option>
+                                                        {paradigmSnapshotThemes.map(theme => (
+                                                            <option key={theme} value={theme}>{theme}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className="max-h-80 overflow-auto rounded-md border border-border/60">
+                                                <table className="w-full min-w-[760px] text-left text-xs">
+                                                    <thead className="sticky top-0 border-b border-border/60 bg-secondary text-[11px] uppercase tracking-wider text-muted-foreground">
+                                                        <tr>
+                                                            <th className="px-3 py-2">Ticker</th>
+                                                            <th className="px-3 py-2">Company</th>
+                                                            <th className="px-3 py-2">Band</th>
+                                                            <th className="px-3 py-2">Signal</th>
+                                                            <th className="px-3 py-2">Rank</th>
+                                                            <th className="px-3 py-2">Primary Theme</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="divide-y divide-border/50 bg-background/20">
+                                                        {paradigmSnapshotRows.map(event => {
+                                                            const stock = rawResults.find(result => result.candidate.symbol === event.symbol);
+                                                            const band = event.to_band || stock?.paradigm?.pdm_band || "n/a";
+                                                            return (
+                                                                <tr
+                                                                    key={`${event.run_id}-${event.symbol}-baseline`}
+                                                                    className="cursor-pointer transition-colors hover:bg-purple-500/10"
+                                                                    onClick={() => {
+                                                                        if (stock) setSelectedStock(stock);
+                                                                    }}
+                                                                >
+                                                                    <td className="px-3 py-2 font-mono font-black text-foreground">{event.symbol}</td>
+                                                                    <td className="max-w-[240px] truncate px-3 py-2 font-semibold text-muted-foreground" title={event.name || stock?.candidate.name || ""}>{event.name || stock?.candidate.name || "n/a"}</td>
+                                                                    <td className="px-3 py-2 font-black uppercase text-purple-200">{PARADIGM_BAND_LABELS[band] || band}</td>
+                                                                    <td className="px-3 py-2 font-mono text-muted-foreground">{event.to_signal ?? stock?.paradigm?.pdm_signal ?? "n/a"}</td>
+                                                                    <td className="px-3 py-2 font-mono text-muted-foreground">#{event.to_rank ?? stock?.paradigm?.pdm_rank ?? "n/a"}</td>
+                                                                    <td className="px-3 py-2 text-muted-foreground">{event.to_theme_primary || stock?.paradigm?.pdm_theme_primary || "n/a"}</td>
+                                                                </tr>
+                                                            );
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     )}
                                 </div>
@@ -1976,6 +2143,22 @@ function SummaryMetric({ label, value }: { label: string; value: string | number
         <div className="rounded-md border border-border/60 bg-secondary/20 px-3 py-2">
             <div className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-0.5 truncate font-mono text-base font-black text-foreground" title={String(value)}>{value}</div>
+        </div>
+    );
+}
+
+function ParadigmMonitorStat({ label, value, tone }: { label: string; value: number; tone: "purple" | "green" | "red" | "blue" | "muted" }) {
+    return (
+        <div className={clsx(
+            "rounded-md border px-3 py-2",
+            tone === "purple" && "border-purple-500/25 bg-purple-500/10 text-purple-200",
+            tone === "green" && "border-emerald-500/25 bg-emerald-500/10 text-emerald-300",
+            tone === "red" && "border-red-500/25 bg-red-500/10 text-red-300",
+            tone === "blue" && "border-blue-500/25 bg-blue-500/10 text-blue-300",
+            tone === "muted" && "border-border/60 bg-secondary/20 text-foreground"
+        )}>
+            <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="mt-0.5 font-mono text-base font-black">{value.toLocaleString()}</div>
         </div>
     );
 }
