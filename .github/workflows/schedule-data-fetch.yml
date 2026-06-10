@@ -39,16 +39,18 @@ jobs:
           python scripts/fetch_sec_data.py
           python scripts/fetch_data_intl.py
 
-      - name: Run Paradigm Chain (free pipelines only — daily)
+      - name: Run Scoring Chain (price history -> EPS -> reverse -> paradigm)
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
-          # Order: price history -> macro state -> EPS trajectory -> score.
           # Analyst coverage skipped here (runs weekly via paradigm-weekly-analyst.yml).
           python scripts/build_price_history.py
-          python scripts/fetch_macro_state.py --apply
           python scripts/fetch_eps_trajectory.py --apply --max-calls 500
-          python scripts/score_paradigm.py
+          # run_chain enforces ordering (macro -> score_reverse -> score_paradigm)
+          # and fails the job when reverse coverage / nominations / artifact
+          # freshness invariants break. This fixes the stale-merge bug where
+          # fetch_data regenerated stocks.json without re-running score_reverse.
+          python scripts/run_chain.py
 
       - name: Commit and Push Changes
         id: push_changes
@@ -70,6 +72,11 @@ jobs:
           git add public/data/eps_trajectory.json || true
           git add public/data/macro_state.json || true
           git add public/data/reverse_scores.json || true
+          git add public/data/chain_manifest.json || true
+          git add public/data/reverse_nomination_log.jsonl || true
+          git add public/data/paradigm_signal_log.jsonl || true
+          git add public/data/paradigm_run_log.jsonl || true
+          git add public/data/paradigm_history.json || true
           
           # Commit if there are changes
           if git diff --quiet && git diff --staged --quiet; then

@@ -634,10 +634,17 @@ def compute_momentum_scores(price_history, stocks, momentum_config=None):
     return momentum_scores
 
 
-def compute_theme_metrics(price_history, stocks, themes, momentum_scores):
+def compute_theme_metrics(price_history, stocks, themes, momentum_scores,
+                          baseline_members=None, hot_themes=None):
     """Compute per-theme metrics and write paradigm_theme_metrics.json.
 
     Returns a dict of theme_id -> metrics for the summary print.
+
+    baseline_members: theme_id -> set of tickers tagged at the DEFAULT
+    threshold (or via LLM/override). Hotness for the next run is computed
+    from these so a hot-expanded cohort can't dilute its own trigger metric.
+    hot_themes: list of theme_ids that ran hot THIS run (persisted so the
+    next run can apply hysteresis).
     """
     prices_dict = price_history.get("prices", {})
     snapshot_date = price_history.get("snapshot_date", "unknown")
@@ -649,6 +656,27 @@ def compute_theme_metrics(price_history, stocks, themes, momentum_scores):
         if sym and "paradigm" in stock:
             ticker_paradigm[sym] = stock["paradigm"]
 
+    def med_breadth(members):
+        above_count = 0
+        total_with_ma = 0
+        momentum_vals = []
+        for sym in members:
+            prices = prices_dict.get(sym)
+            if not isinstance(prices, list) or len(prices) < 11:
+                continue
+            total_with_ma += 1
+            # 10-month MA
+            ma_10 = sum(prices[-10:]) / 10.0
+            if prices[-1] > ma_10:
+                above_count += 1
+            # Median momentum
+            ms = momentum_scores.get(sym)
+            if ms is not None:
+                momentum_vals.append(ms)
+        breadth = round(above_count / total_with_ma * 100) if total_with_ma > 0 else None
+        median_mom = round(statistics.median(momentum_vals)) if momentum_vals else None
+        return median_mom, breadth, total_with_ma
+
     theme_metrics = {}
     for theme in themes:
         tid = theme["id"]
@@ -659,36 +687,20 @@ def compute_theme_metrics(price_history, stocks, themes, momentum_scores):
                 tagged_members.append(sym)
 
         tagged_count = len(tagged_members)
+        median_momentum, breadth_pct, total_with_ma = med_breadth(tagged_members)
 
-        # Compute breadth and median momentum
-        above_count = 0
-        total_with_ma = 0
-        momentum_vals = []
-
-        for sym in tagged_members:
-            prices = prices_dict.get(sym)
-            if not isinstance(prices, list) or len(prices) < 11:
-                continue
-            total_with_ma += 1
-
-            # 10-month MA
-            ma_10 = sum(prices[-10:]) / 10.0
-            if prices[-1] > ma_10:
-                above_count += 1
-
-            # Median momentum
-            ms = momentum_scores.get(sym)
-            if ms is not None:
-                momentum_vals.append(ms)
-
-        breadth_pct = round(above_count / total_with_ma * 100) if total_with_ma > 0 else None
-        median_momentum = round(statistics.median(momentum_vals)) if momentum_vals else None
+        base_set = sorted((baseline_members or {}).get(tid) or set())
+        baseline_median, baseline_breadth, _ = med_breadth(base_set)
 
         theme_metrics[tid] = {
             "tagged_count": tagged_count,
             "tagged_with_history_count": total_with_ma,
             "median_momentum": median_momentum,
             "breadth_pct": breadth_pct,
+            "baseline_count": len(base_set),
+            "baseline_median_momentum": baseline_median,
+            "baseline_breadth_pct": baseline_breadth,
+            "hot": tid in (hot_themes or []),
         }
 
     # Write theme metrics file
@@ -964,10 +976,18 @@ def main():
     # ── Dynamic per-theme composite threshold (T8a-dyn) ──────────────────
     # Read prior run's theme metrics (if any) -> drop threshold to
     # hot_composite_threshold for themes that were hot last run.
+    #
+    # Oscillation fix (June 2026): hotness is evaluated on BASELINE members
+    # (those tagged at the default threshold) so the hot-expanded cohort
+    # cannot dilute its own hotness metric, and hot status has hysteresis
+    # (enter at the entry floors, exit only below the lower exit floors).
+    # Previously ai_compute flapped 40<->146 members on alternating runs.
     default_threshold = momentum_config.get("default_composite_threshold", 2.0)
     hot_threshold = momentum_config.get("hot_composite_threshold", 1.5)
     hot_mom_floor = momentum_config.get("hot_median_mom", 70)
     hot_breadth_floor = momentum_config.get("hot_breadth_pct", 70)
+    hot_exit_mom = momentum_config.get("hot_exit_median_mom", hot_mom_floor - 10)
+    hot_exit_breadth = momentum_config.get("hot_exit_breadth_pct", hot_breadth_floor - 10)
     theme_thresholds = {t["id"]: default_threshold for t in themes}
     prior_metrics = {}
     if THEME_METRICS_JSON.exists():
@@ -979,9 +999,18 @@ def main():
     for t in themes:
         tid = t["id"]
         pm = prior_metrics.get(tid) or {}
-        med = pm.get("median_momentum")
-        br = pm.get("breadth_pct")
-        if med is not None and br is not None and med >= hot_mom_floor and br >= hot_breadth_floor:
+        # Prefer baseline metrics; fall back to legacy fields for the first
+        # run after this change (legacy metrics may reflect an expanded cohort).
+        med = pm.get("baseline_median_momentum", pm.get("median_momentum"))
+        br = pm.get("baseline_breadth_pct", pm.get("breadth_pct"))
+        was_hot = bool(pm.get("hot"))
+        if med is None or br is None:
+            continue
+        if was_hot:
+            is_hot = med >= hot_exit_mom and br >= hot_exit_breadth
+        else:
+            is_hot = med >= hot_mom_floor and br >= hot_breadth_floor
+        if is_hot:
             theme_thresholds[tid] = hot_threshold
             hot_themes.append(tid)
 
@@ -1001,6 +1030,9 @@ def main():
     stocks_with_reverse = 0
     total_tagged = 0  # stocks with at least one theme (composite >= 2.0)
     theme_tag_counts = {t["id"]: 0 for t in themes}
+    # Members tagged at the DEFAULT threshold (or via LLM/override) — used for
+    # hot-theme metrics so threshold expansion can't dilute its own trigger.
+    baseline_members = {t["id"]: set() for t in themes}
 
     # Economics gate tracking
     gate_values = []
@@ -1085,6 +1117,8 @@ def main():
             if composite_vote >= tag_threshold:
                 result["pdm_themes"].append(tid)
                 theme_tag_counts[tid] = theme_tag_counts.get(tid, 0) + 1
+                if composite_vote >= default_threshold:
+                    baseline_members[tid].add(ticker)
                 if tag_threshold < default_threshold and "hot_theme_expanded" not in flags:
                     flags.append("hot_theme_expanded")
 
@@ -1102,6 +1136,8 @@ def main():
                     if llm_tid not in result["pdm_themes"]:
                         result["pdm_themes"].append(llm_tid)
                         theme_tag_counts[llm_tid] = theme_tag_counts.get(llm_tid, 0) + 1
+                        # LLM tags are threshold-independent -> count as baseline
+                        baseline_members.setdefault(llm_tid, set()).add(ticker)
                     # Synthetic composite vote for ranking (treat LLM as 1.5)
                     if llm_tid not in theme_scores:
                         theme_scores[llm_tid] = 1.5
@@ -1141,6 +1177,8 @@ def main():
                 # Ensure override theme is in pdm_themes
                 if override_theme not in result["pdm_themes"]:
                     result["pdm_themes"].insert(0, override_theme)
+                # Operator overrides are threshold-independent -> baseline
+                baseline_members.setdefault(override_theme, set()).add(ticker)
                 result["pdm_theme_primary"] = override_theme
                 flags.append("override")
 
@@ -1227,7 +1265,9 @@ def main():
     momentum_scores = compute_momentum_scores(price_history, stocks, momentum_config)
 
     # ── Compute theme metrics (WS1-T3b) ──────────────────────────────────
-    theme_metrics = compute_theme_metrics(price_history, stocks, themes, momentum_scores)
+    theme_metrics = compute_theme_metrics(price_history, stocks, themes, momentum_scores,
+                                          baseline_members=baseline_members,
+                                          hot_themes=hot_themes)
 
     # ── Compute signal, band, pro/con (WS1-T5) ───────────────────────────
     for stock in stocks:
