@@ -176,7 +176,7 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
                 insiderOwnership: (parseFlexibleNumber(row['Insider Own']) || 0) * multiplier,
                 
                 pegRatio: parseFlexibleNumber(row['PEG']) || 0,
-                zScore: parseFlexibleNumber(row['Z-Score']) || 0,
+                zScore: parseFlexibleNumber(row['Z-Score']),
                 peRatio: firstNumber(row['P/E'], row['PE'], row['Trailing P/E'], row['Current P/E']) || 0,
                 priceToSales: parseFlexibleNumber(row['P/S']) || 0,
                 floatShares: parseFlexibleNumber(row['Float']) || 0,

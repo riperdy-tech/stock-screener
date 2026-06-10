@@ -11,7 +11,7 @@ export interface StockCandidate {
     revenueGrowth: number; // YoY %
     grossMargin: number; // %
     roic: number; // %
-    zScore: number;
+    zScore: number | null; // null = not computable (no silent safe default)
     insiderOwnership: number; // %
     floatShares: number;
     lastUpdated?: string;
@@ -88,8 +88,8 @@ export interface ScreeningMetrics {
     grossMargin: number;
     netIncome: number;
     operatingCashFlow: number;
-    zScore: number;
-    mScore: number;
+    zScore: number | null;
+    mScore: number | null;
     insiderOwnership: number;
     dilution: number;
     psRatio: number;
@@ -209,8 +209,9 @@ export function analyzeStock(stock: StockCandidate): ScreeningResult {
 
     // --- Phase 2: Kill List ---
 
-    // Altman Z-Score
-    if (stock.zScore < KILL_LIST.MAX_Z_SCORE_DISTRESS) {
+    // Altman Z-Score (null = not computable; skip the kill rather than
+    // treating missing data as 0 = distress or as silently safe)
+    if (stock.zScore !== null && stock.zScore < KILL_LIST.MAX_Z_SCORE_DISTRESS) {
         passed = false;
         flags.push(`Financial Distress (Z-Score: ${stock.zScore})`);
         score = 0; // Immediate kill
