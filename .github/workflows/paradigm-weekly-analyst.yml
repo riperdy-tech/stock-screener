@@ -54,6 +54,11 @@ jobs:
           # and enforces coverage/freshness invariants.
           python scripts/run_chain.py
 
+      - name: Backfill Signal Outcomes (forward returns vs IWM/SPY)
+        run: |
+          # Evaluates matured signal cohorts; free yfinance prices.
+          python scripts/backfill_outcomes.py || true
+
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
@@ -65,6 +70,12 @@ jobs:
           git add public/data/stocks.json || true
           git add public/data/paradigm_scores.json || true
           git add public/data/paradigm_theme_metrics.json || true
+          git add public/data/reverse_scores.json || true
+          git add public/data/chain_manifest.json || true
+          git add public/data/reverse_nomination_log.jsonl || true
+          git add public/data/outcome_backfill.json || true
+          git add public/data/outcomes_report.md || true
+          git add public/data/outcome_price_cache.json || true
 
           if git diff --quiet && git diff --staged --quiet; then
             echo "No changes to commit"
