@@ -37,6 +37,9 @@ jobs:
           # Add the scripts you want to run automatically here
           python scripts/fetch_data.py
           python scripts/fetch_sec_data.py
+          # Reuses the companyfacts.zip fetch_sec_data just downloaded:
+          # 10y fundamentals + value-trap battery (Piotroski/accruals/M-Score)
+          python scripts/build_fundamentals_history.py || true
           python scripts/fetch_data_intl.py
 
       - name: Run Scoring Chain (price history -> EPS -> reverse -> paradigm)
@@ -74,6 +77,8 @@ jobs:
           git add public/data/reverse_scores.json || true
           git add public/data/chain_manifest.json || true
           git add public/data/reverse_nomination_log.jsonl || true
+          git add public/data/fundamentals_battery.json || true
+          git add public/data/cik_map.json || true
           git add public/data/paradigm_signal_log.jsonl || true
           git add public/data/paradigm_run_log.jsonl || true
           git add public/data/paradigm_history.json || true
