@@ -464,6 +464,38 @@ def compute_raw_return(prices, window):
     return ret
 
 
+def compute_skip_month_return(prices):
+    """12-1 momentum: return from t-13 to t-1, excluding the most recent month.
+
+    Standard construction (Jegadeesh-Titman): the latest month is skipped so
+    short-term reversal doesn't contaminate the signal.
+    """
+    if len(prices) < 13:
+        return None
+    p_old = prices[-13]
+    p_new = prices[-2]
+    if p_old == 0 or not math.isfinite(p_old) or not math.isfinite(p_new):
+        return None
+    ret = (p_new / p_old) - 1.0
+    return ret if math.isfinite(ret) else None
+
+
+def compute_high_proximity(prices):
+    """Proximity to the 52-week high (monthly-close proxy): last / max(last 12).
+
+    Values near 1.0 = at the high (empirically bullish persistence); well
+    below 1.0 = deep below the high.
+    """
+    if len(prices) < 12:
+        return None
+    window = prices[-12:]
+    high = max(window)
+    if high <= 0 or not math.isfinite(high):
+        return None
+    prox = prices[-1] / high
+    return prox if math.isfinite(prox) else None
+
+
 def compute_percentile_rank(value, sorted_distribution, count):
     """Compute percentile rank of value within a sorted distribution.
 
@@ -479,16 +511,22 @@ def compute_percentile_rank(value, sorted_distribution, count):
 def compute_momentum_scores(price_history, stocks, momentum_config=None):
     """Compute pdm_momentum_score for each stock.
 
-    WS1-T3b: static 4-window weighted percentile-rank composite.
+    WS1-T3b: static 4-window weighted percentile-rank composite (version 1).
     WS1-T8a: blends static composite (weight static_weight, default 0.6) with a
              Delta-percentile-rank acceleration component (weight accel_weight,
              default 0.4). Also flags accelerating / decelerating / regime_shift_*.
+    version 2 (momentum_config["version"] == 2): static composite is replaced
+             by the empirically robust trio — 12-1 skip-month momentum,
+             52-week-high proximity, 6-month return — each cross-sectionally
+             percentile-ranked and blended by v2_weights. Acceleration and
+             regime flags are unchanged.
 
     Modifies the paradigm object on each stock in-place.
     Returns a dict of ticker -> momentum_score (int or None) for use in theme metrics.
     """
     if momentum_config is None:
         momentum_config = {}
+    version = int(momentum_config.get("version", 1))
     static_weight = momentum_config.get("static_weight", 0.6)
     accel_weight = momentum_config.get("accel_weight", 0.4)
     accelerating_threshold = momentum_config.get("accelerating_threshold", 70)
@@ -537,25 +575,74 @@ def compute_momentum_scores(price_history, stocks, momentum_config=None):
             ranks[w] = compute_percentile_rank(ret, sorted_distributions[w], window_counts[w])
         ranks_by_ticker[ticker] = ranks
 
-    # Step 4: Static weighted composite per stock
+    # Step 4: Static composite per stock
+    # v1: 4-window weighted percentile-rank blend.
+    # v2: 12-1 skip-month + 52w-high proximity + 6m return (each percentile-
+    #     ranked cross-sectionally), renormalized over available components.
     static_scores = {}  # ticker -> float in [0, 1] or None
-    for stock in stocks:
-        ticker = stock.get("symbol")
-        if not ticker:
-            continue
-        ranks = ranks_by_ticker.get(ticker, {})
-        if not ranks:
-            static_scores[ticker] = None
-            continue
-        available_windows = list(ranks.keys())
-        total_weight = sum(MOMENTUM_WINDOWS[w] for w in available_windows)
-        if total_weight == 0:
-            static_scores[ticker] = None
-            continue
-        composite = 0.0
-        for w in available_windows:
-            composite += (MOMENTUM_WINDOWS[w] / total_weight) * ranks[w]
-        static_scores[ticker] = composite
+    if version >= 2:
+        v2_weights = momentum_config.get(
+            "v2_weights", {"skip_12_1": 0.5, "high_52w": 0.3, "ret_6m": 0.2}
+        )
+        raw_components = {}  # ticker -> {component_name: raw value}
+        for stock in stocks:
+            ticker = stock.get("symbol")
+            if not ticker:
+                continue
+            prices = prices_dict.get(ticker)
+            comp = {}
+            if isinstance(prices, list) and len(prices) >= 2:
+                skip = compute_skip_month_return(prices)
+                if skip is not None:
+                    comp["skip_12_1"] = skip
+                prox = compute_high_proximity(prices)
+                if prox is not None:
+                    comp["high_52w"] = prox
+                r6 = raw_returns.get(ticker, {}).get(6)
+                if r6 is not None:
+                    comp["ret_6m"] = r6
+            raw_components[ticker] = comp
+
+        comp_distributions = {}
+        comp_counts = {}
+        for name in v2_weights:
+            values = sorted(c[name] for c in raw_components.values() if name in c)
+            comp_distributions[name] = values
+            comp_counts[name] = len(values)
+
+        for stock in stocks:
+            ticker = stock.get("symbol")
+            if not ticker:
+                continue
+            comp = raw_components.get(ticker, {})
+            available = [n for n in v2_weights if n in comp]
+            total_weight = sum(v2_weights[n] for n in available)
+            if not available or total_weight == 0:
+                static_scores[ticker] = None
+                continue
+            composite = 0.0
+            for n in available:
+                rank = compute_percentile_rank(comp[n], comp_distributions[n], comp_counts[n])
+                composite += (v2_weights[n] / total_weight) * rank
+            static_scores[ticker] = composite
+    else:
+        for stock in stocks:
+            ticker = stock.get("symbol")
+            if not ticker:
+                continue
+            ranks = ranks_by_ticker.get(ticker, {})
+            if not ranks:
+                static_scores[ticker] = None
+                continue
+            available_windows = list(ranks.keys())
+            total_weight = sum(MOMENTUM_WINDOWS[w] for w in available_windows)
+            if total_weight == 0:
+                static_scores[ticker] = None
+                continue
+            composite = 0.0
+            for w in available_windows:
+                composite += (MOMENTUM_WINDOWS[w] / total_weight) * ranks[w]
+            static_scores[ticker] = composite
 
     # Step 5: Acceleration component (WS1-T8a)
     # Raw accel per ticker = rank_1m - rank_12m. Requires BOTH windows.
@@ -857,7 +944,8 @@ def build_pro_con(paradigm, bands_config):
         )
 
 
-def append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snapshot_date):
+def append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snapshot_date,
+                       momentum_version=1):
     """Append per-stock signal snapshot to JSONL log + per-run summary (WS1-T7).
 
     Append-only, never read back by scoring. Honest validation path: log signals
@@ -907,6 +995,9 @@ def append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snaps
         "stocks_total": len(stocks),
         "stocks_logged": len(log_lines),
         "themes_registered": len(themes),
+        # Momentum methodology version — outcome analysis must not mix
+        # cohorts scored under different momentum definitions.
+        "momentum_version": momentum_version,
         "macro_flags_global": (macro_state or {}).get("triggered_flags", []),
         "macro_fetched_at": (macro_state or {}).get("fetched_at"),
         "theme_metrics": theme_metrics,
@@ -1437,7 +1528,8 @@ def main():
     print(f"  Written: paradigm_history.json ({history_events_count} new events)")
 
     # ── WS1-T7: forward-logging hook ─────────────────────────────────────
-    logged = append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snapshot_date)
+    logged = append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snapshot_date,
+                                momentum_version=int(momentum_config.get("version", 1)))
     print(f"  Appended: paradigm_signal_log.jsonl ({logged} stock-rows, run_id={run_id})")
     print(f"  Appended: paradigm_run_log.jsonl (1 summary row)")
     print("=" * 60)
