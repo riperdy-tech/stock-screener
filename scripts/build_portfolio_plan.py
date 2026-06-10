@@ -40,6 +40,7 @@ DATA = ROOT / "public" / "data"
 STOCKS_JSON = DATA / "stocks.json"
 REVERSE_SCORES_JSON = DATA / "reverse_scores.json"
 PARADIGM_SCORES_JSON = DATA / "paradigm_scores.json"
+UNIFIED_SCORES_JSON = DATA / "unified_scores.json"
 BATTERY_JSON = DATA / "fundamentals_battery.json"
 MACRO_STATE_JSON = DATA / "macro_state.json"
 CONFIG_JSON = Path(__file__).resolve().with_name("portfolio_config.json")
@@ -82,6 +83,7 @@ def main():
     reverse = load_json(REVERSE_SCORES_JSON, {})
     paradigm = load_json(PARADIGM_SCORES_JSON, {})
     battery = (load_json(BATTERY_JSON, {}) or {}).get("tickers", {})
+    unified = (load_json(UNIFIED_SCORES_JSON, {}) or {}).get("tickers", {})
     macro = load_json(MACRO_STATE_JSON, {}) or {}
     macro_flags = macro.get("triggered_flags", []) or []
 
@@ -150,6 +152,9 @@ def main():
             "theme_primary": theme,
             "pdm_band": pdm.get("pdm_band"),
             "pdm_signal": pdm.get("pdm_signal"),
+            "uni_score": (unified.get(sym) or {}).get("uni_score"),
+            "uni_rank": (unified.get(sym) or {}).get("uni_rank"),
+            "uni_band": (unified.get(sym) or {}).get("uni_band"),
             "high_risk_class": bool(high_risk),
             "forensic_flags": forensic_fired,
             "f_score": bat.get("f_score"),
@@ -188,12 +193,14 @@ def main():
              f"Macro flags: {macro_flags if macro_flags else 'none'}"
              + ("  → **DE-RISK ACTIVE (sizes halved)**" if macro_derisk else ""),
              f"Invested: **{invested}%**  |  Cash: **{cash}%**  |  Positions: {len(positions)}", "",
-             "| # | Sym | Wt% | Arch | Comp | Surv | Theme | PdmBand | F | M | Flags |",
-             "|---|---|---|---|---|---|---|---|---|---|---|"]
+             "| # | Sym | Wt% | Arch | Comp | Surv | UniRank | UniBand | Theme | PdmBand | F | M | Flags |",
+             "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for p in positions:
         lines.append(
             f"| {p['rank']} | **{p['symbol']}** | {p['weight_pct']} | {p['archetype']} "
-            f"| {p['composite']} | {p['survivability']} | {p['theme_primary'] or '-'} "
+            f"| {p['composite']} | {p['survivability']} "
+            f"| {p['uni_rank'] if p['uni_rank'] is not None else '-'} | {p['uni_band'] or '-'} "
+            f"| {p['theme_primary'] or '-'} "
             f"| {p['pdm_band'] or '-'} | {p['f_score'] if p['f_score'] is not None else '-'} "
             f"| {p['m_score'] if p['m_score'] is not None else '-'} "
             f"| {','.join(p['forensic_flags']) or '-'} |")

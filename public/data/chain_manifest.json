@@ -13,18 +13,12 @@
       "space_economy": 44
     }
   },
-  "finished_at": "2026-06-10T16:35:56Z",
+  "finished_at": "2026-06-10T16:48:47Z",
   "invariants": [
     {
       "detail": "stocks.json is 0.0 days old (max 8)",
       "level": "soft",
       "name": "stocks_json_fresh",
-      "ok": true
-    },
-    {
-      "detail": "FRED macro state fetched",
-      "level": "soft",
-      "name": "macro_fetch",
       "ok": true
     },
     {
@@ -62,24 +56,36 @@
       "level": "hard",
       "name": "paradigm_coverage",
       "ok": true
+    },
+    {
+      "detail": "1832 stocks carry a unified score (min 500)",
+      "level": "hard",
+      "name": "unified_scored",
+      "ok": true
+    },
+    {
+      "detail": "55 research_now candidates",
+      "level": "soft",
+      "name": "unified_research_now",
+      "ok": true
     }
   ],
   "ok": true,
-  "run_id": "20260610T163528Z",
+  "run_id": "20260610T164822Z",
   "steps": [
     {
-      "duration_s": 7.9,
-      "name": "fetch_macro_state",
-      "returncode": 0
-    },
-    {
-      "duration_s": 12.4,
+      "duration_s": 16.6,
       "name": "score_reverse",
       "returncode": 0
     },
     {
       "duration_s": 7.3,
       "name": "score_paradigm",
+      "returncode": 0
+    },
+    {
+      "duration_s": 0.3,
+      "name": "score_unified",
       "returncode": 0
     }
   ]

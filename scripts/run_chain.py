@@ -111,6 +111,9 @@ def main():
     if ok and not run_step("score_paradigm", ["scripts/score_paradigm.py"], steps):
         print("FATAL: score_paradigm failed.")
         ok = False
+    if ok and not run_step("score_unified", ["scripts/score_unified.py"], steps):
+        print("FATAL: score_unified failed.")
+        ok = False
 
     # ── Post-run invariants (artifact-based, not stdout-parsed) ─────────
     print("\n=== INVARIANTS ".ljust(60, "="))
@@ -154,6 +157,15 @@ def main():
         paradigm_scores = load_json(PARADIGM_SCORES_JSON)
         add_invariant(invariants, "paradigm_coverage", "hard", len(paradigm_scores) >= 0.95 * n_stocks,
                       f"{len(paradigm_scores)} paradigm rows vs {n_stocks} stocks")
+
+        unified_path = DATA / "unified_scores.json"
+        unified = load_json(unified_path) if unified_path.exists() else {}
+        uni_scored = unified.get("scored_count", 0)
+        add_invariant(invariants, "unified_scored", "hard", uni_scored >= 500,
+                      f"{uni_scored} stocks carry a unified score (min 500)")
+        research_now = unified.get("band_counts", {}).get("research_now", 0)
+        add_invariant(invariants, "unified_research_now", "soft", research_now >= 10,
+                      f"{research_now} research_now candidates")
 
         # Theme membership drift vs previous run (hot flips are legal but must be visible)
         theme_counts = {}
