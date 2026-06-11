@@ -34,13 +34,11 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
-          # Add the scripts you want to run automatically here
+          # Daily: only data that actually changes daily. SEC fundamentals
+          # (fetch_sec_data + build_fundamentals_history: 1.4GB companyfacts
+          # download for quarterly-changing fields) and the intl scan moved
+          # to the weekly workflow — saves ~1.4GB + 10-20 min per day.
           python scripts/fetch_data.py
-          python scripts/fetch_sec_data.py
-          # Reuses the companyfacts.zip fetch_sec_data just downloaded:
-          # 10y fundamentals + value-trap battery (Piotroski/accruals/M-Score)
-          python scripts/build_fundamentals_history.py || true
-          python scripts/fetch_data_intl.py
 
       - name: Run Scoring Chain (price history -> EPS -> reverse -> paradigm)
         env:
