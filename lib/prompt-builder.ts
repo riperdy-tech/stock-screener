@@ -267,6 +267,43 @@ export async function buildPrompt(ticker: string, result: ScreeningResult): Prom
         reversePriming = parts.join("\n") + "\n";
     }
 
+    // Data-discipline block (ecosystem review Stage 5): LLM hallucinated
+    // fundamentals + training-data look-ahead are the documented failure
+    // modes — the model must analyze ONLY what we feed it.
+    const dataDiscipline = [
+        "## DATA DISCIPLINE — MANDATORY",
+        "",
+        "- Use ONLY the financial figures provided in this prompt. Do NOT recall revenues, margins, prices, or any other numbers from memory or training data.",
+        "- If a figure you need is not provided, write \"not provided\" and reason qualitatively — never substitute a remembered or estimated value.",
+        "- Knowledge of events after the data dates below must not inform the analysis (look-ahead contamination).",
+        "",
+    ].join("\n") + "\n";
+
+    // Stage-4 overlay priming: GPR exposure + informed demand, when available.
+    let overlayPriming = "";
+    if (market === 'US' && typeof window !== "undefined") {
+        try {
+            const response = await fetch(`/data/overlay_signals.json`);
+            if (response.ok) {
+                const payload = await response.json();
+                const ov = payload?.tickers?.[ticker.toUpperCase()];
+                if (ov) {
+                    const lines: string[] = [];
+                    if (ov.gpr && ov.gpr.gpr_level !== undefined) {
+                        lines.push(`- Geopolitical exposure (LLM-tagged): level ${ov.gpr.gpr_level}/3${ov.gpr.channels?.length ? ` via ${ov.gpr.channels.join(", ")}` : ""}. ${ov.gpr.note ?? ""}`);
+                    }
+                    if (ov.informed_demand === 1) lines.push("- Informed demand: POSITIVE (insider net buying without rising short interest) — confirming signal.");
+                    if (ov.informed_demand === -1) lines.push("- Informed demand: NEGATIVE (insider selling with elevated/rising short interest) — treat as a red flag to interrogate.");
+                    if (lines.length) {
+                        overlayPriming = "## Risk Overlay Context\n\n" + lines.join("\n") + "\n\n";
+                    }
+                }
+            }
+        } catch (e) {
+            console.error(`Failed to fetch overlay signals for ${ticker}`, e);
+        }
+    }
+
     // Factor Lab valuation priming: implied-vs-evidenced growth from the
     // reverse-DCF model, so the deep engine starts from the expectations gap.
     let valuationPriming = "";
@@ -315,6 +352,6 @@ export async function buildPrompt(ticker: string, result: ScreeningResult): Prom
         rs2Content = "Failed to load RS2.txt prompt template.";
     }
 
-    return `${rs2Content}\n\n### Company Ticker: ${ticker.toUpperCase()}\n\n${reversePriming}${valuationPriming}${dataBrief}\n\n[DATA_BLOCK]\nAfter your full analysis above, you MUST append EXACTLY this JSON structure (NO markdown fences, NO extra text, multi-line with proper indentation). Replace ALL angle-bracket placeholders with actual numerical or string values from your analysis.\n\n{\n  "classification": {\n    "archetype": "<Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led / High-Beta|Regulatory>",\n    "valuation_engine": "<Engine 1|Engine 2|Engine 3|Engine 4|Engine 5>",\n    "sector": "<SECTOR_NAME>",\n    "moat_score": <0.0-10.0>,\n    "moat_direction": "<WIDENING|STABLE|NARROWING>",\n    "financial_strength": "<EXCELLENT|GOOD|ADEQUATE|WEAK|CONCERNING>",\n    "summary": "<2-3 sentence company snapshot>"\n  },\n  "macro": {\n    "dominant_regime": "<Goldilocks|Reflation|Stagflation|Recession>",\n    "regime_probability": <0.0-1.0>,\n    "rate_sensitivity": <-3 to +3 integer>,\n    "dollar_sensitivity": <-3 to +3 integer>,\n    "macro_impact_score": <-3.0 to +3.0 float>,\n    "summary": "<2-3 sentence macro impact on this stock>"\n  },\n  "valuation": {\n    "current_price": <number>,\n    "intrinsic_value": <number>,\n    "margin_of_safety_pct": <number>,\n    "valuation_status": "<UNDERVALUED|FAIR_TO_UNDERVALUED|FAIR|OVERVALUED>",\n    "core_value": <number>,\n    "execution_value": <number>,\n    "ecosystem_value": <number>,\n    "drag_value": <number>,\n    "ev_to_sales": <number>,\n    "ev_to_gross_profit": <number>,\n    "fcf_yield_pct": <number>,\n    "summary": "<2-3 sentence valuation thesis>"\n  },\n  "scenarios": {\n    "bear_price": <number>,\n    "bear_probability": <0.0-1.0>,\n    "base_price": <number>,\n    "base_probability": <0.0-1.0>,\n    "bull_execution_price": <number>,\n    "bull_execution_probability": <0.0-1.0>,\n    "bull_ecosystem_price": <number>,\n    "bull_ecosystem_probability": <0.0-1.0>,\n    "expected_price": <number>,\n    "summary": "<2-3 sentence scenario rationale>"\n  },\n  "growth": {\n    "revenue_growth_1y_pct": <number>,\n    "revenue_growth_3y_cagr_pct": <number>,\n    "eps_growth_1y_pct": <number>,\n    "margin_trajectory": "<Expanding|Stable|Contracting>",\n    "free_cash_flow_1y_pct": <number>,\n    "rule_of_40": <number>,\n    "summary": "<2-3 sentence growth outlook>"\n  },\n  "verdict": {\n    "conviction": <0.0-15.0>,\n    "action": "<BUY|ACCUMULATE|HOLD|SELL>",\n    "upside_pct": <number>,\n    "rating": "<Overpriced|Fair|Underpriced>",\n    "top_risk": "<single most impactful risk>",\n    "top_catalyst": "<single most impactful catalyst>",\n    "position_size_pct": <0.0-10.0>,\n    "model_confidence": "<High|Medium|Low>",\n    "summary": "<2-3 sentence investment thesis>"\n  }\n}`;
+    return `${rs2Content}\n\n### Company Ticker: ${ticker.toUpperCase()}\n\n${dataDiscipline}${reversePriming}${valuationPriming}${overlayPriming}${dataBrief}\n\n[DATA_BLOCK]\nAfter your full analysis above, you MUST append EXACTLY this JSON structure (NO markdown fences, NO extra text, multi-line with proper indentation). Replace ALL angle-bracket placeholders with actual numerical or string values from your analysis.\n\n{\n  "classification": {\n    "archetype": "<Stable Incumbent|Quality Compounder|Cyclical|Product-Platform Hybrid|Option-Led / High-Beta|Regulatory>",\n    "valuation_engine": "<Engine 1|Engine 2|Engine 3|Engine 4|Engine 5>",\n    "sector": "<SECTOR_NAME>",\n    "moat_score": <0.0-10.0>,\n    "moat_direction": "<WIDENING|STABLE|NARROWING>",\n    "financial_strength": "<EXCELLENT|GOOD|ADEQUATE|WEAK|CONCERNING>",\n    "summary": "<2-3 sentence company snapshot>"\n  },\n  "macro": {\n    "dominant_regime": "<Goldilocks|Reflation|Stagflation|Recession>",\n    "regime_probability": <0.0-1.0>,\n    "rate_sensitivity": <-3 to +3 integer>,\n    "dollar_sensitivity": <-3 to +3 integer>,\n    "macro_impact_score": <-3.0 to +3.0 float>,\n    "summary": "<2-3 sentence macro impact on this stock>"\n  },\n  "valuation": {\n    "current_price": <number>,\n    "intrinsic_value": <number>,\n    "margin_of_safety_pct": <number>,\n    "valuation_status": "<UNDERVALUED|FAIR_TO_UNDERVALUED|FAIR|OVERVALUED>",\n    "core_value": <number>,\n    "execution_value": <number>,\n    "ecosystem_value": <number>,\n    "drag_value": <number>,\n    "ev_to_sales": <number>,\n    "ev_to_gross_profit": <number>,\n    "fcf_yield_pct": <number>,\n    "summary": "<2-3 sentence valuation thesis>"\n  },\n  "scenarios": {\n    "bear_price": <number>,\n    "bear_probability": <0.0-1.0>,\n    "base_price": <number>,\n    "base_probability": <0.0-1.0>,\n    "bull_execution_price": <number>,\n    "bull_execution_probability": <0.0-1.0>,\n    "bull_ecosystem_price": <number>,\n    "bull_ecosystem_probability": <0.0-1.0>,\n    "expected_price": <number>,\n    "summary": "<2-3 sentence scenario rationale>"\n  },\n  "growth": {\n    "revenue_growth_1y_pct": <number>,\n    "revenue_growth_3y_cagr_pct": <number>,\n    "eps_growth_1y_pct": <number>,\n    "margin_trajectory": "<Expanding|Stable|Contracting>",\n    "free_cash_flow_1y_pct": <number>,\n    "rule_of_40": <number>,\n    "summary": "<2-3 sentence growth outlook>"\n  },\n  "verdict": {\n    "conviction": <0.0-15.0>,\n    "action": "<BUY|ACCUMULATE|HOLD|SELL>",\n    "upside_pct": <number>,\n    "rating": "<Overpriced|Fair|Underpriced>",\n    "top_risk": "<single most impactful risk>",\n    "top_catalyst": "<single most impactful catalyst>",\n    "position_size_pct": <0.0-10.0>,\n    "model_confidence": "<High|Medium|Low>",\n    "summary": "<2-3 sentence investment thesis>"\n  }\n}`;
 }
 
