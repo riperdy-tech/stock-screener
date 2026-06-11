@@ -1,5 +1,5 @@
-import { ScreenerDashboard } from "@/components/ScreenerDashboard";
+import CockpitDashboard from "@/components/CockpitDashboard";
 
 export default function Home() {
-    return <ScreenerDashboard />;
+    return <CockpitDashboard />;
 }
