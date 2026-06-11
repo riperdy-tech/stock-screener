@@ -256,6 +256,86 @@ export async function fetchParadigmScores(): Promise<Record<string, ParadigmResu
     }
 }
 
+// ── Factor Lab + Decision Cockpit sidecars ─────────────────────────────────
+
+export interface FactorEntry {
+    fct_composite: number | null;
+    fct_percentile: number | null;
+    fct_band: string | null;
+    fct_rank: number | null;
+    fct_veto: string | null;
+    fct_z: Record<string, number | null> | null;
+    fct_contributions: Record<string, number> | null;
+    fct_haircuts: Record<string, number> | null;
+}
+
+export interface FactorScoresPayload {
+    generated_at: string;
+    engine: string;
+    scored_count: number;
+    band_counts: Record<string, number>;
+    veto_counts: Record<string, number>;
+    weights_used: Record<string, number>;
+    weights_calibrated_at?: string;
+    tickers: Record<string, FactorEntry>;
+}
+
+export interface ValuationModel {
+    implied_growth: number | null;
+    implied_growth_clamped?: boolean;
+    hist_revenue_cagr_5y?: number | null;
+    hist_fcf_cagr_5y?: number | null;
+    trajectory_slope?: number | null;
+    expectations_gap_pts?: number | null;
+    verdict?: string;
+    reason?: string;
+    assumptions?: {
+        base_cf: number;
+        base_cf_kind: string;
+        fiscal_year: number;
+        wacc: number;
+        terminal_growth: number;
+        stage1_years: number;
+        fade_years: number;
+        market_cap: number;
+    };
+}
+
+async function fetchJson<T>(path: string): Promise<T | null> {
+    try {
+        const response = await fetch(`${path}?t=${new Date().getTime()}`);
+        if (!response.ok) return null;
+        return await response.json();
+    } catch (error) {
+        console.error(`Error loading ${path}:`, error);
+        return null;
+    }
+}
+
+export async function fetchFactorScores(): Promise<FactorScoresPayload | null> {
+    return fetchJson<FactorScoresPayload>('/data/factor_scores.json');
+}
+
+export async function fetchValuationModels(): Promise<{ generated_at: string; disclaimer: string; tickers: Record<string, ValuationModel> } | null> {
+    return fetchJson('/data/valuation_models.json');
+}
+
+export async function fetchPortfolioPlan(): Promise<any | null> {
+    return fetchJson('/data/portfolio_plan.json');
+}
+
+export async function fetchOutcomes(): Promise<any | null> {
+    return fetchJson('/data/outcome_backfill.json');
+}
+
+export async function fetchBacktest(): Promise<any | null> {
+    return fetchJson('/data/backtest_results.json');
+}
+
+export async function fetchFactorIc(): Promise<any | null> {
+    return fetchJson('/data/factor_ic.json');
+}
+
 export async function fetchParadigmHistory(): Promise<ParadigmHistoryPayload> {
     try {
         const response = await fetch(`/data/paradigm_history.json?t=${new Date().getTime()}`);

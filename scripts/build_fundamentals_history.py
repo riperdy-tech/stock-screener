@@ -53,38 +53,50 @@ SEC_HEADERS = {"User-Agent": "StockScreener/1.0 (contact@example.com)"}
 ANNUAL_FORMS = ("10-K", "10-K/A", "20-F", "40-F")
 MAX_YEARS = 12  # keep up to 12 fiscal years
 
-# Tag priority lists: first tag with data wins (never mix tags in one series).
+# Tag priority lists (us-gaap first, ifrs-full equivalents after — the two
+# namespaces are merged with us-gaap winning on name collisions). Foreign
+# filers reporting in non-USD units stay uncovered by design: the USD-only
+# unit filter prevents currency-mismatched yields (TSM files in TWD).
 DURATION_TAGS = {
     "revenue": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax",
-                "RevenueFromContractWithCustomerIncludingAssessedTax", "SalesRevenueNet"],
+                "RevenueFromContractWithCustomerIncludingAssessedTax", "SalesRevenueNet",
+                "Revenue", "RevenueFromContractsWithCustomers"],
     "gross_profit": ["GrossProfit"],
-    "operating_income": ["OperatingIncomeLoss"],
-    "net_income": ["NetIncomeLoss", "ProfitLoss"],
+    "operating_income": ["OperatingIncomeLoss", "ProfitLossFromOperatingActivities"],
+    "net_income": ["NetIncomeLoss", "ProfitLoss",
+                   "ProfitLossAttributableToOwnersOfParent"],
     "ocf": ["NetCashProvidedByUsedInOperatingActivities",
-            "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"],
+            "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations",
+            "CashFlowsFromUsedInOperatingActivities"],
     "capex": ["PaymentsToAcquirePropertyPlantAndEquipment",
-              "PaymentsToAcquireProductiveAssets"],
+              "PaymentsToAcquireProductiveAssets",
+              "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities"],
     "da": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization",
-           "DepreciationAmortizationAndAccretionNet"],
+           "DepreciationAmortizationAndAccretionNet",
+           "DepreciationAndAmortisationExpense"],
     "sga": ["SellingGeneralAndAdministrativeExpense",
             "GeneralAndAdministrativeExpense"],
     "interest_expense": ["InterestExpense", "InterestExpenseDebt"],
     "shares_diluted": ["WeightedAverageNumberOfDilutedSharesOutstanding",
-                       "WeightedAverageNumberOfSharesOutstandingBasic"],
+                       "WeightedAverageNumberOfSharesOutstandingBasic",
+                       "WeightedAverageShares", "AdjustedWeightedAverageShares"],
 }
 INSTANT_TAGS = {
     "total_assets": ["Assets"],
-    "current_assets": ["AssetsCurrent"],
-    "current_liabilities": ["LiabilitiesCurrent"],
+    "current_assets": ["AssetsCurrent", "CurrentAssets"],
+    "current_liabilities": ["LiabilitiesCurrent", "CurrentLiabilities"],
     "total_liabilities": ["Liabilities"],
     "equity": ["StockholdersEquity",
-               "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
+               "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+               "Equity"],
     "cash": ["CashAndCashEquivalentsAtCarryingValue",
-             "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"],
+             "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+             "CashAndCashEquivalents"],
     "lt_debt": ["LongTermDebtNoncurrent", "LongTermDebt"],
-    "receivables": ["AccountsReceivableNetCurrent", "ReceivablesNetCurrent"],
-    "inventory": ["InventoryNet"],
-    "ppe_net": ["PropertyPlantAndEquipmentNet"],
+    "receivables": ["AccountsReceivableNetCurrent", "ReceivablesNetCurrent",
+                    "TradeAndOtherCurrentReceivables"],
+    "inventory": ["InventoryNet", "Inventories"],
+    "ppe_net": ["PropertyPlantAndEquipmentNet", "PropertyPlantAndEquipment"],
 }
 SHARES_UNIT = "shares"
 
@@ -416,7 +428,10 @@ def main():
             except Exception:
                 no_entry += 1
                 continue
-            facts = data.get("facts", {}).get("us-gaap", {})
+            facts_all = data.get("facts", {})
+            # Merge namespaces; us-gaap wins on name collisions
+            facts = dict(facts_all.get("ifrs-full", {}))
+            facts.update(facts_all.get("us-gaap", {}))
             history = extract_history(facts)
             if not history:
                 no_history += 1

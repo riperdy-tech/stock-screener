@@ -361,3 +361,28 @@ Momentum is **v2** (12-1 skip-month + 52w-high proximity + 6m return,
 `paradigm_config.json → momentum.version`). Hot-theme thresholds use baseline
 membership + hysteresis (fixes the 40↔146 ai_compute oscillation). Beneish/
 Altman placeholders are gone — missing data is null, never silently safe.
+
+---
+
+## 🧪 Factor Lab + Decision Cockpit (June 2026 revamp)
+
+The primary ranking engine is now **Factor Lab** (`scripts/score_factors.py`):
+sector-neutral winsorized z-scores across six factors (value, quality,
+momentum, low-vol, revisions, theme), composite weights **calibrated from
+measured rank-IC** in the point-in-time backtest (`factor_ic.json` →
+`calibrate_factor_weights.py` → `scripts/factor_weights.json`, recalibrated
+monthly via `factor-recalibration.yml`). Hard vetoes preserve the anti-Nikola
+floor. `score_unified.py` is retired from the chain (kept on disk).
+
+`scripts/build_valuation_models.py` adds reverse-DCF expectations models for
+research_now/watchlist names: implied growth vs demonstrated 5y CAGR →
+expectations gap. The math is mirrored client-side in `lib/dcf.ts` for the
+interactive workbench, and injected into the AI prompt by `prompt-builder.ts`.
+
+**Frontend**: `/` is the **Decision Cockpit** (`components/CockpitDashboard.tsx`)
+— Rankings (factor table + contribution bars + DCF gap), Research Queue,
+Portfolio (rendered plan + allocation charts), Validation (backtest equity
+curve, quarterly excess, per-factor IC history, live outcome table; recharts).
+The four legacy lenses are unchanged at **/lenses**. Factor signals are
+forward-logged (`factor_signal_log.jsonl`) and evaluated by
+`backfill_outcomes.py` as the `factor_research_now` source.

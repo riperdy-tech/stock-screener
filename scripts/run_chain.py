@@ -111,8 +111,11 @@ def main():
     if ok and not run_step("score_paradigm", ["scripts/score_paradigm.py"], steps):
         print("FATAL: score_paradigm failed.")
         ok = False
-    if ok and not run_step("score_unified", ["scripts/score_unified.py"], steps):
-        print("FATAL: score_unified failed.")
+    if ok and not run_step("score_factors", ["scripts/score_factors.py"], steps):
+        print("FATAL: score_factors failed.")
+        ok = False
+    if ok and not run_step("build_valuation_models", ["scripts/build_valuation_models.py"], steps):
+        print("FATAL: build_valuation_models failed.")
         ok = False
 
     # ── Post-run invariants (artifact-based, not stdout-parsed) ─────────
@@ -158,14 +161,37 @@ def main():
         add_invariant(invariants, "paradigm_coverage", "hard", len(paradigm_scores) >= 0.95 * n_stocks,
                       f"{len(paradigm_scores)} paradigm rows vs {n_stocks} stocks")
 
-        unified_path = DATA / "unified_scores.json"
-        unified = load_json(unified_path) if unified_path.exists() else {}
-        uni_scored = unified.get("scored_count", 0)
-        add_invariant(invariants, "unified_scored", "hard", uni_scored >= 500,
-                      f"{uni_scored} stocks carry a unified score (min 500)")
-        research_now = unified.get("band_counts", {}).get("research_now", 0)
-        add_invariant(invariants, "unified_research_now", "soft", research_now >= 10,
+        factor_path = DATA / "factor_scores.json"
+        factor = load_json(factor_path) if factor_path.exists() else {}
+        fct_scored = factor.get("scored_count", 0)
+        add_invariant(invariants, "factor_scored", "hard", fct_scored >= 500,
+                      f"{fct_scored} stocks carry a Factor Lab score (min 500)")
+        research_now = factor.get("band_counts", {}).get("research_now", 0)
+        add_invariant(invariants, "factor_research_now", "soft", research_now >= 10,
                       f"{research_now} research_now candidates")
+
+        valuation_path = DATA / "valuation_models.json"
+        valuation = load_json(valuation_path) if valuation_path.exists() else {}
+        add_invariant(invariants, "valuation_models", "soft",
+                      valuation.get("modeled_count", 0) >= 50,
+                      f"{valuation.get('modeled_count', 0)} reverse-DCF models built")
+
+        # ── Factor Lab forward log (dated, append-only — outcome tracking) ──
+        factor_log = DATA / "factor_signal_log.jsonl"
+        log_rows = [
+            {"symbol": sym, "fct_composite": e.get("fct_composite"),
+             "fct_rank": e.get("fct_rank"), "fct_band": e.get("fct_band")}
+            for sym, e in (factor.get("tickers") or {}).items()
+            if e.get("fct_band") in ("research_now", "watchlist")
+        ]
+        with factor_log.open("a", encoding="utf-8") as f:
+            f.write(json.dumps({
+                "run_id": run_id,
+                "snapshot_date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                "engine": factor.get("engine", "factor_lab_v1"),
+                "signals": sorted(log_rows, key=lambda x: (x.get("fct_rank") or 10**9)),
+            }, sort_keys=True) + "\n")
+        print(f"  Appended {len(log_rows)} factor signals to {factor_log.name}")
 
         # Theme membership drift vs previous run (hot flips are legal but must be visible)
         theme_counts = {}
