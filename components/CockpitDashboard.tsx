@@ -18,10 +18,11 @@ import {
 } from 'recharts';
 import {
     fetchBacktest, fetchFactorIc, fetchFactorScores, fetchOutcomes,
-    fetchPortfolioPlan, fetchStocks, fetchValuationModels,
+    fetchOverlaySignals, fetchPortfolioPlan, fetchStocks, fetchValuationModels,
     FactorEntry, FactorScoresPayload, ValuationModel,
 } from '@/lib/data-service';
 import { dcfValue } from '@/lib/dcf';
+import { quarterKelly, POSITION_CAP_PCT } from '@/lib/kelly';
 
 type TabId = 'rankings' | 'research' | 'portfolio' | 'validation';
 
@@ -33,11 +34,36 @@ interface StockInfo {
     marketCap: number;
 }
 
-const FACTOR_ORDER = ['value', 'quality', 'momentum', 'lowvol', 'revisions', 'theme'] as const;
+// Five robust factors, equal-weighted (theme = context tag, never additive)
+const FACTOR_ORDER = ['value', 'quality', 'momentum', 'lowvol', 'revisions'] as const;
 const FACTOR_COLORS: Record<string, string> = {
     value: '#34d399', quality: '#38bdf8', momentum: '#fbbf24',
-    lowvol: '#a78bfa', revisions: '#fb7185', theme: '#c084fc',
+    lowvol: '#a78bfa', revisions: '#fb7185',
 };
+const GPR_STYLES: Record<number, string> = {
+    0: 'border-border bg-secondary/30 text-muted-foreground',
+    1: 'border-sky-500/40 bg-sky-500/10 text-sky-300',
+    2: 'border-amber-500/40 bg-amber-500/10 text-amber-300',
+    3: 'border-red-500/40 bg-red-500/10 text-red-300',
+};
+
+function OverlayChips({ overlay }: { overlay: any }) {
+    if (!overlay) return null;
+    const gpr = overlay.gpr;
+    const demand = overlay.informed_demand;
+    return (
+        <span className="inline-flex items-center gap-1.5">
+            {gpr && gpr.gpr_level !== undefined && (
+                <span className={clsx('inline-flex rounded-md border px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider', GPR_STYLES[gpr.gpr_level] || GPR_STYLES[0])}
+                    title={`Geopolitical exposure ${gpr.gpr_level}/3${gpr.channels?.length ? ` (${gpr.channels.join(', ')})` : ''}: ${gpr.note || ''}`}>
+                    GPR {gpr.gpr_level}
+                </span>
+            )}
+            {demand === 1 && <span className="text-[10px] font-black text-emerald-300" title="Informed demand positive: insider net buying without rising short interest">▲ INSIDERS</span>}
+            {demand === -1 && <span className="text-[10px] font-black text-red-300" title="Informed demand negative: insider selling with elevated/rising short interest">▼ INSIDERS</span>}
+        </span>
+    );
+}
 const BAND_STYLES: Record<string, string> = {
     research_now: 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300',
     watchlist: 'border-sky-500/40 bg-sky-500/15 text-sky-300',
@@ -85,7 +111,8 @@ function HelpModal({ onClose }: { onClose: () => void }) {
 
                     <HelpSection title="Rankings tab">
                         <p><b>Composite</b> (0–100): the weighted mix of six factor scores. Each factor is measured against the stock&apos;s OWN SECTOR — a bank competes with banks, so &quot;high momentum&quot; can&apos;t just mean &quot;is a tech stock.&quot;</p>
-                        <p><b>The six factors</b>: <span className="text-emerald-300">value</span> (cheap vs cash flows), <span className="text-sky-300">quality</span> (profitable, stable, clean accounting), <span className="text-amber-300">momentum</span> (12-month winner, near its high), <span className="text-violet-300">low-vol</span> (calm price behavior), <span className="text-rose-300">revisions</span> (estimates improving), <span className="text-purple-300">theme</span> (in a validated secular trend). The weights are not opinions — they come from measuring which factors actually predicted returns in our own historical test (see Validation tab).</p>
+                        <p><b>The five factors</b>: <span className="text-emerald-300">value</span> (cheap vs cash flows), <span className="text-sky-300">quality</span> (profitable, stable, clean accounting), <span className="text-amber-300">momentum</span> (12-month winner, near its high), <span className="text-violet-300">low-vol</span> (calm price behavior), <span className="text-rose-300">revisions</span> (estimates improving). They are <b>equal-weighted on purpose</b>: decades of research (DeMiguel et al. 2009) show weights estimated from backtests overfit and lose to simple 1/N out-of-sample. We still MEASURE each factor&apos;s predictive power (Validation tab) — we just don&apos;t let short samples steer the engine.</p>
+                        <p><b>Theme is a context tag, not a factor</b>: naive theme-chasing destroys value (specialized theme ETFs average −3.1%/yr), so theme membership is shown for orientation and risk (late-cycle crowding warnings) but never adds to the score.</p>
                         <p><b>Band</b>: Research Now = top 3% · Watchlist = top 10% · Monitor = top 30% · Pass = the rest.</p>
                         <p><b>Veto</b> (red chip): automatic disqualification regardless of score — failed the reverse engine&apos;s safety checks, fired both forensic-accounting alarms, or is heavily diluting shareholders. The reason is written on the chip.</p>
                         <p><b>DCF gap</b>: compares the growth the current PRICE requires vs the growth the company has actually DELIVERED (last 5 years of SEC filings). <span className="text-emerald-300">Green negative</span> = priced for less growth than demonstrated (potential bargain). <span className="text-amber-300">Amber positive</span> = price needs acceleration nobody has proven yet (you must believe a story).</p>
@@ -97,10 +124,14 @@ function HelpModal({ onClose }: { onClose: () => void }) {
                     </HelpSection>
 
                     <HelpSection title="Portfolio tab">
-                        <p><b>This is NOT your portfolio.</b> It is a machine-suggested allocation plan, regenerated after every scoring run, showing how a disciplined 100% portfolio COULD be arranged from the reverse engine&apos;s 25 nominated stocks.</p>
-                        <p><b>Weight</b> = suggested position size. Sturdier companies (higher survivability) get more; risky archetypes and micro-caps get less; any forensic flag halves the size. Caps: max 25% per sector, max 30% per theme — whatever doesn&apos;t fit stays as <b>cash</b> (that&apos;s why cash is large).</p>
-                        <p><b>Macro flags</b>: warning lights from Fed data (yield curve, credit spreads). If 2+ fire, every position size halves automatically (&quot;de-risk&quot;).</p>
-                        <p>The bar charts just redraw the table: how the suggested money spreads across sectors and themes.</p>
+                        <p><b>My Portfolio (top)</b>: enter your ACTUAL holdings (saved only in this browser) and each is checked against the model: a quarter-Kelly suggested size, an over/under-weight verdict, and loud flags if a holding is vetoed or outside coverage.</p>
+                        <p><b>Suggested plan (below)</b>: NOT your portfolio — a machine-built allocation from the Research Now list. <b>Sizing is quarter-Kelly</b>: expected edge = the expectations gap closing over ~3 years (only names priced BELOW their demonstrated growth have measurable edge — that&apos;s why many high-ranked names are skipped with &quot;no Kelly edge&quot;); risk = price volatility; f = 0.25 × edge/risk², capped at 5%. Forensic flags halve size; geopolitical exposure (GPR 2-3) and insider selling shrink it further; sector 25% / theme 30% caps; the rest stays cash.</p>
+                        <p><b>Macro flags</b>: warning lights from Fed data. If 2+ fire, every size halves automatically.</p>
+                    </HelpSection>
+
+                    <HelpSection title="Overlay chips (GPR / insiders)">
+                        <p><b>GPR 0-3</b>: geopolitical exposure tagged from the company&apos;s actual business profile (revenue geography, supply chains, regulation, sanctions). Never a buy/sell signal — it shrinks position sizes and demands a bigger margin of safety at level 3.</p>
+                        <p><b>▲/▼ INSIDERS</b>: &quot;informed demand&quot; — insiders net-buying while short sellers retreat (▲, confirming) or insiders selling into elevated short interest (▼, interrogate the thesis). Confirmation/warning only, never additive score.</p>
                     </HelpSection>
 
                     <HelpSection title="Validation tab — &quot;does this even work?&quot;">
@@ -264,6 +295,155 @@ function ValuationWorkbench({ ticker, model, marketCap }: { ticker: string; mode
     );
 }
 
+interface Holding { ticker: string; value: number; }
+const MY_PORTFOLIO_KEY = 'myPortfolio_v1';
+
+function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect }: {
+    factor: Record<string, FactorEntry>;
+    valuations: Record<string, ValuationModel>;
+    overlay: Record<string, any>;
+    stockInfo: Record<string, StockInfo>;
+    onSelect: (t: string) => void;
+}) {
+    const [holdings, setHoldings] = useState<Holding[]>([]);
+    const [cash, setCash] = useState<number>(0);
+    const [newTicker, setNewTicker] = useState('');
+    const [newValue, setNewValue] = useState('');
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        try {
+            const raw = localStorage.getItem(MY_PORTFOLIO_KEY);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                setHoldings(Array.isArray(parsed.holdings) ? parsed.holdings : []);
+                setCash(typeof parsed.cash === 'number' ? parsed.cash : 0);
+            }
+        } catch { /* fresh start */ }
+        setLoaded(true);
+    }, []);
+
+    useEffect(() => {
+        if (!loaded) return;
+        try {
+            localStorage.setItem(MY_PORTFOLIO_KEY, JSON.stringify({ holdings, cash }));
+        } catch { /* storage full/blocked — non-fatal */ }
+    }, [holdings, cash, loaded]);
+
+    const total = holdings.reduce((s, h) => s + h.value, 0) + cash;
+
+    const addHolding = () => {
+        const t = newTicker.trim().toUpperCase();
+        const v = parseFloat(newValue);
+        if (!t || !Number.isFinite(v) || v <= 0) return;
+        setHoldings(prev => [...prev.filter(h => h.ticker !== t), { ticker: t, value: v }]);
+        setNewTicker('');
+        setNewValue('');
+    };
+
+    const sectorWeights: Record<string, number> = {};
+    const rows = holdings.map(h => {
+        const wt = total > 0 ? (h.value / total) * 100 : 0;
+        const entry = factor[h.ticker];
+        const vm = valuations[h.ticker];
+        const k = quarterKelly({
+            expectationsGapPts: vm?.expectations_gap_pts,
+            annualizedVol: entry?.fct_vol,
+        });
+        const vetoed = !!entry?.fct_veto;
+        const modelWt = vetoed ? 0 : k.weightPct;
+        let verdict: string;
+        let tone: string;
+        if (!entry) { verdict = 'NO COVERAGE'; tone = 'text-muted-foreground'; }
+        else if (vetoed) { verdict = `VETOED (${entry.fct_veto!.replace(/_/g, ' ')})`; tone = 'text-red-300'; }
+        else if (modelWt === null) { verdict = k.reason.toUpperCase(); tone = 'text-muted-foreground'; }
+        else if (wt > modelWt + 1) { verdict = 'OVERWEIGHT'; tone = 'text-amber-300'; }
+        else if (wt < modelWt - 1) { verdict = 'UNDERWEIGHT'; tone = 'text-sky-300'; }
+        else { verdict = 'ALIGNED'; tone = 'text-emerald-300'; }
+        const sector = stockInfo[h.ticker]?.sector || 'Unknown';
+        sectorWeights[sector] = (sectorWeights[sector] || 0) + wt;
+        return { ...h, wt, entry, vm, k, modelWt, verdict, tone, sector };
+    });
+
+    const covered = rows.filter(r => r.entry && r.entry.fct_composite !== null);
+    const weightedComposite = covered.length
+        ? covered.reduce((s, r) => s + (r.entry!.fct_composite! * r.wt), 0) / covered.reduce((s, r) => s + r.wt, 0)
+        : null;
+    const sectorBreaches = Object.entries(sectorWeights).filter(([, w]) => w > 25);
+
+    return (
+        <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/[0.03] p-3">
+            <h3 className="text-sm font-black uppercase tracking-wider text-emerald-300">My Portfolio — Kelly check</h3>
+            <p className="mt-1 text-[11px] text-muted-foreground">
+                Enter your ACTUAL holdings (stored only in this browser). Each is compared against the model&apos;s
+                quarter-Kelly suggested size (cap {POSITION_CAP_PCT}%) and flagged if it&apos;s vetoed or oversized.
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+                <input value={newTicker} onChange={e => setNewTicker(e.target.value)} placeholder="Ticker"
+                    onKeyDown={e => e.key === 'Enter' && addHolding()}
+                    className="w-24 rounded-md border border-border bg-secondary/20 px-2 py-1.5 text-xs font-bold uppercase outline-none focus:border-emerald-500/50" />
+                <input value={newValue} onChange={e => setNewValue(e.target.value)} placeholder="Value $"
+                    type="number" min="0" onKeyDown={e => e.key === 'Enter' && addHolding()}
+                    className="w-28 rounded-md border border-border bg-secondary/20 px-2 py-1.5 text-xs font-bold outline-none focus:border-emerald-500/50" />
+                <button onClick={addHolding}
+                    className="rounded-md border border-emerald-500/40 bg-emerald-500/15 px-3 py-1.5 text-xs font-black text-emerald-300 hover:bg-emerald-500/25">
+                    Add / Update
+                </button>
+                <label className="ml-2 flex items-center gap-1.5 text-xs text-muted-foreground">
+                    Cash $
+                    <input value={cash || ''} onChange={e => setCash(parseFloat(e.target.value) || 0)} type="number" min="0"
+                        className="w-28 rounded-md border border-border bg-secondary/20 px-2 py-1.5 text-xs font-bold outline-none focus:border-emerald-500/50" />
+                </label>
+            </div>
+
+            {rows.length > 0 && (
+                <>
+                    <div className="mt-3 overflow-x-auto">
+                        <table className="w-full min-w-[760px] text-left text-xs">
+                            <thead className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                                <tr><th className="px-2 py-1.5">Sym</th><th className="px-2 py-1.5 text-right">Value</th>
+                                    <th className="px-2 py-1.5 text-right">Your wt</th><th className="px-2 py-1.5 text-right">Kelly wt</th>
+                                    <th className="px-2 py-1.5">Verdict</th><th className="px-2 py-1.5 text-right">Gap</th>
+                                    <th className="px-2 py-1.5">Band</th><th className="px-2 py-1.5">Overlay</th><th className="px-2 py-1.5" /></tr>
+                            </thead>
+                            <tbody>
+                                {rows.map(r => (
+                                    <tr key={r.ticker} className="border-t border-border/50">
+                                        <td className="cursor-pointer px-2 py-1.5 font-black hover:text-emerald-300"
+                                            onClick={() => r.entry && onSelect(r.ticker)}>{r.ticker}</td>
+                                        <td className="px-2 py-1.5 text-right font-mono">${r.value.toLocaleString()}</td>
+                                        <td className="px-2 py-1.5 text-right font-mono font-black">{r.wt.toFixed(1)}%</td>
+                                        <td className="px-2 py-1.5 text-right font-mono">{r.modelWt === null ? '—' : `${r.modelWt.toFixed(1)}%`}</td>
+                                        <td className={clsx('px-2 py-1.5 text-[10px] font-black', r.tone)} title={r.k.reason}>{r.verdict}</td>
+                                        <td className="px-2 py-1.5 text-right font-mono">
+                                            {r.vm?.expectations_gap_pts !== null && r.vm?.expectations_gap_pts !== undefined
+                                                ? `${r.vm.expectations_gap_pts > 0 ? '+' : ''}${r.vm.expectations_gap_pts.toFixed(0)}pts` : '—'}
+                                        </td>
+                                        <td className="px-2 py-1.5">{r.entry ? <BandChip band={r.entry.fct_band} veto={r.entry.fct_veto} /> : <span className="text-muted-foreground">—</span>}</td>
+                                        <td className="px-2 py-1.5"><OverlayChips overlay={overlay[r.ticker]} /></td>
+                                        <td className="px-2 py-1.5 text-right">
+                                            <button onClick={() => setHoldings(prev => prev.filter(h => h.ticker !== r.ticker))}
+                                                className="text-muted-foreground hover:text-red-300" title="Remove"><X className="h-3.5 w-3.5" /></button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-3 text-[11px] text-muted-foreground">
+                        <span>Total: <b className="font-mono text-foreground">${total.toLocaleString()}</b></span>
+                        <span>Cash: <b className="font-mono text-foreground">{total > 0 ? ((cash / total) * 100).toFixed(1) : 0}%</b></span>
+                        {weightedComposite !== null && <span>Weighted composite: <b className="font-mono text-foreground">{weightedComposite.toFixed(1)}</b></span>}
+                        {sectorBreaches.map(([s, w]) => (
+                            <span key={s} className="font-bold text-amber-300">⚠ {s} {w.toFixed(0)}% (&gt;25% concentration rule)</span>
+                        ))}
+                    </div>
+                </>
+            )}
+        </div>
+    );
+}
+
 export default function CockpitDashboard() {
     const [tab, setTab] = useState<TabId>('rankings');
     const [factor, setFactor] = useState<FactorScoresPayload | null>(null);
@@ -272,6 +452,7 @@ export default function CockpitDashboard() {
     const [outcomes, setOutcomes] = useState<any | null>(null);
     const [backtest, setBacktest] = useState<any | null>(null);
     const [ic, setIc] = useState<any | null>(null);
+    const [overlay, setOverlay] = useState<Record<string, any>>({});
     const [stockInfo, setStockInfo] = useState<Record<string, StockInfo>>({});
     const [loading, setLoading] = useState(true);
 
@@ -284,9 +465,9 @@ export default function CockpitDashboard() {
 
     const loadAll = async () => {
         setLoading(true);
-        const [f, v, p, o, b, i, s] = await Promise.all([
+        const [f, v, p, o, b, i, ov, s] = await Promise.all([
             fetchFactorScores(), fetchValuationModels(), fetchPortfolioPlan(),
-            fetchOutcomes(), fetchBacktest(), fetchFactorIc(), fetchStocks('US'),
+            fetchOutcomes(), fetchBacktest(), fetchFactorIc(), fetchOverlaySignals(), fetchStocks('US'),
         ]);
         setFactor(f);
         setValuations(v?.tickers ?? {});
@@ -294,6 +475,7 @@ export default function CockpitDashboard() {
         setOutcomes(o);
         setBacktest(b);
         setIc(i);
+        setOverlay(ov?.tickers ?? {});
         const info: Record<string, StockInfo> = {};
         for (const row of (s.data as any[])) {
             if (row.symbol) {
@@ -524,12 +706,14 @@ export default function CockpitDashboard() {
                 {/* ── Portfolio ──────────────────────────────────────── */}
                 {tab === 'portfolio' && (plan ? (
                     <div className="space-y-4">
+                        <MyPortfolio factor={factor?.tickers ?? {}} valuations={valuations}
+                            overlay={overlay} stockInfo={stockInfo} onSelect={setSelected} />
                         <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
                             <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
                             <p>
-                                <b>Suggested plan, not your holdings.</b> The machine sizes the reverse engine&apos;s 25 nominated stocks
-                                (sturdier = bigger, flagged = halved), caps each sector at 25% and theme at 30%, and leaves the rest
-                                as cash. Regenerates after every scoring run — a starting sheet for your decisions, never orders.{' '}
+                                <b>Suggested plan, not your holdings.</b> The machine sizes the Factor Lab research_now names with
+                                quarter-Kelly (edge from the expectations gap, risk from volatility; no negative gap = no position),
+                                halves flagged names, caps sectors at 25% / themes at 30%, leaves the rest as cash.{' '}
                                 <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
                             </p>
                         </div>
@@ -553,23 +737,22 @@ export default function CockpitDashboard() {
                                 <thead className="bg-secondary/60 text-[10px] font-black uppercase tracking-wider text-muted-foreground">
                                     <tr>
                                         <th className="px-3 py-2">Sym</th><th className="px-3 py-2 text-right">Weight</th>
-                                        <th className="px-3 py-2">Arch</th><th className="px-3 py-2 text-right">RevComp</th>
-                                        <th className="px-3 py-2 text-right">Surv</th><th className="px-3 py-2 text-right">FctRank</th>
-                                        <th className="px-3 py-2">FctBand</th><th className="px-3 py-2">Theme</th><th className="px-3 py-2">Flags</th>
+                                        <th className="px-3 py-2">Sizing</th><th className="px-3 py-2 text-right">Gap</th>
+                                        <th className="px-3 py-2 text-right">FctRank</th>
+                                        <th className="px-3 py-2">Theme (context)</th><th className="px-3 py-2">Overlay</th><th className="px-3 py-2">Flags</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {(plan.positions ?? []).map((p: any) => (
                                         <tr key={p.symbol} onClick={() => setSelected(p.symbol)}
                                             className="cursor-pointer border-t border-border/50 odd:bg-secondary/10 hover:bg-emerald-500/[0.06]">
-                                            <td className="px-3 py-2 font-black">{p.symbol}</td>
+                                            <td className="px-3 py-2 font-black">{p.symbol}{p.rev_nominated && <span className="ml-1 text-[9px] font-black text-sky-300" title="Also nominated by the reverse engine — independent confirmation">✓REV</span>}</td>
                                             <td className="px-3 py-2 text-right font-mono font-black">{p.weight_pct}%</td>
-                                            <td className="px-3 py-2">{p.archetype}</td>
-                                            <td className="px-3 py-2 text-right font-mono">{p.composite}</td>
-                                            <td className="px-3 py-2 text-right font-mono">{p.survivability}</td>
+                                            <td className="px-3 py-2 text-[10px] font-bold uppercase text-muted-foreground">{(p.sizing_method || '').replace('_', ' ')}</td>
+                                            <td className="px-3 py-2 text-right font-mono">{p.expectations_gap_pts !== null && p.expectations_gap_pts !== undefined ? `${p.expectations_gap_pts > 0 ? '+' : ''}${Math.round(p.expectations_gap_pts)}` : '—'}</td>
                                             <td className="px-3 py-2 text-right font-mono">{p.fct_rank ?? '—'}</td>
-                                            <td className="px-3 py-2"><BandChip band={p.fct_band} veto={null} /></td>
                                             <td className="px-3 py-2 text-muted-foreground">{p.theme_primary || '—'}</td>
+                                            <td className="px-3 py-2"><OverlayChips overlay={overlay[p.symbol]} /></td>
                                             <td className="px-3 py-2 text-[10px] text-red-300">{(p.forensic_flags ?? []).join(', ') || '—'}</td>
                                         </tr>
                                     ))}
@@ -610,7 +793,7 @@ export default function CockpitDashboard() {
                         </div>
                         {backtest?.survivorship_caveat && (
                             <p className="rounded-md border border-amber-500/40 bg-amber-500/10 p-2.5 text-xs font-bold text-amber-200">
-                                ⚠ {backtest.survivorship_caveat}
+                                ⚠ {backtest.survivorship_caveat} Expect live performance ≈ half of these numbers (post-publication decay, McLean-Pontiff 2016).
                             </p>
                         )}
                         <div className="flex flex-wrap gap-3">
@@ -658,7 +841,7 @@ export default function CockpitDashboard() {
                         </div>
                         <div className="rounded-lg border border-border bg-card/95 p-3">
                             <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
-                                Per-factor rank-IC by quarter (these calibrate the composite weights)
+                                Per-factor rank-IC by quarter (diagnostic only — the composite is equal-weighted by design)
                             </h3>
                             <ResponsiveContainer width="100%" height={240}>
                                 <LineChart data={icCurve}>
@@ -729,6 +912,7 @@ export default function CockpitDashboard() {
                             <BandChip band={selectedEntry.fct_band} veto={selectedEntry.fct_veto} />
                             {selectedEntry.fct_rank && <span className="font-mono text-xs font-black text-muted-foreground">rank #{selectedEntry.fct_rank}</span>}
                             {selectedEntry.fct_composite !== null && <span className="font-mono text-lg font-black text-emerald-300">{selectedEntry.fct_composite.toFixed(1)}</span>}
+                            <OverlayChips overlay={overlay[selected!]} />
                             <a href={`https://www.tradingview.com/chart/?symbol=${selected}`} target="_blank" rel="noreferrer"
                                 className="ml-auto flex items-center gap-1 rounded-md border border-border bg-secondary/20 px-2 py-1 text-[10px] font-bold text-muted-foreground hover:text-foreground">
                                 TradingView <ExternalLink className="h-3 w-3" />
@@ -740,6 +924,13 @@ export default function CockpitDashboard() {
                         {selectedEntry.fct_haircuts && (
                             <p className="mt-2 text-[10px] text-muted-foreground">
                                 Haircuts — survivability ×{selectedEntry.fct_haircuts.survivability}, data quality ×{selectedEntry.fct_haircuts.data_quality}, forensic ×{selectedEntry.fct_haircuts.forensic}
+                            </p>
+                        )}
+                        {selectedEntry.fct_context?.theme_primary && (
+                            <p className="mt-2 rounded-md border border-purple-500/30 bg-purple-500/[0.06] p-2 text-[11px] text-purple-200/90">
+                                <b>Context (not scored):</b> theme {selectedEntry.fct_context.theme_primary}
+                                {selectedEntry.fct_context.theme_score !== null ? ` (strength ${selectedEntry.fct_context.theme_score}/100)` : ''} — themes are a
+                                hunting ground and risk tag, never additive alpha.
                             </p>
                         )}
 

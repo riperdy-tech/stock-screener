@@ -265,6 +265,8 @@ export interface FactorEntry {
     fct_rank: number | null;
     fct_veto: string | null;
     fct_z: Record<string, number | null> | null;
+    fct_context?: { theme_score: number | null; theme_primary: string | null; pdm_band: string | null } | null;
+    fct_vol?: number | null;
     fct_contributions: Record<string, number> | null;
     fct_haircuts: Record<string, number> | null;
 }
@@ -334,6 +336,10 @@ export async function fetchBacktest(): Promise<any | null> {
 
 export async function fetchFactorIc(): Promise<any | null> {
     return fetchJson('/data/factor_ic.json');
+}
+
+export async function fetchOverlaySignals(): Promise<any | null> {
+    return fetchJson('/data/overlay_signals.json');
 }
 
 export async function fetchParadigmHistory(): Promise<ParadigmHistoryPayload> {

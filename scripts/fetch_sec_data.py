@@ -186,10 +186,9 @@ def main():
         if metrics:
             sec_data[ticker] = metrics
             
-    # Save isolated SEC data
-    with open('public/data/sec_momentum.json', 'w') as f:
-        json.dump(sec_data, f, indent=2)
-        
+    # (sec_momentum.json sidecar removed June 2026 — it had zero consumers;
+    # the fields below are merged into stocks.json / stocks.csv instead.)
+
     # Merge into individual detail JSON files and top-level stocks.json metrics
     updated_count = 0
     for s in stocks:

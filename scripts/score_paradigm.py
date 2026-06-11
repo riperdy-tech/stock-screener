@@ -764,6 +764,24 @@ def compute_theme_metrics(price_history, stocks, themes, momentum_scores,
         median_mom = round(statistics.median(momentum_vals)) if momentum_vals else None
         return median_mom, breadth, total_with_ma
 
+    def median_inst_ownership(members):
+        """Median institutional ownership of theme members (late-cycle crowding
+        input, doc §D: themes are most dangerous when ownership is saturated)."""
+        values = []
+        for sym in members:
+            detail_path = DATA_DIR / "financials" / f"{sym}.json"
+            if not detail_path.exists():
+                continue
+            try:
+                with detail_path.open("r", encoding="utf-8") as f:
+                    cm = (json.load(f).get("Calculated_Metrics") or {})
+                ih = cm.get("Held_Percent_Institutions")
+                if isinstance(ih, (int, float)) and math.isfinite(ih):
+                    values.append(ih)
+            except (OSError, json.JSONDecodeError, ValueError):
+                continue
+        return round(statistics.median(values), 3) if values else None
+
     theme_metrics = {}
     for theme in themes:
         tid = theme["id"]
@@ -779,6 +797,17 @@ def compute_theme_metrics(price_history, stocks, themes, momentum_scores,
         base_set = sorted((baseline_members or {}).get(tid) or set())
         baseline_median, baseline_breadth, _ = med_breadth(base_set)
 
+        # Late-cycle crowding check (display-only; never changes scoring)
+        med_inst = median_inst_ownership(tagged_members)
+        etf_launch = theme.get("etf_launch_date")  # optional operator field
+        etf_recent = False
+        if etf_launch:
+            try:
+                launch = datetime.strptime(etf_launch, "%Y-%m-%d")
+                etf_recent = (datetime.now() - launch).days < 18 * 30
+            except ValueError:
+                pass
+
         theme_metrics[tid] = {
             "tagged_count": tagged_count,
             "tagged_with_history_count": total_with_ma,
@@ -788,6 +817,9 @@ def compute_theme_metrics(price_history, stocks, themes, momentum_scores,
             "baseline_median_momentum": baseline_median,
             "baseline_breadth_pct": baseline_breadth,
             "hot": tid in (hot_themes or []),
+            "median_inst_ownership": med_inst,
+            "late_cycle_crowding": bool(med_inst is not None and med_inst > 0.85) or etf_recent,
+            "etf_launch_date": etf_launch,
         }
 
     # Write theme metrics file

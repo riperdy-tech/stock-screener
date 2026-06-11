@@ -427,8 +427,24 @@ def run_backtest():
     eq_iwm, dd_iwm = chain(iwm_rets)
     n_q = len(quarters)
     years_span = n_q / 4 if n_q else 0
+
+    # Honesty metrics (ecosystem review §H): quarterly Sharpe of excess
+    # returns, declared trial count, and the live≈half-of-backtest rule.
+    excess = [t - i for t, i in zip(top_rets, iwm_rets)]
+    quarterly_sharpe = None
+    if len(excess) >= 8:
+        mean_e = sum(excess) / len(excess)
+        var_e = sum((x - mean_e) ** 2 for x in excess) / (len(excess) - 1)
+        if var_e > 0:
+            quarterly_sharpe = round(mean_e / math.sqrt(var_e) * 2, 3)  # x sqrt(4) annualized
+
     summary = {
         "quarters": n_q,
+        "annualized_excess_sharpe": quarterly_sharpe,
+        "trials": 1,
+        "live_expectation_note": ("Expect live performance ~ half of backtest "
+                                  "(McLean-Pontiff 2016 post-publication decay); "
+                                  "survivorship bias flatters further."),
         "strategy_cagr_pct": round((eq_top ** (1 / years_span) - 1) * 100, 2) if years_span else None,
         "iwm_cagr_pct": round((eq_iwm ** (1 / years_span) - 1) * 100, 2) if years_span else None,
         "strategy_max_drawdown_pct": round(dd_top * 100, 1),
@@ -476,6 +492,7 @@ def run_backtest():
 
     lines = ["# Backtest Lite — V/Q/M composite, quarterly, vs IWM", "",
              f"**{SURVIVORSHIP_NOTE}**", "",
+             f"**Live expectation: ~half of these numbers** (post-publication decay, McLean-Pontiff 2016). Trials: 1 (no parameter search on this configuration).", "",
              f"Generated: {payload['generated_at']}  |  Quarters: {n_q}", "",
              f"| | Strategy (top decile) | IWM |", "|---|---|---|",
              f"| CAGR | {summary['strategy_cagr_pct']}% | {summary['iwm_cagr_pct']}% |",

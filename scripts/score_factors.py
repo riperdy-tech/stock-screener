@@ -6,9 +6,12 @@ Supersedes score_unified.py in the scoring chain. Differences that matter:
      and z-scored WITHIN its GICS sector (groups < 15 fall back to universe
      stats). Universe-wide percentiles let sector beta masquerade as signal —
      "high momentum" was mostly "is a tech stock".
-  2. EVIDENCE-DRIVEN weights: read from scripts/factor_weights.json, which
-     calibrate_factor_weights.py derives from measured per-factor rank-IC in
-     the point-in-time backtest. No more hand-picked weights.
+  2. EQUAL-WEIGHT composite across the five robust factors (June 2026,
+     per the Integrated Ecosystem review: DeMiguel-Garlappi-Uppal 2009 —
+     estimated weights rarely beat 1/N out-of-sample). Weights live in
+     scripts/factor_weights.json; IC measurement continues as a DIAGNOSTIC
+     only (calibrate_factor_weights.py writes a drift report, never weights).
+     Theme is a context tag, never additive alpha.
   3. EXPANDED factors: low-volatility (monthly-return sigma — the low-vol
      anomaly), owner-earnings yield inside Value, margin stability +
      continuous F-score inside Quality.
@@ -170,6 +173,7 @@ def main():
         "fcf_yield", "owner_yield", "ebit_yield", "earnings_yield",
         "rev_quality", "gm_stability", "neg_accruals", "f_score",
         "skip_12_1", "high_52w", "neg_vol")}
+    annualized_vol = {}  # ticker -> sigma for Kelly sizing
 
     for t in tickers:
         stock = stocks.get(t) or {}
@@ -221,7 +225,10 @@ def main():
             rets = [closes[i] / closes[i - 1] - 1 for i in range(1, len(closes))
                     if closes[i - 1] and closes[i - 1] > 0]
             if len(rets) >= 12:
-                raw["neg_vol"][t] = -statistics.pstdev(rets)
+                monthly_sigma = statistics.pstdev(rets)
+                raw["neg_vol"][t] = -monthly_sigma
+                # Annualized vol exported for Kelly sizing (fct_vol)
+                annualized_vol[t] = round(monthly_sigma * math.sqrt(12), 4)
 
     # ── Sector-neutral z per sub-metric, then factor z = mean of subs ────
     z = {name: sector_neutral_z(vals, sector_by_ticker) for name, vals in raw.items()}
@@ -236,12 +243,9 @@ def main():
             "momentum": mean_of_available(z["skip_12_1"].get(t), z["high_52w"].get(t)),
             "lowvol": z["neg_vol"].get(t),
         }
-        # Revisions / Theme reuse the 0-100 pillar logic, recentred to z-ish scale
+        # Revisions reuses the 0-100 pillar logic, recentred to z-ish scale
         rp = revisions_pillar(eps_traj.get(t), analyst.get(t))
         factor_z[t]["revisions"] = (rp - 50) / 25.0 if rp is not None else None
-        pdm = paradigm.get(t) or {}
-        tp = theme_pillar(pdm, theme_metrics)
-        factor_z[t]["theme"] = (tp - 50) / 25.0 if tp is not None else None
 
     # ── Vetoes (verbatim from score_unified) + composite z ──────────────
     results = {}
@@ -251,8 +255,19 @@ def main():
         rv = reverse.get(t) or {}
         flags = rv.get("rev_flags") or ""
         fz = factor_z[t]
+        # Theme: CONTEXT TAG ONLY, never additive alpha (Ben-David et al. 2023:
+        # naive theme exposure averages -3.1%/yr; the paradigm lens keeps the
+        # full theme machinery for hunting, gated by economics).
+        pdm = paradigm.get(t) or {}
+        tp = theme_pillar(pdm, theme_metrics)
         entry = {
             "fct_z": {k: (round(v, 3) if v is not None else None) for k, v in fz.items()},
+            "fct_context": {
+                "theme_score": tp,
+                "theme_primary": pdm.get("pdm_theme_primary"),
+                "pdm_band": pdm.get("pdm_band"),
+            },
+            "fct_vol": annualized_vol.get(t),
             "fct_composite": None, "fct_percentile": None, "fct_band": None,
             "fct_rank": None, "fct_veto": None, "fct_contributions": None,
             "fct_haircuts": None,
@@ -324,7 +339,8 @@ def main():
 
     payload = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "engine": "factor_lab_v1",
+        "engine": "factor_lab_v2_equal",
+        "weights_scheme": weights_file["current"].get("scheme", "unknown"),
         "scored_count": n,
         "band_counts": band_counts,
         "veto_counts": veto_counts,
