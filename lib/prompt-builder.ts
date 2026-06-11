@@ -197,7 +197,7 @@ function formatScreenerData(result: ScreeningResult, market: Market = 'US'): str
     lines.push(`  ROIC                : ${Number(c.roic).toFixed(1)}%`);
     lines.push(`  PEG Ratio           : ${Number(c.pegRatio).toFixed(1)}x`);
     lines.push(`  Insider Ownership   : ${Number(c.insiderOwnership).toFixed(1)}%`);
-    lines.push(`  Altman Z-Score      : ${Number(c.zScore).toFixed(2)}`);
+    lines.push(`  Altman Z-Score      : ${c.zScore != null ? Number(c.zScore).toFixed(2) : 'N/A (not computable)'}`);
     lines.push(``);
     lines.push(``);
     lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);

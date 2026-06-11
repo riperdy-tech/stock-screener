@@ -46,13 +46,18 @@ jobs:
           # outputs sidecar consumed by score_paradigm.py.
           python scripts/classify_themes_llm.py --apply --max-calls 300
 
-      - name: Re-score Paradigm (so analyst uplift flows into gate)
+      - name: Re-score Chain (so analyst uplift flows into gate)
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
-          # macro state is small + free; refresh it too so signal log captures fresh macro
-          python scripts/fetch_macro_state.py --apply || true
-          python scripts/score_paradigm.py
+          # run_chain refreshes macro, re-runs reverse + paradigm in order,
+          # and enforces coverage/freshness invariants.
+          python scripts/run_chain.py
+
+      - name: Backfill Signal Outcomes (forward returns vs IWM/SPY)
+        run: |
+          # Evaluates matured signal cohorts; free yfinance prices.
+          python scripts/backfill_outcomes.py || true
 
       - name: Commit and Push Changes
         run: |
@@ -65,6 +70,13 @@ jobs:
           git add public/data/stocks.json || true
           git add public/data/paradigm_scores.json || true
           git add public/data/paradigm_theme_metrics.json || true
+          git add public/data/reverse_scores.json || true
+          git add public/data/chain_manifest.json || true
+          git add public/data/unified_scores.json || true
+          git add public/data/reverse_nomination_log.jsonl || true
+          git add public/data/outcome_backfill.json || true
+          git add public/data/outcomes_report.md || true
+          git add public/data/outcome_price_cache.json || true
 
           if git diff --quiet && git diff --staged --quiet; then
             echo "No changes to commit"

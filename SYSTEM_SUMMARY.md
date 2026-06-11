@@ -322,3 +322,42 @@ npm run dev
 ```
 
 Batch files are also provided: `run_scanner.bat` for the main scanner.
+
+---
+
+## 🔗 Scoring Chain & Validation Loop (June 2026)
+
+After any data fetch, scoring MUST run through the orchestrator (CI does this
+automatically; locally use `run_chain.bat`):
+
+```
+fetch_data.py / fetch_sec_data.py / build_fundamentals_history.py   (data)
+        │
+        ▼
+scripts/run_chain.py        ← enforced order + hard invariants
+  1. fetch_macro_state --apply      (FRED flags; soft-fail)
+  2. score_reverse                  (quality/value/survivability + forensic flags)
+  3. score_paradigm                 (theme membership × momentum v2 × economics gate)
+  4. invariants: reverse coverage ≥90%, nominations ≥1, artifact freshness,
+     universe/theme drift warnings → chain_manifest.json
+  5. appends dated nominations → reverse_nomination_log.jsonl
+        │
+        ▼
+scripts/build_portfolio_plan.py     (sized, capped, exit-ruled decision sheet)
+scripts/backfill_outcomes.py        (weekly: forward returns vs IWM/SPY)
+```
+
+Key files added in the June 2026 overhaul:
+| File | Purpose |
+|------|---------|
+| `scripts/run_chain.py` | Orchestrator + data-integrity invariants (fixes the stale-merge bug where fetch wiped reverse scores) |
+| `scripts/build_fundamentals_history.py` | SEC companyfacts ETL: 10y fundamentals + Piotroski F / Sloan accruals / real Beneish M / net issuance (replaces placeholder Z/M scores) |
+| `scripts/backfill_outcomes.py` | Forward-return measurement of logged signal cohorts vs IWM/SPY — the system's only honest "does it make money" meter |
+| `scripts/build_portfolio_plan.py` + `portfolio_config.json` | Position sizing, sector/theme caps, macro de-risk, exit triggers (decision support, not execution) |
+| `public/data/chain_manifest.json` | Last chain run: steps, invariant results, counts |
+| `public/data/fundamentals_battery.json` | Per-ticker value-trap battery consumed by reverse Stage 8 flags |
+
+Momentum is **v2** (12-1 skip-month + 52w-high proximity + 6m return,
+`paradigm_config.json → momentum.version`). Hot-theme thresholds use baseline
+membership + hysteresis (fixes the 40↔146 ai_compute oscillation). Beneish/
+Altman placeholders are gone — missing data is null, never silently safe.

@@ -7,6 +7,9 @@ DATA_DIR = ROOT / "public" / "data"
 STOCKS_JSON = DATA_DIR / "stocks.json"
 FINANCIALS_DIR = DATA_DIR / "financials"
 REVERSE_SCORES_JSON = DATA_DIR / "reverse_scores.json"
+# Optional sidecar from build_fundamentals_history.py (SEC companyfacts):
+# Piotroski F, Sloan accruals, real Beneish M, net share issuance.
+FUNDAMENTALS_BATTERY_JSON = DATA_DIR / "fundamentals_battery.json"
 CONFIG_JSON = Path(__file__).resolve().with_name("reverse_config.json")
 
 REVERSE_FIELDS = [
@@ -917,7 +920,7 @@ def append_flag(reverse_result, flag):
     reverse_result["rev_flags"] = ",".join(flags)
 
 
-def apply_stage8_flags(stock, financial_detail, reverse_result, config):
+def apply_stage8_flags(stock, financial_detail, reverse_result, config, battery_entry=None):
     """Stage 8 behavioral flags — advisory metadata ONLY. Never changes composite/band/rank."""
     flag_config = config.get("flags") or {}
     metrics = stock.get("metrics") or {}
@@ -973,7 +976,50 @@ def apply_stage8_flags(stock, financial_detail, reverse_result, config):
             f"CROWDED_LONG: institutional ownership {inst_held:.1%} > {cl_threshold:.1%} (exit-crowding risk)",
         )
 
-    # --- RECENT_DILUTION_PROXY: STUBBED (no real share-count history; Phase 6.1 dividend/payout fields don't measure dilution) ---
+    # --- Forensic battery flags (SEC companyfacts via fundamentals_battery.json) ---
+    # Advisory like every Stage 8 flag. Thresholds config-overridable.
+    if battery_entry:
+        m_score = as_number(battery_entry.get("m_score"))
+        m_threshold = flag_config.get("m_score_elevated_threshold", -1.78)
+        if m_score is not None and m_score > m_threshold:
+            append_flag(reverse_result, "M_SCORE_ELEVATED")
+            reverse_result["rev_con"] = append_note(
+                reverse_result.get("rev_con"),
+                f"M_SCORE_ELEVATED: Beneish M {m_score:.2f} > {m_threshold} "
+                "(earnings-manipulation risk profile; also fires on legitimate hypergrowth — verify)",
+            )
+
+        f_score = as_number(battery_entry.get("f_score"))
+        f_checks = as_number(battery_entry.get("f_score_checks_available")) or 0
+        f_max = flag_config.get("f_score_weak_max", 3)
+        f_min_checks = flag_config.get("f_score_min_checks", 6)
+        if f_score is not None and f_checks >= f_min_checks and f_score <= f_max:
+            append_flag(reverse_result, "F_SCORE_WEAK")
+            reverse_result["rev_con"] = append_note(
+                reverse_result.get("rev_con"),
+                f"F_SCORE_WEAK: Piotroski {int(f_score)}/{int(f_checks)} (deteriorating fundamentals; "
+                "cheap + weak F is the classic value-trap profile)",
+            )
+
+        accruals = as_number(battery_entry.get("accruals_ratio"))
+        accruals_threshold = flag_config.get("accruals_high_threshold", 0.10)
+        if accruals is not None and accruals > accruals_threshold:
+            append_flag(reverse_result, "ACCRUALS_HIGH")
+            reverse_result["rev_con"] = append_note(
+                reverse_result.get("rev_con"),
+                f"ACCRUALS_HIGH: Sloan accruals {accruals:.2f} > {accruals_threshold} "
+                "(reported earnings not backed by cash flow)",
+            )
+
+        issuance = as_number(battery_entry.get("net_issuance_3y_cagr"))
+        issuance_threshold = flag_config.get("heavy_issuance_threshold", 0.10)
+        if issuance is not None and issuance > issuance_threshold:
+            append_flag(reverse_result, "HEAVY_ISSUANCE")
+            reverse_result["rev_con"] = append_note(
+                reverse_result.get("rev_con"),
+                f"HEAVY_ISSUANCE: diluted shares +{issuance:.1%}/yr over 3y "
+                "(SEC filings; split-adjusted-guarded)",
+            )
 
 
 def calculate_forward_eps_growth(financial_detail):
@@ -1638,6 +1684,13 @@ def validate_stocks(stocks):
 
 def attach_reverse_results(stocks, config, previous_scores=None):
     previous_scores = previous_scores or {}
+    # Optional forensic sidecar (graceful absence: flags simply don't fire)
+    fundamentals_battery = {}
+    if FUNDAMENTALS_BATTERY_JSON.exists():
+        try:
+            fundamentals_battery = load_json(FUNDAMENTALS_BATTERY_JSON).get("tickers", {})
+        except (OSError, json.JSONDecodeError, ValueError):
+            fundamentals_battery = {}
     found_financials = 0
     missing_financials = 0
     scoreable_count = 0
@@ -1827,7 +1880,8 @@ def attach_reverse_results(stocks, config, previous_scores=None):
                     composite_breakdowns[ticker] = breakdown
 
                 # Stage 8: advisory flags (AFTER band/composite — metadata only)
-                apply_stage8_flags(stock, financial_detail, reverse_result, config)
+                apply_stage8_flags(stock, financial_detail, reverse_result, config,
+                                   battery_entry=fundamentals_battery.get(ticker))
 
             # Phase 6.1c: collect institutional ownership for distribution measurement
             if reverse_result.get("rev_band") not in ("Excluded", "Reject", None):

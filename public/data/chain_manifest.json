@@ -1,0 +1,103 @@
+{
+  "counts": {
+    "stocks": 6664,
+    "themes": {
+      "ai_compute": 40,
+      "cloud_software": 137,
+      "cybersecurity": 52,
+      "energy_transition": 72,
+      "glp1_metabolic": 42,
+      "nuclear_renaissance": 23,
+      "physical_ai": 72,
+      "quantum_computing": 16,
+      "space_economy": 44
+    }
+  },
+  "finished_at": "2026-06-11T00:35:04Z",
+  "invariants": [
+    {
+      "detail": "stocks.json is 0.0 days old (max 8)",
+      "level": "soft",
+      "name": "stocks_json_fresh",
+      "ok": true
+    },
+    {
+      "detail": "FRED macro state fetched",
+      "level": "soft",
+      "name": "macro_fetch",
+      "ok": true
+    },
+    {
+      "detail": "universe 6645 -> 6664 (0.3% drift, max 10%)",
+      "level": "soft",
+      "name": "universe_drift",
+      "ok": true
+    },
+    {
+      "detail": "6664/6664 stocks carry reverse object (100.0%, min 90%)",
+      "level": "hard",
+      "name": "reverse_coverage",
+      "ok": true
+    },
+    {
+      "detail": "reverse_scores.json written by this run",
+      "level": "hard",
+      "name": "reverse_scores_regenerated",
+      "ok": true
+    },
+    {
+      "detail": "25 stocks nominated (min 1)",
+      "level": "hard",
+      "name": "nomination_nonempty",
+      "ok": true
+    },
+    {
+      "detail": "paradigm_scores.json written by this run",
+      "level": "hard",
+      "name": "paradigm_scores_regenerated",
+      "ok": true
+    },
+    {
+      "detail": "6664 paradigm rows vs 6664 stocks",
+      "level": "hard",
+      "name": "paradigm_coverage",
+      "ok": true
+    },
+    {
+      "detail": "1840 stocks carry a unified score (min 500)",
+      "level": "hard",
+      "name": "unified_scored",
+      "ok": true
+    },
+    {
+      "detail": "56 research_now candidates",
+      "level": "soft",
+      "name": "unified_research_now",
+      "ok": true
+    }
+  ],
+  "ok": true,
+  "run_id": "20260611T003341Z",
+  "steps": [
+    {
+      "duration_s": 6.2,
+      "name": "fetch_macro_state",
+      "returncode": 0
+    },
+    {
+      "duration_s": 68.6,
+      "name": "score_reverse",
+      "returncode": 0
+    },
+    {
+      "duration_s": 7.1,
+      "name": "score_paradigm",
+      "returncode": 0
+    },
+    {
+      "duration_s": 0.3,
+      "name": "score_unified",
+      "returncode": 0
+    }
+  ]
+}

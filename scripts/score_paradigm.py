@@ -464,6 +464,38 @@ def compute_raw_return(prices, window):
     return ret
 
 
+def compute_skip_month_return(prices):
+    """12-1 momentum: return from t-13 to t-1, excluding the most recent month.
+
+    Standard construction (Jegadeesh-Titman): the latest month is skipped so
+    short-term reversal doesn't contaminate the signal.
+    """
+    if len(prices) < 13:
+        return None
+    p_old = prices[-13]
+    p_new = prices[-2]
+    if p_old == 0 or not math.isfinite(p_old) or not math.isfinite(p_new):
+        return None
+    ret = (p_new / p_old) - 1.0
+    return ret if math.isfinite(ret) else None
+
+
+def compute_high_proximity(prices):
+    """Proximity to the 52-week high (monthly-close proxy): last / max(last 12).
+
+    Values near 1.0 = at the high (empirically bullish persistence); well
+    below 1.0 = deep below the high.
+    """
+    if len(prices) < 12:
+        return None
+    window = prices[-12:]
+    high = max(window)
+    if high <= 0 or not math.isfinite(high):
+        return None
+    prox = prices[-1] / high
+    return prox if math.isfinite(prox) else None
+
+
 def compute_percentile_rank(value, sorted_distribution, count):
     """Compute percentile rank of value within a sorted distribution.
 
@@ -479,16 +511,22 @@ def compute_percentile_rank(value, sorted_distribution, count):
 def compute_momentum_scores(price_history, stocks, momentum_config=None):
     """Compute pdm_momentum_score for each stock.
 
-    WS1-T3b: static 4-window weighted percentile-rank composite.
+    WS1-T3b: static 4-window weighted percentile-rank composite (version 1).
     WS1-T8a: blends static composite (weight static_weight, default 0.6) with a
              Delta-percentile-rank acceleration component (weight accel_weight,
              default 0.4). Also flags accelerating / decelerating / regime_shift_*.
+    version 2 (momentum_config["version"] == 2): static composite is replaced
+             by the empirically robust trio — 12-1 skip-month momentum,
+             52-week-high proximity, 6-month return — each cross-sectionally
+             percentile-ranked and blended by v2_weights. Acceleration and
+             regime flags are unchanged.
 
     Modifies the paradigm object on each stock in-place.
     Returns a dict of ticker -> momentum_score (int or None) for use in theme metrics.
     """
     if momentum_config is None:
         momentum_config = {}
+    version = int(momentum_config.get("version", 1))
     static_weight = momentum_config.get("static_weight", 0.6)
     accel_weight = momentum_config.get("accel_weight", 0.4)
     accelerating_threshold = momentum_config.get("accelerating_threshold", 70)
@@ -537,25 +575,74 @@ def compute_momentum_scores(price_history, stocks, momentum_config=None):
             ranks[w] = compute_percentile_rank(ret, sorted_distributions[w], window_counts[w])
         ranks_by_ticker[ticker] = ranks
 
-    # Step 4: Static weighted composite per stock
+    # Step 4: Static composite per stock
+    # v1: 4-window weighted percentile-rank blend.
+    # v2: 12-1 skip-month + 52w-high proximity + 6m return (each percentile-
+    #     ranked cross-sectionally), renormalized over available components.
     static_scores = {}  # ticker -> float in [0, 1] or None
-    for stock in stocks:
-        ticker = stock.get("symbol")
-        if not ticker:
-            continue
-        ranks = ranks_by_ticker.get(ticker, {})
-        if not ranks:
-            static_scores[ticker] = None
-            continue
-        available_windows = list(ranks.keys())
-        total_weight = sum(MOMENTUM_WINDOWS[w] for w in available_windows)
-        if total_weight == 0:
-            static_scores[ticker] = None
-            continue
-        composite = 0.0
-        for w in available_windows:
-            composite += (MOMENTUM_WINDOWS[w] / total_weight) * ranks[w]
-        static_scores[ticker] = composite
+    if version >= 2:
+        v2_weights = momentum_config.get(
+            "v2_weights", {"skip_12_1": 0.5, "high_52w": 0.3, "ret_6m": 0.2}
+        )
+        raw_components = {}  # ticker -> {component_name: raw value}
+        for stock in stocks:
+            ticker = stock.get("symbol")
+            if not ticker:
+                continue
+            prices = prices_dict.get(ticker)
+            comp = {}
+            if isinstance(prices, list) and len(prices) >= 2:
+                skip = compute_skip_month_return(prices)
+                if skip is not None:
+                    comp["skip_12_1"] = skip
+                prox = compute_high_proximity(prices)
+                if prox is not None:
+                    comp["high_52w"] = prox
+                r6 = raw_returns.get(ticker, {}).get(6)
+                if r6 is not None:
+                    comp["ret_6m"] = r6
+            raw_components[ticker] = comp
+
+        comp_distributions = {}
+        comp_counts = {}
+        for name in v2_weights:
+            values = sorted(c[name] for c in raw_components.values() if name in c)
+            comp_distributions[name] = values
+            comp_counts[name] = len(values)
+
+        for stock in stocks:
+            ticker = stock.get("symbol")
+            if not ticker:
+                continue
+            comp = raw_components.get(ticker, {})
+            available = [n for n in v2_weights if n in comp]
+            total_weight = sum(v2_weights[n] for n in available)
+            if not available or total_weight == 0:
+                static_scores[ticker] = None
+                continue
+            composite = 0.0
+            for n in available:
+                rank = compute_percentile_rank(comp[n], comp_distributions[n], comp_counts[n])
+                composite += (v2_weights[n] / total_weight) * rank
+            static_scores[ticker] = composite
+    else:
+        for stock in stocks:
+            ticker = stock.get("symbol")
+            if not ticker:
+                continue
+            ranks = ranks_by_ticker.get(ticker, {})
+            if not ranks:
+                static_scores[ticker] = None
+                continue
+            available_windows = list(ranks.keys())
+            total_weight = sum(MOMENTUM_WINDOWS[w] for w in available_windows)
+            if total_weight == 0:
+                static_scores[ticker] = None
+                continue
+            composite = 0.0
+            for w in available_windows:
+                composite += (MOMENTUM_WINDOWS[w] / total_weight) * ranks[w]
+            static_scores[ticker] = composite
 
     # Step 5: Acceleration component (WS1-T8a)
     # Raw accel per ticker = rank_1m - rank_12m. Requires BOTH windows.
@@ -634,10 +721,17 @@ def compute_momentum_scores(price_history, stocks, momentum_config=None):
     return momentum_scores
 
 
-def compute_theme_metrics(price_history, stocks, themes, momentum_scores):
+def compute_theme_metrics(price_history, stocks, themes, momentum_scores,
+                          baseline_members=None, hot_themes=None):
     """Compute per-theme metrics and write paradigm_theme_metrics.json.
 
     Returns a dict of theme_id -> metrics for the summary print.
+
+    baseline_members: theme_id -> set of tickers tagged at the DEFAULT
+    threshold (or via LLM/override). Hotness for the next run is computed
+    from these so a hot-expanded cohort can't dilute its own trigger metric.
+    hot_themes: list of theme_ids that ran hot THIS run (persisted so the
+    next run can apply hysteresis).
     """
     prices_dict = price_history.get("prices", {})
     snapshot_date = price_history.get("snapshot_date", "unknown")
@@ -649,6 +743,27 @@ def compute_theme_metrics(price_history, stocks, themes, momentum_scores):
         if sym and "paradigm" in stock:
             ticker_paradigm[sym] = stock["paradigm"]
 
+    def med_breadth(members):
+        above_count = 0
+        total_with_ma = 0
+        momentum_vals = []
+        for sym in members:
+            prices = prices_dict.get(sym)
+            if not isinstance(prices, list) or len(prices) < 11:
+                continue
+            total_with_ma += 1
+            # 10-month MA
+            ma_10 = sum(prices[-10:]) / 10.0
+            if prices[-1] > ma_10:
+                above_count += 1
+            # Median momentum
+            ms = momentum_scores.get(sym)
+            if ms is not None:
+                momentum_vals.append(ms)
+        breadth = round(above_count / total_with_ma * 100) if total_with_ma > 0 else None
+        median_mom = round(statistics.median(momentum_vals)) if momentum_vals else None
+        return median_mom, breadth, total_with_ma
+
     theme_metrics = {}
     for theme in themes:
         tid = theme["id"]
@@ -659,36 +774,20 @@ def compute_theme_metrics(price_history, stocks, themes, momentum_scores):
                 tagged_members.append(sym)
 
         tagged_count = len(tagged_members)
+        median_momentum, breadth_pct, total_with_ma = med_breadth(tagged_members)
 
-        # Compute breadth and median momentum
-        above_count = 0
-        total_with_ma = 0
-        momentum_vals = []
-
-        for sym in tagged_members:
-            prices = prices_dict.get(sym)
-            if not isinstance(prices, list) or len(prices) < 11:
-                continue
-            total_with_ma += 1
-
-            # 10-month MA
-            ma_10 = sum(prices[-10:]) / 10.0
-            if prices[-1] > ma_10:
-                above_count += 1
-
-            # Median momentum
-            ms = momentum_scores.get(sym)
-            if ms is not None:
-                momentum_vals.append(ms)
-
-        breadth_pct = round(above_count / total_with_ma * 100) if total_with_ma > 0 else None
-        median_momentum = round(statistics.median(momentum_vals)) if momentum_vals else None
+        base_set = sorted((baseline_members or {}).get(tid) or set())
+        baseline_median, baseline_breadth, _ = med_breadth(base_set)
 
         theme_metrics[tid] = {
             "tagged_count": tagged_count,
             "tagged_with_history_count": total_with_ma,
             "median_momentum": median_momentum,
             "breadth_pct": breadth_pct,
+            "baseline_count": len(base_set),
+            "baseline_median_momentum": baseline_median,
+            "baseline_breadth_pct": baseline_breadth,
+            "hot": tid in (hot_themes or []),
         }
 
     # Write theme metrics file
@@ -845,7 +944,8 @@ def build_pro_con(paradigm, bands_config):
         )
 
 
-def append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snapshot_date):
+def append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snapshot_date,
+                       momentum_version=1):
     """Append per-stock signal snapshot to JSONL log + per-run summary (WS1-T7).
 
     Append-only, never read back by scoring. Honest validation path: log signals
@@ -895,6 +995,9 @@ def append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snaps
         "stocks_total": len(stocks),
         "stocks_logged": len(log_lines),
         "themes_registered": len(themes),
+        # Momentum methodology version — outcome analysis must not mix
+        # cohorts scored under different momentum definitions.
+        "momentum_version": momentum_version,
         "macro_flags_global": (macro_state or {}).get("triggered_flags", []),
         "macro_fetched_at": (macro_state or {}).get("fetched_at"),
         "theme_metrics": theme_metrics,
@@ -964,10 +1067,18 @@ def main():
     # ── Dynamic per-theme composite threshold (T8a-dyn) ──────────────────
     # Read prior run's theme metrics (if any) -> drop threshold to
     # hot_composite_threshold for themes that were hot last run.
+    #
+    # Oscillation fix (June 2026): hotness is evaluated on BASELINE members
+    # (those tagged at the default threshold) so the hot-expanded cohort
+    # cannot dilute its own hotness metric, and hot status has hysteresis
+    # (enter at the entry floors, exit only below the lower exit floors).
+    # Previously ai_compute flapped 40<->146 members on alternating runs.
     default_threshold = momentum_config.get("default_composite_threshold", 2.0)
     hot_threshold = momentum_config.get("hot_composite_threshold", 1.5)
     hot_mom_floor = momentum_config.get("hot_median_mom", 70)
     hot_breadth_floor = momentum_config.get("hot_breadth_pct", 70)
+    hot_exit_mom = momentum_config.get("hot_exit_median_mom", hot_mom_floor - 10)
+    hot_exit_breadth = momentum_config.get("hot_exit_breadth_pct", hot_breadth_floor - 10)
     theme_thresholds = {t["id"]: default_threshold for t in themes}
     prior_metrics = {}
     if THEME_METRICS_JSON.exists():
@@ -979,9 +1090,18 @@ def main():
     for t in themes:
         tid = t["id"]
         pm = prior_metrics.get(tid) or {}
-        med = pm.get("median_momentum")
-        br = pm.get("breadth_pct")
-        if med is not None and br is not None and med >= hot_mom_floor and br >= hot_breadth_floor:
+        # Prefer baseline metrics; fall back to legacy fields for the first
+        # run after this change (legacy metrics may reflect an expanded cohort).
+        med = pm.get("baseline_median_momentum", pm.get("median_momentum"))
+        br = pm.get("baseline_breadth_pct", pm.get("breadth_pct"))
+        was_hot = bool(pm.get("hot"))
+        if med is None or br is None:
+            continue
+        if was_hot:
+            is_hot = med >= hot_exit_mom and br >= hot_exit_breadth
+        else:
+            is_hot = med >= hot_mom_floor and br >= hot_breadth_floor
+        if is_hot:
             theme_thresholds[tid] = hot_threshold
             hot_themes.append(tid)
 
@@ -1001,6 +1121,9 @@ def main():
     stocks_with_reverse = 0
     total_tagged = 0  # stocks with at least one theme (composite >= 2.0)
     theme_tag_counts = {t["id"]: 0 for t in themes}
+    # Members tagged at the DEFAULT threshold (or via LLM/override) — used for
+    # hot-theme metrics so threshold expansion can't dilute its own trigger.
+    baseline_members = {t["id"]: set() for t in themes}
 
     # Economics gate tracking
     gate_values = []
@@ -1085,6 +1208,8 @@ def main():
             if composite_vote >= tag_threshold:
                 result["pdm_themes"].append(tid)
                 theme_tag_counts[tid] = theme_tag_counts.get(tid, 0) + 1
+                if composite_vote >= default_threshold:
+                    baseline_members[tid].add(ticker)
                 if tag_threshold < default_threshold and "hot_theme_expanded" not in flags:
                     flags.append("hot_theme_expanded")
 
@@ -1102,6 +1227,8 @@ def main():
                     if llm_tid not in result["pdm_themes"]:
                         result["pdm_themes"].append(llm_tid)
                         theme_tag_counts[llm_tid] = theme_tag_counts.get(llm_tid, 0) + 1
+                        # LLM tags are threshold-independent -> count as baseline
+                        baseline_members.setdefault(llm_tid, set()).add(ticker)
                     # Synthetic composite vote for ranking (treat LLM as 1.5)
                     if llm_tid not in theme_scores:
                         theme_scores[llm_tid] = 1.5
@@ -1141,6 +1268,8 @@ def main():
                 # Ensure override theme is in pdm_themes
                 if override_theme not in result["pdm_themes"]:
                     result["pdm_themes"].insert(0, override_theme)
+                # Operator overrides are threshold-independent -> baseline
+                baseline_members.setdefault(override_theme, set()).add(ticker)
                 result["pdm_theme_primary"] = override_theme
                 flags.append("override")
 
@@ -1227,7 +1356,9 @@ def main():
     momentum_scores = compute_momentum_scores(price_history, stocks, momentum_config)
 
     # ── Compute theme metrics (WS1-T3b) ──────────────────────────────────
-    theme_metrics = compute_theme_metrics(price_history, stocks, themes, momentum_scores)
+    theme_metrics = compute_theme_metrics(price_history, stocks, themes, momentum_scores,
+                                          baseline_members=baseline_members,
+                                          hot_themes=hot_themes)
 
     # ── Compute signal, band, pro/con (WS1-T5) ───────────────────────────
     for stock in stocks:
@@ -1397,7 +1528,8 @@ def main():
     print(f"  Written: paradigm_history.json ({history_events_count} new events)")
 
     # ── WS1-T7: forward-logging hook ─────────────────────────────────────
-    logged = append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snapshot_date)
+    logged = append_forward_log(stocks, themes, theme_metrics, macro_state, run_id, snapshot_date,
+                                momentum_version=int(momentum_config.get("version", 1)))
     print(f"  Appended: paradigm_signal_log.jsonl ({logged} stock-rows, run_id={run_id})")
     print(f"  Appended: paradigm_run_log.jsonl (1 summary row)")
     print("=" * 60)

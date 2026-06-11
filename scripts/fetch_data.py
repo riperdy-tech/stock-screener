@@ -149,8 +149,8 @@ class StockData:
         self.float_shares = float('inf')
         self.country = "Unknown"
         self.shares_outstanding_growth_3yr_cagr = 0.0
-        self.altman_z_score = 0.0
-        self.beneish_m_score = -99.0 
+        self.altman_z_score = None
+        self.beneish_m_score = None
         self.net_income = 0.0
         self.operating_cash_flow = 0.0
         self.fail_reasons = []
@@ -267,10 +267,15 @@ def process_stock(ticker_symbol):
             
             data.altman_z_score = 1.2*A + 1.4*B + 3.3*C + 0.6*D + 1.0*E
         except:
-            data.altman_z_score = 3.0 
+            # Honest null: a silent 3.0 default put every computation failure
+            # in the "safe zone" exactly where distress detection matters most.
+            data.altman_z_score = None
 
-        # Beneish M-Score
-        data.beneish_m_score = -2.0 
+        # Beneish M-Score: not computable from this fetch (needs 2yr of
+        # receivables/PP&E/SG&A detail). Null until the SEC companyfacts
+        # pipeline provides real inputs. The old -2.0 placeholder read as
+        # "no manipulation risk" for every stock.
+        data.beneish_m_score = None
         
         return (data, stock)
 
