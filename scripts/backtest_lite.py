@@ -48,6 +48,7 @@ HISTORY_JSON = DATA / "fundamentals_history.json"
 PRICES_JSON = DATA / "backtest_prices.json"
 RESULTS_JSON = DATA / "backtest_results.json"
 REPORT_MD = DATA / "backtest_report.md"
+FACTOR_IC_JSON = DATA / "factor_ic.json"
 
 BENCHMARK = "IWM"
 PRICE_START = "2014-01-01"
@@ -182,6 +183,62 @@ def percentile_ranks(pairs):
     return {t: i / (n - 1) for i, (t, _) in enumerate(pairs)}
 
 
+def spearman_ic(pairs):
+    """Spearman rank correlation for [(factor_value, forward_return)] pairs.
+
+    Ordinal ranks (no tie averaging) — adequate for IC estimation. None if
+    fewer than 30 observations or degenerate variance.
+    """
+    pairs = [(f, r) for f, r in pairs if f is not None and r is not None]
+    n = len(pairs)
+    if n < 30:
+        return None
+
+    def ranks(vals):
+        order = sorted(range(n), key=lambda i: vals[i])
+        out = [0] * n
+        for rank, i in enumerate(order):
+            out[i] = rank
+        return out
+
+    fr = ranks([p[0] for p in pairs])
+    gr = ranks([p[1] for p in pairs])
+    mf = sum(fr) / n
+    mg = sum(gr) / n
+    cov = sum((fr[i] - mf) * (gr[i] - mg) for i in range(n))
+    vf = sum((x - mf) ** 2 for x in fr)
+    vg = sum((x - mg) ** 2 for x in gr)
+    if vf == 0 or vg == 0:
+        return None
+    return cov / math.sqrt(vf * vg)
+
+
+def monthly_vol(prices, f_key, fy, fm, window=24):
+    """Annualized-ish sigma of monthly returns over `window` months ending at
+    formation. Tolerates missing months (returns computed between successive
+    available closes). None if fewer than 12 returns."""
+    closes = []
+    yy, mm = fy, fm
+    for _ in range(window + 1):
+        k = month_key(yy, mm)
+        if k in prices:
+            closes.append(prices[k])
+        mm -= 1
+        if mm == 0:
+            mm = 12
+            yy -= 1
+    closes.reverse()
+    rets = []
+    for a, b in zip(closes, closes[1:]):
+        if a and a > 0 and b is not None:
+            rets.append(b / a - 1)
+    if len(rets) < 12:
+        return None
+    mean = sum(rets) / len(rets)
+    var = sum((r - mean) ** 2 for r in rets) / (len(rets) - 1)
+    return math.sqrt(var)
+
+
 def run_backtest():
     history = json.loads(HISTORY_JSON.read_text(encoding="utf-8"))["tickers"]
     pricedata = json.loads(PRICES_JSON.read_text(encoding="utf-8"))["prices"]
@@ -208,6 +265,7 @@ def run_backtest():
         y += 1
 
     quarters = []
+    ic_series = {}  # factor -> [{formation, ic, n}]
     for fy, fm in formations:
         f_key = month_key(fy, fm)
         # next quarter end (hold period)
@@ -282,19 +340,22 @@ def run_backtest():
                 continue
             if not passes_vetoes(cur, prev or {}, adj_sh, yf_, yf_ - 1):
                 continue
-            candidates.append((t, v_raw, q_raw, m_raw))
+            # LowVol: negative sigma of monthly returns (low-vol anomaly) — optional
+            lv = monthly_vol(prices, f_key, fy, fm)
+            lv_raw = -lv if lv is not None else None
+            candidates.append((t, v_raw, q_raw, m_raw, lv_raw))
 
         if len(candidates) < 100:
             continue
 
-        v_ranks = percentile_ranks([(t, v) for t, v, _, _ in candidates])
-        q_ranks = percentile_ranks([(t, q) for t, _, q, _ in candidates])
-        m_ranks = percentile_ranks([(t, m) for t, _, _, m in candidates])
+        v_ranks = percentile_ranks([(t, v) for t, v, _, _, _ in candidates])
+        q_ranks = percentile_ranks([(t, q) for t, _, q, _, _ in candidates])
+        m_ranks = percentile_ranks([(t, m) for t, _, _, m, _ in candidates])
         total_w = sum(WEIGHTS.values())
         composite = {
             t: (WEIGHTS["value"] * v_ranks[t] + WEIGHTS["quality"] * q_ranks[t]
                 + WEIGHTS["momentum"] * m_ranks[t]) / total_w
-            for t, _, _, _ in candidates
+            for t, _, _, _, _ in candidates
         }
         ranked = sorted(composite, key=lambda t: -composite[t])
         n_top = max(10, int(len(ranked) * TOP_FRACTION))
@@ -315,6 +376,27 @@ def run_backtest():
         top_ret, top_missing = cohort_return(top)
         bottom_ret, _ = cohort_return(bottom)
         bench_ret = bench[n_key] / bench[f_key] - 1
+
+        # ── Per-factor rank-IC vs forward 3m return (Factor Lab calibration) ──
+        fwd = {}
+        for t, _, _, _, _ in candidates:
+            p0 = pricedata[t].get(f_key)
+            p1_ = pricedata[t].get(n_key)
+            if p0 and p1_:
+                fwd[t] = p1_ / p0 - 1
+        factor_values = {
+            "value": {t: v for t, v, _, _, _ in candidates},
+            "quality": {t: q for t, _, q, _, _ in candidates},
+            "momentum": {t: m for t, _, _, m, _ in candidates},
+            "lowvol": {t: lv for t, _, _, _, lv in candidates},
+        }
+        formation_ics = {}
+        for fname, vals in factor_values.items():
+            ic = spearman_ic([(vals[t], fwd.get(t)) for t in vals])
+            if ic is not None:
+                formation_ics[fname] = round(ic, 4)
+                ic_series.setdefault(fname, []).append(
+                    {"formation": f_key, "ic": round(ic, 4), "n": len(fwd)})
 
         if top_ret is None:
             continue
@@ -358,6 +440,26 @@ def run_backtest():
             for q in quarters if q["bottom_decile_return_pct"] is not None) / n_q, 2) if n_q else None,
     }
 
+    # ── Factor IC output (Factor Lab weight calibration + Validation tab) ──
+    ic_summary = {}
+    for fname, series in sorted(ic_series.items()):
+        ics = [row["ic"] for row in series]
+        mean_ic = sum(ics) / len(ics) if ics else None
+        ic_summary[fname] = {
+            "mean_ic": round(mean_ic, 4) if mean_ic is not None else None,
+            "positive_quarters_pct": round(100 * sum(1 for i in ics if i > 0) / len(ics), 1) if ics else None,
+            "quarters": len(ics),
+            "series": series,
+        }
+    FACTOR_IC_JSON.write_text(json.dumps({
+        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "survivorship_caveat": SURVIVORSHIP_NOTE,
+        "method": "Spearman rank-IC of factor value vs forward 3m return, per formation date",
+        "factors": ic_summary,
+        "unmeasurable_factors_note": ("revisions and theme have no point-in-time history; "
+                                      "they receive fixed weights in calibrate_factor_weights.py"),
+    }, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+
     payload = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "survivorship_caveat": SURVIVORSHIP_NOTE,
@@ -391,7 +493,9 @@ def run_backtest():
     print(f"Backtest: {n_q} quarters | strategy CAGR {summary['strategy_cagr_pct']}% "
           f"vs IWM {summary['iwm_cagr_pct']}% | hit rate {summary['hit_rate_vs_iwm_pct']}% "
           f"| decile spread {summary['mean_decile_spread_pct']}%/q")
-    print(f"Written: {RESULTS_JSON.name}, {REPORT_MD.name}")
+    ic_line = ", ".join(f"{f}={d['mean_ic']}" for f, d in ic_summary.items())
+    print(f"Factor mean ICs: {ic_line}")
+    print(f"Written: {RESULTS_JSON.name}, {REPORT_MD.name}, {FACTOR_IC_JSON.name}")
 
 
 def main():

@@ -2,7 +2,7 @@
 
 **UPPER BOUND ONLY: universe is today's listings; delisted losers are absent from every formation date. Use for relative factor judgments, not return forecasts.**
 
-Generated: 2026-06-10T16:54:28Z  |  Quarters: 37
+Generated: 2026-06-11T11:49:06Z  |  Quarters: 37
 
 | | Strategy (top decile) | IWM |
 |---|---|---|

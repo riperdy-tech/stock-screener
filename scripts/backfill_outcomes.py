@@ -39,6 +39,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "public" / "data"
 SIGNAL_LOG = DATA / "paradigm_signal_log.jsonl"
 NOMINATION_LOG = DATA / "reverse_nomination_log.jsonl"
+FACTOR_LOG = DATA / "factor_signal_log.jsonl"
 PRICE_CACHE_JSON = DATA / "outcome_price_cache.json"
 OUTCOMES_JSON = DATA / "outcome_backfill.json"
 REPORT_MD = DATA / "outcomes_report.md"
@@ -72,7 +73,7 @@ def load_cohorts():
         sym = row.get("symbol")
         if not snap or not sym:
             continue
-        entry = cohorts.setdefault(snap, {"paradigm": {}, "reverse": []})
+        entry = cohorts.setdefault(snap, {"paradigm": {}, "reverse": [], "factor": []})
         # Keep the latest row per (snapshot, symbol); duplicate runs for the
         # same snapshot date overwrite (re-runs supersede).
         entry["paradigm"][sym] = {
@@ -85,8 +86,17 @@ def load_cohorts():
         snap = row.get("snapshot_date")
         if not snap:
             continue
-        entry = cohorts.setdefault(snap, {"paradigm": {}, "reverse": []})
+        entry = cohorts.setdefault(snap, {"paradigm": {}, "reverse": [], "factor": []})
         entry["reverse"] = [n.get("symbol") for n in row.get("nominated", []) if n.get("symbol")]
+
+    for row in read_jsonl(FACTOR_LOG):
+        snap = row.get("snapshot_date")
+        if not snap:
+            continue
+        entry = cohorts.setdefault(snap, {"paradigm": {}, "reverse": [], "factor": []})
+        # research_now only — that's the actionable tier
+        entry["factor"] = [s.get("symbol") for s in row.get("signals", [])
+                           if s.get("symbol") and s.get("fct_band") == "research_now"]
 
     return cohorts
 
@@ -215,7 +225,8 @@ def main():
         entry = cohorts[snap]
         paradigm_syms = sorted(entry["paradigm"].keys())
         reverse_syms = sorted(set(entry["reverse"]))
-        all_syms = sorted(set(paradigm_syms) | set(reverse_syms) | set(BENCHMARKS))
+        factor_syms = sorted(set(entry.get("factor", [])))
+        all_syms = sorted(set(paradigm_syms) | set(reverse_syms) | set(factor_syms) | set(BENCHMARKS))
 
         for h in horizons:
             target_d = snap_d + timedelta(days=h)
@@ -235,7 +246,8 @@ def main():
                 b1 = close_on_or_before(cache, b, target)
                 bench_returns[b] = (b1 / b0 - 1.0) if (b0 and b1) else None
 
-            for source, syms in (("paradigm", paradigm_syms), ("reverse_nominated", reverse_syms)):
+            for source, syms in (("paradigm", paradigm_syms), ("reverse_nominated", reverse_syms),
+                                 ("factor_research_now", factor_syms)):
                 if not syms:
                     continue
                 stats = evaluate_cohort(syms, entry["paradigm"], snap, target, cache, bench_returns)
