@@ -11,7 +11,7 @@ import { evaluateYoutubeStrategy, matchesYoutubeStrategyFilter, YoutubeStrategyE
 import { supabase } from "@/lib/supabase";
 import { LanguageToggle } from "./LanguageToggle";
 import { LogConsole } from "./LogConsole";
-import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal, HelpCircle, Telescope, ShieldCheck, Layers3, Youtube, LayoutGrid, Table2, History } from 'lucide-react';
+import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal, HelpCircle, Telescope, ShieldCheck, Layers3, Youtube, LayoutGrid, Table2, History, ArrowLeft } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -1037,6 +1037,12 @@ export function ScreenerDashboard() {
                 <header className="sticky top-0 z-30 flex flex-shrink-0 flex-col gap-2 border-b border-border/50 bg-card/70 px-3 py-3 shadow-sm backdrop-blur-xl md:flex-row md:flex-wrap md:px-5">
                     <div className="flex w-full items-center justify-between gap-3">
                         <div className="flex items-center gap-2 md:gap-4">
+                            <Link href="/"
+                                className="flex shrink-0 items-center gap-1.5 rounded-md border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1.5 text-xs font-bold text-emerald-300 transition-colors hover:bg-emerald-500/20"
+                                title="Back to the Factor Lab Cockpit">
+                                <ArrowLeft className="h-3.5 w-3.5" />
+                                <span className="hidden sm:inline">Cockpit</span>
+                            </Link>
                             <h1 className="max-w-[min(54vw,20rem)] truncate text-xl font-black text-foreground sm:max-w-none md:text-2xl">
                                 {t('appTitle')}
                             </h1>

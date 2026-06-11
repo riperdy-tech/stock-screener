@@ -10,7 +10,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import {
     Activity, ArrowUpRight, BarChart3, Briefcase, ExternalLink, FlaskConical,
-    Layers3, Microscope, RefreshCw, Search, ShieldAlert, X,
+    HelpCircle, Layers3, Microscope, RefreshCw, Search, ShieldAlert, X,
 } from 'lucide-react';
 import {
     Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ReferenceLine,
@@ -56,6 +56,68 @@ function fmtMcap(v: number | undefined): string {
 function fmtPct(v: number | null | undefined, digits = 1): string {
     if (v === null || v === undefined) return '—';
     return `${(v * 100).toFixed(digits)}%`;
+}
+
+function HelpSection({ title, children }: { title: string; children: React.ReactNode }) {
+    return (
+        <section className="rounded-lg border border-border/60 bg-secondary/10 p-3">
+            <h3 className="mb-1.5 text-xs font-black uppercase tracking-wider text-emerald-300">{title}</h3>
+            <div className="space-y-1.5 text-xs leading-relaxed text-foreground/90">{children}</div>
+        </section>
+    );
+}
+
+function HelpModal({ onClose }: { onClose: () => void }) {
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
+            <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl border border-border bg-background p-5 shadow-2xl"
+                onClick={e => e.stopPropagation()}>
+                <div className="flex items-start justify-between">
+                    <h2 className="text-lg font-black">How this page works</h2>
+                    <button onClick={onClose} className="rounded-md border border-border p-1.5 text-muted-foreground hover:text-foreground">
+                        <X className="h-4 w-4" />
+                    </button>
+                </div>
+                <div className="mt-3 space-y-3">
+                    <HelpSection title="The big picture">
+                        <p>Every day the system scores ~6,600 US stocks and ranks them with ONE composite number built from six &quot;factors&quot; — measurable traits that have historically predicted returns. The top 3% become the <b>Research Now</b> list. Nothing here is a buy order; it is a ranked shortlist plus the evidence for and against each name.</p>
+                    </HelpSection>
+
+                    <HelpSection title="Rankings tab">
+                        <p><b>Composite</b> (0–100): the weighted mix of six factor scores. Each factor is measured against the stock&apos;s OWN SECTOR — a bank competes with banks, so &quot;high momentum&quot; can&apos;t just mean &quot;is a tech stock.&quot;</p>
+                        <p><b>The six factors</b>: <span className="text-emerald-300">value</span> (cheap vs cash flows), <span className="text-sky-300">quality</span> (profitable, stable, clean accounting), <span className="text-amber-300">momentum</span> (12-month winner, near its high), <span className="text-violet-300">low-vol</span> (calm price behavior), <span className="text-rose-300">revisions</span> (estimates improving), <span className="text-purple-300">theme</span> (in a validated secular trend). The weights are not opinions — they come from measuring which factors actually predicted returns in our own historical test (see Validation tab).</p>
+                        <p><b>Band</b>: Research Now = top 3% · Watchlist = top 10% · Monitor = top 30% · Pass = the rest.</p>
+                        <p><b>Veto</b> (red chip): automatic disqualification regardless of score — failed the reverse engine&apos;s safety checks, fired both forensic-accounting alarms, or is heavily diluting shareholders. The reason is written on the chip.</p>
+                        <p><b>DCF gap</b>: compares the growth the current PRICE requires vs the growth the company has actually DELIVERED (last 5 years of SEC filings). <span className="text-emerald-300">Green negative</span> = priced for less growth than demonstrated (potential bargain). <span className="text-amber-300">Amber positive</span> = price needs acceleration nobody has proven yet (you must believe a story).</p>
+                        <p>Click any row for the per-stock detail: factor profile + an interactive valuation workbench where you can drag growth/discount sliders and watch fair value change.</p>
+                    </HelpSection>
+
+                    <HelpSection title="Research Queue tab">
+                        <p>Just the Research Now names as cards. Suggested workflow: click a card → read the factor profile → read the valuation verdict → if still interesting, open the Lenses view and run the AI deep-dive. A high rank earns a stock your ATTENTION, never an automatic buy.</p>
+                    </HelpSection>
+
+                    <HelpSection title="Portfolio tab">
+                        <p><b>This is NOT your portfolio.</b> It is a machine-suggested allocation plan, regenerated after every scoring run, showing how a disciplined 100% portfolio COULD be arranged from the reverse engine&apos;s 25 nominated stocks.</p>
+                        <p><b>Weight</b> = suggested position size. Sturdier companies (higher survivability) get more; risky archetypes and micro-caps get less; any forensic flag halves the size. Caps: max 25% per sector, max 30% per theme — whatever doesn&apos;t fit stays as <b>cash</b> (that&apos;s why cash is large).</p>
+                        <p><b>Macro flags</b>: warning lights from Fed data (yield curve, credit spreads). If 2+ fire, every position size halves automatically (&quot;de-risk&quot;).</p>
+                        <p>The bar charts just redraw the table: how the suggested money spreads across sectors and themes.</p>
+                    </HelpSection>
+
+                    <HelpSection title="Validation tab — &quot;does this even work?&quot;">
+                        <p><b>Equity curve</b>: growth of $1 since 2017. Green line = buying the strategy&apos;s top-decile picks each quarter (simulated). Grey = IWM, the small-cap index ETF (the &quot;just buy the market&quot; alternative). Green above grey = the method beat the market in simulation.</p>
+                        <p><b>Quarterly excess bars</b>: one bar per quarter = strategy return MINUS index return. Above zero = won that quarter. Expect plenty of losing quarters — a good system wins modestly more often than it loses.</p>
+                        <p><b>Factor IC chart</b>: each line = one factor&apos;s &quot;prediction score&quot; per quarter (correlation between the factor&apos;s ranking and what actually happened next quarter). Above zero = the factor helped. These measured values are exactly what sets the composite weights — the system trusts factors in proportion to their evidence.</p>
+                        <p><b>Live signal outcomes</b>: the honest table. Every day the system publishes its lists; this table fills in their REAL forward returns as time passes (first results ~2 weeks after launch). Simulation can fool you; this can&apos;t.</p>
+                        <p><b>The yellow banner</b>: the simulation only sees companies that still exist today — the ones that went bankrupt are invisible, which flatters every number. Treat backtest results as an upper bound; trust the live outcomes table more as it fills in.</p>
+                    </HelpSection>
+
+                    <HelpSection title="Where the data comes from">
+                        <p>SEC filings (10 years of fundamentals), Yahoo Finance (prices, estimates), FRED (Fed macro data). The whole pipeline re-runs daily via GitHub Actions; weights recalibrate monthly from measured evidence.</p>
+                    </HelpSection>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 function BandChip({ band, veto }: { band: string | null; veto: string | null }) {
@@ -218,6 +280,7 @@ export default function CockpitDashboard() {
     const [sectorFilter, setSectorFilter] = useState<string>('all');
     const [limit, setLimit] = useState(100);
     const [selected, setSelected] = useState<string | null>(null);
+    const [showHelp, setShowHelp] = useState(false);
 
     const loadAll = async () => {
         setLoading(true);
@@ -329,6 +392,11 @@ export default function CockpitDashboard() {
                         ))}
                     </nav>
                     <div className="ml-auto flex items-center gap-2">
+                        <button onClick={() => setShowHelp(true)}
+                            className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-2.5 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground"
+                            title="How this page works" aria-label="Open help">
+                            <HelpCircle className="h-4 w-4" />
+                        </button>
                         <Link href="/lenses" className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground">
                             <Layers3 className="h-3.5 w-3.5" /> Lenses
                         </Link>
@@ -456,6 +524,15 @@ export default function CockpitDashboard() {
                 {/* ── Portfolio ──────────────────────────────────────── */}
                 {tab === 'portfolio' && (plan ? (
                     <div className="space-y-4">
+                        <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
+                            <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
+                            <p>
+                                <b>Suggested plan, not your holdings.</b> The machine sizes the reverse engine&apos;s 25 nominated stocks
+                                (sturdier = bigger, flagged = halved), caps each sector at 25% and theme at 30%, and leaves the rest
+                                as cash. Regenerates after every scoring run — a starting sheet for your decisions, never orders.{' '}
+                                <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
+                            </p>
+                        </div>
                         <div className="flex flex-wrap gap-3">
                             {[['Invested', `${plan.invested_pct}%`], ['Cash', `${plan.cash_pct}%`],
                               ['Positions', plan.position_count],
@@ -521,6 +598,16 @@ export default function CockpitDashboard() {
                 {/* ── Validation ─────────────────────────────────────── */}
                 {tab === 'validation' && (
                     <div className="space-y-4">
+                        <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
+                            <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
+                            <p>
+                                <b>This page answers &quot;does the system actually work?&quot;</b> Top charts = simulated history
+                                (green line above grey = beat the index; bars above zero = won that quarter). The IC chart shows each
+                                factor&apos;s measured prediction power — those values set the composite weights. The bottom table is
+                                the REAL forward record of published signals, filling in as time passes.{' '}
+                                <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
+                            </p>
+                        </div>
                         {backtest?.survivorship_caveat && (
                             <p className="rounded-md border border-amber-500/40 bg-amber-500/10 p-2.5 text-xs font-bold text-amber-200">
                                 ⚠ {backtest.survivorship_caveat}
@@ -621,6 +708,8 @@ export default function CockpitDashboard() {
                     </div>
                 )}
             </main>
+
+            {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
 
             {/* ── Detail slide-over ─────────────────────────────────── */}
             {selected && selectedEntry && (
