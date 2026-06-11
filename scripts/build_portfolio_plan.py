@@ -41,6 +41,8 @@ STOCKS_JSON = DATA / "stocks.json"
 REVERSE_SCORES_JSON = DATA / "reverse_scores.json"
 PARADIGM_SCORES_JSON = DATA / "paradigm_scores.json"
 FACTOR_SCORES_JSON = DATA / "factor_scores.json"
+VALUATION_MODELS_JSON = DATA / "valuation_models.json"
+OVERLAY_SIGNALS_JSON = DATA / "overlay_signals.json"
 BATTERY_JSON = DATA / "fundamentals_battery.json"
 MACRO_STATE_JSON = DATA / "macro_state.json"
 CONFIG_JSON = Path(__file__).resolve().with_name("portfolio_config.json")
@@ -60,6 +62,11 @@ DEFAULT_CONFIG = {
     "max_invested_pct": 90.0,
     "macro_derisk_flag_count": 2,
     "macro_derisk_multiplier": 0.5,
+    "kelly_fraction": 0.25,
+    "kelly_gap_horizon_years": 3.0,
+    "kelly_mu_cap": 0.15,
+    "kelly_sigma_floor": 0.15,
+    "kelly_position_cap_pct": 5.0,
     "_note": ("v1 defaults from the June 2026 audit. Edit and re-run; the plan "
               "is deterministic from inputs + this config."),
 }
@@ -78,18 +85,27 @@ def main():
         CONFIG_JSON.write_text(json.dumps(DEFAULT_CONFIG, indent=2) + "\n", encoding="utf-8")
         config = dict(DEFAULT_CONFIG)
         print(f"Wrote default {CONFIG_JSON.name}")
+    # Backfill any keys added after the user's config file was written
+    for key, value in DEFAULT_CONFIG.items():
+        config.setdefault(key, value)
 
     stocks = {s["symbol"]: s for s in load_json(STOCKS_JSON, []) if s.get("symbol")}
     reverse = load_json(REVERSE_SCORES_JSON, {})
     paradigm = load_json(PARADIGM_SCORES_JSON, {})
     battery = (load_json(BATTERY_JSON, {}) or {}).get("tickers", {})
     factor = (load_json(FACTOR_SCORES_JSON, {}) or {}).get("tickers", {})
+    valuations = (load_json(VALUATION_MODELS_JSON, {}) or {}).get("tickers", {})
+    overlay = (load_json(OVERLAY_SIGNALS_JSON, {}) or {}).get("tickers", {})
     macro = load_json(MACRO_STATE_JSON, {}) or {}
     macro_flags = macro.get("triggered_flags", []) or []
 
-    nominated = [(sym, rv) for sym, rv in reverse.items()
-                 if isinstance(rv, dict) and rv.get("rev_nominated")]
-    nominated.sort(key=lambda x: (x[1].get("rev_rank") or 10**9))
+    # Candidate list = Factor Lab research_now (Stage 1 of the funnel produces
+    # the nomination list per the ecosystem doc). Reverse-engine data rides
+    # along for haircuts/fallback/exit triggers; rev_nominated becomes a
+    # confirmation chip rather than the source.
+    nominated = [(sym, reverse.get(sym) or {}) for sym, e in factor.items()
+                 if e.get("fct_band") == "research_now"]
+    nominated.sort(key=lambda x: ((factor.get(x[0]) or {}).get("fct_rank") or 10**9))
 
     macro_derisk = len(macro_flags) >= config["macro_derisk_flag_count"]
     derisk_mult = config["macro_derisk_multiplier"] if macro_derisk else 1.0
@@ -114,13 +130,53 @@ def main():
 
         high_risk = (archetype in config["high_risk_archetypes"]
                      or (mcap and mcap < config["high_risk_mcap_below"]))
-        base = config["high_risk_position_pct"] if high_risk else config["base_position_pct"]
-        surv_scale = (surv / 100.0) if isinstance(surv, (int, float)) else 0.5
-        weight = base * max(0.3, surv_scale) * derisk_mult
+
+        # ── Sizing: quarter-Kelly when an expectations model exists ──────
+        # mu = expected annual excess return if the expectations gap closes
+        # over ~3 years (only NEGATIVE gaps — priced below demonstrated
+        # growth — count as edge). f = 0.25 * mu / sigma^2, capped.
+        # Mirrored client-side in lib/kelly.ts — keep both in sync.
+        fct = factor.get(sym) or {}
+        vm = valuations.get(sym) or {}
+        gap = vm.get("expectations_gap_pts")
+        sigma = fct.get("fct_vol")
+        if gap is not None and isinstance(sigma, (int, float)) and sigma > 0:
+            mu = max(0.0, min(config["kelly_mu_cap"], -gap / 100.0 / config["kelly_gap_horizon_years"]))
+            sigma_f = max(sigma, config["kelly_sigma_floor"])
+            weight = min(config["kelly_position_cap_pct"],
+                         100 * config["kelly_fraction"] * mu / (sigma_f ** 2))
+            sizing_method = "quarter_kelly"
+            if mu == 0.0:
+                skipped.append({"symbol": sym,
+                                "reason": f"no Kelly edge (expectations gap {gap:+.0f}pts >= 0: price already assumes more growth than demonstrated)"})
+                continue
+        else:
+            base = config["high_risk_position_pct"] if high_risk else config["base_position_pct"]
+            surv_scale = (surv / 100.0) if isinstance(surv, (int, float)) else 0.5
+            weight = base * max(0.3, surv_scale)
+            sizing_method = "heuristic"
+
+        weight *= derisk_mult
         # Forensic flags halve size rather than auto-exclude (flags, not vetoes;
         # the human decides after reading the con line).
         if forensic_fired:
             weight *= 0.5
+
+        # ── Stage-4 overlay multipliers (GPR exposure + informed demand) ──
+        ov = overlay.get(sym) or {}
+        gpr_level = (ov.get("gpr") or {}).get("gpr_level")
+        informed = ov.get("informed_demand")
+        if gpr_level == 3:
+            if gap is None or gap >= 0:
+                skipped.append({"symbol": sym,
+                                "reason": "GPR level 3 requires a negative expectations gap (extra margin of safety)"})
+                continue
+            weight *= 0.5
+        elif gpr_level == 2:
+            weight *= 0.75
+        if informed == -1:
+            weight *= 0.75
+
         weight = round(weight, 2)
 
         if weight < config["min_position_pct"]:
@@ -144,7 +200,8 @@ def main():
         positions.append({
             "symbol": sym,
             "weight_pct": weight,
-            "rank": rv.get("rev_rank"),
+            "rank": fct.get("fct_rank"),
+            "rev_nominated": bool(rv.get("rev_nominated")),
             "archetype": archetype,
             "composite": rv.get("rev_composite"),
             "survivability": surv,
@@ -152,9 +209,14 @@ def main():
             "theme_primary": theme,
             "pdm_band": pdm.get("pdm_band"),
             "pdm_signal": pdm.get("pdm_signal"),
-            "fct_composite": (factor.get(sym) or {}).get("fct_composite"),
-            "fct_rank": (factor.get(sym) or {}).get("fct_rank"),
-            "fct_band": (factor.get(sym) or {}).get("fct_band"),
+            "fct_composite": fct.get("fct_composite"),
+            "fct_rank": fct.get("fct_rank"),
+            "fct_band": fct.get("fct_band"),
+            "sizing_method": sizing_method,
+            "expectations_gap_pts": gap,
+            "fct_vol": sigma,
+            "gpr_level": gpr_level,
+            "informed_demand": informed,
             "high_risk_class": bool(high_risk),
             "forensic_flags": forensic_fired,
             "f_score": bat.get("f_score"),
@@ -211,6 +273,15 @@ def main():
     if skipped:
         lines += ["", "## Skipped (caps/sizing)",
                   *(f"- {s['symbol']}: {s['reason']}" for s in skipped)]
+    kelly_n = sum(1 for p in positions if p.get("sizing_method") == "quarter_kelly")
+    lines += ["", "## Sizing method",
+              f"- Quarter-Kelly: {kelly_n} positions — f = {config['kelly_fraction']} x mu/sigma^2, "
+              f"mu = expectations-gap recovery over {config['kelly_gap_horizon_years']:.0f}y (cap {config['kelly_mu_cap']:.0%}), "
+              f"sigma floor {config['kelly_sigma_floor']:.0%}, position cap {config['kelly_position_cap_pct']}%.",
+              f"- Heuristic fallback: {len(positions) - kelly_n} positions (no expectations model): "
+              "base x survivability scaling.",
+              "- Overlay multipliers: GPR level 2 -> x0.75, level 3 -> x0.5 + requires negative gap; "
+              "informed-demand -1 -> x0.75."]
     lines += ["", "## Standing exit/review triggers (all positions)",
               "- Economics gate falls to 0 or reverse band drops to Reject -> re-underwrite within a week",
               "- A forensic flag newly fires (M/F/accruals/issuance) -> re-underwrite",
