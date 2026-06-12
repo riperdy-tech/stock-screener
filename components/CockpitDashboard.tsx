@@ -300,6 +300,48 @@ function ValuationWorkbench({ ticker, model, marketCap }: { ticker: string; mode
 interface Holding { ticker: string; value: number; }
 const MY_PORTFOLIO_KEY = 'myPortfolio_v1';
 
+const TICKER_RE = /^[A-Z][A-Z0-9.\-]{0,9}$/;
+
+/** Bulk-paste parser. One position per line: first token = ticker, LAST
+ *  number on the line = market value (broker exports typically end the row
+ *  with market value, so extra columns like shares/price are harmless).
+ *  `$`, `%`, commas, parentheses stripped. A line starting with CASH sets
+ *  cash. Returns skipped lines for honest feedback. */
+function parseBulkPortfolio(text: string): { holdings: Holding[]; cash: number | null; skipped: string[] } {
+    const holdings: Holding[] = [];
+    const seen = new Set<string>();
+    let cash: number | null = null;
+    const skipped: string[] = [];
+    for (const rawLine of text.split(/\r?\n/)) {
+        // Strip thousands-separator commas (digit,digit) BEFORE tokenizing,
+        // otherwise "$1,205.00" splits into 1 and 205.00. Commas followed by
+        // whitespace remain column separators ("AAPL, 8000" still works).
+        const line = rawLine.trim().replace(/(\d),(?=\d)/g, '$1');
+        if (!line) continue;
+        const tokens = line.split(/[\s,;\t]+/);
+        const ticker = (tokens[0] || '').toUpperCase().replace(/[^A-Z0-9.\-]/g, '');
+        const numbers = tokens.slice(1)
+            .map(tok => parseFloat(tok.replace(/[$%,()]/g, '')))
+            .filter(n => Number.isFinite(n) && n > 0);
+        const value = numbers.length ? numbers[numbers.length - 1] : NaN;
+        if (ticker === 'CASH' && Number.isFinite(value)) {
+            cash = value;
+            continue;
+        }
+        // Skip obvious header rows (e.g. "Symbol Value") quietly
+        if ((ticker === 'SYMBOL' || ticker === 'TICKER') && !Number.isFinite(value)) continue;
+        if (!TICKER_RE.test(ticker) || !Number.isFinite(value)) {
+            skipped.push(line.slice(0, 40));
+            continue;
+        }
+        if (!seen.has(ticker)) {
+            seen.add(ticker);
+            holdings.push({ ticker, value });
+        }
+    }
+    return { holdings, cash, skipped };
+}
+
 function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect }: {
     factor: Record<string, FactorEntry>;
     valuations: Record<string, ValuationModel>;
@@ -313,6 +355,31 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect }: {
     const [newValue, setNewValue] = useState('');
     const [loaded, setLoaded] = useState(false);
     const [saveStatus, setSaveStatus] = useState<string | null>(null);
+    const [showBulk, setShowBulk] = useState(false);
+    const [bulkText, setBulkText] = useState('');
+    const [bulkStatus, setBulkStatus] = useState<string | null>(null);
+
+    const importBulk = (replace: boolean) => {
+        const { holdings: parsed, cash: parsedCash, skipped } = parseBulkPortfolio(bulkText);
+        if (parsed.length === 0 && parsedCash === null) {
+            setBulkStatus('Nothing parseable found — expected lines like "AAPL 12500".');
+            return;
+        }
+        setHoldings(prev => {
+            if (replace) return parsed;
+            const merged = [...prev];
+            for (const p of parsed) {
+                const i = merged.findIndex(h => h.ticker === p.ticker);
+                if (i >= 0) merged[i] = p; else merged.push(p);
+            }
+            return merged;
+        });
+        if (parsedCash !== null) setCash(parsedCash);
+        setBulkStatus(`Imported ${parsed.length} position${parsed.length === 1 ? '' : 's'}`
+            + (parsedCash !== null ? ` + cash $${parsedCash.toLocaleString()}` : '')
+            + (skipped.length ? ` · skipped ${skipped.length}: ${skipped.slice(0, 3).join(' | ')}${skipped.length > 3 ? '…' : ''}` : ''));
+        setBulkText('');
+    };
 
     const saveSnapshot = async () => {
         setSaveStatus('saving…');
@@ -419,7 +486,37 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect }: {
                     Save snapshot for tracking
                 </button>
                 {saveStatus && <span className="text-[11px] font-bold text-muted-foreground">{saveStatus}</span>}
+                <button onClick={() => setShowBulk(s => !s)}
+                    className="rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground">
+                    {showBulk ? 'Hide bulk paste' : 'Bulk paste…'}
+                </button>
             </div>
+
+            {showBulk && (
+                <div className="mt-2 rounded-md border border-border bg-secondary/10 p-2.5">
+                    <p className="text-[11px] text-muted-foreground">
+                        One position per line: <b className="font-mono text-foreground">TICKER  value</b> — the <b>last number</b> on
+                        each line is taken as market value, so broker rows with extra columns (shares, price…) paste fine.
+                        Separators: spaces, commas, or tabs. <b className="font-mono text-foreground">CASH 5000</b> sets cash.
+                        Example: <span className="font-mono text-foreground">NVDA 12,500.50</span> · <span className="font-mono text-foreground">AAPL, 10, 150.00, 1500.00</span>
+                    </p>
+                    <textarea value={bulkText} onChange={e => setBulkText(e.target.value)}
+                        rows={6} placeholder={'NVDA 12500\nAAPL 8000\nINCY 5,250.75\nCASH 3000'}
+                        className="mt-2 w-full rounded-md border border-border bg-secondary/20 p-2 font-mono text-xs outline-none focus:border-emerald-500/50" />
+                    <div className="mt-1.5 flex flex-wrap items-center gap-2">
+                        <button onClick={() => importBulk(false)}
+                            className="rounded-md border border-emerald-500/40 bg-emerald-500/15 px-3 py-1.5 text-xs font-black text-emerald-300 hover:bg-emerald-500/25">
+                            Import (merge)
+                        </button>
+                        <button onClick={() => importBulk(true)}
+                            className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 text-xs font-black text-amber-300 hover:bg-amber-500/20"
+                            title="Clears the current list and replaces it with the pasted positions">
+                            Replace all
+                        </button>
+                        {bulkStatus && <span className="text-[11px] font-bold text-muted-foreground">{bulkStatus}</span>}
+                    </div>
+                </div>
+            )}
 
             {rows.length > 0 && (
                 <>
