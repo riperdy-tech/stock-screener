@@ -10,7 +10,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import {
     Activity, ArrowUpRight, BarChart3, Briefcase, ExternalLink, FlaskConical,
-    HelpCircle, Layers3, Microscope, RefreshCw, Search, ShieldAlert, X,
+    HelpCircle, Layers3, LineChart as LineChartIcon, RefreshCw, Search, ShieldAlert, X,
 } from 'lucide-react';
 import {
     Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ReferenceLine,
@@ -18,13 +18,13 @@ import {
 } from 'recharts';
 import {
     fetchBacktest, fetchFactorIc, fetchFactorScores, fetchOutcomes,
-    fetchOverlaySignals, fetchPortfolioPlan, fetchStocks, fetchValuationModels,
+    fetchOverlaySignals, fetchPaperLedgers, fetchPortfolioPlan, fetchStocks, fetchValuationModels,
     FactorEntry, FactorScoresPayload, ValuationModel,
 } from '@/lib/data-service';
 import { dcfValue } from '@/lib/dcf';
 import { quarterKelly, POSITION_CAP_PCT } from '@/lib/kelly';
 
-type TabId = 'rankings' | 'research' | 'portfolio' | 'validation';
+type TabId = 'rankings' | 'track' | 'portfolio' | 'validation';
 
 interface StockInfo {
     name: string;
@@ -119,8 +119,10 @@ function HelpModal({ onClose }: { onClose: () => void }) {
                         <p>Click any row for the per-stock detail: factor profile + an interactive valuation workbench where you can drag growth/discount sliders and watch fair value change.</p>
                     </HelpSection>
 
-                    <HelpSection title="Research Queue tab">
-                        <p>Just the Research Now names as cards. Suggested workflow: click a card → read the factor profile → read the valuation verdict → if still interesting, open the Lenses view and run the AI deep-dive. A high rank earns a stock your ATTENTION, never an automatic buy.</p>
+                    <HelpSection title="Track Record tab — the honest meter">
+                        <p>From inception, three portfolios are <b>paper-traded daily, for real, with transaction costs</b> — no backtest, no hindsight. When a stock enters the ranked list it gets bought at that day&apos;s price; when it drops out it gets sold. The record persists forever.</p>
+                        <p><b>plan</b> = following the suggested plan exactly (Kelly sizes, cash). <b>equal</b> = equal-weighting every Research Now name (pure stock-picking test). <b>mine</b> = your saved My Portfolio holdings, unitized like a fund (adding/removing money moves units, never fakes performance).</p>
+                        <p><b>How to read it</b>: plan beating equal = the sizing machinery adds value. Equal beating IWM = the stock selection itself works. Mine lagging plan = your own deviations cost money (the behavior gap). &quot;Sold too early&quot; flags exits that kept rising — a recurring pattern there means the exit rule needs work. Sharpe/CAGR appear only after enough days; early on this page is deliberately boring.</p>
                     </HelpSection>
 
                     <HelpSection title="Portfolio tab">
@@ -310,6 +312,23 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect }: {
     const [newTicker, setNewTicker] = useState('');
     const [newValue, setNewValue] = useState('');
     const [loaded, setLoaded] = useState(false);
+    const [saveStatus, setSaveStatus] = useState<string | null>(null);
+
+    const saveSnapshot = async () => {
+        setSaveStatus('saving…');
+        try {
+            const resp = await fetch('/api/my-portfolio', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ holdings, cash }),
+            });
+            const data = await resp.json();
+            setSaveStatus(data?.ok ? `saved ✓ (tracked from next chain run)` : `failed: ${data?.error || resp.status}`);
+        } catch {
+            setSaveStatus('failed — needs the dev/node server (API route unavailable on static export)');
+        }
+        setTimeout(() => setSaveStatus(null), 6000);
+    };
 
     useEffect(() => {
         try {
@@ -394,6 +413,12 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect }: {
                     <input value={cash || ''} onChange={e => setCash(parseFloat(e.target.value) || 0)} type="number" min="0"
                         className="w-28 rounded-md border border-border bg-secondary/20 px-2 py-1.5 text-xs font-bold outline-none focus:border-emerald-500/50" />
                 </label>
+                <button onClick={saveSnapshot} disabled={holdings.length === 0}
+                    className="rounded-md border border-sky-500/40 bg-sky-500/15 px-3 py-1.5 text-xs font-black text-sky-300 hover:bg-sky-500/25 disabled:opacity-40"
+                    title="Writes public/data/my_portfolio.json so the daily tracker measures your real portfolio (Track Record tab, 'mine' ledger)">
+                    Save snapshot for tracking
+                </button>
+                {saveStatus && <span className="text-[11px] font-bold text-muted-foreground">{saveStatus}</span>}
             </div>
 
             {rows.length > 0 && (
@@ -453,6 +478,8 @@ export default function CockpitDashboard() {
     const [backtest, setBacktest] = useState<any | null>(null);
     const [ic, setIc] = useState<any | null>(null);
     const [overlay, setOverlay] = useState<Record<string, any>>({});
+    const [ledgers, setLedgers] = useState<any | null>(null);
+    const [ledgerView, setLedgerView] = useState<'plan' | 'equal' | 'mine'>('plan');
     const [stockInfo, setStockInfo] = useState<Record<string, StockInfo>>({});
     const [loading, setLoading] = useState(true);
 
@@ -465,10 +492,12 @@ export default function CockpitDashboard() {
 
     const loadAll = async () => {
         setLoading(true);
-        const [f, v, p, o, b, i, ov, s] = await Promise.all([
+        const [f, v, p, o, b, i, ov, pl, s] = await Promise.all([
             fetchFactorScores(), fetchValuationModels(), fetchPortfolioPlan(),
-            fetchOutcomes(), fetchBacktest(), fetchFactorIc(), fetchOverlaySignals(), fetchStocks('US'),
+            fetchOutcomes(), fetchBacktest(), fetchFactorIc(), fetchOverlaySignals(),
+            fetchPaperLedgers(), fetchStocks('US'),
         ]);
+        setLedgers(pl);
         setFactor(f);
         setValuations(v?.tickers ?? {});
         setPlan(p);
@@ -514,9 +543,39 @@ export default function CockpitDashboard() {
         return true;
     }), [rows, bandFilter, sectorFilter, search, stockInfo]);
 
-    const researchRows = useMemo(
-        () => rows.filter(([, e]) => e.fct_band === 'research_now'),
-        [rows]);
+    const navCurve = useMemo(() => {
+        const L = ledgers?.ledgers;
+        if (!L) return [];
+        const byDate: Record<string, any> = {};
+        const firsts: Record<string, number> = {};
+        for (const name of ['plan', 'equal', 'mine'] as const) {
+            for (const row of L[name]?.nav_series ?? []) {
+                if (row.nav === null || row.nav === undefined) continue;
+                byDate[row.date] = byDate[row.date] || { date: row.date };
+                if (firsts[name] === undefined) firsts[name] = row.nav;
+                byDate[row.date][name] = Number(((row.nav / firsts[name]) * 100).toFixed(2));
+                if (row.bench !== null && row.bench !== undefined) {
+                    if (firsts.iwm === undefined) firsts.iwm = row.bench;
+                    byDate[row.date].iwm = Number(((row.bench / firsts.iwm) * 100).toFixed(2));
+                }
+            }
+        }
+        return Object.values(byDate).sort((a: any, b: any) => a.date.localeCompare(b.date));
+    }, [ledgers]);
+
+    const soldTooEarly = useMemo(() => {
+        const L = ledgers?.ledgers;
+        if (!L) return [];
+        const out: any[] = [];
+        for (const name of ['plan', 'equal'] as const) {
+            for (const c of L[name]?.closed ?? []) {
+                if (c.post_exit_return_pct !== null && c.post_exit_return_pct > 10) {
+                    out.push({ ...c, ledger: name });
+                }
+            }
+        }
+        return out.sort((a, b) => b.post_exit_return_pct - a.post_exit_return_pct).slice(0, 10);
+    }, [ledgers]);
 
     const equityCurve = useMemo(() => {
         const quarters = backtest?.quarters ?? [];
@@ -545,7 +604,7 @@ export default function CockpitDashboard() {
 
     const tabs: { id: TabId; label: string; icon: any }[] = [
         { id: 'rankings', label: 'Rankings', icon: BarChart3 },
-        { id: 'research', label: 'Research Queue', icon: Microscope },
+        { id: 'track', label: 'Track Record', icon: LineChartIcon },
         { id: 'portfolio', label: 'Portfolio', icon: Briefcase },
         { id: 'validation', label: 'Validation', icon: Activity },
     ];
@@ -672,36 +731,143 @@ export default function CockpitDashboard() {
                     </div>
                 )}
 
-                {/* ── Research Queue ─────────────────────────────────── */}
-                {tab === 'research' && (
-                    <div className="space-y-2">
-                        <p className="text-xs font-semibold text-muted-foreground">
-                            Top {researchRows.length} (≥97th percentile, post-veto, post-haircut). Each deserves a thesis before any buy — open the workbench, read the gap, then run the AI deep-dive from the Lenses page.
-                        </p>
-                        <div className="grid gap-2 md:grid-cols-2 2xl:grid-cols-3">
-                            {researchRows.map(([t, e]) => {
-                                const info = stockInfo[t];
-                                const vm = valuations[t];
+                {/* ── Track Record (live paper-trading ledgers) ─────────── */}
+                {tab === 'track' && (ledgers?.ledgers ? (
+                    <div className="space-y-4">
+                        <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
+                            <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
+                            <p>
+                                <b>The honest meter.</b> Since {ledgers.inception}, three portfolios are paper-traded daily:
+                                {' '}<b className="text-emerald-300">plan</b> (following the suggested plan exactly),
+                                {' '}<b className="text-sky-300">equal</b> (equal-weight every Research Now name),
+                                {' '}<b className="text-violet-300">mine</b> (your saved holdings). Plan−equal isolates the value of sizing;
+                                mine−plan shows your behavior gap. Costs: {ledgers.config?.cost_bps}bps per trade.{' '}
+                                <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
+                            </p>
+                        </div>
+
+                        <div className="grid gap-3 lg:grid-cols-3">
+                            {(['plan', 'equal', 'mine'] as const).map(name => {
+                                const s = ledgers.ledgers[name]?.summary ?? {};
+                                const live = s.observations > 0 && ledgers.ledgers[name].nav_series.some((r: any) => r.nav !== null);
                                 return (
-                                    <button key={t} onClick={() => setSelected(t)}
-                                        className="rounded-lg border border-border bg-card/95 p-3 text-left transition-all hover:-translate-y-0.5 hover:border-emerald-500/40">
-                                        <div className="flex items-start justify-between gap-2">
-                                            <div>
-                                                <div className="text-base font-black">{t} <span className="font-mono text-xs text-emerald-300">#{e.fct_rank}</span></div>
-                                                <div className="max-w-[220px] truncate text-[11px] text-muted-foreground">{info?.name}</div>
+                                    <div key={name} className={clsx('rounded-lg border bg-card/95 p-3',
+                                        ledgerView === name ? 'border-emerald-500/50' : 'border-border')}>
+                                        <button onClick={() => setLedgerView(name)} className="w-full text-left">
+                                            <div className="flex items-baseline justify-between">
+                                                <span className="text-xs font-black uppercase tracking-wider">{name}</span>
+                                                <span className="font-mono text-lg font-black">
+                                                    {live && s.cumulative_return_pct !== undefined && s.cumulative_return_pct !== null
+                                                        ? `${s.cumulative_return_pct >= 0 ? '+' : ''}${s.cumulative_return_pct}%` : '—'}
+                                                </span>
                                             </div>
-                                            <span className="font-mono text-lg font-black text-emerald-300">{e.fct_composite?.toFixed(1)}</span>
-                                        </div>
-                                        <div className="mt-2"><ContributionBar entry={e} /></div>
-                                        <p className="mt-2 line-clamp-2 text-[11px] text-muted-foreground">
-                                            {vm?.verdict || 'No reverse-DCF model for this name.'}
-                                        </p>
-                                    </button>
+                                            <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-[11px] text-muted-foreground">
+                                                <span>CAGR: <b className="font-mono text-foreground">{s.cagr_pct ?? 'too early'}</b></span>
+                                                <span>Max DD: <b className="font-mono text-foreground">{s.max_drawdown_pct ?? '—'}%</b></span>
+                                                <span>Sharpe: <b className="font-mono text-foreground">{s.sharpe ?? 'needs 21d'}</b></span>
+                                                <span>vs IWM: <b className="font-mono text-foreground">{s.excess_vs_bench_pct ?? '—'}{s.excess_vs_bench_pct !== null && s.excess_vs_bench_pct !== undefined ? 'pts' : ''}</b></span>
+                                                <span>Win rate: <b className="font-mono text-foreground">{s.win_rate_pct ?? '—'}{s.win_rate_pct ? '%' : ''}</b></span>
+                                                <span>Open: <b className="font-mono text-foreground">{s.open_positions ?? 0}</b></span>
+                                            </div>
+                                            {!live && name === 'mine' && (
+                                                <p className="mt-2 text-[10px] text-amber-300">Idle — save a My Portfolio snapshot (Portfolio tab) to start tracking.</p>
+                                            )}
+                                        </button>
+                                    </div>
                                 );
                             })}
                         </div>
+
+                        <div className="rounded-lg border border-border bg-card/95 p-3">
+                            <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">NAV — indexed to 100 at inception</h3>
+                            <ResponsiveContainer width="100%" height={280}>
+                                <LineChart data={navCurve}>
+                                    <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
+                                    <XAxis dataKey="date" tick={{ fontSize: 9 }} stroke="#64748b" />
+                                    <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10 }} stroke="#64748b" />
+                                    <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
+                                    <Legend wrapperStyle={{ fontSize: 11 }} />
+                                    <Line type="monotone" dataKey="plan" stroke="#34d399" dot={false} strokeWidth={2} />
+                                    <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} />
+                                    <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} />
+                                    <Line type="monotone" dataKey="iwm" stroke="#64748b" dot={false} strokeWidth={1.5} strokeDasharray="4 3" />
+                                </LineChart>
+                            </ResponsiveContainer>
+                            {navCurve.length < 5 && (
+                                <p className="mt-1 text-[11px] text-muted-foreground">Day {navCurve.length} — lines get meaningful after a few weeks. This page is designed to be boring for a while.</p>
+                            )}
+                        </div>
+
+                        <div className="grid gap-4 xl:grid-cols-2">
+                            <div className="rounded-lg border border-border bg-card/95 p-3">
+                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
+                                    Open positions — {ledgerView}
+                                </h3>
+                                <div className="max-h-72 overflow-y-auto">
+                                    <table className="w-full text-left text-xs">
+                                        <thead className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                                            <tr><th className="px-2 py-1.5">Sym</th><th className="px-2 py-1.5">Entry</th>
+                                                <th className="px-2 py-1.5 text-right">Entry $</th><th className="px-2 py-1.5 text-right">Now $</th>
+                                                <th className="px-2 py-1.5 text-right">P&L</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            {Object.entries(ledgers.ledgers[ledgerView]?.state?.holdings ?? {}).map(([t, h]: [string, any]) => {
+                                                const mark = ledgers.ledgers[ledgerView]?.last_marks?.[t];
+                                                const pnl = mark && h.entry_price ? (mark / h.entry_price - 1) * 100 : null;
+                                                return (
+                                                    <tr key={t} className="border-t border-border/50">
+                                                        <td className="cursor-pointer px-2 py-1.5 font-black hover:text-emerald-300" onClick={() => setSelected(t)}>{t}</td>
+                                                        <td className="px-2 py-1.5 font-mono text-muted-foreground">{h.entry_date}</td>
+                                                        <td className="px-2 py-1.5 text-right font-mono">{h.entry_price}</td>
+                                                        <td className="px-2 py-1.5 text-right font-mono">{mark ?? '—'}</td>
+                                                        <td className={clsx('px-2 py-1.5 text-right font-mono font-black',
+                                                            pnl === null ? 'text-muted-foreground' : pnl >= 0 ? 'text-success' : 'text-danger')}>
+                                                            {pnl === null ? '—' : `${pnl >= 0 ? '+' : ''}${pnl.toFixed(1)}%`}
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div className="rounded-lg border border-border bg-card/95 p-3">
+                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
+                                    Recent trades — {ledgerView}
+                                </h3>
+                                <div className="max-h-72 overflow-y-auto">
+                                    <table className="w-full text-left text-xs">
+                                        <tbody>
+                                            {(ledgers.ledgers[ledgerView]?.trades ?? []).slice(-25).reverse().map((tr: any, i: number) => (
+                                                <tr key={i} className="border-t border-border/50">
+                                                    <td className="px-2 py-1.5 font-mono text-muted-foreground">{tr.date}</td>
+                                                    <td className={clsx('px-2 py-1.5 font-black uppercase', tr.side === 'buy' ? 'text-emerald-300' : 'text-red-300')}>{tr.side}</td>
+                                                    <td className="px-2 py-1.5 font-black">{tr.ticker}</td>
+                                                    <td className="px-2 py-1.5 text-right font-mono">{tr.price ?? '—'}</td>
+                                                    <td className="px-2 py-1.5 text-[10px] text-muted-foreground">{(tr.reason || '').replace(/_/g, ' ')}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        {soldTooEarly.length > 0 && (
+                            <div className="rounded-lg border border-amber-500/40 bg-amber-500/[0.06] p-3">
+                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-amber-300">Sold too early? (+10%+ within 30 days after exit)</h3>
+                                <div className="flex flex-wrap gap-2 text-xs">
+                                    {soldTooEarly.map((c, i) => (
+                                        <span key={i} className="rounded-md border border-amber-500/40 bg-amber-500/10 px-2 py-1 font-mono">
+                                            {c.ticker} ({c.ledger}): +{c.post_exit_return_pct}% in {c.post_exit_days}d post-exit
+                                        </span>
+                                    ))}
+                                </div>
+                                <p className="mt-2 text-[11px] text-muted-foreground">Recurring pattern here = exits fire too fast; consider a stickier exit band.</p>
+                            </div>
+                        )}
                     </div>
-                )}
+                ) : <p className="text-sm text-muted-foreground">No paper ledger yet — run the chain once (run_chain.bat).</p>)}
 
                 {/* ── Portfolio ──────────────────────────────────────── */}
                 {tab === 'portfolio' && (plan ? (

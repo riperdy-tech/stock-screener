@@ -117,6 +117,13 @@ def main():
     if ok and not run_step("build_valuation_models", ["scripts/build_valuation_models.py"], steps):
         print("FATAL: build_valuation_models failed.")
         ok = False
+    if ok and not run_step("build_portfolio_plan", ["scripts/build_portfolio_plan.py"], steps):
+        print("FATAL: build_portfolio_plan failed.")
+        ok = False
+    if ok and not run_step("track_paper_portfolios", ["scripts/track_paper_portfolios.py"]
+                           + (["--skip-benchmark"] if args.skip_macro else []), steps):
+        print("FATAL: track_paper_portfolios failed.")
+        ok = False
 
     # ── Post-run invariants (artifact-based, not stdout-parsed) ─────────
     print("\n=== INVARIANTS ".ljust(60, "="))
@@ -175,6 +182,23 @@ def main():
         add_invariant(invariants, "valuation_models", "soft",
                       valuation.get("modeled_count", 0) >= 50,
                       f"{valuation.get('modeled_count', 0)} reverse-DCF models built")
+
+        plan_path = DATA / "portfolio_plan.json"
+        add_invariant(invariants, "portfolio_plan_regenerated", "hard",
+                      plan_path.exists() and plan_path.stat().st_mtime >= chain_start,
+                      "portfolio_plan.json written by this run")
+
+        ledgers_path = DATA / "paper_ledgers.json"
+        ledgers = load_json(ledgers_path) if ledgers_path.exists() else {}
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        plan_series = ((ledgers.get("ledgers") or {}).get("plan") or {}).get("nav_series") or []
+        ledger_current = bool(plan_series) and plan_series[-1].get("date") == today
+        add_invariant(invariants, "paper_ledger_updated", "hard", ledger_current,
+                      f"paper ledger latest row {plan_series[-1]['date'] if plan_series else 'none'} (expect {today})")
+        mine_series = ((ledgers.get("ledgers") or {}).get("mine") or {}).get("nav_series") or []
+        mine_live = bool(mine_series) and mine_series[-1].get("nav") is not None
+        add_invariant(invariants, "mine_ledger_active", "soft", mine_live,
+                      "mine ledger tracking" if mine_live else "mine ledger idle (no My Portfolio snapshot saved yet)")
 
         # ── Factor Lab forward log (dated, append-only — outcome tracking) ──
         factor_log = DATA / "factor_signal_log.jsonl"
