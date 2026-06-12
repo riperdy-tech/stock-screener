@@ -342,6 +342,10 @@ export async function fetchOverlaySignals(): Promise<any | null> {
     return fetchJson('/data/overlay_signals.json');
 }
 
+export async function fetchPaperLedgers(): Promise<any | null> {
+    return fetchJson('/data/paper_ledgers.json');
+}
+
 export async function fetchParadigmHistory(): Promise<ParadigmHistoryPayload> {
     try {
         const response = await fetch(`/data/paradigm_history.json?t=${new Date().getTime()}`);
