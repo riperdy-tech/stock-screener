@@ -61,8 +61,9 @@ public/data/sec_facts/
 public/data/paradigm_signal_log.jsonl
 public/data/paradigm_run_log.jsonl
 
-# Large ETL audit-trail output (regenerate via build_fundamentals_history.py)
-public/data/fundamentals_history.json
+# NOTE: fundamentals_history.json is NOT ignored — score_factors.py derives the
+# Value factor from it, so it is a load-bearing chain input that must be present
+# on every CI checkout (regenerated weekly by build_fundamentals_history.py).
 etl_full_run.log
 public/data/backtest_prices.json
 backtest_fetch.log
