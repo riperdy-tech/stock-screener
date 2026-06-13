@@ -50,7 +50,8 @@ RESULTS_JSON = DATA / "backtest_results.json"
 REPORT_MD = DATA / "backtest_report.md"
 FACTOR_IC_JSON = DATA / "factor_ic.json"
 
-BENCHMARK = "IWM"
+BENCHMARK = "IWM"  # primary (small-cap); SPY/QQQ added for context
+BENCHMARKS = ["IWM", "SPY", "QQQ"]
 PRICE_START = "2014-01-01"
 FORMATION_START_YEAR = 2017
 MIN_MCAP = 100_000_000
@@ -71,7 +72,7 @@ def fetch_prices():
     import yfinance as yf
 
     history = json.loads(HISTORY_JSON.read_text(encoding="utf-8"))["tickers"]
-    tickers = sorted(history.keys()) + [BENCHMARK]
+    tickers = sorted(set(history.keys()) | set(BENCHMARKS))
     print(f"Fetching monthly closes for {len(tickers)} tickers since {PRICE_START} ...")
 
     prices = {}
@@ -246,6 +247,7 @@ def run_backtest():
     if not bench:
         print(f"FATAL: no {BENCHMARK} prices — run --fetch-prices first.")
         sys.exit(1)
+    bench_series = {b: pricedata.get(b, {}) for b in BENCHMARKS}
 
     # Pre-compute split-adjusted shares per ticker
     adj_shares_all = {}
@@ -376,6 +378,10 @@ def run_backtest():
         top_ret, top_missing = cohort_return(top)
         bottom_ret, _ = cohort_return(bottom)
         bench_ret = bench[n_key] / bench[f_key] - 1
+        bench_rets = {}
+        for b, ser in bench_series.items():
+            if f_key in ser and n_key in ser and ser[f_key]:
+                bench_rets[b] = ser[n_key] / ser[f_key] - 1
 
         # ── Per-factor rank-IC vs forward 3m return (Factor Lab calibration) ──
         fwd = {}
@@ -400,7 +406,7 @@ def run_backtest():
 
         if top_ret is None:
             continue
-        quarters.append({
+        q_row = {
             "formation": f_key,
             "n_candidates": len(candidates),
             "n_top": n_top,
@@ -409,7 +415,12 @@ def run_backtest():
             "iwm_return_pct": round(bench_ret * 100, 2),
             "excess_vs_iwm_pct": round((top_ret - bench_ret) * 100, 2),
             "missing_end_price": top_missing,
-        })
+        }
+        for b in BENCHMARKS:
+            br = bench_rets.get(b)
+            q_row[f"{b.lower()}_return_pct"] = round(br * 100, 2) if br is not None else None
+            q_row[f"excess_vs_{b.lower()}_pct"] = round((top_ret - br) * 100, 2) if br is not None else None
+        quarters.append(q_row)
 
     # ── Aggregates ───────────────────────────────────────────────────────
     def chain(rets):
@@ -454,7 +465,25 @@ def run_backtest():
         "mean_decile_spread_pct": round(sum(
             q["top_return_pct"] - q["bottom_decile_return_pct"]
             for q in quarters if q["bottom_decile_return_pct"] is not None) / n_q, 2) if n_q else None,
+        "benchmarks": BENCHMARKS,
     }
+    # Per-benchmark CAGR / drawdown / hit rate (SPY, QQQ context alongside IWM)
+    for b in BENCHMARKS:
+        key = f"{b.lower()}_return_pct"
+        b_quarters = [q for q in quarters if q.get(key) is not None]
+        if not b_quarters:
+            continue
+        b_rets = [q[key] / 100 for q in b_quarters]
+        eq_b, dd_b = chain(b_rets)
+        b_years = len(b_rets) / 4
+        summary[f"{b.lower()}_cagr_pct"] = round((eq_b ** (1 / b_years) - 1) * 100, 2) if b_years else None
+        summary[f"{b.lower()}_max_drawdown_pct"] = round(dd_b * 100, 1)
+        ex_key = f"excess_vs_{b.lower()}_pct"
+        ex_quarters = [q for q in quarters if q.get(ex_key) is not None]
+        summary[f"hit_rate_vs_{b.lower()}_pct"] = round(
+            100 * sum(1 for q in ex_quarters if q[ex_key] > 0) / len(ex_quarters), 1) if ex_quarters else None
+        summary[f"mean_excess_vs_{b.lower()}_pct"] = round(
+            sum(q[ex_key] for q in ex_quarters) / len(ex_quarters), 2) if ex_quarters else None
 
     # ── Factor IC output (Factor Lab weight calibration + Validation tab) ──
     ic_summary = {}
@@ -482,7 +511,7 @@ def run_backtest():
         "method": {
             "weights": WEIGHTS, "top_fraction": TOP_FRACTION, "min_mcap": MIN_MCAP,
             "fundamentals_lag": "FY y usable from July 1, y+1 (Fama-French)",
-            "rebalance": "quarterly", "benchmark": BENCHMARK,
+            "rebalance": "quarterly", "benchmark": BENCHMARK, "benchmarks": BENCHMARKS,
             "vetoes": "accruals>0.10, issuance>10%/yr (split-adjusted), mini-Piotroski<=1/4",
         },
         "summary": summary,
@@ -494,16 +523,17 @@ def run_backtest():
              f"**{SURVIVORSHIP_NOTE}**", "",
              f"**Live expectation: ~half of these numbers** (post-publication decay, McLean-Pontiff 2016). Trials: 1 (no parameter search on this configuration).", "",
              f"Generated: {payload['generated_at']}  |  Quarters: {n_q}", "",
-             f"| | Strategy (top decile) | IWM |", "|---|---|---|",
-             f"| CAGR | {summary['strategy_cagr_pct']}% | {summary['iwm_cagr_pct']}% |",
-             f"| Max drawdown | {summary['strategy_max_drawdown_pct']}% | {summary['iwm_max_drawdown_pct']}% |", "",
-             f"Hit rate vs IWM: {summary['hit_rate_vs_iwm_pct']}% of quarters  |  "
-             f"Mean quarterly excess: {summary['mean_quarterly_excess_pct']}%  |  "
-             f"Mean top-bottom decile spread: {summary['mean_decile_spread_pct']}%", "",
-             "| Formation | n | Top% | Bottom% | IWM% | Excess% |", "|---|---|---|---|---|---|"]
+             f"| | Strategy (top decile) | IWM | SPY | QQQ |", "|---|---|---|---|---|",
+             f"| CAGR | {summary['strategy_cagr_pct']}% | {summary['iwm_cagr_pct']}% | {summary.get('spy_cagr_pct')}% | {summary.get('qqq_cagr_pct')}% |",
+             f"| Max drawdown | {summary['strategy_max_drawdown_pct']}% | {summary['iwm_max_drawdown_pct']}% | {summary.get('spy_max_drawdown_pct')}% | {summary.get('qqq_max_drawdown_pct')}% |", "",
+             f"Hit rate: vs IWM {summary['hit_rate_vs_iwm_pct']}% · vs SPY {summary.get('hit_rate_vs_spy_pct')}% · vs QQQ {summary.get('hit_rate_vs_qqq_pct')}% of quarters  |  "
+             f"Mean excess: IWM {summary.get('mean_excess_vs_iwm_pct')}% · SPY {summary.get('mean_excess_vs_spy_pct')}% · QQQ {summary.get('mean_excess_vs_qqq_pct')}%  |  "
+             f"Decile spread: {summary['mean_decile_spread_pct']}%", "",
+             "| Formation | n | Top% | Bottom% | IWM% | SPY% | QQQ% | Excess vs IWM% |", "|---|---|---|---|---|---|---|---|"]
     for q in quarters:
         lines.append(f"| {q['formation']} | {q['n_candidates']} | {q['top_return_pct']} "
-                     f"| {q['bottom_decile_return_pct']} | {q['iwm_return_pct']} | {q['excess_vs_iwm_pct']} |")
+                     f"| {q['bottom_decile_return_pct']} | {q['iwm_return_pct']} "
+                     f"| {q.get('spy_return_pct')} | {q.get('qqq_return_pct')} | {q['excess_vs_iwm_pct']} |")
     lines += ["", f"_Method: {json.dumps(payload['method'])}_"]
     REPORT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
 

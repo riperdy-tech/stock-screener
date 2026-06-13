@@ -44,7 +44,7 @@ PRICE_CACHE_JSON = DATA / "outcome_price_cache.json"
 OUTCOMES_JSON = DATA / "outcome_backfill.json"
 REPORT_MD = DATA / "outcomes_report.md"
 
-BENCHMARKS = ["IWM", "SPY"]
+BENCHMARKS = ["IWM", "SPY", "QQQ"]  # small-cap, S&P 500, Nasdaq-100
 HORIZON_DAYS = [30, 91, 182, 365]  # ~1m / 3m / 6m / 12m calendar horizons
 
 
@@ -181,22 +181,27 @@ def evaluate_cohort(symbols, meta_by_symbol, snap, horizon_target, cache, bench_
         return None
 
     s = pd.Series(returns)
+    mean_ret = float(s.mean())
     iwm = bench_returns.get("IWM")
-    spy = bench_returns.get("SPY")
     stats = {
         "n_evaluated": len(returns),
         "n_missing_price_at_horizon": missing_end,
         "n_missing_price_at_start": missing_start,
-        "mean_return_pct": round(float(s.mean()) * 100, 2),
+        "mean_return_pct": round(mean_ret * 100, 2),
         "median_return_pct": round(float(s.median()) * 100, 2),
         "worst_return_pct": round(float(s.min()) * 100, 2),
         "best_return_pct": round(float(s.max()) * 100, 2),
         "iwm_return_pct": round(iwm * 100, 2) if iwm is not None else None,
-        "spy_return_pct": round(spy * 100, 2) if spy is not None else None,
         "pct_beat_iwm": pct(sum(1 for r in returns if iwm is not None and r > iwm), len(returns)) if iwm is not None else None,
-        "mean_excess_vs_iwm_pct": round((float(s.mean()) - iwm) * 100, 2) if iwm is not None else None,
+        "mean_excess_vs_iwm_pct": round((mean_ret - iwm) * 100, 2) if iwm is not None else None,
         "members": sorted(rows, key=lambda x: -x["return_pct"]),
     }
+    # Per-benchmark return, hit rate, and mean excess (IWM primary, SPY/QQQ context)
+    for b in BENCHMARKS:
+        br = bench_returns.get(b)
+        stats[f"{b.lower()}_return_pct"] = round(br * 100, 2) if br is not None else None
+        stats[f"pct_beat_{b.lower()}"] = pct(sum(1 for r in returns if br is not None and r > br), len(returns)) if br is not None else None
+        stats[f"mean_excess_vs_{b.lower()}_pct"] = round((mean_ret - br) * 100, 2) if br is not None else None
     return stats
 
 
@@ -276,6 +281,7 @@ def main():
     payload = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "benchmark_primary": "IWM",
+        "benchmarks": BENCHMARKS,
         "note": ("Missing-price members are excluded from return stats but counted in "
                  "n_missing_price_at_horizon — do not ignore them, they may be delistings."),
         "evaluated": results,
@@ -285,14 +291,15 @@ def main():
 
     # ── Markdown report ──────────────────────────────────────────────────
     lines = ["# Signal Outcome Report", "",
-             f"Generated: {payload['generated_at']}  |  Benchmark: IWM (small-cap), SPY shown for context", ""]
+             f"Generated: {payload['generated_at']}  |  Benchmarks: IWM (small-cap, primary), SPY (S&P 500), QQQ (Nasdaq-100)", ""]
     if results:
-        lines += ["| Cohort | Horizon | Source | n | Median | Mean | IWM | Excess vs IWM | %>IWM | Missing@end |",
-                  "|---|---|---|---|---|---|---|---|---|---|"]
+        lines += ["| Cohort | Horizon | Source | n | Median | Mean | IWM | SPY | QQQ | Excess vs IWM | %>IWM | Missing@end |",
+                  "|---|---|---|---|---|---|---|---|---|---|---|---|"]
         for r in results:
             lines.append(
                 f"| {r['snapshot_date']} | {r['horizon_days']}d | {r['source']} | {r['n_evaluated']} "
                 f"| {r['median_return_pct']}% | {r['mean_return_pct']}% | {r['iwm_return_pct']}% "
+                f"| {r.get('spy_return_pct')}% | {r.get('qqq_return_pct')}% "
                 f"| {r['mean_excess_vs_iwm_pct']}% | {r['pct_beat_iwm']}% | {r['n_missing_price_at_horizon']} |")
     else:
         lines.append("No cohorts have matured to any horizon yet.")

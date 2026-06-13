@@ -645,15 +645,20 @@ export default function CockpitDashboard() {
         if (!L) return [];
         const byDate: Record<string, any> = {};
         const firsts: Record<string, number> = {};
+        const benchKeys: Record<string, string> = { IWM: 'iwm', SPY: 'spy', QQQ: 'qqq' };
         for (const name of ['plan', 'equal', 'mine'] as const) {
             for (const row of L[name]?.nav_series ?? []) {
                 if (row.nav === null || row.nav === undefined) continue;
                 byDate[row.date] = byDate[row.date] || { date: row.date };
                 if (firsts[name] === undefined) firsts[name] = row.nav;
                 byDate[row.date][name] = Number(((row.nav / firsts[name]) * 100).toFixed(2));
-                if (row.bench !== null && row.bench !== undefined) {
-                    if (firsts.iwm === undefined) firsts.iwm = row.bench;
-                    byDate[row.date].iwm = Number(((row.bench / firsts.iwm) * 100).toFixed(2));
+                // Benchmarks: prefer the multi-benchmark dict, fall back to scalar IWM
+                const benches = row.benches || (row.bench != null ? { IWM: row.bench } : {});
+                for (const [sym, key] of Object.entries(benchKeys)) {
+                    const v = benches[sym];
+                    if (v === null || v === undefined) continue;
+                    if (firsts[key] === undefined) firsts[key] = v;
+                    byDate[row.date][key] = Number(((v / firsts[key]) * 100).toFixed(2));
                 }
             }
         }
@@ -677,10 +682,17 @@ export default function CockpitDashboard() {
     const equityCurve = useMemo(() => {
         const quarters = backtest?.quarters ?? [];
         let s = 1, w = 1;
+        let spy = 1, qqq = 1;
         return quarters.map((q: any) => {
             s *= 1 + q.top_return_pct / 100;
             w *= 1 + q.iwm_return_pct / 100;
-            return { formation: q.formation, strategy: Number(s.toFixed(3)), iwm: Number(w.toFixed(3)), excess: q.excess_vs_iwm_pct };
+            if (q.spy_return_pct != null) spy *= 1 + q.spy_return_pct / 100;
+            if (q.qqq_return_pct != null) qqq *= 1 + q.qqq_return_pct / 100;
+            return {
+                formation: q.formation, strategy: Number(s.toFixed(3)),
+                iwm: Number(w.toFixed(3)), spy: Number(spy.toFixed(3)), qqq: Number(qqq.toFixed(3)),
+                excess: q.excess_vs_iwm_pct,
+            };
         });
     }, [backtest]);
 
@@ -862,9 +874,19 @@ export default function CockpitDashboard() {
                                                 <span>CAGR: <b className="font-mono text-foreground">{s.cagr_pct ?? 'too early'}</b></span>
                                                 <span>Max DD: <b className="font-mono text-foreground">{s.max_drawdown_pct ?? '—'}%</b></span>
                                                 <span>Sharpe: <b className="font-mono text-foreground">{s.sharpe ?? 'needs 21d'}</b></span>
-                                                <span>vs IWM: <b className="font-mono text-foreground">{s.excess_vs_bench_pct ?? '—'}{s.excess_vs_bench_pct !== null && s.excess_vs_bench_pct !== undefined ? 'pts' : ''}</b></span>
                                                 <span>Win rate: <b className="font-mono text-foreground">{s.win_rate_pct ?? '—'}{s.win_rate_pct ? '%' : ''}</b></span>
                                                 <span>Open: <b className="font-mono text-foreground">{s.open_positions ?? 0}</b></span>
+                                            </div>
+                                            <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 border-t border-border/40 pt-1.5 text-[11px] text-muted-foreground">
+                                                {(['IWM', 'SPY', 'QQQ'] as const).map(b => {
+                                                    const ex = (s.excess_vs || {})[b];
+                                                    const fallback = b === 'IWM' ? s.excess_vs_bench_pct : undefined;
+                                                    const val = ex !== undefined ? ex : fallback;
+                                                    return (
+                                                        <span key={b}>vs {b}: <b className={clsx('font-mono', val == null ? 'text-muted-foreground' : val >= 0 ? 'text-success' : 'text-danger')}>
+                                                            {val == null ? '—' : `${val >= 0 ? '+' : ''}${val}pts`}</b></span>
+                                                    );
+                                                })}
                                             </div>
                                             {!live && name === 'mine' && (
                                                 <p className="mt-2 text-[10px] text-amber-300">Idle — save a My Portfolio snapshot (Portfolio tab) to start tracking.</p>
@@ -887,7 +909,9 @@ export default function CockpitDashboard() {
                                     <Line type="monotone" dataKey="plan" stroke="#34d399" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} />
-                                    <Line type="monotone" dataKey="iwm" stroke="#64748b" dot={false} strokeWidth={1.5} strokeDasharray="4 3" />
+                                    <Line type="monotone" dataKey="iwm" name="IWM" stroke="#64748b" dot={false} strokeWidth={1.5} strokeDasharray="4 3" />
+                                    <Line type="monotone" dataKey="spy" name="SPY" stroke="#94a3b8" dot={false} strokeWidth={1.5} strokeDasharray="2 2" />
+                                    <Line type="monotone" dataKey="qqq" name="QQQ" stroke="#facc15" dot={false} strokeWidth={1.5} strokeDasharray="1 3" />
                                 </LineChart>
                             </ResponsiveContainer>
                             {navCurve.length < 5 && (
@@ -1063,7 +1087,9 @@ export default function CockpitDashboard() {
                             {backtest?.summary && [
                                 ['Strategy CAGR', `${backtest.summary.strategy_cagr_pct}%`],
                                 ['IWM CAGR', `${backtest.summary.iwm_cagr_pct}%`],
-                                ['Hit rate', `${backtest.summary.hit_rate_vs_iwm_pct}%`],
+                                ['SPY CAGR', `${backtest.summary.spy_cagr_pct ?? '—'}%`],
+                                ['QQQ CAGR', `${backtest.summary.qqq_cagr_pct ?? '—'}%`],
+                                ['Hit rate vs IWM', `${backtest.summary.hit_rate_vs_iwm_pct}%`],
                                 ['Decile spread', `${backtest.summary.mean_decile_spread_pct}%/q`],
                                 ['Max DD', `${backtest.summary.strategy_max_drawdown_pct}%`],
                             ].map(([k, v]) => (
@@ -1075,7 +1101,7 @@ export default function CockpitDashboard() {
                         </div>
                         <div className="grid gap-4 xl:grid-cols-2">
                             <div className="rounded-lg border border-border bg-card/95 p-3">
-                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Equity curve — top decile vs IWM (quarterly)</h3>
+                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Equity curve — top decile vs IWM / SPY / QQQ (quarterly)</h3>
                                 <ResponsiveContainer width="100%" height={260}>
                                     <LineChart data={equityCurve}>
                                         <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
@@ -1084,7 +1110,9 @@ export default function CockpitDashboard() {
                                         <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
                                         <Legend wrapperStyle={{ fontSize: 11 }} />
                                         <Line type="monotone" dataKey="strategy" stroke="#34d399" dot={false} strokeWidth={2} />
-                                        <Line type="monotone" dataKey="iwm" stroke="#64748b" dot={false} strokeWidth={2} />
+                                        <Line type="monotone" dataKey="iwm" name="IWM" stroke="#64748b" dot={false} strokeWidth={2} />
+                                        <Line type="monotone" dataKey="spy" name="SPY" stroke="#94a3b8" dot={false} strokeWidth={1.5} strokeDasharray="3 2" />
+                                        <Line type="monotone" dataKey="qqq" name="QQQ" stroke="#facc15" dot={false} strokeWidth={1.5} strokeDasharray="1 3" />
                                     </LineChart>
                                 </ResponsiveContainer>
                             </div>
@@ -1128,7 +1156,9 @@ export default function CockpitDashboard() {
                                         <thead className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
                                             <tr><th className="px-2 py-1.5">Cohort</th><th className="px-2 py-1.5">Horizon</th><th className="px-2 py-1.5">Source</th>
                                                 <th className="px-2 py-1.5 text-right">n</th><th className="px-2 py-1.5 text-right">Median</th>
-                                                <th className="px-2 py-1.5 text-right">Excess vs IWM</th><th className="px-2 py-1.5 text-right">% beat IWM</th></tr>
+                                                <th className="px-2 py-1.5 text-right">Excess vs IWM</th>
+                                                <th className="px-2 py-1.5 text-right">vs SPY</th><th className="px-2 py-1.5 text-right">vs QQQ</th>
+                                                <th className="px-2 py-1.5 text-right">% beat IWM</th></tr>
                                         </thead>
                                         <tbody>
                                             {outcomes.evaluated.map((r: any, idx: number) => (
@@ -1139,6 +1169,8 @@ export default function CockpitDashboard() {
                                                     <td className="px-2 py-1.5 text-right font-mono">{r.n_evaluated}</td>
                                                     <td className="px-2 py-1.5 text-right font-mono">{r.median_return_pct}%</td>
                                                     <td className={clsx('px-2 py-1.5 text-right font-mono font-black', r.mean_excess_vs_iwm_pct >= 0 ? 'text-success' : 'text-danger')}>{r.mean_excess_vs_iwm_pct}%</td>
+                                                    <td className={clsx('px-2 py-1.5 text-right font-mono', r.mean_excess_vs_spy_pct == null ? 'text-muted-foreground' : r.mean_excess_vs_spy_pct >= 0 ? 'text-success' : 'text-danger')}>{r.mean_excess_vs_spy_pct ?? '—'}%</td>
+                                                    <td className={clsx('px-2 py-1.5 text-right font-mono', r.mean_excess_vs_qqq_pct == null ? 'text-muted-foreground' : r.mean_excess_vs_qqq_pct >= 0 ? 'text-success' : 'text-danger')}>{r.mean_excess_vs_qqq_pct ?? '—'}%</td>
                                                     <td className="px-2 py-1.5 text-right font-mono">{r.pct_beat_iwm}%</td>
                                                 </tr>
                                             ))}

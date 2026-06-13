@@ -49,7 +49,8 @@ MY_PORTFOLIO_JSON = DATA / "my_portfolio.json"
 LEDGERS_JSON = DATA / "paper_ledgers.json"
 
 COST_BPS = 10
-BENCHMARK = "IWM"
+BENCHMARKS = ["IWM", "SPY", "QQQ"]  # small-cap, S&P 500, Nasdaq-100
+PRIMARY_BENCHMARK = "IWM"
 START_NAV = 100.0
 POST_EXIT_DAYS = 30
 
@@ -256,15 +257,21 @@ def run_mine_ledger(ledger, snapshot, prices, as_of):
     return nav_pu, stale
 
 
-def fetch_benchmark():
+def fetch_benchmarks():
+    """Latest close for each benchmark ETF -> {sym: price|None}."""
+    out = {b: None for b in BENCHMARKS}
     try:
         import yfinance as yf
-        hist = yf.Ticker(BENCHMARK).history(period="5d", interval="1d")
-        if hist is not None and not hist.empty:
-            return round(float(hist["Close"].dropna().iloc[-1]), 4)
+        for b in BENCHMARKS:
+            try:
+                hist = yf.Ticker(b).history(period="5d", interval="1d")
+                if hist is not None and not hist.empty:
+                    out[b] = round(float(hist["Close"].dropna().iloc[-1]), 4)
+            except Exception as e:
+                print(f"  {b} fetch failed: {e}", file=sys.stderr)
     except Exception as e:
         print(f"  benchmark fetch failed: {e}", file=sys.stderr)
-    return None
+    return out
 
 
 def compute_summary(nav_series, trades, closed, inception):
@@ -287,12 +294,15 @@ def compute_summary(nav_series, trades, closed, inception):
         var = sum((x - mean) ** 2 for x in rets) / (len(rets) - 1)
         if var > 0:
             sharpe = round(mean / math.sqrt(var) * math.sqrt(252), 2)
-    bench_rows = [r for r in rows if r.get("bench") is not None]
-    excess = None
-    if bench_rows:
-        b0, b1 = bench_rows[0]["bench"], bench_rows[-1]["bench"]
-        if b0:
-            excess = round((cum - (b1 / b0 - 1)) * 100, 2)
+    # Excess return vs each benchmark over the same window
+    excess_vs = {}
+    for b in BENCHMARKS:
+        b_rows = [r for r in rows if (r.get("benches") or {}).get(b) is not None]
+        if b_rows:
+            b0, b1 = b_rows[0]["benches"][b], b_rows[-1]["benches"][b]
+            if b0:
+                excess_vs[b] = round((cum - (b1 / b0 - 1)) * 100, 2)
+    excess = excess_vs.get(PRIMARY_BENCHMARK)
     wins = [c for c in closed if c.get("return_pct") is not None]
     traded = sum(t.get("value") or 0 for t in trades)
     return {
@@ -303,6 +313,7 @@ def compute_summary(nav_series, trades, closed, inception):
         "max_drawdown_pct": round(maxdd * 100, 2),
         "sharpe": sharpe,
         "excess_vs_bench_pct": excess,
+        "excess_vs": excess_vs,
         "closed_trades": len(wins),
         "win_rate_pct": round(100 * sum(1 for c in wins if c["return_pct"] > 0) / len(wins), 1) if wins else None,
         "avg_hold_days": round(sum(c["hold_days"] for c in closed) / len(closed), 1) if closed else None,
@@ -342,12 +353,15 @@ def main():
 
     book = load_json(LEDGERS_JSON, None) or {
         "inception": as_of,
-        "config": {"cost_bps": COST_BPS, "benchmark": BENCHMARK, "start_nav": START_NAV},
+        "config": {"cost_bps": COST_BPS, "benchmarks": BENCHMARKS,
+                   "primary_benchmark": PRIMARY_BENCHMARK, "start_nav": START_NAV},
         "ledgers": {"plan": empty_ledger(), "equal": empty_ledger(), "mine": empty_ledger()},
     }
+    book.setdefault("config", {})["benchmarks"] = BENCHMARKS
+    book["config"]["primary_benchmark"] = PRIMARY_BENCHMARK
     ledgers = book["ledgers"]
 
-    bench = None if args.skip_benchmark else fetch_benchmark()
+    benches = {b: None for b in BENCHMARKS} if args.skip_benchmark else fetch_benchmarks()
 
     # ── plan ledger ──────────────────────────────────────────────────────
     plan_targets = {p["symbol"]: p["weight_pct"] for p in (plan.get("positions") or [])}
@@ -364,7 +378,8 @@ def main():
                              ("mine", nav_mine, stale_mine)):
         led = ledgers[name]
         led["nav_series"].append({"date": as_of, "nav": round(nav, 4) if nav is not None else None,
-                                  "bench": bench, "stale_marks": stale})
+                                  "bench": benches.get(PRIMARY_BENCHMARK),  # back-compat (IWM)
+                                  "benches": benches, "stale_marks": stale})
         backfill_post_exit(led, prices, as_of)
         led["summary"] = compute_summary(led["nav_series"], led["trades"], led["closed"],
                                          book["inception"])
