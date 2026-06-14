@@ -4,7 +4,7 @@
 
 **Live expectation: ~half of these numbers** (post-publication decay, McLean-Pontiff 2016). Trials: 1 (no parameter search on this configuration).
 
-Generated: 2026-06-13T14:59:14Z  |  Quarters: 37
+Generated: 2026-06-14T07:53:06Z  |  Quarters: 37
 
 | | Strategy (top decile) | IWM | SPY | QQQ |
 |---|---|---|---|---|

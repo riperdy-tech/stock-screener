@@ -363,6 +363,11 @@ def run_backtest():
         n_top = max(10, int(len(ranked) * TOP_FRACTION))
         top = ranked[:n_top]
         bottom = ranked[-n_top:]
+        # Value-core proxy: the cheaper half of the top decile (high composite AND
+        # high value rank) — historical stand-in for the live Kelly value core,
+        # which only buys winners that are also cheap. The full top decile is the
+        # hybrid (plan2) proxy: top names regardless of cheapness.
+        top_value_tilt = [t for t in top if v_ranks.get(t, 0) >= 0.5] or top
 
         def cohort_return(members):
             rets, missing = [], 0
@@ -377,6 +382,7 @@ def run_backtest():
 
         top_ret, top_missing = cohort_return(top)
         bottom_ret, _ = cohort_return(bottom)
+        value_core_ret, _ = cohort_return(top_value_tilt)
         bench_ret = bench[n_key] / bench[f_key] - 1
         bench_rets = {}
         for b, ser in bench_series.items():
@@ -411,6 +417,7 @@ def run_backtest():
             "n_candidates": len(candidates),
             "n_top": n_top,
             "top_return_pct": round(top_ret * 100, 2),
+            "value_core_return_pct": round(value_core_ret * 100, 2) if value_core_ret is not None else None,
             "bottom_decile_return_pct": round(bottom_ret * 100, 2) if bottom_ret is not None else None,
             "iwm_return_pct": round(bench_ret * 100, 2),
             "excess_vs_iwm_pct": round((top_ret - bench_ret) * 100, 2),
@@ -434,10 +441,13 @@ def run_backtest():
 
     top_rets = [q["top_return_pct"] / 100 for q in quarters]
     iwm_rets = [q["iwm_return_pct"] / 100 for q in quarters]
+    vc_rets = [q["value_core_return_pct"] / 100 for q in quarters if q.get("value_core_return_pct") is not None]
     eq_top, dd_top = chain(top_rets)
     eq_iwm, dd_iwm = chain(iwm_rets)
+    eq_vc, dd_vc = chain(vc_rets) if vc_rets else (1.0, 0.0)
     n_q = len(quarters)
     years_span = n_q / 4 if n_q else 0
+    vc_years = len(vc_rets) / 4 if vc_rets else 0
 
     # Honesty metrics (ecosystem review §H): quarterly Sharpe of excess
     # returns, declared trial count, and the live≈half-of-backtest rule.
@@ -457,6 +467,9 @@ def run_backtest():
                                   "(McLean-Pontiff 2016 post-publication decay); "
                                   "survivorship bias flatters further."),
         "strategy_cagr_pct": round((eq_top ** (1 / years_span) - 1) * 100, 2) if years_span else None,
+        "hybrid_cagr_pct": round((eq_top ** (1 / years_span) - 1) * 100, 2) if years_span else None,
+        "value_core_cagr_pct": round((eq_vc ** (1 / vc_years) - 1) * 100, 2) if vc_years else None,
+        "value_core_max_drawdown_pct": round(dd_vc * 100, 1),
         "iwm_cagr_pct": round((eq_iwm ** (1 / years_span) - 1) * 100, 2) if years_span else None,
         "strategy_max_drawdown_pct": round(dd_top * 100, 1),
         "iwm_max_drawdown_pct": round(dd_iwm * 100, 1),

@@ -687,14 +687,15 @@ export default function CockpitDashboard() {
     const equityCurve = useMemo(() => {
         const quarters = backtest?.quarters ?? [];
         let s = 1, w = 1;
-        let spy = 1, qqq = 1;
+        let spy = 1, qqq = 1, vc = 1;
         return quarters.map((q: any) => {
             s *= 1 + q.top_return_pct / 100;
             w *= 1 + q.iwm_return_pct / 100;
             if (q.spy_return_pct != null) spy *= 1 + q.spy_return_pct / 100;
             if (q.qqq_return_pct != null) qqq *= 1 + q.qqq_return_pct / 100;
+            if (q.value_core_return_pct != null) vc *= 1 + q.value_core_return_pct / 100;
             return {
-                formation: q.formation, strategy: Number(s.toFixed(3)),
+                formation: q.formation, hybrid: Number(s.toFixed(3)), valueCore: Number(vc.toFixed(3)),
                 iwm: Number(w.toFixed(3)), spy: Number(spy.toFixed(3)), qqq: Number(qqq.toFixed(3)),
                 excess: q.excess_vs_iwm_pct,
             };
@@ -1122,13 +1123,13 @@ export default function CockpitDashboard() {
                         )}
                         <div className="flex flex-wrap gap-3">
                             {backtest?.summary && [
-                                ['Strategy CAGR', `${backtest.summary.strategy_cagr_pct}%`],
+                                ['Hybrid CAGR', `${backtest.summary.hybrid_cagr_pct ?? backtest.summary.strategy_cagr_pct}%`],
+                                ['Value-core CAGR', `${backtest.summary.value_core_cagr_pct ?? '—'}%`],
                                 ['IWM CAGR', `${backtest.summary.iwm_cagr_pct}%`],
                                 ['SPY CAGR', `${backtest.summary.spy_cagr_pct ?? '—'}%`],
                                 ['QQQ CAGR', `${backtest.summary.qqq_cagr_pct ?? '—'}%`],
                                 ['Hit rate vs IWM', `${backtest.summary.hit_rate_vs_iwm_pct}%`],
                                 ['Decile spread', `${backtest.summary.mean_decile_spread_pct}%/q`],
-                                ['Max DD', `${backtest.summary.strategy_max_drawdown_pct}%`],
                             ].map(([k, v]) => (
                                 <div key={k as string} className="rounded-lg border border-border bg-card/95 px-4 py-2">
                                     <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">{k}</div>
@@ -1138,7 +1139,7 @@ export default function CockpitDashboard() {
                         </div>
                         <div className="grid gap-4 xl:grid-cols-2">
                             <div className="rounded-lg border border-border bg-card/95 p-3">
-                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Equity curve — top decile vs IWM / SPY / QQQ (quarterly)</h3>
+                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Equity curve — hybrid / value-core vs IWM / SPY / QQQ (quarterly, backtest)</h3>
                                 <ResponsiveContainer width="100%" height={260}>
                                     <LineChart data={equityCurve}>
                                         <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
@@ -1146,12 +1147,16 @@ export default function CockpitDashboard() {
                                         <YAxis tick={{ fontSize: 10 }} stroke="#64748b" />
                                         <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
                                         <Legend wrapperStyle={{ fontSize: 11 }} />
-                                        <Line type="monotone" dataKey="strategy" stroke="#34d399" dot={false} strokeWidth={2} />
+                                        <Line type="monotone" dataKey="hybrid" name="hybrid (plan2)" stroke="#34d399" dot={false} strokeWidth={2} />
+                                        <Line type="monotone" dataKey="valueCore" name="value core (plan)" stroke="#f472b6" dot={false} strokeWidth={2} strokeDasharray="5 2" />
                                         <Line type="monotone" dataKey="iwm" name="IWM" stroke="#64748b" dot={false} strokeWidth={2} />
                                         <Line type="monotone" dataKey="spy" name="SPY" stroke="#94a3b8" dot={false} strokeWidth={1.5} strokeDasharray="3 2" />
                                         <Line type="monotone" dataKey="qqq" name="QQQ" stroke="#facc15" dot={false} strokeWidth={1.5} strokeDasharray="1 3" />
                                     </LineChart>
                                 </ResponsiveContainer>
+                                <p className="mt-1 text-[10px] text-muted-foreground">
+                                    Backtest proxies: <b>hybrid</b> = top-decile basket (what plan2&apos;s sleeve buys); <b>value core</b> = the cheaper half of that decile (what plan&apos;s Kelly core buys). Live Kelly sizing/cash isn&apos;t backtestable — the real plan/plan2 are measured forward in <b>Track Record</b>. Over 2017-26 the two nearly overlap: cheap-tilting the winners barely changed historical returns.
+                                </p>
                             </div>
                             <div className="rounded-lg border border-border bg-card/95 p-3">
                                 <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Quarterly excess vs IWM</h3>
