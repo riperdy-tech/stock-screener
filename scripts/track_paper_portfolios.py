@@ -355,17 +355,22 @@ def main():
         "inception": as_of,
         "config": {"cost_bps": COST_BPS, "benchmarks": BENCHMARKS,
                    "primary_benchmark": PRIMARY_BENCHMARK, "start_nav": START_NAV},
-        "ledgers": {"plan": empty_ledger(), "equal": empty_ledger(), "mine": empty_ledger()},
+        "ledgers": {"plan": empty_ledger(), "plan2": empty_ledger(),
+                    "equal": empty_ledger(), "mine": empty_ledger()},
     }
+    book["ledgers"].setdefault("plan2", empty_ledger())  # add to pre-existing books
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
     book["config"]["primary_benchmark"] = PRIMARY_BENCHMARK
     ledgers = book["ledgers"]
 
     benches = {b: None for b in BENCHMARKS} if args.skip_benchmark else fetch_benchmarks()
 
-    # ── plan ledger ──────────────────────────────────────────────────────
+    # ── plan ledger (value core) ─────────────────────────────────────────
     plan_targets = {p["symbol"]: p["weight_pct"] for p in (plan.get("positions") or [])}
     nav_plan, stale_plan = run_target_ledger(ledgers["plan"], plan_targets, prices, as_of, "plan")
+    # ── plan2 ledger (hybrid: value core + quality sleeve) ───────────────
+    plan2_targets = {p["symbol"]: p["weight_pct"] for p in ((plan.get("plan2") or {}).get("positions") or [])}
+    nav_plan2, stale_plan2 = run_target_ledger(ledgers["plan2"], plan2_targets, prices, as_of, "plan2")
     # ── equal ledger ─────────────────────────────────────────────────────
     research = sorted(t for t, e in factor.items() if e.get("fct_band") == "research_now")
     eq_weight = 100.0 / len(research) if research else 0
@@ -374,8 +379,8 @@ def main():
     # ── mine ledger ──────────────────────────────────────────────────────
     nav_mine, stale_mine = run_mine_ledger(ledgers["mine"], my_snapshot, prices, as_of)
 
-    for name, nav, stale in (("plan", nav_plan, stale_plan), ("equal", nav_eq, stale_eq),
-                             ("mine", nav_mine, stale_mine)):
+    for name, nav, stale in (("plan", nav_plan, stale_plan), ("plan2", nav_plan2, stale_plan2),
+                             ("equal", nav_eq, stale_eq), ("mine", nav_mine, stale_mine)):
         led = ledgers[name]
         led["nav_series"].append({"date": as_of, "nav": round(nav, 4) if nav is not None else None,
                                   "bench": benches.get(PRIMARY_BENCHMARK),  # back-compat (IWM)
@@ -389,7 +394,7 @@ def main():
     LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
 
     print(f"Paper ledgers @ {as_of}:")
-    for name in ("plan", "equal", "mine"):
+    for name in ("plan", "plan2", "equal", "mine"):
         s = ledgers[name]["summary"]
         nav_now = ledgers[name]["nav_series"][-1]["nav"]
         print(f"  {name:5s} nav={nav_now} open={s.get('open_positions')} "

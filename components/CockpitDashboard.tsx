@@ -121,13 +121,17 @@ function HelpModal({ onClose }: { onClose: () => void }) {
 
                     <HelpSection title="Track Record tab — the honest meter">
                         <p>From inception, three portfolios are <b>paper-traded daily, for real, with transaction costs</b> — no backtest, no hindsight. When a stock enters the ranked list it gets bought at that day&apos;s price; when it drops out it gets sold. The record persists forever.</p>
-                        <p><b>plan</b> = following the suggested plan exactly (Kelly sizes, cash). <b>equal</b> = equal-weighting every Research Now name (pure stock-picking test). <b>mine</b> = your saved My Portfolio holdings, unitized like a fund (adding/removing money moves units, never fakes performance).</p>
+                        <p><b>plan</b> = the value core (Kelly-sized, ~50% cash). <b>plan2</b> = the hybrid (value core + quality sleeve, ~78% invested, holds the expensive leaders). <b>equal</b> = equal-weighting every Research Now name (pure stock-picking test). <b>mine</b> = your saved My Portfolio holdings, unitized like a fund (adding/removing money moves units, never fakes performance).</p>
+                        <p>Watch <b>plan vs plan2</b>: if plan2 wins, paying up for quality leaders beat the value discipline this period; if plan wins, the discipline (and cash) paid off. That&apos;s the value-vs-growth question answered with your own live money simulation.</p>
                         <p><b>How to read it</b>: plan beating equal = the sizing machinery adds value. Equal beating IWM = the stock selection itself works. Mine lagging plan = your own deviations cost money (the behavior gap). &quot;Sold too early&quot; flags exits that kept rising — a recurring pattern there means the exit rule needs work. Sharpe/CAGR appear only after enough days; early on this page is deliberately boring.</p>
                     </HelpSection>
 
                     <HelpSection title="Portfolio tab">
                         <p><b>My Portfolio (top)</b>: enter your ACTUAL holdings (saved only in this browser) and each is checked against the model: a quarter-Kelly suggested size, an over/under-weight verdict, and loud flags if a holding is vetoed or outside coverage.</p>
-                        <p><b>Suggested plan (below)</b>: NOT your portfolio — a machine-built allocation from the Research Now list. <b>Sizing is quarter-Kelly</b>: expected edge = the expectations gap closing over ~3 years (only names priced BELOW their demonstrated growth have measurable edge — that&apos;s why many high-ranked names are skipped with &quot;no Kelly edge&quot;); risk = price volatility; f = 0.25 × edge/risk², capped at 5%. Forensic flags halve size; geopolitical exposure (GPR 2-3) and insider selling shrink it further; sector 25% / theme 30% caps; the rest stays cash.</p>
+                        <p><b>Suggested plan (below)</b>: NOT your portfolio — a machine-built allocation from the Research Now list, with a <b>Value core / Hybrid</b> toggle.</p>
+                        <p><b>Value core (plan)</b>: quarter-Kelly sizing — expected edge = the expectations gap closing over ~3 years (only names priced BELOW their demonstrated growth have measurable edge, so high-ranked-but-expensive names like TSM are skipped with &quot;no Kelly edge&quot;); risk = volatility; f = 0.25 × edge/risk², capped 5%. Forensic flags halve size; GPR 2-3 and insider selling shrink it; sector 25% / theme 30% caps; rest stays cash (often ~50%).</p>
+                        <p><b>Hybrid (plan2)</b>: the same value core PLUS a <b>quality sleeve</b> that buys the top-ranked names REGARDLESS of valuation gap (capped ~35% of book) — so it holds the expensive leaders (TSM, GOOGL, MU) the core refuses, and deploys the idle cash (~78% invested). Trade-off: more leader exposure and less cash, but it pays up for quality instead of demanding a margin of safety. Sleeve rows are tinted pink.</p>
+                        <p>Why two? The value core protects you in a bust (won&apos;t overpay) but lags in a melt-up; the hybrid captures the leaders but rides them down harder. Track Record shows how both actually perform.</p>
                         <p><b>Macro flags</b>: warning lights from Fed data. If 2+ fire, every size halves automatically.</p>
                     </HelpSection>
 
@@ -576,7 +580,8 @@ export default function CockpitDashboard() {
     const [ic, setIc] = useState<any | null>(null);
     const [overlay, setOverlay] = useState<Record<string, any>>({});
     const [ledgers, setLedgers] = useState<any | null>(null);
-    const [ledgerView, setLedgerView] = useState<'plan' | 'equal' | 'mine'>('plan');
+    const [ledgerView, setLedgerView] = useState<'plan' | 'plan2' | 'equal' | 'mine'>('plan');
+    const [planView, setPlanView] = useState<'plan' | 'plan2'>('plan');
     const [stockInfo, setStockInfo] = useState<Record<string, StockInfo>>({});
     const [loading, setLoading] = useState(true);
 
@@ -646,7 +651,7 @@ export default function CockpitDashboard() {
         const byDate: Record<string, any> = {};
         const firsts: Record<string, number> = {};
         const benchKeys: Record<string, string> = { IWM: 'iwm', SPY: 'spy', QQQ: 'qqq' };
-        for (const name of ['plan', 'equal', 'mine'] as const) {
+        for (const name of ['plan', 'plan2', 'equal', 'mine'] as const) {
             for (const row of L[name]?.nav_series ?? []) {
                 if (row.nav === null || row.nav === undefined) continue;
                 byDate[row.date] = byDate[row.date] || { date: row.date };
@@ -669,7 +674,7 @@ export default function CockpitDashboard() {
         const L = ledgers?.ledgers;
         if (!L) return [];
         const out: any[] = [];
-        for (const name of ['plan', 'equal'] as const) {
+        for (const name of ['plan', 'plan2', 'equal'] as const) {
             for (const c of L[name]?.closed ?? []) {
                 if (c.post_exit_return_pct !== null && c.post_exit_return_pct > 10) {
                     out.push({ ...c, ledger: name });
@@ -710,6 +715,8 @@ export default function CockpitDashboard() {
 
     const selectedEntry = selected ? factor?.tickers[selected] : null;
     const selectedInfo = selected ? stockInfo[selected] : null;
+    // Portfolio tab: which suggested plan is shown (value core vs hybrid)
+    const activePlan = planView === 'plan2' && plan?.plan2 ? plan.plan2 : plan;
 
     const tabs: { id: TabId; label: string; icon: any }[] = [
         { id: 'rankings', label: 'Rankings', icon: BarChart3 },
@@ -846,25 +853,29 @@ export default function CockpitDashboard() {
                         <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
                             <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
                             <p>
-                                <b>The honest meter.</b> Since {ledgers.inception}, three portfolios are paper-traded daily:
-                                {' '}<b className="text-emerald-300">plan</b> (following the suggested plan exactly),
-                                {' '}<b className="text-sky-300">equal</b> (equal-weight every Research Now name),
-                                {' '}<b className="text-violet-300">mine</b> (your saved holdings). Plan−equal isolates the value of sizing;
-                                mine−plan shows your behavior gap. Costs: {ledgers.config?.cost_bps}bps per trade.{' '}
+                                <b>The honest meter.</b> Since {ledgers.inception}, four portfolios are paper-traded daily:
+                                {' '}<b className="text-emerald-300">plan</b> (value core),
+                                {' '}<b className="text-pink-400">plan2</b> (hybrid + quality sleeve),
+                                {' '}<b className="text-sky-300">equal</b> (equal-weight all Research Now),
+                                {' '}<b className="text-violet-300">mine</b> (your holdings). plan-vs-plan2 = value discipline vs paying up for leaders;
+                                plan-vs-equal = sizing value; mine-vs-plan = your behavior gap. Costs: {ledgers.config?.cost_bps}bps per trade.{' '}
                                 <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
                             </p>
                         </div>
 
-                        <div className="grid gap-3 lg:grid-cols-3">
-                            {(['plan', 'equal', 'mine'] as const).map(name => {
-                                const s = ledgers.ledgers[name]?.summary ?? {};
-                                const live = s.observations > 0 && ledgers.ledgers[name].nav_series.some((r: any) => r.nav !== null);
+                        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                            {(['plan', 'plan2', 'equal', 'mine'] as const).map(name => {
+                                const led = ledgers.ledgers[name];
+                                const s = led?.summary ?? {};
+                                const live = led && s.observations > 0 && led.nav_series.some((r: any) => r.nav !== null);
+                                const label = name === 'plan' ? 'plan · value core'
+                                    : name === 'plan2' ? 'plan2 · hybrid' : name;
                                 return (
                                     <div key={name} className={clsx('rounded-lg border bg-card/95 p-3',
                                         ledgerView === name ? 'border-emerald-500/50' : 'border-border')}>
                                         <button onClick={() => setLedgerView(name)} className="w-full text-left">
                                             <div className="flex items-baseline justify-between">
-                                                <span className="text-xs font-black uppercase tracking-wider">{name}</span>
+                                                <span className="text-[11px] font-black uppercase tracking-wider">{label}</span>
                                                 <span className="font-mono text-lg font-black">
                                                     {live && s.cumulative_return_pct !== undefined && s.cumulative_return_pct !== null
                                                         ? `${s.cumulative_return_pct >= 0 ? '+' : ''}${s.cumulative_return_pct}%` : '—'}
@@ -906,7 +917,8 @@ export default function CockpitDashboard() {
                                     <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10 }} stroke="#64748b" />
                                     <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
                                     <Legend wrapperStyle={{ fontSize: 11 }} />
-                                    <Line type="monotone" dataKey="plan" stroke="#34d399" dot={false} strokeWidth={2} />
+                                    <Line type="monotone" dataKey="plan" name="plan (core)" stroke="#34d399" dot={false} strokeWidth={2} />
+                                    <Line type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="iwm" name="IWM" stroke="#64748b" dot={false} strokeWidth={1.5} strokeDasharray="4 3" />
@@ -995,18 +1007,42 @@ export default function CockpitDashboard() {
                     <div className="space-y-4">
                         <MyPortfolio factor={factor?.tickers ?? {}} valuations={valuations}
                             overlay={overlay} stockInfo={stockInfo} onSelect={setSelected} />
+
+                        {/* Suggested-plan selector: value core vs hybrid */}
+                        <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-xs font-bold text-muted-foreground">Suggested plan:</span>
+                            {([['plan', 'Value core', `${plan.invested_pct}% inv`],
+                               ['plan2', 'Hybrid (+ quality sleeve)', plan.plan2 ? `${plan.plan2.invested_pct}% inv` : '—']] as const).map(([id, lbl, sub]) => (
+                                <button key={id} onClick={() => setPlanView(id)}
+                                    className={clsx('rounded-md border px-3 py-1.5 text-xs font-bold transition-colors',
+                                        planView === id ? 'border-emerald-500/50 bg-emerald-500/15 text-emerald-300'
+                                            : 'border-border bg-secondary/20 text-muted-foreground hover:text-foreground')}>
+                                    {lbl} <span className="font-mono opacity-70">· {sub}</span>
+                                </button>
+                            ))}
+                        </div>
                         <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
                             <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
-                            <p>
-                                <b>Suggested plan, not your holdings.</b> The machine sizes the Factor Lab research_now names with
-                                quarter-Kelly (edge from the expectations gap, risk from volatility; no negative gap = no position),
-                                halves flagged names, caps sectors at 25% / themes at 30%, leaves the rest as cash.{' '}
-                                <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
-                            </p>
+                            {planView === 'plan' ? (
+                                <p>
+                                    <b>Value core, not your holdings.</b> Quarter-Kelly sizes only research_now names priced
+                                    BELOW their demonstrated growth (negative gap); no edge = no position, so it runs ~50% cash and
+                                    won&apos;t hold expensive leaders like TSM.{' '}
+                                    <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
+                                </p>
+                            ) : (
+                                <p>
+                                    <b>Hybrid = value core + quality sleeve.</b> Keeps the Kelly core, then adds the top-ranked names
+                                    REGARDLESS of valuation gap (capped ~35% of book) — so it captures TSM, GOOGL, MU and deploys the
+                                    idle cash. More invested, more leader exposure, less value discipline.{' '}
+                                    <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
+                                </p>
+                            )}
                         </div>
                         <div className="flex flex-wrap gap-3">
-                            {[['Invested', `${plan.invested_pct}%`], ['Cash', `${plan.cash_pct}%`],
-                              ['Positions', plan.position_count],
+                            {[['Invested', `${activePlan.invested_pct}%`], ['Cash', `${activePlan.cash_pct}%`],
+                              ['Positions', activePlan.position_count],
+                              ...(planView === 'plan2' && activePlan.sleeve_pct !== undefined ? [['Quality sleeve', `${activePlan.sleeve_pct}%`]] : []),
                               ['Macro flags', plan.macro_flags?.length ? plan.macro_flags.join(', ') : 'none']].map(([k, v]) => (
                                 <div key={k as string} className="rounded-lg border border-border bg-card/95 px-4 py-2">
                                     <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">{k}</div>
@@ -1030,9 +1066,10 @@ export default function CockpitDashboard() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {(plan.positions ?? []).map((p: any) => (
+                                    {(activePlan.positions ?? []).map((p: any) => (
                                         <tr key={p.symbol} onClick={() => setSelected(p.symbol)}
-                                            className="cursor-pointer border-t border-border/50 odd:bg-secondary/10 hover:bg-emerald-500/[0.06]">
+                                            className={clsx('cursor-pointer border-t border-border/50 odd:bg-secondary/10 hover:bg-emerald-500/[0.06]',
+                                                p.sizing_method === 'quality_sleeve' && 'bg-pink-500/[0.05]')}>
                                             <td className="px-3 py-2 font-black">{p.symbol}{p.rev_nominated && <span className="ml-1 text-[9px] font-black text-sky-300" title="Also nominated by the reverse engine — independent confirmation">✓REV</span>}</td>
                                             <td className="px-3 py-2 text-right font-mono font-black">{p.weight_pct}%</td>
                                             <td className="px-3 py-2 text-[10px] font-bold uppercase text-muted-foreground">{(p.sizing_method || '').replace('_', ' ')}</td>
@@ -1047,7 +1084,7 @@ export default function CockpitDashboard() {
                             </table>
                         </div>
                         <div className="grid gap-4 lg:grid-cols-2">
-                            {[['Sector allocation', plan.sector_allocation], ['Theme allocation', plan.theme_allocation]].map(([title, alloc]) => (
+                            {[['Sector allocation', activePlan.sector_allocation], ['Theme allocation', activePlan.theme_allocation]].map(([title, alloc]) => (
                                 <div key={title as string} className="rounded-lg border border-border bg-card/95 p-3">
                                     <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">{title as string}</h3>
                                     <ResponsiveContainer width="100%" height={Math.max(120, Object.keys(alloc || {}).length * 28)}>

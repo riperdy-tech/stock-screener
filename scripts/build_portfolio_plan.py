@@ -67,6 +67,9 @@ DEFAULT_CONFIG = {
     "kelly_mu_cap": 0.15,
     "kelly_sigma_floor": 0.15,
     "kelly_position_cap_pct": 5.0,
+    "quality_sleeve_position_pct": 2.5,
+    "quality_sleeve_max_pct": 35.0,
+    "quality_sleeve_max_names": 15,
     "_note": ("v1 defaults from the June 2026 audit. Edit and re-run; the plan "
               "is deterministic from inputs + this config."),
 }
@@ -232,12 +235,105 @@ def main():
         })
 
     cash = round(100.0 - invested, 2)
+
+    # ── plan2: Hybrid = value core + quality sleeve ──────────────────────
+    # Same value-gated core, PLUS a sleeve that buys the top-ranked
+    # research_now names REGARDLESS of valuation gap (capped), so the book
+    # captures expensive quality leaders (TSM, GOOGL, MU...) the Kelly core
+    # skips, and deploys idle cash. Sized by survivability, not Kelly (these
+    # names have no measured valuation edge — sized for participation, not
+    # conviction). Same vetoes, forensic halving, and sector/theme caps.
+    def make_sleeve_position(sym, weight):
+        rv = reverse.get(sym) or {}
+        fct = factor.get(sym) or {}
+        bat = battery.get(sym) or {}
+        pdm = paradigm.get(sym) or {}
+        vm = valuations.get(sym) or {}
+        flags = rv.get("rev_flags") or ""
+        forensic = [f for f in FORENSIC_FLAGS if f in flags]
+        return {
+            "symbol": sym, "weight_pct": weight, "rank": fct.get("fct_rank"),
+            "rev_nominated": bool(rv.get("rev_nominated")),
+            "archetype": rv.get("rev_archetype"), "composite": rv.get("rev_composite"),
+            "survivability": rv.get("rev_survivability"),
+            "sector": (stocks.get(sym) or {}).get("sector") or "Unknown",
+            "theme_primary": pdm.get("pdm_theme_primary"),
+            "pdm_band": pdm.get("pdm_band"), "pdm_signal": pdm.get("pdm_signal"),
+            "fct_composite": fct.get("fct_composite"), "fct_rank": fct.get("fct_rank"),
+            "fct_band": fct.get("fct_band"), "sizing_method": "quality_sleeve",
+            "expectations_gap_pts": vm.get("expectations_gap_pts"),
+            "fct_vol": fct.get("fct_vol"),
+            "gpr_level": ((overlay.get(sym) or {}).get("gpr") or {}).get("gpr_level"),
+            "informed_demand": (overlay.get(sym) or {}).get("informed_demand"),
+            "high_risk_class": rv.get("rev_archetype") in config["high_risk_archetypes"],
+            "forensic_flags": forensic,
+            "f_score": bat.get("f_score"), "m_score": bat.get("m_score"),
+            "accruals_ratio": bat.get("accruals_ratio"),
+            "pro": rv.get("rev_pro"), "con": rv.get("rev_con"),
+            "exit_triggers": ["dropped out of research_now band", "any forensic flag newly fires"],
+        }
+
+    p2_positions = [dict(p) for p in positions]
+    p2_sector = dict(sector_alloc)
+    p2_theme = dict(theme_alloc)
+    p2_invested = invested
+    held = {p["symbol"] for p in positions}
+    sleeve_added = 0.0
+    sleeve_pos = config["quality_sleeve_position_pct"]
+    sleeve_max = config["quality_sleeve_max_pct"]
+    ranked = sorted(((fe.get("fct_rank") or 10**9, sym) for sym, fe in factor.items()
+                     if fe.get("fct_band") == "research_now"), key=lambda x: x[0])
+    for _, sym in ranked:
+        if sym in held or sleeve_added >= sleeve_max:
+            continue
+        if len([p for p in p2_positions if p["sizing_method"] == "quality_sleeve"]) >= config["quality_sleeve_max_names"]:
+            break
+        rv = reverse.get(sym) or {}
+        surv = rv.get("rev_survivability")
+        surv_scale = (surv / 100.0) if isinstance(surv, (int, float)) else 0.5
+        w = round(sleeve_pos * max(0.3, surv_scale) * derisk_mult, 2)
+        if "M_SCORE_ELEVATED" in (rv.get("rev_flags") or "") and "ACCRUALS_HIGH" in (rv.get("rev_flags") or ""):
+            continue  # forensic pair -> skip even in sleeve
+        if any(f in (rv.get("rev_flags") or "") for f in FORENSIC_FLAGS):
+            w = round(w * 0.5, 2)
+        if w < config["min_position_pct"]:
+            continue
+        sector = (stocks.get(sym) or {}).get("sector") or "Unknown"
+        theme = (paradigm.get(sym) or {}).get("pdm_theme_primary")
+        if p2_invested + w > config["max_invested_pct"]:
+            continue
+        if p2_sector.get(sector, 0) + w > config["sector_cap_pct"]:
+            continue
+        if theme and p2_theme.get(theme, 0) + w > config["theme_cap_pct"]:
+            continue
+        p2_sector[sector] = round(p2_sector.get(sector, 0) + w, 2)
+        if theme:
+            p2_theme[theme] = round(p2_theme.get(theme, 0) + w, 2)
+        p2_invested = round(p2_invested + w, 2)
+        sleeve_added = round(sleeve_added + w, 2)
+        p2_positions.append(make_sleeve_position(sym, w))
+
+    plan2 = {
+        "label": "Hybrid (value core + quality sleeve)",
+        "invested_pct": p2_invested,
+        "cash_pct": round(100.0 - p2_invested, 2),
+        "position_count": len(p2_positions),
+        "sleeve_pct": round(sleeve_added, 2),
+        "sector_allocation": dict(sorted(p2_sector.items(), key=lambda x: -x[1])),
+        "theme_allocation": dict(sorted(p2_theme.items(), key=lambda x: -x[1])),
+        "positions": p2_positions,
+        "note": ("Value core (Kelly, only names priced below demonstrated growth) PLUS a "
+                 "quality sleeve buying top-ranked names regardless of valuation gap, capped at "
+                 f"{sleeve_max}% of book. Captures expensive quality leaders the core skips."),
+    }
+
     plan = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "disclaimer": ("Decision support only. Not investment advice, not an order list. "
                        "Every position requires human review of the con line and flags."),
         "macro_flags": macro_flags,
         "macro_derisk_active": macro_derisk,
+        "label": "Value core (Kelly-sized)",
         "invested_pct": invested,
         "cash_pct": cash,
         "position_count": len(positions),
@@ -245,6 +341,7 @@ def main():
         "theme_allocation": dict(sorted(theme_alloc.items(), key=lambda x: -x[1])),
         "positions": positions,
         "skipped": skipped,
+        "plan2": plan2,
         "config_used": {k: v for k, v in config.items() if not k.startswith("_")},
     }
     PLAN_JSON.write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -289,8 +386,10 @@ def main():
               "", f"_{plan['disclaimer']}_"]
     REPORT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-    print(f"Plan: {len(positions)} positions, {invested}% invested, {cash}% cash"
+    print(f"Plan  (value core): {len(positions)} positions, {invested}% invested, {cash}% cash"
           + (" [MACRO DE-RISK]" if macro_derisk else ""))
+    print(f"Plan2 (hybrid):     {plan2['position_count']} positions, {plan2['invested_pct']}% invested, "
+          f"{plan2['cash_pct']}% cash (sleeve {plan2['sleeve_pct']}%)")
     print(f"Written: {PLAN_JSON.name}, {REPORT_MD.name}")
 
 

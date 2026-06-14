@@ -174,14 +174,23 @@ def main():
     overlay = (load(OVERLAY, {}) or {}).get("tickers", {})
     stocks = {s["symbol"]: s for s in load(STOCKS, []) if s.get("symbol")}
     plan_pos = {p["symbol"]: p for p in (plan.get("positions") or [])}
+    plan2_pos = {p["symbol"]: p for p in ((plan.get("plan2") or {}).get("positions") or [])}
 
-    # ── plan ledger: actual Kelly weights (fractions of full book) ──────
+    # ── plan ledger (value core): actual Kelly weights ──────────────────
     plan_we = []
     for sym, pos in plan_pos.items():
         ex = name_exposure(sym, factors.get(sym, {}), plan_pos, overlay, stocks)
         plan_we.append((pos["weight_pct"] / 100.0, ex))
     plan_invested = sum(w for w, _ in plan_we)
     plan_ret = portfolio_return(plan_we, mult)
+
+    # ── plan2 ledger (hybrid: core + quality sleeve) ────────────────────
+    plan2_we = []
+    for sym, pos in plan2_pos.items():
+        ex = name_exposure(sym, factors.get(sym, {}), plan2_pos, overlay, stocks)
+        plan2_we.append((pos["weight_pct"] / 100.0, ex))
+    plan2_invested = sum(w for w, _ in plan2_we)
+    plan2_ret = portfolio_return(plan2_we, mult)
 
     # ── equal ledger: equal-weight research_now (fully invested) ────────
     research = [t for t, e in factors.items() if e.get("fct_band") == "research_now"]
@@ -223,11 +232,13 @@ def main():
     # ── Output ───────────────────────────────────────────────────────────
     print(f"\n=== STRESS SCENARIO: AI-capex bust + higher-for-longer ({sev_key}) ===")
     print(f"Modeled 12-month total return (illustrative, assumption-driven):\n")
-    print(f"  plan ledger  (your sized book, {plan_invested*100:.0f}% invested):  {pct(plan_ret)}")
-    print(f"  equal ledger (research_now, fully invested):           {pct(equal_ret)}")
-    print(f"  QQQ proxy    (Nasdaq-100, parametric):                 {pct(qqq_ret)}")
-    print(f"  SPY proxy    (S&P 500, parametric):                    {pct(spy_ret)}")
-    print(f"\n  Strategy (equal) vs QQQ:  {pct(equal_ret - qqq_ret)} relative")
+    print(f"  plan  (value core, {plan_invested*100:.0f}% invested):           {pct(plan_ret)}")
+    print(f"  plan2 (hybrid, {plan2_invested*100:.0f}% invested):               {pct(plan2_ret)}")
+    print(f"  equal (research_now, fully invested):           {pct(equal_ret)}")
+    print(f"  QQQ proxy    (Nasdaq-100, parametric):          {pct(qqq_ret)}")
+    print(f"  SPY proxy    (S&P 500, parametric):             {pct(spy_ret)}")
+    print(f"\n  plan2 (hybrid) vs QQQ:  {pct(plan2_ret - qqq_ret)} relative")
+    print(f"  plan2 vs plan (sleeve cost in this scenario): {pct(plan2_ret - plan_ret)}")
     print(f"\nStrategy attribution (equal book, fraction points):")
     for k, v in sorted(equal_attr.items(), key=lambda x: x[1]):
         print(f"    {k:22s} {v*100:+.1f}")
@@ -252,12 +263,14 @@ def main():
         "",
         "| Portfolio | Modeled return |",
         "|---|---|",
-        f"| **plan** (your sized book, {plan_invested*100:.0f}% invested) | **{pct(plan_ret)}** |",
+        f"| **plan** (value core, {plan_invested*100:.0f}% invested) | **{pct(plan_ret)}** |",
+        f"| **plan2** (hybrid, {plan2_invested*100:.0f}% invested) | **{pct(plan2_ret)}** |",
         f"| **equal** (research_now, full) | **{pct(equal_ret)}** |",
         f"| QQQ proxy (Nasdaq-100) | {pct(qqq_ret)} |",
         f"| SPY proxy (S&P 500) | {pct(spy_ret)} |",
         "",
-        f"**Strategy (equal) vs QQQ: {pct(equal_ret - qqq_ret)} relative.**",
+        f"**plan2 (hybrid) vs QQQ: {pct(plan2_ret - qqq_ret)} relative.** "
+        f"Quality sleeve cost vs value core this scenario: {pct(plan2_ret - plan_ret)}.",
         "",
         "## Why (attribution, equal book)",
         "| Shock | Strategy pts | QQQ pts |",
