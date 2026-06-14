@@ -13,12 +13,18 @@
       "space_economy": 44
     }
   },
-  "finished_at": "2026-06-13T14:45:37Z",
+  "finished_at": "2026-06-14T14:25:25Z",
   "invariants": [
     {
-      "detail": "stocks.json is 1.2 days old (max 8)",
+      "detail": "stocks.json is 0.1 days old (max 8)",
       "level": "soft",
       "name": "stocks_json_fresh",
+      "ok": true
+    },
+    {
+      "detail": "FRED macro state fetched",
+      "level": "soft",
+      "name": "macro_fetch",
       "ok": true
     },
     {
@@ -82,7 +88,7 @@
       "ok": true
     },
     {
-      "detail": "paper ledger latest row 2026-06-13 (expect 2026-06-13)",
+      "detail": "paper ledger latest row 2026-06-14 (expect 2026-06-14)",
       "level": "hard",
       "name": "paper_ledger_updated",
       "ok": true
@@ -95,35 +101,40 @@
     }
   ],
   "ok": true,
-  "run_id": "20260613T144427Z",
+  "run_id": "20260614T142511Z",
   "steps": [
     {
-      "duration_s": 58.4,
+      "duration_s": 2.5,
+      "name": "fetch_macro_state",
+      "returncode": 0
+    },
+    {
+      "duration_s": 3.0,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 6.7,
+      "duration_s": 4.7,
       "name": "score_paradigm",
       "returncode": 0
     },
     {
-      "duration_s": 1.9,
+      "duration_s": 1.5,
       "name": "score_factors",
       "returncode": 0
     },
     {
-      "duration_s": 0.7,
+      "duration_s": 0.5,
       "name": "build_valuation_models",
       "returncode": 0
     },
     {
-      "duration_s": 0.6,
+      "duration_s": 0.4,
       "name": "build_portfolio_plan",
       "returncode": 0
     },
     {
-      "duration_s": 0.5,
+      "duration_s": 1.4,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
