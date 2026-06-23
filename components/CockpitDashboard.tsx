@@ -486,7 +486,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect }: {
                 </label>
                 <button onClick={saveSnapshot} disabled={holdings.length === 0}
                     className="rounded-md border border-sky-500/40 bg-sky-500/15 px-3 py-1.5 text-xs font-black text-sky-300 hover:bg-sky-500/25 disabled:opacity-40"
-                    title="Writes public/data/my_portfolio.json so the daily tracker measures your real portfolio (Track Record tab, 'mine' ledger)">
+                    title="Saves your holdings snapshot to Supabase so the daily tracker measures your real portfolio (Track Record tab, 'mine' ledger)">
                     Save snapshot for tracking
                 </button>
                 {saveStatus && <span className="text-[11px] font-bold text-muted-foreground">{saveStatus}</span>}

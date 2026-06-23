@@ -31,6 +31,7 @@ import argparse
 import copy
 import json
 import math
+import os
 import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -60,6 +61,33 @@ def load_json(path, default=None):
         return default
     with path.open("r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def load_my_snapshot():
+    """The user's holdings snapshot for the "mine" ledger.
+
+    Supabase (table my_portfolio, single row id=1) is the source of truth on the
+    deployed site, where the /api/my-portfolio route writes it. Falls back to the
+    local JSON file for offline/dev runs with no Supabase env set.
+    Shape: {"holdings": [{"ticker","value"}], "cash": num, "saved_at": iso}.
+    """
+    url = os.environ.get("NEXT_PUBLIC_SUPABASE_URL")
+    key = os.environ.get("SUPABASE_SERVICE_KEY")
+    if url and key:
+        try:
+            import requests
+            r = requests.get(
+                f"{url}/rest/v1/my_portfolio?id=eq.1&select=holdings,cash,saved_at",
+                headers={"apikey": key, "Authorization": f"Bearer {key}"},
+                timeout=20)
+            if r.status_code == 200:
+                rows = r.json()
+                return rows[0] if rows else None  # reachable, no snapshot saved yet
+            print(f"  my_portfolio supabase fetch {r.status_code}: {r.text[:200]}",
+                  file=sys.stderr)
+        except Exception as e:
+            print(f"  my_portfolio supabase fetch failed: {e}", file=sys.stderr)
+    return load_json(MY_PORTFOLIO_JSON, None)  # dev / offline fallback
 
 
 def num(v):
@@ -347,7 +375,7 @@ def main():
     prices = {s["symbol"]: s.get("price") for s in stocks if s.get("symbol")}
     factor = (load_json(FACTOR_SCORES_JSON, {}) or {}).get("tickers", {})
     plan = load_json(PORTFOLIO_PLAN_JSON, {}) or {}
-    my_snapshot = load_json(MY_PORTFOLIO_JSON, None)
+    my_snapshot = load_my_snapshot()
     if my_snapshot and my_snapshot.get("saved_at"):
         my_snapshot["saved_at_date"] = my_snapshot["saved_at"][:10]
 

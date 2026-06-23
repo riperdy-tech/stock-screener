@@ -43,6 +43,10 @@ jobs:
       - name: Run Scoring Chain (price history -> EPS -> reverse -> paradigm)
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          # track_paper_portfolios (mine ledger) reads the holdings snapshot from
+          # Supabase, written by the /api/my-portfolio route on the deployed site.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
           # Analyst coverage skipped here (runs weekly via paradigm-weekly-analyst.yml).
           python scripts/build_price_history.py
@@ -83,7 +87,7 @@ jobs:
           git add public/data/portfolio_plan.json || true
           git add public/data/portfolio_report.md || true
           git add public/data/paper_ledgers.json || true
-          git add public/data/my_portfolio.json || true
+          # my_portfolio.json no longer committed — snapshot lives in Supabase now.
           git add public/data/paradigm_signal_log.jsonl || true
           git add public/data/paradigm_run_log.jsonl || true
           git add public/data/paradigm_history.json || true
