@@ -90,6 +90,36 @@ def load_my_snapshot():
     return load_json(MY_PORTFOLIO_JSON, None)  # dev / offline fallback
 
 
+def save_ledgers_to_supabase(book):
+    """Mirror the full ledger book to Supabase (table paper_ledgers, row id=1).
+
+    The site reads this at runtime via /api/paper-ledgers, so a portfolio refresh
+    shows up without committing paper_ledgers.json / a Vercel rebuild. No-op when
+    Supabase env is absent (dev); the committed JSON file stays a backup.
+    """
+    url = os.environ.get("NEXT_PUBLIC_SUPABASE_URL")
+    key = os.environ.get("SUPABASE_SERVICE_KEY")
+    if not (url and key):
+        return
+    try:
+        import requests
+        r = requests.post(
+            f"{url}/rest/v1/paper_ledgers?on_conflict=id",
+            headers={"apikey": key, "Authorization": f"Bearer {key}",
+                     "Content-Type": "application/json",
+                     "Prefer": "resolution=merge-duplicates,return=minimal"},
+            data=json.dumps({"id": 1, "data": book,
+                             "updated_at": datetime.now(timezone.utc).isoformat()}),
+            timeout=30)
+        if r.status_code not in (200, 201, 204):
+            print(f"  paper_ledgers supabase upsert {r.status_code}: {r.text[:200]}",
+                  file=sys.stderr)
+        else:
+            print("  paper_ledgers mirrored to Supabase.")
+    except Exception as e:
+        print(f"  paper_ledgers supabase upsert failed: {e}", file=sys.stderr)
+
+
 def num(v):
     return v if isinstance(v, (int, float)) and math.isfinite(v) and v > 0 else None
 
@@ -420,6 +450,7 @@ def main():
 
     book["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    save_ledgers_to_supabase(book)  # runtime source for /api/paper-ledgers (no redeploy)
 
     print(f"Paper ledgers @ {as_of}:")
     for name in ("plan", "plan2", "equal", "mine"):

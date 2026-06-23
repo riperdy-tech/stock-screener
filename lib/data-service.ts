@@ -343,6 +343,16 @@ export async function fetchOverlaySignals(): Promise<any | null> {
 }
 
 export async function fetchPaperLedgers(): Promise<any | null> {
+    // Runtime read from Supabase (written by track_paper_portfolios.py) so a
+    // portfolio-snapshot refresh never needs a commit/redeploy. Falls back to the
+    // committed static file if the API/Supabase is unavailable.
+    try {
+        const res = await fetch(`/api/paper-ledgers?t=${Date.now()}`, { cache: 'no-store' });
+        if (res.ok) {
+            const j = await res.json();
+            if (j) return j;
+        }
+    } catch { /* fall through to static backup */ }
     return fetchJson('/data/paper_ledgers.json');
 }
 

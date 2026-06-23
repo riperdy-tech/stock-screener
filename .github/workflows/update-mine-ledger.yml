@@ -10,10 +10,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  # Never race the daily chain (or another manual run) writing the same file.
+  # Never race the daily chain (or another manual run) writing the same ledger row.
   group: ledger-writers
   cancel-in-progress: false
 
@@ -38,23 +38,7 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        # Writes the ledger book straight to Supabase (table paper_ledgers); the
+        # site reads it at runtime via /api/paper-ledgers. No commit, no redeploy.
+        # (The local paper_ledgers.json it also writes is discarded with the runner.)
         run: python scripts/track_paper_portfolios.py
-
-      - name: Commit and Push
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/data/paper_ledgers.json || true
-          if git diff --staged --quiet; then
-            echo "No ledger changes to commit."
-            exit 0
-          fi
-          git commit -m "Update paper ledgers (on-demand mine-ledger refresh)"
-          # Land safely even if the daily chain pushed meanwhile.
-          for i in 1 2 3; do
-            git pull --rebase --autostash origin main && git push origin main && exit 0
-            echo "push attempt $i failed, retrying..."
-            sleep 5
-          done
-          echo "Failed to push after retries." >&2
-          exit 1
