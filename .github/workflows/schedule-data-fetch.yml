@@ -51,6 +51,9 @@ jobs:
           # Analyst coverage skipped here (runs weekly via paradigm-weekly-analyst.yml).
           python scripts/build_price_history.py
           python scripts/fetch_eps_trajectory.py --apply --max-calls 500
+          # Ex-dividend calendar for the ledgers' total-return marks; self-throttles
+          # to ~weekly, so this is a no-op skip on most days.
+          python scripts/fetch_dividends.py
           # run_chain enforces ordering (macro -> score_reverse -> score_paradigm)
           # and fails the job when reverse coverage / nominations / artifact
           # freshness invariants break. This fixes the stale-merge bug where
@@ -87,6 +90,7 @@ jobs:
           git add public/data/portfolio_plan.json || true
           git add public/data/portfolio_report.md || true
           git add public/data/paper_ledgers.json || true
+          git add public/data/dividends.json || true
           # my_portfolio.json no longer committed — snapshot lives in Supabase now.
           git add public/data/paradigm_signal_log.jsonl || true
           git add public/data/paradigm_run_log.jsonl || true

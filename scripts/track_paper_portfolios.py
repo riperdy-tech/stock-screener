@@ -48,6 +48,12 @@ FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 PORTFOLIO_PLAN_JSON = DATA / "portfolio_plan.json"
 MY_PORTFOLIO_JSON = DATA / "my_portfolio.json"
 LEDGERS_JSON = DATA / "paper_ledgers.json"
+DIVIDENDS_JSON = DATA / "dividends.json"
+
+# Ex-dividend calendar for the run, {ticker: [[ex_date, per_share_amount], ...]}.
+# Stashed module-side so the credit step can reach it without threading the arg
+# through run_target_ledger / run_mine_ledger.
+dividends_holder = {}
 
 COST_BPS = 10
 BENCHMARKS = ["IWM", "SPY", "QQQ"]  # small-cap, S&P 500, Nasdaq-100
@@ -192,6 +198,31 @@ def sell(ledger, ticker, price, as_of, reason):
     })
 
 
+def credit_dividends(ledger, as_of):
+    """Cash-credit current holders for ex-dates in (last_nav_date, as_of].
+
+    Approach-B total return: only positions held on the ex-date receive the
+    dividend, so a churning ledger captures exactly the dividends it earned. Runs
+    after rewind_or_advance on the carried-over (pre-rebalance) holdings, so a
+    same-date replay re-credits cleanly against the restored opening state.
+    """
+    divs = dividends_holder.get("divs") or {}
+    if not divs:
+        return
+    series = ledger.get("nav_series") or []
+    last_date = series[-1]["date"] if series else None
+    if last_date is None:
+        return  # fresh ledger: nothing was held before today
+    total = 0.0
+    for t, h in ledger["state"]["holdings"].items():
+        for ex_date, amt in divs.get(t, ()):  # [[ex_date, per_share_amount], ...]
+            if last_date < ex_date <= as_of:
+                total += h["shares"] * amt
+    if total:
+        ledger["state"]["cash"] += total
+        ledger.setdefault("dividends", []).append({"date": as_of, "amount": round(total, 4)})
+
+
 def rewind_or_advance(ledger, as_of):
     """Idempotency: same-date rerun rewinds to the day's opening state."""
     if ledger["current_date"] == as_of and ledger["prev_day_state"] is not None:
@@ -199,6 +230,7 @@ def rewind_or_advance(ledger, as_of):
         ledger["nav_series"] = [r for r in ledger["nav_series"] if r["date"] != as_of]
         ledger["trades"] = [t for t in ledger["trades"] if t["date"] != as_of]
         ledger["closed"] = [c for c in ledger["closed"] if c["exit_date"] != as_of]
+        ledger["dividends"] = [d for d in ledger.get("dividends", []) if d["date"] != as_of]
     else:
         ledger["prev_day_state"] = copy.deepcopy(ledger["state"])
         ledger["current_date"] = as_of
@@ -207,6 +239,7 @@ def rewind_or_advance(ledger, as_of):
 def run_target_ledger(ledger, targets, prices, as_of, reason_prefix):
     """plan/equal ledgers: trade-on-change toward a {ticker: weight_pct} target set."""
     rewind_or_advance(ledger, as_of)
+    credit_dividends(ledger, as_of)  # pay holders before today's rebalance
     held = set(ledger["state"]["holdings"])
     target_set = set(targets)
 
@@ -229,6 +262,7 @@ def run_target_ledger(ledger, targets, prices, as_of, reason_prefix):
 def run_mine_ledger(ledger, snapshot, prices, as_of):
     """Unitized ledger of the user's actual holdings."""
     rewind_or_advance(ledger, as_of)
+    credit_dividends(ledger, as_of)  # pay holders before applying today's snapshot
     state = ledger["state"]
 
     # Mark existing book first (pre-flow value)
@@ -446,6 +480,7 @@ def main():
     stocks = load_json(stocks_path, [])
     prices = {s["symbol"]: s.get("price") for s in stocks if s.get("symbol")}
     prices_holder["prices"] = prices
+    dividends_holder["divs"] = (load_json(DIVIDENDS_JSON, {}) or {}).get("tickers", {})
     factor = (load_json(FACTOR_SCORES_JSON, {}) or {}).get("tickers", {})
     plan = load_json(PORTFOLIO_PLAN_JSON, {}) or {}
 
