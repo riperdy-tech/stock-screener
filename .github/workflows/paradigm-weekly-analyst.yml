@@ -50,7 +50,10 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL }}
         run: |
-          python scripts/fetch_overlay_signals.py --apply --max-calls 400 || true
+          # No `|| true`: soft DeepSeek failures already exit 0 (GPR tags carry
+          # forward) and surface as ::warning::/::error:: annotations; a hard crash
+          # (import/config error) should fail the step instead of hiding green.
+          python scripts/fetch_overlay_signals.py --apply --max-calls 400
 
       - name: LLM Fallback Theme Classifier
         env:

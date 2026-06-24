@@ -167,6 +167,8 @@ def main():
     results = {}
     gpr_fetched = 0
     gpr_carried = 0
+    gpr_failed = 0
+    gpr_attempted = 0
 
     for t in eligible:
         prev = previous.get(t) or {}
@@ -200,6 +202,7 @@ def main():
                 prompt = GPR_PROMPT.format(
                     name=stock.get("name") or t, sector=stock.get("sector") or "?",
                     industry=stock.get("industry") or "?", description=description)
+                gpr_attempted += 1
                 try:
                     response = deepseek_client.chat.completions.create(
                         model=model, messages=[{"role": "user", "content": prompt}],
@@ -210,6 +213,7 @@ def main():
                         gpr["fetched_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%d")
                         gpr_fetched += 1
                 except Exception as e:
+                    gpr_failed += 1
                     print(f"  {t}: GPR call failed ({e}); carrying previous", file=sys.stderr)
                 calls += 1
                 time.sleep(RATE_LIMIT_SECONDS)
@@ -229,6 +233,8 @@ def main():
                   "informed_demand: +1 insider buying w/o rising shorts, -1 insider selling "
                   "w/ rising or high shorts. gpr_level: 0-3 LLM-tagged exposure (slow-moving; "
                   "carried forward when call budget exhausted)."),
+        "gpr_status": {"attempted": gpr_attempted, "fetched": gpr_fetched,
+                       "failed": gpr_failed, "carried": gpr_carried},
         "tickers": {t: results[t] for t in sorted(results)},
     }
     OUT_JSON.write_text(json.dumps(payload, indent=1, sort_keys=True) + "\n", encoding="utf-8")
@@ -237,7 +243,17 @@ def main():
         d = e.get("informed_demand")
         demand_counts[d] = demand_counts.get(d, 0) + 1
     print(f"Written: {OUT_JSON.name} | {len(results)} tickers | calls used: {calls}")
-    print(f"informed_demand counts: {demand_counts} | GPR fetched: {gpr_fetched}, carried: {gpr_carried}")
+    print(f"informed_demand counts: {demand_counts} | GPR fetched: {gpr_fetched}, "
+          f"carried: {gpr_carried}, failed: {gpr_failed}/{gpr_attempted}")
+
+    # Surface DeepSeek degradation as GitHub Actions annotations — the step stays
+    # green (carry-forward keeps the chain alive) but failures are no longer silent.
+    if gpr_failed:
+        level = "error" if (gpr_attempted and gpr_fetched == 0) else "warning"
+        detail = ("ALL GPR calls failed — tags are stale (check DEEPSEEK_API_KEY / balance / rate limit)"
+                  if level == "error" else
+                  f"{gpr_failed}/{gpr_attempted} GPR calls failed; those tags carried forward")
+        print(f"::{level}::Stage-4 overlay DeepSeek: {detail}")
 
 
 if __name__ == "__main__":
