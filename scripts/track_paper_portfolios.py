@@ -63,61 +63,57 @@ def load_json(path, default=None):
         return json.load(f)
 
 
-def load_my_snapshot():
-    """The user's holdings snapshot for the "mine" ledger.
+def supabase_env():
+    return os.environ.get("NEXT_PUBLIC_SUPABASE_URL"), os.environ.get("SUPABASE_SERVICE_KEY")
 
-    Supabase (table my_portfolio, single row id=1) is the source of truth on the
-    deployed site, where the /api/my-portfolio route writes it. Falls back to the
-    local JSON file for offline/dev runs with no Supabase env set.
-    Shape: {"holdings": [{"ticker","value"}], "cash": num, "saved_at": iso}.
-    """
-    url = os.environ.get("NEXT_PUBLIC_SUPABASE_URL")
-    key = os.environ.get("SUPABASE_SERVICE_KEY")
-    if url and key:
-        try:
-            import requests
-            r = requests.get(
-                f"{url}/rest/v1/my_portfolio?id=eq.1&select=holdings,cash,saved_at",
-                headers={"apikey": key, "Authorization": f"Bearer {key}"},
-                timeout=20)
-            if r.status_code == 200:
-                rows = r.json()
-                return rows[0] if rows else None  # reachable, no snapshot saved yet
-            print(f"  my_portfolio supabase fetch {r.status_code}: {r.text[:200]}",
-                  file=sys.stderr)
-        except Exception as e:
-            print(f"  my_portfolio supabase fetch failed: {e}", file=sys.stderr)
-    return load_json(MY_PORTFOLIO_JSON, None)  # dev / offline fallback
+
+def sb_get(path):
+    """GET PostgREST rows (service key). Returns parsed list or None."""
+    url, key = supabase_env()
+    if not (url and key):
+        return None
+    try:
+        import requests
+        r = requests.get(f"{url}/rest/v1/{path}",
+                         headers={"apikey": key, "Authorization": f"Bearer {key}"}, timeout=30)
+        if r.status_code == 200:
+            return r.json()
+        print(f"  supabase GET {path} -> {r.status_code}: {r.text[:200]}", file=sys.stderr)
+    except Exception as e:
+        print(f"  supabase GET {path} failed: {e}", file=sys.stderr)
+    return None
+
+
+def sb_upsert(table, row, on_conflict):
+    """Upsert one row via PostgREST (service key, merge-duplicates). Returns bool."""
+    url, key = supabase_env()
+    if not (url and key):
+        return False
+    try:
+        import requests
+        r = requests.post(f"{url}/rest/v1/{table}?on_conflict={on_conflict}",
+                          headers={"apikey": key, "Authorization": f"Bearer {key}",
+                                   "Content-Type": "application/json",
+                                   "Prefer": "resolution=merge-duplicates,return=minimal"},
+                          data=json.dumps(row), timeout=30)
+        if r.status_code in (200, 201, 204):
+            return True
+        print(f"  supabase upsert {table} -> {r.status_code}: {r.text[:200]}", file=sys.stderr)
+    except Exception as e:
+        print(f"  supabase upsert {table} failed: {e}", file=sys.stderr)
+    return False
 
 
 def save_ledgers_to_supabase(book):
-    """Mirror the full ledger book to Supabase (table paper_ledgers, row id=1).
-
-    The site reads this at runtime via /api/paper-ledgers, so a portfolio refresh
-    shows up without committing paper_ledgers.json / a Vercel rebuild. No-op when
-    Supabase env is absent (dev); the committed JSON file stays a backup.
+    """Mirror the GLOBAL ledger book (plan/plan2/equal) to Supabase (paper_ledgers
+    row id=1). The site reads it at runtime via /api/paper-ledgers — no commit /
+    redeploy. No-op without Supabase env (dev); the committed JSON stays a backup.
+    Per-user `mine` ledgers live in user_mine_ledgers, not here.
     """
-    url = os.environ.get("NEXT_PUBLIC_SUPABASE_URL")
-    key = os.environ.get("SUPABASE_SERVICE_KEY")
-    if not (url and key):
-        return
-    try:
-        import requests
-        r = requests.post(
-            f"{url}/rest/v1/paper_ledgers?on_conflict=id",
-            headers={"apikey": key, "Authorization": f"Bearer {key}",
-                     "Content-Type": "application/json",
-                     "Prefer": "resolution=merge-duplicates,return=minimal"},
-            data=json.dumps({"id": 1, "data": book,
-                             "updated_at": datetime.now(timezone.utc).isoformat()}),
-            timeout=30)
-        if r.status_code not in (200, 201, 204):
-            print(f"  paper_ledgers supabase upsert {r.status_code}: {r.text[:200]}",
-                  file=sys.stderr)
-        else:
-            print("  paper_ledgers mirrored to Supabase.")
-    except Exception as e:
-        print(f"  paper_ledgers supabase upsert failed: {e}", file=sys.stderr)
+    if sb_upsert("paper_ledgers",
+                 {"id": 1, "data": book, "updated_at": datetime.now(timezone.utc).isoformat()},
+                 "id"):
+        print("  global ledgers mirrored to Supabase.")
 
 
 def num(v):
@@ -392,6 +388,52 @@ def backfill_post_exit(ledger, prices, as_of):
                 c["post_exit_days"] = elapsed
 
 
+def finalize_ledger(led, nav, stale, benches, as_of, inception):
+    """Append today's NAV point, backfill post-exit marks, recompute summary."""
+    led["nav_series"].append({"date": as_of, "nav": round(nav, 4) if nav is not None else None,
+                              "bench": benches.get(PRIMARY_BENCHMARK),  # back-compat (IWM)
+                              "benches": benches, "stale_marks": stale})
+    backfill_post_exit(led, prices_holder.get("prices", {}), as_of)
+    led["summary"] = compute_summary(led["nav_series"], led["trades"], led["closed"], inception)
+    led["summary"]["open_positions"] = len(led["state"]["holdings"])
+
+
+# prices are passed explicitly everywhere except backfill inside finalize_ledger;
+# stash them so finalize_ledger can reach the current run's marks without threading
+# the arg through every caller.
+prices_holder = {}
+
+
+def process_user_mine_ledgers(prices, benches, as_of):
+    """Per-user `mine` ledgers (multi-user). Reads every saved snapshot from
+    my_portfolio (service key), advances each user's mine ledger held in
+    user_mine_ledgers, and writes it back. Each user's ledger inceptions on the
+    first run that sees their snapshot. Returns a count for logging.
+    """
+    rows = sb_get("my_portfolio?select=user_id,holdings,cash,saved_at")
+    if not rows:
+        return 0
+    done = 0
+    for snap in rows:
+        uid = snap.get("user_id")
+        if not uid:
+            continue
+        if snap.get("saved_at"):
+            snap["saved_at_date"] = snap["saved_at"][:10]
+        existing = sb_get(f"user_mine_ledgers?user_id=eq.{uid}&select=data") or []
+        stored = existing[0]["data"] if existing else None
+        led = stored["ledger"] if stored and "ledger" in stored else empty_ledger()
+        inception = (stored or {}).get("inception") or as_of
+        nav, stale = run_mine_ledger(led, snap, prices, as_of)
+        finalize_ledger(led, nav, stale, benches, as_of, inception)
+        sb_upsert("user_mine_ledgers",
+                  {"user_id": uid, "data": {"ledger": led, "inception": inception},
+                   "updated_at": datetime.now(timezone.utc).isoformat()},
+                  "user_id")
+        done += 1
+    return done
+
+
 def main():
     parser = argparse.ArgumentParser(description="Update live paper-trading ledgers.")
     parser.add_argument("--as-of", type=str, default=None, help="Override date (YYYY-MM-DD, testing)")
@@ -403,61 +445,62 @@ def main():
     stocks_path = Path(args.stocks_json) if args.stocks_json else STOCKS_JSON
     stocks = load_json(stocks_path, [])
     prices = {s["symbol"]: s.get("price") for s in stocks if s.get("symbol")}
+    prices_holder["prices"] = prices
     factor = (load_json(FACTOR_SCORES_JSON, {}) or {}).get("tickers", {})
     plan = load_json(PORTFOLIO_PLAN_JSON, {}) or {}
-    my_snapshot = load_my_snapshot()
-    if my_snapshot and my_snapshot.get("saved_at"):
-        my_snapshot["saved_at_date"] = my_snapshot["saved_at"][:10]
 
     book = load_json(LEDGERS_JSON, None) or {
         "inception": as_of,
         "config": {"cost_bps": COST_BPS, "benchmarks": BENCHMARKS,
                    "primary_benchmark": PRIMARY_BENCHMARK, "start_nav": START_NAV},
-        "ledgers": {"plan": empty_ledger(), "plan2": empty_ledger(),
-                    "equal": empty_ledger(), "mine": empty_ledger()},
+        "ledgers": {"plan": empty_ledger(), "plan2": empty_ledger(), "equal": empty_ledger()},
     }
     book["ledgers"].setdefault("plan2", empty_ledger())  # add to pre-existing books
+    book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
     book["config"]["primary_benchmark"] = PRIMARY_BENCHMARK
     ledgers = book["ledgers"]
 
     benches = {b: None for b in BENCHMARKS} if args.skip_benchmark else fetch_benchmarks()
 
-    # ── plan ledger (value core) ─────────────────────────────────────────
+    # ── global ledgers: plan / plan2 / equal (identical for every user) ──
     plan_targets = {p["symbol"]: p["weight_pct"] for p in (plan.get("positions") or [])}
     nav_plan, stale_plan = run_target_ledger(ledgers["plan"], plan_targets, prices, as_of, "plan")
-    # ── plan2 ledger (hybrid: value core + quality sleeve) ───────────────
     plan2_targets = {p["symbol"]: p["weight_pct"] for p in ((plan.get("plan2") or {}).get("positions") or [])}
     nav_plan2, stale_plan2 = run_target_ledger(ledgers["plan2"], plan2_targets, prices, as_of, "plan2")
-    # ── equal ledger ─────────────────────────────────────────────────────
     research = sorted(t for t, e in factor.items() if e.get("fct_band") == "research_now")
     eq_weight = 100.0 / len(research) if research else 0
     nav_eq, stale_eq = run_target_ledger(ledgers["equal"], {t: eq_weight for t in research},
                                          prices, as_of, "rank")
-    # ── mine ledger ──────────────────────────────────────────────────────
-    nav_mine, stale_mine = run_mine_ledger(ledgers["mine"], my_snapshot, prices, as_of)
-
     for name, nav, stale in (("plan", nav_plan, stale_plan), ("plan2", nav_plan2, stale_plan2),
-                             ("equal", nav_eq, stale_eq), ("mine", nav_mine, stale_mine)):
-        led = ledgers[name]
-        led["nav_series"].append({"date": as_of, "nav": round(nav, 4) if nav is not None else None,
-                                  "bench": benches.get(PRIMARY_BENCHMARK),  # back-compat (IWM)
-                                  "benches": benches, "stale_marks": stale})
-        backfill_post_exit(led, prices, as_of)
-        led["summary"] = compute_summary(led["nav_series"], led["trades"], led["closed"],
-                                         book["inception"])
-        led["summary"]["open_positions"] = len(led["state"]["holdings"])
+                             ("equal", nav_eq, stale_eq)):
+        finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
 
     book["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     save_ledgers_to_supabase(book)  # runtime source for /api/paper-ledgers (no redeploy)
 
+    # ── mine ledgers (per-user in Supabase; single local user in dev) ────
+    if all(supabase_env()):
+        n_users = process_user_mine_ledgers(prices, benches, as_of)
+        mine_note = f"{n_users} user mine-ledger(s) -> Supabase"
+    else:
+        my_snapshot = load_json(MY_PORTFOLIO_JSON, None)
+        if my_snapshot and my_snapshot.get("saved_at"):
+            my_snapshot["saved_at_date"] = my_snapshot["saved_at"][:10]
+        mine = book["ledgers"].setdefault("mine", empty_ledger())
+        nav_mine, stale_mine = run_mine_ledger(mine, my_snapshot, prices, as_of)
+        finalize_ledger(mine, nav_mine, stale_mine, benches, as_of, book["inception"])
+        LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        mine_note = "local mine ledger (dev, no Supabase env)"
+
     print(f"Paper ledgers @ {as_of}:")
-    for name in ("plan", "plan2", "equal", "mine"):
+    for name in ("plan", "plan2", "equal"):
         s = ledgers[name]["summary"]
         nav_now = ledgers[name]["nav_series"][-1]["nav"]
         print(f"  {name:5s} nav={nav_now} open={s.get('open_positions')} "
               f"cum={s.get('cumulative_return_pct')}% trades={len(ledgers[name]['trades'])}")
+    print(f"  mine: {mine_note}")
     print(f"Written: {LEDGERS_JSON.name}")
 
 

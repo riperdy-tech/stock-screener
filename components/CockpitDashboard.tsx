@@ -8,6 +8,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
+import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/lib/useAuth';
+import { AuthModal } from './AuthModal';
 import {
     Activity, ArrowUpRight, BarChart3, Briefcase, ExternalLink, FlaskConical,
     HelpCircle, Layers3, LineChart as LineChartIcon, RefreshCw, Search, ShieldAlert, X,
@@ -346,12 +349,14 @@ function parseBulkPortfolio(text: string): { holdings: Holding[]; cash: number |
     return { holdings, cash, skipped };
 }
 
-function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect }: {
+function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, onRequireLogin }: {
     factor: Record<string, FactorEntry>;
     valuations: Record<string, ValuationModel>;
     overlay: Record<string, any>;
     stockInfo: Record<string, StockInfo>;
     onSelect: (t: string) => void;
+    user: any;
+    onRequireLogin: () => void;
 }) {
     const [holdings, setHoldings] = useState<Holding[]>([]);
     const [cash, setCash] = useState<number>(0);
@@ -386,18 +391,20 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect }: {
     };
 
     const saveSnapshot = async () => {
+        if (!user) { onRequireLogin(); return; }
+        if (!supabase) { setSaveStatus('failed: auth/storage not configured'); return; }
         setSaveStatus('saving…');
-        try {
-            const resp = await fetch('/api/my-portfolio', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ holdings, cash }),
-            });
-            const data = await resp.json();
-            setSaveStatus(data?.ok ? `saved ✓ (tracked from next chain run)` : `failed: ${data?.error || resp.status}`);
-        } catch {
-            setSaveStatus('failed — needs the dev/node server (API route unavailable on static export)');
-        }
+        const clean = holdings
+            .filter(h => h.ticker && Number.isFinite(h.value) && h.value > 0)
+            .map(h => ({ ticker: h.ticker.toUpperCase(), value: h.value }));
+        // RLS scopes this upsert to the logged-in user (user_id = auth.uid()).
+        const { error } = await supabase.from('my_portfolio').upsert({
+            user_id: user.id,
+            holdings: clean,
+            cash: Number.isFinite(cash) && cash >= 0 ? cash : 0,
+            saved_at: new Date().toISOString(),
+        });
+        setSaveStatus(error ? `failed: ${error.message}` : 'saved ✓ (run Update Mine Ledger, or wait for the daily run)');
         setTimeout(() => setSaveStatus(null), 6000);
     };
 
@@ -591,6 +598,36 @@ export default function CockpitDashboard() {
     const [limit, setLimit] = useState(100);
     const [selected, setSelected] = useState<string | null>(null);
     const [showHelp, setShowHelp] = useState(false);
+    const auth = useAuth();
+    const [showAuth, setShowAuth] = useState(false);
+
+    // The logged-in user's private `mine` ledger (user_mine_ledgers, RLS-scoped).
+    // Merged into the global ledger book so Track Record renders all four cards.
+    const attachMine = async (base: any): Promise<any> => {
+        let mine: any = undefined;
+        if (supabase && auth.user) {
+            const { data } = await supabase
+                .from('user_mine_ledgers').select('data').eq('user_id', auth.user.id).maybeSingle();
+            mine = data?.data?.ledger;
+        }
+        return base ? { ...base, ledgers: { ...base.ledgers, mine } } : base;
+    };
+
+    // Re-attach mine on login/logout (loadAll handles mount + manual refresh).
+    useEffect(() => {
+        if (!auth.ready) return;
+        let cancelled = false;
+        (async () => {
+            let mine: any = undefined;
+            if (supabase && auth.user) {
+                const { data } = await supabase
+                    .from('user_mine_ledgers').select('data').eq('user_id', auth.user.id).maybeSingle();
+                mine = data?.data?.ledger;
+            }
+            if (!cancelled) setLedgers((prev: any) => prev ? { ...prev, ledgers: { ...prev.ledgers, mine } } : prev);
+        })();
+        return () => { cancelled = true; };
+    }, [auth.user, auth.ready]);
 
     const loadAll = async () => {
         setLoading(true);
@@ -599,7 +636,7 @@ export default function CockpitDashboard() {
             fetchOutcomes(), fetchBacktest(), fetchFactorIc(), fetchOverlaySignals(),
             fetchPaperLedgers(), fetchStocks('US'),
         ]);
-        setLedgers(pl);
+        setLedgers(await attachMine(pl));
         setFactor(f);
         setValuations(v?.tickers ?? {});
         setPlan(p);
@@ -761,6 +798,18 @@ export default function CockpitDashboard() {
                         <Link href="/reports" className="rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground">
                             AI Reports
                         </Link>
+                        {auth.ready && (auth.user ? (
+                            <button onClick={() => auth.signOut()}
+                                className="rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground"
+                                title={auth.user.email || 'Log out'}>
+                                Log out
+                            </button>
+                        ) : (
+                            <button onClick={() => setShowAuth(true)}
+                                className="rounded-md border border-emerald-500/40 bg-emerald-500/15 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/25">
+                                Log in
+                            </button>
+                        ))}
                         <button onClick={loadAll} className="rounded-md border border-border bg-secondary/20 p-1.5 text-muted-foreground hover:text-foreground" title="Refresh">
                             <RefreshCw className={clsx('h-4 w-4', loading && 'animate-spin')} />
                         </button>
@@ -901,7 +950,11 @@ export default function CockpitDashboard() {
                                                 })}
                                             </div>
                                             {!live && name === 'mine' && (
-                                                <p className="mt-2 text-[10px] text-amber-300">Idle — save a My Portfolio snapshot (Portfolio tab) to start tracking.</p>
+                                                <p className="mt-2 text-[10px] text-amber-300">
+                                                    {auth.user
+                                                        ? 'Idle — save a My Portfolio snapshot (Portfolio tab), then run Update Mine Ledger.'
+                                                        : 'Log in and save a My Portfolio snapshot to track your own portfolio.'}
+                                                </p>
                                             )}
                                         </button>
                                     </div>
@@ -1007,7 +1060,8 @@ export default function CockpitDashboard() {
                 {tab === 'portfolio' && (plan ? (
                     <div className="space-y-4">
                         <MyPortfolio factor={factor?.tickers ?? {}} valuations={valuations}
-                            overlay={overlay} stockInfo={stockInfo} onSelect={setSelected} />
+                            overlay={overlay} stockInfo={stockInfo} onSelect={setSelected}
+                            user={auth.user} onRequireLogin={() => setShowAuth(true)} />
 
                         {/* Suggested-plan selector: value core vs hybrid */}
                         <div className="flex flex-wrap items-center gap-2">
@@ -1230,6 +1284,7 @@ export default function CockpitDashboard() {
             </main>
 
             {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
+            {showAuth && <AuthModal onClose={() => setShowAuth(false)} signIn={auth.signIn} signUp={auth.signUp} />}
 
             {/* ── Detail slide-over ─────────────────────────────────── */}
             {selected && selectedEntry && (
