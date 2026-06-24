@@ -404,8 +404,24 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
             cash: Number.isFinite(cash) && cash >= 0 ? cash : 0,
             saved_at: new Date().toISOString(),
         });
-        setSaveStatus(error ? `failed: ${error.message}` : 'saved ✓ (run Update Mine Ledger, or wait for the daily run)');
-        setTimeout(() => setSaveStatus(null), 6000);
+        if (error) {
+            setSaveStatus(`failed: ${error.message}`);
+            setTimeout(() => setSaveStatus(null), 6000);
+            return;
+        }
+        // Auto-fire the Update Mine Ledger workflow so the ledger refreshes without
+        // the Actions tab. ~1 min to run; the daily chain is the fallback.
+        setSaveStatus('saved ✓ — starting ledger refresh…');
+        try {
+            const r = await fetch('/api/refresh-mine', { method: 'POST' });
+            const d = await r.json();
+            setSaveStatus(d?.ok
+                ? 'saved ✓ — ledger updating (~1 min), then refresh this page'
+                : `saved ✓ — auto-refresh failed (${d?.error || r.status}); run Update Mine Ledger manually`);
+        } catch {
+            setSaveStatus('saved ✓ — auto-refresh unreachable; run Update Mine Ledger manually');
+        }
+        setTimeout(() => setSaveStatus(null), 9000);
     };
 
     useEffect(() => {
