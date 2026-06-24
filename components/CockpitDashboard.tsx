@@ -605,6 +605,8 @@ export default function CockpitDashboard() {
     const [ledgers, setLedgers] = useState<any | null>(null);
     const [ledgerView, setLedgerView] = useState<'plan' | 'plan2' | 'equal' | 'mine'>('plan');
     const [planView, setPlanView] = useState<'plan' | 'plan2'>('plan');
+    const [navRange, setNavRange] = useState<'1m' | '3m' | 'ytd' | 'all'>('all');
+    const [tradeQuery, setTradeQuery] = useState('');
     const [stockInfo, setStockInfo] = useState<Record<string, StockInfo>>({});
     const [loading, setLoading] = useState(true);
 
@@ -720,8 +722,16 @@ export default function CockpitDashboard() {
                 }
             }
         }
-        return Object.values(byDate).sort((a: any, b: any) => a.date.localeCompare(b.date));
-    }, [ledgers]);
+        const all = Object.values(byDate).sort((a: any, b: any) => a.date.localeCompare(b.date));
+        if (navRange === 'all' || all.length === 0) return all;
+        const lastDate: string = (all[all.length - 1] as any).date;
+        const cut = new Date(lastDate + 'T00:00:00Z');
+        if (navRange === '1m') cut.setUTCMonth(cut.getUTCMonth() - 1);
+        else if (navRange === '3m') cut.setUTCMonth(cut.getUTCMonth() - 3);
+        else if (navRange === 'ytd') { cut.setUTCMonth(0); cut.setUTCDate(1); }
+        const cutStr = cut.toISOString().slice(0, 10);
+        return all.filter((r: any) => r.date >= cutStr);
+    }, [ledgers, navRange]);
 
     const soldTooEarly = useMemo(() => {
         const L = ledgers?.ledgers;
@@ -979,11 +989,22 @@ export default function CockpitDashboard() {
                         </div>
 
                         <div className="rounded-lg border border-border bg-card/95 p-3">
-                            <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">NAV — indexed to 100 at inception</h3>
+                            <div className="mb-2 flex items-center justify-between">
+                                <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground">NAV — indexed to 100 at inception</h3>
+                                <div className="flex gap-1">
+                                    {(['1m', '3m', 'ytd', 'all'] as const).map(r => (
+                                        <button key={r} onClick={() => setNavRange(r)}
+                                            className={clsx('rounded px-2 py-0.5 text-[10px] font-black uppercase',
+                                                navRange === r ? 'bg-emerald-500/20 text-emerald-300' : 'text-muted-foreground hover:text-foreground')}>
+                                            {r}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
                             <ResponsiveContainer width="100%" height={280}>
                                 <LineChart data={navCurve}>
                                     <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
-                                    <XAxis dataKey="date" tick={{ fontSize: 9 }} stroke="#64748b" />
+                                    <XAxis dataKey="date" tick={{ fontSize: 9 }} stroke="#64748b" minTickGap={28} interval="preserveStartEnd" />
                                     <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10 }} stroke="#64748b" />
                                     <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
                                     <Legend wrapperStyle={{ fontSize: 11 }} />
@@ -1035,24 +1056,88 @@ export default function CockpitDashboard() {
                                 </div>
                             </div>
                             <div className="rounded-lg border border-border bg-card/95 p-3">
-                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
-                                    Recent trades — {ledgerView}
-                                </h3>
-                                <div className="max-h-72 overflow-y-auto">
-                                    <table className="w-full text-left text-xs">
-                                        <tbody>
-                                            {(ledgers.ledgers[ledgerView]?.trades ?? []).slice(-25).reverse().map((tr: any, i: number) => (
-                                                <tr key={i} className="border-t border-border/50">
-                                                    <td className="px-2 py-1.5 font-mono text-muted-foreground">{tr.date}</td>
-                                                    <td className={clsx('px-2 py-1.5 font-black uppercase', tr.side === 'buy' ? 'text-emerald-300' : 'text-red-300')}>{tr.side}</td>
-                                                    <td className="px-2 py-1.5 font-black">{tr.ticker}</td>
-                                                    <td className="px-2 py-1.5 text-right font-mono">{tr.price ?? '—'}</td>
-                                                    <td className="px-2 py-1.5 text-[10px] text-muted-foreground">{(tr.reason || '').replace(/_/g, ' ')}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                                <div className="mb-2 flex items-center justify-between gap-2">
+                                    <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground">
+                                        Trade history — {ledgerView}
+                                    </h3>
+                                    <input value={tradeQuery} onChange={e => setTradeQuery(e.target.value)} placeholder="filter ticker / date"
+                                        className="w-36 rounded-md border border-border bg-secondary/20 px-2 py-1 text-[11px] outline-none focus:border-emerald-500/50" />
                                 </div>
+                                <div className="max-h-72 overflow-y-auto">
+                                    {(() => {
+                                        const trades = (ledgers.ledgers[ledgerView]?.trades ?? []);
+                                        const tq = tradeQuery.trim().toUpperCase();
+                                        const filtered = tq
+                                            ? trades.filter((t: any) => (t.ticker || '').toUpperCase().includes(tq) || (t.date || '').includes(tq))
+                                            : trades;
+                                        const shown = filtered.slice().reverse().slice(0, 500);
+                                        if (filtered.length === 0) return <p className="px-2 py-2 text-[11px] text-muted-foreground">No trades match.</p>;
+                                        return (<>
+                                            <table className="w-full text-left text-xs">
+                                                <tbody>
+                                                    {shown.map((tr: any, i: number) => (
+                                                        <tr key={i} className="border-t border-border/50">
+                                                            <td className="px-2 py-1.5 font-mono text-muted-foreground">{tr.date}</td>
+                                                            <td className={clsx('px-2 py-1.5 font-black uppercase', tr.side === 'buy' ? 'text-emerald-300' : 'text-red-300')}>{tr.side}</td>
+                                                            <td className="cursor-pointer px-2 py-1.5 font-black hover:text-emerald-300" onClick={() => setSelected(tr.ticker)}>{tr.ticker}</td>
+                                                            <td className="px-2 py-1.5 text-right font-mono">{tr.price ?? '—'}</td>
+                                                            <td className="px-2 py-1.5 text-[10px] text-muted-foreground">{(tr.reason || '').replace(/_/g, ' ')}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                            <p className="px-2 py-1.5 text-[10px] text-muted-foreground">
+                                                {filtered.length > 500 ? `Showing latest 500 of ${filtered.length}` : `${filtered.length} trade${filtered.length === 1 ? '' : 's'}`}
+                                            </p>
+                                        </>);
+                                    })()}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Closed trades — realized round-trip history */}
+                        <div className="rounded-lg border border-border bg-card/95 p-3">
+                            <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
+                                Closed trades — {ledgerView} (realized)
+                            </h3>
+                            <div className="max-h-80 overflow-y-auto">
+                                {(() => {
+                                    const closed = (ledgers.ledgers[ledgerView]?.closed ?? []).slice()
+                                        .sort((a: any, b: any) => (b.exit_date || '').localeCompare(a.exit_date || ''));
+                                    if (closed.length === 0) return <p className="px-2 py-2 text-[11px] text-muted-foreground">No closed trades yet — sells appear here once positions exit.</p>;
+                                    const wins = closed.filter((c: any) => c.return_pct != null && c.return_pct > 0).length;
+                                    const withRet = closed.filter((c: any) => c.return_pct != null);
+                                    return (<>
+                                        <table className="w-full text-left text-xs">
+                                            <thead className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                                                <tr><th className="px-2 py-1.5">Sym</th><th className="px-2 py-1.5">Entry</th><th className="px-2 py-1.5">Exit</th>
+                                                    <th className="px-2 py-1.5 text-right">Days</th><th className="px-2 py-1.5 text-right">Return</th>
+                                                    <th className="px-2 py-1.5 text-right">Post-exit</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                {closed.map((c: any, i: number) => (
+                                                    <tr key={i} className="border-t border-border/50">
+                                                        <td className="cursor-pointer px-2 py-1.5 font-black hover:text-emerald-300" onClick={() => setSelected(c.ticker)}>{c.ticker}</td>
+                                                        <td className="px-2 py-1.5 font-mono text-muted-foreground">{c.entry_date}</td>
+                                                        <td className="px-2 py-1.5 font-mono text-muted-foreground">{c.exit_date}</td>
+                                                        <td className="px-2 py-1.5 text-right font-mono text-muted-foreground">{c.hold_days ?? '—'}</td>
+                                                        <td className={clsx('px-2 py-1.5 text-right font-mono font-black',
+                                                            c.return_pct == null ? 'text-muted-foreground' : c.return_pct >= 0 ? 'text-success' : 'text-danger')}>
+                                                            {c.return_pct == null ? '—' : `${c.return_pct >= 0 ? '+' : ''}${c.return_pct}%`}
+                                                        </td>
+                                                        <td className={clsx('px-2 py-1.5 text-right font-mono',
+                                                            c.post_exit_return_pct == null ? 'text-muted-foreground' : c.post_exit_return_pct >= 0 ? 'text-success' : 'text-danger')}>
+                                                            {c.post_exit_return_pct == null ? '—' : `${c.post_exit_return_pct >= 0 ? '+' : ''}${c.post_exit_return_pct}%`}
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                        <p className="px-2 py-1.5 text-[10px] text-muted-foreground">
+                                            {closed.length} closed{withRet.length ? ` · win rate ${(100 * wins / withRet.length).toFixed(0)}%` : ''} · &ldquo;Post-exit&rdquo; = move in the 30d after selling (sold-too-early signal)
+                                        </p>
+                                    </>);
+                                })()}
                             </div>
                         </div>
 
