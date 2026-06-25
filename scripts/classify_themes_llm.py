@@ -199,7 +199,7 @@ def main():
         print("ERROR: DEEPSEEK_API_KEY not set.", file=sys.stderr)
         sys.exit(1)
 
-    model = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash")
+    model = os.getenv("DEEPSEEK_MODEL") or "deepseek-v4-flash"  # `or`: empty secret -> default
 
     if not STOCKS_JSON.exists():
         print(f"ERROR: {STOCKS_JSON} not found.", file=sys.stderr)

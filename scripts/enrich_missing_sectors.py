@@ -207,7 +207,7 @@ def main():
         print("Set DEEPSEEK_API_KEY in .env at the workspace root.")
         sys.exit(1)
 
-    model = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash")
+    model = os.getenv("DEEPSEEK_MODEL") or "deepseek-v4-flash"  # `or`: empty secret -> default
 
     # ── Load stocks ──────────────────────────────────────────────────────
     stocks = load_json(STOCKS_JSON)

@@ -161,7 +161,7 @@ def main():
         else:
             from openai import OpenAI
             deepseek_client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
-            model = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash")
+            model = os.getenv("DEEPSEEK_MODEL") or "deepseek-v4-flash"  # `or`: empty secret -> default
 
     calls = 0
     results = {}

@@ -368,7 +368,7 @@ def main():
             print("ERROR: DEEPSEEK_API_KEY not found in environment or .env file.")
             print("Set DEEPSEEK_API_KEY in .env at the workspace root, or use --skip-narrative.")
             sys.exit(1)
-        model = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash")
+        model = os.getenv("DEEPSEEK_MODEL") or "deepseek-v4-flash"  # `or`: empty secret -> default
     else:
         api_key = None
         model = None
