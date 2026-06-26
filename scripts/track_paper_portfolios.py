@@ -56,7 +56,7 @@ DIVIDENDS_JSON = DATA / "dividends.json"
 dividends_holder = {}
 
 COST_BPS = 10
-BENCHMARKS = ["IWM", "SPY", "QQQ"]  # small-cap, S&P 500, Nasdaq-100
+BENCHMARKS = ["IWM", "SPY", "QQQ", "SOXX", "DRAM"]  # small-cap, S&P500, Nasdaq-100, semis, memory
 PRIMARY_BENCHMARK = "IWM"
 START_NAV = 100.0
 POST_EXIT_DAYS = 30

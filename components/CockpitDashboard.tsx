@@ -705,7 +705,7 @@ export default function CockpitDashboard() {
         if (!L) return [];
         const byDate: Record<string, any> = {};
         const firsts: Record<string, number> = {};
-        const benchKeys: Record<string, string> = { IWM: 'iwm', SPY: 'spy', QQQ: 'qqq' };
+        const benchKeys: Record<string, string> = { IWM: 'iwm', SPY: 'spy', QQQ: 'qqq', SOXX: 'soxx', DRAM: 'dram' };
         for (const name of ['plan', 'plan2', 'equal', 'mine'] as const) {
             for (const row of L[name]?.nav_series ?? []) {
                 if (row.nav === null || row.nav === undefined) continue;
@@ -965,7 +965,7 @@ export default function CockpitDashboard() {
                                                 <span>Open: <b className="font-mono text-foreground">{s.open_positions ?? 0}</b></span>
                                             </div>
                                             <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 border-t border-border/40 pt-1.5 text-[11px] text-muted-foreground">
-                                                {(['IWM', 'SPY', 'QQQ'] as const).map(b => {
+                                                {(['IWM', 'SPY', 'QQQ', 'SOXX', 'DRAM'] as const).map(b => {
                                                     const ex = (s.excess_vs || {})[b];
                                                     const fallback = b === 'IWM' ? s.excess_vs_bench_pct : undefined;
                                                     const val = ex !== undefined ? ex : fallback;
@@ -1015,6 +1015,8 @@ export default function CockpitDashboard() {
                                     <Line type="monotone" dataKey="iwm" name="IWM" stroke="#64748b" dot={false} strokeWidth={1.5} strokeDasharray="4 3" />
                                     <Line type="monotone" dataKey="spy" name="SPY" stroke="#94a3b8" dot={false} strokeWidth={1.5} strokeDasharray="2 2" />
                                     <Line type="monotone" dataKey="qqq" name="QQQ" stroke="#facc15" dot={false} strokeWidth={1.5} strokeDasharray="1 3" />
+                                    <Line type="monotone" dataKey="soxx" name="SOXX" stroke="#fb923c" dot={false} strokeWidth={1.5} strokeDasharray="3 2" />
+                                    <Line type="monotone" dataKey="dram" name="DRAM" stroke="#22d3ee" dot={false} strokeWidth={1.5} strokeDasharray="2 3" />
                                 </LineChart>
                             </ResponsiveContainer>
                             {navCurve.length < 5 && (

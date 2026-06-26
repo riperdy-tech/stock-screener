@@ -11,6 +11,13 @@ permissions:
   contents: write
   actions: write
 
+# Serialize against the weekly analyst job — both regenerate + push the same
+# public/data files; running concurrently caused rebase conflicts that silently
+# dropped one run's output. Shared group across workflows queues them.
+concurrency:
+  group: data-writers
+  cancel-in-progress: false
+
 jobs:
   fetch-and-push:
     runs-on: ubuntu-latest
@@ -112,15 +119,21 @@ jobs:
             fi
             
             # Push with retry (handles transient network issues)
+            pushed=false
             for i in 1 2 3; do
               echo "Push attempt $i..."
               if git push origin main; then
                 echo "Push succeeded"
+                pushed=true
                 break
               fi
               echo "Push attempt $i failed, retrying in 10s..."
               sleep 10
             done
-            
+            if [ "$pushed" != "true" ]; then
+              echo "::error::Push failed after 3 attempts — run output was NOT committed."
+              exit 1
+            fi
+
             echo "changes=true" >> $GITHUB_OUTPUT
           fi
