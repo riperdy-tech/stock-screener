@@ -2,7 +2,9 @@ name: Scheduled Data Fetch
 
 on:
   schedule:
-    # Runs at 09:30 UTC every day
+    # 09:30 UTC daily = 17:30 GMT+8 (5:30 PM Singapore/HK/China time).
+    # NOTE: GitHub queues scheduled runs and often starts them 30 min–several
+    # hours late under load — the cron sets the target, not a guaranteed start.
     - cron: '30 9 * * *'
   # Allows you to trigger it manually from the Actions tab
   workflow_dispatch:
