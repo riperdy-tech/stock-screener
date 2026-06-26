@@ -38,7 +38,8 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-        # Writes the ledger book straight to Supabase (table paper_ledgers); the
-        # site reads it at runtime via /api/paper-ledgers. No commit, no redeploy.
-        # (The local paper_ledgers.json it also writes is discarded with the runner.)
-        run: python scripts/track_paper_portfolios.py
+        # --mine-only: advance ONLY the per-user mine ledgers (user_mine_ledgers).
+        # The global plan/plan2/equal are left untouched — this on-demand refresh
+        # must not re-stamp them with stale prices (only the daily/weekly chain,
+        # which fetches fresh prices first, advances the global ledgers).
+        run: python scripts/track_paper_portfolios.py --mine-only

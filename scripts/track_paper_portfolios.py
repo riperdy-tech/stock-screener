@@ -473,6 +473,9 @@ def main():
     parser.add_argument("--as-of", type=str, default=None, help="Override date (YYYY-MM-DD, testing)")
     parser.add_argument("--stocks-json", type=str, default=None, help="Override stocks.json path (testing)")
     parser.add_argument("--skip-benchmark", action="store_true", help="No yfinance call (testing)")
+    parser.add_argument("--mine-only", action="store_true",
+                        help="Advance ONLY per-user mine ledgers; never touch plan/plan2/equal "
+                             "(on-demand refresh must not re-stamp the global ledgers).")
     args = parser.parse_args()
     as_of = args.as_of or datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
@@ -481,9 +484,6 @@ def main():
     prices = {s["symbol"]: s.get("price") for s in stocks if s.get("symbol")}
     prices_holder["prices"] = prices
     dividends_holder["divs"] = (load_json(DIVIDENDS_JSON, {}) or {}).get("tickers", {})
-    factor = (load_json(FACTOR_SCORES_JSON, {}) or {}).get("tickers", {})
-    plan = load_json(PORTFOLIO_PLAN_JSON, {}) or {}
-
     book = load_json(LEDGERS_JSON, None) or {
         "inception": as_of,
         "config": {"cost_bps": COST_BPS, "benchmarks": BENCHMARKS,
@@ -499,21 +499,27 @@ def main():
     benches = {b: None for b in BENCHMARKS} if args.skip_benchmark else fetch_benchmarks()
 
     # ── global ledgers: plan / plan2 / equal (identical for every user) ──
-    plan_targets = {p["symbol"]: p["weight_pct"] for p in (plan.get("positions") or [])}
-    nav_plan, stale_plan = run_target_ledger(ledgers["plan"], plan_targets, prices, as_of, "plan")
-    plan2_targets = {p["symbol"]: p["weight_pct"] for p in ((plan.get("plan2") or {}).get("positions") or [])}
-    nav_plan2, stale_plan2 = run_target_ledger(ledgers["plan2"], plan2_targets, prices, as_of, "plan2")
-    research = sorted(t for t, e in factor.items() if e.get("fct_band") == "research_now")
-    eq_weight = 100.0 / len(research) if research else 0
-    nav_eq, stale_eq = run_target_ledger(ledgers["equal"], {t: eq_weight for t in research},
-                                         prices, as_of, "rank")
-    for name, nav, stale in (("plan", nav_plan, stale_plan), ("plan2", nav_plan2, stale_plan2),
-                             ("equal", nav_eq, stale_eq)):
-        finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
+    # Skipped under --mine-only so an on-demand mine refresh never re-stamps the
+    # global ledgers with stale prices (that produced frozen NAV tails). The
+    # global book is left exactly as loaded; only the daily/weekly chain advances it.
+    if not args.mine_only:
+        factor = (load_json(FACTOR_SCORES_JSON, {}) or {}).get("tickers", {})
+        plan = load_json(PORTFOLIO_PLAN_JSON, {}) or {}
+        plan_targets = {p["symbol"]: p["weight_pct"] for p in (plan.get("positions") or [])}
+        nav_plan, stale_plan = run_target_ledger(ledgers["plan"], plan_targets, prices, as_of, "plan")
+        plan2_targets = {p["symbol"]: p["weight_pct"] for p in ((plan.get("plan2") or {}).get("positions") or [])}
+        nav_plan2, stale_plan2 = run_target_ledger(ledgers["plan2"], plan2_targets, prices, as_of, "plan2")
+        research = sorted(t for t, e in factor.items() if e.get("fct_band") == "research_now")
+        eq_weight = 100.0 / len(research) if research else 0
+        nav_eq, stale_eq = run_target_ledger(ledgers["equal"], {t: eq_weight for t in research},
+                                             prices, as_of, "rank")
+        for name, nav, stale in (("plan", nav_plan, stale_plan), ("plan2", nav_plan2, stale_plan2),
+                                 ("equal", nav_eq, stale_eq)):
+            finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
 
-    book["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
-    save_ledgers_to_supabase(book)  # runtime source for /api/paper-ledgers (no redeploy)
+        book["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        save_ledgers_to_supabase(book)  # runtime source for /api/paper-ledgers (no redeploy)
 
     # ── mine ledgers (per-user in Supabase; single local user in dev) ────
     if all(supabase_env()):
@@ -529,12 +535,13 @@ def main():
         LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
         mine_note = "local mine ledger (dev, no Supabase env)"
 
-    print(f"Paper ledgers @ {as_of}:")
-    for name in ("plan", "plan2", "equal"):
-        s = ledgers[name]["summary"]
-        nav_now = ledgers[name]["nav_series"][-1]["nav"]
-        print(f"  {name:5s} nav={nav_now} open={s.get('open_positions')} "
-              f"cum={s.get('cumulative_return_pct')}% trades={len(ledgers[name]['trades'])}")
+    print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
+    if not args.mine_only:
+        for name in ("plan", "plan2", "equal"):
+            s = ledgers[name]["summary"]
+            nav_now = ledgers[name]["nav_series"][-1]["nav"]
+            print(f"  {name:5s} nav={nav_now} open={s.get('open_positions')} "
+                  f"cum={s.get('cumulative_return_pct')}% trades={len(ledgers[name]['trades'])}")
     print(f"  mine: {mine_note}")
     print(f"Written: {LEDGERS_JSON.name}")
 
