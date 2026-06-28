@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-06-27T13:09:29Z
+Generated: 2026-06-28T13:20:53Z
 Macro flags: none
 Invested: **53.34%**  |  Cash: **46.66%**  |  Positions: 15
 
@@ -68,9 +68,9 @@ Invested: **53.34%**  |  Cash: **46.66%**  |  Positions: 15
 - AVGO: no Kelly edge (expectations gap +13pts >= 0: price already assumes more growth than demonstrated)
 - MYRG: no Kelly edge (expectations gap +23pts >= 0: price already assumes more growth than demonstrated)
 - GILD: no Kelly edge (expectations gap +3pts >= 0: price already assumes more growth than demonstrated)
-- MNST: no Kelly edge (expectations gap +8pts >= 0: price already assumes more growth than demonstrated)
-- DELL: no Kelly edge (expectations gap +20pts >= 0: price already assumes more growth than demonstrated)
 - RMD: sector cap Healthcare (25.0%)
+- DELL: no Kelly edge (expectations gap +20pts >= 0: price already assumes more growth than demonstrated)
+- MNST: no Kelly edge (expectations gap +8pts >= 0: price already assumes more growth than demonstrated)
 
 ## Sizing method
 - Quarter-Kelly: 9 positions — f = 0.25 x mu/sigma^2, mu = expectations-gap recovery over 3y (cap 15%), sigma floor 15%, position cap 5.0%.
