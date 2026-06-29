@@ -116,19 +116,23 @@ jobs:
           else
             git commit -m "Auto-update: Weekly analyst coverage refresh + paradigm re-score"
 
-            if ! git pull --rebase --autostash origin main; then
-              git rebase --abort 2>/dev/null || true
-              git pull --no-rebase origin main || true
-            fi
-
+            # Resilient to a diverged origin: the daily job commits the same data
+            # files, and the cross-workflow concurrency guard is NOT reliably
+            # honored for delayed scheduled runs (they overlapped on 2026-06-28,
+            # producing hundreds of merge conflicts in public/data/*). Re-sync each
+            # attempt with `merge -X ours`: content conflicts keep THIS run's
+            # freshly-regenerated files (it computed last, so it's the most current),
+            # while non-conflicting origin changes (e.g. code commits) still merge in.
             pushed=false
             for i in 1 2 3; do
+              git fetch origin main || true
+              git merge -X ours --no-edit origin/main || git merge --abort 2>/dev/null || true
               if git push origin main; then
                 echo "Push succeeded"
                 pushed=true
                 break
               fi
-              echo "Push attempt $i failed, retrying in 10s..."
+              echo "Push attempt $i failed — re-syncing and retrying in 10s..."
               sleep 10
             done
             if [ "$pushed" != "true" ]; then

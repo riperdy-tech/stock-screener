@@ -112,25 +112,22 @@ jobs:
             echo "changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "Auto-update: Scheduled stock data refresh"
-            
-            # Pull latest and rebase — with retry & fallback strategy
-            echo "Pulling latest from origin/main..."
-            if ! git pull --rebase --autostash origin main; then
-              echo "Rebase failed — trying merge strategy instead..."
-              git rebase --abort 2>/dev/null || true
-              git pull --no-rebase origin main || true
-            fi
-            
-            # Push with retry (handles transient network issues)
+
+            # Resilient to a diverged origin (the weekly job commits the same data
+            # files and can overlap despite the concurrency guard). Re-sync each
+            # attempt with `merge -X ours`: content conflicts keep THIS run's
+            # freshly-fetched data, non-conflicting origin changes still merge in.
             pushed=false
             for i in 1 2 3; do
               echo "Push attempt $i..."
+              git fetch origin main || true
+              git merge -X ours --no-edit origin/main || git merge --abort 2>/dev/null || true
               if git push origin main; then
                 echo "Push succeeded"
                 pushed=true
                 break
               fi
-              echo "Push attempt $i failed, retrying in 10s..."
+              echo "Push attempt $i failed — re-syncing and retrying in 10s..."
               sleep 10
             done
             if [ "$pushed" != "true" ]; then
