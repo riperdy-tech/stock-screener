@@ -1,6 +1,12 @@
 {
  "_note": "Stage-4 overlay: veto/sizing/confirmation only, never additive alpha. informed_demand: +1 insider buying w/o rising shorts, -1 insider selling w/ rising or high shorts. gpr_level: 0-3 LLM-tagged exposure (slow-moving; carried forward when call budget exhausted).",
- "generated_at": "2026-06-21T14:40:36Z",
+ "generated_at": "2026-06-29T13:14:20Z",
+ "gpr_status": {
+  "attempted": 172,
+  "carried": 0,
+  "failed": 0,
+  "fetched": 50
+ },
  "tickers": {
   "AAPL": {
    "gpr": null,
@@ -8,7 +14,8 @@
    "insider_net_pct": 0.0,
    "inst_pct": 0.65822,
    "short_delta": null,
-   "short_pct": 0.0106
+   "short_pct": 0.0106,
+   "stale": true
   },
   "ABBV": {
    "gpr": {
@@ -22,81 +29,97 @@
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0018,
-   "inst_pct": 0.7685,
-   "short_delta": 0.0,
-   "short_pct": 0.0146
+   "inst_pct": 0.76865,
+   "short_delta": 0.0002,
+   "short_pct": 0.0148
   },
   "ABNB": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0031,
-   "inst_pct": 0.88557,
-   "short_delta": 0.0,
-   "short_pct": 0.0357
+   "inst_pct": 0.88588,
+   "short_delta": -0.0002,
+   "short_pct": 0.0355
   },
   "ADBE": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": 0.0017,
-   "inst_pct": 0.8816,
-   "short_delta": 0.0,
-   "short_pct": 0.051599998
+   "insider_net_pct": 0.0018,
+   "inst_pct": 0.88154,
+   "short_delta": 0.0072,
+   "short_pct": 0.0588
   },
   "ADI": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography",
+     "supply_chain",
+     "regulation"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 2,
+    "note": "Global semiconductor firm with significant revenue from China and other regions, subject to export controls."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0009,
-   "inst_pct": 0.93533,
-   "short_delta": 0.0,
-   "short_pct": 0.0217
+   "inst_pct": 0.93534,
+   "short_delta": 0.0059,
+   "short_pct": 0.0276
   },
   "ADSK": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "Autodesk operates globally with software sales across many countries, but no severe geopolitical exposure noted."
+   },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.97536004,
-   "short_delta": 0.0,
-   "short_pct": 0.0345
+   "inst_pct": 0.97545,
+   "short_delta": 0.0049,
+   "short_pct": 0.0394
   },
   "AGX": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": -0.0008,
-   "inst_pct": 1.08857,
-   "short_delta": 0.0,
-   "short_pct": 0.044
+   "insider_net_pct": -0.0015,
+   "inst_pct": 1.08908,
+   "short_delta": 0.0033,
+   "short_pct": 0.0473
   },
   "AGYS": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0006,
    "inst_pct": 1.01888,
-   "short_delta": 0.0,
-   "short_pct": 0.057600003
+   "short_delta": 0.0005,
+   "short_pct": 0.0581
   },
   "ALKS": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.002,
-   "inst_pct": 1.10365,
-   "short_delta": 0.0,
-   "short_pct": 0.1447
+   "inst_pct": 1.10511,
+   "short_delta": 0.005,
+   "short_pct": 0.1497
   },
   "AMD": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0003,
-   "inst_pct": 0.72156996,
-   "short_delta": 0.0,
-   "short_pct": 0.0271
+   "inst_pct": 0.72159,
+   "short_delta": 0.0017,
+   "short_pct": 0.028800001
   },
   "AMGN": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.003,
-   "inst_pct": 0.85223997,
-   "short_delta": 0.0,
-   "short_pct": 0.022
+   "inst_pct": 0.85252,
+   "short_delta": 0.0006,
+   "short_pct": 0.0226
   },
   "AMRX": {
    "gpr": null,
@@ -108,28 +131,42 @@
    "stale": true
   },
   "AMZN": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography",
+     "supply_chain",
+     "regulation"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 2,
+    "note": "Amazon operates globally with significant international revenue and supply chain, facing regulatory risks across jurisdictions."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.68018997,
-   "short_delta": 0.0,
-   "short_pct": 0.0094
+   "inst_pct": 0.68017,
+   "short_delta": 0.0007,
+   "short_pct": 0.0101
   },
   "ANAB": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Clinical-stage biotech focused on US autoimmune therapeutics; no foreign revenue or supply chain exposure indicated."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0005,
-   "inst_pct": 1.0436599,
-   "short_delta": null,
-   "short_pct": 0.23889999
+   "inst_pct": 1.0415599,
+   "short_delta": -0.0093,
+   "short_pct": 0.2296
   },
   "ANET": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0001,
-   "inst_pct": 0.72830003,
-   "short_delta": 0.0,
-   "short_pct": 0.020399999
+   "inst_pct": 0.72828,
+   "short_delta": -0.001,
+   "short_pct": 0.0194
   },
   "APEI": {
    "gpr": null,
@@ -144,57 +181,71 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
-   "inst_pct": 0.97893,
-   "short_delta": 0.0,
-   "short_pct": 0.0165
+   "inst_pct": 0.97901,
+   "short_delta": -0.0007,
+   "short_pct": 0.015800001
   },
   "ARGX": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
    "inst_pct": 0.49327,
-   "short_delta": 0.0,
-   "short_pct": 0.0291
+   "short_delta": -0.0055,
+   "short_pct": 0.023599999
   },
   "ARM": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0043,
-   "inst_pct": 0.95417,
-   "short_delta": null,
-   "short_pct": 0.1274
+   "inst_pct": 0.95419,
+   "short_delta": -0.0148,
+   "short_pct": 0.1126
   },
   "ATAT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.79752,
-   "short_delta": 0.0,
-   "short_pct": 0.0232
+   "inst_pct": 0.79823,
+   "short_delta": 0.0028,
+   "short_pct": 0.025999999
   },
   "AVGO": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography",
+     "supply_chain",
+     "regulation"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 2,
+    "note": "Broadcom has significant international revenue and semiconductor supply chain exposure, subject to US-China export controls."
+   },
    "informed_demand": 0,
    "insider_net_pct": -0.0,
-   "inst_pct": 0.79908997,
-   "short_delta": 0.0,
-   "short_pct": 0.0125
+   "inst_pct": 0.79914004,
+   "short_delta": 0.0007,
+   "short_pct": 0.013200001
   },
   "AZN": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.67849,
-   "short_delta": 0.0,
-   "short_pct": 0.0011
+   "inst_pct": 0.67862,
+   "short_delta": -0.0002,
+   "short_pct": 0.00090000004
   },
   "AZZ": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates solely in North America with no foreign exposure or geopolitical risk factors."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0024,
-   "inst_pct": 1.02778,
-   "short_delta": 0.0,
-   "short_pct": 0.0304
+   "inst_pct": 1.02777,
+   "short_delta": 0.0021,
+   "short_pct": 0.0325
   },
   "BIIB": {
    "gpr": null,
@@ -202,55 +253,69 @@
    "insider_net_pct": 0.0051,
    "inst_pct": 0.96228,
    "short_delta": 0.0,
-   "short_pct": 0.036
+   "short_pct": 0.036,
+   "stale": true
   },
   "BLBD": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.1292,
-   "short_delta": 0.0,
-   "short_pct": 0.122200005
+   "inst_pct": 1.12513,
+   "short_delta": 0.0077,
+   "short_pct": 0.1299
   },
   "BMRN": {
    "gpr": null,
    "informed_demand": 1,
    "insider_net_pct": 0.0054,
-   "inst_pct": 1.02207,
-   "short_delta": 0.0,
-   "short_pct": 0.0602
+   "inst_pct": 1.02204,
+   "short_delta": 0.0047,
+   "short_pct": 0.064899996
   },
   "BMY": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.002,
-   "inst_pct": 0.83778,
-   "short_delta": 0.0,
-   "short_pct": 0.0189
+   "inst_pct": 0.83775,
+   "short_delta": 0.0005,
+   "short_pct": 0.0194
   },
   "BWMX": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
    "inst_pct": 0.123900004,
-   "short_delta": 0.0,
-   "short_pct": 0.0101
+   "short_delta": -0.0012,
+   "short_pct": 0.0089
   },
   "CAH": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0001,
-   "inst_pct": 0.90025,
-   "short_delta": 0.0,
-   "short_pct": 0.039
+   "inst_pct": 0.90022004,
+   "short_delta": 0.0054,
+   "short_pct": 0.0444
+  },
+  "CART": {
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Primarily domestic operations with limited international exposure."
+   },
+   "informed_demand": 0,
+   "insider_net_pct": 0.0016,
+   "inst_pct": 0.83962,
+   "short_delta": null,
+   "short_pct": 0.1266
   },
   "CAT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0019,
-   "inst_pct": 0.72877,
-   "short_delta": 0.0,
-   "short_pct": 0.0196
+   "inst_pct": 0.72883004,
+   "short_delta": 0.0009,
+   "short_pct": 0.020499999
   },
   "CBOE": {
    "gpr": null,
@@ -262,122 +327,157 @@
    "stale": true
   },
   "CDNS": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "No explicit geopolitical risk factors mentioned in company profile."
+   },
    "informed_demand": 1,
-   "insider_net_pct": 0.0073,
-   "inst_pct": 0.91134,
-   "short_delta": 0.0,
-   "short_pct": 0.0178
+   "insider_net_pct": 0.0072,
+   "inst_pct": 0.91185,
+   "short_delta": 0.0001,
+   "short_pct": 0.0179
   },
   "CGNX": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0033,
-   "inst_pct": 1.04168,
-   "short_delta": null,
-   "short_pct": 0.038
+   "inst_pct": 1.04204,
+   "short_delta": 0.007,
+   "short_pct": 0.045
   },
   "CHE": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates exclusively in the United States with no foreign exposure."
+   },
    "informed_demand": 0,
-   "insider_net_pct": 0.0,
-   "inst_pct": 1.0403501,
-   "short_delta": 0.0,
-   "short_pct": 0.056399997
+   "insider_net_pct": -0.0,
+   "inst_pct": 1.04017,
+   "short_delta": -0.0031,
+   "short_pct": 0.0533
   },
   "CHRW": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0028,
-   "inst_pct": 1.0736699,
-   "short_delta": 0.0,
-   "short_pct": 0.0669
+   "inst_pct": 1.07369,
+   "short_delta": 0.0028,
+   "short_pct": 0.069699995
   },
   "CIEN": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "Ciena has global revenue exposure across Americas, EMEA, and Asia Pacific, but no explicit high-risk region dependencies."
+   },
    "informed_demand": 0,
-   "insider_net_pct": -0.0019,
-   "inst_pct": 0.97913,
-   "short_delta": 0.0,
-   "short_pct": 0.050100002
+   "insider_net_pct": -0.0018,
+   "inst_pct": 0.97952,
+   "short_delta": 0.0029,
+   "short_pct": 0.053000003
   },
   "CMI": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0037,
-   "inst_pct": 0.87952006,
-   "short_delta": 0.0,
-   "short_pct": 0.0171
+   "inst_pct": 0.87951,
+   "short_delta": 0.0043,
+   "short_pct": 0.0214
+  },
+  "COHR": {
+   "gpr": null,
+   "informed_demand": 0,
+   "insider_net_pct": -0.0,
+   "inst_pct": 0.89559996,
+   "short_delta": null,
+   "short_pct": 0.053600002
   },
   "COST": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": -0.0,
-   "inst_pct": 0.73794,
-   "short_delta": 0.0,
-   "short_pct": 0.0178
+   "insider_net_pct": -0.0001,
+   "inst_pct": 0.73799,
+   "short_delta": -0.0001,
+   "short_pct": 0.0177
   },
   "CPRX": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates solely within the United States, with no foreign revenue or supply chain exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.89801,
-   "short_delta": 0.0,
-   "short_pct": 0.0829
+   "inst_pct": 0.89795995,
+   "short_delta": -0.0024,
+   "short_pct": 0.0805
   },
   "CRM": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
-   "inst_pct": 0.94295,
-   "short_delta": 0.0,
-   "short_pct": 0.0861
+   "inst_pct": 0.9428,
+   "short_delta": -0.0027,
+   "short_pct": 0.0834
   },
   "CRS": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0003,
-   "inst_pct": 0.97886,
-   "short_delta": 0.0,
-   "short_pct": 0.0363
+   "inst_pct": 0.97929,
+   "short_delta": 0.0023,
+   "short_pct": 0.038599998
   },
   "CRUS": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": 0.0021,
-   "inst_pct": 1.04531,
-   "short_delta": 0.0,
-   "short_pct": 0.0655
+   "insider_net_pct": 0.002,
+   "inst_pct": 1.04553,
+   "short_delta": -0.0001,
+   "short_pct": 0.0654
   },
   "CSCO": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0005,
-   "inst_pct": 0.8286,
+   "inst_pct": 0.82871,
    "short_delta": 0.0,
    "short_pct": 0.015700001
   },
   "CVCO": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates entirely within the United States with no foreign revenue or supply chain exposure."
+   },
    "informed_demand": 1,
-   "insider_net_pct": 0.0064,
-   "inst_pct": 1.05498,
-   "short_delta": null,
-   "short_pct": 0.083000004
+   "insider_net_pct": 0.0061,
+   "inst_pct": 1.05493,
+   "short_delta": -0.012,
+   "short_pct": 0.071
   },
   "CW": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": 0.0016,
-   "inst_pct": 0.88936996,
-   "short_delta": 0.0,
-   "short_pct": 0.0221
+   "insider_net_pct": 0.0017,
+   "inst_pct": 0.88977,
+   "short_delta": 0.0016,
+   "short_pct": 0.023699999
   },
   "DCBO": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.27109,
+   "inst_pct": 0.2738,
    "short_delta": null,
    "short_pct": null
   },
@@ -387,127 +487,161 @@
    "insider_net_pct": null,
    "inst_pct": 0.48922002,
    "short_delta": 0.0,
-   "short_pct": 0.09810001
+   "short_pct": 0.09810001,
+   "stale": true
   },
   "DELL": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0005,
-   "inst_pct": 0.82524,
-   "short_delta": 0.0,
-   "short_pct": 0.062800005
+   "inst_pct": 0.82523,
+   "short_delta": -0.0105,
+   "short_pct": 0.0523
+  },
+  "DOCU": {
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates in US and internationally but profile indicates no significant geopolitical exposure."
+   },
+   "informed_demand": 0,
+   "insider_net_pct": 0.0044,
+   "inst_pct": 0.96735,
+   "short_delta": null,
+   "short_pct": 0.105399996
   },
   "DOV": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0012,
-   "inst_pct": 0.94737,
-   "short_delta": 0.0,
-   "short_pct": 0.0349
+   "inst_pct": 0.94733,
+   "short_delta": -0.0037,
+   "short_pct": 0.0312
   },
   "DT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0047,
    "inst_pct": 1.04531,
-   "short_delta": null,
-   "short_pct": 0.0382
+   "short_delta": 0.0021,
+   "short_pct": 0.0403
   },
   "DXCM": {
    "gpr": null,
    "informed_demand": 1,
    "insider_net_pct": 0.0069,
-   "inst_pct": 1.02469,
-   "short_delta": 0.0,
-   "short_pct": 0.0519
+   "inst_pct": 1.0247,
+   "short_delta": -0.0012,
+   "short_pct": 0.0507
   },
   "ELMD": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0,
    "inst_pct": 0.59097,
-   "short_delta": 0.0,
-   "short_pct": 0.020399999
+   "short_delta": 0.0013,
+   "short_pct": 0.0217
   },
   "EMBJ": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.57568,
-   "short_delta": 0.0,
-   "short_pct": 0.0117999995
+   "inst_pct": 0.57613,
+   "short_delta": 0.0051,
+   "short_pct": 0.016900001
   },
   "EMR": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0,
-   "inst_pct": 0.85108,
-   "short_delta": 0.0,
-   "short_pct": 0.023
+   "inst_pct": 0.85103995,
+   "short_delta": -0.0014,
+   "short_pct": 0.0216
   },
   "ENS": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.02266,
-   "short_delta": 0.0,
-   "short_pct": 0.044899996
+   "inst_pct": 1.0231199,
+   "short_delta": 0.001,
+   "short_pct": 0.045900002
   },
   "EPAC": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.10703,
-   "short_delta": 0.0,
-   "short_pct": 0.026400002
+   "inst_pct": 1.1069599,
+   "short_delta": 0.0049,
+   "short_pct": 0.0313
   },
   "ESLT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.23621,
-   "short_delta": 0.0,
-   "short_pct": 0.0038
+   "inst_pct": 0.23656,
+   "short_delta": 0.0049,
+   "short_pct": 0.0087
   },
   "EW": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.002,
-   "inst_pct": 0.94118,
-   "short_delta": 0.0,
-   "short_pct": 0.024
+   "inst_pct": 0.94125,
+   "short_delta": -0.0007,
+   "short_pct": 0.0233
   },
   "EXEL": {
    "gpr": null,
    "informed_demand": 1,
    "insider_net_pct": 0.0073,
-   "inst_pct": 1.0749099,
-   "short_delta": 0.0,
-   "short_pct": 0.1607
+   "inst_pct": 1.0749401,
+   "short_delta": 0.005,
+   "short_pct": 0.1657
+  },
+  "EXPD": {
+   "gpr": null,
+   "informed_demand": 0,
+   "insider_net_pct": 0.0009,
+   "inst_pct": 1.0104901,
+   "short_delta": null,
+   "short_pct": 0.0454
   },
   "EXPE": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0035,
-   "inst_pct": 1.04335,
-   "short_delta": null,
-   "short_pct": 0.0836
+   "inst_pct": 1.04356,
+   "short_delta": -0.0035,
+   "short_pct": 0.0801
   },
   "EZPW": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "Operates pawn services in US, Mexico, and Latin America, exposing it to regional economic and political risks."
+   },
    "informed_demand": 0,
    "insider_net_pct": -0.0004,
-   "inst_pct": 1.2209201,
-   "short_delta": null,
-   "short_pct": 0.2383
+   "inst_pct": 1.21666,
+   "short_delta": 0.0147,
+   "short_pct": 0.253
   },
   "FIX": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Comfort Systems USA operates solely within the United States, with no foreign revenue or supply chain exposure."
+   },
    "informed_demand": 0,
-   "insider_net_pct": -0.0009,
-   "inst_pct": 0.96457,
-   "short_delta": 0.0,
-   "short_pct": 0.0271
+   "insider_net_pct": -0.001,
+   "inst_pct": 0.96505,
+   "short_delta": -0.0013,
+   "short_pct": 0.025799999
   },
   "FOX": {
    "gpr": null,
@@ -531,7 +665,7 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.94515,
+   "inst_pct": 0.94499,
    "short_delta": 0.0,
    "short_pct": 0.1039
   },
@@ -539,39 +673,46 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0011,
-   "inst_pct": 0.87637,
-   "short_delta": 0.0,
-   "short_pct": 0.0108
+   "inst_pct": 0.87641,
+   "short_delta": 0.0018,
+   "short_pct": 0.0126
   },
   "GEV": {
    "gpr": null,
-   "informed_demand": 1,
+   "informed_demand": 0,
    "insider_net_pct": 0.0285,
-   "inst_pct": 0.79612,
-   "short_delta": 0.0,
-   "short_pct": 0.0342
+   "inst_pct": 0.79606,
+   "short_delta": 0.0051,
+   "short_pct": 0.039300002
   },
   "GILD": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0021,
-   "inst_pct": 0.92203003,
-   "short_delta": 0.0,
-   "short_pct": 0.0207
+   "inst_pct": 0.92208,
+   "short_delta": -0.0015,
+   "short_pct": 0.019199999
   },
   "GMED": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "Company has international revenue but no specific geopolitical risks detailed."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0003,
-   "inst_pct": 1.0156,
-   "short_delta": 0.0,
-   "short_pct": 0.0348
+   "inst_pct": 1.01568,
+   "short_delta": 0.0138,
+   "short_pct": 0.048600003
   },
   "GOOG": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
-   "inst_pct": 0.61102,
+   "inst_pct": 0.61103,
    "short_delta": null,
    "short_pct": null
   },
@@ -579,129 +720,177 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.80763,
-   "short_delta": 0.0,
-   "short_pct": 0.014199999
+   "inst_pct": 0.80758005,
+   "short_delta": 0.0011,
+   "short_pct": 0.0153
   },
   "GRC": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "Company has international revenue but no specific high-risk regions or dependencies mentioned."
+   },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.67097,
-   "short_delta": 0.0,
-   "short_pct": 0.0209
+   "inst_pct": 0.67190003,
+   "short_delta": 0.0034,
+   "short_pct": 0.024300002
   },
   "GRDN": {
-   "gpr": null,
-   "informed_demand": 1,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates solely within the United States with no foreign revenue, supply chain, or regulatory exposure."
+   },
+   "informed_demand": 0,
    "insider_net_pct": 0.008,
-   "inst_pct": 0.5823,
-   "short_delta": 0.0,
-   "short_pct": 0.0785
+   "inst_pct": 0.58224,
+   "short_delta": 0.009,
+   "short_pct": 0.0875
   },
   "GRMN": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography",
+     "regulation"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 2,
+    "note": "Garmin generates significant revenue worldwide and its aviation products face heavy regulation across multiple jurisdictions."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0011,
-   "inst_pct": 0.5864,
-   "short_delta": 0.0,
-   "short_pct": 0.025
+   "inst_pct": 0.58638,
+   "short_delta": 0.0008,
+   "short_pct": 0.025799999
   },
   "GSAT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.26318002,
-   "short_delta": 0.0,
-   "short_pct": 0.070199996
+   "inst_pct": 0.2638,
+   "short_delta": 0.0031,
+   "short_pct": 0.0733
+  },
+  "GWRE": {
+   "gpr": null,
+   "informed_demand": 0,
+   "insider_net_pct": null,
+   "inst_pct": 1.0483999,
+   "short_delta": null,
+   "short_pct": 0.0723
   },
   "HALO": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0021,
-   "inst_pct": 1.07198,
-   "short_delta": 0.0,
-   "short_pct": 0.1488
+   "inst_pct": 1.0720301,
+   "short_delta": -0.0076,
+   "short_pct": 0.1412
   },
   "HCSG": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Healthcare Services Group operates exclusively within the United States, with no foreign revenue or supply chain exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0041,
-   "inst_pct": 1.1517199,
-   "short_delta": 0.0,
-   "short_pct": 0.039100002
+   "inst_pct": 1.15157,
+   "short_delta": 0.0007,
+   "short_pct": 0.0398
   },
   "HEI": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.76598,
-   "short_delta": null,
-   "short_pct": 0.0155
+   "inst_pct": 0.7661,
+   "short_delta": 0.0001,
+   "short_pct": 0.0156
   },
   "HQY": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "HealthEquity operates exclusively in the United States with no foreign revenue or geopolitical exposure."
+   },
    "informed_demand": 0,
-   "insider_net_pct": 0.0029,
-   "inst_pct": 1.07068,
-   "short_delta": 0.0,
-   "short_pct": 0.0654
+   "insider_net_pct": 0.0017,
+   "inst_pct": 1.07129,
+   "short_delta": 0.0075,
+   "short_pct": 0.0729
   },
   "HRMY": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates solely in the US with no foreign revenue or geopolitical exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
-   "inst_pct": 1.0347,
-   "short_delta": 0.0,
-   "short_pct": 0.1373
+   "inst_pct": 1.03626,
+   "short_delta": -0.0299,
+   "short_pct": 0.1074
   },
   "HWM": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
-   "inst_pct": 0.94499,
-   "short_delta": 0.0,
-   "short_pct": 0.0222
+   "inst_pct": 0.94524,
+   "short_delta": 0.0011,
+   "short_pct": 0.0233
   },
   "IDCC": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0021,
-   "inst_pct": 1.06522,
-   "short_delta": 0.0,
-   "short_pct": 0.1185
+   "inst_pct": 1.06692,
+   "short_delta": 0.0075,
+   "short_pct": 0.126
   },
   "IDXX": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0009,
-   "inst_pct": 0.96193004,
-   "short_delta": 0.0,
-   "short_pct": 0.031600002
+   "inst_pct": 0.96175003,
+   "short_delta": -0.0006,
+   "short_pct": 0.031
   },
   "IESC": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "All operations are domestic within the United States, with no foreign exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": -0.0023,
    "inst_pct": 0.96906996,
-   "short_delta": 0.0,
-   "short_pct": 0.1007
+   "short_delta": -0.0147,
+   "short_pct": 0.086
   },
   "IHG": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.10661,
-   "short_delta": 0.0,
-   "short_pct": 0.0047
+   "inst_pct": 0.10669,
+   "short_delta": -0.0002,
+   "short_pct": 0.0045
   },
   "ILMN": {
    "gpr": null,
-   "informed_demand": 0,
+   "informed_demand": -1,
    "insider_net_pct": -0.0064,
-   "inst_pct": 1.06525,
-   "short_delta": 0.0,
-   "short_pct": 0.0834
+   "inst_pct": 1.06535,
+   "short_delta": 0.0161,
+   "short_pct": 0.0995
   },
   "IMAX": {
    "gpr": null,
@@ -709,143 +898,179 @@
    "insider_net_pct": 0.0003,
    "inst_pct": 0.96182,
    "short_delta": 0.0,
-   "short_pct": 0.1766
+   "short_pct": 0.1766,
+   "stale": true
   },
   "INCY": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "Operates in US, Europe, Canada, Japan\u2014stable regions with minor geopolitical risk."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.001,
-   "inst_pct": 1.0661,
-   "short_delta": 0.0,
-   "short_pct": 0.0983
+   "inst_pct": 1.0662,
+   "short_delta": -0.0073,
+   "short_pct": 0.091000006
   },
   "INTU": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Primarily US-focused software company with negligible foreign revenue or geopolitical exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": -0.0002,
-   "inst_pct": 0.92568,
-   "short_delta": 0.0,
-   "short_pct": 0.0436
+   "inst_pct": 0.92581004,
+   "short_delta": 0.008,
+   "short_pct": 0.051599998
   },
   "INVA": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.0803,
-   "short_delta": 0.0,
-   "short_pct": 0.107
+   "inst_pct": 1.08033,
+   "short_delta": 0.0135,
+   "short_pct": 0.1205
   },
   "IRMD": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": null,
-   "inst_pct": 0.60986,
-   "short_delta": 0.0,
-   "short_pct": 0.0788
+   "insider_net_pct": -0.0003,
+   "inst_pct": 0.6099,
+   "short_delta": 0.0035,
+   "short_pct": 0.08229999
   },
   "ISRG": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0008,
-   "inst_pct": 0.89289004,
-   "short_delta": 0.0,
-   "short_pct": 0.020599999
+   "inst_pct": 0.89294,
+   "short_delta": 0.0015,
+   "short_pct": 0.0221
   },
   "ITRN": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.64478,
-   "short_delta": 0.0,
-   "short_pct": 0.016900001
+   "inst_pct": 0.64483,
+   "short_delta": 0.0018,
+   "short_pct": 0.0187
   },
   "JLHL": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Operates solely within China providing infrastructure solutions, no foreign exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": null,
    "inst_pct": 0.00112,
-   "short_delta": 0.0,
-   "short_pct": 0.0115
+   "short_delta": 0.0052,
+   "short_pct": 0.0167
   },
   "JNJ": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0019,
-   "inst_pct": 0.76852,
-   "short_delta": 0.0,
-   "short_pct": 0.0108
+   "inst_pct": 0.76852995,
+   "short_delta": 0.0015,
+   "short_pct": 0.0123000005
   },
   "JOE": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Domestic real estate developer with no foreign exposure or geopolitical links."
+   },
    "informed_demand": 0,
-   "insider_net_pct": -0.0083,
-   "inst_pct": 0.87767,
-   "short_delta": 0.0,
-   "short_pct": 0.028900001
+   "insider_net_pct": -0.0085,
+   "inst_pct": 0.8668,
+   "short_delta": -0.0008,
+   "short_pct": 0.028099999
   },
   "KAI": {
    "gpr": null,
    "informed_demand": -1,
    "insider_net_pct": -1.0086,
-   "inst_pct": 1.22485,
-   "short_delta": 0.0,
-   "short_pct": 0.1331
+   "inst_pct": 1.22486,
+   "short_delta": -0.0035,
+   "short_pct": 0.1296
   },
   "KMDA": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
    "inst_pct": 0.48560002,
-   "short_delta": 0.0,
-   "short_pct": 0.0043
+   "short_delta": -0.0007,
+   "short_pct": 0.0036000002
   },
   "KN": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0027,
-   "inst_pct": 1.03753,
-   "short_delta": 0.0,
-   "short_pct": 0.060599998
+   "inst_pct": 1.0389299,
+   "short_delta": -0.0014,
+   "short_pct": 0.0592
   },
   "KNSA": {
    "gpr": null,
    "informed_demand": 1,
    "insider_net_pct": 0.0055,
-   "inst_pct": 1.02754,
-   "short_delta": 0.0,
-   "short_pct": 0.0801
+   "inst_pct": 1.02751,
+   "short_delta": -0.0026,
+   "short_pct": 0.0775
   },
   "KO": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.68273,
-   "short_delta": 0.0,
-   "short_pct": 0.0109
+   "inst_pct": 0.68289,
+   "short_delta": 0.0011,
+   "short_pct": 0.012
   },
   "KRYS": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Krystal Biotech is a US-based biotech with no foreign revenue, supply chain, or regulatory dependence."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 1.01986,
-   "short_delta": 0.0,
-   "short_pct": 0.1753
+   "inst_pct": 1.01947,
+   "short_delta": -0.0005,
+   "short_pct": 0.1748
   },
   "LAUR": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0002,
-   "inst_pct": 1.02299,
-   "short_delta": 0.0,
-   "short_pct": 0.0511
+   "inst_pct": 1.02294,
+   "short_delta": -0.0016,
+   "short_pct": 0.0495
   },
   "LHX": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography",
+     "regulation"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 2,
+    "note": "Major defense contractor with significant international revenue and heavy reliance on U.S. and foreign government regulations."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0011,
-   "inst_pct": 0.89392,
-   "short_delta": 0.0,
-   "short_pct": 0.0147
+   "inst_pct": 0.89408994,
+   "short_delta": 0.0033,
+   "short_pct": 0.018
   },
   "LIVN": {
    "gpr": null,
@@ -853,63 +1078,76 @@
    "insider_net_pct": 0.0112,
    "inst_pct": 1.12455,
    "short_delta": 0.0,
-   "short_pct": 0.0699
+   "short_pct": 0.0699,
+   "stale": true
   },
   "LLY": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0009,
-   "inst_pct": 0.85355,
-   "short_delta": 0.0,
-   "short_pct": 0.011
+   "inst_pct": 0.85357004,
+   "short_delta": -0.0001,
+   "short_pct": 0.0109
   },
   "LMAT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0013,
-   "inst_pct": 1.00333,
-   "short_delta": null,
-   "short_pct": 0.0654
+   "inst_pct": 1.00376,
+   "short_delta": 0.0049,
+   "short_pct": 0.070300005
   },
   "LQDT": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "Company has international operations but no explicit focus on high-risk geopolitical regions or sanctions-adjacent markets."
+   },
    "informed_demand": 0,
-   "insider_net_pct": 0.0001,
-   "inst_pct": 0.80197,
-   "short_delta": 0.0,
-   "short_pct": 0.0355
+   "insider_net_pct": -0.0,
+   "inst_pct": 0.80170995,
+   "short_delta": 0.0036,
+   "short_pct": 0.039100002
   },
   "LRCX": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0019,
-   "inst_pct": 0.88067,
-   "short_delta": 0.0,
-   "short_pct": 0.0287
+   "inst_pct": 0.88128,
+   "short_delta": -0.002,
+   "short_pct": 0.026700001
   },
   "MAMA": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates solely within the United States with no foreign exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0028,
-   "inst_pct": 0.79162,
-   "short_delta": null,
-   "short_pct": 0.0749
+   "inst_pct": 0.79160005,
+   "short_delta": 0.0036,
+   "short_pct": 0.0785
   },
   "MANH": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0028,
-   "inst_pct": 1.13328,
-   "short_delta": 0.0,
-   "short_pct": 0.0618
+   "inst_pct": 1.13336,
+   "short_delta": 0.0013,
+   "short_pct": 0.0631
   },
   "MAR": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0,
    "inst_pct": 0.64239997,
-   "short_delta": 0.0,
-   "short_pct": 0.025899999
+   "short_delta": 0.001,
+   "short_pct": 0.0269
   },
   "MASI": {
    "gpr": null,
@@ -920,44 +1158,62 @@
    "short_pct": 0.0734
   },
   "MCRI": {
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates solely in the US, with no foreign revenue, supply chain, or regulatory exposure."
+   },
+   "informed_demand": 0,
+   "insider_net_pct": 0.0005,
+   "inst_pct": 0.65139997,
+   "short_delta": 0.0096,
+   "short_pct": 0.0275
+  },
+  "MDT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0005,
-   "inst_pct": 0.65142,
-   "short_delta": 0.0,
-   "short_pct": 0.0179
+   "inst_pct": 0.89722,
+   "short_delta": null,
+   "short_pct": 0.014400001
   },
   "MEDP": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
-   "inst_pct": 0.88606,
-   "short_delta": 0.0,
-   "short_pct": 0.08930001
+   "inst_pct": 0.88631,
+   "short_delta": 0.0013,
+   "short_pct": 0.09060001
   },
   "META": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.7934,
-   "short_delta": 0.0,
-   "short_pct": 0.0147
+   "inst_pct": 0.79345,
+   "short_delta": -0.001,
+   "short_pct": 0.0137
   },
   "MNST": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.70908,
-   "short_delta": 0.0,
-   "short_pct": 0.03
+   "inst_pct": 0.70919997,
+   "short_delta": 0.0019,
+   "short_pct": 0.0319
   },
   "MO": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Operates solely within the US; no geopolitical exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0015,
-   "inst_pct": 0.63505,
-   "short_delta": 0.0,
-   "short_pct": 0.0315
+   "inst_pct": 0.63481,
+   "short_delta": -0.0005,
+   "short_pct": 0.031
   },
   "MOG-A": {
    "gpr": null,
@@ -970,27 +1226,27 @@
   },
   "MOV": {
    "gpr": null,
-   "informed_demand": 0,
-   "insider_net_pct": 0.0043,
-   "inst_pct": 0.91420996,
-   "short_delta": 0.0,
-   "short_pct": 0.048899997
+   "informed_demand": 1,
+   "insider_net_pct": 0.0061,
+   "inst_pct": 0.91379,
+   "short_delta": 0.0045,
+   "short_pct": 0.053400002
   },
   "MPWR": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0,
-   "inst_pct": 1.01058,
-   "short_delta": 0.0,
-   "short_pct": 0.0635
+   "inst_pct": 1.01064,
+   "short_delta": 0.0008,
+   "short_pct": 0.0643
   },
   "MRK": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0003,
-   "inst_pct": 0.82186997,
-   "short_delta": 0.0,
-   "short_pct": 0.0124
+   "inst_pct": 0.82212996,
+   "short_delta": -0.0001,
+   "short_pct": 0.0123000005
   },
   "MSCI": {
    "gpr": null,
@@ -1005,49 +1261,54 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.75838995,
-   "short_delta": null,
-   "short_pct": 0.053600002
+   "inst_pct": 0.75841004,
+   "short_delta": 0.0057,
+   "short_pct": 0.059299998
   },
   "MU": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0007,
-   "inst_pct": 0.81588,
-   "short_delta": 0.0,
-   "short_pct": 0.0334
+   "inst_pct": 0.81531,
+   "short_delta": 0.0035,
+   "short_pct": 0.0369
   },
   "MYRG": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0006,
-   "inst_pct": 1.04454,
-   "short_delta": 0.0,
-   "short_pct": 0.0539
+   "inst_pct": 1.0442901,
+   "short_delta": -0.0017,
+   "short_pct": 0.052199997
   },
   "NBIX": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0029,
-   "inst_pct": 1.03905,
-   "short_delta": 0.0,
-   "short_pct": 0.0716
+   "inst_pct": 1.0391,
+   "short_delta": 0.0021,
+   "short_pct": 0.073699996
   },
   "NHC": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates solely within the US healthcare market with no foreign exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0004,
-   "inst_pct": 0.67425,
-   "short_delta": 0.0,
-   "short_pct": 0.047
+   "inst_pct": 0.67434996,
+   "short_delta": -0.0033,
+   "short_pct": 0.0437
   },
   "NICE": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.58858,
-   "short_delta": 0.0,
-   "short_pct": 0.0695
+   "inst_pct": 0.58859,
+   "short_delta": -0.01,
+   "short_pct": 0.059499998
   },
   "NOC": {
    "gpr": null,
@@ -1058,13 +1319,28 @@
    "short_pct": 0.0128,
    "stale": true
   },
-  "NVS": {
+  "NVEC": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.07695,
-   "short_delta": 0.0,
-   "short_pct": 0.0023999999
+   "inst_pct": 0.89015996,
+   "short_delta": null,
+   "short_pct": 0.0935
+  },
+  "NVS": {
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "Novartis operates internationally in pharmaceuticals but no specific geopolitical flashpoints or sanctions exposure detailed."
+   },
+   "informed_demand": 0,
+   "insider_net_pct": null,
+   "inst_pct": 0.07696,
+   "short_delta": 0.0004,
+   "short_pct": 0.0028
   },
   "NXT": {
    "gpr": null,
@@ -1072,23 +1348,24 @@
    "insider_net_pct": -0.022,
    "inst_pct": 1.14364,
    "short_delta": null,
-   "short_pct": 0.065
+   "short_pct": 0.065,
+   "stale": true
   },
   "NYT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0003,
-   "inst_pct": 0.94385004,
-   "short_delta": 0.0,
-   "short_pct": 0.0734
+   "inst_pct": 0.94386,
+   "short_delta": 0.0061,
+   "short_pct": 0.0795
   },
   "OSW": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0003,
-   "inst_pct": 1.12963,
-   "short_delta": 0.0,
-   "short_pct": 0.064
+   "inst_pct": 1.12774,
+   "short_delta": -0.0043,
+   "short_pct": 0.059699997
   },
   "PAYC": {
    "gpr": null,
@@ -1105,7 +1382,8 @@
    "insider_net_pct": 0.0009,
    "inst_pct": 0.88966006,
    "short_delta": 0.0,
-   "short_pct": 0.055999998
+   "short_pct": 0.055999998,
+   "stale": true
   },
   "PFE": {
    "gpr": null,
@@ -1129,17 +1407,17 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0008,
-   "inst_pct": 0.84120005,
-   "short_delta": 0.0,
-   "short_pct": 0.0104
+   "inst_pct": 0.84121,
+   "short_delta": 0.0005,
+   "short_pct": 0.0109
   },
   "POWL": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": -0.0001,
+   "insider_net_pct": -0.0002,
    "inst_pct": 0.95432,
-   "short_delta": 0.0,
-   "short_pct": 0.1145
+   "short_delta": -0.005,
+   "short_pct": 0.1095
   },
   "PRDO": {
    "gpr": null,
@@ -1153,194 +1431,254 @@
   "PSMT": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": -0.0001,
-   "inst_pct": 0.98648,
-   "short_delta": 0.0,
-   "short_pct": 0.090500005
+   "insider_net_pct": -0.0,
+   "inst_pct": 0.98744005,
+   "short_delta": -0.0028,
+   "short_pct": 0.0877
   },
   "PTC": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0015,
-   "inst_pct": 1.04338,
-   "short_delta": 0.0,
-   "short_pct": 0.066700004
+   "inst_pct": 1.04343,
+   "short_delta": -0.0002,
+   "short_pct": 0.0665
   },
   "QTWO": {
-   "gpr": null,
-   "informed_demand": 1,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company provides digital solutions exclusively to US financial institutions, with no foreign exposure."
+   },
+   "informed_demand": 0,
    "insider_net_pct": 0.0659,
-   "inst_pct": 1.05497,
-   "short_delta": 0.0,
-   "short_pct": 0.0674
+   "inst_pct": 1.05496,
+   "short_delta": 0.019,
+   "short_pct": 0.0864
   },
   "RDVT": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Red Violet operates solely in the US domestic market with no foreign revenue or geopolitical exposure."
+   },
    "informed_demand": 0,
-   "insider_net_pct": 0.0002,
-   "inst_pct": 0.70329005,
-   "short_delta": 0.0,
-   "short_pct": 0.062
+   "insider_net_pct": -0.0001,
+   "inst_pct": 0.70322996,
+   "short_delta": 0.0031,
+   "short_pct": 0.0651
   },
   "REGN": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates globally but profile does not indicate significant geopolitical exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0003,
-   "inst_pct": 0.92256,
-   "short_delta": 0.0,
-   "short_pct": 0.030299999
+   "inst_pct": 0.92264,
+   "short_delta": 0.003,
+   "short_pct": 0.033299997
   },
   "RHLD": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company is a domestic asset management firm based in New York with no disclosed foreign exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0,
    "inst_pct": 0.47706002,
-   "short_delta": 0.0,
-   "short_pct": 0.1146
+   "short_delta": 0.0069,
+   "short_pct": 0.12149999
   },
   "RL": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0003,
-   "inst_pct": 1.07913,
-   "short_delta": 0.0,
-   "short_pct": 0.105100006
+   "inst_pct": 1.07909,
+   "short_delta": -0.0009,
+   "short_pct": 0.1042
   },
   "RMBS": {
    "gpr": null,
-   "informed_demand": 1,
+   "informed_demand": 0,
    "insider_net_pct": 0.0063,
-   "inst_pct": 0.99423,
-   "short_delta": 0.0,
-   "short_pct": 0.0908
+   "inst_pct": 0.99417,
+   "short_delta": 0.0056,
+   "short_pct": 0.0964
   },
   "RMD": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0002,
-   "inst_pct": 0.70008004,
-   "short_delta": 0.0,
-   "short_pct": 0.094399996
+   "inst_pct": 0.70007,
+   "short_delta": 0.0082,
+   "short_pct": 0.1026
   },
   "ROK": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0002,
-   "inst_pct": 0.90982,
-   "short_delta": 0.0,
-   "short_pct": 0.033800002
+   "inst_pct": 0.90970004,
+   "short_delta": 0.0019,
+   "short_pct": 0.0357
   },
   "ROP": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.04836,
-   "short_delta": 0.0,
-   "short_pct": 0.048
+   "inst_pct": 1.04833,
+   "short_delta": 0.0084,
+   "short_pct": 0.056399997
   },
   "ROST": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Ross Stores operates solely within the United States with no indicated foreign exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0002,
-   "inst_pct": 0.94693,
-   "short_delta": 0.0,
-   "short_pct": 0.0305
+   "inst_pct": 0.9472,
+   "short_delta": 0.0083,
+   "short_pct": 0.0388
   },
   "RRX": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0032,
    "inst_pct": 1.06418,
-   "short_delta": null,
-   "short_pct": 0.0556
+   "short_delta": 0.0007,
+   "short_pct": 0.0563
   },
   "RSI": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.0050701,
-   "short_delta": 0.0,
-   "short_pct": 0.0883
+   "inst_pct": 1.00506,
+   "short_delta": 0.0145,
+   "short_pct": 0.1028
+  },
+  "RTX": {
+   "gpr": null,
+   "informed_demand": 0,
+   "insider_net_pct": 0.0015,
+   "inst_pct": 0.81571,
+   "short_delta": null,
+   "short_pct": 0.0139999995
   },
   "SAP": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.0783,
-   "short_delta": 0.0,
-   "short_pct": 0.0095999995
+   "inst_pct": 0.07831,
+   "short_delta": -0.0008,
+   "short_pct": 0.0088
   },
   "SENEA": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "International sales to 55 countries are diversified and not concentrated in high-risk regions."
+   },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.74617,
-   "short_delta": null,
-   "short_pct": 0.0328
+   "inst_pct": 0.75001,
+   "short_delta": 0.0081,
+   "short_pct": 0.040900003
   },
   "SENEB": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
    "inst_pct": 0.05249,
-   "short_delta": null,
-   "short_pct": 0.001
+   "short_delta": -0.0002,
+   "short_pct": 0.0008
   },
   "SIMO": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.81766,
-   "short_delta": 0.0,
-   "short_pct": 0.0364
+   "inst_pct": 0.81881,
+   "short_delta": -0.0045,
+   "short_pct": 0.0319
   },
   "SMTC": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": 0.0049,
-   "inst_pct": 1.0932701,
-   "short_delta": 0.0,
-   "short_pct": 0.0792
+   "insider_net_pct": 0.0048,
+   "inst_pct": 1.0932801,
+   "short_delta": 0.011,
+   "short_pct": 0.09020001
   },
   "SPHR": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates solely in the United States with no foreign exposure or regulatory dependencies."
+   },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.29524,
-   "short_delta": 0.0,
-   "short_pct": 0.35580003
+   "inst_pct": 1.3004401,
+   "short_delta": 0.016,
+   "short_pct": 0.3718
   },
   "STRL": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Company operates solely within the United States, with no foreign revenue or supply chain exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": -0.001,
-   "inst_pct": 0.95739996,
-   "short_delta": 0.0,
-   "short_pct": 0.066
+   "inst_pct": 0.95738,
+   "short_delta": -0.0018,
+   "short_pct": 0.0642
   },
   "SYK": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
-   "inst_pct": 0.82373,
-   "short_delta": 0.0,
-   "short_pct": 0.017
+   "inst_pct": 0.82366997,
+   "short_delta": -0.0003,
+   "short_pct": 0.0167
   },
   "TBPH": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "US-based biopharma with domestic operations and no foreign revenue or geopolitical exposure."
+   },
    "informed_demand": 0,
-   "insider_net_pct": 0.0006,
-   "inst_pct": 0.99134004,
-   "short_delta": 0.0,
-   "short_pct": 0.1566
+   "insider_net_pct": 0.0008,
+   "inst_pct": 0.99138,
+   "short_delta": -0.008,
+   "short_pct": 0.1486
   },
   "TCMD": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Tactile Systems Technology operates exclusively in the US domestic market with no foreign revenue or supply chain exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0044,
-   "inst_pct": 1.03471,
-   "short_delta": 0.0,
-   "short_pct": 0.106400006
+   "inst_pct": 1.03451,
+   "short_delta": -0.0025,
+   "short_pct": 0.1039
   },
   "TER": {
    "gpr": null,
@@ -1355,66 +1693,70 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.46217,
-   "short_delta": 0.0,
-   "short_pct": 0.0431
+   "inst_pct": 0.46212003,
+   "short_delta": 0.0111,
+   "short_pct": 0.0542
   },
   "TSM": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.15645,
-   "short_delta": 0.0,
-   "short_pct": 0.0058
+   "inst_pct": 0.15642999,
+   "short_delta": -0.0007,
+   "short_pct": 0.0050999997
   },
   "TT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.001,
-   "inst_pct": 0.91620004,
-   "short_delta": 0.0,
-   "short_pct": 0.0176
+   "inst_pct": 0.91613,
+   "short_delta": 0.0035,
+   "short_pct": 0.0211
   },
   "TTMI": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": 0.0017,
-   "inst_pct": 0.9675,
-   "short_delta": 0.0,
-   "short_pct": 0.0557
+   "insider_net_pct": 0.0016,
+   "inst_pct": 0.96753,
+   "short_delta": 0.0041,
+   "short_pct": 0.0598
   },
   "TYL": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Domestic-focused software provider for US public sector; negligible geopolitical exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0043,
-   "inst_pct": 1.03542,
-   "short_delta": 0.0,
-   "short_pct": 0.0746
+   "inst_pct": 1.03543,
+   "short_delta": 0.0153,
+   "short_pct": 0.089899994
   },
   "UFPT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0022,
-   "inst_pct": 1.17021,
-   "short_delta": 0.0,
-   "short_pct": 0.2033
+   "inst_pct": 1.16995,
+   "short_delta": 0.0142,
+   "short_pct": 0.2175
   },
   "ULS": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0025,
-   "inst_pct": 1.14697,
-   "short_delta": 0.0,
-   "short_pct": 0.040900003,
-   "stale": true
+   "inst_pct": 1.14689,
+   "short_delta": 0.0011,
+   "short_pct": 0.042
   },
   "UTHR": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0021,
-   "inst_pct": 1.0214701,
-   "short_delta": 0.0,
-   "short_pct": 0.060399998
+   "inst_pct": 1.02135,
+   "short_delta": -0.0038,
+   "short_pct": 0.056599997
   },
   "VCEL": {
    "gpr": null,
@@ -1422,87 +1764,115 @@
    "insider_net_pct": 0.0027,
    "inst_pct": 1.11225,
    "short_delta": 0.0,
-   "short_pct": 0.12810001
+   "short_pct": 0.12810001,
+   "stale": true
   },
   "VCYT": {
    "gpr": null,
    "informed_demand": -1,
-   "insider_net_pct": -0.0342,
-   "inst_pct": 1.13026,
-   "short_delta": 0.0,
-   "short_pct": 0.109
+   "insider_net_pct": -0.0347,
+   "inst_pct": 1.13025,
+   "short_delta": 0.0169,
+   "short_pct": 0.1259
   },
   "VICR": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "Company generates significant revenue from international markets including Europe and Asia Pacific, exposing it to regional geopolitical shi"
+   },
    "informed_demand": 0,
    "insider_net_pct": -0.0009,
-   "inst_pct": 0.63173,
-   "short_delta": 0.0,
-   "short_pct": 0.0764
+   "inst_pct": 0.63291,
+   "short_delta": -0.0036,
+   "short_pct": 0.0728
   },
   "VIK": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.02056,
-   "short_delta": 0.0,
-   "short_pct": 0.0327
+   "inst_pct": 1.02512,
+   "short_delta": 0.0026,
+   "short_pct": 0.0353
   },
   "VMD": {
-   "gpr": null,
+   "gpr": {
+    "channels": [],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 0,
+    "note": "Viemed operates solely in the US domestic market with no foreign exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0009,
-   "inst_pct": 0.69721,
-   "short_delta": 0.0,
-   "short_pct": 0.0152
+   "inst_pct": 0.69723,
+   "short_delta": -0.0012,
+   "short_pct": 0.0139999995
   },
   "VRT": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography",
+     "supply_chain"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 2,
+    "note": "Global presence in Americas, Asia Pacific, Europe, Middle East, Africa creates material geopolitical exposure."
+   },
    "informed_demand": 0,
-   "insider_net_pct": -0.0017,
-   "inst_pct": 0.85807997,
-   "short_delta": 0.0,
-   "short_pct": 0.0373
+   "insider_net_pct": -0.002,
+   "inst_pct": 0.85802,
+   "short_delta": 0.0018,
+   "short_pct": 0.039100002
   },
   "VRTX": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.002,
-   "inst_pct": 0.98004997,
-   "short_delta": 0.0,
-   "short_pct": 0.02
+   "inst_pct": 0.98019,
+   "short_delta": 0.0005,
+   "short_pct": 0.020499999
   },
   "WILC": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
    "inst_pct": 0.21636999,
-   "short_delta": 0.0,
-   "short_pct": 0.0021
+   "short_delta": -0.0018,
+   "short_pct": 0.00029999999
   },
   "WST": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0005,
-   "inst_pct": 1.03935,
-   "short_delta": 0.0,
-   "short_pct": 0.038399998
+   "inst_pct": 1.03941,
+   "short_delta": -0.0006,
+   "short_pct": 0.0378
   },
   "WWD": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.001,
-   "inst_pct": 0.90856004,
-   "short_delta": 0.0,
-   "short_pct": 0.0248
+   "inst_pct": 0.90882003,
+   "short_delta": 0.0045,
+   "short_pct": 0.0293
   },
   "YETI": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-06-29",
+    "gpr_level": 1,
+    "note": "YETI sells in multiple developed countries but no significant exposure to geopolitical flashpoints."
+   },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.1981,
-   "short_delta": 0.0,
-   "short_pct": 0.13159999
+   "inst_pct": 1.1979901,
+   "short_delta": 0.0008,
+   "short_pct": 0.13239999
   },
   "ZBH": {
    "gpr": null,
