@@ -597,7 +597,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
 // back to a neutral grey so newly-added benchmarks still render.
 const BENCH_META: Record<string, { color: string; dash: string }> = {
     IWM: { color: '#64748b', dash: '4 3' },
-    SPY: { color: '#94a3b8', dash: '2 2' },
+    SPY: { color: '#e2e8f0', dash: '2 2' },
     QQQ: { color: '#facc15', dash: '1 3' },
     SOXX: { color: '#fb923c', dash: '3 2' },
     DRAM: { color: '#22d3ee', dash: '2 3' },
