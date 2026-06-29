@@ -339,6 +339,11 @@ export async function fetchPortfolioPlan(): Promise<any | null> {
     return fetchJson('/data/portfolio_plan.json');
 }
 
+// Parallel LLM-overlay variant for baseline-vs-LLM A/B (null until the orchestrator + run_chain --llm produce it).
+export async function fetchPortfolioPlanLlm(): Promise<any | null> {
+    return fetchJson('/data/portfolio_plan_llm.json');
+}
+
 export async function fetchOutcomes(): Promise<any | null> {
     return fetchJson('/data/outcome_backfill.json');
 }

@@ -157,14 +157,15 @@ def _reband(p):
 
 
 def apply_llm_overlay(results):
-    """Stage-5 LLM veto/promote/tilt overlay. Reads public/data/llm_overlay.json (written by the
-    local RS2 orchestrator) and lets each verdict adjust the quant ranking:
-      - bounded TILT of fct_percentile from conviction + stance (+-25 pts max),
-      - hard DEMOTE (out of research_now) + veto='llm_reject' on a bearish/low-conviction verdict,
+    """Stage-5 LLM overlay — ADDITIVE / parallel layer for baseline-vs-LLM A/B (does NOT mutate the
+    quant bands). Reads public/data/llm_overlay.json (written by the local RS2 orchestrator) and, for
+    each verdict, computes a PARALLEL ranking:
+      - bounded TILT of the percentile from conviction + stance (+-25 pts),
+      - hard DEMOTE (out of research_now) + fct_llm_veto='llm_reject' on a bearish/low-conviction verdict,
       - hard PROMOTE (into research_now) on a high-conviction bullish verdict.
-    Re-derives fct_band, preserves fct_band_quant (pre-overlay) for A/B, records fct_llm + the raw
-    verdict for the frontend. STRICT NO-OP when the overlay file is absent/empty — never breaks the
-    cloud pipeline before verdicts exist (AUDIT-safe, per the plan)."""
+    Writes fct_band_llm / fct_percentile_llm / fct_llm / fct_llm_veto / fct_llm_verdict; LEAVES
+    fct_band / fct_percentile / fct_veto (the baseline) untouched. STRICT NO-OP when the overlay file is
+    absent/empty — never affects the cloud pipeline before verdicts exist."""
     try:
         ov = (json.loads((DATA / "llm_overlay.json").read_text(encoding="utf-8")) or {}).get("tickers", {})
     except Exception:
@@ -197,7 +198,6 @@ def apply_llm_overlay(results):
                      + (8 if stance == "undervalued" else -8 if stance == "overvalued" else 0), -25, 25)
         if stale:
             tilt *= 0.5
-        e["fct_band_quant"] = e.get("fct_band")          # preserve pre-overlay band
         e["fct_llm_verdict"] = {"stance": stance or None, "action": v.get("action"),
                                 "conviction": conv, "method": v.get("method"),
                                 "mos_pct": v.get("mos_pct"), "gap": v.get("expectations_gap_pts"),
@@ -205,16 +205,19 @@ def apply_llm_overlay(results):
                                 "analyzed_date": v.get("analyzed_date")}
         p = clamp((e["fct_percentile"] or 0) + tilt, 0, 100)
         e["fct_llm"] = "none"
+        e["fct_llm_veto"] = None
         if bearish or (has_conv and conv < 7):
-            p = min(p, BANDS["research_now"] - 0.1)      # demote out of research_now
+            p = min(p, BANDS["research_now"] - 0.1)      # demote out of research_now (LLM layer)
             e["fct_llm"] = "demoted"
             if any(w in act for w in ("AVOID", "SELL")):
-                e["fct_veto"] = "llm_reject"             # also exclude from the portfolio candidate set
+                e["fct_llm_veto"] = "llm_reject"         # excluded from the LLM portfolio set only
         elif bullish and has_conv and conv >= 10:
-            p = max(p, float(BANDS["research_now"]))     # promote into research_now
+            p = max(p, float(BANDS["research_now"]))     # promote into research_now (LLM layer)
             e["fct_llm"] = "promoted"
-        e["fct_percentile"] = round(p, 1)
-        e["fct_band"] = _reband(p)
+        # ADDITIVE: baseline fct_band / fct_percentile / fct_veto are LEFT UNTOUCHED. The LLM is a
+        # PARALLEL layer (fct_band_llm / fct_percentile_llm) so the site can show baseline vs LLM A/B.
+        e["fct_percentile_llm"] = round(p, 1)
+        e["fct_band_llm"] = _reband(p)
         applied += 1
     return applied
 

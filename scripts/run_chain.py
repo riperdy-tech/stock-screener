@@ -120,6 +120,10 @@ def main():
     if ok and not run_step("build_portfolio_plan", ["scripts/build_portfolio_plan.py"], steps):
         print("FATAL: build_portfolio_plan failed.")
         ok = False
+    # Parallel LLM-overlay variant (portfolio_plan_llm.json) for baseline-vs-LLM A/B. Non-fatal:
+    # it is additive and must never break the baseline chain.
+    if ok and not run_step("build_portfolio_plan_llm", ["scripts/build_portfolio_plan.py", "--llm"], steps):
+        print("WARN: build_portfolio_plan --llm failed (non-fatal; baseline plan unaffected).")
     if ok and not run_step("track_paper_portfolios", ["scripts/track_paper_portfolios.py"]
                            + (["--skip-benchmark"] if args.skip_macro else []), steps):
         print("FATAL: track_paper_portfolios failed.")

@@ -21,7 +21,7 @@ import {
 } from 'recharts';
 import {
     fetchBacktest, fetchFactorIc, fetchFactorScores, fetchOutcomes,
-    fetchOverlaySignals, fetchPaperLedgers, fetchPortfolioPlan, fetchStocks, fetchValuationModels,
+    fetchOverlaySignals, fetchPaperLedgers, fetchPortfolioPlan, fetchPortfolioPlanLlm, fetchStocks, fetchValuationModels,
     FactorEntry, FactorScoresPayload, ValuationModel,
 } from '@/lib/data-service';
 import { dcfValue } from '@/lib/dcf';
@@ -644,6 +644,8 @@ export default function CockpitDashboard() {
     const [ledgers, setLedgers] = useState<any | null>(null);
     const [ledgerView, setLedgerView] = useState<'plan' | 'plan2' | 'equal' | 'mine'>('plan');
     const [planView, setPlanView] = useState<'plan' | 'plan2'>('plan');
+    const [planLlm, setPlanLlm] = useState<any | null>(null);          // LLM-overlay variant
+    const [planSource, setPlanSource] = useState<'baseline' | 'llm'>('baseline');
     const [navRange, setNavRange] = useState<'1m' | '3m' | 'ytd' | 'all'>('all');
     const [tradeQuery, setTradeQuery] = useState('');
     const [benchSel, setBenchSel] = useState<Set<string>>(new Set(DEFAULT_BENCHES));
@@ -694,15 +696,16 @@ export default function CockpitDashboard() {
 
     const loadAll = async () => {
         setLoading(true);
-        const [f, v, p, o, b, i, ov, pl, s] = await Promise.all([
+        const [f, v, p, o, b, i, ov, pl, s, pllm] = await Promise.all([
             fetchFactorScores(), fetchValuationModels(), fetchPortfolioPlan(),
             fetchOutcomes(), fetchBacktest(), fetchFactorIc(), fetchOverlaySignals(),
-            fetchPaperLedgers(), fetchStocks('US'),
+            fetchPaperLedgers(), fetchStocks('US'), fetchPortfolioPlanLlm(),
         ]);
         setLedgers(await attachMine(pl));
         setFactor(f);
         setValuations(v?.tickers ?? {});
         setPlan(p);
+        setPlanLlm(pllm);
         setOutcomes(o);
         setBacktest(b);
         setIc(i);
@@ -828,8 +831,9 @@ export default function CockpitDashboard() {
 
     const selectedEntry = selected ? factor?.tickers[selected] : null;
     const selectedInfo = selected ? stockInfo[selected] : null;
-    // Portfolio tab: which suggested plan is shown (value core vs hybrid)
-    const activePlan = planView === 'plan2' && plan?.plan2 ? plan.plan2 : plan;
+    // Portfolio tab: baseline vs LLM-overlay source, then value core vs hybrid
+    const basePlan = planSource === 'llm' && planLlm ? planLlm : plan;
+    const activePlan = planView === 'plan2' && basePlan?.plan2 ? basePlan.plan2 : basePlan;
 
     const tabs: { id: TabId; label: string; icon: any }[] = [
         { id: 'rankings', label: 'Rankings', icon: BarChart3 },
@@ -1225,11 +1229,29 @@ export default function CockpitDashboard() {
                             overlay={overlay} stockInfo={stockInfo} onSelect={setSelected}
                             user={auth.user} onRequireLogin={() => setShowAuth(true)} />
 
+                        {/* Baseline vs LLM-overlay source (A/B) — LLM option only when the variant exists */}
+                        <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-xs font-bold text-muted-foreground">Source:</span>
+                            {([['baseline', 'Baseline', 'quant only'],
+                               ['llm', 'LLM overlay', planLlm ? 'RS2 verdicts' : 'no data yet']] as const).map(([id, lbl, sub]) => (
+                                <button key={id} onClick={() => planLlm || id === 'baseline' ? setPlanSource(id) : null}
+                                    disabled={id === 'llm' && !planLlm}
+                                    className={clsx('rounded-md border px-3 py-1.5 text-xs font-bold transition-colors',
+                                        id === 'llm' && !planLlm ? 'cursor-not-allowed border-border bg-secondary/10 text-muted-foreground/40'
+                                            : planSource === id ? 'border-sky-500/50 bg-sky-500/15 text-sky-300'
+                                                : 'border-border bg-secondary/20 text-muted-foreground hover:text-foreground')}>
+                                    {lbl} <span className="font-mono opacity-70">· {sub}</span>
+                                </button>
+                            ))}
+                            {planSource === 'llm' && (
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-sky-300/80">comparing LLM-adjusted Research-Now</span>
+                            )}
+                        </div>
                         {/* Suggested-plan selector: value core vs hybrid */}
                         <div className="flex flex-wrap items-center gap-2">
                             <span className="text-xs font-bold text-muted-foreground">Suggested plan:</span>
-                            {([['plan', 'Value core', `${plan.invested_pct}% inv`],
-                               ['plan2', 'Hybrid (+ quality sleeve)', plan.plan2 ? `${plan.plan2.invested_pct}% inv` : '—']] as const).map(([id, lbl, sub]) => (
+                            {([['plan', 'Value core', `${basePlan.invested_pct}% inv`],
+                               ['plan2', 'Hybrid (+ quality sleeve)', basePlan.plan2 ? `${basePlan.plan2.invested_pct}% inv` : '—']] as const).map(([id, lbl, sub]) => (
                                 <button key={id} onClick={() => setPlanView(id)}
                                     className={clsx('rounded-md border px-3 py-1.5 text-xs font-bold transition-colors',
                                         planView === id ? 'border-emerald-500/50 bg-emerald-500/15 text-emerald-300'
