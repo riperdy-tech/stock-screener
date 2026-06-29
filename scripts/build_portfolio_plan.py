@@ -107,7 +107,8 @@ def main():
     # along for haircuts/fallback/exit triggers; rev_nominated becomes a
     # confirmation chip rather than the source.
     nominated = [(sym, reverse.get(sym) or {}) for sym, e in factor.items()
-                 if e.get("fct_band") == "research_now"]
+                 if e.get("fct_band") == "research_now"
+                 and e.get("fct_veto") != "llm_reject"]   # LLM AVOID/SELL excludes from the candidate set
     nominated.sort(key=lambda x: ((factor.get(x[0]) or {}).get("fct_rank") or 10**9))
 
     macro_derisk = len(macro_flags) >= config["macro_derisk_flag_count"]
@@ -179,6 +180,18 @@ def main():
             weight *= 0.75
         if informed == -1:
             weight *= 0.75
+
+        # ── Stage-5 LLM overlay: the RS2 deep-dive sizes the position ──────
+        # Scale by conviction (0.3x at conv<=4 up to 1.0x at conv>=12) and cap at the verdict's
+        # own recommended weight. No-op when there's no verdict (fct_llm_verdict absent).
+        llmv = (factor.get(sym) or {}).get("fct_llm_verdict") or {}
+        lconv = llmv.get("conviction")
+        if isinstance(lconv, (int, float)):
+            weight *= max(0.3, min(1.0, lconv / 12.0))
+            sizing_method += "+llm_conv"
+        lrec = llmv.get("recommended_weight_pct")
+        if isinstance(lrec, (int, float)) and lrec > 0:
+            weight = min(weight, lrec)
 
         weight = round(weight, 2)
 

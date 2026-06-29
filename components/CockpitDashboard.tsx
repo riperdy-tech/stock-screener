@@ -176,6 +176,32 @@ function BandChip({ band, veto }: { band: string | null; veto: string | null }) 
     );
 }
 
+// RS2 LLM verdict chip — renders only when a verdict exists (no-op otherwise). Self-contained.
+function LlmChip({ entry }: { entry?: FactorEntry | null }) {
+    const v = entry?.fct_llm_verdict;
+    if (!v) return null;
+    const promoted = entry?.fct_llm === 'promoted';
+    const demoted = entry?.fct_llm === 'demoted' || entry?.fct_veto === 'llm_reject';
+    const cls = promoted ? 'border-emerald-400/50 bg-emerald-400/10 text-emerald-300'
+        : demoted ? 'border-red-500/50 bg-red-500/10 text-red-300'
+            : 'border-sky-500/40 bg-sky-500/10 text-sky-300';
+    const label = promoted ? 'LLM ▲' : demoted ? 'LLM ✕' : 'LLM';
+    const tip = [
+        v.stance && `stance ${v.stance}`,
+        v.action && `action ${v.action}`,
+        v.conviction != null && `conviction ${v.conviction}/15`,
+        v.gap != null && `gap ${v.gap > 0 ? '+' : ''}${v.gap}pts`,
+        v.mos_pct != null && `MoS ${v.mos_pct > 0 ? '+' : ''}${v.mos_pct}%`,
+        v.analyzed_date && `(${v.analyzed_date})`,
+    ].filter(Boolean).join(' · ');
+    return (
+        <span title={`RS2 LLM — ${tip}`}
+            className={clsx('inline-flex items-center rounded-md border px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider', cls)}>
+            {label}{v.conviction != null ? ` ${v.conviction}` : ''}
+        </span>
+    );
+}
+
 function ContributionBar({ entry }: { entry: FactorEntry }) {
     const contributions = entry.fct_contributions;
     if (!contributions) return <div className="h-2 w-full rounded bg-secondary/40" />;
@@ -568,7 +594,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
                                             {r.vm?.expectations_gap_pts !== null && r.vm?.expectations_gap_pts !== undefined
                                                 ? `${r.vm.expectations_gap_pts > 0 ? '+' : ''}${r.vm.expectations_gap_pts.toFixed(0)}pts` : '—'}
                                         </td>
-                                        <td className="px-2 py-1.5">{r.entry ? <BandChip band={r.entry.fct_band} veto={r.entry.fct_veto} /> : <span className="text-muted-foreground">—</span>}</td>
+                                        <td className="px-2 py-1.5"><div className="flex flex-wrap items-center gap-1">{r.entry ? <BandChip band={r.entry.fct_band} veto={r.entry.fct_veto} /> : <span className="text-muted-foreground">—</span>}<LlmChip entry={r.entry} /></div></td>
                                         <td className="px-2 py-1.5"><OverlayChips overlay={overlay[r.ticker]} /></td>
                                         <td className="px-2 py-1.5 text-right">
                                             <button onClick={() => setHoldings(prev => prev.filter(h => h.ticker !== r.ticker))}
@@ -921,7 +947,7 @@ export default function CockpitDashboard() {
                                                 </td>
                                                 <td className="px-3 py-2 font-mono text-sm font-black text-emerald-300">{e.fct_composite?.toFixed(1)}</td>
                                                 <td className="px-3 py-2"><ContributionBar entry={e} /></td>
-                                                <td className="px-3 py-2"><BandChip band={e.fct_band} veto={e.fct_veto} /></td>
+                                                <td className="px-3 py-2"><div className="flex flex-wrap items-center gap-1"><BandChip band={e.fct_band} veto={e.fct_veto} /><LlmChip entry={e} /></div></td>
                                                 <td className="px-3 py-2 font-mono font-bold">
                                                     {gap === null || gap === undefined ? <span className="text-muted-foreground">—</span> :
                                                         <span className={gap > 5 ? 'text-amber-300' : gap < -5 ? 'text-emerald-300' : 'text-muted-foreground'}>

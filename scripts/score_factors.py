@@ -146,6 +146,79 @@ def latest_fy(ydata):
     return y0, ydata[str(y0)], ydata.get(str(y0 - 1))
 
 
+def _reband(p):
+    if p >= BANDS["research_now"]:
+        return "research_now"
+    if p >= BANDS["watchlist"]:
+        return "watchlist"
+    if p >= BANDS["monitor"]:
+        return "monitor"
+    return "pass"
+
+
+def apply_llm_overlay(results):
+    """Stage-5 LLM veto/promote/tilt overlay. Reads public/data/llm_overlay.json (written by the
+    local RS2 orchestrator) and lets each verdict adjust the quant ranking:
+      - bounded TILT of fct_percentile from conviction + stance (+-25 pts max),
+      - hard DEMOTE (out of research_now) + veto='llm_reject' on a bearish/low-conviction verdict,
+      - hard PROMOTE (into research_now) on a high-conviction bullish verdict.
+    Re-derives fct_band, preserves fct_band_quant (pre-overlay) for A/B, records fct_llm + the raw
+    verdict for the frontend. STRICT NO-OP when the overlay file is absent/empty — never breaks the
+    cloud pipeline before verdicts exist (AUDIT-safe, per the plan)."""
+    try:
+        ov = (json.loads((DATA / "llm_overlay.json").read_text(encoding="utf-8")) or {}).get("tickers", {})
+    except Exception:
+        return 0
+    if not ov:
+        return 0
+    BEAR = ("AVOID", "SELL", "REDUCE", "TRIM", "EXIT")
+    BULL = ("BUY", "ACCUMULAT", "SCALE", "ADD", "OVERWEIGHT")
+    clamp = lambda x, lo, hi: max(lo, min(hi, x))
+    applied = 0
+    for t, v in ov.items():
+        e = results.get(t)
+        if not e or e.get("fct_percentile") is None:
+            continue
+        act = (v.get("action") or "").upper()
+        stance = (v.get("stance") or "").lower()
+        conv = v.get("conviction")
+        has_conv = isinstance(conv, (int, float))
+        bearish = any(w in act for w in BEAR) or stance == "overvalued"
+        bullish = (any(w in act for w in BULL) or stance == "undervalued") and not bearish
+        # stale verdict (older than ~the RN refresh window) -> halve its influence
+        stale = False
+        try:
+            from datetime import date
+            stale = bool(v.get("analyzed_date")) and \
+                (date.today() - date.fromisoformat(v["analyzed_date"])).days > 10
+        except Exception:
+            pass
+        tilt = clamp(((conv - 9) * 2 if has_conv else 0)
+                     + (8 if stance == "undervalued" else -8 if stance == "overvalued" else 0), -25, 25)
+        if stale:
+            tilt *= 0.5
+        e["fct_band_quant"] = e.get("fct_band")          # preserve pre-overlay band
+        e["fct_llm_verdict"] = {"stance": stance or None, "action": v.get("action"),
+                                "conviction": conv, "method": v.get("method"),
+                                "mos_pct": v.get("mos_pct"), "gap": v.get("expectations_gap_pts"),
+                                "recommended_weight_pct": v.get("recommended_weight_pct"),
+                                "analyzed_date": v.get("analyzed_date")}
+        p = clamp((e["fct_percentile"] or 0) + tilt, 0, 100)
+        e["fct_llm"] = "none"
+        if bearish or (has_conv and conv < 7):
+            p = min(p, BANDS["research_now"] - 0.1)      # demote out of research_now
+            e["fct_llm"] = "demoted"
+            if any(w in act for w in ("AVOID", "SELL")):
+                e["fct_veto"] = "llm_reject"             # also exclude from the portfolio candidate set
+        elif bullish and has_conv and conv >= 10:
+            p = max(p, float(BANDS["research_now"]))     # promote into research_now
+            e["fct_llm"] = "promoted"
+        e["fct_percentile"] = round(p, 1)
+        e["fct_band"] = _reband(p)
+        applied += 1
+    return applied
+
+
 def main():
     weights_file = load_json(WEIGHTS_JSON, None)
     if not weights_file or "current" not in weights_file:
@@ -332,6 +405,10 @@ def main():
         else:
             results[t]["fct_band"] = "pass"
 
+    # Stage-5 LLM overlay (no-op if public/data/llm_overlay.json absent) — veto/promote/tilt the
+    # quant bands using the local RS2 verdicts. Runs AFTER the quant bands so fct_band_quant is set.
+    llm_applied = apply_llm_overlay(results)
+
     band_counts = {}
     for e in results.values():
         b = e.get("fct_band") or ("vetoed" if e.get("fct_veto") else "unscored")
@@ -342,6 +419,7 @@ def main():
         "engine": "factor_lab_v2_equal",
         "weights_scheme": weights_file["current"].get("scheme", "unknown"),
         "scored_count": n,
+        "llm_overlay_applied": llm_applied,
         "band_counts": band_counts,
         "veto_counts": veto_counts,
         "weights_used": weights,
@@ -350,7 +428,7 @@ def main():
     }
     OUT_JSON.write_text(json.dumps(payload, indent=1, sort_keys=True) + "\n", encoding="utf-8")
 
-    print(f"Factor Lab: {n} scored | bands {band_counts} | vetoes {veto_counts}")
+    print(f"Factor Lab: {n} scored | bands {band_counts} | vetoes {veto_counts} | LLM overlay {llm_applied}")
     print(f"Weights: {weights}")
     top10 = [f"{t}({s:.1f})" for t, s in finals[:10]]
     print(f"Top 10: {', '.join(top10)}")
