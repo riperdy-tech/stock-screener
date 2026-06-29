@@ -646,6 +646,7 @@ export default function CockpitDashboard() {
     const [planView, setPlanView] = useState<'plan' | 'plan2'>('plan');
     const [planLlm, setPlanLlm] = useState<any | null>(null);          // LLM-overlay variant
     const [planSource, setPlanSource] = useState<'baseline' | 'llm'>('baseline');
+    const [showLlm, setShowLlm] = useState(true);                      // overlay LLM lines on the NAV chart
     const [navRange, setNavRange] = useState<'1m' | '3m' | 'ytd' | 'all'>('all');
     const [tradeQuery, setTradeQuery] = useState('');
     const [benchSel, setBenchSel] = useState<Set<string>>(new Set(DEFAULT_BENCHES));
@@ -755,7 +756,7 @@ export default function CockpitDashboard() {
         const firsts: Record<string, number> = {};
         const benchList: string[] = L && ledgers?.config?.benchmarks ? ledgers.config.benchmarks : DEFAULT_BENCHES;
         const benchKeys: Record<string, string> = Object.fromEntries(benchList.map((s: string) => [s, s.toLowerCase()]));
-        for (const name of ['plan', 'plan2', 'equal', 'mine'] as const) {
+        for (const name of ['plan', 'plan2', 'equal', 'mine', 'plan_llm', 'plan2_llm', 'equal_llm'] as const) {
             for (const row of L[name]?.nav_series ?? []) {
                 if (row.nav === null || row.nav === undefined) continue;
                 byDate[row.date] = byDate[row.date] || { date: row.date };
@@ -1064,6 +1065,12 @@ export default function CockpitDashboard() {
                                         {b}
                                     </button>
                                 ))}
+                                <button onClick={() => setShowLlm(v => !v)}
+                                    className={clsx('rounded border px-2 py-0.5 text-[10px] font-black uppercase transition',
+                                        showLlm ? 'border-sky-400 text-sky-300' : 'border-border text-muted-foreground opacity-50 hover:opacity-80')}
+                                    title="Overlay the LLM-variant NAV lines (dashed) for baseline-vs-LLM comparison">
+                                    LLM overlay (dashed)
+                                </button>
                             </div>
                             <ResponsiveContainer width="100%" height={280}>
                                 <LineChart data={navCurve}>
@@ -1076,6 +1083,11 @@ export default function CockpitDashboard() {
                                     <Line type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} />
+                                    {showLlm && [
+                                        <Line key="pl" type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#34d399" dot={false} strokeWidth={2} strokeDasharray="5 3" />,
+                                        <Line key="p2l" type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#f472b6" dot={false} strokeWidth={2} strokeDasharray="5 3" />,
+                                        <Line key="eql" type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#38bdf8" dot={false} strokeWidth={2} strokeDasharray="5 3" />,
+                                    ]}
                                     {allBenches.filter(b => benchSel.has(b)).map(b => (
                                         <Line key={b} type="monotone" dataKey={b.toLowerCase()} name={b}
                                             stroke={benchColor(b)} dot={false} strokeWidth={1.5} strokeDasharray={benchDash(b)} />

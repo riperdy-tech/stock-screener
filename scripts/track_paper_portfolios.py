@@ -46,6 +46,7 @@ DATA = ROOT / "public" / "data"
 STOCKS_JSON = DATA / "stocks.json"
 FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 PORTFOLIO_PLAN_JSON = DATA / "portfolio_plan.json"
+PORTFOLIO_PLAN_LLM_JSON = DATA / "portfolio_plan_llm.json"   # LLM-overlay variant (A/B)
 MY_PORTFOLIO_JSON = DATA / "my_portfolio.json"
 LEDGERS_JSON = DATA / "paper_ledgers.json"
 DIVIDENDS_JSON = DATA / "dividends.json"
@@ -527,9 +528,11 @@ def main():
         "inception": as_of,
         "config": {"cost_bps": COST_BPS, "benchmarks": BENCHMARKS,
                    "primary_benchmark": PRIMARY_BENCHMARK, "start_nav": START_NAV},
-        "ledgers": {"plan": empty_ledger(), "plan2": empty_ledger(), "equal": empty_ledger()},
+        "ledgers": {"plan": empty_ledger(), "plan2": empty_ledger(), "equal": empty_ledger(),
+                    "plan_llm": empty_ledger(), "plan2_llm": empty_ledger(), "equal_llm": empty_ledger()},
     }
-    book["ledgers"].setdefault("plan2", empty_ledger())  # add to pre-existing books
+    for _k in ("plan2", "plan_llm", "plan2_llm", "equal_llm"):
+        book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
     book["config"]["primary_benchmark"] = PRIMARY_BENCHMARK
@@ -558,6 +561,26 @@ def main():
             finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
             backfill_benches(ledgers[name])  # late-added benchmarks -> full record
 
+        # ── LLM-overlay variants (A/B): plan_llm / plan2_llm / equal_llm ─────
+        # Same inception + machinery as the baselines, fed from portfolio_plan_llm.json + fct_band_llm.
+        # No-op while the LLM data is absent (empty targets -> the ledger just holds cash), so the
+        # series stays flat until verdicts exist, then diverges from baseline — a clean A/B.
+        plan_llm = load_json(PORTFOLIO_PLAN_LLM_JSON, {}) or {}
+        pl_t = {p["symbol"]: p["weight_pct"] for p in (plan_llm.get("positions") or [])}
+        nav_pl, stale_pl = run_target_ledger(ledgers["plan_llm"], pl_t, prices, as_of, "plan_llm")
+        pl2_t = {p["symbol"]: p["weight_pct"] for p in ((plan_llm.get("plan2") or {}).get("positions") or [])}
+        nav_pl2, stale_pl2 = run_target_ledger(ledgers["plan2_llm"], pl2_t, prices, as_of, "plan2_llm")
+        research_llm = sorted(t for t, e in factor.items()
+                              if (e.get("fct_band_llm") or e.get("fct_band")) == "research_now"
+                              and e.get("fct_llm_veto") != "llm_reject")
+        eqw_llm = 100.0 / len(research_llm) if research_llm else 0
+        nav_eql, stale_eql = run_target_ledger(ledgers["equal_llm"], {t: eqw_llm for t in research_llm},
+                                               prices, as_of, "rank")
+        for name, nav, stale in (("plan_llm", nav_pl, stale_pl), ("plan2_llm", nav_pl2, stale_pl2),
+                                 ("equal_llm", nav_eql, stale_eql)):
+            finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
+            backfill_benches(ledgers[name])
+
         book["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
         save_ledgers_to_supabase(book)  # runtime source for /api/paper-ledgers (no redeploy)
@@ -578,10 +601,12 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("plan", "plan2", "equal"):
+        for name in ("plan", "plan2", "equal", "plan_llm", "plan2_llm", "equal_llm"):
+            if not ledgers.get(name, {}).get("nav_series"):
+                continue
             s = ledgers[name]["summary"]
             nav_now = ledgers[name]["nav_series"][-1]["nav"]
-            print(f"  {name:5s} nav={nav_now} open={s.get('open_positions')} "
+            print(f"  {name:10s} nav={nav_now} open={s.get('open_positions')} "
                   f"cum={s.get('cumulative_return_pct')}% trades={len(ledgers[name]['trades'])}")
     print(f"  mine: {mine_note}")
     print(f"Written: {LEDGERS_JSON.name}")
