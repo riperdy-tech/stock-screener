@@ -362,6 +362,44 @@ def fetch_benchmarks():
     return out
 
 
+bench_hist_holder = {}  # {sym: {date: close}} fetched once per run for backfill
+
+
+def fetch_benchmark_history(start_date):
+    """Daily closes for every benchmark from start_date -> today: {sym: {date: close}}.
+    Lets benchmarks added after inception (e.g. SOXX/DRAM) be backfilled to the
+    common start date so every selected ETF is indexed from the same point."""
+    out = {b: {} for b in BENCHMARKS}
+    try:
+        import yfinance as yf
+        for b in BENCHMARKS:
+            try:
+                hist = yf.Ticker(b).history(start=start_date, interval="1d")
+                if hist is not None and not hist.empty:
+                    for idx, c in hist["Close"].dropna().items():
+                        d = idx.date().isoformat() if hasattr(idx, "date") else str(idx)[:10]
+                        out[b][d] = round(float(c), 4)
+            except Exception as e:
+                print(f"  {b} history failed: {e}", file=sys.stderr)
+    except Exception as e:
+        print(f"  benchmark history fetch failed: {e}", file=sys.stderr)
+    return out
+
+
+def backfill_benches(ledger):
+    """Fill any missing benchmark close in this ledger's nav_series from the
+    fetched history, so a late-added benchmark spans the full record (not just
+    from when it was first added)."""
+    hist = bench_hist_holder.get("hist") or {}
+    if not hist:
+        return
+    for r in ledger.get("nav_series", []):
+        b = r.setdefault("benches", {})
+        for sym, by_date in hist.items():
+            if b.get(sym) is None and r["date"] in by_date:
+                b[sym] = by_date[r["date"]]
+
+
 def compute_summary(nav_series, trades, closed, inception):
     rows = [r for r in nav_series if r.get("nav") is not None]
     if len(rows) < 1:
@@ -460,6 +498,7 @@ def process_user_mine_ledgers(prices, benches, as_of):
         inception = (stored or {}).get("inception") or as_of
         nav, stale = run_mine_ledger(led, snap, prices, as_of)
         finalize_ledger(led, nav, stale, benches, as_of, inception)
+        backfill_benches(led)  # late-added benchmarks -> full record
         sb_upsert("user_mine_ledgers",
                   {"user_id": uid, "data": {"ledger": led, "inception": inception},
                    "updated_at": datetime.now(timezone.utc).isoformat()},
@@ -497,6 +536,7 @@ def main():
     ledgers = book["ledgers"]
 
     benches = {b: None for b in BENCHMARKS} if args.skip_benchmark else fetch_benchmarks()
+    bench_hist_holder["hist"] = {} if args.skip_benchmark else fetch_benchmark_history(book["inception"])
 
     # ── global ledgers: plan / plan2 / equal (identical for every user) ──
     # Skipped under --mine-only so an on-demand mine refresh never re-stamps the
@@ -516,6 +556,7 @@ def main():
         for name, nav, stale in (("plan", nav_plan, stale_plan), ("plan2", nav_plan2, stale_plan2),
                                  ("equal", nav_eq, stale_eq)):
             finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
+            backfill_benches(ledgers[name])  # late-added benchmarks -> full record
 
         book["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")

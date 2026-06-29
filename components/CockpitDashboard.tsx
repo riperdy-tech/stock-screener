@@ -593,6 +593,19 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
     );
 }
 
+// Benchmark line styling (data key = lowercased symbol). Unknown symbols fall
+// back to a neutral grey so newly-added benchmarks still render.
+const BENCH_META: Record<string, { color: string; dash: string }> = {
+    IWM: { color: '#64748b', dash: '4 3' },
+    SPY: { color: '#94a3b8', dash: '2 2' },
+    QQQ: { color: '#facc15', dash: '1 3' },
+    SOXX: { color: '#fb923c', dash: '3 2' },
+    DRAM: { color: '#22d3ee', dash: '2 3' },
+};
+const benchColor = (b: string) => BENCH_META[b]?.color ?? '#9ca3af';
+const benchDash = (b: string) => BENCH_META[b]?.dash ?? '3 3';
+const DEFAULT_BENCHES = ['IWM', 'SPY', 'QQQ'];  // SOXX/DRAM off by default (toggle on)
+
 export default function CockpitDashboard() {
     const [tab, setTab] = useState<TabId>('rankings');
     const [factor, setFactor] = useState<FactorScoresPayload | null>(null);
@@ -607,6 +620,12 @@ export default function CockpitDashboard() {
     const [planView, setPlanView] = useState<'plan' | 'plan2'>('plan');
     const [navRange, setNavRange] = useState<'1m' | '3m' | 'ytd' | 'all'>('all');
     const [tradeQuery, setTradeQuery] = useState('');
+    const [benchSel, setBenchSel] = useState<Set<string>>(new Set(DEFAULT_BENCHES));
+    const toggleBench = (b: string) => setBenchSel(prev => {
+        const next = new Set(prev);
+        next.has(b) ? next.delete(b) : next.add(b);
+        return next;
+    });
     const [stockInfo, setStockInfo] = useState<Record<string, StockInfo>>({});
     const [loading, setLoading] = useState(true);
 
@@ -705,7 +724,8 @@ export default function CockpitDashboard() {
         if (!L) return [];
         const byDate: Record<string, any> = {};
         const firsts: Record<string, number> = {};
-        const benchKeys: Record<string, string> = { IWM: 'iwm', SPY: 'spy', QQQ: 'qqq', SOXX: 'soxx', DRAM: 'dram' };
+        const benchList: string[] = L && ledgers?.config?.benchmarks ? ledgers.config.benchmarks : DEFAULT_BENCHES;
+        const benchKeys: Record<string, string> = Object.fromEntries(benchList.map((s: string) => [s, s.toLowerCase()]));
         for (const name of ['plan', 'plan2', 'equal', 'mine'] as const) {
             for (const row of L[name]?.nav_series ?? []) {
                 if (row.nav === null || row.nav === undefined) continue;
@@ -732,6 +752,9 @@ export default function CockpitDashboard() {
         const cutStr = cut.toISOString().slice(0, 10);
         return all.filter((r: any) => r.date >= cutStr);
     }, [ledgers, navRange]);
+
+    const allBenches: string[] = useMemo(
+        () => (ledgers?.config?.benchmarks as string[] | undefined) ?? DEFAULT_BENCHES, [ledgers]);
 
     const soldTooEarly = useMemo(() => {
         const L = ledgers?.ledgers;
@@ -965,7 +988,7 @@ export default function CockpitDashboard() {
                                                 <span>Open: <b className="font-mono text-foreground">{s.open_positions ?? 0}</b></span>
                                             </div>
                                             <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 border-t border-border/40 pt-1.5 text-[11px] text-muted-foreground">
-                                                {(['IWM', 'SPY', 'QQQ', 'SOXX', 'DRAM'] as const).map(b => {
+                                                {allBenches.filter(b => benchSel.has(b)).map(b => {
                                                     const ex = (s.excess_vs || {})[b];
                                                     const fallback = b === 'IWM' ? s.excess_vs_bench_pct : undefined;
                                                     const val = ex !== undefined ? ex : fallback;
@@ -1001,6 +1024,17 @@ export default function CockpitDashboard() {
                                     ))}
                                 </div>
                             </div>
+                            <div className="mb-2 flex flex-wrap items-center gap-1.5">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Benchmarks:</span>
+                                {allBenches.map(b => (
+                                    <button key={b} onClick={() => toggleBench(b)}
+                                        className={clsx('rounded border px-2 py-0.5 text-[10px] font-black uppercase transition',
+                                            benchSel.has(b) ? 'border-current' : 'border-border text-muted-foreground opacity-50 hover:opacity-80')}
+                                        style={benchSel.has(b) ? { color: benchColor(b), borderColor: benchColor(b) } : undefined}>
+                                        {b}
+                                    </button>
+                                ))}
+                            </div>
                             <ResponsiveContainer width="100%" height={280}>
                                 <LineChart data={navCurve}>
                                     <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
@@ -1012,11 +1046,10 @@ export default function CockpitDashboard() {
                                     <Line type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} />
-                                    <Line type="monotone" dataKey="iwm" name="IWM" stroke="#64748b" dot={false} strokeWidth={1.5} strokeDasharray="4 3" />
-                                    <Line type="monotone" dataKey="spy" name="SPY" stroke="#94a3b8" dot={false} strokeWidth={1.5} strokeDasharray="2 2" />
-                                    <Line type="monotone" dataKey="qqq" name="QQQ" stroke="#facc15" dot={false} strokeWidth={1.5} strokeDasharray="1 3" />
-                                    <Line type="monotone" dataKey="soxx" name="SOXX" stroke="#fb923c" dot={false} strokeWidth={1.5} strokeDasharray="3 2" />
-                                    <Line type="monotone" dataKey="dram" name="DRAM" stroke="#22d3ee" dot={false} strokeWidth={1.5} strokeDasharray="2 3" />
+                                    {allBenches.filter(b => benchSel.has(b)).map(b => (
+                                        <Line key={b} type="monotone" dataKey={b.toLowerCase()} name={b}
+                                            stroke={benchColor(b)} dot={false} strokeWidth={1.5} strokeDasharray={benchDash(b)} />
+                                    ))}
                                 </LineChart>
                             </ResponsiveContainer>
                             {navCurve.length < 5 && (
