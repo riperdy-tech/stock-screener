@@ -271,7 +271,10 @@ export interface FactorEntry {
     fct_haircuts: Record<string, number> | null;
     // Stage-5 RS2 LLM overlay (written by score_factors.apply_llm_overlay; absent until verdicts exist)
     fct_band_quant?: string | null;   // pre-overlay band, for A/B
+    fct_band_llm?: string | null;     // LLM-overlay parallel band (additive)
     fct_llm?: string | null;          // 'promoted' | 'demoted' | 'none'
+    fct_llm_veto?: string | null;     // 'llm_reject' when the LLM action is AVOID/SELL
+    fct_percentile_llm?: number | null;
     fct_llm_verdict?: {
         stance: string | null;
         action: string | null;
