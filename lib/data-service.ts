@@ -269,6 +269,22 @@ export interface FactorEntry {
     fct_vol?: number | null;
     fct_contributions: Record<string, number> | null;
     fct_haircuts: Record<string, number> | null;
+    // Stage-5 RS2 LLM overlay (written by score_factors.apply_llm_overlay; absent until verdicts exist)
+    fct_band_quant?: string | null;   // pre-overlay band, for A/B
+    fct_band_llm?: string | null;     // LLM-overlay parallel band (additive)
+    fct_llm?: string | null;          // 'promoted' | 'demoted' | 'none'
+    fct_llm_veto?: string | null;     // 'llm_reject' when the LLM action is AVOID/SELL
+    fct_percentile_llm?: number | null;
+    fct_llm_verdict?: {
+        stance: string | null;
+        action: string | null;
+        conviction: number | null;
+        method?: string | null;
+        mos_pct?: number | null;
+        gap?: number | null;
+        recommended_weight_pct?: number | null;
+        analyzed_date?: string | null;
+    } | null;
 }
 
 export interface FactorScoresPayload {
@@ -324,6 +340,11 @@ export async function fetchValuationModels(): Promise<{ generated_at: string; di
 
 export async function fetchPortfolioPlan(): Promise<any | null> {
     return fetchJson('/data/portfolio_plan.json');
+}
+
+// Parallel LLM-overlay variant for baseline-vs-LLM A/B (null until the orchestrator + run_chain --llm produce it).
+export async function fetchPortfolioPlanLlm(): Promise<any | null> {
+    return fetchJson('/data/portfolio_plan_llm.json');
 }
 
 export async function fetchOutcomes(): Promise<any | null> {

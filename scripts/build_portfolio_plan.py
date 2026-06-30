@@ -102,12 +102,21 @@ def main():
     macro = load_json(MACRO_STATE_JSON, {}) or {}
     macro_flags = macro.get("triggered_flags", []) or []
 
+    # --llm : build the PARALLEL LLM-overlay variant (candidates from fct_band_llm, conviction
+    # sizing, LLM veto) into portfolio_plan_llm.json — for baseline-vs-LLM A/B. Without the flag
+    # this is the pristine baseline (fct_band only), byte-identical to before.
+    LLM = "--llm" in sys.argv
+    band_field = "fct_band_llm" if LLM else "fct_band"
+    out_plan = (DATA / "portfolio_plan_llm.json") if LLM else PLAN_JSON
+    out_report = (DATA / "portfolio_report_llm.md") if LLM else REPORT_MD
+
     # Candidate list = Factor Lab research_now (Stage 1 of the funnel produces
     # the nomination list per the ecosystem doc). Reverse-engine data rides
     # along for haircuts/fallback/exit triggers; rev_nominated becomes a
     # confirmation chip rather than the source.
     nominated = [(sym, reverse.get(sym) or {}) for sym, e in factor.items()
-                 if e.get("fct_band") == "research_now"]
+                 if (e.get(band_field) or e.get("fct_band")) == "research_now"
+                 and not (LLM and e.get("fct_llm_veto") == "llm_reject")]   # LLM AVOID/SELL excluded (LLM variant only)
     nominated.sort(key=lambda x: ((factor.get(x[0]) or {}).get("fct_rank") or 10**9))
 
     macro_derisk = len(macro_flags) >= config["macro_derisk_flag_count"]
@@ -179,6 +188,19 @@ def main():
             weight *= 0.75
         if informed == -1:
             weight *= 0.75
+
+        # ── Stage-5 LLM overlay (LLM variant only): the RS2 deep-dive sizes the position ──
+        # Scale by conviction (0.3x at conv<=4 up to 1.0x at conv>=12) and cap at the verdict's
+        # own recommended weight. Baseline run is untouched.
+        if LLM:
+            llmv = (factor.get(sym) or {}).get("fct_llm_verdict") or {}
+            lconv = llmv.get("conviction")
+            if isinstance(lconv, (int, float)):
+                weight *= max(0.3, min(1.0, lconv / 12.0))
+                sizing_method += "+llm_conv"
+            lrec = llmv.get("recommended_weight_pct")
+            if isinstance(lrec, (int, float)) and lrec > 0:
+                weight = min(weight, lrec)
 
         weight = round(weight, 2)
 
@@ -282,7 +304,8 @@ def main():
     sleeve_pos = config["quality_sleeve_position_pct"]
     sleeve_max = config["quality_sleeve_max_pct"]
     ranked = sorted(((fe.get("fct_rank") or 10**9, sym) for sym, fe in factor.items()
-                     if fe.get("fct_band") == "research_now"), key=lambda x: x[0])
+                     if (fe.get(band_field) or fe.get("fct_band")) == "research_now"
+                     and not (LLM and fe.get("fct_llm_veto") == "llm_reject")), key=lambda x: x[0])
     for _, sym in ranked:
         if sym in held or sleeve_added >= sleeve_max:
             continue
@@ -333,7 +356,8 @@ def main():
                        "Every position requires human review of the con line and flags."),
         "macro_flags": macro_flags,
         "macro_derisk_active": macro_derisk,
-        "label": "Value core (Kelly-sized)",
+        "variant": "llm" if LLM else "baseline",
+        "label": "Value core (Kelly-sized)" + (" — LLM overlay" if LLM else ""),
         "invested_pct": invested,
         "cash_pct": cash,
         "position_count": len(positions),
@@ -344,7 +368,7 @@ def main():
         "plan2": plan2,
         "config_used": {k: v for k, v in config.items() if not k.startswith("_")},
     }
-    PLAN_JSON.write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    out_plan.write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     # ── Markdown report ──────────────────────────────────────────────────
     lines = ["# Portfolio Plan (v1 — decision support)", "",
@@ -384,13 +408,13 @@ def main():
               "- A forensic flag newly fires (M/F/accruals/issuance) -> re-underwrite",
               "- Scores older than 90 days -> position is unreviewed, treat as expired (engine rule 15)",
               "", f"_{plan['disclaimer']}_"]
-    REPORT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    out_report.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-    print(f"Plan  (value core): {len(positions)} positions, {invested}% invested, {cash}% cash"
-          + (" [MACRO DE-RISK]" if macro_derisk else ""))
-    print(f"Plan2 (hybrid):     {plan2['position_count']} positions, {plan2['invested_pct']}% invested, "
+    print(f"[{'LLM' if LLM else 'baseline'}] Plan (value core): {len(positions)} positions, {invested}% invested, "
+          f"{cash}% cash" + (" [MACRO DE-RISK]" if macro_derisk else ""))
+    print(f"           Plan2 (hybrid): {plan2['position_count']} positions, {plan2['invested_pct']}% invested, "
           f"{plan2['cash_pct']}% cash (sleeve {plan2['sleeve_pct']}%)")
-    print(f"Written: {PLAN_JSON.name}, {REPORT_MD.name}")
+    print(f"Written: {out_plan.name}, {out_report.name}")
 
 
 if __name__ == "__main__":

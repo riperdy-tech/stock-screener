@@ -21,7 +21,7 @@ import {
 } from 'recharts';
 import {
     fetchBacktest, fetchFactorIc, fetchFactorScores, fetchOutcomes,
-    fetchOverlaySignals, fetchPaperLedgers, fetchPortfolioPlan, fetchStocks, fetchValuationModels,
+    fetchOverlaySignals, fetchPaperLedgers, fetchPortfolioPlan, fetchPortfolioPlanLlm, fetchStocks, fetchValuationModels,
     FactorEntry, FactorScoresPayload, ValuationModel,
 } from '@/lib/data-service';
 import { dcfValue } from '@/lib/dcf';
@@ -172,6 +172,32 @@ function BandChip({ band, veto }: { band: string | null; veto: string | null }) 
     return (
         <span className={clsx('inline-flex rounded-md border px-2 py-0.5 text-[10px] font-black uppercase tracking-wider', BAND_STYLES[band] || BAND_STYLES.pass)}>
             {band.replace(/_/g, ' ')}
+        </span>
+    );
+}
+
+// RS2 LLM verdict chip — renders only when a verdict exists (no-op otherwise). Self-contained.
+function LlmChip({ entry }: { entry?: FactorEntry | null }) {
+    const v = entry?.fct_llm_verdict;
+    if (!v) return null;
+    const promoted = entry?.fct_llm === 'promoted';
+    const demoted = entry?.fct_llm === 'demoted' || entry?.fct_veto === 'llm_reject';
+    const cls = promoted ? 'border-emerald-400/50 bg-emerald-400/10 text-emerald-300'
+        : demoted ? 'border-red-500/50 bg-red-500/10 text-red-300'
+            : 'border-sky-500/40 bg-sky-500/10 text-sky-300';
+    const label = promoted ? 'LLM ▲' : demoted ? 'LLM ✕' : 'LLM';
+    const tip = [
+        v.stance && `stance ${v.stance}`,
+        v.action && `action ${v.action}`,
+        v.conviction != null && `conviction ${v.conviction}/15`,
+        v.gap != null && `gap ${v.gap > 0 ? '+' : ''}${v.gap}pts`,
+        v.mos_pct != null && `MoS ${v.mos_pct > 0 ? '+' : ''}${v.mos_pct}%`,
+        v.analyzed_date && `(${v.analyzed_date})`,
+    ].filter(Boolean).join(' · ');
+    return (
+        <span title={`RS2 LLM — ${tip}`}
+            className={clsx('inline-flex items-center rounded-md border px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider', cls)}>
+            {label}{v.conviction != null ? ` ${v.conviction}` : ''}
         </span>
     );
 }
@@ -568,7 +594,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
                                             {r.vm?.expectations_gap_pts !== null && r.vm?.expectations_gap_pts !== undefined
                                                 ? `${r.vm.expectations_gap_pts > 0 ? '+' : ''}${r.vm.expectations_gap_pts.toFixed(0)}pts` : '—'}
                                         </td>
-                                        <td className="px-2 py-1.5">{r.entry ? <BandChip band={r.entry.fct_band} veto={r.entry.fct_veto} /> : <span className="text-muted-foreground">—</span>}</td>
+                                        <td className="px-2 py-1.5"><div className="flex flex-wrap items-center gap-1">{r.entry ? <BandChip band={r.entry.fct_band} veto={r.entry.fct_veto} /> : <span className="text-muted-foreground">—</span>}<LlmChip entry={r.entry} /></div></td>
                                         <td className="px-2 py-1.5"><OverlayChips overlay={overlay[r.ticker]} /></td>
                                         <td className="px-2 py-1.5 text-right">
                                             <button onClick={() => setHoldings(prev => prev.filter(h => h.ticker !== r.ticker))}
@@ -618,6 +644,9 @@ export default function CockpitDashboard() {
     const [ledgers, setLedgers] = useState<any | null>(null);
     const [ledgerView, setLedgerView] = useState<'plan' | 'plan2' | 'equal' | 'mine'>('plan');
     const [planView, setPlanView] = useState<'plan' | 'plan2'>('plan');
+    const [planLlm, setPlanLlm] = useState<any | null>(null);          // LLM-overlay variant
+    const [planSource, setPlanSource] = useState<'baseline' | 'llm'>('baseline');
+    const [showLlm, setShowLlm] = useState(true);                      // overlay LLM lines on the NAV chart
     const [navRange, setNavRange] = useState<'1m' | '3m' | 'ytd' | 'all'>('all');
     const [tradeQuery, setTradeQuery] = useState('');
     const [benchSel, setBenchSel] = useState<Set<string>>(new Set(DEFAULT_BENCHES));
@@ -631,6 +660,7 @@ export default function CockpitDashboard() {
 
     const [search, setSearch] = useState('');
     const [bandFilter, setBandFilter] = useState<string>('all');
+    const [llmFilter, setLlmFilter] = useState<string>('all');   // filter rankings by RS2 LLM verdict
     const [sectorFilter, setSectorFilter] = useState<string>('all');
     const [limit, setLimit] = useState(100);
     const [selected, setSelected] = useState<string | null>(null);
@@ -668,15 +698,16 @@ export default function CockpitDashboard() {
 
     const loadAll = async () => {
         setLoading(true);
-        const [f, v, p, o, b, i, ov, pl, s] = await Promise.all([
+        const [f, v, p, o, b, i, ov, pl, s, pllm] = await Promise.all([
             fetchFactorScores(), fetchValuationModels(), fetchPortfolioPlan(),
             fetchOutcomes(), fetchBacktest(), fetchFactorIc(), fetchOverlaySignals(),
-            fetchPaperLedgers(), fetchStocks('US'),
+            fetchPaperLedgers(), fetchStocks('US'), fetchPortfolioPlanLlm(),
         ]);
         setLedgers(await attachMine(pl));
         setFactor(f);
         setValuations(v?.tickers ?? {});
         setPlan(p);
+        setPlanLlm(pllm);
         setOutcomes(o);
         setBacktest(b);
         setIc(i);
@@ -711,13 +742,22 @@ export default function CockpitDashboard() {
 
     const filteredRows = useMemo(() => rows.filter(([t, e]) => {
         if (bandFilter !== 'all' && e.fct_band !== bandFilter) return false;
+        if (llmFilter !== 'all') {
+            const v = e.fct_llm_verdict;
+            if (llmFilter === 'reviewed' && !v) return false;
+            else if (llmFilter === 'promoted' && e.fct_llm !== 'promoted') return false;
+            else if (llmFilter === 'demoted' && e.fct_llm !== 'demoted') return false;
+            else if (llmFilter === 'vetoed' && e.fct_llm_veto !== 'llm_reject') return false;
+            else if ((llmFilter === 'undervalued' || llmFilter === 'fair' || llmFilter === 'overvalued')
+                     && v?.stance !== llmFilter) return false;
+        }
         if (sectorFilter !== 'all' && stockInfo[t]?.sector !== sectorFilter) return false;
         if (search) {
             const q = search.toUpperCase();
             if (!t.includes(q) && !(stockInfo[t]?.name || '').toUpperCase().includes(q)) return false;
         }
         return true;
-    }), [rows, bandFilter, sectorFilter, search, stockInfo]);
+    }), [rows, bandFilter, llmFilter, sectorFilter, search, stockInfo]);
 
     const navCurve = useMemo(() => {
         const L = ledgers?.ledgers;
@@ -726,7 +766,7 @@ export default function CockpitDashboard() {
         const firsts: Record<string, number> = {};
         const benchList: string[] = L && ledgers?.config?.benchmarks ? ledgers.config.benchmarks : DEFAULT_BENCHES;
         const benchKeys: Record<string, string> = Object.fromEntries(benchList.map((s: string) => [s, s.toLowerCase()]));
-        for (const name of ['plan', 'plan2', 'equal', 'mine'] as const) {
+        for (const name of ['plan', 'plan2', 'equal', 'mine', 'plan_llm', 'plan2_llm', 'equal_llm'] as const) {
             for (const row of L[name]?.nav_series ?? []) {
                 if (row.nav === null || row.nav === undefined) continue;
                 byDate[row.date] = byDate[row.date] || { date: row.date };
@@ -802,8 +842,9 @@ export default function CockpitDashboard() {
 
     const selectedEntry = selected ? factor?.tickers[selected] : null;
     const selectedInfo = selected ? stockInfo[selected] : null;
-    // Portfolio tab: which suggested plan is shown (value core vs hybrid)
-    const activePlan = planView === 'plan2' && plan?.plan2 ? plan.plan2 : plan;
+    // Portfolio tab: baseline vs LLM-overlay source, then value core vs hybrid
+    const basePlan = planSource === 'llm' && planLlm ? planLlm : plan;
+    const activePlan = planView === 'plan2' && basePlan?.plan2 ? basePlan.plan2 : basePlan;
 
     const tabs: { id: TabId; label: string; icon: any }[] = [
         { id: 'rankings', label: 'Rankings', icon: BarChart3 },
@@ -884,6 +925,19 @@ export default function CockpitDashboard() {
                                 <option value="monitor">Monitor</option>
                                 <option value="pass">Pass</option>
                             </select>
+                            <select value={llmFilter} onChange={e => setLlmFilter(e.target.value)}
+                                title="Filter by the RS2 local-LLM verdict"
+                                className={clsx('rounded-md border bg-secondary/20 px-2 py-1.5 text-xs font-semibold',
+                                    llmFilter === 'all' ? 'border-border' : 'border-sky-500/50 text-sky-300')}>
+                                <option value="all">All LLM</option>
+                                <option value="reviewed">LLM: reviewed</option>
+                                <option value="promoted">LLM: promoted</option>
+                                <option value="demoted">LLM: demoted</option>
+                                <option value="vetoed">LLM: vetoed</option>
+                                <option value="undervalued">LLM: undervalued</option>
+                                <option value="fair">LLM: fair</option>
+                                <option value="overvalued">LLM: overvalued</option>
+                            </select>
                             <select value={sectorFilter} onChange={e => setSectorFilter(e.target.value)}
                                 className="rounded-md border border-border bg-secondary/20 px-2 py-1.5 text-xs font-semibold">
                                 <option value="all">All sectors</option>
@@ -921,7 +975,7 @@ export default function CockpitDashboard() {
                                                 </td>
                                                 <td className="px-3 py-2 font-mono text-sm font-black text-emerald-300">{e.fct_composite?.toFixed(1)}</td>
                                                 <td className="px-3 py-2"><ContributionBar entry={e} /></td>
-                                                <td className="px-3 py-2"><BandChip band={e.fct_band} veto={e.fct_veto} /></td>
+                                                <td className="px-3 py-2"><div className="flex flex-wrap items-center gap-1"><BandChip band={e.fct_band} veto={e.fct_veto} /><LlmChip entry={e} /></div></td>
                                                 <td className="px-3 py-2 font-mono font-bold">
                                                     {gap === null || gap === undefined ? <span className="text-muted-foreground">—</span> :
                                                         <span className={gap > 5 ? 'text-amber-300' : gap < -5 ? 'text-emerald-300' : 'text-muted-foreground'}>
@@ -1034,6 +1088,12 @@ export default function CockpitDashboard() {
                                         {b}
                                     </button>
                                 ))}
+                                <button onClick={() => setShowLlm(v => !v)}
+                                    className={clsx('rounded border px-2 py-0.5 text-[10px] font-black uppercase transition',
+                                        showLlm ? 'border-sky-400 text-sky-300' : 'border-border text-muted-foreground opacity-50 hover:opacity-80')}
+                                    title="Overlay the LLM-variant NAV lines (dashed) for baseline-vs-LLM comparison">
+                                    LLM overlay (dashed)
+                                </button>
                             </div>
                             <ResponsiveContainer width="100%" height={280}>
                                 <LineChart data={navCurve}>
@@ -1046,6 +1106,11 @@ export default function CockpitDashboard() {
                                     <Line type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} />
+                                    {showLlm && [
+                                        <Line key="pl" type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#34d399" dot={false} strokeWidth={2} strokeDasharray="5 3" />,
+                                        <Line key="p2l" type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#f472b6" dot={false} strokeWidth={2} strokeDasharray="5 3" />,
+                                        <Line key="eql" type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#38bdf8" dot={false} strokeWidth={2} strokeDasharray="5 3" />,
+                                    ]}
                                     {allBenches.filter(b => benchSel.has(b)).map(b => (
                                         <Line key={b} type="monotone" dataKey={b.toLowerCase()} name={b}
                                             stroke={benchColor(b)} dot={false} strokeWidth={1.5} strokeDasharray={benchDash(b)} />
@@ -1199,11 +1264,29 @@ export default function CockpitDashboard() {
                             overlay={overlay} stockInfo={stockInfo} onSelect={setSelected}
                             user={auth.user} onRequireLogin={() => setShowAuth(true)} />
 
+                        {/* Baseline vs LLM-overlay source (A/B) — LLM option only when the variant exists */}
+                        <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-xs font-bold text-muted-foreground">Source:</span>
+                            {([['baseline', 'Baseline', 'quant only'],
+                               ['llm', 'LLM overlay', planLlm ? 'RS2 verdicts' : 'no data yet']] as const).map(([id, lbl, sub]) => (
+                                <button key={id} onClick={() => planLlm || id === 'baseline' ? setPlanSource(id) : null}
+                                    disabled={id === 'llm' && !planLlm}
+                                    className={clsx('rounded-md border px-3 py-1.5 text-xs font-bold transition-colors',
+                                        id === 'llm' && !planLlm ? 'cursor-not-allowed border-border bg-secondary/10 text-muted-foreground/40'
+                                            : planSource === id ? 'border-sky-500/50 bg-sky-500/15 text-sky-300'
+                                                : 'border-border bg-secondary/20 text-muted-foreground hover:text-foreground')}>
+                                    {lbl} <span className="font-mono opacity-70">· {sub}</span>
+                                </button>
+                            ))}
+                            {planSource === 'llm' && (
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-sky-300/80">comparing LLM-adjusted Research-Now</span>
+                            )}
+                        </div>
                         {/* Suggested-plan selector: value core vs hybrid */}
                         <div className="flex flex-wrap items-center gap-2">
                             <span className="text-xs font-bold text-muted-foreground">Suggested plan:</span>
-                            {([['plan', 'Value core', `${plan.invested_pct}% inv`],
-                               ['plan2', 'Hybrid (+ quality sleeve)', plan.plan2 ? `${plan.plan2.invested_pct}% inv` : '—']] as const).map(([id, lbl, sub]) => (
+                            {([['plan', 'Value core', `${basePlan.invested_pct}% inv`],
+                               ['plan2', 'Hybrid (+ quality sleeve)', basePlan.plan2 ? `${basePlan.plan2.invested_pct}% inv` : '—']] as const).map(([id, lbl, sub]) => (
                                 <button key={id} onClick={() => setPlanView(id)}
                                     className={clsx('rounded-md border px-3 py-1.5 text-xs font-bold transition-colors',
                                         planView === id ? 'border-emerald-500/50 bg-emerald-500/15 text-emerald-300'
