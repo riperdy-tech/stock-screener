@@ -660,6 +660,7 @@ export default function CockpitDashboard() {
 
     const [search, setSearch] = useState('');
     const [bandFilter, setBandFilter] = useState<string>('all');
+    const [llmFilter, setLlmFilter] = useState<string>('all');   // filter rankings by RS2 LLM verdict
     const [sectorFilter, setSectorFilter] = useState<string>('all');
     const [limit, setLimit] = useState(100);
     const [selected, setSelected] = useState<string | null>(null);
@@ -741,13 +742,22 @@ export default function CockpitDashboard() {
 
     const filteredRows = useMemo(() => rows.filter(([t, e]) => {
         if (bandFilter !== 'all' && e.fct_band !== bandFilter) return false;
+        if (llmFilter !== 'all') {
+            const v = e.fct_llm_verdict;
+            if (llmFilter === 'reviewed' && !v) return false;
+            else if (llmFilter === 'promoted' && e.fct_llm !== 'promoted') return false;
+            else if (llmFilter === 'demoted' && e.fct_llm !== 'demoted') return false;
+            else if (llmFilter === 'vetoed' && e.fct_llm_veto !== 'llm_reject') return false;
+            else if ((llmFilter === 'undervalued' || llmFilter === 'fair' || llmFilter === 'overvalued')
+                     && v?.stance !== llmFilter) return false;
+        }
         if (sectorFilter !== 'all' && stockInfo[t]?.sector !== sectorFilter) return false;
         if (search) {
             const q = search.toUpperCase();
             if (!t.includes(q) && !(stockInfo[t]?.name || '').toUpperCase().includes(q)) return false;
         }
         return true;
-    }), [rows, bandFilter, sectorFilter, search, stockInfo]);
+    }), [rows, bandFilter, llmFilter, sectorFilter, search, stockInfo]);
 
     const navCurve = useMemo(() => {
         const L = ledgers?.ledgers;
@@ -914,6 +924,19 @@ export default function CockpitDashboard() {
                                 <option value="watchlist">Watchlist</option>
                                 <option value="monitor">Monitor</option>
                                 <option value="pass">Pass</option>
+                            </select>
+                            <select value={llmFilter} onChange={e => setLlmFilter(e.target.value)}
+                                title="Filter by the RS2 local-LLM verdict"
+                                className={clsx('rounded-md border bg-secondary/20 px-2 py-1.5 text-xs font-semibold',
+                                    llmFilter === 'all' ? 'border-border' : 'border-sky-500/50 text-sky-300')}>
+                                <option value="all">All LLM</option>
+                                <option value="reviewed">LLM: reviewed</option>
+                                <option value="promoted">LLM: promoted</option>
+                                <option value="demoted">LLM: demoted</option>
+                                <option value="vetoed">LLM: vetoed</option>
+                                <option value="undervalued">LLM: undervalued</option>
+                                <option value="fair">LLM: fair</option>
+                                <option value="overvalued">LLM: overvalued</option>
                             </select>
                             <select value={sectorFilter} onChange={e => setSectorFilter(e.target.value)}
                                 className="rounded-md border border-border bg-secondary/20 px-2 py-1.5 text-xs font-semibold">

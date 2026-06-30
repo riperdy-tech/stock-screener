@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-06-30T04:20:50Z
+Generated: 2026-06-30T04:37:48Z
 Macro flags: none
 Invested: **53.34%**  |  Cash: **46.66%**  |  Positions: 15
 
