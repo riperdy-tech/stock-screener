@@ -16,7 +16,7 @@ import {
     HelpCircle, Layers3, LineChart as LineChartIcon, RefreshCw, Search, ShieldAlert, X,
 } from 'lucide-react';
 import {
-    Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ReferenceLine,
+    Bar, BarChart, Brush, CartesianGrid, Legend, Line, LineChart, ReferenceLine,
     ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts';
 import {
@@ -1107,14 +1107,17 @@ export default function CockpitDashboard() {
                                     <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} />
                                     <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} />
                                     {showLlm && [
-                                        <Line key="pl" type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#34d399" dot={false} strokeWidth={2} strokeDasharray="5 3" />,
-                                        <Line key="p2l" type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#f472b6" dot={false} strokeWidth={2} strokeDasharray="5 3" />,
-                                        <Line key="eql" type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#38bdf8" dot={false} strokeWidth={2} strokeDasharray="5 3" />,
+                                        <Line key="pl" type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#fbbf24" dot={false} strokeWidth={2.5} strokeDasharray="7 3" />,
+                                        <Line key="p2l" type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#fb923c" dot={false} strokeWidth={2.5} strokeDasharray="7 3" />,
+                                        <Line key="eql" type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#2dd4bf" dot={false} strokeWidth={2.5} strokeDasharray="7 3" />,
                                     ]}
                                     {allBenches.filter(b => benchSel.has(b)).map(b => (
                                         <Line key={b} type="monotone" dataKey={b.toLowerCase()} name={b}
                                             stroke={benchColor(b)} dot={false} strokeWidth={1.5} strokeDasharray={benchDash(b)} />
                                     ))}
+                                    <Brush dataKey="date" height={24} stroke="#475569" fill="#0b1220"
+                                        travellerWidth={8} gap={1}
+                                        tickFormatter={(d: string) => (typeof d === 'string' ? d.slice(5) : d)} />
                                 </LineChart>
                             </ResponsiveContainer>
                             {navCurve.length < 5 && (
