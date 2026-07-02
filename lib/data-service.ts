@@ -347,6 +347,48 @@ export async function fetchPortfolioPlanLlm(): Promise<any | null> {
     return fetchJson('/data/portfolio_plan_llm.json');
 }
 
+// ── RS2 local-LLM research + outcomes (public/data/rs2/, published by the local orchestrator) ──
+export interface Rs2RunMeta {
+    ts: string;
+    date: string | null;
+    action: string | null;
+    conviction: number | null;
+    stance: string | null;
+    method: string | null;
+    expectations_gap_pts: number | null;
+    mos_pct: number | null;
+    fair_value: number | null;
+    recommended_weight_pct: number | null;
+    band_at_analysis: string | null;
+    report: string | null;
+}
+export interface Rs2IndexPayload {
+    generated_at: string;
+    k_full_per_ticker: number;
+    count: number;
+    tickers: Record<string, { latest: Rs2RunMeta; history: Rs2RunMeta[] }>;
+}
+export interface Rs2Bundle {
+    ticker: string;
+    ts: string;
+    date: string | null;
+    verdict: Record<string, any>;
+    final_md: string | null;
+    research_md: string | null;
+    research_generated: string | null;
+    raw: Record<string, string>;
+}
+
+// Index of ALL runs (metadata only) — null/absent until the local engine publishes. No-op safe.
+export async function fetchRs2Index(): Promise<Rs2IndexPayload | null> {
+    return fetchJson<Rs2IndexPayload>('/data/rs2/index.json');
+}
+// One run's full text (verdict + final analysis + research brief + raw stages). Only the newest K per
+// ticker exist as full bundles; older runs are metadata-only in the index (fetch returns null).
+export async function fetchRs2Report(ticker: string, ts: string): Promise<Rs2Bundle | null> {
+    return fetchJson<Rs2Bundle>(`/data/rs2/${encodeURIComponent(ticker.toUpperCase())}/${ts}.json`);
+}
+
 export async function fetchOutcomes(): Promise<any | null> {
     return fetchJson('/data/outcome_backfill.json');
 }

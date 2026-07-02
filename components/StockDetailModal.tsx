@@ -1,10 +1,9 @@
 import { X, Activity, Sparkles, Layers3, ShieldCheck, Telescope, Youtube, History } from "lucide-react";
 import { type ParadigmHistoryEvent, type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
 import { useLanguage } from "@/components/LanguageContext";
-import ReactMarkdown from "react-markdown";
-import { useEffect, useState, type ReactNode } from "react";
+import { Rs2AnalysisPanel } from "./Rs2AnalysisPanel";
+import { useState, type ReactNode } from "react";
 import { Market, formatKoreanWon, formatTaiwanNTD } from "@/lib/data-service";
-import { supabase } from "@/lib/supabase";
 import clsx from "clsx";
 import { YoutubeStrategyEvaluation, formatStrategyNumber } from "@/lib/youtube-strategy";
 
@@ -21,96 +20,8 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
     const { t } = useLanguage();
     const { candidate, reasons, flags, score } = result;
 
-    const [savedReport, setSavedReport] = useState<any>(null);
-    const [reportHistory, setReportHistory] = useState<any[]>([]);
-    const [showReports, setShowReports] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
-    const [reportCopied, setReportCopied] = useState(false);
-
-    useEffect(() => {
-        let isMounted = true;
-        const checkReport = async () => {
-            const basePath = '';
-            let fileReport: any = null;
-            let dbReport: any = null;
-
-            // 1. Check Static File (Local/Pushed)
-            try {
-                const res = await fetch(`${basePath}/data/reports/${candidate.symbol}.json?t=${new Date().getTime()}`);
-                if (res.ok) fileReport = await res.json();
-            } catch (e) {}
-
-            // 2. Check Supabase Database (Live/Cloud)
-            try {
-                const { data, error } = await supabase
-                    .from('ai_reports')
-                    .select('*')
-                    .eq('ticker', candidate.symbol)
-                    .order('created_at', { ascending: false });
-                
-                if (data && data.length > 0 && !error) {
-                    setReportHistory(data);
-                    const latestDb = {
-                        ...data[0],
-                        timestamp: data[0].created_at
-                    };
-                    dbReport = latestDb;
-                }
-            } catch (e) {}
-
-            // 3. Compare and Choose the Latest
-            if (isMounted) {
-                let latest = null;
-                if (fileReport && dbReport) {
-                    // Show whichever is newer
-                    const fileTime = new Date(fileReport.timestamp).getTime();
-                    const dbTime = new Date(dbReport.timestamp).getTime();
-                    latest = dbTime > fileTime ? dbReport : fileReport;
-                } else {
-                    latest = dbReport || fileReport;
-                }
-
-                if (latest) {
-                    setSavedReport((prev: any) => {
-                        if (!prev || prev.timestamp !== latest.timestamp) {
-                            return latest;
-                        }
-                        return prev;
-                    });
-                }
-            }
-        };
-        
-        checkReport();
-        const interval = setInterval(checkReport, 5000); // Check every 5 seconds
-
-    return () => {
-            isMounted = false;
-            clearInterval(interval);
-        };
-    }, [candidate.symbol]);
-
-
-    const downloadDsResult = () => {
-        if (!savedReport) return;
-        const text = `Date: ${savedReport.timestamp}\nCost: $${savedReport.cost}\n\n${savedReport.content}`;
-        const blob = new Blob([text], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${candidate.symbol}_deepseek_report.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    };
-
-    const copyDsResult = () => {
-        if (!savedReport) return;
-        navigator.clipboard.writeText(savedReport.content);
-        setReportCopied(true);
-        setTimeout(() => setReportCopied(false), 2000);
-    };
+    const [activeTab, setActiveTab] = useState<string>("rs2");
 
     const reverse = result.reverse;
     const paradigm = result.paradigm;
@@ -133,12 +44,11 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
             ? formatTaiwanNTD(candidate.price, 2)
             : `$${Number(candidate.price || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     const sectionLinks = [
+        { id: "rs2", label: "RS2 Analysis" },
         { id: "quant", label: "Quant" },
-        { id: "reports", label: "Reports" },
         ...(paradigm && (paradigm.pdm_themes?.length > 0 || paradigm.pdm_signal != null) ? [{ id: "paradigm", label: "Paradigm" }] : []),
         ...(youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0 ? [{ id: "youtube", label: "YouTube" }] : []),
         ...(reverse && reverse.rev_band && reverse.rev_band !== 'Excluded' ? [{ id: "reverse", label: "Reverse" }] : []),
-        ...(savedReport ? [{ id: "ai-report", label: "AI Report" }] : []),
     ];
     const quantRows = [
         {
@@ -194,10 +104,6 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
     const quantPassCount = quantRows.filter(row => row.pass).length;
     const quantWatchCount = quantRows.filter(row => !row.pass && row.warning).length;
     const quantFailCount = quantRows.length - quantPassCount - quantWatchCount;
-
-    const scrollToSection = (id: string) => {
-        document.getElementById(`scorecard-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-3 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
@@ -389,26 +295,36 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             />
                         </div>
 
-                        <nav aria-label="Scorecard sections" className="sticky top-[168px] z-10 -mx-1 overflow-x-auto border-y border-border/60 bg-card/95 px-1 py-2.5 backdrop-blur-xl sm:top-[142px] lg:top-[128px]">
+                        <nav aria-label="Sections" className="sticky top-[168px] z-10 -mx-1 overflow-x-auto border-y border-border/60 bg-card/95 px-1 py-2.5 backdrop-blur-xl sm:top-[142px] lg:top-[128px]">
                             <div className="flex min-w-max gap-2">
-                                {sectionLinks.map((section, index) => (
-                                    <button
-                                        key={section.id}
-                                        type="button"
-                                        onClick={() => scrollToSection(section.id)}
-                                        className="group flex items-center gap-2 rounded-lg border border-border/60 bg-secondary/35 px-3 py-2 text-sm font-black text-muted-foreground transition-colors hover:border-primary/50 hover:bg-secondary/70 hover:text-foreground"
-                                    >
-                                        <span className="flex h-6 w-6 items-center justify-center rounded-md border border-border/60 bg-background/40 font-mono text-xs font-black text-muted-foreground transition-colors group-hover:border-primary/40 group-hover:text-primary">
-                                            {String(index + 1).padStart(2, '0')}
-                                        </span>
-                                        <span>{section.label}</span>
-                                    </button>
-                                ))}
+                                {sectionLinks.map((section) => {
+                                    const isActive = activeTab === section.id;
+                                    return (
+                                        <button
+                                            key={section.id}
+                                            type="button"
+                                            onClick={() => setActiveTab(section.id)}
+                                            className={clsx(
+                                                "flex items-center gap-2 rounded-lg border px-3.5 py-2 text-sm font-black transition-colors",
+                                                isActive
+                                                    ? "border-primary/60 bg-primary/15 text-primary"
+                                                    : "border-border/60 bg-secondary/35 text-muted-foreground hover:border-primary/40 hover:bg-secondary/70 hover:text-foreground"
+                                            )}
+                                        >
+                                            <span>{section.label}</span>
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </nav>
 
+                        {/* RS2 local-LLM research + outcomes (primary analysis surface) */}
+                        <div className={clsx("rounded-lg border border-border/60 bg-card/60 p-3 shadow-sm sm:p-4", activeTab !== "rs2" && "hidden")}>
+                            <Rs2AnalysisPanel symbol={candidate.symbol} displayTicker={displayTicker} />
+                        </div>
+
                         {/* Phase 1: Quant Metrics */}
-                        <div id="scorecard-quant" className="scroll-mt-28 rounded-lg border border-border/60 bg-card/60 p-3 shadow-sm sm:p-4">
+                        <div id="scorecard-quant" className={clsx("scroll-mt-28 rounded-lg border border-border/60 bg-card/60 p-3 shadow-sm sm:p-4", activeTab !== "quant" && "hidden")}>
                             <div className="mb-3 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                                 <SectionHeading
                                     icon={<Activity className="h-4 w-4 text-primary" />}
@@ -435,102 +351,9 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         </div>
 
-                        <div id="scorecard-reports" className="scroll-mt-28 rounded-lg border border-border/60 bg-card/60 p-3 shadow-sm sm:p-4">
-                            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                                <SectionHeading
-                                    icon={<Sparkles className="h-4 w-4 text-blue-400" />}
-                                    title="Research Reports"
-                                    body="Open saved Deepseek research for this ticker, or generate a fresh prompt when the thesis needs another pass."
-                                />
-                                <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:justify-end">
-                                    <div className="rounded-lg border border-blue-500/25 bg-blue-500/[0.06] px-3 py-2">
-                                        <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">
-                                            Cloud records
-                                        </div>
-                                        <div className="mt-1 font-mono text-lg font-black text-blue-400">
-                                            {reportHistory.length}
-                                        </div>
-                                    </div>
-                                    <button
-                                        onClick={() => setShowReports(!showReports)}
-                                        className={clsx(
-                                            "flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm font-black shadow-sm transition-all active:scale-95 sm:w-auto",
-                                            showReports
-                                                ? "border-primary bg-primary text-primary-foreground"
-                                                : "border-border/60 bg-secondary/45 text-foreground hover:border-primary/40 hover:bg-secondary/70"
-                                        )}
-                                    >
-                                        <Activity className="h-4 w-4" />
-                                        {showReports ? "Close reports" : "View reports"}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {showReports && (
-                            <div className="animate-in slide-in-from-top-2 rounded-lg border border-blue-500/20 bg-blue-500/[0.035] p-3 duration-300">
-                                <div className="mb-3 flex flex-col gap-1">
-                                    <h3 className="flex items-center gap-2 text-sm font-black tracking-tight">
-                                        <Sparkles className="h-4 w-4 text-blue-400" /> Saved AI Research
-                                    </h3>
-                                    <p className="text-xs leading-relaxed text-muted-foreground">
-                                        Pick the most recent report, or compare older records when the thesis has changed.
-                                    </p>
-                                </div>
-                                <div className="space-y-2.5">
-                                    {reportHistory.length === 0 ? (
-                                        <div className="rounded-lg border border-dashed border-border bg-card/55 p-3 text-center">
-                                            <div className="text-sm font-black tracking-tight text-foreground">No saved reports yet</div>
-                                            <p className="mx-auto mt-1.5 max-w-lg text-xs leading-relaxed text-muted-foreground">
-                                                Use Generate AI Prompt in the primary actions rail to create the first research handoff for this ticker.
-                                            </p>
-                                        </div>
-                                    ) : reportHistory.map((report, idx) => (
-                                        <div
-                                            key={report.created_at}
-                                            className="flex flex-col gap-2.5 rounded-lg border border-border/70 bg-card/90 p-2.5 shadow-sm transition-colors hover:border-primary/40 sm:flex-row sm:items-center sm:justify-between"
-                                        >
-                                            <div className="flex min-w-0 gap-2.5">
-                                                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-blue-500/25 bg-blue-500/10 font-mono text-[11px] font-black text-blue-400">
-                                                    #{idx + 1}
-                                                </span>
-                                                <div className="min-w-0">
-                                                    <div className="flex flex-wrap items-center gap-1.5">
-                                                        <span className="text-sm font-black tracking-tight">Deepseek V4-Pro Analysis</span>
-                                                        {idx === 0 && (
-                                                            <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-xs font-black text-emerald-400">
-                                                                Latest
-                                                            </span>
-                                                        )}
-                                                    </div>
-                                                    <div className="mt-1.5 flex flex-wrap gap-1.5">
-                                                        <span className="rounded-md border border-border/60 bg-secondary/35 px-2 py-1 font-mono text-xs font-bold text-muted-foreground">
-                                                            {new Date(report.created_at).toLocaleString()}
-                                                        </span>
-                                                        <span className="rounded-md border border-blue-500/20 bg-blue-500/10 px-2 py-1 font-mono text-xs font-bold text-blue-300">
-                                                            ${report.cost || '0.00'}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button
-                                                onClick={() => {
-                                                    setSavedReport({...report, timestamp: report.created_at});
-                                                    setShowReports(false);
-                                                }}
-                                                className="w-full rounded-md border border-primary/30 bg-primary/10 px-2.5 py-1.5 text-xs font-black text-primary transition-colors hover:bg-primary/15 sm:w-auto"
-                                            >
-                                                Open report
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
                         {/* WS1: Paradigm Dimension Breakdown */}
                         {result.paradigm && (result.paradigm.pdm_themes?.length > 0 || result.paradigm.pdm_signal != null) && (
-                            <div id="scorecard-paradigm" className="scroll-mt-28 rounded-lg border border-purple-500/25 bg-purple-500/[0.04] p-3 shadow-sm sm:p-4">
+                            <div id="scorecard-paradigm" className={clsx("scroll-mt-28 rounded-lg border border-purple-500/25 bg-purple-500/[0.04] p-3 shadow-sm sm:p-4", activeTab !== "paradigm" && "hidden")}>
                                 <div className="mb-3">
                                     <SectionHeading
                                         icon={<Layers3 className="h-4 w-4 text-purple-400" />}
@@ -627,7 +450,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         )}
 
                         {youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0 && (
-                            <div id="scorecard-youtube" className="scroll-mt-28 rounded-lg border border-red-500/25 bg-red-500/[0.04] p-3 shadow-sm sm:p-4">
+                            <div id="scorecard-youtube" className={clsx("scroll-mt-28 rounded-lg border border-red-500/25 bg-red-500/[0.04] p-3 shadow-sm sm:p-4", activeTab !== "youtube" && "hidden")}>
                                 <div className="mb-3">
                                     <SectionHeading
                                         icon={<Youtube className="h-4 w-4 text-red-300" />}
@@ -654,7 +477,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* Phase 9: Reverse Engine Breakdown */}
                         {result.reverse && result.reverse.rev_band && result.reverse.rev_band !== 'Excluded' && (
-                            <div id="scorecard-reverse" className="scroll-mt-28 rounded-lg border border-emerald-500/25 bg-emerald-500/[0.04] p-3 shadow-sm sm:p-4">
+                            <div id="scorecard-reverse" className={clsx("scroll-mt-28 rounded-lg border border-emerald-500/25 bg-emerald-500/[0.04] p-3 shadow-sm sm:p-4", activeTab !== "reverse" && "hidden")}>
                                 <div className="mb-3">
                                     <SectionHeading
                                         icon={<ShieldCheck className="h-4 w-4 text-emerald-400" />}
@@ -708,43 +531,6 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         )}
 
-                        {/* Deepseek AI Report */}
-                        {savedReport && (
-                            <div id="scorecard-ai-report" className="scroll-mt-28 rounded-lg border border-blue-500/25 bg-blue-500/[0.04] p-3 shadow-sm sm:p-4">
-                                <div className="mb-3 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-                                    <SectionHeading
-                                        icon={<Sparkles className="h-4 w-4 text-blue-400" />}
-                                        title="AI Valuation Report"
-                                        body="Deepseek V4.0 Pro research output, kept in a larger reading pane for thesis review."
-                                    />
-                                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:min-w-[30rem]">
-                                        <ReportMetaStat label="Generated" value={new Date(savedReport.timestamp).toLocaleString()} />
-                                        <ReportMetaStat label="Cost" value={`$${savedReport.cost || '0.00'}`} />
-                                        <ReportMetaStat label="Tokens" value={`${savedReport.usage?.total_tokens || "n/a"}`} />
-                                    </div>
-                                </div>
-                                <div className="bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
-                                    <div className="flex shrink-0 flex-col gap-3 border-b border-blue-500/20 bg-blue-500/10 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
-                                        <span className="text-sm leading-relaxed text-muted-foreground">
-                                            Generated {new Date(savedReport.timestamp).toLocaleString()}
-                                        </span>
-                                        <div className="flex flex-wrap items-center gap-2">
-                                            <button onClick={downloadDsResult} className="flex items-center gap-1 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-semibold shadow-sm transition-colors hover:bg-secondary/80">Download .txt</button>
-                                            <button onClick={copyDsResult} className="flex items-center gap-1 rounded-md bg-[#4d6bfe] px-3 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#3b54d1]">
-                                                {reportCopied ? "Copied" : "Copy Result"}
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div className="p-4 overflow-y-auto max-h-[600px] custom-scrollbar">
-                                        <div className="prose prose-invert prose-sm max-w-none text-foreground/90 leading-relaxed prose-headings:text-foreground prose-p:text-sm prose-p:leading-6 prose-li:text-sm prose-li:leading-6 prose-a:text-blue-400">
-                                            <ReactMarkdown>
-                                                {savedReport.content}
-                                            </ReactMarkdown>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
                 </div>
             </div>
         </div>
@@ -785,15 +571,6 @@ function InsightNote({ tone, label, text }: { tone: "positive" | "caution"; labe
         )}>
             <div className="text-xs font-black uppercase tracking-wider">{label}</div>
             <p className="mt-1 text-foreground/85">{text}</p>
-        </div>
-    );
-}
-
-function ReportMetaStat({ label, value }: { label: string; value: string }) {
-    return (
-        <div className="min-w-0 rounded-lg border border-blue-500/25 bg-blue-500/[0.06] px-3 py-2.5">
-            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-1 truncate font-mono text-xs font-black text-blue-300" title={value}>{value}</div>
         </div>
     );
 }

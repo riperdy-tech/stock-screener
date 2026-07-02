@@ -24,7 +24,6 @@ import {
     fetchOverlaySignals, fetchPaperLedgers, fetchPortfolioPlan, fetchPortfolioPlanLlm, fetchStocks, fetchValuationModels,
     FactorEntry, FactorScoresPayload, ValuationModel,
 } from '@/lib/data-service';
-import { dcfValue } from '@/lib/dcf';
 import { quarterKelly, POSITION_CAP_PCT } from '@/lib/kelly';
 
 type TabId = 'rankings' | 'track' | 'portfolio' | 'validation';
@@ -119,7 +118,7 @@ function HelpModal({ onClose }: { onClose: () => void }) {
                         <p><b>Band</b>: Research Now = top 3% · Watchlist = top 10% · Monitor = top 30% · Pass = the rest.</p>
                         <p><b>Veto</b> (red chip): automatic disqualification regardless of score — failed the reverse engine&apos;s safety checks, fired both forensic-accounting alarms, or is heavily diluting shareholders. The reason is written on the chip.</p>
                         <p><b>DCF gap</b>: compares the growth the current PRICE requires vs the growth the company has actually DELIVERED (last 5 years of SEC filings). <span className="text-emerald-300">Green negative</span> = priced for less growth than demonstrated (potential bargain). <span className="text-amber-300">Amber positive</span> = price needs acceleration nobody has proven yet (you must believe a story).</p>
-                        <p>Click any row for the per-stock detail: factor profile + an interactive valuation workbench where you can drag growth/discount sliders and watch fair value change.</p>
+                        <p>Click any row for the per-stock detail: factor profile, the reverse-DCF read (the growth the price implies vs what the company has demonstrated), and the RS2 local-LLM research + verdict.</p>
                     </HelpSection>
 
                     <HelpSection title="Track Record tab — the honest meter">
@@ -258,16 +257,8 @@ function FactorProfile({ entry }: { entry: FactorEntry }) {
     );
 }
 
-function ValuationWorkbench({ ticker, model, marketCap }: { ticker: string; model: ValuationModel | undefined; marketCap: number | undefined }) {
+function ValuationWorkbench({ model }: { ticker: string; model: ValuationModel | undefined; marketCap: number | undefined }) {
     const a = model?.assumptions;
-    const [growth, setGrowth] = useState<number>(model?.implied_growth ?? 0.08);
-    const [wacc, setWacc] = useState<number>(a ? a.wacc / 100 : 0.10);
-
-    useEffect(() => {
-        setGrowth(model?.implied_growth ?? 0.08);
-        setWacc(a ? a.wacc / 100 : 0.10);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ticker]);
 
     if (!model || model.implied_growth === null || !a) {
         return (
@@ -277,9 +268,6 @@ function ValuationWorkbench({ ticker, model, marketCap }: { ticker: string; mode
         );
     }
 
-    const fair = dcfValue({ baseCf: a.base_cf, growth, wacc, terminalGrowth: a.terminal_growth });
-    const mcap = marketCap || a.market_cap;
-    const upside = fair !== null && mcap ? fair / mcap - 1 : null;
     const evidenced = model.hist_revenue_cagr_5y;
 
     return (
@@ -304,25 +292,6 @@ function ValuationWorkbench({ ticker, model, marketCap }: { ticker: string; mode
                     {model.verdict}
                 </p>
             )}
-            <div className="space-y-2 rounded-lg border border-border/60 p-2.5">
-                <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">Scenario sliders (live DCF)</div>
-                <label className="block text-xs">
-                    <span className="flex justify-between"><span>Stage-1 growth</span><span className="font-mono font-black">{fmtPct(growth)}</span></span>
-                    <input type="range" min={-30} max={60} step={1} value={Math.round(growth * 100)}
-                        onChange={e => setGrowth(Number(e.target.value) / 100)} className="w-full accent-emerald-400" />
-                </label>
-                <label className="block text-xs">
-                    <span className="flex justify-between"><span>Discount rate (WACC)</span><span className="font-mono font-black">{fmtPct(wacc)}</span></span>
-                    <input type="range" min={6} max={16} step={0.5} value={wacc * 100}
-                        onChange={e => setWacc(Number(e.target.value) / 100)} className="w-full accent-sky-400" />
-                </label>
-                <div className="flex items-center justify-between border-t border-border/50 pt-2 text-xs">
-                    <span className="text-muted-foreground">Fair value vs market cap</span>
-                    <span className={clsx('font-mono text-sm font-black', upside !== null && upside >= 0 ? 'text-success' : 'text-danger')}>
-                        {fair !== null ? fmtMcap(fair) : '—'} ({upside !== null ? `${upside >= 0 ? '+' : ''}${(upside * 100).toFixed(0)}%` : '—'})
-                    </span>
-                </div>
-            </div>
             <p className="text-[10px] text-muted-foreground">
                 Base: {fmtMcap(a.base_cf)} {a.base_cf_kind.replace(/_/g, ' ')} (FY{a.fiscal_year}) · terminal {fmtPct(a.terminal_growth)} · sector WACC {a.wacc}%. Not a price target.
             </p>
