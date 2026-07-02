@@ -124,8 +124,8 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
     const action = v.action ?? meta.action;
     const stance = v.stance ?? meta.stance;
     const conviction = (v.conviction ?? meta.conviction) as number | null;
-    const gap = (v.expectations_gap_pts ?? meta.expectations_gap_pts) as number | null;
-    const weight = (v.recommended_weight_pct ?? meta.recommended_weight_pct) as number | null;
+    const iv = (v.fair_value ?? (meta as any).fair_value) as number | null;
+    const mos = (v.mos_pct ?? (meta as any).mos_pct) as number | null;
     const band = (v.band_at_analysis ?? meta.band_at_analysis) as string | null;
     const method = v.method ?? meta.method;
     const date = v.date ?? meta.date;
@@ -163,8 +163,9 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
             {/* colored metric boxes */}
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
                 <Metric label="Conviction" value={conviction != null ? `${conviction}/15` : "—"} tone={convTone(conviction)} />
-                <Metric label="Exp. gap" value={gap != null ? `${gap > 0 ? "+" : ""}${gap} pt` : "—"} tone={gapTone(gap)} />
-                <Metric label="Rec. weight" value={weight != null ? `${weight}%` : "—"} tone="text-foreground" />
+                <Metric label="Intrinsic Value" value={iv != null ? `$${iv}` : "—"} tone="text-foreground" />
+                <Metric label="Margin of Safety" value={mos != null ? `${mos > 0 ? "+" : ""}${mos}%` : "—"}
+                    tone={mos == null ? "text-muted-foreground" : mos >= 0 ? "text-success" : "text-danger"} />
                 <Metric label="Band" value={bandLabel(band)} tone={bandTone(band)} />
                 <Metric label="Analyzed" value={fmtDate(date)} tone="text-foreground/80" />
             </div>
