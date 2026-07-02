@@ -1696,7 +1696,7 @@ export default function CockpitDashboard() {
             {/* ── Detail slide-over ─────────────────────────────────── */}
             {selected && selectedEntry && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 p-3 backdrop-blur-sm sm:p-6" onClick={() => setSelected(null)}>
-                    <div className="max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-xl border border-border bg-background p-5 shadow-2xl"
+                    <div className="max-h-[92vh] w-full max-w-[95vw] xl:max-w-7xl overflow-y-auto rounded-xl border border-border bg-background p-5 shadow-2xl"
                         onClick={e => e.stopPropagation()}>
                         <div className="flex items-start justify-between">
                             <div>

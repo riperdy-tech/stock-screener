@@ -53,7 +53,7 @@ const mdComponents = {
 
 function Md({ children }: { children: string }) {
     return (
-        <div className="prose prose-invert prose-sm max-w-none leading-relaxed text-foreground/90 prose-headings:font-black prose-headings:text-foreground prose-p:leading-6 prose-li:leading-6 prose-strong:text-foreground prose-a:text-blue-400">
+        <div className="prose prose-invert prose-sm max-w-none break-words leading-relaxed text-foreground/90 prose-headings:font-black prose-headings:text-foreground prose-p:leading-6 prose-li:leading-6 prose-strong:text-foreground prose-a:text-blue-400 prose-pre:whitespace-pre-wrap prose-pre:break-words prose-pre:overflow-x-hidden prose-code:whitespace-pre-wrap">
             <ReactMarkdown components={mdComponents}>{children}</ReactMarkdown>
         </div>
     );
