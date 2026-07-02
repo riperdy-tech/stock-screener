@@ -199,6 +199,22 @@ def sell(ledger, ticker, price, as_of, reason):
     })
 
 
+def trim(ledger, ticker, price, sell_value, as_of, reason):
+    """Partial sell to fund a rebalance — reduces shares, keeps the position + entry basis
+    (no closed round-trip logged; the position is still open)."""
+    h = ledger["state"]["holdings"].get(ticker)
+    if not h or price is None or sell_value <= 0:
+        return
+    sell_value = min(sell_value, h["shares"] * price)
+    h["shares"] -= sell_value / price
+    ledger["state"]["cash"] += sell_value * cost_factor()
+    ledger["trades"].append({"date": as_of, "side": "sell", "ticker": ticker,
+                             "price": round(price, 4), "value": round(sell_value * cost_factor(), 4),
+                             "reason": reason})
+    if h["shares"] * price < 0.01:                    # dust guard
+        ledger["state"]["holdings"].pop(ticker, None)
+
+
 def credit_dividends(ledger, as_of):
     """Cash-credit current holders for ex-dates in (last_nav_date, as_of].
 
@@ -249,10 +265,38 @@ def run_target_ledger(ledger, targets, prices, as_of, reason_prefix):
         sell(ledger, t, p, as_of, f"left_{reason_prefix}")
 
     nav, _ = portfolio_value(ledger, prices)
+    entrants = []
     for t in sorted(target_set - held):
         p, stale = mark_price(t, prices, ledger)
         if p is None or stale:
             continue  # never open a position on a stale/absent mark
+        entrants.append(t)
+
+    # Fund entrants when cash is short: trim overweight incumbents toward their target weight.
+    # (The old code bought from cash only — when the target set GREW sharply, e.g. the LLM
+    # research_now set doubling overnight, cash ran out mid-alphabet and the rest of the
+    # entrants were silently skipped, leaving the ledger stuck underweight its own target.)
+    need = sum(targets[t] / 100.0 * nav for t in entrants)
+    shortfall = need - ledger["state"]["cash"]
+    if entrants and shortfall > 0:
+        for t in sorted(held & target_set):
+            if shortfall <= 0:
+                break
+            p, stale = mark_price(t, prices, ledger)
+            if p is None or stale:
+                continue
+            h = ledger["state"]["holdings"].get(t)
+            if not h:
+                continue
+            excess = h["shares"] * p - targets[t] / 100.0 * nav
+            if excess <= 0:
+                continue
+            take = min(excess, shortfall)
+            trim(ledger, t, p, take, as_of, f"rebalance_{reason_prefix}")
+            shortfall -= take
+
+    for t in entrants:
+        p, _ = mark_price(t, prices, ledger)
         spend = targets[t] / 100.0 * nav
         buy(ledger, t, p, spend, as_of, f"entered_{reason_prefix}")
 

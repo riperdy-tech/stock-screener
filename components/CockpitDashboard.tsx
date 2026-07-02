@@ -241,6 +241,48 @@ function StancePill({ stance }: { stance?: string | null }) {
 
 const convColor = (c?: number | null) => c == null ? 'text-muted-foreground' : c >= 10 ? 'text-emerald-300' : c >= 7 ? 'text-amber-300' : 'text-red-300';
 
+// LLM action → leading verb as a colored pill + the full phrase wrapped underneath (no truncation).
+function ActionCell({ action }: { action?: string | null }) {
+    if (!action) return <span className="text-muted-foreground">—</span>;
+    const a = action.toUpperCase();
+    const verb = a.startsWith('BUY') ? 'BUY'
+        : a.startsWith('ACCUM') ? 'ACCUMULATE'
+            : a.startsWith('INITIATE') ? 'INITIATE'
+                : a.startsWith('SELL') || a.startsWith('EXIT') || a.startsWith('TRIM') ? 'REDUCE'
+                    : a.startsWith('AVOID') ? 'AVOID'
+                        : a.startsWith('HOLD') ? 'HOLD' : null;
+    const cls = verb === 'BUY' || verb === 'ACCUMULATE' ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
+        : verb === 'INITIATE' ? 'border-sky-500/40 bg-sky-500/10 text-sky-300'
+            : verb === 'HOLD' ? 'border-amber-500/40 bg-amber-500/10 text-amber-300'
+                : verb === 'AVOID' || verb === 'REDUCE' ? 'border-red-500/40 bg-red-500/10 text-red-300'
+                    : 'border-border bg-secondary/30 text-muted-foreground';
+    return (
+        <div className="min-w-[160px] max-w-[220px]" title={action}>
+            {verb && <span className={clsx('inline-flex rounded-full border px-2 py-0.5 text-[10px] font-black tracking-wider', cls)}>{verb}</span>}
+            <div className="mt-1 text-[10px] normal-case leading-snug text-muted-foreground"
+                style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                {action.toLowerCase()}
+            </div>
+        </div>
+    );
+}
+
+// LLM-lens band cell: the LLM's band front and center; the quant band only when it DIFFERS
+// (small muted caption) — no more redundant twin chips.
+function LlmBandCell({ entry }: { entry: FactorEntry }) {
+    const same = (entry.fct_band_llm ?? entry.fct_band) === entry.fct_band && !entry.fct_llm_veto;
+    return (
+        <div className="space-y-0.5">
+            <BandChip band={entry.fct_band_llm ?? null} veto={entry.fct_llm_veto ?? null} />
+            {!same && (
+                <div className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/70">
+                    quant · {(entry.fct_band || '—').replace(/_/g, ' ')}{entry.fct_veto ? ` (${entry.fct_veto.replace(/_/g, ' ')})` : ''}
+                </div>
+            )}
+        </div>
+    );
+}
+
 function ContributionBar({ entry }: { entry: FactorEntry }) {
     const contributions = entry.fct_contributions;
     if (!contributions) return <div className="h-2 w-full rounded bg-secondary/40" />;
@@ -916,10 +958,9 @@ export default function CockpitDashboard() {
     // Portfolio tab: baseline vs LLM-overlay source, then value core vs hybrid
     const basePlan = planSource === 'llm' && planLlm ? planLlm : plan;
     const activePlan = planView === 'plan2' && basePlan?.plan2 ? basePlan.plan2 : basePlan;
-    // Positions/trades tables follow the lens: llm lens → the *_llm ledgers; compare lens → a mini
-    // Baseline/LLM toggle; quant lens → baseline. 'mine' has no LLM variant (falls back).
-    const wantLlmTables = lens === 'llm' || (lens === 'compare' && posSource === 'llm');
-    const posKey = (wantLlmTables && ledgerView !== 'mine' && ledgers?.ledgers?.[`${ledgerView}_llm`])
+    // Positions/trades tables: Baseline/LLM mini-toggle (Track Record always shows both engines'
+    // stats + NAV lines; only the drill-down tables pick one book at a time). 'mine' has no LLM variant.
+    const posKey = (posSource === 'llm' && ledgerView !== 'mine' && ledgers?.ledgers?.[`${ledgerView}_llm`])
         ? `${ledgerView}_llm` : ledgerView;
     const posLlm = posKey !== ledgerView;
     const hasLlmLedgers = !!(ledgers?.ledgers && (ledgers.ledgers.plan_llm || ledgers.ledgers.equal_llm));
@@ -1055,7 +1096,6 @@ export default function CockpitDashboard() {
                                             <th className="px-3 py-2">Composite</th>
                                             <th className="px-3 py-2 w-52">Factor mix</th>
                                             <th className="px-3 py-2">Band</th>
-                                            <th className="px-3 py-2">DCF gap</th>
                                             <th className="px-3 py-2 text-right">Price</th>
                                             <th className="px-3 py-2 text-right">MCap</th>
                                             <th className="px-3 py-2">Sector</th>
@@ -1064,13 +1104,12 @@ export default function CockpitDashboard() {
                                         <tr>
                                             <th className="px-3 py-2 text-sky-300">LLM #</th>
                                             <th className="px-3 py-2">Stock</th>
-                                            <th className="px-3 py-2 text-sky-300">LLM band · quant band</th>
+                                            <th className="px-3 py-2 text-sky-300">Band</th>
                                             <th className="px-3 py-2 text-sky-300">Stance</th>
                                             <th className="px-3 py-2 text-sky-300">Conv</th>
                                             <th className="px-3 py-2 text-sky-300">Action</th>
                                             <th className="px-3 py-2">Composite</th>
                                             <th className="px-3 py-2 w-44">Factor mix</th>
-                                            <th className="px-3 py-2">DCF gap</th>
                                             <th className="px-3 py-2 text-right">Price</th>
                                             <th className="px-3 py-2 text-right">MCap</th>
                                             <th className="px-3 py-2">Sector</th>
@@ -1121,7 +1160,6 @@ export default function CockpitDashboard() {
                                                     <td className="px-3 py-2 font-mono text-sm font-black text-emerald-300">{e.fct_composite?.toFixed(1)}</td>
                                                     <td className="px-3 py-2"><ContributionBar entry={e} /></td>
                                                     <td className="px-3 py-2"><div className="flex flex-wrap items-center gap-1"><BandChip band={e.fct_band} veto={e.fct_veto} /><LlmChip entry={e} /></div></td>
-                                                    <td className="px-3 py-2 font-mono font-bold">{gapCell}</td>
                                                     <td className="px-3 py-2 text-right font-mono">{info?.price ? `$${info.price.toFixed(2)}` : '—'}</td>
                                                     <td className="px-3 py-2 text-right font-mono">{fmtMcap(info?.marketCap)}</td>
                                                     <td className="px-3 py-2 text-muted-foreground">{info?.sector || '—'}</td>
@@ -1133,20 +1171,15 @@ export default function CockpitDashboard() {
                                                     </td>
                                                     {stockCell}
                                                     <td className="px-3 py-2">
-                                                        <div className="flex flex-wrap items-center gap-1">
-                                                            {lrank !== undefined
-                                                                ? <><BandChip band={e.fct_band_llm ?? null} veto={e.fct_llm_veto ?? null} />
-                                                                    <span className="text-[9px] text-muted-foreground">q:</span>
-                                                                    <span className="scale-90 opacity-70"><BandChip band={e.fct_band} veto={e.fct_veto} /></span></>
-                                                                : <BandChip band={e.fct_band} veto={e.fct_veto} />}
-                                                        </div>
+                                                        {lrank !== undefined
+                                                            ? <LlmBandCell entry={e} />
+                                                            : <BandChip band={e.fct_band} veto={e.fct_veto} />}
                                                     </td>
                                                     <td className="px-3 py-2"><StancePill stance={v?.stance} /></td>
                                                     <td className={clsx('px-3 py-2 font-mono font-black', convColor(v?.conviction))}>{v?.conviction ?? '—'}</td>
-                                                    <td className="max-w-[150px] truncate px-3 py-2 text-[11px] text-muted-foreground" title={v?.action || ''}>{v?.action || '—'}</td>
+                                                    <td className="px-3 py-2"><ActionCell action={v?.action} /></td>
                                                     <td className="px-3 py-2 font-mono text-sm font-black text-emerald-300">{e.fct_composite?.toFixed(1)}</td>
                                                     <td className="px-3 py-2"><ContributionBar entry={e} /></td>
-                                                    <td className="px-3 py-2 font-mono font-bold">{gapCell}</td>
                                                     <td className="px-3 py-2 text-right font-mono">{info?.price ? `$${info.price.toFixed(2)}` : '—'}</td>
                                                     <td className="px-3 py-2 text-right font-mono">{fmtMcap(info?.marketCap)}</td>
                                                     <td className="px-3 py-2 text-muted-foreground">{info?.sector || '—'}</td>
@@ -1171,7 +1204,7 @@ export default function CockpitDashboard() {
                                                     <td className="px-3 py-2"><StancePill stance={v?.stance} /></td>
                                                     <td className={clsx('px-3 py-2 font-mono font-black', convColor(v?.conviction))}>{v?.conviction ?? '—'}</td>
                                                     <td className="px-3 py-2 font-mono font-bold">{gapCell}</td>
-                                                    <td className="max-w-[170px] truncate px-3 py-2 text-[11px] text-muted-foreground" title={v?.action || ''}>{v?.action || '—'}</td>
+                                                    <td className="px-3 py-2"><ActionCell action={v?.action} /></td>
                                                     <td className="px-3 py-2 text-right font-mono">{info?.price ? `$${info.price.toFixed(2)}` : '—'}</td>
                                                     <td className="px-3 py-2 text-muted-foreground">{info?.sector || '—'}</td>
                                                 </>)}
@@ -1193,14 +1226,11 @@ export default function CockpitDashboard() {
                 {/* ── Track Record (live paper-trading ledgers) ─────────── */}
                 {tab === 'track' && (ledgers?.ledgers ? (
                     <div className="space-y-4">
-                        <div className="flex flex-wrap items-center gap-3">
-                            <LensSwitch lens={lens} setLens={setLens} />
-                            {lens !== 'quant' && llmInception && (
-                                <span className="rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 text-[10px] font-bold text-sky-300">
-                                    LLM ledgers live since {llmInception} — early days
-                                </span>
-                            )}
-                        </div>
+                        {llmInception && (
+                            <span className="inline-flex rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 text-[10px] font-bold text-sky-300">
+                                RS2 LLM ledgers live since {llmInception} — early days
+                            </span>
+                        )}
                         <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
                             <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
                             <p>
@@ -1214,113 +1244,78 @@ export default function CockpitDashboard() {
                             </p>
                         </div>
 
-                        {lens === 'compare' ? (
-                            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                                {(['plan', 'plan2', 'equal'] as const).map(name => {
-                                    const base = ledgers.ledgers[name]?.summary ?? {};
-                                    const llmS = ledgers.ledgers[`${name}_llm`]?.summary ?? {};
-                                    const b = base.cumulative_return_pct, l = llmS.cumulative_return_pct;
-                                    const diff = (b != null && l != null) ? Number((b - l).toFixed(2)) : null;
-                                    const label = name === 'plan' ? 'plan · value core' : name === 'plan2' ? 'plan2 · hybrid' : name;
-                                    return (
-                                        <div key={name} className={clsx('rounded-lg border bg-card/95 p-3', ledgerView === name ? 'border-violet-500/50' : 'border-border')}>
-                                            <button onClick={() => setLedgerView(name)} className="w-full text-left">
-                                                <div className="text-[11px] font-black uppercase tracking-wider">{label}</div>
-                                                <div className="mt-2 flex items-baseline justify-between">
-                                                    <span className="text-[11px] font-bold text-emerald-300">quant</span>
-                                                    <span className={clsx('font-mono text-base font-black', b == null ? 'text-muted-foreground' : b >= 0 ? 'text-success' : 'text-danger')}>
-                                                        {b == null ? '—' : `${b >= 0 ? '+' : ''}${b}%`}</span>
-                                                </div>
-                                                <div className="flex items-baseline justify-between">
-                                                    <span className="text-[11px] font-bold text-sky-300">RS2 LLM</span>
-                                                    <span className={clsx('font-mono text-base font-black', l == null ? 'text-muted-foreground' : l >= 0 ? 'text-success' : 'text-danger')}>
-                                                        {l == null ? '—' : `${l >= 0 ? '+' : ''}${l}%`}</span>
-                                                </div>
-                                                <div className="mt-2 border-t border-border/40 pt-1.5 text-[11px]">
-                                                    {diff == null ? <span className="text-muted-foreground">no comparison yet</span>
-                                                        : diff >= 0
-                                                            ? <span className="text-muted-foreground">quant ahead <b className="font-mono text-emerald-300">+{diff}pts</b></span>
-                                                            : <span className="text-muted-foreground">LLM ahead <b className="font-mono text-sky-300">+{Math.abs(diff)}pts</b></span>}
-                                                </div>
-                                                <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-[10px] text-muted-foreground">
-                                                    <span>open q:{base.open_positions ?? 0} / llm:{llmS.open_positions ?? 0}</span>
-                                                    <span>maxDD q:{base.max_drawdown_pct ?? '—'} / llm:{llmS.max_drawdown_pct ?? '—'}</span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    );
-                                })}
-                                <div className={clsx('rounded-lg border bg-card/95 p-3 opacity-80', ledgerView === 'mine' ? 'border-violet-500/50' : 'border-border')}>
-                                    <button onClick={() => setLedgerView('mine')} className="w-full text-left">
-                                        <div className="text-[11px] font-black uppercase tracking-wider">mine</div>
-                                        <p className="mt-2 text-[11px] text-muted-foreground">Your holdings — no LLM variant. Cum:{' '}
-                                            <b className="font-mono text-foreground">
-                                                {ledgers.ledgers.mine?.summary?.cumulative_return_pct != null
-                                                    ? `${ledgers.ledgers.mine.summary.cumulative_return_pct >= 0 ? '+' : ''}${ledgers.ledgers.mine.summary.cumulative_return_pct}%` : '—'}
-                                            </b>
-                                        </p>
-                                    </button>
-                                </div>
-                            </div>
-                        ) : (
-                        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                        {/* Both engines' full stats, always visible — no lens toggling needed to compare numbers */}
+                        <div className="grid gap-3 lg:grid-cols-2 xl:grid-cols-4">
                             {(['plan', 'plan2', 'equal', 'mine'] as const).map(name => {
-                                const key = lens === 'llm' && name !== 'mine' && ledgers.ledgers[`${name}_llm`] ? `${name}_llm` : name;
-                                const led = ledgers.ledgers[key];
-                                const s = led?.summary ?? {};
-                                const live = led && s.observations > 0 && led.nav_series.some((r: any) => r.nav !== null);
-                                const label = (name === 'plan' ? 'plan · value core'
-                                    : name === 'plan2' ? 'plan2 · hybrid' : name)
-                                    + (key !== name ? ' · LLM' : lens === 'llm' && name === 'mine' ? ' · no LLM variant' : '');
+                                const bs = ledgers.ledgers[name]?.summary ?? {};
+                                const hasLlm = name !== 'mine' && !!ledgers.ledgers[`${name}_llm`];
+                                const ls = hasLlm ? (ledgers.ledgers[`${name}_llm`]?.summary ?? {}) : ({} as any);
+                                const label = name === 'plan' ? 'plan · value core' : name === 'plan2' ? 'plan2 · hybrid' : name;
+                                const live = ledgers.ledgers[name] && bs.observations > 0;
+                                const diff = hasLlm && bs.cumulative_return_pct != null && ls.cumulative_return_pct != null
+                                    ? Number((bs.cumulative_return_pct - ls.cumulative_return_pct).toFixed(2)) : null;
+                                const cum = (v: any) => v == null ? '—' : `${v >= 0 ? '+' : ''}${v}%`;
+                                const rows: [string, any, any][] = [
+                                    ['Cum', cum(bs.cumulative_return_pct), hasLlm ? cum(ls.cumulative_return_pct) : null],
+                                    ['CAGR', bs.cagr_pct ?? 'early', hasLlm ? (ls.cagr_pct ?? 'early') : null],
+                                    ['Max DD', bs.max_drawdown_pct != null ? `${bs.max_drawdown_pct}%` : '—', hasLlm ? (ls.max_drawdown_pct != null ? `${ls.max_drawdown_pct}%` : '—') : null],
+                                    ['Sharpe', bs.sharpe ?? '21d…', hasLlm ? (ls.sharpe ?? '21d…') : null],
+                                    ['Win', bs.win_rate_pct != null ? `${bs.win_rate_pct}%` : '—', hasLlm ? (ls.win_rate_pct != null ? `${ls.win_rate_pct}%` : '—') : null],
+                                    ['Open', bs.open_positions ?? 0, hasLlm ? (ls.open_positions ?? 0) : null],
+                                    ...allBenches.filter(b => benchSel.has(b)).map(b => {
+                                        const bv = (bs.excess_vs || {})[b] ?? (b === 'IWM' ? bs.excess_vs_bench_pct : undefined);
+                                        const lv = (ls.excess_vs || {})[b];
+                                        const f = (v: any) => v == null ? '—' : `${v >= 0 ? '+' : ''}${v}`;
+                                        return [`vs ${b}`, f(bv), hasLlm ? f(lv) : null] as [string, any, any];
+                                    }),
+                                ];
                                 return (
                                     <div key={name} className={clsx('rounded-lg border bg-card/95 p-3',
-                                        ledgerView === name ? (lens === 'llm' ? 'border-sky-500/50' : 'border-emerald-500/50') : 'border-border')}>
+                                        ledgerView === name ? 'border-emerald-500/50' : 'border-border')}>
                                         <button onClick={() => setLedgerView(name)} className="w-full text-left">
-                                            <div className="flex items-baseline justify-between">
+                                            <div className="flex items-baseline justify-between gap-2">
                                                 <span className="text-[11px] font-black uppercase tracking-wider">{label}</span>
-                                                <span className="font-mono text-lg font-black">
-                                                    {live && s.cumulative_return_pct !== undefined && s.cumulative_return_pct !== null
-                                                        ? `${s.cumulative_return_pct >= 0 ? '+' : ''}${s.cumulative_return_pct}%` : '—'}
-                                                </span>
+                                                {diff != null && (diff >= 0
+                                                    ? <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[9px] font-black text-emerald-300">QUANT +{diff}pts</span>
+                                                    : <span className="rounded-full bg-sky-500/10 px-2 py-0.5 text-[9px] font-black text-sky-300">LLM +{Math.abs(diff)}pts</span>)}
                                             </div>
-                                            <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-[11px] text-muted-foreground">
-                                                <span>CAGR: <b className="font-mono text-foreground">{s.cagr_pct ?? 'too early'}</b></span>
-                                                <span>Max DD: <b className="font-mono text-foreground">{s.max_drawdown_pct ?? '—'}%</b></span>
-                                                <span>Sharpe: <b className="font-mono text-foreground">{s.sharpe ?? 'needs 21d'}</b></span>
-                                                <span>Win rate: <b className="font-mono text-foreground">{s.win_rate_pct ?? '—'}{s.win_rate_pct ? '%' : ''}</b></span>
-                                                <span>Open: <b className="font-mono text-foreground">{s.open_positions ?? 0}</b></span>
-                                            </div>
-                                            <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 border-t border-border/40 pt-1.5 text-[11px] text-muted-foreground">
-                                                {allBenches.filter(b => benchSel.has(b)).map(b => {
-                                                    const ex = (s.excess_vs || {})[b];
-                                                    const fallback = b === 'IWM' ? s.excess_vs_bench_pct : undefined;
-                                                    const val = ex !== undefined ? ex : fallback;
-                                                    return (
-                                                        <span key={b}>vs {b}: <b className={clsx('font-mono', val == null ? 'text-muted-foreground' : val >= 0 ? 'text-success' : 'text-danger')}>
-                                                            {val == null ? '—' : `${val >= 0 ? '+' : ''}${val}pts`}</b></span>
-                                                    );
-                                                })}
-                                            </div>
-                                            {!live && name === 'mine' && (
-                                                <p className="mt-2 text-[10px] text-amber-300">
+                                            <table className="mt-2 w-full text-[10px]">
+                                                <thead>
+                                                    <tr className="text-left">
+                                                        <th className="py-0.5"></th>
+                                                        <th className="py-0.5 font-black uppercase tracking-wider text-emerald-300">Quant</th>
+                                                        {hasLlm && <th className="py-0.5 font-black uppercase tracking-wider text-sky-300">RS2 LLM</th>}
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {rows.map(([k, qv, lv]) => (
+                                                        <tr key={k} className="border-t border-border/30">
+                                                            <td className="py-0.5 pr-1 text-muted-foreground">{k}</td>
+                                                            <td className="py-0.5 font-mono font-bold text-foreground">{qv}</td>
+                                                            {hasLlm && <td className="py-0.5 font-mono font-bold text-foreground">{lv}</td>}
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                            {name === 'mine' && !live && (
+                                                <p className="mt-1.5 text-[9px] text-amber-300">
                                                     {auth.user
                                                         ? 'Idle — save a My Portfolio snapshot (Portfolio tab), then run Update Mine Ledger.'
                                                         : 'Log in and save a My Portfolio snapshot to track your own portfolio.'}
                                                 </p>
                                             )}
+                                            {name === 'mine' && live && <p className="mt-1.5 text-[9px] text-muted-foreground">your holdings — no LLM variant</p>}
                                         </button>
                                     </div>
                                 );
                             })}
                         </div>
-                        )}
 
                         <div className="rounded-lg border border-border bg-card/95 p-3">
                             <div className="mb-2 flex items-center justify-between">
                                 <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground">
                                     NAV — indexed to 100 at inception
-                                    {lens === 'llm' ? <span className="ml-2 text-sky-300">· RS2 LLM ledgers</span>
-                                        : lens === 'compare' ? <span className="ml-2 text-violet-300">· quant solid vs LLM dashed</span> : ''}
+                                    <span className="ml-2 normal-case tracking-normal"><span className="text-emerald-300">quant solid</span> · <span className="text-sky-300">RS2 LLM dashed</span></span>
                                 </h3>
                                 <div className="flex gap-1">
                                     {(['1m', '3m', 'ytd', 'all'] as const).map(r => (
@@ -1350,24 +1345,14 @@ export default function CockpitDashboard() {
                                     <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10 }} stroke="#64748b" />
                                     <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
                                     <Legend wrapperStyle={{ fontSize: 11 }} />
-                                    {lens !== 'llm' && [
-                                        <Line key="p" type="monotone" dataKey="plan" name="plan (core)" stroke="#34d399" dot={false} strokeWidth={2} connectNulls />,
-                                        <Line key="p2" type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} connectNulls />,
-                                        <Line key="e" type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} connectNulls />,
-                                    ]}
+                                    <Line type="monotone" dataKey="plan" name="plan (core)" stroke="#34d399" dot={false} strokeWidth={2} connectNulls />
+                                    <Line type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} connectNulls />
+                                    <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} connectNulls />
                                     <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} connectNulls />
-                                    {lens === 'llm' && [
-                                        // LLM lens: only the LLM ledgers — solid, same strategy colors (plan=green mental model kept)
-                                        <Line key="pl" type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#34d399" dot={false} strokeWidth={2} connectNulls />,
-                                        <Line key="p2l" type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#f472b6" dot={false} strokeWidth={2} connectNulls />,
-                                        <Line key="eql" type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#38bdf8" dot={false} strokeWidth={2} connectNulls />,
-                                    ]}
-                                    {lens === 'compare' && [
-                                        // Compare: LLM dashed in distinct warm colors next to the solid baselines
-                                        <Line key="pl" type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#fbbf24" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />,
-                                        <Line key="p2l" type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#fb923c" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />,
-                                        <Line key="eql" type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#2dd4bf" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />,
-                                    ]}
+                                    {/* RS2 LLM variants — always on, dashed, distinct warm colors */}
+                                    <Line type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#fbbf24" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />
+                                    <Line type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#fb923c" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />
+                                    <Line type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#2dd4bf" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />
                                     {allBenches.filter(b => benchSel.has(b)).map(b => (
                                         <Line key={b} type="monotone" dataKey={b.toLowerCase()} name={b}
                                             stroke={benchColor(b)} dot={false} strokeWidth={1.5} strokeDasharray={benchDash(b)} />
@@ -1382,7 +1367,7 @@ export default function CockpitDashboard() {
                             )}
                         </div>
 
-                        {lens === 'compare' && hasLlmLedgers && (
+                        {hasLlmLedgers && (
                             <div className="flex items-center gap-2">
                                 <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Positions source:</span>
                                 {(['baseline', 'llm'] as const).map(id => (
@@ -1783,8 +1768,8 @@ export default function CockpitDashboard() {
 
             {/* ── Detail slide-over ─────────────────────────────────── */}
             {selected && selectedEntry && (
-                <div className="fixed inset-0 z-40 flex justify-end bg-black/50" onClick={() => setSelected(null)}>
-                    <div className="h-full w-full max-w-md overflow-y-auto border-l border-border bg-background p-4 shadow-2xl"
+                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 p-3 backdrop-blur-sm sm:p-6" onClick={() => setSelected(null)}>
+                    <div className="max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-xl border border-border bg-background p-5 shadow-2xl"
                         onClick={e => e.stopPropagation()}>
                         <div className="flex items-start justify-between">
                             <div>
@@ -1800,32 +1785,38 @@ export default function CockpitDashboard() {
                             {selectedEntry.fct_rank && <span className="font-mono text-xs font-black text-muted-foreground">rank #{selectedEntry.fct_rank}</span>}
                             {selectedEntry.fct_composite !== null && <span className="font-mono text-lg font-black text-emerald-300">{selectedEntry.fct_composite.toFixed(1)}</span>}
                             <OverlayChips overlay={overlay[selected!]} />
-                            <a href={`https://www.tradingview.com/chart/?symbol=${selected}`} target="_blank" rel="noreferrer"
+                            <a href={`https://www.tradingview.com/symbols/${selected}/`} target="_blank" rel="noreferrer"
                                 className="ml-auto flex items-center gap-1 rounded-md border border-border bg-secondary/20 px-2 py-1 text-[10px] font-bold text-muted-foreground hover:text-foreground">
                                 TradingView <ExternalLink className="h-3 w-3" />
                             </a>
                         </div>
 
-                        <h3 className="mb-2 mt-5 text-xs font-black uppercase tracking-wider text-muted-foreground">Factor profile (sector-neutral z)</h3>
-                        <FactorProfile entry={selectedEntry} />
-                        {selectedEntry.fct_haircuts && (
-                            <p className="mt-2 text-[10px] text-muted-foreground">
-                                Haircuts — survivability ×{selectedEntry.fct_haircuts.survivability}, data quality ×{selectedEntry.fct_haircuts.data_quality}, forensic ×{selectedEntry.fct_haircuts.forensic}
-                            </p>
-                        )}
-                        {selectedEntry.fct_context?.theme_primary && (
-                            <p className="mt-2 rounded-md border border-purple-500/30 bg-purple-500/[0.06] p-2 text-[11px] text-purple-200/90">
-                                <b>Context (not scored):</b> theme {selectedEntry.fct_context.theme_primary}
-                                {selectedEntry.fct_context.theme_score !== null ? ` (strength ${selectedEntry.fct_context.theme_score}/100)` : ''} — themes are a
-                                hunting ground and risk tag, never additive alpha.
-                            </p>
-                        )}
+                        <div className="mt-4 grid gap-x-8 gap-y-5 lg:grid-cols-5">
+                            <div className="lg:col-span-2">
+                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Factor profile (sector-neutral z)</h3>
+                                <FactorProfile entry={selectedEntry} />
+                                {selectedEntry.fct_haircuts && (
+                                    <p className="mt-2 text-[10px] text-muted-foreground">
+                                        Haircuts — survivability ×{selectedEntry.fct_haircuts.survivability}, data quality ×{selectedEntry.fct_haircuts.data_quality}, forensic ×{selectedEntry.fct_haircuts.forensic}
+                                    </p>
+                                )}
+                                {selectedEntry.fct_context?.theme_primary && (
+                                    <p className="mt-2 rounded-md border border-purple-500/30 bg-purple-500/[0.06] p-2 text-[11px] text-purple-200/90">
+                                        <b>Context (not scored):</b> theme {selectedEntry.fct_context.theme_primary}
+                                        {selectedEntry.fct_context.theme_score !== null ? ` (strength ${selectedEntry.fct_context.theme_score}/100)` : ''} — themes are a
+                                        hunting ground and risk tag, never additive alpha.
+                                    </p>
+                                )}
 
-                        <h3 className="mb-2 mt-5 text-xs font-black uppercase tracking-wider text-muted-foreground">Valuation workbench (reverse DCF)</h3>
-                        <ValuationWorkbench ticker={selected} model={valuations[selected]} marketCap={selectedInfo?.marketCap} />
+                                <h3 className="mb-2 mt-5 text-xs font-black uppercase tracking-wider text-muted-foreground">Valuation workbench (reverse DCF)</h3>
+                                <ValuationWorkbench ticker={selected} model={valuations[selected]} marketCap={selectedInfo?.marketCap} />
+                            </div>
 
-                        <h3 className="mb-2 mt-6 text-xs font-black uppercase tracking-wider text-muted-foreground">RS2 local-LLM analysis</h3>
-                        <Rs2AnalysisPanel symbol={selected} displayTicker={selected} />
+                            <div className="lg:col-span-3">
+                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">RS2 local-LLM analysis</h3>
+                                <Rs2AnalysisPanel symbol={selected} displayTicker={selected} />
+                            </div>
+                        </div>
 
                         <div className="mt-5 rounded-md border border-border bg-secondary/10 p-2.5 text-[11px] text-muted-foreground">
                             Full lens detail (reverse engine, paradigm, factor history) lives in the{' '}
