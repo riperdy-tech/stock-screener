@@ -2,7 +2,7 @@
 
 // Decision Cockpit — primary decision surface for the Factor Lab engine.
 // Tabs: Rankings (sector-neutral factor composite), Research Queue,
-// Portfolio (rendered plan), Validation (backtest/outcomes/IC evidence).
+// Portfolio (rendered plan).
 // The four legacy lenses live unchanged at /lenses.
 
 import { useEffect, useMemo, useState } from 'react';
@@ -12,22 +12,22 @@ import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import { AuthModal } from './AuthModal';
 import {
-    Activity, ArrowUpRight, BarChart3, Briefcase, Cpu, ExternalLink, FlaskConical, GitCompareArrows,
+    ArrowUpRight, BarChart3, Briefcase, Cpu, ExternalLink, FlaskConical, GitCompareArrows,
     HelpCircle, Layers3, LineChart as LineChartIcon, RefreshCw, Search, ShieldAlert, Sparkles, X,
 } from 'lucide-react';
 import {
-    Bar, BarChart, Brush, CartesianGrid, Legend, Line, LineChart, ReferenceLine,
+    Bar, BarChart, Brush, CartesianGrid, Legend, Line, LineChart,
     ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts';
 import {
-    fetchBacktest, fetchFactorIc, fetchFactorScores, fetchOutcomes,
+    fetchFactorScores,
     fetchOverlaySignals, fetchPaperLedgers, fetchPortfolioPlan, fetchPortfolioPlanLlm, fetchStocks, fetchValuationModels,
     FactorEntry, FactorScoresPayload, ValuationModel,
 } from '@/lib/data-service';
 import { quarterKelly, POSITION_CAP_PCT } from '@/lib/kelly';
 import { Rs2AnalysisPanel } from './Rs2AnalysisPanel';
 
-type TabId = 'rankings' | 'track' | 'portfolio' | 'validation';
+type TabId = 'rankings' | 'track' | 'portfolio';
 
 interface StockInfo {
     name: string;
@@ -141,14 +141,6 @@ function HelpModal({ onClose }: { onClose: () => void }) {
                     <HelpSection title="Overlay chips (GPR / insiders)">
                         <p><b>GPR 0-3</b>: geopolitical exposure tagged from the company&apos;s actual business profile (revenue geography, supply chains, regulation, sanctions). Never a buy/sell signal — it shrinks position sizes and demands a bigger margin of safety at level 3.</p>
                         <p><b>▲/▼ INSIDERS</b>: &quot;informed demand&quot; — insiders net-buying while short sellers retreat (▲, confirming) or insiders selling into elevated short interest (▼, interrogate the thesis). Confirmation/warning only, never additive score.</p>
-                    </HelpSection>
-
-                    <HelpSection title="Validation tab — &quot;does this even work?&quot;">
-                        <p><b>Equity curve</b>: growth of $1 since 2017. Green line = buying the strategy&apos;s top-decile picks each quarter (simulated). Grey = IWM, the small-cap index ETF (the &quot;just buy the market&quot; alternative). Green above grey = the method beat the market in simulation.</p>
-                        <p><b>Quarterly excess bars</b>: one bar per quarter = strategy return MINUS index return. Above zero = won that quarter. Expect plenty of losing quarters — a good system wins modestly more often than it loses.</p>
-                        <p><b>Factor IC chart</b>: each line = one factor&apos;s &quot;prediction score&quot; per quarter (correlation between the factor&apos;s ranking and what actually happened next quarter). Above zero = the factor helped. These measured values are exactly what sets the composite weights — the system trusts factors in proportion to their evidence.</p>
-                        <p><b>Live signal outcomes</b>: the honest table. Every day the system publishes its lists; this table fills in their REAL forward returns as time passes (first results ~2 weeks after launch). Simulation can fool you; this can&apos;t.</p>
-                        <p><b>The yellow banner</b>: the simulation only sees companies that still exist today — the ones that went bankrupt are invisible, which flatters every number. Treat backtest results as an upper bound; trust the live outcomes table more as it fills in.</p>
                     </HelpSection>
 
                     <HelpSection title="Where the data comes from">
@@ -688,9 +680,6 @@ export default function CockpitDashboard() {
     const [factor, setFactor] = useState<FactorScoresPayload | null>(null);
     const [valuations, setValuations] = useState<Record<string, ValuationModel>>({});
     const [plan, setPlan] = useState<any | null>(null);
-    const [outcomes, setOutcomes] = useState<any | null>(null);
-    const [backtest, setBacktest] = useState<any | null>(null);
-    const [ic, setIc] = useState<any | null>(null);
     const [overlay, setOverlay] = useState<Record<string, any>>({});
     const [ledgers, setLedgers] = useState<any | null>(null);
     const [ledgerView, setLedgerView] = useState<'plan' | 'plan2' | 'equal' | 'mine'>('plan');
@@ -758,19 +747,15 @@ export default function CockpitDashboard() {
 
     const loadAll = async () => {
         setLoading(true);
-        const [f, v, p, o, b, i, ov, pl, s, pllm] = await Promise.all([
+        const [f, v, p, ov, pl, s, pllm] = await Promise.all([
             fetchFactorScores(), fetchValuationModels(), fetchPortfolioPlan(),
-            fetchOutcomes(), fetchBacktest(), fetchFactorIc(), fetchOverlaySignals(),
-            fetchPaperLedgers(), fetchStocks('US'), fetchPortfolioPlanLlm(),
+            fetchOverlaySignals(), fetchPaperLedgers(), fetchStocks('US'), fetchPortfolioPlanLlm(),
         ]);
         setLedgers(await attachMine(pl));
         setFactor(f);
         setValuations(v?.tickers ?? {});
         setPlan(p);
         setPlanLlm(pllm);
-        setOutcomes(o);
-        setBacktest(b);
-        setIc(i);
         setOverlay(ov?.tickers ?? {});
         const info: Record<string, StockInfo> = {};
         for (const row of (s.data as any[])) {
@@ -994,35 +979,6 @@ export default function CockpitDashboard() {
         return out.sort((a, b) => b.post_exit_return_pct - a.post_exit_return_pct).slice(0, 10);
     }, [ledgers]);
 
-    const equityCurve = useMemo(() => {
-        const quarters = backtest?.quarters ?? [];
-        let s = 1, w = 1;
-        let spy = 1, qqq = 1, vc = 1;
-        return quarters.map((q: any) => {
-            s *= 1 + q.top_return_pct / 100;
-            w *= 1 + q.iwm_return_pct / 100;
-            if (q.spy_return_pct != null) spy *= 1 + q.spy_return_pct / 100;
-            if (q.qqq_return_pct != null) qqq *= 1 + q.qqq_return_pct / 100;
-            if (q.value_core_return_pct != null) vc *= 1 + q.value_core_return_pct / 100;
-            return {
-                formation: q.formation, hybrid: Number(s.toFixed(3)), valueCore: Number(vc.toFixed(3)),
-                iwm: Number(w.toFixed(3)), spy: Number(spy.toFixed(3)), qqq: Number(qqq.toFixed(3)),
-                excess: q.excess_vs_iwm_pct,
-            };
-        });
-    }, [backtest]);
-
-    const icCurve = useMemo(() => {
-        const factors = ic?.factors ?? {};
-        const byFormation: Record<string, any> = {};
-        for (const [fname, fdata] of Object.entries<any>(factors)) {
-            for (const row of fdata.series ?? []) {
-                byFormation[row.formation] = byFormation[row.formation] || { formation: row.formation };
-                byFormation[row.formation][fname] = row.ic;
-            }
-        }
-        return Object.values(byFormation).sort((a: any, b: any) => a.formation.localeCompare(b.formation));
-    }, [ic]);
 
     const selectedEntry = selected ? factor?.tickers[selected] : null;
     const selectedInfo = selected ? stockInfo[selected] : null;
@@ -1042,7 +998,6 @@ export default function CockpitDashboard() {
         { id: 'rankings', label: 'Rankings', icon: BarChart3 },
         { id: 'track', label: 'Track Record', icon: LineChartIcon },
         { id: 'portfolio', label: 'Portfolio', icon: Briefcase },
-        { id: 'validation', label: 'Validation', icon: Activity },
     ];
 
     return (
@@ -1733,130 +1688,6 @@ export default function CockpitDashboard() {
                     </div>
                 ) : <p className="text-sm text-muted-foreground">No portfolio plan found — run scripts/build_portfolio_plan.py.</p>)}
 
-                {/* ── Validation ─────────────────────────────────────── */}
-                {tab === 'validation' && (
-                    <div className="space-y-4">
-                        <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-[13px] text-sky-200/90">
-                            <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
-                            <p>
-                                <b>This page answers &quot;does the system actually work?&quot;</b> Top charts = simulated history
-                                (green line above grey = beat the index; bars above zero = won that quarter). The IC chart shows each
-                                factor&apos;s measured prediction power — those values set the composite weights. The bottom table is
-                                the REAL forward record of published signals, filling in as time passes.{' '}
-                                <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
-                            </p>
-                        </div>
-                        {backtest?.survivorship_caveat && (
-                            <p className="rounded-md border border-amber-500/40 bg-amber-500/10 p-2.5 text-xs font-bold text-amber-200">
-                                ⚠ {backtest.survivorship_caveat} Expect live performance ≈ half of these numbers (post-publication decay, McLean-Pontiff 2016).
-                            </p>
-                        )}
-                        <div className="flex flex-wrap gap-3">
-                            {backtest?.summary && [
-                                ['Hybrid CAGR', `${backtest.summary.hybrid_cagr_pct ?? backtest.summary.strategy_cagr_pct}%`],
-                                ['Value-core CAGR', `${backtest.summary.value_core_cagr_pct ?? '—'}%`],
-                                ['IWM CAGR', `${backtest.summary.iwm_cagr_pct}%`],
-                                ['SPY CAGR', `${backtest.summary.spy_cagr_pct ?? '—'}%`],
-                                ['QQQ CAGR', `${backtest.summary.qqq_cagr_pct ?? '—'}%`],
-                                ['Hit rate vs IWM', `${backtest.summary.hit_rate_vs_iwm_pct}%`],
-                                ['Decile spread', `${backtest.summary.mean_decile_spread_pct}%/q`],
-                            ].map(([k, v]) => (
-                                <div key={k as string} className="rounded-lg border border-border bg-card/95 px-4 py-2">
-                                    <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">{k}</div>
-                                    <div className="font-mono text-lg font-black">{v as string}</div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="grid gap-4 xl:grid-cols-2">
-                            <div className="rounded-lg border border-border bg-card/95 p-3">
-                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Equity curve — hybrid / value-core vs IWM / SPY / QQQ (quarterly, backtest)</h3>
-                                <ResponsiveContainer width="100%" height={260}>
-                                    <LineChart data={equityCurve}>
-                                        <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
-                                        <XAxis dataKey="formation" tick={{ fontSize: 9 }} stroke="#64748b" />
-                                        <YAxis tick={{ fontSize: 10 }} stroke="#64748b" />
-                                        <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
-                                        <Legend wrapperStyle={{ fontSize: 11 }} />
-                                        <Line type="monotone" dataKey="hybrid" name="hybrid (plan2)" stroke="#34d399" dot={false} strokeWidth={2} />
-                                        <Line type="monotone" dataKey="valueCore" name="value core (plan)" stroke="#f472b6" dot={false} strokeWidth={2} strokeDasharray="5 2" />
-                                        <Line type="monotone" dataKey="iwm" name="IWM" stroke="#64748b" dot={false} strokeWidth={2} />
-                                        <Line type="monotone" dataKey="spy" name="SPY" stroke="#94a3b8" dot={false} strokeWidth={1.5} strokeDasharray="3 2" />
-                                        <Line type="monotone" dataKey="qqq" name="QQQ" stroke="#facc15" dot={false} strokeWidth={1.5} strokeDasharray="1 3" />
-                                    </LineChart>
-                                </ResponsiveContainer>
-                                <p className="mt-1 text-[10px] text-muted-foreground">
-                                    Backtest proxies: <b>hybrid</b> = top-decile basket (what plan2&apos;s sleeve buys); <b>value core</b> = the cheaper half of that decile (what plan&apos;s Kelly core buys). Live Kelly sizing/cash isn&apos;t backtestable — the real plan/plan2 are measured forward in <b>Track Record</b>. Over 2017-26 the two nearly overlap: cheap-tilting the winners barely changed historical returns.
-                                </p>
-                            </div>
-                            <div className="rounded-lg border border-border bg-card/95 p-3">
-                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Quarterly excess vs IWM</h3>
-                                <ResponsiveContainer width="100%" height={260}>
-                                    <BarChart data={equityCurve}>
-                                        <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
-                                        <XAxis dataKey="formation" tick={{ fontSize: 9 }} stroke="#64748b" />
-                                        <YAxis tick={{ fontSize: 10 }} stroke="#64748b" unit="%" />
-                                        <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
-                                        <ReferenceLine y={0} stroke="#475569" />
-                                        <Bar dataKey="excess" fill="#38bdf8" radius={[2, 2, 0, 0]} />
-                                    </BarChart>
-                                </ResponsiveContainer>
-                            </div>
-                        </div>
-                        <div className="rounded-lg border border-border bg-card/95 p-3">
-                            <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
-                                Per-factor rank-IC by quarter (diagnostic only — the composite is equal-weighted by design)
-                            </h3>
-                            <ResponsiveContainer width="100%" height={240}>
-                                <LineChart data={icCurve}>
-                                    <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
-                                    <XAxis dataKey="formation" tick={{ fontSize: 9 }} stroke="#64748b" />
-                                    <YAxis tick={{ fontSize: 10 }} stroke="#64748b" />
-                                    <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
-                                    <Legend wrapperStyle={{ fontSize: 11 }} />
-                                    <ReferenceLine y={0} stroke="#475569" />
-                                    {['value', 'quality', 'momentum', 'lowvol'].map(f => (
-                                        <Line key={f} type="monotone" dataKey={f} stroke={FACTOR_COLORS[f]} dot={false} strokeWidth={1.5} />
-                                    ))}
-                                </LineChart>
-                            </ResponsiveContainer>
-                        </div>
-                        <div className="rounded-lg border border-border bg-card/95 p-3">
-                            <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Live signal outcomes (forward log, matures over time)</h3>
-                            {(outcomes?.evaluated?.length ?? 0) > 0 ? (
-                                <div className="overflow-x-auto">
-                                    <table className="w-full min-w-[700px] text-left text-xs">
-                                        <thead className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">
-                                            <tr><th className="px-2 py-1.5">Cohort</th><th className="px-2 py-1.5">Horizon</th><th className="px-2 py-1.5">Source</th>
-                                                <th className="px-2 py-1.5 text-right">n</th><th className="px-2 py-1.5 text-right">Median</th>
-                                                <th className="px-2 py-1.5 text-right">Excess vs IWM</th>
-                                                <th className="px-2 py-1.5 text-right">vs SPY</th><th className="px-2 py-1.5 text-right">vs QQQ</th>
-                                                <th className="px-2 py-1.5 text-right">% beat IWM</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            {outcomes.evaluated.map((r: any, idx: number) => (
-                                                <tr key={idx} className="border-t border-border/50">
-                                                    <td className="px-2 py-1.5 font-mono">{r.snapshot_date}</td>
-                                                    <td className="px-2 py-1.5 font-mono">{r.horizon_days}d</td>
-                                                    <td className="px-2 py-1.5">{r.source}</td>
-                                                    <td className="px-2 py-1.5 text-right font-mono">{r.n_evaluated}</td>
-                                                    <td className="px-2 py-1.5 text-right font-mono">{r.median_return_pct}%</td>
-                                                    <td className={clsx('px-2 py-1.5 text-right font-mono font-black', r.mean_excess_vs_iwm_pct >= 0 ? 'text-success' : 'text-danger')}>{r.mean_excess_vs_iwm_pct}%</td>
-                                                    <td className={clsx('px-2 py-1.5 text-right font-mono', r.mean_excess_vs_spy_pct == null ? 'text-muted-foreground' : r.mean_excess_vs_spy_pct >= 0 ? 'text-success' : 'text-danger')}>{r.mean_excess_vs_spy_pct ?? '—'}%</td>
-                                                    <td className={clsx('px-2 py-1.5 text-right font-mono', r.mean_excess_vs_qqq_pct == null ? 'text-muted-foreground' : r.mean_excess_vs_qqq_pct >= 0 ? 'text-success' : 'text-danger')}>{r.mean_excess_vs_qqq_pct ?? '—'}%</td>
-                                                    <td className="px-2 py-1.5 text-right font-mono">{r.pct_beat_iwm}%</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            ) : (
-                                <p className="text-xs text-muted-foreground">
-                                    No matured cohorts yet{outcomes?.pending?.length ? ` — ${outcomes.pending.length} pending, next matures soon` : ''}. The forward log is the honest validation clock.
-                                </p>
-                            )}
-                        </div>
-                    </div>
-                )}
             </main>
 
             {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
