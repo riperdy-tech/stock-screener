@@ -26,6 +26,27 @@ import {
 } from '@/lib/data-service';
 import { quarterKelly, POSITION_CAP_PCT } from '@/lib/kelly';
 import { Rs2AnalysisPanel } from './Rs2AnalysisPanel';
+import { Hint } from './Hint';
+
+// Plain-English explanations for the rankings-table column headers and other
+// first-glance-confusing UI. Shared across the three lens views so the same
+// column always explains itself the same way.
+const HINTS = {
+    rank: 'Today’s position on the leaderboard of ~6,600 scored US stocks. #1 has the strongest overall evidence right now.',
+    composite: 'The one number everything is ranked by (0–100). It blends five factor scores — each measured against the stock’s own sector — then applies safety haircuts for fragile or suspicious accounting. Higher = more evidence in the stock’s favor.',
+    factorMix: 'What is driving this stock’s score: green = value (cheap vs cash flows), blue = quality (profitable & clean books), amber = momentum (recent winner), violet = low volatility (calm price), pink = revisions (analyst forecasts improving). Longer segment = bigger contribution.',
+    band: 'What the rank means in practice. RESEARCH NOW = top 3%, worth your research time today. WATCHLIST = top 10%. MONITOR = top 30%. PASS = the rest. A red chip means the stock is disqualified outright — the reason is written on the chip.',
+    mcap: 'Market cap — the price of the whole company (share price × shares). T = trillion, B = billion, M = million dollars.',
+    llmRank: 'Rank according to RS2, a local AI analyst that reads each company’s actual filings and writes an independent verdict. Grey “q” numbers = not yet reviewed by the AI; their quant rank is shown instead.',
+    stance: 'The AI analyst’s valuation call: UNDERVALUED (price looks too low for the evidence), FAIR, or OVERVALUED (price already assumes a lot).',
+    conviction: 'Conviction — how confident the AI analyst is in its own verdict, from 0 (a guess) to 15 (very confident).',
+    action: 'What the AI analyst would do with the stock (buy / hold / avoid…). An opinion for research, never an order — nothing on this site executes trades.',
+    quantRank: 'Rank from the quant engine — pure math over financial statements and prices, no AI involved.',
+    deltaPctl: 'How much the two engines disagree, in percentile points. ▲ green = the AI ranks it higher than the math does; ▼ red = lower. Big gaps are the interesting rows — someone is wrong.',
+    bandQuantLlm: 'The band the quant engine assigned → the band after the AI’s review. A change means the AI promoted or demoted the stock after reading its filings.',
+    dcfGap: 'Compares the growth the current price REQUIRES vs the growth the company has actually DELIVERED (last 5 years of SEC filings). Green negative = priced for less than proven — potential bargain. Amber positive = the price needs an acceleration nobody has demonstrated yet.',
+    lens: 'Choose whose ranking you look through: QUANT = the deterministic factor engine (pure math). RS2 LLM = the local AI analyst’s own list. COMPARE = both side by side, biggest disagreements first.',
+} as const;
 
 type TabId = 'rankings' | 'track' | 'portfolio';
 
@@ -97,9 +118,12 @@ function HelpSection({ title, children }: { title: string; children: React.React
 }
 
 function HelpModal({ onClose }: { onClose: () => void }) {
+    // Two audiences, two tabs: 'plain' assumes zero finance background;
+    // 'expert' documents every formula, data source, and threshold.
+    const [helpTab, setHelpTab] = useState<'plain' | 'expert'>('plain');
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
-            <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl border border-border bg-background p-5 shadow-2xl"
+            <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-xl border border-border bg-background p-5 shadow-2xl"
                 onClick={e => e.stopPropagation()}>
                 <div className="flex items-start justify-between">
                     <h2 className="text-lg font-black">How this page works</h2>
@@ -107,7 +131,92 @@ function HelpModal({ onClose }: { onClose: () => void }) {
                         <X className="h-4 w-4" />
                     </button>
                 </div>
-                <div className="mt-3 space-y-3">
+                <div className="mt-3 flex overflow-hidden rounded-lg border border-border bg-secondary/20 p-0.5 text-xs font-black">
+                    <button onClick={() => setHelpTab('plain')}
+                        className={clsx('flex-1 rounded-md border px-3 py-2 transition-all',
+                            helpTab === 'plain'
+                                ? 'border-emerald-400/60 bg-emerald-500/15 text-emerald-300'
+                                : 'border-transparent text-muted-foreground hover:text-foreground')}>
+                        Plain English — no jargon
+                    </button>
+                    <button onClick={() => setHelpTab('expert')}
+                        className={clsx('flex-1 rounded-md border px-3 py-2 transition-all',
+                            helpTab === 'expert'
+                                ? 'border-sky-400/60 bg-sky-500/15 text-sky-300'
+                                : 'border-transparent text-muted-foreground hover:text-foreground')}>
+                        Full methodology — for practitioners
+                    </button>
+                </div>
+
+                {helpTab === 'plain' && (
+                    <div className="mt-3 space-y-3">
+                        <HelpSection title="What is this site?">
+                            <p>Every day, a computer reads the financial reports and price history of roughly 6,600 US stocks and ranks them on one leaderboard. Top of the leaderboard = the most evidence in the stock&apos;s favor. That&apos;s it. Nothing here buys or sells anything, and nothing here is financial advice — it&apos;s a research shortlist with the evidence laid out.</p>
+                        </HelpSection>
+
+                        <HelpSection title="The five ingredients of a score">
+                            <p>Each stock is graded on five traits that have historically predicted returns:</p>
+                            <p><span className="text-emerald-300 font-bold">Value</span> — are you paying $1 for $2 of yearly cash earnings, or $2 for $1? Cheap beats expensive, on average, over time.</p>
+                            <p><span className="text-sky-300 font-bold">Quality</span> — does the company make real money, consistently, with clean accounting? A profitable business with honest books beats a story.</p>
+                            <p><span className="text-amber-300 font-bold">Momentum</span> — has the stock been winning over the past year? Winners tend to keep winning for a while.</p>
+                            <p><span className="text-violet-300 font-bold">Low volatility</span> — does the price move calmly or wildly? Calm stocks have historically delivered more return per unit of pain.</p>
+                            <p><span className="text-rose-300 font-bold">Revisions</span> — are the professional analysts who follow the company raising or cutting their forecasts? Direction of change matters.</p>
+                            <p>Crucially, every grade is <b>against companies in the same sector</b> — a supermarket competes with supermarkets, not with software companies. Otherwise &quot;high momentum&quot; would just mean &quot;is a tech stock.&quot;</p>
+                        </HelpSection>
+
+                        <HelpSection title="Why every ingredient counts equally">
+                            <p>Think of judging a decathlon: you could try to guess which event matters most, but decades of research show those guesses backfire — the &quot;perfect&quot; weights found in past data almost never work on future data. So each of the five ingredients counts exactly the same. Boring, humble, and it works better.</p>
+                        </HelpSection>
+
+                        <HelpSection title="Reading the leaderboard">
+                            <p><b>Composite</b> is the final grade (0–100). <b>Band</b> translates it: <span className="text-emerald-300">RESEARCH NOW</span> = top 3%, worth your time today · <span className="text-sky-300">WATCHLIST</span> = top 10% · <span className="text-amber-300">MONITOR</span> = top 30% · PASS = the rest.</p>
+                            <p><b>Red veto chips</b>: some stocks are disqualified no matter how good the score looks — think of a house with beautiful photos that failed the structural inspection. Reasons include accounting red flags firing together, heavy printing of new shares, or failing the safety checks of the valuation engine.</p>
+                            <p><b>DCF gap</b>: every stock price silently makes a promise about future growth. This column compares the promise with what the company has actually delivered. <span className="text-emerald-300">Green</span> = the price promises LESS than the company has proven (a potential bargain). <span className="text-amber-300">Amber</span> = the price needs an acceleration nobody has demonstrated yet — you have to believe a story.</p>
+                        </HelpSection>
+
+                        <HelpSection title="The AI second opinion (RS2)">
+                            <p>A local AI reads each company&apos;s actual SEC filings and writes an independent verdict — like getting a second doctor&apos;s opinion. The <b>Lens</b> switch at the top lets you see the math engine&apos;s list, the AI&apos;s list, or both side by side with the disagreements first. When the two disagree strongly, one of them is wrong — those are the interesting rows.</p>
+                        </HelpSection>
+
+                        <HelpSection title="The honest scoreboard (Track Record)">
+                            <p>Instead of showing a flattering backtest, the system paper-trades its own picks every single day with real prices and real transaction costs, and the record can never be edited. If the machine is wrong, this page will say so — publicly and permanently. That&apos;s the point.</p>
+                        </HelpSection>
+
+                        <HelpSection title="What this site is NOT">
+                            <p>Not financial advice. Not a trading bot — nothing executes trades. Not a crystal ball — factors work on average over years, not on every stock every month. It&apos;s a machine for narrowing 6,600 stocks down to a shortlist worth YOUR research time, with every piece of evidence shown.</p>
+                        </HelpSection>
+                    </div>
+                )}
+
+                {helpTab === 'expert' && (
+                    <div className="mt-3 space-y-3">
+                    <HelpSection title="Scoring pipeline — exact mechanics">
+                        <p>Universe: every name scored by the reverse engine (~6,600 US listings). Per sub-metric: winsorize at the 1st/99th percentile <b>within sector</b>, then z-score within sector. Factor z = mean of that factor&apos;s available sub-metrics. Composite z = weight-renormalized sum over available factors (missing factors drop out and remaining weights rescale; <b>value, quality, momentum are required</b> — a name missing any of them is marked insufficient_factors rather than scored on partial data).</p>
+                        <p>Composite z → cross-sectional percentile (0–100) → three multiplicative haircuts: <b>survivability</b> = 0.7 + 0.3·(surv/100), <b>data quality</b> = min(1, 0.8 + 0.04·dq), <b>forensic</b> = 0.85 if either the Beneish M-score or the accruals alarm fired (both firing is a veto, not a haircut). Haircut result is re-ranked; final percentile sets the band: ≥97 research_now, ≥90 watchlist, ≥70 monitor, else pass.</p>
+                        <p>Weights: equal 0.20 × 5 (scheme <code>equal_weight_robust5</code>, in <code>scripts/factor_weights.json</code> with a full revision history). Rank-IC per factor is still measured monthly by <code>calibrate_factor_weights.py</code> but writes a drift <i>diagnostic</i> only — measured IC never steers the weights (DeMiguel, Garlappi &amp; Uppal 2009: estimated weights rarely beat 1/N out of sample).</p>
+                    </HelpSection>
+
+                    <HelpSection title="Factor construction — sub-metrics and sources">
+                        <p><span className="text-emerald-300 font-bold">Value</span> = mean z of four yields, all computed from the latest fiscal year of SEC-filed fundamentals against current market cap: <b>FCF yield</b> = FCF/mcap · <b>owner-earnings yield</b> = (net income + D&amp;A − capex)/mcap · <b>EBIT yield</b> = operating income/EV where EV = mcap + LT debt − cash · <b>earnings yield</b> = NI/mcap (broadest-coverage sub; rescues filers with missing capex/D&amp;A/op-income tags).</p>
+                        <p><span className="text-sky-300 font-bold">Quality</span> = mean z of: <b>revenue quality</b> (reverse-engine score), <b>gross-margin stability</b> = −stdev of GM across ≥4 fiscal years, <b>negative accruals</b> = −accruals ratio, and <b>Piotroski F-score</b> (both from the forensic battery).</p>
+                        <p><span className="text-amber-300 font-bold">Momentum</span> = mean z of the <b>12-1 skip-month return</b> (12-month return excluding the most recent month, the academic standard that avoids short-term reversal) and <b>52-week-high proximity</b>. Monthly closes.</p>
+                        <p><span className="text-violet-300 font-bold">Low volatility</span> = z of −σ(monthly returns), minimum 12 observations. The annualized σ·√12 is exported per name and feeds Kelly sizing.</p>
+                        <p><span className="text-rose-300 font-bold">Revisions</span> = mean of two 0–1 parts: normalized EPS-trajectory slope, (clamp(slope, −1, 1)+1)/2, and analyst structured score/100 — scaled to 0–100 then recentred to a z-like scale via (score−50)/25.</p>
+                        <p><b>Theme is a context tag, never additive</b> (Ben-David et al. 2023: naive theme exposure averages −3.1%/yr). Theme membership/score ride along for orientation and the crowding warning only.</p>
+                    </HelpSection>
+
+                    <HelpSection title="Vetoes — hard disqualifiers">
+                        <p>Applied before scoring; a vetoed name gets no composite regardless of factors: <b>reverse_engine_reject</b> = reverse-engine band ∈ {'{'}Excluded, Reject, Reject-tier{'}'} · <b>forensic_pair</b> = Beneish M-score elevated AND accruals high (single alarm = 0.85 haircut instead) · <b>heavy_issuance</b> = HEAVY_ISSUANCE flag, waived for archetypes E/F where issuance is the expected financing mode.</p>
+                    </HelpSection>
+
+                    <HelpSection title="Reverse DCF — the expectations gap">
+                        <p><code>build_valuation_models.py</code> solves by bisection for the growth rate that makes a standard DCF equal the CURRENT price — the growth the market is charging you for. The <b>expectations gap</b> (shown as &quot;DCF gap&quot;) = implied growth − demonstrated growth, where demonstrated = the last 5 years of revenue/FCF growth from SEC filings, in percentage points. Negative gap = priced below proven capability; positive = the price requires unproven acceleration. <code>score_reverse.py</code> layers archetype classification (A–F) and survivability/data-quality scoring on top, producing the safety inputs the Factor Lab consumes.</p>
+                    </HelpSection>
+
+                    <HelpSection title="RS2 LLM overlay — stage 5">
+                        <p>A local LLM reads each company&apos;s filings and produces stance (undervalued/fair/overvalued), conviction 0–15, action, and its own DCF read. Applied AFTER quant bands are set (<code>fct_band_quant</code> is preserved): it can promote, demote, or veto (<code>llm_reject</code>) names, producing the parallel LLM ranking visible through the Lens switch. Disagreement percentile Δ is computed per name; the Compare lens sorts on it.</p>
+                    </HelpSection>
+
                     <HelpSection title="The big picture">
                         <p>Every day the system scores ~6,600 US stocks and ranks them with ONE composite number built from six &quot;factors&quot; — measurable traits that have historically predicted returns. The top 3% become the <b>Research Now</b> list. Nothing here is a buy order; it is a ranked shortlist plus the evidence for and against each name.</p>
                     </HelpSection>
@@ -144,9 +253,10 @@ function HelpModal({ onClose }: { onClose: () => void }) {
                     </HelpSection>
 
                     <HelpSection title="Where the data comes from">
-                        <p>SEC filings (10 years of fundamentals), Yahoo Finance (prices, estimates), FRED (Fed macro data). The whole pipeline re-runs daily via GitHub Actions; weights recalibrate monthly from measured evidence.</p>
+                        <p>SEC company facts (10 years of as-filed fundamentals), Yahoo Finance (prices, estimates, analyst coverage), FRED (Fed macro series). The whole pipeline re-runs daily via GitHub Actions; the IC drift report recalculates monthly. Paper ledgers persist append-only with transaction costs in bps.</p>
                     </HelpSection>
-                </div>
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -204,7 +314,7 @@ function LensSwitch({ lens, setLens }: { lens: 'quant' | 'llm' | 'compare'; setL
     ];
     return (
         <div className="flex items-center gap-2">
-            <span className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">Lens</span>
+            <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-muted-foreground">Lens<Hint label="Lens" text={HINTS.lens} /></span>
             <div className="flex overflow-hidden rounded-lg border border-border bg-secondary/20 p-0.5">
                 {items.map(({ id, label, Icon }) => (
                     <button key={id} onClick={() => setLens(id)}
@@ -1117,40 +1227,40 @@ export default function CockpitDashboard() {
                                 <thead className="sticky top-0 bg-secondary/60 text-[10px] font-black uppercase tracking-wider text-muted-foreground backdrop-blur">
                                     {lens === 'quant' ? (
                                         <tr>
-                                            <th className="px-3 py-2">#</th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">#<Hint label="#" text={HINTS.rank} /></span></th>
                                             <th className="px-3 py-2">Stock</th>
-                                            <th className="px-3 py-2">Composite</th>
-                                            <th className="px-3 py-2 w-52">Factor mix</th>
-                                            <th className="px-3 py-2">Band</th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Composite<Hint label="Composite" text={HINTS.composite} /></span></th>
+                                            <th className="px-3 py-2 w-52"><span className="inline-flex items-center gap-1">Factor mix<Hint label="Factor mix" text={HINTS.factorMix} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Band<Hint label="Band" text={HINTS.band} /></span></th>
                                             <th className="px-3 py-2 text-right">Price</th>
-                                            <th className="px-3 py-2 text-right">MCap</th>
+                                            <th className="px-3 py-2 text-right"><span className="inline-flex items-center gap-1">MCap<Hint label="MCap" text={HINTS.mcap} /></span></th>
                                             <th className="px-3 py-2">Sector</th>
                                         </tr>
                                     ) : lens === 'llm' ? (
                                         <tr>
-                                            <th className="px-3 py-2 text-sky-300">LLM #</th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">LLM #<Hint label="LLM #" text={HINTS.llmRank} /></span></th>
                                             <th className="px-3 py-2">Stock</th>
-                                            <th className="px-3 py-2 text-sky-300">Band</th>
-                                            <th className="px-3 py-2 text-sky-300">Stance</th>
-                                            <th className="px-3 py-2 text-sky-300">Conv</th>
-                                            <th className="px-3 py-2 text-sky-300">Action</th>
-                                            <th className="px-3 py-2">Composite</th>
-                                            <th className="px-3 py-2 w-44">Factor mix</th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">Band<Hint label="Band" text={HINTS.band} /></span></th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">Stance<Hint label="Stance" text={HINTS.stance} /></span></th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">Conv<Hint label="Conv" text={HINTS.conviction} /></span></th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">Action<Hint label="Action" text={HINTS.action} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Composite<Hint label="Composite" text={HINTS.composite} /></span></th>
+                                            <th className="px-3 py-2 w-44"><span className="inline-flex items-center gap-1">Factor mix<Hint label="Factor mix" text={HINTS.factorMix} /></span></th>
                                             <th className="px-3 py-2 text-right">Price</th>
-                                            <th className="px-3 py-2 text-right">MCap</th>
+                                            <th className="px-3 py-2 text-right"><span className="inline-flex items-center gap-1">MCap<Hint label="MCap" text={HINTS.mcap} /></span></th>
                                             <th className="px-3 py-2">Sector</th>
                                         </tr>
                                     ) : (
                                         <tr>
                                             <th className="px-3 py-2">Stock</th>
-                                            <th className="px-3 py-2 text-emerald-300">Quant #</th>
-                                            <th className="px-3 py-2 text-sky-300">LLM #</th>
-                                            <th className="px-3 py-2 text-violet-300">Δ pctl</th>
-                                            <th className="px-3 py-2">Band quant → LLM</th>
-                                            <th className="px-3 py-2">Stance</th>
-                                            <th className="px-3 py-2">Conv</th>
-                                            <th className="px-3 py-2">DCF gap</th>
-                                            <th className="px-3 py-2">Action</th>
+                                            <th className="px-3 py-2 text-emerald-300"><span className="inline-flex items-center gap-1">Quant #<Hint label="Quant #" text={HINTS.quantRank} /></span></th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">LLM #<Hint label="LLM #" text={HINTS.llmRank} /></span></th>
+                                            <th className="px-3 py-2 text-violet-300"><span className="inline-flex items-center gap-1">Δ pctl<Hint label="Δ pctl" text={HINTS.deltaPctl} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Band quant → LLM<Hint label="Band quant → LLM" text={HINTS.bandQuantLlm} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Stance<Hint label="Stance" text={HINTS.stance} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Conv<Hint label="Conv" text={HINTS.conviction} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">DCF gap<Hint label="DCF gap" text={HINTS.dcfGap} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Action<Hint label="Action" text={HINTS.action} /></span></th>
                                             <th className="px-3 py-2 text-right">Price</th>
                                             <th className="px-3 py-2">Sector</th>
                                         </tr>
