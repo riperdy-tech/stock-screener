@@ -723,6 +723,10 @@ export default function CockpitDashboard() {
     const [showHelp, setShowHelp] = useState(false);
     const auth = useAuth();
     const [showAuth, setShowAuth] = useState(false);
+    // What-if commission overlay: re-cost every trade at a user-set %/side vs the
+    // baked-in baseline, retroactively from inception. Display-only (no ledger write).
+    const [commInput, setCommInput] = useState('');
+    const [commBps, setCommBps] = useState<number | null>(null);  // null = use baseline (stored)
 
     // The logged-in user's private `mine` ledger (user_mine_ledgers, RLS-scoped).
     // Merged into the global ledger book so Track Record renders all four cards.
@@ -872,6 +876,40 @@ export default function CockpitDashboard() {
         return [...reviewed, ...rest];
     }, [lens, filteredRows, rows, bandFilter, llmFilter, sectorFilter, search, stockInfo, llmRankMap, cmpSort]);
 
+    const baseBps: number = (ledgers?.config?.cost_bps as number | undefined) ?? 10;
+    const STRAT_LEDGERS = ['plan', 'plan2', 'equal', 'mine', 'plan_llm', 'plan2_llm', 'equal_llm'];
+
+    // Cumulative extra commission (in NAV-100 units) per strategy ledger, by date,
+    // for the what-if rate vs baseline. Each trade is re-costed by |value|*delta/1e4.
+    const commDrag = useMemo(() => {
+        const L = ledgers?.ledgers;
+        if (!L || commBps == null) return null;
+        const delta = commBps - baseBps;
+        const perName: Record<string, { date: string; drag: number }[]> = {};
+        for (const name of STRAT_LEDGERS) {
+            const led = L[name];
+            if (!led) continue;
+            const trades = (led.trades ?? []).slice().sort((a: any, b: any) => (a.date || '').localeCompare(b.date || ''));
+            let cum = 0;
+            const arr: { date: string; drag: number }[] = [];
+            for (const t of trades) {
+                const v = t.value;
+                if (typeof v === 'number' && isFinite(v)) cum += Math.abs(v) * delta / 10000;
+                arr.push({ date: t.date, drag: cum });
+            }
+            perName[name] = arr;
+        }
+        return perName;
+    }, [ledgers, commBps, baseBps]);
+
+    const dragAsOf = (name: string, date: string): number => {
+        const arr = commDrag?.[name];
+        if (!arr || !arr.length) return 0;
+        let r = 0;
+        for (const x of arr) { if (x.date <= date) r = x.drag; else break; }
+        return r;
+    };
+
     const navCurve = useMemo(() => {
         const L = ledgers?.ledgers;
         if (!L) return [];
@@ -883,8 +921,9 @@ export default function CockpitDashboard() {
             for (const row of L[name]?.nav_series ?? []) {
                 if (row.nav === null || row.nav === undefined) continue;
                 byDate[row.date] = byDate[row.date] || { date: row.date };
-                if (firsts[name] === undefined) firsts[name] = row.nav;
-                byDate[row.date][name] = Number(((row.nav / firsts[name]) * 100).toFixed(2));
+                const adjNav = row.nav - dragAsOf(name, row.date);  // what-if commission overlay
+                if (firsts[name] === undefined) firsts[name] = adjNav;
+                byDate[row.date][name] = Number(((adjNav / firsts[name]) * 100).toFixed(2));
                 // Benchmarks: prefer the multi-benchmark dict, fall back to scalar IWM
                 const benches = row.benches || (row.bench != null ? { IWM: row.bench } : {});
                 for (const [sym, key] of Object.entries(benchKeys)) {
@@ -904,10 +943,42 @@ export default function CockpitDashboard() {
         else if (navRange === 'ytd') { cut.setUTCMonth(0); cut.setUTCDate(1); }
         const cutStr = cut.toISOString().slice(0, 10);
         return all.filter((r: any) => r.date >= cutStr);
-    }, [ledgers, navRange]);
+    }, [ledgers, navRange, commDrag]);
 
     const allBenches: string[] = useMemo(
         () => (ledgers?.config?.benchmarks as string[] | undefined) ?? DEFAULT_BENCHES, [ledgers]);
+
+    // Adjusted per-card stats (cumulative return + excess vs each benchmark) under
+    // the what-if commission. Falls back to the stored summary when no rate is set.
+    const commStats = useMemo(() => {
+        const L = ledgers?.ledgers;
+        if (!L || commBps == null || !commDrag) return null;
+        const out: Record<string, { cum: number | null; excess: Record<string, number> }> = {};
+        for (const name of STRAT_LEDGERS) {
+            const led = L[name];
+            if (!led) continue;
+            const rows = (led.nav_series ?? []).filter((r: any) => r.nav != null);
+            if (!rows.length) { out[name] = { cum: null, excess: {} }; continue; }
+            const adjNav = (r: any) => r.nav - dragAsOf(name, r.date);
+            const cum = adjNav(rows[rows.length - 1]) / 100 - 1;
+            const excess: Record<string, number> = {};
+            for (const b of allBenches) {
+                const br = rows.filter((r: any) => (r.benches || {})[b] != null);
+                if (br.length && br[0].benches[b]) {
+                    const bret = br[br.length - 1].benches[b] / br[0].benches[b] - 1;
+                    const stratRet = adjNav(br[br.length - 1]) / 100 - 1;
+                    excess[b] = Number(((stratRet - bret) * 100).toFixed(2));
+                }
+            }
+            out[name] = { cum: Number((cum * 100).toFixed(2)), excess };
+        }
+        return out;
+    }, [ledgers, commBps, commDrag, allBenches]);
+
+    const applyComm = () => {
+        const pct = parseFloat(commInput);
+        setCommBps(commInput.trim() === '' || !isFinite(pct) || pct < 0 ? null : pct * 100);
+    };
 
     const soldTooEarly = useMemo(() => {
         const L = ledgers?.ledgers;
@@ -1252,19 +1323,25 @@ export default function CockpitDashboard() {
                                 const ls = hasLlm ? (ledgers.ledgers[`${name}_llm`]?.summary ?? {}) : ({} as any);
                                 const label = name === 'plan' ? 'plan · value core' : name === 'plan2' ? 'plan2 · hybrid' : name;
                                 const live = ledgers.ledgers[name] && bs.observations > 0;
-                                const diff = hasLlm && bs.cumulative_return_pct != null && ls.cumulative_return_pct != null
-                                    ? Number((bs.cumulative_return_pct - ls.cumulative_return_pct).toFixed(2)) : null;
+                                // What-if commission overlay overrides Cum + vs-benchmark (the return view);
+                                // risk metrics (CAGR/DD/Sharpe) stay at the stored baseline.
+                                const cs = commStats?.[name];
+                                const csLlm = hasLlm ? commStats?.[`${name}_llm`] : null;
+                                const qCum = cs ? cs.cum : bs.cumulative_return_pct;
+                                const lCum = csLlm ? csLlm.cum : ls.cumulative_return_pct;
+                                const diff = hasLlm && qCum != null && lCum != null
+                                    ? Number((qCum - lCum).toFixed(2)) : null;
                                 const cum = (v: any) => v == null ? '—' : `${v >= 0 ? '+' : ''}${v}%`;
                                 const rows: [string, any, any][] = [
-                                    ['Cum', cum(bs.cumulative_return_pct), hasLlm ? cum(ls.cumulative_return_pct) : null],
+                                    ['Cum', cum(qCum), hasLlm ? cum(lCum) : null],
                                     ['CAGR', bs.cagr_pct ?? 'early', hasLlm ? (ls.cagr_pct ?? 'early') : null],
                                     ['Max DD', bs.max_drawdown_pct != null ? `${bs.max_drawdown_pct}%` : '—', hasLlm ? (ls.max_drawdown_pct != null ? `${ls.max_drawdown_pct}%` : '—') : null],
                                     ['Sharpe', bs.sharpe ?? '21d…', hasLlm ? (ls.sharpe ?? '21d…') : null],
                                     ['Win', bs.win_rate_pct != null ? `${bs.win_rate_pct}%` : '—', hasLlm ? (ls.win_rate_pct != null ? `${ls.win_rate_pct}%` : '—') : null],
                                     ['Open', bs.open_positions ?? 0, hasLlm ? (ls.open_positions ?? 0) : null],
                                     ...allBenches.filter(b => benchSel.has(b)).map(b => {
-                                        const bv = (bs.excess_vs || {})[b] ?? (b === 'IWM' ? bs.excess_vs_bench_pct : undefined);
-                                        const lv = (ls.excess_vs || {})[b];
+                                        const bv = cs ? cs.excess[b] : ((bs.excess_vs || {})[b] ?? (b === 'IWM' ? bs.excess_vs_bench_pct : undefined));
+                                        const lv = csLlm ? csLlm.excess[b] : (ls.excess_vs || {})[b];
                                         const f = (v: any) => v == null ? '—' : `${v >= 0 ? '+' : ''}${v}`;
                                         return [`vs ${b}`, f(bv), hasLlm ? f(lv) : null] as [string, any, any];
                                     }),
@@ -1337,6 +1414,25 @@ export default function CockpitDashboard() {
                                         {b}
                                     </button>
                                 ))}
+                            </div>
+                            <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px]">
+                                <span className="font-bold uppercase tracking-wider text-muted-foreground">Commission %/side:</span>
+                                <input type="number" step="0.01" min="0" value={commInput}
+                                    onChange={e => setCommInput(e.target.value)}
+                                    onKeyDown={e => e.key === 'Enter' && applyComm()}
+                                    placeholder={(baseBps / 100).toString()}
+                                    className="w-20 rounded-md border border-border bg-secondary/20 px-2 py-1 font-mono outline-none focus:border-emerald-500/50" />
+                                <button onClick={applyComm}
+                                    className="rounded-md border border-emerald-500/40 bg-emerald-500/15 px-3 py-1 font-black text-emerald-300 hover:bg-emerald-500/25">Set</button>
+                                {commBps != null ? (
+                                    <>
+                                        <span className="text-amber-300">applied {(commBps / 100).toFixed(3)}%/side (baseline {(baseBps / 100).toFixed(2)}%) — Cum &amp; vs-benchmark re-costed from inception</span>
+                                        <button onClick={() => { setCommInput(''); setCommBps(null); }}
+                                            className="rounded-md border border-border px-2 py-1 font-bold text-muted-foreground hover:text-foreground">Reset</button>
+                                    </>
+                                ) : (
+                                    <span className="text-muted-foreground">baseline {(baseBps / 100).toFixed(2)}%/side ({baseBps}bps) — set your KIS rate to re-cost every trade</span>
+                                )}
                             </div>
                             <ResponsiveContainer width="100%" height={280}>
                                 <LineChart data={navCurve}>
