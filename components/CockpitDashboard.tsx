@@ -25,6 +25,7 @@ import {
     FactorEntry, FactorScoresPayload, ValuationModel,
 } from '@/lib/data-service';
 import { quarterKelly, POSITION_CAP_PCT } from '@/lib/kelly';
+import { Rs2AnalysisPanel } from './Rs2AnalysisPanel';
 
 type TabId = 'rankings' | 'track' | 'portfolio' | 'validation';
 
@@ -612,6 +613,7 @@ export default function CockpitDashboard() {
     const [overlay, setOverlay] = useState<Record<string, any>>({});
     const [ledgers, setLedgers] = useState<any | null>(null);
     const [ledgerView, setLedgerView] = useState<'plan' | 'plan2' | 'equal' | 'mine'>('plan');
+    const [posSource, setPosSource] = useState<'baseline' | 'llm'>('baseline');
     const [planView, setPlanView] = useState<'plan' | 'plan2'>('plan');
     const [planLlm, setPlanLlm] = useState<any | null>(null);          // LLM-overlay variant
     const [planSource, setPlanSource] = useState<'baseline' | 'llm'>('baseline');
@@ -814,6 +816,12 @@ export default function CockpitDashboard() {
     // Portfolio tab: baseline vs LLM-overlay source, then value core vs hybrid
     const basePlan = planSource === 'llm' && planLlm ? planLlm : plan;
     const activePlan = planView === 'plan2' && basePlan?.plan2 ? basePlan.plan2 : basePlan;
+    // Positions/trades tables: show the LLM-variant ledger when the user toggles Source=LLM
+    // ('mine' has no LLM variant). Falls back to baseline if the _llm ledger isn't present yet.
+    const posKey = (posSource === 'llm' && ledgerView !== 'mine' && ledgers?.ledgers?.[`${ledgerView}_llm`])
+        ? `${ledgerView}_llm` : ledgerView;
+    const posLlm = posKey !== ledgerView;
+    const hasLlmLedgers = !!(ledgers?.ledgers && (ledgers.ledgers.plan_llm || ledgers.ledgers.equal_llm));
 
     const tabs: { id: TabId; label: string; icon: any }[] = [
         { id: 'rankings', label: 'Rankings', icon: BarChart3 },
@@ -1071,14 +1079,14 @@ export default function CockpitDashboard() {
                                     <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10 }} stroke="#64748b" />
                                     <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
                                     <Legend wrapperStyle={{ fontSize: 11 }} />
-                                    <Line type="monotone" dataKey="plan" name="plan (core)" stroke="#34d399" dot={false} strokeWidth={2} />
-                                    <Line type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} />
-                                    <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} />
-                                    <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} />
+                                    <Line type="monotone" dataKey="plan" name="plan (core)" stroke="#34d399" dot={false} strokeWidth={2} connectNulls />
+                                    <Line type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} connectNulls />
+                                    <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} connectNulls />
+                                    <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} connectNulls />
                                     {showLlm && [
-                                        <Line key="pl" type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#fbbf24" dot={false} strokeWidth={2.5} strokeDasharray="7 3" />,
-                                        <Line key="p2l" type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#fb923c" dot={false} strokeWidth={2.5} strokeDasharray="7 3" />,
-                                        <Line key="eql" type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#2dd4bf" dot={false} strokeWidth={2.5} strokeDasharray="7 3" />,
+                                        <Line key="pl" type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#fbbf24" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />,
+                                        <Line key="p2l" type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#fb923c" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />,
+                                        <Line key="eql" type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#2dd4bf" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />,
                                     ]}
                                     {allBenches.filter(b => benchSel.has(b)).map(b => (
                                         <Line key={b} type="monotone" dataKey={b.toLowerCase()} name={b}
@@ -1094,10 +1102,26 @@ export default function CockpitDashboard() {
                             )}
                         </div>
 
+                        {hasLlmLedgers && (
+                            <div className="flex items-center gap-2">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Positions source:</span>
+                                {(['baseline', 'llm'] as const).map(id => (
+                                    <button key={id} onClick={() => setPosSource(id)}
+                                        className={clsx('rounded border px-2 py-0.5 text-[10px] font-black uppercase transition',
+                                            posSource === id ? 'border-amber-400 text-amber-300' : 'border-border text-muted-foreground opacity-60 hover:opacity-90')}
+                                        title={id === 'llm' ? 'Show the LLM-overlay portfolio holdings, trades + closed round-trips' : 'Show the baseline (quant-only) holdings + trades'}>
+                                        {id === 'llm' ? 'LLM overlay' : 'Baseline'}
+                                    </button>
+                                ))}
+                                {posSource === 'llm' && ledgerView === 'mine' && (
+                                    <span className="text-[10px] text-muted-foreground">mine has no LLM variant — showing baseline</span>
+                                )}
+                            </div>
+                        )}
                         <div className="grid gap-4 xl:grid-cols-2">
                             <div className="rounded-lg border border-border bg-card/95 p-3">
                                 <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
-                                    Open positions — {ledgerView}
+                                    Open positions — {ledgerView}{posLlm ? ' · LLM' : ''}
                                 </h3>
                                 <div className="max-h-72 overflow-y-auto">
                                     <table className="w-full text-left text-xs">
@@ -1107,8 +1131,8 @@ export default function CockpitDashboard() {
                                                 <th className="px-2 py-1.5 text-right">P&L</th></tr>
                                         </thead>
                                         <tbody>
-                                            {Object.entries(ledgers.ledgers[ledgerView]?.state?.holdings ?? {}).map(([t, h]: [string, any]) => {
-                                                const mark = ledgers.ledgers[ledgerView]?.last_marks?.[t];
+                                            {Object.entries(ledgers.ledgers[posKey]?.state?.holdings ?? {}).map(([t, h]: [string, any]) => {
+                                                const mark = ledgers.ledgers[posKey]?.last_marks?.[t];
                                                 const pnl = mark && h.entry_price ? (mark / h.entry_price - 1) * 100 : null;
                                                 return (
                                                     <tr key={t} className="border-t border-border/50">
@@ -1130,14 +1154,14 @@ export default function CockpitDashboard() {
                             <div className="rounded-lg border border-border bg-card/95 p-3">
                                 <div className="mb-2 flex items-center justify-between gap-2">
                                     <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground">
-                                        Trade history — {ledgerView}
+                                        Trade history — {ledgerView}{posLlm ? ' · LLM' : ''}
                                     </h3>
                                     <input value={tradeQuery} onChange={e => setTradeQuery(e.target.value)} placeholder="filter ticker / date"
                                         className="w-36 rounded-md border border-border bg-secondary/20 px-2 py-1 text-[11px] outline-none focus:border-emerald-500/50" />
                                 </div>
                                 <div className="max-h-72 overflow-y-auto">
                                     {(() => {
-                                        const trades = (ledgers.ledgers[ledgerView]?.trades ?? []);
+                                        const trades = (ledgers.ledgers[posKey]?.trades ?? []);
                                         const tq = tradeQuery.trim().toUpperCase();
                                         const filtered = tq
                                             ? trades.filter((t: any) => (t.ticker || '').toUpperCase().includes(tq) || (t.date || '').includes(tq))
@@ -1170,11 +1194,11 @@ export default function CockpitDashboard() {
                         {/* Closed trades — realized round-trip history */}
                         <div className="rounded-lg border border-border bg-card/95 p-3">
                             <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
-                                Closed trades — {ledgerView} (realized)
+                                Closed trades — {ledgerView}{posLlm ? ' · LLM' : ''} (realized)
                             </h3>
                             <div className="max-h-80 overflow-y-auto">
                                 {(() => {
-                                    const closed = (ledgers.ledgers[ledgerView]?.closed ?? []).slice()
+                                    const closed = (ledgers.ledgers[posKey]?.closed ?? []).slice()
                                         .sort((a: any, b: any) => (b.exit_date || '').localeCompare(a.exit_date || ''));
                                     if (closed.length === 0) return <p className="px-2 py-2 text-[11px] text-muted-foreground">No closed trades yet — sells appear here once positions exit.</p>;
                                     const wins = closed.filter((c: any) => c.return_pct != null && c.return_pct > 0).length;
@@ -1520,8 +1544,11 @@ export default function CockpitDashboard() {
                         <h3 className="mb-2 mt-5 text-xs font-black uppercase tracking-wider text-muted-foreground">Valuation workbench (reverse DCF)</h3>
                         <ValuationWorkbench ticker={selected} model={valuations[selected]} marketCap={selectedInfo?.marketCap} />
 
+                        <h3 className="mb-2 mt-6 text-xs font-black uppercase tracking-wider text-muted-foreground">RS2 local-LLM analysis</h3>
+                        <Rs2AnalysisPanel symbol={selected} displayTicker={selected} />
+
                         <div className="mt-5 rounded-md border border-border bg-secondary/10 p-2.5 text-[11px] text-muted-foreground">
-                            Full lens detail (reverse engine, paradigm, AI deep-dive) lives in the{' '}
+                            Full lens detail (reverse engine, paradigm, factor history) lives in the{' '}
                             <Link href="/lenses" className="font-bold text-emerald-300 underline">Lenses view</Link>.
                         </div>
                     </div>
