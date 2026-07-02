@@ -12,8 +12,8 @@ import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import { AuthModal } from './AuthModal';
 import {
-    Activity, ArrowUpRight, BarChart3, Briefcase, ExternalLink, FlaskConical,
-    HelpCircle, Layers3, LineChart as LineChartIcon, RefreshCw, Search, ShieldAlert, X,
+    Activity, ArrowUpRight, BarChart3, Briefcase, Cpu, ExternalLink, FlaskConical, GitCompareArrows,
+    HelpCircle, Layers3, LineChart as LineChartIcon, RefreshCw, Search, ShieldAlert, Sparkles, X,
 } from 'lucide-react';
 import {
     Bar, BarChart, Brush, CartesianGrid, Legend, Line, LineChart, ReferenceLine,
@@ -201,6 +201,45 @@ function LlmChip({ entry }: { entry?: FactorEntry | null }) {
         </span>
     );
 }
+
+// THE LENS — the one switch that decides whose eyes you look through: the deterministic factor
+// engine (quant), the RS2 local-LLM verdicts (llm), or both side by side (compare).
+function LensSwitch({ lens, setLens }: { lens: 'quant' | 'llm' | 'compare'; setLens: (l: 'quant' | 'llm' | 'compare') => void }) {
+    const items = [
+        { id: 'quant' as const, label: 'Quant', Icon: Cpu, on: 'border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]' },
+        { id: 'llm' as const, label: 'RS2 LLM', Icon: Sparkles, on: 'border-sky-400/60 bg-sky-500/15 text-sky-300 shadow-[0_0_12px_-2px_rgba(56,189,248,0.45)]' },
+        { id: 'compare' as const, label: 'Compare', Icon: GitCompareArrows, on: 'border-violet-400/60 bg-violet-500/15 text-violet-300 shadow-[0_0_12px_-2px_rgba(167,139,250,0.45)]' },
+    ];
+    return (
+        <div className="flex items-center gap-2">
+            <span className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">Lens</span>
+            <div className="flex overflow-hidden rounded-lg border border-border bg-secondary/20 p-0.5">
+                {items.map(({ id, label, Icon }) => (
+                    <button key={id} onClick={() => setLens(id)}
+                        title={id === 'quant' ? 'The original deterministic factor view — unchanged'
+                            : id === 'llm' ? "The RS2 local-LLM's own Research-Now → Watchlist list + verdicts"
+                                : 'Both engines side by side — disagreements first'}
+                        className={clsx('flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-black transition-all',
+                            lens === id ? items.find(i => i.id === id)!.on
+                                : 'border-transparent text-muted-foreground hover:text-foreground')}>
+                        <Icon className="h-3.5 w-3.5" /> {label}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+// Colored stance pill for the LLM/compare rankings columns.
+function StancePill({ stance }: { stance?: string | null }) {
+    if (!stance) return <span className="text-muted-foreground">—</span>;
+    const cls = stance === 'undervalued' ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
+        : stance === 'overvalued' ? 'border-red-500/40 bg-red-500/10 text-red-300'
+            : 'border-amber-500/40 bg-amber-500/10 text-amber-300';
+    return <span className={clsx('inline-flex rounded-full border px-2 py-0.5 text-[10px] font-black uppercase tracking-wider', cls)}>{stance}</span>;
+}
+
+const convColor = (c?: number | null) => c == null ? 'text-muted-foreground' : c >= 10 ? 'text-emerald-300' : c >= 7 ? 'text-amber-300' : 'text-red-300';
 
 function ContributionBar({ entry }: { entry: FactorEntry }) {
     const contributions = entry.fct_contributions;
@@ -613,11 +652,15 @@ export default function CockpitDashboard() {
     const [overlay, setOverlay] = useState<Record<string, any>>({});
     const [ledgers, setLedgers] = useState<any | null>(null);
     const [ledgerView, setLedgerView] = useState<'plan' | 'plan2' | 'equal' | 'mine'>('plan');
-    const [posSource, setPosSource] = useState<'baseline' | 'llm'>('baseline');
+    // THE LENS — one switch that re-skins Rankings + Track Record through the chosen engine's
+    // eyes: quant (deterministic factor engine, the original view), llm (RS2 local-LLM verdicts),
+    // compare (both side by side). Replaces the old scattered showLlm / posSource toggles.
+    const [lens, setLens] = useState<'quant' | 'llm' | 'compare'>('quant');
+    const [posSource, setPosSource] = useState<'baseline' | 'llm'>('baseline'); // compare-lens tables only
+    const [cmpSort, setCmpSort] = useState<'delta' | 'quant' | 'llm'>('delta'); // compare-lens row order
     const [planView, setPlanView] = useState<'plan' | 'plan2'>('plan');
     const [planLlm, setPlanLlm] = useState<any | null>(null);          // LLM-overlay variant
     const [planSource, setPlanSource] = useState<'baseline' | 'llm'>('baseline');
-    const [showLlm, setShowLlm] = useState(true);                      // overlay LLM lines on the NAV chart
     const [navRange, setNavRange] = useState<'1m' | '3m' | 'ytd' | 'all'>('all');
     const [tradeQuery, setTradeQuery] = useState('');
     const [benchSel, setBenchSel] = useState<Set<string>>(new Set(DEFAULT_BENCHES));
@@ -730,6 +773,63 @@ export default function CockpitDashboard() {
         return true;
     }), [rows, bandFilter, llmFilter, sectorFilter, search, stockInfo]);
 
+    // ── RS2 LLM lens ordering: the LLM's own RN → WL list ─────────────────────
+    // Reviewed names sorted by LLM band (research_now → watchlist → monitor → pass, vetoes sink
+    // within band) then LLM percentile. llmRank = 1..N within the reviewed set.
+    const BAND_ORDER: Record<string, number> = useMemo(() => ({ research_now: 0, watchlist: 1, monitor: 2, pass: 3 }), []);
+    const llmRankMap = useMemo(() => {
+        const reviewed = rows.filter(([, e]) => e.fct_llm_verdict);
+        reviewed.sort((a, b) => {
+            const ea = a[1], eb = b[1];
+            const ba = BAND_ORDER[ea.fct_band_llm ?? ''] ?? 4, bb = BAND_ORDER[eb.fct_band_llm ?? ''] ?? 4;
+            if (ba !== bb) return ba - bb;
+            const va = ea.fct_llm_veto ? 1 : 0, vb = eb.fct_llm_veto ? 1 : 0;
+            if (va !== vb) return va - vb;
+            return (eb.fct_percentile_llm ?? -1) - (ea.fct_percentile_llm ?? -1);
+        });
+        const m: Record<string, number> = {};
+        reviewed.forEach(([t], i) => { m[t] = i + 1; });
+        return m;
+    }, [rows, BAND_ORDER]);
+
+    // Rows for the active lens. quant = untouched original ordering. llm/compare = the LLM's list
+    // first (its RN→WL), then every unreviewed name greyed below in quant order (filters + the
+    // Show-more pager keep the tail tucked away). In llm/compare the band filter reads the LLM band.
+    const lensRows = useMemo(() => {
+        if (lens === 'quant') return filteredRows;
+        const base = rows.filter(([t, e]) => {
+            const bandOf = e.fct_llm_verdict ? e.fct_band_llm : e.fct_band;
+            if (bandFilter !== 'all' && bandOf !== bandFilter) return false;
+            if (llmFilter !== 'all') {
+                const v = e.fct_llm_verdict;
+                if (llmFilter === 'reviewed' && !v) return false;
+                else if (llmFilter === 'promoted' && e.fct_llm !== 'promoted') return false;
+                else if (llmFilter === 'demoted' && e.fct_llm !== 'demoted') return false;
+                else if (llmFilter === 'vetoed' && e.fct_llm_veto !== 'llm_reject') return false;
+                else if ((llmFilter === 'undervalued' || llmFilter === 'fair' || llmFilter === 'overvalued')
+                         && v?.stance !== llmFilter) return false;
+            }
+            if (sectorFilter !== 'all' && stockInfo[t]?.sector !== sectorFilter) return false;
+            if (search) {
+                const q = search.toUpperCase();
+                if (!t.includes(q) && !(stockInfo[t]?.name || '').toUpperCase().includes(q)) return false;
+            }
+            return true;
+        });
+        const reviewed = base.filter(([t]) => llmRankMap[t] !== undefined);
+        const rest = base.filter(([t]) => llmRankMap[t] === undefined);
+        if (lens === 'compare' && cmpSort === 'delta') {
+            reviewed.sort((a, b) =>
+                Math.abs((b[1].fct_percentile_llm ?? 0) - (b[1].fct_percentile ?? 0))
+                - Math.abs((a[1].fct_percentile_llm ?? 0) - (a[1].fct_percentile ?? 0)));
+        } else if (lens === 'compare' && cmpSort === 'quant') {
+            reviewed.sort((a, b) => (a[1].fct_rank ?? 1e9) - (b[1].fct_rank ?? 1e9));
+        } else {
+            reviewed.sort((a, b) => (llmRankMap[a[0]] ?? 1e9) - (llmRankMap[b[0]] ?? 1e9));
+        }
+        return [...reviewed, ...rest];
+    }, [lens, filteredRows, rows, bandFilter, llmFilter, sectorFilter, search, stockInfo, llmRankMap, cmpSort]);
+
     const navCurve = useMemo(() => {
         const L = ledgers?.ledgers;
         if (!L) return [];
@@ -816,12 +916,15 @@ export default function CockpitDashboard() {
     // Portfolio tab: baseline vs LLM-overlay source, then value core vs hybrid
     const basePlan = planSource === 'llm' && planLlm ? planLlm : plan;
     const activePlan = planView === 'plan2' && basePlan?.plan2 ? basePlan.plan2 : basePlan;
-    // Positions/trades tables: show the LLM-variant ledger when the user toggles Source=LLM
-    // ('mine' has no LLM variant). Falls back to baseline if the _llm ledger isn't present yet.
-    const posKey = (posSource === 'llm' && ledgerView !== 'mine' && ledgers?.ledgers?.[`${ledgerView}_llm`])
+    // Positions/trades tables follow the lens: llm lens → the *_llm ledgers; compare lens → a mini
+    // Baseline/LLM toggle; quant lens → baseline. 'mine' has no LLM variant (falls back).
+    const wantLlmTables = lens === 'llm' || (lens === 'compare' && posSource === 'llm');
+    const posKey = (wantLlmTables && ledgerView !== 'mine' && ledgers?.ledgers?.[`${ledgerView}_llm`])
         ? `${ledgerView}_llm` : ledgerView;
     const posLlm = posKey !== ledgerView;
     const hasLlmLedgers = !!(ledgers?.ledgers && (ledgers.ledgers.plan_llm || ledgers.ledgers.equal_llm));
+    const llmInception = ledgers?.ledgers?.plan_llm?.nav_series?.[0]?.date
+        ?? ledgers?.ledgers?.equal_llm?.nav_series?.[0]?.date ?? null;
 
     const tabs: { id: TabId; label: string; icon: any }[] = [
         { id: 'rankings', label: 'Rankings', icon: BarChart3 },
@@ -888,6 +991,21 @@ export default function CockpitDashboard() {
                 {/* ── Rankings ───────────────────────────────────────── */}
                 {tab === 'rankings' && (
                     <div className="space-y-3">
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                            <LensSwitch lens={lens} setLens={setLens} />
+                            {lens === 'compare' && (
+                                <div className="flex items-center gap-1">
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">sort</span>
+                                    {([['delta', 'Δ disagreement'], ['quant', 'quant #'], ['llm', 'LLM #']] as const).map(([id, label]) => (
+                                        <button key={id} onClick={() => setCmpSort(id)}
+                                            className={clsx('rounded px-2 py-1 text-[10px] font-black uppercase',
+                                                cmpSort === id ? 'bg-violet-500/20 text-violet-300' : 'text-muted-foreground hover:text-foreground')}>
+                                            {label}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                         <div className="flex flex-wrap items-center gap-2">
                             <div className="relative">
                                 <Search className="absolute left-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
@@ -895,6 +1013,7 @@ export default function CockpitDashboard() {
                                     className="rounded-md border border-border bg-secondary/20 py-1.5 pl-7 pr-2 text-xs font-semibold outline-none focus:border-emerald-500/50" />
                             </div>
                             <select value={bandFilter} onChange={e => setBandFilter(e.target.value)}
+                                title={lens === 'quant' ? 'Filter by the quant band' : 'Filter by the LLM band (reviewed names) / quant band (unreviewed)'}
                                 className="rounded-md border border-border bg-secondary/20 px-2 py-1.5 text-xs font-semibold">
                                 <option value="all">All bands</option>
                                 <option value="research_now">Research now</option>
@@ -920,58 +1039,152 @@ export default function CockpitDashboard() {
                                 <option value="all">All sectors</option>
                                 {sectors.map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
-                            <span className="text-xs font-semibold text-muted-foreground">{filteredRows.length} stocks · sector-neutral z, IC-calibrated weights</span>
+                            <span className="text-xs font-semibold text-muted-foreground">
+                                {lens === 'quant'
+                                    ? `${filteredRows.length} stocks · sector-neutral z, IC-calibrated weights`
+                                    : `${lensRows.filter(([t]) => llmRankMap[t] !== undefined).length} RS2-reviewed ranked first · ${lensRows.filter(([t]) => llmRankMap[t] === undefined).length} unreviewed greyed below`}
+                            </span>
                         </div>
                         <div className="overflow-x-auto rounded-lg border border-border">
-                            <table className="w-full min-w-[980px] text-left text-xs">
+                            <table className={clsx('w-full text-left text-xs', lens === 'quant' ? 'min-w-[980px]' : 'min-w-[1180px]')}>
                                 <thead className="sticky top-0 bg-secondary/60 text-[10px] font-black uppercase tracking-wider text-muted-foreground backdrop-blur">
-                                    <tr>
-                                        <th className="px-3 py-2">#</th>
-                                        <th className="px-3 py-2">Stock</th>
-                                        <th className="px-3 py-2">Composite</th>
-                                        <th className="px-3 py-2 w-52">Factor mix</th>
-                                        <th className="px-3 py-2">Band</th>
-                                        <th className="px-3 py-2">DCF gap</th>
-                                        <th className="px-3 py-2 text-right">Price</th>
-                                        <th className="px-3 py-2 text-right">MCap</th>
-                                        <th className="px-3 py-2">Sector</th>
-                                    </tr>
+                                    {lens === 'quant' ? (
+                                        <tr>
+                                            <th className="px-3 py-2">#</th>
+                                            <th className="px-3 py-2">Stock</th>
+                                            <th className="px-3 py-2">Composite</th>
+                                            <th className="px-3 py-2 w-52">Factor mix</th>
+                                            <th className="px-3 py-2">Band</th>
+                                            <th className="px-3 py-2">DCF gap</th>
+                                            <th className="px-3 py-2 text-right">Price</th>
+                                            <th className="px-3 py-2 text-right">MCap</th>
+                                            <th className="px-3 py-2">Sector</th>
+                                        </tr>
+                                    ) : lens === 'llm' ? (
+                                        <tr>
+                                            <th className="px-3 py-2 text-sky-300">LLM #</th>
+                                            <th className="px-3 py-2">Stock</th>
+                                            <th className="px-3 py-2 text-sky-300">LLM band · quant band</th>
+                                            <th className="px-3 py-2 text-sky-300">Stance</th>
+                                            <th className="px-3 py-2 text-sky-300">Conv</th>
+                                            <th className="px-3 py-2 text-sky-300">Action</th>
+                                            <th className="px-3 py-2">Composite</th>
+                                            <th className="px-3 py-2 w-44">Factor mix</th>
+                                            <th className="px-3 py-2">DCF gap</th>
+                                            <th className="px-3 py-2 text-right">Price</th>
+                                            <th className="px-3 py-2 text-right">MCap</th>
+                                            <th className="px-3 py-2">Sector</th>
+                                        </tr>
+                                    ) : (
+                                        <tr>
+                                            <th className="px-3 py-2">Stock</th>
+                                            <th className="px-3 py-2 text-emerald-300">Quant #</th>
+                                            <th className="px-3 py-2 text-sky-300">LLM #</th>
+                                            <th className="px-3 py-2 text-violet-300">Δ pctl</th>
+                                            <th className="px-3 py-2">Band quant → LLM</th>
+                                            <th className="px-3 py-2">Stance</th>
+                                            <th className="px-3 py-2">Conv</th>
+                                            <th className="px-3 py-2">DCF gap</th>
+                                            <th className="px-3 py-2">Action</th>
+                                            <th className="px-3 py-2 text-right">Price</th>
+                                            <th className="px-3 py-2">Sector</th>
+                                        </tr>
+                                    )}
                                 </thead>
                                 <tbody>
-                                    {filteredRows.slice(0, limit).map(([t, e]) => {
+                                    {lensRows.slice(0, limit).map(([t, e]) => {
                                         const info = stockInfo[t];
                                         const vm = valuations[t];
                                         const gap = vm?.expectations_gap_pts;
+                                        const v = e.fct_llm_verdict;
+                                        const lrank = llmRankMap[t];
+                                        const unreviewed = lens !== 'quant' && lrank === undefined;
+                                        const dPctl = (e.fct_percentile_llm != null && e.fct_percentile != null)
+                                            ? e.fct_percentile_llm - e.fct_percentile : null;
+                                        const gapCell = gap === null || gap === undefined
+                                            ? <span className="text-muted-foreground">—</span>
+                                            : <span className={gap > 5 ? 'text-amber-300' : gap < -5 ? 'text-emerald-300' : 'text-muted-foreground'}>
+                                                  {gap > 0 ? '+' : ''}{gap.toFixed(0)}pts</span>;
+                                        const stockCell = (
+                                            <td className="px-3 py-2">
+                                                <div className="font-black">{t}</div>
+                                                <div className="max-w-[180px] truncate text-[10px] text-muted-foreground">{info?.name || ''}</div>
+                                            </td>
+                                        );
                                         return (
                                             <tr key={t} onClick={() => setSelected(t)}
-                                                className="cursor-pointer border-t border-border/50 transition-colors odd:bg-secondary/10 hover:bg-emerald-500/[0.06]">
-                                                <td className="px-3 py-2 font-mono font-black text-muted-foreground">{e.fct_rank}</td>
-                                                <td className="px-3 py-2">
-                                                    <div className="font-black">{t}</div>
-                                                    <div className="max-w-[180px] truncate text-[10px] text-muted-foreground">{info?.name || ''}</div>
-                                                </td>
-                                                <td className="px-3 py-2 font-mono text-sm font-black text-emerald-300">{e.fct_composite?.toFixed(1)}</td>
-                                                <td className="px-3 py-2"><ContributionBar entry={e} /></td>
-                                                <td className="px-3 py-2"><div className="flex flex-wrap items-center gap-1"><BandChip band={e.fct_band} veto={e.fct_veto} /><LlmChip entry={e} /></div></td>
-                                                <td className="px-3 py-2 font-mono font-bold">
-                                                    {gap === null || gap === undefined ? <span className="text-muted-foreground">—</span> :
-                                                        <span className={gap > 5 ? 'text-amber-300' : gap < -5 ? 'text-emerald-300' : 'text-muted-foreground'}>
-                                                            {gap > 0 ? '+' : ''}{gap.toFixed(0)}pts
-                                                        </span>}
-                                                </td>
-                                                <td className="px-3 py-2 text-right font-mono">{info?.price ? `$${info.price.toFixed(2)}` : '—'}</td>
-                                                <td className="px-3 py-2 text-right font-mono">{fmtMcap(info?.marketCap)}</td>
-                                                <td className="px-3 py-2 text-muted-foreground">{info?.sector || '—'}</td>
+                                                className={clsx('cursor-pointer border-t border-border/50 transition-colors odd:bg-secondary/10 hover:bg-emerald-500/[0.06]',
+                                                    unreviewed && 'opacity-45')}>
+                                                {lens === 'quant' ? (<>
+                                                    <td className="px-3 py-2 font-mono font-black text-muted-foreground">{e.fct_rank}</td>
+                                                    {stockCell}
+                                                    <td className="px-3 py-2 font-mono text-sm font-black text-emerald-300">{e.fct_composite?.toFixed(1)}</td>
+                                                    <td className="px-3 py-2"><ContributionBar entry={e} /></td>
+                                                    <td className="px-3 py-2"><div className="flex flex-wrap items-center gap-1"><BandChip band={e.fct_band} veto={e.fct_veto} /><LlmChip entry={e} /></div></td>
+                                                    <td className="px-3 py-2 font-mono font-bold">{gapCell}</td>
+                                                    <td className="px-3 py-2 text-right font-mono">{info?.price ? `$${info.price.toFixed(2)}` : '—'}</td>
+                                                    <td className="px-3 py-2 text-right font-mono">{fmtMcap(info?.marketCap)}</td>
+                                                    <td className="px-3 py-2 text-muted-foreground">{info?.sector || '—'}</td>
+                                                </>) : lens === 'llm' ? (<>
+                                                    <td className="px-3 py-2 font-mono font-black">
+                                                        {lrank !== undefined
+                                                            ? <span className="text-sky-300">{lrank}</span>
+                                                            : <span className="text-muted-foreground" title="Not yet reviewed by RS2 — quant rank shown">q{e.fct_rank}</span>}
+                                                    </td>
+                                                    {stockCell}
+                                                    <td className="px-3 py-2">
+                                                        <div className="flex flex-wrap items-center gap-1">
+                                                            {lrank !== undefined
+                                                                ? <><BandChip band={e.fct_band_llm ?? null} veto={e.fct_llm_veto ?? null} />
+                                                                    <span className="text-[9px] text-muted-foreground">q:</span>
+                                                                    <span className="scale-90 opacity-70"><BandChip band={e.fct_band} veto={e.fct_veto} /></span></>
+                                                                : <BandChip band={e.fct_band} veto={e.fct_veto} />}
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-3 py-2"><StancePill stance={v?.stance} /></td>
+                                                    <td className={clsx('px-3 py-2 font-mono font-black', convColor(v?.conviction))}>{v?.conviction ?? '—'}</td>
+                                                    <td className="max-w-[150px] truncate px-3 py-2 text-[11px] text-muted-foreground" title={v?.action || ''}>{v?.action || '—'}</td>
+                                                    <td className="px-3 py-2 font-mono text-sm font-black text-emerald-300">{e.fct_composite?.toFixed(1)}</td>
+                                                    <td className="px-3 py-2"><ContributionBar entry={e} /></td>
+                                                    <td className="px-3 py-2 font-mono font-bold">{gapCell}</td>
+                                                    <td className="px-3 py-2 text-right font-mono">{info?.price ? `$${info.price.toFixed(2)}` : '—'}</td>
+                                                    <td className="px-3 py-2 text-right font-mono">{fmtMcap(info?.marketCap)}</td>
+                                                    <td className="px-3 py-2 text-muted-foreground">{info?.sector || '—'}</td>
+                                                </>) : (<>
+                                                    {stockCell}
+                                                    <td className="px-3 py-2 font-mono font-black text-emerald-300">{e.fct_rank}</td>
+                                                    <td className="px-3 py-2 font-mono font-black text-sky-300">{lrank ?? '—'}</td>
+                                                    <td className="px-3 py-2 font-mono font-black">
+                                                        {dPctl === null ? <span className="text-muted-foreground">—</span>
+                                                            : <span className={dPctl > 1 ? 'text-emerald-300' : dPctl < -1 ? 'text-red-300' : 'text-muted-foreground'}>
+                                                                  {dPctl > 0 ? '▲ +' : dPctl < 0 ? '▼ ' : ''}{dPctl.toFixed(0)}</span>}
+                                                    </td>
+                                                    <td className="px-3 py-2">
+                                                        <div className="flex flex-wrap items-center gap-1">
+                                                            <BandChip band={e.fct_band} veto={e.fct_veto} />
+                                                            {lrank !== undefined && <>
+                                                                <span className="text-muted-foreground">→</span>
+                                                                <BandChip band={e.fct_band_llm ?? null} veto={e.fct_llm_veto ?? null} />
+                                                            </>}
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-3 py-2"><StancePill stance={v?.stance} /></td>
+                                                    <td className={clsx('px-3 py-2 font-mono font-black', convColor(v?.conviction))}>{v?.conviction ?? '—'}</td>
+                                                    <td className="px-3 py-2 font-mono font-bold">{gapCell}</td>
+                                                    <td className="max-w-[170px] truncate px-3 py-2 text-[11px] text-muted-foreground" title={v?.action || ''}>{v?.action || '—'}</td>
+                                                    <td className="px-3 py-2 text-right font-mono">{info?.price ? `$${info.price.toFixed(2)}` : '—'}</td>
+                                                    <td className="px-3 py-2 text-muted-foreground">{info?.sector || '—'}</td>
+                                                </>)}
                                             </tr>
                                         );
                                     })}
                                 </tbody>
                             </table>
                         </div>
-                        {filteredRows.length > limit && (
+                        {lensRows.length > limit && (
                             <button onClick={() => setLimit(l => l + 100)}
                                 className="w-full rounded-md border border-border bg-secondary/20 py-2 text-xs font-bold text-muted-foreground hover:text-foreground">
-                                Show more ({filteredRows.length - limit} remaining)
+                                Show more ({lensRows.length - limit} remaining)
                             </button>
                         )}
                     </div>
@@ -980,6 +1193,14 @@ export default function CockpitDashboard() {
                 {/* ── Track Record (live paper-trading ledgers) ─────────── */}
                 {tab === 'track' && (ledgers?.ledgers ? (
                     <div className="space-y-4">
+                        <div className="flex flex-wrap items-center gap-3">
+                            <LensSwitch lens={lens} setLens={setLens} />
+                            {lens !== 'quant' && llmInception && (
+                                <span className="rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 text-[10px] font-bold text-sky-300">
+                                    LLM ledgers live since {llmInception} — early days
+                                </span>
+                            )}
+                        </div>
                         <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
                             <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
                             <p>
@@ -993,16 +1214,67 @@ export default function CockpitDashboard() {
                             </p>
                         </div>
 
+                        {lens === 'compare' ? (
+                            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                                {(['plan', 'plan2', 'equal'] as const).map(name => {
+                                    const base = ledgers.ledgers[name]?.summary ?? {};
+                                    const llmS = ledgers.ledgers[`${name}_llm`]?.summary ?? {};
+                                    const b = base.cumulative_return_pct, l = llmS.cumulative_return_pct;
+                                    const diff = (b != null && l != null) ? Number((b - l).toFixed(2)) : null;
+                                    const label = name === 'plan' ? 'plan · value core' : name === 'plan2' ? 'plan2 · hybrid' : name;
+                                    return (
+                                        <div key={name} className={clsx('rounded-lg border bg-card/95 p-3', ledgerView === name ? 'border-violet-500/50' : 'border-border')}>
+                                            <button onClick={() => setLedgerView(name)} className="w-full text-left">
+                                                <div className="text-[11px] font-black uppercase tracking-wider">{label}</div>
+                                                <div className="mt-2 flex items-baseline justify-between">
+                                                    <span className="text-[11px] font-bold text-emerald-300">quant</span>
+                                                    <span className={clsx('font-mono text-base font-black', b == null ? 'text-muted-foreground' : b >= 0 ? 'text-success' : 'text-danger')}>
+                                                        {b == null ? '—' : `${b >= 0 ? '+' : ''}${b}%`}</span>
+                                                </div>
+                                                <div className="flex items-baseline justify-between">
+                                                    <span className="text-[11px] font-bold text-sky-300">RS2 LLM</span>
+                                                    <span className={clsx('font-mono text-base font-black', l == null ? 'text-muted-foreground' : l >= 0 ? 'text-success' : 'text-danger')}>
+                                                        {l == null ? '—' : `${l >= 0 ? '+' : ''}${l}%`}</span>
+                                                </div>
+                                                <div className="mt-2 border-t border-border/40 pt-1.5 text-[11px]">
+                                                    {diff == null ? <span className="text-muted-foreground">no comparison yet</span>
+                                                        : diff >= 0
+                                                            ? <span className="text-muted-foreground">quant ahead <b className="font-mono text-emerald-300">+{diff}pts</b></span>
+                                                            : <span className="text-muted-foreground">LLM ahead <b className="font-mono text-sky-300">+{Math.abs(diff)}pts</b></span>}
+                                                </div>
+                                                <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-[10px] text-muted-foreground">
+                                                    <span>open q:{base.open_positions ?? 0} / llm:{llmS.open_positions ?? 0}</span>
+                                                    <span>maxDD q:{base.max_drawdown_pct ?? '—'} / llm:{llmS.max_drawdown_pct ?? '—'}</span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    );
+                                })}
+                                <div className={clsx('rounded-lg border bg-card/95 p-3 opacity-80', ledgerView === 'mine' ? 'border-violet-500/50' : 'border-border')}>
+                                    <button onClick={() => setLedgerView('mine')} className="w-full text-left">
+                                        <div className="text-[11px] font-black uppercase tracking-wider">mine</div>
+                                        <p className="mt-2 text-[11px] text-muted-foreground">Your holdings — no LLM variant. Cum:{' '}
+                                            <b className="font-mono text-foreground">
+                                                {ledgers.ledgers.mine?.summary?.cumulative_return_pct != null
+                                                    ? `${ledgers.ledgers.mine.summary.cumulative_return_pct >= 0 ? '+' : ''}${ledgers.ledgers.mine.summary.cumulative_return_pct}%` : '—'}
+                                            </b>
+                                        </p>
+                                    </button>
+                                </div>
+                            </div>
+                        ) : (
                         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                             {(['plan', 'plan2', 'equal', 'mine'] as const).map(name => {
-                                const led = ledgers.ledgers[name];
+                                const key = lens === 'llm' && name !== 'mine' && ledgers.ledgers[`${name}_llm`] ? `${name}_llm` : name;
+                                const led = ledgers.ledgers[key];
                                 const s = led?.summary ?? {};
                                 const live = led && s.observations > 0 && led.nav_series.some((r: any) => r.nav !== null);
-                                const label = name === 'plan' ? 'plan · value core'
-                                    : name === 'plan2' ? 'plan2 · hybrid' : name;
+                                const label = (name === 'plan' ? 'plan · value core'
+                                    : name === 'plan2' ? 'plan2 · hybrid' : name)
+                                    + (key !== name ? ' · LLM' : lens === 'llm' && name === 'mine' ? ' · no LLM variant' : '');
                                 return (
                                     <div key={name} className={clsx('rounded-lg border bg-card/95 p-3',
-                                        ledgerView === name ? 'border-emerald-500/50' : 'border-border')}>
+                                        ledgerView === name ? (lens === 'llm' ? 'border-sky-500/50' : 'border-emerald-500/50') : 'border-border')}>
                                         <button onClick={() => setLedgerView(name)} className="w-full text-left">
                                             <div className="flex items-baseline justify-between">
                                                 <span className="text-[11px] font-black uppercase tracking-wider">{label}</span>
@@ -1041,10 +1313,15 @@ export default function CockpitDashboard() {
                                 );
                             })}
                         </div>
+                        )}
 
                         <div className="rounded-lg border border-border bg-card/95 p-3">
                             <div className="mb-2 flex items-center justify-between">
-                                <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground">NAV — indexed to 100 at inception</h3>
+                                <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground">
+                                    NAV — indexed to 100 at inception
+                                    {lens === 'llm' ? <span className="ml-2 text-sky-300">· RS2 LLM ledgers</span>
+                                        : lens === 'compare' ? <span className="ml-2 text-violet-300">· quant solid vs LLM dashed</span> : ''}
+                                </h3>
                                 <div className="flex gap-1">
                                     {(['1m', '3m', 'ytd', 'all'] as const).map(r => (
                                         <button key={r} onClick={() => setNavRange(r)}
@@ -1065,12 +1342,6 @@ export default function CockpitDashboard() {
                                         {b}
                                     </button>
                                 ))}
-                                <button onClick={() => setShowLlm(v => !v)}
-                                    className={clsx('rounded border px-2 py-0.5 text-[10px] font-black uppercase transition',
-                                        showLlm ? 'border-sky-400 text-sky-300' : 'border-border text-muted-foreground opacity-50 hover:opacity-80')}
-                                    title="Overlay the LLM-variant NAV lines (dashed) for baseline-vs-LLM comparison">
-                                    LLM overlay (dashed)
-                                </button>
                             </div>
                             <ResponsiveContainer width="100%" height={280}>
                                 <LineChart data={navCurve}>
@@ -1079,11 +1350,20 @@ export default function CockpitDashboard() {
                                     <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10 }} stroke="#64748b" />
                                     <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
                                     <Legend wrapperStyle={{ fontSize: 11 }} />
-                                    <Line type="monotone" dataKey="plan" name="plan (core)" stroke="#34d399" dot={false} strokeWidth={2} connectNulls />
-                                    <Line type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} connectNulls />
-                                    <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} connectNulls />
+                                    {lens !== 'llm' && [
+                                        <Line key="p" type="monotone" dataKey="plan" name="plan (core)" stroke="#34d399" dot={false} strokeWidth={2} connectNulls />,
+                                        <Line key="p2" type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} connectNulls />,
+                                        <Line key="e" type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} connectNulls />,
+                                    ]}
                                     <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} connectNulls />
-                                    {showLlm && [
+                                    {lens === 'llm' && [
+                                        // LLM lens: only the LLM ledgers — solid, same strategy colors (plan=green mental model kept)
+                                        <Line key="pl" type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#34d399" dot={false} strokeWidth={2} connectNulls />,
+                                        <Line key="p2l" type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#f472b6" dot={false} strokeWidth={2} connectNulls />,
+                                        <Line key="eql" type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#38bdf8" dot={false} strokeWidth={2} connectNulls />,
+                                    ]}
+                                    {lens === 'compare' && [
+                                        // Compare: LLM dashed in distinct warm colors next to the solid baselines
                                         <Line key="pl" type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#fbbf24" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />,
                                         <Line key="p2l" type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#fb923c" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />,
                                         <Line key="eql" type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#2dd4bf" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />,
@@ -1102,7 +1382,7 @@ export default function CockpitDashboard() {
                             )}
                         </div>
 
-                        {hasLlmLedgers && (
+                        {lens === 'compare' && hasLlmLedgers && (
                             <div className="flex items-center gap-2">
                                 <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Positions source:</span>
                                 {(['baseline', 'llm'] as const).map(id => (
