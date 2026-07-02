@@ -33,7 +33,7 @@ import json
 import math
 import os
 import sys
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 try:
@@ -254,15 +254,60 @@ def rewind_or_advance(ledger, as_of):
 
 
 def run_target_ledger(ledger, targets, prices, as_of, reason_prefix):
-    """plan/equal ledgers: trade-on-change toward a {ticker: weight_pct} target set."""
+    """plan/equal ledgers: trade-on-change toward a {ticker: weight_pct} target set.
+
+    FALSE-REMOVAL GUARDS — a data hiccup upstream must never liquidate the book:
+      1. collapse breaker: if the target set vanishes, or >25% of current holdings would exit
+         at once (>=5 names), assume an upstream failure (truncated factor_scores, missing LLM
+         overlay) and carry the book unchanged — mark NAV only. If the collapse persists for
+         3 consecutive runs it is treated as a real signal and trading resumes.
+      2. exit grace: a held name must be missing from the target set on 2 consecutive runs
+         before it is sold — a one-day flap causes zero churn.
+    Missed ENTRIES need no guard: the target is recomputed every run, so a name skipped on an
+    absent/stale mark is simply retried at the next run with a fresh price.
+    """
     rewind_or_advance(ledger, as_of)
     credit_dividends(ledger, as_of)  # pay holders before today's rebalance
     held = set(ledger["state"]["holdings"])
     target_set = set(targets)
+    leavers = held - target_set
 
-    for t in sorted(held - target_set):
+    # guard 1: collapse breaker (with a 3-consecutive-day escape so real regime shifts trade).
+    # Every collapse-condition day is recorded (even once trading resumes), so the streak
+    # count never resets mid-collapse and the breaker cannot re-arm in a loop.
+    if held and (not target_set or (len(leavers) >= 5 and len(leavers) / len(held) > 0.25)):
+        skips = ledger.setdefault("skipped_rebalances", [])
+        skip_dates = {r["date"] for r in skips}
+        if as_of not in skip_dates:
+            skips.append({"date": as_of, "targets": len(target_set), "held": len(held),
+                          "would_exit": len(leavers)})
+            skip_dates.add(as_of)
+        consec = 0
+        d = date.fromisoformat(as_of)
+        while (d - timedelta(days=consec + 1)).isoformat() in skip_dates:
+            consec += 1
+        if consec < 2:
+            print(f"  ! {reason_prefix}: {len(leavers)}/{len(held)} holdings would exit "
+                  f"(targets={len(target_set)}) — holding book unchanged "
+                  f"(data-failure guard, day {consec + 1}/3)", file=sys.stderr)
+            nav, stale = portfolio_value(ledger, prices)
+            return nav, stale
+        # 3rd+ consecutive day: the change is persistent -> real; fall through and trade.
+
+    # guard 2: exit grace — first miss arms the exit, the second consecutive miss executes it.
+    # (exit_pending survives same-day reruns: entries are only cleared when the name returns
+    # to the target set, so a rewound rerun still sells deterministically.)
+    pending = ledger.setdefault("exit_pending", {})
+    for t in sorted(leavers):
+        first = pending.get(t)
+        if first is None or first == as_of:
+            pending.setdefault(t, as_of)
+            continue                       # first miss: hold one more run (flap guard)
         p, _ = mark_price(t, prices, ledger)
         sell(ledger, t, p, as_of, f"left_{reason_prefix}")
+    for t in list(pending):                # back in the target set -> disarm
+        if t in target_set:
+            pending.pop(t, None)
 
     nav, _ = portfolio_value(ledger, prices)
     entrants = []
