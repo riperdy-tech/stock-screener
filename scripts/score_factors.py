@@ -157,27 +157,34 @@ def _reband(p):
 
 
 def apply_llm_overlay(results):
-    """Stage-5 LLM overlay — ADDITIVE / parallel layer for baseline-vs-LLM A/B (does NOT mutate the
-    quant bands). Reads public/data/llm_overlay.json (written by the local RS2 orchestrator) and, for
-    each verdict, computes a PARALLEL ranking:
-      - bounded TILT of the percentile from conviction + stance (+-25 pts),
-      - hard DEMOTE (out of research_now) + fct_llm_veto='llm_reject' on a bearish/low-conviction verdict,
-      - hard PROMOTE (into research_now) on a high-conviction bullish verdict.
-    Writes fct_band_llm / fct_percentile_llm / fct_llm / fct_llm_veto / fct_llm_verdict; LEAVES
-    fct_band / fct_percentile / fct_veto (the baseline) untouched. STRICT NO-OP when the overlay file is
-    absent/empty — never affects the cloud pipeline before verdicts exist."""
+    """Stage-5 LLM overlay — RS2-PRIMARY / quant-GUARDRAIL (parallel A/B layer; does NOT mutate the
+    quant baseline). RS2 (institutional reverse-DCF analysis, public/data/llm_overlay.json from the
+    local orchestrator) DRIVES the LLM band: action + conviction + stance set fct_percentile_llm /
+    fct_band_llm directly. The quant engine acts ONLY as a hard GUARDRAIL — names the quant forensic/
+    accounting engine hard-vetoed (reverse-reject / forensic-pair / heavy-issuance) carry fct_percentile
+    == None and are skipped, so RS2 can never pull a red-flagged name into the LLM set. Names RS2 did
+    not review keep no LLM band (fall back to quant downstream). STRICT NO-OP when the file is absent.
+
+    Bands come from conviction (scale ~4-14, neutral 9): a BULLISH action needs conviction >= RN_CONV
+    for research_now, >= WL_CONV for watchlist. BEARISH (avoid/sell/reduce/overvalued) is demoted out
+    of RN; hard AVOID/SELL also sets fct_llm_veto='llm_reject' (excluded from the LLM portfolio set).
+    Stale verdicts (>10d) shrink conviction toward neutral. Writes fct_band_llm / fct_percentile_llm /
+    fct_llm / fct_llm_veto / fct_llm_verdict; LEAVES the quant baseline untouched."""
     try:
         ov = (json.loads((DATA / "llm_overlay.json").read_text(encoding="utf-8")) or {}).get("tickers", {})
     except Exception:
         return 0
     if not ov:
         return 0
-    BEAR = ("AVOID", "SELL", "REDUCE", "TRIM", "EXIT")
-    BULL = ("BUY", "ACCUMULAT", "SCALE", "ADD", "OVERWEIGHT")
+    BEAR = ("AVOID", "SELL", "REDUCE", "TRIM", "EXIT", "SHORT")
+    BULL = ("BUY", "ACCUMULAT", "INITIAT", "SCALE", "ADD", "OVERWEIGHT")
+    HARD_SELL = ("AVOID", "SELL", "SHORT")
+    RN_CONV, WL_CONV = 9.5, 8.0
     clamp = lambda x, lo, hi: max(lo, min(hi, x))
     applied = 0
     for t, v in ov.items():
         e = results.get(t)
+        # GUARDRAIL: no baseline percentile => quant hard-vetoed or unscorable => RS2 cannot include it.
         if not e or e.get("fct_percentile") is None:
             continue
         act = (v.get("action") or "").upper()
@@ -186,7 +193,6 @@ def apply_llm_overlay(results):
         has_conv = isinstance(conv, (int, float))
         bearish = any(w in act for w in BEAR) or stance == "overvalued"
         bullish = (any(w in act for w in BULL) or stance == "undervalued") and not bearish
-        # stale verdict (older than ~the RN refresh window) -> halve its influence
         stale = False
         try:
             from datetime import date
@@ -194,30 +200,37 @@ def apply_llm_overlay(results):
                 (date.today() - date.fromisoformat(v["analyzed_date"])).days > 10
         except Exception:
             pass
-        tilt = clamp(((conv - 9) * 2 if has_conv else 0)
-                     + (8 if stance == "undervalued" else -8 if stance == "overvalued" else 0), -25, 25)
-        if stale:
-            tilt *= 0.5
         e["fct_llm_verdict"] = {"stance": stance or None, "action": v.get("action"),
                                 "conviction": conv, "method": v.get("method"),
                                 "mos_pct": v.get("mos_pct"), "gap": v.get("expectations_gap_pts"),
                                 "recommended_weight_pct": v.get("recommended_weight_pct"),
                                 "analyzed_date": v.get("analyzed_date")}
-        p = clamp((e["fct_percentile"] or 0) + tilt, 0, 100)
         e["fct_llm"] = "none"
         e["fct_llm_veto"] = None
-        if bearish or (has_conv and conv < 7):
-            p = min(p, BANDS["research_now"] - 0.1)      # demote out of research_now (LLM layer)
+
+        # RS2 PRIMARY: conviction drives the band (stale -> shrink toward neutral 9).
+        c = (conv if has_conv else 9.0)
+        if stale:
+            c = 9.0 + (c - 9.0) * 0.5
+        stance_adj = 2.0 if stance == "undervalued" else 0.0
+        if bearish:
+            pctl = clamp(50 + (c - 9.0) * 3.0 - (8 if stance == "overvalued" else 0),
+                         0, BANDS["research_now"] - 5)
             e["fct_llm"] = "demoted"
-            if any(w in act for w in ("AVOID", "SELL")):
-                e["fct_llm_veto"] = "llm_reject"         # excluded from the LLM portfolio set only
-        elif bullish and has_conv and conv >= 10:
-            p = max(p, float(BANDS["research_now"]))     # promote into research_now (LLM layer)
-            e["fct_llm"] = "promoted"
-        # ADDITIVE: baseline fct_band / fct_percentile / fct_veto are LEFT UNTOUCHED. The LLM is a
-        # PARALLEL layer (fct_band_llm / fct_percentile_llm) so the site can show baseline vs LLM A/B.
-        e["fct_percentile_llm"] = round(p, 1)
-        e["fct_band_llm"] = _reband(p)
+            if any(w in act for w in HARD_SELL):
+                e["fct_llm_veto"] = "llm_reject"
+        elif bullish and c >= RN_CONV:
+            pctl = clamp(97 + (c - RN_CONV) + stance_adj, 97, 100)
+            if e.get("fct_band") != "research_now":
+                e["fct_llm"] = "promoted"
+        elif bullish and c >= WL_CONV:
+            pctl = clamp(90 + (c - WL_CONV) * 3.5 + stance_adj, 90, 96.9)
+        elif bullish:
+            pctl = clamp(60 + (c - 6.0) * 6 + stance_adj, 40, 89)
+        else:  # neutral (fair / hold, no directional call): monitor, RS2 not endorsing a buy
+            pctl = clamp(55 + (c - 9.0) * 4, 25, 89)
+        e["fct_percentile_llm"] = round(pctl, 1)
+        e["fct_band_llm"] = _reband(pctl)
         applied += 1
     return applied
 
