@@ -258,8 +258,8 @@ function ActionCell({ action }: { action?: string | null }) {
                     : 'border-border bg-secondary/30 text-muted-foreground';
     return (
         <div className="min-w-[160px] max-w-[220px]" title={action}>
-            {verb && <span className={clsx('inline-flex rounded-full border px-2 py-0.5 text-[10px] font-black tracking-wider', cls)}>{verb}</span>}
-            <div className="mt-1 text-[10px] normal-case leading-snug text-muted-foreground"
+            {verb && <span className={clsx('inline-flex rounded-full border px-2 py-0.5 text-[11px] font-black tracking-wider', cls)}>{verb}</span>}
+            <div className="mt-1 text-[11px] normal-case leading-snug text-muted-foreground"
                 style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                 {action.toLowerCase()}
             </div>
@@ -275,7 +275,7 @@ function LlmBandCell({ entry }: { entry: FactorEntry }) {
         <div className="space-y-0.5">
             <BandChip band={entry.fct_band_llm ?? null} veto={entry.fct_llm_veto ?? null} />
             {!same && (
-                <div className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/70">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
                     quant · {(entry.fct_band || '—').replace(/_/g, ' ')}{entry.fct_veto ? ` (${entry.fct_veto.replace(/_/g, ' ')})` : ''}
                 </div>
             )}
@@ -626,7 +626,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
                 <>
                     <div className="mt-3 overflow-x-auto">
                         <table className="w-full min-w-[760px] text-left text-xs">
-                            <thead className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                            <thead className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">
                                 <tr><th className="px-2 py-1.5">Sym</th><th className="px-2 py-1.5 text-right">Value</th>
                                     <th className="px-2 py-1.5 text-right">Your wt</th><th className="px-2 py-1.5 text-right">Kelly wt</th>
                                     <th className="px-2 py-1.5">Verdict</th><th className="px-2 py-1.5 text-right">Gap</th>
@@ -1227,11 +1227,11 @@ export default function CockpitDashboard() {
                 {tab === 'track' && (ledgers?.ledgers ? (
                     <div className="space-y-4">
                         {llmInception && (
-                            <span className="inline-flex rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 text-[10px] font-bold text-sky-300">
+                            <span className="inline-flex rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 text-[11px] font-bold text-sky-300">
                                 RS2 LLM ledgers live since {llmInception} — early days
                             </span>
                         )}
-                        <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
+                        <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-[13px] text-sky-200/90">
                             <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
                             <p>
                                 <b>The honest meter.</b> Since {ledgers.inception}, four portfolios are paper-traded daily:
@@ -1274,12 +1274,12 @@ export default function CockpitDashboard() {
                                         ledgerView === name ? 'border-emerald-500/50' : 'border-border')}>
                                         <button onClick={() => setLedgerView(name)} className="w-full text-left">
                                             <div className="flex items-baseline justify-between gap-2">
-                                                <span className="text-[11px] font-black uppercase tracking-wider">{label}</span>
+                                                <span className="text-[13px] font-black uppercase tracking-wider">{label}</span>
                                                 {diff != null && (diff >= 0
-                                                    ? <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[9px] font-black text-emerald-300">QUANT +{diff}pts</span>
-                                                    : <span className="rounded-full bg-sky-500/10 px-2 py-0.5 text-[9px] font-black text-sky-300">LLM +{Math.abs(diff)}pts</span>)}
+                                                    ? <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-black text-emerald-300">QUANT +{diff}pts</span>
+                                                    : <span className="rounded-full bg-sky-500/10 px-2 py-0.5 text-[11px] font-black text-sky-300">LLM +{Math.abs(diff)}pts</span>)}
                                             </div>
-                                            <table className="mt-2 w-full text-[10px]">
+                                            <table className="mt-2 w-full text-xs">
                                                 <thead>
                                                     <tr className="text-left">
                                                         <th className="py-0.5"></th>
@@ -1298,13 +1298,13 @@ export default function CockpitDashboard() {
                                                 </tbody>
                                             </table>
                                             {name === 'mine' && !live && (
-                                                <p className="mt-1.5 text-[9px] text-amber-300">
+                                                <p className="mt-1.5 text-[11px] text-amber-300">
                                                     {auth.user
                                                         ? 'Idle — save a My Portfolio snapshot (Portfolio tab), then run Update Mine Ledger.'
                                                         : 'Log in and save a My Portfolio snapshot to track your own portfolio.'}
                                                 </p>
                                             )}
-                                            {name === 'mine' && live && <p className="mt-1.5 text-[9px] text-muted-foreground">your holdings — no LLM variant</p>}
+                                            {name === 'mine' && live && <p className="mt-1.5 text-[11px] text-muted-foreground">your holdings — no LLM variant</p>}
                                         </button>
                                     </div>
                                 );
@@ -1320,7 +1320,7 @@ export default function CockpitDashboard() {
                                 <div className="flex gap-1">
                                     {(['1m', '3m', 'ytd', 'all'] as const).map(r => (
                                         <button key={r} onClick={() => setNavRange(r)}
-                                            className={clsx('rounded px-2 py-0.5 text-[10px] font-black uppercase',
+                                            className={clsx('rounded px-2 py-0.5 text-[11px] font-black uppercase',
                                                 navRange === r ? 'bg-emerald-500/20 text-emerald-300' : 'text-muted-foreground hover:text-foreground')}>
                                             {r}
                                         </button>
@@ -1331,7 +1331,7 @@ export default function CockpitDashboard() {
                                 <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Benchmarks:</span>
                                 {allBenches.map(b => (
                                     <button key={b} onClick={() => toggleBench(b)}
-                                        className={clsx('rounded border px-2 py-0.5 text-[10px] font-black uppercase transition',
+                                        className={clsx('rounded border px-2 py-0.5 text-[11px] font-black uppercase transition',
                                             benchSel.has(b) ? 'border-current' : 'border-border text-muted-foreground opacity-50 hover:opacity-80')}
                                         style={benchSel.has(b) ? { color: benchColor(b), borderColor: benchColor(b) } : undefined}>
                                         {b}
@@ -1369,10 +1369,10 @@ export default function CockpitDashboard() {
 
                         {hasLlmLedgers && (
                             <div className="flex items-center gap-2">
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Positions source:</span>
+                                <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Positions source:</span>
                                 {(['baseline', 'llm'] as const).map(id => (
                                     <button key={id} onClick={() => setPosSource(id)}
-                                        className={clsx('rounded border px-2 py-0.5 text-[10px] font-black uppercase transition',
+                                        className={clsx('rounded border px-2 py-0.5 text-[11px] font-black uppercase transition',
                                             posSource === id ? 'border-amber-400 text-amber-300' : 'border-border text-muted-foreground opacity-60 hover:opacity-90')}
                                         title={id === 'llm' ? 'Show the LLM-overlay portfolio holdings, trades + closed round-trips' : 'Show the baseline (quant-only) holdings + trades'}>
                                         {id === 'llm' ? 'LLM overlay' : 'Baseline'}
@@ -1385,12 +1385,12 @@ export default function CockpitDashboard() {
                         )}
                         <div className="grid gap-4 xl:grid-cols-2">
                             <div className="rounded-lg border border-border bg-card/95 p-3">
-                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
+                                <h3 className="mb-2 text-[13px] font-black uppercase tracking-wider text-muted-foreground">
                                     Open positions — {ledgerView}{posLlm ? ' · LLM' : ''}
                                 </h3>
                                 <div className="max-h-72 overflow-y-auto">
                                     <table className="w-full text-left text-xs">
-                                        <thead className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                                        <thead className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">
                                             <tr><th className="px-2 py-1.5">Sym</th><th className="px-2 py-1.5">Entry</th>
                                                 <th className="px-2 py-1.5 text-right">Entry $</th><th className="px-2 py-1.5 text-right">Now $</th>
                                                 <th className="px-2 py-1.5 text-right">P&L</th></tr>
@@ -1418,7 +1418,7 @@ export default function CockpitDashboard() {
                             </div>
                             <div className="rounded-lg border border-border bg-card/95 p-3">
                                 <div className="mb-2 flex items-center justify-between gap-2">
-                                    <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground">
+                                    <h3 className="text-[13px] font-black uppercase tracking-wider text-muted-foreground">
                                         Trade history — {ledgerView}{posLlm ? ' · LLM' : ''}
                                     </h3>
                                     <input value={tradeQuery} onChange={e => setTradeQuery(e.target.value)} placeholder="filter ticker / date"
@@ -1458,7 +1458,7 @@ export default function CockpitDashboard() {
 
                         {/* Closed trades — realized round-trip history */}
                         <div className="rounded-lg border border-border bg-card/95 p-3">
-                            <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
+                            <h3 className="mb-2 text-[13px] font-black uppercase tracking-wider text-muted-foreground">
                                 Closed trades — {ledgerView}{posLlm ? ' · LLM' : ''} (realized)
                             </h3>
                             <div className="max-h-80 overflow-y-auto">
@@ -1470,7 +1470,7 @@ export default function CockpitDashboard() {
                                     const withRet = closed.filter((c: any) => c.return_pct != null);
                                     return (<>
                                         <table className="w-full text-left text-xs">
-                                            <thead className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                                            <thead className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">
                                                 <tr><th className="px-2 py-1.5">Sym</th><th className="px-2 py-1.5">Entry</th><th className="px-2 py-1.5">Exit</th>
                                                     <th className="px-2 py-1.5 text-right">Days</th><th className="px-2 py-1.5 text-right">Return</th>
                                                     <th className="px-2 py-1.5 text-right">Post-exit</th></tr>
@@ -1556,7 +1556,7 @@ export default function CockpitDashboard() {
                                 </button>
                             ))}
                         </div>
-                        <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
+                        <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-[13px] text-sky-200/90">
                             <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
                             {planView === 'plan' ? (
                                 <p>
@@ -1640,7 +1640,7 @@ export default function CockpitDashboard() {
                 {/* ── Validation ─────────────────────────────────────── */}
                 {tab === 'validation' && (
                     <div className="space-y-4">
-                        <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-xs text-sky-200/90">
+                        <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-[13px] text-sky-200/90">
                             <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
                             <p>
                                 <b>This page answers &quot;does the system actually work?&quot;</b> Top charts = simulated history
@@ -1729,7 +1729,7 @@ export default function CockpitDashboard() {
                             {(outcomes?.evaluated?.length ?? 0) > 0 ? (
                                 <div className="overflow-x-auto">
                                     <table className="w-full min-w-[700px] text-left text-xs">
-                                        <thead className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                                        <thead className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">
                                             <tr><th className="px-2 py-1.5">Cohort</th><th className="px-2 py-1.5">Horizon</th><th className="px-2 py-1.5">Source</th>
                                                 <th className="px-2 py-1.5 text-right">n</th><th className="px-2 py-1.5 text-right">Median</th>
                                                 <th className="px-2 py-1.5 text-right">Excess vs IWM</th>
