@@ -61,6 +61,7 @@ BENCHMARKS = ["IWM", "SPY", "QQQ", "SOXX", "DRAM"]  # small-cap, S&P500, Nasdaq-
 PRIMARY_BENCHMARK = "IWM"
 START_NAV = 100.0
 POST_EXIT_DAYS = 30
+MIN_EQUAL_NAMES = 8      # #8 concentration floor: equal-weight over max(count, this) -> cash residual when few
 
 
 def load_json(path, default=None):
@@ -642,7 +643,7 @@ def main():
         plan2_targets = {p["symbol"]: p["weight_pct"] for p in ((plan.get("plan2") or {}).get("positions") or [])}
         nav_plan2, stale_plan2 = run_target_ledger(ledgers["plan2"], plan2_targets, prices, as_of, "plan2")
         research = sorted(t for t, e in factor.items() if e.get("fct_band") == "research_now")
-        eq_weight = 100.0 / len(research) if research else 0
+        eq_weight = 100.0 / max(len(research), MIN_EQUAL_NAMES) if research else 0   # #8 cash residual when few
         nav_eq, stale_eq = run_target_ledger(ledgers["equal"], {t: eq_weight for t in research},
                                              prices, as_of, "rank")
         for name, nav, stale in (("plan", nav_plan, stale_plan), ("plan2", nav_plan2, stale_plan2),
@@ -662,7 +663,7 @@ def main():
         research_llm = sorted(t for t, e in factor.items()
                               if (e.get("fct_band_llm") or e.get("fct_band")) == "research_now"
                               and e.get("fct_llm_veto") != "llm_reject")
-        eqw_llm = 100.0 / len(research_llm) if research_llm else 0
+        eqw_llm = 100.0 / max(len(research_llm), MIN_EQUAL_NAMES) if research_llm else 0   # #8 cash residual when few
         nav_eql, stale_eql = run_target_ledger(ledgers["equal_llm"], {t: eqw_llm for t in research_llm},
                                                prices, as_of, "rank")
         for name, nav, stale in (("plan_llm", nav_pl, stale_pl), ("plan2_llm", nav_pl2, stale_pl2),

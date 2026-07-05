@@ -67,7 +67,7 @@ Invested: **50.57%**  |  Cash: **49.43%**  |  Positions: 16
 - ELMD: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
 - RMBS: no Kelly edge (expectations gap +9pts >= 0: price already assumes more growth than demonstrated)
 - WWD: no Kelly edge (expectations gap +19pts >= 0: price already assumes more growth than demonstrated)
-- PSMT: no Kelly edge (expectations gap +18pts >= 0: price already assumes more growth than demonstrated)
+- META: no Kelly edge (expectations gap +32pts >= 0: price already assumes more growth than demonstrated)
 - INVA: sector cap Healthcare (25.0%)
 - GD: no Kelly edge (expectations gap +4pts >= 0: price already assumes more growth than demonstrated)
 - DELL: no Kelly edge (expectations gap +20pts >= 0: price already assumes more growth than demonstrated)
