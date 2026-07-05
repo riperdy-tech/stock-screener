@@ -180,6 +180,11 @@ def apply_llm_overlay(results):
     BULL = ("BUY", "ACCUMULAT", "INITIAT", "SCALE", "ADD", "OVERWEIGHT")
     HARD_SELL = ("AVOID", "SELL", "SHORT")
     RN_CONV, WL_CONV = 9.5, 8.0
+    # research_now gate is on RS2's STRUCTURED signals (margin of safety + entry_timing), NOT the
+    # free-text action keyword (which read "accumulate on weakness / hold" as bullish and over-promoted).
+    # Two-tier: DEEP value (MoS >= RN_DEEP_MOS) earns a research flag regardless of conviction; MODERATE
+    # value (>= RN_MOS, or a genuine fresh buy) additionally needs conviction >= RN_CONV.
+    RN_MOS, RN_DEEP_MOS = 15.0, 30.0
     clamp = lambda x, lo, hi: max(lo, min(hi, x))
     applied = 0
     for t, v in ov.items():
@@ -213,14 +218,23 @@ def apply_llm_overlay(results):
         if stale:
             c = 9.0 + (c - 9.0) * 0.5
         stance_adj = 2.0 if stance == "undervalued" else 0.0
+        # RS2's own margin of safety (present-value; realistic_mos_pct preferred, mos_pct fallback)
+        # and entry-timing drive the research_now gate.
+        mos = v.get("realistic_mos_pct")
+        if mos is None:
+            mos = v.get("mos_pct")
+        et = (v.get("entry_timing") or "").lower()
+        deep_value = mos is not None and mos >= RN_DEEP_MOS
+        rn_qualify = (not bearish) and (
+            deep_value or (c >= RN_CONV and ((mos is not None and mos >= RN_MOS) or et == "buy")))
         if bearish:
             pctl = clamp(50 + (c - 9.0) * 3.0 - (8 if stance == "overvalued" else 0),
                          0, BANDS["research_now"] - 5)
             e["fct_llm"] = "demoted"
             if any(w in act for w in HARD_SELL):
                 e["fct_llm_veto"] = "llm_reject"
-        elif bullish and c >= RN_CONV:
-            pctl = clamp(97 + (c - RN_CONV) + stance_adj, 97, 100)
+        elif rn_qualify:
+            pctl = clamp(97 + (c - RN_CONV) + stance_adj + (2 if deep_value else 0), 97, 100)
             if e.get("fct_band") != "research_now":
                 e["fct_llm"] = "promoted"
         elif bullish and c >= WL_CONV:
