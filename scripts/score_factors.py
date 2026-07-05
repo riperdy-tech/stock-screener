@@ -176,6 +176,12 @@ def apply_llm_overlay(results):
         return 0
     if not ov:
         return 0
+    # #4 live prices to recompute margin of safety daily (the verdict's MoS is frozen at analysis-time
+    # price; a name that rallied +30% since is no longer as cheap as its stored MoS claims).
+    _prices = (load_json(PRICE_HISTORY_JSON, {}) or {}).get("prices", {})
+    def _live_price(t):
+        c = _prices.get(t)
+        return c[-1] if isinstance(c, list) and c and c[-1] else None
     BEAR = ("AVOID", "SELL", "REDUCE", "TRIM", "EXIT", "SHORT")
     BULL = ("BUY", "ACCUMULAT", "INITIAT", "SCALE", "ADD", "OVERWEIGHT")
     HARD_SELL = ("AVOID", "SELL", "SHORT")
@@ -202,7 +208,7 @@ def apply_llm_overlay(results):
         try:
             from datetime import date
             stale = bool(v.get("analyzed_date")) and \
-                (date.today() - date.fromisoformat(v["analyzed_date"])).days > 10
+                (date.today() - date.fromisoformat(v["analyzed_date"])).days > 14  # #5 = max WL refresh
         except Exception:
             pass
         e["fct_llm_verdict"] = {"stance": stance or None, "action": v.get("action"),
@@ -218,11 +224,16 @@ def apply_llm_overlay(results):
         if stale:
             c = 9.0 + (c - 9.0) * 0.5
         stance_adj = 2.0 if stance == "undervalued" else 0.0
-        # RS2's own margin of safety (present-value; realistic_mos_pct preferred, mos_pct fallback)
-        # and entry-timing drive the research_now gate.
-        mos = v.get("realistic_mos_pct")
-        if mos is None:
-            mos = v.get("mos_pct")
+        # RS2's own margin of safety and entry-timing drive the research_now gate. #4: recompute MoS
+        # against the LIVE price (fair_value / today's close) so a mid-cycle price move is reflected
+        # immediately; fall back to the verdict's frozen realistic_mos_pct / mos_pct if no live price.
+        fv, lp = v.get("fair_value"), _live_price(t)
+        if isinstance(fv, (int, float)) and lp:
+            mos = (fv / lp - 1.0) * 100.0
+        else:
+            mos = v.get("realistic_mos_pct")
+            if mos is None:
+                mos = v.get("mos_pct")
         et = (v.get("entry_timing") or "").lower()
         deep_value = mos is not None and mos >= RN_DEEP_MOS
         rn_qualify = (not bearish) and (
