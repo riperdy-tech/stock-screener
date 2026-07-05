@@ -214,7 +214,8 @@ function HelpModal({ onClose }: { onClose: () => void }) {
                     </HelpSection>
 
                     <HelpSection title="RS2 LLM overlay — stage 5">
-                        <p>A local LLM reads each company&apos;s filings and produces stance (undervalued/fair/overvalued), conviction 0–15, action, and its own DCF read. Applied AFTER quant bands are set (<code>fct_band_quant</code> is preserved): it can promote, demote, or veto (<code>llm_reject</code>) names, producing the parallel LLM ranking visible through the Lens switch. Disagreement percentile Δ is computed per name; the Compare lens sorts on it.</p>
+                        <p>A local LLM reads each company&apos;s filings and produces stance (undervalued/fair/overvalued), conviction 0–15, action, and its own DCF read. Its intrinsic value is anchored to the analyst consensus band, de-forwarded to present value (discounted one year of cost-of-equity) so margin of safety measures cheapness <i>today</i> — not a 12-month price target. Applied AFTER quant bands are set (<code>fct_band_quant</code> is preserved): it can promote, demote, or veto (<code>llm_reject</code>) names, producing the parallel LLM ranking visible through the Lens switch.</p>
+                        <p className="mt-2">The LLM <b>Research Now</b> gate keys off RS2&apos;s structured signals — <b>margin of safety</b> and <b>entry timing</b>, not the action wording — in two tiers: <b>deep value</b> (MoS ≥ 30%) earns Research Now at any conviction; <b>moderate value</b> (MoS ≥ 15%, or a genuine fresh buy) additionally needs conviction ≥ 9.5. Bearish (avoid/sell/reduce/overvalued) is demoted out of Research Now; a hard avoid/sell is vetoed. Disagreement percentile Δ is computed per name; the Compare lens sorts on it.</p>
                     </HelpSection>
 
                     <HelpSection title="The big picture">
