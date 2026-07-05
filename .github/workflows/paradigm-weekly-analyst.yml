@@ -110,6 +110,13 @@ jobs:
           git add public/data/outcome_backfill.json || true
           git add public/data/outcomes_report.md || true
           git add public/data/outcome_price_cache.json || true
+          # run_chain also regenerates these — commit them (matches the daily job) so they are
+          # NOT left dirty; an uncommitted change here makes the reconcile `git merge` refuse when
+          # origin has touched the same file (the cause of the 2026-07 push failures).
+          git add public/data/portfolio_plan.json || true
+          git add public/data/portfolio_report.md || true
+          git add public/data/paper_ledgers.json || true
+          git add public/data/paradigm_history.json || true
 
           if git diff --quiet && git diff --staged --quiet; then
             echo "No changes to commit"
