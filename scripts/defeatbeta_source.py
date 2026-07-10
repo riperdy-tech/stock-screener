@@ -111,9 +111,8 @@ class DefeatBeta:
         return df
 
 
-def load(universe=None):
-    """Download + aggregate. Returns a DefeatBeta instance, or None if the
-    dataset is stale/unreachable (caller falls back to legacy yfinance path)."""
+def dataset_fresh():
+    """True when the HF dataset was updated within MAX_AGE_HOURS."""
     try:
         req = urllib.request.Request(f"{BASE}/spec.json",
                                      headers={"User-Agent": "stock-screener/1.0"})
@@ -121,12 +120,51 @@ def load(universe=None):
         updated = datetime.fromisoformat(spec["update_time"].replace("Z", "+00:00"))
         age_h = (datetime.now(timezone.utc) - updated).total_seconds() / 3600
         if age_h > MAX_AGE_HOURS:
-            logging.warning(f"defeatbeta dataset is {age_h:.0f}h old (> {MAX_AGE_HOURS}h) — using legacy yfinance path.")
-            return None
-        logging.info(f"defeatbeta dataset age: {age_h:.1f}h — downloading {len(FILES)} tables.")
+            logging.warning(f"defeatbeta dataset is {age_h:.0f}h old (> {MAX_AGE_HOURS}h).")
+            return False
+        logging.info(f"defeatbeta dataset age: {age_h:.1f}h.")
+        return True
     except Exception as e:
-        logging.warning(f"defeatbeta spec.json unavailable ({e}) — using legacy yfinance path.")
+        logging.warning(f"defeatbeta spec.json unavailable ({e}).")
+        return False
+
+
+def load_dividends(cutoff, universe=None):
+    """{symbol: [[ex_date, amount], ...]} (ascending ex-date) from the tiny
+    stock_dividend_events table. None when the dataset is stale/unreachable —
+    caller falls back to per-ticker yfinance."""
+    if not dataset_fresh():
         return None
+    try:
+        import duckdb
+        path = _download("stock_dividend_events.parquet").replace("\\", "/")
+        con = duckdb.connect()
+        uni_filter = ""
+        if universe:
+            con.execute("CREATE TABLE uni(sym VARCHAR)")
+            con.executemany("INSERT INTO uni VALUES (?)", [(s,) for s in set(universe)])
+            uni_filter = "AND symbol IN (SELECT sym FROM uni)"
+        out = {}
+        for sym, d, amt in con.execute(f"""
+            SELECT symbol, report_date, amount FROM read_parquet('{path}')
+            WHERE report_date >= '{cutoff}' AND amount > 0 {uni_filter}
+            ORDER BY symbol, report_date
+        """).fetchall():
+            out.setdefault(sym, []).append([d, round(float(amt), 6)])
+        con.close()
+        logging.info(f"defeatbeta dividends loaded: {len(out)} payers.")
+        return out
+    except Exception as e:
+        logging.warning(f"defeatbeta dividends load failed ({e}).")
+        return None
+
+
+def load(universe=None):
+    """Download + aggregate. Returns a DefeatBeta instance, or None if the
+    dataset is stale/unreachable (caller falls back to legacy yfinance path)."""
+    if not dataset_fresh():
+        return None
+    logging.info(f"downloading {len(FILES)} defeatbeta tables.")
 
     try:
         import duckdb

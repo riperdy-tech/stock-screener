@@ -48,20 +48,13 @@ def is_fresh():
         return False
 
 
-def main():
-    force = "--force" in sys.argv
-    if not force and is_fresh():
-        print(f"dividends.json fresh (< {THROTTLE_DAYS}d) — skip. Use --force to refetch.")
-        return
-
+def yf_dividends(symbols):
+    """Per-ticker yfinance dividend pull (1 request each)."""
     try:
         import yfinance as yf
     except Exception as e:
         print(f"yfinance unavailable: {e}", file=sys.stderr)
-        return
-
-    stocks = json.loads(STOCKS_JSON.read_text(encoding="utf-8")) if STOCKS_JSON.exists() else []
-    symbols = sorted({s["symbol"] for s in stocks if s.get("symbol")})
+        return {}
     out = {}
     for i, t in enumerate(symbols):
         try:
@@ -77,14 +70,54 @@ def main():
             print(f"  {t} dividends failed: {e}", file=sys.stderr)
         if (i + 1) % 50 == 0:
             print(f"  ...{i + 1}/{len(symbols)}")
+    return out
+
+
+def main():
+    force = "--force" in sys.argv
+
+    stocks = json.loads(STOCKS_JSON.read_text(encoding="utf-8")) if STOCKS_JSON.exists() else []
+    symbols = sorted({s["symbol"] for s in stocks if s.get("symbol")})
+
+    # DEFEATBETA FIRST: one 0.7MB parquet replaces ~6.7k per-ticker Yahoo
+    # requests (values verified identical — same Yahoo data). Cheap enough to
+    # run daily, so the weekly throttle only applies to the yfinance fallback.
+    # Foreign ADRs the dataset misses (~25: SONY, HMC, MUFG, ...) are topped up
+    # per-ticker from yfinance, keyed off the previous file's payer list.
+    out = None
+    source = "defeatbeta"
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import defeatbeta_source
+        out = defeatbeta_source.load_dividends(EX_DATE_CUTOFF, universe=symbols)
+    except Exception as e:
+        print(f"defeatbeta dividends unavailable: {e}", file=sys.stderr)
+    if out is not None:
+        prev_payers = set()
+        try:
+            prev_payers = set(json.loads(OUT.read_text(encoding="utf-8")).get("tickers", {}))
+        except Exception:
+            pass
+        topup = sorted((prev_payers & set(symbols)) - set(out))
+        if topup:
+            print(f"topping up {len(topup)} dataset-missing payers via yfinance...")
+            out.update(yf_dividends(topup))
+    else:
+        # LEGACY: full per-ticker sweep — expensive, keep the weekly throttle
+        source = "yfinance"
+        if not force and is_fresh():
+            print(f"dividends.json fresh (< {THROTTLE_DAYS}d) — skip. Use --force to refetch.")
+            return
+        out = yf_dividends(symbols)
 
     payload = {
         "fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "ex_date_cutoff": EX_DATE_CUTOFF,
+        "source": source,
         "tickers": out,
     }
     OUT.write_text(json.dumps(payload, indent=1, sort_keys=True) + "\n", encoding="utf-8")
-    print(f"dividends: {len(out)}/{len(symbols)} tickers paid since {EX_DATE_CUTOFF} -> {OUT.name}")
+    print(f"dividends[{source}]: {len(out)}/{len(symbols)} tickers paid since {EX_DATE_CUTOFF} -> {OUT.name}")
 
 
 if __name__ == "__main__":
