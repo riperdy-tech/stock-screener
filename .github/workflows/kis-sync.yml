@@ -28,6 +28,10 @@ on:
       ledger:
         description: "Ledger to mirror (equal, equal_llm, ...)"
         default: "equal"
+      probe:
+        description: "Read-only account diagnostics; places no orders"
+        type: boolean
+        default: false
 
 concurrency:
   group: kis-sync
@@ -58,6 +62,10 @@ jobs:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
           FLAGS=""
+          if [ "${{ inputs.probe }}" = "true" ]; then
+            python scripts/sync_kis_portfolio.py --probe
+            exit $?
+          fi
           if [ "${{ github.event_name }}" = "schedule" ]; then
             [ "${{ vars.KIS_AUTO_EXECUTE }}" = "true" ] && FLAGS="--execute"
           else

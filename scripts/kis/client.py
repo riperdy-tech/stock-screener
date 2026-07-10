@@ -35,6 +35,8 @@ TR = {
     "buy":      {"real": "TTTT1002U", "paper": "VTTT1002U"},
     "sell":     {"real": "TTTT1006U", "paper": "VTTT1001U"},
     "unfilled": {"real": "TTTS3018R", "paper": "VTTS3018R"},
+    "psamount": {"real": "TTTS3007R", "paper": "VTTS3007R"},
+    "krw_bal":  {"real": "TTTC8434R", "paper": "VTTC8434R"},
 }
 
 # Quote API exchange codes (EXCD) -> order API exchange codes (OVRS_EXCG_CD)
@@ -258,6 +260,41 @@ class KISClient:
                         return float(v), row
                 return 0.0, row
         return 0.0, {}
+
+    def buying_power(self, ticker: str, exch_order_cd: str, price: float) -> dict:
+        """해외주식 매수가능금액조회 — orderable USD, which (unlike the raw USD
+        deposit row) reflects 통합증거금 / KRW collateral. Returns raw output."""
+        body, _ = self._get(
+            "/uapi/overseas-stock/v1/trading/inquire-psamount",
+            TR["psamount"][self.env],
+            {"CANO": self.cano, "ACNT_PRDT_CD": self.acnt_prdt_cd,
+             "OVRS_EXCG_CD": exch_order_cd, "OVRS_ORD_UNPR": f"{price:.2f}",
+             "ITEM_CD": ticker})
+        return body.get("output") or {}
+
+    def krw_balance(self) -> dict:
+        """국내주식 잔고조회 output2 — used only to see whether the account
+        holds a KRW seed (mock accounts are often KRW-funded)."""
+        body, _ = self._get(
+            "/uapi/domestic-stock/v1/trading/inquire-balance",
+            TR["krw_bal"][self.env],
+            {"CANO": self.cano, "ACNT_PRDT_CD": self.acnt_prdt_cd,
+             "AFHR_FLPR_YN": "N", "OFL_YN": "", "INQR_DVSN": "02",
+             "UNPR_DVSN": "01", "FUND_STTL_ICLD_YN": "N",
+             "FNCG_AMT_AUTO_RDPT_YN": "N", "PRCS_DVSN": "00",
+             "CTX_AREA_FK100": "", "CTX_AREA_NK100": ""})
+        out2 = body.get("output2") or []
+        return out2[0] if out2 else {}
+
+    def present_balance_raw(self) -> dict:
+        """Full inquire-present-balance body (all currency rows) for diagnostics."""
+        body, _ = self._get(
+            "/uapi/overseas-stock/v1/trading/inquire-present-balance",
+            TR["present"][self.env],
+            {"CANO": self.cano, "ACNT_PRDT_CD": self.acnt_prdt_cd,
+             "WCRC_FRCR_DVSN_CD": "02", "NATN_CD": "840",
+             "TR_MKET_CD": "00", "INQR_DVSN_CD": "00"})
+        return body
 
     def unfilled(self) -> list[dict]:
         """Open (unfilled) US orders: [{ticker, side, qty_remaining, order_no}].

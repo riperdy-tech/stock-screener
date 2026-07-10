@@ -118,6 +118,50 @@ def plan_table(plan, order_cd) -> list[str]:
     return lines
 
 
+def run_probe(client):
+    """Read-only diagnostics. Answers: is the account KRW-seeded, does it have
+    USD, and does KIS think we can actually buy anything?"""
+    out = ["## KIS account probe", ""]
+
+    def emit(line=""):
+        print(line)
+        out.append(line)
+
+    emit(f"env: {client.env}")
+
+    body = client.present_balance_raw()
+    rows = body.get("output2") or []
+    emit(f"\ncurrency rows in inquire-present-balance: {len(rows)}")
+    for row in rows:
+        emit(f"  {json.dumps(row, ensure_ascii=False)}")
+    if not rows:
+        emit("  (none — account holds no foreign currency at all)")
+    totals = body.get("output3")
+    if totals:
+        emit(f"  totals (output3): {json.dumps(totals, ensure_ascii=False)}")
+
+    try:
+        krw = client.krw_balance()
+        keys = ("dnca_tot_amt", "prvs_rcdl_excc_amt", "tot_evlu_amt", "nxdy_excc_amt")
+        shown = {k: krw.get(k) for k in keys if k in krw}
+        emit(f"\nKRW (domestic) balance: "
+             f"{json.dumps(shown, ensure_ascii=False) if shown else '(empty)'}")
+    except Exception as e:
+        emit(f"\nKRW balance query failed: {e}")
+
+    try:
+        bp = client.buying_power("AAPL", "NASD", 200.0)
+        emit(f"\nbuying power (매수가능금액, AAPL @ $200): "
+             f"{json.dumps(bp, ensure_ascii=False) if bp else '(empty)'}")
+    except Exception as e:
+        emit(f"\nbuying power query failed: {e}")
+
+    emit("\nRead: USD deposit rows all zero + KRW seed present => 통합증거금 case, "
+         "switch cash source to 매수가능금액.")
+    emit("      Everything zero => mock account genuinely unfunded.")
+    gh_summary(out)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--env", default=os.environ.get("KIS_ENV", "paper"),
@@ -136,6 +180,9 @@ def main():
     ap.add_argument("--max-turnover", type=float,
                     default=float(os.environ.get("KIS_MAX_TURNOVER_PCT", 40)),
                     help="max total order value as %% of NAV (use 100 for first buy-in)")
+    ap.add_argument("--probe", action="store_true",
+                    help="read-only account diagnostics (cash rows, KRW seed, "
+                         "buying power); places no orders and exits")
     ap.add_argument("--ignore-market-hours", action="store_true")
     ap.add_argument("--no-wait", action="store_true",
                     help="don't wait for sell fills before buying")
@@ -158,6 +205,10 @@ def main():
         sys.exit(f"missing env: {', '.join(missing)}")
     client = KISClient(args.env, os.environ["KIS_APP_KEY"], os.environ["KIS_APP_SECRET"],
                        os.environ["KIS_CANO"], os.environ["KIS_ACNT_PRDT_CD"])
+
+    if args.probe:
+        run_probe(client)
+        return
 
     positions = client.balance()
     held = {p["ticker"]: p["shares"] for p in positions}
