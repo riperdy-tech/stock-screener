@@ -164,6 +164,22 @@ def safe_float(val, default=0.0):
     except:
         return default
 
+def peg_fallback(trailing_pe, rev_growth):
+    """PEG when Yahoo doesn't supply pegRatio: PE / growth%.
+
+    Undefined for non-positive growth, so return the 100.0 fail sentinel
+    (StockData's default; is_potential_100_bagger fails PEG > 1.5). Callers
+    used to inline `trailing_pe / (rev_growth * 100)` as a safe_float default —
+    Python evaluates that eagerly, so revenueGrowth == 0.0 raised
+    ZeroDivisionError inside process_stock's bare except and the ticker was
+    dropped from the scan entirely (GRPN, SILO, RLYB). Negative growth was
+    worse than a crash: it produced a negative PEG that silently PASSED the
+    gate a shrinking company should fail.
+    """
+    if rev_growth is None or rev_growth <= 0:
+        return 100.0
+    return trailing_pe / (rev_growth * 100)
+
 def safe_get_df(df, row_name, col_idx):
     """Safely get a value from a DataFrame by row name and column index."""
     try:
@@ -305,7 +321,7 @@ def process_stock_bulk(ticker_symbol, info, slot_today):
     if slot_today:
         rev_growth = safe_float(info.get("revenueGrowth"), 0.01)
         trailing_pe = safe_float(info.get("trailingPE"), 100.0)
-        data.peg_ratio = safe_float(info.get("pegRatio"), trailing_pe / (rev_growth * 100))
+        data.peg_ratio = safe_float(info.get("pegRatio"), peg_fallback(trailing_pe, rev_growth))
         data.insider_ownership = safe_float(info.get("heldPercentInsiders"), 0.0)
         data.float_shares = safe_float(info.get("floatShares"), float("inf"))
         data.revenue_growth_ttm = safe_float(info.get("revenueGrowth"), 0.0)
@@ -410,7 +426,7 @@ def process_stock(ticker_symbol):
         rev_growth = safe_float(info.get('revenueGrowth'), 0.01)
         trailing_pe = safe_float(info.get('trailingPE'), 100.0)
         
-        data.peg_ratio = safe_float(info.get('pegRatio'), trailing_pe / (rev_growth * 100)) 
+        data.peg_ratio = safe_float(info.get('pegRatio'), peg_fallback(trailing_pe, rev_growth))
         data.price_to_sales = safe_float(info.get('priceToSalesTrailing12Months'), 100.0)
         data.insider_ownership = safe_float(info.get('heldPercentInsiders'), 0.0) 
         data.float_shares = safe_float(info.get('floatShares'), float('inf'))
