@@ -106,16 +106,18 @@ def compute_plan(targets: dict[str, float],
             continue
         if delta == 0:
             continue
+        # Entries and exits are in/out events and always execute; the churn
+        # threshold only governs rebalance deltas on names we already hold.
+        is_entry = cur_sh == 0
         value = abs(delta) * px
-        if value < threshold:
+        if value < threshold and not is_entry:
             continue
         if delta < 0:
             qty = int(min(-delta, sellable.get(t, cur_sh)))
             if qty > 0:
                 trims.append(Order("sell", t, clip(qty, px), px, "trim"))
         else:
-            reason = "enter" if cur_sh == 0 else "add"
-            buys.append(Order("buy", t, clip(delta, px), px, reason))
+            buys.append(Order("buy", t, clip(delta, px), px, "enter" if is_entry else "add"))
 
     # turnover cap: exits exempt; drop smallest trims/buys until under cap
     cap = nav * max_turnover_pct / 100

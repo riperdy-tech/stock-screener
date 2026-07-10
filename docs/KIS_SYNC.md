@@ -20,8 +20,9 @@ paper_ledgers.json (Supabase)          KIS Open API
 - **Reconciliation, not trade-replay.** Every run compares target weights
   against actual holdings and orders the delta. Missed runs, partial fills,
   rejected orders all self-heal on the next run.
-- **In/outs mirrored exactly:** a name dropped from the ledger is fully sold
-  (even below the churn threshold); a new name is bought at its weight.
+- **In/outs mirrored exactly:** a name dropped from the ledger is fully sold and
+  a new name is bought at its weight, both regardless of the churn threshold.
+  The threshold only governs rebalance deltas on names already held.
 - **Whole shares** (`floor(weight × NAV / price)`); the KIS API has no
   fractional orders. With NAV ≥ $65k, rounding drift is small.
 - Rebalance deltas below `max($50, 25 bps of NAV)` are skipped to kill churn.

@@ -41,6 +41,25 @@ def test_churn_threshold_skips_small_rebalance():
     assert plan.orders == []
 
 
+def test_small_entry_below_threshold_still_buys():
+    """Ins are mirrored like outs: a 1-share entry worth less than the churn
+    threshold still executes (regression: RMD, 0.4% weight, silently skipped)."""
+    plan = compute_plan(targets={"RMD": 0.004}, held={}, sellable={},
+                        prices={"RMD": 208.45}, cash=100_000,
+                        min_order_usd=50, min_order_bps=25)  # threshold = $250
+    rmd = [o for o in plan.orders if o.ticker == "RMD"]
+    assert len(rmd) == 1 and rmd[0].side == "buy" and rmd[0].qty == 1
+    assert rmd[0].reason == "enter"
+
+
+def test_small_add_below_threshold_skipped():
+    """...but topping up a name we already hold still respects the threshold."""
+    plan = compute_plan(targets={"RMD": 0.006}, held={"RMD": 1}, sellable={"RMD": 1},
+                        prices={"RMD": 208.45}, cash=100_000,
+                        min_order_usd=50, min_order_bps=25)
+    assert plan.orders == []
+
+
 def test_zero_share_entry_warns():
     plan = compute_plan(targets={"PRICY": 0.02}, held={}, sellable={},
                         prices={"PRICY": 1200}, cash=10_000)
