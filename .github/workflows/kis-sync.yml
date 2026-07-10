@@ -18,6 +18,14 @@ on:
     - cron: '40 14 * * 1-5'
   workflow_dispatch:
     inputs:
+      env:
+        description: "Account (manual runs only; the schedule always uses the KIS_ENV variable)"
+        type: choice
+        options: [paper, real]
+        default: paper
+      confirm:
+        description: "Type REAL MONEY to permit a real-account execute"
+        default: ""
       execute:
         description: "Place orders (unchecked = dry run)"
         type: boolean
@@ -54,13 +62,25 @@ jobs:
 
       - run: pip install requests
 
+      # A manual run may target the real account via the env input; the schedule
+      # never can (it only reads vars.KIS_ENV). Real + execute additionally needs
+      # the exact confirm phrase, so a real buy-in cannot be a mis-click.
+      - name: Guard real-money manual runs
+        if: github.event_name == 'workflow_dispatch' && inputs.env == 'real' && inputs.execute
+        run: |
+          if [ "${{ inputs.confirm }}" != "REAL MONEY" ]; then
+            echo "::error::real + execute requires confirm='REAL MONEY'"
+            exit 1
+          fi
+
       - name: Run sync
         env:
-          KIS_ENV: ${{ vars.KIS_ENV || 'paper' }}
-          KIS_APP_KEY: ${{ vars.KIS_ENV == 'real' && secrets.KIS_APP_KEY_REAL || secrets.KIS_APP_KEY_PAPER }}
-          KIS_APP_SECRET: ${{ vars.KIS_ENV == 'real' && secrets.KIS_APP_SECRET_REAL || secrets.KIS_APP_SECRET_PAPER }}
-          KIS_CANO: ${{ vars.KIS_ENV == 'real' && secrets.KIS_CANO_REAL || secrets.KIS_CANO_PAPER }}
-          KIS_ACNT_PRDT_CD: ${{ vars.KIS_ENV == 'real' && secrets.KIS_ACNT_PRDT_CD_REAL || secrets.KIS_ACNT_PRDT_CD_PAPER }}
+          # Manual dispatch: the env input wins. Schedule: the repo variable.
+          KIS_ENV: ${{ github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV || 'paper' }}
+          KIS_APP_KEY: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_APP_KEY_REAL || secrets.KIS_APP_KEY_PAPER }}
+          KIS_APP_SECRET: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_APP_SECRET_REAL || secrets.KIS_APP_SECRET_PAPER }}
+          KIS_CANO: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_CANO_REAL || secrets.KIS_CANO_PAPER }}
+          KIS_ACNT_PRDT_CD: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_ACNT_PRDT_CD_REAL || secrets.KIS_ACNT_PRDT_CD_PAPER }}
           KIS_LEDGER: ${{ inputs.ledger || vars.KIS_LEDGER || 'equal' }}
           KIS_PROBE_DOMESTIC_ORDER: ${{ inputs.probe_domestic_order == true && '1' || '' }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
@@ -76,8 +96,12 @@ jobs:
           else
             [ "${{ inputs.execute }}" = "true" ] && FLAGS="--execute"
           fi
-          if [ "$KIS_ENV" = "real" ] && [ "${{ vars.KIS_CONFIRM_REAL }}" = "true" ]; then
-            FLAGS="$FLAGS --confirm-real"
+          # --confirm-real for a scheduled real run still gated by the repo variable;
+          # for a manual real run the guard step above already enforced the phrase.
+          if [ "$KIS_ENV" = "real" ]; then
+            if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ vars.KIS_CONFIRM_REAL }}" = "true" ]; then
+              FLAGS="$FLAGS --confirm-real"
+            fi
           fi
           python scripts/sync_kis_portfolio.py \
             --max-turnover "${{ inputs.max_turnover || '40' }}" $FLAGS
