@@ -1,8 +1,8 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-07-10T12:20:59Z
+Generated: 2026-07-10T15:45:27Z
 Macro flags: none
-Invested: **56.89%**  |  Cash: **43.11%**  |  Positions: 16
+Invested: **55.71%**  |  Cash: **44.29%**  |  Positions: 16
 
 | # | Sym | Wt% | Arch | Comp | Surv | FctRank | FctBand | Theme | PdmBand | F | M | Flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -13,22 +13,22 @@ Invested: **56.89%**  |  Cash: **43.11%**  |  Positions: 16
 | 7 | **CPRX** | 5.0 | B | 55.66 | 80 | 7 | research_now | - | no_data | 5 | - | - |
 | 9 | **VIK** | 2.25 | B | 63.62 | 75 | 9 | research_now | - | no_data | 6 | - | - |
 | 10 | **KRYS** | 2.25 | B | 44.99 | 75 | 10 | research_now | - | no_data | 6 | - | - |
-| 15 | **LAUR** | 5.0 | B | 77.36 | 80 | 15 | research_now | - | no_data | 5 | -2.622 | - |
+| 15 | **LAUR** | 3.75 | B | 77.36 | 80 | 15 | research_now | - | no_data | 5 | -2.622 | - |
 | 18 | **KNSA** | 5.0 | B | 45.68 | 75 | 18 | research_now | - | no_data | 6 | -3.129 | - |
-| 25 | **ABNB** | 1.8 | B | 81.41 | 80 | 25 | research_now | - | no_data | 5 | - | - |
+| 25 | **ABNB** | 2.4 | B | 81.41 | 80 | 25 | research_now | - | no_data | 5 | - | - |
 | 32 | **BLBD** | 2.39 | B | 84.47 | 75 | 32 | research_now | - | no_data | 8 | -3.432 | - |
 | 39 | **MAMA** | 0.95 | A | 41.22 | 75 | 39 | research_now | - | no_data | 5 | - | - |
 | 40 | **EXPE** | 5.0 | B | 74.83 | 80 | 40 | research_now | - | no_data | 6 | -2.758 | - |
 | 41 | **EMBJ** | 5.0 | B | 63.51 | 80 | 41 | research_now | space_economy | mid | 5 | - | - |
-| 47 | **SAP** | 2.1 | A | 63.84 | 70 | 47 | research_now | - | no_data | - | - | - |
+| 47 | **SAP** | 1.57 | A | 63.84 | 70 | 47 | research_now | - | no_data | - | - | - |
 | 49 | **MCRI** | 5.0 | A | 66.58 | 80 | 49 | research_now | - | no_data | 8 | -2.953 | - |
 
 ## Sector allocation
 - Healthcare: 24.65%
-- Consumer Cyclical: 14.05%
+- Consumer Cyclical: 14.65%
 - Industrials: 10.14%
-- Consumer Defensive: 5.95%
-- Technology: 2.1%
+- Consumer Defensive: 4.7%
+- Technology: 1.57%
 
 ## Theme allocation
 - space_economy: 5.0%
@@ -52,8 +52,8 @@ Invested: **56.89%**  |  Cash: **43.11%**  |  Positions: 16
 - BMRN: no Kelly edge (expectations gap +9pts >= 0: price already assumes more growth than demonstrated)
 - AVGO: no Kelly edge (expectations gap +15pts >= 0: price already assumes more growth than demonstrated)
 - NBIX: sector cap Healthcare (25.0%)
-- DGII: no Kelly edge (expectations gap +15pts >= 0: price already assumes more growth than demonstrated)
 - IRMD: no Kelly edge (expectations gap +14pts >= 0: price already assumes more growth than demonstrated)
+- DGII: no Kelly edge (expectations gap +15pts >= 0: price already assumes more growth than demonstrated)
 - POWL: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - MRK: no Kelly edge (expectations gap +4pts >= 0: price already assumes more growth than demonstrated)
 - GOOG: no Kelly edge (expectations gap +14pts >= 0: price already assumes more growth than demonstrated)
