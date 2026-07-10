@@ -200,6 +200,133 @@ def get_session():
 FUND_HIST = {}          # fundamentals_history.json tickers map (SEC companyfacts, weekly)
 EXISTING_DATA_REF = {}  # previous stocks.json rows, keyed by symbol (carry-forward fallback)
 
+# ── defeatbeta bulk source (Yahoo-quota killer, 2026-07-10) ────────────────────
+# Daily-refreshed parquet mirror of Yahoo data on Hugging Face (verified
+# value-identical vs our cached financials/{T}.json). Names with a fresh price
+# there skip Yahoo entirely except a weekly 1-request .info refresh (analyst /
+# ownership fields the dataset lacks). DBETA is None when the dataset is stale
+# or unreachable -> every name takes the legacy yfinance path below.
+import defeatbeta_source
+DBETA = None
+
+# .info-only fields carried from the cached detail on non-slot days
+_CARRY_INFO_KEYS = {
+    "forwardEps": "Forward_EPS_Estimate",
+    "priceToBook": "Price_to_Book",
+    "fiveYearAvgPE": "PE_5Y_Avg",
+    "beta": "Beta",
+    "shortPercentOfFloat": "Short_Percent_Float",
+    "heldPercentInstitutions": "Held_Percent_Institutions",
+    "dividendYield": "Dividend_Yield",
+    "payoutRatio": "Payout_Ratio",
+}
+
+def pseudo_info(ticker_symbol, cached_detail):
+    """Stand-in for yf .info on non-slot bulk days: live price/mcap/shares/EPS
+    from defeatbeta, analyst/ownership fields carried from the cached detail."""
+    info = {}
+    row = DBETA.latest.get(ticker_symbol)
+    if row:
+        info["currentPrice"] = row["close"]
+    mcap = DBETA.market_cap(ticker_symbol)
+    if mcap:
+        info["marketCap"] = mcap
+    if ticker_symbol in DBETA.shares:
+        info["sharesOutstanding"] = DBETA.shares[ticker_symbol]
+    prev = (EXISTING_DATA_REF.get(ticker_symbol) or {}).get("metrics", {}) or {}
+    if prev.get("revenueGrowth") is not None:
+        info["revenueGrowth"] = prev["revenueGrowth"]
+    cm = (cached_detail or {}).get("Calculated_Metrics", {}) or {}
+    # EPS_TTM: carry the .info trailingEps captured at the last slot refresh —
+    # the dataset's tailing_eps is basic-EPS-based and drifts from Yahoo's
+    # (diluted) trailingEps on some names (CROX -1.38 vs -1.62). Same weekly
+    # refresh cadence the detail file already had.
+    if cm.get("EPS_TTM") is not None:
+        info["trailingEps"] = cm["EPS_TTM"]
+    elif ticker_symbol in DBETA.eps_ttm:
+        info["trailingEps"] = DBETA.eps_ttm[ticker_symbol]
+    for info_key, detail_key in _CARRY_INFO_KEYS.items():
+        if cm.get(detail_key) is not None:
+            info[info_key] = cm[detail_key]
+    return info
+
+def process_stock_bulk(ticker_symbol, info, slot_today):
+    """StockData from defeatbeta bulk tables — zero Yahoo calls. `info` is the
+    real .info on slot days (weekly analyst/ownership refresh), else pseudo_info.
+    Field semantics match process_stock; slow-moving .info-only fields are
+    <=7 days old instead of daily."""
+    prev_row = EXISTING_DATA_REF.get(ticker_symbol) or {}
+    prev_metrics = prev_row.get("metrics", {}) or {}
+    prof = DBETA.profile.get(ticker_symbol) or {}
+    row = DBETA.latest.get(ticker_symbol) or {}
+
+    data = StockData(ticker_symbol)
+    data.company_name = (info.get("longName") if slot_today else None) \
+        or prev_row.get("name") or ticker_symbol
+    data.description = (info.get("longBusinessSummary") if slot_today else None) \
+        or prof.get("summary") or prev_row.get("description") or "No description available."
+    data.sector = (info.get("sector") if slot_today else None) \
+        or prof.get("sector") or prev_row.get("sector") or "Unknown"
+    data.industry = (info.get("industry") if slot_today else None) \
+        or prof.get("industry") or prev_row.get("industry") or "Unknown"
+    data.country = (info.get("country") if slot_today else None) \
+        or prof.get("country") or prev_row.get("country") or "Unknown"
+
+    data.price = safe_float(info.get("currentPrice"), 0.0) or safe_float(row.get("close"), 0.0)
+    mcap = safe_float(info.get("marketCap"), 0.0) or safe_float(DBETA.market_cap(ticker_symbol), 0.0) \
+        or safe_float(prev_row.get("marketCap"), 0.0)
+    data.market_cap = mcap
+
+    # gross margin: Yahoo's grossMargins uses its own cost classification that
+    # statement-derived GP/Rev doesn't always match (MEDP 0.29 vs 0.72) — carry
+    # the previous run's value between weekly slot refreshes, never re-derive.
+    if slot_today and info.get("grossMargins") is not None:
+        data.gross_margin = safe_float(info.get("grossMargins"), 0.0)
+    else:
+        data.gross_margin = safe_float(prev_metrics.get("grossMargin"), 0.0)
+
+    # P/S: price-sensitive, so recompute daily against fresh mcap; TTM revenue
+    # from the quarterly statements matched Yahoo's exactly in verification.
+    ttm_rev = None
+    q = (DBETA.statements.get(ticker_symbol) or {}).get(("income_statement", "quarterly"))
+    if q:
+        dates = sorted(q, reverse=True)[:4]
+        revs = [q[d].get("Total Revenue") for d in dates]
+        if len(revs) == 4 and all(v is not None for v in revs):
+            ttm_rev = sum(revs)
+    if slot_today and info.get("priceToSalesTrailing12Months") is not None:
+        data.price_to_sales = safe_float(info.get("priceToSalesTrailing12Months"), 100.0)
+    elif mcap and ttm_rev:
+        data.price_to_sales = mcap / ttm_rev
+    else:
+        data.price_to_sales = safe_float(prev_metrics.get("psRatio"), 100.0)
+
+    # .info-only fields: fresh on slot days, previous run's value otherwise
+    if slot_today:
+        rev_growth = safe_float(info.get("revenueGrowth"), 0.01)
+        trailing_pe = safe_float(info.get("trailingPE"), 100.0)
+        data.peg_ratio = safe_float(info.get("pegRatio"), trailing_pe / (rev_growth * 100))
+        data.insider_ownership = safe_float(info.get("heldPercentInsiders"), 0.0)
+        data.float_shares = safe_float(info.get("floatShares"), float("inf"))
+        data.revenue_growth_ttm = safe_float(info.get("revenueGrowth"), 0.0)
+        data.revenue_growth_qtr_yoy = safe_float(info.get("quarterlyRevenueGrowth"), 0.0)
+    else:
+        data.peg_ratio = safe_float(prev_metrics.get("pegRatio"), 100.0)
+        data.insider_ownership = safe_float(prev_metrics.get("insiderOwnership"), 0.0)
+        data.float_shares = safe_float(prev_metrics.get("float"), float("inf"))
+        data.revenue_growth_ttm = safe_float(prev_metrics.get("revenueGrowth"), 0.0)
+        data.revenue_growth_qtr_yoy = safe_float(prev_metrics.get("revenueGrowth"), 0.0)
+
+    # SEC-first fundamentals: identical to the legacy path
+    sec_roic, sec_gm3, sec_alt = sec_fundamentals(ticker_symbol, mcap)
+    if str(data.sector).startswith("Financial"):
+        sec_roic = None
+    data.roic = sec_roic if sec_roic is not None else safe_float(prev_metrics.get("roic"), 0.0)
+    data.gross_margin_3yr_avg = sec_gm3 if sec_gm3 is not None else data.gross_margin
+    data.altman_z_score = sec_alt if sec_alt is not None else prev_metrics.get("zScore")
+    data.beneish_m_score = None
+    return data
+
 def load_fund_hist():
     global FUND_HIST
     try:
@@ -345,6 +472,68 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
         except:
             pass  # Some tickers don't have calendar data
 
+        monthly_closes = []
+        try:
+            hist = yf_ticker.history(period="2y", interval="1mo")
+            if not hist.empty and 'Close' in hist.columns:
+                monthly_closes = [float(x) for x in hist['Close'].dropna().tolist()]
+        except:
+            pass
+
+        return build_financial_detail(ticker_symbol, info, income_stmt, q_income_stmt,
+                                      cash_flow_stmt, bs, next_earnings, monthly_closes)
+    except Exception as e:
+        logging.warning(f"Financial detail extraction failed for {ticker_symbol}: {e}")
+        return None
+
+def extract_financial_detail_bulk(ticker_symbol, info, cached_detail, yf_ticker=None):
+    """Same detail dict, sourced from the defeatbeta bulk tables (zero Yahoo
+    calls). `info` is real .info on slot days, else pseudo_info carry-forward.
+    Next earnings date falls back to the cached value — the defeatbeta calendar
+    covers fewer names than Yahoo's."""
+    try:
+        income_stmt = DBETA.statement_frame(ticker_symbol, "income_statement", "annual")
+        q_income_stmt = DBETA.statement_frame(ticker_symbol, "income_statement", "quarterly")
+        cash_flow_stmt = DBETA.statement_frame(ticker_symbol, "cash_flow", "annual")
+        bs = DBETA.statement_frame(ticker_symbol, "balance_sheet", "annual")
+        next_earnings = DBETA.next_earnings.get(ticker_symbol) \
+            or (cached_detail or {}).get("Next_Earnings_Date")
+
+        # Monthly closes: keep yfinance's dividend-adjusted series (defeatbeta
+        # closes are split- but not dividend-adjusted -> 20M-MA drifts high for
+        # dividend payers). Slot days re-pull the adjusted history (1 request);
+        # between slots reuse the cached series with the LAST point replaced by
+        # today's close (the current month has no adjustments yet, so raw ==
+        # adjusted there). First-ever run falls back to the raw dataset series.
+        monthly_closes = []
+        if yf_ticker is not None:
+            try:
+                hist = yf_ticker.history(period="2y", interval="1mo")
+                if not hist.empty and 'Close' in hist.columns:
+                    monthly_closes = [float(x) for x in hist['Close'].dropna().tolist()]
+            except Exception:
+                pass
+        if not monthly_closes:
+            cached_mc = (cached_detail or {}).get("Monthly_Closes") or []
+            live = (DBETA.latest.get(ticker_symbol) or {}).get("close")
+            if cached_mc:
+                monthly_closes = list(cached_mc)
+                if live:
+                    monthly_closes[-1] = float(live)
+            else:
+                monthly_closes = DBETA.monthly.get(ticker_symbol, [])
+
+        return build_financial_detail(ticker_symbol, info, income_stmt, q_income_stmt,
+                                      cash_flow_stmt, bs, next_earnings, monthly_closes)
+    except Exception as e:
+        logging.warning(f"Bulk financial detail failed for {ticker_symbol}: {e}")
+        return None
+
+def build_financial_detail(ticker_symbol, info, income_stmt, q_income_stmt,
+                           cash_flow_stmt, bs, next_earnings, monthly_closes):
+    """Core detail builder — pure function of its inputs so the yfinance and
+    defeatbeta paths produce identically-derived numbers."""
+    try:
         def extract_income_metrics(df, num_periods):
             if df is None or df.empty:
                 return []
@@ -445,16 +634,10 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
         five_year_avg_pe = safe_float(info.get("fiveYearAvgPE") or info.get("trailingPE"), None)
         beta = safe_float(info.get("beta"), None)
 
-        monthly_closes = []
+        monthly_closes = monthly_closes or []
         ma_20_month = None
-        try:
-            hist = yf_ticker.history(period="2y", interval="1mo")
-            if not hist.empty and 'Close' in hist.columns:
-                monthly_closes = [float(x) for x in hist['Close'].dropna().tolist()]
-                if len(monthly_closes) >= 20:
-                    ma_20_month = sum(monthly_closes[-20:]) / 20.0
-        except:
-            pass
+        if len(monthly_closes) >= 20:
+            ma_20_month = sum(monthly_closes[-20:]) / 20.0
 
         detail = {
             "Ticker": ticker_symbol,
@@ -593,6 +776,14 @@ def main():
     EXISTING_DATA_REF.update(existing_data)
     load_fund_hist()
 
+    # defeatbeta bulk tables (daily HF mirror of Yahoo data). None -> legacy
+    # yfinance for the whole run (dataset stale >36h or unreachable).
+    global DBETA
+    DBETA = defeatbeta_source.load(universe=tickers)
+    if DBETA is None:
+        logging.warning("defeatbeta unavailable — full legacy yfinance scan (slow).")
+    flush_handlers()
+
     # Write PID to file for control
     with open("public/data/scanner.pid", "w") as f:
         f.write(str(os.getpid()))
@@ -618,47 +809,84 @@ def main():
                 logging.info(progress_msg)
                 flush_handlers()
             
-            # 1. PROCESS STOCK
-            process_result = process_stock(ticker)
-            if not process_result:
-                skipped_count += 1
-                continue
-            result, yf_ticker = process_result
-
-            # TTL-GATED DETAIL: extract_financial_detail hits ~4-5 more Yahoo endpoints
-            # per ticker (statements, quarterly EPS, calendar, monthly closes) for data
-            # that changes quarterly-to-slowly. Each ticker refreshes on a fixed weekly
-            # slot (hash%7 -> ~1/7 of the universe per day) or when its cached
-            # financials/{T}.json is >10d old; other days reuse the cached file with
-            # Price/Market_Cap patched fresh so downstream consumers (incl. the RS2
-            # Local valuation, which reads Price from this file) never see a stale price.
-            detail = None
             cached_detail = None
             try:
                 with open(os.path.join('public', 'data', 'financials', f'{ticker}.json'), 'r') as f:
                     cached_detail = json.load(f)
             except Exception:
                 pass
-            age_days = None
-            if cached_detail and cached_detail.get('Data_Fetched_Date'):
-                try:
-                    age_days = (datetime.now() - datetime.strptime(
-                        str(cached_detail['Data_Fetched_Date'])[:10], '%Y-%m-%d')).days
-                except Exception:
-                    pass
             slot_today = (int(hashlib.md5(ticker.encode()).hexdigest(), 16) % 7) == (datetime.now().toordinal() % 7)
-            if cached_detail is None or age_days is None or slot_today or age_days > 10:
+
+            # BULK PATH (defeatbeta): names with a fresh price in the daily HF
+            # dataset get everything locally — price/mcap/statements/monthly
+            # closes/EPS — so detail is rebuilt DAILY (fresher than the old
+            # weekly TTL). Yahoo is touched only on the weekly slot day for the
+            # .info-only analyst/ownership fields; between slots those carry
+            # forward from the previous run (<=7d old).
+            result = None
+            detail = None
+            used_bulk = False
+            if DBETA is not None and DBETA.has_fresh_price(ticker):
                 try:
-                    detail = extract_financial_detail(ticker, yf_ticker)
-                except Exception:
-                    pass
-                if not detail:
-                    detail = cached_detail      # fresh fetch failed -> keep serving the cache
-            else:
-                detail = cached_detail
-                detail['Price'] = result.price or detail.get('Price')
-                if result.market_cap:
-                    detail['Market_Cap'] = result.market_cap
+                    info = None
+                    yf_t = None
+                    if slot_today:
+                        try:
+                            yf_t = yf.Ticker(ticker)
+                            info = yf_t.info
+                        except Exception:
+                            info, yf_t = None, None   # Yahoo hiccup -> carry-forward week
+                    slot_ok = bool(info)
+                    if not info:
+                        info = pseudo_info(ticker, cached_detail)
+                    result = process_stock_bulk(ticker, info, slot_ok)
+                    detail = extract_financial_detail_bulk(ticker, info, cached_detail,
+                                                           yf_ticker=yf_t) or cached_detail
+                    if detail:
+                        detail['Price'] = result.price or detail.get('Price')
+                        if result.market_cap:
+                            detail['Market_Cap'] = result.market_cap
+                    used_bulk = True
+                except Exception as e:
+                    logging.warning(f"Bulk path failed for {ticker} ({e}) — legacy fallback.")
+                    result, detail = None, None
+
+            # LEGACY PATH (yfinance): defeatbeta-stale/missing names or dataset
+            # outage. TTL-GATED DETAIL: extract_financial_detail hits ~4-5 Yahoo
+            # endpoints per ticker; each ticker refreshes on its weekly slot or
+            # when its cached financials/{T}.json is >10d old; other days reuse
+            # the cache with Price/Market_Cap patched fresh (RS2 Local reads
+            # Price from this file — it must never be stale).
+            if not used_bulk:
+                process_result = process_stock(ticker)
+                if not process_result:
+                    skipped_count += 1
+                    continue
+                result, yf_ticker = process_result
+
+                age_days = None
+                if cached_detail and cached_detail.get('Data_Fetched_Date'):
+                    try:
+                        age_days = (datetime.now() - datetime.strptime(
+                            str(cached_detail['Data_Fetched_Date'])[:10], '%Y-%m-%d')).days
+                    except Exception:
+                        pass
+                if cached_detail is None or age_days is None or slot_today or age_days > 10:
+                    try:
+                        detail = extract_financial_detail(ticker, yf_ticker)
+                    except Exception:
+                        pass
+                    if not detail:
+                        detail = cached_detail      # fresh fetch failed -> keep serving the cache
+                        if detail:                  # ...but never with a stale price
+                            detail['Price'] = result.price or detail.get('Price')
+                            if result.market_cap:
+                                detail['Market_Cap'] = result.market_cap
+                else:
+                    detail = cached_detail
+                    detail['Price'] = result.price or detail.get('Price')
+                    if result.market_cap:
+                        detail['Market_Cap'] = result.market_cap
                 
             # 2. APPLY "100-BAGGER" RULES
             screening_result = is_potential_100_bagger(result)

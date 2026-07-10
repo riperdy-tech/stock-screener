@@ -49,7 +49,7 @@ jobs:
           # yfinance PINNED: it was previously unpinned (`pip install yfinance`), so a bad
           # upstream release could silently change fetch behaviour. 1.5.1 is the version both
           # the fast (07-08) and slow (07-09) runs used, so it is a known-good baseline.
-          pip install yfinance==1.5.1 pandas numpy requests finance-datareader supabase python-dotenv lxml html5lib beautifulsoup4 openai
+          pip install yfinance==1.5.1 pandas numpy requests finance-datareader supabase python-dotenv lxml html5lib beautifulsoup4 openai duckdb
 
       - name: Run Data Fetchers
         env:
@@ -118,7 +118,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install yfinance==1.5.1 pandas numpy requests finance-datareader supabase python-dotenv lxml html5lib beautifulsoup4 openai
+          pip install yfinance==1.5.1 pandas numpy requests finance-datareader supabase python-dotenv lxml html5lib beautifulsoup4 openai duckdb
 
       - name: Run Scoring Chain (price history -> EPS -> reverse -> paradigm)
         env:
