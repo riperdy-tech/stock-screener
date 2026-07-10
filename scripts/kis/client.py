@@ -57,6 +57,20 @@ class KISError(RuntimeError):
     pass
 
 
+class KISAuthError(KISError):
+    """Token issuance / authentication failure.
+
+    Kept distinct because callers swallow KISError to mean "this symbol has no
+    data". An auth failure must never be mistaken for a missing symbol — that
+    turns a credentials problem into a silently empty portfolio.
+    """
+
+
+# Token issuance is limited to once per minute per app key (EGW00133).
+TOKEN_RATE_LIMIT_CODE = "EGW00133"
+TOKEN_RETRY_WAIT = 65
+
+
 def _is_rate_limited(status: int, body: dict | None, text: str) -> bool:
     if body and (body.get("msg_cd") == RATE_LIMIT_CODE or "초당 거래건수" in (body.get("msg1") or "")):
         return True
@@ -122,15 +136,26 @@ class KISClient:
                 return self._token
         except Exception:
             pass
-        self._throttle()  # the token call counts against the per-second cap
-        r = self.session.post(
-            f"{self.base}/oauth2/tokenP",
-            json={"grant_type": "client_credentials",
-                  "appkey": self.appkey, "appsecret": self.appsecret},
-            timeout=30)
-        if r.status_code != 200:
-            raise KISError(f"token issuance failed {r.status_code}: {r.text[:300]}")
-        d = r.json()
+        d = None
+        for attempt in range(3):
+            self._throttle()  # the token call counts against the per-second cap
+            r = self.session.post(
+                f"{self.base}/oauth2/tokenP",
+                json={"grant_type": "client_credentials",
+                      "appkey": self.appkey, "appsecret": self.appsecret},
+                timeout=30)
+            if r.status_code == 200:
+                d = r.json()
+                break
+            # One token per minute per app key. Two runs in quick succession
+            # (e.g. a dry run followed by an execute) will collide here.
+            if TOKEN_RATE_LIMIT_CODE in r.text and attempt < 2:
+                print(f"  token rate-limited (1/min); waiting {TOKEN_RETRY_WAIT}s")
+                time.sleep(TOKEN_RETRY_WAIT)
+                continue
+            raise KISAuthError(f"token issuance failed {r.status_code}: {r.text[:300]}")
+        if d is None:
+            raise KISAuthError("token issuance failed after retries")
         self._token = d["access_token"]
         try:
             self._token_cache.write_text(json.dumps(
@@ -185,13 +210,20 @@ class KISClient:
     # ---------- quotes ----------
 
     def quote(self, excd: str, ticker: str) -> float | None:
-        """Last price from the overseas price API. None if not found / no data."""
+        """Last price from the overseas price API. None if not found / no data.
+
+        Auth failures propagate: a bad token means we know nothing about any
+        symbol, and returning None would be indistinguishable from "delisted".
+        """
+        self.token()  # raises KISAuthError before we start swallowing errors
         try:
             body, _ = self._get("/uapi/overseas-price/v1/quotations/price",
                                 "HHDFS00000300",
                                 {"AUTH": "", "EXCD": excd, "SYMB": ticker})
             last = float(body.get("output", {}).get("last") or 0)
             return last if last > 0 else None
+        except KISAuthError:
+            raise
         except (KISError, ValueError):
             return None
 

@@ -263,6 +263,10 @@ def main():
     unpriced = tickers - set(prices)
     if unpriced:
         print(f"WARNING: no KIS quote for {sorted(unpriced)}")
+    if tickers and not prices:
+        # Never plan from a total absence of prices — that is an outage, not a
+        # portfolio of delisted names.
+        sys.exit(f"refusing: no price for any of {len(tickers)} tickers")
 
     # ---- plan ----
     plan = compute_plan(tgt["weights"], held, sellable, prices, cash,
