@@ -8,6 +8,7 @@ import logging
 import requests
 import io
 import math
+import hashlib
 from datetime import datetime
 import base64
 
@@ -188,6 +189,75 @@ def get_session():
     s.mount('https://', requests.adapters.HTTPAdapter(max_retries=3))
     return s
 
+# ── SEC-first fundamentals (Yahoo-quota saver, 2026-07-10) ─────────────────────
+# The old path fetched stock.financials/balance_sheet/cashflow per ticker per day:
+# ~3 extra Yahoo requests × 6,598 tickers of QUARTERLY-changing data. Yahoo throttles
+# ~2,000-2,500 req/hr/IP, so this was the main driver of the fetch step hitting the
+# 6h GitHub job cap (357 min on 2026-07-09). ROIC / gross-margin-trend / Altman-Z are
+# now derived from the SEC companyfacts annual history (built weekly, read locally —
+# zero Yahoo requests), with the previous stocks.json value carried forward for names
+# SEC doesn't cover (foreign filers, new listings).
+FUND_HIST = {}          # fundamentals_history.json tickers map (SEC companyfacts, weekly)
+EXISTING_DATA_REF = {}  # previous stocks.json rows, keyed by symbol (carry-forward fallback)
+
+def load_fund_hist():
+    global FUND_HIST
+    try:
+        with open('public/data/fundamentals_history.json', 'r') as f:
+            FUND_HIST = (json.load(f) or {}).get('tickers', {})
+        logging.info(f"SEC fundamentals history loaded: {len(FUND_HIST)} tickers.")
+    except Exception as e:
+        FUND_HIST = {}
+        logging.warning(f"fundamentals_history.json unavailable ({e}) — carry-forward only.")
+
+def sec_fundamentals(ticker_symbol, mcap):
+    """(roic, gross_margin_3yr_avg, altman_z) from SEC annual history; each field is
+    None when its inputs are missing (honest null — never a fabricated default)."""
+    yrs_map = FUND_HIST.get(ticker_symbol)
+    if not isinstance(yrs_map, dict) or not yrs_map:
+        return None, None, None
+    years = sorted(yrs_map)
+    f0 = yrs_map[years[-1]]
+    n = lambda v: v if isinstance(v, (int, float)) else None
+
+    # EBIT: operating income, else NI + tax + interest (same fallback the old yf path used)
+    ebit = n(f0.get('operating_income'))
+    if ebit is None and n(f0.get('net_income')) is not None:
+        ebit = f0['net_income'] + (n(f0.get('tax_provision')) or 0) + (n(f0.get('interest_expense')) or 0)
+
+    # ROIC = NOPAT / (equity + debt - cash); effective tax rate clamped to sanity
+    roic = None
+    pretax, tax = n(f0.get('pretax_income')), n(f0.get('tax_provision'))
+    tax_rate = (tax / pretax) if (pretax and tax is not None) else 0.21
+    tax_rate = min(max(tax_rate, 0.0), 0.5)
+    eq = n(f0.get('equity'))
+    if ebit is not None and eq is not None:
+        invested = eq + (n(f0.get('lt_debt')) or 0) - (n(f0.get('cash')) or 0)
+        if invested > 0:
+            roic = ebit * (1 - tax_rate) / invested
+            if abs(roic) > 1.5:
+                roic = None   # implausible — tiny invested-capital denominator (e.g. banks: deposits aren't lt_debt)
+
+    # Gross-margin 3yr average (GrossProfit tag is only ~40% covered; caller falls
+    # back to the current .info gross margin, same as the old failure path)
+    gms = []
+    for y in years[-3:]:
+        fy = yrs_map[y]
+        gp, rev = n(fy.get('gross_profit')), n(fy.get('revenue'))
+        if gp is not None and rev:
+            gms.append(gp / rev)
+    gm3 = (sum(gms) / len(gms)) if gms else None
+
+    # Altman Z (needs retained_earnings — present after the weekly SEC rebuild adds the tag)
+    alt = None
+    ta, tl = n(f0.get('total_assets')), n(f0.get('total_liabilities'))
+    ca, cl = n(f0.get('current_assets')), n(f0.get('current_liabilities'))
+    re_, rev = n(f0.get('retained_earnings')), n(f0.get('revenue'))
+    if None not in (ta, tl, ca, cl, re_, rev) and ebit is not None and ta > 0 and tl > 0 and mcap:
+        alt = (1.2 * (ca - cl) / ta + 1.4 * re_ / ta + 3.3 * ebit / ta
+               + 0.6 * mcap / tl + 1.0 * rev / ta)
+    return roic, gm3, alt
+
 def process_stock(ticker_symbol):
     try:
         import socket
@@ -221,55 +291,19 @@ def process_stock(ticker_symbol):
         data.revenue_growth_ttm = safe_float(info.get('revenueGrowth'), 0.0)
         data.revenue_growth_qtr_yoy = safe_float(info.get('quarterlyRevenueGrowth'), 0.0)
 
-        financials = stock.financials
-        balance_sheet = stock.balance_sheet
-        cashflow = stock.cashflow
-        
-        # We proceed even if financials are empty to ensure all stocks pulled from market are visible
-
-        # ROIC
-        try:
-            ebit = financials.loc['EBIT'].iloc[0] if 'EBIT' in financials.index else (financials.loc['Net Income'].iloc[0] + financials.loc['Tax Provision'].iloc[0] + financials.loc['Interest Expense'].iloc[0])
-            tax_rate = financials.loc['Tax Provision'].iloc[0] / financials.loc['Pretax Income'].iloc[0] if 'Pretax Income' in financials.index and financials.loc['Pretax Income'].iloc[0] != 0 else 0.21
-            nopat = ebit * (1 - tax_rate)
-            total_equity = balance_sheet.loc['Stockholders Equity'].iloc[0]
-            total_debt = balance_sheet.loc['Total Debt'].iloc[0] if 'Total Debt' in balance_sheet.index else 0
-            cash = balance_sheet.loc['Cash And Cash Equivalents'].iloc[0] if 'Cash And Cash Equivalents' in balance_sheet.index else 0
-            invested_capital = total_equity + total_debt - cash
-            data.roic = nopat / invested_capital if invested_capital > 0 else 0
-        except:
-            data.roic = 0.0
-
-        # Gross Margin Trend
-        try:
-            if 'Gross Profit' in financials.index and 'Total Revenue' in financials.index:
-                margins = financials.loc['Gross Profit'] / financials.loc['Total Revenue']
-                data.gross_margin_3yr_avg = margins.head(3).mean()
-            else:
-                data.gross_margin_3yr_avg = data.gross_margin
-        except:
-            data.gross_margin_3yr_avg = data.gross_margin
-
-        # Altman Z-Score
-        try:
-            total_assets = balance_sheet.loc['Total Assets'].iloc[0]
-            current_assets = balance_sheet.loc['Current Assets'].iloc[0]
-            current_liabilities = balance_sheet.loc['Current Liabilities'].iloc[0]
-            working_capital = current_assets - current_liabilities
-            retained_earnings = balance_sheet.loc['Retained Earnings'].iloc[0] if 'Retained Earnings' in balance_sheet.index else 0
-            total_liabilities = balance_sheet.loc['Total Liabilities Net Minority Interest'].iloc[0]
-            
-            A = working_capital / total_assets
-            B = retained_earnings / total_assets
-            C = ebit / total_assets
-            D = mcap / total_liabilities
-            E = financials.loc['Total Revenue'].iloc[0] / total_assets
-            
-            data.altman_z_score = 1.2*A + 1.4*B + 3.3*C + 0.6*D + 1.0*E
-        except:
-            # Honest null: a silent 3.0 default put every computation failure
-            # in the "safe zone" exactly where distress detection matters most.
-            data.altman_z_score = None
+        # SEC-FIRST fundamentals: ROIC / gross-margin-trend / Altman-Z are quarterly-changing,
+        # so they are derived from the local SEC companyfacts history instead of three daily
+        # Yahoo statement fetches per ticker (the old stock.financials/balance_sheet/cashflow
+        # calls — the main quota eater; see sec_fundamentals). Names SEC doesn't cover
+        # (foreign filers, new listings) carry forward the previous run's value; failing
+        # that, the old failure-mode defaults apply (roic 0.0, altman None).
+        sec_roic, sec_gm3, sec_alt = sec_fundamentals(ticker_symbol, mcap)
+        prev_metrics = (EXISTING_DATA_REF.get(ticker_symbol) or {}).get('metrics', {}) or {}
+        if str(data.sector).startswith('Financial'):
+            sec_roic = None   # invested-capital ROIC is structurally wrong for banks/insurers -> carry forward
+        data.roic = sec_roic if sec_roic is not None else safe_float(prev_metrics.get('roic'), 0.0)
+        data.gross_margin_3yr_avg = sec_gm3 if sec_gm3 is not None else data.gross_margin
+        data.altman_z_score = sec_alt if sec_alt is not None else prev_metrics.get('zScore')
 
         # Beneish M-Score: not computable from this fetch (needs 2yr of
         # receivables/PP&E/SG&A detail). Null until the SEC companyfacts
@@ -555,6 +589,10 @@ def main():
             logging.error(f"Failed to load existing stocks.json: {e}")
             flush_handlers()
 
+    # SEC-first fundamentals: local companyfacts history + previous-run carry-forward
+    EXISTING_DATA_REF.update(existing_data)
+    load_fund_hist()
+
     # Write PID to file for control
     with open("public/data/scanner.pid", "w") as f:
         f.write(str(os.getpid()))
@@ -587,12 +625,40 @@ def main():
                 continue
             result, yf_ticker = process_result
 
-            # PRE-FETCH DETAIL (to avoid UnboundLocalError)
+            # TTL-GATED DETAIL: extract_financial_detail hits ~4-5 more Yahoo endpoints
+            # per ticker (statements, quarterly EPS, calendar, monthly closes) for data
+            # that changes quarterly-to-slowly. Each ticker refreshes on a fixed weekly
+            # slot (hash%7 -> ~1/7 of the universe per day) or when its cached
+            # financials/{T}.json is >10d old; other days reuse the cached file with
+            # Price/Market_Cap patched fresh so downstream consumers (incl. the RS2
+            # Local valuation, which reads Price from this file) never see a stale price.
             detail = None
+            cached_detail = None
             try:
-                detail = extract_financial_detail(ticker, yf_ticker)
+                with open(os.path.join('public', 'data', 'financials', f'{ticker}.json'), 'r') as f:
+                    cached_detail = json.load(f)
             except Exception:
                 pass
+            age_days = None
+            if cached_detail and cached_detail.get('Data_Fetched_Date'):
+                try:
+                    age_days = (datetime.now() - datetime.strptime(
+                        str(cached_detail['Data_Fetched_Date'])[:10], '%Y-%m-%d')).days
+                except Exception:
+                    pass
+            slot_today = (int(hashlib.md5(ticker.encode()).hexdigest(), 16) % 7) == (datetime.now().toordinal() % 7)
+            if cached_detail is None or age_days is None or slot_today or age_days > 10:
+                try:
+                    detail = extract_financial_detail(ticker, yf_ticker)
+                except Exception:
+                    pass
+                if not detail:
+                    detail = cached_detail      # fresh fetch failed -> keep serving the cache
+            else:
+                detail = cached_detail
+                detail['Price'] = result.price or detail.get('Price')
+                if result.market_cap:
+                    detail['Market_Cap'] = result.market_cap
                 
             # 2. APPLY "100-BAGGER" RULES
             screening_result = is_potential_100_bagger(result)
