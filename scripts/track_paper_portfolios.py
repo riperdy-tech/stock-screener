@@ -33,7 +33,7 @@ import json
 import math
 import os
 import sys
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 try:
@@ -61,6 +61,47 @@ BENCHMARKS = ["IWM", "SPY", "QQQ", "SOXX", "DRAM"]  # small-cap, S&P500, Nasdaq-
 PRIMARY_BENCHMARK = "IWM"
 START_NAV = 100.0
 POST_EXIT_DAYS = 30
+
+# ── source-health gates ──────────────────────────────────────────────────────
+# A name absent from a target set means one of two things, and they demand
+# opposite responses: it was EVALUATED and demoted (sell), or it was NOT
+# EVALUATED (hold — we know nothing). The old collapse breaker could not tell
+# them apart, so it inferred "upstream failure" from the *portfolio's* reaction
+# (>25% of holdings exiting at once) — a proxy that is perfectly correlated with
+# a genuine market crash, i.e. it fired hardest exactly when it should not.
+# These gates check the INPUT instead, and unknown-vs-demoted is decided per
+# name, so no time-delay counter is needed.
+FACTOR_MAX_AGE_H = 36        # factor_scores.json content age (generated_at)
+SCORED_COUNT_MIN_RATIO = 0.9  # vs the last healthy run
+ALERT_RETENTION_DAYS = 7      # how long a held/underfunded alert stays on the site banner
+# Fund an entrant only when the cash covers at least this much of its target weight.
+# Nothing ever tops a position back up (this function only trims overweights), so a
+# badly-underfunded entrant would stay underweight indefinitely — defer it instead and
+# let it re-enter at full size once an exit frees cash. The 10% slack absorbs the
+# transaction cost of the trims that raised the cash (trimming $100 to a $50 target
+# returns $49.95 at 10bps) and tolerates a mild underweight in preference to holding
+# no position at all.
+ENTRY_FUND_TOL = 0.90
+
+# Bands that mean "this name was not evaluated today", as opposed to "evaluated
+# and did not make the cut". `insufficient_factors` is emitted by score_factors
+# when a name cannot be scored; a missing entry means the same thing.
+UNEVALUATED_BANDS = (None, "insufficient_factors")
+
+
+def evaluated_quant(entry):
+    """True if the quant engine actually banded this name today."""
+    return bool(entry) and entry.get("fct_band") not in UNEVALUATED_BANDS
+
+
+def evaluated_llm(entry):
+    """True if the LLM overlay actually graded this name today.
+
+    A missing fct_band_llm means the overlay did not speak. It must NEVER fall
+    back to fct_band: that reads silence as a verdict and manufactures phantom
+    departures (2026-06-30: 19 of them; 2026-07-05: 57).
+    """
+    return bool(entry) and entry.get("fct_band_llm") is not None
 MIN_EQUAL_NAMES = 8      # #8 concentration floor: equal-weight over max(count, this) -> cash residual when few
 
 
@@ -254,16 +295,19 @@ def rewind_or_advance(ledger, as_of):
         ledger["current_date"] = as_of
 
 
-def run_target_ledger(ledger, targets, prices, as_of, reason_prefix):
+def run_target_ledger(ledger, targets, prices, as_of, reason_prefix, unknown=frozenset()):
     """plan/equal ledgers: trade-on-change toward a {ticker: weight_pct} target set.
 
-    FALSE-REMOVAL GUARDS — a data hiccup upstream must never liquidate the book:
-      1. collapse breaker: if the target set vanishes, or >25% of current holdings would exit
-         at once (>=5 names), assume an upstream failure (truncated factor_scores, missing LLM
-         overlay) and carry the book unchanged — mark NAV only. If the collapse persists for
-         3 consecutive runs it is treated as a real signal and trading resumes.
-      2. exit grace: a held name must be missing from the target set on 2 consecutive runs
-         before it is sold — a one-day flap causes zero churn.
+    `unknown` = held names the upstream engine did not evaluate this run. They are
+    NOT leavers: absence of a verdict is not a verdict. They are carried unchanged.
+    Callers derive it from the source (see evaluated_quant / evaluated_llm); when the
+    source itself is unhealthy the caller holds the whole ledger instead (see
+    factor_healthy / targets_healthy), so no portfolio-shaped "collapse" heuristic is
+    needed here.
+
+    Remaining guard — exit grace: a held name must be missing from the target set on 2
+    consecutive runs before it is sold, so a one-day flap around the band cliff causes
+    zero churn. (A buffer/hysteresis band at the signal would make this redundant.)
     Missed ENTRIES need no guard: the target is recomputed every run, so a name skipped on an
     absent/stale mark is simply retried at the next run with a fresh price.
     """
@@ -271,31 +315,14 @@ def run_target_ledger(ledger, targets, prices, as_of, reason_prefix):
     credit_dividends(ledger, as_of)  # pay holders before today's rebalance
     held = set(ledger["state"]["holdings"])
     target_set = set(targets)
-    leavers = held - target_set
+    leavers = held - target_set - set(unknown)
 
-    # guard 1: collapse breaker (with a 3-consecutive-day escape so real regime shifts trade).
-    # Every collapse-condition day is recorded (even once trading resumes), so the streak
-    # count never resets mid-collapse and the breaker cannot re-arm in a loop.
-    if held and (not target_set or (len(leavers) >= 5 and len(leavers) / len(held) > 0.25)):
-        skips = ledger.setdefault("skipped_rebalances", [])
-        skip_dates = {r["date"] for r in skips}
-        if as_of not in skip_dates:
-            skips.append({"date": as_of, "targets": len(target_set), "held": len(held),
-                          "would_exit": len(leavers)})
-            skip_dates.add(as_of)
-        consec = 0
-        d = date.fromisoformat(as_of)
-        while (d - timedelta(days=consec + 1)).isoformat() in skip_dates:
-            consec += 1
-        if consec < 2:
-            print(f"  ! {reason_prefix}: {len(leavers)}/{len(held)} holdings would exit "
-                  f"(targets={len(target_set)}) — holding book unchanged "
-                  f"(data-failure guard, day {consec + 1}/3)", file=sys.stderr)
-            nav, stale = portfolio_value(ledger, prices)
-            return nav, stale
-        # 3rd+ consecutive day: the change is persistent -> real; fall through and trade.
+    carried = held & set(unknown)
+    if carried:
+        print(f"  ! {reason_prefix}: {len(carried)} held name(s) not evaluated this run "
+              f"— carried unchanged: {sorted(carried)}", file=sys.stderr)
 
-    # guard 2: exit grace — first miss arms the exit, the second consecutive miss executes it.
+    # exit grace: first miss arms the exit, the second consecutive miss executes it.
     # (exit_pending survives same-day reruns: entries are only cleared when the name returns
     # to the target set, so a rewound rerun still sells deterministically.)
     pending = ledger.setdefault("exit_pending", {})
@@ -309,6 +336,11 @@ def run_target_ledger(ledger, targets, prices, as_of, reason_prefix):
     for t in list(pending):                # back in the target set -> disarm
         if t in target_set:
             pending.pop(t, None)
+    for t in carried:
+        # An unevaluated run is not a miss. Clearing the arm means the grace period
+        # counts 2 consecutive *evaluated* misses; otherwise a name armed yesterday
+        # and unknown today would sell the instant it is graded again, skipping it.
+        pending.pop(t, None)
 
     nav, _ = portfolio_value(ledger, prices)
     entrants = []
@@ -319,9 +351,6 @@ def run_target_ledger(ledger, targets, prices, as_of, reason_prefix):
         entrants.append(t)
 
     # Fund entrants when cash is short: trim overweight incumbents toward their target weight.
-    # (The old code bought from cash only — when the target set GREW sharply, e.g. the LLM
-    # research_now set doubling overnight, cash ran out mid-alphabet and the rest of the
-    # entrants were silently skipped, leaving the ledger stuck underweight its own target.)
     need = sum(targets[t] / 100.0 * nav for t in entrants)
     shortfall = need - ledger["state"]["cash"]
     if entrants and shortfall > 0:
@@ -341,13 +370,89 @@ def run_target_ledger(ledger, targets, prices, as_of, reason_prefix):
             trim(ledger, t, p, take, as_of, f"rebalance_{reason_prefix}")
             shortfall -= take
 
+    # If trimming could not raise the full amount (incumbents stale, so unpriceable
+    # and untrimmable), buy() clamps each spend to whatever cash is left and returns
+    # silently — starving whoever sorts last. UFPT sat outside a 22-name target set
+    # for a full day this way, with no warning anywhere.
+    #
+    # Fund at FULL target weight or not at all. A partially-funded entrant would stay
+    # underweight forever: this function only ever trims overweights, so nothing tops
+    # a position back up. A deferred name is simply an entrant again next run, when an
+    # exit or a fresh price has freed the cash — that self-heals; a token position does
+    # not. Either way the shortfall is now loud.
+    deferred = []
     for t in entrants:
         p, _ = mark_price(t, prices, ledger)
-        spend = targets[t] / 100.0 * nav
-        buy(ledger, t, p, spend, as_of, f"entered_{reason_prefix}")
+        target_spend = targets[t] / 100.0 * nav
+        # buy() clamps spend to cash, so this must gate on (near) the FULL amount:
+        # gating on a fraction and then asking for the full spend just re-creates the
+        # partial position by another route.
+        if p is None or ledger["state"]["cash"] < target_spend * ENTRY_FUND_TOL:
+            deferred.append(t)
+            continue
+        buy(ledger, t, p, target_spend, as_of, f"entered_{reason_prefix}")
+    if deferred:
+        ledger["underfunded_entrants"] = {"date": as_of, "tickers": sorted(deferred)}
+        print(f"  ! {reason_prefix}: cash short — {len(deferred)} entrant(s) DEFERRED to the "
+              f"next run: {sorted(deferred)}. The ledger is underweight its own target set.",
+              file=sys.stderr)
+    else:
+        ledger.pop("underfunded_entrants", None)
 
     nav, stale = portfolio_value(ledger, prices)
     return nav, stale
+
+
+def hold_ledger(ledger, prices, as_of):
+    """Advance the day and mark NAV without trading. Used when the upstream source
+    that defines this ledger's target set is unhealthy or absent."""
+    rewind_or_advance(ledger, as_of)
+    credit_dividends(ledger, as_of)
+    return portfolio_value(ledger, prices)
+
+
+def content_age_hours(generated_at):
+    """Age of a producer's own timestamp. File mtime is useless — a git checkout
+    resets it even on stale content."""
+    if not generated_at:
+        return None
+    try:
+        ts = datetime.fromisoformat(str(generated_at).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return (datetime.now(timezone.utc) - ts).total_seconds() / 3600.0
+
+
+def factor_healthy(factor_raw, book, as_of):
+    """Validate factor_scores.json directly. Returns (ok, reason).
+
+    Checks the INPUT, never the portfolio's reaction to it: content freshness, and
+    scored_count against the last run that passed. A truncated or stale file trades
+    nothing; a genuine mass demotion trades immediately.
+    """
+    age = content_age_hours(factor_raw.get("generated_at"))
+    if age is None:
+        return False, "factor_scores.json has no parseable generated_at"
+    if age > FACTOR_MAX_AGE_H:
+        return False, f"factor_scores.json is {age:.1f}h old (max {FACTOR_MAX_AGE_H}h)"
+    scored = factor_raw.get("scored_count")
+    if not scored:
+        return False, "factor_scores.json reports scored_count=0"
+    last_good = (book.get("health") or {}).get("factor_scored_count")
+    if last_good and scored < last_good * SCORED_COUNT_MIN_RATIO:
+        return False, (f"scored_count collapsed: {scored} vs {last_good} last healthy run "
+                       f"(< {SCORED_COUNT_MIN_RATIO:.0%})")
+    return True, ""
+
+
+def targets_healthy(name, targets, ledger):
+    """An empty target set for a ledger that holds positions is a producer failure,
+    not an instruction to liquidate. (This is the deterministic replacement for the
+    'target set vanished' arm of the old collapse breaker.)"""
+    if not targets and ledger["state"]["holdings"]:
+        return False, f"{name}: target set is empty while holding " \
+                      f"{len(ledger['state']['holdings'])} names"
+    return True, ""
 
 
 def run_mine_ledger(ledger, snapshot, prices, as_of):
@@ -608,6 +713,11 @@ def main():
                              "(on-demand refresh must not re-stamp the global ledgers).")
     args = parser.parse_args()
     as_of = args.as_of or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    # Held-book / underfunded events for the run. Written to the ledger book as an
+    # `alerts` block (-> Supabase -> site banner) so the pipeline keeps committing
+    # the day's data; see the note at the end of main() for why not a nonzero exit.
+    alerts = []
+    guard_tripped = []  # subset that caused a ledger to hold (for the stderr summary)
 
     stocks_path = Path(args.stocks_json) if args.stocks_json else STOCKS_JSON
     stocks = load_json(stocks_path, [])
@@ -636,16 +746,50 @@ def main():
     # global ledgers with stale prices (that produced frozen NAV tails). The
     # global book is left exactly as loaded; only the daily/weekly chain advances it.
     if not args.mine_only:
-        factor = (load_json(FACTOR_SCORES_JSON, {}) or {}).get("tickers", {})
+        factor_raw = load_json(FACTOR_SCORES_JSON, {}) or {}
+        factor = factor_raw.get("tickers", {})
+        fct_ok, fct_why = factor_healthy(factor_raw, book, as_of)
+        if not fct_ok:
+            print(f"  ! factor_scores unhealthy: {fct_why} — equal/equal_llm hold", file=sys.stderr)
+            alerts.append({"date": as_of, "severity": "error", "scope": "factor_scores",
+                           "detail": fct_why})
+            guard_tripped.append(f"factor_scores: {fct_why}")
+
+        def run_or_hold(name, targets, prefix, unknown=frozenset(), source_ok=True, why=""):
+            """Trade only when the source that defines this target set is healthy."""
+            led = ledgers[name]
+            ok, reason = (source_ok, why) if not source_ok else targets_healthy(name, targets, led)
+            if not ok:
+                print(f"  ! {name}: holding book unchanged — {reason}", file=sys.stderr)
+                alerts.append({"date": as_of, "severity": "error", "scope": name,
+                               "kind": "held", "detail": reason})
+                if reason not in guard_tripped:
+                    guard_tripped.append(reason)
+                return hold_ledger(led, prices, as_of)
+            nav_stale = run_target_ledger(led, targets, prices, as_of, prefix, unknown=unknown)
+            uf = led.get("underfunded_entrants")
+            if uf and uf.get("date") == as_of:
+                alerts.append({"date": as_of, "severity": "warn", "scope": name,
+                               "kind": "underfunded", "detail": f"deferred: {uf['tickers']}"})
+            if unknown & set(led["state"]["holdings"]):
+                carried = sorted(unknown & set(led["state"]["holdings"]))
+                alerts.append({"date": as_of, "severity": "info", "scope": name,
+                               "kind": "unevaluated_held", "detail": f"carried: {carried}"})
+            return nav_stale
+
         plan = load_json(PORTFOLIO_PLAN_JSON, {}) or {}
         plan_targets = {p["symbol"]: p["weight_pct"] for p in (plan.get("positions") or [])}
-        nav_plan, stale_plan = run_target_ledger(ledgers["plan"], plan_targets, prices, as_of, "plan")
+        nav_plan, stale_plan = run_or_hold("plan", plan_targets, "plan")
         plan2_targets = {p["symbol"]: p["weight_pct"] for p in ((plan.get("plan2") or {}).get("positions") or [])}
-        nav_plan2, stale_plan2 = run_target_ledger(ledgers["plan2"], plan2_targets, prices, as_of, "plan2")
+        nav_plan2, stale_plan2 = run_or_hold("plan2", plan2_targets, "plan2")
+
+        # A held name the quant engine did not band today is unknown, not demoted.
+        unknown_quant = {t for t in ledgers["equal"]["state"]["holdings"]
+                         if not evaluated_quant(factor.get(t))}
         research = sorted(t for t, e in factor.items() if e.get("fct_band") == "research_now")
         eq_weight = 100.0 / max(len(research), MIN_EQUAL_NAMES) if research else 0   # #8 cash residual when few
-        nav_eq, stale_eq = run_target_ledger(ledgers["equal"], {t: eq_weight for t in research},
-                                             prices, as_of, "rank")
+        nav_eq, stale_eq = run_or_hold("equal", {t: eq_weight for t in research}, "rank",
+                                       unknown=unknown_quant, source_ok=fct_ok, why=fct_why)
         for name, nav, stale in (("plan", nav_plan, stale_plan), ("plan2", nav_plan2, stale_plan2),
                                  ("equal", nav_eq, stale_eq)):
             finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
@@ -657,19 +801,53 @@ def main():
         # series stays flat until verdicts exist, then diverges from baseline — a clean A/B.
         plan_llm = load_json(PORTFOLIO_PLAN_LLM_JSON, {}) or {}
         pl_t = {p["symbol"]: p["weight_pct"] for p in (plan_llm.get("positions") or [])}
-        nav_pl, stale_pl = run_target_ledger(ledgers["plan_llm"], pl_t, prices, as_of, "plan_llm")
+        nav_pl, stale_pl = run_or_hold("plan_llm", pl_t, "plan_llm")
         pl2_t = {p["symbol"]: p["weight_pct"] for p in ((plan_llm.get("plan2") or {}).get("positions") or [])}
-        nav_pl2, stale_pl2 = run_target_ledger(ledgers["plan2_llm"], pl2_t, prices, as_of, "plan2_llm")
-        research_llm = sorted(t for t, e in factor.items()
-                              if (e.get("fct_band_llm") or e.get("fct_band")) == "research_now"
-                              and e.get("fct_llm_veto") != "llm_reject")
-        eqw_llm = 100.0 / max(len(research_llm), MIN_EQUAL_NAMES) if research_llm else 0   # #8 cash residual when few
-        nav_eql, stale_eql = run_target_ledger(ledgers["equal_llm"], {t: eqw_llm for t in research_llm},
-                                               prices, as_of, "rank")
+        nav_pl2, stale_pl2 = run_or_hold("plan2_llm", pl2_t, "plan2_llm")
+
+        # The overlay is authoritative for equal_llm. If it did not run, the ledger
+        # holds — it must never fall back to the quant band, which reads the LLM's
+        # silence as a verdict (that manufactured 19 phantom departures on 2026-06-30
+        # and 57 on 2026-07-05). Overlay-absent is a known state, not a data fault,
+        # so it holds without failing the run.
+        overlay_on = bool(factor_raw.get("llm_overlay_applied"))
+        if not overlay_on:
+            print("  ! equal_llm: llm_overlay_applied is false — holding book unchanged",
+                  file=sys.stderr)
+            # overlay-absent is a known state, not a data fault: a warn banner, not an
+            # error, and it does NOT count toward guard_tripped.
+            if ledgers["equal_llm"]["state"]["holdings"]:
+                alerts.append({"date": as_of, "severity": "warn", "scope": "equal_llm",
+                               "kind": "overlay_absent",
+                               "detail": "llm_overlay_applied is false; held unchanged"})
+            nav_eql, stale_eql = hold_ledger(ledgers["equal_llm"], prices, as_of)
+        else:
+            unknown_llm = {t for t in ledgers["equal_llm"]["state"]["holdings"]
+                           if not evaluated_llm(factor.get(t))}
+            research_llm = sorted(t for t, e in factor.items()
+                                  if e.get("fct_band_llm") == "research_now"
+                                  and e.get("fct_llm_veto") != "llm_reject")
+            eqw_llm = 100.0 / max(len(research_llm), MIN_EQUAL_NAMES) if research_llm else 0   # #8 cash residual when few
+            nav_eql, stale_eql = run_or_hold("equal_llm", {t: eqw_llm for t in research_llm}, "rank",
+                                             unknown=unknown_llm, source_ok=fct_ok, why=fct_why)
         for name, nav, stale in (("plan_llm", nav_pl, stale_pl), ("plan2_llm", nav_pl2, stale_pl2),
                                  ("equal_llm", nav_eql, stale_eql)):
             finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
             backfill_benches(ledgers[name])
+
+        # Watermark only advances on a healthy run, so a collapse cannot ratchet the
+        # baseline down one bad day at a time until the gate stops catching anything.
+        if fct_ok:
+            book.setdefault("health", {})["factor_scored_count"] = factor_raw.get("scored_count")
+            book["health"]["factor_checked_at"] = as_of
+
+        # Alerts block: this run's held/underfunded/carried events, plus any recent
+        # ones kept for the site banner. Cleared entries older than the window so a
+        # one-off stale day stops showing once it recovers.
+        prior = [a for a in (book.get("alerts") or [])
+                 if a.get("date") != as_of
+                 and (date.fromisoformat(as_of) - date.fromisoformat(a["date"])).days <= ALERT_RETENTION_DAYS]
+        book["alerts"] = prior + alerts
 
         book["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
@@ -700,6 +878,15 @@ def main():
                   f"cum={s.get('cumulative_return_pct')}% trades={len(ledgers[name]['trades'])}")
     print(f"  mine: {mine_note}")
     print(f"Written: {LEDGERS_JSON.name}")
+    if guard_tripped:
+        # Surfaced to the user via the ledger's `alerts` block (Supabase -> site
+        # banner), NOT by failing the process: this script is the last step of
+        # run_chain, whose nonzero exit would skip the daily Commit-and-Push and
+        # discard the whole day's scoring outputs (price_history, paradigm_scores,
+        # ...). The ledgers are already written and mirrored; alerting belongs in
+        # the data, where the user actually looks.
+        print("  ! held-book alerts recorded (see paper_ledgers.alerts): "
+              + "; ".join(guard_tripped), file=sys.stderr)
 
 
 if __name__ == "__main__":
