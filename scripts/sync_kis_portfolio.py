@@ -328,6 +328,12 @@ def main():
                    [f"- {r['side']} {r['ticker']}: {r['msg']}" for r in rejects]
     gh_summary(summary)
 
+    # A run that intended to trade and placed nothing is a failure, not a no-op.
+    # Silence here would let a misprovisioned account look healthy for weeks.
+    if results and ok == 0:
+        sys.exit(f"every order was rejected ({len(rejects)}/{len(results)}); "
+                 f"first reason: {rejects[0]['msg']!r}")
+
 
 if __name__ == "__main__":
     main()
