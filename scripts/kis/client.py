@@ -37,6 +37,7 @@ TR = {
     "unfilled": {"real": "TTTS3018R", "paper": "VTTS3018R"},
     "psamount": {"real": "TTTS3007R", "paper": "VTTS3007R"},
     "krw_bal":  {"real": "TTTC8434R", "paper": "VTTC8434R"},
+    "krw_buy":  {"real": "TTTC0012U", "paper": "VTTC0012U"},
 }
 
 # Quote API exchange codes (EXCD) -> order API exchange codes (OVRS_EXCG_CD)
@@ -304,6 +305,32 @@ class KISClient:
              "CTX_AREA_FK100": "", "CTX_AREA_NK100": ""})
         out2 = body.get("output2") or []
         return out2[0] if out2 else {}
+
+    def domestic_buy_probe(self, pdno: str = "005930", qty: int = 1,
+                           price: int = 1000) -> dict:
+        """Diagnostic: place a domestic limit buy far below market (cannot fill).
+
+        Isolates whether the account can place *any* mock order. If this is
+        accepted (or refused for market hours) while overseas orders are refused
+        with "모의투자 주문이 불가한 계좌입니다", the account simply lacks 해외주식
+        provisioning. Returns {ok, rt_cd, msg, order_no}.
+        """
+        body = {
+            "CANO": self.cano, "ACNT_PRDT_CD": self.acnt_prdt_cd,
+            "PDNO": pdno, "ORD_DVSN": "00",
+            "ORD_QTY": str(int(qty)), "ORD_UNPR": str(int(price)),
+        }
+        r, d = self._retry_rate_limited(
+            lambda: self.session.post(
+                f"{self.base}/uapi/domestic-stock/v1/trading/order-cash",
+                json=body,
+                headers=self._headers(TR["krw_buy"][self.env], hashkey=self._hashkey(body)),
+                timeout=30),
+            "domestic buy probe")
+        d = d or {}
+        return {"ok": r.status_code == 200 and d.get("rt_cd") == "0",
+                "rt_cd": d.get("rt_cd"), "msg": (d.get("msg1") or "").strip(),
+                "order_no": (d.get("output") or {}).get("ODNO")}
 
     def present_balance_raw(self) -> dict:
         """Full inquire-present-balance body (all currency rows) for diagnostics."""
