@@ -37,6 +37,8 @@ TR = {
     "unfilled": {"real": "TTTS3018R", "paper": "VTTS3018R"},
     "psamount": {"real": "TTTS3007R", "paper": "VTTS3007R"},
     "krw_bal":  {"real": "TTTC8434R", "paper": "VTTC8434R"},
+    "krw_buy":  {"real": "TTTC0012U", "paper": "VTTC0012U"},
+    "cancel":   {"real": "TTTT1004U", "paper": "VTTT1004U"},
 }
 
 # Quote API exchange codes (EXCD) -> order API exchange codes (OVRS_EXCG_CD)
@@ -53,6 +55,20 @@ RATE_LIMIT_CODE = "EGW00201"
 
 class KISError(RuntimeError):
     pass
+
+
+class KISAuthError(KISError):
+    """Token issuance / authentication failure.
+
+    Kept distinct because callers swallow KISError to mean "this symbol has no
+    data". An auth failure must never be mistaken for a missing symbol — that
+    turns a credentials problem into a silently empty portfolio.
+    """
+
+
+# Token issuance is limited to once per minute per app key (EGW00133).
+TOKEN_RATE_LIMIT_CODE = "EGW00133"
+TOKEN_RETRY_WAIT = 65
 
 
 def _is_rate_limited(status: int, body: dict | None, text: str) -> bool:
@@ -120,15 +136,26 @@ class KISClient:
                 return self._token
         except Exception:
             pass
-        self._throttle()  # the token call counts against the per-second cap
-        r = self.session.post(
-            f"{self.base}/oauth2/tokenP",
-            json={"grant_type": "client_credentials",
-                  "appkey": self.appkey, "appsecret": self.appsecret},
-            timeout=30)
-        if r.status_code != 200:
-            raise KISError(f"token issuance failed {r.status_code}: {r.text[:300]}")
-        d = r.json()
+        d = None
+        for attempt in range(3):
+            self._throttle()  # the token call counts against the per-second cap
+            r = self.session.post(
+                f"{self.base}/oauth2/tokenP",
+                json={"grant_type": "client_credentials",
+                      "appkey": self.appkey, "appsecret": self.appsecret},
+                timeout=30)
+            if r.status_code == 200:
+                d = r.json()
+                break
+            # One token per minute per app key. Two runs in quick succession
+            # (e.g. a dry run followed by an execute) will collide here.
+            if TOKEN_RATE_LIMIT_CODE in r.text and attempt < 2:
+                print(f"  token rate-limited (1/min); waiting {TOKEN_RETRY_WAIT}s")
+                time.sleep(TOKEN_RETRY_WAIT)
+                continue
+            raise KISAuthError(f"token issuance failed {r.status_code}: {r.text[:300]}")
+        if d is None:
+            raise KISAuthError("token issuance failed after retries")
         self._token = d["access_token"]
         try:
             self._token_cache.write_text(json.dumps(
@@ -183,13 +210,20 @@ class KISClient:
     # ---------- quotes ----------
 
     def quote(self, excd: str, ticker: str) -> float | None:
-        """Last price from the overseas price API. None if not found / no data."""
+        """Last price from the overseas price API. None if not found / no data.
+
+        Auth failures propagate: a bad token means we know nothing about any
+        symbol, and returning None would be indistinguishable from "delisted".
+        """
+        self.token()  # raises KISAuthError before we start swallowing errors
         try:
             body, _ = self._get("/uapi/overseas-price/v1/quotations/price",
                                 "HHDFS00000300",
                                 {"AUTH": "", "EXCD": excd, "SYMB": ticker})
             last = float(body.get("output", {}).get("last") or 0)
             return last if last > 0 else None
+        except KISAuthError:
+            raise
         except (KISError, ValueError):
             return None
 
@@ -305,6 +339,32 @@ class KISClient:
         out2 = body.get("output2") or []
         return out2[0] if out2 else {}
 
+    def domestic_buy_probe(self, pdno: str = "005930", qty: int = 1,
+                           price: int = 1000) -> dict:
+        """Diagnostic: place a domestic limit buy far below market (cannot fill).
+
+        Isolates whether the account can place *any* mock order. If this is
+        accepted (or refused for market hours) while overseas orders are refused
+        with "모의투자 주문이 불가한 계좌입니다", the account simply lacks 해외주식
+        provisioning. Returns {ok, rt_cd, msg, order_no}.
+        """
+        body = {
+            "CANO": self.cano, "ACNT_PRDT_CD": self.acnt_prdt_cd,
+            "PDNO": pdno, "ORD_DVSN": "00",
+            "ORD_QTY": str(int(qty)), "ORD_UNPR": str(int(price)),
+        }
+        r, d = self._retry_rate_limited(
+            lambda: self.session.post(
+                f"{self.base}/uapi/domestic-stock/v1/trading/order-cash",
+                json=body,
+                headers=self._headers(TR["krw_buy"][self.env], hashkey=self._hashkey(body)),
+                timeout=30),
+            "domestic buy probe")
+        d = d or {}
+        return {"ok": r.status_code == 200 and d.get("rt_cd") == "0",
+                "rt_cd": d.get("rt_cd"), "msg": (d.get("msg1") or "").strip(),
+                "order_no": (d.get("output") or {}).get("ODNO")}
+
     def present_balance_raw(self) -> dict:
         """Full inquire-present-balance body (all currency rows) for diagnostics."""
         body, _ = self._get(
@@ -349,6 +409,27 @@ class KISClient:
         return list(out.values())
 
     # ---------- orders ----------
+
+    def cancel_order(self, exch_order_cd: str, ticker: str, order_no: str,
+                     qty: int) -> dict:
+        """Cancel a resting order (RVSE_CNCL_DVSN_CD=02). Returns {ok, msg}."""
+        body = {
+            "CANO": self.cano, "ACNT_PRDT_CD": self.acnt_prdt_cd,
+            "OVRS_EXCG_CD": exch_order_cd, "PDNO": ticker,
+            "ORGN_ODNO": str(order_no), "RVSE_CNCL_DVSN_CD": "02",
+            "ORD_QTY": str(int(qty)), "OVRS_ORD_UNPR": "0",
+            "ORD_SVR_DVSN_CD": "0",
+        }
+        r, d = self._retry_rate_limited(
+            lambda: self.session.post(
+                f"{self.base}/uapi/overseas-stock/v1/trading/order-rvsecncl",
+                json=body,
+                headers=self._headers(TR["cancel"][self.env], hashkey=self._hashkey(body)),
+                timeout=30),
+            f"cancel {ticker}")
+        d = d or {}
+        return {"ok": r.status_code == 200 and d.get("rt_cd") == "0",
+                "msg": (d.get("msg1") or "").strip()}
 
     def place_order(self, side: str, exch_order_cd: str, ticker: str,
                     qty: int, limit_price: float) -> dict:

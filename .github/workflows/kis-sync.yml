@@ -29,7 +29,11 @@ on:
         description: "Ledger to mirror (equal, equal_llm, ...)"
         default: "equal"
       probe:
-        description: "Read-only account diagnostics; places no orders"
+        description: "Account diagnostics; places no orders"
+        type: boolean
+        default: false
+      probe_domestic_order:
+        description: "With probe: also send ONE unfillable domestic order to test order permission"
         type: boolean
         default: false
 
@@ -58,6 +62,7 @@ jobs:
           KIS_CANO: ${{ vars.KIS_ENV == 'real' && secrets.KIS_CANO_REAL || secrets.KIS_CANO_PAPER }}
           KIS_ACNT_PRDT_CD: ${{ vars.KIS_ENV == 'real' && secrets.KIS_ACNT_PRDT_CD_REAL || secrets.KIS_ACNT_PRDT_CD_PAPER }}
           KIS_LEDGER: ${{ inputs.ledger || vars.KIS_LEDGER || 'equal' }}
+          KIS_PROBE_DOMESTIC_ORDER: ${{ inputs.probe_domestic_order == true && '1' || '' }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |

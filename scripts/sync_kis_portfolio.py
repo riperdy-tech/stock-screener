@@ -159,6 +159,27 @@ def run_probe(client):
     emit("\nRead: zero USD deposit + KRW seed + nonzero 매수가능금액 => 통합증거금 "
          "account; usd_cash() falls back to 매수가능금액 automatically.")
     emit("      Everything zero => account genuinely unfunded.")
+
+    if os.environ.get("KIS_PROBE_DOMESTIC_ORDER"):
+        # Places a ₩1,000 limit on 005930 — three orders of magnitude below
+        # market, so it cannot fill. Purely to see which error comes back.
+        emit("\ndomestic order probe (unfillable ₩1,000 limit on 005930):")
+        try:
+            res = client.domestic_buy_probe()
+            emit(f"  rt_cd={res['rt_cd']} ok={res['ok']} msg={res['msg']!r} "
+                 f"order_no={res['order_no']}")
+            if res["ok"]:
+                emit("  => account CAN place mock orders. Overseas rejection is a "
+                     "해외주식 provisioning problem, not credentials.")
+            elif "모의투자 주문이 불가" in res["msg"]:
+                emit("  => account cannot place ANY mock order. The credentials or "
+                     "account are not a working 모의투자 pair.")
+            else:
+                emit("  => refused for a different reason (market hours?), which still "
+                     "means ordering is permitted on this account.")
+        except Exception as e:
+            emit(f"  probe failed: {e}")
+
     gh_summary(out)
 
 
@@ -242,6 +263,10 @@ def main():
     unpriced = tickers - set(prices)
     if unpriced:
         print(f"WARNING: no KIS quote for {sorted(unpriced)}")
+    if tickers and not prices:
+        # Never plan from a total absence of prices — that is an outage, not a
+        # portfolio of delisted names.
+        sys.exit(f"refusing: no price for any of {len(tickers)} tickers")
 
     # ---- plan ----
     plan = compute_plan(tgt["weights"], held, sellable, prices, cash,
@@ -327,6 +352,12 @@ def main():
         summary += ["", "**Rejected/skipped**"] + \
                    [f"- {r['side']} {r['ticker']}: {r['msg']}" for r in rejects]
     gh_summary(summary)
+
+    # A run that intended to trade and placed nothing is a failure, not a no-op.
+    # Silence here would let a misprovisioned account look healthy for weeks.
+    if results and ok == 0:
+        sys.exit(f"every order was rejected ({len(rejects)}/{len(results)}); "
+                 f"first reason: {rejects[0]['msg']!r}")
 
 
 if __name__ == "__main__":
