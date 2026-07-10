@@ -1,19 +1,19 @@
 {
   "counts": {
-    "stocks": 6758,
+    "stocks": 6764,
     "themes": {
       "ai_compute": 46,
-      "cloud_software": 147,
-      "cybersecurity": 55,
-      "energy_transition": 94,
-      "glp1_metabolic": 43,
-      "nuclear_renaissance": 25,
+      "cloud_software": 55,
+      "cybersecurity": 26,
+      "energy_transition": 80,
+      "glp1_metabolic": 40,
+      "nuclear_renaissance": 21,
       "physical_ai": 82,
-      "quantum_computing": 19,
+      "quantum_computing": 14,
       "space_economy": 49
     }
   },
-  "finished_at": "2026-07-10T06:46:31Z",
+  "finished_at": "2026-07-10T11:55:42Z",
   "invariants": [
     {
       "detail": "stocks.json is 0.0 days old (max 8)",
@@ -28,13 +28,13 @@
       "ok": true
     },
     {
-      "detail": "universe 6755 -> 6758 (0.0% drift, max 10%)",
+      "detail": "universe 6758 -> 6764 (0.1% drift, max 10%)",
       "level": "soft",
       "name": "universe_drift",
       "ok": true
     },
     {
-      "detail": "6758/6758 stocks carry reverse object (100.0%, min 90%)",
+      "detail": "6764/6764 stocks carry reverse object (100.0%, min 90%)",
       "level": "hard",
       "name": "reverse_coverage",
       "ok": true
@@ -58,13 +58,13 @@
       "ok": true
     },
     {
-      "detail": "6758 paradigm rows vs 6758 stocks",
+      "detail": "6764 paradigm rows vs 6764 stocks",
       "level": "hard",
       "name": "paradigm_coverage",
       "ok": true
     },
     {
-      "detail": "1710 stocks carry a Factor Lab score (min 500)",
+      "detail": "1714 stocks carry a Factor Lab score (min 500)",
       "level": "hard",
       "name": "factor_scored",
       "ok": true
@@ -98,23 +98,35 @@
       "level": "soft",
       "name": "mine_ledger_active",
       "ok": false
+    },
+    {
+      "detail": "tagged 147 -> 55 (63%); hot=False",
+      "level": "soft",
+      "name": "theme_drift_cloud_software",
+      "ok": false
+    },
+    {
+      "detail": "tagged 55 -> 26 (53%); hot=False",
+      "level": "soft",
+      "name": "theme_drift_cybersecurity",
+      "ok": false
     }
   ],
   "ok": true,
-  "run_id": "20260710T064610Z",
+  "run_id": "20260710T115523Z",
   "steps": [
     {
-      "duration_s": 3.2,
+      "duration_s": 2.3,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 3.4,
+      "duration_s": 3.2,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 4.7,
+      "duration_s": 4.5,
       "name": "score_paradigm",
       "returncode": 0
     },
@@ -129,17 +141,17 @@
       "returncode": 0
     },
     {
-      "duration_s": 0.4,
+      "duration_s": 0.3,
       "name": "build_portfolio_plan",
       "returncode": 0
     },
     {
-      "duration_s": 0.4,
+      "duration_s": 0.3,
       "name": "build_portfolio_plan_llm",
       "returncode": 0
     },
     {
-      "duration_s": 6.3,
+      "duration_s": 5.6,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
