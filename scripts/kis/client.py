@@ -38,6 +38,7 @@ TR = {
     "psamount": {"real": "TTTS3007R", "paper": "VTTS3007R"},
     "krw_bal":  {"real": "TTTC8434R", "paper": "VTTC8434R"},
     "krw_buy":  {"real": "TTTC0012U", "paper": "VTTC0012U"},
+    "cancel":   {"real": "TTTT1004U", "paper": "VTTT1004U"},
 }
 
 # Quote API exchange codes (EXCD) -> order API exchange codes (OVRS_EXCG_CD)
@@ -376,6 +377,27 @@ class KISClient:
         return list(out.values())
 
     # ---------- orders ----------
+
+    def cancel_order(self, exch_order_cd: str, ticker: str, order_no: str,
+                     qty: int) -> dict:
+        """Cancel a resting order (RVSE_CNCL_DVSN_CD=02). Returns {ok, msg}."""
+        body = {
+            "CANO": self.cano, "ACNT_PRDT_CD": self.acnt_prdt_cd,
+            "OVRS_EXCG_CD": exch_order_cd, "PDNO": ticker,
+            "ORGN_ODNO": str(order_no), "RVSE_CNCL_DVSN_CD": "02",
+            "ORD_QTY": str(int(qty)), "OVRS_ORD_UNPR": "0",
+            "ORD_SVR_DVSN_CD": "0",
+        }
+        r, d = self._retry_rate_limited(
+            lambda: self.session.post(
+                f"{self.base}/uapi/overseas-stock/v1/trading/order-rvsecncl",
+                json=body,
+                headers=self._headers(TR["cancel"][self.env], hashkey=self._hashkey(body)),
+                timeout=30),
+            f"cancel {ticker}")
+        d = d or {}
+        return {"ok": r.status_code == 200 and d.get("rt_cd") == "0",
+                "msg": (d.get("msg1") or "").strip()}
 
     def place_order(self, side: str, exch_order_cd: str, ticker: str,
                     qty: int, limit_price: float) -> dict:

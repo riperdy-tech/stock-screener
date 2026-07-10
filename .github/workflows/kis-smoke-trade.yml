@@ -1,0 +1,92 @@
+# One-share buy/sell round trip to prove the account can actually trade.
+#
+# Manual only — never scheduled. Deliberately does NOT read the repo's KIS_ENV
+# variable, so the daily kis-sync cron is unaffected by anything done here.
+#
+# Real-money runs require ALL of:
+#   * env: real
+#   * execute: true
+#   * confirm: the exact phrase REAL MONEY
+# and the script itself still enforces --max-notional and the margin guard.
+
+name: KIS Smoke Trade
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Account to trade"
+        type: choice
+        options: [paper, real]
+        default: paper
+      ticker:
+        description: "Ticker for the round trip"
+        default: "F"
+      qty:
+        description: "Share count"
+        default: "1"
+      max_notional:
+        description: "Hard cap on qty x price (USD)"
+        default: "500"
+      execute:
+        description: "Place orders (unchecked = dry run, guards only)"
+        type: boolean
+        default: false
+      no_sell:
+        description: "Buy only; leave the position open"
+        type: boolean
+        default: false
+      confirm:
+        description: "Type REAL MONEY to permit a real-account execute"
+        default: ""
+
+concurrency:
+  group: kis-account
+  cancel-in-progress: false
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+
+      - name: Guard real-money runs
+        if: inputs.env == 'real' && inputs.execute
+        run: |
+          if [ "${{ inputs.confirm }}" != "REAL MONEY" ]; then
+            echo "::error::real + execute requires confirm='REAL MONEY'"
+            exit 1
+          fi
+
+      - name: Smoke trade
+        env:
+          KIS_ENV: ${{ inputs.env }}
+          KIS_APP_KEY: ${{ inputs.env == 'real' && secrets.KIS_APP_KEY_REAL || secrets.KIS_APP_KEY_PAPER }}
+          KIS_APP_SECRET: ${{ inputs.env == 'real' && secrets.KIS_APP_SECRET_REAL || secrets.KIS_APP_SECRET_PAPER }}
+          KIS_CANO: ${{ inputs.env == 'real' && secrets.KIS_CANO_REAL || secrets.KIS_CANO_PAPER }}
+          KIS_ACNT_PRDT_CD: ${{ inputs.env == 'real' && secrets.KIS_ACNT_PRDT_CD_REAL || secrets.KIS_ACNT_PRDT_CD_PAPER }}
+        run: |
+          FLAGS=""
+          [ "${{ inputs.execute }}" = "true" ] && FLAGS="--execute"
+          [ "${{ inputs.env }}" = "real" ] && FLAGS="$FLAGS --confirm-real"
+          [ "${{ inputs.no_sell }}" = "true" ] && FLAGS="$FLAGS --no-sell"
+          python scripts/kis_smoke_trade.py \
+            --env "${{ inputs.env }}" \
+            --ticker "${{ inputs.ticker }}" \
+            --qty "${{ inputs.qty }}" \
+            --max-notional "${{ inputs.max_notional }}" \
+            $FLAGS
+
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kis-smoke-${{ github.run_id }}
+          path: logs/kis_sync.jsonl
+          if-no-files-found: ignore
+          retention-days: 90
