@@ -1,0 +1,79 @@
+# KIS Portfolio Sync — mirrors the `equal` paper ledger into a KIS account.
+#
+# Safety model:
+#   - Scheduled runs are DRY RUN unless repo variable KIS_AUTO_EXECUTE=true.
+#   - Env comes from repo variable KIS_ENV (default paper); secrets are split
+#     into *_PAPER / *_REAL pairs so flipping the variable can never send
+#     paper credentials at the real account or vice versa.
+#   - Real trading additionally requires repo variable KIS_CONFIRM_REAL=true
+#     (the script refuses --env real --execute without --confirm-real).
+#
+# 14:40 UTC = 10:40 EDT / 09:40 EST — inside US regular session year-round,
+# and after the 08:57 UTC ledger tracker refresh.
+
+name: KIS Portfolio Sync
+
+on:
+  schedule:
+    - cron: '40 14 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      execute:
+        description: "Place orders (unchecked = dry run)"
+        type: boolean
+        default: false
+      max_turnover:
+        description: "Max turnover % of NAV (use 100 for first buy-in)"
+        default: "40"
+      ledger:
+        description: "Ledger to mirror (equal, equal_llm, ...)"
+        default: "equal"
+
+concurrency:
+  group: kis-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install requests
+
+      - name: Run sync
+        env:
+          KIS_ENV: ${{ vars.KIS_ENV || 'paper' }}
+          KIS_APP_KEY: ${{ vars.KIS_ENV == 'real' && secrets.KIS_APP_KEY_REAL || secrets.KIS_APP_KEY_PAPER }}
+          KIS_APP_SECRET: ${{ vars.KIS_ENV == 'real' && secrets.KIS_APP_SECRET_REAL || secrets.KIS_APP_SECRET_PAPER }}
+          KIS_CANO: ${{ vars.KIS_ENV == 'real' && secrets.KIS_CANO_REAL || secrets.KIS_CANO_PAPER }}
+          KIS_ACNT_PRDT_CD: ${{ vars.KIS_ENV == 'real' && secrets.KIS_ACNT_PRDT_CD_REAL || secrets.KIS_ACNT_PRDT_CD_PAPER }}
+          KIS_LEDGER: ${{ inputs.ledger || vars.KIS_LEDGER || 'equal' }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          FLAGS=""
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            [ "${{ vars.KIS_AUTO_EXECUTE }}" = "true" ] && FLAGS="--execute"
+          else
+            [ "${{ inputs.execute }}" = "true" ] && FLAGS="--execute"
+          fi
+          if [ "$KIS_ENV" = "real" ] && [ "${{ vars.KIS_CONFIRM_REAL }}" = "true" ]; then
+            FLAGS="$FLAGS --confirm-real"
+          fi
+          python scripts/sync_kis_portfolio.py \
+            --max-turnover "${{ inputs.max_turnover || '40' }}" $FLAGS
+
+      - name: Upload run log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kis-sync-log-${{ github.run_id }}
+          path: logs/kis_sync.jsonl
+          if-no-files-found: ignore
+          retention-days: 90
