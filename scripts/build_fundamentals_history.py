@@ -80,6 +80,13 @@ DURATION_TAGS = {
     "shares_diluted": ["WeightedAverageNumberOfDilutedSharesOutstanding",
                        "WeightedAverageNumberOfSharesOutstandingBasic",
                        "WeightedAverageShares", "AdjustedWeightedAverageShares"],
+    # Tax fields so fetch_data can derive an effective tax rate for ROIC from SEC data
+    # (instead of a daily yfinance stock.financials fetch per ticker — quota killer).
+    "pretax_income": ["IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+                      "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+                      "ProfitLossBeforeTax"],
+    "tax_provision": ["IncomeTaxExpenseBenefit", "IncomeTaxExpenseContinuingOperations",
+                      "IncomeTaxExpenseIncome"],
 }
 INSTANT_TAGS = {
     "total_assets": ["Assets"],
@@ -97,6 +104,8 @@ INSTANT_TAGS = {
                     "TradeAndOtherCurrentReceivables"],
     "inventory": ["InventoryNet", "Inventories"],
     "ppe_net": ["PropertyPlantAndEquipmentNet", "PropertyPlantAndEquipment"],
+    # Altman-Z B-term (retained earnings / total assets) for the SEC-derived Z in fetch_data.
+    "retained_earnings": ["RetainedEarningsAccumulatedDeficit", "RetainedEarnings"],
 }
 SHARES_UNIT = "shares"
 
