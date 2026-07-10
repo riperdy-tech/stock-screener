@@ -57,7 +57,8 @@ def compute_plan(targets: dict[str, float],
                  min_order_bps: float = 25.0,
                  max_order_usd: float = 15000.0,
                  max_turnover_pct: float = 40.0,
-                 cost_buffer: float = 0.005) -> Plan:
+                 cost_buffer: float = 0.005,
+                 overshoot_tol: float = 0.25) -> Plan:
     """targets: {ticker: weight 0..1}; held/sellable: {ticker: shares};
     prices: {ticker: last}; cash: USD available.
 
@@ -65,6 +66,8 @@ def compute_plan(targets: dict[str, float],
     max_turnover_pct caps total |order value| as % of NAV — exits are exempt
     (they must happen), trims/buys get dropped smallest-first to fit.
     cost_buffer shaves buy budget for fees + limit-price slippage.
+    overshoot_tol bounds how far the cash top-up may push a position past its
+    target slot (0.25 = a position may end up 25% over its target weight).
     """
     plan = Plan(cash=cash)
     nav = cash + sum(sh * prices[t] for t, sh in held.items() if t in prices)
@@ -92,14 +95,54 @@ def compute_plan(targets: dict[str, float],
         if qty > 0:
             exits.append(Order("sell", t, clip(qty, prices[t]), prices[t], "exit"))
 
-    # rebalances and entries
+    # Target share counts: largest-remainder (Hamilton) apportionment.
+    # Plain floor() strands ~sum(prices)/2 in cash — a name wanting 1.97 shares
+    # gets 1 and loses 97% of a share's value. Instead floor everyone, then
+    # spend the remaining budget one share at a time on the biggest fractional
+    # remainders. Leftover collapses to roughly one cheap share.
+    priced = {}
     for t, w in sorted(targets.items()):
         px = prices.get(t)
         if not px or px <= 0:
             plan.warnings.append(f"{t}: no price — skipped")
             continue
-        tgt_sh = math.floor(w * nav / px)
+        priced[t] = px
+    # Only the invested fraction is ours to spend: if the ledger holds cash as a
+    # deliberate position, we hold it too. cost_buffer leaves room for fees and
+    # limit-price slippage.
+    budget = nav * sum(targets[t] for t in priced) * (1 - cost_buffer)
+    slot = {t: targets[t] * nav for t in priced}          # target dollars
+    tgt_shares = {t: math.floor(slot[t] / priced[t]) for t in priced}
+    remaining = budget - sum(n * priced[t] for t, n in tgt_shares.items())
+
+    # Pass 1 — round to nearest: a share is granted only when it moves the
+    # position closer to its slot (remainder > 0.5). This is what rescues MU at
+    # 1.97 shares, while refusing to hand a $1,200 share to a $200 slot.
+    for frac, t in sorted(((slot[t] / priced[t]) - tgt_shares[t], t) for t in priced)[::-1]:
+        if frac > 0.5 and priced[t] <= remaining:
+            tgt_shares[t] += 1
+            remaining -= priced[t]
+
+    # Pass 2 — top up: uninvested cash earns nothing, so it is worse than a
+    # bounded overweight. Spend what is left on whichever name overshoots its
+    # slot least, never exceeding overshoot_tol of that slot.
+    while True:
+        best, best_over = None, None
+        for t, px in priced.items():
+            if px > remaining or slot[t] <= 0:
+                continue
+            over = ((tgt_shares[t] + 1) * px - slot[t]) / slot[t]
+            if over <= overshoot_tol and (best_over is None or over < best_over):
+                best, best_over = t, over
+        if best is None:
+            break
+        tgt_shares[best] += 1
+        remaining -= priced[best]
+
+    for t, px in priced.items():
+        tgt_sh = tgt_shares[t]
         cur_sh = int(held.get(t, 0))
+        w = targets[t]
         delta = tgt_sh - cur_sh
         if tgt_sh == 0 and cur_sh == 0:
             plan.warnings.append(f"{t}: weight {w:.2%} can't afford 1 share @ {px:.2f}")

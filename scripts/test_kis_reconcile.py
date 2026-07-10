@@ -22,6 +22,38 @@ def test_initial_buy_in():
     assert by["AAA"].reason == "enter"
 
 
+def test_largest_remainder_rescues_near_whole_share():
+    """A 1.97-share target gets 2, not 1 (regression: MU stranded $945 in cash).
+
+    The extra share is funded by the fractional slack other names leave behind
+    when they floor — here FILLER wants 14.3 shares and takes 14.
+    """
+    plan = compute_plan(targets={"MU": 0.019, "FILLER": 0.10}, held={}, sellable={},
+                        prices={"MU": 978.0, "FILLER": 700.0}, cash=100_000,
+                        max_turnover_pct=100)
+    qty = {o.ticker: o.qty for o in plan.buys}
+    assert qty["MU"] == 2, f"expected 2 shares of MU, got {qty['MU']}"
+    assert qty["FILLER"] == 14, f"FILLER (frac 0.28) must not round up, got {qty['FILLER']}"
+
+
+def test_top_up_refuses_to_overshoot_slot():
+    """Leftover cash may not buy a share costing far more than the target slot."""
+    plan = compute_plan(targets={"PRICY": 0.02, "CHEAP": 0.10}, held={}, sellable={},
+                        prices={"PRICY": 1200.0, "CHEAP": 10.0}, cash=10_000,
+                        max_turnover_pct=100)
+    assert all(o.ticker != "PRICY" for o in plan.buys)
+    assert any("can't afford 1 share" in w for w in plan.warnings)
+
+
+def test_cash_weight_is_respected_not_deployed():
+    """Ledger cash is a position: don't spend it just because it's sitting there."""
+    plan = compute_plan(targets={"AAA": 0.5, "BBB": 0.3}, held={}, sellable={},
+                        prices={"AAA": 100.0, "BBB": 50.0}, cash=10_000,
+                        max_turnover_pct=100)
+    spent = sum(o.est_value for o in plan.buys)
+    assert spent <= 8_000, f"deployed {spent}, must not touch the 20% cash weight"
+
+
 def test_full_exit_below_threshold_still_sells():
     """Outs must be mirrored even when tiny."""
     plan = compute_plan(targets={"KEEP": 0.9}, held={"KEEP": 90, "GONE": 1},

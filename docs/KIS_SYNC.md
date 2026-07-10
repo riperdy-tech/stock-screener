@@ -23,8 +23,13 @@ paper_ledgers.json (Supabase)          KIS Open API
 - **In/outs mirrored exactly:** a name dropped from the ledger is fully sold and
   a new name is bought at its weight, both regardless of the churn threshold.
   The threshold only governs rebalance deltas on names already held.
-- **Whole shares** (`floor(weight × NAV / price)`); the KIS API has no
-  fractional orders. With NAV ≥ $65k, rounding drift is small.
+- **Whole shares** — the KIS API has no fractional orders. Sizing uses
+  largest-remainder apportionment, not `floor()`: floor every position, then
+  spend the remaining budget on the largest fractional remainders (a name
+  wanting 1.97 shares gets 2). Plain flooring stranded ~8% of NAV in cash,
+  concentrated in high-priced names. A final top-up pass deploys the last of the
+  cash into whichever name overshoots its target slot least, capped at +25% of
+  that slot. Ledger cash weight is preserved, never deployed.
 - Rebalance deltas below `max($50, 25 bps of NAV)` are skipped to kill churn.
 - Marketable limit orders: buy at last +0.3%, sell at last −0.3%.
 
