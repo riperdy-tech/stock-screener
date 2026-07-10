@@ -41,11 +41,22 @@ TR = {
 EXCD_TO_ORDER = {"NAS": "NASD", "NYS": "NYSE", "AMS": "AMEX"}
 US_EXCDS = ["NAS", "NYS", "AMS"]
 
-MIN_INTERVAL = {"paper": 0.55, "real": 0.06}  # seconds between requests
+# 모의투자 enforces ~1 call/sec per account (EGW00201); real is far looser.
+# The limit is per-account, not per-process, so throttling alone can't
+# guarantee compliance — see _retry_rate_limited.
+MIN_INTERVAL = {"paper": 1.1, "real": 0.06}
+RATE_LIMIT_RETRIES = 5
+RATE_LIMIT_CODE = "EGW00201"
 
 
 class KISError(RuntimeError):
     pass
+
+
+def _is_rate_limited(status: int, body: dict | None, text: str) -> bool:
+    if body and (body.get("msg_cd") == RATE_LIMIT_CODE or "초당 거래건수" in (body.get("msg1") or "")):
+        return True
+    return status == 500 and (RATE_LIMIT_CODE in text or "초당 거래건수" in text)
 
 
 class KISClient:
@@ -71,6 +82,31 @@ class KISClient:
             time.sleep(wait)
         self._last_req = time.monotonic()
 
+    def _retry_rate_limited(self, send, what: str):
+        """Run send() -> requests.Response, backing off on EGW00201.
+
+        The per-second cap is enforced per *account*, so a sibling run (or a
+        retried job step) can trip it even when this process is throttled
+        correctly. Rate-limit rejections happen before the request is acted
+        on (rt_cd=1, nothing placed), so retrying is safe for orders too.
+        """
+        delay = 1.0
+        for attempt in range(RATE_LIMIT_RETRIES):
+            self._throttle()
+            r = send()
+            try:
+                body = r.json()
+            except Exception:
+                body = None
+            if not _is_rate_limited(r.status_code, body, r.text):
+                return r, body
+            if attempt < RATE_LIMIT_RETRIES - 1:
+                print(f"  rate limited on {what}; retry {attempt + 1}"
+                      f"/{RATE_LIMIT_RETRIES - 1} in {delay:.0f}s")
+                time.sleep(delay)
+                delay *= 2
+        raise KISError(f"{what}: rate limited after {RATE_LIMIT_RETRIES} attempts")
+
     def token(self) -> str:
         if self._token:
             return self._token
@@ -82,6 +118,7 @@ class KISClient:
                 return self._token
         except Exception:
             pass
+        self._throttle()  # the token call counts against the per-second cap
         r = self.session.post(
             f"{self.base}/oauth2/tokenP",
             json={"grant_type": "client_credentials",
@@ -115,13 +152,15 @@ class KISClient:
         return h
 
     def _get(self, path: str, tr_id: str, params: dict, tr_cont: str = "") -> tuple[dict, str]:
-        """One GET. Returns (body, response tr_cont header)."""
-        self._throttle()
-        r = self.session.get(f"{self.base}{path}", params=params,
-                             headers=self._headers(tr_id, tr_cont=tr_cont), timeout=30)
+        """One GET, retried on rate limit. Returns (body, response tr_cont header)."""
+        r, body = self._retry_rate_limited(
+            lambda: self.session.get(f"{self.base}{path}", params=params,
+                                     headers=self._headers(tr_id, tr_cont=tr_cont), timeout=30),
+            f"GET {path} [{tr_id}]")
         if r.status_code != 200:
             raise KISError(f"GET {path} [{tr_id}] {r.status_code}: {r.text[:300]}")
-        body = r.json()
+        if body is None:
+            raise KISError(f"GET {path} [{tr_id}]: non-JSON response {r.text[:200]}")
         if body.get("rt_cd") not in ("0", None):
             raise KISError(f"GET {path} [{tr_id}] rt_cd={body.get('rt_cd')} "
                            f"msg={body.get('msg1', '')[:200]}")
@@ -272,15 +311,18 @@ class KISClient:
         }
         if side == "sell":
             body["SLL_TYPE"] = "00"
-        self._throttle()
-        r = self.session.post(
-            f"{self.base}/uapi/overseas-stock/v1/trading/order",
-            json=body,
-            headers=self._headers(TR[side][self.env], hashkey=self._hashkey(body)),
-            timeout=30)
+        hashkey = self._hashkey(body)
         try:
-            d = r.json()
-        except Exception:
+            r, d = self._retry_rate_limited(
+                lambda: self.session.post(
+                    f"{self.base}/uapi/overseas-stock/v1/trading/order",
+                    json=body,
+                    headers=self._headers(TR[side][self.env], hashkey=hashkey),
+                    timeout=30),
+                f"order {side} {ticker}")
+        except KISError as e:
+            return {"ok": False, "order_no": None, "msg": str(e)}
+        if d is None:
             return {"ok": False, "order_no": None,
                     "msg": f"HTTP {r.status_code}: {r.text[:200]}"}
         ok = r.status_code == 200 and d.get("rt_cd") == "0"
