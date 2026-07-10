@@ -156,9 +156,9 @@ def run_probe(client):
     except Exception as e:
         emit(f"\nbuying power query failed: {e}")
 
-    emit("\nRead: USD deposit rows all zero + KRW seed present => 통합증거금 case, "
-         "switch cash source to 매수가능금액.")
-    emit("      Everything zero => mock account genuinely unfunded.")
+    emit("\nRead: zero USD deposit + KRW seed + nonzero 매수가능금액 => 통합증거금 "
+         "account; usd_cash() falls back to 매수가능금액 automatically.")
+    emit("      Everything zero => account genuinely unfunded.")
     gh_summary(out)
 
 
@@ -214,11 +214,20 @@ def main():
     held = {p["ticker"]: p["shares"] for p in positions}
     sellable = {p["ticker"]: p["sellable"] for p in positions}
     held_exch = {p["ticker"]: p["exch_order_cd"] for p in positions}
-    cash, cash_row = client.usd_cash()
-    print(f"account: {len(held)} positions, USD cash {cash:,.2f}")
+    cash, cash_src, cash_row = client.usd_cash()
+    print(f"account: {len(held)} positions, USD cash {cash:,.2f} (source: {cash_src})")
     if cash_row:
-        print(f"  cash row (verify field mapping once): "
+        print(f"  cash row: "
               f"{json.dumps({k: v for k, v in cash_row.items() if 'amt' in k}, ensure_ascii=False)}")
+    if cash_src == "buying_power":
+        # KRW-seeded account under 통합증거금: the USD deposit reads zero but US
+        # orders still clear. Fine for 모의투자; on a real account this can draw
+        # on collateral (margin), which this strategy never intends to use.
+        print("  NOTE: USD deposit is zero; using 매수가능금액 (통합증거금 account)")
+        if args.env == "real" and not os.environ.get("KIS_ALLOW_MARGIN"):
+            sys.exit("refusing: real account has no USD deposit and would trade on "
+                     "collateral-backed buying power. Fund USD, or set "
+                     "KIS_ALLOW_MARGIN=1 if that is genuinely intended.")
 
     open_orders = client.unfilled()
     if open_orders:
@@ -292,7 +301,7 @@ def main():
                 break
 
     # ---- buys, capped by actual cash ----
-    budget, _ = client.usd_cash() if plan.sells else (cash, None)
+    budget = client.usd_cash()[0] if plan.sells else cash
     budget *= 0.995  # fee/slippage headroom
     for o in plan.buys:
         limit = o.price * BUY_LIMIT_BUFFER

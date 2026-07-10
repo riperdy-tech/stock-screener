@@ -93,9 +93,14 @@ Do this during US market hours (the script refuses to trade outside
   show up in every summary — decide per-name whether to live without it.
 - **Stale ledger guard:** if the ledger's `current_date` is >5 days old the
   script refuses to trade.
-- **Cash field check:** first dry run prints the raw USD cash row from
-  `inquire-present-balance` — eyeball that the parsed amount matches reality
-  before enabling execution (KIS field naming varies by account type).
+- **Cash source.** The script prefers the plain USD deposit from
+  `inquire-present-balance`. A KRW-seeded account under 통합증거금 reports a
+  **zero** USD deposit while still being able to order US stock (this is what
+  모의투자 does: ₩10M seed, $0 deposit, $100k 매수가능금액), so it falls back to
+  `inquire-psamount`. The levered `frcr_ord_psbl_amt1` field is deliberately
+  ignored. On a **real** account the fallback aborts the run unless
+  `KIS_ALLOW_MARGIN=1` — fund USD instead of trading on collateral.
+  Run `--probe` (workflow input `probe`) any time to dump all of this read-only.
 - **모의투자 quirks:** paper supports overseas orders (VTTT/VTTS TR IDs) but
   fills can differ from reality; treat paper results as plumbing validation,
   not performance validation.

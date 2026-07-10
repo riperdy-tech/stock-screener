@@ -243,9 +243,8 @@ class KISClient:
                 break  # NASD already covered the whole US market
         return list(rows.values())
 
-    def usd_cash(self) -> tuple[float, dict]:
-        """USD cash available. Returns (amount, raw_usd_row) — raw row logged
-        by the caller so field-name surprises are visible in dry runs."""
+    def usd_deposit(self) -> tuple[float, dict]:
+        """Plain USD deposit (no collateral, no margin). (amount, raw_row)."""
         body, _ = self._get(
             "/uapi/overseas-stock/v1/trading/inquire-present-balance",
             TR["present"][self.env],
@@ -260,6 +259,26 @@ class KISClient:
                         return float(v), row
                 return 0.0, row
         return 0.0, {}
+
+    def usd_cash(self) -> tuple[float, str, dict]:
+        """Spendable USD. Returns (amount, source, raw_row).
+
+        Prefers the plain USD deposit. A KRW-seeded account under 통합증거금
+        reports a zero deposit while still being able to order US stock, so we
+        fall back to 매수가능금액 — but only to the cash-equivalent fields.
+        `frcr_ord_psbl_amt1` is deliberately ignored: it reflects collateral-
+        backed (levered) buying power, which this strategy never intends to use.
+        Callers decide whether the fallback is acceptable for the environment.
+        """
+        amount, row = self.usd_deposit()
+        if amount > 0:
+            return amount, "deposit", row
+        bp = self.buying_power("AAPL", "NASD", 200.0)
+        vals = [float(bp[f]) for f in ("ovrs_ord_psbl_amt", "ord_psbl_frcr_amt")
+                if bp.get(f) not in (None, "")]
+        if vals:
+            return min(vals), "buying_power", bp
+        return 0.0, "none", row or bp
 
     def buying_power(self, ticker: str, exch_order_cd: str, price: float) -> dict:
         """해외주식 매수가능금액조회 — orderable USD, which (unlike the raw USD
