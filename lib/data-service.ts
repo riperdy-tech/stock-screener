@@ -270,8 +270,7 @@ export interface FactorEntry {
     fct_contributions: Record<string, number> | null;
     fct_haircuts: Record<string, number> | null;
     // Stage-5 RS2 LLM overlay (written by score_factors.apply_llm_overlay; absent until verdicts exist)
-    fct_band_quant?: string | null;   // pre-overlay band, for A/B
-    fct_band_llm?: string | null;     // LLM-overlay parallel band (additive)
+    fct_band_llm?: string | null;     // LLM-overlay parallel band (additive; quant band stays in fct_band)
     fct_llm?: string | null;          // 'promoted' | 'demoted' | 'none'
     fct_llm_veto?: string | null;     // 'llm_reject' when the LLM action is AVOID/SELL
     fct_percentile_llm?: number | null;
@@ -284,6 +283,7 @@ export interface FactorEntry {
         gap?: number | null;
         recommended_weight_pct?: number | null;
         analyzed_date?: string | null;
+        exit_review?: boolean | null;  // holder's exit review — name left the quant list
     } | null;
 }
 

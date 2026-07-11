@@ -168,8 +168,9 @@ def apply_llm_overlay(results):
     Bands come from conviction (scale ~4-14, neutral 9): a BULLISH action needs conviction >= RN_CONV
     for research_now, >= WL_CONV for watchlist. BEARISH (avoid/sell/reduce/overvalued) is demoted out
     of RN; hard AVOID/SELL also sets fct_llm_veto='llm_reject' (excluded from the LLM portfolio set).
-    Stale verdicts (>10d) shrink conviction toward neutral. Writes fct_band_llm / fct_percentile_llm /
-    fct_llm / fct_llm_veto / fct_llm_verdict; LEAVES the quant baseline untouched."""
+    Stale verdicts (>14d = the max WL refresh cadence) shrink conviction toward neutral. Writes
+    fct_band_llm / fct_percentile_llm / fct_llm / fct_llm_veto / fct_llm_verdict; LEAVES the quant
+    baseline untouched."""
     try:
         ov = (json.loads((DATA / "llm_overlay.json").read_text(encoding="utf-8")) or {}).get("tickers", {})
     except Exception:
@@ -195,8 +196,11 @@ def apply_llm_overlay(results):
     applied = 0
     for t, v in ov.items():
         e = results.get(t)
-        # GUARDRAIL: no baseline percentile => quant hard-vetoed or unscorable => RS2 cannot include it.
-        if not e or e.get("fct_percentile") is None:
+        # GUARDRAIL: quant hard-veto (forensic pair / heavy issuance / reverse reject) blocks the
+        # LLM layer — RS2 can never pull a red-flagged name in. A name that is merely UNSCORABLE
+        # (insufficient factor data -> fct_percentile None, no veto) keeps its RS2 verdict: the
+        # guardrail is a red-flag filter, not a data-coverage filter.
+        if not e or e.get("fct_veto") is not None:
             continue
         act = (v.get("action") or "").upper()
         stance = (v.get("stance") or "").lower()
@@ -215,7 +219,9 @@ def apply_llm_overlay(results):
                                 "conviction": conv, "method": v.get("method"),
                                 "mos_pct": v.get("mos_pct"), "gap": v.get("expectations_gap_pts"),
                                 "recommended_weight_pct": v.get("recommended_weight_pct"),
-                                "analyzed_date": v.get("analyzed_date")}
+                                "analyzed_date": v.get("analyzed_date"),
+                                # holder's exit review (name left the quant list) — UI badges it
+                                "exit_review": bool(v.get("exit_review")) or None}
         e["fct_llm"] = "none"
         e["fct_llm_veto"] = None
 
@@ -446,8 +452,8 @@ def main():
         else:
             results[t]["fct_band"] = "pass"
 
-    # Stage-5 LLM overlay (no-op if public/data/llm_overlay.json absent) — veto/promote/tilt the
-    # quant bands using the local RS2 verdicts. Runs AFTER the quant bands so fct_band_quant is set.
+    # Stage-5 LLM overlay (no-op if public/data/llm_overlay.json absent) — a parallel LLM band
+    # from the local RS2 verdicts. Runs AFTER the quant bands (fct_band is the guardrail input).
     llm_applied = apply_llm_overlay(results)
 
     band_counts = {}

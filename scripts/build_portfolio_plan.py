@@ -152,7 +152,13 @@ def main():
         vm = valuations.get(sym) or {}
         gap = vm.get("expectations_gap_pts")
         sigma = fct.get("fct_vol")
-        if gap is not None and isinstance(sigma, (int, float)) and sigma > 0:
+        # An RS2-reviewed name in the LLM variant: if quant Kelly sees no gap-edge, fall through to
+        # the heuristic base size (scaled by LLM conviction below) instead of skipping — otherwise
+        # the LLM plan silently reverts to quant's view and the A/B never expresses RS2's picks.
+        # Kelly itself stays quant-owned (RS2 is a single-stock analyst, not a sizing engine).
+        llm_pick = LLM and isinstance(((fct.get("fct_llm_verdict") or {}).get("conviction")), (int, float))
+        if gap is not None and isinstance(sigma, (int, float)) and sigma > 0 \
+                and not (llm_pick and gap >= 0):
             mu = max(0.0, min(config["kelly_mu_cap"], -gap / 100.0 / config["kelly_gap_horizon_years"]))
             sigma_f = max(sigma, config["kelly_sigma_floor"])
             weight = min(config["kelly_position_cap_pct"],
@@ -166,7 +172,7 @@ def main():
             base = config["high_risk_position_pct"] if high_risk else config["base_position_pct"]
             surv_scale = (surv / 100.0) if isinstance(surv, (int, float)) else 0.5
             weight = base * max(0.3, surv_scale)
-            sizing_method = "heuristic"
+            sizing_method = "heuristic_llm_pick" if (llm_pick and gap is not None and gap >= 0) else "heuristic"
 
         weight *= derisk_mult
         # Forensic flags halve size rather than auto-exclude (flags, not vetoes;
