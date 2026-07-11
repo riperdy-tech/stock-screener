@@ -285,11 +285,14 @@ function LlmChip({ entry }: { entry?: FactorEntry | null }) {
     if (!v) return null;
     const promoted = entry?.fct_llm === 'promoted';
     const demoted = entry?.fct_llm === 'demoted' || entry?.fct_veto === 'llm_reject';
-    const cls = promoted ? 'border-emerald-400/50 bg-emerald-400/10 text-emerald-300'
-        : demoted ? 'border-red-500/50 bg-red-500/10 text-red-300'
-            : 'border-sky-500/40 bg-sky-500/10 text-sky-300';
-    const label = promoted ? 'LLM ▲' : demoted ? 'LLM ✕' : 'LLM';
+    const exit = !!v.exit_review;   // holder's exit review — name left the quant list
+    const cls = exit ? 'border-amber-400/60 bg-amber-400/10 text-amber-300'
+        : promoted ? 'border-emerald-400/50 bg-emerald-400/10 text-emerald-300'
+            : demoted ? 'border-red-500/50 bg-red-500/10 text-red-300'
+                : 'border-sky-500/40 bg-sky-500/10 text-sky-300';
+    const label = exit ? 'LLM EXIT' : promoted ? 'LLM ▲' : demoted ? 'LLM ✕' : 'LLM';
     const tip = [
+        exit && 'EXIT REVIEW — left the quant list; hold/trim/sell call for current holders',
         v.stance && `stance ${v.stance}`,
         v.action && `action ${v.action}`,
         v.conviction != null && `conviction ${v.conviction}/15`,
@@ -377,6 +380,12 @@ function LlmBandCell({ entry }: { entry: FactorEntry }) {
     return (
         <div className="space-y-0.5">
             <BandChip band={entry.fct_band_llm ?? null} veto={entry.fct_llm_veto ?? null} />
+            {entry.fct_llm_verdict?.exit_review && (
+                <div className="text-[10px] font-black uppercase tracking-wider text-amber-300/90"
+                    title="Holder's exit review — the name fell out of the quant research list; the verdict is a hold/trim/sell call, not a buy case.">
+                    exit review
+                </div>
+            )}
             {!same && (
                 <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
                     quant · {(entry.fct_band || '—').replace(/_/g, ' ')}{entry.fct_veto ? ` (${entry.fct_veto.replace(/_/g, ' ')})` : ''}
