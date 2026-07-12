@@ -1,8 +1,8 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-07-12T10:39:59Z
+Generated: 2026-07-12T13:44:20Z
 Macro flags: none
-Invested: **56.6%**  |  Cash: **43.4%**  |  Positions: 16
+Invested: **55.35%**  |  Cash: **44.65%**  |  Positions: 16
 
 | # | Sym | Wt% | Arch | Comp | Surv | FctRank | FctBand | Theme | PdmBand | F | M | Flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -12,26 +12,26 @@ Invested: **56.6%**  |  Cash: **43.4%**  |  Positions: 16
 | 5 | **AGX** | 2.96 | B | 77.3 | 80 | 5 | research_now | - | no_data | 6 | -4.032 | - |
 | 7 | **CPRX** | 5.0 | B | 55.66 | 80 | 7 | research_now | - | no_data | 5 | - | - |
 | 9 | **VIK** | 2.25 | B | 63.66 | 75 | 9 | research_now | - | no_data | 6 | - | - |
-| 11 | **KRYS** | 2.25 | B | 45.04 | 75 | 11 | research_now | - | no_data | 6 | - | - |
+| 10 | **KRYS** | 2.25 | B | 45.04 | 75 | 10 | research_now | - | no_data | 6 | - | - |
 | 16 | **LAUR** | 3.75 | B | 77.32 | 80 | 16 | research_now | - | no_data | 5 | -2.622 | - |
 | 18 | **KNSA** | 5.0 | B | 45.86 | 75 | 18 | research_now | - | no_data | 6 | -3.129 | - |
 | 21 | **ABNB** | 2.4 | B | 81.3 | 80 | 21 | research_now | - | no_data | 5 | - | - |
 | 29 | **EXPE** | 5.0 | B | 74.74 | 80 | 29 | research_now | - | no_data | 6 | -2.758 | - |
 | 34 | **BLBD** | 2.5 | B | 84.59 | 75 | 34 | research_now | - | no_data | 8 | -3.432 | - |
 | 40 | **MAMA** | 1.52 | A | 41.39 | 75 | 40 | research_now | - | no_data | 5 | - | - |
-| 41 | **EMBJ** | 5.0 | B | 63.45 | 80 | 41 | research_now | space_economy | mid | 5 | - | - |
+| 41 | **EMBJ** | 3.75 | B | 63.45 | 80 | 41 | research_now | space_economy | mid | 5 | - | - |
 | 47 | **SAP** | 1.57 | A | 63.87 | 70 | 47 | research_now | - | no_data | - | - | - |
 | 51 | **MCRI** | 5.0 | A | 66.83 | 80 | 51 | research_now | - | no_data | 8 | -2.953 | - |
 
 ## Sector allocation
 - Healthcare: 24.65%
 - Consumer Cyclical: 14.65%
-- Industrials: 10.46%
+- Industrials: 9.21%
 - Consumer Defensive: 5.27%
 - Technology: 1.57%
 
 ## Theme allocation
-- space_economy: 5.0%
+- space_economy: 3.75%
 
 ## Skipped (caps/sizing)
 - TSM: no Kelly edge (expectations gap +21pts >= 0: price already assumes more growth than demonstrated)
@@ -45,8 +45,8 @@ Invested: **56.6%**  |  Cash: **43.4%**  |  Positions: 16
 - LLY: no Kelly edge (expectations gap +12pts >= 0: price already assumes more growth than demonstrated)
 - UTHR: sector cap Healthcare (25.0%)
 - GEV: no Kelly edge (expectations gap +24pts >= 0: price already assumes more growth than demonstrated)
-- AMD: no Kelly edge (expectations gap +22pts >= 0: price already assumes more growth than demonstrated)
 - NVS: sector cap Healthcare (25.0%)
+- AMD: no Kelly edge (expectations gap +22pts >= 0: price already assumes more growth than demonstrated)
 - RMBS: no Kelly edge (expectations gap +9pts >= 0: price already assumes more growth than demonstrated)
 - FIX: no Kelly edge (expectations gap +3pts >= 0: price already assumes more growth than demonstrated)
 - IRMD: no Kelly edge (expectations gap +14pts >= 0: price already assumes more growth than demonstrated)
