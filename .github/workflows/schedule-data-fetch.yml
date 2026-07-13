@@ -68,6 +68,12 @@ jobs:
           # download for quarterly-changing fields) and the intl scan moved
           # to the weekly workflow — saves ~1.4GB + 10-20 min per day.
           python scripts/fetch_data.py
+          # Live-price overlay (plan B): defeatbeta serves yesterday's close at
+          # best, so overlay live yfinance prices for the whole universe. This
+          # run fires just after the US open, so bands score on intraday prices.
+          # Atomic: <90% coverage leaves the consistent snapshot untouched (exit
+          # 3) — never fail the fetch over it.
+          python scripts/refresh_prices.py || echo "::warning::live price overlay skipped — stocks.json keeps the snapshot prices"
 
       - name: Commit and Push Fetched Data
         run: |
