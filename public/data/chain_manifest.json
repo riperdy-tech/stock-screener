@@ -3,20 +3,20 @@
     "stocks": 6765,
     "themes": {
       "ai_compute": 51,
-      "cloud_software": 79,
-      "cybersecurity": 35,
-      "energy_transition": 94,
-      "glp1_metabolic": 42,
-      "nuclear_renaissance": 21,
-      "physical_ai": 86,
-      "quantum_computing": 15,
+      "cloud_software": 157,
+      "cybersecurity": 57,
+      "energy_transition": 105,
+      "glp1_metabolic": 44,
+      "nuclear_renaissance": 26,
+      "physical_ai": 85,
+      "quantum_computing": 19,
       "space_economy": 51
     }
   },
-  "finished_at": "2026-07-12T13:44:23Z",
+  "finished_at": "2026-07-13T06:37:01Z",
   "invariants": [
     {
-      "detail": "stocks.json is 0.1 days old (max 8)",
+      "detail": "stocks.json is 0.0 days old (max 8)",
       "level": "soft",
       "name": "stocks_json_fresh",
       "ok": true
@@ -64,7 +64,7 @@
       "ok": true
     },
     {
-      "detail": "1714 stocks carry a Factor Lab score (min 500)",
+      "detail": "1700 stocks carry a Factor Lab score (min 500)",
       "level": "hard",
       "name": "factor_scored",
       "ok": true
@@ -76,7 +76,7 @@
       "ok": true
     },
     {
-      "detail": "166 reverse-DCF models built",
+      "detail": "165 reverse-DCF models built",
       "level": "soft",
       "name": "valuation_models",
       "ok": true
@@ -88,7 +88,7 @@
       "ok": true
     },
     {
-      "detail": "paper ledger latest row 2026-07-12 (expect 2026-07-12)",
+      "detail": "paper ledger latest row 2026-07-13 (expect 2026-07-13)",
       "level": "hard",
       "name": "paper_ledger_updated",
       "ok": true
@@ -98,23 +98,35 @@
       "level": "soft",
       "name": "mine_ledger_active",
       "ok": false
+    },
+    {
+      "detail": "tagged 79 -> 157 (99%); hot=False",
+      "level": "soft",
+      "name": "theme_drift_cloud_software",
+      "ok": false
+    },
+    {
+      "detail": "tagged 35 -> 57 (63%); hot=False",
+      "level": "soft",
+      "name": "theme_drift_cybersecurity",
+      "ok": false
     }
   ],
   "ok": true,
-  "run_id": "20260712T134407Z",
+  "run_id": "20260713T063641Z",
   "steps": [
     {
-      "duration_s": 2.5,
+      "duration_s": 2.4,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 3.4,
+      "duration_s": 3.3,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 4.6,
+      "duration_s": 4.5,
       "name": "score_paradigm",
       "returncode": 0
     },
@@ -139,7 +151,12 @@
       "returncode": 0
     },
     {
-      "duration_s": 2.2,
+      "duration_s": 1.1,
+      "name": "build_momo_plan",
+      "returncode": 0
+    },
+    {
+      "duration_s": 5.4,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
