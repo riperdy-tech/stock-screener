@@ -12,6 +12,10 @@ record what happens. Three ledgers:
           by the My Portfolio UI). Unitized like a fund: edits are treated
           as deposits/withdrawals that buy/sell units, so adding money never
           fakes performance. "Did I beat my own system?"
+  plan3 — momentum sleeve (portfolio_plan_momo.json from build_momo_plan.py),
+          benchmark QQQ, with daily defense layers: 15% trailing stops,
+          re-entry cooldown, and a drawdown kill switch at -15/-20/-25%
+          (see the PLAN3_* constants). PAPER ONLY — never mirrored to KIS.
 
 Mechanics: trade-on-change only (buy on entry to the target set, sell on
 exit; held positions drift). 10 bps transaction cost per side. Marks come
@@ -47,6 +51,7 @@ STOCKS_JSON = DATA / "stocks.json"
 FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 PORTFOLIO_PLAN_JSON = DATA / "portfolio_plan.json"
 PORTFOLIO_PLAN_LLM_JSON = DATA / "portfolio_plan_llm.json"   # LLM-overlay variant (A/B)
+PORTFOLIO_PLAN_MOMO_JSON = DATA / "portfolio_plan_momo.json"  # plan3 momentum sleeve
 MY_PORTFOLIO_JSON = DATA / "my_portfolio.json"
 LEDGERS_JSON = DATA / "paper_ledgers.json"
 DIVIDENDS_JSON = DATA / "dividends.json"
@@ -61,6 +66,28 @@ BENCHMARKS = ["IWM", "SPY", "QQQ", "SOXX", "DRAM"]  # small-cap, S&P500, Nasdaq-
 PRIMARY_BENCHMARK = "IWM"
 START_NAV = 100.0
 POST_EXIT_DAYS = 30
+
+# ── plan3 · bold (momentum sleeve) risk machinery ────────────────────────────
+# Offense lives in build_momo_plan.py (weekly momentum rank + daily regime
+# throttle). Defense lives HERE because only the tracker marks daily:
+#   trailing stop — per-position, off the high-water mark since entry;
+#   cooldown     — a stopped-out name may not re-enter for N calendar days,
+#                  so a crash can't re-buy itself the next run (the JLHL loop);
+#   kill switch  — tiers on the LEDGER's own drawdown from peak NAV. Gross is
+#                  cut at -15%/-20%, and at -25% the book liquidates and HALTS
+#                  (state.halted) until manually reset. (User 2026-07-13: "let
+#                  it run hotter" — original tiers were -10/-15/-20.)
+# Tier recovery uses ~2pt hysteresis so a NAV oscillating on a boundary does
+# not churn gross up and down every day. All of this state lives inside
+# ledger["state"] so the same-day rewind restores it (idempotent reruns).
+PLAN3_TRAIL_STOP = 0.15        # exit at 15% off the position's high-water mark
+PLAN3_COOLDOWN_DAYS = 14       # calendar days (~10 trading days) re-entry ban
+PLAN3_REBAL_BAND = 0.25        # rebalance only outside +/-25% of target value
+PLAN3_MIN_TRADE = 0.05         # NAV pts; skip dust trades the band lets through
+PLAN3_DD_HALF = -0.15          # ledger DD tiers: half gross
+PLAN3_DD_QUARTER = -0.20       # quarter gross
+PLAN3_DD_KILL = -0.25          # liquidate + halt
+PLAN3_TIER_HYSTERESIS = 0.02   # recover a tier only this far above its trigger
 
 # ── source-health gates ──────────────────────────────────────────────────────
 # A name absent from a target set means one of two things, and they demand
@@ -411,6 +438,177 @@ def hold_ledger(ledger, prices, as_of):
     return portfolio_value(ledger, prices)
 
 
+def top_up(ledger, ticker, price, spend, as_of, reason):
+    """Add to an existing position (plan3 band rebalance). Entry basis becomes the
+    weighted average so the closed-trade return stays honest."""
+    h = ledger["state"]["holdings"].get(ticker)
+    spend = min(spend, ledger["state"]["cash"])
+    if not h or price is None or spend <= 0:
+        return
+    new_shares = spend * cost_factor() / price
+    total = h["shares"] + new_shares
+    h["entry_price"] = round((h["entry_price"] * h["shares"] + price * new_shares) / total, 4)
+    h["shares"] = total
+    ledger["state"]["cash"] -= spend
+    ledger["trades"].append({"date": as_of, "side": "buy", "ticker": ticker,
+                             "price": round(price, 4), "value": round(spend, 4), "reason": reason})
+
+
+def plan3_risk_tier(state, dd):
+    """Kill-switch tier from ledger drawdown, with hysteresis on recovery."""
+    tier = state.get("risk_tier", 1.0)
+    if dd <= PLAN3_DD_QUARTER:
+        tier = min(tier, 0.25)
+    elif dd <= PLAN3_DD_HALF:
+        tier = min(tier, 0.5)
+    if tier == 0.25 and dd > PLAN3_DD_QUARTER + PLAN3_TIER_HYSTERESIS:
+        tier = 0.5
+    if tier == 0.5 and dd > PLAN3_DD_HALF + PLAN3_TIER_HYSTERESIS:
+        tier = 1.0
+    state["risk_tier"] = tier
+    return tier
+
+
+def run_plan3_ledger(ledger, plan, prices, as_of):
+    """plan3 · bold: momentum targets from portfolio_plan_momo.json, with the
+    defense layers the flat target-set ledgers don't have (see constants above).
+
+    Unlike run_target_ledger this DOES rebalance held names toward target — cash
+    here is an explicit regime decision (gross throttle x kill-switch tier), never
+    a residual — but only outside a +/-25% band so drift doesn't churn."""
+    rewind_or_advance(ledger, as_of)
+    credit_dividends(ledger, as_of)
+    st = ledger["state"]
+    st.setdefault("hwm", {})
+    st.setdefault("cooldown", {})
+    st.setdefault("risk_tier", 1.0)
+    st.setdefault("halted", False)
+
+    if st["halted"]:
+        return portfolio_value(ledger, prices)  # flat until the user resets the halt
+
+    # 1 ── high-water marks, then trailing stops (fresh marks only; a stale mark
+    # can neither raise the water line nor fire a stop)
+    for t in list(st["holdings"]):
+        p, stale = mark_price(t, prices, ledger)
+        if p is None or stale:
+            continue
+        hw = max(st["hwm"].get(t, p), p)
+        st["hwm"][t] = hw
+        if p <= hw * (1.0 - PLAN3_TRAIL_STOP):
+            sell(ledger, t, p, as_of, "stop_plan3")
+            st["cooldown"][t] = as_of
+            st["hwm"].pop(t, None)
+
+    # 2 ── kill switch on the ledger's own drawdown from peak NAV. A manual halt
+    # reset rebases the peak (state.peak_since) — otherwise the very next run
+    # would measure dd from the pre-crash peak and re-halt instantly.
+    nav, _ = portfolio_value(ledger, prices)
+    since = st.get("peak_since")
+    prior_navs = [r["nav"] for r in ledger["nav_series"]
+                  if r.get("nav") is not None and (not since or r["date"] >= since)]
+    peak = max(prior_navs + [nav] + ([] if since else [START_NAV]))
+    dd = nav / peak - 1.0
+    if dd <= PLAN3_DD_KILL:
+        for t in sorted(st["holdings"]):
+            p, _ = mark_price(t, prices, ledger)
+            sell(ledger, t, p, as_of, "killswitch_plan3")
+        st["halted"] = True
+        st["risk_tier"] = 0.0
+        st["hwm"] = {}
+        print(f"  ! plan3: KILL SWITCH — drawdown {dd:.1%} breached {PLAN3_DD_KILL:.0%}; "
+              f"book liquidated and HALTED (reset via --reset-plan3-halt)", file=sys.stderr)
+        return portfolio_value(ledger, prices)
+    tier = plan3_risk_tier(st, dd)
+
+    # 3 ── target set: momentum plan x cooldown filter
+    targets = {p["symbol"]: p["weight_pct"] for p in (plan.get("positions") or [])}
+    for t, stop_date in list(st["cooldown"].items()):
+        age = (date.fromisoformat(as_of) - date.fromisoformat(stop_date)).days
+        if age >= PLAN3_COOLDOWN_DAYS:
+            st["cooldown"].pop(t)          # served its time
+        else:
+            targets.pop(t, None)           # still banned from re-entry
+    gross = (plan.get("regime") or {}).get("gross_exposure_pct", 100.0) / 100.0 * tier
+
+    # 4 ── leavers (rank decay), with the same 2-consecutive-runs exit grace as
+    # the other ledgers so a one-week flap around rank #13 causes zero churn
+    held = set(st["holdings"])
+    target_set = set(targets)
+    pending = ledger.setdefault("exit_pending", {})
+    for t in sorted(held - target_set):
+        first = pending.get(t)
+        if first is None or first == as_of:
+            pending.setdefault(t, as_of)
+            continue
+        p, _ = mark_price(t, prices, ledger)
+        sell(ledger, t, p, as_of, "left_plan3")
+        st["hwm"].pop(t, None)
+    for t in list(pending):
+        if t in target_set:
+            pending.pop(t, None)
+
+    # 5 ── band rebalance toward target value = weight x nav x gross.
+    # Trims first (they raise the cash the buys need), then entrants, then top-ups.
+    nav, _ = portfolio_value(ledger, prices)
+    for t in sorted(set(st["holdings"]) & target_set):
+        p, stale = mark_price(t, prices, ledger)
+        if p is None or stale:
+            continue
+        h = st["holdings"][t]
+        value = h["shares"] * p
+        target_value = targets[t] / 100.0 * nav * gross
+        if value > target_value * (1 + PLAN3_REBAL_BAND) \
+                and value - target_value > PLAN3_MIN_TRADE:
+            trim(ledger, t, p, value - target_value, as_of, "rebalance_plan3")
+
+    entrants = []
+    for t in sorted(target_set - set(st["holdings"])):
+        p, stale = mark_price(t, prices, ledger)
+        if p is None or stale:
+            continue  # never open on a stale/absent mark
+        target_value = targets[t] / 100.0 * nav * gross
+        if target_value <= PLAN3_MIN_TRADE:
+            continue  # throttled to dust (e.g. quarter gross): defer, don't churn
+        entrants.append((t, p, target_value))
+    # Entrant funding beats the drift band: when cash is short, trim incumbents
+    # toward their exact target (mirrors run_target_ledger's funding pass) —
+    # otherwise a name whose value sits just inside the band pins the cash and
+    # a returning entrant starves indefinitely.
+    shortfall = sum(tv for _, _, tv in entrants) - st["cash"]
+    if entrants and shortfall > 0:
+        for t in sorted(set(st["holdings"]) & target_set):
+            if shortfall <= 0:
+                break
+            p, stale = mark_price(t, prices, ledger)
+            if p is None or stale:
+                continue
+            excess = st["holdings"][t]["shares"] * p - targets[t] / 100.0 * nav * gross
+            if excess <= 0:
+                continue
+            take = min(excess, shortfall)
+            trim(ledger, t, p, take, as_of, "rebalance_plan3")
+            shortfall -= take
+    for t, p, target_value in entrants:
+        if st["cash"] < target_value * ENTRY_FUND_TOL:
+            continue  # still underfunded: it is simply an entrant again next run
+        buy(ledger, t, p, target_value, as_of, "entered_plan3")
+        st["hwm"][t] = p
+
+    for t in sorted(set(st["holdings"]) & target_set):
+        p, stale = mark_price(t, prices, ledger)
+        if p is None or stale:
+            continue
+        h = st["holdings"][t]
+        value = h["shares"] * p
+        target_value = targets[t] / 100.0 * nav * gross
+        shortfall = target_value - value
+        if value < target_value * (1 - PLAN3_REBAL_BAND) and shortfall > PLAN3_MIN_TRADE:
+            top_up(ledger, t, p, min(shortfall, st["cash"]), as_of, "rebalance_plan3")
+
+    return portfolio_value(ledger, prices)
+
+
 def content_age_hours(generated_at):
     """Age of a producer's own timestamp. File mtime is useless — a git checkout
     resets it even on stale content."""
@@ -711,6 +909,9 @@ def main():
     parser.add_argument("--mine-only", action="store_true",
                         help="Advance ONLY per-user mine ledgers; never touch plan/plan2/equal "
                              "(on-demand refresh must not re-stamp the global ledgers).")
+    parser.add_argument("--reset-plan3-halt", action="store_true",
+                        help="Clear plan3's kill-switch halt (deliberate user action after a "
+                             "-20%% drawdown liquidation; the ledger re-enters from cash).")
     args = parser.parse_args()
     as_of = args.as_of or datetime.now(timezone.utc).strftime("%Y-%m-%d")
     # Held-book / underfunded events for the run. Written to the ledger book as an
@@ -731,7 +932,7 @@ def main():
         "ledgers": {"plan": empty_ledger(), "plan2": empty_ledger(), "equal": empty_ledger(),
                     "plan_llm": empty_ledger(), "plan2_llm": empty_ledger(), "equal_llm": empty_ledger()},
     }
-    for _k in ("plan2", "plan_llm", "plan2_llm", "equal_llm"):
+    for _k in ("plan2", "plan_llm", "plan2_llm", "equal_llm", "plan3"):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -835,6 +1036,36 @@ def main():
             finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
             backfill_benches(ledgers[name])
 
+        # ── plan3 · bold (momentum sleeve; PAPER ONLY — never mirrored to KIS) ──
+        # Absent plan file pre-launch = empty targets: the ledger holds cash and the
+        # series stays flat until build_momo_plan.py has run — same clean-A/B pattern
+        # as the LLM ledgers. Empty targets WITH holdings is a producer failure and
+        # holds the book (targets_healthy), it never liquidates.
+        led3 = ledgers["plan3"]
+        if args.reset_plan3_halt and led3["state"].get("halted"):
+            led3["state"]["halted"] = False
+            led3["state"]["risk_tier"] = 1.0
+            led3["state"]["cooldown"] = {}
+            led3["state"]["peak_since"] = as_of  # rebase dd, or the switch re-fires instantly
+            print("  plan3: kill-switch halt CLEARED by --reset-plan3-halt", file=sys.stderr)
+        momo_plan = load_json(PORTFOLIO_PLAN_MOMO_JSON, {}) or {}
+        momo_targets = {p["symbol"]: p["weight_pct"] for p in (momo_plan.get("positions") or [])}
+        ok3, why3 = targets_healthy("plan3", momo_targets, led3)
+        if not ok3:
+            print(f"  ! plan3: holding book unchanged — {why3}", file=sys.stderr)
+            alerts.append({"date": as_of, "severity": "error", "scope": "plan3",
+                           "kind": "held", "detail": why3})
+            guard_tripped.append(why3)
+            nav_p3, stale_p3 = hold_ledger(led3, prices, as_of)
+        else:
+            nav_p3, stale_p3 = run_plan3_ledger(led3, momo_plan, prices, as_of)
+            if led3["state"].get("halted"):
+                alerts.append({"date": as_of, "severity": "error", "scope": "plan3",
+                               "kind": "killswitch",
+                               "detail": "drawdown breached -20%: liquidated and halted"})
+        finalize_ledger(led3, nav_p3, stale_p3, benches, as_of, book["inception"])
+        backfill_benches(led3)
+
         # Watermark only advances on a healthy run, so a collapse cannot ratchet the
         # baseline down one bad day at a time until the gate stops catching anything.
         if fct_ok:
@@ -869,7 +1100,7 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("plan", "plan2", "equal", "plan_llm", "plan2_llm", "equal_llm"):
+        for name in ("plan", "plan2", "equal", "plan3", "plan_llm", "plan2_llm", "equal_llm"):
             if not ledgers.get(name, {}).get("nav_series"):
                 continue
             s = ledgers[name]["summary"]

@@ -802,7 +802,7 @@ export default function CockpitDashboard() {
     const [plan, setPlan] = useState<any | null>(null);
     const [overlay, setOverlay] = useState<Record<string, any>>({});
     const [ledgers, setLedgers] = useState<any | null>(null);
-    const [ledgerView, setLedgerView] = useState<'plan' | 'plan2' | 'equal' | 'mine'>('plan');
+    const [ledgerView, setLedgerView] = useState<'plan' | 'plan2' | 'equal' | 'plan3' | 'mine'>('plan');
     // THE LENS — one switch that re-skins Rankings + Track Record through the chosen engine's
     // eyes: quant (deterministic factor engine, the original view), llm (RS2 local-LLM verdicts),
     // compare (both side by side). Replaces the old scattered showLlm / posSource toggles.
@@ -982,7 +982,7 @@ export default function CockpitDashboard() {
     }, [lens, filteredRows, rows, bandFilter, llmFilter, sectorFilter, search, stockInfo, llmRankMap, cmpSort]);
 
     const baseBps: number = (ledgers?.config?.cost_bps as number | undefined) ?? 10;
-    const STRAT_LEDGERS = ['plan', 'plan2', 'equal', 'mine', 'plan_llm', 'plan2_llm', 'equal_llm'];
+    const STRAT_LEDGERS = ['plan', 'plan2', 'equal', 'plan3', 'mine', 'plan_llm', 'plan2_llm', 'equal_llm'];
 
     // Cumulative extra commission (in NAV-100 units) per strategy ledger, by date,
     // for the what-if rate vs baseline. Each trade is re-costed by |value|*delta/1e4.
@@ -1022,7 +1022,7 @@ export default function CockpitDashboard() {
         const firsts: Record<string, number> = {};
         const benchList: string[] = L && ledgers?.config?.benchmarks ? ledgers.config.benchmarks : DEFAULT_BENCHES;
         const benchKeys: Record<string, string> = Object.fromEntries(benchList.map((s: string) => [s, s.toLowerCase()]));
-        for (const name of ['plan', 'plan2', 'equal', 'mine', 'plan_llm', 'plan2_llm', 'equal_llm'] as const) {
+        for (const name of ['plan', 'plan2', 'equal', 'plan3', 'mine', 'plan_llm', 'plan2_llm', 'equal_llm'] as const) {
             for (const row of L[name]?.nav_series ?? []) {
                 if (row.nav === null || row.nav === undefined) continue;
                 byDate[row.date] = byDate[row.date] || { date: row.date };
@@ -1391,12 +1391,14 @@ export default function CockpitDashboard() {
                         </div>
 
                         {/* Both engines' full stats, always visible — no lens toggling needed to compare numbers */}
-                        <div className="grid gap-3 lg:grid-cols-2 xl:grid-cols-4">
-                            {(['plan', 'plan2', 'equal', 'mine'] as const).map(name => {
+                        <div className="grid gap-3 lg:grid-cols-2 xl:grid-cols-5">
+                            {(['plan', 'plan2', 'equal', 'plan3', 'mine'] as const).map(name => {
                                 const bs = ledgers.ledgers[name]?.summary ?? {};
-                                const hasLlm = name !== 'mine' && !!ledgers.ledgers[`${name}_llm`];
+                                const hasLlm = name !== 'mine' && name !== 'plan3' && !!ledgers.ledgers[`${name}_llm`];
                                 const ls = hasLlm ? (ledgers.ledgers[`${name}_llm`]?.summary ?? {}) : ({} as any);
-                                const label = name === 'plan' ? 'plan · value core' : name === 'plan2' ? 'plan2 · hybrid' : name;
+                                const label = name === 'plan' ? 'plan · value core' : name === 'plan2' ? 'plan2 · hybrid'
+                                    : name === 'plan3' ? 'plan3 · bold' : name;
+                                const p3state = name === 'plan3' ? (ledgers.ledgers.plan3?.state as any) : null;
                                 const live = ledgers.ledgers[name] && bs.observations > 0;
                                 // What-if commission overlay overrides Cum + vs-benchmark (the return view);
                                 // risk metrics (CAGR/DD/Sharpe) stay at the stored baseline.
@@ -1457,6 +1459,16 @@ export default function CockpitDashboard() {
                                                 </p>
                                             )}
                                             {name === 'mine' && live && <p className="mt-1.5 text-[11px] text-muted-foreground">your holdings — no LLM variant</p>}
+                                            {name === 'plan3' && (
+                                                p3state?.halted
+                                                    ? <p className="mt-1.5 text-[11px] font-bold text-red-400">
+                                                        HALTED — kill switch fired at −25% DD (reset: --reset-plan3-halt)</p>
+                                                    : <p className="mt-1.5 text-[11px] text-muted-foreground">
+                                                        momentum sleeve · benchmark QQQ · 20% DD budget
+                                                        {typeof p3state?.risk_tier === 'number' && p3state.risk_tier < 1
+                                                            ? <span className="font-bold text-amber-300"> · de-risked to {Math.round(p3state.risk_tier * 100)}% gross</span>
+                                                            : ''}</p>
+                                            )}
                                         </button>
                                     </div>
                                 );
@@ -1519,6 +1531,7 @@ export default function CockpitDashboard() {
                                     <Line type="monotone" dataKey="plan" name="plan (core)" stroke="#34d399" dot={false} strokeWidth={2} connectNulls />
                                     <Line type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} connectNulls />
                                     <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} connectNulls />
+                                    <Line type="monotone" dataKey="plan3" name="plan3 (bold)" stroke="#f43f5e" dot={false} strokeWidth={2} connectNulls />
                                     <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} connectNulls />
                                     {/* RS2 LLM variants — always on, dashed, distinct warm colors */}
                                     <Line type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#fbbf24" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />

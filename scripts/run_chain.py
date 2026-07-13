@@ -124,6 +124,12 @@ def main():
     # it is additive and must never break the baseline chain.
     if ok and not run_step("build_portfolio_plan_llm", ["scripts/build_portfolio_plan.py", "--llm"], steps):
         print("WARN: build_portfolio_plan --llm failed (non-fatal; baseline plan unaffected).")
+    # plan3 momentum sleeve (portfolio_plan_momo.json). Non-fatal for the same reason;
+    # the plan3 ledger holds its book when the plan file is missing/stale. Weekly rerank
+    # + daily regime refresh are handled inside the script itself. PAPER ONLY (no KIS).
+    if ok and not run_step("build_momo_plan", ["scripts/build_momo_plan.py"]
+                           + (["--skip-regime"] if args.skip_macro else []), steps):
+        print("WARN: build_momo_plan failed (non-fatal; plan3 ledger will hold).")
     if ok and not run_step("track_paper_portfolios", ["scripts/track_paper_portfolios.py"]
                            + (["--skip-benchmark"] if args.skip_macro else []), steps):
         print("FATAL: track_paper_portfolios failed.")
