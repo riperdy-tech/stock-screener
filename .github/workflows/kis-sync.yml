@@ -1,21 +1,27 @@
-# KIS Portfolio Sync — mirrors the `equal` paper ledger into a KIS account.
+# KIS Portfolio Sync — mirrors a paper ledger into a KIS account.
+#
+# TRIGGER: chained to Scheduled Data Fetch completion (workflow_run), not a cron.
+# GitHub crons drift 0-3h, so clock-offset sequencing cannot guarantee the sync
+# sees the freshly updated ledger; the chain can. The fetch runs just after the
+# US open, so the sync trades mid-session minutes after the ledger updates.
+# A market-hours gate skips the runs triggered by weekend fetches (and any fetch
+# that finishes after the close) without failing them.
 #
 # Safety model:
-#   - Scheduled runs are DRY RUN unless repo variable KIS_AUTO_EXECUTE=true.
+#   - Chained runs are DRY RUN unless repo variable KIS_AUTO_EXECUTE=true.
 #   - Env comes from repo variable KIS_ENV (default paper); secrets are split
 #     into *_PAPER / *_REAL pairs so flipping the variable can never send
 #     paper credentials at the real account or vice versa.
 #   - Real trading additionally requires repo variable KIS_CONFIRM_REAL=true
 #     (the script refuses --env real --execute without --confirm-real).
-#
-# 14:40 UTC = 10:40 EDT / 09:40 EST — inside US regular session year-round,
-# and after the 08:57 UTC ledger tracker refresh.
+#   - Manual real runs require the env input + confirm phrase REAL MONEY.
 
 name: KIS Portfolio Sync
 
 on:
-  schedule:
-    - cron: '40 14 * * 1-5'
+  workflow_run:
+    workflows: ["Scheduled Data Fetch"]
+    types: [completed]
   workflow_dispatch:
     inputs:
       env:
@@ -53,6 +59,9 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Chained runs only proceed off a SUCCESSFUL fetch: a failed fetch means a
+    # stale/inconsistent ledger, and the right response is to not trade on it.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
 
@@ -61,6 +70,21 @@ jobs:
           python-version: '3.11'
 
       - run: pip install requests
+
+      # Chained runs fire after EVERY fetch, including weekend maintenance and
+      # any fetch that drags past the close. Skip cleanly (green, no orders)
+      # when the US session is over — script-level guards stay as backstop.
+      - name: Market-hours gate
+        id: gate
+        if: github.event_name == 'workflow_run'
+        run: |
+          OPEN=$(python -c "
+          from datetime import datetime, timezone
+          from zoneinfo import ZoneInfo
+          ny = datetime.now(timezone.utc).astimezone(ZoneInfo('America/New_York'))
+          print('true' if ny.weekday() < 5 and 9*60+30 <= ny.hour*60+ny.minute < 16*60 else 'false')")
+          echo "open=$OPEN" >> "$GITHUB_OUTPUT"
+          echo "US market open: $OPEN"
 
       # A manual run may target the real account via the env input; the schedule
       # never can (it only reads vars.KIS_ENV). Real + execute additionally needs
@@ -74,8 +98,9 @@ jobs:
           fi
 
       - name: Run sync
+        if: github.event_name != 'workflow_run' || steps.gate.outputs.open == 'true'
         env:
-          # Manual dispatch: the env input wins. Schedule: the repo variable.
+          # Manual dispatch: the env input wins. Chained runs: the repo variable.
           KIS_ENV: ${{ github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV || 'paper' }}
           KIS_APP_KEY: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_APP_KEY_REAL || secrets.KIS_APP_KEY_PAPER }}
           KIS_APP_SECRET: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_APP_SECRET_REAL || secrets.KIS_APP_SECRET_PAPER }}
@@ -91,12 +116,12 @@ jobs:
             python scripts/sync_kis_portfolio.py --probe
             exit $?
           fi
-          if [ "${{ github.event_name }}" = "schedule" ]; then
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
             [ "${{ vars.KIS_AUTO_EXECUTE }}" = "true" ] && FLAGS="--execute"
           else
             [ "${{ inputs.execute }}" = "true" ] && FLAGS="--execute"
           fi
-          # --confirm-real for a scheduled real run still gated by the repo variable;
+          # --confirm-real for a chained real run still gated by the repo variable;
           # for a manual real run the guard step above already enforced the phrase.
           if [ "$KIS_ENV" = "real" ]; then
             if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ vars.KIS_CONFIRM_REAL }}" = "true" ]; then
