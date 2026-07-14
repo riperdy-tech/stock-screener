@@ -110,6 +110,10 @@ jobs:
           KIS_PROBE_DOMESTIC_ORDER: ${{ inputs.probe_domestic_order == true && '1' || '' }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          # Trade-run notification (Telegram). Absent secrets = silent no-op.
+          KIS_TG_BOT_TOKEN: ${{ secrets.KIS_TG_BOT_TOKEN }}
+          KIS_TG_CHAT_ID: ${{ secrets.KIS_TG_CHAT_ID }}
+          KIS_MSG_PREFIX: ${{ vars.KIS_MSG_PREFIX || '[KIS·trades]' }}
         run: |
           FLAGS=""
           if [ "${{ inputs.probe }}" = "true" ]; then

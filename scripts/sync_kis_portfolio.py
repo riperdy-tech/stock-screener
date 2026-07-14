@@ -29,6 +29,9 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from kis.client import EXCD_TO_ORDER, KISClient  # noqa: E402
+from kis.notify import (  # noqa: E402
+    format_telegram, sb_upsert, send_telegram, trades_rows,
+)
 from kis.reconcile import compute_plan  # noqa: E402
 from kis.targets import ledger_weights, load_ledger_book  # noqa: E402
 
@@ -347,6 +350,30 @@ def main():
     rejects = [r for r in results if not r.get("ok")]
     print(f"\nplaced {ok}/{len(results)} orders; {len(rejects)} rejected/skipped")
     log_event({"run_id": run_id, "event": "execute", "results": results})
+
+    # ---- surface the run (best-effort; must never break the trade path) ----
+    # Only after a real execute that placed/attempted orders. Both sinks are
+    # non-fatal by contract; failures here are logged, never raised.
+    if results:
+        try:
+            cash_after = client.usd_cash()[0]  # post-run snapshot
+        except Exception:
+            cash_after = budget  # fall back to our internal estimate
+        try:
+            if sb_upsert("kis_trades",
+                         trades_rows(run_id, args.env, results, plan.nav, cash_after),
+                         "run_id,ticker,side"):
+                print("  kis_trades: persisted to Supabase")
+        except Exception as e:
+            print(f"  kis_trades upsert failed (non-fatal): {e}", file=sys.stderr)
+        try:
+            prefix = os.environ.get("KIS_MSG_PREFIX", "[KIS·trades]")
+            msg = format_telegram(prefix, run_id, args.env, args.ledger,
+                                  results, plan.nav, cash_after)
+            if send_telegram(msg):
+                print("  telegram: digest sent")
+        except Exception as e:
+            print(f"  telegram notify failed (non-fatal): {e}", file=sys.stderr)
     summary += ["", f"**Placed {ok}/{len(results)}** orders"]
     if rejects:
         summary += ["", "**Rejected/skipped**"] + \
