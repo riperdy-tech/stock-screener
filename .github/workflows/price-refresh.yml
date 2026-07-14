@@ -107,9 +107,24 @@ jobs:
             exit 0
           fi
           git commit -m "Auto-update: post-close price refresh + re-score"
+          # The chain also touches files we deliberately don't commit (logs, csv
+          # byproducts). They blocked `pull --rebase` on the first scheduled run
+          # (2026-07-13: "cannot pull with rebase: You have unstaged changes",
+          # 3/3 attempts, data never pushed). Drop them, then use the same
+          # diverged-origin-resilient fetch+merge the data-fetch job uses.
+          git checkout -- . || true
+          pushed=false
           for i in 1 2 3; do
-            git pull --rebase && git push && exit 0
+            git fetch origin main || true
+            git merge -X ours --no-edit origin/main || git merge --abort 2>/dev/null || true
+            if git push origin main; then
+              pushed=true
+              break
+            fi
+            echo "push attempt $i failed — retrying in 10s"
             sleep 10
           done
-          echo "::error::push failed after 3 attempts"
-          exit 1
+          if [ "$pushed" != "true" ]; then
+            echo "::error::push failed after 3 attempts"
+            exit 1
+          fi
