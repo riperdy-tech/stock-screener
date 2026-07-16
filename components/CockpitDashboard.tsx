@@ -785,11 +785,11 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
 // Benchmark line styling (data key = lowercased symbol). Benchmarks are context,
 // not contenders: grey ramp only, thin, dotted. Unknown symbols fall back to grey.
 const BENCH_META: Record<string, { color: string; dash: string }> = {
-    IWM: { color: '#475569', dash: '4 3' },
-    SPY: { color: '#94a3b8', dash: '2 2' },
-    QQQ: { color: '#cbd5e1', dash: '1 3' },
-    SOXX: { color: '#64748b', dash: '3 2' },
-    DRAM: { color: '#7c8ba1', dash: '2 3' },
+    IWM: { color: '#8494a8', dash: '4 3' },
+    SPY: { color: '#c3cedb', dash: '2 2' },
+    QQQ: { color: '#e8edf3', dash: '1 3' },
+    SOXX: { color: '#9aa8ba', dash: '3 2' },
+    DRAM: { color: '#aab6c6', dash: '2 3' },
 };
 const benchColor = (b: string) => BENCH_META[b]?.color ?? '#9ca3af';
 const benchDash = (b: string) => BENCH_META[b]?.dash ?? '3 3';
@@ -849,6 +849,7 @@ export default function CockpitDashboard() {
     });
     const [hiddenNav, setHiddenNav] = useState<Set<string>>(new Set());
     const [navHover, setNavHover] = useState<string | null>(null);  // series key OR lowercased bench symbol
+    const [brushIdx, setBrushIdx] = useState<{ s: number; e: number } | null>(null);  // Brush window (row indexes)
     const toggleNav = (k: string) => setHiddenNav(prev => {
         const next = new Set(prev);
         next.has(k) ? next.delete(k) : next.add(k);
@@ -1086,6 +1087,30 @@ export default function CockpitDashboard() {
 
     const allBenches: string[] = useMemo(
         () => (ledgers?.config?.benchmarks as string[] | undefined) ?? DEFAULT_BENCHES, [ledgers]);
+
+    // Y domain over the visible window only — Recharts' 'auto' domain ignores the
+    // Brush selection and hidden series, so zooming left the axis stuck at full range.
+    const navYDomain = useMemo((): [number | string, number | string] => {
+        if (!navCurve.length) return ['auto', 'auto'];
+        const s = brushIdx ? Math.max(0, Math.min(brushIdx.s, navCurve.length - 1)) : 0;
+        const e = brushIdx ? Math.max(s, Math.min(brushIdx.e, navCurve.length - 1)) : navCurve.length - 1;
+        const keys = [
+            ...NAV_SERIES.filter(x => !hiddenNav.has(x.key)).map(x => x.key),
+            ...allBenches.filter(b => benchSel.has(b)).map(b => b.toLowerCase()),
+        ];
+        let min = Infinity, max = -Infinity;
+        for (let i = s; i <= e; i++) {
+            const row = navCurve[i] as any;
+            for (const k of keys) {
+                const v = row[k];
+                if (v != null) { if (v < min) min = v; if (v > max) max = v; }
+            }
+        }
+        if (!isFinite(min) || !isFinite(max)) return ['auto', 'auto'];
+        const pad = Math.max((max - min) * 0.08, 0.2);
+        // Snap to half-point boundaries so the axis ticks stay readable.
+        return [Math.floor((min - pad) * 2) / 2, Math.ceil((max + pad) * 2) / 2];
+    }, [navCurve, brushIdx, hiddenNav, benchSel, allBenches]);
 
     // Last non-null row index per series — anchors the line-end labels.
     const navLastIdx = useMemo(() => {
@@ -1529,7 +1554,7 @@ export default function CockpitDashboard() {
                                 </h3>
                                 <div className="flex gap-1">
                                     {(['1m', '3m', 'ytd', 'all'] as const).map(r => (
-                                        <button key={r} onClick={() => setNavRange(r)}
+                                        <button key={r} onClick={() => { setNavRange(r); setBrushIdx(null); }}
                                             className={clsx('rounded px-2 py-0.5 text-[11px] font-black uppercase',
                                                 navRange === r ? 'bg-emerald-500/20 text-emerald-300' : 'text-muted-foreground hover:text-foreground')}>
                                             {r}
@@ -1585,7 +1610,7 @@ export default function CockpitDashboard() {
                                 <LineChart data={navCurve} margin={{ top: 4, right: 92, bottom: 0, left: 0 }}>
                                     <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
                                     <XAxis dataKey="date" tick={{ fontSize: 9 }} stroke="#64748b" minTickGap={28} interval="preserveStartEnd" />
-                                    <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10 }} stroke="#64748b" />
+                                    <YAxis domain={navYDomain} tick={{ fontSize: 10 }} stroke="#64748b" />
                                     <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
                                     {NAV_SERIES.map(s => (
                                         <Line key={s.key} type="monotone" dataKey={s.key} name={s.name}
@@ -1601,13 +1626,15 @@ export default function CockpitDashboard() {
                                         return (
                                             <Line key={b} type="monotone" dataKey={k} name={b}
                                                 stroke={benchColor(b)} dot={false} isAnimationActive={false} strokeDasharray={benchDash(b)}
-                                                strokeWidth={navHover === k ? 2 : 1}
+                                                strokeWidth={navHover === k ? 2.5 : 1.25}
                                                 strokeOpacity={navHover && navHover !== k ? 0.15 : 1}
                                                 label={navEndLabel(b, benchColor(b), navLastIdx[k] ?? -1)} />
                                         );
                                     })}
                                     <Brush dataKey="date" height={24} stroke="#475569" fill="#0b1220"
                                         travellerWidth={8} gap={1}
+                                        onChange={(r: any) => setBrushIdx(
+                                            r && r.startIndex != null ? { s: r.startIndex, e: r.endIndex } : null)}
                                         tickFormatter={(d: string) => (typeof d === 'string' ? d.slice(5) : d)} />
                                 </LineChart>
                             </ResponsiveContainer>
