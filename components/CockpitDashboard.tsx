@@ -16,7 +16,7 @@ import {
     HelpCircle, Layers3, LineChart as LineChartIcon, RefreshCw, Search, ShieldAlert, Sparkles, X,
 } from 'lucide-react';
 import {
-    Bar, BarChart, Brush, CartesianGrid, Legend, Line, LineChart,
+    Bar, BarChart, Brush, CartesianGrid, Line, LineChart,
     ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts';
 import {
@@ -782,18 +782,45 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
     );
 }
 
-// Benchmark line styling (data key = lowercased symbol). Unknown symbols fall
-// back to a neutral grey so newly-added benchmarks still render.
+// Benchmark line styling (data key = lowercased symbol). Benchmarks are context,
+// not contenders: grey ramp only, thin, dotted. Unknown symbols fall back to grey.
 const BENCH_META: Record<string, { color: string; dash: string }> = {
-    IWM: { color: '#64748b', dash: '4 3' },
-    SPY: { color: '#e2e8f0', dash: '2 2' },
-    QQQ: { color: '#facc15', dash: '1 3' },
-    SOXX: { color: '#fb923c', dash: '3 2' },
-    DRAM: { color: '#22d3ee', dash: '2 3' },
+    IWM: { color: '#475569', dash: '4 3' },
+    SPY: { color: '#94a3b8', dash: '2 2' },
+    QQQ: { color: '#cbd5e1', dash: '1 3' },
+    SOXX: { color: '#64748b', dash: '3 2' },
+    DRAM: { color: '#7c8ba1', dash: '2 3' },
 };
 const benchColor = (b: string) => BENCH_META[b]?.color ?? '#9ca3af';
 const benchDash = (b: string) => BENCH_META[b]?.dash ?? '3 3';
 const DEFAULT_BENCHES = ['IWM', 'SPY', 'QQQ'];  // SOXX/DRAM off by default (toggle on)
+
+// NAV chart strategy series — one hue per family: quant solid, RS2 LLM variant
+// same hue lighter + dashed, so pairs read together at a glance.
+const NAV_SERIES: { key: string; name: string; color: string; dash?: string }[] = [
+    { key: 'plan', name: 'plan (core)', color: '#34d399' },
+    { key: 'plan_llm', name: 'plan · LLM', color: '#6ee7b7', dash: '7 3' },
+    { key: 'plan2', name: 'plan2 (hybrid)', color: '#f472b6' },
+    { key: 'plan2_llm', name: 'plan2 · LLM', color: '#f9a8d4', dash: '7 3' },
+    { key: 'equal', name: 'equal', color: '#38bdf8' },
+    { key: 'equal_llm', name: 'equal · LLM', color: '#7dd3fc', dash: '7 3' },
+    { key: 'plan3', name: 'plan3 (bold)', color: '#f43f5e' },
+    { key: 'mine', name: 'mine', color: '#a78bfa' },
+];
+
+// Line-end label: series name + last value, colored to match, drawn just past
+// the final non-null point. Returned per-point by Recharts `label`; renders
+// only at the anchor index.
+const navEndLabel = (name: string, color: string, lastIdx: number) =>
+    function EndLabel(props: any) {
+        const { x, y, index, value } = props;
+        if (index !== lastIdx || value == null || x == null || y == null) return null;
+        return (
+            <text x={x + 5} y={y + 3} fill={color} fontSize={10} fontWeight={700}>
+                {name} {Number(value).toFixed(1)}
+            </text>
+        );
+    };
 
 export default function CockpitDashboard() {
     const [tab, setTab] = useState<TabId>('rankings');
@@ -818,6 +845,13 @@ export default function CockpitDashboard() {
     const toggleBench = (b: string) => setBenchSel(prev => {
         const next = new Set(prev);
         next.has(b) ? next.delete(b) : next.add(b);
+        return next;
+    });
+    const [hiddenNav, setHiddenNav] = useState<Set<string>>(new Set());
+    const [navHover, setNavHover] = useState<string | null>(null);  // series key OR lowercased bench symbol
+    const toggleNav = (k: string) => setHiddenNav(prev => {
+        const next = new Set(prev);
+        next.has(k) ? next.delete(k) : next.add(k);
         return next;
     });
     const [stockInfo, setStockInfo] = useState<Record<string, StockInfo>>({});
@@ -1052,6 +1086,18 @@ export default function CockpitDashboard() {
 
     const allBenches: string[] = useMemo(
         () => (ledgers?.config?.benchmarks as string[] | undefined) ?? DEFAULT_BENCHES, [ledgers]);
+
+    // Last non-null row index per series — anchors the line-end labels.
+    const navLastIdx = useMemo(() => {
+        const out: Record<string, number> = {};
+        const keys = [...NAV_SERIES.map(s => s.key), ...allBenches.map(b => b.toLowerCase())];
+        for (const k of keys) {
+            for (let i = navCurve.length - 1; i >= 0; i--) {
+                if (navCurve[i][k] != null) { out[k] = i; break; }
+            }
+        }
+        return out;
+    }, [navCurve, allBenches]);
 
     // Adjusted per-card stats (cumulative return + excess vs each benchmark) under
     // the what-if commission. Falls back to the stored summary when no rate is set.
@@ -1479,7 +1525,7 @@ export default function CockpitDashboard() {
                             <div className="mb-2 flex items-center justify-between">
                                 <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground">
                                     NAV — indexed to 100 at inception
-                                    <span className="ml-2 normal-case tracking-normal"><span className="text-emerald-300">quant solid</span> · <span className="text-sky-300">RS2 LLM dashed</span></span>
+                                    <span className="ml-2 normal-case tracking-normal text-muted-foreground">quant solid · LLM dashed (same hue) · hover chip to isolate · click to hide</span>
                                 </h3>
                                 <div className="flex gap-1">
                                     {(['1m', '3m', 'ytd', 'all'] as const).map(r => (
@@ -1492,9 +1538,23 @@ export default function CockpitDashboard() {
                                 </div>
                             </div>
                             <div className="mb-2 flex flex-wrap items-center gap-1.5">
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Benchmarks:</span>
+                                {NAV_SERIES.map(s => {
+                                    const on = !hiddenNav.has(s.key);
+                                    return (
+                                        <button key={s.key} onClick={() => toggleNav(s.key)}
+                                            onMouseEnter={() => setNavHover(s.key)} onMouseLeave={() => setNavHover(null)}
+                                            className={clsx('rounded border px-2 py-0.5 text-[11px] font-black transition',
+                                                on ? 'border-current' : 'border-border text-muted-foreground opacity-50 hover:opacity-80')}
+                                            style={on ? { color: s.color, borderColor: s.color } : undefined}>
+                                            {s.dash ? '╌ ' : '— '}{s.name}
+                                        </button>
+                                    );
+                                })}
+                                <span className="mx-1 h-4 w-px bg-border" />
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Bench:</span>
                                 {allBenches.map(b => (
                                     <button key={b} onClick={() => toggleBench(b)}
+                                        onMouseEnter={() => setNavHover(b.toLowerCase())} onMouseLeave={() => setNavHover(null)}
                                         className={clsx('rounded border px-2 py-0.5 text-[11px] font-black uppercase transition',
                                             benchSel.has(b) ? 'border-current' : 'border-border text-muted-foreground opacity-50 hover:opacity-80')}
                                         style={benchSel.has(b) ? { color: benchColor(b), borderColor: benchColor(b) } : undefined}>
@@ -1522,25 +1582,30 @@ export default function CockpitDashboard() {
                                 )}
                             </div>
                             <ResponsiveContainer width="100%" height={280}>
-                                <LineChart data={navCurve}>
+                                <LineChart data={navCurve} margin={{ top: 4, right: 92, bottom: 0, left: 0 }}>
                                     <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
                                     <XAxis dataKey="date" tick={{ fontSize: 9 }} stroke="#64748b" minTickGap={28} interval="preserveStartEnd" />
                                     <YAxis domain={['auto', 'auto']} tick={{ fontSize: 10 }} stroke="#64748b" />
                                     <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
-                                    <Legend wrapperStyle={{ fontSize: 11 }} />
-                                    <Line type="monotone" dataKey="plan" name="plan (core)" stroke="#34d399" dot={false} strokeWidth={2} connectNulls />
-                                    <Line type="monotone" dataKey="plan2" name="plan2 (hybrid)" stroke="#f472b6" dot={false} strokeWidth={2} connectNulls />
-                                    <Line type="monotone" dataKey="equal" stroke="#38bdf8" dot={false} strokeWidth={2} connectNulls />
-                                    <Line type="monotone" dataKey="plan3" name="plan3 (bold)" stroke="#f43f5e" dot={false} strokeWidth={2} connectNulls />
-                                    <Line type="monotone" dataKey="mine" stroke="#a78bfa" dot={false} strokeWidth={2} connectNulls />
-                                    {/* RS2 LLM variants — always on, dashed, distinct warm colors */}
-                                    <Line type="monotone" dataKey="plan_llm" name="plan · LLM" stroke="#fbbf24" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />
-                                    <Line type="monotone" dataKey="plan2_llm" name="plan2 · LLM" stroke="#fb923c" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />
-                                    <Line type="monotone" dataKey="equal_llm" name="equal · LLM" stroke="#2dd4bf" dot={false} strokeWidth={2.5} strokeDasharray="7 3" connectNulls />
-                                    {allBenches.filter(b => benchSel.has(b)).map(b => (
-                                        <Line key={b} type="monotone" dataKey={b.toLowerCase()} name={b}
-                                            stroke={benchColor(b)} dot={false} strokeWidth={1.5} strokeDasharray={benchDash(b)} />
+                                    {NAV_SERIES.map(s => (
+                                        <Line key={s.key} type="monotone" dataKey={s.key} name={s.name}
+                                            stroke={s.color} dot={false} connectNulls isAnimationActive={false}
+                                            hide={hiddenNav.has(s.key)}
+                                            strokeWidth={navHover === s.key ? 3 : 2}
+                                            strokeOpacity={navHover && navHover !== s.key ? 0.15 : 1}
+                                            strokeDasharray={s.dash}
+                                            label={navEndLabel(s.name, s.color, navLastIdx[s.key] ?? -1)} />
                                     ))}
+                                    {allBenches.filter(b => benchSel.has(b)).map(b => {
+                                        const k = b.toLowerCase();
+                                        return (
+                                            <Line key={b} type="monotone" dataKey={k} name={b}
+                                                stroke={benchColor(b)} dot={false} isAnimationActive={false} strokeDasharray={benchDash(b)}
+                                                strokeWidth={navHover === k ? 2 : 1}
+                                                strokeOpacity={navHover && navHover !== k ? 0.15 : 1}
+                                                label={navEndLabel(b, benchColor(b), navLastIdx[k] ?? -1)} />
+                                        );
+                                    })}
                                     <Brush dataKey="date" height={24} stroke="#475569" fill="#0b1220"
                                         travellerWidth={8} gap={1}
                                         tickFormatter={(d: string) => (typeof d === 'string' ? d.slice(5) : d)} />
