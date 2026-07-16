@@ -1589,7 +1589,7 @@ export default function CockpitDashboard() {
                                     <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
                                     {NAV_SERIES.map(s => (
                                         <Line key={s.key} type="monotone" dataKey={s.key} name={s.name}
-                                            stroke={s.color} dot={false} connectNulls
+                                            stroke={s.color} dot={false} connectNulls isAnimationActive={false}
                                             hide={hiddenNav.has(s.key)}
                                             strokeWidth={navHover === s.key ? 3 : 2}
                                             strokeOpacity={navHover && navHover !== s.key ? 0.15 : 1}
@@ -1600,7 +1600,7 @@ export default function CockpitDashboard() {
                                         const k = b.toLowerCase();
                                         return (
                                             <Line key={b} type="monotone" dataKey={k} name={b}
-                                                stroke={benchColor(b)} dot={false} strokeDasharray={benchDash(b)}
+                                                stroke={benchColor(b)} dot={false} isAnimationActive={false} strokeDasharray={benchDash(b)}
                                                 strokeWidth={navHover === k ? 2 : 1}
                                                 strokeOpacity={navHover && navHover !== k ? 0.15 : 1}
                                                 label={navEndLabel(b, benchColor(b), navLastIdx[k] ?? -1)} />
