@@ -1,6 +1,6 @@
 # Signal Outcome Report
 
-Generated: 2026-07-12T13:44:26Z  |  Benchmarks: IWM (small-cap, primary), SPY (S&P 500), QQQ (Nasdaq-100)
+Generated: 2026-07-19T14:14:36Z  |  Benchmarks: IWM (small-cap, primary), SPY (S&P 500), QQQ (Nasdaq-100)
 
 | Cohort | Horizon | Source | n | Median | Mean | IWM | SPY | QQQ | Excess vs IWM | %>IWM | Missing@end |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -9,5 +9,19 @@ Generated: 2026-07-12T13:44:26Z  |  Benchmarks: IWM (small-cap, primary), SPY (S
 | 2026-06-11 | 30d | factor_research_now | 51 | 1.07% | 0.99% | 3.77% | 2.89% | 4.08% | -2.78% | 41.2% | 0 |
 | 2026-06-12 | 30d | reverse_nominated | 25 | 3.41% | 5.52% | 3.77% | 2.89% | 4.08% | 1.76% | 48.0% | 0 |
 | 2026-06-12 | 30d | factor_research_now | 51 | 1.07% | 0.99% | 3.77% | 2.89% | 4.08% | -2.78% | 41.2% | 0 |
+| 2026-06-13 | 30d | reverse_nominated | 25 | 3.41% | 5.52% | 3.77% | 2.89% | 4.08% | 1.76% | 48.0% | 0 |
+| 2026-06-13 | 30d | factor_research_now | 51 | 1.07% | 0.99% | 3.77% | 2.89% | 4.08% | -2.78% | 41.2% | 0 |
+| 2026-06-14 | 30d | reverse_nominated | 25 | 3.41% | 5.52% | 3.77% | 2.89% | 4.08% | 1.76% | 48.0% | 0 |
+| 2026-06-14 | 30d | factor_research_now | 51 | 1.07% | 0.59% | 3.77% | 2.89% | 4.08% | -3.18% | 41.2% | 0 |
+| 2026-06-15 | 30d | reverse_nominated | 25 | 3.41% | 5.52% | 3.77% | 2.89% | 4.08% | 1.76% | 48.0% | 0 |
+| 2026-06-15 | 30d | factor_research_now | 50 | 3.2% | 1.88% | 3.77% | 2.89% | 4.08% | -1.89% | 46.0% | 0 |
+| 2026-06-16 | 30d | reverse_nominated | 25 | 3.41% | 5.52% | 3.77% | 2.89% | 4.08% | 1.76% | 48.0% | 0 |
+| 2026-06-16 | 30d | factor_research_now | 51 | 2.79% | 1.77% | 3.77% | 2.89% | 4.08% | -2.0% | 45.1% | 0 |
+| 2026-06-17 | 30d | reverse_nominated | 25 | 4.95% | 8.17% | 1.44% | 0.57% | -3.66% | 6.74% | 64.0% | 0 |
+| 2026-06-17 | 30d | factor_research_now | 52 | 0.9% | -0.86% | 1.44% | 0.57% | -3.66% | -2.29% | 46.2% | 0 |
+| 2026-06-18 | 30d | reverse_nominated | 25 | 4.95% | 8.17% | 1.44% | 0.57% | -3.66% | 6.74% | 64.0% | 0 |
+| 2026-06-18 | 30d | factor_research_now | 50 | 0.42% | -2.2% | 1.44% | 0.57% | -3.66% | -3.63% | 44.0% | 1 |
+| 2026-06-19 | 30d | reverse_nominated | 25 | 4.95% | 8.17% | 1.44% | 0.57% | -3.66% | 6.74% | 64.0% | 0 |
+| 2026-06-19 | 30d | factor_research_now | 51 | 0.49% | -2.06% | 1.44% | 0.57% | -3.66% | -3.49% | 45.1% | 1 |
 
-Pending evaluations: 125 (next matures 2026-07-13: cohort 2026-06-13 @ 30d)
+Pending evaluations: 146 (next matures 2026-07-20: cohort 2026-06-20 @ 30d)

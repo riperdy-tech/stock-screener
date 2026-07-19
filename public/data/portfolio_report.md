@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-07-18T12:30:58Z
+Generated: 2026-07-19T14:14:25Z
 Macro flags: none
 Invested: **51.08%**  |  Cash: **48.92%**  |  Positions: 15
 
@@ -69,7 +69,7 @@ Invested: **51.08%**  |  Cash: **48.92%**  |  Positions: 15
 - HWM: no Kelly edge (expectations gap +24pts >= 0: price already assumes more growth than demonstrated)
 - NOVT: no Kelly edge (expectations gap +20pts >= 0: price already assumes more growth than demonstrated)
 - DELL: no Kelly edge (expectations gap +20pts >= 0: price already assumes more growth than demonstrated)
-- VCYT: sized below minimum (0.73% < 0.75%)
+- VCYT: sector cap Healthcare (25.0%)
 
 ## Sizing method
 - Quarter-Kelly: 10 positions — f = 0.25 x mu/sigma^2, mu = expectations-gap recovery over 3y (cap 15%), sigma floor 15%, position cap 5.0%.
