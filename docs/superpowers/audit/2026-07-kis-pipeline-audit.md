@@ -14,6 +14,10 @@
 | F-03 | P3 | 1 | Single-machine dependency for the live signal | register_orchestrator_task.ps1; §1 Q5 |
 | F-04 | P2 | 2 | Hard MoS/conviction boundaries, no hysteresis → mechanical set churn; sells strength | score_factors.py:244-246; §2 |
 | F-05 | P3 | 2 | WL tier still classifies free action text ("accumulate on weakness" = bullish) | score_factors.py:187,210; run_rs2.py:369 |
+| F-06 | P1 | 3 | Live-book turnover ≈15–35× NAV/yr → double-digit real cost drag at KIS fees | churn_summary.json; §3 |
+| F-07 | P2 | 3 | Quant equal: 25/49 round trips are ≤14d re-entries (boundary flip-flops) | churn_summary.json |
+| F-08 | P2 | 3 | Falling-knife entries: quant 6–15d holds avg −11 to −14% (hypothesis-grade, small n) | churn_summary.json |
+| F-09 | P3 | 3 | Universe-dropout names carried forever (no exit path); stale exit_pending entries | track_paper_portfolios.py:326-330,1026 |
 
 ## 1. Link 1 — RS2 verdict generation
 
@@ -57,6 +61,37 @@
 **Sound (verified):** single choke-point veto (structural + empirical); STRICT NO-OP on missing overlay; daily live-price MoS; structured RN gate (the historic text-keyword over-promotion is already fixed); exit-review verdicts flow through with a UI badge (`:218-224`).
 
 ## 3. Link 3 — Ledger mechanics & churn forensics
+
+**Files audited:** `scripts/track_paper_portfolios.py` (core paths: `run_target_ledger:325-430`, health gates `:612-653`, equal/equal_llm orchestration `:940-1037`, buy/sell/trim/dividends/rewind `:238-322`); forensics via `tools/churn_forensics.py`.
+
+**Q1 — What sells a held `equal_llm` name.** The target set is `fct_band_llm == "research_now"` minus `llm_reject`, equal-weighted over `max(N, 8)` (`:1026-1031`). A held name sells when it leaves that set on **2 consecutive evaluated daily runs** (exit grace `:352-370`) — the grace kills 1-day flaps but is powerless against verdict flips, which persist ~7 days until the next RS2 cadence run (F-01), and against multi-day MoS boundary crossings (F-04). Silence is handled correctly: `llm_overlay_applied` false → whole book held with a warn banner (`:1014-1024`); a held name missing `fct_band_llm` → carried as unevaluated, never sold, and its exit-arm is cleared so grace counts only evaluated misses (`:366-370`). The 2026-06-30/07-05 phantom-departure incidents (19 and 57 spurious exits) were root-caused to silence-as-verdict and are genuinely fixed.
+
+**Q2 — Funding, dividends, idempotency.** Entrants fund at **full target weight or defer loudly** (`ENTRY_FUND_TOL=0.90`, `:410-427`) — correct, self-healing. Dividends are Approach-B total return credited to pre-rebalance ex-date holders, replay-safe (`:287-309`). Same-day rewind restores opening state and strips the day's trades/closed/dividends (`:312-322`); `exit_pending` arming is rerun-deterministic. Verified sound by code path; no double-count route found.
+
+**Q3 — Cost model.** 10 bps **per side** via `cost_factor()` in buy/sell/trim/top-up (`:211-212` et al.). Omits: KIS commission, the ±0.3% marketable-limit crossing, actual spread, FX. Real-fill comparison in §4.
+
+**Q4 — Set construction.** `equal` = quant `research_now` equal-weight; `equal_llm` as above. **No position-count cap** — N floats with the band (today 23; `equal` holds 53). At $20k this collides with whole shares (§4 sim).
+
+**Forensics (`tools/out/churn_summary.json`), inception → 2026-07-19:**
+
+| Ledger | Round trips | Median hold | Re-entries ≤14d | Turnover ×NAV | Cost @10bps | Mean closed | Win rate | 6–15d bucket |
+|---|---|---|---|---|---|---|---|---|
+| equal (5wk) | 49 | 5d | **25** | 2.72× | 27 bps | **−4.60%** | 30.6% | −10.84% (n=13) |
+| equal_llm (2wk, LIVE) | 12 | 6d | 2 | **2.29×** | 23 bps | **+1.72%** | 66.7% | +3.05% (n=6) |
+| plan (5wk) | 16 | 7d | 8 | 1.41× | 14 bps | −6.08% | 31.2% | −14.06% (n=7) |
+| plan2 (5wk) | 35 | 5d | 17 | 2.40× | 24 bps | −4.72% | 28.6% | −11.01% (n=9) |
+| plan_llm (2wk) | 18 | 4d | 4 | 1.53× | 15 bps | +0.24% | 44.4% | +0.90% (n=7) |
+| plan2_llm (2wk) | 22 | 4d | 5 | 1.69× | 17 bps | +2.07% | 54.5% | +4.82% (n=9) |
+
+Context: over this window IWM was roughly flat (292.3→294.0) — the quant losses are **not** market beta.
+
+**Findings:**
+- **F-06 (P1) — Live-book turnover is a real-money leak an order of magnitude beyond what paper shows.** `equal_llm` traded 2.29× NAV in 2 weeks (~1.31× beyond the one-time buy-in ⇒ steady-state ≈ **15–35× NAV/yr**). At the paper model (10 bps/side) that's ~3–4%/yr; at plausible real KIS cost per side (commission + the ±0.3% limit-buffer crossing + spread ≈ 0.4–0.6%) it extrapolates to **double-digit %/yr drag** — enough to consume any plausible alpha. Mechanism = F-01 (verdict flips) + F-04 (boundary crossings) surviving the 2-run grace. *Real-fill verification in §4; proposals live under F-01/F-04 (TTL, hysteresis, confirmation) plus rebalance-cadence reduction.*
+- **F-07 (P2) — Quant `equal` flip-flops: 25 of its 49 round trips re-entered the same name within 14 days.** Band-boundary noise round-trips paying 2 sides each; the ledger-side grace is insufficient because signal-side crossings persist >2 runs. (Same root as F-04; kept separate because it's measured on the quant band, not the LLM path.)
+- **F-08 (P2, hypothesis-grade) — Quant nominations enter falling knives.** The 6–15d hold bucket averages −10.8% to −14.1% across quant ledgers (n=13/7/9) while the LLM variants' same bucket is positive — consistent with RS2's entry-timing/MoS gates filtering names in active drawdown that the quant band nominates. Small n, one 5-week window: flag for a Phase 3 pre-registered test, **not** a conclusion.
+- **F-09 (P3) — Zombie-position path.** A held name that vanishes from `factor_scores.json` entirely (universe drift, data drop) is permanently "unevaluated" → carried forever with stale marks; no exit path except manual. Related hygiene: `exit_pending` entries for already-sold names persist indefinitely (harmless — only consulted for held names).
+
+**Sound (verified):** input-side health gates (content age 36h, scored-count collapse ratio, empty-set-while-holding, overlay_on flag); silence≠verdict discipline; exit grace; full-fund-or-defer; Approach-B dividends; idempotent rewind; unitized `mine` ledger (deposits can't fake performance).
 
 ## 4. Link 4 — Reconcile & execution
 
