@@ -18,6 +18,8 @@
 | F-07 | P2 | 3 | Quant equal: 25/49 round trips are ≤14d re-entries (boundary flip-flops) | churn_summary.json |
 | F-08 | P2 | 3 | Falling-knife entries: quant 6–15d holds avg −11 to −14% (hypothesis-grade, small n) | churn_summary.json |
 | F-09 | P3 | 3 | Universe-dropout names carried forever (no exit path); stale exit_pending entries | track_paper_portfolios.py:326-330,1026 |
+| F-10 | P1 | 4 | $9k real NAV × 25 names × daily churn: chronic partial mirror + realized commissions | kis_trades.json; plan_sim.json |
+| F-11 | P2 | 4 | One resting order halts the daily sync; KIS-unlisted names = permanent mirror gaps | sync_kis_portfolio.py:256-261; KIS_SYNC.md:94-99 |
 
 ## 1. Link 1 — RS2 verdict generation
 
@@ -94,6 +96,30 @@ Context: over this window IWM was roughly flat (292.3→294.0) — the quant los
 **Sound (verified):** input-side health gates (content age 36h, scored-count collapse ratio, empty-set-while-holding, overlay_on flag); silence≠verdict discipline; exit grace; full-fund-or-defer; Approach-B dividends; idempotent rewind; unitized `mine` ledger (deposits can't fake performance).
 
 ## 4. Link 4 — Reconcile & execution
+
+**Files audited:** `scripts/sync_kis_portfolio.py`, `scripts/kis/{client,reconcile,targets,notify}.py`, `.github/workflows/kis-sync.yml`, `docs/KIS_SYNC.md`; forensics `tools/plan_sim.py` (granularity at 20k/50k/200k) + `tools/fetch_kis_trades.py` (real fills from Supabase).
+
+**Live-config verification (spec §7.2): CONFIRMED REAL.** `kis_trades` holds 28 rows, all `env="real"`, three consecutive daily execute runs (2026-07-15/16/17, ~13:01 ET — mid-session as designed). **Real account NAV ≈ $9,039, cash ≈ $275** at the 07-17 run.
+
+**Q1 — Unfilled-order abort.** Any open unfilled order aborts the whole run before planning (`sync_kis_portfolio.py:256-261`) — correct for double-order safety, but **global**: one resting limit costs the entire book its daily sync. Bounded in practice because the ±0.3% marketable limits are day orders that expire at the close (`docs/KIS_SYNC.md:94-96` "let them expire, next run reconciles"), so worst case ≈ one lost day per stuck order. → folded into **F-11**.
+
+**Q2 — Partial fills / sells-first: self-heals, but real data shows chronic starvation.** Sells place first, up to 3-min fill wait, buys budgeted from live `usd_cash()` (`:314-347`). In the real rows, **PTC, CRUS, CLS were skipped "insufficient settled cash" on two consecutive days** — the mirror is persistently incomplete at this NAV; deltas roll forward daily (no double-ordering observed — reconcile-to-weights holds). → **F-10**.
+
+**Q3 — Real cost per side.** Marketable-limit crossing ±0.3% + documented real commission "~25 bps + FX spread" (`docs/KIS_SYNC.md:84-85`) ⇒ realistic all-in ≈ **0.4–0.6%/side ≈ 5× the paper model's 10 bps**. Applied to §3's measured turnover, **F-06 is confirmed as a real, first-order leak**: at the observed 6–12 orders/day on a $9k book (~20–30% NAV/day traded in the buy-in/churn phase), cost drag is on the order of 0.1–0.2% of NAV *per day* while churn persists.
+
+**Q4 — FX / margin.** `usd_cash()` prefers the plain USD deposit and deliberately ignores the levered `frcr_ord_psbl_amt1`; a real account with zero deposit refuses to trade on collateral without `KIS_ALLOW_MARGIN=1` (`client.py:297-315`, `sync:246-254`). Real rows show a positive cash deposit being spent down — no margin path observed. **Sound.**
+
+**Q5 — Actions-chain failure modes.** Chained run requires fetch success (`kis-sync.yml:64`); stale ledger >5d refuses (`targets.py:81-84`); zero-priced-tickers refuses (`sync:269-272`); every-order-rejected exits nonzero so a misprovisioned account cannot look green (`sync:384-387`); Telegram digest fires only after a real execute. Silent branch: if the *fetch* fails, the sync never runs and nothing alerts (GitHub email only). Acceptable-with-note.
+
+**Q6 — Rate/token limits & double-order risk.** EGW00201 retries are safe by KIS semantics (rejection precedes action, `client.py:103-110`) and, decisively, the layer above is reconcile-to-weights: even a phantom fill cannot compound because the next run plans from actual holdings. **Sound.**
+
+**Granularity sim (`tools/out/plan_sim.json`, buy-in mode, current 25-name set, price range $12.81–$370.83):** at $20k/$50k/$200k — 25 orders, zero unaffordable names, zero forced single-share positions, **cash drag ~0.5% at every scale** (largest-remainder apportionment works as designed), spread cost of a full round-trip rebuild ≈ 0.6% of invested. Granularity is a **non-issue at ≥$20k**; the observed pain is specific to the current **$9k NAV × 25 names × daily churn** combination.
+
+**Findings:**
+- **F-10 (P1) — The real book cannot faithfully hold its target set at current NAV, and churns hard while failing.** $9k NAV ⇒ ~$390/slot vs share prices up to ~$370; whole-share lumps + settled-cash timing leave persistent underweights (PTC/CRUS/CLS skipped 2 days running), while 6–12 orders/day realize real commissions on every reshuffle. *Proposal: scale position count with NAV (e.g., N ≤ NAV/$800–1,000, concentrating highest-conviction names), and/or reduce sync cadence to weekly + event-driven until NAV grows.*
+- **F-11 (P2) — Single resting order halts the whole daily sync; KIS-unlisted small caps create permanent mirror gaps.** Both bounded (day-order expiry; persistent-reject names logged every run per `docs/KIS_SYNC.md:97-99`) but at daily cadence each costs tracking error. *Proposal: cancel-and-replace stale resting orders at run start (cancel API already exists, `client.py:413-432`); maintain an explicit exclude-list for KIS-untradable names so the ledger and account agree on the investable set.*
+
+**Sound (verified):** dry-run default + layered real gates (`--confirm-real`, `REAL MONEY` phrase, split secrets); concurrency group prevents overlapping syncs; loud zero-fill failure; Hamilton apportionment (0.5% cash drag at all scales); exchange-map caching; reconcile idempotence as the structural double-order backstop.
 
 ## 5. Link 5 — Risk & philosophy coherence
 
