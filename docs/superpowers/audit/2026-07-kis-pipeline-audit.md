@@ -149,6 +149,25 @@ Context: over this window IWM was roughly flat (292.3→294.0) — the quant los
 
 ## 6. Attribution verdict
 
+**Method (`tools/attribution.py` → `tools/out/attribution.json`):** actual ledger return vs a *day-1 buy-&-hold counterfactual* (the inception-day basket, equal-weight, marked at current prices). `trading delta = actual − counterfactual` isolates what all subsequent trading added or destroyed. Approximations: counterfactual excludes dividends and the cash residual; windows differ per ledger (equal 5wk, `*_llm` 2wk).
+
+| Ledger | Window | Actual | IWM | Excess | Day-1 B&H | **Trading delta** | Modeled cost |
+|---|---|---|---|---|---|---|---|
+| equal | 6/12→7/19 | −2.24% | +0.61% | **−2.86%** | −0.25% | **−2.00%** | −27 bps |
+| equal_llm (LIVE) | 7/05→7/19 | +1.02% | −1.19% | **+2.21%** | +0.72% | **+0.30%** | −23 bps |
+| plan | 6/12→7/19 | −1.33% | +0.61% | −1.94% | −2.68% | +1.35% | −14 bps |
+| plan2 | 6/14→7/19 | −3.27% | +0.37% | −3.64% | −3.05% | −0.22% | −24 bps |
+| plan_llm | 7/05→7/19 | −0.35% | −1.19% | +0.84% | −0.26% | −0.10% | −15 bps |
+| plan2_llm | 7/05→7/19 | +0.69% | −1.19% | +1.88% | +0.95% | −0.26% | −17 bps |
+
+**Verdict (mechanical, window-limited):**
+1. **The quant flagship (`equal`) was hurt by its own trading, not its day-1 picks.** Of −2.86% vs IWM, the inception basket explains −0.25%; **−2.00% came from post-day-1 trading** — mid-period entries that immediately fell (F-08 falling knives) and boundary flip-flops (F-07), of which only ~27 bps is modeled fee; the rest is adverse *timing*. The churn engine isn't just a future fee problem (F-06) — it already destroyed ~2% in five paper weeks.
+2. **The LLM overlay improved both components**: positive selection (+0.72% while IWM fell 1.19%) *and* positive trading delta (+0.30%), with 67% closed-trade win rate. Consistent across all three `_llm` variants (excess +0.84% to +2.21%). **Two weeks of data — an encouraging sign, not a validated edge** (F-13 stands).
+3. **`plan`'s sizing layer added value on the same picks** (+1.35% trading delta from Kelly caps/trims) while its narrower selection hurt — weak evidence that the sizing science idling outside the live path (§5) has something to contribute.
+4. **Costs at paper's 10 bps are NOT the realized story** (14–27 bps) — the realized damage was timing; the *prospective* danger is the same turnover at real ~0.4–0.6%/side (F-06/F-10).
+
+**Stops pre-check (scope note):** testing whether per-position trailing stops would have helped requires max-favorable/adverse-excursion paths, i.e. a daily per-ticker price panel. Deferred to the Phase 2 replay harness (which builds that panel) rather than faking it from monthly closes. The one available proxy — 30-day post-exit returns (§3) — shows quant exits were roughly neutral (mean +0.41%, 36% bounce rate on n=11): no evidence the system sells winners too early; the damage is on the *entry* side.
+
 ## 7. Assumptions & open questions for the user
 
 ## 8. Method & environment
