@@ -4,25 +4,46 @@
 **Spec:** docs/superpowers/specs/2026-07-20-kis-pipeline-audit-design.md
 
 ## 0. Executive summary
-(written last — Task 8)
+
+**Trust verdict per link** (sound / sound-with-findings / not-trustworthy):
+- **RS2 verdict generation — sound-with-findings.** Deterministic valuation backbone, verified publish path, defensive ops. But verdicts flip action family on **35.4% of re-analyses** (the churn engine), and every failure mode alerts only on the local PC.
+- **Overlay → guardrail — sound.** The quant veto cannot be bypassed (structural + empirical proof). Design flaw, not integrity flaw: hard MoS/conviction boundaries with daily-moving inputs and no hysteresis.
+- **Ledger mechanics — sound machinery, harmful emergent behavior.** Health gates, idempotency, silence≠verdict are all genuinely well-built. Emergent result: the live strategy turns over **≈2.3× NAV in 2 weeks**.
+- **Reconcile & execution — sound engineering, wrong scale fit.** Layered real-money gates, self-healing reconciliation, 0.5% cash drag at every scale ≥$20k. But the real account is **$9k running 25 names with 6–12 orders/day** and chronic "insufficient settled cash" skips.
+- **Risk architecture — not trustworthy as a system.** Every risk layer that exists (macro de-risk, trailing stops, DD kill tiers) lives on a ledger that *doesn't* hold the money; the ledger that does (`equal_llm`) has none of them.
+
+**Attribution (mechanical, small-window):** the quant flagship's −2.86% vs IWM came −0.25% from day-1 picks and **−2.00% from its own subsequent trading** (falling-knife entries + boundary flip-flops; modeled fees only −27 bps of it). The LLM overlay improved both components (+2.21% vs IWM, 67% win rate — 2 weeks, encouraging but not validated). Exits are fine; **entries and churn are the damage**.
+
+**P0:** F-12 — the user's hard DD ≤ 15% constraint is enforced nowhere on the live path. **P1:** F-02 (silent ops failures), F-06 (turnover ≈15–35× NAV/yr ⇒ double-digit real-cost drag), F-10 ($9k × 25 names × daily churn), F-13 (live capital on 2 weeks of evidence).
+
+**Recommended backlog order (all changes need approval):**
+1. **Phase 2 risk engine** (F-12/F-14) — simulation-validated DD tiers + kill switch on whatever ledger is mirrored.
+2. **Churn triad** (F-01+F-04+F-06) — verdict TTL/confirmation, boundary hysteresis, weekly sync cadence. Biggest expected-profit lever; attacks fees, taxes, and the measured −2% timing drag at once.
+3. **NAV-aware position count** (F-10) — concentrate to ~NAV/$1,000 highest-conviction names until funding grows.
+4. **Ops alerting** (F-02) — reuse the KIS Telegram for orchestrator heartbeat.
+5. **Scaling gates** (F-13) — pre-agreed evidence milestones before each new tranche.
+6. **Phase 3 hypotheses** (F-08 knife-filter, sizing sleeve from §6.3) — pre-registered paper A/Bs.
 
 ## Findings register
+All proposed fixes are **proposals — every change requires user approval** (read-only engagement).
+Severity note: F-06/F-10 are performance-leak class (taxonomy P2) and F-13 is process-drift class (taxonomy P3), all **promoted to P1 for magnitude** — real-fee drag and real capital at stake make them first-order.
+
 | ID | Sev | Link | Title | Evidence |
 |----|-----|------|-------|----------|
-| F-01 | P2 | 1 | Verdict family instability (35.4%/re-analysis) drives live churn | verdict_flips.json; run_rs2.py:348-372 |
+| F-12 | **P0** | 5 | Hard DD ≤ 15% constraint enforced nowhere on the live path; no kill switch on US sync | track_paper_portfolios.py:83-91; §5 |
 | F-02 | P1 | 1 | Orchestrator/publish failures alert nowhere off-machine; staleness = silent slow liquidation | orchestrate.py:108-115,518; score_factors.py:171 |
-| F-03 | P3 | 1 | Single-machine dependency for the live signal | register_orchestrator_task.ps1; §1 Q5 |
+| F-06 | P1 | 3 | Live-book turnover ≈15–35× NAV/yr → double-digit real cost drag at KIS fees | churn_summary.json; §3 §4 |
+| F-10 | P1 | 4 | $9k real NAV × 25 names × daily churn: chronic partial mirror + realized commissions | kis_trades.json; plan_sim.json |
+| F-13 | P1 | 5 | Live capital allocated on ~2 weeks of evidence (survivor-picking risk across 7 ledgers) | §5; churn_summary.json |
+| F-01 | P2 | 1 | Verdict family instability (35.4%/re-analysis) drives live churn | verdict_flips.json; run_rs2.py:348-372 |
 | F-04 | P2 | 2 | Hard MoS/conviction boundaries, no hysteresis → mechanical set churn; sells strength | score_factors.py:244-246; §2 |
-| F-05 | P3 | 2 | WL tier still classifies free action text ("accumulate on weakness" = bullish) | score_factors.py:187,210; run_rs2.py:369 |
-| F-06 | P1 | 3 | Live-book turnover ≈15–35× NAV/yr → double-digit real cost drag at KIS fees | churn_summary.json; §3 |
 | F-07 | P2 | 3 | Quant equal: 25/49 round trips are ≤14d re-entries (boundary flip-flops) | churn_summary.json |
 | F-08 | P2 | 3 | Falling-knife entries: quant 6–15d holds avg −11 to −14% (hypothesis-grade, small n) | churn_summary.json |
-| F-09 | P3 | 3 | Universe-dropout names carried forever (no exit path); stale exit_pending entries | track_paper_portfolios.py:326-330,1026 |
-| F-10 | P1 | 4 | $9k real NAV × 25 names × daily churn: chronic partial mirror + realized commissions | kis_trades.json; plan_sim.json |
 | F-11 | P2 | 4 | One resting order halts the daily sync; KIS-unlisted names = permanent mirror gaps | sync_kis_portfolio.py:256-261; KIS_SYNC.md:94-99 |
-| F-12 | P0 | 5 | Hard DD ≤ 15% constraint enforced nowhere on the live path; no kill switch on US sync | track_paper_portfolios.py:83-91; §5 |
-| F-13 | P1 | 5 | Live capital allocated on ~2 weeks of evidence (survivor-picking risk across 7 ledgers) | §5; churn_summary.json |
 | F-14 | P2 | 5 | Live book bypasses every existing risk layer (macro de-risk, stops, kill tiers) | §5 matrix |
+| F-03 | P3 | 1 | Single-machine dependency for the live signal | register_orchestrator_task.ps1; §1 Q5 |
+| F-05 | P3 | 2 | WL tier still classifies free action text ("accumulate on weakness" = bullish) | score_factors.py:187,210; run_rs2.py:369 |
+| F-09 | P3 | 3 | Universe-dropout names carried forever (no exit path); stale exit_pending entries | track_paper_portfolios.py:326-330,1026 |
 | F-15 | P3 | 5 | Dormant IC-recalibration machinery contradicts adopted equal-weight decision | factor-recalibration.yml |
 
 ## 1. Link 1 — RS2 verdict generation
@@ -170,6 +191,17 @@ Context: over this window IWM was roughly flat (292.3→294.0) — the quant los
 
 ## 7. Assumptions & open questions for the user
 
+**Resolved by the audit:**
+- **Spec §7.2 (live config):** VERIFIED real — `kis_trades` shows `env="real"`, three consecutive weekday executes at ~13:01 ET (chained cadence ⇒ `KIS_AUTO_EXECUTE=true`); traded tickers (UFPT/SAP/PTC/CRUS/CLS/SENEB…) match the equal_llm set. Residual: eyeball the repo variables once to confirm `KIS_LEDGER=equal_llm` formally.
+- **Spec §7.4 (overlay publish path):** VERIFIED — orchestrator commits/pushes with verification; daily cadence observed since 2026-06-29 (§1).
+
+**Open questions (user input needed):**
+1. **Tax residency & bracket.** Assumed: Korean tax resident ⇒ overseas-stock capital gains ~22% on *realized* net gains above ₩2.5M/yr. At ~6-day holds, every gain realizes immediately — churn is a tax leak on top of fees. Confirm residency so Phase 3's metric can be after-tax.
+2. **Actual KIS commission + FX.** The doc says ~25 bps; promos as low as ~7–9 bps exist. What is this account's actual overseas commission schedule, and is KRW→USD conversion manual or automatic (and at what spread)? Needed to pin F-06's real number.
+3. **Account funding plan.** The real account shows **$9,039 NAV** vs the stated "initially $20k+". Is further funding imminent? F-10's urgency depends on it (at $20k+ the granularity pressure halves; the churn problem remains).
+4. **KIS-untradable names.** Confirm whether any current target names persistently reject (GRDN/JLHL/WILC-class); if so they should be excluded upstream (F-11).
+5. **PC uptime pattern.** How often is the RS2 machine off/asleep past 08:00? Determines how much F-02/F-03 matter in practice.
+
 ## 8. Method & environment
 
 - **Environment:** Windows 11, Python 3.12.10 (system `python`), git @ `e211748487` (audit start). All forensic tools in `tools/`, stdlib-only, read-only; outputs in `tools/out/` (gitignored).
@@ -179,3 +211,6 @@ Context: over this window IWM was roughly flat (292.3→294.0) — the quant los
   - `ledgers.{name}.state`: `cash, holdings{}, units`; plus `nav_series[]` with per-day `nav` and `benches{IWM,SPY,QQQ,SOXX,DRAM}`.
 - **Plan deviation log:** forensic scripts use `ROOT = parents[4]` (the plan's `parents[3]` was one level short — mechanical fix, no scope change).
 - **Data window caveat:** ledger inception 2026-06-12 → 2026-07-19 (~26 trading days). Mechanical decomposition is meaningful; statistical claims about signal quality are not.
+- **Files read per link:** L1 — `RS2 Local/{orchestrate,run_rs2,valuation_engine,status}.py`, `register_orchestrator_task.ps1`, `RS2-Analyst.Modelfile`, README. L2 — `scripts/score_factors.py`. L3 — `scripts/track_paper_portfolios.py`. L4 — `scripts/sync_kis_portfolio.py`, `scripts/kis/*`, `.github/workflows/kis-sync.yml`, `docs/KIS_SYNC.md`. L5 — `Integrated stock-selection ecosystem.md` (theory doc), `scripts/build_portfolio_plan.py`, `scripts/build_momo_plan.py`, `SYSTEM_SUMMARY.md`.
+- **Forensic artifacts:** `tools/out/{ledger_schema,trades_sample,verdict_flips,overlay_trace,churn_summary,plan_sim,kis_trades,attribution}.json` + `verdict_history.csv` (gitignored; regenerate by re-running the `tools/*.py` scripts).
+- **What this audit cannot conclude:** whether the RS2 selection edge is real (2 weeks, one regime); whether stops would help (needs the Phase 2 daily price panel); exact real cost per side (needs the user's commission schedule, §7 Q2). Everything labeled hypothesis-grade must go through a Phase 3 pre-registered test before being believed.
