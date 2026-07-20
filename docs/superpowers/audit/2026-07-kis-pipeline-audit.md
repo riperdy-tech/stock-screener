@@ -69,6 +69,8 @@ Severity note: F-06/F-10 are performance-leak class (taxonomy P2) and F-13 is pr
 
 **Sound (verified, no finding):** factor-freshness guard (48h) prevents analyzing stale bands; resumable per-ticker state; earnings-window cache-bust forces post-earnings re-research; RN-drop **exit reviews** keep SELL/TRIM calls flowing for held names 30 days after they leave the list (`orchestrate.py:248-259`); hard-vetoed names are retired without wasting a run; RS2's own RN picks get accelerated 7d cadence so they can't stale-decay out (`orchestrate.py:184-199`).
 
+**Addendum (2026-07-20, user Q: "how sensitive are the scoring swings?") — `tools/verdict_sensitivity.py`:** across 493 re-analysis pairs, the deterministic layer is *rock-stable*: median |Δfair value| between re-analyses is **0.49%** (p90 9.9% — the tail is legitimate repricing e.g. earnings). Conviction wobbles median ±1.0 (p90 ±2.5) around hard thresholds (RN gate 9.5). Decisively: **of 164 measurable action-family flips, 99 (60%) happened with |Δfair value| < 5%** — the engine's valuation didn't move; the sampled action/conviction layer flipped anyway (e.g. AGX BULL→HOLD with ΔFV +0.0% and conviction 9.5→4.0; AVGO BULL→HOLD with ΔFV 0.0% while conviction *rose* 11→12). This confirms the user's hypothesis: **the instability is an RS2 final-verdict-layer problem, not genuine boundary change** — F-01 and F-04 are one finding with one fix location (stabilize the action/conviction emission; thresholds second; the DCF backbone needs nothing).
+
 ## 2. Link 2 — Overlay → factor guardrail
 
 **Files audited:** `scripts/score_factors.py` (bands/vetoes/`apply_llm_overlay`, lines 159-266, 395-412); snapshots `public/data/llm_overlay.json` + `factor_scores.json` (2026-07-19) via `tools/overlay_trace.py`.
