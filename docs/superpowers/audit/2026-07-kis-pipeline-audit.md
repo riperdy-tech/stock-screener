@@ -20,6 +20,10 @@
 | F-09 | P3 | 3 | Universe-dropout names carried forever (no exit path); stale exit_pending entries | track_paper_portfolios.py:326-330,1026 |
 | F-10 | P1 | 4 | $9k real NAV × 25 names × daily churn: chronic partial mirror + realized commissions | kis_trades.json; plan_sim.json |
 | F-11 | P2 | 4 | One resting order halts the daily sync; KIS-unlisted names = permanent mirror gaps | sync_kis_portfolio.py:256-261; KIS_SYNC.md:94-99 |
+| F-12 | P0 | 5 | Hard DD ≤ 15% constraint enforced nowhere on the live path; no kill switch on US sync | track_paper_portfolios.py:83-91; §5 |
+| F-13 | P1 | 5 | Live capital allocated on ~2 weeks of evidence (survivor-picking risk across 7 ledgers) | §5; churn_summary.json |
+| F-14 | P2 | 5 | Live book bypasses every existing risk layer (macro de-risk, stops, kill tiers) | §5 matrix |
+| F-15 | P3 | 5 | Dormant IC-recalibration machinery contradicts adopted equal-weight decision | factor-recalibration.yml |
 
 ## 1. Link 1 — RS2 verdict generation
 
@@ -122,6 +126,26 @@ Context: over this window IWM was roughly flat (292.3→294.0) — the quant los
 **Sound (verified):** dry-run default + layered real gates (`--confirm-real`, `REAL MONEY` phrase, split secrets); concurrency group prevents overlapping syncs; loud zero-fill failure; Hamilton apportionment (0.5% cash drag at all scales); exchange-map caching; reconcile idempotence as the structural double-order backstop.
 
 ## 5. Link 5 — Risk & philosophy coherence
+
+**Reference:** the theory doc (`../Integrated stock-selection ecosystem.md`) vs what actually runs on the live path (equal_llm → KIS).
+
+| Theory-doc principle | Where implemented | Where violated on the live path |
+|---|---|---|
+| Multi-stage funnel; weak layers are vetoes/context, not alpha | Chain → Factor Lab → RS2 → guardrail; veto choke point (§2) | — intact |
+| Equal-weight robust factors; no fitted weights | **Implemented:** `factor_lab_v2_equal`, scheme `equal_weight_robust5` (0.2×5, theme dropped from composite) | Recalibration workflow (`factor-recalibration.yml`) still alive — dormant contradiction, config ambiguity only |
+| Combine slow signals with fast to **reduce turnover** | — | **Violated in effect:** 7d verdict re-rolls, hard boundaries, daily rebalance ⇒ 15–35× NAV/yr (F-01/F-04/F-06) |
+| Macro/regime as risk layer ("sin a little") | `build_portfolio_plan.py` macro de-risk (halve sizing at ≥2 flags) | **`equal_llm` bypasses it entirely** — the live book has no macro layer (F-14) |
+| LLM fed verified data only; never recalls financials | RS2 pipeline: screener-fed data, deterministic valuation backbone | — intact (strongest link) |
+| Fractional Kelly sizing | `plan` ledger (quarter-Kelly, capped) | Live book is equal-weight — a deliberate A/B choice, but sizing science idles while real money trades |
+| Forward paper validation **before** capital; minimum track record | Ledger system exists and is honest | **Violated:** live selection (equal_llm) was made on ~10 trading days of paper data (F-13) |
+| Assume decay; validate with deflated statistics | No backtest overclaims anywhere (honest) | Dashboard shows raw Sharpe on 14–36 observations — decorative, not decision-grade; no minimum-track gate guards the ledger-picking decision |
+| Position sizing respects a drawdown budget | plan3 only (tiers −15/−20/−25, paper) | **Violated: no DD enforcement anywhere on the live path** (F-12) |
+
+**Structural findings:**
+- **F-12 (P0, formally recorded — already escalated to the user during the 2026-07-20 brainstorm) — The user's hard constraint (max DD ≤ 15%) is enforced nowhere on the live path.** `PLAN3_DD_*` machinery exists (`track_paper_portfolios.py:83-91`) but is paper-only and plan3-only; `sync_kis_portfolio.py` tracks no peak NAV and has no halt flag; there is no manual kill switch on the US sync (the KOSPI project's KILL_SWITCH pattern was never ported). A 2020/2022-shaped market takes this book to −30%+ with no mechanical response. *Disposition: this is Phase 2's entire mandate (spec §5) — risk engine, simulation-validated, then wired with approval.*
+- **F-13 (P1) — Live capital was allocated on ~2 weeks of evidence, against the system's own validation philosophy.** equal_llm went live with ~10 trading days of paper history (14 nav observations); with 7 ledgers running, picking the best-looking one is survivor-picking the theory doc (§H) explicitly warns against. The *decision* may still be right (selection quality signs are real — §3, §6); the *process* violated the standard. *Proposal: define scaling gates (spec §6 governance) so further tranches wait for pre-agreed evidence; do not add capital on green weeks alone.*
+- **F-14 (P2) — The live book bypasses every risk layer that exists elsewhere in the system.** Macro de-risk lives only in `plan`; stops/kill-switch only in plan3; the book actually holding money (`equal_llm` mirror) has none of them. The system's risk engineering and its capital are in different places. *Disposition: same as F-12 — the Phase 2 risk engine must attach to whatever ledger is mirrored, not to a specific strategy.*
+- **F-15 (P3) — Dormant IC-calibration machinery contradicts the adopted equal-weight philosophy.** `factor-recalibration.yml` + `calibrate_factor_weights.py` still exist and could silently reintroduce fitted weights. *Proposal: disable or clearly mark decision-of-record.*
 
 ## 6. Attribution verdict
 
