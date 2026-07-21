@@ -262,6 +262,25 @@ def apply_llm_overlay(results):
             pctl = clamp(55 + (c - 9.0) * 4, 25, 89)
         e["fct_percentile_llm"] = round(pctl, 1)
         e["fct_band_llm"] = _reband(pctl)
+        # ── parallel STRUCTURED-STANCE band (telemetry only — no ledger consumes it yet).
+        # Gate design 2026-07-21: numbers govern the middle (live MoS + conviction);
+        # stance only vetoes (<=2 or thesis_break) and fast-passes (5, floored at
+        # MoS>=5). Runs alongside the text path so agreement can be measured daily
+        # before any switchover.
+        ss, tb = v.get("stance_score"), bool(v.get("thesis_break"))
+        if isinstance(ss, (int, float)):
+            e["fct_stance"] = ss
+            e["fct_thesis_break"] = tb or None
+            if tb or ss <= 2:
+                e["fct_band_llm_score"] = "demoted"
+            elif (mos is not None and mos >= 30) or \
+                    (c >= 9.5 and mos is not None and mos >= 15) or \
+                    (ss >= 5 and mos is not None and mos >= 5):
+                e["fct_band_llm_score"] = "research_now"
+            elif ss >= 4 and c >= 8.0:
+                e["fct_band_llm_score"] = "watchlist"
+            else:
+                e["fct_band_llm_score"] = "monitor"
         applied += 1
     return applied
 
