@@ -215,6 +215,20 @@ Context: over this window IWM was roughly flat (292.3→294.0) — the quant los
 4. **Therefore the evidence-backed lever is not cadence, and not blunt churn reduction — it is verdict-layer stabilization** (§1 addendum: 60% of flips occur with |ΔFV|<5%). Eliminating *noise* flips cuts fee-paying trades while preserving the informative exits that make trading beat buy-hold. F-06's *proposal* is superseded; its cost measurement is confirmed.
 5. **Quant book (paper-only): band-hysteresis wins decisively and robustly** (E: −0.26% vs A: −2.00%, better DD, ⅓ the trades, stable across all costs and phases) — the quant band's RN-boundary churn is genuinely value-destroying, matching the −2.0% trading-delta attribution (§6). Candidate A/B for the paper `equal` ledger.
 
+## 6b. Verdict-stabilizer replay (2026-07-21) — task #19 evidence
+
+**Method (`tools/stabilizer_replay.py`):** rebuild the LLM book's daily membership from raw verdict history under alternative opinion-change rules; identical portfolio mechanics on every stream; costs per side. Validation: the reimplemented current rule (V0) overlaps the actually-recorded LLM sets 71.8% (Jaccard, 20 days) and returns −0.2% @25 bps vs the prior harness's +0.03% — comparisons are same-harness relative, absolute levels approximate.
+
+| Variant @25 bps | Return | Max DD | Trades |
+|---|---|---|---|
+| V0 current rules | −0.20% | −1.45% | 84 |
+| **V1 two-in-a-row (FV-move exception)** | **+0.93%** | −1.51% | 89 |
+| V1 with 3% / 8% FV thresholds | +0.93% / +0.86% | ~same | 89/93 |
+| V3 sticky thresholds | −0.90% | −2.36% | 74 |
+| V4 = V1+V3 | −0.06% | −2.52% | 68 |
+
+**Findings:** V1 (+1.1pt vs V0) is stable across all cost levels (so the gain is whipsaw avoidance, not fee savings) and across FV thresholds 3/5/8% (not a tuned knob). Mechanism instrumentation: 85 no-valuation-reason family flips were deferred; 7 were retracted at the next review (never traded), 28 confirmed (traded one review later), the rest unresolved in-window; 72 flips backed by a ≥5% fair-value change passed through immediately — numbers-backed decisions unaffected. V3 confirms (with §6a's E_hyst) that impeding numeric exits hurts; dropped. Caveats: 3-week window, same-harness relative comparison. **Proposed implementation:** two-in-a-row rule at the overlay publisher (`RS2 Local/orchestrate.py::aggregate_overlay`, deferred flips published with a pending flag) + the user-requested large-move re-review trigger (`build_queue` force condition, prospective-only).
+
 ## 7. Assumptions & open questions for the user
 
 **Resolved by the audit:**
