@@ -1016,7 +1016,7 @@ export default function CockpitDashboard() {
         return [...reviewed, ...rest];
     }, [lens, filteredRows, rows, bandFilter, llmFilter, sectorFilter, search, stockInfo, llmRankMap, cmpSort]);
 
-    const baseBps: number = (ledgers?.config?.cost_bps as number | undefined) ?? 10;
+    const baseBps: number = (ledgers?.config?.cost_bps as number | undefined) ?? 25;
     const STRAT_LEDGERS = ['plan', 'plan2', 'equal', 'plan3', 'mine', 'plan_llm', 'plan2_llm', 'equal_llm'];
 
     // Cumulative extra commission (in NAV-100 units) per strategy ledger, by date,
@@ -1155,44 +1155,6 @@ export default function CockpitDashboard() {
         const pct = parseFloat(commInput);
         setCommBps(commInput.trim() === '' || !isFinite(pct) || pct < 0 ? null : pct * 100);
     };
-
-    // Turnover & cumulative trading cost per ledger (the fee meter for the churn
-    // finding, audit F-06). Re-rates live with the what-if commission input.
-    const costData = useMemo(() => {
-        const L = ledgers?.ledgers;
-        if (!L) return null;
-        const eff = commBps ?? baseBps;
-        const byDate: Record<string, any> = {};
-        const summary: { name: string; trades: number; turnover: number; cost: number }[] = [];
-        for (const name of STRAT_LEDGERS) {
-            const led = L[name];
-            if (!led) continue;
-            const trades = (led.trades ?? []).slice().sort((a: any, b: any) => (a.date || '').localeCompare(b.date || ''));
-            let cum = 0;
-            for (const t of trades) {
-                if (typeof t.value === 'number' && isFinite(t.value)) cum += Math.abs(t.value);
-                byDate[t.date] = byDate[t.date] || { date: t.date };
-                byDate[t.date][name] = Number((cum * eff / 10000).toFixed(3));
-            }
-            if (trades.length) {
-                summary.push({
-                    name, trades: trades.length,
-                    turnover: Number((cum / 100).toFixed(2)),
-                    cost: Number((cum * eff / 10000).toFixed(2)),
-                });
-            }
-        }
-        const curve = Object.values(byDate).sort((a: any, b: any) => a.date.localeCompare(b.date));
-        // carry each series forward so lines don't gap on non-trading days
-        const lastVal: Record<string, number> = {};
-        for (const row of curve as any[]) {
-            for (const s of summary) {
-                if (row[s.name] != null) lastVal[s.name] = row[s.name];
-                else if (lastVal[s.name] != null) row[s.name] = lastVal[s.name];
-            }
-        }
-        return { curve, summary, eff };
-    }, [ledgers, commBps, baseBps]);
 
     const soldTooEarly = useMemo(() => {
         const L = ledgers?.ledgers;
@@ -1680,54 +1642,6 @@ export default function CockpitDashboard() {
                                 <p className="mt-1 text-[11px] text-muted-foreground">Day {navCurve.length} — lines get meaningful after a few weeks. This page is designed to be boring for a while.</p>
                             )}
                         </div>
-
-                        {/* ── Turnover & trading cost (the fee meter, audit F-06) ─────────── */}
-                        {costData && costData.summary.length > 0 && (
-                            <div className="rounded-lg border border-border bg-card/95 p-3">
-                                <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
-                                    Turnover &amp; trading cost — cumulative @ {(costData.eff / 100).toFixed(2)}%/side
-                                    <span className="ml-2 normal-case tracking-normal">what the churn actually costs · re-rates with the commission input above · same chips hide/show lines</span>
-                                </h3>
-                                <div className="grid gap-3 lg:grid-cols-[1fr_auto]">
-                                    <ResponsiveContainer width="100%" height={200}>
-                                        <LineChart data={costData.curve} margin={{ top: 4, right: 12, bottom: 0, left: 0 }}>
-                                            <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
-                                            <XAxis dataKey="date" tick={{ fontSize: 9 }} stroke="#64748b" minTickGap={28} interval="preserveStartEnd" />
-                                            <YAxis tick={{ fontSize: 10 }} stroke="#64748b" />
-                                            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
-                                            {NAV_SERIES.map(s => (
-                                                <Line key={s.key} type="stepAfter" dataKey={s.key} name={s.name}
-                                                    stroke={s.color} dot={false} connectNulls isAnimationActive={false}
-                                                    hide={hiddenNav.has(s.key)} strokeWidth={1.5} strokeDasharray={s.dash} />
-                                            ))}
-                                        </LineChart>
-                                    </ResponsiveContainer>
-                                    <table className="self-start text-[11px]">
-                                        <thead>
-                                            <tr className="text-left text-muted-foreground">
-                                                <th className="py-0.5 pr-3 font-black uppercase">Ledger</th>
-                                                <th className="py-0.5 pr-3 font-black uppercase">Trades</th>
-                                                <th className="py-0.5 pr-3 font-black uppercase">Turnover</th>
-                                                <th className="py-0.5 font-black uppercase">Cost (pts)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="font-mono">
-                                            {costData.summary.map(s => (
-                                                <tr key={s.name} className="border-t border-border/30">
-                                                    <td className="py-0.5 pr-3 font-bold">{s.name}</td>
-                                                    <td className="py-0.5 pr-3">{s.trades}</td>
-                                                    <td className="py-0.5 pr-3">{s.turnover}×</td>
-                                                    <td className="py-0.5 text-amber-300">{s.cost}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <p className="mt-1 text-[11px] text-muted-foreground">
-                                    Cost points are NAV-100 units: 2.3 pts ≈ 2.3% of starting capital consumed by commissions at the shown rate. Turnover is cumulative traded value ÷ starting NAV.
-                                </p>
-                            </div>
-                        )}
 
                         {hasLlmLedgers && (
                             <div className="flex items-center gap-2">
