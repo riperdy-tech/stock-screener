@@ -116,6 +116,20 @@ def build_membership(variant):
             s = sig.get(t)
             if s and s.get("qv") is not None:
                 continue                      # quant hard-veto guardrail
+            if variant.startswith("V5"):
+                # ROOT-CAUSE variant: decision from deterministic fields ONLY —
+                # no sampled action text, no sampled conviction. Live MoS from
+                # the deterministic fair value; entry_timing is the brake's
+                # (price-data-driven) tier, frozen at analysis.
+                mos = mos_live(v, px_day.get(t))
+                et = (v.get("entry_timing") or "").lower()
+                if variant == "V5_mos":
+                    ok = mos is not None and mos >= 15
+                else:  # V5_mos_entry
+                    ok = mos is not None and mos >= 15 and et in ("buy", "stage")
+                if ok:
+                    today.add(t)
+                continue
             if variant.startswith("V1") or variant == "V4_both":
                 prev = eff.get(t)
                 if prev is None or prev.get("analyzed_date") == v.get("analyzed_date"):
@@ -231,7 +245,8 @@ print(f"V0 validation: mean Jaccard overlap with actual LLM sets = "
       f"{round(100 * sum(overlaps) / len(overlaps), 1)}% over {len(overlaps)} days")
 
 results = {}
-for variant in ("V0_asis", "V1_fv3", "V1_confirm", "V1_fv8", "V3_sticky", "V4_both"):
+for variant in ("V0_asis", "V1_fv3", "V1_confirm", "V1_fv8", "V3_sticky", "V4_both",
+                "V5_mos", "V5_mos_entry"):
     m = build_membership(variant)
     results[variant] = {f"{c}bps": replay(m, c) for c in (10, 25, 40)}
     avg_n = round(sum(len(m[d]) for d in DATES) / len(DATES), 1)
