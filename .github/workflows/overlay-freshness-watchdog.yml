@@ -1,0 +1,37 @@
+# Alerts if the RS2 overlay stops updating (dead PC, dead scheduler, dead push).
+# Cloud-side on purpose: a dead machine cannot alert about itself. Silent no-op
+# when the Telegram secrets are absent.
+name: Overlay Freshness Watchdog
+on:
+  schedule:
+    - cron: "30 10 * * 1-5"   # weekdays 10:30 UTC, after the local 00:00-UTC run window
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check overlay age and alert
+        env:
+          TG_TOKEN: ${{ secrets.KIS_TG_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.KIS_TG_CHAT_ID }}
+        run: |
+          AGE_H=$(python - <<'EOF'
+          import json, datetime
+          ts = json.load(open("public/data/llm_overlay.json"))["generated_at"]
+          dt = datetime.datetime.fromisoformat(ts.replace("Z", "+00:00"))
+          print(round((datetime.datetime.now(datetime.timezone.utc) - dt).total_seconds() / 3600))
+          EOF
+          )
+          echo "overlay age: ${AGE_H}h"
+          if [ "$AGE_H" -gt 36 ]; then
+            echo "::warning::llm_overlay.json is ${AGE_H}h old (>36h)"
+            if [ -n "$TG_TOKEN" ]; then
+              curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+                -d chat_id="${TG_CHAT}" \
+                -d text="[RS2 ops] llm_overlay.json is ${AGE_H}h old (>36h) — orchestrator/PC/push may be down. Verdicts decay toward neutral after 14d." >/dev/null
+              echo "telegram alert sent"
+            fi
+          fi
