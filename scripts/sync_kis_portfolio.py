@@ -216,6 +216,17 @@ def main():
     print(f"KIS sync [{run_id}] env={args.env} ledger={args.ledger} "
           f"execute={args.execute}")
 
+    # Kill switch: repo variable KIS_HALT (any of 1/true/yes) stops the run
+    # before targets, prices, or any order. Flip it from the GitHub mobile app
+    # (repo Settings -> Secrets and variables -> Variables). Halts paper and
+    # real alike; clear the variable to resume.
+    if os.environ.get("KIS_HALT", "").strip().lower() in ("1", "true", "yes"):
+        log_event({"run_id": run_id, "event": "halted", "reason": "KIS_HALT set"})
+        gh_summary([f"## KIS sync {run_id}",
+                    "**HALTED** — repo variable KIS_HALT is set; no orders."])
+        print("HALTED: KIS_HALT is set — exiting before any planning/orders.")
+        return
+
     # ---- targets ----
     book, src = load_ledger_book()
     tgt = ledger_weights(book, args.ledger)
