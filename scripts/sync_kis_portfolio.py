@@ -29,6 +29,10 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from kis.client import EXCD_TO_ORDER, KISClient  # noqa: E402
+from kis.dd_engine import decide, initial_state, rebase, resume  # noqa: E402
+from kis.dd_gate import (  # noqa: E402
+    apply_gate, dd_alert_text, dd_log_line, load_dd_states, save_dd_states,
+)
 from kis.notify import (  # noqa: E402
     format_telegram, sb_upsert, send_telegram, trades_rows,
 )
@@ -210,6 +214,12 @@ def main():
     ap.add_argument("--ignore-market-hours", action="store_true")
     ap.add_argument("--no-wait", action="store_true",
                     help="don't wait for sell fills before buying")
+    ap.add_argument("--dd-resume", action="store_true",
+                    help="clear a drawdown HALT after human review (peak kept; "
+                         "the tier ladder governs re-entry)")
+    ap.add_argument("--dd-rebase", action="store_true",
+                    help="DELIBERATE: restart the drawdown budget from current NAV "
+                         "(accepts a fresh 15%% below here); never routine")
     args = ap.parse_args()
 
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -282,12 +292,61 @@ def main():
         # portfolio of delisted names.
         sys.exit(f"refusing: no price for any of {len(tickers)} tickers")
 
+    # ---- drawdown governor (LIVE per user 2026-07-21; tiers -8/-11/-13, hyst 2) ----
+    # Enforces the max-DD<=15% budget on whatever ledger is mirrored. Fail-open:
+    # a state-store outage trades ungated with a loud alert (KIS_HALT stays the
+    # manual backstop). KIS_DD_DISABLE=true is the emergency bypass.
+    nav_now = cash + sum(sh * prices[t] for t, sh in held.items() if t in prices)
+    dd_gross, dd_halted = 1.0, False
+    if os.environ.get("KIS_DD_DISABLE", "").strip().lower() in ("1", "true", "yes"):
+        print("  DD governor DISABLED via KIS_DD_DISABLE — trading ungated")
+    else:
+        dd_envs, dd_src = load_dd_states()
+        if dd_src == "error":
+            msg = ("[KIS·risk] DD state store unreachable — trading UNGATED this run "
+                   "(fail-open); KIS_HALT remains the manual backstop")
+            print(f"  WARNING: {msg}")
+            send_telegram(msg)
+        else:
+            st = (dd_envs or {}).get(args.env)
+            if args.dd_rebase:
+                st = rebase(nav_now)
+                print(f"  DD: REBASE — new budget base at NAV ${nav_now:,.2f}")
+            elif st and args.dd_resume:
+                st = resume(st)
+                print("  DD: RESUME — halt cleared, peak kept; ladder governs re-entry")
+            if st is None:
+                st = initial_state(nav_now)
+                print(f"  DD: initialized (peak = NAV ${nav_now:,.2f})")
+            st, dd = decide(st, nav_now)
+            dd_envs = {**(dd_envs or {}), args.env: st}
+            if not save_dd_states(dd_envs):
+                print("  ! DD state save failed (non-fatal; retried next run)", file=sys.stderr)
+            print(f"  {dd_log_line(args.env, dd, st)}")
+            log_event({"run_id": run_id, "event": "dd_decision", "env": args.env,
+                       "nav": nav_now, "dd": round(dd["dd"], 4), "gross": dd["gross"],
+                       "action": dd["action"], "halted": st["halted"]})
+            if dd["action"] in ("derisk", "rerisk", "halt"):
+                send_telegram(dd_alert_text(args.env, dd, args.execute))
+            dd_gross, dd_halted = dd["gross"], st["halted"]
+            gated, gate_note = apply_gate(tgt["weights"], dd_gross, dd_halted)
+            if gate_note:
+                print(f"  DD gate: {gate_note}")
+            tgt["weights"] = gated
+
     # ---- plan ----
     plan = compute_plan(tgt["weights"], held, sellable, prices, cash,
                         min_order_usd=args.min_order_usd,
                         min_order_bps=args.min_order_bps,
                         max_order_usd=args.max_order_usd,
                         max_turnover_pct=args.max_turnover)
+    # Reduced DD tier: sells proceed (trims to the scaled weights), fresh buys wait
+    # until the drawdown recovers past the hysteresis line.
+    if 0 < dd_gross < 1.0 and plan.buys:
+        for o in plan.buys:
+            plan.warnings.append(
+                f"{o.ticker}: buy suppressed (DD governor gross {dd_gross:.0%})")
+        plan.orders = [o for o in plan.orders if o.side == "sell"]
     print(f"\nNAV ${plan.nav:,.2f} | {len(plan.sells)} sells, {len(plan.buys)} buys, "
           f"turnover {plan.turnover_pct}%")
     for w in plan.warnings:

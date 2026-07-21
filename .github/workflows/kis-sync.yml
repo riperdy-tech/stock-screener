@@ -46,6 +46,14 @@ on:
         description: "Account diagnostics; places no orders"
         type: boolean
         default: false
+      dd_resume:
+        description: "Clear a drawdown HALT after review (peak kept; ladder governs re-entry)"
+        type: boolean
+        default: false
+      dd_rebase:
+        description: "DELIBERATE: restart the DD budget from current NAV (fresh 15% below here)"
+        type: boolean
+        default: false
       probe_domestic_order:
         description: "With probe: also send ONE unfillable domestic order to test order permission"
         type: boolean
@@ -116,6 +124,8 @@ jobs:
           KIS_MSG_PREFIX: ${{ vars.KIS_MSG_PREFIX || '[KIS·trades]' }}
           # Phone-flippable halt: GitHub app -> repo Settings -> Variables -> KIS_HALT=true
           KIS_HALT: ${{ vars.KIS_HALT || '' }}
+          # Emergency bypass for the drawdown governor (leave unset normally)
+          KIS_DD_DISABLE: ${{ vars.KIS_DD_DISABLE || '' }}
         run: |
           FLAGS=""
           if [ "${{ inputs.probe }}" = "true" ]; then
@@ -126,6 +136,8 @@ jobs:
             [ "${{ vars.KIS_AUTO_EXECUTE }}" = "true" ] && FLAGS="--execute"
           else
             [ "${{ inputs.execute }}" = "true" ] && FLAGS="--execute"
+            [ "${{ inputs.dd_resume }}" = "true" ] && FLAGS="$FLAGS --dd-resume"
+            [ "${{ inputs.dd_rebase }}" = "true" ] && FLAGS="$FLAGS --dd-rebase"
           fi
           # --confirm-real for a chained real run still gated by the repo variable;
           # for a manual real run the guard step above already enforced the phrase.

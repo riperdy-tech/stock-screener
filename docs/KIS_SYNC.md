@@ -89,6 +89,27 @@ Do this during US market hours (the script refuses to trade outside
 4. **Switch to LLM ledger** (if it keeps outperforming): set
    `KIS_LEDGER=equal_llm`. The reconciler treats it as a normal rebalance.
 
+## Drawdown governor (live 2026-07-21)
+
+Every run enforces the max-drawdown budget on the mirrored book (engine:
+`scripts/kis/dd_engine.py`, wiring: `scripts/kis/dd_gate.py`; tiers −8% → half
+gross, −11% → quarter, −13% → liquidate + sticky HALT; ~2pt recovery
+hysteresis). State (peak NAV per env) persists in Supabase `paper_ledgers`
+row id=2. Tier changes and halts alert via Telegram.
+
+- **Reduced tier:** targets are scaled down (sells/trims proceed), fresh buys
+  are suppressed until the drawdown recovers past the hysteresis line.
+- **HALT:** targets cleared → full liquidation, no buys, sticky across runs.
+  After review, resume via workflow input `dd_resume=true` — this KEEPS the
+  peak (the ladder governs re-entry). `dd_rebase=true` restarts the budget
+  from current NAV — deliberate only, never routine.
+- **Fail-open:** if the state store is unreachable the run trades ungated and
+  alerts loudly; `KIS_HALT` remains the manual backstop. Emergency bypass:
+  repo variable `KIS_DD_DISABLE=true`.
+- Validation: `docs/superpowers/audit/tools/dd_replay.py` (stress + Monte
+  Carlo). Hard ≤15% cannot be guaranteed against single-day gaps at full
+  gross (~1% of simulated years reach ≈−16 to −20%); p99 ≈ −15%.
+
 ## Operational notes
 
 - **Unfilled orders abort the run** (prevents double-ordering). They usually
