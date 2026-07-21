@@ -191,6 +191,30 @@ Context: over this window IWM was roughly flat (292.3→294.0) — the quant los
 
 **Stops pre-check (scope note):** testing whether per-position trailing stops would have helped requires max-favorable/adverse-excursion paths, i.e. a daily per-ticker price panel. Deferred to the Phase 2 replay harness (which builds that panel) rather than faking it from monthly closes. The one available proxy — 30-day post-exit returns (§3) — shows quant exits were roughly neutral (mean +0.41%, 36% bounce rate on n=11): no evidence the system sells winners too early; the damage is on the *entry* side.
 
+## 6a. Churn policy replay (2026-07-21) — the F-06 "prove it first" test
+
+**Method (`tools/build_replay_panel.py` + `tools/churn_policy_replay.py`):** 38 dated as-of signal snapshots (git history of `factor_scores.json`, 6/12→7/19) + same-commit prices (`price_history.json` history) → replay identical signals under 10 membership policies × 4 cost scenarios (10/25/40/55 bps per side), tracker-faithful mechanics (equal-weight `max(N,8)`, trade-on-change, full-fund-or-defer, 2-run grace in the baseline). No look-ahead. **Harness validation:** quant `A_current` @10 bps returns −1.90% vs the real tracker's −2.24% over the same window (Δ0.34pt from simplifications: dividends, deferral queue) — credible.
+
+**Results @ the real 25 bps/side (full table in `tools/out/churn_replay_results.json`):**
+
+| Policy | LLM book ret | LLM DD | Quant book ret | Quant DD |
+|---|---|---|---|---|
+| A_current (live behavior) | **+0.03%** | −1.61% | −2.00% | −6.37% |
+| B_confirm2 (2-day entry confirm) | −0.56% | −0.93% | −2.09% | −6.54% |
+| C_slow (3-in/5-out) | −0.60% | −1.81% | −2.34% | −6.38% |
+| D_weekly (5 phase offsets) | +1.08 / +0.52 / −0.16 / +0.26 / −0.34 (mean **+0.27%**) | ~−1.1% | −1.79 to −4.16 (all worse than E) | ~−6% |
+| E_hyst (exit only below WL zone) | −0.87% | −2.11% | **−0.26%** | **−4.64%** |
+| F_buyhold (never sell) | **−2.27%** | −3.90% | −0.47% | −4.84% |
+
+(IWM over the same window: +0.61%. LLM window ≈3 weeks, quant ≈5.5 weeks — indicative, not proof.)
+
+**Honest verdict on F-06 — partially overturned, refined:**
+1. **The user's earlier test was right about the core claim: on the live LLM book, trading beats not-trading.** Never-selling loses 2.3pts vs current behavior — RS2's demotions carry real information. "Reduce churn" naively (entry confirmation, slow exits, WL-hysteresis) made the live book *worse* — entries also carry immediate-days alpha (B/C/E all underperform A).
+2. **The cost claim stands:** each +15 bps of side-cost consistently costs ~0.6pt per 3 weeks on the live behavior (+0.64 → +0.03 → −0.57 → −1.16 across 10/25/40/55). At the real 25 bps, the current cadence pays ≈1 NAV-pt per 3 weeks in fees (buy-in inflated; steady-state roughly half).
+3. **Weekly cadence is a phase lottery on 3 weeks of data** (mean +0.24pt vs A, spread ±0.7pt across offsets) — not adoptable on this evidence.
+4. **Therefore the evidence-backed lever is not cadence, and not blunt churn reduction — it is verdict-layer stabilization** (§1 addendum: 60% of flips occur with |ΔFV|<5%). Eliminating *noise* flips cuts fee-paying trades while preserving the informative exits that make trading beat buy-hold. F-06's *proposal* is superseded; its cost measurement is confirmed.
+5. **Quant book (paper-only): band-hysteresis wins decisively and robustly** (E: −0.26% vs A: −2.00%, better DD, ⅓ the trades, stable across all costs and phases) — the quant band's RN-boundary churn is genuinely value-destroying, matching the −2.0% trading-delta attribution (§6). Candidate A/B for the paper `equal` ledger.
+
 ## 7. Assumptions & open questions for the user
 
 **Resolved by the audit:**
