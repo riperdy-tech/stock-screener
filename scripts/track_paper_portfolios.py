@@ -61,7 +61,7 @@ DIVIDENDS_JSON = DATA / "dividends.json"
 # through run_target_ledger / run_mine_ledger.
 dividends_holder = {}
 
-COST_BPS = 10
+COST_BPS = 25   # real KIS overseas commission per side (user 2026-07-20); was 10 (idealized)
 BENCHMARKS = ["IWM", "SPY", "QQQ", "SOXX", "DRAM"]  # small-cap, S&P500, Nasdaq-100, semis, memory
 PRIMARY_BENCHMARK = "IWM"
 START_NAV = 100.0
