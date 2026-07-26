@@ -1,5 +1,5 @@
 {
-  "cash_pct": 48.9,
+  "cash_pct": 47.65,
   "config_used": {
     "base_position_pct": 3.0,
     "high_risk_archetypes": [
@@ -24,14 +24,14 @@
     "theme_cap_pct": 30.0
   },
   "disclaimer": "Decision support only. Not investment advice, not an order list. Every position requires human review of the con line and flags.",
-  "generated_at": "2026-07-25T12:44:41Z",
-  "invested_pct": 51.1,
+  "generated_at": "2026-07-26T14:27:52Z",
+  "invested_pct": 52.35,
   "label": "Value core (Kelly-sized)",
   "macro_derisk_active": false,
   "macro_flags": [],
   "plan2": {
-    "cash_pct": 21.18,
-    "invested_pct": 78.82,
+    "cash_pct": 19.93,
+    "invested_pct": 80.07,
     "label": "Hybrid (value core + quality sleeve)",
     "note": "Value core (Kelly, only names priced below demonstrated growth) PLUS a quality sleeve buying top-ranked names regardless of valuation gap, capped at 35.0% of book. Captures expensive quality leaders the core skips.",
     "position_count": 30,
@@ -86,7 +86,7 @@
         "fct_rank": 3,
         "fct_vol": 0.3301,
         "forensic_flags": [],
-        "gpr_level": null,
+        "gpr_level": 1,
         "high_risk_class": false,
         "informed_demand": 0,
         "m_score": -2.593,
@@ -253,7 +253,7 @@
         "forensic_flags": [],
         "gpr_level": null,
         "high_risk_class": false,
-        "informed_demand": 0,
+        "informed_demand": 1,
         "m_score": -3.129,
         "pdm_band": "no_data",
         "pdm_signal": null,
@@ -284,7 +284,7 @@
         "fct_rank": 16,
         "fct_vol": 0.2707,
         "forensic_flags": [],
-        "gpr_level": 2,
+        "gpr_level": 1,
         "high_risk_class": false,
         "informed_demand": 0,
         "m_score": -2.622,
@@ -298,7 +298,7 @@
         "survivability": 80,
         "symbol": "LAUR",
         "theme_primary": null,
-        "weight_pct": 3.75
+        "weight_pct": 5.0
       },
       {
         "accruals_ratio": -0.2739,
@@ -950,38 +950,6 @@
         "weight_pct": 1.75
       },
       {
-        "accruals_ratio": -0.0018,
-        "archetype": "B",
-        "composite": 53.24,
-        "con": "survivability leverage stress: net cash; survivability funding gap: positive FCF is self-funding; survivability drawdown history: max drawdown 18.1% over short ~2yr window; PRICE_EXTENDED: current price 5.1x above 2yr low (mean-reversion risk, short ~2yr window)",
-        "exit_triggers": [
-          "dropped out of research_now band",
-          "any forensic flag newly fires"
-        ],
-        "expectations_gap_pts": 22.2,
-        "f_score": 6,
-        "fct_band": "research_now",
-        "fct_composite": 90.36,
-        "fct_rank": 35,
-        "fct_vol": 0.4585,
-        "forensic_flags": [],
-        "gpr_level": null,
-        "high_risk_class": false,
-        "informed_demand": 1,
-        "m_score": null,
-        "pdm_band": "watch",
-        "pdm_signal": 14,
-        "pro": "FCF yield 1.4% percentile valuation signal + high ROIC and revenue growth",
-        "rank": 35,
-        "rev_nominated": false,
-        "sector": "Industrials",
-        "sizing_method": "quality_sleeve",
-        "survivability": 80,
-        "symbol": "GEV",
-        "theme_primary": "energy_transition",
-        "weight_pct": 2.0
-      },
-      {
         "accruals_ratio": -0.0773,
         "archetype": "A",
         "composite": 48.82,
@@ -994,7 +962,7 @@
         "f_score": 5,
         "fct_band": "research_now",
         "fct_composite": 90.33,
-        "fct_rank": 37,
+        "fct_rank": 36,
         "fct_vol": 0.3197,
         "forensic_flags": [],
         "gpr_level": 1,
@@ -1004,7 +972,7 @@
         "pdm_band": "skip",
         "pdm_signal": 0,
         "pro": "FCF yield 4.2% percentile valuation signal + positive FCF, moderate growth profile",
-        "rank": 37,
+        "rank": 36,
         "rev_nominated": false,
         "sector": "Technology",
         "sizing_method": "quality_sleeve",
@@ -1012,12 +980,44 @@
         "symbol": "DGII",
         "theme_primary": "physical_ai",
         "weight_pct": 1.88
+      },
+      {
+        "accruals_ratio": -0.0018,
+        "archetype": "B",
+        "composite": 53.24,
+        "con": "survivability leverage stress: net cash; survivability funding gap: positive FCF is self-funding; survivability drawdown history: max drawdown 18.1% over short ~2yr window; PRICE_EXTENDED: current price 5.1x above 2yr low (mean-reversion risk, short ~2yr window)",
+        "exit_triggers": [
+          "dropped out of research_now band",
+          "any forensic flag newly fires"
+        ],
+        "expectations_gap_pts": 22.2,
+        "f_score": 6,
+        "fct_band": "research_now",
+        "fct_composite": 90.31,
+        "fct_rank": 37,
+        "fct_vol": 0.4585,
+        "forensic_flags": [],
+        "gpr_level": null,
+        "high_risk_class": false,
+        "informed_demand": 1,
+        "m_score": null,
+        "pdm_band": "watch",
+        "pdm_signal": 14,
+        "pro": "FCF yield 1.4% percentile valuation signal + high ROIC and revenue growth",
+        "rank": 37,
+        "rev_nominated": false,
+        "sector": "Industrials",
+        "sizing_method": "quality_sleeve",
+        "survivability": 80,
+        "symbol": "GEV",
+        "theme_primary": "energy_transition",
+        "weight_pct": 2.0
       }
     ],
     "sector_allocation": {
       "Communication Services": 2.0,
       "Consumer Cyclical": 11.53,
-      "Consumer Defensive": 7.72,
+      "Consumer Defensive": 8.97,
       "Healthcare": 24.65,
       "Industrials": 17.27,
       "Technology": 15.65
@@ -1083,7 +1083,7 @@
       "fct_rank": 3,
       "fct_vol": 0.3301,
       "forensic_flags": [],
-      "gpr_level": null,
+      "gpr_level": 1,
       "high_risk_class": false,
       "informed_demand": 0,
       "m_score": -2.593,
@@ -1250,7 +1250,7 @@
       "forensic_flags": [],
       "gpr_level": null,
       "high_risk_class": false,
-      "informed_demand": 0,
+      "informed_demand": 1,
       "m_score": -3.129,
       "pdm_band": "no_data",
       "pdm_signal": null,
@@ -1281,7 +1281,7 @@
       "fct_rank": 16,
       "fct_vol": 0.2707,
       "forensic_flags": [],
-      "gpr_level": 2,
+      "gpr_level": 1,
       "high_risk_class": false,
       "informed_demand": 0,
       "m_score": -2.622,
@@ -1295,7 +1295,7 @@
       "survivability": 80,
       "symbol": "LAUR",
       "theme_primary": null,
-      "weight_pct": 3.75
+      "weight_pct": 5.0
     },
     {
       "accruals_ratio": -0.2739,
@@ -1531,7 +1531,7 @@
   ],
   "sector_allocation": {
     "Consumer Cyclical": 9.65,
-    "Consumer Defensive": 5.72,
+    "Consumer Defensive": 6.97,
     "Healthcare": 24.65,
     "Industrials": 9.51,
     "Technology": 1.57
@@ -1630,16 +1630,16 @@
       "symbol": "AVGO"
     },
     {
-      "reason": "no Kelly edge (expectations gap +22pts >= 0: price already assumes more growth than demonstrated)",
-      "symbol": "GEV"
-    },
-    {
       "reason": "sector cap Healthcare (25.0%)",
       "symbol": "AZN"
     },
     {
       "reason": "no Kelly edge (expectations gap +13pts >= 0: price already assumes more growth than demonstrated)",
       "symbol": "DGII"
+    },
+    {
+      "reason": "no Kelly edge (expectations gap +22pts >= 0: price already assumes more growth than demonstrated)",
+      "symbol": "GEV"
     },
     {
       "reason": "no Kelly edge (expectations gap +4pts >= 0: price already assumes more growth than demonstrated)",

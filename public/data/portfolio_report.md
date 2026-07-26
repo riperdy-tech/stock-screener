@@ -1,8 +1,8 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-07-25T12:44:41Z
+Generated: 2026-07-26T14:27:52Z
 Macro flags: none
-Invested: **51.1%**  |  Cash: **48.9%**  |  Positions: 15
+Invested: **52.35%**  |  Cash: **47.65%**  |  Positions: 15
 
 | # | Sym | Wt% | Arch | Comp | Surv | FctRank | FctBand | Theme | PdmBand | F | M | Flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -13,7 +13,7 @@ Invested: **51.1%**  |  Cash: **48.9%**  |  Positions: 15
 | 11 | **VIK** | 2.25 | B | 63.64 | 75 | 11 | research_now | - | no_data | 6 | - | - |
 | 14 | **KRYS** | 2.25 | B | 45.38 | 75 | 14 | research_now | - | no_data | 6 | - | - |
 | 15 | **KNSA** | 5.0 | B | 45.91 | 75 | 15 | research_now | - | no_data | 6 | -3.129 | - |
-| 16 | **LAUR** | 3.75 | B | 78.68 | 80 | 16 | research_now | - | no_data | 5 | -2.622 | - |
+| 16 | **LAUR** | 5.0 | B | 78.68 | 80 | 16 | research_now | - | no_data | 5 | -2.622 | - |
 | 23 | **AGX** | 3.15 | B | 77.41 | 75 | 23 | research_now | - | no_data | 6 | -4.032 | - |
 | 31 | **ABNB** | 2.4 | B | 81.76 | 80 | 31 | research_now | - | no_data | 5 | - | - |
 | 34 | **BLBD** | 2.61 | B | 84.78 | 75 | 34 | research_now | - | no_data | 8 | -3.432 | - |
@@ -26,7 +26,7 @@ Invested: **51.1%**  |  Cash: **48.9%**  |  Positions: 15
 - Healthcare: 24.65%
 - Consumer Cyclical: 9.65%
 - Industrials: 9.51%
-- Consumer Defensive: 5.72%
+- Consumer Defensive: 6.97%
 - Technology: 1.57%
 
 ## Theme allocation
@@ -56,9 +56,9 @@ Invested: **51.1%**  |  Cash: **48.9%**  |  Positions: 15
 - MRK: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
 - POWL: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - AVGO: no Kelly edge (expectations gap +14pts >= 0: price already assumes more growth than demonstrated)
-- GEV: no Kelly edge (expectations gap +22pts >= 0: price already assumes more growth than demonstrated)
 - AZN: sector cap Healthcare (25.0%)
 - DGII: no Kelly edge (expectations gap +13pts >= 0: price already assumes more growth than demonstrated)
+- GEV: no Kelly edge (expectations gap +22pts >= 0: price already assumes more growth than demonstrated)
 - VRTX: no Kelly edge (expectations gap +4pts >= 0: price already assumes more growth than demonstrated)
 - GMED: sector cap Healthcare (25.0%)
 - DELL: no Kelly edge (expectations gap +22pts >= 0: price already assumes more growth than demonstrated)
