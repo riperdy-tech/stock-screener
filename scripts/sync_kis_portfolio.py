@@ -34,7 +34,7 @@ from kis.dd_gate import (  # noqa: E402
     apply_gate, dd_alert_text, dd_log_line, load_dd_states, save_dd_states,
 )
 from kis.notify import (  # noqa: E402
-    format_telegram, sb_upsert, send_telegram, trades_rows,
+    format_telegram, pnl_suffix, sb_upsert, send_telegram, trades_rows,
 )
 from kis.reconcile import compute_plan  # noqa: E402
 from kis.targets import ledger_weights, load_ledger_book  # noqa: E402
@@ -259,6 +259,7 @@ def main():
     held = {p["ticker"]: p["shares"] for p in positions}
     sellable = {p["ticker"]: p["sellable"] for p in positions}
     held_exch = {p["ticker"]: p["exch_order_cd"] for p in positions}
+    avg_cost = {p["ticker"]: p.get("avg_cost", 0) for p in positions}
     cash, cash_src, cash_row = client.usd_cash()
     print(f"account: {len(held)} positions, USD cash {cash:,.2f} (source: {cash_src})")
     if cash_row:
@@ -387,7 +388,8 @@ def main():
         limit = o.price * SELL_LIMIT_BUFFER
         res = client.place_order("sell", order_cd[o.ticker], o.ticker, o.qty, limit)
         results.append({**vars(o), **res, "limit": round(limit, 4)})
-        print(f"  sell {o.ticker} x{o.qty} @ {limit:.2f} -> "
+        print(f"  sell {o.ticker} x{o.qty} @ {limit:.2f}"
+              f"{pnl_suffix(avg_cost.get(o.ticker, 0), limit, o.qty)} -> "
               f"{'OK ' + str(res['order_no']) if res['ok'] else 'REJECT: ' + res['msg']}")
 
     if plan.sells and plan.buys and not args.no_wait:
@@ -439,7 +441,7 @@ def main():
         try:
             prefix = os.environ.get("KIS_MSG_PREFIX", "[KIS·trades]")
             msg = format_telegram(prefix, run_id, args.env, args.ledger,
-                                  results, plan.nav, cash_after)
+                                  results, plan.nav, cash_after, avg_cost)
             if send_telegram(msg):
                 print("  telegram: digest sent")
         except Exception as e:

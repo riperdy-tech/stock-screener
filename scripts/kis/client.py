@@ -238,7 +238,7 @@ class KISClient:
     # ---------- account ----------
 
     def balance(self) -> list[dict]:
-        """Held US positions: [{ticker, shares, sellable, exch_order_cd, name}].
+        """Held US positions: [{ticker, shares, sellable, exch_order_cd, name, avg_cost}].
 
         Real accounts accept OVRS_EXCG_CD=NASD as "entire US"; paper accounts
         need per-exchange queries, so we query all three and merge either way
@@ -266,6 +266,7 @@ class KISClient:
                         "sellable": float(it.get("ord_psbl_qty") or qty),
                         "exch_order_cd": (it.get("ovrs_excg_cd") or excg).strip(),
                         "name": (it.get("ovrs_item_name") or "").strip(),
+                        "avg_cost": float(it.get("pchs_avg_pric") or 0),
                     }
                 if cont in ("F", "M"):
                     fk = body.get("ctx_area_fk200", "")

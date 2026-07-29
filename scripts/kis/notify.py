@@ -32,11 +32,23 @@ def _sign(ok) -> str:
     return "✅" if ok else "❌"
 
 
+def pnl_suffix(cost: float, price: float, qty: int) -> str:
+    """" (+$50, +0.25%)" P/L of selling qty @ price vs avg cost; "" if no cost."""
+    if not cost or cost <= 0:
+        return ""
+    pnl = (price - cost) * qty
+    pct = (price / cost - 1) * 100
+    return f" ({'+' if pnl >= 0 else '-'}${abs(pnl):,.0f}, {'+' if pct >= 0 else '-'}{abs(pct):.2f}%)"
+
+
 def format_telegram(prefix: str, run_id: str, env: str, ledger: str,
-                    results: list[dict], nav: float, cash: float) -> str:
+                    results: list[dict], nav: float, cash: float,
+                    avg_cost: dict[str, float] | None = None) -> str:
     """One digest message. `results` is the list sync_kis_portfolio.py builds:
     each an order's vars() merged with the place_order result. Skipped buys may
-    lack a 'limit' key — rendered as '@ —'."""
+    lack a 'limit' key — rendered as '@ —'. `avg_cost` (ticker -> cost basis)
+    is optional; when present, sell rows get a "(+$x, +y%)" P/L suffix."""
+    avg_cost = avg_cost or {}
     ok_n = sum(1 for r in results if r.get("ok"))
     lines = [f"{prefix} {run_id} {env}/{ledger}",
              f"Placed {ok_n}/{len(results)}"]
@@ -45,6 +57,8 @@ def format_telegram(prefix: str, run_id: str, env: str, ledger: str,
         px = f"{limit:.2f}" if isinstance(limit, (int, float)) else "—"
         line = f"{_sign(r.get('ok'))} {str(r.get('side', '')).upper()} " \
                f"{r.get('ticker', '?')} x{r.get('qty', 0)} @ {px}"
+        if r.get("side") == "sell" and isinstance(limit, (int, float)):
+            line += pnl_suffix(avg_cost.get(r.get("ticker"), 0), limit, r.get("qty", 0))
         if not r.get("ok") and r.get("msg"):
             line += f" — {r['msg']}"
         lines.append(line)
