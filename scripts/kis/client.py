@@ -278,24 +278,30 @@ class KISClient:
                 break  # NASD already covered the whole US market
         return list(rows.values())
 
-    def usd_deposit(self) -> tuple[float, dict]:
-        """Plain USD deposit (no collateral, no margin). (amount, raw_row)."""
+    def _present_usd(self) -> tuple[float, dict, dict]:
+        """One inquire-present-balance call -> (settled_usd, usd_row, totals).
+
+        `totals` is output3, which carries tot_asst_amt — KIS's own view of the
+        whole account. Returned from the SAME call so the NAV cross-check costs
+        no extra request.
+        """
         body, _ = self._get(
             "/uapi/overseas-stock/v1/trading/inquire-present-balance",
             TR["present"][self.env],
             {"CANO": self.cano, "ACNT_PRDT_CD": self.acnt_prdt_cd,
              "WCRC_FRCR_DVSN_CD": "02", "NATN_CD": "840",
              "TR_MKET_CD": "00", "INQR_DVSN_CD": "00"})
+        totals = body.get("output3") or {}
         for row in body.get("output2", []) or []:
             if (row.get("crcy_cd") or "").upper() == "USD":
                 for field in ("frcr_drwg_psbl_amt_1", "frcr_dncl_amt_2", "frcr_dncl_amt2"):
                     v = row.get(field)
                     if v not in (None, ""):
-                        return float(v), row
-                return 0.0, row
-        return 0.0, {}
+                        return float(v), row, totals
+                return 0.0, row, totals
+        return 0.0, {}, totals
 
-    def usd_funds(self) -> dict:
+    def usd_funds(self, with_orderable: bool = True) -> dict:
         """USD split into what we OWN (for NAV) and what we can SPEND (for orders).
 
         These are different numbers and conflating them is a trap. Shares sold
@@ -306,12 +312,18 @@ class KISClient:
         the buy budget must not (KIS decides what is spendable today).
 
         Returns {settled, sell_in_transit, buy_in_transit, nav_cash, orderable,
-                 source, row, bp}:
-          nav_cash  = settled + sell_in_transit - buy_in_transit
-          orderable = own settled cash + reusable sale proceeds (매도대금 재사용),
-                      capped by what KIS reports so we never spend collateral.
+                 kis_total_usd, source, row, bp}:
+          nav_cash      = settled + sell_in_transit - buy_in_transit
+          orderable     = own settled cash + reusable sale proceeds (매도대금
+                          재사용), capped so we never spend collateral.
+          kis_total_usd = KIS's own tot_asst_amt converted at the bulletin rate;
+                          an INDEPENDENT figure the caller cross-checks NAV
+                          against. 0.0 when unavailable (caller skips the check).
+
+        with_orderable=False skips the 매수가능금액 request when only NAV cash is
+        needed (the post-run snapshot), saving a call and a failure mode.
         """
-        settled, row = self.usd_deposit()
+        settled, row, totals = self._present_usd()
 
         def rowf(key):
             return float(row.get(key) or 0)
@@ -319,14 +331,25 @@ class KISClient:
         sell_in_transit = rowf("frcr_sll_amt_smtl")
         buy_in_transit = rowf("frcr_buy_amt_smtl")
 
+        # KIS's own total assets (KRW) at the bulletin FX rate. Independent of
+        # everything above, so it catches errors in our own NAV arithmetic.
+        # NOTE: tot_asst_amt spans the whole account including any KRW-denominated
+        # assets; on a KRW-funded account the caller's tolerance must absorb that.
+        fx = float(row.get("frst_bltn_exrt") or 0)
+        tot_krw = float(totals.get("tot_asst_amt") or 0)
+        kis_total_usd = (tot_krw / fx) if (fx > 0 and tot_krw > 0) else 0.0
+
         # 매수가능금액 is a SECOND endpoint and must never take the run down: this
         # is called again after the sells are placed, where an exception would
         # strand the book half-rebalanced (sold, never bought). Degrade instead.
-        try:
-            bp = self.buying_power("AAPL", "NASD", 200.0)
-            bp_ok = True
-        except Exception:
-            bp, bp_ok = {}, False
+        if not with_orderable:
+            bp, bp_ok = {}, True
+        else:
+            try:
+                bp = self.buying_power("AAPL", "NASD", 200.0)
+                bp_ok = True
+            except Exception:
+                bp, bp_ok = {}, False
 
         def bpf(key):
             return float(bp.get(key) or 0)
@@ -359,6 +382,7 @@ class KISClient:
                 "buy_in_transit": buy_in_transit,
                 "nav_cash": settled + sell_in_transit - buy_in_transit,
                 "orderable": orderable,
+                "kis_total_usd": kis_total_usd,
                 "source": source, "row": row, "bp": bp}
 
     def buying_power(self, ticker: str, exch_order_cd: str, price: float) -> dict:

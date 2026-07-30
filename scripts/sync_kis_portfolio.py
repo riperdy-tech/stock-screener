@@ -1,9 +1,9 @@
 """sync_kis_portfolio.py — mirror a paper-trading ledger into a KIS account.
 
-Reads target weights from the site's ledger book (default: the `equal`
-ledger), compares them with actual KIS holdings, and reconciles with limit
-orders through the KIS Open API. Reconciliation, not trade-replay: missed
-runs, partial fills and rejects self-heal on the next run.
+Reads target weights from the site's ledger book (which ledger is REQUIRED —
+--ledger or KIS_LEDGER, no default), compares them with actual KIS holdings,
+and reconciles with limit orders through the KIS Open API. Reconciliation, not
+trade-replay: missed runs, partial fills and rejects self-heal on the next run.
 
 DRY-RUN BY DEFAULT. Nothing is sent without --execute.
 Real accounts additionally require --confirm-real.
@@ -207,8 +207,11 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--env", default=os.environ.get("KIS_ENV", "paper"),
                     choices=["paper", "real"])
-    ap.add_argument("--ledger", default=os.environ.get("KIS_LEDGER", "equal"),
-                    help="ledger key in the book (equal, equal_llm, plan, ...)")
+    # No default ledger on purpose: silently mirroring the wrong book is the
+    # worst failure this script has. Pass --ledger or set KIS_LEDGER.
+    ap.add_argument("--ledger", default=os.environ.get("KIS_LEDGER", ""),
+                    help="ledger key in the book (equal, equal_llm, plan, ...); "
+                         "required — no default")
     ap.add_argument("--execute", action="store_true", help="actually place orders")
     ap.add_argument("--confirm-real", action="store_true",
                     help="required (with --execute) to trade the real account")
@@ -234,6 +237,10 @@ def main():
                     help="DELIBERATE: restart the drawdown budget from current NAV "
                          "(accepts a fresh 15%% below here); never routine")
     args = ap.parse_args()
+    if not args.ledger.strip():
+        sys.exit("no ledger: pass --ledger or set KIS_LEDGER (e.g. equal_llm). "
+                 "There is deliberately no default — mirroring the wrong book is worse "
+                 "than not trading.")
 
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     print(f"KIS sync [{run_id}] env={args.env} ledger={args.ledger} "
@@ -318,6 +325,39 @@ def main():
     # a state-store outage trades ungated with a loud alert (KIS_HALT stays the
     # manual backstop). KIS_DD_DISABLE=true is the emergency bypass.
     nav_now = cash + sum(sh * prices[t] for t, sh in held.items() if t in prices)
+
+    # ---- NAV sanity: cross-check against KIS's own total-assets figure -------
+    # Our NAV drives BOTH the drawdown verdict and every position size, so a
+    # wrong NAV is not a small error — on 2026-07-30 a settled-cash-only NAV read
+    # -46% on an account at its high-water mark and would have liquidated the
+    # book. tot_asst_amt is computed by KIS independently of our arithmetic, so a
+    # material divergence means we cannot trust our own number. Fail CLOSED: no
+    # orders at all, rather than de-risking (or sizing) off a figure we doubt.
+    # KIS_HALT remains the manual backstop; KIS_NAV_TOL_ABORT tunes the trip.
+    kis_total = funds.get("kis_total_usd") or 0.0
+    if kis_total > 0:
+        div = abs(nav_now - kis_total) / kis_total
+        warn_at = float(os.environ.get("KIS_NAV_TOL_WARN", "3")) / 100
+        abort_at = float(os.environ.get("KIS_NAV_TOL_ABORT", "10")) / 100
+        print(f"  NAV check: ours ${nav_now:,.2f} vs KIS total ${kis_total:,.2f} "
+              f"({div:.2%} divergence)")
+        if div >= abort_at:
+            msg = (f"[KIS·risk] {args.env}: ABORT — computed NAV ${nav_now:,.2f} diverges "
+                   f"{div:.1%} from KIS total assets ${kis_total:,.2f} "
+                   f"(limit {abort_at:.0%}). NO orders placed; drawdown state untouched.")
+            print(f"  {msg}")
+            log_event({"run_id": run_id, "event": "nav_mismatch_abort", "env": args.env,
+                       "nav": nav_now, "kis_total": kis_total, "divergence": round(div, 4)})
+            send_telegram(msg)
+            gh_summary([f"## KIS sync {run_id} — {args.env}/{args.ledger}", "", msg])
+            sys.exit("refusing: NAV disagrees with KIS total assets")
+        if div >= warn_at:
+            send_telegram(f"[KIS·risk] {args.env}: NAV divergence {div:.1%} "
+                          f"(ours ${nav_now:,.2f} vs KIS ${kis_total:,.2f}) — proceeding, "
+                          f"but check for unpriced holdings or FX drift.")
+    else:
+        print("  NAV check: skipped (KIS total assets unavailable)")
+
     dd_gross, dd_halted = 1.0, False
     if os.environ.get("KIS_DD_DISABLE", "").strip().lower() in ("1", "true", "yes"):
         print("  DD governor DISABLED via KIS_DD_DISABLE — trading ungated")
@@ -451,7 +491,8 @@ def main():
     # non-fatal by contract; failures here are logged, never raised.
     if results:
         try:
-            cash_after = client.usd_funds()["nav_cash"]  # post-run snapshot
+            # nav_cash only — no need for 매수가능금액 on a post-run snapshot.
+            cash_after = client.usd_funds(with_orderable=False)["nav_cash"]
         except Exception:
             cash_after = budget  # fall back to our internal estimate
         try:

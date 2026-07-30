@@ -71,6 +71,10 @@ backtest_fetch.log
 # KIS sync
 scripts/kis/.token_*.json
 /logs/
+# Ticker->exchange cache, rebuilt from the quote API on demand. Never commit it:
+# CI checks out fresh so it is always regenerated anyway, and a stale or
+# locally-polluted map silently misroutes quotes.
+scripts/kis/exchange_map.json
 
 # defeatbeta bulk-data local cache (regenerated each run)
 .defeatbeta_cache/

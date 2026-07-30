@@ -132,6 +132,31 @@ Context: over this window IWM was roughly flat (292.3→294.0) — the quant los
 
 **Q2 — Partial fills / sells-first: self-heals, but real data shows chronic starvation.** Sells place first, up to 3-min fill wait, buys budgeted from live `usd_cash()` (`:314-347`). In the real rows, **PTC, CRUS, CLS were skipped "insufficient settled cash" on two consecutive days** — the mirror is persistently incomplete at this NAV; deltas roll forward daily (no double-ordering observed — reconcile-to-weights holds). → **F-10**.
 
+> **ADDENDUM 2026-07-30 — F-10 root cause found; was NOT a NAV-size problem.**
+> The starvation was a bug, not a small account. `usd_cash()` returned
+> `frcr_drwg_psbl_amt_1` — the *withdrawable* deposit — as the buy budget, so
+> unsettled sale proceeds were invisible. KIS in fact permits reusing them
+> (`sll_ruse_psbl_amt`, 매도대금 재사용): on 07-30 the account had **$2,349.89
+> settled but $12,574.32 orderable**, and buys were being skipped for money that
+> was available.
+>
+> The same number was also used for NAV, which was the more dangerous half: sold
+> shares leave the balance immediately while proceeds settle T+2, so NAV dropped
+> the money in transit and manufactured a drawdown. The recorded 07-28→07-30
+> series (21,877 → 20,605 → 19,588, read as −10.5%) was an artifact — true NAV
+> **rose** 20,778 → 22,120. The next run would have computed −46%, tripped the
+> −13% sticky HALT, and liquidated the book.
+>
+> Fixed in `0103d8cb20` by splitting the two questions in `usd_funds()`:
+> `nav_cash = settled + sell_in_transit − buy_in_transit` (settlement-invariant)
+> and `orderable = settled + reusable proceeds` (never collateral). `usd_cash()`
+> is removed; references to it above are historical. Regression tests in
+> `scripts/test_kis_funds.py` are built from the live 07-30 probe payload.
+>
+> Q4 below remains sound in its conclusion (no margin path was taken), but its
+> premise that preferring the plain deposit is simply conservative was wrong —
+> that preference is what starved the buys and broke NAV.
+
 **Q3 — Real cost per side.** Marketable-limit crossing ±0.3% + documented real commission "~25 bps + FX spread" (`docs/KIS_SYNC.md:84-85`) ⇒ realistic all-in ≈ **0.4–0.6%/side ≈ 5× the paper model's 10 bps**. Applied to §3's measured turnover, **F-06 is confirmed as a real, first-order leak**: at the observed 6–12 orders/day on a $9k book (~20–30% NAV/day traded in the buy-in/churn phase), cost drag is on the order of 0.1–0.2% of NAV *per day* while churn persists.
 
 **Q4 — FX / margin.** `usd_cash()` prefers the plain USD deposit and deliberately ignores the levered `frcr_ord_psbl_amt1`; a real account with zero deposit refuses to trade on collateral without `KIS_ALLOW_MARGIN=1` (`client.py:297-315`, `sync:246-254`). Real rows show a positive cash deposit being spent down — no margin path observed. **Sound.**

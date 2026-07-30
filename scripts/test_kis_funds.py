@@ -21,7 +21,9 @@ from kis.dd_engine import decide  # noqa: E402
 # --- real 2026-07-30 probe output (inquire-present-balance USD row) ----------
 ROW = {"crcy_cd": "USD", "frcr_buy_amt_smtl": "1015.09",
        "frcr_sll_amt_smtl": "11308.680000", "frcr_dncl_amt_2": "2349.890000",
-       "frcr_drwg_psbl_amt_1": "2349.890000"}
+       "frcr_drwg_psbl_amt_1": "2349.890000", "frst_bltn_exrt": "1450.10000000"}
+# output3 from the same call — KIS's own total-assets figure, in KRW
+TOTALS = {"tot_asst_amt": "32029150"}
 # --- real 매수가능금액 (inquire-psamount) -----------------------------------
 BP = {"ord_psbl_frcr_amt": "2349.89", "sll_ruse_psbl_amt": "10293.59",
       "ovrs_ord_psbl_amt": "12574.32", "frcr_ord_psbl_amt1": "12574.329646"}
@@ -31,13 +33,13 @@ KIS_TOTAL = 22087.55      # tot_asst_amt — KIS's own view of the account
 PEAK = 21877.0726         # DD peak recorded before the fix
 
 
-def _client(row=ROW, bp=BP, deposit=2349.89):
+def _client(row=ROW, bp=BP, deposit=2349.89, totals=TOTALS):
     class Fake(KISClient):
         def __init__(self):
             pass
 
-        def usd_deposit(self):
-            return deposit, row
+        def _present_usd(self):
+            return deposit, row, totals
 
         def buying_power(self, *a):
             return bp
@@ -108,8 +110,8 @@ def test_psamount_failure_degrades_instead_of_raising():
         def __init__(self):
             pass
 
-        def usd_deposit(self):
-            return 2349.89, ROW
+        def _present_usd(self):
+            return 2349.89, ROW, TOTALS
 
         def buying_power(self, *a):
             raise RuntimeError("psamount 500")
@@ -128,6 +130,47 @@ def test_orderable_capped_at_own_money_even_if_kis_inflates_everything():
             "ovrs_ord_psbl_amt": "999999"}
     f = _client(bp=wild).usd_funds()
     assert f["orderable"] == 2349.89 + 11308.68, f["orderable"]
+
+
+def test_kis_total_usd_is_an_independent_cross_check():
+    # tot_asst_amt (KRW) / bulletin FX == the account total KIS itself reports.
+    f = _client().usd_funds()
+    assert abs(f["kis_total_usd"] - KIS_TOTAL) < 1.0, f["kis_total_usd"]
+
+    ours_fixed = f["nav_cash"] + HOLDINGS
+    ours_buggy = f["settled"] + HOLDINGS          # the pre-fix formula
+    div_fixed = abs(ours_fixed - f["kis_total_usd"]) / f["kis_total_usd"]
+    div_buggy = abs(ours_buggy - f["kis_total_usd"]) / f["kis_total_usd"]
+    assert div_fixed < 0.001, div_fixed           # ~0.002% — well inside any tolerance
+    assert div_buggy > 0.10, div_buggy            # ~47% — trips the 10% abort
+
+
+def test_kis_total_usd_zero_when_unavailable():
+    # No FX rate or no totals -> 0.0 so the caller skips the check rather than
+    # dividing by zero or aborting the run on missing data.
+    assert _client(totals={}).usd_funds()["kis_total_usd"] == 0.0
+    no_fx = {k: v for k, v in ROW.items() if k != "frst_bltn_exrt"}
+    assert _client(row=no_fx).usd_funds()["kis_total_usd"] == 0.0
+
+
+def test_with_orderable_false_skips_psamount():
+    calls = []
+
+    class Counting(KISClient):
+        def __init__(self):
+            pass
+
+        def _present_usd(self):
+            return 2349.89, ROW, TOTALS
+
+        def buying_power(self, *a):
+            calls.append(1)
+            return BP
+
+    f = Counting().usd_funds(with_orderable=False)
+    assert calls == [], "psamount must not be queried for a nav-only snapshot"
+    assert round(f["nav_cash"], 2) == 12643.48
+    assert f["kis_total_usd"] > 0     # still available, same call
 
 
 def test_phantom_drawdown_is_gone():
