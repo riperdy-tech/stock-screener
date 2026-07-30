@@ -163,9 +163,22 @@ def run_probe(client):
     except Exception as e:
         emit(f"\nbuying power query failed: {e}")
 
+    try:
+        f = client.usd_funds()
+        emit(f"\nfunds split (what the sync actually uses):"
+             f"\n  settled            {f['settled']:>12,.2f}"
+             f"\n  + sells in transit {f['sell_in_transit']:>12,.2f}"
+             f"\n  - buys in transit  {f['buy_in_transit']:>12,.2f}"
+             f"\n  = NAV cash         {f['nav_cash']:>12,.2f}   (counted toward NAV / drawdown)"
+             f"\n  orderable          {f['orderable']:>12,.2f}   (spendable on buys today)")
+    except Exception as e:
+        emit(f"\nfunds split failed: {e}")
+
     emit("\nRead: zero USD deposit + KRW seed + nonzero 매수가능금액 => 통합증거금 "
-         "account; usd_cash() falls back to 매수가능금액 automatically.")
+         "account; usd_funds() falls back to 매수가능금액 automatically.")
     emit("      Everything zero => account genuinely unfunded.")
+    emit("      NAV cash >> settled => sale proceeds in transit; that gap used to "
+         "vanish from NAV and manufacture a phantom drawdown.")
 
     if os.environ.get("KIS_PROBE_DOMESTIC_ORDER"):
         # Places a ₩1,000 limit on 005930 — three orders of magnitude below
@@ -260,8 +273,15 @@ def main():
     sellable = {p["ticker"]: p["sellable"] for p in positions}
     held_exch = {p["ticker"]: p["exch_order_cd"] for p in positions}
     avg_cost = {p["ticker"]: p.get("avg_cost", 0) for p in positions}
-    cash, cash_src, cash_row = client.usd_cash()
+    funds = client.usd_funds()
+    # NAV counts money in transit (sold shares already left the balance); the buy
+    # budget only counts what KIS will let us spend today. See usd_funds().
+    cash, orderable = funds["nav_cash"], funds["orderable"]
+    cash_src, cash_row = funds["source"], funds["row"]
     print(f"account: {len(held)} positions, USD cash {cash:,.2f} (source: {cash_src})")
+    print(f"  cash: settled {funds['settled']:,.2f} + sells in transit "
+          f"{funds['sell_in_transit']:,.2f} - buys in transit "
+          f"{funds['buy_in_transit']:,.2f} = {cash:,.2f} | orderable {orderable:,.2f}")
     if cash_row:
         print(f"  cash row: "
               f"{json.dumps({k: v for k, v in cash_row.items() if 'amt' in k}, ensure_ascii=False)}")
@@ -337,6 +357,7 @@ def main():
 
     # ---- plan ----
     plan = compute_plan(tgt["weights"], held, sellable, prices, cash,
+                        buy_budget=orderable,
                         min_order_usd=args.min_order_usd,
                         min_order_bps=args.min_order_bps,
                         max_order_usd=args.max_order_usd,
@@ -400,8 +421,10 @@ def main():
             if not remaining:
                 break
 
-    # ---- buys, capped by actual cash ----
-    budget = client.usd_cash()[0] if plan.sells else cash
+    # ---- buys, capped by what KIS will actually let us spend ----
+    # Re-read after the sells: filled proceeds show up as 매도대금 재사용 and lift
+    # the orderable amount, so this is no longer starved by T+2 settlement.
+    budget = client.usd_funds()["orderable"] if plan.sells else orderable
     budget *= 0.995  # fee/slippage headroom
     for o in plan.buys:
         limit = o.price * BUY_LIMIT_BUFFER
@@ -428,7 +451,7 @@ def main():
     # non-fatal by contract; failures here are logged, never raised.
     if results:
         try:
-            cash_after = client.usd_cash()[0]  # post-run snapshot
+            cash_after = client.usd_funds()["nav_cash"]  # post-run snapshot
         except Exception:
             cash_after = budget  # fall back to our internal estimate
         try:

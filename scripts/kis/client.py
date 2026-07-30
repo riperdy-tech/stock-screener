@@ -295,25 +295,71 @@ class KISClient:
                 return 0.0, row
         return 0.0, {}
 
-    def usd_cash(self) -> tuple[float, str, dict]:
-        """Spendable USD. Returns (amount, source, raw_row).
+    def usd_funds(self) -> dict:
+        """USD split into what we OWN (for NAV) and what we can SPEND (for orders).
 
-        Prefers the plain USD deposit. A KRW-seeded account under 통합증거금
-        reports a zero deposit while still being able to order US stock, so we
-        fall back to 매수가능금액 — but only to the cash-equivalent fields.
-        `frcr_ord_psbl_amt1` is deliberately ignored: it reflects collateral-
-        backed (levered) buying power, which this strategy never intends to use.
-        Callers decide whether the fallback is acceptable for the environment.
+        These are different numbers and conflating them is a trap. Shares sold
+        leave the balance immediately, but the proceeds take T+2 to settle, so a
+        settled-cash-only NAV silently drops the money in transit and reports a
+        drawdown that never happened — which then de-risks the book and sells
+        more, deepening the phantom. NAV must therefore count in-transit money;
+        the buy budget must not (KIS decides what is spendable today).
+
+        Returns {settled, sell_in_transit, buy_in_transit, nav_cash, orderable,
+                 source, row, bp}:
+          nav_cash  = settled + sell_in_transit - buy_in_transit
+          orderable = own settled cash + reusable sale proceeds (매도대금 재사용),
+                      capped by what KIS reports so we never spend collateral.
         """
-        amount, row = self.usd_deposit()
-        if amount > 0:
-            return amount, "deposit", row
-        bp = self.buying_power("AAPL", "NASD", 200.0)
-        vals = [float(bp[f]) for f in ("ovrs_ord_psbl_amt", "ord_psbl_frcr_amt")
-                if bp.get(f) not in (None, "")]
-        if vals:
-            return min(vals), "buying_power", bp
-        return 0.0, "none", row or bp
+        settled, row = self.usd_deposit()
+
+        def rowf(key):
+            return float(row.get(key) or 0)
+
+        sell_in_transit = rowf("frcr_sll_amt_smtl")
+        buy_in_transit = rowf("frcr_buy_amt_smtl")
+
+        # 매수가능금액 is a SECOND endpoint and must never take the run down: this
+        # is called again after the sells are placed, where an exception would
+        # strand the book half-rebalanced (sold, never bought). Degrade instead.
+        try:
+            bp = self.buying_power("AAPL", "NASD", 200.0)
+            bp_ok = True
+        except Exception:
+            bp, bp_ok = {}, False
+
+        def bpf(key):
+            return float(bp.get(key) or 0)
+
+        # sll_ruse_psbl_amt (매도대금 재사용 가능금액) is our own money in transit
+        # and is spendable now. ovrs_ord_psbl_amt may ALSO reflect KRW collateral
+        # under 통합증거금, so cap at our own funds — this strategy never levers.
+        own = bpf("ord_psbl_frcr_amt") + bpf("sll_ruse_psbl_amt")
+        kis = bpf("ovrs_ord_psbl_amt")
+        if own > 0 and kis > 0:
+            orderable = min(own, kis)
+        else:
+            orderable = own or kis or settled
+        # Hard invariant in normal cash mode: never more than our own money,
+        # whatever KIS reports. Skipped when the USD deposit is zero, because a
+        # KRW-seeded 통합증거금 account legitimately orders against collateral —
+        # that path is governed by the caller's KIS_ALLOW_MARGIN guard instead,
+        # and capping it here would silently freeze the account at zero budget.
+        if settled > 0:
+            orderable = min(orderable, settled + sell_in_transit)
+
+        # Preserve the caller's margin guard: a zero deposit means we are leaning
+        # on 매수가능금액 for a KRW-seeded (통합증거금) account.
+        if not bp_ok:
+            source = "deposit(psamount-failed)" if settled > 0 else "none"
+        else:
+            source = "deposit" if settled > 0 else ("buying_power" if orderable > 0 else "none")
+        return {"settled": settled,
+                "sell_in_transit": sell_in_transit,
+                "buy_in_transit": buy_in_transit,
+                "nav_cash": settled + sell_in_transit - buy_in_transit,
+                "orderable": orderable,
+                "source": source, "row": row, "bp": bp}
 
     def buying_power(self, ticker: str, exch_order_cd: str, price: float) -> dict:
         """해외주식 매수가능금액조회 — orderable USD, which (unlike the raw USD

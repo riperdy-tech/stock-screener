@@ -53,6 +53,7 @@ def compute_plan(targets: dict[str, float],
                  prices: dict[str, float],
                  cash: float,
                  *,
+                 buy_budget: float | None = None,
                  min_order_usd: float = 50.0,
                  min_order_bps: float = 25.0,
                  max_order_usd: float = 15000.0,
@@ -60,7 +61,14 @@ def compute_plan(targets: dict[str, float],
                  cost_buffer: float = 0.005,
                  overshoot_tol: float = 0.25) -> Plan:
     """targets: {ticker: weight 0..1}; held/sellable: {ticker: shares};
-    prices: {ticker: last}; cash: USD available.
+    prices: {ticker: last}; cash: USD counted toward NAV (settled + money in
+    transit from unsettled trades — it is ours even before it lands).
+
+    buy_budget is what may actually be SPENT today (KIS 매수가능금액: settled
+    cash + reusable sale proceeds). It defaults to `cash` for callers with no
+    settlement distinction, but the two differ on any account where sold
+    proceeds take days to settle — passing NAV cash as the budget over-funds
+    the plan, passing settled cash as NAV invents a drawdown.
 
     max_order_usd clips a single order (remainder handled next run).
     max_turnover_pct caps total |order value| as % of NAV — exits are exempt
@@ -184,9 +192,10 @@ def compute_plan(targets: dict[str, float],
         else:
             plan.warnings.append(f"{o.ticker}: buy ${o.est_value:,.0f} dropped (turnover cap)")
 
-    # cash cap on buys: cash now + expected sell proceeds, minus cost buffer
+    # cash cap on buys: spendable now + expected sell proceeds, minus cost buffer
     sells = sorted(exits + kept_trims, key=lambda o: -o.est_value)
-    budget = (cash + sum(o.est_value for o in sells)) * (1 - cost_buffer)
+    spendable = cash if buy_budget is None else buy_budget
+    budget = (spendable + sum(o.est_value for o in sells)) * (1 - cost_buffer)
     final_buys = []
     for o in sorted(kept_buys, key=lambda o: -o.est_value):
         if o.est_value <= budget:

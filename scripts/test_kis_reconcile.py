@@ -147,6 +147,38 @@ def test_held_without_price_untouched():
     assert any("MYSTERY" in w for w in plan.warnings)
 
 
+def test_buy_budget_defaults_to_cash():
+    # Callers with no settlement distinction keep the old behaviour exactly.
+    a = compute_plan(targets={"AAA": 1.0}, held={}, sellable={},
+                     prices={"AAA": 100}, cash=1000)
+    b = compute_plan(targets={"AAA": 1.0}, held={}, sellable={},
+                     prices={"AAA": 100}, cash=1000, buy_budget=1000)
+    assert [(o.ticker, o.qty) for o in a.orders] == [(o.ticker, o.qty) for o in b.orders]
+
+
+def test_buy_budget_limits_buys_without_shrinking_nav():
+    # The bug this guards: NAV cash (settled + in transit) must size the book,
+    # while only the spendable slice funds buys. Passing one for the other
+    # either invents a drawdown or over-funds the plan.
+    plan = compute_plan(targets={"AAA": 1.0}, held={}, sellable={},
+                        prices={"AAA": 100}, cash=10_000, buy_budget=500)
+    assert plan.nav == 10_000, plan.nav          # NAV from the full cash figure
+    bought = sum(o.qty for o in plan.buys)
+    assert bought <= 5, f"bought {bought} shares on a $500 budget"
+
+
+def test_nav_counts_cash_in_transit():
+    # Same book, same prices: cash still in transit must not shrink NAV.
+    settled_only = compute_plan(targets={}, held={"AAA": 10}, sellable={"AAA": 10},
+                                prices={"AAA": 100}, cash=2_000)
+    with_transit = compute_plan(targets={}, held={"AAA": 10}, sellable={"AAA": 10},
+                                prices={"AAA": 100}, cash=2_000 + 8_000)
+    assert settled_only.nav == 3_000
+    assert with_transit.nav == 11_000
+    # An 8k gap on a 11k book is the difference between calm and a -70% drawdown.
+    assert with_transit.nav / settled_only.nav > 3
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     failed = 0

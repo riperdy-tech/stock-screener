@@ -40,8 +40,8 @@ on:
         description: "Max turnover % of NAV (use 100 for first buy-in)"
         default: "40"
       ledger:
-        description: "Ledger to mirror (equal, equal_llm, ...)"
-        default: "equal"
+        description: "Ledger to mirror — LEAVE BLANK to use the KIS_LEDGER repo variable"
+        default: ""
       probe:
         description: "Account diagnostics; places no orders"
         type: boolean
@@ -114,7 +114,13 @@ jobs:
           KIS_APP_SECRET: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_APP_SECRET_REAL || secrets.KIS_APP_SECRET_PAPER }}
           KIS_CANO: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_CANO_REAL || secrets.KIS_CANO_PAPER }}
           KIS_ACNT_PRDT_CD: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_ACNT_PRDT_CD_REAL || secrets.KIS_ACNT_PRDT_CD_PAPER }}
-          KIS_LEDGER: ${{ inputs.ledger || vars.KIS_LEDGER || 'equal' }}
+          # No 'equal' fallback on purpose: the manual-dispatch input used to
+          # default to "equal", which silently OVERRODE vars.KIS_LEDGER and would
+          # have mirrored the wrong book on any manual run. The input now
+          # defaults to blank so the repo variable wins; if that variable is also
+          # missing this resolves to "" and ledger_weights() raises KeyError —
+          # a loud failure with no orders, which is the correct outcome.
+          KIS_LEDGER: ${{ inputs.ledger || vars.KIS_LEDGER }}
           KIS_PROBE_DOMESTIC_ORDER: ${{ inputs.probe_domestic_order == true && '1' || '' }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
