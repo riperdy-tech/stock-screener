@@ -24,8 +24,110 @@ DEFAULT_CONFIG = {
 }
 
 
+def _migrate(state: dict) -> dict:
+    """Bring a pre-unitization state forward. Free and exact: with units = 1 the
+    per-unit value IS the NAV, so peak_pu = peak_nav and every drawdown reading
+    is bit-identical to what the raw governor produced."""
+    if "units" in state and "peak_pu" in state:
+        return state
+    return {**state, "units": 1.0, "peak_pu": float(state["peak_nav"])}
+
+
 def initial_state(nav: float) -> dict:
-    return {"peak_nav": float(nav), "gross": 1.0, "halted": False}
+    return {"peak_nav": float(nav), "peak_pu": float(nav), "units": 1.0,
+            "gross": 1.0, "halted": False}
+
+
+def snapshot(cash: float, holdings: dict) -> dict:
+    """The minimum needed to reconcile the next run: USD cash and share counts."""
+    return {"cash": float(cash),
+            "holdings": {t: float(sh) for t, sh in holdings.items()}}
+
+
+def reconcile_flow(snap: dict, nav_now: float, prices: dict,
+                   *, min_abs: float = 200.0, min_frac: float = 0.005):
+    """Detect money that crossed the USD sleeve since `snap`, from data we
+    already fetch. Returns (flow, detail) — flow 0.0 when nothing is detected.
+
+    Hold last run's positions at today's prices and add last run's cash:
+
+        expected = cash_prev + SUM(shares_prev x price_now)
+        flow     = nav_now - expected
+
+    Trades in between are sleeve-INTERNAL and cancel: a buy converts cash into
+    shares at market, a sell does the reverse, neither changes sleeve NAV. Market
+    moves are captured by revaluing the OLD share counts at today's prices, so
+    performance lands in `expected` and never in `flow`. What remains is money
+    that entered or left. Pure KRW movement produces exactly 0.0 — it never
+    touches USD NAV on either side — which is the behaviour we want.
+
+    This is why no 환전 endpoint is needed: an exchange raises USD NAV without
+    any position or trade explaining it, so it falls straight out of the residual
+    regardless of which KIS call would have reported it.
+
+    Threshold: max(min_abs, nav x min_frac). Below it the residual is dividends,
+    fees, and the timing noise of valuing a position we exited at today's price
+    rather than the fill — all genuine performance, and all small. Real transfers
+    on this book are orders of magnitude larger, so the bands do not overlap.
+
+    Returns flow 0.0 with a reason when the reconciliation cannot be trusted:
+    no prior snapshot, or a previously-held name with no current price (its value
+    would silently vanish from nav_now and read as an outflow).
+    """
+    if not snap or "cash" not in snap:
+        return 0.0, {"ok": False, "reason": "no prior snapshot (first run)"}
+    prev = snap.get("holdings") or {}
+    missing = sorted(t for t in prev if t not in prices)
+    if missing:
+        return 0.0, {"ok": False,
+                     "reason": f"no current price for previously-held {missing} — "
+                               f"reconciliation would misread the gap as an outflow"}
+    expected = float(snap["cash"]) + sum(sh * prices[t] for t, sh in prev.items())
+    flow = float(nav_now) - expected
+    threshold = max(float(min_abs), float(nav_now) * float(min_frac))
+    detail = {"ok": True, "expected_nav": expected, "residual": flow,
+              "threshold": threshold}
+    if abs(flow) < threshold:
+        detail["reason"] = "residual within noise band (dividends, fees, fill timing)"
+        return 0.0, detail
+    detail["reason"] = "unexplained by positions or trades — treating as external flow"
+    return flow, detail
+
+
+def apply_flow(state: dict, nav_after: float, flow: float) -> dict:
+    """Record money crossing the USD-sleeve boundary, so it is NOT read as P&L.
+
+    `flow` is signed and denominated in USD: positive for money arriving in the
+    sleeve (an external USD deposit, or a KRW->USD 환전), negative for money
+    leaving it (a withdrawal, or USD->KRW). Pure KRW movement is not a flow —
+    it never enters NAV, so it must never move units either.
+
+    A flow buys or sells units at the pre-flow price, which leaves the price per
+    unit exactly unchanged:
+
+        units' = units x nav_after / nav_before    where nav_before = nav_after - flow
+        pu'    = nav_after / units' = nav_before / units = pu
+
+    That identity is the whole mechanism. Without it a deposit lifts NAV past the
+    high-water mark and silently forgives an open drawdown — worse than merely
+    failing to notice, because it also restores full gross exposure.
+
+    Timing note: `nav_after` is observed on the next run, not at the instant of
+    the transfer, so any market move in between is attributed to the flow. One
+    run per day bounds that to intraday noise; declare the flow on the first run
+    after moving money rather than saving several up.
+    """
+    st = _migrate(state)
+    flow = float(flow)
+    if flow == 0.0:
+        return st
+    nav_before = float(nav_after) - flow
+    if nav_before <= 0 or float(nav_after) <= 0:
+        raise ValueError(
+            f"implausible flow {flow:+,.2f} against NAV {nav_after:,.2f}: "
+            f"pre-flow NAV would be {nav_before:,.2f}")
+    units = float(st["units"]) * float(nav_after) / nav_before
+    return {**st, "units": units, "peak_nav": float(st["peak_pu"]) * units}
 
 
 def resume(state: dict) -> dict:
@@ -38,34 +140,57 @@ def resume(state: dict) -> dict:
     Validation note (dd_replay, 2026-07-21): modeling reset as a budget restart
     at the bottom compounded −13% cycles into −38% realized in a 2022-style
     grind. Resume-with-peak is the budget-honoring semantics."""
-    return {"peak_nav": float(state["peak_nav"]), "gross": 0.0, "halted": False}
+    st = _migrate(state)
+    return {"peak_nav": float(st["peak_nav"]), "peak_pu": float(st["peak_pu"]),
+            "units": float(st["units"]), "gross": 0.0, "halted": False}
 
 
 def rebase(nav: float) -> dict:
     """Deliberate NEW budget base — accepts a fresh 15% below here. A conscious
-    regime decision (e.g., months later, new capital), never routine."""
+    regime decision (e.g., months later, new capital), never routine.
+
+    Since unitization landed this is rarely the right tool for new capital:
+    apply_flow() keeps the budget honest without forgiving an open drawdown,
+    whereas rebase() deliberately discards it. Reach for it on a genuine regime
+    change, not on a deposit."""
     return initial_state(nav)
 
 
 def decide(state: dict, nav: float, config: dict | None = None):
     """One daily mark. Returns (new_state, decision).
 
-    decision = {dd, gross, prev_gross, action: none|derisk|rerisk|halt|halted,
-                reason}. Pure function: same inputs -> same outputs."""
+    decision = {dd, pu, units, gross, prev_gross,
+                action: none|derisk|rerisk|halt|halted, reason}.
+    Pure function: same inputs -> same outputs.
+
+    Drawdown is measured on NAV PER UNIT, not raw NAV, so money moving in or out
+    of the USD sleeve cannot register as performance (see apply_flow). Cash still
+    counts toward NAV exactly as before — an undeployed balance dilutes the
+    reading, which is correct for a budget on capital rather than on the equity
+    sleeve alone."""
     cfg = {**DEFAULT_CONFIG, **(config or {})}
     tiers = sorted(cfg["tiers"])                     # most negative trigger first
-    peak = max(float(state["peak_nav"]), float(nav))
-    dd = nav / peak - 1.0
-    prev = float(state["gross"])
+    st = _migrate(state)
+    units = float(st["units"])
+    pu = float(nav) / units
+    peak_pu = max(float(st["peak_pu"]), pu)
+    peak = peak_pu * units                           # display only: NAV at the high-water mark
+    dd = pu / peak_pu - 1.0
+    prev = float(st["gross"])
 
-    if state.get("halted"):
-        return ({"peak_nav": peak, "gross": 0.0, "halted": True},
-                {"dd": dd, "gross": 0.0, "prev_gross": prev, "action": "halted",
-                 "reason": "halt is sticky until manual reset"})
+    def _state(gross, halted):
+        return {"peak_nav": peak, "peak_pu": peak_pu, "units": units,
+                "gross": gross, "halted": halted}
+
+    if st.get("halted"):
+        return (_state(0.0, True),
+                {"dd": dd, "pu": pu, "units": units, "gross": 0.0, "prev_gross": prev,
+                 "action": "halted", "reason": "halt is sticky until manual reset"})
 
     if dd <= cfg["halt_dd"]:
-        return ({"peak_nav": peak, "gross": 0.0, "halted": True},
-                {"dd": dd, "gross": 0.0, "prev_gross": prev, "action": "halt",
+        return (_state(0.0, True),
+                {"dd": dd, "pu": pu, "units": units, "gross": 0.0, "prev_gross": prev,
+                 "action": "halt",
                  "reason": f"dd {dd:.1%} <= halt {cfg['halt_dd']:.0%} — liquidate and halt"})
 
     # tier target on the way DOWN (enter at the trigger)
@@ -91,6 +216,6 @@ def decide(state: dict, nav: float, config: dict | None = None):
     else:
         new_gross, action = prev, "none"
         reason = ""
-    return ({"peak_nav": peak, "gross": new_gross, "halted": False},
-            {"dd": dd, "gross": new_gross, "prev_gross": prev, "action": action,
-             "reason": reason})
+    return (_state(new_gross, False),
+            {"dd": dd, "pu": pu, "units": units, "gross": new_gross,
+             "prev_gross": prev, "action": action, "reason": reason})

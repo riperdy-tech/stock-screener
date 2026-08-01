@@ -29,7 +29,9 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from kis.client import EXCD_TO_ORDER, KISClient  # noqa: E402
-from kis.dd_engine import decide, initial_state, rebase, resume  # noqa: E402
+from kis.dd_engine import (  # noqa: E402
+    apply_flow, decide, initial_state, rebase, reconcile_flow, resume, snapshot,
+)
 from kis.dd_gate import (  # noqa: E402
     apply_gate, dd_alert_text, dd_log_line, load_dd_states, save_dd_states,
 )
@@ -239,6 +241,14 @@ def main():
     ap.add_argument("--dd-rebase", action="store_true",
                     help="DELIBERATE: restart the drawdown budget from current NAV "
                          "(accepts a fresh 15%% below here); never routine")
+    # OVERRIDE ONLY — flows are detected automatically by reconciling the book
+    # (see reconcile_flow). Use this to correct a misread, or to force 0 when the
+    # detector fires on something that was not a transfer. One-shot on purpose:
+    # a repo variable left set would re-apply the same flow every run.
+    ap.add_argument("--flow", type=float, default=float(os.environ.get("KIS_FLOW_USD") or 0),
+                    help="OVERRIDE the flow detector for this run. USD crossing "
+                         "the sleeve: +deposit or KRW->USD 환전, -withdrawal or "
+                         "USD->KRW. Normally unnecessary — detection is automatic")
     args = ap.parse_args()
     if not args.ledger.strip():
         sys.exit("no ledger: pass --ledger or set KIS_LEDGER (e.g. equal_llm). "
@@ -380,16 +390,66 @@ def main():
             send_telegram(msg)
         else:
             st = (dd_envs or {}).get(args.env)
+            fresh = False
             if args.dd_rebase:
                 st = rebase(nav_now)
+                fresh = True
                 print(f"  DD: REBASE — new budget base at NAV ${nav_now:,.2f}")
             elif st and args.dd_resume:
                 st = resume(st)
                 print("  DD: RESUME — halt cleared, peak kept; ladder governs re-entry")
             if st is None:
                 st = initial_state(nav_now)
+                fresh = True
                 print(f"  DD: initialized (peak = NAV ${nav_now:,.2f})")
+            # External flow: money crossing the USD sleeve (a deposit, a
+            # withdrawal, or a KRW<->USD 환전). Buys/sells units at the pre-flow
+            # price so the transfer cannot read as P&L. Detected automatically by
+            # reconciling last run's book against today's prices — a safeguard
+            # that depended on remembering to declare a transfer would fail on
+            # the one occasion it mattered. --flow overrides the detector.
+            # A fresh or rebased state has no history to protect, so any flow
+            # against it is meaningless.
+            flow, why = 0.0, ""
+            if fresh:
+                if args.flow:
+                    print(f"  DD: flow ${args.flow:+,.2f} ignored — state was just "
+                          f"initialized/rebased, so there is no prior peak to preserve")
+            elif args.flow:
+                flow, why = args.flow, "declared via --flow (overrides detection)"
+            else:
+                flow, detail = reconcile_flow(st.get("snap") or {}, nav_now, prices)
+                why = detail.get("reason", "")
+                if not detail.get("ok"):
+                    print(f"  DD: flow detection skipped — {why}")
+                elif flow:
+                    print(f"  DD: detected flow ${flow:+,.2f} — NAV ${nav_now:,.2f} vs "
+                          f"${detail['expected_nav']:,.2f} expected from last run's book "
+                          f"(threshold ${detail['threshold']:,.2f})")
+                else:
+                    print(f"  DD: no flow — residual ${detail['residual']:+,.2f} "
+                          f"under ${detail['threshold']:,.2f} threshold")
+            if flow:
+                try:
+                    st = apply_flow(st, nav_now, flow)
+                except ValueError as e:
+                    sys.exit(f"refusing: {e}")
+                krw = funds.get("kis_krw_reserve_usd") or 0.0
+                msg = (f"[KIS·risk] {args.env}: external flow ${flow:+,.2f} recorded "
+                       f"({why}) — units repriced, drawdown budget unchanged "
+                       f"(NAV ${nav_now:,.2f}, KRW reserve ${krw:,.2f}). "
+                       f"If this was NOT a transfer, re-run with --flow 0 and review.")
+                print(f"  DD: FLOW ${flow:+,.2f} — units now {st['units']:,.4f}; "
+                      f"peak preserved at ${st['peak_nav']:,.2f} NAV-equivalent")
+                log_event({"run_id": run_id, "event": "dd_flow", "env": args.env,
+                           "flow": flow, "source": why, "nav": nav_now,
+                           "krw_reserve_usd": krw, "units": st["units"]})
+                send_telegram(msg)
             st, dd = decide(st, nav_now)
+            # Snapshot for the NEXT run's reconciliation. Written from the book as
+            # observed at the START of this run, before any orders are placed —
+            # today's fills are then sleeve-internal and cancel out tomorrow.
+            st["snap"] = snapshot(cash, held)
             dd_envs = {**(dd_envs or {}), args.env: st}
             if not save_dd_states(dd_envs):
                 print("  ! DD state save failed (non-fatal; retried next run)", file=sys.stderr)

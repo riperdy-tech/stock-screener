@@ -94,8 +94,10 @@ Do this during US market hours (the script refuses to trade outside
 Every run enforces the max-drawdown budget on the mirrored book (engine:
 `scripts/kis/dd_engine.py`, wiring: `scripts/kis/dd_gate.py`; tiers −8% → half
 gross, −11% → quarter, −13% → liquidate + sticky HALT; ~2pt recovery
-hysteresis). State (peak NAV per env) persists in Supabase `paper_ledgers`
-row id=2. Tier changes and halts alert via Telegram.
+hysteresis). State (peak NAV per unit, unit count, gross, halted — per env)
+persists in Supabase `paper_ledgers` row id=2; pre-unitization rows migrate on
+read with the drawdown reading unchanged. Tier changes, halts, and declared
+flows alert via Telegram.
 
 - **Reduced tier:** targets are scaled down (sells/trims proceed), fresh buys
   are suppressed until the drawdown recovers past the hysteresis line.
@@ -106,6 +108,43 @@ row id=2. Tier changes and halts alert via Telegram.
 - **Fail-open:** if the state store is unreachable the run trades ungated and
   alerts loudly; `KIS_HALT` remains the manual backstop. Emergency bypass:
   repo variable `KIS_DD_DISABLE=true`.
+- **Moving money in or out — nothing to do; it is detected automatically.**
+  Drawdown is measured on NAV **per unit**, fund-style, so a cash flow buys or
+  sells units at the pre-flow price and cannot register as performance. Without
+  this a deposit lifts NAV past the high-water mark and *forgives an open
+  drawdown*, restoring full gross — and a withdrawal manufactures one (a 13%
+  withdrawal alone would liquidate and HALT).
+
+  Each run reconciles the previous run's book against today's prices:
+
+  ```
+  expected = cash_prev + SUM(shares_prev x price_now)
+  flow     = nav_now - expected
+  ```
+
+  Trades in between are sleeve-internal and cancel (a buy converts cash into
+  shares at market); market moves land in `expected` because the OLD share
+  counts are revalued at today's prices. Whatever remains is money that entered
+  or left. **Pure KRW movement yields exactly 0.0** — it never touches USD NAV
+  on either side — which is also why no 환전 endpoint is required: an exchange
+  raises USD NAV with no position or trade explaining it, so it falls out of the
+  residual on its own.
+
+  Residuals below `max($200, 0.5% of NAV)` are treated as performance —
+  dividends, fees, and the timing noise of valuing an exited position at today's
+  close rather than the fill. Real transfers are orders of magnitude larger, so
+  the bands do not overlap. Detection is skipped (never guessed) on the first
+  run, or when a previously-held name has no current price.
+
+  Every detected flow alerts via Telegram. `flow_usd` is an **override** for the
+  rare misread — set a number to force it, or `0` to suppress one. It is a
+  dispatch input, never a repo variable: a variable left set would re-apply the
+  same flow every run.
+
+  `dd_rebase` is now rarely the right tool for new capital — it discards an open
+  drawdown, whereas this keeps the budget honest. Reach for rebase on a genuine
+  regime change only. Locked by the flow and detection tests in
+  `scripts/test_dd_engine.py`.
 - Validation: `docs/superpowers/audit/tools/dd_replay.py` (stress + Monte
   Carlo). Hard ≤15% cannot be guaranteed against single-day gaps at full
   gross (~1% of simulated years reach ≈−16 to −20%); p99 ≈ −15%.
