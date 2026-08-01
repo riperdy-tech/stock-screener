@@ -70,8 +70,15 @@ def apply_gate(weights: dict, gross: float, halted: bool):
 
 
 def dd_log_line(env: str, dd: dict, state: dict) -> str:
+    # peak_nav is the NAV that would put us back at the high-water mark AT THE
+    # CURRENT UNIT COUNT — it moves with declared flows, while the underlying
+    # per-unit peak does not. Units are shown only once they diverge from 1.0,
+    # so a book that has never seen a flow logs exactly as it always did.
+    units = float(state.get("units", 1.0))
+    extra = f" [units {units:,.4f}]" if abs(units - 1.0) > 1e-9 else ""
     return (f"DD[{env}]: dd {dd['dd']:.1%} from peak {state['peak_nav']:,.2f} "
-            f"-> gross {dd['gross']:.0%}" + (" [HALTED]" if state.get("halted") else ""))
+            f"-> gross {dd['gross']:.0%}{extra}"
+            + (" [HALTED]" if state.get("halted") else ""))
 
 
 def dd_alert_text(env: str, dd: dict, execute: bool) -> str:

@@ -54,6 +54,9 @@ on:
         description: "DELIBERATE: restart the DD budget from current NAV (fresh 15% below here)"
         type: boolean
         default: false
+      flow_usd:
+        description: "USD moved in/out since last run (+deposit or KRW->USD, -withdrawal). Blank = none. NOT for pure KRW moves"
+        default: ""
       probe_domestic_order:
         description: "With probe: also send ONE unfillable domestic order to test order permission"
         type: boolean
@@ -144,6 +147,9 @@ jobs:
             [ "${{ inputs.execute }}" = "true" ] && FLAGS="--execute"
             [ "${{ inputs.dd_resume }}" = "true" ] && FLAGS="$FLAGS --dd-resume"
             [ "${{ inputs.dd_rebase }}" = "true" ] && FLAGS="$FLAGS --dd-rebase"
+            # Dispatch-only, deliberately not a repo variable: a variable left
+            # set would re-apply the same flow on every subsequent run.
+            [ -n "${{ inputs.flow_usd }}" ] && FLAGS="$FLAGS --flow ${{ inputs.flow_usd }}"
           fi
           # --confirm-real for a chained real run still gated by the repo variable;
           # for a manual real run the guard step above already enforced the phrase.

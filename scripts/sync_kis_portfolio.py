@@ -29,7 +29,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from kis.client import EXCD_TO_ORDER, KISClient  # noqa: E402
-from kis.dd_engine import decide, initial_state, rebase, resume  # noqa: E402
+from kis.dd_engine import apply_flow, decide, initial_state, rebase, resume  # noqa: E402
 from kis.dd_gate import (  # noqa: E402
     apply_gate, dd_alert_text, dd_log_line, load_dd_states, save_dd_states,
 )
@@ -239,6 +239,14 @@ def main():
     ap.add_argument("--dd-rebase", action="store_true",
                     help="DELIBERATE: restart the drawdown budget from current NAV "
                          "(accepts a fresh 15%% below here); never routine")
+    # One-shot on purpose: sourced from a workflow_dispatch input, never a repo
+    # variable. A variable left set would re-apply the same flow every run and
+    # silently drift units. Declare it on the first run after moving money.
+    ap.add_argument("--flow", type=float, default=float(os.environ.get("KIS_FLOW_USD") or 0),
+                    help="USD crossing the sleeve since the last run: +deposit or "
+                         "KRW->USD 환전, -withdrawal or USD->KRW. Repriced into "
+                         "units so it is not read as P&L. Pure KRW moves are NOT "
+                         "flows — they never touch NAV")
     args = ap.parse_args()
     if not args.ledger.strip():
         sys.exit("no ledger: pass --ledger or set KIS_LEDGER (e.g. equal_llm). "
@@ -380,15 +388,39 @@ def main():
             send_telegram(msg)
         else:
             st = (dd_envs or {}).get(args.env)
+            fresh = False
             if args.dd_rebase:
                 st = rebase(nav_now)
+                fresh = True
                 print(f"  DD: REBASE — new budget base at NAV ${nav_now:,.2f}")
             elif st and args.dd_resume:
                 st = resume(st)
                 print("  DD: RESUME — halt cleared, peak kept; ladder governs re-entry")
             if st is None:
                 st = initial_state(nav_now)
+                fresh = True
                 print(f"  DD: initialized (peak = NAV ${nav_now:,.2f})")
+            # Declared external flow: money crossing the USD sleeve (a deposit, a
+            # withdrawal, or a KRW<->USD 환전). Buys/sells units at the pre-flow
+            # price so the transfer cannot read as P&L. A fresh or rebased state
+            # has no history to protect, so a flow against it is meaningless.
+            if args.flow:
+                if fresh:
+                    print(f"  DD: flow ${args.flow:+,.2f} ignored — state was just "
+                          f"initialized/rebased, so there is no prior peak to preserve")
+                else:
+                    try:
+                        st = apply_flow(st, nav_now, args.flow)
+                    except ValueError as e:
+                        sys.exit(f"refusing: {e}")
+                    msg = (f"[KIS·risk] {args.env}: external flow ${args.flow:+,.2f} "
+                           f"recorded — units repriced, drawdown budget unchanged "
+                           f"(NAV ${nav_now:,.2f})")
+                    print(f"  DD: FLOW ${args.flow:+,.2f} — units now {st['units']:,.4f}; "
+                          f"peak preserved at ${st['peak_nav']:,.2f} NAV-equivalent")
+                    log_event({"run_id": run_id, "event": "dd_flow", "env": args.env,
+                               "flow": args.flow, "nav": nav_now, "units": st["units"]})
+                    send_telegram(msg)
             st, dd = decide(st, nav_now)
             dd_envs = {**(dd_envs or {}), args.env: st}
             if not save_dd_states(dd_envs):

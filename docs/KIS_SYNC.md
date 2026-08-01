@@ -94,8 +94,10 @@ Do this during US market hours (the script refuses to trade outside
 Every run enforces the max-drawdown budget on the mirrored book (engine:
 `scripts/kis/dd_engine.py`, wiring: `scripts/kis/dd_gate.py`; tiers −8% → half
 gross, −11% → quarter, −13% → liquidate + sticky HALT; ~2pt recovery
-hysteresis). State (peak NAV per env) persists in Supabase `paper_ledgers`
-row id=2. Tier changes and halts alert via Telegram.
+hysteresis). State (peak NAV per unit, unit count, gross, halted — per env)
+persists in Supabase `paper_ledgers` row id=2; pre-unitization rows migrate on
+read with the drawdown reading unchanged. Tier changes, halts, and declared
+flows alert via Telegram.
 
 - **Reduced tier:** targets are scaled down (sells/trims proceed), fresh buys
   are suppressed until the drawdown recovers past the hysteresis line.
@@ -106,6 +108,24 @@ row id=2. Tier changes and halts alert via Telegram.
 - **Fail-open:** if the state store is unreachable the run trades ungated and
   alerts loudly; `KIS_HALT` remains the manual backstop. Emergency bypass:
   repo variable `KIS_DD_DISABLE=true`.
+- **Moving money in or out — declare it with `flow_usd`.** Drawdown is measured
+  on NAV **per unit**, fund-style, so cash flows buy or sell units at the
+  pre-flow price and cannot register as performance. Without this a deposit
+  lifts NAV past the high-water mark and *forgives an open drawdown*, restoring
+  full gross — and a withdrawal manufactures one (a 13% withdrawal alone would
+  liquidate and HALT). Set the workflow input on the **first run after moving
+  money**:
+  - `+` money arriving in the USD sleeve: an external USD deposit, **or a
+    KRW→USD 환전**.
+  - `−` money leaving it: a withdrawal, or USD→KRW.
+  - **Pure KRW movement is not a flow** — it never enters NAV, so declaring it
+    would corrupt the unit count. Only the USD leg counts.
+
+  It is a dispatch input on purpose, never a repo variable: a variable left set
+  would re-apply the same flow every run. `dd_rebase` is now rarely the right
+  tool for new capital — it discards an open drawdown, whereas `flow_usd` keeps
+  the budget honest. Reach for rebase on a genuine regime change only.
+  Locked by the flow tests in `scripts/test_dd_engine.py`.
 - Validation: `docs/superpowers/audit/tools/dd_replay.py` (stress + Monte
   Carlo). Hard ≤15% cannot be guaranteed against single-day gaps at full
   gross (~1% of simulated years reach ≈−16 to −20%); p99 ≈ −15%.

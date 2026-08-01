@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from kis.dd_engine import decide, initial_state, rebase, resume  # noqa: E402
+from kis.dd_engine import apply_flow, decide, initial_state, rebase, resume  # noqa: E402
 
 
 def run_path(navs, state=None):
@@ -110,3 +110,97 @@ def test_deterministic():
     s1, d1 = run_path([100, 95, 90, 88, 92, 96])
     s2, d2 = run_path([100, 95, 90, 88, 92, 96])
     assert s1 == s2 and d1 == d2
+
+
+# --- unitized flow tracking -------------------------------------------------
+
+def test_pre_unitization_state_migrates_with_dd_unchanged():
+    """Free migration: units=1 makes per-unit value identical to raw NAV.
+
+    Existing persisted rows carry only peak_nav/gross/halted. Reading one must
+    reproduce the raw governor's verdict exactly, or the upgrade silently
+    re-rates the live book.
+    """
+    old = {"peak_nav": 100.0, "gross": 0.5, "halted": False}
+    state, d = decide(old, 91.0)
+    assert abs(d["dd"] - (-0.09)) < 1e-12, d["dd"]
+    assert state["units"] == 1.0 and state["peak_pu"] == 100.0
+    assert state["peak_nav"] == 100.0
+
+
+def test_deposit_does_not_forgive_an_open_drawdown():
+    """The failure that motivated this: a top-up while down must not reset."""
+    state, _ = run_path([100, 91.9])                 # -8.1% -> tier 1, gross 0.5
+    assert state["gross"] == 0.5
+
+    raw_would_be = 91.9 + 20.0                       # deposit lifts NAV past the peak
+    state = apply_flow(state, raw_would_be, +20.0)
+    state, d = decide(state, raw_would_be)
+    assert abs(d["dd"] - (-0.081)) < 1e-9, d["dd"]   # drawdown preserved to the basis point
+    assert state["gross"] == 0.5, "deposit must not restore gross"
+    assert d["action"] == "none"
+
+
+def test_withdrawal_does_not_manufacture_a_drawdown():
+    state, _ = run_path([100, 100])                  # sitting at the peak
+    state = apply_flow(state, 86.0, -14.0)           # withdraw 14% of the book
+    state, d = decide(state, 86.0)
+    assert abs(d["dd"]) < 1e-12, d["dd"]
+    assert state["halted"] is False and state["gross"] == 1.0
+
+
+def test_raw_nav_would_have_halted_on_that_same_withdrawal():
+    # Proves the test above is not vacuous: the pre-unitization path halts here.
+    state, d = decide({"peak_nav": 100.0, "gross": 1.0, "halted": False}, 86.0)
+    assert state["halted"] and d["action"] == "halt"
+
+
+def test_flow_is_transparent_to_subsequent_real_performance():
+    """After a flow, a genuine move must read at its true magnitude."""
+    state = initial_state(100.0)
+    state = apply_flow(state, 150.0, +50.0)          # deposit, no market move
+    state, d = decide(state, 150.0)
+    assert abs(d["dd"]) < 1e-12
+
+    state, d = decide(state, 150.0 * 0.90)           # then a real -10%
+    assert abs(d["dd"] - (-0.10)) < 1e-12, d["dd"]
+    assert state["gross"] == 0.5                     # -10% sits in tier 1
+
+
+def test_flow_masking_a_real_decline_is_still_caught():
+    """The scenario from the KRW->USD walkthrough: a top-up must not hide a fall."""
+    state, _ = run_path([100, 91.9])                 # -8.1%
+    state = apply_flow(state, 91.9 + 20.0, +20.0)    # top up while down
+    # stocks then fall another 10% of the enlarged book
+    state, d = decide(state, (91.9 + 20.0) * 0.90)
+    assert d["dd"] < -0.17, d["dd"]                  # compounded, not forgiven
+    assert state["halted"] is True                   # raw NAV would have read ~ -6%
+
+
+def test_round_trip_flow_leaves_units_and_dd_intact():
+    state = initial_state(100.0)
+    state = apply_flow(state, 130.0, +30.0)
+    state = apply_flow(state, 100.0, -30.0)
+    assert abs(state["units"] - 1.0) < 1e-12, state["units"]
+    _, d = decide(state, 100.0)
+    assert abs(d["dd"]) < 1e-12
+
+
+def test_zero_flow_is_a_no_op_and_implausible_flow_refuses():
+    state = initial_state(100.0)
+    assert apply_flow(state, 100.0, 0.0)["units"] == 1.0
+    for bad in (100.0, 150.0):        # flow >= NAV: pre-flow NAV would be <= 0
+        try:
+            apply_flow(state, 100.0, bad)
+        except ValueError:
+            continue
+        raise AssertionError(f"flow {bad} against NAV 100 should refuse")
+
+
+def test_halt_state_survives_a_flow():
+    # A deposit must not be a back door around the sticky halt.
+    state, _ = run_path([100, 86.0])
+    assert state["halted"]
+    state = apply_flow(state, 200.0, +114.0)
+    state, d = decide(state, 200.0)
+    assert state["halted"] and d["action"] == "halted"
