@@ -128,6 +128,19 @@ row id=2. Tier changes and halts alert via Telegram.
   ignored. On a **real** account the fallback aborts the run unless
   `KIS_ALLOW_MARGIN=1` — fund USD instead of trading on collateral.
   Run `--probe` (workflow input `probe`) any time to dump all of this read-only.
+- **KRW is out of scope for NAV (policy, owner-stated 2026-08-01).** Any KRW
+  left in the account is a parked reserve: it is never invested in Korean
+  equities and must not enter any NAV, drawdown, or position-sizing equation.
+  The code holds this on all three sides — NAV counts USD only, `orderable` is
+  capped at USD funds so 통합증거금 collateral is never spent, and the NAV
+  cross-check nets the KRW leg (`tot_dncl_amt`) out of KIS's `tot_asst_amt` so a
+  reserve cannot read as a NAV error. The reserve is printed on every run purely
+  so it stays visible. Locked by
+  `test_krw_reserve_of_any_size_never_moves_nav_or_budget`.
+  Corollary: if KRW ever *is* deployed into Korean stock it lands in holdings,
+  which USD NAV cannot see, and the run aborts — correctly, since the book could
+  no longer be valued. Don't widen the tolerance to silence that; sell back to
+  KRW cash or exchange to USD.
 - **모의투자 quirks:** paper supports overseas orders (VTTT/VTTS TR IDs) but
   fills can differ from reality; treat paper results as plumbing validation,
   not performance validation.

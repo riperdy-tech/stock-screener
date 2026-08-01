@@ -278,8 +278,20 @@ class KISClient:
                 break  # NASD already covered the whole US market
         return list(rows.values())
 
-    def _present_usd(self) -> tuple[float, dict, dict]:
-        """One inquire-present-balance call -> (settled_usd, usd_row, totals).
+    def _present_usd(self) -> tuple[float, float, dict, dict]:
+        """One inquire-present-balance call -> (deposit, withdrawable, row, totals).
+
+        KIS reports TWO USD figures and they answer different questions:
+          deposit      외화예수금 (frcr_dncl_amt_2) — every USD we own, including
+                       the 매수증거금 held against buys that have filled but not
+                       yet settled. This is the NAV input.
+          withdrawable 외화출금가능금액 (frcr_drwg_psbl_amt_1) — the deposit minus
+                       that margin, i.e. what could leave the account today.
+                       A spending-side number; never a NAV input.
+
+        They are identical whenever nothing is in transit, which is why the
+        2026-07-30 probe (frcr_buy_mgn_amt = 0) could not tell them apart and a
+        fixture captured that day pinned the wrong one for a month.
 
         `totals` is output3, which carries tot_asst_amt — KIS's own view of the
         whole account. Returned from the SAME call so the NAV cross-check costs
@@ -294,12 +306,20 @@ class KISClient:
         totals = body.get("output3") or {}
         for row in body.get("output2", []) or []:
             if (row.get("crcy_cd") or "").upper() == "USD":
-                for field in ("frcr_drwg_psbl_amt_1", "frcr_dncl_amt_2", "frcr_dncl_amt2"):
-                    v = row.get(field)
-                    if v not in (None, ""):
-                        return float(v), row, totals
-                return 0.0, row, totals
-        return 0.0, {}, totals
+                def pick(*fields):
+                    for field in fields:
+                        v = row.get(field)
+                        if v not in (None, ""):
+                            return float(v)
+                    return 0.0
+                # Each falls back to the other: on an account with nothing in
+                # transit they are equal anyway, so a missing field is harmless.
+                deposit = pick("frcr_dncl_amt_2", "frcr_dncl_amt2",
+                               "frcr_drwg_psbl_amt_1")
+                withdrawable = pick("frcr_drwg_psbl_amt_1", "frcr_dncl_amt_2",
+                                    "frcr_dncl_amt2")
+                return deposit, withdrawable, row, totals
+        return 0.0, 0.0, {}, totals
 
     def usd_funds(self, with_orderable: bool = True) -> dict:
         """USD split into what we OWN (for NAV) and what we can SPEND (for orders).
@@ -311,19 +331,27 @@ class KISClient:
         more, deepening the phantom. NAV must therefore count in-transit money;
         the buy budget must not (KIS decides what is spendable today).
 
-        Returns {settled, sell_in_transit, buy_in_transit, nav_cash, orderable,
-                 kis_total_usd, source, row, bp}:
-          nav_cash      = settled + sell_in_transit - buy_in_transit
-          orderable     = own settled cash + reusable sale proceeds (매도대금
+        Returns {deposit, withdrawable, sell_in_transit, buy_in_transit, nav_cash,
+                 orderable, kis_total_usd, kis_krw_reserve_usd, source, row, bp}:
+          nav_cash      = deposit + sell_in_transit - buy_in_transit
+          orderable     = own spendable cash + reusable sale proceeds (매도대금
                           재사용), capped so we never spend collateral.
-          kis_total_usd = KIS's own tot_asst_amt converted at the bulletin rate;
-                          an INDEPENDENT figure the caller cross-checks NAV
-                          against. 0.0 when unavailable (caller skips the check).
+          kis_total_usd = KIS's own tot_asst_amt LESS its KRW leg, converted at
+                          the bulletin rate; an INDEPENDENT figure the caller
+                          cross-checks NAV against. 0.0 when unavailable
+                          (caller skips the check).
+
+        NAV must be built on `deposit`, never `withdrawable`. `withdrawable` has
+        net in-transit buys already removed, so subtracting buy_in_transit from
+        it double-counts them and makes NAV lurch by the full value of every
+        settling trade — the 2026-07-31 abort ($25,118.74 vs $30,720.91, 18.2%)
+        was exactly this, and it is the same phantom-drawdown failure the
+        settled-cash NAV caused on 07-30, merely reached by a second route.
 
         with_orderable=False skips the 매수가능금액 request when only NAV cash is
         needed (the post-run snapshot), saving a call and a failure mode.
         """
-        settled, row, totals = self._present_usd()
+        deposit, withdrawable, row, totals = self._present_usd()
 
         def rowf(key):
             return float(row.get(key) or 0)
@@ -333,11 +361,20 @@ class KISClient:
 
         # KIS's own total assets (KRW) at the bulletin FX rate. Independent of
         # everything above, so it catches errors in our own NAV arithmetic.
-        # NOTE: tot_asst_amt spans the whole account including any KRW-denominated
-        # assets; on a KRW-funded account the caller's tolerance must absorb that.
+        #
+        # tot_asst_amt spans every currency. Verified against the 07-30 probe, it
+        # decomposes exactly as:
+        #   holdings + USD cash + unsettled sells - unsettled buys + KRW deposit
+        # The KRW leg (tot_dncl_amt) is real money but cannot buy US stock, so it
+        # is deliberately absent from our USD NAV. Subtract it here so the check
+        # compares like with like — otherwise a KRW reserve reads as a NAV error
+        # and the tolerance has to be widened, blunting the check for everyone.
         fx = float(row.get("frst_bltn_exrt") or 0)
         tot_krw = float(totals.get("tot_asst_amt") or 0)
-        kis_total_usd = (tot_krw / fx) if (fx > 0 and tot_krw > 0) else 0.0
+        krw_reserve_krw = float(totals.get("tot_dncl_amt") or 0)
+        kis_total_usd = ((tot_krw - krw_reserve_krw) / fx
+                         if (fx > 0 and tot_krw > 0) else 0.0)
+        kis_krw_reserve_usd = (krw_reserve_krw / fx) if fx > 0 else 0.0
 
         # 매수가능금액 is a SECOND endpoint and must never take the run down: this
         # is called again after the sells are placed, where an exception would
@@ -362,27 +399,34 @@ class KISClient:
         if own > 0 and kis > 0:
             orderable = min(own, kis)
         else:
-            orderable = own or kis or settled
+            orderable = own or kis or withdrawable
         # Hard invariant in normal cash mode: never more than our own money,
-        # whatever KIS reports. Skipped when the USD deposit is zero, because a
-        # KRW-seeded 통합증거금 account legitimately orders against collateral —
-        # that path is governed by the caller's KIS_ALLOW_MARGIN guard instead,
-        # and capping it here would silently freeze the account at zero budget.
-        if settled > 0:
-            orderable = min(orderable, settled + sell_in_transit)
+        # whatever KIS reports. Deliberately built on `withdrawable`, not
+        # `deposit`: money already earmarked for unsettled buys is spoken for,
+        # and sizing today's buys off it would double-spend. Skipped when that is
+        # zero, because a KRW-seeded 통합증거금 account legitimately orders against
+        # collateral — that path is governed by the caller's KIS_ALLOW_MARGIN
+        # guard instead, and capping here would freeze it at zero budget.
+        if withdrawable > 0:
+            orderable = min(orderable, withdrawable + sell_in_transit)
 
         # Preserve the caller's margin guard: a zero deposit means we are leaning
-        # on 매수가능금액 for a KRW-seeded (통합증거금) account.
+        # on 매수가능금액 for a KRW-seeded (통합증거금) account. Keyed on `deposit`
+        # because the guard asks "do we hold any USD at all?" — an account whose
+        # USD is merely all committed to unsettled buys does hold USD, and
+        # reading it as collateral-only would refuse a fundable rebalance.
         if not bp_ok:
-            source = "deposit(psamount-failed)" if settled > 0 else "none"
+            source = "deposit(psamount-failed)" if deposit > 0 else "none"
         else:
-            source = "deposit" if settled > 0 else ("buying_power" if orderable > 0 else "none")
-        return {"settled": settled,
+            source = "deposit" if deposit > 0 else ("buying_power" if orderable > 0 else "none")
+        return {"deposit": deposit,
+                "withdrawable": withdrawable,
                 "sell_in_transit": sell_in_transit,
                 "buy_in_transit": buy_in_transit,
-                "nav_cash": settled + sell_in_transit - buy_in_transit,
+                "nav_cash": deposit + sell_in_transit - buy_in_transit,
                 "orderable": orderable,
                 "kis_total_usd": kis_total_usd,
+                "kis_krw_reserve_usd": kis_krw_reserve_usd,
                 "source": source, "row": row, "bp": bp}
 
     def buying_power(self, ticker: str, exch_order_cd: str, price: float) -> dict:

@@ -157,6 +157,46 @@ Context: over this window IWM was roughly flat (292.3→294.0) — the quant los
 > premise that preferring the plain deposit is simply conservative was wrong —
 > that preference is what starved the buys and broke NAV.
 
+> **ADDENDUM 2026-07-31 — the 07-30 fix was incomplete; same failure, second route.**
+> `usd_funds()` was split correctly, but `_present_usd()` still fed it the wrong
+> input: it preferred `frcr_drwg_psbl_amt_1` (외화출금가능금액, *withdrawable*) over
+> `frcr_dncl_amt_2` (외화예수금, the actual deposit). Withdrawable is the deposit
+> **less 매수증거금**, and that margin is exactly net unsettled buys — so
+> `+ sell_in_transit − buy_in_transit` removed them a second time. NAV was
+> `deposit − 2 × (buys − sells)`: a step function of settlement timing again,
+> which is the very property the 07-30 fix was written to establish.
+>
+> Invisible until an account held both a deposit and an unsettled buy. On the
+> 07-30 probe `frcr_buy_mgn_amt` was `0.00` and the two fields read identically
+> (2349.89), so the fixture built from that payload could not distinguish them
+> and every 07-30 test passed against the bug.
+>
+> Surfaced 2026-07-31 by a user top-up: NAV $25,118.74 vs KIS total $30,720.91,
+> **18.2%**, tripping the `KIS_NAV_TOL_ABORT` fail-closed guard. No orders placed
+> and drawdown state untouched — the cross-check added on 07-30 did its job and
+> caught a real NAV error rather than a false alarm. Reconciles exactly:
+> $4,249.87 double-counted margin + $1,352.30 KRW reserve = $5,602.17 gap.
+>
+> Fixed by returning deposit and withdrawable separately and using deposit for
+> NAV only; `orderable` stays on the withdrawable basis, so the buy budget is
+> unchanged (money earmarked for unsettled buys must not be spent twice).
+> `kis_total_usd` now also nets out the KRW leg (`tot_dncl_amt`), since a KRW
+> reserve is real money that cannot buy US stock and is absent from our USD NAV
+> by design — without that, a reserve reads as a NAV error and the tolerance has
+> to be widened, blunting the check. Verified against the 07-30 probe,
+> `tot_asst_amt` decomposes exactly as
+> `holdings + USD cash + unsettled sells − unsettled buys + KRW deposit`.
+>
+> **Caveat:** only the KRW *cash* leg is excluded. KRW deployed into Korean
+> equities lands in `evlu_amt_smtl_amt`, which our USD NAV cannot see and this
+> subtraction does not remove — the abort would fire, correctly, since we could
+> no longer value the book.
+>
+> Regression tests use the live 07-31 payload and stub the HTTP layer rather than
+> `_present_usd`, so the field selection itself is under test. Four of them fail
+> if the preference is reverted; all eighteen 07-30 tests still pass against it,
+> which is the point.
+
 **Q3 — Real cost per side.** Marketable-limit crossing ±0.3% + documented real commission "~25 bps + FX spread" (`docs/KIS_SYNC.md:84-85`) ⇒ realistic all-in ≈ **0.4–0.6%/side ≈ 5× the paper model's 10 bps**. Applied to §3's measured turnover, **F-06 is confirmed as a real, first-order leak**: at the observed 6–12 orders/day on a $9k book (~20–30% NAV/day traded in the buy-in/churn phase), cost drag is on the order of 0.1–0.2% of NAV *per day* while churn persists.
 
 **Q4 — FX / margin.** `usd_cash()` prefers the plain USD deposit and deliberately ignores the levered `frcr_ord_psbl_amt1`; a real account with zero deposit refuses to trade on collateral without `KIS_ALLOW_MARGIN=1` (`client.py:297-315`, `sync:246-254`). Real rows show a positive cash deposit being spent down — no margin path observed. **Sound.**

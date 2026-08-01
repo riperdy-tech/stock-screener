@@ -166,10 +166,11 @@ def run_probe(client):
     try:
         f = client.usd_funds()
         emit(f"\nfunds split (what the sync actually uses):"
-             f"\n  settled            {f['settled']:>12,.2f}"
+             f"\n  deposit (외화예수금) {f['deposit']:>12,.2f}"
              f"\n  + sells in transit {f['sell_in_transit']:>12,.2f}"
              f"\n  - buys in transit  {f['buy_in_transit']:>12,.2f}"
              f"\n  = NAV cash         {f['nav_cash']:>12,.2f}   (counted toward NAV / drawdown)"
+             f"\n  withdrawable       {f['withdrawable']:>12,.2f}   (deposit less 매수증거금)"
              f"\n  orderable          {f['orderable']:>12,.2f}   (spendable on buys today)")
     except Exception as e:
         emit(f"\nfunds split failed: {e}")
@@ -177,8 +178,10 @@ def run_probe(client):
     emit("\nRead: zero USD deposit + KRW seed + nonzero 매수가능금액 => 통합증거금 "
          "account; usd_funds() falls back to 매수가능금액 automatically.")
     emit("      Everything zero => account genuinely unfunded.")
-    emit("      NAV cash >> settled => sale proceeds in transit; that gap used to "
+    emit("      NAV cash >> deposit => sale proceeds in transit; that gap used to "
          "vanish from NAV and manufacture a phantom drawdown.")
+    emit("      deposit > withdrawable => buys filled but unsettled (매수증거금). "
+         "NAV uses deposit; only the buy budget may use withdrawable.")
 
     if os.environ.get("KIS_PROBE_DOMESTIC_ORDER"):
         # Places a ₩1,000 limit on 005930 — three orders of magnitude below
@@ -286,9 +289,10 @@ def main():
     cash, orderable = funds["nav_cash"], funds["orderable"]
     cash_src, cash_row = funds["source"], funds["row"]
     print(f"account: {len(held)} positions, USD cash {cash:,.2f} (source: {cash_src})")
-    print(f"  cash: settled {funds['settled']:,.2f} + sells in transit "
+    print(f"  cash: deposit {funds['deposit']:,.2f} + sells in transit "
           f"{funds['sell_in_transit']:,.2f} - buys in transit "
-          f"{funds['buy_in_transit']:,.2f} = {cash:,.2f} | orderable {orderable:,.2f}")
+          f"{funds['buy_in_transit']:,.2f} = {cash:,.2f} | withdrawable "
+          f"{funds['withdrawable']:,.2f} | orderable {orderable:,.2f}")
     if cash_row:
         print(f"  cash row: "
               f"{json.dumps({k: v for k, v in cash_row.items() if 'amt' in k}, ensure_ascii=False)}")
@@ -335,12 +339,18 @@ def main():
     # orders at all, rather than de-risking (or sizing) off a figure we doubt.
     # KIS_HALT remains the manual backstop; KIS_NAV_TOL_ABORT tunes the trip.
     kis_total = funds.get("kis_total_usd") or 0.0
+    krw_reserve = funds.get("kis_krw_reserve_usd") or 0.0
     if kis_total > 0:
         div = abs(nav_now - kis_total) / kis_total
         warn_at = float(os.environ.get("KIS_NAV_TOL_WARN", "3")) / 100
         abort_at = float(os.environ.get("KIS_NAV_TOL_ABORT", "10")) / 100
         print(f"  NAV check: ours ${nav_now:,.2f} vs KIS total ${kis_total:,.2f} "
               f"({div:.2%} divergence)")
+        if krw_reserve > 0:
+            # Excluded from both sides on purpose; printed so a growing KRW
+            # balance is never mistaken for the check quietly drifting.
+            print(f"  (KRW reserve ${krw_reserve:,.2f} excluded from both sides "
+                  f"— it cannot fund US buys)")
         if div >= abort_at:
             msg = (f"[KIS·risk] {args.env}: ABORT — computed NAV ${nav_now:,.2f} diverges "
                    f"{div:.1%} from KIS total assets ${kis_total:,.2f} "
