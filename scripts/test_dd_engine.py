@@ -4,7 +4,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from kis.dd_engine import apply_flow, decide, initial_state, rebase, resume  # noqa: E402
+from kis.dd_engine import (  # noqa: E402
+    apply_flow, decide, initial_state, rebase, reconcile_flow, resume, snapshot,
+)
 
 
 def run_path(navs, state=None):
@@ -195,6 +197,86 @@ def test_zero_flow_is_a_no_op_and_implausible_flow_refuses():
         except ValueError:
             continue
         raise AssertionError(f"flow {bad} against NAV 100 should refuse")
+
+
+# --- automatic flow detection ----------------------------------------------
+
+SNAP = snapshot(1000.0, {"AAA": 10.0})        # cash 1,000 + 10 shares; NAV 2,000 @ 100
+
+
+def test_market_moves_are_never_read_as_flows():
+    """Revaluing OLD share counts at today's prices puts performance in
+    `expected`, so even a violent move leaves no residual."""
+    for px in (100.0, 110.0, 60.0, 250.0):
+        nav = 1000.0 + 10.0 * px
+        flow, d = reconcile_flow(SNAP, nav, {"AAA": px})
+        assert flow == 0.0, f"px {px}: {flow}"
+        assert d["ok"] and abs(d["residual"]) < 1e-9
+
+
+def test_trades_between_runs_cancel_out():
+    """Sold 5 AAA @100 (+500), bought 2 BBB @250 (-500). Sleeve NAV unchanged."""
+    nav = 1000.0 + 5 * 100.0 + 2 * 250.0
+    flow, d = reconcile_flow(SNAP, nav, {"AAA": 100.0, "BBB": 250.0})
+    assert flow == 0.0, d
+
+
+def test_deposit_and_withdrawal_are_detected_at_the_right_size():
+    for moved in (+5000.0, -800.0, +250.0):
+        flow, d = reconcile_flow(SNAP, 2000.0 + moved, {"AAA": 100.0})
+        assert abs(flow - moved) < 1e-9, (moved, flow, d)
+
+
+def test_krw_only_movement_produces_exactly_zero():
+    """KRW never enters USD NAV, so it cannot appear in the residual. This is
+    what lets the detector work without any 환전 endpoint."""
+    flow, d = reconcile_flow(SNAP, 2000.0, {"AAA": 100.0})
+    assert flow == 0.0 and d["ok"]
+
+
+def test_small_residual_is_treated_as_performance_not_a_flow():
+    # dividends / fees / exiting a position priced at today's close, not the fill
+    for noise in (+40.0, -95.0, +199.0):
+        flow, d = reconcile_flow(SNAP, 2000.0 + noise, {"AAA": 100.0})
+        assert flow == 0.0, (noise, d)
+        assert "noise band" in d["reason"]
+
+
+def test_threshold_scales_with_book_size():
+    big = snapshot(50_000.0, {"AAA": 500.0})       # NAV 100,000
+    nav = 100_000.0 + 400.0
+    flow, d = reconcile_flow(big, nav, {"AAA": 100.0})
+    assert d["threshold"] == nav * 0.005           # 0.5% dominates the $200 floor
+    assert d["threshold"] > 200.0
+    assert flow == 0.0
+    flow, _ = reconcile_flow(big, 100_000.0 + 600.0, {"AAA": 100.0})
+    assert abs(flow - 600.0) < 1e-9
+
+
+def test_first_run_and_unpriced_holdings_skip_detection():
+    flow, d = reconcile_flow({}, 2000.0, {"AAA": 100.0})
+    assert flow == 0.0 and not d["ok"] and "first run" in d["reason"]
+
+    # A name we held but can no longer price would vanish from nav_now and read
+    # as a large outflow — refuse rather than guess.
+    flow, d = reconcile_flow(SNAP, 1000.0, {"BBB": 5.0})
+    assert flow == 0.0 and not d["ok"] and "AAA" in d["reason"]
+
+
+def test_detection_feeds_apply_flow_and_preserves_an_open_drawdown():
+    """End to end: down 8.1%, deposit lands, detector catches it, budget holds."""
+    state, _ = run_path([100.0, 91.9])
+    assert state["gross"] == 0.5
+    snap = snapshot(41.9, {"AAA": 0.5})            # cash + 0.5 sh @100 = 91.9 NAV
+
+    nav_after = 91.9 + 20.0                        # $20 deposit, no market move
+    flow, d = reconcile_flow(snap, nav_after, {"AAA": 100.0}, min_abs=5.0)
+    assert abs(flow - 20.0) < 1e-9, d
+
+    state = apply_flow(state, nav_after, flow)
+    state, dec = decide(state, nav_after)
+    assert abs(dec["dd"] - (-0.081)) < 1e-9, dec["dd"]
+    assert state["gross"] == 0.5
 
 
 def test_halt_state_survives_a_flow():

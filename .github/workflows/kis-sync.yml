@@ -55,7 +55,7 @@ on:
         type: boolean
         default: false
       flow_usd:
-        description: "USD moved in/out since last run (+deposit or KRW->USD, -withdrawal). Blank = none. NOT for pure KRW moves"
+        description: "OVERRIDE the automatic flow detector (rarely needed): USD moved in/out, or 0 to force none. Blank = auto-detect"
         default: ""
       probe_domestic_order:
         description: "With probe: also send ONE unfillable domestic order to test order permission"

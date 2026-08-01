@@ -38,6 +38,62 @@ def initial_state(nav: float) -> dict:
             "gross": 1.0, "halted": False}
 
 
+def snapshot(cash: float, holdings: dict) -> dict:
+    """The minimum needed to reconcile the next run: USD cash and share counts."""
+    return {"cash": float(cash),
+            "holdings": {t: float(sh) for t, sh in holdings.items()}}
+
+
+def reconcile_flow(snap: dict, nav_now: float, prices: dict,
+                   *, min_abs: float = 200.0, min_frac: float = 0.005):
+    """Detect money that crossed the USD sleeve since `snap`, from data we
+    already fetch. Returns (flow, detail) — flow 0.0 when nothing is detected.
+
+    Hold last run's positions at today's prices and add last run's cash:
+
+        expected = cash_prev + SUM(shares_prev x price_now)
+        flow     = nav_now - expected
+
+    Trades in between are sleeve-INTERNAL and cancel: a buy converts cash into
+    shares at market, a sell does the reverse, neither changes sleeve NAV. Market
+    moves are captured by revaluing the OLD share counts at today's prices, so
+    performance lands in `expected` and never in `flow`. What remains is money
+    that entered or left. Pure KRW movement produces exactly 0.0 — it never
+    touches USD NAV on either side — which is the behaviour we want.
+
+    This is why no 환전 endpoint is needed: an exchange raises USD NAV without
+    any position or trade explaining it, so it falls straight out of the residual
+    regardless of which KIS call would have reported it.
+
+    Threshold: max(min_abs, nav x min_frac). Below it the residual is dividends,
+    fees, and the timing noise of valuing a position we exited at today's price
+    rather than the fill — all genuine performance, and all small. Real transfers
+    on this book are orders of magnitude larger, so the bands do not overlap.
+
+    Returns flow 0.0 with a reason when the reconciliation cannot be trusted:
+    no prior snapshot, or a previously-held name with no current price (its value
+    would silently vanish from nav_now and read as an outflow).
+    """
+    if not snap or "cash" not in snap:
+        return 0.0, {"ok": False, "reason": "no prior snapshot (first run)"}
+    prev = snap.get("holdings") or {}
+    missing = sorted(t for t in prev if t not in prices)
+    if missing:
+        return 0.0, {"ok": False,
+                     "reason": f"no current price for previously-held {missing} — "
+                               f"reconciliation would misread the gap as an outflow"}
+    expected = float(snap["cash"]) + sum(sh * prices[t] for t, sh in prev.items())
+    flow = float(nav_now) - expected
+    threshold = max(float(min_abs), float(nav_now) * float(min_frac))
+    detail = {"ok": True, "expected_nav": expected, "residual": flow,
+              "threshold": threshold}
+    if abs(flow) < threshold:
+        detail["reason"] = "residual within noise band (dividends, fees, fill timing)"
+        return 0.0, detail
+    detail["reason"] = "unexplained by positions or trades — treating as external flow"
+    return flow, detail
+
+
 def apply_flow(state: dict, nav_after: float, flow: float) -> dict:
     """Record money crossing the USD-sleeve boundary, so it is NOT read as P&L.
 
