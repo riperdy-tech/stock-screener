@@ -298,6 +298,29 @@ def test_0731_krw_reserve_is_excluded_from_the_cross_check():
     assert KRW_RESERVE_0731 / KIS_TOTAL_0731 > 0.03
 
 
+def test_krw_reserve_of_any_size_never_moves_nav_or_budget():
+    """Policy (owner-stated 2026-08-01): KRW is a parked reserve, never invested.
+
+    It must not enter NAV, the buy budget, or — through NAV — drawdown and
+    position sizing. Swept across sizes because the failure this guards against
+    is a reserve growing until it silently drags one of them.
+    """
+    base = _client_from_payload().usd_funds()
+    # The reserve is PART of tot_asst_amt, so topping it up grows both together —
+    # varying one alone would model an account that cannot exist.
+    usd_side_krw = float(TOTALS_0731["tot_asst_amt"]) - float(TOTALS_0731["tot_dncl_amt"])
+    for krw in (0.0, 1948799.0, 50_000_000.0, 999_999_999.0):
+        totals = {"tot_asst_amt": str(usd_side_krw + krw), "tot_dncl_amt": str(krw)}
+        f = _client_from_payload({"output2": [ROW_0731], "output3": totals}).usd_funds()
+        assert f["nav_cash"] == base["nav_cash"], krw
+        assert f["orderable"] == base["orderable"], krw
+        # The cross-check target moves by exactly the reserve and nothing else,
+        # so divergence against our USD-only NAV stays put.
+        nav = f["nav_cash"] + HOLDINGS_0731
+        div = abs(nav - f["kis_total_usd"]) / f["kis_total_usd"]
+        assert div < 0.001, f"{krw}: {div:.2%}"
+
+
 def test_0731_buy_budget_is_not_loosened_by_the_nav_fix():
     """NAV grew; spending power must not.
 
