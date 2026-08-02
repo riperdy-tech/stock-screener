@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-08-01T12:44:32Z
+Generated: 2026-08-02T14:33:38Z
 Macro flags: none
 Invested: **52.38%**  |  Cash: **47.62%**  |  Positions: 15
 
@@ -61,8 +61,8 @@ Invested: **52.38%**  |  Cash: **47.62%**  |  Positions: 15
 - GEV: no Kelly edge (expectations gap +22pts >= 0: price already assumes more growth than demonstrated)
 - POWL: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
 - VRTX: no Kelly edge (expectations gap +4pts >= 0: price already assumes more growth than demonstrated)
-- GMED: sector cap Healthcare (25.0%)
 - ALKS: no Kelly edge (expectations gap +13pts >= 0: price already assumes more growth than demonstrated)
+- GMED: sector cap Healthcare (25.0%)
 - LQDT: no Kelly edge (expectations gap +4pts >= 0: price already assumes more growth than demonstrated)
 - ELMD: no Kelly edge (expectations gap +3pts >= 0: price already assumes more growth than demonstrated)
 - HWM: no Kelly edge (expectations gap +24pts >= 0: price already assumes more growth than demonstrated)
