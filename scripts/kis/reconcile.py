@@ -72,7 +72,11 @@ def compute_plan(targets: dict[str, float],
 
     max_order_usd clips a single order (remainder handled next run).
     max_turnover_pct caps total |order value| as % of NAV — exits are exempt
-    (they must happen), trims/buys get dropped smallest-first to fit.
+    (they must happen), trims/buys get dropped smallest-first to fit. Buys also
+    draw on an idle-cash allowance: cash held above the ledger's target weight is
+    exempt, because deploying new capital is a one-off, not churn. Note that
+    selling CONSUMES the cap rather than replenishing it — the cap bounds trading
+    activity, while the separate cash cap below bounds affordability.
     cost_buffer shaves buy budget for fees + limit-price slippage.
     overshoot_tol bounds how far the cash top-up may push a position past its
     target slot (0.25 = a position may end up 25% over its target weight).
@@ -178,6 +182,23 @@ def compute_plan(targets: dict[str, float],
             f"exits alone (${exit_value:,.0f}) exceed turnover cap (${cap:,.0f}) — "
             f"executing exits anyway (in/out mirroring takes priority)")
     room = max(0.0, cap - exit_value)
+
+    # Idle-cash allowance. The cap exists to bound CHURN, whose cost scales with
+    # how often we trade the same money. Putting capital to work for the first
+    # time is not churn: it is a one-off, it is what the ledger already asks for,
+    # and it is the whole point of a deposit. Left unexempted it queues behind
+    # unrelated rotation — on 2026-08-03 six exits ate half a 40% cap and $5,409
+    # of buys were dropped while $5,315 of deposited cash sat idle.
+    #
+    # The allowance is cash held ABOVE the ledger's own target cash weight, so it
+    # is self-limiting: it exists only while we are underinvested, and vanishes
+    # the moment we reach target. `cash` here is PRE-trade, so today's own sale
+    # proceeds are not counted — rotation stays fully capped, as intended.
+    # It also disappears under a reduced DD tier, because gating scales the
+    # weights down and raises target cash to match.
+    target_cash = nav * max(0.0, 1.0 - sum(targets.values()))
+    idle_cash = max(0.0, cash - target_cash)
+
     kept_trims, kept_buys = [], []
     for o in sorted(trims, key=lambda o: -o.est_value):
         if o.est_value <= room:
@@ -185,10 +206,19 @@ def compute_plan(targets: dict[str, float],
             room -= o.est_value
         else:
             plan.warnings.append(f"{o.ticker}: trim ${o.est_value:,.0f} dropped (turnover cap)")
+    # Trims are rotation and draw on `room` alone; buys may also draw on the
+    # idle-cash allowance. Solvency is unaffected — the cash cap below still
+    # applies to whatever survives here.
+    buy_room = room + idle_cash
+    if idle_cash > 0:
+        plan.warnings.append(
+            f"idle-cash allowance ${idle_cash:,.0f} added to the buy budget "
+            f"(cash ${cash:,.0f} vs ledger target ${target_cash:,.0f}) — "
+            f"deploying new capital is not churn")
     for o in sorted(buys, key=lambda o: -o.est_value):
-        if o.est_value <= room:
+        if o.est_value <= buy_room:
             kept_buys.append(o)
-            room -= o.est_value
+            buy_room -= o.est_value
         else:
             plan.warnings.append(f"{o.ticker}: buy ${o.est_value:,.0f} dropped (turnover cap)")
 

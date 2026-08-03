@@ -159,6 +159,29 @@ flows alert via Telegram.
   show up in every summary — decide per-name whether to live without it.
 - **Stale ledger guard:** if the ledger's `current_date` is >5 days old the
   script refuses to trade.
+- **Two independent caps limit buys — don't confuse them.**
+  1. **Turnover** (`max_turnover_pct`, default 40% of NAV) bounds trading
+     *activity*, i.e. cost. It counts sells **and** buys against one allowance,
+     so **selling consumes the cap rather than replenishing it**. Exits are
+     exempt from being dropped (they must happen) but still eat the allowance —
+     on 2026-08-03 six exits used $6,057 of an $11,887 cap and $5,409 of buys
+     were dropped as a result.
+  2. **Cash** bounds *affordability*: `(orderable + expected sell proceeds) ×
+     (1 − cost_buffer)`. This is the "sell first, then spend the proceeds"
+     rule, and it applies after the turnover cap.
+
+  A run can be blocked by (1) while (2) still has slack, which looks like
+  "why isn't my cash being used?".
+- **Idle-cash allowance.** Cash held *above the ledger's target weight* is
+  exempt from the turnover cap. Deploying new capital is a one-off, not churn,
+  so a deposit no longer queues behind unrelated rotation. The allowance is
+  self-limiting: it exists only while underinvested, vanishes at target, ignores
+  the current run's own sale proceeds (rotation stays fully capped), and
+  disappears under a reduced DD tier, where the governor wants the cash held.
+  **Consequence:** on a deployment day total turnover can exceed the nominal
+  cap — 57% vs a 40% setting in the 08-03 replay. That is intended; the buys
+  happen either way, so deferring them costs cash drag without saving
+  commission. Trims never draw on the allowance.
 - **Cash source.** The script prefers the plain USD deposit from
   `inquire-present-balance`. A KRW-seeded account under 통합증거금 reports a
   **zero** USD deposit while still being able to order US stock (this is what

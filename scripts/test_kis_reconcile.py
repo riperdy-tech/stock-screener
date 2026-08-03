@@ -117,6 +117,77 @@ def test_turnover_cap_drops_buys_keeps_exits():
     assert any("turnover cap" in w for w in plan.warnings)
 
 
+# --- idle-cash allowance ----------------------------------------------------
+#
+# Shared setup: $10k NAV = $6k idle cash + a $4k position being exited. Targets
+# ask for 90% invested, so target cash is $1k and $5k of the cash is idle.
+# A 40% cap gives $4k of turnover, entirely consumed by the exit — under the old
+# rule every buy was dropped even though the money was sitting there.
+IDLE_KW = dict(held={"OLD": 40}, sellable={"OLD": 40},
+               prices={"OLD": 100, "AAA": 100, "BBB": 100},
+               cash=6_000, max_turnover_pct=40)
+IDLE_TARGETS = {"AAA": 0.45, "BBB": 0.45}
+
+
+def test_idle_cash_is_exempt_from_the_turnover_cap():
+    plan = compute_plan(IDLE_TARGETS, **IDLE_KW)
+    assert plan.nav == 10_000, plan.nav
+    # cap 4,000 - exit 4,000 = 0 room; allowance = 6,000 cash - 1,000 target
+    bought = sum(o.est_value for o in plan.buys)
+    assert bought > 0, "idle cash must not queue behind unrelated rotation"
+    assert bought <= 5_000 + 1e-6, bought
+    assert any("idle-cash allowance" in w for w in plan.warnings)
+
+
+def test_without_the_allowance_the_same_plan_is_fully_blocked():
+    """Same book, but cash already at the ledger's target -> nothing exempt.
+
+    Pins the old behaviour so the test above cannot go vacuous. cash=444 is the
+    fixed point: NAV 4,444 x 10% target cash == the cash held, so idle is zero.
+    """
+    plan = compute_plan(IDLE_TARGETS, held={"OLD": 40}, sellable={"OLD": 40},
+                        prices={"OLD": 100, "AAA": 100, "BBB": 100},
+                        cash=444, max_turnover_pct=40)
+    assert sum(o.est_value for o in plan.buys) == 0
+    assert not any("idle-cash allowance" in w for w in plan.warnings)
+    assert any("turnover cap" in w for w in plan.warnings)
+
+
+def test_allowance_never_breaches_the_cash_budget():
+    """Solvency is a separate cap and still binds: buys <= orderable + proceeds."""
+    plan = compute_plan(IDLE_TARGETS, **{**IDLE_KW, "buy_budget": 500})
+    bought = sum(o.est_value for o in plan.buys)
+    exits = sum(o.est_value for o in plan.sells)
+    assert bought <= (500 + exits) * 0.995 + 1e-6, (bought, exits)
+
+
+def test_allowance_vanishes_when_the_dd_gate_scales_targets_down():
+    """A reduced tier raises target cash, so there is no 'idle' cash to deploy.
+
+    The governor wants that cash held; the allowance must not undo the gate.
+    """
+    gated = {t: w * 0.25 for t, w in IDLE_TARGETS.items()}   # quarter gross
+    plan = compute_plan(gated, **IDLE_KW)
+    assert not any("idle-cash allowance" in w for w in plan.warnings)
+
+
+def test_rotation_trims_do_not_draw_on_the_allowance():
+    """The allowance funds deployment, never churn.
+
+    TRIM is grossly overweight (100 shares held against a 22-share slot, a
+    $7,800 trim) while the exit leaves only $2,800 of room. Idle cash of $3,800
+    is available and must NOT rescue it.
+    """
+    plan = compute_plan({"TRIM": 0.10, "AAA": 0.80},
+                        held={"OLD": 60, "TRIM": 100},
+                        sellable={"OLD": 60, "TRIM": 100},
+                        prices={"OLD": 100, "TRIM": 100, "AAA": 100},
+                        cash=6_000, max_turnover_pct=40)
+    assert any("TRIM" in w and "trim" in w and "turnover cap" in w
+               for w in plan.warnings), plan.warnings
+    assert all(o.reason != "trim" for o in plan.sells)
+
+
 def test_sells_ordered_before_buys():
     plan = compute_plan(targets={"NEW": 0.9}, held={"OLD": 50},
                         sellable={"OLD": 50}, prices={"OLD": 100, "NEW": 10},
