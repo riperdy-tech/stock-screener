@@ -307,9 +307,12 @@ def compute_battery(history):
         battery["net_issuance_1y"] = (
             round(sh[y0] / sh[y1] - 1, 4) if sh.get(y0) and sh.get(y1) else None)
         y3 = next((y for y in years if y <= y0 - 3 and sh.get(y)), None)
+        # Both endpoints must be POSITIVE, not merely truthy: a negative share
+        # count makes the fractional power return a complex number (see the
+        # revenue CAGR note below). Undefined -> null.
         battery["net_issuance_3y_cagr"] = (
             round((sh[y0] / sh[y3]) ** (1 / (y0 - y3)) - 1, 4)
-            if sh.get(y0) and y3 else None)
+            if y3 and (sh.get(y0) or 0) > 0 and sh[y3] > 0 else None)
 
     # ── Beneish M-Score (8 ratios; missing ones neutralized + reported) ──
     ratios = {}
@@ -373,7 +376,17 @@ def compute_battery(history):
     if len(revs) >= 6:
         (ya, ra), (yb, rb) = revs[max(0, len(revs) - 6)], revs[-1]
         span = yb - ya
-        battery["revenue_cagr_5y"] = round((rb / ra) ** (1 / span) - 1, 4) if span > 0 and ra > 0 else None
+        # rb > 0 is load-bearing, not defensive: a negative TERMINAL revenue
+        # (contra-revenue, restatement, mis-tagged XBRL fact) makes rb/ra
+        # negative, and a negative float ** a fractional power returns a
+        # complex, which round() rejects with TypeError. That killed the whole
+        # build weekly from 2026-07-05 — the crash aborted main() before either
+        # output file was written, so both silently kept their 06-29 contents.
+        # A CAGR to a negative endpoint has no real value: null, per the
+        # data-honesty rule above.
+        battery["revenue_cagr_5y"] = (
+            round((rb / ra) ** (1 / span) - 1, 4)
+            if span > 0 and ra > 0 and rb > 0 else None)
     else:
         battery["revenue_cagr_5y"] = None
     margins = []
