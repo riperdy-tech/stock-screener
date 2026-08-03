@@ -51,6 +51,7 @@ STOCKS_JSON = DATA / "stocks.json"
 FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 PORTFOLIO_PLAN_JSON = DATA / "portfolio_plan.json"
 PORTFOLIO_PLAN_LLM_JSON = DATA / "portfolio_plan_llm.json"   # LLM-overlay variant (A/B)
+LLM_OVERLAY_JSON = DATA / "llm_overlay.json"                 # RS2 verdicts (fair_value etc.) — F-04 hysteresis exit test
 PORTFOLIO_PLAN_MOMO_JSON = DATA / "portfolio_plan_momo.json"  # plan3 momentum sleeve
 MY_PORTFOLIO_JSON = DATA / "my_portfolio.json"
 LEDGERS_JSON = DATA / "paper_ledgers.json"
@@ -130,6 +131,56 @@ def evaluated_llm(entry):
     """
     return bool(entry) and entry.get("fct_band_llm") is not None
 MIN_EQUAL_NAMES = 8      # #8 concentration floor: equal-weight over max(count, this) -> cash residual when few
+
+# ── F-04 hysteresis (equal_llm only, added 2026-08-04) ────────────────────────
+# The strict research_now gate (score_factors.apply_llm_overlay: deep>=30 / MoS>=15
+# / conv>=9.5) recomputes live MoS against daily-moving prices with no hysteresis,
+# so a held name parked near the cliff round-trips on ordinary price noise (F-04).
+# ENTRY is unchanged; a held name that has slipped OUT of research_now is RETAINED
+# until it drops below this looser EXIT band, then sold via the normal leaver path.
+# Thresholds from the benchmark sweep (scratchpad/hyst_sweep.py, 2026-08-04): at
+# 25bps+ this nets more than the hard cliff and cuts trades ~30%. MoS is the noisy
+# price-driven input so it gets a real 5pt buffer; conviction is anchor-stable
+# (F-01 fixed) so it gets only a token 0.5pt one.
+# NOTE: the live-MoS / staleness / bearish logic below MIRRORS
+# score_factors.apply_llm_overlay (~lines 186-246) — keep the two in sync.
+HYST_EXIT_MOS, HYST_EXIT_DEEP, HYST_EXIT_CONV = 10.0, 25.0, 9.0
+_HYST_BEAR_WORDS = ("AVOID", "SELL", "REDUCE", "TRIM", "EXIT", "SHORT")
+
+
+def llm_hold_qualifies(entry, verdict, live_price, as_of):
+    """F-04 exit test: True if a currently-held equal_llm name that has left the
+    strict research_now set is still 'good enough to hold' (clears the looser exit
+    band), so it is retained rather than sold on boundary noise. A genuine bearish
+    call (AVOID/SELL/REDUCE/TRIM/EXIT/SHORT or stance overvalued) always fails ->
+    hard exit, no hysteresis. `entry` is the factor_scores row (for the quant
+    guardrail); `verdict` is the llm_overlay.json ticker record (fair_value etc.).
+    Mirrors score_factors.apply_llm_overlay; keep in sync."""
+    if not entry or entry.get("fct_veto") is not None or not verdict:
+        return False
+    act = (verdict.get("action") or "").upper()
+    stance = (verdict.get("stance") or "").lower()
+    if any(w in act for w in _HYST_BEAR_WORDS) or stance == "overvalued":
+        return False                                   # explicit bear = hard exit
+    conv = verdict.get("conviction")
+    c = conv if isinstance(conv, (int, float)) else 9.0
+    ad = verdict.get("analyzed_date")
+    try:
+        if ad and (date.fromisoformat(as_of) - date.fromisoformat(ad)).days > 14:
+            c = 9.0 + (c - 9.0) * 0.5                   # stale -> shrink toward neutral (as score_factors)
+    except Exception:
+        pass
+    fv = verdict.get("fair_value")
+    if isinstance(fv, (int, float)) and live_price:
+        mos = (fv / live_price - 1.0) * 100.0          # live MoS (fair_value / today's close)
+    else:                                              # no live price: fall back to the frozen verdict MoS
+        mos = verdict.get("realistic_mos_pct")
+        if mos is None:
+            mos = verdict.get("mos_pct")
+    et = (verdict.get("entry_timing") or "").lower()
+    if mos is not None and mos >= HYST_EXIT_DEEP:      # still deep value -> hold regardless of conviction
+        return True
+    return c >= HYST_EXIT_CONV and ((mos is not None and mos >= HYST_EXIT_MOS) or et == "buy")
 
 
 def load_json(path, default=None):
@@ -1028,8 +1079,28 @@ def main():
             research_llm = sorted(t for t, e in factor.items()
                                   if e.get("fct_band_llm") == "research_now"
                                   and e.get("fct_llm_veto") != "llm_reject")
-            eqw_llm = 100.0 / max(len(research_llm), MIN_EQUAL_NAMES) if research_llm else 0   # #8 cash residual when few
-            nav_eql, stale_eql = run_or_hold("equal_llm", {t: eqw_llm for t in research_llm}, "rank",
+            # F-04 hysteresis: RETAIN currently-held names that have slipped out of
+            # the strict research_now gate but still clear the looser exit band, so
+            # daily price noise around the MoS/conviction cliff stops round-tripping
+            # them (see llm_hold_qualifies). Candidates are held, evaluated, and not
+            # already in the strict set; unknown/unevaluated holds are carried by
+            # run_target_ledger's own path, and strict RN names enter/stay normally.
+            # overlay_on is True here (checked above), so the overlay file exists;
+            # if it somehow fails to load, no name is retained -> current behaviour.
+            overlay_tk = (load_json(LLM_OVERLAY_JSON, {}) or {}).get("tickers", {})
+            strict_llm = set(research_llm)
+            retained_llm = sorted(
+                t for t in ledgers["equal_llm"]["state"]["holdings"]
+                if t not in strict_llm and evaluated_llm(factor.get(t))
+                and llm_hold_qualifies(factor.get(t), overlay_tk.get(t),
+                                       num(prices.get(t)), as_of))
+            if retained_llm:
+                print(f"  · equal_llm: F-04 hysteresis retained {len(retained_llm)} held "
+                      f"name(s) below research_now but above exit band: {retained_llm}",
+                      file=sys.stderr)
+            target_llm = research_llm + retained_llm
+            eqw_llm = 100.0 / max(len(target_llm), MIN_EQUAL_NAMES) if target_llm else 0   # #8 cash residual when few
+            nav_eql, stale_eql = run_or_hold("equal_llm", {t: eqw_llm for t in target_llm}, "rank",
                                              unknown=unknown_llm, source_ok=fct_ok, why=fct_why)
         for name, nav, stale in (("plan_llm", nav_pl, stale_pl), ("plan2_llm", nav_pl2, stale_pl2),
                                  ("equal_llm", nav_eql, stale_eql)):

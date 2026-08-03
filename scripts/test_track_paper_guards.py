@@ -193,6 +193,65 @@ def test_mass_demotion_now_exits_on_the_grace_schedule_not_four_days():
     assert len(led["state"]["holdings"]) == 4, "mass demotion did not execute on schedule"
 
 
+# ── F-04 hysteresis exit band (equal_llm retention) ──────────────────────────
+
+def _verdict(action="Hold", conviction=10.0, fair_value=None,
+             analyzed_date="2026-07-01", entry_timing="stage", stance="fair"):
+    return {"action": action, "conviction": conviction, "fair_value": fair_value,
+            "analyzed_date": analyzed_date, "entry_timing": entry_timing, "stance": stance}
+
+
+_OK_ENTRY = {"fct_veto": None}
+
+
+def test_hyst_retains_name_in_buffer_zone():
+    """Live MoS 12 (below the 15 entry gate, above the 10 exit) with healthy
+    conviction -> a held name is retained, not sold on boundary noise."""
+    v = _verdict(conviction=10.0, fair_value=112.0)          # (112/100-1)=12% MoS
+    assert tp.llm_hold_qualifies(_OK_ENTRY, v, 100.0, "2026-07-05") is True
+
+
+def test_hyst_sells_below_exit_band():
+    """Live MoS 8 (below the 10 exit) with conviction below 9.0 -> not retained."""
+    v = _verdict(conviction=8.5, fair_value=108.0)           # 8% MoS
+    assert tp.llm_hold_qualifies(_OK_ENTRY, v, 100.0, "2026-07-05") is False
+
+
+def test_hyst_deep_value_holds_regardless_of_conviction():
+    """MoS >= 25 holds even on weak conviction (deep-value carve-out)."""
+    v = _verdict(conviction=4.0, fair_value=130.0)           # 30% MoS
+    assert tp.llm_hold_qualifies(_OK_ENTRY, v, 100.0, "2026-07-05") is True
+
+
+def test_hyst_bearish_is_hard_exit():
+    """An explicit bearish call always exits, even with a fat margin of safety."""
+    v = _verdict(action="Sell / reduce exposure", conviction=12.0, fair_value=140.0)
+    assert tp.llm_hold_qualifies(_OK_ENTRY, v, 100.0, "2026-07-05") is False
+
+
+def test_hyst_conviction_buffer_boundary():
+    """MoS in [10,25) needs conviction >= 9.0 (the token buffer below the 9.5 gate)."""
+    v_ok = _verdict(conviction=9.0, fair_value=112.0)        # conv exactly at the buffer
+    v_no = _verdict(conviction=8.9, fair_value=112.0)        # just below
+    assert tp.llm_hold_qualifies(_OK_ENTRY, v_ok, 100.0, "2026-07-05") is True
+    assert tp.llm_hold_qualifies(_OK_ENTRY, v_no, 100.0, "2026-07-05") is False
+
+
+def test_hyst_uses_live_price_not_frozen_mos():
+    """A name that rallied so its LIVE MoS collapsed is dropped even if the
+    frozen verdict MoS still looks cheap — the whole point of F-04."""
+    v = _verdict(conviction=8.0, fair_value=105.0)           # live MoS ~5% at price 100
+    v["realistic_mos_pct"] = 40.0                            # stale frozen value, must be ignored
+    assert tp.llm_hold_qualifies(_OK_ENTRY, v, 100.0, "2026-07-05") is False
+
+
+def test_hyst_vetoed_or_missing_verdict_not_retained():
+    """Quant hard-veto or an absent verdict -> never retained."""
+    assert tp.llm_hold_qualifies({"fct_veto": "forensic_pair"},
+                                 _verdict(fair_value=130.0), 100.0, "2026-07-05") is False
+    assert tp.llm_hold_qualifies(_OK_ENTRY, None, 100.0, "2026-07-05") is False
+
+
 def test_guard_does_not_raise_systemexit():
     """The tracker signals held books via the data, never by failing the process —
     a nonzero exit would abort run_chain's daily commit. Guard-tripping paths must

@@ -13,7 +13,7 @@ import { useAuth } from '@/lib/useAuth';
 import { AuthModal } from './AuthModal';
 import {
     ArrowUpRight, BarChart3, Briefcase, Cpu, ExternalLink, FlaskConical, GitCompareArrows,
-    HelpCircle, Layers3, LineChart as LineChartIcon, RefreshCw, Search, ShieldAlert, Sparkles, X,
+    HelpCircle, Layers3, LineChart as LineChartIcon, RefreshCw, Search, ShieldAlert, Sparkles, Tag, X,
 } from 'lucide-react';
 import {
     Bar, BarChart, Brush, CartesianGrid, Line, LineChart,
@@ -27,6 +27,7 @@ import {
 import { quarterKelly, POSITION_CAP_PCT } from '@/lib/kelly';
 import { Rs2AnalysisPanel } from './Rs2AnalysisPanel';
 import { Hint } from './Hint';
+import { APP_VERSION, CHANGELOG } from '@/lib/changelog';
 
 // Plain-English explanations for the rankings-table column headers and other
 // first-glance-confusing UI. Shared across the three lens views so the same
@@ -258,6 +259,39 @@ function HelpModal({ onClose }: { onClose: () => void }) {
                     </HelpSection>
                     </div>
                 )}
+            </div>
+        </div>
+    );
+}
+
+function ChangelogModal({ onClose }: { onClose: () => void }) {
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
+            <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl border border-border bg-background p-5 shadow-2xl"
+                onClick={e => e.stopPropagation()}>
+                <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-2">
+                        <Tag className="h-4 w-4 text-emerald-400" />
+                        <h2 className="text-lg font-black">What&apos;s new <span className="text-muted-foreground">· v{APP_VERSION}</span></h2>
+                    </div>
+                    <button onClick={onClose} className="rounded-md border border-border p-1.5 text-muted-foreground hover:text-foreground">
+                        <X className="h-4 w-4" />
+                    </button>
+                </div>
+                <div className="mt-4 space-y-5">
+                    {CHANGELOG.map(entry => (
+                        <div key={entry.version} className="border-l-2 border-emerald-500/40 pl-3">
+                            <div className="flex items-baseline gap-2">
+                                <span className="rounded bg-emerald-500/15 px-1.5 py-0.5 text-xs font-black text-emerald-300">v{entry.version}</span>
+                                <span className="text-xs font-semibold text-muted-foreground">{entry.date}</span>
+                            </div>
+                            <h3 className="mt-1.5 text-sm font-bold">{entry.title}</h3>
+                            <ul className="mt-1.5 list-disc space-y-1 pl-4 text-xs text-muted-foreground">
+                                {entry.changes.map((c, i) => <li key={i}>{c}</li>)}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
@@ -865,6 +899,7 @@ export default function CockpitDashboard() {
     const [limit, setLimit] = useState(100);
     const [selected, setSelected] = useState<string | null>(null);
     const [showHelp, setShowHelp] = useState(false);
+    const [showChangelog, setShowChangelog] = useState(false);
     const auth = useAuth();
     const [showAuth, setShowAuth] = useState(false);
     // What-if commission overlay: re-cost every trade at a user-set %/side vs the
@@ -1215,6 +1250,11 @@ export default function CockpitDashboard() {
                         ))}
                     </nav>
                     <div className="ml-auto flex items-center gap-2">
+                        <button onClick={() => setShowChangelog(true)}
+                            className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-2.5 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground"
+                            title="What's new / changelog" aria-label="Open changelog">
+                            <Tag className="h-3.5 w-3.5" /> v{APP_VERSION}
+                        </button>
                         <button onClick={() => setShowHelp(true)}
                             className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-2.5 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground"
                             title="How this page works" aria-label="Open help">
@@ -1916,6 +1956,7 @@ export default function CockpitDashboard() {
             </main>
 
             {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
+            {showChangelog && <ChangelogModal onClose={() => setShowChangelog(false)} />}
             {showAuth && <AuthModal onClose={() => setShowAuth(false)} signIn={auth.signIn} signUp={auth.signUp} />}
 
             {/* ── Detail slide-over ─────────────────────────────────── */}
