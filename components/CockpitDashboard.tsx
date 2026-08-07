@@ -713,6 +713,24 @@ const navEndLabel = (name: string, color: string, lastIdx: number) =>
         );
     };
 
+// Custom Brush drag handles — large rounded pills with grip notches, matching the
+// chart's emerald accent. Recharts v3 keeps the drag/pointer handlers on the wrapper
+// Layer around the traveller, so this render is purely visual and stays draggable.
+const renderNavTraveller = (props: any) => {
+    const { x, y, width, height } = props;
+    const cx = x + width / 2;
+    const hy = y + 2;
+    const hh = Math.max(8, height - 4);
+    return (
+        <g style={{ cursor: 'ew-resize' }}>
+            <rect x={x} y={hy} width={width} height={hh} rx={5} fill="#0f172a" stroke="#34d399" strokeWidth={2} />
+            <line x1={cx - 3.5} y1={hy + hh * 0.3} x2={cx - 3.5} y2={hy + hh * 0.7} stroke="#34d399" strokeWidth={1.6} strokeLinecap="round" />
+            <line x1={cx} y1={hy + hh * 0.3} x2={cx} y2={hy + hh * 0.7} stroke="#34d399" strokeWidth={1.6} strokeLinecap="round" />
+            <line x1={cx + 3.5} y1={hy + hh * 0.3} x2={cx + 3.5} y2={hy + hh * 0.7} stroke="#34d399" strokeWidth={1.6} strokeLinecap="round" />
+        </g>
+    );
+};
+
 export default function CockpitDashboard() {
     const { t } = useLanguage();
     const [tab, setTab] = useState<TabId>('rankings');
@@ -739,7 +757,10 @@ export default function CockpitDashboard() {
         next.has(b) ? next.delete(b) : next.add(b);
         return next;
     });
-    const [hiddenNav, setHiddenNav] = useState<Set<string>>(new Set());
+    // Default: show only the equal·LLM strategy line (plus the IWM/QQQ/SPY benchmarks).
+    // All other paper-ledgers (plan, plan2, equal, plan·LLM, plan2·LLM, plan3, mine)
+    // start hidden but can be toggled on from the chart legend.
+    const [hiddenNav, setHiddenNav] = useState<Set<string>>(new Set(['plan', 'plan_llm', 'plan2', 'plan2_llm', 'equal', 'plan3', 'mine']));
     const [navHover, setNavHover] = useState<string | null>(null);  // series key OR lowercased bench symbol
     const [brushIdx, setBrushIdx] = useState<{ s: number; e: number } | null>(null);  // Brush window (row indexes)
     const toggleNav = (k: string) => setHiddenNav(prev => {
@@ -1533,11 +1554,12 @@ export default function CockpitDashboard() {
                                     <span className="text-muted-foreground">baseline {(baseBps / 100).toFixed(2)}%/side ({baseBps}bps) — set your KIS rate to re-cost every trade</span>
                                 )}
                             </div>
-                            <ResponsiveContainer width="100%" height={280}>
+                            <ResponsiveContainer width="100%" height={400}>
                                 <LineChart data={navCurve} margin={{ top: 4, right: 92, bottom: 0, left: 0 }}>
                                     <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
-                                    <XAxis dataKey="date" tick={{ fontSize: 9 }} stroke="#64748b" minTickGap={28} interval="preserveStartEnd" />
-                                    <YAxis domain={navYDomain} tick={{ fontSize: 10 }} stroke="#64748b" />
+                                    <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#94a3b8' }} stroke="#475569" minTickGap={36} interval="preserveStartEnd"
+                                        tickFormatter={(d: string) => { const [y, m, day] = (d || '').split('-'); return m ? `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Number(m) - 1]} ${Number(day)}` : d; }} />
+                                    <YAxis domain={navYDomain} tick={{ fontSize: 12, fill: '#94a3b8' }} stroke="#475569" width={52} />
                                     <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
                                     {NAV_SERIES.map(s => (
                                         <Line key={s.key} type="monotone" dataKey={s.key} name={s.name}
@@ -1558,8 +1580,8 @@ export default function CockpitDashboard() {
                                                 label={navEndLabel(b, benchColor(b), navLastIdx[k] ?? -1)} />
                                         );
                                     })}
-                                    <Brush dataKey="date" height={24} stroke="#475569" fill="#0b1220"
-                                        travellerWidth={8} gap={1}
+                                    <Brush dataKey="date" height={34} fill="#1e293b" stroke="#475569"
+                                        travellerWidth={20} gap={1} traveller={renderNavTraveller}
                                         onChange={(r: any) => setBrushIdx(
                                             r && r.startIndex != null ? { s: r.startIndex, e: r.endIndex } : null)}
                                         tickFormatter={(d: string) => (typeof d === 'string' ? d.slice(5) : d)} />
