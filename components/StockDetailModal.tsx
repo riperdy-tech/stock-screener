@@ -23,6 +23,19 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
     const [isExpanded, setIsExpanded] = useState(false);
     const [activeTab, setActiveTab] = useState<string>("rs2");
 
+    // Password gate for Generate AI Prompt (same protection as the Deepseek flow).
+    const [showAskPw, setShowAskPw] = useState(false);
+    const [askPassword, setAskPassword] = useState("");
+    const [askError, setAskError] = useState("");
+
+    const handleGeneratePrompt = () => {
+        if (askPassword !== "RSYS") { setAskError("Incorrect password"); return; }
+        setShowAskPw(false);
+        setAskPassword("");
+        setAskError("");
+        onAskGemini && onAskGemini(candidate.symbol);
+    };
+
     const reverse = result.reverse;
     const paradigm = result.paradigm;
     const paradigmBand = paradigm?.pdm_band
@@ -168,14 +181,41 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="h-4 w-4 rounded-sm" />
                                         <span className="text-sm font-bold">TradingView</span>
                                     </a>
-                                    <button
-                                        onClick={() => onAskGemini && onAskGemini(candidate.symbol)}
-                                        className="flex items-center gap-2 rounded-md border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-3 py-2 text-blue-600 shadow-sm transition-all hover:from-blue-500/20 hover:to-purple-500/20 dark:text-blue-400"
-                                        title="Ask AI about this stock"
-                                    >
-                                        <Sparkles className="h-4 w-4" />
-                                        <span className="text-sm font-bold">Generate AI Prompt</span>
-                                    </button>
+                                    {showAskPw ? (
+                                        <div className="flex items-center gap-2">
+                                            <input
+                                                type="password"
+                                                placeholder="Password"
+                                                value={askPassword}
+                                                onChange={(e) => { setAskPassword(e.target.value); setAskError(""); }}
+                                                onKeyDown={(e) => e.key === 'Enter' && handleGeneratePrompt()}
+                                                autoFocus
+                                                className="w-32 rounded-md border border-white/15 bg-background px-2 py-2 text-sm font-bold text-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                                            />
+                                            <button
+                                                onClick={handleGeneratePrompt}
+                                                className="flex items-center gap-1.5 rounded-md bg-emerald-500 px-3 py-2 text-sm font-black text-emerald-950 transition-colors hover:bg-emerald-400"
+                                            >
+                                                <Sparkles className="h-4 w-4" /> Generate
+                                            </button>
+                                            <button
+                                                onClick={() => { setShowAskPw(false); setAskPassword(""); setAskError(""); }}
+                                                className="rounded-md border border-white/15 bg-white/5 px-2 py-2 text-sm font-bold text-muted-foreground transition-colors hover:bg-white/10"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <button
+                                            onClick={() => setShowAskPw(true)}
+                                            className="flex items-center gap-2 rounded-md border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-3 py-2 text-blue-600 shadow-sm transition-all hover:from-blue-500/20 hover:to-purple-500/20 dark:text-blue-400"
+                                            title="Ask AI about this stock (password required)"
+                                        >
+                                            <Sparkles className="h-4 w-4" />
+                                            <span className="text-sm font-bold">Generate AI Prompt</span>
+                                        </button>
+                                    )}
+                                    {askError && <span className="text-xs font-bold text-red-400">{askError}</span>}
                                 </div>
                             </div>
                             <div className={clsx("w-fit rounded-full px-3 py-1.5 text-xs font-black tracking-wide", result.passed ? "bg-success/20 text-success" : "bg-muted text-muted-foreground")}>
