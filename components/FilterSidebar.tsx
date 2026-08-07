@@ -303,7 +303,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                         className={clsx(
                                             "px-2.5 py-1.5 text-sm font-bold rounded-md border transition-all",
                                             localReverseFilters.archetypes.includes(arch)
-                                                ? "bg-primary text-primary-foreground border-primary"
+                                                ? "border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]"
                                                 : "bg-secondary/40 border-border/50 text-muted-foreground hover:border-primary/40"
                                         )}
                                     >
@@ -701,7 +701,7 @@ function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "
         ? "bg-emerald-600 text-white hover:bg-emerald-500"
         : tone === "purple"
             ? "bg-purple-600 text-white hover:bg-purple-500"
-            : "bg-primary text-primary-foreground hover:bg-primary/90";
+            : "border border-emerald-500/40 bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25";
 
     return (
         <div className="sticky bottom-0 z-10 border-t border-border/50 bg-card/80 p-3 shadow-[0_-4px_24px_rgba(0,0,0,0.5)] backdrop-blur-xl">
@@ -783,7 +783,7 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
                 onChange={(e) => onChange(e.target.value)}
                 className={`w-full h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer outline-none transition-all
                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
-                [&::-webkit-slider-thumb]:rounded-full ${isStrict ? '[&::-webkit-slider-thumb]:bg-warning [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(237,137,54,0.8)]' : '[&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(59,130,246,0.6)]'}
+                [&::-webkit-slider-thumb]:rounded-full ${isStrict ? '[&::-webkit-slider-thumb]:bg-warning [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(237,137,54,0.8)]' : '[&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(52,211,153,0.6)]'}
                 hover:[&::-webkit-slider-thumb]:scale-125 hover:[&::-webkit-slider-thumb]:transition-transform`}
             />
             <div className="mt-2 flex items-center justify-between font-mono text-xs font-bold text-muted-foreground/70">

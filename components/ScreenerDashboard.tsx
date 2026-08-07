@@ -1090,10 +1090,11 @@ export function ScreenerDashboard() {
                                 className={clsx(
                                     "flex items-center gap-1.5 whitespace-nowrap rounded px-3 py-1.5 text-sm font-bold transition-all duration-200",
                                     selectedMarket === m 
-                                                ? "bg-primary text-primary-foreground shadow"
+                                                ? "border border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]"
                                         : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                                 )}
-                            >                                <span className="font-black">{m}</span>
+                            >
+                                <span className="font-black">{m}</span>
                                 <span className="hidden 2xl:inline">
                                     {m === 'US' ? t('usStocks') : m === 'Korea' ? t('koreaStocks') : t('taiwanStocks')}
                                 </span>
@@ -1154,7 +1155,7 @@ export function ScreenerDashboard() {
                                     <div className={clsx(
                                         "h-full rounded-lg border p-3 text-left transition-all",
                                         isActive
-                                            ? "border-primary/70 bg-primary/10 shadow-[0_0_0_1px_rgba(59,130,246,0.18)]"
+                                            ? "border-primary/70 bg-primary/10 shadow-[0_0_0_1px_rgba(52,211,153,0.18)]"
                                             : "border-border/70 bg-card/70 hover:border-primary/40 hover:bg-secondary/30"
                                     )}>
                                         <div className="flex items-center gap-3">
@@ -1167,7 +1168,7 @@ export function ScreenerDashboard() {
                                             </div>
                                             <div className="shrink-0 text-right">
                                                 <div className="font-mono text-base font-black text-foreground">{countLabel}</div>
-                                                <div className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">{meta.metricLabel}</div>
+                                                <div className="text-xs font-bold uppercase tracking-wide text-muted-foreground">{meta.metricLabel}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -1253,7 +1254,8 @@ export function ScreenerDashboard() {
                                 />
                             ))}
                         </div>
-                    </section>                    {/* Phase 11d: Batch Progress Bar */}
+                    </section>
+                    {/* Phase 11d: Batch Progress Bar */}
                     {screenMode === 'reverse' && batchId && (
                         <div className="mb-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 animate-in fade-in">
                             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -1291,7 +1293,8 @@ export function ScreenerDashboard() {
                                             t.status === 'completed' ? "bg-emerald-500/20 text-emerald-400" :
                                             t.status === 'error' ? "bg-red-500/20 text-red-400" :
                                             "bg-secondary/40 text-muted-foreground"
-                                        )}>                                            {t.ticker}{t.status === 'completed' ? ' done' : t.status === 'error' ? ' error' : ' pending'}
+                                        )}>
+                                            {t.ticker}{t.status === 'completed' ? ' done' : t.status === 'error' ? ' error' : ' pending'}
                                         </span>
                                     ))}
                                 </div>
@@ -1346,7 +1349,7 @@ export function ScreenerDashboard() {
                                         onClick={() => setResultView('cards')}
                                         className={clsx(
                                             "flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-black transition-colors",
-                                            resultView === 'cards' ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                                            resultView === 'cards' ? "border border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                                         )}
                                         aria-pressed={resultView === 'cards'}
                                     >
@@ -1358,7 +1361,7 @@ export function ScreenerDashboard() {
                                         onClick={() => setResultView('table')}
                                         className={clsx(
                                             "flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-black transition-colors",
-                                            resultView === 'table' ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                                            resultView === 'table' ? "border border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                                         )}
                                         aria-pressed={resultView === 'table'}
                                     >
@@ -1434,7 +1437,7 @@ export function ScreenerDashboard() {
                                     {paradigmRealChangeEvents.length > 0 ? (
                                         <div className="overflow-x-auto rounded-md border border-border/60 bg-background/35">
                                             <table className="w-full min-w-[760px] text-left text-xs">
-                                                <thead className="border-b border-border/60 bg-secondary/35 text-[11px] uppercase tracking-wider text-muted-foreground">
+                                                <thead className="border-b border-border/60 bg-secondary/35 text-xs uppercase tracking-wider text-muted-foreground">
                                                     <tr>
                                                         <th className="px-3 py-2">Ticker</th>
                                                         <th className="px-3 py-2">Direction</th>
@@ -1511,7 +1514,7 @@ export function ScreenerDashboard() {
                                             </div>
                                             <div className="max-h-80 overflow-auto rounded-md border border-border/60">
                                                 <table className="w-full min-w-[760px] text-left text-xs">
-                                                    <thead className="sticky top-0 border-b border-border/60 bg-secondary text-[11px] uppercase tracking-wider text-muted-foreground">
+                                                    <thead className="sticky top-0 border-b border-border/60 bg-secondary text-xs uppercase tracking-wider text-muted-foreground">
                                                         <tr>
                                                             <th className="px-3 py-2">Ticker</th>
                                                             <th className="px-3 py-2">Company</th>
@@ -1641,7 +1644,7 @@ export function ScreenerDashboard() {
                                                     className={clsx(
                                                         "flex h-11 min-w-11 items-center justify-center rounded-lg px-3 text-base font-black transition-colors",
                                                         currentPage === p
-                                                            ? 'bg-primary text-primary-foreground shadow-sm'
+                                                            ? 'border border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]'
                                                             : 'border border-border/60 bg-secondary/30 text-muted-foreground hover:bg-secondary hover:text-foreground'
                                                     )}
                                                 >
@@ -1717,7 +1720,7 @@ export function ScreenerDashboard() {
                                                 </div>
                                                 <button
                                                     onClick={() => copyToClipboard(aiResult!)}
-                                                    className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-black text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 sm:w-auto"
+                                                    className="flex w-full items-center justify-center gap-2 rounded-md border border-emerald-500/40 bg-emerald-500/15 px-3 py-2 text-sm font-black text-emerald-300 shadow-sm transition-colors hover:bg-emerald-500/25 sm:w-auto"
                                                 >
                                                     {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                                                     {copied ? 'COPIED!' : 'COPY PROMPT'}
@@ -1747,7 +1750,7 @@ export function ScreenerDashboard() {
                                                         </div>
                                                     </div>
                                                     <button onClick={downloadDsResult} className="flex items-center gap-1 rounded bg-secondary px-3 py-2 text-sm font-bold hover:bg-secondary/80">Download .txt</button>
-                                                    <button onClick={copyDsResult} className="flex items-center gap-1 rounded bg-primary px-3 py-2 text-sm font-bold text-primary-foreground">
+                                                    <button onClick={copyDsResult} className="flex items-center gap-1 rounded border border-emerald-500/40 bg-emerald-500/15 px-3 py-2 text-sm font-bold text-emerald-300 hover:bg-emerald-500/25">
                                                         {dsCopied ? "Copied" : "Copy Result"}
                                                     </button>
                                                 </div>
@@ -2147,7 +2150,7 @@ function HelpPillar({ title, text }: { title: string; text: string }) {
 function SummaryMetric({ label, value }: { label: string; value: string | number }) {
     return (
         <div className="rounded-md border border-border/60 bg-secondary/20 px-3 py-2">
-            <div className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-0.5 truncate font-mono text-base font-black text-foreground" title={String(value)}>{value}</div>
         </div>
     );
@@ -2163,7 +2166,7 @@ function ParadigmMonitorStat({ label, value, tone }: { label: string; value: num
             tone === "blue" && "border-blue-500/25 bg-blue-500/10 text-blue-300",
             tone === "muted" && "border-border/60 bg-secondary/20 text-foreground"
         )}>
-            <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">{label}</div>
+            <div className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">{label}</div>
             <div className="mt-0.5 font-mono text-base font-black">{value.toLocaleString()}</div>
         </div>
     );
@@ -2494,7 +2497,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
             </div>
             <p className="mt-1 truncate text-xs leading-snug text-muted-foreground" title={detail}>{detail}</p>
             {onClick && (
-                <div className="mt-2 flex items-center justify-between border-t border-border/50 pt-1.5 text-[11px] font-black uppercase tracking-wider text-muted-foreground">
+                <div className="mt-2 flex items-center justify-between border-t border-border/50 pt-1.5 text-xs font-black uppercase tracking-wider text-muted-foreground">
                     <span>{active ? 'Applied' : 'Click to filter'}</span>
                     <span className={clsx(
                         "h-2.5 w-2.5 rounded-full",

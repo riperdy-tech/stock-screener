@@ -12,8 +12,8 @@ import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import { AuthModal } from './AuthModal';
 import {
-    ArrowUpRight, BarChart3, Briefcase, Cpu, ExternalLink, FlaskConical, GitCompareArrows,
-    HelpCircle, Layers3, LineChart as LineChartIcon, RefreshCw, Search, ShieldAlert, Sparkles, Tag, X,
+    ArrowUpRight, BarChart3, Briefcase, Cpu, ExternalLink, FileText, FlaskConical, GitCompareArrows,
+    HelpCircle, Layers3, LineChart as LineChartIcon, Loader2, RefreshCw, Search, ShieldAlert, Sparkles, Tag, X,
 } from 'lucide-react';
 import {
     Bar, BarChart, Brush, CartesianGrid, Line, LineChart,
@@ -28,6 +28,8 @@ import { quarterKelly, POSITION_CAP_PCT } from '@/lib/kelly';
 import { Rs2AnalysisPanel } from './Rs2AnalysisPanel';
 import { Hint } from './Hint';
 import { APP_VERSION, CHANGELOG } from '@/lib/changelog';
+import { useLanguage } from './LanguageContext';
+import { LanguageToggle } from './LanguageToggle';
 
 // Plain-English explanations for the rankings-table column headers and other
 // first-glance-confusing UI. Shared across the three lens views so the same
@@ -79,13 +81,13 @@ function OverlayChips({ overlay }: { overlay: any }) {
     return (
         <span className="inline-flex items-center gap-1.5">
             {gpr && gpr.gpr_level !== undefined && (
-                <span className={clsx('inline-flex rounded-md border px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider', GPR_STYLES[gpr.gpr_level] || GPR_STYLES[0])}
+                <span className={clsx('inline-flex rounded-md border px-1.5 py-0.5 text-[11px] font-black uppercase tracking-wider', GPR_STYLES[gpr.gpr_level] || GPR_STYLES[0])}
                     title={`Geopolitical exposure ${gpr.gpr_level}/3${gpr.channels?.length ? ` (${gpr.channels.join(', ')})` : ''}: ${gpr.note || ''}`}>
                     GPR {gpr.gpr_level}
                 </span>
             )}
-            {demand === 1 && <span className="text-[10px] font-black text-emerald-300" title="Informed demand positive: insider net buying without rising short interest">▲ INSIDERS</span>}
-            {demand === -1 && <span className="text-[10px] font-black text-red-300" title="Informed demand negative: insider selling with elevated/rising short interest">▼ INSIDERS</span>}
+            {demand === 1 && <span className="text-[11px] font-black text-emerald-300" title="Informed demand positive: insider net buying without rising short interest">▲ INSIDERS</span>}
+            {demand === -1 && <span className="text-[11px] font-black text-red-300" title="Informed demand negative: insider selling with elevated/rising short interest">▼ INSIDERS</span>}
         </span>
     );
 }
@@ -107,6 +109,15 @@ function fmtMcap(v: number | undefined): string {
 function fmtPct(v: number | null | undefined, digits = 1): string {
     if (v === null || v === undefined) return '—';
     return `${(v * 100).toFixed(digits)}%`;
+}
+
+// Lightweight loading shimmer used while the factor payload is being fetched/parsed.
+function Shimmer({ className }: { className?: string }) {
+    return (
+        <span className={clsx('relative block h-3 overflow-hidden rounded bg-secondary/40', className)}>
+            <span className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-emerald-500/15 to-transparent" />
+        </span>
+    );
 }
 
 function ChangelogModal({ onClose }: { onClose: () => void }) {
@@ -145,14 +156,14 @@ function ChangelogModal({ onClose }: { onClose: () => void }) {
 function BandChip({ band, veto }: { band: string | null; veto: string | null }) {
     if (veto) {
         return (
-            <span className="inline-flex items-center gap-1 rounded-md border border-red-500/40 bg-red-500/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-red-300">
+            <span className="inline-flex items-center gap-1 rounded-md border border-red-500/40 bg-red-500/10 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-red-300">
                 <ShieldAlert className="h-3 w-3" /> {veto.replace(/_/g, ' ')}
             </span>
         );
     }
     if (!band) return <span className="text-xs text-muted-foreground">—</span>;
     return (
-        <span className={clsx('inline-flex rounded-md border px-2 py-0.5 text-[10px] font-black uppercase tracking-wider', BAND_STYLES[band] || BAND_STYLES.pass)}>
+        <span className={clsx('inline-flex rounded-md border px-2 py-0.5 text-[11px] font-black uppercase tracking-wider', BAND_STYLES[band] || BAND_STYLES.pass)}>
             {band.replace(/_/g, ' ')}
         </span>
     );
@@ -181,7 +192,7 @@ function LlmChip({ entry }: { entry?: FactorEntry | null }) {
     ].filter(Boolean).join(' · ');
     return (
         <span title={`RS2 LLM — ${tip}`}
-            className={clsx('inline-flex items-center rounded-md border px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider', cls)}>
+            className={clsx('inline-flex items-center rounded-md border px-1.5 py-0.5 text-[11px] font-black uppercase tracking-wider', cls)}>
             {label}{v.conviction != null ? ` ${v.conviction}` : ''}
         </span>
     );
@@ -190,14 +201,15 @@ function LlmChip({ entry }: { entry?: FactorEntry | null }) {
 // THE LENS — the one switch that decides whose eyes you look through: the deterministic factor
 // engine (quant), the RS2 local-LLM verdicts (llm), or both side by side (compare).
 function LensSwitch({ lens, setLens }: { lens: 'quant' | 'llm' | 'compare'; setLens: (l: 'quant' | 'llm' | 'compare') => void }) {
+    const { t } = useLanguage();
     const items = [
-        { id: 'quant' as const, label: 'Quant', Icon: Cpu, on: 'border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]' },
-        { id: 'llm' as const, label: 'RS2 LLM', Icon: Sparkles, on: 'border-sky-400/60 bg-sky-500/15 text-sky-300 shadow-[0_0_12px_-2px_rgba(56,189,248,0.45)]' },
-        { id: 'compare' as const, label: 'Compare', Icon: GitCompareArrows, on: 'border-violet-400/60 bg-violet-500/15 text-violet-300 shadow-[0_0_12px_-2px_rgba(167,139,250,0.45)]' },
+        { id: 'quant' as const, label: t('lensQuant'), Icon: Cpu, on: 'border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]' },
+        { id: 'llm' as const, label: t('lensLlm'), Icon: Sparkles, on: 'border-sky-400/60 bg-sky-500/15 text-sky-300 shadow-[0_0_12px_-2px_rgba(56,189,248,0.45)]' },
+        { id: 'compare' as const, label: t('lensCompare'), Icon: GitCompareArrows, on: 'border-violet-400/60 bg-violet-500/15 text-violet-300 shadow-[0_0_12px_-2px_rgba(167,139,250,0.45)]' },
     ];
     return (
         <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-muted-foreground">Lens<Hint label="Lens" text={HINTS.lens} /></span>
+            <span className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-muted-foreground">{t('lensLabel')}<Hint label={t('lensLabel')} text={HINTS.lens} /></span>
             <div className="flex overflow-hidden rounded-lg border border-border bg-secondary/20 p-0.5">
                 {items.map(({ id, label, Icon }) => (
                     <button key={id} onClick={() => setLens(id)}
@@ -221,7 +233,7 @@ function StancePill({ stance }: { stance?: string | null }) {
     const cls = stance === 'undervalued' ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
         : stance === 'overvalued' ? 'border-red-500/40 bg-red-500/10 text-red-300'
             : 'border-amber-500/40 bg-amber-500/10 text-amber-300';
-    return <span className={clsx('inline-flex rounded-full border px-2 py-0.5 text-[10px] font-black uppercase tracking-wider', cls)}>{stance}</span>;
+    return <span className={clsx('inline-flex rounded-full border px-2 py-0.5 text-[11px] font-black uppercase tracking-wider', cls)}>{stance}</span>;
 }
 
 const convColor = (c?: number | null) => c == null ? 'text-muted-foreground' : c >= 10 ? 'text-emerald-300' : c >= 7 ? 'text-amber-300' : 'text-red-300';
@@ -243,8 +255,8 @@ function ActionCell({ action }: { action?: string | null }) {
                     : 'border-border bg-secondary/30 text-muted-foreground';
     return (
         <div className="min-w-[160px] max-w-[220px]" title={action}>
-            {verb && <span className={clsx('inline-flex rounded-full border px-2 py-0.5 text-[11px] font-black tracking-wider', cls)}>{verb}</span>}
-            <div className="mt-1 text-[11px] normal-case leading-snug text-muted-foreground"
+            {verb && <span className={clsx('inline-flex rounded-full border px-2 py-0.5 text-xs font-black tracking-wider', cls)}>{verb}</span>}
+            <div className="mt-1 text-xs normal-case leading-snug text-muted-foreground"
                 style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                 {action.toLowerCase()}
             </div>
@@ -260,13 +272,13 @@ function LlmBandCell({ entry }: { entry: FactorEntry }) {
         <div className="space-y-0.5">
             <BandChip band={entry.fct_band_llm ?? null} veto={entry.fct_llm_veto ?? null} />
             {entry.fct_llm_verdict?.exit_review && (
-                <div className="text-[10px] font-black uppercase tracking-wider text-amber-300/90"
+                <div className="text-[11px] font-black uppercase tracking-wider text-amber-300/90"
                     title="Holder's exit review — the name fell out of the quant research list; the verdict is a hold/trim/sell call, not a buy case.">
                     exit review
                 </div>
             )}
             {!same && (
-                <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/70">
                     quant · {(entry.fct_band || '—').replace(/_/g, ' ')}{entry.fct_veto ? ` (${entry.fct_veto.replace(/_/g, ' ')})` : ''}
                 </div>
             )}
@@ -349,12 +361,12 @@ function ValuationWorkbench({ model }: { ticker: string; model: ValuationModel |
                 <div className="rounded-lg border border-border/60 bg-secondary/20 p-2">
                     <div className="font-bold uppercase tracking-wider text-muted-foreground">Price implies</div>
                     <div className="mt-1 font-mono text-lg font-black text-amber-300">{fmtPct(model.implied_growth)}/yr</div>
-                    <div className="text-[10px] text-muted-foreground">growth for 5y (then fade)</div>
+                    <div className="text-[11px] text-muted-foreground">growth for 5y (then fade)</div>
                 </div>
                 <div className="rounded-lg border border-border/60 bg-secondary/20 p-2">
                     <div className="font-bold uppercase tracking-wider text-muted-foreground">Demonstrated</div>
                     <div className="mt-1 font-mono text-lg font-black text-sky-300">{evidenced !== null && evidenced !== undefined ? `${fmtPct(evidenced)}/yr` : '—'}</div>
-                    <div className="text-[10px] text-muted-foreground">5y revenue CAGR (SEC)</div>
+                    <div className="text-[11px] text-muted-foreground">5y revenue CAGR (SEC)</div>
                 </div>
             </div>
             {model.verdict && (
@@ -365,7 +377,7 @@ function ValuationWorkbench({ model }: { ticker: string; model: ValuationModel |
                     {model.verdict}
                 </p>
             )}
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-[11px] text-muted-foreground">
                 Base: {fmtMcap(a.base_cf)} {a.base_cf_kind.replace(/_/g, ' ')} (FY{a.fiscal_year}) · terminal {fmtPct(a.terminal_growth)} · sector WACC {a.wacc}%. Not a price target.
             </p>
         </div>
@@ -555,7 +567,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
     return (
         <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/[0.03] p-3">
             <h3 className="text-sm font-black uppercase tracking-wider text-emerald-300">My Portfolio — Kelly check</h3>
-            <p className="mt-1 text-[11px] text-muted-foreground">
+            <p className="mt-1 text-xs text-muted-foreground">
                 Enter your ACTUAL holdings (stored only in this browser). Each is compared against the model&apos;s
                 quarter-Kelly suggested size (cap {POSITION_CAP_PCT}%) and flagged if it&apos;s vetoed or oversized.
             </p>
@@ -580,7 +592,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
                     title="Saves your holdings snapshot to Supabase so the daily tracker measures your real portfolio (Track Record tab, 'mine' ledger)">
                     Save snapshot for tracking
                 </button>
-                {saveStatus && <span className="text-[11px] font-bold text-muted-foreground">{saveStatus}</span>}
+                {saveStatus && <span className="text-xs font-bold text-muted-foreground">{saveStatus}</span>}
                 <button onClick={() => setShowBulk(s => !s)}
                     className="rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground">
                     {showBulk ? 'Hide bulk paste' : 'Bulk paste…'}
@@ -589,7 +601,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
 
             {showBulk && (
                 <div className="mt-2 rounded-md border border-border bg-secondary/10 p-2.5">
-                    <p className="text-[11px] text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                         One position per line: <b className="font-mono text-foreground">TICKER  value</b> — the <b>last number</b> on
                         each line is taken as market value, so broker rows with extra columns (shares, price…) paste fine.
                         Separators: spaces, commas, or tabs. <b className="font-mono text-foreground">CASH 5000</b> sets cash.
@@ -608,7 +620,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
                             title="Clears the current list and replaces it with the pasted positions">
                             Replace all
                         </button>
-                        {bulkStatus && <span className="text-[11px] font-bold text-muted-foreground">{bulkStatus}</span>}
+                        {bulkStatus && <span className="text-xs font-bold text-muted-foreground">{bulkStatus}</span>}
                     </div>
                 </div>
             )}
@@ -617,7 +629,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
                 <>
                     <div className="mt-3 overflow-x-auto">
                         <table className="w-full min-w-[760px] text-left text-xs">
-                            <thead className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">
+                            <thead className="text-xs font-black uppercase tracking-wider text-muted-foreground">
                                 <tr><th className="px-2 py-1.5">Sym</th><th className="px-2 py-1.5 text-right">Value</th>
                                     <th className="px-2 py-1.5 text-right">Your wt</th><th className="px-2 py-1.5 text-right">Kelly wt</th>
                                     <th className="px-2 py-1.5">Verdict</th><th className="px-2 py-1.5 text-right">Gap</th>
@@ -631,7 +643,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
                                         <td className="px-2 py-1.5 text-right font-mono">${r.value.toLocaleString()}</td>
                                         <td className="px-2 py-1.5 text-right font-mono font-black">{r.wt.toFixed(1)}%</td>
                                         <td className="px-2 py-1.5 text-right font-mono">{r.modelWt === null ? '—' : `${r.modelWt.toFixed(1)}%`}</td>
-                                        <td className={clsx('px-2 py-1.5 text-[10px] font-black', r.tone)} title={r.k.reason}>{r.verdict}</td>
+                                        <td className={clsx('px-2 py-1.5 text-[11px] font-black', r.tone)} title={r.k.reason}>{r.verdict}</td>
                                         <td className="px-2 py-1.5 text-right font-mono">
                                             {r.vm?.expectations_gap_pts !== null && r.vm?.expectations_gap_pts !== undefined
                                                 ? `${r.vm.expectations_gap_pts > 0 ? '+' : ''}${r.vm.expectations_gap_pts.toFixed(0)}pts` : '—'}
@@ -647,7 +659,7 @@ function MyPortfolio({ factor, valuations, overlay, stockInfo, onSelect, user, o
                             </tbody>
                         </table>
                     </div>
-                    <div className="mt-2 flex flex-wrap gap-3 text-[11px] text-muted-foreground">
+                    <div className="mt-2 flex flex-wrap gap-3 text-xs text-muted-foreground">
                         <span>Total: <b className="font-mono text-foreground">${total.toLocaleString()}</b></span>
                         <span>Cash: <b className="font-mono text-foreground">{total > 0 ? ((cash / total) * 100).toFixed(1) : 0}%</b></span>
                         {weightedComposite !== null && <span>Weighted composite: <b className="font-mono text-foreground">{weightedComposite.toFixed(1)}</b></span>}
@@ -702,6 +714,7 @@ const navEndLabel = (name: string, color: string, lastIdx: number) =>
     };
 
 export default function CockpitDashboard() {
+    const { t } = useLanguage();
     const [tab, setTab] = useState<TabId>('rankings');
     const [factor, setFactor] = useState<FactorScoresPayload | null>(null);
     const [valuations, setValuations] = useState<Record<string, ValuationModel>>({});
@@ -1065,9 +1078,9 @@ export default function CockpitDashboard() {
         ?? ledgers?.ledgers?.equal_llm?.nav_series?.[0]?.date ?? null;
 
     const tabs: { id: TabId; label: string; icon: any }[] = [
-        { id: 'rankings', label: 'Rankings', icon: BarChart3 },
-        { id: 'track', label: 'Track Record', icon: LineChartIcon },
-        { id: 'portfolio', label: 'Portfolio', icon: Briefcase },
+        { id: 'rankings', label: t('tabRankings'), icon: BarChart3 },
+        { id: 'track', label: t('tabTrack'), icon: LineChartIcon },
+        { id: 'portfolio', label: t('tabPortfolio'), icon: Briefcase },
     ];
 
     return (
@@ -1079,8 +1092,9 @@ export default function CockpitDashboard() {
                         <FlaskConical className="h-6 w-6 text-emerald-400" />
                         <div>
                             <h1 className="text-lg font-black tracking-tight">FACTOR LAB <span className="text-emerald-400">COCKPIT</span></h1>
-                            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                                {factor ? `${factor.scored_count} scored · weights ${Object.entries(factor.weights_used).map(([f, w]) => `${f[0].toUpperCase()}${Math.round((w as number) * 100)}`).join(' ')} · ${factor.engine}` : 'loading…'}
+                            <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                                {factor ? `${factor.scored_count} ${t('scored')} · ${t('weights')} ${Object.entries(factor.weights_used).map(([f, w]) => `${f[0].toUpperCase()}${Math.round((w as number) * 100)}`).join(' ')} · ${factor.engine}`
+                                    : <span className="inline-flex items-center gap-1.5 text-emerald-300/90"><Loader2 className="h-3 w-3 animate-spin" /> {t('loadingEngine')}</span>}
                             </p>
                         </div>
                     </div>
@@ -1093,7 +1107,7 @@ export default function CockpitDashboard() {
                             </button>
                         ))}
                     </nav>
-                    <div className="ml-auto flex items-center gap-2">
+                    <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
                         <button onClick={() => setShowChangelog(true)}
                             className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-2.5 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground"
                             title="What's new / changelog" aria-label="Open changelog">
@@ -1104,22 +1118,23 @@ export default function CockpitDashboard() {
                             title="The complete handbook — how everything works" aria-label="Open the handbook">
                             <HelpCircle className="h-4 w-4" />
                         </Link>
-                        <Link href="/lenses" className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground">
-                            <Layers3 className="h-3.5 w-3.5" /> Lenses
+                        <Link href="/lenses" className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground" title={t('navLenses')}>
+                            <Layers3 className="h-3.5 w-3.5" /> <span className="hidden xl:inline">{t('navLenses')}</span>
                         </Link>
-                        <Link href="/reports" className="rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground">
-                            AI Reports
+                        <Link href="/reports" className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground" title={t('navReports')}>
+                            <FileText className="h-3.5 w-3.5" /> <span className="hidden xl:inline">{t('navReports')}</span>
                         </Link>
+                        <LanguageToggle />
                         {auth.ready && (auth.user ? (
                             <button onClick={() => auth.signOut()}
                                 className="rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground"
-                                title={auth.user.email || 'Log out'}>
-                                Log out
+                                title={auth.user.email || t('logOut')}>
+                                {t('logOut')}
                             </button>
                         ) : (
                             <button onClick={() => setShowAuth(true)}
                                 className="rounded-md border border-emerald-500/40 bg-emerald-500/15 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/25">
-                                Log in
+                                {t('logIn')}
                             </button>
                         ))}
                         <button onClick={loadAll} className="rounded-md border border-border bg-secondary/20 p-1.5 text-muted-foreground hover:text-foreground" title="Refresh">
@@ -1137,10 +1152,10 @@ export default function CockpitDashboard() {
                             <LensSwitch lens={lens} setLens={setLens} />
                             {lens === 'compare' && (
                                 <div className="flex items-center gap-1">
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">sort</span>
+                                    <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">sort</span>
                                     {([['delta', 'Δ disagreement'], ['quant', 'quant #'], ['llm', 'LLM #']] as const).map(([id, label]) => (
                                         <button key={id} onClick={() => setCmpSort(id)}
-                                            className={clsx('rounded px-2 py-1 text-[10px] font-black uppercase',
+                                            className={clsx('rounded px-2 py-1 text-[11px] font-black uppercase',
                                                 cmpSort === id ? 'bg-violet-500/20 text-violet-300' : 'text-muted-foreground hover:text-foreground')}>
                                             {label}
                                         </button>
@@ -1151,7 +1166,7 @@ export default function CockpitDashboard() {
                         <div className="flex flex-wrap items-center gap-2">
                             <div className="relative">
                                 <Search className="absolute left-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-                                <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Ticker or name…"
+                                <input value={search} onChange={e => setSearch(e.target.value)} placeholder={t('searchPlaceholderCockpit')}
                                     className="rounded-md border border-border bg-secondary/20 py-1.5 pl-7 pr-2 text-xs font-semibold outline-none focus:border-emerald-500/50" />
                             </div>
                             <select value={bandFilter} onChange={e => setBandFilter(e.target.value)}
@@ -1181,58 +1196,84 @@ export default function CockpitDashboard() {
                                 <option value="all">All sectors</option>
                                 {sectors.map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
-                            <span className="text-xs font-semibold text-muted-foreground">
-                                {lens === 'quant'
-                                    ? `${filteredRows.length} stocks · sector-neutral z, IC-calibrated weights`
-                                    : `${lensRows.filter(([t]) => llmRankMap[t] !== undefined).length} RS2-reviewed ranked first · ${lensRows.filter(([t]) => llmRankMap[t] === undefined).length} unreviewed greyed below`}
-                            </span>
+                            {loading ? (
+                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
+                                    <Loader2 className="h-3 w-3 animate-spin" /> Loading…
+                                </span>
+                            ) : (
+                                <span className="text-xs font-semibold text-muted-foreground">
+                                    {lens === 'quant'
+                                        ? `${filteredRows.length} stocks · sector-neutral z, IC-calibrated weights`
+                                        : `${lensRows.filter(([t]) => llmRankMap[t] !== undefined).length} RS2-reviewed ranked first · ${lensRows.filter(([t]) => llmRankMap[t] === undefined).length} unreviewed greyed below`}
+                                </span>
+                            )}
                         </div>
                         <div className="overflow-x-auto rounded-lg border border-border">
                             <table className={clsx('w-full text-left text-xs', lens === 'quant' ? 'min-w-[980px]' : 'min-w-[1180px]')}>
-                                <thead className="sticky top-0 bg-secondary/60 text-[10px] font-black uppercase tracking-wider text-muted-foreground backdrop-blur">
+                                <thead className="sticky top-0 bg-secondary/60 text-[11px] font-black uppercase tracking-wider text-muted-foreground backdrop-blur">
                                     {lens === 'quant' ? (
                                         <tr>
-                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">#<Hint label="#" text={HINTS.rank} /></span></th>
-                                            <th className="px-3 py-2">Stock</th>
-                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Composite<Hint label="Composite" text={HINTS.composite} /></span></th>
-                                            <th className="px-3 py-2 w-52"><span className="inline-flex items-center gap-1">Factor mix<Hint label="Factor mix" text={HINTS.factorMix} /></span></th>
-                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Band<Hint label="Band" text={HINTS.band} /></span></th>
-                                            <th className="px-3 py-2 text-right">Price</th>
-                                            <th className="px-3 py-2 text-right"><span className="inline-flex items-center gap-1">MCap<Hint label="MCap" text={HINTS.mcap} /></span></th>
-                                            <th className="px-3 py-2">Sector</th>
+                                            <th className="sticky left-0 z-20 bg-secondary/60 backdrop-blur px-3 py-2"><span className="inline-flex items-center gap-1">{t('colRank')}<Hint label={t('colRank')} text={HINTS.rank} /></span></th>
+                                            <th className="sticky left-[64px] z-20 bg-secondary/60 backdrop-blur px-3 py-2">{t('colStock')}</th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">{t('colComposite')}<Hint label={t('colComposite')} text={HINTS.composite} /></span></th>
+                                            <th className="px-3 py-2 w-52"><span className="inline-flex items-center gap-1">{t('colFactorMix')}<Hint label={t('colFactorMix')} text={HINTS.factorMix} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">{t('colBand')}<Hint label={t('colBand')} text={HINTS.band} /></span></th>
+                                            <th className="px-3 py-2 text-right">{t('colPrice')}</th>
+                                            <th className="px-3 py-2 text-right"><span className="inline-flex items-center gap-1">{t('colMcap')}<Hint label={t('colMcap')} text={HINTS.mcap} /></span></th>
+                                            <th className="px-3 py-2">{t('colSector')}</th>
                                         </tr>
                                     ) : lens === 'llm' ? (
                                         <tr>
-                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">LLM #<Hint label="LLM #" text={HINTS.llmRank} /></span></th>
-                                            <th className="px-3 py-2">Stock</th>
-                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">Band<Hint label="Band" text={HINTS.band} /></span></th>
-                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">Stance<Hint label="Stance" text={HINTS.stance} /></span></th>
-                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">Conv<Hint label="Conv" text={HINTS.conviction} /></span></th>
-                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">Action<Hint label="Action" text={HINTS.action} /></span></th>
-                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Composite<Hint label="Composite" text={HINTS.composite} /></span></th>
-                                            <th className="px-3 py-2 w-44"><span className="inline-flex items-center gap-1">Factor mix<Hint label="Factor mix" text={HINTS.factorMix} /></span></th>
-                                            <th className="px-3 py-2 text-right">Price</th>
-                                            <th className="px-3 py-2 text-right"><span className="inline-flex items-center gap-1">MCap<Hint label="MCap" text={HINTS.mcap} /></span></th>
-                                            <th className="px-3 py-2">Sector</th>
+                                            <th className="sticky left-0 z-20 bg-secondary/60 backdrop-blur px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">{t('colLlmRank')}<Hint label={t('colLlmRank')} text={HINTS.llmRank} /></span></th>
+                                            <th className="sticky left-[70px] z-20 bg-secondary/60 backdrop-blur px-3 py-2">{t('colStock')}</th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">{t('colBand')}<Hint label={t('colBand')} text={HINTS.band} /></span></th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">{t('colStance')}<Hint label={t('colStance')} text={HINTS.stance} /></span></th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">{t('colConv')}<Hint label={t('colConv')} text={HINTS.conviction} /></span></th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">{t('colAction')}<Hint label={t('colAction')} text={HINTS.action} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">{t('colComposite')}<Hint label={t('colComposite')} text={HINTS.composite} /></span></th>
+                                            <th className="px-3 py-2 w-44"><span className="inline-flex items-center gap-1">{t('colFactorMix')}<Hint label={t('colFactorMix')} text={HINTS.factorMix} /></span></th>
+                                            <th className="px-3 py-2 text-right">{t('colPrice')}</th>
+                                            <th className="px-3 py-2 text-right"><span className="inline-flex items-center gap-1">{t('colMcap')}<Hint label={t('colMcap')} text={HINTS.mcap} /></span></th>
+                                            <th className="px-3 py-2">{t('colSector')}</th>
                                         </tr>
                                     ) : (
                                         <tr>
-                                            <th className="px-3 py-2">Stock</th>
-                                            <th className="px-3 py-2 text-emerald-300"><span className="inline-flex items-center gap-1">Quant #<Hint label="Quant #" text={HINTS.quantRank} /></span></th>
-                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">LLM #<Hint label="LLM #" text={HINTS.llmRank} /></span></th>
-                                            <th className="px-3 py-2 text-violet-300"><span className="inline-flex items-center gap-1">Δ pctl<Hint label="Δ pctl" text={HINTS.deltaPctl} /></span></th>
-                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Band quant → LLM<Hint label="Band quant → LLM" text={HINTS.bandQuantLlm} /></span></th>
-                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Stance<Hint label="Stance" text={HINTS.stance} /></span></th>
-                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Conv<Hint label="Conv" text={HINTS.conviction} /></span></th>
-                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">DCF gap<Hint label="DCF gap" text={HINTS.dcfGap} /></span></th>
-                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">Action<Hint label="Action" text={HINTS.action} /></span></th>
-                                            <th className="px-3 py-2 text-right">Price</th>
-                                            <th className="px-3 py-2">Sector</th>
+                                            <th className="sticky left-0 z-20 bg-secondary/60 backdrop-blur px-3 py-2">{t('colStock')}</th>
+                                            <th className="px-3 py-2 text-emerald-300"><span className="inline-flex items-center gap-1">{t('colQuantRank')}<Hint label={t('colQuantRank')} text={HINTS.quantRank} /></span></th>
+                                            <th className="px-3 py-2 text-sky-300"><span className="inline-flex items-center gap-1">{t('colLlmRank')}<Hint label={t('colLlmRank')} text={HINTS.llmRank} /></span></th>
+                                            <th className="px-3 py-2 text-violet-300"><span className="inline-flex items-center gap-1">{t('colDeltaPctl')}<Hint label={t('colDeltaPctl')} text={HINTS.deltaPctl} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">{t('colBandQuantLlm')}<Hint label={t('colBandQuantLlm')} text={HINTS.bandQuantLlm} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">{t('colStance')}<Hint label={t('colStance')} text={HINTS.stance} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">{t('colConv')}<Hint label={t('colConv')} text={HINTS.conviction} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">{t('colDcfGap')}<Hint label={t('colDcfGap')} text={HINTS.dcfGap} /></span></th>
+                                            <th className="px-3 py-2"><span className="inline-flex items-center gap-1">{t('colAction')}<Hint label={t('colAction')} text={HINTS.action} /></span></th>
+                                            <th className="px-3 py-2 text-right">{t('colPrice')}</th>
+                                            <th className="px-3 py-2">{t('colSector')}</th>
                                         </tr>
                                     )}
                                 </thead>
                                 <tbody>
-                                    {lensRows.slice(0, limit).map(([t, e]) => {
+                                    {loading ? (
+                                        Array.from({ length: 12 }).map((_, i) => (
+                                            <tr key={i} className="border-t border-border/50">
+                                                <td className="px-3 py-2"><Shimmer className="h-3 w-6" /></td>
+                                                <td className="px-3 py-2"><Shimmer className="h-3 w-24" /></td>
+                                                <td className="px-3 py-2"><Shimmer className="h-3 w-10" /></td>
+                                                <td className="px-3 py-2"><Shimmer className="h-2 w-full" /></td>
+                                                <td className="px-3 py-2"><Shimmer className="h-4 w-20" /></td>
+                                                <td className="px-3 py-2"><Shimmer className="h-3 w-12" /></td>
+                                                <td className="px-3 py-2"><Shimmer className="h-3 w-12" /></td>
+                                                <td className="px-3 py-2"><Shimmer className="h-3 w-24" /></td>
+                                            </tr>
+                                        ))
+                                    ) : lensRows.length === 0 ? (
+                                        <tr>
+                                            <td colSpan={12} className="px-3 py-10 text-center text-xs text-muted-foreground">
+                                                {filteredRows.length === 0 ? t('emptyNoScored') : t('emptyNoMatch')}
+                                            </td>
+                                        </tr>
+                                    ) : (
+                                        lensRows.slice(0, limit).map(([t, e]) => {
                                         const info = stockInfo[t];
                                         const vm = valuations[t];
                                         const gap = vm?.expectations_gap_pts;
@@ -1246,9 +1287,9 @@ export default function CockpitDashboard() {
                                             : <span className={gap > 5 ? 'text-amber-300' : gap < -5 ? 'text-emerald-300' : 'text-muted-foreground'}>
                                                   {gap > 0 ? '+' : ''}{gap.toFixed(0)}pts</span>;
                                         const stockCell = (
-                                            <td className="px-3 py-2">
+                                            <td className={clsx('sticky z-10 bg-background px-3 py-2', lens === 'compare' ? 'left-0' : lens === 'llm' ? 'left-[70px]' : 'left-[64px]')}>
                                                 <div className="font-black">{t}</div>
-                                                <div className="max-w-[180px] truncate text-[10px] text-muted-foreground">{info?.name || ''}</div>
+                                                <div className="max-w-[180px] truncate text-[11px] text-muted-foreground">{info?.name || ''}</div>
                                             </td>
                                         );
                                         return (
@@ -1256,7 +1297,7 @@ export default function CockpitDashboard() {
                                                 className={clsx('cursor-pointer border-t border-border/50 transition-colors odd:bg-secondary/10 hover:bg-emerald-500/[0.06]',
                                                     unreviewed && 'opacity-45')}>
                                                 {lens === 'quant' ? (<>
-                                                    <td className="px-3 py-2 font-mono font-black text-muted-foreground">{e.fct_rank}</td>
+                                                    <td className="sticky left-0 z-10 bg-background px-3 py-2 font-mono font-black text-muted-foreground">{e.fct_rank}</td>
                                                     {stockCell}
                                                     <td className="px-3 py-2 font-mono text-sm font-black text-emerald-300">{e.fct_composite?.toFixed(1)}</td>
                                                     <td className="px-3 py-2"><ContributionBar entry={e} /></td>
@@ -1265,7 +1306,7 @@ export default function CockpitDashboard() {
                                                     <td className="px-3 py-2 text-right font-mono">{fmtMcap(info?.marketCap)}</td>
                                                     <td className="px-3 py-2 text-muted-foreground">{info?.sector || '—'}</td>
                                                 </>) : lens === 'llm' ? (<>
-                                                    <td className="px-3 py-2 font-mono font-black">
+                                                    <td className="sticky left-0 z-10 bg-background px-3 py-2 font-mono font-black">
                                                         {lrank !== undefined
                                                             ? <span className="text-sky-300">{lrank}</span>
                                                             : <span className="text-muted-foreground" title="Not yet reviewed by RS2 — quant rank shown">q{e.fct_rank}</span>}
@@ -1311,14 +1352,14 @@ export default function CockpitDashboard() {
                                                 </>)}
                                             </tr>
                                         );
-                                    })}
+                                    }))}
                                 </tbody>
                             </table>
                         </div>
                         {lensRows.length > limit && (
                             <button onClick={() => setLimit(l => l + 100)}
                                 className="w-full rounded-md border border-border bg-secondary/20 py-2 text-xs font-bold text-muted-foreground hover:text-foreground">
-                                Show more ({lensRows.length - limit} remaining)
+                                {t('showMore')} ({lensRows.length - limit} {t('remaining')})
                             </button>
                         )}
                     </div>
@@ -1328,7 +1369,7 @@ export default function CockpitDashboard() {
                 {tab === 'track' && (ledgers?.ledgers ? (
                     <div className="space-y-4">
                         {llmInception && (
-                            <span className="inline-flex rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 text-[11px] font-bold text-sky-300">
+                            <span className="inline-flex rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 text-xs font-bold text-sky-300">
                                 RS2 LLM ledgers live since {llmInception} — early days
                             </span>
                         )}
@@ -1387,8 +1428,8 @@ export default function CockpitDashboard() {
                                             <div className="flex items-baseline justify-between gap-2">
                                                 <span className="text-[13px] font-black uppercase tracking-wider">{label}</span>
                                                 {diff != null && (diff >= 0
-                                                    ? <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-black text-emerald-300">QUANT +{diff}pts</span>
-                                                    : <span className="rounded-full bg-sky-500/10 px-2 py-0.5 text-[11px] font-black text-sky-300">LLM +{Math.abs(diff)}pts</span>)}
+                                                    ? <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-xs font-black text-emerald-300">QUANT +{diff}pts</span>
+                                                    : <span className="rounded-full bg-sky-500/10 px-2 py-0.5 text-xs font-black text-sky-300">LLM +{Math.abs(diff)}pts</span>)}
                                             </div>
                                             <table className="mt-2 w-full text-xs">
                                                 <thead>
@@ -1409,18 +1450,18 @@ export default function CockpitDashboard() {
                                                 </tbody>
                                             </table>
                                             {name === 'mine' && !live && (
-                                                <p className="mt-1.5 text-[11px] text-amber-300">
+                                                <p className="mt-1.5 text-xs text-amber-300">
                                                     {auth.user
                                                         ? 'Idle — save a My Portfolio snapshot (Portfolio tab), then run Update Mine Ledger.'
                                                         : 'Log in and save a My Portfolio snapshot to track your own portfolio.'}
                                                 </p>
                                             )}
-                                            {name === 'mine' && live && <p className="mt-1.5 text-[11px] text-muted-foreground">your holdings — no LLM variant</p>}
+                                            {name === 'mine' && live && <p className="mt-1.5 text-xs text-muted-foreground">your holdings — no LLM variant</p>}
                                             {name === 'plan3' && (
                                                 p3state?.halted
-                                                    ? <p className="mt-1.5 text-[11px] font-bold text-red-400">
+                                                    ? <p className="mt-1.5 text-xs font-bold text-red-400">
                                                         HALTED — kill switch fired at −25% DD (reset: --reset-plan3-halt)</p>
-                                                    : <p className="mt-1.5 text-[11px] text-muted-foreground">
+                                                    : <p className="mt-1.5 text-xs text-muted-foreground">
                                                         momentum sleeve · benchmark QQQ · 20% DD budget
                                                         {typeof p3state?.risk_tier === 'number' && p3state.risk_tier < 1
                                                             ? <span className="font-bold text-amber-300"> · de-risked to {Math.round(p3state.risk_tier * 100)}% gross</span>
@@ -1441,7 +1482,7 @@ export default function CockpitDashboard() {
                                 <div className="flex gap-1">
                                     {(['1m', '3m', 'ytd', 'all'] as const).map(r => (
                                         <button key={r} onClick={() => { setNavRange(r); setBrushIdx(null); }}
-                                            className={clsx('rounded px-2 py-0.5 text-[11px] font-black uppercase',
+                                            className={clsx('rounded px-2 py-0.5 text-xs font-black uppercase',
                                                 navRange === r ? 'bg-emerald-500/20 text-emerald-300' : 'text-muted-foreground hover:text-foreground')}>
                                             {r}
                                         </button>
@@ -1454,7 +1495,7 @@ export default function CockpitDashboard() {
                                     return (
                                         <button key={s.key} onClick={() => toggleNav(s.key)}
                                             onMouseEnter={() => setNavHover(s.key)} onMouseLeave={() => setNavHover(null)}
-                                            className={clsx('rounded border px-2 py-0.5 text-[11px] font-black transition',
+                                            className={clsx('rounded border px-2 py-0.5 text-xs font-black transition',
                                                 on ? 'border-current' : 'border-border text-muted-foreground opacity-50 hover:opacity-80')}
                                             style={on ? { color: s.color, borderColor: s.color } : undefined}>
                                             {s.dash ? '╌ ' : '— '}{s.name}
@@ -1462,18 +1503,18 @@ export default function CockpitDashboard() {
                                     );
                                 })}
                                 <span className="mx-1 h-4 w-px bg-border" />
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Bench:</span>
+                                <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Bench:</span>
                                 {allBenches.map(b => (
                                     <button key={b} onClick={() => toggleBench(b)}
                                         onMouseEnter={() => setNavHover(b.toLowerCase())} onMouseLeave={() => setNavHover(null)}
-                                        className={clsx('rounded border px-2 py-0.5 text-[11px] font-black uppercase transition',
+                                        className={clsx('rounded border px-2 py-0.5 text-xs font-black uppercase transition',
                                             benchSel.has(b) ? 'border-current' : 'border-border text-muted-foreground opacity-50 hover:opacity-80')}
                                         style={benchSel.has(b) ? { color: benchColor(b), borderColor: benchColor(b) } : undefined}>
                                         {b}
                                     </button>
                                 ))}
                             </div>
-                            <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px]">
+                            <div className="mb-2 flex flex-wrap items-center gap-2 text-xs">
                                 <span className="font-bold uppercase tracking-wider text-muted-foreground">Commission %/side:</span>
                                 <input type="number" step="0.01" min="0" value={commInput}
                                     onChange={e => setCommInput(e.target.value)}
@@ -1525,23 +1566,23 @@ export default function CockpitDashboard() {
                                 </LineChart>
                             </ResponsiveContainer>
                             {navCurve.length < 5 && (
-                                <p className="mt-1 text-[11px] text-muted-foreground">Day {navCurve.length} — lines get meaningful after a few weeks. This page is designed to be boring for a while.</p>
+                                <p className="mt-1 text-xs text-muted-foreground">Day {navCurve.length} — lines get meaningful after a few weeks. This page is designed to be boring for a while.</p>
                             )}
                         </div>
 
                         {hasLlmLedgers && (
                             <div className="flex items-center gap-2">
-                                <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Positions source:</span>
+                                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Positions source:</span>
                                 {(['baseline', 'llm'] as const).map(id => (
                                     <button key={id} onClick={() => setPosSource(id)}
-                                        className={clsx('rounded border px-2 py-0.5 text-[11px] font-black uppercase transition',
+                                        className={clsx('rounded border px-2 py-0.5 text-xs font-black uppercase transition',
                                             posSource === id ? 'border-amber-400 text-amber-300' : 'border-border text-muted-foreground opacity-60 hover:opacity-90')}
                                         title={id === 'llm' ? 'Show the LLM-overlay portfolio holdings, trades + closed round-trips' : 'Show the baseline (quant-only) holdings + trades'}>
                                         {id === 'llm' ? 'LLM overlay' : 'Baseline'}
                                     </button>
                                 ))}
                                 {posSource === 'llm' && ledgerView === 'mine' && (
-                                    <span className="text-[10px] text-muted-foreground">mine has no LLM variant — showing baseline</span>
+                                    <span className="text-[11px] text-muted-foreground">mine has no LLM variant — showing baseline</span>
                                 )}
                             </div>
                         )}
@@ -1552,7 +1593,7 @@ export default function CockpitDashboard() {
                                 </h3>
                                 <div className="max-h-72 overflow-y-auto">
                                     <table className="w-full text-left text-xs">
-                                        <thead className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">
+                                        <thead className="text-xs font-black uppercase tracking-wider text-muted-foreground">
                                             <tr><th className="px-2 py-1.5">Sym</th><th className="px-2 py-1.5">Entry</th>
                                                 <th className="px-2 py-1.5 text-right">Entry $</th><th className="px-2 py-1.5 text-right">Now $</th>
                                                 <th className="px-2 py-1.5 text-right">P&L</th></tr>
@@ -1584,7 +1625,7 @@ export default function CockpitDashboard() {
                                         Trade history — {ledgerView}{posLlm ? ' · LLM' : ''}
                                     </h3>
                                     <input value={tradeQuery} onChange={e => setTradeQuery(e.target.value)} placeholder="filter ticker / date"
-                                        className="w-36 rounded-md border border-border bg-secondary/20 px-2 py-1 text-[11px] outline-none focus:border-emerald-500/50" />
+                                        className="w-36 rounded-md border border-border bg-secondary/20 px-2 py-1 text-xs outline-none focus:border-emerald-500/50" />
                                 </div>
                                 <div className="max-h-72 overflow-y-auto">
                                     {(() => {
@@ -1594,7 +1635,7 @@ export default function CockpitDashboard() {
                                             ? trades.filter((t: any) => (t.ticker || '').toUpperCase().includes(tq) || (t.date || '').includes(tq))
                                             : trades;
                                         const shown = filtered.slice().reverse().slice(0, 500);
-                                        if (filtered.length === 0) return <p className="px-2 py-2 text-[11px] text-muted-foreground">No trades match.</p>;
+                                        if (filtered.length === 0) return <p className="px-2 py-2 text-xs text-muted-foreground">No trades match.</p>;
                                         return (<>
                                             <table className="w-full text-left text-xs">
                                                 <tbody>
@@ -1604,12 +1645,12 @@ export default function CockpitDashboard() {
                                                             <td className={clsx('px-2 py-1.5 font-black uppercase', tr.side === 'buy' ? 'text-emerald-300' : 'text-red-300')}>{tr.side}</td>
                                                             <td className="cursor-pointer px-2 py-1.5 font-black hover:text-emerald-300" onClick={() => setSelected(tr.ticker)}>{tr.ticker}</td>
                                                             <td className="px-2 py-1.5 text-right font-mono">{tr.price ?? '—'}</td>
-                                                            <td className="px-2 py-1.5 text-[10px] text-muted-foreground">{(tr.reason || '').replace(/_/g, ' ')}</td>
+                                                            <td className="px-2 py-1.5 text-[11px] text-muted-foreground">{(tr.reason || '').replace(/_/g, ' ')}</td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
                                             </table>
-                                            <p className="px-2 py-1.5 text-[10px] text-muted-foreground">
+                                            <p className="px-2 py-1.5 text-[11px] text-muted-foreground">
                                                 {filtered.length > 500 ? `Showing latest 500 of ${filtered.length}` : `${filtered.length} trade${filtered.length === 1 ? '' : 's'}`}
                                             </p>
                                         </>);
@@ -1627,12 +1668,12 @@ export default function CockpitDashboard() {
                                 {(() => {
                                     const closed = (ledgers.ledgers[posKey]?.closed ?? []).slice()
                                         .sort((a: any, b: any) => (b.exit_date || '').localeCompare(a.exit_date || ''));
-                                    if (closed.length === 0) return <p className="px-2 py-2 text-[11px] text-muted-foreground">No closed trades yet — sells appear here once positions exit.</p>;
+                                    if (closed.length === 0) return <p className="px-2 py-2 text-xs text-muted-foreground">No closed trades yet — sells appear here once positions exit.</p>;
                                     const wins = closed.filter((c: any) => c.return_pct != null && c.return_pct > 0).length;
                                     const withRet = closed.filter((c: any) => c.return_pct != null);
                                     return (<>
                                         <table className="w-full text-left text-xs">
-                                            <thead className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">
+                                            <thead className="text-xs font-black uppercase tracking-wider text-muted-foreground">
                                                 <tr><th className="px-2 py-1.5">Sym</th><th className="px-2 py-1.5">Entry</th><th className="px-2 py-1.5">Exit</th>
                                                     <th className="px-2 py-1.5 text-right">Days</th><th className="px-2 py-1.5 text-right">Return</th>
                                                     <th className="px-2 py-1.5 text-right">Post-exit</th></tr>
@@ -1656,7 +1697,7 @@ export default function CockpitDashboard() {
                                                 ))}
                                             </tbody>
                                         </table>
-                                        <p className="px-2 py-1.5 text-[10px] text-muted-foreground">
+                                        <p className="px-2 py-1.5 text-[11px] text-muted-foreground">
                                             {closed.length} closed{withRet.length ? ` · win rate ${(100 * wins / withRet.length).toFixed(0)}%` : ''} · &ldquo;Post-exit&rdquo; = move in the 30d after selling (sold-too-early signal)
                                         </p>
                                     </>);
@@ -1674,7 +1715,7 @@ export default function CockpitDashboard() {
                                         </span>
                                     ))}
                                 </div>
-                                <p className="mt-2 text-[11px] text-muted-foreground">Recurring pattern here = exits fire too fast; consider a stickier exit band.</p>
+                                <p className="mt-2 text-xs text-muted-foreground">Recurring pattern here = exits fire too fast; consider a stickier exit band.</p>
                             </div>
                         )}
                     </div>
@@ -1702,7 +1743,7 @@ export default function CockpitDashboard() {
                                 </button>
                             ))}
                             {planSource === 'llm' && (
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-sky-300/80">comparing LLM-adjusted Research-Now</span>
+                                <span className="text-[11px] font-bold uppercase tracking-wider text-sky-300/80">comparing LLM-adjusted Research-Now</span>
                             )}
                         </div>
                         {/* Suggested-plan selector: value core vs hybrid */}
@@ -1744,7 +1785,7 @@ export default function CockpitDashboard() {
                               ...(planView === 'plan2' && activePlan.sleeve_pct !== undefined ? [['Quality sleeve', `${activePlan.sleeve_pct}%`]] : []),
                               ['Macro flags', plan.macro_flags?.length ? plan.macro_flags.join(', ') : 'none']].map(([k, v]) => (
                                 <div key={k as string} className="rounded-lg border border-border bg-card/95 px-4 py-2">
-                                    <div className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">{k}</div>
+                                    <div className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">{k}</div>
                                     <div className="font-mono text-lg font-black">{v as any}</div>
                                 </div>
                             ))}
@@ -1756,7 +1797,7 @@ export default function CockpitDashboard() {
                         )}
                         <div className="overflow-x-auto rounded-lg border border-border">
                             <table className="w-full min-w-[860px] text-left text-xs">
-                                <thead className="bg-secondary/60 text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                                <thead className="bg-secondary/60 text-[11px] font-black uppercase tracking-wider text-muted-foreground">
                                     <tr>
                                         <th className="px-3 py-2">Sym</th><th className="px-3 py-2 text-right">Weight</th>
                                         <th className="px-3 py-2">Sizing</th><th className="px-3 py-2 text-right">Gap</th>
@@ -1771,12 +1812,12 @@ export default function CockpitDashboard() {
                                                 p.sizing_method === 'quality_sleeve' && 'bg-pink-500/[0.05]')}>
                                             <td className="px-3 py-2 font-black">{p.symbol}{p.rev_nominated && <span className="ml-1 text-[9px] font-black text-sky-300" title="Also nominated by the reverse engine — independent confirmation">✓REV</span>}</td>
                                             <td className="px-3 py-2 text-right font-mono font-black">{p.weight_pct}%</td>
-                                            <td className="px-3 py-2 text-[10px] font-bold uppercase text-muted-foreground">{(p.sizing_method || '').replace('_', ' ')}</td>
+                                            <td className="px-3 py-2 text-[11px] font-bold uppercase text-muted-foreground">{(p.sizing_method || '').replace('_', ' ')}</td>
                                             <td className="px-3 py-2 text-right font-mono">{p.expectations_gap_pts !== null && p.expectations_gap_pts !== undefined ? `${p.expectations_gap_pts > 0 ? '+' : ''}${Math.round(p.expectations_gap_pts)}` : '—'}</td>
                                             <td className="px-3 py-2 text-right font-mono">{p.fct_rank ?? '—'}</td>
                                             <td className="px-3 py-2 text-muted-foreground">{p.theme_primary || '—'}</td>
                                             <td className="px-3 py-2"><OverlayChips overlay={overlay[p.symbol]} /></td>
-                                            <td className="px-3 py-2 text-[10px] text-red-300">{(p.forensic_flags ?? []).join(', ') || '—'}</td>
+                                            <td className="px-3 py-2 text-[11px] text-red-300">{(p.forensic_flags ?? []).join(', ') || '—'}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -1797,7 +1838,7 @@ export default function CockpitDashboard() {
                                 </div>
                             ))}
                         </div>
-                        <p className="text-[11px] text-muted-foreground">{plan.disclaimer}</p>
+                        <p className="text-xs text-muted-foreground">{plan.disclaimer}</p>
                     </div>
                 ) : <p className="text-sm text-muted-foreground">No portfolio plan found — run scripts/build_portfolio_plan.py.</p>)}
 
@@ -1826,7 +1867,7 @@ export default function CockpitDashboard() {
                             {selectedEntry.fct_composite !== null && <span className="font-mono text-lg font-black text-emerald-300">{selectedEntry.fct_composite.toFixed(1)}</span>}
                             <OverlayChips overlay={overlay[selected!]} />
                             <a href={`https://www.tradingview.com/symbols/${selected}/`} target="_blank" rel="noreferrer"
-                                className="ml-auto flex items-center gap-1 rounded-md border border-border bg-secondary/20 px-2 py-1 text-[10px] font-bold text-muted-foreground hover:text-foreground">
+                                className="ml-auto flex items-center gap-1 rounded-md border border-border bg-secondary/20 px-2 py-1 text-[11px] font-bold text-muted-foreground hover:text-foreground">
                                 TradingView <ExternalLink className="h-3 w-3" />
                             </a>
                         </div>
@@ -1836,12 +1877,12 @@ export default function CockpitDashboard() {
                                 <h3 className="mb-2 text-xs font-black uppercase tracking-wider text-muted-foreground">Factor profile (sector-neutral z)</h3>
                                 <FactorProfile entry={selectedEntry} />
                                 {selectedEntry.fct_haircuts && (
-                                    <p className="mt-2 text-[10px] text-muted-foreground">
+                                    <p className="mt-2 text-[11px] text-muted-foreground">
                                         Haircuts — survivability ×{selectedEntry.fct_haircuts.survivability}, data quality ×{selectedEntry.fct_haircuts.data_quality}, forensic ×{selectedEntry.fct_haircuts.forensic}
                                     </p>
                                 )}
                                 {selectedEntry.fct_context?.theme_primary && (
-                                    <p className="mt-2 rounded-md border border-purple-500/30 bg-purple-500/[0.06] p-2 text-[11px] text-purple-200/90">
+                                    <p className="mt-2 rounded-md border border-purple-500/30 bg-purple-500/[0.06] p-2 text-xs text-purple-200/90">
                                         <b>Context (not scored):</b> theme {selectedEntry.fct_context.theme_primary}
                                         {selectedEntry.fct_context.theme_score !== null ? ` (strength ${selectedEntry.fct_context.theme_score}/100)` : ''} — themes are a
                                         hunting ground and risk tag, never additive alpha.
@@ -1858,7 +1899,7 @@ export default function CockpitDashboard() {
                             </div>
                         </div>
 
-                        <div className="mt-5 rounded-md border border-border bg-secondary/10 p-2.5 text-[11px] text-muted-foreground">
+                        <div className="mt-5 rounded-md border border-border bg-secondary/10 p-2.5 text-xs text-muted-foreground">
                             Full lens detail (reverse engine, paradigm, factor history) lives in the{' '}
                             <Link href="/lenses" className="font-bold text-emerald-300 underline">Lenses view</Link>.
                         </div>
