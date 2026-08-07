@@ -244,7 +244,8 @@ def annual_duration_series(facts, tags, unit_keys=("USD",)):
             prelim = {y: max(c, key=lambda z: z[0] or "")[1] for y, c in best.items()}
             clean = {y: v for y, v in prelim.items()
                      if sum(1 for _, vv in best[y] if vv is not None) == 1}
-            ref = statistics.median([abs(v) for v in clean.values() if v]) if clean else None
+            _refvals = [abs(v) for v in clean.values() if v]
+            ref = statistics.median(_refvals) if _refvals else None
             resolved = {y: _pick_consistent(c, ref) for y, c in best.items()}
             candidates.append(_normalise_series_scale(resolved))
     if not candidates:
@@ -275,7 +276,8 @@ def annual_instant_series(facts, tags, unit_keys=("USD",)):
             prelim = {y: max(c, key=lambda z: z[0])[1] for y, c in best.items()}
             clean = {y: v for y, v in prelim.items()
                      if sum(1 for _, vv in best[y] if vv is not None) == 1}
-            ref = statistics.median([abs(v) for v in clean.values() if v]) if clean else None
+            _refvals = [abs(v) for v in clean.values() if v]
+            ref = statistics.median(_refvals) if _refvals else None
             resolved = {y: _pick_consistent([(k[1], v) for k, v in c], ref)
                         for y, c in best.items()}
             candidates.append(_normalise_series_scale(resolved))
@@ -554,6 +556,17 @@ def main():
                 print(f"  ... {processed} tickers processed")
 
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    # SUBSET RUNS MUST NOT TOUCH PRODUCTION. --limit/--tickers used to write the full production
+    # files unconditionally: a 60-ticker smoke test replaced the 5,588-ticker
+    # fundamentals_history.json that every RS2 valuation reads (2026-08-07; recovered from git).
+    # A partial universe silently masquerading as the full one corrupts everything downstream,
+    # so subset output goes to *.SUBSET.json and says so.
+    global HISTORY_JSON, BATTERY_JSON
+    if args.limit or args.tickers:
+        HISTORY_JSON = HISTORY_JSON.with_name("fundamentals_history.SUBSET.json")
+        BATTERY_JSON = BATTERY_JSON.with_name("fundamentals_battery.SUBSET.json")
+        print(f"SUBSET run ({len(targets)} tickers) -> writing {HISTORY_JSON.name} / "
+              f"{BATTERY_JSON.name} — production files untouched")
     HISTORY_JSON.write_text(json.dumps(
         {"generated_at": generated_at, "source": "SEC companyfacts.zip (annual filings)",
          "tickers": history_out}, sort_keys=True), encoding="utf-8")
