@@ -11,7 +11,7 @@
 // and a mini-popup explains that term. See components/GlossaryTerm.tsx.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import {
     ArrowLeft, ArrowUpRight, BookOpen, BookMarked, FlaskConical, HelpCircle, ListTree, Search, X,
@@ -23,57 +23,61 @@ import type { TermDef } from '@/lib/glossary';
 import { useLanguage } from '@/components/LanguageContext';
 import { LanguageToggle } from '@/components/LanguageToggle';
 import { CATEGORY_LABELS_KO, GLOSSARY_KO } from '@/lib/glossary-ko';
+import { CATEGORY_LABELS_ZH, GLOSSARY_ZH } from '@/lib/glossary-zh';
 import { APP_VERSION } from '@/lib/changelog';
 import { Section, SubHeading, Callout } from './help-ui';
 import { KoreanHelpBody } from './content-ko';
+import { ChineseHelpBody } from './content-zh';
 import { PipelineDiagram, AiAnalysisFlow } from './WorkflowDiagram';
 
+type Lang = 'en' | 'ko' | 'zh';
+
 // ── Left navigation — grouped like a reference sidebar (Box-style) ────────────
-type NavItem = { id: string; en: string; ko: string };
-interface NavGroup { id: string; en: string; ko: string; items: NavItem[] }
+type NavItem = { id: string; en: string; ko: string; zh: string };
+interface NavGroup { id: string; en: string; ko: string; zh: string; items: NavItem[] }
 
 const NAV_GROUPS: NavGroup[] = [
     {
-        id: 'start', en: 'Start here', ko: '시작하기',
+        id: 'start', en: 'Start here', ko: '시작하기', zh: '開始',
         items: [
-            { id: 'welcome', en: 'Welcome', ko: '소개' },
-            { id: 'pipeline', en: 'What happens every day', ko: '매일 무슨 일이?' },
+            { id: 'welcome', en: 'Welcome', ko: '소개', zh: '歡迎' },
+            { id: 'pipeline', en: 'What happens every day', ko: '매일 무슨 일이?', zh: '每天的流程' },
         ],
     },
     {
-        id: 'engine', en: 'The engine', ko: '엔진',
+        id: 'engine', en: 'The engine', ko: '엔진', zh: '引擎',
         items: [
-            { id: 'leaderboard', en: 'Reading the leaderboard', ko: '리더보드 읽는 법' },
-            { id: 'factors', en: 'The five factors', ko: '다섯 가지 팩터' },
-            { id: 'bands', en: 'Bands, vetoes & haircuts', ko: '등급·베토·할인' },
-            { id: 'dcf', en: 'The expectations gap', ko: '기대치 격차' },
-            { id: 'lens', en: 'The Lens: quant vs RS2', ko: '렌즈: 퀀트 vs RS2' },
-            { id: 'rs2', en: 'RS2: the AI second opinion', ko: 'RS2: AI 2차 소견' },
+            { id: 'leaderboard', en: 'Reading the leaderboard', ko: '리더보드 읽는 법', zh: '閱讀排行榜' },
+            { id: 'factors', en: 'The five factors', ko: '다섯 가지 팩터', zh: '五個因子' },
+            { id: 'bands', en: 'Bands, vetoes & haircuts', ko: '등급·베토·할인', zh: '等級·否決·折價' },
+            { id: 'dcf', en: 'The expectations gap', ko: '기대치 격차', zh: '預期落差' },
+            { id: 'lens', en: 'The Lens: quant vs RS2', ko: '렌즈: 퀀트 vs RS2', zh: '鏡頭：量化 vs RS2' },
+            { id: 'rs2', en: 'RS2: the AI second opinion', ko: 'RS2: AI 2차 소견', zh: 'RS2：AI 第二意見' },
         ],
     },
     {
-        id: 'using', en: 'Using the tool', ko: '도구 사용법',
+        id: 'using', en: 'Using the tool', ko: '도구 사용법', zh: '使用工具',
         items: [
-            { id: 'track', en: 'Track Record', ko: '트랙 레코드' },
-            { id: 'portfolio', en: 'Portfolio & sizing', ko: '포트폴리오·크기' },
-            { id: 'overlays', en: 'Overlay chips & forensics', ko: '오버레이·포렌식' },
-            { id: 'themes', en: 'Themes: context, not factors', ko: '테마: 맥락뿐' },
+            { id: 'track', en: 'Track Record', ko: '트랙 레코드', zh: '績效紀錄' },
+            { id: 'portfolio', en: 'Portfolio & sizing', ko: '포트폴리오·크기', zh: '投資組合·規模' },
+            { id: 'overlays', en: 'Overlay chips & forensics', ko: '오버레이·포렌식', zh: '覆蓋·財報鑑識' },
+            { id: 'themes', en: 'Themes: context, not factors', ko: '테마: 맥락뿐', zh: '主題：只是脈絡' },
         ],
     },
     {
-        id: 'deep', en: 'Deep dive', ko: '심화',
+        id: 'deep', en: 'Deep dive', ko: '심화', zh: '深入',
         items: [
-            { id: 'methodology', en: 'Methodology', ko: '실무자용 방법론' },
-            { id: 'validation', en: 'How it is validated', ko: '시스템 검증' },
-            { id: 'data', en: 'Where the data comes from', ko: '데이터 출처' },
+            { id: 'methodology', en: 'Methodology', ko: '실무자용 방법론', zh: '方法論' },
+            { id: 'validation', en: 'How it is validated', ko: '시스템 검증', zh: '如何驗證' },
+            { id: 'data', en: 'Where the data comes from', ko: '데이터 출처', zh: '資料來源' },
         ],
     },
     {
-        id: 'ref', en: 'Reference', ko: '참조',
+        id: 'ref', en: 'Reference', ko: '참조', zh: '參考',
         items: [
-            { id: 'faq', en: 'FAQ', ko: '자주 묻는 질문' },
-            { id: 'glossary', en: 'The glossary', ko: '용어 사전' },
-            { id: 'disclaimer', en: 'Disclaimer', ko: '면책 조항' },
+            { id: 'faq', en: 'FAQ', ko: '자주 묻는 질문', zh: '常見問題' },
+            { id: 'glossary', en: 'The glossary', ko: '용어 사전', zh: '詞彙表' },
+            { id: 'disclaimer', en: 'Disclaimer', ko: '면책 조항', zh: '免責聲明' },
         ],
     },
 ];
@@ -82,17 +86,79 @@ const ALL_NAV_IDS = NAV_GROUPS.flatMap(g => g.items.map(i => i.id));
 
 // Small UI string dictionary used by the shared page shell.
 const UI = {
-    handbookSubtitle: { en: 'The complete guide', ko: '완전한 안내서' },
-    searchPlaceholder: { en: 'Search the glossary…', ko: '용어 사전 검색…' },
-    glossaryBtn: { en: 'Glossary', ko: '용어 사전' },
-    onThisPage: { en: 'On this page', ko: '이 페이지 목차' },
-    howToUse: { en: 'How to use this guide', ko: '이 안내서 사용법' },
-    howToUseBody: { en: 'Words shown in green with a dotted underline are clickable — tap one for a quick definition.', ko: '점선 밑줄의 초록 단어는 클릭 가능합니다. 누르면 간단한 정의가 나옵니다.' },
-    results: { en: 'results for', ko: '개의 결과 (검색어:' },
-    tryAnother: { en: '— try another word.', ko: '— 다른 단어를 검색해 보세요.' },
-    terms: { en: 'term(s)', ko: '개 용어' },
-    backToCockpit: { en: 'Back to the Factor Lab Cockpit', ko: '팩터 랩 콕핏으로 돌아가기' },
+    handbookSubtitle: { en: 'The complete guide', ko: '완전한 안내서', zh: '完整指南' },
+    searchPlaceholder: { en: 'Search the glossary…', ko: '용어 사전 검색…', zh: '搜尋詞彙表…' },
+    glossaryBtn: { en: 'Glossary', ko: '용어 사전', zh: '詞彙表' },
+    onThisPage: { en: 'On this page', ko: '이 페이지 목차', zh: '本頁目錄' },
+    howToUse: { en: 'How to use this guide', ko: '이 안내서 사용법', zh: '如何使用本指南' },
+    howToUseBody: { en: 'Words shown in green with a dotted underline are clickable — tap one for a quick definition.', ko: '점선 밑줄의 초록 단어는 클릭 가능합니다. 누르면 간단한 정의가 나옵니다.', zh: '帶點狀底線的綠色字可以點擊——按一下即可看到簡短定義。' },
+    results: { en: 'results for', ko: '개의 결과 (검색어:', zh: '個結果（搜尋：' },
+    tryAnother: { en: '— try another word.', ko: '— 다른 단어를 검색해 보세요.', zh: '——請換個詞試試。' },
+    terms: { en: 'term(s)', ko: '개 용어', zh: '個詞彙' },
+    backToCockpit: { en: 'Back to the Factor Lab Cockpit', ko: '팩터 랩 콕핏으로 돌아가기', zh: '返回 Factor Lab 駕駛艙' },
 } as const;
+
+type L3 = { en: string; ko: string; zh: string };
+type FAQItem = { q: L3; a: { en: ReactNode; ko: ReactNode; zh: ReactNode } };
+
+const FAQ_ITEMS: FAQItem[] = [
+    {
+        q: { en: 'Is this financial advice?', ko: '이것은 재정적 조언인가요?', zh: '這是投資建議嗎？' },
+        a: {
+            en: 'No. It is a research shortlist with the evidence laid out. Nothing here buys or sells anything, and nothing here is financial advice.',
+            ko: '아니요. 근거를 보여주는 리서치 후보 명단입니다. 여기서는 아무것도 사고팔지 않으며, 어떤 것도 재정적 조언이 아닙니다.',
+            zh: '不是。這是一份攤開證據的研究候選名單。這裡不會買賣任何東西，這裡也不是投資建議。',
+        },
+    },
+    {
+        q: { en: 'Does the site execute trades?', ko: '이 사이트는 실제 매매를 하나요?', zh: '這個網站會實際交易嗎？' },
+        a: {
+            en: 'Never. Even the paper portfolios are simulated — but honestly, with real prices and real transaction costs.',
+            ko: '절대 아닙니다. 페이퍼 포트폴리오조차 시뮬레이션일 뿐입니다. 다만 정직하게, 실제 가격과 실제 거래비용으로 시뮬레이션됩니다.',
+            zh: '絕對不會。即使是紙上投資組合也只是模擬——但誠實地，以真實價格與真實交易成本模擬。',
+        },
+    },
+    {
+        q: { en: 'Why is the composite ranked by five factors, not more?', ko: '왜 팩터가 다섯 개뿐인가요?', zh: '為什麼綜合評分只用五個因子，不多不少？' },
+        a: {
+            en: <>Five robust, historically documented factors, equal-weighted on purpose. Adding more tuned factors invites <Term term="overfitting" />, which loses to simple 1/N out of sample.</>,
+            ko: <>견고하고 역사적으로 입증된 다섯 팩터를 의도적으로 동일 가중합니다. 손을 더 많이 댄 팩터는 <Term term="overfitting" />을 불러오며, 이는 표본 외에서 단순 1/N에 집니다.</>,
+            zh: <>五個穩健、有歷史文獻佐證的因子，刻意等權重。加入更多調校過的因子只會招來 <Term term="overfitting" />，在樣本外輸給簡單的 1/N。</>,
+        },
+    },
+    {
+        q: { en: 'Why is the suggested plan often ~50% cash?', ko: '왜 추천 계획이 자주 약 50% 현금인가요?', zh: '為什麼建議計畫常保持約 50% 現金？' },
+        a: {
+            en: <>The value core only buys names with measurable <Term term="edge" /> — priced below demonstrated growth — and refuses to overpay. Cash is a feature: protection and dry powder.</>,
+            ko: <>밸류 코어는 측정 가능한 <Term term="edge" />이 있는 종목(입증된 성장보다 싼 종목)만 사고 과대평가를 거부합니다. 현금은 보호와 탄약이라는 특징입니다.</>,
+            zh: <>價值核心只買有可測量 <Term term="edge" /> 的股票——定價低於已證明成長——並拒絕為昂貴買單。現金是特色：保護與子彈。</>,
+        },
+    },
+    {
+        q: { en: 'What do the red chips mean?', ko: '레드칩은 무엇을 뜻하나요?', zh: '紅牌是什麼意思？' },
+        a: {
+            en: <>A <Term term="veto" />: automatic disqualification regardless of score. The reason is written on the chip.</>,
+            ko: <><Term term="veto" />입니다. 점수와 무관한 자동 탈락이며 이유가 칩에 적혀 있습니다.</>,
+            zh: <><Term term="veto" />：無論分數都自動取消資格。原因寫在牌上。</>,
+        },
+    },
+    {
+        q: { en: 'Why do quant and RS2 disagree?', ko: '왜 퀀트와 RS2가 다른가요?', zh: '為什麼量化引擎和 RS2 會意見不同？' },
+        a: {
+            en: 'One is pure math over financial statements; the other reads filings with judgment. When they strongly disagree, one of them is wrong — those are the interesting rows. Use the Compare lens.',
+            ko: '하나는 재무제표에 대한 순수 수학이고, 다른 하나는 판단으로 서류를 읽습니다. 강하게 다를 때는 둘 중 하나가 틀린 것입니다. 그런 행이 흥미로운 행입니다. 비교(Compare) 렌즈를 쓰세요.',
+            zh: '一個是對財務報表的純數學，另一個是以判斷閱讀申報文件。當它們強烈分歧時，其中一方是錯的——那些列最有趣。請用比較（Compare）鏡頭。',
+        },
+    },
+    {
+        q: { en: 'How can I trust the track record?', ko: '트랙 레코드를 어떻게 신뢰하나요?', zh: '績效紀錄為何可信？' },
+        a: {
+            en: <>It is forward-logged (<Term term="point-in-time" />), append-only, cannot be edited, includes <Term term="transaction-costs" />, and measures against real benchmarks including delisted names.</>,
+            ko: <>전방 기록(<Term term="point-in-time" />), 추가 전용이며 편집할 수 없고, <Term term="transaction-costs" />을 포함하며, 상장폐지 종목을 포함한 실제 벤치마크와 비교합니다.</>,
+            zh: <>它是前瞻記錄（<Term term="point-in-time" />）、只能附加、無法編輯、包含 <Term term="transaction-costs" />，並與包含已下市股票的實際基準比較。</>,
+        },
+    },
+];
 
 const FACTOR_ITEMS = [
     {
@@ -166,13 +232,13 @@ const FACTOR_ITEMS = [
     },
 ];
 
-function SidebarNav({ activeId, isKo }: { activeId: string; isKo: boolean }) {
+function SidebarNav({ activeId, lang }: { activeId: string; lang: Lang }) {
     return (
         <nav className="space-y-4">
             {NAV_GROUPS.map(group => (
                 <div key={group.id}>
                     <p className="mb-1.5 text-[10px] font-black uppercase tracking-wider text-muted-foreground/60">
-                        {isKo ? group.ko : group.en}
+                        {group[lang]}
                     </p>
                     <ul className="space-y-0.5 border-l border-border">
                         {group.items.map(item => {
@@ -188,7 +254,7 @@ function SidebarNav({ activeId, isKo }: { activeId: string; isKo: boolean }) {
                                                 : 'border-transparent text-muted-foreground hover:border-emerald-400/40 hover:text-foreground'
                                         }`}
                                     >
-                                        {isKo ? item.ko : item.en}
+                                        {item[lang]}
                                     </a>
                                 </li>
                             );
@@ -202,7 +268,9 @@ function SidebarNav({ activeId, isKo }: { activeId: string; isKo: boolean }) {
 
 export default function HelpPage() {
     const { language } = useLanguage();
-    const isKo = language === 'ko';
+    const lang: Lang = language === 'zh' ? 'zh' : language === 'ko' ? 'ko' : 'en';
+    const contentsLabel = lang === 'ko' ? '목차' : lang === 'zh' ? '目錄' : 'Contents';
+    const openContentsLabel = lang === 'ko' ? '목차 열기' : lang === 'zh' ? '開啟目錄' : 'Open contents';
     const [glossaryQuery, setGlossaryQuery] = useState('');
     const [activeId, setActiveId] = useState<string>('welcome');
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -233,16 +301,17 @@ export default function HelpPage() {
         if (!q) return ordered;
         return ordered.filter(pair => {
             const t = pair[1];
-            const ko = isKo ? GLOSSARY_KO[pair[0]] : undefined;
+            const loc = lang === 'ko' ? GLOSSARY_KO[pair[0]] : lang === 'zh' ? GLOSSARY_ZH[pair[0]] : undefined;
+            const catLabel = lang === 'ko' ? CATEGORY_LABELS_KO : lang === 'zh' ? CATEGORY_LABELS_ZH : CATEGORY_LABELS;
             return t.term.toLowerCase().includes(q) ||
                 t.plain.toLowerCase().includes(q) ||
                 t.definition.toLowerCase().includes(q) ||
-                (ko?.term.toLowerCase().includes(q) ?? false) ||
-                (ko?.plain.toLowerCase().includes(q) ?? false) ||
-                (ko?.definition.toLowerCase().includes(q) ?? false) ||
-                (isKo ? CATEGORY_LABELS_KO : CATEGORY_LABELS)[t.category].toLowerCase().includes(q);
+                (loc?.term.toLowerCase().includes(q) ?? false) ||
+                (loc?.plain.toLowerCase().includes(q) ?? false) ||
+                (loc?.definition.toLowerCase().includes(q) ?? false) ||
+                catLabel[t.category].toLowerCase().includes(q);
         });
-    }, [glossaryQuery, isKo]);
+    }, [glossaryQuery, lang]);
 
     const counts = useMemo(() => {
         const c: Record<string, number> = {};
@@ -261,11 +330,11 @@ export default function HelpPage() {
                         </Link>
                         <button
                             onClick={() => setMobileNavOpen(true)}
-                            aria-label={isKo ? '목차 열기' : 'Open contents'}
+                            aria-label={openContentsLabel}
                             className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-2.5 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground lg:hidden"
                         >
                             <ListTree className="h-3.5 w-3.5" />
-                            {isKo ? '목차' : 'Contents'}
+                            {contentsLabel}
                         </button>
                         <div className="flex items-center gap-2">
                             <BookOpen className="h-5 w-5 text-emerald-400" />
@@ -274,7 +343,7 @@ export default function HelpPage() {
                                     THE FACTOR LAB <span className="text-emerald-400">HANDBOOK</span>
                                 </h1>
                                 <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                                    {UI.handbookSubtitle[isKo ? 'ko' : 'en']} · v{APP_VERSION}
+                                    {UI.handbookSubtitle[lang]} · v{APP_VERSION}
                                 </p>
                             </div>
                         </div>
@@ -285,12 +354,12 @@ export default function HelpPage() {
                                 <input
                                     value={glossaryQuery}
                                     onChange={e => setGlossaryQuery(e.target.value)}
-                                    placeholder={UI.searchPlaceholder[isKo ? 'ko' : 'en']}
+                                    placeholder={UI.searchPlaceholder[lang]}
                                     className="w-56 rounded-md border border-border bg-secondary/20 py-1.5 pl-8 pr-2 text-xs text-foreground placeholder:text-muted-foreground/60 focus:border-emerald-400/50 focus:outline-none"
                                 />
                             </div>
                             <Link href="#glossary" className="flex items-center gap-1.5 rounded-md border border-emerald-500/40 bg-emerald-500/15 px-2.5 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/25">
-                                <BookMarked className="h-3.5 w-3.5" /> {UI.glossaryBtn[isKo ? 'ko' : 'en']}
+                                <BookMarked className="h-3.5 w-3.5" /> {UI.glossaryBtn[lang]}
                             </Link>
                         </div>
                     </div>
@@ -301,22 +370,22 @@ export default function HelpPage() {
                     {/* Left TOC (desktop) */}
                     <nav className="sticky top-20 hidden h-fit w-56 shrink-0 lg:block">
                         <p className="mb-2 text-[10px] font-black uppercase tracking-wider text-muted-foreground/70">
-                            {UI.onThisPage[isKo ? 'ko' : 'en']}
+                            {UI.onThisPage[lang]}
                         </p>
                         <div className="max-h-[calc(100vh-8rem)] overflow-y-auto pr-1">
-                            <SidebarNav activeId={activeId} isKo={isKo} />
+                            <SidebarNav activeId={activeId} lang={lang} />
                         </div>
                         <div className="mt-4 rounded-lg border border-border/60 bg-secondary/10 p-3 text-[11px] leading-relaxed text-muted-foreground">
-                            <p className="font-black uppercase tracking-wider text-emerald-300/80">{UI.howToUse[isKo ? 'ko' : 'en']}</p>
+                            <p className="font-black uppercase tracking-wider text-emerald-300/80">{UI.howToUse[lang]}</p>
                             <p className="mt-1">
-                                {UI.howToUseBody[isKo ? 'ko' : 'en']}
+                                {UI.howToUseBody[lang]}
                             </p>
                         </div>
                     </nav>
 
                     {/* Main column */}
                     <main className="min-w-0 flex-1 space-y-10">
-                        {!isKo && (<>
+                        {lang === 'en' && (<>
                         {/* Welcome */}
                         <Section id="welcome" title="Welcome — what this site is (and is not)" icon={<FlaskConical className="h-5 w-5" />}>
                             <p>
@@ -790,65 +859,50 @@ export default function HelpPage() {
                             </p>
                         </Section>
                         </>)}
-                        {isKo && <KoreanHelpBody />}
+                        {lang === 'ko' && <KoreanHelpBody />}
+                        {lang === 'zh' && <ChineseHelpBody />}
 
                         {/* FAQ */}
-                        <Section id="faq" title={isKo ? '자주 묻는 질문' : 'Frequently asked questions'} icon={<HelpCircle className="h-5 w-5" />}>
+                        <Section id="faq" title={lang === 'ko' ? '자주 묻는 질문' : lang === 'zh' ? '常見問題' : 'Frequently asked questions'} icon={<HelpCircle className="h-5 w-5" />}>
                             <div className="space-y-4">
-                                <div>
-                                    <p className="font-black">{isKo ? '이것은 재정적 조언인가요?' : 'Is this financial advice?'}</p>
-                                    <p className="mt-1">{isKo ? '아니요. 근거를 보여주는 리서치 후보 명단입니다. 여기서는 아무것도 사고팔지 않으며, 어떤 것도 재정적 조언이 아닙니다.' : 'No. It is a research shortlist with the evidence laid out. Nothing here buys or sells anything, and nothing here is financial advice.'}</p>
-                                </div>
-                                <div>
-                                    <p className="font-black">{isKo ? '이 사이트는 실제 매매를 하나요?' : 'Does the site execute trades?'}</p>
-                                    <p className="mt-1">{isKo ? '절대 아닙니다. 페이퍼 포트폴리오조차 시뮬레이션일 뿐입니다. 다만 정직하게, 실제 가격과 실제 거래비용으로 시뮬레이션됩니다.' : 'Never. Even the paper portfolios are simulated — but honestly, with real prices and real transaction costs.'}</p>
-                                </div>
-                                <div>
-                                    <p className="font-black">{isKo ? '왜 팩터가 다섯 개뿐인가요?' : 'Why is the composite ranked by five factors, not more?'}</p>
-                                    <p className="mt-1">{isKo ? '견고하고 역사적으로 입증된 다섯 팩터를 의도적으로 동일 가중합니다. 손을 더 많이 댄 팩터는 ' : 'Five robust, historically documented factors, equal-weighted on purpose. Adding more tuned factors invites '}<Term term="overfitting" />{isKo ? '을 불러오며, 이는 표본 외에서 단순 1/N에 집니다.' : ', which loses to simple 1/N out of sample.'}</p>
-                                </div>
-                                <div>
-                                    <p className="font-black">{isKo ? '왜 추천 계획이 자주 약 50% 현금인가요?' : 'Why is the suggested plan often ~50% cash?'}</p>
-                                    <p className="mt-1">{isKo ? '밸류 코어는 측정 가능한 ' : 'The value core only buys names with measurable '}<Term term="edge" />{isKo ? '이 있는 종목(입증된 성장보다 싼 종목)만 사고 과대평가를 거부합니다. 현금은 보호와 탄약이라는 특징입니다.' : ' — priced below demonstrated growth — and refuses to overpay. Cash is a feature: protection and dry powder.'}</p>
-                                </div>
-                                <div>
-                                    <p className="font-black">{isKo ? '레드칩은 무엇을 뜻하나요?' : 'What do the red chips mean?'}</p>
-                                    <p className="mt-1">{isKo ? '점수와 무관한 자동 탈락(' : 'A '}<Term term="veto" />{isKo ? ')입니다. 이유가 칩에 적혀 있습니다.' : ': automatic disqualification regardless of score. The reason is written on the chip.'}</p>
-                                </div>
-                                <div>
-                                    <p className="font-black">{isKo ? '왜 퀀트와 RS2가 다른가요?' : 'Why do quant and RS2 disagree?'}</p>
-                                    <p className="mt-1">{isKo ? '하나는 재무제표에 대한 순수 수학이고, 다른 하나는 판단으로 서류를 읽습니다. 강하게 다를 때는 둘 중 하나가 틀린 것입니다. 그런 행이 흥미로운 행입니다. 비교(Compare) 렌즈를 쓰세요.' : 'One is pure math over financial statements; the other reads filings with judgment. When they strongly disagree, one of them is wrong — those are the interesting rows. Use the Compare lens.'}</p>
-                                </div>
-                                <div>
-                                    <p className="font-black">{isKo ? '트랙 레코드를 어떻게 신뢰하나요?' : 'How can I trust the track record?'}</p>
-                                    <p className="mt-1">{isKo ? '전방 기록(' : 'It is forward-logged ('}<Term term="point-in-time" />{isKo ? '), 추가 전용이며 편집할 수 없고, ' : '), append-only, cannot be edited, includes '}<Term term="transaction-costs" />{isKo ? '을 포함하며, 상장폐지 종목을 포함한 실제 벤치마크와 비교합니다.' : ', and measures against real benchmarks including delisted names.'}</p>
-                                </div>
+                                {FAQ_ITEMS.map((item, i) => (
+                                    <div key={i}>
+                                        <p className="font-black">{item.q[lang]}</p>
+                                        <p className="mt-1">{item.a[lang]}</p>
+                                    </div>
+                                ))}
                             </div>
                         </Section>
 
                         {/* Glossary */}
-                        <Section id="glossary" title={isKo ? '용어 사전 — 이 핸드북의 모든 용어' : 'The glossary — every term in this handbook'} icon={<BookMarked className="h-5 w-5" />}>
+                        <Section id="glossary" title={lang === 'ko' ? '용어 사전 — 이 핸드북의 모든 용어' : lang === 'zh' ? '詞彙表 — 本手冊的所有詞彙' : 'The glossary — every term in this handbook'} icon={<BookMarked className="h-5 w-5" />}>
                             <p>
-                                {isKo
-                                    ? `정의된 ${Object.keys(GLOSSARY).length}개 용어의 검색 가능한 색인입니다. 용어 칩을 클릭하면 정의가 열립니다. 위 본문에서도 아무 용어나 클릭할 수 있습니다.`
-                                    : `A searchable index of all ${Object.keys(GLOSSARY).length} defined terms. Click any term chip to open its definition — or click a term inline in any section above.`}
+                                {lang === 'ko' && `정의된 ${Object.keys(GLOSSARY).length}개 용어의 검색 가능한 색인입니다. 용어 칩을 클릭하면 정의가 열립니다. 위 본문에서도 아무 용어나 클릭할 수 있습니다.`}
+                                {lang === 'zh' && `共 ${Object.keys(GLOSSARY).length} 個已定義詞彙的可搜尋索引。點擊任何詞彙標籤即可開啟定義——或點擊上方任何章節中的詞彙。`}
+                                {lang === 'en' && `A searchable index of all ${Object.keys(GLOSSARY).length} defined terms. Click any term chip to open its definition — or click a term inline in any section above.`}
                             </p>
                             <div className="relative mt-2 sm:hidden">
                                 <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground/60" />
                                 <input
                                     value={glossaryQuery}
                                     onChange={e => setGlossaryQuery(e.target.value)}
-                                    placeholder={UI.searchPlaceholder[isKo ? 'ko' : 'en']}
+                                    placeholder={UI.searchPlaceholder[lang]}
                                     className="w-full rounded-md border border-border bg-secondary/20 py-2 pl-8 pr-2 text-xs text-foreground placeholder:text-muted-foreground/60 focus:border-emerald-400/50 focus:outline-none"
                                 />
                             </div>
                             {glossaryQuery && (
                                 <p className="mt-2 text-xs text-muted-foreground">
-                                    {isKo ? (
+                                    {lang === 'ko' && (
                                         entries.length === 0
                                             ? `“${glossaryQuery}”에 대한 결과가 없습니다. — 다른 단어를 검색해 보세요.`
                                             : `“${glossaryQuery}”에 대한 결과 ${entries.length}개`
-                                    ) : (
+                                    )}
+                                    {lang === 'zh' && (
+                                        entries.length === 0
+                                            ? `「${glossaryQuery}」沒有結果——請換個詞試試。`
+                                            : `「${glossaryQuery}」共有 ${entries.length} 個結果`
+                                    )}
+                                    {lang === 'en' && (
                                         <>
                                             {entries.length} result{entries.length === 1 ? '' : 's'} for &ldquo;{glossaryQuery}&rdquo;
                                             {entries.length === 0 && ' — try another word.'}
@@ -860,19 +914,20 @@ export default function HelpPage() {
                                 {CATEGORY_ORDER.map(cat => {
                                     const items = entries.filter(([, t]) => t.category === cat);
                                     if (items.length === 0) return null;
+                                    const catLabel = lang === 'ko' ? CATEGORY_LABELS_KO : lang === 'zh' ? CATEGORY_LABELS_ZH : CATEGORY_LABELS;
                                     return (
                                         <div key={cat}>
                                             <div className="flex items-center gap-2">
                                                 <span className={`rounded border px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider ${CATEGORY_STYLES[cat]}`}>
-                                                    {(isKo ? CATEGORY_LABELS_KO : CATEGORY_LABELS)[cat]}
+                                                    {catLabel[cat]}
                                                 </span>
                                                 <span className="text-[10px] font-bold text-muted-foreground/60">
-                                                    {isKo ? `${counts[cat]}개 용어` : `${counts[cat]} term${counts[cat] === 1 ? '' : 's'}`}
+                                                    {lang === 'ko' ? `${counts[cat]}개 용어` : lang === 'zh' ? `${counts[cat]} 個詞彙` : `${counts[cat]} term${counts[cat] === 1 ? '' : 's'}`}
                                                 </span>
                                             </div>
                                             <div className="mt-1.5 flex flex-wrap gap-1.5">
                                                 {items.map(([key, t]) => (
-                                                    <Term key={key} term={key} label={isKo ? (GLOSSARY_KO[key]?.term ?? t.term) : t.term} />
+                                                    <Term key={key} term={key} label={lang === 'ko' ? (GLOSSARY_KO[key]?.term ?? t.term) : lang === 'zh' ? (GLOSSARY_ZH[key]?.term ?? t.term) : t.term} />
                                                 ))}
                                             </div>
                                         </div>
@@ -882,15 +937,23 @@ export default function HelpPage() {
                         </Section>
 
                         {/* Disclaimer */}
-                        <Section id="disclaimer" title={isKo ? '면책 조항' : 'Disclaimer'} icon={<BookOpen className="h-5 w-5" />}>
-                            {isKo ? (
+                        <Section id="disclaimer" title={lang === 'ko' ? '면책 조항' : lang === 'zh' ? '免責聲明' : 'Disclaimer'} icon={<BookOpen className="h-5 w-5" />}>
+                            {lang === 'ko' && (
                                 <p>
                                     이 사이트는 리서치 도구입니다. <b>재정적 조언</b>도, <b>거래 봇</b>도, <b>수정 구슬</b>도
                                     아닙니다. 팩터는 매달 모든 종목이 아니라 수년에 걸쳐 평균적으로 작동합니다. 시스템 자신의
                                     트랙 레코드는 설계상 정직하고 종종 겸손합니다. 과거 성과 — 페이퍼트레이딩 성과를 포함해 — 는
                                     미래 결과를 보장하지 않습니다. 직접 리서치하세요.
                                 </p>
-                            ) : (
+                            )}
+                            {lang === 'zh' && (
+                                <p>
+                                    這個網站是研究工具。<b>不是</b>投資建議，<b>不是</b>交易機器人，也<b>不是</b>水晶球。因子是
+                                    以數年為尺度平均運作，而非每個月對每檔股票都有效。系統自身的績效紀錄是設計上誠實、且常令人
+                                    謙卑的。過往表現——包括紙上交易表現——不保證未來結果。請自行研究。
+                                </p>
+                            )}
+                            {lang === 'en' && (
                                 <p>
                                     This site is a research tool. It is <b>not</b> financial advice, <b>not</b> a trading bot, and{' '}
                                     <b>not</b> a crystal ball. Factors work on average over years, not on every stock every month.
@@ -900,7 +963,7 @@ export default function HelpPage() {
                             )}
                             <p className="pt-2 text-xs text-muted-foreground">
                                 <Link href="/" className="inline-flex items-center gap-1 font-bold text-emerald-300 hover:underline">
-                                    <ArrowUpRight className="h-3 w-3" /> {UI.backToCockpit[isKo ? 'ko' : 'en']}
+                                    <ArrowUpRight className="h-3 w-3" /> {UI.backToCockpit[lang]}
                                 </Link>
                             </p>
                         </Section>
@@ -914,17 +977,17 @@ export default function HelpPage() {
                         <div className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col border-r border-border bg-background shadow-2xl">
                             <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
                                 <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground/70">
-                                    {isKo ? '목차' : 'Contents'}
+                                    {contentsLabel}
                                 </p>
                                 <button onClick={() => setMobileNavOpen(false)} aria-label="Close contents" className="rounded-md border border-border/60 p-1.5 text-muted-foreground hover:text-foreground">
                                     <X className="h-4 w-4" />
                                 </button>
                             </div>
                             <div className="flex-1 overflow-y-auto p-4">
-                                <SidebarNav activeId={activeId} isKo={isKo} />
+                                <SidebarNav activeId={activeId} lang={lang} />
                             </div>
                             <div className="border-t border-border/60 p-3 text-[10px] leading-relaxed text-muted-foreground/70">
-                                {UI.howToUseBody[isKo ? 'ko' : 'en']}
+                                {UI.howToUseBody[lang]}
                             </div>
                         </div>
                     </div>

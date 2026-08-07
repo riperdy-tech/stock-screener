@@ -21,7 +21,16 @@ import {
     CATEGORY_LABELS, CATEGORY_ORDER, CATEGORY_STYLES, GLOSSARY, lookupTerm, TermDef,
 } from '@/lib/glossary';
 import { CATEGORY_LABELS_KO, GLOSSARY_KO } from '@/lib/glossary-ko';
+import { CATEGORY_LABELS_ZH, GLOSSARY_ZH } from '@/lib/glossary-zh';
 import { useLanguage } from './LanguageContext';
+
+/** Pick the localized dictionary for the current site language (undefined = English). */
+function localDict(language: string) {
+    return language === 'ko' ? GLOSSARY_KO : language === 'zh' ? GLOSSARY_ZH : undefined;
+}
+function localCatLabels(language: string) {
+    return language === 'ko' ? CATEGORY_LABELS_KO : language === 'zh' ? CATEGORY_LABELS_ZH : CATEGORY_LABELS;
+}
 
 const POPUP_WIDTH = 340;
 const POPUP_HEIGHT_EST = 260; // rough, used only to decide above/below placement
@@ -85,9 +94,8 @@ export function useGlossary() {
 export function Term({ term, label }: { term: string; label?: string }) {
     const def = lookupTerm(term);
     const { language } = useLanguage();
-    const isKo = language === 'ko';
-    const koDef = isKo ? GLOSSARY_KO[term] : undefined;
-    const displayName = label ?? koDef?.term ?? def?.term ?? term.replace(/-/g, ' ');
+    const localDef = localDict(language)?.[term];
+    const displayName = label ?? localDef?.term ?? def?.term ?? term.replace(/-/g, ' ');
     const { openKey, open } = useGlossary();
     const isOpen = openKey === term;
     const btnRef = useRef<HTMLButtonElement>(null);
@@ -128,8 +136,7 @@ function TermPopup({ termKey, def, anchorEl }: {
 }) {
     const { open, close } = useGlossary();
     const { language } = useLanguage();
-    const isKo = language === 'ko';
-    const koDef = isKo ? GLOSSARY_KO[termKey] : undefined;
+    const localDef = localDict(language)?.[termKey];
     const popRef = useRef<HTMLDivElement>(null);
     const [pos, setPos] = useState<{ top: number; left: number; width: number; above: boolean } | null>(null);
 
@@ -175,8 +182,8 @@ function TermPopup({ termKey, def, anchorEl }: {
     const related = (def.related ?? []).map(k => ({ key: k, def: lookupTerm(k) }))
         .filter(x => x.def) as { key: string; def: TermDef }[];
 
-    const displayName = koDef?.term ?? def.term;
-    const categoryLabel = (isKo ? CATEGORY_LABELS_KO : CATEGORY_LABELS)[def.category];
+    const displayName = localDef?.term ?? def.term;
+    const categoryLabel = localCatLabels(language)[def.category];
 
     if (typeof document === 'undefined') return null;
     // Render through a portal to <body> so the popup is NOT nested inside the
@@ -220,10 +227,10 @@ function TermPopup({ termKey, def, anchorEl }: {
             </div>
 
             <p className="mt-1.5 text-[11px] font-semibold italic leading-snug text-emerald-300/80">
-                {koDef?.plain ?? def.plain}
+                {localDef?.plain ?? def.plain}
             </p>
             <p className="mt-1.5 text-[12px] leading-relaxed text-foreground/90">
-                {koDef?.definition ?? def.definition}
+                {localDef?.definition ?? def.definition}
             </p>
 
             {related.length > 0 && (
@@ -241,7 +248,7 @@ function TermPopup({ termKey, def, anchorEl }: {
                             }}
                             className="rounded border border-border/70 bg-secondary/30 px-1.5 py-0.5 text-[10px] font-bold text-muted-foreground transition-colors hover:border-emerald-400/50 hover:text-emerald-300"
                         >
-                            {isKo ? (GLOSSARY_KO[key]?.term ?? rd.term) : rd.term}
+                            {localDict(language)?.[key]?.term ?? rd.term}
                         </button>
                     ))}
                 </div>
