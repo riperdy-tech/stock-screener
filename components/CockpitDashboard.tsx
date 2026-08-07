@@ -109,161 +109,6 @@ function fmtPct(v: number | null | undefined, digits = 1): string {
     return `${(v * 100).toFixed(digits)}%`;
 }
 
-function HelpSection({ title, children }: { title: string; children: React.ReactNode }) {
-    return (
-        <section className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-            <h3 className="mb-1.5 text-xs font-black uppercase tracking-wider text-emerald-300">{title}</h3>
-            <div className="space-y-1.5 text-xs leading-relaxed text-foreground/90">{children}</div>
-        </section>
-    );
-}
-
-function HelpModal({ onClose }: { onClose: () => void }) {
-    // Two audiences, two tabs: 'plain' assumes zero finance background;
-    // 'expert' documents every formula, data source, and threshold.
-    const [helpTab, setHelpTab] = useState<'plain' | 'expert'>('plain');
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
-            <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-xl border border-border bg-background p-5 shadow-2xl"
-                onClick={e => e.stopPropagation()}>
-                <div className="flex items-start justify-between">
-                    <h2 className="text-lg font-black">How this page works</h2>
-                    <button onClick={onClose} className="rounded-md border border-border p-1.5 text-muted-foreground hover:text-foreground">
-                        <X className="h-4 w-4" />
-                    </button>
-                </div>
-                <div className="mt-3 flex overflow-hidden rounded-lg border border-border bg-secondary/20 p-0.5 text-xs font-black">
-                    <button onClick={() => setHelpTab('plain')}
-                        className={clsx('flex-1 rounded-md border px-3 py-2 transition-all',
-                            helpTab === 'plain'
-                                ? 'border-emerald-400/60 bg-emerald-500/15 text-emerald-300'
-                                : 'border-transparent text-muted-foreground hover:text-foreground')}>
-                        Plain English — no jargon
-                    </button>
-                    <button onClick={() => setHelpTab('expert')}
-                        className={clsx('flex-1 rounded-md border px-3 py-2 transition-all',
-                            helpTab === 'expert'
-                                ? 'border-sky-400/60 bg-sky-500/15 text-sky-300'
-                                : 'border-transparent text-muted-foreground hover:text-foreground')}>
-                        Full methodology — for practitioners
-                    </button>
-                </div>
-
-                {helpTab === 'plain' && (
-                    <div className="mt-3 space-y-3">
-                        <HelpSection title="What is this site?">
-                            <p>Every day, a computer reads the financial reports and price history of roughly 6,600 US stocks and ranks them on one leaderboard. Top of the leaderboard = the most evidence in the stock&apos;s favor. That&apos;s it. Nothing here buys or sells anything, and nothing here is financial advice — it&apos;s a research shortlist with the evidence laid out.</p>
-                        </HelpSection>
-
-                        <HelpSection title="The five ingredients of a score">
-                            <p>Each stock is graded on five traits that have historically predicted returns:</p>
-                            <p><span className="text-emerald-300 font-bold">Value</span> — are you paying $1 for $2 of yearly cash earnings, or $2 for $1? Cheap beats expensive, on average, over time.</p>
-                            <p><span className="text-sky-300 font-bold">Quality</span> — does the company make real money, consistently, with clean accounting? A profitable business with honest books beats a story.</p>
-                            <p><span className="text-amber-300 font-bold">Momentum</span> — has the stock been winning over the past year? Winners tend to keep winning for a while.</p>
-                            <p><span className="text-violet-300 font-bold">Low volatility</span> — does the price move calmly or wildly? Calm stocks have historically delivered more return per unit of pain.</p>
-                            <p><span className="text-rose-300 font-bold">Revisions</span> — are the professional analysts who follow the company raising or cutting their forecasts? Direction of change matters.</p>
-                            <p>Crucially, every grade is <b>against companies in the same sector</b> — a supermarket competes with supermarkets, not with software companies. Otherwise &quot;high momentum&quot; would just mean &quot;is a tech stock.&quot;</p>
-                        </HelpSection>
-
-                        <HelpSection title="Why every ingredient counts equally">
-                            <p>Think of judging a decathlon: you could try to guess which event matters most, but decades of research show those guesses backfire — the &quot;perfect&quot; weights found in past data almost never work on future data. So each of the five ingredients counts exactly the same. Boring, humble, and it works better.</p>
-                        </HelpSection>
-
-                        <HelpSection title="Reading the leaderboard">
-                            <p><b>Composite</b> is the final grade (0–100). <b>Band</b> translates it: <span className="text-emerald-300">RESEARCH NOW</span> = top 3%, worth your time today · <span className="text-sky-300">WATCHLIST</span> = top 10% · <span className="text-amber-300">MONITOR</span> = top 30% · PASS = the rest.</p>
-                            <p><b>Red veto chips</b>: some stocks are disqualified no matter how good the score looks — think of a house with beautiful photos that failed the structural inspection. Reasons include accounting red flags firing together, heavy printing of new shares, or failing the safety checks of the valuation engine.</p>
-                            <p><b>DCF gap</b>: every stock price silently makes a promise about future growth. This column compares the promise with what the company has actually delivered. <span className="text-emerald-300">Green</span> = the price promises LESS than the company has proven (a potential bargain). <span className="text-amber-300">Amber</span> = the price needs an acceleration nobody has demonstrated yet — you have to believe a story.</p>
-                        </HelpSection>
-
-                        <HelpSection title="The AI second opinion (RS2)">
-                            <p>A local AI reads each company&apos;s actual SEC filings and writes an independent verdict — like getting a second doctor&apos;s opinion. The <b>Lens</b> switch at the top lets you see the math engine&apos;s list, the AI&apos;s list, or both side by side with the disagreements first. When the two disagree strongly, one of them is wrong — those are the interesting rows.</p>
-                        </HelpSection>
-
-                        <HelpSection title="The honest scoreboard (Track Record)">
-                            <p>Instead of showing a flattering backtest, the system paper-trades its own picks every single day with real prices and real transaction costs, and the record can never be edited. If the machine is wrong, this page will say so — publicly and permanently. That&apos;s the point.</p>
-                        </HelpSection>
-
-                        <HelpSection title="What this site is NOT">
-                            <p>Not financial advice. Not a trading bot — nothing executes trades. Not a crystal ball — factors work on average over years, not on every stock every month. It&apos;s a machine for narrowing 6,600 stocks down to a shortlist worth YOUR research time, with every piece of evidence shown.</p>
-                        </HelpSection>
-                    </div>
-                )}
-
-                {helpTab === 'expert' && (
-                    <div className="mt-3 space-y-3">
-                    <HelpSection title="Scoring pipeline — exact mechanics">
-                        <p>Universe: every name scored by the reverse engine (~6,600 US listings). Per sub-metric: winsorize at the 1st/99th percentile <b>within sector</b>, then z-score within sector. Factor z = mean of that factor&apos;s available sub-metrics. Composite z = weight-renormalized sum over available factors (missing factors drop out and remaining weights rescale; <b>value, quality, momentum are required</b> — a name missing any of them is marked insufficient_factors rather than scored on partial data).</p>
-                        <p>Composite z → cross-sectional percentile (0–100) → three multiplicative haircuts: <b>survivability</b> = 0.7 + 0.3·(surv/100), <b>data quality</b> = min(1, 0.8 + 0.04·dq), <b>forensic</b> = 0.85 if either the Beneish M-score or the accruals alarm fired (both firing is a veto, not a haircut). Haircut result is re-ranked; final percentile sets the band: ≥97 research_now, ≥90 watchlist, ≥70 monitor, else pass.</p>
-                        <p>Weights: equal 0.20 × 5 (scheme <code>equal_weight_robust5</code>, in <code>scripts/factor_weights.json</code> with a full revision history). Rank-IC per factor is still measured monthly by <code>calibrate_factor_weights.py</code> but writes a drift <i>diagnostic</i> only — measured IC never steers the weights (DeMiguel, Garlappi &amp; Uppal 2009: estimated weights rarely beat 1/N out of sample).</p>
-                    </HelpSection>
-
-                    <HelpSection title="Factor construction — sub-metrics and sources">
-                        <p><span className="text-emerald-300 font-bold">Value</span> = mean z of four yields, all computed from the latest fiscal year of SEC-filed fundamentals against current market cap: <b>FCF yield</b> = FCF/mcap · <b>owner-earnings yield</b> = (net income + D&amp;A − capex)/mcap · <b>EBIT yield</b> = operating income/EV where EV = mcap + LT debt − cash · <b>earnings yield</b> = NI/mcap (broadest-coverage sub; rescues filers with missing capex/D&amp;A/op-income tags).</p>
-                        <p><span className="text-sky-300 font-bold">Quality</span> = mean z of: <b>revenue quality</b> (reverse-engine score), <b>gross-margin stability</b> = −stdev of GM across ≥4 fiscal years, <b>negative accruals</b> = −accruals ratio, and <b>Piotroski F-score</b> (both from the forensic battery).</p>
-                        <p><span className="text-amber-300 font-bold">Momentum</span> = mean z of the <b>12-1 skip-month return</b> (12-month return excluding the most recent month, the academic standard that avoids short-term reversal) and <b>52-week-high proximity</b>. Monthly closes.</p>
-                        <p><span className="text-violet-300 font-bold">Low volatility</span> = z of −σ(monthly returns), minimum 12 observations. The annualized σ·√12 is exported per name and feeds Kelly sizing.</p>
-                        <p><span className="text-rose-300 font-bold">Revisions</span> = mean of two 0–1 parts: normalized EPS-trajectory slope, (clamp(slope, −1, 1)+1)/2, and analyst structured score/100 — scaled to 0–100 then recentred to a z-like scale via (score−50)/25.</p>
-                        <p><b>Theme is a context tag, never additive</b> (Ben-David et al. 2023: naive theme exposure averages −3.1%/yr). Theme membership/score ride along for orientation and the crowding warning only.</p>
-                    </HelpSection>
-
-                    <HelpSection title="Vetoes — hard disqualifiers">
-                        <p>Applied before scoring; a vetoed name gets no composite regardless of factors: <b>reverse_engine_reject</b> = reverse-engine band ∈ {'{'}Excluded, Reject, Reject-tier{'}'} · <b>forensic_pair</b> = Beneish M-score elevated AND accruals high (single alarm = 0.85 haircut instead) · <b>heavy_issuance</b> = HEAVY_ISSUANCE flag, waived for archetypes E/F where issuance is the expected financing mode.</p>
-                    </HelpSection>
-
-                    <HelpSection title="Reverse DCF — the expectations gap">
-                        <p><code>build_valuation_models.py</code> solves by bisection for the growth rate that makes a standard DCF equal the CURRENT price — the growth the market is charging you for. The <b>expectations gap</b> (shown as &quot;DCF gap&quot;) = implied growth − demonstrated growth, where demonstrated = the last 5 years of revenue/FCF growth from SEC filings, in percentage points. Negative gap = priced below proven capability; positive = the price requires unproven acceleration. <code>score_reverse.py</code> layers archetype classification (A–F) and survivability/data-quality scoring on top, producing the safety inputs the Factor Lab consumes.</p>
-                    </HelpSection>
-
-                    <HelpSection title="RS2 LLM overlay — stage 5">
-                        <p>A local LLM reads each company&apos;s filings and produces stance (undervalued/fair/overvalued), conviction 0–15, action, and its own DCF read. Its intrinsic value is anchored to the analyst consensus band, de-forwarded to present value (discounted one year of cost-of-equity) so margin of safety measures cheapness <i>today</i> — not a 12-month price target. Applied AFTER quant bands are set (the quant baseline stays untouched in <code>fct_band</code>): it can promote, demote, or veto (<code>llm_reject</code>) names, producing the parallel LLM ranking visible through the Lens switch.</p>
-                        <p className="mt-2">The LLM <b>Research Now</b> gate keys off RS2&apos;s structured signals — <b>margin of safety</b> and <b>entry timing</b>, not the action wording — in two tiers: <b>deep value</b> (MoS ≥ 30%) earns Research Now at any conviction; <b>moderate value</b> (MoS ≥ 15%, or a genuine fresh buy) additionally needs conviction ≥ 9.5. Bearish (avoid/sell/reduce/overvalued) is demoted out of Research Now; a hard avoid/sell is vetoed. Disagreement percentile Δ is computed per name; the Compare lens sorts on it.</p>
-                    </HelpSection>
-
-                    <HelpSection title="The big picture">
-                        <p>Every day the system scores ~6,600 US stocks and ranks them with ONE composite number built from six &quot;factors&quot; — measurable traits that have historically predicted returns. The top 3% become the <b>Research Now</b> list. Nothing here is a buy order; it is a ranked shortlist plus the evidence for and against each name.</p>
-                    </HelpSection>
-
-                    <HelpSection title="Rankings tab">
-                        <p><b>Composite</b> (0–100): the weighted mix of six factor scores. Each factor is measured against the stock&apos;s OWN SECTOR — a bank competes with banks, so &quot;high momentum&quot; can&apos;t just mean &quot;is a tech stock.&quot;</p>
-                        <p><b>The five factors</b>: <span className="text-emerald-300">value</span> (cheap vs cash flows), <span className="text-sky-300">quality</span> (profitable, stable, clean accounting), <span className="text-amber-300">momentum</span> (12-month winner, near its high), <span className="text-violet-300">low-vol</span> (calm price behavior), <span className="text-rose-300">revisions</span> (estimates improving). They are <b>equal-weighted on purpose</b>: decades of research (DeMiguel et al. 2009) show weights estimated from backtests overfit and lose to simple 1/N out-of-sample. We still MEASURE each factor&apos;s predictive power (Validation tab) — we just don&apos;t let short samples steer the engine.</p>
-                        <p><b>Theme is a context tag, not a factor</b>: naive theme-chasing destroys value (specialized theme ETFs average −3.1%/yr), so theme membership is shown for orientation and risk (late-cycle crowding warnings) but never adds to the score.</p>
-                        <p><b>Band</b>: Research Now = top 3% · Watchlist = top 10% · Monitor = top 30% · Pass = the rest.</p>
-                        <p><b>Veto</b> (red chip): automatic disqualification regardless of score — failed the reverse engine&apos;s safety checks, fired both forensic-accounting alarms, or is heavily diluting shareholders. The reason is written on the chip.</p>
-                        <p><b>DCF gap</b>: compares the growth the current PRICE requires vs the growth the company has actually DELIVERED (last 5 years of SEC filings). <span className="text-emerald-300">Green negative</span> = priced for less growth than demonstrated (potential bargain). <span className="text-amber-300">Amber positive</span> = price needs acceleration nobody has proven yet (you must believe a story).</p>
-                        <p>Click any row for the per-stock detail: factor profile, the reverse-DCF read (the growth the price implies vs what the company has demonstrated), and the RS2 local-LLM research + verdict.</p>
-                    </HelpSection>
-
-                    <HelpSection title="Track Record tab — the honest meter">
-                        <p>From inception, three portfolios are <b>paper-traded daily, for real, with transaction costs</b> — no backtest, no hindsight. When a stock enters the ranked list it gets bought at that day&apos;s price; when it drops out it gets sold. The record persists forever.</p>
-                        <p><b>plan</b> = the value core (Kelly-sized, ~50% cash). <b>plan2</b> = the hybrid (value core + quality sleeve, ~78% invested, holds the expensive leaders). <b>equal</b> = equal-weighting every Research Now name (pure stock-picking test). <b>mine</b> = your saved My Portfolio holdings, unitized like a fund (adding/removing money moves units, never fakes performance).</p>
-                        <p>Watch <b>plan vs plan2</b>: if plan2 wins, paying up for quality leaders beat the value discipline this period; if plan wins, the discipline (and cash) paid off. That&apos;s the value-vs-growth question answered with your own live money simulation.</p>
-                        <p><b>How to read it</b>: plan beating equal = the sizing machinery adds value. Equal beating IWM = the stock selection itself works. Mine lagging plan = your own deviations cost money (the behavior gap). &quot;Sold too early&quot; flags exits that kept rising — a recurring pattern there means the exit rule needs work. Sharpe/CAGR appear only after enough days; early on this page is deliberately boring.</p>
-                    </HelpSection>
-
-                    <HelpSection title="Portfolio tab">
-                        <p><b>My Portfolio (top)</b>: enter your ACTUAL holdings (saved only in this browser) and each is checked against the model: a quarter-Kelly suggested size, an over/under-weight verdict, and loud flags if a holding is vetoed or outside coverage.</p>
-                        <p><b>Suggested plan (below)</b>: NOT your portfolio — a machine-built allocation from the Research Now list, with a <b>Value core / Hybrid</b> toggle.</p>
-                        <p><b>Value core (plan)</b>: quarter-Kelly sizing — expected edge = the expectations gap closing over ~3 years (only names priced BELOW their demonstrated growth have measurable edge, so high-ranked-but-expensive names like TSM are skipped with &quot;no Kelly edge&quot;); risk = volatility; f = 0.25 × edge/risk², capped 5%. Forensic flags halve size; GPR 2-3 and insider selling shrink it; sector 25% / theme 30% caps; rest stays cash (often ~50%).</p>
-                        <p><b>Hybrid (plan2)</b>: the same value core PLUS a <b>quality sleeve</b> that buys the top-ranked names REGARDLESS of valuation gap (capped ~35% of book) — so it holds the expensive leaders (TSM, GOOGL, MU) the core refuses, and deploys the idle cash (~78% invested). Trade-off: more leader exposure and less cash, but it pays up for quality instead of demanding a margin of safety. Sleeve rows are tinted pink.</p>
-                        <p>Why two? The value core protects you in a bust (won&apos;t overpay) but lags in a melt-up; the hybrid captures the leaders but rides them down harder. Track Record shows how both actually perform.</p>
-                        <p><b>Macro flags</b>: warning lights from Fed data. If 2+ fire, every size halves automatically.</p>
-                    </HelpSection>
-
-                    <HelpSection title="Overlay chips (GPR / insiders)">
-                        <p><b>GPR 0-3</b>: geopolitical exposure tagged from the company&apos;s actual business profile (revenue geography, supply chains, regulation, sanctions). Never a buy/sell signal — it shrinks position sizes and demands a bigger margin of safety at level 3.</p>
-                        <p><b>▲/▼ INSIDERS</b>: &quot;informed demand&quot; — insiders net-buying while short sellers retreat (▲, confirming) or insiders selling into elevated short interest (▼, interrogate the thesis). Confirmation/warning only, never additive score.</p>
-                    </HelpSection>
-
-                    <HelpSection title="Where the data comes from">
-                        <p>SEC company facts (10 years of as-filed fundamentals), Yahoo Finance (prices, estimates, analyst coverage), FRED (Fed macro series). The whole pipeline re-runs daily via GitHub Actions; the IC drift report recalculates monthly. Paper ledgers persist append-only with transaction costs in bps.</p>
-                    </HelpSection>
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-}
-
 function ChangelogModal({ onClose }: { onClose: () => void }) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
@@ -898,7 +743,6 @@ export default function CockpitDashboard() {
     const [sectorFilter, setSectorFilter] = useState<string>('all');
     const [limit, setLimit] = useState(100);
     const [selected, setSelected] = useState<string | null>(null);
-    const [showHelp, setShowHelp] = useState(false);
     const [showChangelog, setShowChangelog] = useState(false);
     const auth = useAuth();
     const [showAuth, setShowAuth] = useState(false);
@@ -1255,11 +1099,11 @@ export default function CockpitDashboard() {
                             title="What's new / changelog" aria-label="Open changelog">
                             <Tag className="h-3.5 w-3.5" /> v{APP_VERSION}
                         </button>
-                        <button onClick={() => setShowHelp(true)}
+                        <Link href="/help"
                             className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-2.5 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground"
-                            title="How this page works" aria-label="Open help">
+                            title="The complete handbook — how everything works" aria-label="Open the handbook">
                             <HelpCircle className="h-4 w-4" />
-                        </button>
+                        </Link>
                         <Link href="/lenses" className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-3 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground">
                             <Layers3 className="h-3.5 w-3.5" /> Lenses
                         </Link>
@@ -1489,7 +1333,9 @@ export default function CockpitDashboard() {
                             </span>
                         )}
                         <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-[13px] text-sky-200/90">
-                            <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
+                            <Link href="/help#track" className="mt-0.5 shrink-0" title="Open the Track Record section of the handbook">
+                                <HelpCircle className="h-3.5 w-3.5 cursor-pointer" />
+                            </Link>
                             <p>
                                 <b>The honest meter.</b> Since {ledgers.inception}, four portfolios are paper-traded daily:
                                 {' '}<b className="text-emerald-300">plan</b> (value core),
@@ -1497,7 +1343,7 @@ export default function CockpitDashboard() {
                                 {' '}<b className="text-sky-300">equal</b> (equal-weight all Research Now),
                                 {' '}<b className="text-violet-300">mine</b> (your holdings). plan-vs-plan2 = value discipline vs paying up for leaders;
                                 plan-vs-equal = sizing value; mine-vs-plan = your behavior gap. Costs: {ledgers.config?.cost_bps}bps per trade.{' '}
-                                <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
+                                <Link href="/help#track" className="font-bold underline">Full explanation</Link>
                             </p>
                         </div>
 
@@ -1873,20 +1719,22 @@ export default function CockpitDashboard() {
                             ))}
                         </div>
                         <div className="flex items-start gap-2 rounded-md border border-sky-500/30 bg-sky-500/[0.07] p-2.5 text-[13px] text-sky-200/90">
-                            <HelpCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer" onClick={() => setShowHelp(true)} />
+                            <Link href="/help#portfolio" className="mt-0.5 shrink-0" title="Open the Portfolio section of the handbook">
+                                <HelpCircle className="h-3.5 w-3.5 cursor-pointer" />
+                            </Link>
                             {planView === 'plan' ? (
                                 <p>
                                     <b>Value core, not your holdings.</b> Quarter-Kelly sizes only research_now names priced
                                     BELOW their demonstrated growth (negative gap); no edge = no position, so it runs ~50% cash and
                                     won&apos;t hold expensive leaders like TSM.{' '}
-                                    <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
+                                    <Link href="/help#portfolio" className="font-bold underline">Full explanation</Link>
                                 </p>
                             ) : (
                                 <p>
                                     <b>Hybrid = value core + quality sleeve.</b> Keeps the Kelly core, then adds the top-ranked names
                                     REGARDLESS of valuation gap (capped ~35% of book) — so it captures TSM, GOOGL, MU and deploys the
                                     idle cash. More invested, more leader exposure, less value discipline.{' '}
-                                    <button onClick={() => setShowHelp(true)} className="font-bold underline">Full explanation</button>
+                                    <Link href="/help#portfolio" className="font-bold underline">Full explanation</Link>
                                 </p>
                             )}
                         </div>
@@ -1955,7 +1803,6 @@ export default function CockpitDashboard() {
 
             </main>
 
-            {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
             {showChangelog && <ChangelogModal onClose={() => setShowChangelog(false)} />}
             {showAuth && <AuthModal onClose={() => setShowAuth(false)} signIn={auth.signIn} signUp={auth.signUp} />}
 
