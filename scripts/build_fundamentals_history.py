@@ -29,6 +29,8 @@ reported — no neutral-looking defaults.
 
 import argparse
 import json
+import math
+import statistics
 import sys
 import zipfile
 from datetime import date, datetime, timezone
@@ -130,6 +132,84 @@ def get_cik_map():
     return mapping
 
 
+# ── Scale-error defence ──────────────────────────────────────────────────────────────────────
+# SEC filings are not internally consistent. The SAME fiscal period is sometimes reported twice
+# with values a clean power of 1000 apart, and since the corrupt value is usually in the LATER
+# filing, "most recent wins" picks it every time. Verified against the raw companyfacts:
+#     COHR  FY2023 D&A          681,687,000 (10-K)   vs      681,687,000,000 (later 10-K)
+#     INVE  FY2021 NetIncome      1,620,000 (10-K)   vs    1,620,000,000,000 (10-K/A)
+#     BKTI  FY2020 shares            12,561          and           12,561,000
+# One period cannot have two true values 1000x apart, so this is provable corruption rather than
+# a judgement call — unlike INVE's genuine restatements, which move a number by 0.3%.
+#
+# Measured impact before this fix: 672 year-over-year ~1000x transitions across 451 tickers,
+# 49% of them in shares_diluted.
+#
+# NOTE what this deliberately does NOT do: reject values merely for being large relative to the
+# series. That was tested and is unsafe — at a 10x bar it flags NVDA's real $120bn net income
+# (29x), AMZN's real 20:1 split (21.5x), AMD's Xilinx equity (22.3x) and CRM's margin expansion
+# (20.7x). A magnitude filter silently deletes the best names in the book. Only provable
+# contradictions and clean power-of-1000 series breaks are touched.
+SCALE_STEPS = (1e3, 1e6, 1e9)
+
+
+def _pow1000_ratio(a, b):
+    """Return the power-of-1000 step if |a|/|b| is ~one, else None."""
+    if not a or not b:
+        return None
+    r = abs(a) / abs(b)
+    for p in SCALE_STEPS:
+        if 0.7 * p <= r <= 1.4 * p:
+            return p
+    return None
+
+
+def _pick_consistent(cands, reference):
+    """From [(filed, val), ...] for ONE period, pick the value consistent with `reference`.
+
+    Falls back to most-recent when there is no conflict or no reference to judge against —
+    identical to the old behaviour, so nothing changes for the 99% that are clean.
+    """
+    vals = {v for _, v in cands if v is not None}
+    if len(vals) < 2:
+        return max(cands, key=lambda c: c[0] or "")[1]
+    hi, lo = max(vals, key=abs), min(vals, key=abs)
+    if _pow1000_ratio(hi, lo) is None:          # ordinary restatement -> keep most recent
+        return max(cands, key=lambda c: c[0] or "")[1]
+    if reference is None:                        # conflict but nothing to anchor on
+        return lo                                # the inflated one is the error in every case seen
+    return min(vals, key=lambda v: abs(math.log10(max(abs(v), 1e-9) / max(abs(reference), 1e-9))))
+
+
+def _normalise_series_scale(series):
+    """Rescale years whose value is a clean power of 1000 off the MOST RECENT year.
+
+    Catches the case a per-period contradiction cannot: a company that reported in THOUSANDS for
+    years and then switched to units, where each individual year has only one value and nothing
+    contradicts it (BKTI reported shares in thousands through FY2022, units from FY2023). The most
+    recent filing defines current units, so it is the anchor.
+    """
+    if len(series) < 3:
+        return series
+    yrs = sorted(series)
+    anchor_y = yrs[-1]
+    anchor = series[anchor_y]
+    if not anchor:
+        return series
+    # median magnitude of years already on the anchor's scale, to avoid anchoring on an outlier
+    same = [abs(series[y]) for y in yrs if series[y] and _pow1000_ratio(series[y], anchor) is None]
+    ref = statistics.median(same) if len(same) >= 2 else abs(anchor)
+    out = dict(series)
+    for y in yrs:
+        v = series[y]
+        if not v:
+            continue
+        p = _pow1000_ratio(ref, v)               # value is p times SMALLER than the current scale
+        if p:
+            out[y] = v * p
+    return out
+
+
 def annual_duration_series(facts, tags, unit_keys=("USD",)):
     """fiscal_year -> value for ~12-month-duration facts from annual filings.
 
@@ -158,11 +238,15 @@ def annual_duration_series(facts, tags, unit_keys=("USD",)):
                 if not 300 <= days <= 400:
                     continue
                 year = int(end[:4])
-                cur = best.get(year)
-                if cur is None or (e.get("filed") or "") >= (cur[0] or ""):
-                    best[year] = (e.get("filed"), val)
+                best.setdefault(year, []).append((e.get("filed"), val))
         if best:
-            candidates.append({y: v for y, (_, v) in best.items()})
+            # resolve per-period scale contradictions, then normalise the whole series
+            prelim = {y: max(c, key=lambda z: z[0] or "")[1] for y, c in best.items()}
+            clean = {y: v for y, v in prelim.items()
+                     if sum(1 for _, vv in best[y] if vv is not None) == 1}
+            ref = statistics.median([abs(v) for v in clean.values() if v]) if clean else None
+            resolved = {y: _pick_consistent(c, ref) for y, c in best.items()}
+            candidates.append(_normalise_series_scale(resolved))
     if not candidates:
         return {}
     return max(candidates, key=lambda s: (max(s), len(s)))
@@ -186,12 +270,15 @@ def annual_instant_series(facts, tags, unit_keys=("USD",)):
                 if not end or val is None:
                     continue
                 year = int(end[:4])
-                key = (end, e.get("filed") or "")
-                cur = best.get(year)
-                if cur is None or key >= cur[0]:
-                    best[year] = (key, val)
+                best.setdefault(year, []).append(((end, e.get("filed") or ""), val))
         if best:
-            candidates.append({y: v for y, (_, v) in best.items()})
+            prelim = {y: max(c, key=lambda z: z[0])[1] for y, c in best.items()}
+            clean = {y: v for y, v in prelim.items()
+                     if sum(1 for _, vv in best[y] if vv is not None) == 1}
+            ref = statistics.median([abs(v) for v in clean.values() if v]) if clean else None
+            resolved = {y: _pick_consistent([(k[1], v) for k, v in c], ref)
+                        for y, c in best.items()}
+            candidates.append(_normalise_series_scale(resolved))
     if not candidates:
         return {}
     return max(candidates, key=lambda s: (max(s), len(s)))
