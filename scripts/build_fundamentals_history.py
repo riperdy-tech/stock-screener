@@ -50,6 +50,10 @@ ZIP_PATH = ROOT / "companyfacts.zip"
 CIK_MAP_JSON = DATA / "cik_map.json"
 HISTORY_JSON = DATA / "fundamentals_history.json"
 BATTERY_JSON = DATA / "fundamentals_battery.json"
+# TTM lives in its OWN file: fundamentals_history's per-ticker dicts are keyed by fiscal year
+# and consumers do int(year) over the keys (valuation_backbone sorts int(y) directly) — a
+# non-year key inside would crash them all.
+TTM_JSON = DATA / "fundamentals_ttm.json"
 
 SEC_HEADERS = {"User-Agent": "StockScreener/1.0 (contact@example.com)"}
 ANNUAL_FORMS = ("10-K", "10-K/A", "20-F", "40-F")
@@ -211,18 +215,25 @@ def _normalise_series_scale(series):
 
 
 def annual_duration_series(facts, tags, unit_keys=("USD",)):
-    """fiscal_year -> value for ~12-month-duration facts from annual filings.
+    """(fiscal_year -> value, fiscal_year -> [(accn, filed, val), ...]) for ~12-month-duration
+    facts from annual filings.
 
     Tag selection: most RECENT latest-year wins, then most coverage. Tags are
     never mixed within one series — companies switch tags over time (e.g.
     Revenues -> RevenueFromContractWithCustomer...), and both first-tag-wins
     and coverage-only selection picked stale tags (AAPL's SalesRevenueNet has
     11 old years but ends in 2017).
+
+    The second return value carries the WINNING tag's raw per-year candidates with their
+    accession ids, so extract_history can assemble each year-row from ONE filing (see the
+    row-consistency note there). The resolved series itself is unchanged from the previous
+    behaviour.
     """
     candidates = []
     for tag in tags:
         units = facts.get(tag, {}).get("units", {})
         best = {}
+        raw = {}
         for uk in unit_keys:
             for e in units.get(uk, []):
                 if e.get("form") not in ANNUAL_FORMS:
@@ -239,6 +250,8 @@ def annual_duration_series(facts, tags, unit_keys=("USD",)):
                     continue
                 year = int(end[:4])
                 best.setdefault(year, []).append((e.get("filed"), val))
+                raw.setdefault(year, []).append((e.get("accn") or "", e.get("filed") or "",
+                                                 val, end))
         if best:
             # resolve per-period scale contradictions, then normalise the whole series
             prelim = {y: max(c, key=lambda z: z[0] or "")[1] for y, c in best.items()}
@@ -247,21 +260,24 @@ def annual_duration_series(facts, tags, unit_keys=("USD",)):
             _refvals = [abs(v) for v in clean.values() if v]
             ref = statistics.median(_refvals) if _refvals else None
             resolved = {y: _pick_consistent(c, ref) for y, c in best.items()}
-            candidates.append(_normalise_series_scale(resolved))
+            candidates.append((_normalise_series_scale(resolved), raw))
     if not candidates:
-        return {}
-    return max(candidates, key=lambda s: (max(s), len(s)))
+        return {}, {}
+    return max(candidates, key=lambda s: (max(s[0]), len(s[0])))
 
 
 def annual_instant_series(facts, tags, unit_keys=("USD",)):
-    """fiscal_year -> value for balance-sheet (instant) facts from annual filings.
+    """(fiscal_year -> value, fiscal_year -> [(accn, filed, val), ...]) for balance-sheet
+    (instant) facts from annual filings.
 
-    Same recency-then-coverage tag selection as annual_duration_series.
+    Same recency-then-coverage tag selection — and the same raw-candidate side channel —
+    as annual_duration_series.
     """
     candidates = []
     for tag in tags:
         units = facts.get(tag, {}).get("units", {})
         best = {}
+        raw = {}
         for uk in unit_keys:
             for e in units.get(uk, []):
                 if e.get("form") not in ANNUAL_FORMS:
@@ -272,6 +288,8 @@ def annual_instant_series(facts, tags, unit_keys=("USD",)):
                     continue
                 year = int(end[:4])
                 best.setdefault(year, []).append(((end, e.get("filed") or ""), val))
+                raw.setdefault(year, []).append((e.get("accn") or "", e.get("filed") or "",
+                                                 val, end))
         if best:
             prelim = {y: max(c, key=lambda z: z[0])[1] for y, c in best.items()}
             clean = {y: v for y, v in prelim.items()
@@ -280,20 +298,132 @@ def annual_instant_series(facts, tags, unit_keys=("USD",)):
             ref = statistics.median(_refvals) if _refvals else None
             resolved = {y: _pick_consistent([(k[1], v) for k, v in c], ref)
                         for y, c in best.items()}
-            candidates.append(_normalise_series_scale(resolved))
+            candidates.append((_normalise_series_scale(resolved), raw))
     if not candidates:
-        return {}
-    return max(candidates, key=lambda s: (max(s), len(s)))
+        return {}, {}
+    return max(candidates, key=lambda s: (max(s[0]), len(s[0])))
+
+
+QUARTERLY_FORMS = ("10-Q", "10-Q/A")
+# Flow fields the RS2 base_cf needs fresh (owner earnings = NI + D&A − capex; blend adds revenue;
+# fcf derived). Balance-sheet items and averages (shares_diluted is a weighted average — NOT
+# additive, the FY + YTD − YTD identity does not hold for it) are deliberately excluded.
+TTM_FIELDS = ("revenue", "net_income", "ocf", "capex", "da")
+
+
+def ttm_snapshot(facts):
+    """Trailing-twelve-month flows from 10-Q YTD rows: TTM = FY + YTD_cur − YTD_prior.
+
+    Validated against HWM before implementation (2026-08-08): the zip carries YTD duration rows
+    for every needed tag through the 10-Q filed 2026-08-06, and the identity reproduces the
+    hand-computed TTM. Date guards make the identity exact rather than approximate:
+      * YTD rows start at the fiscal-year start by construction; the current YTD leg must start
+        the day after the FY leg ends (±5d), and the prior YTD leg must cover the same fiscal
+        span one year earlier (end 350-380d before, duration within 14d of the current leg).
+      * Tag selection mirrors annual_duration_series' recency-then-coverage rule and NEVER mixes
+        tags across the three legs (HWM's "Revenues" tag is dead — 0 annual rows, 10-Q rows
+        ending 2019 — so first-tag-wins would bridge live and dead series).
+      * Same-period duplicate filings resolve via _pick_consistent against the annual median,
+        and each leg is pow-1000 checked against that median (same scale defence as the annual
+        series; magnitude-vs-series filters stay banned — see the scale-error note above).
+    A field with no complete triple is absent — honest absence, the engine falls back to FY.
+    Returns {"through", "filed", "fy_leg_end", "fields": {...}} or None if nothing computed.
+    """
+    out = {}
+    prov = None
+    for field in TTM_FIELDS:
+        best = None
+        for tag in DURATION_TAGS[field]:
+            entries = []
+            for e in facts.get(tag, {}).get("units", {}).get("USD", []):
+                start, end, val = e.get("start"), e.get("end"), e.get("val")
+                if not start or not end or val is None:
+                    continue
+                try:
+                    days = (date.fromisoformat(end) - date.fromisoformat(start)).days
+                except ValueError:
+                    continue
+                entries.append({"form": e.get("form"), "start": start, "end": end,
+                                "days": days, "val": val, "filed": e.get("filed") or ""})
+            ann = [e for e in entries if e["form"] in ANNUAL_FORMS and 300 <= e["days"] <= 400]
+            qtd = [e for e in entries if e["form"] in QUARTERLY_FORMS and 60 <= e["days"] <= 300]
+            if not ann or not qtd:
+                continue
+            # TTM must be FRESHER than the newest annual period: right after a 10-K (no newer
+            # 10-Q yet) the formula would happily emit a TTM through last Q3 — STALER than the
+            # FY the engine already has, silently presented as fresher.
+            if max(e["end"] for e in qtd) <= max(e["end"] for e in ann):
+                continue
+            ann_med = statistics.median(abs(e["val"]) for e in ann)
+
+            def resolve(rows):
+                # duplicate filings of the SAME period -> scale-consistent pick
+                return _pick_consistent([(r["filed"], r["val"]) for r in rows], ann_med)
+
+            # current leg: YTD row with the latest end (max duration at that end wins the
+            # quarterly-vs-YTD tie; at Q1 they are the same row)
+            end_cur = max(e["end"] for e in qtd)
+            cur_rows = [e for e in qtd if e["end"] == end_cur]
+            dmax = max(e["days"] for e in cur_rows)
+            cur_rows = [e for e in cur_rows if abs(e["days"] - dmax) <= 3]
+            cur = dict(cur_rows[0]); cur["val"] = resolve(cur_rows)
+            # FY leg: latest annual period ending before the current YTD starts, adjacent to it
+            fy_rows = [e for e in ann if e["end"] < cur["start"]]
+            if not fy_rows:
+                continue
+            fy_end = max(e["end"] for e in fy_rows)
+            if not 0 <= (date.fromisoformat(cur["start"]) - date.fromisoformat(fy_end)).days <= 5:
+                continue                       # current YTD does not start right after an FY
+            fy_leg = [e for e in fy_rows if e["end"] == fy_end]
+            fy = dict(fy_leg[0]); fy["val"] = resolve(fy_leg)
+            # prior leg: same YTD span one fiscal year earlier
+            pri_rows = [e for e in qtd
+                        if abs(e["days"] - cur["days"]) <= 14
+                        and 350 <= (date.fromisoformat(cur["end"])
+                                    - date.fromisoformat(e["end"])).days <= 380]
+            if not pri_rows:
+                continue
+            pri_end = max(e["end"] for e in pri_rows)
+            pri_rows = [e for e in pri_rows if e["end"] == pri_end]
+            pri = dict(pri_rows[0]); pri["val"] = resolve(pri_rows)
+            # per-leg scale defence: a leg a clean power of 1000 off the annual median is the
+            # same corruption the annual series guards against
+            legs = []
+            for r in (fy, cur, pri):
+                v = r["val"]
+                p = _pow1000_ratio(ann_med, v)
+                legs.append(v * p if p else v)
+            ttm_val = legs[0] + legs[1] - legs[2]
+            cand = {"val": ttm_val, "through": cur["end"], "filed": cur["filed"],
+                    "fy_leg_end": fy_end, "ann_years": len({e["end"][:4] for e in ann})}
+            if best is None or (cand["through"], cand["ann_years"]) > (best["through"], best["ann_years"]):
+                best = cand
+        if best is None:
+            continue
+        out[field] = best["val"]
+        # provenance from the field with the freshest through-date (they should agree; the
+        # engine-side audit cross-checks coverage)
+        if prov is None or best["through"] > prov["through"]:
+            prov = {"through": best["through"], "filed": best["filed"],
+                    "fy_leg_end": best["fy_leg_end"]}
+    if not out or prov is None:
+        return None
+    ocf, capex = out.get("ocf"), out.get("capex")
+    if ocf is not None and capex is not None:
+        out["fcf"] = ocf - capex
+    return {"through": prov["through"], "filed": prov["filed"],
+            "fy_leg_end": prov["fy_leg_end"], "fields": out}
 
 
 def extract_history(facts):
     """Build {fiscal_year: {field: value}} from a CIK's us-gaap facts."""
     series = {}
+    raws = {}
     for field, tags in DURATION_TAGS.items():
         unit = ("shares",) if field == "shares_diluted" else ("USD",)
-        series[field] = annual_duration_series(facts, tags, unit)
+        series[field], raws[field] = annual_duration_series(facts, tags, unit)
     for field, tags in INSTANT_TAGS.items():
-        series[field] = annual_instant_series(facts, tags)
+        series[field], raws[field] = annual_instant_series(facts, tags)
 
     years = set()
     for s in series.values():
@@ -304,7 +434,80 @@ def extract_history(facts):
 
     history = {}
     for y in years:
-        row = {f: series[f].get(y) for f in series}
+        # ── ROW CONSISTENCY (2026-08-08) ────────────────────────────────────────────────
+        # Per-field most-recent-wins mixes FILING BASES inside one row: after a divestiture
+        # the next 10-K restates comparative revenue to continuing operations, while net
+        # income under our tags keeps the original consolidated figure — WDC FY2023 ended up
+        # with HDD-only revenue ($6.25B, restated) against the consolidated flash-crash loss
+        # (−$1.68B), a margin of two different companies. Measured across the live book: 314
+        # basis-suspect conflicts (>30% or sign-flip) on 88 tickers, and no filed-date
+        # preference survives them all (original-first breaks ASC-606-style restatements
+        # where the later figure is better; latest-first is what mixed WDC). So instead of
+        # judging vintages, assemble each year-row from ONE filing: the accession covering
+        # the most fields (tie -> latest filed). The per-period/series scale defences above
+        # stay authoritative: an accession value that contradicts the resolved series by a
+        # clean power of 1000 is refused (COHR-class corrupt filings must not win a row),
+        # and a zero contradicted by a nonzero resolved value is a filing artifact (PSMT
+        # revenue 0 vs $2.5B), not data.
+        # BIN-END ANCHOR. Year bins are calendar end-year (int(end[:4])), and fiscal years
+        # ending Jan 1-2 COLLIDE with the prior year's bin: without this anchor the accession-
+        # coverage rule installed JNJ FY2016's $16.54B net income as "2017" (JNJ FY2016 ended
+        # 2017-01-01), ILMN's FY2022 GRAIL-impairment loss as "2023", YETI FY2021 as "2022" —
+        # found by diffing the full rebuild against the previous production file. The bin's
+        # canonical period end is its LATEST end date (deterministic — a filed-date anchor
+        # ties, because one later 10-K carries BOTH years as comparatives under one filed
+        # date): the collision candidate always ends Jan 1-2 of year y, the bin's own fiscal
+        # year always ends later in y. Only candidates within 14 days of the anchor may join
+        # the accession vote.
+        end_ref = None
+        for f in series:
+            for accn, filed, val, end in raws[f].get(y, []):
+                if end_ref is None or end > end_ref:
+                    end_ref = end
+
+        def _near_ref(end):
+            if end_ref is None:
+                return True
+            try:
+                return abs((date.fromisoformat(end) - date.fromisoformat(end_ref)).days) <= 14
+            except ValueError:
+                return False
+
+        accns = {}
+        for f in series:
+            for accn, filed, val, end in raws[f].get(y, []):
+                if not _near_ref(end):
+                    continue
+                a = accns.setdefault(accn, {"fields": set(), "filed": ""})
+                a["fields"].add(f)
+                a["filed"] = max(a["filed"], filed)
+        # Among near-complete accessions, the LATEST wins — measured on the two conflicting
+        # classes (2026-08-08): an ERROR restatement re-tags the whole comparative row (Macy's
+        # FY-Feb-2024: original 10-K and the restated next-10-K comparative both ~100% field
+        # coverage — the later, corrected $45M row must win over the original $105M), while a
+        # PERIMETER restatement re-tags a sparse subset (WDC FY2023 post-spin comparative: 48%
+        # coverage — excluded, so the row stays consolidated and internally consistent).
+        # Coverage-first-then-filed inverted the M case; pure-latest would let WDC's 48% row
+        # fragment mix again. The 0.8 bar separates the measured populations.
+        chosen = None
+        if accns:
+            mx = max(len(a["fields"]) for a in accns.values())
+            elig = {k: a for k, a in accns.items() if len(a["fields"]) >= 0.8 * mx}
+            chosen = max(elig, key=lambda k: (elig[k]["filed"], len(elig[k]["fields"])))
+        row = {}
+        for f in series:
+            v = series[f].get(y)
+            if chosen is not None and v is not None:
+                cand = [c for c in raws[f].get(y, [])
+                        if c[0] == chosen and _near_ref(c[3])]
+                if cand:
+                    if len({c[2] for c in cand}) > 1:
+                        av = _pick_consistent([(c[1], c[2]) for c in cand], v)
+                    else:
+                        av = cand[0][2]
+                    if av != v and _pow1000_ratio(av, v) is None and not (av == 0 and v):
+                        v = av
+            row[f] = v
         # Require at least a revenue or assets figure for the year to count
         if row.get("revenue") is None and row.get("total_assets") is None:
             continue
@@ -523,6 +726,7 @@ def main():
 
     history_out = {}
     battery_out = {}
+    ttm_out = {}
     no_entry = 0
     no_history = 0
     processed = 0
@@ -551,6 +755,9 @@ def main():
             battery = compute_battery(history)
             if battery:
                 battery_out[ticker] = battery
+            ttm = ttm_snapshot(facts)
+            if ttm:
+                ttm_out[ticker] = ttm
             processed += 1
             if processed % 500 == 0:
                 print(f"  ... {processed} tickers processed")
@@ -561,12 +768,13 @@ def main():
     # fundamentals_history.json that every RS2 valuation reads (2026-08-07; recovered from git).
     # A partial universe silently masquerading as the full one corrupts everything downstream,
     # so subset output goes to *.SUBSET.json and says so.
-    global HISTORY_JSON, BATTERY_JSON
+    global HISTORY_JSON, BATTERY_JSON, TTM_JSON
     if args.limit or args.tickers:
         HISTORY_JSON = HISTORY_JSON.with_name("fundamentals_history.SUBSET.json")
         BATTERY_JSON = BATTERY_JSON.with_name("fundamentals_battery.SUBSET.json")
+        TTM_JSON = TTM_JSON.with_name("fundamentals_ttm.SUBSET.json")
         print(f"SUBSET run ({len(targets)} tickers) -> writing {HISTORY_JSON.name} / "
-              f"{BATTERY_JSON.name} — production files untouched")
+              f"{BATTERY_JSON.name} / {TTM_JSON.name} — production files untouched")
     HISTORY_JSON.write_text(json.dumps(
         {"generated_at": generated_at, "source": "SEC companyfacts.zip (annual filings)",
          "tickers": history_out}, sort_keys=True), encoding="utf-8")
@@ -578,11 +786,19 @@ def main():
                    "net_issuance_*: positive = dilution."),
          "tickers": battery_out}, indent=1, sort_keys=True), encoding="utf-8")
 
+    TTM_JSON.write_text(json.dumps(
+        {"generated_at": generated_at,
+         "source": "SEC companyfacts.zip (TTM = FY + 10-Q YTD_current - 10-Q YTD_prior)",
+         "_note": ("Flow fields only; a field with no complete, date-adjacent FY/YTD/YTD triple "
+                   "is absent rather than approximated. 'through' is the TTM window end."),
+         "tickers": ttm_out}, sort_keys=True), encoding="utf-8")
+
     print()
-    print(f"Tickers with history: {processed} | battery: {len(battery_out)}")
+    print(f"Tickers with history: {processed} | battery: {len(battery_out)} | ttm: {len(ttm_out)}")
     print(f"No zip entry: {no_entry} | no usable annual history: {no_history}")
     print(f"Written: {HISTORY_JSON.name} ({HISTORY_JSON.stat().st_size:,} bytes)")
     print(f"Written: {BATTERY_JSON.name} ({BATTERY_JSON.stat().st_size:,} bytes)")
+    print(f"Written: {TTM_JSON.name} ({TTM_JSON.stat().st_size:,} bytes)")
 
 
 if __name__ == "__main__":
