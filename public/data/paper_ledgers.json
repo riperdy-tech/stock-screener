@@ -1,13 +1,6 @@
 {
  "alerts": [
   {
-   "date": "2026-08-01",
-   "detail": "carried: ['ANIP', 'BWMX', 'ITRN']",
-   "kind": "unevaluated_held",
-   "scope": "equal_llm",
-   "severity": "info"
-  },
-  {
    "date": "2026-08-02",
    "detail": "carried: ['WDC']",
    "kind": "unevaluated_held",
@@ -111,6 +104,20 @@
    "kind": "unevaluated_held",
    "scope": "equal_llm",
    "severity": "info"
+  },
+  {
+   "date": "2026-08-09",
+   "detail": "deferred: ['VRT']",
+   "kind": "underfunded",
+   "scope": "equal_llm",
+   "severity": "warn"
+  },
+  {
+   "date": "2026-08-09",
+   "detail": "carried: ['ANIP', 'BWMX', 'CRUS', 'INVA', 'ITRN', 'SITM']",
+   "kind": "unevaluated_held",
+   "scope": "equal_llm",
+   "severity": "info"
   }
  ],
  "config": {
@@ -127,11 +134,11 @@
   "start_nav": 100.0
  },
  "health": {
-  "factor_checked_at": "2026-08-08",
+  "factor_checked_at": "2026-08-09",
   "factor_scored_count": 1718
  },
  "inception": "2026-06-12",
- "last_updated": "2026-08-08T11:50:51Z",
+ "last_updated": "2026-08-09T13:22:50Z",
  "ledgers": {
   "equal": {
    "closed": [
@@ -548,8 +555,8 @@
      "exit_date": "2026-07-10",
      "exit_price": 403.48,
      "hold_days": 7,
-     "post_exit_days": null,
-     "post_exit_return_pct": null,
+     "post_exit_days": 30,
+     "post_exit_return_pct": -10.06,
      "return_pct": -3.57,
      "ticker": "WWD"
     },
@@ -882,9 +889,31 @@
      "post_exit_return_pct": null,
      "return_pct": -5.05,
      "ticker": "PSMT"
+    },
+    {
+     "entry_date": "2026-06-12",
+     "entry_price": 603.09,
+     "exit_date": "2026-08-09",
+     "exit_price": 597.33,
+     "hold_days": 58,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": -1.2,
+     "ticker": "AGX"
+    },
+    {
+     "entry_date": "2026-06-12",
+     "entry_price": 70.04,
+     "exit_date": "2026-08-09",
+     "exit_price": 68.76,
+     "hold_days": 58,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": -2.07,
+     "ticker": "BLBD"
     }
    ],
-   "current_date": "2026-08-08",
+   "current_date": "2026-08-09",
    "dividends": [],
    "exit_pending": {
     "AGX": "2026-08-08",
@@ -1698,290 +1727,22 @@
      "date": "2026-08-08",
      "nav": 98.6812,
      "stale_marks": []
+    },
+    {
+     "bench": 301.56,
+     "benches": {
+      "DRAM": 50.6,
+      "IWM": 301.56,
+      "QQQ": 723.03,
+      "SOXX": 543.27,
+      "SPY": 773.26
+     },
+     "date": "2026-08-09",
+     "nav": 98.6731,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 1.0447075097561669,
-    "holdings": {
-     "AAPL": {
-      "entry_date": "2026-07-10",
-      "entry_price": 316.22,
-      "shares": 0.005553329766910275
-     },
-     "ABNB": {
-      "entry_date": "2026-06-15",
-      "entry_price": 138.37,
-      "shares": 0.01065941313195216
-     },
-     "ADSK": {
-      "entry_date": "2026-06-12",
-      "entry_price": 221.28,
-      "shares": 0.007620530337268032
-     },
-     "AGX": {
-      "entry_date": "2026-06-12",
-      "entry_price": 603.09,
-      "shares": 0.0026906336274177644
-     },
-     "AMD": {
-      "entry_date": "2026-06-12",
-      "entry_price": 467.74,
-      "shares": 0.003453547574699515
-     },
-     "ANET": {
-      "entry_date": "2026-07-10",
-      "entry_price": 184.69,
-      "shares": 0.0020557158431482596
-     },
-     "AVGO": {
-      "entry_date": "2026-06-12",
-      "entry_price": 375.92,
-      "shares": 0.004437352011423979
-     },
-     "AZN": {
-      "entry_date": "2026-06-12",
-      "entry_price": 178.96,
-      "shares": 0.009997726300958529
-     },
-     "BLBD": {
-      "entry_date": "2026-06-12",
-      "entry_price": 70.04,
-      "shares": 0.023212590657991063
-     },
-     "BMRN": {
-      "entry_date": "2026-06-12",
-      "entry_price": 55.61,
-      "shares": 0.029746461313379113
-     },
-     "CLS": {
-      "entry_date": "2026-07-26",
-      "entry_price": 334.75,
-      "shares": 0.005119879435720371
-     },
-     "CPRX": {
-      "entry_date": "2026-06-12",
-      "entry_price": 31.355,
-      "shares": 0.059210022208803365
-     },
-     "DELL": {
-      "entry_date": "2026-07-05",
-      "entry_price": 394.32,
-      "shares": 0.004066692174904478
-     },
-     "DGII": {
-      "entry_date": "2026-07-08",
-      "entry_price": 70.3,
-      "shares": 0.023232823701428658
-     },
-     "ELMD": {
-      "entry_date": "2026-07-02",
-      "entry_price": 44.725,
-      "shares": 0.04251299600491183
-     },
-     "EMBJ": {
-      "entry_date": "2026-07-06",
-      "entry_price": 66.14,
-      "shares": 0.025998105689723616
-     },
-     "EXEL": {
-      "entry_date": "2026-06-12",
-      "entry_price": 52.66,
-      "shares": 0.033420215663260415
-     },
-     "EXPE": {
-      "entry_date": "2026-07-02",
-      "entry_price": 268.78,
-      "shares": 0.00608935221613669
-     },
-     "FIX": {
-      "entry_date": "2026-06-12",
-      "entry_price": 1788.99,
-      "shares": 0.0010582400337515016
-     },
-     "GD": {
-      "entry_date": "2026-07-24",
-      "entry_price": 386.75,
-      "shares": 0.0048089522698302
-     },
-     "GEV": {
-      "entry_date": "2026-06-12",
-      "entry_price": 905.675,
-      "shares": 0.0017332622598885074
-     },
-     "GILD": {
-      "entry_date": "2026-08-04",
-      "entry_price": 135.25,
-      "shares": 0.014014733045738977
-     },
-     "GMED": {
-      "entry_date": "2026-06-12",
-      "entry_price": 80.25,
-      "shares": 0.02300639295571519
-     },
-     "GOOG": {
-      "entry_date": "2026-06-12",
-      "entry_price": 345.42,
-      "shares": 0.005031548232535665
-     },
-     "GOOGL": {
-      "entry_date": "2026-06-12",
-      "entry_price": 356.38,
-      "shares": 0.0050175384063949014
-     },
-     "GRDN": {
-      "entry_date": "2026-06-12",
-      "entry_price": 41.825,
-      "shares": 0.04330644983816385
-     },
-     "GSAT": {
-      "entry_date": "2026-08-02",
-      "entry_price": 83.38,
-      "shares": 0.022263016989457818
-     },
-     "HWM": {
-      "entry_date": "2026-07-28",
-      "entry_price": 286.04,
-      "shares": 0.00654501910376671
-     },
-     "INCY": {
-      "entry_date": "2026-06-12",
-      "entry_price": 107.805,
-      "shares": 0.014535337390370552
-     },
-     "IRMD": {
-      "entry_date": "2026-06-12",
-      "entry_price": 96.29,
-      "shares": 0.01907456721028529
-     },
-     "KNSA": {
-      "entry_date": "2026-06-12",
-      "entry_price": 49.27,
-      "shares": 0.023964004300282966
-     },
-     "KRYS": {
-      "entry_date": "2026-06-12",
-      "entry_price": 320.5,
-      "shares": 0.005134834117572541
-     },
-     "LAUR": {
-      "entry_date": "2026-07-03",
-      "entry_price": 38.2,
-      "shares": 0.04775800164971869
-     },
-     "LLY": {
-      "entry_date": "2026-06-12",
-      "entry_price": 1168.2,
-      "shares": 0.001558927116673677
-     },
-     "LQDT": {
-      "entry_date": "2026-07-01",
-      "entry_price": 39.39,
-      "shares": 0.04512890386131054
-     },
-     "MAMA": {
-      "entry_date": "2026-07-03",
-      "entry_price": 18.68,
-      "shares": 0.09921126364068604
-     },
-     "MCRI": {
-      "entry_date": "2026-08-07",
-      "entry_price": 124.39,
-      "shares": 0.015221291037589072
-     },
-     "MEDP": {
-      "entry_date": "2026-06-12",
-      "entry_price": 470.69,
-      "shares": 0.0031004083929549
-     },
-     "MNST": {
-      "entry_date": "2026-07-03",
-      "entry_price": 97.6,
-      "shares": 0.019290464885115072
-     },
-     "MOV": {
-      "entry_date": "2026-06-12",
-      "entry_price": 36.7,
-      "shares": 0.04805875701991947
-     },
-     "MPWR": {
-      "entry_date": "2026-06-12",
-      "entry_price": 1540.56,
-      "shares": 0.0012715009667989333
-     },
-     "MRK": {
-      "entry_date": "2026-06-12",
-      "entry_price": 121.025,
-      "shares": 0.014225403214734247
-     },
-     "NBIX": {
-      "entry_date": "2026-06-12",
-      "entry_price": 160.86,
-      "shares": 0.010154791892353028
-     },
-     "NHC": {
-      "entry_date": "2026-06-12",
-      "entry_price": 194.415,
-      "shares": 0.008226902633670293
-     },
-     "NOVT": {
-      "entry_date": "2026-08-03",
-      "entry_price": 148.34,
-      "shares": 0.011409038266554795
-     },
-     "NVS": {
-      "entry_date": "2026-06-12",
-      "entry_price": 152.26,
-      "shares": 0.011889130876240134
-     },
-     "PSMT": {
-      "entry_date": "2026-07-18",
-      "entry_price": 186.0,
-      "shares": 0.009506928271559679
-     },
-     "REGN": {
-      "entry_date": "2026-08-04",
-      "entry_price": 760.66,
-      "shares": 0.0023062205450939204
-     },
-     "RMD": {
-      "entry_date": "2026-07-30",
-      "entry_price": 208.56,
-      "shares": 0.008515923870967177
-     },
-     "SAP": {
-      "entry_date": "2026-06-12",
-      "entry_price": 160.95,
-      "shares": 0.00920703189952814
-     },
-     "TSM": {
-      "entry_date": "2026-06-12",
-      "entry_price": 414.555,
-      "shares": 0.00430888602757802
-     },
-     "UTHR": {
-      "entry_date": "2026-06-12",
-      "entry_price": 549.63,
-      "shares": 0.003461643117992168
-     },
-     "VIK": {
-      "entry_date": "2026-06-12",
-      "entry_price": 89.3034,
-      "shares": 0.017602148682000184
-     },
-     "VRTX": {
-      "entry_date": "2026-06-12",
-      "entry_price": 438.89,
-      "shares": 0.003694902446087526
-     },
-     "WDC": {
-      "entry_date": "2026-08-01",
-      "entry_price": 544.84,
-      "shares": 0.003413634370202656
-     }
-    },
-    "units": null
-   },
-   "state": {
     "cash": 2.677989128919144,
     "holdings": {
      "AAPL": {
@@ -2257,26 +2018,292 @@
     },
     "units": null
    },
+   "state": {
+    "cash": 5.873274812432291,
+    "holdings": {
+     "AAPL": {
+      "entry_date": "2026-07-10",
+      "entry_price": 316.22,
+      "shares": 0.005553329766910275
+     },
+     "ABNB": {
+      "entry_date": "2026-06-15",
+      "entry_price": 138.37,
+      "shares": 0.01065941313195216
+     },
+     "ADSK": {
+      "entry_date": "2026-06-12",
+      "entry_price": 221.28,
+      "shares": 0.007620530337268032
+     },
+     "AMD": {
+      "entry_date": "2026-06-12",
+      "entry_price": 467.74,
+      "shares": 0.003453547574699515
+     },
+     "ANET": {
+      "entry_date": "2026-07-10",
+      "entry_price": 184.69,
+      "shares": 0.0020557158431482596
+     },
+     "AVGO": {
+      "entry_date": "2026-06-12",
+      "entry_price": 375.92,
+      "shares": 0.004437352011423979
+     },
+     "AZN": {
+      "entry_date": "2026-06-12",
+      "entry_price": 178.96,
+      "shares": 0.009997726300958529
+     },
+     "BMRN": {
+      "entry_date": "2026-06-12",
+      "entry_price": 55.61,
+      "shares": 0.029746461313379113
+     },
+     "CLS": {
+      "entry_date": "2026-07-26",
+      "entry_price": 334.75,
+      "shares": 0.005119879435720371
+     },
+     "CPRX": {
+      "entry_date": "2026-06-12",
+      "entry_price": 31.355,
+      "shares": 0.059210022208803365
+     },
+     "DELL": {
+      "entry_date": "2026-07-05",
+      "entry_price": 394.32,
+      "shares": 0.004066692174904478
+     },
+     "DGII": {
+      "entry_date": "2026-07-08",
+      "entry_price": 70.3,
+      "shares": 0.023232823701428658
+     },
+     "ELMD": {
+      "entry_date": "2026-07-02",
+      "entry_price": 44.725,
+      "shares": 0.04251299600491183
+     },
+     "EMBJ": {
+      "entry_date": "2026-07-06",
+      "entry_price": 66.14,
+      "shares": 0.025998105689723616
+     },
+     "EXEL": {
+      "entry_date": "2026-06-12",
+      "entry_price": 52.66,
+      "shares": 0.033420215663260415
+     },
+     "EXPE": {
+      "entry_date": "2026-07-02",
+      "entry_price": 268.78,
+      "shares": 0.00608935221613669
+     },
+     "FIX": {
+      "entry_date": "2026-06-12",
+      "entry_price": 1788.99,
+      "shares": 0.0010582400337515016
+     },
+     "GD": {
+      "entry_date": "2026-07-24",
+      "entry_price": 386.75,
+      "shares": 0.0048089522698302
+     },
+     "GEV": {
+      "entry_date": "2026-06-12",
+      "entry_price": 905.675,
+      "shares": 0.0017332622598885074
+     },
+     "GILD": {
+      "entry_date": "2026-08-04",
+      "entry_price": 135.25,
+      "shares": 0.014014733045738977
+     },
+     "GMED": {
+      "entry_date": "2026-06-12",
+      "entry_price": 80.25,
+      "shares": 0.02300639295571519
+     },
+     "GOOG": {
+      "entry_date": "2026-06-12",
+      "entry_price": 345.42,
+      "shares": 0.005031548232535665
+     },
+     "GOOGL": {
+      "entry_date": "2026-06-12",
+      "entry_price": 356.38,
+      "shares": 0.0050175384063949014
+     },
+     "GRDN": {
+      "entry_date": "2026-06-12",
+      "entry_price": 41.825,
+      "shares": 0.04330644983816385
+     },
+     "HWM": {
+      "entry_date": "2026-07-28",
+      "entry_price": 286.04,
+      "shares": 0.00654501910376671
+     },
+     "INCY": {
+      "entry_date": "2026-06-12",
+      "entry_price": 107.805,
+      "shares": 0.014535337390370552
+     },
+     "IRMD": {
+      "entry_date": "2026-06-12",
+      "entry_price": 96.29,
+      "shares": 0.01907456721028529
+     },
+     "KNSA": {
+      "entry_date": "2026-06-12",
+      "entry_price": 49.27,
+      "shares": 0.023964004300282966
+     },
+     "KRYS": {
+      "entry_date": "2026-06-12",
+      "entry_price": 320.5,
+      "shares": 0.005134834117572541
+     },
+     "LAUR": {
+      "entry_date": "2026-07-03",
+      "entry_price": 38.2,
+      "shares": 0.04775800164971869
+     },
+     "LLY": {
+      "entry_date": "2026-06-12",
+      "entry_price": 1168.2,
+      "shares": 0.001558927116673677
+     },
+     "LQDT": {
+      "entry_date": "2026-07-01",
+      "entry_price": 39.39,
+      "shares": 0.04512890386131054
+     },
+     "MAMA": {
+      "entry_date": "2026-07-03",
+      "entry_price": 18.68,
+      "shares": 0.09921126364068604
+     },
+     "MCRI": {
+      "entry_date": "2026-08-07",
+      "entry_price": 124.39,
+      "shares": 0.015221291037589072
+     },
+     "MEDP": {
+      "entry_date": "2026-06-12",
+      "entry_price": 470.69,
+      "shares": 0.0031004083929549
+     },
+     "MNST": {
+      "entry_date": "2026-07-03",
+      "entry_price": 97.6,
+      "shares": 0.019290464885115072
+     },
+     "MOV": {
+      "entry_date": "2026-06-12",
+      "entry_price": 36.7,
+      "shares": 0.04805875701991947
+     },
+     "MPWR": {
+      "entry_date": "2026-06-12",
+      "entry_price": 1540.56,
+      "shares": 0.0012715009667989333
+     },
+     "MRK": {
+      "entry_date": "2026-06-12",
+      "entry_price": 121.025,
+      "shares": 0.014225403214734247
+     },
+     "NBIX": {
+      "entry_date": "2026-06-12",
+      "entry_price": 160.86,
+      "shares": 0.010154791892353028
+     },
+     "NHC": {
+      "entry_date": "2026-06-12",
+      "entry_price": 194.415,
+      "shares": 0.008226902633670293
+     },
+     "NOVT": {
+      "entry_date": "2026-08-03",
+      "entry_price": 148.34,
+      "shares": 0.011409038266554795
+     },
+     "NVS": {
+      "entry_date": "2026-06-12",
+      "entry_price": 152.26,
+      "shares": 0.011889130876240134
+     },
+     "REGN": {
+      "entry_date": "2026-08-04",
+      "entry_price": 760.66,
+      "shares": 0.0023062205450939204
+     },
+     "RMD": {
+      "entry_date": "2026-07-30",
+      "entry_price": 208.56,
+      "shares": 0.008515923870967177
+     },
+     "SAP": {
+      "entry_date": "2026-06-12",
+      "entry_price": 160.95,
+      "shares": 0.00920703189952814
+     },
+     "STX": {
+      "entry_date": "2026-08-08",
+      "entry_price": 812.76,
+      "shares": 0.0023291762519763192
+     },
+     "TSM": {
+      "entry_date": "2026-06-12",
+      "entry_price": 414.555,
+      "shares": 0.00430888602757802
+     },
+     "UTHR": {
+      "entry_date": "2026-06-12",
+      "entry_price": 549.63,
+      "shares": 0.003461643117992168
+     },
+     "VIK": {
+      "entry_date": "2026-06-12",
+      "entry_price": 89.3034,
+      "shares": 0.017602148682000184
+     },
+     "VRTX": {
+      "entry_date": "2026-06-12",
+      "entry_price": 438.89,
+      "shares": 0.003694902446087526
+     },
+     "WDC": {
+      "entry_date": "2026-08-01",
+      "entry_price": 544.84,
+      "shares": 0.003413634370202656
+     }
+    },
+    "units": null
+   },
    "summary": {
-    "avg_hold_days": 10.1,
-    "cagr_pct": -8.15,
-    "closed_trades": 68,
-    "cumulative_return_pct": -1.32,
+    "avg_hold_days": 11.5,
+    "cagr_pct": -8.06,
+    "closed_trades": 70,
+    "cumulative_return_pct": -1.33,
     "excess_vs": {
-     "DRAM": 20.85,
-     "IWM": -4.5,
-     "QQQ": -1.66,
+     "DRAM": 20.84,
+     "IWM": -4.51,
+     "QQQ": -1.67,
      "SOXX": 7.52,
      "SPY": -5.84
     },
-    "excess_vs_bench_pct": -4.5,
+    "excess_vs_bench_pct": -4.51,
     "inception": "2026-06-12",
     "max_drawdown_pct": -7.92,
-    "observations": 55,
-    "open_positions": 54,
+    "observations": 56,
+    "open_positions": 52,
     "sharpe": -0.38,
-    "total_traded_value": 351.47,
-    "win_rate_pct": 27.9
+    "total_traded_value": 354.67,
+    "win_rate_pct": 27.1
    },
    "trades": [
     {
@@ -5486,6 +5513,22 @@
      "side": "buy",
      "ticker": "STX",
      "value": 1.8978
+    },
+    {
+     "date": "2026-08-09",
+     "price": 597.33,
+     "reason": "left_rank",
+     "side": "sell",
+     "ticker": "AGX",
+     "value": 1.6032
+    },
+    {
+     "date": "2026-08-09",
+     "price": 68.76,
+     "reason": "left_rank",
+     "side": "sell",
+     "ticker": "BLBD",
+     "value": 1.5921
     }
    ]
   },
@@ -5530,8 +5573,8 @@
      "exit_date": "2026-07-10",
      "exit_price": 149.97,
      "hold_days": 5,
-     "post_exit_days": null,
-     "post_exit_return_pct": null,
+     "post_exit_days": 30,
+     "post_exit_return_pct": -8.51,
      "return_pct": -3.95,
      "ticker": "TTMI"
     },
@@ -5921,7 +5964,7 @@
      "ticker": "SAP"
     }
    ],
-   "current_date": "2026-08-08",
+   "current_date": "2026-08-09",
    "dividends": [
     {
      "amount": 0.0189,
@@ -6444,140 +6487,22 @@
      "date": "2026-08-08",
      "nav": 110.2777,
      "stale_marks": []
+    },
+    {
+     "bench": 301.56,
+     "benches": {
+      "DRAM": 50.6,
+      "IWM": 301.56,
+      "QQQ": 723.03,
+      "SOXX": 543.27,
+      "SPY": 773.26
+     },
+     "date": "2026-08-09",
+     "nav": 110.2777,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 0.31240859819904365,
-    "holdings": {
-     "ADSK": {
-      "entry_date": "2026-07-05",
-      "entry_price": 207.48,
-      "shares": 0.01678599196824061
-     },
-     "ANIP": {
-      "entry_date": "2026-07-31",
-      "entry_price": 79.24,
-      "shares": 0.05529639898626882
-     },
-     "ATAT": {
-      "entry_date": "2026-07-05",
-      "entry_price": 32.22,
-      "shares": 0.12113619520641278
-     },
-     "AVGO": {
-      "entry_date": "2026-08-02",
-      "entry_price": 389.28,
-      "shares": 0.01289507341004489
-     },
-     "BMRN": {
-      "entry_date": "2026-07-31",
-      "entry_price": 60.02,
-      "shares": 0.07300377633575376
-     },
-     "BWMX": {
-      "entry_date": "2026-07-05",
-      "entry_price": 17.98,
-      "shares": 0.2155511708819992
-     },
-     "CLS": {
-      "entry_date": "2026-07-25",
-      "entry_price": 305.28,
-      "shares": 0.011504388301887193
-     },
-     "CRUS": {
-      "entry_date": "2026-07-15",
-      "entry_price": 139.07,
-      "shares": 0.02636757144715396
-     },
-     "DCBO": {
-      "entry_date": "2026-07-05",
-      "entry_price": 18.24,
-      "shares": 0.18176880822604377
-     },
-     "DCTH": {
-      "entry_date": "2026-07-05",
-      "entry_price": 13.2,
-      "shares": 0.28812289814553743
-     },
-     "IDCC": {
-      "entry_date": "2026-07-05",
-      "entry_price": 281.4,
-      "shares": 0.014410459530839536
-     },
-     "INTU": {
-      "entry_date": "2026-07-05",
-      "entry_price": 275.35,
-      "shares": 0.011881557099647245
-     },
-     "INVA": {
-      "entry_date": "2026-07-05",
-      "entry_price": 22.31,
-      "shares": 0.16421930108854793
-     },
-     "ISRG": {
-      "entry_date": "2026-07-05",
-      "entry_price": 426.01,
-      "shares": 0.01019571902272145
-     },
-     "ITRN": {
-      "entry_date": "2026-07-30",
-      "entry_price": 55.46,
-      "shares": 0.07963503129964035
-     },
-     "KNSA": {
-      "entry_date": "2026-08-05",
-      "entry_price": 78.08,
-      "shares": 0.07252164872312387
-     },
-     "LMAT": {
-      "entry_date": "2026-08-07",
-      "entry_price": 81.45,
-      "shares": 0.06755318122008717
-     },
-     "NHC": {
-      "entry_date": "2026-08-07",
-      "entry_price": 215.54,
-      "shares": 0.025527542963608152
-     },
-     "PODD": {
-      "entry_date": "2026-07-13",
-      "entry_price": 163.285,
-      "shares": 0.02223046985312835
-     },
-     "RMBS": {
-      "entry_date": "2026-07-13",
-      "entry_price": 102.97,
-      "shares": 0.0341201842750118
-     },
-     "SITM": {
-      "entry_date": "2026-07-23",
-      "entry_price": 576.41,
-      "shares": 0.006350073612773632
-     },
-     "STRL": {
-      "entry_date": "2026-08-07",
-      "entry_price": 547.06,
-      "shares": 0.01005777540009524
-     },
-     "TCMD": {
-      "entry_date": "2026-07-28",
-      "entry_price": 27.74,
-      "shares": 0.15593426789095355
-     },
-     "TYL": {
-      "entry_date": "2026-07-31",
-      "entry_price": 309.6,
-      "shares": 0.014152734675942961
-     },
-     "VICR": {
-      "entry_date": "2026-08-01",
-      "entry_price": 207.37,
-      "shares": 0.024936693498556973
-     }
-    },
-    "units": null
-   },
-   "state": {
     "cash": 0.31872913494591404,
     "holdings": {
      "ADSK": {
@@ -6708,9 +6633,140 @@
     },
     "units": null
    },
+   "state": {
+    "cash": 0.3187315051471919,
+    "holdings": {
+     "ADSK": {
+      "entry_date": "2026-07-05",
+      "entry_price": 207.48,
+      "shares": 0.01678599196824061
+     },
+     "ANIP": {
+      "entry_date": "2026-07-31",
+      "entry_price": 79.24,
+      "shares": 0.05529639898626882
+     },
+     "ATAT": {
+      "entry_date": "2026-07-05",
+      "entry_price": 32.22,
+      "shares": 0.12113619520641278
+     },
+     "AVGO": {
+      "entry_date": "2026-08-02",
+      "entry_price": 389.28,
+      "shares": 0.01289013391606639
+     },
+     "BMRN": {
+      "entry_date": "2026-07-31",
+      "entry_price": 60.02,
+      "shares": 0.07300377633575376
+     },
+     "BWMX": {
+      "entry_date": "2026-07-05",
+      "entry_price": 17.98,
+      "shares": 0.2155511708819992
+     },
+     "CLS": {
+      "entry_date": "2026-07-25",
+      "entry_price": 305.28,
+      "shares": 0.011504388301887193
+     },
+     "CRUS": {
+      "entry_date": "2026-07-15",
+      "entry_price": 139.07,
+      "shares": 0.02636757144715396
+     },
+     "DCBO": {
+      "entry_date": "2026-07-05",
+      "entry_price": 18.24,
+      "shares": 0.18176880822604377
+     },
+     "DCTH": {
+      "entry_date": "2026-07-05",
+      "entry_price": 13.2,
+      "shares": 0.28812289814553743
+     },
+     "IDCC": {
+      "entry_date": "2026-07-05",
+      "entry_price": 281.4,
+      "shares": 0.014410459530839536
+     },
+     "INTU": {
+      "entry_date": "2026-07-05",
+      "entry_price": 275.35,
+      "shares": 0.011881557099647245
+     },
+     "INVA": {
+      "entry_date": "2026-07-05",
+      "entry_price": 22.31,
+      "shares": 0.16421930108854793
+     },
+     "ISRG": {
+      "entry_date": "2026-07-05",
+      "entry_price": 426.01,
+      "shares": 0.01019571902272145
+     },
+     "ITRN": {
+      "entry_date": "2026-07-30",
+      "entry_price": 55.46,
+      "shares": 0.07963503129964035
+     },
+     "KNSA": {
+      "entry_date": "2026-08-05",
+      "entry_price": 78.08,
+      "shares": 0.07249386910250537
+     },
+     "LMAT": {
+      "entry_date": "2026-08-07",
+      "entry_price": 81.45,
+      "shares": 0.06755318122008717
+     },
+     "NHC": {
+      "entry_date": "2026-08-07",
+      "entry_price": 215.54,
+      "shares": 0.025527542963608152
+     },
+     "PODD": {
+      "entry_date": "2026-07-13",
+      "entry_price": 163.285,
+      "shares": 0.02223046985312835
+     },
+     "RMBS": {
+      "entry_date": "2026-07-13",
+      "entry_price": 102.97,
+      "shares": 0.0341201842750118
+     },
+     "SITM": {
+      "entry_date": "2026-07-23",
+      "entry_price": 576.41,
+      "shares": 0.006350073612773632
+     },
+     "STRL": {
+      "entry_date": "2026-08-07",
+      "entry_price": 547.06,
+      "shares": 0.01005777540009524
+     },
+     "TCMD": {
+      "entry_date": "2026-07-28",
+      "entry_price": 27.74,
+      "shares": 0.15593426789095355
+     },
+     "TYL": {
+      "entry_date": "2026-07-31",
+      "entry_price": 309.6,
+      "shares": 0.014152734675942961
+     },
+     "VICR": {
+      "entry_date": "2026-08-01",
+      "entry_price": 207.37,
+      "shares": 0.024927141428284626
+     }
+    },
+    "units": null
+   },
    "summary": {
     "avg_hold_days": 9.0,
-    "cagr_pct": 87.1,
+    "cagr_pct": 85.09,
     "closed_trades": 39,
     "cumulative_return_pct": 10.28,
     "excess_vs": {
@@ -6723,9 +6779,9 @@
     "excess_vs_bench_pct": 8.94,
     "inception": "2026-06-12",
     "max_drawdown_pct": -3.69,
-    "observations": 33,
+    "observations": 34,
     "open_positions": 25,
-    "sharpe": 4.32,
+    "sharpe": 4.25,
     "total_traded_value": 484.49,
     "win_rate_pct": 71.8
    },
@@ -8409,14 +8465,73 @@
      "side": "sell",
      "ticker": "VICR",
      "value": 0.0021
+    },
+    {
+     "date": "2026-08-09",
+     "price": 427.76,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "AVGO",
+     "value": 0.0
+    },
+    {
+     "date": "2026-08-09",
+     "price": 76.06,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "KNSA",
+     "value": 0.0
+    },
+    {
+     "date": "2026-08-09",
+     "price": 221.2,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "VICR",
+     "value": 0.0
     }
    ],
    "underfunded_entrants": {
-    "date": "2026-08-08",
+    "date": "2026-08-09",
     "tickers": [
      "VRT"
     ]
    }
+  },
+  "mine": {
+   "closed": [],
+   "current_date": "2026-08-09",
+   "last_marks": {},
+   "nav_series": [
+    {
+     "bench": 301.56,
+     "benches": {
+      "DRAM": 50.6,
+      "IWM": 301.56,
+      "QQQ": 723.03,
+      "SOXX": 543.27,
+      "SPY": 773.26
+     },
+     "date": "2026-08-09",
+     "nav": null,
+     "stale_marks": []
+    }
+   ],
+   "prev_day_state": {
+    "cash": 100.0,
+    "holdings": {},
+    "units": null
+   },
+   "state": {
+    "cash": 100.0,
+    "holdings": {},
+    "units": null
+   },
+   "summary": {
+    "observations": 0,
+    "open_positions": 0
+   },
+   "trades": []
   },
   "plan": {
    "closed": [
@@ -8558,8 +8673,8 @@
      "exit_date": "2026-07-10",
      "exit_price": 59.3,
      "hold_days": 3,
-     "post_exit_days": null,
-     "post_exit_return_pct": null,
+     "post_exit_days": 30,
+     "post_exit_return_pct": -20.37,
      "return_pct": 2.15,
      "ticker": "VCYT"
     },
@@ -8672,9 +8787,31 @@
      "post_exit_return_pct": null,
      "return_pct": 1.48,
      "ticker": "NVS"
+    },
+    {
+     "entry_date": "2026-06-12",
+     "entry_price": 603.09,
+     "exit_date": "2026-08-09",
+     "exit_price": 597.33,
+     "hold_days": 58,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": -1.2,
+     "ticker": "AGX"
+    },
+    {
+     "entry_date": "2026-06-12",
+     "entry_price": 70.04,
+     "exit_date": "2026-08-09",
+     "exit_price": 68.76,
+     "hold_days": 58,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": -2.07,
+     "ticker": "BLBD"
     }
    ],
-   "current_date": "2026-08-08",
+   "current_date": "2026-08-09",
    "dividends": [],
    "exit_pending": {
     "AGX": "2026-08-08",
@@ -9420,105 +9557,22 @@
      "date": "2026-08-08",
      "nav": 101.9982,
      "stale_marks": []
+    },
+    {
+     "bench": 301.56,
+     "benches": {
+      "DRAM": 50.6,
+      "IWM": 301.56,
+      "QQQ": 723.03,
+      "SOXX": 543.27,
+      "SPY": 773.26
+     },
+     "date": "2026-08-09",
+     "nav": 101.98,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 34.11682082864086,
-    "holdings": {
-     "ABNB": {
-      "entry_date": "2026-06-15",
-      "entry_price": 138.37,
-      "shares": 0.017385090352848697
-     },
-     "AGX": {
-      "entry_date": "2026-06-12",
-      "entry_price": 603.09,
-      "shares": 0.005814206834800775
-     },
-     "BLBD": {
-      "entry_date": "2026-06-12",
-      "entry_price": 70.04,
-      "shares": 0.05548415191319246
-     },
-     "CPRX": {
-      "entry_date": "2026-06-12",
-      "entry_price": 31.355,
-      "shares": 0.15930473608674853
-     },
-     "EMBJ": {
-      "entry_date": "2026-07-06",
-      "entry_price": 66.14,
-      "shares": 0.07601940501086317
-     },
-     "EXEL": {
-      "entry_date": "2026-06-12",
-      "entry_price": 52.66,
-      "shares": 0.09485377895936195
-     },
-     "EXPE": {
-      "entry_date": "2026-07-02",
-      "entry_price": 268.78,
-      "shares": 0.018762825282320067
-     },
-     "GRDN": {
-      "entry_date": "2026-06-12",
-      "entry_price": 41.825,
-      "shares": 0.05732456664674237
-     },
-     "GSAT": {
-      "entry_date": "2026-08-02",
-      "entry_price": 83.38,
-      "shares": 0.010819157787775044
-     },
-     "INCY": {
-      "entry_date": "2026-06-12",
-      "entry_price": 107.805,
-      "shares": 0.04633365799359955
-     },
-     "KNSA": {
-      "entry_date": "2026-07-10",
-      "entry_price": 65.38,
-      "shares": 0.07696151346306085
-     },
-     "KRYS": {
-      "entry_date": "2026-08-07",
-      "entry_price": 326.45,
-      "shares": 0.007014295496521351
-     },
-     "LAUR": {
-      "entry_date": "2026-07-02",
-      "entry_price": 37.53,
-      "shares": 0.134374425243325
-     },
-     "MAMA": {
-      "entry_date": "2026-07-10",
-      "entry_price": 18.16,
-      "shares": 0.05264489606502392
-     },
-     "MCRI": {
-      "entry_date": "2026-08-07",
-      "entry_price": 124.39,
-      "shares": 0.04090748210984083
-     },
-     "NVS": {
-      "entry_date": "2026-08-03",
-      "entry_price": 153.67,
-      "shares": 0.014733886437074498
-     },
-     "SAP": {
-      "entry_date": "2026-06-12",
-      "entry_price": 160.95,
-      "shares": 0.01303448275862069
-     },
-     "VIK": {
-      "entry_date": "2026-06-12",
-      "entry_price": 89.3034,
-      "shares": 0.025169814363170943
-     }
-    },
-    "units": null
-   },
-   "state": {
     "cash": 37.314472889283635,
     "holdings": {
      "ABNB": {
@@ -9604,26 +9658,102 @@
     },
     "units": null
    },
-   "summary": {
-    "avg_hold_days": 10.0,
-    "cagr_pct": 13.51,
-    "closed_trades": 23,
-    "cumulative_return_pct": 2.0,
-    "excess_vs": {
-     "DRAM": 24.16,
-     "IWM": -1.19,
-     "QQQ": 1.65,
-     "SOXX": 10.84,
-     "SPY": -2.52
+   "state": {
+    "cash": 44.584343117330846,
+    "holdings": {
+     "ABNB": {
+      "entry_date": "2026-06-15",
+      "entry_price": 138.37,
+      "shares": 0.017385090352848697
+     },
+     "CPRX": {
+      "entry_date": "2026-06-12",
+      "entry_price": 31.355,
+      "shares": 0.15930473608674853
+     },
+     "EMBJ": {
+      "entry_date": "2026-07-06",
+      "entry_price": 66.14,
+      "shares": 0.07601940501086317
+     },
+     "EXEL": {
+      "entry_date": "2026-06-12",
+      "entry_price": 52.66,
+      "shares": 0.09485377895936195
+     },
+     "EXPE": {
+      "entry_date": "2026-07-02",
+      "entry_price": 268.78,
+      "shares": 0.018762825282320067
+     },
+     "GRDN": {
+      "entry_date": "2026-06-12",
+      "entry_price": 41.825,
+      "shares": 0.05732456664674237
+     },
+     "INCY": {
+      "entry_date": "2026-06-12",
+      "entry_price": 107.805,
+      "shares": 0.04633365799359955
+     },
+     "KNSA": {
+      "entry_date": "2026-07-10",
+      "entry_price": 65.38,
+      "shares": 0.07696151346306085
+     },
+     "KRYS": {
+      "entry_date": "2026-08-07",
+      "entry_price": 326.45,
+      "shares": 0.007014295496521351
+     },
+     "LAUR": {
+      "entry_date": "2026-07-02",
+      "entry_price": 37.53,
+      "shares": 0.134374425243325
+     },
+     "MAMA": {
+      "entry_date": "2026-07-10",
+      "entry_price": 18.16,
+      "shares": 0.05264489606502392
+     },
+     "MCRI": {
+      "entry_date": "2026-08-07",
+      "entry_price": 124.39,
+      "shares": 0.04090748210984083
+     },
+     "SAP": {
+      "entry_date": "2026-06-12",
+      "entry_price": 160.95,
+      "shares": 0.01303448275862069
+     },
+     "VIK": {
+      "entry_date": "2026-06-12",
+      "entry_price": 89.3034,
+      "shares": 0.025169814363170943
+     }
     },
-    "excess_vs_bench_pct": -1.19,
+    "units": null
+   },
+   "summary": {
+    "avg_hold_days": 13.8,
+    "cagr_pct": 13.13,
+    "closed_trades": 25,
+    "cumulative_return_pct": 1.98,
+    "excess_vs": {
+     "DRAM": 24.15,
+     "IWM": -1.2,
+     "QQQ": 1.64,
+     "SOXX": 10.82,
+     "SPY": -2.54
+    },
+    "excess_vs_bench_pct": -1.2,
     "inception": "2026-06-12",
     "max_drawdown_pct": -4.62,
-    "observations": 55,
-    "open_positions": 16,
-    "sharpe": 1.08,
-    "total_traded_value": 186.23,
-    "win_rate_pct": 34.8
+    "observations": 56,
+    "open_positions": 14,
+    "sharpe": 1.06,
+    "total_traded_value": 193.5,
+    "win_rate_pct": 32.0
    },
    "trades": [
     {
@@ -10129,6 +10259,22 @@
      "side": "sell",
      "ticker": "NVS",
      "value": 2.2976
+    },
+    {
+     "date": "2026-08-09",
+     "price": 597.33,
+     "reason": "left_plan",
+     "side": "sell",
+     "ticker": "AGX",
+     "value": 3.4643
+    },
+    {
+     "date": "2026-08-09",
+     "price": 68.76,
+     "reason": "left_plan",
+     "side": "sell",
+     "ticker": "BLBD",
+     "value": 3.8056
     }
    ]
   },
@@ -10415,8 +10561,8 @@
      "exit_date": "2026-07-10",
      "exit_price": 991.64,
      "hold_days": 26,
-     "post_exit_days": null,
-     "post_exit_return_pct": null,
+     "post_exit_days": 30,
+     "post_exit_return_pct": -11.5,
      "return_pct": 9.0,
      "ticker": "MU"
     },
@@ -10426,8 +10572,8 @@
      "exit_date": "2026-07-10",
      "exit_price": 59.3,
      "hold_days": 3,
-     "post_exit_days": null,
-     "post_exit_return_pct": null,
+     "post_exit_days": 30,
+     "post_exit_return_pct": -20.37,
      "return_pct": 2.15,
      "ticker": "VCYT"
     },
@@ -10705,9 +10851,31 @@
      "post_exit_return_pct": null,
      "return_pct": 1.48,
      "ticker": "NVS"
+    },
+    {
+     "entry_date": "2026-06-14",
+     "entry_price": 603.09,
+     "exit_date": "2026-08-09",
+     "exit_price": 597.33,
+     "hold_days": 56,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": -1.2,
+     "ticker": "AGX"
+    },
+    {
+     "entry_date": "2026-06-14",
+     "entry_price": 70.04,
+     "exit_date": "2026-08-09",
+     "exit_price": 68.76,
+     "hold_days": 56,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": -2.07,
+     "ticker": "BLBD"
     }
    ],
-   "current_date": "2026-08-08",
+   "current_date": "2026-08-09",
    "dividends": [],
    "exit_pending": {
     "AGX": "2026-08-08",
@@ -11471,190 +11639,22 @@
      "date": "2026-08-08",
      "nav": 99.7209,
      "stale_marks": []
+    },
+    {
+     "bench": 301.56,
+     "benches": {
+      "DRAM": 50.6,
+      "IWM": 301.56,
+      "QQQ": 723.03,
+      "SOXX": 543.27,
+      "SPY": 773.26
+     },
+     "date": "2026-08-09",
+     "nav": 99.7027,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 0.5430846971443495,
-    "holdings": {
-     "AAPL": {
-      "entry_date": "2026-07-10",
-      "entry_price": 316.22,
-      "shares": 0.006319902957581159
-     },
-     "ABNB": {
-      "entry_date": "2026-06-15",
-      "entry_price": 138.37,
-      "shares": 0.017654320039149234
-     },
-     "ADSK": {
-      "entry_date": "2026-06-14",
-      "entry_price": 221.28,
-      "shares": 0.00848752711496746
-     },
-     "AGX": {
-      "entry_date": "2026-06-14",
-      "entry_price": 603.09,
-      "shares": 0.005814206834800775
-     },
-     "AMD": {
-      "entry_date": "2026-06-14",
-      "entry_price": 467.74,
-      "shares": 0.0037376533971864717
-     },
-     "ANET": {
-      "entry_date": "2026-07-11",
-      "entry_price": 186.96,
-      "shares": 0.004978156160491542
-     },
-     "AVGO": {
-      "entry_date": "2026-07-10",
-      "entry_price": 401.11,
-      "shares": 0.004359576547806151
-     },
-     "BLBD": {
-      "entry_date": "2026-06-14",
-      "entry_price": 70.04,
-      "shares": 0.05548415191319246
-     },
-     "CLS": {
-      "entry_date": "2026-08-04",
-      "entry_price": 371.15,
-      "shares": 0.005061177830698947
-     },
-     "CPRX": {
-      "entry_date": "2026-06-14",
-      "entry_price": 31.355,
-      "shares": 0.15930473608674853
-     },
-     "DGII": {
-      "entry_date": "2026-07-14",
-      "entry_price": 67.63,
-      "shares": 0.02719694810621069
-     },
-     "EMBJ": {
-      "entry_date": "2026-07-06",
-      "entry_price": 66.14,
-      "shares": 0.07588723044413583
-     },
-     "EXEL": {
-      "entry_date": "2026-06-14",
-      "entry_price": 52.66,
-      "shares": 0.09485377895936195
-     },
-     "EXPE": {
-      "entry_date": "2026-07-02",
-      "entry_price": 268.78,
-      "shares": 0.0186970862158034
-     },
-     "FIX": {
-      "entry_date": "2026-06-14",
-      "entry_price": 1788.99,
-      "shares": 0.0010498214076098801
-     },
-     "GD": {
-      "entry_date": "2026-08-07",
-      "entry_price": 392.05,
-      "shares": 0.004772099128606452
-     },
-     "GEV": {
-      "entry_date": "2026-07-31",
-      "entry_price": 990.29,
-      "shares": 0.001976111871958156
-     },
-     "GOOG": {
-      "entry_date": "2026-07-28",
-      "entry_price": 332.6,
-      "shares": 0.005931746285771139
-     },
-     "GOOGL": {
-      "entry_date": "2026-06-14",
-      "entry_price": 356.38,
-      "shares": 0.005606375217464504
-     },
-     "GRDN": {
-      "entry_date": "2026-06-14",
-      "entry_price": 41.825,
-      "shares": 0.05732456664674237
-     },
-     "GSAT": {
-      "entry_date": "2026-08-02",
-      "entry_price": 83.38,
-      "shares": 0.010559638353232445
-     },
-     "INCY": {
-      "entry_date": "2026-06-14",
-      "entry_price": 107.805,
-      "shares": 0.04633365799359955
-     },
-     "KNSA": {
-      "entry_date": "2026-07-10",
-      "entry_price": 65.38,
-      "shares": 0.0764178538255703
-     },
-     "KRYS": {
-      "entry_date": "2026-08-07",
-      "entry_price": 326.45,
-      "shares": 0.006858970114648653
-     },
-     "LAUR": {
-      "entry_date": "2026-07-02",
-      "entry_price": 37.53,
-      "shares": 0.13390361932010758
-     },
-     "MAMA": {
-      "entry_date": "2026-07-02",
-      "entry_price": 18.365,
-      "shares": 0.048707961028526404
-     },
-     "MCRI": {
-      "entry_date": "2026-08-07",
-      "entry_price": 124.39,
-      "shares": 0.04000162202976397
-     },
-     "MNST": {
-      "entry_date": "2026-07-02",
-      "entry_price": 97.75,
-      "shares": 0.02056430826837294
-     },
-     "MOV": {
-      "entry_date": "2026-06-27",
-      "entry_price": 39.58,
-      "shares": 0.04495441871436667
-     },
-     "MPWR": {
-      "entry_date": "2026-06-24",
-      "entry_price": 1436.21,
-      "shares": 0.0013227825597050937
-     },
-     "NVS": {
-      "entry_date": "2026-08-03",
-      "entry_price": 153.67,
-      "shares": 0.014406765794017316
-     },
-     "SAP": {
-      "entry_date": "2026-06-14",
-      "entry_price": 160.95,
-      "shares": 0.01303448275862069
-     },
-     "STX": {
-      "entry_date": "2026-08-07",
-      "entry_price": 812.76,
-      "shares": 0.0024488418545609235
-     },
-     "TSM": {
-      "entry_date": "2026-06-14",
-      "entry_price": 414.555,
-      "shares": 0.004819625863878134
-     },
-     "VIK": {
-      "entry_date": "2026-06-14",
-      "entry_price": 89.3034,
-      "shares": 0.025169814363170943
-     }
-    },
-    "units": null
-   },
-   "state": {
     "cash": 7.224799339365793,
     "holdings": {
      "AAPL": {
@@ -11815,26 +11815,177 @@
     },
     "units": null
    },
-   "summary": {
-    "avg_hold_days": 10.5,
-    "cagr_pct": -1.77,
-    "closed_trades": 52,
-    "cumulative_return_pct": -0.28,
-    "excess_vs": {
-     "DRAM": 28.52,
-     "IWM": -3.22,
-     "QQQ": -0.51,
-     "SOXX": 13.27,
-     "SPY": -4.53
+   "state": {
+    "cash": 14.494669567412998,
+    "holdings": {
+     "AAPL": {
+      "entry_date": "2026-07-10",
+      "entry_price": 316.22,
+      "shares": 0.006319902957581159
+     },
+     "ABNB": {
+      "entry_date": "2026-06-15",
+      "entry_price": 138.37,
+      "shares": 0.017654320039149234
+     },
+     "ADSK": {
+      "entry_date": "2026-06-14",
+      "entry_price": 221.28,
+      "shares": 0.00848752711496746
+     },
+     "AMD": {
+      "entry_date": "2026-06-14",
+      "entry_price": 467.74,
+      "shares": 0.0037376533971864717
+     },
+     "ANET": {
+      "entry_date": "2026-07-11",
+      "entry_price": 186.96,
+      "shares": 0.004978156160491542
+     },
+     "AVGO": {
+      "entry_date": "2026-07-10",
+      "entry_price": 401.11,
+      "shares": 0.004359576547806151
+     },
+     "CPRX": {
+      "entry_date": "2026-06-14",
+      "entry_price": 31.355,
+      "shares": 0.15930473608674853
+     },
+     "DGII": {
+      "entry_date": "2026-07-14",
+      "entry_price": 67.63,
+      "shares": 0.02719694810621069
+     },
+     "EMBJ": {
+      "entry_date": "2026-07-06",
+      "entry_price": 66.14,
+      "shares": 0.07588723044413583
+     },
+     "EXEL": {
+      "entry_date": "2026-06-14",
+      "entry_price": 52.66,
+      "shares": 0.09485377895936195
+     },
+     "EXPE": {
+      "entry_date": "2026-07-02",
+      "entry_price": 268.78,
+      "shares": 0.0186970862158034
+     },
+     "FIX": {
+      "entry_date": "2026-06-14",
+      "entry_price": 1788.99,
+      "shares": 0.0010498214076098801
+     },
+     "GD": {
+      "entry_date": "2026-08-07",
+      "entry_price": 392.05,
+      "shares": 0.004772099128606452
+     },
+     "GOOG": {
+      "entry_date": "2026-07-28",
+      "entry_price": 332.6,
+      "shares": 0.005931746285771139
+     },
+     "GOOGL": {
+      "entry_date": "2026-06-14",
+      "entry_price": 356.38,
+      "shares": 0.005606375217464504
+     },
+     "GRDN": {
+      "entry_date": "2026-06-14",
+      "entry_price": 41.825,
+      "shares": 0.05732456664674237
+     },
+     "INCY": {
+      "entry_date": "2026-06-14",
+      "entry_price": 107.805,
+      "shares": 0.04633365799359955
+     },
+     "KNSA": {
+      "entry_date": "2026-07-10",
+      "entry_price": 65.38,
+      "shares": 0.0764178538255703
+     },
+     "KRYS": {
+      "entry_date": "2026-08-07",
+      "entry_price": 326.45,
+      "shares": 0.006858970114648653
+     },
+     "LAUR": {
+      "entry_date": "2026-07-02",
+      "entry_price": 37.53,
+      "shares": 0.13390361932010758
+     },
+     "MAMA": {
+      "entry_date": "2026-07-02",
+      "entry_price": 18.365,
+      "shares": 0.048707961028526404
+     },
+     "MCRI": {
+      "entry_date": "2026-08-07",
+      "entry_price": 124.39,
+      "shares": 0.04000162202976397
+     },
+     "MNST": {
+      "entry_date": "2026-07-02",
+      "entry_price": 97.75,
+      "shares": 0.02056430826837294
+     },
+     "MOV": {
+      "entry_date": "2026-06-27",
+      "entry_price": 39.58,
+      "shares": 0.04495441871436667
+     },
+     "MPWR": {
+      "entry_date": "2026-06-24",
+      "entry_price": 1436.21,
+      "shares": 0.0013227825597050937
+     },
+     "SAP": {
+      "entry_date": "2026-06-14",
+      "entry_price": 160.95,
+      "shares": 0.01303448275862069
+     },
+     "STX": {
+      "entry_date": "2026-08-07",
+      "entry_price": 812.76,
+      "shares": 0.0024488418545609235
+     },
+     "TSM": {
+      "entry_date": "2026-06-14",
+      "entry_price": 414.555,
+      "shares": 0.004819625863878134
+     },
+     "VIK": {
+      "entry_date": "2026-06-14",
+      "entry_price": 89.3034,
+      "shares": 0.025169814363170943
+     }
     },
-    "excess_vs_bench_pct": -3.22,
+    "units": null
+   },
+   "summary": {
+    "avg_hold_days": 12.1,
+    "cagr_pct": -1.86,
+    "closed_trades": 54,
+    "cumulative_return_pct": -0.3,
+    "excess_vs": {
+     "DRAM": 28.51,
+     "IWM": -3.24,
+     "QQQ": -0.53,
+     "SOXX": 13.26,
+     "SPY": -4.55
+    },
+    "excess_vs_bench_pct": -3.24,
     "inception": "2026-06-12",
     "max_drawdown_pct": -7.56,
-    "observations": 53,
-    "open_positions": 31,
+    "observations": 54,
+    "open_positions": 29,
     "sharpe": -0.01,
-    "total_traded_value": 321.86,
-    "win_rate_pct": 26.9
+    "total_traded_value": 329.13,
+    "win_rate_pct": 25.9
    },
    "trades": [
     {
@@ -12916,6 +13067,22 @@
      "side": "sell",
      "ticker": "NVS",
      "value": 2.2466
+    },
+    {
+     "date": "2026-08-09",
+     "price": 597.33,
+     "reason": "left_plan2",
+     "side": "sell",
+     "ticker": "AGX",
+     "value": 3.4643
+    },
+    {
+     "date": "2026-08-09",
+     "price": 68.76,
+     "reason": "left_plan2",
+     "side": "sell",
+     "ticker": "BLBD",
+     "value": 3.8056
     }
    ]
   },
@@ -12960,8 +13127,8 @@
      "exit_date": "2026-07-10",
      "exit_price": 149.97,
      "hold_days": 5,
-     "post_exit_days": null,
-     "post_exit_return_pct": null,
+     "post_exit_days": 30,
+     "post_exit_return_pct": -8.51,
      "return_pct": -3.95,
      "ticker": "TTMI"
     },
@@ -13692,7 +13859,7 @@
      "ticker": "DCBO"
     }
    ],
-   "current_date": "2026-08-08",
+   "current_date": "2026-08-09",
    "dividends": [
     {
      "amount": 0.0218,
@@ -14226,16 +14393,24 @@
      "date": "2026-08-08",
      "nav": 104.2678,
      "stale_marks": []
+    },
+    {
+     "bench": 301.56,
+     "benches": {
+      "DRAM": 50.6,
+      "IWM": 301.56,
+      "QQQ": 723.03,
+      "SOXX": 543.27,
+      "SPY": 773.26
+     },
+     "date": "2026-08-09",
+     "nav": 104.2678,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 50.05726829408265,
+    "cash": 56.56280051268402,
     "holdings": {
-     "ADSK": {
-      "entry_date": "2026-07-07",
-      "entry_price": 207.54,
-      "shares": 0.00909646440077675
-     },
      "ATAT": {
       "entry_date": "2026-07-28",
       "entry_price": 35.07,
@@ -14250,11 +14425,6 @@
       "entry_date": "2026-07-24",
       "entry_price": 305.28,
       "shares": 0.0054968620058065834
-     },
-     "DCBO": {
-      "entry_date": "2026-07-28",
-      "entry_price": 20.99,
-      "shares": 0.19089883192116935
      },
      "DCTH": {
       "entry_date": "2026-07-31",
@@ -14432,7 +14602,7 @@
    },
    "summary": {
     "avg_hold_days": 7.5,
-    "cagr_pct": 30.68,
+    "cagr_pct": 30.08,
     "closed_trades": 70,
     "cumulative_return_pct": 4.27,
     "excess_vs": {
@@ -14445,9 +14615,9 @@
     "excess_vs_bench_pct": 2.93,
     "inception": "2026-06-12",
     "max_drawdown_pct": -1.85,
-    "observations": 33,
+    "observations": 34,
     "open_positions": 18,
-    "sharpe": 3.27,
+    "sharpe": 3.22,
     "total_traded_value": 372.51,
     "win_rate_pct": 54.3
    },
@@ -16060,9 +16230,31 @@
      "post_exit_return_pct": null,
      "return_pct": -1.8,
      "ticker": "PRLB"
+    },
+    {
+     "entry_date": "2026-07-13",
+     "entry_price": 54.42,
+     "exit_date": "2026-08-09",
+     "exit_price": 61.86,
+     "hold_days": 27,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": 13.39,
+     "ticker": "ECO"
+    },
+    {
+     "entry_date": "2026-07-22",
+     "entry_price": 220.34,
+     "exit_date": "2026-08-09",
+     "exit_price": 215.54,
+     "hold_days": 18,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": -2.42,
+     "ticker": "NHC"
     }
    ],
-   "current_date": "2026-08-08",
+   "current_date": "2026-08-09",
    "dividends": [],
    "exit_pending": {
     "AMD": "2026-07-23",
@@ -16471,112 +16663,22 @@
      "date": "2026-08-08",
      "nav": 97.1449,
      "stale_marks": []
+    },
+    {
+     "bench": 301.56,
+     "benches": {
+      "DRAM": 50.6,
+      "IWM": 301.56,
+      "QQQ": 723.03,
+      "SOXX": 543.27,
+      "SPY": 773.26
+     },
+     "date": "2026-08-09",
+     "nav": 97.0762,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 0.0,
-    "cooldown": {
-     "PARR": "2026-08-05"
-    },
-    "halted": false,
-    "holdings": {
-     "ATI": {
-      "entry_date": "2026-08-04",
-      "entry_price": 200.15,
-      "shares": 0.02066208157809357
-     },
-     "AYA": {
-      "entry_date": "2026-08-05",
-      "entry_price": 25.07,
-      "shares": 0.20741340066206598
-     },
-     "DELL": {
-      "entry_date": "2026-08-03",
-      "entry_price": 429.02,
-      "shares": 0.009602636889762798
-     },
-     "DGII": {
-      "entry_date": "2026-08-07",
-      "entry_price": 81.7,
-      "shares": 0.1113915811042877
-     },
-     "ECO": {
-      "entry_date": "2026-07-13",
-      "entry_price": 54.42,
-      "shares": 0.10610134817957323
-     },
-     "GH": {
-      "entry_date": "2026-08-01",
-      "entry_price": 161.99,
-      "shares": 0.020477961139433298
-     },
-     "IESC": {
-      "entry_date": "2026-08-01",
-      "entry_price": 744.54,
-      "shares": 0.006829431645126577
-     },
-     "INSW": {
-      "entry_date": "2026-07-13",
-      "entry_price": 87.58,
-      "shares": 0.0888346015184619
-     },
-     "KNSA": {
-      "entry_date": "2026-07-29",
-      "entry_price": 80.92,
-      "shares": 0.09701365166532862
-     },
-     "MTRN": {
-      "entry_date": "2026-08-05",
-      "entry_price": 297.08,
-      "shares": 0.021253899196985396
-     },
-     "NHC": {
-      "entry_date": "2026-07-22",
-      "entry_price": 220.34,
-      "shares": 0.042864907673895745
-     },
-     "PRLB": {
-      "entry_date": "2026-08-05",
-      "entry_price": 90.31,
-      "shares": 0.06053054071262169
-     },
-     "TIGO": {
-      "entry_date": "2026-07-13",
-      "entry_price": 96.57,
-      "shares": 0.11909800282945264
-     },
-     "TWLO": {
-      "entry_date": "2026-08-07",
-      "entry_price": 241.28,
-      "shares": 0.018389265367645586
-     },
-     "TXG": {
-      "entry_date": "2026-07-13",
-      "entry_price": 41.785,
-      "shares": 0.11187631451334952
-     }
-    },
-    "hwm": {
-     "ATI": 227.84,
-     "AYA": 27.19,
-     "DELL": 467.27,
-     "DGII": 81.7,
-     "ECO": 61.86,
-     "GH": 168.48,
-     "IESC": 778.675,
-     "INSW": 96.18,
-     "KNSA": 80.92,
-     "MTRN": 297.08,
-     "NHC": 231.0,
-     "PRLB": 90.31,
-     "TIGO": 98.61,
-     "TWLO": 241.28,
-     "TXG": 52.03
-    },
-    "risk_tier": 1.0,
-    "units": null
-   },
-   "state": {
     "cash": 3.197143206215438,
     "cooldown": {
      "PARR": "2026-08-05"
@@ -16673,26 +16775,117 @@
     "risk_tier": 1.0,
     "units": null
    },
-   "summary": {
-    "avg_hold_days": 5.9,
-    "cagr_pct": -16.93,
-    "closed_trades": 31,
-    "cumulative_return_pct": -2.86,
-    "excess_vs": {
-     "DRAM": 8.48,
-     "IWM": -5.65,
-     "QQQ": -4.34,
-     "SOXX": -1.18,
-     "SPY": -6.0
+   "state": {
+    "cash": 7.307525557387169,
+    "cooldown": {
+     "PARR": "2026-08-05"
     },
-    "excess_vs_bench_pct": -5.65,
+    "halted": false,
+    "holdings": {
+     "ATI": {
+      "entry_date": "2026-08-04",
+      "entry_price": 200.15,
+      "shares": 0.02066208157809357
+     },
+     "CRWD": {
+      "entry_date": "2026-08-08",
+      "entry_price": 214.42,
+      "shares": 0.021610037938956054
+     },
+     "DELL": {
+      "entry_date": "2026-08-03",
+      "entry_price": 429.02,
+      "shares": 0.009602636889762798
+     },
+     "DGII": {
+      "entry_date": "2026-08-07",
+      "entry_price": 81.7,
+      "shares": 0.1113915811042877
+     },
+     "GH": {
+      "entry_date": "2026-08-01",
+      "entry_price": 161.99,
+      "shares": 0.020477961139433298
+     },
+     "IESC": {
+      "entry_date": "2026-08-01",
+      "entry_price": 744.54,
+      "shares": 0.0065746143172808426
+     },
+     "INSW": {
+      "entry_date": "2026-07-13",
+      "entry_price": 87.58,
+      "shares": 0.0888346015184619
+     },
+     "JAZZ": {
+      "entry_date": "2026-08-08",
+      "entry_price": 256.56,
+      "shares": 0.036914631819784625
+     },
+     "KNSA": {
+      "entry_date": "2026-07-29",
+      "entry_price": 80.92,
+      "shares": 0.09701365166532862
+     },
+     "PLPC": {
+      "entry_date": "2026-08-09",
+      "entry_price": 466.82,
+      "shares": 0.024899343025055653
+     },
+     "TIGO": {
+      "entry_date": "2026-07-13",
+      "entry_price": 96.57,
+      "shares": 0.11909800282945264
+     },
+     "TWLO": {
+      "entry_date": "2026-08-07",
+      "entry_price": 241.28,
+      "shares": 0.018389265367645586
+     },
+     "TXG": {
+      "entry_date": "2026-07-13",
+      "entry_price": 41.785,
+      "shares": 0.11187631451334952
+     }
+    },
+    "hwm": {
+     "ATI": 227.84,
+     "CRWD": 214.42,
+     "DELL": 467.27,
+     "DGII": 81.7,
+     "GH": 168.48,
+     "IESC": 778.675,
+     "INSW": 96.18,
+     "JAZZ": 256.56,
+     "KNSA": 80.92,
+     "PLPC": 466.82,
+     "TIGO": 98.61,
+     "TWLO": 241.28,
+     "TXG": 52.03
+    },
+    "risk_tier": 1.0,
+    "units": null
+   },
+   "summary": {
+    "avg_hold_days": 6.9,
+    "cagr_pct": -17.03,
+    "closed_trades": 33,
+    "cumulative_return_pct": -2.92,
+    "excess_vs": {
+     "DRAM": 8.41,
+     "IWM": -5.72,
+     "QQQ": -4.41,
+     "SOXX": -1.25,
+     "SPY": -6.07
+    },
+    "excess_vs_bench_pct": -5.72,
     "inception": "2026-06-12",
     "max_drawdown_pct": -6.08,
-    "observations": 26,
-    "open_positions": 14,
-    "sharpe": -1.59,
-    "total_traded_value": 522.53,
-    "win_rate_pct": 19.4
+    "observations": 27,
+    "open_positions": 13,
+    "sharpe": -1.6,
+    "total_traded_value": 549.95,
+    "win_rate_pct": 21.2
    },
    "trades": [
     {
@@ -17630,6 +17823,30 @@
      "side": "buy",
      "ticker": "JAZZ",
      "value": 9.4946
+    },
+    {
+     "date": "2026-08-09",
+     "price": 61.86,
+     "reason": "left_plan3",
+     "side": "sell",
+     "ticker": "ECO",
+     "value": 6.547
+    },
+    {
+     "date": "2026-08-09",
+     "price": 215.54,
+     "reason": "left_plan3",
+     "side": "sell",
+     "ticker": "NHC",
+     "value": 9.216
+    },
+    {
+     "date": "2026-08-09",
+     "price": 466.82,
+     "reason": "entered_plan3",
+     "side": "buy",
+     "ticker": "PLPC",
+     "value": 11.6526
     }
    ]
   },
@@ -17652,8 +17869,8 @@
      "exit_date": "2026-07-10",
      "exit_price": 149.97,
      "hold_days": 5,
-     "post_exit_days": null,
-     "post_exit_return_pct": null,
+     "post_exit_days": 30,
+     "post_exit_return_pct": -8.51,
      "return_pct": -3.95,
      "ticker": "TTMI"
     },
@@ -18351,7 +18568,7 @@
      "ticker": "DCBO"
     }
    ],
-   "current_date": "2026-08-08",
+   "current_date": "2026-08-09",
    "dividends": [
     {
      "amount": 0.0218,
@@ -18879,16 +19096,24 @@
      "date": "2026-08-08",
      "nav": 103.2413,
      "stale_marks": []
+    },
+    {
+     "bench": 301.56,
+     "benches": {
+      "DRAM": 50.6,
+      "IWM": 301.56,
+      "QQQ": 723.03,
+      "SOXX": 543.27,
+      "SPY": 773.26
+     },
+     "date": "2026-08-09",
+     "nav": 103.2413,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 52.88846632535313,
+    "cash": 59.54274778950951,
     "holdings": {
-     "ADSK": {
-      "entry_date": "2026-07-11",
-      "entry_price": 208.45,
-      "shares": 0.009863882895097936
-     },
      "ATAT": {
       "entry_date": "2026-07-28",
       "entry_price": 35.07,
@@ -18903,11 +19128,6 @@
       "entry_date": "2026-07-24",
       "entry_price": 305.28,
       "shares": 0.005439831511515274
-     },
-     "DCBO": {
-      "entry_date": "2026-07-28",
-      "entry_price": 20.99,
-      "shares": 0.1890138107108617
      },
      "DCTH": {
       "entry_date": "2026-07-31",
@@ -19065,7 +19285,7 @@
    },
    "summary": {
     "avg_hold_days": 7.5,
-    "cagr_pct": 22.66,
+    "cagr_pct": 22.23,
     "closed_trades": 65,
     "cumulative_return_pct": 3.24,
     "excess_vs": {
@@ -19078,9 +19298,9 @@
     "excess_vs_bench_pct": 1.9,
     "inception": "2026-06-12",
     "max_drawdown_pct": -2.39,
-    "observations": 33,
+    "observations": 34,
     "open_positions": 16,
-    "sharpe": 2.43,
+    "sharpe": 2.39,
     "total_traded_value": 347.59,
     "win_rate_pct": 50.8
    },
