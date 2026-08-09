@@ -1,8 +1,8 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-08-08T11:50:48Z
+Generated: 2026-08-09T13:22:45Z
 Macro flags: none
-Invested: **51.58%**  |  Cash: **48.42%**  |  Positions: 14
+Invested: **52.11%**  |  Cash: **47.89%**  |  Positions: 14
 
 | # | Sym | Wt% | Arch | Comp | Surv | FctRank | FctBand | Theme | PdmBand | F | M | Flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -17,7 +17,7 @@ Invested: **51.58%**  |  Cash: **48.42%**  |  Positions: 14
 | 16 | **LAUR** | 5.0 | B | 74.16 | 80 | 16 | research_now | - | no_data | 5 | -2.622 | - |
 | 33 | **MAMA** | 1.96 | A | 41.58 | 75 | 33 | research_now | - | no_data | 5 | - | - |
 | 34 | **EXPE** | 5.0 | B | 82.53 | 80 | 34 | research_now | - | no_data | 6 | -2.758 | - |
-| 38 | **SAP** | 1.57 | A | 63.76 | 70 | 38 | research_now | - | no_data | - | - | - |
+| 38 | **SAP** | 2.1 | A | 63.76 | 70 | 38 | research_now | - | no_data | - | - | - |
 | 45 | **ABNB** | 2.4 | B | 79.69 | 80 | 45 | research_now | - | no_data | 5 | - | - |
 | 48 | **MCRI** | 5.0 | A | 66.93 | 80 | 48 | research_now | - | no_data | 8 | -2.953 | - |
 
@@ -26,7 +26,7 @@ Invested: **51.58%**  |  Cash: **48.42%**  |  Positions: 14
 - Consumer Cyclical: 14.65%
 - Consumer Defensive: 6.96%
 - Industrials: 3.75%
-- Technology: 1.57%
+- Technology: 2.1%
 
 ## Theme allocation
 - space_economy: 3.75%
@@ -39,8 +39,8 @@ Invested: **51.58%**  |  Cash: **48.42%**  |  Positions: 14
 - ADSK: no Kelly edge (expectations gap +12pts >= 0: price already assumes more growth than demonstrated)
 - AAPL: no Kelly edge (expectations gap +17pts >= 0: price already assumes more growth than demonstrated)
 - LLY: no Kelly edge (expectations gap +13pts >= 0: price already assumes more growth than demonstrated)
-- MPWR: no Kelly edge (expectations gap +24pts >= 0: price already assumes more growth than demonstrated)
 - GOOG: no Kelly edge (expectations gap +14pts >= 0: price already assumes more growth than demonstrated)
+- MPWR: no Kelly edge (expectations gap +24pts >= 0: price already assumes more growth than demonstrated)
 - MEDP: sector cap Healthcare (25.0%)
 - NHC: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
 - FIX: no Kelly edge (expectations gap +2pts >= 0: price already assumes more growth than demonstrated)

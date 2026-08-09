@@ -1,5 +1,5 @@
 {
-  "cash_pct": 48.42,
+  "cash_pct": 47.89,
   "config_used": {
     "base_position_pct": 3.0,
     "high_risk_archetypes": [
@@ -24,14 +24,14 @@
     "theme_cap_pct": 30.0
   },
   "disclaimer": "Decision support only. Not investment advice, not an order list. Every position requires human review of the con line and flags.",
-  "generated_at": "2026-08-08T11:50:48Z",
-  "invested_pct": 51.58,
+  "generated_at": "2026-08-09T13:22:45Z",
+  "invested_pct": 52.11,
   "label": "Value core (Kelly-sized)",
   "macro_derisk_active": false,
   "macro_flags": [],
   "plan2": {
-    "cash_pct": 20.7,
-    "invested_pct": 79.3,
+    "cash_pct": 20.17,
+    "invested_pct": 79.83,
     "label": "Hybrid (value core + quality sleeve)",
     "note": "Value core (Kelly, only names priced below demonstrated growth) PLUS a quality sleeve buying top-ranked names regardless of valuation gap, capped at 35.0% of book. Captures expensive quality leaders the core skips.",
     "position_count": 29,
@@ -154,7 +154,7 @@
         "forensic_flags": [],
         "gpr_level": null,
         "high_risk_class": false,
-        "informed_demand": 0,
+        "informed_demand": 1,
         "m_score": -3.129,
         "pdm_band": "no_data",
         "pdm_signal": null,
@@ -416,7 +416,7 @@
         "fct_rank": 38,
         "fct_vol": 0.302,
         "forensic_flags": [],
-        "gpr_level": 2,
+        "gpr_level": 1,
         "high_risk_class": false,
         "informed_demand": 0,
         "m_score": null,
@@ -430,7 +430,7 @@
         "survivability": 70,
         "symbol": "SAP",
         "theme_primary": null,
-        "weight_pct": 1.57
+        "weight_pct": 2.1
       },
       {
         "accruals_ratio": -0.0989,
@@ -478,7 +478,7 @@
         "expectations_gap_pts": -16.0,
         "f_score": 8,
         "fct_band": "research_now",
-        "fct_composite": 89.07,
+        "fct_composite": 89.13,
         "fct_rank": 48,
         "fct_vol": 0.3055,
         "forensic_flags": [],
@@ -516,7 +516,7 @@
         "forensic_flags": [],
         "gpr_level": null,
         "high_risk_class": false,
-        "informed_demand": null,
+        "informed_demand": 0,
         "m_score": -2.152,
         "pdm_band": "no_data",
         "pdm_signal": null,
@@ -659,6 +659,38 @@
         "weight_pct": 2.0
       },
       {
+        "accruals_ratio": -0.0623,
+        "archetype": "B",
+        "composite": 63.89,
+        "con": "balance sheet uses real EBITDA; survivability leverage stress: net debt / EBITDA 0.19; survivability funding gap: positive FCF is self-funding; survivability drawdown history: max drawdown 23.9% over short ~2yr window; PRICE_EXTENDED: current price 2.3x above 2yr low (mean-reversion risk, short ~2yr window)",
+        "exit_triggers": [
+          "dropped out of research_now band",
+          "any forensic flag newly fires"
+        ],
+        "expectations_gap_pts": 13.7,
+        "f_score": 5,
+        "fct_band": "research_now",
+        "fct_composite": 91.54,
+        "fct_rank": 17,
+        "fct_vol": 0.3568,
+        "forensic_flags": [],
+        "gpr_level": 2,
+        "high_risk_class": false,
+        "informed_demand": 0,
+        "m_score": null,
+        "pdm_band": "mid",
+        "pdm_signal": 25,
+        "pro": "FCF yield 1.7% percentile valuation signal + high ROIC and revenue growth",
+        "rank": 17,
+        "rev_nominated": false,
+        "sector": "Communication Services",
+        "sizing_method": "quality_sleeve",
+        "survivability": 80,
+        "symbol": "GOOG",
+        "theme_primary": "ai_compute",
+        "weight_pct": 2.0
+      },
+      {
         "accruals_ratio": -0.0562,
         "archetype": "B",
         "composite": 61.75,
@@ -671,7 +703,7 @@
         "f_score": 6,
         "fct_band": "research_now",
         "fct_composite": 91.53,
-        "fct_rank": 17,
+        "fct_rank": 18,
         "fct_vol": 0.4973,
         "forensic_flags": [],
         "gpr_level": null,
@@ -681,7 +713,7 @@
         "pdm_band": "watch",
         "pdm_signal": 14,
         "pro": "FCF yield 1.0% percentile valuation signal + high ROIC and revenue growth",
-        "rank": 17,
+        "rank": 18,
         "rev_nominated": false,
         "sector": "Technology",
         "sizing_method": "quality_sleeve",
@@ -689,38 +721,6 @@
         "symbol": "MPWR",
         "theme_primary": "ai_compute",
         "weight_pct": 1.88
-      },
-      {
-        "accruals_ratio": -0.0623,
-        "archetype": "B",
-        "composite": 63.89,
-        "con": "balance sheet uses real EBITDA; survivability leverage stress: net debt / EBITDA 0.19; survivability funding gap: positive FCF is self-funding; survivability drawdown history: max drawdown 23.9% over short ~2yr window; PRICE_EXTENDED: current price 2.3x above 2yr low (mean-reversion risk, short ~2yr window)",
-        "exit_triggers": [
-          "dropped out of research_now band",
-          "any forensic flag newly fires"
-        ],
-        "expectations_gap_pts": 13.7,
-        "f_score": 5,
-        "fct_band": "research_now",
-        "fct_composite": 91.48,
-        "fct_rank": 18,
-        "fct_vol": 0.3568,
-        "forensic_flags": [],
-        "gpr_level": null,
-        "high_risk_class": false,
-        "informed_demand": 0,
-        "m_score": null,
-        "pdm_band": "mid",
-        "pdm_signal": 25,
-        "pro": "FCF yield 1.7% percentile valuation signal + high ROIC and revenue growth",
-        "rank": 18,
-        "rev_nominated": false,
-        "sector": "Communication Services",
-        "sizing_method": "quality_sleeve",
-        "survivability": 80,
-        "symbol": "GOOG",
-        "theme_primary": "ai_compute",
-        "weight_pct": 2.0
       },
       {
         "accruals_ratio": -0.0294,
@@ -802,9 +802,9 @@
         "fct_rank": 25,
         "fct_vol": 0.4336,
         "forensic_flags": [],
-        "gpr_level": null,
+        "gpr_level": 1,
         "high_risk_class": false,
-        "informed_demand": 0,
+        "informed_demand": 1,
         "m_score": -2.631,
         "pdm_band": "no_data",
         "pdm_signal": null,
@@ -830,11 +830,11 @@
         "expectations_gap_pts": 6.3,
         "f_score": 5,
         "fct_band": "research_now",
-        "fct_composite": 90.88,
+        "fct_composite": 90.82,
         "fct_rank": 27,
         "fct_vol": 0.2431,
         "forensic_flags": [],
-        "gpr_level": null,
+        "gpr_level": 1,
         "high_risk_class": false,
         "informed_demand": 0,
         "m_score": -2.379,
@@ -987,7 +987,7 @@
       "Consumer Defensive": 8.96,
       "Healthcare": 24.65,
       "Industrials": 7.51,
-      "Technology": 17.65
+      "Technology": 18.18
     },
     "sleeve_pct": 27.72,
     "theme_allocation": {
@@ -1117,7 +1117,7 @@
       "forensic_flags": [],
       "gpr_level": null,
       "high_risk_class": false,
-      "informed_demand": 0,
+      "informed_demand": 1,
       "m_score": -3.129,
       "pdm_band": "no_data",
       "pdm_signal": null,
@@ -1379,7 +1379,7 @@
       "fct_rank": 38,
       "fct_vol": 0.302,
       "forensic_flags": [],
-      "gpr_level": 2,
+      "gpr_level": 1,
       "high_risk_class": false,
       "informed_demand": 0,
       "m_score": null,
@@ -1393,7 +1393,7 @@
       "survivability": 70,
       "symbol": "SAP",
       "theme_primary": null,
-      "weight_pct": 1.57
+      "weight_pct": 2.1
     },
     {
       "accruals_ratio": -0.0989,
@@ -1441,7 +1441,7 @@
       "expectations_gap_pts": -16.0,
       "f_score": 8,
       "fct_band": "research_now",
-      "fct_composite": 89.07,
+      "fct_composite": 89.13,
       "fct_rank": 48,
       "fct_vol": 0.3055,
       "forensic_flags": [],
@@ -1467,7 +1467,7 @@
     "Consumer Defensive": 6.96,
     "Healthcare": 24.65,
     "Industrials": 3.75,
-    "Technology": 1.57
+    "Technology": 2.1
   },
   "skipped": [
     {
@@ -1499,12 +1499,12 @@
       "symbol": "LLY"
     },
     {
-      "reason": "no Kelly edge (expectations gap +24pts >= 0: price already assumes more growth than demonstrated)",
-      "symbol": "MPWR"
-    },
-    {
       "reason": "no Kelly edge (expectations gap +14pts >= 0: price already assumes more growth than demonstrated)",
       "symbol": "GOOG"
+    },
+    {
+      "reason": "no Kelly edge (expectations gap +24pts >= 0: price already assumes more growth than demonstrated)",
+      "symbol": "MPWR"
     },
     {
       "reason": "sector cap Healthcare (25.0%)",
