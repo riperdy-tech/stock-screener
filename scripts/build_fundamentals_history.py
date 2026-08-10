@@ -54,6 +54,7 @@ BATTERY_JSON = DATA / "fundamentals_battery.json"
 # and consumers do int(year) over the keys (valuation_backbone sorts int(y) directly) — a
 # non-year key inside would crash them all.
 TTM_JSON = DATA / "fundamentals_ttm.json"
+QTR_JSON = DATA / "fundamentals_quarterly.json"
 
 SEC_HEADERS = {"User-Agent": "StockScreener/1.0 (contact@example.com)"}
 ANNUAL_FORMS = ("10-K", "10-K/A", "20-F", "40-F")
@@ -415,6 +416,91 @@ def ttm_snapshot(facts):
             "fy_leg_end": prov["fy_leg_end"], "fields": out}
 
 
+QTR_FIELDS = ("revenue", "net_income", "gross_profit")
+
+
+def quarterly_snapshot(facts):
+    """Last ~10 SINGLE QUARTERS of the core flow fields, with YoY — the regime-persistence
+    evidence served from filings instead of hoped-for from news (AMD 2026-08: a fresh,
+    healthy-looking research brief carried none of the +50%/+107% record quarter that had
+    been public for three days; filings cannot miss their own numbers).
+
+    Single quarters come from 10-Q duration rows (60-120d). Q4 has no 10-Q: derived as
+    FY − YTD-Q3 when both legs share the fiscal-year start (same date guards as the TTM
+    identity). Same per-period scale resolution as everywhere else. Returns
+    {"quarters": [{"end", "revenue", "net_income", "gross_profit", "yoy_revenue",
+    "yoy_net_income"}, ...]} oldest->newest, or None."""
+    per_field = {}
+    for field in QTR_FIELDS:
+        best = None
+        for tag in DURATION_TAGS[field]:
+            entries = []
+            for e in facts.get(tag, {}).get("units", {}).get("USD", []):
+                start, end, val = e.get("start"), e.get("end"), e.get("val")
+                if not start or not end or val is None:
+                    continue
+                try:
+                    days = (date.fromisoformat(end) - date.fromisoformat(start)).days
+                except ValueError:
+                    continue
+                entries.append({"form": e.get("form"), "start": start, "end": end,
+                                "days": days, "val": val, "filed": e.get("filed") or ""})
+            singles = {}
+            for e in entries:
+                if e["form"] in QUARTERLY_FORMS and 60 <= e["days"] <= 120:
+                    singles.setdefault(e["end"], []).append((e["filed"], e["val"]))
+            ann = [e for e in entries if e["form"] in ANNUAL_FORMS and 300 <= e["days"] <= 400]
+            if not singles or not ann:
+                continue
+            ann_med = statistics.median(abs(e["val"]) for e in ann)
+            q = {end: _pick_consistent(c, ann_med) for end, c in singles.items()}
+            # derived Q4 = FY − YTD-Q3 (YTD row ending 76-104d before the FY end, same start)
+            ytd3 = {}
+            for e in entries:
+                if e["form"] in QUARTERLY_FORMS and 240 <= e["days"] <= 300:
+                    ytd3.setdefault(e["end"], []).append((e["filed"], e["val"], e["start"]))
+            for fy_e in ann:
+                if fy_e["end"] in q:
+                    continue
+                for y_end, cands in ytd3.items():
+                    try:
+                        gap = (date.fromisoformat(fy_e["end"]) - date.fromisoformat(y_end)).days
+                    except ValueError:
+                        continue
+                    if 76 <= gap <= 104 and any(c[2] == fy_e["start"] for c in cands):
+                        yv = _pick_consistent([(c[0], c[1]) for c in cands], ann_med)
+                        q[fy_e["end"]] = fy_e["val"] - yv
+                        break
+            cand = {"q": q, "latest": max(q), "n": len(q)}
+            if best is None or (cand["latest"], cand["n"]) > (best["latest"], best["n"]):
+                best = cand
+        if best:
+            per_field[field] = best["q"]
+    if "revenue" not in per_field:
+        return None
+    ends = sorted(set().union(*[set(v) for v in per_field.values()]))[-10:]
+    rows = []
+    for e in ends:
+        rows.append({"end": e, **{f: per_field.get(f, {}).get(e) for f in QTR_FIELDS}})
+    for i, r in enumerate(rows):
+        try:
+            e0 = date.fromisoformat(r["end"])
+        except ValueError:
+            continue
+        for p in rows[:i]:
+            try:
+                lag = (e0 - date.fromisoformat(p["end"])).days
+            except ValueError:
+                continue
+            if 350 <= lag <= 380:
+                for f, k in (("revenue", "yoy_revenue"), ("net_income", "yoy_net_income")):
+                    # YoY off a NEGATIVE/zero base is meaningless (the exact -17.5%-CAGR trap
+                    # the auditor caught the model committing on ARWR) — omit, never invent
+                    if r.get(f) and p.get(f) and p[f] > 0:
+                        r[k] = round((r[f] / p[f] - 1) * 100, 1)
+    return {"quarters": rows} if rows else None
+
+
 def extract_history(facts):
     """Build {fiscal_year: {field: value}} from a CIK's us-gaap facts."""
     series = {}
@@ -727,6 +813,7 @@ def main():
     history_out = {}
     battery_out = {}
     ttm_out = {}
+    qtr_out = {}
     no_entry = 0
     no_history = 0
     processed = 0
@@ -758,6 +845,9 @@ def main():
             ttm = ttm_snapshot(facts)
             if ttm:
                 ttm_out[ticker] = ttm
+            qtr = quarterly_snapshot(facts)
+            if qtr:
+                qtr_out[ticker] = qtr
             processed += 1
             if processed % 500 == 0:
                 print(f"  ... {processed} tickers processed")
@@ -768,11 +858,12 @@ def main():
     # fundamentals_history.json that every RS2 valuation reads (2026-08-07; recovered from git).
     # A partial universe silently masquerading as the full one corrupts everything downstream,
     # so subset output goes to *.SUBSET.json and says so.
-    global HISTORY_JSON, BATTERY_JSON, TTM_JSON
+    global HISTORY_JSON, BATTERY_JSON, TTM_JSON, QTR_JSON
     if args.limit or args.tickers:
         HISTORY_JSON = HISTORY_JSON.with_name("fundamentals_history.SUBSET.json")
         BATTERY_JSON = BATTERY_JSON.with_name("fundamentals_battery.SUBSET.json")
         TTM_JSON = TTM_JSON.with_name("fundamentals_ttm.SUBSET.json")
+        QTR_JSON = QTR_JSON.with_name("fundamentals_quarterly.SUBSET.json")
         print(f"SUBSET run ({len(targets)} tickers) -> writing {HISTORY_JSON.name} / "
               f"{BATTERY_JSON.name} / {TTM_JSON.name} — production files untouched")
     HISTORY_JSON.write_text(json.dumps(
@@ -798,7 +889,12 @@ def main():
     print(f"No zip entry: {no_entry} | no usable annual history: {no_history}")
     print(f"Written: {HISTORY_JSON.name} ({HISTORY_JSON.stat().st_size:,} bytes)")
     print(f"Written: {BATTERY_JSON.name} ({BATTERY_JSON.stat().st_size:,} bytes)")
+    QTR_JSON.write_text(json.dumps(
+        {"generated_at": generated_at,
+         "source": "SEC companyfacts.zip (single quarters from 10-Q; Q4 = FY - YTD-Q3)",
+         "tickers": qtr_out}, sort_keys=True), encoding="utf-8")
     print(f"Written: {TTM_JSON.name} ({TTM_JSON.stat().st_size:,} bytes)")
+    print(f"Written: {QTR_JSON.name} ({QTR_JSON.stat().st_size:,} bytes) — {len(qtr_out)} tickers")
 
 
 if __name__ == "__main__":
