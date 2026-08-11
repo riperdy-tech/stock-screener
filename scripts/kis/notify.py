@@ -28,6 +28,13 @@ import os
 import sys
 
 
+# A sell-only run this cash-heavy is never routine: either the ledger rotated
+# out of half the book and the buy leg was suppressed, or something upstream
+# stopped producing entries. Either way the phone should say so.
+CASH_ALERT_FRAC = 0.20
+MAX_DROPPED_LINES = 3      # keep the digest phone-sized; the log has them all
+
+
 def _sign(ok) -> str:
     return "✅" if ok else "❌"
 
@@ -43,15 +50,28 @@ def pnl_suffix(cost: float, price: float, qty: int) -> str:
 
 def format_telegram(prefix: str, run_id: str, env: str, ledger: str,
                     results: list[dict], nav: float, cash: float,
-                    avg_cost: dict[str, float] | None = None) -> str:
+                    avg_cost: dict[str, float] | None = None,
+                    dropped: list[dict] | None = None) -> str:
     """One digest message. `results` is the list sync_kis_portfolio.py builds:
     each an order's vars() merged with the place_order result. Skipped buys may
     lack a 'limit' key — rendered as '@ —'. `avg_cost` (ticker -> cost basis)
-    is optional; when present, sell rows get a "(+$x, +y%)" P/L suffix."""
+    is optional; when present, sell rows get a "(+$x, +y%)" P/L suffix.
+
+    `dropped` is plan.dropped as dicts: orders the plan wanted but never sent
+    (turnover cap, cash, DD governor). They are NOT in `results` — nothing was
+    attempted — so without them the digest reports only what happened and stays
+    silent about what was suppressed. That silence is what let 2026-08-11 read
+    "Placed 14/14" after the cap discarded every entry of a full rotation.
+    """
     avg_cost = avg_cost or {}
+    dropped = list(dropped or [])
     ok_n = sum(1 for r in results if r.get("ok"))
-    lines = [f"{prefix} {run_id} {env}/{ledger}",
-             f"Placed {ok_n}/{len(results)}"]
+    header = f"Placed {ok_n}/{len(results)}"
+    if dropped:
+        # On the second line on purpose: it is what a phone shows in the
+        # notification preview, before anyone opens the chat.
+        header += f" · ⚠ {len(dropped)} NOT placed"
+    lines = [f"{prefix} {run_id} {env}/{ledger}", header]
     for r in results:
         limit = r.get("limit")
         px = f"{limit:.2f}" if isinstance(limit, (int, float)) else "—"
@@ -62,7 +82,30 @@ def format_telegram(prefix: str, run_id: str, env: str, ledger: str,
         if not r.get("ok") and r.get("msg"):
             line += f" — {r['msg']}"
         lines.append(line)
-    lines.append(f"NAV ${nav:,.0f} · cash ${cash:,.0f}")
+
+    if dropped:
+        total = sum(float(d.get("est_value") or 0) for d in dropped)
+        lines.append(f"⚠ NOT placed ({len(dropped)}, ${total:,.0f}):")
+        for d in sorted(dropped, key=lambda d: -float(d.get("est_value") or 0)
+                        )[:MAX_DROPPED_LINES]:
+            lines.append(f"   {str(d.get('side', '')).upper()} {d.get('ticker', '?')} "
+                         f"x{d.get('qty', 0)} ${float(d.get('est_value') or 0):,.0f} "
+                         f"— {d.get('why', '?')}")
+        if len(dropped) > MAX_DROPPED_LINES:
+            lines.append(f"   +{len(dropped) - MAX_DROPPED_LINES} more (see run log)")
+
+    # Independent of `dropped`: whatever the cause, a run that only sold and is
+    # now sitting in cash gets flagged. Catches suppression paths that predate
+    # this reporting, and any future one that forgets to record itself.
+    if nav > 0 and cash / nav >= CASH_ALERT_FRAC:
+        sold = any(r.get("ok") and r.get("side") == "sell" for r in results)
+        bought = any(r.get("ok") and r.get("side") == "buy" for r in results)
+        if sold and not bought:
+            lines.append(f"⚠ SELLS ONLY — {cash / nav:.0%} of NAV in cash, "
+                         f"nothing redeployed")
+
+    pct = f" ({cash / nav:.0%} of NAV)" if nav > 0 else ""
+    lines.append(f"NAV ${nav:,.0f} · cash ${cash:,.0f}{pct}")
     return "\n".join(lines)
 
 

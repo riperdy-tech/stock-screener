@@ -56,6 +56,102 @@ def test_format_survives_order_without_limit():
     assert "Placed 0/1" in txt
 
 
+# ── dropped orders: what the plan wanted and never sent ──────────────────────
+#
+# 2026-08-11 regression suite. A rotation exited 57% of NAV, the turnover cap
+# discarded all 13 entries, and the digest said "Placed 14/14" with no hint that
+# anything was suppressed.
+
+def _dropped(n=13):
+    return [{"side": "buy", "ticker": f"T{i}", "qty": 1, "est_value": 2000.0 - i,
+             "why": "turnover cap"} for i in range(n)]
+
+
+def test_dropped_orders_reach_the_header():
+    # The header is the notification preview — the alarm has to be there, not
+    # only in the body someone has to open the chat to read.
+    txt = nf.format_telegram("[KIS·trades]", "rid", "real", "equal_llm",
+                             _results(), 40_512.0, 23_456.0, None, _dropped())
+    assert "Placed 2/3" in txt and "13 NOT placed" in txt, txt
+    assert txt.splitlines()[1].startswith("Placed 2/3"), txt
+
+
+def test_dropped_block_totals_and_truncates():
+    txt = nf.format_telegram("[p]", "rid", "real", "equal_llm",
+                             _results(), 40_512.0, 23_456.0, None, _dropped())
+    assert "NOT placed (13, $25,922)" in txt, txt          # sum of est_value
+    assert "BUY T0 x1 $2,000 — turnover cap" in txt, txt   # largest first
+    assert "+10 more" in txt, txt                          # 3 shown of 13
+    assert "T12" not in txt                                # smallest truncated
+
+
+def test_no_dropped_no_warning_noise():
+    """A clean run must look exactly as it did before this feature."""
+    txt = nf.format_telegram("[p]", "rid", "real", "equal_llm",
+                             _results(), 10_000.0, 500.0)
+    assert "NOT placed" not in txt and "⚠" not in txt, txt
+
+
+def test_sells_only_cash_heavy_is_flagged_even_without_dropped():
+    """Independent backstop: any suppression path that forgets to record itself
+    still trips this, because the account state alone gives it away."""
+    sells = [{"side": "sell", "ticker": "STRL", "qty": 4, "ok": True,
+              "limit": 531.77, "msg": ""}]
+    txt = nf.format_telegram("[p]", "rid", "real", "equal_llm", sells,
+                             40_512.0, 23_456.0)
+    assert "SELLS ONLY" in txt and "58% of NAV in cash" in txt, txt
+
+
+def test_no_sells_only_flag_when_buys_were_placed():
+    mixed = [{"side": "sell", "ticker": "A", "qty": 1, "ok": True, "limit": 10.0},
+             {"side": "buy", "ticker": "B", "qty": 1, "ok": True, "limit": 10.0}]
+    txt = nf.format_telegram("[p]", "rid", "real", "equal_llm", mixed,
+                             40_512.0, 23_456.0)
+    assert "SELLS ONLY" not in txt, txt
+
+
+def test_no_sells_only_flag_when_cash_is_normal():
+    sells = [{"side": "sell", "ticker": "A", "qty": 1, "ok": True, "limit": 10.0}]
+    txt = nf.format_telegram("[p]", "rid", "real", "equal_llm", sells,
+                             40_512.0, 500.0)
+    assert "SELLS ONLY" not in txt, txt
+
+
+def test_failed_sell_does_not_trigger_the_cash_flag():
+    """A rejected sell placed nothing; cash sitting there is a separate story."""
+    rejected = [{"side": "sell", "ticker": "A", "qty": 1, "ok": False,
+                 "msg": "REJECT", "limit": 10.0}]
+    txt = nf.format_telegram("[p]", "rid", "real", "equal_llm", rejected,
+                             40_512.0, 23_456.0)
+    assert "SELLS ONLY" not in txt, txt
+
+
+def test_cash_percentage_is_always_shown():
+    txt = nf.format_telegram("[p]", "rid", "real", "equal_llm", _results(),
+                             40_512.0, 23_456.0)
+    assert "NAV $40,512 · cash $23,456 (58% of NAV)" in txt, txt
+
+
+def test_zero_nav_does_not_divide_by_zero():
+    txt = nf.format_telegram("[p]", "rid", "paper", "equal", _results(), 0.0, 0.0)
+    assert "NAV $0" in txt
+
+
+def test_dropped_tolerates_missing_fields():
+    """plan.dropped is built by us, but the digest must never be the thing that
+    breaks a trading run over a missing key."""
+    txt = nf.format_telegram("[p]", "rid", "real", "equal", _results(), 100.0, 1.0,
+                             None, [{"side": "buy"}])
+    assert "NOT placed (1, $0)" in txt, txt
+
+
+def test_plan_only_digest_renders_without_results():
+    """The 'everything was suppressed, nothing attempted' run: results is empty."""
+    txt = nf.format_telegram("[p]", "rid", "real", "equal_llm", [], 40_512.0,
+                             23_456.0, None, _dropped(2))
+    assert "Placed 0/0" in txt and "2 NOT placed" in txt, txt
+
+
 def test_format_no_secrets_leak():
     # Sanity: message never echoes an env/secret-looking field.
     txt = nf.format_telegram("[KIS·trades]", "rid", "real", "equal_llm", _results(), 1.0, 2.0)

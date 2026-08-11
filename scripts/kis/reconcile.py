@@ -31,9 +31,25 @@ class Order:
 
 
 @dataclass
+class Dropped:
+    """An order the plan WANTED and did not place. Structured because prose
+    warnings only ever reached the job summary: on 2026-08-11 a wholesale ledger
+    rotation exited $23,094 (57% of NAV), the 40% cap silently discarded all 13
+    entries, and the phone digest read "Placed 14/14" — a sell-only run that
+    looked perfectly healthy. Anything that suppresses intent records it here so
+    the notifier can say so out loud."""
+    side: str           # "buy" | "sell"
+    ticker: str
+    qty: int
+    est_value: float
+    why: str            # turnover cap | insufficient cash | DD governor ...
+
+
+@dataclass
 class Plan:
     orders: list[Order] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
+    dropped: list[Dropped] = field(default_factory=list)
     nav: float = 0.0
     cash: float = 0.0
     turnover_pct: float = 0.0
@@ -206,6 +222,7 @@ def compute_plan(targets: dict[str, float],
             room -= o.est_value
         else:
             plan.warnings.append(f"{o.ticker}: trim ${o.est_value:,.0f} dropped (turnover cap)")
+            plan.dropped.append(Dropped("sell", o.ticker, o.qty, o.est_value, "turnover cap"))
     # Trims are rotation and draw on `room` alone; buys may also draw on the
     # idle-cash allowance. Solvency is unaffected — the cash cap below still
     # applies to whatever survives here.
@@ -221,6 +238,7 @@ def compute_plan(targets: dict[str, float],
             buy_room -= o.est_value
         else:
             plan.warnings.append(f"{o.ticker}: buy ${o.est_value:,.0f} dropped (turnover cap)")
+            plan.dropped.append(Dropped("buy", o.ticker, o.qty, o.est_value, "turnover cap"))
 
     # cash cap on buys: spendable now + expected sell proceeds, minus cost buffer
     sells = sorted(exits + kept_trims, key=lambda o: -o.est_value)
@@ -236,8 +254,18 @@ def compute_plan(targets: dict[str, float],
             if afford >= 1:
                 final_buys.append(Order("buy", o.ticker, afford, o.price, o.reason))
                 budget -= afford * o.price
+                # The shortfall is intent we are not placing, so it is reported
+                # like any other drop — a half-filled slot used to be silent.
+                short = o.qty - afford
+                plan.warnings.append(
+                    f"{o.ticker}: buy cut to {afford}/{o.qty} shares (insufficient cash)")
+                plan.dropped.append(
+                    Dropped("buy", o.ticker, short, round(short * o.price, 2),
+                            "insufficient cash"))
             else:
                 plan.warnings.append(f"{o.ticker}: buy dropped (insufficient cash)")
+                plan.dropped.append(
+                    Dropped("buy", o.ticker, o.qty, o.est_value, "insufficient cash"))
 
     plan.orders = sells + final_buys
     total = sum(o.est_value for o in plan.orders)

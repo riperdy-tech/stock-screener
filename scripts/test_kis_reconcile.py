@@ -188,6 +188,63 @@ def test_rotation_trims_do_not_draw_on_the_allowance():
     assert all(o.reason != "trim" for o in plan.sells)
 
 
+# --- dropped-order reporting ------------------------------------------------
+#
+# Every suppression must leave a structured record, not just prose in a warning
+# string: the phone digest is built from plan.dropped, and on 2026-08-11 the
+# prose-only version meant a run that discarded 13 entries reported "14/14".
+
+def test_cap_dropped_buys_are_recorded_structurally():
+    plan = compute_plan(targets={"NEW": 0.5}, held={"OLD": 100},
+                        sellable={"OLD": 100}, prices={"OLD": 100, "NEW": 100},
+                        cash=0, max_turnover_pct=20)
+    assert len(plan.dropped) == 1, plan.dropped
+    d = plan.dropped[0]
+    assert (d.side, d.ticker, d.why) == ("buy", "NEW", "turnover cap")
+    assert d.est_value > 0 and d.qty > 0
+
+
+def test_dropped_trims_are_recorded_too():
+    plan = compute_plan({"TRIM": 0.10, "AAA": 0.80},
+                        held={"OLD": 60, "TRIM": 100},
+                        sellable={"OLD": 60, "TRIM": 100},
+                        prices={"OLD": 100, "TRIM": 100, "AAA": 100},
+                        cash=6_000, max_turnover_pct=40)
+    assert any(d.side == "sell" and d.ticker == "TRIM" and d.why == "turnover cap"
+               for d in plan.dropped), plan.dropped
+
+
+def test_clean_plan_records_nothing_dropped():
+    """No suppression -> empty list, so the digest stays quiet on normal days."""
+    plan = compute_plan(targets={"AAA": 0.5, "BBB": 0.3}, held={}, sellable={},
+                        prices={"AAA": 100, "BBB": 50}, cash=10_000,
+                        max_turnover_pct=100)
+    assert plan.dropped == []
+
+
+def test_cash_shortfall_records_the_unbought_remainder():
+    """A buy cut down to what cash allows is partial intent, and says so."""
+    plan = compute_plan(targets={"NEW": 1.0}, held={}, sellable={},
+                        prices={"NEW": 100}, cash=10_000, buy_budget=350,
+                        max_turnover_pct=100)
+    assert sum(o.qty for o in plan.buys) == 3               # 350 -> 3 shares
+    short = [d for d in plan.dropped if d.why == "insufficient cash"]
+    assert len(short) == 1 and short[0].ticker == "NEW", plan.dropped
+    assert short[0].qty == 97, short[0]                     # wanted 100
+    assert any("cut to 3/100" in w for w in plan.warnings), plan.warnings
+
+
+def test_dropped_records_are_json_serializable():
+    """sync writes them to logs/kis_sync.jsonl and to the Telegram digest."""
+    import json
+    plan = compute_plan(targets={"NEW": 0.5}, held={"OLD": 100},
+                        sellable={"OLD": 100}, prices={"OLD": 100, "NEW": 100},
+                        cash=0, max_turnover_pct=20)
+    rows = [vars(d) for d in plan.dropped]
+    assert json.loads(json.dumps(rows)) == rows
+    assert {"side", "ticker", "qty", "est_value", "why"} == set(rows[0])
+
+
 def test_sells_ordered_before_buys():
     plan = compute_plan(targets={"NEW": 0.9}, held={"OLD": 50},
                         sellable={"OLD": 50}, prices={"OLD": 100, "NEW": 10},

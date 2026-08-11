@@ -38,7 +38,7 @@ from kis.dd_gate import (  # noqa: E402
 from kis.notify import (  # noqa: E402
     format_telegram, pnl_suffix, sb_upsert, send_telegram, trades_rows,
 )
-from kis.reconcile import compute_plan  # noqa: E402
+from kis.reconcile import Dropped, compute_plan  # noqa: E402
 from kis.targets import ledger_weights, load_ledger_book  # noqa: E402
 
 try:
@@ -478,9 +478,14 @@ def main():
         for o in plan.buys:
             plan.warnings.append(
                 f"{o.ticker}: buy suppressed (DD governor gross {dd_gross:.0%})")
+            plan.dropped.append(Dropped("buy", o.ticker, o.qty, o.est_value,
+                                        f"DD governor {dd_gross:.0%}"))
         plan.orders = [o for o in plan.orders if o.side == "sell"]
+    dropped_rows = [vars(d) for d in plan.dropped]
     print(f"\nNAV ${plan.nav:,.2f} | {len(plan.sells)} sells, {len(plan.buys)} buys, "
-          f"turnover {plan.turnover_pct}%")
+          f"turnover {plan.turnover_pct}%"
+          + (f", {len(plan.dropped)} NOT placed "
+             f"(${sum(d.est_value for d in plan.dropped):,.0f})" if plan.dropped else ""))
     for w in plan.warnings:
         print(f"  ! {w}")
     for line in plan_table(plan, order_cd):
@@ -496,7 +501,8 @@ def main():
     log_event({"run_id": run_id, "event": "plan", "env": args.env, "ledger": args.ledger,
                "execute": args.execute, "nav": plan.nav, "cash": cash,
                "turnover_pct": plan.turnover_pct, "warnings": plan.warnings,
-               "orders": [vars(o) for o in plan.orders]})
+               "orders": [vars(o) for o in plan.orders],
+               "dropped": dropped_rows})
 
     if not args.execute:
         print("\ndry run — no orders sent (use --execute)")
@@ -507,6 +513,17 @@ def main():
         sys.exit("refusing: --env real --execute requires --confirm-real")
     if not plan.orders:
         print("nothing to do")
+        # "Nothing to do" and "everything was suppressed" are different runs and
+        # must not look alike. The results-driven digest below never fires here
+        # (no orders were attempted), so alert from the plan instead.
+        if plan.dropped:
+            try:
+                send_telegram(format_telegram(
+                    os.environ.get("KIS_MSG_PREFIX", "[KIS·trades]"), run_id,
+                    args.env, args.ledger, [], plan.nav, cash, avg_cost,
+                    dropped_rows))
+            except Exception as e:
+                print(f"  telegram notify failed (non-fatal): {e}", file=sys.stderr)
         gh_summary(summary)
         return
     if not us_market_open() and not args.ignore_market_hours:
@@ -575,7 +592,8 @@ def main():
         try:
             prefix = os.environ.get("KIS_MSG_PREFIX", "[KIS·trades]")
             msg = format_telegram(prefix, run_id, args.env, args.ledger,
-                                  results, plan.nav, cash_after, avg_cost)
+                                  results, plan.nav, cash_after, avg_cost,
+                                  dropped_rows)
             if send_telegram(msg):
                 print("  telegram: digest sent")
         except Exception as e:

@@ -171,7 +171,10 @@ flows alert via Telegram.
      rule, and it applies after the turnover cap.
 
   A run can be blocked by (1) while (2) still has slack, which looks like
-  "why isn't my cash being used?".
+  "why isn't my cash being used?". A wholesale ledger rotation is the extreme
+  case: on 2026-08-11 exits alone were $23,094 against a $16,205 cap, leaving
+  zero room, and all 13 entries were dropped — the book sold 57% of NAV and
+  redeployed none of it until the next run.
 - **Idle-cash allowance.** Cash held *above the ledger's target weight* is
   exempt from the turnover cap. Deploying new capital is a one-off, not churn,
   so a deposit no longer queues behind unrelated rotation. The allowance is
@@ -182,6 +185,16 @@ flows alert via Telegram.
   cap — 57% vs a 40% setting in the 08-03 replay. That is intended; the buys
   happen either way, so deferring them costs cash drag without saving
   commission. Trims never draw on the allowance.
+- **Suppressed orders are reported, not just logged.** Anything the plan wanted
+  and never sent — turnover cap, cash shortfall, DD-governor suppression, a buy
+  cut down to what cash allowed — is recorded in `plan.dropped`, written to
+  `logs/kis_sync.jsonl` under the `plan` event, and surfaced in the Telegram
+  digest as a `⚠ N NOT placed` line (largest three itemized, rest counted).
+  Independently, a run that placed only sells and left ≥20% of NAV in cash gets
+  a `⚠ SELLS ONLY` line — a backstop that fires even if a future suppression
+  path forgets to record itself. Before this, dropped orders reached only the
+  Actions job summary: the 08-11 rotation above notified as a clean
+  "Placed 14/14".
 - **Cash source.** The script prefers the plain USD deposit from
   `inquire-present-balance`. A KRW-seeded account under 통합증거금 reports a
   **zero** USD deposit while still being able to order US stock (this is what
