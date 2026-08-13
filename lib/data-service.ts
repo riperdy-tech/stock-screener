@@ -264,6 +264,7 @@ export interface FactorEntry {
     fct_band: string | null;
     fct_rank: number | null;
     fct_veto: string | null;
+    fct_veto_detail?: string | null;  // why, for vetoes that carry a reason (not_tradable)
     fct_z: Record<string, number | null> | null;
     fct_context?: { theme_score: number | null; theme_primary: string | null; pdm_band: string | null } | null;
     fct_vol?: number | null;
