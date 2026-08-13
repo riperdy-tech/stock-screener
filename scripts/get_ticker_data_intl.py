@@ -182,7 +182,16 @@ def fetch_taiwan_data(symbol):
         mcap = safe_float(info.get('marketCap'), 0)
         price = safe_float(info.get('currentPrice', info.get('previousClose')), 0)
         shares = info.get('impliedSharesOutstanding') or info.get('sharesOutstanding') or 0
-        
+
+        # VENDOR IDENTITY GUARD (2026-08-14) — same rule as fetch_data.py: publish
+        # price*shares when Yahoo's marketCap disagrees with its own payload by >2%.
+        mcap_vendor = None
+        if price and shares and mcap:
+            _implied = price * shares
+            if _implied > 0 and abs(mcap / _implied - 1) > 0.02:
+                mcap_vendor = mcap
+                mcap = _implied
+
         income_stmt = stock.income_stmt
         q_income_stmt = stock.quarterly_income_stmt
         cash_flow_stmt = stock.cashflow
@@ -238,6 +247,7 @@ def fetch_taiwan_data(symbol):
             "Price": price,
             "Shares_Outstanding": shares,
             "Market_Cap": mcap,
+            "Market_Cap_vendor": mcap_vendor,
             "Enterprise_Value_EV": ev,
             "Total_Cash": total_cash,
             "Total_Debt": total_debt,

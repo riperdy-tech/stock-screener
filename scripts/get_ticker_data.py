@@ -67,7 +67,17 @@ def fetch_data(ticker_symbol):
         shares = info.get("impliedSharesOutstanding") or info.get("sharesOutstanding") or 0
         market_cap = info.get("marketCap") or 0
         current_price = info.get("currentPrice") or info.get("previousClose") or 0
-        
+
+        # VENDOR IDENTITY GUARD (2026-08-14) — same rule as fetch_data.py: Yahoo can serve
+        # marketCap on a different share basis than sharesOutstanding (FMX +73%) or ahead of
+        # a stale share count (AMRX/MAMA). Publish price*shares when they disagree >2%.
+        market_cap_vendor = None
+        if current_price and shares and market_cap:
+            _implied = current_price * shares
+            if _implied > 0 and abs(market_cap / _implied - 1) > 0.02:
+                market_cap_vendor = market_cap
+                market_cap = _implied
+
         # Computed metrics
         ev = market_cap
         if total_debt is not None and total_cash is not None:
@@ -118,6 +128,7 @@ def fetch_data(ticker_symbol):
             "Price": current_price,
             "Shares_Outstanding": shares,
             "Market_Cap": market_cap,
+            "Market_Cap_vendor": market_cap_vendor,
             "Enterprise_Value_EV": ev,
             "Total_Cash": total_cash,
             "Total_Debt": total_debt,
