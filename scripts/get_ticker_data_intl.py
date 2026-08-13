@@ -196,7 +196,16 @@ def fetch_taiwan_data(symbol):
         q_income_stmt = stock.quarterly_income_stmt
         cash_flow_stmt = stock.cashflow
         bs = stock.balance_sheet
-        
+
+        # FX-AWARE INGESTION (2026-08-14): .TW names quote AND report in TWD, so the
+        # proven conversion table never applies here — this call is the mismatch
+        # DETECTOR (fx_normalize flags any statement/quote currency split instead of
+        # letting it pass silently). Same-currency names return untouched.
+        import fx_normalize
+        info, income_stmt, q_income_stmt, cash_flow_stmt, bs, fx_meta = \
+            fx_normalize.normalize(symbol, info, income_stmt, q_income_stmt,
+                                   cash_flow_stmt, bs)
+
         def safe_get_df(df, row_name, col_idx):
             try:
                 if df is not None and not df.empty and row_name in df.index:
@@ -241,8 +250,8 @@ def fetch_taiwan_data(symbol):
         growth = safe_float(info.get("revenueGrowth"), 0) * 100
         fcf_margin = (fcf / ttm_rev * 100) if (fcf and ttm_rev and ttm_rev > 0) else 0
         roic = (ttm_ebit / ev * 100) if (ttm_ebit and ev and ev > 0) else 0
-        
-        return {
+
+        out = {
             "Ticker": symbol,
             "Price": price,
             "Shares_Outstanding": shares,
@@ -272,6 +281,9 @@ def fetch_taiwan_data(symbol):
                 "Core_Anchor_Multiple": None
             }
         }
+        if fx_meta:
+            out["FX"] = fx_meta
+        return out
     except Exception as e:
         return {"error": f"Taiwan fetch failed: {str(e)}"}
 
