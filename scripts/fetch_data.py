@@ -793,6 +793,13 @@ def main():
             logging.error(f"Failed to load existing stocks.json: {e}")
             flush_handlers()
 
+    # The scan loop below replaces records wholesale, which drops last_listed
+    # from every name whose data source still answers. Keep the pre-run stamps
+    # so the listing reconciliation can restore them: a name that left the
+    # listing must not reset its own absence clock just by still having data.
+    prior_last_listed = {sym: rec['last_listed']
+                         for sym, rec in existing_data.items() if rec.get('last_listed')}
+
     # SEC-first fundamentals: local companyfacts history + previous-run carry-forward
     EXISTING_DATA_REF.update(existing_data)
     load_fund_hist()
@@ -1071,20 +1078,32 @@ def main():
                       "skipping listing reconciliation; last_listed not advanced.")
     else:
         today_str = datetime.now().strftime("%Y-%m-%d")
-        stamped = seeded = 0
+        stamped = carried = seeded = 0
         for sym, rec in existing_data.items():
             if sym in listed_today:
                 rec['last_listed'] = today_str
                 stamped += 1
+            elif prior_last_listed.get(sym):
+                # Not in today's listing but stamped before: restore the pre-run
+                # stamp, which the scan loop dropped if this name was re-fetched.
+                # Seeding from Last_Updated here instead would reset the absence
+                # clock every run for any unlisted name Yahoo still serves — the
+                # manual-override tickers would be exempt from the very check
+                # this exists for.
+                rec['last_listed'] = prior_last_listed[sym]
+                carried += 1
             elif not rec.get('last_listed'):
-                # Bootstrap only: records written before this field existed. The
-                # last successful fetch is the best available proxy for when the
+                # Bootstrap only: a record that has never been stamped. The last
+                # successful fetch is the best available proxy for when the
                 # listing still carried the name; absent even that, start the
-                # clock today so no name is ever vetoed on ignorance.
+                # clock today so no name is ever vetoed on ignorance. Fires at
+                # most once per record — from the next run the stamp is either
+                # advanced (listed) or carried (absent), never re-seeded.
                 rec['last_listed'] = (rec.get('Last_Updated') or '')[:10] or today_str
                 seeded += 1
         logging.info(f"Listing: {len(listed_today)} listed | stamped {stamped} | "
-                     f"seeded {seeded} | not in listing {len(existing_data) - stamped}")
+                     f"carried {carried} | seeded {seeded} | "
+                     f"not in listing {len(existing_data) - stamped}")
     flush_handlers()
 
     final_results = sanitize(list(existing_data.values()))

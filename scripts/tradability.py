@@ -34,6 +34,7 @@ The manual list is never circuit-broken; it is a deliberate human statement.
 """
 
 import json
+import sys
 from datetime import date, datetime
 from pathlib import Path
 
@@ -46,13 +47,20 @@ MAX_UNLISTED_SHARE = 0.10   # above this the listing feed is presumed broken
 def load_config(path=CONFIG_JSON):
     """Read not_tradable.json. A missing/corrupt file must never take the
     pipeline down — it degrades to 'no manual entries', and the automatic
-    listing path keeps working."""
+    listing path keeps working. But a file that EXISTS and fails to parse is
+    a typo silently erasing every hand-declared block, so that case is loud."""
     cfg = {"grace_days": DEFAULT_GRACE_DAYS, "tickers": {}}
-    try:
-        raw = json.loads(Path(path).read_text(encoding="utf-8"))
-    except Exception:
+    path = Path(path)
+    if not path.exists():
         return cfg
-    if isinstance(raw.get("grace_days"), int) and raw["grace_days"] >= 0:
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"TRADABILITY WARNING: {path.name} exists but is unreadable ({e}) — "
+              "ALL manual non-tradable entries are OFF this run.", file=sys.stderr)
+        return cfg
+    # NB: bool is an int subclass — "grace_days": true must not become a 1-day grace.
+    if type(raw.get("grace_days")) is int and raw["grace_days"] >= 0:
         cfg["grace_days"] = raw["grace_days"]
     tickers = raw.get("tickers")
     if isinstance(tickers, dict):
@@ -106,13 +114,15 @@ def scan(stocks, cfg=None, today=None):
 
     manual, unlisted = {}, {}
     for sym, rec in stocks.items():
-        up = sym.upper()
-        if up in cfg["tickers"]:
-            manual[sym] = cfg["tickers"][up].get("reason") or "manually blocked"
+        reason = untradable_reason(sym, rec, cfg, today)
+        if reason is None:
             continue
-        gone = days_unlisted(rec, today)
-        if gone is not None and gone > cfg["grace_days"]:
-            unlisted[sym] = f"absent from the exchange listing for {gone}d"
+        # Bucketed so the circuit breaker can drop the listing-derived half
+        # while keeping the manual list.
+        if sym.upper() in cfg["tickers"]:
+            manual[sym] = reason
+        else:
+            unlisted[sym] = reason
 
     total = len(stocks)
     share = (len(unlisted) / total) if total else 0.0

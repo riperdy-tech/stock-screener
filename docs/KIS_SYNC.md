@@ -157,18 +157,23 @@ flows alert via Telegram.
 - **Rejected tickers** (KIS may not carry some small caps — GRDN/JLHL/WILC
   class names) are logged and skipped; the run continues. Persistent rejects
   show up in every summary — decide per-name whether to live without it.
-- **Non-tradable names never reach an order.** Names that have left the exchange
-  listing (acquired, taken private, renamed, suspended pending a merger) are
-  vetoed upstream in the scoring chain, so they never enter a ledger and are
-  never ordered. Detection is automatic — `fetch_data.py` stamps `last_listed`
-  from the live listing, and `score_factors.py` vetoes anything absent for more
-  than 5 days (`scripts/tradability.py`). For a name that is still listed but
-  untradable anyway — a halt, or a KIS-side gap like the GRDN class above — add
-  it to `scripts/not_tradable.json` with a reason; it takes effect on the next
+- **Non-tradable names never become a NEW position.** Names that have left the
+  exchange listing (acquired, taken private, renamed, suspended pending a
+  merger) are vetoed upstream in the scoring chain, so they never enter a
+  ledger and no new buy is ever planned. Detection is automatic —
+  `fetch_data.py` stamps `last_listed` from the live listing, and
+  `score_factors.py` vetoes anything absent for more than 5 days
+  (`scripts/tradability.py`). For a name that is still listed but untradable
+  anyway — a halt, or a KIS-side gap like the GRDN class above — add it to
+  `scripts/not_tradable.json` with a reason; it takes effect on the next
   chain run, and deleting the entry lets the name back in.
-  *A name you already HOLD that goes non-tradable is carried, not sold* (the
-  ledger reads the veto as "unevaluated today", and a suspended name cannot be
-  sold anyway). Exit it by hand once its tape reopens.
+  *A name you already HOLD when it goes non-tradable is carried, not sold*
+  (the ledger reads the veto as "unevaluated today", and a suspended name
+  cannot be sold anyway). Because KIS targets derive from ledger holdings,
+  a carried name the real account doesn't hold **keeps emitting an order the
+  broker refuses on every sync** — expect the daily reject until you exit the
+  ledger position by hand once its tape reopens; it means the carry is
+  working, not that the veto failed.
 - **Stale ledger guard:** if the ledger's `current_date` is >5 days old the
   script refuses to trade.
 - **Two independent caps limit buys — don't confuse them.**
