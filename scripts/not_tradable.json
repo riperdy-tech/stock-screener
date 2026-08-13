@@ -1,0 +1,10 @@
+{
+ "_note": "Manual non-tradable list. score_factors.py turns every entry into fct_veto='not_tradable', which strips the quant band AND (via the existing veto guardrail) blocks the RS2/LLM overlay, so the name can never reach a ledger or a KIS order. This list is for names the exchange listing has not dropped yet — a halt or a pending merger that still shows as listed. Names that LEAVE the NASDAQ/NYSE/AMEX listing are caught automatically via last_listed and do not belong here. Removing an entry lets the name back in on the next chain run.",
+ "grace_days": 5,
+ "tickers": {
+  "CPRX": {
+   "reason": "trading suspended pending merger (KIS rejected the 2026-08-13 buy: 거래정지종목)",
+   "since": "2026-08-13"
+  }
+ }
+}

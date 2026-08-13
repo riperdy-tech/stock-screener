@@ -44,6 +44,7 @@ except Exception:
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPT_DIR))
+import tradability  # noqa: E402
 from score_paradigm import compute_skip_month_return, compute_high_proximity  # noqa: E402
 from score_unified import revisions_pillar, theme_pillar, VETO_BANDS  # noqa: E402
 
@@ -307,6 +308,12 @@ def main():
     tickers = sorted(reverse.keys())
     sector_by_ticker = {t: (stocks.get(t) or {}).get("sector") for t in tickers}
 
+    # Names that cannot be traded (off the exchange listing, or hand-blocked).
+    # Vetoed below, which strips the quant band and — via the veto guardrail in
+    # apply_llm_overlay — the RS2 lane too. See scripts/tradability.py.
+    untradable, untradable_note = tradability.scan(stocks)
+    print(f"Tradability: {untradable_note}")
+
     # ── Raw sub-metrics ──────────────────────────────────────────────────
     raw = {name: {} for name in (
         "fcf_yield", "owner_yield", "ebit_yield", "earnings_yield",
@@ -408,8 +415,8 @@ def main():
             },
             "fct_vol": annualized_vol.get(t),
             "fct_composite": None, "fct_percentile": None, "fct_band": None,
-            "fct_rank": None, "fct_veto": None, "fct_contributions": None,
-            "fct_haircuts": None,
+            "fct_rank": None, "fct_veto": None, "fct_veto_detail": None,
+            "fct_contributions": None, "fct_haircuts": None,
         }
         results[t] = entry
 
@@ -417,7 +424,13 @@ def main():
         a_fired = "ACCRUALS_HIGH" in flags
         issuance_fired = "HEAVY_ISSUANCE" in flags
         archetype = rv.get("rev_archetype")
-        if rv.get("rev_band") in VETO_BANDS:
+        # Tradability is checked FIRST: if the name cannot be bought, no amount
+        # of factor quality is relevant, and the reason belongs in the output
+        # rather than being masked by whichever veto happens to fire next.
+        if t in untradable:
+            entry["fct_veto"] = "not_tradable"
+            entry["fct_veto_detail"] = untradable[t]
+        elif rv.get("rev_band") in VETO_BANDS:
             entry["fct_veto"] = "reverse_engine_reject"
         elif m_fired and a_fired:
             entry["fct_veto"] = "forensic_pair"

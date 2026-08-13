@@ -780,7 +780,12 @@ def main():
     
     # Use FDR (FinanceDataReader) for Master Universe
     tickers = get_fdr_tickers()
-    
+
+    # Today's live listing, kept BEFORE the manual overrides are mixed in: the
+    # exchange feed is the authority on what is still listed, and a hand-added
+    # name must not be able to vouch for its own tradability.
+    listed_today = set(tickers)
+
     # Optional Manual Overrides
     manual_tickers = ["CELH", "ELF", "XPEL", "MNST", "LNTH", "MEDP", "INMD", "PERI", "CROX"]
     tickers.extend(manual_tickers)
@@ -804,6 +809,13 @@ def main():
         except Exception as e:
             logging.error(f"Failed to load existing stocks.json: {e}")
             flush_handlers()
+
+    # The scan loop below replaces records wholesale, which drops last_listed
+    # from every name whose data source still answers. Keep the pre-run stamps
+    # so the listing reconciliation can restore them: a name that left the
+    # listing must not reset its own absence clock just by still having data.
+    prior_last_listed = {sym: rec['last_listed']
+                         for sym, rec in existing_data.items() if rec.get('last_listed')}
 
     # SEC-first fundamentals: local companyfacts history + previous-run carry-forward
     EXISTING_DATA_REF.update(existing_data)
@@ -1064,7 +1076,53 @@ def main():
     
     logging.info(f"Scan Complete. Processed {processed_count}. Passed {passed_count}. Skipped {skipped_count}.")
     flush_handlers()
-    
+
+    # ── Listing reconciliation ───────────────────────────────────────────
+    # This database is carry-forward and never pruned: a name that leaves the
+    # exchange listing (acquired, renamed, suspended pending a merger) keeps its
+    # last good record and keeps getting scored on frozen data. Nothing is
+    # deleted here — we only record what the listing says TODAY, and
+    # score_factors.py vetoes names that stay absent (scripts/tradability.py).
+    # Runs AFTER the scan because the loop replaces records wholesale.
+    #
+    # Guarded: a truncated or failed listing fetch would mark the entire
+    # universe delisted at once, so below MIN_LISTING_SIZE nothing is stamped
+    # and every last_listed simply fails to advance (no name is newly vetoed
+    # until the feed recovers).
+    MIN_LISTING_SIZE = 5000
+    if len(listed_today) < MIN_LISTING_SIZE:
+        logging.error(f"Listing fetch returned {len(listed_today)} names (< {MIN_LISTING_SIZE}) — "
+                      "skipping listing reconciliation; last_listed not advanced.")
+    else:
+        today_str = datetime.now().strftime("%Y-%m-%d")
+        stamped = carried = seeded = 0
+        for sym, rec in existing_data.items():
+            if sym in listed_today:
+                rec['last_listed'] = today_str
+                stamped += 1
+            elif prior_last_listed.get(sym):
+                # Not in today's listing but stamped before: restore the pre-run
+                # stamp, which the scan loop dropped if this name was re-fetched.
+                # Seeding from Last_Updated here instead would reset the absence
+                # clock every run for any unlisted name Yahoo still serves — the
+                # manual-override tickers would be exempt from the very check
+                # this exists for.
+                rec['last_listed'] = prior_last_listed[sym]
+                carried += 1
+            elif not rec.get('last_listed'):
+                # Bootstrap only: a record that has never been stamped. The last
+                # successful fetch is the best available proxy for when the
+                # listing still carried the name; absent even that, start the
+                # clock today so no name is ever vetoed on ignorance. Fires at
+                # most once per record — from the next run the stamp is either
+                # advanced (listed) or carried (absent), never re-seeded.
+                rec['last_listed'] = (rec.get('Last_Updated') or '')[:10] or today_str
+                seeded += 1
+        logging.info(f"Listing: {len(listed_today)} listed | stamped {stamped} | "
+                     f"carried {carried} | seeded {seeded} | "
+                     f"not in listing {len(existing_data) - stamped}")
+    flush_handlers()
+
     final_results = sanitize(list(existing_data.values()))
     
     # 1. JSON Save
