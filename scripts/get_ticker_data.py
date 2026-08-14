@@ -3,6 +3,7 @@ import argparse
 import json
 import sys
 import numpy as np
+import fx_normalize
 
 def safe_get(df, row_name, col_idx):
     try:
@@ -24,7 +25,15 @@ def fetch_data(ticker_symbol):
         q_income_stmt = ticker.quarterly_income_stmt
         cash_flow = ticker.cash_flow
         balance_sheet = ticker.balance_sheet
-        
+
+        # FX-AWARE INGESTION (2026-08-14) — same normalization as fetch_data.py:
+        # proven foreign filers' statements -> USD (flows at period-average FX,
+        # balance-sheet stocks at period-end FX), whole-company share counts pinned.
+        # USD names pass through untouched (fx_meta None).
+        info, income_stmt, q_income_stmt, cash_flow, balance_sheet, fx_meta = \
+            fx_normalize.normalize(ticker_symbol, info, income_stmt, q_income_stmt,
+                                   cash_flow, balance_sheet)
+
         # We need last 2 annual and last 4 quarterly
         
         # Helper to extract metrics
@@ -148,7 +157,9 @@ def fetch_data(ticker_symbol):
                 "Core_Anchor_Multiple_0.4Sales_0.4GP": core_multiple_anchor
             }
         }
-        
+        if fx_meta:
+            data["FX"] = fx_meta
+
         # Clean up any residual NaNs
         def clean_dict(d):
             if isinstance(d, dict):

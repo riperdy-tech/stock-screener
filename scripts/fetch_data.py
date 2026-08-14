@@ -225,6 +225,14 @@ EXISTING_DATA_REF = {}  # previous stocks.json rows, keyed by symbol (carry-forw
 import defeatbeta_source
 DBETA = None
 
+# ── FX-aware ingestion (2026-08-14) ────────────────────────────────────────────
+# Foreign 20-F filers arrive with statements in the REPORTING currency while the
+# quote side is USD (measured 2026-08-14: 8 of 266 RS2 live names). fx_normalize
+# converts proven names' statements to USD (flows at fiscal-period-average FX,
+# balance-sheet stocks at period-end FX) and pins proven whole-company share
+# counts, BEFORE the vendor identity guard below. USD names pass through untouched.
+import fx_normalize
+
 # .info-only fields carried from the cached detail on non-slot days
 _CARRY_INFO_KEYS = {
     "forwardEps": "Forward_EPS_Estimate",
@@ -264,6 +272,13 @@ def pseudo_info(ticker_symbol, cached_detail):
     for info_key, detail_key in _CARRY_INFO_KEYS.items():
         if cm.get(detail_key) is not None:
             info[info_key] = cm[detail_key]
+    # FX-aware ingestion: carry the statement/quote currency from the cached FX block
+    # so fx_normalize keeps flagging unreviewed mismatches on non-slot (pseudo-info)
+    # days. Proven names don't need this — their table entry drives the conversion.
+    fxb = (cached_detail or {}).get("FX") or {}
+    if fxb.get("statement_currency"):
+        info["financialCurrency"] = fxb["statement_currency"]
+        info["currency"] = fxb.get("quote_currency") or "USD"
     return info
 
 def process_stock_bulk(ticker_symbol, info, slot_today):
@@ -550,6 +565,14 @@ def build_financial_detail(ticker_symbol, info, income_stmt, q_income_stmt,
     """Core detail builder — pure function of its inputs so the yfinance and
     defeatbeta paths produce identically-derived numbers."""
     try:
+        # FX normalization first: statements of proven foreign filers -> USD, and
+        # proven whole-company share counts pinned, so every figure below (TTM sums,
+        # EV legs, multiples, the vendor identity guard) works on ONE currency and
+        # ONE perimeter. USD names return untouched with fx_meta None.
+        info, income_stmt, q_income_stmt, cash_flow_stmt, bs, fx_meta = \
+            fx_normalize.normalize(ticker_symbol, info, income_stmt, q_income_stmt,
+                                   cash_flow_stmt, bs)
+
         def extract_income_metrics(df, num_periods):
             if df is None or df.empty:
                 return []
@@ -713,6 +736,8 @@ def build_financial_detail(ticker_symbol, info, income_stmt, q_income_stmt,
             },
             "Monthly_Closes": monthly_closes
         }
+        if fx_meta:
+            detail["FX"] = fx_meta
 
         return sanitize(detail)
     except Exception as e:
@@ -763,6 +788,28 @@ def is_potential_100_bagger(stock):
     stock.fail_reasons = reasons
     stock.fail_codes = codes
     return len(reasons) == 0
+
+def patch_live_mcap(detail, live_mcap):
+    """Patch a detail dict's Market_Cap with a fresh figure WITHOUT breaking the
+    Price x Shares_Outstanding identity the vendor guard enforces (2026-08-14).
+    The live figure arrives on the vendor's share basis; when it disagrees with the
+    detail's own Price x Shares_Outstanding by >2% (FMX whole-company vs ADS bases,
+    AMRX/MAMA stale-share-count refreshes), publish the identity-consistent product
+    and keep the vendor figure as Market_Cap_vendor — the guard's rule and tolerance,
+    applied at the patch site. Before this helper, these sites re-published the raw
+    vendor figure on every bulk/cache day, silently undoing the guard. Patch Price
+    BEFORE calling so the identity uses the same snapshot."""
+    if not live_mcap:
+        return
+    p, so = detail.get('Price'), detail.get('Shares_Outstanding')
+    if p and so and p > 0 and so > 0:
+        implied = p * so
+        if abs(live_mcap / implied - 1) > 0.02:
+            detail['Market_Cap_vendor'] = live_mcap
+            detail['Market_Cap'] = implied
+            return
+    detail['Market_Cap'] = live_mcap
+
 
 # --- Helper for Sanitization ---
 def sanitize(obj):
@@ -889,8 +936,7 @@ def main():
                                                            yf_ticker=yf_t) or cached_detail
                     if detail:
                         detail['Price'] = result.price or detail.get('Price')
-                        if result.market_cap:
-                            detail['Market_Cap'] = result.market_cap
+                        patch_live_mcap(detail, result.market_cap)
                     used_bulk = True
                 except Exception as e:
                     logging.warning(f"Bulk path failed for {ticker} ({e}) — legacy fallback.")
@@ -925,13 +971,11 @@ def main():
                         detail = cached_detail      # fresh fetch failed -> keep serving the cache
                         if detail:                  # ...but never with a stale price
                             detail['Price'] = result.price or detail.get('Price')
-                            if result.market_cap:
-                                detail['Market_Cap'] = result.market_cap
+                            patch_live_mcap(detail, result.market_cap)
                 else:
                     detail = cached_detail
                     detail['Price'] = result.price or detail.get('Price')
-                    if result.market_cap:
-                        detail['Market_Cap'] = result.market_cap
+                    patch_live_mcap(detail, result.market_cap)
                 
             # 2. APPLY "100-BAGGER" RULES
             screening_result = is_potential_100_bagger(result)
