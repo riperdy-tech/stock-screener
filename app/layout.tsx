@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google"; // Next.js optimizes fonts automatically
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/next';
 
 import { LanguageProvider } from "../components/LanguageContext";
 
@@ -22,6 +23,7 @@ export default function RootLayout({
                 <LanguageProvider>
                     {children}
                 </LanguageProvider>
+                <Analytics />
             </body>
         </html>
     );
