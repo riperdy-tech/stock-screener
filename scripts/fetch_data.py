@@ -800,6 +800,14 @@ def patch_live_mcap(detail, live_mcap):
     vendor figure on every bulk/cache day, silently undoing the guard. Patch Price
     BEFORE calling so the identity uses the same snapshot."""
     if not live_mcap:
+        # No vendor figure this pass — but the caller has ALREADY patched a fresh Price,
+        # so leaving the previous Market_Cap breaks the identity by however far the price
+        # has moved since the last full rebuild (MU 2026-08-15: fresh 961.55 against a
+        # mcap still on the 861 basis = 10.5%; the gate blocked the whole book). Shares
+        # are the stable leg — derive the cap from the identity instead.
+        p, so = detail.get('Price'), detail.get('Shares_Outstanding')
+        if p and so and p > 0 and so > 0:
+            detail['Market_Cap'] = p * so
         return
     p, so = detail.get('Price'), detail.get('Shares_Outstanding')
     if p and so and p > 0 and so > 0:
