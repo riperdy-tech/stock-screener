@@ -1,36 +1,36 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-08-18T15:59:41Z
+Generated: 2026-08-18T22:04:29Z
 Macro flags: none
-Invested: **56.74%**  |  Cash: **43.26%**  |  Positions: 15
+Invested: **57.33%**  |  Cash: **42.67%**  |  Positions: 15
 
 | # | Sym | Wt% | Arch | Comp | Surv | FctRank | FctBand | Theme | PdmBand | F | M | Flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 3 | **CART** | 4.28 | B | 75.47 | 80 | 3 | research_now | cloud_software | watch | 5 | -3.032 | - |
-| 5 | **INCY** | 5.0 | B | 87.84 | 80 | 5 | research_now | - | no_data | 6 | - | - |
-| 7 | **EXEL** | 5.0 | B | 86.92 | 80 | 7 | research_now | - | no_data | 6 | -2.593 | - |
+| 3 | **CART** | 4.64 | B | 75.58 | 80 | 3 | research_now | cloud_software | watch | 5 | -3.032 | - |
+| 5 | **INCY** | 5.0 | B | 87.87 | 80 | 5 | research_now | - | no_data | 6 | - | - |
+| 7 | **EXEL** | 5.0 | B | 86.93 | 80 | 7 | research_now | - | no_data | 6 | -2.593 | - |
 | 8 | **KNSA** | 5.0 | A | 44.07 | 80 | 8 | research_now | - | no_data | 6 | -3.129 | - |
-| 11 | **NBIX** | 5.0 | B | 69.67 | 75 | 11 | research_now | - | no_data | 5 | - | - |
-| 12 | **EMBJ** | 3.75 | B | 62.25 | 80 | 12 | research_now | space_economy | mid | 5 | - | - |
-| 15 | **KRYS** | 2.25 | B | 47.11 | 75 | 15 | research_now | - | no_data | 6 | - | - |
-| 18 | **VIK** | 2.25 | B | 63.82 | 75 | 18 | research_now | - | no_data | 6 | - | - |
-| 19 | **GRDN** | 2.4 | B | 77.68 | 80 | 19 | research_now | - | no_data | 7 | -2.947 | - |
-| 30 | **SAP** | 2.1 | B | 73.62 | 70 | 30 | research_now | - | no_data | - | - | - |
-| 32 | **ABNB** | 2.4 | B | 79.64 | 80 | 32 | research_now | - | no_data | 5 | - | - |
-| 37 | **MAMA** | 2.31 | A | 41.69 | 75 | 37 | research_now | - | no_data | 5 | - | - |
-| 41 | **PCTY** | 5.0 | B | 70.57 | 70 | 41 | research_now | cloud_software | watch | 7 | -2.57 | - |
+| 10 | **NBIX** | 5.0 | B | 69.69 | 75 | 10 | research_now | - | no_data | 5 | - | - |
+| 11 | **EMBJ** | 3.75 | B | 62.26 | 80 | 11 | research_now | space_economy | mid | 5 | - | - |
+| 15 | **KRYS** | 2.25 | B | 47.12 | 75 | 15 | research_now | - | no_data | 6 | - | - |
+| 16 | **GRDN** | 2.4 | B | 77.64 | 80 | 16 | research_now | - | no_data | 7 | -2.947 | - |
+| 19 | **VIK** | 2.25 | B | 63.84 | 75 | 19 | research_now | - | no_data | 6 | - | - |
+| 28 | **ABNB** | 2.4 | B | 79.69 | 80 | 28 | research_now | - | no_data | 5 | - | - |
+| 31 | **SAP** | 2.1 | B | 73.66 | 70 | 31 | research_now | - | no_data | - | - | - |
+| 42 | **PCTY** | 5.0 | B | 70.61 | 70 | 42 | research_now | cloud_software | watch | 7 | -2.57 | - |
+| 43 | **MAMA** | 2.54 | A | 41.69 | 75 | 43 | research_now | - | no_data | 5 | - | - |
 | 44 | **KFY** | 5.0 | A | 69.75 | 80 | 44 | research_now | - | no_data | 8 | -2.619 | - |
-| 48 | **MCRI** | 5.0 | A | 66.98 | 80 | 48 | research_now | - | no_data | 8 | -2.953 | - |
+| 49 | **MCRI** | 5.0 | A | 67.01 | 80 | 49 | research_now | - | no_data | 8 | -2.953 | - |
 
 ## Sector allocation
 - Healthcare: 24.65%
-- Consumer Cyclical: 13.93%
+- Consumer Cyclical: 14.29%
 - Industrials: 8.75%
 - Technology: 7.1%
-- Consumer Defensive: 2.31%
+- Consumer Defensive: 2.54%
 
 ## Theme allocation
-- cloud_software: 9.28%
+- cloud_software: 9.64%
 - space_economy: 3.75%
 
 ## Skipped (caps/sizing)
@@ -44,32 +44,32 @@ Invested: **56.74%**  |  Cash: **43.26%**  |  Positions: 15
 - AAPL: no Kelly edge (expectations gap +17pts >= 0: price already assumes more growth than demonstrated)
 - FIX: no Kelly edge (expectations gap +3pts >= 0: price already assumes more growth than demonstrated)
 - GEV: no Kelly edge (expectations gap +22pts >= 0: price already assumes more growth than demonstrated)
+- MPWR: no Kelly edge (expectations gap +23pts >= 0: price already assumes more growth than demonstrated)
 - LLY: no Kelly edge (expectations gap +13pts >= 0: price already assumes more growth than demonstrated)
 - NHC: no Kelly edge (expectations gap +8pts >= 0: price already assumes more growth than demonstrated)
-- MPWR: no Kelly edge (expectations gap +23pts >= 0: price already assumes more growth than demonstrated)
 - MEDP: sector cap Healthcare (25.0%)
+- CIEN: no Kelly edge (expectations gap +35pts >= 0: price already assumes more growth than demonstrated)
 - NVS: sector cap Healthcare (25.0%)
-- CIEN: no Kelly edge (expectations gap +34pts >= 0: price already assumes more growth than demonstrated)
 - RMD: sector cap Healthcare (25.0%)
 - AMD: no Kelly edge (expectations gap +19pts >= 0: price already assumes more growth than demonstrated)
 - GD: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
 - AMZN: no Kelly edge (expectations gap +47pts >= 0: price already assumes more growth than demonstrated)
 - UTHR: sector cap Healthcare (25.0%)
-- ANET: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
+- ANET: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
 - VRTX: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
 - MCO: no Kelly edge (expectations gap +11pts >= 0: price already assumes more growth than demonstrated)
 - DELL: no Kelly edge (expectations gap +23pts >= 0: price already assumes more growth than demonstrated)
-- CLS: no Kelly edge (expectations gap +8pts >= 0: price already assumes more growth than demonstrated)
 - AVGO: no Kelly edge (expectations gap +14pts >= 0: price already assumes more growth than demonstrated)
+- CLS: no Kelly edge (expectations gap +8pts >= 0: price already assumes more growth than demonstrated)
 - HWM: no Kelly edge (expectations gap +25pts >= 0: price already assumes more growth than demonstrated)
 - MNST: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
-- CW: no Kelly edge (expectations gap +14pts >= 0: price already assumes more growth than demonstrated)
+- CW: no Kelly edge (expectations gap +15pts >= 0: price already assumes more growth than demonstrated)
 - GMED: sector cap Healthcare (25.0%)
 - MANH: no Kelly edge (expectations gap +19pts >= 0: price already assumes more growth than demonstrated)
 - ATI: no Kelly edge (expectations gap +29pts >= 0: price already assumes more growth than demonstrated)
 - GILD: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
 - MOV: no Kelly edge (expectations gap +8pts >= 0: price already assumes more growth than demonstrated)
-- QTWO: no Kelly edge (expectations gap +11pts >= 0: price already assumes more growth than demonstrated)
+- CMI: no Kelly edge (expectations gap +3pts >= 0: price already assumes more growth than demonstrated)
 
 ## Sizing method
 - Quarter-Kelly: 10 positions — f = 0.25 x mu/sigma^2, mu = expectations-gap recovery over 3y (cap 15%), sigma floor 15%, position cap 5.0%.
