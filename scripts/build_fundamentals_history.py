@@ -215,6 +215,138 @@ def _normalise_series_scale(series):
     return out
 
 
+# -- FIELD SPECS (2026-08-20) -------------------------------------------------------------
+# Curated against companyfacts.zip over the 269-ticker book (2,917 ticker-years); every proposal
+# adversarially re-verified against filed cash-flow statements before landing here.
+#
+# WHY THIS EXISTS. annual_duration_series picks ONE winning tag per field -- most-recent-latest-
+# year, then coverage -- and never mixes tags. That is right per tag (see its docstring: AAPL's
+# SalesRevenueNet has 11 old years ending 2017) but it silently drops years the WINNER lacks even
+# when another ALREADY-MAPPED tag covers them. Measured: that single effect is ~85% of the
+# revenue / pretax / ocf nulls. Adding tag names does nothing for it; stitching does.
+#
+# THREE MECHANISMS, strict order:
+#   COMBINED        priority list, each usable ALONE. Primary = today's winner (unchanged, so
+#                   every year currently filled stays byte-identical); the rest BACKFILL only
+#                   years the primary lacks.
+#   COMPONENT_SLOTS at most ONE tag per slot, summed ACROSS slots, and only if EVERY slot
+#                   resolves. A partial sum is not an approximation, it is a wrong number:
+#                   amortisation-slot alone runs a median 0.222 of true D&A, depreciation-slot
+#                   alone 0.925 (n=1822 paired observations).
+#   LONE_DEPRECIATION_ALLOWLIST  da only. A filer whose depreciation tag IS its entire D&A line,
+#                   verified against the filed statement. NEVER inferred: NVS files
+#                   DepreciationPropertyPlantAndEquipment 1,208M against a true FY2021 D&A of
+#                   4,949M (-76%). Adding a ticker requires reading its cash-flow statement.
+FIELD_SPECS = {
+ "da": {
+  "COMBINED": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization",
+               "DepreciationAmortizationAndAccretionNet",
+               "DepreciationAndAmortisationExpense",                 # ifrs-full
+               "AdjustmentsForDepreciationAndAmortisationExpense",   # ifrs-full
+               "OtherDepreciationAndAmortization"],
+  "COMPONENT_SLOTS": [
+    ["Depreciation", "DepreciationExpense", "AdjustmentsForDepreciationExpense",
+     "DepreciationPropertyPlantAndEquipment", "DepreciationNonproduction"],
+    ["AmortizationOfIntangibleAssets", "AdjustmentForAmortization", "AmortisationExpense",
+     "AdjustmentsForAmortisationExpense", "AmortisationIntangibleAssetsOtherThanGoodwill",
+     "FiniteLivedIntangibleAssetsAmortizationExpense",
+     "AmortizationOfAcquiredIntangibleAssets"]],
+  "LONE_DEPRECIATION_ALLOWLIST": {"GOOG", "GOOGL", "UNP"},
+ },
+ "revenue": {"COMBINED": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax",
+                          "RevenueFromContractWithCustomerIncludingAssessedTax",
+                          "SalesRevenueNet", "Revenue", "RevenueFromContractsWithCustomers"],
+             "COMPONENT_SLOTS": []},
+ "net_income": {"COMBINED": ["NetIncomeLoss", "ProfitLoss"], "COMPONENT_SLOTS": []},
+ "ocf": {"COMBINED": ["NetCashProvidedByUsedInOperatingActivities",
+                      "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations",
+                      "CashFlowsFromUsedInOperatingActivities",
+                      "CashFlowsFromUsedInOperatingActivitiesContinuingOperations"],
+         "COMPONENT_SLOTS": []},
+ "capex": {"COMBINED": ["PaymentsToAcquirePropertyPlantAndEquipment",
+                        "PaymentsToAcquireProductiveAssets"],
+           "COMPONENT_SLOTS": []},   # additions NOT curated -> not added
+ "operating_income": {"COMBINED": ["OperatingIncomeLoss",
+                                   "ProfitLossFromOperatingActivities"],
+                      "COMPONENT_SLOTS": []},
+ "pretax_income": {"COMBINED": [
+   "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+   "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+   "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
+   "ProfitLossBeforeTax"],
+   "COMPONENT_SLOTS": []},
+}
+# Tags deliberately REFUSED, recorded so nobody re-adds them:
+#   Accumulated*                     balance-sheet stocks, not period flows
+#   *ImpairmentLoss*                 bundles impairment (AZN 6,530 vs 5,733 D&A-only)
+#   *NextTwelveMonths / Future*      forward-looking disclosure, not a period figure
+#   AmortizationOfFinancingCosts     financing cost, not D&A
+#   DepreciationRightofuseAssets     alone runs 0.308 of true D&A and is already inside most
+#                                    filers' depreciation line -> double-count
+#   PaymentsToAcquireBusinesses*     M&A, not capex
+
+
+def resolve_field_series(facts, spec, unit_keys=("USD",), ticker=None, baseline_tags=None):
+    """Series for one field: primary winner, then backfill, then component sum.
+
+    Returns (series, raws, provenance). provenance[year] is "primary" | "backfill" |
+    "component_sum" | "lone_depreciation". Years resolved by SUMMATION have no single accession,
+    so extract_history must exclude them from its accession-coverage vote -- a summed year
+    cannot be attributed to one filing.
+    """
+    combined = list(spec.get("COMBINED") or [])
+    # PRIMARY IS COMPUTED OVER THE ORIGINAL TAG LIST ONLY.
+    # annual_duration_series picks max(candidates, key=(max_year, coverage)) over whatever list
+    # it is handed, so passing the EXPANDED list changes which tag wins and can DROP years the
+    # old winner covered. Measured when this was got wrong: 13 capex values vanished on LNKS and
+    # LTM. Additions must therefore only ever BACKFILL; the currently-filled years stay
+    # byte-identical by construction.
+    base_tags = list(baseline_tags or combined[:1])
+    series, raws = annual_duration_series(facts, base_tags, unit_keys)
+    series = dict(series)
+    raws = dict(raws)
+    prov = {y: "primary" for y in series}
+
+    # BACKFILL -- only years the primary lacks, other combined tags, latest/most-coverage first.
+    alts = []
+    for tag in combined:
+        s, r = annual_duration_series(facts, [tag], unit_keys)
+        if s:
+            alts.append((max(s), len(s), s, r))
+    for _, _, s, r in sorted(alts, key=lambda z: (-z[0], -z[1])):
+        for y, v in s.items():
+            if y not in series:
+                series[y], raws[y], prov[y] = v, r.get(y, []), "backfill"
+
+    slots = spec.get("COMPONENT_SLOTS") or []
+    if slots:
+        slot_series = []
+        for slot in slots:
+            merged = {}
+            for tag in slot:
+                s, _ = annual_duration_series(facts, [tag], unit_keys)
+                for y, v in s.items():
+                    merged.setdefault(y, v)          # first alternative in slot order wins
+            slot_series.append(merged)
+        years = set()
+        for s in slot_series:
+            years |= set(s)
+        for y in sorted(years):
+            if y in series:
+                continue                              # combined always wins outright
+            vals = [s.get(y) for s in slot_series]
+            # EVERY slot must resolve, and no negative contribution: RL 2009 files
+            # Depreciation = -164.2M against a true 184.4M.
+            if all(v is not None and v >= 0 for v in vals):
+                series[y], raws[y], prov[y] = sum(vals), [], "component_sum"
+        allow = spec.get("LONE_DEPRECIATION_ALLOWLIST") or set()
+        if ticker in allow and len(slot_series) >= 2 and not slot_series[1]:
+            for y, v in slot_series[0].items():
+                if y not in series and v is not None and v >= 0:
+                    series[y], raws[y], prov[y] = v, [], "lone_depreciation"
+    return series, raws, prov
+
+
 def annual_duration_series(facts, tags, unit_keys=("USD",)):
     """(fiscal_year -> value, fiscal_year -> [(accn, filed, val), ...]) for ~12-month-duration
     facts from annual filings.
@@ -501,13 +633,25 @@ def quarterly_snapshot(facts):
     return {"quarters": rows} if rows else None
 
 
-def extract_history(facts):
+def extract_history(facts, ticker=None):
     """Build {fiscal_year: {field: value}} from a CIK's us-gaap facts."""
     series = {}
     raws = {}
+    # Fields with a curated spec resolve via stitching + component sums (FIELD_SPECS above);
+    # every other field keeps the original single-winner behaviour untouched.
+    summed = {}          # field -> years that came from a SUM and so have no single accession
     for field, tags in DURATION_TAGS.items():
         unit = ("shares",) if field == "shares_diluted" else ("USD",)
-        series[field], raws[field] = annual_duration_series(facts, tags, unit)
+        spec = FIELD_SPECS.get(field)
+        if spec:
+            # `tags` is the ORIGINAL DURATION_TAGS list — it defines the primary winner, so the
+            # existing output is preserved exactly and FIELD_SPECS can only add.
+            series[field], raws[field], prov = resolve_field_series(
+                facts, spec, unit, ticker, baseline_tags=tags)
+            summed[field] = {y for y, p in prov.items()
+                             if p in ("component_sum", "lone_depreciation")}
+        else:
+            series[field], raws[field] = annual_duration_series(facts, tags, unit)
     for field, tags in INSTANT_TAGS.items():
         series[field], raws[field] = annual_instant_series(facts, tags)
 
@@ -834,7 +978,7 @@ def main():
             # Merge namespaces; us-gaap wins on name collisions
             facts = dict(facts_all.get("ifrs-full", {}))
             facts.update(facts_all.get("us-gaap", {}))
-            history = extract_history(facts)
+            history = extract_history(facts, ticker)
             if not history:
                 no_history += 1
                 continue
