@@ -288,9 +288,24 @@ FIELD_SPECS = {
   # at AMD (shipped -75%) and an amortization ALIAS at LIVN. Gate it to ABNB so AMD/LIVN resolve
   # from component sums. AMD 2025 D&A -75% -> -6% (feeds base_cf live). DECLARED trade: LIVN 2020
   # 38,312,000 -> 29,031,000 (worse) + 4 currently-correct cells nulled (AMD 2020/21, LIVN 21/22) —
-  # latest-FY correctness outranks historical completeness. NOTE: D&A is NOT "done" — FIX (Comfort
-  # Systems) latest-FY -56% still stands (STOP §1: needs a per-filer cash-flow-statement read).
+  # latest-FY correctness outranks historical completeness.
   "TICKER_GATED_TAGS": {"OtherDepreciationAndAmortization": {"ABNB"}},
+  # PER-FILER DENIES (2026-08-21, each adjudicated by READING the filed cash-flow statement —
+  # never from tag plausibility):
+  #   FIX: its "DepreciationAndAmortization" tag IS the depreciation line mislabeled — filed FY2025
+  #        CF statement (accn 0001104659-26-017530, R7) shows TWO lines: "Depreciation expense"
+  #        62,379k (== the tag's 62,400k rounded) and "Amortization of identifiable intangible
+  #        assets" 79,580k, filed separately under AmortizationOfIntangibleAssets. Denying the
+  #        mislabeled tag lets the component slots sum both lines (both cover 2009-2025):
+  #        FY2025 141,959k vs the 62,400k that shipped (-56%).
+  #   ABNB: DepreciationDepletionAndAmortization is its depreciation line (2021: 85.6M == the
+  #        separate Depreciation tag's 86M), NOT the CF total. Filed FY2022 10-K CF statement
+  #        (accn 0001559720-23-000003, R8): "Depreciation and amortization" 81/138/126 ($M,
+  #        2022/2021/2020) == OtherDepreciationAndAmortization exactly. Denying the partial
+  #        primary lets the ABNB-gated OtherD&A cover 2019-2024. FY2025: null is CORRECT — the
+  #        FY2025 10-K's CF statement carries no D&A line at all (folded into "Other, net").
+  "TICKER_DENY_TAGS": {"DepreciationAndAmortization": {"FIX"},
+                       "DepreciationDepletionAndAmortization": {"ABNB"}},
  },
  "revenue": {"COMBINED": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax",
                           "RevenueFromContractWithCustomerIncludingAssessedTax",
@@ -473,7 +488,14 @@ def resolve_field_series(facts, spec, unit_keys=("USD",), ticker=None, baseline_
     # old winner covered. Measured when this was got wrong: 13 capex values vanished on LNKS and
     # LTM. Additions must therefore only ever BACKFILL; the currently-filled years stay
     # byte-identical by construction.
-    base_tags = list(baseline_tags or combined[:1])
+    # PER-FILER DENY (2026-08-21): a tag proven mislabeled AT A SPECIFIC FILER by reading its
+    # cash-flow statement (FIX "DepreciationAndAmortization" == depreciation-only; ABNB
+    # "DepreciationDepletionAndAmortization" likewise) is removed for that filer from BOTH the
+    # primary vote and backfill, letting component sums / gated tags carry the field. Empty deny
+    # dict must leave the build byte-identical.
+    denied = spec.get("TICKER_DENY_TAGS") or {}
+    deny = {t for t, tk in denied.items() if ticker in tk}
+    base_tags = [t for t in (baseline_tags or combined[:1]) if t not in deny]
     series, raws, ptag = annual_duration_series(facts, base_tags, unit_keys)
     series = dict(series)
     raws = dict(raws)
@@ -484,6 +506,8 @@ def resolve_field_series(facts, spec, unit_keys=("USD",), ticker=None, baseline_
     gated = spec.get("TICKER_GATED_TAGS") or {}       # CH-4: tag usable only for named tickers
     alts = []
     for tag in combined:
+        if tag in deny:
+            continue                                   # per-filer denied tag -> skip entirely
         if tag in gated and ticker not in gated[tag]:
             continue                                   # gated tag, wrong ticker -> skip entirely
         s, r, _ = annual_duration_series(facts, [tag], unit_keys)
