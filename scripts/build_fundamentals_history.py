@@ -22,6 +22,15 @@ Usage:
   python scripts/build_fundamentals_history.py                 # full universe
   python scripts/build_fundamentals_history.py --limit 50      # smoke run
   python scripts/build_fundamentals_history.py --tickers NVDA,LLY
+  python scripts/build_fundamentals_history.py --refresh-one NVDA   # live SEC, patch in place
+
+--refresh-one fetches ONE company's companyfacts live from data.sec.gov (same structure as
+one member of the bulk zip, always current), runs the identical extraction, and patches only
+that ticker's rows into the four production files (tmp + os.replace; every other ticker
+byte-untouched; provenance rides along). LOCAL-ONLY: the patched files must never be
+committed — data on git comes only from the cloud's fresh-zip rebuild, which reproduces
+the same rows from the same facts and dissolves the patch. Exit 0 = rows updated (or
+already identical); non-zero = fetch/extract failure, files untouched.
 
 Data honesty rules: a metric that cannot be computed is null with its gaps
 reported — no neutral-looking defaults.
@@ -30,6 +39,7 @@ reported — no neutral-looking defaults.
 import argparse
 import json
 import math
+import os
 import statistics
 import sys
 import zipfile
@@ -679,20 +689,37 @@ def ttm_snapshot(facts):
     """
     out = {}
     prov = None
+
+    def duration_entries(tag):
+        entries = []
+        for e in facts.get(tag, {}).get("units", {}).get("USD", []):
+            start, end, val = e.get("start"), e.get("end"), e.get("val")
+            if not start or not end or val is None:
+                continue
+            try:
+                days = (date.fromisoformat(end) - date.fromisoformat(start)).days
+            except ValueError:
+                continue
+            entries.append({"form": e.get("form"), "start": start, "end": end,
+                            "days": days, "val": val, "filed": e.get("filed") or ""})
+        return entries
+
+    # Newest annual period end across EVERY TTM tag of the company — the freshness bar below.
+    # It must be company-wide, not per-tag: right after a 10-K the live tag correctly yields
+    # nothing, and a DEAD tag (old 10-Qs, older 10-Ks) would then pass a per-tag check and
+    # win with a years-old "TTM" (2026-08-21: EL's live 10-K produced through=2017-03-31;
+    # 98 production rows — MDT 2015-07-31, PAYX 2017-11-30 — carried the same defect).
+    newest_fy_end = ""
+    for field in TTM_FIELDS:
+        for tag in DURATION_TAGS[field]:
+            for e in duration_entries(tag):
+                if e["form"] in ANNUAL_FORMS and 300 <= e["days"] <= 400 and e["end"] > newest_fy_end:
+                    newest_fy_end = e["end"]
+
     for field in TTM_FIELDS:
         best = None
         for tag in DURATION_TAGS[field]:
-            entries = []
-            for e in facts.get(tag, {}).get("units", {}).get("USD", []):
-                start, end, val = e.get("start"), e.get("end"), e.get("val")
-                if not start or not end or val is None:
-                    continue
-                try:
-                    days = (date.fromisoformat(end) - date.fromisoformat(start)).days
-                except ValueError:
-                    continue
-                entries.append({"form": e.get("form"), "start": start, "end": end,
-                                "days": days, "val": val, "filed": e.get("filed") or ""})
+            entries = duration_entries(tag)
             ann = [e for e in entries if e["form"] in ANNUAL_FORMS and 300 <= e["days"] <= 400]
             qtd = [e for e in entries if e["form"] in QUARTERLY_FORMS and 60 <= e["days"] <= 300]
             if not ann or not qtd:
@@ -700,7 +727,7 @@ def ttm_snapshot(facts):
             # TTM must be FRESHER than the newest annual period: right after a 10-K (no newer
             # 10-Q yet) the formula would happily emit a TTM through last Q3 — STALER than the
             # FY the engine already has, silently presented as fresher.
-            if max(e["end"] for e in qtd) <= max(e["end"] for e in ann):
+            if max(e["end"] for e in qtd) <= newest_fy_end:
                 continue
             ann_med = statistics.median(abs(e["val"]) for e in ann)
 
@@ -1291,11 +1318,177 @@ def compute_battery(history):
     return battery
 
 
+def build_ticker_outputs(data, ticker):
+    """One companyfacts document (zip member or live API) -> every per-ticker output.
+
+    Single extraction path for the weekly build AND --refresh-one, so a live refresh is
+    byte-identical to what the next bulk rebuild produces from the same facts. Returns None
+    when no usable annual history exists (the ticker is then absent from every file).
+    """
+    facts_all = data.get("facts", {})
+    # Merge namespaces; us-gaap wins on name collisions
+    facts = dict(facts_all.get("ifrs-full", {}))
+    facts.update(facts_all.get("us-gaap", {}))
+    history, prov_bundle = extract_history(facts, ticker)
+    if not history:
+        return None
+    return {
+        "history": {str(y): row for y, row in sorted(history.items())},
+        "prov": prov_bundle or None,
+        "battery": compute_battery(history) or None,
+        "ttm": ttm_snapshot(facts) or None,
+        "qtr": quarterly_snapshot(facts) or None,
+    }
+
+
+# ── single-ticker live refresh ───────────────────────────────────────────────────────────
+SEC_COMPANYFACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json"
+
+
+def fetch_companyfacts_live(cik):
+    """One GET against data.sec.gov for one CIK (declared UA). Raises on any HTTP failure."""
+    resp = requests.get(SEC_COMPANYFACTS_URL.format(cik=cik), headers=SEC_HEADERS, timeout=60)
+    resp.raise_for_status()
+    return resp.json()
+
+
+def _dump_compact(doc):
+    return json.dumps(doc, sort_keys=True)
+
+
+def _dump_battery(doc):
+    return json.dumps(doc, indent=1, sort_keys=True)
+
+
+def _atomic_write_text(path, text):
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(text, encoding="utf-8")
+    os.replace(tmp, path)
+
+
+def merge_ticker_provenance(prov, ticker, rows, bundle):
+    """Replace one ticker's provenance in an existing encoded payload, in place.
+
+    Encodes the single ticker with encode_provenance (the production encoder, so run/override
+    semantics are identical), then remaps its local _tags/_accns indices into the file's
+    existing tables — appending unseen entries at the end so every other ticker's indices stay
+    valid. A ticker with no bundle loses its runs/overrides/period_end entries.
+    """
+    for section in ("runs", "overrides", "period_end"):
+        prov.setdefault(section, {}).pop(ticker, None)
+    if not bundle:
+        return
+    local = encode_provenance({ticker: rows}, {ticker: bundle})
+    tags, accns = prov.setdefault("_tags", []), prov.setdefault("_accns", [])
+    tag_pos = {t: i for i, t in enumerate(tags)}
+    accn_pos = {a: i for i, a in enumerate(accns)}
+
+    def remap(table, pos, value):
+        if value not in pos:
+            pos[value] = len(table)
+            table.append(value)
+        return pos[value]
+
+    t_runs = local["runs"].get(ticker)
+    if t_runs:
+        prov["runs"][ticker] = {
+            f: [[y, remap(tags, tag_pos, local["_tags"][ti]), code] for y, ti, code in seq]
+            for f, seq in t_runs.items()}
+    t_over = local["overrides"].get(ticker)
+    if t_over:
+        prov["overrides"][ticker] = {
+            y: {f: remap(accns, accn_pos, local["_accns"][ai]) for f, ai in fmap.items()}
+            for y, fmap in t_over.items()}
+    if local["period_end"].get(ticker):
+        prov["period_end"][ticker] = local["period_end"][ticker]
+
+
+def refresh_one(ticker, data=None):
+    """Live-fetch one ticker, re-extract, patch its rows into the four production files.
+
+    `data` (a companyfacts document) bypasses the network — used by the acceptance harness.
+    Exit codes: 0 rows updated or already identical; 1 fetch failure; 2 no CIK / no usable
+    history (a ticker that previously had rows is NOT deleted on an empty extraction — that is
+    treated as failure, files untouched).
+    """
+    ticker = ticker.strip().upper()
+    if data is None:
+        cik = get_cik_map().get(ticker)
+        if not cik:
+            print(f"FATAL: no CIK for {ticker}")
+            return 2
+        print(f"Fetching live companyfacts for {ticker} (CIK{cik}) ...")
+        try:
+            data = fetch_companyfacts_live(cik)
+        except Exception as e:  # network, HTTP, JSON
+            print(f"FATAL: fetch failed: {e}")
+            return 1
+    out = build_ticker_outputs(data, ticker)
+    if out is None:
+        print(f"FATAL: no usable annual history for {ticker} in live facts — files untouched")
+        return 2
+
+    files = {
+        "history": (HISTORY_JSON, _dump_compact),
+        "battery": (BATTERY_JSON, _dump_battery),
+        "ttm": (TTM_JSON, _dump_compact),
+        "qtr": (QTR_JSON, _dump_compact),
+    }
+    docs, before = {}, {}
+    for key, (path, dump) in files.items():
+        if not path.exists():
+            print(f"FATAL: {path} not found — run a full build first")
+            return 2
+        before[key] = path.read_text(encoding="utf-8")
+        docs[key] = json.loads(before[key])
+        # A re-dump of the UNTOUCHED doc must reproduce the file on disk; otherwise the file
+        # was not written by this script's dumper and a patch would rewrite every byte of
+        # every ticker. Refuse rather than silently reformat production.
+        if dump(docs[key]) != before[key]:
+            print(f"FATAL: {path.name} does not round-trip through this script's serializer "
+                  f"— refusing to patch (rebuild it first)")
+            return 2
+
+    for key, (path, dump) in files.items():
+        tickers = docs[key].setdefault("tickers", {})
+        if out[key]:
+            tickers[ticker] = out[key]
+        else:
+            tickers.pop(ticker, None)
+    hist = docs["history"]
+    if "provenance" in hist:
+        merge_ticker_provenance(hist["provenance"], ticker, out["history"], out["prov"])
+    elif out["prov"]:
+        hist["provenance"] = encode_provenance({ticker: out["history"]}, {ticker: out["prov"]})
+
+    changed = []
+    for key, (path, dump) in files.items():
+        text = dump(docs[key])
+        if text != before[key]:
+            changed.append((path, text))
+    if not changed:
+        print(f"{ticker}: every file already identical to the live facts — nothing written")
+        return 0
+    for path, text in changed:
+        _atomic_write_text(path, text)
+        print(f"Patched {ticker} into {path.name} ({len(text.encode('utf-8')):,} bytes)")
+    print("LOCAL-ONLY refresh: do not commit these files (git data comes from the cloud rebuild).")
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="Build 10y fundamentals + value-trap battery from companyfacts.zip")
     parser.add_argument("--limit", type=int, default=None, help="Process at most N tickers (smoke runs)")
     parser.add_argument("--tickers", type=str, default=None, help="Comma-separated ticker subset")
+    parser.add_argument("--refresh-one", type=str, default=None, metavar="TICKER",
+                        help="Live-fetch ONE ticker from data.sec.gov and patch its rows in place "
+                             "(local-only; never commit the result)")
     args = parser.parse_args()
+
+    if args.refresh_one:
+        if args.limit or args.tickers:
+            parser.error("--refresh-one cannot be combined with --limit/--tickers")
+        sys.exit(refresh_one(args.refresh_one))
 
     if not ZIP_PATH.exists():
         print(f"FATAL: {ZIP_PATH} not found.")
@@ -1334,26 +1527,19 @@ def main():
             except Exception:
                 no_entry += 1
                 continue
-            facts_all = data.get("facts", {})
-            # Merge namespaces; us-gaap wins on name collisions
-            facts = dict(facts_all.get("ifrs-full", {}))
-            facts.update(facts_all.get("us-gaap", {}))
-            history, prov_bundle = extract_history(facts, ticker)
-            if not history:
+            out = build_ticker_outputs(data, ticker)
+            if out is None:
                 no_history += 1
                 continue
-            history_out[ticker] = {str(y): row for y, row in sorted(history.items())}
-            if prov_bundle:
-                prov_by_ticker[ticker] = prov_bundle
-            battery = compute_battery(history)
-            if battery:
-                battery_out[ticker] = battery
-            ttm = ttm_snapshot(facts)
-            if ttm:
-                ttm_out[ticker] = ttm
-            qtr = quarterly_snapshot(facts)
-            if qtr:
-                qtr_out[ticker] = qtr
+            history_out[ticker] = out["history"]
+            if out["prov"]:
+                prov_by_ticker[ticker] = out["prov"]
+            if out["battery"]:
+                battery_out[ticker] = out["battery"]
+            if out["ttm"]:
+                ttm_out[ticker] = out["ttm"]
+            if out["qtr"]:
+                qtr_out[ticker] = out["qtr"]
             processed += 1
             if processed % 500 == 0:
                 print(f"  ... {processed} tickers processed")
