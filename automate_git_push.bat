@@ -3,10 +3,6 @@ echo ===================================================
 echo     GIT DATA PUSH AUTOMATION
 echo ===================================================
 echo.
-echo Running international data compiler...
-py -u scripts/compile_intl_csv.py
-
-echo.
 echo Staging all updated data files (CSV and JSON)...
 
 git add public/data/*.csv

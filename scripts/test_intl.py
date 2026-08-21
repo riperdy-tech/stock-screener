@@ -1,26 +1,6 @@
-import FinanceDataReader as fdr
 import nsepython as nse
 import yfinance as yf
 import pandas as pd
-
-def test_korea():
-    print("Testing Korea (KRX)...")
-    try:
-        df_krx = fdr.StockListing('KRX')
-        print(f"Found {len(df_krx)} KRX stocks.")
-        print("Sample KRX stocks:")
-        print(df_krx[['Code', 'Name', 'Market']].head())
-        
-        # Test yfinance for a Korea stock
-        ticker = df_krx.iloc[0]['Code']
-        market = df_krx.iloc[0]['Market']
-        suffix = ".KS" if "KOSPI" in market else ".KQ"
-        yf_ticker = ticker + suffix
-        print(f"Fetching data for {yf_ticker}...")
-        stock = yf.Ticker(yf_ticker)
-        print(f"Price: {stock.info.get('currentPrice')}")
-    except Exception as e:
-        print(f"Korea test failed: {e}")
 
 def test_india():
     print("\nTesting India (NSE)...")
@@ -49,5 +29,4 @@ def test_india():
         print(f"India test failed: {e}")
 
 if __name__ == "__main__":
-    test_korea()
     test_india()

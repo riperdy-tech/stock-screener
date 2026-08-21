@@ -37,13 +37,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install yfinance pandas numpy requests python-dotenv openai finance-datareader lxml html5lib beautifulsoup4
 
-      - name: Weekly SEC + Intl Refresh (quarterly-changing data; moved from daily)
+      - name: Weekly SEC Refresh (quarterly-changing data; moved from daily)
         run: |
           # 1.4GB companyfacts download feeds quarterly-changing fields —
           # weekly cadence loses nothing vs daily.
+          # (Intl KR/TW financials coverage removed 2026-08-21 — no longer used.)
           python scripts/fetch_sec_data.py
           python scripts/build_fundamentals_history.py || true
-          python scripts/fetch_data_intl.py || true
 
       - name: Fetch Analyst Coverage (Tier 1 yfinance + Tier 2 DeepSeek)
         env:

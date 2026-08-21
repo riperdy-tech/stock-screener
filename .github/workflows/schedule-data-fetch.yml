@@ -65,8 +65,9 @@ jobs:
         run: |
           # Daily: only data that actually changes daily. SEC fundamentals
           # (fetch_sec_data + build_fundamentals_history: 1.4GB companyfacts
-          # download for quarterly-changing fields) and the intl scan moved
-          # to the weekly workflow — saves ~1.4GB + 10-20 min per day.
+          # download for quarterly-changing fields) moved to the weekly
+          # workflow — saves ~1.4GB + 10-20 min per day. (Intl KR/TW scan
+          # removed entirely 2026-08-21.)
           python scripts/fetch_data.py
           # Live-price overlay (plan B): defeatbeta serves yesterday's close at
           # best, so overlay live yfinance prices for the whole universe. This
