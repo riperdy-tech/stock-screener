@@ -331,6 +331,36 @@ async function fetchJson<T>(path: string): Promise<T | null> {
     }
 }
 
+// ── Depth-tier band-direction verdicts (replacement pipeline, RS2 Local) ────
+// Written by orchestrate_depth.py at sweep end. band_direction_v1: direction is where the
+// price sits vs the IV band across 3 seeded model runs; spread maps to a size hint.
+export interface DepthVerdict {
+    ticker: string;
+    price: number | null;
+    date: string | null;
+    model: string | null;
+    n_basis: number;
+    iv_band_low: number | null;
+    iv_band_high: number | null;
+    median_iv: number | null;
+    spread_pct: number | null;
+    direction: "overvalued" | "undervalued" | "hold" | "NOT_USABLE";
+    size_hint: "full" | "half" | "quarter" | null;
+    mos_vs_median_pct?: number | null;
+    reason?: string | null;
+}
+
+export interface DepthOverlayPayload {
+    generated_at: string;
+    scheme: string;
+    count: number;
+    tickers: Record<string, DepthVerdict>;
+}
+
+export async function fetchDepthOverlay(): Promise<DepthOverlayPayload | null> {
+    return fetchJson<DepthOverlayPayload>('/data/depth_overlay.json');
+}
+
 export async function fetchFactorScores(): Promise<FactorScoresPayload | null> {
     return fetchJson<FactorScoresPayload>('/data/factor_scores.json');
 }

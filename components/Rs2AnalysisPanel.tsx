@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import clsx from "clsx";
 import { ExternalLink, ChevronDown } from "lucide-react";
-import { fetchRs2Index, fetchRs2Report, type Rs2RunMeta, type Rs2Bundle } from "@/lib/data-service";
+import { fetchRs2Index, fetchRs2Report, fetchDepthOverlay, type Rs2RunMeta, type Rs2Bundle, type DepthVerdict } from "@/lib/data-service";
 
 const humanMethod = (m?: string | null) => {
     if (!m) return "—";
@@ -76,6 +76,42 @@ function Note({ children }: { children: React.ReactNode }) {
     );
 }
 
+function DepthVerdictBanner({ v }: { v: DepthVerdict }) {
+    const tone =
+        v.direction === "undervalued" ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-500" :
+        v.direction === "overvalued" ? "border-red-500/50 bg-red-500/10 text-red-500" :
+        v.direction === "hold" ? "border-amber-500/50 bg-amber-500/10 text-amber-500" :
+        "border-border bg-muted/40 text-muted-foreground";
+    const label =
+        v.direction === "undervalued" ? "UNDERVALUED — every run values it above the price" :
+        v.direction === "overvalued" ? "OVERVALUED — every run values it below the price" :
+        v.direction === "hold" ? "HOLD — price sits inside the model's uncertainty band" :
+        "NOT USABLE — no plausible run";
+    return (
+        <div className={`rounded-lg border p-3 ${tone}`}>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="text-xs font-black uppercase tracking-wide">Depth verdict</span>
+                <span className="text-sm font-black">{label}</span>
+            </div>
+            <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-foreground/80">
+                {v.iv_band_low != null && v.iv_band_high != null && (
+                    <span>IV band <b>${v.iv_band_low}–${v.iv_band_high}</b> vs price <b>${v.price}</b></span>
+                )}
+                {v.median_iv != null && <span>median <b>${v.median_iv}</b></span>}
+                {v.spread_pct != null && <span>run spread <b>{v.spread_pct}%</b></span>}
+                {v.size_hint && <span>size hint <b>{v.size_hint}</b></span>}
+                <span>{v.n_basis} plausible run{v.n_basis === 1 ? "" : "s"}</span>
+                {v.date && <span>{v.date}</span>}
+            </div>
+            <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
+                Band-direction scheme: the model analyzes the full fact pack in {v.n_basis >= 3 ? "three" : "multiple"} independent
+                seeded runs; the verdict is where today's price sits relative to the whole band of its
+                valuations. Spread sets position size, not pass/fail.
+            </p>
+        </div>
+    );
+}
+
 export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; displayTicker: string }) {
     const ticker = symbol.toUpperCase();
     const [history, setHistory] = useState<Rs2RunMeta[] | null>(null); // null = loading, [] = none
@@ -84,6 +120,15 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
     const [bundleLoading, setBundleLoading] = useState(false);
     const [subTab, setSubTab] = useState<"full" | "research" | "raw">("full");
     const [openStages, setOpenStages] = useState<Record<string, boolean>>({ s1: true });
+    const [depthV, setDepthV] = useState<DepthVerdict | null>(null);
+
+    useEffect(() => {
+        let alive = true;
+        fetchDepthOverlay().then((d) => {
+            if (alive) setDepthV(d?.tickers?.[ticker] ?? null);
+        });
+        return () => { alive = false; };
+    }, [ticker]);
 
     useEffect(() => {
         let alive = true;
@@ -111,11 +156,14 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
     if (history === null) return <div className="p-6 text-center text-sm text-muted-foreground">Loading RS2 analysis…</div>;
     if (history.length === 0)
         return (
+            <div className="space-y-4">
+            {depthV && <DepthVerdictBanner v={depthV} />}
             <div className="rounded-lg border border-dashed border-border bg-card/50 p-6 text-center">
                 <div className="text-sm font-black text-foreground">No RS2 analysis yet for {displayTicker}</div>
                 <p className="mx-auto mt-1.5 max-w-md text-xs leading-relaxed text-muted-foreground">
                     The local RS2 engine analyzes Research-Now and Watchlist names on a weekly / bi-weekly cadence. It hasn't produced a report for this ticker yet.
                 </p>
+            </div>
             </div>
         );
 
@@ -133,6 +181,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
 
     return (
         <div className="space-y-4">
+            {depthV && <DepthVerdictBanner v={depthV} />}
             {/* header: ticker + TradingView overview + method */}
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                 <span className="text-lg font-black tracking-tight">{displayTicker}</span>
