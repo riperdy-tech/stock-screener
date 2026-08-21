@@ -437,9 +437,18 @@ def compute_analyst_uplift(analyst_entry, has_themes, uplift_config):
     narrative_conf = analyst_entry.get("narrative_confidence") or 0.0
 
     s_norm = (structured_score / 100.0) if isinstance(structured_score, (int, float)) else 0.0
-    n_norm = (narrative_score / 100.0 * narrative_conf) if isinstance(narrative_score, (int, float)) else 0.0
 
-    uplift_raw = (w_structured * s_norm + w_narrative * n_norm) * max_uplift
+    # NULL SEMANTICS (2026-08-21): a null narrative_score means "no narrative term",
+    # not a zero opinion — the structured leg absorbs the full weight instead of the
+    # old behaviour (n_norm=0.0) silently penalizing no-coverage names by 30% of
+    # their uplift. narrative_score is now computed deterministically upstream
+    # (fetch_analyst_coverage.analyst_uplift_score, confidence structurally 1.0);
+    # entries from the old DeepSeek path keep their archived confidence weighting.
+    if isinstance(narrative_score, (int, float)):
+        n_norm = narrative_score / 100.0 * narrative_conf
+        uplift_raw = (w_structured * s_norm + w_narrative * n_norm) * max_uplift
+    else:
+        uplift_raw = s_norm * max_uplift
     uplift = max(0, min(max_uplift, round(uplift_raw)))
     return uplift
 

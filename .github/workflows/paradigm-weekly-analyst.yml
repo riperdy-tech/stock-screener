@@ -1,8 +1,9 @@
 name: Paradigm Weekly Analyst Coverage
 
-# Runs Sunday 10:00 UTC. Fetches yfinance analyst data + DeepSeek narrative
-# summarization for all tagged stocks, then re-scores paradigm so the analyst
-# uplift flows into pdm_economics_gate. Costs ~$0.07/run via DeepSeek.
+# Runs Sunday 10:00 UTC. Fetches yfinance analyst data (narrative score is a
+# deterministic formula since 2026-08-21 — no LLM) for all tagged stocks, then
+# re-scores paradigm so the analyst uplift flows into pdm_economics_gate.
+# DeepSeek is still used by the overlay + theme-classifier steps (~$0.07/run).
 on:
   schedule:
     - cron: '0 10 * * 0'
@@ -45,11 +46,10 @@ jobs:
           python scripts/fetch_sec_data.py
           python scripts/build_fundamentals_history.py || true
 
-      - name: Fetch Analyst Coverage (Tier 1 yfinance + Tier 2 DeepSeek)
-        env:
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-          DEEPSEEK_MODEL: ${{ secrets.DEEPSEEK_MODEL }}
+      - name: Fetch Analyst Coverage (Tier 1 yfinance + deterministic Tier 2)
         run: |
+          # Tier 2 narrative_score is a deterministic formula since 2026-08-21
+          # (was DeepSeek) — no API key, no cost, no nondeterminism at the gate.
           python scripts/fetch_analyst_coverage.py --apply --max-calls 500
 
       - name: Stage-4 Overlay (informed demand + GPR exposure)

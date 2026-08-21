@@ -2,7 +2,15 @@
 fetch_analyst_coverage.py -- WS1-T8c: Two-tier analyst coverage enrichment.
 
 Tier 1 (yfinance): Structured price targets and recommendation counts.
-Tier 2 (DeepSeek): Constrained narrative summarization (no attribution).
+Tier 2 (deterministic): narrative_score computed from the Tier-1 numbers by
+    analyst_uplift_score() — no LLM. The DeepSeek call this replaced (2026-08-21)
+    received ONLY the Tier-1 numbers and was forbidden from adding anything, so it
+    was pure compression of known inputs: nondeterministic at a gate (unseeded —
+    same counts could score differently next Sunday and churn gate membership), an
+    API failure surface (keys/quota/JSON/attribution-leak policing), and gated on
+    the model's own uncalibrated self-confidence. A formula over the same inputs
+    is deterministic, free, and offline. Archived-score calibration: see
+    analyst_uplift_score's docstring.
 
 Output: public/data/analyst_coverage.json keyed by ticker.
 Consumed read-only by score_paradigm.py's analyst uplift logic.
@@ -14,20 +22,14 @@ Usage:
     # Single-ticker dry-run
     python scripts/fetch_analyst_coverage.py --ticker NVDA
 
-    # Apply mode, Tier 1 only (no DeepSeek)
-    python scripts/fetch_analyst_coverage.py --apply --skip-narrative --max-calls 5
-
-    # Apply mode, both tiers
+    # Apply mode
     python scripts/fetch_analyst_coverage.py --apply --max-calls 5
 """
 
 import argparse
 import hashlib
 import json
-import os
-import re
 import sys
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -38,9 +40,6 @@ try:
 except Exception:
     pass
 
-from dotenv import load_dotenv
-from openai import OpenAI
-
 
 # ── Paths ────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).resolve().parents[1]
@@ -50,24 +49,6 @@ ANALYST_COVERAGE_JSON = DATA_DIR / "analyst_coverage.json"
 
 # ── Constants ────────────────────────────────────────────────────────────
 DEFAULT_MAX_CALLS = 100
-RATE_LIMIT_SECONDS = 0.5
-CONFIDENCE_THRESHOLD = 0.6
-ESTIMATED_COST_PER_CALL = 0.0003  # rough estimate for deepseek-v4-flash (replace if pro)
-
-# Suspicious attribution phrases to strip from narrative output
-ATTRIBUTION_PATTERNS = [
-    r"according to",
-    r"report from",
-    r"analyst at",
-    r"\b(Goldman Sachs|Morgan Stanley|JP Morgan|JPMorgan|Bank of America|BofA|Merrill Lynch|"
-    r"Citigroup|Citi|UBS|Credit Suisse|Barclays|Deutsche Bank|Wells Fargo|"
-    r"RBC Capital|Jefferies|Piper Sandler|Needham|Raymond James|Oppenheimer|"
-    r"Stifel|Baird|Cowen|Evercore|BMO Capital|Canaccord|William Blair|"
-    r"Truist|Wedbush|Loop Capital|Rosenblatt|Susquehanna|Bernstein|"
-    r"HSBC|Nomura|Mizuho|Daiwa|Macquarie|Societe Generale)\b",
-]
-
-FALLBACK_RATIONALE = "Analyst data summary (narrative attribution removed)"
 
 
 def load_json(path):
@@ -218,138 +199,67 @@ def compute_structured_score(target_mean_delta_pct, buy_consensus_ratio, analyst
     return int(structured_score)
 
 
-def build_narrative_prompt(symbol, name, price, pdm_themes, target_mean, target_mean_delta_pct,
-                           analyst_count, buy_consensus_ratio, rec_counts):
-    """Build the constrained narrative prompt for DeepSeek.
+def analyst_uplift_score(strong_buy, buy, hold, sell, strong_sell, upside_pct,
+                         k=3, w_rec=0.8, w_up=0.2, upside_cap=50.0):
+    """Deterministic replacement for the DeepSeek Tier-2 narrative_score (2026-08-21).
 
-    Strict no-attribution wording. Returns a single user message string.
+    Returns a float in [0, 100], or None when there is no coverage (n == 0) —
+    absence of coverage is information, not a neutral 50 and not a 0.
+
+    Constants FROZEN after calibration against the last archived DeepSeek scores
+    (137 entries, 2026-08-16 run): Spearman rank correlation 0.6622 at
+    (k=3, w_rec=0.8, w_up=0.2, upside_cap=50) vs 0.5764 at the proposal defaults.
+    The LLM scores were never ground truth — the largest divergences are names
+    where DeepSeek scored 85-95 on ONE analyst with a +200% target (HIT, FURY,
+    IPM, QNC), exactly the overconfidence the n/(n+k) shrinkage suppresses and
+    the upside cap bounds. Do not re-tune toward those.
     """
-    themes_str = ", ".join(pdm_themes) if pdm_themes else "(none)"
-    rec_str = (
-        f"strongBuy={rec_counts.get('strongBuy', 0)}, "
-        f"buy={rec_counts.get('buy', 0)}, "
-        f"hold={rec_counts.get('hold', 0)}, "
-        f"sell={rec_counts.get('sell', 0)}, "
-        f"strongSell={rec_counts.get('strongSell', 0)}"
-    )
-
-    prompt = f"""You are summarizing publicly known analyst sentiment for a US-listed equity.
-
-You will receive STRUCTURED analyst data already aggregated from public sources. Your job
-is to produce a one-sentence narrative interpretation and a 0-100 score, using ONLY the
-provided numbers as evidence. Do not invent firm names, specific analyst names, or
-specific quotes. Do not refer to events, reports, or sources by name. Do not assert
-information you cannot derive from the provided structured data.
-
-Stock:
-  Ticker: {symbol}
-  Name: {name}
-  Current price: ${price}
-  Theme membership: {themes_str}
-
-Structured analyst data:
-  Price target mean: ${target_mean}
-  Price target upside vs current: {target_mean_delta_pct}%
-  Number of analysts: {analyst_count}
-  Buy/StrongBuy ratio: {buy_consensus_ratio}
-  Recommendation counts: {rec_str}
-
-Return ONLY a JSON object with this exact shape (no markdown, no commentary):
-{{
-  "narrative_score": <integer 0-100, or null if you cannot derive a confident view>,
-  "rationale_one_sentence": "<one sentence, no firm names, no analyst names, no specific event references>",
-  "confidence": <float 0.0 to 1.0>
-}}
-
-If your confidence is below 0.6, return narrative_score as null."""
-    return prompt
+    n = strong_buy + buy + hold + sell + strong_sell
+    if n == 0:
+        return None
+    # recommendation balance in [-1, 1]
+    rec = (2 * strong_buy + buy - sell - 2 * strong_sell) / (2.0 * n)
+    # target upside in [-1, 1], capped so one outlier target cannot dominate
+    up = 0.0 if upside_pct is None else max(-1.0, min(1.0, upside_pct / upside_cap))
+    w_up_eff = 0.0 if upside_pct is None else w_up
+    w_rec_eff = 1.0 - w_up_eff
+    raw = w_rec_eff * rec + w_up_eff * up
+    # shrink toward neutral when coverage is thin: 2 analysts must not score like 30
+    shrunk = raw * (n / (n + k))
+    return round(50.0 + 50.0 * shrunk, 1)
 
 
-def parse_narrative_response(response_text):
-    """Parse the JSON response from DeepSeek for narrative data.
-
-    Returns (narrative_score, rationale, confidence) or raises on failure.
-    """
-    text = response_text.strip()
-    # Remove markdown code fences if present
-    if text.startswith("```"):
-        lines = text.splitlines()
-        if lines[0].startswith("```"):
-            lines = lines[1:]
-        if lines and lines[-1].strip() == "```":
-            lines = lines[:-1]
-        text = "\n".join(lines).strip()
-
-    data = json.loads(text)
-    narrative_score = data.get("narrative_score")
-    if narrative_score is not None:
-        narrative_score = int(narrative_score)
-    rationale = str(data.get("rationale_one_sentence", ""))
-    confidence = float(data.get("confidence", 0.0))
-    return narrative_score, rationale, confidence
-
-
-def strip_attribution(rationale):
-    """Strip suspicious attribution phrases from narrative output.
-
-    If any attribution pattern is found, return the fallback string.
-    """
-    if not rationale:
-        return FALLBACK_RATIONALE
-
-    lower = rationale.lower()
-    for pattern in ATTRIBUTION_PATTERNS:
-        if re.search(pattern, lower):
-            return FALLBACK_RATIONALE
-
-    # Also check for any uppercase-leading multi-word phrase that looks like a firm name
-    # e.g., "Goldman Sachs", "Morgan Stanley" - these are already in ATTRIBUTION_PATTERNS
-    # but catch any unknown firm-like patterns: two+ capitalized words in a row
-    firm_like = re.findall(r'\b([A-Z][a-z]+ [A-Z][a-z]+)\b', rationale)
-    known_firms = {
-        "Goldman Sachs", "Morgan Stanley", "Bank of America", "Merrill Lynch",
-        "Credit Suisse", "Deutsche Bank", "Wells Fargo", "RBC Capital",
-        "Piper Sandler", "Raymond James", "William Blair", "Loop Capital",
-        "Rosenblatt Securities", "Societe Generale", "BMO Capital",
-        "Canaccord Genuity", "Jefferies Group", "Barclays Capital",
-        "Citigroup Global", "UBS Group", "HSBC Holdings", "Nomura Holdings",
-        "Mizuho Financial", "Daiwa Securities", "Macquarie Group",
-        "Stifel Financial", "Baird Financial", "Cowen Group", "Evercore ISI",
-        "Oppenheimer Holdings", "Truist Financial", "Wedbush Securities",
-        "Susquehanna International", "Bernstein Research",
-    }
-    for phrase in firm_like:
-        if phrase in known_firms:
-            return FALLBACK_RATIONALE
-
-    return rationale
+def narrative_rationale_template(rec_counts, analyst_count, target_mean_delta_pct):
+    """Human-readable one-sentence rationale from the same numbers. No LLM."""
+    if not analyst_count:
+        return None
+    positive = rec_counts.get("strongBuy", 0) + rec_counts.get("buy", 0)
+    parts = [f"{positive} of {analyst_count} analysts rate buy or stronger"]
+    if target_mean_delta_pct is not None:
+        parts.append(f"mean target implies {target_mean_delta_pct:+.0f}% vs current price")
+    return "; ".join(parts) + "."
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Fetch analyst coverage data (yfinance + DeepSeek narrative)."
+        description="Fetch analyst coverage data (yfinance + deterministic narrative score)."
     )
     parser.add_argument(
         "--apply",
         action="store_true",
-        help="Actually call yfinance/DeepSeek and write output. Default is dry-run.",
+        help="Actually call yfinance and write output. Default is dry-run.",
     )
     parser.add_argument(
         "--max-calls",
         type=int,
         default=DEFAULT_MAX_CALLS,
-        help=f"Maximum number of API calls (yfinance + DeepSeek combined; default: {DEFAULT_MAX_CALLS}).",
+        help=f"Maximum number of yfinance calls (default: {DEFAULT_MAX_CALLS}).",
     )
     parser.add_argument(
         "--ticker",
         type=str,
         default=None,
         help="If set, only process this specific ticker (dry-run or apply).",
-    )
-    parser.add_argument(
-        "--skip-narrative",
-        action="store_true",
-        help="Skip Tier 2 (DeepSeek narrative). Tier 1 (yfinance) only.",
     )
     args = parser.parse_args()
 
@@ -359,19 +269,6 @@ def main():
     except ImportError:
         print("ERROR: yfinance is not installed. Install with: pip install yfinance")
         sys.exit(1)
-
-    # ── Auth check (fail fast if DeepSeek needed) ────────────────────────
-    if not args.skip_narrative:
-        load_dotenv()
-        api_key = os.environ.get("DEEPSEEK_API_KEY")
-        if not api_key:
-            print("ERROR: DEEPSEEK_API_KEY not found in environment or .env file.")
-            print("Set DEEPSEEK_API_KEY in .env at the workspace root, or use --skip-narrative.")
-            sys.exit(1)
-        model = os.getenv("DEEPSEEK_MODEL") or "deepseek-v4-flash"  # `or`: empty secret -> default
-    else:
-        api_key = None
-        model = None
 
     # ── Load stocks ──────────────────────────────────────────────────────
     stocks = load_json(STOCKS_JSON)
@@ -412,19 +309,9 @@ def main():
     tier1_attempted = 0
     tier1_succeeded = 0
     tier1_failed = 0
-    tier2_attempted = 0
-    tier2_succeeded = 0
-    tier2_rejected = 0
-    tier2_errors = 0
-    total_calls = 0  # yfinance + DeepSeek combined
-
-    # ── Initialize clients ───────────────────────────────────────────────
-    deepseek_client = None
-    if args.apply and not args.skip_narrative:
-        deepseek_client = OpenAI(
-            api_key=api_key,
-            base_url="https://api.deepseek.com",
-        )
+    tier2_scored = 0
+    tier2_no_coverage = 0
+    total_calls = 0  # yfinance only (Tier 2 is a local formula, zero API cost)
 
     # ── Process candidates ───────────────────────────────────────────────
     for idx, stock in enumerate(candidates):
@@ -539,68 +426,28 @@ def main():
             existing_data[ticker] = entry
             continue
 
-        # ── Tier 2: DeepSeek narrative (only if structured_score is non-null) ──
-        if not args.skip_narrative and structured_score is not None and deepseek_client is not None:
-            if total_calls >= args.max_calls:
-                print(f"Reached --max-calls limit ({args.max_calls}). Skipping Tier 2 for {ticker}.")
-            else:
-                tier2_attempted += 1
-                total_calls += 1
-
-                prompt = build_narrative_prompt(
-                    symbol=ticker,
-                    name=name,
-                    price=current_price,
-                    pdm_themes=pdm_themes,
-                    target_mean=target_mean,
-                    target_mean_delta_pct=target_mean_delta_pct,
-                    analyst_count=entry["analyst_count"],
-                    buy_consensus_ratio=buy_consensus_ratio,
-                    rec_counts=rec_counts,
-                )
-
-                try:
-                    response = deepseek_client.chat.completions.create(
-                        model=model,
-                        messages=[{"role": "user", "content": prompt}],
-                        temperature=0.1,
-                        max_tokens=300,
-                    )
-
-                    response_text = response.choices[0].message.content or ""
-                    narrative_score, rationale, confidence = parse_narrative_response(response_text)
-
-                    # Apply confidence threshold
-                    if confidence < CONFIDENCE_THRESHOLD:
-                        narrative_score = None
-                        tier2_rejected += 1
-                    else:
-                        tier2_succeeded += 1
-
-                    # Strip attribution phrases
-                    rationale = strip_attribution(rationale)
-
-                    entry["narrative_score"] = narrative_score
-                    entry["narrative_rationale"] = rationale
-                    entry["narrative_confidence"] = round(confidence, 4)
-                    entry["tier2_source"] = model
-
-                    print(
-                        f"  [T2][{idx + 1}/{len(candidates)}] {ticker}: "
-                        f"narrative_score={narrative_score}, "
-                        f"confidence={confidence:.2f}"
-                    )
-
-                except Exception as e:
-                    tier2_errors += 1
-                    print(f"  [T2][{idx + 1}/{len(candidates)}] {ticker}: ERROR - {e}")
-                    entry["narrative_score"] = None
-                    entry["narrative_rationale"] = None
-                    entry["narrative_confidence"] = None
-                    entry["tier2_source"] = None
-
-                # Rate limit
-                time.sleep(RATE_LIMIT_SECONDS)
+        # ── Tier 2: deterministic narrative_score from the same Tier-1 numbers ──
+        # No LLM, no network, no confidence gate: same inputs always give the same
+        # score (gate membership cannot churn without an underlying data change).
+        # n == 0 (no analysts) -> null: no coverage is information, not neutral.
+        narrative_score = analyst_uplift_score(
+            rec_counts.get("strongBuy", 0), rec_counts.get("buy", 0),
+            rec_counts.get("hold", 0), rec_counts.get("sell", 0),
+            rec_counts.get("strongSell", 0), target_mean_delta_pct,
+        )
+        if narrative_score is None:
+            tier2_no_coverage += 1
+        else:
+            tier2_scored += 1
+        entry["narrative_score"] = narrative_score
+        entry["narrative_rationale"] = narrative_rationale_template(
+            rec_counts, entry["analyst_count"], target_mean_delta_pct)
+        # deterministic computation: confidence is structurally 1.0 (consumers
+        # multiply the narrative leg by this; the old value was LLM self-report)
+        entry["narrative_confidence"] = 1.0 if narrative_score is not None else None
+        entry["tier2_source"] = "deterministic-v1" if narrative_score is not None else None
+        if narrative_score is not None:
+            print(f"  [T2][{idx + 1}/{len(candidates)}] {ticker}: narrative_score={narrative_score}")
 
         # Save entry
         existing_data[ticker] = entry
@@ -611,8 +458,6 @@ def main():
         print(f"\nWritten {len(existing_data)} entries to {ANALYST_COVERAGE_JSON}")
 
     # ── Summary ──────────────────────────────────────────────────────────
-    estimated_cost = tier2_attempted * ESTIMATED_COST_PER_CALL
-
     print()
     print("=" * 60)
     print("  FETCH ANALYST COVERAGE - Summary")
@@ -623,11 +468,9 @@ def main():
     print(f"  Tier 1 attempted:        {tier1_attempted}")
     print(f"  Tier 1 succeeded:        {tier1_succeeded}")
     print(f"  Tier 1 failed:           {tier1_failed}")
-    print(f"  Tier 2 attempted:        {tier2_attempted}")
-    print(f"  Tier 2 succeeded:        {tier2_succeeded}")
-    print(f"  Tier 2 rejected (conf):  {tier2_rejected}")
-    print(f"  Tier 2 errors:           {tier2_errors}")
-    print(f"  Estimated cost:          ${estimated_cost:.4f}")
+    print(f"  Tier 2 scored (formula): {tier2_scored}")
+    print(f"  Tier 2 no coverage:      {tier2_no_coverage}")
+    print(f"  API cost:                $0 (Tier 2 is deterministic, no LLM)")
     if not args.apply:
         print()
         print("  NOTE: This was a dry-run. No network calls were made.")

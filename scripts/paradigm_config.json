@@ -86,7 +86,7 @@
     {
       "id": "physical_ai",
       "label": "Physical AI / Robotics",
-      "description": "Companies at the intersection of AI and the physical world — robotics, autonomous systems, edge AI, and industrial automation.",
+      "description": "Companies at the intersection of AI and the physical world \u2014 robotics, autonomous systems, edge AI, and industrial automation.",
       "status": "watch",
       "member_rules": {
         "gics_industries": [
@@ -259,7 +259,7 @@
     {
       "id": "energy_transition",
       "label": "Energy Transition & Clean Tech",
-      "description": "Companies enabling the shift to low-carbon energy — renewables, grid modernization, battery storage, and electrification.",
+      "description": "Companies enabling the shift to low-carbon energy \u2014 renewables, grid modernization, battery storage, and electrification.",
       "status": "watch",
       "member_rules": {
         "gics_industries": [
@@ -486,7 +486,7 @@
     {
       "id": "nuclear_renaissance",
       "label": "Nuclear Renaissance",
-      "description": "Companies enabling the resurgence of nuclear power — large reactors, small modular reactors (SMRs), advanced reactors, uranium mining + enrichment, nuclear fuel cycle, and nuclear utilities. Driven by AI-data-center power demand and decarbonization mandates.",
+      "description": "Companies enabling the resurgence of nuclear power \u2014 large reactors, small modular reactors (SMRs), advanced reactors, uranium mining + enrichment, nuclear fuel cycle, and nuclear utilities. Driven by AI-data-center power demand and decarbonization mandates.",
       "status": "watch",
       "member_rules": {
         "gics_industries": [
@@ -541,11 +541,25 @@
   ],
   "weights": {},
   "bands": {
-    "high": {"min_signal": 30, "_note": "high-conviction: all three pillars meaningful"},
-    "mid": {"min_signal": 15, "_note": "moderate-conviction"},
-    "watch": {"min_signal": 5, "_note": "weak signal; worth tracking but not buying"},
-    "skip": {"min_signal": 0, "_note": "below-threshold or three-factor product near zero"},
-    "no_data": {"_note": "signal is None due to missing reverse, price history, or gate inputs"}
+    "high": {
+      "min_signal": 30,
+      "_note": "high-conviction: all three pillars meaningful"
+    },
+    "mid": {
+      "min_signal": 15,
+      "_note": "moderate-conviction"
+    },
+    "watch": {
+      "min_signal": 5,
+      "_note": "weak signal; worth tracking but not buying"
+    },
+    "skip": {
+      "min_signal": 0,
+      "_note": "below-threshold or three-factor product near zero"
+    },
+    "no_data": {
+      "_note": "signal is None due to missing reverse, price history, or gate inputs"
+    }
   },
   "economics_gate": {
     "quality_floor": 25,
@@ -560,7 +574,7 @@
       "high_52w": 0.3,
       "ret_6m": 0.2
     },
-    "_v2_note": "Version 2 static composite (June 2026): 12-1 skip-month momentum (Jegadeesh-Titman; latest month excluded to dodge short-term reversal), 52-week-high proximity (monthly-close proxy), and 6-month return — each cross-sectionally percentile-ranked. Set version back to 1 to restore the legacy 1/3/6/12 blend. Acceleration + regime flags unchanged in both versions.",
+    "_v2_note": "Version 2 static composite (June 2026): 12-1 skip-month momentum (Jegadeesh-Titman; latest month excluded to dodge short-term reversal), 52-week-high proximity (monthly-close proxy), and 6-month return \u2014 each cross-sectionally percentile-ranked. Set version back to 1 to restore the legacy 1/3/6/12 blend. Acceleration + regime flags unchanged in both versions.",
     "hot_exit_median_mom": 60,
     "hot_exit_breadth_pct": 60,
     "_hysteresis_note": "Hot status enters at hot_median_mom/hot_breadth_pct and exits below hot_exit_*. Hotness is computed from BASELINE members (default-threshold taggings) so the hot-expanded cohort cannot dilute its own trigger. Fixes the 40<->146 ai_compute membership oscillation.",
@@ -586,7 +600,7 @@
     "structured_weight": 0.7,
     "narrative_weight": 0.3,
     "require_theme_membership": true,
-    "_note": "WS1-T8c. After the forward bridge, an analyst-coverage uplift can add up to +15 to the effective gate. Only fires when stock has at least one theme membership (require_theme_membership). Tier 1 (yfinance structured) contributes 70%, Tier 2 (DeepSeek narrative, weighted by confidence) contributes 30%. Reads public/data/analyst_coverage.json (optional; if absent, uplift is 0)."
+    "_note": "WS1-T8c. After the forward bridge, an analyst-coverage uplift can add up to +15 to the effective gate. Only fires when stock has at least one theme membership (require_theme_membership). Tier 1 (yfinance structured) contributes 70%; Tier 2 (deterministic narrative formula since 2026-08-21 \u2014 was DeepSeek) contributes 30%. A null narrative_score means no narrative term: the structured leg absorbs full weight (see compute_analyst_uplift). Reads public/data/analyst_coverage.json (optional; absent -> uplift 0)."
   },
   "macro_overlay": {
     "dgs10_warning": 5.0,
