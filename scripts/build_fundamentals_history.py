@@ -84,9 +84,10 @@ DURATION_TAGS = {
     "sga": ["SellingGeneralAndAdministrativeExpense",
             "GeneralAndAdministrativeExpense"],
     "interest_expense": ["InterestExpense", "InterestExpenseDebt"],
-    "shares_diluted": ["WeightedAverageNumberOfDilutedSharesOutstanding",
-                       "WeightedAverageNumberOfSharesOutstandingBasic",
-                       "WeightedAverageShares", "AdjustedWeightedAverageShares"],
+    # CH-3: primary restricted to the DILUTED tag only. A filer whose BASIC series outlives its
+    # Diluted series used to hand the whole field to Basic (INVA +14.9%, 64 live basic-as-diluted
+    # cells). The other three tags backfill via FIELD_SPECS["shares_diluted"] below.
+    "shares_diluted": ["WeightedAverageNumberOfDilutedSharesOutstanding"],
     # Tax fields so fetch_data can derive an effective tax rate for ROIC from SEC data
     # (instead of a daily yfinance stock.financials fetch per ticker — quota killer).
     "pretax_income": ["IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
@@ -94,6 +95,9 @@ DURATION_TAGS = {
                       "ProfitLossBeforeTax"],
     "tax_provision": ["IncomeTaxExpenseBenefit", "IncomeTaxExpenseContinuingOperations",
                       "IncomeTaxExpenseIncome"],
+    # CH-8: per-year stock-based compensation. Single-tag primary (ShareBasedCompensation, the
+    # CF add-back) so the primary vote cannot re-rank; the other two tags backfill via FIELD_SPECS.
+    "sbc": ["ShareBasedCompensation"],
 }
 INSTANT_TAGS = {
     "total_assets": ["Assets"],
@@ -113,8 +117,29 @@ INSTANT_TAGS = {
     "ppe_net": ["PropertyPlantAndEquipmentNet", "PropertyPlantAndEquipment"],
     # Altman-Z B-term (retained earnings / total assets) for the SEC-derived Z in fetch_data.
     "retained_earnings": ["RetainedEarningsAccumulatedDeficit", "RetainedEarnings"],
+    # CH-7: marketable securities. Each list is a LADDER of alternatives for ONE balance-sheet
+    # line (first tag to resolve a year wins it) — NEVER summed (ADI files 1,153M under two tags
+    # for the same line). st and lt kept SEPARATE, not merged: 80.6% of AAPL's securities book is
+    # noncurrent, not one-year liquidity. Un-suffixed totals, Investments, LongTermInvestments,
+    # CashCashEquivalentsAndShortTermInvestments are REFUSED (fiduciary/insurance float, cash
+    # double-count) — see the refusal block below.
+    "st_investments": ["ShortTermInvestments", "MarketableSecuritiesCurrent",
+                       "AvailableForSaleSecuritiesDebtSecuritiesCurrent",
+                       "OtherShortTermInvestments", "HeldToMaturitySecuritiesCurrent"],
+    "lt_investments": ["MarketableSecuritiesNoncurrent",
+                       "AvailableForSaleSecuritiesDebtSecuritiesNoncurrent",
+                       "HeldToMaturitySecuritiesNoncurrent"],
 }
 SHARES_UNIT = "shares"
+
+# Fields excluded from the accession-coverage vote AND the year-row union (CH-7 + CH-9).
+# The accession vote scores accessions by field coverage; letting these new instant fields vote
+# rewrote 11 pre-existing cells on RC/CPT in measurement. They still RECEIVE the chosen
+# accession's correction in the row-build loop — they just do not get a say in WHICH accession
+# wins, and a new-field-only year bin can never evict an existing year-row.
+VOTE_EXCLUDED_FIELDS = ("st_investments", "lt_investments", "sbc",
+                        "debt_lt_noncurrent", "debt_current", "short_term_borrowings_separate",
+                        "finance_lease_liability", "operating_lease_liability", "borrowings_total")
 
 
 def get_cik_map():
@@ -186,6 +211,12 @@ def _pick_consistent(cands, reference):
     return min(vals, key=lambda v: abs(math.log10(max(abs(v), 1e-9) / max(abs(reference), 1e-9))))
 
 
+def _series_median(s):
+    """Median absolute magnitude of a {year: value} series (nonzero values), or None."""
+    vals = [abs(x) for x in s.values() if x]
+    return statistics.median(vals) if vals else None
+
+
 def _normalise_series_scale(series):
     """Rescale years whose value is a clean power of 1000 off the MOST RECENT year.
 
@@ -252,6 +283,14 @@ FIELD_SPECS = {
      "FiniteLivedIntangibleAssetsAmortizationExpense",
      "AmortizationOfAcquiredIntangibleAssets"]],
   "LONE_DEPRECIATION_ALLOWLIST": {"GOOG", "GOOGL", "UNP"},
+  # CH-5 (SHIPPED, operator-approved 2026-08-21): OtherDepreciationAndAmortization is POLYSEMOUS —
+  # the broadest CF D&A line at ABNB, but "other D&A EXCLUDING acquisition-intangible amortization"
+  # at AMD (shipped -75%) and an amortization ALIAS at LIVN. Gate it to ABNB so AMD/LIVN resolve
+  # from component sums. AMD 2025 D&A -75% -> -6% (feeds base_cf live). DECLARED trade: LIVN 2020
+  # 38,312,000 -> 29,031,000 (worse) + 4 currently-correct cells nulled (AMD 2020/21, LIVN 21/22) —
+  # latest-FY correctness outranks historical completeness. NOTE: D&A is NOT "done" — FIX (Comfort
+  # Systems) latest-FY -56% still stands (STOP §1: needs a per-filer cash-flow-statement read).
+  "TICKER_GATED_TAGS": {"OtherDepreciationAndAmortization": {"ABNB"}},
  },
  "revenue": {"COMBINED": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax",
                           "RevenueFromContractWithCustomerIncludingAssessedTax",
@@ -264,17 +303,38 @@ FIELD_SPECS = {
                       "CashFlowsFromUsedInOperatingActivitiesContinuingOperations"],
          "COMPONENT_SLOTS": []},
  "capex": {"COMBINED": ["PaymentsToAcquirePropertyPlantAndEquipment",
-                        "PaymentsToAcquireProductiveAssets"],
-           "COMPONENT_SLOTS": []},   # additions NOT curated -> not added
+                        "PaymentsToAcquireProductiveAssets",
+                        "PaymentsToAcquireOtherPropertyPlantAndEquipment",   # CH-4: gated -> LLY
+                        "PaymentsToAcquireOtherProductiveAssets"],           # CH-4: gated -> ROP
+           "COMPONENT_SLOTS": [],
+           # CH-4: these two tags are POLYSEMOUS across filers — a real capex line at LLY/ROP
+           # (verified vs dPPE+D&A within 2.5%), but <1% of actual PP&E additions at GSAT. So
+           # they BACKFILL ONLY the named tickers; ungated they would ship GSAT a capex 1/130th
+           # of truth and a matching inflated FCF. Primary vote (DURATION_TAGS["capex"]) unchanged.
+           "TICKER_GATED_TAGS": {"PaymentsToAcquireOtherPropertyPlantAndEquipment": {"LLY"},
+                                 "PaymentsToAcquireOtherProductiveAssets": {"ROP"}}},
  "operating_income": {"COMBINED": ["OperatingIncomeLoss",
                                    "ProfitLossFromOperatingActivities"],
                       "COMPONENT_SLOTS": []},
  "pretax_income": {"COMBINED": [
    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
-   "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic",
    "ProfitLossBeforeTax"],
    "COMPONENT_SLOTS": []},
+ # CH-3: deliberate PRIMARY-VOTE change (diluted tag is primary via DURATION_TAGS; the other three
+ # BACKFILL only). Justified by the 0-lost corpus gate, not by plausibility. The 12 filers whose
+ # only tag is WeightedAverageShares (undifferentiated) stay unchanged — disclosure via the CH-6
+ # tag record, not substitution. The winning tag per cell rides CH-6's provenance runs.
+ "shares_diluted": {"COMBINED": ["WeightedAverageNumberOfDilutedSharesOutstanding",
+                                 "WeightedAverageNumberOfSharesOutstandingBasic",
+                                 "WeightedAverageShares", "AdjustedWeightedAverageShares"],
+                    "COMPONENT_SLOTS": []},
+ # CH-8: SBC. Primary = ShareBasedCompensation (best match to the APIC equity-statement witness,
+ # 85.3%); the other two BACKFILL only (Allocated is a COMPONENT at AIT, 7.7x mis-tag at SIMO,
+ # sign-flipped at INTU — never primary). Backfill priority is (-max_year, -coverage), not list order.
+ "sbc": {"COMBINED": ["ShareBasedCompensation", "AdjustmentsForSharebasedPayments",
+                      "AllocatedShareBasedCompensationExpense"],
+         "COMPONENT_SLOTS": []},
 }
 # Tags deliberately REFUSED, recorded so nobody re-adds them:
 #   Accumulated*                     balance-sheet stocks, not period flows
@@ -284,15 +344,127 @@ FIELD_SPECS = {
 #   DepreciationRightofuseAssets     alone runs 0.308 of true D&A and is already inside most
 #                                    filers' depreciation line -> double-count
 #   PaymentsToAcquireBusinesses*     M&A, not capex
+#   ...BeforeIncomeTaxesDomestic     tax-footnote US-only geographic COMPONENT, not the total.
+#                                    Never primary (absent from DURATION_TAGS) but won BACKFILL
+#                                    because the footnote series files later than the income
+#                                    statement and backfill sorts by (-max_year, -coverage).
+#                                    Domestic + Foreign == Total in 54/54 checked filer-years;
+#                                    GOOG FY2014 shipped 8,894M (Domestic) vs true 17,259M
+#                                    (Domestic 8,894 + Foreign 8,365). Removed -> 165 cells
+#                                    corrected, 8 NHC 2014-2021 correctly nulled (NHC files no
+#                                    Foreign leg and no total pre-2022). No allowlist: none of
+#                                    the 8 is a latest FY and no pretax allowlist mechanism exists.
+#   Investments (us-gaap)            fiduciary/insurance float, not corporate securities:
+#                                    PAYC 5,507M = client funds (LiabilitiesCurrent 5,368.4M);
+#                                    PCTY 3,482,421,000; HG 5,026,660,000 = 144.6% of mcap; UVE
+#                                    1,532,604,000 (insurer). Not st/lt_investments.
+#   LongTermInvestments              polysemous, opposite economics: GE 38,788M insurance run-off
+#                                    (LiabilityForFuturePolicyBenefits 35,438M) vs INVA 404,497,000
+#                                    genuine AFS debt. No rule separates them; INVA declared false-neg.
+#   AvailableForSaleSecuritiesDebtSecurities (un-suffixed total)
+#                                    double-counts cash: BMRN total - (current+noncurrent) == cash
+#                                    to the dollar; above current-asset headroom in 81 of 487 t-y.
+#   OtherLongTermInvestments / un-suffixed MarketableSecurities / CashCashEquivalentsAndShortTermInvestments
+#                                    GOOG OtherLTI 68,687M is "Non-marketable securities"; NHC
+#                                    MarketableSecurities 303,462,000 > its current headroom 216M;
+#                                    CCESTI contains cash by definition. Ladder tags NEVER summed
+#                                    (ADI 1,153M filed under two tags for one line; sum-vs-total p10=0.133).
+#   ifrs financial-asset families    note-level grab-bags (NVS OtherCurrentFinancialAssets 1,998M ->
+#                                    155M in one year, cash flat) — 13/14 live IFRS filers None (STOP).
+#   AllocatedShareBasedCompensationExpense (as SBC primary)
+#                                    backfill-only: COMPONENT at AIT (7,289,000 vs filed total
+#                                    12,002,000); 7.7x superset/mis-tag at SIMO (203,305,000 vs
+#                                    filed 26,283,000); SIGN-FLIPPED at INTU 2008-2010.
+#   ExpenseFromSharebasedPaymentTransactionsWithEmployees (as SBC)
+#                                    P&L expense, not the CF add-back (NVS 1,330M vs 1,096M).
+#   IncreaseDecreaseThroughSharebasedPaymentTransactions (as SBC)
+#                                    equity movement, not SBC expense (IHG 67M vs 47M).
+#   Total_Debt (vendor) / DebtLongtermAndShorttermCombinedAmount / ifrs Borrowings (as a RULE)
+#                                    no single definition: vendor reproduces WITH leases at 56
+#                                    names, WITHOUT at 23; AZN Borrowings INCLUDES IFRS-16 leases,
+#                                    SAP/NVS EXCLUDE them (all identities exact). Components only.
+
+
+# CH-9: interest-bearing debt COMPONENTS (instant/balance-sheet). Resolved one tag at a time in
+# LIST ORDER (first tag to cover a year wins it) by resolve_instant_field_series — NOT the
+# recency+coverage vote, which can crown a total-including-current tag for a noncurrent-only field
+# (MAR: the 2-tag production list ships 23,000,000). Legacy `lt_debt` (INSTANT_TAGS) is untouched.
+# NO merged total_debt / net_debt field is emitted — see _debt_note at the write.
+INSTANT_FIELD_SPECS = {
+ "debt_lt_noncurrent": {"COMBINED": ["LongTermDebtNoncurrent",
+   "LongTermDebtAndCapitalLeaseObligations",   # == LongTermDebtNoncurrent in 25/27 live both-filers
+   "LongtermBorrowings", "NoncurrentPortionOfNoncurrentBondsIssued"]},   # ifrs; TSM
+ "debt_current": {"COMBINED": ["LongTermDebtCurrent",
+   "LongTermDebtAndCapitalLeaseObligationsCurrent", "DebtCurrent",
+   "CurrentBorrowingsAndCurrentPortionOfNoncurrentBorrowings",
+   "CurrentPortionOfLongtermBorrowings", "ShortTermBorrowings", "ShorttermBorrowings"]},
+ "short_term_borrowings_separate": {"COMBINED": ["CommercialPaper", "ShortTermBorrowings",
+                                                 "ShorttermBorrowings"]},
+ "finance_lease_liability": {"COMBINED": ["FinanceLeaseLiability", "CapitalLeaseObligations"],
+   "SUM_PAIRS": [("FinanceLeaseLiabilityCurrent", "FinanceLeaseLiabilityNoncurrent"),
+                 ("CapitalLeaseObligationsCurrent", "CapitalLeaseObligationsNoncurrent")]},
+ "operating_lease_liability": {"COMBINED": ["OperatingLeaseLiability", "LeaseLiabilities"],
+   "SUM_PAIRS": [("OperatingLeaseLiabilityCurrent", "OperatingLeaseLiabilityNoncurrent"),
+                 ("CurrentLeaseLiabilities", "NoncurrentLeaseLiabilities")]},
+ # CH-9 (operator-approved 2026-08-21): per-filer ALLOWLISTED ifrs Borrowings total. NULL for every
+ # filer except the allowlist — ifrs Borrowings has no single cross-filer definition (AZN includes
+ # IFRS-16 leases, SAP/NVS exclude them), so it can only ship where the composition is per-filer
+ # verified. NVS: Borrowings 28,729M for 2025, leases 1,920M proven OUTSIDE it (two-year identity
+ # exact). This is a COMBINED current+noncurrent total — deliberately its own field, NEVER merged
+ # into debt_lt_noncurrent/debt_current, and NOT a computed total_debt.
+ "borrowings_total": {"COMBINED": ["Borrowings"], "TICKER_ALLOWLIST": {"NVS"}},
+}
+# Declared STOP resolved by allowlist (CH-9 / §4.8): NVS files no LongtermBorrowings and its ifrs
+# Borrowings is a mixed total, so debt_lt_noncurrent stays null and debt_current is SUPPRESSED
+# (its bare 794M current-portion invites a 97%-understated total-debt sum). The verified total ships
+# in borrowings_total instead; leases resolve normally into operating_lease_liability.
+DEBT_NULL_TICKERS = {"NVS"}
+
+
+def resolve_instant_field_series(facts, spec, ticker=None, unit_keys=("USD",)):
+    """Instant field resolved by CURATED LADDER, not the recency+coverage vote.
+
+    COMBINED tags in LIST ORDER: the first tag to cover a year wins it (a total-including-current
+    tag must not be crowned for a noncurrent-only field). Then SUM_PAIRS: (current, noncurrent)
+    component pairs, summed ONLY when BOTH sides are present for the year (a one-sided component is
+    a wrong total — CMI finance-lease 2009-2017 noncurrent-only, EXPE/MEDP 2018 lone-0 false-zero).
+    A TICKER_ALLOWLIST spec restricts the field to named filers (per-filer-verified totals only).
+    Returns (series, raws, prov, tags). provenance is 'primary' for combined[0], else the tag name;
+    'pair_sum' for summed years (raws=[] so the accession vote skips them).
+    """
+    allow = spec.get("TICKER_ALLOWLIST")
+    if allow is not None and ticker not in allow:
+        return {}, {}, {}, {}
+    combined = list(spec.get("COMBINED") or [])
+    series, raws, prov, tags = {}, {}, {}, {}
+    for i, tag in enumerate(combined):
+        s, r, _ = annual_instant_series(facts, [tag], unit_keys)
+        for y, v in s.items():
+            if y not in series and v is not None:
+                series[y] = v
+                raws[y] = r.get(y, [])
+                prov[y] = "primary" if i == 0 else tag
+                tags[y] = tag
+    for pair in spec.get("SUM_PAIRS") or []:
+        sa, _, _ = annual_instant_series(facts, [pair[0]], unit_keys)
+        sb, _, _ = annual_instant_series(facts, [pair[1]], unit_keys)
+        for y in set(sa) & set(sb):                    # BOTH sides mandatory
+            if y not in series and sa[y] is not None and sb[y] is not None:
+                series[y] = sa[y] + sb[y]
+                raws[y] = []
+                prov[y] = "pair_sum"
+                tags[y] = pair[0] + "+" + pair[1]
+    return series, raws, prov, tags
 
 
 def resolve_field_series(facts, spec, unit_keys=("USD",), ticker=None, baseline_tags=None):
     """Series for one field: primary winner, then backfill, then component sum.
 
-    Returns (series, raws, provenance). provenance[year] is "primary" | "backfill" |
-    "component_sum" | "lone_depreciation". Years resolved by SUMMATION have no single accession,
-    so extract_history must exclude them from its accession-coverage vote -- a summed year
-    cannot be attributed to one filing.
+    Returns (series, raws, provenance, tags). provenance[year] is "primary" | "backfill" |
+    "component_sum" | "lone_depreciation"; tags[year] is the winning tag name (or a
+    '+'-joined composite for component_sum years). Years resolved by SUMMATION have no single
+    accession, so extract_history must exclude them from its accession-coverage vote -- a
+    summed year cannot be attributed to one filing.
     """
     combined = list(spec.get("COMBINED") or [])
     # PRIMARY IS COMPUTED OVER THE ORIGINAL TAG LIST ONLY.
@@ -302,32 +474,45 @@ def resolve_field_series(facts, spec, unit_keys=("USD",), ticker=None, baseline_
     # LTM. Additions must therefore only ever BACKFILL; the currently-filled years stay
     # byte-identical by construction.
     base_tags = list(baseline_tags or combined[:1])
-    series, raws = annual_duration_series(facts, base_tags, unit_keys)
+    series, raws, ptag = annual_duration_series(facts, base_tags, unit_keys)
     series = dict(series)
     raws = dict(raws)
     prov = {y: "primary" for y in series}
+    tags = {y: ptag for y in series}          # winning tag per year, parallel to prov
 
     # BACKFILL -- only years the primary lacks, other combined tags, latest/most-coverage first.
+    gated = spec.get("TICKER_GATED_TAGS") or {}       # CH-4: tag usable only for named tickers
     alts = []
     for tag in combined:
-        s, r = annual_duration_series(facts, [tag], unit_keys)
+        if tag in gated and ticker not in gated[tag]:
+            continue                                   # gated tag, wrong ticker -> skip entirely
+        s, r, _ = annual_duration_series(facts, [tag], unit_keys)
         if s:
-            alts.append((max(s), len(s), s, r))
-    for _, _, s, r in sorted(alts, key=lambda z: (-z[0], -z[1])):
+            alts.append((max(s), len(s), s, r, tag))
+    for _, _, s, r, tag in sorted(alts, key=lambda z: (-z[0], -z[1])):
         for y, v in s.items():
             if y not in series:
                 series[y], raws[y], prov[y] = v, r.get(y, []), "backfill"
+                tags[y] = tag
 
     slots = spec.get("COMPONENT_SLOTS") or []
     if slots:
         slot_series = []
+        slot_tags = []
         for slot in slots:
             merged = {}
+            mtags = {}
             for tag in slot:
-                s, _ = annual_duration_series(facts, [tag], unit_keys)
+                s, _, _ = annual_duration_series(facts, [tag], unit_keys)
                 for y, v in s.items():
-                    merged.setdefault(y, v)          # first alternative in slot order wins
+                    # CH-5: prefer the first NON-ZERO alternative — a 0-valued tag must not beat a
+                    # later non-zero one in the same slot (LIVN AmortizationOfIntangibleAssets = 0
+                    # for 2019/2020 while real amortization exists under an alternative).
+                    if merged.get(y) in (None, 0) and v is not None:
+                        merged[y] = v
+                        mtags[y] = tag
             slot_series.append(merged)
+            slot_tags.append(mtags)
         years = set()
         for s in slot_series:
             years |= set(s)
@@ -339,12 +524,15 @@ def resolve_field_series(facts, spec, unit_keys=("USD",), ticker=None, baseline_
             # Depreciation = -164.2M against a true 184.4M.
             if all(v is not None and v >= 0 for v in vals):
                 series[y], raws[y], prov[y] = sum(vals), [], "component_sum"
+                # composite tag marks a cell with no single filed tag (excluded from overlap tests)
+                tags[y] = "+".join(slot_tags[i][y] for i in range(len(slot_series)))
         allow = spec.get("LONE_DEPRECIATION_ALLOWLIST") or set()
         if ticker in allow and len(slot_series) >= 2 and not slot_series[1]:
             for y, v in slot_series[0].items():
                 if y not in series and v is not None and v >= 0:
                     series[y], raws[y], prov[y] = v, [], "lone_depreciation"
-    return series, raws, prov
+                    tags[y] = slot_tags[0][y]
+    return series, raws, prov, tags
 
 
 def annual_duration_series(facts, tags, unit_keys=("USD",)):
@@ -393,9 +581,11 @@ def annual_duration_series(facts, tags, unit_keys=("USD",)):
             _refvals = [abs(v) for v in clean.values() if v]
             ref = statistics.median(_refvals) if _refvals else None
             resolved = {y: _pick_consistent(c, ref) for y, c in best.items()}
-            candidates.append((_normalise_series_scale(resolved), raw))
+            candidates.append((_normalise_series_scale(resolved), raw, tag))
     if not candidates:
-        return {}, {}
+        return {}, {}, None
+    # winner selection stays on s[0] (series) ONLY — never on the appended tag string;
+    # tuple comparison reaching the tag is the documented 13-capex-loss trap.
     return max(candidates, key=lambda s: (max(s[0]), len(s[0])))
 
 
@@ -431,9 +621,10 @@ def annual_instant_series(facts, tags, unit_keys=("USD",)):
             ref = statistics.median(_refvals) if _refvals else None
             resolved = {y: _pick_consistent([(k[1], v) for k, v in c], ref)
                         for y, c in best.items()}
-            candidates.append((_normalise_series_scale(resolved), raw))
+            candidates.append((_normalise_series_scale(resolved), raw, tag))
     if not candidates:
-        return {}, {}
+        return {}, {}, None
+    # winner selection stays on s[0] (series) ONLY — see annual_duration_series note.
     return max(candidates, key=lambda s: (max(s[0]), len(s[0])))
 
 
@@ -637,32 +828,57 @@ def extract_history(facts, ticker=None):
     """Build {fiscal_year: {field: value}} from a CIK's us-gaap facts."""
     series = {}
     raws = {}
-    # Fields with a curated spec resolve via stitching + component sums (FIELD_SPECS above);
-    # every other field keeps the original single-winner behaviour untouched.
-    summed = {}          # field -> years that came from a SUM and so have no single accession
+    # Provenance captured alongside every field: base state (primary/backfill/component_sum/
+    # lone_depreciation) and the winning tag name per year. Emitted as a parallel top-level
+    # "provenance" sibling in main() — never inside a year-row (the int(year) reader hazard).
+    prov_of = {}          # field -> {year: base_state}
+    tag_of = {}           # field -> {year: winning_tag}
     for field, tags in DURATION_TAGS.items():
         unit = ("shares",) if field == "shares_diluted" else ("USD",)
         spec = FIELD_SPECS.get(field)
         if spec:
             # `tags` is the ORIGINAL DURATION_TAGS list — it defines the primary winner, so the
             # existing output is preserved exactly and FIELD_SPECS can only add.
-            series[field], raws[field], prov = resolve_field_series(
+            series[field], raws[field], prov_of[field], tag_of[field] = resolve_field_series(
                 facts, spec, unit, ticker, baseline_tags=tags)
-            summed[field] = {y for y, p in prov.items()
-                             if p in ("component_sum", "lone_depreciation")}
         else:
-            series[field], raws[field] = annual_duration_series(facts, tags, unit)
+            series[field], raws[field], wtag = annual_duration_series(facts, tags, unit)
+            prov_of[field] = {y: "primary" for y in series[field]}
+            tag_of[field] = {y: wtag for y in series[field]}
     for field, tags in INSTANT_TAGS.items():
-        series[field], raws[field] = annual_instant_series(facts, tags)
+        series[field], raws[field], wtag = annual_instant_series(facts, tags)
+        prov_of[field] = {y: "primary" for y in series[field]}
+        tag_of[field] = {y: wtag for y in series[field]}
+    for field, ispec in INSTANT_FIELD_SPECS.items():          # CH-9 debt components (ladder-resolved)
+        series[field], raws[field], prov_of[field], tag_of[field] = \
+            resolve_instant_field_series(facts, ispec, ticker)
+    if ticker in DEBT_NULL_TICKERS:                           # declared STOP (NVS): null debt fields
+        for field in ("debt_lt_noncurrent", "debt_current"):
+            series[field], raws[field], prov_of[field], tag_of[field] = {}, {}, {}, {}
 
-    years = set()
-    for s in series.values():
-        years.update(s.keys())
-    if not years:
-        return {}
-    years = sorted(years)[-MAX_YEARS:]
+    # Vote-excluded fields (CH-7/CH-9) still get resolved and still receive the chosen accession's
+    # correction, but do NOT vote in the accession-coverage rule and cannot form/evict a year-row.
+    VOTE_FIELDS = [f for f in series if f not in VOTE_EXCLUDED_FIELDS]
+
+    # WINDOW ANCHOR. A row survives only if it has revenue or total_assets, but the MAX_YEARS
+    # truncation runs BEFORE that gate — so a field whose coverage runs past revenue's (an IFRS
+    # filer's WeightedAverageShares over years it files no USD revenue; CH-3's stitching widened
+    # this for TM: shares 2010-2025 vs USD revenue 2012-2013 only) would evict the only revenue-
+    # bearing years and drop the whole ticker. Anchor the window on the row-forming fields; every
+    # other field is a passenger that fills a row it cannot create, and non-forming years are
+    # dropped by the gate regardless. Provably loss-free: the surviving rows are a superset of the
+    # old ones (any old row-year is formable and, being among the recent union years, is among the
+    # recent formable years too). Same eviction the CH-7 st/lt years-union exclusion prevents.
+    if not any(series.get(f) for f in series):
+        return {}, None
+    form_years = set(series.get("revenue", {})) | set(series.get("total_assets", {}))
+    if not form_years:
+        return {}, None
+    years = sorted(form_years)[-MAX_YEARS:]
 
     history = {}
+    overrides = {}        # {str(year): {field: chosen_accession}} for accession-vote overrides
+    period_end = {}       # {str(year): "YYYY-MM-DD"} bin-end anchor
     for y in years:
         # ── ROW CONSISTENCY (2026-08-08) ────────────────────────────────────────────────
         # Per-field most-recent-wins mixes FILING BASES inside one row: after a divestiture
@@ -690,10 +906,12 @@ def extract_history(facts, ticker=None):
         # year always ends later in y. Only candidates within 14 days of the anchor may join
         # the accession vote.
         end_ref = None
-        for f in series:
+        for f in VOTE_FIELDS:
             for accn, filed, val, end in raws[f].get(y, []):
                 if end_ref is None or end > end_ref:
                     end_ref = end
+        if end_ref is not None:
+            period_end[str(y)] = end_ref
 
         def _near_ref(end):
             if end_ref is None:
@@ -704,7 +922,7 @@ def extract_history(facts, ticker=None):
                 return False
 
         accns = {}
-        for f in series:
+        for f in VOTE_FIELDS:
             for accn, filed, val, end in raws[f].get(y, []):
                 if not _near_ref(end):
                     continue
@@ -735,8 +953,26 @@ def extract_history(facts, ticker=None):
                         av = _pick_consistent([(c[1], c[2]) for c in cand], v)
                     else:
                         av = cand[0][2]
-                    if av != v and _pow1000_ratio(av, v) is None and not (av == 0 and v):
-                        v = av
+                    # SCALE-OVERWRITE ARBITRATION (CH-2). av (accession) and v (resolved series)
+                    # are UNORDERED here, so the old guard `_pow1000_ratio(av, v)` (which assumes
+                    # largest-first) had a directional hole that reinstated a raw-thousands
+                    # accession value over an already scale-corrected series (GRMN shares 194,165
+                    # over 194,165,000). Order-correct the ratio; when the two ARE a clean
+                    # power-of-1000 apart, let the series median decide which sits on the series'
+                    # own scale (keeps the correct NHC 2023 sga 21,412,000 over a 21.4T resolved
+                    # value; a symmetric band alone would ship the 21.4T).
+                    if av != v and not (av == 0 and v):
+                        _ref = _series_median(series[f])
+                        _take = False
+                        if _pow1000_ratio(max(av, v, key=abs), min(av, v, key=abs)) is None:
+                            _take = True
+                        elif _ref and abs(math.log10(max(abs(av), 1e-9) / _ref)) < \
+                                     abs(math.log10(max(abs(v), 1e-9) / _ref)):
+                            _take = True
+                        if _take:
+                            v = av
+                            # fifth state, layered over base: value came from the chosen accession.
+                            overrides.setdefault(str(y), {})[f] = chosen
             row[f] = v
         # Require at least a revenue or assets figure for the year to count
         if row.get("revenue") is None and row.get("total_assets") is None:
@@ -744,7 +980,106 @@ def extract_history(facts, ticker=None):
         ocf, capex = row.get("ocf"), row.get("capex")
         row["fcf"] = (ocf - capex) if (ocf is not None and capex is not None) else None
         history[y] = row
-    return history
+    prov_bundle = {"states": prov_of, "tags": tag_of,
+                   "overrides": overrides, "period_end": period_end}
+    return history, prov_bundle
+
+
+PROV_STATE_CODE = {"primary": "p", "backfill": "b",
+                   "component_sum": "s", "lone_depreciation": "l"}
+PROV_DERIVED_FIELDS = ("fcf",)   # computed row field, no filed tag -> no provenance
+
+
+def encode_provenance(history_out, prov_by_ticker):
+    """Parallel top-level 'provenance' payload from per-ticker prov bundles.
+
+    RLE-encodes (winning_tag, base_state) runs per ticker/field over the SHIPPED non-null
+    cells, with index-addressed _tags and _accns tables, plus overrides and period_end maps.
+    A run [first_year, tag_index, state_code] holds until the next run's first_year, intersected
+    with the years actually present. 'o' (accession_override) is layered via `overrides`, never
+    a run state. Called from main() (production) and the acceptance harness (shared, so measured
+    counts equal what ships).
+    """
+    tag_index, accn_index = {}, {}
+
+    def ti(tag):
+        if tag not in tag_index:
+            tag_index[tag] = len(tag_index)
+        return tag_index[tag]
+
+    def ai(accn):
+        if accn not in accn_index:
+            accn_index[accn] = len(accn_index)
+        return accn_index[accn]
+
+    runs, overrides_out, period_end_out = {}, {}, {}
+    # Index accessions over ALL captured overrides (including cells on year-rows later dropped by
+    # the revenue/assets gate) so the _accns table is complete; the overrides MAP below still
+    # emits only shipped non-null cells. (Indexing only shipped cells undercounts by the handful
+    # of dropped-row accessions.)
+    for tk in sorted(history_out):
+        bundle = prov_by_ticker.get(tk)
+        if not bundle:
+            continue
+        for y in sorted(bundle["overrides"]):
+            for f in sorted(bundle["overrides"][y]):
+                ai(bundle["overrides"][y][f])
+    for tk in sorted(history_out):
+        bundle = prov_by_ticker.get(tk)
+        if not bundle:
+            continue
+        states, tags = bundle["states"], bundle["tags"]
+        rows = history_out[tk]                        # {str(y): row}
+        t_runs = {}
+        for f in sorted(states):
+            if f in PROV_DERIVED_FIELDS:
+                continue
+            fstate, ftag = states[f], tags[f]
+            yrs = sorted(int(y) for y, row in rows.items()
+                         if row.get(f) is not None and int(y) in fstate)
+            seq, prev = [], None
+            for y in yrs:
+                key = (ti(ftag.get(y)), PROV_STATE_CODE.get(fstate.get(y), "p"))
+                if key != prev:
+                    seq.append([y, key[0], key[1]])
+                    prev = key
+            if seq:
+                t_runs[f] = seq
+        if t_runs:
+            runs[tk] = t_runs
+        ot = {}
+        for y, fmap in bundle["overrides"].items():
+            row = rows.get(y, {})
+            inner = {f: ai(accn) for f, accn in fmap.items() if row.get(f) is not None}
+            if inner:
+                ot[y] = inner
+        if ot:
+            overrides_out[tk] = ot
+        pe = {y: d for y, d in bundle["period_end"].items() if y in rows}
+        if pe:
+            period_end_out[tk] = pe
+
+    inv_tags = [None] * len(tag_index)
+    for t, i in tag_index.items():
+        inv_tags[i] = t
+    inv_accns = [None] * len(accn_index)
+    for a, i in accn_index.items():
+        inv_accns[i] = a
+    return {
+        "_schema": ("parallel provenance sibling of 'tickers'. runs[T][field] = "
+                    "[[first_year, tag_index, state_code], ...] RLE over SHIPPED non-null cells; "
+                    "a run holds until the next run's first_year, intersected with years present. "
+                    "state_code in _states; _tags/_accns are index-addressed. "
+                    "overrides[T][year][field] = accn_index (effective state 'o'). "
+                    "period_end[T][year] = bin end date."),
+        "_states": {"p": "primary", "b": "backfill", "s": "component_sum",
+                    "l": "lone_depreciation", "o": "accession_override"},
+        "_tags": inv_tags,
+        "_accns": inv_accns,
+        "runs": runs,
+        "overrides": overrides_out,
+        "period_end": period_end_out,
+    }
 
 
 def safe_div(a, b):
@@ -958,6 +1293,7 @@ def main():
     battery_out = {}
     ttm_out = {}
     qtr_out = {}
+    prov_by_ticker = {}
     no_entry = 0
     no_history = 0
     processed = 0
@@ -978,11 +1314,13 @@ def main():
             # Merge namespaces; us-gaap wins on name collisions
             facts = dict(facts_all.get("ifrs-full", {}))
             facts.update(facts_all.get("us-gaap", {}))
-            history = extract_history(facts, ticker)
+            history, prov_bundle = extract_history(facts, ticker)
             if not history:
                 no_history += 1
                 continue
             history_out[ticker] = {str(y): row for y, row in sorted(history.items())}
+            if prov_bundle:
+                prov_by_ticker[ticker] = prov_bundle
             battery = compute_battery(history)
             if battery:
                 battery_out[ticker] = battery
@@ -1010,9 +1348,25 @@ def main():
         QTR_JSON = QTR_JSON.with_name("fundamentals_quarterly.SUBSET.json")
         print(f"SUBSET run ({len(targets)} tickers) -> writing {HISTORY_JSON.name} / "
               f"{BATTERY_JSON.name} / {TTM_JSON.name} — production files untouched")
+    provenance = encode_provenance(history_out, prov_by_ticker)
+    debt_note = (
+        "CH-9 debt components (instant, USD): debt_lt_noncurrent + debt_current = interest-bearing "
+        "debt EXCLUDING all leases. short_term_borrowings_separate is ADDITIVE only when debt_current "
+        "resolved from LongTermDebtCurrent (else CP/ShortTermBorrowings nesting is filer-specific — "
+        "EMR DebtCurrent 4,797M = LTDCurrent 605M + CP 4,192M; ITT DebtCurrent == ShortTermBorrowings). "
+        "Leases (finance_lease_liability, operating_lease_liability) are SEPARATE by design; ifrs "
+        "LeaseLiabilities is ALL IFRS-16 lease liabilities (no operating/finance split). Legacy "
+        "lt_debt is null/zero/understated for 28/172 live names — not for new work. NO computed "
+        "total_debt / net_debt field is emitted; whoever sums components must state their lease + "
+        "None-vs-0 policy. borrowings_total is a PER-FILER-ALLOWLISTED ifrs Borrowings total "
+        "(current+noncurrent, leases excluded) — null for all but named filers whose composition is "
+        "verified; it is a labelled total, never merged with the component fields. NVS: "
+        "debt_lt_noncurrent + debt_current SUPPRESSED (no clean split; bare current-portion would "
+        "masquerade as total debt), verified Borrowings 28,729M ships in borrowings_total.")
     HISTORY_JSON.write_text(json.dumps(
         {"generated_at": generated_at, "source": "SEC companyfacts.zip (annual filings)",
-         "tickers": history_out}, sort_keys=True), encoding="utf-8")
+         "_debt_note": debt_note,
+         "provenance": provenance, "tickers": history_out}, sort_keys=True), encoding="utf-8")
     BATTERY_JSON.write_text(json.dumps(
         {"generated_at": generated_at,
          "_note": ("Value-trap battery. f_score: 0-9 (check f_score_checks_available); "
