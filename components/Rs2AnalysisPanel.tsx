@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import clsx from "clsx";
 import { ExternalLink, ChevronDown } from "lucide-react";
-import { fetchRs2Index, fetchRs2Report, fetchDepthOverlay, type Rs2RunMeta, type Rs2Bundle, type DepthVerdict } from "@/lib/data-service";
+import { fetchRs2Index, fetchRs2Report, fetchDepthOverlay, fetchDepthReport, type Rs2RunMeta, type Rs2Bundle, type DepthVerdict, type DepthReportBundle } from "@/lib/data-service";
 
 const humanMethod = (m?: string | null) => {
     if (!m) return "—";
@@ -72,6 +72,55 @@ function Note({ children }: { children: React.ReactNode }) {
     return (
         <div className="rounded-md border border-dashed border-border bg-background/40 p-5 text-center text-xs leading-relaxed text-muted-foreground">
             {children}
+        </div>
+    );
+}
+
+function DepthSamplesView({ ticker }: { ticker: string }) {
+    const [bundle, setBundle] = useState<DepthReportBundle | null>(null);
+    const [open, setOpen] = useState(false);
+    const [tab, setTab] = useState(0);
+    useEffect(() => {
+        let alive = true;
+        fetchDepthReport(ticker).then((b) => { if (alive) setBundle(b); });
+        return () => { alive = false; };
+    }, [ticker]);
+    if (!bundle || bundle.samples.length === 0) return null;
+    const withReports = bundle.samples.filter((s) => s.report && s.report.length > 0);
+    if (withReports.length === 0) return null;
+    const cur = withReports[Math.min(tab, withReports.length - 1)];
+    return (
+        <div className="rounded-lg border border-border/60 bg-card/40">
+            <button
+                onClick={() => setOpen(!open)}
+                className="flex w-full items-center justify-between px-3 py-2 text-left text-xs font-black uppercase tracking-wide text-muted-foreground hover:text-foreground"
+            >
+                <span>Depth run transcripts — {withReports.length} sample report{withReports.length === 1 ? "" : "s"} ({bundle.run})</span>
+                <span>{open ? "▾ hide" : "▸ show"}</span>
+            </button>
+            {open && (
+                <div className="border-t border-border/60 p-3">
+                    <div className="mb-2 flex flex-wrap gap-1.5">
+                        {withReports.map((s, i) => (
+                            <button
+                                key={s.sample}
+                                onClick={() => setTab(i)}
+                                className={`rounded-md border px-2.5 py-1 text-xs font-bold ${i === tab ? "border-primary bg-primary/15 text-primary" : "border-border text-muted-foreground hover:text-foreground"}`}
+                            >
+                                Sample {s.sample}{s.iv != null ? ` · $${s.iv}` : ""}{!s.plausible ? " · rejected" : ""}{s.truncated ? " · truncated" : ""}
+                            </button>
+                        ))}
+                    </div>
+                    {!cur.plausible && cur.reasons.length > 0 && (
+                        <p className="mb-2 text-[11px] text-amber-500">
+                            Guard rejection: {cur.reasons.join("; ")}
+                        </p>
+                    )}
+                    <pre className="max-h-[32rem] overflow-auto whitespace-pre-wrap rounded-md bg-background/60 p-3 text-[11.5px] leading-relaxed text-foreground/90">
+                        {cur.report}
+                    </pre>
+                </div>
+            )}
         </div>
     );
 }
@@ -158,6 +207,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
         return (
             <div className="space-y-4">
             {depthV && <DepthVerdictBanner v={depthV} />}
+            {depthV && <DepthSamplesView ticker={ticker} />}
             <div className="rounded-lg border border-dashed border-border bg-card/50 p-6 text-center">
                 <div className="text-sm font-black text-foreground">No RS2 analysis yet for {displayTicker}</div>
                 <p className="mx-auto mt-1.5 max-w-md text-xs leading-relaxed text-muted-foreground">
@@ -182,6 +232,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
     return (
         <div className="space-y-4">
             {depthV && <DepthVerdictBanner v={depthV} />}
+            {depthV && <DepthSamplesView ticker={ticker} />}
             {/* header: ticker + TradingView overview + method */}
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                 <span className="text-lg font-black tracking-tight">{displayTicker}</span>

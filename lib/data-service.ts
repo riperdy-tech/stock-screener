@@ -357,6 +357,27 @@ export interface DepthOverlayPayload {
     tickers: Record<string, DepthVerdict>;
 }
 
+export interface DepthSample {
+    sample: number;
+    iv: number | null;
+    plausible: boolean;
+    reasons: string[];
+    truncated: boolean;
+    secs: number | null;
+    report: string;
+}
+
+export interface DepthReportBundle {
+    ticker: string;
+    run: string;
+    verdict: DepthVerdict;
+    samples: DepthSample[];
+}
+
+export async function fetchDepthReport(ticker: string): Promise<DepthReportBundle | null> {
+    return fetchJson<DepthReportBundle>(`/data/depth_reports/${encodeURIComponent(ticker.toUpperCase())}.json`);
+}
+
 export async function fetchDepthOverlay(): Promise<DepthOverlayPayload | null> {
     return fetchJson<DepthOverlayPayload>('/data/depth_overlay.json');
 }
