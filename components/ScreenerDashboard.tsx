@@ -38,19 +38,19 @@ const STRATEGY_META: Record<StrategyId, {
     icon: typeof Sparkles;
 }> = {
     '100bagger': {
-        accent: 'text-sky-400 border-sky-500/40 bg-sky-500/10',
+        accent: 'text-accent border-accent/40 bg-accent/10',
         icon: Telescope,
     },
     reverse: {
-        accent: 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10',
+        accent: 'text-pos border-pos/40 bg-pos/10',
         icon: ShieldCheck,
     },
     paradigm: {
-        accent: 'text-purple-300 border-purple-500/40 bg-purple-500/10',
+        accent: 'text-ink-2 border-rule-14 bg-white/5',
         icon: Layers3,
     },
     youtube: {
-        accent: 'text-red-300 border-red-500/40 bg-red-500/10',
+        accent: 'text-neg border-neg/40 bg-neg/10',
         icon: Youtube,
     },
 };
@@ -996,12 +996,12 @@ export function ScreenerDashboard() {
     };
 
     return (
-        <div className="flex min-h-screen bg-background text-foreground animate-in fade-in duration-500">
+        <div className="flex min-h-screen bg-page text-ink animate-in fade-in duration-500">
             {/* Mobile Sidebar Overlay */}
             {isSidebarOpen && (
                 <div 
                     onClick={() => setIsSidebarOpen(false)}
-                    className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 md:hidden"
+                    className="fixed inset-0 bg-page z-40 md:hidden"
                 />
             )}
             
@@ -1034,21 +1034,21 @@ export function ScreenerDashboard() {
             {/* 2. Main Content Area */}
             <main className="relative flex min-w-0 flex-1 flex-col overflow-x-hidden">
                 {/* Header */}
-                <header className="sticky top-0 z-30 flex flex-shrink-0 flex-col gap-2 border-b border-border/50 bg-card/70 px-3 py-3 shadow-sm backdrop-blur-xl md:flex-row md:flex-wrap md:px-5">
+                <header className="sticky top-0 z-30 flex flex-shrink-0 flex-col gap-2 border-b border-rule-6 bg-surface px-3 py-3 md:flex-row md:flex-wrap md:px-5">
                     <div className="flex w-full items-center justify-between gap-3">
                         <div className="flex items-center gap-2 md:gap-4">
                             <Link href="/"
-                                className="flex shrink-0 items-center gap-1.5 rounded-md border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1.5 text-xs font-bold text-emerald-300 transition-colors hover:bg-emerald-500/20"
-                                title="Back to the Factor Lab Cockpit">
+                                className="flex shrink-0 items-center gap-1.5 border border-pos/40 bg-pos/10 px-2.5 py-1.5 text-xs font-bold text-pos transition-colors hover:bg-pos/10"
+                                title="Back to the Stockpeak desk">
                                 <ArrowLeft className="h-3.5 w-3.5" />
-                                <span className="hidden sm:inline">Cockpit</span>
+                                <span className="hidden sm:inline">Desk</span>
                             </Link>
-                            <h1 className="max-w-[min(54vw,20rem)] truncate text-xl font-black text-foreground sm:max-w-none md:text-2xl">
+                            <h1 className="max-w-[min(54vw,20rem)] truncate text-xl font-extrabold text-ink sm:max-w-none md:text-2xl">
                                 {t('appTitle')}
                             </h1>
                             <button 
                                 onClick={() => setShowHelp(true)}
-                                className="rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-secondary/50 hover:text-foreground"
+                                className="p-1.5 text-ink-2 transition-colors hover:bg-white/5 hover:text-ink"
                                 title={t('howScoringWorks')}
                                 aria-label={t('openScoringGuide')}
                             >
@@ -1057,44 +1057,44 @@ export function ScreenerDashboard() {
                         </div>
 
                         <div className="relative hidden w-full max-w-sm md:block">
-                            <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                            <Search className="absolute left-3 top-2.5 h-4 w-4 text-ink-2" />
                             <input
                                 type="text"
                                 placeholder={t('searchPlaceholder')}
-                                className="w-full rounded-md border border-border/50 bg-secondary/45 py-2 pl-9 pr-3 text-sm transition-all focus:bg-secondary focus:outline-none focus:ring-1 focus:ring-primary"
+                                className="w-full border border-rule-6 bg-white/5 py-2 pl-9 pr-3 text-sm transition-all focus:bg-white/5 focus:outline-none focus:ring-1 focus:ring-primary"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
                         
                         <div className="flex md:hidden items-center gap-2 shrink-0">
-                             <Link href="/reports" className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-black text-muted-foreground transition-all hover:bg-white/10 hover:text-foreground active:scale-95">
+                             <Link href="/reports" className="flex items-center gap-1.5 border border-white/10 bg-white/5 px-3 py-2 text-xs font-extrabold text-ink-2 transition-all hover:bg-white/10 hover:text-ink active:scale-95">
                                 <Sparkles className="h-4 w-4" />
                                 {t('recentReports')}
                              </Link>
-                             <button onClick={() => setIsSidebarOpen(true)} className="rounded-full border border-border/50 bg-secondary p-2 text-secondary-foreground transition-colors hover:bg-secondary/80" aria-label="Open filters">
+                             <button onClick={() => setIsSidebarOpen(true)} className="border border-rule-6 bg-white/5 p-2 text-secondary-foreground transition-colors hover:bg-white/5" aria-label="Open filters">
                                 <Filter className="h-4 w-4" />
                             </button>
                         </div>
                         
-                        <Link href="/reports" className="hidden shrink-0 items-center gap-1.5 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-black text-muted-foreground transition-all hover:bg-white/10 hover:text-foreground active:scale-95 md:flex">
+                        <Link href="/reports" className="hidden shrink-0 items-center gap-1.5 border border-white/10 bg-white/5 px-3 py-2 text-xs font-extrabold text-ink-2 transition-all hover:bg-white/10 hover:text-ink active:scale-95 md:flex">
                            <Sparkles className="h-3.5 w-3.5" /> {t('recentReports')}
                         </Link>
                     </div>
 
-                    <div className="flex w-full max-w-full flex-1 overflow-x-auto rounded-md border border-border/50 bg-secondary/45 p-0.5 shadow-inner no-scrollbar md:min-w-0 md:w-auto">
+                    <div className="flex w-full max-w-full flex-1 overflow-x-auto border border-rule-6 bg-white/5 p-0.5 no-scrollbar md:min-w-0 md:w-auto">
                         {(['US', 'Korea', 'Taiwan'] as Market[]).map((m) => (
                             <button
                                 key={m}
                                 onClick={() => setSelectedMarket(m)}
                                 className={clsx(
-                                    "flex items-center gap-1.5 whitespace-nowrap rounded px-3 py-1.5 text-sm font-bold transition-all duration-200",
+                                    "flex items-center gap-1.5 whitespace-nowrap  px-3 py-1.5 text-sm font-bold transition-all duration-200",
                                     selectedMarket === m 
-                                                ? "border border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]"
-                                        : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                                                ? "border border-pos/40 bg-pos/10 text-pos "
+                                        : "text-ink-2 hover:text-ink hover:bg-white/5"
                                 )}
                             >
-                                <span className="font-black">{m}</span>
+                                <span className="font-extrabold">{m}</span>
                                 <span className="hidden 2xl:inline">
                                     {m === 'US' ? t('usStocks') : m === 'Korea' ? t('koreaStocks') : t('taiwanStocks')}
                                 </span>
@@ -1106,12 +1106,12 @@ export function ScreenerDashboard() {
                         <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
                             <button 
                                 onClick={() => setIsLogOpen(true)} 
-                                className="flex items-center gap-1.5 rounded-md border border-border/50 bg-secondary/45 px-3 py-2 text-xs font-bold text-foreground/80 shadow-sm backdrop-blur-md transition-all duration-300 hover:bg-secondary hover:text-foreground active:scale-95"
+                                className="flex items-center gap-1.5 border border-rule-6 bg-white/5 px-3 py-2 text-xs font-bold text-ink-q transition-all duration-300 hover:bg-white/5 hover:text-ink active:scale-95"
                                 aria-label="Open system logs"
                             >
                                 <div className="relative">
                                     <Terminal className="h-4 w-4" />
-                                    <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_5px_var(--success)]"></span>
+                                    <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-green-500 animate-pulse"></span>
                                 </div>
                                 <span className="hidden sm:inline tracking-tight">{t('systemLogs')}</span>
                             </button>
@@ -1120,11 +1120,11 @@ export function ScreenerDashboard() {
                         </div>
 
                         <div className="relative w-full md:hidden">
-                            <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                            <Search className="absolute left-3 top-2.5 h-4 w-4 text-ink-2" />
                             <input
                                 type="text"
                                 placeholder={t('searchPlaceholder')}
-                                className="w-full rounded-md border border-border/50 bg-secondary/50 py-2 pl-9 pr-3 text-sm transition-all focus:bg-secondary focus:outline-none focus:ring-1 focus:ring-primary"
+                                className="w-full border border-rule-6 bg-white/5 py-2 pl-9 pr-3 text-sm transition-all focus:bg-white/5 focus:outline-none focus:ring-1 focus:ring-primary"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -1137,10 +1137,10 @@ export function ScreenerDashboard() {
                     <section className="mb-4">
                         <div className="mb-2 flex flex-col gap-1 xl:flex-row xl:items-end xl:justify-between">
                             <div>
-                                <div className="text-xs font-black uppercase tracking-[0.18em] text-muted-foreground">{t('investingLens')}</div>
-                                <h2 className="text-xl font-black tracking-tight text-foreground md:text-2xl">{t('strategyBoard')}</h2>
+                                <div className="text-xs font-extrabold uppercase tracking-[0.18em] text-ink-2">{t('investingLens')}</div>
+                                <h2 className="text-xl font-extrabold tracking-tight text-ink md:text-2xl">{t('strategyBoard')}</h2>
                             </div>
-                            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                            <p className="max-w-2xl text-sm leading-relaxed text-ink-2">
                                 {t('strategyBoardDesc')}
                             </p>
                         </div>
@@ -1153,22 +1153,22 @@ export function ScreenerDashboard() {
                                 const countLabel = formatCount(count, id === 'youtube' ? isYoutubeCountLoading : isBaseUniverseLoading);
                                 const content = (
                                     <div className={clsx(
-                                        "h-full rounded-lg border p-3 text-left transition-all",
+                                        "h-full  border p-3 text-left transition-all",
                                         isActive
-                                            ? "border-primary/70 bg-primary/10 shadow-[0_0_0_1px_rgba(52,211,153,0.18)]"
-                                            : "border-border/70 bg-card/70 hover:border-primary/40 hover:bg-secondary/30"
+                                            ? "border-accent/70 bg-accent/10 "
+                                            : "border-rule-6 bg-surface hover:border-accent/40 hover:bg-white/5"
                                     )}>
                                         <div className="flex items-center gap-3">
-                                            <div className={clsx("shrink-0 rounded-md border p-2", meta.accent)}>
+                                            <div className={clsx("shrink-0  border p-2", meta.accent)}>
                                                 <Icon className="h-4 w-4" />
                                             </div>
                                             <div className="min-w-0 flex-1">
-                                                <div className="truncate text-xs font-black uppercase tracking-wider text-muted-foreground">{meta.eyebrow}</div>
-                                                <div className="truncate text-base font-black text-foreground">{meta.title}</div>
+                                                <div className="truncate text-xs font-extrabold uppercase tracking-wider text-ink-2">{meta.eyebrow}</div>
+                                                <div className="truncate text-base font-extrabold text-ink">{meta.title}</div>
                                             </div>
                                             <div className="shrink-0 text-right">
-                                                <div className="font-mono text-base font-black text-foreground">{countLabel}</div>
-                                                <div className="text-xs font-bold uppercase tracking-wide text-muted-foreground">{meta.metricLabel}</div>
+                                                <div className="font-mono text-base font-extrabold text-ink">{countLabel}</div>
+                                                <div className="text-xs font-bold uppercase tracking-wide text-ink-2">{meta.metricLabel}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -1257,20 +1257,20 @@ export function ScreenerDashboard() {
                     </section>
                     {/* Phase 11d: Batch Progress Bar */}
                     {screenMode === 'reverse' && batchId && (
-                        <div className="mb-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 animate-in fade-in">
+                        <div className="mb-4 border border-pos/40 bg-pos/10 p-4 animate-in fade-in">
                             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                                 <div className="flex items-start gap-3">
-                                    <Sparkles className={clsx("mt-1 h-5 w-5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-emerald-400" : "text-emerald-400 animate-pulse")} />
+                                    <Sparkles className={clsx("mt-1 h-5 w-5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-pos" : "text-pos animate-pulse")} />
                                     <div>
-                                        <span className="text-lg font-black text-emerald-400">Batch Deep-Dive</span>
-                                        <span className="mt-1 block text-base text-muted-foreground sm:ml-3 sm:inline">
+                                        <span className="text-lg font-extrabold text-pos">Batch Deep-Dive</span>
+                                        <span className="mt-1 block text-base text-ink-2 sm:ml-3 sm:inline">
                                             {batchProgress
                                                 ? `${batchProgress.completed} of ${batchProgress.total} complete${batchProgress.failed > 0 ? ` (${batchProgress.failed} failed)` : ''}`
                                                 : `Waiting for workers...`}
                                         </span>
                                     </div>
                                 </div>
-                                <button onClick={() => dismissBatchPanel()} className="w-fit rounded-lg border border-border/60 px-3.5 py-2 text-base font-bold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">Dismiss</button>
+                                <button onClick={() => dismissBatchPanel()} className="w-fit border border-rule-6 px-3.5 py-2 text-base font-bold text-ink-2 transition-colors hover:bg-white/5 hover:text-ink">Dismiss</button>
                             </div>
                             {batchProgress && (
                                 <div className="mt-3 grid grid-cols-3 gap-2">
@@ -1280,8 +1280,8 @@ export function ScreenerDashboard() {
                                 </div>
                             )}
                             {batchProgress && (
-                                <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-secondary/50">
-                                    <div className="h-full bg-emerald-500 rounded-full transition-all duration-700"
+                                <div className="mt-3 h-2.5 w-full overflow-hidden bg-white/5">
+                                    <div className="h-full bg-pos transition-all duration-700"
                                         style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
                                 </div>
                             )}
@@ -1289,10 +1289,10 @@ export function ScreenerDashboard() {
                                 <div className="mt-3 flex max-h-28 flex-wrap gap-2 overflow-y-auto">
                                     {batchProgress.tickers.map((t: any) => (
                                         <span key={t.ticker} className={clsx(
-                                            "rounded-md px-2.5 py-1.5 font-mono text-base font-bold",
-                                            t.status === 'completed' ? "bg-emerald-500/20 text-emerald-400" :
-                                            t.status === 'error' ? "bg-red-500/20 text-red-400" :
-                                            "bg-secondary/40 text-muted-foreground"
+                                            " px-2.5 py-1.5 font-mono text-base font-bold",
+                                            t.status === 'completed' ? "bg-pos/10 text-pos" :
+                                            t.status === 'error' ? "bg-neg/10 text-neg" :
+                                            "bg-white/5 text-ink-2"
                                         )}>
                                             {t.ticker}{t.status === 'completed' ? ' done' : t.status === 'error' ? ' error' : ' pending'}
                                         </span>
@@ -1300,37 +1300,37 @@ export function ScreenerDashboard() {
                                 </div>
                             )}
                             {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                <p className="mt-3 text-base font-bold text-emerald-400">All done! Open any stock card to view its report.</p>
+                                <p className="mt-3 text-base font-bold text-pos">All done! Open any stock card to view its report.</p>
                             )}
                         </div>
                     )}
-                    <div className="mb-4 rounded-lg border border-border/70 bg-card/70 p-4 shadow-sm">
+                    <div className="mb-4 border border-rule-6 bg-surface p-4">
                         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                             <div className="min-w-0">
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <span className={clsx("rounded-md border px-2.5 py-1 text-xs font-black uppercase tracking-wider", activeStrategy.accent)}>
+                                    <span className={clsx(" border px-2.5 py-1 text-xs font-extrabold uppercase tracking-wider", activeStrategy.accent)}>
                                         {activeStrategy.eyebrow}
                                     </span>
-                                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{selectedMarket} {t('selectedMarket')}</span>
+                                    <span className="text-xs font-bold uppercase tracking-wider text-ink-2">{selectedMarket} {t('selectedMarket')}</span>
                                 </div>
-                                <h2 className="mt-1.5 text-2xl font-black tracking-tight">{activeStrategy.title}</h2>
-                                <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{activeSummary}</p>
+                                <h2 className="mt-1.5 text-2xl font-extrabold tracking-tight">{activeStrategy.title}</h2>
+                                <p className="mt-1 max-w-3xl text-sm leading-relaxed text-ink-2">{activeSummary}</p>
                                 {visibleFilterChips.length > 0 && (
                                     <div className="mt-2 flex flex-wrap items-center gap-1.5">
                                         {visibleFilterChips.map((chip) => (
-                                            <span key={chip} className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-xs font-bold text-muted-foreground">
+                                            <span key={chip} className="border border-rule-6 bg-white/5 px-2.5 py-1 text-xs font-bold text-ink-2">
                                                 {chip}
                                             </span>
                                         ))}
                                         {hiddenFilterChipCount > 0 && (
-                                            <span className="rounded-full border border-border/70 bg-secondary/40 px-2.5 py-1 text-xs font-bold text-muted-foreground">
+                                            <span className="border border-rule-6 bg-white/5 px-2.5 py-1 text-xs font-bold text-ink-2">
                                                 +{hiddenFilterChipCount} {t('more')}
                                             </span>
                                         )}
                                         <button
                                             type="button"
                                             onClick={resetActiveFilters}
-                                            className="rounded-full border border-primary/40 bg-primary/10 px-2.5 py-1 text-xs font-black text-primary transition-colors hover:bg-primary/15"
+                                            className="border border-accent/40 bg-accent/10 px-2.5 py-1 text-xs font-extrabold text-accent transition-colors hover:bg-accent/10"
                                         >
                                             {t('resetFiltersShort')}
                                         </button>
@@ -1343,13 +1343,13 @@ export function ScreenerDashboard() {
                                     <SummaryMetric label={t('results')} value={filteredCount.toLocaleString()} />
                                     <SummaryMetric label={t('sortedBy')} value={activeMetric} />
                                 </div>
-                                <div className="grid grid-cols-2 rounded-lg border border-border/70 bg-secondary/30 p-1 shadow-inner">
+                                <div className="grid grid-cols-2 border border-rule-6 bg-white/5 p-1">
                                     <button
                                         type="button"
                                         onClick={() => setResultView('cards')}
                                         className={clsx(
-                                            "flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-black transition-colors",
-                                            resultView === 'cards' ? "border border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                                            "flex items-center justify-center gap-2  px-3 py-2 text-sm font-extrabold transition-colors",
+                                            resultView === 'cards' ? "border border-pos/40 bg-pos/10 text-pos " : "text-ink-2 hover:bg-white/5 hover:text-ink"
                                         )}
                                         aria-pressed={resultView === 'cards'}
                                     >
@@ -1360,8 +1360,8 @@ export function ScreenerDashboard() {
                                         type="button"
                                         onClick={() => setResultView('table')}
                                         className={clsx(
-                                            "flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-black transition-colors",
-                                            resultView === 'table' ? "border border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                                            "flex items-center justify-center gap-2  px-3 py-2 text-sm font-extrabold transition-colors",
+                                            resultView === 'table' ? "border border-pos/40 bg-pos/10 text-pos " : "text-ink-2 hover:bg-white/5 hover:text-ink"
                                         )}
                                         aria-pressed={resultView === 'table'}
                                     >
@@ -1376,11 +1376,11 @@ export function ScreenerDashboard() {
                     {(loading && rawResults.length === 0) || isYoutubeUniverseLoading ? (
                         <LoadingResultsState title={t('initEngine')} strategy={activeStrategy.title} view={resultView} />
                     ) : filteredCount === 0 ? (
-                        <div className="flex min-h-72 flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-8 text-center text-muted-foreground">
-                            <span className={clsx("rounded-md border px-3 py-1.5 text-base font-black uppercase tracking-wider", activeStrategy.accent)}>
+                        <div className="flex min-h-72 flex-col items-center justify-center border border-dashed border-rule-9 bg-surface p-8 text-center text-ink-2">
+                            <span className={clsx(" border px-3 py-1.5 text-base font-extrabold uppercase tracking-wider", activeStrategy.accent)}>
                                 {activeStrategy.title}
                             </span>
-                            <p className="mt-4 text-2xl font-black text-foreground">{t('noMatchingStocks')}</p>
+                            <p className="mt-4 text-2xl font-extrabold text-ink">{t('noMatchingStocks')}</p>
                             <p className="mt-2 max-w-xl text-base leading-relaxed">{t('noStocks')}</p>
                             <div className="mt-5 grid w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
                                 <EmptyStateStat label={t('selectedMarket')} value={selectedMarket} />
@@ -1390,37 +1390,37 @@ export function ScreenerDashboard() {
                             {visibleFilterChips.length > 0 && (
                                 <div className="mt-4 flex max-w-2xl flex-wrap justify-center gap-2">
                                     {visibleFilterChips.map((chip) => (
-                                        <span key={chip} className="rounded-md border border-border/60 bg-secondary/35 px-3 py-1.5 text-base font-black text-muted-foreground">
+                                        <span key={chip} className="border border-rule-6 bg-white/5 px-3 py-1.5 text-base font-extrabold text-ink-2">
                                             {chip}
                                         </span>
                                     ))}
                                     {hiddenFilterChipCount > 0 && (
-                                        <span className="rounded-md border border-border/60 bg-secondary/25 px-3 py-1.5 text-base font-black text-muted-foreground">
+                                        <span className="border border-rule-6 bg-white/5 px-3 py-1.5 text-base font-extrabold text-ink-2">
                                             +{hiddenFilterChipCount} {t('more')}
                                         </span>
                                     )}
                                 </div>
                             )}
-                            <button onClick={resetActiveFilters} className="mt-5 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2.5 text-base font-black text-primary transition-colors hover:bg-primary/15">{t('resetFilters')}</button>
+                            <button onClick={resetActiveFilters} className="mt-5 border border-accent/40 bg-accent/10 px-4 py-2.5 text-base font-extrabold text-accent transition-colors hover:bg-accent/10">{t('resetFilters')}</button>
                         </div>
                     ) : (
                         <>
                             {screenMode === 'paradigm' && (
-                                <div className="mb-4 rounded-lg border border-purple-500/20 bg-purple-500/[0.04] p-3">
+                                <div className="mb-4 border border-rule-14 bg-white/5] p-3">
                                     <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                                         <div>
-                                            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-purple-300">
+                                            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
                                                 <History className="h-4 w-4" />
                                                 Paradigm Monitor
                                             </div>
-                                            <p className="mt-1 text-xs font-semibold text-muted-foreground">
+                                            <p className="mt-1 text-xs font-semibold text-ink-2">
                                                 {paradigmChangeStats.total.toLocaleString()} new changes since baseline. {paradigmBaselineEvents.length.toLocaleString()} names in current snapshot.
                                             </p>
                                         </div>
                                         <button
                                             type="button"
                                             onClick={() => setShowParadigmSnapshot(value => !value)}
-                                            className="w-full rounded-md border border-purple-500/30 bg-purple-500/10 px-3 py-2 text-xs font-black uppercase tracking-wide text-purple-200 transition-colors hover:bg-purple-500/15 sm:w-auto"
+                                            className="w-full border border-rule-14 bg-white/5 px-3 py-2 text-xs font-extrabold uppercase tracking-wide text-ink-2 transition-colors hover:bg-white/5 sm:w-auto"
                                         >
                                             {showParadigmSnapshot ? "Hide Snapshot" : "View Current Snapshot"}
                                         </button>
@@ -1435,9 +1435,9 @@ export function ScreenerDashboard() {
                                     </div>
 
                                     {paradigmRealChangeEvents.length > 0 ? (
-                                        <div className="overflow-x-auto rounded-md border border-border/60 bg-background/35">
+                                        <div className="overflow-x-auto border border-rule-6 bg-page">
                                             <table className="w-full min-w-[760px] text-left text-xs">
-                                                <thead className="border-b border-border/60 bg-secondary/35 text-xs uppercase tracking-wider text-muted-foreground">
+                                                <thead className="border-b border-rule-6 bg-white/5 text-xs uppercase tracking-wider text-ink-2">
                                                     <tr>
                                                         <th className="px-3 py-2">Ticker</th>
                                                         <th className="px-3 py-2">Direction</th>
@@ -1451,35 +1451,35 @@ export function ScreenerDashboard() {
                                                     {paradigmRealChangeEvents.slice(0, 12).map(event => (
                                                         <tr
                                                             key={`${event.run_id}-${event.symbol}-${event.summary}`}
-                                                            className="cursor-pointer transition-colors hover:bg-purple-500/10"
+                                                            className="cursor-pointer transition-colors hover:bg-white/5"
                                                             onClick={() => {
                                                                 const match = rawResults.find(result => result.candidate.symbol === event.symbol);
                                                                 if (match) setSelectedStock(match);
                                                             }}
                                                         >
-                                                            <td className="px-3 py-2 font-mono font-black text-foreground">{event.symbol}</td>
-                                                            <td className="px-3 py-2 font-bold capitalize text-muted-foreground">{event.direction}</td>
-                                                            <td className="px-3 py-2 font-mono text-muted-foreground">{`${event.from_band || "n/a"} -> ${event.to_band || "n/a"}`}</td>
-                                                            <td className="px-3 py-2 font-mono text-muted-foreground">{`${event.from_signal ?? "n/a"} -> ${event.to_signal ?? "n/a"} / #${event.to_rank ?? "n/a"}`}</td>
-                                                            <td className="px-3 py-2 text-muted-foreground">{event.to_theme_primary || event.from_theme_primary || "n/a"}</td>
-                                                            <td className="px-3 py-2 font-mono text-muted-foreground">{event.snapshot_date}</td>
+                                                            <td className="px-3 py-2 font-mono font-extrabold text-ink">{event.symbol}</td>
+                                                            <td className="px-3 py-2 font-bold capitalize text-ink-2">{event.direction}</td>
+                                                            <td className="px-3 py-2 font-mono text-ink-2">{`${event.from_band || "n/a"} -> ${event.to_band || "n/a"}`}</td>
+                                                            <td className="px-3 py-2 font-mono text-ink-2">{`${event.from_signal ?? "n/a"} -> ${event.to_signal ?? "n/a"} / #${event.to_rank ?? "n/a"}`}</td>
+                                                            <td className="px-3 py-2 text-ink-2">{event.to_theme_primary || event.from_theme_primary || "n/a"}</td>
+                                                            <td className="px-3 py-2 font-mono text-ink-2">{event.snapshot_date}</td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
                                             </table>
                                         </div>
                                     ) : (
-                                        <div className="rounded-md border border-border/50 bg-background/30 px-3 py-2 text-sm font-semibold text-muted-foreground">
+                                        <div className="border border-rule-6 bg-page px-3 py-2 text-sm font-semibold text-ink-2">
                                             Baseline is active. No Paradigm upgrades, downgrades, or theme changes have been recorded since tracking started.
                                         </div>
                                     )}
 
                                     {showParadigmSnapshot && (
-                                        <div className="mt-3 rounded-md border border-purple-500/20 bg-background/35 p-3">
+                                        <div className="mt-3 border border-rule-14 bg-page p-3">
                                             <div className="mb-3 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
                                                 <div>
-                                                    <div className="text-xs font-black uppercase tracking-wider text-purple-200">Current Snapshot</div>
-                                                    <p className="mt-1 text-xs font-semibold text-muted-foreground">
+                                                    <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">Current Snapshot</div>
+                                                    <p className="mt-1 text-xs font-semibold text-ink-2">
                                                         Baseline watchlist entries, sorted by band and rank. Showing {paradigmSnapshotRows.length.toLocaleString()} of {paradigmBaselineEvents.length.toLocaleString()}.
                                                     </p>
                                                 </div>
@@ -1488,12 +1488,12 @@ export function ScreenerDashboard() {
                                                         value={paradigmSnapshotSearch}
                                                         onChange={(event) => setParadigmSnapshotSearch(event.target.value)}
                                                         placeholder="Search ticker, name, theme..."
-                                                        className="rounded-md border border-border/60 bg-background px-3 py-2 text-xs font-semibold text-foreground outline-none focus:border-purple-400"
+                                                        className="border border-rule-6 bg-page px-3 py-2 text-xs font-semibold text-ink outline-none focus:border-purple-400"
                                                     />
                                                     <select
                                                         value={paradigmSnapshotBand}
                                                         onChange={(event) => setParadigmSnapshotBand(event.target.value)}
-                                                        className="rounded-md border border-border/60 bg-background px-3 py-2 text-xs font-bold text-foreground outline-none focus:border-purple-400"
+                                                        className="border border-rule-6 bg-page px-3 py-2 text-xs font-bold text-ink outline-none focus:border-purple-400"
                                                     >
                                                         <option value="all">All bands</option>
                                                         <option value="high">Strong</option>
@@ -1503,7 +1503,7 @@ export function ScreenerDashboard() {
                                                     <select
                                                         value={paradigmSnapshotTheme}
                                                         onChange={(event) => setParadigmSnapshotTheme(event.target.value)}
-                                                        className="rounded-md border border-border/60 bg-background px-3 py-2 text-xs font-bold text-foreground outline-none focus:border-purple-400"
+                                                        className="border border-rule-6 bg-page px-3 py-2 text-xs font-bold text-ink outline-none focus:border-purple-400"
                                                     >
                                                         <option value="all">All themes</option>
                                                         {paradigmSnapshotThemes.map(theme => (
@@ -1512,9 +1512,9 @@ export function ScreenerDashboard() {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div className="max-h-80 overflow-auto rounded-md border border-border/60">
+                                            <div className="max-h-80 overflow-auto border border-rule-6">
                                                 <table className="w-full min-w-[760px] text-left text-xs">
-                                                    <thead className="sticky top-0 border-b border-border/60 bg-secondary text-xs uppercase tracking-wider text-muted-foreground">
+                                                    <thead className="sticky top-0 border-b border-rule-6 bg-white/5 text-xs uppercase tracking-wider text-ink-2">
                                                         <tr>
                                                             <th className="px-3 py-2">Ticker</th>
                                                             <th className="px-3 py-2">Company</th>
@@ -1524,24 +1524,24 @@ export function ScreenerDashboard() {
                                                             <th className="px-3 py-2">Primary Theme</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody className="divide-y divide-border/50 bg-background/20">
+                                                    <tbody className="divide-y divide-border/50 bg-page">
                                                         {paradigmSnapshotRows.map(event => {
                                                             const stock = rawResults.find(result => result.candidate.symbol === event.symbol);
                                                             const band = event.to_band || stock?.paradigm?.pdm_band || "n/a";
                                                             return (
                                                                 <tr
                                                                     key={`${event.run_id}-${event.symbol}-baseline`}
-                                                                    className="cursor-pointer transition-colors hover:bg-purple-500/10"
+                                                                    className="cursor-pointer transition-colors hover:bg-white/5"
                                                                     onClick={() => {
                                                                         if (stock) setSelectedStock(stock);
                                                                     }}
                                                                 >
-                                                                    <td className="px-3 py-2 font-mono font-black text-foreground">{event.symbol}</td>
-                                                                    <td className="max-w-[240px] truncate px-3 py-2 font-semibold text-muted-foreground" title={event.name || stock?.candidate.name || ""}>{event.name || stock?.candidate.name || "n/a"}</td>
-                                                                    <td className="px-3 py-2 font-black uppercase text-purple-200">{PARADIGM_BAND_LABELS[band] || band}</td>
-                                                                    <td className="px-3 py-2 font-mono text-muted-foreground">{event.to_signal ?? stock?.paradigm?.pdm_signal ?? "n/a"}</td>
-                                                                    <td className="px-3 py-2 font-mono text-muted-foreground">#{event.to_rank ?? stock?.paradigm?.pdm_rank ?? "n/a"}</td>
-                                                                    <td className="px-3 py-2 text-muted-foreground">{event.to_theme_primary || stock?.paradigm?.pdm_theme_primary || "n/a"}</td>
+                                                                    <td className="px-3 py-2 font-mono font-extrabold text-ink">{event.symbol}</td>
+                                                                    <td className="max-w-[240px] truncate px-3 py-2 font-semibold text-ink-2" title={event.name || stock?.candidate.name || ""}>{event.name || stock?.candidate.name || "n/a"}</td>
+                                                                    <td className="px-3 py-2 font-extrabold uppercase text-ink-2">{PARADIGM_BAND_LABELS[band] || band}</td>
+                                                                    <td className="px-3 py-2 font-mono text-ink-2">{event.to_signal ?? stock?.paradigm?.pdm_signal ?? "n/a"}</td>
+                                                                    <td className="px-3 py-2 font-mono text-ink-2">#{event.to_rank ?? stock?.paradigm?.pdm_rank ?? "n/a"}</td>
+                                                                    <td className="px-3 py-2 text-ink-2">{event.to_theme_primary || stock?.paradigm?.pdm_theme_primary || "n/a"}</td>
                                                                 </tr>
                                                             );
                                                         })}
@@ -1569,10 +1569,10 @@ export function ScreenerDashboard() {
                                                         });
                                                     }}
                                                     className={clsx(
-                                                        "absolute top-2 right-2 z-20 w-6 h-6 rounded-md border-2 flex items-center justify-center transition-all",
+                                                        "absolute top-2 right-2 z-20 w-6 h-6  border-2 flex items-center justify-center transition-all",
                                                         selectedTickers.has(result.candidate.symbol)
-                                                            ? "bg-emerald-500 border-emerald-500 text-white"
-                                                            : "bg-background/60 border-border/50 hover:border-emerald-400"
+                                                            ? "bg-pos border-pos text-surface"
+                                                            : "bg-page border-rule-6 hover:border-emerald-400"
                                                     )}
                                                     aria-label={`${selectedTickers.has(result.candidate.symbol) ? 'Deselect' : 'Select'} ${result.candidate.symbol}`}
                                                 >
@@ -1615,15 +1615,15 @@ export function ScreenerDashboard() {
                             {/* Pagination Controls */}
                             {totalPages > 1 && (
                                 <div className="pb-8">
-                                    <div className="mx-auto flex max-w-4xl flex-col gap-3 rounded-xl border border-border/70 bg-card/75 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+                                    <div className="mx-auto flex max-w-4xl flex-col gap-3 border border-rule-6 bg-surface p-4 sm:flex-row sm:items-center sm:justify-between">
                                         <div className="text-center sm:text-left">
-                                            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{t('page')} {currentPage} {t('of')} {totalPages}</div>
+                                            <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{t('page')} {currentPage} {t('of')} {totalPages}</div>
                                             <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-                                                <span className="rounded-md border border-primary/25 bg-primary/10 px-3 py-1.5 font-mono text-lg font-black text-primary">
+                                                <span className="border border-accent/25 bg-accent/10 px-3 py-1.5 font-mono text-lg font-extrabold text-accent">
                                                     {filteredCount > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}
                                                 </span>
-                                                <span className="text-base font-bold text-muted-foreground">{t('of')} {filteredCount.toLocaleString()} {t('results')}</span>
-                                                <span className="rounded-md border border-border/60 bg-secondary/30 px-2.5 py-1.5 text-base font-black text-muted-foreground">
+                                                <span className="text-base font-bold text-ink-2">{t('of')} {filteredCount.toLocaleString()} {t('results')}</span>
+                                                <span className="border border-rule-6 bg-white/5 px-2.5 py-1.5 text-base font-extrabold text-ink-2">
                                                     {ITEMS_PER_PAGE} / {t('perPage')}
                                                 </span>
                                             </div>
@@ -1632,7 +1632,7 @@ export function ScreenerDashboard() {
                                             <button
                                                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                                                 disabled={currentPage === 1}
-                                                className="rounded-lg border border-border bg-secondary/40 px-4 py-3 text-base font-black transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-45"
+                                                className="border border-rule-9 bg-white/5 px-4 py-3 text-base font-extrabold transition-colors hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-45"
                                             >
                                                 {t('previous')}
                                             </button>
@@ -1642,10 +1642,10 @@ export function ScreenerDashboard() {
                                                     key={p}
                                                     onClick={() => setCurrentPage(p)}
                                                     className={clsx(
-                                                        "flex h-11 min-w-11 items-center justify-center rounded-lg px-3 text-base font-black transition-colors",
+                                                        "flex h-11 min-w-11 items-center justify-center  px-3 text-base font-extrabold transition-colors",
                                                         currentPage === p
-                                                            ? 'border border-emerald-400/60 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-2px_rgba(52,211,153,0.45)]'
-                                                            : 'border border-border/60 bg-secondary/30 text-muted-foreground hover:bg-secondary hover:text-foreground'
+                                                            ? 'border border-pos/40 bg-pos/10 text-pos '
+                                                            : 'border border-rule-6 bg-white/5 text-ink-2 hover:bg-white/5 hover:text-ink'
                                                     )}
                                                 >
                                                     {p}
@@ -1655,7 +1655,7 @@ export function ScreenerDashboard() {
                                             <button
                                                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                                                 disabled={currentPage === totalPages}
-                                                className="rounded-lg border border-border bg-secondary/40 px-4 py-3 text-base font-black transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-45"
+                                                className="border border-rule-9 bg-white/5 px-4 py-3 text-base font-extrabold transition-colors hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-45"
                                             >
                                                 {t('next')}
                                             </button>
@@ -1681,25 +1681,25 @@ export function ScreenerDashboard() {
 
             {/* AI Modal Overlay */}
             {aiModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-end justify-center bg-background/80 backdrop-blur-sm animate-in fade-in duration-200 sm:items-center sm:p-3">
-                    <div className="flex h-[94vh] w-full flex-col overflow-hidden rounded-t-xl border border-border bg-card shadow-2xl sm:h-[90vh] sm:max-w-[92vw] sm:rounded-xl lg:max-w-5xl">
-                        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-border bg-secondary/30 p-3 sm:p-4">
+                <div className="fixed inset-0 z-50 flex items-end justify-center bg-page animate-in fade-in duration-200 sm:items-center sm:p-3">
+                    <div className="flex h-[94vh] w-full flex-col overflow-hidden -xl border border-rule-9 bg-surface sm:h-[90vh] sm:max-w-[92vw] sm: lg:max-w-5xl">
+                        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-rule-9 bg-white/5 p-3 sm:p-4">
                             <div className="min-w-0">
-                                <p className="text-xs font-black uppercase tracking-[0.16em] text-muted-foreground">Research handoff</p>
-                                <h3 className="mt-0.5 text-xl font-black tracking-tight text-foreground sm:text-2xl">
+                                <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-ink-2">Research handoff</p>
+                                <h3 className="mt-0.5 text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
                                     Prompt Exporter: {selectedAiTicker}
                                 </h3>
-                                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                                <p className="mt-1 text-sm leading-relaxed text-ink-2">
                                     Copy the prepared prompt, open a model, or run the protected Deepseek workflow.
                                 </p>
                             </div>
-                            <button onClick={() => setAiModalOpen(false)} className="text-muted-foreground hover:text-foreground shrink-0 ml-2" aria-label="Close AI prompt modal">
+                            <button onClick={() => setAiModalOpen(false)} className="text-ink-2 hover:text-ink shrink-0 ml-2" aria-label="Close AI prompt modal">
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
                         <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-3 sm:p-4">
                             {aiLoading ? (
-                                <div className="flex flex-col items-center justify-center flex-1 text-muted-foreground gap-4">
+                                <div className="flex flex-col items-center justify-center flex-1 text-ink-2 gap-4">
                                     <RefreshCw className="h-8 w-8 animate-spin text-accent" />
                                     <p className="text-base font-medium text-center">Injecting latest real-time statements and building prompt...</p>
                                 </div>
@@ -1712,15 +1712,15 @@ export function ScreenerDashboard() {
                                     </div>
                                     <div className="grid min-h-[260px] flex-1 grid-cols-1 gap-3 sm:min-h-[300px]">
                                         {/* Prompt Box */}
-                                        <div className="relative flex-1 bg-[#0d121c] border border-border rounded-xl overflow-hidden flex flex-col shadow-inner">
-                                            <div className="flex shrink-0 flex-col gap-2 border-b border-border bg-secondary/40 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between">
+                                        <div className="relative flex-1 bg-page border border-rule-9 overflow-hidden flex flex-col">
+                                            <div className="flex shrink-0 flex-col gap-2 border-b border-rule-9 bg-white/5 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between">
                                                 <div>
-                                                    <span className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
-                                                    <p className="mt-0.5 text-sm text-muted-foreground">Prepared analysis packet for valuation, scenarios, risks, and final verdict.</p>
+                                                    <span className="font-mono text-xs font-semibold uppercase tracking-wider text-ink-2">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
+                                                    <p className="mt-0.5 text-sm text-ink-2">Prepared analysis packet for valuation, scenarios, risks, and final verdict.</p>
                                                 </div>
                                                 <button
                                                     onClick={() => copyToClipboard(aiResult!)}
-                                                    className="flex w-full items-center justify-center gap-2 rounded-md border border-emerald-500/40 bg-emerald-500/15 px-3 py-2 text-sm font-black text-emerald-300 shadow-sm transition-colors hover:bg-emerald-500/25 sm:w-auto"
+                                                    className="flex w-full items-center justify-center gap-2 border border-pos/40 bg-pos/10 px-3 py-2 text-sm font-extrabold text-pos transition-colors hover:bg-pos/10 sm:w-auto"
                                                 >
                                                     {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                                                     {copied ? 'COPIED!' : 'COPY PROMPT'}
@@ -1729,33 +1729,33 @@ export function ScreenerDashboard() {
                                             <textarea
                                                 readOnly
                                                 value={aiResult || ""}
-                                                className="h-full w-full flex-1 resize-none overflow-y-auto bg-transparent p-3 font-mono text-xs leading-6 text-foreground/90 focus:outline-none focus:ring-0 sm:text-sm"
+                                                className="h-full w-full flex-1 resize-none overflow-y-auto bg-transparent p-3 font-mono text-xs leading-6 text-ink-q focus:outline-none focus:ring-0 sm:text-sm"
                                             />
                                         </div>
                                         
                                         {/* Deepseek Result Box */}
                                         {dsResult && (
-                                            <div className="relative flex-1 bg-[#1a1f2e] border border-blue-500/30 rounded-xl overflow-hidden flex flex-col shadow-inner">
-                                                <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-blue-500/20 bg-blue-500/10 px-3 py-2.5">
-                                                    <span className="font-mono text-xs font-semibold uppercase tracking-wider text-blue-400">QUANT REPORT</span>
+                                            <div className="relative flex-1 bg-surface border border-accent/40 overflow-hidden flex flex-col">
+                                                <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-accent/40 bg-accent/10 px-3 py-2.5">
+                                                    <span className="font-mono text-xs font-semibold uppercase tracking-wider text-accent">QUANT REPORT</span>
                                                     <div className="flex items-center gap-3">
                                                         <div className="flex flex-col">
-                                                            <h1 className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-base font-black tracking-tight text-transparent">
-                                                                QUANT <span className="text-blue-500">PRO</span>
+                                                            <h1 className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-base font-extrabold tracking-tight text-transparent">
+                                                                QUANT <span className="text-accent">PRO</span>
                                                             </h1>
                                                             <div className="flex items-center gap-2">
-                                                                <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Global Terminal</span>
-                                                                <div className="h-1 w-1 rounded-full bg-green-500 animate-pulse" />
+                                                                <span className="text-xs font-medium uppercase tracking-widest text-ink-2">Global Terminal</span>
+                                                                <div className="h-1 w-1 bg-green-500 animate-pulse" />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button onClick={downloadDsResult} className="flex items-center gap-1 rounded bg-secondary px-3 py-2 text-sm font-bold hover:bg-secondary/80">Download .txt</button>
-                                                    <button onClick={copyDsResult} className="flex items-center gap-1 rounded border border-emerald-500/40 bg-emerald-500/15 px-3 py-2 text-sm font-bold text-emerald-300 hover:bg-emerald-500/25">
+                                                    <button onClick={downloadDsResult} className="flex items-center gap-1 bg-white/5 px-3 py-2 text-sm font-bold hover:bg-white/5">Download .txt</button>
+                                                    <button onClick={copyDsResult} className="flex items-center gap-1 border border-pos/40 bg-pos/10 px-3 py-2 text-sm font-bold text-pos hover:bg-pos/10">
                                                         {dsCopied ? "Copied" : "Copy Result"}
                                                     </button>
                                                 </div>
-                                                <div className="flex-1 overflow-y-auto bg-slate-950/40 p-4 backdrop-blur-md sm:p-5">
-                                                    <div className="prose prose-invert prose-blue max-w-none break-words whitespace-pre-wrap font-sans text-sm leading-relaxed text-slate-100">
+                                                <div className="flex-1 overflow-y-auto bg-page/40 p-4 sm:p-5">
+                                                    <div className="prose prose-invert prose-blue max-w-none break-words whitespace-pre-wrap font-sans text-sm leading-relaxed text-ink">
                                                         <ReactMarkdown>
                                                             {dsResult.content
                                                                 .replace(/^```(markdown|json|text)?/i, '')
@@ -1769,59 +1769,59 @@ export function ScreenerDashboard() {
                                             </div>
                                         )}
                                     </div>
-                                    <div className="shrink-0 rounded-lg border border-border/60 bg-secondary/20 p-3">
+                                    <div className="shrink-0 border border-rule-6 bg-white/5 p-3">
                                         <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
                                             <div>
-                                                <div className="text-xs font-black uppercase tracking-[0.16em] text-muted-foreground">Choose output path</div>
-                                                <div className="mt-0.5 text-sm font-semibold text-foreground">Open a manual model, or run the protected Deepseek workflow.</div>
+                                                <div className="text-xs font-extrabold uppercase tracking-[0.16em] text-ink-2">Choose output path</div>
+                                                <div className="mt-0.5 text-sm font-semibold text-ink">Open a manual model, or run the protected Deepseek workflow.</div>
                                             </div>
-                                            <div className="text-xs font-bold text-muted-foreground">Prompt is ready to export</div>
+                                            <div className="text-xs font-bold text-ink-2">Prompt is ready to export</div>
                                         </div>
                                         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
-                                            <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 rounded-lg border border-white/10 bg-[#1A73E8]/90 px-3 py-2.5 text-white shadow-md transition-all hover:bg-[#1557B0] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="h-7 w-7 shrink-0 rounded-md bg-white p-1 shadow-sm" />
+                                            <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#1A73E8]/90 px-3 py-2.5 text-surface transition-all hover:bg-[#1557B0] active:scale-95">
+                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="h-7 w-7 shrink-0 bg-white p-1" />
                                             <span className="min-w-0">
-                                                <span className="block text-sm font-black tracking-tight">Gemini</span>
-                                                <span className="mt-0.5 block text-xs font-bold text-white/80">Open manual chat</span>
+                                                <span className="block text-sm font-extrabold tracking-tight">Gemini</span>
+                                                <span className="mt-0.5 block text-xs font-bold text-surface/80">Open manual chat</span>
                                             </span>
                                             </a>
-                                            <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 rounded-lg border border-white/10 bg-[#D97757]/90 px-3 py-2.5 text-white shadow-md transition-all hover:bg-[#C26547] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="h-7 w-7 shrink-0 rounded-md bg-white p-1 shadow-sm" />
+                                            <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#D97757]/90 px-3 py-2.5 text-surface transition-all hover:bg-[#C26547] active:scale-95">
+                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="h-7 w-7 shrink-0 bg-white p-1" />
                                             <span className="min-w-0">
-                                                <span className="block text-sm font-black tracking-tight">Claude</span>
-                                                <span className="mt-0.5 block text-xs font-bold text-white/80">Open manual chat</span>
+                                                <span className="block text-sm font-extrabold tracking-tight">Claude</span>
+                                                <span className="mt-0.5 block text-xs font-bold text-surface/80">Open manual chat</span>
                                             </span>
                                             </a>
-                                            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 rounded-lg border border-white/10 bg-[#10A37F]/90 px-3 py-2.5 text-white shadow-md transition-all hover:bg-[#0E906F] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="h-7 w-7 shrink-0 rounded-md bg-white p-1 shadow-sm" />
+                                            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#10A37F]/90 px-3 py-2.5 text-surface transition-all hover:bg-[#0E906F] active:scale-95">
+                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="h-7 w-7 shrink-0 bg-white p-1" />
                                             <span className="min-w-0">
-                                                <span className="block text-sm font-black tracking-tight">ChatGPT</span>
-                                                <span className="mt-0.5 block text-xs font-bold text-white/80">Open manual chat</span>
+                                                <span className="block text-sm font-extrabold tracking-tight">ChatGPT</span>
+                                                <span className="mt-0.5 block text-xs font-bold text-surface/80">Open manual chat</span>
                                             </span>
                                             </a>
                                             {showDsPassword ? (
-                                                <div className="flex min-h-16 flex-col justify-center gap-2 rounded-lg border border-[#4d6bfe]/40 bg-[#4d6bfe]/20 px-3 py-2.5">
+                                                <div className="flex min-h-16 flex-col justify-center gap-2 border border-[#4d6bfe]/40 bg-[#4d6bfe]/20 px-3 py-2.5">
                                                     <div>
-                                                        <div className="text-xs font-black uppercase tracking-wider text-blue-200">Protected run</div>
-                                                        <div className="mt-0.5 text-xs font-semibold text-white/75">Enter the workflow password to generate and save a report.</div>
+                                                        <div className="text-xs font-extrabold uppercase tracking-wider text-accent">Protected run</div>
+                                                        <div className="mt-0.5 text-xs font-semibold text-surface/75">Enter the workflow password to generate and save a report.</div>
                                                     </div>
-                                                    <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full rounded-md border border-white/15 bg-background px-3 py-2 text-sm font-bold text-foreground focus:outline-none focus:ring-2 focus:ring-[#4d6bfe]/50" />
+                                                    <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full border border-white/15 bg-page px-3 py-2 text-sm font-bold text-ink focus:outline-none focus:ring-2 focus:ring-[#4d6bfe]/50" />
                                                     <div className="grid grid-cols-2 gap-2">
-                                                        <button onClick={() => setShowDsPassword(false)} disabled={dsLoading} className="rounded-md border border-white/15 bg-white/5 px-3 py-2 text-sm font-bold text-white/80 transition-colors hover:bg-white/10 disabled:opacity-50">
+                                                        <button onClick={() => setShowDsPassword(false)} disabled={dsLoading} className="border border-white/15 bg-white/5 px-3 py-2 text-sm font-bold text-surface/80 transition-colors hover:bg-white/10 disabled:opacity-50">
                                                             Cancel
                                                         </button>
-                                                        <button onClick={handleDeepseekRun} disabled={dsLoading} className="rounded-md bg-[#4d6bfe] px-3 py-2 text-sm font-black text-white transition-colors hover:bg-[#3b54d1] disabled:opacity-60">
+                                                        <button onClick={handleDeepseekRun} disabled={dsLoading} className="bg-[#4d6bfe] px-3 py-2 text-sm font-extrabold text-surface transition-colors hover:bg-[#3b54d1] disabled:opacity-60">
                                                             {dsLoading ? "Running..." : "Run Deepseek"}
                                                         </button>
                                                     </div>
-                                                    {dsError && <span className="rounded-md border border-danger/30 bg-danger/10 px-3 py-2 text-xs font-bold text-danger">{dsError}</span>}
+                                                    {dsError && <span className="border border-danger/30 bg-danger/10 px-3 py-2 text-xs font-bold text-neg">{dsError}</span>}
                                                 </div>
                                             ) : (
-                                                <button onClick={() => setShowDsPassword(true)} className="flex min-h-16 items-center gap-2.5 rounded-lg border border-white/10 bg-[#4d6bfe]/90 px-3 py-2.5 text-left text-white shadow-md transition-all hover:bg-[#3b54d1] active:scale-95">
-                                                <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" alt="Deepseek" className="h-7 w-7 shrink-0 rounded-md bg-white p-1 shadow-sm" />
+                                                <button onClick={() => setShowDsPassword(true)} className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#4d6bfe]/90 px-3 py-2.5 text-left text-surface transition-all hover:bg-[#3b54d1] active:scale-95">
+                                                <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" alt="Deepseek" className="h-7 w-7 shrink-0 bg-white p-1" />
                                                 <span className="min-w-0">
-                                                    <span className="block text-sm font-black tracking-tight">Deepseek V4.0 Pro</span>
-                                                    <span className="mt-0.5 block text-xs font-bold text-white/80">Run protected workflow</span>
+                                                    <span className="block text-sm font-extrabold tracking-tight">Deepseek V4.0 Pro</span>
+                                                    <span className="mt-0.5 block text-xs font-bold text-surface/80">Run protected workflow</span>
                                                 </span>
                                                 </button>
                                             )}
@@ -1836,20 +1836,20 @@ export function ScreenerDashboard() {
 
             {/* Phase 11d: Batch Password Prompt */}
             {showBatchPassword && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
-                    <div className="w-full max-w-md animate-in zoom-in-95 rounded-2xl border border-border/70 bg-card p-6 shadow-2xl">
+                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-page">
+                    <div className="w-full max-w-md animate-in zoom-in-95 border border-rule-6 bg-surface p-6">
                         <div className="flex items-start gap-3">
-                            <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/10 p-3 text-emerald-400">
+                            <div className="border border-pos/40 bg-pos/10 p-3 text-pos">
                                 <Sparkles className="h-6 w-6" />
                             </div>
                             <div className="min-w-0 flex-1">
                                 <div className="mb-2 flex flex-wrap items-center gap-2">
-                                    <span className="rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 text-base font-black uppercase tracking-wider text-emerald-400">
+                                    <span className="border border-pos/40 bg-pos/10 px-2.5 py-1 text-base font-extrabold uppercase tracking-wider text-pos">
                                         Step 1 of 2
                                     </span>
                                 </div>
-                                <h3 className="text-2xl font-black tracking-tight">Protected Deep-Dive</h3>
-                                <p className="mt-1 text-base leading-relaxed text-muted-foreground">Enter the dispatch password before queuing v3.2 analyses.</p>
+                                <h3 className="text-2xl font-extrabold tracking-tight">Protected Deep-Dive</h3>
+                                <p className="mt-1 text-base leading-relaxed text-ink-2">Enter the dispatch password before queuing v3.2 analyses.</p>
                             </div>
                         </div>
                         <div className="my-5 grid grid-cols-2 gap-3">
@@ -1861,18 +1861,18 @@ export function ScreenerDashboard() {
                             placeholder="Password"
                             value={dsPassword}
                             onChange={(e) => setDsPassword(e.target.value)}
-                            className="mb-4 w-full rounded-lg border border-border bg-secondary/40 px-3.5 py-3 text-base focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                            className="mb-4 w-full border border-rule-9 bg-white/5 px-3.5 py-3 text-base focus:outline-none focus:ring-1 focus:ring-emerald-500"
                             onKeyDown={(e) => { if (e.key === 'Enter' && dsPassword) { setShowBatchPassword(false); setShowBatchConfirm(true); } }}
                         />
-                        <div className="mb-4 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-3 text-base font-semibold leading-relaxed text-emerald-300">
+                        <div className="mb-4 border border-pos/40 bg-pos/10 px-3.5 py-3 text-base font-semibold leading-relaxed text-pos">
                             Nothing is dispatched yet. The next screen shows the final queue count before workers start.
                         </div>
                         <div className="flex gap-3">
-                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 rounded-lg border border-border bg-muted px-3.5 py-3 text-base font-bold text-muted-foreground transition-colors hover:bg-secondary">Cancel</button>
+                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 border border-rule-9 bg-muted px-3.5 py-3 text-base font-bold text-ink-2 transition-colors hover:bg-white/5">Cancel</button>
                             <button
                                 onClick={() => { setShowBatchPassword(false); setShowBatchConfirm(true); }}
                                 disabled={!dsPassword}
-                                className="flex-1 rounded-lg bg-emerald-600 px-3.5 py-3 text-base font-black text-white transition-colors hover:bg-emerald-500 disabled:opacity-50"
+                                className="flex-1 bg-accent px-3.5 py-3 text-base font-extrabold text-surface transition-colors hover:bg-accent/80 disabled:opacity-50"
                             >Continue</button>
                         </div>
                     </div>
@@ -1881,26 +1881,26 @@ export function ScreenerDashboard() {
 
             {/* Phase 11d: Batch Confirm Dialog */}
             {showBatchConfirm && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
-                    <div className="w-full max-w-lg animate-in zoom-in-95 rounded-2xl border border-border/70 bg-card p-6 shadow-2xl">
+                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-page">
+                    <div className="w-full max-w-lg animate-in zoom-in-95 border border-rule-6 bg-surface p-6">
                         <div className="flex items-start gap-3">
-                            <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/10 p-3 text-emerald-400">
+                            <div className="border border-pos/40 bg-pos/10 p-3 text-pos">
                                 <Sparkles className="h-6 w-6" />
                             </div>
                             <div className="min-w-0 flex-1">
                                 <div className="mb-2 flex flex-wrap items-center gap-2">
-                                    <span className="rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 text-base font-black uppercase tracking-wider text-emerald-400">
+                                    <span className="border border-pos/40 bg-pos/10 px-2.5 py-1 text-base font-extrabold uppercase tracking-wider text-pos">
                                         Step 2 of 2
                                     </span>
-                                    <span className="rounded-md border border-border/60 bg-secondary/30 px-2.5 py-1 text-base font-black uppercase tracking-wider text-muted-foreground">
+                                    <span className="border border-rule-6 bg-white/5 px-2.5 py-1 text-base font-extrabold uppercase tracking-wider text-ink-2">
                                         Final review
                                     </span>
                                 </div>
-                                <h3 className="text-2xl font-black tracking-tight">Dispatch Deep-Dive Batch?</h3>
-                                <p className="mt-1 text-base leading-relaxed text-muted-foreground">
+                                <h3 className="text-2xl font-extrabold tracking-tight">Dispatch Deep-Dive Batch?</h3>
+                                <p className="mt-1 text-base leading-relaxed text-ink-2">
                             {selectedTickers.size > 0
-                                ? <>This will dispatch <span className="font-bold text-foreground">{selectedTickers.size} selected</span> stock(s) for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
-                                : <>This will dispatch the top <span className="font-bold text-foreground">{batchN}</span> stocks for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
+                                ? <>This will dispatch <span className="font-bold text-ink">{selectedTickers.size} selected</span> stock(s) for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
+                                : <>This will dispatch the top <span className="font-bold text-ink">{batchN}</span> stocks for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
                             }
                                 </p>
                             </div>
@@ -1913,13 +1913,13 @@ export function ScreenerDashboard() {
                         <div className="flex gap-3">
                             <button
                                 onClick={() => setShowBatchConfirm(false)}
-                                className="flex-1 rounded-lg border border-border bg-muted px-3.5 py-3 text-base font-bold text-muted-foreground transition-colors hover:bg-secondary"
+                                className="flex-1 border border-rule-9 bg-muted px-3.5 py-3 text-base font-bold text-ink-2 transition-colors hover:bg-white/5"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleBatchDispatch}
-                                className="flex-1 rounded-lg bg-emerald-600 px-3.5 py-3 text-base font-black text-white transition-colors hover:bg-emerald-500"
+                                className="flex-1 bg-accent px-3.5 py-3 text-base font-extrabold text-surface transition-colors hover:bg-accent/80"
                             >
                                 Dispatch {selectedTickers.size > 0 ? selectedTickers.size : batchN}
                             </button>
@@ -1930,13 +1930,13 @@ export function ScreenerDashboard() {
 
             {/* Phase 11d: Batch Progress Panel */}
             {batchId && screenMode !== 'reverse' && (
-                <div className="fixed bottom-4 right-4 z-[100] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col gap-3 rounded-xl border border-emerald-500/30 bg-[#1a1f2e] p-5 shadow-2xl animate-in slide-in-from-bottom-5 sm:bottom-6 sm:right-6">
+                <div className="fixed bottom-4 right-4 z-[100] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col gap-3 border border-pos/40 bg-surface p-5 animate-in slide-in-from-bottom-5 sm:bottom-6 sm:right-6">
                     <div className="flex justify-between items-start gap-4">
                         <div className="flex items-start gap-3">
-                            <Sparkles className={clsx("h-5 w-5 mt-0.5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-emerald-400" : "text-emerald-400 animate-pulse")} />
+                            <Sparkles className={clsx("h-5 w-5 mt-0.5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-pos" : "text-pos animate-pulse")} />
                             <div className="flex flex-col flex-1">
-                                <span className="font-bold text-lg text-foreground">Batch Deep-Dive</span>
-                                <span className="text-base text-muted-foreground mt-1">
+                                <span className="font-bold text-lg text-ink">Batch Deep-Dive</span>
+                                <span className="text-base text-ink-2 mt-1">
                                     {batchProgress
                                         ? (() => {
                                             const ok = batchProgress.completed;
@@ -1958,19 +1958,19 @@ export function ScreenerDashboard() {
                                     </div>
                                 )}
                                 {batchProgress && (
-                                    <div className="w-full h-2 bg-secondary/50 rounded-full mt-2 overflow-hidden">
-                                        <div className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+                                    <div className="w-full h-2 bg-white/5 mt-2 overflow-hidden">
+                                        <div className="h-full bg-pos transition-all duration-500"
                                             style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
                                     </div>
                                 )}
                                 {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                    <span className="text-base text-emerald-400 mt-1.5 font-bold">
+                                    <span className="text-base text-pos mt-1.5 font-bold">
                                         {batchProgress.completed > 0 ? 'Open any stock card to view its report.' : 'No reports generated.'}{' '}Auto-closing in 8s.
                                     </span>
                                 )}
                             </div>
                         </div>
-                        <button onClick={() => dismissBatchPanel()} className="text-muted-foreground hover:text-foreground shrink-0" title="Dismiss" aria-label="Dismiss batch progress">
+                        <button onClick={() => dismissBatchPanel()} className="text-ink-2 hover:text-ink shrink-0" title="Dismiss" aria-label="Dismiss batch progress">
                             <X className="h-5 w-5" />
                         </button>
                     </div>
@@ -1979,33 +1979,33 @@ export function ScreenerDashboard() {
 
             {/* Deepseek Task Alert */}
             {backgroundDsTask && (
-                <div className="fixed bottom-4 right-4 z-[100] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col gap-3 rounded-xl border border-blue-500/30 bg-[#1a1f2e] p-5 shadow-2xl animate-in slide-in-from-bottom-5 sm:bottom-6 sm:right-6">
+                <div className="fixed bottom-4 right-4 z-[100] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col gap-3 border border-accent/40 bg-surface p-5 animate-in slide-in-from-bottom-5 sm:bottom-6 sm:right-6">
                     <div className="flex items-start justify-between gap-4">
                         <div className="flex items-start gap-3">
-                            <Sparkles className={clsx("h-5 w-5 mt-0.5", backgroundDsTask.status === 'running' ? "text-blue-400 animate-pulse" : backgroundDsTask.status === 'error' ? "text-danger" : "text-success")} />
+                            <Sparkles className={clsx("h-5 w-5 mt-0.5", backgroundDsTask.status === 'running' ? "text-accent animate-pulse" : backgroundDsTask.status === 'error' ? "text-neg" : "text-pos")} />
                             <div className="min-w-0">
                                 <div className="mb-2 flex flex-wrap items-center gap-2">
                                     <span className={clsx(
-                                        "rounded-md border px-2.5 py-1 text-base font-black uppercase tracking-wider",
-                                        backgroundDsTask.status === 'running' && "border-blue-500/30 bg-blue-500/10 text-blue-400",
-                                        backgroundDsTask.status === 'error' && "border-red-500/30 bg-red-500/10 text-red-400",
-                                        backgroundDsTask.status !== 'running' && backgroundDsTask.status !== 'error' && "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+                                        " border px-2.5 py-1 text-base font-extrabold uppercase tracking-wider",
+                                        backgroundDsTask.status === 'running' && "border-accent/40 bg-accent/10 text-accent",
+                                        backgroundDsTask.status === 'error' && "border-neg/40 bg-neg/10 text-neg",
+                                        backgroundDsTask.status !== 'running' && backgroundDsTask.status !== 'error' && "border-pos/40 bg-pos/10 text-pos",
                                     )}>
                                         {backgroundDsTask.status === 'running' ? 'Running' : backgroundDsTask.status === 'error' ? 'Error' : 'Complete'}
                                     </span>
-                                    <span className="rounded-md border border-border/60 bg-secondary/35 px-2.5 py-1 font-mono text-base font-black text-foreground">
+                                    <span className="border border-rule-6 bg-white/5 px-2.5 py-1 font-mono text-base font-extrabold text-ink">
                                         {backgroundDsTask.ticker}
                                     </span>
                                 </div>
-                                <span className="block truncate text-lg font-bold text-foreground" title={backgroundDsTask.ticker}>
+                                <span className="block truncate text-lg font-bold text-ink" title={backgroundDsTask.ticker}>
                                     {backgroundDsTask.status === 'running' ? `Analyzing ${backgroundDsTask.ticker}...` : backgroundDsTask.status === 'error' ? `Error analyzing ${backgroundDsTask.ticker}` : `Analysis Complete: ${backgroundDsTask.ticker}`}
                                 </span>
-                                <span className="mt-1 block text-base leading-relaxed text-muted-foreground">
+                                <span className="mt-1 block text-base leading-relaxed text-ink-2">
                                     {backgroundDsTask.status === 'running' ? 'Deepseek V4.0 Pro is generating report.' : backgroundDsTask.status === 'error' ? backgroundDsTask.message : 'Report saved to scorecard!'}
                                 </span>
                             </div>
                         </div>
-                        <button onClick={() => setBackgroundDsTask(null)} className="text-muted-foreground hover:text-foreground" aria-label="Dismiss analysis status">
+                        <button onClick={() => setBackgroundDsTask(null)} className="text-ink-2 hover:text-ink" aria-label="Dismiss analysis status">
                             <X className="h-5 w-5" />
                         </button>
                     </div>
@@ -2014,23 +2014,23 @@ export function ScreenerDashboard() {
 
             {/* Help Modal */}
             {showHelp && (
-                <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setShowHelp(false)}>
-                    <div className="bg-card border border-border/50 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[84vh] overflow-y-auto p-6 md:p-8" onClick={e => e.stopPropagation()}>
-                        <div className="flex items-start justify-between gap-4 border-b border-border/60 pb-5">
+                <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/60" onClick={() => setShowHelp(false)}>
+                    <div className="bg-surface border border-rule-6 max-w-4xl w-full max-h-[84vh] overflow-y-auto p-6 md:p-8" onClick={e => e.stopPropagation()}>
+                        <div className="flex items-start justify-between gap-4 border-b border-rule-6 pb-5">
                             <div>
-                                <p className="text-base font-black uppercase tracking-[0.18em] text-muted-foreground">{t('scoringGuide')}</p>
-                                <h2 className="mt-1 text-2xl font-black tracking-tight text-foreground">{t('scoringGuideTitle')}</h2>
-                                <p className="mt-2 max-w-3xl text-base leading-relaxed text-muted-foreground">
+                                <p className="text-base font-extrabold uppercase tracking-[0.18em] text-ink-2">{t('scoringGuide')}</p>
+                                <h2 className="mt-1 text-2xl font-extrabold tracking-tight text-ink">{t('scoringGuideTitle')}</h2>
+                                <p className="mt-2 max-w-3xl text-base leading-relaxed text-ink-2">
                                     {t('scoringGuideBody')}
                                 </p>
                             </div>
-                            <button onClick={() => setShowHelp(false)} className="rounded-full border border-border/60 p-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground" aria-label={t('closeScoringGuide')}>
+                            <button onClick={() => setShowHelp(false)} className="border border-rule-6 p-2.5 text-ink-2 transition-colors hover:bg-white/5 hover:text-ink" aria-label={t('closeScoringGuide')}>
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
 
-                        <div className="mt-6 rounded-xl border border-primary/20 bg-primary/[0.04] p-5">
-                            <div className="mb-3 text-base font-black uppercase tracking-[0.18em] text-primary">{t('recommendedWorkflow')}</div>
+                        <div className="mt-6 border border-accent/20 bg-primary/[0.04] p-5">
+                            <div className="mb-3 text-base font-extrabold uppercase tracking-[0.18em] text-accent">{t('recommendedWorkflow')}</div>
                             <div className="grid gap-3 md:grid-cols-3">
                                 <WorkflowStep label="1" title={t('workflowMarketTitle')} text={t('workflowMarketText')} />
                                 <WorkflowStep label="2" title={t('workflowLensTitle')} text={t('workflowLensText')} />
@@ -2061,9 +2061,9 @@ export function ScreenerDashboard() {
                             />
                         </div>
 
-                        <div className="mt-6 rounded-xl border border-border/70 bg-secondary/20 p-5">
-                            <h3 className="text-lg font-black text-foreground">{t('reverseStagesTitle')}</h3>
-                            <div className="mt-4 grid gap-3 text-base leading-relaxed text-muted-foreground md:grid-cols-2">
+                        <div className="mt-6 border border-rule-6 bg-white/5 p-5">
+                            <h3 className="text-lg font-extrabold text-ink">{t('reverseStagesTitle')}</h3>
+                            <div className="mt-4 grid gap-3 text-base leading-relaxed text-ink-2 md:grid-cols-2">
                                 <StageLine label="0-1" text={t('reverseStage01')} />
                                 <StageLine label="2" text={t('reverseStage2')} />
                                 <StageLine label="3-5" text={t('reverseStage35')} />
@@ -2073,17 +2073,17 @@ export function ScreenerDashboard() {
                             </div>
                         </div>
 
-                        <div className="mt-6 rounded-xl border border-purple-500/25 bg-purple-500/[0.05] p-5">
-                            <h3 className="text-lg font-black text-purple-200">{t('paradigmSignalTitle')}</h3>
-                            <div className="mt-3 grid gap-3 text-base leading-relaxed text-muted-foreground md:grid-cols-3">
+                        <div className="mt-6 border border-rule-14 bg-white/5] p-5">
+                            <h3 className="text-lg font-extrabold text-ink-2">{t('paradigmSignalTitle')}</h3>
+                            <div className="mt-3 grid gap-3 text-base leading-relaxed text-ink-2 md:grid-cols-3">
                                 <HelpPillar title={t('paradigmMembershipTitle')} text={t('paradigmMembershipText')} />
                                 <HelpPillar title={t('paradigmMomentumTitle')} text={t('paradigmMomentumText')} />
                                 <HelpPillar title={t('paradigmEconomicsTitle')} text={t('paradigmEconomicsText')} />
                             </div>
                         </div>
 
-                        <div className="mt-6 rounded-xl border border-border/70 bg-card/70 p-5 text-base leading-relaxed text-muted-foreground">
-                            <h3 className="text-lg font-black text-foreground">{t('honestLimitationsTitle')}</h3>
+                        <div className="mt-6 border border-rule-6 bg-surface p-5 text-base leading-relaxed text-ink-2">
+                            <h3 className="text-lg font-extrabold text-ink">{t('honestLimitationsTitle')}</h3>
                             <p className="mt-2">
                                 {t('honestLimitationsText')}
                             </p>
@@ -2099,14 +2099,14 @@ export function ScreenerDashboard() {
 
 function HelpCard({ index, title, body }: { index: string; title: string; body: string }) {
     return (
-        <div className="rounded-xl border border-border/70 bg-secondary/20 p-4">
+        <div className="border border-rule-6 bg-white/5 p-4">
             <div className="flex items-start gap-3">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 font-mono text-base font-black text-primary">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-accent/25 bg-accent/10 font-mono text-base font-extrabold text-accent">
                     {index}
                 </span>
                 <div>
-                    <h3 className="text-lg font-black text-foreground">{title}</h3>
-                    <p className="mt-1.5 text-base leading-relaxed text-muted-foreground">{body}</p>
+                    <h3 className="text-lg font-extrabold text-ink">{title}</h3>
+                    <p className="mt-1.5 text-base leading-relaxed text-ink-2">{body}</p>
                 </div>
             </div>
         </div>
@@ -2115,22 +2115,22 @@ function HelpCard({ index, title, body }: { index: string; title: string; body: 
 
 function WorkflowStep({ label, title, text }: { label: string; title: string; text: string }) {
     return (
-        <div className="rounded-lg border border-primary/15 bg-background/35 p-4">
+        <div className="border border-accent/15 bg-page p-4">
             <div className="flex items-center gap-2">
-                <span className="flex h-8 w-8 items-center justify-center rounded-md border border-primary/25 bg-primary/10 font-mono text-base font-black text-primary">
+                <span className="flex h-8 w-8 items-center justify-center border border-accent/25 bg-accent/10 font-mono text-base font-extrabold text-accent">
                     {label}
                 </span>
-                <h3 className="text-lg font-black text-foreground">{title}</h3>
+                <h3 className="text-lg font-extrabold text-ink">{title}</h3>
             </div>
-            <p className="mt-2 text-base leading-relaxed text-muted-foreground">{text}</p>
+            <p className="mt-2 text-base leading-relaxed text-ink-2">{text}</p>
         </div>
     );
 }
 
 function StageLine({ label, text }: { label: string; text: string }) {
     return (
-        <div className="flex gap-3 rounded-lg border border-border/50 bg-background/30 p-3">
-            <span className="flex h-10 min-w-10 items-center justify-center rounded-md bg-primary/15 font-mono text-base font-black text-primary">
+        <div className="flex gap-3 border border-rule-6 bg-page p-3">
+            <span className="flex h-10 min-w-10 items-center justify-center bg-accent/10 font-mono text-base font-extrabold text-accent">
                 {label}
             </span>
             <p>{text}</p>
@@ -2140,8 +2140,8 @@ function StageLine({ label, text }: { label: string; text: string }) {
 
 function HelpPillar({ title, text }: { title: string; text: string }) {
     return (
-        <div className="rounded-lg border border-purple-500/20 bg-background/30 p-3">
-            <h4 className="font-black text-purple-200">{title}</h4>
+        <div className="border border-rule-14 bg-page p-3">
+            <h4 className="font-extrabold text-ink-2">{title}</h4>
             <p className="mt-1">{text}</p>
         </div>
     );
@@ -2149,9 +2149,9 @@ function HelpPillar({ title, text }: { title: string; text: string }) {
 
 function SummaryMetric({ label, value }: { label: string; value: string | number }) {
     return (
-        <div className="rounded-md border border-border/60 bg-secondary/20 px-3 py-2">
-            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-0.5 truncate font-mono text-base font-black text-foreground" title={String(value)}>{value}</div>
+        <div className="border border-rule-6 bg-white/5 px-3 py-2">
+            <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
+            <div className="mt-0.5 truncate font-mono text-base font-extrabold text-ink" title={String(value)}>{value}</div>
         </div>
     );
 }
@@ -2159,80 +2159,80 @@ function SummaryMetric({ label, value }: { label: string; value: string | number
 function ParadigmMonitorStat({ label, value, tone }: { label: string; value: number; tone: "purple" | "green" | "red" | "blue" | "muted" }) {
     return (
         <div className={clsx(
-            "rounded-md border px-3 py-2",
-            tone === "purple" && "border-purple-500/25 bg-purple-500/10 text-purple-200",
-            tone === "green" && "border-emerald-500/25 bg-emerald-500/10 text-emerald-300",
-            tone === "red" && "border-red-500/25 bg-red-500/10 text-red-300",
-            tone === "blue" && "border-blue-500/25 bg-blue-500/10 text-blue-300",
-            tone === "muted" && "border-border/60 bg-secondary/20 text-foreground"
+            " border px-3 py-2",
+            tone === "purple" && "border-rule-14 bg-white/5 text-ink-2",
+            tone === "green" && "border-pos/40 bg-pos/10 text-pos",
+            tone === "red" && "border-neg/40 bg-neg/10 text-neg",
+            tone === "blue" && "border-accent/40 bg-accent/10 text-accent",
+            tone === "muted" && "border-rule-6 bg-white/5 text-ink"
         )}>
-            <div className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-0.5 font-mono text-base font-black">{value.toLocaleString()}</div>
+            <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
+            <div className="mt-0.5 font-mono text-base font-extrabold">{value.toLocaleString()}</div>
         </div>
     );
 }
 
 function EmptyStateStat({ label, value }: { label: string; value: string | number }) {
     return (
-        <div className="rounded-lg border border-border/60 bg-secondary/20 px-4 py-3">
-            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-1 truncate font-mono text-xl font-black text-foreground" title={String(value)}>{value}</div>
+        <div className="border border-rule-6 bg-white/5 px-4 py-3">
+            <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
+            <div className="mt-1 truncate font-mono text-xl font-extrabold text-ink" title={String(value)}>{value}</div>
         </div>
     );
 }
 
 function DialogStat({ label, value }: { label: string; value: string | number }) {
     return (
-        <div className="rounded-lg border border-border/60 bg-secondary/20 px-3.5 py-3">
-            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-1 truncate font-mono text-lg font-black text-foreground" title={String(value)}>{value}</div>
+        <div className="border border-rule-6 bg-white/5 px-3.5 py-3">
+            <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
+            <div className="mt-1 truncate font-mono text-lg font-extrabold text-ink" title={String(value)}>{value}</div>
         </div>
     );
 }
 
 function BatchMiniStat({ label, value }: { label: string; value: string | number }) {
     return (
-        <div className="rounded-md border border-emerald-500/20 bg-emerald-500/[0.055] px-3 py-2">
-            <div className="text-base font-black uppercase tracking-wider text-emerald-300/80">{label}</div>
-            <div className="mt-0.5 font-mono text-lg font-black text-emerald-300">{value}</div>
+        <div className="border border-pos/40 bg-pos/10 px-3 py-2">
+            <div className="text-base font-extrabold uppercase tracking-wider text-pos">{label}</div>
+            <div className="mt-0.5 font-mono text-lg font-extrabold text-pos">{value}</div>
         </div>
     );
 }
 
 function LoadingResultsState({ title, strategy, view }: { title: string; strategy: string; view: ResultView }) {
     return (
-        <div className="rounded-xl border border-border/70 bg-card/60 p-5 shadow-sm sm:p-6">
+        <div className="border border-rule-6 bg-surface p-5 sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-3">
-                    <div className="rounded-lg border border-primary/30 bg-primary/10 p-3 text-primary">
+                    <div className="border border-accent/30 bg-accent/10 p-3 text-accent">
                         <RefreshCw className="h-6 w-6 animate-spin" />
                     </div>
                     <div>
-                        <p className="text-xl font-black text-foreground">{title}</p>
-                        <p className="mt-1 text-base leading-relaxed text-muted-foreground">
+                        <p className="text-xl font-extrabold text-ink">{title}</p>
+                        <p className="mt-1 text-base leading-relaxed text-ink-2">
                             Loading {strategy} data, overlays, and {view === 'table' ? 'table rows' : 'stock cards'}.
                         </p>
                     </div>
                 </div>
-                <span className="w-fit rounded-md border border-border/60 bg-secondary/30 px-3 py-1.5 text-base font-black uppercase tracking-wider text-muted-foreground">
+                <span className="w-fit border border-rule-6 bg-white/5 px-3 py-1.5 text-base font-extrabold uppercase tracking-wider text-ink-2">
                     Preparing view
                 </span>
             </div>
             <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
                 {[0, 1, 2].map((item) => (
-                    <div key={item} className="rounded-lg border border-border/60 bg-secondary/15 p-4">
+                    <div key={item} className="border border-rule-6 bg-white/5 p-4">
                         <div className="flex items-start justify-between gap-4">
                             <div className="space-y-3">
-                                <div className="h-6 w-24 animate-pulse rounded bg-secondary" />
-                                <div className="h-4 w-44 animate-pulse rounded bg-secondary/70" />
+                                <div className="h-6 w-24 animate-pulse bg-white/5" />
+                                <div className="h-4 w-44 animate-pulse bg-white/5" />
                             </div>
-                            <div className="h-8 w-16 animate-pulse rounded bg-secondary/70" />
+                            <div className="h-8 w-16 animate-pulse bg-white/5" />
                         </div>
-                        <div className="mt-5 h-16 animate-pulse rounded-lg bg-secondary/50" />
+                        <div className="mt-5 h-16 animate-pulse bg-white/5" />
                         <div className="mt-4 grid grid-cols-3 gap-2">
-                            <div className="h-12 animate-pulse rounded bg-secondary/45" />
-                            <div className="h-12 animate-pulse rounded bg-secondary/45" />
-                            <div className="h-12 animate-pulse rounded bg-secondary/45" />
+                            <div className="h-12 animate-pulse bg-white/5" />
+                            <div className="h-12 animate-pulse bg-white/5" />
+                            <div className="h-12 animate-pulse bg-white/5" />
                         </div>
                     </div>
                 ))}
@@ -2243,10 +2243,10 @@ function LoadingResultsState({ title, strategy, view }: { title: string; strateg
 
 function PromptStat({ label, value, sub }: { label: string; value: string; sub: string }) {
     return (
-        <div className="rounded-lg border border-border/60 bg-secondary/20 p-3">
-            <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-0.5 truncate font-mono text-base font-black text-foreground" title={value}>{value}</div>
-            <div className="mt-0.5 truncate text-xs font-semibold text-muted-foreground" title={sub}>{sub}</div>
+        <div className="border border-rule-6 bg-white/5 p-3">
+            <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
+            <div className="mt-0.5 truncate font-mono text-base font-extrabold text-ink" title={value}>{value}</div>
+            <div className="mt-0.5 truncate text-xs font-semibold text-ink-2" title={sub}>{sub}</div>
         </div>
     );
 }
@@ -2272,23 +2272,23 @@ function ResultsTable({
     const lensMeta = getTableLensMeta(screenMode);
 
     return (
-        <div className="mb-8 overflow-hidden rounded-lg border border-border/70 bg-card/80 shadow-sm">
-            <div className="flex flex-col gap-1 border-b border-border/60 bg-secondary/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-8 overflow-hidden border border-rule-6 bg-surface">
+            <div className="flex flex-col gap-1 border-b border-rule-6 bg-white/5 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                    <h3 className="text-lg font-black text-foreground">Scan Table</h3>
-                    <p className="text-base text-muted-foreground">Dense view for comparing the current page by {lensMeta.label}.</p>
+                    <h3 className="text-lg font-extrabold text-ink">Scan Table</h3>
+                    <p className="text-base text-ink-2">Dense view for comparing the current page by {lensMeta.label}.</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                     <TableBadge tone={lensMeta.tone}>{lensMeta.label}</TableBadge>
-                    <span className="text-base font-bold uppercase tracking-wider text-muted-foreground">
+                    <span className="text-base font-bold uppercase tracking-wider text-ink-2">
                         Click any row for the full scorecard
                     </span>
                 </div>
             </div>
             <div className="overflow-x-auto">
                 <table className="w-full min-w-[1240px] border-collapse text-left">
-                    <thead className="sticky top-0 z-[1] bg-card/95 backdrop-blur">
-                        <tr className="border-b border-border/70">
+                    <thead className="sticky top-0 z-[1] bg-surface">
+                        <tr className="border-b border-rule-6">
                             {screenMode === 'reverse' && <TableHead className="w-14">Pick</TableHead>}
                             <TableHead>Stock</TableHead>
                             <TableHead>Sector / Industry</TableHead>
@@ -2321,7 +2321,7 @@ function ResultsTable({
                                 <tr
                                     key={symbol}
                                     onClick={() => onOpen(result)}
-                                    className="group/row cursor-pointer border-b border-border/40 transition-colors odd:bg-background/10 hover:bg-primary/[0.06]"
+                                    className="group/row cursor-pointer border-b border-rule-6 transition-colors odd:bg-page hover:bg-primary/[0.06]"
                                 >
                                     {screenMode === 'reverse' && (
                                         <td className="px-4 py-3 align-middle">
@@ -2332,10 +2332,10 @@ function ResultsTable({
                                                     onToggleSelected(symbol);
                                                 }}
                                                 className={clsx(
-                                                    "flex h-8 w-8 items-center justify-center rounded-md border-2 transition-all",
+                                                    "flex h-8 w-8 items-center justify-center  border-2 transition-all",
                                                     selectedTickers.has(symbol)
-                                                        ? "border-emerald-500 bg-emerald-500 text-white"
-                                                        : "border-border/70 bg-background/60 hover:border-emerald-400"
+                                                        ? "border-pos bg-pos text-surface"
+                                                        : "border-rule-6 bg-page hover:border-emerald-400"
                                                 )}
                                                 aria-label={`${selectedTickers.has(symbol) ? 'Deselect' : 'Select'} ${symbol}`}
                                             >
@@ -2345,17 +2345,17 @@ function ResultsTable({
                                     )}
                                     <td className="px-4 py-4 align-middle">
                                         <div className="flex min-w-0 items-center gap-3">
-                                            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-border/70 bg-secondary/40 font-mono text-lg font-black text-primary transition-colors group-hover/row:border-primary/50 group-hover/row:bg-primary/10">
+                                            <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-rule-6 bg-white/5 font-mono text-lg font-extrabold text-accent transition-colors group-hover/row:border-accent/50 group-hover/row:bg-accent/10">
                                                 {ticker.slice(0, 2)}
                                             </span>
                                             <div className="min-w-0">
-                                                <span className="block font-mono text-xl font-black text-foreground">{ticker}</span>
-                                                <span className="block max-w-[220px] truncate text-base font-semibold text-muted-foreground" title={c.name}>{c.name || symbol}</span>
+                                                <span className="block font-mono text-xl font-extrabold text-ink">{ticker}</span>
+                                                <span className="block max-w-[220px] truncate text-base font-semibold text-ink-2" title={c.name}>{c.name || symbol}</span>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="px-4 py-4 align-middle">
-                                        <div className="max-w-[260px] truncate text-base font-semibold text-muted-foreground" title={`${c.sector || 'Unknown'} / ${c.industry || result.industry || 'Unknown'}`}>
+                                        <div className="max-w-[260px] truncate text-base font-semibold text-ink-2" title={`${c.sector || 'Unknown'} / ${c.industry || result.industry || 'Unknown'}`}>
                                             {c.sector || 'Unknown'} / {c.industry || result.industry || 'Unknown'}
                                         </div>
                                     </td>
@@ -2365,19 +2365,19 @@ function ResultsTable({
                                                 <TableBadge tone={paradigm.pdm_band === 'high' ? 'success' : paradigm.pdm_band === 'mid' ? 'primary' : paradigm.pdm_band === 'watch' ? 'warning' : 'muted'}>
                                                     {paradigm.pdm_band?.toUpperCase() || 'THEME'}
                                                 </TableBadge>
-                                                <span className="max-w-[220px] truncate text-base font-mono text-purple-300" title={paradigm.pdm_themes.join(', ')}>
+                                                <span className="max-w-[220px] truncate text-base font-mono text-ink-2" title={paradigm.pdm_themes.join(', ')}>
                                                     {paradigm.pdm_theme_primary || paradigm.pdm_themes[0]}
                                                 </span>
                                             </div>
                                         ) : (
-                                            <span className="text-base text-muted-foreground">No theme</span>
+                                            <span className="text-base text-ink-2">No theme</span>
                                         )}
                                     </td>
                                     <td className="px-4 py-4 align-middle">
                                         <div className="flex min-w-[160px] flex-col gap-1">
                                             <TableBadge tone={lensMeta.tone}>{lensMeta.shortLabel}</TableBadge>
-                                            <span className="font-mono text-xl font-black text-foreground">{activeMetric.value}</span>
-                                            <span className="text-base font-bold text-muted-foreground">{activeMetric.label}</span>
+                                            <span className="font-mono text-xl font-extrabold text-ink">{activeMetric.value}</span>
+                                            <span className="text-base font-bold text-ink-2">{activeMetric.label}</span>
                                         </div>
                                     </td>
                                     <td className="px-4 py-4 align-middle">
@@ -2393,18 +2393,18 @@ function ResultsTable({
                                             )}
                                         </div>
                                     </td>
-                                    <td className="px-4 py-4 text-right align-middle font-mono text-lg font-black text-foreground">
+                                    <td className="px-4 py-4 text-right align-middle font-mono text-lg font-extrabold text-ink">
                                         {pricePrefix}{price}
                                     </td>
-                                    <td className="px-4 py-4 text-right align-middle font-mono text-base font-black text-foreground/85">
+                                    <td className="px-4 py-4 text-right align-middle font-mono text-base font-extrabold text-ink/85">
                                         {marketCap}
                                     </td>
                                     <td className="px-4 py-4 text-right align-middle">
                                         <span className={clsx(
-                                            "inline-flex items-center justify-end rounded-md border px-2.5 py-1.5 font-mono text-base font-black",
+                                            "inline-flex items-center justify-end  border px-2.5 py-1.5 font-mono text-base font-extrabold",
                                             growth >= 0
-                                                ? "border-emerald-500/30 bg-emerald-500/10 text-success"
-                                                : "border-red-500/30 bg-red-500/10 text-danger"
+                                                ? "border-pos/40 bg-pos/10 text-pos"
+                                                : "border-neg/40 bg-neg/10 text-neg"
                                         )}>
                                             {growth >= 0 ? '+' : ''}{growth.toFixed(1)}%
                                         </span>
@@ -2461,7 +2461,7 @@ function getTableLensMeta(screenMode: ScreenMode): { label: string; shortLabel: 
 
 function TableHead({ children, className }: { children: ReactNode; className?: string }) {
     return (
-        <th className={clsx("px-4 py-3 text-base font-black uppercase tracking-wider text-muted-foreground", className)}>
+        <th className={clsx("px-4 py-3 text-base font-extrabold uppercase tracking-wider text-ink-2", className)}>
             {children}
         </th>
     );
@@ -2470,11 +2470,11 @@ function TableHead({ children, className }: { children: ReactNode; className?: s
 function TableBadge({ children, tone }: { children: ReactNode; tone: 'success' | 'warning' | 'primary' | 'muted' }) {
     return (
         <span className={clsx(
-            "inline-flex w-fit items-center rounded-md border px-2.5 py-1.5 text-base font-black leading-none",
-            tone === 'success' && "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-            tone === 'warning' && "border-amber-500/30 bg-amber-500/10 text-amber-400",
-            tone === 'primary' && "border-blue-500/30 bg-blue-500/10 text-blue-400",
-            tone === 'muted' && "border-border/60 bg-secondary/30 text-muted-foreground",
+            "inline-flex w-fit items-center  border px-2.5 py-1.5 text-base font-extrabold leading-none",
+            tone === 'success' && "border-pos/40 bg-pos/10 text-pos",
+            tone === 'warning' && "border-warn/40 bg-warn/10 text-warn",
+            tone === 'primary' && "border-accent/40 bg-accent/10 text-accent",
+            tone === 'muted' && "border-rule-6 bg-white/5 text-ink-2",
         )}>
             {children}
         </span>
@@ -2483,25 +2483,25 @@ function TableBadge({ children, tone }: { children: ReactNode; tone: 'success' |
 
 function SubCard({ label, value, detail, active, tone, onClick }: { label: string; value: string | number; detail: string; active: boolean; tone: 'sky' | 'emerald' | 'purple' | 'red'; onClick?: () => void }) {
     const toneClass = {
-        sky: active ? "border-sky-500/60 bg-sky-500/15 text-sky-300" : "hover:border-sky-500/40",
-        emerald: active ? "border-emerald-500/60 bg-emerald-500/15 text-emerald-300" : "hover:border-emerald-500/40",
-        purple: active ? "border-purple-500/60 bg-purple-500/15 text-purple-300" : "hover:border-purple-500/40",
-        red: active ? "border-red-500/60 bg-red-500/15 text-red-300" : "hover:border-red-500/40",
+        sky: active ? "border-accent/40 bg-accent/10 text-accent" : "hover:border-accent/40",
+        emerald: active ? "border-pos/40 bg-pos/10 text-pos" : "hover:border-pos/40",
+        purple: active ? "border-rule-14 bg-white/5 text-ink-2" : "hover:border-rule-14",
+        red: active ? "border-neg/40 bg-neg/10 text-neg" : "hover:border-neg/40",
     }[tone];
 
     const content = (
         <>
             <div className="flex items-center justify-between gap-2">
-                <span className="truncate text-xs font-black uppercase tracking-wider text-muted-foreground">{label}</span>
-                <span className="font-mono text-base font-black text-foreground">{value}</span>
+                <span className="truncate text-xs font-extrabold uppercase tracking-wider text-ink-2">{label}</span>
+                <span className="font-mono text-base font-extrabold text-ink">{value}</span>
             </div>
-            <p className="mt-1 truncate text-xs leading-snug text-muted-foreground" title={detail}>{detail}</p>
+            <p className="mt-1 truncate text-xs leading-snug text-ink-2" title={detail}>{detail}</p>
             {onClick && (
-                <div className="mt-2 flex items-center justify-between border-t border-border/50 pt-1.5 text-xs font-black uppercase tracking-wider text-muted-foreground">
+                <div className="mt-2 flex items-center justify-between border-t border-rule-6 pt-1.5 text-xs font-extrabold uppercase tracking-wider text-ink-2">
                     <span>{active ? 'Applied' : 'Click to filter'}</span>
                     <span className={clsx(
-                        "h-2.5 w-2.5 rounded-full",
-                        active ? "bg-primary shadow-[0_0_10px_hsl(var(--primary)/0.75)]" : "bg-muted-foreground/40"
+                        "h-2.5 w-2.5 ",
+                        active ? "bg-primary " : "bg-muted-foreground/40"
                     )} />
                 </div>
             )}
@@ -2513,7 +2513,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
             <button
                 type="button"
                 onClick={onClick}
-                className={clsx("min-w-0 rounded-md border border-border/70 bg-card/60 px-3 py-2 text-left transition-all", toneClass)}
+                className={clsx("min-w-0  border border-rule-6 bg-surface px-3 py-2 text-left transition-all", toneClass)}
             >
                 {content}
             </button>
@@ -2521,7 +2521,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
     }
 
     return (
-        <div className={clsx("min-w-0 rounded-md border border-border/70 bg-card/60 px-3 py-2", toneClass)}>
+        <div className={clsx("min-w-0  border border-rule-6 bg-surface px-3 py-2", toneClass)}>
             {content}
         </div>
     );

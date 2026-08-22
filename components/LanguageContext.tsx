@@ -23,6 +23,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         }
     }, []);
 
+    // Keep the document language in sync so screen readers and the browser's
+    // own translation heuristics see the right locale.
+    useEffect(() => {
+        document.documentElement.lang = language === 'ko' ? 'ko' : language === 'zh' ? 'zh-TW' : 'en';
+    }, [language]);
+
     const handleSetLanguage = (lang: Language) => {
         setLanguage(lang);
         localStorage.setItem('app-language', lang);

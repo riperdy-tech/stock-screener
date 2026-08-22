@@ -348,6 +348,11 @@ export interface DepthVerdict {
     size_hint: "full" | "half" | "quarter" | null;
     mos_vs_median_pct?: number | null;
     reason?: string | null;
+    // Present in the shipped payload (band_direction_v1) but previously untyped.
+    samples_run?: number | null;      // runs attempted (3); n_basis = runs that passed the guards
+    scheme?: string | null;
+    consensus_dir?: string | null;    // run id, e.g. LULU_20260821_155157 — shown on the transcripts header
+    backfilled?: boolean;
 }
 
 export interface DepthOverlayPayload {
@@ -455,6 +460,18 @@ export async function fetchFactorIc(): Promise<any | null> {
 
 export async function fetchOverlaySignals(): Promise<any | null> {
     return fetchJson('/data/overlay_signals.json');
+}
+
+// FRED-derived macro regime flags (fetch_macro_state.py). Drives the portfolio
+// de-risk notice; absent payload = no flags, never an error state.
+export interface MacroStatePayload {
+    generated_at?: string;
+    series?: Record<string, { value: number | null; as_of: string | null; label: string | null; interpretation: string | null }>;
+    thresholds_used?: Record<string, any>;
+    triggered_flags?: string[];
+}
+export async function fetchMacroState(): Promise<MacroStatePayload | null> {
+    return fetchJson<MacroStatePayload>('/data/macro_state.json');
 }
 
 export async function fetchPaperLedgers(): Promise<any | null> {

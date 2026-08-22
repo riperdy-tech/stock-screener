@@ -22,8 +22,9 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
         const setupLogStream = async () => {
             // 1. Fetch initial baseline from static file
             try {
-                const basePath = process.env.NODE_ENV === 'production' ? '/stock-screener' : '';
-                const res = await fetch(`${basePath}/data/scan.log?t=${Date.now()}`);
+                // Served from the site root — next.config.js dropped the old
+                // /stock-screener basePath when the app moved off static export.
+                const res = await fetch(`/data/scan.log?t=${Date.now()}`);
                 if (res.ok) {
                     const text = await res.text();
                     setLogs(text);
@@ -93,43 +94,43 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
     const supabaseConnected = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
-            <div className="flex h-[86vh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#0c0c0c] text-base shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
+            <div className="flex h-[86vh] w-full max-w-6xl flex-col overflow-hidden border border-rule-9 bg-page text-base">
 
                 {/* Header */}
-                <div className="flex flex-col gap-4 border-b border-gray-800 bg-[#111] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="flex items-start gap-3 text-green-500">
-                        <div className="rounded-lg border border-green-500/25 bg-green-500/10 p-2">
+                <div className="flex flex-col gap-4 border-b border-rule-9 bg-surface px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex items-start gap-3 text-pos">
+                        <div className="border border-pos/40 bg-pos/10 p-2">
                             <Terminal className="h-6 w-6" />
                         </div>
                         <div>
-                            <h2 className="text-2xl font-black tracking-tight text-white">System Logs</h2>
-                            <p className="mt-1 text-base font-medium leading-relaxed text-gray-400">Scanner runtime stream, static log baseline, and cloud sync status.</p>
+                            <h2 className="text-2xl font-extrabold tracking-tight text-white">System Logs</h2>
+                            <p className="mt-1 text-base font-medium leading-relaxed text-ink-2">Scanner runtime stream, static log baseline, and cloud sync status.</p>
                         </div>
                     </div>
                     <div className="flex items-center justify-between gap-4 sm:justify-end">
-                        <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-800 bg-white/[0.03] px-3.5 py-2.5 text-base text-gray-300 hover:text-white">
+                        <label className="flex cursor-pointer items-center gap-2 border border-rule-9 bg-white/[0.03] px-3.5 py-2.5 text-base text-ink-2 hover:text-ink">
                             <input
                                 type="checkbox"
                                 checked={autoScroll}
                                 onChange={(e) => setAutoScroll(e.target.checked)}
-                                className="h-5 w-5 rounded border-gray-700 bg-gray-900"
+                                className="h-5 w-5 border-rule-9 bg-page"
                             />
                             Auto-scroll
                         </label>
-                        <button onClick={onClose} className="rounded-lg border border-gray-800 bg-white/[0.03] p-2.5 text-gray-500 transition-colors hover:text-white" aria-label="Close system logs">
+                        <button onClick={onClose} className="border border-rule-9 bg-white/[0.03] p-2.5 text-ink-3 transition-colors hover:text-ink" aria-label="Close system logs">
                             <X className="h-5 w-5" />
                         </button>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-3 border-b border-gray-800 bg-[#0f0f0f] px-5 py-4 sm:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 border-b border-rule-9 bg-[#0f0f0f] px-5 py-4 sm:grid-cols-3">
                     <LogStat icon={<FileText className="h-4 w-4" />} label="Static Source" value="scan.log" sub="public/data baseline" />
                     <LogStat icon={<Radio className="h-4 w-4" />} label="Live Stream" value={supabaseConnected ? "Connected" : "Unavailable"} sub={supabaseConnected ? "Supabase channel ready" : "Missing public keys"} tone={supabaseConnected ? "success" : "danger"} />
                     <LogStat icon={<Terminal className="h-4 w-4" />} label="Lines Loaded" value={lineCount.toLocaleString()} sub={logs ? "Non-empty log lines" : "Waiting for data"} />
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 border-b border-gray-800 bg-[#0b0b0b] px-5 py-3">
+                <div className="flex flex-wrap items-center gap-2 border-b border-rule-9 bg-[#0b0b0b] px-5 py-3">
                     <LogSeverityPill tone="danger" label="Errors" value={severityCounts.danger} />
                     <LogSeverityPill tone="warning" label="Warnings" value={severityCounts.warning} />
                     <LogSeverityPill tone="success" label="Success" value={severityCounts.success} />
@@ -138,7 +139,7 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                 </div>
 
                 {/* Log Content */}
-                <div className="flex-1 space-y-1 overflow-y-auto bg-[#070707] p-5 font-mono text-gray-300">
+                <div className="flex-1 space-y-1 overflow-y-auto bg-page p-5 font-mono text-ink-2">
                     {logs ? (
                         <div className="space-y-1 text-base leading-8">
                             {logLines.map((line, index) => (
@@ -146,9 +147,9 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                             ))}
                         </div>
                     ) : (
-                        <div className="flex h-full flex-col items-center justify-center space-y-3 text-center text-gray-500">
+                        <div className="flex h-full flex-col items-center justify-center space-y-3 text-center text-ink-3">
                             <RefreshCw className="h-6 w-6 animate-spin" />
-                            <p className="text-lg font-bold text-gray-400">Waiting for log stream...</p>
+                            <p className="text-lg font-bold text-ink-2">Waiting for log stream...</p>
                             <p className="max-w-sm text-base leading-relaxed">Logs will appear here once the static scan file or live Supabase channel responds.</p>
                         </div>
                     )}
@@ -156,12 +157,12 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                 </div>
 
                 {/* Footer */}
-                <div className="flex flex-col gap-3 border-t border-gray-800 bg-[#111] px-5 py-4 text-base text-gray-500 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-3 border-t border-rule-9 bg-surface px-5 py-4 text-base text-ink-3 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex flex-wrap items-center gap-3">
                         <span>Source: public/data/scan.log</span>
-                        <div className="flex items-center gap-2 rounded-full border border-gray-800 bg-white/[0.03] px-3 py-1.5">
-                            <div className={`h-2.5 w-2.5 rounded-full ${supabaseConnected ? 'bg-green-500' : 'bg-red-500'}`} />
-                            <span className={supabaseConnected ? 'text-gray-400' : 'text-red-400'}>
+                        <div className="flex items-center gap-2 border border-rule-9 bg-white/[0.03] px-3 py-1.5">
+                            <div className={`h-2.5 w-2.5  ${supabaseConnected ? 'bg-green-500' : 'bg-red-500'}`} />
+                            <span className={supabaseConnected ? 'text-ink-2' : 'text-neg'}>
                                 {supabaseConnected ? 'Supabase Connected' : 'Supabase Disconnected (Keys Missing)'}
                             </span>
                         </div>
@@ -175,15 +176,15 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
 
 function LogStat({ icon, label, value, sub, tone = "neutral" }: { icon: ReactNode; label: string; value: string; sub: string; tone?: "neutral" | "success" | "danger" }) {
     return (
-        <div className="rounded-lg border border-gray-800 bg-white/[0.03] p-4">
-            <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider text-gray-500">
+        <div className="border border-rule-9 bg-white/[0.03] p-4">
+            <div className="flex items-center gap-2 text-base font-extrabold uppercase tracking-wider text-ink-3">
                 {icon}
                 {label}
             </div>
-            <div className={`mt-2 truncate font-mono text-xl font-black ${tone === "success" ? "text-green-400" : tone === "danger" ? "text-red-400" : "text-white"}`} title={value}>
+            <div className={`mt-2 truncate font-mono text-xl font-extrabold ${tone === "success" ? "text-pos" : tone === "danger" ? "text-neg" : "text-white"}`} title={value}>
                 {value}
             </div>
-            <div className="mt-1 truncate text-base font-medium text-gray-500" title={sub}>{sub}</div>
+            <div className="mt-1 truncate text-base font-medium text-ink-3" title={sub}>{sub}</div>
         </div>
     );
 }
@@ -198,8 +199,8 @@ function LogLine({ line }: { line: string }) {
     }
 
     return (
-        <div className={`flex gap-3 rounded-md border px-3 py-2 ${logLineToneClass(tone)}`}>
-            <span className={`mt-0.5 shrink-0 rounded border px-2 py-1 text-base font-black leading-none ${logLineBadgeClass(tone)}`}>
+        <div className={`flex gap-3  border px-3 py-2 ${logLineToneClass(tone)}`}>
+            <span className={`mt-0.5 shrink-0  border px-2 py-1 text-base font-extrabold leading-none ${logLineBadgeClass(tone)}`}>
                 {logLineLabel(tone)}
             </span>
             <span className="min-w-0 whitespace-pre-wrap break-words">{line}</span>
@@ -222,7 +223,7 @@ function classifyLogLine(line: string): LogTone {
 
 function LogSeverityPill({ tone, label, value }: { tone: LogTone; label: string; value: number }) {
     return (
-        <div className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-base font-black ${logLineBadgeClass(tone)}`}>
+        <div className={`flex items-center gap-2  border px-3 py-1.5 text-base font-extrabold ${logLineBadgeClass(tone)}`}>
             <span>{label}</span>
             <span className="font-mono">{value.toLocaleString()}</span>
         </div>
@@ -230,19 +231,19 @@ function LogSeverityPill({ tone, label, value }: { tone: LogTone; label: string;
 }
 
 function logLineToneClass(tone: LogTone) {
-    if (tone === "success") return "border-green-500/20 bg-green-500/[0.06] text-green-300";
-    if (tone === "danger") return "border-red-500/25 bg-red-500/[0.08] text-red-300";
-    if (tone === "warning") return "border-amber-500/25 bg-amber-500/[0.08] text-amber-300";
-    if (tone === "marker") return "border-blue-500/20 bg-blue-500/[0.08] text-blue-300";
-    return "border-transparent bg-transparent text-gray-300";
+    if (tone === "success") return "border-pos/40 bg-pos/10] text-pos";
+    if (tone === "danger") return "border-neg/40 bg-neg/10] text-neg";
+    if (tone === "warning") return "border-warn/40 bg-warn/10] text-warn";
+    if (tone === "marker") return "border-accent/40 bg-accent/10] text-accent";
+    return "border-transparent bg-transparent text-ink-2";
 }
 
 function logLineBadgeClass(tone: LogTone) {
-    if (tone === "success") return "border-green-500/25 bg-green-500/10 text-green-300";
-    if (tone === "danger") return "border-red-500/30 bg-red-500/10 text-red-300";
-    if (tone === "warning") return "border-amber-500/30 bg-amber-500/10 text-amber-300";
-    if (tone === "marker") return "border-blue-500/25 bg-blue-500/10 text-blue-300";
-    return "border-gray-800 bg-white/[0.03] text-gray-500";
+    if (tone === "success") return "border-pos/40 bg-pos/10 text-pos";
+    if (tone === "danger") return "border-neg/40 bg-neg/10 text-neg";
+    if (tone === "warning") return "border-warn/40 bg-warn/10 text-warn";
+    if (tone === "marker") return "border-accent/40 bg-accent/10 text-accent";
+    return "border-rule-9 bg-white/[0.03] text-ink-3";
 }
 
 function logLineLabel(tone: LogTone) {

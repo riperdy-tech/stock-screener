@@ -16,13 +16,13 @@ const humanMethod = (m?: string | null) => {
     };
     return map[m] || m.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 };
-const convTone = (c?: number | null) => (c == null ? "text-muted-foreground" : c >= 10 ? "text-emerald-400" : c >= 7 ? "text-amber-400" : "text-red-400");
+const convTone = (c?: number | null) => (c == null ? "text-ink-2" : c >= 10 ? "text-pos" : c >= 7 ? "text-warn" : "text-neg");
 const stancePill = (s?: string | null) =>
-    s === "undervalued" ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-    : s === "overvalued" ? "border-red-500/30 bg-red-500/10 text-red-400"
-    : "border-amber-500/30 bg-amber-500/10 text-amber-400";
-const gapTone = (g?: number | null) => (g == null ? "text-muted-foreground" : g <= -1 ? "text-emerald-400" : g >= 1 ? "text-red-400" : "text-amber-400");
-const bandTone = (b?: string | null) => (b === "research_now" ? "text-emerald-400" : b === "watchlist" ? "text-amber-400" : "text-muted-foreground");
+    s === "undervalued" ? "border-pos/40 bg-pos/10 text-pos"
+    : s === "overvalued" ? "border-neg/40 bg-neg/10 text-neg"
+    : "border-warn/40 bg-warn/10 text-warn";
+const gapTone = (g?: number | null) => (g == null ? "text-ink-2" : g <= -1 ? "text-pos" : g >= 1 ? "text-neg" : "text-warn");
+const bandTone = (b?: string | null) => (b === "research_now" ? "text-pos" : b === "watchlist" ? "text-warn" : "text-ink-2");
 const bandLabel = (b?: string | null) => (b === "research_now" ? "Research Now" : b === "watchlist" ? "Watchlist" : b || "—");
 const shortAction = (a?: string | null) => (a ? a.split("/")[0].trim().toLowerCase() : "—");
 const fmtDate = (d?: string | null) => {
@@ -47,13 +47,13 @@ const STAGE_TITLES: [string, string][] = [
 
 const mdComponents = {
     a: (props: any) => (
-        <a target="_blank" rel="noopener noreferrer" className="break-all text-blue-400 underline decoration-blue-400/40 underline-offset-2 hover:decoration-blue-400" {...props} />
+        <a target="_blank" rel="noopener noreferrer" className="break-all text-accent underline decoration-blue-400/40 underline-offset-2 hover:decoration-blue-400" {...props} />
     ),
 };
 
 function Md({ children }: { children: string }) {
     return (
-        <div className="prose prose-invert prose-sm max-w-none break-words leading-relaxed text-foreground/90 prose-headings:font-black prose-headings:text-foreground prose-p:leading-6 prose-li:leading-6 prose-strong:text-foreground prose-a:text-blue-400 prose-pre:whitespace-pre-wrap prose-pre:break-words prose-pre:overflow-x-hidden prose-code:whitespace-pre-wrap">
+        <div className="prose prose-invert prose-sm max-w-none break-words leading-relaxed text-ink-q prose-headings:font-extrabold prose-headings:text-ink prose-p:leading-6 prose-li:leading-6 prose-strong:text-ink prose-a:text-accent prose-pre:whitespace-pre-wrap prose-pre:break-words prose-pre:overflow-x-hidden prose-code:whitespace-pre-wrap">
             <ReactMarkdown components={mdComponents}>{children}</ReactMarkdown>
         </div>
     );
@@ -61,16 +61,16 @@ function Md({ children }: { children: string }) {
 
 function Metric({ label, value, tone }: { label: string; value: string; tone: string }) {
     return (
-        <div className="flex flex-col items-center justify-center rounded-lg border border-border/60 bg-background/70 px-2 py-3 text-center">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className={clsx("mt-1 font-mono text-lg font-black leading-none", tone)}>{value}</div>
+        <div className="flex flex-col items-center justify-center border border-rule-6 bg-page px-2 py-3 text-center">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-ink-2">{label}</div>
+            <div className={clsx("mt-1 font-mono text-lg font-extrabold leading-none", tone)}>{value}</div>
         </div>
     );
 }
 
 function Note({ children }: { children: React.ReactNode }) {
     return (
-        <div className="rounded-md border border-dashed border-border bg-background/40 p-5 text-center text-xs leading-relaxed text-muted-foreground">
+        <div className="border border-dashed border-rule-9 bg-page p-5 text-center text-xs leading-relaxed text-ink-2">
             {children}
         </div>
     );
@@ -90,33 +90,33 @@ function DepthSamplesView({ ticker }: { ticker: string }) {
     if (withReports.length === 0) return null;
     const cur = withReports[Math.min(tab, withReports.length - 1)];
     return (
-        <div className="rounded-lg border border-border/60 bg-card/40">
+        <div className="border border-rule-6 bg-surface">
             <button
                 onClick={() => setOpen(!open)}
-                className="flex w-full items-center justify-between px-3 py-2 text-left text-xs font-black uppercase tracking-wide text-muted-foreground hover:text-foreground"
+                className="flex w-full items-center justify-between px-3 py-2 text-left text-xs font-extrabold uppercase tracking-wide text-ink-2 hover:text-ink"
             >
                 <span>Depth run transcripts — {withReports.length} sample report{withReports.length === 1 ? "" : "s"} ({bundle.run})</span>
                 <span>{open ? "▾ hide" : "▸ show"}</span>
             </button>
             {open && (
-                <div className="border-t border-border/60 p-3">
+                <div className="border-t border-rule-6 p-3">
                     <div className="mb-2 flex flex-wrap gap-1.5">
                         {withReports.map((s, i) => (
                             <button
                                 key={s.sample}
                                 onClick={() => setTab(i)}
-                                className={`rounded-md border px-2.5 py-1 text-xs font-bold ${i === tab ? "border-primary bg-primary/15 text-primary" : "border-border text-muted-foreground hover:text-foreground"}`}
+                                className={` border px-2.5 py-1 text-xs font-bold ${i === tab ? "border-accent bg-accent/10 text-accent" : "border-rule-9 text-ink-2 hover:text-ink"}`}
                             >
                                 Sample {s.sample}{s.iv != null ? ` · $${s.iv}` : ""}{!s.plausible ? " · rejected" : ""}{s.truncated ? " · truncated" : ""}
                             </button>
                         ))}
                     </div>
                     {!cur.plausible && cur.reasons.length > 0 && (
-                        <p className="mb-2 text-[11px] text-amber-500">
+                        <p className="mb-2 text-[11px] text-warn">
                             Guard rejection: {cur.reasons.join("; ")}
                         </p>
                     )}
-                    <pre className="max-h-[32rem] overflow-auto whitespace-pre-wrap rounded-md bg-background/60 p-3 text-[11.5px] leading-relaxed text-foreground/90">
+                    <pre className="max-h-[32rem] overflow-auto whitespace-pre-wrap bg-page p-3 text-[11.5px] leading-relaxed text-ink-q">
                         {cur.report}
                     </pre>
                 </div>
@@ -127,22 +127,22 @@ function DepthSamplesView({ ticker }: { ticker: string }) {
 
 function DepthVerdictBanner({ v }: { v: DepthVerdict }) {
     const tone =
-        v.direction === "undervalued" ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-500" :
-        v.direction === "overvalued" ? "border-red-500/50 bg-red-500/10 text-red-500" :
-        v.direction === "hold" ? "border-amber-500/50 bg-amber-500/10 text-amber-500" :
-        "border-border bg-muted/40 text-muted-foreground";
+        v.direction === "undervalued" ? "border-pos/40 bg-pos/10 text-pos" :
+        v.direction === "overvalued" ? "border-neg/40 bg-neg/10 text-neg" :
+        v.direction === "hold" ? "border-warn/40 bg-warn/10 text-warn" :
+        "border-rule-9 bg-white/5 text-ink-2";
     const label =
         v.direction === "undervalued" ? "UNDERVALUED — every run values it above the price" :
         v.direction === "overvalued" ? "OVERVALUED — every run values it below the price" :
         v.direction === "hold" ? "HOLD — price sits inside the model's uncertainty band" :
         "NOT USABLE — no plausible run";
     return (
-        <div className={`rounded-lg border p-3 ${tone}`}>
+        <div className={` border p-3 ${tone}`}>
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                <span className="text-xs font-black uppercase tracking-wide">Depth verdict</span>
-                <span className="text-sm font-black">{label}</span>
+                <span className="text-xs font-extrabold uppercase tracking-wide">Depth verdict</span>
+                <span className="text-sm font-extrabold">{label}</span>
             </div>
-            <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-foreground/80">
+            <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-q">
                 {v.iv_band_low != null && v.iv_band_high != null && (
                     <span>IV band <b>${v.iv_band_low}–${v.iv_band_high}</b> vs price <b>${v.price}</b></span>
                 )}
@@ -152,7 +152,7 @@ function DepthVerdictBanner({ v }: { v: DepthVerdict }) {
                 <span>{v.n_basis} plausible run{v.n_basis === 1 ? "" : "s"}</span>
                 {v.date && <span>{v.date}</span>}
             </div>
-            <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
+            <p className="mt-1 text-[11px] leading-snug text-ink-2">
                 Band-direction scheme: the model analyzes the full fact pack in {v.n_basis >= 3 ? "three" : "multiple"} independent
                 seeded runs; the verdict is where today's price sits relative to the whole band of its
                 valuations. Spread sets position size, not pass/fail.
@@ -161,7 +161,13 @@ function DepthVerdictBanner({ v }: { v: DepthVerdict }) {
     );
 }
 
-export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; displayTicker: string }) {
+export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
+    symbol: string;
+    displayTicker: string;
+    // The desk's ticker page renders the band verdict and transcripts itself, so it
+    // asks this panel for the run history and the older RS2 report text only.
+    hideDepth?: boolean;
+}) {
     const ticker = symbol.toUpperCase();
     const [history, setHistory] = useState<Rs2RunMeta[] | null>(null); // null = loading, [] = none
     const [selectedTs, setSelectedTs] = useState<string | null>(null);
@@ -202,15 +208,15 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
         return () => { alive = false; };
     }, [ticker, selectedTs]);
 
-    if (history === null) return <div className="p-6 text-center text-sm text-muted-foreground">Loading RS2 analysis…</div>;
+    if (history === null) return <div className="p-6 text-center text-sm text-ink-2">Loading RS2 analysis…</div>;
     if (history.length === 0)
         return (
             <div className="space-y-4">
-            {depthV && <DepthVerdictBanner v={depthV} />}
-            {depthV && <DepthSamplesView ticker={ticker} />}
-            <div className="rounded-lg border border-dashed border-border bg-card/50 p-6 text-center">
-                <div className="text-sm font-black text-foreground">No RS2 analysis yet for {displayTicker}</div>
-                <p className="mx-auto mt-1.5 max-w-md text-xs leading-relaxed text-muted-foreground">
+            {!hideDepth && depthV && <DepthVerdictBanner v={depthV} />}
+            {!hideDepth && depthV && <DepthSamplesView ticker={ticker} />}
+            <div className="border border-dashed border-rule-9 bg-surface p-6 text-center">
+                <div className="text-sm font-extrabold text-ink">No RS2 analysis yet for {displayTicker}</div>
+                <p className="mx-auto mt-1.5 max-w-md text-xs leading-relaxed text-ink-2">
                     The local RS2 engine analyzes Research-Now and Watchlist names on a weekly / bi-weekly cadence. It hasn't produced a report for this ticker yet.
                 </p>
             </div>
@@ -231,43 +237,43 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
 
     return (
         <div className="space-y-4">
-            {depthV && <DepthVerdictBanner v={depthV} />}
-            {depthV && <DepthSamplesView ticker={ticker} />}
+            {!hideDepth && depthV && <DepthVerdictBanner v={depthV} />}
+            {!hideDepth && depthV && <DepthSamplesView ticker={ticker} />}
             {/* header: ticker + TradingView overview + method */}
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                <span className="text-lg font-black tracking-tight">{displayTicker}</span>
+                <span className="text-lg font-extrabold tracking-tight">{displayTicker}</span>
                 <a
                     href={`https://www.tradingview.com/symbols/${ticker}/`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-md border border-[#2a2e39] bg-[#131722] px-2.5 py-1.5 text-xs font-bold text-white transition-colors hover:bg-[#2a2e39]"
+                    className="inline-flex items-center gap-1.5 border border-[#2a2e39] bg-[#131722] px-2.5 py-1.5 text-xs font-bold text-white transition-colors hover:bg-[#2a2e39]"
                     title="Open the TradingView company overview (not the chart)"
                 >
-                    <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="h-3.5 w-3.5 rounded-sm" />
+                    <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="h-3.5 w-3.5" />
                     TradingView overview
                     <ExternalLink className="h-3 w-3" />
                 </a>
-                <span className="ml-auto rounded-md border border-border/60 bg-secondary/40 px-2.5 py-1 text-xs text-muted-foreground">
-                    Method: <span className="font-black text-foreground">{humanMethod(method)}</span>
+                <span className="ml-auto border border-rule-6 bg-white/5 px-2.5 py-1 text-xs text-ink-2">
+                    Method: <span className="font-extrabold text-ink">{humanMethod(method)}</span>
                 </span>
             </div>
 
             {/* verdict banner */}
             <div className="flex flex-wrap items-center gap-3">
-                <span className={clsx("rounded-full border px-3.5 py-1 text-sm font-black capitalize", stancePill(stance))}>
+                <span className={clsx(" border px-3.5 py-1 text-sm font-extrabold capitalize", stancePill(stance))}>
                     {stance || "—"}
                 </span>
-                <span className="text-base font-black">{action || "—"}</span>
+                <span className="text-base font-extrabold">{action || "—"}</span>
             </div>
 
             {/* colored metric boxes */}
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
                 <Metric label="Conviction" value={conviction != null ? `${conviction}/15` : "—"} tone={convTone(conviction)} />
-                <Metric label="Intrinsic Value" value={iv != null ? `$${iv}` : "—"} tone="text-foreground" />
+                <Metric label="Intrinsic Value" value={iv != null ? `$${iv}` : "—"} tone="text-ink" />
                 <Metric label="Margin of Safety" value={mos != null ? `${mos > 0 ? "+" : ""}${mos}%` : "—"}
-                    tone={mos == null ? "text-muted-foreground" : mos >= 0 ? "text-success" : "text-danger"} />
+                    tone={mos == null ? "text-ink-2" : mos >= 0 ? "text-pos" : "text-neg"} />
                 <Metric label="Band" value={bandLabel(band)} tone={bandTone(band)} />
-                <Metric label="Analyzed" value={fmtDate(date)} tone="text-foreground/80" />
+                <Metric label="Analyzed" value={fmtDate(date)} tone="text-ink-q" />
             </div>
 
             {/* run history */}
@@ -278,10 +284,10 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
                             key={h.ts}
                             onClick={() => setSelectedTs(h.ts)}
                             className={clsx(
-                                "whitespace-nowrap rounded-md border px-2.5 py-1.5 text-xs font-bold transition-colors",
+                                "whitespace-nowrap  border px-2.5 py-1.5 text-xs font-bold transition-colors",
                                 h.ts === selectedTs
-                                    ? "border-primary/50 bg-primary/10 text-primary"
-                                    : "border-border/60 bg-secondary/30 text-muted-foreground hover:border-primary/30 hover:text-foreground"
+                                    ? "border-accent/50 bg-accent/10 text-accent"
+                                    : "border-rule-6 bg-white/5 text-ink-2 hover:border-accent/30 hover:text-ink"
                             )}
                         >
                             {fmtDate(h.date)} · {shortAction(h.action)}{h.conviction != null ? ` ${h.conviction}` : ""}
@@ -291,16 +297,16 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
             )}
 
             {/* sub-tabs */}
-            <div className="flex gap-2 border-b border-border/60 pb-2">
+            <div className="flex gap-2 border-b border-rule-6 pb-2">
                 {([["full", "Full analysis"], ["research", "Research & news"], ["raw", "Raw stages"]] as const).map(([id, label]) => (
                     <button
                         key={id}
                         onClick={() => setSubTab(id)}
                         className={clsx(
-                            "rounded-md border px-3 py-1.5 text-xs font-black transition-colors",
+                            " border px-3 py-1.5 text-xs font-extrabold transition-colors",
                             subTab === id
-                                ? "border-primary/50 bg-primary/10 text-primary"
-                                : "border-border/60 bg-secondary/30 text-muted-foreground hover:text-foreground"
+                                ? "border-accent/50 bg-accent/10 text-accent"
+                                : "border-rule-6 bg-white/5 text-ink-2 hover:text-ink"
                         )}
                     >
                         {label}
@@ -309,15 +315,15 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
             </div>
 
             {/* panels */}
-            <div className="rounded-lg border border-border/60 bg-card/40 p-4">
+            <div className="border border-rule-6 bg-surface p-4">
                 {bundleLoading ? (
-                    <div className="p-4 text-center text-sm text-muted-foreground">Loading report…</div>
+                    <div className="p-4 text-center text-sm text-ink-2">Loading report…</div>
                 ) : subTab === "full" ? (
                     bundle?.final_md ? <Md>{bundle.final_md}</Md> : <Note>Full analysis text isn't stored for this older run — only the newest reports keep the full text. The verdict summary above is from the run index.</Note>
                 ) : subTab === "research" ? (
                     bundle?.research_md ? (
                         <div className="space-y-3">
-                            <div className="text-xs text-muted-foreground">
+                            <div className="text-xs text-ink-2">
                                 Deep-research brief{bundle.research_generated ? ` · generated ${bundle.research_generated}` : ""} · every cited source is listed inline below.
                             </div>
                             <Md>{linkify(bundle.research_md)}</Md>
@@ -326,18 +332,18 @@ export function Rs2AnalysisPanel({ symbol, displayTicker }: { symbol: string; di
                 ) : rawKeys.length ? (
                     <div className="space-y-2">
                         {STAGE_TITLES.filter(([k]) => bundle?.raw?.[k]).map(([k, title]) => (
-                            <div key={k} className="overflow-hidden rounded-lg border border-border/60">
+                            <div key={k} className="overflow-hidden border border-rule-6">
                                 <button
                                     onClick={() => setOpenStages((s) => ({ ...s, [k]: !s[k] }))}
-                                    className="flex w-full items-center justify-between gap-2 bg-secondary/30 px-3 py-2 text-left text-sm font-black text-foreground transition-colors hover:bg-secondary/50"
+                                    className="flex w-full items-center justify-between gap-2 bg-white/5 px-3 py-2 text-left text-sm font-extrabold text-ink transition-colors hover:bg-white/5"
                                 >
                                     <span>{title}</span>
                                     <ChevronDown className={clsx("h-4 w-4 shrink-0 transition-transform", openStages[k] && "rotate-180")} />
                                 </button>
                                 {openStages[k] && (
-                                    <div className="border-t border-border/60 p-3">
+                                    <div className="border-t border-rule-6 p-3">
                                         {k === "s3_inputs" ? (
-                                            <pre className="overflow-x-auto whitespace-pre-wrap break-words font-mono text-xs text-muted-foreground">{bundle!.raw[k]}</pre>
+                                            <pre className="overflow-x-auto whitespace-pre-wrap break-words font-mono text-xs text-ink-2">{bundle!.raw[k]}</pre>
                                         ) : (
                                             <Md>{bundle!.raw[k]}</Md>
                                         )}

@@ -30,9 +30,9 @@ export function ChineseHelpBody() {
                     以真實價格與真實成本模擬）。
                 </Callout>
                 <p>
-                    帶有 <span className="border-b border-dotted border-emerald-400/60 font-semibold text-emerald-300">點狀底線</span>的
+                    帶有 <span className="border-b border-dotted border-pos/40 font-semibold text-pos">點狀底線</span>的
                     字是技術詞彙。點擊即可不離開頁面看到解釋。所有詞彙的可搜尋索引在{' '}
-                    <Link href="#glossary" className="font-bold text-emerald-300 hover:underline">詞彙表</Link>區段。
+                    <Link href="#glossary" className="font-bold text-pos hover:underline">詞彙表</Link>區段。
                 </p>
             </Section>
 
@@ -68,9 +68,9 @@ export function ChineseHelpBody() {
                         <Term term="monitor" />、<Term term="pass" />）。紅牌代表股票被 <Term term="veto" />——原因寫在牌上。
                     </li>
                     <li><b>Market cap（市值）</b> — <Term term="market-cap" />。整家公司的價格（股價 × 股數）。</li>
-                    <li><b>RS2 排名 / 立場 / 信念度 / 動作</b> — 獨立的 AI 判斷。見 <Link href="#rs2" className="font-bold text-emerald-300 hover:underline">RS2 區段</Link>。</li>
+                    <li><b>RS2 排名 / 立場 / 信念度 / 動作</b> — 獨立的 AI 判斷。見 <Link href="#rs2" className="font-bold text-pos hover:underline">RS2 區段</Link>。</li>
                     <li><b>Δ pctl</b> — 量化引擎與 AI 相差多少個百分位點。落差大的列最有趣：其中一方錯了。</li>
-                    <li><b>DCF gap</b> — <Term term="expectations-gap" />。價格要求的成長 vs 公司實際達成的成長。見 <Link href="#dcf" className="font-bold text-emerald-300 hover:underline">DCF 區段</Link>。</li>
+                    <li><b>DCF gap</b> — <Term term="expectations-gap" />。價格要求的成長 vs 公司實際達成的成長。見 <Link href="#dcf" className="font-bold text-pos hover:underline">DCF 區段</Link>。</li>
                 </ul>
                 <Callout kind="info">
                     點擊任何一列可看個股詳情：完整因子輪廓、反向 DCF 解讀（價格隱含的成長 vs 公司已證明的成長），以及
@@ -85,40 +85,40 @@ export function ChineseHelpBody() {
                     超市與超市競爭，不與軟體公司比較。否則「動能高」就只是「是科技股」。
                 </p>
                 <div className="space-y-3">
-                    <div className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                        <p className="flex items-center gap-2 text-sm font-black"><span className="h-2.5 w-2.5 rounded-full bg-emerald-400" /><span className="text-emerald-300">價值 (Value)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+                    <div className="border border-rule-6 bg-white/5 p-3">
+                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-value" /><span className="text-pos">價值 (Value)</span></p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             是用 $1 買 $2 的年度現金盈餘，還是用 $2 買 $1？長期平均而言，便宜勝過昂貴。以四種收益率——
                             <Term term="fcf-yield" />、<Term term="owner-earnings" />、<Term term="ebit" />、<Term term="earnings-yield" />——的
-                            平均衡量。見 <Link href="#methodology" className="font-bold text-emerald-300 hover:underline">方法論</Link>。
+                            平均衡量。見 <Link href="#methodology" className="font-bold text-pos hover:underline">方法論</Link>。
                         </p>
                     </div>
-                    <div className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                        <p className="flex items-center gap-2 text-sm font-black"><span className="h-2.5 w-2.5 rounded-full bg-sky-400" /><span className="text-sky-300">品質 (Quality)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+                    <div className="border border-rule-6 bg-white/5 p-3">
+                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-quality" /><span className="text-accent">品質 (Quality)</span></p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             公司是否持續真正賺錢、帳目乾淨？結合 <Term term="revenue-quality" />、數年來 <Term term="gross-margin" />
                             的穩定性、<Term term="accruals" />（偏好有現金支撐的盈餘）、<Term term="piotroski" /> 與 <Term term="roic" />。
                             帳目乾淨、真正獲利的生意勝過故事。
                         </p>
                     </div>
-                    <div className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                        <p className="flex items-center gap-2 text-sm font-black"><span className="h-2.5 w-2.5 rounded-full bg-amber-400" /><span className="text-amber-300">動能 (Momentum)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+                    <div className="border border-rule-6 bg-white/5 p-3">
+                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-momentum" /><span className="text-warn">動能 (Momentum)</span></p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             過去一年這檔股票是否一直在贏？贏家往往再贏一陣子。由 <Term term="skip-month" />（學術標準的
                             12 個月報酬、排除最近一個月）與 <Term term="high-proximity" /> 構成。為何排除最近一個月見{' '}
                             <Term term="reversal" />。
                         </p>
                     </div>
-                    <div className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                        <p className="flex items-center gap-2 text-sm font-black"><span className="h-2.5 w-2.5 rounded-full bg-violet-400" /><span className="text-violet-300">低波動 (Low volatility)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+                    <div className="border border-rule-6 bg-white/5 p-3">
+                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-lowvol" /><span className="text-ink-2">低波動 (Low volatility)</span></p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             價格平穩還是劇烈波動？平穩股票歷史上一單位痛苦換來更多報酬。以月報酬標準差（至少 12 個觀察值）
                             的負值衡量。<Term term="annualized-volatility" /> 也會輸出供 <Term term="kelly" /> 部位規模使用。
                         </p>
                     </div>
-                    <div className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                        <p className="flex items-center gap-2 text-sm font-black"><span className="h-2.5 w-2.5 rounded-full bg-rose-400" /><span className="text-rose-300">財測修正 (Revisions)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+                    <div className="border border-rule-6 bg-white/5 p-3">
+                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-revisions" /><span className="text-neg">財測修正 (Revisions)</span></p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             追蹤公司的分析師是在上調還是下修預測？方向很重要。由標準化的 <Term term="eps-trajectory" /> 斜率
                             與結構化 <Term term="estimates" /> 評分構成。
                         </p>
@@ -143,10 +143,10 @@ export function ChineseHelpBody() {
                     綜合百分位切成四個實用區間，即 <Term term="band" />。
                 </p>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><span className="font-black text-emerald-300">RESEARCH NOW</span> — 前 3%。今天值得你的研究時間。</li>
-                    <li><span className="font-black text-sky-300">WATCHLIST</span> — 前 10%。</li>
-                    <li><span className="font-black text-amber-300">MONITOR</span> — 前 30%。</li>
-                    <li><span className="text-muted-foreground">PASS</span> — 其餘。</li>
+                    <li><span className="font-extrabold text-pos">RESEARCH NOW</span> — 前 3%。今天值得你的研究時間。</li>
+                    <li><span className="font-extrabold text-accent">WATCHLIST</span> — 前 10%。</li>
+                    <li><span className="font-extrabold text-warn">MONITOR</span> — 前 30%。</li>
+                    <li><span className="text-ink-2">PASS</span> — 其餘。</li>
                 </ul>
                 <SubHeading>否決 — 硬性取消資格</SubHeading>
                 <p>
@@ -175,9 +175,9 @@ export function ChineseHelpBody() {
                     （最近 5 年 SEC 申報的營收/FCF 成長），以百分點計。
                 </p>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><span className="font-black text-emerald-300">綠 / 負值</span> — 價格要求的成長低於公司已證明。潛在便宜貨：
+                    <li><span className="font-extrabold text-pos">綠 / 負值</span> — 價格要求的成長低於公司已證明。潛在便宜貨：
                     你不必相信成長故事就得到補償。</li>
-                    <li><span className="font-black text-amber-300">琥珀 / 正值</span> — 價格需要無人證明的加速。你必須相信一個故事。</li>
+                    <li><span className="font-extrabold text-warn">琥珀 / 正值</span> — 價格需要無人證明的加速。你必須相信一個故事。</li>
                 </ul>
                 <Callout kind="tip">
                     這個落差也是建議計畫所用的 <Term term="edge" />：只有定價低於已證明成長的股票才具可測量的優勢，所以排名
@@ -238,10 +238,10 @@ export function ChineseHelpBody() {
                 </p>
                 <SubHeading>投資組合</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b className="text-emerald-300">plan</b> — 價值核心。<Term term="kelly" /> 規模，約 50% 現金。</li>
-                    <li><b className="text-pink-400">plan2</b> — 混合。價值核心 + <Term term="sleeve" />，約 78% 投入，持有昂貴的領頭股。</li>
-                    <li><b className="text-sky-300">equal</b> — 對所有 Research Now 股票等權重（純選股測試）。</li>
-                    <li><b className="text-violet-300">mine</b> — 你儲存的 My Portfolio 持股，以 <Term term="unitization" /> 如基金般衡量。</li>
+                    <li><b className="text-pos">plan</b> — 價值核心。<Term term="kelly" /> 規模，約 50% 現金。</li>
+                    <li><b className="text-series-plan2">plan2</b> — 混合。價值核心 + <Term term="sleeve" />，約 78% 投入，持有昂貴的領頭股。</li>
+                    <li><b className="text-accent">equal</b> — 對所有 Research Now 股票等權重（純選股測試）。</li>
+                    <li><b className="text-ink-2">mine</b> — 你儲存的 My Portfolio 持股，以 <Term term="unitization" /> 如基金般衡量。</li>
                 </ul>
                 <SubHeading>如何解讀</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
@@ -345,26 +345,26 @@ export function ChineseHelpBody() {
                 </p>
                 <SubHeading>因子構成 — 子指標與來源</SubHeading>
                 <p>
-                    <span className="font-black text-emerald-300">價值</span> = 四種收益率的平均 z。皆以最近會計年度 SEC 申報
+                    <span className="font-extrabold text-pos">價值</span> = 四種收益率的平均 z。皆以最近會計年度 SEC 申報
                     財務除以目前市值計算。<Term term="fcf-yield" />（FCF/市值）、<Term term="owner-earnings" />（(淨利 + 折舊攤銷 −
                     資本支出)/市值）、<Term term="ebit" /> 收益率（營業利益/<Term term="enterprise-value" />）、<Term term="earnings-yield" />
                     （淨利/市值——覆蓋最廣，拯救缺少 CAPEX/D&amp;A/營業利益標籤的申報者）。
                 </p>
                 <p>
-                    <span className="font-black text-sky-300">品質</span> = <Term term="revenue-quality" />（逆向引擎評分）、
+                    <span className="font-extrabold text-accent">品質</span> = <Term term="revenue-quality" />（逆向引擎評分）、
                     <Term term="gross-margin" /> 穩定性（≥4 會計年度 GM 的 −標準差）、負 <Term term="accruals" />（−應計比率）、
                     <Term term="piotroski" />（兩者皆出自財報鑑識資料庫）。
                 </p>
                 <p>
-                    <span className="font-black text-amber-300">動能</span> = <Term term="skip-month" /> 與 <Term term="high-proximity" />{' '}
+                    <span className="font-extrabold text-warn">動能</span> = <Term term="skip-month" /> 與 <Term term="high-proximity" />{' '}
                     的平均 z。使用月收盤。
                 </p>
                 <p>
-                    <span className="font-black text-violet-300">低波動</span> = 月報酬的 −σ z，至少 12 個觀察值；<Term term="annualized-volatility" />{' '}
+                    <span className="font-extrabold text-ink-2">低波動</span> = 月報酬的 −σ z，至少 12 個觀察值；<Term term="annualized-volatility" />{' '}
                     輸出供 <Term term="kelly" /> 規模使用。
                 </p>
                 <p>
-                    <span className="font-black text-rose-300">財測修正</span> = 兩個 0–1 部分的平均：標準化 <Term term="eps-trajectory" />{' '}
+                    <span className="font-extrabold text-neg">財測修正</span> = 兩個 0–1 部分的平均：標準化 <Term term="eps-trajectory" />{' '}
                     斜率（clamp(斜率, −1, 1)+1)/2，與分析師結構評分/100——縮放到 0–100 後以 (分數−50)/25 重新置中為 z 類尺度。
                 </p>
                 <SubHeading>權重</SubHeading>

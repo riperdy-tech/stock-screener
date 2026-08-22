@@ -6,12 +6,12 @@ export function Section({ id, title, icon, children }: {
     id: string; title: string; icon?: React.ReactNode; children: React.ReactNode;
 }) {
     return (
-        <section id={id} className="scroll-mt-24 border-b border-border/60 pb-10 last:border-b-0">
+        <section id={id} className="scroll-mt-24 border-b border-rule-6 pb-10 last:border-b-0">
             <div className="flex items-center gap-2">
-                {icon && <span className="text-emerald-400">{icon}</span>}
-                <h2 className="text-xl font-black tracking-tight text-foreground">{title}</h2>
+                {icon && <span className="text-pos">{icon}</span>}
+                <h2 className="text-xl font-extrabold tracking-tight text-ink">{title}</h2>
             </div>
-            <div className="mt-3 space-y-3 text-[13.5px] leading-relaxed text-foreground/90">
+            <div className="mt-3 space-y-3 text-[13.5px] leading-relaxed text-ink-q">
                 {children}
             </div>
         </section>
@@ -20,18 +20,18 @@ export function Section({ id, title, icon, children }: {
 
 export function SubHeading({ children }: { children: React.ReactNode }) {
     return (
-        <h3 className="pt-1 text-sm font-black uppercase tracking-wider text-emerald-300">{children}</h3>
+        <h3 className="pt-1 text-sm font-extrabold uppercase tracking-wider text-pos">{children}</h3>
     );
 }
 
 export function Callout({ kind, children }: { kind: 'tip' | 'warn' | 'info'; children: React.ReactNode }) {
     const styles = {
-        tip: 'border-emerald-500/40 bg-emerald-500/[0.07] text-emerald-100/90',
-        warn: 'border-amber-500/40 bg-amber-500/[0.07] text-amber-100/90',
-        info: 'border-sky-500/40 bg-sky-500/[0.07] text-sky-100/90',
+        tip: 'border-pos/40 bg-pos/10 text-ink-q',
+        warn: 'border-warn/40 bg-warn/10] text-amber-100/90',
+        info: 'border-accent/40 bg-accent/10] text-sky-100/90',
     }[kind];
     return (
-        <div className={`rounded-lg border p-3 text-[13px] leading-relaxed ${styles}`}>
+        <div className={` border p-3 text-[13px] leading-relaxed ${styles}`}>
             {children}
         </div>
     );

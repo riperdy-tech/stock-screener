@@ -41,8 +41,8 @@ const SOURCES: FlowNode[] = [
     {
         id: 'sec',
         icon: Landmark,
-        accent: 'text-sky-400',
-        badge: 'bg-sky-500/10 border-sky-500/30',
+        accent: 'text-accent',
+        badge: 'bg-accent/10 border-accent/40',
         title: { en: 'SEC Company Facts', ko: 'SEC Company Facts', zh: 'SEC Company Facts' },
         desc: {
             en: <>Ten years of <Term term="as-filed" /> fundamentals straight from <Term term="sec-filings" /> — the ground truth behind <Term term="quality" />, <Term term="forensic" /> checks, and <Term term="demonstrated-growth" />.</>,
@@ -53,8 +53,8 @@ const SOURCES: FlowNode[] = [
     {
         id: 'yf',
         icon: Database,
-        accent: 'text-sky-400',
-        badge: 'bg-sky-500/10 border-sky-500/30',
+        accent: 'text-accent',
+        badge: 'bg-accent/10 border-accent/40',
         title: { en: 'Yahoo Finance', ko: '야후 파이낸스', zh: 'Yahoo Finance' },
         desc: {
             en: <>Live prices, price history, analyst <Term term="estimates" />, and <Term term="analyst-coverage" /> metadata for every ticker.</>,
@@ -65,8 +65,8 @@ const SOURCES: FlowNode[] = [
     {
         id: 'fred',
         icon: Activity,
-        accent: 'text-amber-400',
-        badge: 'bg-amber-500/10 border-amber-500/30',
+        accent: 'text-warn',
+        badge: 'bg-warn/10 border-warn/40',
         title: { en: 'FRED (Fed macro)', ko: 'FRED (연준 매크로)', zh: 'FRED（聯準會總體）' },
         desc: {
             en: <>Federal Reserve macro series that feed the <Term term="macro-flags" /> used to trigger <Term term="macro-derisk" />.</>,
@@ -81,8 +81,8 @@ const SPINE: FlowNode[] = [
     {
         id: 'build-history',
         icon: History,
-        accent: 'text-sky-400',
-        badge: 'bg-sky-500/10 border-sky-500/30',
+        accent: 'text-accent',
+        badge: 'bg-accent/10 border-accent/40',
         step: '1',
         title: { en: 'Build fundamentals history', ko: '재무 이력 구축', zh: '建立財務歷史' },
         desc: {
@@ -95,8 +95,8 @@ const SPINE: FlowNode[] = [
     {
         id: 'reverse',
         icon: ShieldCheck,
-        accent: 'text-emerald-400',
-        badge: 'bg-emerald-500/10 border-emerald-500/30',
+        accent: 'text-pos',
+        badge: 'bg-pos/10 border-pos/40',
         step: '2',
         title: { en: 'Reverse engine', ko: '역설계 엔진', zh: '逆向引擎' },
         desc: {
@@ -109,8 +109,8 @@ const SPINE: FlowNode[] = [
     {
         id: 'factorlab',
         icon: Cpu,
-        accent: 'text-violet-400',
-        badge: 'bg-violet-500/10 border-violet-500/30',
+        accent: 'text-ink-2',
+        badge: 'bg-white/5 border-rule-14',
         step: '3',
         title: { en: 'Factor Lab', ko: '팩터 랩', zh: '因子實驗室' },
         desc: {
@@ -141,8 +141,8 @@ const PARALLEL: FlowNode[] = [
     {
         id: 'rs2',
         icon: Sparkles,
-        accent: 'text-cyan-400',
-        badge: 'bg-cyan-500/10 border-cyan-500/30',
+        accent: 'text-accent',
+        badge: 'bg-accent/10 border-accent/40',
         step: '5',
         title: { en: 'RS2 LLM overlay', ko: 'RS2 LLM 오버레이', zh: 'RS2 LLM 覆蓋' },
         desc: {
@@ -158,8 +158,8 @@ const PARALLEL: FlowNode[] = [
 const PLAN_NODE: FlowNode = {
     id: 'portfolio',
     icon: Briefcase,
-    accent: 'text-pink-400',
-    badge: 'bg-pink-500/10 border-pink-500/30',
+    accent: 'text-series-plan2',
+    badge: 'bg-white/5 border-rule-14',
     step: '6',
     title: { en: 'Portfolio plan', ko: '포트폴리오 계획', zh: '投資組合計畫' },
     desc: {
@@ -175,8 +175,8 @@ const OUTPUTS: FlowNode[] = [
     {
         id: 'rankings',
         icon: LayoutDashboard,
-        accent: 'text-emerald-400',
-        badge: 'bg-emerald-500/10 border-emerald-500/30',
+        accent: 'text-pos',
+        badge: 'bg-pos/10 border-pos/40',
         title: { en: 'Rankings / leaderboard', ko: '순위 / 리더보드', zh: '排名 / 排行榜' },
         desc: {
             en: <>The <Term term="composite" />, <Term term="band" />, rank, and DCF gap you see on the dashboard, refreshed every run.</>,
@@ -187,8 +187,8 @@ const OUTPUTS: FlowNode[] = [
     {
         id: 'plan-out',
         icon: Briefcase,
-        accent: 'text-pink-400',
-        badge: 'bg-pink-500/10 border-pink-500/30',
+        accent: 'text-series-plan2',
+        badge: 'bg-white/5 border-rule-14',
         title: { en: 'Portfolio plan', ko: '포트폴리오 계획', zh: '投資組合計畫' },
         desc: {
             en: <>The <Term term="plan" /> (value core) and <Term term="plan2" /> (hybrid) allocations with sizing, flags, and macro de-risk.</>,
@@ -199,8 +199,8 @@ const OUTPUTS: FlowNode[] = [
     {
         id: 'track-out',
         icon: LineChart,
-        accent: 'text-orange-400',
-        badge: 'bg-orange-500/10 border-orange-500/30',
+        accent: 'text-warn',
+        badge: 'bg-warn/10 border-warn/40',
         title: { en: 'Track Record', ko: '트랙 레코드', zh: '績效紀錄' },
         desc: {
             en: <>Four portfolios <Term term="paper-trading" /> daily with real <Term term="transaction-costs" />, benchmarked against <Term term="iwm" /> and <Term term="spy" /> — the honest meter.</>,
@@ -211,8 +211,8 @@ const OUTPUTS: FlowNode[] = [
     {
         id: 'reports-out',
         icon: FileText,
-        accent: 'text-cyan-400',
-        badge: 'bg-cyan-500/10 border-cyan-500/30',
+        accent: 'text-accent',
+        badge: 'bg-accent/10 border-accent/40',
         title: { en: 'AI Reports', ko: 'AI 리포츠', zh: 'AI 報告' },
         desc: {
             en: <>On-demand <Term term="llm" /> analysis stored in Supabase and shown under <b>/reports</b>.</>,
@@ -223,8 +223,8 @@ const OUTPUTS: FlowNode[] = [
     {
         id: 'logs-out',
         icon: Archive,
-        accent: 'text-amber-400',
-        badge: 'bg-amber-500/10 border-amber-500/30',
+        accent: 'text-warn',
+        badge: 'bg-warn/10 border-warn/40',
         title: { en: 'Forward logs → outcomes', ko: '전방 로그 → 성과', zh: '前瞻日誌 → 結果' },
         desc: {
             en: <>Every signal and nomination is logged <Term term="point-in-time" /> and later measured against real forward returns — no hindsight, no editing.</>,
@@ -254,36 +254,36 @@ function FlowBlock({ kind, header, lang, children }: {
 }) {
     const cfg = {
         parallel: {
-            box: 'border-amber-500/25 bg-amber-500/[0.05]',
-            band: 'bg-amber-500/15',
-            text: 'text-amber-300',
-            dot: 'bg-amber-400',
-            pill: 'border-amber-500/40 bg-amber-500/15 text-amber-300',
+            box: 'border-warn/40 bg-warn/10]',
+            band: 'bg-warn/10',
+            text: 'text-warn',
+            dot: 'bg-factor-momentum',
+            pill: 'border-warn/40 bg-warn/10 text-warn',
             en: 'Parallel', ko: '병렬', zh: '平行',
         },
         serial: {
-            box: 'border-emerald-500/25 bg-emerald-500/[0.05]',
-            band: 'bg-emerald-500/15',
-            text: 'text-emerald-300',
-            dot: 'bg-emerald-400',
-            pill: 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300',
+            box: 'border-pos/40 bg-pos/10',
+            band: 'bg-pos/10',
+            text: 'text-pos',
+            dot: 'bg-factor-value',
+            pill: 'border-pos/40 bg-pos/10 text-pos',
             en: 'Serial', ko: '직렬', zh: '序列',
         },
         output: {
-            box: 'border-violet-500/25 bg-violet-500/[0.05]',
-            band: 'bg-violet-500/15',
-            text: 'text-violet-300',
-            dot: 'bg-violet-400',
-            pill: 'border-violet-500/40 bg-violet-500/15 text-violet-300',
+            box: 'border-rule-14 bg-white/5]',
+            band: 'bg-white/5',
+            text: 'text-ink-2',
+            dot: 'bg-factor-lowvol',
+            pill: 'border-rule-14 bg-white/5 text-ink-2',
             en: 'Outputs', ko: '출력', zh: '輸出',
         },
     }[kind];
     return (
-        <div className={`overflow-hidden rounded-xl border ${cfg.box}`}>
-            <div className={`flex items-center gap-2 border-b border-border/40 px-3 py-2 ${cfg.band} ${cfg.text}`}>
-                <span className={`h-2 w-2 rounded-full ${cfg.dot}`} />
-                <span className="text-[10px] font-black uppercase tracking-wider">{header}</span>
-                <span className={`ml-auto rounded-full border px-2 py-0.5 text-[9px] font-black uppercase tracking-wider ${cfg.pill}`}>
+        <div className={`overflow-hidden  border ${cfg.box}`}>
+            <div className={`flex items-center gap-2 border-b border-rule-6 px-3 py-2 ${cfg.band} ${cfg.text}`}>
+                <span className={`h-2 w-2  ${cfg.dot}`} />
+                <span className="text-[10px] font-extrabold uppercase tracking-wider">{header}</span>
+                <span className={`ml-auto  border px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider ${cfg.pill}`}>
                     {cfg[lang]}
                 </span>
             </div>
@@ -296,8 +296,8 @@ function DownConnector() {
     return (
         <div className="relative my-1.5 flex h-8 items-center justify-center">
             <span className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gradient-to-b from-emerald-400/50 to-emerald-400/10" />
-            <span className="relative z-10 flex h-6 w-6 items-center justify-center rounded-full border border-emerald-500/40 bg-background shadow-[0_0_14px_-4px_rgba(16,185,129,0.6)]">
-                <ChevronDown className="h-4 w-4 text-emerald-400" />
+            <span className="relative z-10 flex h-6 w-6 items-center justify-center border border-pos/40 bg-page">
+                <ChevronDown className="h-4 w-4 text-pos" />
             </span>
         </div>
     );
@@ -308,8 +308,8 @@ function FanOutConnector() {
         <div className="relative my-1.5 flex h-9 items-center justify-center">
             <span className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gradient-to-b from-emerald-400/50 to-emerald-400/10" />
             <span className="absolute left-0 right-0 top-1/2 h-0.5 -translate-y-1/2 bg-gradient-to-r from-transparent via-violet-400/40 to-transparent" />
-            <span className="relative z-10 flex h-6 w-6 items-center justify-center rounded-full border border-violet-500/40 bg-background shadow-[0_0_14px_-4px_rgba(139,92,246,0.6)]">
-                <ChevronDown className="h-4 w-4 text-violet-400" />
+            <span className="relative z-10 flex h-6 w-6 items-center justify-center border border-rule-14 bg-page">
+                <ChevronDown className="h-4 w-4 text-ink-2" />
             </span>
         </div>
     );
@@ -317,23 +317,23 @@ function FanOutConnector() {
 
 function NodeCard({ n, lang, l }: { n: FlowNode; lang: 'en' | 'ko' | 'zh'; l: (x: L) => string }) {
     return (
-        <div className="group flex h-full items-start gap-3 rounded-xl border border-border/70 bg-secondary/10 p-3.5 transition-all hover:border-border hover:bg-secondary/20">
-            <div className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border shadow-lg shadow-black/30 ${n.badge} ${n.accent}`}>
+        <div className="group flex h-full items-start gap-3 border border-rule-6 bg-white/5 p-3.5 transition-all hover:border-rule-9 hover:bg-white/5">
+            <div className={`relative flex h-10 w-10 shrink-0 items-center justify-center border border-rule-14 ${n.badge} ${n.accent}`}>
                 <n.icon className="h-5 w-5" />
                 {n.step && (
-                    <span className={`absolute -right-1.5 -top-1.5 flex h-4.5 w-4.5 items-center justify-center rounded-full border-2 border-background bg-[#0b1220] text-[9px] font-black ${n.accent}`}
+                    <span className={`absolute -right-1.5 -top-1.5 flex h-4.5 w-4.5 items-center justify-center  border-2 border-background bg-[#0b1220] text-[9px] font-extrabold ${n.accent}`}
                         style={{ height: 18, width: 18 }}>
                         {n.step}
                     </span>
                 )}
             </div>
             <div className="min-w-0 flex-1">
-                <p className="text-[13px] font-black leading-tight text-foreground">{l(n.title)}</p>
-                <p className="mt-1 text-[12px] leading-relaxed text-muted-foreground">{n.desc[lang]}</p>
+                <p className="text-[13px] font-extrabold leading-tight text-ink">{l(n.title)}</p>
+                <p className="mt-1 text-[12px] leading-relaxed text-ink-2">{n.desc[lang]}</p>
                 {n.output && (
-                    <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-md border border-emerald-500/25 bg-emerald-500/[0.07] px-1.5 py-0.5">
-                        <span className="text-[8px] font-black uppercase tracking-wider text-emerald-400/80">{lang === 'ko' ? '산출물' : lang === 'zh' ? '產出' : 'output'}</span>
-                        <span className="font-mono text-[10px] font-bold text-emerald-300">{l(n.output)}</span>
+                    <div className="mt-1.5 inline-flex items-center gap-1.5 border border-pos/40 bg-pos/10 px-1.5 py-0.5">
+                        <span className="text-[8px] font-extrabold uppercase tracking-wider text-pos">{lang === 'ko' ? '산출물' : lang === 'zh' ? '產出' : 'output'}</span>
+                        <span className="font-mono text-[10px] font-bold text-pos">{l(n.output)}</span>
                     </div>
                 )}
             </div>
@@ -347,14 +347,14 @@ export function PipelineDiagram() {
     const l = (x: L) => x[lang];
 
     return (
-        <div className="rounded-2xl border border-emerald-500/20 bg-gradient-to-b from-emerald-500/[0.07] via-transparent to-violet-500/[0.07] p-4 shadow-[0_0_40px_-12px_rgba(16,185,129,0.3)]">
+        <div className="border border-pos/40 bg-gradient-to-b from-emerald-500/[0.07] via-transparent to-violet-500/[0.07] p-4">
             {/* Header */}
             <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm font-black tracking-tight text-foreground">
+                <p className="text-sm font-extrabold tracking-tight text-ink">
                     <span className="mr-2">⚙️</span>
                     {lang === 'ko' ? '매일의 데이터 파이프라인' : lang === 'zh' ? '每日資料流程' : 'The daily data pipeline'}
                 </p>
-                <span className="rounded-full border border-emerald-500/40 bg-emerald-500/15 px-2.5 py-1 text-[10px] font-black tracking-wider text-emerald-300">
+                <span className="border border-pos/40 bg-pos/10 px-2.5 py-1 text-[10px] font-extrabold tracking-wider text-pos">
                     {lang === 'ko' ? '매일 자동 재실행' : lang === 'zh' ? '每日執行' : 'RUNS DAILY'}
                 </span>
             </div>
@@ -387,7 +387,7 @@ export function PipelineDiagram() {
             <DownConnector />
 
             {/* 4. Portfolio plan — hero card */}
-            <div className="overflow-hidden rounded-xl border border-pink-500/40 bg-gradient-to-br from-pink-500/[0.14] to-secondary/10 p-3.5 shadow-[0_0_28px_-8px_rgba(236,72,153,0.4)]">
+            <div className="overflow-hidden border border-rule-14 bg-gradient-to-br from-pink-500/[0.14] to-secondary/10 p-3.5">
                 <NodeCard n={PLAN_NODE} lang={lang} l={l} />
             </div>
 
@@ -401,13 +401,13 @@ export function PipelineDiagram() {
             </FlowBlock>
 
             {/* Footer notes */}
-            <div className="mt-3 flex flex-wrap gap-2 border-t border-border/50 pt-3 text-[11px] text-muted-foreground">
+            <div className="mt-3 flex flex-wrap gap-2 border-t border-rule-6 pt-3 text-[11px] text-ink-2">
                 <span className="inline-flex items-center gap-1.5">
-                    <BadgeCheck className="h-3.5 w-3.5 text-emerald-400" />
+                    <BadgeCheck className="h-3.5 w-3.5 text-pos" />
                     {lang === 'ko' ? '전체 체인은 GitHub Actions로 매일 재실행됩니다.' : lang === 'zh' ? '整個流程透過 GitHub Actions 每天重新執行。' : 'The whole chain re-runs daily via GitHub Actions.'}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                    <Activity className="h-3.5 w-3.5 text-amber-400" />
+                    <Activity className="h-3.5 w-3.5 text-warn" />
                     {lang === 'ko' ? 'IC 드리프트 보고서는 매월 재계산됩니다.' : lang === 'zh' ? 'IC 漂移報告每月重算。' : 'The IC drift report recalculates monthly.'}
                 </span>
             </div>
@@ -421,32 +421,32 @@ export function AiAnalysisFlow() {
     const l = (x: L) => x[lang];
 
     return (
-        <div className="rounded-xl border border-border/70 bg-secondary/5 p-4">
+        <div className="border border-rule-6 bg-white/5 p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-[10px] font-black uppercase tracking-wider text-cyan-300/90">
+                <p className="text-[10px] font-extrabold uppercase tracking-wider text-accent">
                     {lang === 'ko' ? '요청 시 AI 분석 (Ask AI)' : lang === 'zh' ? '按需 AI 分析（Ask AI）' : 'On-demand AI analysis (Ask AI)'}
                 </p>
-                <span className="rounded-full border border-cyan-500/40 bg-cyan-500/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-cyan-300">
+                <span className="border border-accent/40 bg-accent/10 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-accent">
                     {lang === 'ko' ? '요청 시' : lang === 'zh' ? '按需' : 'on-demand'}
                 </span>
             </div>
             <div className="mt-2.5 flex items-stretch gap-1 overflow-x-auto pb-1">
                 {AI_STEPS.map((s, i) => (
                     <Fragment key={s.id}>
-                        <div className="flex min-w-[136px] flex-col justify-center rounded-lg border border-border/60 bg-secondary/10 p-2">
-                            <span className="text-[9px] font-black uppercase tracking-wider text-muted-foreground/50">{i + 1}</span>
-                            <span className="mt-0.5 text-[11px] font-black leading-tight text-foreground">{l(s.title)}</span>
-                            <span className="mt-0.5 text-[10px] leading-snug text-muted-foreground">{s.desc[lang]}</span>
+                        <div className="flex min-w-[136px] flex-col justify-center border border-rule-6 bg-white/5 p-2">
+                            <span className="text-[9px] font-extrabold uppercase tracking-wider text-ink-2/50">{i + 1}</span>
+                            <span className="mt-0.5 text-[11px] font-extrabold leading-tight text-ink">{l(s.title)}</span>
+                            <span className="mt-0.5 text-[10px] leading-snug text-ink-2">{s.desc[lang]}</span>
                         </div>
                         {i < AI_STEPS.length - 1 && (
-                            <span className="flex shrink-0 items-center text-emerald-400/70">
+                            <span className="flex shrink-0 items-center text-pos">
                                 <ChevronRight className="h-4 w-4" />
                             </span>
                         )}
                     </Fragment>
                 ))}
             </div>
-            <p className="mt-2 text-[10px] text-muted-foreground/70">
+            <p className="mt-2 text-[10px] text-ink-3">
                 {lang === 'ko'
                     ? '딥시크가 전체 RS2 프롬프트와 재무 데이터로 분석을 쓰고, 결과는 AI Reports(/reports)에 표시됩니다.'
                     : lang === 'zh'

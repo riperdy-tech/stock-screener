@@ -30,28 +30,28 @@ export function AuthModal({ onClose, signIn, signUp }: {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
-            <div className="w-full max-w-sm rounded-lg border border-border bg-card p-5"
+            <div className="w-full max-w-sm border border-rule-9 bg-surface p-5"
                  onClick={e => e.stopPropagation()}>
-                <h3 className="text-sm font-black uppercase tracking-wider text-emerald-300">
+                <h3 className="text-sm font-extrabold uppercase tracking-wider text-pos">
                     {mode === 'login' ? 'Log in' : 'Create account'}
                 </h3>
-                <p className="mt-1 text-[11px] text-muted-foreground">
+                <p className="mt-1 text-[11px] text-ink-2">
                     Needed to save your portfolio for tracking. Holdings are private to your account.
                 </p>
                 <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" type="email"
                     autoComplete="email"
-                    className="mt-3 w-full rounded-md border border-border bg-secondary/20 px-2 py-2 text-xs outline-none focus:border-emerald-500/50" />
+                    className="mt-3 w-full border border-rule-9 bg-white/5 px-2 py-2 text-xs outline-none focus:border-pos/40" />
                 <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" type="password"
                     autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                     onKeyDown={e => e.key === 'Enter' && submit()}
-                    className="mt-2 w-full rounded-md border border-border bg-secondary/20 px-2 py-2 text-xs outline-none focus:border-emerald-500/50" />
+                    className="mt-2 w-full border border-rule-9 bg-white/5 px-2 py-2 text-xs outline-none focus:border-pos/40" />
                 <button onClick={submit} disabled={busy}
-                    className="mt-3 w-full rounded-md border border-emerald-500/40 bg-emerald-500/15 py-2 text-xs font-black text-emerald-300 hover:bg-emerald-500/25 disabled:opacity-40">
+                    className="mt-3 w-full border border-pos/40 bg-pos/10 py-2 text-xs font-extrabold text-pos hover:bg-pos/10 disabled:opacity-40">
                     {busy ? '…' : mode === 'login' ? 'Log in' : 'Sign up'}
                 </button>
-                {msg && <p className="mt-2 text-[11px] text-amber-300">{msg}</p>}
+                {msg && <p className="mt-2 text-[11px] text-warn">{msg}</p>}
                 <button onClick={() => { setMode(mode === 'login' ? 'signup' : 'login'); setMsg(null); }}
-                    className="mt-3 text-[11px] font-bold text-muted-foreground underline">
+                    className="mt-3 text-[11px] font-bold text-ink-2 underline">
                     {mode === 'login' ? "No account? Sign up" : 'Have an account? Log in'}
                 </button>
             </div>

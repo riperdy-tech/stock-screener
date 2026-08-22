@@ -32,9 +32,9 @@ export function KoreanHelpBody() {
                     실제 가격과 실제 비용으로 시뮬레이션됩니다).
                 </Callout>
                 <p>
-                    <span className="border-b border-dotted border-emerald-400/60 font-semibold text-emerald-300">점선 밑줄</span>이
+                    <span className="border-b border-dotted border-pos/40 font-semibold text-pos">점선 밑줄</span>이
                     있는 단어는 기술 용어입니다. 클릭하면 페이지를 떠나지 않고 뜻을 볼 수 있습니다. 모든 용어의
-                    검색 가능한 색인은 <Link href="#glossary" className="font-bold text-emerald-300 hover:underline">용어 사전 섹션</Link>에
+                    검색 가능한 색인은 <Link href="#glossary" className="font-bold text-pos hover:underline">용어 사전 섹션</Link>에
                     있습니다.
                 </p>
             </Section>
@@ -73,9 +73,9 @@ export function KoreanHelpBody() {
                         <Term term="monitor" />, <Term term="pass" />). 레드칩은 <Term term="veto" />된 종목입니다. 이유가 칩에 적혀 있습니다.
                     </li>
                     <li><b>Market cap(시가총액)</b> — <Term term="market-cap" />. 기업 전체의 가격(주가 × 주식 수).</li>
-                    <li><b>RS2 순위 / 스탠스 / 컨빅션 / 액션</b> — 독립적인 AI 판단. <Link href="#rs2" className="font-bold text-emerald-300 hover:underline">RS2 섹션</Link> 참조.</li>
+                    <li><b>RS2 순위 / 스탠스 / 컨빅션 / 액션</b> — 독립적인 AI 판단. <Link href="#rs2" className="font-bold text-pos hover:underline">RS2 섹션</Link> 참조.</li>
                     <li><b>Δ pctl</b> — 퀀트 엔진과 AI가 백분위 몇 포인트만큼 다른지. 큰 격차가 흥미로운 행입니다. 둘 중 하나는 틀렸다는 뜻입니다.</li>
-                    <li><b>DCF gap</b> — <Term term="expectations-gap" />. 가격이 요구하는 성장률 대비 기업이 실제로 달성한 성장률. <Link href="#dcf" className="font-bold text-emerald-300 hover:underline">DCF 섹션</Link> 참조.</li>
+                    <li><b>DCF gap</b> — <Term term="expectations-gap" />. 가격이 요구하는 성장률 대비 기업이 실제로 달성한 성장률. <Link href="#dcf" className="font-bold text-pos hover:underline">DCF 섹션</Link> 참조.</li>
                 </ul>
                 <Callout kind="info">
                     아무 행이나 클릭하면 종목 상세를 볼 수 있습니다. 전체 팩터 프로필, 역산 DCF 판단(가격이 암시하는
@@ -91,43 +91,43 @@ export function KoreanHelpBody() {
                     않습니다. 그렇지 않으면 “모멘텀이 높다”가 그냥 “기술주다”가 되어 버립니다.
                 </p>
                 <div className="space-y-3">
-                    <div className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                        <p className="flex items-center gap-2 text-sm font-black"><span className="h-2.5 w-2.5 rounded-full bg-emerald-400" /><span className="text-emerald-300">밸류(Value)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+                    <div className="border border-rule-6 bg-white/5 p-3">
+                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-value" /><span className="text-pos">밸류(Value)</span></p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             연간 현금이익 1달러당 2달러를 사는가, 2달러당 1달러를 사는가? 장기 평균적으로 저렴한 것이
                             비싼 것보다 낫습니다. <Term term="fcf-yield" />, <Term term="owner-earnings" />,{' '}
                             <Term term="ebit" />, <Term term="earnings-yield" /> 네 가지 수익률의 평균으로 측정합니다.
-                            자세한 것은 <Link href="#methodology" className="font-bold text-emerald-300 hover:underline">방법론</Link> 참조.
+                            자세한 것은 <Link href="#methodology" className="font-bold text-pos hover:underline">방법론</Link> 참조.
                         </p>
                     </div>
-                    <div className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                        <p className="flex items-center gap-2 text-sm font-black"><span className="h-2.5 w-2.5 rounded-full bg-sky-400" /><span className="text-sky-300">퀄리티(Quality)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+                    <div className="border border-rule-6 bg-white/5 p-3">
+                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-quality" /><span className="text-accent">퀄리티(Quality)</span></p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             기업이 꾸준히 진짜 돈을 벌고, 회계가 깨끗한가? <Term term="revenue-quality" />, 수년간의{' '}
                             <Term term="gross-margin" /> 안정성, <Term term="accruals" />(현금이 뒷받침된 이익 선호),{' '}
                             <Term term="piotroski" />, <Term term="roic" />를 결합합니다. 스토리가 아닌, 이익을 내고
                             회계가 정직한 사업이 이깁니다.
                         </p>
                     </div>
-                    <div className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                        <p className="flex items-center gap-2 text-sm font-black"><span className="h-2.5 w-2.5 rounded-full bg-amber-400" /><span className="text-amber-300">모멘텀(Momentum)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+                    <div className="border border-rule-6 bg-white/5 p-3">
+                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-momentum" /><span className="text-warn">모멘텀(Momentum)</span></p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             지난 1년간 주가가 이기고 있었나? 이긴 주식은 한동안 계속 이기는 경향이 있습니다.{' '}
                             <Term term="skip-month" />(학계 표준 12개월 수익률, 최근 달 제외)과 <Term term="high-proximity" />로
                             구성됩니다. 최근 달을 빼는 이유는 <Term term="reversal" /> 참조.
                         </p>
                     </div>
-                    <div className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                        <p className="flex items-center gap-2 text-sm font-black"><span className="h-2.5 w-2.5 rounded-full bg-violet-400" /><span className="text-violet-300">저변동성(Low volatility)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+                    <div className="border border-rule-6 bg-white/5 p-3">
+                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-lowvol" /><span className="text-ink-2">저변동성(Low volatility)</span></p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             주가가 잔잔하게 움직이는가, 격렬하게 움직이는가? 잔잔한 주식이 역사적으로 고통 대비 더 많은
                             수익을 냈습니다. 월간 수익률의 표준편차(최소 12개 관측치)의 마이너스로 측정합니다.{' '}
                             <Term term="annualized-volatility" />는 <Term term="kelly" /> 포지션 크기에도 내보내집니다.
                         </p>
                     </div>
-                    <div className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                        <p className="flex items-center gap-2 text-sm font-black"><span className="h-2.5 w-2.5 rounded-full bg-rose-400" /><span className="text-rose-300">리비전(Revisions)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+                    <div className="border border-rule-6 bg-white/5 p-3">
+                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-revisions" /><span className="text-neg">리비전(Revisions)</span></p>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             애널리스트들이 전망을 올리고 있는가 내리고 있는가? 방향이 중요합니다. 정규화된{' '}
                             <Term term="eps-trajectory" /> 기울기와 구조화된 <Term term="estimates" /> 점수로 구성됩니다.
                         </p>
@@ -155,10 +155,10 @@ export function KoreanHelpBody() {
                     종합 백분위는 네 개의 실용적인 <Term term="band" />로 잘립니다.
                 </p>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><span className="font-black text-emerald-300">RESEARCH NOW</span> — 상위 3%. 오늘 리서치할 가치가 있습니다.</li>
-                    <li><span className="font-black text-sky-300">WATCHLIST</span> — 상위 10%.</li>
-                    <li><span className="font-black text-amber-300">MONITOR</span> — 상위 30%.</li>
-                    <li><span className="text-muted-foreground">PASS</span> — 나머지.</li>
+                    <li><span className="font-extrabold text-pos">RESEARCH NOW</span> — 상위 3%. 오늘 리서치할 가치가 있습니다.</li>
+                    <li><span className="font-extrabold text-accent">WATCHLIST</span> — 상위 10%.</li>
+                    <li><span className="font-extrabold text-warn">MONITOR</span> — 상위 30%.</li>
+                    <li><span className="text-ink-2">PASS</span> — 나머지.</li>
                 </ul>
                 <SubHeading>베토 — 하드 디스퀄리파이어</SubHeading>
                 <p>
@@ -189,9 +189,9 @@ export function KoreanHelpBody() {
                     <Term term="demonstrated-growth" />(SEC 제출 기준 최근 5년 매출/FCF 성장), 퍼센트 포인트 단위.
                 </p>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><span className="font-black text-emerald-300">초록 / 마이너스</span> — 가격이 기업이 입증한 것보다
+                    <li><span className="font-extrabold text-pos">초록 / 마이너스</span> — 가격이 기업이 입증한 것보다
                     적은 성장을 약속합니다. 잠재적 저가 매수입니다. 성장 스토리를 믿지 않아도 보상받습니다.</li>
-                    <li><span className="font-black text-amber-300">주황 / 플러스</span> — 가격이 아무도 입증하지 못한
+                    <li><span className="font-extrabold text-warn">주황 / 플러스</span> — 가격이 아무도 입증하지 못한
                     가속을 요구합니다. 스토리를 믿어야 합니다.</li>
                 </ul>
                 <Callout kind="tip">
@@ -254,10 +254,10 @@ export function KoreanHelpBody() {
                 </p>
                 <SubHeading>포트폴리오</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b className="text-emerald-300">plan</b> — 밸류 코어. <Term term="kelly" /> 크기, 약 50% 현금.</li>
-                    <li><b className="text-pink-400">plan2</b> — 하이브리드. 밸류 코어 + <Term term="sleeve" />, 약 78% 투자, 비싼 리더 보유.</li>
-                    <li><b className="text-sky-300">equal</b> — 모든 Research Now 종목을 동일 가중(순수 종목 선정 테스트).</li>
-                    <li><b className="text-violet-300">mine</b> — 당신의 저장된 My Portfolio 보유 종목. <Term term="unitization" />으로 펀드처럼 측정.</li>
+                    <li><b className="text-pos">plan</b> — 밸류 코어. <Term term="kelly" /> 크기, 약 50% 현금.</li>
+                    <li><b className="text-series-plan2">plan2</b> — 하이브리드. 밸류 코어 + <Term term="sleeve" />, 약 78% 투자, 비싼 리더 보유.</li>
+                    <li><b className="text-accent">equal</b> — 모든 Research Now 종목을 동일 가중(순수 종목 선정 테스트).</li>
+                    <li><b className="text-ink-2">mine</b> — 당신의 저장된 My Portfolio 보유 종목. <Term term="unitization" />으로 펀드처럼 측정.</li>
                 </ul>
                 <SubHeading>읽는 법</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
@@ -370,28 +370,28 @@ export function KoreanHelpBody() {
                 </p>
                 <SubHeading>팩터 구성 — 하위 지표와 출처</SubHeading>
                 <p>
-                    <span className="font-black text-emerald-300">밸류</span> = 네 가지 수익률의 평균 z. 모두 최근
+                    <span className="font-extrabold text-pos">밸류</span> = 네 가지 수익률의 평균 z. 모두 최근
                     회계연도 SEC 제출 재무 대비 현재 시가총액으로 계산합니다. <Term term="fcf-yield" />(FCF/시총),{' '}
                     <Term term="owner-earnings" />((순이익 + 감가상각 − 설비투자)/시총), <Term term="ebit" /> 수익률
                     (영업이익/<Term term="enterprise-value" />), <Term term="earnings-yield" />(순이익/시총 — 커버리지가
                     가장 넓어 CAPEX·D&amp;A·영업이익 태그가 없는 기업을 구제).
                 </p>
                 <p>
-                    <span className="font-black text-sky-300">퀄리티</span> = <Term term="revenue-quality" />(역설계
+                    <span className="font-extrabold text-accent">퀄리티</span> = <Term term="revenue-quality" />(역설계
                     점수), <Term term="gross-margin" /> 안정성(≥4 회계연도 GM의 −표준편차), 마이너스{' '}
                     <Term term="accruals" />(−발생액 비율), <Term term="piotroski" />(둘 다 포렌식 배터리 출처).
                 </p>
                 <p>
-                    <span className="font-black text-amber-300">모멘텀</span> = <Term term="skip-month" />과{' '}
+                    <span className="font-extrabold text-warn">모멘텀</span> = <Term term="skip-month" />과{' '}
                     <Term term="high-proximity" />의 평균 z. 월간 종가.
                 </p>
                 <p>
-                    <span className="font-black text-violet-300">저변동성</span> = 월간 수익률의 −σ z, 최소 12개
+                    <span className="font-extrabold text-ink-2">저변동성</span> = 월간 수익률의 −σ z, 최소 12개
                     관측치. <Term term="annualized-volatility" />는 종목별로 내보내 <Term term="kelly" /> 크기에
                     사용됩니다.
                 </p>
                 <p>
-                    <span className="font-black text-rose-300">리비전</span> = 두 0–1 부분의 평균. 정규화된{' '}
+                    <span className="font-extrabold text-neg">리비전</span> = 두 0–1 부분의 평균. 정규화된{' '}
                     <Term term="eps-trajectory" /> 기울기 (clamp(기울기, −1, 1)+1)/2, 그리고 애널리스트 구조 점수/100
                     — 0–100으로 스케일 후 (점수−50)/25로 z 유사 척도로 재중심화.
                 </p>

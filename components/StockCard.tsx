@@ -67,7 +67,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
         <div
             onClick={onClick}
             style={{ animationDelay: `${index * 30}ms` }}
-            className="group relative h-full cursor-pointer overflow-hidden rounded-lg border border-border/80 bg-card/95 shadow-inner transition-all duration-300 animate-in fade-in zoom-in-95 fill-mode-backwards hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-xl"
+            className="group relative h-full cursor-pointer overflow-hidden border border-rule-6 bg-surface transition-all duration-300 animate-in fade-in zoom-in-95 fill-mode-backwards hover:-translate-y-0.5 hover:border-accent/40 hover:"
         >
             <div className="flex h-full flex-col p-3.5 sm:p-4">
                 <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -75,37 +75,37 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                         <div className="flex items-center gap-2">
                             <span
                                 className={clsx(
-                                    "h-2.5 w-2.5 shrink-0 rounded-full",
-                                    result.passed ? "bg-success shadow-[0_0_10px_var(--success)]" :
-                                        result.score > 80 ? "bg-warning shadow-[0_0_10px_rgba(237,137,54,0.85)]" :
+                                    "h-2.5 w-2.5 shrink-0 ",
+                                    result.passed ? "bg-success " :
+                                        result.score > 80 ? "bg-warning " :
                                             "bg-danger/60"
                                 )}
                                 title={result.passed ? "Gem Candidate" : result.score > 80 ? "High Potential" : "Reviewing"}
                             />
-                            <h3 className="truncate text-lg font-black tracking-tight transition-colors group-hover:text-primary">
+                            <h3 className="truncate text-lg font-extrabold tracking-tight transition-colors group-hover:text-accent">
                                 {ticker}
                             </h3>
                         </div>
-                        <p className="mt-0.5 truncate text-sm font-semibold text-muted-foreground">
+                        <p className="mt-0.5 truncate text-sm font-semibold text-ink-2">
                             {companyName}
                         </p>
-                        <p className="mt-0.5 truncate text-xs text-muted-foreground/80">
+                        <p className="mt-0.5 truncate text-xs text-ink-2/80">
                             {candidate.sector || t('unknownSector')} / {candidate.industry || result.industry || t('unknownIndustry')}
                         </p>
                     </div>
 
-                    <div className="w-full shrink-0 rounded-lg border border-border/60 bg-secondary/20 p-2.5 text-left sm:min-w-[7.5rem] sm:w-auto sm:text-right">
-                        <div className="text-[11px] font-black uppercase tracking-wider text-muted-foreground">{t('price')}</div>
-                        <div className="mt-1 truncate font-mono text-lg font-black leading-none text-foreground sm:text-xl" title={priceLabel}>
+                    <div className="w-full shrink-0 border border-rule-6 bg-white/5 p-2.5 text-left sm:min-w-[7.5rem] sm:w-auto sm:text-right">
+                        <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-2">{t('price')}</div>
+                        <div className="mt-1 truncate font-mono text-lg font-extrabold leading-none text-ink sm:text-xl" title={priceLabel}>
                             {priceLabel}
                         </div>
-                        <div className="mt-2 flex items-center justify-between gap-3 border-t border-border/50 pt-2">
-                            <span className="text-xs font-bold text-muted-foreground">{t('mcap')}</span>
-                            <span className="truncate font-mono text-xs font-black text-foreground" title={marketCapLabel}>{marketCapLabel}</span>
+                        <div className="mt-2 flex items-center justify-between gap-3 border-t border-rule-6 pt-2">
+                            <span className="text-xs font-bold text-ink-2">{t('mcap')}</span>
+                            <span className="truncate font-mono text-xs font-extrabold text-ink" title={marketCapLabel}>{marketCapLabel}</span>
                         </div>
                         <div className="mt-2 flex items-center justify-between gap-3">
-                            <span className="text-xs font-bold text-muted-foreground">{t('growth')}</span>
-                            <span className={clsx("flex items-center justify-end gap-1 font-mono text-xs font-black", revenueGrowth >= 0 ? 'text-success' : 'text-danger')}>
+                            <span className="text-xs font-bold text-ink-2">{t('growth')}</span>
+                            <span className={clsx("flex items-center justify-end gap-1 font-mono text-xs font-extrabold", revenueGrowth >= 0 ? 'text-pos' : 'text-neg')}>
                                 {revenueGrowth >= 0 ? <ArrowUpRight className="h-3.5 w-3.5" /> : <ArrowDownRight className="h-3.5 w-3.5" />}
                                 {Math.abs(revenueGrowth).toFixed(1)}%
                             </span>
@@ -113,53 +113,53 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                     </div>
                 </div>
 
-                <div className="mt-3 rounded-lg border border-purple-500/20 bg-purple-500/[0.04] p-2.5">
+                <div className="mt-3 border border-rule-14 bg-white/5] p-2.5">
                     {hasParadigm ? (
                         <div className="flex items-start gap-2">
-                            <div className="mt-0.5 rounded-md border border-purple-500/30 bg-purple-500/10 p-2 text-purple-300">
+                            <div className="mt-0.5 border border-rule-14 bg-white/5 p-2 text-ink-2">
                                 <Layers3 className="h-4 w-4" />
                             </div>
                             <div className="min-w-0 flex-1">
                                 <div className="flex flex-wrap items-center gap-1.5">
                                     <span className={clsx(
-                                        "rounded px-2.5 py-1 text-xs font-black uppercase",
-                                        paradigmBand === 'high' && "bg-emerald-500/20 text-emerald-400",
-                                        paradigmBand === 'mid' && "bg-blue-500/20 text-blue-400",
-                                        paradigmBand === 'watch' && "bg-amber-500/20 text-amber-400",
-                                        paradigmBand === 'skip' && "bg-gray-500/20 text-gray-400",
-                                        paradigmBand === 'no_data' && "bg-muted/20 text-muted-foreground",
+                                        " px-2.5 py-1 text-xs font-extrabold uppercase",
+                                        paradigmBand === 'high' && "bg-pos/10 text-pos",
+                                        paradigmBand === 'mid' && "bg-accent/10 text-accent",
+                                        paradigmBand === 'watch' && "bg-warn/10 text-warn",
+                                        paradigmBand === 'skip' && "bg-gray-500/20 text-ink-2",
+                                        paradigmBand === 'no_data' && "bg-white/5 text-ink-2",
                                     )}>
                                         Paradigm {paradigmLabel}
                                     </span>
                                     {paradigm?.pdm_signal != null && (
-                                        <span className="font-mono text-xs font-bold text-primary/90">Sig {Math.round(paradigm.pdm_signal)}</span>
+                                        <span className="font-mono text-xs font-bold text-accent/90">Sig {Math.round(paradigm.pdm_signal)}</span>
                                     )}
                                 </div>
-                                <div className="mt-1 truncate font-mono text-xs text-purple-300" title={paradigm?.pdm_themes?.join(', ')}>
+                                <div className="mt-1 truncate font-mono text-xs text-ink-2" title={paradigm?.pdm_themes?.join(', ')}>
                                     {paradigm?.pdm_theme_primary || paradigm?.pdm_themes?.[0]}
                                     {paradigm?.pdm_themes && paradigm.pdm_themes.length > 1 ? ` +${paradigm.pdm_themes.length - 1}` : ''}
                                 </div>
                                 {latestParadigmEvent && (
-                                    <div className="mt-1 truncate text-[11px] font-bold text-muted-foreground" title={formatParadigmHistoryEvent(latestParadigmEvent)}>
+                                    <div className="mt-1 truncate text-[11px] font-bold text-ink-2" title={formatParadigmHistoryEvent(latestParadigmEvent)}>
                                         {formatParadigmHistoryEvent(latestParadigmEvent)}
                                     </div>
                                 )}
                             </div>
                         </div>
                     ) : (
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Layers3 className="h-4 w-4 text-purple-300/60" />
+                        <div className="flex items-center gap-2 text-sm text-ink-2">
+                            <Layers3 className="h-4 w-4 text-ink-2" />
                             {t('paradigmNoTag')}
                         </div>
                     )}
                 </div>
 
-                <div className="mt-2.5 rounded-lg border border-border/70 bg-secondary/15 p-2.5">
+                <div className="mt-2.5 border border-rule-6 bg-white/5 p-2.5">
                     <ActiveLensPanel result={result} screenMode={screenMode} youtubeEvaluation={youtubeEvaluation} />
                 </div>
 
-                <div className="mt-2.5 border-t border-border/60 pt-2.5">
-                    <div className="mb-1.5 text-xs font-black uppercase tracking-wider text-muted-foreground">{t('otherSignals')}</div>
+                <div className="mt-2.5 border-t border-rule-6 pt-2.5">
+                    <div className="mb-1.5 text-xs font-extrabold uppercase tracking-wider text-ink-2">{t('otherSignals')}</div>
                     <div className="flex flex-wrap gap-1.5">
                         <SignalChip
                             icon={<Telescope className="h-4 w-4" />}
@@ -192,10 +192,10 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                             />
                         )}
                         {paradigm?.pdm_flags?.some((f: string) => f.startsWith('macro_')) && (
-                            <span className="rounded border border-red-500/30 bg-red-500/10 px-2.5 py-1 text-xs font-black text-red-400">Macro</span>
+                            <span className="border border-neg/40 bg-neg/10 px-2.5 py-1 text-xs font-extrabold text-neg">Macro</span>
                         )}
                         {paradigm?.pdm_flags?.includes('accelerating') && (
-                            <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-xs font-black text-emerald-400">Accel</span>
+                            <span className="border border-pos/40 bg-pos/10 px-2.5 py-1 text-xs font-extrabold text-pos">Accel</span>
                         )}
                     </div>
                 </div>
@@ -238,10 +238,10 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
         return (
             <div>
                 <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-emerald-400">
+                    <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-pos">
                         <ShieldCheck className="h-4 w-4" /> {t('strategyReverseTitle')}
                     </div>
-                    <span className="font-mono text-sm font-black text-foreground">{reverse.rev_composite != null ? Math.round(reverse.rev_composite) : 'n/a'}</span>
+                    <span className="font-mono text-sm font-extrabold text-ink">{reverse.rev_composite != null ? Math.round(reverse.rev_composite) : 'n/a'}</span>
                 </div>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                     <MiniMetric label="Band" value={reverse.rev_band || 'n/a'} />
@@ -260,10 +260,10 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
         return (
             <div>
                 <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-purple-300">
+                    <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
                         <Layers3 className="h-4 w-4" /> {t('strategyParadigmTitle')}
                     </div>
-                    <span className="font-mono text-sm font-black text-foreground">{paradigm.pdm_signal != null ? Math.round(paradigm.pdm_signal) : 'n/a'}</span>
+                    <span className="font-mono text-sm font-extrabold text-ink">{paradigm.pdm_signal != null ? Math.round(paradigm.pdm_signal) : 'n/a'}</span>
                 </div>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                     <MiniMetric label="Member" value={paradigm.pdm_membership_score ?? 'n/a'} />
@@ -282,10 +282,10 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
         return (
             <div>
                 <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-red-300">
+                    <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-neg">
                         <Youtube className="h-4 w-4" /> {t('strategyYoutubeTitle')}
                     </div>
-                    <span className="truncate text-right text-sm font-black text-foreground" title={youtubeEvaluation.matchedStrategies.join(', ')}>
+                    <span className="truncate text-right text-sm font-extrabold text-ink" title={youtubeEvaluation.matchedStrategies.join(', ')}>
                         {youtubeEvaluation.matchedStrategies[0]}{extraMatches > 0 ? ` +${extraMatches}` : ''}
                     </span>
                 </div>
@@ -302,10 +302,10 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
     return (
         <div>
             <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-sky-400">
+                <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-accent">
                     <Telescope className="h-4 w-4" /> {t('strategy100Title')}
                 </div>
-                <span className="font-mono text-sm font-black text-foreground">{Math.round(result.score)}</span>
+                <span className="font-mono text-sm font-extrabold text-ink">{Math.round(result.score)}</span>
             </div>
             <div className="mt-3 grid grid-cols-3 gap-2">
                 <MiniMetric label={t('status')} value={result.passed ? t('pass') : t('review')} />
@@ -318,21 +318,21 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
 
 function MiniMetric({ label, value }: { label: string; value: string | number }) {
     return (
-        <div className="min-w-0 rounded-md bg-background/40 px-2.5 py-1.5">
-            <div className="truncate text-[11px] font-bold uppercase tracking-wide text-muted-foreground">{label}</div>
-            <div className="mt-0.5 truncate font-mono text-xs font-black text-foreground" title={String(value)}>{value}</div>
+        <div className="min-w-0 bg-page px-2.5 py-1.5">
+            <div className="truncate text-[11px] font-bold uppercase tracking-wide text-ink-2">{label}</div>
+            <div className="mt-0.5 truncate font-mono text-xs font-extrabold text-ink" title={String(value)}>{value}</div>
         </div>
     );
 }
 
 function EmptyLens({ icon, label, detail }: { icon: ReactNode; label: string; detail: string }) {
     return (
-        <div className="rounded-lg border border-border/60 bg-secondary/15 p-2.5">
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
+        <div className="border border-rule-6 bg-white/5 p-2.5">
+            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
                 {icon}
                 <span>{label}</span>
             </div>
-            <p className="mt-1 text-xs leading-relaxed text-muted-foreground/75">{detail}</p>
+            <p className="mt-1 text-xs leading-relaxed text-ink-2/75">{detail}</p>
         </div>
     );
 }
@@ -340,11 +340,11 @@ function EmptyLens({ icon, label, detail }: { icon: ReactNode; label: string; de
 function SignalChip({ icon, label, value, tone }: { icon: ReactNode; label: string; value: string; tone: 'success' | 'warning' | 'primary' | 'muted' }) {
     return (
         <span className={clsx(
-            "inline-flex items-center gap-1.5 rounded border px-2.5 py-1 text-xs font-black",
-            tone === 'success' && "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-            tone === 'warning' && "border-amber-500/30 bg-amber-500/10 text-amber-400",
-            tone === 'primary' && "border-blue-500/30 bg-blue-500/10 text-blue-400",
-            tone === 'muted' && "border-border/60 bg-secondary/30 text-muted-foreground",
+            "inline-flex items-center gap-1.5  border px-2.5 py-1 text-xs font-extrabold",
+            tone === 'success' && "border-pos/40 bg-pos/10 text-pos",
+            tone === 'warning' && "border-warn/40 bg-warn/10 text-warn",
+            tone === 'primary' && "border-accent/40 bg-accent/10 text-accent",
+            tone === 'muted' && "border-rule-6 bg-white/5 text-ink-2",
         )}>
             {icon}
             {label} {value}

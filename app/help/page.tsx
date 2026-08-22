@@ -1,7 +1,7 @@
 'use client';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// /help — THE FACTOR LAB HANDBOOK
+// /help — the Stockpeak handbook
 //
 // A dedicated, extensive "bible" that explains everything this site does:
 // how the pipeline works, how every number is computed, what every column
@@ -11,7 +11,7 @@
 // and a mini-popup explains that term. See components/GlossaryTerm.tsx.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode, useRef } from 'react';
 import Link from 'next/link';
 import {
     ArrowLeft, ArrowUpRight, BookOpen, BookMarked, FlaskConical, HelpCircle, ListTree, Search, X,
@@ -95,7 +95,7 @@ const UI = {
     results: { en: 'results for', ko: '개의 결과 (검색어:', zh: '個結果（搜尋：' },
     tryAnother: { en: '— try another word.', ko: '— 다른 단어를 검색해 보세요.', zh: '——請換個詞試試。' },
     terms: { en: 'term(s)', ko: '개 용어', zh: '個詞彙' },
-    backToCockpit: { en: 'Back to the Factor Lab Cockpit', ko: '팩터 랩 콕핏으로 돌아가기', zh: '返回 Factor Lab 駕駛艙' },
+    backToCockpit: { en: 'Back to the Stockpeak desk', ko: '스톡피크 데스크로 돌아가기', zh: '返回 Stockpeak 研究台' },
 } as const;
 
 type L3 = { en: string; ko: string; zh: string };
@@ -163,8 +163,8 @@ const FAQ_ITEMS: FAQItem[] = [
 const FACTOR_ITEMS = [
     {
         key: 'value',
-        color: 'text-emerald-300',
-        dot: 'bg-emerald-400',
+        color: 'text-pos',
+        dot: 'bg-factor-value',
         name: 'Value',
         body: (
             <>
@@ -172,14 +172,14 @@ const FACTOR_ITEMS = [
                 average over time. Measured as the average of four yields — <Term term="fcf-yield" />,
                 {' '}<Term term="owner-earnings" />, <Term term="ebit" />, and <Term term="earnings-yield" /> —
                 each against the stock&apos;s current price. See{' '}
-                <Link href="#methodology" className="font-bold text-emerald-300 hover:underline">the methodology</Link>.
+                <Link href="#methodology" className="font-bold text-pos hover:underline">the methodology</Link>.
             </>
         ),
     },
     {
         key: 'quality',
-        color: 'text-sky-300',
-        dot: 'bg-sky-400',
+        color: 'text-accent',
+        dot: 'bg-factor-quality',
         name: 'Quality',
         body: (
             <>
@@ -192,8 +192,8 @@ const FACTOR_ITEMS = [
     },
     {
         key: 'momentum',
-        color: 'text-amber-300',
-        dot: 'bg-amber-400',
+        color: 'text-warn',
+        dot: 'bg-factor-momentum',
         name: 'Momentum',
         body: (
             <>
@@ -205,8 +205,8 @@ const FACTOR_ITEMS = [
     },
     {
         key: 'lowvol',
-        color: 'text-violet-300',
-        dot: 'bg-violet-400',
+        color: 'text-ink-2',
+        dot: 'bg-factor-lowvol',
         name: 'Low volatility',
         body: (
             <>
@@ -219,8 +219,8 @@ const FACTOR_ITEMS = [
     },
     {
         key: 'revisions',
-        color: 'text-rose-300',
-        dot: 'bg-rose-400',
+        color: 'text-neg',
+        dot: 'bg-factor-revisions',
         name: 'Revisions',
         body: (
             <>
@@ -237,10 +237,10 @@ function SidebarNav({ activeId, lang }: { activeId: string; lang: Lang }) {
         <nav className="space-y-4">
             {NAV_GROUPS.map(group => (
                 <div key={group.id}>
-                    <p className="mb-1.5 text-[10px] font-black uppercase tracking-wider text-muted-foreground/60">
+                    <p className="mb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-ink-3">
                         {group[lang]}
                     </p>
-                    <ul className="space-y-0.5 border-l border-border">
+                    <ul className="space-y-0.5 border-l border-rule-9">
                         {group.items.map(item => {
                             const active = activeId === item.id;
                             return (
@@ -250,8 +250,8 @@ function SidebarNav({ activeId, lang }: { activeId: string; lang: Lang }) {
                                         aria-current={active ? 'true' : undefined}
                                         className={`-ml-px block border-l-2 py-1 pl-3 text-xs font-semibold transition-colors ${
                                             active
-                                                ? 'border-emerald-400/70 text-emerald-300'
-                                                : 'border-transparent text-muted-foreground hover:border-emerald-400/40 hover:text-foreground'
+                                                ? 'border-pos/40 text-pos'
+                                                : 'border-transparent text-ink-2 hover:border-pos/40 hover:text-ink'
                                         }`}
                                     >
                                         {item[lang]}
@@ -272,6 +272,24 @@ export default function HelpPage() {
     const contentsLabel = lang === 'ko' ? '목차' : lang === 'zh' ? '目錄' : 'Contents';
     const openContentsLabel = lang === 'ko' ? '목차 열기' : lang === 'zh' ? '開啟目錄' : 'Open contents';
     const [glossaryQuery, setGlossaryQuery] = useState('');
+    // The glossary index sits ~10,000px below the header, so a search box that
+    // only filtered it read as broken. Matches now appear directly under the
+    // input as you type; the section below stays filtered for browsing.
+    const [searchOpen, setSearchOpen] = useState(false);
+    const searchBoxRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const onDown = (e: MouseEvent) => {
+            if (searchBoxRef.current && !searchBoxRef.current.contains(e.target as Node)) setSearchOpen(false);
+        };
+        const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchOpen(false); };
+        document.addEventListener('mousedown', onDown);
+        document.addEventListener('keydown', onKey);
+        return () => {
+            document.removeEventListener('mousedown', onDown);
+            document.removeEventListener('keydown', onKey);
+        };
+    }, []);
     const [activeId, setActiveId] = useState<string>('welcome');
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -321,44 +339,85 @@ export default function HelpPage() {
 
     return (
         <GlossaryProvider>
-            <div className="min-h-screen bg-background text-foreground">
+            <div className="min-h-screen bg-page text-ink">
                 {/* ── Header ─────────────────────────────────────────────── */}
-                <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
+                <header className="sticky top-0 z-30 border-b border-rule-9 bg-page">
                     <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-3 px-4 py-3">
-                        <Link href="/" className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-2.5 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground">
-                            <ArrowLeft className="h-3.5 w-3.5" /> Cockpit
+                        <Link href="/" className="flex items-center gap-1.5 border border-rule-9 px-2.5 py-1.5 text-xs font-bold text-ink-2 hover:text-ink">
+                            <ArrowLeft className="h-3.5 w-3.5" /> Rankings
                         </Link>
                         <button
                             onClick={() => setMobileNavOpen(true)}
                             aria-label={openContentsLabel}
-                            className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/20 px-2.5 py-1.5 text-xs font-bold text-muted-foreground hover:text-foreground lg:hidden"
+                            className="flex items-center gap-1.5 border border-rule-9 bg-white/5 px-2.5 py-1.5 text-xs font-bold text-ink-2 hover:text-ink lg:hidden"
                         >
                             <ListTree className="h-3.5 w-3.5" />
                             {contentsLabel}
                         </button>
                         <div className="flex items-center gap-2">
-                            <BookOpen className="h-5 w-5 text-emerald-400" />
+                            <BookOpen className="h-5 w-5 text-accent" />
                             <div>
-                                <h1 className="text-base font-black tracking-tight">
-                                    THE FACTOR LAB <span className="text-emerald-400">HANDBOOK</span>
+                                <h1 className="text-base font-extrabold tracking-brand">
+                                    STOCKPEAK <span className="text-accent">HANDBOOK</span>
                                 </h1>
-                                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                                <p className="text-[10px] font-semibold uppercase tracking-wider text-ink-2">
                                     {UI.handbookSubtitle[lang]} · v{APP_VERSION}
                                 </p>
                             </div>
                         </div>
                         <div className="ml-auto flex flex-wrap items-center gap-2">
                             <LanguageToggle />
-                            <div className="relative hidden sm:block">
-                                <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground/60" />
+                            <div ref={searchBoxRef} className="relative hidden sm:block">
+                                <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-ink-3" />
                                 <input
                                     value={glossaryQuery}
-                                    onChange={e => setGlossaryQuery(e.target.value)}
+                                    onChange={e => { setGlossaryQuery(e.target.value); setSearchOpen(true); }}
+                                    onFocus={() => setSearchOpen(true)}
                                     placeholder={UI.searchPlaceholder[lang]}
-                                    className="w-56 rounded-md border border-border bg-secondary/20 py-1.5 pl-8 pr-2 text-xs text-foreground placeholder:text-muted-foreground/60 focus:border-emerald-400/50 focus:outline-none"
+                                    aria-label={UI.searchPlaceholder[lang]}
+                                    className="w-56 border border-rule-9 bg-white/5 py-1.5 pl-8 pr-2 text-xs text-ink placeholder:text-ink-3 focus:border-accent focus:outline-none"
                                 />
+                                {glossaryQuery.trim() !== '' && (
+                                    <button
+                                        onClick={() => { setGlossaryQuery(''); setSearchOpen(false); }}
+                                        aria-label="Clear search"
+                                        className="absolute right-2 top-1/2 -translate-y-1/2 font-mono text-[11px] text-ink-3 hover:text-ink"
+                                    >
+                                        &#10005;
+                                    </button>
+                                )}
+
+                                {searchOpen && glossaryQuery.trim() !== '' && (
+                                    <div className="absolute right-0 top-full z-40 mt-1 max-h-[60vh] w-80 overflow-y-auto border border-rule-16 bg-page p-2 scroll-dark">
+                                        <p className="px-1 pb-1.5 font-mono text-[9.5px] uppercase tracking-[.1em] text-ink-3">
+                                            {entries.length === 0
+                                                ? (lang === 'ko' ? '\uacb0\uacfc \uc5c6\uc74c' : lang === 'zh' ? '\u6c92\u6709\u7d50\u679c' : 'No matches')
+                                                : (lang === 'ko' ? `${entries.length}\uac1c \uacb0\uacfc` : lang === 'zh' ? `${entries.length} \u500b\u7d50\u679c` : `${entries.length} match${entries.length === 1 ? '' : 'es'}`)}
+                                        </p>
+                                        {entries.slice(0, 10).map(([key, term]) => {
+                                            const loc = lang === 'ko' ? GLOSSARY_KO[key] : lang === 'zh' ? GLOSSARY_ZH[key] : undefined;
+                                            return (
+                                                <div key={key} className="border-t border-rule-6 px-1 py-1.5 first:border-t-0">
+                                                    <Term term={key} label={loc?.term ?? term.term} />
+                                                    <p className="mt-0.5 line-clamp-2 text-[11px] leading-snug text-ink-3">
+                                                        {loc?.plain ?? term.plain}
+                                                    </p>
+                                                </div>
+                                            );
+                                        })}
+                                        {entries.length > 10 && (
+                                            <Link
+                                                href="#glossary"
+                                                onClick={() => setSearchOpen(false)}
+                                                className="mt-1 block border-t border-rule-9 px-1 pt-2 font-mono text-[9.5px] uppercase tracking-[.1em] text-accent"
+                                            >
+                                                {lang === 'ko' ? `\uc804\uccb4 ${entries.length}\uac1c \ubcf4\uae30` : lang === 'zh' ? `\u67e5\u770b\u5168\u90e8 ${entries.length} \u500b` : `See all ${entries.length} in the glossary`} \u2192
+                                            </Link>
+                                        )}
+                                    </div>
+                                )}
                             </div>
-                            <Link href="#glossary" className="flex items-center gap-1.5 rounded-md border border-emerald-500/40 bg-emerald-500/15 px-2.5 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/25">
+                            <Link href="#glossary" className="flex items-center gap-1.5 border border-accent/60 px-2.5 py-1.5 text-xs font-bold text-accent hover:bg-accent/[0.12]">
                                 <BookMarked className="h-3.5 w-3.5" /> {UI.glossaryBtn[lang]}
                             </Link>
                         </div>
@@ -369,14 +428,14 @@ export default function HelpPage() {
                 <div className="mx-auto flex max-w-[1400px] gap-6 px-4 py-6">
                     {/* Left TOC (desktop) */}
                     <nav className="sticky top-20 hidden h-fit w-56 shrink-0 lg:block">
-                        <p className="mb-2 text-[10px] font-black uppercase tracking-wider text-muted-foreground/70">
+                        <p className="mb-2 text-[10px] font-extrabold uppercase tracking-wider text-ink-3">
                             {UI.onThisPage[lang]}
                         </p>
                         <div className="max-h-[calc(100vh-8rem)] overflow-y-auto pr-1">
                             <SidebarNav activeId={activeId} lang={lang} />
                         </div>
-                        <div className="mt-4 rounded-lg border border-border/60 bg-secondary/10 p-3 text-[11px] leading-relaxed text-muted-foreground">
-                            <p className="font-black uppercase tracking-wider text-emerald-300/80">{UI.howToUse[lang]}</p>
+                        <div className="mt-4 border border-rule-6 bg-white/5 p-3 text-[11px] leading-relaxed text-ink-2">
+                            <p className="font-extrabold uppercase tracking-wider text-pos">{UI.howToUse[lang]}</p>
                             <p className="mt-1">
                                 {UI.howToUseBody[lang]}
                             </p>
@@ -402,10 +461,10 @@ export default function HelpPage() {
                                 paper portfolios (they are simulated, honestly, with real prices and real costs).
                             </Callout>
                             <p>
-                                If a word has a <span className="border-b border-dotted border-emerald-400/60 font-semibold text-emerald-300">dotted underline</span>,
+                                If a word has a <span className="border-b border-dotted border-pos/40 font-semibold text-pos">dotted underline</span>,
                                 it is a <Term term="ticker" />-level technical term — click it to see what it means without
                                 leaving the page. A complete, searchable index of every term lives in the{' '}
-                                <Link href="#glossary" className="font-bold text-emerald-300 hover:underline">glossary section</Link>.
+                                <Link href="#glossary" className="font-bold text-pos hover:underline">glossary section</Link>.
                             </p>
                         </Section>
 
@@ -457,7 +516,7 @@ export default function HelpPage() {
                                 </li>
                                 <li>
                                     <b>RS2 rank / stance / conviction / action</b> — the independent AI read. See the{' '}
-                                    <Link href="#rs2" className="font-bold text-emerald-300 hover:underline">RS2 section</Link>.
+                                    <Link href="#rs2" className="font-bold text-pos hover:underline">RS2 section</Link>.
                                 </li>
                                 <li>
                                     <b>Δ pctl</b> — how much the quant engine and the AI disagree, in percentile points.
@@ -466,7 +525,7 @@ export default function HelpPage() {
                                 <li>
                                     <b>DCF gap</b> — the <Term term="expectations-gap" />: the growth the price requires vs
                                     the growth the company has actually delivered. See the{' '}
-                                    <Link href="#dcf" className="font-bold text-emerald-300 hover:underline">DCF section</Link>.
+                                    <Link href="#dcf" className="font-bold text-pos hover:underline">DCF section</Link>.
                                 </li>
                             </ul>
                             <Callout kind="info">
@@ -486,12 +545,12 @@ export default function HelpPage() {
                             </p>
                             <div className="space-y-3">
                                 {FACTOR_ITEMS.map(f => (
-                                    <div key={f.key} className="rounded-lg border border-border/60 bg-secondary/10 p-3">
-                                        <p className="flex items-center gap-2 text-sm font-black">
-                                            <span className={`h-2.5 w-2.5 rounded-full ${f.dot}`} />
+                                    <div key={f.key} className="border border-rule-6 bg-white/5 p-3">
+                                        <p className="flex items-center gap-2 text-sm font-extrabold">
+                                            <span className={`h-2.5 w-2.5  ${f.dot}`} />
                                             <span className={f.color}>{f.name}</span>
                                         </p>
-                                        <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">{f.body}</p>
+                                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">{f.body}</p>
                                     </div>
                                 ))}
                             </div>
@@ -518,10 +577,10 @@ export default function HelpPage() {
                                 The composite percentile is cut into four practical buckets, or <Term term="band" />s:
                             </p>
                             <ul className="list-disc space-y-2 pl-5">
-                                <li><span className="font-black text-emerald-300">RESEARCH NOW</span> — top 3%. Worth your research time today.</li>
-                                <li><span className="font-black text-sky-300">WATCHLIST</span> — top 10%.</li>
-                                <li><span className="font-black text-amber-300">MONITOR</span> — top 30%.</li>
-                                <li><span className="text-muted-foreground">PASS</span> — the rest.</li>
+                                <li><span className="font-extrabold text-pos">RESEARCH NOW</span> — top 3%. Worth your research time today.</li>
+                                <li><span className="font-extrabold text-accent">WATCHLIST</span> — top 10%.</li>
+                                <li><span className="font-extrabold text-warn">MONITOR</span> — top 30%.</li>
+                                <li><span className="text-ink-2">PASS</span> — the rest.</li>
                             </ul>
                             <SubHeading>Vetoes — hard disqualifiers</SubHeading>
                             <p>
@@ -558,12 +617,12 @@ export default function HelpPage() {
                             </p>
                             <ul className="list-disc space-y-2 pl-5">
                                 <li>
-                                    <span className="font-black text-emerald-300">Green / negative</span> — the price promises
+                                    <span className="font-extrabold text-pos">Green / negative</span> — the price promises
                                     LESS than the company has proven. A potential bargain: you are being paid not to believe
                                     the growth story.
                                 </li>
                                 <li>
-                                    <span className="font-black text-amber-300">Amber / positive</span> — the price needs an
+                                    <span className="font-extrabold text-warn">Amber / positive</span> — the price needs an
                                     acceleration nobody has demonstrated yet. You have to believe a story.
                                 </li>
                             </ul>
@@ -639,10 +698,10 @@ export default function HelpPage() {
                             </p>
                             <SubHeading>The portfolios</SubHeading>
                             <ul className="list-disc space-y-2 pl-5">
-                                <li><b className="text-emerald-300">plan</b> — the value core: <Term term="kelly" />-sized, ~50% cash.</li>
-                                <li><b className="text-pink-400">plan2</b> — the hybrid: value core + <Term term="sleeve" />, ~78% invested, holds the expensive leaders.</li>
-                                <li><b className="text-sky-300">equal</b> — equal-weighting every Research Now name (pure stock-picking test).</li>
-                                <li><b className="text-violet-300">mine</b> — your saved My Portfolio holdings, <Term term="unitization" />-measured like a fund.</li>
+                                <li><b className="text-pos">plan</b> — the value core: <Term term="kelly" />-sized, ~50% cash.</li>
+                                <li><b className="text-series-plan2">plan2</b> — the hybrid: value core + <Term term="sleeve" />, ~78% invested, holds the expensive leaders.</li>
+                                <li><b className="text-accent">equal</b> — equal-weighting every Research Now name (pure stock-picking test).</li>
+                                <li><b className="text-ink-2">mine</b> — your saved My Portfolio holdings, <Term term="unitization" />-measured like a fund.</li>
                             </ul>
                             <SubHeading>How to read it</SubHeading>
                             <ul className="list-disc space-y-2 pl-5">
@@ -764,7 +823,7 @@ export default function HelpPage() {
                             </p>
                             <SubHeading>Factor construction — sub-metrics and sources</SubHeading>
                             <p>
-                                <span className="font-black text-emerald-300">Value</span> = mean z of four yields, all
+                                <span className="font-extrabold text-pos">Value</span> = mean z of four yields, all
                                 computed from the latest fiscal year of SEC-filed fundamentals against current market cap:
                                 <Term term="fcf-yield" /> (FCF/mcap), <Term term="owner-earnings" /> ((NI + D&amp;A − capex)/mcap),
                                 <Term term="ebit" /> yield (operating income/<Term term="enterprise-value" />), and{' '}
@@ -772,22 +831,22 @@ export default function HelpPage() {
                                 capex/D&amp;A/op-income tags).
                             </p>
                             <p>
-                                <span className="font-black text-sky-300">Quality</span> = mean z of: <Term term="revenue-quality" />{' '}
+                                <span className="font-extrabold text-accent">Quality</span> = mean z of: <Term term="revenue-quality" />{' '}
                                 (reverse-engine score), <Term term="gross-margin" /> stability (−stdev across ≥4 fiscal
                                 years), negative <Term term="accruals" /> (−accruals ratio), and <Term term="piotroski" />{' '}
                                 (both from the forensic battery).
                             </p>
                             <p>
-                                <span className="font-black text-amber-300">Momentum</span> = mean z of the{' '}
+                                <span className="font-extrabold text-warn">Momentum</span> = mean z of the{' '}
                                 <Term term="skip-month" /> and <Term term="high-proximity" />. Monthly closes.
                             </p>
                             <p>
-                                <span className="font-black text-violet-300">Low volatility</span> = z of −σ(monthly
+                                <span className="font-extrabold text-ink-2">Low volatility</span> = z of −σ(monthly
                                 returns), minimum 12 observations; the <Term term="annualized-volatility" /> is exported per
                                 name and feeds <Term term="kelly" /> sizing.
                             </p>
                             <p>
-                                <span className="font-black text-rose-300">Revisions</span> = mean of two 0–1 parts:
+                                <span className="font-extrabold text-neg">Revisions</span> = mean of two 0–1 parts:
                                 normalized <Term term="eps-trajectory" /> slope (clamp(slope, −1, 1)+1)/2, and analyst
                                 structured score/100 — scaled to 0–100 then re-centred to a z-like scale via (score−50)/25.
                             </p>
@@ -867,7 +926,7 @@ export default function HelpPage() {
                             <div className="space-y-4">
                                 {FAQ_ITEMS.map((item, i) => (
                                     <div key={i}>
-                                        <p className="font-black">{item.q[lang]}</p>
+                                        <p className="font-extrabold">{item.q[lang]}</p>
                                         <p className="mt-1">{item.a[lang]}</p>
                                     </div>
                                 ))}
@@ -882,16 +941,16 @@ export default function HelpPage() {
                                 {lang === 'en' && `A searchable index of all ${Object.keys(GLOSSARY).length} defined terms. Click any term chip to open its definition — or click a term inline in any section above.`}
                             </p>
                             <div className="relative mt-2 sm:hidden">
-                                <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground/60" />
+                                <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-ink-3" />
                                 <input
                                     value={glossaryQuery}
                                     onChange={e => setGlossaryQuery(e.target.value)}
                                     placeholder={UI.searchPlaceholder[lang]}
-                                    className="w-full rounded-md border border-border bg-secondary/20 py-2 pl-8 pr-2 text-xs text-foreground placeholder:text-muted-foreground/60 focus:border-emerald-400/50 focus:outline-none"
+                                    className="w-full border border-rule-9 bg-white/5 py-2 pl-8 pr-2 text-xs text-ink placeholder:text-ink-3 focus:border-accent focus:outline-none"
                                 />
                             </div>
                             {glossaryQuery && (
-                                <p className="mt-2 text-xs text-muted-foreground">
+                                <p className="mt-2 text-xs text-ink-2">
                                     {lang === 'ko' && (
                                         entries.length === 0
                                             ? `“${glossaryQuery}”에 대한 결과가 없습니다. — 다른 단어를 검색해 보세요.`
@@ -918,10 +977,10 @@ export default function HelpPage() {
                                     return (
                                         <div key={cat}>
                                             <div className="flex items-center gap-2">
-                                                <span className={`rounded border px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider ${CATEGORY_STYLES[cat]}`}>
+                                                <span className={` border px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider ${CATEGORY_STYLES[cat]}`}>
                                                     {catLabel[cat]}
                                                 </span>
-                                                <span className="text-[10px] font-bold text-muted-foreground/60">
+                                                <span className="text-[10px] font-bold text-ink-3">
                                                     {lang === 'ko' ? `${counts[cat]}개 용어` : lang === 'zh' ? `${counts[cat]} 個詞彙` : `${counts[cat]} term${counts[cat] === 1 ? '' : 's'}`}
                                                 </span>
                                             </div>
@@ -961,8 +1020,8 @@ export default function HelpPage() {
                                     including paper-traded performance — does not guarantee future results. Do your own research.
                                 </p>
                             )}
-                            <p className="pt-2 text-xs text-muted-foreground">
-                                <Link href="/" className="inline-flex items-center gap-1 font-bold text-emerald-300 hover:underline">
+                            <p className="pt-2 text-xs text-ink-2">
+                                <Link href="/" className="inline-flex items-center gap-1 font-bold text-pos hover:underline">
                                     <ArrowUpRight className="h-3 w-3" /> {UI.backToCockpit[lang]}
                                 </Link>
                             </p>
@@ -974,19 +1033,19 @@ export default function HelpPage() {
                 {mobileNavOpen && (
                     <div className="fixed inset-0 z-[70] lg:hidden" role="dialog" aria-modal="true">
                         <div className="absolute inset-0 bg-black/60" onClick={() => setMobileNavOpen(false)} />
-                        <div className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col border-r border-border bg-background shadow-2xl">
-                            <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
-                                <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground/70">
+                        <div className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col border-r border-rule-9 bg-page">
+                            <div className="flex items-center justify-between border-b border-rule-6 px-4 py-3">
+                                <p className="text-[10px] font-extrabold uppercase tracking-wider text-ink-3">
                                     {contentsLabel}
                                 </p>
-                                <button onClick={() => setMobileNavOpen(false)} aria-label="Close contents" className="rounded-md border border-border/60 p-1.5 text-muted-foreground hover:text-foreground">
+                                <button onClick={() => setMobileNavOpen(false)} aria-label="Close contents" className="border border-rule-6 p-1.5 text-ink-2 hover:text-ink">
                                     <X className="h-4 w-4" />
                                 </button>
                             </div>
                             <div className="flex-1 overflow-y-auto p-4">
                                 <SidebarNav activeId={activeId} lang={lang} />
                             </div>
-                            <div className="border-t border-border/60 p-3 text-[10px] leading-relaxed text-muted-foreground/70">
+                            <div className="border-t border-rule-6 p-3 text-[10px] leading-relaxed text-ink-3">
                                 {UI.howToUseBody[lang]}
                             </div>
                         </div>

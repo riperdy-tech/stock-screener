@@ -353,19 +353,19 @@ export function ReportsDashboard() {
     };
 
     return (
-        <div className="flex-1 flex flex-col h-screen overflow-hidden bg-[#0a0c10]">
+        <div className="flex-1 flex flex-col h-screen overflow-hidden bg-page">
             {/* Header */}
-            <header className="flex shrink-0 flex-col gap-3 border-b border-white/5 bg-[#0d1117] px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
+            <header className="flex shrink-0 flex-col gap-3 border-b border-white/5 bg-surface px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex items-center gap-3">
-                    <Link href="/" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground" aria-label="Back to screener">
+                    <Link href="/" className="p-2 text-ink-2 transition-colors hover:bg-white/5 hover:text-ink" aria-label="Back to screener">
                         <ArrowLeft className="h-5 w-5" />
                     </Link>
                     <div>
-                        <h1 className="flex items-center gap-2 text-xl font-black tracking-tight text-foreground">
+                        <h1 className="flex items-center gap-2 text-xl font-extrabold tracking-tight text-ink">
                             <Sparkles className="h-5 w-5 text-accent" />
                             AI RESEARCH REPOSITORY
                         </h1>
-                        <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                        <p className="text-xs font-bold uppercase tracking-widest text-ink-2">
                             Cloud-Stored Deepseek V4.0 Pro Analyses
                         </p>
                     </div>
@@ -375,21 +375,21 @@ export function ReportsDashboard() {
                     <button 
                         onClick={fetchReports}
                         disabled={loading}
-                        className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-black text-muted-foreground transition-all hover:bg-white/10 hover:text-blue-400 active:scale-95 disabled:opacity-60"
+                        className="flex items-center justify-center gap-2 border border-white/10 bg-white/5 px-3 py-2 text-sm font-extrabold text-ink-2 transition-all hover:bg-white/10 hover:text-accent active:scale-95 disabled:opacity-60"
                         title="Force Sync Cloud Data"
                         aria-label="Sync cloud reports"
                     >
-                        <RefreshCw className={clsx("h-5 w-5", loading && "animate-spin text-blue-500")} />
+                        <RefreshCw className={clsx("h-5 w-5", loading && "animate-spin text-accent")} />
                         <span>{loading ? "Syncing" : "Sync"}</span>
                     </button>
                     <div className="relative w-full sm:w-72">
-                        <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                        <Search className="absolute left-3 top-2.5 h-4 w-4 text-ink-2" />
                         <input 
                             type="text" 
                             placeholder="Search tickers..." 
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full rounded-lg border border-white/10 bg-white/5 py-2 pl-9 pr-3 text-sm transition-all focus:outline-none focus:ring-1 focus:ring-accent"
+                            className="w-full border border-white/10 bg-white/5 py-2 pl-9 pr-3 text-sm transition-all focus:outline-none focus:ring-1 focus:ring-accent"
                         />
                     </div>
                 </div>
@@ -398,16 +398,16 @@ export function ReportsDashboard() {
             <div className="flex-1 flex overflow-hidden relative">
                 {/* List Sidebar - Hidden on mobile if report selected */}
                 <div className={clsx(
-                    "w-full border-r border-white/5 bg-[#0d1117]/50 transition-all md:w-[24rem] flex flex-col",
+                    "w-full border-r border-white/5 bg-surface/50 transition-all md:w-[24rem] flex flex-col",
                     selectedReport && "hidden md:flex"
                 )}>
                     {/* Filter Bar */}
-                    <div className="space-y-2.5 border-b border-white/5 bg-[#0d1117] p-3">
+                    <div className="space-y-2.5 border-b border-white/5 bg-surface p-3">
                         <div className="grid grid-cols-2 gap-2">
                             <select 
                                 value={filterAction} 
                                 onChange={(e) => setFilterAction(e.target.value)}
-                                className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-bold text-blue-400 focus:outline-none"
+                                className="border border-white/10 bg-white/5 px-3 py-2 text-sm font-bold text-accent focus:outline-none"
                             >
                                 <option value="ALL">ALL ACTIONS</option>
                                 <option value="BUY">BUY</option>
@@ -418,7 +418,7 @@ export function ReportsDashboard() {
                             <select 
                                 value={filterValuation} 
                                 onChange={(e) => setFilterValuation(e.target.value)}
-                                className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-bold text-green-400 focus:outline-none"
+                                className="border border-white/10 bg-white/5 px-3 py-2 text-sm font-bold text-pos focus:outline-none"
                             >
                                 <option value="ALL">ALL VALUATIONS</option>
                                 <option value="UNDERVALUED">UNDERVALUED</option>
@@ -429,7 +429,7 @@ export function ReportsDashboard() {
                             <select 
                                 value={filterArchetype} 
                                 onChange={(e) => setFilterArchetype(e.target.value)}
-                                className="col-span-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-bold text-muted-foreground focus:outline-none"
+                                className="col-span-2 border border-white/10 bg-white/5 px-3 py-2 text-sm font-bold text-ink-2 focus:outline-none"
                             >
                                 <option value="ALL">ALL ARCHETYPES</option>
                                 <option value="Stable Incumbent">STABLE</option>
@@ -440,33 +440,33 @@ export function ReportsDashboard() {
                             </select>
                         </div>
                         <div className="flex items-center gap-3 px-1">
-                            <span className="whitespace-nowrap text-xs font-black uppercase text-muted-foreground">Min Conviction: {filterConviction}</span>
+                            <span className="whitespace-nowrap text-xs font-extrabold uppercase text-ink-2">Min Conviction: {filterConviction}</span>
                             <input 
                                 type="range" min="0" max="15" step="0.5" 
                                 value={filterConviction} 
                                 onChange={(e) => setFilterConviction(parseFloat(e.target.value))}
-                                className="flex-1 h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                className="flex-1 h-1 bg-white/10 appearance-none cursor-pointer accent-blue-500"
                             />
                         </div>
-                        <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-3">
+                        <div className="border border-white/10 bg-white/[0.03] px-3.5 py-3">
                             <div className="mb-2 flex items-center justify-between gap-3">
-                                <span className="text-xs font-black uppercase tracking-wider text-muted-foreground">Active filters</span>
+                                <span className="text-xs font-extrabold uppercase tracking-wider text-ink-2">Active filters</span>
                                 <button
                                     type="button"
                                     onClick={resetReportFilters}
                                     disabled={activeReportFilters.length === 0}
-                                    className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-black text-muted-foreground transition-colors hover:bg-white/10 hover:text-slate-200 disabled:cursor-not-allowed disabled:opacity-45"
+                                    className="border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-extrabold text-ink-2 transition-colors hover:bg-white/10 hover:text-ink-2 disabled:cursor-not-allowed disabled:opacity-45"
                                 >
                                     Reset
                                 </button>
                             </div>
                             <div className="flex flex-wrap gap-2">
                                 {activeReportFilters.length > 0 ? activeReportFilters.map((filter) => (
-                                    <span key={filter} className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-1 text-xs font-bold text-blue-300">
+                                    <span key={filter} className="border border-accent/40 bg-accent/10 px-2.5 py-1 text-xs font-bold text-accent">
                                         {filter}
                                     </span>
                                 )) : (
-                                    <span className="text-xs font-semibold text-muted-foreground">Showing all cloud reports.</span>
+                                    <span className="text-xs font-semibold text-ink-2">Showing all cloud reports.</span>
                                 )}
                             </div>
                         </div>
@@ -480,15 +480,15 @@ export function ReportsDashboard() {
 
                     <div className="flex-1 overflow-y-auto">
                         {loading ? (
-                            <div className="flex min-h-80 flex-col justify-center gap-4 p-6 text-muted-foreground">
-                                <div className="rounded-xl border border-blue-500/20 bg-blue-500/[0.05] p-5">
+                            <div className="flex min-h-80 flex-col justify-center gap-4 p-6 text-ink-2">
+                                <div className="border border-accent/40 bg-accent/10] p-5">
                                     <div className="flex items-start gap-3">
-                                        <div className="rounded-lg border border-blue-500/25 bg-blue-500/10 p-3 text-blue-400">
+                                        <div className="border border-accent/40 bg-accent/10 p-3 text-accent">
                                             <RefreshCw className="h-6 w-6 animate-spin" />
                                         </div>
                                         <div>
-                                            <h3 className="text-2xl font-black tracking-tight text-foreground">Fetching cloud reports</h3>
-                                            <p className="mt-1 text-base font-semibold leading-relaxed text-muted-foreground">
+                                            <h3 className="text-2xl font-extrabold tracking-tight text-ink">Fetching cloud reports</h3>
+                                            <p className="mt-1 text-base font-semibold leading-relaxed text-ink-2">
                                                 Loading Deepseek analyses, metadata, and queue status.
                                             </p>
                                         </div>
@@ -502,12 +502,12 @@ export function ReportsDashboard() {
                                 </div>
                             </div>
                         ) : filteredReports.length === 0 ? (
-                            <div className="flex min-h-80 flex-col items-center justify-center gap-5 p-8 text-center text-muted-foreground">
-                                <div className="rounded-xl border border-blue-500/20 bg-blue-500/[0.06] p-4 text-blue-400">
+                            <div className="flex min-h-80 flex-col items-center justify-center gap-5 p-8 text-center text-ink-2">
+                                <div className="border border-accent/40 bg-accent/10] p-4 text-accent">
                                     <FileText className="h-8 w-8" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-black tracking-tight text-foreground">No reports match this view</h3>
+                                    <h3 className="text-2xl font-extrabold tracking-tight text-ink">No reports match this view</h3>
                                     <p className="mt-2 max-w-sm text-base leading-relaxed">
                                         Try widening the repository filters or syncing the cloud records again.
                                     </p>
@@ -521,7 +521,7 @@ export function ReportsDashboard() {
                                 {activeReportFilters.length > 0 && (
                                     <div className="flex max-w-sm flex-wrap justify-center gap-2">
                                         {activeReportFilters.map((filter) => (
-                                            <span key={filter} className="rounded-md border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 text-base font-black text-blue-300">
+                                            <span key={filter} className="border border-accent/40 bg-accent/10 px-3 py-1.5 text-base font-extrabold text-accent">
                                                 {filter}
                                             </span>
                                         ))}
@@ -530,13 +530,13 @@ export function ReportsDashboard() {
                                 <div className="flex flex-wrap justify-center gap-2">
                                     <button
                                         onClick={resetReportFilters}
-                                        className="rounded-lg border border-border bg-secondary/50 px-4 py-2.5 text-base font-black text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                                        className="border border-rule-9 bg-white/5 px-4 py-2.5 text-base font-extrabold text-ink-2 transition-colors hover:bg-white/5 hover:text-ink"
                                     >
                                         Reset filters
                                     </button>
                                     <button
                                         onClick={fetchReports}
-                                        className="flex items-center gap-2 rounded-lg border border-blue-500/30 bg-blue-500/10 px-4 py-2.5 text-base font-black text-blue-400 transition-colors hover:bg-blue-500/15"
+                                        className="flex items-center gap-2 border border-accent/40 bg-accent/10 px-4 py-2.5 text-base font-extrabold text-accent transition-colors hover:bg-accent/10"
                                     >
                                         <RefreshCw className="h-4 w-4" />
                                         Sync reports
@@ -558,80 +558,80 @@ export function ReportsDashboard() {
                                             onClick={() => setSelectedReport(report)}
                                             className={clsx(
                                                 "group relative flex w-full cursor-pointer flex-col gap-3 border-b border-white/5 p-3.5 text-left transition-all hover:bg-white/[0.045] active:bg-white/10",
-                                                selectedReport?.id === report.id ? "bg-blue-500/10 shadow-[inset_4px_0_0_rgba(59,130,246,0.95),inset_0_0_20px_rgba(59,130,246,0.1)]" : ""
+                                                selectedReport?.id === report.id ? "bg-accent/10 " : ""
                                             )}
                                         >
                                             <div className="flex items-start justify-between gap-4">
                                                 <div className="min-w-0">
                                                     <div className="flex flex-wrap items-center gap-2">
-                                                        <span className="text-lg font-black tracking-tight text-foreground transition-colors group-hover:text-blue-400">
+                                                        <span className="text-lg font-extrabold tracking-tight text-ink transition-colors group-hover:text-accent">
                                                             {report.ticker}
                                                         </span>
                                                         {report.status === 'pending' && (
-                                                            <span className="rounded-md border border-amber-500/30 bg-amber-500/15 px-2 py-1 text-xs font-black uppercase tracking-tight text-amber-400">
+                                                            <span className="border border-warn/40 bg-warn/10 px-2 py-1 text-xs font-extrabold uppercase tracking-tight text-warn">
                                                                 Pending
                                                             </span>
                                                         )}
                                                         {meta.valuation_status && (
                                                             <span className={clsx(
-                                                                "rounded-md border px-2 py-1 text-xs font-black uppercase tracking-tight",
-                                                                meta.valuation_status.includes('UNDERVALUED') ? "border-green-500/20 bg-green-500/20 text-green-400" :
-                                                                meta.valuation_status === 'OVERVALUED' ? "border-red-500/20 bg-red-500/20 text-red-400" :
-                                                                "border-white/10 bg-white/5 text-muted-foreground"
+                                                                " border px-2 py-1 text-xs font-extrabold uppercase tracking-tight",
+                                                                meta.valuation_status.includes('UNDERVALUED') ? "border-pos/40 bg-pos/10 text-pos" :
+                                                                meta.valuation_status === 'OVERVALUED' ? "border-neg/40 bg-neg/10 text-neg" :
+                                                                "border-white/10 bg-white/5 text-ink-2"
                                                             )}>
                                                                 {meta.valuation_status.replace(/_/g, ' ')}
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <div className="mt-1.5 flex items-center gap-2 text-xs font-bold uppercase tracking-tight text-muted-foreground">
-                                                        <Calendar className="h-4 w-4 text-blue-500 opacity-70" />
+                                                    <div className="mt-1.5 flex items-center gap-2 text-xs font-bold uppercase tracking-tight text-ink-2">
+                                                        <Calendar className="h-4 w-4 text-accent opacity-70" />
                                                         {createdAt.toLocaleDateString()}
-                                                        <span className="text-white/20 font-normal">@</span>
-                                                        <span className="text-blue-400/80">{createdAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                                        <span className="text-surface/20 font-normal">@</span>
+                                                        <span className="text-accent">{createdAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                                     </div>
                                                 </div>
 
                                                 <div className="grid shrink-0 grid-cols-2 gap-2 text-right">
-                                                    <div className="rounded-lg border border-blue-500/25 bg-blue-500/10 px-3 py-2 shadow-md">
-                                                        <div className="font-mono text-base font-black leading-none text-blue-400">
+                                                    <div className="border border-accent/40 bg-accent/10 px-3 py-2">
+                                                        <div className="font-mono text-base font-extrabold leading-none text-accent">
                                                             {meta.conviction ? meta.conviction.toFixed(1) : '0.0'}
                                                         </div>
-                                                        <span className="mt-1 block text-[10px] font-black uppercase tracking-[0.12em] text-muted-foreground opacity-70">Conv</span>
+                                                        <span className="mt-1 block text-[10px] font-extrabold uppercase tracking-[0.12em] text-ink-2 opacity-70">Conv</span>
                                                     </div>
                                                     <div className={clsx(
-                                                        "rounded-lg border px-3 py-2 shadow-md",
-                                                        isPositive ? "border-green-500/30 bg-green-500/20 text-green-400" : "border-red-500/30 bg-red-500/20 text-red-400"
+                                                        " border px-3 py-2 ",
+                                                        isPositive ? "border-pos/40 bg-pos/10 text-pos" : "border-neg/40 bg-neg/10 text-neg"
                                                     )}>
-                                                        <div className="font-mono text-lg font-black leading-none">
+                                                        <div className="font-mono text-lg font-extrabold leading-none">
                                                             {isPositive ? '+' : ''}{upside.toFixed(1)}%
                                                         </div>
-                                                        <span className="mt-1 block text-base font-black uppercase tracking-[0.12em] text-muted-foreground opacity-70">Alpha</span>
+                                                        <span className="mt-1 block text-base font-extrabold uppercase tracking-[0.12em] text-ink-2 opacity-70">Alpha</span>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                                                <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-3">
-                                                    <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Action</div>
-                                                    <div className="mt-1 truncate text-lg font-black text-slate-200" title={meta.action || 'ACTION N/A'}>
+                                                <div className="border border-white/10 bg-white/[0.03] px-3.5 py-3">
+                                                    <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">Action</div>
+                                                    <div className="mt-1 truncate text-lg font-extrabold text-ink-2" title={meta.action || 'ACTION N/A'}>
                                                         {meta.action || 'ACTION N/A'}
                                                     </div>
                                                 </div>
                                                 {meta.archetype && (
-                                                    <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-3">
-                                                        <div className="text-base font-black uppercase tracking-wider text-muted-foreground">Archetype</div>
-                                                        <div className="mt-1 truncate text-lg font-black text-slate-300" title={meta.archetype}>
+                                                    <div className="border border-white/10 bg-white/[0.03] px-3.5 py-3">
+                                                        <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">Archetype</div>
+                                                        <div className="mt-1 truncate text-lg font-extrabold text-ink-2" title={meta.archetype}>
                                                             {meta.archetype}
                                                         </div>
                                                     </div>
                                                 )}
                                             </div>
 
-                                            <div className="flex items-center justify-between gap-3 border-t border-white/5 pt-3 text-base font-bold text-muted-foreground">
+                                            <div className="flex items-center justify-between gap-3 border-t border-white/5 pt-3 text-base font-bold text-ink-2">
                                                 <span className="truncate">
                                                     {selectedReport?.id === report.id ? "Reading this report" : "Open report reader"}
                                                 </span>
-                                                <span className="inline-flex items-center gap-1.5 rounded-md border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 text-blue-400 opacity-80 transition-all group-hover:border-blue-500/40 group-hover:bg-blue-500/15 group-hover:opacity-100">
+                                                <span className="inline-flex items-center gap-1.5 border border-accent/40 bg-accent/10 px-3 py-1.5 text-accent opacity-80 transition-all group-hover:border-accent/40 group-hover:bg-accent/10 group-hover:opacity-100">
                                                     View <ChevronRight className="h-4 w-4" />
                                                 </span>
                                             </div>
@@ -646,42 +646,42 @@ export function ReportsDashboard() {
                 <main
                     id="main-scroll-panel"
                     className={clsx(
-                        "flex-1 bg-[#0a0c10] overflow-y-auto no-scrollbar relative transition-all",
+                        "flex-1 bg-page overflow-y-auto no-scrollbar relative transition-all",
                         !selectedReport && "hidden md:flex"
                     )}
                 >
                     {selectedReport ? (
                         <div className="flex h-full">
                             {/* Table of Contents Sidebar (Desktop) */}
-                            <aside className="sticky top-0 hidden h-screen w-60 shrink-0 overflow-y-auto border-r border-white/5 bg-[#0a0c10] p-4 lg:block">
+                            <aside className="sticky top-0 hidden h-screen w-60 shrink-0 overflow-y-auto border-r border-white/5 bg-page p-4 lg:block">
                                 <div className="space-y-4">
                                     <div>
-                                        <h3 className="mb-3 flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-blue-500">
-                                            <span className="w-4 h-[1px] bg-blue-500/30"></span>
+                                        <h3 className="mb-3 flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.16em] text-accent">
+                                            <span className="w-4 h-[1px] bg-accent/10"></span>
                                             Contents
                                         </h3>
                                         <nav className="space-y-0.5">
                                             {reportHeadings.length === 0 ? (
-                                                <p className="text-base text-muted-foreground uppercase px-2">No sections detected</p>
+                                                <p className="text-base text-ink-2 uppercase px-2">No sections detected</p>
                                             ) : (
                                                 reportHeadings.map((h) => (
                                                     <button
                                                         key={h.id}
                                                         onClick={() => scrollToHeading(h.id)}
                                                         className={clsx(
-                                                            "group flex w-full items-start gap-2.5 rounded-md px-2.5 py-2 text-left transition-all duration-200",
-                                                            activeHeading === h.id ? "bg-blue-500/10" : "hover:bg-white/[0.04]",
+                                                            "group flex w-full items-start gap-2.5  px-2.5 py-2 text-left transition-all duration-200",
+                                                            activeHeading === h.id ? "bg-accent/10" : "hover:bg-white/[0.04]",
                                                             h.level === 2 && "pl-7"
                                                         )}
                                                     >
                                                         <span className={clsx(
-                                                            "shrink-0 w-1.5 h-1.5 rounded-full mt-[7px] transition-all duration-300",
-                                                            activeHeading === h.id ? "bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.5)]" : "bg-white/15 group-hover:bg-blue-400/50"
+                                                            "shrink-0 w-1.5 h-1.5  mt-[7px] transition-all duration-300",
+                                                            activeHeading === h.id ? "bg-blue-400 " : "bg-white/15 group-hover:bg-accent/10"
                                                         )}></span>
                                                         <span className={clsx(
                                                             "line-clamp-2 text-xs leading-snug transition-colors duration-200",
                                                             h.level === 1 ? "font-bold uppercase tracking-wide" : "font-medium opacity-70",
-                                                            activeHeading === h.id ? "text-blue-300" : "text-slate-400 group-hover:text-slate-200"
+                                                            activeHeading === h.id ? "text-accent" : "text-ink-2 group-hover:text-ink-2"
                                                         )}>
                                                             {h.title}
                                                         </span>
@@ -694,10 +694,10 @@ export function ReportsDashboard() {
                                     <div className="pt-5 border-t border-white/5">
                                         <button
                                             onClick={() => downloadReport(selectedReport)}
-                                            className="w-full flex items-center justify-between group bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-lg px-4 py-3 transition-all"
+                                            className="w-full flex items-center justify-between group bg-accent/10 hover:bg-accent/10 border border-accent/40 px-4 py-3 transition-all"
                                         >
-                                            <span className="text-base font-black text-blue-400 uppercase tracking-widest">Download .TXT</span>
-                                            <Download className="h-4 w-4 text-blue-400 group-hover:translate-y-0.5 transition-transform" />
+                                            <span className="text-base font-extrabold text-accent uppercase tracking-widest">Download .TXT</span>
+                                            <Download className="h-4 w-4 text-accent group-hover:translate-y-0.5 transition-transform" />
                                         </button>
                                     </div>
                                 </div>
@@ -713,22 +713,22 @@ export function ReportsDashboard() {
                                             {/* Mobile Back Button */}
                                             <button 
                                                 onClick={() => setSelectedReport(null)}
-                                                className="mb-4 flex w-fit items-center gap-2 rounded-full bg-blue-500/10 px-3 py-2 text-xs font-bold tracking-[0.16em] text-blue-400 transition-all active:scale-95 md:hidden"
+                                                className="mb-4 flex w-fit items-center gap-2 bg-accent/10 px-3 py-2 text-xs font-bold tracking-[0.16em] text-accent transition-all active:scale-95 md:hidden"
                                             >
                                                 <ArrowLeft className="h-3.5 w-3.5" /> RETURN TO LIST
                                             </button>
 
                                             {/* Mobile TOC (collapsible) */}
                                             {reportHeadings.length > 0 && (
-                                                <div className="mb-5 overflow-hidden rounded-xl border border-white/10 bg-[#0d1117] lg:hidden">
+                                                <div className="mb-5 overflow-hidden border border-white/10 bg-surface lg:hidden">
                                                     <button
                                                         onClick={() => setMobileTocOpen(!mobileTocOpen)}
                                                         className="w-full flex items-center justify-between px-5 py-3.5 text-left"
                                                     >
-                                                        <span className="text-base font-black text-blue-400 uppercase tracking-[0.14em]">
+                                                        <span className="text-base font-extrabold text-accent uppercase tracking-[0.14em]">
                                                             Table of Contents ({reportHeadings.length} sections)
                                                         </span>
-                                                        <ChevronRight className={clsx("h-4 w-4 text-blue-400 transition-transform duration-200", mobileTocOpen && "rotate-90")} />
+                                                        <ChevronRight className={clsx("h-4 w-4 text-accent transition-transform duration-200", mobileTocOpen && "rotate-90")} />
                                                     </button>
                                                     {mobileTocOpen && (
                                                         <nav className="border-t border-white/5 px-5 py-3 space-y-0.5 max-h-72 overflow-y-auto">
@@ -738,8 +738,8 @@ export function ReportsDashboard() {
                                                                     onClick={() => scrollToHeading(h.id)}
                                                                     className={clsx(
                                                                         "block w-full text-left py-2.5 text-base transition-colors",
-                                                                        h.level === 1 ? "font-bold text-slate-300" : "font-medium text-slate-500 pl-4",
-                                                                        "hover:text-blue-400 active:text-blue-300"
+                                                                        h.level === 1 ? "font-bold text-ink-2" : "font-medium text-ink-3 pl-4",
+                                                                        "hover:text-accent active:text-accent"
                                                                     )}
                                                                 >
                                                                     {h.title}
@@ -755,39 +755,39 @@ export function ReportsDashboard() {
                                                 <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
                                                     <div>
                                                         <div className="mb-2 flex items-center gap-2">
-                                                            <span className="rounded-md border border-blue-500/20 bg-blue-500/10 px-2.5 py-1 text-xs font-black uppercase tracking-widest text-blue-400">
+                                                            <span className="border border-accent/40 bg-accent/10 px-2.5 py-1 text-xs font-extrabold uppercase tracking-widest text-accent">
                                                                 {meta.archetype || 'Asset Research'}
                                                             </span>
-                                                            <span className="w-1 h-1 rounded-full bg-white/20"></span>
-                                                            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                                                            <span className="w-1 h-1 bg-white/20"></span>
+                                                            <span className="text-xs font-bold uppercase tracking-widest text-ink-2">
                                                                 {new Date(selectedReport.created_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                                                             </span>
                                                         </div>
-                                                        <h1 className="mb-2 text-4xl font-black tracking-tight text-white md:text-5xl">
+                                                        <h1 className="mb-2 text-4xl font-extrabold tracking-tight text-surface md:text-5xl">
                                                             {selectedReport.ticker}
                                                         </h1>
-                                                        <p className="max-w-2xl text-sm font-medium leading-relaxed text-muted-foreground">
+                                                        <p className="max-w-2xl text-sm font-medium leading-relaxed text-ink-2">
                                                             Comprehensive investment analysis powered by Deepseek V4.0 Pro engine.
                                                         </p>
                                                     </div>
 
                                                     <div className="grid shrink-0 grid-cols-2 gap-2 sm:grid-cols-3">
-                                                        <div className="min-w-[92px] rounded-lg border border-white/5 bg-white/[0.02] p-3">
-                                                            <div className="mb-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-60">Conviction</div>
-                                                            <div className="text-2xl font-black tracking-tight text-blue-500">{meta.conviction || '0'}</div>
+                                                        <div className="min-w-[92px] border border-white/5 bg-white/[0.02] p-3">
+                                                            <div className="mb-1.5 text-[10px] font-extrabold uppercase tracking-widest text-ink-2 opacity-60">Conviction</div>
+                                                            <div className="text-2xl font-extrabold tracking-tight text-accent">{meta.conviction || '0'}</div>
                                                         </div>
-                                                        <div className="min-w-[92px] rounded-lg border border-white/5 bg-white/[0.02] p-3">
-                                                            <div className="mb-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-60">Upside</div>
+                                                        <div className="min-w-[92px] border border-white/5 bg-white/[0.02] p-3">
+                                                            <div className="mb-1.5 text-[10px] font-extrabold uppercase tracking-widest text-ink-2 opacity-60">Upside</div>
                                                             <div className={clsx(
-                                                                "text-2xl font-black tracking-tight",
-                                                                (parseFloat(meta.upside || 0)) > 0 ? "text-green-400" : "text-red-400"
+                                                                "text-2xl font-extrabold tracking-tight",
+                                                                (parseFloat(meta.upside || 0)) > 0 ? "text-pos" : "text-neg"
                                                             )}>
                                                                 {meta.upside || '0.0'}%
                                                             </div>
                                                         </div>
-                                                        <div className="hidden min-w-[92px] rounded-lg border border-white/5 bg-white/[0.02] p-3 sm:block">
-                                                            <div className="mb-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-60">Rating</div>
-                                                            <div className="text-lg font-black uppercase tracking-tight text-white">{meta.action || 'HOLD'}</div>
+                                                        <div className="hidden min-w-[92px] border border-white/5 bg-white/[0.02] p-3 sm:block">
+                                                            <div className="mb-1.5 text-[10px] font-extrabold uppercase tracking-widest text-ink-2 opacity-60">Rating</div>
+                                                            <div className="text-lg font-extrabold uppercase tracking-tight text-surface">{meta.action || 'HOLD'}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -795,15 +795,15 @@ export function ReportsDashboard() {
 
                                             {/* Report Content */}
                                             {selectedReport.status === 'pending' ? (
-                                                <div className="flex flex-col items-center justify-center gap-5 rounded-2xl border border-white/5 bg-white/[0.02] py-20 text-center">
+                                                <div className="flex flex-col items-center justify-center gap-5 border border-white/5 bg-white/[0.02] py-20 text-center">
                                                     <div className="relative">
-                                                        <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full animate-pulse"></div>
-                                                        <RefreshCw className="h-16 w-16 text-blue-500 animate-spin relative z-10" />
-                                                        <Bot className="h-8 w-8 absolute top-4 left-4 text-white relative z-10" />
+                                                        <div className="absolute inset-0 bg-accent/10 blur-3xl animate-pulse"></div>
+                                                        <RefreshCw className="h-16 w-16 text-accent animate-spin relative z-10" />
+                                                        <Bot className="h-8 w-8 absolute top-4 left-4 text-surface relative z-10" />
                                                     </div>
                                                     <div>
-                                                        <h3 className="mb-2 text-2xl font-black text-white">AI Engine Processing...</h3>
-                                                        <p className="max-w-sm text-sm font-medium text-muted-foreground">
+                                                        <h3 className="mb-2 text-2xl font-extrabold text-surface">AI Engine Processing...</h3>
+                                                        <p className="max-w-sm text-sm font-medium text-ink-2">
                                                             Generating high-fidelity research for {selectedReport.ticker}. 
                                                             This typically takes 2-4 minutes.
                                                         </p>
@@ -816,48 +816,48 @@ export function ReportsDashboard() {
                                                             h1: ({node, ...props}: any) => {
                                                                 const idx = reportHeadings.findIndex(h => h.title === reactNodeToText(props.children));
                                                                 const id = idx >= 0 ? reportHeadings[idx].id : undefined;
-                                                                return <h1 id={id} className="mt-12 mb-4 border-b border-white/10 pb-3 text-2xl font-black uppercase tracking-tight text-white md:text-3xl" {...props} />;
+                                                                return <h1 id={id} className="mt-12 mb-4 border-b border-white/10 pb-3 text-2xl font-extrabold uppercase tracking-tight text-surface md:text-3xl" {...props} />;
                                                             },
                                                             h2: ({node, ...props}: any) => {
                                                                 const idx = reportHeadings.findIndex(h => h.title === reactNodeToText(props.children));
                                                                 const id = idx >= 0 ? reportHeadings[idx].id : undefined;
-                                                                return <h2 id={id} className="mt-9 mb-3 text-lg font-black uppercase tracking-wide text-blue-400 md:text-xl" {...props} />;
+                                                                return <h2 id={id} className="mt-9 mb-3 text-lg font-extrabold uppercase tracking-wide text-accent md:text-xl" {...props} />;
                                                             },
-                                                            h3: ({node, ...props}: any) => <h3 className="mt-6 mb-2.5 text-lg font-black tracking-tight text-white" {...props} />,
-                                                            p: ({node, ...props}: any) => <p className="mb-4 text-sm font-medium leading-7 text-slate-300 sm:text-base" {...props} />,
-                                                            strong: ({node, ...props}: any) => <strong className="font-black text-slate-100" {...props} />,
-                                                            em: ({node, ...props}: any) => <em className="italic text-blue-300/80" {...props} />,
+                                                            h3: ({node, ...props}: any) => <h3 className="mt-6 mb-2.5 text-lg font-extrabold tracking-tight text-surface" {...props} />,
+                                                            p: ({node, ...props}: any) => <p className="mb-4 text-sm font-medium leading-7 text-ink-2 sm:text-base" {...props} />,
+                                                            strong: ({node, ...props}: any) => <strong className="font-extrabold text-ink" {...props} />,
+                                                            em: ({node, ...props}: any) => <em className="italic text-accent" {...props} />,
                                                             hr: ({node, ...props}: any) => <hr className="my-10 border-white/10" {...props} />,
                                                             ul: ({node, ...props}: any) => <ul className="space-y-2 mb-6 list-none pl-0" {...props} />,
-                                                            ol: ({node, ...props}: any) => <ol className="space-y-2 mb-6 list-decimal pl-6 text-slate-300" {...props} />,
+                                                            ol: ({node, ...props}: any) => <ol className="space-y-2 mb-6 list-decimal pl-6 text-ink-2" {...props} />,
                                                             li: ({node, ...props}: any) => (
-                                                                <li className="flex items-start gap-2.5 text-sm font-medium leading-7 text-slate-400 sm:text-base">
-                                                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500/40 mt-[9px] shrink-0"></span>
+                                                                <li className="flex items-start gap-2.5 text-sm font-medium leading-7 text-ink-2 sm:text-base">
+                                                                    <span className="w-1.5 h-1.5 bg-accent/10 mt-[9px] shrink-0"></span>
                                                                     <span>{props.children}</span>
                                                                 </li>
                                                             ),
                                                             blockquote: ({node, ...props}: any) => (
-                                                                <blockquote className="mb-5 rounded-r-xl border-l-[3px] border-blue-500/50 bg-blue-500/5 px-4 py-3 text-sm italic text-slate-200 sm:text-base" {...props} />
+                                                                <blockquote className="mb-5 -xl border-l-[3px] border-accent/40 bg-accent/10 px-4 py-3 text-sm italic text-ink-2 sm:text-base" {...props} />
                                                             ),
                                                             code: ({node, className, ...props}: any) => {
                                                                 const isInline = !className;
                                                                 if (isInline) {
-                                                                    return <code className="bg-slate-800/60 px-1.5 py-0.5 rounded text-blue-300 font-mono text-base" {...props} />;
+                                                                    return <code className="bg-page/60 px-1.5 py-0.5 text-accent font-mono text-base" {...props} />;
                                                                 }
-                                                                return <code className="block bg-slate-800/60 p-5 rounded-xl text-blue-200 font-mono text-base leading-7 overflow-x-auto mb-6" {...props} />;
+                                                                return <code className="block bg-page/60 p-5 text-accent font-mono text-base leading-7 overflow-x-auto mb-6" {...props} />;
                                                             },
                                                             pre: ({node, ...props}: any) => (
-                                                                <pre className="bg-slate-800/40 border border-white/5 rounded-xl p-5 overflow-x-auto mb-6 text-base leading-7" {...props} />
+                                                                <pre className="bg-page/40 border border-white/5 p-5 overflow-x-auto mb-6 text-base leading-7" {...props} />
                                                             ),
                                                             table: ({node, ...props}: any) => (
-                                                                <div className="overflow-x-auto mb-8 rounded-xl border border-white/10">
+                                                                <div className="overflow-x-auto mb-8 border border-white/10">
                                                                     <table className="w-full text-base border-collapse" {...props} />
                                                                 </div>
                                                             ),
                                                             thead: ({node, ...props}: any) => <thead className="bg-white/[0.03]" {...props} />,
                                                             tbody: ({node, ...props}: any) => <tbody className="divide-y divide-white/5" {...props} />,
-                                                            th: ({node, ...props}: any) => <th className="px-4 py-3 text-left text-base font-black text-blue-400 uppercase tracking-wider border-b border-white/10" {...props} />,
-                                                            td: ({node, ...props}: any) => <td className="px-4 py-3 text-slate-300 font-medium border-b border-white/5 leading-7" {...props} />,
+                                                            th: ({node, ...props}: any) => <th className="px-4 py-3 text-left text-base font-extrabold text-accent uppercase tracking-wider border-b border-white/10" {...props} />,
+                                                            td: ({node, ...props}: any) => <td className="px-4 py-3 text-ink-2 font-medium border-b border-white/5 leading-7" {...props} />,
                                                         }}
                                                     >
                                                         {normalizeContent(
@@ -872,7 +872,7 @@ export function ReportsDashboard() {
 
                                                     {/* Footer stats */}
                                                     <footer className="mt-24 border-t border-white/5 pt-12">
-                                                        <div className="mb-4 text-base font-black uppercase tracking-[0.16em] text-muted-foreground">
+                                                        <div className="mb-4 text-base font-extrabold uppercase tracking-[0.16em] text-ink-2">
                                                             Report Metadata
                                                         </div>
                                                         <div className="grid gap-3 sm:grid-cols-3">
@@ -889,13 +889,13 @@ export function ReportsDashboard() {
                             </div>
                         </div>
                     ) : (
-                        <div className="flex h-full w-full items-center justify-center p-6 text-center text-muted-foreground">
-                            <div className="w-full max-w-2xl rounded-2xl border border-white/10 bg-white/[0.03] p-8 shadow-2xl">
-                                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl border border-blue-500/20 bg-blue-500/[0.08] text-blue-400 shadow-lg">
+                        <div className="flex h-full w-full items-center justify-center p-6 text-center text-ink-2">
+                            <div className="w-full max-w-2xl border border-white/10 bg-white/[0.03] p-8">
+                                <div className="mx-auto flex h-20 w-20 items-center justify-center border border-accent/40 bg-accent/10] text-accent">
                                     <FileText className="h-9 w-9" />
                                 </div>
-                                <h3 className="mt-6 text-3xl font-black tracking-tight text-white">Select a Research Report</h3>
-                                <p className="mx-auto mt-3 max-w-lg text-base font-medium leading-relaxed text-muted-foreground">
+                                <h3 className="mt-6 text-3xl font-extrabold tracking-tight text-surface">Select a Research Report</h3>
+                                <p className="mx-auto mt-3 max-w-lg text-base font-medium leading-relaxed text-ink-2">
                                     Choose a ticker from the repository list to open the full Deepseek analysis, section navigation, conviction stats, and downloadable report.
                                 </p>
                                 <div className="mt-6 grid grid-cols-2 gap-3">
@@ -915,22 +915,22 @@ export function ReportsDashboard() {
 
 function ResearchStat({ label, value, sub }: { label: string; value: string; sub: string }) {
     return (
-        <div className="rounded-lg border border-white/10 bg-white/[0.03] p-3">
-            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-1 truncate font-mono text-xl font-black text-white" title={value}>{value}</div>
-            <div className="mt-1 truncate text-base font-semibold text-muted-foreground" title={sub}>{sub}</div>
+        <div className="border border-white/10 bg-white/[0.03] p-3">
+            <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
+            <div className="mt-1 truncate font-mono text-xl font-extrabold text-surface" title={value}>{value}</div>
+            <div className="mt-1 truncate text-base font-semibold text-ink-2" title={sub}>{sub}</div>
         </div>
     );
 }
 
 function ReportFooterStat({ icon, label, value }: { icon: ReactNode; label: string; value: string }) {
     return (
-        <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
-            <div className="flex items-center gap-2 text-base font-black uppercase tracking-wider text-muted-foreground">
+        <div className="border border-white/10 bg-white/[0.03] p-4">
+            <div className="flex items-center gap-2 text-base font-extrabold uppercase tracking-wider text-ink-2">
                 {icon}
                 {label}
             </div>
-            <div className="mt-2 break-words font-mono text-base font-black leading-relaxed text-slate-200" title={value}>
+            <div className="mt-2 break-words font-mono text-base font-extrabold leading-relaxed text-ink-2" title={value}>
                 {value}
             </div>
         </div>
@@ -939,19 +939,19 @@ function ReportFooterStat({ icon, label, value }: { icon: ReactNode; label: stri
 
 function EmptyReportStat({ label, value }: { label: string; value: string }) {
     return (
-        <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2.5">
-            <div className="text-base font-black uppercase tracking-wider text-muted-foreground">{label}</div>
-            <div className="mt-1 truncate font-mono text-base font-black text-slate-200" title={value}>{value}</div>
+        <div className="border border-white/10 bg-white/[0.03] px-3 py-2.5">
+            <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
+            <div className="mt-1 truncate font-mono text-base font-extrabold text-ink-2" title={value}>{value}</div>
         </div>
     );
 }
 
 function ReportLoadingTile() {
     return (
-        <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
-            <div className="h-4 w-20 animate-pulse rounded bg-white/10" />
-            <div className="mt-3 h-7 w-14 animate-pulse rounded bg-white/15" />
-            <div className="mt-3 h-4 w-28 animate-pulse rounded bg-white/10" />
+        <div className="border border-white/10 bg-white/[0.03] p-4">
+            <div className="h-4 w-20 animate-pulse bg-white/10" />
+            <div className="mt-3 h-7 w-14 animate-pulse bg-white/15" />
+            <div className="mt-3 h-4 w-28 animate-pulse bg-white/10" />
         </div>
     );
 }

@@ -1,0 +1,205 @@
+// Row model for the three rankings lenses.
+//
+// One DeskRow joins everything known about a ticker: the quant filter entry, the
+// depth (band-direction) verdict when one exists, the reverse-DCF model, and the
+// overlay signals. The lenses only choose ordering and which columns to show.
+
+import type { DepthVerdict, FactorEntry, ValuationModel } from '@/lib/data-service';
+import type { StockInfo } from './useDeskData';
+
+export interface DeskRow {
+    ticker: string;
+    info: StockInfo | undefined;
+    fct: FactorEntry;
+    depth: DepthVerdict | undefined;
+    val: ValuationModel | undefined;
+    overlay: any;
+    /** 1..N among depth-analyzed undervalued names, by median gap. Undefined otherwise. */
+    aiRank?: number;
+    /** Percentile points of disagreement carried by the retired conviction overlay, or null. */
+    delta: number | null;
+    /**
+     * Promotion/demotion under the BAND scheme, derived here rather than read from
+     * `fct_llm` — that flag is written by the retired conviction/MoS overlay and
+     * would contradict the depth verdict shown next to it.
+     */
+    promo: 'promoted' | 'demoted' | 'none';
+    vetoed: boolean;
+    vetoReason: string | null;
+}
+
+export interface RankingFilters {
+    search: string;
+    band: string;      // 'all' | research_now | watchlist | monitor | pass
+    verdict: string;   // 'all' | analyzed | undervalued | fair | overvalued | not_usable | promoted | demoted | vetoed
+    sector: string;
+}
+
+export const EMPTY_FILTERS: RankingFilters = { search: '', band: 'all', verdict: 'all', sector: 'all' };
+
+export interface RankingsInput {
+    factor: { tickers: Record<string, FactorEntry> } | null;
+    depth: Record<string, DepthVerdict>;
+    valuations: Record<string, ValuationModel>;
+    overlay: Record<string, any>;
+    stockInfo: Record<string, StockInfo>;
+}
+
+/** Every scored ticker, quant order, with the depth verdict attached where it exists. */
+export function buildRows({ factor, depth, valuations, overlay, stockInfo }: RankingsInput): DeskRow[] {
+    if (!factor) return [];
+    const rows: DeskRow[] = Object.entries(factor.tickers)
+        .filter(([, e]) => e.fct_rank !== null && e.fct_rank !== undefined)
+        .sort((a, b) => (a[1].fct_rank! - b[1].fct_rank!))
+        .map(([ticker, fct]) => {
+            const pl = (fct as any).fct_percentile_llm;
+            const p = (fct as any).fct_percentile;
+            return {
+                ticker,
+                info: stockInfo[ticker],
+                fct,
+                depth: depth[ticker],
+                val: valuations[ticker],
+                overlay: overlay[ticker],
+                delta: (pl != null && p != null) ? Math.round(pl - p) : null,
+                promo: 'none',
+                vetoed: !!(fct.fct_veto || (fct as any).fct_llm_veto),
+                vetoReason: (fct.fct_veto_detail as string) || (fct.fct_veto as string) || null,
+            };
+        });
+
+    // AI rank: the depth engine has no rank of its own, so the desk ranks the
+    // names it called undervalued by how far the price sits below the median IV.
+    rows
+        .filter((r) => r.depth?.direction === 'undervalued')
+        .sort((a, b) => (b.depth?.mos_vs_median_pct ?? -1e9) - (a.depth?.mos_vs_median_pct ?? -1e9))
+        .forEach((r, i) => { r.aiRank = i + 1; });
+
+    // Promotion is the AI disagreeing with the shortlist in either direction:
+    // it valued a non-shortlisted name above its price, or it knocked a
+    // shortlisted name out by valuing it below the price.
+    for (const r of rows) {
+        if (!r.depth) continue;
+        const shortlisted = r.fct.fct_band === 'research_now';
+        if (r.depth.direction === 'undervalued' && !shortlisted) r.promo = 'promoted';
+        else if (r.depth.direction === 'overvalued' && shortlisted) r.promo = 'demoted';
+    }
+
+    return rows;
+}
+
+export function sectorsOf(rows: DeskRow[]): string[] {
+    const set = new Set<string>();
+    rows.forEach((r) => { if (r.info?.sector) set.add(r.info.sector); });
+    return Array.from(set).sort();
+}
+
+export function applyFilters(rows: DeskRow[], f: RankingFilters): DeskRow[] {
+    const q = f.search.trim().toUpperCase();
+    return rows.filter((r) => {
+        if (f.band !== 'all' && r.fct.fct_band !== f.band) return false;
+        if (f.sector !== 'all' && r.info?.sector !== f.sector) return false;
+        if (f.verdict !== 'all') {
+            const d = r.depth?.direction;
+            switch (f.verdict) {
+                case 'analyzed': if (!r.depth) return false; break;
+                case 'undervalued': if (d !== 'undervalued') return false; break;
+                case 'fair': if (d !== 'hold') return false; break;
+                case 'overvalued': if (d !== 'overvalued') return false; break;
+                case 'not_usable': if (d !== 'NOT_USABLE') return false; break;
+                case 'promoted': if (r.promo !== 'promoted') return false; break;
+                case 'demoted': if (r.promo !== 'demoted') return false; break;
+                case 'vetoed': if (!r.vetoed) return false; break;
+            }
+        }
+        if (q && !r.ticker.includes(q) && !(r.info?.name ?? '').toUpperCase().includes(q)) return false;
+        return true;
+    });
+}
+
+export interface AiSections {
+    researchNow: DeskRow[];   // price below the whole band — the AI's shortlist
+    watchlist: DeskRow[];     // price inside or above the band
+    awaiting: DeskRow[];      // quant shortlist, depth run not done yet
+    vetoed: DeskRow[];        // disqualified before the depth run
+}
+
+/**
+ * The RS2 AI lens. Only depth-analyzed names carry a verdict; the quant
+ * shortlist that has not been through a depth run is shown separately rather
+ * than silently dropped — 14–18 of 51 research_now names are analyzed today.
+ */
+export function aiSections(rows: DeskRow[]): AiSections {
+    const researchNow: DeskRow[] = [];
+    const watchlist: DeskRow[] = [];
+    const awaiting: DeskRow[] = [];
+    const vetoed: DeskRow[] = [];
+
+    for (const r of rows) {
+        if (r.vetoed && (r.fct.fct_band === 'research_now' || r.depth)) { vetoed.push(r); continue; }
+        if (r.depth) {
+            if (r.depth.direction === 'undervalued') researchNow.push(r);
+            else watchlist.push(r);
+            continue;
+        }
+        if (r.fct.fct_band === 'research_now') awaiting.push(r);
+    }
+
+    researchNow.sort((a, b) => (a.aiRank ?? 1e9) - (b.aiRank ?? 1e9));
+    // Watchlist: FAIR first (closest to actionable), then overvalued, then unusable.
+    const wlOrder: Record<string, number> = { hold: 0, overvalued: 1, NOT_USABLE: 2 };
+    watchlist.sort((a, b) => {
+        const oa = wlOrder[a.depth?.direction ?? ''] ?? 3;
+        const ob = wlOrder[b.depth?.direction ?? ''] ?? 3;
+        if (oa !== ob) return oa - ob;
+        return (b.depth?.mos_vs_median_pct ?? -1e9) - (a.depth?.mos_vs_median_pct ?? -1e9);
+    });
+
+    return { researchNow, watchlist, awaiting, vetoed };
+}
+
+export type CompareSort = 'delta' | 'quant' | 'ai';
+
+/** Compare lens: only names both engines have an opinion on, biggest split first. */
+export function compareRows(rows: DeskRow[], sort: CompareSort): DeskRow[] {
+    const out = rows.filter((r) => r.depth && r.depth.direction !== 'NOT_USABLE');
+    // Size of the split: an explicit rank move where both engines ranked the name,
+    // otherwise how deep into the quant shortlist the AI's rejection reaches.
+    const deltaOf = (r: DeskRow) => {
+        const d = rankDelta(r);
+        if (d !== null) return Math.abs(d);
+        if (r.promo === 'demoted' && r.fct.fct_rank) return Math.max(1, 100 - r.fct.fct_rank);
+        return 0;
+    };
+    if (sort === 'quant') out.sort((a, b) => (a.fct.fct_rank ?? 1e9) - (b.fct.fct_rank ?? 1e9));
+    else if (sort === 'ai') out.sort((a, b) => (a.aiRank ?? 1e9) - (b.aiRank ?? 1e9));
+    else out.sort((a, b) => deltaOf(b) - deltaOf(a));
+    return out;
+}
+
+/**
+ * Signed rank move vs the quant filter. Positive = the AI ranks it higher than
+ * the math does. Only depth-analyzed names carry an AI rank, so names the AI
+ * pushed down have no rank to compare and report null.
+ */
+export function rankDelta(r: DeskRow): number | null {
+    if (r.aiRank && r.fct.fct_rank) return r.fct.fct_rank - r.aiRank;
+    return null;
+}
+
+/** One-line reason the two engines disagree, assembled from what the data knows. */
+export function whySplit(r: DeskRow): string {
+    const gap = r.val?.expectations_gap_pts;
+    const d = r.depth?.direction;
+    const bits: string[] = [];
+    if (gap != null) {
+        bits.push(gap < 0
+            ? `price needs ${(r.val?.implied_growth != null ? (r.val.implied_growth * 100).toFixed(1) : '—')}% growth against ${(r.val?.hist_revenue_cagr_5y != null ? (r.val.hist_revenue_cagr_5y * 100).toFixed(1) : '—')}% delivered`
+            : `price already assumes an acceleration of ${gap.toFixed(1)} pts over what was delivered`);
+    }
+    if (d === 'undervalued') bits.push('all seeded runs land above the price');
+    else if (d === 'overvalued') bits.push('all seeded runs land below the price');
+    else if (d === 'hold') bits.push('the price sits inside the run spread');
+    if (r.fct.fct_haircuts && (r.fct.fct_haircuts as any).forensic < 1) bits.push('forensic haircut applied');
+    return bits.length ? bits.join(' · ') : 'no single driver — the engines weight the same evidence differently';
+}

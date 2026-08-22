@@ -4,45 +4,25 @@
 
 @layer base {
     :root {
-        /* Dark Mode Premium Foundation */
-        --background: 222 47% 11%;
-        /* #0f172a - Slate 900 */
-        --foreground: 210 40% 98%;
-        /* Slate 50 */
-
-        --card: 222 47% 10%;
-        --card-foreground: 210 40% 98%;
-
-        --popover: 222 47% 11%;
-        --popover-foreground: 210 40% 98%;
-
-        --primary: 158 64% 52%;
-        /* Emerald 400 (#34d399) — exact match to the site's brand emerald */
-        --primary-foreground: 222 47% 11%;
-
-        --secondary: 217 33% 17%;
-        /* Slate 800 */
-        --secondary-foreground: 210 40% 98%;
-
-        --muted: 217 33% 17%;
-        --muted-foreground: 215 20% 65%;
-
-        --accent: 217 33% 17%;
-        --accent-foreground: 210 40% 98%;
-
-        --destructive: 0 63% 31%;
-        --destructive-foreground: 210 40% 98%;
-
-        --border: 217 33% 17%;
-        --input: 217 33% 17%;
-        --ring: 158 64% 52%;
-
-        --radius: 0.5rem;
-
-        /* Blueprint Specific Colors */
-        --success: 142 71% 45%;
-        --warning: 38 92% 50%;
-        --danger: 343 100% 50%;
+        /* ── AI Research Desk palette (design_handoff_stockpeak_redesign) ──
+           Editorial, dark-only, radius 0. Tailwind reads these same values from
+           tailwind.config.js; the vars exist for raw CSS below and inline styles. */
+        --page: #0e0f11;
+        --surface: #131416;
+        --ink: #e7e5e0;
+        --ink-2: #8b887f;
+        --ink-3: #66635b;
+        --ink-q: #c9c6be;
+        --accent: oklch(0.78 0.08 250);
+        --pos: oklch(0.75 0.11 155);
+        --warn: #cfa14e;
+        --neg: #c2695a;
+        --rule-16: rgba(255, 255, 255, .16);
+        --rule-14: rgba(255, 255, 255, .14);
+        --rule-12: rgba(255, 255, 255, .12);
+        --rule-9: rgba(255, 255, 255, .09);
+        --rule-6: rgba(255, 255, 255, .06);
+        --radius: 0px;
     }
 
     html {
@@ -52,31 +32,21 @@
     }
 
     body {
-        @apply bg-background text-foreground antialiased font-sans;
         min-height: 100vh;
-        background:
-            linear-gradient(180deg, hsl(220 36% 9%) 0%, hsl(var(--background)) 42%, hsl(222 36% 7%) 100%);
-        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-        font-variant-numeric: tabular-nums;
-        text-rendering: optimizeLegibility;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    p {
-        text-wrap: pretty;
+        background: var(--page);
+        color: var(--ink);
+        font-family: var(--font-hanken), system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
     }
 
     ::selection {
-        background: hsl(var(--primary) / 0.28);
-        color: hsl(var(--foreground));
+        background: oklch(0.78 0.08 250 / 0.3);
+        color: var(--ink);
     }
 
     :focus-visible {
-        outline: 2px solid hsl(var(--primary) / 0.75);
-        outline-offset: 3px;
+        outline: 1px solid var(--accent);
+        outline-offset: 2px;
     }
 
     button,
@@ -86,45 +56,98 @@
         font: inherit;
     }
 
-    /* Custom Premium Scrollbars */
-    ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+    /* Numbers must line up in tables — Spline Sans Mono is used for all data. */
+    .font-mono,
+    code,
+    pre {
+        font-variant-numeric: tabular-nums;
     }
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: hsl(215 20% 35% / 0.65);
-        border-radius: 4px;
-        border: 2px solid hsl(var(--background));
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: hsl(var(--primary) / 0.75);
-    }
-    /* Firefox support */
-    * {
-        scrollbar-width: thin;
-        scrollbar-color: hsl(215 20% 35% / 0.65) transparent;
+
+    /* Range inputs (Track Record window sliders) take the accent. */
+    input[type="range"] {
+        accent-color: oklch(0.78 0.08 250);
     }
 }
 
-/* Report prose overrides */
-/* Fallback styles for any elements not handled by ReactMarkdown components */
+/* Themed thin scrollbars for dark scroll areas (transcript viewers, tables). */
+.scroll-dark {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, .22) #0e0f11;
+}
+
+.scroll-dark::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.scroll-dark::-webkit-scrollbar-track {
+    background: #0e0f11;
+}
+
+.scroll-dark::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .22);
+}
+
+.scroll-dark::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, .34);
+}
+
+/* Global scrollbars follow the same treatment. */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .22);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, .34);
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, .22) transparent;
+}
+
+/* Raw model output and long transcripts must wrap — never scroll horizontally. */
+.wrap-anywhere {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Report prose overrides (ReportsDashboard, RS2 markdown panels) */
 .report-prose {
-    @apply text-slate-300;
+    color: var(--ink-q);
 }
+
 .report-prose a {
-    @apply text-blue-400 underline decoration-blue-400/30 underline-offset-2 hover:text-blue-300 transition-colors;
+    color: #a8b4d8;
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
+
+.report-prose a:hover {
+    color: #c3cce6;
+}
+
 .report-prose img {
-    @apply rounded-xl max-w-full;
+    max-width: 100%;
 }
+
 .report-prose pre {
-    @apply whitespace-pre-wrap break-words;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
+
 .report-prose code {
-    @apply break-all;
+    overflow-wrap: anywhere;
 }
 
 .filter-section-list {
@@ -143,12 +166,11 @@
     width: 2rem;
     height: 2rem;
     flex-shrink: 0;
-    border-radius: 0.5rem;
-    border: 1px solid hsl(var(--primary) / 0.25);
-    background: hsl(var(--primary) / 0.10);
-    color: hsl(var(--primary));
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: 1rem;
-    font-weight: 900;
+    border: 1px solid var(--rule-14);
+    background: transparent;
+    color: var(--ink-2);
+    font-family: var(--font-spline), ui-monospace, monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
     line-height: 1;
 }

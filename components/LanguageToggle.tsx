@@ -1,7 +1,16 @@
+'use client';
+
 import { useState, useRef, useEffect } from "react";
-import { Check, ChevronDown, Globe2 } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { clsx } from "clsx";
+
+// Desk idiom: mono two-letter codes, no flag images (the design ships no assets
+// beyond the two Google fonts, and flagcdn.com was an external request per render).
+const LANGUAGES = [
+    { code: "en", name: "English", locale: "US market labels" },
+    { code: "ko", name: "한국어", locale: "Korea market labels" },
+    { code: "zh", name: "中文", locale: "Taiwan market labels" },
+] as const;
 
 export function LanguageToggle() {
     const { language, setLanguage } = useLanguage();
@@ -10,70 +19,50 @@ export function LanguageToggle() {
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (ref.current && !ref.current.contains(event.target as Node)) {
-                setOpen(false);
-            }
+            if (ref.current && !ref.current.contains(event.target as Node)) setOpen(false);
         };
+        const handleKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setOpen(false); };
         document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
+        document.addEventListener("keydown", handleKey);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleKey);
+        };
     }, []);
 
-    const languages = [
-        { code: "en", name: "English", locale: "US market labels", flag: "https://flagcdn.com/w20/us.png" },
-        { code: "ko", name: "Korean", locale: "Korea market labels", flag: "https://flagcdn.com/w20/kr.png" },
-        { code: "zh", name: "Chinese", locale: "Taiwan market labels", flag: "https://flagcdn.com/w20/tw.png" },
-    ];
-
-    const current = languages.find(l => l.code === language) || languages[0];
+    const current = LANGUAGES.find(l => l.code === language) || LANGUAGES[0];
 
     return (
         <div ref={ref} className="relative z-50 inline-block text-left">
             <button
                 onClick={() => setOpen(!open)}
-                className="flex items-center gap-1.5 rounded-md border border-border/60 bg-secondary/50 px-3 py-2 text-xs font-black transition-colors hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-primary/40"
-                title="Select Language"
+                className="font-mono text-[10px] uppercase tracking-[.08em] text-ink-2 hover:text-ink"
+                title="Select language"
                 aria-label={`Current language: ${current.name}`}
                 aria-expanded={open}
                 aria-haspopup="menu"
             >
-                <Globe2 className="h-4 w-4 text-primary" />
-                <img src={current.flag} alt={current.code} className="h-3.5 w-5 rounded-sm opacity-90" />
-                <span className="hidden text-foreground sm:inline">{current.name}</span>
-                <span className="uppercase text-foreground sm:hidden">{current.code}</span>
-                <ChevronDown className={clsx("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
+                {current.code.toUpperCase()} {open ? '▴' : '▾'}
             </button>
 
             {open && (
-                <div className="absolute right-0 mt-2 w-64 origin-top-right overflow-hidden rounded-xl border border-border bg-card shadow-2xl focus:outline-none">
-                    <div className="border-b border-border/60 bg-secondary/20 px-3 py-2.5">
-                        <div className="text-xs font-black uppercase tracking-wider text-muted-foreground">Language</div>
-                        <div className="mt-1 flex items-center gap-2 text-base font-black text-foreground">
-                            <img src={current.flag} alt={current.code} className="h-4 w-6 rounded-sm opacity-90" />
-                            {current.name}
-                        </div>
-                        <div className="mt-1 text-xs font-semibold text-muted-foreground">{current.locale}</div>
+                <div role="menu" className="absolute right-0 top-full mt-2 w-56 border border-rule-16 bg-page">
+                    <div className="border-b border-rule-9 px-3 py-2">
+                        <div className="font-mono text-[9px] uppercase tracking-micro text-ink-3">Language</div>
                     </div>
-                    <div className="flex flex-col p-1.5">
-                        {languages.map((lng) => (
+                    <div className="flex flex-col">
+                        {LANGUAGES.map((lng) => (
                             <button
                                 key={lng.code}
-                                onClick={() => {
-                                    setLanguage(lng.code as "en" | "ko" | "zh");
-                                    setOpen(false);
-                                }}
+                                role="menuitem"
+                                onClick={() => { setLanguage(lng.code as "en" | "ko" | "zh"); setOpen(false); }}
                                 className={clsx(
-                                    "flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-bold transition-colors",
-                                    language === lng.code ? "bg-primary/15 text-primary" : "text-foreground hover:bg-secondary/80"
+                                    "flex w-full items-baseline justify-between gap-3 px-3 py-2.5 text-left transition-colors",
+                                    language === lng.code ? "text-accent" : "text-ink-2 hover:text-ink",
                                 )}
                             >
-                                <span className="flex items-center gap-3">
-                                    <img src={lng.flag} alt={lng.code} className="h-4 w-6 rounded-sm opacity-90" />
-                                    <span className="min-w-0">
-                                        <span className="block">{lng.name}</span>
-                                        <span className="mt-0.5 block truncate text-xs font-semibold text-muted-foreground">{lng.locale}</span>
-                                    </span>
-                                </span>
-                                {language === lng.code && <Check className="h-4 w-4" />}
+                                <span className="text-[12.5px] font-semibold normal-case">{lng.name}</span>
+                                <span className="font-mono text-[9.5px] uppercase tracking-micro text-ink-3">{lng.code}</span>
                             </button>
                         ))}
                     </div>

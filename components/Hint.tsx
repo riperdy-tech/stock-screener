@@ -44,7 +44,7 @@ export function Hint({ text, label }: { text: string; label?: string }) {
                     if (pos) close(); else open();
                 }}
                 onBlur={close}
-                className="outline-none text-muted-foreground/60 hover:text-emerald-300 focus:text-emerald-300"
+                className="outline-none text-ink-3 hover:text-pos focus:text-pos"
             >
                 <HelpCircle className="h-3 w-3" />
             </button>
@@ -52,7 +52,7 @@ export function Hint({ text, label }: { text: string; label?: string }) {
                 <span
                     role="tooltip"
                     style={{ top: pos.top, left: pos.left, width: POPUP_WIDTH }}
-                    className="fixed z-[70] rounded-lg border border-border bg-background/95 p-2.5 text-left text-[11px] font-medium normal-case leading-relaxed tracking-normal text-foreground shadow-xl backdrop-blur"
+                    className="fixed z-[70] border border-rule-9 bg-page p-2.5 text-left text-[11px] font-medium normal-case leading-relaxed tracking-normal text-ink"
                 >
                     {text}
                 </span>
