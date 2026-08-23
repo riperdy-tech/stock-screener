@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-08-22T11:50:44Z
+Generated: 2026-08-23T10:55:58Z
 Macro flags: none
 Invested: **52.68%**  |  Cash: **47.32%**  |  Positions: 14
 
@@ -53,7 +53,7 @@ Invested: **52.68%**  |  Cash: **47.32%**  |  Positions: 14
 - MEDP: sized below minimum (0.27% < 0.75%)
 - JKHY: no Kelly edge (expectations gap +4pts >= 0: price already assumes more growth than demonstrated)
 - RMD: sector cap Healthcare (25.0%)
-- FIX: no Kelly edge (expectations gap +2pts >= 0: price already assumes more growth than demonstrated)
+- FIX: no Kelly edge (expectations gap +0pts >= 0: price already assumes more growth than demonstrated)
 - AMZN: no Kelly edge (expectations gap +47pts >= 0: price already assumes more growth than demonstrated)
 - CIEN: no Kelly edge (expectations gap +76pts >= 0: price already assumes more growth than demonstrated)
 - GD: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
