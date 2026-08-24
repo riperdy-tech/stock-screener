@@ -530,7 +530,7 @@ export function ReportsDashboard() {
                                 <div className="flex flex-wrap justify-center gap-2">
                                     <button
                                         onClick={resetReportFilters}
-                                        className="border border-rule-9 bg-white/5 px-4 py-2.5 text-base font-extrabold text-ink-2 transition-colors hover:bg-white/5 hover:text-ink"
+                                        className="border border-rule-14 bg-white/5 px-4 py-2.5 text-base font-extrabold text-ink-2 transition-colors hover:bg-white/5 hover:text-ink"
                                     >
                                         Reset filters
                                     </button>
@@ -586,7 +586,7 @@ export function ReportsDashboard() {
                                                     <div className="mt-1.5 flex items-center gap-2 text-xs font-bold uppercase tracking-tight text-ink-2">
                                                         <Calendar className="h-4 w-4 text-accent opacity-70" />
                                                         {createdAt.toLocaleDateString()}
-                                                        <span className="text-surface/20 font-normal">@</span>
+                                                        <span className="font-normal text-ink-3">@</span>
                                                         <span className="text-accent">{createdAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                                     </div>
                                                 </div>
@@ -596,7 +596,7 @@ export function ReportsDashboard() {
                                                         <div className="font-mono text-base font-extrabold leading-none text-accent">
                                                             {meta.conviction ? meta.conviction.toFixed(1) : '0.0'}
                                                         </div>
-                                                        <span className="mt-1 block text-[10px] font-extrabold uppercase tracking-[0.12em] text-ink-2 opacity-70">Conv</span>
+                                                        <span className="mt-1 block text-[11px] font-extrabold uppercase tracking-[0.12em] text-ink-2 opacity-70">Conv</span>
                                                     </div>
                                                     <div className={clsx(
                                                         " border px-3 py-2 ",
@@ -763,7 +763,7 @@ export function ReportsDashboard() {
                                                                 {new Date(selectedReport.created_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                                                             </span>
                                                         </div>
-                                                        <h1 className="mb-2 text-4xl font-extrabold tracking-tight text-surface md:text-5xl">
+                                                        <h1 className="mb-2 text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
                                                             {selectedReport.ticker}
                                                         </h1>
                                                         <p className="max-w-2xl text-sm font-medium leading-relaxed text-ink-2">
@@ -773,11 +773,11 @@ export function ReportsDashboard() {
 
                                                     <div className="grid shrink-0 grid-cols-2 gap-2 sm:grid-cols-3">
                                                         <div className="min-w-[92px] border border-white/5 bg-white/[0.02] p-3">
-                                                            <div className="mb-1.5 text-[10px] font-extrabold uppercase tracking-widest text-ink-2 opacity-60">Conviction</div>
+                                                            <div className="mb-1.5 text-[11px] font-extrabold uppercase tracking-widest text-ink-2 opacity-60">Conviction</div>
                                                             <div className="text-2xl font-extrabold tracking-tight text-accent">{meta.conviction || '0'}</div>
                                                         </div>
                                                         <div className="min-w-[92px] border border-white/5 bg-white/[0.02] p-3">
-                                                            <div className="mb-1.5 text-[10px] font-extrabold uppercase tracking-widest text-ink-2 opacity-60">Upside</div>
+                                                            <div className="mb-1.5 text-[11px] font-extrabold uppercase tracking-widest text-ink-2 opacity-60">Upside</div>
                                                             <div className={clsx(
                                                                 "text-2xl font-extrabold tracking-tight",
                                                                 (parseFloat(meta.upside || 0)) > 0 ? "text-pos" : "text-neg"
@@ -786,8 +786,8 @@ export function ReportsDashboard() {
                                                             </div>
                                                         </div>
                                                         <div className="hidden min-w-[92px] border border-white/5 bg-white/[0.02] p-3 sm:block">
-                                                            <div className="mb-1.5 text-[10px] font-extrabold uppercase tracking-widest text-ink-2 opacity-60">Rating</div>
-                                                            <div className="text-lg font-extrabold uppercase tracking-tight text-surface">{meta.action || 'HOLD'}</div>
+                                                            <div className="mb-1.5 text-[11px] font-extrabold uppercase tracking-widest text-ink-2 opacity-60">Rating</div>
+                                                            <div className="text-lg font-extrabold uppercase tracking-tight text-ink">{meta.action || 'HOLD'}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -799,10 +799,10 @@ export function ReportsDashboard() {
                                                     <div className="relative">
                                                         <div className="absolute inset-0 bg-accent/10 blur-3xl animate-pulse"></div>
                                                         <RefreshCw className="h-16 w-16 text-accent animate-spin relative z-10" />
-                                                        <Bot className="h-8 w-8 absolute top-4 left-4 text-surface relative z-10" />
+                                                        <Bot className="h-8 w-8 absolute top-4 left-4 text-ink relative z-10" />
                                                     </div>
                                                     <div>
-                                                        <h3 className="mb-2 text-2xl font-extrabold text-surface">AI Engine Processing...</h3>
+                                                        <h3 className="mb-2 text-2xl font-extrabold text-ink">AI Engine Processing...</h3>
                                                         <p className="max-w-sm text-sm font-medium text-ink-2">
                                                             Generating high-fidelity research for {selectedReport.ticker}. 
                                                             This typically takes 2-4 minutes.
@@ -816,14 +816,14 @@ export function ReportsDashboard() {
                                                             h1: ({node, ...props}: any) => {
                                                                 const idx = reportHeadings.findIndex(h => h.title === reactNodeToText(props.children));
                                                                 const id = idx >= 0 ? reportHeadings[idx].id : undefined;
-                                                                return <h1 id={id} className="mt-12 mb-4 border-b border-white/10 pb-3 text-2xl font-extrabold uppercase tracking-tight text-surface md:text-3xl" {...props} />;
+                                                                return <h1 id={id} className="mt-12 mb-4 border-b border-white/10 pb-3 text-2xl font-extrabold uppercase tracking-tight text-ink md:text-3xl" {...props} />;
                                                             },
                                                             h2: ({node, ...props}: any) => {
                                                                 const idx = reportHeadings.findIndex(h => h.title === reactNodeToText(props.children));
                                                                 const id = idx >= 0 ? reportHeadings[idx].id : undefined;
                                                                 return <h2 id={id} className="mt-9 mb-3 text-lg font-extrabold uppercase tracking-wide text-accent md:text-xl" {...props} />;
                                                             },
-                                                            h3: ({node, ...props}: any) => <h3 className="mt-6 mb-2.5 text-lg font-extrabold tracking-tight text-surface" {...props} />,
+                                                            h3: ({node, ...props}: any) => <h3 className="mt-6 mb-2.5 text-lg font-extrabold tracking-tight text-ink" {...props} />,
                                                             p: ({node, ...props}: any) => <p className="mb-4 text-sm font-medium leading-7 text-ink-2 sm:text-base" {...props} />,
                                                             strong: ({node, ...props}: any) => <strong className="font-extrabold text-ink" {...props} />,
                                                             em: ({node, ...props}: any) => <em className="italic text-accent" {...props} />,
@@ -894,7 +894,7 @@ export function ReportsDashboard() {
                                 <div className="mx-auto flex h-20 w-20 items-center justify-center border border-accent/40 bg-accent/10] text-accent">
                                     <FileText className="h-9 w-9" />
                                 </div>
-                                <h3 className="mt-6 text-3xl font-extrabold tracking-tight text-surface">Select a Research Report</h3>
+                                <h3 className="mt-6 text-3xl font-extrabold tracking-tight text-ink">Select a Research Report</h3>
                                 <p className="mx-auto mt-3 max-w-lg text-base font-medium leading-relaxed text-ink-2">
                                     Choose a ticker from the repository list to open the full Deepseek analysis, section navigation, conviction stats, and downloadable report.
                                 </p>
@@ -917,7 +917,7 @@ function ResearchStat({ label, value, sub }: { label: string; value: string; sub
     return (
         <div className="border border-white/10 bg-white/[0.03] p-3">
             <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
-            <div className="mt-1 truncate font-mono text-xl font-extrabold text-surface" title={value}>{value}</div>
+            <div className="mt-1 truncate font-mono text-xl font-extrabold text-ink" title={value}>{value}</div>
             <div className="mt-1 truncate text-base font-semibold text-ink-2" title={sub}>{sub}</div>
         </div>
     );

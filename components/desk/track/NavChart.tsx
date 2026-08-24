@@ -101,8 +101,8 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                         <button
                             key={s.key}
                             onClick={() => onToggle(s.key)}
-                            className={clsx('border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[.06em]',
-                                visible[s.key] ? 'border-rule-14' : 'border-transparent text-ink-3')}
+                            className={clsx('border px-2.5 py-1 font-mono font-semibold text-[11px] uppercase tracking-[.06em]',
+                                visible[s.key] ? 'border-rule-24' : 'border-rule-24 text-ink-3')}
                             style={visible[s.key] ? { color: s.color, borderColor: 'rgba(255,255,255,.35)' } : undefined}
                         >
                             {visible[s.key] ? '●' : '○'} {s.label}
@@ -119,7 +119,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
             >
                 <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block h-[240px] w-full">
                     {yTicks.map((v, i) => (
-                        <line key={i} x1={0} x2={W} y1={CY(v)} y2={CY(v)} stroke="rgba(255,255,255,.07)" strokeWidth={1} />
+                        <line key={i} x1={0} x2={W} y1={CY(v)} y2={CY(v)} stroke="rgba(255,255,255,.12)" strokeWidth={1} />
                     ))}
                     {paths.map((p) => (
                         <polyline
@@ -134,12 +134,13 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                     ))}
                 </svg>
 
-                {/* y labels sit in HTML so they keep their type size under the stretched viewBox */}
+                {/* y labels sit in HTML so they keep their type size under the stretched viewBox;
+                    each gets a surface-coloured chip so it stays readable where a series line runs behind it */}
                 {yTicks.map((v, i) => (
                     <span
                         key={i}
-                        className="pointer-events-none absolute left-0.5 font-mono text-[8.5px] text-ink-3"
-                        style={{ top: `${(CY(v) / H) * 100}%`, transform: 'translateY(-100%)' }}
+                        className="pointer-events-none absolute left-0.5 font-mono font-semibold text-[11px] text-ink-3"
+                        style={{ top: `${(CY(v) / H) * 100}%`, transform: 'translateY(-100%)', background: 'var(--surface)', paddingRight: 4 }}
                     >
                         {fmtDollars(v)}
                     </span>
@@ -149,7 +150,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                 {xTicks.map((i, k) => (
                     <span
                         key={i}
-                        className="pointer-events-none absolute bottom-0 whitespace-nowrap font-mono text-[8.5px] text-ink-3"
+                        className="pointer-events-none absolute bottom-0 whitespace-nowrap font-mono font-semibold text-[11px] text-ink-3"
                         style={{
                             left: `${(CX(i) / W) * 100}%`,
                             transform: `translateX(${k === 0 ? '0%' : k === 4 ? '-100%' : '-50%'})`,
@@ -166,7 +167,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                             style={{ left: `${hoverFrac * 100}%` }}
                         />
                         <div
-                            className="pointer-events-none absolute top-2 z-10 min-w-[148px] border border-rule-16 bg-page px-3 py-2"
+                            className="pointer-events-none absolute top-2 z-10 min-w-[148px] border border-rule-22 bg-page px-3 py-2"
                             style={{ left: `${hoverFrac * 100}%`, transform: `translateX(${tipShift})` }}
                         >
                             <Micro className="block">{curve.dates[hoverIdx]}</Micro>
@@ -174,7 +175,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                                 const v = growthAt(curve.series[s.key], r0, hoverIdx);
                                 if (v == null) return null;
                                 return (
-                                    <div key={s.key} className="mt-1 flex items-baseline justify-between gap-4 text-[10.5px]">
+                                    <div key={s.key} className="mt-1 flex items-baseline justify-between gap-4 text-[11px]">
                                         <span style={{ color: s.color }}>{s.label}</span>
                                         <span className="font-mono font-semibold text-ink">{fmtDollars(v)}</span>
                                     </div>
@@ -193,7 +194,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                         <button
                             key={label}
                             onClick={() => preset(d)}
-                            className="border border-rule-14 px-2.5 py-1 font-mono text-[10px] text-ink-2 hover:text-ink"
+                            className="border border-rule-24 px-2.5 py-1 font-mono text-[11px] text-ink-2 hover:text-ink"
                         >
                             {label}
                         </button>
@@ -234,7 +235,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                     const end = growthAt(curve.series[s.key], r0, r1);
                     const ret = windowReturn(curve.series[s.key], r0, r1);
                     return (
-                        <span key={s.key} className="font-mono text-[10.5px] text-ink-2">
+                        <span key={s.key} className="font-mono text-[11px] text-ink-2">
                             <span style={{ color: s.color }}>{s.dashed ? '╌' : '━'} {s.label}</span>{' '}
                             <span className="text-ink">{end != null ? fmtDollars(end) : '—'}</span>{' '}
                             <span className={ret != null && ret >= 0 ? 'text-pos' : 'text-neg'}>({fmtSignedPct(ret)})</span>

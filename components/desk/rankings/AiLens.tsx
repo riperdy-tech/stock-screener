@@ -22,7 +22,7 @@ const GRID = 'grid grid-cols-[26px_180px_190px_170px_90px_120px_150px_70px_56px]
 function HeaderRow() {
     const { t } = useLanguage();
     return (
-        <div className={clsx(GRID, 'hidden border-b border-rule-12 pb-2 pt-3 lg:grid')}>
+        <div className={clsx(GRID, 'hidden border-b border-rule-18 pb-2 pt-3 lg:grid')}>
             <Micro>#</Micro>
             <Micro>{t('colStockDesk')}</Micro>
             <Micro>{t('colVerdict')}</Micro>
@@ -43,7 +43,7 @@ function DeskRowView({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNod
             tabIndex={0}
             onClick={() => onOpen(row.ticker)}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(row.ticker); } }}
-            className={clsx(GRID, 'hidden cursor-pointer border-b border-rule-6 py-3 hover:bg-hover lg:grid',
+            className={clsx(GRID, 'hidden cursor-pointer border-b border-rule-10 py-3 hover:bg-hover lg:grid',
                 row.promo === 'promoted' && 'bg-accent/[0.05]')}
         >
             <span className="font-mono text-[12px] text-ink-3">{rank}</span>
@@ -75,7 +75,7 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
             tabIndex={0}
             onClick={() => onOpen(row.ticker)}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(row.ticker); } }}
-            className={clsx('block cursor-pointer border-b border-rule-6 py-3.5 lg:hidden',
+            className={clsx('block cursor-pointer border-b border-rule-10 py-3.5 lg:hidden',
                 row.promo === 'promoted' && 'bg-accent/[0.05]')}
         >
             <div className="flex items-baseline justify-between gap-3">
@@ -103,7 +103,7 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
 
             {d && <div className="mt-2"><BandStrip row={row} height={12} showSubline={false} /></div>}
 
-            <div className="mt-2 font-mono text-[10px] text-ink-3">
+            <div className="mt-2 font-mono text-[11px] text-ink-3">
                 {d ? bandLabel(d.iv_band_low, d.iv_band_high, d.median_iv) : 'awaiting depth run'}
                 {' · '}quant #{row.fct.fct_rank ?? '—'}
                 {' · '}{fmtMcap(row.info?.marketCap)}
@@ -125,7 +125,7 @@ function Section({ title, note, rows, rankOf, onOpen, empty }: {
             <SectionHead title={title} note={note} />
             <HeaderRow />
             {rows.length === 0
-                ? <p className="border-b border-rule-6 py-5 text-[12px] text-ink-3">{empty}</p>
+                ? <p className="border-b border-rule-10 py-5 text-[12px] text-ink-3">{empty}</p>
                 : rows.map((r, i) => (
                     <React.Fragment key={r.ticker}>
                         <DeskRowView row={r} rank={rankOf(r, i)} onOpen={onOpen} />

@@ -46,7 +46,7 @@ const STRATEGY_META: Record<StrategyId, {
         icon: ShieldCheck,
     },
     paradigm: {
-        accent: 'text-ink-2 border-rule-14 bg-white/5',
+        accent: 'text-ink-2 border-rule-24 bg-white/5',
         icon: Layers3,
     },
     youtube: {
@@ -1034,7 +1034,7 @@ export function ScreenerDashboard() {
             {/* 2. Main Content Area */}
             <main className="relative flex min-w-0 flex-1 flex-col overflow-x-hidden">
                 {/* Header */}
-                <header className="sticky top-0 z-30 flex flex-shrink-0 flex-col gap-2 border-b border-rule-6 bg-surface px-3 py-3 md:flex-row md:flex-wrap md:px-5">
+                <header className="sticky top-0 z-30 flex flex-shrink-0 flex-col gap-2 border-b border-rule-10 bg-surface px-3 py-3 md:flex-row md:flex-wrap md:px-5">
                     <div className="flex w-full items-center justify-between gap-3">
                         <div className="flex items-center gap-2 md:gap-4">
                             <Link href="/"
@@ -1061,7 +1061,7 @@ export function ScreenerDashboard() {
                             <input
                                 type="text"
                                 placeholder={t('searchPlaceholder')}
-                                className="w-full border border-rule-6 bg-white/5 py-2 pl-9 pr-3 text-sm transition-all focus:bg-white/5 focus:outline-none focus:ring-1 focus:ring-primary"
+                                className="w-full border border-rule-10 bg-white/5 py-2 pl-9 pr-3 text-sm transition-all focus:bg-white/5 focus:outline-none focus:ring-1 focus:ring-primary"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -1072,7 +1072,7 @@ export function ScreenerDashboard() {
                                 <Sparkles className="h-4 w-4" />
                                 {t('recentReports')}
                              </Link>
-                             <button onClick={() => setIsSidebarOpen(true)} className="border border-rule-6 bg-white/5 p-2 text-secondary-foreground transition-colors hover:bg-white/5" aria-label="Open filters">
+                             <button onClick={() => setIsSidebarOpen(true)} className="border border-rule-10 bg-white/5 p-2 text-secondary-foreground transition-colors hover:bg-white/5" aria-label="Open filters">
                                 <Filter className="h-4 w-4" />
                             </button>
                         </div>
@@ -1082,7 +1082,7 @@ export function ScreenerDashboard() {
                         </Link>
                     </div>
 
-                    <div className="flex w-full max-w-full flex-1 overflow-x-auto border border-rule-6 bg-white/5 p-0.5 no-scrollbar md:min-w-0 md:w-auto">
+                    <div className="flex w-full max-w-full flex-1 overflow-x-auto border border-rule-10 bg-white/5 p-0.5 no-scrollbar md:min-w-0 md:w-auto">
                         {(['US', 'Korea', 'Taiwan'] as Market[]).map((m) => (
                             <button
                                 key={m}
@@ -1106,7 +1106,7 @@ export function ScreenerDashboard() {
                         <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
                             <button 
                                 onClick={() => setIsLogOpen(true)} 
-                                className="flex items-center gap-1.5 border border-rule-6 bg-white/5 px-3 py-2 text-xs font-bold text-ink-q transition-all duration-300 hover:bg-white/5 hover:text-ink active:scale-95"
+                                className="flex items-center gap-1.5 border border-rule-10 bg-white/5 px-3 py-2 text-xs font-bold text-ink-q transition-all duration-300 hover:bg-white/5 hover:text-ink active:scale-95"
                                 aria-label="Open system logs"
                             >
                                 <div className="relative">
@@ -1124,7 +1124,7 @@ export function ScreenerDashboard() {
                             <input
                                 type="text"
                                 placeholder={t('searchPlaceholder')}
-                                className="w-full border border-rule-6 bg-white/5 py-2 pl-9 pr-3 text-sm transition-all focus:bg-white/5 focus:outline-none focus:ring-1 focus:ring-primary"
+                                className="w-full border border-rule-10 bg-white/5 py-2 pl-9 pr-3 text-sm transition-all focus:bg-white/5 focus:outline-none focus:ring-1 focus:ring-primary"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -1156,7 +1156,7 @@ export function ScreenerDashboard() {
                                         "h-full  border p-3 text-left transition-all",
                                         isActive
                                             ? "border-accent/70 bg-accent/10 "
-                                            : "border-rule-6 bg-surface hover:border-accent/40 hover:bg-white/5"
+                                            : "border-rule-10 bg-surface hover:border-accent/40 hover:bg-white/5"
                                     )}>
                                         <div className="flex items-center gap-3">
                                             <div className={clsx("shrink-0  border p-2", meta.accent)}>
@@ -1270,7 +1270,7 @@ export function ScreenerDashboard() {
                                         </span>
                                     </div>
                                 </div>
-                                <button onClick={() => dismissBatchPanel()} className="w-fit border border-rule-6 px-3.5 py-2 text-base font-bold text-ink-2 transition-colors hover:bg-white/5 hover:text-ink">Dismiss</button>
+                                <button onClick={() => dismissBatchPanel()} className="w-fit border border-rule-10 px-3.5 py-2 text-base font-bold text-ink-2 transition-colors hover:bg-white/5 hover:text-ink">Dismiss</button>
                             </div>
                             {batchProgress && (
                                 <div className="mt-3 grid grid-cols-3 gap-2">
@@ -1304,7 +1304,7 @@ export function ScreenerDashboard() {
                             )}
                         </div>
                     )}
-                    <div className="mb-4 border border-rule-6 bg-surface p-4">
+                    <div className="mb-4 border border-rule-10 bg-surface p-4">
                         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                             <div className="min-w-0">
                                 <div className="flex flex-wrap items-center gap-2">
@@ -1318,12 +1318,12 @@ export function ScreenerDashboard() {
                                 {visibleFilterChips.length > 0 && (
                                     <div className="mt-2 flex flex-wrap items-center gap-1.5">
                                         {visibleFilterChips.map((chip) => (
-                                            <span key={chip} className="border border-rule-6 bg-white/5 px-2.5 py-1 text-xs font-bold text-ink-2">
+                                            <span key={chip} className="border border-rule-10 bg-white/5 px-2.5 py-1 text-xs font-bold text-ink-2">
                                                 {chip}
                                             </span>
                                         ))}
                                         {hiddenFilterChipCount > 0 && (
-                                            <span className="border border-rule-6 bg-white/5 px-2.5 py-1 text-xs font-bold text-ink-2">
+                                            <span className="border border-rule-10 bg-white/5 px-2.5 py-1 text-xs font-bold text-ink-2">
                                                 +{hiddenFilterChipCount} {t('more')}
                                             </span>
                                         )}
@@ -1343,7 +1343,7 @@ export function ScreenerDashboard() {
                                     <SummaryMetric label={t('results')} value={filteredCount.toLocaleString()} />
                                     <SummaryMetric label={t('sortedBy')} value={activeMetric} />
                                 </div>
-                                <div className="grid grid-cols-2 border border-rule-6 bg-white/5 p-1">
+                                <div className="grid grid-cols-2 border border-rule-10 bg-white/5 p-1">
                                     <button
                                         type="button"
                                         onClick={() => setResultView('cards')}
@@ -1376,7 +1376,7 @@ export function ScreenerDashboard() {
                     {(loading && rawResults.length === 0) || isYoutubeUniverseLoading ? (
                         <LoadingResultsState title={t('initEngine')} strategy={activeStrategy.title} view={resultView} />
                     ) : filteredCount === 0 ? (
-                        <div className="flex min-h-72 flex-col items-center justify-center border border-dashed border-rule-9 bg-surface p-8 text-center text-ink-2">
+                        <div className="flex min-h-72 flex-col items-center justify-center border border-dashed border-rule-14 bg-surface p-8 text-center text-ink-2">
                             <span className={clsx(" border px-3 py-1.5 text-base font-extrabold uppercase tracking-wider", activeStrategy.accent)}>
                                 {activeStrategy.title}
                             </span>
@@ -1390,12 +1390,12 @@ export function ScreenerDashboard() {
                             {visibleFilterChips.length > 0 && (
                                 <div className="mt-4 flex max-w-2xl flex-wrap justify-center gap-2">
                                     {visibleFilterChips.map((chip) => (
-                                        <span key={chip} className="border border-rule-6 bg-white/5 px-3 py-1.5 text-base font-extrabold text-ink-2">
+                                        <span key={chip} className="border border-rule-10 bg-white/5 px-3 py-1.5 text-base font-extrabold text-ink-2">
                                             {chip}
                                         </span>
                                     ))}
                                     {hiddenFilterChipCount > 0 && (
-                                        <span className="border border-rule-6 bg-white/5 px-3 py-1.5 text-base font-extrabold text-ink-2">
+                                        <span className="border border-rule-10 bg-white/5 px-3 py-1.5 text-base font-extrabold text-ink-2">
                                             +{hiddenFilterChipCount} {t('more')}
                                         </span>
                                     )}
@@ -1406,7 +1406,7 @@ export function ScreenerDashboard() {
                     ) : (
                         <>
                             {screenMode === 'paradigm' && (
-                                <div className="mb-4 border border-rule-14 bg-white/5] p-3">
+                                <div className="mb-4 border border-rule-24 bg-white/5] p-3">
                                     <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                                         <div>
                                             <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
@@ -1420,7 +1420,7 @@ export function ScreenerDashboard() {
                                         <button
                                             type="button"
                                             onClick={() => setShowParadigmSnapshot(value => !value)}
-                                            className="w-full border border-rule-14 bg-white/5 px-3 py-2 text-xs font-extrabold uppercase tracking-wide text-ink-2 transition-colors hover:bg-white/5 sm:w-auto"
+                                            className="w-full border border-rule-24 bg-white/5 px-3 py-2 text-xs font-extrabold uppercase tracking-wide text-ink-2 transition-colors hover:bg-white/5 sm:w-auto"
                                         >
                                             {showParadigmSnapshot ? "Hide Snapshot" : "View Current Snapshot"}
                                         </button>
@@ -1435,9 +1435,9 @@ export function ScreenerDashboard() {
                                     </div>
 
                                     {paradigmRealChangeEvents.length > 0 ? (
-                                        <div className="overflow-x-auto border border-rule-6 bg-page">
+                                        <div className="overflow-x-auto border border-rule-10 bg-page">
                                             <table className="w-full min-w-[760px] text-left text-xs">
-                                                <thead className="border-b border-rule-6 bg-white/5 text-xs uppercase tracking-wider text-ink-2">
+                                                <thead className="border-b border-rule-10 bg-white/5 text-xs uppercase tracking-wider text-ink-2">
                                                     <tr>
                                                         <th className="px-3 py-2">Ticker</th>
                                                         <th className="px-3 py-2">Direction</th>
@@ -1469,13 +1469,13 @@ export function ScreenerDashboard() {
                                             </table>
                                         </div>
                                     ) : (
-                                        <div className="border border-rule-6 bg-page px-3 py-2 text-sm font-semibold text-ink-2">
+                                        <div className="border border-rule-10 bg-page px-3 py-2 text-sm font-semibold text-ink-2">
                                             Baseline is active. No Paradigm upgrades, downgrades, or theme changes have been recorded since tracking started.
                                         </div>
                                     )}
 
                                     {showParadigmSnapshot && (
-                                        <div className="mt-3 border border-rule-14 bg-page p-3">
+                                        <div className="mt-3 border border-rule-24 bg-page p-3">
                                             <div className="mb-3 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
                                                 <div>
                                                     <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">Current Snapshot</div>
@@ -1488,12 +1488,12 @@ export function ScreenerDashboard() {
                                                         value={paradigmSnapshotSearch}
                                                         onChange={(event) => setParadigmSnapshotSearch(event.target.value)}
                                                         placeholder="Search ticker, name, theme..."
-                                                        className="border border-rule-6 bg-page px-3 py-2 text-xs font-semibold text-ink outline-none focus:border-purple-400"
+                                                        className="border border-rule-10 bg-page px-3 py-2 text-xs font-semibold text-ink outline-none focus:border-purple-400"
                                                     />
                                                     <select
                                                         value={paradigmSnapshotBand}
                                                         onChange={(event) => setParadigmSnapshotBand(event.target.value)}
-                                                        className="border border-rule-6 bg-page px-3 py-2 text-xs font-bold text-ink outline-none focus:border-purple-400"
+                                                        className="border border-rule-10 bg-page px-3 py-2 text-xs font-bold text-ink outline-none focus:border-purple-400"
                                                     >
                                                         <option value="all">All bands</option>
                                                         <option value="high">Strong</option>
@@ -1503,7 +1503,7 @@ export function ScreenerDashboard() {
                                                     <select
                                                         value={paradigmSnapshotTheme}
                                                         onChange={(event) => setParadigmSnapshotTheme(event.target.value)}
-                                                        className="border border-rule-6 bg-page px-3 py-2 text-xs font-bold text-ink outline-none focus:border-purple-400"
+                                                        className="border border-rule-10 bg-page px-3 py-2 text-xs font-bold text-ink outline-none focus:border-purple-400"
                                                     >
                                                         <option value="all">All themes</option>
                                                         {paradigmSnapshotThemes.map(theme => (
@@ -1512,9 +1512,9 @@ export function ScreenerDashboard() {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div className="max-h-80 overflow-auto border border-rule-6">
+                                            <div className="max-h-80 overflow-auto border border-rule-10">
                                                 <table className="w-full min-w-[760px] text-left text-xs">
-                                                    <thead className="sticky top-0 border-b border-rule-6 bg-white/5 text-xs uppercase tracking-wider text-ink-2">
+                                                    <thead className="sticky top-0 border-b border-rule-10 bg-white/5 text-xs uppercase tracking-wider text-ink-2">
                                                         <tr>
                                                             <th className="px-3 py-2">Ticker</th>
                                                             <th className="px-3 py-2">Company</th>
@@ -1572,7 +1572,7 @@ export function ScreenerDashboard() {
                                                         "absolute top-2 right-2 z-20 w-6 h-6  border-2 flex items-center justify-center transition-all",
                                                         selectedTickers.has(result.candidate.symbol)
                                                             ? "bg-pos border-pos text-surface"
-                                                            : "bg-page border-rule-6 hover:border-emerald-400"
+                                                            : "bg-page border-rule-10 hover:border-emerald-400"
                                                     )}
                                                     aria-label={`${selectedTickers.has(result.candidate.symbol) ? 'Deselect' : 'Select'} ${result.candidate.symbol}`}
                                                 >
@@ -1615,7 +1615,7 @@ export function ScreenerDashboard() {
                             {/* Pagination Controls */}
                             {totalPages > 1 && (
                                 <div className="pb-8">
-                                    <div className="mx-auto flex max-w-4xl flex-col gap-3 border border-rule-6 bg-surface p-4 sm:flex-row sm:items-center sm:justify-between">
+                                    <div className="mx-auto flex max-w-4xl flex-col gap-3 border border-rule-10 bg-surface p-4 sm:flex-row sm:items-center sm:justify-between">
                                         <div className="text-center sm:text-left">
                                             <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{t('page')} {currentPage} {t('of')} {totalPages}</div>
                                             <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
@@ -1623,7 +1623,7 @@ export function ScreenerDashboard() {
                                                     {filteredCount > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredCount)}
                                                 </span>
                                                 <span className="text-base font-bold text-ink-2">{t('of')} {filteredCount.toLocaleString()} {t('results')}</span>
-                                                <span className="border border-rule-6 bg-white/5 px-2.5 py-1.5 text-base font-extrabold text-ink-2">
+                                                <span className="border border-rule-10 bg-white/5 px-2.5 py-1.5 text-base font-extrabold text-ink-2">
                                                     {ITEMS_PER_PAGE} / {t('perPage')}
                                                 </span>
                                             </div>
@@ -1632,7 +1632,7 @@ export function ScreenerDashboard() {
                                             <button
                                                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                                                 disabled={currentPage === 1}
-                                                className="border border-rule-9 bg-white/5 px-4 py-3 text-base font-extrabold transition-colors hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-45"
+                                                className="border border-rule-14 bg-white/5 px-4 py-3 text-base font-extrabold transition-colors hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-45"
                                             >
                                                 {t('previous')}
                                             </button>
@@ -1645,7 +1645,7 @@ export function ScreenerDashboard() {
                                                         "flex h-11 min-w-11 items-center justify-center  px-3 text-base font-extrabold transition-colors",
                                                         currentPage === p
                                                             ? 'border border-pos/40 bg-pos/10 text-pos '
-                                                            : 'border border-rule-6 bg-white/5 text-ink-2 hover:bg-white/5 hover:text-ink'
+                                                            : 'border border-rule-10 bg-white/5 text-ink-2 hover:bg-white/5 hover:text-ink'
                                                     )}
                                                 >
                                                     {p}
@@ -1655,7 +1655,7 @@ export function ScreenerDashboard() {
                                             <button
                                                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                                                 disabled={currentPage === totalPages}
-                                                className="border border-rule-9 bg-white/5 px-4 py-3 text-base font-extrabold transition-colors hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-45"
+                                                className="border border-rule-14 bg-white/5 px-4 py-3 text-base font-extrabold transition-colors hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-45"
                                             >
                                                 {t('next')}
                                             </button>
@@ -1682,8 +1682,8 @@ export function ScreenerDashboard() {
             {/* AI Modal Overlay */}
             {aiModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-end justify-center bg-page animate-in fade-in duration-200 sm:items-center sm:p-3">
-                    <div className="flex h-[94vh] w-full flex-col overflow-hidden -xl border border-rule-9 bg-surface sm:h-[90vh] sm:max-w-[92vw] sm: lg:max-w-5xl">
-                        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-rule-9 bg-white/5 p-3 sm:p-4">
+                    <div className="flex h-[94vh] w-full flex-col overflow-hidden -xl border border-rule-14 bg-surface sm:h-[90vh] sm:max-w-[92vw] sm: lg:max-w-5xl">
+                        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-rule-14 bg-white/5 p-3 sm:p-4">
                             <div className="min-w-0">
                                 <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-ink-2">Research handoff</p>
                                 <h3 className="mt-0.5 text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
@@ -1712,8 +1712,8 @@ export function ScreenerDashboard() {
                                     </div>
                                     <div className="grid min-h-[260px] flex-1 grid-cols-1 gap-3 sm:min-h-[300px]">
                                         {/* Prompt Box */}
-                                        <div className="relative flex-1 bg-page border border-rule-9 overflow-hidden flex flex-col">
-                                            <div className="flex shrink-0 flex-col gap-2 border-b border-rule-9 bg-white/5 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between">
+                                        <div className="relative flex-1 bg-page border border-rule-14 overflow-hidden flex flex-col">
+                                            <div className="flex shrink-0 flex-col gap-2 border-b border-rule-14 bg-white/5 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between">
                                                 <div>
                                                     <span className="font-mono text-xs font-semibold uppercase tracking-wider text-ink-2">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
                                                     <p className="mt-0.5 text-sm text-ink-2">Prepared analysis packet for valuation, scenarios, risks, and final verdict.</p>
@@ -1769,7 +1769,7 @@ export function ScreenerDashboard() {
                                             </div>
                                         )}
                                     </div>
-                                    <div className="shrink-0 border border-rule-6 bg-white/5 p-3">
+                                    <div className="shrink-0 border border-rule-10 bg-white/5 p-3">
                                         <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
                                             <div>
                                                 <div className="text-xs font-extrabold uppercase tracking-[0.16em] text-ink-2">Choose output path</div>
@@ -1778,50 +1778,50 @@ export function ScreenerDashboard() {
                                             <div className="text-xs font-bold text-ink-2">Prompt is ready to export</div>
                                         </div>
                                         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
-                                            <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#1A73E8]/90 px-3 py-2.5 text-surface transition-all hover:bg-[#1557B0] active:scale-95">
+                                            <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#1A73E8]/90 px-3 py-2.5 text-ink transition-all hover:bg-[#1557B0] active:scale-95">
                                             <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="h-7 w-7 shrink-0 bg-white p-1" />
                                             <span className="min-w-0">
                                                 <span className="block text-sm font-extrabold tracking-tight">Gemini</span>
-                                                <span className="mt-0.5 block text-xs font-bold text-surface/80">Open manual chat</span>
+                                                <span className="mt-0.5 block text-xs font-bold text-ink/80">Open manual chat</span>
                                             </span>
                                             </a>
-                                            <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#D97757]/90 px-3 py-2.5 text-surface transition-all hover:bg-[#C26547] active:scale-95">
+                                            <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#D97757]/90 px-3 py-2.5 text-ink transition-all hover:bg-[#C26547] active:scale-95">
                                             <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="h-7 w-7 shrink-0 bg-white p-1" />
                                             <span className="min-w-0">
                                                 <span className="block text-sm font-extrabold tracking-tight">Claude</span>
-                                                <span className="mt-0.5 block text-xs font-bold text-surface/80">Open manual chat</span>
+                                                <span className="mt-0.5 block text-xs font-bold text-ink/80">Open manual chat</span>
                                             </span>
                                             </a>
-                                            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#10A37F]/90 px-3 py-2.5 text-surface transition-all hover:bg-[#0E906F] active:scale-95">
+                                            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#10A37F]/90 px-3 py-2.5 text-ink transition-all hover:bg-[#0E906F] active:scale-95">
                                             <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="h-7 w-7 shrink-0 bg-white p-1" />
                                             <span className="min-w-0">
                                                 <span className="block text-sm font-extrabold tracking-tight">ChatGPT</span>
-                                                <span className="mt-0.5 block text-xs font-bold text-surface/80">Open manual chat</span>
+                                                <span className="mt-0.5 block text-xs font-bold text-ink/80">Open manual chat</span>
                                             </span>
                                             </a>
                                             {showDsPassword ? (
                                                 <div className="flex min-h-16 flex-col justify-center gap-2 border border-[#4d6bfe]/40 bg-[#4d6bfe]/20 px-3 py-2.5">
                                                     <div>
                                                         <div className="text-xs font-extrabold uppercase tracking-wider text-accent">Protected run</div>
-                                                        <div className="mt-0.5 text-xs font-semibold text-surface/75">Enter the workflow password to generate and save a report.</div>
+                                                        <div className="mt-0.5 text-xs font-semibold text-ink-2">Enter the workflow password to generate and save a report.</div>
                                                     </div>
                                                     <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full border border-white/15 bg-page px-3 py-2 text-sm font-bold text-ink focus:outline-none focus:ring-2 focus:ring-[#4d6bfe]/50" />
                                                     <div className="grid grid-cols-2 gap-2">
-                                                        <button onClick={() => setShowDsPassword(false)} disabled={dsLoading} className="border border-white/15 bg-white/5 px-3 py-2 text-sm font-bold text-surface/80 transition-colors hover:bg-white/10 disabled:opacity-50">
+                                                        <button onClick={() => setShowDsPassword(false)} disabled={dsLoading} className="border border-white/15 bg-white/5 px-3 py-2 text-sm font-bold text-ink/80 transition-colors hover:bg-white/10 disabled:opacity-50">
                                                             Cancel
                                                         </button>
-                                                        <button onClick={handleDeepseekRun} disabled={dsLoading} className="bg-[#4d6bfe] px-3 py-2 text-sm font-extrabold text-surface transition-colors hover:bg-[#3b54d1] disabled:opacity-60">
+                                                        <button onClick={handleDeepseekRun} disabled={dsLoading} className="bg-[#4d6bfe] px-3 py-2 text-sm font-extrabold text-ink transition-colors hover:bg-[#3b54d1] disabled:opacity-60">
                                                             {dsLoading ? "Running..." : "Run Deepseek"}
                                                         </button>
                                                     </div>
                                                     {dsError && <span className="border border-danger/30 bg-danger/10 px-3 py-2 text-xs font-bold text-neg">{dsError}</span>}
                                                 </div>
                                             ) : (
-                                                <button onClick={() => setShowDsPassword(true)} className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#4d6bfe]/90 px-3 py-2.5 text-left text-surface transition-all hover:bg-[#3b54d1] active:scale-95">
+                                                <button onClick={() => setShowDsPassword(true)} className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#4d6bfe]/90 px-3 py-2.5 text-left text-ink transition-all hover:bg-[#3b54d1] active:scale-95">
                                                 <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" alt="Deepseek" className="h-7 w-7 shrink-0 bg-white p-1" />
                                                 <span className="min-w-0">
                                                     <span className="block text-sm font-extrabold tracking-tight">Deepseek V4.0 Pro</span>
-                                                    <span className="mt-0.5 block text-xs font-bold text-surface/80">Run protected workflow</span>
+                                                    <span className="mt-0.5 block text-xs font-bold text-ink/80">Run protected workflow</span>
                                                 </span>
                                                 </button>
                                             )}
@@ -1837,7 +1837,7 @@ export function ScreenerDashboard() {
             {/* Phase 11d: Batch Password Prompt */}
             {showBatchPassword && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-page">
-                    <div className="w-full max-w-md animate-in zoom-in-95 border border-rule-6 bg-surface p-6">
+                    <div className="w-full max-w-md animate-in zoom-in-95 border border-rule-10 bg-surface p-6">
                         <div className="flex items-start gap-3">
                             <div className="border border-pos/40 bg-pos/10 p-3 text-pos">
                                 <Sparkles className="h-6 w-6" />
@@ -1861,14 +1861,14 @@ export function ScreenerDashboard() {
                             placeholder="Password"
                             value={dsPassword}
                             onChange={(e) => setDsPassword(e.target.value)}
-                            className="mb-4 w-full border border-rule-9 bg-white/5 px-3.5 py-3 text-base focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                            className="mb-4 w-full border border-rule-14 bg-white/5 px-3.5 py-3 text-base focus:outline-none focus:ring-1 focus:ring-emerald-500"
                             onKeyDown={(e) => { if (e.key === 'Enter' && dsPassword) { setShowBatchPassword(false); setShowBatchConfirm(true); } }}
                         />
                         <div className="mb-4 border border-pos/40 bg-pos/10 px-3.5 py-3 text-base font-semibold leading-relaxed text-pos">
                             Nothing is dispatched yet. The next screen shows the final queue count before workers start.
                         </div>
                         <div className="flex gap-3">
-                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 border border-rule-9 bg-muted px-3.5 py-3 text-base font-bold text-ink-2 transition-colors hover:bg-white/5">Cancel</button>
+                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 border border-rule-14 bg-muted px-3.5 py-3 text-base font-bold text-ink-2 transition-colors hover:bg-white/5">Cancel</button>
                             <button
                                 onClick={() => { setShowBatchPassword(false); setShowBatchConfirm(true); }}
                                 disabled={!dsPassword}
@@ -1882,7 +1882,7 @@ export function ScreenerDashboard() {
             {/* Phase 11d: Batch Confirm Dialog */}
             {showBatchConfirm && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-page">
-                    <div className="w-full max-w-lg animate-in zoom-in-95 border border-rule-6 bg-surface p-6">
+                    <div className="w-full max-w-lg animate-in zoom-in-95 border border-rule-10 bg-surface p-6">
                         <div className="flex items-start gap-3">
                             <div className="border border-pos/40 bg-pos/10 p-3 text-pos">
                                 <Sparkles className="h-6 w-6" />
@@ -1892,7 +1892,7 @@ export function ScreenerDashboard() {
                                     <span className="border border-pos/40 bg-pos/10 px-2.5 py-1 text-base font-extrabold uppercase tracking-wider text-pos">
                                         Step 2 of 2
                                     </span>
-                                    <span className="border border-rule-6 bg-white/5 px-2.5 py-1 text-base font-extrabold uppercase tracking-wider text-ink-2">
+                                    <span className="border border-rule-10 bg-white/5 px-2.5 py-1 text-base font-extrabold uppercase tracking-wider text-ink-2">
                                         Final review
                                     </span>
                                 </div>
@@ -1913,7 +1913,7 @@ export function ScreenerDashboard() {
                         <div className="flex gap-3">
                             <button
                                 onClick={() => setShowBatchConfirm(false)}
-                                className="flex-1 border border-rule-9 bg-muted px-3.5 py-3 text-base font-bold text-ink-2 transition-colors hover:bg-white/5"
+                                className="flex-1 border border-rule-14 bg-muted px-3.5 py-3 text-base font-bold text-ink-2 transition-colors hover:bg-white/5"
                             >
                                 Cancel
                             </button>
@@ -1993,7 +1993,7 @@ export function ScreenerDashboard() {
                                     )}>
                                         {backgroundDsTask.status === 'running' ? 'Running' : backgroundDsTask.status === 'error' ? 'Error' : 'Complete'}
                                     </span>
-                                    <span className="border border-rule-6 bg-white/5 px-2.5 py-1 font-mono text-base font-extrabold text-ink">
+                                    <span className="border border-rule-10 bg-white/5 px-2.5 py-1 font-mono text-base font-extrabold text-ink">
                                         {backgroundDsTask.ticker}
                                     </span>
                                 </div>
@@ -2015,8 +2015,8 @@ export function ScreenerDashboard() {
             {/* Help Modal */}
             {showHelp && (
                 <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/60" onClick={() => setShowHelp(false)}>
-                    <div className="bg-surface border border-rule-6 max-w-4xl w-full max-h-[84vh] overflow-y-auto p-6 md:p-8" onClick={e => e.stopPropagation()}>
-                        <div className="flex items-start justify-between gap-4 border-b border-rule-6 pb-5">
+                    <div className="bg-surface border border-rule-10 max-w-4xl w-full max-h-[84vh] overflow-y-auto p-6 md:p-8" onClick={e => e.stopPropagation()}>
+                        <div className="flex items-start justify-between gap-4 border-b border-rule-10 pb-5">
                             <div>
                                 <p className="text-base font-extrabold uppercase tracking-[0.18em] text-ink-2">{t('scoringGuide')}</p>
                                 <h2 className="mt-1 text-2xl font-extrabold tracking-tight text-ink">{t('scoringGuideTitle')}</h2>
@@ -2024,7 +2024,7 @@ export function ScreenerDashboard() {
                                     {t('scoringGuideBody')}
                                 </p>
                             </div>
-                            <button onClick={() => setShowHelp(false)} className="border border-rule-6 p-2.5 text-ink-2 transition-colors hover:bg-white/5 hover:text-ink" aria-label={t('closeScoringGuide')}>
+                            <button onClick={() => setShowHelp(false)} className="border border-rule-10 p-2.5 text-ink-2 transition-colors hover:bg-white/5 hover:text-ink" aria-label={t('closeScoringGuide')}>
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
@@ -2061,7 +2061,7 @@ export function ScreenerDashboard() {
                             />
                         </div>
 
-                        <div className="mt-6 border border-rule-6 bg-white/5 p-5">
+                        <div className="mt-6 border border-rule-10 bg-white/5 p-5">
                             <h3 className="text-lg font-extrabold text-ink">{t('reverseStagesTitle')}</h3>
                             <div className="mt-4 grid gap-3 text-base leading-relaxed text-ink-2 md:grid-cols-2">
                                 <StageLine label="0-1" text={t('reverseStage01')} />
@@ -2073,7 +2073,7 @@ export function ScreenerDashboard() {
                             </div>
                         </div>
 
-                        <div className="mt-6 border border-rule-14 bg-white/5] p-5">
+                        <div className="mt-6 border border-rule-24 bg-white/5] p-5">
                             <h3 className="text-lg font-extrabold text-ink-2">{t('paradigmSignalTitle')}</h3>
                             <div className="mt-3 grid gap-3 text-base leading-relaxed text-ink-2 md:grid-cols-3">
                                 <HelpPillar title={t('paradigmMembershipTitle')} text={t('paradigmMembershipText')} />
@@ -2082,7 +2082,7 @@ export function ScreenerDashboard() {
                             </div>
                         </div>
 
-                        <div className="mt-6 border border-rule-6 bg-surface p-5 text-base leading-relaxed text-ink-2">
+                        <div className="mt-6 border border-rule-10 bg-surface p-5 text-base leading-relaxed text-ink-2">
                             <h3 className="text-lg font-extrabold text-ink">{t('honestLimitationsTitle')}</h3>
                             <p className="mt-2">
                                 {t('honestLimitationsText')}
@@ -2099,7 +2099,7 @@ export function ScreenerDashboard() {
 
 function HelpCard({ index, title, body }: { index: string; title: string; body: string }) {
     return (
-        <div className="border border-rule-6 bg-white/5 p-4">
+        <div className="border border-rule-10 bg-white/5 p-4">
             <div className="flex items-start gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-accent/25 bg-accent/10 font-mono text-base font-extrabold text-accent">
                     {index}
@@ -2129,7 +2129,7 @@ function WorkflowStep({ label, title, text }: { label: string; title: string; te
 
 function StageLine({ label, text }: { label: string; text: string }) {
     return (
-        <div className="flex gap-3 border border-rule-6 bg-page p-3">
+        <div className="flex gap-3 border border-rule-10 bg-page p-3">
             <span className="flex h-10 min-w-10 items-center justify-center bg-accent/10 font-mono text-base font-extrabold text-accent">
                 {label}
             </span>
@@ -2140,7 +2140,7 @@ function StageLine({ label, text }: { label: string; text: string }) {
 
 function HelpPillar({ title, text }: { title: string; text: string }) {
     return (
-        <div className="border border-rule-14 bg-page p-3">
+        <div className="border border-rule-24 bg-page p-3">
             <h4 className="font-extrabold text-ink-2">{title}</h4>
             <p className="mt-1">{text}</p>
         </div>
@@ -2149,7 +2149,7 @@ function HelpPillar({ title, text }: { title: string; text: string }) {
 
 function SummaryMetric({ label, value }: { label: string; value: string | number }) {
     return (
-        <div className="border border-rule-6 bg-white/5 px-3 py-2">
+        <div className="border border-rule-10 bg-white/5 px-3 py-2">
             <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
             <div className="mt-0.5 truncate font-mono text-base font-extrabold text-ink" title={String(value)}>{value}</div>
         </div>
@@ -2160,11 +2160,11 @@ function ParadigmMonitorStat({ label, value, tone }: { label: string; value: num
     return (
         <div className={clsx(
             " border px-3 py-2",
-            tone === "purple" && "border-rule-14 bg-white/5 text-ink-2",
+            tone === "purple" && "border-rule-24 bg-white/5 text-ink-2",
             tone === "green" && "border-pos/40 bg-pos/10 text-pos",
             tone === "red" && "border-neg/40 bg-neg/10 text-neg",
             tone === "blue" && "border-accent/40 bg-accent/10 text-accent",
-            tone === "muted" && "border-rule-6 bg-white/5 text-ink"
+            tone === "muted" && "border-rule-10 bg-white/5 text-ink"
         )}>
             <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
             <div className="mt-0.5 font-mono text-base font-extrabold">{value.toLocaleString()}</div>
@@ -2174,7 +2174,7 @@ function ParadigmMonitorStat({ label, value, tone }: { label: string; value: num
 
 function EmptyStateStat({ label, value }: { label: string; value: string | number }) {
     return (
-        <div className="border border-rule-6 bg-white/5 px-4 py-3">
+        <div className="border border-rule-10 bg-white/5 px-4 py-3">
             <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
             <div className="mt-1 truncate font-mono text-xl font-extrabold text-ink" title={String(value)}>{value}</div>
         </div>
@@ -2183,7 +2183,7 @@ function EmptyStateStat({ label, value }: { label: string; value: string | numbe
 
 function DialogStat({ label, value }: { label: string; value: string | number }) {
     return (
-        <div className="border border-rule-6 bg-white/5 px-3.5 py-3">
+        <div className="border border-rule-10 bg-white/5 px-3.5 py-3">
             <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
             <div className="mt-1 truncate font-mono text-lg font-extrabold text-ink" title={String(value)}>{value}</div>
         </div>
@@ -2201,7 +2201,7 @@ function BatchMiniStat({ label, value }: { label: string; value: string | number
 
 function LoadingResultsState({ title, strategy, view }: { title: string; strategy: string; view: ResultView }) {
     return (
-        <div className="border border-rule-6 bg-surface p-5 sm:p-6">
+        <div className="border border-rule-10 bg-surface p-5 sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-3">
                     <div className="border border-accent/30 bg-accent/10 p-3 text-accent">
@@ -2214,13 +2214,13 @@ function LoadingResultsState({ title, strategy, view }: { title: string; strateg
                         </p>
                     </div>
                 </div>
-                <span className="w-fit border border-rule-6 bg-white/5 px-3 py-1.5 text-base font-extrabold uppercase tracking-wider text-ink-2">
+                <span className="w-fit border border-rule-10 bg-white/5 px-3 py-1.5 text-base font-extrabold uppercase tracking-wider text-ink-2">
                     Preparing view
                 </span>
             </div>
             <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
                 {[0, 1, 2].map((item) => (
-                    <div key={item} className="border border-rule-6 bg-white/5 p-4">
+                    <div key={item} className="border border-rule-10 bg-white/5 p-4">
                         <div className="flex items-start justify-between gap-4">
                             <div className="space-y-3">
                                 <div className="h-6 w-24 animate-pulse bg-white/5" />
@@ -2243,7 +2243,7 @@ function LoadingResultsState({ title, strategy, view }: { title: string; strateg
 
 function PromptStat({ label, value, sub }: { label: string; value: string; sub: string }) {
     return (
-        <div className="border border-rule-6 bg-white/5 p-3">
+        <div className="border border-rule-10 bg-white/5 p-3">
             <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
             <div className="mt-0.5 truncate font-mono text-base font-extrabold text-ink" title={value}>{value}</div>
             <div className="mt-0.5 truncate text-xs font-semibold text-ink-2" title={sub}>{sub}</div>
@@ -2272,8 +2272,8 @@ function ResultsTable({
     const lensMeta = getTableLensMeta(screenMode);
 
     return (
-        <div className="mb-8 overflow-hidden border border-rule-6 bg-surface">
-            <div className="flex flex-col gap-1 border-b border-rule-6 bg-white/5 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-8 overflow-hidden border border-rule-10 bg-surface">
+            <div className="flex flex-col gap-1 border-b border-rule-10 bg-white/5 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                     <h3 className="text-lg font-extrabold text-ink">Scan Table</h3>
                     <p className="text-base text-ink-2">Dense view for comparing the current page by {lensMeta.label}.</p>
@@ -2288,7 +2288,7 @@ function ResultsTable({
             <div className="overflow-x-auto">
                 <table className="w-full min-w-[1240px] border-collapse text-left">
                     <thead className="sticky top-0 z-[1] bg-surface">
-                        <tr className="border-b border-rule-6">
+                        <tr className="border-b border-rule-10">
                             {screenMode === 'reverse' && <TableHead className="w-14">Pick</TableHead>}
                             <TableHead>Stock</TableHead>
                             <TableHead>Sector / Industry</TableHead>
@@ -2321,7 +2321,7 @@ function ResultsTable({
                                 <tr
                                     key={symbol}
                                     onClick={() => onOpen(result)}
-                                    className="group/row cursor-pointer border-b border-rule-6 transition-colors odd:bg-page hover:bg-primary/[0.06]"
+                                    className="group/row cursor-pointer border-b border-rule-10 transition-colors odd:bg-page hover:bg-primary/[0.06]"
                                 >
                                     {screenMode === 'reverse' && (
                                         <td className="px-4 py-3 align-middle">
@@ -2335,7 +2335,7 @@ function ResultsTable({
                                                     "flex h-8 w-8 items-center justify-center  border-2 transition-all",
                                                     selectedTickers.has(symbol)
                                                         ? "border-pos bg-pos text-surface"
-                                                        : "border-rule-6 bg-page hover:border-emerald-400"
+                                                        : "border-rule-10 bg-page hover:border-emerald-400"
                                                 )}
                                                 aria-label={`${selectedTickers.has(symbol) ? 'Deselect' : 'Select'} ${symbol}`}
                                             >
@@ -2345,7 +2345,7 @@ function ResultsTable({
                                     )}
                                     <td className="px-4 py-4 align-middle">
                                         <div className="flex min-w-0 items-center gap-3">
-                                            <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-rule-6 bg-white/5 font-mono text-lg font-extrabold text-accent transition-colors group-hover/row:border-accent/50 group-hover/row:bg-accent/10">
+                                            <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-rule-10 bg-white/5 font-mono text-lg font-extrabold text-accent transition-colors group-hover/row:border-accent/50 group-hover/row:bg-accent/10">
                                                 {ticker.slice(0, 2)}
                                             </span>
                                             <div className="min-w-0">
@@ -2474,7 +2474,7 @@ function TableBadge({ children, tone }: { children: ReactNode; tone: 'success' |
             tone === 'success' && "border-pos/40 bg-pos/10 text-pos",
             tone === 'warning' && "border-warn/40 bg-warn/10 text-warn",
             tone === 'primary' && "border-accent/40 bg-accent/10 text-accent",
-            tone === 'muted' && "border-rule-6 bg-white/5 text-ink-2",
+            tone === 'muted' && "border-rule-10 bg-white/5 text-ink-2",
         )}>
             {children}
         </span>
@@ -2485,7 +2485,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
     const toneClass = {
         sky: active ? "border-accent/40 bg-accent/10 text-accent" : "hover:border-accent/40",
         emerald: active ? "border-pos/40 bg-pos/10 text-pos" : "hover:border-pos/40",
-        purple: active ? "border-rule-14 bg-white/5 text-ink-2" : "hover:border-rule-14",
+        purple: active ? "border-rule-24 bg-white/5 text-ink-2" : "hover:border-rule-24",
         red: active ? "border-neg/40 bg-neg/10 text-neg" : "hover:border-neg/40",
     }[tone];
 
@@ -2497,7 +2497,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
             </div>
             <p className="mt-1 truncate text-xs leading-snug text-ink-2" title={detail}>{detail}</p>
             {onClick && (
-                <div className="mt-2 flex items-center justify-between border-t border-rule-6 pt-1.5 text-xs font-extrabold uppercase tracking-wider text-ink-2">
+                <div className="mt-2 flex items-center justify-between border-t border-rule-10 pt-1.5 text-xs font-extrabold uppercase tracking-wider text-ink-2">
                     <span>{active ? 'Applied' : 'Click to filter'}</span>
                     <span className={clsx(
                         "h-2.5 w-2.5 ",
@@ -2513,7 +2513,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
             <button
                 type="button"
                 onClick={onClick}
-                className={clsx("min-w-0  border border-rule-6 bg-surface px-3 py-2 text-left transition-all", toneClass)}
+                className={clsx("min-w-0  border border-rule-10 bg-surface px-3 py-2 text-left transition-all", toneClass)}
             >
                 {content}
             </button>
@@ -2521,7 +2521,7 @@ function SubCard({ label, value, detail, active, tone, onClick }: { label: strin
     }
 
     return (
-        <div className={clsx("min-w-0  border border-rule-6 bg-surface px-3 py-2", toneClass)}>
+        <div className={clsx("min-w-0  border border-rule-10 bg-surface px-3 py-2", toneClass)}>
             {content}
         </div>
     );

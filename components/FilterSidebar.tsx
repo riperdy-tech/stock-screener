@@ -259,10 +259,10 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
     return (
         <div className={clsx(
-            "fixed inset-y-0 left-0 z-50 w-[min(22.5rem,100vw)] bg-surface -3xl border-r border-rule-6 flex flex-col h-[100dvh] overflow-hidden shrink-0  transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-surface",
+            "fixed inset-y-0 left-0 z-50 w-[min(22.5rem,100vw)] bg-surface -3xl border-r border-rule-10 flex flex-col h-[100dvh] overflow-hidden shrink-0  transition-transform duration-300 md:relative md:translate-x-0 md:z-40 md:bg-surface",
             isOpen ? "translate-x-0" : "-translate-x-full"
         )}>
-            <div className="p-3 border-b border-rule-6 flex justify-between items-center bg-white/5">
+            <div className="p-3 border-b border-rule-10 flex justify-between items-center bg-white/5">
                 <div className="flex items-center gap-2 text-base font-extrabold">
                     <Filter className="h-5 w-5 text-accent" />
                     {t('filters')}
@@ -273,7 +273,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
             </div>
 
             <div className="filter-section-list flex-1 overflow-y-auto p-2.5 space-y-2.5">
-                <div className="border border-rule-6 bg-white/5 p-3">
+                <div className="border border-rule-10 bg-white/5 p-3">
                     <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
                             <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">{t('activeLens')}</div>
@@ -304,7 +304,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                             "px-2.5 py-1.5 text-sm font-bold  border transition-all",
                                             localReverseFilters.archetypes.includes(arch)
                                                 ? "border-pos/40 bg-pos/10 text-pos "
-                                                : "bg-white/5 border-rule-6 text-ink-2 hover:border-accent/40"
+                                                : "bg-white/5 border-rule-10 text-ink-2 hover:border-accent/40"
                                         )}
                                     >
                                         {arch}
@@ -325,9 +325,9 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                                 ? band === 'High' ? "bg-pos/10 text-pos border-pos/40"
                                                 : band === 'Solid' ? "bg-accent/10 text-accent border-accent/40"
                                                 : band === 'Watchlist' ? "bg-warn/10 text-warn border-warn/40"
-                                                : band === 'Monitor' ? "bg-white/5 text-ink-2 border-rule-14"
-                                                : "bg-white/5 text-ink-2 border-rule-6"
-                                                : "bg-white/5 border-rule-6 text-ink-2 hover:border-accent/40"
+                                                : band === 'Monitor' ? "bg-white/5 text-ink-2 border-rule-24"
+                                                : "bg-white/5 text-ink-2 border-rule-10"
+                                                : "bg-white/5 border-rule-10 text-ink-2 hover:border-accent/40"
                                         )}
                                     >
                                         {band}
@@ -358,12 +358,12 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         </Section>
 
                         <Section title="Nomination">
-                            <label className="flex items-center gap-3 cursor-pointer border border-rule-6 bg-white/5 px-3 py-2">
+                            <label className="flex items-center gap-3 cursor-pointer border border-rule-10 bg-white/5 px-3 py-2">
                                 <input
                                     type="checkbox"
                                     checked={localReverseFilters.nominatedOnly}
                                     onChange={(e) => setLocalReverseFilters({ ...localReverseFilters, nominatedOnly: e.target.checked })}
-                                    className="h-4 w-4 border-rule-9 accent-amber-500"
+                                    className="h-4 w-4 border-rule-14 accent-amber-500"
                                 />
                                 <span className="text-sm font-medium text-ink-2">Nominated only</span>
                             </label>
@@ -376,7 +376,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                 <select
                                     value={(batchN && [5,10,25].includes(batchN)) ? batchN : 0}
                                     onChange={(e) => { const v = Number(e.target.value); if (v > 0 && onBatchNChange) onBatchNChange(v); }}
-                                    className="border border-rule-6 bg-white/5 px-3 py-2 text-sm font-bold text-ink focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                                    className="border border-rule-10 bg-white/5 px-3 py-2 text-sm font-bold text-ink focus:outline-none focus:ring-1 focus:ring-emerald-500"
                                 >
                                     <option value={0}>N</option>
                                     <option value={5}>5</option>
@@ -388,7 +388,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                     min={1} max={30}
                                     value={batchN || 25}
                                     onChange={(e) => { const v = parseInt(e.target.value); if (v >= 1 && v <= 30 && onBatchNChange) onBatchNChange(v); }}
-                                    className="w-20 border border-rule-6 bg-white/5 px-2.5 py-2 text-center text-sm font-bold text-ink focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                                    className="w-20 border border-rule-10 bg-white/5 px-2.5 py-2 text-center text-sm font-bold text-ink focus:outline-none focus:ring-1 focus:ring-emerald-500"
                                 />
                             </div>
                             <button
@@ -419,7 +419,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                     { id: 'high', label: 'STRONG', cls: 'bg-pos/10 text-pos border-pos/40' },
                                     { id: 'mid', label: 'SOLID', cls: 'bg-accent/10 text-accent border-accent/40' },
                                     { id: 'watch', label: 'WATCH', cls: 'bg-warn/10 text-warn border-warn/40' },
-                                    { id: 'skip', label: 'PASS', cls: 'bg-white/5 text-ink-2 border-rule-14' },
+                                    { id: 'skip', label: 'PASS', cls: 'bg-white/5 text-ink-2 border-rule-24' },
                                 ].map(({ id, label, cls }) => (
                                     <button
                                         key={id}
@@ -428,7 +428,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                             "px-2.5 py-1.5 text-sm font-bold  border transition-all",
                                             localParadigmFilters.bands.includes(id)
                                                 ? cls
-                                                : "bg-white/5 border-rule-6 text-ink-2 hover:border-accent/40"
+                                                : "bg-white/5 border-rule-10 text-ink-2 hover:border-accent/40"
                                         )}
                                     >
                                         {label}
@@ -446,8 +446,8 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                         className={clsx(
                                             " border px-3 py-2 text-sm font-mono transition-all",
                                             localParadigmFilters.themes.includes(theme)
-                                                ? "bg-white/5 text-ink-2 border-rule-14"
-                                                : "bg-white/5 border-rule-6 text-ink-2 hover:border-rule-14"
+                                                ? "bg-white/5 text-ink-2 border-rule-24"
+                                                : "bg-white/5 border-rule-10 text-ink-2 hover:border-rule-24"
                                         )}
                                     >
                                         {theme}
@@ -462,7 +462,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                 placeholder="filter (e.g. Semi, Software, Solar)"
                                 value={localParadigmFilters.industryQuery}
                                 onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, industryQuery: e.target.value })}
-                                className="w-full bg-white/5 border border-rule-6 text-ink text-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500"
+                                className="w-full bg-white/5 border border-rule-10 text-ink text-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500"
                             />
                             <p className="text-sm text-ink-2 mt-1">Case-insensitive substring match on Yahoo industry name.</p>
                         </Section>
@@ -495,39 +495,39 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                         </Section>
 
                         <Section title="Flag Filters">
-                            <label className="flex items-center gap-3 cursor-pointer border border-rule-6 bg-white/5 px-3 py-2">
+                            <label className="flex items-center gap-3 cursor-pointer border border-rule-10 bg-white/5 px-3 py-2">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.acceleratingOnly}
                                     onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, acceleratingOnly: e.target.checked })}
-                                    className="h-4 w-4 border-rule-9 accent-emerald-500"
+                                    className="h-4 w-4 border-rule-14 accent-emerald-500"
                                 />
                                 <span className="text-sm font-medium text-ink-2">Accelerating only</span>
                             </label>
-                            <label className="flex items-center gap-3 cursor-pointer border border-rule-6 bg-white/5 px-3 py-2">
+                            <label className="flex items-center gap-3 cursor-pointer border border-rule-10 bg-white/5 px-3 py-2">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.bridgedOnly}
                                     onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, bridgedOnly: e.target.checked })}
-                                    className="h-4 w-4 border-rule-9 accent-blue-500"
+                                    className="h-4 w-4 border-rule-14 accent-blue-500"
                                 />
                                 <span className="text-sm font-medium text-ink-2">Forward-EPS bridged only</span>
                             </label>
-                            <label className="flex items-center gap-3 cursor-pointer border border-rule-6 bg-white/5 px-3 py-2">
+                            <label className="flex items-center gap-3 cursor-pointer border border-rule-10 bg-white/5 px-3 py-2">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.multiThemeOnly}
                                     onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, multiThemeOnly: e.target.checked })}
-                                    className="h-4 w-4 border-rule-9 accent-purple-500"
+                                    className="h-4 w-4 border-rule-14 accent-purple-500"
                                 />
                                 <span className="text-sm font-medium text-ink-2">Multi-theme only (2+ themes)</span>
                             </label>
-                            <label className="flex items-center gap-3 cursor-pointer border border-rule-6 bg-white/5 px-3 py-2">
+                            <label className="flex items-center gap-3 cursor-pointer border border-rule-10 bg-white/5 px-3 py-2">
                                 <input
                                     type="checkbox"
                                     checked={localParadigmFilters.macroWarningOnly}
                                     onChange={(e) => setLocalParadigmFilters({ ...localParadigmFilters, macroWarningOnly: e.target.checked })}
-                                    className="h-4 w-4 border-rule-9 accent-red-500"
+                                    className="h-4 w-4 border-rule-14 accent-red-500"
                                 />
                                 <span className="text-sm font-medium text-ink-2">Macro warning only</span>
                             </label>
@@ -551,7 +551,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                                 "flex w-full items-center justify-between gap-2  border px-3 py-2 text-left text-sm font-bold transition-all",
                                                 isActive
                                                     ? "border-neg/40 bg-neg/10 text-neg"
-                                                    : "border-rule-6 bg-white/5 text-ink-2 hover:border-neg/40 hover:text-ink"
+                                                    : "border-rule-10 bg-white/5 text-ink-2 hover:border-neg/40 hover:text-ink"
                                             )}
                                         >
                                             <span>{filter.label}</span>
@@ -655,7 +655,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                 />
             )}
             {screenMode === 'youtube' && (
-                <div className="sticky bottom-0 z-10 border-t border-rule-6 bg-surface p-3">
+                <div className="sticky bottom-0 z-10 border-t border-rule-10 bg-surface p-3">
                     <div className="flex items-center justify-between gap-3 border border-neg/40 bg-neg/10] px-3 py-2">
                         <div>
                             <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">{t('liveYoutubeFilter')}</div>
@@ -687,7 +687,7 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
 
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <section className="filter-section border border-rule-6 bg-page p-2.5">
+        <section className="filter-section border border-rule-10 bg-page p-2.5">
             <h3 className="filter-section-title flex items-center gap-3 text-sm font-extrabold text-ink">{title}</h3>
             <div className="mt-2 space-y-2.5">
                 {children}
@@ -704,9 +704,9 @@ function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "
             : "border border-pos/40 bg-pos/10 text-pos hover:bg-pos/10";
 
     return (
-        <div className="sticky bottom-0 z-10 border-t border-rule-6 bg-surface p-3">
+        <div className="sticky bottom-0 z-10 border-t border-rule-10 bg-surface p-3">
             {contextLabel && contextValue !== undefined && (
-                <div className="mb-3 flex items-center justify-between gap-3 border border-rule-6 bg-white/5 px-3 py-2">
+                <div className="mb-3 flex items-center justify-between gap-3 border border-rule-10 bg-white/5 px-3 py-2">
                     <div>
                         <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">{currentViewLabel}</div>
                         <div className="mt-1 text-sm font-bold text-ink">{contextLabel}</div>
@@ -726,7 +726,7 @@ function SidebarActions({ primaryLabel, onPrimary, onReset, tone, resetLabel = "
                 </button>
                 <button
                     onClick={onReset}
-                    className="flex-1 border border-rule-9 bg-muted px-3 py-2 text-sm font-bold text-ink-2 transition-colors hover:bg-destructive/10 hover:text-destructive"
+                    className="flex-1 border border-rule-14 bg-muted px-3 py-2 text-sm font-bold text-ink-2 transition-colors hover:bg-destructive/10 hover:text-destructive"
                 >
                     {resetLabel}
                 </button>
@@ -751,9 +751,9 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
 
                     {/* Tooltip */}
                     {field && defs && (
-                        <div className="absolute left-0 bottom-full mb-2 w-56 p-3 bg-page border border-rule-9 text-sm text-ink-2 opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
+                        <div className="absolute left-0 bottom-full mb-2 w-56 p-3 bg-page border border-rule-14 text-sm text-ink-2 opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
                             {defs[field] || "Filter criteria"}
-                            <div className="absolute bottom-[-4px] left-4 w-2 h-2 bg-[#1a1a1a] border-r border-b border-rule-9 transform rotate-45"></div>
+                            <div className="absolute bottom-[-4px] left-4 w-2 h-2 bg-[#1a1a1a] border-r border-b border-rule-14 transform rotate-45"></div>
                         </div>
                     )}
                 </div>
@@ -768,7 +768,7 @@ function InputGroup({ label, value, onChange, hint, strictValue, field, defs, mi
                         type="number"
                         value={value}
                         onChange={(e) => onChange(e.target.value)}
-                        className="w-24 border border-rule-6 bg-white/5 px-2 py-1.5 text-right font-mono text-xs transition-all focus:border-accent focus:outline-none focus:ring-1 focus:ring-primary"
+                        className="w-24 border border-rule-10 bg-white/5 px-2 py-1.5 text-right font-mono text-xs transition-all focus:border-accent focus:outline-none focus:ring-1 focus:ring-primary"
                     />
                 </div>
             </div>

@@ -52,7 +52,7 @@ export function Hint({ text, label }: { text: string; label?: string }) {
                 <span
                     role="tooltip"
                     style={{ top: pos.top, left: pos.left, width: POPUP_WIDTH }}
-                    className="fixed z-[70] border border-rule-9 bg-page p-2.5 text-left text-[11px] font-medium normal-case leading-relaxed tracking-normal text-ink"
+                    className="fixed z-[70] border border-rule-14 bg-page p-2.5 text-left text-[11px] font-medium normal-case leading-relaxed tracking-normal text-ink"
                 >
                     {text}
                 </span>

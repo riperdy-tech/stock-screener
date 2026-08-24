@@ -50,7 +50,7 @@ function Select({ value, onChange, options, label }: {
             aria-label={label}
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="border border-rule-14 bg-transparent px-2.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[.06em] text-ink-2 hover:text-ink focus:text-ink"
+            className="border border-rule-24 bg-transparent px-2.5 py-1.5 font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink-2 hover:text-ink focus:text-ink"
         >
             {options.map(([v, l]) => <option key={v} value={v} className="bg-page text-ink">{l}</option>)}
         </select>
@@ -68,7 +68,7 @@ function Funnel({ scored, analyzed, researchNow, labels }: {
     return (
         <div className="flex gap-x-6 text-right">
             {cells.map((c, i) => (
-                <div key={c.label} className={i > 0 ? 'border-l border-rule-12 pl-6' : ''}>
+                <div key={c.label} className={i > 0 ? 'border-l border-rule-18 pl-6' : ''}>
                     <div className={`font-mono text-[28px] leading-none ${c.cls}`}>{c.n.toLocaleString('en-US')}</div>
                     <Micro className={`mt-1 block ${i === 2 ? 'text-accent' : ''}`}>{c.label}</Micro>
                 </div>
@@ -130,7 +130,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
             </div>
 
             {/* Lens switcher + filters */}
-            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-rule-9 py-4">
+            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-rule-14 py-4">
                 <div className="flex items-center gap-2">
                     <Micro className="mr-1">{t('lensLabelDesk')}</Micro>
                     <Chip active={lens === 'ai'} onClick={() => onLens('ai')}>{t('lensAi')}</Chip>
@@ -152,7 +152,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                         onChange={(e) => set({ search: e.target.value })}
                         placeholder="SEARCH TICKER OR NAME"
                         aria-label="Search ticker or name"
-                        className="w-[190px] border border-rule-14 bg-transparent px-2.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[.06em] text-ink placeholder:text-ink-3"
+                        className="w-[190px] border border-rule-24 bg-transparent px-2.5 py-1.5 font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink placeholder:text-ink-3"
                     />
                 </div>
             </div>

@@ -2,7 +2,7 @@
 
 // Shared building blocks for the AI Research Desk.
 // House rules: radius 0, no cards, no shadows — rules and whitespace only.
-// Micro-labels are mono, uppercase, 8.5–10px, letter-spaced.
+// Micro-labels are mono, uppercase, 11px/600, .04–.07em tracking (rev1 legibility pass).
 
 import React, { useCallback, useEffect, useRef } from 'react';
 import clsx from 'clsx';
@@ -15,7 +15,7 @@ export function Micro({ className, children, as: As = 'span', ...rest }: {
 } & React.HTMLAttributes<HTMLElement>) {
     return (
         <As
-            className={clsx('font-mono text-[9.5px] uppercase leading-tight tracking-micro text-ink-2', className)}
+            className={clsx('font-mono font-semibold text-[11px] uppercase leading-tight tracking-micro text-ink-2', className)}
             {...rest}
         >
             {children}
@@ -44,7 +44,7 @@ export function SectionHead({ title, note, right, className, id }: {
 
 /** Thin section divider (1px .09) used between blocks inside a section. */
 export function Rule({ className }: { className?: string }) {
-    return <div className={clsx('border-t border-rule-9', className)} />;
+    return <div className={clsx('border-t border-rule-14', className)} />;
 }
 
 export type ChipTone = 'default' | 'accent' | 'pos' | 'warn' | 'neg';
@@ -69,7 +69,7 @@ export function Chip({ active, tone = 'default', className, children, ...rest }:
             type="button"
             className={clsx(
                 'border px-3.5 py-1.5 text-[12px] transition-colors',
-                active ? CHIP_ON[tone] : 'border-rule-14 bg-transparent text-ink-2 hover:text-ink',
+                active ? CHIP_ON[tone] : 'border-rule-24 bg-transparent text-ink-2 hover:text-ink',
                 className,
             )}
             {...rest}
@@ -87,7 +87,7 @@ export function Tag({ className, style, children }: {
 }) {
     return (
         <span
-            className={clsx('inline-flex border border-rule-14 px-2.5 py-1 font-mono text-[9.5px] uppercase tracking-[.06em] text-ink-2', className)}
+            className={clsx('inline-flex border border-rule-24 px-2.5 py-1 font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink-2', className)}
             style={style}
         >
             {children}
@@ -110,13 +110,13 @@ export function Stat({ label, value, sub, valueClass, subClass, className, size 
         <div className={className}>
             <div className={clsx('font-mono font-semibold leading-none', sizeClass, valueClass ?? 'text-ink')}>{value}</div>
             <Micro className="mt-1 block">{label}</Micro>
-            {sub && <div className={clsx('mt-1 text-[10.5px]', subClass ?? 'text-ink-3')}>{sub}</div>}
+            {sub && <div className={clsx('mt-1 text-[11px]', subClass ?? 'text-ink-3')}>{sub}</div>}
         </div>
     );
 }
 
 /** Horizontal bar on a square track — factor bars, DCF bars, plan weights. */
-export function Bar({ pct, color, track = 'rgba(255,255,255,.08)', height = 6, className }: {
+export function Bar({ pct, color, track = 'rgba(255,255,255,.12)', height = 6, className }: {
     pct: number;
     color: string;
     track?: string;
@@ -174,7 +174,7 @@ export function Modal({ onClose, labelledBy, className, children }: {
                 aria-labelledby={labelledBy}
                 tabIndex={-1}
                 onKeyDown={onKeyDown}
-                className={clsx('w-full max-w-3xl border border-rule-16 bg-surface outline-none', className)}
+                className={clsx('w-full max-w-3xl border border-rule-22 bg-surface outline-none', className)}
             >
                 {children}
             </div>
@@ -184,5 +184,5 @@ export function Modal({ onClose, labelledBy, className, children }: {
 
 /** Static loading placeholder (no shimmer animation — the desk is instant and dense). */
 export function Skel({ className }: { className?: string }) {
-    return <span className={clsx('block h-3 bg-track-5', className)} />;
+    return <span className={clsx('block h-3 bg-track-12', className)} />;
 }

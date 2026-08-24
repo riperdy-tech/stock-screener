@@ -39,15 +39,15 @@ export function BandChartHero({ verdict, runIvs }: { verdict: DepthVerdict; runI
             </div>
 
             {/* band-end labels sit above the track ends */}
-            <div className="relative mt-6 h-[58px] bg-track-4">
+            <div className="relative mt-6 h-[58px] bg-track-12">
                 <span
-                    className="absolute font-mono text-[9px] text-ink-2"
+                    className="absolute font-mono text-[11px] text-ink-2"
                     style={{ left: `${g.bandLeft}%`, top: -2, transform: 'translate(-50%,-100%)' }}
                 >
                     {verdict.iv_band_low != null ? money(verdict.iv_band_low) : ''}
                 </span>
                 <span
-                    className="absolute font-mono text-[9px] text-ink-2"
+                    className="absolute font-mono text-[11px] text-ink-2"
                     style={{ left: `${g.bandLeft + g.bandWidth}%`, top: -2, transform: 'translate(-50%,-100%)' }}
                 >
                     {verdict.iv_band_high != null ? money(verdict.iv_band_high) : ''}
@@ -74,14 +74,14 @@ export function BandChartHero({ verdict, runIvs }: { verdict: DepthVerdict; runI
                     />
                 ))}
                 {g.priceAt !== null && (
-                    <span className="absolute" style={{ left: `${g.priceAt}%`, top: 0, bottom: 0, width: 2, background: '#e7e5e0' }} />
+                    <span className="absolute" style={{ left: `${g.priceAt}%`, top: 0, bottom: 0, width: 2, background: '#f2f0eb' }} />
                 )}
             </div>
 
             <div className="relative mt-1.5 h-4">
                 {g.priceAt !== null && (
                     <span
-                        className="absolute whitespace-nowrap font-mono text-[9px] font-semibold text-ink"
+                        className="absolute whitespace-nowrap font-mono text-[11px] font-semibold text-ink"
                         style={{ left: `${g.priceAt}%`, transform: 'translateX(-50%)' }}
                     >
                         {verdict.price != null ? money(verdict.price) : ''} TODAY
@@ -89,7 +89,7 @@ export function BandChartHero({ verdict, runIvs }: { verdict: DepthVerdict; runI
                 )}
                 {g.medianAt !== null && (
                     <span
-                        className="absolute whitespace-nowrap font-mono text-[9px]"
+                        className="absolute whitespace-nowrap font-mono text-[11px]"
                         style={{ left: `${g.medianAt}%`, transform: 'translateX(-50%)', color: tone.color }}
                     >
                         MED {verdict.median_iv != null ? money(verdict.median_iv) : ''}

@@ -30,7 +30,7 @@ export function AuthModal({ onClose, signIn, signUp }: {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
-            <div className="w-full max-w-sm border border-rule-9 bg-surface p-5"
+            <div className="w-full max-w-sm border border-rule-14 bg-surface p-5"
                  onClick={e => e.stopPropagation()}>
                 <h3 className="text-sm font-extrabold uppercase tracking-wider text-pos">
                     {mode === 'login' ? 'Log in' : 'Create account'}
@@ -40,11 +40,11 @@ export function AuthModal({ onClose, signIn, signUp }: {
                 </p>
                 <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" type="email"
                     autoComplete="email"
-                    className="mt-3 w-full border border-rule-9 bg-white/5 px-2 py-2 text-xs outline-none focus:border-pos/40" />
+                    className="mt-3 w-full border border-rule-14 bg-white/5 px-2 py-2 text-xs outline-none focus:border-pos/40" />
                 <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" type="password"
                     autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                     onKeyDown={e => e.key === 'Enter' && submit()}
-                    className="mt-2 w-full border border-rule-9 bg-white/5 px-2 py-2 text-xs outline-none focus:border-pos/40" />
+                    className="mt-2 w-full border border-rule-14 bg-white/5 px-2 py-2 text-xs outline-none focus:border-pos/40" />
                 <button onClick={submit} disabled={busy}
                     className="mt-3 w-full border border-pos/40 bg-pos/10 py-2 text-xs font-extrabold text-pos hover:bg-pos/10 disabled:opacity-40">
                     {busy ? '…' : mode === 'login' ? 'Log in' : 'Sign up'}

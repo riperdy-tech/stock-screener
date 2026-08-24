@@ -67,7 +67,7 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
         <div
             onClick={onClick}
             style={{ animationDelay: `${index * 30}ms` }}
-            className="group relative h-full cursor-pointer overflow-hidden border border-rule-6 bg-surface transition-all duration-300 animate-in fade-in zoom-in-95 fill-mode-backwards hover:-translate-y-0.5 hover:border-accent/40 hover:"
+            className="group relative h-full cursor-pointer overflow-hidden border border-rule-10 bg-surface transition-all duration-300 animate-in fade-in zoom-in-95 fill-mode-backwards hover:-translate-y-0.5 hover:border-accent/40 hover:"
         >
             <div className="flex h-full flex-col p-3.5 sm:p-4">
                 <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -94,12 +94,12 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                         </p>
                     </div>
 
-                    <div className="w-full shrink-0 border border-rule-6 bg-white/5 p-2.5 text-left sm:min-w-[7.5rem] sm:w-auto sm:text-right">
+                    <div className="w-full shrink-0 border border-rule-10 bg-white/5 p-2.5 text-left sm:min-w-[7.5rem] sm:w-auto sm:text-right">
                         <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-2">{t('price')}</div>
                         <div className="mt-1 truncate font-mono text-lg font-extrabold leading-none text-ink sm:text-xl" title={priceLabel}>
                             {priceLabel}
                         </div>
-                        <div className="mt-2 flex items-center justify-between gap-3 border-t border-rule-6 pt-2">
+                        <div className="mt-2 flex items-center justify-between gap-3 border-t border-rule-10 pt-2">
                             <span className="text-xs font-bold text-ink-2">{t('mcap')}</span>
                             <span className="truncate font-mono text-xs font-extrabold text-ink" title={marketCapLabel}>{marketCapLabel}</span>
                         </div>
@@ -113,10 +113,10 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                     </div>
                 </div>
 
-                <div className="mt-3 border border-rule-14 bg-white/5] p-2.5">
+                <div className="mt-3 border border-rule-24 bg-white/5] p-2.5">
                     {hasParadigm ? (
                         <div className="flex items-start gap-2">
-                            <div className="mt-0.5 border border-rule-14 bg-white/5 p-2 text-ink-2">
+                            <div className="mt-0.5 border border-rule-24 bg-white/5 p-2 text-ink-2">
                                 <Layers3 className="h-4 w-4" />
                             </div>
                             <div className="min-w-0 flex-1">
@@ -154,11 +154,11 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                     )}
                 </div>
 
-                <div className="mt-2.5 border border-rule-6 bg-white/5 p-2.5">
+                <div className="mt-2.5 border border-rule-10 bg-white/5 p-2.5">
                     <ActiveLensPanel result={result} screenMode={screenMode} youtubeEvaluation={youtubeEvaluation} />
                 </div>
 
-                <div className="mt-2.5 border-t border-rule-6 pt-2.5">
+                <div className="mt-2.5 border-t border-rule-10 pt-2.5">
                     <div className="mb-1.5 text-xs font-extrabold uppercase tracking-wider text-ink-2">{t('otherSignals')}</div>
                     <div className="flex flex-wrap gap-1.5">
                         <SignalChip
@@ -327,7 +327,7 @@ function MiniMetric({ label, value }: { label: string; value: string | number })
 
 function EmptyLens({ icon, label, detail }: { icon: ReactNode; label: string; detail: string }) {
     return (
-        <div className="border border-rule-6 bg-white/5 p-2.5">
+        <div className="border border-rule-10 bg-white/5 p-2.5">
             <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
                 {icon}
                 <span>{label}</span>
@@ -344,7 +344,7 @@ function SignalChip({ icon, label, value, tone }: { icon: ReactNode; label: stri
             tone === 'success' && "border-pos/40 bg-pos/10 text-pos",
             tone === 'warning' && "border-warn/40 bg-warn/10 text-warn",
             tone === 'primary' && "border-accent/40 bg-accent/10 text-accent",
-            tone === 'muted' && "border-rule-6 bg-white/5 text-ink-2",
+            tone === 'muted' && "border-rule-10 bg-white/5 text-ink-2",
         )}>
             {icon}
             {label} {value}

@@ -6,7 +6,7 @@ export function Section({ id, title, icon, children }: {
     id: string; title: string; icon?: React.ReactNode; children: React.ReactNode;
 }) {
     return (
-        <section id={id} className="scroll-mt-24 border-b border-rule-6 pb-10 last:border-b-0">
+        <section id={id} className="scroll-mt-24 border-b border-rule-10 pb-10 last:border-b-0">
             <div className="flex items-center gap-2">
                 {icon && <span className="text-pos">{icon}</span>}
                 <h2 className="text-xl font-extrabold tracking-tight text-ink">{title}</h2>

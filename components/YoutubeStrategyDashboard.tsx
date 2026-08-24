@@ -86,10 +86,10 @@ function StrategyBadge({ label }: { label: string }) {
         "Earnings Momentum": "bg-pos/10 text-pos border-pos/40",
         "Deep Value + Technical Reversal": "bg-accent/10 text-accent border-accent/40",
         "Turnaround Seed": "bg-warn/10 text-warn border-warn/40",
-        "Turnaround Scale-In": "bg-white/5 text-ink-2 border-rule-14",
+        "Turnaround Scale-In": "bg-white/5 text-ink-2 border-rule-24",
     };
     return (
-        <span className={clsx(" border px-3.5 py-2 text-base font-extrabold uppercase tracking-tight", styles[label] || "bg-white/5 text-ink-2 border-rule-9")}>
+        <span className={clsx(" border px-3.5 py-2 text-base font-extrabold uppercase tracking-tight", styles[label] || "bg-white/5 text-ink-2 border-rule-14")}>
             {label}
         </span>
     );
@@ -97,7 +97,7 @@ function StrategyBadge({ label }: { label: string }) {
 
 function MetricPill({ label, value }: { label: string; value: string }) {
     return (
-        <div className="bg-white/5 border border-rule-6 px-4 py-3.5">
+        <div className="bg-white/5 border border-rule-10 px-4 py-3.5">
             <div className="text-base text-ink-2 uppercase font-bold tracking-wider">{label}</div>
             <div className="mt-1 text-lg font-mono font-extrabold text-ink">{value}</div>
         </div>
@@ -106,7 +106,7 @@ function MetricPill({ label, value }: { label: string; value: string }) {
 
 function SummaryCard({ label, value, sub }: { label: string; value: string; sub: string }) {
     return (
-        <div className="border border-rule-6 bg-surface p-4">
+        <div className="border border-rule-10 bg-surface p-4">
             <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
             <div className="mt-1 font-mono text-2xl font-extrabold text-ink">{value}</div>
             <div className="mt-1 text-base font-semibold text-ink-2">{sub}</div>
@@ -116,7 +116,7 @@ function SummaryCard({ label, value, sub }: { label: string; value: string; sub:
 
 function EmptyYoutubeStat({ label, value }: { label: string; value: string }) {
     return (
-        <div className="border border-rule-6 bg-white/5 px-4 py-3">
+        <div className="border border-rule-10 bg-white/5 px-4 py-3">
             <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
             <div className="mt-1 truncate font-mono text-lg font-extrabold text-ink" title={value}>{value}</div>
         </div>
@@ -125,7 +125,7 @@ function EmptyYoutubeStat({ label, value }: { label: string; value: string }) {
 
 function YoutubeLoadingCard() {
     return (
-        <div className="border border-rule-6 bg-white/5 p-4">
+        <div className="border border-rule-10 bg-white/5 p-4">
             <div className="flex items-start justify-between gap-4">
                 <div className="space-y-3">
                     <div className="h-6 w-24 animate-pulse bg-white/5" />
@@ -196,10 +196,10 @@ export function YoutubeStrategyDashboard() {
 
     return (
         <div className="min-h-screen bg-page text-ink">
-            <header className="sticky top-0 z-30 border-b border-rule-6 bg-surface px-4 md:px-6 py-4">
+            <header className="sticky top-0 z-30 border-b border-rule-10 bg-surface px-4 md:px-6 py-4">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex items-start gap-3">
-                        <Link href="/" className="mt-1 border border-rule-9 bg-white/5 p-2.5 hover:bg-white/5 transition-colors" title="Back to main screener">
+                        <Link href="/" className="mt-1 border border-rule-14 bg-white/5 p-2.5 hover:bg-white/5 transition-colors" title="Back to main screener">
                             <ArrowLeft className="h-5 w-5" />
                         </Link>
                         <div>
@@ -224,7 +224,7 @@ export function YoutubeStrategyDashboard() {
                         </Link>
                         <button
                             onClick={() => loadData()}
-                            className="px-4 py-2.5 text-base font-extrabold border border-rule-9 bg-white/5 hover:bg-white/5 flex items-center gap-2"
+                            className="px-4 py-2.5 text-base font-extrabold border border-rule-14 bg-white/5 hover:bg-white/5 flex items-center gap-2"
                         >
                             <RefreshCw className={clsx("h-4 w-4", loading && "animate-spin")} /> Refresh
                         </button>
@@ -247,7 +247,7 @@ export function YoutubeStrategyDashboard() {
                             onClick={() => setStrategyFilter(filter.value)}
                             className={clsx(
                                 " border p-5 text-left transition-all hover:-translate-y-0.5",
-                                strategyFilter === filter.value ? "bg-accent/10 border-accent " : "bg-surface border-rule-6 hover:border-accent/40"
+                                strategyFilter === filter.value ? "bg-accent/10 border-accent " : "bg-surface border-rule-10 hover:border-accent/40"
                             )}
                         >
                             <div className="flex justify-between items-start gap-2">
@@ -260,21 +260,21 @@ export function YoutubeStrategyDashboard() {
                 </section>
 
                 <section className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <div className="border border-rule-6 bg-surface p-5 flex items-start gap-3">
+                    <div className="border border-rule-10 bg-surface p-5 flex items-start gap-3">
                         <TrendingUp className="h-6 w-6 text-pos shrink-0 mt-0.5" />
                         <div>
                             <h3 className="text-lg font-extrabold">Filter 1: Earnings Momentum</h3>
                             <p className="text-base text-ink-2 leading-relaxed">Large-cap blue chips require positive EPS and four consecutive quarters of EPS increases.</p>
                         </div>
                     </div>
-                    <div className="border border-rule-6 bg-surface p-5 flex items-start gap-3">
+                    <div className="border border-rule-10 bg-surface p-5 flex items-start gap-3">
                         <RotateCcw className="h-6 w-6 text-accent shrink-0 mt-0.5" />
                         <div>
                             <h3 className="text-lg font-extrabold">Filter 2: Deep Value Reversal</h3>
                             <p className="text-base text-ink-2 leading-relaxed">Requires P/B &lt; 1 or P/E below 5-year average, plus monthly double bottom and price above 20-month MA.</p>
                         </div>
                     </div>
-                    <div className="border border-rule-6 bg-surface p-5 flex items-start gap-3">
+                    <div className="border border-rule-10 bg-surface p-5 flex items-start gap-3">
                         <Shield className="h-6 w-6 text-warn shrink-0 mt-0.5" />
                         <div>
                             <h3 className="text-lg font-extrabold">Filter 3: Turnaround Seed</h3>
@@ -294,13 +294,13 @@ export function YoutubeStrategyDashboard() {
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder="Search ticker or company"
-                            className="w-full border border-rule-9 bg-white/5 py-3 pl-10 pr-3 text-base focus:outline-none focus:ring-1 focus:ring-primary"
+                            className="w-full border border-rule-14 bg-white/5 py-3 pl-10 pr-3 text-base focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                 </div>
 
                 {loading ? (
-                    <div className="border border-rule-6 bg-surface p-5 sm:p-6">
+                    <div className="border border-rule-10 bg-surface p-5 sm:p-6">
                         <div className="flex items-start gap-3">
                             <div className="border border-neg/40 bg-neg/10 p-3 text-neg">
                                 <RefreshCw className="h-6 w-6 animate-spin" />
@@ -318,7 +318,7 @@ export function YoutubeStrategyDashboard() {
                         </div>
                     </div>
                 ) : filteredRows.length === 0 ? (
-                    <div className="flex min-h-80 flex-col items-center justify-center border border-dashed border-rule-9 bg-surface px-6 py-8 text-center text-ink-2">
+                    <div className="flex min-h-80 flex-col items-center justify-center border border-dashed border-rule-14 bg-surface px-6 py-8 text-center text-ink-2">
                         <span className="border border-neg/40 bg-neg/10 px-3 py-1.5 text-base font-extrabold uppercase tracking-wider text-neg">
                             {activeFilter?.label || "YouTube Strategy"}
                         </span>
@@ -347,11 +347,11 @@ export function YoutubeStrategyDashboard() {
                             const c = result.candidate as any;
                             const primaryMatch = evaluation.matchedStrategies[0] || "Video signal";
                             return (
-                                <article key={c.symbol} className="border border-rule-6 bg-surface p-6 hover:border-accent/40 transition-colors">
+                                <article key={c.symbol} className="border border-rule-10 bg-surface p-6 hover:border-accent/40 transition-colors">
                                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                                         <div className="min-w-0">
                                             <div className="flex items-center gap-2 flex-wrap">
-                                                <span className="border border-rule-6 bg-white/5 px-2.5 py-1 font-mono text-base font-extrabold text-ink-2">
+                                                <span className="border border-rule-10 bg-white/5 px-2.5 py-1 font-mono text-base font-extrabold text-ink-2">
                                                     #{index + 1}
                                                 </span>
                                                 <h3 className="text-2xl font-extrabold tracking-tight">{c.symbol.split(".")[0]}</h3>
@@ -359,12 +359,12 @@ export function YoutubeStrategyDashboard() {
                                             </div>
                                             <p className="text-base text-ink-2 mt-1 uppercase font-bold tracking-tight">{c.sector} / {c.industry || result.industry || "Unknown"}</p>
                                         </div>
-                                        <div className="w-full shrink-0 border border-rule-6 bg-white/5 p-3 text-left sm:min-w-[8.5rem] sm:w-auto sm:text-right">
+                                        <div className="w-full shrink-0 border border-rule-10 bg-white/5 p-3 text-left sm:min-w-[8.5rem] sm:w-auto sm:text-right">
                                             <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">Price</div>
                                             <div className="mt-1 truncate font-mono text-xl font-extrabold leading-none text-ink sm:text-2xl" title={formatPrice(c.price)}>
                                                 {formatPrice(c.price)}
                                             </div>
-                                            <div className="mt-3 flex items-center justify-between gap-3 border-t border-rule-6 pt-2">
+                                            <div className="mt-3 flex items-center justify-between gap-3 border-t border-rule-10 pt-2">
                                                 <span className="text-base font-bold text-ink-2">MCap</span>
                                                 <span className="truncate font-mono text-base font-extrabold text-ink" title={formatMarketCap(c.marketCap)}>
                                                     {formatMarketCap(c.marketCap)}
@@ -398,7 +398,7 @@ export function YoutubeStrategyDashboard() {
                                         </span>
                                     </div>
 
-                                    <div className="mt-4 border border-rule-6 bg-white/5 p-4">
+                                    <div className="mt-4 border border-rule-10 bg-white/5 p-4">
                                         <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
                                             <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">Strategy Evidence</div>
                                             <div className="text-base font-semibold text-ink-2">Fundamental and technical inputs</div>

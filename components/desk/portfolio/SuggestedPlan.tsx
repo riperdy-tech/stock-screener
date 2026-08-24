@@ -99,7 +99,7 @@ export function SuggestedPlan({ plan, planLlm, macro, overlay, onOpenTicker }: {
                 <Link href="/help#portfolio" className="border-b border-dotted border-accent/50 text-accent">Full explanation</Link>
             </p>
 
-            <div className="mt-5 flex flex-wrap gap-x-8 gap-y-4 border-t border-rule-9 pt-4">
+            <div className="mt-5 flex flex-wrap gap-x-8 gap-y-4 border-t border-rule-14 pt-4">
                 <Stat size="md" label="Invested" value={`${active.invested_pct ?? '—'}%`} />
                 <Stat size="md" label="Cash" value={`${active.cash_pct ?? '—'}%`} />
                 <Stat size="md" label="Positions" value={active.position_count ?? (active.positions ?? []).length} />
@@ -116,7 +116,7 @@ export function SuggestedPlan({ plan, planLlm, macro, overlay, onOpenTicker }: {
             </div>
 
             {(plan.macro_derisk_active || flags.length > 0) && (
-                <div className="mt-4 flex items-baseline gap-3 border border-rule-9 px-4 py-3">
+                <div className="mt-4 flex items-baseline gap-3 border border-rule-14 px-4 py-3">
                     <span className="mt-1 h-[7px] w-[7px] shrink-0 rounded-full bg-warn" />
                     <p className="text-[12px] text-ink-2">
                         {plan.macro_derisk_active
@@ -126,7 +126,7 @@ export function SuggestedPlan({ plan, planLlm, macro, overlay, onOpenTicker }: {
                 </div>
             )}
 
-            <div className={clsx(GRID, 'mt-5 border-b border-rule-12 pb-2')}>
+            <div className={clsx(GRID, 'mt-5 border-b border-rule-18 pb-2')}>
                 <Micro>Name</Micro>
                 <Micro className="text-right">Size</Micro>
                 <Micro />
@@ -145,18 +145,18 @@ export function SuggestedPlan({ plan, planLlm, macro, overlay, onOpenTicker }: {
                         tabIndex={0}
                         onClick={() => onOpenTicker(p.symbol)}
                         onKeyDown={(e) => { if (e.key === 'Enter') onOpenTicker(p.symbol); }}
-                        className={clsx(GRID, 'cursor-pointer border-b border-rule-6 py-2.5 hover:bg-hover')}
+                        className={clsx(GRID, 'cursor-pointer border-b border-rule-10 py-2.5 hover:bg-hover')}
                         style={sleeve ? { background: 'rgba(194,121,143,.05)' } : undefined}
                     >
                         <span className="text-[13px] font-extrabold text-ink">
                             {p.symbol}
                             {p.rev_nominated && (
-                                <span className="ml-1 font-mono text-[8.5px] text-accent" title="Also nominated by the reverse engine">✓REV</span>
+                                <span className="ml-1 font-mono text-[11px] text-accent" title="Also nominated by the reverse engine">✓REV</span>
                             )}
                         </span>
                         <span className="text-right font-mono text-[12px] font-semibold text-ink">{p.weight_pct}%</span>
                         <Bar pct={Math.min(100, (p.weight_pct / 6) * 100)} color={sleeve ? '#c2798f' : 'oklch(0.78 0.08 250)'} />
-                        <span className="font-mono text-[10px] uppercase tracking-[.06em] text-ink-3">
+                        <span className="font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink-3">
                             {(p.sizing_method || '').replace(/_/g, ' ')}
                         </span>
                         <span className="text-right font-mono text-[11px] text-ink-2">
@@ -164,10 +164,10 @@ export function SuggestedPlan({ plan, planLlm, macro, overlay, onOpenTicker }: {
                                 ? `${p.expectations_gap_pts > 0 ? '+' : '−'}${Math.abs(Math.round(p.expectations_gap_pts))}`
                                 : '—'}
                         </span>
-                        <span className="truncate text-[10.5px] text-ink-3">{p.theme_primary || '—'}</span>
+                        <span className="truncate text-[11px] text-ink-3">{p.theme_primary || '—'}</span>
                         <span className="min-w-0">
                             {(p.forensic_flags ?? []).length > 0
-                                ? <span className="truncate text-[10.5px] text-neg">{p.forensic_flags.join(', ')}</span>
+                                ? <span className="truncate text-[11px] text-neg">{p.forensic_flags.join(', ')}</span>
                                 : <OverlayChips overlay={overlay[p.symbol]} />}
                         </span>
                     </div>
@@ -175,16 +175,16 @@ export function SuggestedPlan({ plan, planLlm, macro, overlay, onOpenTicker }: {
             })}
 
             {active.cash_pct != null && (
-                <div className={clsx(GRID, 'border-b border-rule-6 py-2.5')}>
+                <div className={clsx(GRID, 'border-b border-rule-10 py-2.5')}>
                     <span className="text-[13px] font-extrabold text-ink-2">CASH</span>
                     <span className="text-right font-mono text-[12px] text-ink-2">{active.cash_pct}%</span>
                     <Bar pct={active.cash_pct} color="rgba(255,255,255,.18)" />
-                    <span className="font-mono text-[10px] uppercase tracking-[.06em] text-ink-3">no edge available</span>
+                    <span className="font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink-3">no edge available</span>
                     <span /><span /><span />
                 </div>
             )}
 
-            <div className="mt-7 grid grid-cols-1 gap-x-10 gap-y-6 border-t border-rule-9 pt-5 lg:grid-cols-2">
+            <div className="mt-7 grid grid-cols-1 gap-x-10 gap-y-6 border-t border-rule-14 pt-5 lg:grid-cols-2">
                 <AllocationBars title="Sector allocation" alloc={active.sector_allocation} />
                 <AllocationBars title="Theme allocation" alloc={active.theme_allocation} />
             </div>

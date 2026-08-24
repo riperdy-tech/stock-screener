@@ -95,10 +95,10 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-            <div className="flex h-[86vh] w-full max-w-6xl flex-col overflow-hidden border border-rule-9 bg-page text-base">
+            <div className="flex h-[86vh] w-full max-w-6xl flex-col overflow-hidden border border-rule-14 bg-page text-base">
 
                 {/* Header */}
-                <div className="flex flex-col gap-4 border-b border-rule-9 bg-surface px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-4 border-b border-rule-14 bg-surface px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-start gap-3 text-pos">
                         <div className="border border-pos/40 bg-pos/10 p-2">
                             <Terminal className="h-6 w-6" />
@@ -109,28 +109,28 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                         </div>
                     </div>
                     <div className="flex items-center justify-between gap-4 sm:justify-end">
-                        <label className="flex cursor-pointer items-center gap-2 border border-rule-9 bg-white/[0.03] px-3.5 py-2.5 text-base text-ink-2 hover:text-ink">
+                        <label className="flex cursor-pointer items-center gap-2 border border-rule-14 bg-white/[0.03] px-3.5 py-2.5 text-base text-ink-2 hover:text-ink">
                             <input
                                 type="checkbox"
                                 checked={autoScroll}
                                 onChange={(e) => setAutoScroll(e.target.checked)}
-                                className="h-5 w-5 border-rule-9 bg-page"
+                                className="h-5 w-5 border-rule-14 bg-page"
                             />
                             Auto-scroll
                         </label>
-                        <button onClick={onClose} className="border border-rule-9 bg-white/[0.03] p-2.5 text-ink-3 transition-colors hover:text-ink" aria-label="Close system logs">
+                        <button onClick={onClose} className="border border-rule-14 bg-white/[0.03] p-2.5 text-ink-3 transition-colors hover:text-ink" aria-label="Close system logs">
                             <X className="h-5 w-5" />
                         </button>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-3 border-b border-rule-9 bg-[#0f0f0f] px-5 py-4 sm:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 border-b border-rule-14 bg-[#0f0f0f] px-5 py-4 sm:grid-cols-3">
                     <LogStat icon={<FileText className="h-4 w-4" />} label="Static Source" value="scan.log" sub="public/data baseline" />
                     <LogStat icon={<Radio className="h-4 w-4" />} label="Live Stream" value={supabaseConnected ? "Connected" : "Unavailable"} sub={supabaseConnected ? "Supabase channel ready" : "Missing public keys"} tone={supabaseConnected ? "success" : "danger"} />
                     <LogStat icon={<Terminal className="h-4 w-4" />} label="Lines Loaded" value={lineCount.toLocaleString()} sub={logs ? "Non-empty log lines" : "Waiting for data"} />
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 border-b border-rule-9 bg-[#0b0b0b] px-5 py-3">
+                <div className="flex flex-wrap items-center gap-2 border-b border-rule-14 bg-[#0b0b0b] px-5 py-3">
                     <LogSeverityPill tone="danger" label="Errors" value={severityCounts.danger} />
                     <LogSeverityPill tone="warning" label="Warnings" value={severityCounts.warning} />
                     <LogSeverityPill tone="success" label="Success" value={severityCounts.success} />
@@ -157,10 +157,10 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                 </div>
 
                 {/* Footer */}
-                <div className="flex flex-col gap-3 border-t border-rule-9 bg-surface px-5 py-4 text-base text-ink-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-3 border-t border-rule-14 bg-surface px-5 py-4 text-base text-ink-3 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex flex-wrap items-center gap-3">
                         <span>Source: public/data/scan.log</span>
-                        <div className="flex items-center gap-2 border border-rule-9 bg-white/[0.03] px-3 py-1.5">
+                        <div className="flex items-center gap-2 border border-rule-14 bg-white/[0.03] px-3 py-1.5">
                             <div className={`h-2.5 w-2.5  ${supabaseConnected ? 'bg-green-500' : 'bg-red-500'}`} />
                             <span className={supabaseConnected ? 'text-ink-2' : 'text-neg'}>
                                 {supabaseConnected ? 'Supabase Connected' : 'Supabase Disconnected (Keys Missing)'}
@@ -176,7 +176,7 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
 
 function LogStat({ icon, label, value, sub, tone = "neutral" }: { icon: ReactNode; label: string; value: string; sub: string; tone?: "neutral" | "success" | "danger" }) {
     return (
-        <div className="border border-rule-9 bg-white/[0.03] p-4">
+        <div className="border border-rule-14 bg-white/[0.03] p-4">
             <div className="flex items-center gap-2 text-base font-extrabold uppercase tracking-wider text-ink-3">
                 {icon}
                 {label}
@@ -243,7 +243,7 @@ function logLineBadgeClass(tone: LogTone) {
     if (tone === "danger") return "border-neg/40 bg-neg/10 text-neg";
     if (tone === "warning") return "border-warn/40 bg-warn/10 text-warn";
     if (tone === "marker") return "border-accent/40 bg-accent/10 text-accent";
-    return "border-rule-9 bg-white/[0.03] text-ink-3";
+    return "border-rule-14 bg-white/[0.03] text-ink-3";
 }
 
 function logLineLabel(tone: LogTone) {
