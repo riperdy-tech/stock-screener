@@ -36,7 +36,7 @@ export function LanguageToggle() {
         <div ref={ref} className="relative z-50 inline-block text-left">
             <button
                 onClick={() => setOpen(!open)}
-                className="font-mono text-[10px] uppercase tracking-[.08em] text-ink-2 hover:text-ink"
+                className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2 hover:text-ink"
                 title="Select language"
                 aria-label={`Current language: ${current.name}`}
                 aria-expanded={open}
@@ -46,9 +46,9 @@ export function LanguageToggle() {
             </button>
 
             {open && (
-                <div role="menu" className="absolute right-0 top-full mt-2 w-56 border border-rule-16 bg-page">
-                    <div className="border-b border-rule-9 px-3 py-2">
-                        <div className="font-mono text-[9px] uppercase tracking-micro text-ink-3">Language</div>
+                <div role="menu" className="absolute right-0 top-full mt-2 w-56 border border-rule-22 bg-page">
+                    <div className="border-b border-rule-14 px-3 py-2">
+                        <div className="font-mono font-semibold text-[11px] uppercase tracking-micro text-ink-3">Language</div>
                     </div>
                     <div className="flex flex-col">
                         {LANGUAGES.map((lng) => (
@@ -62,7 +62,7 @@ export function LanguageToggle() {
                                 )}
                             >
                                 <span className="text-[12.5px] font-semibold normal-case">{lng.name}</span>
-                                <span className="font-mono text-[9.5px] uppercase tracking-micro text-ink-3">{lng.code}</span>
+                                <span className="font-mono font-semibold text-[11px] uppercase tracking-micro text-ink-3">{lng.code}</span>
                             </button>
                         ))}
                     </div>

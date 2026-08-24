@@ -134,16 +134,16 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
             let note: string;
             let color: string;
             if (!entry) {
-                verdict = 'NO COVERAGE'; color = '#66635b';
+                verdict = 'NO COVERAGE'; color = '#c3bfb5';
                 note = 'not in the scored universe';
             } else if (vetoed) {
-                verdict = 'VETOED'; color = '#c2695a';
+                verdict = 'VETOED'; color = '#e2917f';
                 note = `${entry.fct_veto!.replace(/_/g, ' ')} — hard avoid`;
             } else if (dv?.direction === 'overvalued') {
                 verdict = 'OVERWEIGHT'; color = '#cfa14e';
                 note = 'AI says overvalued — every run below the price';
             } else if (modelWt === null) {
-                verdict = 'NO EDGE'; color = '#66635b';
+                verdict = 'NO EDGE'; color = '#c3bfb5';
                 note = k.reason;
             } else if (wt > modelWt + 1) {
                 verdict = 'OVERWEIGHT'; color = '#cfa14e';
@@ -173,7 +173,7 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
         };
     }, [holdings, total, factor, valuations, depth, stockInfo]);
 
-    const field = 'border border-rule-14 bg-transparent px-2.5 py-1.5 font-mono text-[11px] text-ink outline-none focus:border-accent';
+    const field = 'border border-rule-24 bg-transparent px-2.5 py-1.5 font-mono text-[11px] text-ink outline-none focus:border-accent';
 
     return (
         <section>
@@ -210,18 +210,18 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
                     onClick={saveSnapshot}
                     disabled={holdings.length === 0}
                     title="Saves your holdings to the cloud so the daily tracker measures your real portfolio in the 'mine' ledger"
-                    className="border border-rule-14 px-3 py-1.5 text-[12px] font-bold text-ink-2 hover:text-ink disabled:opacity-40"
+                    className="border border-rule-24 px-3 py-1.5 text-[12px] font-bold text-ink-2 hover:text-ink disabled:opacity-40"
                 >
                     {t('portSaveSnapshot')}
                 </button>
-                <button onClick={() => setShowBulk((v) => !v)} className="font-mono text-[10px] uppercase tracking-[.08em] text-ink-2 hover:text-ink">
+                <button onClick={() => setShowBulk((v) => !v)} className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2 hover:text-ink">
                     {showBulk ? `${t('transcriptsHide')} — ${t('portBulk')}` : `${t('portBulk')}…`}
                 </button>
                 {saveStatus && <Micro className="normal-case tracking-normal">{saveStatus}</Micro>}
             </div>
 
             {showBulk && (
-                <div className="mt-3 border border-rule-9 p-3">
+                <div className="mt-3 border border-rule-14 p-3">
                     <p className="text-[11.5px] leading-relaxed text-ink-2">
                         One position per line: <span className="font-mono text-ink">TICKER value</span> — the <b>last number</b> on
                         each line is taken as market value, so broker rows with extra columns paste fine.
@@ -231,7 +231,7 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
                         value={bulkText} onChange={(e) => setBulkText(e.target.value)}
                         rows={6} placeholder={'NVDA 12500\nAAPL 8000\nINCY 5,250.75\nCASH 3000'}
                         aria-label="Bulk paste holdings"
-                        className="mt-2 w-full border border-rule-14 bg-transparent p-2 font-mono text-[11.5px] text-ink outline-none focus:border-accent"
+                        className="mt-2 w-full border border-rule-24 bg-transparent p-2 font-mono text-[11.5px] text-ink outline-none focus:border-accent"
                     />
                     <div className="mt-2 flex flex-wrap items-center gap-2">
                         <button onClick={() => importBulk(false)} className="border border-accent/60 px-3 py-1.5 text-[12px] font-bold text-accent hover:bg-accent/[0.12]">
@@ -247,7 +247,7 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
 
             {rows.length > 0 && (
                 <>
-                    <div className="mt-5 grid grid-cols-[80px_90px_70px_80px_1fr_70px_120px_28px] gap-x-3 border-b border-rule-12 pb-2">
+                    <div className="mt-5 grid grid-cols-[80px_90px_70px_80px_1fr_70px_120px_28px] gap-x-3 border-b border-rule-18 pb-2">
                         <Micro>Holding</Micro>
                         <Micro className="text-right">Value</Micro>
                         <Micro className="text-right">Weight</Micro>
@@ -258,7 +258,7 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
                         <Micro />
                     </div>
                     {rows.map((r) => (
-                        <div key={r.ticker} className="grid grid-cols-[80px_90px_70px_80px_1fr_70px_120px_28px] items-baseline gap-x-3 border-b border-rule-6 py-2.5">
+                        <div key={r.ticker} className="grid grid-cols-[80px_90px_70px_80px_1fr_70px_120px_28px] items-baseline gap-x-3 border-b border-rule-10 py-2.5">
                             <button
                                 onClick={() => r.entry && onSelect(r.ticker)}
                                 className="text-left text-[13px] font-extrabold text-ink hover:text-accent"
@@ -272,7 +272,7 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
                             </span>
                             <span className="min-w-0">
                                 <span className="text-[11.5px] font-bold" style={{ color: r.color }}>{r.verdict}</span>
-                                <span className="ml-2 text-[10.5px] text-ink-3">{r.note}</span>
+                                <span className="ml-2 text-[11px] text-ink-3">{r.note}</span>
                             </span>
                             <span className="text-right font-mono text-[11px] text-ink-2">
                                 {r.vm?.expectations_gap_pts != null
@@ -290,7 +290,7 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
                         </div>
                     ))}
 
-                    <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 font-mono text-[10.5px] text-ink-2">
+                    <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 font-mono text-[11px] text-ink-2">
                         <span>TOTAL <b className="text-ink">${total.toLocaleString()}</b></span>
                         <span>CASH <b className="text-ink">{total > 0 ? ((cash / total) * 100).toFixed(1) : '0.0'}%</b></span>
                         {weightedComposite !== null && (

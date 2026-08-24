@@ -24,51 +24,56 @@ export interface VerdictTone {
 const ACCENT = 'oklch(0.78 0.08 250)';
 const POS = 'oklch(0.75 0.11 155)';
 const WARN = '#cfa14e';
-const NEG = '#c2695a';
-const MUTED = '#8b887f';
+const NEG = '#e2917f';
+const MUTED = '#d3cfc5';
 
 export function verdictTone(direction: Direction | null | undefined): VerdictTone {
     switch (direction) {
         case 'undervalued':
             return {
-                label: 'UNDERVALUED', color: POS, fill: 'oklch(0.75 0.11 155 / .28)',
+                label: 'UNDERVALUED', color: POS, fill: 'oklch(0.75 0.11 155 / .48)',
                 subline: 'every run above the price', action: 'buy',
                 keys: { label: 'vUndervalued', subline: 'vSubUnder', action: 'actBuy' },
             };
         case 'overvalued':
             return {
-                label: 'OVERVALUED', color: NEG, fill: 'rgba(194,105,90,.22)',
+                label: 'OVERVALUED', color: NEG, fill: 'rgba(226,145,127,.44)',
                 subline: 'every run below the price', action: 'reduce',
                 keys: { label: 'vOvervalued', subline: 'vSubOver', action: 'actReduce' },
             };
         case 'hold':
             return {
-                label: 'FAIR', color: WARN, fill: 'rgba(207,161,78,.22)',
+                label: 'FAIR', color: WARN, fill: 'rgba(207,161,78,.44)',
                 subline: 'price sits inside the band', action: 'hold',
                 keys: { label: 'vFair', subline: 'vSubFair', action: 'actHold' },
             };
         case 'NOT_USABLE':
             return {
-                label: 'NOT USABLE', color: MUTED, fill: 'rgba(255,255,255,.06)',
+                label: 'NOT USABLE', color: MUTED, fill: 'rgba(255,255,255,.12)',
                 subline: 'no plausible run', action: '—',
                 keys: { label: 'vNotUsable', subline: 'vSubNone', action: null },
             };
         default:
             return {
-                label: '—', color: MUTED, fill: 'rgba(255,255,255,.06)',
+                label: '—', color: MUTED, fill: 'rgba(255,255,255,.12)',
                 subline: 'not yet analyzed', action: '—',
                 keys: { label: null, subline: null, action: null },
             };
     }
 }
 
-/** Hero band fill is lighter than the row strip (design: .16 vs .28/.22). */
+/**
+ * Hero band fill stays lighter than the row strip — the hero is 58px tall, so
+ * the same alpha reads far heavier there. Both tiers were raised over the
+ * handoff's .28/.22 and .16: at those values the shading barely separated from
+ * the track on real screens.
+ */
 export function heroFill(direction: Direction | null | undefined): string {
     switch (direction) {
-        case 'undervalued': return 'oklch(0.75 0.11 155 / .16)';
-        case 'overvalued': return 'rgba(194,105,90,.16)';
-        case 'hold': return 'rgba(207,161,78,.16)';
-        default: return 'rgba(255,255,255,.05)';
+        case 'undervalued': return 'oklch(0.75 0.11 155 / .32)';
+        case 'overvalued': return 'rgba(226,145,127,.3)';
+        case 'hold': return 'rgba(207,161,78,.3)';
+        default: return 'rgba(255,255,255,.12)';
     }
 }
 

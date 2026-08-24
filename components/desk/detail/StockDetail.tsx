@@ -43,7 +43,7 @@ function DepthStatRow({ row }: { row: DeskRow }) {
                 <div className="mt-1 font-mono text-[19px] font-semibold text-ink">
                     {d.median_iv != null ? fmtMoney(d.median_iv, 0) : '—'}
                 </div>
-                <div className="mt-0.5 text-[10.5px]" style={{ color: gapColor(d.mos_vs_median_pct, d.direction) }}>
+                <div className="mt-0.5 text-[11px]" style={{ color: gapColor(d.mos_vs_median_pct, d.direction) }}>
                     {fmtSignedPct(d.mos_vs_median_pct)} vs price
                 </div>
             </div>
@@ -53,7 +53,7 @@ function DepthStatRow({ row }: { row: DeskRow }) {
                 <div className="mt-1 font-mono text-[19px] font-semibold text-ink">
                     {d.spread_pct != null ? `${d.spread_pct.toFixed(1)}%` : 'n/a'}
                 </div>
-                <div className="mt-0.5 text-[10.5px] text-ink-3">
+                <div className="mt-0.5 text-[11px] text-ink-3">
                     {d.spread_pct == null ? 'only one run to compare'
                         : d.spread_pct < 10 ? 'runs agree tightly'
                             : d.spread_pct < 30 ? 'runs disagree on pace'
@@ -63,10 +63,10 @@ function DepthStatRow({ row }: { row: DeskRow }) {
 
             <div>
                 <Micro>{t('statSizeHint')}</Micro>
-                <div className="mt-1 text-[16px] font-extrabold" style={{ color: sizable ? size.color : '#66635b' }}>
+                <div className="mt-1 text-[16px] font-extrabold" style={{ color: sizable ? size.color : '#c3bfb5' }}>
                     {sizable ? size.label : '—'}
                 </div>
-                <div className="mt-0.5 text-[10.5px] text-ink-3">
+                <div className="mt-0.5 text-[11px] text-ink-3">
                     {sizable ? size.note : 'no allocation — the price is not below the band'}
                 </div>
             </div>
@@ -76,7 +76,7 @@ function DepthStatRow({ row }: { row: DeskRow }) {
                 <div className="mt-1 font-mono text-[19px] font-semibold text-ink">
                     {d.n_basis}<span className="text-[12px] text-ink-3">/{d.samples_run ?? 3}</span>
                 </div>
-                <div className="mt-0.5 text-[10.5px] text-ink-3">
+                <div className="mt-0.5 text-[11px] text-ink-3">
                     {(d.samples_run ?? 3) - d.n_basis === 0 ? 'none discarded'
                         : `${(d.samples_run ?? 3) - d.n_basis} rejected by the guards`}
                 </div>
@@ -114,7 +114,7 @@ function ReverseDcf({ row }: { row: DeskRow }) {
                             {implied != null ? `${implied.toFixed(1)}%` : '—'}
                         </span>
                     </div>
-                    <Bar pct={implied != null ? Math.min(100, (implied / 35) * 100 + 4) : 0} color="#8b887f" height={8} />
+                    <Bar pct={implied != null ? Math.min(100, (implied / 35) * 100 + 4) : 0} color="#d3cfc5" height={8} />
                 </div>
                 <div>
                     <div className="mb-1 flex items-baseline justify-between">
@@ -155,7 +155,7 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
     const z = f.fct_z ?? {};
     const haircuts = f.fct_haircuts ?? {};
     return (
-        <div className="border-t border-rule-9 pt-5">
+        <div className="border-t border-rule-14 pt-5">
             <div className="flex items-baseline justify-between gap-4">
                 <Micro>{t('quantPanelTitle')}</Micro>
                 <span className="font-mono text-[12px] text-ink">
@@ -180,7 +180,7 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
                 })}
             </div>
 
-            <p className="mt-3 text-[10.5px] leading-relaxed text-ink-3">
+            <p className="mt-3 text-[11px] leading-relaxed text-ink-3">
                 Sector-neutral, equal-weighted z-scores. Haircuts: survivability ×{(haircuts.survivability ?? 1).toFixed(2)},
                 data quality ×{(haircuts.data_quality ?? 1).toFixed(2)}, forensic ×{(haircuts.forensic ?? 1).toFixed(2)}.
                 The quant filter decides what the AI reads — it no longer scores the verdict.
@@ -279,7 +279,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
     return shell(
         <div>
             {/* Title bar */}
-            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-rule-9 py-4">
+            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-rule-14 py-4">
                 <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                     <button onClick={() => router.push(backHref)} className="text-[12px] text-ink-2 hover:text-ink">
                         {backLabel}
@@ -295,7 +295,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                     <a
                         href={`https://www.tradingview.com/symbols/${row.ticker}/`}
                         target="_blank" rel="noopener noreferrer"
-                        className="font-mono text-[10px] uppercase tracking-[.08em] text-ink-2 hover:text-ink"
+                        className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2 hover:text-ink"
                     >
                         TradingView ↗
                     </a>
@@ -310,7 +310,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
             {/* Two-column body */}
             <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-[1.35fr_1fr]">
-                <div className="min-w-0 border-rule-9 py-6 lg:border-r lg:pr-8">
+                <div className="min-w-0 border-rule-14 py-6 lg:border-r lg:pr-8">
                     <Micro className="block">
                         RS2 local-LLM analysis
                         {d?.date ? ` · depth run ${d.date}` : ''}
@@ -366,7 +366,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                     )}
                 </div>
 
-                <div className="flex min-w-0 flex-col gap-6 border-t border-rule-9 py-6 lg:border-t-0 lg:pl-0">
+                <div className="flex min-w-0 flex-col gap-6 border-t border-rule-14 py-6 lg:border-t-0 lg:pl-0">
                     <ReverseDcf row={row} />
                     <QuantFilterPanel row={row} />
                 </div>
@@ -375,7 +375,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
             <TranscriptViewer bundle={bundle} />
 
             {/* Earlier RS2 runs: full analysis, research brief and raw stages. */}
-            <section className="mt-8 min-w-0 border-t border-rule-16 pt-5">
+            <section className="mt-8 min-w-0 border-t border-rule-22 pt-5">
                 <Micro className="mb-3 block font-semibold text-ink">Analysis history</Micro>
                 <Rs2AnalysisPanel symbol={row.ticker} displayTicker={row.ticker} hideDepth />
             </section>

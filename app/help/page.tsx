@@ -237,10 +237,10 @@ function SidebarNav({ activeId, lang }: { activeId: string; lang: Lang }) {
         <nav className="space-y-4">
             {NAV_GROUPS.map(group => (
                 <div key={group.id}>
-                    <p className="mb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-ink-3">
+                    <p className="mb-1.5 text-[11px] font-extrabold uppercase tracking-wider text-ink-3">
                         {group[lang]}
                     </p>
-                    <ul className="space-y-0.5 border-l border-rule-9">
+                    <ul className="space-y-0.5 border-l border-rule-14">
                         {group.items.map(item => {
                             const active = activeId === item.id;
                             return (
@@ -341,15 +341,15 @@ export default function HelpPage() {
         <GlossaryProvider>
             <div className="min-h-screen bg-page text-ink">
                 {/* ── Header ─────────────────────────────────────────────── */}
-                <header className="sticky top-0 z-30 border-b border-rule-9 bg-page">
+                <header className="sticky top-0 z-30 border-b border-rule-14 bg-page">
                     <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-3 px-4 py-3">
-                        <Link href="/" className="flex items-center gap-1.5 border border-rule-9 px-2.5 py-1.5 text-xs font-bold text-ink-2 hover:text-ink">
+                        <Link href="/" className="flex items-center gap-1.5 border border-rule-14 px-2.5 py-1.5 text-xs font-bold text-ink-2 hover:text-ink">
                             <ArrowLeft className="h-3.5 w-3.5" /> Rankings
                         </Link>
                         <button
                             onClick={() => setMobileNavOpen(true)}
                             aria-label={openContentsLabel}
-                            className="flex items-center gap-1.5 border border-rule-9 bg-white/5 px-2.5 py-1.5 text-xs font-bold text-ink-2 hover:text-ink lg:hidden"
+                            className="flex items-center gap-1.5 border border-rule-14 bg-white/5 px-2.5 py-1.5 text-xs font-bold text-ink-2 hover:text-ink lg:hidden"
                         >
                             <ListTree className="h-3.5 w-3.5" />
                             {contentsLabel}
@@ -360,7 +360,7 @@ export default function HelpPage() {
                                 <h1 className="text-base font-extrabold tracking-brand">
                                     STOCKPEAK <span className="text-accent">HANDBOOK</span>
                                 </h1>
-                                <p className="text-[10px] font-semibold uppercase tracking-wider text-ink-2">
+                                <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-2">
                                     {UI.handbookSubtitle[lang]} · v{APP_VERSION}
                                 </p>
                             </div>
@@ -375,7 +375,7 @@ export default function HelpPage() {
                                     onFocus={() => setSearchOpen(true)}
                                     placeholder={UI.searchPlaceholder[lang]}
                                     aria-label={UI.searchPlaceholder[lang]}
-                                    className="w-56 border border-rule-9 bg-white/5 py-1.5 pl-8 pr-2 text-xs text-ink placeholder:text-ink-3 focus:border-accent focus:outline-none"
+                                    className="w-56 border border-rule-14 bg-white/5 py-1.5 pl-8 pr-2 text-xs text-ink placeholder:text-ink-3 focus:border-accent focus:outline-none"
                                 />
                                 {glossaryQuery.trim() !== '' && (
                                     <button
@@ -388,8 +388,8 @@ export default function HelpPage() {
                                 )}
 
                                 {searchOpen && glossaryQuery.trim() !== '' && (
-                                    <div className="absolute right-0 top-full z-40 mt-1 max-h-[60vh] w-80 overflow-y-auto border border-rule-16 bg-page p-2 scroll-dark">
-                                        <p className="px-1 pb-1.5 font-mono text-[9.5px] uppercase tracking-[.1em] text-ink-3">
+                                    <div className="absolute right-0 top-full z-40 mt-1 max-h-[60vh] w-80 overflow-y-auto border border-rule-22 bg-page p-2 scroll-dark">
+                                        <p className="px-1 pb-1.5 font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-3">
                                             {entries.length === 0
                                                 ? (lang === 'ko' ? '\uacb0\uacfc \uc5c6\uc74c' : lang === 'zh' ? '\u6c92\u6709\u7d50\u679c' : 'No matches')
                                                 : (lang === 'ko' ? `${entries.length}\uac1c \uacb0\uacfc` : lang === 'zh' ? `${entries.length} \u500b\u7d50\u679c` : `${entries.length} match${entries.length === 1 ? '' : 'es'}`)}
@@ -397,7 +397,7 @@ export default function HelpPage() {
                                         {entries.slice(0, 10).map(([key, term]) => {
                                             const loc = lang === 'ko' ? GLOSSARY_KO[key] : lang === 'zh' ? GLOSSARY_ZH[key] : undefined;
                                             return (
-                                                <div key={key} className="border-t border-rule-6 px-1 py-1.5 first:border-t-0">
+                                                <div key={key} className="border-t border-rule-10 px-1 py-1.5 first:border-t-0">
                                                     <Term term={key} label={loc?.term ?? term.term} />
                                                     <p className="mt-0.5 line-clamp-2 text-[11px] leading-snug text-ink-3">
                                                         {loc?.plain ?? term.plain}
@@ -409,7 +409,7 @@ export default function HelpPage() {
                                             <Link
                                                 href="#glossary"
                                                 onClick={() => setSearchOpen(false)}
-                                                className="mt-1 block border-t border-rule-9 px-1 pt-2 font-mono text-[9.5px] uppercase tracking-[.1em] text-accent"
+                                                className="mt-1 block border-t border-rule-14 px-1 pt-2 font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-accent"
                                             >
                                                 {lang === 'ko' ? `\uc804\uccb4 ${entries.length}\uac1c \ubcf4\uae30` : lang === 'zh' ? `\u67e5\u770b\u5168\u90e8 ${entries.length} \u500b` : `See all ${entries.length} in the glossary`} \u2192
                                             </Link>
@@ -428,13 +428,13 @@ export default function HelpPage() {
                 <div className="mx-auto flex max-w-[1400px] gap-6 px-4 py-6">
                     {/* Left TOC (desktop) */}
                     <nav className="sticky top-20 hidden h-fit w-56 shrink-0 lg:block">
-                        <p className="mb-2 text-[10px] font-extrabold uppercase tracking-wider text-ink-3">
+                        <p className="mb-2 text-[11px] font-extrabold uppercase tracking-wider text-ink-3">
                             {UI.onThisPage[lang]}
                         </p>
                         <div className="max-h-[calc(100vh-8rem)] overflow-y-auto pr-1">
                             <SidebarNav activeId={activeId} lang={lang} />
                         </div>
-                        <div className="mt-4 border border-rule-6 bg-white/5 p-3 text-[11px] leading-relaxed text-ink-2">
+                        <div className="mt-4 border border-rule-10 bg-white/5 p-3 text-[11px] leading-relaxed text-ink-2">
                             <p className="font-extrabold uppercase tracking-wider text-pos">{UI.howToUse[lang]}</p>
                             <p className="mt-1">
                                 {UI.howToUseBody[lang]}
@@ -545,7 +545,7 @@ export default function HelpPage() {
                             </p>
                             <div className="space-y-3">
                                 {FACTOR_ITEMS.map(f => (
-                                    <div key={f.key} className="border border-rule-6 bg-white/5 p-3">
+                                    <div key={f.key} className="border border-rule-10 bg-white/5 p-3">
                                         <p className="flex items-center gap-2 text-sm font-extrabold">
                                             <span className={`h-2.5 w-2.5  ${f.dot}`} />
                                             <span className={f.color}>{f.name}</span>
@@ -946,7 +946,7 @@ export default function HelpPage() {
                                     value={glossaryQuery}
                                     onChange={e => setGlossaryQuery(e.target.value)}
                                     placeholder={UI.searchPlaceholder[lang]}
-                                    className="w-full border border-rule-9 bg-white/5 py-2 pl-8 pr-2 text-xs text-ink placeholder:text-ink-3 focus:border-accent focus:outline-none"
+                                    className="w-full border border-rule-14 bg-white/5 py-2 pl-8 pr-2 text-xs text-ink placeholder:text-ink-3 focus:border-accent focus:outline-none"
                                 />
                             </div>
                             {glossaryQuery && (
@@ -977,10 +977,10 @@ export default function HelpPage() {
                                     return (
                                         <div key={cat}>
                                             <div className="flex items-center gap-2">
-                                                <span className={` border px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider ${CATEGORY_STYLES[cat]}`}>
+                                                <span className={` border px-1.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wider ${CATEGORY_STYLES[cat]}`}>
                                                     {catLabel[cat]}
                                                 </span>
-                                                <span className="text-[10px] font-bold text-ink-3">
+                                                <span className="text-[11px] font-bold text-ink-3">
                                                     {lang === 'ko' ? `${counts[cat]}개 용어` : lang === 'zh' ? `${counts[cat]} 個詞彙` : `${counts[cat]} term${counts[cat] === 1 ? '' : 's'}`}
                                                 </span>
                                             </div>
@@ -1033,19 +1033,19 @@ export default function HelpPage() {
                 {mobileNavOpen && (
                     <div className="fixed inset-0 z-[70] lg:hidden" role="dialog" aria-modal="true">
                         <div className="absolute inset-0 bg-black/60" onClick={() => setMobileNavOpen(false)} />
-                        <div className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col border-r border-rule-9 bg-page">
-                            <div className="flex items-center justify-between border-b border-rule-6 px-4 py-3">
-                                <p className="text-[10px] font-extrabold uppercase tracking-wider text-ink-3">
+                        <div className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col border-r border-rule-14 bg-page">
+                            <div className="flex items-center justify-between border-b border-rule-10 px-4 py-3">
+                                <p className="text-[11px] font-extrabold uppercase tracking-wider text-ink-3">
                                     {contentsLabel}
                                 </p>
-                                <button onClick={() => setMobileNavOpen(false)} aria-label="Close contents" className="border border-rule-6 p-1.5 text-ink-2 hover:text-ink">
+                                <button onClick={() => setMobileNavOpen(false)} aria-label="Close contents" className="border border-rule-10 p-1.5 text-ink-2 hover:text-ink">
                                     <X className="h-4 w-4" />
                                 </button>
                             </div>
                             <div className="flex-1 overflow-y-auto p-4">
                                 <SidebarNav activeId={activeId} lang={lang} />
                             </div>
-                            <div className="border-t border-rule-6 p-3 text-[10px] leading-relaxed text-ink-3">
+                            <div className="border-t border-rule-10 p-3 text-[11px] leading-relaxed text-ink-3">
                                 {UI.howToUseBody[lang]}
                             </div>
                         </div>

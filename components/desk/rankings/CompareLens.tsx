@@ -17,11 +17,11 @@ const GRID_HEAD = 'hidden lg:grid lg:grid-cols-[180px_1fr_120px_1fr_220px] items
 const GRID_ROW = 'grid grid-cols-1 gap-y-2 lg:grid-cols-[180px_1fr_120px_1fr_220px] lg:gap-y-0 lg:gap-x-5 items-start';
 
 function deltaColor(d: number | null): string {
-    if (d === null) return '#66635b';
+    if (d === null) return '#c3bfb5';
     const a = Math.abs(d);
     if (a >= 30) return d > 0 ? 'oklch(0.78 0.08 250)' : '#cfa14e';
-    if (a >= 8) return '#8b887f';
-    return '#66635b';
+    if (a >= 8) return '#d3cfc5';
+    return '#c3bfb5';
 }
 
 export function CompareLens({ rows, sort, onSort, onOpen }: {
@@ -45,7 +45,7 @@ export function CompareLens({ rows, sort, onSort, onOpen }: {
                 }
             />
 
-            <div className={clsx(GRID_HEAD, 'border-b border-rule-12 pb-2 pt-3')}>
+            <div className={clsx(GRID_HEAD, 'border-b border-rule-18 pb-2 pt-3')}>
                 <Micro>Stock</Micro>
                 <Micro className="text-right">Quant says</Micro>
                 <Micro className="text-center">Δ</Micro>
@@ -54,7 +54,7 @@ export function CompareLens({ rows, sort, onSort, onOpen }: {
             </div>
 
             {rows.length === 0 && (
-                <p className="border-b border-rule-6 py-5 text-[12px] text-ink-3">
+                <p className="border-b border-rule-10 py-5 text-[12px] text-ink-3">
                     No name has been read by both engines yet.
                 </p>
             )}
@@ -71,7 +71,7 @@ export function CompareLens({ rows, sort, onSort, onOpen }: {
                         tabIndex={0}
                         onClick={() => onOpen(r.ticker)}
                         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(r.ticker); } }}
-                        className={clsx('cursor-pointer border-b border-rule-6 py-4 hover:bg-hover', GRID_ROW, agree && 'opacity-70')}
+                        className={clsx('cursor-pointer border-b border-rule-10 py-4 hover:bg-hover', GRID_ROW, agree && 'opacity-70')}
                     >
                         <span className="block min-w-0">
                             <span className="text-[15px] font-extrabold text-ink">{r.ticker}</span>
@@ -98,7 +98,7 @@ export function CompareLens({ rows, sort, onSort, onOpen }: {
                             <span className="text-[13px] font-extrabold" style={{ color: tone.color }}>{tone.label}</span>
                             <span className="ml-1.5 text-[11.5px] text-ink-2">· {tone.action}</span>
                             {r.aiRank && <span className="ml-1.5 font-mono text-[11px] text-ink-3">AI #{r.aiRank}</span>}
-                            <span className="mt-1 block font-mono text-[10.5px] text-ink-3">
+                            <span className="mt-1 block font-mono text-[11px] text-ink-3">
                                 {fmtSignedPct(r.depth?.mos_vs_median_pct)} median gap
                                 {r.depth?.spread_pct != null && ` · ${r.depth.spread_pct.toFixed(1)}% spread`}
                                 {r.depth?.size_hint && ` → ${size.label}`}

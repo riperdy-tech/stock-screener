@@ -4,24 +4,31 @@
 
 @layer base {
     :root {
-        /* ── AI Research Desk palette (design_handoff_stockpeak_redesign) ──
-           Editorial, dark-only, radius 0. Tailwind reads these same values from
-           tailwind.config.js; the vars exist for raw CSS below and inline styles. */
-        --page: #0e0f11;
-        --surface: #131416;
-        --ink: #e7e5e0;
-        --ink-2: #8b887f;
-        --ink-3: #66635b;
-        --ink-q: #c9c6be;
+        /* ── AI Research Desk palette (design_handoff_stockpeak_redesign_rev1) ──
+           Editorial, dark-only, radius 0. Values are the Aug-24 legibility pass:
+           the canvas sits off near-black and every grey tier is raised, because
+           muted greys on the old #131416 were unreadable on real screens.
+           Secondary and tertiary are deliberately close — hierarchy comes from
+           size, weight and tracking, never from fading text into the background.
+           Tailwind reads these same values from tailwind.config.js; the vars exist
+           for the raw CSS below and for inline styles. */
+        --page: #15171a;
+        --surface: #1c1e21;
+        --inset: #202225;
+        --ink: #f2f0eb;
+        --ink-2: #d3cfc5;
+        --ink-3: #c3bfb5;
+        --ink-q: #e0ddd6;
         --accent: oklch(0.78 0.08 250);
         --pos: oklch(0.75 0.11 155);
         --warn: #cfa14e;
-        --neg: #c2695a;
-        --rule-16: rgba(255, 255, 255, .16);
+        --neg: #e2917f;
+        --rule-24: rgba(255, 255, 255, .24);
+        --rule-22: rgba(255, 255, 255, .22);
+        --rule-18: rgba(255, 255, 255, .18);
         --rule-14: rgba(255, 255, 255, .14);
-        --rule-12: rgba(255, 255, 255, .12);
-        --rule-9: rgba(255, 255, 255, .09);
-        --rule-6: rgba(255, 255, 255, .06);
+        --rule-10: rgba(255, 255, 255, .10);
+        --track: rgba(255, 255, 255, .12);
         --radius: 0px;
     }
 
@@ -72,7 +79,7 @@
 /* Themed thin scrollbars for dark scroll areas (transcript viewers, tables). */
 .scroll-dark {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, .22) #0e0f11;
+    scrollbar-color: rgba(255, 255, 255, .22) #15171a;
 }
 
 .scroll-dark::-webkit-scrollbar {
@@ -81,7 +88,7 @@
 }
 
 .scroll-dark::-webkit-scrollbar-track {
-    background: #0e0f11;
+    background: #15171a;
 }
 
 .scroll-dark::-webkit-scrollbar-thumb {
@@ -120,6 +127,18 @@
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     word-break: break-word;
+}
+
+/* 11px is the floor for every piece of text in the app (handoff rev1). The
+   typography plugin's prose-sm scales `pre code` to .857em — clamp it back. */
+.prose :where(code, pre, kbd, samp, figcaption, small, sub, sup):not(:where([class~="not-prose"] *)) {
+    font-size: max(11px, 0.875em);
+}
+
+small,
+sub,
+sup {
+    font-size: max(11px, 0.85em);
 }
 
 /* Report prose overrides (ReportsDashboard, RS2 markdown panels) */
@@ -166,7 +185,7 @@
     width: 2rem;
     height: 2rem;
     flex-shrink: 0;
-    border: 1px solid var(--rule-14);
+    border: 1px solid var(--rule-24);
     background: transparent;
     color: var(--ink-2);
     font-family: var(--font-spline), ui-monospace, monospace;

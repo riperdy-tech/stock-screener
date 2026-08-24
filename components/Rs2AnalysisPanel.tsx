@@ -61,7 +61,7 @@ function Md({ children }: { children: string }) {
 
 function Metric({ label, value, tone }: { label: string; value: string; tone: string }) {
     return (
-        <div className="flex flex-col items-center justify-center border border-rule-6 bg-page px-2 py-3 text-center">
+        <div className="flex flex-col items-center justify-center border border-rule-10 bg-page px-2 py-3 text-center">
             <div className="text-[11px] font-bold uppercase tracking-wider text-ink-2">{label}</div>
             <div className={clsx("mt-1 font-mono text-lg font-extrabold leading-none", tone)}>{value}</div>
         </div>
@@ -70,7 +70,7 @@ function Metric({ label, value, tone }: { label: string; value: string; tone: st
 
 function Note({ children }: { children: React.ReactNode }) {
     return (
-        <div className="border border-dashed border-rule-9 bg-page p-5 text-center text-xs leading-relaxed text-ink-2">
+        <div className="border border-dashed border-rule-14 bg-page p-5 text-center text-xs leading-relaxed text-ink-2">
             {children}
         </div>
     );
@@ -90,7 +90,7 @@ function DepthSamplesView({ ticker }: { ticker: string }) {
     if (withReports.length === 0) return null;
     const cur = withReports[Math.min(tab, withReports.length - 1)];
     return (
-        <div className="border border-rule-6 bg-surface">
+        <div className="border border-rule-10 bg-inset">
             <button
                 onClick={() => setOpen(!open)}
                 className="flex w-full items-center justify-between px-3 py-2 text-left text-xs font-extrabold uppercase tracking-wide text-ink-2 hover:text-ink"
@@ -99,13 +99,13 @@ function DepthSamplesView({ ticker }: { ticker: string }) {
                 <span>{open ? "▾ hide" : "▸ show"}</span>
             </button>
             {open && (
-                <div className="border-t border-rule-6 p-3">
+                <div className="border-t border-rule-10 p-3">
                     <div className="mb-2 flex flex-wrap gap-1.5">
                         {withReports.map((s, i) => (
                             <button
                                 key={s.sample}
                                 onClick={() => setTab(i)}
-                                className={` border px-2.5 py-1 text-xs font-bold ${i === tab ? "border-accent bg-accent/10 text-accent" : "border-rule-9 text-ink-2 hover:text-ink"}`}
+                                className={` border px-2.5 py-1 text-xs font-bold ${i === tab ? "border-accent bg-accent/10 text-accent" : "border-rule-14 text-ink-2 hover:text-ink"}`}
                             >
                                 Sample {s.sample}{s.iv != null ? ` · $${s.iv}` : ""}{!s.plausible ? " · rejected" : ""}{s.truncated ? " · truncated" : ""}
                             </button>
@@ -130,7 +130,7 @@ function DepthVerdictBanner({ v }: { v: DepthVerdict }) {
         v.direction === "undervalued" ? "border-pos/40 bg-pos/10 text-pos" :
         v.direction === "overvalued" ? "border-neg/40 bg-neg/10 text-neg" :
         v.direction === "hold" ? "border-warn/40 bg-warn/10 text-warn" :
-        "border-rule-9 bg-white/5 text-ink-2";
+        "border-rule-14 bg-white/5 text-ink-2";
     const label =
         v.direction === "undervalued" ? "UNDERVALUED — every run values it above the price" :
         v.direction === "overvalued" ? "OVERVALUED — every run values it below the price" :
@@ -214,7 +214,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
             <div className="space-y-4">
             {!hideDepth && depthV && <DepthVerdictBanner v={depthV} />}
             {!hideDepth && depthV && <DepthSamplesView ticker={ticker} />}
-            <div className="border border-dashed border-rule-9 bg-surface p-6 text-center">
+            <div className="border border-dashed border-rule-14 bg-inset p-6 text-center">
                 <div className="text-sm font-extrabold text-ink">No RS2 analysis yet for {displayTicker}</div>
                 <p className="mx-auto mt-1.5 max-w-md text-xs leading-relaxed text-ink-2">
                     The local RS2 engine analyzes Research-Now and Watchlist names on a weekly / bi-weekly cadence. It hasn't produced a report for this ticker yet.
@@ -253,7 +253,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
                     TradingView overview
                     <ExternalLink className="h-3 w-3" />
                 </a>
-                <span className="ml-auto border border-rule-6 bg-white/5 px-2.5 py-1 text-xs text-ink-2">
+                <span className="ml-auto border border-rule-10 bg-white/5 px-2.5 py-1 text-xs text-ink-2">
                     Method: <span className="font-extrabold text-ink">{humanMethod(method)}</span>
                 </span>
             </div>
@@ -287,7 +287,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
                                 "whitespace-nowrap  border px-2.5 py-1.5 text-xs font-bold transition-colors",
                                 h.ts === selectedTs
                                     ? "border-accent/50 bg-accent/10 text-accent"
-                                    : "border-rule-6 bg-white/5 text-ink-2 hover:border-accent/30 hover:text-ink"
+                                    : "border-rule-10 bg-white/5 text-ink-2 hover:border-accent/30 hover:text-ink"
                             )}
                         >
                             {fmtDate(h.date)} · {shortAction(h.action)}{h.conviction != null ? ` ${h.conviction}` : ""}
@@ -297,7 +297,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
             )}
 
             {/* sub-tabs */}
-            <div className="flex gap-2 border-b border-rule-6 pb-2">
+            <div className="flex gap-2 border-b border-rule-10 pb-2">
                 {([["full", "Full analysis"], ["research", "Research & news"], ["raw", "Raw stages"]] as const).map(([id, label]) => (
                     <button
                         key={id}
@@ -306,7 +306,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
                             " border px-3 py-1.5 text-xs font-extrabold transition-colors",
                             subTab === id
                                 ? "border-accent/50 bg-accent/10 text-accent"
-                                : "border-rule-6 bg-white/5 text-ink-2 hover:text-ink"
+                                : "border-rule-10 bg-white/5 text-ink-2 hover:text-ink"
                         )}
                     >
                         {label}
@@ -315,7 +315,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
             </div>
 
             {/* panels */}
-            <div className="border border-rule-6 bg-surface p-4">
+            <div className="border border-rule-10 bg-inset p-4">
                 {bundleLoading ? (
                     <div className="p-4 text-center text-sm text-ink-2">Loading report…</div>
                 ) : subTab === "full" ? (
@@ -332,7 +332,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
                 ) : rawKeys.length ? (
                     <div className="space-y-2">
                         {STAGE_TITLES.filter(([k]) => bundle?.raw?.[k]).map(([k, title]) => (
-                            <div key={k} className="overflow-hidden border border-rule-6">
+                            <div key={k} className="overflow-hidden border border-rule-10">
                                 <button
                                     onClick={() => setOpenStages((s) => ({ ...s, [k]: !s[k] }))}
                                     className="flex w-full items-center justify-between gap-2 bg-white/5 px-3 py-2 text-left text-sm font-extrabold text-ink transition-colors hover:bg-white/5"
@@ -341,7 +341,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
                                     <ChevronDown className={clsx("h-4 w-4 shrink-0 transition-transform", openStages[k] && "rotate-180")} />
                                 </button>
                                 {openStages[k] && (
-                                    <div className="border-t border-rule-6 p-3">
+                                    <div className="border-t border-rule-10 p-3">
                                         {k === "s3_inputs" ? (
                                             <pre className="overflow-x-auto whitespace-pre-wrap break-words font-mono text-xs text-ink-2">{bundle!.raw[k]}</pre>
                                         ) : (

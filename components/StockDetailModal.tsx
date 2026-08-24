@@ -120,17 +120,17 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-3 bg-page animate-in fade-in duration-200">
-            <div className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto bg-surface border border-rule-9 animate-in zoom-in-95 duration-200">
+            <div className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto bg-surface border border-rule-14 animate-in zoom-in-95 duration-200">
 
                 {/* Header */}
-                <div className="sticky top-0 z-10 flex items-center justify-between p-3 sm:p-4 bg-surface border-b border-rule-9">
+                <div className="sticky top-0 z-10 flex items-center justify-between p-3 sm:p-4 bg-surface border-b border-rule-14">
                     <div className="flex-1 min-w-0">
                         <div className="flex flex-col gap-1">
                             <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
                                 <h2 className="truncate text-2xl font-extrabold tracking-tight sm:text-2xl">
                                     {displayTicker}
                                 </h2>
-                                <span className="truncate text-sm font-semibold text-ink-2 sm:border-l sm:border-rule-9 sm:px-2 sm:text-lg">
+                                <span className="truncate text-sm font-semibold text-ink-2 sm:border-l sm:border-rule-14 sm:px-2 sm:text-lg">
                                     {displayName}
                                 </span>
                             </div>
@@ -167,7 +167,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         </div>
 
-                        <div className="mt-3 flex flex-col gap-2 border border-rule-6 bg-page p-2.5 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="mt-3 flex flex-col gap-2 border border-rule-10 bg-page p-2.5 sm:flex-row sm:items-center sm:justify-between">
                             <div className="min-w-0">
                                 <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">Primary Actions</div>
                                 <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -175,7 +175,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         href={`https://www.tradingview.com/symbols/${candidate.symbol}/`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-2 border border-[#2a2e39] bg-[#131722] px-3 py-2 text-surface transition-all hover:bg-[#2a2e39]"
+                                        className="flex items-center gap-2 border border-[#2a2e39] bg-[#131722] px-3 py-2 text-ink transition-all hover:bg-[#2a2e39]"
                                         title={t('openTV')}
                                     >
                                         <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="h-4 w-4" />
@@ -247,7 +247,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         </div>
 
                         {/* Score & Synthesis */}
-                        <div className="flex flex-col gap-3 border border-rule-6 bg-white/5 p-3 sm:flex-row sm:items-center sm:p-4">
+                        <div className="flex flex-col gap-3 border border-rule-10 bg-white/5 p-3 sm:flex-row sm:items-center sm:p-4">
                             <div className="relative flex items-center justify-center h-16 w-16 shrink-0">
                                 <svg className="h-full w-full -rotate-90" viewBox="0 0 36 36">
                                     <path className="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
@@ -335,7 +335,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             />
                         </div>
 
-                        <nav aria-label="Sections" className="sticky top-[168px] z-10 -mx-1 overflow-x-auto border-y border-rule-6 bg-surface px-1 py-2.5 sm:top-[142px] lg:top-[128px]">
+                        <nav aria-label="Sections" className="sticky top-[168px] z-10 -mx-1 overflow-x-auto border-y border-rule-10 bg-surface px-1 py-2.5 sm:top-[142px] lg:top-[128px]">
                             <div className="flex min-w-max gap-2">
                                 {sectionLinks.map((section) => {
                                     const isActive = activeTab === section.id;
@@ -348,7 +348,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                                 "flex items-center gap-2  border px-3.5 py-2 text-sm font-extrabold transition-colors",
                                                 isActive
                                                     ? "border-accent/60 bg-accent/10 text-accent"
-                                                    : "border-rule-6 bg-white/5 text-ink-2 hover:border-accent/40 hover:bg-white/5 hover:text-ink"
+                                                    : "border-rule-10 bg-white/5 text-ink-2 hover:border-accent/40 hover:bg-white/5 hover:text-ink"
                                             )}
                                         >
                                             <span>{section.label}</span>
@@ -359,12 +359,12 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                         </nav>
 
                         {/* RS2 local-LLM research + outcomes (primary analysis surface) */}
-                        <div className={clsx(" border border-rule-6 bg-surface p-3  sm:p-4", activeTab !== "rs2" && "hidden")}>
+                        <div className={clsx(" border border-rule-10 bg-surface p-3  sm:p-4", activeTab !== "rs2" && "hidden")}>
                             <Rs2AnalysisPanel symbol={candidate.symbol} displayTicker={displayTicker} />
                         </div>
 
                         {/* Phase 1: Quant Metrics */}
-                        <div id="scorecard-quant" className={clsx("scroll-mt-28  border border-rule-6 bg-surface p-3  sm:p-4", activeTab !== "quant" && "hidden")}>
+                        <div id="scorecard-quant" className={clsx("scroll-mt-28  border border-rule-10 bg-surface p-3  sm:p-4", activeTab !== "quant" && "hidden")}>
                             <div className="mb-3 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                                 <SectionHeading
                                     icon={<Activity className="h-4 w-4 text-accent" />}
@@ -393,7 +393,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
                         {/* WS1: Paradigm Dimension Breakdown */}
                         {result.paradigm && (result.paradigm.pdm_themes?.length > 0 || result.paradigm.pdm_signal != null) && (
-                            <div id="scorecard-paradigm" className={clsx("scroll-mt-28  border border-rule-14 bg-white/5] p-3  sm:p-4", activeTab !== "paradigm" && "hidden")}>
+                            <div id="scorecard-paradigm" className={clsx("scroll-mt-28  border border-rule-24 bg-white/5] p-3  sm:p-4", activeTab !== "paradigm" && "hidden")}>
                                 <div className="mb-3">
                                     <SectionHeading
                                         icon={<Layers3 className="h-4 w-4 text-ink-2" />}
@@ -416,12 +416,12 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     <ReverseStat label="Confidence" value={result.paradigm.pdm_confidence != null ? result.paradigm.pdm_confidence : 'n/a'} />
                                 </div>
                                 {paradigmBaselineEvent && (
-                                    <div className="mb-3 border border-rule-14 bg-page p-3">
+                                    <div className="mb-3 border border-rule-24 bg-page p-3">
                                         <div className="mb-2 flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
                                             <History className="h-4 w-4 text-ink-2" />
                                             Current baseline
                                         </div>
-                                        <div className="flex flex-col gap-1 border border-rule-6 bg-white/5 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
+                                        <div className="flex flex-col gap-1 border border-rule-10 bg-white/5 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
                                             <span className="text-sm font-bold text-ink">
                                                 Entered Paradigm snapshot as {formatParadigmBand(paradigmBaselineEvent.to_band)}.
                                             </span>
@@ -430,14 +430,14 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     </div>
                                 )}
                                 {paradigmRealHistory.length > 0 && (
-                                    <div className="mb-3 border border-rule-14 bg-page p-3">
+                                    <div className="mb-3 border border-rule-24 bg-page p-3">
                                         <div className="mb-2 flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
                                             <History className="h-4 w-4 text-ink-2" />
                                             Recent changes
                                         </div>
                                         <div className="space-y-2">
                                             {paradigmRealHistory.slice(0, 4).map(event => (
-                                                <div key={`${event.run_id}-${event.summary}`} className="flex flex-col gap-1 border border-rule-6 bg-white/5 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
+                                                <div key={`${event.run_id}-${event.summary}`} className="flex flex-col gap-1 border border-rule-10 bg-white/5 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
                                                     <span className="text-sm font-bold text-ink">{formatParadigmHistoryEvent(event)}</span>
                                                     <span className="font-mono text-xs font-bold text-ink-2">{event.snapshot_date}</span>
                                                 </div>
@@ -446,11 +446,11 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     </div>
                                 )}
                                 {result.paradigm.pdm_themes && result.paradigm.pdm_themes.length > 0 && (
-                                    <div className="mb-3 border border-rule-14 bg-page p-3">
+                                    <div className="mb-3 border border-rule-24 bg-page p-3">
                                         <div className="mb-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">Matched themes</div>
                                         <div className="flex flex-wrap gap-1.5">
                                             {result.paradigm.pdm_themes.map((theme: string) => (
-                                                <span key={theme} className="text-xs font-mono px-2 py-1 bg-white/5 text-ink-2 border border-rule-14">
+                                                <span key={theme} className="text-xs font-mono px-2 py-1 bg-white/5 text-ink-2 border border-rule-24">
                                                     {theme}
                                                 </span>
                                             ))}
@@ -458,7 +458,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     </div>
                                 )}
                                 {result.paradigm.pdm_flags && result.paradigm.pdm_flags.length > 0 && (
-                                    <div className="mb-3 border border-rule-6 bg-page p-3">
+                                    <div className="mb-3 border border-rule-10 bg-page p-3">
                                         <div className="mb-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">Advisory flags</div>
                                         <div className="flex flex-wrap gap-1.5">
                                             {result.paradigm.pdm_flags.map((flag: string) => {
@@ -471,7 +471,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                                         isMacro && "bg-neg/10 text-neg border-neg/40",
                                                         isAccel && "bg-pos/10 text-pos border-pos/40",
                                                         isDecel && "bg-warn/10 text-warn border-warn/40",
-                                                        !isMacro && !isAccel && !isDecel && "bg-white/5 text-ink-2 border-rule-6",
+                                                        !isMacro && !isAccel && !isDecel && "bg-white/5 text-ink-2 border-rule-10",
                                                     )}>
                                                         {flag}
                                                     </span>
@@ -551,7 +551,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                 {result.reverse.rev_flags && (
                                     <div className="flex flex-wrap gap-1.5 mb-3">
                                         {result.reverse.rev_flags.split(',').filter(f => f).map((flag: string) => (
-                                            <span key={flag} className="text-xs font-mono px-2 py-1 bg-white/5 text-ink-2 border border-rule-6">
+                                            <span key={flag} className="text-xs font-mono px-2 py-1 bg-white/5 text-ink-2 border border-rule-10">
                                                 {flag}
                                             </span>
                                         ))}
@@ -579,7 +579,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
 
 function ReverseStat({ label, value, sub, band, warn }: { label: string; value: string | number; sub?: string; band?: string | null; warn?: boolean }) {
     return (
-        <div className="min-w-0 border border-rule-6 bg-white/5 p-3">
+        <div className="min-w-0 border border-rule-10 bg-white/5 p-3">
             <div className="truncate text-sm font-bold text-ink-2 uppercase tracking-wider">{label}</div>
             <div className={clsx(
                 "mt-1.5 break-words font-mono text-sm font-extrabold leading-tight",
@@ -631,7 +631,7 @@ function SectionHeading({ icon, title, body }: { icon: ReactNode; title: string;
 
 function StatusCount({ label, value, tone }: { label: string; value: number; tone: "positive" | "warning" | "negative" }) {
     return (
-        <div className="border border-rule-6 bg-white/5 px-3 py-2.5 text-center">
+        <div className="border border-rule-10 bg-white/5 px-3 py-2.5 text-center">
             <div className={clsx(
                 "font-mono text-lg font-extrabold leading-none",
                 tone === "positive" && "text-pos",
@@ -649,7 +649,7 @@ function StatusCount({ label, value, tone }: { label: string; value: number; ton
 
 function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: ReactNode; label: string; value: string | number; detail: string; tone: "purple" | "emerald" | "sky" | "red" }) {
     const toneClass = {
-        purple: "border-rule-14 bg-white/5] text-ink-2",
+        purple: "border-rule-24 bg-white/5] text-ink-2",
         emerald: "border-pos/40 bg-pos/10 text-pos",
         sky: "border-accent/40 bg-accent/10] text-accent",
         red: "border-neg/40 bg-neg/10] text-neg",
@@ -714,7 +714,7 @@ function selectedMarketLabel(market: Market) {
 
 function QuoteMetric({ label, value, sub, tone = "muted" }: { label: string; value: string; sub: string; tone?: "positive" | "negative" | "muted" }) {
     return (
-        <div className="min-w-0 border border-rule-6 bg-white/5 p-3">
+        <div className="min-w-0 border border-rule-10 bg-white/5 p-3">
             <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
             <div className={clsx(
                 "mt-2 truncate font-mono text-lg font-extrabold leading-none sm:text-2xl",
@@ -734,13 +734,13 @@ function DetailRow({ label, value, target, pass, warning }: { label: string, val
     const statusLabel = pass ? t('pass') : warning ? t('watch') : t('fail');
 
     return (
-        <div className="flex flex-col gap-3 border border-rule-6 bg-white/5 p-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border border-rule-10 bg-white/5 p-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
                 <div className="text-sm font-semibold text-ink-2">{label}</div>
                 <div className="mt-0.5 truncate font-mono text-sm font-extrabold" title={String(value)}>{value}</div>
             </div>
             <div className="flex shrink-0 items-center justify-between gap-3 sm:flex-col sm:items-end">
-                <div className="border border-rule-6 bg-page px-3 py-1.5 text-sm font-bold text-ink-2">
+                <div className="border border-rule-10 bg-page px-3 py-1.5 text-sm font-bold text-ink-2">
                     {t('target')}: {target}
                 </div>
                 <div className={clsx(

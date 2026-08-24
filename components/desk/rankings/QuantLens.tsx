@@ -21,11 +21,11 @@ const BAND_LABEL: Record<string, string> = {
 
 function BandChip({ row }: { row: DeskRow }) {
     if (row.vetoed) {
-        return <span className="font-mono text-[9.5px] uppercase tracking-[.08em] text-neg">■ VETOED</span>;
+        return <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-neg">■ VETOED</span>;
     }
     const band = row.fct.fct_band ?? 'pass';
     return (
-        <span className={clsx('font-mono text-[9.5px] uppercase tracking-[.08em]',
+        <span className={clsx('font-mono font-semibold text-[11px] uppercase tracking-[.05em]',
             band === 'research_now' ? 'text-accent' : 'text-ink-3')}>
             {BAND_LABEL[band] ?? band}
         </span>
@@ -35,14 +35,14 @@ function BandChip({ row }: { row: DeskRow }) {
 /** "UNDERVALUED · +37% · FULL" — the depth verdict compressed into one cell. */
 function CompactVerdict({ row }: { row: DeskRow }) {
     const d = row.depth;
-    if (!d) return <span className="block font-mono text-[10.5px] text-ink-3">not depth-analyzed</span>;
+    if (!d) return <span className="block font-mono text-[11px] text-ink-3">not depth-analyzed</span>;
     const tone = verdictTone(d.direction);
     const size = sizeTone(d.size_hint, d.n_basis);
     return (
         <span className="block truncate text-[11px]">
             <span className="font-bold" style={{ color: tone.color }}>{tone.label}</span>
             {d.mos_vs_median_pct != null && <span className="ml-1.5 font-mono text-ink-2">{fmtSignedPct(d.mos_vs_median_pct)}</span>}
-            {d.size_hint && <span className="ml-1.5 font-mono text-[10px]" style={{ color: size.color }}>{size.label}</span>}
+            {d.size_hint && <span className="ml-1.5 font-mono text-[11px]" style={{ color: size.color }}>{size.label}</span>}
         </span>
     );
 }
@@ -61,7 +61,7 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                 note="five factors, sector-neutral, equal-weighted — this is what feeds the AI's desk"
             />
 
-            <div className={clsx(GRID, 'hidden border-b border-rule-12 pb-2 pt-3 lg:grid')}>
+            <div className={clsx(GRID, 'hidden border-b border-rule-18 pb-2 pt-3 lg:grid')}>
                 <Micro>#</Micro>
                 <Micro>Stock</Micro>
                 <Micro className="text-right">Composite</Micro>
@@ -80,7 +80,7 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                         tabIndex={0}
                         onClick={() => onOpen(r.ticker)}
                         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(r.ticker); } }}
-                        className={clsx(GRID, 'hidden cursor-pointer border-b border-rule-6 py-3 hover:bg-hover lg:grid',
+                        className={clsx(GRID, 'hidden cursor-pointer border-b border-rule-10 py-3 hover:bg-hover lg:grid',
                             r.vetoed && 'opacity-65')}
                     >
                         <span className="font-mono text-[12px] text-ink-3">{r.fct.fct_rank ?? '—'}</span>
@@ -101,7 +101,7 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                         tabIndex={0}
                         onClick={() => onOpen(r.ticker)}
                         onKeyDown={(e) => { if (e.key === 'Enter') onOpen(r.ticker); }}
-                        className={clsx('block cursor-pointer border-b border-rule-6 py-3.5 lg:hidden', r.vetoed && 'opacity-65')}
+                        className={clsx('block cursor-pointer border-b border-rule-10 py-3.5 lg:hidden', r.vetoed && 'opacity-65')}
                     >
                         <div className="flex items-baseline justify-between gap-3">
                             <span className="min-w-0 truncate">
@@ -124,7 +124,7 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
             ))}
 
             {rows.length > limit && (
-                <button onClick={onMore} className="mt-4 font-mono text-[10px] uppercase tracking-[.1em] text-ink-2 hover:text-ink">
+                <button onClick={onMore} className="mt-4 font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2 hover:text-ink">
                     Show more — {rows.length - limit} remaining
                 </button>
             )}

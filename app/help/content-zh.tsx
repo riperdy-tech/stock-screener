@@ -85,7 +85,7 @@ export function ChineseHelpBody() {
                     超市與超市競爭，不與軟體公司比較。否則「動能高」就只是「是科技股」。
                 </p>
                 <div className="space-y-3">
-                    <div className="border border-rule-6 bg-white/5 p-3">
+                    <div className="border border-rule-10 bg-white/5 p-3">
                         <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-value" /><span className="text-pos">價值 (Value)</span></p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             是用 $1 買 $2 的年度現金盈餘，還是用 $2 買 $1？長期平均而言，便宜勝過昂貴。以四種收益率——
@@ -93,7 +93,7 @@ export function ChineseHelpBody() {
                             平均衡量。見 <Link href="#methodology" className="font-bold text-pos hover:underline">方法論</Link>。
                         </p>
                     </div>
-                    <div className="border border-rule-6 bg-white/5 p-3">
+                    <div className="border border-rule-10 bg-white/5 p-3">
                         <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-quality" /><span className="text-accent">品質 (Quality)</span></p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             公司是否持續真正賺錢、帳目乾淨？結合 <Term term="revenue-quality" />、數年來 <Term term="gross-margin" />
@@ -101,7 +101,7 @@ export function ChineseHelpBody() {
                             帳目乾淨、真正獲利的生意勝過故事。
                         </p>
                     </div>
-                    <div className="border border-rule-6 bg-white/5 p-3">
+                    <div className="border border-rule-10 bg-white/5 p-3">
                         <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-momentum" /><span className="text-warn">動能 (Momentum)</span></p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             過去一年這檔股票是否一直在贏？贏家往往再贏一陣子。由 <Term term="skip-month" />（學術標準的
@@ -109,14 +109,14 @@ export function ChineseHelpBody() {
                             <Term term="reversal" />。
                         </p>
                     </div>
-                    <div className="border border-rule-6 bg-white/5 p-3">
+                    <div className="border border-rule-10 bg-white/5 p-3">
                         <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-lowvol" /><span className="text-ink-2">低波動 (Low volatility)</span></p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             價格平穩還是劇烈波動？平穩股票歷史上一單位痛苦換來更多報酬。以月報酬標準差（至少 12 個觀察值）
                             的負值衡量。<Term term="annualized-volatility" /> 也會輸出供 <Term term="kelly" /> 部位規模使用。
                         </p>
                     </div>
-                    <div className="border border-rule-6 bg-white/5 p-3">
+                    <div className="border border-rule-10 bg-white/5 p-3">
                         <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-revisions" /><span className="text-neg">財測修正 (Revisions)</span></p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             追蹤公司的分析師是在上調還是下修預測？方向很重要。由標準化的 <Term term="eps-trajectory" /> 斜率

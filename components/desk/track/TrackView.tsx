@@ -76,13 +76,13 @@ function StatCard({ book, llm, title, note, active, onClick }: {
     return (
         <button
             onClick={onClick}
-            className={clsx('block w-full min-w-0 overflow-hidden border-t border-rule-9 px-3 py-3 text-left',
+            className={clsx('block w-full min-w-0 overflow-hidden border-t border-rule-14 px-3 py-3 text-left',
                 active && 'bg-hover')}
         >
             <div className="flex items-baseline justify-between gap-2">
                 <Micro className={clsx('truncate', active && 'text-ink')}>{title}</Micro>
                 {diff != null && (
-                    <span className={clsx('shrink-0 font-mono text-[9.5px]', diff >= 0 ? 'text-pos' : 'text-neg')}>
+                    <span className={clsx('shrink-0 font-mono text-[11px]', diff >= 0 ? 'text-pos' : 'text-neg')}>
                         AI {diff >= 0 ? '+' : '\u2212'}{Math.abs(diff).toFixed(1)}pts
                     </span>
                 )}
@@ -90,12 +90,12 @@ function StatCard({ book, llm, title, note, active, onClick }: {
             <div className={clsx('mt-1.5 font-mono text-[22px] leading-none', pctClass(lead))}>
                 {lead != null ? fmtSignedPct(lead) : '\u2014'}
             </div>
-            <div className="mt-1 text-[10.5px] leading-snug text-ink-3">{note}</div>
+            <div className="mt-1 text-[11px] leading-snug text-ink-3">{note}</div>
 
-            {!book && <div className="mt-2 text-[10.5px] text-ink-3">no ledger yet</div>}
+            {!book && <div className="mt-2 text-[11px] text-ink-3">no ledger yet</div>}
 
             {book && (
-                <table className="mt-2.5 w-full table-fixed font-mono text-[10px]">
+                <table className="mt-2.5 w-full table-fixed font-mono text-[11px]">
                     <thead>
                         <tr className="text-ink-3">
                             <th className="w-[38%] text-left font-normal" />
@@ -204,7 +204,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                 </div>
                 <div>
                     <Micro className="block">{t('trackWhatIf')}</Micro>
-                    <div className="mt-1.5 flex items-baseline gap-2 border border-rule-14 px-2.5 py-1">
+                    <div className="mt-1.5 flex items-baseline gap-2 border border-rule-24 px-2.5 py-1">
                         <input
                             type="number" min={0} max={1} step={0.05}
                             value={commInput}
@@ -221,7 +221,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
             </div>
 
             {/* Strategy stat band */}
-            <div className="grid grid-cols-1 gap-x-5 border-t border-rule-9 pb-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            <div className="grid grid-cols-1 gap-x-5 border-t border-rule-14 pb-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                 {CARDS.map((c) => (
                     <StatCard
                         key={c.key}
@@ -236,13 +236,13 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
             </div>
 
             {(books.plan3?.state?.halted || books.plan3?.state?.risk_tier) && (
-                <div className="flex flex-wrap items-center gap-3 border-t border-rule-9 pt-4">
+                <div className="flex flex-wrap items-center gap-3 border-t border-rule-14 pt-4">
                     {books.plan3?.state?.halted ? (
-                        <span className="font-mono text-[10px] uppercase tracking-[.08em] text-neg">
+                        <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-neg">
                             \u25a0 PLAN3 HALTED \u2014 kill switch fired
                         </span>
                     ) : (
-                        <span className="font-mono text-[10px] uppercase tracking-[.08em] text-warn">
+                        <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-warn">
                             PLAN3 DE-RISK TIER {books.plan3.state.risk_tier}
                         </span>
                     )}
@@ -281,7 +281,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                         {/* Current holdings */}
                         <div className="min-w-0 py-5">
                             <Micro className="block">{t('trackHoldings')} · {heldCount}</Micro>
-                            <div className="mt-3 grid grid-cols-[70px_70px_1fr_1fr_60px] gap-x-3 border-b border-rule-12 pb-2">
+                            <div className="mt-3 grid grid-cols-[70px_70px_1fr_1fr_60px] gap-x-3 border-b border-rule-18 pb-2">
                                 <Micro>Ticker</Micro><Micro>Entered</Micro>
                                 <Micro className="text-right">Entry</Micro><Micro className="text-right">Now</Micro>
                                 <Micro className="text-right">P&amp;L</Micro>
@@ -293,10 +293,10 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                                     tabIndex={0}
                                     onClick={() => onOpenTicker(h.ticker)}
                                     onKeyDown={(e) => { if (e.key === 'Enter') onOpenTicker(h.ticker); }}
-                                    className="grid cursor-pointer grid-cols-[70px_70px_1fr_1fr_60px] gap-x-3 border-b border-rule-6 py-2 hover:bg-hover"
+                                    className="grid cursor-pointer grid-cols-[70px_70px_1fr_1fr_60px] gap-x-3 border-b border-rule-10 py-2 hover:bg-hover"
                                 >
                                     <span className="font-mono text-[11.5px] font-semibold text-ink">{h.ticker}</span>
-                                    <span className="font-mono text-[10.5px] text-ink-3">{fmtDateShort(h.entry_date)}</span>
+                                    <span className="font-mono text-[11px] text-ink-3">{fmtDateShort(h.entry_date)}</span>
                                     <span className="text-right font-mono text-[11px] text-ink-2">{fmtMoney(h.entry_price)}</span>
                                     <span className="text-right font-mono text-[11px] text-ink-2">{fmtMoney(h.now)}</span>
                                     <span className={clsx('text-right font-mono text-[11px]', pctClass(h.pl))}>
@@ -314,8 +314,8 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                             <Micro className="block">{t('trackActivity')}</Micro>
                             <div className="scroll-dark mt-3 max-h-[520px] overflow-y-auto">
                                 {activity.map(({ date, trades }: { date: string; trades: Trade[] }) => (
-                                    <div key={date} className="grid grid-cols-[70px_1fr] gap-x-3 border-b border-rule-6 py-2">
-                                        <span className="font-mono text-[10.5px] text-ink-3">{fmtDateShort(date)}</span>
+                                    <div key={date} className="grid grid-cols-[70px_1fr] gap-x-3 border-b border-rule-10 py-2">
+                                        <span className="font-mono text-[11px] text-ink-3">{fmtDateShort(date)}</span>
                                         <span className="min-w-0">
                                             {trades.length === 0 ? (
                                                 <span className="text-[11px] text-ink-3">— {t('trackNoChanges')} · {heldCount} {t('trackPositionsHeld')}</span>
@@ -348,19 +348,19 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                 <section className="mt-8">
                     <SectionHead title={t('trackClosed')} note={`${closed.length} round trips · win rate ${active?.summary?.win_rate_pct ?? '—'}%`} />
                     <div className="scroll-dark mt-3 max-h-[400px] overflow-y-auto">
-                        <div className="grid grid-cols-[70px_80px_80px_60px_80px_90px] gap-x-3 border-b border-rule-12 pb-2">
+                        <div className="grid grid-cols-[70px_80px_80px_60px_80px_90px] gap-x-3 border-b border-rule-18 pb-2">
                             <Micro>Ticker</Micro><Micro>Entered</Micro><Micro>Exited</Micro>
                             <Micro className="text-right">Days</Micro><Micro className="text-right">Return</Micro>
                             <Micro className="text-right">Post-exit</Micro>
                         </div>
                         {closed.map((c: any, i: number) => (
-                            <div key={`${c.ticker}-${c.exit_date}-${i}`} className="grid grid-cols-[70px_80px_80px_60px_80px_90px] gap-x-3 border-b border-rule-6 py-2">
+                            <div key={`${c.ticker}-${c.exit_date}-${i}`} className="grid grid-cols-[70px_80px_80px_60px_80px_90px] gap-x-3 border-b border-rule-10 py-2">
                                 <button onClick={() => onOpenTicker(c.ticker)} className="text-left font-mono text-[11.5px] font-semibold text-ink hover:text-accent">
                                     {c.ticker}
                                 </button>
-                                <span className="font-mono text-[10.5px] text-ink-3">{fmtDateShort(c.entry_date)}</span>
-                                <span className="font-mono text-[10.5px] text-ink-3">{fmtDateShort(c.exit_date)}</span>
-                                <span className="text-right font-mono text-[10.5px] text-ink-3">{c.hold_days}</span>
+                                <span className="font-mono text-[11px] text-ink-3">{fmtDateShort(c.entry_date)}</span>
+                                <span className="font-mono text-[11px] text-ink-3">{fmtDateShort(c.exit_date)}</span>
+                                <span className="text-right font-mono text-[11px] text-ink-3">{c.hold_days}</span>
                                 <span className={clsx('text-right font-mono text-[11px]', pctClass(c.return_pct))}>{fmtSignedPct(c.return_pct)}</span>
                                 <span className={clsx('text-right font-mono text-[11px]', pctClass(c.post_exit_return_pct))}>
                                     {c.post_exit_return_pct == null ? '—' : fmtSignedPct(c.post_exit_return_pct)}
@@ -382,22 +382,22 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                             onChange={(e) => setTradeQuery(e.target.value)}
                             placeholder="FILTER TICKER OR DATE"
                             aria-label="Filter trades"
-                            className="w-[180px] border border-rule-14 bg-transparent px-2.5 py-1 font-mono text-[10px] uppercase tracking-[.06em] text-ink placeholder:text-ink-3"
+                            className="w-[180px] border border-rule-24 bg-transparent px-2.5 py-1 font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink placeholder:text-ink-3"
                         />
                     }
                 />
                 <div className="scroll-dark mt-3 max-h-[360px] overflow-y-auto">
                     {tradeRows.map((t, i) => (
-                        <div key={`${t.ticker}-${t.date}-${i}`} className="grid grid-cols-[80px_50px_70px_80px_1fr] gap-x-3 border-b border-rule-6 py-1.5">
-                            <span className="font-mono text-[10.5px] text-ink-3">{t.date}</span>
-                            <span className={clsx('font-mono text-[10.5px] font-semibold', t.side === 'buy' ? 'text-pos' : 'text-neg')}>
+                        <div key={`${t.ticker}-${t.date}-${i}`} className="grid grid-cols-[80px_50px_70px_80px_1fr] gap-x-3 border-b border-rule-10 py-1.5">
+                            <span className="font-mono text-[11px] text-ink-3">{t.date}</span>
+                            <span className={clsx('font-mono text-[11px] font-semibold', t.side === 'buy' ? 'text-pos' : 'text-neg')}>
                                 {t.side.toUpperCase()}
                             </span>
                             <button onClick={() => onOpenTicker(t.ticker)} className="text-left font-mono text-[11px] font-semibold text-ink hover:text-accent">
                                 {t.ticker}
                             </button>
-                            <span className="text-right font-mono text-[10.5px] text-ink-2">{fmtMoney(t.price)}</span>
-                            <span className="truncate text-[10.5px] text-ink-3">{t.reason ?? ''}</span>
+                            <span className="text-right font-mono text-[11px] text-ink-2">{fmtMoney(t.price)}</span>
+                            <span className="truncate text-[11px] text-ink-3">{t.reason ?? ''}</span>
                         </div>
                     ))}
                 </div>
@@ -405,8 +405,8 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
 
             {/* Postmortem */}
             {early.length > 0 && (
-                <div className="mt-8 border-t border-rule-9 pt-4">
-                    <span className="font-mono text-[10px] uppercase tracking-[.1em] text-warn">
+                <div className="mt-8 border-t border-rule-14 pt-4">
+                    <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-warn">
                         {t('trackSoldEarly')} · {early.length}
                     </span>
                     <p className="mt-1.5 text-[11.5px] leading-relaxed text-ink-2">

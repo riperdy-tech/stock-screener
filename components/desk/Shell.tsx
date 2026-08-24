@@ -40,7 +40,7 @@ function NavLink({ href, active, children }: { href: string; active?: boolean; c
 export function ChangelogModal({ onClose }: { onClose: () => void }) {
     return (
         <Modal onClose={onClose} labelledBy="changelog-title" className="max-w-2xl">
-            <div className="flex items-baseline justify-between border-b border-rule-16 px-6 py-4">
+            <div className="flex items-baseline justify-between border-b border-rule-22 px-6 py-4">
                 <h2 id="changelog-title" className="text-[14px] font-extrabold uppercase tracking-section">
                     What&apos;s new — v{APP_VERSION}
                 </h2>
@@ -50,13 +50,13 @@ export function ChangelogModal({ onClose }: { onClose: () => void }) {
                 {CHANGELOG.map((entry: any) => (
                     <section key={entry.version} className="mb-6 last:mb-0">
                         <div className="flex items-baseline gap-3">
-                            <span className="border border-rule-14 px-2 py-0.5 font-mono text-[10px] text-accent">v{entry.version}</span>
+                            <span className="border border-rule-24 px-2 py-0.5 font-mono text-[11px] text-accent">v{entry.version}</span>
                             <Micro>{entry.date}</Micro>
                         </div>
                         <h3 className="mt-2 text-[13.5px] font-bold text-ink">{entry.title}</h3>
                         <ul className="mt-2 space-y-1.5">
                             {(entry.changes ?? []).map((item: string, i: number) => (
-                                <li key={i} className="border-l border-rule-14 pl-3 text-[12.5px] leading-relaxed text-ink-q">{item}</li>
+                                <li key={i} className="border-l border-rule-24 pl-3 text-[12.5px] leading-relaxed text-ink-q">{item}</li>
                             ))}
                         </ul>
                     </section>
@@ -82,11 +82,11 @@ export function StatusStrip({ factor, depthMeta, ledgers }: {
     ].filter(Boolean).join(' · ');
 
     return (
-        <div className="border-b border-rule-9">
+        <div className="border-b border-rule-14">
             <div className="mx-auto flex max-w-desk flex-wrap items-center justify-between gap-x-6 gap-y-1 px-5 py-2 sm:px-10">
-                <span className="font-mono text-[10px] uppercase tracking-[.1em] text-ink-2">{left}</span>
+                <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2">{left}</span>
                 {record && (
-                    <span className="font-mono text-[10px] uppercase tracking-[.1em] text-ink-2">
+                    <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2">
                         AI PICKS{' '}
                         <span className={clsx('font-semibold', (record.aiPct ?? 0) >= 0 ? 'text-pos' : 'text-neg')}>
                             {fmtSignedPct(record.aiPct)}
@@ -114,9 +114,12 @@ export function Shell({ tab, factor, depthMeta, ledgers, loading, onReload, chil
     // Auth state is read by the surfaces themselves; the shell only needs the buttons.
     const auth = useAuth();
 
+    // The app surface sits one step above the body ground (#1c1e21 over #15171a) so
+    // inset panels, transcript viewers and tooltips can drop back to the page colour
+    // and still read as recessed.
     return (
-        <div className="min-h-screen bg-page text-ink">
-            <header className="border-b border-rule-16">
+        <div className="min-h-screen bg-surface text-ink">
+            <header className="border-b border-rule-22">
                 <div className="mx-auto flex max-w-desk flex-wrap items-baseline gap-x-6 gap-y-3 px-5 py-4 sm:px-10">
                     <Link href="/" className="flex items-baseline gap-3">
                         <span className="text-[21px] font-extrabold tracking-brand text-ink">STOCKPEAK</span>
@@ -130,7 +133,7 @@ export function Shell({ tab, factor, depthMeta, ledgers, loading, onReload, chil
                         <NavLink href="/help">{t('deskHandbook')}</NavLink>
                     </nav>
 
-                    <div className="ml-auto flex flex-wrap items-baseline justify-end gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[.08em]">
+                    <div className="ml-auto flex flex-wrap items-baseline justify-end gap-x-4 gap-y-2 font-mono font-semibold text-[11px] uppercase tracking-[.05em]">
                         <Link href="/lenses" className="text-ink-2 hover:text-ink">{t('navLenses')}</Link>
                         <Link href="/reports" className="text-ink-2 hover:text-ink">{t('navReports')}</Link>
                         <button onClick={() => setShowChangelog(true)} className="text-ink-2 hover:text-ink" title="What's new">
@@ -158,7 +161,7 @@ export function Shell({ tab, factor, depthMeta, ledgers, loading, onReload, chil
             <main className="mx-auto max-w-desk px-5 pb-24 sm:px-10 lg:pb-16">{children}</main>
 
             {/* Mobile tab bar — the header nav is out of reach on a phone. */}
-            <nav className="fixed inset-x-0 bottom-0 z-30 flex border-t border-rule-9 bg-page lg:hidden">
+            <nav className="fixed inset-x-0 bottom-0 z-30 flex border-t border-rule-14 bg-surface lg:hidden">
                 {TABS.map((x) => (
                     <Link
                         key={x.id}

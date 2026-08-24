@@ -91,7 +91,7 @@ export function KoreanHelpBody() {
                     않습니다. 그렇지 않으면 “모멘텀이 높다”가 그냥 “기술주다”가 되어 버립니다.
                 </p>
                 <div className="space-y-3">
-                    <div className="border border-rule-6 bg-white/5 p-3">
+                    <div className="border border-rule-10 bg-white/5 p-3">
                         <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-value" /><span className="text-pos">밸류(Value)</span></p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             연간 현금이익 1달러당 2달러를 사는가, 2달러당 1달러를 사는가? 장기 평균적으로 저렴한 것이
@@ -100,7 +100,7 @@ export function KoreanHelpBody() {
                             자세한 것은 <Link href="#methodology" className="font-bold text-pos hover:underline">방법론</Link> 참조.
                         </p>
                     </div>
-                    <div className="border border-rule-6 bg-white/5 p-3">
+                    <div className="border border-rule-10 bg-white/5 p-3">
                         <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-quality" /><span className="text-accent">퀄리티(Quality)</span></p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             기업이 꾸준히 진짜 돈을 벌고, 회계가 깨끗한가? <Term term="revenue-quality" />, 수년간의{' '}
@@ -109,7 +109,7 @@ export function KoreanHelpBody() {
                             회계가 정직한 사업이 이깁니다.
                         </p>
                     </div>
-                    <div className="border border-rule-6 bg-white/5 p-3">
+                    <div className="border border-rule-10 bg-white/5 p-3">
                         <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-momentum" /><span className="text-warn">모멘텀(Momentum)</span></p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             지난 1년간 주가가 이기고 있었나? 이긴 주식은 한동안 계속 이기는 경향이 있습니다.{' '}
@@ -117,7 +117,7 @@ export function KoreanHelpBody() {
                             구성됩니다. 최근 달을 빼는 이유는 <Term term="reversal" /> 참조.
                         </p>
                     </div>
-                    <div className="border border-rule-6 bg-white/5 p-3">
+                    <div className="border border-rule-10 bg-white/5 p-3">
                         <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-lowvol" /><span className="text-ink-2">저변동성(Low volatility)</span></p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             주가가 잔잔하게 움직이는가, 격렬하게 움직이는가? 잔잔한 주식이 역사적으로 고통 대비 더 많은
@@ -125,7 +125,7 @@ export function KoreanHelpBody() {
                             <Term term="annualized-volatility" />는 <Term term="kelly" /> 포지션 크기에도 내보내집니다.
                         </p>
                     </div>
-                    <div className="border border-rule-6 bg-white/5 p-3">
+                    <div className="border border-rule-10 bg-white/5 p-3">
                         <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-revisions" /><span className="text-neg">리비전(Revisions)</span></p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             애널리스트들이 전망을 올리고 있는가 내리고 있는가? 방향이 중요합니다. 정규화된{' '}

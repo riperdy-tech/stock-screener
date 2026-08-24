@@ -34,13 +34,13 @@ export function TranscriptViewer({ bundle }: { bundle: DepthReportBundle | null 
     const cur = samples[Math.min(tab, samples.length - 1)];
 
     return (
-        <section className="mt-8 border-t border-rule-16 pt-5">
+        <section className="mt-8 border-t border-rule-22 pt-5">
             <div className="flex items-baseline justify-between gap-4">
                 <Micro className="font-semibold text-ink">
                     {t('transcriptsTitle')} — {samples.length} sample report{samples.length === 1 ? '' : 's'}
                     {bundle?.run ? ` (${bundle.run})` : ''}
                 </Micro>
-                <button onClick={toggle} className="font-mono text-[10px] uppercase tracking-[.1em] text-ink-2 hover:text-ink">
+                <button onClick={toggle} className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2 hover:text-ink">
                     {open ? `▾ ${t('transcriptsHide')}` : `▸ ${t('transcriptsShow')}`}
                 </button>
             </div>
@@ -56,7 +56,7 @@ export function TranscriptViewer({ bundle }: { bundle: DepthReportBundle | null 
                                     'border px-3.5 py-1.5 font-mono text-[11px]',
                                     i === tab
                                         ? 'border-pos/60 bg-pos/[0.08] font-semibold text-pos'
-                                        : 'border-rule-14 text-ink-2 hover:text-ink',
+                                        : 'border-rule-24 text-ink-2 hover:text-ink',
                                     !s.plausible && 'line-through decoration-neg/60',
                                 )}
                             >
@@ -71,7 +71,7 @@ export function TranscriptViewer({ bundle }: { bundle: DepthReportBundle | null 
                         </p>
                     )}
 
-                    <pre className="scroll-dark wrap-anywhere mt-3 max-h-[240px] min-w-0 overflow-y-auto border border-rule-9 bg-page px-3.5 py-3 font-mono text-[10px] leading-[1.65] text-ink-q lg:max-h-[340px] lg:px-5 lg:py-4 lg:text-[11.5px] lg:leading-[1.7]">
+                    <pre className="scroll-dark wrap-anywhere mt-3 max-h-[240px] min-w-0 overflow-y-auto border border-rule-14 bg-page px-3.5 py-3 font-mono text-[11px] leading-[1.65] text-ink-q lg:max-h-[340px] lg:px-5 lg:py-4 lg:text-[11.5px] lg:leading-[1.7]">
                         {cur.report}
                     </pre>
 
