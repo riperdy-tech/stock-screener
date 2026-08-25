@@ -70,20 +70,19 @@ jobs:
       run:
         shell: ${{ inputs.runner == 'ubuntu-latest' && 'bash' || 'C:\PROGRA~1\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
 
-    # The home PC has core.autocrlf=true and the repo has no .gitattributes, so a
-    # Windows checkout materializes every text file with CRLF (measured on the PC:
-    # 832,473 CRLF in stocks.json). Verified 2026-08-25 that this does NOT corrupt
-    # commits — autocrlf round-trips cleanly on `git add`, and no script hashes or
-    # size-checks file bytes. This is environment parity only: it keeps the
-    # self-hosted worktree byte-identical to the ubuntu-latest one so the two paths
-    # cannot drift. Scoped to git invocations INSIDE this job (including
-    # actions/checkout's); never touches the machine's own git config.
+    # No git line-ending overrides here on purpose. Forcing core.autocrlf=false
+    # was tried on 2026-08-25 and made it worse: Python text-mode writes CRLF on
+    # Windows, and with autocrlf off git stored that verbatim, so the trailing
+    # newline of stocks.json diverged from the ubuntu-written files. The host's
+    # own core.autocrlf=true normalizes CRLF back to LF on `git add` (verified
+    # round-trip), which is what actually matches the ubuntu path.
     env:
-      GIT_CONFIG_COUNT: 2
-      GIT_CONFIG_KEY_0: core.autocrlf
-      GIT_CONFIG_VALUE_0: "false"
-      GIT_CONFIG_KEY_1: core.eol
-      GIT_CONFIG_VALUE_1: lf
+      # Python on Windows defaults stdout to the ANSI codepage (cp1252), so a
+      # script printing any non-Latin-1 character dies with UnicodeEncodeError:
+      # score_reverse prints U+2192 and killed the chain. Linux defaults to
+      # UTF-8, so this is parity with the ubuntu path, not a Windows-only hack.
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
 
     steps:
       # A cron job aimed at an offline self-hosted runner queues instead of
@@ -205,13 +204,19 @@ jobs:
       run:
         shell: ${{ inputs.runner == 'ubuntu-latest' && 'bash' || 'C:\PROGRA~1\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
 
-    # Same line-ending parity settings as the `fetch` job above; see the note there.
+    # No git line-ending overrides here on purpose. Forcing core.autocrlf=false
+    # was tried on 2026-08-25 and made it worse: Python text-mode writes CRLF on
+    # Windows, and with autocrlf off git stored that verbatim, so the trailing
+    # newline of stocks.json diverged from the ubuntu-written files. The host's
+    # own core.autocrlf=true normalizes CRLF back to LF on `git add` (verified
+    # round-trip), which is what actually matches the ubuntu path.
     env:
-      GIT_CONFIG_COUNT: 2
-      GIT_CONFIG_KEY_0: core.autocrlf
-      GIT_CONFIG_VALUE_0: "false"
-      GIT_CONFIG_KEY_1: core.eol
-      GIT_CONFIG_VALUE_1: lf
+      # Python on Windows defaults stdout to the ANSI codepage (cp1252), so a
+      # script printing any non-Latin-1 character dies with UnicodeEncodeError:
+      # score_reverse prints U+2192 and killed the chain. Linux defaults to
+      # UTF-8, so this is parity with the ubuntu path, not a Windows-only hack.
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
 
     steps:
       # ref: main (not the trigger SHA) so we pick up the commit the `fetch` job just pushed.
