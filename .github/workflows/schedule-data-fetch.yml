@@ -14,8 +14,22 @@ on:
     # Weekends: data maintenance only (RS2 verdict ingestion, dividends, mine
     # ledgers). Market closed; KIS sync chained to this completion gates itself off.
     - cron: '35 10 * * 0,6'
-  # Allows you to trigger it manually from the Actions tab
+  # Allows you to trigger it manually from the Actions tab.
+  # RUNNER CHOICE (2026-08-25): scheduled runs go to the home PC's self-hosted
+  # runner (free minutes; also dodges the Yahoo throttling of GitHub's shared
+  # runner IPs documented in the SPLIT INTO TWO JOBS note below). Manual runs
+  # default to ubuntu-latest, because a manual run is usually the "PC is off"
+  # fallback and a job targeted at an offline self-hosted runner does not fail
+  # — it queues silently for up to 24h.
   workflow_dispatch:
+    inputs:
+      runner:
+        description: "Runner: ubuntu-latest bills GitHub minutes; self-hosted uses the home PC (must be online)"
+        type: choice
+        options:
+          - ubuntu-latest
+          - self-hosted
+        default: ubuntu-latest
 
 permissions:
   contents: write
@@ -38,10 +52,52 @@ concurrency:
 # chain + commit always complete even after a slow fetch.
 jobs:
   fetch:
-    runs-on: ubuntu-latest
+    # schedule -> self-hosted (inputs is empty on a cron event); dispatch -> chosen value.
+    runs-on: ${{ inputs.runner || 'self-hosted' }}
     timeout-minutes: 350          # fail loudly just under the 360 cap instead of a silent cancel
 
+    # The self-hosted runner is Windows; every `run:` block here is bash
+    # (`[ -n ... ]`, heredocs, sleep). Without this the Windows runner would
+    # default to PowerShell and every step would fail on syntax.
+    defaults:
+      run:
+        shell: bash
+
+    # The home PC has core.autocrlf=true and the repo has no .gitattributes, so a
+    # Windows checkout materializes every text file with CRLF (measured on the PC:
+    # 832,473 CRLF in stocks.json). Verified 2026-08-25 that this does NOT corrupt
+    # commits — autocrlf round-trips cleanly on `git add`, and no script hashes or
+    # size-checks file bytes. This is environment parity only: it keeps the
+    # self-hosted worktree byte-identical to the ubuntu-latest one so the two paths
+    # cannot drift. Scoped to git invocations INSIDE this job (including
+    # actions/checkout's); never touches the machine's own git config.
+    env:
+      GIT_CONFIG_COUNT: 2
+      GIT_CONFIG_KEY_0: core.autocrlf
+      GIT_CONFIG_VALUE_0: "false"
+      GIT_CONFIG_KEY_1: core.eol
+      GIT_CONFIG_VALUE_1: lf
+
     steps:
+      # A cron job aimed at an offline self-hosted runner queues instead of
+      # failing, then runs whenever the PC wakes — which would fetch hours-stale
+      # data and hand it to the KIS sync chained on this workflow's success.
+      # Fail instead, so kis-sync's `conclusion == 'success'` gate blocks the trade.
+      - name: Reject a stale queued run
+        if: github.event_name == 'schedule'
+        run: |
+          started=$(date -u -d "${{ github.run_started_at }}" +%s 2>/dev/null || echo "")
+          if [ -z "$started" ]; then
+            echo "::warning::could not parse run_started_at — skipping staleness guard"
+            exit 0
+          fi
+          delay_min=$(( ( $(date -u +%s) - started ) / 60 ))
+          echo "queue delay: ${delay_min} min"
+          if [ "$delay_min" -gt 90 ]; then
+            echo "::error::run started ${delay_min} min after it was scheduled (>90) — the self-hosted runner was probably offline. Refusing to fetch stale data and trigger the KIS chain. Re-dispatch manually on ubuntu-latest."
+            exit 1
+          fi
+
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -114,8 +170,22 @@ jobs:
 
   score:
     needs: fetch
-    runs-on: ubuntu-latest
+    # Same runner as `fetch` — the score job re-checks out main and pushes, so
+    # splitting it across runner types would only add a second environment to keep working.
+    runs-on: ${{ inputs.runner || 'self-hosted' }}
     timeout-minutes: 350
+
+    defaults:
+      run:
+        shell: bash
+
+    # Same line-ending parity settings as the `fetch` job above; see the note there.
+    env:
+      GIT_CONFIG_COUNT: 2
+      GIT_CONFIG_KEY_0: core.autocrlf
+      GIT_CONFIG_VALUE_0: "false"
+      GIT_CONFIG_KEY_1: core.eol
+      GIT_CONFIG_VALUE_1: lf
 
     steps:
       # ref: main (not the trigger SHA) so we pick up the commit the `fetch` job just pushed.
