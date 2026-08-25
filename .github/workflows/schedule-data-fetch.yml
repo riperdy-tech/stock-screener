@@ -91,13 +91,30 @@ jobs:
       # Fail instead, so kis-sync's `conclusion == 'success'` gate blocks the trade.
       - name: Reject a stale queued run
         if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          started=$(date -u -d "${{ github.run_started_at }}" +%s 2>/dev/null || echo "")
-          if [ -z "$started" ]; then
-            echo "::warning::could not parse run_started_at — skipping staleness guard"
-            exit 0
-          fi
-          delay_min=$(( ( $(date -u +%s) - started ) / 60 ))
+          # run_started_at is NOT in the `github` context -- it exists only on the
+          # API/webhook payload. Interpolating it yielded an empty string, and
+          # `date -d ""` silently returns today's midnight rather than failing, so
+          # the first version of this guard measured time-since-midnight and killed
+          # a perfectly healthy 15:23 run with "923 min". Read it from the API.
+          delay_min=$(python -c "
+          import json, os, urllib.request, datetime
+          url = '%s/repos/%s/actions/runs/%s' % (os.environ['GITHUB_API_URL'],
+                os.environ['GITHUB_REPOSITORY'], os.environ['GITHUB_RUN_ID'])
+          req = urllib.request.Request(url, headers={
+                'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                'Accept': 'application/vnd.github+json'})
+          ts = json.load(urllib.request.urlopen(req, timeout=30))['run_started_at']
+          d = datetime.datetime.fromisoformat(ts.replace('Z', '+00:00'))
+          print(int((datetime.datetime.now(datetime.timezone.utc) - d).total_seconds() // 60))
+          ") || delay_min=""
+          case "$delay_min" in
+            ''|*[!0-9-]*)
+              echo "::warning::could not determine queue delay (got '$delay_min') -- skipping staleness guard"
+              exit 0 ;;
+          esac
           echo "queue delay: ${delay_min} min"
           if [ "$delay_min" -gt 90 ]; then
             echo "::error::run started ${delay_min} min after it was scheduled (>90) — the self-hosted runner was probably offline. Refusing to fetch stale data and trigger the KIS chain. Re-dispatch manually on ubuntu-latest."
