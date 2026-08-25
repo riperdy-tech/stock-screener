@@ -101,10 +101,28 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      # setup-python's Windows path runs an installer that writes HKLM registry
+      # entries, so it needs administrator rights. The self-hosted runner service
+      # runs as NETWORK SERVICE and fails at "Install Python 3.11.9 in ..._tool"
+      # (setup.ps1:127). Running the runner as an admin would fix it but would
+      # also hand any workflow full control of the machine, so instead the
+      # self-hosted path uses the PC's own Python (3.12.10, already on the machine
+      # PATH) in a throwaway per-job venv. Version differs from ubuntu's 3.11 by
+      # design; the pinned dependency set was verified to install and import on
+      # 3.12.10 on that host before this was adopted.
+      - name: Setup Python (GitHub-hosted)
+        if: inputs.runner == 'ubuntu-latest'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Provision Python (self-hosted)
+        if: inputs.runner != 'ubuntu-latest'
+        run: |
+          VENV="$(cygpath -u "$RUNNER_TEMP")/venv"
+          python -m venv "$VENV"
+          cygpath -w "$VENV/Scripts" >> "$GITHUB_PATH"
+          "$VENV/Scripts/python" --version
 
       - name: Install Dependencies
         run: |
@@ -194,10 +212,28 @@ jobs:
         with:
           ref: main
 
-      - name: Setup Python
+      # setup-python's Windows path runs an installer that writes HKLM registry
+      # entries, so it needs administrator rights. The self-hosted runner service
+      # runs as NETWORK SERVICE and fails at "Install Python 3.11.9 in ..._tool"
+      # (setup.ps1:127). Running the runner as an admin would fix it but would
+      # also hand any workflow full control of the machine, so instead the
+      # self-hosted path uses the PC's own Python (3.12.10, already on the machine
+      # PATH) in a throwaway per-job venv. Version differs from ubuntu's 3.11 by
+      # design; the pinned dependency set was verified to install and import on
+      # 3.12.10 on that host before this was adopted.
+      - name: Setup Python (GitHub-hosted)
+        if: inputs.runner == 'ubuntu-latest'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Provision Python (self-hosted)
+        if: inputs.runner != 'ubuntu-latest'
+        run: |
+          VENV="$(cygpath -u "$RUNNER_TEMP")/venv"
+          python -m venv "$VENV"
+          cygpath -w "$VENV/Scripts" >> "$GITHUB_PATH"
+          "$VENV/Scripts/python" --version
 
       - name: Install Dependencies
         run: |
