@@ -62,10 +62,13 @@ jobs:
     # C:\Windows\System32\bash.exe (the WSL launcher) before Git Bash. WSL
     # distros are registered per-user and the runner service account
     # (NETWORK SERVICE) has none, so steps died with "Windows Subsystem for
-    # Linux has no installed distributions". Point at Git Bash by full path.
+    # Linux has no installed distributions". Point at Git Bash by full path --
+    # using the 8.3 short name, because the runner splits the shell string on
+    # spaces to separate command from arguments and "C:\Program Files\..." then
+    # fails with "Second path fragment must not be a drive or UNC name".
     defaults:
       run:
-        shell: ${{ inputs.runner == 'ubuntu-latest' && 'bash' || 'C:\Program Files\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
+        shell: ${{ inputs.runner == 'ubuntu-latest' && 'bash' || 'C:\PROGRA~1\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
 
     # The home PC has core.autocrlf=true and the repo has no .gitattributes, so a
     # Windows checkout materializes every text file with CRLF (measured on the PC:
@@ -200,7 +203,7 @@ jobs:
     # Same Git Bash pinning as the `fetch` job above; see the note there.
     defaults:
       run:
-        shell: ${{ inputs.runner == 'ubuntu-latest' && 'bash' || 'C:\Program Files\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
+        shell: ${{ inputs.runner == 'ubuntu-latest' && 'bash' || 'C:\PROGRA~1\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
 
     # Same line-ending parity settings as the `fetch` job above; see the note there.
     env:
