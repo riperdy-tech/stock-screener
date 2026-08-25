@@ -52,6 +52,7 @@ FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 PORTFOLIO_PLAN_JSON = DATA / "portfolio_plan.json"
 PORTFOLIO_PLAN_LLM_JSON = DATA / "portfolio_plan_llm.json"   # LLM-overlay variant (A/B)
 LLM_OVERLAY_JSON = DATA / "llm_overlay.json"                 # RS2 verdicts (fair_value etc.) — F-04 hysteresis exit test
+DEPTH_OVERLAY_JSON = DATA / "depth_overlay.json"             # RS2 depth verdicts — rn_depth ledger targets
 PORTFOLIO_PLAN_MOMO_JSON = DATA / "portfolio_plan_momo.json"  # plan3 momentum sleeve
 MY_PORTFOLIO_JSON = DATA / "my_portfolio.json"
 LEDGERS_JSON = DATA / "paper_ledgers.json"
@@ -131,6 +132,51 @@ def evaluated_llm(entry):
     """
     return bool(entry) and entry.get("fct_band_llm") is not None
 MIN_EQUAL_NAMES = 8      # #8 concentration floor: equal-weight over max(count, this) -> cash residual when few
+
+# ── rn_depth ledger (added 2026-08-26) ───────────────────────────────────────
+# Mirrors the site's RESEARCH NOW panel, which no other ledger reads: equal/
+# equal_llm gate on the quant band (fct_band / fct_band_llm) and never look at a
+# depth verdict, so the RS2 depth run drove the UI and nothing else.
+#
+# The gate MUST stay identical to lib/desk/rankings.ts:139-143 (aiSections) or the
+# ledger silently trades a different book than the panel shows: a row is in when it
+# is not vetoed, carries a depth verdict, and that verdict reads "undervalued".
+# No fct_band filter — a watchlist-band name with an undervalued depth verdict is
+# on the panel and belongs here too.
+#
+# EQUAL weight, one slot per name (operator decision 2026-08-26). The depth
+# engine's size_hint (full/half/quarter) is deliberately NOT used for sizing —
+# it stays display-only, as it is everywhere else in the repo.
+#
+# Same MIN_EQUAL_NAMES concentration floor as equal/equal_llm: a panel that
+# shrinks to a handful of names leaves the remainder in cash instead of
+# concentrating the whole book into them.
+
+
+def depth_targets(factor: dict, depth: dict) -> dict:
+    """{ticker: weight_pct} for the RESEARCH NOW panel, equally weighted.
+
+    factor: factor_scores["tickers"], depth: depth_overlay["tickers"].
+    Mirrors aiSections() — see the note above.
+    """
+    names = []
+    for ticker, entry in factor.items():
+        if not isinstance(entry, dict) or entry.get("fct_rank") is None:
+            continue
+        verdict = depth.get(ticker)
+        if not verdict:
+            continue
+        # A vetoed name is disqualified before the depth run is consulted.
+        if entry.get("fct_veto") or entry.get("fct_llm_veto"):
+            continue
+        if verdict.get("direction") != "undervalued":
+            continue
+        names.append(ticker)
+    if not names:
+        return {}
+    weight = 100.0 / max(len(names), MIN_EQUAL_NAMES)
+    return {t: weight for t in names}
+
 
 # ── F-04 hysteresis (equal_llm only, added 2026-08-04) ────────────────────────
 # The strict research_now gate (score_factors.apply_llm_overlay: deep>=30 / MoS>=15
@@ -983,7 +1029,7 @@ def main():
         "ledgers": {"plan": empty_ledger(), "plan2": empty_ledger(), "equal": empty_ledger(),
                     "plan_llm": empty_ledger(), "plan2_llm": empty_ledger(), "equal_llm": empty_ledger()},
     }
-    for _k in ("plan2", "plan_llm", "plan2_llm", "equal_llm", "plan3"):
+    for _k in ("plan2", "plan_llm", "plan2_llm", "equal_llm", "plan3", "rn_depth"):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -1106,6 +1152,27 @@ def main():
                                  ("equal_llm", nav_eql, stale_eql)):
             finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
             backfill_benches(ledgers[name])
+
+        # ── rn_depth: the site's RESEARCH NOW panel, equally weighted ────────
+        # Held (not liquidated) when the depth file is missing or empty, same as
+        # the LLM ledgers treat an absent overlay: no depth run today is a known
+        # state, not a verdict that every name left the panel.
+        depth_raw = load_json(DEPTH_OVERLAY_JSON, {}) or {}
+        depth_tk = depth_raw.get("tickers", {})
+        rn_targets = depth_targets(factor, depth_tk)
+        depth_ok = bool(depth_tk) and fct_ok
+        depth_why = fct_why if not fct_ok else (
+            "depth_overlay.json missing or empty" if not depth_tk else "")
+        unknown_depth = {t for t in ledgers["rn_depth"]["state"]["holdings"]
+                         if t not in depth_tk}
+        nav_rn, stale_rn = run_or_hold("rn_depth", rn_targets, "rank",
+                                       unknown=unknown_depth, source_ok=depth_ok,
+                                       why=depth_why)
+        if rn_targets:
+            print(f"  · rn_depth: {len(rn_targets)} name(s) from depth_overlay "
+                  f"(generated_at={depth_raw.get('generated_at')})", file=sys.stderr)
+        finalize_ledger(ledgers["rn_depth"], nav_rn, stale_rn, benches, as_of, book["inception"])
+        backfill_benches(ledgers["rn_depth"])
 
         # ── plan3 · bold (momentum sleeve; PAPER ONLY — never mirrored to KIS) ──
         # Absent plan file pre-launch = empty targets: the ledger holds cash and the
