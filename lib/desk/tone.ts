@@ -2,7 +2,7 @@
 // the detail hero and the portfolio verdict column.
 //
 // The pipeline emits `hold`; the desk displays FAIR. `NOT_USABLE` means every
-// seeded run was rejected by the plausibility guards — no band exists.
+// run was rejected by the plausibility guards — no band exists.
 
 import type { DepthVerdict } from '@/lib/data-service';
 import type { TRANSLATIONS } from '@/lib/i18n';

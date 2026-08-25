@@ -199,21 +199,3 @@ export function PromoLine({ row, delta }: { row: DeskRow; delta: number | null }
     );
 }
 
-/** DCF GAP: growth the price requires vs growth actually delivered. */
-export function DcfGapCell({ row }: { row: DeskRow }) {
-    const v = row.val;
-    if (!v || v.expectations_gap_pts == null) return <span className="block font-mono text-[12px] text-ink-3">—</span>;
-    const gap = v.expectations_gap_pts;
-    const good = gap < 0;
-    return (
-        <span className="block min-w-0">
-            <span className="font-mono text-[12px] font-semibold" style={{ color: good ? 'oklch(0.75 0.11 155)' : '#cfa14e' }}>
-                {gap > 0 ? '+' : '−'}{Math.abs(gap).toFixed(1)} pts
-            </span>
-            <span className="mt-0.5 block truncate text-[11px] text-ink-3">
-                priced {v.implied_growth != null ? `${(v.implied_growth * 100).toFixed(1)}%` : '—'} vs{' '}
-                {v.hist_revenue_cagr_5y != null ? `${(v.hist_revenue_cagr_5y * 100).toFixed(1)}%` : '—'} real
-            </span>
-        </span>
-    );
-}

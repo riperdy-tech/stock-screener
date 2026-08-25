@@ -24,6 +24,34 @@ export interface StockInfo {
     industry: string;
     price: number;
     marketCap: number;
+    /** Screener metrics for the Key financials panel. Sparse — roughly 49–99%
+     *  populated depending on the field, so every cell there null-guards. */
+    metrics: StockMetrics;
+}
+
+/**
+ * Only the fields the desk renders. `fetchStocks` already scales the four ratio
+ * fields to percentage points, so they arrive as 24.2 rather than 0.242 — the
+ * panel formats them as-is.
+ */
+export interface StockMetrics {
+    priceToSales: number | null;
+    pegRatio: number | null;
+    priceToBook: number | null;
+    epsTtm: number | null;
+    forwardEpsEstimate: number | null;
+    fiveYearAveragePe: number | null;
+    /** percentage points */
+    revenueGrowth: number | null;
+    /** percentage points */
+    grossMargin: number | null;
+    /** percentage points */
+    roic: number | null;
+    zScore: number | null;
+    /** percentage points */
+    insiderOwnership: number | null;
+    ocf: number | null;
+    capex: number | null;
 }
 
 export interface DeskData {
@@ -61,6 +89,10 @@ export function invalidateDeskCache() {
     cache.clear();
 }
 
+/** 0 / NaN / undefined all mean "not stored" in the screener CSV. */
+const nz = (v: unknown): number | null =>
+    typeof v === 'number' && Number.isFinite(v) && v !== 0 ? v : null;
+
 async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> {
     const [f, v, p, ov, pl, s, pllm, dp, mc] = await Promise.all([
         cached('factor', fetchFactorScores),
@@ -80,6 +112,23 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
             stockInfo[row.symbol] = {
                 name: row.name, sector: row.sector, industry: row.industry,
                 price: row.price, marketCap: row.marketCap,
+                // fetchStocks zero-fills missing numbers; 0 is not a real ratio for
+                // any of these, so it is normalised back to null for the panel.
+                metrics: {
+                    priceToSales: nz(row.priceToSales),
+                    pegRatio: nz(row.pegRatio),
+                    priceToBook: nz(row.priceToBook),
+                    epsTtm: nz(row.epsTtm),
+                    forwardEpsEstimate: nz(row.forwardEpsEstimate),
+                    fiveYearAveragePe: nz(row.fiveYearAveragePe),
+                    revenueGrowth: nz(row.revenueGrowth),
+                    grossMargin: nz(row.grossMargin),
+                    roic: nz(row.roic),
+                    zScore: nz(row.zScore),
+                    insiderOwnership: nz(row.insiderOwnership),
+                    ocf: nz(row.ocf),
+                    capex: nz(row.capex),
+                },
             };
         }
     }

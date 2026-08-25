@@ -82,8 +82,13 @@ function StatCard({ book, llm, title, note, active, onClick }: {
             <div className="flex items-baseline justify-between gap-2">
                 <Micro className={clsx('truncate', active && 'text-ink')}>{title}</Micro>
                 {diff != null && (
-                    <span className={clsx('shrink-0 font-mono text-[11px]', diff >= 0 ? 'text-pos' : 'text-neg')}>
-                        AI {diff >= 0 ? '+' : '\u2212'}{Math.abs(diff).toFixed(1)}pts
+                    // The spread between this book's AI twin and its quant control, in
+                    // percentage points \u2014 the same two columns the table below shows.
+                    <span
+                        className={clsx('shrink-0 font-mono text-[11px]', diff >= 0 ? 'text-pos' : 'text-neg')}
+                        title="Cumulative return of the AI book minus its quant control, in percentage points"
+                    >
+                        AI vs quant {diff >= 0 ? '+' : '\u2212'}{Math.abs(diff).toFixed(1)}pts
                     </span>
                 )}
             </div>
@@ -235,19 +240,6 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                 ))}
             </div>
 
-            {(books.plan3?.state?.halted || books.plan3?.state?.risk_tier) && (
-                <div className="flex flex-wrap items-center gap-3 border-t border-rule-14 pt-4">
-                    {books.plan3?.state?.halted ? (
-                        <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-neg">
-                            \u25a0 PLAN3 HALTED \u2014 kill switch fired
-                        </span>
-                    ) : (
-                        <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-warn">
-                            PLAN3 DE-RISK TIER {books.plan3.state.risk_tier}
-                        </span>
-                    )}
-                </div>
-            )}
 
             <NavChart
                 curve={curve}

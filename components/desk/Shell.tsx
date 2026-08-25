@@ -76,7 +76,7 @@ export function StatusStrip({ factor, depthMeta, ledgers }: {
     const depthDate = (depthMeta?.generated_at ?? '').slice(0, 10);
     const left = [
         depthDate ? `DEPTH RUN ${depthDate}` : 'DEPTH RUN — PENDING',
-        '3 SEEDED RUNS PER STOCK',
+        '3 RUNS PER STOCK',
         depthMeta?.count ? `${depthMeta.count} ANALYZED` : null,
         factor?.scored_count ? `${factor.scored_count.toLocaleString('en-US')} QUANT-FILTERED` : null,
     ].filter(Boolean).join(' · ');
@@ -91,7 +91,7 @@ export function StatusStrip({ factor, depthMeta, ledgers }: {
                         <span className={clsx('font-semibold', (record.aiPct ?? 0) >= 0 ? 'text-pos' : 'text-neg')}>
                             {fmtSignedPct(record.aiPct)}
                         </span>{' '}
-                        VS {record.benchSym} {fmtSignedPct(record.benchPct)} · APPEND-ONLY
+                        VS {record.benchSym} {fmtSignedPct(record.benchPct)}
                     </span>
                 )}
             </div>

@@ -28,6 +28,12 @@ export function fmtMoney(v: number | null | undefined, digits = 2): string {
 }
 
 /** Whole-dollar money for chart axes and legends: 11410 → "$11,410". */
+/** Index points, base 100 at the start of the visible window. */
+export function fmtIndex(v: number | null | undefined): string {
+    if (v === null || v === undefined || !Number.isFinite(v)) return '—';
+    return v.toFixed(1);
+}
+
 export function fmtDollars(v: number | null | undefined): string {
     if (v === null || v === undefined || !Number.isFinite(v)) return '—';
     return `$${Math.round(v).toLocaleString('en-US')}`;

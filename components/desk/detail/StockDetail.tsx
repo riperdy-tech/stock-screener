@@ -1,7 +1,7 @@
 'use client';
 
 // Ticker page. Left column is the AI's case (verdict, band, stats, thesis,
-// evidence); right column is the supporting quant context (reverse DCF, factor
+// evidence); right column is the supporting context (key financials, factor
 // filter). Transcripts run full-width underneath.
 
 import React, { useEffect, useMemo, useState } from 'react';
@@ -86,65 +86,82 @@ function DepthStatRow({ row }: { row: DeskRow }) {
     );
 }
 
-function ReverseDcf({ row }: { row: DeskRow }) {
+/**
+ * Key financials — the top of the right column. Price and market cap moved here
+ * out of the title bar, so the supporting-context column opens with the numbers
+ * a reader checks first rather than with a model output.
+ *
+ * Every metric comes from the screener payload and is sparsely populated
+ * (roughly 65–99% depending on the field), so each cell null-guards and the
+ * whole row disappears when nothing in it resolved.
+ */
+function KeyFinancials({ row }: { row: DeskRow }) {
     const { t } = useLanguage();
-    const v = row.val;
-    if (!v) {
-        return (
-            <div>
-                <Micro className="block">{t('dcfTitle')}</Micro>
-                <p className="mt-3 text-[11.5px] text-ink-3">No reverse-DCF model for this name.</p>
-            </div>
-        );
-    }
-    const implied = v.implied_growth != null ? v.implied_growth * 100 : null;
-    const delivered = v.hist_revenue_cagr_5y != null ? v.hist_revenue_cagr_5y * 100 : null;
-    const gap = v.expectations_gap_pts;
-    const good = gap != null && gap < 0;
+    const m = row.info?.metrics;
+    const price = row.depth?.price ?? row.info?.price;
+    const pe = m?.epsTtm != null && m.epsTtm > 0 && price ? price / m.epsTtm : null;
+    const fwdPe = m?.forwardEpsEstimate != null && m.forwardEpsEstimate > 0 && price
+        ? price / m.forwardEpsEstimate : null;
+    // OCF minus capex — the screener stores capex as a negative number.
+    const fcf = m?.ocf != null && m?.capex != null ? m.ocf + m.capex : null;
+
+    // The four ratio fields arrive already scaled to percentage points.
+    const pts = (v: number | null | undefined, digits = 1) =>
+        v == null ? null : `${v.toFixed(digits)}%`;
+    const mult = (v: number | null | undefined) => (v == null ? null : `${v.toFixed(2)}x`);
+
+    const cells: [string, string | null, string?][] = [
+        [t('kfPe'), pe != null ? pe.toFixed(1) : null],
+        [t('kfFwdPe'), fwdPe != null ? fwdPe.toFixed(1) : null],
+        [t('kfPs'), mult(m?.priceToSales)],
+        [t('kfPb'), mult(m?.priceToBook)],
+        [t('kfPeg'), mult(m?.pegRatio)],
+        [t('kfRevGrowth'), pts(m?.revenueGrowth), m?.revenueGrowth != null && m.revenueGrowth > 0 ? 'growth' : undefined],
+        [t('kfGrossMargin'), pts(m?.grossMargin)],
+        [t('kfRoic'), pts(m?.roic), m?.roic != null && m.roic >= 15 ? 'growth' : undefined],
+        [t('kfFcf'), fcf != null ? fmtMcap(fcf) : null, fcf != null && fcf < 0 ? 'bad' : undefined],
+        [t('kfAltman'), m?.zScore != null ? m.zScore.toFixed(2) : null,
+            m?.zScore == null ? undefined : m.zScore >= 3 ? 'growth' : m.zScore < 1.81 ? 'bad' : 'warn'],
+        [t('kfInsider'), pts(m?.insiderOwnership, 0)],
+    ];
+    const shown = cells.filter(([, v]) => v !== null);
+
+    const toneClass = (tone?: string) =>
+        tone === 'growth' ? 'text-pos' : tone === 'bad' ? 'text-neg' : tone === 'warn' ? 'text-warn' : 'text-ink';
 
     return (
         <div>
-            <Micro className="block">{t('dcfTitle')}</Micro>
+            <Micro className="block">{t('kfTitle')}</Micro>
 
-            <div className="mt-3.5 space-y-2.5">
+            <div className="mt-3.5 flex flex-wrap items-baseline gap-x-8 gap-y-3">
                 <div>
-                    <div className="mb-1 flex items-baseline justify-between">
-                        <span className="text-[11.5px] text-ink-2">{t('dcfRequires')}</span>
-                        <span className="font-mono text-[12px] font-semibold text-ink">
-                            {implied != null ? `${implied.toFixed(1)}%` : '—'}
-                        </span>
+                    <Micro className="block text-ink-3">{t('kfPrice')}</Micro>
+                    <div className="mt-1 font-mono text-[22px] font-semibold leading-none text-ink">
+                        {fmtMoney(price)}
                     </div>
-                    <Bar pct={implied != null ? Math.min(100, (implied / 35) * 100 + 4) : 0} color="#d3cfc5" height={8} />
                 </div>
                 <div>
-                    <div className="mb-1 flex items-baseline justify-between">
-                        <span className="text-[11.5px] text-ink-2">{t('dcfDelivered')}</span>
-                        <span className="font-mono text-[12px] font-semibold" style={{ color: 'oklch(0.75 0.11 155)' }}>
-                            {delivered != null ? `${delivered.toFixed(1)}%` : '—'}
-                        </span>
+                    <Micro className="block text-ink-3">{t('kfMcap')}</Micro>
+                    <div className="mt-1 font-mono text-[22px] font-semibold leading-none text-ink">
+                        {fmtMcap(row.info?.marketCap)}
                     </div>
-                    <Bar pct={delivered != null ? Math.min(100, (delivered / 15) * 100) : 0} color="oklch(0.75 0.11 155)" height={8} />
                 </div>
             </div>
 
-            {gap != null && (
-                <p className="mt-3 text-[12px] text-ink-2">
-                    <span className="font-mono font-bold" style={{ color: good ? 'oklch(0.75 0.11 155)' : '#cfa14e' }}>
-                        Gap: {gap > 0 ? '+' : '−'}{Math.abs(gap).toFixed(1)} pts
-                    </span>{' '}
-                    — {good
-                        ? 'you are being paid not to believe the growth story.'
-                        : 'the price needs an acceleration nobody has demonstrated yet.'}
-                </p>
+            {shown.length === 0 ? (
+                <p className="mt-3.5 text-[11.5px] text-ink-3">{t('kfNone')}</p>
+            ) : (
+                <div className="mt-4 grid grid-cols-2 gap-x-6">
+                    {shown.map(([label, value, tone]) => (
+                        <div key={label} className="flex items-baseline justify-between border-b border-rule-10 py-1.5">
+                            <span className="text-[11.5px] text-ink-2">{label}</span>
+                            <span className={clsx('font-mono text-[12px] font-semibold', toneClass(tone))}>{value}</span>
+                        </div>
+                    ))}
+                </div>
             )}
-            {v.verdict && <p className="mt-2 text-[11.5px] italic text-ink-3">{v.verdict}</p>}
-            {v.assumptions && (
-                <Micro className="mt-2 block normal-case tracking-normal text-ink-3">
-                    {v.assumptions.base_cf_kind} FY{v.assumptions.fiscal_year} · WACC {v.assumptions.wacc.toFixed(1)}%
-                    {' · '}terminal {(v.assumptions.terminal_growth * 100).toFixed(1)}%
-                    {' · '}{v.assumptions.stage1_years}y stage 1 + {v.assumptions.fade_years}y fade
-                </Micro>
-            )}
+
+            <Micro className="mt-2.5 block normal-case tracking-normal text-ink-3">{t('kfFoot')}</Micro>
         </div>
     );
 }
@@ -286,26 +303,15 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                     </button>
                     <span className="text-[20px] font-extrabold text-ink">{row.ticker}</span>
                     <span className="text-[13px] font-semibold text-ink-2">{row.info?.name ?? ''}</span>
-                    <Micro className="font-mono">
-                        {(row.info?.sector ?? '').toUpperCase()} · {fmtMcap(row.info?.marketCap)}
-                    </Micro>
+                    <Micro className="font-mono">{(row.info?.sector ?? '').toUpperCase()}</Micro>
                 </div>
-                <div className="flex flex-wrap items-center gap-4">
-                    <span className="font-mono text-[16px] font-semibold text-ink">{fmtMoney(price)}</span>
-                    <a
-                        href={`https://www.tradingview.com/symbols/${row.ticker}/`}
-                        target="_blank" rel="noopener noreferrer"
-                        className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2 hover:text-ink"
-                    >
-                        TradingView ↗
-                    </a>
-                    <Link
-                        href={`/lenses?ticker=${row.ticker}`}
-                        className="border border-accent/60 px-4 py-1.5 text-[12.5px] font-bold text-accent hover:bg-accent/[0.12]"
-                    >
-                        {t('detailAskAi')}
-                    </Link>
-                </div>
+                <a
+                    href={`https://www.tradingview.com/symbols/${row.ticker}/`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="border border-rule-24 px-4 py-1.5 font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2 hover:border-ink hover:text-ink"
+                >
+                    TradingView ↗
+                </a>
             </div>
 
             {/* Two-column body */}
@@ -314,7 +320,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                     <Micro className="block">
                         RS2 local-LLM analysis
                         {d?.date ? ` · depth run ${d.date}` : ''}
-                        {d ? ` · ${d.samples_run ?? 3} seeded runs` : ''}
+                        {d ? ` · ${d.samples_run ?? 3} runs` : ''}
                     </Micro>
 
                     <h1 className="mt-3 flex flex-wrap items-baseline gap-x-3">
@@ -338,7 +344,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                     {d && (
                         <p className="mt-5 text-[11px] leading-relaxed text-ink-3">
                             Band-direction scheme: the model analyzes the full fact pack in {d.samples_run ?? 3} independent
-                            seeded runs; the verdict is where today&apos;s price sits relative to the whole band of its
+                            runs; the verdict is where today&apos;s price sits relative to the whole band of its
                             valuations. Spread sets position size, not pass/fail.
                         </p>
                     )}
@@ -367,7 +373,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 </div>
 
                 <div className="flex min-w-0 flex-col gap-6 border-t border-rule-14 py-6 lg:border-t-0 lg:pl-0">
-                    <ReverseDcf row={row} />
+                    <KeyFinancials row={row} />
                     <QuantFilterPanel row={row} />
                 </div>
             </div>

@@ -7,21 +7,18 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { supabase } from '@/lib/supabase';
-import { POSITION_CAP_PCT, quarterKelly } from '@/lib/kelly';
 import { Micro, SectionHead } from '../primitives';
 import { OverlayChips } from '../rankings/cells';
-import { verdictTone } from '@/lib/desk/tone';
 import { fmtSignedPct } from '@/lib/desk/format';
 import {
     loadPortfolio, parseBulkPortfolio, savePortfolio, type Holding,
 } from '@/lib/desk/portfolio';
-import type { DepthVerdict, FactorEntry, ValuationModel } from '@/lib/data-service';
+import type { DepthVerdict, FactorEntry } from '@/lib/data-service';
 import type { StockInfo } from '@/lib/desk/useDeskData';
 import { useLanguage } from '@/components/LanguageContext';
 
 interface Props {
     factor: Record<string, FactorEntry>;
-    valuations: Record<string, ValuationModel>;
     depth: Record<string, DepthVerdict>;
     overlay: Record<string, any>;
     stockInfo: Record<string, StockInfo>;
@@ -30,7 +27,7 @@ interface Props {
     onRequireLogin: () => void;
 }
 
-export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onSelect, user, onRequireLogin }: Props) {
+export function MyPortfolio({ factor, depth, overlay, stockInfo, onSelect, user, onRequireLogin }: Props) {
     const { t } = useLanguage();
     const [holdings, setHoldings] = useState<Holding[]>([]);
     const [cash, setCash] = useState(0);
@@ -122,14 +119,17 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
         const out = holdings.map((h) => {
             const wt = total > 0 ? (h.value / total) * 100 : 0;
             const entry = factor[h.ticker];
-            const vm = valuations[h.ticker];
             const dv = depth[h.ticker];
-            const k = quarterKelly({ expectationsGapPts: vm?.expectations_gap_pts, annualizedVol: entry?.fct_vol });
             const vetoed = !!entry?.fct_veto;
-            const modelWt = vetoed ? 0 : k.weightPct;
 
-            // Verdict copy is written in band terms wherever the AI has read the
-            // filings; otherwise it falls back to the sizing comparison alone.
+            // Sizing used to come from quarter-Kelly over the reverse-DCF
+            // expectations gap. That dataset is retired, so the model's position
+            // size is now the depth run's own `size_hint`, shown verbatim — the
+            // desk never recomputes the spread tiers. It is a tier, not a percent,
+            // so the verdict compares direction rather than a target weight.
+            const sizeHint = !vetoed && dv?.direction === 'undervalued' ? (dv.size_hint ?? null) : null;
+            const modelSize = vetoed ? 'NONE' : sizeHint ? sizeHint.toUpperCase() : null;
+
             let verdict: string;
             let note: string;
             let color: string;
@@ -139,26 +139,28 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
             } else if (vetoed) {
                 verdict = 'VETOED'; color = '#e2917f';
                 note = `${entry.fct_veto!.replace(/_/g, ' ')} — hard avoid`;
-            } else if (dv?.direction === 'overvalued') {
-                verdict = 'OVERWEIGHT'; color = '#cfa14e';
+            } else if (!dv) {
+                verdict = 'NO DEPTH RUN'; color = '#c3bfb5';
+                note = 'the AI has not read this name yet';
+            } else if (dv.direction === 'overvalued') {
+                verdict = 'REDUCE'; color = '#cfa14e';
                 note = 'AI says overvalued — every run below the price';
-            } else if (modelWt === null) {
-                verdict = 'NO EDGE'; color = '#c3bfb5';
-                note = k.reason;
-            } else if (wt > modelWt + 1) {
-                verdict = 'OVERWEIGHT'; color = '#cfa14e';
-                note = `model sizes this at ${modelWt.toFixed(1)}%`;
-            } else if (wt < modelWt - 1) {
-                verdict = 'UNDERWEIGHT'; color = 'oklch(0.78 0.08 250)';
-                note = `model sizes this at ${modelWt.toFixed(1)}%`;
+            } else if (dv.direction === 'hold') {
+                verdict = 'HOLD'; color = '#c3bfb5';
+                note = 'the price sits inside the band — no edge either way';
+            } else if (dv.direction === 'undervalued') {
+                verdict = 'BUY'; color = 'oklch(0.75 0.11 155)';
+                note = sizeHint
+                    ? `every run above the price — model sizes this ${sizeHint}`
+                    : 'every run above the price';
             } else {
-                verdict = 'ALIGNED'; color = 'oklch(0.75 0.11 155)';
-                note = dv ? `${verdictTone(dv.direction).label.toLowerCase()} · within a point of the model` : 'within a point of the model size';
+                verdict = 'NO PLAUSIBLE RUN'; color = '#c3bfb5';
+                note = 'no band was computed for this name';
             }
 
             const sector = stockInfo[h.ticker]?.sector || 'Unknown';
             sectorWeights[sector] = (sectorWeights[sector] || 0) + wt;
-            return { ...h, wt, entry, vm, dv, modelWt, verdict, note, color, sector };
+            return { ...h, wt, entry, dv, modelSize, verdict, note, color, sector };
         });
 
         const covered = out.filter((r) => r.entry && r.entry.fct_composite !== null);
@@ -171,7 +173,7 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
             sectorBreaches: Object.entries(sectorWeights).filter(([, w]) => w > 25),
             weightedComposite: wc,
         };
-    }, [holdings, total, factor, valuations, depth, stockInfo]);
+    }, [holdings, total, factor, depth, stockInfo]);
 
     const field = 'border border-rule-24 bg-transparent px-2.5 py-1.5 font-mono text-[11px] text-ink outline-none focus:border-accent';
 
@@ -247,18 +249,17 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
 
             {rows.length > 0 && (
                 <>
-                    <div className="mt-5 grid grid-cols-[80px_90px_70px_80px_1fr_70px_120px_28px] gap-x-3 border-b border-rule-18 pb-2">
+                    <div className="mt-5 grid grid-cols-[80px_90px_70px_80px_1fr_120px_28px] gap-x-3 border-b border-rule-18 pb-2">
                         <Micro>Holding</Micro>
                         <Micro className="text-right">Value</Micro>
                         <Micro className="text-right">Weight</Micro>
                         <Micro className="text-right">Model size</Micro>
                         <Micro>Verdict</Micro>
-                        <Micro className="text-right">DCF gap</Micro>
                         <Micro>Overlay</Micro>
                         <Micro />
                     </div>
                     {rows.map((r) => (
-                        <div key={r.ticker} className="grid grid-cols-[80px_90px_70px_80px_1fr_70px_120px_28px] items-baseline gap-x-3 border-b border-rule-10 py-2.5">
+                        <div key={r.ticker} className="grid grid-cols-[80px_90px_70px_80px_1fr_120px_28px] items-baseline gap-x-3 border-b border-rule-10 py-2.5">
                             <button
                                 onClick={() => r.entry && onSelect(r.ticker)}
                                 className="text-left text-[13px] font-extrabold text-ink hover:text-accent"
@@ -268,16 +269,11 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
                             <span className="text-right font-mono text-[11px] text-ink-2">${r.value.toLocaleString()}</span>
                             <span className="text-right font-mono text-[11.5px] font-semibold text-ink">{r.wt.toFixed(1)}%</span>
                             <span className="text-right font-mono text-[11px] text-ink-2">
-                                {r.modelWt === null ? '—' : `${r.modelWt.toFixed(1)}%`}
+                                {r.modelSize ?? '—'}
                             </span>
                             <span className="min-w-0">
                                 <span className="text-[11.5px] font-bold" style={{ color: r.color }}>{r.verdict}</span>
                                 <span className="ml-2 text-[11px] text-ink-3">{r.note}</span>
-                            </span>
-                            <span className="text-right font-mono text-[11px] text-ink-2">
-                                {r.vm?.expectations_gap_pts != null
-                                    ? `${r.vm.expectations_gap_pts > 0 ? '+' : '−'}${Math.abs(r.vm.expectations_gap_pts).toFixed(0)}pts`
-                                    : '—'}
                             </span>
                             <span><OverlayChips overlay={overlay[r.ticker]} /></span>
                             <button
@@ -296,7 +292,6 @@ export function MyPortfolio({ factor, valuations, depth, overlay, stockInfo, onS
                         {weightedComposite !== null && (
                             <span>WEIGHTED COMPOSITE <b className="text-ink">{weightedComposite.toFixed(1)}</b></span>
                         )}
-                        <span>KELLY CAP <b className="text-ink">{POSITION_CAP_PCT}%</b></span>
                         {sectorBreaches.map(([s, w]) => (
                             <span key={s} className="text-warn">⚠ {s.toUpperCase()} {w.toFixed(0)}% (&gt;25% CONCENTRATION RULE)</span>
                         ))}

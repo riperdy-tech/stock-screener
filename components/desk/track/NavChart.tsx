@@ -1,6 +1,7 @@
 'use client';
 
-// Growth of $10,000 — hand-drawn SVG rather than a chart library, because the
+// NAV index, base 100 at the start of the visible window — hand-drawn SVG rather
+// than a chart library, because the
 // spec needs an editorial crosshair, an HTML gridline overlay, square everything
 // and a range-slider window control, none of which a generic chart gives cheaply.
 
@@ -11,7 +12,7 @@ import {
     BENCHMARKS, BENCH_STYLE, BOOKS, growthAt, windowReturn,
     type Curve,
 } from '@/lib/desk/nav';
-import { fmtDateShort, fmtDollars, fmtSignedPct } from '@/lib/desk/format';
+import { fmtDateShort, fmtIndex, fmtSignedPct } from '@/lib/desk/format';
 
 const W = 640;
 const H = 210;
@@ -58,8 +59,8 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                 if (v > max) max = v;
             }
         }
-        if (!Number.isFinite(min) || !Number.isFinite(max)) return [9000, 12000];
-        const pad = Math.max((max - min) * 0.07, 120);
+        if (!Number.isFinite(min) || !Number.isFinite(max)) return [90, 120];
+        const pad = Math.max((max - min) * 0.07, 1.2);
         return [min - pad, max + pad];
     }, [shown, curve.series, r0, r1]);
 
@@ -95,7 +96,6 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
     return (
         <div className="mt-6">
             <div className="flex flex-wrap items-baseline justify-between gap-x-5 gap-y-3">
-                <Micro className="font-semibold text-ink">Growth of $10,000</Micro>
                 <div className="flex flex-wrap gap-x-3 gap-y-1.5">
                     {all.map((s) => (
                         <button
@@ -142,7 +142,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                         className="pointer-events-none absolute left-0.5 font-mono font-semibold text-[11px] text-ink-3"
                         style={{ top: `${(CY(v) / H) * 100}%`, transform: 'translateY(-100%)', background: 'var(--surface)', paddingRight: 4 }}
                     >
-                        {fmtDollars(v)}
+                        {fmtIndex(v)}
                     </span>
                 ))}
 
@@ -177,7 +177,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                                 return (
                                     <div key={s.key} className="mt-1 flex items-baseline justify-between gap-4 text-[11px]">
                                         <span style={{ color: s.color }}>{s.label}</span>
-                                        <span className="font-mono font-semibold text-ink">{fmtDollars(v)}</span>
+                                        <span className="font-mono font-semibold text-ink">{fmtIndex(v)}</span>
                                     </div>
                                 );
                             })}
@@ -237,7 +237,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                     return (
                         <span key={s.key} className="font-mono text-[11px] text-ink-2">
                             <span style={{ color: s.color }}>{s.dashed ? '╌' : '━'} {s.label}</span>{' '}
-                            <span className="text-ink">{end != null ? fmtDollars(end) : '—'}</span>{' '}
+                            <span className="text-ink">{end != null ? fmtIndex(end) : '—'}</span>{' '}
                             <span className={ret != null && ret >= 0 ? 'text-pos' : 'text-neg'}>({fmtSignedPct(ret)})</span>
                         </span>
                     );
@@ -246,11 +246,13 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
 
             <Micro className="mt-2 block text-ink-3">
                 {(() => {
+                    // Ledger trade values are NAV index points, same unit as the
+                    // chart, so the cost of a commission rate is points too.
                     const traded = shown
                         .filter((s) => curve.tradedValue[s.key] > 0)
-                        .map((s) => `${s.label} −$${Math.round(curve.tradedValue[s.key] * commission).toLocaleString('en-US')}`);
+                        .map((s) => `${s.label} −${(curve.tradedValue[s.key] * commission / 100).toFixed(2)}`);
                     return traded.length
-                        ? `Fees at ${commissionLabel}%/trade: ${traded.join(' · ')}`
+                        ? `Fees at ${commissionLabel}%/trade, in index points: ${traded.join(' · ')}`
                         : 'Benchmarks only — no trading costs';
                 })()}
             </Micro>

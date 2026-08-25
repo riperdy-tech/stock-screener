@@ -154,7 +154,7 @@ function DepthVerdictBanner({ v }: { v: DepthVerdict }) {
             </div>
             <p className="mt-1 text-[11px] leading-snug text-ink-2">
                 Band-direction scheme: the model analyzes the full fact pack in {v.n_basis >= 3 ? "three" : "multiple"} independent
-                seeded runs; the verdict is where today's price sits relative to the whole band of its
+                runs; the verdict is where today's price sits relative to the whole band of its
                 valuations. Spread sets position size, not pass/fail.
             </p>
         </div>
@@ -315,7 +315,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
             </div>
 
             {/* panels */}
-            <div className="border border-rule-10 bg-inset p-4">
+            <div className="scroll-dark max-h-[340px] overflow-y-auto border border-rule-10 bg-inset p-4">
                 {bundleLoading ? (
                     <div className="p-4 text-center text-sm text-ink-2">Loading report…</div>
                 ) : subTab === "full" ? (

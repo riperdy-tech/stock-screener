@@ -69,7 +69,7 @@ function Funnel({ scored, analyzed, researchNow, labels }: {
         <div className="flex gap-x-6 text-right">
             {cells.map((c, i) => (
                 <div key={c.label} className={i > 0 ? 'border-l border-rule-18 pl-6' : ''}>
-                    <div className={`font-mono text-[28px] leading-none ${c.cls}`}>{c.n.toLocaleString('en-US')}</div>
+                    <div className={`font-mono text-[24px] leading-none ${c.cls}`}>{c.n.toLocaleString('en-US')}</div>
                     <Micro className={`mt-1 block ${i === 2 ? 'text-accent' : ''}`}>{c.label}</Micro>
                 </div>
             ))}
@@ -109,12 +109,12 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     return (
         <div>
             {/* Intro band — what the reader is looking at, and the funnel that produced it. */}
-            <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-5 py-7">
-                <div className="max-w-[620px]">
-                    <h1 className="text-[22px] font-bold leading-snug tracking-head text-ink">
+            <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4 pb-4 pt-5">
+                <div className="max-w-[760px]">
+                    <h1 className="text-[21px] font-bold leading-tight tracking-head text-ink">
                         {t('rankHeadline')}
                     </h1>
-                    <p className="mt-2 text-[12.5px] text-ink-2">
+                    <p className="mt-1.5 text-[12.5px] text-ink-2">
                         {t('rankSub')}{' '}
                         <Link href="/help#rs2" className="border-b border-dotted border-accent/50 text-accent">
                             {t('rankHowItWorks')}
@@ -130,7 +130,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
             </div>
 
             {/* Lens switcher + filters */}
-            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-rule-14 py-4">
+            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-rule-14 py-3">
                 <div className="flex items-center gap-2">
                     <Micro className="mr-1">{t('lensLabelDesk')}</Micro>
                     <Chip active={lens === 'ai'} onClick={() => onLens('ai')}>{t('lensAi')}</Chip>

@@ -7,12 +7,14 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Micro, SectionHead } from '../primitives';
-import { DcfGapCell, FactorMix, McapCell, PriceCell, StockCell } from './cells';
+import { FactorMix, McapCell, PriceCell, StockCell } from './cells';
 import { sizeTone, verdictTone } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import type { DeskRow } from '@/lib/desk/rankings';
 
-const GRID = 'grid grid-cols-[26px_180px_80px_112px_112px_170px_180px_70px_56px] items-center gap-x-3';
+// Removing the DCF-gap column freed 170px. Cap STOCK and let the RS2 verdict
+// column take the slack — a 470px name column is not what the space is for.
+const GRID = 'grid grid-cols-[26px_minmax(180px,300px)_80px_112px_112px_minmax(180px,1fr)_70px_56px] items-center gap-x-3';
 
 const BAND_LABEL: Record<string, string> = {
     research_now: '■ RSRCH NOW', watchlist: '■ WATCHLIST',
@@ -67,7 +69,6 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                 <Micro className="text-right">Composite</Micro>
                 <Micro>Factor mix</Micro>
                 <Micro>Band</Micro>
-                <Micro>DCF gap</Micro>
                 <Micro>RS2 verdict</Micro>
                 <Micro className="text-right">Price</Micro>
                 <Micro className="text-right">Mcap</Micro>
@@ -90,7 +91,6 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                         </span>
                         <FactorMix contributions={r.fct.fct_contributions} />
                         <BandChip row={r} />
-                        <DcfGapCell row={r} />
                         <CompactVerdict row={r} />
                         <PriceCell row={r} />
                         <McapCell row={r} />

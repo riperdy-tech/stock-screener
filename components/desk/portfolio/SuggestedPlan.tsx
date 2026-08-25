@@ -11,7 +11,7 @@ import { OverlayChips } from '../rankings/cells';
 import type { MacroStatePayload } from '@/lib/data-service';
 import { useLanguage } from '@/components/LanguageContext';
 
-const GRID = 'grid grid-cols-[80px_70px_1fr_110px_60px_120px_110px] items-center gap-x-3';
+const GRID = 'grid grid-cols-[80px_70px_1fr_110px_120px_110px] items-center gap-x-3';
 
 function AllocationBars({ title, alloc }: { title: string; alloc: Record<string, number> | undefined }) {
     const entries = Object.entries(alloc ?? {}).sort((a, b) => b[1] - a[1]);
@@ -131,7 +131,6 @@ export function SuggestedPlan({ plan, planLlm, macro, overlay, onOpenTicker }: {
                 <Micro className="text-right">Size</Micro>
                 <Micro />
                 <Micro>Sizing logic</Micro>
-                <Micro className="text-right">Gap</Micro>
                 <Micro>Theme</Micro>
                 <Micro>Flags</Micro>
             </div>
@@ -159,11 +158,6 @@ export function SuggestedPlan({ plan, planLlm, macro, overlay, onOpenTicker }: {
                         <span className="font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink-3">
                             {(p.sizing_method || '').replace(/_/g, ' ')}
                         </span>
-                        <span className="text-right font-mono text-[11px] text-ink-2">
-                            {p.expectations_gap_pts != null
-                                ? `${p.expectations_gap_pts > 0 ? '+' : '−'}${Math.abs(Math.round(p.expectations_gap_pts))}`
-                                : '—'}
-                        </span>
                         <span className="truncate text-[11px] text-ink-3">{p.theme_primary || '—'}</span>
                         <span className="min-w-0">
                             {(p.forensic_flags ?? []).length > 0
@@ -180,7 +174,7 @@ export function SuggestedPlan({ plan, planLlm, macro, overlay, onOpenTicker }: {
                     <span className="text-right font-mono text-[12px] text-ink-2">{active.cash_pct}%</span>
                     <Bar pct={active.cash_pct} color="rgba(255,255,255,.18)" />
                     <span className="font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink-3">no edge available</span>
-                    <span /><span /><span />
+                    <span /><span />
                 </div>
             )}
 

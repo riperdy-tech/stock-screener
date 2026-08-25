@@ -1,7 +1,7 @@
 'use client';
 
 // The hero: a 58px track showing where today's price sits against the whole
-// band, with one square dot per seeded run.
+// band, with one square dot per run.
 
 import React from 'react';
 import { scaleBand } from '@/lib/desk/band';
@@ -24,7 +24,7 @@ export function BandChartHero({ verdict, runIvs }: { verdict: DepthVerdict; runI
     if (!g.ok) {
         return (
             <p className="mt-5 text-[12px] text-ink-3">
-                No band was computed for this name — every seeded run was rejected by the plausibility guards.
+                No band was computed for this name — every run was rejected by the plausibility guards.
             </p>
         );
     }

@@ -1,7 +1,7 @@
 'use client';
 
 // RS2 AI lens — the default view. The verdict is where today's price sits
-// against the whole band of the three seeded runs; the quant composite is
+// against the whole band of the three runs; the quant composite is
 // demoted to a context column.
 
 import React from 'react';
@@ -17,7 +17,9 @@ import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import { rankDelta, type AiSections, type DeskRow } from '@/lib/desk/rankings';
 import { useLanguage } from '@/components/LanguageContext';
 
-const GRID = 'grid grid-cols-[26px_180px_190px_170px_90px_120px_150px_70px_56px] items-center gap-x-3';
+// STOCK is the flexible column: with every track fixed the row stopped short of
+// the content edge, which read as a lopsided right margin against the rank column.
+const GRID = 'grid grid-cols-[26px_minmax(180px,1fr)_190px_170px_90px_120px_150px_70px_56px] items-center gap-x-3';
 
 function HeaderRow() {
     const { t } = useLanguage();
@@ -180,7 +182,7 @@ export function AiLens({ sections, onOpen }: { sections: AiSections; onOpen: (t:
                             tabIndex={0}
                             onClick={() => onOpen(r.ticker)}
                             onKeyDown={(e) => { if (e.key === 'Enter') onOpen(r.ticker); }}
-                            className="grid cursor-pointer grid-cols-[26px_180px_1fr] items-baseline gap-x-3 py-3 opacity-65 hover:opacity-90"
+                            className="grid cursor-pointer grid-cols-[26px_minmax(180px,240px)_1fr] items-baseline gap-x-3 py-3 opacity-65 hover:opacity-90"
                         >
                             <span className="font-mono text-[12px] text-ink-3">—</span>
                             <span className="text-[15px] font-extrabold text-ink">{r.ticker}

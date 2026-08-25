@@ -333,7 +333,7 @@ async function fetchJson<T>(path: string): Promise<T | null> {
 
 // ── Depth-tier band-direction verdicts (replacement pipeline, RS2 Local) ────
 // Written by orchestrate_depth.py at sweep end. band_direction_v1: direction is where the
-// price sits vs the IV band across 3 seeded model runs; spread maps to a size hint.
+// price sits vs the IV band across 3 independent model runs; spread maps to a size hint.
 export interface DepthVerdict {
     ticker: string;
     price: number | null;

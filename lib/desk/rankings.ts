@@ -187,18 +187,22 @@ export function rankDelta(r: DeskRow): number | null {
     return null;
 }
 
-/** One-line reason the two engines disagree, assembled from what the data knows. */
+/**
+ * One-line reason the two engines disagree, assembled from what the data knows.
+ * The reverse-DCF expectations gap used to open this line; that dataset is
+ * retired, so the reason is now built from the band and the quant haircuts.
+ */
 export function whySplit(r: DeskRow): string {
-    const gap = r.val?.expectations_gap_pts;
     const d = r.depth?.direction;
     const bits: string[] = [];
-    if (gap != null) {
-        bits.push(gap < 0
-            ? `price needs ${(r.val?.implied_growth != null ? (r.val.implied_growth * 100).toFixed(1) : '—')}% growth against ${(r.val?.hist_revenue_cagr_5y != null ? (r.val.hist_revenue_cagr_5y * 100).toFixed(1) : '—')}% delivered`
-            : `price already assumes an acceleration of ${gap.toFixed(1)} pts over what was delivered`);
+    // The median gap is already its own column here, so it only earns a mention
+    // when there is no band direction to state instead.
+    const gapPct = r.depth?.mos_vs_median_pct;
+    if (!d && gapPct != null) {
+        bits.push(`median run values it ${Math.abs(gapPct).toFixed(1)}% ${gapPct >= 0 ? 'above' : 'below'} the price`);
     }
-    if (d === 'undervalued') bits.push('all seeded runs land above the price');
-    else if (d === 'overvalued') bits.push('all seeded runs land below the price');
+    if (d === 'undervalued') bits.push('all runs land above the price');
+    else if (d === 'overvalued') bits.push('all runs land below the price');
     else if (d === 'hold') bits.push('the price sits inside the run spread');
     if (r.fct.fct_haircuts && (r.fct.fct_haircuts as any).forensic < 1) bits.push('forensic haircut applied');
     return bits.length ? bits.join(' · ') : 'no single driver — the engines weight the same evidence differently';

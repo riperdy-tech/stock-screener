@@ -26,18 +26,18 @@ export const BENCHMARKS = ['IWM', 'SPY', 'QQQ', 'SOXX', 'DRAM'] as const;
 
 /** Strategy books, in the order they appear in the chart legend. */
 export const BOOKS: { key: string; label: string; color: string; width: number }[] = [
-    { key: 'equal_llm', label: 'EQUAL · AI', color: 'oklch(0.78 0.08 250)', width: 2.5 },
+    { key: 'equal_llm', label: 'EQUAL · AI', color: 'oklch(0.78 0.08 250)', width: 2 },
     // PLAN takes the design's grey series colour. EQUAL (not in the handoff's
     // series list) can no longer be a second grey — after the legibility pass the
     // two greys sit ~10% apart and are indistinguishable as chart lines, so it
     // takes the factor-value green, which no other solid book line uses.
-    { key: 'equal', label: 'EQUAL', color: '#5a9b6d', width: 1.8 },
-    { key: 'plan', label: 'PLAN', color: '#e0ddd6', width: 1.8 },
-    { key: 'plan_llm', label: 'PLAN · AI', color: '#6b93c4', width: 1.8 },
-    { key: 'plan2', label: 'PLAN2', color: '#c2798f', width: 1.8 },
-    { key: 'plan2_llm', label: 'PLAN2 · AI', color: '#9a83c2', width: 1.8 },
-    { key: 'plan3', label: 'PLAN3', color: '#b56a4f', width: 1.8 },
-    { key: 'mine', label: 'MINE', color: '#cfa14e', width: 1.8 },
+    { key: 'equal', label: 'EQUAL', color: '#5a9b6d', width: 1.4 },
+    { key: 'plan', label: 'PLAN', color: '#e0ddd6', width: 1.4 },
+    { key: 'plan_llm', label: 'PLAN · AI', color: '#6b93c4', width: 1.4 },
+    { key: 'plan2', label: 'PLAN2', color: '#c2798f', width: 1.4 },
+    { key: 'plan2_llm', label: 'PLAN2 · AI', color: '#9a83c2', width: 1.4 },
+    { key: 'plan3', label: 'PLAN3', color: '#b56a4f', width: 1.4 },
+    { key: 'mine', label: 'MINE', color: '#cfa14e', width: 1.4 },
 ];
 
 export const BENCH_STYLE: Record<string, string> = {
@@ -151,8 +151,8 @@ export function windowReturn(arr: (number | null)[] | undefined, from: number, t
     return (b / a - 1) * 100;
 }
 
-/** Growth of $10,000 at index `i`, re-based to the window start. */
-export function growthAt(arr: (number | null)[] | undefined, from: number, i: number, start = 10000): number | null {
+/** Index level at `i`, re-based to 100 at the start of the visible window. */
+export function growthAt(arr: (number | null)[] | undefined, from: number, i: number, start = 100): number | null {
     if (!arr) return null;
     const base = firstValue(arr, from);
     const v = arr[i];
@@ -185,7 +185,7 @@ export function benchReturnPct(series: NavPoint[] | undefined, sym: string, from
  * equal-weight book (`equal_llm`) — the AI's own stock-picking test — and falls
  * back to the quant equal-weight book when the LLM A/B has not started.
  */
-export function standingRecord(ledgers: any, benchSym = 'IWM'): {
+export function standingRecord(ledgers: any, benchSym = 'QQQ'): {
     key: string; aiPct: number | null; benchSym: string; benchPct: number | null;
 } | null {
     const books = ledgers?.ledgers;
@@ -199,12 +199,6 @@ export function standingRecord(ledgers: any, benchSym = 'IWM'): {
         benchSym,
         benchPct: benchReturnPct(series, benchSym),
     };
-}
-
-/** Dollar cost of every trade in a book at `pct` per side, on a $10,000 base. */
-export function feesDollars(tradedValue: number | undefined, pct: number): number {
-    if (!tradedValue || !Number.isFinite(pct)) return 0;
-    return Math.round(tradedValue * pct);
 }
 
 /** Group trades by ISO date — the Daily Activity ledger column. */
