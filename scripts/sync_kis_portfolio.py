@@ -523,13 +523,32 @@ def main():
               f"{pnl_suffix(avg_cost.get(o.ticker, 0), limit, o.qty)} -> "
               f"{'OK ' + str(res['order_no']) if res['ok'] else 'REJECT: ' + res['msg']}")
 
-    if plan.sells and plan.buys and not args.no_wait:
+    # Wait for sell fills whenever there are sells at all. With buys, this lets proceeds settle
+    # to fund them; without buys (a pure exit run), it still confirms the sells cleared. Either
+    # way, an unfilled remainder after the window is surfaced below.
+    if plan.sells and not args.no_wait:
+        remaining = []
         for i in range(FILL_WAIT_ROUNDS):
             time.sleep(FILL_WAIT_SECONDS)
             remaining = [u for u in client.unfilled() if u["side"] == "sell"]
             print(f"  fill wait {i + 1}/{FILL_WAIT_ROUNDS}: {len(remaining)} sells unfilled")
             if not remaining:
                 break
+        if remaining:
+            # Sells still open after the full wait window (limit priced below a market that kept
+            # dropping, or a thin book) — the account is left mid-transition and any buys are
+            # funded only by whatever settled. Surface it. Best-effort: same non-fatal contract
+            # as the digest sink, must never break the trade path.
+            try:
+                names = ", ".join(f"{u.get('ticker', '?')} x{u.get('qty_remaining', 0):g}"
+                                  for u in remaining)
+                wait_min = FILL_WAIT_ROUNDS * FILL_WAIT_SECONDS // 60
+                prefix = os.environ.get("KIS_MSG_PREFIX", "[KIS·trades]")
+                send_telegram(f"{prefix} {run_id} {args.env}/{args.ledger}: "
+                              f"⚠️ {len(remaining)} sell(s) UNFILLED after {wait_min}min "
+                              f"— {names}. Account left mid-transition.")
+            except Exception as e:
+                print(f"  unfilled-sell alert failed (non-fatal): {e}", file=sys.stderr)
 
     # ---- buys, capped by what KIS will actually let us spend ----
     # Re-read after the sells: filled proceeds show up as 매도대금 재사용 and lift
