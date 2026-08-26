@@ -51,9 +51,9 @@ DATA = ROOT / "public" / "data"
 STOCKS_JSON = DATA / "stocks.json"
 FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 PORTFOLIO_PLAN_JSON = DATA / "portfolio_plan.json"
-PORTFOLIO_PLAN_LLM_JSON = DATA / "portfolio_plan_llm.json"   # LLM-overlay variant (A/B)
-LLM_OVERLAY_JSON = DATA / "llm_overlay.json"                 # RS2 verdicts (fair_value etc.) — F-04 hysteresis exit test
 DEPTH_OVERLAY_JSON = DATA / "depth_overlay.json"             # RS2 depth verdicts — rn_depth ledger targets
+# The old llm_overlay.json / portfolio_plan_llm.json lane (plan_llm/plan2_llm/equal_llm)
+# was RETIRED in the depth migration (2026-08-26); rn_depth is the depth paper book.
 PORTFOLIO_PLAN_MOMO_JSON = DATA / "portfolio_plan_momo.json"  # plan3 momentum sleeve
 MY_PORTFOLIO_JSON = DATA / "my_portfolio.json"
 LEDGERS_JSON = DATA / "paper_ledgers.json"
@@ -142,9 +142,9 @@ def evaluated_llm(entry):
 MIN_EQUAL_NAMES = 8      # #8 concentration floor: equal-weight over max(count, this) -> cash residual when few
 
 # ── rn_depth ledger (added 2026-08-26) ───────────────────────────────────────
-# Mirrors the site's RESEARCH NOW panel, which no other ledger reads: equal/
-# equal_llm gate on the quant band (fct_band / fct_band_llm) and never look at a
-# depth verdict, so the RS2 depth run drove the UI and nothing else.
+# Mirrors the site's RESEARCH NOW panel, which no other ledger reads: the quant
+# `equal` sleeve gates on the quant band (fct_band) and never looks at a depth
+# verdict, so the RS2 depth run drove the UI and, now, this ledger.
 #
 # The gate MUST stay identical to lib/desk/rankings.ts:139-143 (aiSections) or the
 # ledger silently trades a different book than the panel shows: a row is in when it
@@ -156,7 +156,7 @@ MIN_EQUAL_NAMES = 8      # #8 concentration floor: equal-weight over max(count, 
 # engine's size_hint (full/half/quarter) is deliberately NOT used for sizing —
 # it stays display-only, as it is everywhere else in the repo.
 #
-# Same MIN_EQUAL_NAMES concentration floor as equal/equal_llm: a panel that
+# Same MIN_EQUAL_NAMES concentration floor as the quant equal sleeve: a panel that
 # shrinks to a handful of names leaves the remainder in cash instead of
 # concentrating the whole book into them.
 
@@ -186,55 +186,12 @@ def depth_targets(factor: dict, depth: dict) -> dict:
     return {t: weight for t in names}
 
 
-# ── F-04 hysteresis (equal_llm only, added 2026-08-04) ────────────────────────
-# The strict research_now gate (score_factors.apply_llm_overlay: deep>=30 / MoS>=15
-# / conv>=9.5) recomputes live MoS against daily-moving prices with no hysteresis,
-# so a held name parked near the cliff round-trips on ordinary price noise (F-04).
-# ENTRY is unchanged; a held name that has slipped OUT of research_now is RETAINED
-# until it drops below this looser EXIT band, then sold via the normal leaver path.
-# Thresholds from the benchmark sweep (scratchpad/hyst_sweep.py, 2026-08-04): at
-# 25bps+ this nets more than the hard cliff and cuts trades ~30%. MoS is the noisy
-# price-driven input so it gets a real 5pt buffer; conviction is anchor-stable
-# (F-01 fixed) so it gets only a token 0.5pt one.
-# NOTE: the live-MoS / staleness / bearish logic below MIRRORS
-# score_factors.apply_llm_overlay (~lines 186-246) — keep the two in sync.
-HYST_EXIT_MOS, HYST_EXIT_DEEP, HYST_EXIT_CONV = 10.0, 25.0, 9.0
-_HYST_BEAR_WORDS = ("AVOID", "SELL", "REDUCE", "TRIM", "EXIT", "SHORT")
-
-
-def llm_hold_qualifies(entry, verdict, live_price, as_of):
-    """F-04 exit test: True if a currently-held equal_llm name that has left the
-    strict research_now set is still 'good enough to hold' (clears the looser exit
-    band), so it is retained rather than sold on boundary noise. A genuine bearish
-    call (AVOID/SELL/REDUCE/TRIM/EXIT/SHORT or stance overvalued) always fails ->
-    hard exit, no hysteresis. `entry` is the factor_scores row (for the quant
-    guardrail); `verdict` is the llm_overlay.json ticker record (fair_value etc.).
-    Mirrors score_factors.apply_llm_overlay; keep in sync."""
-    if not entry or entry.get("fct_veto") is not None or not verdict:
-        return False
-    act = (verdict.get("action") or "").upper()
-    stance = (verdict.get("stance") or "").lower()
-    if any(w in act for w in _HYST_BEAR_WORDS) or stance == "overvalued":
-        return False                                   # explicit bear = hard exit
-    conv = verdict.get("conviction")
-    c = conv if isinstance(conv, (int, float)) else 9.0
-    ad = verdict.get("analyzed_date")
-    try:
-        if ad and (date.fromisoformat(as_of) - date.fromisoformat(ad)).days > 14:
-            c = 9.0 + (c - 9.0) * 0.5                   # stale -> shrink toward neutral (as score_factors)
-    except Exception:
-        pass
-    fv = verdict.get("fair_value")
-    if isinstance(fv, (int, float)) and live_price:
-        mos = (fv / live_price - 1.0) * 100.0          # live MoS (fair_value / today's close)
-    else:                                              # no live price: fall back to the frozen verdict MoS
-        mos = verdict.get("realistic_mos_pct")
-        if mos is None:
-            mos = verdict.get("mos_pct")
-    et = (verdict.get("entry_timing") or "").lower()
-    if mos is not None and mos >= HYST_EXIT_DEEP:      # still deep value -> hold regardless of conviction
-        return True
-    return c >= HYST_EXIT_CONV and ((mos is not None and mos >= HYST_EXIT_MOS) or et == "buy")
+# F-04 hysteresis (equal_llm) was REMOVED in the depth migration (2026-08-26). It
+# existed only because apply_llm_overlay recomputed live MoS against daily-moving
+# prices, so a held name near the research_now cliff round-tripped on price noise. The
+# depth gate reads the FROZEN `direction` verdict (rn_depth / aiSections) — constant
+# until the producer re-runs — so there is no daily cliff to churn across, and nothing
+# for a hysteresis to protect. See depth-migration-decisions in memory / handoff §6.4.
 
 
 def load_json(path, default=None):
@@ -1084,10 +1041,11 @@ def main():
         "inception": as_of,
         "config": {"cost_bps": COST_BPS, "benchmarks": BENCHMARKS,
                    "primary_benchmark": PRIMARY_BENCHMARK, "start_nav": START_NAV},
-        "ledgers": {"plan": empty_ledger(), "plan2": empty_ledger(), "equal": empty_ledger(),
-                    "plan_llm": empty_ledger(), "plan2_llm": empty_ledger(), "equal_llm": empty_ledger()},
+        "ledgers": {"plan": empty_ledger(), "plan2": empty_ledger(), "equal": empty_ledger()},
     }
-    for _k in ("plan2", "plan_llm", "plan2_llm", "equal_llm", "plan3", "rn_depth"):
+    # plan_llm/plan2_llm/equal_llm are NOT seeded on new books — retired 2026-08-26.
+    # Pre-existing books keep them (setdefault never removes), so their history stays.
+    for _k in ("plan2", "plan3", "rn_depth"):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -1113,7 +1071,7 @@ def main():
         factor = factor_raw.get("tickers", {})
         fct_ok, fct_why = factor_healthy(factor_raw, book, as_of)
         if not fct_ok:
-            print(f"  ! factor_scores unhealthy: {fct_why} — equal/equal_llm hold", file=sys.stderr)
+            print(f"  ! factor_scores unhealthy: {fct_why} — equal/rn_depth hold", file=sys.stderr)
             alerts.append({"date": as_of, "severity": "error", "scope": "factor_scores",
                            "detail": fct_why})
             guard_tripped.append(f"factor_scores: {fct_why}")
@@ -1158,65 +1116,12 @@ def main():
             finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
             backfill_benches(ledgers[name])  # late-added benchmarks -> full record
 
-        # ── LLM-overlay variants (A/B): plan_llm / plan2_llm / equal_llm ─────
-        # Same inception + machinery as the baselines, fed from portfolio_plan_llm.json + fct_band_llm.
-        # No-op while the LLM data is absent (empty targets -> the ledger just holds cash), so the
-        # series stays flat until verdicts exist, then diverges from baseline — a clean A/B.
-        plan_llm = load_json(PORTFOLIO_PLAN_LLM_JSON, {}) or {}
-        pl_t = {p["symbol"]: p["weight_pct"] for p in (plan_llm.get("positions") or [])}
-        nav_pl, stale_pl = run_or_hold("plan_llm", pl_t, "plan_llm")
-        pl2_t = {p["symbol"]: p["weight_pct"] for p in ((plan_llm.get("plan2") or {}).get("positions") or [])}
-        nav_pl2, stale_pl2 = run_or_hold("plan2_llm", pl2_t, "plan2_llm")
-
-        # The overlay is authoritative for equal_llm. If it did not run, the ledger
-        # holds — it must never fall back to the quant band, which reads the LLM's
-        # silence as a verdict (that manufactured 19 phantom departures on 2026-06-30
-        # and 57 on 2026-07-05). Overlay-absent is a known state, not a data fault,
-        # so it holds without failing the run.
-        overlay_on = bool(factor_raw.get("llm_overlay_applied"))
-        if not overlay_on:
-            print("  ! equal_llm: llm_overlay_applied is false — holding book unchanged",
-                  file=sys.stderr)
-            # overlay-absent is a known state, not a data fault: a warn banner, not an
-            # error, and it does NOT count toward guard_tripped.
-            if ledgers["equal_llm"]["state"]["holdings"]:
-                alerts.append({"date": as_of, "severity": "warn", "scope": "equal_llm",
-                               "kind": "overlay_absent",
-                               "detail": "llm_overlay_applied is false; held unchanged"})
-            nav_eql, stale_eql = hold_ledger(ledgers["equal_llm"], prices, as_of)
-        else:
-            unknown_llm = {t for t in ledgers["equal_llm"]["state"]["holdings"]
-                           if not evaluated_llm(factor.get(t))}
-            research_llm = sorted(t for t, e in factor.items()
-                                  if e.get("fct_band_llm") == "research_now"
-                                  and e.get("fct_llm_veto") != "llm_reject")
-            # F-04 hysteresis: RETAIN currently-held names that have slipped out of
-            # the strict research_now gate but still clear the looser exit band, so
-            # daily price noise around the MoS/conviction cliff stops round-tripping
-            # them (see llm_hold_qualifies). Candidates are held, evaluated, and not
-            # already in the strict set; unknown/unevaluated holds are carried by
-            # run_target_ledger's own path, and strict RN names enter/stay normally.
-            # overlay_on is True here (checked above), so the overlay file exists;
-            # if it somehow fails to load, no name is retained -> current behaviour.
-            overlay_tk = (load_json(LLM_OVERLAY_JSON, {}) or {}).get("tickers", {})
-            strict_llm = set(research_llm)
-            retained_llm = sorted(
-                t for t in ledgers["equal_llm"]["state"]["holdings"]
-                if t not in strict_llm and evaluated_llm(factor.get(t))
-                and llm_hold_qualifies(factor.get(t), overlay_tk.get(t),
-                                       num(prices.get(t)), as_of))
-            if retained_llm:
-                print(f"  · equal_llm: F-04 hysteresis retained {len(retained_llm)} held "
-                      f"name(s) below research_now but above exit band: {retained_llm}",
-                      file=sys.stderr)
-            target_llm = research_llm + retained_llm
-            eqw_llm = 100.0 / max(len(target_llm), MIN_EQUAL_NAMES) if target_llm else 0   # #8 cash residual when few
-            nav_eql, stale_eql = run_or_hold("equal_llm", {t: eqw_llm for t in target_llm}, "rank",
-                                             unknown=unknown_llm, source_ok=fct_ok, why=fct_why)
-        for name, nav, stale in (("plan_llm", nav_pl, stale_pl), ("plan2_llm", nav_pl2, stale_pl2),
-                                 ("equal_llm", nav_eql, stale_eql)):
-            finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
-            backfill_benches(ledgers[name])
+        # ── LLM-overlay variants (plan_llm / plan2_llm / equal_llm): RETIRED ──
+        # The old conviction/MoS LLM A/B lane (fed by portfolio_plan_llm.json +
+        # fct_band_llm, with the F-04 hysteresis) was retired in the depth migration
+        # (2026-08-26). rn_depth (below) is the depth paper book now. The three
+        # ledgers stay in paper_ledgers.json with their history frozen — no longer
+        # recomputed, never liquidated, just not advanced.
 
         # ── rn_depth: the site's RESEARCH NOW panel, equally weighted ────────
         # Held (not liquidated) when the depth file is missing or empty, same as
@@ -1303,7 +1208,7 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("plan", "plan2", "equal", "plan3", "plan_llm", "plan2_llm", "equal_llm"):
+        for name in ("plan", "plan2", "equal", "plan3", "rn_depth"):
             if not ledgers.get(name, {}).get("nav_series"):
                 continue
             s = ledgers[name]["summary"]

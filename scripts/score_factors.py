@@ -45,6 +45,7 @@ except Exception:
 SCRIPT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPT_DIR))
 import tradability  # noqa: E402
+import depth_conviction  # noqa: E402
 from score_paradigm import compute_skip_month_return, compute_high_proximity  # noqa: E402
 from score_unified import revisions_pillar, theme_pillar, VETO_BANDS  # noqa: E402
 
@@ -158,130 +159,78 @@ def _reband(p):
 
 
 def apply_llm_overlay(results):
-    """Stage-5 LLM overlay — RS2-PRIMARY / quant-GUARDRAIL (parallel A/B layer; does NOT mutate the
-    quant baseline). RS2 (institutional reverse-DCF analysis, public/data/llm_overlay.json from the
-    local orchestrator) DRIVES the LLM band: action + conviction + stance set fct_percentile_llm /
-    fct_band_llm directly. The quant engine acts ONLY as a hard GUARDRAIL — names the quant forensic/
-    accounting engine hard-vetoed (reverse-reject / forensic-pair / heavy-issuance) carry fct_percentile
-    == None and are skipped, so RS2 can never pull a red-flagged name into the LLM set. Names RS2 did
-    not review keep no LLM band (fall back to quant downstream). STRICT NO-OP when the file is absent.
+    """Stage-5 DEPTH overlay — direction-PRIMARY / quant-GUARDRAIL (parallel A/B layer;
+    does NOT mutate the quant baseline). Reads the band_direction_v1 depth verdicts
+    (public/data/depth_overlay.json) and writes the fct_*_llm family onto the factor
+    rows: the depth `direction` sets the band (undervalued -> research_now, hold ->
+    monitor, overvalued -> demoted), and a low-quality-overvalued name is hard-vetoed
+    (fct_llm_veto='llm_reject' when direction == overvalued AND the write-up's mean
+    conviction < CONV_VETO). The quant engine stays a hard GUARDRAIL — a quant-vetoed
+    name (forensic pair / heavy issuance / reverse reject) is skipped, so depth can
+    never pull a red-flagged name in. Names with no depth verdict, or a NOT_USABLE one,
+    keep no band (silence — downstream falls back to quant, never to a fabricated depth
+    call). STRICT NO-OP when depth_overlay.json is absent.
 
-    Bands come from conviction (scale ~4-14, neutral 9): a BULLISH action needs conviction >= RN_CONV
-    for research_now, >= WL_CONV for watchlist. BEARISH (avoid/sell/reduce/overvalued) is demoted out
-    of RN; hard AVOID/SELL also sets fct_llm_veto='llm_reject' (excluded from the LLM portfolio set).
-    Stale verdicts (>14d = the max WL refresh cadence) shrink conviction toward neutral. Writes
-    fct_band_llm / fct_percentile_llm / fct_llm / fct_llm_veto / fct_llm_verdict; LEAVES the quant
-    baseline untouched."""
+    Migration note (2026-08-26): replaced the retired llm_overlay.json / numeric-
+    conviction scheme. Bands are direction-only now (mirrors lib/desk/rankings.ts
+    aiSections and the rn_depth ledger); conviction is prose in depth_reports/{T}.json
+    and is parsed only for the veto (scripts/depth_conviction.py). There is NO live-
+    price MoS recompute — `direction` is the frozen producer verdict, so no daily cliff
+    exists for prices to churn across (this is why the F-04 hysteresis was dropped).
+    Preserves the fct_percentile_llm / fct_llm_veto / fct_band_llm / fct_llm /
+    fct_llm_verdict output names the site (lib/desk/rankings.ts) still reads."""
     try:
-        ov = (json.loads((DATA / "llm_overlay.json").read_text(encoding="utf-8")) or {}).get("tickers", {})
+        ov = (json.loads((DATA / "depth_overlay.json").read_text(encoding="utf-8")) or {}).get("tickers", {})
     except Exception:
         return 0
     if not ov:
         return 0
-    # #4 live prices to recompute margin of safety daily (the verdict's MoS is frozen at analysis-time
-    # price; a name that rallied +30% since is no longer as cheap as its stored MoS claims).
-    _prices = (load_json(PRICE_HISTORY_JSON, {}) or {}).get("prices", {})
-    def _live_price(t):
-        c = _prices.get(t)
-        return c[-1] if isinstance(c, list) and c and c[-1] else None
-    BEAR = ("AVOID", "SELL", "REDUCE", "TRIM", "EXIT", "SHORT")
-    BULL = ("BUY", "ACCUMULAT", "INITIAT", "SCALE", "ADD", "OVERWEIGHT")
-    HARD_SELL = ("AVOID", "SELL", "SHORT")
-    RN_CONV, WL_CONV = 9.5, 8.0
-    # research_now gate is on RS2's STRUCTURED signals (margin of safety + entry_timing), NOT the
-    # free-text action keyword (which read "accumulate on weakness / hold" as bullish and over-promoted).
-    # Two-tier: DEEP value (MoS >= RN_DEEP_MOS) earns a research flag regardless of conviction; MODERATE
-    # value (>= RN_MOS, or a genuine fresh buy) additionally needs conviction >= RN_CONV.
-    RN_MOS, RN_DEEP_MOS = 15.0, 30.0
+    # Conviction lives in the report prose, not the overlay row — parse the mean of the
+    # samples per ticker (absence => no conviction => never fabricates a veto).
+    conv_map = depth_conviction.load_conviction_map(DATA / "depth_reports", ov.keys())
+    CONV_VETO = 8.0   # operator decision 2026-08-26: reject overvalued names below this /15 quality
     clamp = lambda x, lo, hi: max(lo, min(hi, x))
     applied = 0
     for t, v in ov.items():
         e = results.get(t)
-        # GUARDRAIL: quant hard-veto (forensic pair / heavy issuance / reverse reject) blocks the
-        # LLM layer — RS2 can never pull a red-flagged name in. A name that is merely UNSCORABLE
-        # (insufficient factor data -> fct_percentile None, no veto) keeps its RS2 verdict: the
-        # guardrail is a red-flag filter, not a data-coverage filter.
+        # GUARDRAIL: a quant hard-veto (forensic pair / heavy issuance / reverse reject)
+        # blocks the depth lane — depth can never pull a red-flagged name in. A merely
+        # UNSCORABLE name (fct_percentile None, no veto) keeps its verdict.
         if not e or e.get("fct_veto") is not None:
             continue
-        act = (v.get("action") or "").upper()
-        stance = (v.get("stance") or "").lower()
-        conv = v.get("conviction")
-        has_conv = isinstance(conv, (int, float))
-        bearish = any(w in act for w in BEAR) or stance == "overvalued"
-        bullish = (any(w in act for w in BULL) or stance == "undervalued") and not bearish
-        stale = False
-        try:
-            from datetime import date
-            stale = bool(v.get("analyzed_date")) and \
-                (date.today() - date.fromisoformat(v["analyzed_date"])).days > 14  # #5 = max WL refresh
-        except Exception:
-            pass
-        e["fct_llm_verdict"] = {"stance": stance or None, "action": v.get("action"),
-                                "conviction": conv, "method": v.get("method"),
-                                "mos_pct": v.get("mos_pct"), "gap": v.get("expectations_gap_pts"),
-                                "recommended_weight_pct": v.get("recommended_weight_pct"),
-                                "analyzed_date": v.get("analyzed_date"),
-                                # holder's exit review (name left the quant list) — UI badges it
-                                "exit_review": bool(v.get("exit_review")) or None}
+        direction = v.get("direction")
+        # NOT_USABLE / missing = a malfunction, not a verdict: read as silence.
+        if direction not in ("undervalued", "hold", "overvalued"):
+            continue
+        mos = v.get("mos_vs_median_pct")
+        m = mos if isinstance(mos, (int, float)) else 0.0
+        conv = conv_map.get(t)
+        e["fct_llm_verdict"] = {"direction": direction, "size_hint": v.get("size_hint"),
+                                "mos_vs_median_pct": mos, "conviction": conv,
+                                "median_iv": v.get("median_iv"), "iv_band_low": v.get("iv_band_low"),
+                                "iv_band_high": v.get("iv_band_high"), "spread_pct": v.get("spread_pct"),
+                                "date": v.get("date"), "scheme": v.get("scheme")}
         e["fct_llm"] = "none"
         e["fct_llm_veto"] = None
-
-        # RS2 PRIMARY: conviction drives the band (stale -> shrink toward neutral 9).
-        c = (conv if has_conv else 9.0)
-        if stale:
-            c = 9.0 + (c - 9.0) * 0.5
-        stance_adj = 2.0 if stance == "undervalued" else 0.0
-        # RS2's own margin of safety and entry-timing drive the research_now gate. #4: recompute MoS
-        # against the LIVE price (fair_value / today's close) so a mid-cycle price move is reflected
-        # immediately; fall back to the verdict's frozen realistic_mos_pct / mos_pct if no live price.
-        fv, lp = v.get("fair_value"), _live_price(t)
-        if isinstance(fv, (int, float)) and lp:
-            mos = (fv / lp - 1.0) * 100.0
-        else:
-            mos = v.get("realistic_mos_pct")
-            if mos is None:
-                mos = v.get("mos_pct")
-        et = (v.get("entry_timing") or "").lower()
-        deep_value = mos is not None and mos >= RN_DEEP_MOS
-        rn_qualify = (not bearish) and (
-            deep_value or (c >= RN_CONV and ((mos is not None and mos >= RN_MOS) or et == "buy")))
-        if bearish:
-            pctl = clamp(50 + (c - 9.0) * 3.0 - (8 if stance == "overvalued" else 0),
-                         0, BANDS["research_now"] - 5)
-            e["fct_llm"] = "demoted"
-            if any(w in act for w in HARD_SELL):
-                e["fct_llm_veto"] = "llm_reject"
-        elif rn_qualify:
-            pctl = clamp(97 + (c - RN_CONV) + stance_adj + (2 if deep_value else 0), 97, 100)
+        # DIRECTION drives the band; mos_vs_median_pct only orders WITHIN a band so the
+        # site's percentile-delta stays monotonic. Conviction is NOT in the band (equal-
+        # weight rn_depth is the book) — it gates only the veto below.
+        if direction == "undervalued":
+            pctl = clamp(97.0 + m * 0.05, 97.0, 100.0)   # deeper discount ranks higher
             if e.get("fct_band") != "research_now":
                 e["fct_llm"] = "promoted"
-        elif bullish and c >= WL_CONV:
-            pctl = clamp(90 + (c - WL_CONV) * 3.5 + stance_adj, 90, 96.9)
-        elif bullish:
-            pctl = clamp(60 + (c - 6.0) * 6 + stance_adj, 40, 89)
-        else:  # neutral (fair / hold, no directional call): monitor, RS2 not endorsing a buy
-            pctl = clamp(55 + (c - 9.0) * 4, 25, 89)
+        elif direction == "overvalued":
+            pctl = clamp(45.0 + m * 0.5, 0.0, BANDS["research_now"] - 5)   # m is negative -> lower
+            e["fct_llm"] = "demoted"
+            # Hard-reject ONLY the low-quality overvalued: no value edge AND no quality
+            # edge. A high-conviction overvalued name is a pullback candidate -> watchlist,
+            # not a reject. Missing conviction never vetoes (cannot confirm low quality).
+            if conv is not None and conv < CONV_VETO:
+                e["fct_llm_veto"] = "llm_reject"
+        else:  # hold — price inside the model's band, no directional edge
+            pctl = clamp(70.0 + m * 0.5, 25.0, 89.0)
         e["fct_percentile_llm"] = round(pctl, 1)
         e["fct_band_llm"] = _reband(pctl)
-        # ── parallel STRUCTURED-STANCE band (telemetry only — no ledger consumes it yet).
-        # Gate design 2026-07-21: numbers govern the middle (live MoS + conviction);
-        # stance only vetoes (<=2 or thesis_break) and fast-passes (5, floored at
-        # MoS>=5). Runs alongside the text path so agreement can be measured daily
-        # before any switchover.
-        ss, tb = v.get("stance_score"), bool(v.get("thesis_break"))
-        if isinstance(ss, (int, float)):
-            e["fct_stance"] = ss
-            e["fct_thesis_break"] = tb or None
-            if tb or ss <= 2:
-                e["fct_band_llm_score"] = "demoted"
-            elif (mos is not None and mos >= 30) or \
-                    (c >= 9.5 and mos is not None and mos >= 15) or \
-                    (ss >= 5 and mos is not None and mos >= 5):
-                e["fct_band_llm_score"] = "research_now"
-            elif ss >= 4 and c >= 8.0:
-                e["fct_band_llm_score"] = "watchlist"
-            else:
-                e["fct_band_llm_score"] = "monitor"
         applied += 1
     return applied
 
@@ -484,8 +433,9 @@ def main():
         else:
             results[t]["fct_band"] = "pass"
 
-    # Stage-5 LLM overlay (no-op if public/data/llm_overlay.json absent) — a parallel LLM band
-    # from the local RS2 verdicts. Runs AFTER the quant bands (fct_band is the guardrail input).
+    # Stage-5 DEPTH overlay (no-op if public/data/depth_overlay.json absent) — a parallel
+    # direction band from the band_direction_v1 depth verdicts. Runs AFTER the quant bands
+    # (fct_band is the guardrail input). `llm_overlay_applied` key kept for compatibility.
     llm_applied = apply_llm_overlay(results)
 
     band_counts = {}

@@ -102,13 +102,19 @@ def main():
     macro = load_json(MACRO_STATE_JSON, {}) or {}
     macro_flags = macro.get("triggered_flags", []) or []
 
-    # --llm : build the PARALLEL LLM-overlay variant (candidates from fct_band_llm, conviction
-    # sizing, LLM veto) into portfolio_plan_llm.json — for baseline-vs-LLM A/B. Without the flag
-    # this is the pristine baseline (fct_band only), byte-identical to before.
-    LLM = "--llm" in sys.argv
-    band_field = "fct_band_llm" if LLM else "fct_band"
-    out_plan = (DATA / "portfolio_plan_llm.json") if LLM else PLAN_JSON
-    out_report = (DATA / "portfolio_report_llm.md") if LLM else REPORT_MD
+    # --llm built the PARALLEL LLM-overlay variant (portfolio_plan_llm.json) from
+    # fct_band_llm + conviction sizing. RETIRED in the depth migration (2026-08-26): the
+    # conviction/MoS LLM A/B lane was replaced by the equal-weight rn_depth ledger, so the
+    # variant has no consumer. The flag is now a clean no-op (run_chain no longer passes
+    # it); the baseline path below (fct_band only) is unchanged.
+    if "--llm" in sys.argv:
+        print("build_portfolio_plan --llm is retired (depth migration 2026-08-26); "
+              "rn_depth is the depth paper book. No output written.")
+        return
+    LLM = False
+    band_field = "fct_band"
+    out_plan = PLAN_JSON
+    out_report = REPORT_MD
 
     # Candidate list = Factor Lab research_now (Stage 1 of the funnel produces
     # the nomination list per the ecosystem doc). Reverse-engine data rides

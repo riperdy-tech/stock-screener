@@ -46,10 +46,10 @@ jobs:
         with:
           ref: main
 
-      # Overlay freshness watchdog, folded in from the standalone
+      # Depth overlay freshness watchdog, folded in from the standalone
       # overlay-freshness-watchdog.yml to save scheduled-workflow minutes.
       # Placed before the heavy steps and marked continue-on-error so a dead
-      # local orchestrator still alerts even if the refresh itself aborts.
+      # depth producer still alerts even if the refresh itself aborts.
       # Cloud-side on purpose: a dead machine cannot alert about itself.
       # Silent no-op when the Telegram secrets are absent.
       - name: Overlay freshness watchdog
@@ -60,18 +60,22 @@ jobs:
         run: |
           AGE_H=$(python3 - <<'EOF'
           import json, datetime
-          ts = json.load(open("public/data/llm_overlay.json"))["generated_at"]
-          dt = datetime.datetime.fromisoformat(ts.replace("Z", "+00:00"))
-          print(round((datetime.datetime.now(datetime.timezone.utc) - dt).total_seconds() / 3600))
+          # depth_overlay.json stamps generated_at with datetime.now().isoformat() —
+          # NAIVE local time, no 'Z'. Parse it naive and compare against a naive now()
+          # (handoff §8); the old ts.replace("Z","+00:00") + now(tz=utc) path raises
+          # on a naive/aware mix.
+          ts = json.load(open("public/data/depth_overlay.json"))["generated_at"]
+          dt = datetime.datetime.fromisoformat(ts)
+          print(round((datetime.datetime.now() - dt).total_seconds() / 3600))
           EOF
           )
           echo "overlay age: ${AGE_H}h"
-          # Checked at 21:05 UTC: a healthy overlay from the 00:00-UTC RS2 run
-          # is ~21h old, so 36h still fires on exactly one missed run.
+          # The depth producer refreshes continuously; 36h still fires only when the
+          # producer/PC/push has genuinely been down across more than a day.
           if [ "$AGE_H" -gt 36 ]; then
-            echo "::warning::llm_overlay.json is ${AGE_H}h old (>36h)"
+            echo "::warning::depth_overlay.json is ${AGE_H}h old (>36h)"
             if [ -n "$TG_TOKEN" ]; then
-              curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage"                 -d chat_id="${TG_CHAT}"                 -d text="[RS2 ops] llm_overlay.json is ${AGE_H}h old (>36h) - orchestrator/PC/push may be down. Verdicts decay toward neutral after 14d." >/dev/null
+              curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage"                 -d chat_id="${TG_CHAT}"                 -d text="[RS2 ops] depth_overlay.json is ${AGE_H}h old (>36h) - depth producer/PC/push may be down." >/dev/null
               echo "telegram alert sent"
             fi
           fi

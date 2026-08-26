@@ -25,18 +25,22 @@ jobs:
         run: |
           AGE_H=$(python - <<'EOF'
           import json, datetime
-          ts = json.load(open("public/data/llm_overlay.json"))["generated_at"]
-          dt = datetime.datetime.fromisoformat(ts.replace("Z", "+00:00"))
-          print(round((datetime.datetime.now(datetime.timezone.utc) - dt).total_seconds() / 3600))
+          # depth_overlay.json stamps generated_at with datetime.now().isoformat() —
+          # NAIVE local time, no 'Z'. Parse it naive and compare against a naive now()
+          # (handoff §8). Do NOT use the old ts.replace("Z","+00:00") + now(tz=utc) path:
+          # that mixes aware and naive datetimes and raises.
+          ts = json.load(open("public/data/depth_overlay.json"))["generated_at"]
+          dt = datetime.datetime.fromisoformat(ts)
+          print(round((datetime.datetime.now() - dt).total_seconds() / 3600))
           EOF
           )
           echo "overlay age: ${AGE_H}h"
           if [ "$AGE_H" -gt 36 ]; then
-            echo "::warning::llm_overlay.json is ${AGE_H}h old (>36h)"
+            echo "::warning::depth_overlay.json is ${AGE_H}h old (>36h)"
             if [ -n "$TG_TOKEN" ]; then
               curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
                 -d chat_id="${TG_CHAT}" \
-                -d text="[RS2 ops] llm_overlay.json is ${AGE_H}h old (>36h) — orchestrator/PC/push may be down. Verdicts decay toward neutral after 14d." >/dev/null
+                -d text="[RS2 ops] depth_overlay.json is ${AGE_H}h old (>36h) — depth producer/PC/push may be down." >/dev/null
               echo "telegram alert sent"
             fi
           fi
