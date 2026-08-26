@@ -22,13 +22,12 @@ const DEFAULT_COMM = '0.25';
 // SOXX and DRAM stay available as chart lines, but they are not the yardstick.
 const BENCH_ROWS = ['IWM', 'SPY', 'QQQ'] as const;
 
-type BookKey = 'equal' | 'plan' | 'plan2' | 'plan3' | 'mine';
+type BookKey = 'equal' | 'mine';
 
+// plan / plan2 / plan3 (and their AI twins) retired from Track Record 2026-08-27 —
+// we no longer benchmark books we do not analyse.
 const CARDS: { key: BookKey; title: string; note: string }[] = [
     { key: 'equal', title: 'Equal-weight', note: 'the pure stock-picking test' },
-    { key: 'plan', title: 'Plan · value core', note: 'kelly-sized · cash-heavy' },
-    { key: 'plan2', title: 'Plan2 · hybrid', note: 'value core + quality sleeve' },
-    { key: 'plan3', title: 'Plan3 · momentum', note: 'bold sleeve, kill-switch armed' },
     { key: 'mine', title: 'Mine', note: 'your saved portfolio' },
 ];
 
@@ -70,7 +69,7 @@ function StatCard({ book, llm, title, note, active, onClick }: {
     const diff = (sl?.cumulative_return_pct != null && s?.cumulative_return_pct != null)
         ? sl.cumulative_return_pct - s.cumulative_return_pct : null;
     // The headline figure is the AI book's, falling back to the quant book where
-    // the A/B has not started (plan3 and mine have no LLM twin).
+    // the A/B has not started (mine has no LLM twin).
     const lead = sl?.cumulative_return_pct ?? s?.cumulative_return_pct;
 
     return (
@@ -226,7 +225,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
             </div>
 
             {/* Strategy stat band */}
-            <div className="grid grid-cols-1 gap-x-5 border-t border-rule-14 pb-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            <div className="grid grid-cols-1 gap-x-5 border-t border-rule-14 pb-4 sm:grid-cols-2">
                 {CARDS.map((c) => (
                     <StatCard
                         key={c.key}

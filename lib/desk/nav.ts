@@ -27,16 +27,10 @@ export const BENCHMARKS = ['IWM', 'SPY', 'QQQ', 'SOXX', 'DRAM'] as const;
 /** Strategy books, in the order they appear in the chart legend. */
 export const BOOKS: { key: string; label: string; color: string; width: number }[] = [
     { key: 'equal_llm', label: 'EQUAL · AI', color: 'oklch(0.78 0.08 250)', width: 2 },
-    // PLAN takes the design's grey series colour. EQUAL (not in the handoff's
-    // series list) can no longer be a second grey — after the legibility pass the
-    // two greys sit ~10% apart and are indistinguishable as chart lines, so it
-    // takes the factor-value green, which no other solid book line uses.
+    // EQUAL takes the factor-value green (no other solid book line uses it). The
+    // plan / plan2 / plan3 lanes (and their AI twins) were retired 2026-08-27 —
+    // we no longer benchmark books we do not analyse.
     { key: 'equal', label: 'EQUAL', color: '#5a9b6d', width: 1.4 },
-    { key: 'plan', label: 'PLAN', color: '#e0ddd6', width: 1.4 },
-    { key: 'plan_llm', label: 'PLAN · AI', color: '#6b93c4', width: 1.4 },
-    { key: 'plan2', label: 'PLAN2', color: '#c2798f', width: 1.4 },
-    { key: 'plan2_llm', label: 'PLAN2 · AI', color: '#9a83c2', width: 1.4 },
-    { key: 'plan3', label: 'PLAN3', color: '#b56a4f', width: 1.4 },
     { key: 'mine', label: 'MINE', color: '#cfa14e', width: 1.4 },
 ];
 
@@ -227,7 +221,7 @@ export interface ClosedTrade {
 }
 
 /** Exits that kept running without us — the postmortem strip. */
-export function soldTooEarly(ledgers: any, books = ['equal_llm', 'equal', 'plan', 'plan2']): ClosedTrade[] {
+export function soldTooEarly(ledgers: any, books = ['equal_llm', 'equal']): ClosedTrade[] {
     const L = ledgers?.ledgers;
     if (!L) return [];
     const out: ClosedTrade[] = [];

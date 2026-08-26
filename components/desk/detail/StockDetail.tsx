@@ -259,7 +259,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
     // Entry date, if this name is held in any paper book.
     const entryDate = useMemo(() => {
         const books = data.ledgers?.ledgers ?? {};
-        for (const key of ['equal_llm', 'equal', 'plan', 'plan2', 'plan3']) {
+        for (const key of ['rn_depth', 'equal_llm', 'equal']) {
             const h = books[key]?.state?.holdings?.[ticker];
             if (h?.entry_date) return h.entry_date as string;
         }
