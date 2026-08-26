@@ -120,10 +120,8 @@ def main():
     if ok and not run_step("build_portfolio_plan", ["scripts/build_portfolio_plan.py"], steps):
         print("FATAL: build_portfolio_plan failed.")
         ok = False
-    # Parallel LLM-overlay variant (portfolio_plan_llm.json) for baseline-vs-LLM A/B. Non-fatal:
-    # it is additive and must never break the baseline chain.
-    if ok and not run_step("build_portfolio_plan_llm", ["scripts/build_portfolio_plan.py", "--llm"], steps):
-        print("WARN: build_portfolio_plan --llm failed (non-fatal; baseline plan unaffected).")
+    # (The parallel LLM-overlay plan variant was RETIRED in the depth migration, 2026-08-26;
+    # rn_depth replaced the LLM A/B lane, so build_portfolio_plan --llm is no longer run.)
     # plan3 momentum sleeve (portfolio_plan_momo.json). Non-fatal for the same reason;
     # the plan3 ledger holds its book when the plan file is missing/stale. Weekly rerank
     # + daily regime refresh are handled inside the script itself. PAPER ONLY (no KIS).
