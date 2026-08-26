@@ -1,10 +1,15 @@
 # Alerts if the RS2 overlay stops updating (dead PC, dead scheduler, dead push).
 # Cloud-side on purpose: a dead machine cannot alert about itself. Silent no-op
 # when the Telegram secrets are absent.
+#
+# 2026-08-25: the scheduled trigger moved into Post-Close Price Refresh (as a
+# continue-on-error step) to cut scheduled-workflow minutes. This file stays as
+# a manually dispatchable spot check; re-enable the cron below if the check
+# ever needs to run independently of the price refresh.
 name: Overlay Freshness Watchdog
 on:
-  schedule:
-    - cron: "30 10 * * 1-5"   # weekdays 10:30 UTC, after the local 00:00-UTC run window
+  # schedule:
+  #   - cron: "30 10 * * 1-5"   # weekdays 10:30 UTC, after the local 00:00-UTC run window
   workflow_dispatch:
 
 jobs:

@@ -1,14 +1,22 @@
 # KIS Portfolio Sync — mirrors a paper ledger into a KIS account.
 #
-# TRIGGER: chained to Scheduled Data Fetch completion (workflow_run), not a cron.
-# GitHub crons drift 0-3h, so clock-offset sequencing cannot guarantee the sync
-# sees the freshly updated ledger; the chain can. The fetch runs just after the
-# US open, so the sync trades mid-session minutes after the ledger updates.
-# A market-hours gate skips the runs triggered by weekend fetches (and any fetch
-# that finishes after the close) without failing them.
+# TRIGGER: own weekday cron (2026-08-25). Previously chained to Scheduled Data
+# Fetch completion via workflow_run; decoupled so the sync no longer depends on
+# where or whether that workflow ran — which matters now that the fetch runs on a
+# self-hosted runner that can be offline.
+#
+# The chain guaranteed the ledger had just been rewritten by a SUCCESSFUL fetch.
+# A cron cannot guarantee that (GitHub crons drift 0-3h), so that guarantee is
+# replaced by an explicit precondition: the "Ledger freshness gate" step below
+# reads last_updated from paper_ledgers.json and refuses to trade on a stale book.
+#
+# 16:25 UTC is the median start time of the last 41 chained runs (16:31), so this
+# reproduces the existing trading window. With the worst-case +3h drift it still
+# lands inside the US session under both EDT (ends 20:00 UTC) and EST (21:00 UTC).
+# A market-hours gate skips post-close runs without failing them.
 #
 # Safety model:
-#   - Chained runs are DRY RUN unless repo variable KIS_AUTO_EXECUTE=true.
+#   - Scheduled runs are DRY RUN unless repo variable KIS_AUTO_EXECUTE=true.
 #   - Env comes from repo variable KIS_ENV (default paper); secrets are split
 #     into *_PAPER / *_REAL pairs so flipping the variable can never send
 #     paper credentials at the real account or vice versa.
@@ -19,9 +27,8 @@
 name: KIS Portfolio Sync
 
 on:
-  workflow_run:
-    workflows: ["Scheduled Data Fetch"]
-    types: [completed]
+  schedule:
+    - cron: '25 16 * * 1-5'
   workflow_dispatch:
     inputs:
       env:
@@ -70,9 +77,10 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    # Chained runs only proceed off a SUCCESSFUL fetch: a failed fetch means a
-    # stale/inconsistent ledger, and the right response is to not trade on it.
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    # (The old `workflow_run.conclusion == 'success'` gate lived here. Its job —
+    # never trade on a ledger a failed fetch left stale — is now done explicitly
+    # by the "Ledger freshness gate" step, which does not care which workflow,
+    # runner or schedule produced the ledger.)
     steps:
       - uses: actions/checkout@v4
 
@@ -82,12 +90,12 @@ jobs:
 
       - run: pip install requests
 
-      # Chained runs fire after EVERY fetch, including weekend maintenance and
-      # any fetch that drags past the close. Skip cleanly (green, no orders)
-      # when the US session is over — script-level guards stay as backstop.
+      # The cron is weekdays-only, but drift can still push a run past the close
+      # (and a US market holiday is a weekday). Skip cleanly (green, no orders)
+      # when the session is not open — script-level guards stay as backstop.
       - name: Market-hours gate
         id: gate
-        if: github.event_name == 'workflow_run'
+        if: github.event_name == 'schedule'
         run: |
           OPEN=$(python -c "
           from datetime import datetime, timezone
@@ -96,6 +104,26 @@ jobs:
           print('true' if ny.weekday() < 5 and 9*60+30 <= ny.hour*60+ny.minute < 16*60 else 'false')")
           echo "open=$OPEN" >> "$GITHUB_OUTPUT"
           echo "US market open: $OPEN"
+
+      # Replaces the guarantee the workflow_run chain used to provide. On a
+      # normal day the fetch (14:35 UTC) rewrites paper_ledgers.json about an hour
+      # before this runs, so the book is <2h old. If the fetch failed, is still
+      # running, or never started because the self-hosted runner was offline, the
+      # newest last_updated is the previous post-close refresh (~19h old) and this
+      # fails loudly instead of mirroring yesterday's book into the account.
+      - name: Ledger freshness gate
+        if: github.event_name == 'schedule'
+        run: |
+          AGE_H=$(python -c "
+          import json, datetime
+          ts = json.load(open('public/data/paper_ledgers.json'))['last_updated']
+          dt = datetime.datetime.fromisoformat(ts.replace('Z', '+00:00'))
+          print(round((datetime.datetime.now(datetime.timezone.utc) - dt).total_seconds() / 3600, 1))")
+          echo "paper_ledgers.json age: ${AGE_H}h"
+          if [ "$(python -c "print(1 if float('$AGE_H') > 6 else 0)")" = "1" ]; then
+            echo "::error::paper_ledgers.json is ${AGE_H}h old (>6h) — the data fetch did not produce a fresh ledger today. Refusing to trade on a stale book."
+            exit 1
+          fi
 
       # A manual run may target the real account via the env input; the schedule
       # never can (it only reads vars.KIS_ENV). Real + execute additionally needs
@@ -109,7 +137,7 @@ jobs:
           fi
 
       - name: Run sync
-        if: github.event_name != 'workflow_run' || steps.gate.outputs.open == 'true'
+        if: github.event_name != 'schedule' || steps.gate.outputs.open == 'true'
         env:
           # Manual dispatch: the env input wins. Chained runs: the repo variable.
           KIS_ENV: ${{ github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV || 'paper' }}
@@ -141,7 +169,7 @@ jobs:
             python scripts/sync_kis_portfolio.py --probe
             exit $?
           fi
-          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+          if [ "${{ github.event_name }}" = "schedule" ]; then
             [ "${{ vars.KIS_AUTO_EXECUTE }}" = "true" ] && FLAGS="--execute"
           else
             [ "${{ inputs.execute }}" = "true" ] && FLAGS="--execute"
@@ -151,7 +179,7 @@ jobs:
             # set would re-apply the same flow on every subsequent run.
             [ -n "${{ inputs.flow_usd }}" ] && FLAGS="$FLAGS --flow ${{ inputs.flow_usd }}"
           fi
-          # --confirm-real for a chained real run still gated by the repo variable;
+          # --confirm-real for a scheduled real run still gated by the repo variable;
           # for a manual real run the guard step above already enforced the phrase.
           if [ "$KIS_ENV" = "real" ]; then
             if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ vars.KIS_CONFIRM_REAL }}" = "true" ]; then

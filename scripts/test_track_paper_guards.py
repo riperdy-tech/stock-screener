@@ -252,6 +252,89 @@ def test_hyst_vetoed_or_missing_verdict_not_retained():
     assert tp.llm_hold_qualifies(_OK_ENTRY, None, 100.0, "2026-07-05") is False
 
 
+# ── price freshness (a price can be present AND stale) ───────────────────────
+
+def _with_snapshot(asof_map, snapshot_date):
+    """Context-free helper: install a price-freshness snapshot, return a resetter."""
+    tp.price_asof_holder["asof"] = asof_map
+    tp.price_asof_holder["snapshot_date"] = snapshot_date
+    return lambda: tp.price_asof_holder.clear()
+
+
+def test_price_freshness_defaults_to_fresh_without_metadata():
+    """Files with no Last_Updated must behave exactly as before the guard."""
+    tp.price_asof_holder.clear()
+    assert tp.price_is_stale("A") is False
+
+
+def test_price_older_than_the_snapshot_is_stale():
+    reset = _with_snapshot({"A": "2026-08-18", "B": "2026-07-19"}, "2026-08-18")
+    try:
+        assert tp.price_is_stale("A") is False, "same-date row flagged stale"
+        assert tp.price_is_stale("B") is True, "month-old row counted as fresh"
+        assert tp.price_is_stale("MISSING") is False, "unknown ticker must not flag"
+    finally:
+        reset()
+
+
+def test_stale_priced_entrant_is_not_bought():
+    """A price the scan failed to refresh is not a price you can fill at."""
+    reset = _with_snapshot({"FRESH": "2026-08-18", "OLD": "2026-07-19"}, "2026-08-18")
+    try:
+        led = tp.empty_ledger()
+        tp.run_target_ledger(led, {"FRESH": 50.0, "OLD": 50.0},
+                             {"FRESH": 100.0, "OLD": 100.0}, "2026-08-18", "rank")
+        assert "FRESH" in led["state"]["holdings"]
+        assert "OLD" not in led["state"]["holdings"], "opened a position on a stale mark"
+    finally:
+        reset()
+
+
+def test_stale_held_name_still_marks_nav_and_is_flagged():
+    """Stale blocks TRADING, not marking — dropping the name from NAV would be worse."""
+    led = _seeded(["A", "B"], {"A": 100.0, "B": 100.0})
+    reset = _with_snapshot({"A": "2026-08-18", "B": "2026-07-19"}, "2026-08-18")
+    try:
+        nav, stale = tp.portfolio_value(led, {"A": 100.0, "B": 100.0})
+        assert stale == ["B"], f"stale mark not surfaced: {stale}"
+        assert nav > 99.0, f"stale holding dropped out of NAV: {nav}"
+    finally:
+        reset()
+
+
+def test_stale_incumbent_is_not_trimmed_to_fund_an_entrant():
+    """Trimming at an unrefreshed price sells size at a price nobody is quoting."""
+    reset = _with_snapshot({"A": "2026-08-18", "B": "2026-08-18"}, "2026-08-18")
+    try:
+        led = tp.empty_ledger()
+        tp.run_target_ledger(led, {"A": 100.0}, {"A": 100.0}, "2026-08-18", "rank")
+        assert led["state"]["holdings"]["A"]
+    finally:
+        reset()
+    # A is now the whole book and would have to be trimmed to fund B — but A's mark
+    # went stale overnight, so the funding trim must be skipped and B deferred.
+    reset = _with_snapshot({"A": "2026-08-18", "B": "2026-08-19"}, "2026-08-19")
+    try:
+        before = led["state"]["holdings"]["A"]["shares"]
+        tp.run_target_ledger(led, {"A": 50.0, "B": 50.0},
+                             {"A": 100.0, "B": 100.0}, "2026-08-19", "rank")
+        assert led["state"]["holdings"]["A"]["shares"] == before, "trimmed a stale incumbent"
+        assert "B" not in led["state"]["holdings"], "funded an entrant off a stale trim"
+        assert led.get("underfunded_entrants", {}).get("tickers") == ["B"], "deferral not logged"
+    finally:
+        reset()
+
+
+def test_reported_cost_bps_is_restamped_from_the_constant():
+    """config.cost_bps drives the site's drag figure and the what-if overlay's
+    already-charged baseline. A book created at 10bps must not keep reporting 10
+    after COST_BPS moved to 25."""
+    import inspect
+    src = inspect.getsource(tp.main)
+    assert 'book["config"]["cost_bps"] = COST_BPS' in src, \
+        "main() no longer restamps config.cost_bps — the site will drift from the charge"
+
+
 def test_guard_does_not_raise_systemexit():
     """The tracker signals held books via the data, never by failing the process —
     a nonzero exit would abort run_chain's daily commit. Guard-tripping paths must

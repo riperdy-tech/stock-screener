@@ -32,6 +32,7 @@ State: public/data/paper_ledgers.json (append-only history inside).
 """
 
 import argparse
+import collections
 import copy
 import json
 import math
@@ -63,7 +64,14 @@ DIVIDENDS_JSON = DATA / "dividends.json"
 # through run_target_ledger / run_mine_ledger.
 dividends_holder = {}
 
-COST_BPS = 25   # real KIS overseas commission per side (user 2026-07-20); was 10 (idealized)
+# Per-ticker price freshness for the run: {"asof": {ticker: "YYYY-MM-DD"},
+# "snapshot_date": "YYYY-MM-DD"} read off stocks.json Last_Updated. Stashed
+# module-side for the same reason as dividends_holder — mark_price is called from
+# a dozen places and threading the map through all of them buys nothing. Empty
+# means "no freshness metadata", which price_is_stale reads as fresh.
+price_asof_holder = {}
+
+COST_BPS = 25  # real KIS overseas commission per side (user 2026-07-20); was 10 (idealized)
 BENCHMARKS = ["IWM", "SPY", "QQQ", "SOXX", "DRAM"]  # small-cap, S&P500, Nasdaq-100, semis, memory
 PRIMARY_BENCHMARK = "IWM"
 START_NAV = 100.0
@@ -309,12 +317,44 @@ def cost_factor():
     return 1.0 - COST_BPS / 10000.0
 
 
+def price_is_stale(ticker):
+    """True when this ticker's stocks.json row was refreshed BEFORE the run's own
+    snapshot date, i.e. the price is a leftover from an earlier scan.
+
+    Absence from stocks.json was the only staleness the tracker used to recognise;
+    an OLD price sitting in the file counted as fresh. That let the book trade at a
+    price the rest of the world had already moved past (19 equal_llm trades over
+    2026-07/08 filled off a prior session's close, one by 9.3%), and it let a
+    delisted name keep a month-old mark inside NAV (CPRX, last_listed 2026-07-19,
+    still marked at its 07-19 price on 08-18).
+
+    The reference is the snapshot date the run's own file was built on — the modal
+    Last_Updated date, not `as_of`. A calendar comparison against as_of would flag
+    every ticker on a Monday run (Friday's close is the correct mark) and would have
+    to carry a weekend/holiday tolerance wide enough to let the real staleness back
+    through. The scan writes every row inside one short window (28 minutes on the
+    2026-08-18 file), so same-date == same scan, and older == genuinely left behind.
+
+    Degrades to "fresh" when the metadata is absent (test fixtures, older files).
+    """
+    snap = price_asof_holder.get("snapshot_date")
+    if not snap:
+        return False
+    d = (price_asof_holder.get("asof") or {}).get(ticker)
+    return bool(d) and d < snap
+
+
 def mark_price(ticker, prices, ledger):
-    """Today's price; falls back to last known mark (flagged stale by caller)."""
+    """Today's price; falls back to last known mark (flagged stale by caller).
+
+    Stale means "do not trade on this": entrants are skipped and incumbents are not
+    trimmed to fund them. NAV is still marked at the price — a stale mark beats no
+    mark — and the ticker is surfaced in the day's `stale_marks`.
+    """
     p = num(prices.get(ticker))
     if p is not None:
         ledger["last_marks"][ticker] = p
-        return p, False
+        return p, price_is_stale(ticker)
     last = num(ledger["last_marks"].get(ticker))
     return last, True
 
@@ -1021,6 +1061,24 @@ def main():
     stocks = load_json(stocks_path, [])
     prices = {s["symbol"]: s.get("price") for s in stocks if s.get("symbol")}
     prices_holder["prices"] = prices
+    # Price freshness: modal Last_Updated date == the date this scan ran; anything
+    # older is a row the scan failed to refresh. See price_is_stale.
+    asof_map = {s["symbol"]: str(s["Last_Updated"])[:10] for s in stocks
+                if s.get("symbol") and s.get("Last_Updated")}
+    snapshot_date = (collections.Counter(asof_map.values()).most_common(1)[0][0]
+                     if asof_map else None)
+    price_asof_holder["asof"] = asof_map
+    price_asof_holder["snapshot_date"] = snapshot_date
+    if snapshot_date:
+        behind = sum(1 for d in asof_map.values() if d < snapshot_date)
+        print(f"  · price snapshot {snapshot_date}: {behind}/{len(asof_map)} ticker(s) "
+              f"carry an older mark and are untradable this run", file=sys.stderr)
+        if snapshot_date > as_of:
+            print(f"  ! price snapshot {snapshot_date} is AHEAD of as_of {as_of} — "
+                  f"marks postdate the ledger date", file=sys.stderr)
+            alerts.append({"date": as_of, "severity": "error", "scope": "prices",
+                           "kind": "snapshot_ahead",
+                           "detail": f"stocks.json snapshot {snapshot_date} > as_of {as_of}"})
     dividends_holder["divs"] = (load_json(DIVIDENDS_JSON, {}) or {}).get("tickers", {})
     book = load_json(LEDGERS_JSON, None) or {
         "inception": as_of,
@@ -1034,6 +1092,13 @@ def main():
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
     book["config"]["primary_benchmark"] = PRIMARY_BENCHMARK
+    # config.cost_bps is what the SITE reports and what the what-if commission
+    # overlay treats as already-charged. It was only ever written at book creation,
+    # so it still said 10 after COST_BPS moved to 25 on 2026-07-20: the site
+    # understated the drag, and re-costing to 25bps in the UI added a second 15bps
+    # on top of the 25 the ledger had already taken. Restamp it every run.
+    book["config"]["cost_bps"] = COST_BPS
+    book["config"]["start_nav"] = START_NAV
     ledgers = book["ledgers"]
 
     benches = {b: None for b in BENCHMARKS} if args.skip_benchmark else fetch_benchmarks()
