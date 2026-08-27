@@ -199,10 +199,12 @@ def main():
         ledgers_path = DATA / "paper_ledgers.json"
         ledgers = load_json(ledgers_path) if ledgers_path.exists() else {}
         today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        plan_series = ((ledgers.get("ledgers") or {}).get("plan") or {}).get("nav_series") or []
-        ledger_current = bool(plan_series) and plan_series[-1].get("date") == today
+        # Freshness sentinel repointed plan -> equal 2026-08-27 (the plan book was retired).
+        # `equal` is computed every run, so it is the live book that proves the tracker advanced.
+        equal_series = ((ledgers.get("ledgers") or {}).get("equal") or {}).get("nav_series") or []
+        ledger_current = bool(equal_series) and equal_series[-1].get("date") == today
         add_invariant(invariants, "paper_ledger_updated", "hard", ledger_current,
-                      f"paper ledger latest row {plan_series[-1]['date'] if plan_series else 'none'} (expect {today})")
+                      f"paper ledger latest row {equal_series[-1]['date'] if equal_series else 'none'} (expect {today})")
         mine_series = ((ledgers.get("ledgers") or {}).get("mine") or {}).get("nav_series") or []
         mine_live = bool(mine_series) and mine_series[-1].get("nav") is not None
         add_invariant(invariants, "mine_ledger_active", "soft", mine_live,

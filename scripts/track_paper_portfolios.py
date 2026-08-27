@@ -2,20 +2,21 @@
 
 The honest, forward meter the ecosystem review (§H) prescribes: from
 inception onward, simulate ACTUALLY FOLLOWING the system day by day and
-record what happens. Three ledgers:
+record what happens. Live books:
 
-  plan  — follows portfolio_plan.json exactly (quarter-Kelly weights, cash).
-          "Did following the system work?"
-  equal — equal-weight basket of every research_now name (factor_scores).
-          Pure selection test, no sizing effects.
-  mine  — the user's actual holdings (public/data/my_portfolio.json, written
-          by the My Portfolio UI). Unitized like a fund: edits are treated
-          as deposits/withdrawals that buy/sell units, so adding money never
-          fakes performance. "Did I beat my own system?"
-  plan3 — momentum sleeve (portfolio_plan_momo.json from build_momo_plan.py),
-          benchmark QQQ, with daily defense layers: 15% trailing stops,
-          re-entry cooldown, and a drawdown kill switch at -15/-20/-25%
-          (see the PLAN3_* constants). PAPER ONLY — never mirrored to KIS.
+  equal    — equal-weight basket of every research_now name (factor_scores).
+             Pure selection test, no sizing effects.
+  rn_depth — equal-weight basket of research_now/watchlist names carrying an
+             "undervalued" RS2 depth verdict (depth_overlay.json). The AI book.
+  mine     — the user's actual holdings (public/data/my_portfolio.json, written
+             by the My Portfolio UI). Unitized like a fund: edits are treated
+             as deposits/withdrawals that buy/sell units, so adding money never
+             fakes performance. "Did I beat my own system?"
+
+  RETIRED (frozen in paper_ledgers.json, no longer computed): plan / plan2 (the
+  portfolio_plan.json Kelly books, retired 2026-08-27), plan3 (momentum sleeve,
+  retired 2026-08-27), and the *_llm overlay lane (plan_llm / plan2_llm /
+  equal_llm, retired 2026-08-26 in the depth migration).
 
 Mechanics: trade-on-change only (buy on entry to the target set, sell on
 exit; held positions drift). 10 bps transaction cost per side. Marks come
@@ -1041,11 +1042,12 @@ def main():
         "inception": as_of,
         "config": {"cost_bps": COST_BPS, "benchmarks": BENCHMARKS,
                    "primary_benchmark": PRIMARY_BENCHMARK, "start_nav": START_NAV},
-        "ledgers": {"plan": empty_ledger(), "plan2": empty_ledger(), "equal": empty_ledger()},
+        "ledgers": {"equal": empty_ledger()},
     }
-    # plan_llm/plan2_llm/equal_llm are NOT seeded on new books — retired 2026-08-26.
-    # Pre-existing books keep them (setdefault never removes), so their history stays.
-    for _k in ("plan2", "plan3", "rn_depth"):
+    # plan / plan2 / plan3 (retired 2026-08-27) and the *_llm lane (retired 2026-08-26)
+    # are NO LONGER computed or seeded on new books. Pre-existing books keep their frozen
+    # history (setdefault never removes). The live books are `equal` + `rn_depth`.
+    for _k in ("rn_depth",):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -1098,11 +1100,9 @@ def main():
                                "kind": "unevaluated_held", "detail": f"carried: {carried}"})
             return nav_stale
 
-        plan = load_json(PORTFOLIO_PLAN_JSON, {}) or {}
-        plan_targets = {p["symbol"]: p["weight_pct"] for p in (plan.get("positions") or [])}
-        nav_plan, stale_plan = run_or_hold("plan", plan_targets, "plan")
-        plan2_targets = {p["symbol"]: p["weight_pct"] for p in ((plan.get("plan2") or {}).get("positions") or [])}
-        nav_plan2, stale_plan2 = run_or_hold("plan2", plan2_targets, "plan2")
+        # plan / plan2 RETIRED 2026-08-27 — no longer computed. build_portfolio_plan.py still
+        # writes portfolio_plan.json for the Portfolio tab's suggested plan, but the plan/plan2
+        # paper ledgers are frozen in paper_ledgers.json. The live quant book is `equal`.
 
         # A held name the quant engine did not band today is unknown, not demoted.
         unknown_quant = {t for t in ledgers["equal"]["state"]["holdings"]
@@ -1111,10 +1111,8 @@ def main():
         eq_weight = 100.0 / max(len(research), MIN_EQUAL_NAMES) if research else 0   # #8 cash residual when few
         nav_eq, stale_eq = run_or_hold("equal", {t: eq_weight for t in research}, "rank",
                                        unknown=unknown_quant, source_ok=fct_ok, why=fct_why)
-        for name, nav, stale in (("plan", nav_plan, stale_plan), ("plan2", nav_plan2, stale_plan2),
-                                 ("equal", nav_eq, stale_eq)):
-            finalize_ledger(ledgers[name], nav, stale, benches, as_of, book["inception"])
-            backfill_benches(ledgers[name])  # late-added benchmarks -> full record
+        finalize_ledger(ledgers["equal"], nav_eq, stale_eq, benches, as_of, book["inception"])
+        backfill_benches(ledgers["equal"])  # late-added benchmarks -> full record
 
         # ── LLM-overlay variants (plan_llm / plan2_llm / equal_llm): RETIRED ──
         # The old conviction/MoS LLM A/B lane (fed by portfolio_plan_llm.json +
@@ -1144,35 +1142,11 @@ def main():
         finalize_ledger(ledgers["rn_depth"], nav_rn, stale_rn, benches, as_of, book["inception"])
         backfill_benches(ledgers["rn_depth"])
 
-        # ── plan3 · bold (momentum sleeve; PAPER ONLY — never mirrored to KIS) ──
-        # Absent plan file pre-launch = empty targets: the ledger holds cash and the
-        # series stays flat until build_momo_plan.py has run — same clean-A/B pattern
-        # as the LLM ledgers. Empty targets WITH holdings is a producer failure and
-        # holds the book (targets_healthy), it never liquidates.
-        led3 = ledgers["plan3"]
-        if args.reset_plan3_halt and led3["state"].get("halted"):
-            led3["state"]["halted"] = False
-            led3["state"]["risk_tier"] = 1.0
-            led3["state"]["cooldown"] = {}
-            led3["state"]["peak_since"] = as_of  # rebase dd, or the switch re-fires instantly
-            print("  plan3: kill-switch halt CLEARED by --reset-plan3-halt", file=sys.stderr)
-        momo_plan = load_json(PORTFOLIO_PLAN_MOMO_JSON, {}) or {}
-        momo_targets = {p["symbol"]: p["weight_pct"] for p in (momo_plan.get("positions") or [])}
-        ok3, why3 = targets_healthy("plan3", momo_targets, led3)
-        if not ok3:
-            print(f"  ! plan3: holding book unchanged — {why3}", file=sys.stderr)
-            alerts.append({"date": as_of, "severity": "error", "scope": "plan3",
-                           "kind": "held", "detail": why3})
-            guard_tripped.append(why3)
-            nav_p3, stale_p3 = hold_ledger(led3, prices, as_of)
-        else:
-            nav_p3, stale_p3 = run_plan3_ledger(led3, momo_plan, prices, as_of)
-            if led3["state"].get("halted"):
-                alerts.append({"date": as_of, "severity": "error", "scope": "plan3",
-                               "kind": "killswitch",
-                               "detail": "drawdown breached -20%: liquidated and halted"})
-        finalize_ledger(led3, nav_p3, stale_p3, benches, as_of, book["inception"])
-        backfill_benches(led3)
+        # ── plan3 · bold (momentum sleeve): RETIRED 2026-08-27 ──────────────────
+        # No longer computed. run_plan3_ledger + the kill-switch machinery stay defined
+        # (still exercised by test_plan3_guards.py); main() simply no longer advances the
+        # plan3 ledger. Its history is frozen in paper_ledgers.json. build_momo_plan.py may
+        # still write portfolio_plan_momo.json; it is now unused. --reset-plan3-halt is a no-op.
 
         # Watermark only advances on a healthy run, so a collapse cannot ratchet the
         # baseline down one bad day at a time until the gate stops catching anything.
@@ -1208,7 +1182,7 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("plan", "plan2", "equal", "plan3", "rn_depth"):
+        for name in ("equal", "rn_depth"):
             if not ledgers.get(name, {}).get("nav_series"):
                 continue
             s = ledgers[name]["summary"]
