@@ -139,7 +139,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
     // Opens on the AI book against all three benchmarks; the quant books are
     // one click away rather than crowding the first read.
     const [visible, setVisible] = useState<Record<string, boolean>>({
-        equal_llm: true, IWM: true, SPY: true, QQQ: true,
+        rn_depth: true, IWM: true, SPY: true, QQQ: true,
     });
 
     useEffect(() => {
@@ -154,7 +154,12 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
     const early = useMemo(() => soldTooEarly(ledgers), [ledgers]);
 
     const books = ledgers?.ledgers ?? {};
-    const posKey = posSource === 'llm' && books[`${ledgerView}_llm`] ? `${ledgerView}_llm` : ledgerView;
+    // The AI side of the equal-weight A/B is rn_depth (live depth-verdict book)
+    // since the 2026-08 migration; equal_llm is frozen and only kept for history.
+    const posKey = posSource === 'llm'
+        ? (ledgerView === 'equal' && books.rn_depth ? 'rn_depth'
+            : books[`${ledgerView}_llm`] ? `${ledgerView}_llm` : ledgerView)
+        : ledgerView;
     const active = books[posKey];
 
     const holdings = useMemo(() => {
@@ -230,7 +235,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                     <StatCard
                         key={c.key}
                         book={books[c.key]}
-                        llm={books[`${c.key}_llm`]}
+                        llm={c.key === 'equal' ? (books.rn_depth ?? books.equal_llm) : books[`${c.key}_llm`]}
                         title={c.title}
                         note={c.key === 'mine' && !loggedIn ? 'log in and save a portfolio snapshot' : c.note}
                         active={ledgerView === c.key}

@@ -26,7 +26,11 @@ export const BENCHMARKS = ['IWM', 'SPY', 'QQQ', 'SOXX', 'DRAM'] as const;
 
 /** Strategy books, in the order they appear in the chart legend. */
 export const BOOKS: { key: string; label: string; color: string; width: number }[] = [
-    { key: 'equal_llm', label: 'EQUAL · AI', color: 'oklch(0.78 0.08 250)', width: 2 },
+    // rn_depth is the live AI book (depth-verdict picks); it replaced the *_llm
+    // overlay lane in the 2026-08 depth migration. equal_llm stays on the chart
+    // as the frozen pre-migration record — its series ends 2026-08-25.
+    { key: 'rn_depth', label: 'RS2 AI', color: 'oklch(0.78 0.08 250)', width: 2 },
+    { key: 'equal_llm', label: 'EQUAL · AI (retired)', color: 'oklch(0.62 0.04 250)', width: 1.2 },
     // EQUAL takes the factor-value green (no other solid book line uses it). The
     // plan / plan2 / plan3 lanes (and their AI twins) were retired 2026-08-27 —
     // we no longer benchmark books we do not analyse.
@@ -175,16 +179,18 @@ export function benchReturnPct(series: NavPoint[] | undefined, sym: string, from
 }
 
 /**
- * The standing record shown in the header status strip. Prefers the RS2-picked
- * equal-weight book (`equal_llm`) — the AI's own stock-picking test — and falls
- * back to the quant equal-weight book when the LLM A/B has not started.
+ * The standing record shown in the header status strip. Prefers the live AI
+ * book (`rn_depth`, depth-verdict picks), then the frozen pre-migration
+ * `equal_llm` record, then the quant equal-weight book.
  */
 export function standingRecord(ledgers: any, benchSym = 'QQQ'): {
     key: string; aiPct: number | null; benchSym: string; benchPct: number | null;
 } | null {
     const books = ledgers?.ledgers;
     if (!books) return null;
-    const key = books.equal_llm?.nav_series?.length ? 'equal_llm' : books.equal?.nav_series?.length ? 'equal' : null;
+    const key = books.rn_depth?.nav_series?.length ? 'rn_depth'
+        : books.equal_llm?.nav_series?.length ? 'equal_llm'
+        : books.equal?.nav_series?.length ? 'equal' : null;
     if (!key) return null;
     const series: NavPoint[] = books[key].nav_series;
     return {
@@ -221,7 +227,7 @@ export interface ClosedTrade {
 }
 
 /** Exits that kept running without us — the postmortem strip. */
-export function soldTooEarly(ledgers: any, books = ['equal_llm', 'equal']): ClosedTrade[] {
+export function soldTooEarly(ledgers: any, books = ['rn_depth', 'equal_llm', 'equal']): ClosedTrade[] {
     const L = ledgers?.ledgers;
     if (!L) return [];
     const out: ClosedTrade[] = [];
