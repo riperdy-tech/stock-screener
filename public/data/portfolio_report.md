@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-08-28T00:47:45Z
+Generated: 2026-08-28T05:51:45Z
 Macro flags: none
 Invested: **57.9%**  |  Cash: **42.1%**  |  Positions: 16
 
@@ -13,11 +13,11 @@ Invested: **57.9%**  |  Cash: **42.1%**  |  Positions: 16
 | 12 | **KRYS** | 2.25 | B | 46.93 | 75 | 12 | research_now | - | no_data | 6 | - | - |
 | 23 | **CART** | 4.05 | B | 75.44 | 80 | 23 | research_now | cloud_software | mid | 5 | -3.032 | - |
 | 24 | **GRDN** | 2.4 | B | 77.83 | 80 | 24 | research_now | - | no_data | 7 | -2.947 | - |
-| 26 | **VIK** | 5.0 | B | 76.46 | 75 | 26 | research_now | - | no_data | 6 | - | - |
-| 27 | **SAP** | 2.1 | B | 72.52 | 70 | 27 | research_now | - | no_data | - | - | - |
-| 28 | **ABNB** | 1.8 | B | 79.57 | 80 | 28 | research_now | - | no_data | 5 | - | - |
+| 26 | **ABNB** | 1.8 | B | 79.57 | 80 | 26 | research_now | - | no_data | 5 | - | - |
+| 27 | **VIK** | 5.0 | B | 76.46 | 75 | 27 | research_now | - | no_data | 6 | - | - |
+| 28 | **SAP** | 2.1 | B | 72.52 | 70 | 28 | research_now | - | no_data | - | - | - |
 | 37 | **UTHR** | 1.98 | B | 83.34 | 75 | 37 | research_now | - | no_data | 7 | -2.358 | - |
-| 42 | **PCTY** | 4.15 | B | 69.79 | 70 | 42 | research_now | cloud_software | watch | 7 | -2.57 | - |
+| 43 | **PCTY** | 4.15 | B | 69.79 | 70 | 43 | research_now | cloud_software | watch | 7 | -2.57 | - |
 | 46 | **KFY** | 5.0 | A | 69.57 | 80 | 46 | research_now | - | no_data | 8 | -2.619 | - |
 | 47 | **MCRI** | 5.0 | A | 66.72 | 80 | 47 | research_now | - | no_data | 8 | -2.953 | - |
 | 48 | **MAMA** | 0.87 | A | 41.82 | 75 | 48 | research_now | - | no_data | 5 | - | - |
@@ -53,8 +53,8 @@ Invested: **57.9%**  |  Cash: **42.1%**  |  Positions: 16
 - JKHY: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
 - NVS: sector cap Healthcare (25.0%)
 - MEDP: sized below minimum (0.43% < 0.75%)
-- MNST: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - RMD: sector cap Healthcare (25.0%)
+- MNST: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - AMZN: no Kelly edge (expectations gap +47pts >= 0: price already assumes more growth than demonstrated)
 - FIX: sized below minimum (0.06% < 0.75%)
 - CIEN: no Kelly edge (expectations gap +76pts >= 0: price already assumes more growth than demonstrated)
@@ -67,8 +67,8 @@ Invested: **57.9%**  |  Cash: **42.1%**  |  Positions: 16
 - VRTX: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - MCO: no Kelly edge (expectations gap +12pts >= 0: price already assumes more growth than demonstrated)
 - ATI: no Kelly edge (expectations gap +28pts >= 0: price already assumes more growth than demonstrated)
+- LQDT: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
 - HWM: no Kelly edge (expectations gap +23pts >= 0: price already assumes more growth than demonstrated)
-- CMI: no Kelly edge (expectations gap +2pts >= 0: price already assumes more growth than demonstrated)
 
 ## Sizing method
 - Quarter-Kelly: 12 positions — f = 0.25 x mu/sigma^2, mu = expectations-gap recovery over 3y (cap 15%), sigma floor 15%, position cap 5.0%.
