@@ -27,16 +27,22 @@ export const BENCHMARKS = ['IWM', 'SPY', 'QQQ', 'SOXX', 'DRAM'] as const;
 /** Strategy books, in the order they appear in the chart legend. */
 export const BOOKS: { key: string; label: string; color: string; width: number }[] = [
     // rn_depth is the live AI book (depth-verdict picks); it replaced the *_llm
-    // overlay lane in the 2026-08 depth migration. equal_llm stays on the chart
-    // as the frozen pre-migration record — its series ends 2026-08-25.
+    // overlay lane in the 2026-08 depth migration. On the chart it is shown as
+    // ONE continuous AI record: the retired equal_llm history (inception
+    // 2026-07-05, frozen 2026-08-25) chained into rn_depth's returns — see the
+    // splice in buildCurve. rn_depth's own NAV index restarted at ~100 on
+    // 2026-08-25; the splice removes that reset so the account's progress reads
+    // unbroken.
     { key: 'rn_depth', label: 'RS2 AI', color: 'oklch(0.78 0.08 250)', width: 2 },
-    { key: 'equal_llm', label: 'EQUAL · AI (retired)', color: 'oklch(0.62 0.04 250)', width: 1.2 },
     // EQUAL takes the factor-value green (no other solid book line uses it). The
     // plan / plan2 / plan3 lanes (and their AI twins) were retired 2026-08-27 —
     // we no longer benchmark books we do not analyse.
     { key: 'equal', label: 'EQUAL', color: '#5a9b6d', width: 1.4 },
     { key: 'mine', label: 'MINE', color: '#cfa14e', width: 1.4 },
 ];
+
+// The retired AI book whose history the rn_depth chart line continues from.
+const AI_PREDECESSOR = 'equal_llm';
 
 export const BENCH_STYLE: Record<string, string> = {
     IWM: '#908d86', SPY: '#6b93c4', QQQ: '#4f9e8f', DRAM: '#8f7fc0', SOXX: '#b56a4f',
@@ -82,8 +88,13 @@ export function buildCurve(ledgers: any, commissionPct: number | null): Curve {
     const basePct = ((ledgers?.config?.cost_bps as number | undefined) ?? 10) / 100;
     const deltaPct = commissionPct == null ? 0 : commissionPct - basePct;
 
+    // equal_llm is not its own chart line any more, but its history forms the
+    // first leg of the continuous RS2 AI line, so it joins the date axis and
+    // gets a series computed like the others.
+    const curveKeys = [...BOOKS.map((b) => b.key), AI_PREDECESSOR];
+
     const dateSet = new Set<string>();
-    for (const { key } of BOOKS) {
+    for (const key of curveKeys) {
         for (const p of (books[key]?.nav_series ?? []) as NavPoint[]) if (p.date) dateSet.add(p.date.slice(0, 10));
     }
     const dates = Array.from(dateSet).sort();
@@ -94,7 +105,7 @@ export function buildCurve(ledgers: any, commissionPct: number | null): Curve {
     const tradedValue: Record<string, number> = {};
     const blank = () => new Array<number | null>(dates.length).fill(null);
 
-    for (const { key } of BOOKS) {
+    for (const key of curveKeys) {
         const book = books[key];
         if (!book?.nav_series?.length) continue;
         const trades: Trade[] = book.trades ?? [];
@@ -110,6 +121,28 @@ export function buildCurve(ledgers: any, commissionPct: number | null): Curve {
         }
         series[key] = arr;
     }
+
+    // Splice the AI record into one continuous line: equal_llm's actual NAV up
+    // to its freeze, then rn_depth's returns scaled so its first point lands on
+    // equal_llm's last — no reset to 100 at the 2026-08-25 handover.
+    const llm = series[AI_PREDECESSOR];
+    const rn = series.rn_depth;
+    if (llm && rn) {
+        const j = rn.findIndex((v) => v != null);
+        // equal_llm's value at (or last before) rn_depth's first mark.
+        let anchor: number | null = null;
+        for (let i = j; i >= 0; i--) if (llm[i] != null) { anchor = llm[i]; break; }
+        if (j >= 0 && anchor != null && rn[j]) {
+            const f = anchor / (rn[j] as number);
+            series.rn_depth = rn.map((v, i) => (v != null ? v * f : llm[i]));
+            tradeCounts.rn_depth = (tradeCounts.rn_depth ?? 0) + (tradeCounts[AI_PREDECESSOR] ?? 0);
+            tradedValue.rn_depth = (tradedValue.rn_depth ?? 0) + (tradedValue[AI_PREDECESSOR] ?? 0);
+        }
+    }
+    // Never a standalone line — either merged above or dropped.
+    delete series[AI_PREDECESSOR];
+    delete tradeCounts[AI_PREDECESSOR];
+    delete tradedValue[AI_PREDECESSOR];
 
     // Benchmarks: raw closes re-based to 100 at their first observation.
     const benchSource = (books.equal?.nav_series ?? books.equal_llm?.nav_series ?? []) as NavPoint[];
@@ -179,9 +212,11 @@ export function benchReturnPct(series: NavPoint[] | undefined, sym: string, from
 }
 
 /**
- * The standing record shown in the header status strip. Prefers the live AI
- * book (`rn_depth`, depth-verdict picks), then the frozen pre-migration
- * `equal_llm` record, then the quant equal-weight book.
+ * The standing record shown in the header status strip. The AI record is one
+ * continuous account: the retired `equal_llm` history chained into the live
+ * `rn_depth` book (which restarted its own NAV index on 2026-08-25), so the
+ * headline return compounds both legs. Falls back to whichever single book
+ * exists when there is nothing to chain.
  */
 export function standingRecord(ledgers: any, benchSym = 'QQQ'): {
     key: string; aiPct: number | null; benchSym: string; benchPct: number | null;
@@ -189,13 +224,25 @@ export function standingRecord(ledgers: any, benchSym = 'QQQ'): {
     const books = ledgers?.ledgers;
     if (!books) return null;
     const key = books.rn_depth?.nav_series?.length ? 'rn_depth'
-        : books.equal_llm?.nav_series?.length ? 'equal_llm'
+        : books[AI_PREDECESSOR]?.nav_series?.length ? AI_PREDECESSOR
         : books.equal?.nav_series?.length ? 'equal' : null;
     if (!key) return null;
-    const series: NavPoint[] = books[key].nav_series;
+    let series: NavPoint[] = books[key].nav_series;
+    const cumOf = (b: any): number | null =>
+        b?.summary?.cumulative_return_pct ?? seriesReturnPct(b?.nav_series);
+    let aiPct = cumOf(books[key]);
+    if (key === 'rn_depth') {
+        const prior = cumOf(books[AI_PREDECESSOR]);
+        if (prior != null && aiPct != null) {
+            aiPct = ((1 + prior / 100) * (1 + aiPct / 100) - 1) * 100;
+            // Benches are raw closes, so the yardstick spans the same chained
+            // window by simply prepending the predecessor's series.
+            series = [...(books[AI_PREDECESSOR].nav_series as NavPoint[]), ...series];
+        }
+    }
     return {
         key,
-        aiPct: books[key].summary?.cumulative_return_pct ?? seriesReturnPct(series),
+        aiPct,
         benchSym,
         benchPct: benchReturnPct(series, benchSym),
     };

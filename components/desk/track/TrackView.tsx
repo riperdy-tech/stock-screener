@@ -162,6 +162,23 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
         : ledgerView;
     const active = books[posKey];
 
+    // The AI stat column is the continuous account: rn_depth's live stats, but
+    // with the cumulative return chained through the retired equal_llm history
+    // (rn_depth's own NAV index restarted at 100 on 2026-08-25).
+    const aiEqualBook = useMemo(() => {
+        const rn = books.rn_depth;
+        const el = books.equal_llm;
+        if (!rn) return el;
+        const a = rn.summary?.cumulative_return_pct;
+        const b = el?.summary?.cumulative_return_pct;
+        if (a == null || b == null) return rn;
+        return {
+            ...rn,
+            summary: { ...rn.summary, cumulative_return_pct: ((1 + b / 100) * (1 + a / 100) - 1) * 100 },
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ledgers]);
+
     const holdings = useMemo(() => {
         const h = active?.state?.holdings ?? {};
         const marks = active?.last_marks ?? {};
@@ -235,7 +252,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                     <StatCard
                         key={c.key}
                         book={books[c.key]}
-                        llm={c.key === 'equal' ? (books.rn_depth ?? books.equal_llm) : books[`${c.key}_llm`]}
+                        llm={c.key === 'equal' ? aiEqualBook : books[`${c.key}_llm`]}
                         title={c.title}
                         note={c.key === 'mine' && !loggedIn ? 'log in and save a portfolio snapshot' : c.note}
                         active={ledgerView === c.key}
