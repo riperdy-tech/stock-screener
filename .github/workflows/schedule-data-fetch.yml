@@ -1,26 +1,21 @@
 name: Scheduled Data Fetch
 
 on:
+  # GitHub crons are the CLOUD BACKSTOP only (see the `preflight` job). The PRIMARY
+  # run is dispatched by the home PC's scheduler:
+  #     gh workflow run schedule-data-fetch.yml -R riperdy-tech/stock-screener -f runner=self-hosted
+  # A self-hosted job is therefore only ever CREATED when the PC is actually online,
+  # so it can never sit queued against an offline runner and block this backstop.
   schedule:
-    # Weekdays 14:35 UTC = just after the US open year-round (10:35 EDT / 09:35 EST).
-    # The scoring chain then runs on the freshest defeatbeta EOD data + that
-    # morning's RS2 verdicts, and KIS Portfolio Sync (workflow_run-chained to this
-    # workflow's completion) trades DURING the US session minutes after the ledger
-    # updates. Odd minute on purpose: GitHub queues :00/:30 crons worst under load.
-    # The cron is the target, not a guaranteed start time (observed 0-3h late).
-    # NOTE: prices are defeatbeta EOD (yesterday's close) regardless of run time —
-    # a post-close re-run would see the SAME prices, which is why there isn't one.
-    - cron: '35 14 * * 1-5'
-    # Weekends: data maintenance only (RS2 verdict ingestion, dividends, mine
-    # ledgers). Market closed; KIS sync chained to this completion gates itself off.
-    - cron: '35 10 * * 0,6'
-  # Allows you to trigger it manually from the Actions tab.
-  # RUNNER CHOICE (2026-08-25): scheduled runs go to the home PC's self-hosted
-  # runner (free minutes; also dodges the Yahoo throttling of GitHub's shared
-  # runner IPs documented in the SPLIT INTO TWO JOBS note below). Manual runs
-  # default to ubuntu-latest, because a manual run is usually the "PC is off"
-  # fallback and a job targeted at an offline self-hosted runner does not fail
-  # — it queues silently for up to 24h.
+    # Backstop = the PC's target time + 120 min. Runs on ubuntu-latest, but the
+    # preflight NO-OPs it (~1 billed min) if the PC already wrote a fresh ledger
+    # within the last 120 min. Only a stale ledger (PC off, or its run failed)
+    # lets the backstop actually fetch on the cloud.
+    - cron: '35 16 * * 1-5'   # weekday backstop  (PC target 14:35 UTC + 120m)
+    - cron: '35 12 * * 0,6'   # weekend backstop  (PC target 10:35 UTC + 120m)
+  # Manual runs from the Actions tab; also the event the PC's self-dispatch uses.
+  # Default ubuntu-latest = a human clicking "Run workflow" gets the cloud path;
+  # the PC always passes an explicit `-f runner=self-hosted`.
   workflow_dispatch:
     inputs:
       runner:
@@ -38,67 +33,77 @@ permissions:
 # Serialize against the weekly analyst job — both regenerate + push the same
 # public/data files; running concurrently caused rebase conflicts that silently
 # dropped one run's output. Shared group across workflows queues them.
+# SAFE NOW: nothing queues against an offline runner (primary is PC-dispatched),
+# so a member of this group never blocks the others for hours.
 concurrency:
   group: data-writers
   cancel-in-progress: false
 
-# SPLIT INTO TWO JOBS (2026-07-10). GitHub-hosted runners hard-cap a job at 360 min and
-# it cannot be raised. On 2026-07-09 `fetch_data.py` alone took 357 min (Yahoo throttles
-# the shared runner IPs, and the severity varies day to day — the SAME yfinance 1.5.1 ran
-# in 105 min on 07-08). The scoring chain then started inside the same budget, the job was
-# CANCELLED at the cap, "Commit and Push" was skipped, and NOTHING was committed — leaving
-# factor_scores.json stale for ~39h (which in turn starved the local RS2 orchestrator).
-# Fetch and score now run as separate jobs, each with its own 6h budget, so the scoring
-# chain + commit always complete even after a slow fetch.
 jobs:
+  # Cheap decision job (always ubuntu-latest, always available). Decides the
+  # effective runner and whether the heavy jobs run at all. For a scheduled
+  # (backstop) event it reads the ledger's freshness and SKIPS the fetch+score
+  # when the PC path already delivered — so a normal day costs ~1 billed minute.
+  preflight:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.d.outputs.run }}
+      runner: ${{ steps.d.outputs.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: d
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # Manual / PC self-dispatch: honor the chosen runner, always run.
+            echo "runner=${{ inputs.runner }}" >> "$GITHUB_OUTPUT"
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Scheduled event == cloud backstop.
+          echo "runner=ubuntu-latest" >> "$GITHUB_OUTPUT"
+          # Fail OPEN: if the ledger is missing/unreadable, treat as very stale so
+          # the backstop fetches rather than silently skipping.
+          age=$(python - <<'PY' || echo 999999
+          import json, datetime
+          ts = json.load(open('public/data/paper_ledgers.json'))['last_updated']
+          dt = datetime.datetime.fromisoformat(ts.replace('Z', '+00:00'))
+          print(int(round((datetime.datetime.now(datetime.timezone.utc) - dt).total_seconds() / 60)))
+          PY
+          )
+          echo "ledger age: ${age} min (backstop threshold: 120)"
+          if [ "$age" -gt 120 ]; then
+            echo "STALE — PC path did not deliver a fresh ledger; backstop runs on cloud."
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "FRESH — PC already delivered; backstop skips (no cloud minutes)."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
   fetch:
-    # schedule -> self-hosted (inputs is empty on a cron event); dispatch -> chosen value.
-    runs-on: ${{ inputs.runner || 'self-hosted' }}
+    needs: preflight
+    if: needs.preflight.outputs.run == 'true'
+    runs-on: ${{ needs.preflight.outputs.runner }}
     timeout-minutes: 350          # fail loudly just under the 360 cap instead of a silent cancel
 
-    # Every `run:` block here is bash (`[ -n ... ]`, heredocs, sleep), so the
-    # Windows runner must not default to PowerShell. Plain `shell: bash` is NOT
-    # enough: the runner resolves `bash` from PATH, and the machine PATH finds
-    # C:\Windows\System32\bash.exe (the WSL launcher) before Git Bash. WSL
-    # distros are registered per-user and the runner service account
-    # (NETWORK SERVICE) has none, so steps died with "Windows Subsystem for
-    # Linux has no installed distributions". Point at Git Bash by full path --
-    # using the 8.3 short name, because the runner splits the shell string on
-    # spaces to separate command from arguments and "C:\Program Files\..." then
-    # fails with "Second path fragment must not be a drive or UNC name".
     defaults:
       run:
-        shell: ${{ inputs.runner == 'ubuntu-latest' && 'bash' || 'C:\PROGRA~1\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
+        shell: ${{ needs.preflight.outputs.runner == 'ubuntu-latest' && 'bash' || 'C:\PROGRA~1\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
 
-    # No git line-ending overrides here on purpose. Forcing core.autocrlf=false
-    # was tried on 2026-08-25 and made it worse: Python text-mode writes CRLF on
-    # Windows, and with autocrlf off git stored that verbatim, so the trailing
-    # newline of stocks.json diverged from the ubuntu-written files. The host's
-    # own core.autocrlf=true normalizes CRLF back to LF on `git add` (verified
-    # round-trip), which is what actually matches the ubuntu path.
     env:
-      # Python on Windows defaults stdout to the ANSI codepage (cp1252), so a
-      # script printing any non-Latin-1 character dies with UnicodeEncodeError:
-      # score_reverse prints U+2192 and killed the chain. Linux defaults to
-      # UTF-8, so this is parity with the ubuntu path, not a Windows-only hack.
       PYTHONUTF8: '1'
       PYTHONIOENCODING: utf-8
 
     steps:
-      # A cron job aimed at an offline self-hosted runner queues instead of
-      # failing, then runs whenever the PC wakes — which would fetch hours-stale
-      # data and hand it to the KIS sync chained on this workflow's success.
-      # Fail instead, so kis-sync's `conclusion == 'success'` gate blocks the trade.
+      # NOTE: with the primary now PC-dispatched, a scheduled run never targets
+      # self-hosted, so this guard is effectively inert on the backstop path. Kept
+      # as a backstop-of-the-backstop in case a self-hosted cron is ever re-added.
       - name: Reject a stale queued run
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' && needs.preflight.outputs.runner != 'ubuntu-latest'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # run_started_at is NOT in the `github` context -- it exists only on the
-          # API/webhook payload. Interpolating it yielded an empty string, and
-          # `date -d ""` silently returns today's midnight rather than failing, so
-          # the first version of this guard measured time-since-midnight and killed
-          # a perfectly healthy 15:23 run with "923 min". Read it from the API.
           delay_min=$(python -c "
           import json, os, urllib.request, datetime
           url = '%s/repos/%s/actions/runs/%s' % (os.environ['GITHUB_API_URL'],
@@ -117,30 +122,21 @@ jobs:
           esac
           echo "queue delay: ${delay_min} min"
           if [ "$delay_min" -gt 90 ]; then
-            echo "::error::run started ${delay_min} min after it was scheduled (>90) — the self-hosted runner was probably offline. Refusing to fetch stale data and trigger the KIS chain. Re-dispatch manually on ubuntu-latest."
+            echo "::error::run started ${delay_min} min after it was scheduled (>90) — the self-hosted runner was probably offline. Refusing to fetch stale data."
             exit 1
           fi
 
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # setup-python's Windows path runs an installer that writes HKLM registry
-      # entries, so it needs administrator rights. The self-hosted runner service
-      # runs as NETWORK SERVICE and fails at "Install Python 3.11.9 in ..._tool"
-      # (setup.ps1:127). Running the runner as an admin would fix it but would
-      # also hand any workflow full control of the machine, so instead the
-      # self-hosted path uses the PC's own Python (3.12.10, already on the machine
-      # PATH) in a throwaway per-job venv. Version differs from ubuntu's 3.11 by
-      # design; the pinned dependency set was verified to install and import on
-      # 3.12.10 on that host before this was adopted.
       - name: Setup Python (GitHub-hosted)
-        if: inputs.runner == 'ubuntu-latest'
+        if: needs.preflight.outputs.runner == 'ubuntu-latest'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Provision Python (self-hosted)
-        if: inputs.runner != 'ubuntu-latest'
+        if: needs.preflight.outputs.runner != 'ubuntu-latest'
         run: |
           VENV="$(cygpath -u "$RUNNER_TEMP")/venv"
           python -m venv "$VENV"
@@ -150,9 +146,6 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          # yfinance PINNED: it was previously unpinned (`pip install yfinance`), so a bad
-          # upstream release could silently change fetch behaviour. 1.5.1 is the version both
-          # the fast (07-08) and slow (07-09) runs used, so it is a known-good baseline.
           pip install yfinance==1.5.1 pandas numpy requests finance-datareader supabase python-dotenv lxml html5lib beautifulsoup4 openai duckdb
 
       - name: Run Data Fetchers
@@ -160,17 +153,7 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
-          # Daily: only data that actually changes daily. SEC fundamentals
-          # (fetch_sec_data + build_fundamentals_history: 1.4GB companyfacts
-          # download for quarterly-changing fields) moved to the weekly
-          # workflow — saves ~1.4GB + 10-20 min per day. (Intl KR/TW scan
-          # removed entirely 2026-08-21.)
           python scripts/fetch_data.py
-          # Live-price overlay (plan B): defeatbeta serves yesterday's close at
-          # best, so overlay live yfinance prices for the whole universe. This
-          # run fires just after the US open, so bands score on intraday prices.
-          # Atomic: <90% coverage leaves the consistent snapshot untouched (exit
-          # 3) — never fail the fetch over it.
           python scripts/refresh_prices.py || echo "::warning::live price overlay skipped — stocks.json keeps the snapshot prices"
 
       - name: Commit and Push Fetched Data
@@ -210,55 +193,33 @@ jobs:
           fi
 
   score:
-    needs: fetch
-    # Same runner as `fetch` — the score job re-checks out main and pushes, so
-    # splitting it across runner types would only add a second environment to keep working.
-    runs-on: ${{ inputs.runner || 'self-hosted' }}
+    needs: [preflight, fetch]
+    if: needs.preflight.outputs.run == 'true'
+    runs-on: ${{ needs.preflight.outputs.runner }}
     timeout-minutes: 350
 
-    # Same Git Bash pinning as the `fetch` job above; see the note there.
     defaults:
       run:
-        shell: ${{ inputs.runner == 'ubuntu-latest' && 'bash' || 'C:\PROGRA~1\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
+        shell: ${{ needs.preflight.outputs.runner == 'ubuntu-latest' && 'bash' || 'C:\PROGRA~1\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
 
-    # No git line-ending overrides here on purpose. Forcing core.autocrlf=false
-    # was tried on 2026-08-25 and made it worse: Python text-mode writes CRLF on
-    # Windows, and with autocrlf off git stored that verbatim, so the trailing
-    # newline of stocks.json diverged from the ubuntu-written files. The host's
-    # own core.autocrlf=true normalizes CRLF back to LF on `git add` (verified
-    # round-trip), which is what actually matches the ubuntu path.
     env:
-      # Python on Windows defaults stdout to the ANSI codepage (cp1252), so a
-      # script printing any non-Latin-1 character dies with UnicodeEncodeError:
-      # score_reverse prints U+2192 and killed the chain. Linux defaults to
-      # UTF-8, so this is parity with the ubuntu path, not a Windows-only hack.
       PYTHONUTF8: '1'
       PYTHONIOENCODING: utf-8
 
     steps:
-      # ref: main (not the trigger SHA) so we pick up the commit the `fetch` job just pushed.
       - name: Checkout Repository (latest main, incl. fetch job's commit)
         uses: actions/checkout@v4
         with:
           ref: main
 
-      # setup-python's Windows path runs an installer that writes HKLM registry
-      # entries, so it needs administrator rights. The self-hosted runner service
-      # runs as NETWORK SERVICE and fails at "Install Python 3.11.9 in ..._tool"
-      # (setup.ps1:127). Running the runner as an admin would fix it but would
-      # also hand any workflow full control of the machine, so instead the
-      # self-hosted path uses the PC's own Python (3.12.10, already on the machine
-      # PATH) in a throwaway per-job venv. Version differs from ubuntu's 3.11 by
-      # design; the pinned dependency set was verified to install and import on
-      # 3.12.10 on that host before this was adopted.
       - name: Setup Python (GitHub-hosted)
-        if: inputs.runner == 'ubuntu-latest'
+        if: needs.preflight.outputs.runner == 'ubuntu-latest'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Provision Python (self-hosted)
-        if: inputs.runner != 'ubuntu-latest'
+        if: needs.preflight.outputs.runner != 'ubuntu-latest'
         run: |
           VENV="$(cygpath -u "$RUNNER_TEMP")/venv"
           python -m venv "$VENV"
@@ -273,21 +234,12 @@ jobs:
       - name: Run Scoring Chain (price history -> EPS -> reverse -> paradigm)
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          # track_paper_portfolios (mine ledger) reads the holdings snapshot from
-          # Supabase, written by the /api/my-portfolio route on the deployed site.
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
-          # Analyst coverage skipped here (runs weekly via paradigm-weekly-analyst.yml).
           python scripts/build_price_history.py
           python scripts/fetch_eps_trajectory.py --apply --max-calls 500
-          # Ex-dividend calendar for the ledgers' total-return marks; self-throttles
-          # to ~weekly, so this is a no-op skip on most days.
           python scripts/fetch_dividends.py
-          # run_chain enforces ordering (macro -> score_reverse -> score_paradigm)
-          # and fails the job when reverse coverage / nominations / artifact
-          # freshness invariants break. This fixes the stale-merge bug where
-          # fetch_data regenerated stocks.json without re-running score_reverse.
           python scripts/run_chain.py
 
       - name: Commit and Push Changes
@@ -296,7 +248,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Scoring-chain outputs (fetched data already committed by the `fetch` job).
           git add public/data/paradigm_scores.json || true
           git add public/data/paradigm_theme_metrics.json || true
           git add public/data/price_history.json || true
@@ -315,22 +266,15 @@ jobs:
           git add public/data/portfolio_report.md || true
           git add public/data/paper_ledgers.json || true
           git add public/data/dividends.json || true
-          # my_portfolio.json no longer committed — snapshot lives in Supabase now.
           git add public/data/paradigm_signal_log.jsonl || true
           git add public/data/paradigm_run_log.jsonl || true
           git add public/data/paradigm_history.json || true
 
-          # Commit if there are changes
           if git diff --quiet && git diff --staged --quiet; then
             echo "No changes to commit"
             echo "changes=false" >> $GITHUB_OUTPUT
           else
             git commit -m "Auto-update: Scheduled stock data refresh"
-
-            # Resilient to a diverged origin (the weekly job commits the same data
-            # files and can overlap despite the concurrency guard). Re-sync each
-            # attempt with `merge -X ours`: content conflicts keep THIS run's
-            # freshly-fetched data, non-conflicting origin changes still merge in.
             pushed=false
             for i in 1 2 3; do
               echo "Push attempt $i..."
@@ -348,6 +292,5 @@ jobs:
               echo "::error::Push failed after 3 attempts — run output was NOT committed."
               exit 1
             fi
-
             echo "changes=true" >> $GITHUB_OUTPUT
           fi
