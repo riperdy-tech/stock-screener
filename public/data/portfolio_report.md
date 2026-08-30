@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-08-29T17:27:57Z
+Generated: 2026-08-30T15:14:26Z
 Macro flags: none
 Invested: **57.68%**  |  Cash: **42.32%**  |  Positions: 16
 
@@ -8,20 +8,20 @@ Invested: **57.68%**  |  Cash: **42.32%**  |  Positions: 16
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 4 | **INCY** | 5.0 | B | 87.55 | 80 | 4 | research_now | - | no_data | 6 | - | - |
 | 5 | **EXEL** | 5.0 | B | 86.3 | 80 | 5 | research_now | - | no_data | 6 | -2.593 | - |
-| 10 | **KNSA** | 5.0 | A | 44.01 | 80 | 10 | research_now | - | no_data | 6 | -3.129 | - |
+| 9 | **KNSA** | 5.0 | A | 44.01 | 80 | 9 | research_now | - | no_data | 6 | -3.129 | - |
 | 11 | **NBIX** | 3.46 | B | 69.63 | 75 | 11 | research_now | - | no_data | 5 | -2.484 | - |
 | 12 | **KRYS** | 2.25 | B | 46.9 | 75 | 12 | research_now | - | no_data | 6 | - | - |
 | 21 | **CART** | 4.04 | B | 75.34 | 80 | 21 | research_now | cloud_software | mid | 5 | -3.032 | - |
-| 24 | **VIK** | 5.0 | B | 76.9 | 75 | 24 | research_now | - | no_data | 6 | - | - |
-| 25 | **NVS** | 2.25 | B | 75.76 | 75 | 25 | research_now | glp1_metabolic | mid | 6 | - | - |
+| 23 | **VIK** | 5.0 | B | 76.9 | 75 | 23 | research_now | - | no_data | 6 | - | - |
+| 24 | **NVS** | 2.25 | B | 75.76 | 75 | 24 | research_now | glp1_metabolic | mid | 6 | - | - |
 | 26 | **SAP** | 2.1 | B | 72.42 | 70 | 26 | research_now | - | no_data | - | - | - |
-| 29 | **RMD** | 1.31 | B | 81.2 | 75 | 29 | research_now | cloud_software | skip | 7 | -2.584 | - |
+| 28 | **RMD** | 1.31 | B | 81.2 | 75 | 28 | research_now | cloud_software | skip | 7 | -2.584 | - |
 | 30 | **ABNB** | 1.8 | B | 79.42 | 80 | 30 | research_now | - | no_data | 5 | - | - |
 | 41 | **PCTY** | 4.15 | B | 69.83 | 70 | 41 | research_now | cloud_software | watch | 7 | -2.57 | - |
 | 46 | **KFY** | 5.0 | A | 69.48 | 80 | 46 | research_now | - | no_data | 8 | -2.619 | - |
 | 47 | **MAMA** | 1.59 | A | 41.83 | 75 | 47 | research_now | - | no_data | 5 | - | - |
 | 49 | **MCRI** | 5.0 | A | 67.19 | 80 | 49 | research_now | - | no_data | 8 | -2.953 | - |
-| 50 | **EXPE** | 4.73 | B | 80.48 | 80 | 50 | research_now | - | no_data | 6 | -2.758 | - |
+| 51 | **EXPE** | 4.73 | B | 80.48 | 80 | 51 | research_now | - | no_data | 6 | -2.758 | - |
 
 ## Sector allocation
 - Healthcare: 24.27%
@@ -50,18 +50,18 @@ Invested: **57.68%**  |  Cash: **42.32%**  |  Positions: 16
 - LLY: no Kelly edge (expectations gap +13pts >= 0: price already assumes more growth than demonstrated)
 - ANET: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
 - AMZN: no Kelly edge (expectations gap +48pts >= 0: price already assumes more growth than demonstrated)
-- JKHY: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
 - NHC: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
+- MEDP: sized below minimum (0.44% < 0.75%)
 - GRDN: sector cap Healthcare (25.0%)
-- MEDP: sized below minimum (0.59% < 0.75%)
 - GD: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
 - MNST: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - CIEN: no Kelly edge (expectations gap +74pts >= 0: price already assumes more growth than demonstrated)
-- AMD: no Kelly edge (expectations gap +20pts >= 0: price already assumes more growth than demonstrated)
 - SIMO: no Kelly edge (expectations gap +30pts >= 0: price already assumes more growth than demonstrated)
+- AMD: no Kelly edge (expectations gap +20pts >= 0: price already assumes more growth than demonstrated)
 - AVGO: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
-- DELL: no Kelly edge (expectations gap +23pts >= 0: price already assumes more growth than demonstrated)
 - UTHR: sector cap Healthcare (25.0%)
+- DELL: no Kelly edge (expectations gap +23pts >= 0: price already assumes more growth than demonstrated)
+- JKHY: no Kelly edge (expectations gap +3pts >= 0: price already assumes more growth than demonstrated)
 - AZN: sector cap Healthcare (25.0%)
 - FIX: sized below minimum (0.41% < 0.75%)
 - MCO: no Kelly edge (expectations gap +12pts >= 0: price already assumes more growth than demonstrated)

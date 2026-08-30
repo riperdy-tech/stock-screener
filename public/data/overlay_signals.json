@@ -1,11 +1,11 @@
 {
  "_note": "Stage-4 overlay: veto/sizing/confirmation only, never additive alpha. informed_demand: +1 insider buying w/o rising shorts, -1 insider selling w/ rising or high shorts. gpr_level: 0-3 LLM-tagged exposure (slow-moving; carried forward when call budget exhausted).",
- "generated_at": "2026-08-23T10:32:14Z",
+ "generated_at": "2026-08-30T14:52:01Z",
  "gpr_status": {
-  "attempted": 171,
+  "attempted": 170,
   "carried": 0,
   "failed": 0,
-  "fetched": 67
+  "fetched": 65
  },
  "tickers": {
   "AAPL": {
@@ -48,18 +48,18 @@
     "note": "Airbnb operates a global marketplace, generating revenue across many countries and facing geopolitical risks from international operations."
    },
    "informed_demand": 1,
-   "insider_net_pct": 0.005,
-   "inst_pct": 0.89441,
+   "insider_net_pct": 0.0106,
+   "inst_pct": 0.89455,
    "short_delta": 0.0,
    "short_pct": 0.0312
   },
   "ACTG": {
    "gpr": null,
-   "informed_demand": 0,
-   "insider_net_pct": 0.0073,
-   "inst_pct": 0.89063,
-   "short_delta": 0.0081,
-   "short_pct": 0.056900002
+   "informed_demand": 1,
+   "insider_net_pct": 0.0071,
+   "inst_pct": 0.89061,
+   "short_delta": -0.0017,
+   "short_pct": 0.0552
   },
   "ADBE": {
    "gpr": {
@@ -106,20 +106,22 @@
    },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.00274,
+   "inst_pct": 1.00314,
    "short_delta": 0.0,
    "short_pct": 0.0469
   },
   "AGX": {
    "gpr": {
-    "channels": [],
-    "fetched_at": "2026-07-10",
-    "gpr_level": 0,
-    "note": "Operates only in US, Ireland, UK; no exposure to geopolitical flashpoints."
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-08-30",
+    "gpr_level": 1,
+    "note": "Revenue includes Ireland and UK, but no severe geopolitical exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0017,
-   "inst_pct": 1.1245201,
+   "inst_pct": 1.125,
    "short_delta": 0.0,
    "short_pct": 0.0763
   },
@@ -128,9 +130,9 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Operates in North America, Europe, Asia-Pacific, and India, giving it moderate geographic revenue exposure."
+    "note": "Operates across North America, Europe, Asia-Pacific, and India, indicating international revenue exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0013,
@@ -139,18 +141,33 @@
    "short_pct": 0.071
   },
   "AIT": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-08-30",
+    "gpr_level": 1,
+    "note": "Operates across multiple countries including Mexico, Canada, and Singapore, but no explicit geopolitical flashpoints or sanctions exposure."
+   },
    "informed_demand": 0,
-   "insider_net_pct": 0.0002,
+   "insider_net_pct": 0.0006,
    "inst_pct": 0.98621005,
    "short_delta": 0.0,
    "short_pct": 0.0231
   },
   "ALKS": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography",
+     "regulation"
+    ],
+    "fetched_at": "2026-08-30",
+    "gpr_level": 1,
+    "note": "Alkermes operates in the US, Ireland, and internationally, with regulatory oversight in healthcare markets."
+   },
    "informed_demand": 0,
-   "insider_net_pct": 0.0003,
-   "inst_pct": 1.08776,
+   "insider_net_pct": -0.0,
+   "inst_pct": 1.08784,
    "short_delta": 0.0,
    "short_pct": 0.118999995
   },
@@ -166,14 +183,14 @@
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0008,
-   "inst_pct": 0.86535,
-   "short_delta": -0.0031,
-   "short_pct": 0.018
+   "inst_pct": 0.86313003,
+   "short_delta": -0.003,
+   "short_pct": 0.015
   },
   "AMD": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": 0.002,
+   "insider_net_pct": 0.0011,
    "inst_pct": 0.7539,
    "short_delta": 0.0,
    "short_pct": 0.0232
@@ -194,7 +211,14 @@
    "short_pct": 0.024600001
   },
   "AMRX": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-08-30",
+    "gpr_level": 1,
+    "note": "Global operations across US, India, Ireland, and internationally create minor geopolitical revenue exposure."
+   },
    "informed_demand": 0,
    "insider_net_pct": 0.0022,
    "inst_pct": 0.48415002,
@@ -221,9 +245,9 @@
   "ANAB": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "US-focused clinical-stage biotechnology company with no international operations mentioned."
+    "note": "US-focused clinical-stage biotech; no foreign revenue, supply chain, or regulatory geopolitical exposure noted."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
@@ -236,12 +260,12 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-07-12",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Revenue derived from multiple global regions includes geopolitical risk from international operations."
+    "note": "Global sales across Americas, Europe, Middle East, Africa, and Asia-Pacific create minor geopolitical revenue exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0002,
+   "insider_net_pct": -0.0003,
    "inst_pct": 0.73598,
    "short_delta": 0.0,
    "short_pct": 0.0123000005
@@ -279,12 +303,12 @@
   "APPF": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Provides cloud-based real estate software primarily in the United States; no significant geopolitical exposure."
+    "note": "Operates solely in the US real estate software market with no stated foreign exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0011,
+   "insider_net_pct": -0.0012,
    "inst_pct": 0.99469,
    "short_delta": 0.0,
    "short_pct": 0.105
@@ -310,15 +334,15 @@
    "informed_demand": 0,
    "insider_net_pct": 0.0047,
    "inst_pct": 0.96973,
-   "short_delta": -0.0024,
+   "short_delta": 0.0,
    "short_pct": 0.1161
   },
   "ARWR": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "US-focused clinical-stage biotech with no significant geopolitical exposure indicated."
+    "note": "US-focused biotech pipeline; no geopolitical exposure indicated in profile."
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0001,
@@ -342,7 +366,7 @@
   "ATI": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": -0.0015,
+   "insider_net_pct": -0.0016,
    "inst_pct": 0.95662004,
    "short_delta": 0.0,
    "short_pct": 0.041199997
@@ -454,22 +478,22 @@
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0005,
-   "inst_pct": 1.085,
-   "short_delta": 0.0,
-   "short_pct": 0.139
+   "inst_pct": 1.08515,
+   "short_delta": 0.0007,
+   "short_pct": 0.1397
   },
   "BMRN": {
    "gpr": {
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-09",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Revenue spans multiple regions including Middle East, but no explicit geopolitical flashpoint or sanctions exposure indicated."
+    "note": "Operates globally across Europe, Middle East, and Asia Pacific, but no specific geopolitical flashpoint exposure cited."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0045,
-   "inst_pct": 1.03663,
+   "insider_net_pct": 0.0041,
+   "inst_pct": 1.0375199,
    "short_delta": 0.0,
    "short_pct": 0.0648
   },
@@ -523,8 +547,8 @@
     "note": "Operates in the US and internationally across regulated healthcare distribution, but profile gives no specifics on geopolitical flashpoints."
    },
    "informed_demand": 1,
-   "insider_net_pct": 0.0072,
-   "inst_pct": 0.90884,
+   "insider_net_pct": 0.0058,
+   "inst_pct": 0.90922,
    "short_delta": 0.0,
    "short_pct": 0.0327
   },
@@ -538,7 +562,7 @@
     "note": "Operates in the US and internationally, but foreign revenue appears limited."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0019,
+   "insider_net_pct": 0.0018,
    "inst_pct": 0.82494,
    "short_delta": 0.0,
    "short_pct": 0.1067
@@ -546,9 +570,9 @@
   "CASY": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "US-only convenience store operations; no material geopolitical exposure."
+    "note": "Operates entirely within the US; low geopolitical exposure."
    },
    "informed_demand": 1,
    "insider_net_pct": 0.008,
@@ -577,16 +601,23 @@
   "CDNS": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-09",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Domestic software company with no explicit geopolitical risk factors in profile."
+    "note": "Company profile describes software/hardware design products with no specified geopolitical exposure."
    },
    "informed_demand": 1,
-   "insider_net_pct": 0.0073,
-   "inst_pct": 0.91198,
-   "short_delta": 0.0001,
-   "short_pct": 0.0226,
-   "stale": true
+   "insider_net_pct": 0.0059,
+   "inst_pct": 0.91862,
+   "short_delta": -0.0003,
+   "short_pct": 0.0223
+  },
+  "CF": {
+   "gpr": null,
+   "informed_demand": 0,
+   "insider_net_pct": -0.0032,
+   "inst_pct": 1.08356,
+   "short_delta": null,
+   "short_pct": 0.073
   },
   "CGAU": {
    "gpr": null,
@@ -600,10 +631,10 @@
   "CGNX": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": 0.0007,
-   "inst_pct": 1.12472,
-   "short_delta": 0.0134,
-   "short_pct": 0.0584
+   "insider_net_pct": -0.0001,
+   "inst_pct": 1.12475,
+   "short_delta": -0.008,
+   "short_pct": 0.0504
   },
   "CHE": {
    "gpr": {
@@ -616,7 +647,8 @@
    "insider_net_pct": 0.0002,
    "inst_pct": 1.06731,
    "short_delta": 0.0,
-   "short_pct": 0.0416
+   "short_pct": 0.0416,
+   "stale": true
   },
   "CHEF": {
    "gpr": {
@@ -628,7 +660,7 @@
     "note": "Operates in the Middle East, exposing revenue to regional geopolitical tensions."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0001,
+   "insider_net_pct": -0.0003,
    "inst_pct": 1.00622,
    "short_delta": 0.0,
    "short_pct": 0.17559999
@@ -647,9 +679,9 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-02",
-    "gpr_level": 1,
-    "note": "Ciena generates revenue across multiple global regions, including the Middle East and Asia Pacific, but no specific geopolitical flashpoints"
+    "fetched_at": "2026-08-30",
+    "gpr_level": 2,
+    "note": "Operates globally across Americas, Europe, Middle East, Africa, Asia Pacific, Japan, and India, indicating significant foreign revenue expos"
    },
    "informed_demand": 0,
    "insider_net_pct": -0.001,
@@ -660,13 +692,13 @@
   "CIX": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "CompX operates primarily in North America with no apparent geopolitical risk exposure."
+    "note": "Operations primarily in North America with no mentioned geopolitical exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.06679,
+   "inst_pct": 0.067,
    "short_delta": 0.0,
    "short_pct": 0.0234
   },
@@ -688,7 +720,7 @@
   },
   "CMI": {
    "gpr": null,
-   "informed_demand": 1,
+   "informed_demand": 0,
    "insider_net_pct": 0.005,
    "inst_pct": 0.87722,
    "short_delta": 0.0,
@@ -723,7 +755,8 @@
    "insider_net_pct": 0.0,
    "inst_pct": 0.74514,
    "short_delta": 0.0,
-   "short_pct": 0.0173
+   "short_pct": 0.0173,
+   "stale": true
   },
   "CPRX": {
    "gpr": {
@@ -744,9 +777,9 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-21",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Salesforce generates significant revenue in Europe and Asia Pacific, indicating minor geopolitical exposure through foreign operations."
+    "note": "Salesforce operates across the US, Europe, and Asia Pacific, giving it minor foreign revenue exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": null,
@@ -784,10 +817,9 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.69792,
-   "short_delta": null,
-   "short_pct": 0.038,
-   "stale": true
+   "inst_pct": 0.69675004,
+   "short_delta": 0.0,
+   "short_pct": 0.038
   },
   "CVCO": {
    "gpr": {
@@ -824,9 +856,9 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-21",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Docebo generates international revenue from its cloud-based learning platform, but profile shows no specific geopolitical flashpoint exposur"
+    "note": "Operates internationally but primarily in Canada/US with no specific geopolitical flashpoints disclosed."
    },
    "informed_demand": 0,
    "insider_net_pct": null,
@@ -887,7 +919,7 @@
    "informed_demand": 0,
    "insider_net_pct": 0.0018,
    "inst_pct": 1.07282,
-   "short_delta": -0.0097,
+   "short_delta": 0.0,
    "short_pct": 0.0674
   },
   "DLTR": {
@@ -923,7 +955,7 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.93621004,
+   "inst_pct": 0.9357,
    "short_delta": 0.0,
    "short_pct": 0.0335
   },
@@ -936,9 +968,9 @@
     "gpr_level": 2,
     "note": "Operates and sells across multiple global regions, indicating significant foreign revenue exposure."
    },
-   "informed_demand": 0,
-   "insider_net_pct": 0.0049,
-   "inst_pct": 1.08225,
+   "informed_demand": 1,
+   "insider_net_pct": 0.0051,
+   "inst_pct": 1.08165,
    "short_delta": 0.0,
    "short_pct": 0.0448
   },
@@ -952,8 +984,8 @@
     "note": "DexCom operates internationally but has no indicated geopolitical flashpoint or sanctions exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0038,
-   "inst_pct": 1.06326,
+   "insider_net_pct": 0.0033,
+   "inst_pct": 1.06346,
    "short_delta": 0.0,
    "short_pct": 0.0537
   },
@@ -1012,7 +1044,8 @@
    "insider_net_pct": -0.0,
    "inst_pct": 0.61087,
    "short_delta": 0.0,
-   "short_pct": 0.0228
+   "short_pct": 0.0228,
+   "stale": true
   },
   "EMBJ": {
    "gpr": {
@@ -1026,7 +1059,7 @@
    },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.46411,
+   "inst_pct": 0.46543998,
    "short_delta": 0.0,
    "short_pct": 0.0148
   },
@@ -1042,7 +1075,7 @@
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0002,
-   "inst_pct": 0.84552,
+   "inst_pct": 0.84573,
    "short_delta": 0.0,
    "short_pct": 0.0223
   },
@@ -1113,7 +1146,7 @@
     "note": "Sells cardiovascular devices in the US, Europe, Japan, and internationally via direct and distributor channels."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0029,
+   "insider_net_pct": 0.0033,
    "inst_pct": 0.97489,
    "short_delta": 0.0,
    "short_pct": 0.0198
@@ -1123,20 +1156,28 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-21",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Company operates in the US but also markets MINNEBRO for hypertension in Japan."
+    "note": "Primarily US-focused oncology company with one product marketed in Japan, indicating minor foreign revenue exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0009,
-   "inst_pct": 1.07132,
+   "insider_net_pct": 0.001,
+   "inst_pct": 1.07194,
    "short_delta": 0.0,
    "short_pct": 0.1586
   },
   "EXPD": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography",
+     "supply_chain"
+    ],
+    "fetched_at": "2026-08-30",
+    "gpr_level": 2,
+    "note": "Operates logistics across Americas, Asia, Europe, Middle East, Africa, and India, creating material exposure to geopolitical disruptions."
+   },
    "informed_demand": 0,
-   "insider_net_pct": 0.0009,
+   "insider_net_pct": 0.0004,
    "inst_pct": 0.99771005,
    "short_delta": 0.0,
    "short_pct": 0.0442
@@ -1146,12 +1187,12 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-16",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Operates internationally in travel services, but no severe geopolitical or sanctions exposure."
+    "note": "Operates online travel services internationally, with foreign revenue exposure but no chokepoint or sanctions ties."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0014,
+   "insider_net_pct": 0.0016,
    "inst_pct": 1.08745,
    "short_delta": 0.0,
    "short_pct": 0.0842
@@ -1175,12 +1216,12 @@
   "FIX": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Provides mechanical and electrical services within the United States; no noted foreign exposure."
+    "note": "Operates solely in the United States with no significant geopolitical exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0013,
+   "insider_net_pct": -0.0009,
    "inst_pct": 0.95738,
    "short_delta": 0.0,
    "short_pct": 0.0228
@@ -1193,17 +1234,16 @@
     "note": "Company primarily manufactures and sells furniture within the United States with no significant foreign revenue or geopolitical exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": null,
-   "inst_pct": 0.65722,
-   "short_delta": 0.0059,
-   "short_pct": 0.056599997,
-   "stale": true
+   "insider_net_pct": 0.0005,
+   "inst_pct": 0.69198996,
+   "short_delta": -0.0002,
+   "short_pct": 0.056399997
   },
   "FMX": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.48738,
+   "inst_pct": 0.48797,
    "short_delta": null,
    "short_pct": null
   },
@@ -1229,7 +1269,7 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
-   "inst_pct": 0.96745,
+   "inst_pct": 0.97024,
    "short_delta": 0.0,
    "short_pct": 0.1245
   },
@@ -1237,7 +1277,7 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.003,
-   "inst_pct": 0.88122004,
+   "inst_pct": 0.87561995,
    "short_delta": 0.0,
    "short_pct": 0.0101
   },
@@ -1261,9 +1301,9 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0,
-   "inst_pct": 0.67551005,
-   "short_delta": 0.0,
-   "short_pct": 0.0307
+   "inst_pct": 0.67552,
+   "short_delta": 0.0016,
+   "short_pct": 0.0323
   },
   "GMAB": {
    "gpr": null,
@@ -1284,7 +1324,7 @@
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0004,
-   "inst_pct": 0.9203,
+   "inst_pct": 0.91998,
    "short_delta": 0.0,
    "short_pct": 0.062
   },
@@ -1298,7 +1338,7 @@
     "note": "Alphabet generates significant revenue across Europe, Middle East, Africa, Asia-Pacific, Canada, and Latin America, creating material geopol"
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0005,
+   "insider_net_pct": 0.0004,
    "inst_pct": 0.62308997,
    "short_delta": null,
    "short_pct": null
@@ -1330,16 +1370,16 @@
    },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.68736,
+   "inst_pct": 0.68722,
    "short_delta": 0.0,
    "short_pct": 0.026700001
   },
   "GRDN": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Operates solely within the US long-term care pharmacy services sector with no foreign exposure."
+    "note": "Operates solely within the U.S. serving long-term health care facilities, with no stated foreign exposure."
    },
    "informed_demand": 1,
    "insider_net_pct": 0.008,
@@ -1357,8 +1397,8 @@
     "note": "Garmin sells GPS and avionics products worldwide, indicating material but not severe foreign revenue exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0017,
-   "inst_pct": 0.58356,
+   "insider_net_pct": 0.0014,
+   "inst_pct": 0.58361,
    "short_delta": 0.0,
    "short_pct": 0.022
   },
@@ -1379,15 +1419,13 @@
   },
   "GWRE": {
    "gpr": {
-    "channels": [
-     "revenue_geography"
-    ],
-    "fetched_at": "2026-08-16",
-    "gpr_level": 1,
-    "note": "Provides software to insurers worldwide, indicating foreign revenue exposure but no sanctions or chokepoint dependence."
+    "channels": [],
+    "fetched_at": "2026-08-30",
+    "gpr_level": 0,
+    "note": "Provides software globally with no significant geopolitical exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.002,
+   "insider_net_pct": -0.0027,
    "inst_pct": 1.03738,
    "short_delta": 0.0,
    "short_pct": 0.0682
@@ -1402,20 +1440,20 @@
     "note": "Operates internationally across the US, Switzerland, Belgium, Japan, and other markets."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0007,
-   "inst_pct": 1.12544,
+   "insider_net_pct": 0.0001,
+   "inst_pct": 1.12349,
    "short_delta": 0.0,
    "short_pct": 0.1619
   },
   "HCSG": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Provides domestic facility management services to healthcare facilities in the United States with no foreign operations."
+    "note": "Operates solely within the United States, providing domestic healthcare services with no foreign exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0019,
+   "insider_net_pct": 0.0001,
    "inst_pct": 1.13095,
    "short_delta": 0.0,
    "short_pct": 0.045900002
@@ -1423,12 +1461,11 @@
   "HEI": {
    "gpr": {
     "channels": [
-     "revenue_geography",
-     "regulation"
+     "revenue_geography"
     ],
-    "fetched_at": "2026-07-05",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "HEICO operates internationally in aerospace and defense, facing moderate regulatory oversight and foreign revenue exposure."
+    "note": "Operates internationally in aerospace and defense, but profile indicates no severe geopolitical flashpoints or sanctions exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": null,
@@ -1439,7 +1476,7 @@
   "HG": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": 0.0027,
+   "insider_net_pct": 0.0013,
    "inst_pct": 0.85358,
    "short_delta": 0.0,
    "short_pct": 0.0276
@@ -1461,28 +1498,28 @@
   "HQY": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Domestic US-focused health savings account administrator with no geopolitical exposure."
+    "note": "Domestic US operations only; no significant geopolitical exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0018,
-   "inst_pct": 1.10566,
+   "inst_pct": 1.10477,
    "short_delta": 0.0,
    "short_pct": 0.066
   },
   "HRMY": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Company commercializes therapies for rare neurological diseases solely in the United States."
+    "note": "US-focused rare neurology company; no foreign revenue, supply chain, or sanctions exposure noted."
    },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.99621004,
-   "short_delta": -0.0151,
-   "short_pct": 0.1031
+   "inst_pct": 0.99643,
+   "short_delta": -0.0082,
+   "short_pct": 0.0949
   },
   "HWM": {
    "gpr": {
@@ -1497,9 +1534,9 @@
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0001,
-   "inst_pct": 0.93355006,
-   "short_delta": -0.0024,
-   "short_pct": 0.0174
+   "inst_pct": 0.93382,
+   "short_delta": 0.0013,
+   "short_pct": 0.0187
   },
   "IDCC": {
    "gpr": {
@@ -1535,20 +1572,27 @@
   "IESC": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "IES Holdings operates solely in the United States with no foreign revenue, supply chain, or geopolitical regulatory exposure indicated."
+    "note": "Operates solely within the United States, with no significant foreign revenue, supply chain, or sanctions exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0022,
-   "inst_pct": 0.97656,
-   "short_delta": -0.073,
-   "short_pct": 0.1014
+   "insider_net_pct": -0.0012,
+   "inst_pct": 0.97643995,
+   "short_delta": -0.0021,
+   "short_pct": 0.099300005
   },
   "IEX": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-08-30",
+    "gpr_level": 1,
+    "note": "Operates across North America, Europe, and Asia, giving it international revenue exposure but with no explicit chokepoint or sanctions risk."
+   },
    "informed_demand": 0,
-   "insider_net_pct": 0.0016,
+   "insider_net_pct": 0.0005,
    "inst_pct": 1.05722,
    "short_delta": 0.0,
    "short_pct": 0.0294
@@ -1558,9 +1602,9 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-07-10",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Operates hotels globally with significant revenue outside UK and US but no high-risk region concentration."
+    "note": "Operates hotels globally across many brands, with significant international revenue exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": null,
@@ -1571,14 +1615,15 @@
   "ILMN": {
    "gpr": {
     "channels": [
-     "revenue_geography"
+     "revenue_geography",
+     "regulation"
     ],
-    "fetched_at": "2026-08-21",
+    "fetched_at": "2026-08-30",
     "gpr_level": 2,
-    "note": "Operates globally including Greater China and Middle East, indicating material foreign revenue exposure."
+    "note": "Global revenue across Americas, Europe, Greater China, and other regions indicates material foreign exposure in a heavily regulated healthca"
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0081,
+   "insider_net_pct": -0.0089,
    "inst_pct": 1.05903,
    "short_delta": 0.0,
    "short_pct": 0.087299995
@@ -1588,12 +1633,12 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 2,
-    "note": "IMAX generates significant revenue from Greater China, a region with elevated geopolitical tensions."
+    "note": "Significant revenue from Greater China and other international markets exposes IMAX to geopolitical tensions."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0002,
+   "insider_net_pct": -0.0,
    "inst_pct": 0.99547994,
    "short_delta": 0.0,
    "short_pct": 0.2142
@@ -1603,26 +1648,26 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-07-05",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Foreign revenue from stable developed markets (Europe, Canada, Japan) but no high-risk exposure."
+    "note": "Company sells therapeutics in US, Europe, Canada, and Japan, indicating international revenue exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0011,
-   "inst_pct": 1.03872,
+   "inst_pct": 1.03834,
    "short_delta": 0.0,
    "short_pct": 0.0862
   },
   "INTU": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Operates primarily in the United States with domestic-focused financial software products."
+    "note": "Operates solely in the United States with no foreign revenue or supply chain exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.9449,
+   "inst_pct": 0.91207004,
    "short_delta": 0.0,
    "short_pct": 0.0509
   },
@@ -1653,9 +1698,9 @@
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0002,
-   "inst_pct": 0.62808996,
-   "short_delta": -0.0044,
-   "short_pct": 0.0808
+   "inst_pct": 0.62746,
+   "short_delta": 0.007,
+   "short_pct": 0.087799996
   },
   "ISRG": {
    "gpr": {
@@ -1667,8 +1712,8 @@
     "note": "Sells internationally but profile gives no specifics on exposure to geopolitical flashpoints or sanctions."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0007,
-   "inst_pct": 0.8968,
+   "insider_net_pct": 0.0005,
+   "inst_pct": 0.89569,
    "short_delta": 0.0,
    "short_pct": 0.0188
   },
@@ -1676,25 +1721,24 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.65255,
-   "short_delta": -0.002,
-   "short_pct": 0.0154,
-   "stale": true
+   "inst_pct": 0.64545995,
+   "short_delta": 0.0012,
+   "short_pct": 0.0166
   },
   "ITT": {
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": 0.0035,
-   "inst_pct": 1.01332,
+   "inst_pct": 1.01386,
    "short_delta": 0.0,
    "short_pct": 0.0915
   },
   "JBHT": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "J.B. Hunt provides surface transportation and logistics services solely within the United States."
+    "note": "Provides surface transportation and logistics services exclusively within the United States."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
@@ -1705,9 +1749,9 @@
   "JKHY": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Operates domestic financial technology services for U.S. banks and credit unions."
+    "note": "Operations and revenue are domestic-focused, serving US banks and credit unions with no foreign exposure described."
    },
    "informed_demand": 0,
    "insider_net_pct": null,
@@ -1742,14 +1786,15 @@
    "insider_net_pct": -0.0002,
    "inst_pct": 0.7691,
    "short_delta": 0.0,
-   "short_pct": 0.0117
+   "short_pct": 0.0117,
+   "stale": true
   },
   "JOE": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "All operations are domestic (United States), no geopolitical exposure."
+    "note": "Operates solely in the United States with no material geopolitical exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0084,
@@ -1786,7 +1831,7 @@
    },
    "informed_demand": 1,
    "insider_net_pct": 0.0203,
-   "inst_pct": 1.01762,
+   "inst_pct": 1.03114,
    "short_delta": 0.0,
    "short_pct": 0.0589
   },
@@ -1817,7 +1862,14 @@
    "stale": true
   },
   "KNSA": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography"
+    ],
+    "fetched_at": "2026-08-30",
+    "gpr_level": 1,
+    "note": "Operations span the US, UK, and internationally, but no specific geopolitical flashpoint exposure is indicated."
+   },
    "informed_demand": 1,
    "insider_net_pct": 0.0058,
    "inst_pct": 1.0079,
@@ -1828,9 +1880,9 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0,
-   "inst_pct": 0.68391,
-   "short_delta": -0.0007,
-   "short_pct": 0.0105
+   "inst_pct": 0.68363,
+   "short_delta": -0.0013,
+   "short_pct": 0.0092
   },
   "KOF": {
    "gpr": null,
@@ -1843,25 +1895,25 @@
   "KRT": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Domestic manufacturer and distributor of disposable foodservice packaging with no notable geopolitical exposure."
+    "note": "Domestic manufacturer/distributor of disposable packaging with no cited foreign exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": null,
-   "inst_pct": 0.37566003,
+   "insider_net_pct": 0.0,
+   "inst_pct": 0.37517,
    "short_delta": 0.0,
    "short_pct": 0.0312
   },
   "KRYS": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "US-focused commercial biotech; no significant geopolitical exposure indicated."
+    "note": "US-focused commercial biotech with no foreign revenue or supply chain exposure noted."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0,
+   "insider_net_pct": 0.0,
    "inst_pct": 1.02522,
    "short_delta": 0.0,
    "short_pct": 0.17719999
@@ -1880,13 +1932,13 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Operates in Mexico and Peru, generating foreign revenue from emerging markets with moderate geopolitical stability."
+    "note": "Operates higher education institutions in Mexico, Peru, and the US, with foreign revenue exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0,
-   "inst_pct": 1.0064701,
+   "inst_pct": 1.00491,
    "short_delta": 0.0,
    "short_pct": 0.0286
   },
@@ -1915,7 +1967,7 @@
     "note": "Global defense contractor with international customers and heavy government/export regulatory oversight."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0009,
+   "insider_net_pct": 0.0007,
    "inst_pct": 0.8928,
    "short_delta": 0.0,
    "short_pct": 0.0238
@@ -1923,7 +1975,7 @@
   "LITE": {
    "gpr": null,
    "informed_demand": 1,
-   "insider_net_pct": 0.0063,
+   "insider_net_pct": 0.0055,
    "inst_pct": 0.94488,
    "short_delta": 0.0,
    "short_pct": 0.1216
@@ -1940,9 +1992,8 @@
    "informed_demand": 1,
    "insider_net_pct": 0.0133,
    "inst_pct": 1.13182,
-   "short_delta": 0.0009,
-   "short_pct": 0.0864,
-   "stale": true
+   "short_delta": 0.0,
+   "short_pct": 0.0864
   },
   "LLY": {
    "gpr": {
@@ -1950,9 +2001,9 @@
      "revenue_geography",
      "regulation"
     ],
-    "fetched_at": "2026-08-09",
-    "gpr_level": 1,
-    "note": "Operates internationally across US, Europe, China, and Japan, with pharmaceutical products subject to multi-regional regulatory oversight."
+    "fetched_at": "2026-08-30",
+    "gpr_level": 2,
+    "note": "Operates across US, Europe, China, and Japan, with significant international revenue and heavy pharmaceutical regulation."
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0018,
@@ -1986,8 +2037,8 @@
     "note": "International operations expose the company to moderate geopolitical risk from cross-border e-commerce and government asset sales."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0,
-   "inst_pct": 0.80617,
+   "insider_net_pct": 0.0,
+   "inst_pct": 0.80639,
    "short_delta": 0.0,
    "short_pct": 0.0496
   },
@@ -2013,16 +2064,18 @@
    "insider_net_pct": 0.0004,
    "inst_pct": 0.98248,
    "short_delta": 0.0137,
-   "short_pct": 0.1374
+   "short_pct": 0.1374,
+   "stale": true
   },
   "MA": {
    "gpr": {
     "channels": [
-     "revenue_geography"
+     "revenue_geography",
+     "regulation"
     ],
-    "fetched_at": "2026-08-16",
-    "gpr_level": 1,
-    "note": "Operates internationally, generating revenue across multiple countries, but profile indicates no specific geopolitical flashpoint exposure."
+    "fetched_at": "2026-08-30",
+    "gpr_level": 2,
+    "note": "Operates internationally in payment processing, exposing it to foreign revenue and financial regulations."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0016,
@@ -2046,9 +2099,9 @@
   "MANH": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Software provider with no explicit geopolitical exposure in profile."
+    "note": "Software provider with no disclosed geopolitical exposure in profile."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0,
@@ -2115,15 +2168,15 @@
   "MCRI": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Operates casinos and hotels solely in Nevada and Colorado, with no international exposure."
+    "note": "Operates solely in Nevada and Colorado, with no foreign revenue or supply chain exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0005,
-   "inst_pct": 0.67024004,
-   "short_delta": -0.0072,
-   "short_pct": 0.041300002
+   "inst_pct": 0.67039,
+   "short_delta": 0.0047,
+   "short_pct": 0.046
   },
   "MD": {
    "gpr": {
@@ -2150,17 +2203,18 @@
   "MEDP": {
    "gpr": {
     "channels": [
-     "revenue_geography"
+     "revenue_geography",
+     "regulation"
     ],
-    "fetched_at": "2026-08-23",
-    "gpr_level": 1,
-    "note": "Clinical development services operate across multiple global regions, creating moderate foreign revenue exposure."
+    "fetched_at": "2026-08-30",
+    "gpr_level": 2,
+    "note": "Global clinical trial operations across multiple continents create material foreign revenue and heavy regulatory dependence."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0001,
-   "inst_pct": 0.91510004,
-   "short_delta": 0.0,
-   "short_pct": 0.078099996
+   "insider_net_pct": -0.0002,
+   "inst_pct": 0.91549003,
+   "short_delta": -0.0075,
+   "short_pct": 0.0706
   },
   "META": {
    "gpr": {
@@ -2173,8 +2227,8 @@
     "note": "Meta derives significant revenue from diverse international markets and faces heavy regulatory oversight across the EU and other regions."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0044,
-   "inst_pct": 0.79447997,
+   "insider_net_pct": 0.0047,
+   "inst_pct": 0.79103994,
    "short_delta": 0.0,
    "short_pct": 0.0143
   },
@@ -2189,9 +2243,9 @@
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.69735,
-   "short_delta": 0.0,
-   "short_pct": 0.026199998
+   "inst_pct": 0.69817,
+   "short_delta": 0.0012,
+   "short_pct": 0.0274
   },
   "MO": {
    "gpr": {
@@ -2222,7 +2276,8 @@
    "insider_net_pct": null,
    "inst_pct": 0.06084,
    "short_delta": null,
-   "short_pct": 0.0001
+   "short_pct": 0.0001,
+   "stale": true
   },
   "MOV": {
    "gpr": {
@@ -2235,8 +2290,8 @@
     "note": "Operates worldwide and sources watches globally, but no specific geopolitical flashpoints are detailed."
    },
    "informed_demand": 1,
-   "insider_net_pct": 0.006,
-   "inst_pct": 0.99727,
+   "insider_net_pct": 0.0061,
+   "inst_pct": 0.97335,
    "short_delta": 0.0,
    "short_pct": 0.065
   },
@@ -2253,8 +2308,8 @@
    "informed_demand": 0,
    "insider_net_pct": -0.0005,
    "inst_pct": 1.00092,
-   "short_delta": 0.0,
-   "short_pct": 0.0581
+   "short_delta": -0.0077,
+   "short_pct": 0.0504
   },
   "MRK": {
    "gpr": {
@@ -2294,10 +2349,10 @@
   "MU": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": -0.0009,
-   "inst_pct": 0.7999,
-   "short_delta": 0.0,
-   "short_pct": 0.026500002
+   "insider_net_pct": -0.0011,
+   "inst_pct": 0.79977,
+   "short_delta": 0.0001,
+   "short_pct": 0.026600001
   },
   "MYE": {
    "gpr": {
@@ -2345,15 +2400,15 @@
   "NHC": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Domestic US healthcare services operator with no foreign revenue or geopolitical supply chain exposure."
+    "note": "Domestic healthcare services; no apparent foreign revenue or geopolitical exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0003,
-   "inst_pct": 0.66819,
-   "short_delta": 0.0026,
-   "short_pct": 0.0589
+   "inst_pct": 0.66883004,
+   "short_delta": 0.0007,
+   "short_pct": 0.0596
   },
   "NICE": {
    "gpr": null,
@@ -2405,12 +2460,12 @@
   "NVEC": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "US-based semiconductor company with domestic operations and no explicit geopolitical exposure."
+    "note": "Operates domestically in the U.S. with no mentioned foreign revenue or supply chain exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0024,
+   "insider_net_pct": -0.0033,
    "inst_pct": 0.93776,
    "short_delta": 0.0,
    "short_pct": 0.120299995
@@ -2426,9 +2481,9 @@
    },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.072670005,
-   "short_delta": 0.0,
-   "short_pct": 0.0028
+   "inst_pct": 0.07266,
+   "short_delta": -0.0002,
+   "short_pct": 0.0026
   },
   "NVT": {
    "gpr": null,
@@ -2512,9 +2567,9 @@
   "PAYC": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "US-focused HCM software provider; no significant foreign revenue or geopolitical exposure."
+    "note": "Provides cloud-based HCM software solely to US-based small and mid-sized companies; no geopolitical exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0,
@@ -2533,13 +2588,13 @@
   "PCTY": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Provides cloud-based software solutions solely in the United States; no geopolitical exposure."
+    "note": "Provides cloud-based HCM software primarily in the US; no significant foreign exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0003,
-   "inst_pct": 0.89394,
+   "inst_pct": 0.89219004,
    "short_delta": 0.0,
    "short_pct": 0.07
   },
@@ -2560,6 +2615,14 @@
    "short_delta": 0.0,
    "short_pct": 0.028499998,
    "stale": true
+  },
+  "PH": {
+   "gpr": null,
+   "informed_demand": 0,
+   "insider_net_pct": 0.0045,
+   "inst_pct": 0.91418,
+   "short_delta": null,
+   "short_pct": 0.0123000005
   },
   "PKE": {
    "gpr": null,
@@ -2583,9 +2646,9 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.84502,
-   "short_delta": 0.0,
-   "short_pct": 0.0104
+   "inst_pct": 0.84514,
+   "short_delta": -0.0021,
+   "short_pct": 0.0083
   },
   "PODD": {
    "gpr": {
@@ -2607,7 +2670,7 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0002,
-   "inst_pct": 0.93528,
+   "inst_pct": 0.93491,
    "short_delta": 0.0,
    "short_pct": 0.111
   },
@@ -2644,13 +2707,13 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-21",
-    "gpr_level": 1,
-    "note": "Operates in Central America, Caribbean, and Colombia, exposing revenue to regional political instability."
+    "fetched_at": "2026-08-30",
+    "gpr_level": 2,
+    "note": "Significant revenue from operations in Central America, Caribbean, and Colombia, exposing it to regional geopolitical volatility."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0004,
-   "inst_pct": 1.02015,
+   "inst_pct": 1.02107,
    "short_delta": 0.0,
    "short_pct": 0.097600006
   },
@@ -2659,9 +2722,9 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "PTC operates across Americas, Europe, and Asia Pacific, indicating international revenue exposure but no stated flashpoint dependence."
+    "note": "Operates across Americas, Europe, and Asia Pacific, with global software sales."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0004,
@@ -2672,13 +2735,13 @@
   "QTWO": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Provides digital banking software primarily to US financial institutions; no significant foreign exposure."
+    "note": "Q2 Holdings operates solely in the United States, providing digital banking software to domestic financial institutions, with no foreign exp"
    },
    "informed_demand": 1,
    "insider_net_pct": 0.058,
-   "inst_pct": 1.09013,
+   "inst_pct": 1.0895,
    "short_delta": 0.0,
    "short_pct": 0.0992
   },
@@ -2707,8 +2770,8 @@
     "note": "Global medicine sales expose it to diverse regulatory environments, but no sanctions or flashpoint concentration noted."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0,
-   "inst_pct": 0.93412,
+   "insider_net_pct": 0.0001,
+   "inst_pct": 0.93444,
    "short_delta": 0.0,
    "short_pct": 0.0348
   },
@@ -2744,10 +2807,10 @@
   "RMBS": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": -0.0004,
-   "inst_pct": 0.94939005,
-   "short_delta": -0.0062,
-   "short_pct": 0.0511
+   "insider_net_pct": -0.0003,
+   "inst_pct": 0.9497,
+   "short_delta": 0.0168,
+   "short_pct": 0.0679
   },
   "RMD": {
    "gpr": {
@@ -2767,13 +2830,13 @@
   "RNG": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Profile shows no explicit foreign revenue, supply chain, or regulatory geopolitical exposure."
+    "note": "Profile shows no geopolitical exposure; cloud software with no geographic or supply chain details."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0002,
-   "inst_pct": 1.19028,
+   "insider_net_pct": 0.003,
+   "inst_pct": 1.18996,
    "short_delta": 0.0,
    "short_pct": 0.17719999
   },
@@ -2787,7 +2850,7 @@
     "note": "Global sales across multiple regions, but no specific geopolitical flashpoint or sanctions exposure mentioned."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0002,
+   "insider_net_pct": -0.0,
    "inst_pct": 0.93148005,
    "short_delta": 0.0,
    "short_pct": 0.0395
@@ -2797,9 +2860,9 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-21",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Diversified software firm with international sales across multiple regions, but no concentrated flashpoint exposure indicated."
+    "note": "Operates across multiple regions including Europe and Asia, indicating minor geopolitical revenue exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0001,
@@ -2810,13 +2873,13 @@
   "ROST": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Operates solely in the US with domestic retail; no significant geopolitical exposure."
+    "note": "Operates solely in the United States with no stated foreign revenue or geopolitical exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0002,
-   "inst_pct": 0.95286006,
+   "inst_pct": 0.95198995,
    "short_delta": 0.0,
    "short_pct": 0.0353
   },
@@ -2857,7 +2920,7 @@
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0,
-   "inst_pct": 0.8172,
+   "inst_pct": 0.81697,
    "short_delta": 0.0,
    "short_pct": 0.0134000005
   },
@@ -2866,13 +2929,13 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-09",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "SAP operates worldwide, generating significant revenue across many countries, but no severe geopolitical exposure is indicated."
+    "note": "Operates worldwide in enterprise software, but no specific geopolitical flashpoints or sanctions exposure indicated."
    },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 0.07746,
+   "inst_pct": 0.07742,
    "short_delta": 0.0,
    "short_pct": 0.0074
   },
@@ -2889,7 +2952,8 @@
    "insider_net_pct": null,
    "inst_pct": 0.80367994,
    "short_delta": 0.0016,
-   "short_pct": 0.0353
+   "short_pct": 0.0353,
+   "stale": true
   },
   "SENEB": {
    "gpr": {
@@ -2903,11 +2967,19 @@
    "informed_demand": 0,
    "insider_net_pct": null,
    "inst_pct": 0.05381,
-   "short_delta": 0.0002,
+   "short_delta": 0.0,
    "short_pct": 0.001
   },
   "SIMO": {
-   "gpr": null,
+   "gpr": {
+    "channels": [
+     "revenue_geography",
+     "supply_chain"
+    ],
+    "fetched_at": "2026-08-30",
+    "gpr_level": 2,
+    "note": "Operations and sales concentrated in Asia, including China and Taiwan, exposing it to regional geopolitical tensions."
+   },
    "informed_demand": 0,
    "insider_net_pct": null,
    "inst_pct": 0.75598997,
@@ -2927,7 +2999,8 @@
    "insider_net_pct": -0.0012,
    "inst_pct": 0.87811995,
    "short_delta": 0.0058,
-   "short_pct": 0.0553
+   "short_pct": 0.0553,
+   "stale": true
   },
   "SMTC": {
    "gpr": null,
@@ -2942,12 +3015,12 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Operates and sells in the US, China, and internationally, giving minor geopolitical revenue exposure."
+    "note": "Company sells products in the US, China, and internationally, indicating some foreign revenue exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0,
+   "insider_net_pct": 0.0001,
    "inst_pct": 0.68608004,
    "short_delta": 0.0,
    "short_pct": 0.1291
@@ -2971,15 +3044,15 @@
   "SPHR": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Operates solely in the United States as a live entertainment and media company with no geopolitical exposure noted."
+    "note": "Operates solely in the United States with no indicated foreign exposure or geopolitical dependencies."
    },
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.3409,
-   "short_delta": -0.0121,
-   "short_pct": 0.3199
+   "inst_pct": 1.34086,
+   "short_delta": 0.0052,
+   "short_pct": 0.32509997
   },
   "ST": {
    "gpr": null,
@@ -3023,8 +3096,8 @@
     "note": "International revenue across multiple regions, but no disclosed sanctions or flashpoint exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0022,
-   "inst_pct": 0.86948997,
+   "insider_net_pct": -0.0018,
+   "inst_pct": 0.86387,
    "short_delta": 0.0,
    "short_pct": 0.040599998
   },
@@ -3038,7 +3111,7 @@
     "note": "Stryker operates internationally but profile does not indicate material geopolitical exposure or sanctions-adjacent markets."
    },
    "informed_demand": 0,
-   "insider_net_pct": -0.0001,
+   "insider_net_pct": -0.0003,
    "inst_pct": 0.82961,
    "short_delta": 0.0,
    "short_pct": 0.0227
@@ -3100,8 +3173,8 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": -0.0,
-   "inst_pct": 0.49633,
-   "short_delta": -0.0097,
+   "inst_pct": 0.4948,
+   "short_delta": 0.0,
    "short_pct": 0.0419
   },
   "TILE": {
@@ -3133,9 +3206,9 @@
   "TT": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-16",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Trane Technologies designs and services HVAC and refrigeration solutions; no geopolitical exposure indicated in profile."
+    "note": "Company profile does not indicate geopolitical risk exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0009,
@@ -3155,22 +3228,22 @@
   "TYL": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Provides software primarily to US public sector with domestic operations and AWS cloud partnership."
+    "note": "Provides public sector software solutions in the United States only; no significant geopolitical exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0043,
-   "inst_pct": 1.08012,
-   "short_delta": -0.0009,
-   "short_pct": 0.0994
+   "insider_net_pct": 0.0041,
+   "inst_pct": 1.08015,
+   "short_delta": 0.007,
+   "short_pct": 0.106400006
   },
   "UFPT": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-07-10",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "UFP Technologies operates primarily in the US medical device and defense sectors, with no noted foreign exposure."
+    "note": "US-based manufacturer with no disclosed foreign operations or geopolitical exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0006,
@@ -3190,9 +3263,9 @@
   "UNP": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Operates solely within the United States, with no foreign revenue or supply chain exposure."
+    "note": "Operates solely in the United States with domestic rail transportation services."
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0002,
@@ -3218,13 +3291,13 @@
   "UVE": {
    "gpr": {
     "channels": [],
-    "fetched_at": "2026-08-23",
+    "fetched_at": "2026-08-30",
     "gpr_level": 0,
-    "note": "Company operates solely in the United States with no foreign revenue or geopolitical exposure."
+    "note": "Operates solely in the US personal residential insurance market with no direct geopolitical exposure."
    },
    "informed_demand": 0,
-   "insider_net_pct": 0.0002,
-   "inst_pct": 0.77696997,
+   "insider_net_pct": -0.0001,
+   "inst_pct": 0.77718,
    "short_delta": 0.0,
    "short_pct": 0.0579
   },
@@ -3261,9 +3334,9 @@
     "channels": [
      "revenue_geography"
     ],
-    "fetched_at": "2026-06-29",
+    "fetched_at": "2026-08-30",
     "gpr_level": 1,
-    "note": "Company generates significant revenue from international markets including Europe and Asia Pacific, exposing it to regional geopolitical shi"
+    "note": "International sales across Europe and Asia Pacific create minor geopolitical revenue exposure."
    },
    "informed_demand": 0,
    "insider_net_pct": -0.001,
@@ -3275,7 +3348,7 @@
    "gpr": null,
    "informed_demand": 0,
    "insider_net_pct": null,
-   "inst_pct": 1.01737,
+   "inst_pct": 1.01549,
    "short_delta": 0.0,
    "short_pct": 0.0352
   },
@@ -3345,8 +3418,8 @@
   "VRTX": {
    "gpr": null,
    "informed_demand": 0,
-   "insider_net_pct": -0.0011,
-   "inst_pct": 0.98240995,
+   "insider_net_pct": -0.001,
+   "inst_pct": 0.98123,
    "short_delta": 0.0,
    "short_pct": 0.0176
   },
@@ -3388,9 +3461,9 @@
    },
    "informed_demand": 0,
    "insider_net_pct": 0.0004,
-   "inst_pct": 1.0210099,
-   "short_delta": 0.0,
-   "short_pct": 0.0417
+   "inst_pct": 1.02046,
+   "short_delta": -0.0064,
+   "short_pct": 0.0353
   },
   "WTS": {
    "gpr": null,
@@ -3413,7 +3486,7 @@
    },
    "informed_demand": 0,
    "insider_net_pct": -0.0001,
-   "inst_pct": 0.93247,
+   "inst_pct": 0.93239,
    "short_delta": 0.0,
    "short_pct": 0.0223
   },
