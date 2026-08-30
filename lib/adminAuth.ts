@@ -33,8 +33,10 @@ export function verifySession(token: string | undefined): { login: string } | nu
     if (data.exp < Date.now()) return null;
     // Re-check the allowlist at the gate, not only at issuance: any future
     // signSession caller stays non-admin, and rotating ADMIN_GITHUB_LOGIN
-    // revokes outstanding sessions. Unset allowlist = deny everyone.
-    if (data.login.toLowerCase() !== (process.env.ADMIN_GITHUB_LOGIN || "").toLowerCase()) {
+    // revokes outstanding sessions. Unset/empty allowlist = deny everyone
+    // (the !allow guard also blocks an empty-login token from matching "").
+    const allow = (process.env.ADMIN_GITHUB_LOGIN || "").toLowerCase();
+    if (!allow || data.login.toLowerCase() !== allow) {
       return null;
     }
     return { login: data.login };
