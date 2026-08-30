@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { ADMIN_COOKIE, signSession } from "../../../../../lib/adminAuth";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");
@@ -36,7 +37,9 @@ export async function GET(req: NextRequest) {
   const res = NextResponse.redirect(new URL("/admin", req.url));
   res.cookies.set(ADMIN_COOKIE, signSession(user.login), {
     httpOnly: true,
-    secure: req.nextUrl.protocol === "https:",
+    // Hardcoded intent, not proxy-inferred: behind Vercel the origin protocol
+    // is unreliable, and a 30-day admin cookie must never ship without Secure.
+    secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     maxAge: 30 * 24 * 60 * 60,
     path: "/",

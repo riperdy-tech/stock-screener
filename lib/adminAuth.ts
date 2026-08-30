@@ -31,12 +31,20 @@ export function verifySession(token: string | undefined): { login: string } | nu
     const data = JSON.parse(Buffer.from(payload, "base64url").toString());
     if (typeof data.login !== "string" || typeof data.exp !== "number") return null;
     if (data.exp < Date.now()) return null;
+    // Re-check the allowlist at the gate, not only at issuance: any future
+    // signSession caller stays non-admin, and rotating ADMIN_GITHUB_LOGIN
+    // revokes outstanding sessions. Unset allowlist = deny everyone.
+    if (data.login.toLowerCase() !== (process.env.ADMIN_GITHUB_LOGIN || "").toLowerCase()) {
+      return null;
+    }
     return { login: data.login };
   } catch {
     return null;
   }
 }
 
+// Node-runtime only (crypto.createHmac): callable from route handlers and
+// server components — NOT from Edge middleware.
 export function requireAdmin(req: NextRequest): { login: string } | null {
   return verifySession(req.cookies.get(ADMIN_COOKIE)?.value);
 }

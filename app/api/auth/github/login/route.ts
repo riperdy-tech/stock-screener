@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function GET(request: Request) {
   const state = crypto.randomBytes(16).toString("hex");
@@ -17,7 +18,7 @@ export async function GET(request: Request) {
   );
   res.cookies.set("gh_oauth_state", state, {
     httpOnly: true,
-    secure: site.startsWith("https"),
+    secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     maxAge: 600,
     path: "/",
