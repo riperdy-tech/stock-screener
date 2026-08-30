@@ -202,7 +202,7 @@ The CSV and JSON are saved **incrementally every 5 stocks** with atomic file-swa
 Runs **DeepSeek V4 Pro** AI analysis on individual stocks using a comprehensive prompt built from the stock's financial data (the `financials/{TICKER}.json` detail + screening metrics).
 
 ### Flow
-1. User clicks "Ask AI" on a stock in the dashboard (enters password `RSYS`)
+1. User clicks "Ask AI" on a stock in the dashboard (enters password `poe`)
 2. Frontend calls `/api/analysis` → inserts a `pending` job into Supabase (`ai_reports` table)
 3. Triggers a **GitHub Actions workflow** (`trigger-ai-analysis`)
 4. GitHub runner executes `ai_worker.py`:

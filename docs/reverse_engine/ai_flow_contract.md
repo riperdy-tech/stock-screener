@@ -12,14 +12,14 @@ User clicks "Generate AI Prompt" in StockDetailModal
   → ScreenerDashboard.handleAiReview(result) called
     → buildPrompt(ticker, result) loads financial data + RS2.txt → constructs full prompt
     → AI modal opens showing the generated prompt
-User enters password "RSYS" and clicks "Run Deepseek"
+User enters password "poe" and clicks "Run Deepseek"
   → ScreenerDashboard.handleDeepseekRun() fires
     → POST /api/analysis { password, ticker, prompt }
 ```
 
 **Files**: `StockDetailModal.tsx` (line 173: `onClick={() => onAskGemini && onAskGemini(candidate.symbol)}`), `ScreenerDashboard.tsx` (line 138: `handleAiReview`, line 66: `handleDeepseekRun`)
 
-**Password**: `"RSYS"` (hardcoded) or `process.env.APP_PASSWORD` (env override)
+**Password**: `"poe"` (hardcoded) or `process.env.APP_PASSWORD` (env override)
 
 ---
 
@@ -30,7 +30,7 @@ User enters password "RSYS" and clicks "Run Deepseek"
 **Receives**: `POST { password, ticker, prompt }`
 
 **What it does**:
-1. Validates password (RSYS or APP_PASSWORD)
+1. Validates password (poe or APP_PASSWORD)
 2. **DELETES** any existing `ai_reports` row for the ticker (clears old pending/error)
 3. **INSERTS** a new row: `{ ticker, content: "Analysis in progress...", status: "pending", prompt, created_at }`
 4. Triggers GitHub Actions workflow via `POST https://api.github.com/repos/riperdy-tech/stock-screener/dispatches` with `event_type: "trigger-ai-analysis"`

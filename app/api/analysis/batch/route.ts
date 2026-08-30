@@ -75,7 +75,7 @@ export async function POST(req: Request) {
         const { tickers, password } = await req.json();
 
         // ── Auth — identical to existing single-stock route ──
-        if (password !== "RSYS" && password !== process.env.APP_PASSWORD) {
+        if (password !== "poe" && password !== process.env.APP_PASSWORD) {
             return NextResponse.json({ error: "Unauthorized: Invalid password" }, { status: 401 });
         }
 

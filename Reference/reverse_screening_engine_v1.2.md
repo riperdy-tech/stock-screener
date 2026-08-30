@@ -352,7 +352,7 @@ In Reverse Engine mode, show `rev_archetype`, `rev_composite`, `rev_band`, `rev_
 
 ### 10.3 The deep-dive action
 
-In `StockDetailModal.tsx` you already have the "Ask AI" trigger (password `RSYS` → `/api/analysis` → `ai_worker.py`). Add:
+In `StockDetailModal.tsx` you already have the "Ask AI" trigger (password `poe` → `/api/analysis` → `ai_worker.py`). Add:
 
 | New action | Behavior |
 |---|---|

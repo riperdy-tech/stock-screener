@@ -418,6 +418,19 @@ export async function fetchOndemandReport(ticker: string): Promise<DepthReportBu
     return fetchJson<DepthReportBundle>(`/data/ondemand_reports/${encodeURIComponent(ticker.toUpperCase())}.json`);
 }
 
+// The INBOUND request queue (Supabase ondemand_queue, served by /api/ondemand) —
+// distinct from OndemandRequestRow above, which is a PUBLISHED verdict. A row here
+// is a request waiting for / handled by the operator's PC; its verdict later
+// appears as an OndemandRequestRow in the published index.
+export interface OndemandQueueRow {
+    id: number;
+    ticker: string;
+    status: 'pending' | 'claimed' | 'handled' | 'failed';
+    message: string | null;
+    requested_at: string;
+    handled_at: string | null;
+}
+
 export async function fetchFactorScores(): Promise<FactorScoresPayload | null> {
     return fetchJson<FactorScoresPayload>('/data/factor_scores.json');
 }

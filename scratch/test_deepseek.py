@@ -3,7 +3,7 @@ import json
 
 url = "http://localhost:3000/api/deepseek"
 payload = {
-    "password": "RSYS",
+    "password": "poe",
     "ticker": "ELVA",
     "prompt": "Test prompt for ELVA."
 }

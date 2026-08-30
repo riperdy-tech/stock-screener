@@ -29,7 +29,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
     const [askError, setAskError] = useState("");
 
     const handleGeneratePrompt = () => {
-        if (askPassword !== "RSYS") { setAskError("Incorrect password"); return; }
+        if (askPassword !== "poe") { setAskError("Incorrect password"); return; }
         setShowAskPw(false);
         setAskPassword("");
         setAskError("");
