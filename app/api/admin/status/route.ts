@@ -111,9 +111,15 @@ export async function GET(req: NextRequest) {
     html_url: run.html_url,
   }));
 
-  const kisVars: Record<string, string> = {};
-  for (const v of varsRaw?.variables ?? []) {
-    if (KIS_VAR_ALLOWLIST.includes(String(v.name))) kisVars[v.name] = v.value;
+  // null (GitHub unreachable) is NOT {} (reachable, no KIS_* set): an empty
+  // object would render "KIS_HALT: not set" and arm the halt button on a
+  // dashboard that in fact knows nothing about the real KIS state.
+  let kisVars: Record<string, string> | null = null;
+  if (varsRaw !== null) {
+    kisVars = {};
+    for (const v of varsRaw?.variables ?? []) {
+      if (KIS_VAR_ALLOWLIST.includes(String(v.name))) kisVars[v.name] = v.value;
+    }
   }
 
   return NextResponse.json({

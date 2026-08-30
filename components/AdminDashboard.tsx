@@ -11,6 +11,10 @@ const STATE_STYLE: Record<string, string> = {
   unknown: "bg-gray-800 border-gray-600 text-gray-400",
 };
 
+// Windows scheduled-task exit codes worth treating as non-alarming.
+// 267009 = task currently running, 267014 = task was terminated by the user.
+const TASK_RC_OK: Record<number, string> = { 0: "ok", 267009: "running", 267014: "terminated" };
+
 function ageLabel(ageMin: number | null): string {
   if (ageMin === null) return "no data";
   if (ageMin < 60) return `${ageMin}m ago`;
@@ -87,6 +91,10 @@ export default function AdminDashboard({ login }: { login: string }) {
   // undefined renders as "not set" and the button offers to halt.
   const halted = status?.kisVars?.KIS_HALT === "true";
   const haltDisplay = status?.kisVars?.KIS_HALT ?? "not set";
+  // Three distinct states: status===null (not loaded yet), kisVars===null
+  // (loaded, but GitHub was unreachable — KIS state genuinely UNKNOWN), and
+  // an object (authoritative; {} legitimately means "no KIS_* set").
+  const kisUnreachable = status !== null && status.kisVars == null;
 
   return (
     <main className="min-h-screen bg-gray-950 text-gray-100 p-6 space-y-8">
@@ -130,6 +138,56 @@ export default function AdminDashboard({ login }: { login: string }) {
                 <p className="mt-1 text-xs break-words">
                   snapshot_error: {String(status.pc.payload.snapshot_error)}
                 </p>
+              )}
+              {/* The heartbeat carries a whole rhythm snapshot; showing only its
+                  age wasted it. Timestamps below are NAIVE LOCAL (UTC+8) — they
+                  are rendered verbatim and must never be parsed as UTC. */}
+              {r.key === "pc" && status?.pc?.payload && (
+                <div className="mt-2 space-y-0.5 text-xs opacity-90">
+                  {status.pc.payload.depth && (
+                    <div>
+                      depth: {status.pc.payload.depth?.paused ? "PAUSED" : "active"}
+                      {" · "}lock {status.pc.payload.depth?.lock ? "held" : "free"}
+                      {status.pc.payload.depth?.progress?.ticker
+                        ? ` · on ${String(status.pc.payload.depth.progress.ticker)}`
+                        : ""}
+                    </div>
+                  )}
+                  {(status.pc.payload.bot || status.pc.payload.ondemand) && (
+                    <div>
+                      bot: {status.pc.payload.bot?.alive ? "alive" : "DOWN"}
+                      {" · "}ondemand queue{" "}
+                      {String(status.pc.payload.ondemand?.queue_lines ?? "?")}
+                    </div>
+                  )}
+                  {status.pc.payload.sync && (
+                    <div
+                      className={
+                        typeof status.pc.payload.sync?.last_result === "string" &&
+                        (status.pc.payload.sync.last_result.startsWith("error") ||
+                          status.pc.payload.sync.last_result === "raised")
+                          ? "font-semibold text-red-300"
+                          : ""
+                      }
+                    >
+                      state sync: {String(status.pc.payload.sync?.last_result ?? "—")}
+                    </div>
+                  )}
+                  {Object.entries(status.pc.payload.tasks ?? {}).map(
+                    ([name, info]: [string, any]) => {
+                      const rc = info?.LastTaskResult;
+                      const bad = !(typeof rc === "number" && rc in TASK_RC_OK);
+                      return (
+                        <div key={name} className={bad ? "font-semibold text-red-300" : ""}>
+                          {name.replace(/^RS2-/, "")}: rc{" "}
+                          {rc === undefined || rc === null ? "?" : String(rc)}
+                          {typeof rc === "number" && TASK_RC_OK[rc] ? ` (${TASK_RC_OK[rc]})` : ""}
+                          {info?.LastRunTime ? ` · last ${String(info.LastRunTime)}` : ""}
+                        </div>
+                      );
+                    }
+                  )}
+                </div>
               )}
               {(r.state === "stale" || r.state === "dead") && (
                 <p className="mt-2 text-xs leading-relaxed opacity-90">{r.manualRecovery}</p>
@@ -247,6 +305,10 @@ export default function AdminDashboard({ login }: { login: string }) {
               null the truthful label is "loading", and the button stays off. */}
           {status === null ? (
             <div className="text-sm text-gray-400">KIS state loading…</div>
+          ) : kisUnreachable ? (
+            <div className="text-sm text-amber-300">
+              GitHub unreachable — KIS state unknown
+            </div>
           ) : (
           <div className="text-sm">
             {Object.entries(status?.kisVars ?? {}).map(([k, v]) => (
@@ -262,7 +324,7 @@ export default function AdminDashboard({ login }: { login: string }) {
           </div>
           )}
           <button
-            disabled={busy !== null || status === null}
+            disabled={busy !== null || status === null || kisUnreachable}
             onClick={() =>
               post("/api/admin/kis", { halt: !halted }, halted ? "resume KIS" : "HALT KIS",
                 halted

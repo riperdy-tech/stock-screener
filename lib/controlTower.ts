@@ -31,7 +31,7 @@ export const RHYTHMS: Rhythm[] = [
     staleAfterMin: 15,
     deadAfterMin: 60,
     manualRecovery:
-      "PC is offline or the RS2-Control-Agent task stopped. If you can power the PC on, do that — the agent self-heals on boot+logon. If you cannot: depth sweeps fall to the Depth cloud backstop (auto, daily) and SDF falls to the GitHub cron backstop (auto). Nothing else needs you.",
+      "PC is offline or the RS2-Control-Agent task stopped. If you can power the PC on, do that — the agent self-heals on boot+logon. If you cannot: depth sweeps fall to the Depth cloud backstop (auto, daily) and SDF falls to the GitHub cron backstop (auto). Nothing else needs you. If Supabase is also down the backstop's heartbeat gate reads 'unreadable' and refuses to run — only then use 'Depth cloud backstop (FORCE)'.",
   },
   {
     key: "sdf",
@@ -54,7 +54,7 @@ export const RHYTHMS: Rhythm[] = [
     staleAfterMin: 8 * 60,
     deadAfterMin: 36 * 60,
     manualRecovery:
-      "If the PC is on: send PC command 'depth_run_now' below. If the PC is off: dispatch 'Depth cloud backstop' below (runs the DeepSeek arm from rs2-state), or from a terminal: gh workflow run depth-cloud-backstop.yml -R riperdy-tech/rs2-local",
+      "If the PC is on: send PC command 'depth_run_now' below. If the PC is off: dispatch 'Depth cloud backstop' below (runs the DeepSeek arm from rs2-state), or from a terminal: gh workflow run depth-cloud-backstop.yml -R riperdy-tech/rs2-local. If that keeps skipping because the heartbeat is unreadable (Supabase down) and you know the PC is dead, use 'Depth cloud backstop (FORCE)'.",
   },
   {
     key: "chain",
@@ -179,6 +179,16 @@ export const DISPATCHABLE: Record<string, Dispatchable> = {
     confirm:
       "Runs a billable DeepSeek cloud job (~$0.70 for 6 names). Its preflight " +
       "still skips unless the overlay is stale and the PC is dead.",
+  },
+  "depth-cloud-backstop-force": {
+    repo: "riperdy-tech/rs2-local",
+    file: "depth-cloud-backstop.yml",
+    inputs: { force: "true" },
+    label: "Depth cloud backstop (FORCE)",
+    confirm:
+      "FORCE bypasses BOTH gates (overlay freshness + PC-alive interlock). " +
+      "Only when you are certain the PC is dead and normal dispatch keeps " +
+      "skipping (e.g. Supabase outage). Billable.",
   },
 };
 
