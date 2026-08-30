@@ -14,8 +14,11 @@ export async function POST(req: NextRequest) {
   if (!PC_COMMANDS.has(command)) {
     return NextResponse.json({ error: "unknown command" }, { status: 400 });
   }
+  // Explicit runner REQUIRED: the agent defaults an absent runner to
+  // self-hosted, which must never happen without the caller saying so
+  // (same policy as the dispatch route's confirm gate on sdf-self).
   if (command === "sdf_dispatch" &&
-      !["self-hosted", "ubuntu-latest", undefined].includes(args?.runner)) {
+      !["self-hosted", "ubuntu-latest"].includes(args?.runner)) {
     return NextResponse.json({ error: "bad runner" }, { status: 400 });
   }
   // supabaseAdmin is null when SUPABASE_SERVICE_KEY is unset: fail as JSON 500

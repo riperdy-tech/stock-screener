@@ -1,6 +1,7 @@
 // app/api/admin/kis/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "../../../../lib/adminAuth";
+import { KIS_VAR_ALLOWLIST } from "../../../../lib/controlTower";
 
 export const dynamic = "force-dynamic";
 // requireAdmin -> verifySession uses crypto.createHmac: Node runtime only.
@@ -19,14 +20,19 @@ function ghHeaders() {
 
 export async function GET(req: NextRequest) {
   if (!requireAdmin(req)) return new NextResponse("Unauthorized", { status: 401 });
-  const r = await fetch(`https://api.github.com/repos/${REPO}/actions/variables?per_page=30`, {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/actions/variables?per_page=100`, {
     headers: ghHeaders(),
     cache: "no-store",
   });
+  // On the kill-switch panel, "GitHub unreachable" must never read as
+  // "KIS_HALT not set" — fail loudly instead of returning an empty map.
+  if (!r.ok) {
+    return NextResponse.json({ error: `github ${r.status}` }, { status: 502 });
+  }
   const data = await r.json();
   const vars: Record<string, string> = {};
   for (const v of data?.variables ?? []) {
-    if (String(v.name).startsWith("KIS_")) vars[v.name] = v.value;
+    if (KIS_VAR_ALLOWLIST.includes(String(v.name))) vars[v.name] = v.value;
   }
   return NextResponse.json({ vars });
 }

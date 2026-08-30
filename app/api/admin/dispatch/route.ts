@@ -10,8 +10,13 @@ export const runtime = "nodejs";
 export async function POST(req: NextRequest) {
   if (!requireAdmin(req)) return new NextResponse("Unauthorized", { status: 401 });
   const { action, confirmed } = await req.json();
-  const entry = DISPATCHABLE[action as string];
-  if (!entry) return NextResponse.json({ error: "unknown action" }, { status: 400 });
+  // hasOwnProperty guard: bare bracket access on an object literal lets
+  // prototype keys ("constructor", "__proto__") slip past the whitelist.
+  if (typeof action !== "string" ||
+      !Object.prototype.hasOwnProperty.call(DISPATCHABLE, action)) {
+    return NextResponse.json({ error: "unknown action" }, { status: 400 });
+  }
+  const entry = DISPATCHABLE[action];
   // Server-side gate: entries carrying a confirm text (queue-blocking or
   // billable dispatches) require the caller to assert confirmation explicitly.
   if (entry.confirm && confirmed !== true) {

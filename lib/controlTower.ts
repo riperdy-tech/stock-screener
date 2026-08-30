@@ -178,6 +178,18 @@ export const DISPATCHABLE: Record<string, Dispatchable> = {
   },
 };
 
+// Single source of truth for which KIS_* repo variables the admin surfaces may
+// return — keeps any future sensitive KIS_* variable out of dashboard JSON by
+// construction. Imported by /api/admin/status and /api/admin/kis.
+export const KIS_VAR_ALLOWLIST = [
+  "KIS_ENV",
+  "KIS_LEDGER",
+  "KIS_AUTO_EXECUTE",
+  "KIS_CONFIRM_REAL",
+  "KIS_HALT",
+  "KIS_DD_DISABLE",
+];
+
 // Must exactly match COMMANDS in RS2 Local\control_agent.py.
 // (No "ondemand" — the site's /api/ondemand -> ondemand_queue -> bot bridge
 // already carries remote on-demand analysis requests.)

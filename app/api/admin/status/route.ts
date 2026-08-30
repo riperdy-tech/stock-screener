@@ -1,7 +1,7 @@
 // app/api/admin/status/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "../../../../lib/adminAuth";
-import { RHYTHMS, classify, parseStamp } from "../../../../lib/controlTower";
+import { KIS_VAR_ALLOWLIST, RHYTHMS, classify, parseStamp } from "../../../../lib/controlTower";
 import { supabaseAdmin } from "../../../../lib/supabase";
 
 export const dynamic = "force-dynamic";
@@ -111,10 +111,6 @@ export async function GET(req: NextRequest) {
     html_url: run.html_url,
   }));
 
-  // Explicit allowlist: keeps any future sensitive KIS_* variable out of the
-  // dashboard JSON by construction.
-  const KIS_VAR_ALLOWLIST = ["KIS_ENV", "KIS_LEDGER", "KIS_AUTO_EXECUTE",
-    "KIS_CONFIRM_REAL", "KIS_HALT", "KIS_DD_DISABLE"];
   const kisVars: Record<string, string> = {};
   for (const v of varsRaw?.variables ?? []) {
     if (KIS_VAR_ALLOWLIST.includes(String(v.name))) kisVars[v.name] = v.value;
