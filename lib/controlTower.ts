@@ -157,6 +157,10 @@ export const DISPATCHABLE: Record<string, Dispatchable> = {
     file: "kis-sync.yml",
     inputs: { env: "paper", execute: "false" },
     label: "KIS sync dry-run (paper)",
+    confirm:
+      "Fires a real kis-sync workflow run (paper account, execute=false — no " +
+      "orders). Note: currently guaranteed-red while the paper account is empty " +
+      "(dd_engine zero-peak bug).",
   },
   "overlay-watchdog": {
     repo: "riperdy-tech/stock-screener",

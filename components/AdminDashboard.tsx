@@ -1,8 +1,8 @@
 // components/AdminDashboard.tsx
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { DISPATCHABLE } from "../lib/controlTower";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { DISPATCHABLE, PC_COMMANDS } from "../lib/controlTower";
 
 const STATE_STYLE: Record<string, string> = {
   ok: "bg-emerald-900/40 border-emerald-600 text-emerald-300",
@@ -22,10 +22,17 @@ export default function AdminDashboard({ login }: { login: string }) {
   const [status, setStatus] = useState<any>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [authLost, setAuthLost] = useState(false);
+  const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const refresh = useCallback(async () => {
     try {
       const r = await fetch("/api/admin/status", { cache: "no-store" });
+      if (r.status === 401) {
+        // Session expired/revoked: a frozen board must not impersonate truth.
+        setAuthLost(true);
+        return;
+      }
       if (r.ok) setStatus(await r.json());
     } catch {
       /* keep last snapshot */
@@ -47,6 +54,7 @@ export default function AdminDashboard({ login }: { login: string }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
+      if (r.status === 401) setAuthLost(true);
       const data = await r.json().catch(() => ({}));
       setToast(r.ok ? `✓ ${label}` : `✗ ${label}: ${data.error || r.status}`);
     } catch (e: any) {
@@ -54,8 +62,25 @@ export default function AdminDashboard({ login }: { login: string }) {
     } finally {
       setBusy(null);
       setTimeout(refresh, 1500);
-      setTimeout(() => setToast(null), 6000);
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+      toastTimer.current = setTimeout(() => setToast(null), 6000);
     }
+  }
+
+  if (authLost) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gray-950 text-gray-100">
+        <div className="text-center space-y-4">
+          <p>Session expired — the board stopped updating.</p>
+          <a
+            href="/api/auth/github/login"
+            className="inline-block rounded-lg border border-gray-700 px-6 py-3 text-lg hover:bg-gray-800"
+          >
+            Sign in again
+          </a>
+        </div>
+      </main>
+    );
   }
 
   // KIS_HALT may not exist yet as a repo variable (created on first halt):
@@ -116,21 +141,37 @@ export default function AdminDashboard({ login }: { login: string }) {
 
       <section>
         <h2 className="mb-3 text-lg font-semibold">Cloud dispatch</h2>
-        <div className="flex flex-wrap gap-2">
-          {Object.entries(DISPATCHABLE).map(([key, d]) => (
-            <button
-              key={key}
-              disabled={busy !== null}
-              onClick={() =>
-                post("/api/admin/dispatch",
-                  { action: key, ...(d.confirm ? { confirmed: true } : {}) },
-                  d.label, d.confirm)
-              }
-              className="rounded border border-gray-600 px-3 py-2 text-sm hover:bg-gray-800 disabled:opacity-50"
-            >
-              {d.label}
-            </button>
-          ))}
+        {/* Benign (no-confirm) and guarded dispatches are visually separated:
+            identical buttons in one row produced a real mis-click in testing. */}
+        <div className="flex flex-wrap gap-3">
+          {Object.entries(DISPATCHABLE)
+            .filter(([, d]) => !d.confirm)
+            .map(([key, d]) => (
+              <button
+                key={key}
+                disabled={busy !== null}
+                onClick={() => post("/api/admin/dispatch", { action: key }, d.label)}
+                className="rounded border border-gray-600 px-4 py-3 text-sm hover:bg-gray-800 disabled:opacity-50"
+              >
+                {d.label}
+              </button>
+            ))}
+        </div>
+        <div className="mt-3 flex flex-wrap gap-3 border-t border-gray-800 pt-3">
+          {Object.entries(DISPATCHABLE)
+            .filter(([, d]) => !!d.confirm)
+            .map(([key, d]) => (
+              <button
+                key={key}
+                disabled={busy !== null}
+                onClick={() =>
+                  post("/api/admin/dispatch", { action: key, confirmed: true }, d.label, d.confirm)
+                }
+                className="rounded border border-amber-600 px-4 py-3 text-sm text-amber-300 hover:bg-amber-900/30 disabled:opacity-50"
+              >
+                ⚠ {d.label}
+              </button>
+            ))}
         </div>
       </section>
 
@@ -142,8 +183,9 @@ export default function AdminDashboard({ login }: { login: string }) {
           </span>
         </h2>
         <div className="flex flex-wrap items-center gap-2">
-          {["depth_pause", "depth_resume", "depth_run_now", "bot_restart", "state_sync"].map(
-            (c) => (
+          {Array.from(PC_COMMANDS)
+            .filter((c) => c !== "sdf_dispatch")
+            .map((c) => (
               <button
                 key={c}
                 disabled={busy !== null}
@@ -176,6 +218,7 @@ export default function AdminDashboard({ login }: { login: string }) {
               <tr>
                 <th className="px-2 py-1">id</th>
                 <th className="px-2 py-1">command</th>
+                <th className="px-2 py-1">args</th>
                 <th className="px-2 py-1">status</th>
                 <th className="px-2 py-1">result</th>
               </tr>
@@ -185,6 +228,9 @@ export default function AdminDashboard({ login }: { login: string }) {
                 <tr key={c.id} className="border-t border-gray-800">
                   <td className="px-2 py-1">{c.id}</td>
                   <td className="px-2 py-1">{c.command}</td>
+                  <td className="px-2 py-1">
+                    {c.args && Object.keys(c.args).length ? JSON.stringify(c.args) : ""}
+                  </td>
                   <td className="px-2 py-1">{c.status}</td>
                   <td className="max-w-md truncate px-2 py-1">{c.result}</td>
                 </tr>
@@ -197,6 +243,11 @@ export default function AdminDashboard({ login }: { login: string }) {
       <section>
         <h2 className="mb-3 text-lg font-semibold">KIS (real money)</h2>
         <div className="flex flex-wrap items-center gap-4 rounded-lg border border-gray-700 p-4">
+          {/* "not set" may only be asserted from LOADED data — while status is
+              null the truthful label is "loading", and the button stays off. */}
+          {status === null ? (
+            <div className="text-sm text-gray-400">KIS state loading…</div>
+          ) : (
           <div className="text-sm">
             {Object.entries(status?.kisVars ?? {}).map(([k, v]) => (
               <div key={k}>
@@ -209,8 +260,9 @@ export default function AdminDashboard({ login }: { login: string }) {
               </div>
             )}
           </div>
+          )}
           <button
-            disabled={busy !== null}
+            disabled={busy !== null || status === null}
             onClick={() =>
               post("/api/admin/kis", { halt: !halted }, halted ? "resume KIS" : "HALT KIS",
                 halted
