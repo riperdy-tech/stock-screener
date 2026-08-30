@@ -37,11 +37,16 @@ export async function GET(req: NextRequest) {
 
   const fileKeys = RHYTHMS.filter((r) => r.kind === "file");
   const [files, runsRaw, varsRaw, hb, cmds] = await Promise.all([
-    Promise.all(fileKeys.map((r) => fetchJson(`${RAW}/${r.file}`))),
+    // Repos are PRIVATE: raw.githubusercontent 404s without the PAT header.
+    Promise.all(fileKeys.map((r) => fetchJson(`${RAW}/${r.file}`, ghHeaders()))),
     fetchJson(`${API}/repos/${REPO}/actions/runs?per_page=30`, ghHeaders()),
     fetchJson(`${API}/repos/${REPO}/actions/variables?per_page=30`, ghHeaders()),
-    supabaseAdmin.from("control_heartbeat").select("*").eq("id", "rs2-pc").maybeSingle(),
-    supabaseAdmin.from("control_commands").select("*").order("id", { ascending: false }).limit(15),
+    supabaseAdmin
+      ? supabaseAdmin.from("control_heartbeat").select("*").eq("id", "rs2-pc").maybeSingle()
+      : Promise.resolve(null),
+    supabaseAdmin
+      ? supabaseAdmin.from("control_commands").select("*").order("id", { ascending: false }).limit(15)
+      : Promise.resolve(null),
   ]);
 
   const now = Date.now();
