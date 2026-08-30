@@ -136,6 +136,7 @@ export function Shell({ tab, factor, depthMeta, ledgers, loading, onReload, chil
                     <div className="ml-auto flex flex-wrap items-baseline justify-end gap-x-4 gap-y-2 font-mono font-semibold text-[11px] uppercase tracking-[.05em]">
                         <Link href="/lenses" className="text-ink-2 hover:text-ink">{t('navLenses')}</Link>
                         <Link href="/reports" className="text-ink-2 hover:text-ink">{t('navReports')}</Link>
+                        <Link href="/ondemand" className="text-ink-2 hover:text-ink">{t('navOndemand')}</Link>
                         <button onClick={() => setShowChangelog(true)} className="text-ink-2 hover:text-ink" title="What's new">
                             v{APP_VERSION}
                         </button>

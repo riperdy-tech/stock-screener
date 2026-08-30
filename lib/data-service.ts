@@ -387,6 +387,37 @@ export async function fetchDepthOverlay(): Promise<DepthOverlayPayload | null> {
     return fetchJson<DepthOverlayPayload>('/data/depth_overlay.json');
 }
 
+// ── On-demand (operator-requested) analyses ─────────────────────────────────
+// Written by RS2 Local's on-demand path (depth_ondemand.py / orchestrate_depth
+// build_ondemand_bundles) to DEDICATED files: these verdicts are one-shots and are
+// deliberately invisible to the overlay, rankings and the paper portfolios. Bundles
+// share the depth_reports schema, so DepthReportBundle is reused verbatim.
+export interface OndemandRequestRow {
+    ticker: string;
+    date: string | null;
+    direction: DepthVerdict['direction'];
+    iv_band_low: number | null;
+    iv_band_high: number | null;
+    price: number | null;
+    size_hint: DepthVerdict['size_hint'];
+    spread_pct: number | null;
+    consensus_dir: string | null;
+}
+
+export interface OndemandIndexPayload {
+    generated_at: string;
+    count: number;
+    requests: OndemandRequestRow[];   // every on-demand verdict, newest first
+}
+
+export async function fetchOndemandIndex(): Promise<OndemandIndexPayload | null> {
+    return fetchJson<OndemandIndexPayload>('/data/ondemand_index.json');
+}
+
+export async function fetchOndemandReport(ticker: string): Promise<DepthReportBundle | null> {
+    return fetchJson<DepthReportBundle>(`/data/ondemand_reports/${encodeURIComponent(ticker.toUpperCase())}.json`);
+}
+
 export async function fetchFactorScores(): Promise<FactorScoresPayload | null> {
     return fetchJson<FactorScoresPayload>('/data/factor_scores.json');
 }
