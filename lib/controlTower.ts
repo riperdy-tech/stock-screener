@@ -17,6 +17,9 @@ export interface Rhythm {
   workflowFile?: string;
   staleAfterMin: number;
   deadAfterMin: number;
+  /** rhythm's cron only runs Mon-Fri: Sat/Sun/Mon get +48h grace so the
+   *  72h Fri->Mon gap doesn't read as a false "dead" every weekend */
+  weekdaysOnly?: boolean;
   manualRecovery: string;
 }
 
@@ -71,6 +74,7 @@ export const RHYTHMS: Rhythm[] = [
     workflowFile: "kis-sync.yml",
     staleAfterMin: 30 * 60,
     deadAfterMin: 55 * 60,
+    weekdaysOnly: true,
     manualRecovery:
       "KIS sync is cloud-native (ubuntu-latest) — a missed run is a GitHub cron delay or a red run. Check the run log first. NEVER dispatch with env=real from here; if trading must stop, flip KIS_HALT below.",
   },
@@ -81,6 +85,7 @@ export const RHYTHMS: Rhythm[] = [
     workflowFile: "price-refresh.yml",
     staleAfterMin: 30 * 60,
     deadAfterMin: 55 * 60,
+    weekdaysOnly: true,
     manualRecovery: "Dispatch 'Post-close price refresh' below.",
   },
   {
@@ -101,10 +106,19 @@ export function parseStamp(s: string | undefined, naiveTz?: string): Date | null
   return isNaN(d.getTime()) ? null : d;
 }
 
-export function classify(ageMin: number | null, r: Rhythm): RhythmState {
+export function classify(ageMin: number | null, r: Rhythm, now: Date = new Date()): RhythmState {
   if (ageMin === null) return "unknown";
-  if (ageMin >= r.deadAfterMin) return "dead";
-  if (ageMin >= r.staleAfterMin) return "stale";
+  let stale = r.staleAfterMin;
+  let dead = r.deadAfterMin;
+  if (r.weekdaysOnly) {
+    const day = now.getUTCDay(); // 0 Sun .. 6 Sat
+    if (day === 6 || day === 0 || day === 1) {
+      stale += 48 * 60;
+      dead += 48 * 60;
+    }
+  }
+  if (ageMin >= dead) return "dead";
+  if (ageMin >= stale) return "stale";
   return "ok";
 }
 
@@ -113,7 +127,8 @@ export interface Dispatchable {
   file: string;
   inputs?: Record<string, string>;
   label: string;
-  danger?: boolean;
+  /** when set, the UI must show this confirm dialog before dispatching */
+  confirm?: string;
 }
 
 export const DISPATCHABLE: Record<string, Dispatchable> = {
@@ -128,6 +143,9 @@ export const DISPATCHABLE: Record<string, Dispatchable> = {
     file: "schedule-data-fetch.yml",
     inputs: { runner: "self-hosted" },
     label: "Data fetch (PC runner)",
+    confirm:
+      "Only dispatch while the PC is ON. A self-hosted job queued against an " +
+      "offline runner blocks the data-writers queue (price refresh, weekly analyst).",
   },
   "price-refresh": {
     repo: "riperdy-tech/stock-screener",
@@ -154,7 +172,9 @@ export const DISPATCHABLE: Record<string, Dispatchable> = {
     repo: "riperdy-tech/rs2-local",
     file: "depth-cloud-backstop.yml",
     label: "Depth cloud backstop",
-    danger: true,
+    confirm:
+      "Runs a billable DeepSeek cloud job (~$0.70 for 6 names). Its preflight " +
+      "still skips unless the overlay is stale and the PC is dead.",
   },
 };
 
