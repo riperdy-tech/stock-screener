@@ -2,7 +2,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { DISPATCHABLE, PC_COMMANDS } from "../lib/controlTower";
+import { DISPATCHABLE, PC_COMMANDS, PC_COMMAND_INFO } from "../lib/controlTower";
 
 const STATE_STYLE: Record<string, string> = {
   ok: "bg-emerald-900/40 border-emerald-600 text-emerald-300",
@@ -120,7 +120,11 @@ export default function AdminDashboard({ login }: { login: string }) {
       )}
 
       <section>
-        <h2 className="mb-3 text-lg font-semibold">Rhythms</h2>
+        <h2 className="text-lg font-semibold">Rhythms</h2>
+        <p className="mb-3 mt-1 text-sm text-gray-400">
+          Health of every scheduled loop. Green = on schedule; amber/red cards include
+          the recovery steps. These cards are information only — nothing to press.
+        </p>
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {(status?.rhythms ?? []).map((r: any) => (
             <div key={r.key} className={`rounded-lg border p-4 ${STATE_STYLE[r.state]}`}>
@@ -198,7 +202,12 @@ export default function AdminDashboard({ login }: { login: string }) {
       </section>
 
       <section>
-        <h2 className="mb-3 text-lg font-semibold">Cloud dispatch</h2>
+        <h2 className="text-lg font-semibold">Cloud dispatch</h2>
+        <p className="mb-3 mt-1 text-sm text-gray-400">
+          Every button here starts a job on GitHub right now and works even when the PC
+          is off. Grey buttons are free and safe to press; amber ⚠ buttons cost money or
+          need the PC, so they ask you to confirm first.
+        </p>
         {/* Benign (no-confirm) and guarded dispatches are visually separated:
             identical buttons in one row produced a real mis-click in testing. */}
         <div className="flex flex-wrap gap-3">
@@ -209,9 +218,10 @@ export default function AdminDashboard({ login }: { login: string }) {
                 key={key}
                 disabled={busy !== null}
                 onClick={() => post("/api/admin/dispatch", { action: key }, d.label)}
-                className="rounded border border-gray-600 px-4 py-3 text-sm hover:bg-gray-800 disabled:opacity-50"
+                className="w-64 rounded border border-gray-600 px-4 py-3 text-left text-sm hover:bg-gray-800 disabled:opacity-50"
               >
-                {d.label}
+                <span className="font-medium">{d.label}</span>
+                <span className="mt-1 block text-xs leading-snug text-gray-400">{d.desc}</span>
               </button>
             ))}
         </div>
@@ -225,21 +235,31 @@ export default function AdminDashboard({ login }: { login: string }) {
                 onClick={() =>
                   post("/api/admin/dispatch", { action: key, confirmed: true }, d.label, d.confirm)
                 }
-                className="rounded border border-amber-600 px-4 py-3 text-sm text-amber-300 hover:bg-amber-900/30 disabled:opacity-50"
+                className="w-64 rounded border border-amber-600 px-4 py-3 text-left text-sm text-amber-300 hover:bg-amber-900/30 disabled:opacity-50"
               >
-                ⚠ {d.label}
+                <span className="font-medium">⚠ {d.label}</span>
+                <span className="mt-1 block text-xs leading-snug text-amber-200/70">{d.desc}</span>
               </button>
             ))}
         </div>
       </section>
 
       <section>
-        <h2 className="mb-3 text-lg font-semibold">
-          PC commands{" "}
-          <span className="text-sm font-normal text-gray-400">
-            (executed by the agent within ~5 min while the PC is on)
-          </span>
-        </h2>
+        <h2 className="text-lg font-semibold">PC commands</h2>
+        <p className="mb-3 mt-1 text-sm text-gray-400">
+          These queue an instruction for the PC; the agent runs it within ~5 minutes
+          while the PC is on. If the PC is off, the command waits in the queue and runs
+          when it comes back.
+        </p>
+        {(() => {
+          const pcState = (status?.rhythms ?? []).find((r: any) => r.key === "pc")?.state;
+          return pcState === "stale" || pcState === "dead" ? (
+            <p className="mb-3 rounded border border-amber-600 bg-amber-900/30 px-3 py-2 text-sm text-amber-200">
+              The PC looks {pcState} right now — anything you press below will sit in the
+              queue until the PC is back on and logged in.
+            </p>
+          ) : null;
+        })()}
         <div className="flex flex-wrap items-center gap-2">
           {Array.from(PC_COMMANDS)
             .filter((c) => c !== "sdf_dispatch")
@@ -248,9 +268,12 @@ export default function AdminDashboard({ login }: { login: string }) {
                 key={c}
                 disabled={busy !== null}
                 onClick={() => post("/api/admin/command", { command: c }, c)}
-                className="rounded border border-gray-600 px-3 py-2 text-sm hover:bg-gray-800 disabled:opacity-50"
+                className="w-56 rounded border border-gray-600 px-3 py-2 text-left text-sm hover:bg-gray-800 disabled:opacity-50"
               >
-                {c}
+                <span className="font-medium">{PC_COMMAND_INFO[c]?.label ?? c}</span>
+                <span className="mt-0.5 block text-xs leading-snug text-gray-400">
+                  {PC_COMMAND_INFO[c]?.desc ?? ""}
+                </span>
               </button>
             )
           )}
@@ -262,9 +285,12 @@ export default function AdminDashboard({ login }: { login: string }) {
                 "sdf_dispatch (self-hosted)",
                 "Ask the PC to self-dispatch SDF on its own runner? Only useful while the PC is on.")
             }
-            className="rounded border border-gray-600 px-3 py-2 text-sm hover:bg-gray-800 disabled:opacity-50"
+            className="w-56 rounded border border-gray-600 px-3 py-2 text-left text-sm hover:bg-gray-800 disabled:opacity-50"
           >
-            sdf_dispatch
+            <span className="font-medium">{PC_COMMAND_INFO.sdf_dispatch.label}</span>
+            <span className="mt-0.5 block text-xs leading-snug text-gray-400">
+              {PC_COMMAND_INFO.sdf_dispatch.desc}
+            </span>
           </button>
           <a href="/ondemand" className="ml-2 text-sm text-gray-400 underline">
             on-demand /analyze lives on /ondemand
@@ -299,7 +325,12 @@ export default function AdminDashboard({ login }: { login: string }) {
       </section>
 
       <section>
-        <h2 className="mb-3 text-lg font-semibold">KIS (real money)</h2>
+        <h2 className="text-lg font-semibold">KIS (real money)</h2>
+        <p className="mb-3 mt-1 text-sm text-gray-400">
+          Live trading state, read-only. The one control here is the big button: HALT
+          stops all trading until you press Resume. Everything else changes only via
+          repo variables on GitHub.
+        </p>
         <div className="flex flex-wrap items-center gap-4 rounded-lg border border-gray-700 p-4">
           {/* "not set" may only be asserted from LOADED data — while status is
               null the truthful label is "loading", and the button stays off. */}
@@ -343,7 +374,10 @@ export default function AdminDashboard({ login }: { login: string }) {
       </section>
 
       <section>
-        <h2 className="mb-3 text-lg font-semibold">Recent workflow runs</h2>
+        <h2 className="text-lg font-semibold">Recent workflow runs</h2>
+        <p className="mb-3 mt-1 text-sm text-gray-400">
+          Read-only log of what ran on GitHub. Click a workflow name to open its full log.
+        </p>
         <div className="max-h-64 overflow-y-auto rounded border border-gray-800">
           <table className="w-full text-left text-xs">
             <thead className="bg-gray-900 text-gray-400">

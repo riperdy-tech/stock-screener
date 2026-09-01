@@ -127,6 +127,8 @@ export interface Dispatchable {
   file: string;
   inputs?: Record<string, string>;
   label: string;
+  /** one-line plain-language answer to "what happens if I press this?" */
+  desc: string;
   /** when set, the UI must show this confirm dialog before dispatching */
   confirm?: string;
 }
@@ -137,12 +139,14 @@ export const DISPATCHABLE: Record<string, Dispatchable> = {
     file: "schedule-data-fetch.yml",
     inputs: { runner: "ubuntu-latest" },
     label: "Data fetch (cloud)",
+    desc: "Re-fetch market data + re-score on GitHub's servers. Safe anytime; ~1h.",
   },
   "sdf-self": {
     repo: "riperdy-tech/stock-screener",
     file: "schedule-data-fetch.yml",
     inputs: { runner: "self-hosted" },
     label: "Data fetch (PC runner)",
+    desc: "Same fetch, but on the PC. Only while the PC is on.",
     confirm:
       "Only dispatch while the PC is ON. A self-hosted job queued against an " +
       "offline runner blocks the data-writers queue (price refresh, weekly analyst).",
@@ -151,12 +155,14 @@ export const DISPATCHABLE: Record<string, Dispatchable> = {
     repo: "riperdy-tech/stock-screener",
     file: "price-refresh.yml",
     label: "Post-close price refresh",
+    desc: "Pull latest closing prices and re-run scoring. Safe anytime.",
   },
   "kis-dry-run": {
     repo: "riperdy-tech/stock-screener",
     file: "kis-sync.yml",
     inputs: { env: "paper", execute: "false" },
     label: "KIS sync dry-run (paper)",
+    desc: "Test the KIS pipeline on the paper account. Never places orders.",
     confirm:
       "Fires a real kis-sync workflow run (paper account, execute=false — no " +
       "orders). Note: currently guaranteed-red while the paper account is empty " +
@@ -166,16 +172,19 @@ export const DISPATCHABLE: Record<string, Dispatchable> = {
     repo: "riperdy-tech/stock-screener",
     file: "overlay-freshness-watchdog.yml",
     label: "Overlay freshness check",
+    desc: "Check depth-overlay freshness and alert if stale. Changes nothing.",
   },
   "weekly-analyst": {
     repo: "riperdy-tech/stock-screener",
     file: "paradigm-weekly-analyst.yml",
     label: "Weekly analyst refresh",
+    desc: "Regenerate the weekly analyst coverage. Safe anytime.",
   },
   "depth-cloud-backstop": {
     repo: "riperdy-tech/rs2-local",
     file: "depth-cloud-backstop.yml",
     label: "Depth cloud backstop",
+    desc: "PAID DeepSeek run (~$0.70 / 6 names). Auto-skips unless overlay stale and PC dead.",
     confirm:
       "Runs a billable DeepSeek cloud job (~$0.70 for 6 names). Its preflight " +
       "still skips unless the overlay is stale and the PC is dead.",
@@ -185,6 +194,7 @@ export const DISPATCHABLE: Record<string, Dispatchable> = {
     file: "depth-cloud-backstop.yml",
     inputs: { force: "true" },
     label: "Depth cloud backstop (FORCE)",
+    desc: "Same paid run with ALL safety gates bypassed. Last resort (e.g. Supabase down).",
     confirm:
       "FORCE bypasses BOTH gates (overlay freshness + PC-alive interlock). " +
       "Only when you are certain the PC is dead and normal dispatch keeps " +
@@ -215,3 +225,14 @@ export const PC_COMMANDS = new Set([
   "bot_restart",
   "state_sync",
 ]);
+
+// UI-only friendly names + one-liners for the PC commands above. Keys must be
+// a subset of PC_COMMANDS; the raw command string stays the API contract.
+export const PC_COMMAND_INFO: Record<string, { label: string; desc: string }> = {
+  depth_pause: { label: "Pause depth sweep", desc: "Stop analyzing new names until resumed." },
+  depth_resume: { label: "Resume depth sweep", desc: "Clear the pause and continue the sweep." },
+  depth_run_now: { label: "Run depth sweep now", desc: "Start a sweep pass immediately." },
+  sdf_dispatch: { label: "Data fetch (from PC)", desc: "PC re-runs today's data fetch on its own runner." },
+  bot_restart: { label: "Restart Telegram bot", desc: "Restart the /analyze bot bridge if it died." },
+  state_sync: { label: "Sync depth backup", desc: "Push/pull the rs2-state backup right now." },
+};
