@@ -79,8 +79,10 @@ jobs:
           # backstop cron 4-9h late all week (2026-08-27..31): an age-based window
           # (was: 120 min) judged the ledger stale every night and re-fetched on
           # cloud even though the PC had already delivered on time.
-          # Fail OPEN: missing/unreadable ledger => stale => backstop fetches.
-          state=$(python - <<'PY' || echo stale
+          # Fail OPEN: missing/unreadable ledger => stale => backstop fetches —
+          # but say so, because a check that ERRORED every day would otherwise be
+          # indistinguishable from a genuinely missing fetch (full cloud bill).
+          state=$(python3 - <<'PY'
           import json, datetime
           now = datetime.datetime.now(datetime.timezone.utc)
           ts = json.load(open('public/data/paper_ledgers.json'))['last_updated']
@@ -93,7 +95,7 @@ jobs:
               cand = target(now - datetime.timedelta(days=1))
           print('fresh' if dt >= cand - datetime.timedelta(minutes=15) else 'stale')
           PY
-          )
+          ) || { echo "::warning::freshness check itself errored (ledger unreadable?) — failing OPEN to a cloud fetch"; state=stale; }
           echo "ledger vs latest primary target: ${state}"
           if [ "$state" = "stale" ]; then
             echo "STALE — PC path did not deliver a fresh ledger; backstop runs on cloud."

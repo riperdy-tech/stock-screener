@@ -46,6 +46,7 @@ on:
     - cron: '25 13 * * 1-5'
     - cron: '25 16 * * 1-5'
     - cron: '25 18 * * 1-5'
+    - cron: '25 19 * * 1-5'   # last-chance rung: still pre-close in EDT (20:00) and EST (21:00)
   workflow_dispatch:
     inputs:
       env:
@@ -90,6 +91,13 @@ on:
         type: boolean
         default: false
 
+# The dedupe gate reads run/job history via the API: it needs actions:read
+# explicitly, else a restricted default token 403s and the gate fails open
+# silently (every ladder rung would trade-check blind).
+permissions:
+  contents: read
+  actions: read
+
 concurrency:
   group: kis-sync
   cancel-in-progress: false
@@ -112,29 +120,32 @@ jobs:
       - run: pip install requests
 
       # BACKSTOP DEDUPE: crons (the whole ladder) are backstops behind the PC
-      # self-dispatch. Skip when ANY successful run today already reached its
-      # "Run sync" step and that step succeeded — dispatch or an earlier ladder
-      # arrival alike. Runs that were themselves gate-skipped (market closed,
-      # deduped) also read "success" but their sync step shows "skipped", so
-      # they do NOT suppress later arrivals. NOTE: a successful manual probe
-      # also counts and suppresses the backstop for the day — acceptable, the
-      # sync is near-idempotent and this gate is belt-and-suspenders. Fails
-      # OPEN (no skip) if the API calls error.
+      # self-dispatch. Skip when ANY successful run today carries a successful
+      # "Mark traded" step — i.e. a real sync execution (scheduled/as_scheduled,
+      # or manual execute). Probes, manual dry-runs and gate-skipped green runs
+      # never mark, so they can NOT suppress the day's real sync. Two near-
+      # simultaneous arrivals cannot double-trade either: the kis-sync
+      # concurrency group serializes runs, so the later one sees the earlier
+      # one's marker. Fails OPEN (no skip) if the API calls error.
       - name: Backstop dedupe gate
         id: dedupe
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || inputs.as_scheduled
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           TODAY=$(date -u +%Y-%m-%d)
           SKIP=false
+          # status=completed, NOT success: a run that traded and then failed a
+          # later step (e.g. artifact upload) still counts as today's sync.
           IDS=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/kis-sync.yml/runs" \
-                  -f status=success -f created=">=${TODAY}T00:00:00Z" -f per_page=20 \
-                  --jq '.workflow_runs[].id' 2>/dev/null || echo "")
+                  -f status=completed -f created=">=${TODAY}T00:00:00Z" -f per_page=20 \
+                  --jq '.workflow_runs[].id' 2>/dev/null) \
+            || { echo "::warning::dedupe gate could not list today's runs — failing OPEN (may double-check trade)"; IDS=""; }
           for id in $IDS; do
             SYNCED=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/jobs" \
-                       --jq '[.jobs[].steps[] | select(.name == "Run sync" and .conclusion == "success")] | length' \
-                       2>/dev/null || echo 0)
+                       --jq '[.jobs[].steps[] | select(.name == "Mark traded" and .conclusion == "success")] | length' \
+                       2>/dev/null) \
+              || { echo "::warning::dedupe gate could not read jobs of run ${id} — treating as not-traded"; SYNCED=0; }
             if [ "${SYNCED:-0}" -gt 0 ] 2>/dev/null; then
               echo "run ${id} already synced today — backstop skips."
               SKIP=true
@@ -142,7 +153,7 @@ jobs:
             fi
           done
           echo "skip=$SKIP" >> "$GITHUB_OUTPUT"
-          [ "$SKIP" = "true" ] || echo "no successful sync yet today — backstop proceeds to gates."
+          [ "$SKIP" = "true" ] || echo "no marked sync yet today — backstop proceeds to gates."
 
       # The cron is weekdays-only, but drift can still push a run past the close
       # (and a US market holiday is a weekday). Skip cleanly (green, no orders)
@@ -165,19 +176,36 @@ jobs:
       # running, or never started because the self-hosted runner was offline, the
       # newest last_updated is the previous post-close refresh (~19h old) and this
       # fails loudly instead of mirroring yesterday's book into the account.
+      # Target-anchored, three-state (was: a 6h age window, which produced red
+      # runs on early ladder arrivals and refused late-EST sessions):
+      #   fresh          — ledger written since today's 14:20 UTC fetch target: trade.
+      #   stale_pending  — no fresh data yet but it's not overdue (<17:30 UTC):
+      #                    skip GREEN, a later ladder arrival trades once it lands.
+      #   stale_overdue  — still no data after 17:30 UTC: fail RED. This is the
+      #                    one loud alarm that means the data pipeline missed a day.
+      # Gated on market-open so out-of-session arrivals never evaluate (no alarms
+      # at 9:25 UTC about a ledger that isn't due until 14:35).
       - name: Ledger freshness gate
-        if: (github.event_name == 'schedule' || inputs.as_scheduled) && steps.dedupe.outputs.skip != 'true'
+        id: fresh
+        if: (github.event_name == 'schedule' || inputs.as_scheduled) && steps.dedupe.outputs.skip != 'true' && steps.gate.outputs.open == 'true'
         run: |
-          AGE_H=$(python -c "
+          STATE=$(python -c "
           import json, datetime
+          now = datetime.datetime.now(datetime.timezone.utc)
           ts = json.load(open('public/data/paper_ledgers.json'))['last_updated']
           dt = datetime.datetime.fromisoformat(ts.replace('Z', '+00:00'))
-          print(round((datetime.datetime.now(datetime.timezone.utc) - dt).total_seconds() / 3600, 1))")
-          echo "paper_ledgers.json age: ${AGE_H}h"
-          if [ "$(python -c "print(1 if float('$AGE_H') > 6 else 0)")" = "1" ]; then
-            echo "::error::paper_ledgers.json is ${AGE_H}h old (>6h) — the data fetch did not produce a fresh ledger today. Refusing to trade on a stale book."
-            exit 1
-          fi
+          tgt = now.replace(hour=14, minute=20, second=0, microsecond=0)
+          overdue = now >= now.replace(hour=17, minute=30, second=0, microsecond=0)
+          print('fresh' if dt >= tgt else ('stale_overdue' if overdue else 'stale_pending'))")
+          echo "fresh=$STATE" >> "$GITHUB_OUTPUT"
+          echo "ledger vs today's 14:20Z fetch target: $STATE"
+          case "$STATE" in
+            stale_overdue)
+              echo "::error::no fresh ledger by 17:30 UTC — the data fetch missed today. Refusing to trade on a stale book."
+              exit 1 ;;
+            stale_pending)
+              echo "data not yet due — skipping cleanly; a later ladder arrival trades once it lands." ;;
+          esac
 
       # A manual run may target the real account via the env input; the schedule
       # never can (it only reads vars.KIS_ENV). Real + execute additionally needs
@@ -191,7 +219,8 @@ jobs:
           fi
 
       - name: Run sync
-        if: (github.event_name != 'schedule' && !inputs.as_scheduled) || steps.gate.outputs.open == 'true'
+        id: runsync
+        if: (github.event_name != 'schedule' && !inputs.as_scheduled) || (steps.gate.outputs.open == 'true' && steps.fresh.outputs.fresh == 'fresh')
         env:
           # Manual dispatch: the env input wins. Scheduled/as_scheduled: the repo variable.
           KIS_ENV: ${{ (github.event_name == 'workflow_dispatch' && !inputs.as_scheduled) && inputs.env || vars.KIS_ENV || 'paper' }}
@@ -223,7 +252,7 @@ jobs:
             python scripts/sync_kis_portfolio.py --probe
             exit $?
           fi
-          SCHED="${{ github.event_name == 'schedule' || inputs.as_scheduled == true }}"
+          SCHED="${{ github.event_name == 'schedule' || inputs.as_scheduled }}"
           if [ "$SCHED" = "true" ]; then
             [ "${{ vars.KIS_AUTO_EXECUTE }}" = "true" ] && FLAGS="--execute"
           else
@@ -241,8 +270,20 @@ jobs:
               FLAGS="$FLAGS --confirm-real"
             fi
           fi
+          # as_scheduled means "exactly like the cron": the turnover input is
+          # ignored there, not just env/execute/ledger.
+          TURNOVER="${{ inputs.max_turnover || '40' }}"
+          [ "$SCHED" = "true" ] && TURNOVER="40"
           python scripts/sync_kis_portfolio.py \
-            --max-turnover "${{ inputs.max_turnover || '40' }}" $FLAGS
+            --max-turnover "$TURNOVER" $FLAGS
+
+      # DEDUPE MARKER: read by the "Backstop dedupe gate" of later runs (and by
+      # /api/admin/takeover). Fires only for a real sync execution — never for
+      # probes, manual dry-runs, or runs whose sync step was gate-skipped — so
+      # only actual trading suppresses the rest of the day's ladder.
+      - name: Mark traded
+        if: steps.runsync.outcome == 'success' && !inputs.probe && (github.event_name == 'schedule' || inputs.as_scheduled || inputs.execute)
+        run: echo "traded — later ladder arrivals will dedupe-skip today"
 
       - name: Upload run log
         if: always()

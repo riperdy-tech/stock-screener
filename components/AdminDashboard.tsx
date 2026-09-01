@@ -114,11 +114,11 @@ export default function AdminDashboard({ login }: { login: string }) {
         onClick={async () => {
           if (
             !window.confirm(
-              "PC off or dying? This immediately runs everything the cloud can cover:\n" +
-                "· data fetch on GitHub's servers (~1h)\n" +
-                "· KIS sync now, if the US market is open (all safety gates still apply)\n" +
-                "· depth backstop (its own preflight decides whether to spend ~$0.70)\n\n" +
-                "The cron ladders also cover PC-off days automatically — this button is for 'right now'."
+              "PC off or dying? This checks what today still lacks and starts ONLY the missing pieces on cloud:\n" +
+                "· data fetch — only if today's data never landed\n" +
+                "· KIS sync — only if the market is open and today isn't synced yet\n" +
+                "· depth backstop — its own preflight decides\n\n" +
+                "Already-covered items are skipped. The cron ladders do the same automatically — this button is for 'right now'."
             )
           )
             return;
@@ -132,7 +132,11 @@ export default function AdminDashboard({ login }: { login: string }) {
             if (r.status === 401) setAuthLost(true);
             const data = await r.json().catch(() => ({}));
             setToast(
-              data.results ? data.results.join("\n") : `✗ cloud takeover: ${data.error || r.status}`
+              Array.isArray(data.results)
+                ? data.results
+                    .map((it: any) => `${it.ok ? "✓" : "✗ ATTENTION —"} ${it.msg}`)
+                    .join("\n")
+                : `✗ cloud takeover: ${data.error || r.status}`
             );
           } catch (e: any) {
             setToast(`✗ cloud takeover: ${e?.message || "network error"}`);
@@ -145,11 +149,12 @@ export default function AdminDashboard({ login }: { login: string }) {
         }}
         className="w-full rounded-lg border border-sky-600 bg-sky-900/20 px-4 py-3 text-left hover:bg-sky-900/40 disabled:opacity-50"
       >
-        <span className="font-semibold text-sky-300">☁ PC is off — run everything from cloud</span>
+        <span className="font-semibold text-sky-300">☁ PC is off — cover today from cloud</span>
         <span className="mt-1 block text-sm text-sky-200/70">
-          One press: cloud data fetch now, KIS sync now if the market is open, depth backstop if
-          due. Safe to press — every trading safety gate still applies, and the automatic
-          backstops cover you even if you never press it.
+          Checks what today still lacks and starts only the missing pieces on cloud; anything
+          already done is skipped, so pressing it twice (or on a finished day) does nothing.
+          The automatic backstops give the same coverage even if you never press it — this is
+          the impatient version.
         </span>
       </button>
 
