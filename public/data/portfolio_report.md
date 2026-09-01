@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-08-31T22:38:14Z
+Generated: 2026-09-01T01:01:58Z
 Macro flags: none
 Invested: **58.59%**  |  Cash: **41.41%**  |  Positions: 17
 
@@ -12,15 +12,15 @@ Invested: **58.59%**  |  Cash: **41.41%**  |  Positions: 17
 | 9 | **KNSA** | 5.0 | A | 44.0 | 80 | 9 | research_now | - | no_data | 6 | -3.129 | - |
 | 11 | **NBIX** | 3.46 | B | 69.63 | 75 | 11 | research_now | - | no_data | 5 | -2.484 | - |
 | 12 | **KRYS** | 2.25 | B | 46.88 | 75 | 12 | research_now | - | no_data | 6 | - | - |
-| 21 | **ABNB** | 1.8 | B | 79.53 | 80 | 21 | research_now | - | no_data | 5 | - | - |
-| 22 | **CART** | 4.05 | B | 75.35 | 80 | 22 | research_now | cloud_software | mid | 5 | -3.032 | - |
-| 25 | **VIK** | 5.0 | B | 76.99 | 75 | 25 | research_now | - | no_data | 6 | - | - |
+| 20 | **ABNB** | 1.8 | B | 79.53 | 80 | 20 | research_now | - | no_data | 5 | - | - |
+| 21 | **CART** | 4.05 | B | 75.35 | 80 | 21 | research_now | cloud_software | mid | 5 | -3.032 | - |
+| 24 | **VIK** | 5.0 | B | 76.99 | 75 | 24 | research_now | - | no_data | 6 | - | - |
 | 26 | **NVS** | 2.25 | B | 76.34 | 75 | 26 | research_now | glp1_metabolic | watch | 6 | - | - |
 | 27 | **SAP** | 2.1 | B | 72.78 | 70 | 27 | research_now | cloud_software | mid | - | - | - |
 | 28 | **RMD** | 1.32 | B | 81.2 | 75 | 28 | research_now | cloud_software | skip | 7 | -2.584 | - |
-| 39 | **PCTY** | 3.96 | B | 69.72 | 70 | 39 | research_now | cloud_software | mid | 7 | -2.57 | - |
+| 38 | **PCTY** | 3.96 | B | 69.72 | 70 | 38 | research_now | cloud_software | mid | 7 | -2.57 | - |
 | 40 | **KFY** | 5.0 | A | 69.33 | 80 | 40 | research_now | - | no_data | 8 | -2.619 | - |
-| 44 | **EXPE** | 5.0 | B | 80.72 | 80 | 44 | research_now | - | no_data | 6 | -2.758 | - |
+| 46 | **EXPE** | 5.0 | B | 80.72 | 80 | 46 | research_now | - | no_data | 6 | -2.758 | - |
 | 48 | **MAMA** | 1.62 | A | 41.83 | 75 | 48 | research_now | - | no_data | 5 | - | - |
 | 51 | **MCRI** | 5.0 | A | 67.28 | 80 | 51 | research_now | - | no_data | 8 | -2.953 | - |
 
@@ -50,9 +50,9 @@ Invested: **58.59%**  |  Cash: **41.41%**  |  Positions: 17
 - ADSK: no Kelly edge (expectations gap +13pts >= 0: price already assumes more growth than demonstrated)
 - ANET: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
 - LLY: no Kelly edge (expectations gap +13pts >= 0: price already assumes more growth than demonstrated)
-- AMZN: no Kelly edge (expectations gap +48pts >= 0: price already assumes more growth than demonstrated)
-- NHC: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
+- AMZN: no Kelly edge (expectations gap +47pts >= 0: price already assumes more growth than demonstrated)
 - MEDP: sized below minimum (0.52% < 0.75%)
+- NHC: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
 - GRDN: sector cap Healthcare (25.0%)
 - GD: no Kelly edge (expectations gap +4pts >= 0: price already assumes more growth than demonstrated)
 - CIEN: no Kelly edge (expectations gap +75pts >= 0: price already assumes more growth than demonstrated)
@@ -66,8 +66,8 @@ Invested: **58.59%**  |  Cash: **41.41%**  |  Positions: 17
 - MCO: no Kelly edge (expectations gap +12pts >= 0: price already assumes more growth than demonstrated)
 - UTHR: sector cap Healthcare (25.0%)
 - AZN: sector cap Healthcare (25.0%)
-- MNST: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - CLS: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
+- MNST: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - VRTX: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - LQDT: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
 - CMI: no Kelly edge (expectations gap +1pts >= 0: price already assumes more growth than demonstrated)
