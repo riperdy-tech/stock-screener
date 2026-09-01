@@ -1,19 +1,26 @@
 # KIS Portfolio Sync — mirrors a paper ledger into a KIS account.
 #
-# TRIGGER: own weekday cron (2026-08-25). Previously chained to Scheduled Data
-# Fetch completion via workflow_run; decoupled so the sync no longer depends on
-# where or whether that workflow ran — which matters now that the fetch runs on a
-# self-hosted runner that can be offline.
+# TRIGGER (2026-09-01): PRIMARY is the PC's Task Scheduler (RS2-KIS-Dispatch),
+# which fires `gh workflow run kis-sync.yml -f as_scheduled=true` at 16:25 UTC —
+# API dispatches arrive to the second. The weekday cron below is only a BACKSTOP
+# for PC-off days: GitHub cron delivery drifted 4-9h on 2026-08-27..31, landing
+# after the US close, so the market-hours gate skipped every run and the book
+# went unsynced (2026-08-31 missed entirely). The "Backstop dedupe gate" makes
+# the cron skip when a successful dispatch already ran today.
 #
-# The chain guaranteed the ledger had just been rewritten by a SUCCESSFUL fetch.
-# A cron cannot guarantee that (GitHub crons drift 0-3h), so that guarantee is
-# replaced by an explicit precondition: the "Ledger freshness gate" step below
-# reads last_updated from paper_ledgers.json and refuses to trade on a stale book.
+# as_scheduled=true makes a dispatch behave EXACTLY like the cron: env/execute/
+# ledger/confirm-real all come from repo variables, both gates active, manual
+# inputs ignored. The PC task therefore never carries credentials or the REAL
+# MONEY confirm phrase.
+#
+# History: previously chained to Scheduled Data Fetch via workflow_run; decoupled
+# 2026-08-25. The chain's guarantee (ledger just rewritten by a successful fetch)
+# is replaced by the "Ledger freshness gate": it reads last_updated from
+# paper_ledgers.json and refuses to trade on a stale book.
 #
 # 16:25 UTC is the median start time of the last 41 chained runs (16:31), so this
-# reproduces the existing trading window. With the worst-case +3h drift it still
-# lands inside the US session under both EDT (ends 20:00 UTC) and EST (21:00 UTC).
-# A market-hours gate skips post-close runs without failing them.
+# reproduces the existing trading window. A market-hours gate skips post-close
+# runs without failing them.
 #
 # Safety model:
 #   - Scheduled runs are DRY RUN unless repo variable KIS_AUTO_EXECUTE=true.
@@ -68,6 +75,10 @@ on:
         description: "With probe: also send ONE unfillable domestic order to test order permission"
         type: boolean
         default: false
+      as_scheduled:
+        description: "PC self-dispatch: behave exactly like the cron (repo vars govern env/execute/ledger; gates active; other inputs ignored)"
+        type: boolean
+        default: false
 
 concurrency:
   group: kis-sync
@@ -90,12 +101,36 @@ jobs:
 
       - run: pip install requests
 
+      # BACKSTOP DEDUPE: the cron is the backstop behind the PC self-dispatch.
+      # If any successful dispatch run of this workflow was created today since
+      # 14:00 UTC, the cron skips instead of syncing twice. NOTE: a successful
+      # manual run (e.g. a probe) also suppresses the backstop for the day —
+      # acceptable, the sync is near-idempotent and this gate is belt-and-
+      # suspenders. Fails OPEN (no skip) if the API call errors.
+      - name: Backstop dedupe gate
+        id: dedupe
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          N=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/kis-sync.yml/runs" \
+                -f event=workflow_dispatch -f status=success -f created=">=${TODAY}T14:00:00Z" \
+                --jq '.workflow_runs | length' 2>/dev/null || echo 0)
+          echo "successful dispatch runs since ${TODAY}T14:00Z: ${N:-0}"
+          if [ "${N:-0}" -gt 0 ] 2>/dev/null; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "PC self-dispatch already synced today — backstop skips."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       # The cron is weekdays-only, but drift can still push a run past the close
       # (and a US market holiday is a weekday). Skip cleanly (green, no orders)
       # when the session is not open — script-level guards stay as backstop.
       - name: Market-hours gate
         id: gate
-        if: github.event_name == 'schedule'
+        if: (github.event_name == 'schedule' || inputs.as_scheduled) && steps.dedupe.outputs.skip != 'true'
         run: |
           OPEN=$(python -c "
           from datetime import datetime, timezone
@@ -112,7 +147,7 @@ jobs:
       # newest last_updated is the previous post-close refresh (~19h old) and this
       # fails loudly instead of mirroring yesterday's book into the account.
       - name: Ledger freshness gate
-        if: github.event_name == 'schedule'
+        if: (github.event_name == 'schedule' || inputs.as_scheduled) && steps.dedupe.outputs.skip != 'true'
         run: |
           AGE_H=$(python -c "
           import json, datetime
@@ -129,7 +164,7 @@ jobs:
       # never can (it only reads vars.KIS_ENV). Real + execute additionally needs
       # the exact confirm phrase, so a real buy-in cannot be a mis-click.
       - name: Guard real-money manual runs
-        if: github.event_name == 'workflow_dispatch' && inputs.env == 'real' && inputs.execute
+        if: github.event_name == 'workflow_dispatch' && !inputs.as_scheduled && inputs.env == 'real' && inputs.execute
         run: |
           if [ "${{ inputs.confirm }}" != "REAL MONEY" ]; then
             echo "::error::real + execute requires confirm='REAL MONEY'"
@@ -137,21 +172,21 @@ jobs:
           fi
 
       - name: Run sync
-        if: github.event_name != 'schedule' || steps.gate.outputs.open == 'true'
+        if: (github.event_name != 'schedule' && !inputs.as_scheduled) || steps.gate.outputs.open == 'true'
         env:
-          # Manual dispatch: the env input wins. Chained runs: the repo variable.
-          KIS_ENV: ${{ github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV || 'paper' }}
-          KIS_APP_KEY: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_APP_KEY_REAL || secrets.KIS_APP_KEY_PAPER }}
-          KIS_APP_SECRET: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_APP_SECRET_REAL || secrets.KIS_APP_SECRET_PAPER }}
-          KIS_CANO: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_CANO_REAL || secrets.KIS_CANO_PAPER }}
-          KIS_ACNT_PRDT_CD: ${{ (github.event_name == 'workflow_dispatch' && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_ACNT_PRDT_CD_REAL || secrets.KIS_ACNT_PRDT_CD_PAPER }}
+          # Manual dispatch: the env input wins. Scheduled/as_scheduled: the repo variable.
+          KIS_ENV: ${{ (github.event_name == 'workflow_dispatch' && !inputs.as_scheduled) && inputs.env || vars.KIS_ENV || 'paper' }}
+          KIS_APP_KEY: ${{ ((github.event_name == 'workflow_dispatch' && !inputs.as_scheduled) && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_APP_KEY_REAL || secrets.KIS_APP_KEY_PAPER }}
+          KIS_APP_SECRET: ${{ ((github.event_name == 'workflow_dispatch' && !inputs.as_scheduled) && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_APP_SECRET_REAL || secrets.KIS_APP_SECRET_PAPER }}
+          KIS_CANO: ${{ ((github.event_name == 'workflow_dispatch' && !inputs.as_scheduled) && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_CANO_REAL || secrets.KIS_CANO_PAPER }}
+          KIS_ACNT_PRDT_CD: ${{ ((github.event_name == 'workflow_dispatch' && !inputs.as_scheduled) && inputs.env || vars.KIS_ENV) == 'real' && secrets.KIS_ACNT_PRDT_CD_REAL || secrets.KIS_ACNT_PRDT_CD_PAPER }}
           # No 'equal' fallback on purpose: the manual-dispatch input used to
           # default to "equal", which silently OVERRODE vars.KIS_LEDGER and would
           # have mirrored the wrong book on any manual run. The input now
           # defaults to blank so the repo variable wins; if that variable is also
           # missing this resolves to "" and ledger_weights() raises KeyError —
           # a loud failure with no orders, which is the correct outcome.
-          KIS_LEDGER: ${{ inputs.ledger || vars.KIS_LEDGER }}
+          KIS_LEDGER: ${{ (!inputs.as_scheduled && inputs.ledger) || vars.KIS_LEDGER }}
           KIS_PROBE_DOMESTIC_ORDER: ${{ inputs.probe_domestic_order == true && '1' || '' }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
@@ -169,7 +204,8 @@ jobs:
             python scripts/sync_kis_portfolio.py --probe
             exit $?
           fi
-          if [ "${{ github.event_name }}" = "schedule" ]; then
+          SCHED="${{ github.event_name == 'schedule' || inputs.as_scheduled == true }}"
+          if [ "$SCHED" = "true" ]; then
             [ "${{ vars.KIS_AUTO_EXECUTE }}" = "true" ] && FLAGS="--execute"
           else
             [ "${{ inputs.execute }}" = "true" ] && FLAGS="--execute"
@@ -179,10 +215,10 @@ jobs:
             # set would re-apply the same flow on every subsequent run.
             [ -n "${{ inputs.flow_usd }}" ] && FLAGS="$FLAGS --flow ${{ inputs.flow_usd }}"
           fi
-          # --confirm-real for a scheduled real run still gated by the repo variable;
-          # for a manual real run the guard step above already enforced the phrase.
+          # --confirm-real for a scheduled/as_scheduled real run still gated by the
+          # repo variable; for a manual real run the guard step enforced the phrase.
           if [ "$KIS_ENV" = "real" ]; then
-            if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ vars.KIS_CONFIRM_REAL }}" = "true" ]; then
+            if [ "$SCHED" != "true" ] || [ "${{ vars.KIS_CONFIRM_REAL }}" = "true" ]; then
               FLAGS="$FLAGS --confirm-real"
             fi
           fi
