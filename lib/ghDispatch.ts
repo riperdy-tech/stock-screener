@@ -3,6 +3,39 @@
 // /api/admin/dispatch (single whitelisted action) and /api/admin/takeover
 // (the PC-off composite). Never import from client components.
 
+export function ghHeaders(): Record<string, string> {
+  const token = process.env.GH_PAT || process.env.GITHUB_TOKEN || "";
+  return {
+    Authorization: `Bearer ${token}`,
+    Accept: "application/vnd.github+json",
+    "User-Agent": "rs2-control-tower",
+  };
+}
+
+export async function fetchJson(url: string): Promise<any | null> {
+  try {
+    const r = await fetch(url, { headers: ghHeaders(), cache: "no-store" });
+    if (!r.ok) return null;
+    return await r.json();
+  } catch {
+    return null;
+  }
+}
+
+/** Most recent SDF primary target (14:35 UTC weekday / 10:35 weekend), minus
+ *  15 min slack — the same anchor the SDF backstop preflight uses. */
+export function latestPrimaryTarget(now: Date = new Date()): Date {
+  const target = (d: Date) => {
+    const t = new Date(d);
+    const wd = t.getUTCDay();
+    t.setUTCHours(wd >= 1 && wd <= 5 ? 14 : 10, 35, 0, 0);
+    return t;
+  };
+  let cand = target(now);
+  if (cand > now) cand = target(new Date(now.getTime() - 86400000));
+  return new Date(cand.getTime() - 15 * 60000);
+}
+
 export async function dispatchWorkflow(
   repo: string,
   file: string,
