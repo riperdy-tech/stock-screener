@@ -12,7 +12,16 @@ on:
     # (~1 billed min) if the PC already wrote the ledger since ITS target time
     # today. Only a stale ledger (PC off, or its run failed) lets the backstop
     # actually fetch on the cloud.
-    - cron: '35 16 * * 1-5'   # weekday backstop  (PC target 14:35 UTC + 120m)
+    # Weekday BACKSTOP LADDER (2026-09-01): cron delivery drifts 0-9h, so
+    # several entries are scheduled and the target-anchored preflight decides
+    # which arrival fetches. On a normal day each extra arrival is ~1 billed
+    # preflight minute (skip); on a PC-off day the earliest arrival after the
+    # 14:35 target fetches and later ones skip. Early entries also catch up
+    # mornings after a fully-missed previous day.
+    - cron: '35 9 * * 1-5'
+    - cron: '35 11 * * 1-5'
+    - cron: '35 13 * * 1-5'
+    - cron: '35 16 * * 1-5'   # original weekday backstop (PC target 14:35 UTC + 120m)
     - cron: '35 12 * * 0,6'   # weekend backstop  (PC target 10:35 UTC + 120m)
   # Manual runs from the Actions tab; also the event the PC's self-dispatch uses.
   # Default ubuntu-latest = a human clicking "Run workflow" gets the cloud path;

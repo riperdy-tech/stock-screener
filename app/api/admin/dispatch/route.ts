@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "../../../../lib/adminAuth";
 import { DISPATCHABLE } from "../../../../lib/controlTower";
+import { dispatchWorkflow } from "../../../../lib/ghDispatch";
 
 export const dynamic = "force-dynamic";
 // requireAdmin -> verifySession uses crypto.createHmac: Node runtime only.
@@ -23,22 +24,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "confirmation required" }, { status: 400 });
   }
 
-  const token = process.env.GH_PAT || process.env.GITHUB_TOKEN;
-  const r = await fetch(
-    `https://api.github.com/repos/${entry.repo}/actions/workflows/${entry.file}/dispatches`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/vnd.github+json",
-        "User-Agent": "rs2-control-tower",
-      },
-      body: JSON.stringify({ ref: "main", ...(entry.inputs ? { inputs: entry.inputs } : {}) }),
-    }
-  );
-  if (r.status !== 204) {
-    const text = await r.text();
-    return NextResponse.json({ error: `github ${r.status}: ${text}` }, { status: 502 });
+  const res = await dispatchWorkflow(entry.repo, entry.file, entry.inputs);
+  if (!res.ok) {
+    return NextResponse.json({ error: res.error }, { status: 502 });
   }
   return NextResponse.json({ ok: true, label: entry.label });
 }
