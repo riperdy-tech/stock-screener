@@ -106,8 +106,52 @@ export default function AdminDashboard({ login }: { login: string }) {
       </header>
 
       {toast && (
-        <div className="rounded border border-gray-600 bg-gray-800 px-4 py-2">{toast}</div>
+        <div className="whitespace-pre-line rounded border border-gray-600 bg-gray-800 px-4 py-2">{toast}</div>
       )}
+
+      <button
+        disabled={busy !== null}
+        onClick={async () => {
+          if (
+            !window.confirm(
+              "PC off or dying? This immediately runs everything the cloud can cover:\n" +
+                "· data fetch on GitHub's servers (~1h)\n" +
+                "· KIS sync now, if the US market is open (all safety gates still apply)\n" +
+                "· depth backstop (its own preflight decides whether to spend ~$0.70)\n\n" +
+                "The cron ladders also cover PC-off days automatically — this button is for 'right now'."
+            )
+          )
+            return;
+          setBusy("cloud takeover");
+          try {
+            const r = await fetch("/api/admin/takeover", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ confirmed: true }),
+            });
+            if (r.status === 401) setAuthLost(true);
+            const data = await r.json().catch(() => ({}));
+            setToast(
+              data.results ? data.results.join("\n") : `✗ cloud takeover: ${data.error || r.status}`
+            );
+          } catch (e: any) {
+            setToast(`✗ cloud takeover: ${e?.message || "network error"}`);
+          } finally {
+            setBusy(null);
+            setTimeout(refresh, 1500);
+            if (toastTimer.current) clearTimeout(toastTimer.current);
+            toastTimer.current = setTimeout(() => setToast(null), 15000);
+          }
+        }}
+        className="w-full rounded-lg border border-sky-600 bg-sky-900/20 px-4 py-3 text-left hover:bg-sky-900/40 disabled:opacity-50"
+      >
+        <span className="font-semibold text-sky-300">☁ PC is off — run everything from cloud</span>
+        <span className="mt-1 block text-sm text-sky-200/70">
+          One press: cloud data fetch now, KIS sync now if the market is open, depth backstop if
+          due. Safe to press — every trading safety gate still applies, and the automatic
+          backstops cover you even if you never press it.
+        </span>
+      </button>
 
       {status?.sources && Object.values(status.sources).some((v) => !v) && (
         <div className="rounded border border-amber-600 bg-amber-900/30 px-4 py-2 text-sm text-amber-200">

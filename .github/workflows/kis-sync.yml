@@ -35,7 +35,17 @@ name: KIS Portfolio Sync
 
 on:
   schedule:
+    # BACKSTOP LADDER (2026-09-01): GitHub cron delivery drifts 0-9h, so one
+    # entry cannot be trusted to land inside the US session on a PC-off day.
+    # Several are scheduled; the gates decide which arrival actually trades:
+    # dedupe skips once a sync succeeded today, the market-hours gate skips
+    # out-of-session arrivals, the freshness gate refuses a stale book. On a
+    # normal day (PC dispatched at 16:25) every arrival dedupe-skips in ~30s.
+    - cron: '25 9 * * 1-5'
+    - cron: '25 11 * * 1-5'
+    - cron: '25 13 * * 1-5'
     - cron: '25 16 * * 1-5'
+    - cron: '25 18 * * 1-5'
   workflow_dispatch:
     inputs:
       env:
@@ -101,12 +111,15 @@ jobs:
 
       - run: pip install requests
 
-      # BACKSTOP DEDUPE: the cron is the backstop behind the PC self-dispatch.
-      # If any successful dispatch run of this workflow was created today since
-      # 14:00 UTC, the cron skips instead of syncing twice. NOTE: a successful
-      # manual run (e.g. a probe) also suppresses the backstop for the day —
-      # acceptable, the sync is near-idempotent and this gate is belt-and-
-      # suspenders. Fails OPEN (no skip) if the API call errors.
+      # BACKSTOP DEDUPE: crons (the whole ladder) are backstops behind the PC
+      # self-dispatch. Skip when ANY successful run today already reached its
+      # "Run sync" step and that step succeeded — dispatch or an earlier ladder
+      # arrival alike. Runs that were themselves gate-skipped (market closed,
+      # deduped) also read "success" but their sync step shows "skipped", so
+      # they do NOT suppress later arrivals. NOTE: a successful manual probe
+      # also counts and suppresses the backstop for the day — acceptable, the
+      # sync is near-idempotent and this gate is belt-and-suspenders. Fails
+      # OPEN (no skip) if the API calls error.
       - name: Backstop dedupe gate
         id: dedupe
         if: github.event_name == 'schedule'
@@ -114,16 +127,22 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           TODAY=$(date -u +%Y-%m-%d)
-          N=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/kis-sync.yml/runs" \
-                -f event=workflow_dispatch -f status=success -f created=">=${TODAY}T14:00:00Z" \
-                --jq '.workflow_runs | length' 2>/dev/null || echo 0)
-          echo "successful dispatch runs since ${TODAY}T14:00Z: ${N:-0}"
-          if [ "${N:-0}" -gt 0 ] 2>/dev/null; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "PC self-dispatch already synced today — backstop skips."
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
+          SKIP=false
+          IDS=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/kis-sync.yml/runs" \
+                  -f status=success -f created=">=${TODAY}T00:00:00Z" -f per_page=20 \
+                  --jq '.workflow_runs[].id' 2>/dev/null || echo "")
+          for id in $IDS; do
+            SYNCED=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/jobs" \
+                       --jq '[.jobs[].steps[] | select(.name == "Run sync" and .conclusion == "success")] | length' \
+                       2>/dev/null || echo 0)
+            if [ "${SYNCED:-0}" -gt 0 ] 2>/dev/null; then
+              echo "run ${id} already synced today — backstop skips."
+              SKIP=true
+              break
+            fi
+          done
+          echo "skip=$SKIP" >> "$GITHUB_OUTPUT"
+          [ "$SKIP" = "true" ] || echo "no successful sync yet today — backstop proceeds to gates."
 
       # The cron is weekdays-only, but drift can still push a run past the close
       # (and a US market holiday is a weekday). Skip cleanly (green, no orders)

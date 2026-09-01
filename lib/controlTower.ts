@@ -76,7 +76,7 @@ export const RHYTHMS: Rhythm[] = [
     deadAfterMin: 55 * 60,
     weekdaysOnly: true,
     manualRecovery:
-      "KIS sync is cloud-native (ubuntu-latest) — a missed run is a GitHub cron delay or a red run. Check the run log first. NEVER dispatch with env=real from here; if trading must stop, flip KIS_HALT below.",
+      "KIS sync is cloud-native (ubuntu-latest). Primary trigger is the PC's 16:25 UTC dispatch; a cron ladder backstops PC-off days automatically. A missed day usually means every arrival landed post-close — the 'PC is off' takeover button (or the next session's ladder) covers it. NEVER dispatch with env=real from here; if trading must stop, flip KIS_HALT below.",
   },
   {
     key: "price",
