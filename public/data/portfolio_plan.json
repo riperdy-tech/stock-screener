@@ -1,5 +1,5 @@
 {
-  "cash_pct": 44.55,
+  "cash_pct": 43.78,
   "config_used": {
     "base_position_pct": 3.0,
     "high_risk_archetypes": [
@@ -24,17 +24,17 @@
     "theme_cap_pct": 30.0
   },
   "disclaimer": "Decision support only. Not investment advice, not an order list. Every position requires human review of the con line and flags.",
-  "generated_at": "2026-09-05T16:27:19Z",
-  "invested_pct": 55.45,
+  "generated_at": "2026-09-06T13:55:55Z",
+  "invested_pct": 56.22,
   "label": "Value core (Kelly-sized)",
   "macro_derisk_active": false,
   "macro_flags": [],
   "plan2": {
-    "cash_pct": 16.21,
-    "invested_pct": 83.79,
+    "cash_pct": 15.56,
+    "invested_pct": 84.44,
     "label": "Hybrid (value core + quality sleeve)",
     "note": "Value core (Kelly, only names priced below demonstrated growth) PLUS a quality sleeve buying top-ranked names regardless of valuation gap, capped at 35.0% of book. Captures expensive quality leaders the core skips.",
-    "position_count": 29,
+    "position_count": 30,
     "positions": [
       {
         "accruals_ratio": -0.0205,
@@ -334,6 +334,39 @@
         "weight_pct": 5.0
       },
       {
+        "accruals_ratio": -0.1286,
+        "archetype": "B",
+        "composite": 78.53,
+        "con": "survivability leverage stress: net cash; survivability funding gap: positive FCF is self-funding; survivability drawdown history: max drawdown 29.3% over short ~2yr window; PRICE_EXTENDED: current price 2.0x above 2yr low (mean-reversion risk, short ~2yr window); watchlist: capped by archetype B capped at 11 (max 10) diversification",
+        "exit_triggers": [
+          "economics gate -> 0 or band -> Reject on any chain run",
+          "any forensic flag newly fires",
+          "scores older than 90 days (engine rule 15)"
+        ],
+        "expectations_gap_pts": -1.4,
+        "f_score": 6,
+        "fct_band": "research_now",
+        "fct_composite": 91.03,
+        "fct_rank": 27,
+        "fct_vol": 0.389,
+        "forensic_flags": [],
+        "gpr_level": 1,
+        "high_risk_class": false,
+        "informed_demand": 0,
+        "m_score": -2.795,
+        "pdm_band": "no_data",
+        "pdm_signal": null,
+        "pro": "FCF yield 4.1% percentile valuation signal + high ROIC and revenue growth",
+        "rank": 27,
+        "rev_nominated": false,
+        "sector": "Healthcare",
+        "sizing_method": "quarter_kelly",
+        "survivability": 75,
+        "symbol": "MEDP",
+        "theme_primary": null,
+        "weight_pct": 0.77
+      },
+      {
         "accruals_ratio": null,
         "archetype": "B",
         "composite": 73.04,
@@ -379,7 +412,7 @@
         "expectations_gap_pts": -9.3,
         "f_score": 6,
         "fct_band": "research_now",
-        "fct_composite": 90.34,
+        "fct_composite": 90.29,
         "fct_rank": 36,
         "fct_vol": 0.3669,
         "forensic_flags": [],
@@ -445,8 +478,8 @@
         "expectations_gap_pts": -16.4,
         "f_score": 8,
         "fct_band": "research_now",
-        "fct_composite": 89.62,
-        "fct_rank": 45,
+        "fct_composite": 89.57,
+        "fct_rank": 46,
         "fct_vol": 0.3062,
         "forensic_flags": [],
         "gpr_level": 0,
@@ -456,7 +489,7 @@
         "pdm_band": "no_data",
         "pdm_signal": null,
         "pro": "FCF yield 5.9% percentile valuation signal + positive FCF, moderate growth profile",
-        "rank": 45,
+        "rank": 46,
         "rev_nominated": false,
         "sector": "Consumer Cyclical",
         "sizing_method": "quarter_kelly",
@@ -478,7 +511,7 @@
         "expectations_gap_pts": -8.5,
         "f_score": 8,
         "fct_band": "research_now",
-        "fct_composite": 89.4,
+        "fct_composite": 89.29,
         "fct_rank": 49,
         "fct_vol": 0.2876,
         "forensic_flags": [],
@@ -560,38 +593,6 @@
         "survivability": 80,
         "symbol": "STX",
         "theme_primary": null,
-        "weight_pct": 2.0
-      },
-      {
-        "accruals_ratio": -0.0657,
-        "archetype": "A",
-        "composite": 65.33,
-        "con": "survivability leverage stress: net cash; survivability funding gap: positive FCF is self-funding; survivability drawdown history: max drawdown 24.7% over short ~2yr window; GROWTH_UNVERIFIED: forward EPS estimate 1649.2% > 2x archetype cap 17% (EPS extreme, secondary signal); CROWDED_LONG: institutional ownership 103.8% > 98.0% (exit-crowding risk)",
-        "exit_triggers": [
-          "dropped out of research_now band",
-          "any forensic flag newly fires"
-        ],
-        "expectations_gap_pts": 10.6,
-        "f_score": 5,
-        "fct_band": "research_now",
-        "fct_composite": 93.5,
-        "fct_rank": 3,
-        "fct_vol": 0.22,
-        "forensic_flags": [],
-        "gpr_level": 1,
-        "high_risk_class": false,
-        "informed_demand": 0,
-        "m_score": -2.486,
-        "pdm_band": "high",
-        "pdm_signal": 30,
-        "pro": "FCF yield 5.6% percentile valuation signal + positive FCF, moderate growth profile",
-        "rank": 3,
-        "rev_nominated": false,
-        "sector": "Healthcare",
-        "sizing_method": "quality_sleeve",
-        "survivability": 80,
-        "symbol": "BMRN",
-        "theme_primary": "glp1_metabolic",
         "weight_pct": 2.0
       },
       {
@@ -900,7 +901,7 @@
         "fct_rank": 24,
         "fct_vol": 0.3263,
         "forensic_flags": [],
-        "gpr_level": 2,
+        "gpr_level": 1,
         "high_risk_class": false,
         "informed_demand": 0,
         "m_score": -2.597,
@@ -979,26 +980,57 @@
         "symbol": "ADSK",
         "theme_primary": "cloud_software",
         "weight_pct": 1.88
+      },
+      {
+        "accruals_ratio": -0.0407,
+        "archetype": "A",
+        "composite": 49.24,
+        "con": "balance sheet uses real EBITDA; survivability leverage stress: net debt / EBITDA 1.65; survivability funding gap: positive FCF is self-funding; survivability drawdown history: max drawdown 13.5% over short ~2yr window; GROWTH_UNVERIFIED: forward EPS estimate 86.3% > 2x archetype cap 17% (EPS extreme, secondary signal); PRICE_EXTENDED: current price 4.0x above 2yr low (mean-reversion risk, short ~2yr window)",
+        "exit_triggers": [
+          "dropped out of research_now band",
+          "any forensic flag newly fires"
+        ],
+        "expectations_gap_pts": 27.9,
+        "f_score": 8,
+        "fct_band": "research_now",
+        "fct_composite": 90.48,
+        "fct_rank": 34,
+        "fct_vol": 0.4708,
+        "forensic_flags": [],
+        "gpr_level": null,
+        "high_risk_class": false,
+        "informed_demand": 0,
+        "m_score": -2.751,
+        "pdm_band": "no_data",
+        "pdm_signal": null,
+        "pro": "FCF yield 1.2% percentile valuation signal + positive FCF, moderate growth profile",
+        "rank": 34,
+        "rev_nominated": false,
+        "sector": "Industrials",
+        "sizing_method": "quality_sleeve",
+        "survivability": 75,
+        "symbol": "ATI",
+        "theme_primary": null,
+        "weight_pct": 1.88
       }
     ],
     "sector_allocation": {
       "Communication Services": 4.0,
       "Consumer Cyclical": 22.67,
-      "Healthcare": 24.93,
-      "Industrials": 9.0,
+      "Healthcare": 23.7,
+      "Industrials": 10.88,
       "Technology": 23.19
     },
-    "sleeve_pct": 28.34,
+    "sleeve_pct": 28.22,
     "theme_allocation": {
       "ai_compute": 16.46,
       "cloud_software": 10.5,
       "energy_transition": 2.0,
-      "glp1_metabolic": 2.0,
       "physical_ai": 2.0,
       "space_economy": 2.0
     }
   },
-  "position_count": 14,
+  "position_count": 15,
   "positions": [
     {
       "accruals_ratio": -0.0205,
@@ -1298,6 +1330,39 @@
       "weight_pct": 5.0
     },
     {
+      "accruals_ratio": -0.1286,
+      "archetype": "B",
+      "composite": 78.53,
+      "con": "survivability leverage stress: net cash; survivability funding gap: positive FCF is self-funding; survivability drawdown history: max drawdown 29.3% over short ~2yr window; PRICE_EXTENDED: current price 2.0x above 2yr low (mean-reversion risk, short ~2yr window); watchlist: capped by archetype B capped at 11 (max 10) diversification",
+      "exit_triggers": [
+        "economics gate -> 0 or band -> Reject on any chain run",
+        "any forensic flag newly fires",
+        "scores older than 90 days (engine rule 15)"
+      ],
+      "expectations_gap_pts": -1.4,
+      "f_score": 6,
+      "fct_band": "research_now",
+      "fct_composite": 91.03,
+      "fct_rank": 27,
+      "fct_vol": 0.389,
+      "forensic_flags": [],
+      "gpr_level": 1,
+      "high_risk_class": false,
+      "informed_demand": 0,
+      "m_score": -2.795,
+      "pdm_band": "no_data",
+      "pdm_signal": null,
+      "pro": "FCF yield 4.1% percentile valuation signal + high ROIC and revenue growth",
+      "rank": 27,
+      "rev_nominated": false,
+      "sector": "Healthcare",
+      "sizing_method": "quarter_kelly",
+      "survivability": 75,
+      "symbol": "MEDP",
+      "theme_primary": null,
+      "weight_pct": 0.77
+    },
+    {
       "accruals_ratio": null,
       "archetype": "B",
       "composite": 73.04,
@@ -1343,7 +1408,7 @@
       "expectations_gap_pts": -9.3,
       "f_score": 6,
       "fct_band": "research_now",
-      "fct_composite": 90.34,
+      "fct_composite": 90.29,
       "fct_rank": 36,
       "fct_vol": 0.3669,
       "forensic_flags": [],
@@ -1409,8 +1474,8 @@
       "expectations_gap_pts": -16.4,
       "f_score": 8,
       "fct_band": "research_now",
-      "fct_composite": 89.62,
-      "fct_rank": 45,
+      "fct_composite": 89.57,
+      "fct_rank": 46,
       "fct_vol": 0.3062,
       "forensic_flags": [],
       "gpr_level": 0,
@@ -1420,7 +1485,7 @@
       "pdm_band": "no_data",
       "pdm_signal": null,
       "pro": "FCF yield 5.9% percentile valuation signal + positive FCF, moderate growth profile",
-      "rank": 45,
+      "rank": 46,
       "rev_nominated": false,
       "sector": "Consumer Cyclical",
       "sizing_method": "quarter_kelly",
@@ -1442,7 +1507,7 @@
       "expectations_gap_pts": -8.5,
       "f_score": 8,
       "fct_band": "research_now",
-      "fct_composite": 89.4,
+      "fct_composite": 89.29,
       "fct_rank": 49,
       "fct_vol": 0.2876,
       "forensic_flags": [],
@@ -1465,7 +1530,7 @@
   ],
   "sector_allocation": {
     "Consumer Cyclical": 20.67,
-    "Healthcare": 22.93,
+    "Healthcare": 23.7,
     "Industrials": 5.0,
     "Technology": 6.85
   },
@@ -1539,10 +1604,6 @@
       "symbol": "GEV"
     },
     {
-      "reason": "sized below minimum (0.58% < 0.75%)",
-      "symbol": "MEDP"
-    },
-    {
       "reason": "no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)",
       "symbol": "NHC"
     },
@@ -1583,16 +1644,16 @@
       "symbol": "AVGO"
     },
     {
-      "reason": "no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)",
-      "symbol": "ROST"
-    },
-    {
       "reason": "no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)",
       "symbol": "LQDT"
     },
     {
       "reason": "no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)",
       "symbol": "TYL"
+    },
+    {
+      "reason": "no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)",
+      "symbol": "ROST"
     },
     {
       "reason": "no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)",

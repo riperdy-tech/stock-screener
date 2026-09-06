@@ -1,8 +1,8 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-09-05T16:27:19Z
+Generated: 2026-09-06T13:55:55Z
 Macro flags: none
-Invested: **55.45%**  |  Cash: **44.55%**  |  Positions: 14
+Invested: **56.22%**  |  Cash: **43.78%**  |  Positions: 15
 
 | # | Sym | Wt% | Arch | Comp | Surv | FctRank | FctBand | Theme | PdmBand | F | M | Flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -15,14 +15,15 @@ Invested: **55.45%**  |  Cash: **44.55%**  |  Positions: 14
 | 19 | **ABNB** | 1.8 | B | 79.68 | 80 | 19 | research_now | - | no_data | 5 | - | - |
 | 21 | **CART** | 3.87 | B | 75.16 | 80 | 21 | research_now | cloud_software | mid | 5 | -3.032 | - |
 | 26 | **VIK** | 5.0 | B | 77.27 | 75 | 26 | research_now | - | no_data | 6 | - | - |
+| 27 | **MEDP** | 0.77 | B | 78.53 | 75 | 27 | research_now | - | no_data | 6 | -2.795 | - |
 | 29 | **SAP** | 2.1 | B | 73.04 | 70 | 29 | research_now | - | no_data | - | - | - |
 | 36 | **EXPE** | 5.0 | B | 81.91 | 80 | 36 | research_now | - | no_data | 6 | -2.758 | - |
 | 40 | **PCTY** | 4.75 | B | 70.13 | 70 | 40 | research_now | cloud_software | watch | 7 | -2.57 | - |
-| 45 | **MCRI** | 5.0 | A | 67.35 | 80 | 45 | research_now | - | no_data | 8 | -2.953 | - |
+| 46 | **MCRI** | 5.0 | A | 67.35 | 80 | 46 | research_now | - | no_data | 8 | -2.953 | - |
 | 49 | **KFY** | 5.0 | A | 69.58 | 80 | 49 | research_now | - | no_data | 8 | -2.619 | - |
 
 ## Sector allocation
-- Healthcare: 22.93%
+- Healthcare: 23.7%
 - Consumer Cyclical: 20.67%
 - Technology: 6.85%
 - Industrials: 5.0%
@@ -48,7 +49,6 @@ Invested: **55.45%**  |  Cash: **44.55%**  |  Positions: 14
 - RMD: sector cap Healthcare (25.0%)
 - AMZN: no Kelly edge (expectations gap +47pts >= 0: price already assumes more growth than demonstrated)
 - GEV: no Kelly edge (expectations gap +17pts >= 0: price already assumes more growth than demonstrated)
-- MEDP: sized below minimum (0.58% < 0.75%)
 - NHC: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - ADSK: no Kelly edge (expectations gap +9pts >= 0: price already assumes more growth than demonstrated)
 - JKHY: no Kelly edge (expectations gap +2pts >= 0: price already assumes more growth than demonstrated)
@@ -59,9 +59,9 @@ Invested: **55.45%**  |  Cash: **44.55%**  |  Positions: 14
 - GILD: no Kelly edge (expectations gap +3pts >= 0: price already assumes more growth than demonstrated)
 - GD: no Kelly edge (expectations gap +4pts >= 0: price already assumes more growth than demonstrated)
 - AVGO: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
-- ROST: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
 - LQDT: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
 - TYL: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
+- ROST: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
 - MOV: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
 - MCO: no Kelly edge (expectations gap +11pts >= 0: price already assumes more growth than demonstrated)
 - HRMY: sector cap Healthcare (25.0%)
@@ -70,7 +70,7 @@ Invested: **55.45%**  |  Cash: **44.55%**  |  Positions: 14
 - META: no Kelly edge (expectations gap +33pts >= 0: price already assumes more growth than demonstrated)
 
 ## Sizing method
-- Quarter-Kelly: 10 positions — f = 0.25 x mu/sigma^2, mu = expectations-gap recovery over 3y (cap 15%), sigma floor 15%, position cap 5.0%.
+- Quarter-Kelly: 11 positions — f = 0.25 x mu/sigma^2, mu = expectations-gap recovery over 3y (cap 15%), sigma floor 15%, position cap 5.0%.
 - Heuristic fallback: 4 positions (no expectations model): base x survivability scaling.
 - Overlay multipliers: GPR level 2 -> x0.75, level 3 -> x0.5 + requires negative gap; informed-demand -1 -> x0.75.
 
