@@ -1,20 +1,6 @@
 {
  "alerts": [
   {
-   "date": "2026-08-30",
-   "detail": "stocks.json snapshot 2026-08-31 > as_of 2026-08-30",
-   "kind": "snapshot_ahead",
-   "scope": "prices",
-   "severity": "error"
-  },
-  {
-   "date": "2026-08-30",
-   "detail": "carried: ['CPRX', 'WDC']",
-   "kind": "unevaluated_held",
-   "scope": "equal",
-   "severity": "info"
-  },
-  {
    "date": "2026-08-31",
    "detail": "carried: ['CPRX', 'WDC']",
    "kind": "unevaluated_held",
@@ -90,6 +76,13 @@
    "kind": "unevaluated_held",
    "scope": "equal",
    "severity": "info"
+  },
+  {
+   "date": "2026-09-07",
+   "detail": "carried: ['CPRX', 'WDC']",
+   "kind": "unevaluated_held",
+   "scope": "equal",
+   "severity": "info"
   }
  ],
  "config": {
@@ -106,11 +99,11 @@
   "start_nav": 100.0
  },
  "health": {
-  "factor_checked_at": "2026-09-06",
-  "factor_scored_count": 1698
+  "factor_checked_at": "2026-09-07",
+  "factor_scored_count": 1694
  },
  "inception": "2026-06-12",
- "last_updated": "2026-09-06T13:55:58Z",
+ "last_updated": "2026-09-07T16:10:09Z",
  "ledgers": {
   "equal": {
    "closed": [
@@ -846,8 +839,8 @@
      "exit_date": "2026-08-08",
      "exit_price": 83.4,
      "hold_days": 6,
-     "post_exit_days": null,
-     "post_exit_return_pct": null,
+     "post_exit_days": 30,
+     "post_exit_return_pct": -1.27,
      "return_pct": -0.23,
      "ticker": "GSAT"
     },
@@ -857,8 +850,8 @@
      "exit_date": "2026-08-08",
      "exit_price": 177.05,
      "hold_days": 21,
-     "post_exit_days": null,
-     "post_exit_return_pct": null,
+     "post_exit_days": 30,
+     "post_exit_return_pct": -1.67,
      "return_pct": -5.05,
      "ticker": "PSMT"
     },
@@ -1435,7 +1428,7 @@
      "ticker": "MNST"
     }
    ],
-   "current_date": "2026-09-06",
+   "current_date": "2026-09-07",
    "dividends": [],
    "exit_pending": {
     "AGX": "2026-08-24",
@@ -2680,10 +2673,25 @@
      "stale_marks": [
       "CPRX"
      ]
+    },
+    {
+     "bench": 296.01,
+     "benches": {
+      "DRAM": 59.69,
+      "IWM": 296.01,
+      "QQQ": 718.96,
+      "SOXX": 519.86,
+      "SPY": 770.19
+     },
+     "date": "2026-09-07",
+     "nav": 95.1679,
+     "stale_marks": [
+      "CPRX"
+     ]
     }
    ],
    "prev_day_state": {
-    "cash": 0.8945183962519134,
+    "cash": 2.596335379740667,
     "holdings": {
      "AAPL": {
       "entry_date": "2026-07-10",
@@ -2805,11 +2813,6 @@
       "entry_price": 107.805,
       "shares": 0.014535337390370552
      },
-     "ISRG": {
-      "entry_date": "2026-09-04",
-      "entry_price": 366.7,
-      "shares": 0.0050787983322716675
-     },
      "JKHY": {
       "entry_date": "2026-08-14",
       "entry_price": 153.31,
@@ -2869,11 +2872,6 @@
       "entry_date": "2026-09-04",
       "entry_price": 616.77,
       "shares": 0.0028980089018500956
-     },
-     "MNST": {
-      "entry_date": "2026-08-17",
-      "entry_price": 45.52,
-      "shares": 0.03912578825964386
      },
      "MOV": {
       "entry_date": "2026-09-01",
@@ -2939,6 +2937,11 @@
       "entry_date": "2026-06-12",
       "entry_price": 414.555,
       "shares": 0.00430888602757802
+     },
+     "TYL": {
+      "entry_date": "2026-09-06",
+      "entry_price": 364.03,
+      "shares": 0.005113487535499443
      },
      "VIK": {
       "entry_date": "2026-06-12",
@@ -3231,7 +3234,7 @@
    },
    "summary": {
     "avg_hold_days": 15.8,
-    "cagr_pct": -18.96,
+    "cagr_pct": -18.76,
     "closed_trades": 120,
     "cumulative_return_pct": -4.83,
     "excess_vs": {
@@ -3244,9 +3247,9 @@
     "excess_vs_bench_pct": -6.12,
     "inception": "2026-06-12",
     "max_drawdown_pct": -10.14,
-    "observations": 84,
+    "observations": 85,
     "open_positions": 53,
-    "sharpe": -1.16,
+    "sharpe": -1.15,
     "total_traded_value": 545.43,
     "win_rate_pct": 29.2
    },
@@ -12599,41 +12602,6 @@
      "VIK"
     ]
    }
-  },
-  "mine": {
-   "closed": [],
-   "current_date": "2026-09-06",
-   "last_marks": {},
-   "nav_series": [
-    {
-     "bench": 296.01,
-     "benches": {
-      "DRAM": 59.69,
-      "IWM": 296.01,
-      "QQQ": 718.96,
-      "SOXX": 519.86,
-      "SPY": 770.19
-     },
-     "date": "2026-09-06",
-     "nav": null,
-     "stale_marks": []
-    }
-   ],
-   "prev_day_state": {
-    "cash": 100.0,
-    "holdings": {},
-    "units": null
-   },
-   "state": {
-    "cash": 100.0,
-    "holdings": {},
-    "units": null
-   },
-   "summary": {
-    "observations": 0,
-    "open_positions": 0
-   },
-   "trades": []
   },
   "plan": {
    "closed": [
@@ -30827,9 +30795,10 @@
      "ticker": "CRM"
     }
    ],
-   "current_date": "2026-09-06",
+   "current_date": "2026-09-07",
    "dividends": [],
    "exit_pending": {
+    "ACTG": "2026-09-07",
     "ADSK": "2026-08-28",
     "AZN": "2026-08-28",
     "CHE": "2026-08-26",
@@ -31057,6 +31026,19 @@
       "SPY": 770.19
      },
      "date": "2026-09-06",
+     "nav": 99.7988,
+     "stale_marks": []
+    },
+    {
+     "bench": 296.01,
+     "benches": {
+      "DRAM": 59.69,
+      "IWM": 296.01,
+      "QQQ": 718.96,
+      "SOXX": 519.86,
+      "SPY": 770.19
+     },
+     "date": "2026-09-07",
      "nav": 99.7988,
      "stale_marks": []
     }
@@ -31425,7 +31407,7 @@
    },
    "summary": {
     "avg_hold_days": 3.4,
-    "cagr_pct": -0.85,
+    "cagr_pct": -0.84,
     "closed_trades": 11,
     "cumulative_return_pct": -0.2,
     "excess_vs": {
@@ -31438,7 +31420,7 @@
     "excess_vs_bench_pct": 0.87,
     "inception": "2026-06-12",
     "max_drawdown_pct": -0.97,
-    "observations": 13,
+    "observations": 14,
     "open_positions": 35,
     "sharpe": null,
     "total_traded_value": 246.88,
