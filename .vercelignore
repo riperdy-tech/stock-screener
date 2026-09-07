@@ -1,0 +1,34 @@
+# Files excluded from the Vercel deployment bundle.
+#
+# Every entry here is a pipeline input or log that the website never fetches.
+# The Python pipeline runs in GitHub Actions against the git checkout, so these
+# files stay in git untouched; excluding them only shrinks each Vercel
+# deployment (Deployment Storage is the sum of all retained deployments).
+#
+# Before adding a file here, grep app/ lib/ components/ for its name — anything
+# the site fetches via /data/... or reads with readFileSync must NOT be listed.
+
+# Weekly SEC fundamentals history: score_factors.py input (45 MB)
+public/data/fundamentals_history.json
+public/data/fundamentals_quarterly.json
+public/data/fundamentals_ttm.json
+public/data/fundamentals_battery.json
+
+# Intermediate score tables consumed by later pipeline stages
+public/data/price_history.json
+public/data/paradigm_scores.json
+public/data/unified_scores.json
+public/data/theme_assignments_llm.json
+public/data/dividends.json
+public/data/analyst_coverage.json
+public/data/eps_trajectory.json
+public/data/outcome_price_cache.json
+public/data/rs2_verdict_outcomes.json
+public/data/cik_map.json
+
+# Forward-logging accumulators (grow every run)
+public/data/*.jsonl
+
+# Full scan history log. The log console fetches scan_tail.log instead
+# (written by the fetch workflow), so only the tail ships to Vercel.
+public/data/scan.log

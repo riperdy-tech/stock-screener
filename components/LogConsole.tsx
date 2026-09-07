@@ -24,7 +24,9 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
             try {
                 // Served from the site root — next.config.js dropped the old
                 // /stock-screener basePath when the app moved off static export.
-                const res = await fetch(`/data/scan.log?t=${Date.now()}`);
+                // scan_tail.log is the last 2000 lines of scan.log, written by the
+                // fetch workflow; the full log stays in git but is not deployed.
+                const res = await fetch(`/data/scan_tail.log?t=${Date.now()}`);
                 if (res.ok) {
                     const text = await res.text();
                     setLogs(text);
@@ -125,7 +127,7 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                 </div>
 
                 <div className="grid grid-cols-1 gap-3 border-b border-rule-14 bg-[#0f0f0f] px-5 py-4 sm:grid-cols-3">
-                    <LogStat icon={<FileText className="h-4 w-4" />} label="Static Source" value="scan.log" sub="public/data baseline" />
+                    <LogStat icon={<FileText className="h-4 w-4" />} label="Static Source" value="scan_tail.log" sub="public/data baseline" />
                     <LogStat icon={<Radio className="h-4 w-4" />} label="Live Stream" value={supabaseConnected ? "Connected" : "Unavailable"} sub={supabaseConnected ? "Supabase channel ready" : "Missing public keys"} tone={supabaseConnected ? "success" : "danger"} />
                     <LogStat icon={<Terminal className="h-4 w-4" />} label="Lines Loaded" value={lineCount.toLocaleString()} sub={logs ? "Non-empty log lines" : "Waiting for data"} />
                 </div>
@@ -159,7 +161,7 @@ export function LogConsole({ isOpen, onClose }: LogConsoleProps) {
                 {/* Footer */}
                 <div className="flex flex-col gap-3 border-t border-rule-14 bg-surface px-5 py-4 text-base text-ink-3 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex flex-wrap items-center gap-3">
-                        <span>Source: public/data/scan.log</span>
+                        <span>Source: public/data/scan_tail.log</span>
                         <div className="flex items-center gap-2 border border-rule-14 bg-white/[0.03] px-3 py-1.5">
                             <div className={`h-2.5 w-2.5  ${supabaseConnected ? 'bg-green-500' : 'bg-red-500'}`} />
                             <span className={supabaseConnected ? 'text-ink-2' : 'text-neg'}>

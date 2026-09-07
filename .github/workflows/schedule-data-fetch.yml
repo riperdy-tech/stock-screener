@@ -180,6 +180,11 @@ jobs:
           python scripts/fetch_data.py
           python scripts/refresh_prices.py || echo "::warning::live price overlay skipped — stocks.json keeps the snapshot prices"
 
+      - name: Write scan.log tail for the site
+        # The log console loads scan_tail.log as its baseline; the full
+        # scan.log stays in git but is excluded from Vercel (.vercelignore).
+        run: tail -n 2000 public/data/scan.log > public/data/scan_tail.log
+
       - name: Commit and Push Fetched Data
         run: |
           git config --global user.name "github-actions[bot]"
@@ -190,6 +195,7 @@ jobs:
           git add public/data/reports/*.json || true
           git add public/data/stocks.json || true
           git add public/data/scan.log || true
+          git add public/data/scan_tail.log || true
           git add public/data/cik_map.json || true
           git add public/data/fundamentals_battery.json || true
 
