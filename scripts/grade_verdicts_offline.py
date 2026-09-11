@@ -51,6 +51,22 @@ OUTPUT_PATH = os.path.join(DATA_DIR, "rs2_verdict_outcomes_extended.json")
 BENCHMARKS = ["IWM", "SPY", "QQQ"]
 HORIZONS = [30, 60]
 
+# Evidence-based addition to the literal method text (see module docstring):
+# the pre-existing 600 graded rows (all horizon=30) have exit-entry gaps of
+# 28-30 calendar days ONLY -- never less -- even though the literal rule
+# ("latest date <= target, skip only if <= entry_date") would happily accept
+# a much shorter gap when a ticker's cache tail falls short of the target.
+# Measured: min(gap) == 28 == h-2 across all 600 existing rows. That means a
+# horizon whose cache data doesn't reach near the target was treated as not
+# yet resolved ("pending"), not graded on a truncated stand-in. We enforce
+# the same rule here, with a 3-day tolerance (reusing the benchmark
+# near-date-match window already specified in the method) to allow for
+# weekends/holidays pushing the nearest close a few days short of the exact
+# target: a resolved exit_date more than this many days short of
+# (verdict_date + h) is treated as not yet resolved and the horizon is
+# skipped rather than graded on a truncated window.
+EXIT_TARGET_TOLERANCE_DAYS = 3
+
 CARRY_FIELDS = [
     "ticker",
     "date",
@@ -234,6 +250,11 @@ def main():
             target = verdict_date + timedelta(days=h)
             exit_date = find_exit_date(series["dates_sorted"], target)
             if exit_date is None or exit_date <= entry_date:
+                skipped_no_exit[h] += 1
+                continue
+            if (target - exit_date).days > EXIT_TARGET_TOLERANCE_DAYS:
+                # Cache doesn't reach near the target yet -- horizon not
+                # resolved (pending), not gradable on a truncated window.
                 skipped_no_exit[h] += 1
                 continue
 
