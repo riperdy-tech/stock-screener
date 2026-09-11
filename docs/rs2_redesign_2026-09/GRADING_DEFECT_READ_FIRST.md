@@ -1,56 +1,56 @@
-# Defect in `rs2_verdict_outcomes_extended.json` — fix before using the 60d rows
+# Grading horizon defect — FOUND AND FIXED 2026-09-11
 
-**Found 2026-09-11 by validation, before any use.** The 30-day rows are usable with a
-small filter. **The 60-day rows are not usable as they stand.**
+**Status: resolved.** The current `rs2_verdict_outcomes_extended.json` is sound. This note is
+kept because the defect is instructive and the guard must not be removed.
 
-## What is wrong
+## What was wrong
 
-The documented methodology is "exit = last close on or before verdict date + horizon."
-That is correct when the price series extends past `date + h`. It does not here:
-`outcome_price_cache.json` ends 2026-09-04 and verdicts run to 2026-08-19.
+The documented methodology is "exit = last close on or before verdict date + horizon." That
+is correct only when the price series extends past `date + h`. `outcome_price_cache.json`
+ends 2026-09-04 while verdicts run to 2026-08-19, so the rule silently degenerated to "last
+close available." A row labelled 60 days could be a 16-day holding period, with no error.
 
-When the series ends early, the rule silently degenerates to "last close available," so a
-row labelled 60 days can be a 16-day holding period. The label and the reality diverge with
-no error raised.
+First generation, before the fix:
 
-Measured actual holding periods against the labels:
-
-| Label | n | Median actual days | Held under 80% of label |
+| Label | Rows | Median actual days | Held under 80% of label |
 |---|---|---|---|
-| 30d | 1046 | 29 | 133 (13%) |
-| **60d** | **659** | **36** | **476 (72%)** |
+| 30d | 1046 | 29 | 13% |
+| 60d | 659 | 36 | **72%** |
 
-Holding-day deciles for the 60d bucket: 17, 24, 36, 51, 58.
+## Why the guard is correct, not just convenient
 
-**Consequence.** Comparing the 60d bucket to the 30d bucket to test whether the edge decays
-is meaningless. You would be comparing a 29-day average against a 36-day average and calling
-it 30 versus 60. That comparison was the main reason for computing the 60d horizon at all.
+The decisive evidence came from the original 600 graded rows. Their exit-minus-entry gaps are
+**strictly 28 to 30 days, never below 28**, even though the cache would have permitted shorter
+gaps. The original grader therefore treated an unreached horizon as *pending*, not as
+gradable on a truncated stand-in. The guard restores documented behaviour rather than
+inventing a new rule.
 
 ## The fix
 
-In `scripts/grade_verdicts_offline.py`, require the exit date to actually reach the horizon
-before emitting a row:
+`scripts/grade_verdicts_offline.py` skips a horizon when the resolved exit falls more than 3
+calendar days short of `date + h`, reusing the method's own 3-day benchmark-alignment
+tolerance. After the fix:
 
-```python
-MIN_FRACTION = 0.9
-actual_days = (exit_date - entry_date).days
-if actual_days < horizon * MIN_FRACTION:
-    skip("exit_date does not reach the labelled horizon")
-```
+| Label | Rows | Median actual days | Min | Under 80% of label |
+|---|---|---|---|---|
+| 30d | 859 | 29 | 23 | 1 |
+| 60d | 115 | 58 | 51 | 0 |
 
-Also emit `horizon_actual_days` on every row so the divergence can never be silent again.
+**Do not remove this guard.** If the price cache is later extended past `date + h` for all
+verdicts, the guard becomes a no-op and the 60-day sample grows on its own.
 
-Expected yield after the fix: 30d largely intact, 60d falling to roughly 100 rows. A smaller
-honest sample beats a large mislabelled one.
+## Two coverage caveats that remain
 
-## What the validation did confirm
+**Thin price coverage.** Only 118 of the 626 cached tickers extend into the 2026-06-29 to
+2026-08-19 verdict window. The other 505 cover mid-May to mid-June, before any verdict exists.
+Extending the cache is the single cheapest way to grow this dataset.
 
-All 600 rows that overlap the original `rs2_verdict_outcomes.json` reproduce it exactly,
-zero mismatches on `excess_iwm_pct`. The entry-side logic and the benchmark arithmetic are
-correct. The defect is purely in the exit-side horizon guard.
+**One ticker dominates.** ELMD accounts for 97 of the 859 rows at 30 days, roughly 11% of the
+sample, from same-day repeat verdicts. GD, VCYT and NOVT contribute 12 to 13 each. Read the
+name-weighted figures first; the observation-weighted ones overstate significance.
 
-## Until it is fixed
+## Verification that passed
 
-- The 30d rows may be used after filtering to `actual_days >= 24`.
-- The 60d rows must not be used for anything.
-- Do not draw any conclusion about edge decay from this file.
+All 600 rows overlapping the original `rs2_verdict_outcomes.json` reproduce it exactly, zero
+mismatches on `excess_iwm_pct`. Five rows were independently re-graded and matched to
+rounding.
