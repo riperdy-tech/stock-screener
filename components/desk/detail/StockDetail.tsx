@@ -12,7 +12,7 @@ import { Bar, Micro, Tag } from '../primitives';
 import { BandChartHero } from './BandChartHero';
 import { TranscriptViewer } from './TranscriptViewer';
 import { Rs2AnalysisPanel } from '@/components/Rs2AnalysisPanel';
-import { fetchDepthReport, type DepthReportBundle } from '@/lib/data-service';
+import { fetchDepthReport, type DepthReportBundle, type DepthVerdict } from '@/lib/data-service';
 import { headlineFromSamples } from '@/lib/desk/thesis';
 import { gapColor, sizeTone, verdictTone } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
@@ -82,6 +82,109 @@ function DepthStatRow({ row }: { row: DeskRow }) {
                 </div>
             </div>
 
+        </div>
+    );
+}
+
+function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: DepthReportBundle | null }) {
+    const sc = d.scorecard ?? bundle?.scorecard;
+    const conviction = d.conviction_score ?? sc?.median_conviction_score;
+    const quality = d.business_quality_moat ?? sc?.median_quality_moat;
+    const kelly = d.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct;
+    const skew = d.asymmetric_payoff_skew ?? sc?.asymmetric_payoff_skew;
+    const bullIv = d.bull_iv ?? sc?.median_bull_iv;
+    const bearIv = d.bear_iv ?? sc?.median_bear_iv;
+    const tranches = d.reentry_tranches ?? sc?.reentry_tranches;
+    const triggers = d.thesis_invalidation_triggers ?? sc?.thesis_invalidation_triggers ?? [];
+
+    if (conviction == null && quality == null && !triggers.length) {
+        return null;
+    }
+
+    return (
+        <div className="mt-6 border border-rule-18 bg-white/[0.02] p-4">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-rule-14 pb-2.5">
+                <Micro className="font-bold text-accent">Institutional Underwriting Contract (Section 12)</Micro>
+                <Micro className="text-ink-3">Charter v3.1 · Anti-Anchored Multi-Scenario</Micro>
+            </div>
+
+            <div className="mt-3.5 grid grid-cols-2 gap-4 sm:grid-cols-4">
+                <div>
+                    <Micro className="block text-ink-3">Conviction</Micro>
+                    <div className="mt-1 font-mono text-[17px] font-bold text-ink">
+                        {conviction != null ? `${conviction} / 15` : '—'}
+                    </div>
+                    <div className="text-[11px] text-ink-3">
+                        {conviction != null && conviction >= 12 ? 'High conviction' : conviction != null && conviction >= 9 ? 'Core underwriting' : 'Speculative / Watch'}
+                    </div>
+                </div>
+
+                <div>
+                    <Micro className="block text-ink-3">Moat / Quality</Micro>
+                    <div className="mt-1 font-mono text-[17px] font-bold text-ink">
+                        {quality != null ? `${quality} / 5.0` : '—'}
+                    </div>
+                    <div className="text-[11px] text-ink-3">
+                        {quality != null && quality >= 4 ? 'Wide moat rail' : quality != null && quality >= 3 ? 'Narrow moat' : 'Commodity / Low barrier'}
+                    </div>
+                </div>
+
+                <div>
+                    <Micro className="block text-ink-3">Half-Kelly Size</Micro>
+                    <div className="mt-1 font-mono text-[17px] font-bold text-ink">
+                        {kelly != null ? `${kelly.toFixed(1)}%` : '—'}
+                    </div>
+                    <div className="text-[11px] text-ink-3">Portfolio limit cap</div>
+                </div>
+
+                <div>
+                    <Micro className="block text-ink-3">Payoff Skew</Micro>
+                    <div className="mt-1 font-mono text-[17px] font-bold text-ink">
+                        {skew != null ? `${skew.toFixed(2)}x` : '—'}
+                    </div>
+                    <div className="text-[11px] text-ink-3">Bull upside vs Bear risk</div>
+                </div>
+            </div>
+
+            {(bullIv != null || bearIv != null || tranches) && (
+                <div className="mt-4 border-t border-rule-10 pt-3">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        {(bullIv != null || bearIv != null) && (
+                            <div>
+                                <Micro className="block text-ink-3">Scenario Valuation Distribution</Micro>
+                                <div className="mt-1 flex items-baseline gap-3 font-mono text-[12.5px]">
+                                    {bearIv != null && <span>Bear: <b className="text-neg">{fmtMoney(bearIv)}</b></span>}
+                                    {d.median_iv != null && <span>Base: <b className="text-ink">{fmtMoney(d.median_iv)}</b></span>}
+                                    {bullIv != null && <span>Bull: <b className="text-pos">{fmtMoney(bullIv)}</b></span>}
+                                </div>
+                            </div>
+                        )}
+                        {tranches && (tranches.tranche_1_starter != null || tranches.tranche_2_core != null) && (
+                            <div>
+                                <Micro className="block text-ink-3">Re-Entry Tranche Limits</Micro>
+                                <div className="mt-1 flex items-baseline gap-3 font-mono text-[12.5px] text-ink">
+                                    {tranches.tranche_1_starter != null && <span>Starter: <b>{fmtMoney(tranches.tranche_1_starter)}</b></span>}
+                                    {tranches.tranche_2_core != null && <span>Core: <b>{fmtMoney(tranches.tranche_2_core)}</b></span>}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {triggers.length > 0 && (
+                <div className="mt-4 border-t border-rule-10 pt-3">
+                    <Micro className="block text-warn">Thesis Invalidation Triggers (Immediate Stop / Re-underwrite)</Micro>
+                    <ul className="mt-1.5 space-y-1 text-[12px] leading-relaxed text-ink-q">
+                        {triggers.map((trig, idx) => (
+                            <li key={idx} className="flex items-start gap-1.5">
+                                <span className="shrink-0 text-warn">⚠</span>
+                                <span>{trig}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 }
@@ -340,6 +443,8 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                     )}
 
                     {d && <DepthStatRow row={row} />}
+
+                    {d && <InstitutionalContractCard d={d} bundle={bundle} />}
 
                     {d && (
                         <p className="mt-5 text-[11px] leading-relaxed text-ink-3">
