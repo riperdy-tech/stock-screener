@@ -435,6 +435,14 @@ export async function fetchDepthOverlay(): Promise<DepthOverlayPayload | null> {
     return fetchJson<DepthOverlayPayload>('/data/depth_overlay.json');
 }
 
+export async function fetchLegacyDepthReport(ticker: string): Promise<DepthReportBundle | null> {
+    return fetchJson<DepthReportBundle>(`/data/depth_reports_legacy/${encodeURIComponent(ticker.toUpperCase())}.json`);
+}
+
+export async function fetchLegacyDepthOverlay(): Promise<DepthOverlayPayload | null> {
+    return fetchJson<DepthOverlayPayload>('/data/depth_overlay_legacy.json');
+}
+
 // ── On-demand (operator-requested) analyses ─────────────────────────────────
 // Written by RS2 Local's on-demand path (depth_ondemand.py / orchestrate_depth
 // build_ondemand_bundles) to DEDICATED files: these verdicts are one-shots and are
