@@ -193,8 +193,81 @@ export function PromoLine({ row, delta }: { row: DeskRow; delta: number | null }
     const up = row.promo === 'promoted';
     return (
         <span className={clsx('mt-1 block font-mono font-semibold text-[11px] uppercase tracking-[.06em]', up ? 'text-accent' : 'text-warn')}>
-            {up ? '▲ AI PROMOTED FROM QUANT' : '▼ AI DEMOTED FROM QUANT'} #{row.fct.fct_rank}
+            {up ? '▲ AI PROMOTED' : '▼ AI DEMOTED'} #{row.fct.fct_rank}
             {delta != null && delta !== 0 ? ` · Δ${Math.abs(delta)}` : ''}
+        </span>
+    );
+}
+
+/** Institutional Contract Cells (Charter v3.1 / Section 12) */
+
+export function MoatCell({ row }: { row: DeskRow }) {
+    const m = row.moat;
+    if (m == null) return <span className="font-mono text-[11px] text-ink-3">—</span>;
+    const isWide = m >= 4.0;
+    const isNarrow = m >= 3.0;
+    return (
+        <span className="block font-mono text-[12px] font-semibold" title={isWide ? 'Wide Moat (Installed Base / High Switching Costs)' : isNarrow ? 'Narrow Moat' : 'Low Barrier / Commodity'}>
+            <span className={isWide ? 'text-accent' : isNarrow ? 'text-ink' : 'text-warn'}>
+                ★ {m.toFixed(1)}
+            </span>
+            <span className="text-[10px] text-ink-3">/5</span>
+        </span>
+    );
+}
+
+export function ConvictionCell({ row }: { row: DeskRow }) {
+    const c = row.conviction;
+    if (c == null) return <span className="font-mono text-[11px] text-ink-3">—</span>;
+    const isHigh = c >= 12;
+    const isCore = c >= 9;
+    return (
+        <span className="block font-mono text-[12px] font-semibold" title={isHigh ? 'High Conviction Core' : isCore ? 'Standard Underwriting' : 'Speculative / Watch'}>
+            <span className={isHigh ? 'text-pos font-bold' : isCore ? 'text-ink' : 'text-ink-3'}>
+                {c.toFixed(0)}
+            </span>
+            <span className="text-[10px] text-ink-3">/15</span>
+        </span>
+    );
+}
+
+export function HalfKellyCell({ row }: { row: DeskRow }) {
+    const k = row.kelly;
+    if (k == null) return <span className="font-mono text-[11px] text-ink-3">—</span>;
+    const active = k > 0 && row.depth?.direction === 'undervalued';
+    return (
+        <span className={clsx('block font-mono text-[12px] font-semibold', active ? 'text-pos' : 'text-ink-3')} title="Half-Kelly Portfolio Allocation Limit Cap">
+            {k > 0 ? `${k.toFixed(1)}%` : '0.0%'}
+        </span>
+    );
+}
+
+export function SkewCell({ row }: { row: DeskRow }) {
+    const s = row.skew;
+    if (s == null) return <span className="font-mono text-[11px] text-ink-3">—</span>;
+    const isAsymm = s >= 1.5;
+    return (
+        <span className={clsx('block font-mono text-[12px] font-semibold', isAsymm ? 'text-accent font-bold' : 'text-ink-2')} title="Asymmetric Payoff Skew (Bull Upside vs Bear Drawdown Risk)">
+            {s.toFixed(2)}x
+        </span>
+    );
+}
+
+export function TriadCell({ row }: { row: DeskRow }) {
+    const d = row.depth;
+    if (!d) return <span className="font-mono text-[11px] text-ink-3">—</span>;
+    const bear = row.bearIv;
+    const base = d.median_iv;
+    const bull = row.bullIv;
+    if (base == null) return <span className="font-mono text-[11px] text-ink-3">—</span>;
+    return (
+        <span className="block font-mono text-[11px] leading-tight">
+            <span className="text-ink font-semibold">{fmtMoney(base, 0)}</span>
+            {(bear != null || bull != null) && (
+                <span className="block text-[10px] text-ink-3">
+                    {bear != null ? fmtMoney(bear, 0) : '—'} · {bull != null ? fmtMoney(bull, 0) : '—'}
+                </span>
+            )}
         </span>
     );
 }
