@@ -26,6 +26,13 @@ export interface DeskRow {
     promo: 'promoted' | 'demoted' | 'none';
     vetoed: boolean;
     vetoReason: string | null;
+    /** Section 12 Institutional Underwriting Contract metrics */
+    conviction?: number | null;
+    moat?: number | null;
+    kelly?: number | null;
+    skew?: number | null;
+    bearIv?: number | null;
+    bullIv?: number | null;
 }
 
 export interface RankingFilters {
@@ -54,17 +61,25 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
         .map(([ticker, fct]) => {
             const pl = (fct as any).fct_percentile_llm;
             const p = (fct as any).fct_percentile;
+            const d = depth[ticker];
+            const sc = d?.scorecard;
             return {
                 ticker,
                 info: stockInfo[ticker],
                 fct,
-                depth: depth[ticker],
+                depth: d,
                 val: valuations[ticker],
                 overlay: overlay[ticker],
                 delta: (pl != null && p != null) ? Math.round(pl - p) : null,
                 promo: 'none',
                 vetoed: !!(fct.fct_veto || (fct as any).fct_llm_veto),
                 vetoReason: (fct.fct_veto_detail as string) || (fct.fct_veto as string) || null,
+                conviction: d?.conviction_score ?? sc?.median_conviction_score ?? null,
+                moat: d?.business_quality_moat ?? sc?.median_quality_moat ?? null,
+                kelly: d?.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct ?? null,
+                skew: d?.asymmetric_payoff_skew ?? sc?.asymmetric_payoff_skew ?? null,
+                bearIv: d?.bear_iv ?? sc?.median_bear_iv ?? null,
+                bullIv: d?.bull_iv ?? sc?.median_bull_iv ?? null,
             };
         });
 
@@ -109,6 +124,9 @@ export function applyFilters(rows: DeskRow[], f: RankingFilters): DeskRow[] {
                 case 'not_usable': if (d !== 'NOT_USABLE') return false; break;
                 case 'promoted': if (r.promo !== 'promoted') return false; break;
                 case 'demoted': if (r.promo !== 'demoted') return false; break;
+                case 'wide_moat': if (r.moat == null || r.moat < 4.0) return false; break;
+                case 'high_conviction': if (r.conviction == null || r.conviction < 12) return false; break;
+                case 'asymmetric': if (r.skew == null || r.skew < 1.5) return false; break;
                 case 'vetoed': if (!r.vetoed) return false; break;
             }
         }

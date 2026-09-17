@@ -10,6 +10,7 @@ import { Micro, SectionHead } from '../primitives';
 import {
     BandStrip, McapCell, MedianGapCell, PriceCell, PromoLine,
     QuantFilterCell, SpreadSizeCell, StockCell, VerdictCell,
+    MoatCell, ConvictionCell, HalfKellyCell, SkewCell, TriadCell,
 } from './cells';
 import { verdictTone } from '@/lib/desk/tone';
 import { bandLabel } from '@/lib/desk/band';
@@ -17,23 +18,21 @@ import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import { rankDelta, type AiSections, type DeskRow } from '@/lib/desk/rankings';
 import { useLanguage } from '@/components/LanguageContext';
 
-// STOCK is the flexible column: with every track fixed the row stopped short of
-// the content edge, which read as a lopsided right margin against the rank column.
-const GRID = 'grid grid-cols-[26px_minmax(180px,1fr)_190px_170px_90px_120px_150px_70px_56px] items-center gap-x-3';
+const GRID = 'grid grid-cols-[24px_minmax(160px,1.2fr)_170px_130px_70px_70px_65px_60px_65px_60px] items-center gap-x-2.5';
 
 function HeaderRow() {
-    const { t } = useLanguage();
     return (
         <div className={clsx(GRID, 'hidden border-b border-rule-18 pb-2 pt-3 lg:grid')}>
             <Micro>#</Micro>
-            <Micro>{t('colStockDesk')}</Micro>
-            <Micro>{t('colVerdict')}</Micro>
-            <Micro>{t('colBandVsPrice')}</Micro>
-            <Micro className="text-right">{t('colMedianGap')}</Micro>
-            <Micro>{t('colSpreadSize')}</Micro>
-            <Micro>{t('colQuantFilter')}</Micro>
-            <Micro className="text-right">{t('colPriceDesk')}</Micro>
-            <Micro className="text-right">{t('colMcapDesk')}</Micro>
+            <Micro>COMPANY</Micro>
+            <Micro>UNDERWRITING STANCE</Micro>
+            <Micro>VALUATION TRIAD</Micro>
+            <Micro>MOAT</Micro>
+            <Micro>CONVICTION</Micro>
+            <Micro>KELLY CAP</Micro>
+            <Micro>SKEW</Micro>
+            <Micro className="text-right">PRICE</Micro>
+            <Micro className="text-right">MCAP</Micro>
         </div>
     );
 }
@@ -54,23 +53,23 @@ function DeskRowView({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNod
                 <VerdictCell row={row} />
                 <PromoLine row={row} delta={rankDelta(row)} />
             </span>
-            <BandStrip row={row} />
-            <MedianGapCell row={row} />
-            <SpreadSizeCell row={row} />
-            <QuantFilterCell row={row} />
+            <TriadCell row={row} />
+            <MoatCell row={row} />
+            <ConvictionCell row={row} />
+            <HalfKellyCell row={row} />
+            <SkewCell row={row} />
             <PriceCell row={row} />
             <McapCell row={row} />
         </div>
     );
 }
 
-/** Mobile: one stacked card per name — ticker + verdict line, band strip, gap. */
+/** Mobile: stacked card with institutional contract summary */
 function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; onOpen: (t: string) => void }) {
     const { t } = useLanguage();
     const d = row.depth;
     const tone = verdictTone(d?.direction);
     const label = tone.keys.label ? t(tone.keys.label) : tone.label;
-    const action = tone.keys.action ? t(tone.keys.action) : null;
     return (
         <div
             role="button"
@@ -89,27 +88,26 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
                 <span className="shrink-0 font-mono text-[13px] text-ink">{fmtMoney(d?.price ?? row.info?.price)}</span>
             </div>
 
-            <div className="mt-2 flex items-baseline justify-between gap-3">
+            <div className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
                 <span className="text-[12px] font-extrabold" style={{ color: tone.color }}>
                     {label}
-                    {action && <span className="ml-1.5 font-medium text-ink-2">· {action}</span>}
-                </span>
-                <span className="font-mono text-[11px] text-ink-2">
-                    {d?.mos_vs_median_pct != null && <span style={{ color: tone.color }}>{fmtSignedPct(d.mos_vs_median_pct)}</span>}
-                    {/* A size hint only means something where there is something to buy. */}
-                    {d?.direction === 'undervalued' && d.size_hint && (
-                        <span className="ml-2 uppercase">{d.size_hint}</span>
+                    {d?.mos_vs_median_pct != null && (
+                        <span className="ml-1.5 font-mono text-[11px]">({fmtSignedPct(d.mos_vs_median_pct)} MoS)</span>
                     )}
                 </span>
+                <span className="flex items-center gap-2.5 font-mono text-[11px]">
+                    {row.moat != null && <span className="text-accent font-semibold">★ {row.moat.toFixed(1)}/5</span>}
+                    {row.conviction != null && <span className="text-ink">C:{row.conviction}/15</span>}
+                    {row.kelly != null && row.kelly > 0 && <span className="text-pos font-semibold">{row.kelly.toFixed(1)}% Cap</span>}
+                </span>
             </div>
 
-            {d && <div className="mt-2"><BandStrip row={row} height={12} showSubline={false} /></div>}
-
-            <div className="mt-2 font-mono text-[11px] text-ink-3">
-                {d ? bandLabel(d.iv_band_low, d.iv_band_high, d.median_iv) : 'awaiting depth run'}
-                {' · '}quant #{row.fct.fct_rank ?? '—'}
-                {' · '}{fmtMcap(row.info?.marketCap)}
-            </div>
+            {d && (
+                <div className="mt-2 flex items-center justify-between text-[11px] font-mono text-ink-3">
+                    <span>Base IV: {fmtMoney(d.median_iv)}</span>
+                    {row.skew != null && <span>Skew: {row.skew.toFixed(2)}x</span>}
+                </div>
+            )}
         </div>
     );
 }

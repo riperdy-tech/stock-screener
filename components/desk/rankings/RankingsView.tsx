@@ -20,15 +20,18 @@ import type { StockInfo } from '@/lib/desk/useDeskData';
 export type Lens = 'ai' | 'quant' | 'compare';
 
 const VERDICT_OPTIONS: [string, string][] = [
-    ['all', 'All verdicts'],
-    ['analyzed', 'Depth-analyzed'],
-    ['undervalued', 'Undervalued'],
-    ['fair', 'Fair'],
-    ['overvalued', 'Overvalued'],
+    ['all', 'All underwritings'],
+    ['analyzed', 'Depth underwritten'],
+    ['undervalued', 'Undervalued compounders'],
+    ['fair', 'Fair value rails'],
+    ['overvalued', 'Overvalued / Preserved'],
+    ['wide_moat', 'Wide Moat (≥4.0/5.0)'],
+    ['high_conviction', 'High Conviction (≥12/15)'],
+    ['asymmetric', 'Asymmetric Payoff (≥1.5x)'],
+    ['promoted', 'AI promoted (Watchlist gem)'],
+    ['demoted', 'AI demoted (Quant avoid)'],
     ['not_usable', 'No plausible run'],
-    ['promoted', 'AI promoted'],
-    ['demoted', 'AI demoted'],
-    ['vetoed', 'Vetoed'],
+    ['vetoed', 'Disqualified / Vetoed'],
 ];
 
 const BAND_OPTIONS: [string, string][] = [

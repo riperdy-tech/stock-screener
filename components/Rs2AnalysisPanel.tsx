@@ -149,6 +149,9 @@ function DepthVerdictBanner({ v }: { v: DepthVerdict }) {
                 {v.median_iv != null && <span>median <b>${v.median_iv}</b></span>}
                 {v.spread_pct != null && <span>run spread <b>{v.spread_pct}%</b></span>}
                 {v.size_hint && <span>size hint <b>{v.size_hint}</b></span>}
+                {v.conviction_score != null && <span>conviction <b>{v.conviction_score}/15</b></span>}
+                {v.business_quality_moat != null && <span>moat <b>{v.business_quality_moat}/5.0</b></span>}
+                {v.kelly_fraction_pct != null && <span>Kelly <b>{v.kelly_fraction_pct}%</b></span>}
                 <span>{v.n_basis} plausible run{v.n_basis === 1 ? "" : "s"}</span>
                 {v.date && <span>{v.date}</span>}
             </div>
