@@ -133,6 +133,38 @@ export function TranscriptViewer({
                                 </div>
                             ) : (
                                 <>
+                                    {/* Consensus Override Warning if this isolated seed conflicts with synthesized verdict */}
+                                    {(() => {
+                                        const v = bundle?.verdict;
+                                        const price = v?.price ?? cur.iv;
+                                        const individualMos = (cur.iv != null && price != null && price > 0)
+                                            ? ((cur.iv - price) / price) * 100
+                                            : null;
+                                        const consensusMos = (v?.median_iv != null && price != null && price > 0)
+                                            ? ((v.median_iv - price) / price) * 100
+                                            : v?.mos_vs_median_pct ?? null;
+
+                                        const seedWantsBuy = (individualMos != null && individualMos >= 15) || (cur.scorecard?.kelly_fraction_pct != null && cur.scorecard.kelly_fraction_pct > 0);
+                                        const consensusRejectsBuy = v?.direction === 'hold' || v?.direction === 'overvalued' || v?.size_hint === 'none';
+                                        const isSevereIvVariance = cur.iv != null && v?.median_iv != null && Math.abs(cur.iv - v.median_iv) / v.median_iv > 0.20;
+                                        const hasOverride = (seedWantsBuy && consensusRejectsBuy) || isSevereIvVariance;
+
+                                        if (!hasOverride) return null;
+
+                                        return (
+                                            <div className="mb-3.5 border border-warn/40 bg-warn/[0.05] p-3.5 rounded-xs font-mono text-[11px]">
+                                                <div className="flex items-center gap-2 text-warn font-bold uppercase tracking-wider">
+                                                    <span className="inline-block w-2 h-2 rounded-full bg-warn animate-pulse" />
+                                                    <span>Multi-Seed Deliberation Audit · Fiduciary Override</span>
+                                                </div>
+                                                <p className="mt-1.5 leading-relaxed text-ink-2">
+                                                    This individual seed evaluated Intrinsic Value at <b className="text-ink">{fmtMoney(cur.iv)}</b> ({individualMos != null ? fmtSignedPct(individualMos) : '—'} MoS){cur.scorecard?.kelly_fraction_pct != null && cur.scorecard.kelly_fraction_pct > 0 ? <> proposing a <b className="text-pos">{cur.scorecard.kelly_fraction_pct.toFixed(1)}% Kelly allocation</b></> : null}.
+                                                    In multi-seed deliberation, this thesis was <b className="text-warn">superseded by Consensus</b>: Median IV is <b className="text-ink">{fmtMoney(v?.median_iv)}</b> ({consensusMos != null ? fmtSignedPct(consensusMos) : '—'} MoS), assigning stance <b className="text-accent uppercase">{v?.direction}</b> with <b className="text-ink">{v?.size_hint?.toUpperCase() ?? 'NONE'}</b> allocation.
+                                                </p>
+                                            </div>
+                                        );
+                                    })()}
+
                                     {!cur.plausible && cur.reasons && cur.reasons.length > 0 && (
                                         <p className="mb-3 text-[11px] text-warn">
                                             Rejected by plausibility guards: {cur.reasons.join('; ')} — excluded from consensus median.

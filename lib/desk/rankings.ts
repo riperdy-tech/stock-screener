@@ -53,6 +53,29 @@ export interface RankingsInput {
     stockInfo: Record<string, StockInfo>;
 }
 
+/** Enriches depth verdict with mark-to-market live price and dynamic Margin of Safety */
+function enrichDepth(rawD: DepthVerdict | undefined, info: StockInfo | undefined): DepthVerdict | undefined {
+    if (!rawD) return undefined;
+    const livePrice = info?.price && info.price > 0 ? info.price : rawD.price ?? null;
+    const liveMos = (rawD.median_iv != null && livePrice != null && livePrice > 0)
+        ? ((rawD.median_iv - livePrice) / livePrice) * 100
+        : rawD.mos_vs_median_pct ?? null;
+
+    let liveDirection = rawD.direction;
+    if (livePrice != null && rawD.iv_band_low != null && rawD.iv_band_high != null) {
+        if (livePrice < rawD.iv_band_low) liveDirection = 'undervalued';
+        else if (livePrice > rawD.iv_band_high) liveDirection = 'overvalued';
+        else liveDirection = 'hold';
+    }
+
+    return {
+        ...rawD,
+        price: livePrice,
+        mos_vs_median_pct: liveMos,
+        direction: liveDirection,
+    };
+}
+
 /** Every scored ticker, quant order, with the depth verdict attached where it exists.
  * Tickers with active depth underwritings are always included even if fct_rank is null.
  */
@@ -72,7 +95,7 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
         includedTickers.add(ticker);
         const pl = (fct as any).fct_percentile_llm;
         const p = (fct as any).fct_percentile;
-        const d = depth[ticker];
+        const d = enrichDepth(depth[ticker], stockInfo[ticker]);
         const sc = d?.scorecard;
 
         rows.push({
@@ -98,7 +121,7 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
     // 2. Ensure any ticker present in depth that was not in factor.tickers is included
     for (const ticker of Array.from(depthTickers)) {
         if (includedTickers.has(ticker)) continue;
-        const d = depth[ticker];
+        const d = enrichDepth(depth[ticker], stockInfo[ticker]);
         const sc = d?.scorecard;
         const fallbackFct: FactorEntry = {
             fct_composite: null,
