@@ -203,12 +203,22 @@ export function aiSections(rows: DeskRow[]): AiSections {
     const vetoed: DeskRow[] = [];
 
     for (const r of rows) {
-        if (r.vetoed && (r.fct.fct_band === 'research_now' || r.depth)) { vetoed.push(r); continue; }
+        // If a ticker has an active depth underwriting, the depth model's institutional contract
+        // takes precedence over any preliminary heuristic quant veto:
         if (r.depth) {
             if (r.depth.direction === 'undervalued') researchNow.push(r);
+            else if (r.depth.direction === 'NOT_USABLE') vetoed.push(r);
             else watchlist.push(r);
             continue;
         }
+
+        // If not underwritten yet, check if disqualified by preliminary quant veto:
+        if (r.vetoed) {
+            if (r.fct.fct_band === 'research_now' || r.fct.fct_rank) vetoed.push(r);
+            continue;
+        }
+
+        // Shortlisted names awaiting depth run:
         if (r.fct.fct_band === 'research_now') awaiting.push(r);
     }
 
