@@ -246,7 +246,7 @@ export function DeliberationCell({ row }: { row: DeskRow }) {
 
 
 export function PriceCell({ row }: { row: DeskRow }) {
-    return <span className="block text-right font-mono text-[12px] text-ink">{fmtMoney(row.depth?.price ?? row.info?.price)}</span>;
+    return <span className="block text-center font-mono text-[12px] text-ink">{fmtMoney(row.depth?.price ?? row.info?.price)}</span>;
 }
 
 export function McapCell({ row }: { row: DeskRow }) {
@@ -362,16 +362,16 @@ export function SkewCell({ row }: { row: DeskRow }) {
 
 export function TriadCell({ row }: { row: DeskRow }) {
     const d = row.depth;
-    if (!d) return <span className="font-mono text-[11px] text-ink-3">—</span>;
+    if (!d) return <span className="block text-center font-mono text-[11px] text-ink-3">—</span>;
     const bear = row.bearIv;
     const base = d.median_iv;
     const bull = row.bullIv;
-    if (base == null) return <span className="font-mono text-[11px] text-ink-3">—</span>;
+    if (base == null) return <span className="block text-center font-mono text-[11px] text-ink-3">—</span>;
     return (
-        <span className="block font-mono text-[11px] leading-tight">
+        <span className="block text-center font-mono text-[11px] leading-tight">
             <span className="text-ink font-semibold">{fmtMoney(base, 0)}</span>
             {(bear != null || bull != null) && (
-                <span className="block text-[10px] text-ink-3">
+                <span className="block text-center text-[10px] text-ink-3">
                     {bear != null ? fmtMoney(bear, 0) : '—'} · {bull != null ? fmtMoney(bull, 0) : '—'}
                 </span>
             )}
