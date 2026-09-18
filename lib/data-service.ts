@@ -331,9 +331,41 @@ async function fetchJson<T>(path: string): Promise<T | null> {
     }
 }
 
+// ── Institutional Underwriting Contract (Charter v3.1 / Section 12) ──────────
+export interface ReentryTranches {
+    tranche_1_starter?: number | null;
+    tranche_2_core?: number | null;
+}
+
+export interface InstitutionalScorecard {
+    median_iv: number | null;
+    median_bull_iv?: number | null;
+    median_bear_iv?: number | null;
+    iv_band_low?: number | null;
+    iv_band_high?: number | null;
+    median_conviction_score?: number | null;
+    median_quality_moat?: number | null;
+    median_kelly_fraction_pct?: number | null;
+    asymmetric_payoff_skew?: number | null;
+    reentry_tranches?: ReentryTranches | null;
+    thesis_invalidation_triggers?: string[];
+}
+
+export interface SampleScorecard {
+    base_iv?: number | null;
+    bull_iv?: number | null;
+    bear_iv?: number | null;
+    conviction_score?: number | null;
+    business_quality_moat?: number | null;
+    kelly_fraction_pct?: number | null;
+    asymmetric_payoff_skew?: number | null;
+    reentry_tranches?: ReentryTranches | null;
+    thesis_invalidation_trigger?: string | null;
+}
+
 // ── Depth-tier band-direction verdicts (replacement pipeline, RS2 Local) ────
 // Written by orchestrate_depth.py at sweep end. band_direction_v1: direction is where the
-// price sits vs the IV band across 3 independent model runs; spread maps to a size hint.
+// price sits vs the IV band across independent model runs; spread maps to a size hint.
 export interface DepthVerdict {
     ticker: string;
     price: number | null;
@@ -349,10 +381,36 @@ export interface DepthVerdict {
     mos_vs_median_pct?: number | null;
     reason?: string | null;
     // Present in the shipped payload (band_direction_v1) but previously untyped.
-    samples_run?: number | null;      // runs attempted (3); n_basis = runs that passed the guards
+    samples_run?: number | null;      // runs attempted; n_basis = runs that passed the guards
     scheme?: string | null;
     consensus_dir?: string | null;    // run id, e.g. LULU_20260821_155157 — shown on the transcripts header
     backfilled?: boolean;
+
+    // Institutional Underwriting Contract (Charter v3.1 / Section 12)
+    scorecard?: InstitutionalScorecard | null;
+    conviction_score?: number | null;       // 1-15 conviction scale
+    business_quality_moat?: number | null;  // 1-5 economic moat scale
+    kelly_fraction_pct?: number | null;     // half-Kelly sizing fraction (e.g. 5.0%)
+    asymmetric_payoff_skew?: number | null; // bull payoff vs bear downside ratio
+    bull_iv?: number | null;                // median bull intrinsic value
+    bear_iv?: number | null;                // median bear intrinsic value
+    reentry_tranches?: ReentryTranches | null;
+    thesis_invalidation_triggers?: string[];
+    converged?: boolean | null;
+    early_stop?: boolean | null;
+    mode?: string | null;
+    runs?: Array<{
+        sample: number;
+        iv: number | null;
+        bull_iv?: number | null;
+        bear_iv?: number | null;
+        conviction?: number | null;
+        moat?: number | null;
+        kelly?: number | null;
+        secs?: number | null;
+        plausible?: boolean;
+        trigger?: string;
+    }>;
 }
 
 export interface DepthOverlayPayload {
@@ -370,6 +428,7 @@ export interface DepthSample {
     truncated: boolean;
     secs: number | null;
     report: string;
+    scorecard?: SampleScorecard | null;
 }
 
 export interface DepthReportBundle {
@@ -377,6 +436,7 @@ export interface DepthReportBundle {
     run: string;
     verdict: DepthVerdict;
     samples: DepthSample[];
+    scorecard?: InstitutionalScorecard | null;
 }
 
 export async function fetchDepthReport(ticker: string): Promise<DepthReportBundle | null> {
@@ -385,6 +445,14 @@ export async function fetchDepthReport(ticker: string): Promise<DepthReportBundl
 
 export async function fetchDepthOverlay(): Promise<DepthOverlayPayload | null> {
     return fetchJson<DepthOverlayPayload>('/data/depth_overlay.json');
+}
+
+export async function fetchLegacyDepthReport(ticker: string): Promise<DepthReportBundle | null> {
+    return fetchJson<DepthReportBundle>(`/data/depth_reports_legacy/${encodeURIComponent(ticker.toUpperCase())}.json`);
+}
+
+export async function fetchLegacyDepthOverlay(): Promise<DepthOverlayPayload | null> {
+    return fetchJson<DepthOverlayPayload>('/data/depth_overlay_legacy.json');
 }
 
 // ── On-demand (operator-requested) analyses ─────────────────────────────────

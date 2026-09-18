@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#0e0f11;font-family:'Hanken Grotesk',sans-serif}a{color:#a8b4d8}a:hover{color:#c3cce6}input{font:inherit}</style>
+</helmet>
+<div style="min-height:100vh;background:#131416;color:#e7e5e0">
+<div style="max-width:1280px;margin:0 auto;padding:0 40px 60px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.16);padding:24px 0 14px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-size:21px;font-weight:800;letter-spacing:.06em">STOCKPEAK</span>
+      <span style="font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.14em;color:#8b887f">AI RESEARCH DESK</span>
+    </div>
+    <div style="display:flex;gap:26px;font-size:13px;font-weight:600">
+      <span onClick="{{ goRank }}" style="cursor:pointer;padding-bottom:3px;color:{{ navRankC }};border-bottom:2px solid {{ navRankB }}">Rankings</span>
+      <span onClick="{{ goTrack }}" style="cursor:pointer;padding-bottom:3px;color:{{ navTrackC }};border-bottom:2px solid {{ navTrackB }}">Track Record</span>
+      <span onClick="{{ goPort }}" style="cursor:pointer;padding-bottom:3px;color:{{ navPortC }};border-bottom:2px solid {{ navPortB }}">Portfolio</span>
+      <span style="color:#8b887f;cursor:pointer">Handbook</span>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.09);font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.06em;color:#8b887f">
+    <span>THU AUG 21 2026 · RUN COMPLETE 06:04 ET</span>
+    <span>THE RECORD, SINCE JAN 2 — AI PICKS <span style="color:oklch(0.75 0.11 155);font-weight:600">+14.1%</span> VS IWM +8.3% · APPEND-ONLY</span>
+  </div>
+
+  <sc-if value="{{ hasDetail }}" hint-placeholder-val="{{ false }}">
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.09)">
+        <div style="display:flex;align-items:center;gap:18px">
+          <span onClick="{{ closeDetail }}" style="font-size:12px;color:#8b887f;cursor:pointer" style-hover="color:#e7e5e0">← Rankings</span>
+          <span style="font-size:20px;font-weight:800">{{ detail.t }} <span style="font-size:13px;font-weight:600;color:#8b887f">{{ detail.name }}</span></span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.08em;color:#66635b">{{ detail.secUp }} · ${{ detail.mcap }}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:16px;font-weight:600">${{ detail.price }}</span>
+          <span style="font-size:12.5px;font-weight:700;padding:7px 18px;border:1px solid oklch(0.78 0.08 250 / .6);color:oklch(0.78 0.08 250);cursor:pointer" style-hover="background:oklch(0.78 0.08 250 / .12)">Ask AI — run a fresh analysis</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.35fr 1fr;gap:0">
+        <div style="padding:26px 32px 28px 0;border-right:1px solid rgba(255,255,255,.09)">
+          <div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.14em;color:#8b887f">RS2 — THE AI ANALYST'S VERDICT · READ FROM THE FILINGS AUG 21, 05:52 ET</div>
+          <div style="display:flex;align-items:baseline;gap:14px;margin-top:12px">
+            <span style="font-size:26px;font-weight:800;letter-spacing:.02em;color:{{ detail.stanceColor }}">{{ detail.stance }}</span>
+            <span style="font-size:14px;color:#8b887f">action: <span style="color:#e7e5e0;font-weight:700">{{ detail.act }}</span></span>
+          </div>
+          <div style="display:flex;gap:28px;margin-top:16px">
+            <div><div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8b887f">CONVICTION</div><div style="font-family:'Spline Sans Mono',monospace;font-size:19px;font-weight:600;margin-top:4px">{{ detail.conv }}<span style="font-size:12px;color:#66635b">/15</span></div><div style="display:flex;height:4px;width:120px;background:rgba(255,255,255,.1);margin-top:6px"><span style="width:{{ detail.convW }}%;background:oklch(0.78 0.08 250)"></span></div></div>
+            <div><div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8b887f">MARGIN OF SAFETY</div><div style="font-family:'Spline Sans Mono',monospace;font-size:19px;font-weight:600;margin-top:4px;color:{{ detail.mosColor }}">{{ detail.mos }}%</div><div style="font-size:10.5px;color:#66635b;margin-top:6px">vs intrinsic {{ detail.intrinsic }} — cheapness today, not a price target</div></div>
+            <div><div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8b887f">GATE</div><div style="font-size:13px;font-weight:700;margin-top:6px;color:{{ detail.gateColor }}">{{ detail.gateLabel }}</div><div style="font-size:10.5px;color:#66635b;margin-top:3px">{{ detail.gate }}</div></div>
+          </div>
+          <div style="margin-top:20px;padding:16px 18px;border-left:2px solid oklch(0.78 0.08 250);background:rgba(255,255,255,.03);font-size:13.5px;line-height:1.6;color:#c9c6be">"{{ detail.thesis }}"</div>
+          <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+            <sc-for list="{{ detail.chips }}" as="chip" hint-placeholder-count="3">
+              <span style="font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.06em;padding:4px 10px;border:1px solid rgba(255,255,255,.14);color:#8b887f">{{ chip }}</span>
+            </sc-for>
+          </div>
+        </div>
+        <div style="padding:26px 0 28px 32px;display:flex;flex-direction:column;gap:22px">
+          <div>
+            <div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.14em;color:#8b887f">WHAT THE PRICE ASSUMES — REVERSE DCF</div>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+              <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="color:#8b887f">growth the price requires</span><span style="font-family:'Spline Sans Mono',monospace;font-weight:600">{{ detail.imp }}%</span></div><div style="display:flex;height:8px;background:rgba(255,255,255,.08)"><span style="width:{{ detail.impW }}%;background:#8b887f"></span></div></div>
+              <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="color:#8b887f">growth actually delivered, 5y</span><span style="font-family:'Spline Sans Mono',monospace;font-weight:600;color:oklch(0.75 0.11 155)">{{ detail.del }}%</span></div><div style="display:flex;height:8px;background:rgba(255,255,255,.08)"><span style="width:{{ detail.delW }}%;background:oklch(0.75 0.11 155)"></span></div></div>
+            </div>
+            <div style="margin-top:10px;font-size:12px;color:#8b887f;line-height:1.5">Gap: <span style="font-weight:700;font-family:'Spline Sans Mono',monospace;color:{{ detail.gapColor }}">{{ detail.gap }} pts</span> — {{ detail.gapNote }}</div>
+          </div>
+          <div style="border-top:1px solid rgba(255,255,255,.09);padding-top:18px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+              <div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.14em;color:#8b887f">QUANT FILTER — WHY IT REACHED THE AI'S DESK</div>
+              <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8b887f">composite <span style="color:#e7e5e0;font-weight:600">{{ detail.comp }}</span> · rank #{{ detail.qRank }}</div>
+            </div>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:7px;font-size:11px">
+              <sc-for list="{{ detail.factorRows }}" as="fr" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:10px"><span style="width:74px;color:#8b887f">{{ fr.n }}</span><div style="flex:1;display:flex;height:6px;background:rgba(255,255,255,.08)"><span style="width:{{ fr.v }}%;background:{{ fr.c }}"></span></div><span style="font-family:'Spline Sans Mono',monospace;color:#8b887f;width:26px;text-align:right">{{ fr.v }}</span></div>
+              </sc-for>
+            </div>
+            <div style="margin-top:12px;font-size:10.5px;color:#66635b;line-height:1.5">Sector-neutral, equal-weighted, safety haircuts applied. The AI starts where this ends.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showRankings }}" hint-placeholder-val="{{ true }}">
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;padding:22px 0 20px;border-bottom:1px solid rgba(255,255,255,.09)">
+        <div style="max-width:600px">
+          <div style="font-size:22px;font-weight:700;line-height:1.3;letter-spacing:-.01em">RS2, the AI analyst, read the filings of 459 candidates overnight. These are its verdicts.</div>
+          <div style="margin-top:8px;font-size:12.5px;color:#8b887f">A quant filter narrows 6,612 US stocks first — the AI only reads what survives. Research shortlist, not advice. <span style="color:oklch(0.78 0.08 250);border-bottom:1px dotted oklch(0.78 0.08 250 / .6);cursor:pointer">How it works</span></div>
+        </div>
+        <div style="display:flex;align-items:flex-end">
+          <div style="text-align:right;padding:0 24px;border-right:1px solid rgba(255,255,255,.12)"><div style="font-family:'Spline Sans Mono',monospace;font-size:28px;color:#8b887f">6,612</div><div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#66635b">QUANT-FILTERED</div></div>
+          <div style="text-align:right;padding:0 24px;border-right:1px solid rgba(255,255,255,.12)"><div style="font-family:'Spline Sans Mono',monospace;font-size:28px">459</div><div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#66635b">READ BY THE AI</div></div>
+          <div style="text-align:right;padding:0 0 0 24px"><div style="font-family:'Spline Sans Mono',monospace;font-size:28px;font-weight:600;color:oklch(0.78 0.08 250)">21</div><div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#66635b">RESEARCH NOW</div></div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0">
+        <div style="display:flex;gap:6px;align-items:center">
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.14em;color:#8b887f;margin-right:6px">LENS</span>
+          <span onClick="{{ setLensAi }}" style="font-size:12.5px;padding:5px 15px;cursor:pointer;font-weight:{{ lensAiW }};background:{{ lensAiBg }};color:{{ lensAiFg }};border:1px solid {{ lensAiBd }}">RS2 AI</span>
+          <span onClick="{{ setLensQ }}" style="font-size:12.5px;padding:5px 15px;cursor:pointer;font-weight:{{ lensQW }};background:{{ lensQBg }};color:{{ lensQFg }};border:1px solid {{ lensQBd }}">Quant filter</span>
+          <span onClick="{{ setLensC }}" style="font-size:12.5px;padding:5px 15px;cursor:pointer;font-weight:{{ lensCW }};background:{{ lensCBg }};color:{{ lensCFg }};border:1px solid {{ lensCBd }}">Compare</span>
+        </div>
+        <div style="display:flex;gap:16px;font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.05em;color:#8b887f">
+          <span>STANCE: ALL ▾</span><span>SECTOR: ALL ▾</span><span>SEARCH ⌘K</span>
+        </div>
+      </div>
+
+      <sc-if value="{{ isAi }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <div style="display:flex;align-items:baseline;gap:12px;border-top:2px solid #e7e5e0;padding:12px 0 4px">
+            <span style="font-size:14px;font-weight:800;letter-spacing:.08em">RESEARCH NOW</span>
+            <span style="font-size:12px;color:#8b887f">the AI's highest-conviction names — deep value, or fresh buys with conviction ≥ 9.5 · 21 names</span>
+          </div>
+          <div style="display:grid;grid-template-columns:30px 196px 176px 120px 96px 200px 108px 74px 58px;gap:0 14px;align-items:center;font-family:'Spline Sans Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:#8b887f;padding:8px 0 6px;border-bottom:1px solid rgba(255,255,255,.12)">
+            <span>#</span><span>STOCK</span><span>RS2 VERDICT</span><span>CONVICTION /15</span><span>MARGIN OF SAFETY</span><span>WHAT THE PRICE ASSUMES</span><span>QUANT FILTER</span><span style="text-align:right">PRICE</span><span style="text-align:right">MCAP</span>
+          </div>
+          <sc-for list="{{ aiRN }}" as="s" hint-placeholder-count="4">
+            <div onClick="{{ s.open }}" style="display:grid;grid-template-columns:30px 196px 176px 120px 96px 200px 108px 74px 58px;gap:0 14px;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer" style-hover="background:rgba(255,255,255,.03)">
+              <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8b887f">{{ s.aiRank }}</span>
+              <span><span style="font-size:15px;font-weight:800">{{ s.t }}</span><span style="font-size:11.5px;color:#8b887f"> {{ s.name }}</span><br><span style="font-size:10px;color:#66635b">{{ s.sec }}</span></span>
+              <span><span style="font-size:12.5px;font-weight:800;color:{{ s.stanceColor }}">{{ s.stance }}</span><span style="font-size:11.5px;color:#8b887f"> · {{ s.act }}</span><sc-if value="{{ s.hasPromo }}" hint-placeholder-val="{{ false }}"><br><span style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.06em;color:{{ s.promoColor }}">{{ s.promoText }}</span></sc-if><sc-if value="{{ s.showThesis }}" hint-placeholder-val="{{ false }}"><br><span style="font-size:10.5px;color:#66635b;line-height:1.4">{{ s.thesisShort }}</span></sc-if></span>
+              <span><span style="font-family:'Spline Sans Mono',monospace;font-size:13px;font-weight:600">{{ s.conv }}</span><span style="display:flex;height:4px;width:96px;background:rgba(255,255,255,.1);margin-top:5px"><span style="width:{{ s.convW }}%;background:oklch(0.78 0.08 250)"></span></span></span>
+              <span style="font-family:'Spline Sans Mono',monospace;font-size:13px;font-weight:600;color:{{ s.mosColor }}">{{ s.mos }}%</span>
+              <span style="font-size:11.5px;line-height:1.4;color:#8b887f">priced for <span style="color:#e7e5e0;font-weight:600">{{ s.imp }}%</span> growth · delivered <span style="color:#e7e5e0;font-weight:600">{{ s.del }}%</span></span>
+              <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;color:#8b887f">{{ s.comp }} <span style="font-size:9px;letter-spacing:.06em;color:#66635b">· RANK {{ s.qRank }}</span></span>
+              <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:12px">{{ s.price }}</span>
+              <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:11px;color:#8b887f">{{ s.mcap }}</span>
+            </div>
+          </sc-for>
+          <div style="display:flex;align-items:baseline;gap:12px;border-top:2px solid #e7e5e0;padding:14px 0 4px;margin-top:26px">
+            <span style="font-size:14px;font-weight:800;letter-spacing:.08em">WATCHLIST</span>
+            <span style="font-size:12px;color:#8b887f">the AI read them, but the verdict holds them back · 46 names</span>
+          </div>
+          <sc-for list="{{ aiWL }}" as="s" hint-placeholder-count="3">
+            <div onClick="{{ s.open }}" style="display:grid;grid-template-columns:30px 196px 176px 120px 96px 200px 108px 74px 58px;gap:0 14px;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer" style-hover="background:rgba(255,255,255,.03)">
+              <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8b887f">{{ s.aiRank }}</span>
+              <span><span style="font-size:15px;font-weight:800">{{ s.t }}</span><span style="font-size:11.5px;color:#8b887f"> {{ s.name }}</span><br><span style="font-size:10px;color:#66635b">{{ s.sec }}</span></span>
+              <span><span style="font-size:12.5px;font-weight:800;color:{{ s.stanceColor }}">{{ s.stance }}</span><span style="font-size:11.5px;color:#8b887f"> · {{ s.act }}</span><sc-if value="{{ s.hasPromo }}" hint-placeholder-val="{{ false }}"><br><span style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.06em;color:{{ s.promoColor }}">{{ s.promoText }}</span></sc-if></span>
+              <span><span style="font-family:'Spline Sans Mono',monospace;font-size:13px;font-weight:600">{{ s.conv }}</span><span style="display:flex;height:4px;width:96px;background:rgba(255,255,255,.1);margin-top:5px"><span style="width:{{ s.convW }}%;background:#8b887f"></span></span></span>
+              <span style="font-family:'Spline Sans Mono',monospace;font-size:13px;color:{{ s.mosColor }}">{{ s.mos }}%</span>
+              <span style="font-size:11.5px;line-height:1.4;color:#8b887f">{{ s.priceLine }}</span>
+              <span style="font-family:'Spline Sans Mono',monospace;font-size:11px;color:#8b887f">{{ s.comp }} <span style="font-size:9px;letter-spacing:.06em;color:#66635b">· RANK {{ s.qRank }}</span></span>
+              <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:12px">{{ s.price }}</span>
+              <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:11px;color:#8b887f">{{ s.mcap }}</span>
+            </div>
+          </sc-for>
+          <div style="display:grid;grid-template-columns:30px 196px 176px 1fr 74px 58px;gap:0 14px;align-items:center;padding:13px 0;opacity:.65">
+            <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8b887f">—</span>
+            <span><span style="font-size:15px;font-weight:800;color:#8b887f">SMCI</span><span style="font-size:11.5px;color:#66635b"> Super Micro</span><br><span style="font-size:10px;color:#66635b">Technology</span></span>
+            <span style="font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.08em;color:#c2695a">■ VETOED — HARD AVOID</span>
+            <span style="font-size:11.5px;color:#8b887f">the AI issued a hard avoid/sell after reading the filings — disqualified regardless of quant score</span>
+            <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8b887f">44.19</span>
+            <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:11px;color:#8b887f">26B</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isQuant }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="display:flex;align-items:baseline;gap:12px;border-top:2px solid #e7e5e0;padding:12px 0 4px">
+            <span style="font-size:14px;font-weight:800;letter-spacing:.08em">QUANT FILTER</span>
+            <span style="font-size:12px;color:#8b887f">the deterministic factor engine — five factors, sector-neutral, equal-weighted. This is what feeds the AI's desk.</span>
+          </div>
+          <div style="display:grid;grid-template-columns:30px 196px 100px 120px 110px 200px 170px 74px 58px;gap:0 14px;align-items:center;font-family:'Spline Sans Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:#8b887f;padding:8px 0 6px;border-bottom:1px solid rgba(255,255,255,.12)">
+            <span>#</span><span>STOCK</span><span>COMPOSITE</span><span>FACTOR MIX</span><span>BAND</span><span>DCF GAP</span><span>RS2 VERDICT</span><span style="text-align:right">PRICE</span><span style="text-align:right">MCAP</span>
+          </div>
+          <sc-for list="{{ quantList }}" as="s" hint-placeholder-count="7">
+            <div onClick="{{ s.open }}" style="display:grid;grid-template-columns:30px 196px 100px 120px 110px 200px 170px 74px 58px;gap:0 14px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer" style-hover="background:rgba(255,255,255,.03)">
+              <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8b887f">{{ s.qRank }}</span>
+              <span><span style="font-size:15px;font-weight:800">{{ s.t }}</span><span style="font-size:11.5px;color:#8b887f"> {{ s.name }}</span><br><span style="font-size:10px;color:#66635b">{{ s.sec }}</span></span>
+              <span style="font-family:'Spline Sans Mono',monospace;font-size:14px;font-weight:600">{{ s.comp }}</span>
+              <span style="display:flex;height:6px;width:104px"><span style="width:{{ s.fw.v }}%;background:#5a9b6d"></span><span style="width:{{ s.fw.q }}%;background:#6b93c4"></span><span style="width:{{ s.fw.m }}%;background:#cfa14e"></span><span style="width:{{ s.fw.l }}%;background:#9a83c2"></span><span style="width:{{ s.fw.r }}%;background:#c2798f"></span></span>
+              <span style="font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:{{ s.bandColor }}">■ {{ s.qBand }}</span>
+              <span><span style="font-family:'Spline Sans Mono',monospace;font-size:12px;font-weight:600;color:{{ s.gapColor }}">{{ s.gap }}</span><span style="font-size:10px;color:#8b887f"> · priced {{ s.imp }}% vs {{ s.del }}% real</span></span>
+              <span style="font-size:11px"><span style="font-weight:700;color:{{ s.stanceColor }}">{{ s.stance }}</span><span style="color:#8b887f"> · {{ s.conv }}/15 · {{ s.act }}</span></span>
+              <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:12px">{{ s.price }}</span>
+              <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:11px;color:#8b887f">{{ s.mcap }}</span>
+            </div>
+          </sc-for>
+          <div style="display:grid;grid-template-columns:30px 196px 100px 1fr 74px 58px;gap:0 14px;align-items:center;padding:12px 0;opacity:.65">
+            <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8b887f">—</span>
+            <span><span style="font-size:15px;font-weight:800;color:#8b887f">SMCI</span><span style="font-size:11.5px;color:#66635b"> Super Micro</span><br><span style="font-size:10px;color:#66635b">Technology</span></span>
+            <span style="font-family:'Spline Sans Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:#c2695a">■ VETO</span>
+            <span style="font-size:11px;color:#8b887f">disqualified before scoring — forensic pair: M-score + accruals both fired</span>
+            <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:12px;color:#8b887f">44.19</span>
+            <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:11px;color:#8b887f">26B</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isCompare }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="display:flex;align-items:baseline;gap:12px;border-top:2px solid #e7e5e0;padding:12px 0 4px">
+            <span style="font-size:14px;font-weight:800;letter-spacing:.08em">WHERE THE ENGINES DISAGREE</span>
+            <span style="font-size:12px;color:#8b887f">pure math vs the AI's reading of the filings — biggest gaps first. One of them is wrong.</span>
+          </div>
+          <div style="display:grid;grid-template-columns:180px 1fr 120px 1fr 220px;gap:0 20px;align-items:center;font-family:'Spline Sans Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:#8b887f;padding:12px 0 8px;border-bottom:1px solid rgba(255,255,255,.12)">
+            <span>STOCK</span><span style="text-align:right">QUANT SAYS</span><span style="text-align:center">DISAGREEMENT</span><span>THE AI SAYS</span><span>WHY THEY SPLIT</span>
+          </div>
+          <sc-for list="{{ compareList }}" as="s" hint-placeholder-count="7">
+            <div onClick="{{ s.open }}" style="display:grid;grid-template-columns:180px 1fr 120px 1fr 220px;gap:0 20px;align-items:center;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer" style-hover="background:rgba(255,255,255,.03)">
+              <span><span style="font-size:15px;font-weight:800">{{ s.t }}</span><span style="font-size:11px;color:#8b887f"> {{ s.name }}</span><br><span style="font-size:10px;color:#66635b">{{ s.sec }}</span></span>
+              <span style="text-align:right;font-size:12px;color:#8b887f">rank <span style="color:#e7e5e0;font-weight:700">#{{ s.qRank }}</span> · composite {{ s.comp }}<br><span style="font-size:10.5px;color:#66635b">{{ s.quantNote }}</span></span>
+              <span style="text-align:center"><span style="font-family:'Spline Sans Mono',monospace;font-size:20px;font-weight:600;color:{{ s.deltaColor }}">Δ{{ s.delta }}</span><br><span style="font-family:'Spline Sans Mono',monospace;font-size:8.5px;letter-spacing:.1em;color:#66635b">PCTL</span></span>
+              <span style="font-size:12px"><span style="font-weight:800;color:{{ s.stanceColor }}">{{ s.stance }}</span> <span style="color:#8b887f">· {{ s.act }} · #{{ s.aiRank }}</span><br><span style="font-size:10.5px;color:#66635b">conviction {{ s.conv }}/15 · MoS {{ s.mos }}%</span></span>
+              <span style="font-size:11.5px;line-height:1.5;color:#8b887f">{{ s.whySplit }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isTrack }}" hint-placeholder-val="{{ false }}">
+    <div>
+      <div style="padding:22px 0 18px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;justify-content:space-between;align-items:flex-end;gap:24px">
+        <div>
+          <div style="font-size:19px;font-weight:700">If the machine is wrong, this page says so — publicly and permanently.</div>
+          <div style="font-size:12.5px;color:#8b887f;margin-top:4px">Four portfolios paper-traded daily since Jan 2 with real prices and real costs. Append-only: 231 days, never edited, delistings included.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex:none">
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.1em;color:#8b887f">WHAT-IF COSTS</span>
+          <span style="display:flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.14);padding:4px 10px"><input type="number" min="0" max="1" step="0.05" value="{{ commission }}" onChange="{{ setCommission }}" style="width:52px;background:transparent;border:none;outline:none;color:#e7e5e0;font-family:'Spline Sans Mono',monospace;font-size:12px;font-weight:600"><span style="font-family:'Spline Sans Mono',monospace;font-size:10px;color:#66635b">% / TRADE</span></span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,.09)">
+        <div style="padding:18px 24px 18px 0;border-right:1px solid rgba(255,255,255,.09)"><div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8b887f">AI PICKS · EQUAL-WEIGHT</div><div style="font-family:'Spline Sans Mono',monospace;font-size:24px;font-weight:600;color:oklch(0.75 0.11 155);margin-top:6px">+14.1%</div><div style="font-size:11px;color:#8b887f;margin-top:3px">the pure stock-picking test</div></div>
+        <div style="padding:18px 24px;border-right:1px solid rgba(255,255,255,.09)"><div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8b887f">PLAN · VALUE CORE</div><div style="font-family:'Spline Sans Mono',monospace;font-size:24px;font-weight:600;color:oklch(0.75 0.11 155);margin-top:6px">+9.8%</div><div style="font-size:11px;color:#8b887f;margin-top:3px">kelly-sized · ~50% cash</div></div>
+        <div style="padding:18px 24px;border-right:1px solid rgba(255,255,255,.09)"><div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8b887f">PLAN2 · HYBRID</div><div style="font-family:'Spline Sans Mono',monospace;font-size:24px;font-weight:600;color:oklch(0.75 0.11 155);margin-top:6px">+13.6%</div><div style="font-size:11px;color:#8b887f;margin-top:3px">value core + quality sleeve</div></div>
+        <div style="padding:18px 0 18px 24px"><div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8b887f">BENCHMARKS</div><div style="font-family:'Spline Sans Mono',monospace;font-size:15px;margin-top:8px;color:#8b887f">IWM <span style="color:#e7e5e0;font-weight:600">+8.3%</span></div><div style="font-family:'Spline Sans Mono',monospace;font-size:15px;margin-top:4px;color:#8b887f">SPY <span style="color:#e7e5e0;font-weight:600">+10.1%</span></div></div>
+      </div>
+      <div style="padding:22px 0 6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:12px">
+          <div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.14em;color:#8b887f;flex:none">GROWTH OF $10,000</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.04em">
+            <sc-for list="{{ series }}" as="sr" hint-placeholder-count="9">
+              <span onClick="{{ sr.toggle }}" style="padding:4px 9px;cursor:pointer;border:1px solid {{ sr.chipBorder }};color:{{ sr.chipColor }}">{{ sr.mark }} {{ sr.label }}</span>
+            </sc-for>
+          </div>
+        </div>
+        <div style="position:relative" onMouseMove="{{ chartMove }}" onMouseLeave="{{ chartLeave }}">
+          <svg viewBox="0 0 640 210" style="width:100%;height:auto;display:block">
+            <sc-for list="{{ yTicks }}" as="yt" hint-placeholder-count="4">
+              <line x1="0" y1="{{ yt.y }}" x2="640" y2="{{ yt.y }}" stroke="rgba(255,255,255,.07)" stroke-width="1"></line>
+            </sc-for>
+            <sc-for list="{{ visSeries }}" as="sr" hint-placeholder-count="3">
+              <polyline points="{{ sr.pts }}" fill="none" stroke="{{ sr.color }}" stroke-width="{{ sr.sw }}" stroke-dasharray="{{ sr.dash }}"></polyline>
+            </sc-for>
+          </svg>
+          <sc-for list="{{ yTicks }}" as="yt" hint-placeholder-count="4">
+            <div style="position:absolute;left:2px;top:{{ yt.topPct }}%;transform:translateY(-100%);font-family:'Spline Sans Mono',monospace;font-size:8.5px;color:#66635b;pointer-events:none">{{ yt.label }}</div>
+          </sc-for>
+          <sc-for list="{{ xTicks }}" as="xt" hint-placeholder-count="5">
+            <div style="position:absolute;bottom:0;left:{{ xt.leftPct }}%;transform:translateX({{ xt.shift }});white-space:nowrap;font-family:'Spline Sans Mono',monospace;font-size:8.5px;color:#66635b;pointer-events:none">{{ xt.label }}</div>
+          </sc-for>
+          <sc-if value="{{ hasHover }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:0;bottom:24px;left:{{ tipX }}%;width:1px;background:rgba(255,255,255,.25);pointer-events:none"></div>
+            <div style="position:absolute;top:4px;left:{{ tipX }}%;transform:translateX({{ tipShift }});background:#0e0f11;border:1px solid rgba(255,255,255,.16);padding:9px 12px;pointer-events:none;z-index:5;min-width:148px">
+              <div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.1em;color:#8b887f">{{ tipDate }}</div>
+              <sc-for list="{{ tipRows }}" as="tr" hint-placeholder-count="3">
+                <div style="display:flex;justify-content:space-between;gap:16px;font-family:'Spline Sans Mono',monospace;font-size:10.5px;margin-top:4px"><span style="color:{{ tr.color }}">{{ tr.label }}</span><span style="color:#e7e5e0;font-weight:600">{{ tr.val }}</span></div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:14px">
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8b887f;flex:none">WINDOW</span>
+          <span onClick="{{ winAll }}" style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.06em;padding:3px 9px;border:1px solid rgba(255,255,255,.14);color:#8b887f;cursor:pointer" style-hover="color:#e7e5e0">ALL</span>
+          <span onClick="{{ win6 }}" style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.06em;padding:3px 9px;border:1px solid rgba(255,255,255,.14);color:#8b887f;cursor:pointer" style-hover="color:#e7e5e0">6M</span>
+          <span onClick="{{ win3 }}" style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.06em;padding:3px 9px;border:1px solid rgba(255,255,255,.14);color:#8b887f;cursor:pointer" style-hover="color:#e7e5e0">3M</span>
+          <span onClick="{{ win1 }}" style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.06em;padding:3px 9px;border:1px solid rgba(255,255,255,.14);color:#8b887f;cursor:pointer" style-hover="color:#e7e5e0">1M</span>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:9px;color:#66635b;flex:none;margin-left:10px">FROM</span>
+          <input type="range" min="0" max="{{ maxIdx }}" value="{{ r0 }}" onChange="{{ setR0 }}" style="flex:1;accent-color:oklch(0.78 0.08 250);height:14px;margin:0">
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:9px;color:#66635b;flex:none">TO</span>
+          <input type="range" min="0" max="{{ maxIdx }}" value="{{ r1 }}" onChange="{{ setR1 }}" style="flex:1;accent-color:oklch(0.78 0.08 250);height:14px;margin:0">
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:10px;color:#8b887f;flex:none">{{ rangeLabel }}</span>
+        </div>
+        <div style="display:flex;gap:18px;margin-top:12px;flex-wrap:wrap;font-family:'Spline Sans Mono',monospace;font-size:10px;color:#8b887f">
+          <sc-for list="{{ visSeries }}" as="sr" hint-placeholder-count="3">
+            <span><span style="color:{{ sr.color }}">━</span> {{ sr.label }} {{ sr.end }} ({{ sr.ret }})</span>
+          </sc-for>
+        </div>
+        <div style="margin-top:8px;font-family:'Spline Sans Mono',monospace;font-size:10px;color:#66635b">FEES AT {{ commission }}%/TRADE: {{ feeLine }}</div>
+      </div>
+      <div style="border-top:2px solid #e7e5e0;margin-top:26px;padding-top:12px">
+        <div style="display:flex;align-items:baseline;gap:12px">
+          <span style="font-size:14px;font-weight:800;letter-spacing:.08em">THE LEDGER</span>
+          <span style="font-size:12px;color:#8b887f">equal-weight AI picks — every position held and every trade made, appended daily</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1.15fr;gap:0 44px;margin-top:4px">
+          <div>
+            <div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8b887f;padding:10px 0 0">CURRENT HOLDINGS · 21 POSITIONS</div>
+            <div style="display:grid;grid-template-columns:70px 70px 1fr 1fr 60px;gap:0 12px;font-family:'Spline Sans Mono',monospace;font-size:8.5px;letter-spacing:.1em;color:#66635b;padding:10px 0 6px;border-bottom:1px solid rgba(255,255,255,.12)">
+              <span>TICKER</span><span>ENTERED</span><span style="text-align:right">ENTRY</span><span style="text-align:right">NOW</span><span style="text-align:right">P&amp;L</span>
+            </div>
+            <sc-for list="{{ holdings }}" as="h" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:70px 70px 1fr 1fr 60px;gap:0 12px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+                <span style="font-size:13px;font-weight:800">{{ h.t }}</span>
+                <span style="font-family:'Spline Sans Mono',monospace;font-size:10px;color:#8b887f">{{ h.entered }}</span>
+                <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:11px;color:#8b887f">{{ h.entry }}</span>
+                <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:11px">{{ h.now }}</span>
+                <span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-size:11px;font-weight:600;color:{{ h.plColor }}">{{ h.pl }}</span>
+              </div>
+            </sc-for>
+            <div style="font-family:'Spline Sans Mono',monospace;font-size:9.5px;color:#66635b;padding:10px 0">+ 15 MORE — FULL LIST IN THE DAILY CSV</div>
+          </div>
+          <div>
+            <div style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.12em;color:#8b887f;padding:10px 0 0">DAILY ACTIVITY — WHAT WAS BOUGHT &amp; SOLD</div>
+            <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,.12)">
+              <sc-for list="{{ ledger }}" as="l" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:70px 1fr;gap:0 14px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+                  <span style="font-family:'Spline Sans Mono',monospace;font-size:10px;color:#8b887f;padding-top:2px">{{ l.d }}</span>
+                  <span style="display:flex;flex-direction:column;gap:3px">
+                    <sc-for list="{{ l.acts }}" as="act" hint-placeholder-count="1">
+                      <span style="font-size:11.5px;line-height:1.45"><span style="font-family:'Spline Sans Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:.06em;color:{{ act.color }}">{{ act.tag }}</span> <span style="color:#8b887f">{{ act.txt }}</span></span>
+                    </sc-for>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="font-family:'Spline Sans Mono',monospace;font-size:9.5px;color:#66635b;padding:10px 0">APPEND-ONLY — 231 DAYS ON FILE · FULL HISTORY IN THE CSV</div>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.09);margin-top:14px;padding-top:12px;font-size:11px;color:#8b887f;line-height:1.5"><span style="font-family:'Spline Sans Mono',monospace;font-size:9px;letter-spacing:.1em;color:#cfa14e">SOLD TOO EARLY · 2</span><br>ANF exited +8%, now +31% · CLS exited +12%, now +26%. A recurring pattern here means the exit rule needs work.</div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isPort }}" hint-placeholder-val="{{ false }}">
+    <div>
+      <div style="padding:22px 0 20px;border-bottom:1px solid rgba(255,255,255,.09)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <div style="font-size:16px;font-weight:800">My Portfolio <span style="font-size:11.5px;font-weight:500;color:#8b887f">— your actual holdings, saved only in this browser, checked against the model</span></div>
+          <span style="font-family:'Spline Sans Mono',monospace;font-size:10px;color:#8b887f;cursor:pointer">+ ADD HOLDING</span>
+        </div>
+        <div style="display:grid;grid-template-columns:150px 110px 110px 170px 1fr;gap:0 18px;font-family:'Spline Sans Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:#8b887f;padding:14px 0 7px;border-bottom:1px solid rgba(255,255,255,.12)">
+          <span>HOLDING</span><span style="text-align:right">WEIGHT</span><span style="text-align:right">MODEL SIZE</span><span>VERDICT</span><span>NOTE</span>
+        </div>
+        <div style="display:grid;grid-template-columns:150px 110px 110px 170px 1fr;gap:0 18px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px">
+          <span style="font-weight:800;font-size:14px">CROX</span><span style="text-align:right;font-family:'Spline Sans Mono',monospace">4.2%</span><span style="text-align:right;font-family:'Spline Sans Mono',monospace;color:#8b887f">4.8%</span><span style="color:oklch(0.75 0.11 155);font-weight:700">ALIGNED</span><span style="color:#8b887f">within a point of the quarter-Kelly size</span>
+        </div>
+        <div style="display:grid;grid-template-columns:150px 110px 110px 170px 1fr;gap:0 18px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px">
+          <span style="font-weight:800;font-size:14px">NVDA</span><span style="text-align:right;font-family:'Spline Sans Mono',monospace">18.6%</span><span style="text-align:right;font-family:'Spline Sans Mono',monospace;color:#8b887f">0%</span><span style="color:#cfa14e;font-weight:700">OVERWEIGHT</span><span style="color:#8b887f">AI says overvalued · reduce — no model allocation</span>
+        </div>
+        <div style="display:grid;grid-template-columns:150px 110px 110px 170px 1fr;gap:0 18px;align-items:center;padding:11px 0;font-size:12px">
+          <span style="font-weight:800;font-size:14px;color:#8b887f">SMCI</span><span style="text-align:right;font-family:'Spline Sans Mono',monospace">3.1%</span><span style="text-align:right;font-family:'Spline Sans Mono',monospace;color:#8b887f">—</span><span style="color:#c2695a;font-weight:700">■ VETOED</span><span style="color:#8b887f">hard avoid — both forensic alarms fired</span>
+        </div>
+      </div>
+      <div style="padding:20px 0 0">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:16px;font-weight:800">Suggested plan <span style="font-size:11.5px;font-weight:500;color:#8b887f">— machine-built from the Research Now list. NOT your portfolio; nothing executes.</span></div>
+          <div style="display:flex;font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,.14)">
+            <span onClick="{{ setCore }}" style="padding:5px 14px;cursor:pointer;background:{{ coreBg }};color:{{ coreFg }}">Value core</span><span onClick="{{ setHyb }}" style="padding:5px 14px;cursor:pointer;border-left:1px solid rgba(255,255,255,.14);background:{{ hybBg }};color:{{ hybFg }}">Hybrid</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding:8px 14px;border:1px solid rgba(255,255,255,.09);display:flex;gap:10px;align-items:center;font-size:11.5px;color:#8b887f">
+          <span style="width:7px;height:7px;border-radius:50%;background:#cfa14e"></span>Macro: 1 of 4 flags on (yield curve). De-risk triggers at 2 — all sizes would halve automatically.
+        </div>
+        <div style="display:grid;grid-template-columns:150px 110px 1fr 320px;gap:0 18px;font-family:'Spline Sans Mono',monospace;font-size:8.5px;letter-spacing:.12em;color:#8b887f;padding:16px 0 7px;border-bottom:1px solid rgba(255,255,255,.12)">
+          <span>NAME</span><span style="text-align:right">SIZE</span><span></span><span>SIZING LOGIC</span>
+        </div>
+        <sc-for list="{{ planRows }}" as="p" hint-placeholder-count="5">
+          <div style="display:grid;grid-template-columns:150px 110px 1fr 320px;gap:0 18px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px;background:{{ p.rowBg }}">
+            <span style="font-weight:800;font-size:14px;color:{{ p.nameColor }}">{{ p.t }}</span><span style="text-align:right;font-family:'Spline Sans Mono',monospace;font-weight:600;color:{{ p.nameColor }}">{{ p.size }}</span><div style="display:flex;height:6px;background:rgba(255,255,255,.06)"><span style="width:{{ p.w }}%;background:{{ p.barColor }}"></span></div><span style="color:#8b887f;font-size:11px">{{ p.logic }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultLens&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;ai&quot;, &quot;options&quot;: [&quot;ai&quot;, &quot;quant&quot;, &quot;compare&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Behavior&quot;}, &quot;showThesis&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  state = { tab: 'rankings', lens: null, detail: null, planMode: 'core', commission: '0.10', hi: null, r0: 0, r1: null, on: { equal: true, plan: true, plan2: false, mine: false, iwm: true, spy: false, qqq: false, dram: false, soxl: false } };
+
+  DATA = [
+    { t: 'CROX', name: 'Crocs', sec: 'Consumer Discretionary', mcap: '6.8B', price: '118.36', comp: '92.8', qRank: 2, qBand: 'RSRCH NOW', f: { v: 92, q: 84, m: 61, l: 55, r: 68 }, aiRank: 1, aiBand: 'rn', stance: 'UNDERVALUED', act: 'buy', conv: 12, mos: '38', imp: '1.8', del: '13.2', gap: '−11.4', delta: 1, promo: null, intrinsic: '$190', gateLabel: 'Research Now', gate: 'deep value tier: MoS ≥ 30% at any conviction', thesis: 'Market prices a brand in decline; filings show stable margins, shrinking share count, and debt paid down three years running. The pessimism is not in the numbers.', chips: ['GPR 1 — LOW', '▲ INSIDERS NET-BUYING', 'NO FORENSIC FLAGS', 'ENTERED RESEARCH NOW AUG 19'], quantNote: 'research now — value-led', whySplit: 'Full agreement — the strongest kind of signal this site produces.' },
+    { t: 'PLAB', name: 'Photronics', sec: 'Semiconductors', mcap: '1.9B', price: '31.42', comp: '94.1', qRank: 1, qBand: 'RSRCH NOW', f: { v: 88, q: 79, m: 74, l: 62, r: 58 }, aiRank: 2, aiBand: 'rn', stance: 'UNDERVALUED', act: 'buy', conv: 11, mos: '34', imp: '3.1', del: '12.3', gap: '−9.2', delta: 1, promo: null, intrinsic: '$47', gateLabel: 'Research Now', gate: 'deep value tier: MoS ≥ 30% at any conviction', thesis: 'A photomask duopoly priced like a commodity shop. Ten years of positive FCF, net cash, and the price assumes 3% growth against 12% delivered.', chips: ['GPR 2 — TAIWAN EXPOSURE', 'NO FORENSIC FLAGS', 'ENTERED RESEARCH NOW AUG 12'], quantNote: 'research now — broad strength', whySplit: 'Full agreement — the strongest kind of signal this site produces.' },
+    { t: 'MLI', name: 'Mueller Industries', sec: 'Industrials', mcap: '10.4B', price: '92.10', comp: '91.5', qRank: 3, qBand: 'RSRCH NOW', f: { v: 76, q: 88, m: 68, l: 70, r: 44 }, aiRank: 3, aiBand: 'rn', stance: 'UNDERVALUED', act: 'buy', conv: 10, mos: '27', imp: '4.9', del: '9.4', gap: '−4.5', delta: 3, promo: null, intrinsic: '$126', gateLabel: 'Research Now', gate: 'moderate value tier: MoS ≥ 15% + conviction ≥ 9.5', thesis: 'A copper fabricator with fortress accounting: net cash, ROIC above 20% for five years, and a price that assumes half the growth it keeps delivering.', chips: ['GPR 1 — LOW', 'NO FORENSIC FLAGS', 'ENTERED RESEARCH NOW JUL 30'], quantNote: 'research now — quality-led', whySplit: 'Full agreement — both engines like the accounting.' },
+    { t: 'HRB', name: 'H&R Block', sec: 'Consumer Discretionary', mcap: '8.5B', price: '62.84', comp: '87.3', qRank: 38, qBand: 'WATCHLIST', f: { v: 82, q: 77, m: 38, l: 74, r: 51 }, aiRank: 4, aiBand: 'rn', stance: 'UNDERVALUED', act: 'fresh buy', conv: 10, mos: '22', imp: '0.9', del: '6.2', gap: '−5.3', delta: 34, promo: 'up', intrinsic: '$81', gateLabel: 'Research Now', gate: 'moderate value tier + genuine fresh buy, conviction ≥ 9.5', thesis: 'Quant underrates it: momentum is flat, but the filings show a buyback machine retiring 6% of shares yearly with utterly stable cash flow. Promoted on durability the factors cannot see.', chips: ['GPR 0 — NONE', '▲ INSIDERS NET-BUYING', 'AI PROMOTED AUG 21'], quantNote: 'watchlist — momentum flat', whySplit: 'The AI promoted on buyback durability the factors cannot see — 6% of shares retired yearly.' },
+    { t: 'JXN', name: 'Jackson Financial', sec: 'Financials', mcap: '7.6B', price: '103.55', comp: '89.6', qRank: 5, qBand: 'RSRCH NOW', f: { v: 90, q: 52, m: 60, l: 55, r: 48 }, aiRank: 12, aiBand: 'wl', stance: 'FAIR', act: 'hold', conv: 7, mos: '13', imp: '2.4', del: '10.5', gap: '−8.1', delta: 4, promo: null, intrinsic: '$117', gateLabel: 'Watchlist', gate: 'MoS below the 15% moderate-value bar', thesis: 'Statutory accounting makes the cheapness partly optical; hedging results swing the economics more than the screen suggests. Cheap, but not as cheap as it looks.', chips: ['GPR 0 — NONE', 'NO FORENSIC FLAGS'], quantNote: 'research now — value-led', whySplit: 'Mild split — the AI discounts insurance accounting the factors take at face value.' },
+    { t: 'NVDA', name: 'NVIDIA', sec: 'Semiconductors', mcap: '4.8T', price: '196.40', comp: '84.9', qRank: 22, qBand: 'WATCHLIST', f: { v: 12, q: 92, m: 88, l: 35, r: 72 }, aiRank: 31, aiBand: 'wl', stance: 'OVERVALUED', act: 'reduce', conv: 10, mos: '−18', imp: '34.9', del: '24.1', gap: '+10.8', delta: 9, promo: null, intrinsic: '$161', gateLabel: 'Demoted', gate: 'bearish stance — demoted out of Research Now', thesis: 'A great business at a price that requires 34.9% compounding — above anything it has sustained across a full cycle. The filings are clean; the price needs a story.', chips: ['GPR 2 — EXPORT CONTROLS', 'NO FORENSIC FLAGS'], quantNote: 'watchlist — quality + momentum', whySplit: 'Mild split — both respect the business; the AI will not pay for 34.9% required growth.' },
+    { t: 'ACLS', name: 'Axcelis', sec: 'Semiconductors', mcap: '4.8B', price: '148.77', comp: '90.2', qRank: 4, qBand: 'RSRCH NOW', f: { v: 64, q: 71, m: 86, l: 40, r: 62 }, aiRank: 24, aiBand: 'wl', stance: 'FAIR', act: 'hold', conv: 8, mos: '11', imp: '5.2', del: '12.0', gap: '−6.8', delta: 31, promo: 'down', intrinsic: '$166', gateLabel: 'Demoted', gate: 'AI demoted — thesis risk outweighs the quant score', thesis: 'Quant loves the momentum; the filings show order backlog thinning two quarters straight and customer concentration rising. Fairly priced for what is actually coming.', chips: ['GPR 2 — CHINA REVENUE', '▼ INSIDERS SELLING', 'LLM EXIT REVIEW: TRIM'], quantNote: 'research now — momentum-led', whySplit: 'The AI demoted: backlog thinning two quarters straight, customer concentration rising.' }
+  ];
+
+  SERIES = [
+    { k: 'equal', label: 'EQUAL', color: 'oklch(0.78 0.08 250)', dash: '', sw: '2.5', seed: 11, ret: 14.1, vol: 0.016, trades: 210 },
+    { k: 'plan', label: 'PLAN', color: '#c9c6be', dash: '', sw: '1.8', seed: 22, ret: 9.8, vol: 0.009, trades: 64 },
+    { k: 'plan2', label: 'PLAN2', color: '#c2798f', dash: '', sw: '1.8', seed: 33, ret: 13.6, vol: 0.013, trades: 88 },
+    { k: 'mine', label: 'MINE', color: '#cfa14e', dash: '', sw: '1.8', seed: 44, ret: 10.9, vol: 0.011, trades: 31 },
+    { k: 'iwm', label: 'IWM', color: '#6e6b64', dash: '4 4', sw: '1.8', seed: 55, ret: 8.3, vol: 0.012, trades: 0 },
+    { k: 'spy', label: 'SPY', color: '#6b93c4', dash: '4 4', sw: '1.8', seed: 66, ret: 10.1, vol: 0.009, trades: 0 },
+    { k: 'qqq', label: 'QQQ', color: '#4f9e8f', dash: '4 4', sw: '1.8', seed: 77, ret: 12.4, vol: 0.011, trades: 0 },
+    { k: 'dram', label: 'DRAM', color: '#8f7fc0', dash: '4 4', sw: '1.8', seed: 88, ret: 28.1, vol: 0.026, trades: 0 },
+    { k: 'soxl', label: 'SOXL', color: '#b56a4f', dash: '4 4', sw: '1.8', seed: 99, ret: 21.5, vol: 0.042, trades: 0 }
+  ];
+
+  days() {
+    if (!this._D) { this._D = []; const end = new Date(2026, 7, 21); for (let dt = new Date(2026, 0, 2); dt <= end; dt.setDate(dt.getDate() + 1)) { const w = dt.getDay(); if (w !== 0 && w !== 6) this._D.push(new Date(dt)); } }
+    return this._D;
+  }
+  vals(sr) {
+    this._V = this._V || {};
+    if (this._V[sr.k]) return this._V[sr.k];
+    const N = this.days().length; let s = (sr.seed * 2654435761) >>> 0;
+    const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296 - 0.5; };
+    const raw = [10000];
+    for (let i = 1; i < N; i++) raw.push(raw[i - 1] * (1 + rnd() * 2 * sr.vol));
+    const corr = Math.pow(10000 * (1 + sr.ret / 100) / raw[N - 1], 1 / (N - 1));
+    return this._V[sr.k] = raw.map((v, i) => Math.round(v * Math.pow(corr, i)));
+  }
+
+  HOLDINGS = [
+    { t: 'CROX', entered: 'AUG 19', entry: '112.40', now: '118.36', pl: '+5.3%' },
+    { t: 'HRB', entered: 'AUG 21', entry: '62.84', now: '62.84', pl: '0.0%' },
+    { t: 'PLAB', entered: 'AUG 12', entry: '29.10', now: '31.42', pl: '+8.0%' },
+    { t: 'DECK', entered: 'AUG 05', entry: '102.10', now: '99.80', pl: '−2.3%' },
+    { t: 'MLI', entered: 'JUL 30', entry: '88.75', now: '92.10', pl: '+3.8%' },
+    { t: 'JXN', entered: 'JUL 14', entry: '97.20', now: '103.55', pl: '+6.5%' }
+  ];
+  LEDGER = [
+    { d: 'AUG 21', acts: [{ tag: 'BUY', txt: 'HRB @ 62.84 — promoted into Research Now' }, { tag: 'SELL', txt: 'ANF @ 92.40 — exit rule fired at +8.0%' }] },
+    { d: 'AUG 20', acts: [{ tag: '—', txt: 'no changes · 21 positions held' }] },
+    { d: 'AUG 19', acts: [{ tag: 'BUY', txt: 'CROX @ 112.40 — entered deep value tier' }] },
+    { d: 'AUG 18', acts: [{ tag: 'SELL', txt: 'CLS @ 61.22 — exit rule fired at +12.1%' }] },
+    { d: 'AUG 15', acts: [{ tag: '—', txt: 'no changes · 21 positions held' }] },
+    { d: 'AUG 14', acts: [{ tag: 'SELL', txt: 'SMCI @ 48.02 — veto fired, forced exit −3.1%' }] },
+    { d: 'AUG 12', acts: [{ tag: 'BUY', txt: 'PLAB @ 29.10 — entered deep value tier' }] }
+  ];
+
+  PLAN_CORE = [
+    { t: 'CROX', size: '4.8%', w: 96, logic: 'quarter-Kelly · edge 11.4 pts / σ 34% · capped 5%' },
+    { t: 'PLAB', size: '4.1%', w: 82, logic: 'quarter-Kelly · edge 9.2 / σ 41%' },
+    { t: 'MLI', size: '3.6%', w: 72, logic: 'quarter-Kelly · sector cap 25% binds (industrials)' },
+    { t: 'HRB', size: '3.2%', w: 64, logic: 'quarter-Kelly · edge 5.3 / σ 28%' },
+    { t: 'CASH', size: '52%', w: 100, cash: true, logic: 'a feature, not a failure — dry powder where no edge is measurable' }
+  ];
+  PLAN_HYB = [
+    { t: 'CROX', size: '4.8%', w: 80, logic: 'value core · quarter-Kelly, capped 5%' },
+    { t: 'PLAB', size: '4.1%', w: 68, logic: 'value core · quarter-Kelly' },
+    { t: 'NVDA', size: '6.0%', w: 100, sleeve: true, logic: 'quality sleeve — top-ranked regardless of valuation gap' },
+    { t: 'MSFT', size: '5.4%', w: 90, sleeve: true, logic: 'quality sleeve — holds the expensive leaders the core refuses' },
+    { t: 'MLI', size: '3.6%', w: 60, logic: 'value core · sector cap binds' },
+    { t: 'CASH', size: '22%', w: 100, cash: true, logic: '~78% invested — the sleeve deploys the idle cash' }
+  ];
+
+  renderVals() {
+    const A = 'oklch(0.78 0.08 250)', G = 'oklch(0.75 0.11 155)', AM = '#cfa14e', R = '#c2695a', MU = '#8b887f';
+    const stanceColor = { UNDERVALUED: G, FAIR: AM, OVERVALUED: R };
+    const showThesis = this.props.showThesis ?? false;
+    const lens = this.state.lens || this.props.defaultLens || 'ai';
+    const tab = this.state.tab;
+    const deco = s => ({
+      ...s,
+      fw: s.f ? { v: Math.round(s.f.v / (s.f.v + s.f.q + s.f.m + s.f.l + s.f.r) * 100), q: Math.round(s.f.q / (s.f.v + s.f.q + s.f.m + s.f.l + s.f.r) * 100), m: Math.round(s.f.m / (s.f.v + s.f.q + s.f.m + s.f.l + s.f.r) * 100), l: Math.round(s.f.l / (s.f.v + s.f.q + s.f.m + s.f.l + s.f.r) * 100), r: Math.round(s.f.r / (s.f.v + s.f.q + s.f.m + s.f.l + s.f.r) * 100) } : null,
+      factorRows: [{ n: 'Value', v: s.f.v, c: '#5a9b6d' }, { n: 'Quality', v: s.f.q, c: '#6b93c4' }, { n: 'Momentum', v: s.f.m, c: '#cfa14e' }, { n: 'Low vol', v: s.f.l, c: '#9a83c2' }, { n: 'Revisions', v: s.f.r, c: '#c2798f' }],
+      secUp: s.sec.toUpperCase(),
+      stanceColor: stanceColor[s.stance] || MU,
+      gapColor: s.gap.startsWith('−') ? G : AM,
+      gapNote: s.gap.startsWith('−') ? 'you are being paid not to believe the growth story.' : 'the price needs an acceleration nobody has demonstrated yet.',
+      convW: Math.round(s.conv / 15 * 100),
+      mosColor: s.mos.startsWith('−') ? R : (parseFloat(s.mos) >= 15 ? G : MU),
+      gateColor: s.gateLabel === 'Research Now' ? A : (s.gateLabel === 'Demoted' ? AM : MU),
+      hasPromo: !!s.promo,
+      promoText: s.promo === 'up' ? '▲ AI PROMOTED FROM QUANT #' + s.qRank : '▼ AI DEMOTED FROM QUANT #' + s.qRank + ' · Δ' + s.delta,
+      promoColor: s.promo === 'up' ? A : AM,
+      bandColor: s.qBand === 'RSRCH NOW' ? A : MU,
+      deltaColor: s.delta >= 30 ? (s.promo === 'up' ? A : AM) : (s.delta >= 8 ? MU : '#66635b'),
+      impW: Math.min(100, Math.round(parseFloat(s.imp) / 35 * 100) + 4),
+      delW: Math.min(100, Math.round(parseFloat(s.del) / 15 * 100)),
+      priceLine: s.gap.startsWith('−') ? 'priced for ' + s.imp + '% growth · delivered ' + s.del + '%' : 'needs ' + s.imp + '% growth — never demonstrated',
+      showThesis: showThesis,
+      thesisShort: s.thesis.split('.')[0] + '.',
+      open: () => this.setState({ detail: s.t })
+    });
+    const all = this.DATA.map(deco);
+    const detail = this.state.detail ? all.find(s => s.t === this.state.detail) : null;
+    const bg = a => a ? '#e7e5e0' : 'transparent', fg = a => a ? '#131416' : '#8b887f', bd = a => a ? '#e7e5e0' : 'rgba(255,255,255,.14)', wt = a => a ? '700' : '500';
+    const navC = t => (tab === t ? '#e7e5e0' : '#8b887f'), navB = t => (tab === t ? A : 'transparent');
+    const c = parseFloat(this.state.commission) || 0;
+    const days = this.days(), maxIdx = days.length - 1;
+    const r0 = Math.max(0, Math.min(this.state.r0, maxIdx - 5));
+    const r1 = this.state.r1 == null ? maxIdx : Math.max(Math.min(this.state.r1, maxIdx), r0 + 5);
+    const series = this.SERIES.map(sr => {
+      const on = this.state.on[sr.k];
+      return { ...sr, vals: this.vals(sr), on, mark: on ? '●' : '○', chipBorder: on ? (sr.k === 'equal' ? 'oklch(0.78 0.08 250 / .6)' : 'rgba(255,255,255,.35)') : 'rgba(255,255,255,.12)', chipColor: on ? (sr.k === 'equal' ? A : '#c9c6be') : '#66635b', toggle: () => this.setState(st => ({ on: { ...st.on, [sr.k]: !st.on[sr.k] } })) };
+    });
+    let lo = Infinity, hi2 = -Infinity;
+    series.forEach(sr => { if (!sr.on) return; for (let i = r0; i <= r1; i++) { const v = sr.vals[i]; if (v < lo) lo = v; if (v > hi2) hi2 = v; } });
+    if (!isFinite(lo)) { lo = 9000; hi2 = 12000; }
+    const padY = (hi2 - lo) * 0.07 || 120; lo -= padY; hi2 += padY;
+    const CX = i => ((i - r0) / (r1 - r0) * 640).toFixed(1), CY = v => (186 - (v - lo) / (hi2 - lo) * 170).toFixed(1);
+    const visSeries = series.filter(sr => sr.on).map(sr => {
+      let pts = ''; for (let i = r0; i <= r1; i++) pts += CX(i) + ',' + CY(sr.vals[i]) + ' ';
+      const wr = (sr.vals[r1] / sr.vals[r0] - 1) * 100;
+      return { ...sr, pts, end: '$' + sr.vals[r1].toLocaleString('en-US'), ret: (wr >= 0 ? '+' : '') + wr.toFixed(1) + '%' };
+    });
+    const feeLine = visSeries.filter(sr => sr.trades > 0).map(sr => sr.label + ' −$' + Math.round(sr.trades * 500 * c / 100)).join(' · ') || 'benchmarks only — no trading costs';
+    const fmtD = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase();
+    const yTicks = [0, 1, 2, 3].map(j => { const v = lo + (hi2 - lo) * j / 3; const y = parseFloat(CY(v)); return { y: y.toFixed(1), topPct: (y / 210 * 100).toFixed(2), label: '$' + (v / 1000).toFixed(1) + 'K' }; });
+    const xTicks = [0, 1, 2, 3, 4].map(j => { const i = Math.round(r0 + (r1 - r0) * j / 4); return { leftPct: ((i - r0) / (r1 - r0) * 100).toFixed(2), shift: j === 0 ? '0%' : j === 4 ? '-100%' : '-50%', label: fmtD(days[i]) }; });
+    const hIdx = this.state.hi;
+    const hasHover = hIdx != null && hIdx >= r0 && hIdx <= r1 && visSeries.length > 0;
+    const frac = hasHover ? (hIdx - r0) / (r1 - r0) : 0;
+    const tipRows = hasHover ? visSeries.map(sr => ({ label: sr.label, color: sr.color, val: '$' + sr.vals[hIdx].toLocaleString('en-US') })) : [];
+    const chartMove = e => { const rc = e.currentTarget.getBoundingClientRect(); const f = Math.min(1, Math.max(0, (e.clientX - rc.left) / rc.width)); this.setState({ hi: Math.round(r0 + f * (r1 - r0)) }); };
+    const holdings = this.HOLDINGS.map(h => ({ ...h, plColor: h.pl.startsWith('−') ? R : h.pl === '0.0%' ? MU : G }));
+    const ledger = this.LEDGER.map(l => ({ ...l, acts: l.acts.map(a2 => ({ ...a2, color: a2.tag === 'BUY' ? G : a2.tag === 'SELL' ? R : '#66635b' })) }));
+    const planRows = (this.state.planMode === 'core' ? this.PLAN_CORE : this.PLAN_HYB).map(p => ({ ...p, nameColor: p.cash ? MU : '#e7e5e0', barColor: p.cash ? 'rgba(255,255,255,.18)' : (p.sleeve ? '#c2798f' : A), rowBg: p.sleeve ? 'rgba(194,121,143,.05)' : 'transparent' }));
+    return {
+      navRankC: navC('rankings'), navRankB: navB('rankings'), navTrackC: navC('track'), navTrackB: navB('track'), navPortC: navC('port'), navPortB: navB('port'),
+      goRank: () => this.setState({ tab: 'rankings', detail: null }),
+      goTrack: () => this.setState({ tab: 'track', detail: null }),
+      goPort: () => this.setState({ tab: 'port', detail: null }),
+      hasDetail: !!detail, detail,
+      closeDetail: () => this.setState({ detail: null }),
+      showRankings: tab === 'rankings' && !detail,
+      isTrack: tab === 'track', isPort: tab === 'port',
+      isAi: lens === 'ai', isQuant: lens === 'quant', isCompare: lens === 'compare',
+      setLensAi: () => this.setState({ lens: 'ai' }), setLensQ: () => this.setState({ lens: 'quant' }), setLensC: () => this.setState({ lens: 'compare' }),
+      lensAiBg: bg(lens === 'ai'), lensAiFg: fg(lens === 'ai'), lensAiBd: bd(lens === 'ai'), lensAiW: wt(lens === 'ai'),
+      lensQBg: bg(lens === 'quant'), lensQFg: fg(lens === 'quant'), lensQBd: bd(lens === 'quant'), lensQW: wt(lens === 'quant'),
+      lensCBg: bg(lens === 'compare'), lensCFg: fg(lens === 'compare'), lensCBd: bd(lens === 'compare'), lensCW: wt(lens === 'compare'),
+      aiRN: all.filter(s => s.aiBand === 'rn').sort((a, b) => a.aiRank - b.aiRank),
+      aiWL: all.filter(s => s.aiBand === 'wl').sort((a, b) => a.aiRank - b.aiRank),
+      quantList: all.slice().sort((a, b) => a.qRank - b.qRank),
+      compareList: all.slice().sort((a, b) => b.delta - a.delta),
+      series, visSeries, feeLine, yTicks, xTicks, holdings, ledger,
+      maxIdx, r0, r1, rangeLabel: fmtD(days[r0]) + ' — ' + fmtD(days[r1]),
+      setR0: e => { const v = parseInt(e.target.value) || 0; this.setState(st => ({ r0: Math.min(v, (st.r1 == null ? maxIdx : st.r1) - 5) })); },
+      setR1: e => { const v = parseInt(e.target.value) || 0; this.setState(st => ({ r1: Math.max(v, st.r0 + 5) })); },
+      winAll: () => this.setState({ r0: 0, r1: null }),
+      win6: () => this.setState({ r0: Math.max(0, maxIdx - 126), r1: null }),
+      win3: () => this.setState({ r0: Math.max(0, maxIdx - 63), r1: null }),
+      win1: () => this.setState({ r0: Math.max(0, maxIdx - 21), r1: null }),
+      chartMove, chartLeave: () => this.setState({ hi: null }),
+      hasHover, tipX: (frac * 100).toFixed(2), tipShift: frac < 0.15 ? '0%' : frac > 0.8 ? '-100%' : '-50%',
+      tipDate: hasHover ? fmtD(days[hIdx]) + ' 2026' : '', tipRows,
+      commission: this.state.commission,
+      setCommission: e => this.setState({ commission: e.target.value }),
+      planRows,
+      coreBg: bg(this.state.planMode === 'core'), coreFg: fg(this.state.planMode === 'core'),
+      hybBg: bg(this.state.planMode === 'hyb'), hybFg: fg(this.state.planMode === 'hyb'),
+      setCore: () => this.setState({ planMode: 'core' }), setHyb: () => this.setState({ planMode: 'hyb' })
+    };
+  }
+}
+</script>
+</body>
+</html>

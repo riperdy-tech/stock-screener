@@ -171,6 +171,33 @@ export function useDeskData() {
 
     useEffect(() => { load(); }, [load]);
 
+    // Real-time background sweep listener: polls every 25s + on window focus.
+    // When a new depth run finishes in orchestrate_depth.py and pushes to production,
+    // this immediately catches the new generated_at timestamp and refreshes the desk.
+    useEffect(() => {
+        let active = true;
+        const checkSweepUpdate = async () => {
+            try {
+                const res = await fetch(`/data/depth_overlay.json?t=${Date.now()}`);
+                if (!res.ok) return;
+                const fresh = await res.json();
+                if (active && fresh && fresh.generated_at && fresh.generated_at !== data.depthMeta.generated_at) {
+                    invalidateDeskCache();
+                    await load();
+                }
+            } catch {}
+        };
+
+        const interval = setInterval(checkSweepUpdate, 25000);
+        const onFocus = () => { checkSweepUpdate(); };
+        window.addEventListener('focus', onFocus);
+        return () => {
+            active = false;
+            clearInterval(interval);
+            window.removeEventListener('focus', onFocus);
+        };
+    }, [data.depthMeta.generated_at, load]);
+
     // The private `mine` book is RLS-scoped, so it re-attaches on every auth change.
     useEffect(() => {
         if (!auth.ready) return;

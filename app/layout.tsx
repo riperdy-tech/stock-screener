@@ -19,8 +19,8 @@ const spline = Spline_Sans_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Stockpeak — AI Research Desk",
-    description: "RS2 depth verdicts over a sector-neutral quant filter: valuation bands, a public paper-trade record, and a model-checked portfolio.",
+    title: "Stockpeak — Institutional Underwriting Desk",
+    description: "Charter v3.1 Institutional Equity Underwriting: Multi-scenario valuation triad, Section 12 institutional contract, and adaptive consensus.",
 };
 
 export default function RootLayout({

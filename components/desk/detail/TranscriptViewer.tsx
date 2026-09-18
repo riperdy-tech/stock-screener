@@ -1,23 +1,32 @@
 'use client';
 
-// Depth run transcripts — the raw model output, verbatim.
-//
-// Lines run to ~900 characters, so the viewer wraps rather than scrolling
-// sideways: `pre-wrap` + `overflow-wrap: anywhere`, and every ancestor in the
-// detail grid carries min-w-0 so the column cannot be pushed wider.
+// Institutional Consensus Underwriting Memoranda (Charter v3.1)
+// Displays verbatim multi-seed deliberations, research telemetry, and Section 12 machine contracts.
 
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Micro } from '../primitives';
 import { useLanguage } from '@/components/LanguageContext';
+import { fmtMoney } from '@/lib/desk/format';
 import type { DepthReportBundle } from '@/lib/data-service';
 
 const OPEN_KEY = 'desk.transcriptsOpen';
 
-export function TranscriptViewer({ bundle }: { bundle: DepthReportBundle | null }) {
+export function TranscriptViewer({
+    bundle,
+    activeTab,
+    onTabChange,
+}: {
+    bundle: DepthReportBundle | null;
+    activeTab?: number;
+    onTabChange?: (tab: number) => void;
+}) {
     const { t } = useLanguage();
     const [open, setOpen] = useState(true);
-    const [tab, setTab] = useState(0);
+    const [localTab, setLocalTab] = useState(0);
+
+    const tab = activeTab !== undefined ? activeTab : localTab;
+    const setTab = onTabChange || setLocalTab;
 
     useEffect(() => {
         const saved = localStorage.getItem(OPEN_KEY);
@@ -29,56 +38,119 @@ export function TranscriptViewer({ bundle }: { bundle: DepthReportBundle | null 
         return !v;
     });
 
-    const samples = (bundle?.samples ?? []).filter((s) => s.report && s.report.length > 0);
+    const samples = bundle?.samples ?? [];
     if (samples.length === 0) return null;
     const cur = samples[Math.min(tab, samples.length - 1)];
 
+    const spread = bundle?.verdict?.spread_pct;
+    const isEarlyStop = bundle?.verdict?.early_stop ?? (spread != null && spread <= 15);
+
     return (
-        <section className="mt-8 border-t border-rule-22 pt-5">
-            <div className="flex items-baseline justify-between gap-4">
-                <Micro className="font-semibold text-ink">
-                    {t('transcriptsTitle')} — {samples.length} sample report{samples.length === 1 ? '' : 's'}
-                    {bundle?.run ? ` (${bundle.run})` : ''}
-                </Micro>
-                <button onClick={toggle} className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2 hover:text-ink">
-                    {open ? `▾ ${t('transcriptsHide')}` : `▸ ${t('transcriptsShow')}`}
+        <section id="transcripts-section" className="mt-8 border-t border-rule-22 pt-5">
+            <div className="flex flex-wrap items-baseline justify-between gap-4">
+                <div className="flex items-center gap-2">
+                    <span className="inline-block w-2 h-2 rounded-full bg-accent" />
+                    <Micro className="font-bold uppercase tracking-wider text-ink">
+                        Consensus Underwriting Memoranda (Charter v3.1 Institutional Deliberation)
+                    </Micro>
+                    <span className="font-mono text-[11px] text-ink-3">
+                        · {samples.length} Independent Seed{samples.length === 1 ? '' : 's'} Executed
+                    </span>
+                </div>
+                <button
+                    onClick={toggle}
+                    className="font-mono text-[11px] text-ink-3 hover:text-ink flex items-center gap-1.5 transition-colors"
+                >
+                    <span>{open ? '▾ HIDE MEMORANDA' : '▸ EXPAND MEMORANDA'}</span>
                 </button>
             </div>
 
             {open && (
-                <>
-                    <div className="mt-3.5 flex flex-wrap gap-2">
-                        {samples.map((s, i) => (
-                            <button
-                                key={s.sample}
-                                onClick={() => setTab(i)}
-                                className={clsx(
-                                    'border px-3.5 py-1.5 font-mono text-[11px]',
-                                    i === tab
-                                        ? 'border-pos/60 bg-pos/[0.08] font-semibold text-pos'
-                                        : 'border-rule-24 text-ink-2 hover:text-ink',
-                                    !s.plausible && 'line-through decoration-neg/60',
-                                )}
-                            >
-                                Sample {s.sample}{s.iv != null ? ` · $${s.iv}` : ''}{s.truncated ? ' · truncated' : ''}
-                            </button>
-                        ))}
+                <div className="mt-4">
+                    {/* Sample Selector Tabs */}
+                    <div className="flex flex-wrap items-center gap-2 border-b border-rule-14 pb-3">
+                        <span className="font-mono text-[10.5px] uppercase tracking-wider text-ink-3 mr-1">
+                            Sample Runs:
+                        </span>
+                        {samples.map((s, i) => {
+                            const sc = s.scorecard;
+                            const isFailed = !s.plausible || !s.report || s.report.length === 0;
+                            return (
+                                <button
+                                    key={s.sample}
+                                    onClick={() => setTab(i)}
+                                    className={clsx(
+                                        'border px-3 py-1.5 font-mono text-[11px] transition-colors rounded-xs',
+                                        i === tab
+                                            ? 'border-accent bg-accent/15 font-bold text-accent'
+                                            : isFailed
+                                                ? 'border-warn/40 bg-warn/[0.03] text-warn/80 hover:border-warn hover:text-warn'
+                                                : 'border-rule-24 bg-white/[0.02] text-ink-2 hover:border-rule-36 hover:text-ink',
+                                    )}
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-bold">Run #{s.sample}</span>
+                                        {s.iv != null && <span className="font-semibold">{fmtMoney(s.iv)}</span>}
+                                        {isFailed && <span className="text-[10px] text-warn">(Token Limit)</span>}
+                                        {sc?.conviction_score != null && (
+                                            <span className="text-[10px] text-ink-3">
+                                                · {sc.conviction_score}/15
+                                            </span>
+                                        )}
+                                        {s.secs != null && (
+                                            <span className="text-[10px] text-ink-3">
+                                                · {Math.round(s.secs / 60)}m
+                                            </span>
+                                        )}
+                                    </div>
+                                </button>
+                            );
+                        })}
+                        <span className="ml-auto font-mono text-[10.5px] text-ink-3">
+                            {isEarlyStop ? 'Stopped early (≤15% spread tolerance satisfied)' : spread != null ? `Escalated run (Spread ${spread.toFixed(1)}%)` : ''}
+                        </span>
                     </div>
 
-                    {!cur.plausible && cur.reasons?.length > 0 && (
-                        <p className="mt-3 text-[11px] text-warn">
-                            Rejected by the guards: {cur.reasons.join('; ')} — this run is excluded from the band.
-                        </p>
+                    {/* Active Run Content */}
+                    {cur && (
+                        <div className="mt-4">
+                            {(!cur.report || cur.report.length === 0) ? (
+                                <div className="p-6 border border-warn/40 bg-warn/[0.04] rounded-sm">
+                                    <div className="flex items-center gap-2">
+                                        <span className="inline-block w-2.5 h-2.5 rounded-full bg-warn animate-pulse" />
+                                        <span className="font-mono text-[13px] font-bold text-warn uppercase tracking-wider">
+                                            Run #{cur.sample} Execution Guard Intercept
+                                        </span>
+                                    </div>
+                                    <p className="mt-3 text-[12.5px] text-ink-2 leading-relaxed">
+                                        This independent sample run was executed by the inference engine with deterministic seed perturbation, but reached the model&apos;s maximum generation context limit during deep chain-of-thought analysis before emitting the final markdown memorandum and Section 12 machine contract.
+                                    </p>
+                                    <div className="mt-4 flex flex-wrap items-center gap-6 font-mono text-[11px] text-ink-3 border-t border-rule-14 pt-3">
+                                        <span>Plausibility Guard: <b className="text-warn">REJECTED (Plausible = False)</b></span>
+                                        <span>Consensus Valuation: <b className="text-ink">Excluded from Median IV</b></span>
+                                        <span>Compute Time: <b className="text-ink-2">{cur.secs ? `${Math.round(cur.secs / 60)}m` : 'Timed Out'}</b></span>
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    {!cur.plausible && cur.reasons && cur.reasons.length > 0 && (
+                                        <p className="mb-3 text-[11px] text-warn">
+                                            Rejected by plausibility guards: {cur.reasons.join('; ')} — excluded from consensus median.
+                                        </p>
+                                    )}
+
+                                    <pre className="scroll-dark wrap-anywhere mt-2 max-h-[460px] min-w-0 overflow-y-auto border border-rule-18 bg-[#0d0f12] px-4 py-3.5 font-mono text-[11px] leading-[1.7] text-ink-q lg:max-h-[520px] lg:px-6 lg:py-5 lg:text-[12px]">
+                                        {cur.report}
+                                    </pre>
+                                </>
+                            )}
+                        </div>
                     )}
 
-                    <pre className="scroll-dark wrap-anywhere mt-3 max-h-[240px] min-w-0 overflow-y-auto border border-rule-14 bg-page px-3.5 py-3 font-mono text-[11px] leading-[1.65] text-ink-q lg:max-h-[340px] lg:px-5 lg:py-4 lg:text-[11.5px] lg:leading-[1.7]">
-                        {cur.report}
-                    </pre>
-
-                    <Micro className="mt-2 block text-ink-3">
-                        {t('transcriptsFoot')}
+                    <Micro className="mt-2.5 block text-ink-3">
+                        Charter v3.1 Institutional Underwriting Memorandum · Verbatim primary-source evidence, SEC filings citations, and Section 12 execution contract.
                     </Micro>
-                </>
+                </div>
             )}
         </section>
     );

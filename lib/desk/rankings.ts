@@ -26,16 +26,24 @@ export interface DeskRow {
     promo: 'promoted' | 'demoted' | 'none';
     vetoed: boolean;
     vetoReason: string | null;
+    /** Section 12 Institutional Underwriting Contract metrics */
+    conviction?: number | null;
+    moat?: number | null;
+    kelly?: number | null;
+    skew?: number | null;
+    bearIv?: number | null;
+    bullIv?: number | null;
 }
 
 export interface RankingFilters {
     search: string;
     band: string;      // 'all' | research_now | watchlist | monitor | pass
-    verdict: string;   // 'all' | analyzed | undervalued | fair | overvalued | not_usable | promoted | demoted | vetoed
+    verdict: string;   // 'all' | analyzed | undervalued | fair | overvalued | not_usable | promoted | demoted | vetoed | consensus_2 | escalated_3
     sector: string;
+    industry: string;
 }
 
-export const EMPTY_FILTERS: RankingFilters = { search: '', band: 'all', verdict: 'all', sector: 'all' };
+export const EMPTY_FILTERS: RankingFilters = { search: '', band: 'all', verdict: 'all', sector: 'all', industry: 'all' };
 
 export interface RankingsInput {
     factor: { tickers: Record<string, FactorEntry> } | null;
@@ -45,28 +53,85 @@ export interface RankingsInput {
     stockInfo: Record<string, StockInfo>;
 }
 
-/** Every scored ticker, quant order, with the depth verdict attached where it exists. */
+/** Every scored ticker, quant order, with the depth verdict attached where it exists.
+ * Tickers with active depth underwritings are always included even if fct_rank is null.
+ */
 export function buildRows({ factor, depth, valuations, overlay, stockInfo }: RankingsInput): DeskRow[] {
     if (!factor) return [];
-    const rows: DeskRow[] = Object.entries(factor.tickers)
-        .filter(([, e]) => e.fct_rank !== null && e.fct_rank !== undefined)
-        .sort((a, b) => (a[1].fct_rank! - b[1].fct_rank!))
-        .map(([ticker, fct]) => {
-            const pl = (fct as any).fct_percentile_llm;
-            const p = (fct as any).fct_percentile;
-            return {
-                ticker,
-                info: stockInfo[ticker],
-                fct,
-                depth: depth[ticker],
-                val: valuations[ticker],
-                overlay: overlay[ticker],
-                delta: (pl != null && p != null) ? Math.round(pl - p) : null,
-                promo: 'none',
-                vetoed: !!(fct.fct_veto || (fct as any).fct_llm_veto),
-                vetoReason: (fct.fct_veto_detail as string) || (fct.fct_veto as string) || null,
-            };
+
+    const depthTickers = new Set(Object.keys(depth || {}));
+    const includedTickers = new Set<string>();
+    const rows: DeskRow[] = [];
+
+    // 1. Process factor tickers that have a valid rank OR have an active depth report
+    for (const [ticker, fct] of Object.entries(factor.tickers)) {
+        const hasDepth = depthTickers.has(ticker);
+        const hasRank = fct.fct_rank !== null && fct.fct_rank !== undefined;
+        if (!hasRank && !hasDepth) continue;
+
+        includedTickers.add(ticker);
+        const pl = (fct as any).fct_percentile_llm;
+        const p = (fct as any).fct_percentile;
+        const d = depth[ticker];
+        const sc = d?.scorecard;
+
+        rows.push({
+            ticker,
+            info: stockInfo[ticker],
+            fct,
+            depth: d,
+            val: valuations[ticker],
+            overlay: overlay[ticker],
+            delta: (pl != null && p != null) ? Math.round(pl - p) : null,
+            promo: 'none',
+            vetoed: !!(fct.fct_veto || (fct as any).fct_llm_veto),
+            vetoReason: (fct.fct_veto_detail as string) || (fct.fct_veto as string) || null,
+            conviction: d?.conviction_score ?? sc?.median_conviction_score ?? null,
+            moat: d?.business_quality_moat ?? sc?.median_quality_moat ?? null,
+            kelly: d?.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct ?? null,
+            skew: d?.asymmetric_payoff_skew ?? sc?.asymmetric_payoff_skew ?? null,
+            bearIv: d?.bear_iv ?? sc?.median_bear_iv ?? null,
+            bullIv: d?.bull_iv ?? sc?.median_bull_iv ?? null,
         });
+    }
+
+    // 2. Ensure any ticker present in depth that was not in factor.tickers is included
+    for (const ticker of Array.from(depthTickers)) {
+        if (includedTickers.has(ticker)) continue;
+        const d = depth[ticker];
+        const sc = d?.scorecard;
+        const fallbackFct: FactorEntry = {
+            fct_composite: null,
+            fct_percentile: null,
+            fct_band: 'watchlist',
+            fct_rank: null,
+            fct_veto: null,
+            fct_z: null,
+            fct_contributions: null,
+            fct_haircuts: null,
+        };
+        rows.push({
+            ticker,
+            info: stockInfo[ticker],
+            fct: fallbackFct,
+            depth: d,
+            val: valuations[ticker],
+            overlay: overlay[ticker],
+            delta: null,
+            promo: 'promoted',
+            vetoed: false,
+            vetoReason: null,
+            conviction: d?.conviction_score ?? sc?.median_conviction_score ?? null,
+            moat: d?.business_quality_moat ?? sc?.median_quality_moat ?? null,
+            kelly: d?.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct ?? null,
+            skew: d?.asymmetric_payoff_skew ?? sc?.asymmetric_payoff_skew ?? null,
+            bearIv: d?.bear_iv ?? sc?.median_bear_iv ?? null,
+            bullIv: d?.bull_iv ?? sc?.median_bull_iv ?? null,
+        });
+    }
+
+    // Sort by quant rank (unranked names placed at the bottom of quant sorting)
+    rows.sort((a, b) => (a.fct.fct_rank ?? 1e9) - (b.fct.fct_rank ?? 1e9));
 
     // AI rank: the depth engine has no rank of its own, so the desk ranks the
     // names it called undervalued by how far the price sits below the median IV.
@@ -94,11 +159,24 @@ export function sectorsOf(rows: DeskRow[]): string[] {
     return Array.from(set).sort();
 }
 
+export function industriesOf(rows: DeskRow[], sector?: string): string[] {
+    const set = new Set<string>();
+    rows.forEach((r) => {
+        if (r.info?.industry && r.info.industry !== 'Unknown' && r.info.industry !== '—') {
+            if (!sector || sector === 'all' || r.info?.sector === sector) {
+                set.add(r.info.industry);
+            }
+        }
+    });
+    return Array.from(set).sort();
+}
+
 export function applyFilters(rows: DeskRow[], f: RankingFilters): DeskRow[] {
     const q = f.search.trim().toUpperCase();
     return rows.filter((r) => {
         if (f.band !== 'all' && r.fct.fct_band !== f.band) return false;
         if (f.sector !== 'all' && r.info?.sector !== f.sector) return false;
+        if (f.industry && f.industry !== 'all' && r.info?.industry !== f.industry) return false;
         if (f.verdict !== 'all') {
             const d = r.depth?.direction;
             switch (f.verdict) {
@@ -109,6 +187,11 @@ export function applyFilters(rows: DeskRow[], f: RankingFilters): DeskRow[] {
                 case 'not_usable': if (d !== 'NOT_USABLE') return false; break;
                 case 'promoted': if (r.promo !== 'promoted') return false; break;
                 case 'demoted': if (r.promo !== 'demoted') return false; break;
+                case 'wide_moat': if (r.moat == null || r.moat < 4.0) return false; break;
+                case 'high_conviction': if (r.conviction == null || r.conviction < 12) return false; break;
+                case 'asymmetric': if (r.skew == null || r.skew < 1.5) return false; break;
+                case 'consensus_2': if ((r.depth?.samples_run ?? r.depth?.n_basis) !== 2) return false; break;
+                case 'escalated_3': if ((r.depth?.samples_run ?? r.depth?.n_basis) !== 3) return false; break;
                 case 'vetoed': if (!r.vetoed) return false; break;
             }
         }
@@ -136,12 +219,22 @@ export function aiSections(rows: DeskRow[]): AiSections {
     const vetoed: DeskRow[] = [];
 
     for (const r of rows) {
-        if (r.vetoed && (r.fct.fct_band === 'research_now' || r.depth)) { vetoed.push(r); continue; }
+        // If a ticker has an active depth underwriting, the depth model's institutional contract
+        // takes precedence over any preliminary heuristic quant veto:
         if (r.depth) {
             if (r.depth.direction === 'undervalued') researchNow.push(r);
+            else if (r.depth.direction === 'NOT_USABLE') vetoed.push(r);
             else watchlist.push(r);
             continue;
         }
+
+        // If not underwritten yet, check if disqualified by preliminary quant veto:
+        if (r.vetoed) {
+            if (r.fct.fct_band === 'research_now' || r.fct.fct_rank) vetoed.push(r);
+            continue;
+        }
+
+        // Shortlisted names awaiting depth run:
         if (r.fct.fct_band === 'research_now') awaiting.push(r);
     }
 
