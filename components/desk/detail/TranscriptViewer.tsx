@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Micro } from '../primitives';
 import { useLanguage } from '@/components/LanguageContext';
-import { fmtMoney } from '@/lib/desk/format';
+import { fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import type { DepthReportBundle } from '@/lib/data-service';
 
 const OPEN_KEY = 'desk.transcriptsOpen';
@@ -145,7 +145,7 @@ export function TranscriptViewer({
                                             : v?.mos_vs_median_pct ?? null;
 
                                         const seedWantsBuy = (individualMos != null && individualMos >= 15) || (cur.scorecard?.kelly_fraction_pct != null && cur.scorecard.kelly_fraction_pct > 0);
-                                        const consensusRejectsBuy = v?.direction === 'hold' || v?.direction === 'overvalued' || v?.size_hint === 'none';
+                                        const consensusRejectsBuy = v?.direction === 'hold' || v?.direction === 'overvalued' || !v?.size_hint;
                                         const isSevereIvVariance = cur.iv != null && v?.median_iv != null && Math.abs(cur.iv - v.median_iv) / v.median_iv > 0.20;
                                         const hasOverride = (seedWantsBuy && consensusRejectsBuy) || isSevereIvVariance;
 
