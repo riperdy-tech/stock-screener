@@ -18,7 +18,7 @@ import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import { rankDelta, type AiSections, type DeskRow } from '@/lib/desk/rankings';
 import { useLanguage } from '@/components/LanguageContext';
 
-const GRID = 'grid grid-cols-[26px_minmax(175px,1.3fr)_155px_75px_120px_155px_95px_70px_70px] items-center gap-x-3.5';
+const GRID = 'grid grid-cols-[26px_minmax(170px,1.3fr)_155px_85px_130px_150px_90px_65px_65px] items-center gap-x-4';
 
 function HeaderRow() {
     return (
@@ -26,8 +26,8 @@ function HeaderRow() {
             <Micro>#</Micro>
             <Micro>COMPANY & INDUSTRY</Micro>
             <Micro>UNDERWRITING STANCE</Micro>
-            <Micro className="text-right">PRICE</Micro>
-            <Micro>VALUATION TRIAD</Micro>
+            <Micro className="text-center">PRICE</Micro>
+            <Micro className="text-center">VALUATION TRIAD</Micro>
             <Micro>DELIBERATION AUDIT</Micro>
             <Micro>MOAT / CONV</Micro>
             <Micro className="text-center">KELLY %</Micro>
