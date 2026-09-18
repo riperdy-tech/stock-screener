@@ -52,36 +52,85 @@ export interface RankingsInput {
     stockInfo: Record<string, StockInfo>;
 }
 
-/** Every scored ticker, quant order, with the depth verdict attached where it exists. */
+/** Every scored ticker, quant order, with the depth verdict attached where it exists.
+ * Tickers with active depth underwritings are always included even if fct_rank is null.
+ */
 export function buildRows({ factor, depth, valuations, overlay, stockInfo }: RankingsInput): DeskRow[] {
     if (!factor) return [];
-    const rows: DeskRow[] = Object.entries(factor.tickers)
-        .filter(([, e]) => e.fct_rank !== null && e.fct_rank !== undefined)
-        .sort((a, b) => (a[1].fct_rank! - b[1].fct_rank!))
-        .map(([ticker, fct]) => {
-            const pl = (fct as any).fct_percentile_llm;
-            const p = (fct as any).fct_percentile;
-            const d = depth[ticker];
-            const sc = d?.scorecard;
-            return {
-                ticker,
-                info: stockInfo[ticker],
-                fct,
-                depth: d,
-                val: valuations[ticker],
-                overlay: overlay[ticker],
-                delta: (pl != null && p != null) ? Math.round(pl - p) : null,
-                promo: 'none',
-                vetoed: !!(fct.fct_veto || (fct as any).fct_llm_veto),
-                vetoReason: (fct.fct_veto_detail as string) || (fct.fct_veto as string) || null,
-                conviction: d?.conviction_score ?? sc?.median_conviction_score ?? null,
-                moat: d?.business_quality_moat ?? sc?.median_quality_moat ?? null,
-                kelly: d?.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct ?? null,
-                skew: d?.asymmetric_payoff_skew ?? sc?.asymmetric_payoff_skew ?? null,
-                bearIv: d?.bear_iv ?? sc?.median_bear_iv ?? null,
-                bullIv: d?.bull_iv ?? sc?.median_bull_iv ?? null,
-            };
+
+    const depthTickers = new Set(Object.keys(depth || {}));
+    const includedTickers = new Set<string>();
+    const rows: DeskRow[] = [];
+
+    // 1. Process factor tickers that have a valid rank OR have an active depth report
+    for (const [ticker, fct] of Object.entries(factor.tickers)) {
+        const hasDepth = depthTickers.has(ticker);
+        const hasRank = fct.fct_rank !== null && fct.fct_rank !== undefined;
+        if (!hasRank && !hasDepth) continue;
+
+        includedTickers.add(ticker);
+        const pl = (fct as any).fct_percentile_llm;
+        const p = (fct as any).fct_percentile;
+        const d = depth[ticker];
+        const sc = d?.scorecard;
+
+        rows.push({
+            ticker,
+            info: stockInfo[ticker],
+            fct,
+            depth: d,
+            val: valuations[ticker],
+            overlay: overlay[ticker],
+            delta: (pl != null && p != null) ? Math.round(pl - p) : null,
+            promo: 'none',
+            vetoed: !!(fct.fct_veto || (fct as any).fct_llm_veto),
+            vetoReason: (fct.fct_veto_detail as string) || (fct.fct_veto as string) || null,
+            conviction: d?.conviction_score ?? sc?.median_conviction_score ?? null,
+            moat: d?.business_quality_moat ?? sc?.median_quality_moat ?? null,
+            kelly: d?.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct ?? null,
+            skew: d?.asymmetric_payoff_skew ?? sc?.asymmetric_payoff_skew ?? null,
+            bearIv: d?.bear_iv ?? sc?.median_bear_iv ?? null,
+            bullIv: d?.bull_iv ?? sc?.median_bull_iv ?? null,
         });
+    }
+
+    // 2. Ensure any ticker present in depth that was not in factor.tickers is included
+    for (const ticker of Array.from(depthTickers)) {
+        if (includedTickers.has(ticker)) continue;
+        const d = depth[ticker];
+        const sc = d?.scorecard;
+        const fallbackFct: FactorEntry = {
+            fct_composite: null,
+            fct_percentile: null,
+            fct_band: 'watchlist',
+            fct_rank: null,
+            fct_veto: null,
+            fct_z: null,
+            fct_contributions: null,
+            fct_haircuts: null,
+        };
+        rows.push({
+            ticker,
+            info: stockInfo[ticker],
+            fct: fallbackFct,
+            depth: d,
+            val: valuations[ticker],
+            overlay: overlay[ticker],
+            delta: null,
+            promo: 'promoted',
+            vetoed: false,
+            vetoReason: null,
+            conviction: d?.conviction_score ?? sc?.median_conviction_score ?? null,
+            moat: d?.business_quality_moat ?? sc?.median_quality_moat ?? null,
+            kelly: d?.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct ?? null,
+            skew: d?.asymmetric_payoff_skew ?? sc?.asymmetric_payoff_skew ?? null,
+            bearIv: d?.bear_iv ?? sc?.median_bear_iv ?? null,
+            bullIv: d?.bull_iv ?? sc?.median_bull_iv ?? null,
+        });
+    }
+
+    // Sort by quant rank (unranked names placed at the bottom of quant sorting)
+    rows.sort((a, b) => (a.fct.fct_rank ?? 1e9) - (b.fct.fct_rank ?? 1e9));
 
     // AI rank: the depth engine has no rank of its own, so the desk ranks the
     // names it called undervalued by how far the price sits below the median IV.

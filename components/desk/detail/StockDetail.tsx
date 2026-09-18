@@ -418,7 +418,42 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
         }),
         [data.factor, data.depth, data.valuations, data.overlay, data.stockInfo],
     );
-    const row = rows.find((r) => r.ticker === ticker);
+    const row = useMemo(() => {
+        const found = rows.find((r) => r.ticker === ticker);
+        if (found) return found;
+        if (data.depth && data.depth[ticker]) {
+            const d = data.depth[ticker];
+            const sc = d.scorecard;
+            return {
+                ticker,
+                info: data.stockInfo[ticker],
+                fct: {
+                    fct_composite: null,
+                    fct_percentile: null,
+                    fct_band: 'watchlist',
+                    fct_rank: null,
+                    fct_veto: null,
+                    fct_z: null,
+                    fct_contributions: null,
+                    fct_haircuts: null,
+                },
+                depth: d,
+                val: data.valuations[ticker],
+                overlay: data.overlay[ticker],
+                delta: null,
+                promo: 'promoted',
+                vetoed: false,
+                vetoReason: null,
+                conviction: d.conviction_score ?? sc?.median_conviction_score ?? null,
+                moat: d.business_quality_moat ?? sc?.median_quality_moat ?? null,
+                kelly: d.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct ?? null,
+                skew: d.asymmetric_payoff_skew ?? sc?.asymmetric_payoff_skew ?? null,
+                bearIv: d.bear_iv ?? sc?.median_bear_iv ?? null,
+                bullIv: d.bull_iv ?? sc?.median_bull_iv ?? null,
+            } as DeskRow;
+        }
+        return undefined;
+    }, [rows, data.depth, data.stockInfo, data.valuations, data.overlay, ticker]);
 
     const headline = useMemo(() => headlineFromSamples(bundle?.samples), [bundle]);
     const runIvs = useMemo(
