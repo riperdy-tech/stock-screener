@@ -65,17 +65,57 @@ export function VerdictCell({ row }: { row: DeskRow }) {
             </span>
         );
     }
+
+    const isDivergent = (d.spread_pct != null && d.spread_pct > 25) || d.converged === false;
     const tone = verdictTone(d.direction);
+
+    if (isDivergent && d.direction === 'undervalued') {
+        return (
+            <span className="block min-w-0" title={`Model spread (${d.spread_pct?.toFixed(1)}%) exceeds 25% tolerance. Deliberation unconverged.`}>
+                <span className="block text-[12.5px] font-extrabold leading-tight text-accent">
+                    DIVERGENT SPREAD
+                </span>
+                <span className="mt-0.5 block truncate text-[10.5px] text-warn font-mono">
+                    {d.spread_pct != null ? `${d.spread_pct.toFixed(0)}% spread` : 'Unconverged'} · Size Quarter
+                </span>
+            </span>
+        );
+    }
+
     const label = tone.keys.label ? t(tone.keys.label) : tone.label;
     const subline = tone.keys.subline ? t(tone.keys.subline) : tone.subline;
     const action = tone.keys.action ? t(tone.keys.action) : null;
-    // A partial size hint is still a buy, just a smaller one.
     const small = d.direction === 'undervalued' && d.size_hint && d.size_hint !== 'full';
+
     return (
         <span className="block min-w-0">
             <span className="block text-[13px] font-extrabold leading-tight" style={{ color: tone.color }}>{label}</span>
             <span className="mt-0.5 block truncate text-[11px] text-ink-3">
                 {subline}{action ? ` · ${action}${small ? ' ▪' : ''}` : ''}
+            </span>
+        </span>
+    );
+}
+
+/** Unified MOAT & CONVICTION cell to eliminate spacing collisions */
+export function MoatConvictionCell({ row }: { row: DeskRow }) {
+    const m = row.moat;
+    const c = row.conviction;
+    if (m == null && c == null) return <span className="font-mono text-[11px] text-ink-3">—</span>;
+
+    const isWide = m != null && m >= 4.0;
+    const isHigh = c != null && c >= 12;
+
+    return (
+        <span className="block font-mono text-[11.5px] leading-tight" title={`Economic Moat: ${m?.toFixed(1) ?? '-'}/5.0 · Conviction: ${c?.toFixed(0) ?? '-'}/15`}>
+            <span className="flex items-center gap-1.5">
+                <span className={isWide ? 'text-accent font-semibold' : m != null && m >= 3.0 ? 'text-ink' : 'text-warn'}>
+                    ★ {m != null ? m.toFixed(1) : '-'}
+                </span>
+                <span className="text-ink-3">·</span>
+                <span className={isHigh ? 'text-pos font-bold' : c != null && c >= 9 ? 'text-ink' : 'text-ink-3'}>
+                    {c != null ? `${c.toFixed(0)}/15` : '-'}
+                </span>
             </span>
         </span>
     );
@@ -129,14 +169,81 @@ export function QuantFilterCell({ row }: { row: DeskRow }) {
 }
 
 export function StockCell({ row }: { row: DeskRow }) {
+    const ind = row.info?.industry;
+    const sec = row.info?.sector;
     return (
         <span className="block min-w-0">
-            <span className="text-[15px] font-extrabold text-ink">{row.ticker}</span>
-            <span className="ml-1.5 text-[11px] text-ink-2">{row.info?.name ?? ''}</span>
-            <span className="mt-0.5 block truncate text-[11px] text-ink-3">{row.info?.sector ?? '—'}</span>
+            <div className="flex items-baseline gap-1.5 truncate">
+                <span className="text-[14.5px] font-extrabold text-ink tracking-tight">{row.ticker}</span>
+                <span className="truncate text-[11px] text-ink-2">{row.info?.name ?? ''}</span>
+            </div>
+            <div className="mt-1 flex flex-wrap items-center gap-1.5">
+                {ind && ind !== 'Unknown' && ind !== '—' && (
+                    <span
+                        className="inline-block rounded-xs bg-accent/[0.12] border border-accent/30 px-1.5 py-0.5 font-mono text-[9.5px] font-bold text-accent tracking-wide uppercase truncate max-w-[170px]"
+                        title={`Industry: ${ind}`}
+                    >
+                        {ind}
+                    </span>
+                )}
+                {sec && (
+                    <span className="text-[10px] text-ink-3 truncate max-w-[110px]" title={`Sector: ${sec}`}>
+                        {sec}
+                    </span>
+                )}
+            </div>
         </span>
     );
 }
+
+/** DELIBERATION CELL: Transparently audits multi-seed consensus (Run 1, Run 2, Run 3) */
+export function DeliberationCell({ row }: { row: DeskRow }) {
+    const d = row.depth;
+    if (!d) return <span className="block font-mono text-[11px] text-ink-3">—</span>;
+
+    const n = d.samples_run ?? d.n_basis ?? 1;
+    const spread = d.spread_pct;
+    const isTight = spread != null && spread <= 15;
+    const isEscalated = n >= 3;
+    const runs = d.runs || [];
+
+    const tooltip = runs.length > 0
+        ? `Deliberation Audit:\n` + runs.map(r => `• Run ${r.sample}: IV $${r.iv != null ? r.iv.toFixed(2) : '-'} (Moat ${r.moat ?? '-'}, Conviction ${r.conviction ?? '-'})`).join('\n') + `\nMedian: $${d.median_iv?.toFixed(2)} | Spread: ${spread != null ? spread.toFixed(1) + '%' : 'N/A'}`
+        : `${n} run(s) executed. Spread: ${spread != null ? spread.toFixed(1) + '%' : 'N/A'}`;
+
+    return (
+        <div className="min-w-0" title={tooltip}>
+            <div className="flex items-center gap-1.5">
+                <span className={clsx(
+                    'inline-flex items-center gap-1 rounded-xs border px-1.5 py-0.5 font-mono text-[10px] font-bold tracking-tight',
+                    isTight ? 'border-pos/40 bg-pos/[0.1] text-pos'
+                        : isEscalated ? 'border-accent/40 bg-accent/[0.1] text-accent'
+                            : 'border-rule-24 bg-white/[0.02] text-ink-2'
+                )}>
+                    <span>{n} RUNS</span>
+                    {spread != null && (
+                        <span>· {spread.toFixed(0)}% SPREAD</span>
+                    )}
+                </span>
+            </div>
+            <div className="mt-0.5 flex items-center gap-1 font-mono text-[9.5px] text-ink-3 truncate">
+                {isTight ? (
+                    <span className="text-pos font-semibold">Consensus (n=2)</span>
+                ) : isEscalated ? (
+                    <span className="text-accent font-semibold">Escalated (n=3)</span>
+                ) : (
+                    <span>Single seed</span>
+                )}
+                {runs.length > 0 && (
+                    <span className="text-ink-3 truncate">
+                        · [{runs.map(r => r.iv != null ? `$${r.iv}` : '-').join(', ')}]
+                    </span>
+                )}
+            </div>
+        </div>
+    );
+}
+
 
 export function PriceCell({ row }: { row: DeskRow }) {
     return <span className="block text-right font-mono text-[12px] text-ink">{fmtMoney(row.depth?.price ?? row.info?.price)}</span>;

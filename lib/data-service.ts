@@ -399,6 +399,18 @@ export interface DepthVerdict {
     converged?: boolean | null;
     early_stop?: boolean | null;
     mode?: string | null;
+    runs?: Array<{
+        sample: number;
+        iv: number | null;
+        bull_iv?: number | null;
+        bear_iv?: number | null;
+        conviction?: number | null;
+        moat?: number | null;
+        kelly?: number | null;
+        secs?: number | null;
+        plausible?: boolean;
+        trigger?: string;
+    }>;
 }
 
 export interface DepthOverlayPayload {

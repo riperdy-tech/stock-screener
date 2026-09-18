@@ -10,7 +10,7 @@ import { Micro, SectionHead } from '../primitives';
 import {
     BandStrip, McapCell, MedianGapCell, PriceCell, PromoLine,
     QuantFilterCell, SpreadSizeCell, StockCell, VerdictCell,
-    MoatCell, ConvictionCell, HalfKellyCell, SkewCell, TriadCell,
+    MoatConvictionCell, HalfKellyCell, TriadCell, DeliberationCell,
 } from './cells';
 import { verdictTone } from '@/lib/desk/tone';
 import { bandLabel } from '@/lib/desk/band';
@@ -18,20 +18,19 @@ import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import { rankDelta, type AiSections, type DeskRow } from '@/lib/desk/rankings';
 import { useLanguage } from '@/components/LanguageContext';
 
-const GRID = 'grid grid-cols-[24px_minmax(160px,1.2fr)_170px_130px_70px_70px_65px_60px_65px_60px] items-center gap-x-2.5';
+const GRID = 'grid grid-cols-[26px_minmax(175px,1.3fr)_155px_75px_120px_155px_95px_70px_70px] items-center gap-x-3.5';
 
 function HeaderRow() {
     return (
-        <div className={clsx(GRID, 'hidden border-b border-rule-18 pb-2 pt-3 lg:grid')}>
+        <div className={clsx(GRID, 'border-b border-rule-18 pb-2 pt-3')}>
             <Micro>#</Micro>
-            <Micro>COMPANY</Micro>
+            <Micro>COMPANY & INDUSTRY</Micro>
             <Micro>UNDERWRITING STANCE</Micro>
-            <Micro>VALUATION TRIAD</Micro>
-            <Micro>MOAT</Micro>
-            <Micro>CONVICTION</Micro>
-            <Micro>KELLY CAP</Micro>
-            <Micro>SKEW</Micro>
             <Micro className="text-right">PRICE</Micro>
+            <Micro>VALUATION TRIAD</Micro>
+            <Micro>DELIBERATION AUDIT</Micro>
+            <Micro>MOAT / CONV</Micro>
+            <Micro className="text-center">KELLY %</Micro>
             <Micro className="text-right">MCAP</Micro>
         </div>
     );
@@ -44,7 +43,7 @@ function DeskRowView({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNod
             tabIndex={0}
             onClick={() => onOpen(row.ticker)}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(row.ticker); } }}
-            className={clsx(GRID, 'hidden cursor-pointer border-b border-rule-10 py-3 hover:bg-hover lg:grid',
+            className={clsx(GRID, 'cursor-pointer border-b border-rule-10 py-3 hover:bg-hover',
                 row.promo === 'promoted' && 'bg-accent/[0.05]')}
         >
             <span className="font-mono text-[12px] text-ink-3">{rank}</span>
@@ -53,12 +52,13 @@ function DeskRowView({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNod
                 <VerdictCell row={row} />
                 <PromoLine row={row} delta={rankDelta(row)} />
             </span>
-            <TriadCell row={row} />
-            <MoatCell row={row} />
-            <ConvictionCell row={row} />
-            <HalfKellyCell row={row} />
-            <SkewCell row={row} />
             <PriceCell row={row} />
+            <TriadCell row={row} />
+            <DeliberationCell row={row} />
+            <MoatConvictionCell row={row} />
+            <div className="text-center">
+                <HalfKellyCell row={row} />
+            </div>
             <McapCell row={row} />
         </div>
     );
@@ -70,6 +70,10 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
     const d = row.depth;
     const tone = verdictTone(d?.direction);
     const label = tone.keys.label ? t(tone.keys.label) : tone.label;
+    const ind = row.info?.industry;
+    const n = d?.samples_run ?? d?.n_basis ?? 1;
+    const spread = d?.spread_pct;
+
     return (
         <div
             role="button"
@@ -88,6 +92,15 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
                 <span className="shrink-0 font-mono text-[13px] text-ink">{fmtMoney(d?.price ?? row.info?.price)}</span>
             </div>
 
+            {/* Industry Pill Mobile */}
+            {ind && ind !== 'Unknown' && ind !== '—' && (
+                <div className="mt-1">
+                    <span className="inline-block rounded-xs bg-accent/[0.12] border border-accent/30 px-1.5 py-0.5 font-mono text-[9.5px] font-bold text-accent tracking-wide uppercase">
+                        {ind}
+                    </span>
+                </div>
+            )}
+
             <div className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
                 <span className="text-[12px] font-extrabold" style={{ color: tone.color }}>
                     {label}
@@ -104,7 +117,12 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
 
             {d && (
                 <div className="mt-2 flex items-center justify-between text-[11px] font-mono text-ink-3">
-                    <span>Base IV: {fmtMoney(d.median_iv)}</span>
+                    <span className="flex items-center gap-1.5">
+                        <span className="border border-rule-24 px-1 py-0.2 rounded-xs text-ink-2">
+                            {n} RUNS {spread != null ? `· ${spread.toFixed(0)}% SPREAD` : ''}
+                        </span>
+                        <span>Base IV: {fmtMoney(d.median_iv)}</span>
+                    </span>
                     {row.skew != null && <span>Skew: {row.skew.toFixed(2)}x</span>}
                 </div>
             )}
@@ -123,15 +141,26 @@ function Section({ title, note, rows, rankOf, onOpen, empty }: {
     return (
         <section className="mt-7 first:mt-0">
             <SectionHead title={title} note={note} />
-            <HeaderRow />
-            {rows.length === 0
-                ? <p className="border-b border-rule-10 py-5 text-[12px] text-ink-3">{empty}</p>
-                : rows.map((r, i) => (
-                    <React.Fragment key={r.ticker}>
-                        <DeskRowView row={r} rank={rankOf(r, i)} onOpen={onOpen} />
-                        <RowCard row={r} rank={rankOf(r, i)} onOpen={onOpen} />
-                    </React.Fragment>
-                ))}
+            {/* Desktop View with guaranteed min-width and horizontal scroll protection */}
+            <div className="hidden lg:block overflow-x-auto">
+                <div className="min-w-[980px]">
+                    <HeaderRow />
+                    {rows.length === 0
+                        ? <p className="border-b border-rule-10 py-5 text-[12px] text-ink-3">{empty}</p>
+                        : rows.map((r, i) => (
+                            <DeskRowView key={r.ticker} row={r} rank={rankOf(r, i)} onOpen={onOpen} />
+                        ))}
+                </div>
+            </div>
+
+            {/* Mobile Card View */}
+            <div className="block lg:hidden">
+                {rows.length === 0
+                    ? <p className="border-b border-rule-10 py-5 text-[12px] text-ink-3">{empty}</p>
+                    : rows.map((r, i) => (
+                        <RowCard key={r.ticker} row={r} rank={rankOf(r, i)} onOpen={onOpen} />
+                    ))}
+            </div>
         </section>
     );
 }

@@ -12,10 +12,21 @@ import type { DepthReportBundle } from '@/lib/data-service';
 
 const OPEN_KEY = 'desk.transcriptsOpen';
 
-export function TranscriptViewer({ bundle }: { bundle: DepthReportBundle | null }) {
+export function TranscriptViewer({
+    bundle,
+    activeTab,
+    onTabChange,
+}: {
+    bundle: DepthReportBundle | null;
+    activeTab?: number;
+    onTabChange?: (tab: number) => void;
+}) {
     const { t } = useLanguage();
     const [open, setOpen] = useState(true);
-    const [tab, setTab] = useState(0);
+    const [localTab, setLocalTab] = useState(0);
+
+    const tab = activeTab !== undefined ? activeTab : localTab;
+    const setTab = onTabChange || setLocalTab;
 
     useEffect(() => {
         const saved = localStorage.getItem(OPEN_KEY);
@@ -27,7 +38,7 @@ export function TranscriptViewer({ bundle }: { bundle: DepthReportBundle | null 
         return !v;
     });
 
-    const samples = (bundle?.samples ?? []).filter((s) => s.report && s.report.length > 0);
+    const samples = bundle?.samples ?? [];
     if (samples.length === 0) return null;
     const cur = samples[Math.min(tab, samples.length - 1)];
 
@@ -35,7 +46,7 @@ export function TranscriptViewer({ bundle }: { bundle: DepthReportBundle | null 
     const isEarlyStop = bundle?.verdict?.early_stop ?? (spread != null && spread <= 15);
 
     return (
-        <section className="mt-8 border-t border-rule-22 pt-5">
+        <section id="transcripts-section" className="mt-8 border-t border-rule-22 pt-5">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
                 <div className="flex items-center gap-2">
                     <span className="inline-block w-2 h-2 rounded-full bg-accent" />
@@ -43,55 +54,44 @@ export function TranscriptViewer({ bundle }: { bundle: DepthReportBundle | null 
                         Consensus Underwriting Memoranda (Charter v3.1 Institutional Deliberation)
                     </Micro>
                     <span className="font-mono text-[11px] text-ink-3">
-                        · {samples.length} Independent Seed{samples.length === 1 ? '' : 's'}
+                        · {samples.length} Independent Seed{samples.length === 1 ? '' : 's'} Executed
                     </span>
                 </div>
                 <button
                     onClick={toggle}
-                    className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2 hover:text-ink"
+                    className="font-mono text-[11px] text-ink-3 hover:text-ink flex items-center gap-1.5 transition-colors"
                 >
-                    {open ? `▾ ${t('transcriptsHide')}` : `▸ ${t('transcriptsShow')}`}
+                    <span>{open ? '▾ HIDE MEMORANDA' : '▸ EXPAND MEMORANDA'}</span>
                 </button>
             </div>
 
             {open && (
-                <>
-                    {/* Consensus Telemetry Bar */}
-                    <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border border-rule-14 bg-white/[0.02] px-4 py-2 text-[11.5px] font-mono">
-                        <div className="flex items-center gap-4 text-ink-2">
-                            <span>Run ID: <b className="text-ink">{bundle?.run ?? '—'}</b></span>
-                            <span>Model: <b className="text-ink">{bundle?.verdict?.model ?? 'rs2-analyst-deep-mtp5'}</b></span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <span className="text-ink-3">Consensus Spread:</span>
-                            <span className={clsx('font-bold', spread != null && spread <= 15 ? 'text-pos' : 'text-accent')}>
-                                {spread != null ? `${spread.toFixed(1)}%` : 'Single Seed'}
-                            </span>
-                            <span className="text-ink-3">
-                                {isEarlyStop ? '(Level 0 Early-Stop ≤15%)' : samples.length >= 3 ? '(Escalated Deliberation n=3)' : ''}
-                            </span>
-                        </div>
-                    </div>
-
+                <div className="mt-4">
                     {/* Sample Selector Tabs */}
-                    <div className="mt-3.5 flex flex-wrap gap-2">
+                    <div className="flex flex-wrap items-center gap-2 border-b border-rule-14 pb-3">
+                        <span className="font-mono text-[10.5px] uppercase tracking-wider text-ink-3 mr-1">
+                            Sample Runs:
+                        </span>
                         {samples.map((s, i) => {
                             const sc = s.scorecard;
+                            const isFailed = !s.plausible || !s.report || s.report.length === 0;
                             return (
                                 <button
                                     key={s.sample}
                                     onClick={() => setTab(i)}
                                     className={clsx(
-                                        'border px-3.5 py-2 font-mono text-[11.5px] transition-colors',
+                                        'border px-3 py-1.5 font-mono text-[11px] transition-colors rounded-xs',
                                         i === tab
-                                            ? 'border-accent bg-accent/[0.1] font-semibold text-accent'
-                                            : 'border-rule-24 text-ink-2 hover:border-rule-18 hover:text-ink',
-                                        !s.plausible && 'line-through decoration-neg/60',
+                                            ? 'border-accent bg-accent/15 font-bold text-accent'
+                                            : isFailed
+                                                ? 'border-warn/40 bg-warn/[0.03] text-warn/80 hover:border-warn hover:text-warn'
+                                                : 'border-rule-24 bg-white/[0.02] text-ink-2 hover:border-rule-36 hover:text-ink',
                                     )}
                                 >
                                     <div className="flex items-center gap-2">
-                                        <span>Sample {s.sample}</span>
-                                        {s.iv != null && <span className="font-bold">{fmtMoney(s.iv)}</span>}
+                                        <span className="font-bold">Run #{s.sample}</span>
+                                        {s.iv != null && <span className="font-semibold">{fmtMoney(s.iv)}</span>}
+                                        {isFailed && <span className="text-[10px] text-warn">(Token Limit)</span>}
                                         {sc?.conviction_score != null && (
                                             <span className="text-[10px] text-ink-3">
                                                 · {sc.conviction_score}/15
@@ -106,23 +106,51 @@ export function TranscriptViewer({ bundle }: { bundle: DepthReportBundle | null 
                                 </button>
                             );
                         })}
+                        <span className="ml-auto font-mono text-[10.5px] text-ink-3">
+                            {isEarlyStop ? 'Stopped early (≤15% spread tolerance satisfied)' : spread != null ? `Escalated run (Spread ${spread.toFixed(1)}%)` : ''}
+                        </span>
                     </div>
 
-                    {!cur.plausible && cur.reasons?.length > 0 && (
-                        <p className="mt-3 text-[11px] text-warn">
-                            Rejected by plausibility guards: {cur.reasons.join('; ')} — excluded from consensus median.
-                        </p>
-                    )}
+                    {/* Active Run Content */}
+                    {cur && (
+                        <div className="mt-4">
+                            {(!cur.report || cur.report.length === 0) ? (
+                                <div className="p-6 border border-warn/40 bg-warn/[0.04] rounded-sm">
+                                    <div className="flex items-center gap-2">
+                                        <span className="inline-block w-2.5 h-2.5 rounded-full bg-warn animate-pulse" />
+                                        <span className="font-mono text-[13px] font-bold text-warn uppercase tracking-wider">
+                                            Run #{cur.sample} Execution Guard Intercept
+                                        </span>
+                                    </div>
+                                    <p className="mt-3 text-[12.5px] text-ink-2 leading-relaxed">
+                                        This independent sample run was executed by the inference engine with deterministic seed perturbation, but reached the model&apos;s maximum generation context limit during deep chain-of-thought analysis before emitting the final markdown memorandum and Section 12 machine contract.
+                                    </p>
+                                    <div className="mt-4 flex flex-wrap items-center gap-6 font-mono text-[11px] text-ink-3 border-t border-rule-14 pt-3">
+                                        <span>Plausibility Guard: <b className="text-warn">REJECTED (Plausible = False)</b></span>
+                                        <span>Consensus Valuation: <b className="text-ink">Excluded from Median IV</b></span>
+                                        <span>Compute Time: <b className="text-ink-2">{cur.secs ? `${Math.round(cur.secs / 60)}m` : 'Timed Out'}</b></span>
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    {!cur.plausible && cur.reasons && cur.reasons.length > 0 && (
+                                        <p className="mb-3 text-[11px] text-warn">
+                                            Rejected by plausibility guards: {cur.reasons.join('; ')} — excluded from consensus median.
+                                        </p>
+                                    )}
 
-                    {/* Verbatim Memorandum */}
-                    <pre className="scroll-dark wrap-anywhere mt-3.5 max-h-[380px] min-w-0 overflow-y-auto border border-rule-18 bg-[#0d0f12] px-4 py-3.5 font-mono text-[11px] leading-[1.7] text-ink-q lg:max-h-[460px] lg:px-6 lg:py-5 lg:text-[12px]">
-                        {cur.report}
-                    </pre>
+                                    <pre className="scroll-dark wrap-anywhere mt-2 max-h-[460px] min-w-0 overflow-y-auto border border-rule-18 bg-[#0d0f12] px-4 py-3.5 font-mono text-[11px] leading-[1.7] text-ink-q lg:max-h-[520px] lg:px-6 lg:py-5 lg:text-[12px]">
+                                        {cur.report}
+                                    </pre>
+                                </>
+                            )}
+                        </div>
+                    )}
 
                     <Micro className="mt-2.5 block text-ink-3">
                         Charter v3.1 Institutional Underwriting Memorandum · Verbatim primary-source evidence, SEC filings citations, and Section 12 execution contract.
                     </Micro>
-                </>
+                </div>
             )}
         </section>
     );

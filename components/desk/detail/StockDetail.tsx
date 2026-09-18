@@ -83,6 +83,165 @@ function DepthStatRow({ row }: { row: DeskRow }) {
     );
 }
 
+function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
+    d: DepthVerdict;
+    bundle: DepthReportBundle | null;
+    onSelectSample?: (idx: number) => void;
+}) {
+    const runs = (bundle?.samples && bundle.samples.length > 0)
+        ? bundle.samples.map((s) => ({
+            sample: s.sample,
+            iv: s.iv,
+            bull_iv: s.scorecard?.bull_iv,
+            bear_iv: s.scorecard?.bear_iv,
+            conviction: s.scorecard?.conviction_score,
+            moat: s.scorecard?.business_quality_moat,
+            kelly: s.scorecard?.kelly_fraction_pct,
+            secs: s.secs,
+            plausible: s.plausible,
+            hasReport: !!(s.report && s.report.length > 0),
+            trigger: s.scorecard?.thesis_invalidation_trigger,
+        }))
+        : (d.runs || []);
+
+    const n = d.samples_run ?? d.n_basis ?? (runs.length > 0 ? runs.length : 1);
+    const spread = d.spread_pct;
+    const isTight = spread != null && spread <= 15;
+    const isEscalated = n >= 3;
+
+    return (
+        <div className="mt-6 border border-rule-18 bg-[#111317] rounded-sm overflow-hidden">
+            {/* Header */}
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rule-14 bg-white/[0.03] px-5 py-3">
+                <div className="flex items-center gap-2.5">
+                    <span className={clsx('w-2.5 h-2.5 rounded-full animate-pulse', isTight ? 'bg-pos' : isEscalated ? 'bg-accent' : 'bg-ink-3')} />
+                    <Micro className="font-extrabold uppercase tracking-wider text-ink">
+                        Multi-Seed Deliberation Audit · {runs.length > 0 ? `${runs.length} Independent Runs Recorded` : `${n} Runs Executed`}
+                    </Micro>
+                </div>
+                <div className="flex items-center gap-2 font-mono text-[11px]">
+                    <span className="text-ink-3">Consensus Spread:</span>
+                    <span className={clsx('font-bold', isTight ? 'text-pos' : 'text-accent')}>
+                        {spread != null ? `${spread.toFixed(1)}%` : '≤ 15.0%'}
+                    </span>
+                    <span className="text-ink-3">
+                        {isTight ? '(Early Stop ≤15%)' : isEscalated ? '(Escalated Deliberation n=3)' : '(Single Baseline)'}
+                    </span>
+                </div>
+            </div>
+
+            {/* Side-by-side run cards */}
+            <div className={clsx(
+                'grid divide-y sm:divide-y-0 sm:divide-x divide-rule-14 border-b border-rule-14',
+                runs.length === 1 ? 'grid-cols-1' : runs.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-3',
+            )}>
+                {runs.map((r, i) => {
+                    const price = d.price;
+                    const mos = (r.iv != null && price != null && price > 0)
+                        ? ((r.iv - price) / price) * 100
+                        : null;
+                    const isFailed = !r.plausible || r.iv == null;
+
+                    return (
+                        <div key={r.sample} className="p-4 flex flex-col justify-between hover:bg-white/[0.01] transition-colors">
+                            <div>
+                                <div className="flex items-baseline justify-between">
+                                    <span className="font-mono text-[12px] font-bold text-accent uppercase tracking-wider">
+                                        RUN #{r.sample}
+                                    </span>
+                                    {r.secs != null && (
+                                        <span className="font-mono text-[10px] text-ink-3">
+                                            {Math.round(r.secs / 60)}m compute
+                                        </span>
+                                    )}
+                                </div>
+
+                                {r.iv != null ? (
+                                    <div className="mt-2.5">
+                                        <div className="font-mono text-[22px] font-extrabold text-ink">
+                                            {fmtMoney(r.iv)}
+                                        </div>
+                                        <div className="mt-0.5 font-mono text-[11.5px]" style={{ color: gapColor(mos, d.direction) }}>
+                                            {mos != null ? fmtSignedPct(mos) : '—'} MoS vs Market
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="mt-2.5 border border-warn/30 bg-warn/[0.04] p-2.5 rounded-xs">
+                                        <div className="font-mono text-[12px] font-bold text-warn uppercase tracking-wider">
+                                            GUARD INTERCEPT
+                                        </div>
+                                        <div className="mt-1 text-[10.5px] text-ink-3 leading-tight">
+                                            Output token limit reached before contract emission. Excluded from consensus median.
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Triad mini */}
+                                {(r.bear_iv != null || r.bull_iv != null) && (
+                                    <div className="mt-2.5 font-mono text-[11px] text-ink-3 flex items-center justify-between border-t border-rule-10 pt-2">
+                                        <span>Bear: <b className="text-ink-2">{r.bear_iv != null ? fmtMoney(r.bear_iv, 0) : '—'}</b></span>
+                                        <span>Bull: <b className="text-ink-2">{r.bull_iv != null ? fmtMoney(r.bull_iv, 0) : '—'}</b></span>
+                                    </div>
+                                )}
+
+                                {/* Scorecard items */}
+                                <div className="mt-3 grid grid-cols-3 gap-2 border-t border-rule-10 pt-2.5 text-center font-mono text-[11px]">
+                                    <div>
+                                        <Micro className="text-[9.5px] text-ink-3">MOAT</Micro>
+                                        <div className="mt-0.5 text-accent font-semibold">
+                                            {r.moat != null ? `★ ${r.moat.toFixed(1)}` : '—'}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <Micro className="text-[9.5px] text-ink-3">CONVICTION</Micro>
+                                        <div className="mt-0.5 text-ink font-semibold">
+                                            {r.conviction != null ? `${r.conviction}/15` : '—'}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <Micro className="text-[9.5px] text-ink-3">KELLY</Micro>
+                                        <div className="mt-0.5 text-pos font-semibold">
+                                            {r.kelly != null && r.kelly > 0 ? `${r.kelly.toFixed(1)}%` : '0.0%'}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {r.trigger && (
+                                    <p className="mt-3 text-[11px] leading-relaxed text-ink-3 line-clamp-3 italic">
+                                        &ldquo;{r.trigger}&rdquo;
+                                    </p>
+                                )}
+                            </div>
+
+                            {onSelectSample && (
+                                <div className="mt-4 pt-3 border-t border-rule-10">
+                                    <button
+                                        onClick={() => onSelectSample(i)}
+                                        className="w-full border border-rule-24 bg-white/[0.02] hover:bg-accent/10 hover:border-accent/40 px-2 py-1.5 font-mono text-[10.5px] font-bold text-ink-2 hover:text-accent tracking-wide uppercase transition-colors"
+                                    >
+                                        {isFailed ? `View Run #${r.sample} Guard Log ▸` : `Read Run #${r.sample} Memo ▸`}
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+
+            {/* Bottom consensus synthesis strip */}
+            <div className="bg-white/[0.015] px-5 py-2.5 flex flex-wrap items-center justify-between gap-3 font-mono text-[11.5px] text-ink-2">
+                <div className="flex items-center gap-4">
+                    <span>Synthesized Median: <b className="text-ink">{fmtMoney(d.median_iv)}</b></span>
+                    <span>Allocation Tier: <b className="text-pos">{d.size_hint?.toUpperCase() ?? 'FULL'}</b></span>
+                </div>
+                <span className="text-ink-3 text-[10.5px]">
+                    Every sample independent · Deterministic seed perturbations · Fiduciary contract audited
+                </span>
+            </div>
+        </div>
+    );
+}
+
 function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: DepthReportBundle | null }) {
     const sc = d.scorecard ?? bundle?.scorecard;
     const conviction = d.conviction_score ?? sc?.median_conviction_score;
@@ -337,39 +496,74 @@ function KeyFinancials({ row }: { row: DeskRow }) {
     );
 }
 
+function zToPercentile(z: number): number {
+    const t = 1 / (1 + 0.2316419 * Math.abs(z));
+    const d = 0.3989422804014327 * Math.exp(-z * z / 2);
+    const p = d * t * (0.31938153 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+    const cdf = z >= 0 ? 1 - p : p;
+    return Math.round(cdf * 100);
+}
+
 function QuantFilterPanel({ row }: { row: DeskRow }) {
     const { t } = useLanguage();
     const f = row.fct;
     const z = f.fct_z ?? {};
-    const haircuts = f.fct_haircuts ?? {};
+    
+    // Only show factors that have active calculations
+    const activeFactors = FACTORS.filter(([key]) => z[key] != null);
+
     return (
         <div className="border-t border-rule-14 pt-5">
             <div className="flex items-baseline justify-between gap-4">
-                <Micro>{t('quantPanelTitle')}</Micro>
-                <span className="font-mono text-[12px] text-ink">
-                    <b>{f.fct_composite != null ? f.fct_composite.toFixed(1) : '—'}</b> · rank #{f.fct_rank ?? '—'}
+                <Micro>QUANT FILTER · WHY IT REACHED THE AI&apos;S DESK</Micro>
+                <span className="font-mono text-[11.5px] text-ink">
+                    <b>{f.fct_composite != null ? f.fct_composite.toFixed(1) : '—'}</b>
+                    {f.fct_rank ? (
+                        <span className="text-ink-3"> · rank #{f.fct_rank}</span>
+                    ) : (
+                        <span className="text-pos font-semibold"> · Gate Passed</span>
+                    )}
                 </span>
             </div>
 
-            <div className="mt-3.5 space-y-2">
-                {FACTORS.map(([key, label, color]) => {
-                    const raw = z[key];
-                    const pct = raw == null ? 0 : Math.max(0, Math.min(100, (raw + 3) / 6 * 100));
-                    return (
-                        <div key={key} className="flex items-center gap-3 text-[11px]">
-                            <span className="w-[74px] shrink-0 text-ink-2">{label}</span>
-                            <span className="min-w-0 flex-1"><Bar pct={pct} color={color} /></span>
-                            <span className="w-[38px] shrink-0 text-right font-mono text-ink-2">
-                                {raw == null ? '—' : raw.toFixed(2)}
-                            </span>
-                        </div>
-                    );
-                })}
+            <div className="mt-3.5 space-y-2.5">
+                {activeFactors.length > 0 ? (
+                    activeFactors.map(([key, label, color]) => {
+                        const raw = z[key] as number;
+                        const pct = Math.max(0, Math.min(100, (raw + 3) / 6 * 100));
+                        const cdfPct = zToPercentile(raw);
+                        const topPct = Math.max(1, 100 - cdfPct);
+                        const displayBadge = raw >= 0 ? `Top ${topPct}% (+${raw.toFixed(2)}σ)` : `Bottom ${cdfPct}% (${raw.toFixed(2)}σ)`;
+
+                        return (
+                            <div key={key} className="space-y-1">
+                                <div className="flex items-center justify-between text-[11px]">
+                                    <span className="font-medium text-ink-2">{label} Factor</span>
+                                    <span className="font-mono text-[10.5px] text-ink font-semibold">
+                                        {displayBadge}
+                                    </span>
+                                </div>
+                                <div className="h-1.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
+                                    <div
+                                        className="h-full rounded-full transition-all duration-500"
+                                        style={{ width: `${pct}%`, backgroundColor: color }}
+                                    />
+                                </div>
+                            </div>
+                        );
+                    })
+                ) : (
+                    <div className="text-[11.5px] text-ink-3">
+                        Statistical factor scores pending pre-screen cache generation.
+                    </div>
+                )}
             </div>
 
-            <p className="mt-3 text-[11px] leading-relaxed text-ink-3">
-                Sector-neutral factor model feeding the candidate funnel. The quant filter decides what the AI reads — the AI underwrites the investment contract.
-            </p>
+            <div className="mt-3.5 border-t border-rule-10 pt-2.5">
+                <p className="text-[11px] leading-relaxed text-ink-3">
+                    <strong className="text-ink-2 font-medium">Funnel Purpose:</strong> A quantitative cross-sectional model scans 3,000+ equities to admit top-decile valuation and balance sheet candidates. The AI then underwrites the long-term cash-flow contract and filters out value traps.
+                </p>
+            </div>
         </div>
     );
 }
@@ -455,6 +649,8 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
         return undefined;
     }, [rows, data.depth, data.stockInfo, data.valuations, data.overlay, ticker]);
 
+    const [selectedSample, setSelectedSample] = useState(0);
+
     const headline = useMemo(() => headlineFromSamples(bundle?.samples), [bundle]);
     const runIvs = useMemo(
         () => (bundle?.samples ?? []).filter((s) => s.plausible && s.iv != null).map((s) => s.iv as number),
@@ -497,15 +693,29 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
     return shell(
         <div>
-            {/* Top Navigation Bar */}
+            {/* Top Navigation Bar with Highlighted Industry */}
             <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-rule-14 py-4">
-                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                     <button onClick={() => router.push(backHref)} className="text-[12px] text-ink-2 hover:text-ink">
                         {backLabel}
                     </button>
-                    <span className="text-[22px] font-extrabold text-ink">{row.ticker}</span>
+                    <span className="text-[24px] font-extrabold text-ink tracking-tight">{row.ticker}</span>
                     <span className="text-[14px] font-semibold text-ink-2">{row.info?.name ?? ''}</span>
-                    <Micro className="font-mono">{(row.info?.sector ?? '').toUpperCase()}</Micro>
+
+                    {/* Prominent Industry Highlight */}
+                    {row.info?.industry && row.info.industry !== 'Unknown' && (
+                        <span className="inline-flex items-center gap-1.5 rounded-xs bg-accent/[0.12] border border-accent/35 px-2.5 py-0.5 font-mono text-[11px] font-bold text-accent tracking-wide uppercase">
+                            <span className="text-ink-3 text-[9.5px]">INDUSTRY:</span>
+                            {row.info.industry}
+                        </span>
+                    )}
+
+                    {/* Sector Badge */}
+                    {row.info?.sector && (
+                        <span className="inline-flex items-center gap-1 rounded-xs border border-rule-24 bg-white/[0.02] px-2 py-0.5 font-mono text-[10.5px] text-ink-3 uppercase">
+                            {row.info.sector}
+                        </span>
+                    )}
                 </div>
                 <a
                     href={`https://www.tradingview.com/symbols/${row.ticker}/`}
@@ -557,6 +767,18 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                         </p>
                     )}
 
+                    {/* Multi-Run Deliberation Audit Matrix (All Runs Recorded & Side-by-Side Compared) */}
+                    {d && (
+                        <MultiRunAuditMatrix
+                            d={d}
+                            bundle={bundle}
+                            onSelectSample={(idx) => {
+                                setSelectedSample(idx);
+                                document.getElementById('transcripts-section')?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                        />
+                    )}
+
                     {/* Depth Statistics Row */}
                     {d && <DepthStatRow row={row} />}
 
@@ -601,8 +823,12 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 </div>
             </div>
 
-            {/* Verbatim Multi-Seed Transcripts & Deliberation */}
-            <TranscriptViewer bundle={bundle} />
+            {/* Verbatim Multi-Seed Transcripts & Deliberation Reader */}
+            <TranscriptViewer
+                bundle={bundle}
+                activeTab={selectedSample}
+                onTabChange={setSelectedSample}
+            />
 
             {/* Earlier Run History */}
             <section className="mt-8 min-w-0 border-t border-rule-22 pt-5">

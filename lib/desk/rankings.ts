@@ -38,11 +38,12 @@ export interface DeskRow {
 export interface RankingFilters {
     search: string;
     band: string;      // 'all' | research_now | watchlist | monitor | pass
-    verdict: string;   // 'all' | analyzed | undervalued | fair | overvalued | not_usable | promoted | demoted | vetoed
+    verdict: string;   // 'all' | analyzed | undervalued | fair | overvalued | not_usable | promoted | demoted | vetoed | consensus_2 | escalated_3
     sector: string;
+    industry: string;
 }
 
-export const EMPTY_FILTERS: RankingFilters = { search: '', band: 'all', verdict: 'all', sector: 'all' };
+export const EMPTY_FILTERS: RankingFilters = { search: '', band: 'all', verdict: 'all', sector: 'all', industry: 'all' };
 
 export interface RankingsInput {
     factor: { tickers: Record<string, FactorEntry> } | null;
@@ -158,11 +159,24 @@ export function sectorsOf(rows: DeskRow[]): string[] {
     return Array.from(set).sort();
 }
 
+export function industriesOf(rows: DeskRow[], sector?: string): string[] {
+    const set = new Set<string>();
+    rows.forEach((r) => {
+        if (r.info?.industry && r.info.industry !== 'Unknown' && r.info.industry !== '—') {
+            if (!sector || sector === 'all' || r.info?.sector === sector) {
+                set.add(r.info.industry);
+            }
+        }
+    });
+    return Array.from(set).sort();
+}
+
 export function applyFilters(rows: DeskRow[], f: RankingFilters): DeskRow[] {
     const q = f.search.trim().toUpperCase();
     return rows.filter((r) => {
         if (f.band !== 'all' && r.fct.fct_band !== f.band) return false;
         if (f.sector !== 'all' && r.info?.sector !== f.sector) return false;
+        if (f.industry && f.industry !== 'all' && r.info?.industry !== f.industry) return false;
         if (f.verdict !== 'all') {
             const d = r.depth?.direction;
             switch (f.verdict) {
@@ -176,6 +190,8 @@ export function applyFilters(rows: DeskRow[], f: RankingFilters): DeskRow[] {
                 case 'wide_moat': if (r.moat == null || r.moat < 4.0) return false; break;
                 case 'high_conviction': if (r.conviction == null || r.conviction < 12) return false; break;
                 case 'asymmetric': if (r.skew == null || r.skew < 1.5) return false; break;
+                case 'consensus_2': if ((r.depth?.samples_run ?? r.depth?.n_basis) !== 2) return false; break;
+                case 'escalated_3': if ((r.depth?.samples_run ?? r.depth?.n_basis) !== 3) return false; break;
                 case 'vetoed': if (!r.vetoed) return false; break;
             }
         }
