@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-09-20T12:25:46Z
+Generated: 2026-09-20T14:09:33Z
 Macro flags: none
 Invested: **37.69%**  |  Cash: **62.31%**  |  Positions: 10
 
@@ -14,7 +14,7 @@ Invested: **37.69%**  |  Cash: **62.31%**  |  Positions: 10
 | 11 | **NBIX** | 4.36 | B | 69.72 | 75 | 11 | research_now | glp1_metabolic | mid | 5 | -2.484 | - |
 | 15 | **KRYS** | 2.25 | B | 47.0 | 75 | 15 | research_now | - | no_data | 6 | - | - |
 | 17 | **CART** | 5.0 | B | 76.28 | 80 | 17 | research_now | cloud_software | watch | 5 | -3.032 | - |
-| 28 | **SAP** | 2.1 | B | 73.79 | 70 | 28 | research_now | cloud_software | mid | - | - | - |
+| 29 | **SAP** | 2.1 | B | 73.79 | 70 | 29 | research_now | cloud_software | mid | - | - | - |
 | 35 | **PCTY** | 4.78 | B | 70.84 | 70 | 35 | research_now | cloud_software | watch | 7 | -2.57 | - |
 
 ## Sector allocation
@@ -45,15 +45,15 @@ Invested: **37.69%**  |  Cash: **62.31%**  |  Positions: 10
 - ADSK: no Kelly edge (expectations gap +9pts >= 0: price already assumes more growth than demonstrated)
 - RMD: sector cap Healthcare (25.0%)
 - NVS: sector cap Healthcare (25.0%)
-- AZN: sector cap Healthcare (25.0%)
 - GEV: no Kelly edge (expectations gap +17pts >= 0: price already assumes more growth than demonstrated)
+- AZN: sector cap Healthcare (25.0%)
 - VRTX: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
 - GILD: no Kelly edge (expectations gap +3pts >= 0: price already assumes more growth than demonstrated)
 - DELL: no Kelly edge (expectations gap +27pts >= 0: price already assumes more growth than demonstrated)
 - SIMO: no Kelly edge (expectations gap +33pts >= 0: price already assumes more growth than demonstrated)
 - AMZN: no Kelly edge (expectations gap +46pts >= 0: price already assumes more growth than demonstrated)
-- MCO: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
 - AVGO: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
+- MCO: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
 - LQDT: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
 - HRMY: sector cap Healthcare (25.0%)
 - ATI: no Kelly edge (expectations gap +26pts >= 0: price already assumes more growth than demonstrated)
