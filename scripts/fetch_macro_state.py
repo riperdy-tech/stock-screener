@@ -38,6 +38,8 @@ except Exception:
 import requests
 from dotenv import load_dotenv
 
+import peer_paths   # peer-repo locations; see scripts/peer_paths.py
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "public" / "data"
 MACRO_STATE_JSON = DATA_DIR / "macro_state.json"
@@ -121,17 +123,21 @@ def main():
     args = parser.parse_args()
 
     # Try workspace root .env first, then fall back to Macro repo .env
-    # (key lives there from WS2-T1 backfill work).
+    # (key lives there from WS2-T1 backfill work). The MRI location comes from peer_paths, not
+    # from a hardcoded `ROOT.parent / "Macro Regime Indicator"` walk: that made the directory
+    # nesting load-bearing and would have broken silently once the repos became siblings.
     load_dotenv()
     api_key = os.getenv("FRED_API_KEY")
-    if not api_key:
-        macro_env = ROOT.parent / "Macro Regime Indicator" / ".env"
-        if macro_env.exists():
-            load_dotenv(macro_env, override=False)
-            api_key = os.getenv("FRED_API_KEY")
+    macro_env = peer_paths.mri_env_file()
+    if not api_key and macro_env and macro_env.exists():
+        load_dotenv(macro_env, override=False)
+        api_key = os.getenv("FRED_API_KEY")
     if not api_key:
         print("ERROR: FRED_API_KEY not set. Add to .env or environment.", file=sys.stderr)
-        print("       Tried CWD .env and 'Macro Regime Indicator/.env'.", file=sys.stderr)
+        print(f"       Tried CWD .env and the MRI .env at: {macro_env or '(MRI repo not found)'}",
+              file=sys.stderr)
+        print("       Set FRED_API_KEY, or point MRI_ENV_FILE / STOCKS_ROOT at the MRI repo.",
+              file=sys.stderr)
         sys.exit(1)
 
     # Load config for thresholds (gracefully handle absent block)
