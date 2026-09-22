@@ -174,6 +174,33 @@ def get_percentile(val: Optional[float], sorted_vals: List[float]) -> float:
     return (idx / len(sorted_vals)) * 100.0
 
 
+def _contributions(prof):
+    """Per-pillar contribution to the score of the door this name actually won on.
+
+    The site renders this as the factor-mix bar. It is the DECOMPOSITION OF THE WINNING DOOR,
+    not an average of both — a value name and a compounder are scored by different formulas, and
+    blending their mixes would describe neither. Magnitudes only: the bar shows relative weight,
+    and a negative z is still a real contribution to how the name ranked.
+
+    There is deliberately no `lowvol` key. The equal-weight engine carried a low-volatility
+    pillar; the dual-door model does not, so the bar's lowvol segment is absent rather than
+    fabricated at zero-as-if-measured.
+    """
+    if not prof or prof.get("score_door1") is None and prof.get("score_door2") is None:
+        return None
+    d1, d2 = prof.get("pctl_d1", 0.0), prof.get("pctl_d2", 0.0)
+    z = lambda k: abs(prof.get(k) or 0.0)
+    if d1 >= d2:   # compounder door
+        parts = {"quality": 0.45 * z("z_quality"),
+                 "momentum": 0.35 * z("z_momentum"),
+                 "revisions": 0.20 * z("z_revisions")}
+    else:          # value / expectations-gap door
+        parts = {"value": 0.40 * z("z_value"),
+                 "exp_gap": 0.40 * z("z_exp_gap"),
+                 "quality": 0.20 * z("z_quality")}
+    return {k: round(v, 4) for k, v in parts.items() if v > 0} or None
+
+
 # Percentile cuts for the DEPTH lane's own band (fct_band_llm). Independent of the quant
 # nomination, which is rank-based (top 50 research_now, next 85 watchlist) — this scale exists
 # so the site can order the depth view against a stable axis.
@@ -749,6 +776,9 @@ def main():
                 "value": prof.get("z_value"),
                 "exp_gap": prof.get("z_exp_gap")
             },
+            "fct_contributions": _contributions(prof),
+            "fct_haircuts": None,
+            "fct_vol": None,
             "fct_nominated_doors": prof.get("nominated_doors", []),
             "sector": prof.get("sector", sector_by_ticker.get(t)),
             "cluster": prof.get("cluster"),

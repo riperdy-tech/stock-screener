@@ -254,9 +254,13 @@ export function McapCell({ row }: { row: DeskRow }) {
 }
 
 /** 104×6px stacked factor-mix bar — value/quality/momentum/low-vol/revisions. */
+// Pillars of the dual-door model. `exp_gap` is half of the value door's weight, so omitting it
+// would draw a value name's mix as mostly-missing. `lowvol` is retained for rows written by the
+// retired equal-weight engine; the dual-door model has no low-volatility pillar and simply never
+// emits that key.
 const FACTOR_COLORS: [string, string][] = [
-    ['value', '#5a9b6d'], ['quality', '#6b93c4'], ['momentum', '#cfa14e'],
-    ['lowvol', '#9a83c2'], ['revisions', '#c2798f'],
+    ['value', '#5a9b6d'], ['exp_gap', '#4f8f8a'], ['quality', '#6b93c4'],
+    ['momentum', '#cfa14e'], ['lowvol', '#9a83c2'], ['revisions', '#c2798f'],
 ];
 
 export function FactorMix({ contributions, width = 104 }: { contributions: Record<string, number> | null; width?: number }) {
