@@ -1,76 +1,83 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-09-22T00:27:20Z
+Generated: 2026-09-22T07:12:43Z
 Macro flags: ['macro_yield_warning']
-Invested: **42.69%**  |  Cash: **57.31%**  |  Positions: 11
+Invested: **90.0%**  |  Cash: **10.0%**  |  Positions: 49
 
 | # | Sym | Wt% | Arch | Comp | Surv | FctRank | FctBand | Theme | PdmBand | F | M | Flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 4 | **INCY** | 5.0 | B | 87.56 | 80 | 4 | research_now | - | no_data | 6 | - | - |
-| 5 | **EXEL** | 5.0 | B | 85.68 | 80 | 5 | research_now | - | no_data | 6 | -2.593 | - |
-| 6 | **KNSA** | 5.0 | A | 44.12 | 80 | 6 | research_now | - | no_data | 6 | -3.129 | - |
-| 7 | **GRDN** | 2.4 | B | 76.27 | 80 | 7 | research_now | - | no_data | 7 | -2.947 | - |
-| 11 | **NBIX** | 4.36 | B | 69.72 | 75 | 11 | research_now | glp1_metabolic | mid | 5 | -2.484 | - |
-| 12 | **CART** | 5.0 | B | 76.28 | 80 | 12 | research_now | cloud_software | watch | 5 | -3.032 | - |
-| 15 | **KRYS** | 2.25 | B | 47.0 | 75 | 15 | research_now | - | no_data | 6 | - | - |
-| 21 | **ABNB** | 1.8 | B | 80.47 | 80 | 21 | research_now | - | no_data | 5 | - | - |
-| 28 | **SAP** | 2.1 | B | 74.1 | 70 | 28 | research_now | cloud_software | mid | - | - | - |
-| 31 | **VIK** | 5.0 | B | 77.87 | 75 | 31 | research_now | - | no_data | 6 | - | - |
-| 36 | **PCTY** | 4.78 | B | 70.44 | 70 | 36 | research_now | cloud_software | watch | 7 | -2.57 | - |
+| 1 | **CBL** | 1.8 | H | 32.3 | 60 | 1 | research_now | - | no_data | 6 | - | - |
+| 2 | **ZIM** | 1.5 | None | None | None | 2 | research_now | - | no_data | 4 | -3.181 | - |
+| 3 | **ESEA** | 1.2 | C | 50.49 | 80 | 3 | research_now | - | no_data | 6 | -1.597 | M_SCORE_ELEVATED |
+| 4 | **SEZL** | 1.95 | B | 49.57 | 65 | 4 | research_now | - | no_data | 6 | - | - |
+| 5 | **IHS** | 1.5 | None | None | None | 5 | research_now | - | no_data | 6 | - | - |
+| 6 | **SLDE** | 2.25 | G | 35.44 | 75 | 6 | research_now | - | no_data | 5 | - | - |
+| 7 | **UVE** | 2.4 | G | 53.17 | 80 | 7 | research_now | - | no_data | 7 | - | - |
+| 8 | **GTE** | 1.5 | None | None | None | 8 | research_now | - | no_data | 3 | -3.098 | - |
+| 9 | **RNG** | 1.8 | A | 59.03 | 60 | 9 | research_now | - | no_data | 8 | -4.358 | - |
+| 10 | **SENEA** | 2.25 | A | 59.6 | 75 | 10 | research_now | - | no_data | 6 | -3.384 | - |
+| 11 | **NEXA** | 1.5 | None | None | None | 11 | research_now | - | no_data | 5 | - | - |
+| 12 | **ECPG** | 1.5 | None | None | None | 12 | research_now | - | no_data | 5 | - | - |
+| 13 | **STRW** | 1.8 | H | 48.31 | 60 | 13 | research_now | - | no_data | 5 | - | - |
+| 14 | **HG** | 2.4 | G | 37.41 | 80 | 14 | research_now | - | no_data | 7 | - | - |
+| 15 | **MRP** | 1.95 | H | 32.44 | 65 | 15 | research_now | - | no_data | 4 | - | - |
+| 16 | **RHLD** | 2.1 | A | 77.22 | 70 | 16 | research_now | - | no_data | 6 | -5.426 | - |
+| 17 | **FSM** | 2.25 | C | 47.44 | 75 | 17 | research_now | - | no_data | 8 | - | - |
+| 18 | **TASK** | 1.95 | A | 75.55 | 65 | 18 | research_now | - | no_data | 8 | -2.354 | - |
+| 19 | **BFH** | 2.1 | A | 40.63 | 70 | 19 | research_now | - | no_data | 6 | - | - |
+| 20 | **PACS** | 1.5 | None | None | None | 20 | research_now | - | no_data | 7 | - | - |
+| 21 | **TWFG** | 2.1 | G | 40.6 | 70 | 21 | research_now | - | no_data | 7 | -2.383 | - |
+| 22 | **APA** | 1.5 | None | None | None | 22 | research_now | - | no_data | 5 | - | - |
+| 23 | **BCRX** | 1.05 | B | 57.86 | 70 | 23 | research_now | - | no_data | 6 | -2.187 | HEAVY_ISSUANCE |
+| 24 | **GASS** | 2.4 | C | 47.01 | 80 | 24 | research_now | - | no_data | 7 | -2.21 | - |
+| 25 | **HAFN** | 2.1 | C | 43.64 | 70 | 25 | research_now | - | no_data | 6 | - | - |
+| 26 | **AU** | 2.25 | C | 33.49 | 75 | 26 | research_now | - | no_data | 7 | -2.732 | - |
+| 27 | **GOLD** | 1.5 | G | 18.09 | 50 | 27 | research_now | - | no_data | 5 | -3.037 | - |
+| 28 | **QUAD** | 1.5 | None | None | None | 28 | research_now | - | no_data | 6 | -2.611 | - |
+| 29 | **NUTX** | 2.1 | B | 59.75 | 70 | 29 | research_now | - | no_data | 7 | -2.72 | - |
+| 30 | **OPY** | 2.25 | G | 56.09 | 75 | 30 | research_now | - | no_data | 6 | - | - |
+| 31 | **IRWD** | 1.5 | None | None | None | 31 | research_now | - | no_data | 5 | -4.236 | - |
+| 32 | **HOG** | 2.1 | A | 40.68 | 70 | 32 | research_now | - | no_data | 8 | -2.834 | - |
+| 33 | **MSGE** | 1.95 | A | 60.56 | 65 | 33 | research_now | - | no_data | 7 | -2.974 | - |
+| 34 | **VEON** | 1.5 | None | None | None | 34 | research_now | - | no_data | 5 | - | - |
+| 35 | **NJR** | 1.5 | None | None | None | 35 | research_now | - | no_data | 7 | - | - |
+| 36 | **NGVT** | 1.8 | C | 24.57 | 60 | 36 | research_now | - | no_data | 6 | -4.026 | - |
+| 37 | **NTR** | 2.25 | C | 24.71 | 75 | 37 | research_now | - | no_data | 8 | - | - |
+| 38 | **BIP** | 1.5 | None | None | None | 38 | research_now | - | no_data | 4 | - | - |
+| 39 | **ARX** | 2.1 | G | 33.6 | 70 | 39 | research_now | - | no_data | 5 | - | - |
+| 40 | **FUTU** | 2.1 | G | 36.62 | 70 | 40 | research_now | - | no_data | 7 | - | - |
+| 41 | **LITE** | 2.25 | A | 40.31 | 75 | 41 | research_now | ai_compute | skip | 5 | - | - |
+| 42 | **TIGR** | 1.95 | G | 36.22 | 65 | 42 | research_now | - | no_data | 5 | - | - |
+| 43 | **ADT** | 1.5 | None | None | None | 43 | research_now | - | no_data | 7 | -2.858 | - |
+| 44 | **BBUC** | 1.5 | None | None | None | 44 | research_now | - | no_data | 4 | -2.191 | - |
+| 45 | **DXC** | 1.5 | None | None | None | 45 | research_now | - | no_data | 5 | - | - |
+| 46 | **FLXS** | 2.1 | A | 70.2 | 70 | 46 | research_now | - | no_data | 7 | -2.73 | - |
+| 47 | **BRBR** | 1.5 | B | 42.72 | 50 | 47 | research_now | - | no_data | 4 | -2.672 | - |
+| 48 | **SENEB** | 2.25 | A | 59.39 | 75 | 48 | research_now | - | no_data | 6 | -3.384 | - |
+| 49 | **WLKP** | 1.2 | C | 29.57 | 80 | 49 | research_now | - | no_data | 3 | -2.235 | F_SCORE_WEAK |
 
 ## Sector allocation
-- Healthcare: 24.01%
-- Consumer Cyclical: 11.8%
-- Technology: 6.88%
+- Financial Services: 24.6%
+- Industrials: 13.8%
+- Basic Materials: 11.25%
+- Technology: 7.5%
+- Real Estate: 7.05%
+- Healthcare: 6.15%
+- Consumer Defensive: 6.0%
+- Consumer Cyclical: 4.2%
+- Communication Services: 3.45%
+- Energy: 3.0%
+- Utilities: 3.0%
 
 ## Theme allocation
-- cloud_software: 11.88%
-- glp1_metabolic: 4.36%
+- ai_compute: 2.25%
 
 ## Skipped (caps/sizing)
-- TSM: no Kelly edge (expectations gap +21pts >= 0: price already assumes more growth than demonstrated)
-- STX: no Kelly edge (expectations gap +33pts >= 0: price already assumes more growth than demonstrated)
-- BMRN: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
-- LITE: no Kelly edge (expectations gap +56pts >= 0: price already assumes more growth than demonstrated)
-- EMBJ: sized below minimum (0.25% < 0.75%)
-- AMD: no Kelly edge (expectations gap +24pts >= 0: price already assumes more growth than demonstrated)
-- MU: no Kelly edge (expectations gap +91pts >= 0: price already assumes more growth than demonstrated)
-- AAPL: no Kelly edge (expectations gap +19pts >= 0: price already assumes more growth than demonstrated)
-- GOOGL: no Kelly edge (expectations gap +16pts >= 0: price already assumes more growth than demonstrated)
-- LLY: no Kelly edge (expectations gap +12pts >= 0: price already assumes more growth than demonstrated)
-- ANET: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
-- MPWR: no Kelly edge (expectations gap +21pts >= 0: price already assumes more growth than demonstrated)
-- GOOG: no Kelly edge (expectations gap +16pts >= 0: price already assumes more growth than demonstrated)
-- MEDP: sized below minimum (0.39% < 0.75%)
-- NHC: no Kelly edge (expectations gap +7pts >= 0: price already assumes more growth than demonstrated)
-- ADSK: no Kelly edge (expectations gap +9pts >= 0: price already assumes more growth than demonstrated)
-- RMD: sector cap Healthcare (25.0%)
-- VRTX: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
-- NVS: sector cap Healthcare (25.0%)
-- AZN: sector cap Healthcare (25.0%)
-- GEV: no Kelly edge (expectations gap +17pts >= 0: price already assumes more growth than demonstrated)
-- DELL: no Kelly edge (expectations gap +27pts >= 0: price already assumes more growth than demonstrated)
-- GILD: no Kelly edge (expectations gap +3pts >= 0: price already assumes more growth than demonstrated)
-- SIMO: no Kelly edge (expectations gap +33pts >= 0: price already assumes more growth than demonstrated)
-- MCO: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
-- AVGO: no Kelly edge (expectations gap +10pts >= 0: price already assumes more growth than demonstrated)
-- AMZN: no Kelly edge (expectations gap +46pts >= 0: price already assumes more growth than demonstrated)
-- HRMY: sector cap Healthcare (25.0%)
-- ATI: no Kelly edge (expectations gap +26pts >= 0: price already assumes more growth than demonstrated)
-- ISRG: no Kelly edge (expectations gap +8pts >= 0: price already assumes more growth than demonstrated)
-- META: no Kelly edge (expectations gap +35pts >= 0: price already assumes more growth than demonstrated)
-- SENEB: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
-- MANH: no Kelly edge (expectations gap +20pts >= 0: price already assumes more growth than demonstrated)
-- DT: no Kelly edge (expectations gap +22pts >= 0: price already assumes more growth than demonstrated)
-- TYL: no Kelly edge (expectations gap +5pts >= 0: price already assumes more growth than demonstrated)
-- MNST: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
-- LQDT: no Kelly edge (expectations gap +6pts >= 0: price already assumes more growth than demonstrated)
-- CLS: no Kelly edge (expectations gap +14pts >= 0: price already assumes more growth than demonstrated)
-- JKHY: no Kelly edge (expectations gap +1pts >= 0: price already assumes more growth than demonstrated)
+- AER: max invested reached
 
 ## Sizing method
-- Quarter-Kelly: 7 positions — f = 0.25 x mu/sigma^2, mu = expectations-gap recovery over 3y (cap 15%), sigma floor 15%, position cap 5.0%.
-- Heuristic fallback: 4 positions (no expectations model): base x survivability scaling.
+- Quarter-Kelly: 0 positions — f = 0.25 x mu/sigma^2, mu = expectations-gap recovery over 3y (cap 15%), sigma floor 15%, position cap 5.0%.
+- Heuristic fallback: 49 positions (no expectations model): base x survivability scaling.
 - Overlay multipliers: GPR level 2 -> x0.75, level 3 -> x0.5 + requires negative gap; informed-demand -1 -> x0.75.
 
 ## Standing exit/review triggers (all positions)

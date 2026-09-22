@@ -13,7 +13,7 @@
       "space_economy": 53
     }
   },
-  "finished_at": "2026-09-22T00:27:28Z",
+  "finished_at": "2026-09-22T07:12:51Z",
   "invariants": [
     {
       "detail": "stocks.json is 0.0 days old (max 8)",
@@ -64,7 +64,7 @@
       "ok": true
     },
     {
-      "detail": "1654 stocks carry a Factor Lab score (min 500)",
+      "detail": "2864 stocks carry a Factor Lab score (min 500)",
       "level": "hard",
       "name": "factor_scored",
       "ok": true
@@ -76,7 +76,7 @@
       "ok": true
     },
     {
-      "detail": "164 reverse-DCF models built",
+      "detail": "125 reverse-DCF models built",
       "level": "soft",
       "name": "valuation_models",
       "ok": true
@@ -101,45 +101,50 @@
     }
   ],
   "ok": true,
-  "run_id": "20260922T002708Z",
+  "run_id": "20260922T071228Z",
   "steps": [
     {
-      "duration_s": 2.8,
+      "duration_s": 3.3,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 2.5,
+      "duration_s": 3.6,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 4.2,
+      "duration_s": 4.7,
       "name": "score_paradigm",
       "returncode": 0
     },
     {
-      "duration_s": 1.5,
-      "name": "score_factors",
+      "duration_s": 0.9,
+      "name": "filter_tier1_hygiene",
       "returncode": 0
     },
     {
-      "duration_s": 0.7,
+      "duration_s": 1.6,
+      "name": "score_factors_dual_door",
+      "returncode": 0
+    },
+    {
+      "duration_s": 0.8,
       "name": "build_valuation_models",
       "returncode": 0
     },
     {
-      "duration_s": 0.3,
+      "duration_s": 0.4,
       "name": "build_portfolio_plan",
       "returncode": 0
     },
     {
-      "duration_s": 1.3,
+      "duration_s": 1.2,
       "name": "build_momo_plan",
       "returncode": 0
     },
     {
-      "duration_s": 6.7,
+      "duration_s": 6.3,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
