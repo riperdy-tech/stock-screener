@@ -1134,7 +1134,7 @@ def main():
     # exchange listing (acquired, renamed, suspended pending a merger) keeps its
     # last good record and keeps getting scored on frozen data. Nothing is
     # deleted here — we only record what the listing says TODAY, and
-    # score_factors.py vetoes names that stay absent (scripts/tradability.py).
+    # score_factors_dual_door.py vetoes names that stay absent (scripts/tradability.py).
     # Runs AFTER the scan because the loop replaces records wholesale.
     #
     # Guarded: a truncated or failed listing fetch would mark the entire

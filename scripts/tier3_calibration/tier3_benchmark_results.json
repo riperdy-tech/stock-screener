@@ -1,0 +1,1719 @@
+{
+  "generated_at": "2026-09-15T20:50:29Z",
+  "benchmark_tickers_count": 50,
+  "score_matrix": [
+    {
+      "arm": "candidate_a_static",
+      "traps_vetoed": "3/15",
+      "trap_catch_rate_pct": 20.0,
+      "compounders_passed": "15/15",
+      "comp_preservation_pct": 100.0,
+      "false_rejection_pct": 0.0,
+      "cyclicals_passed": "10/10",
+      "biotechs_passed": "10/10",
+      "total_time_s": 0.0,
+      "avg_time_per_ticker_s": 0.0
+    },
+    {
+      "arm": "candidate_b_llm",
+      "traps_vetoed": "11/15",
+      "trap_catch_rate_pct": 73.3,
+      "compounders_passed": "15/15",
+      "comp_preservation_pct": 100.0,
+      "false_rejection_pct": 0.0,
+      "cyclicals_passed": "10/10",
+      "biotechs_passed": "10/10",
+      "total_time_s": 892.969,
+      "avg_time_per_ticker_s": 17.859
+    },
+    {
+      "arm": "candidate_c_hybrid",
+      "traps_vetoed": "12/15",
+      "trap_catch_rate_pct": 80.0,
+      "compounders_passed": "15/15",
+      "comp_preservation_pct": 100.0,
+      "false_rejection_pct": 0.0,
+      "cyclicals_passed": "10/10",
+      "biotechs_passed": "10/10",
+      "total_time_s": 836.863,
+      "avg_time_per_ticker_s": 16.737
+    }
+  ],
+  "detailed_results": {
+    "candidate_a_static": {
+      "cases": {
+        "INTC": {
+          "ticker": "INTC",
+          "decision": "VETO",
+          "flags": [
+            "GROSS_MARGIN_DECAY",
+            "NEGATIVE_OPINC_HIGH_DEBT",
+            "PERSISTENT_FCF_BURN"
+          ],
+          "score": 0,
+          "reasons": [
+            "Gross margin collapsed -29.0pts from 63.7% to 34.8%",
+            "Operating income is negative ($-2.21B) against $44.09B of long-term debt",
+            "Consecutive negative FCF ($-4.95B latest, $-15.66B prior) while holding net debt"
+          ]
+        },
+        "KSS": {
+          "ticker": "KSS",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "KHC": {
+          "ticker": "KHC",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "BBDC": {
+          "ticker": "BBDC",
+          "decision": "PASS",
+          "flags": [
+            "SHARE_DILUTION_BLEED"
+          ],
+          "score": 65,
+          "reasons": [
+            "Share count compounded at 12.7%/yr while revenue compounded at 0.0%/yr"
+          ]
+        },
+        "LUMN": {
+          "ticker": "LUMN",
+          "decision": "VETO",
+          "flags": [
+            "SHARE_DILUTION_BLEED",
+            "TOPLINE_STRUCTURAL_CONTRACTION"
+          ],
+          "score": 30,
+          "reasons": [
+            "Share count compounded at 5.2%/yr while revenue compounded at -3.3%/yr",
+            "Revenue contracting at -3.3% CAGR over 11 years"
+          ]
+        },
+        "F": {
+          "ticker": "F",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "LEG": {
+          "ticker": "LEG",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "VNO": {
+          "ticker": "VNO",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "SLG": {
+          "ticker": "SLG",
+          "decision": "PASS",
+          "flags": [
+            "TOPLINE_STRUCTURAL_CONTRACTION"
+          ],
+          "score": 65,
+          "reasons": [
+            "Revenue contracting at -3.7% CAGR over 11 years"
+          ]
+        },
+        "AAL": {
+          "ticker": "AAL",
+          "decision": "PASS",
+          "flags": [
+            "EXCESSIVE_LEVERAGE"
+          ],
+          "score": 65,
+          "reasons": [
+            "Net Debt to EBITDA is dangerously high at 7.0x"
+          ]
+        },
+        "CCL": {
+          "ticker": "CCL",
+          "decision": "PASS",
+          "flags": [
+            "SHARE_DILUTION_BLEED"
+          ],
+          "score": 65,
+          "reasons": [
+            "Share count compounded at 5.5%/yr while revenue compounded at 4.8%/yr"
+          ]
+        },
+        "DIS": {
+          "ticker": "DIS",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "BA": {
+          "ticker": "BA",
+          "decision": "VETO",
+          "flags": [
+            "GROSS_MARGIN_DECAY",
+            "EXCESSIVE_LEVERAGE",
+            "PERSISTENT_FCF_BURN"
+          ],
+          "score": 0,
+          "reasons": [
+            "Gross margin collapsed -10.6pts from 15.4% to 4.8%",
+            "Net Debt to EBITDA is dangerously high at 6.9x",
+            "Consecutive negative FCF ($-1.88B latest, $-14.31B prior) while holding net debt"
+          ]
+        },
+        "CVS": {
+          "ticker": "CVS",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "T": {
+          "ticker": "T",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "AAPL": {
+          "ticker": "AAPL",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "MSFT": {
+          "ticker": "MSFT",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "GOOG": {
+          "ticker": "GOOG",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "COST": {
+          "ticker": "COST",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "LLY": {
+          "ticker": "LLY",
+          "decision": "PASS",
+          "flags": [
+            "EXCESSIVE_LEVERAGE"
+          ],
+          "score": 65,
+          "reasons": [
+            "Net Debt to EBITDA is dangerously high at 16.8x"
+          ]
+        },
+        "GWW": {
+          "ticker": "GWW",
+          "decision": "PASS",
+          "flags": [
+            "GROSS_MARGIN_DECAY"
+          ],
+          "score": 65,
+          "reasons": [
+            "Gross margin collapsed -4.2pts from 43.3% to 39.1%"
+          ]
+        },
+        "CPRT": {
+          "ticker": "CPRT",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "ORLY": {
+          "ticker": "ORLY",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "ODFL": {
+          "ticker": "ODFL",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "CTAS": {
+          "ticker": "CTAS",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "V": {
+          "ticker": "V",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "MA": {
+          "ticker": "MA",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "NVDA": {
+          "ticker": "NVDA",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "AVGO": {
+          "ticker": "AVGO",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "FAST": {
+          "ticker": "FAST",
+          "decision": "PASS",
+          "flags": [
+            "GROSS_MARGIN_DECAY"
+          ],
+          "score": 65,
+          "reasons": [
+            "Gross margin collapsed -5.8pts from 50.8% to 45.0%"
+          ]
+        },
+        "CEG": {
+          "ticker": "CEG",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "VST": {
+          "ticker": "VST",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "CAT": {
+          "ticker": "CAT",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "DE": {
+          "ticker": "DE",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "FCX": {
+          "ticker": "FCX",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "XOM": {
+          "ticker": "XOM",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "CVX": {
+          "ticker": "CVX",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "NUE": {
+          "ticker": "NUE",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "CF": {
+          "ticker": "CF",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "MOS": {
+          "ticker": "MOS",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "EXEL": {
+          "ticker": "EXEL",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "INCY": {
+          "ticker": "INCY",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "BMRN": {
+          "ticker": "BMRN",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "ALNY": {
+          "ticker": "ALNY",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "SRPT": {
+          "ticker": "SRPT",
+          "decision": "PASS",
+          "flags": [
+            "PERSISTENT_FCF_BURN"
+          ],
+          "score": 65,
+          "reasons": [
+            "Consecutive negative FCF ($-0.31B latest, $-0.34B prior) while holding net debt"
+          ]
+        },
+        "PLTR": {
+          "ticker": "PLTR",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "SNOW": {
+          "ticker": "SNOW",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "CRWD": {
+          "ticker": "CRWD",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        },
+        "NET": {
+          "ticker": "NET",
+          "decision": "PASS",
+          "flags": [
+            "GROSS_MARGIN_DECAY"
+          ],
+          "score": 65,
+          "reasons": [
+            "Gross margin collapsed -4.1pts from 78.7% to 74.5%"
+          ]
+        },
+        "DDOG": {
+          "ticker": "DDOG",
+          "decision": "PASS",
+          "flags": [],
+          "score": 100,
+          "reasons": [
+            "No severe structural red flags detected."
+          ]
+        }
+      },
+      "total_time_s": 0.0
+    },
+    "candidate_b_llm": {
+      "cases": {
+        "INTC": {
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "decision": "VETO",
+          "rationale": "Intel exhibits classic secular decline: four consecutive years of revenue contraction, gross margin compression from 42.6% to ~33-35% (far below TSMC/AMD), sustained negative FCF (-$4B to -$15B annually), and $44B in debt with no path to near-term profitability \u2014 a textbook value trap with debt distress risk.",
+          "ticker": "INTC",
+          "elapsed_s": 16.2,
+          "error": null
+        },
+        "KSS": {
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "decision": "VETO",
+          "rationale": "Kohl's exhibits a clear secular revenue decline (~14% over 3 years) in the structurally eroding department store category, with no durable moat against e-commerce, big-box, and off-price competitors; FCF improvements are driven by cost cutting on a shrinking revenue base, a classic value trap pattern.",
+          "ticker": "KSS",
+          "elapsed_s": 18.16,
+          "error": null
+        },
+        "KHC": {
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "decision": "VETO",
+          "rationale": "Kraft Heinz exhibits classic value trap characteristics: two consecutive years of accelerating revenue decline ($26.6B\u2192$24.9B), a swing to a massive -$4.67B operating loss in FY2025 (likely impairments signaling asset overvaluation), and structural share loss in packaged foods with no evidence of pricing power or brand renaissance.",
+          "ticker": "KHC",
+          "elapsed_s": 18.92,
+          "error": null
+        },
+        "BBDC": {
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "decision": "VETO",
+          "rationale": "BDC with debt growing 67% over three years to $1.20B while market cap is only $0.91B, meaning leverage exceeds equity value with no visible FCF to service the debt; this is a debt-distress trajectory in a rising-rate environment that threatens the vehicle's viability.",
+          "ticker": "BBDC",
+          "elapsed_s": 17.46,
+          "error": null
+        },
+        "LUMN": {
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "decision": "VETO",
+          "rationale": "Lumen is a legacy copper wireline telecom in structural secular decline with ~29% revenue erosion over three years, near-zero or negative operating income, and a heavy debt load\u2014textbook value trap with no durable moat against fiber and wireless substitution.",
+          "ticker": "LUMN",
+          "elapsed_s": 15.21,
+          "error": null
+        },
+        "F": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Ford's FY2025 operating loss of -$9.17B signals a significant EV-transition cliff (likely non-cash impairments/write-downs), but record FCF of $12.47B and continued revenue growth confirm the core business remains cash-generative and not in secular decline; scale and brand provide a moderate moat through the industry transition.",
+          "ticker": "F",
+          "elapsed_s": 23.38,
+          "error": null
+        },
+        "LEG": {
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "decision": "VETO",
+          "rationale": "Leggett & Platt shows a consistent 21% revenue decline over three years with gross margin compression (19.0%\u219217.1%), indicating structural share loss in its core bed components and diversified manufacturing segments rather than a simple cyclical trough; the low valuation reflects the market correctly pricing in a shrinking business.",
+          "ticker": "LEG",
+          "elapsed_s": 16.8,
+          "error": null
+        },
+        "VNO": {
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "decision": "VETO",
+          "rationale": "Office REITs face structural secular decline from permanent hybrid/remote work shifts; Vornado's flat revenue and elevated debt-to-revenue ratio (~1.25x) signal a value trap with meaningful death-spiral risk as occupancy erodes in even prime NYC locations.",
+          "ticker": "VNO",
+          "elapsed_s": 19.23,
+          "error": null
+        },
+        "SLG": {
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "decision": "VETO",
+          "rationale": "SLG is an office REIT facing structural secular decline from the remote/hybrid work shift, with revenue trending down and a $3.23B debt load against a $3.94B market cap creating severe leverage risk and refinancing cliff exposure in a sector with deteriorating occupancy fundamentals.",
+          "ticker": "SLG",
+          "elapsed_s": 16.51,
+          "error": null
+        },
+        "AAL": {
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": true,
+          "decision": "VETO",
+          "rationale": "Airlines are commodity businesses with zero pricing power and no durable moat; AAL carries $24.6B in debt against only ~$1.5B operating income (16x+ debt/EBITDA) with FCF swinging negative, making it a textbook debt-distress value trap with no path to self-sustaining cash generation.",
+          "ticker": "AAL",
+          "elapsed_s": 15.37,
+          "error": null
+        },
+        "CCL": {
+          "ticker": "CCL",
+          "moat_rating": "UNKNOWN",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "LLM evaluation failed or timed out: Unterminated string starting at: line 1 column 97 (char 96)",
+          "elapsed_s": 26.25,
+          "error": "Unterminated string starting at: line 1 column 97 (char 96)"
+        },
+        "DIS": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Disney possesses one of the most durable IP moats in the world (Disney, Pixar, Marvel, Star Wars, ESPN) with a growing content library, high-margin parks, and a clear financial improvement trajectory\u2014revenue up 14%, FCF up 8.5x, and debt down 22% over three years\u2014making it a high-quality compounder with no structural decline or cliff risk.",
+          "ticker": "DIS",
+          "elapsed_s": 17.35,
+          "error": null
+        },
+        "BA": {
+          "ticker": "BA",
+          "moat_rating": "UNKNOWN",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "LLM evaluation failed or timed out: Expecting value: line 1 column 1 (char 0)",
+          "elapsed_s": 24.56,
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        },
+        "CVS": {
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": true,
+          "decision": "VETO",
+          "rationale": "CVS is a secular decliner: its core pharmacy retail segment faces structural share loss to big-box and online competitors with ongoing store closures, while Aetna's PPO insurance provides only thin-margin revenue growth that cannot offset the pharmacy erosion. The operating income collapse from $13.7B (FY23 peak) to $4.7B (FY25) signals a deteriorating earnings base with no durable moat to protect future cash flows.",
+          "ticker": "CVS",
+          "elapsed_s": 21.53,
+          "error": null
+        },
+        "T": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "decision": "VETO",
+          "rationale": "Core telecom is in secular decline (wireline structurally dying, wireless flat) and the WBD acquisition has pushed debt to ~7x FCF with significant integration risk, creating a classic value-trap profile with limited growth and elevated leverage.",
+          "ticker": "T",
+          "elapsed_s": 26.44,
+          "error": null
+        },
+        "AAPL": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Apple exhibits a durable ecosystem moat with expanding gross margins (43.3%\u219246.9%), resuming revenue growth in FY2025, declining debt, and ~$100B annual FCF \u2014 a textbook high-quality compounder with no structural decline or distress signals.",
+          "ticker": "AAPL",
+          "elapsed_s": 13.17,
+          "error": null
+        },
+        "MSFT": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Microsoft is a premier compounder with an unassailable enterprise software and cloud moat, expanding operating margins (42%\u219247%), $67-74B annual FCF, and minimal leverage \u2014 no structural decline or cliff risk identified.",
+          "ticker": "MSFT",
+          "elapsed_s": 11.92,
+          "error": null
+        },
+        "GOOG": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Alphabet possesses one of the most durable moats in global markets (search dominance, YouTube, Android, AI leadership) with accelerating revenue and operating income growth, and even the FY2025 debt increase to $49B is trivially covered by $73B FCF (0.67x), presenting no distress or structural decline risk.",
+          "ticker": "GOOG",
+          "elapsed_s": 13.59,
+          "error": null
+        },
+        "COST": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Costco's membership-based model creates a durable flywheel with ~90%+ renewal rates, scale-driven procurement advantages, and counter-cyclical consumer demand; financials show consistent revenue growth, expanding operating income, and FCF comfortably covering modest debt.",
+          "ticker": "COST",
+          "elapsed_s": 14.09,
+          "error": null
+        },
+        "LLY": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Eli Lilly is a top-tier pharma compounder with a dominant GLP-1 franchise (Mounjaro/Zepbound) driving revenue from $28B to $65B in three years, backed by regulatory moats, massive R&D scale, and no near-term patent cliff; debt growth is acquisition-driven and easily serviced by strong and growing FCF.",
+          "ticker": "LLY",
+          "elapsed_s": 14.48,
+          "error": null
+        },
+        "GWW": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Grainger is a dominant MRO industrial distributor with a durable scale-and-network moat, conservative leverage (~1.6x FCF), and steady mid-single-digit revenue growth with no structural decline risk.",
+          "ticker": "GWW",
+          "elapsed_s": 17.69,
+          "error": null
+        },
+        "CPRT": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Copart is a dominant two-sided marketplace in salvage vehicle auctions with strong network effects, ~10% revenue CAGR, ~36% operating margins, essentially zero debt, and expanding FCF \u2014 a textbook high-quality compounder with no structural headwinds.",
+          "ticker": "CPRT",
+          "elapsed_s": 17.75,
+          "error": null
+        },
+        "ORLY": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "O'Reilly is a duopoly auto parts retailer with a durable moat from scale, logistics, and brand; the aging US vehicle fleet provides a structural tailwind, margins are stable-to-expanding, and debt is well-covered by ~$3.5B in operating income.",
+          "ticker": "ORLY",
+          "elapsed_s": 18.91,
+          "error": null
+        },
+        "ODFL": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "ODFL is a high-quality LTL compounder with a durable operational moat (network density, safety culture, driver retention) currently navigating a cyclical freight downcycle; FCF resilience ($0.96B in FY2025 vs $0.92B in FY2022) and minimal debt confirm this is a cyclical trough, not a structural decline.",
+          "ticker": "ODFL",
+          "elapsed_s": 17.45,
+          "error": null
+        },
+        "CTAS": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Cintas is a textbook recurring-revenue compounder with expanding margins (47%\u219251%), consistent ~8-9% revenue growth, growing FCF, and declining debt\u2014benefiting from high switching costs, scale, and secular labor participation trends with no structural decline risk.",
+          "ticker": "CTAS",
+          "elapsed_s": 13.5,
+          "error": null
+        },
+        "V": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Visa is a global payments tollbooth with an unmatched network-effect duopoly, ~60%+ operating margins, and consistent revenue/FCF growth; debt is trivial relative to cash generation (~1x FCF), making this a textbook durable compounder with no structural decline risk.",
+          "ticker": "V",
+          "elapsed_s": 13.57,
+          "error": null
+        },
+        "MA": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Mastercard is a pure-play payments tollbooth with exceptional network effects, ~58% operating margins, and consistent 13-15% revenue/FCF growth with debt below 1x FCF \u2014 a textbook durable-moat compounder with no structural decline or cliff risk.",
+          "ticker": "MA",
+          "elapsed_s": 16.2,
+          "error": null
+        },
+        "NVDA": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "NVIDIA possesses a durable moat via its CUDA software ecosystem, full-stack AI platform (GPU + networking + software), and massive switching costs; revenue has grown 8x in three years with expanding margins and a fortress balance sheet ($97B FCF vs $8.5B debt), indicating a secular AI infrastructure buildout still in its early innings rather than a cyclical peak or value trap.",
+          "ticker": "NVDA",
+          "elapsed_s": 16.58,
+          "error": null
+        },
+        "AVGO": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Broadcom possesses a durable multi-segment moat (custom AI silicon, data center networking, VMware enterprise virtualization) with strong and accelerating FCF ($26.9B in FY2025), no structural decline, and manageable leverage relative to cash flow generation.",
+          "ticker": "AVGO",
+          "elapsed_s": 19.62,
+          "error": null
+        },
+        "FAST": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Fastenal is a high-quality industrial distribution compounder with a durable moat built on its 2,000+ branch network, embedded vending machines, and high B2B switching costs; minimal debt, steady revenue growth, and expanding FCF confirm a clean, investable business with no structural decline or cliff risk.",
+          "ticker": "FAST",
+          "elapsed_s": 14.92,
+          "error": null
+        },
+        "CEG": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Constellation Energy owns the largest US nuclear fleet with extremely high barriers to entry (regulatory, capital, technical) and long-term PPAs with hyperscalers for AI data center power; debt is manageable at ~$7.25B against $3-4B operating income, and FCF has turned positive as the capex cycle matures.",
+          "ticker": "CEG",
+          "elapsed_s": 18.92,
+          "error": null
+        },
+        "VST": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "decision": "PASS",
+          "rationale": "Vistra is a large-scale IPP with a quality asset fleet (gas, nuclear, renewables) benefiting from structural AI/data-center power demand; the FY2025 earnings pullback reflects power-price cyclicality rather than secular decline, and the balance sheet remains serviceable despite elevated leverage.",
+          "ticker": "VST",
+          "elapsed_s": 24.53,
+          "error": null
+        },
+        "CAT": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "decision": "PASS",
+          "rationale": "Caterpillar's moat is built on its massive installed base, global dealer network, and high-margin aftermarket (parts/service) flywheel \u2014 a structurally durable competitive advantage. The FY2025 margin compression (20.2%\u219216.5% op margin) while revenue grew signals a cyclical peak in profitability, but the balance sheet (debt/FCF ~3x) and diversified end-markets make this a high-quality compounder, not a trap.",
+          "ticker": "CAT",
+          "elapsed_s": 23.82,
+          "error": null
+        },
+        "DE": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "decision": "PASS",
+          "rationale": "Deere is a dominant, high-quality compounder with a durable moat (brand, dealer network, financial services lock-in) currently in a normal farm/construction equipment cyclical downturn after a FY2023 revenue peak; FCF resilience through the cycle confirms business quality and absence of structural decline.",
+          "ticker": "DE",
+          "elapsed_s": 18.17,
+          "error": null
+        },
+        "FCX": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "FCX owns world-class copper assets with a durable resource moat and benefits from structural electrification demand; debt is modest (~1.3x EBITDA) and FCF volatility is normal cyclical behavior, not a sign of distress or decline.",
+          "ticker": "FCX",
+          "elapsed_s": 16.25,
+          "error": null
+        },
+        "XOM": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "decision": "PASS",
+          "rationale": "ExxonMobil is a high-quality integrated oil major with a durable moat from scale, proprietary technology, and low-cost production; the FCF decline from the 2022 peak reflects cyclical oil price normalization, not structural decline, and the balance sheet remains fortress-strong.",
+          "ticker": "XOM",
+          "elapsed_s": 16.73,
+          "error": null
+        },
+        "CVX": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "decision": "PASS",
+          "rationale": "Chevron is a well-capitalized integrated oil major with scale advantages and a global asset base; the 2022 revenue/FCF spike was a cyclical peak that has since normalized, but FCF remains robust at ~$16B with no signs of secular decline or debt distress.",
+          "ticker": "CVX",
+          "elapsed_s": 19.61,
+          "error": null
+        },
+        "NUE": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Nucor is a cyclical steel leader at or near the bottom of its cycle (FCF collapsed from $8.1B peak in FY2022 to negative in FY2025, revenue stabilizing). Its cost advantage via electric arc furnaces and dominant US market position provide a moderate moat; this is a normal cyclical trough, not a structural decline.",
+          "ticker": "NUE",
+          "elapsed_s": 16.47,
+          "error": null
+        },
+        "CF": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Corteva is a well-capitalized ag inputs franchise with meaningful IP in seeds and crop protection; the FY2022-to-FY2024 revenue compression reflects a cyclical trough (fertilizer/crop price normalization), not secular decline, and FY2025 shows clear recovery with manageable ~1.5x debt/FCF.",
+          "ticker": "CF",
+          "elapsed_s": 16.5,
+          "error": null
+        },
+        "MOS": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "decision": "PASS",
+          "rationale": "Mosaic is a cyclical fertilizer commodity producer whose FY2022 results reflected a war-driven price spike; the subsequent normalization to FY2024-25 trough is expected cyclical behavior, not structural decline. Global agricultural demand for potash/phosphate remains intact, and FY2025 shows early margin recovery, though negative FCF at the cycle bottom warrants monitoring.",
+          "ticker": "MOS",
+          "elapsed_s": 23.17,
+          "error": null
+        },
+        "EXEL": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Exelixis shows steady revenue growth (~12% CAGR), rapidly expanding operating margins, strong and growing FCF, and no debt \u2014 a clean, scaling oncology franchise with multiple approved products (Cabometyx, Tivdak) and a pipeline, not a value trap or secular decliner.",
+          "ticker": "EXEL",
+          "elapsed_s": 16.22,
+          "error": null
+        },
+        "INCY": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Incyte shows consistent revenue growth (~12% CAGR) with a strong FY2025 operating income recovery to $1.51B, a diversified approved product portfolio (Jakafi, Omvoh, etc.) protected by patents, and a deep pipeline providing future growth optionality without signs of secular decline or debt distress.",
+          "ticker": "INCY",
+          "elapsed_s": 18.01,
+          "error": null
+        },
+        "BMRN": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "BioMarin is a rare-disease biotech with durable moat (high barriers to entry, patent-protected orphan biologics, pricing power) showing consistent ~15-18% revenue growth and a dramatic FCF inflection from near-zero to $720M with no meaningful debt \u2014 a high-quality compounder well past its cash-burn phase.",
+          "ticker": "BMRN",
+          "elapsed_s": 15.21,
+          "error": null
+        },
+        "ALNY": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Alnylam has a durable RNAi platform moat with multiple approved products, strong revenue growth (~75% YoY), and has just crossed into sustained profitability with positive FCF and no debt\u2014classic high-quality compounder transitioning from growth to earnings.",
+          "ticker": "ALNY",
+          "elapsed_s": 13.08,
+          "error": null
+        },
+        "SRPT": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Sarepta's Elevidys gene therapy for DMD is a first-in-class product with strong revenue growth ($0.93B\u2192$2.20B) and declining debt, though the FY2025 operating income swing to -$700M and persistent negative FCF warrant monitoring; the moat is moderate given first-mover advantage in a rare disease niche but long-term durability of gene therapy efficacy remains unproven.",
+          "ticker": "SRPT",
+          "elapsed_s": 23.02,
+          "error": null
+        },
+        "PLTR": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Palantir exhibits a durable moat with 80%+ gross margins, explosive revenue acceleration (56% YoY in FY2025), rapidly scaling operating leverage, zero debt, and sticky government/enterprise contracts with high switching costs\u2014no signs of secular decline or terminal cliff.",
+          "ticker": "PLTR",
+          "elapsed_s": 17.05,
+          "error": null
+        },
+        "SNOW": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Snowflake is a high-growth cloud data platform with a durable moat (switching costs, network effects, ecosystem lock-in), 35%+ revenue CAGR, positive and growing FCF, zero debt, and no structural decline risk; operating losses are driven by SBC and growth investment rather than a broken unit economics model.",
+          "ticker": "SNOW",
+          "elapsed_s": 18.36,
+          "error": null
+        },
+        "CRWD": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "CrowdStrike is a high-growth cloud security platform leader with ~75% gross margins, strong and growing FCF ($1.3B), negligible debt, and a durable moat built on network effects, high switching costs, and platform consolidation in enterprise security. Negative GAAP operating income reflects growth investment, not structural weakness.",
+          "ticker": "CRWD",
+          "elapsed_s": 16.53,
+          "error": null
+        },
+        "NET": {
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Strong 30%+ revenue CAGR with high gross margins (~75%), positive and growing FCF, and zero debt indicate a healthy growth-stage infrastructure software business; negative GAAP operating income is likely driven by heavy SBC/R&D investment rather than structural unprofitability, and the data storage/management market has no secular decline risk.",
+          "ticker": "NET",
+          "elapsed_s": 20.48,
+          "error": null
+        },
+        "DDOG": {
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "decision": "PASS",
+          "rationale": "Datadog is a category-leading SaaS observability platform with ~80% gross margins, 25%+ revenue CAGR, strongly positive and growing FCF, zero debt, and high switching costs creating a durable moat in a structurally growing cloud infrastructure market.",
+          "ticker": "DDOG",
+          "elapsed_s": 13.89,
+          "error": null
+        }
+      },
+      "total_time_s": 892.969
+    },
+    "candidate_c_hybrid": {
+      "cases": {
+        "INTC": {
+          "ticker": "INTC",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_1_STATIC",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "static_flags": [
+            "GROSS_MARGIN_DECAY",
+            "NEGATIVE_OPINC_HIGH_DEBT",
+            "PERSISTENT_FCF_BURN"
+          ],
+          "rationale": "Static structural failure: Gross margin collapsed -29.0pts from 63.7% to 34.8%; Operating income is negative ($-2.21B) against $44.09B of long-term debt; Consecutive negative FCF ($-4.95B latest, $-15.66B prior) while holding net debt",
+          "elapsed_s": 0.001,
+          "llm_called": false
+        },
+        "KSS": {
+          "ticker": "KSS",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_2_LLM",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Kohl's exhibits a clear secular revenue decline (~14% over 3 years) in the structurally eroding department store category, with no durable moat against e-commerce, big-box, and off-price competitors; FCF improvements are driven by cost cutting on a shrinking revenue base, a classic value trap pattern.",
+          "elapsed_s": 18.16,
+          "llm_called": true,
+          "error": null
+        },
+        "KHC": {
+          "ticker": "KHC",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_2_LLM",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Kraft Heinz exhibits classic value trap characteristics: two consecutive years of accelerating revenue decline ($26.6B\u2192$24.9B), a swing to a massive -$4.67B operating loss in FY2025 (likely impairments signaling asset overvaluation), and structural share loss in packaged foods with no evidence of pricing power or brand renaissance.",
+          "elapsed_s": 18.92,
+          "llm_called": true,
+          "error": null
+        },
+        "BBDC": {
+          "ticker": "BBDC",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_2_LLM",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "static_flags": [
+            "SHARE_DILUTION_BLEED"
+          ],
+          "rationale": "BDC with debt growing 67% over three years to $1.20B while market cap is only $0.91B, meaning leverage exceeds equity value with no visible FCF to service the debt; this is a debt-distress trajectory in a rising-rate environment that threatens the vehicle's viability.",
+          "elapsed_s": 17.46,
+          "llm_called": true,
+          "error": null
+        },
+        "LUMN": {
+          "ticker": "LUMN",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_1_STATIC",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "static_flags": [
+            "SHARE_DILUTION_BLEED",
+            "TOPLINE_STRUCTURAL_CONTRACTION"
+          ],
+          "rationale": "Static structural failure: Share count compounded at 5.2%/yr while revenue compounded at -3.3%/yr; Revenue contracting at -3.3% CAGR over 11 years",
+          "elapsed_s": 0.001,
+          "llm_called": false
+        },
+        "F": {
+          "ticker": "F",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "MODERATE",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Ford's FY2025 operating loss of -$9.17B signals a significant EV-transition cliff (likely non-cash impairments/write-downs), but record FCF of $12.47B and continued revenue growth confirm the core business remains cash-generative and not in secular decline; scale and brand provide a moderate moat through the industry transition.",
+          "elapsed_s": 23.38,
+          "llm_called": true,
+          "error": null
+        },
+        "LEG": {
+          "ticker": "LEG",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_2_LLM",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "static_flags": [],
+          "rationale": "Leggett & Platt shows a consistent 21% revenue decline over three years with gross margin compression (19.0%\u219217.1%), indicating structural share loss in its core bed components and diversified manufacturing segments rather than a simple cyclical trough; the low valuation reflects the market correctly pricing in a shrinking business.",
+          "elapsed_s": 16.8,
+          "llm_called": true,
+          "error": null
+        },
+        "VNO": {
+          "ticker": "VNO",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_2_LLM",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Office REITs face structural secular decline from permanent hybrid/remote work shifts; Vornado's flat revenue and elevated debt-to-revenue ratio (~1.25x) signal a value trap with meaningful death-spiral risk as occupancy erodes in even prime NYC locations.",
+          "elapsed_s": 19.23,
+          "llm_called": true,
+          "error": null
+        },
+        "SLG": {
+          "ticker": "SLG",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_2_LLM",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "static_flags": [
+            "TOPLINE_STRUCTURAL_CONTRACTION"
+          ],
+          "rationale": "SLG is an office REIT facing structural secular decline from the remote/hybrid work shift, with revenue trending down and a $3.23B debt load against a $3.94B market cap creating severe leverage risk and refinancing cliff exposure in a sector with deteriorating occupancy fundamentals.",
+          "elapsed_s": 16.51,
+          "llm_called": true,
+          "error": null
+        },
+        "AAL": {
+          "ticker": "AAL",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_2_LLM",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": true,
+          "static_flags": [
+            "EXCESSIVE_LEVERAGE"
+          ],
+          "rationale": "Airlines are commodity businesses with zero pricing power and no durable moat; AAL carries $24.6B in debt against only ~$1.5B operating income (16x+ debt/EBITDA) with FCF swinging negative, making it a textbook debt-distress value trap with no path to self-sustaining cash generation.",
+          "elapsed_s": 15.37,
+          "llm_called": true,
+          "error": null
+        },
+        "CCL": {
+          "ticker": "CCL",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "UNKNOWN",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [
+            "SHARE_DILUTION_BLEED"
+          ],
+          "rationale": "LLM evaluation failed or timed out: Unterminated string starting at: line 1 column 97 (char 96)",
+          "elapsed_s": 26.25,
+          "llm_called": true,
+          "error": "Unterminated string starting at: line 1 column 97 (char 96)"
+        },
+        "DIS": {
+          "ticker": "DIS",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Disney possesses one of the most durable IP moats in the world (Disney, Pixar, Marvel, Star Wars, ESPN) with a growing content library, high-margin parks, and a clear financial improvement trajectory\u2014revenue up 14%, FCF up 8.5x, and debt down 22% over three years\u2014making it a high-quality compounder with no structural decline or cliff risk.",
+          "elapsed_s": 17.35,
+          "llm_called": true,
+          "error": null
+        },
+        "BA": {
+          "ticker": "BA",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_1_STATIC",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "static_flags": [
+            "GROSS_MARGIN_DECAY",
+            "EXCESSIVE_LEVERAGE",
+            "PERSISTENT_FCF_BURN"
+          ],
+          "rationale": "Static structural failure: Gross margin collapsed -10.6pts from 15.4% to 4.8%; Net Debt to EBITDA is dangerously high at 6.9x; Consecutive negative FCF ($-1.88B latest, $-14.31B prior) while holding net debt",
+          "elapsed_s": 0.001,
+          "llm_called": false
+        },
+        "CVS": {
+          "ticker": "CVS",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_2_LLM",
+          "moat_rating": "NONE_OR_TRAP",
+          "cliff_risk": true,
+          "cyclical_peak": true,
+          "static_flags": [],
+          "rationale": "CVS is a secular decliner: its core pharmacy retail segment faces structural share loss to big-box and online competitors with ongoing store closures, while Aetna's PPO insurance provides only thin-margin revenue growth that cannot offset the pharmacy erosion. The operating income collapse from $13.7B (FY23 peak) to $4.7B (FY25) signals a deteriorating earnings base with no durable moat to protect future cash flows.",
+          "elapsed_s": 21.53,
+          "llm_called": true,
+          "error": null
+        },
+        "T": {
+          "ticker": "T",
+          "decision": "VETO",
+          "stage_vetoed": "STAGE_2_LLM",
+          "moat_rating": "MODERATE",
+          "cliff_risk": true,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Core telecom is in secular decline (wireline structurally dying, wireless flat) and the WBD acquisition has pushed debt to ~7x FCF with significant integration risk, creating a classic value-trap profile with limited growth and elevated leverage.",
+          "elapsed_s": 26.44,
+          "llm_called": true,
+          "error": null
+        },
+        "AAPL": {
+          "ticker": "AAPL",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Apple exhibits a durable ecosystem moat with expanding gross margins (43.3%\u219246.9%), resuming revenue growth in FY2025, declining debt, and ~$100B annual FCF \u2014 a textbook high-quality compounder with no structural decline or distress signals.",
+          "elapsed_s": 13.17,
+          "llm_called": true,
+          "error": null
+        },
+        "MSFT": {
+          "ticker": "MSFT",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Microsoft is a premier compounder with an unassailable enterprise software and cloud moat, expanding operating margins (42%\u219247%), $67-74B annual FCF, and minimal leverage \u2014 no structural decline or cliff risk identified.",
+          "elapsed_s": 11.92,
+          "llm_called": true,
+          "error": null
+        },
+        "GOOG": {
+          "ticker": "GOOG",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Alphabet possesses one of the most durable moats in global markets (search dominance, YouTube, Android, AI leadership) with accelerating revenue and operating income growth, and even the FY2025 debt increase to $49B is trivially covered by $73B FCF (0.67x), presenting no distress or structural decline risk.",
+          "elapsed_s": 13.59,
+          "llm_called": true,
+          "error": null
+        },
+        "COST": {
+          "ticker": "COST",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Costco's membership-based model creates a durable flywheel with ~90%+ renewal rates, scale-driven procurement advantages, and counter-cyclical consumer demand; financials show consistent revenue growth, expanding operating income, and FCF comfortably covering modest debt.",
+          "elapsed_s": 14.09,
+          "llm_called": true,
+          "error": null
+        },
+        "LLY": {
+          "ticker": "LLY",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [
+            "EXCESSIVE_LEVERAGE"
+          ],
+          "rationale": "Eli Lilly is a top-tier pharma compounder with a dominant GLP-1 franchise (Mounjaro/Zepbound) driving revenue from $28B to $65B in three years, backed by regulatory moats, massive R&D scale, and no near-term patent cliff; debt growth is acquisition-driven and easily serviced by strong and growing FCF.",
+          "elapsed_s": 14.48,
+          "llm_called": true,
+          "error": null
+        },
+        "GWW": {
+          "ticker": "GWW",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [
+            "GROSS_MARGIN_DECAY"
+          ],
+          "rationale": "Grainger is a dominant MRO industrial distributor with a durable scale-and-network moat, conservative leverage (~1.6x FCF), and steady mid-single-digit revenue growth with no structural decline risk.",
+          "elapsed_s": 17.69,
+          "llm_called": true,
+          "error": null
+        },
+        "CPRT": {
+          "ticker": "CPRT",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Copart is a dominant two-sided marketplace in salvage vehicle auctions with strong network effects, ~10% revenue CAGR, ~36% operating margins, essentially zero debt, and expanding FCF \u2014 a textbook high-quality compounder with no structural headwinds.",
+          "elapsed_s": 17.75,
+          "llm_called": true,
+          "error": null
+        },
+        "ORLY": {
+          "ticker": "ORLY",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "O'Reilly is a duopoly auto parts retailer with a durable moat from scale, logistics, and brand; the aging US vehicle fleet provides a structural tailwind, margins are stable-to-expanding, and debt is well-covered by ~$3.5B in operating income.",
+          "elapsed_s": 18.91,
+          "llm_called": true,
+          "error": null
+        },
+        "ODFL": {
+          "ticker": "ODFL",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "ODFL is a high-quality LTL compounder with a durable operational moat (network density, safety culture, driver retention) currently navigating a cyclical freight downcycle; FCF resilience ($0.96B in FY2025 vs $0.92B in FY2022) and minimal debt confirm this is a cyclical trough, not a structural decline.",
+          "elapsed_s": 17.45,
+          "llm_called": true,
+          "error": null
+        },
+        "CTAS": {
+          "ticker": "CTAS",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Cintas is a textbook recurring-revenue compounder with expanding margins (47%\u219251%), consistent ~8-9% revenue growth, growing FCF, and declining debt\u2014benefiting from high switching costs, scale, and secular labor participation trends with no structural decline risk.",
+          "elapsed_s": 13.5,
+          "llm_called": true,
+          "error": null
+        },
+        "V": {
+          "ticker": "V",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Visa is a global payments tollbooth with an unmatched network-effect duopoly, ~60%+ operating margins, and consistent revenue/FCF growth; debt is trivial relative to cash generation (~1x FCF), making this a textbook durable compounder with no structural decline risk.",
+          "elapsed_s": 13.57,
+          "llm_called": true,
+          "error": null
+        },
+        "MA": {
+          "ticker": "MA",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Mastercard is a pure-play payments tollbooth with exceptional network effects, ~58% operating margins, and consistent 13-15% revenue/FCF growth with debt below 1x FCF \u2014 a textbook durable-moat compounder with no structural decline or cliff risk.",
+          "elapsed_s": 16.2,
+          "llm_called": true,
+          "error": null
+        },
+        "NVDA": {
+          "ticker": "NVDA",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "NVIDIA possesses a durable moat via its CUDA software ecosystem, full-stack AI platform (GPU + networking + software), and massive switching costs; revenue has grown 8x in three years with expanding margins and a fortress balance sheet ($97B FCF vs $8.5B debt), indicating a secular AI infrastructure buildout still in its early innings rather than a cyclical peak or value trap.",
+          "elapsed_s": 16.58,
+          "llm_called": true,
+          "error": null
+        },
+        "AVGO": {
+          "ticker": "AVGO",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Broadcom possesses a durable multi-segment moat (custom AI silicon, data center networking, VMware enterprise virtualization) with strong and accelerating FCF ($26.9B in FY2025), no structural decline, and manageable leverage relative to cash flow generation.",
+          "elapsed_s": 19.62,
+          "llm_called": true,
+          "error": null
+        },
+        "FAST": {
+          "ticker": "FAST",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [
+            "GROSS_MARGIN_DECAY"
+          ],
+          "rationale": "Fastenal is a high-quality industrial distribution compounder with a durable moat built on its 2,000+ branch network, embedded vending machines, and high B2B switching costs; minimal debt, steady revenue growth, and expanding FCF confirm a clean, investable business with no structural decline or cliff risk.",
+          "elapsed_s": 14.92,
+          "llm_called": true,
+          "error": null
+        },
+        "CEG": {
+          "ticker": "CEG",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Constellation Energy owns the largest US nuclear fleet with extremely high barriers to entry (regulatory, capital, technical) and long-term PPAs with hyperscalers for AI data center power; debt is manageable at ~$7.25B against $3-4B operating income, and FCF has turned positive as the capex cycle matures.",
+          "elapsed_s": 18.92,
+          "llm_called": true,
+          "error": null
+        },
+        "VST": {
+          "ticker": "VST",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "static_flags": [],
+          "rationale": "Vistra is a large-scale IPP with a quality asset fleet (gas, nuclear, renewables) benefiting from structural AI/data-center power demand; the FY2025 earnings pullback reflects power-price cyclicality rather than secular decline, and the balance sheet remains serviceable despite elevated leverage.",
+          "elapsed_s": 24.53,
+          "llm_called": true,
+          "error": null
+        },
+        "CAT": {
+          "ticker": "CAT",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "static_flags": [],
+          "rationale": "Caterpillar's moat is built on its massive installed base, global dealer network, and high-margin aftermarket (parts/service) flywheel \u2014 a structurally durable competitive advantage. The FY2025 margin compression (20.2%\u219216.5% op margin) while revenue grew signals a cyclical peak in profitability, but the balance sheet (debt/FCF ~3x) and diversified end-markets make this a high-quality compounder, not a trap.",
+          "elapsed_s": 23.82,
+          "llm_called": true,
+          "error": null
+        },
+        "DE": {
+          "ticker": "DE",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "static_flags": [],
+          "rationale": "Deere is a dominant, high-quality compounder with a durable moat (brand, dealer network, financial services lock-in) currently in a normal farm/construction equipment cyclical downturn after a FY2023 revenue peak; FCF resilience through the cycle confirms business quality and absence of structural decline.",
+          "elapsed_s": 18.17,
+          "llm_called": true,
+          "error": null
+        },
+        "FCX": {
+          "ticker": "FCX",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "FCX owns world-class copper assets with a durable resource moat and benefits from structural electrification demand; debt is modest (~1.3x EBITDA) and FCF volatility is normal cyclical behavior, not a sign of distress or decline.",
+          "elapsed_s": 16.25,
+          "llm_called": true,
+          "error": null
+        },
+        "XOM": {
+          "ticker": "XOM",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "static_flags": [],
+          "rationale": "ExxonMobil is a high-quality integrated oil major with a durable moat from scale, proprietary technology, and low-cost production; the FCF decline from the 2022 peak reflects cyclical oil price normalization, not structural decline, and the balance sheet remains fortress-strong.",
+          "elapsed_s": 16.73,
+          "llm_called": true,
+          "error": null
+        },
+        "CVX": {
+          "ticker": "CVX",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "static_flags": [],
+          "rationale": "Chevron is a well-capitalized integrated oil major with scale advantages and a global asset base; the 2022 revenue/FCF spike was a cyclical peak that has since normalized, but FCF remains robust at ~$16B with no signs of secular decline or debt distress.",
+          "elapsed_s": 19.61,
+          "llm_called": true,
+          "error": null
+        },
+        "NUE": {
+          "ticker": "NUE",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Nucor is a cyclical steel leader at or near the bottom of its cycle (FCF collapsed from $8.1B peak in FY2022 to negative in FY2025, revenue stabilizing). Its cost advantage via electric arc furnaces and dominant US market position provide a moderate moat; this is a normal cyclical trough, not a structural decline.",
+          "elapsed_s": 16.47,
+          "llm_called": true,
+          "error": null
+        },
+        "CF": {
+          "ticker": "CF",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Corteva is a well-capitalized ag inputs franchise with meaningful IP in seeds and crop protection; the FY2022-to-FY2024 revenue compression reflects a cyclical trough (fertilizer/crop price normalization), not secular decline, and FY2025 shows clear recovery with manageable ~1.5x debt/FCF.",
+          "elapsed_s": 16.5,
+          "llm_called": true,
+          "error": null
+        },
+        "MOS": {
+          "ticker": "MOS",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": true,
+          "static_flags": [],
+          "rationale": "Mosaic is a cyclical fertilizer commodity producer whose FY2022 results reflected a war-driven price spike; the subsequent normalization to FY2024-25 trough is expected cyclical behavior, not structural decline. Global agricultural demand for potash/phosphate remains intact, and FY2025 shows early margin recovery, though negative FCF at the cycle bottom warrants monitoring.",
+          "elapsed_s": 23.17,
+          "llm_called": true,
+          "error": null
+        },
+        "EXEL": {
+          "ticker": "EXEL",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Exelixis shows steady revenue growth (~12% CAGR), rapidly expanding operating margins, strong and growing FCF, and no debt \u2014 a clean, scaling oncology franchise with multiple approved products (Cabometyx, Tivdak) and a pipeline, not a value trap or secular decliner.",
+          "elapsed_s": 16.22,
+          "llm_called": true,
+          "error": null
+        },
+        "INCY": {
+          "ticker": "INCY",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Incyte shows consistent revenue growth (~12% CAGR) with a strong FY2025 operating income recovery to $1.51B, a diversified approved product portfolio (Jakafi, Omvoh, etc.) protected by patents, and a deep pipeline providing future growth optionality without signs of secular decline or debt distress.",
+          "elapsed_s": 18.01,
+          "llm_called": true,
+          "error": null
+        },
+        "BMRN": {
+          "ticker": "BMRN",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "BioMarin is a rare-disease biotech with durable moat (high barriers to entry, patent-protected orphan biologics, pricing power) showing consistent ~15-18% revenue growth and a dramatic FCF inflection from near-zero to $720M with no meaningful debt \u2014 a high-quality compounder well past its cash-burn phase.",
+          "elapsed_s": 15.21,
+          "llm_called": true,
+          "error": null
+        },
+        "ALNY": {
+          "ticker": "ALNY",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Alnylam has a durable RNAi platform moat with multiple approved products, strong revenue growth (~75% YoY), and has just crossed into sustained profitability with positive FCF and no debt\u2014classic high-quality compounder transitioning from growth to earnings.",
+          "elapsed_s": 13.08,
+          "llm_called": true,
+          "error": null
+        },
+        "SRPT": {
+          "ticker": "SRPT",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [
+            "PERSISTENT_FCF_BURN"
+          ],
+          "rationale": "Sarepta's Elevidys gene therapy for DMD is a first-in-class product with strong revenue growth ($0.93B\u2192$2.20B) and declining debt, though the FY2025 operating income swing to -$700M and persistent negative FCF warrant monitoring; the moat is moderate given first-mover advantage in a rare disease niche but long-term durability of gene therapy efficacy remains unproven.",
+          "elapsed_s": 23.02,
+          "llm_called": true,
+          "error": null
+        },
+        "PLTR": {
+          "ticker": "PLTR",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Palantir exhibits a durable moat with 80%+ gross margins, explosive revenue acceleration (56% YoY in FY2025), rapidly scaling operating leverage, zero debt, and sticky government/enterprise contracts with high switching costs\u2014no signs of secular decline or terminal cliff.",
+          "elapsed_s": 17.05,
+          "llm_called": true,
+          "error": null
+        },
+        "SNOW": {
+          "ticker": "SNOW",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Snowflake is a high-growth cloud data platform with a durable moat (switching costs, network effects, ecosystem lock-in), 35%+ revenue CAGR, positive and growing FCF, zero debt, and no structural decline risk; operating losses are driven by SBC and growth investment rather than a broken unit economics model.",
+          "elapsed_s": 18.36,
+          "llm_called": true,
+          "error": null
+        },
+        "CRWD": {
+          "ticker": "CRWD",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "CrowdStrike is a high-growth cloud security platform leader with ~75% gross margins, strong and growing FCF ($1.3B), negligible debt, and a durable moat built on network effects, high switching costs, and platform consolidation in enterprise security. Negative GAAP operating income reflects growth investment, not structural weakness.",
+          "elapsed_s": 16.53,
+          "llm_called": true,
+          "error": null
+        },
+        "NET": {
+          "ticker": "NET",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "MODERATE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [
+            "GROSS_MARGIN_DECAY"
+          ],
+          "rationale": "Strong 30%+ revenue CAGR with high gross margins (~75%), positive and growing FCF, and zero debt indicate a healthy growth-stage infrastructure software business; negative GAAP operating income is likely driven by heavy SBC/R&D investment rather than structural unprofitability, and the data storage/management market has no secular decline risk.",
+          "elapsed_s": 20.48,
+          "llm_called": true,
+          "error": null
+        },
+        "DDOG": {
+          "ticker": "DDOG",
+          "decision": "PASS",
+          "stage_vetoed": "NONE",
+          "moat_rating": "DURABLE",
+          "cliff_risk": false,
+          "cyclical_peak": false,
+          "static_flags": [],
+          "rationale": "Datadog is a category-leading SaaS observability platform with ~80% gross margins, 25%+ revenue CAGR, strongly positive and growing FCF, zero debt, and high switching costs creating a durable moat in a structurally growing cloud infrastructure market.",
+          "elapsed_s": 13.89,
+          "llm_called": true,
+          "error": null
+        }
+      },
+      "total_time_s": 836.863
+    }
+  }
+}

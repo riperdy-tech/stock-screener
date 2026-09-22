@@ -111,8 +111,15 @@ def main():
     if ok and not run_step("score_paradigm", ["scripts/score_paradigm.py"], steps):
         print("FATAL: score_paradigm failed.")
         ok = False
-    if ok and not run_step("score_factors", ["scripts/score_factors.py"], steps):
-        print("FATAL: score_factors failed.")
+    # Tier 1 hygiene, then the dual-door sifter. These replaced the equal-weight Factor Lab
+    # (score_factors.py, retired 2026-09-22): the declared 1/N weights were never the effective
+    # ones, and the unconstrained global pool let one sector take 29% of the slots. Tier 1 must
+    # run first — the sifter reads tier1_hygiene_survivors.json as a hard pre-condition.
+    if ok and not run_step("filter_tier1_hygiene", ["scripts/filter_tier1_hygiene.py"], steps):
+        print("FATAL: filter_tier1_hygiene failed — the sifter has no survivor set to gate on.")
+        ok = False
+    if ok and not run_step("score_factors_dual_door", ["scripts/score_factors_dual_door.py"], steps):
+        print("FATAL: score_factors_dual_door failed.")
         ok = False
     if ok and not run_step("build_valuation_models", ["scripts/build_valuation_models.py"], steps):
         print("FATAL: build_valuation_models failed.")

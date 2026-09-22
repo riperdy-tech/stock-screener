@@ -1,0 +1,77 @@
+{
+  "description": "50-stock frozen calibration benchmark for Tier 3 smart pre-filter testing (Static vs LLM vs Hybrid).",
+  "version": "1.0",
+  "created_at": "2026-09-16",
+  "cohorts": {
+    "traps": {
+      "target_behavior": "VETO",
+      "tickers": [
+        {"ticker": "INTC", "reason": "Secular market share loss in x86/datacenter, foundry capex drag, negative FCF"},
+        {"ticker": "KSS", "reason": "Department store structural decline, traffic erosion, high leverage"},
+        {"ticker": "KHC", "reason": "Packaged goods margin erosion, negative real volume growth, high debt"},
+        {"ticker": "BBDC", "reason": "Credit investment vehicle with NAV degradation and high credit risk"},
+        {"ticker": "LUMN", "reason": "Legacy wireline structural collapse, debt distress, dividend eliminated"},
+        {"ticker": "F", "reason": "High cyclical leverage, low operating margin, capital-intensive EV transition drag"},
+        {"ticker": "LEG", "reason": "Bedding/furniture market collapse, persistent gross margin compression, dividend cut"},
+        {"ticker": "VNO", "reason": "Urban office commercial real estate headwinds, declining FFO, high leverage"},
+        {"ticker": "SLG", "reason": "NYC office exposure, high debt-to-EBITDA, dividend reduction"},
+        {"ticker": "AAL", "reason": "Excessive debt load, thin operating margins, extreme fuel/labor cyclicality"},
+        {"ticker": "CCL", "reason": "Post-pandemic debt burden, capital intensity, vulnerable to consumer recessions"},
+        {"ticker": "DIS", "reason": "Linear TV secular decay, streaming transition margin compression, high debt"},
+        {"ticker": "BA", "reason": "Severe operational/quality failures, delayed deliveries, negative cash flow"},
+        {"ticker": "CVS", "reason": "Retail pharmacy margin compression, Medicare Advantage medical cost ratio spikes"},
+        {"ticker": "T", "reason": "Capital-intensive telecom, high net debt, low secular top-line growth"}
+      ]
+    },
+    "compounders": {
+      "target_behavior": "PASS",
+      "tickers": [
+        {"ticker": "AAPL", "reason": "Global consumer hardware/services ecosystem, exceptional ROIC, massive FCF"},
+        {"ticker": "MSFT", "reason": "Enterprise software monopoly, cloud/AI infrastructure, high operating margins"},
+        {"ticker": "GOOG", "reason": "Search/YouTube moat, Google Cloud acceleration, deep balance sheet net cash"},
+        {"ticker": "COST", "reason": "Membership renewal rate >90%, negative working capital float, pricing power"},
+        {"ticker": "LLY", "reason": "Secular incretin/GLP-1 franchise, strong pipeline, accelerating revenue"},
+        {"ticker": "GWW", "reason": "MRO distribution density, supply-chain scale moat, consistent high ROIC"},
+        {"ticker": "CPRT", "reason": "Salvage vehicle auction duopoly, high land/logistics moat, low capex"},
+        {"ticker": "ORLY", "reason": "Automotive aftermarket parts supply chain, recession-resilient commercial demand"},
+        {"ticker": "ODFL", "reason": "LTL trucking efficiency leader, operating ratio discipline, premium ROIC"},
+        {"ticker": "CTAS", "reason": "Uniform rental route density, high customer switching costs, compounding FCF"},
+        {"ticker": "V", "reason": "Global payment rails duopoly, tollbooth model, >50% operating margins"},
+        {"ticker": "MA", "reason": "Global payment network, volume-based fee model, capital-light compounding"},
+        {"ticker": "NVDA", "reason": "AI computing hardware/software ecosystem (CUDA), market-leading gross margins"},
+        {"ticker": "AVGO", "reason": "Custom silicon/networking leadership, enterprise infrastructure software moat"},
+        {"ticker": "FAST", "reason": "Fastener/industrial on-site vending, high customer integration, durable cash flows"}
+      ]
+    },
+    "cyclicals": {
+      "target_behavior": "DISCRIMINATE_OR_PASS",
+      "tickers": [
+        {"ticker": "CEG", "reason": "Nuclear power producer, zero-carbon baseload power demand, data center PPAs"},
+        {"ticker": "VST", "reason": "Merchant power generation, ERCOT/PJM power pricing upside, nuclear expansion"},
+        {"ticker": "CAT", "reason": "Construction/mining machinery leader, cyclical replacement cycle"},
+        {"ticker": "DE", "reason": "Precision agriculture machinery leader, cyclical agricultural income exposure"},
+        {"ticker": "FCX", "reason": "Copper/gold mining, secular electrification demand vs commodity price volatility"},
+        {"ticker": "XOM", "reason": "Integrated energy major, low-cost Permian/Guyana assets, disciplined capex"},
+        {"ticker": "CVX", "reason": "Integrated energy, strong balance sheet, dividend compounding"},
+        {"ticker": "NUE", "reason": "Electric-arc mini-mill steel producer, flexible cost structure vs integrated steel"},
+        {"ticker": "CF", "reason": "Nitrogen fertilizer producer, North American natural gas cost advantage"},
+        {"ticker": "MOS", "reason": "Phosphate/potash fertilizer producer, agricultural nutrient cyclicality"}
+      ]
+    },
+    "high_risk_biotech_tech": {
+      "target_behavior": "FLAG_CLIFF_OR_PASS",
+      "tickers": [
+        {"ticker": "EXEL", "reason": "Single-product commercial oncology (Cabometyx), patent litigation/cliff risk"},
+        {"ticker": "INCY", "reason": "Commercial oncology/immunology (Jakafi), royalty revenue dependence"},
+        {"ticker": "BMRN", "reason": "Rare disease genetic medicines, high R&D intensity, gene therapy commercialization"},
+        {"ticker": "ALNY", "reason": "RNAi therapeutic pioneer, expanding commercial pipeline, path to GAAP profitability"},
+        {"ticker": "SRPT", "reason": "Duchenne muscular dystrophy gene therapy, high execution/regulatory stakes"},
+        {"ticker": "PLTR", "reason": "Enterprise/government AI ontology software (AIP), accelerating US commercial revenue"},
+        {"ticker": "SNOW", "reason": "Data cloud data warehousing, consumption-based revenue model, high gross margins"},
+        {"ticker": "CRWD", "reason": "Endpoint cybersecurity (Falcon), high net retention, recurring subscription FCF"},
+        {"ticker": "NET", "reason": "Edge network/security cloud (Cloudflare), high gross margins, large developer moat"},
+        {"ticker": "DDOG", "reason": "Observability/cloud monitoring platform, high platform adoption, strong FCF conversion"}
+      ]
+    }
+  }
+}

@@ -515,7 +515,7 @@ def run_backtest():
         "method": "Spearman rank-IC of factor value vs forward 3m return, per formation date",
         "factors": ic_summary,
         "unmeasurable_factors_note": ("revisions and theme have no point-in-time history; "
-                                      "they receive fixed weights in calibrate_factor_weights.py"),
+                                      "the dual-door model scores them; this is a diagnostic only"),
     }, indent=1, sort_keys=True) + "\n", encoding="utf-8")
 
     payload = {

@@ -22,7 +22,7 @@ Two independent inputs, one output:
      cannot be traded anyway (halt, suspension, a KIS-side gap). The listing
      cannot see these, so they are declared by hand.
 
-Consumed by score_factors.py, which maps a reason to fct_veto='not_tradable'.
+Consumed by score_factors_dual_door.py, which maps a reason to fct_veto='NOT_TRADABLE'.
 That veto strips fct_band and is already the guardrail apply_llm_overlay()
 honours, so one veto removes the name from quant eval AND the RS2 lane.
 

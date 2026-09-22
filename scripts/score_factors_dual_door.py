@@ -1,0 +1,798 @@
+"""score_factors_dual_door.py — Production Dual-Door Sifter for Tier 2.
+
+Core Pillars:
+1. Institutional Retail Hygiene & 15-Month SEC Statutory Integrity.
+2. Tailored Corporate Finance Archetypes (145 canonical industries mapped to 6 archetypes).
+   - Banks/Insurance: Earnings Yield, ROE, Gordon Growth Gap (no EV/FCF).
+   - REITs: Price/FFO, OCF/MCap (GAAP depreciation bypassed).
+   - Commodity Cyclicals: 3-year normalized mid-cycle cash flow (peak trap prevention).
+   - Tech/Industrial Compounders: ROIC, Gross Margin Stability, FCF Conversion.
+3. Intra-Sector Anti-Cannibalism Guardrails: Max 35% per sub-industry cluster.
+4. Dynamic Percentile-Merit Selection:
+   - Rank-percentile normalization (0-100) eliminates raw score skew.
+   - 25% safety style floor per door within each sector.
+   - 50% competitive merit based on highest empirical percentile.
+5. Core-Satellite 70/30 Macro Architecture:
+   - 70% Core Floor (~90 stocks across 11 sectors guided by MGI macro rankings).
+   - 30% Global Wildcards (~45 unconstrained slots for superstar compounders).
+   - Hard 18% Sector Ceiling (max 24 stocks per sector) guarantees zero sector crowding.
+
+Usage: python scripts/score_factors_dual_door.py
+Output: public/data/factor_scores_dual_door.json, public/data/factor_scores.json
+"""
+
+import bisect
+import json
+import math
+import statistics
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Dict, Any, List, Optional, Tuple, Set
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "public" / "data"
+
+sys.path.append(str(Path(__file__).resolve().parent))
+from industry_taxonomy import get_taxonomy_profile, normalize_industry
+import depth_conviction
+import tradability
+
+STOCKS_JSON = DATA / "stocks.json"
+PRICE_HISTORY_JSON = DATA / "price_history.json"
+FUNDAMENTALS_HISTORY_JSON = DATA / "fundamentals_history.json"
+BATTERY_JSON = DATA / "fundamentals_battery.json"
+EPS_TRAJECTORY_JSON = DATA / "eps_trajectory.json"
+TIER1_SURVIVORS_JSON = DATA / "tier1_hygiene_survivors.json"
+CURRENT_SECTOR_RANKING_JSON = DATA / "current_sector_ranking.json"
+OUT_JSON = DATA / "factor_scores_dual_door.json"
+FACTOR_SCORES_COMPAT_JSON = DATA / "factor_scores.json"
+
+Z_CLAMP = 3.0
+TOTAL_NOMINATION_TARGET = 135
+CORE_RATIO = 0.70 # 70% Core Sector Floor (~90 stocks)
+WILDCARD_RATIO = 0.30 # 30% Global Wildcards (~45 stocks)
+MAX_SECTOR_PCT = 0.18 # Hard 18% ceiling (max 24 stocks per sector)
+MAX_SECTOR_CEILING = int(TOTAL_NOMINATION_TARGET * MAX_SECTOR_PCT)
+
+GICS_TO_MACRO_ID = {
+    "Basic Materials": "materials",
+    "Communication Services": "communication_services",
+    "Consumer Cyclical": "consumer_discretionary",
+    "Consumer Defensive": "consumer_staples",
+    "Energy": "energy",
+    "Financial Services": "financials",
+    "Healthcare": "health_care",
+    "Industrials": "industrials",
+    "Real Estate": "real_estate",
+    "Technology": "information_technology",
+    "Utilities": "utilities",
+}
+
+
+def load_json(path: Path, default=None):
+    if not path.exists():
+        return default
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def num(v) -> Optional[float]:
+    return float(v) if isinstance(v, (int, float)) and math.isfinite(v) else None
+
+
+def pctl(sorted_vals: List[float], q: float) -> Optional[float]:
+    n = len(sorted_vals)
+    if n == 0: return None
+    if n == 1: return sorted_vals[0]
+    pos = (q / 100.0) * (n - 1)
+    lo = int(math.floor(pos))
+    hi = min(lo + 1, n - 1)
+    frac = pos - lo
+    return sorted_vals[lo] * (1.0 - frac) + sorted_vals[hi] * frac
+
+
+def sector_neutral_z(raw_by_ticker: Dict[str, Optional[float]], sector_by_ticker: Dict[str, str]) -> Dict[str, Optional[float]]:
+    by_sector: Dict[str, List[float]] = {}
+    universe: List[float] = []
+    for t, v in raw_by_ticker.items():
+        if v is not None:
+            universe.append(v)
+            by_sector.setdefault(sector_by_ticker.get(t) or "Unknown", []).append(v)
+            
+    if len(universe) < 2:
+        return {t: None for t in raw_by_ticker}
+
+    def stats_for(vals: List[float]) -> Tuple[float, float, float, Optional[float]]:
+        s = sorted(vals)
+        lo, hi = pctl(s, 1.0), pctl(s, 99.0)
+        w = [min(max(v, lo), hi) for v in vals]
+        mean = sum(w) / len(w)
+        sd = statistics.pstdev(w)
+        return mean, sd, lo, hi
+
+    u_mean, u_sd, u_lo, u_hi = stats_for(universe)
+    sec_stats = {}
+    for sec, vals in by_sector.items():
+        if len(vals) >= 15:
+            sec_stats[sec] = stats_for(vals)
+        else:
+            sec_stats[sec] = (u_mean, u_sd, u_lo, u_hi)
+
+    z_scores: Dict[str, Optional[float]] = {}
+    for t, v in raw_by_ticker.items():
+        if v is None:
+            z_scores[t] = None
+            continue
+        sec = sector_by_ticker.get(t) or "Unknown"
+        mean, sd, lo, hi = sec_stats.get(sec, (u_mean, u_sd, u_lo, u_hi))
+        if sd == 0 or not math.isfinite(sd):
+            z_scores[t] = 0.0
+            continue
+        v_clamped = min(max(v, lo), hi)
+        score = (v_clamped - mean) / sd
+        z_scores[t] = max(-Z_CLAMP, min(Z_CLAMP, score))
+
+    return z_scores
+
+
+def solve_reverse_dcf_gap(owner_earnings: float, mcap: float, discount_rate: float, historical_cagr: float) -> Optional[float]:
+    if owner_earnings <= 0 or mcap <= 0:
+        return None
+    r = discount_rate / 100.0
+    g_terminal = 0.025
+    if mcap <= owner_earnings:
+        implied_g = -0.50
+    else:
+        lo, hi = -0.40, 0.40
+        implied_g = 0.05
+        for _ in range(30):
+            mid = (lo + hi) / 2.0
+            pv = sum(owner_earnings * ((1.0 + mid) ** i) / ((1.0 + r) ** i) for i in range(1, 11))
+            cf_10 = owner_earnings * ((1.0 + mid) ** 10)
+            tv = (cf_10 * (1.0 + g_terminal)) / (r - g_terminal) if r > g_terminal else 0.0
+            pv += tv / ((1.0 + r) ** 10)
+            if pv > mcap:
+                hi = mid
+            else:
+                lo = mid
+        implied_g = (lo + hi) / 2.0
+
+    gap = (historical_cagr - implied_g) * 100.0
+    return max(-30.0, min(30.0, gap))
+
+
+def get_percentile(val: Optional[float], sorted_vals: List[float]) -> float:
+    if val is None or not sorted_vals:
+        return 0.0
+    idx = bisect.bisect_left(sorted_vals, val)
+    return (idx / len(sorted_vals)) * 100.0
+
+
+# Percentile cuts for the DEPTH lane's own band (fct_band_llm). Independent of the quant
+# nomination, which is rank-based (top 50 research_now, next 85 watchlist) — this scale exists
+# so the site can order the depth view against a stable axis.
+LLM_BANDS = {"research_now": 97, "watchlist": 90, "monitor": 70}
+
+
+def _reband(p):
+    if p >= LLM_BANDS["research_now"]:
+        return "research_now"
+    if p >= LLM_BANDS["watchlist"]:
+        return "watchlist"
+    if p >= LLM_BANDS["monitor"]:
+        return "monitor"
+    return "pass"
+
+
+def apply_llm_overlay(results):
+    """The Divergence Engine — direction-PRIMARY / quant-GUARDRAIL.
+
+    Reads the depth verdicts (public/data/depth_overlay.json) and writes the fct_*_llm family
+    onto the factor rows: the depth `direction` sets the band (undervalued -> research_now,
+    hold -> monitor, overvalued -> demoted), and a low-quality-overvalued name is hard-vetoed
+    (fct_llm_veto='llm_reject' when direction == overvalued AND the write-up's mean conviction
+    < CONV_VETO).
+
+    The quant engine stays a hard GUARDRAIL: a quant-vetoed name (not tradable, forensic,
+    insolvency, chronic loss) is skipped, so the depth lane can never pull a red-flagged name
+    in. Names with no depth verdict, or a NOT_USABLE one, keep no band — silence, never a
+    fabricated depth call. STRICT NO-OP when depth_overlay.json is absent.
+
+    Conviction is prose in depth_reports/{T}.json and is parsed only for the veto
+    (scripts/depth_conviction.py). There is NO live-price MoS recompute — `direction` is the
+    frozen producer verdict, so no daily cliff exists for prices to churn across.
+
+    Preserves the fct_percentile_llm / fct_llm_veto / fct_band_llm / fct_llm / fct_llm_verdict
+    output names that lib/desk/rankings.ts reads.
+    """
+    try:
+        ov = (json.loads((DATA / "depth_overlay.json").read_text(encoding="utf-8")) or {}).get("tickers", {})
+    except Exception:
+        return 0
+    if not ov:
+        return 0
+    conv_map = depth_conviction.load_conviction_map(DATA / "depth_reports", ov.keys())
+    CONV_VETO = 8.0   # operator decision 2026-08-26: reject overvalued names below this /15 quality
+    clamp = lambda x, lo, hi: max(lo, min(hi, x))
+    applied = 0
+    for t, v in ov.items():
+        e = results.get(t)
+        if not e or e.get("fct_veto") is not None:
+            continue
+        direction = v.get("direction")
+        # NOT_USABLE / missing = a malfunction, not a verdict: read as silence.
+        if direction not in ("undervalued", "hold", "overvalued"):
+            continue
+        mos = v.get("mos_vs_median_pct")
+        m = mos if isinstance(mos, (int, float)) else 0.0
+        conv = conv_map.get(t)
+        e["fct_llm_verdict"] = {"direction": direction, "size_hint": v.get("size_hint"),
+                                "mos_vs_median_pct": mos, "conviction": conv,
+                                "median_iv": v.get("median_iv"), "iv_band_low": v.get("iv_band_low"),
+                                "iv_band_high": v.get("iv_band_high"), "spread_pct": v.get("spread_pct"),
+                                "date": v.get("date"), "scheme": v.get("scheme")}
+        e["fct_llm"] = "none"
+        e["fct_llm_veto"] = None
+        # DIRECTION drives the band; mos_vs_median_pct only orders WITHIN a band so the site's
+        # percentile-delta stays monotonic. Conviction is NOT in the band (equal-weight rn_depth
+        # is the book) — it gates only the veto below.
+        if direction == "undervalued":
+            pctl = clamp(97.0 + m * 0.05, 97.0, 100.0)   # deeper discount ranks higher
+            if e.get("fct_band") != "research_now":
+                e["fct_llm"] = "promoted"
+        elif direction == "overvalued":
+            pctl = clamp(45.0 + m * 0.5, 0.0, LLM_BANDS["research_now"] - 5)   # m negative -> lower
+            e["fct_llm"] = "demoted"
+            # Hard-reject ONLY the low-quality overvalued: no value edge AND no quality edge. A
+            # high-conviction overvalued name is a pullback candidate -> watchlist, not a reject.
+            # Missing conviction never vetoes (cannot confirm low quality).
+            if conv is not None and conv < CONV_VETO:
+                e["fct_llm_veto"] = "llm_reject"
+        else:  # hold — price inside the model's band, no directional edge
+            pctl = clamp(70.0 + m * 0.5, 25.0, 89.0)
+        e["fct_percentile_llm"] = round(pctl, 1)
+        e["fct_band_llm"] = _reband(pctl)
+        applied += 1
+    return applied
+
+
+def main():
+    print("=" * 80)
+    print("TIER 2 DUAL-DOOR SIFTER (PROD V2 - CLUSTER GUARDRAILS & CORE/SATELLITE)")
+    print("=" * 80)
+
+    stocks_raw = load_json(STOCKS_JSON, {})
+    if isinstance(stocks_raw, list):
+        stocks = {s.get("symbol"): s for s in stocks_raw if s.get("symbol")}
+    else:
+        stocks = stocks_raw
+
+    prices_raw = load_json(PRICE_HISTORY_JSON, {})
+    prices = prices_raw.get("prices", prices_raw.get("tickers", prices_raw)) if isinstance(prices_raw, dict) else {}
+
+    fundamentals_raw = load_json(FUNDAMENTALS_HISTORY_JSON, {})
+    fundamentals = fundamentals_raw.get("tickers", fundamentals_raw.get("fundamentals", fundamentals_raw)) if isinstance(fundamentals_raw, dict) else {}
+
+    battery_raw = load_json(BATTERY_JSON, {})
+    battery = battery_raw.get("tickers", battery_raw.get("battery", battery_raw)) if isinstance(battery_raw, dict) else {}
+
+    eps_traj = load_json(EPS_TRAJECTORY_JSON, {})
+    if isinstance(eps_traj, dict) and "tickers" in eps_traj and isinstance(eps_traj["tickers"], dict):
+        eps_traj = eps_traj["tickers"]
+
+    # Load Tier 1 hygiene survivors if present
+    survivor_tickers: Optional[Set[str]] = None
+    if TIER1_SURVIVORS_JSON.exists():
+        surv_data = load_json(TIER1_SURVIVORS_JSON, {})
+        survivor_tickers = set(surv_data.get("survivor_tickers", []))
+        print(f"Loaded {len(survivor_tickers)} clean survivors from Tier 1 Hygiene filter.")
+
+    all_tickers = sorted(stocks.keys())
+    sector_by_ticker = {t: stocks[t].get("sector") or "Unknown" for t in all_tickers}
+
+    # Taxonomy enrichment
+    taxonomy_by_ticker = {}
+    for t in all_tickers:
+        s = stocks[t]
+        raw_ind = s.get("industry")
+        sec = s.get("sector") or "Unknown"
+        taxonomy_by_ticker[t] = get_taxonomy_profile(raw_ind, sec)
+
+    raw: Dict[str, Dict[str, Optional[float]]] = {
+        # Quality
+        "roic_proxy": {}, "gm_stability": {}, "neg_accruals": {}, "f_score": {},
+        # Momentum
+        "skip_12_1": {}, "high_52w": {}, "neg_vol": {},
+        # Revisions
+        "eps_slope": {},
+        # Value
+        "fcf_yield": {}, "owner_yield": {}, "ebit_yield": {},
+        # Expectations Gap
+        "exp_gap": {}
+    }
+
+    vetoes: Dict[str, str] = {}
+    veto_detail: Dict[str, str] = {}
+    eligible_count = 0
+
+    # Names the engine is not ALLOWED to trade, regardless of how they score: gone from the
+    # exchange listing (stamped last_listed by fetch_data.py) or declared by hand in
+    # not_tradable.json. stocks.json carries records forward and never prunes, so without this
+    # a delisted name keeps its last good record and keeps getting nominated — CPRX sat at #6
+    # in the universe for 25 days until the broker refused the order.
+    untradable, untradable_note = tradability.scan(stocks)
+    print(f"Tradability: {untradable_note}")
+
+    for t in all_tickers:
+        s = stocks[t]
+        tax = taxonomy_by_ticker[t]
+        archetype = tax["archetype"]
+        ind = tax["canonical_industry"]
+
+        # 0. Tradability — checked FIRST so the real reason is reported rather than being
+        #    masked by whichever scoring veto happens to fire next.
+        if t in untradable:
+            vetoes[t] = "NOT_TRADABLE"
+            veto_detail[t] = untradable[t]
+            continue
+
+        # 1. Tier 1 Pre-condition
+        if survivor_tickers is not None and t not in survivor_tickers:
+            vetoes[t] = "FAILED_TIER1_HYGIENE"
+            continue
+
+        mcap = num(s.get("marketCap"))
+        price = num(s.get("price"))
+        vol = num(s.get("volume"))
+
+        if not mcap or mcap < 300e6:
+            vetoes[t] = "MARKET_CAP_BELOW_300M"
+            continue
+        if not price or price < 3.0:
+            vetoes[t] = "PRICE_BELOW_3"
+            continue
+        if vol is not None and (vol * price) < 250e3:
+            vetoes[t] = "ILLIQUID_ADV_BELOW_250K"
+            continue
+        if ind in ("Shell Companies", "Blank Check"):
+            vetoes[t] = "NON_OPERATING_SHELL_SPAC"
+            continue
+
+        # 2. Hard Forensic & Insolvency Vetoes
+        bat = battery.get(t, {})
+        acc = num(bat.get("accruals_ratio"))
+        m_score = num(bat.get("m_score"))
+        z_score = num(bat.get("z_score"))
+        f_score = num(bat.get("f_score"))
+
+        if m_score is not None and m_score > -1.78 and acc is not None and acc > 0.10:
+            vetoes[t] = "FORENSIC_MANIPULATION_RISK"
+            continue
+        if z_score is not None and z_score < 1.1:
+            vetoes[t] = "INSOLVENCY_DISTRESS_Z_UNDER_1.1"
+            continue
+
+        ydata = fundamentals.get(t, {})
+        years = sorted([int(y) for y in ydata.keys()])
+        if not years:
+            vetoes[t] = "NO_FUNDAMENTAL_HISTORY"
+            continue
+
+        latest_y = str(years[-1])
+        latest = ydata[latest_y]
+        rev = num(latest.get("revenue"))
+        op = num(latest.get("operating_income"))
+        ni = num(latest.get("net_income"))
+        da = num(latest.get("da")) or 0.0
+        capex = num(latest.get("capex")) or 0.0
+        ocf = num(latest.get("ocf")) or (ni + da if ni else None)
+        fcf = num(latest.get("fcf")) or ((ocf - capex) if ocf is not None else None)
+        lt_debt = num(latest.get("lt_debt")) or 0.0
+        cash = num(latest.get("cash")) or 0.0
+        equity = num(latest.get("equity"))
+        ev = mcap + lt_debt - cash
+
+        if fcf is not None and fcf < 0 and op is not None and op < 0 and lt_debt > 1e9:
+            vetoes[t] = "CHRONIC_OPERATING_LOSS_LEVERAGE"
+            continue
+
+        eligible_count += 1
+
+        # ── 3. Tailored Corporate Finance Archetype Metrics ──
+        if archetype in ("commercial_bank", "insurance_lending"):
+            # Commercial Banks & Insurance: Earnings Yield & ROE (Deposits are operating liabilities)
+            if ni is not None and mcap > 0:
+                raw["fcf_yield"][t] = ni / mcap
+                raw["owner_yield"][t] = ni / mcap
+            raw["ebit_yield"][t] = None
+            if ni is not None and equity and equity > 0:
+                raw["roic_proxy"][t] = ni / equity
+            else:
+                raw["roic_proxy"][t] = None
+
+        elif archetype == "real_estate_reit":
+            # Real Estate (REITs): Funds from Operations (OCF / MCap) bypassing building depreciation
+            if ocf is not None and mcap > 0:
+                raw["fcf_yield"][t] = ocf / mcap
+                raw["owner_yield"][t] = ocf / mcap
+            raw["ebit_yield"][t] = None
+            if ocf is not None and equity and equity > 0:
+                raw["roic_proxy"][t] = ocf / equity
+            else:
+                raw["roic_proxy"][t] = None
+
+        elif archetype == "commodity_cyclical":
+            # Commodity Cyclicals: 3-Year Normalized Mid-Cycle Cash Flow (Anti-Peak Value Trap)
+            past_fcfs = []
+            for y in years[-3:]:
+                y_row = ydata.get(str(y), {})
+                y_fcf = num(y_row.get("fcf"))
+                if y_fcf is not None:
+                    past_fcfs.append(y_fcf)
+            mid_cycle_fcf = (sum(past_fcfs) / len(past_fcfs)) if past_fcfs else fcf
+
+            if mid_cycle_fcf is not None and mcap > 0:
+                raw["fcf_yield"][t] = mid_cycle_fcf / mcap
+                raw["owner_yield"][t] = mid_cycle_fcf / mcap
+            if op is not None and ev > 0:
+                raw["ebit_yield"][t] = op / ev
+                raw["roic_proxy"][t] = op / ev
+
+        else:
+            # Standard Industrial / Tech Compounders
+            if fcf is not None and mcap > 0:
+                raw["fcf_yield"][t] = fcf / mcap
+            if None not in (ni, da, capex) and mcap > 0:
+                raw["owner_yield"][t] = (ni + da - capex) / mcap
+            if op is not None and ev > 0:
+                raw["ebit_yield"][t] = op / ev
+                raw["roic_proxy"][t] = op / ev
+
+        if acc is not None:
+            raw["neg_accruals"][t] = -acc
+        if f_score is not None:
+            raw["f_score"][t] = f_score
+
+        if len(years) >= 4:
+            margins = []
+            for y in years:
+                row = ydata[str(y)]
+                gp_y, rev_y = num(row.get("gross_profit")), num(row.get("revenue"))
+                if gp_y and rev_y and rev_y > 0:
+                    margins.append(gp_y / rev_y)
+            if len(margins) >= 4:
+                raw["gm_stability"][t] = -statistics.pstdev(margins)
+
+        # Momentum & Volatility
+        closes = prices.get(t)
+        if isinstance(closes, list) and len(closes) >= 12:
+            raw["skip_12_1"][t] = (closes[-2] / closes[-12] - 1.0) if closes[-12] > 0 else None
+            max_c = max(closes[-12:])
+            raw["high_52w"][t] = (closes[-1] / max_c - 1.0) if max_c > 0 else None
+            rets = [closes[i] / closes[i - 1] - 1.0 for i in range(1, len(closes)) if closes[i - 1] > 0]
+            if len(rets) >= 12:
+                raw["neg_vol"][t] = -statistics.pstdev(rets)
+
+        # EPS Revisions Slope
+        traj = eps_traj.get(t, {})
+        slope = num(traj.get("trajectory_slope"))
+        if slope is not None:
+            raw["eps_slope"][t] = slope
+
+        # Expectations Gap Calculation
+        num_years = max(1, years[-1] - years[0])
+        oldest = ydata[str(years[0])]
+        rev_old = num(oldest.get("revenue"))
+        if rev and rev_old and rev_old > 0 and num_years >= 3:
+            hist_cagr = (rev / rev_old) ** (1.0 / num_years) - 1.0
+            if archetype in ("commercial_bank", "insurance_lending"):
+                if ni and ni > 0 and mcap > 0:
+                    implied_g = 0.10 - (ni / mcap)
+                    gap = (hist_cagr - implied_g) * 100.0
+                    raw["exp_gap"][t] = max(-15.0, min(15.0, gap))
+            elif archetype == "real_estate_reit":
+                if ocf and ocf > 0 and mcap > 0:
+                    implied_g = 0.08 - (ocf / mcap)
+                    gap = (hist_cagr - implied_g) * 100.0
+                    raw["exp_gap"][t] = max(-15.0, min(15.0, gap))
+            else:
+                owner_earn = (ni + da - capex) if None not in (ni, da, capex) else fcf
+                if owner_earn and owner_earn > 0:
+                    gap = solve_reverse_dcf_gap(owner_earn, mcap, 10.0, hist_cagr)
+                    raw["exp_gap"][t] = gap
+
+    # Standardize All Features via Sector-Neutral Z
+    z = {metric: sector_neutral_z(vals, sector_by_ticker) for metric, vals in raw.items()}
+
+    def mean_of_available(*values) -> Optional[float]:
+        valid = [v for v in values if v is not None]
+        return (sum(valid) / len(valid)) if valid else None
+
+    # Compute Door 1 and Door 2 Scores
+    scored_profiles: Dict[str, Dict[str, Any]] = {}
+    d1_candidates: List[Dict[str, Any]] = []
+    d2_candidates: List[Dict[str, Any]] = []
+
+    for t in all_tickers:
+        if t in vetoes:
+            continue
+
+        z_qual = mean_of_available(z["roic_proxy"].get(t), z["gm_stability"].get(t),
+                                   z["neg_accruals"].get(t), z["f_score"].get(t))
+        z_mom = mean_of_available(z["skip_12_1"].get(t), z["high_52w"].get(t))
+        z_rev = z["eps_slope"].get(t)
+        z_val = mean_of_available(z["fcf_yield"].get(t), z["owner_yield"].get(t), z["ebit_yield"].get(t))
+        z_gap = z["exp_gap"].get(t)
+
+        tax = taxonomy_by_ticker[t]
+        sec = tax["sector"]
+        cluster = tax["cluster"]
+
+        # Door 1: Secular Compounders
+        d1_score = None
+        if z_qual is not None and z_mom is not None:
+            rev_component = z_rev if z_rev is not None else 0.0
+            d1_score = 0.45 * z_qual + 0.35 * z_mom + 0.20 * rev_component
+
+        # Door 2: Value / Expectations Gap
+        d2_score = None
+        if z_val is not None:
+            gap_component = z_gap if z_gap is not None else 0.0
+            qual_component = z_qual if z_qual is not None else 0.0
+            d2_score = 0.40 * z_val + 0.40 * gap_component + 0.20 * qual_component
+
+        cand_data = {
+            "ticker": t,
+            "sector": sec,
+            "industry": tax["canonical_industry"],
+            "cluster": cluster,
+            "archetype": tax["archetype"],
+            "mgi_subindustry_id": tax["mgi_subindustry_id"],
+            "z_quality": round(z_qual, 3) if z_qual is not None else None,
+            "z_momentum": round(z_mom, 3) if z_mom is not None else None,
+            "z_revisions": round(z_rev, 3) if z_rev is not None else None,
+            "z_value": round(z_val, 3) if z_val is not None else None,
+            "z_exp_gap": round(z_gap, 3) if z_gap is not None else None,
+            "score_door1": round(d1_score, 3) if d1_score is not None else None,
+            "score_door2": round(d2_score, 3) if d2_score is not None else None,
+            "pctl_d1": 0.0,
+            "pctl_d2": 0.0,
+            "best_pctl": 0.0,
+            "nominated_doors": []
+        }
+        scored_profiles[t] = cand_data
+
+    # Empirical Percentile Conversion
+    all_d1 = sorted([p["score_door1"] for p in scored_profiles.values() if p["score_door1"] is not None])
+    all_d2 = sorted([p["score_door2"] for p in scored_profiles.values() if p["score_door2"] is not None])
+
+    for p in scored_profiles.values():
+        p["pctl_d1"] = round(get_percentile(p["score_door1"], all_d1), 1)
+        p["pctl_d2"] = round(get_percentile(p["score_door2"], all_d2), 1)
+        p["best_pctl"] = max(p["pctl_d1"], p["pctl_d2"])
+
+    # ── 4. Macro Sector Budgeting via MGI ────────────────────────────────────
+    macro_data = load_json(CURRENT_SECTOR_RANKING_JSON, {}) or {}
+    reported_regime = macro_data.get("reported_macro_regime") or macro_data.get("reported_regime") or "neutral"
+    macro_scores_by_id = {}
+    for item in macro_data.get("sector_ranking", []):
+        sid = item.get("sector_id")
+        score = item.get("confidence_adjusted_score") or item.get("raw_sector_score", 0.0)
+        macro_scores_by_id[sid] = float(score)
+
+    CORE_TOTAL_TARGET = int(TOTAL_NOMINATION_TARGET * CORE_RATIO) # ~94 core slots
+    BASE_CORE_PER_SECTOR = 8
+    MIN_CORE_PER_SECTOR = 5
+    MAX_CORE_PER_SECTOR = 12
+
+    core_sector_quotas = {}
+    for gics_sec, macro_id in sorted(GICS_TO_MACRO_ID.items()):
+        m_score = macro_scores_by_id.get(macro_id, 0.0)
+        tilt = int(round(m_score * 4.0))
+        quota = max(MIN_CORE_PER_SECTOR, min(MAX_CORE_PER_SECTOR, BASE_CORE_PER_SECTOR + tilt))
+        core_sector_quotas[gics_sec] = quota
+
+    # ── 5. Nomination Step A: Core Sector Floor with Intra-Sector Guardrails ──
+    by_sec: Dict[str, List[Dict[str, Any]]] = {}
+    for p in scored_profiles.values():
+        by_sec.setdefault(p["sector"], []).append(p)
+
+    core_nominated: Dict[str, Dict[str, Any]] = {}
+    sector_running_counts: Dict[str, int] = {sec: 0 for sec in GICS_TO_MACRO_ID}
+
+    for sec, core_quota in core_sector_quotas.items():
+        sec_cand = by_sec.get(sec, [])
+        if not sec_cand: continue
+
+        # Intra-Sector Cluster Guardrail: max 35% per cluster
+        max_per_cluster = max(2, int(math.ceil(core_quota * 0.35)))
+        cluster_counts: Dict[str, int] = {}
+        current_sec_picks: Dict[str, Dict[str, Any]] = {}
+
+        # Round 1: Cluster Diversification Pass
+        # Guarantee that distinct strategic clusters with qualified candidates (>= 75th pctl) get 1 slot
+        c_by_cluster: Dict[str, List[Dict[str, Any]]] = {}
+        for c in sec_cand:
+            c_by_cluster.setdefault(c["cluster"], []).append(c)
+        for cl, cl_list in c_by_cluster.items():
+            cl_list.sort(key=lambda x: -x["best_pctl"])
+
+        sorted_clusters = sorted(c_by_cluster.keys(), key=lambda cl: -c_by_cluster[cl][0]["best_pctl"])
+        for cl in sorted_clusters:
+            if len(current_sec_picks) >= core_quota:
+                break
+            best_in_cl = c_by_cluster[cl][0]
+            if best_in_cl["best_pctl"] >= 75.0:
+                door_won = "DOOR_1_COMPOUNDER" if best_in_cl["pctl_d1"] >= best_in_cl["pctl_d2"] else "DOOR_2_VALUE_GAP"
+                best_in_cl["nominated_doors"].append(door_won)
+                current_sec_picks[best_in_cl["ticker"]] = best_in_cl
+                cluster_counts[cl] = cluster_counts.get(cl, 0) + 1
+
+        # Round 2: Fill remaining core slots by pure competitive merit under cluster cap
+        remaining_slots = core_quota - len(current_sec_picks)
+        merit_pool = [c for c in sec_cand if c["ticker"] not in current_sec_picks]
+        merit_pool.sort(key=lambda x: -x["best_pctl"])
+
+        for c in merit_pool:
+            if remaining_slots <= 0: break
+            cl = c["cluster"]
+            if cluster_counts.get(cl, 0) < max_per_cluster:
+                door_won = "DOOR_1_COMPOUNDER" if c["pctl_d1"] >= c["pctl_d2"] else "DOOR_2_VALUE_GAP"
+                c["nominated_doors"].append(door_won)
+                current_sec_picks[c["ticker"]] = c
+                cluster_counts[cl] = cluster_counts.get(cl, 0) + 1
+                remaining_slots -= 1
+
+        for t, c in current_sec_picks.items():
+            core_nominated[t] = c
+            sector_running_counts[sec] = sector_running_counts.get(sec, 0) + 1
+
+    # ── 6. Nomination Step B: Global Wildcards with Hard 18% Ceiling ─────────
+    wildcard_target = TOTAL_NOMINATION_TARGET - len(core_nominated)
+    unnominated = [p for p in scored_profiles.values() if p["ticker"] not in core_nominated]
+    unnominated.sort(key=lambda x: -x["best_pctl"])
+
+    wildcard_nominated: Dict[str, Dict[str, Any]] = {}
+    for p in unnominated:
+        if len(wildcard_nominated) >= wildcard_target:
+            break
+        sec = p["sector"]
+        if sector_running_counts.get(sec, 0) < MAX_SECTOR_CEILING:
+            door_won = "DOOR_1_COMPOUNDER" if p["pctl_d1"] >= p["pctl_d2"] else "DOOR_2_VALUE_GAP"
+            p["nominated_doors"].append(door_won)
+            p["nominated_doors"].append("GLOBAL_WILDCARD")
+            wildcard_nominated[p["ticker"]] = p
+            sector_running_counts[sec] = sector_running_counts.get(sec, 0) + 1
+
+    # Mark Double-Door Overlap Champions
+    all_nominated_map = {**core_nominated, **wildcard_nominated}
+    for p in all_nominated_map.values():
+        if p["score_door1"] is not None and p["score_door1"] > 0.40 and \
+           p["score_door2"] is not None and p["score_door2"] > 0.40:
+            if "DOUBLE_DOOR_CHAMPION" not in p["nominated_doors"]:
+                p["nominated_doors"].append("DOUBLE_DOOR_CHAMPION")
+
+    nominated_pool = sorted(all_nominated_map.keys())
+
+    # ── 7. Output Results & Backward-Compatible factor_scores.json ───────────
+    d1_count = sum(1 for t in nominated_pool if any("DOOR_1" in d for d in all_nominated_map[t]["nominated_doors"]))
+    d2_count = sum(1 for t in nominated_pool if any("DOOR_2" in d for d in all_nominated_map[t]["nominated_doors"]))
+    overlap_count = sum(1 for t in nominated_pool if "DOUBLE_DOOR_CHAMPION" in all_nominated_map[t]["nominated_doors"])
+
+    summary = {
+        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "reported_macro_regime": reported_regime,
+        "total_universe": len(all_tickers),
+        "eligible_scored": eligible_count,
+        "vetoed_count": len(vetoes),
+        "nominated_count": len(nominated_pool),
+        "core_nominated_count": len(core_nominated),
+        "wildcard_nominated_count": len(wildcard_nominated),
+        "door1_compounders_count": d1_count,
+        "door2_value_gaps_count": d2_count,
+        "overlap_both_doors_count": overlap_count,
+        "core_sector_quotas": core_sector_quotas,
+        "sector_ceiling_max": MAX_SECTOR_CEILING,
+        "nominated_tickers": nominated_pool,
+        "veto_breakdown": {v: sum(1 for x in vetoes.values() if x == v) for v in set(vetoes.values())},
+        "profiles": {t: all_nominated_map[t] for t in nominated_pool}
+    }
+
+    OUT_JSON.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+
+    # Priority Queue Ranking for RS2 Local
+    def priority_sort_key(t: str) -> float:
+        p = all_nominated_map[t]
+        bonus = 10.0 if "DOUBLE_DOOR_CHAMPION" in p["nominated_doors"] else 0.0
+        return p["best_pctl"] + bonus
+
+    ranked_nominated = sorted(nominated_pool, key=priority_sort_key, reverse=True)
+    rn_set = set(ranked_nominated[:50])
+    wl_set = set(ranked_nominated[50:])
+
+    # fct_rank is the nomination's ordinal in the priority queue, 1-based. It is NOT decoration:
+    # track_paper_portfolios.depth_targets() and lib/desk/rankings.ts both skip any row whose
+    # rank is None, so a nominated name without one silently vanishes from the rn_depth book
+    # and from the desk. Non-nominated names carry None by design — they are not in the queue.
+    rank_by_ticker = {t: i + 1 for i, t in enumerate(ranked_nominated)}
+
+    compat_tickers = {}
+    for t in all_tickers:
+        if t in rn_set:
+            band = "research_now"
+        elif t in wl_set:
+            band = "watchlist"
+        elif t in vetoes:
+            band = "vetoed"
+        else:
+            band = "pass"
+
+        prof = all_nominated_map.get(t, scored_profiles.get(t, {}))
+        best_pctl_val = prof.get("best_pctl", 50.0)
+        compat_tickers[t] = {
+            "fct_band": band,
+            "fct_composite": round(best_pctl_val, 2),
+            "fct_percentile": round(best_pctl_val, 2),
+            "fct_rank": rank_by_ticker.get(t),
+            "fct_veto": vetoes.get(t),
+            "fct_veto_detail": veto_detail.get(t),
+            "fct_z": {
+                "quality": prof.get("z_quality"),
+                "momentum": prof.get("z_momentum"),
+                "revisions": prof.get("z_revisions"),
+                "value": prof.get("z_value"),
+                "exp_gap": prof.get("z_exp_gap")
+            },
+            "fct_nominated_doors": prof.get("nominated_doors", []),
+            "sector": prof.get("sector", sector_by_ticker.get(t)),
+            "cluster": prof.get("cluster"),
+            "archetype": prof.get("archetype")
+        }
+
+    # Stage 4 of the charter: the depth lane's own view, written alongside the quant bands.
+    llm_applied = apply_llm_overlay(compat_tickers)
+    print(f"Divergence overlay: {llm_applied} names carry a depth verdict")
+
+    compat_payload = {
+        "engine": "dual_door_dynamic_macro_v2_cluster_guarded",
+        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "reported_macro_regime": reported_regime,
+        "scored_count": eligible_count,
+        "band_counts": {
+            "research_now": len(rn_set),
+            "watchlist": len(wl_set),
+            "pass": sum(1 for x in compat_tickers.values() if x["fct_band"] == "pass"),
+            "vetoed": len(vetoes)
+        },
+        "tickers": compat_tickers
+    }
+    FACTOR_SCORES_COMPAT_JSON.write_text(json.dumps(compat_payload, indent=2), encoding="utf-8")
+
+    print(f"\nScored: {eligible_count} | Vetoed: {len(vetoes)} | Nominated: {len(nominated_pool)}")
+    print(f"  - Core Floor: {len(core_nominated)} | Global Wildcards: {len(wildcard_nominated)}")
+    print(f"  - Door 1 (Compounders): {d1_count} picks")
+    print(f"  - Door 2 (Value Gaps):  {d2_count} picks")
+    print(f"  - Double-Door Champions: {overlap_count} picks")
+    print(f"  - Priority Queue: {len(rn_set)} research_now | {len(wl_set)} watchlist")
+    print(f"Saved Dual-Door scores to: {OUT_JSON}")
+    print(f"Saved compatible factor_scores to: {FACTOR_SCORES_COMPAT_JSON}")
+
+    # Sector Breakdown of Nominated Pool
+    sec_counts = {}
+    for t in nominated_pool:
+        s = all_nominated_map[t].get("sector") or "Unknown"
+        sec_counts[s] = sec_counts.get(s, 0) + 1
+    print("\nNominated Pool Sector Distribution:")
+    for s, c in sorted(sec_counts.items(), key=lambda x: -x[1]):
+        pct = c / len(nominated_pool) * 100.0
+        print(f"  {s:<24}: {c:>2} picks ({pct:4.1f}%) [Max Ceiling: {MAX_SECTOR_CEILING}]")
+
+
+if __name__ == "__main__":
+    main()
