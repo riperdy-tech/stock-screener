@@ -1187,11 +1187,10 @@ def main():
             wildcard_nominated[p["ticker"]] = p
             sector_running_counts[sec] = sector_running_counts.get(sec, 0) + 1
 
-    # Mark Double-Door Overlap Champions
+    # Mark Double-Door Overlap Champions (P3.4: percentiles >= 90 and d2_eligible)
     all_nominated_map = {**core_nominated, **wildcard_nominated}
     for p in all_nominated_map.values():
-        if p["score_door1"] is not None and p["score_door1"] > 0.40 and \
-           p["score_door2"] is not None and p["score_door2"] > 0.40:
+        if p.get("pctl_d1", 0.0) >= 90.0 and p.get("pctl_d2", 0.0) >= 90.0 and p.get("d2_eligible", True):
             if "DOUBLE_DOOR_CHAMPION" not in p["nominated_doors"]:
                 p["nominated_doors"].append("DOUBLE_DOOR_CHAMPION")
 
@@ -1290,10 +1289,10 @@ def main():
 
     OUT_JSON.write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
-    # Priority Queue Ranking for RS2 Local
+    # Priority Queue Ranking for RS2 Local (P3.4: bonus 2.0)
     def priority_sort_key(t: str) -> float:
         p = all_nominated_map[t]
-        bonus = 10.0 if "DOUBLE_DOOR_CHAMPION" in p["nominated_doors"] else 0.0
+        bonus = 2.0 if "DOUBLE_DOOR_CHAMPION" in p["nominated_doors"] else 0.0
         return p["best_pctl"] + bonus
 
     ranked_nominated = sorted(nominated_pool, key=priority_sort_key, reverse=True)

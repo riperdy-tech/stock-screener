@@ -208,3 +208,86 @@ def test_contributions_honors_d2_eligible():
     assert "value" not in contrib
     assert "quality" in contrib
     assert "momentum" in contrib
+
+
+def test_champion_requires_pctl_gte_90_and_d2_eligible():
+    """DOUBLE_DOOR_CHAMPION requires pctl_d1 >= 90 AND pctl_d2 >= 90 AND d2_eligible.
+    Raw score > 0.40 rule is deleted.
+    """
+    def eval_champion(p: Dict[str, Any]) -> bool:
+        doors = list(p.get("nominated_doors", []))
+        if p.get("pctl_d1", 0.0) >= 90.0 and p.get("pctl_d2", 0.0) >= 90.0 and p.get("d2_eligible", True):
+            if "DOUBLE_DOOR_CHAMPION" not in doors:
+                doors.append("DOUBLE_DOOR_CHAMPION")
+        return "DOUBLE_DOOR_CHAMPION" in doors
+
+    # 1. Both percentiles >= 90 and d2_eligible -> Champion
+    p_champ = {"pctl_d1": 91.0, "pctl_d2": 93.0, "d2_eligible": True, "score_door1": 0.20, "score_door2": 0.30}
+    assert eval_champion(p_champ) is True
+
+    # 2. Both percentiles >= 90 but falling knife (d2_eligible=False) -> NOT Champion
+    p_knife = {"pctl_d1": 95.0, "pctl_d2": 96.0, "d2_eligible": False}
+    assert eval_champion(p_knife) is False
+
+    # 3. pctl_d1 < 90 -> NOT Champion
+    p_low_d1 = {"pctl_d1": 89.9, "pctl_d2": 95.0, "d2_eligible": True}
+    assert eval_champion(p_low_d1) is False
+
+    # 4. pctl_d2 < 90 -> NOT Champion
+    p_low_d2 = {"pctl_d1": 95.0, "pctl_d2": 89.9, "d2_eligible": True}
+    assert eval_champion(p_low_d2) is False
+
+    # 5. Raw scores > 0.40 but percentiles < 90 -> NOT Champion (raw score rule deleted)
+    p_raw_only = {"pctl_d1": 85.0, "pctl_d2": 85.0, "score_door1": 0.80, "score_door2": 0.90, "d2_eligible": True}
+    assert eval_champion(p_raw_only) is False
+
+
+def test_champion_bonus_2_0_ordering():
+    """bonus 2.0 ordering: a champion at best_pctl 95 does not jump a non-champion at 98."""
+    def priority_sort_key(p: Dict[str, Any]) -> float:
+        bonus = 2.0 if "DOUBLE_DOOR_CHAMPION" in p.get("nominated_doors", []) else 0.0
+        return p["best_pctl"] + bonus
+
+    # Champion at best_pctl = 95.0
+    champ = {
+        "ticker": "CHAMP",
+        "best_pctl": 95.0,
+        "nominated_doors": ["DOOR_1_COMPOUNDER", "DOUBLE_DOOR_CHAMPION"],
+    }
+    # Non-champion at best_pctl = 98.0
+    non_champ = {
+        "ticker": "HIGH_NON_CHAMP",
+        "best_pctl": 98.0,
+        "nominated_doors": ["DOOR_1_COMPOUNDER"],
+    }
+    # Non-champion at best_pctl = 96.0
+    close_non_champ = {
+        "ticker": "CLOSE_NON_CHAMP",
+        "best_pctl": 96.0,
+        "nominated_doors": ["DOOR_1_COMPOUNDER"],
+    }
+
+    key_champ = priority_sort_key(champ)
+    key_non_champ = priority_sort_key(non_champ)
+    key_close = priority_sort_key(close_non_champ)
+
+    # 95.0 + 2.0 = 97.0
+    assert key_champ == 97.0
+    assert key_non_champ == 98.0
+    assert key_close == 96.0
+
+    # Champion at 95 (key 97) DOES NOT jump non-champion at 98 (key 98)
+    assert key_champ < key_non_champ
+
+    # But champion at 95 (key 97) DOES jump non-champion at 96 (key 96)
+    assert key_champ > key_close
+
+    # Sort descending
+    pool = [champ, non_champ, close_non_champ]
+    ranked = sorted(pool, key=priority_sort_key, reverse=True)
+    assert [p["ticker"] for p in ranked] == ["HIGH_NON_CHAMP", "CHAMP", "CLOSE_NON_CHAMP"]
+
+    # Contrast with old 10.0 bonus where champ would have scored 105 and jumped non_champ at 98
+    old_key_champ = champ["best_pctl"] + 10.0
+    assert old_key_champ == 105.0
+    assert old_key_champ > key_non_champ
