@@ -18,6 +18,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import filter_tier1_hygiene as fth  # noqa: E402
+import score_factors_dual_door as sfdd  # noqa: E402
 
 
 def _stock(symbol, mcap=1e9, price=50.0, vol=1_000_000, sector="Technology",
@@ -120,7 +121,9 @@ def test_recent_period_end_survives_no_staleness_veto(tmp_path, monkeypatch):
     assert audit["details"]["FRESH"]["decision"] == "PASS"
 
 
-def test_stale_period_end_beyond_16_months_vetoes(tmp_path, monkeypatch):
+def test_stale_period_end_beyond_16_months_is_flagged_not_vetoed(tmp_path, monkeypatch):
+    """P3.10b: our fundamentals_history lag is our data gap, not proof of SEC delinquency —
+    staleness beyond 16 months is a flag on the survivor record, never a veto."""
     stocks = [_stock("STALE")]
     _setup(tmp_path, monkeypatch, stocks,
            fundamentals_tickers={"STALE": {"2024": {}}},
@@ -128,9 +131,17 @@ def test_stale_period_end_beyond_16_months_vetoes(tmp_path, monkeypatch):
 
     survivors = fth.evaluate_tier1()
 
-    assert "STALE" not in survivors
+    assert "STALE" in survivors
     audit = json.loads((tmp_path / "tier1_hygiene_audit.json").read_text(encoding="utf-8"))
-    assert audit["details"]["STALE"]["primary_reason"] == "SEC_DELINQUENT_STALE_ANNUAL_REPORT"
+    assert audit["details"]["STALE"]["decision"] == "PASS"
+    assert "DATA_FLAG: STALE_ANNUAL_DATA" in audit["details"]["STALE"]["flags"]
+
+    survivors_data = json.loads((tmp_path / "tier1_hygiene_survivors.json").read_text(encoding="utf-8"))
+    detail = survivors_data["stale_annual_data"]["STALE"]
+    assert detail["latest_period_end"] == _date_months_ago(20)
+    assert detail["months"] > 16.0
+    assert detail["country"] == "United States"
+    assert survivors_data["stale_annual_data_count"] == 1
 
 
 def test_just_under_16_months_is_not_stale():
@@ -149,9 +160,10 @@ def test_ttm_fy_leg_end_fallback_used_when_period_end_missing(tmp_path, monkeypa
 
     survivors = fth.evaluate_tier1()
 
-    assert "TTMFALLBACK" not in survivors
-    audit = json.loads((tmp_path / "tier1_hygiene_audit.json").read_text(encoding="utf-8"))
-    assert audit["details"]["TTMFALLBACK"]["primary_reason"] == "SEC_DELINQUENT_STALE_ANNUAL_REPORT"
+    # P3.10b: the fallback still resolves a stale period-end, but staleness is a flag now.
+    assert "TTMFALLBACK" in survivors
+    survivors_data = json.loads((tmp_path / "tier1_hygiene_survivors.json").read_text(encoding="utf-8"))
+    assert "TTMFALLBACK" in survivors_data["stale_annual_data"]
 
 
 # ── ALTERNATE_REPORTING written per ticker into the survivors file (P3.10) ──
@@ -256,3 +268,59 @@ def test_alternate_reporting_ticker_gets_specific_veto_detail():
 
 def test_plain_no_fundamentals_ticker_gets_no_veto_detail():
     assert _no_fundamental_history_veto_detail("NODATA", [], set()) is None
+
+
+# ── P3.10b: stale_annual_data rides through to score_factors_dual_door.py's fct_flags ───────
+
+def test_stale_annual_data_flag_rides_through_to_fct_flags(tmp_path, monkeypatch):
+    """The stale_annual_data flag Tier 1 writes into tier1_hygiene_survivors.json must reach
+    the survivor's fct_flags / fct_flag_detail in factor_scores.json (SCR-03b) — never a
+    veto."""
+    data_dir = tmp_path / "data"
+    data_dir.mkdir(parents=True)
+
+    stocks = {
+        "STALESURV": {
+            "symbol": "STALESURV", "sector": "Technology", "industry": "Software-Application",
+            "marketCap": 5e9, "price": 50.0, "volume": 2_000_000,
+            "metrics": {"adv_20d_usd": 50_000_000.0},
+        },
+    }
+    fundamentals = {
+        "tickers": {"STALESURV": {"2024": {"revenue": 1000.0, "operating_income": 100.0,
+                                            "net_income": 80.0}}},
+    }
+    tier1_survivors = {
+        "survivor_tickers": ["STALESURV"],
+        "alternate_reporting": [],
+        "stale_annual_data": {
+            "STALESURV": {"months": 18.2, "latest_period_end": "2024-02-01", "country": "Japan"},
+        },
+    }
+    (data_dir / "stocks.json").write_text(json.dumps(stocks), encoding="utf-8")
+    (data_dir / "fundamentals_history.json").write_text(json.dumps(fundamentals), encoding="utf-8")
+    (data_dir / "tier1_hygiene_survivors.json").write_text(json.dumps(tier1_survivors), encoding="utf-8")
+
+    out_dual = tmp_path / "factor_scores_dual_door.json"
+    out_compat = tmp_path / "factor_scores.json"
+
+    monkeypatch.setattr(sfdd, "DATA", data_dir)
+    monkeypatch.setattr(sfdd, "STOCKS_JSON", data_dir / "stocks.json")
+    monkeypatch.setattr(sfdd, "PRICE_HISTORY_JSON", data_dir / "price_history.json")
+    monkeypatch.setattr(sfdd, "FUNDAMENTALS_HISTORY_JSON", data_dir / "fundamentals_history.json")
+    monkeypatch.setattr(sfdd, "BATTERY_JSON", data_dir / "fundamentals_battery.json")
+    monkeypatch.setattr(sfdd, "EPS_TRAJECTORY_JSON", data_dir / "eps_trajectory.json")
+    monkeypatch.setattr(sfdd, "TIER1_SURVIVORS_JSON", data_dir / "tier1_hygiene_survivors.json")
+    monkeypatch.setattr(sfdd, "MOMENTUM_STATE_JSON", data_dir / "momentum_state.json")
+    monkeypatch.setattr(sfdd, "OUT_JSON", out_dual)
+    monkeypatch.setattr(sfdd, "FACTOR_SCORES_COMPAT_JSON", out_compat)
+    monkeypatch.setattr(sfdd, "sync_mri_snapshot", lambda: None)
+
+    sfdd.main()
+
+    compat = json.loads(out_compat.read_text(encoding="utf-8"))
+    row = compat["tickers"]["STALESURV"]
+    assert row["fct_veto"] is None   # survives — never vetoed for staleness
+    assert "stale_annual_data" in row["fct_flags"]
+    detail = row["fct_flag_detail"]["stale_annual_data"]
+    assert detail == {"months": 18.2, "latest_period_end": "2024-02-01", "country": "Japan"}

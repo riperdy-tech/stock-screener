@@ -7,7 +7,10 @@ Core Rules:
 1. Minimum Market Capitalization: >= $300M (eliminates illiquid micro-caps).
 2. Minimum Share Price: >= $3.00 (eliminates penny stocks subject to reverse-split volatility).
 3. Minimum Dollar Volume (ADV): >= $300,000/day (keeps retail trade impact < 5% of ADV and spreads < 25 bps).
-4. SEC Reporting Compliance: Verified annual report (10-K, 20-F, 40-F) within 15 months of evaluation date.
+4. SEC Reporting Compliance: no annual report on file at all (no fundamentals history years)
+   vetoes a domestic issuer. A filed annual report whose period-end is > 16 months old is a
+   data-lag flag (`DATA_FLAG: STALE_ANNUAL_DATA`), not a veto (P3.10b) — our fundamentals
+   ingestion lagging is our data gap, not proof the company is SEC-delinquent.
    - Issuers lacking recent US XBRL but actively trading with foreign reporting are flagged
      `DATA_FLAG: ALTERNATE_REPORTING` and retained for SearXNG Local AI verification.
 
@@ -49,6 +52,9 @@ OUT_AUDIT_JSON = DATA / "tier1_hygiene_audit.json"
 # Thresholds — P3.10: the only statutory-staleness constant actually used. EVAL_YEAR and
 # MIN_COMPLIANT_FY (a hardcoded fiscal-year cutoff) and the unused MAX_STALE_MONTHS are gone;
 # staleness is now measured from the real annual period-end date, not a fixed calendar year.
+# P3.10b: months_since(period_end) > this no longer vetoes — a lag in OUR fundamentals_history
+# ingestion (an unparsed 20-F, a 10-K not yet ingested) is our data gap, not proof the company
+# is SEC-delinquent. It rides as the `stale_annual_data` flag instead (SCR-03b).
 STALE_ANNUAL_REPORT_MAX_MONTHS = 16   # 16 months from fiscal year end (15 months from filing)
 
 # Benchmark tickers that MUST NEVER be rejected (Preservation Gate)
@@ -122,6 +128,7 @@ def evaluate_tier1():
 
     survivors: List[str] = []
     alternate_reporting: List[str] = []
+    stale_annual_data: Dict[str, Dict[str, Any]] = {}
     audit_log: Dict[str, Dict[str, Any]] = {}
     veto_tallies: Dict[str, int] = {}
 
@@ -159,6 +166,7 @@ def evaluate_tier1():
         fh = fundamentals.get(sym, {})
         years = sorted([int(y) for y in fh.keys()]) if fh else []
 
+        stale_detail = None
         if not years:
             # Check if foreign issuer with alternate reporting
             country = s.get("country") or "US"
@@ -173,10 +181,13 @@ def evaluate_tier1():
             if months_stale is None:
                 flags.append("DATA_FLAG: PERIOD_END_UNRESOLVED")
             elif months_stale > STALE_ANNUAL_REPORT_MAX_MONTHS:
-                reasons.append(
-                    f"SEC_DELINQUENT_STALE_ANNUAL_REPORT (period_end={period_end}, "
-                    f"months_since={months_stale:.1f} > {STALE_ANNUAL_REPORT_MAX_MONTHS})"
-                )
+                # P3.10b: flag, not a veto — see the constant's comment above.
+                flags.append("DATA_FLAG: STALE_ANNUAL_DATA")
+                stale_detail = {
+                    "months": round(months_stale, 1),
+                    "latest_period_end": period_end,
+                    "country": s.get("country") or "US",
+                }
 
         # 5. Non-Operating Vehicle / SPAC Check
         industry = (s.get("industry") or "").strip()
@@ -198,6 +209,8 @@ def evaluate_tier1():
             }
         else:
             survivors.append(sym)
+            if stale_detail is not None:
+                stale_annual_data[sym] = stale_detail
             audit_log[sym] = {
                 "decision": "PASS",
                 "primary_reason": "CLEAN",
@@ -230,7 +243,11 @@ def evaluate_tier1():
         "survivor_tickers": survivors,
         # P3.10: written per ticker so SCR-03b can stamp fct_veto_detail =
         # "alternate_reporting_unverified" instead of the generic NO_FUNDAMENTAL_HISTORY.
-        "alternate_reporting": sorted(alternate_reporting)
+        "alternate_reporting": sorted(alternate_reporting),
+        # P3.10b: survivors whose latest annual period-end is > 16 months old — a flag
+        # (SCR-03b's stale_annual_data), never a veto; see the constant's comment above.
+        "stale_annual_data": stale_annual_data,
+        "stale_annual_data_count": len(stale_annual_data)
     }
     OUT_SURVIVORS_JSON.write_text(json.dumps(survivors_data, indent=2), encoding="utf-8")
 
@@ -244,6 +261,7 @@ def evaluate_tier1():
     OUT_AUDIT_JSON.write_text(json.dumps(audit_summary, indent=2), encoding="utf-8")
 
     print(f"Survivors: {len(survivors)} / {total_universe} ({survivors_data['retention_rate_pct']}%)")
+    print(f"Stale annual data (flag only, not vetoed): {len(stale_annual_data)}")
     print(f"Veto Breakdown:")
     for reason, count in sorted(veto_tallies.items(), key=lambda x: -x[1]):
         print(f"  - {reason:<40}: {count:>5}")

@@ -757,10 +757,15 @@ def main():
     # P3.10: names Tier 1 flagged ALTERNATE_REPORTING (foreign issuer, no US XBRL) so the
     # NO_FUNDAMENTAL_HISTORY veto below can say why instead of looking like a data hole.
     alternate_reporting_tickers: Set[str] = set()
+    # P3.10b: survivors whose latest annual period-end is > 16 months old — Tier 1 no longer
+    # vetoes these (our fundamentals_history lag, not proof of SEC delinquency); it flags them
+    # instead, and that flag rides through here onto fct_flags (SCR-03b).
+    stale_annual_data_map: Dict[str, Dict[str, Any]] = {}
     if TIER1_SURVIVORS_JSON.exists():
         surv_data = load_json(TIER1_SURVIVORS_JSON, {})
         survivor_tickers = set(surv_data.get("survivor_tickers", []))
         alternate_reporting_tickers = set(surv_data.get("alternate_reporting", []))
+        stale_annual_data_map = surv_data.get("stale_annual_data", {}) or {}
         print(f"Loaded {len(survivor_tickers)} clean survivors from Tier 1 Hygiene filter.")
 
     all_tickers = sorted(stocks.keys())
@@ -881,6 +886,14 @@ def main():
         if survivor_tickers is not None and t not in survivor_tickers:
             vetoes[t] = "FAILED_TIER1_HYGIENE"
             continue
+
+        # P3.10b: Tier 1's stale_annual_data flag (data lag, not a statutory veto) rides
+        # through onto this name's fct_flags with its detail.
+        if t in stale_annual_data_map:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "stale_annual_data" not in cur_flags:
+                cur_flags.append("stale_annual_data")
+            ticker_flag_detail.setdefault(t, {})["stale_annual_data"] = stale_annual_data_map[t]
 
         mcap = num(s.get("marketCap"))
         price = num(s.get("price"))
