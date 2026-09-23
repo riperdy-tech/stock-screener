@@ -40,6 +40,7 @@ DATA = ROOT / "public" / "data"
 
 sys.path.append(str(Path(__file__).resolve().parent))
 from industry_taxonomy import get_taxonomy_profile, normalize_industry
+from score_paradigm import compute_skip_month_return, compute_high_proximity
 import depth_conviction
 import tradability
 import peer_paths
@@ -47,6 +48,7 @@ from mri_sync import sync_mri_snapshot
 
 STOCKS_JSON = DATA / "stocks.json"
 PRICE_HISTORY_JSON = DATA / "price_history.json"
+MOMENTUM_STATE_JSON = DATA / "momentum_state.json"
 FUNDAMENTALS_HISTORY_JSON = DATA / "fundamentals_history.json"
 BATTERY_JSON = DATA / "fundamentals_battery.json"
 EPS_TRAJECTORY_JSON = DATA / "eps_trajectory.json"
@@ -488,7 +490,7 @@ def main():
         # Quality
         "roic_proxy": {}, "gm_stability": {}, "neg_accruals": {}, "f_score": {},
         # Momentum
-        "skip_12_1": {}, "high_52w": {}, "neg_vol": {},
+        "skip_12_1": {}, "high_52w": {},
         # Revisions
         "eps_slope": {},
         # Value
@@ -496,6 +498,66 @@ def main():
         # Expectations Gap
         "exp_gap": {}
     }
+
+    # Load momentum state (SCR-10) with freshness check and fallback
+    momentum_state_path = globals().get("MOMENTUM_STATE_JSON", DATA / "momentum_state.json")
+    if not momentum_state_path.exists() and (DATA / "momentum_state.json").exists():
+        momentum_state_path = DATA / "momentum_state.json"
+
+    momentum_source = "momentum_state"
+    momentum_data: Dict[str, Any] = {}
+    is_fresh = False
+
+    if momentum_state_path.exists():
+        try:
+            mom_payload = json.loads(momentum_state_path.read_text(encoding="utf-8"))
+            asof_str = mom_payload.get("asof")
+            mtime = momentum_state_path.stat().st_mtime
+            age_days = (datetime.now(timezone.utc).timestamp() - mtime) / 86400.0
+            if asof_str:
+                for fmt in ("%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d"):
+                    try:
+                        asof_dt = datetime.strptime(asof_str.split(".")[0].rstrip("Z"), fmt.rstrip("Z")).replace(tzinfo=timezone.utc)
+                        age_days = (datetime.now(timezone.utc) - asof_dt).total_seconds() / 86400.0
+                        break
+                    except ValueError:
+                        continue
+            if age_days <= 3.0:
+                is_fresh = True
+                momentum_data = mom_payload.get("tickers", {})
+                print(f"Loaded fresh momentum state ({len(momentum_data)} tickers, age {age_days:.1f} days)")
+            else:
+                print(f"WARN: momentum_state.json is stale ({age_days:.1f} days old > 3 days) — triggering fallback!", file=sys.stderr)
+        except Exception as exc:
+            print(f"WARN: failed to load momentum_state.json: {exc} — triggering fallback!", file=sys.stderr)
+
+    if not is_fresh:
+        momentum_source = "inline_fallback"
+        print("MOMENTUM WARNING: Using inline fallback from price_history.json (loud notice)!", file=sys.stderr)
+
+    ticker_mom_state: Dict[str, Dict[str, Any]] = {}
+    ticker_flags: Dict[str, List[str]] = {}
+
+    for t in all_tickers:
+        t_flags: List[str] = []
+        t_mom: Dict[str, Any] = {}
+        if momentum_source == "momentum_state":
+            entry = momentum_data.get(t, {})
+            t_mom = dict(entry)
+            if "pct_from_52w_high" not in entry and "high_52w_proxy" in entry:
+                t_flags.append("momentum_proxy_monthly")
+        else:
+            closes = prices.get(t)
+            if isinstance(closes, list) and len(closes) >= 2:
+                m121 = compute_skip_month_return(closes)
+                if m121 is not None:
+                    t_mom["mom_12_1"] = round(m121, 4)
+                prox = compute_high_proximity(closes)
+                if prox is not None:
+                    t_mom["high_52w_proxy"] = round(prox - 1.0, 4)
+                    t_flags.append("momentum_proxy_monthly")
+        ticker_mom_state[t] = t_mom
+        ticker_flags[t] = t_flags
 
     vetoes: Dict[str, str] = {}
     veto_detail: Dict[str, str] = {}
@@ -649,15 +711,15 @@ def main():
             if len(margins) >= 4:
                 raw["gm_stability"][t] = -statistics.pstdev(margins)
 
-        # Momentum & Volatility
-        closes = prices.get(t)
-        if isinstance(closes, list) and len(closes) >= 12:
-            raw["skip_12_1"][t] = (closes[-2] / closes[-12] - 1.0) if closes[-12] > 0 else None
-            max_c = max(closes[-12:])
-            raw["high_52w"][t] = (closes[-1] / max_c - 1.0) if max_c > 0 else None
-            rets = [closes[i] / closes[i - 1] - 1.0 for i in range(1, len(closes)) if closes[i - 1] > 0]
-            if len(rets) >= 12:
-                raw["neg_vol"][t] = -statistics.pstdev(rets)
+        # Momentum (SCR-10)
+        mom_entry = ticker_mom_state.get(t, {})
+        raw["skip_12_1"][t] = mom_entry.get("mom_12_1")
+        if "pct_from_52w_high" in mom_entry and mom_entry["pct_from_52w_high"] is not None:
+            raw["high_52w"][t] = mom_entry["pct_from_52w_high"]
+        elif "high_52w_proxy" in mom_entry and mom_entry["high_52w_proxy"] is not None:
+            raw["high_52w"][t] = mom_entry["high_52w_proxy"]
+        else:
+            raw["high_52w"][t] = None
 
         # EPS Revisions Slope
         traj = eps_traj.get(t, {})
@@ -744,7 +806,9 @@ def main():
             "pctl_d1": 0.0,
             "pctl_d2": 0.0,
             "best_pctl": 0.0,
-            "nominated_doors": []
+            "nominated_doors": [],
+            "fct_momentum_state": ticker_mom_state.get(t, {}),
+            "fct_flags": list(ticker_flags.get(t, []))
         }
         scored_profiles[t] = cand_data
 
@@ -880,6 +944,11 @@ def main():
     d2_count = sum(1 for t in nominated_pool if any("DOOR_2" in d for d in all_nominated_map[t]["nominated_doors"]))
     overlap_count = sum(1 for t in nominated_pool if "DOUBLE_DOOR_CHAMPION" in all_nominated_map[t]["nominated_doors"])
 
+    momentum_coverage = sum(
+        1 for t in all_tickers
+        if t not in vetoes and ticker_mom_state.get(t, {}).get("mom_12_1") is not None
+    )
+
     summary = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "reported_macro_regime": reported_regime,
@@ -896,6 +965,8 @@ def main():
         "core_quota_total": core_quota_total,
         "sector_ceiling_max": MAX_SECTOR_CEILING,
         "sector_ranking_meta": sector_ranking_meta,
+        "momentum_source": momentum_source,
+        "momentum_coverage": momentum_coverage,
         "nominated_tickers": nominated_pool,
         "veto_breakdown": {v: sum(1 for x in vetoes.values() if x == v) for v in set(vetoes.values())},
         "profiles": {t: all_nominated_map[t] for t in nominated_pool}
@@ -950,6 +1021,8 @@ def main():
             "fct_haircuts": None,
             "fct_vol": None,
             "fct_nominated_doors": prof.get("nominated_doors", []),
+            "fct_momentum_state": prof.get("fct_momentum_state", ticker_mom_state.get(t, {})),
+            "fct_flags": prof.get("fct_flags", list(ticker_flags.get(t, []))),
             "sector": prof.get("sector", sector_by_ticker.get(t)),
             "cluster": prof.get("cluster"),
             "archetype": prof.get("archetype")
@@ -967,6 +1040,8 @@ def main():
         "sector_ranking_date": sector_ranking_meta["date"],
         "sector_ranking_age_days": sector_ranking_meta["age_days"],
         "macro_confidence": sector_ranking_meta["macro_confidence"],
+        "momentum_source": momentum_source,
+        "momentum_coverage": momentum_coverage,
         "scored_count": eligible_count,
         "band_counts": {
             "research_now": len(rn_set),

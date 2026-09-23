@@ -140,6 +140,11 @@ def main():
     if ok and not run_step("filter_tier1_hygiene", ["scripts/filter_tier1_hygiene.py"], steps):
         print("FATAL: filter_tier1_hygiene failed — the sifter has no survivor set to gate on.")
         ok = False
+    if ok:
+        if not run_step("build_daily_price_history", ["scripts/build_daily_price_history.py"], steps):
+            print("WARN: build_daily_price_history failed (non-fatal; cache or fallback will be used).")
+        if not run_step("build_momentum_state", ["scripts/build_momentum_state.py"], steps):
+            print("WARN: build_momentum_state failed (non-fatal; sifter will use inline fallback).")
     if ok and not run_step("score_factors_dual_door", ["scripts/score_factors_dual_door.py"], steps):
         print("FATAL: score_factors_dual_door failed.")
         ok = False
@@ -213,6 +218,17 @@ def main():
         research_now = factor.get("band_counts", {}).get("research_now", 0)
         add_invariant(invariants, "factor_research_now", "soft", research_now >= 10,
                       f"{research_now} research_now candidates")
+
+        mom_coverage = factor.get("momentum_coverage")
+        if mom_coverage is None:
+            mom_coverage = sum(
+                1 for d in factor.get("tickers", {}).values()
+                if d.get("fct_band") != "vetoed" and (d.get("fct_momentum_state") or {}).get("mom_12_1") is not None
+            )
+        add_invariant(invariants, "momentum_coverage", "soft",
+                      mom_coverage >= 0.95 * fct_scored if fct_scored else False,
+                      f"{mom_coverage}/{fct_scored} scored names carry momentum "
+                      f"({(mom_coverage / fct_scored):.1%} if fct_scored else '0%', min 95.0%)")
 
         # MRI-11: the sector-quota loader (score_factors_dual_door.load_sector_ranking) fails
         # closed to a neutral quota when it cannot find a usable MRI ranking at all. That state

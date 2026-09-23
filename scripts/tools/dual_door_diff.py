@@ -135,6 +135,7 @@ def run_sifter(
         mod.EPS_TRAJECTORY_JSON = data_dir / "eps_trajectory.json"
         mod.TIER1_SURVIVORS_JSON = data_dir / "tier1_hygiene_survivors.json"
         mod.MRI_SNAPSHOT_SECTOR_RANKING_JSON = data_dir / "mri" / "current_sector_ranking.json"
+        mod.MOMENTUM_STATE_JSON = data_dir / "momentum_state.json"
 
     buf_stdout = io.StringIO()
     buf_stderr = io.StringIO()
