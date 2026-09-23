@@ -1043,6 +1043,187 @@ def apply_llm_overlay(results):
     return applied
 
 
+# ── C12 (PHASE_3_APPROVAL.md): door formulas, the falling-knife floor, the champion rule and
+# band hysteresis, extracted out of main() so tests call this production code directly instead
+# of re-implementing the logic inline. ───────────────────────────────────────────────────────
+
+DOOR1_BASE_WEIGHTS = {"quality": 0.45, "momentum": 0.35, "revisions": 0.20}
+DOOR2_BASE_WEIGHTS = {"value": 0.40, "exp_gap": 0.40, "quality": 0.20}
+
+
+def score_door1(
+    z_qual: Optional[float], z_mom: Optional[float], z_rev: Optional[float],
+) -> Tuple[Optional[float], List[str], Optional[float], Optional[str]]:
+    """Door 1 (Secular Compounders): requires z_qual AND z_mom; revisions optional, and the
+    weights renormalise over whichever pillars are present (no `else 0.0` imputation). Returns
+    (score, pillars_used, weight_scale, ineligible_reason)."""
+    if z_qual is None or z_mom is None:
+        missing = []
+        if z_qual is None:
+            missing.append("missing_z_quality")
+        if z_mom is None:
+            missing.append("missing_z_momentum")
+        return None, [], None, "_and_".join(missing)
+    if z_rev is not None:
+        score = (DOOR1_BASE_WEIGHTS["quality"] * z_qual + DOOR1_BASE_WEIGHTS["momentum"] * z_mom
+                 + DOOR1_BASE_WEIGHTS["revisions"] * z_rev)
+        return score, ["quality", "momentum", "revisions"], 1.0, None
+    present_w = DOOR1_BASE_WEIGHTS["quality"] + DOOR1_BASE_WEIGHTS["momentum"]
+    scale = round(1.0 / present_w, 4)
+    score = (DOOR1_BASE_WEIGHTS["quality"] / present_w) * z_qual + (DOOR1_BASE_WEIGHTS["momentum"] / present_w) * z_mom
+    return score, ["quality", "momentum"], scale, None
+
+
+def score_door2(
+    z_val: Optional[float], z_gap: Optional[float], z_qual: Optional[float],
+) -> Tuple[Optional[float], List[str], Optional[float], Optional[str]]:
+    """Door 2 (Value / Expectations Gap): requires z_val; z_gap and z_qual optional, weights
+    renormalise over whichever pillars are present. Returns (score, pillars_used, weight_scale,
+    ineligible_reason)."""
+    if z_val is None:
+        return None, [], None, "missing_z_value"
+    present = [("value", DOOR2_BASE_WEIGHTS["value"], z_val)]
+    if z_gap is not None:
+        present.append(("exp_gap", DOOR2_BASE_WEIGHTS["exp_gap"], z_gap))
+    if z_qual is not None:
+        present.append(("quality", DOOR2_BASE_WEIGHTS["quality"], z_qual))
+    pillars_used = [name for name, _, _ in present]
+    sum_w = sum(w for _, w, _ in present)
+    scale = round(1.0 / sum_w, 4)
+    score = sum((w / sum_w) * val for _, w, val in present)
+    return score, pillars_used, scale, None
+
+
+def compute_pillar_sd(
+    scored_tickers: List[str], raw_pillars: Dict[str, Dict[str, Optional[float]]],
+    pillar_names: Tuple[str, ...],
+) -> Tuple[Dict[str, Optional[float]], Dict[str, Optional[float]], List[str]]:
+    """Cross-sectional sd of each pillar over the scored set. A pillar with fewer than 2 values,
+    or sd == 0 / non-finite, is degenerate (left undivided downstream, excluded from
+    effective_weights). Returns (pillar_sd_rounded, pillar_sd_exact, pillar_sd_degenerate)."""
+    pillar_sd: Dict[str, Optional[float]] = {}
+    pillar_sd_exact: Dict[str, Optional[float]] = {}
+    pillar_sd_degenerate: List[str] = []
+    for p_name in pillar_names:
+        vals = [raw_pillars[t][p_name] for t in scored_tickers if raw_pillars[t][p_name] is not None]
+        if len(vals) < 2:
+            pillar_sd_degenerate.append(p_name)
+            pillar_sd[p_name] = None
+            pillar_sd_exact[p_name] = None
+        else:
+            sd = statistics.pstdev(vals)
+            if sd == 0 or not math.isfinite(sd):
+                pillar_sd_degenerate.append(p_name)
+                pillar_sd[p_name] = round(sd, 4) if math.isfinite(sd) else None
+                pillar_sd_exact[p_name] = None
+            else:
+                pillar_sd[p_name] = round(sd, 4)
+                pillar_sd_exact[p_name] = sd
+    return pillar_sd, pillar_sd_exact, pillar_sd_degenerate
+
+
+def compute_effective_weights(
+    base_weights: Dict[str, float], pillar_sd_exact: Dict[str, Optional[float]],
+) -> Dict[str, float]:
+    """Effective weights: {pillar: w * sd / sum(w * sd)}, falling back to the nominal base
+    weights (rounded) when every present pillar is degenerate (sum <= 0)."""
+    weighted = {
+        k: base_weights[k] * (pillar_sd_exact[k] if pillar_sd_exact.get(k) is not None else 0.0)
+        for k in base_weights
+    }
+    total = sum(weighted.values())
+    if total > 0:
+        return {k: round(v / total, 4) for k, v in weighted.items()}
+    return {k: round(base_weights[k], 4) for k in base_weights}
+
+
+def standardize_pillar_value(
+    raw_val: Optional[float], sd_exact: Optional[float], degenerate: bool, use_unit_variance: bool,
+) -> Optional[float]:
+    """Unit-variance standardisation of one pillar value: divide by its cross-sectional sd
+    unless the pillar is degenerate, sd is unusable, or unit-variance is disabled — in which
+    case the raw value passes through undivided. None stays None."""
+    if raw_val is None:
+        return None
+    if not use_unit_variance:
+        return raw_val
+    if degenerate or sd_exact is None or sd_exact <= 0:
+        return raw_val
+    return raw_val / sd_exact
+
+
+def evaluate_falling_knife(
+    z_mom_pub: Optional[float], floor: float, regime_shift_down: bool,
+) -> Tuple[bool, Optional[str], Optional[Dict[str, Any]]]:
+    """P3.3 Door-2 falling-knife floor: a name is a knife when its published z_momentum (the
+    P3.13 blend) is below `floor`, OR `regime_shift_down` is true — checked on the PUBLISHED z,
+    never Door 1's own sector-neutral-only feed (P3.14). A missing z_momentum is eligible
+    (never silently gated) and flagged `momentum_missing` instead.
+
+    Returns (d2_eligible, flag_to_add, falling_knife_detail) — flag_to_add is
+    "momentum_missing", "falling_knife", or None."""
+    if z_mom_pub is None:
+        return True, "momentum_missing", None
+    is_knife = (z_mom_pub < floor) or regime_shift_down
+    if is_knife:
+        detail = {"z_momentum": z_mom_pub, "floor": floor, "regime_shift_down": regime_shift_down}
+        return False, "falling_knife", detail
+    return True, None, None
+
+
+def compute_best_pctl(
+    score_door1_val: Optional[float], score_door2_val: Optional[float],
+    pctl_d1: float, pctl_d2: float, d2_eligible: bool,
+) -> float:
+    """A falling knife (d2_eligible=False) keeps score_door2/pctl_d2 for display, but best_pctl
+    never uses them — it is pctl_d1 alone (or 0.0 if Door 1 didn't score it either)."""
+    if score_door1_val is not None and score_door2_val is not None and d2_eligible:
+        return max(pctl_d1, pctl_d2)
+    if score_door1_val is not None:
+        return pctl_d1
+    if score_door2_val is not None and d2_eligible:
+        return pctl_d2
+    return 0.0
+
+
+def is_double_door_champion(pctl_d1: float, pctl_d2: float, d2_eligible: bool) -> bool:
+    """P3.4: DOUBLE_DOOR_CHAMPION requires both percentiles >= 90 AND d2_eligible (a falling
+    knife can never be a champion, even at high raw scores)."""
+    return pctl_d1 >= 90.0 and pctl_d2 >= 90.0 and d2_eligible
+
+
+def champion_bonus(nominated_doors: List[str]) -> float:
+    """P3.4: the priority-queue ranking bonus for a DOUBLE_DOOR_CHAMPION."""
+    return 2.0 if "DOUBLE_DOOR_CHAMPION" in nominated_doors else 0.0
+
+
+def priority_sort_key_for_profile(p: Dict[str, Any]) -> float:
+    """RS2 priority-queue ranking key: best_pctl plus the champion bonus."""
+    return p["best_pctl"] + champion_bonus(p.get("nominated_doors", []))
+
+
+def apply_band_hysteresis(
+    all_ranked: List[str], rank_by_ticker: Dict[str, int], prev_rn: Set[str], prev_book: Set[str],
+    rn_buffer_rank: int, book_buffer_rank: int, rn_cutoff: int = 50, book_cutoff: int = 135,
+) -> Tuple[Set[str], Set[str]]:
+    """P3.5 band hysteresis: rank <= rn_cutoff -> research_now; rank <= rn_buffer_rank AND
+    previously research_now -> stays research_now; rank <= book_cutoff -> watchlist; rank <=
+    book_buffer_rank AND previously in the book -> stays watchlist. Returns (rn_set, wl_set)."""
+    rn_set: Set[str] = set()
+    wl_set: Set[str] = set()
+    for t in all_ranked:
+        r = rank_by_ticker[t]
+        if r <= rn_cutoff:
+            rn_set.add(t)
+        elif r <= rn_buffer_rank and t in prev_rn:
+            rn_set.add(t)
+        elif r <= book_cutoff:
+            wl_set.add(t)
+        elif r <= book_buffer_rank and t in prev_book:
+            wl_set.add(t)
+    return rn_set, wl_set
+
+
 def main():
     print("=" * 80)
     print("TIER 2 DUAL-DOOR SIFTER (PROD V2 - CLUSTER GUARDRAILS & CORE/SATELLITE)")
@@ -1652,53 +1833,13 @@ def main():
     # comparable scale; it is not one of DOOR1_BASE_WEIGHTS/DOOR2_BASE_WEIGHTS's keys, so it
     # never enters effective_weights or either door's score.
     PILLAR_NAMES = ("quality", "momentum", "momentum_published", "revisions", "value", "exp_gap")
-    pillar_sd: Dict[str, Optional[float]] = {}
-    pillar_sd_exact: Dict[str, Optional[float]] = {}
-    pillar_sd_degenerate: List[str] = []
-
-    for p_name in PILLAR_NAMES:
-        vals = [raw_pillars[t][p_name] for t in scored_tickers if raw_pillars[t][p_name] is not None]
-        if len(vals) < 2:
-            pillar_sd_degenerate.append(p_name)
-            pillar_sd[p_name] = None
-            pillar_sd_exact[p_name] = None
-        else:
-            sd = statistics.pstdev(vals)
-            if sd == 0 or not math.isfinite(sd):
-                pillar_sd_degenerate.append(p_name)
-                pillar_sd[p_name] = round(sd, 4) if math.isfinite(sd) else None
-                pillar_sd_exact[p_name] = None
-            else:
-                pillar_sd[p_name] = round(sd, 4)
-                pillar_sd_exact[p_name] = sd
-
-    DOOR1_BASE_WEIGHTS = {"quality": 0.45, "momentum": 0.35, "revisions": 0.20}
-    DOOR2_BASE_WEIGHTS = {"value": 0.40, "exp_gap": 0.40, "quality": 0.20}
-
-    # Effective weights: {door: {pillar: w * sd / sum(w * sd)}}
-    p1 = {
-        k: DOOR1_BASE_WEIGHTS[k] * (pillar_sd_exact[k] if pillar_sd_exact.get(k) is not None else 0.0)
-        for k in DOOR1_BASE_WEIGHTS
-    }
-    sum_p1 = sum(p1.values())
-    if sum_p1 > 0:
-        eff_w1 = {k: round(v / sum_p1, 4) for k, v in p1.items()}
-    else:
-        eff_w1 = {k: round(DOOR1_BASE_WEIGHTS[k], 4) for k in DOOR1_BASE_WEIGHTS}
-
-    p2 = {
-        k: DOOR2_BASE_WEIGHTS[k] * (pillar_sd_exact[k] if pillar_sd_exact.get(k) is not None else 0.0)
-        for k in DOOR2_BASE_WEIGHTS
-    }
-    sum_p2 = sum(p2.values())
-    if sum_p2 > 0:
-        eff_w2 = {k: round(v / sum_p2, 4) for k, v in p2.items()}
-    else:
-        eff_w2 = {k: round(DOOR2_BASE_WEIGHTS[k], 4) for k in DOOR2_BASE_WEIGHTS}
+    pillar_sd, pillar_sd_exact, pillar_sd_degenerate = compute_pillar_sd(
+        scored_tickers, raw_pillars, PILLAR_NAMES
+    )
 
     effective_weights = {
-        "door1": eff_w1,
-        "door2": eff_w2,
+        "door1": compute_effective_weights(DOOR1_BASE_WEIGHTS, pillar_sd_exact),
+        "door2": compute_effective_weights(DOOR2_BASE_WEIGHTS, pillar_sd_exact),
     }
 
     # Unit variance standardization: divide each pillar by its sd (if not degenerate and UNIT_VARIANCE enabled)
@@ -1707,17 +1848,10 @@ def main():
     for t in scored_tickers:
         std_pillars[t] = {}
         for p_name in PILLAR_NAMES:
-            raw_val = raw_pillars[t][p_name]
-            if raw_val is None:
-                std_pillars[t][p_name] = None
-            elif not use_unit_variance:
-                std_pillars[t][p_name] = raw_val
-            else:
-                sd_ex = pillar_sd_exact.get(p_name)
-                if p_name in pillar_sd_degenerate or sd_ex is None or sd_ex <= 0:
-                    std_pillars[t][p_name] = raw_val
-                else:
-                    std_pillars[t][p_name] = raw_val / sd_ex
+            std_pillars[t][p_name] = standardize_pillar_value(
+                raw_pillars[t][p_name], pillar_sd_exact.get(p_name),
+                p_name in pillar_sd_degenerate, use_unit_variance,
+            )
 
     # Compute Door 1 and Door 2 Scores
     scored_profiles: Dict[str, Dict[str, Any]] = {}
@@ -1734,45 +1868,10 @@ def main():
         cluster = tax["cluster"]
 
         # Door 1: Secular Compounders (requires z_qual AND z_mom; revisions optional)
-        d1_score = None
-        d1_pillars_used = []
-        d1_weight_scale = None
-        d1_ineligible_reason = None
-
-        if z_qual is None or z_mom is None:
-            missing = []
-            if z_qual is None: missing.append("missing_z_quality")
-            if z_mom is None: missing.append("missing_z_momentum")
-            d1_ineligible_reason = "_and_".join(missing)
-        else:
-            if z_rev is not None:
-                d1_pillars_used = ["quality", "momentum", "revisions"]
-                d1_weight_scale = 1.0
-                d1_score = 0.45 * z_qual + 0.35 * z_mom + 0.20 * z_rev
-            else:
-                d1_pillars_used = ["quality", "momentum"]
-                d1_weight_scale = round(1.0 / 0.80, 4)
-                d1_score = (0.45 / 0.80) * z_qual + (0.35 / 0.80) * z_mom
+        d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(z_qual, z_mom, z_rev)
 
         # Door 2: Value / Expectations Gap (requires z_val; z_gap and z_qual optional)
-        d2_score = None
-        d2_pillars_used = []
-        d2_weight_scale = None
-        d2_ineligible_reason = None
-
-        if z_val is None:
-            d2_ineligible_reason = "missing_z_value"
-        else:
-            present_d2 = [("value", 0.40, z_val)]
-            if z_gap is not None:
-                present_d2.append(("exp_gap", 0.40, z_gap))
-            if z_qual is not None:
-                present_d2.append(("quality", 0.20, z_qual))
-
-            d2_pillars_used = [name for name, w, val in present_d2]
-            sum_w2 = sum(w for name, w, val in present_d2)
-            d2_weight_scale = round(1.0 / sum_w2, 4)
-            d2_score = sum((w / sum_w2) * val for name, w, val in present_d2)
+        d2_score, d2_pillars_used, d2_weight_scale, d2_ineligible_reason = score_door2(z_val, z_gap, z_qual)
 
         # P3.14: the PUBLISHED z_momentum (P3.3's falling-knife floor reads this) stays the
         # P3.13 blend even though Door 1's own z_mom above reverted to sector-neutral only.
@@ -1784,26 +1883,13 @@ def main():
         regime_shift_down = _resolve_regime_shift_down(fct_mom, ticker_flags.get(t, []))
 
         cur_flags = list(ticker_flags.get(t, []))
-        if z_mom_pub is None:
-            d2_eligible = True
-            if "momentum_missing" not in cur_flags:
-                cur_flags.append("momentum_missing")
-            falling_knife_detail = None
-        else:
-            is_knife = (z_mom_pub < door2_momentum_floor) or regime_shift_down
-            d2_eligible = not is_knife
-            if not d2_eligible:
-                if "falling_knife" not in cur_flags:
-                    cur_flags.append("falling_knife")
-                falling_knife_detail = {
-                    "z_momentum": z_mom_pub,
-                    "floor": door2_momentum_floor,
-                    "regime_shift_down": regime_shift_down,
-                }
-                if d2_ineligible_reason is None:
-                    d2_ineligible_reason = "falling_knife"
-            else:
-                falling_knife_detail = None
+        d2_eligible, knife_flag, falling_knife_detail = evaluate_falling_knife(
+            z_mom_pub, door2_momentum_floor, regime_shift_down
+        )
+        if knife_flag is not None and knife_flag not in cur_flags:
+            cur_flags.append(knife_flag)
+        if not d2_eligible and d2_ineligible_reason is None:
+            d2_ineligible_reason = "falling_knife"
 
         cand_data = {
             "ticker": t,
@@ -1862,14 +1948,7 @@ def main():
         p["pctl_d1"] = round(get_percentile(p["score_door1"], all_d1), 1) if p["score_door1"] is not None else 0.0
         p["pctl_d2"] = round(get_percentile(p["score_door2"], all_d2), 1) if p["score_door2"] is not None else 0.0
         d2_ok = p.get("d2_eligible", True)
-        if p["score_door1"] is not None and p["score_door2"] is not None and d2_ok:
-            p["best_pctl"] = max(p["pctl_d1"], p["pctl_d2"])
-        elif p["score_door1"] is not None:
-            p["best_pctl"] = p["pctl_d1"]
-        elif p["score_door2"] is not None and d2_ok:
-            p["best_pctl"] = p["pctl_d2"]
-        else:
-            p["best_pctl"] = 0.0
+        p["best_pctl"] = compute_best_pctl(p["score_door1"], p["score_door2"], p["pctl_d1"], p["pctl_d2"], d2_ok)
 
     # ── 4. Macro Sector Budgeting via MGI (MRI-11 contract) ──────────────────
     macro_scores_by_id, reported_regime, sector_ranking_meta = load_sector_ranking()
@@ -1993,7 +2072,7 @@ def main():
     # Mark Double-Door Overlap Champions (P3.4: percentiles >= 90 and d2_eligible)
     all_nominated_map = {**core_nominated, **wildcard_nominated}
     for p in all_nominated_map.values():
-        if p.get("pctl_d1", 0.0) >= 90.0 and p.get("pctl_d2", 0.0) >= 90.0 and p.get("d2_eligible", True):
+        if is_double_door_champion(p.get("pctl_d1", 0.0), p.get("pctl_d2", 0.0), p.get("d2_eligible", True)):
             if "DOUBLE_DOOR_CHAMPION" not in p["nominated_doors"]:
                 p["nominated_doors"].append("DOUBLE_DOOR_CHAMPION")
 
@@ -2227,8 +2306,7 @@ def main():
     # Priority Queue Ranking for RS2 Local (P3.4: bonus 2.0)
     def priority_sort_key(t: str) -> float:
         p = all_nominated_map.get(t, scored_profiles[t])
-        bonus = 2.0 if "DOUBLE_DOOR_CHAMPION" in p.get("nominated_doors", []) else 0.0
-        return p["best_pctl"] + bonus
+        return priority_sort_key_for_profile(p)
 
     # B1 (PHASE_3_APPROVAL.md): rank and band Door 1/2 on their OWN nomination
     # (door12_nominated_map, captured above before Door 3 was merged in) — exactly as before
@@ -2244,19 +2322,9 @@ def main():
     rank_by_ticker = {t: i + 1 for i, t in enumerate(all_ranked)}
 
     # P3.5: Band Hysteresis — Door 1/2 only.
-    rn_set: Set[str] = set()
-    wl_set: Set[str] = set()
-
-    for t in all_ranked:
-        r = rank_by_ticker[t]
-        if r <= 50:
-            rn_set.add(t)
-        elif r <= rn_buffer_rank and t in prev_rn:
-            rn_set.add(t)
-        elif r <= 135:
-            wl_set.add(t)
-        elif r <= book_buffer_rank and t in prev_book:
-            wl_set.add(t)
+    rn_set, wl_set = apply_band_hysteresis(
+        all_ranked, rank_by_ticker, prev_rn, prev_book, rn_buffer_rank, book_buffer_rank,
+    )
 
     retained_rn = {t for t in rn_set if rank_by_ticker[t] > 50}
     retained_book = {t for t in wl_set if rank_by_ticker[t] > 135}

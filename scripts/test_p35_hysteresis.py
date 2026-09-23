@@ -23,7 +23,8 @@ def test_hysteresis_config_buffers():
 
 
 def test_hysteresis_transitions_logic():
-    """Verify the exact hysteresis band rules:
+    """Verify the exact hysteresis band rules, via the production function
+    (score_factors_dual_door.apply_band_hysteresis):
     - rank 55 previously RN stays RN (retained_rn)
     - rank 61 previously RN -> watchlist (left_rn, entered_book)
     - rank 149 previously book stays in book (retained_book -> watchlist)
@@ -61,18 +62,9 @@ def test_hysteresis_transitions_logic():
     rn_buffer_rank = 60
     book_buffer_rank = 150
 
-    rn_set = set()
-    wl_set = set()
-
-    for t, r in rank_by_ticker.items():
-        if r <= 50:
-            rn_set.add(t)
-        elif r <= rn_buffer_rank and t in prev_rn:
-            rn_set.add(t)
-        elif r <= 135:
-            wl_set.add(t)
-        elif r <= book_buffer_rank and t in prev_book:
-            wl_set.add(t)
+    rn_set, wl_set = sfdd.apply_band_hysteresis(
+        all_ranked, rank_by_ticker, prev_rn, prev_book, rn_buffer_rank, book_buffer_rank,
+    )
 
     book_set = rn_set | wl_set
     retained_rn = {t for t in rn_set if rank_by_ticker[t] > 50}

@@ -32,39 +32,24 @@ from score_factors_dual_door import (
     DOOR2_MOMENTUM_FLOOR,
     _contributions,
     _load_door2_momentum_floor,
+    _resolve_regime_shift_down,
+    evaluate_falling_knife,
+    is_double_door_champion,
+    champion_bonus,
+    priority_sort_key_for_profile,
 )
 
 
 def _eval_knife(z_mom: float | None, fct_mom: Dict[str, Any] | None = None, flags: List[str] | None = None, floor: float = -1.5):
-    """Helper mimicking sifter knife evaluation."""
+    """Thin wrapper around the production functions (_resolve_regime_shift_down,
+    evaluate_falling_knife) reproducing the same flag-list bookkeeping main() does around them,
+    so the tests below can assert on (d2_eligible, cur_flags, falling_knife_detail) as before."""
     fct_mom = fct_mom or {}
     cur_flags = list(flags or [])
-    regime_shift_down = bool(fct_mom.get("regime_shift_down") is True)
-    if not regime_shift_down:
-        if "regime_shift_down" in cur_flags:
-            regime_shift_down = True
-        elif isinstance(fct_mom.get("flags"), list) and "regime_shift_down" in fct_mom["flags"]:
-            regime_shift_down = True
-
-    if z_mom is None:
-        d2_eligible = True
-        if "momentum_missing" not in cur_flags:
-            cur_flags.append("momentum_missing")
-        falling_knife_detail = None
-    else:
-        is_knife = (z_mom < floor) or regime_shift_down
-        d2_eligible = not is_knife
-        if not d2_eligible:
-            if "falling_knife" not in cur_flags:
-                cur_flags.append("falling_knife")
-            falling_knife_detail = {
-                "z_momentum": z_mom,
-                "floor": floor,
-                "regime_shift_down": regime_shift_down,
-            }
-        else:
-            falling_knife_detail = None
-
+    regime_shift_down = _resolve_regime_shift_down(fct_mom, cur_flags)
+    d2_eligible, knife_flag, falling_knife_detail = evaluate_falling_knife(z_mom, floor, regime_shift_down)
+    if knife_flag is not None and knife_flag not in cur_flags:
+        cur_flags.append(knife_flag)
     return d2_eligible, cur_flags, falling_knife_detail
 
 
@@ -142,25 +127,8 @@ def test_momentum_missing_when_none():
 
 def test_knife_keeps_door2_score_and_pctl_but_best_pctl_is_pctl_d1():
     """A falling knife keeps score_door2 and pctl_d2 for display, but best_pctl uses pctl_d1 only."""
-    # Simulate percentile calculation block
-    p = {
-        "score_door1": 0.50,
-        "score_door2": 2.50,
-        "pctl_d1": 65.0,
-        "pctl_d2": 95.0,
-        "d2_eligible": False,  # Falling knife
-        "best_pctl": 0.0,
-    }
-
-    d2_ok = p.get("d2_eligible", True)
-    if p["score_door1"] is not None and p["score_door2"] is not None and d2_ok:
-        p["best_pctl"] = max(p["pctl_d1"], p["pctl_d2"])
-    elif p["score_door1"] is not None:
-        p["best_pctl"] = p["pctl_d1"]
-    elif p["score_door2"] is not None and d2_ok:
-        p["best_pctl"] = p["pctl_d2"]
-    else:
-        p["best_pctl"] = 0.0
+    p = {"score_door1": 0.50, "score_door2": 2.50, "pctl_d1": 65.0, "pctl_d2": 95.0, "d2_eligible": False}
+    p["best_pctl"] = sfdd.compute_best_pctl(p["score_door1"], p["score_door2"], p["pctl_d1"], p["pctl_d2"], p["d2_eligible"])
 
     # Door 2 score and pctl are kept for display
     assert p["score_door2"] == 2.50
@@ -168,26 +136,10 @@ def test_knife_keeps_door2_score_and_pctl_but_best_pctl_is_pctl_d1():
     # But best_pctl uses Door 1 only (65.0, NOT 95.0)
     assert p["best_pctl"] == 65.0
 
-    # If score_door1 is None and d2_eligible is False: best_pctl is 0.0
-    p_no_d1 = {
-        "score_door1": None,
-        "score_door2": 2.50,
-        "pctl_d1": 0.0,
-        "pctl_d2": 95.0,
-        "d2_eligible": False,
-        "best_pctl": 0.0,
-    }
-    d2_ok = p_no_d1.get("d2_eligible", True)
-    if p_no_d1["score_door1"] is not None and p_no_d1["score_door2"] is not None and d2_ok:
-        p_no_d1["best_pctl"] = max(p_no_d1["pctl_d1"], p_no_d1["pctl_d2"])
-    elif p_no_d1["score_door1"] is not None:
-        p_no_d1["best_pctl"] = p_no_d1["pctl_d1"]
-    elif p_no_d1["score_door2"] is not None and d2_ok:
-        p_no_d1["best_pctl"] = p_no_d1["pctl_d2"]
-    else:
-        p_no_d1["best_pctl"] = 0.0
-
-    assert p_no_d1["best_pctl"] == 0.0
+    # If score_door1 is None and d2_eligible is False: best_pctl is 0.0 (Door 2 is disqualified
+    # by the knife, so its score can never rescue best_pctl either).
+    best_pctl_no_d1 = sfdd.compute_best_pctl(None, 2.50, 0.0, 95.0, False)
+    assert best_pctl_no_d1 == 0.0
 
 
 def test_contributions_honors_d2_eligible():
@@ -217,40 +169,25 @@ def test_champion_requires_pctl_gte_90_and_d2_eligible():
     """DOUBLE_DOOR_CHAMPION requires pctl_d1 >= 90 AND pctl_d2 >= 90 AND d2_eligible.
     Raw score > 0.40 rule is deleted.
     """
-    def eval_champion(p: Dict[str, Any]) -> bool:
-        doors = list(p.get("nominated_doors", []))
-        if p.get("pctl_d1", 0.0) >= 90.0 and p.get("pctl_d2", 0.0) >= 90.0 and p.get("d2_eligible", True):
-            if "DOUBLE_DOOR_CHAMPION" not in doors:
-                doors.append("DOUBLE_DOOR_CHAMPION")
-        return "DOUBLE_DOOR_CHAMPION" in doors
-
     # 1. Both percentiles >= 90 and d2_eligible -> Champion
-    p_champ = {"pctl_d1": 91.0, "pctl_d2": 93.0, "d2_eligible": True, "score_door1": 0.20, "score_door2": 0.30}
-    assert eval_champion(p_champ) is True
+    assert is_double_door_champion(91.0, 93.0, True) is True
 
     # 2. Both percentiles >= 90 but falling knife (d2_eligible=False) -> NOT Champion
-    p_knife = {"pctl_d1": 95.0, "pctl_d2": 96.0, "d2_eligible": False}
-    assert eval_champion(p_knife) is False
+    assert is_double_door_champion(95.0, 96.0, False) is False
 
     # 3. pctl_d1 < 90 -> NOT Champion
-    p_low_d1 = {"pctl_d1": 89.9, "pctl_d2": 95.0, "d2_eligible": True}
-    assert eval_champion(p_low_d1) is False
+    assert is_double_door_champion(89.9, 95.0, True) is False
 
     # 4. pctl_d2 < 90 -> NOT Champion
-    p_low_d2 = {"pctl_d1": 95.0, "pctl_d2": 89.9, "d2_eligible": True}
-    assert eval_champion(p_low_d2) is False
+    assert is_double_door_champion(95.0, 89.9, True) is False
 
-    # 5. Raw scores > 0.40 but percentiles < 90 -> NOT Champion (raw score rule deleted)
-    p_raw_only = {"pctl_d1": 85.0, "pctl_d2": 85.0, "score_door1": 0.80, "score_door2": 0.90, "d2_eligible": True}
-    assert eval_champion(p_raw_only) is False
+    # 5. Raw scores > 0.40 but percentiles < 90 -> NOT Champion (raw score rule deleted; a raw
+    # score is not even a parameter of is_double_door_champion any more).
+    assert is_double_door_champion(85.0, 85.0, True) is False
 
 
 def test_champion_bonus_2_0_ordering():
     """bonus 2.0 ordering: a champion at best_pctl 95 does not jump a non-champion at 98."""
-    def priority_sort_key(p: Dict[str, Any]) -> float:
-        bonus = 2.0 if "DOUBLE_DOOR_CHAMPION" in p.get("nominated_doors", []) else 0.0
-        return p["best_pctl"] + bonus
-
     # Champion at best_pctl = 95.0
     champ = {
         "ticker": "CHAMP",
@@ -270,9 +207,12 @@ def test_champion_bonus_2_0_ordering():
         "nominated_doors": ["DOOR_1_COMPOUNDER"],
     }
 
-    key_champ = priority_sort_key(champ)
-    key_non_champ = priority_sort_key(non_champ)
-    key_close = priority_sort_key(close_non_champ)
+    assert champion_bonus(champ["nominated_doors"]) == 2.0
+    assert champion_bonus(non_champ["nominated_doors"]) == 0.0
+
+    key_champ = priority_sort_key_for_profile(champ)
+    key_non_champ = priority_sort_key_for_profile(non_champ)
+    key_close = priority_sort_key_for_profile(close_non_champ)
 
     # 95.0 + 2.0 = 97.0
     assert key_champ == 97.0
@@ -287,7 +227,7 @@ def test_champion_bonus_2_0_ordering():
 
     # Sort descending
     pool = [champ, non_champ, close_non_champ]
-    ranked = sorted(pool, key=priority_sort_key, reverse=True)
+    ranked = sorted(pool, key=priority_sort_key_for_profile, reverse=True)
     assert [p["ticker"] for p in ranked] == ["HIGH_NON_CHAMP", "CHAMP", "CLOSE_NON_CHAMP"]
 
     # Contrast with old 10.0 bonus where champ would have scored 105 and jumped non_champ at 98
