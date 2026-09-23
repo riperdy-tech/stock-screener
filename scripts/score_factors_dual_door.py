@@ -42,7 +42,7 @@ DATA = ROOT / "public" / "data"
 sys.path.append(str(Path(__file__).resolve().parent))
 from industry_taxonomy import get_taxonomy_profile, normalize_industry
 from score_paradigm import compute_skip_month_return, compute_high_proximity
-from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, LARGE_CAP_FLAG_ONLY_USD
+from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, LARGE_CAP_FLAG_ONLY_USD, resolve_adv_usd
 import depth_conviction
 import tradability
 import peer_paths
@@ -830,18 +830,17 @@ def main():
             vetoes[t] = "PRICE_BELOW_3"
             continue
 
-        # ADV via hygiene_thresholds.py (P3.6): adv_20d_usd from SCR-10 when present else snapshot flagged adv_single_day, neither -> NO_LIQUIDITY_DATA
+        # ADV via hygiene_thresholds.py (P3.6c): stocks[t].metrics.adv_20d_usd (new,
+        # universe-wide, from the daily fetch) -> momentum_state adv_20d_usd (SCR-10) ->
+        # snapshot vol*price (flag adv_single_day) -> none -> NO_LIQUIDITY_DATA (switch-gated).
         fct_mom = ticker_mom_state.get(t, {})
-        adv_20d = num(fct_mom.get("adv_20d_usd"))
-        if adv_20d is not None:
-            adv = adv_20d
-        elif vol is not None and price is not None:
-            adv = vol * price
+        stocks_adv_20d = num((s.get("metrics") or {}).get("adv_20d_usd"))
+        mom_adv_20d = num(fct_mom.get("adv_20d_usd"))
+        adv, adv_flag = resolve_adv_usd(stocks_adv_20d, mom_adv_20d, vol, price)
+        if adv_flag is not None:
             cur_flags = ticker_flags.setdefault(t, [])
-            if "adv_single_day" not in cur_flags:
-                cur_flags.append("adv_single_day")
-        else:
-            adv = None
+            if adv_flag not in cur_flags:
+                cur_flags.append(adv_flag)
 
         if adv is None:
             if switch_no_liquidity_data:

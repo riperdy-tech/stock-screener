@@ -27,9 +27,10 @@ Requirements covered:
    LARGE_CAP_FLAG_ONLY_USD; at or above it, flags "loss_making_leveraged" with {fcf,
    operating_income, lt_debt}, no veto.
 5. Issuance flag: net_issuance_1y > 0.10 -> flag "heavy_issuance" (flag only, unchanged).
-6. ADV via scripts/hygiene_thresholds.py: adv_20d_usd from SCR-10 used when present; else
-   snapshot vol*price flagged "adv_single_day"; neither present -> switch off flags
-   "no_liquidity_data" (no veto), switch on -> veto "NO_LIQUIDITY_DATA" (unchanged by P3.6b).
+6. ADV via scripts/hygiene_thresholds.py resolve_adv_usd() (P3.6c order): stocks[t].metrics.
+   adv_20d_usd (universe-wide, from the daily fetch) used when present; else adv_20d_usd from
+   SCR-10 momentum_state; else snapshot vol*price flagged "adv_single_day"; neither present ->
+   switch off flags "no_liquidity_data" (no veto), switch on -> veto "NO_LIQUIDITY_DATA".
 7. sifter_config.json carries veto_switches, all False; hygiene_thresholds.py is the single
    source for MIN_MARKET_CAP / MIN_SHARE_PRICE / MIN_ADV_DOLLAR / LARGE_CAP_FLAG_ONLY_USD.
 """
@@ -142,19 +143,17 @@ def _eval_chronic_loss(fcf, op, lt_debt, mcap) -> Dict[str, Any]:
 
 
 def _eval_adv(
-    fct_mom: Dict[str, Any], vol: Optional[float], price: Optional[float], switch_no_liquidity_data: bool
+    fct_mom: Dict[str, Any],
+    vol: Optional[float],
+    price: Optional[float],
+    switch_no_liquidity_data: bool,
+    stocks_adv_20d_usd: Optional[float] = None,
 ) -> Dict[str, Any]:
-    """Mirrors score_factors_dual_door.py's inline ADV block (unchanged by P3.6b)."""
+    """Mirrors score_factors_dual_door.py's inline ADV block (P3.6c source order)."""
     cur_flags: List[str] = []
-    adv_20d = num(fct_mom.get("adv_20d_usd"))
-    if adv_20d is not None:
-        adv = adv_20d
-    elif vol is not None and price is not None:
-        adv = vol * price
-        if "adv_single_day" not in cur_flags:
-            cur_flags.append("adv_single_day")
-    else:
-        adv = None
+    adv, adv_flag = ht.resolve_adv_usd(stocks_adv_20d_usd, num(fct_mom.get("adv_20d_usd")), vol, price)
+    if adv_flag is not None:
+        cur_flags.append(adv_flag)
 
     veto = None
     if adv is None:
@@ -511,5 +510,26 @@ def test_adv_below_threshold_still_vetoes_illiquid_regardless_of_switch():
 
 def test_adv_scr10_value_takes_priority_over_snapshot():
     res = _eval_adv({"adv_20d_usd": 400_000.0}, vol=1.0, price=1.0, switch_no_liquidity_data=False)
+    assert res["adv"] == 400_000.0
+    assert "adv_single_day" not in res["flags"]
+
+
+# ── P3.6c: stocks[t].metrics.adv_20d_usd (universe-wide daily fetch) is now the top source ──
+
+def test_adv_stocks_metrics_value_takes_priority_over_momentum_state_and_snapshot():
+    res = _eval_adv(
+        {"adv_20d_usd": 400_000.0}, vol=1.0, price=1.0, switch_no_liquidity_data=False,
+        stocks_adv_20d_usd=900_000.0,
+    )
+    assert res["adv"] == 900_000.0
+    assert res["flags"] == []
+    assert res["veto"] is None
+
+
+def test_adv_falls_back_to_momentum_state_when_stocks_metrics_value_absent():
+    res = _eval_adv(
+        {"adv_20d_usd": 400_000.0}, vol=1.0, price=1.0, switch_no_liquidity_data=False,
+        stocks_adv_20d_usd=None,
+    )
     assert res["adv"] == 400_000.0
     assert "adv_single_day" not in res["flags"]
