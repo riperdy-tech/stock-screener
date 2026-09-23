@@ -118,6 +118,49 @@ def test_empty_target_set_with_holdings_is_a_failure():
     assert ok2
 
 
+def test_overlay_gated_empty_predicate():
+    """gate_version present + actionable_count == 0 -> gated-empty. Anything else
+    (no gate_version, or actionable_count > 0) -> not gated-empty."""
+    assert tp.overlay_gated_empty({"gate_version": 2, "actionable_count": 0})
+    assert not tp.overlay_gated_empty({"gate_version": 2, "actionable_count": 5})
+    assert not tp.overlay_gated_empty({"actionable_count": 0})  # no gate_version: OLD overlay
+    assert not tp.overlay_gated_empty({})
+
+
+def test_rn_depth_gate_zero_reaches_cash_over_two_runs():
+    """B3 ledger outcome (operator-approved 2026-09-23): a gate-on-read overlay
+    (top-level gate_version present) with actionable_count == 0 means the panel WAS
+    evaluated and nothing qualifies. (i) targets_healthy accepts the empty target
+    set instead of freezing the book; (ii) holdings absent from that overlay are
+    exits (unknown=set()), so they run the normal 2-miss exit grace and the book
+    actually reaches cash — not just depth_targets() == {}."""
+    names = [f"N{i}" for i in range(32)]
+    prices = {n: 100.0 for n in names}
+    led = _seeded(names, prices)
+    assert len(led["state"]["holdings"]) == 32
+
+    targets = {}  # depth_targets() on an all-actionable:false overlay
+    ok, reason = tp.targets_healthy("rn_depth", targets, led, allow_empty=True)
+    assert ok, reason  # (i) no longer a producer failure
+
+    # (ii) every holding is absent from the new overlay -> exit, not unknown
+    tp.run_target_ledger(led, targets, prices, "2026-07-02", "rank", unknown=set())  # run 1: arms
+    assert len(led["state"]["holdings"]) == 32, "sold on the first miss — no grace period"
+    tp.run_target_ledger(led, targets, prices, "2026-07-03", "rank", unknown=set())  # run 2: sells
+    assert len(led["state"]["holdings"]) == 0, "book did not reach cash after the exit grace"
+    assert led["state"]["cash"] > 0
+
+
+def test_empty_target_set_from_an_old_overlay_still_freezes_the_book():
+    """The same empty target set, but WITHOUT gate_version (an OLD overlay): must
+    keep today's failure behaviour — the guard exists for a reason."""
+    led = _seeded(["A", "B"], {"A": 100.0, "B": 100.0})
+    assert not tp.overlay_gated_empty({})           # no gate_version at all
+    assert not tp.overlay_gated_empty({"actionable_count": 0})  # still no gate_version
+    ok, reason = tp.targets_healthy("rn_depth", {}, led, allow_empty=False)
+    assert not ok and "empty while holding" in reason
+
+
 def test_hold_ledger_marks_nav_without_trading():
     prices = {"A": 100.0, "B": 100.0}
     led = _seeded(["A", "B"], prices)

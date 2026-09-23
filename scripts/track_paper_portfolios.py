@@ -189,6 +189,19 @@ def depth_targets(factor: dict, depth: dict) -> dict:
     return {t: weight for t in names}
 
 
+def overlay_gated_empty(depth_raw: dict) -> bool:
+    """True when depth_raw is a gate-on-read overlay (carries a top-level
+    `gate_version`) that gated every name out (`actionable_count == 0`).
+
+    That is the ruled outcome for rn_depth: the whole panel WAS evaluated and none
+    qualify, so an empty target set means cash, not a producer failure, and a held
+    name absent from the overlay is an exit, not unknown. An OLD overlay (no
+    `gate_version`) cannot make that claim, so it is excluded and keeps the
+    pre-gate failure behaviour (operator ruling, 2026-09-23).
+    """
+    return "gate_version" in depth_raw and depth_raw.get("actionable_count") == 0
+
+
 # F-04 hysteresis (equal_llm) was REMOVED in the depth migration (2026-08-26). It
 # existed only because apply_llm_overlay recomputed live MoS against daily-moving
 # prices, so a held name near the research_now cliff round-tripped on price noise. The
@@ -740,11 +753,15 @@ def factor_healthy(factor_raw, book, as_of):
     return True, ""
 
 
-def targets_healthy(name, targets, ledger):
+def targets_healthy(name, targets, ledger, allow_empty=False):
     """An empty target set for a ledger that holds positions is a producer failure,
     not an instruction to liquidate. (This is the deterministic replacement for the
-    'target set vanished' arm of the old collapse breaker.)"""
-    if not targets and ledger["state"]["holdings"]:
+    'target set vanished' arm of the old collapse breaker.)
+
+    allow_empty: the producer itself said "nothing qualifies" (a gate-on-read
+    overlay, evaluated and empty by design), as opposed to not having run at all.
+    """
+    if not targets and ledger["state"]["holdings"] and not allow_empty:
         return False, f"{name}: target set is empty while holding " \
                       f"{len(ledger['state']['holdings'])} names"
     return True, ""
@@ -1080,10 +1097,12 @@ def main():
                            "detail": fct_why})
             guard_tripped.append(f"factor_scores: {fct_why}")
 
-        def run_or_hold(name, targets, prefix, unknown=frozenset(), source_ok=True, why=""):
+        def run_or_hold(name, targets, prefix, unknown=frozenset(), source_ok=True, why="",
+                        allow_empty_targets=False):
             """Trade only when the source that defines this target set is healthy."""
             led = ledgers[name]
-            ok, reason = (source_ok, why) if not source_ok else targets_healthy(name, targets, led)
+            ok, reason = (source_ok, why) if not source_ok else targets_healthy(
+                name, targets, led, allow_empty=allow_empty_targets)
             if not ok:
                 print(f"  ! {name}: holding book unchanged — {reason}", file=sys.stderr)
                 alerts.append({"date": as_of, "severity": "error", "scope": name,
@@ -1133,11 +1152,12 @@ def main():
         depth_ok = bool(depth_tk) and fct_ok
         depth_why = fct_why if not fct_ok else (
             "depth_overlay.json missing or empty" if not depth_tk else "")
-        unknown_depth = {t for t in ledgers["rn_depth"]["state"]["holdings"]
-                         if t not in depth_tk}
+        depth_gate_zero = overlay_gated_empty(depth_raw)
+        unknown_depth = set() if depth_gate_zero else {
+            t for t in ledgers["rn_depth"]["state"]["holdings"] if t not in depth_tk}
         nav_rn, stale_rn = run_or_hold("rn_depth", rn_targets, "rank",
                                        unknown=unknown_depth, source_ok=depth_ok,
-                                       why=depth_why)
+                                       why=depth_why, allow_empty_targets=depth_gate_zero)
         if rn_targets:
             print(f"  · rn_depth: {len(rn_targets)} name(s) from depth_overlay "
                   f"(generated_at={depth_raw.get('generated_at')})", file=sys.stderr)
