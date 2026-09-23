@@ -50,6 +50,7 @@ from mri_sync import sync_mri_snapshot
 STOCKS_JSON = DATA / "stocks.json"
 PRICE_HISTORY_JSON = DATA / "price_history.json"
 MOMENTUM_STATE_JSON = DATA / "momentum_state.json"
+MOMENTUM_CONFIG_PATH = Path(__file__).resolve().parent / "momentum_config.json"
 FUNDAMENTALS_HISTORY_JSON = DATA / "fundamentals_history.json"
 BATTERY_JSON = DATA / "fundamentals_battery.json"
 EPS_TRAJECTORY_JSON = DATA / "eps_trajectory.json"
@@ -91,6 +92,16 @@ def load_json(path: Path, default=None):
         return default
     with path.open("r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def _load_door2_momentum_floor(config_path: Optional[Path] = None) -> float:
+    p = config_path or globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
+    cfg = load_json(p, {}) if p.exists() else {}
+    val = cfg.get("door2_momentum_floor", cfg.get("DOOR2_MOMENTUM_FLOOR", -1.5))
+    return float(val)
+
+
+DOOR2_MOMENTUM_FLOOR = _load_door2_momentum_floor()
 
 
 def _parse_mri_date(raw: Optional[str]) -> Optional[datetime]:
@@ -393,13 +404,16 @@ def _contributions(prof):
     if s1 is None and s2 is None:
         return None
     d1, d2 = prof.get("pctl_d1", 0.0), prof.get("pctl_d2", 0.0)
+    d2_ok = prof.get("d2_eligible", True)
 
-    if s1 is not None and s2 is None:
+    if s1 is not None and (s2 is None or not d2_ok):
         won_d1 = True
-    elif s2 is not None and s1 is None:
+    elif s2 is not None and d2_ok and s1 is None:
         won_d1 = False
-    else:
+    elif s1 is not None and s2 is not None and d2_ok:
         won_d1 = (d1 >= d2)
+    else:
+        return None
 
     parts = {}
     if won_d1:
@@ -518,6 +532,9 @@ def main():
     print("=" * 80)
     print("TIER 2 DUAL-DOOR SIFTER (PROD V2 - CLUSTER GUARDRAILS & CORE/SATELLITE)")
     print("=" * 80)
+
+    mom_cfg_path = globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
+    door2_momentum_floor = float(globals().get("DOOR2_MOMENTUM_FLOOR", _load_door2_momentum_floor(mom_cfg_path)))
 
     sync_result = sync_mri_snapshot()
     if sync_result is None:
@@ -970,6 +987,39 @@ def main():
             d2_weight_scale = round(1.0 / sum_w2, 4)
             d2_score = sum((w / sum_w2) * val for name, w, val in present_d2)
 
+        z_mom_pub = round(z_mom, 3) if z_mom is not None else None
+
+        # P3.3 Door-2 falling-knife floor
+        fct_mom = ticker_mom_state.get(t, {})
+        regime_shift_down = bool(fct_mom.get("regime_shift_down") is True)
+        if not regime_shift_down:
+            if "regime_shift_down" in ticker_flags.get(t, []):
+                regime_shift_down = True
+            elif isinstance(fct_mom.get("flags"), list) and "regime_shift_down" in fct_mom["flags"]:
+                regime_shift_down = True
+
+        cur_flags = list(ticker_flags.get(t, []))
+        if z_mom_pub is None:
+            d2_eligible = True
+            if "momentum_missing" not in cur_flags:
+                cur_flags.append("momentum_missing")
+            falling_knife_detail = None
+        else:
+            is_knife = (z_mom_pub < door2_momentum_floor) or regime_shift_down
+            d2_eligible = not is_knife
+            if not d2_eligible:
+                if "falling_knife" not in cur_flags:
+                    cur_flags.append("falling_knife")
+                falling_knife_detail = {
+                    "z_momentum": z_mom_pub,
+                    "floor": door2_momentum_floor,
+                    "regime_shift_down": regime_shift_down,
+                }
+                if d2_ineligible_reason is None:
+                    d2_ineligible_reason = "falling_knife"
+            else:
+                falling_knife_detail = None
+
         cand_data = {
             "ticker": t,
             "sector": sec,
@@ -978,7 +1028,7 @@ def main():
             "archetype": tax["archetype"],
             "mgi_subindustry_id": tax["mgi_subindustry_id"],
             "z_quality": round(z_qual, 3) if z_qual is not None else None,
-            "z_momentum": round(z_mom, 3) if z_mom is not None else None,
+            "z_momentum": z_mom_pub,
             "z_revisions": round(z_rev, 3) if z_rev is not None else None,
             "z_value": round(z_val, 3) if z_val is not None else None,
             "z_exp_gap": round(z_gap, 3) if z_gap is not None else None,
@@ -990,12 +1040,14 @@ def main():
             "door2_weight_scale": d2_weight_scale,
             "door1_ineligible_reason": d1_ineligible_reason,
             "door2_ineligible_reason": d2_ineligible_reason,
+            "d2_eligible": d2_eligible,
+            "falling_knife_detail": falling_knife_detail,
             "pctl_d1": 0.0,
             "pctl_d2": 0.0,
             "best_pctl": 0.0,
             "nominated_doors": [],
             "fct_momentum_state": ticker_mom_state.get(t, {}),
-            "fct_flags": list(ticker_flags.get(t, []))
+            "fct_flags": cur_flags
         }
         scored_profiles[t] = cand_data
 
@@ -1006,11 +1058,12 @@ def main():
     for p in scored_profiles.values():
         p["pctl_d1"] = round(get_percentile(p["score_door1"], all_d1), 1) if p["score_door1"] is not None else 0.0
         p["pctl_d2"] = round(get_percentile(p["score_door2"], all_d2), 1) if p["score_door2"] is not None else 0.0
-        if p["score_door1"] is not None and p["score_door2"] is not None:
+        d2_ok = p.get("d2_eligible", True)
+        if p["score_door1"] is not None and p["score_door2"] is not None and d2_ok:
             p["best_pctl"] = max(p["pctl_d1"], p["pctl_d2"])
         elif p["score_door1"] is not None:
             p["best_pctl"] = p["pctl_d1"]
-        elif p["score_door2"] is not None:
+        elif p["score_door2"] is not None and d2_ok:
             p["best_pctl"] = p["pctl_d2"]
         else:
             p["best_pctl"] = 0.0
@@ -1061,11 +1114,12 @@ def main():
 
     def _door_won(p: Dict[str, Any]) -> str:
         s1, s2 = p.get("score_door1"), p.get("score_door2")
-        if s1 is not None and s2 is not None:
+        d2_ok = p.get("d2_eligible", True)
+        if s1 is not None and s2 is not None and d2_ok:
             return "DOOR_1_COMPOUNDER" if p.get("pctl_d1", 0.0) >= p.get("pctl_d2", 0.0) else "DOOR_2_VALUE_GAP"
         elif s1 is not None:
             return "DOOR_1_COMPOUNDER"
-        elif s2 is not None:
+        elif s2 is not None and d2_ok:
             return "DOOR_2_VALUE_GAP"
         return "NONE"
 
@@ -1166,7 +1220,7 @@ def main():
             k = ",".join(p["door1_pillars_used"])
             d1_pillars_counts[k] = d1_pillars_counts.get(k, 0) + 1
 
-    d2_eligible_count = sum(1 for p in scored_profiles.values() if p["score_door2"] is not None)
+    d2_eligible_count = sum(1 for p in scored_profiles.values() if p["score_door2"] is not None and p.get("d2_eligible", True))
     d2_ineligible_count = len(scored_profiles) - d2_eligible_count
     d2_renormalised_count = sum(1 for p in scored_profiles.values() if p["door2_weight_scale"] is not None and p["door2_weight_scale"] != 1.0)
     d2_ineligible_reasons: Dict[str, int] = {}
@@ -1178,6 +1232,9 @@ def main():
         if p["door2_pillars_used"]:
             k = ",".join(p["door2_pillars_used"])
             d2_pillars_counts[k] = d2_pillars_counts.get(k, 0) + 1
+
+    falling_knife_count_scored = sum(1 for p in scored_profiles.values() if "falling_knife" in p.get("fct_flags", []))
+    falling_knife_count_nominated = sum(1 for p in all_nominated_map.values() if "falling_knife" in p.get("fct_flags", []))
 
     summary = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -1198,6 +1255,9 @@ def main():
         "momentum_source": momentum_source,
         "momentum_coverage": momentum_coverage,
         "z_method": z_method_chosen,
+        "door2_momentum_floor": door2_momentum_floor,
+        "falling_knife_count_scored": falling_knife_count_scored,
+        "falling_knife_count_nominated": falling_knife_count_nominated,
         "pillar_sd": pillar_sd,
         "pillar_sd_degenerate": pillar_sd_degenerate,
         "effective_weights": effective_weights,
@@ -1209,11 +1269,13 @@ def main():
             "pillars_used_counts": d1_pillars_counts,
         },
         "door2_eligibility": {
+            "floor": door2_momentum_floor,
             "eligible_count": d2_eligible_count,
             "ineligible_count": d2_ineligible_count,
             "renormalised_count": d2_renormalised_count,
             "ineligible_reasons": d2_ineligible_reasons,
             "pillars_used_counts": d2_pillars_counts,
+            "falling_knife_count": falling_knife_count_scored,
         },
         "door1_eligible_count": d1_eligible_count,
         "door1_ineligible_count": d1_ineligible_count,
@@ -1277,6 +1339,8 @@ def main():
             "fct_nominated_doors": prof.get("nominated_doors", []),
             "fct_momentum_state": prof.get("fct_momentum_state", ticker_mom_state.get(t, {})),
             "fct_flags": prof.get("fct_flags", list(ticker_flags.get(t, []))),
+            "falling_knife_detail": prof.get("falling_knife_detail"),
+            "d2_eligible": prof.get("d2_eligible", True),
             "door1_pillars_used": prof.get("door1_pillars_used", []),
             "door2_pillars_used": prof.get("door2_pillars_used", []),
             "door1_weight_scale": prof.get("door1_weight_scale"),
@@ -1301,6 +1365,7 @@ def main():
         "momentum_source": momentum_source,
         "momentum_coverage": momentum_coverage,
         "z_method": z_method_chosen,
+        "door2_momentum_floor": door2_momentum_floor,
         "scored_count": eligible_count,
         "band_counts": {
             "research_now": len(rn_set),
