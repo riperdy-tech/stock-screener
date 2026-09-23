@@ -50,7 +50,7 @@ def test_door3_config_defaults():
         "DOOR3_RN_SLOTS": 5,
         "DOOR3_CLUSTER_CAP": 5,
         "DOOR3_MIN_MCAP": 2_000_000_000.0,
-        "DOOR3_QUALITY_MIN_PCTL": 25.0,
+        "DOOR3_PROFITABILITY_MIN_PCTL": 25.0,
         "DOOR3_MAX_JUMP_SHARE": 0.75,
     }
 
@@ -59,8 +59,8 @@ def test_door3_config_defaults():
 
 def _elig(**kw):
     base = dict(
-        mcap=5e9, falling_knife=False, mom_break=False, z_revisions=0.5, z_quality=1.0,
-        quality_pctl25=0.0, adv_usd=1_000_000.0, min_mcap=2e9,
+        mcap=5e9, falling_knife=False, mom_break=False, z_revisions=0.5, roic_proxy_z=1.0,
+        roic_proxy_pctl25=0.0, adv_usd=1_000_000.0, min_mcap=2e9,
         # P3.14b: valid trend-continuity data by default, so tests above this section keep
         # exercising only their own rule in isolation.
         usable_months=11, jump_share=0.3,
@@ -177,25 +177,29 @@ def test_revisions_missing_is_eligible_with_flag():
     assert "revisions_missing" in flags
 
 
-def test_ineligible_quality_below_pctl25():
-    eligible, reason, _ = _elig(z_quality=-0.5, quality_pctl25=0.0)
-    assert eligible is False and reason == "quality_below_pctl25"
+# ── C10 (PHASE_3_APPROVAL.md): profitability (roic_proxy) floor, replacing the old quality
+# floor for Door 3 only — the quality pillar's accruals/margin-stability terms penalise
+# hypergrowth and excluded NVDA/SNDK/WDC/COHR while admitting unprofitable biotechs. ──────────
+
+def test_ineligible_profitability_below_pctl25():
+    eligible, reason, _ = _elig(roic_proxy_z=-0.5, roic_proxy_pctl25=0.0)
+    assert eligible is False and reason == "profitability_below_pctl25"
 
 
-def test_eligible_quality_exactly_at_pctl25():
-    eligible, reason, _ = _elig(z_quality=0.0, quality_pctl25=0.0)
+def test_eligible_profitability_exactly_at_pctl25():
+    eligible, reason, _ = _elig(roic_proxy_z=0.0, roic_proxy_pctl25=0.0)
     assert eligible is True and reason is None
 
 
-def test_ineligible_quality_none():
-    eligible, reason, _ = _elig(z_quality=None)
-    assert eligible is False and reason == "quality_below_pctl25"
+def test_ineligible_roic_proxy_z_none():
+    eligible, reason, _ = _elig(roic_proxy_z=None)
+    assert eligible is False and reason == "no_profitability_data"
 
 
-def test_ineligible_quality_pctl25_none():
-    """No usable quality distribution at all -> nobody can clear it."""
-    eligible, reason, _ = _elig(quality_pctl25=None)
-    assert eligible is False and reason == "quality_below_pctl25"
+def test_ineligible_roic_proxy_pctl25_none():
+    """No usable roic_proxy distribution at all -> nobody can clear it."""
+    eligible, reason, _ = _elig(roic_proxy_pctl25=None)
+    assert eligible is False and reason == "no_profitability_data"
 
 
 def test_adv_missing_is_eligible_with_flag():

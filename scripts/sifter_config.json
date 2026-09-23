@@ -14,7 +14,8 @@
     "DOOR3_RN_SLOTS": 5,
     "DOOR3_CLUSTER_CAP": 5,
     "DOOR3_MIN_MCAP": 2000000000,
-    "DOOR3_QUALITY_MIN_PCTL": 25,
+    "DOOR3_PROFITABILITY_MIN_PCTL": 25,
+    "_note_profitability_min_pctl": "C10 (PHASE_3_APPROVAL.md, orchestrator measurement 2026-09-24) — renamed from DOOR3_QUALITY_MIN_PCTL. The quality pillar's accruals and gross-margin-stability terms penalise hypergrowth working capital, so the old quality floor excluded NVDA (quality z -1.34), SNDK (12-1 return +1,296%), WDC and COHR while admitting unprofitable biotechs. Replaced with a profitability-only floor: sector-neutral roic_proxy z >= this percentile of the scored universe's roic_proxy z distribution (missing roic_proxy -> not eligible, reason no_profitability_data). Applies to Door 3 only; Door 1/2's quality pillar is unchanged.",
     "DOOR3_MAX_JUMP_SHARE": 0.75,
     "_note_jump_share": "P3.14b (orchestrator measurement 2026-09-24) — Door 3's first run picked PACS (one month = 90% of its 12-1 log gain, +177%) and IBRX (98%, +216%, only 5/11 months up): event jumps, not trends. jump_share = ln(1+largest single-month return)/ln(1+12-1 return); above this is not Door-3-eligible (reason jump_driven). Momentum research (Da, Gurun & Warachka 2014, 'frog in the pan') finds continuous gains persist and discrete jumps do not."
   },

@@ -156,7 +156,10 @@ def _load_door3_config(config_path: Optional[Path] = None) -> Dict[str, float]:
         "DOOR3_RN_SLOTS": int(d3.get("DOOR3_RN_SLOTS", 5)),
         "DOOR3_CLUSTER_CAP": int(d3.get("DOOR3_CLUSTER_CAP", 5)),
         "DOOR3_MIN_MCAP": float(d3.get("DOOR3_MIN_MCAP", 2_000_000_000.0)),
-        "DOOR3_QUALITY_MIN_PCTL": float(d3.get("DOOR3_QUALITY_MIN_PCTL", 25.0)),
+        # C10 (PHASE_3_APPROVAL.md): renamed from DOOR3_QUALITY_MIN_PCTL — the quality pillar
+        # penalises hypergrowth (accruals, margin instability) and excluded NVDA/SNDK/WDC/COHR;
+        # Door 3's floor is now profitability (sector-neutral roic_proxy z) only.
+        "DOOR3_PROFITABILITY_MIN_PCTL": float(d3.get("DOOR3_PROFITABILITY_MIN_PCTL", 25.0)),
         "DOOR3_MAX_JUMP_SHARE": float(d3.get("DOOR3_MAX_JUMP_SHARE", 0.75)),
     }
 
@@ -252,8 +255,8 @@ def door3_eligibility(
     falling_knife: bool,
     mom_break: Optional[bool],
     z_revisions: Optional[float],
-    z_quality: Optional[float],
-    quality_pctl25: Optional[float],
+    roic_proxy_z: Optional[float],
+    roic_proxy_pctl25: Optional[float],
     adv_usd: Optional[float],
     min_mcap: float,
     min_adv: float = 300_000.0,
@@ -277,6 +280,13 @@ def door3_eligibility(
     at all (`short_history`); False -> the monthly trend itself says no (`
     mom_break_unverified_monthly_trend_failed`); True -> eligible, flagged
     `mom_break_unverified_monthly_trend_ok` so the name is never mistaken for a verified pass.
+
+    C10 (PHASE_3_APPROVAL.md): the old quality-pillar floor is replaced, for Door 3 only, by a
+    PROFITABILITY floor — the quality pillar's accruals/margin-stability terms penalise
+    hypergrowth and excluded NVDA/SNDK/WDC/COHR while admitting unprofitable biotechs.
+    `roic_proxy_z` is the sector-neutral z of roic_proxy alone; eligible only when it is >=
+    `roic_proxy_pctl25` (the scored universe's 25th percentile of that z). Either missing ->
+    not eligible (reason `no_profitability_data`).
     """
     extra_flags: List[str] = []
     if mcap is None or mcap < min_mcap:
@@ -299,8 +309,10 @@ def door3_eligibility(
         extra_flags.append("revisions_missing")
     elif z_revisions < 0:
         return False, "revisions_negative", extra_flags
-    if z_quality is None or quality_pctl25 is None or z_quality < quality_pctl25:
-        return False, "quality_below_pctl25", extra_flags
+    if roic_proxy_z is None or roic_proxy_pctl25 is None:
+        return False, "no_profitability_data", extra_flags
+    if roic_proxy_z < roic_proxy_pctl25:
+        return False, "profitability_below_pctl25", extra_flags
     if adv_usd is None:
         extra_flags.append("adv_missing")
     elif adv_usd < min_adv:
@@ -1994,10 +2006,12 @@ def main():
     door3_cfg = _load_door3_config(sifter_cfg_path)
     already_nominated_set: Set[str] = set(all_nominated_map.keys())
 
-    quality_vals_sorted = sorted(
-        p["z_quality"] for p in scored_profiles.values() if p["z_quality"] is not None
+    # C10 (PHASE_3_APPROVAL.md): Door 3's floor is profitability (sector-neutral roic_proxy z)
+    # only, not the composite quality pillar — see door3_eligibility's docstring.
+    roic_proxy_vals_sorted = sorted(
+        v for v in (z["roic_proxy"].get(t) for t in scored_tickers) if v is not None
     )
-    door3_quality_pctl25 = pctl(quality_vals_sorted, door3_cfg["DOOR3_QUALITY_MIN_PCTL"])
+    door3_roic_proxy_pctl25 = pctl(roic_proxy_vals_sorted, door3_cfg["DOOR3_PROFITABILITY_MIN_PCTL"])
 
     door3_ineligible_reasons: Dict[str, int] = {}
     door3_candidates: List[Dict[str, Any]] = []
@@ -2021,8 +2035,8 @@ def main():
             falling_knife="falling_knife" in p.get("fct_flags", []),
             mom_break=mom_break,
             z_revisions=p.get("z_revisions"),
-            z_quality=p.get("z_quality"),
-            quality_pctl25=door3_quality_pctl25,
+            roic_proxy_z=z["roic_proxy"].get(t),
+            roic_proxy_pctl25=door3_roic_proxy_pctl25,
             adv_usd=ticker_adv.get(t),
             min_mcap=door3_cfg["DOOR3_MIN_MCAP"],
             usable_months=fct_mom.get("usable_months"),
