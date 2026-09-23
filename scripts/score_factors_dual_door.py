@@ -164,8 +164,13 @@ def _load_door3_config(config_path: Optional[Path] = None) -> Dict[str, float]:
         # Door 3's floor is now profitability (sector-neutral roic_proxy z) only.
         "DOOR3_PROFITABILITY_MIN_PCTL": float(d3.get("DOOR3_PROFITABILITY_MIN_PCTL", 25.0)),
         "DOOR3_MAX_JUMP_SHARE": float(d3.get("DOOR3_MAX_JUMP_SHARE", 0.75)),
+        # R1 (orchestrator refinement 2026-09-24): jump rule applies only when 12-1 >= 0.50
+        "DOOR3_JUMP_RULE_MIN_RETURN": float(d3.get("DOOR3_JUMP_RULE_MIN_RETURN", 0.50)),
     }
 
+
+# R1: jump rule applies only when 12-1 return is at least this threshold (0.50)
+DOOR3_JUMP_RULE_MIN_RETURN = 0.50
 
 # P3.14b: fewer usable monthly returns than this in the 12-1 window and a name's trend can't be
 # judged at all (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24).
@@ -268,12 +273,18 @@ def door3_eligibility(
     min_usable_months: int = DOOR3_MIN_USABLE_MONTHS,
     max_jump_share: float = 0.75,
     monthly_trend_ok: Optional[bool] = None,
+    mom_12_1: Optional[float] = None,
+    jump_rule_min_return: float = 0.50,
 ) -> Tuple[bool, Optional[str], List[str]]:
     """P3.14 Door 3 eligibility (PHASE_3_ADDENDUM.md, all required), plus the P3.14b
     trend-continuity rule (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24):
     fewer than `min_usable_months` usable monthly returns in the 12-1 window -> not eligible
     (reason `short_history`); jump_share > `max_jump_share` -> not eligible (reason
-    `jump_driven`). Returns (eligible, ineligible_reason, extra_flags) — extra_flags carries
+    `jump_driven`).
+    R1 (orchestrator refinement 2026-09-24): the jump rule applies only when 12-1 >= 0.50
+    (a small total gain makes any single month look dominant — NVDA at +18% was excluded with
+    jump_share 0.795).
+    Returns (eligible, ineligible_reason, extra_flags) — extra_flags carries
     revisions_missing / adv_missing even when the name is otherwise eligible (an absence rides
     as a flag, never silently gated).
 
@@ -306,7 +317,8 @@ def door3_eligibility(
         extra_flags.append("mom_break_unverified_monthly_trend_ok")
     if usable_months is None or usable_months < min_usable_months:
         return False, "short_history", extra_flags
-    if jump_share is not None and jump_share > max_jump_share:
+    # R1: jump rule applies only when 12-1 >= jump_rule_min_return
+    if (mom_12_1 is None or mom_12_1 >= jump_rule_min_return) and jump_share is not None and jump_share > max_jump_share:
         return False, "jump_driven", extra_flags
     if z_revisions is None:
         extra_flags.append("revisions_missing")
@@ -2215,6 +2227,8 @@ def main():
             jump_share=fct_mom.get("jump_share"),
             max_jump_share=door3_cfg["DOOR3_MAX_JUMP_SHARE"],
             monthly_trend_ok=monthly_trend_ok,
+            mom_12_1=fct_mom.get("mom_12_1"),
+            jump_rule_min_return=door3_cfg.get("DOOR3_JUMP_RULE_MIN_RETURN", 0.50),
         )
         if not eligible:
             door3_ineligible_reasons[reason] = door3_ineligible_reasons.get(reason, 0) + 1

@@ -52,6 +52,7 @@ def test_door3_config_defaults():
         "DOOR3_MIN_MCAP": 2_000_000_000.0,
         "DOOR3_PROFITABILITY_MIN_PCTL": 25.0,
         "DOOR3_MAX_JUMP_SHARE": 0.75,
+        "DOOR3_JUMP_RULE_MIN_RETURN": 0.50,
     }
 
 
