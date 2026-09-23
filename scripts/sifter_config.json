@@ -25,10 +25,14 @@
     "all_cluster_median_swing": 0.041
   },
   "veto_switches": {
-    "_note": "Switches for new P3.6 forensic and solvency vetoes. All set to false (flag_only) in this commit.",
+    "_note": "Switches for new P3.6 forensic and solvency vetoes. All set to false (flag_only) in this commit. P3.6b: altman_z and beneish_standalone are now permanently flag-only in code (see PHASE_3_QUANT_BOOK.md P3.6b) — these two keys are kept at false for the record but no longer gate a veto branch.",
     "altman_z": false,
     "beneish_standalone": false,
     "no_liquidity_data": false
+  },
+  "altman_sector_overrides": {
+    "_note": "P3.6b: layered on top of reverse_config.json's thresholds.stage1.sector_altman_z_min (owned by score_reverse.py — not edited here). Utilities is structurally leveraged like Financials/Real Estate, which reverse_config.json's table doesn't yet carry.",
+    "Utilities": 0.0
   },
   "dma200_slope_lookback_days": 20,
   "pct_from_52w_high_break_threshold": -0.20,

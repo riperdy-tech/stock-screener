@@ -42,7 +42,7 @@ DATA = ROOT / "public" / "data"
 sys.path.append(str(Path(__file__).resolve().parent))
 from industry_taxonomy import get_taxonomy_profile, normalize_industry
 from score_paradigm import compute_skip_month_return, compute_high_proximity
-from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR
+from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, LARGE_CAP_FLAG_ONLY_USD
 import depth_conviction
 import tradability
 import peer_paths
@@ -148,6 +148,20 @@ def _load_altman_thresholds(config_path: Optional[Path] = None) -> Tuple[float, 
     default_min = float(st1.get("altman_z_min", 1.8))
     sec_map = {k: float(v) for k, v in st1.get("sector_altman_z_min", {}).items() if not k.startswith("_")}
     return default_min, sec_map
+
+
+def _load_altman_sector_overrides(config_path: Optional[Path] = None) -> Dict[str, float]:
+    """P3.6b: sector Altman-Z overrides layered on top of reverse_config.json's table (owned
+    by score_reverse.py and not edited here) — e.g. Utilities, structurally leveraged like
+    Financials/Real Estate, which reverse_config.json doesn't carry yet."""
+    cfg = _load_sifter_config(config_path)
+    overrides = cfg.get("altman_sector_overrides", {})
+    return {k: float(v) for k, v in overrides.items() if not k.startswith("_")}
+
+
+# P3.6b: sectors where accrual/manipulation ratios are structurally uninformative (asset
+# managers, BDCs, mortgage REITs, a physical-gold trust) — same exemption Altman already uses.
+FORENSIC_VETO_EXEMPT_SECTORS = {"Financial Services", "Real Estate"}
 
 
 DOOR2_MOMENTUM_FLOOR = _load_door2_momentum_floor()
@@ -590,8 +604,9 @@ def main():
     default_cycle_window, cluster_cycle_windows = _load_mid_cycle_config(sifter_cfg_path)
     veto_switches = globals().get("VETO_SWITCHES", _load_veto_switches(sifter_cfg_path))
     default_altman_min, sector_altman_map = _load_altman_thresholds()
-    switch_altman = bool(veto_switches.get("altman_z", False))
-    switch_beneish = bool(veto_switches.get("beneish_standalone", False))
+    sector_altman_map = {**sector_altman_map, **_load_altman_sector_overrides(sifter_cfg_path)}
+    # P3.6b: altman_z and beneish_standalone are permanently flag-only (never read the switch
+    # below — see the forensic block). no_liquidity_data is untouched by P3.6b.
     switch_no_liquidity_data = bool(veto_switches.get("no_liquidity_data", False))
 
     # Read previous factor_scores.json before anything overwrites it (P3.5 band hysteresis)
@@ -741,6 +756,10 @@ def main():
     ticker_mid_cycle: Dict[str, Dict[str, Any]] = {}
     vetoes: Dict[str, str] = {}
     veto_detail: Dict[str, str] = {}
+    # P3.6b: values for the new flag-only forensic/solvency flags, keyed ticker -> flag name ->
+    # detail dict, so the analyst pack can print what tripped the flag (fct_flags itself stays
+    # a plain list of names, same shape every other consumer already expects).
+    ticker_flag_detail: Dict[str, Dict[str, Any]] = {}
     eligible_count = 0
 
     # Names the engine is not ALLOWED to trade, regardless of how they score: gone from the
@@ -809,47 +828,81 @@ def main():
             vetoes[t] = "NON_OPERATING_SHELL_SPAC"
             continue
 
-        # 2. Hard Forensic & Insolvency Vetoes (P3.6)
+        # 2. Hard Forensic & Insolvency Vetoes (P3.6b — flag large caps instead of culling)
         bat = battery.get(t, {})
         acc = num(bat.get("accruals_ratio"))
         m_score = num(bat.get("m_score"))
         f_score = num(bat.get("f_score"))
         net_iss_1y = num(bat.get("net_issuance_1y"))
+        sector = s.get("sector") or "Unknown"
 
-        # Existing combined forensic veto stays as is for now
-        if m_score is not None and m_score > -1.78 and acc is not None and acc > 0.10:
+        # FORENSIC_MANIPULATION_RISK (P3.6b): the old combined rule (m_score > -1.78 AND
+        # accruals > 0.10) culled NVDA and every large-cap AI/semi name with hypergrowth
+        # working capital — Beneish's sales-growth index is known to flag fast growers, not
+        # just manipulators. Now it vetoes only the tight case: accruals > 0.20 AND
+        # m_score > -1.78 AND sector isn't structurally accrual-heavy (Financials/Real
+        # Estate) AND market cap is below the large-cap flag-only floor. Everything the old
+        # rule would have caught, and every accruals > 0.20 name (any sector), is a flag —
+        # never silently gated for a name an analyst can look at directly.
+        forensic_accruals_over_20 = acc is not None and acc > 0.20
+        forensic_m_score_elevated = m_score is not None and m_score > -1.78
+        forensic_old_rule_fired = forensic_m_score_elevated and acc is not None and acc > 0.10
+        forensic_sector_exempt = sector in FORENSIC_VETO_EXEMPT_SECTORS
+        forensic_large_cap_exempt = mcap >= LARGE_CAP_FLAG_ONLY_USD
+        if (forensic_accruals_over_20 and forensic_m_score_elevated
+                and not forensic_sector_exempt and not forensic_large_cap_exempt):
             vetoes[t] = "FORENSIC_MANIPULATION_RISK"
             continue
+        if forensic_accruals_over_20 or forensic_old_rule_fired:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "forensic_red_flag" not in cur_flags:
+                cur_flags.append("forensic_red_flag")
+            if forensic_accruals_over_20 and forensic_m_score_elevated and forensic_sector_exempt:
+                forensic_reason = "sector_exempt"
+            elif forensic_accruals_over_20 and forensic_m_score_elevated and forensic_large_cap_exempt:
+                forensic_reason = "large_cap_flag_only"
+            elif forensic_accruals_over_20:
+                forensic_reason = "accruals_over_0.20"
+            else:
+                forensic_reason = "legacy_combined_rule_accruals_over_0.10"
+            ticker_flag_detail.setdefault(t, {})["forensic_red_flag"] = {
+                "accruals": acc, "m_score": m_score, "reason": forensic_reason,
+            }
 
-        # Beneish standalone: veto when m_score > -1.78 and all inputs present, flag beneish_unverifiable when inputs missing
+        # Beneish standalone (P3.6b): never a veto — the M-score's sales-growth index (SGI) is
+        # biased toward fast organic growers, not just manipulators. Flag only, with the
+        # M-score value attached for the analyst. beneish_unverifiable (inputs missing) is
+        # unchanged.
         m_inputs_missing = bat.get("m_score_inputs_missing")
         beneish_inputs_complete = (isinstance(m_inputs_missing, list) and len(m_inputs_missing) == 0) or (isinstance(m_inputs_missing, (int, float)) and m_inputs_missing == 0)
         if m_score is not None and beneish_inputs_complete and m_score > -1.78:
-            if switch_beneish:
-                vetoes[t] = "BENEISH_MANIPULATION_RISK"
-                continue
-            else:
-                cur_flags = ticker_flags.setdefault(t, [])
-                if "beneish_manipulation_risk" not in cur_flags:
-                    cur_flags.append("beneish_manipulation_risk")
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "beneish_flag" not in cur_flags:
+                cur_flags.append("beneish_flag")
+            ticker_flag_detail.setdefault(t, {})["beneish_flag"] = {
+                "m_score": m_score,
+                "_note": "Beneish M-score standalone is flag-only, never a veto: the sales-growth index is biased toward fast organic growers.",
+            }
         elif not beneish_inputs_complete:
             cur_flags = ticker_flags.setdefault(t, [])
             if "beneish_unverifiable" not in cur_flags:
                 cur_flags.append("beneish_unverifiable")
 
-        # Altman Z from stocks[t].metrics.zScore with reverse_config sector_altman_z_min / altman_z_min 1.8
+        # Altman Z from stocks[t].metrics.zScore with reverse_config sector_altman_z_min /
+        # altman_z_min 1.8, plus the sifter's own Utilities override (P3.6b). Warning flag
+        # only, never a veto: the discriminant model isn't a valid solvency test for every
+        # sector and a >5%-of-survivors veto rate was the P3.6 STOP condition.
         metrics = s.get("metrics") or {}
         altman_z = num(metrics.get("zScore"))
-        sector = s.get("sector") or "Unknown"
         z_min = sector_altman_map.get(sector, default_altman_min)
         if altman_z is not None and altman_z < z_min:
-            if switch_altman:
-                vetoes[t] = "INSOLVENCY_DISTRESS_ALTMAN_Z"
-                continue
-            else:
-                cur_flags = ticker_flags.setdefault(t, [])
-                if "insolvency_distress_altman_z" not in cur_flags:
-                    cur_flags.append("insolvency_distress_altman_z")
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "insolvency_distress_altman_z" not in cur_flags:
+                cur_flags.append("insolvency_distress_altman_z")
+            ticker_flag_detail.setdefault(t, {})["insolvency_distress_altman_z"] = {
+                "altman_z": altman_z, "z_min": z_min, "sector": sector,
+                "_note": "Altman Z is a warning flag only, never a veto.",
+            }
 
         # Sloan accruals flag (> 0.20)
         if acc is not None and acc > 0.20:
@@ -883,9 +936,20 @@ def main():
         equity = num(latest.get("equity"))
         ev = mcap + lt_debt - cash
 
+        # CHRONIC_OPERATING_LOSS_LEVERAGE (P3.6b): a single fiscal year's numbers shouldn't cull
+        # a large cap outright — CRWV/NBIS/IREN/CIFR were vetoed on one year of AI-buildout
+        # capex. Same large-cap rule as the forensic vetoes: veto only below the flag-only
+        # floor; at or above it, flag with the raw numbers for the analyst.
         if fcf is not None and fcf < 0 and op is not None and op < 0 and lt_debt > 1e9:
-            vetoes[t] = "CHRONIC_OPERATING_LOSS_LEVERAGE"
-            continue
+            if mcap < LARGE_CAP_FLAG_ONLY_USD:
+                vetoes[t] = "CHRONIC_OPERATING_LOSS_LEVERAGE"
+                continue
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "loss_making_leveraged" not in cur_flags:
+                cur_flags.append("loss_making_leveraged")
+            ticker_flag_detail.setdefault(t, {})["loss_making_leveraged"] = {
+                "fcf": fcf, "operating_income": op, "lt_debt": lt_debt,
+            }
 
         eligible_count += 1
 
@@ -1217,6 +1281,7 @@ def main():
             "nominated_doors": [],
             "fct_momentum_state": ticker_mom_state.get(t, {}),
             "fct_flags": cur_flags,
+            "fct_flag_detail": ticker_flag_detail.get(t, {}),
             "mid_cycle_window_years": ticker_mid_cycle.get(t, {}).get("window_years") if t in ticker_mid_cycle else None,
             "mid_cycle_years_used": ticker_mid_cycle.get(t, {}).get("years_used") if t in ticker_mid_cycle else None,
         }
@@ -1554,6 +1619,7 @@ def main():
             "fct_nominated_doors": prof.get("nominated_doors", []),
             "fct_momentum_state": prof.get("fct_momentum_state", ticker_mom_state.get(t, {})),
             "fct_flags": prof.get("fct_flags", list(ticker_flags.get(t, []))),
+            "fct_flag_detail": prof.get("fct_flag_detail", ticker_flag_detail.get(t, {})),
             "falling_knife_detail": prof.get("falling_knife_detail"),
             "d2_eligible": prof.get("d2_eligible", True),
             "door1_pillars_used": prof.get("door1_pillars_used", []),
