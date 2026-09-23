@@ -2524,6 +2524,10 @@ def main():
                 "value": prof.get("z_value"),
                 "exp_gap": prof.get("z_exp_gap")
             },
+            # R3 (orchestrator refinement 2026-09-24): publish z_momentum_universe and
+            # z_momentum_sector_neutral so build_daily_price_history's top-60 seed works.
+            "z_momentum_universe": prof.get("z_momentum_universe"),
+            "z_momentum_sector_neutral": prof.get("z_momentum_sector_neutral"),
             "fct_contributions": _contributions(prof),
             # P3.9 (SCR-05): None on rows the reverse-DCF exp_gap branch never touched (banks,
             # REITs, no fundamentals) — not a fabricated 0.0.

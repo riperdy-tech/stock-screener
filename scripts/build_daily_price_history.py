@@ -4,7 +4,7 @@ Produces public/data/daily_closes.json containing 400 trading days of adjusted d
 and volume for:
 1. Research Now (RN) and Watchlist (WL) of the latest factor_scores.json
 2. Every ticker in public/data/depth_overlay.json
-3. Every ticker in the previous public/data/momentum_state.json (so exits keep history)
+3. Every ticker in the previous public/data/daily_closes.json (so exits keep history)
 4. 17 sector/cluster ETF proxies + IWM (18 ETFs total)
 
 Features:
