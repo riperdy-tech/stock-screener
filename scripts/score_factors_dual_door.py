@@ -62,6 +62,7 @@ FACTOR_SCORES_COMPAT_JSON = DATA / "factor_scores.json"
 SECTOR_RANKING_MAX_AGE_DAYS = 45
 
 Z_CLAMP = 3.0
+# Default stays "winsor": under gaussian_rank z_exp_gap ties do not disappear (they stem from raw gap clamping), failing pre-registered adoption rule.
 Z_METHOD = os.environ.get("Z_METHOD", "winsor")
 UNIT_VARIANCE = True
 TOTAL_NOMINATION_TARGET = 135
