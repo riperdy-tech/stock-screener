@@ -100,7 +100,7 @@ def test_actionable_false_still_skips_entirely(tmp_path, monkeypatch):
     assert "fct_band_llm" not in results["NON_ACTIONABLE"]
 
 
-def test_missing_mos_never_defaults_to_zero_and_blocks_any_band():
+def test_missing_mos_blocks_promotion_for_undervalued():
     ov = {
         "NO_MOS": {"direction": "undervalued", "actionable": True},   # neither MoS field present
     }
@@ -113,6 +113,57 @@ def test_missing_mos_never_defaults_to_zero_and_blocks_any_band():
     assert "fct_band_llm" not in e
     assert "fct_percentile_llm" not in e
     assert e["fct_llm"] == "none"
+
+
+def test_missing_mos_overvalued_demotes_and_applies_low_quality_veto():
+    """C3: overvalued demotion and low-quality veto still apply when MoS is missing."""
+    ov = {
+        "OV_NO_MOS_LOW_CONV": {
+            "direction": "overvalued", "actionable": True,
+            "conviction_score": 5.0,  # < 8.0 -> triggers llm_reject
+        },
+        "OV_NO_MOS_HIGH_CONV": {
+            "direction": "overvalued", "actionable": True,
+            "conviction_score": 10.0,
+        },
+    }
+    results = {
+        "OV_NO_MOS_LOW_CONV": {"fct_band": "watchlist", "fct_percentile": 80.0},
+        "OV_NO_MOS_HIGH_CONV": {"fct_band": "watchlist", "fct_percentile": 80.0},
+    }
+    applied = _run_overlay(ov, results)
+
+    assert applied == 2
+    e_low = results["OV_NO_MOS_LOW_CONV"]
+    assert e_low["fct_llm"] == "demoted"
+    assert e_low["fct_band_llm"] == "pass"
+    assert e_low["fct_percentile_llm"] == 35.0
+    assert e_low["fct_llm_veto"] == "llm_reject"
+    assert e_low["fct_llm_note"] == "no_mos"
+
+    e_high = results["OV_NO_MOS_HIGH_CONV"]
+    assert e_high["fct_llm"] == "demoted"
+    assert e_high["fct_band_llm"] == "pass"
+    assert e_high["fct_percentile_llm"] == 35.0
+    assert e_high["fct_llm_veto"] is None
+    assert e_high["fct_llm_note"] == "no_mos"
+
+
+def test_missing_mos_hold_still_bands_monitor():
+    """C3: hold still bands as monitor when MoS is missing."""
+    ov = {
+        "HOLD_NO_MOS": {"direction": "hold", "actionable": True},
+    }
+    results = {
+        "HOLD_NO_MOS": {"fct_band": "pass", "fct_percentile": 50.0},
+    }
+    applied = _run_overlay(ov, results)
+
+    assert applied == 1
+    e = results["HOLD_NO_MOS"]
+    assert e["fct_band_llm"] == "monitor"
+    assert e["fct_percentile_llm"] == 75.0
+    assert e["fct_llm_note"] == "no_mos"
 
 
 def test_mos_vs_median_pct_fallback_is_noted_when_base_is_absent():

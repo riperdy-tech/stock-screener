@@ -1001,13 +1001,14 @@ def apply_llm_overlay(results):
         e["fct_llm_note"] = mos_note
         e["fct_llm_gate_version"] = FCT_LLM_GATE_VERSION
 
-        if m is None:
-            applied += 1
-            continue   # no_mos: no promotion, no band — never a guessed m.
-
         # DIRECTION drives the band; m only orders WITHIN a band so the site's percentile-delta
         # stays monotonic. Conviction is NOT in the band — it gates only the veto below.
+        # C3: a missing margin of safety blocks PROMOTION only; hold and overvalued still band,
+        # and the low-quality overvalued veto still applies.
         if direction == "undervalued":
+            if m is None:
+                applied += 1
+                continue   # no_mos: blocks promotion only, no band — never a guessed m.
             thesis_breached = v.get("thesis_status") == "breached"
             fct_pctl = e.get("fct_percentile")
             floors_ok = (
@@ -1028,7 +1029,7 @@ def apply_llm_overlay(results):
                 elif mos_note:
                     e["fct_llm_note"] = mos_note
         elif direction == "overvalued":
-            pctl_val = clamp(35.0 + m * 0.5, 0.0, 69.0)
+            pctl_val = clamp(35.0 + m * 0.5, 0.0, 69.0) if m is not None else 35.0
             e["fct_llm"] = "demoted"
             # Hard-reject ONLY the low-quality overvalued: no value edge AND no quality edge. A
             # high-conviction overvalued name is a pullback candidate -> watchlist, not a reject.
@@ -1036,7 +1037,7 @@ def apply_llm_overlay(results):
             if conv is not None and conv < CONV_VETO:
                 e["fct_llm_veto"] = "llm_reject"
         else:  # hold — price inside the model's band, no directional edge
-            pctl_val = clamp(75.0 + m * 0.2, 70.0, 89.0)
+            pctl_val = clamp(75.0 + m * 0.2, 70.0, 89.0) if m is not None else 75.0
         e["fct_percentile_llm"] = round(pctl_val, 1)
         e["fct_band_llm"] = _reband(pctl_val)
         applied += 1
