@@ -42,6 +42,8 @@ sys.path.append(str(Path(__file__).resolve().parent))
 from industry_taxonomy import get_taxonomy_profile, normalize_industry
 import depth_conviction
 import tradability
+import peer_paths
+from mri_sync import sync_mri_snapshot
 
 STOCKS_JSON = DATA / "stocks.json"
 PRICE_HISTORY_JSON = DATA / "price_history.json"
@@ -49,9 +51,12 @@ FUNDAMENTALS_HISTORY_JSON = DATA / "fundamentals_history.json"
 BATTERY_JSON = DATA / "fundamentals_battery.json"
 EPS_TRAJECTORY_JSON = DATA / "eps_trajectory.json"
 TIER1_SURVIVORS_JSON = DATA / "tier1_hygiene_survivors.json"
-CURRENT_SECTOR_RANKING_JSON = DATA / "current_sector_ranking.json"
+MRI_SNAPSHOT_SECTOR_RANKING_JSON = DATA / "mri" / "current_sector_ranking.json"
 OUT_JSON = DATA / "factor_scores_dual_door.json"
 FACTOR_SCORES_COMPAT_JSON = DATA / "factor_scores.json"
+
+# MRI-11: matches MRI's own CURRENT_REGIME_MAX_AGE_DAYS (regime_status.py:18).
+SECTOR_RANKING_MAX_AGE_DAYS = 45
 
 Z_CLAMP = 3.0
 TOTAL_NOMINATION_TARGET = 135
@@ -80,6 +85,146 @@ def load_json(path: Path, default=None):
         return default
     with path.open("r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def _parse_mri_date(raw: Optional[str]) -> Optional[datetime]:
+    """MRI writes `date` as `YYYY-MM-DD` (sector ranking) or `YYYY-MM-DD HH:MM:SS`
+    (current_regime.json's older shape); accept both. None when absent or unparseable."""
+    if not raw:
+        return None
+    for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(raw, fmt).replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+    return None
+
+
+def _sector_tilt_score(item: Dict[str, Any]) -> Optional[float]:
+    """Schema 2 publishes `tilt_score`; schema 1 published `confidence_adjusted_score`, falling
+    back to `raw_sector_score`. A true 0.0 in any of these is a value and must not fall through
+    to the next key — only a missing (None) key does. None means the sector carries no score."""
+    for key in ("tilt_score", "confidence_adjusted_score", "raw_sector_score"):
+        val = item.get(key)
+        if val is not None:
+            return float(val)
+    return None
+
+
+def _validation_gate_open(macro_data: Dict[str, Any]) -> Tuple[bool, str]:
+    """The operator-approved validation gate (P0_0_MRI_TARGET_ARCHITECTURE.md §7.1): a non-zero
+    sector tilt is applied only when the ranking artifact's validation.horizon_3m shows a
+    positive rank IC with overlap-corrected t >= 2. A missing or null validation block — which is
+    what MRI publishes today — fails closed to neutral; it is never treated as a pass."""
+    validation = macro_data.get("validation")
+    horizon = validation.get("horizon_3m") if isinstance(validation, dict) else None
+    if not isinstance(horizon, dict):
+        return False, "validation_block_missing"
+    rank_ic = horizon.get("rank_ic")
+    t_stat = horizon.get("t_overlap_corrected")
+    if rank_ic is None or t_stat is None:
+        return False, "validation_block_missing"
+    if rank_ic <= 0:
+        return False, "ic_not_positive"
+    if t_stat < 2:
+        return False, "t_below_threshold"
+    return True, "validated_edge"
+
+
+def load_sector_ranking() -> Tuple[Dict[str, float], str, Dict[str, Any]]:
+    """Resolve the MRI -> screener sector-quota contract (MRI-11).
+
+    Resolution order: (1) peer_paths.mri_outputs_dir(), the live MRI checkout (operator's PC,
+    self-hosted runner); (2) the committed snapshot at public/data/mri/, refreshed by
+    mri_sync.sync_mri_snapshot(); (3) neutral fallback with a stated reason — never a silent
+    constant.
+
+    Returns (macro_scores_by_id, reported_regime, meta). macro_scores_by_id maps sector_id ->
+    tilt_score and is populated only when the validation gate (below) is open; otherwise it is
+    empty and every sector quota falls back to the base via the caller's .get(id, 0.0).
+
+    meta.sector_quota_source is one of:
+      "mri"                      - read from the live MRI checkout, validation gate open
+      "mri_snapshot"              - read from the committed snapshot, validation gate open
+      "neutral_fallback"          - no usable ranking found (missing/unparseable/invalid/stale/
+                                     future-dated); quotas are neutral because there is no data
+      "neutral_no_validated_edge" - a usable, fresh ranking was found but the validation gate is
+                                     closed; quotas are neutral because the tilt is not trusted
+    """
+    candidates = []
+    outputs_dir = peer_paths.mri_outputs_dir()
+    if outputs_dir is not None and outputs_dir.exists():
+        candidates.append(("mri", outputs_dir / "current_sector_ranking.json"))
+    candidates.append(("mri_snapshot", MRI_SNAPSHOT_SECTOR_RANKING_JSON))
+
+    macro_data, source, path, load_reason = None, None, None, "no_source_found"
+    for candidate_source, candidate_path in candidates:
+        if not candidate_path.exists():
+            continue
+        try:
+            macro_data = json.loads(candidate_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            load_reason = f"unparseable:{exc}"
+            continue
+        source, path = candidate_source, candidate_path
+        break
+
+    if macro_data is None:
+        meta = {
+            "sector_quota_source": "neutral_fallback", "reason": load_reason,
+            "path": None, "date": None, "age_days": None,
+            "macro_confidence": None, "n_sectors": 0,
+        }
+        return {}, "neutral", meta
+
+    reported_regime = macro_data.get("reported_macro_regime") or macro_data.get("reported_regime") or "neutral"
+    macro_confidence = macro_data.get("macro_confidence")
+    sector_rows = macro_data.get("sector_ranking") or []
+    n_sectors = len(sector_rows)
+    date_raw = macro_data.get("date")
+    parsed_date = _parse_mri_date(date_raw)
+    now = datetime.now(timezone.utc)
+    age_days = (now - parsed_date).days if parsed_date is not None else None
+
+    fallback_reason = None
+    if macro_data.get("valid") is False:
+        fallback_reason = "invalid_flag_false"
+    elif parsed_date is None:
+        fallback_reason = "date_missing_or_unparseable"
+    elif parsed_date > now:
+        fallback_reason = "future_dated"
+    elif age_days > SECTOR_RANKING_MAX_AGE_DAYS:
+        fallback_reason = f"stale_{age_days}d"
+
+    if fallback_reason is not None:
+        meta = {
+            "sector_quota_source": "neutral_fallback", "reason": fallback_reason,
+            "path": str(path), "date": date_raw, "age_days": age_days,
+            "macro_confidence": macro_confidence, "n_sectors": n_sectors,
+        }
+        return {}, reported_regime, meta
+
+    gate_open, gate_reason = _validation_gate_open(macro_data)
+
+    macro_scores_by_id: Dict[str, float] = {}
+    if gate_open:
+        for item in sector_rows:
+            sid = item.get("sector_id")
+            if not sid:
+                continue
+            score = _sector_tilt_score(item)
+            if score is None:
+                print(f"  [sector ranking] {sid}: no score field present, skipped (base quota applies)")
+                continue
+            macro_scores_by_id[sid] = score
+
+    meta = {
+        "sector_quota_source": source if gate_open else "neutral_no_validated_edge",
+        "reason": gate_reason,
+        "path": str(path), "date": date_raw, "age_days": age_days,
+        "macro_confidence": macro_confidence, "n_sectors": n_sectors,
+    }
+    return macro_scores_by_id, reported_regime, meta
 
 
 def num(v) -> Optional[float]:
@@ -293,6 +438,12 @@ def main():
     print("=" * 80)
     print("TIER 2 DUAL-DOOR SIFTER (PROD V2 - CLUSTER GUARDRAILS & CORE/SATELLITE)")
     print("=" * 80)
+
+    sync_result = sync_mri_snapshot()
+    if sync_result is None:
+        print("MRI snapshot sync: MRI outputs directory not found, snapshot left as-is.")
+    else:
+        print(f"MRI snapshot sync: {len(sync_result['files'])} files copied from {sync_result['source_dir']}")
 
     stocks_raw = load_json(STOCKS_JSON, {})
     if isinstance(stocks_raw, list):
@@ -604,16 +755,12 @@ def main():
         p["pctl_d2"] = round(get_percentile(p["score_door2"], all_d2), 1)
         p["best_pctl"] = max(p["pctl_d1"], p["pctl_d2"])
 
-    # ── 4. Macro Sector Budgeting via MGI ────────────────────────────────────
-    macro_data = load_json(CURRENT_SECTOR_RANKING_JSON, {}) or {}
-    reported_regime = macro_data.get("reported_macro_regime") or macro_data.get("reported_regime") or "neutral"
-    macro_scores_by_id = {}
-    for item in macro_data.get("sector_ranking", []):
-        sid = item.get("sector_id")
-        score = item.get("confidence_adjusted_score") or item.get("raw_sector_score", 0.0)
-        macro_scores_by_id[sid] = float(score)
+    # ── 4. Macro Sector Budgeting via MGI (MRI-11 contract) ──────────────────
+    macro_scores_by_id, reported_regime, sector_ranking_meta = load_sector_ranking()
+    print(f"Sector ranking source: {sector_ranking_meta['sector_quota_source']} "
+          f"(reason={sector_ranking_meta['reason']}, date={sector_ranking_meta['date']}, "
+          f"age_days={sector_ranking_meta['age_days']}, n_sectors={sector_ranking_meta['n_sectors']})")
 
-    CORE_TOTAL_TARGET = int(TOTAL_NOMINATION_TARGET * CORE_RATIO) # ~94 core slots
     BASE_CORE_PER_SECTOR = 8
     MIN_CORE_PER_SECTOR = 5
     MAX_CORE_PER_SECTOR = 12
@@ -624,6 +771,25 @@ def main():
         tilt = int(round(m_score * 4.0))
         quota = max(MIN_CORE_PER_SECTOR, min(MAX_CORE_PER_SECTOR, BASE_CORE_PER_SECTOR + tilt))
         core_sector_quotas[gics_sec] = quota
+    core_quota_total = sum(core_sector_quotas.values())
+
+    # Sub-industry cluster score (MRI-11 §8): MRI v2 publishes the 6 sub-industries in their own
+    # `subindustry_ranking` list, separate from the 11-row `sector_ranking` above. Stored on each
+    # profile via mgi_subindustry_id for Phase 5; no behavioural change here.
+    subindustry_scores_by_id: Dict[str, float] = {}
+    if sector_ranking_meta["path"]:
+        try:
+            _mri_raw = json.loads(Path(sector_ranking_meta["path"]).read_text(encoding="utf-8"))
+            for row in _mri_raw.get("subindustry_ranking") or []:
+                sid = row.get("sector_id")
+                score = _sector_tilt_score(row)
+                if sid and score is not None:
+                    subindustry_scores_by_id[sid] = score
+        except Exception as exc:
+            print(f"  [sub-industry ranking] could not read {sector_ranking_meta['path']}: {exc}")
+
+    for p in scored_profiles.values():
+        p["cluster_macro_score"] = subindustry_scores_by_id.get(p.get("mgi_subindustry_id"))
 
     # ── 5. Nomination Step A: Core Sector Floor with Intra-Sector Guardrails ──
     by_sec: Dict[str, List[Dict[str, Any]]] = {}
@@ -725,7 +891,9 @@ def main():
         "door2_value_gaps_count": d2_count,
         "overlap_both_doors_count": overlap_count,
         "core_sector_quotas": core_sector_quotas,
+        "core_quota_total": core_quota_total,
         "sector_ceiling_max": MAX_SECTOR_CEILING,
+        "sector_ranking_meta": sector_ranking_meta,
         "nominated_tickers": nominated_pool,
         "veto_breakdown": {v: sum(1 for x in vetoes.values() if x == v) for v in set(vetoes.values())},
         "profiles": {t: all_nominated_map[t] for t in nominated_pool}
@@ -793,6 +961,10 @@ def main():
         "engine": "dual_door_dynamic_macro_v2_cluster_guarded",
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "reported_macro_regime": reported_regime,
+        "sector_quota_source": sector_ranking_meta["sector_quota_source"],
+        "sector_ranking_date": sector_ranking_meta["date"],
+        "sector_ranking_age_days": sector_ranking_meta["age_days"],
+        "macro_confidence": sector_ranking_meta["macro_confidence"],
         "scored_count": eligible_count,
         "band_counts": {
             "research_now": len(rn_set),
