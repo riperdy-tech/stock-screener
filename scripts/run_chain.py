@@ -52,6 +52,12 @@ def load_json(path):
         return json.load(f)
 
 
+def round3(v):
+    """3dp rounding for a nomination-context value; a missing/non-numeric input is an
+    absence (None), never a guessed default — 0.0 is a value and passes through."""
+    return round(v, 3) if isinstance(v, (int, float)) else None
+
+
 def run_step(name, args, steps, env_note=""):
     print(f"\n=== STEP: {name} {env_note}".ljust(60, "="))
     t0 = time.monotonic()
@@ -66,6 +72,22 @@ def add_invariant(invariants, name, level, ok, detail):
     invariants.append({"name": name, "level": level, "ok": bool(ok), "detail": detail})
     tag = "PASS" if ok else ("FAIL" if level == "hard" else "WARN")
     print(f"  [{tag}] ({level}) {name}: {detail}")
+
+
+def build_factor_signal_rows(factor):
+    """factor_signal_log.jsonl signal rows: one per research_now/watchlist ticker, carrying
+    nomination context (fct_nominated_doors, fct_z, cluster, sector) from the same dual-door
+    profile the other fct_* fields come from (P2.3). A name with no profile, or a missing
+    value within it, gets None for that field — never a guessed default."""
+    return [
+        {"symbol": sym, "fct_composite": e.get("fct_composite"),
+         "fct_rank": e.get("fct_rank"), "fct_band": e.get("fct_band"),
+         "fct_nominated_doors": e.get("fct_nominated_doors"),
+         "fct_z": {k: round3(v) for k, v in e["fct_z"].items()} if isinstance(e.get("fct_z"), dict) else None,
+         "cluster": e.get("cluster"), "sector": e.get("sector")}
+        for sym, e in (factor.get("tickers") or {}).items()
+        if e.get("fct_band") in ("research_now", "watchlist")
+    ]
 
 
 def main():
@@ -230,12 +252,7 @@ def main():
 
         # ── Factor Lab forward log (dated, append-only — outcome tracking) ──
         factor_log = DATA / "factor_signal_log.jsonl"
-        log_rows = [
-            {"symbol": sym, "fct_composite": e.get("fct_composite"),
-             "fct_rank": e.get("fct_rank"), "fct_band": e.get("fct_band")}
-            for sym, e in (factor.get("tickers") or {}).items()
-            if e.get("fct_band") in ("research_now", "watchlist")
-        ]
+        log_rows = build_factor_signal_rows(factor)
         with factor_log.open("a", encoding="utf-8") as f:
             f.write(json.dumps({
                 "run_id": run_id,
