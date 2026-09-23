@@ -191,11 +191,24 @@ def compute_daily_metrics(
     daily_closes: Dict[str, Any],
     stocks: Dict[str, Any],
     monthly_data: Dict[str, Dict[str, Any]],
+    config: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Dict[str, Any]]:
     """Compute daily momentum metrics for tickers present in daily_closes.json."""
     tickers_dict: Dict[str, Dict[str, List[float]]] = daily_closes.get("tickers", {})
     if not tickers_dict:
         return {}
+
+    if config is None:
+        config = load_config()
+
+    break_terms = config.get("mom_break_terms", {})
+    dma_term = break_terms.get("dma_trend_break", {})
+    require_below_200 = dma_term.get("require_below_200dma", True)
+    max_dma_slope = dma_term.get("max_dma200_slope_20d", 0.0)
+
+    dd_term = break_terms.get("drawdown_break", {})
+    max_pct_high = dd_term.get("max_pct_from_52w_high", config.get("pct_from_52w_high_break_threshold", -0.20))
+    max_mom_1m = dd_term.get("max_mom_1m", 0.0)
 
     # Pre-extract series and calculate 63-day ETF returns
     etf_63d_returns: Dict[str, float] = {}
@@ -303,8 +316,8 @@ def compute_daily_metrics(
             and pct_high is not None
             and mom_1m is not None
         ):
-            term1 = (not above_200) and (slope_200 < 0.0)
-            term2 = (pct_high < -0.20) and (mom_1m < 0.0)
+            term1 = (not above_200 if require_below_200 else True) and (slope_200 < max_dma_slope)
+            term2 = (pct_high < max_pct_high) and (mom_1m < max_mom_1m)
             item["mom_break"] = bool(term1 or term2)
 
         if item:
@@ -341,7 +354,7 @@ def build_momentum_state(
     monthly_data = compute_monthly_metrics(price_history, stocks)
     print(f"  Computed monthly metrics for {len(monthly_data)} tickers")
 
-    daily_data = compute_daily_metrics(daily_closes, stocks, monthly_data)
+    daily_data = compute_daily_metrics(daily_closes, stocks, monthly_data, config=config)
     print(f"  Computed daily metrics for {len(daily_data)} tickers")
 
     all_tickers = sorted(set(list(monthly_data.keys()) + list(daily_data.keys())))
@@ -386,9 +399,18 @@ def build_momentum_state(
         if combined:
             merged_tickers[t] = combined
 
+    daily_dates = [d["price_asof"] for d in daily_data.values() if d.get("price_asof")]
+    if daily_dates:
+        price_asof = max(daily_dates)
+    else:
+        price_asof = price_history.get("snapshot_date")
+        if not price_asof and price_history.get("fetched_at"):
+            price_asof = price_history["fetched_at"][:10]
+
     now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     payload = {
         "asof": now_iso,
+        "price_asof": price_asof,
         "config": config,
         "tickers": merged_tickers,
     }

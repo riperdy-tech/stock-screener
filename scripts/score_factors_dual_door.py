@@ -1377,17 +1377,34 @@ def main():
     momentum_source = "momentum_state"
     momentum_data: Dict[str, Any] = {}
     is_fresh = False
+    momentum_basis = "price_asof"
+    momentum_asof_fallback = False
+    price_asof_str: Optional[str] = None
 
     if momentum_state_path.exists():
         try:
             mom_payload = json.loads(momentum_state_path.read_text(encoding="utf-8"))
+            price_asof_str = mom_payload.get("price_asof")
             asof_str = mom_payload.get("asof")
+
+            # C7: freshness check uses price_asof (fallback to asof only if absent, flagged)
+            if price_asof_str:
+                date_str = price_asof_str
+                momentum_basis = "price_asof"
+            elif asof_str:
+                date_str = asof_str
+                momentum_basis = "asof"
+                momentum_asof_fallback = True
+                print("MOMENTUM NOTE: price_asof absent from momentum_state.json; falling back to asof.", file=sys.stderr)
+            else:
+                date_str = None
+
             mtime = momentum_state_path.stat().st_mtime
             age_days = (datetime.now(timezone.utc).timestamp() - mtime) / 86400.0
-            if asof_str:
+            if date_str:
                 for fmt in ("%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d"):
                     try:
-                        asof_dt = datetime.strptime(asof_str.split(".")[0].rstrip("Z"), fmt.rstrip("Z")).replace(tzinfo=timezone.utc)
+                        asof_dt = datetime.strptime(date_str.split(".")[0].rstrip("Z"), fmt.rstrip("Z")).replace(tzinfo=timezone.utc)
                         age_days = (datetime.now(timezone.utc) - asof_dt).total_seconds() / 86400.0
                         break
                     except ValueError:
@@ -1395,7 +1412,7 @@ def main():
             if age_days <= 3.0:
                 is_fresh = True
                 momentum_data = mom_payload.get("tickers", {})
-                print(f"Loaded fresh momentum state ({len(momentum_data)} tickers, age {age_days:.1f} days)")
+                print(f"Loaded fresh momentum state ({len(momentum_data)} tickers, age {age_days:.1f} days, basis={momentum_basis})")
             else:
                 print(f"WARN: momentum_state.json is stale ({age_days:.1f} days old > 3 days) — triggering fallback!", file=sys.stderr)
         except Exception as exc:
@@ -1410,6 +1427,8 @@ def main():
 
     for t in all_tickers:
         t_flags: List[str] = []
+        if momentum_asof_fallback:
+            t_flags.append("momentum_asof_fallback")
         t_mom: Dict[str, Any] = {}
         if momentum_source == "momentum_state":
             entry = momentum_data.get(t, {})
@@ -2307,6 +2326,9 @@ def main():
         "discount_rate_source": coe_anchor_meta["discount_rate_source"],
         "discount_rate_meta": coe_anchor_meta,
         "momentum_source": momentum_source,
+        "momentum_price_asof": price_asof_str if (momentum_source == "momentum_state" and price_asof_str) else None,
+        "momentum_basis": momentum_basis if momentum_source == "momentum_state" else None,
+        "momentum_asof_fallback": momentum_asof_fallback,
         "momentum_coverage": momentum_coverage,
         "z_method": z_method_chosen,
         "door2_momentum_floor": door2_momentum_floor,
