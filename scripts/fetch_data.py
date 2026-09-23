@@ -152,6 +152,7 @@ class StockData:
         self.shares_outstanding_growth_3yr_cagr = 0.0
         self.altman_z_score = None
         self.beneish_m_score = None
+        self.adv_20d_usd = None
         self.net_income = 0.0
         self.operating_cash_flow = 0.0
         self.fail_reasons = []
@@ -356,6 +357,13 @@ def process_stock_bulk(ticker_symbol, info, slot_today):
     data.gross_margin_3yr_avg = sec_gm3 if sec_gm3 is not None else data.gross_margin
     data.altman_z_score = sec_alt if sec_alt is not None else prev_metrics.get("zScore")
     data.beneish_m_score = None
+
+    # ADV (P3.6b DAT): median(close * volume) over the last 20 sessions, computed in
+    # defeatbeta_source.load() from stock_prices.parquet (already downloaded for
+    # latest/monthly above — no new request). Carry the previous run's value forward when
+    # the symbol isn't in this load (dataset gap, not an absence of liquidity).
+    adv = DBETA.adv_20d_usd.get(ticker_symbol)
+    data.adv_20d_usd = adv if adv is not None else prev_metrics.get("adv_20d_usd")
     return data
 
 def load_fund_hist():
@@ -468,7 +476,12 @@ def process_stock(ticker_symbol):
         # pipeline provides real inputs. The old -2.0 placeholder read as
         # "no manipulation risk" for every stock.
         data.beneish_m_score = None
-        
+
+        # ADV (P3.6b DAT): this legacy per-ticker yfinance path doesn't fetch daily volume
+        # (no new requests added for it) — carry the last defeatbeta-computed value forward,
+        # same as altman_z_score above.
+        data.adv_20d_usd = prev_metrics.get('adv_20d_usd')
+
         return (data, stock)
 
     except Exception as e:
@@ -1015,6 +1028,7 @@ def main():
                     "operatingCashFlow": result.operating_cash_flow,
                     "zScore": result.altman_z_score,
                     "mScore": result.beneish_m_score,
+                    "adv_20d_usd": result.adv_20d_usd,
                     "insiderOwnership": result.insider_ownership,
                     "dilution": result.shares_outstanding_growth_3yr_cagr,
                     "psRatio": result.price_to_sales,
