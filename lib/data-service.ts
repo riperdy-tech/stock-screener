@@ -376,10 +376,16 @@ export interface DepthVerdict {
     iv_band_high: number | null;
     median_iv: number | null;
     spread_pct: number | null;
-    direction: "overvalued" | "undervalued" | "hold" | "NOT_USABLE";
+    direction: "overvalued" | "undervalued" | "hold" | "NOT_USABLE" | null;
     size_hint: "full" | "half" | "quarter" | null;
     mos_vs_median_pct?: number | null;
     reason?: string | null;
+    // Gate-on-read overlay fields (P1.3). Absent means a legacy row: treat as
+    // actionable (fail-open) and, if direction is the legacy 'NOT_USABLE' string
+    // rather than null, still not-usable.
+    actionable?: boolean | null;
+    actionable_reasons?: string[] | null;
+    status?: string | null;
     // Present in the shipped payload (band_direction_v1) but previously untyped.
     samples_run?: number | null;      // runs attempted; n_basis = runs that passed the guards
     scheme?: string | null;

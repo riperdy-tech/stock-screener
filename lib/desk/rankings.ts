@@ -62,7 +62,9 @@ function enrichDepth(rawD: DepthVerdict | undefined, info: StockInfo | undefined
         : rawD.mos_vs_median_pct ?? null;
 
     let liveDirection = rawD.direction;
-    if (livePrice != null && rawD.iv_band_low != null && rawD.iv_band_high != null) {
+    // A null direction (gate-on-read NOT_USABLE) is an absence, not a verdict to
+    // recompute against — the live price/band comparison must not resurrect one.
+    if (rawD.direction != null && livePrice != null && rawD.iv_band_low != null && rawD.iv_band_high != null) {
         if (livePrice < rawD.iv_band_low) liveDirection = 'undervalued';
         else if (livePrice > rawD.iv_band_high) liveDirection = 'overvalued';
         else liveDirection = 'hold';
@@ -245,9 +247,22 @@ export function aiSections(rows: DeskRow[]): AiSections {
         // If a ticker has an active depth underwriting, the depth model's institutional contract
         // takes precedence over any preliminary heuristic quant veto:
         if (r.depth) {
-            if (r.depth.direction === 'undervalued') researchNow.push(r);
-            else if (r.depth.direction === 'NOT_USABLE') vetoed.push(r);
-            else watchlist.push(r);
+            // Gate-on-read NOT_USABLE publishes direction: null, status: 'not_usable';
+            // the legacy producer instead wrote the literal string 'NOT_USABLE'. Both
+            // are "no plausible verdict" and belong with the disqualified names, not
+            // silently in the watchlist.
+            if (r.depth.direction == null || r.depth.direction === 'NOT_USABLE' || r.depth.status === 'not_usable') {
+                vetoed.push(r);
+            } else if (r.depth.direction === 'undervalued' && r.depth.actionable !== false) {
+                // actionable === false (gated out post-verdict) is excluded from the
+                // shortlist — it falls to watchlist below, alongside the other
+                // depth-analyzed names that are not the AI's pick right now. Rows
+                // without the actionable field (legacy overlays) keep today's
+                // behaviour: actionable !== false is true for undefined too.
+                researchNow.push(r);
+            } else {
+                watchlist.push(r);
+            }
             continue;
         }
 
