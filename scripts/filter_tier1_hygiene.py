@@ -45,6 +45,7 @@ CIK_MAP_JSON = DATA / "cik_map.json"
 
 sys.path.append(str(Path(__file__).resolve().parent))
 from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, resolve_adv_usd, ADV_ENFORCE, load_adv_enforce
+import tradability
 
 OUT_SURVIVORS_JSON = DATA / "tier1_hygiene_survivors.json"
 OUT_AUDIT_JSON = DATA / "tier1_hygiene_audit.json"
@@ -102,10 +103,15 @@ def months_since(date_str: Optional[str], now: datetime) -> Optional[float]:
     return (now - d).days / 30.4368
 
 
-def benchmark_hard_fail(missing_bench: List[str], audit_log: Dict[str, Dict[str, Any]]) -> List[str]:
-    """P3.10: the benchmark gate is hard — every preserved name must survive, or be vetoed for
-    NOT_TRADABLE (delisted) alone. Anything else vetoed is a build-breaking regression."""
-    return [t for t in missing_bench if audit_log.get(t, {}).get("primary_reason") != "NOT_TRADABLE"]
+def benchmark_hard_fail(missing_bench: List[str], audit_log: Dict[str, Dict[str, Any]],
+                        untradable_map: Optional[Dict[str, str]] = None) -> List[str]:
+    """P3.10/C5: the benchmark gate is hard — every preserved name must survive, or be vetoed for
+    NOT_TRADABLE (delisted/untradable) alone. Anything else vetoed is a build-breaking regression."""
+    untradable_map = untradable_map or {}
+    return [
+        t for t in missing_bench
+        if audit_log.get(t, {}).get("primary_reason") != "NOT_TRADABLE" and t not in untradable_map
+    ]
 
 
 def evaluate_tier1():
@@ -126,6 +132,9 @@ def evaluate_tier1():
     print(f"Loaded {total_universe} stocks from universe database.")
     now = datetime.now(timezone.utc)
 
+    untradable_map, trad_note = tradability.scan(stocks)
+    print(f"Tradability: {trad_note}")
+
     survivors: List[str] = []
     alternate_reporting: List[str] = []
     stale_annual_data: Dict[str, Dict[str, Any]] = {}
@@ -140,6 +149,10 @@ def evaluate_tier1():
 
         reasons = []
         flags = []
+
+        # 0. Tradability Check
+        if sym in untradable_map:
+            reasons.append(f"NOT_TRADABLE ({untradable_map[sym]})")
 
         # 1. Market Cap Check
         if mcap is None or mcap < MIN_MARKET_CAP:
@@ -229,14 +242,20 @@ def evaluate_tier1():
             if adv is not None and adv < MIN_ADV_DOLLAR:
                 audit_log[sym]["below_min_adv"] = round(adv, 2)
 
-    # Preservation Gate Check (P3.10: hard gate — a benchmark name vetoed for any reason other
-    # than NOT_TRADABLE is a build-breaking regression, not a warning)
+    # Preservation Gate Check (P3.10/C5: hard gate — every preserved name must survive, or be
+    # vetoed for NOT_TRADABLE (delisted/untradable) alone. Untradable names are exempt with a printed note).
     missing_bench = [t for t in BENCHMARK_PRESERVE if t not in survivors]
-    hard_fail_bench = benchmark_hard_fail(missing_bench, audit_log)
-    if missing_bench:
-        print(f"\n[FATAL WARNING] Benchmark preservation failed for: {missing_bench}")
-        for t in missing_bench:
+    hard_fail_bench = benchmark_hard_fail(missing_bench, audit_log, untradable_map)
+    exempt_bench = [t for t in missing_bench if t not in hard_fail_bench]
+    for t in exempt_bench:
+        reason = untradable_map.get(t) or (audit_log.get(t, {}) or {}).get("primary_reason", "NOT_TRADABLE")
+        print(f"[NOTE] Benchmark preservation exemption: {t} is untradable ({reason}) — exempt from hard gate.")
+    if hard_fail_bench:
+        print(f"\n[FATAL WARNING] Benchmark preservation failed for: {hard_fail_bench}")
+        for t in hard_fail_bench:
             print(f"  {t}: {audit_log.get(t)}")
+    elif missing_bench:
+        print(f"\n[PASS] Benchmark Preservation verified ({len(BENCHMARK_PRESERVE) - len(missing_bench)}/{len(BENCHMARK_PRESERVE)} active, {len(exempt_bench)} exempt as untradable).")
     else:
         print(f"\n[PASS] 100% Benchmark Preservation verified ({len(BENCHMARK_PRESERVE)}/{len(BENCHMARK_PRESERVE)} passed).")
 
