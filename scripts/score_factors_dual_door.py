@@ -275,6 +275,7 @@ def door3_eligibility(
     monthly_trend_ok: Optional[bool] = None,
     mom_12_1: Optional[float] = None,
     jump_rule_min_return: float = 0.50,
+    raw_roic_proxy: Optional[float] = None,
 ) -> Tuple[bool, Optional[str], List[str]]:
     """P3.14 Door 3 eligibility (PHASE_3_ADDENDUM.md, all required), plus the P3.14b
     trend-continuity rule (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24):
@@ -284,6 +285,9 @@ def door3_eligibility(
     R1 (orchestrator refinement 2026-09-24): the jump rule applies only when 12-1 >= 0.50
     (a small total gain makes any single month look dominant — NVDA at +18% was excluded with
     jump_share 0.795).
+    R2 (orchestrator refinement 2026-09-24): the Door-3 profitability floor adds an absolute
+    condition: raw roic_proxy > 0 (the company earns a positive return on capital) AND the
+    existing sector-neutral z >= 25th pct. Reason `unprofitable` when roic_proxy <= 0.
     Returns (eligible, ineligible_reason, extra_flags) — extra_flags carries
     revisions_missing / adv_missing even when the name is otherwise eligible (an absence rides
     as a flag, never silently gated).
@@ -324,8 +328,11 @@ def door3_eligibility(
         extra_flags.append("revisions_missing")
     elif z_revisions < 0:
         return False, "revisions_negative", extra_flags
-    if roic_proxy_z is None or roic_proxy_pctl25 is None:
+    # R2: profitability floor requires raw roic_proxy > 0 AND sector-neutral z >= 25th pct
+    if raw_roic_proxy is None or roic_proxy_z is None or roic_proxy_pctl25 is None:
         return False, "no_profitability_data", extra_flags
+    if raw_roic_proxy <= 0:
+        return False, "unprofitable", extra_flags
     if roic_proxy_z < roic_proxy_pctl25:
         return False, "profitability_below_pctl25", extra_flags
     if adv_usd is None:
@@ -2229,6 +2236,7 @@ def main():
             monthly_trend_ok=monthly_trend_ok,
             mom_12_1=fct_mom.get("mom_12_1"),
             jump_rule_min_return=door3_cfg.get("DOOR3_JUMP_RULE_MIN_RETURN", 0.50),
+            raw_roic_proxy=raw["roic_proxy"].get(t),
         )
         if not eligible:
             door3_ineligible_reasons[reason] = door3_ineligible_reasons.get(reason, 0) + 1
@@ -2243,6 +2251,7 @@ def main():
         door3_candidates.append({
             "ticker": t, "cluster": p["cluster"], "universe_momentum": univ_mom,
             "mom_12_1": fct_mom.get("mom_12_1"),
+            "roic_proxy": raw["roic_proxy"].get(t),
         })
 
     # C1 (PHASE_3_APPROVAL.md): the Door-3 hysteresis rank excludes Door-1/2 nominees — a

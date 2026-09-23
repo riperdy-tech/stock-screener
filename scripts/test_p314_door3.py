@@ -65,6 +65,7 @@ def _elig(**kw):
         # P3.14b: valid trend-continuity data by default, so tests above this section keep
         # exercising only their own rule in isolation.
         usable_months=11, jump_share=0.3,
+        raw_roic_proxy=0.10,
     )
     base.update(kw)
     return door3_eligibility(**base)
@@ -200,6 +201,24 @@ def test_ineligible_roic_proxy_z_none():
 def test_ineligible_roic_proxy_pctl25_none():
     """No usable roic_proxy distribution at all -> nobody can clear it."""
     eligible, reason, _ = _elig(roic_proxy_pctl25=None)
+    assert eligible is False and reason == "no_profitability_data"
+
+
+def test_ineligible_unprofitable_negative():
+    """R2: raw roic_proxy <= 0 -> ineligible, reason unprofitable."""
+    eligible, reason, _ = _elig(raw_roic_proxy=-0.05)
+    assert eligible is False and reason == "unprofitable"
+
+
+def test_ineligible_unprofitable_zero():
+    """R2: raw roic_proxy == 0 -> ineligible, reason unprofitable."""
+    eligible, reason, _ = _elig(raw_roic_proxy=0.0)
+    assert eligible is False and reason == "unprofitable"
+
+
+def test_ineligible_raw_roic_proxy_none():
+    """R2: raw roic_proxy missing -> ineligible, reason no_profitability_data."""
+    eligible, reason, _ = _elig(raw_roic_proxy=None)
     assert eligible is False and reason == "no_profitability_data"
 
 

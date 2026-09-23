@@ -18,6 +18,7 @@ def _base_elig(**kw):
         max_jump_share=0.75,
         mom_12_1=0.18,  # NVDA case: +18% gain
         jump_rule_min_return=0.50,
+        raw_roic_proxy=0.10,
     )
     base.update(kw)
     return sfdd.door3_eligibility(**base)
