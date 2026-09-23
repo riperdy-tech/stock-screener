@@ -272,21 +272,33 @@ def select_door3(
     already_nominated: Set[str],
     slots: int = 20,
     cluster_cap: int = 5,
+    retained_tickers: Optional[Set[str]] = None,
+    retained_cluster_counts: Optional[Dict[str, int]] = None,
 ) -> Dict[str, Any]:
     """P3.14 Door 3 selection. `candidates` are already ELIGIBLE names, each a dict with at
     least {"ticker", "cluster", "universe_momentum"} (optionally "mom_12_1" for the P3.14b
     tie-break). Ranked by universe_momentum descending, ties broken by raw mom_12_1 descending
     then ticker (see `_door3_rank_key`). A name already nominated by Door 1 or Door 2 is
     skipped for a Door 3 slot but tagged `also_trend_leader`; at most `cluster_cap` per cluster;
-    stops once `slots` new names are selected."""
+    stops once `slots` new names are selected.
+
+    C1 (PHASE_3_APPROVAL.md): `retained_tickers` are previous Door-3 names the caller already
+    decided to keep via hysteresis (door3_hysteresis_retain) — this function never selects them
+    fresh (the caller owns them), but their clusters, via `retained_cluster_counts`, seed this
+    call's cluster accounting so a fresh entrant from a cluster already full of retained names
+    is correctly blocked. `slots` here is the number of NEW (non-retained) names still wanted —
+    the caller has already reduced it by len(retained_tickers)."""
+    retained_tickers = retained_tickers or set()
     ordered = sorted(candidates, key=_door3_rank_key)
     selected: List[str] = []
     also_trend_leader: List[str] = []
-    cluster_counts: Dict[str, int] = {}
+    cluster_counts: Dict[str, int] = dict(retained_cluster_counts or {})
     for c in ordered:
         if len(selected) >= slots:
             break
         t = c["ticker"]
+        if t in retained_tickers:
+            continue
         if t in already_nominated:
             also_trend_leader.append(t)
             continue
@@ -1961,9 +1973,29 @@ def main():
             "mom_12_1": fct_mom.get("mom_12_1"),
         })
 
+    # C1 (PHASE_3_APPROVAL.md): the Door-3 hysteresis rank excludes Door-1/2 nominees — a
+    # nominee already has its own door and isn't a Door-3 candidate, so it must not occupy a
+    # rank in the list that decides which previous Door-3 name survives. Retention is decided
+    # BEFORE fresh selection (not after, as before), so retained names get first claim on their
+    # cluster's cap and fresh selection only fills what's left.
+    door3_rank_pool = [c for c in door3_candidates if c["ticker"] not in already_nominated_set]
+    door3_eligible_ranked = [c["ticker"] for c in sorted(door3_rank_pool, key=_door3_rank_key)]
+    door3_candidates_by_ticker = {c["ticker"]: c for c in door3_candidates}
+    door3_retained = door3_hysteresis_retain(
+        prev_door3, [], door3_eligible_ranked, already_nominated_set,
+        door3_cfg["DOOR3_SLOTS"] + 5,
+    )
+    door3_retained_cluster_counts: Dict[str, int] = {}
+    for t in door3_retained:
+        cl = door3_candidates_by_ticker[t]["cluster"]
+        door3_retained_cluster_counts[cl] = door3_retained_cluster_counts.get(cl, 0) + 1
+
     door3_select_result = select_door3(
         door3_candidates, already_nominated_set,
-        slots=door3_cfg["DOOR3_SLOTS"], cluster_cap=door3_cfg["DOOR3_CLUSTER_CAP"],
+        slots=max(0, door3_cfg["DOOR3_SLOTS"] - len(door3_retained)),
+        cluster_cap=door3_cfg["DOOR3_CLUSTER_CAP"],
+        retained_tickers=set(door3_retained),
+        retained_cluster_counts=door3_retained_cluster_counts,
     )
     door3_fresh = door3_select_result["selected"]
     door3_also_trend_leader = door3_select_result["also_trend_leader"]
@@ -1971,16 +2003,6 @@ def main():
         p = scored_profiles[t]
         if "also_trend_leader" not in p["fct_flags"]:
             p["fct_flags"].append("also_trend_leader")
-
-    # P3.14b: same ranking as select_door3 — universe momentum, ties broken by raw mom_12_1
-    # descending, then ticker (_door3_rank_key) — so hysteresis rank agrees with selection order.
-    door3_eligible_ranked = [
-        c["ticker"] for c in sorted(door3_candidates, key=_door3_rank_key)
-    ]
-    door3_retained = door3_hysteresis_retain(
-        prev_door3, door3_fresh, door3_eligible_ranked, already_nominated_set,
-        door3_cfg["DOOR3_SLOTS"] + 5,
-    )
 
     for t in door3_fresh:
         p = scored_profiles[t]
