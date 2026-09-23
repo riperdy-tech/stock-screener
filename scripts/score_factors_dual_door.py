@@ -117,6 +117,19 @@ def _load_hysteresis_ranks(config_path: Optional[Path] = None) -> Tuple[int, int
     return int(rn_buf), int(book_buf)
 
 
+def _load_mid_cycle_config(config_path: Optional[Path] = None) -> Tuple[int, Dict[str, int]]:
+    cfg = _load_sifter_config(config_path)
+    mc = cfg.get("mid_cycle_window", {})
+    def_yrs = int(mc.get("default_years", 3))
+    cl_yrs = mc.get("cluster_years", {
+        "energy_upstream": 8,
+        "energy_services": 8,
+        "energy_midstream_refining": 8,
+        "mat_metals_mining": 8,
+    })
+    return def_yrs, {k: int(v) for k, v in cl_yrs.items()}
+
+
 DOOR2_MOMENTUM_FLOOR = _load_door2_momentum_floor()
 
 
@@ -554,6 +567,7 @@ def main():
         sifter_cfg_path = globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
     door2_momentum_floor = float(globals().get("DOOR2_MOMENTUM_FLOOR", _load_door2_momentum_floor(sifter_cfg_path)))
     rn_buffer_rank, book_buffer_rank = _load_hysteresis_ranks(sifter_cfg_path)
+    default_cycle_window, cluster_cycle_windows = _load_mid_cycle_config(sifter_cfg_path)
 
     # Read previous factor_scores.json before anything overwrites it (P3.5 band hysteresis)
     prev_factor_raw = None
@@ -699,6 +713,7 @@ def main():
         ticker_mom_state[t] = t_mom
         ticker_flags[t] = t_flags
 
+    ticker_mid_cycle: Dict[str, Dict[str, Any]] = {}
     vetoes: Dict[str, str] = {}
     veto_detail: Dict[str, str] = {}
     eligible_count = 0
@@ -810,14 +825,33 @@ def main():
                 raw["roic_proxy"][t] = None
 
         elif archetype == "commodity_cyclical":
-            # Commodity Cyclicals: 3-Year Normalized Mid-Cycle Cash Flow (Anti-Peak Value Trap)
+            # Commodity Cyclicals: Normalized Mid-Cycle Cash Flow by Cluster (P3.7)
+            cluster = tax["cluster"]
+            target_window = cluster_cycle_windows.get(cluster, default_cycle_window)
+            window_years = years[-target_window:]
             past_fcfs = []
-            for y in years[-3:]:
+            for y in window_years:
                 y_row = ydata.get(str(y), {})
                 y_fcf = num(y_row.get("fcf"))
                 if y_fcf is not None:
                     past_fcfs.append(y_fcf)
-            mid_cycle_fcf = (sum(past_fcfs) / len(past_fcfs)) if past_fcfs else fcf
+
+            years_used = len(past_fcfs)
+            if past_fcfs:
+                mid_cycle_fcf = sum(past_fcfs) / len(past_fcfs)
+            else:
+                mid_cycle_fcf = fcf
+                years_used = 1 if fcf is not None else 0
+
+            cur_flags = ticker_flags.setdefault(t, [])
+            if target_window == 8 and years_used < 5:
+                if "mid_cycle_short_history" not in cur_flags:
+                    cur_flags.append("mid_cycle_short_history")
+
+            ticker_mid_cycle[t] = {
+                "window_years": target_window,
+                "years_used": years_used,
+            }
 
             if mid_cycle_fcf is not None and mcap > 0:
                 raw["fcf_yield"][t] = mid_cycle_fcf / mcap
@@ -1094,7 +1128,9 @@ def main():
             "best_pctl": 0.0,
             "nominated_doors": [],
             "fct_momentum_state": ticker_mom_state.get(t, {}),
-            "fct_flags": cur_flags
+            "fct_flags": cur_flags,
+            "mid_cycle_window_years": ticker_mid_cycle.get(t, {}).get("window_years") if t in ticker_mid_cycle else None,
+            "mid_cycle_years_used": ticker_mid_cycle.get(t, {}).get("years_used") if t in ticker_mid_cycle else None,
         }
         scored_profiles[t] = cand_data
 
@@ -1435,10 +1471,11 @@ def main():
             "door1_pillars_used": prof.get("door1_pillars_used", []),
             "door2_pillars_used": prof.get("door2_pillars_used", []),
             "door1_weight_scale": prof.get("door1_weight_scale"),
-            "door2_weight_scale": prof.get("door2_weight_scale"),
             "sector": prof.get("sector", sector_by_ticker.get(t)),
             "cluster": prof.get("cluster"),
-            "archetype": prof.get("archetype")
+            "archetype": prof.get("archetype"),
+            "mid_cycle_window_years": prof.get("mid_cycle_window_years"),
+            "mid_cycle_years_used": prof.get("mid_cycle_years_used"),
         }
 
     # Stage 4 of the charter: the depth lane's own view, written alongside the quant bands.

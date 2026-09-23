@@ -4,6 +4,26 @@
   "DOOR2_MOMENTUM_FLOOR": -1.5,
   "hysteresis_rn_rank": 60,
   "hysteresis_book_rank": 150,
+  "mid_cycle_window": {
+    "_note": "Window by cluster from measured 10-year owner-cash-flow margin swing |3y mean - 10y mean| vs all-cluster median 0.041. 8 years ONLY for commodity-driven clusters above median: energy_upstream (0.061), energy_services (0.085), energy_midstream_refining (0.054), mat_metals_mining (0.068). NOT freight (0.036), chemicals (0.032), construction materials (0.020).",
+    "default_years": 3,
+    "cluster_years": {
+      "energy_upstream": 8,
+      "energy_services": 8,
+      "energy_midstream_refining": 8,
+      "mat_metals_mining": 8
+    },
+    "cluster_swings": {
+      "energy_upstream": 0.061,
+      "energy_services": 0.085,
+      "energy_midstream_refining": 0.054,
+      "mat_metals_mining": 0.068,
+      "ind_freight_logistics": 0.036,
+      "mat_chemicals": 0.032,
+      "mat_construction": 0.020
+    },
+    "all_cluster_median_swing": 0.041
+  },
   "dma200_slope_lookback_days": 20,
   "pct_from_52w_high_break_threshold": -0.20,
   "mom_break_terms": {
