@@ -111,6 +111,17 @@ def _load_door2_momentum_floor(config_path: Optional[Path] = None) -> float:
     return float(val)
 
 
+def _load_momentum_universe_weight(config_path: Optional[Path] = None) -> float:
+    """P3.13: weight given to the pooled-universe momentum z vs. the sector-neutral one when
+    combining the momentum pillar. Accepts either a flat top-level key or the nested
+    {"momentum_universe_weight": {"MOMENTUM_UNIVERSE_WEIGHT": ...}} shape used elsewhere in
+    this file for judgement constants that carry a `_note`."""
+    cfg = _load_sifter_config(config_path)
+    nested = cfg.get("momentum_universe_weight", {})
+    val = nested.get("MOMENTUM_UNIVERSE_WEIGHT", cfg.get("MOMENTUM_UNIVERSE_WEIGHT", 0.5))
+    return float(val)
+
+
 def _load_hysteresis_ranks(config_path: Optional[Path] = None) -> Tuple[int, int]:
     cfg = _load_sifter_config(config_path)
     rn_buf = cfg.get("hysteresis_rn_rank", cfg.get("hysteresis_rn_buffer", 60))
@@ -165,6 +176,7 @@ FORENSIC_VETO_EXEMPT_SECTORS = {"Financial Services", "Real Estate"}
 
 
 DOOR2_MOMENTUM_FLOOR = _load_door2_momentum_floor()
+MOMENTUM_UNIVERSE_WEIGHT = _load_momentum_universe_weight()
 
 
 def _parse_mri_date(raw: Optional[str]) -> Optional[datetime]:
@@ -416,6 +428,24 @@ def sector_neutral_z(
     return z_scores
 
 
+def universe_z(
+    raw_by_ticker: Dict[str, Optional[float]],
+    method: Optional[str] = None,
+) -> Dict[str, Optional[float]]:
+    """Same standardisation as sector_neutral_z (winsor or gaussian_rank; same winsor/clip
+    rules) but pooled across the whole scored universe — no sector grouping. Putting every
+    ticker in one sector name reuses sector_neutral_z's own pooled-universe fallback path
+    (already exercised when a sector has fewer than 15 members), so this is exactly that
+    computation rather than a re-derivation of it. None stays None.
+
+    P3.13: the momentum pillar is otherwise 100% sector-neutral, which makes a sector-wide
+    boom invisible. This lets the momentum pillar also see the un-neutralised, universe-wide
+    move.
+    """
+    pooled_sector = {t: "__universe__" for t in raw_by_ticker}
+    return sector_neutral_z(raw_by_ticker, pooled_sector, method=method)
+
+
 def solve_reverse_dcf_gap(owner_earnings: float, mcap: float, discount_rate: float, historical_cagr: float) -> Optional[float]:
     if owner_earnings <= 0 or mcap <= 0:
         return None
@@ -600,6 +630,7 @@ def main():
     if not sifter_cfg_path.exists():
         sifter_cfg_path = globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
     door2_momentum_floor = float(globals().get("DOOR2_MOMENTUM_FLOOR", _load_door2_momentum_floor(sifter_cfg_path)))
+    momentum_universe_weight = float(globals().get("MOMENTUM_UNIVERSE_WEIGHT", _load_momentum_universe_weight(sifter_cfg_path)))
     rn_buffer_rank, book_buffer_rank = _load_hysteresis_ranks(sifter_cfg_path)
     default_cycle_window, cluster_cycle_windows = _load_mid_cycle_config(sifter_cfg_path)
     veto_switches = globals().get("VETO_SWITCHES", _load_veto_switches(sifter_cfg_path))
@@ -1079,18 +1110,46 @@ def main():
     z_method_chosen = globals().get("Z_METHOD", "winsor")
     z = {metric: sector_neutral_z(vals, sector_by_ticker, method=z_method_chosen) for metric, vals in raw.items()}
 
+    # P3.13: pooled-universe z's for the momentum inputs only — sector-neutral z throws away a
+    # sector-wide move, so the momentum pillar also gets to see the un-neutralised version.
+    z_universe_momentum = {
+        metric: universe_z(raw[metric], method=z_method_chosen)
+        for metric in ("skip_12_1", "high_52w")
+    }
+
     def mean_of_available(*values) -> Optional[float]:
         valid = [v for v in values if v is not None]
         return (sum(valid) / len(valid)) if valid else None
 
+    def weighted_mean_of_available(pairs: List[Tuple[Optional[float], float]]) -> Optional[float]:
+        """Like mean_of_available, but each present value carries its own weight. Absent
+        values drop out entirely (taking their weight with them), so a single present value is
+        returned unchanged regardless of its weight — same None handling as mean_of_available."""
+        valid = [(v, w) for v, w in pairs if v is not None]
+        if not valid:
+            return None
+        total_w = sum(w for _, w in valid)
+        if total_w == 0:
+            return mean_of_available(*(v for v, _ in valid))
+        return sum(v * w for v, w in valid) / total_w
+
     # Compute raw pillar z's for scored set (not vetoed)
     scored_tickers = [t for t in all_tickers if t not in vetoes]
     raw_pillars: Dict[str, Dict[str, Optional[float]]] = {}
+    # P3.13: sector-neutral / universe momentum parts before the 50/50 blend, kept for the
+    # profile fields (z_momentum_sector_neutral, z_momentum_universe) — before unit variance.
+    momentum_parts: Dict[str, Tuple[Optional[float], Optional[float]]] = {}
     for t in scored_tickers:
+        sn_mom = mean_of_available(z["skip_12_1"].get(t), z["high_52w"].get(t))
+        univ_mom = mean_of_available(z_universe_momentum["skip_12_1"].get(t), z_universe_momentum["high_52w"].get(t))
+        momentum_parts[t] = (sn_mom, univ_mom)
         raw_pillars[t] = {
             "quality": mean_of_available(z["roic_proxy"].get(t), z["gm_stability"].get(t),
                                          z["neg_accruals"].get(t), z["f_score"].get(t)),
-            "momentum": mean_of_available(z["skip_12_1"].get(t), z["high_52w"].get(t)),
+            "momentum": weighted_mean_of_available([
+                (sn_mom, 1.0 - momentum_universe_weight),
+                (univ_mom, momentum_universe_weight),
+            ]),
             "revisions": z["eps_slope"].get(t),
             "value": mean_of_available(z["fcf_yield"].get(t), z["owner_yield"].get(t), z["ebit_yield"].get(t)),
             "exp_gap": z["exp_gap"].get(t),
@@ -1262,6 +1321,8 @@ def main():
             "mgi_subindustry_id": tax["mgi_subindustry_id"],
             "z_quality": round(z_qual, 3) if z_qual is not None else None,
             "z_momentum": z_mom_pub,
+            "z_momentum_sector_neutral": round(momentum_parts[t][0], 3) if momentum_parts[t][0] is not None else None,
+            "z_momentum_universe": round(momentum_parts[t][1], 3) if momentum_parts[t][1] is not None else None,
             "z_revisions": round(z_rev, 3) if z_rev is not None else None,
             "z_value": round(z_val, 3) if z_val is not None else None,
             "z_exp_gap": round(z_gap, 3) if z_gap is not None else None,
