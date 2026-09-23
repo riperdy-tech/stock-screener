@@ -199,6 +199,7 @@ def test_contributions_honors_d2_eligible():
         "pctl_d2": 95.0,
         "z_quality": 1.0,
         "z_momentum": -2.0,
+        "z_momentum_door1": -2.0,
         "z_value": 2.0,
         "d2_eligible": False,
         "door1_pillars_used": ["quality", "momentum"],

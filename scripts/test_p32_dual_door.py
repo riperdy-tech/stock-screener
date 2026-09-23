@@ -227,6 +227,7 @@ def test_contributions_honors_renormalised_weights():
         "door1_pillars_used": ["quality", "momentum"],
         "z_quality": 1.0,
         "z_momentum": 1.0,
+        "z_momentum_door1": 1.0,
         "z_revisions": None,
     }
     c = _contributions(prof_d1_renorm)

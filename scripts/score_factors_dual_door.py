@@ -142,6 +142,105 @@ def _load_mid_cycle_config(config_path: Optional[Path] = None) -> Tuple[int, Dic
     return def_yrs, {k: int(v) for k, v in cl_yrs.items()}
 
 
+def _load_door3_config(config_path: Optional[Path] = None) -> Dict[str, float]:
+    """P3.14 (PHASE_3_ADDENDUM.md): Door 3 'trend leaders' constants."""
+    cfg = _load_sifter_config(config_path)
+    d3 = cfg.get("door3", {})
+    return {
+        "DOOR3_SLOTS": int(d3.get("DOOR3_SLOTS", 20)),
+        "DOOR3_RN_SLOTS": int(d3.get("DOOR3_RN_SLOTS", 5)),
+        "DOOR3_CLUSTER_CAP": int(d3.get("DOOR3_CLUSTER_CAP", 5)),
+        "DOOR3_MIN_MCAP": float(d3.get("DOOR3_MIN_MCAP", 2_000_000_000.0)),
+        "DOOR3_QUALITY_MIN_PCTL": float(d3.get("DOOR3_QUALITY_MIN_PCTL", 25.0)),
+    }
+
+
+def door3_eligibility(
+    mcap: Optional[float],
+    falling_knife: bool,
+    mom_break: Optional[bool],
+    z_revisions: Optional[float],
+    z_quality: Optional[float],
+    quality_pctl25: Optional[float],
+    adv_usd: Optional[float],
+    min_mcap: float,
+    min_adv: float = 300_000.0,
+) -> Tuple[bool, Optional[str], List[str]]:
+    """P3.14 Door 3 eligibility (PHASE_3_ADDENDUM.md, all required). Returns (eligible,
+    ineligible_reason, extra_flags) — extra_flags carries revisions_missing / adv_missing even
+    when the name is otherwise eligible (an absence rides as a flag, never silently gated)."""
+    extra_flags: List[str] = []
+    if mcap is None or mcap < min_mcap:
+        return False, "mcap_below_door3_floor", extra_flags
+    if falling_knife or mom_break is True:
+        return False, "falling_knife_or_mom_break", extra_flags
+    if z_revisions is None:
+        extra_flags.append("revisions_missing")
+    elif z_revisions < 0:
+        return False, "revisions_negative", extra_flags
+    if z_quality is None or quality_pctl25 is None or z_quality < quality_pctl25:
+        return False, "quality_below_pctl25", extra_flags
+    if adv_usd is None:
+        extra_flags.append("adv_missing")
+    elif adv_usd < min_adv:
+        return False, "adv_below_300k", extra_flags
+    return True, None, extra_flags
+
+
+def select_door3(
+    candidates: List[Dict[str, Any]],
+    already_nominated: Set[str],
+    slots: int = 20,
+    cluster_cap: int = 5,
+) -> Dict[str, Any]:
+    """P3.14 Door 3 selection. `candidates` are already ELIGIBLE names, each a dict with at
+    least {"ticker", "cluster", "universe_momentum"}. Ranked by universe_momentum descending
+    (ticker breaks ties for determinism). A name already nominated by Door 1 or Door 2 is
+    skipped for a Door 3 slot but tagged `also_trend_leader`; at most `cluster_cap` per cluster;
+    stops once `slots` new names are selected."""
+    ordered = sorted(candidates, key=lambda c: (-c["universe_momentum"], c["ticker"]))
+    selected: List[str] = []
+    also_trend_leader: List[str] = []
+    cluster_counts: Dict[str, int] = {}
+    for c in ordered:
+        if len(selected) >= slots:
+            break
+        t = c["ticker"]
+        if t in already_nominated:
+            also_trend_leader.append(t)
+            continue
+        cl = c["cluster"]
+        if cluster_counts.get(cl, 0) >= cluster_cap:
+            continue
+        selected.append(t)
+        cluster_counts[cl] = cluster_counts.get(cl, 0) + 1
+    return {"selected": selected, "also_trend_leader": also_trend_leader, "cluster_counts": cluster_counts}
+
+
+def door3_hysteresis_retain(
+    prev_door3: Set[str],
+    fresh_selected: List[str],
+    eligible_ranked: List[str],
+    already_nominated: Set[str],
+    max_rank: int,
+) -> List[str]:
+    """P3.14: 'Hysteresis (P3.5) applies to Door-3 names like any other' — a previous Door-3
+    name not re-selected fresh stays while its current universe-momentum rank among ELIGIBLE
+    names is <= max_rank (DOOR3_SLOTS + 5). `eligible_ranked` is every eligible ticker ordered
+    by universe momentum descending (rank 1 = index 0). Already-nominated names are excluded —
+    they get `also_trend_leader` instead, handled by the caller."""
+    rank_by_ticker = {t: i + 1 for i, t in enumerate(eligible_ranked)}
+    fresh_set = set(fresh_selected)
+    retained = []
+    for t in sorted(prev_door3):
+        if t in fresh_set or t in already_nominated:
+            continue
+        r = rank_by_ticker.get(t)
+        if r is not None and r <= max_rank:
+            retained.append(t)
+    return retained
+
+
 def _load_veto_switches(config_path: Optional[Path] = None) -> Dict[str, bool]:
     cfg = _load_sifter_config(config_path)
     sw = cfg.get("veto_switches", {})
@@ -514,8 +613,11 @@ def _contributions(prof):
         used = prof.get("door1_pillars_used") or ["quality", "momentum", "revisions"]
         if "quality" in used and prof.get("z_quality") is not None:
             parts["quality"] = 0.45 * scale * abs(prof["z_quality"])
-        if "momentum" in used and prof.get("z_momentum") is not None:
-            parts["momentum"] = 0.35 * scale * abs(prof["z_momentum"])
+        # P3.14: the momentum contribution uses z_momentum_door1 (sector-neutral only — what
+        # actually fed Door 1's score), not the published z_momentum (the P3.13 blend, which
+        # only backs the P3.3 falling-knife floor since P3.14).
+        if "momentum" in used and prof.get("z_momentum_door1") is not None:
+            parts["momentum"] = 0.35 * scale * abs(prof["z_momentum_door1"])
         if "revisions" in used and prof.get("z_revisions") is not None:
             parts["revisions"] = 0.20 * scale * abs(prof["z_revisions"])
     else:
@@ -720,12 +822,16 @@ def main():
         hysteresis_status = "no_previous_run"
         prev_rn = set()
         prev_book = set()
+        prev_door3: Set[str] = set()
     else:
         has_previous = True
         hysteresis_status = "applied"
         prev_tickers = prev_factor_raw.get("tickers", {})
         prev_rn = {t for t, d in prev_tickers.items() if d.get("fct_band") == "research_now"}
         prev_book = {t for t, d in prev_tickers.items() if d.get("fct_band") in ("research_now", "watchlist")}
+        # P3.14: previous Door-3 names, for the Door-3 hysteresis rule below.
+        prev_door3 = {t for t, d in prev_tickers.items()
+                      if "DOOR_3_TREND_LEADER" in (d.get("fct_nominated_doors") or [])}
 
     sync_result = sync_mri_snapshot()
     if sync_result is None:
@@ -859,6 +965,10 @@ def main():
     # detail dict, so the analyst pack can print what tripped the flag (fct_flags itself stays
     # a plain list of names, same shape every other consumer already expects).
     ticker_flag_detail: Dict[str, Dict[str, Any]] = {}
+    # P3.14: market cap and resolved ADV per scored ticker, kept for the Door 3 eligibility
+    # check (marketCap >= DOOR3_MIN_MCAP; ADV >= 300k when resolved) without recomputing them.
+    ticker_mcap: Dict[str, Optional[float]] = {}
+    ticker_adv: Dict[str, Optional[float]] = {}
     eligible_count = 0
 
     # Names the engine is not ALLOWED to trade, regardless of how they score: gone from the
@@ -898,6 +1008,7 @@ def main():
         mcap = num(s.get("marketCap"))
         price = num(s.get("price"))
         vol = num(s.get("volume"))
+        ticker_mcap[t] = mcap
 
         if not mcap or mcap < MIN_MARKET_CAP:
             vetoes[t] = "MARKET_CAP_BELOW_300M"
@@ -913,6 +1024,7 @@ def main():
         stocks_adv_20d = num((s.get("metrics") or {}).get("adv_20d_usd"))
         mom_adv_20d = num(fct_mom.get("adv_20d_usd"))
         adv, adv_flag = resolve_adv_usd(stocks_adv_20d, mom_adv_20d, vol, price)
+        ticker_adv[t] = adv
         if adv_flag is not None:
             cur_flags = ticker_flags.setdefault(t, [])
             if adv_flag not in cur_flags:
@@ -1223,7 +1335,13 @@ def main():
         raw_pillars[t] = {
             "quality": mean_of_available(z["roic_proxy"].get(t), z["gm_stability"].get(t),
                                          z["neg_accruals"].get(t), z["f_score"].get(t)),
-            "momentum": weighted_mean_of_available([
+            # P3.14: Door 1's momentum pillar reverts to sector-neutral only — "best in its
+            # sector" — so a sector-wide boom no longer feeds Door 1 (that job now belongs to
+            # Door 3 alone; see PHASE_3_ADDENDUM.md P3.14, "no concept duplication").
+            "momentum": sn_mom,
+            # P3.13 blend, kept only for the PUBLISHED z_momentum (P3.3 falling-knife floor) —
+            # does not feed Door 1 or Door 2 scoring.
+            "momentum_published": weighted_mean_of_available([
                 (sn_mom, 1.0 - momentum_universe_weight),
                 (univ_mom, momentum_universe_weight),
             ]),
@@ -1232,8 +1350,11 @@ def main():
             "exp_gap": z["exp_gap"].get(t),
         }
 
-    # Cross-sectional standard deviation over the SCORED set (not vetoed)
-    PILLAR_NAMES = ("quality", "momentum", "revisions", "value", "exp_gap")
+    # Cross-sectional standard deviation over the SCORED set (not vetoed). momentum_published
+    # rides the same unit-variance treatment as the rest so the P3.3 floor stays on a
+    # comparable scale; it is not one of DOOR1_BASE_WEIGHTS/DOOR2_BASE_WEIGHTS's keys, so it
+    # never enters effective_weights or either door's score.
+    PILLAR_NAMES = ("quality", "momentum", "momentum_published", "revisions", "value", "exp_gap")
     pillar_sd: Dict[str, Optional[float]] = {}
     pillar_sd_exact: Dict[str, Optional[float]] = {}
     pillar_sd_degenerate: List[str] = []
@@ -1356,7 +1477,10 @@ def main():
             d2_weight_scale = round(1.0 / sum_w2, 4)
             d2_score = sum((w / sum_w2) * val for name, w, val in present_d2)
 
-        z_mom_pub = round(z_mom, 3) if z_mom is not None else None
+        # P3.14: the PUBLISHED z_momentum (P3.3's falling-knife floor reads this) stays the
+        # P3.13 blend even though Door 1's own z_mom above reverted to sector-neutral only.
+        z_mom_published = std_pillars[t]["momentum_published"]
+        z_mom_pub = round(z_mom_published, 3) if z_mom_published is not None else None
 
         # P3.3 Door-2 falling-knife floor
         fct_mom = ticker_mom_state.get(t, {})
@@ -1398,6 +1522,9 @@ def main():
             "mgi_subindustry_id": tax["mgi_subindustry_id"],
             "z_quality": round(z_qual, 3) if z_qual is not None else None,
             "z_momentum": z_mom_pub,
+            # P3.14: the value that actually fed Door 1's score (sector-neutral only, unit-
+            # variance normalized) — distinct from the published z_momentum above (P3.13 blend).
+            "z_momentum_door1": round(z_mom, 3) if z_mom is not None else None,
             "z_momentum_sector_neutral": round(momentum_parts[t][0], 3) if momentum_parts[t][0] is not None else None,
             "z_momentum_universe": round(momentum_parts[t][1], 3) if momentum_parts[t][1] is not None else None,
             "z_revisions": round(z_rev, 3) if z_rev is not None else None,
@@ -1568,6 +1695,88 @@ def main():
             if "DOUBLE_DOOR_CHAMPION" not in p["nominated_doors"]:
                 p["nominated_doors"].append("DOUBLE_DOOR_CHAMPION")
 
+    # ── P3.14: Door 3 "trend leaders" (PHASE_3_ADDENDUM.md) ──────────────────
+    door3_cfg = _load_door3_config(sifter_cfg_path)
+    already_nominated_set: Set[str] = set(all_nominated_map.keys())
+
+    quality_vals_sorted = sorted(
+        p["z_quality"] for p in scored_profiles.values() if p["z_quality"] is not None
+    )
+    door3_quality_pctl25 = pctl(quality_vals_sorted, door3_cfg["DOOR3_QUALITY_MIN_PCTL"])
+
+    door3_ineligible_reasons: Dict[str, int] = {}
+    door3_candidates: List[Dict[str, Any]] = []
+    for t in scored_tickers:
+        p = scored_profiles[t]
+        univ_mom = momentum_parts[t][1]
+        if univ_mom is None:
+            door3_ineligible_reasons["universe_momentum_missing"] = \
+                door3_ineligible_reasons.get("universe_momentum_missing", 0) + 1
+            continue
+        fct_mom = p.get("fct_momentum_state") or {}
+        eligible, reason, extra_flags = door3_eligibility(
+            mcap=ticker_mcap.get(t),
+            falling_knife="falling_knife" in p.get("fct_flags", []),
+            mom_break=fct_mom.get("mom_break"),
+            z_revisions=p.get("z_revisions"),
+            z_quality=p.get("z_quality"),
+            quality_pctl25=door3_quality_pctl25,
+            adv_usd=ticker_adv.get(t),
+            min_mcap=door3_cfg["DOOR3_MIN_MCAP"],
+        )
+        if not eligible:
+            door3_ineligible_reasons[reason] = door3_ineligible_reasons.get(reason, 0) + 1
+            continue
+        for fl in extra_flags:
+            if fl not in p["fct_flags"]:
+                p["fct_flags"].append(fl)
+        door3_candidates.append({"ticker": t, "cluster": p["cluster"], "universe_momentum": univ_mom})
+
+    door3_select_result = select_door3(
+        door3_candidates, already_nominated_set,
+        slots=door3_cfg["DOOR3_SLOTS"], cluster_cap=door3_cfg["DOOR3_CLUSTER_CAP"],
+    )
+    door3_fresh = door3_select_result["selected"]
+    door3_also_trend_leader = door3_select_result["also_trend_leader"]
+    for t in door3_also_trend_leader:
+        p = scored_profiles[t]
+        if "also_trend_leader" not in p["fct_flags"]:
+            p["fct_flags"].append("also_trend_leader")
+
+    door3_eligible_ranked = [
+        c["ticker"] for c in sorted(door3_candidates, key=lambda c: (-c["universe_momentum"], c["ticker"]))
+    ]
+    door3_retained = door3_hysteresis_retain(
+        prev_door3, door3_fresh, door3_eligible_ranked, already_nominated_set,
+        door3_cfg["DOOR3_SLOTS"] + 5,
+    )
+
+    for t in door3_fresh:
+        p = scored_profiles[t]
+        if "DOOR_3_TREND_LEADER" not in p["nominated_doors"]:
+            p["nominated_doors"].append("DOOR_3_TREND_LEADER")
+        all_nominated_map[t] = p
+    for t in door3_retained:
+        p = scored_profiles[t]
+        if "DOOR_3_TREND_LEADER" not in p["nominated_doors"]:
+            p["nominated_doors"].append("DOOR_3_TREND_LEADER")
+        if "HYSTERESIS_RETAINED" not in p["nominated_doors"]:
+            p["nominated_doors"].append("HYSTERESIS_RETAINED")
+        all_nominated_map[t] = p
+
+    door3_final = door3_fresh + [t for t in door3_retained if t not in door3_fresh]
+    door3_final_ranked = sorted(
+        door3_final,
+        key=lambda t: (-(momentum_parts[t][1] if momentum_parts[t][1] is not None else float("-inf")), t),
+    )
+    door3_rn_names = door3_final_ranked[:door3_cfg["DOOR3_RN_SLOTS"]]
+    door3_wl_names = door3_final_ranked[door3_cfg["DOOR3_RN_SLOTS"]:]
+
+    door3_by_cluster: Dict[str, int] = {}
+    for t in door3_final:
+        cl = scored_profiles[t].get("cluster") or "Unknown"
+        door3_by_cluster[cl] = door3_by_cluster.get(cl, 0) + 1
+
     nominated_pool = sorted(all_nominated_map.keys())
 
     # ── 7. Output Results & Backward-Compatible factor_scores.json ───────────
@@ -1657,6 +1866,14 @@ def main():
         "door2_ineligible_count": d2_ineligible_count,
         "door2_renormalised_count": d2_renormalised_count,
         "veto_breakdown": {v: sum(1 for x in vetoes.values() if x == v) for v in set(vetoes.values())},
+        # P3.14: Door 3 "trend leaders" (PHASE_3_ADDENDUM.md).
+        "door3_count": len(door3_final),
+        "door3_rn_count": len(door3_rn_names),
+        "door3_by_cluster": door3_by_cluster,
+        "door3_eligible_count": len(door3_candidates),
+        "door3_ineligible_reasons": door3_ineligible_reasons,
+        "door3_also_trend_leader": sorted(door3_also_trend_leader),
+        "door3_hysteresis_retained": sorted(door3_retained),
     }
 
     # Priority Queue Ranking for RS2 Local (P3.4: bonus 2.0)
@@ -1689,9 +1906,18 @@ def main():
         elif r <= book_buffer_rank and t in prev_book:
             wl_set.add(t)
 
+    # P3.14: Door 3 bands are assigned directly (extra slots beyond the top 50 / top 135, per
+    # PHASE_3_ADDENDUM.md) rather than through the rank-based buffers above. Door 3 has its own
+    # hysteresis rule (door3_hysteresis_retain, already applied to door3_retained) — Door-3
+    # names are excluded from retained_rn/retained_book below so that Door 1/2's own
+    # hysteresis accounting is not conflated with a fresh Door-3 entrant's (unrelated) pctl rank.
+    door3_names_set = set(door3_final)
+    rn_set |= set(door3_rn_names)
+    wl_set |= (set(door3_wl_names) - rn_set)
+
     book_set = rn_set | wl_set
-    retained_rn = {t for t in rn_set if rank_by_ticker[t] > 50}
-    retained_book = {t for t in wl_set if rank_by_ticker[t] > 135}
+    retained_rn = {t for t in rn_set if rank_by_ticker[t] > 50 and t not in door3_names_set}
+    retained_book = {t for t in wl_set if rank_by_ticker[t] > 135 and t not in door3_names_set}
     retained_by_hysteresis = sorted(list(retained_rn | retained_book))
 
     # Ensure any ticker retained into the book is present in all_nominated_map
@@ -1805,6 +2031,7 @@ def main():
     print(f"  - Door 1 (Compounders): {d1_count} picks")
     print(f"  - Door 2 (Value Gaps):  {d2_count} picks")
     print(f"  - Double-Door Champions: {overlap_count} picks")
+    print(f"  - Door 3 (Trend Leaders): {len(door3_final)} picks ({len(door3_rn_names)} research_now) | eligible {len(door3_candidates)}")
     print(f"  - Priority Queue: {len(rn_set)} research_now | {len(wl_set)} watchlist")
     print(f"Saved Dual-Door scores to: {OUT_JSON}")
     print(f"Saved compatible factor_scores to: {FACTOR_SCORES_COMPAT_JSON}")
