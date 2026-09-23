@@ -152,7 +152,60 @@ def _load_door3_config(config_path: Optional[Path] = None) -> Dict[str, float]:
         "DOOR3_CLUSTER_CAP": int(d3.get("DOOR3_CLUSTER_CAP", 5)),
         "DOOR3_MIN_MCAP": float(d3.get("DOOR3_MIN_MCAP", 2_000_000_000.0)),
         "DOOR3_QUALITY_MIN_PCTL": float(d3.get("DOOR3_QUALITY_MIN_PCTL", 25.0)),
+        "DOOR3_MAX_JUMP_SHARE": float(d3.get("DOOR3_MAX_JUMP_SHARE", 0.75)),
     }
+
+
+# P3.14b: fewer usable monthly returns than this in the 12-1 window and a name's trend can't be
+# judged at all (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24).
+DOOR3_MIN_USABLE_MONTHS = 9
+
+
+def compute_trend_continuity(
+    closes: Optional[List[float]],
+    mom_12_1: Optional[float],
+) -> Dict[str, Optional[int]]:
+    """P3.14b: trend-continuity metrics for Door 3, from the same monthly-close window
+    score_paradigm.compute_skip_month_return uses for 12-1 momentum — prices[-13] .. prices[-2],
+    the 11 monthly returns spanning t-12 .. t-2 (closes[-13:-1], 12 closes -> 11 consecutive
+    monthly returns).
+
+    Momentum research (Da, Gurun & Warachka 2014, "Attention, Trading, and the Momentum
+    Effect" / the "frog in the pan" result) finds that momentum from many small, continuous
+    monthly gains persists, while momentum concentrated in a few discrete jumps does not. Door
+    3's first live run picked PACS (one month = 90% of its 12-1 log gain, +177%) and IBRX (98%,
+    +216%, only 5 of 11 months up) — event jumps, not trends.
+
+    jump_share = ln(1 + largest single-month return) / ln(1 + 12-1 return), only defined when
+    the 12-1 return is positive (the ratio of logs is meaningless otherwise) and at least
+    DOOR3_MIN_USABLE_MONTHS of the 11 window months are usable (both endpoints present, finite,
+    non-zero prior close). up_months is the count of positive months among the usable ones.
+
+    Returns {"jump_share": float|None, "up_months": int|None, "usable_months": int}."""
+    if not isinstance(closes, list) or len(closes) < 13:
+        return {"jump_share": None, "up_months": None, "usable_months": 0}
+    window = closes[-13:-1]  # 12 closes -> 11 consecutive monthly returns (t-12 .. t-2)
+    monthly_returns: List[float] = []
+    for i in range(1, len(window)):
+        p0, p1 = window[i - 1], window[i]
+        if p0 is None or p1 is None:
+            continue
+        if not math.isfinite(p0) or not math.isfinite(p1) or p0 == 0:
+            continue
+        r = (p1 / p0) - 1.0
+        if math.isfinite(r):
+            monthly_returns.append(r)
+    usable = len(monthly_returns)
+    if usable < DOOR3_MIN_USABLE_MONTHS:
+        return {"jump_share": None, "up_months": None, "usable_months": usable}
+    up_months = sum(1 for r in monthly_returns if r > 0)
+    jump_share = None
+    if mom_12_1 is not None and mom_12_1 > 0:
+        largest = max(monthly_returns)
+        denom = math.log(1 + mom_12_1)
+        if denom > 0 and (1 + largest) > 0:
+            jump_share = math.log(1 + largest) / denom
+    return {"jump_share": jump_share, "up_months": up_months, "usable_months": usable}
 
 
 def door3_eligibility(
@@ -165,15 +218,27 @@ def door3_eligibility(
     adv_usd: Optional[float],
     min_mcap: float,
     min_adv: float = 300_000.0,
+    usable_months: Optional[int] = None,
+    jump_share: Optional[float] = None,
+    min_usable_months: int = DOOR3_MIN_USABLE_MONTHS,
+    max_jump_share: float = 0.75,
 ) -> Tuple[bool, Optional[str], List[str]]:
-    """P3.14 Door 3 eligibility (PHASE_3_ADDENDUM.md, all required). Returns (eligible,
-    ineligible_reason, extra_flags) — extra_flags carries revisions_missing / adv_missing even
-    when the name is otherwise eligible (an absence rides as a flag, never silently gated)."""
+    """P3.14 Door 3 eligibility (PHASE_3_ADDENDUM.md, all required), plus the P3.14b
+    trend-continuity rule (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24):
+    fewer than `min_usable_months` usable monthly returns in the 12-1 window -> not eligible
+    (reason `short_history`); jump_share > `max_jump_share` -> not eligible (reason
+    `jump_driven`). Returns (eligible, ineligible_reason, extra_flags) — extra_flags carries
+    revisions_missing / adv_missing even when the name is otherwise eligible (an absence rides
+    as a flag, never silently gated)."""
     extra_flags: List[str] = []
     if mcap is None or mcap < min_mcap:
         return False, "mcap_below_door3_floor", extra_flags
     if falling_knife or mom_break is True:
         return False, "falling_knife_or_mom_break", extra_flags
+    if usable_months is None or usable_months < min_usable_months:
+        return False, "short_history", extra_flags
+    if jump_share is not None and jump_share > max_jump_share:
+        return False, "jump_driven", extra_flags
     if z_revisions is None:
         extra_flags.append("revisions_missing")
     elif z_revisions < 0:
@@ -187,6 +252,16 @@ def door3_eligibility(
     return True, None, extra_flags
 
 
+def _door3_rank_key(c: Dict[str, Any]) -> Tuple[float, float, str]:
+    """P3.14b: rank among Door-3 (eligible) names by universe momentum score descending, ties
+    broken by raw mom_12_1 descending, then ticker — deterministic even when universe z is
+    clipped and several names tie (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement
+    2026-09-24). A missing mom_12_1 sorts after every present value on the tie-break."""
+    mom_12_1 = c.get("mom_12_1")
+    mom_12_1_key = -mom_12_1 if mom_12_1 is not None else float("inf")
+    return (-c["universe_momentum"], mom_12_1_key, c["ticker"])
+
+
 def select_door3(
     candidates: List[Dict[str, Any]],
     already_nominated: Set[str],
@@ -194,11 +269,12 @@ def select_door3(
     cluster_cap: int = 5,
 ) -> Dict[str, Any]:
     """P3.14 Door 3 selection. `candidates` are already ELIGIBLE names, each a dict with at
-    least {"ticker", "cluster", "universe_momentum"}. Ranked by universe_momentum descending
-    (ticker breaks ties for determinism). A name already nominated by Door 1 or Door 2 is
+    least {"ticker", "cluster", "universe_momentum"} (optionally "mom_12_1" for the P3.14b
+    tie-break). Ranked by universe_momentum descending, ties broken by raw mom_12_1 descending
+    then ticker (see `_door3_rank_key`). A name already nominated by Door 1 or Door 2 is
     skipped for a Door 3 slot but tagged `also_trend_leader`; at most `cluster_cap` per cluster;
     stops once `slots` new names are selected."""
-    ordered = sorted(candidates, key=lambda c: (-c["universe_momentum"], c["ticker"]))
+    ordered = sorted(candidates, key=_door3_rank_key)
     selected: List[str] = []
     also_trend_leader: List[str] = []
     cluster_counts: Dict[str, int] = {}
@@ -955,6 +1031,13 @@ def main():
                 if prox is not None:
                     t_mom["high_52w_proxy"] = round(prox - 1.0, 4)
                     t_flags.append("momentum_proxy_monthly")
+        # P3.14b: trend-continuity, from price_history's own monthly closes — the same window
+        # score_paradigm uses for 12-1 — regardless of momentum_source, since momentum_state.json
+        # does not carry the underlying monthly closes (PHASE_3_ADDENDUM.md P3.14b).
+        trend = compute_trend_continuity(prices.get(t), t_mom.get("mom_12_1"))
+        t_mom["jump_share"] = trend["jump_share"]
+        t_mom["up_months"] = trend["up_months"]
+        t_mom["usable_months"] = trend["usable_months"]
         ticker_mom_state[t] = t_mom
         ticker_flags[t] = t_flags
 
@@ -1527,6 +1610,11 @@ def main():
             "z_momentum_door1": round(z_mom, 3) if z_mom is not None else None,
             "z_momentum_sector_neutral": round(momentum_parts[t][0], 3) if momentum_parts[t][0] is not None else None,
             "z_momentum_universe": round(momentum_parts[t][1], 3) if momentum_parts[t][1] is not None else None,
+            # P3.14b: trend-continuity for Door 3 (PHASE_3_ADDENDUM.md P3.14b) — jump_share and
+            # up_months from the same 12-1 monthly-close window, also carried in
+            # fct_momentum_state.
+            "jump_share": ticker_mom_state.get(t, {}).get("jump_share"),
+            "up_months": ticker_mom_state.get(t, {}).get("up_months"),
             "z_revisions": round(z_rev, 3) if z_rev is not None else None,
             "z_value": round(z_val, 3) if z_val is not None else None,
             "z_exp_gap": round(z_gap, 3) if z_gap is not None else None,
@@ -1723,6 +1811,9 @@ def main():
             quality_pctl25=door3_quality_pctl25,
             adv_usd=ticker_adv.get(t),
             min_mcap=door3_cfg["DOOR3_MIN_MCAP"],
+            usable_months=fct_mom.get("usable_months"),
+            jump_share=fct_mom.get("jump_share"),
+            max_jump_share=door3_cfg["DOOR3_MAX_JUMP_SHARE"],
         )
         if not eligible:
             door3_ineligible_reasons[reason] = door3_ineligible_reasons.get(reason, 0) + 1
@@ -1730,7 +1821,10 @@ def main():
         for fl in extra_flags:
             if fl not in p["fct_flags"]:
                 p["fct_flags"].append(fl)
-        door3_candidates.append({"ticker": t, "cluster": p["cluster"], "universe_momentum": univ_mom})
+        door3_candidates.append({
+            "ticker": t, "cluster": p["cluster"], "universe_momentum": univ_mom,
+            "mom_12_1": fct_mom.get("mom_12_1"),
+        })
 
     door3_select_result = select_door3(
         door3_candidates, already_nominated_set,
@@ -1743,8 +1837,10 @@ def main():
         if "also_trend_leader" not in p["fct_flags"]:
             p["fct_flags"].append("also_trend_leader")
 
+    # P3.14b: same ranking as select_door3 — universe momentum, ties broken by raw mom_12_1
+    # descending, then ticker (_door3_rank_key) — so hysteresis rank agrees with selection order.
     door3_eligible_ranked = [
-        c["ticker"] for c in sorted(door3_candidates, key=lambda c: (-c["universe_momentum"], c["ticker"]))
+        c["ticker"] for c in sorted(door3_candidates, key=_door3_rank_key)
     ]
     door3_retained = door3_hysteresis_retain(
         prev_door3, door3_fresh, door3_eligible_ranked, already_nominated_set,
@@ -1765,9 +1861,15 @@ def main():
         all_nominated_map[t] = p
 
     door3_final = door3_fresh + [t for t in door3_retained if t not in door3_fresh]
+    # P3.14b: same rank order as selection/hysteresis (_door3_rank_key) for the research_now /
+    # watchlist split, so the band boundary agrees with the ranking that put a name in the door.
     door3_final_ranked = sorted(
         door3_final,
-        key=lambda t: (-(momentum_parts[t][1] if momentum_parts[t][1] is not None else float("-inf")), t),
+        key=lambda t: _door3_rank_key({
+            "universe_momentum": momentum_parts[t][1] if momentum_parts[t][1] is not None else float("-inf"),
+            "mom_12_1": ticker_mom_state.get(t, {}).get("mom_12_1"),
+            "ticker": t,
+        }),
     )
     door3_rn_names = door3_final_ranked[:door3_cfg["DOOR3_RN_SLOTS"]]
     door3_wl_names = door3_final_ranked[door3_cfg["DOOR3_RN_SLOTS"]:]

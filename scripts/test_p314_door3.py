@@ -13,6 +13,15 @@ Requirements covered (PHASE_3_ADDENDUM.md P3.14):
 5. Hysteresis: a previous Door-3 name not re-selected fresh stays while its current
    universe-momentum rank among eligible names is <= DOOR3_SLOTS + 5.
 6. sifter_config.json carries the door3 constants.
+
+Requirements covered (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24):
+7. Trend-continuity eligibility: jump_share = ln(1 + largest single-month return) / ln(1 +
+   12-1 return), computed only when 12-1 > 0, from the 11 monthly returns in the t-12 .. t-2
+   window (closes[-13:-1], same data score_paradigm.compute_skip_month_return uses). A name
+   with jump_share > DOOR3_MAX_JUMP_SHARE (0.75) is not eligible (reason jump_driven). Fewer
+   than 9 usable monthly returns -> not eligible (reason short_history).
+8. Ranking among eligible names: universe momentum score, ties broken by raw mom_12_1
+   descending, then ticker.
 """
 
 from pathlib import Path
@@ -24,6 +33,7 @@ from score_factors_dual_door import (
     door3_eligibility,
     select_door3,
     door3_hysteresis_retain,
+    compute_trend_continuity,
     sector_neutral_z,
     universe_z,
 )
@@ -41,6 +51,7 @@ def test_door3_config_defaults():
         "DOOR3_CLUSTER_CAP": 5,
         "DOOR3_MIN_MCAP": 2_000_000_000.0,
         "DOOR3_QUALITY_MIN_PCTL": 25.0,
+        "DOOR3_MAX_JUMP_SHARE": 0.75,
     }
 
 
@@ -50,6 +61,9 @@ def _elig(**kw):
     base = dict(
         mcap=5e9, falling_knife=False, mom_break=False, z_revisions=0.5, z_quality=1.0,
         quality_pctl25=0.0, adv_usd=1_000_000.0, min_mcap=2e9,
+        # P3.14b: valid trend-continuity data by default, so tests above this section keep
+        # exercising only their own rule in isolation.
+        usable_months=11, jump_share=0.3,
     )
     base.update(kw)
     return door3_eligibility(**base)
@@ -144,6 +158,96 @@ def test_revisions_missing_and_adv_missing_both_flagged():
     assert set(flags) == {"revisions_missing", "adv_missing"}
 
 
+# ── P3.14b: trend-continuity eligibility (jump_share / short_history) ───────
+# PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24: Door 3's first run picked
+# PACS (one month = 90% of its 12-1 log gain, +177%) and IBRX (98%, +216%, only 5/11 months
+# up) — event jumps, not trends (Da, Gurun & Warachka 2014, "frog in the pan").
+
+def test_eligible_jump_share_exactly_at_threshold():
+    eligible, reason, _ = _elig(jump_share=0.75)
+    assert eligible is True and reason is None
+
+
+def test_ineligible_jump_share_just_above_threshold():
+    eligible, reason, _ = _elig(jump_share=0.7501)
+    assert eligible is False and reason == "jump_driven"
+
+
+def test_jump_share_none_does_not_block():
+    """jump_share is None whenever the 12-1 return isn't positive (the rule doesn't apply
+    then) — a present, adequate usable_months still lets the name through."""
+    eligible, reason, _ = _elig(jump_share=None)
+    assert eligible is True and reason is None
+
+
+def test_ineligible_short_history_below_9_usable_months():
+    eligible, reason, _ = _elig(usable_months=8)
+    assert eligible is False and reason == "short_history"
+
+
+def test_eligible_short_history_exactly_9_usable_months():
+    eligible, reason, _ = _elig(usable_months=9)
+    assert eligible is True and reason is None
+
+
+def test_ineligible_usable_months_none():
+    eligible, reason, _ = _elig(usable_months=None)
+    assert eligible is False and reason == "short_history"
+
+
+def test_short_history_checked_before_jump_share():
+    """Both rules would fail on this input; short_history (checked first) is the reason."""
+    eligible, reason, _ = _elig(usable_months=5, jump_share=0.9)
+    assert eligible is False and reason == "short_history"
+
+
+# ── P3.14b: compute_trend_continuity — jump_share / up_months from monthly closes ────────────
+
+def test_trend_continuity_continuous_gain_has_low_jump_share():
+    """11 equal 5%-per-month gains (geometric): no single month dominates the 12-1 log gain,
+    and every month is up."""
+    closes = [100.0 * (1.05 ** i) for i in range(12)] + [999.0]  # 13th (skipped month) is inert
+    m121 = sfdd.compute_skip_month_return(closes)
+    result = compute_trend_continuity(closes, m121)
+    assert result["usable_months"] == 11
+    assert result["up_months"] == 11
+    assert result["jump_share"] == pytest.approx(1.0 / 11.0, abs=0.005)
+
+
+def test_trend_continuity_single_event_jump_has_high_jump_share():
+    """PACS-shaped: ten flat months, then one large jump — mirrors the +177% orchestrator
+    measurement where one month was 90% of the 12-1 log gain."""
+    closes = [100.0] * 11 + [277.0, 300.0]  # window = closes[-13:-1] = the first 12 entries
+    m121 = sfdd.compute_skip_month_return(closes)
+    assert m121 == pytest.approx(1.77, abs=0.01)
+    result = compute_trend_continuity(closes, m121)
+    assert result["usable_months"] == 11
+    assert result["up_months"] == 1
+    assert result["jump_share"] == pytest.approx(1.0, abs=1e-9)
+    assert result["jump_share"] > 0.75
+
+
+def test_trend_continuity_short_history_below_13_closes():
+    result = compute_trend_continuity([100.0] * 10, 0.1)
+    assert result == {"jump_share": None, "up_months": None, "usable_months": 0}
+
+
+def test_trend_continuity_short_history_gaps_below_9_usable():
+    """A None in the window drops the two returns that touch it; one gap out of 11 possible
+    returns leaves exactly 9 usable (at the short_history boundary, still eligible-shaped)."""
+    closes = [100.0] * 5 + [None] + [100.0] * 6 + [999.0]  # 13 entries, one gap in the window
+    result = compute_trend_continuity(closes, 0.0)
+    assert result["usable_months"] == 9
+
+
+def test_trend_continuity_jump_share_none_when_12_1_not_positive():
+    closes = [100.0 * (0.98 ** i) for i in range(12)] + [50.0]
+    m121 = sfdd.compute_skip_month_return(closes)
+    assert m121 is not None and m121 <= 0
+    result = compute_trend_continuity(closes, m121)
+    assert result["jump_share"] is None
+
+
 # ── Selection: ranking, dedup/also_trend_leader, cluster cap, slot cap ───────
 
 def _cand(ticker, cluster, mom):
@@ -186,6 +290,30 @@ def test_ties_broken_by_ticker_for_determinism():
     cands = [_cand("B", "c1", 1.0), _cand("A", "c2", 1.0)]
     res = select_door3(cands, already_nominated=set(), slots=20, cluster_cap=5)
     assert res["selected"] == ["A", "B"]
+
+
+# ── P3.14b: ties broken by raw mom_12_1 descending, then ticker (universe z is clipped, so the
+# top names can tie exactly — this is what makes their order deterministic) ──────────────────
+
+def test_ties_broken_by_mom_12_1_before_ticker():
+    cands = [
+        {"ticker": "Z", "cluster": "c1", "universe_momentum": 2.053, "mom_12_1": 0.50},
+        {"ticker": "A", "cluster": "c2", "universe_momentum": 2.053, "mom_12_1": 0.90},
+        {"ticker": "M", "cluster": "c3", "universe_momentum": 2.053, "mom_12_1": 0.90},
+    ]
+    res = select_door3(cands, already_nominated=set(), slots=20, cluster_cap=5)
+    # A and M tie on both universe_momentum and mom_12_1 (0.90) -> ticker decides (A before M).
+    # Z shares the universe_momentum tie but has a lower raw mom_12_1 -> ranks behind both.
+    assert res["selected"] == ["A", "M", "Z"]
+
+
+def test_ties_missing_mom_12_1_sorts_after_present_values():
+    cands = [
+        {"ticker": "HAS", "cluster": "c1", "universe_momentum": 1.0, "mom_12_1": 0.01},
+        {"ticker": "MISSING", "cluster": "c2", "universe_momentum": 1.0},  # no mom_12_1 key
+    ]
+    res = select_door3(cands, already_nominated=set(), slots=20, cluster_cap=5)
+    assert res["selected"] == ["HAS", "MISSING"]
 
 
 # ── RN / watchlist split (top DOOR3_RN_SLOTS -> research_now, rest -> watchlist) ─────────────
