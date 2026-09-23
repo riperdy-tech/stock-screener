@@ -103,6 +103,27 @@ def test_empty_inputs_are_safe():
     assert tp.depth_targets({}, {}) == {}
 
 
+def test_actionable_false_is_excluded_from_targets():
+    """A row with actionable: False is ignored, while actionable: True or legacy absent are kept."""
+    f = {"A": fct(1), "B": fct(2), "C": fct(3)}
+    d = {
+        "A": {"direction": "undervalued", "actionable": True},
+        "B": {"direction": "undervalued", "actionable": False},
+        "C": {"direction": "undervalued"},  # legacy row without actionable field
+    }
+    assert set(tp.depth_targets(f, d)) == {"A", "C"}
+
+
+def test_all_false_overlay_gives_empty_target_set():
+    """When every row is actionable: False, the target set is empty."""
+    f = {"A": fct(1), "B": fct(2)}
+    d = {
+        "A": {"direction": "undervalued", "actionable": False},
+        "B": {"direction": "undervalued", "actionable": False},
+    }
+    assert tp.depth_targets(f, d) == {}
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     failed = 0

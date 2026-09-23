@@ -180,6 +180,8 @@ def depth_targets(factor: dict, depth: dict) -> dict:
             continue
         if verdict.get("direction") != "undervalued":
             continue
+        if verdict.get("actionable") is False:
+            continue
         names.append(ticker)
     if not names:
         return {}
