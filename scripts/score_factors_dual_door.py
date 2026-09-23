@@ -695,9 +695,13 @@ def main():
 
     # Load Tier 1 hygiene survivors if present
     survivor_tickers: Optional[Set[str]] = None
+    # P3.10: names Tier 1 flagged ALTERNATE_REPORTING (foreign issuer, no US XBRL) so the
+    # NO_FUNDAMENTAL_HISTORY veto below can say why instead of looking like a data hole.
+    alternate_reporting_tickers: Set[str] = set()
     if TIER1_SURVIVORS_JSON.exists():
         surv_data = load_json(TIER1_SURVIVORS_JSON, {})
         survivor_tickers = set(surv_data.get("survivor_tickers", []))
+        alternate_reporting_tickers = set(surv_data.get("alternate_reporting", []))
         print(f"Loaded {len(survivor_tickers)} clean survivors from Tier 1 Hygiene filter.")
 
     all_tickers = sorted(stocks.keys())
@@ -950,6 +954,8 @@ def main():
         years = sorted([int(y) for y in ydata.keys()])
         if not years:
             vetoes[t] = "NO_FUNDAMENTAL_HISTORY"
+            if t in alternate_reporting_tickers:
+                veto_detail[t] = "alternate_reporting_unverified"
             continue
 
         latest_y = str(years[-1])

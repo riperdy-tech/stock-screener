@@ -35,19 +35,21 @@ DATA = ROOT / "public" / "data"
 
 STOCKS_JSON = DATA / "stocks.json"
 FUNDAMENTALS_JSON = DATA / "fundamentals_history.json"
+FUNDAMENTALS_TTM_JSON = DATA / "fundamentals_ttm.json"
+MOMENTUM_STATE_JSON = DATA / "momentum_state.json"
 PRICE_HISTORY_JSON = DATA / "price_history.json"
 CIK_MAP_JSON = DATA / "cik_map.json"
 
 sys.path.append(str(Path(__file__).resolve().parent))
-from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR
+from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, resolve_adv_usd
 
 OUT_SURVIVORS_JSON = DATA / "tier1_hygiene_survivors.json"
 OUT_AUDIT_JSON = DATA / "tier1_hygiene_audit.json"
 
-# Thresholds
-MAX_STALE_MONTHS = 16            # 16 months from fiscal year end (15 months from filing)
-EVAL_YEAR = 2026                 # Current runtime year
-MIN_COMPLIANT_FY = 2024          # Must have filed at least FY2024 by mid-2026
+# Thresholds — P3.10: the only statutory-staleness constant actually used. EVAL_YEAR and
+# MIN_COMPLIANT_FY (a hardcoded fiscal-year cutoff) and the unused MAX_STALE_MONTHS are gone;
+# staleness is now measured from the real annual period-end date, not a fixed calendar year.
+STALE_ANNUAL_REPORT_MAX_MONTHS = 16   # 16 months from fiscal year end (15 months from filing)
 
 # Benchmark tickers that MUST NEVER be rejected (Preservation Gate)
 BENCHMARK_PRESERVE = [
@@ -68,6 +70,38 @@ def load_json(p: Path, default=None):
         return json.load(f)
 
 
+def resolve_period_end(sym: str, years: List[int], period_end_map: Dict[str, Any],
+                        fundamentals_ttm: Dict[str, Any]) -> Optional[str]:
+    """P3.10: the latest annual period-end date for a ticker — fundamentals_history.json's
+    provenance.period_end[sym][latest_fy] when available, else fundamentals_ttm.json's
+    fy_leg_end. None when neither resolves (an absence, not a guessed date)."""
+    if not years:
+        return None
+    latest_fy_str = str(years[-1])
+    period_end = (period_end_map.get(sym) or {}).get(latest_fy_str)
+    if period_end is not None:
+        return period_end
+    return (fundamentals_ttm.get(sym) or {}).get("fy_leg_end")
+
+
+def months_since(date_str: Optional[str], now: datetime) -> Optional[float]:
+    """Calendar months (30.4368-day average) between a "YYYY-MM-DD" date and `now`. None when
+    the date is missing or unparseable — an absence, never a guessed default."""
+    if not date_str:
+        return None
+    try:
+        d = datetime.strptime(date_str, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    except ValueError:
+        return None
+    return (now - d).days / 30.4368
+
+
+def benchmark_hard_fail(missing_bench: List[str], audit_log: Dict[str, Dict[str, Any]]) -> List[str]:
+    """P3.10: the benchmark gate is hard — every preserved name must survive, or be vetoed for
+    NOT_TRADABLE (delisted) alone. Anything else vetoed is a build-breaking regression."""
+    return [t for t in missing_bench if audit_log.get(t, {}).get("primary_reason") != "NOT_TRADABLE"]
+
+
 def evaluate_tier1():
     print("=" * 70)
     print("TIER 1 RETAIL HYGIENE & SEC STATUTORY REPORTING FILTER")
@@ -75,13 +109,19 @@ def evaluate_tier1():
 
     stocks_data = load_json(STOCKS_JSON, [])
     stocks = {s["symbol"]: s for s in stocks_data if s.get("symbol")}
-    fundamentals = (load_json(FUNDAMENTALS_JSON, {}) or {}).get("tickers", {})
+    fundamentals_raw = load_json(FUNDAMENTALS_JSON, {}) or {}
+    fundamentals = fundamentals_raw.get("tickers", {})
+    period_end_map = (fundamentals_raw.get("provenance", {}) or {}).get("period_end", {})
+    fundamentals_ttm = (load_json(FUNDAMENTALS_TTM_JSON, {}) or {}).get("tickers", {})
+    momentum_state = (load_json(MOMENTUM_STATE_JSON, {}) or {}).get("tickers", {})
     cik_map = load_json(CIK_MAP_JSON, {}) or {}
 
     total_universe = len(stocks)
     print(f"Loaded {total_universe} stocks from universe database.")
+    now = datetime.now(timezone.utc)
 
     survivors: List[str] = []
+    alternate_reporting: List[str] = []
     audit_log: Dict[str, Dict[str, Any]] = {}
     veto_tallies: Dict[str, int] = {}
 
@@ -102,13 +142,19 @@ def evaluate_tier1():
         if price is None or price < MIN_SHARE_PRICE:
             reasons.append(f"PRICE_BELOW_3 (price=${price if price else 0:.2f})")
 
-        # 3. Liquidity ADV Check
-        if vol is not None and price is not None:
-            adv = vol * price
-            if adv < MIN_ADV_DOLLAR:
-                reasons.append(f"ADV_BELOW_300K (adv=${adv/1e3:.1f}k)")
+        # 3. Liquidity ADV Check (P3.6c order, via hygiene_thresholds.resolve_adv_usd):
+        #    stocks[t].metrics.adv_20d_usd (new, universe-wide) -> momentum_state adv_20d_usd
+        #    (SCR-10) -> snapshot vol*price (flagged adv_single_day) -> none. The 300k check
+        #    applies whenever a value resolves, same as before.
+        stocks_adv_20d = num((s.get("metrics") or {}).get("adv_20d_usd"))
+        mom_adv_20d = num(momentum_state.get(sym, {}).get("adv_20d_usd"))
+        adv, adv_flag = resolve_adv_usd(stocks_adv_20d, mom_adv_20d, vol, price)
+        if adv_flag is not None:
+            flags.append(f"DATA_FLAG: {adv_flag.upper()}")
+        if adv is not None and adv < MIN_ADV_DOLLAR:
+            reasons.append(f"ADV_BELOW_300K (adv=${adv/1e3:.1f}k)")
 
-        # 4. SEC Statutory Reporting Freshness Check
+        # 4. SEC Statutory Reporting Freshness Check (P3.10: period-end basis, not fiscal year)
         has_cik = sym in cik_map
         fh = fundamentals.get(sym, {})
         years = sorted([int(y) for y in fh.keys()]) if fh else []
@@ -118,12 +164,19 @@ def evaluate_tier1():
             country = s.get("country") or "US"
             if country != "United States" and mcap and mcap >= MIN_MARKET_CAP and price and price >= MIN_SHARE_PRICE:
                 flags.append("DATA_FLAG: ALTERNATE_REPORTING")
+                alternate_reporting.append(sym)
             else:
                 reasons.append("NO_SEC_FUNDAMENTALS_FILED")
         else:
-            latest_fy = years[-1]
-            if latest_fy < MIN_COMPLIANT_FY:
-                reasons.append(f"SEC_DELINQUENT_STALE_ANNUAL_REPORT (latest_fy={latest_fy} < {MIN_COMPLIANT_FY})")
+            period_end = resolve_period_end(sym, years, period_end_map, fundamentals_ttm)
+            months_stale = months_since(period_end, now)
+            if months_stale is None:
+                flags.append("DATA_FLAG: PERIOD_END_UNRESOLVED")
+            elif months_stale > STALE_ANNUAL_REPORT_MAX_MONTHS:
+                reasons.append(
+                    f"SEC_DELINQUENT_STALE_ANNUAL_REPORT (period_end={period_end}, "
+                    f"months_since={months_stale:.1f} > {STALE_ANNUAL_REPORT_MAX_MONTHS})"
+                )
 
         # 5. Non-Operating Vehicle / SPAC Check
         industry = (s.get("industry") or "").strip()
@@ -156,8 +209,10 @@ def evaluate_tier1():
                 "latest_fy": years[-1] if years else None
             }
 
-    # Preservation Gate Check
+    # Preservation Gate Check (P3.10: hard gate — a benchmark name vetoed for any reason other
+    # than NOT_TRADABLE is a build-breaking regression, not a warning)
     missing_bench = [t for t in BENCHMARK_PRESERVE if t not in survivors]
+    hard_fail_bench = benchmark_hard_fail(missing_bench, audit_log)
     if missing_bench:
         print(f"\n[FATAL WARNING] Benchmark preservation failed for: {missing_bench}")
         for t in missing_bench:
@@ -172,7 +227,10 @@ def evaluate_tier1():
         "survivors_count": len(survivors),
         "vetoed_count": len(audit_log) - len(survivors),
         "retention_rate_pct": round(len(survivors) / total_universe * 100.0, 2),
-        "survivor_tickers": survivors
+        "survivor_tickers": survivors,
+        # P3.10: written per ticker so SCR-03b can stamp fct_veto_detail =
+        # "alternate_reporting_unverified" instead of the generic NO_FUNDAMENTAL_HISTORY.
+        "alternate_reporting": sorted(alternate_reporting)
     }
     OUT_SURVIVORS_JSON.write_text(json.dumps(survivors_data, indent=2), encoding="utf-8")
 
@@ -192,6 +250,14 @@ def evaluate_tier1():
     print(f"Saved survivors to: {OUT_SURVIVORS_JSON}")
     print(f"Saved audit log to: {OUT_AUDIT_JSON}")
     print("=" * 70)
+
+    if hard_fail_bench:
+        print(f"[FATAL] Benchmark preservation gate: {hard_fail_bench} vetoed for a reason "
+              f"other than NOT_TRADABLE.")
+        for t in hard_fail_bench:
+            print(f"  {t}: {audit_log.get(t)}")
+        sys.exit(1)
+
     return survivors
 
 
