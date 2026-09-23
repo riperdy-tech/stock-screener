@@ -401,6 +401,8 @@ def apply_llm_overlay(results):
         # NOT_USABLE / missing = a malfunction, not a verdict: read as silence.
         if direction not in ("undervalued", "hold", "overvalued"):
             continue
+        if v.get("actionable") is False:
+            continue
         mos = v.get("mos_vs_median_pct")
         m = mos if isinstance(mos, (int, float)) else 0.0
         conv = conv_map.get(t)
