@@ -37,7 +37,9 @@ from typing import Any, Dict, List, Optional, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DATA_DIR = ROOT / "public" / "data"
-CONFIG_FILE = Path(__file__).resolve().with_name("momentum_config.json")
+CONFIG_FILE = Path(__file__).resolve().with_name("sifter_config.json")
+if not CONFIG_FILE.exists():
+    CONFIG_FILE = Path(__file__).resolve().with_name("momentum_config.json")
 
 # Ensure scripts directory is on sys.path for internal imports
 SCRIPTS_DIR = Path(__file__).resolve().parent

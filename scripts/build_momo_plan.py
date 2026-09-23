@@ -1,5 +1,7 @@
 """build_momo_plan.py — plan3 · bold: momentum sleeve plan builder.
 
+P3.11: diagnostic-only — not a run_chain.py step; its regime throttle is an input to Phase 5.
+
 Objective (user spec 2026-07-13): maximize profit inside a 15% drawdown budget
 (20% hard kill), benchmark QQQ. Offense and defense are SEPARATE layers:
 

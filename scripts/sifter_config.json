@@ -1,0 +1,63 @@
+{
+  "_note": "Defaults are judgement until re-measured after 20 dual-door runs. Buffers 60/150 prevent churn (in 3 dual-door runs, 2 of 4 research_now exits landed at ranks 51-52).",
+  "door2_momentum_floor": -1.5,
+  "DOOR2_MOMENTUM_FLOOR": -1.5,
+  "momentum_universe_weight": {
+    "_note": "judgement — industry momentum; only 24 monthly closes exist, no local backtest; to be graded by TRK-06 / Phase 5",
+    "MOMENTUM_UNIVERSE_WEIGHT": 0.5
+  },
+  "hysteresis_rn_rank": 60,
+  "hysteresis_book_rank": 150,
+  "door3": {
+    "_note": "P3.14 (PHASE_3_ADDENDUM.md) — Door 3 'trend leaders': ranks eligible names by universe-wide momentum (mean of universe_z(skip_12_1), universe_z(high_52w)); dedups against Door 1/2; no champion bonus.",
+    "DOOR3_SLOTS": 20,
+    "DOOR3_RN_SLOTS": 5,
+    "DOOR3_CLUSTER_CAP": 5,
+    "DOOR3_MIN_MCAP": 2000000000,
+    "DOOR3_QUALITY_MIN_PCTL": 25,
+    "DOOR3_MAX_JUMP_SHARE": 0.75,
+    "_note_jump_share": "P3.14b (orchestrator measurement 2026-09-24) — Door 3's first run picked PACS (one month = 90% of its 12-1 log gain, +177%) and IBRX (98%, +216%, only 5/11 months up): event jumps, not trends. jump_share = ln(1+largest single-month return)/ln(1+12-1 return); above this is not Door-3-eligible (reason jump_driven). Momentum research (Da, Gurun & Warachka 2014, 'frog in the pan') finds continuous gains persist and discrete jumps do not."
+  },
+  "mid_cycle_window": {
+    "_note": "Window by cluster from measured 10-year owner-cash-flow margin swing |3y mean - 10y mean| vs all-cluster median 0.041. 8 years ONLY for commodity-driven clusters above median: energy_upstream (0.061), energy_services (0.085), energy_midstream_refining (0.054), mat_metals_mining (0.068). NOT freight (0.036), chemicals (0.032), construction materials (0.020).",
+    "default_years": 3,
+    "cluster_years": {
+      "energy_upstream": 8,
+      "energy_services": 8,
+      "energy_midstream_refining": 8,
+      "mat_metals_mining": 8
+    },
+    "cluster_swings": {
+      "energy_upstream": 0.061,
+      "energy_services": 0.085,
+      "energy_midstream_refining": 0.054,
+      "mat_metals_mining": 0.068,
+      "ind_freight_logistics": 0.036,
+      "mat_chemicals": 0.032,
+      "mat_construction": 0.020
+    },
+    "all_cluster_median_swing": 0.041
+  },
+  "veto_switches": {
+    "_note": "Switches for new P3.6 forensic and solvency vetoes. All set to false (flag_only) in this commit. P3.6b: altman_z and beneish_standalone are now permanently flag-only in code (see PHASE_3_QUANT_BOOK.md P3.6b) — these two keys are kept at false for the record but no longer gate a veto branch.",
+    "altman_z": false,
+    "beneish_standalone": false,
+    "no_liquidity_data": false
+  },
+  "altman_sector_overrides": {
+    "_note": "P3.6b: layered on top of reverse_config.json's thresholds.stage1.sector_altman_z_min (owned by score_reverse.py — not edited here). Utilities is structurally leveraged like Financials/Real Estate, which reverse_config.json's table doesn't yet carry.",
+    "Utilities": 0.0
+  },
+  "dma200_slope_lookback_days": 20,
+  "pct_from_52w_high_break_threshold": -0.20,
+  "mom_break_terms": {
+    "dma_trend_break": {
+      "require_below_200dma": true,
+      "max_dma200_slope_20d": 0.0
+    },
+    "drawdown_break": {
+      "max_pct_from_52w_high": -0.20,
+      "max_mom_1m": 0.0
+    }
+  }
+}

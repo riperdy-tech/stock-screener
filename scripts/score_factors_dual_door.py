@@ -42,6 +42,7 @@ DATA = ROOT / "public" / "data"
 sys.path.append(str(Path(__file__).resolve().parent))
 from industry_taxonomy import get_taxonomy_profile, normalize_industry
 from score_paradigm import compute_skip_month_return, compute_high_proximity
+from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, LARGE_CAP_FLAG_ONLY_USD, resolve_adv_usd
 import depth_conviction
 import tradability
 import peer_paths
@@ -50,7 +51,10 @@ from mri_sync import sync_mri_snapshot
 STOCKS_JSON = DATA / "stocks.json"
 PRICE_HISTORY_JSON = DATA / "price_history.json"
 MOMENTUM_STATE_JSON = DATA / "momentum_state.json"
-MOMENTUM_CONFIG_PATH = Path(__file__).resolve().parent / "momentum_config.json"
+SIFTER_CONFIG_PATH = Path(__file__).resolve().parent / "sifter_config.json"
+if not SIFTER_CONFIG_PATH.exists():
+    SIFTER_CONFIG_PATH = Path(__file__).resolve().parent / "momentum_config.json"
+MOMENTUM_CONFIG_PATH = SIFTER_CONFIG_PATH
 FUNDAMENTALS_HISTORY_JSON = DATA / "fundamentals_history.json"
 BATTERY_JSON = DATA / "fundamentals_battery.json"
 EPS_TRAJECTORY_JSON = DATA / "eps_trajectory.json"
@@ -94,14 +98,260 @@ def load_json(path: Path, default=None):
         return json.load(f)
 
 
+def _load_sifter_config(config_path: Optional[Path] = None) -> Dict[str, Any]:
+    p = config_path or globals().get("SIFTER_CONFIG_PATH", Path(__file__).resolve().parent / "sifter_config.json")
+    if not p.exists():
+        p = globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
+    return load_json(p, {}) if p.exists() else {}
+
+
 def _load_door2_momentum_floor(config_path: Optional[Path] = None) -> float:
-    p = config_path or globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
-    cfg = load_json(p, {}) if p.exists() else {}
+    cfg = _load_sifter_config(config_path)
     val = cfg.get("door2_momentum_floor", cfg.get("DOOR2_MOMENTUM_FLOOR", -1.5))
     return float(val)
 
 
+def _load_momentum_universe_weight(config_path: Optional[Path] = None) -> float:
+    """P3.13: weight given to the pooled-universe momentum z vs. the sector-neutral one when
+    combining the momentum pillar. Accepts either a flat top-level key or the nested
+    {"momentum_universe_weight": {"MOMENTUM_UNIVERSE_WEIGHT": ...}} shape used elsewhere in
+    this file for judgement constants that carry a `_note`."""
+    cfg = _load_sifter_config(config_path)
+    nested = cfg.get("momentum_universe_weight", {})
+    val = nested.get("MOMENTUM_UNIVERSE_WEIGHT", cfg.get("MOMENTUM_UNIVERSE_WEIGHT", 0.5))
+    return float(val)
+
+
+def _load_hysteresis_ranks(config_path: Optional[Path] = None) -> Tuple[int, int]:
+    cfg = _load_sifter_config(config_path)
+    rn_buf = cfg.get("hysteresis_rn_rank", cfg.get("hysteresis_rn_buffer", 60))
+    book_buf = cfg.get("hysteresis_book_rank", cfg.get("hysteresis_book_buffer", 150))
+    return int(rn_buf), int(book_buf)
+
+
+def _load_mid_cycle_config(config_path: Optional[Path] = None) -> Tuple[int, Dict[str, int]]:
+    cfg = _load_sifter_config(config_path)
+    mc = cfg.get("mid_cycle_window", {})
+    def_yrs = int(mc.get("default_years", 3))
+    cl_yrs = mc.get("cluster_years", {
+        "energy_upstream": 8,
+        "energy_services": 8,
+        "energy_midstream_refining": 8,
+        "mat_metals_mining": 8,
+    })
+    return def_yrs, {k: int(v) for k, v in cl_yrs.items()}
+
+
+def _load_door3_config(config_path: Optional[Path] = None) -> Dict[str, float]:
+    """P3.14 (PHASE_3_ADDENDUM.md): Door 3 'trend leaders' constants."""
+    cfg = _load_sifter_config(config_path)
+    d3 = cfg.get("door3", {})
+    return {
+        "DOOR3_SLOTS": int(d3.get("DOOR3_SLOTS", 20)),
+        "DOOR3_RN_SLOTS": int(d3.get("DOOR3_RN_SLOTS", 5)),
+        "DOOR3_CLUSTER_CAP": int(d3.get("DOOR3_CLUSTER_CAP", 5)),
+        "DOOR3_MIN_MCAP": float(d3.get("DOOR3_MIN_MCAP", 2_000_000_000.0)),
+        "DOOR3_QUALITY_MIN_PCTL": float(d3.get("DOOR3_QUALITY_MIN_PCTL", 25.0)),
+        "DOOR3_MAX_JUMP_SHARE": float(d3.get("DOOR3_MAX_JUMP_SHARE", 0.75)),
+    }
+
+
+# P3.14b: fewer usable monthly returns than this in the 12-1 window and a name's trend can't be
+# judged at all (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24).
+DOOR3_MIN_USABLE_MONTHS = 9
+
+
+def compute_trend_continuity(
+    closes: Optional[List[float]],
+    mom_12_1: Optional[float],
+) -> Dict[str, Optional[int]]:
+    """P3.14b: trend-continuity metrics for Door 3, from the same monthly-close window
+    score_paradigm.compute_skip_month_return uses for 12-1 momentum — prices[-13] .. prices[-2],
+    the 11 monthly returns spanning t-12 .. t-2 (closes[-13:-1], 12 closes -> 11 consecutive
+    monthly returns).
+
+    Momentum research (Da, Gurun & Warachka 2014, "Attention, Trading, and the Momentum
+    Effect" / the "frog in the pan" result) finds that momentum from many small, continuous
+    monthly gains persists, while momentum concentrated in a few discrete jumps does not. Door
+    3's first live run picked PACS (one month = 90% of its 12-1 log gain, +177%) and IBRX (98%,
+    +216%, only 5 of 11 months up) — event jumps, not trends.
+
+    jump_share = ln(1 + largest single-month return) / ln(1 + 12-1 return), only defined when
+    the 12-1 return is positive (the ratio of logs is meaningless otherwise) and at least
+    DOOR3_MIN_USABLE_MONTHS of the 11 window months are usable (both endpoints present, finite,
+    non-zero prior close). up_months is the count of positive months among the usable ones.
+
+    Returns {"jump_share": float|None, "up_months": int|None, "usable_months": int}."""
+    if not isinstance(closes, list) or len(closes) < 13:
+        return {"jump_share": None, "up_months": None, "usable_months": 0}
+    window = closes[-13:-1]  # 12 closes -> 11 consecutive monthly returns (t-12 .. t-2)
+    monthly_returns: List[float] = []
+    for i in range(1, len(window)):
+        p0, p1 = window[i - 1], window[i]
+        if p0 is None or p1 is None:
+            continue
+        if not math.isfinite(p0) or not math.isfinite(p1) or p0 == 0:
+            continue
+        r = (p1 / p0) - 1.0
+        if math.isfinite(r):
+            monthly_returns.append(r)
+    usable = len(monthly_returns)
+    if usable < DOOR3_MIN_USABLE_MONTHS:
+        return {"jump_share": None, "up_months": None, "usable_months": usable}
+    up_months = sum(1 for r in monthly_returns if r > 0)
+    jump_share = None
+    if mom_12_1 is not None and mom_12_1 > 0:
+        largest = max(monthly_returns)
+        denom = math.log(1 + mom_12_1)
+        if denom > 0 and (1 + largest) > 0:
+            jump_share = math.log(1 + largest) / denom
+    return {"jump_share": jump_share, "up_months": up_months, "usable_months": usable}
+
+
+def door3_eligibility(
+    mcap: Optional[float],
+    falling_knife: bool,
+    mom_break: Optional[bool],
+    z_revisions: Optional[float],
+    z_quality: Optional[float],
+    quality_pctl25: Optional[float],
+    adv_usd: Optional[float],
+    min_mcap: float,
+    min_adv: float = 300_000.0,
+    usable_months: Optional[int] = None,
+    jump_share: Optional[float] = None,
+    min_usable_months: int = DOOR3_MIN_USABLE_MONTHS,
+    max_jump_share: float = 0.75,
+) -> Tuple[bool, Optional[str], List[str]]:
+    """P3.14 Door 3 eligibility (PHASE_3_ADDENDUM.md, all required), plus the P3.14b
+    trend-continuity rule (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24):
+    fewer than `min_usable_months` usable monthly returns in the 12-1 window -> not eligible
+    (reason `short_history`); jump_share > `max_jump_share` -> not eligible (reason
+    `jump_driven`). Returns (eligible, ineligible_reason, extra_flags) — extra_flags carries
+    revisions_missing / adv_missing even when the name is otherwise eligible (an absence rides
+    as a flag, never silently gated)."""
+    extra_flags: List[str] = []
+    if mcap is None or mcap < min_mcap:
+        return False, "mcap_below_door3_floor", extra_flags
+    if falling_knife or mom_break is True:
+        return False, "falling_knife_or_mom_break", extra_flags
+    if usable_months is None or usable_months < min_usable_months:
+        return False, "short_history", extra_flags
+    if jump_share is not None and jump_share > max_jump_share:
+        return False, "jump_driven", extra_flags
+    if z_revisions is None:
+        extra_flags.append("revisions_missing")
+    elif z_revisions < 0:
+        return False, "revisions_negative", extra_flags
+    if z_quality is None or quality_pctl25 is None or z_quality < quality_pctl25:
+        return False, "quality_below_pctl25", extra_flags
+    if adv_usd is None:
+        extra_flags.append("adv_missing")
+    elif adv_usd < min_adv:
+        return False, "adv_below_300k", extra_flags
+    return True, None, extra_flags
+
+
+def _door3_rank_key(c: Dict[str, Any]) -> Tuple[float, float, str]:
+    """P3.14b: rank among Door-3 (eligible) names by universe momentum score descending, ties
+    broken by raw mom_12_1 descending, then ticker — deterministic even when universe z is
+    clipped and several names tie (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement
+    2026-09-24). A missing mom_12_1 sorts after every present value on the tie-break."""
+    mom_12_1 = c.get("mom_12_1")
+    mom_12_1_key = -mom_12_1 if mom_12_1 is not None else float("inf")
+    return (-c["universe_momentum"], mom_12_1_key, c["ticker"])
+
+
+def select_door3(
+    candidates: List[Dict[str, Any]],
+    already_nominated: Set[str],
+    slots: int = 20,
+    cluster_cap: int = 5,
+) -> Dict[str, Any]:
+    """P3.14 Door 3 selection. `candidates` are already ELIGIBLE names, each a dict with at
+    least {"ticker", "cluster", "universe_momentum"} (optionally "mom_12_1" for the P3.14b
+    tie-break). Ranked by universe_momentum descending, ties broken by raw mom_12_1 descending
+    then ticker (see `_door3_rank_key`). A name already nominated by Door 1 or Door 2 is
+    skipped for a Door 3 slot but tagged `also_trend_leader`; at most `cluster_cap` per cluster;
+    stops once `slots` new names are selected."""
+    ordered = sorted(candidates, key=_door3_rank_key)
+    selected: List[str] = []
+    also_trend_leader: List[str] = []
+    cluster_counts: Dict[str, int] = {}
+    for c in ordered:
+        if len(selected) >= slots:
+            break
+        t = c["ticker"]
+        if t in already_nominated:
+            also_trend_leader.append(t)
+            continue
+        cl = c["cluster"]
+        if cluster_counts.get(cl, 0) >= cluster_cap:
+            continue
+        selected.append(t)
+        cluster_counts[cl] = cluster_counts.get(cl, 0) + 1
+    return {"selected": selected, "also_trend_leader": also_trend_leader, "cluster_counts": cluster_counts}
+
+
+def door3_hysteresis_retain(
+    prev_door3: Set[str],
+    fresh_selected: List[str],
+    eligible_ranked: List[str],
+    already_nominated: Set[str],
+    max_rank: int,
+) -> List[str]:
+    """P3.14: 'Hysteresis (P3.5) applies to Door-3 names like any other' — a previous Door-3
+    name not re-selected fresh stays while its current universe-momentum rank among ELIGIBLE
+    names is <= max_rank (DOOR3_SLOTS + 5). `eligible_ranked` is every eligible ticker ordered
+    by universe momentum descending (rank 1 = index 0). Already-nominated names are excluded —
+    they get `also_trend_leader` instead, handled by the caller."""
+    rank_by_ticker = {t: i + 1 for i, t in enumerate(eligible_ranked)}
+    fresh_set = set(fresh_selected)
+    retained = []
+    for t in sorted(prev_door3):
+        if t in fresh_set or t in already_nominated:
+            continue
+        r = rank_by_ticker.get(t)
+        if r is not None and r <= max_rank:
+            retained.append(t)
+    return retained
+
+
+def _load_veto_switches(config_path: Optional[Path] = None) -> Dict[str, bool]:
+    cfg = _load_sifter_config(config_path)
+    sw = cfg.get("veto_switches", {})
+    return {
+        "altman_z": bool(sw.get("altman_z", cfg.get("enable_veto_altman_z", False))),
+        "beneish_standalone": bool(sw.get("beneish_standalone", cfg.get("enable_veto_beneish_standalone", False))),
+        "no_liquidity_data": bool(sw.get("no_liquidity_data", cfg.get("enable_veto_no_liquidity_data", False))),
+    }
+
+
+def _load_altman_thresholds(config_path: Optional[Path] = None) -> Tuple[float, Dict[str, float]]:
+    p = config_path or Path(__file__).resolve().parent / "reverse_config.json"
+    cfg = load_json(p, {}) if p.exists() else {}
+    st1 = cfg.get("thresholds", {}).get("stage1", {})
+    default_min = float(st1.get("altman_z_min", 1.8))
+    sec_map = {k: float(v) for k, v in st1.get("sector_altman_z_min", {}).items() if not k.startswith("_")}
+    return default_min, sec_map
+
+
+def _load_altman_sector_overrides(config_path: Optional[Path] = None) -> Dict[str, float]:
+    """P3.6b: sector Altman-Z overrides layered on top of reverse_config.json's table (owned
+    by score_reverse.py and not edited here) — e.g. Utilities, structurally leveraged like
+    Financials/Real Estate, which reverse_config.json doesn't carry yet."""
+    cfg = _load_sifter_config(config_path)
+    overrides = cfg.get("altman_sector_overrides", {})
+    return {k: float(v) for k, v in overrides.items() if not k.startswith("_")}
+
+
+# P3.6b: sectors where accrual/manipulation ratios are structurally uninformative (asset
+# managers, BDCs, mortgage REITs, a physical-gold trust) — same exemption Altman already uses.
+FORENSIC_VETO_EXEMPT_SECTORS = {"Financial Services", "Real Estate"}
+
+
 DOOR2_MOMENTUM_FLOOR = _load_door2_momentum_floor()
+MOMENTUM_UNIVERSE_WEIGHT = _load_momentum_universe_weight()
 
 
 def _parse_mri_date(raw: Optional[str]) -> Optional[datetime]:
@@ -353,6 +603,24 @@ def sector_neutral_z(
     return z_scores
 
 
+def universe_z(
+    raw_by_ticker: Dict[str, Optional[float]],
+    method: Optional[str] = None,
+) -> Dict[str, Optional[float]]:
+    """Same standardisation as sector_neutral_z (winsor or gaussian_rank; same winsor/clip
+    rules) but pooled across the whole scored universe — no sector grouping. Putting every
+    ticker in one sector name reuses sector_neutral_z's own pooled-universe fallback path
+    (already exercised when a sector has fewer than 15 members), so this is exactly that
+    computation rather than a re-derivation of it. None stays None.
+
+    P3.13: the momentum pillar is otherwise 100% sector-neutral, which makes a sector-wide
+    boom invisible. This lets the momentum pillar also see the un-neutralised, universe-wide
+    move.
+    """
+    pooled_sector = {t: "__universe__" for t in raw_by_ticker}
+    return sector_neutral_z(raw_by_ticker, pooled_sector, method=method)
+
+
 def solve_reverse_dcf_gap(owner_earnings: float, mcap: float, discount_rate: float, historical_cagr: float) -> Optional[float]:
     if owner_earnings <= 0 or mcap <= 0:
         return None
@@ -421,8 +689,11 @@ def _contributions(prof):
         used = prof.get("door1_pillars_used") or ["quality", "momentum", "revisions"]
         if "quality" in used and prof.get("z_quality") is not None:
             parts["quality"] = 0.45 * scale * abs(prof["z_quality"])
-        if "momentum" in used and prof.get("z_momentum") is not None:
-            parts["momentum"] = 0.35 * scale * abs(prof["z_momentum"])
+        # P3.14: the momentum contribution uses z_momentum_door1 (sector-neutral only — what
+        # actually fed Door 1's score), not the published z_momentum (the P3.13 blend, which
+        # only backs the P3.3 falling-knife floor since P3.14).
+        if "momentum" in used and prof.get("z_momentum_door1") is not None:
+            parts["momentum"] = 0.35 * scale * abs(prof["z_momentum_door1"])
         if "revisions" in used and prof.get("z_revisions") is not None:
             parts["revisions"] = 0.20 * scale * abs(prof["z_revisions"])
     else:
@@ -454,26 +725,45 @@ def _reband(p):
     return "pass"
 
 
+FCT_LLM_GATE_VERSION = "p3.12"   # SCR-04 mapping version — bump when the mapping rules change.
+
+
 def apply_llm_overlay(results):
     """The Divergence Engine — direction-PRIMARY / quant-GUARDRAIL.
 
     Reads the depth verdicts (public/data/depth_overlay.json) and writes the fct_*_llm family
     onto the factor rows: the depth `direction` sets the band (undervalued -> research_now,
     hold -> monitor, overvalued -> demoted), and a low-quality-overvalued name is hard-vetoed
-    (fct_llm_veto='llm_reject' when direction == overvalued AND the write-up's mean conviction
-    < CONV_VETO).
+    (fct_llm_veto='llm_reject' when direction == overvalued AND conviction < CONV_VETO).
 
     The quant engine stays a hard GUARDRAIL: a quant-vetoed name (not tradable, forensic,
     insolvency, chronic loss) is skipped, so the depth lane can never pull a red-flagged name
     in. Names with no depth verdict, or a NOT_USABLE one, keep no band — silence, never a
     fabricated depth call. STRICT NO-OP when depth_overlay.json is absent.
 
-    Conviction is prose in depth_reports/{T}.json and is parsed only for the veto
-    (scripts/depth_conviction.py). There is NO live-price MoS recompute — `direction` is the
-    frozen producer verdict, so no daily cliff exists for prices to churn across.
+    P3.12 (SCR-04 mapping made honest):
+      - Promotion to research_now (fct_llm="promoted") requires actionable == true AND
+        fct_percentile >= 70 (the monitor floor) AND m >= 10 (mos_vs_base_pct, falling back to
+        mos_vs_median_pct with fct_llm_note="mos_median_fallback") AND thesis_status is not
+        "breached". An undervalued verdict that fails any of those floors is NOT skipped — it
+        lands in watchlist (pctl 90-96.9, fct_llm="promoted_partial"); a row with NO actionable
+        field is one of the floors it can fail (the P1.3 fail-open ends here — C8 of the Phase
+        1 review). A row that carries actionable: false is still skipped entirely, unchanged.
+      - m cannot be resolved (both mos_vs_base_pct and mos_vs_median_pct absent) -> no
+        promotion at all, fct_llm_note="no_mos". m is NEVER defaulted to 0.0.
+      - hold -> monitor always: pctl = clamp(75 + m*0.2, 70, 89).
+      - overvalued -> pass always: pctl = clamp(35 + m*0.5, 0, 69), fct_llm="demoted".
+      - Conviction for the low-quality-overvalued veto reads the overlay row's own
+        conviction_score first; the depth_reports/{T}.json prose parser
+        (scripts/depth_conviction.py) is used only when that field is None.
+      - thesis_status == "breached" (when present) blocks promotion, fct_llm_note=
+        "thesis_breached".
+
+    There is NO live-price MoS recompute — `direction` is the frozen producer verdict, so no
+    daily cliff exists for prices to churn across.
 
     Preserves the fct_percentile_llm / fct_llm_veto / fct_band_llm / fct_llm / fct_llm_verdict
-    output names that lib/desk/rankings.ts reads.
+    output names that lib/desk/rankings.ts reads; adds fct_llm_note and fct_llm_gate_version.
     """
     try:
         ov = (json.loads((DATA / "depth_overlay.json").read_text(encoding="utf-8")) or {}).get("tickers", {})
@@ -495,25 +785,65 @@ def apply_llm_overlay(results):
             continue
         if v.get("actionable") is False:
             continue
-        mos = v.get("mos_vs_median_pct")
-        m = mos if isinstance(mos, (int, float)) else 0.0
-        conv = conv_map.get(t)
+        actionable_true = v.get("actionable") is True
+
+        # m: mos_vs_base_pct first, mos_vs_median_pct as a noted fallback. Never defaulted —
+        # 0.0 is a value, an absent MoS is an absence and blocks any band assignment below.
+        mos_base = v.get("mos_vs_base_pct")
+        mos_median = v.get("mos_vs_median_pct")
+        if isinstance(mos_base, (int, float)):
+            m = mos_base
+            mos_note = None
+        elif isinstance(mos_median, (int, float)):
+            m = mos_median
+            mos_note = "mos_median_fallback"
+        else:
+            m = None
+            mos_note = "no_mos"
+
+        conv = v.get("conviction_score")
+        if not isinstance(conv, (int, float)):
+            conv = conv_map.get(t)
+
         e["fct_llm_verdict"] = {"direction": direction, "size_hint": v.get("size_hint"),
-                                "mos_vs_median_pct": mos, "conviction": conv,
+                                "mos_vs_base_pct": mos_base, "mos_vs_median_pct": mos_median,
+                                "conviction": conv, "thesis_status": v.get("thesis_status"),
                                 "median_iv": v.get("median_iv"), "iv_band_low": v.get("iv_band_low"),
                                 "iv_band_high": v.get("iv_band_high"), "spread_pct": v.get("spread_pct"),
                                 "date": v.get("date"), "scheme": v.get("scheme")}
         e["fct_llm"] = "none"
         e["fct_llm_veto"] = None
-        # DIRECTION drives the band; mos_vs_median_pct only orders WITHIN a band so the site's
-        # percentile-delta stays monotonic. Conviction is NOT in the band (equal-weight rn_depth
-        # is the book) — it gates only the veto below.
+        e["fct_llm_note"] = mos_note
+        e["fct_llm_gate_version"] = FCT_LLM_GATE_VERSION
+
+        if m is None:
+            applied += 1
+            continue   # no_mos: no promotion, no band — never a guessed m.
+
+        # DIRECTION drives the band; m only orders WITHIN a band so the site's percentile-delta
+        # stays monotonic. Conviction is NOT in the band — it gates only the veto below.
         if direction == "undervalued":
-            pctl = clamp(97.0 + m * 0.05, 97.0, 100.0)   # deeper discount ranks higher
-            if e.get("fct_band") != "research_now":
-                e["fct_llm"] = "promoted"
+            thesis_breached = v.get("thesis_status") == "breached"
+            fct_pctl = e.get("fct_percentile")
+            floors_ok = (
+                actionable_true
+                and isinstance(fct_pctl, (int, float)) and fct_pctl >= 70.0
+                and m >= 10.0
+                and not thesis_breached
+            )
+            if floors_ok:
+                pctl_val = clamp(97.0 + m * 0.05, 97.0, 100.0)   # deeper discount ranks higher
+                if e.get("fct_band") != "research_now":
+                    e["fct_llm"] = "promoted"
+            else:
+                pctl_val = clamp(90.0 + m * 0.05, 90.0, 96.9)
+                e["fct_llm"] = "promoted_partial"
+                if thesis_breached:
+                    e["fct_llm_note"] = "thesis_breached"
+                elif mos_note:
+                    e["fct_llm_note"] = mos_note
         elif direction == "overvalued":
-            pctl = clamp(45.0 + m * 0.5, 0.0, LLM_BANDS["research_now"] - 5)   # m negative -> lower
+            pctl_val = clamp(35.0 + m * 0.5, 0.0, 69.0)
             e["fct_llm"] = "demoted"
             # Hard-reject ONLY the low-quality overvalued: no value edge AND no quality edge. A
             # high-conviction overvalued name is a pullback candidate -> watchlist, not a reject.
@@ -521,9 +851,9 @@ def apply_llm_overlay(results):
             if conv is not None and conv < CONV_VETO:
                 e["fct_llm_veto"] = "llm_reject"
         else:  # hold — price inside the model's band, no directional edge
-            pctl = clamp(70.0 + m * 0.5, 25.0, 89.0)
-        e["fct_percentile_llm"] = round(pctl, 1)
-        e["fct_band_llm"] = _reband(pctl)
+            pctl_val = clamp(75.0 + m * 0.2, 70.0, 89.0)
+        e["fct_percentile_llm"] = round(pctl_val, 1)
+        e["fct_band_llm"] = _reband(pctl_val)
         applied += 1
     return applied
 
@@ -533,8 +863,51 @@ def main():
     print("TIER 2 DUAL-DOOR SIFTER (PROD V2 - CLUSTER GUARDRAILS & CORE/SATELLITE)")
     print("=" * 80)
 
-    mom_cfg_path = globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
-    door2_momentum_floor = float(globals().get("DOOR2_MOMENTUM_FLOOR", _load_door2_momentum_floor(mom_cfg_path)))
+    sifter_cfg_path = globals().get("SIFTER_CONFIG_PATH", Path(__file__).resolve().parent / "sifter_config.json")
+    if not sifter_cfg_path.exists():
+        sifter_cfg_path = globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
+    door2_momentum_floor = float(globals().get("DOOR2_MOMENTUM_FLOOR", _load_door2_momentum_floor(sifter_cfg_path)))
+    momentum_universe_weight = float(globals().get("MOMENTUM_UNIVERSE_WEIGHT", _load_momentum_universe_weight(sifter_cfg_path)))
+    rn_buffer_rank, book_buffer_rank = _load_hysteresis_ranks(sifter_cfg_path)
+    default_cycle_window, cluster_cycle_windows = _load_mid_cycle_config(sifter_cfg_path)
+    veto_switches = globals().get("VETO_SWITCHES", _load_veto_switches(sifter_cfg_path))
+    default_altman_min, sector_altman_map = _load_altman_thresholds()
+    sector_altman_map = {**sector_altman_map, **_load_altman_sector_overrides(sifter_cfg_path)}
+    # P3.6b: altman_z and beneish_standalone are permanently flag-only (never read the switch
+    # below — see the forensic block). no_liquidity_data is untouched by P3.6b.
+    switch_no_liquidity_data = bool(veto_switches.get("no_liquidity_data", False))
+
+    # Read previous factor_scores.json before anything overwrites it (P3.5 band hysteresis)
+    prev_factor_raw = None
+    prev_factor_path = globals().get("PREVIOUS_FACTOR_SCORES_PATH")
+    if prev_factor_path is None:
+        if FACTOR_SCORES_COMPAT_JSON.exists():
+            prev_factor_path = FACTOR_SCORES_COMPAT_JSON
+        elif (DATA / "factor_scores.json").exists():
+            prev_factor_path = DATA / "factor_scores.json"
+
+    if prev_factor_path and Path(prev_factor_path).exists():
+        try:
+            prev_factor_raw = json.loads(Path(prev_factor_path).read_text(encoding="utf-8"))
+        except Exception:
+            prev_factor_raw = None
+
+    EXPECTED_ENGINE = "dual_door_dynamic_macro_v2_cluster_guarded"
+    if prev_factor_raw is None or prev_factor_raw.get("engine") != EXPECTED_ENGINE:
+        has_previous = False
+        hysteresis_status = "no_previous_run"
+        prev_rn = set()
+        prev_book = set()
+        prev_door3: Set[str] = set()
+    else:
+        has_previous = True
+        hysteresis_status = "applied"
+        prev_tickers = prev_factor_raw.get("tickers", {})
+        prev_rn = {t for t, d in prev_tickers.items() if d.get("fct_band") == "research_now"}
+        prev_book = {t for t, d in prev_tickers.items() if d.get("fct_band") in ("research_now", "watchlist")}
+        # P3.14: previous Door-3 names, for the Door-3 hysteresis rule below.
+        prev_door3 = {t for t, d in prev_tickers.items()
+                      if "DOOR_3_TREND_LEADER" in (d.get("fct_nominated_doors") or [])}
 
     sync_result = sync_mri_snapshot()
     if sync_result is None:
@@ -563,9 +936,18 @@ def main():
 
     # Load Tier 1 hygiene survivors if present
     survivor_tickers: Optional[Set[str]] = None
+    # P3.10: names Tier 1 flagged ALTERNATE_REPORTING (foreign issuer, no US XBRL) so the
+    # NO_FUNDAMENTAL_HISTORY veto below can say why instead of looking like a data hole.
+    alternate_reporting_tickers: Set[str] = set()
+    # P3.10b: survivors whose latest annual period-end is > 16 months old — Tier 1 no longer
+    # vetoes these (our fundamentals_history lag, not proof of SEC delinquency); it flags them
+    # instead, and that flag rides through here onto fct_flags (SCR-03b).
+    stale_annual_data_map: Dict[str, Dict[str, Any]] = {}
     if TIER1_SURVIVORS_JSON.exists():
         surv_data = load_json(TIER1_SURVIVORS_JSON, {})
         survivor_tickers = set(surv_data.get("survivor_tickers", []))
+        alternate_reporting_tickers = set(surv_data.get("alternate_reporting", []))
+        stale_annual_data_map = surv_data.get("stale_annual_data", {}) or {}
         print(f"Loaded {len(survivor_tickers)} clean survivors from Tier 1 Hygiene filter.")
 
     all_tickers = sorted(stocks.keys())
@@ -649,11 +1031,27 @@ def main():
                 if prox is not None:
                     t_mom["high_52w_proxy"] = round(prox - 1.0, 4)
                     t_flags.append("momentum_proxy_monthly")
+        # P3.14b: trend-continuity, from price_history's own monthly closes — the same window
+        # score_paradigm uses for 12-1 — regardless of momentum_source, since momentum_state.json
+        # does not carry the underlying monthly closes (PHASE_3_ADDENDUM.md P3.14b).
+        trend = compute_trend_continuity(prices.get(t), t_mom.get("mom_12_1"))
+        t_mom["jump_share"] = trend["jump_share"]
+        t_mom["up_months"] = trend["up_months"]
+        t_mom["usable_months"] = trend["usable_months"]
         ticker_mom_state[t] = t_mom
         ticker_flags[t] = t_flags
 
+    ticker_mid_cycle: Dict[str, Dict[str, Any]] = {}
     vetoes: Dict[str, str] = {}
     veto_detail: Dict[str, str] = {}
+    # P3.6b: values for the new flag-only forensic/solvency flags, keyed ticker -> flag name ->
+    # detail dict, so the analyst pack can print what tripped the flag (fct_flags itself stays
+    # a plain list of names, same shape every other consumer already expects).
+    ticker_flag_detail: Dict[str, Dict[str, Any]] = {}
+    # P3.14: market cap and resolved ADV per scored ticker, kept for the Door 3 eligibility
+    # check (marketCap >= DOOR3_MIN_MCAP; ADV >= 300k when resolved) without recomputing them.
+    ticker_mcap: Dict[str, Optional[float]] = {}
+    ticker_adv: Dict[str, Optional[float]] = {}
     eligible_count = 0
 
     # Names the engine is not ALLOWED to trade, regardless of how they score: gone from the
@@ -682,41 +1080,149 @@ def main():
             vetoes[t] = "FAILED_TIER1_HYGIENE"
             continue
 
+        # P3.10b: Tier 1's stale_annual_data flag (data lag, not a statutory veto) rides
+        # through onto this name's fct_flags with its detail.
+        if t in stale_annual_data_map:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "stale_annual_data" not in cur_flags:
+                cur_flags.append("stale_annual_data")
+            ticker_flag_detail.setdefault(t, {})["stale_annual_data"] = stale_annual_data_map[t]
+
         mcap = num(s.get("marketCap"))
         price = num(s.get("price"))
         vol = num(s.get("volume"))
+        ticker_mcap[t] = mcap
 
-        if not mcap or mcap < 300e6:
+        if not mcap or mcap < MIN_MARKET_CAP:
             vetoes[t] = "MARKET_CAP_BELOW_300M"
             continue
-        if not price or price < 3.0:
+        if not price or price < MIN_SHARE_PRICE:
             vetoes[t] = "PRICE_BELOW_3"
             continue
-        if vol is not None and (vol * price) < 250e3:
-            vetoes[t] = "ILLIQUID_ADV_BELOW_250K"
+
+        # ADV via hygiene_thresholds.py (P3.6c): stocks[t].metrics.adv_20d_usd (new,
+        # universe-wide, from the daily fetch) -> momentum_state adv_20d_usd (SCR-10) ->
+        # snapshot vol*price (flag adv_single_day) -> none -> NO_LIQUIDITY_DATA (switch-gated).
+        fct_mom = ticker_mom_state.get(t, {})
+        stocks_adv_20d = num((s.get("metrics") or {}).get("adv_20d_usd"))
+        mom_adv_20d = num(fct_mom.get("adv_20d_usd"))
+        adv, adv_flag = resolve_adv_usd(stocks_adv_20d, mom_adv_20d, vol, price)
+        ticker_adv[t] = adv
+        if adv_flag is not None:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if adv_flag not in cur_flags:
+                cur_flags.append(adv_flag)
+
+        if adv is None:
+            if switch_no_liquidity_data:
+                vetoes[t] = "NO_LIQUIDITY_DATA"
+                continue
+            else:
+                cur_flags = ticker_flags.setdefault(t, [])
+                if "no_liquidity_data" not in cur_flags:
+                    cur_flags.append("no_liquidity_data")
+        elif adv < MIN_ADV_DOLLAR:
+            vetoes[t] = "ILLIQUID_ADV_BELOW_300K"
             continue
+
         if ind in ("Shell Companies", "Blank Check"):
             vetoes[t] = "NON_OPERATING_SHELL_SPAC"
             continue
 
-        # 2. Hard Forensic & Insolvency Vetoes
+        # 2. Hard Forensic & Insolvency Vetoes (P3.6b — flag large caps instead of culling)
         bat = battery.get(t, {})
         acc = num(bat.get("accruals_ratio"))
         m_score = num(bat.get("m_score"))
-        z_score = num(bat.get("z_score"))
         f_score = num(bat.get("f_score"))
+        net_iss_1y = num(bat.get("net_issuance_1y"))
+        sector = s.get("sector") or "Unknown"
 
-        if m_score is not None and m_score > -1.78 and acc is not None and acc > 0.10:
+        # FORENSIC_MANIPULATION_RISK (P3.6b): the old combined rule (m_score > -1.78 AND
+        # accruals > 0.10) culled NVDA and every large-cap AI/semi name with hypergrowth
+        # working capital — Beneish's sales-growth index is known to flag fast growers, not
+        # just manipulators. Now it vetoes only the tight case: accruals > 0.20 AND
+        # m_score > -1.78 AND sector isn't structurally accrual-heavy (Financials/Real
+        # Estate) AND market cap is below the large-cap flag-only floor. Everything the old
+        # rule would have caught, and every accruals > 0.20 name (any sector), is a flag —
+        # never silently gated for a name an analyst can look at directly.
+        forensic_accruals_over_20 = acc is not None and acc > 0.20
+        forensic_m_score_elevated = m_score is not None and m_score > -1.78
+        forensic_old_rule_fired = forensic_m_score_elevated and acc is not None and acc > 0.10
+        forensic_sector_exempt = sector in FORENSIC_VETO_EXEMPT_SECTORS
+        forensic_large_cap_exempt = mcap >= LARGE_CAP_FLAG_ONLY_USD
+        if (forensic_accruals_over_20 and forensic_m_score_elevated
+                and not forensic_sector_exempt and not forensic_large_cap_exempt):
             vetoes[t] = "FORENSIC_MANIPULATION_RISK"
             continue
-        if z_score is not None and z_score < 1.1:
-            vetoes[t] = "INSOLVENCY_DISTRESS_Z_UNDER_1.1"
-            continue
+        if forensic_accruals_over_20 or forensic_old_rule_fired:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "forensic_red_flag" not in cur_flags:
+                cur_flags.append("forensic_red_flag")
+            if forensic_accruals_over_20 and forensic_m_score_elevated and forensic_sector_exempt:
+                forensic_reason = "sector_exempt"
+            elif forensic_accruals_over_20 and forensic_m_score_elevated and forensic_large_cap_exempt:
+                forensic_reason = "large_cap_flag_only"
+            elif forensic_accruals_over_20:
+                forensic_reason = "accruals_over_0.20"
+            else:
+                forensic_reason = "legacy_combined_rule_accruals_over_0.10"
+            ticker_flag_detail.setdefault(t, {})["forensic_red_flag"] = {
+                "accruals": acc, "m_score": m_score, "reason": forensic_reason,
+            }
+
+        # Beneish standalone (P3.6b): never a veto — the M-score's sales-growth index (SGI) is
+        # biased toward fast organic growers, not just manipulators. Flag only, with the
+        # M-score value attached for the analyst. beneish_unverifiable (inputs missing) is
+        # unchanged.
+        m_inputs_missing = bat.get("m_score_inputs_missing")
+        beneish_inputs_complete = (isinstance(m_inputs_missing, list) and len(m_inputs_missing) == 0) or (isinstance(m_inputs_missing, (int, float)) and m_inputs_missing == 0)
+        if m_score is not None and beneish_inputs_complete and m_score > -1.78:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "beneish_flag" not in cur_flags:
+                cur_flags.append("beneish_flag")
+            ticker_flag_detail.setdefault(t, {})["beneish_flag"] = {
+                "m_score": m_score,
+                "_note": "Beneish M-score standalone is flag-only, never a veto: the sales-growth index is biased toward fast organic growers.",
+            }
+        elif not beneish_inputs_complete:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "beneish_unverifiable" not in cur_flags:
+                cur_flags.append("beneish_unverifiable")
+
+        # Altman Z from stocks[t].metrics.zScore with reverse_config sector_altman_z_min /
+        # altman_z_min 1.8, plus the sifter's own Utilities override (P3.6b). Warning flag
+        # only, never a veto: the discriminant model isn't a valid solvency test for every
+        # sector and a >5%-of-survivors veto rate was the P3.6 STOP condition.
+        metrics = s.get("metrics") or {}
+        altman_z = num(metrics.get("zScore"))
+        z_min = sector_altman_map.get(sector, default_altman_min)
+        if altman_z is not None and altman_z < z_min:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "insolvency_distress_altman_z" not in cur_flags:
+                cur_flags.append("insolvency_distress_altman_z")
+            ticker_flag_detail.setdefault(t, {})["insolvency_distress_altman_z"] = {
+                "altman_z": altman_z, "z_min": z_min, "sector": sector,
+                "_note": "Altman Z is a warning flag only, never a veto.",
+            }
+
+        # Sloan accruals flag (> 0.20)
+        if acc is not None and acc > 0.20:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "heavy_accruals" not in cur_flags:
+                cur_flags.append("heavy_accruals")
+
+        # Issuance flag: net_issuance_1y > 0.10
+        if net_iss_1y is not None and net_iss_1y > 0.10:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "heavy_issuance" not in cur_flags:
+                cur_flags.append("heavy_issuance")
 
         ydata = fundamentals.get(t, {})
         years = sorted([int(y) for y in ydata.keys()])
         if not years:
             vetoes[t] = "NO_FUNDAMENTAL_HISTORY"
+            if t in alternate_reporting_tickers:
+                veto_detail[t] = "alternate_reporting_unverified"
             continue
 
         latest_y = str(years[-1])
@@ -733,9 +1239,20 @@ def main():
         equity = num(latest.get("equity"))
         ev = mcap + lt_debt - cash
 
+        # CHRONIC_OPERATING_LOSS_LEVERAGE (P3.6b): a single fiscal year's numbers shouldn't cull
+        # a large cap outright — CRWV/NBIS/IREN/CIFR were vetoed on one year of AI-buildout
+        # capex. Same large-cap rule as the forensic vetoes: veto only below the flag-only
+        # floor; at or above it, flag with the raw numbers for the analyst.
         if fcf is not None and fcf < 0 and op is not None and op < 0 and lt_debt > 1e9:
-            vetoes[t] = "CHRONIC_OPERATING_LOSS_LEVERAGE"
-            continue
+            if mcap < LARGE_CAP_FLAG_ONLY_USD:
+                vetoes[t] = "CHRONIC_OPERATING_LOSS_LEVERAGE"
+                continue
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "loss_making_leveraged" not in cur_flags:
+                cur_flags.append("loss_making_leveraged")
+            ticker_flag_detail.setdefault(t, {})["loss_making_leveraged"] = {
+                "fcf": fcf, "operating_income": op, "lt_debt": lt_debt,
+            }
 
         eligible_count += 1
 
@@ -763,14 +1280,33 @@ def main():
                 raw["roic_proxy"][t] = None
 
         elif archetype == "commodity_cyclical":
-            # Commodity Cyclicals: 3-Year Normalized Mid-Cycle Cash Flow (Anti-Peak Value Trap)
+            # Commodity Cyclicals: Normalized Mid-Cycle Cash Flow by Cluster (P3.7)
+            cluster = tax["cluster"]
+            target_window = cluster_cycle_windows.get(cluster, default_cycle_window)
+            window_years = years[-target_window:]
             past_fcfs = []
-            for y in years[-3:]:
+            for y in window_years:
                 y_row = ydata.get(str(y), {})
                 y_fcf = num(y_row.get("fcf"))
                 if y_fcf is not None:
                     past_fcfs.append(y_fcf)
-            mid_cycle_fcf = (sum(past_fcfs) / len(past_fcfs)) if past_fcfs else fcf
+
+            years_used = len(past_fcfs)
+            if past_fcfs:
+                mid_cycle_fcf = sum(past_fcfs) / len(past_fcfs)
+            else:
+                mid_cycle_fcf = fcf
+                years_used = 1 if fcf is not None else 0
+
+            cur_flags = ticker_flags.setdefault(t, [])
+            if target_window == 8 and years_used < 5:
+                if "mid_cycle_short_history" not in cur_flags:
+                    cur_flags.append("mid_cycle_short_history")
+
+            ticker_mid_cycle[t] = {
+                "window_years": target_window,
+                "years_used": years_used,
+            }
 
             if mid_cycle_fcf is not None and mcap > 0:
                 raw["fcf_yield"][t] = mid_cycle_fcf / mcap
@@ -846,25 +1382,62 @@ def main():
     z_method_chosen = globals().get("Z_METHOD", "winsor")
     z = {metric: sector_neutral_z(vals, sector_by_ticker, method=z_method_chosen) for metric, vals in raw.items()}
 
+    # P3.13: pooled-universe z's for the momentum inputs only — sector-neutral z throws away a
+    # sector-wide move, so the momentum pillar also gets to see the un-neutralised version.
+    z_universe_momentum = {
+        metric: universe_z(raw[metric], method=z_method_chosen)
+        for metric in ("skip_12_1", "high_52w")
+    }
+
     def mean_of_available(*values) -> Optional[float]:
         valid = [v for v in values if v is not None]
         return (sum(valid) / len(valid)) if valid else None
 
+    def weighted_mean_of_available(pairs: List[Tuple[Optional[float], float]]) -> Optional[float]:
+        """Like mean_of_available, but each present value carries its own weight. Absent
+        values drop out entirely (taking their weight with them), so a single present value is
+        returned unchanged regardless of its weight — same None handling as mean_of_available."""
+        valid = [(v, w) for v, w in pairs if v is not None]
+        if not valid:
+            return None
+        total_w = sum(w for _, w in valid)
+        if total_w == 0:
+            return mean_of_available(*(v for v, _ in valid))
+        return sum(v * w for v, w in valid) / total_w
+
     # Compute raw pillar z's for scored set (not vetoed)
     scored_tickers = [t for t in all_tickers if t not in vetoes]
     raw_pillars: Dict[str, Dict[str, Optional[float]]] = {}
+    # P3.13: sector-neutral / universe momentum parts before the 50/50 blend, kept for the
+    # profile fields (z_momentum_sector_neutral, z_momentum_universe) — before unit variance.
+    momentum_parts: Dict[str, Tuple[Optional[float], Optional[float]]] = {}
     for t in scored_tickers:
+        sn_mom = mean_of_available(z["skip_12_1"].get(t), z["high_52w"].get(t))
+        univ_mom = mean_of_available(z_universe_momentum["skip_12_1"].get(t), z_universe_momentum["high_52w"].get(t))
+        momentum_parts[t] = (sn_mom, univ_mom)
         raw_pillars[t] = {
             "quality": mean_of_available(z["roic_proxy"].get(t), z["gm_stability"].get(t),
                                          z["neg_accruals"].get(t), z["f_score"].get(t)),
-            "momentum": mean_of_available(z["skip_12_1"].get(t), z["high_52w"].get(t)),
+            # P3.14: Door 1's momentum pillar reverts to sector-neutral only — "best in its
+            # sector" — so a sector-wide boom no longer feeds Door 1 (that job now belongs to
+            # Door 3 alone; see PHASE_3_ADDENDUM.md P3.14, "no concept duplication").
+            "momentum": sn_mom,
+            # P3.13 blend, kept only for the PUBLISHED z_momentum (P3.3 falling-knife floor) —
+            # does not feed Door 1 or Door 2 scoring.
+            "momentum_published": weighted_mean_of_available([
+                (sn_mom, 1.0 - momentum_universe_weight),
+                (univ_mom, momentum_universe_weight),
+            ]),
             "revisions": z["eps_slope"].get(t),
             "value": mean_of_available(z["fcf_yield"].get(t), z["owner_yield"].get(t), z["ebit_yield"].get(t)),
             "exp_gap": z["exp_gap"].get(t),
         }
 
-    # Cross-sectional standard deviation over the SCORED set (not vetoed)
-    PILLAR_NAMES = ("quality", "momentum", "revisions", "value", "exp_gap")
+    # Cross-sectional standard deviation over the SCORED set (not vetoed). momentum_published
+    # rides the same unit-variance treatment as the rest so the P3.3 floor stays on a
+    # comparable scale; it is not one of DOOR1_BASE_WEIGHTS/DOOR2_BASE_WEIGHTS's keys, so it
+    # never enters effective_weights or either door's score.
+    PILLAR_NAMES = ("quality", "momentum", "momentum_published", "revisions", "value", "exp_gap")
     pillar_sd: Dict[str, Optional[float]] = {}
     pillar_sd_exact: Dict[str, Optional[float]] = {}
     pillar_sd_degenerate: List[str] = []
@@ -987,7 +1560,10 @@ def main():
             d2_weight_scale = round(1.0 / sum_w2, 4)
             d2_score = sum((w / sum_w2) * val for name, w, val in present_d2)
 
-        z_mom_pub = round(z_mom, 3) if z_mom is not None else None
+        # P3.14: the PUBLISHED z_momentum (P3.3's falling-knife floor reads this) stays the
+        # P3.13 blend even though Door 1's own z_mom above reverted to sector-neutral only.
+        z_mom_published = std_pillars[t]["momentum_published"]
+        z_mom_pub = round(z_mom_published, 3) if z_mom_published is not None else None
 
         # P3.3 Door-2 falling-knife floor
         fct_mom = ticker_mom_state.get(t, {})
@@ -1029,6 +1605,16 @@ def main():
             "mgi_subindustry_id": tax["mgi_subindustry_id"],
             "z_quality": round(z_qual, 3) if z_qual is not None else None,
             "z_momentum": z_mom_pub,
+            # P3.14: the value that actually fed Door 1's score (sector-neutral only, unit-
+            # variance normalized) — distinct from the published z_momentum above (P3.13 blend).
+            "z_momentum_door1": round(z_mom, 3) if z_mom is not None else None,
+            "z_momentum_sector_neutral": round(momentum_parts[t][0], 3) if momentum_parts[t][0] is not None else None,
+            "z_momentum_universe": round(momentum_parts[t][1], 3) if momentum_parts[t][1] is not None else None,
+            # P3.14b: trend-continuity for Door 3 (PHASE_3_ADDENDUM.md P3.14b) — jump_share and
+            # up_months from the same 12-1 monthly-close window, also carried in
+            # fct_momentum_state.
+            "jump_share": ticker_mom_state.get(t, {}).get("jump_share"),
+            "up_months": ticker_mom_state.get(t, {}).get("up_months"),
             "z_revisions": round(z_rev, 3) if z_rev is not None else None,
             "z_value": round(z_val, 3) if z_val is not None else None,
             "z_exp_gap": round(z_gap, 3) if z_gap is not None else None,
@@ -1047,7 +1633,10 @@ def main():
             "best_pctl": 0.0,
             "nominated_doors": [],
             "fct_momentum_state": ticker_mom_state.get(t, {}),
-            "fct_flags": cur_flags
+            "fct_flags": cur_flags,
+            "fct_flag_detail": ticker_flag_detail.get(t, {}),
+            "mid_cycle_window_years": ticker_mid_cycle.get(t, {}).get("window_years") if t in ticker_mid_cycle else None,
+            "mid_cycle_years_used": ticker_mid_cycle.get(t, {}).get("years_used") if t in ticker_mid_cycle else None,
         }
         scored_profiles[t] = cand_data
 
@@ -1194,6 +1783,102 @@ def main():
             if "DOUBLE_DOOR_CHAMPION" not in p["nominated_doors"]:
                 p["nominated_doors"].append("DOUBLE_DOOR_CHAMPION")
 
+    # ── P3.14: Door 3 "trend leaders" (PHASE_3_ADDENDUM.md) ──────────────────
+    door3_cfg = _load_door3_config(sifter_cfg_path)
+    already_nominated_set: Set[str] = set(all_nominated_map.keys())
+
+    quality_vals_sorted = sorted(
+        p["z_quality"] for p in scored_profiles.values() if p["z_quality"] is not None
+    )
+    door3_quality_pctl25 = pctl(quality_vals_sorted, door3_cfg["DOOR3_QUALITY_MIN_PCTL"])
+
+    door3_ineligible_reasons: Dict[str, int] = {}
+    door3_candidates: List[Dict[str, Any]] = []
+    for t in scored_tickers:
+        p = scored_profiles[t]
+        univ_mom = momentum_parts[t][1]
+        if univ_mom is None:
+            door3_ineligible_reasons["universe_momentum_missing"] = \
+                door3_ineligible_reasons.get("universe_momentum_missing", 0) + 1
+            continue
+        fct_mom = p.get("fct_momentum_state") or {}
+        eligible, reason, extra_flags = door3_eligibility(
+            mcap=ticker_mcap.get(t),
+            falling_knife="falling_knife" in p.get("fct_flags", []),
+            mom_break=fct_mom.get("mom_break"),
+            z_revisions=p.get("z_revisions"),
+            z_quality=p.get("z_quality"),
+            quality_pctl25=door3_quality_pctl25,
+            adv_usd=ticker_adv.get(t),
+            min_mcap=door3_cfg["DOOR3_MIN_MCAP"],
+            usable_months=fct_mom.get("usable_months"),
+            jump_share=fct_mom.get("jump_share"),
+            max_jump_share=door3_cfg["DOOR3_MAX_JUMP_SHARE"],
+        )
+        if not eligible:
+            door3_ineligible_reasons[reason] = door3_ineligible_reasons.get(reason, 0) + 1
+            continue
+        for fl in extra_flags:
+            if fl not in p["fct_flags"]:
+                p["fct_flags"].append(fl)
+        door3_candidates.append({
+            "ticker": t, "cluster": p["cluster"], "universe_momentum": univ_mom,
+            "mom_12_1": fct_mom.get("mom_12_1"),
+        })
+
+    door3_select_result = select_door3(
+        door3_candidates, already_nominated_set,
+        slots=door3_cfg["DOOR3_SLOTS"], cluster_cap=door3_cfg["DOOR3_CLUSTER_CAP"],
+    )
+    door3_fresh = door3_select_result["selected"]
+    door3_also_trend_leader = door3_select_result["also_trend_leader"]
+    for t in door3_also_trend_leader:
+        p = scored_profiles[t]
+        if "also_trend_leader" not in p["fct_flags"]:
+            p["fct_flags"].append("also_trend_leader")
+
+    # P3.14b: same ranking as select_door3 — universe momentum, ties broken by raw mom_12_1
+    # descending, then ticker (_door3_rank_key) — so hysteresis rank agrees with selection order.
+    door3_eligible_ranked = [
+        c["ticker"] for c in sorted(door3_candidates, key=_door3_rank_key)
+    ]
+    door3_retained = door3_hysteresis_retain(
+        prev_door3, door3_fresh, door3_eligible_ranked, already_nominated_set,
+        door3_cfg["DOOR3_SLOTS"] + 5,
+    )
+
+    for t in door3_fresh:
+        p = scored_profiles[t]
+        if "DOOR_3_TREND_LEADER" not in p["nominated_doors"]:
+            p["nominated_doors"].append("DOOR_3_TREND_LEADER")
+        all_nominated_map[t] = p
+    for t in door3_retained:
+        p = scored_profiles[t]
+        if "DOOR_3_TREND_LEADER" not in p["nominated_doors"]:
+            p["nominated_doors"].append("DOOR_3_TREND_LEADER")
+        if "HYSTERESIS_RETAINED" not in p["nominated_doors"]:
+            p["nominated_doors"].append("HYSTERESIS_RETAINED")
+        all_nominated_map[t] = p
+
+    door3_final = door3_fresh + [t for t in door3_retained if t not in door3_fresh]
+    # P3.14b: same rank order as selection/hysteresis (_door3_rank_key) for the research_now /
+    # watchlist split, so the band boundary agrees with the ranking that put a name in the door.
+    door3_final_ranked = sorted(
+        door3_final,
+        key=lambda t: _door3_rank_key({
+            "universe_momentum": momentum_parts[t][1] if momentum_parts[t][1] is not None else float("-inf"),
+            "mom_12_1": ticker_mom_state.get(t, {}).get("mom_12_1"),
+            "ticker": t,
+        }),
+    )
+    door3_rn_names = door3_final_ranked[:door3_cfg["DOOR3_RN_SLOTS"]]
+    door3_wl_names = door3_final_ranked[door3_cfg["DOOR3_RN_SLOTS"]:]
+
+    door3_by_cluster: Dict[str, int] = {}
+    for t in door3_final:
+        cl = scored_profiles[t].get("cluster") or "Unknown"
+        door3_by_cluster[cl] = door3_by_cluster.get(cl, 0) + 1
+
     nominated_pool = sorted(all_nominated_map.keys())
 
     # ── 7. Output Results & Backward-Compatible factor_scores.json ───────────
@@ -1282,28 +1967,90 @@ def main():
         "door2_eligible_count": d2_eligible_count,
         "door2_ineligible_count": d2_ineligible_count,
         "door2_renormalised_count": d2_renormalised_count,
-        "nominated_tickers": nominated_pool,
         "veto_breakdown": {v: sum(1 for x in vetoes.values() if x == v) for v in set(vetoes.values())},
-        "profiles": {t: all_nominated_map[t] for t in nominated_pool}
+        # P3.14: Door 3 "trend leaders" (PHASE_3_ADDENDUM.md).
+        "door3_count": len(door3_final),
+        "door3_rn_count": len(door3_rn_names),
+        "door3_by_cluster": door3_by_cluster,
+        "door3_eligible_count": len(door3_candidates),
+        "door3_ineligible_reasons": door3_ineligible_reasons,
+        "door3_also_trend_leader": sorted(door3_also_trend_leader),
+        "door3_hysteresis_retained": sorted(door3_retained),
     }
-
-    OUT_JSON.write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     # Priority Queue Ranking for RS2 Local (P3.4: bonus 2.0)
     def priority_sort_key(t: str) -> float:
-        p = all_nominated_map[t]
-        bonus = 2.0 if "DOUBLE_DOOR_CHAMPION" in p["nominated_doors"] else 0.0
+        p = all_nominated_map.get(t, scored_profiles[t])
+        bonus = 2.0 if "DOUBLE_DOOR_CHAMPION" in p.get("nominated_doors", []) else 0.0
         return p["best_pctl"] + bonus
 
+    # Nominees ranked by priority_sort_key (1 to 135)
     ranked_nominated = sorted(nominated_pool, key=priority_sort_key, reverse=True)
-    rn_set = set(ranked_nominated[:50])
-    wl_set = set(ranked_nominated[50:])
 
-    # fct_rank is the nomination's ordinal in the priority queue, 1-based. It is NOT decoration:
-    # track_paper_portfolios.depth_targets() and lib/desk/rankings.ts both skip any row whose
-    # rank is None, so a nominated name without one silently vanishes from the rn_depth book
-    # and from the desk. Non-nominated names carry None by design — they are not in the queue.
-    rank_by_ticker = {t: i + 1 for i, t in enumerate(ranked_nominated)}
+    # Extend ranking beyond 135 nominees by ranking remaining scored profiles by best_pctl
+    unnominated_scored = [t for t in scored_tickers if t not in all_nominated_map]
+    ranked_unnominated = sorted(unnominated_scored, key=lambda t: (-scored_profiles[t]["best_pctl"], t))
+    all_ranked = ranked_nominated + ranked_unnominated
+    rank_by_ticker = {t: i + 1 for i, t in enumerate(all_ranked)}
+
+    # P3.5: Band Hysteresis
+    rn_set: Set[str] = set()
+    wl_set: Set[str] = set()
+
+    for t in all_ranked:
+        r = rank_by_ticker[t]
+        if r <= 50:
+            rn_set.add(t)
+        elif r <= rn_buffer_rank and t in prev_rn:
+            rn_set.add(t)
+        elif r <= 135:
+            wl_set.add(t)
+        elif r <= book_buffer_rank and t in prev_book:
+            wl_set.add(t)
+
+    # P3.14: Door 3 bands are assigned directly (extra slots beyond the top 50 / top 135, per
+    # PHASE_3_ADDENDUM.md) rather than through the rank-based buffers above. Door 3 has its own
+    # hysteresis rule (door3_hysteresis_retain, already applied to door3_retained) — Door-3
+    # names are excluded from retained_rn/retained_book below so that Door 1/2's own
+    # hysteresis accounting is not conflated with a fresh Door-3 entrant's (unrelated) pctl rank.
+    door3_names_set = set(door3_final)
+    rn_set |= set(door3_rn_names)
+    wl_set |= (set(door3_wl_names) - rn_set)
+
+    book_set = rn_set | wl_set
+    retained_rn = {t for t in rn_set if rank_by_ticker[t] > 50 and t not in door3_names_set}
+    retained_book = {t for t in wl_set if rank_by_ticker[t] > 135 and t not in door3_names_set}
+    retained_by_hysteresis = sorted(list(retained_rn | retained_book))
+
+    # Ensure any ticker retained into the book is present in all_nominated_map
+    for t in book_set:
+        if t not in all_nominated_map:
+            p = dict(scored_profiles[t])
+            door_won = _door_won(p)
+            p["nominated_doors"] = [door_won, "HYSTERESIS_RETAINED"]
+            all_nominated_map[t] = p
+
+    # Update nominated pool to reflect the final book (may exceed 135 with hysteresis)
+    nominated_pool = sorted(list(book_set))
+
+    band_transitions = {
+        "entered_rn": sorted(list(rn_set - prev_rn)) if has_previous else [],
+        "left_rn": sorted(list(prev_rn - rn_set)) if has_previous else [],
+        "entered_book": sorted(list(book_set - prev_book)) if has_previous else [],
+        "left_book": sorted(list(prev_book - book_set)) if has_previous else [],
+        "retained_by_hysteresis": retained_by_hysteresis,
+    }
+
+    summary["hysteresis"] = hysteresis_status
+    summary["hysteresis_retained"] = retained_by_hysteresis
+    summary["hysteresis_rn_buffer_rank"] = rn_buffer_rank
+    summary["hysteresis_book_buffer_rank"] = book_buffer_rank
+    summary["band_transitions"] = band_transitions
+    summary["nominated_count"] = len(nominated_pool)
+    summary["nominated_tickers"] = nominated_pool
+    summary["profiles"] = {t: all_nominated_map[t] for t in nominated_pool}
+
+    OUT_JSON.write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     compat_tickers = {}
     for t in all_tickers:
@@ -1338,15 +2085,17 @@ def main():
             "fct_nominated_doors": prof.get("nominated_doors", []),
             "fct_momentum_state": prof.get("fct_momentum_state", ticker_mom_state.get(t, {})),
             "fct_flags": prof.get("fct_flags", list(ticker_flags.get(t, []))),
+            "fct_flag_detail": prof.get("fct_flag_detail", ticker_flag_detail.get(t, {})),
             "falling_knife_detail": prof.get("falling_knife_detail"),
             "d2_eligible": prof.get("d2_eligible", True),
             "door1_pillars_used": prof.get("door1_pillars_used", []),
             "door2_pillars_used": prof.get("door2_pillars_used", []),
             "door1_weight_scale": prof.get("door1_weight_scale"),
-            "door2_weight_scale": prof.get("door2_weight_scale"),
             "sector": prof.get("sector", sector_by_ticker.get(t)),
             "cluster": prof.get("cluster"),
-            "archetype": prof.get("archetype")
+            "archetype": prof.get("archetype"),
+            "mid_cycle_window_years": prof.get("mid_cycle_window_years"),
+            "mid_cycle_years_used": prof.get("mid_cycle_years_used"),
         }
 
     # Stage 4 of the charter: the depth lane's own view, written alongside the quant bands.
@@ -1366,6 +2115,9 @@ def main():
         "z_method": z_method_chosen,
         "door2_momentum_floor": door2_momentum_floor,
         "scored_count": eligible_count,
+        "hysteresis": hysteresis_status,
+        "hysteresis_retained": retained_by_hysteresis,
+        "band_transitions": band_transitions,
         "band_counts": {
             "research_now": len(rn_set),
             "watchlist": len(wl_set),
@@ -1381,6 +2133,7 @@ def main():
     print(f"  - Door 1 (Compounders): {d1_count} picks")
     print(f"  - Door 2 (Value Gaps):  {d2_count} picks")
     print(f"  - Double-Door Champions: {overlap_count} picks")
+    print(f"  - Door 3 (Trend Leaders): {len(door3_final)} picks ({len(door3_rn_names)} research_now) | eligible {len(door3_candidates)}")
     print(f"  - Priority Queue: {len(rn_set)} research_now | {len(wl_set)} watchlist")
     print(f"Saved Dual-Door scores to: {OUT_JSON}")
     print(f"Saved compatible factor_scores to: {FACTOR_SCORES_COMPAT_JSON}")

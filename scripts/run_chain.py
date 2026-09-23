@@ -156,12 +156,8 @@ def main():
         ok = False
     # (The parallel LLM-overlay plan variant was RETIRED in the depth migration, 2026-08-26;
     # rn_depth replaced the LLM A/B lane, so build_portfolio_plan --llm is no longer run.)
-    # plan3 momentum sleeve (portfolio_plan_momo.json). Non-fatal for the same reason;
-    # the plan3 ledger holds its book when the plan file is missing/stale. Weekly rerank
-    # + daily regime refresh are handled inside the script itself. PAPER ONLY (no KIS).
-    if ok and not run_step("build_momo_plan", ["scripts/build_momo_plan.py"]
-                           + (["--skip-regime"] if args.skip_macro else []), steps):
-        print("WARN: build_momo_plan failed (non-fatal; plan3 ledger will hold).")
+    # P3.11: build_momo_plan removed from the chain — it is diagnostic-only (see its own
+    # docstring); its regime throttle is an input to Phase 5, not a step this chain runs.
     if ok and not run_step("track_paper_portfolios", ["scripts/track_paper_portfolios.py"]
                            + (["--skip-benchmark"] if args.skip_macro else []), steps):
         print("FATAL: track_paper_portfolios failed.")
@@ -215,6 +211,22 @@ def main():
         fct_scored = factor.get("scored_count", 0)
         add_invariant(invariants, "factor_scored", "hard", fct_scored >= 500,
                       f"{fct_scored} stocks carry a Factor Lab score (min 500)")
+
+        # P3.11 (SCR-00): the chain must be running the dual-door sifter, not a stale/retired
+        # engine — this is hard because everything downstream assumes this contract.
+        factor_engine = factor.get("engine")
+        add_invariant(invariants, "factor_engine", "hard",
+                      factor_engine == "dual_door_dynamic_macro_v2_cluster_guarded",
+                      f"engine={factor_engine}")
+
+        # P3.11 soft: the reverse-DCF discount rate should come from the MRI cost-of-capital
+        # anchor (P3.9), not the hardcoded constant. P3.9 has not landed yet in this phase, so
+        # this is EXPECTED to read soft-false (discount_rate_source is absent) until it does —
+        # soft, never hard, for exactly that reason.
+        discount_rate_source = factor.get("discount_rate_source")
+        add_invariant(invariants, "discount_rate_source", "soft",
+                      discount_rate_source == "anchor",
+                      f"discount_rate_source={discount_rate_source} (constant fallback until P3.9)")
         research_now = factor.get("band_counts", {}).get("research_now", 0)
         add_invariant(invariants, "factor_research_now", "soft", research_now >= 10,
                       f"{research_now} research_now candidates")
@@ -269,11 +281,17 @@ def main():
         # ── Factor Lab forward log (dated, append-only — outcome tracking) ──
         factor_log = DATA / "factor_signal_log.jsonl"
         log_rows = build_factor_signal_rows(factor)
+        transitions = factor.get("band_transitions") or {}
         with factor_log.open("a", encoding="utf-8") as f:
             f.write(json.dumps({
                 "run_id": run_id,
                 "snapshot_date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
                 "engine": factor.get("engine", "factor_lab_v1"),
+                "entered_rn": transitions.get("entered_rn", factor.get("entered_rn", [])),
+                "left_rn": transitions.get("left_rn", factor.get("left_rn", [])),
+                "entered_book": transitions.get("entered_book", factor.get("entered_book", [])),
+                "left_book": transitions.get("left_book", factor.get("left_book", [])),
+                "retained_by_hysteresis": transitions.get("retained_by_hysteresis", factor.get("hysteresis_retained", [])),
                 "signals": sorted(log_rows, key=lambda x: (x.get("fct_rank") or 10**9)),
             }, sort_keys=True) + "\n")
         print(f"  Appended {len(log_rows)} factor signals to {factor_log.name}")
