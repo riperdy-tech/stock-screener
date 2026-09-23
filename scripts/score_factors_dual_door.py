@@ -1893,9 +1893,21 @@ def main():
         scored_tickers, raw_pillars, PILLAR_NAMES
     )
 
-    effective_weights = {
+    effective_weights_before_std = {
         "door1": compute_effective_weights(DOOR1_BASE_WEIGHTS, pillar_sd_exact),
         "door2": compute_effective_weights(DOOR2_BASE_WEIGHTS, pillar_sd_exact),
+    }
+
+    total_d1 = sum(DOOR1_BASE_WEIGHTS.values())
+    total_d2 = sum(DOOR2_BASE_WEIGHTS.values())
+    effective_weights_live = {
+        "door1": {k: round(v / total_d1, 4) for k, v in DOOR1_BASE_WEIGHTS.items()},
+        "door2": {k: round(v / total_d2, 4) for k, v in DOOR2_BASE_WEIGHTS.items()},
+    }
+
+    effective_weights = {
+        **effective_weights_before_std,
+        "_note": "alias of effective_weights_before_standardisation for diff harness compatibility",
     }
 
     # Unit variance standardization: divide each pillar by its sd (if not degenerate and UNIT_VARIANCE enabled)
@@ -2336,7 +2348,10 @@ def main():
         "falling_knife_count_nominated": falling_knife_count_nominated,
         "pillar_sd": pillar_sd,
         "pillar_sd_degenerate": pillar_sd_degenerate,
+        "effective_weights_before_standardisation": effective_weights_before_std,
+        "effective_weights_live": effective_weights_live,
         "effective_weights": effective_weights,
+        "_note_effective_weights": "alias of effective_weights_before_standardisation for diff harness compatibility",
         "door1_eligibility": {
             "eligible_count": d1_eligible_count,
             "ineligible_count": d1_ineligible_count,
