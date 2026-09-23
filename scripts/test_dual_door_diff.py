@@ -172,9 +172,10 @@ def test_baseline_vs_itself_zero_churn(tmp_path: Path):
     assert d2_delta["count_under_minus_1_5"] == 0
     assert d2_delta["count_under_minus_2_0"] == 0
 
-    # 5. Effective weights are null with reason not_emitted_by_this_version
-    assert report["effective_weights"] is None
-    assert report["effective_weights_reason"] == "not_emitted_by_this_version"
+    # 5. Effective weights are emitted and match between identical runs
+    assert report["effective_weights"] is not None
+    assert report["effective_weights"]["working"] == report["effective_weights"]["baseline"]
+    assert report["effective_weights"]["working"] is not None
 
     # 6. JSON output file was written and matches returned report
     assert out_file.exists()

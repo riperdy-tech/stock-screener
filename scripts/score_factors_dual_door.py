@@ -24,6 +24,7 @@ Output: public/data/factor_scores_dual_door.json, public/data/factor_scores.json
 import bisect
 import json
 import math
+import os
 import statistics
 import sys
 from datetime import datetime, timezone
@@ -61,6 +62,8 @@ FACTOR_SCORES_COMPAT_JSON = DATA / "factor_scores.json"
 SECTOR_RANKING_MAX_AGE_DAYS = 45
 
 Z_CLAMP = 3.0
+Z_METHOD = os.environ.get("Z_METHOD", "winsor")
+UNIT_VARIANCE = True
 TOTAL_NOMINATION_TARGET = 135
 CORE_RATIO = 0.70 # 70% Core Sector Floor (~90 stocks)
 WILDCARD_RATIO = 0.30 # 30% Global Wildcards (~45 stocks)
@@ -244,17 +247,65 @@ def pctl(sorted_vals: List[float], q: float) -> Optional[float]:
     return sorted_vals[lo] * (1.0 - frac) + sorted_vals[hi] * frac
 
 
-def sector_neutral_z(raw_by_ticker: Dict[str, Optional[float]], sector_by_ticker: Dict[str, str]) -> Dict[str, Optional[float]]:
-    by_sector: Dict[str, List[float]] = {}
-    universe: List[float] = []
+def sector_neutral_z(
+    raw_by_ticker: Dict[str, Optional[float]],
+    sector_by_ticker: Dict[str, str],
+    method: Optional[str] = None,
+) -> Dict[str, Optional[float]]:
+    method = method or globals().get("Z_METHOD", "winsor")
+    by_sector: Dict[str, List[Tuple[str, float]]] = {}
+    universe: List[Tuple[str, float]] = []
     for t, v in raw_by_ticker.items():
         if v is not None:
-            universe.append(v)
-            by_sector.setdefault(sector_by_ticker.get(t) or "Unknown", []).append(v)
+            sec = sector_by_ticker.get(t) or "Unknown"
+            universe.append((t, v))
+            by_sector.setdefault(sec, []).append((t, v))
             
     if len(universe) < 2:
         return {t: None for t in raw_by_ticker}
 
+    if method == "gaussian_rank":
+        z_scores: Dict[str, Optional[float]] = {}
+        for t, v in raw_by_ticker.items():
+            if v is None:
+                z_scores[t] = None
+
+        def _rank_pool(ticker_val_list: List[Tuple[str, float]]) -> Dict[str, float]:
+            n = len(ticker_val_list)
+            if n == 0:
+                return {}
+            if n == 1:
+                return {ticker_val_list[0][0]: 0.0}
+            sorted_items = sorted(ticker_val_list, key=lambda x: x[1])
+            res: Dict[str, float] = {}
+            i = 0
+            while i < n:
+                j = i
+                while j < n - 1 and sorted_items[j + 1][1] == sorted_items[j][1]:
+                    j += 1
+                midrank = (i + 1 + j + 1) / 2.0
+                p = (midrank - 0.5) / n
+                p_clamped = max(1e-6, min(1.0 - 1e-6, p))
+                z_val = statistics.NormalDist().inv_cdf(p_clamped)
+                z_clamped = max(-Z_CLAMP, min(Z_CLAMP, z_val))
+                for k in range(i, j + 1):
+                    res[sorted_items[k][0]] = z_clamped
+                i = j + 1
+            return res
+
+        u_ranks = _rank_pool(universe)
+        for sec, items in by_sector.items():
+            if len(items) >= 15:
+                sec_ranks = _rank_pool(items)
+                for t, _ in items:
+                    z_scores[t] = sec_ranks[t]
+            else:
+                for t, _ in items:
+                    z_scores[t] = u_ranks[t]
+
+        return z_scores
+
+    # Default "winsor"
     def stats_for(vals: List[float]) -> Tuple[float, float, float, Optional[float]]:
         s = sorted(vals)
         lo, hi = pctl(s, 1.0), pctl(s, 99.0)
@@ -263,9 +314,11 @@ def sector_neutral_z(raw_by_ticker: Dict[str, Optional[float]], sector_by_ticker
         sd = statistics.pstdev(w)
         return mean, sd, lo, hi
 
-    u_mean, u_sd, u_lo, u_hi = stats_for(universe)
+    u_vals = [v for _, v in universe]
+    u_mean, u_sd, u_lo, u_hi = stats_for(u_vals)
     sec_stats = {}
-    for sec, vals in by_sector.items():
+    for sec, items in by_sector.items():
+        vals = [v for _, v in items]
         if len(vals) >= 15:
             sec_stats[sec] = stats_for(vals)
         else:
@@ -333,18 +386,40 @@ def _contributions(prof):
     pillar; the dual-door model does not, so the bar's lowvol segment is absent rather than
     fabricated at zero-as-if-measured.
     """
-    if not prof or prof.get("score_door1") is None and prof.get("score_door2") is None:
+    if not prof:
+        return None
+    s1, s2 = prof.get("score_door1"), prof.get("score_door2")
+    if s1 is None and s2 is None:
         return None
     d1, d2 = prof.get("pctl_d1", 0.0), prof.get("pctl_d2", 0.0)
-    z = lambda k: abs(prof.get(k) or 0.0)
-    if d1 >= d2:   # compounder door
-        parts = {"quality": 0.45 * z("z_quality"),
-                 "momentum": 0.35 * z("z_momentum"),
-                 "revisions": 0.20 * z("z_revisions")}
-    else:          # value / expectations-gap door
-        parts = {"value": 0.40 * z("z_value"),
-                 "exp_gap": 0.40 * z("z_exp_gap"),
-                 "quality": 0.20 * z("z_quality")}
+
+    if s1 is not None and s2 is None:
+        won_d1 = True
+    elif s2 is not None and s1 is None:
+        won_d1 = False
+    else:
+        won_d1 = (d1 >= d2)
+
+    parts = {}
+    if won_d1:
+        scale = prof.get("door1_weight_scale") if prof.get("door1_weight_scale") is not None else 1.0
+        used = prof.get("door1_pillars_used") or ["quality", "momentum", "revisions"]
+        if "quality" in used and prof.get("z_quality") is not None:
+            parts["quality"] = 0.45 * scale * abs(prof["z_quality"])
+        if "momentum" in used and prof.get("z_momentum") is not None:
+            parts["momentum"] = 0.35 * scale * abs(prof["z_momentum"])
+        if "revisions" in used and prof.get("z_revisions") is not None:
+            parts["revisions"] = 0.20 * scale * abs(prof["z_revisions"])
+    else:
+        scale = prof.get("door2_weight_scale") if prof.get("door2_weight_scale") is not None else 1.0
+        used = prof.get("door2_pillars_used") or ["value", "exp_gap", "quality"]
+        if "value" in used and prof.get("z_value") is not None:
+            parts["value"] = 0.40 * scale * abs(prof["z_value"])
+        if "exp_gap" in used and prof.get("z_exp_gap") is not None:
+            parts["exp_gap"] = 0.40 * scale * abs(prof["z_exp_gap"])
+        if "quality" in used and prof.get("z_quality") is not None:
+            parts["quality"] = 0.20 * scale * abs(prof["z_quality"])
+
     return {k: round(v, 4) for k, v in parts.items() if v > 0} or None
 
 
@@ -750,44 +825,149 @@ def main():
                     raw["exp_gap"][t] = gap
 
     # Standardize All Features via Sector-Neutral Z
-    z = {metric: sector_neutral_z(vals, sector_by_ticker) for metric, vals in raw.items()}
+    z_method_chosen = globals().get("Z_METHOD", "winsor")
+    z = {metric: sector_neutral_z(vals, sector_by_ticker, method=z_method_chosen) for metric, vals in raw.items()}
 
     def mean_of_available(*values) -> Optional[float]:
         valid = [v for v in values if v is not None]
         return (sum(valid) / len(valid)) if valid else None
 
+    # Compute raw pillar z's for scored set (not vetoed)
+    scored_tickers = [t for t in all_tickers if t not in vetoes]
+    raw_pillars: Dict[str, Dict[str, Optional[float]]] = {}
+    for t in scored_tickers:
+        raw_pillars[t] = {
+            "quality": mean_of_available(z["roic_proxy"].get(t), z["gm_stability"].get(t),
+                                         z["neg_accruals"].get(t), z["f_score"].get(t)),
+            "momentum": mean_of_available(z["skip_12_1"].get(t), z["high_52w"].get(t)),
+            "revisions": z["eps_slope"].get(t),
+            "value": mean_of_available(z["fcf_yield"].get(t), z["owner_yield"].get(t), z["ebit_yield"].get(t)),
+            "exp_gap": z["exp_gap"].get(t),
+        }
+
+    # Cross-sectional standard deviation over the SCORED set (not vetoed)
+    PILLAR_NAMES = ("quality", "momentum", "revisions", "value", "exp_gap")
+    pillar_sd: Dict[str, Optional[float]] = {}
+    pillar_sd_exact: Dict[str, Optional[float]] = {}
+    pillar_sd_degenerate: List[str] = []
+
+    for p_name in PILLAR_NAMES:
+        vals = [raw_pillars[t][p_name] for t in scored_tickers if raw_pillars[t][p_name] is not None]
+        if len(vals) < 2:
+            pillar_sd_degenerate.append(p_name)
+            pillar_sd[p_name] = None
+            pillar_sd_exact[p_name] = None
+        else:
+            sd = statistics.pstdev(vals)
+            if sd == 0 or not math.isfinite(sd):
+                pillar_sd_degenerate.append(p_name)
+                pillar_sd[p_name] = round(sd, 4) if math.isfinite(sd) else None
+                pillar_sd_exact[p_name] = None
+            else:
+                pillar_sd[p_name] = round(sd, 4)
+                pillar_sd_exact[p_name] = sd
+
+    DOOR1_BASE_WEIGHTS = {"quality": 0.45, "momentum": 0.35, "revisions": 0.20}
+    DOOR2_BASE_WEIGHTS = {"value": 0.40, "exp_gap": 0.40, "quality": 0.20}
+
+    # Effective weights: {door: {pillar: w * sd / sum(w * sd)}}
+    p1 = {
+        k: DOOR1_BASE_WEIGHTS[k] * (pillar_sd_exact[k] if pillar_sd_exact.get(k) is not None else 0.0)
+        for k in DOOR1_BASE_WEIGHTS
+    }
+    sum_p1 = sum(p1.values())
+    if sum_p1 > 0:
+        eff_w1 = {k: round(v / sum_p1, 4) for k, v in p1.items()}
+    else:
+        eff_w1 = {k: round(DOOR1_BASE_WEIGHTS[k], 4) for k in DOOR1_BASE_WEIGHTS}
+
+    p2 = {
+        k: DOOR2_BASE_WEIGHTS[k] * (pillar_sd_exact[k] if pillar_sd_exact.get(k) is not None else 0.0)
+        for k in DOOR2_BASE_WEIGHTS
+    }
+    sum_p2 = sum(p2.values())
+    if sum_p2 > 0:
+        eff_w2 = {k: round(v / sum_p2, 4) for k, v in p2.items()}
+    else:
+        eff_w2 = {k: round(DOOR2_BASE_WEIGHTS[k], 4) for k in DOOR2_BASE_WEIGHTS}
+
+    effective_weights = {
+        "door1": eff_w1,
+        "door2": eff_w2,
+    }
+
+    # Unit variance standardization: divide each pillar by its sd (if not degenerate and UNIT_VARIANCE enabled)
+    std_pillars: Dict[str, Dict[str, Optional[float]]] = {}
+    use_unit_variance = globals().get("UNIT_VARIANCE", True)
+    for t in scored_tickers:
+        std_pillars[t] = {}
+        for p_name in PILLAR_NAMES:
+            raw_val = raw_pillars[t][p_name]
+            if raw_val is None:
+                std_pillars[t][p_name] = None
+            elif not use_unit_variance:
+                std_pillars[t][p_name] = raw_val
+            else:
+                sd_ex = pillar_sd_exact.get(p_name)
+                if p_name in pillar_sd_degenerate or sd_ex is None or sd_ex <= 0:
+                    std_pillars[t][p_name] = raw_val
+                else:
+                    std_pillars[t][p_name] = raw_val / sd_ex
+
     # Compute Door 1 and Door 2 Scores
     scored_profiles: Dict[str, Dict[str, Any]] = {}
-    d1_candidates: List[Dict[str, Any]] = []
-    d2_candidates: List[Dict[str, Any]] = []
 
-    for t in all_tickers:
-        if t in vetoes:
-            continue
-
-        z_qual = mean_of_available(z["roic_proxy"].get(t), z["gm_stability"].get(t),
-                                   z["neg_accruals"].get(t), z["f_score"].get(t))
-        z_mom = mean_of_available(z["skip_12_1"].get(t), z["high_52w"].get(t))
-        z_rev = z["eps_slope"].get(t)
-        z_val = mean_of_available(z["fcf_yield"].get(t), z["owner_yield"].get(t), z["ebit_yield"].get(t))
-        z_gap = z["exp_gap"].get(t)
+    for t in scored_tickers:
+        z_qual = std_pillars[t]["quality"]
+        z_mom = std_pillars[t]["momentum"]
+        z_rev = std_pillars[t]["revisions"]
+        z_val = std_pillars[t]["value"]
+        z_gap = std_pillars[t]["exp_gap"]
 
         tax = taxonomy_by_ticker[t]
         sec = tax["sector"]
         cluster = tax["cluster"]
 
-        # Door 1: Secular Compounders
+        # Door 1: Secular Compounders (requires z_qual AND z_mom; revisions optional)
         d1_score = None
-        if z_qual is not None and z_mom is not None:
-            rev_component = z_rev if z_rev is not None else 0.0
-            d1_score = 0.45 * z_qual + 0.35 * z_mom + 0.20 * rev_component
+        d1_pillars_used = []
+        d1_weight_scale = None
+        d1_ineligible_reason = None
 
-        # Door 2: Value / Expectations Gap
+        if z_qual is None or z_mom is None:
+            missing = []
+            if z_qual is None: missing.append("missing_z_quality")
+            if z_mom is None: missing.append("missing_z_momentum")
+            d1_ineligible_reason = "_and_".join(missing)
+        else:
+            if z_rev is not None:
+                d1_pillars_used = ["quality", "momentum", "revisions"]
+                d1_weight_scale = 1.0
+                d1_score = 0.45 * z_qual + 0.35 * z_mom + 0.20 * z_rev
+            else:
+                d1_pillars_used = ["quality", "momentum"]
+                d1_weight_scale = round(1.0 / 0.80, 4)
+                d1_score = (0.45 / 0.80) * z_qual + (0.35 / 0.80) * z_mom
+
+        # Door 2: Value / Expectations Gap (requires z_val; z_gap and z_qual optional)
         d2_score = None
-        if z_val is not None:
-            gap_component = z_gap if z_gap is not None else 0.0
-            qual_component = z_qual if z_qual is not None else 0.0
-            d2_score = 0.40 * z_val + 0.40 * gap_component + 0.20 * qual_component
+        d2_pillars_used = []
+        d2_weight_scale = None
+        d2_ineligible_reason = None
+
+        if z_val is None:
+            d2_ineligible_reason = "missing_z_value"
+        else:
+            present_d2 = [("value", 0.40, z_val)]
+            if z_gap is not None:
+                present_d2.append(("exp_gap", 0.40, z_gap))
+            if z_qual is not None:
+                present_d2.append(("quality", 0.20, z_qual))
+
+            d2_pillars_used = [name for name, w, val in present_d2]
+            sum_w2 = sum(w for name, w, val in present_d2)
+            d2_weight_scale = round(1.0 / sum_w2, 4)
+            d2_score = sum((w / sum_w2) * val for name, w, val in present_d2)
 
         cand_data = {
             "ticker": t,
@@ -803,6 +983,12 @@ def main():
             "z_exp_gap": round(z_gap, 3) if z_gap is not None else None,
             "score_door1": round(d1_score, 3) if d1_score is not None else None,
             "score_door2": round(d2_score, 3) if d2_score is not None else None,
+            "door1_pillars_used": d1_pillars_used,
+            "door2_pillars_used": d2_pillars_used,
+            "door1_weight_scale": d1_weight_scale,
+            "door2_weight_scale": d2_weight_scale,
+            "door1_ineligible_reason": d1_ineligible_reason,
+            "door2_ineligible_reason": d2_ineligible_reason,
             "pctl_d1": 0.0,
             "pctl_d2": 0.0,
             "best_pctl": 0.0,
@@ -817,9 +1003,16 @@ def main():
     all_d2 = sorted([p["score_door2"] for p in scored_profiles.values() if p["score_door2"] is not None])
 
     for p in scored_profiles.values():
-        p["pctl_d1"] = round(get_percentile(p["score_door1"], all_d1), 1)
-        p["pctl_d2"] = round(get_percentile(p["score_door2"], all_d2), 1)
-        p["best_pctl"] = max(p["pctl_d1"], p["pctl_d2"])
+        p["pctl_d1"] = round(get_percentile(p["score_door1"], all_d1), 1) if p["score_door1"] is not None else 0.0
+        p["pctl_d2"] = round(get_percentile(p["score_door2"], all_d2), 1) if p["score_door2"] is not None else 0.0
+        if p["score_door1"] is not None and p["score_door2"] is not None:
+            p["best_pctl"] = max(p["pctl_d1"], p["pctl_d2"])
+        elif p["score_door1"] is not None:
+            p["best_pctl"] = p["pctl_d1"]
+        elif p["score_door2"] is not None:
+            p["best_pctl"] = p["pctl_d2"]
+        else:
+            p["best_pctl"] = 0.0
 
     # ── 4. Macro Sector Budgeting via MGI (MRI-11 contract) ──────────────────
     macro_scores_by_id, reported_regime, sector_ranking_meta = load_sector_ranking()
@@ -865,6 +1058,16 @@ def main():
     core_nominated: Dict[str, Dict[str, Any]] = {}
     sector_running_counts: Dict[str, int] = {sec: 0 for sec in GICS_TO_MACRO_ID}
 
+    def _door_won(p: Dict[str, Any]) -> str:
+        s1, s2 = p.get("score_door1"), p.get("score_door2")
+        if s1 is not None and s2 is not None:
+            return "DOOR_1_COMPOUNDER" if p.get("pctl_d1", 0.0) >= p.get("pctl_d2", 0.0) else "DOOR_2_VALUE_GAP"
+        elif s1 is not None:
+            return "DOOR_1_COMPOUNDER"
+        elif s2 is not None:
+            return "DOOR_2_VALUE_GAP"
+        return "NONE"
+
     for sec, core_quota in core_sector_quotas.items():
         sec_cand = by_sec.get(sec, [])
         if not sec_cand: continue
@@ -888,7 +1091,7 @@ def main():
                 break
             best_in_cl = c_by_cluster[cl][0]
             if best_in_cl["best_pctl"] >= 75.0:
-                door_won = "DOOR_1_COMPOUNDER" if best_in_cl["pctl_d1"] >= best_in_cl["pctl_d2"] else "DOOR_2_VALUE_GAP"
+                door_won = _door_won(best_in_cl)
                 best_in_cl["nominated_doors"].append(door_won)
                 current_sec_picks[best_in_cl["ticker"]] = best_in_cl
                 cluster_counts[cl] = cluster_counts.get(cl, 0) + 1
@@ -902,7 +1105,7 @@ def main():
             if remaining_slots <= 0: break
             cl = c["cluster"]
             if cluster_counts.get(cl, 0) < max_per_cluster:
-                door_won = "DOOR_1_COMPOUNDER" if c["pctl_d1"] >= c["pctl_d2"] else "DOOR_2_VALUE_GAP"
+                door_won = _door_won(c)
                 c["nominated_doors"].append(door_won)
                 current_sec_picks[c["ticker"]] = c
                 cluster_counts[cl] = cluster_counts.get(cl, 0) + 1
@@ -923,7 +1126,7 @@ def main():
             break
         sec = p["sector"]
         if sector_running_counts.get(sec, 0) < MAX_SECTOR_CEILING:
-            door_won = "DOOR_1_COMPOUNDER" if p["pctl_d1"] >= p["pctl_d2"] else "DOOR_2_VALUE_GAP"
+            door_won = _door_won(p)
             p["nominated_doors"].append(door_won)
             p["nominated_doors"].append("GLOBAL_WILDCARD")
             wildcard_nominated[p["ticker"]] = p
@@ -949,6 +1152,32 @@ def main():
         if t not in vetoes and ticker_mom_state.get(t, {}).get("mom_12_1") is not None
     )
 
+    d1_eligible_count = sum(1 for p in scored_profiles.values() if p["score_door1"] is not None)
+    d1_ineligible_count = len(scored_profiles) - d1_eligible_count
+    d1_renormalised_count = sum(1 for p in scored_profiles.values() if p["door1_weight_scale"] is not None and p["door1_weight_scale"] != 1.0)
+    d1_ineligible_reasons: Dict[str, int] = {}
+    d1_pillars_counts: Dict[str, int] = {}
+    for p in scored_profiles.values():
+        if p["door1_ineligible_reason"]:
+            r = p["door1_ineligible_reason"]
+            d1_ineligible_reasons[r] = d1_ineligible_reasons.get(r, 0) + 1
+        if p["door1_pillars_used"]:
+            k = ",".join(p["door1_pillars_used"])
+            d1_pillars_counts[k] = d1_pillars_counts.get(k, 0) + 1
+
+    d2_eligible_count = sum(1 for p in scored_profiles.values() if p["score_door2"] is not None)
+    d2_ineligible_count = len(scored_profiles) - d2_eligible_count
+    d2_renormalised_count = sum(1 for p in scored_profiles.values() if p["door2_weight_scale"] is not None and p["door2_weight_scale"] != 1.0)
+    d2_ineligible_reasons: Dict[str, int] = {}
+    d2_pillars_counts: Dict[str, int] = {}
+    for p in scored_profiles.values():
+        if p["door2_ineligible_reason"]:
+            r = p["door2_ineligible_reason"]
+            d2_ineligible_reasons[r] = d2_ineligible_reasons.get(r, 0) + 1
+        if p["door2_pillars_used"]:
+            k = ",".join(p["door2_pillars_used"])
+            d2_pillars_counts[k] = d2_pillars_counts.get(k, 0) + 1
+
     summary = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "reported_macro_regime": reported_regime,
@@ -967,6 +1196,30 @@ def main():
         "sector_ranking_meta": sector_ranking_meta,
         "momentum_source": momentum_source,
         "momentum_coverage": momentum_coverage,
+        "z_method": z_method_chosen,
+        "pillar_sd": pillar_sd,
+        "pillar_sd_degenerate": pillar_sd_degenerate,
+        "effective_weights": effective_weights,
+        "door1_eligibility": {
+            "eligible_count": d1_eligible_count,
+            "ineligible_count": d1_ineligible_count,
+            "renormalised_count": d1_renormalised_count,
+            "ineligible_reasons": d1_ineligible_reasons,
+            "pillars_used_counts": d1_pillars_counts,
+        },
+        "door2_eligibility": {
+            "eligible_count": d2_eligible_count,
+            "ineligible_count": d2_ineligible_count,
+            "renormalised_count": d2_renormalised_count,
+            "ineligible_reasons": d2_ineligible_reasons,
+            "pillars_used_counts": d2_pillars_counts,
+        },
+        "door1_eligible_count": d1_eligible_count,
+        "door1_ineligible_count": d1_ineligible_count,
+        "door1_renormalised_count": d1_renormalised_count,
+        "door2_eligible_count": d2_eligible_count,
+        "door2_ineligible_count": d2_ineligible_count,
+        "door2_renormalised_count": d2_renormalised_count,
         "nominated_tickers": nominated_pool,
         "veto_breakdown": {v: sum(1 for x in vetoes.values() if x == v) for v in set(vetoes.values())},
         "profiles": {t: all_nominated_map[t] for t in nominated_pool}
@@ -1023,6 +1276,10 @@ def main():
             "fct_nominated_doors": prof.get("nominated_doors", []),
             "fct_momentum_state": prof.get("fct_momentum_state", ticker_mom_state.get(t, {})),
             "fct_flags": prof.get("fct_flags", list(ticker_flags.get(t, []))),
+            "door1_pillars_used": prof.get("door1_pillars_used", []),
+            "door2_pillars_used": prof.get("door2_pillars_used", []),
+            "door1_weight_scale": prof.get("door1_weight_scale"),
+            "door2_weight_scale": prof.get("door2_weight_scale"),
             "sector": prof.get("sector", sector_by_ticker.get(t)),
             "cluster": prof.get("cluster"),
             "archetype": prof.get("archetype")
@@ -1042,6 +1299,7 @@ def main():
         "macro_confidence": sector_ranking_meta["macro_confidence"],
         "momentum_source": momentum_source,
         "momentum_coverage": momentum_coverage,
+        "z_method": z_method_chosen,
         "scored_count": eligible_count,
         "band_counts": {
             "research_now": len(rn_set),

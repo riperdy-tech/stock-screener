@@ -483,6 +483,46 @@ def compute_diff(
             "by_reason": veto_by_reason,
         },
     }
+
+    # Saturation analysis (right-tail exp_gap saturation & |z|=3.0 count per pillar)
+    def _saturation_stats(profiles: Dict[str, Any], compat: Dict[str, Any], nominated_list: List[str]) -> Dict[str, Any]:
+        exp_gaps: List[float] = []
+        for t in nominated_list:
+            prof = profiles.get(t) or compat.get("tickers", {}).get(t, {})
+            zg = prof.get("z_exp_gap")
+            if zg is None and "fct_z" in prof:
+                zg = (prof.get("fct_z") or {}).get("exp_gap")
+            if zg is not None:
+                exp_gaps.append(round(float(zg), 3))
+        from collections import Counter
+        counts = Counter(exp_gaps)
+        shared = {str(k): v for k, v in sorted(counts.items()) if v > 1}
+        nominees_sharing_exp_gap = sum(shared.values())
+
+        pillars = ("quality", "momentum", "revisions", "value", "exp_gap")
+        at_3_counts = {}
+        for p in pillars:
+            cnt = 0
+            for t in nominated_list:
+                prof = profiles.get(t) or compat.get("tickers", {}).get(t, {})
+                val = prof.get(f"z_{p}")
+                if val is None and "fct_z" in prof:
+                    val = (prof.get("fct_z") or {}).get(p)
+                if val is not None and abs(round(float(val), 3)) >= 3.0:
+                    cnt += 1
+            at_3_counts[p] = cnt
+
+        return {
+            "nominees_sharing_exp_gap_count": nominees_sharing_exp_gap,
+            "shared_exp_gap_values": shared,
+            "nominees_at_z_3_0": at_3_counts,
+        }
+
+    report["saturation"] = {
+        "baseline": _saturation_stats(b_profiles, baseline_compat, b_book),
+        "working": _saturation_stats(w_profiles, working_compat, w_book),
+    }
+
     return report
 
 
@@ -613,6 +653,23 @@ def format_diff_summary(report: Dict[str, Any]) -> str:
             f"Working {counts['working']:>4} | Delta {counts['delta']:>+4}"
         )
 
+    # 9. Saturation Analysis
+    if "saturation" in report:
+        lines.append("\n[9. SATURATION ANALYSIS (RIGHT-TAIL & |z|=3.0)]")
+        b_s = report["saturation"]["baseline"]
+        w_s = report["saturation"]["working"]
+        lines.append(
+            f"  Nominees sharing z_exp_gap (to 3dp): Baseline {b_s['nominees_sharing_exp_gap_count']:>3} | "
+            f"Working {w_s['nominees_sharing_exp_gap_count']:>3}"
+        )
+        if b_s['shared_exp_gap_values']:
+            lines.append(f"    Baseline shared values: {b_s['shared_exp_gap_values']}")
+        if w_s['shared_exp_gap_values']:
+            lines.append(f"    Working shared values : {w_s['shared_exp_gap_values']}")
+        lines.append("  Nominees sitting at |z| = 3.0 per pillar:")
+        for p in ("quality", "momentum", "revisions", "value", "exp_gap"):
+            lines.append(f"    {p:<12}: Baseline {b_s['nominees_at_z_3_0'].get(p, 0):>3} | Working {w_s['nominees_at_z_3_0'].get(p, 0):>3}")
+
     lines.append("=" * 80)
     return "\n".join(lines)
 
@@ -625,6 +682,7 @@ def run_diff(
     data_dir: Optional[Path] = None,
     out_path: Optional[Path] = None,
     quiet: bool = True,
+    z_method: str = "winsor",
 ) -> Tuple[Dict[str, Any], str]:
     """Orchestrate running baseline vs working tree sifter and computing diff."""
     repo_root = repo_root or ROOT
@@ -649,22 +707,31 @@ def run_diff(
     mod_baseline = load_sifter_module(baseline_code, "sifter_baseline", working_file)
     mod_working = load_sifter_module(working_code, "sifter_working", working_file)
 
-    with tempfile.TemporaryDirectory() as td:
-        temp_dir = Path(td)
-        base_out = temp_dir / "baseline"
-        work_out = temp_dir / "working"
+    old_z_env = os.environ.get("Z_METHOD")
+    try:
+        os.environ["Z_METHOD"] = z_method
+        mod_working.Z_METHOD = z_method
+        with tempfile.TemporaryDirectory() as td:
+            temp_dir = Path(td)
+            base_out = temp_dir / "baseline"
+            work_out = temp_dir / "working"
 
-        b_summary, b_compat = run_sifter(mod_baseline, base_out, data_dir=data_dir, quiet=quiet)
-        w_summary, w_compat = run_sifter(mod_working, work_out, data_dir=data_dir, quiet=quiet)
+            b_summary, b_compat = run_sifter(mod_baseline, base_out, data_dir=data_dir, quiet=quiet)
+            w_summary, w_compat = run_sifter(mod_working, work_out, data_dir=data_dir, quiet=quiet)
 
-        diff_report = compute_diff(
-            b_summary,
-            b_compat,
-            w_summary,
-            w_compat,
-            baseline_label=baseline_label,
-            working_label=working_label,
-        )
+            diff_report = compute_diff(
+                b_summary,
+                b_compat,
+                w_summary,
+                w_compat,
+                baseline_label=baseline_label,
+                working_label=working_label,
+            )
+    finally:
+        if old_z_env is not None:
+            os.environ["Z_METHOD"] = old_z_env
+        else:
+            os.environ.pop("Z_METHOD", None)
 
     summary_text = format_diff_summary(diff_report)
 
@@ -710,6 +777,13 @@ def parse_args():
         help="Input data directory containing stocks.json etc. (default: public/data).",
     )
     parser.add_argument(
+        "--z-method",
+        type=str,
+        default=os.environ.get("Z_METHOD", "winsor"),
+        choices=["winsor", "gaussian_rank"],
+        help="Z-score standardization method for working tree sifter (default: winsor).",
+    )
+    parser.add_argument(
         "--out",
         type=Path,
         default=None,
@@ -732,6 +806,7 @@ def main():
         data_dir=args.data_dir,
         out_path=args.out,
         quiet=not args.verbose,
+        z_method=args.z_method,
     )
     print(text_summary)
     if args.out:
