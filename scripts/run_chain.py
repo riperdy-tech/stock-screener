@@ -192,6 +192,17 @@ def main():
         add_invariant(invariants, "factor_research_now", "soft", research_now >= 10,
                       f"{research_now} research_now candidates")
 
+        # MRI-11: the sector-quota loader (score_factors_dual_door.load_sector_ranking) fails
+        # closed to a neutral quota when it cannot find a usable MRI ranking at all. That state
+        # is reported, not silently accepted — but it does not fail the chain the way
+        # "neutral_no_validated_edge" (a found, fresh ranking whose validation gate is closed)
+        # does not: the latter is the approved, correct state per the review's validation gate.
+        sector_quota_source = factor.get("sector_quota_source")
+        add_invariant(invariants, "sector_quota_source", "soft",
+                      sector_quota_source != "neutral_fallback",
+                      f"sector_quota_source={sector_quota_source} "
+                      f"(reason={(factor.get('sector_ranking_meta') or {}).get('reason')})")
+
         valuation_path = DATA / "valuation_models.json"
         valuation = load_json(valuation_path) if valuation_path.exists() else {}
         add_invariant(invariants, "valuation_models", "soft",
