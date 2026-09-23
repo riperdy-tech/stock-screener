@@ -50,7 +50,10 @@ from mri_sync import sync_mri_snapshot
 STOCKS_JSON = DATA / "stocks.json"
 PRICE_HISTORY_JSON = DATA / "price_history.json"
 MOMENTUM_STATE_JSON = DATA / "momentum_state.json"
-MOMENTUM_CONFIG_PATH = Path(__file__).resolve().parent / "momentum_config.json"
+SIFTER_CONFIG_PATH = Path(__file__).resolve().parent / "sifter_config.json"
+if not SIFTER_CONFIG_PATH.exists():
+    SIFTER_CONFIG_PATH = Path(__file__).resolve().parent / "momentum_config.json"
+MOMENTUM_CONFIG_PATH = SIFTER_CONFIG_PATH
 FUNDAMENTALS_HISTORY_JSON = DATA / "fundamentals_history.json"
 BATTERY_JSON = DATA / "fundamentals_battery.json"
 EPS_TRAJECTORY_JSON = DATA / "eps_trajectory.json"
@@ -94,11 +97,24 @@ def load_json(path: Path, default=None):
         return json.load(f)
 
 
+def _load_sifter_config(config_path: Optional[Path] = None) -> Dict[str, Any]:
+    p = config_path or globals().get("SIFTER_CONFIG_PATH", Path(__file__).resolve().parent / "sifter_config.json")
+    if not p.exists():
+        p = globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
+    return load_json(p, {}) if p.exists() else {}
+
+
 def _load_door2_momentum_floor(config_path: Optional[Path] = None) -> float:
-    p = config_path or globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
-    cfg = load_json(p, {}) if p.exists() else {}
+    cfg = _load_sifter_config(config_path)
     val = cfg.get("door2_momentum_floor", cfg.get("DOOR2_MOMENTUM_FLOOR", -1.5))
     return float(val)
+
+
+def _load_hysteresis_ranks(config_path: Optional[Path] = None) -> Tuple[int, int]:
+    cfg = _load_sifter_config(config_path)
+    rn_buf = cfg.get("hysteresis_rn_rank", cfg.get("hysteresis_rn_buffer", 60))
+    book_buf = cfg.get("hysteresis_book_rank", cfg.get("hysteresis_book_buffer", 150))
+    return int(rn_buf), int(book_buf)
 
 
 DOOR2_MOMENTUM_FLOOR = _load_door2_momentum_floor()
@@ -533,8 +549,39 @@ def main():
     print("TIER 2 DUAL-DOOR SIFTER (PROD V2 - CLUSTER GUARDRAILS & CORE/SATELLITE)")
     print("=" * 80)
 
-    mom_cfg_path = globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
-    door2_momentum_floor = float(globals().get("DOOR2_MOMENTUM_FLOOR", _load_door2_momentum_floor(mom_cfg_path)))
+    sifter_cfg_path = globals().get("SIFTER_CONFIG_PATH", Path(__file__).resolve().parent / "sifter_config.json")
+    if not sifter_cfg_path.exists():
+        sifter_cfg_path = globals().get("MOMENTUM_CONFIG_PATH", Path(__file__).resolve().parent / "momentum_config.json")
+    door2_momentum_floor = float(globals().get("DOOR2_MOMENTUM_FLOOR", _load_door2_momentum_floor(sifter_cfg_path)))
+    rn_buffer_rank, book_buffer_rank = _load_hysteresis_ranks(sifter_cfg_path)
+
+    # Read previous factor_scores.json before anything overwrites it (P3.5 band hysteresis)
+    prev_factor_raw = None
+    prev_factor_path = globals().get("PREVIOUS_FACTOR_SCORES_PATH")
+    if prev_factor_path is None:
+        if FACTOR_SCORES_COMPAT_JSON.exists():
+            prev_factor_path = FACTOR_SCORES_COMPAT_JSON
+        elif (DATA / "factor_scores.json").exists():
+            prev_factor_path = DATA / "factor_scores.json"
+
+    if prev_factor_path and Path(prev_factor_path).exists():
+        try:
+            prev_factor_raw = json.loads(Path(prev_factor_path).read_text(encoding="utf-8"))
+        except Exception:
+            prev_factor_raw = None
+
+    EXPECTED_ENGINE = "dual_door_dynamic_macro_v2_cluster_guarded"
+    if prev_factor_raw is None or prev_factor_raw.get("engine") != EXPECTED_ENGINE:
+        has_previous = False
+        hysteresis_status = "no_previous_run"
+        prev_rn = set()
+        prev_book = set()
+    else:
+        has_previous = True
+        hysteresis_status = "applied"
+        prev_tickers = prev_factor_raw.get("tickers", {})
+        prev_rn = {t for t, d in prev_tickers.items() if d.get("fct_band") == "research_now"}
+        prev_book = {t for t, d in prev_tickers.items() if d.get("fct_band") in ("research_now", "watchlist")}
 
     sync_result = sync_mri_snapshot()
     if sync_result is None:
@@ -1282,28 +1329,73 @@ def main():
         "door2_eligible_count": d2_eligible_count,
         "door2_ineligible_count": d2_ineligible_count,
         "door2_renormalised_count": d2_renormalised_count,
-        "nominated_tickers": nominated_pool,
         "veto_breakdown": {v: sum(1 for x in vetoes.values() if x == v) for v in set(vetoes.values())},
-        "profiles": {t: all_nominated_map[t] for t in nominated_pool}
     }
-
-    OUT_JSON.write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     # Priority Queue Ranking for RS2 Local (P3.4: bonus 2.0)
     def priority_sort_key(t: str) -> float:
-        p = all_nominated_map[t]
-        bonus = 2.0 if "DOUBLE_DOOR_CHAMPION" in p["nominated_doors"] else 0.0
+        p = all_nominated_map.get(t, scored_profiles[t])
+        bonus = 2.0 if "DOUBLE_DOOR_CHAMPION" in p.get("nominated_doors", []) else 0.0
         return p["best_pctl"] + bonus
 
+    # Nominees ranked by priority_sort_key (1 to 135)
     ranked_nominated = sorted(nominated_pool, key=priority_sort_key, reverse=True)
-    rn_set = set(ranked_nominated[:50])
-    wl_set = set(ranked_nominated[50:])
 
-    # fct_rank is the nomination's ordinal in the priority queue, 1-based. It is NOT decoration:
-    # track_paper_portfolios.depth_targets() and lib/desk/rankings.ts both skip any row whose
-    # rank is None, so a nominated name without one silently vanishes from the rn_depth book
-    # and from the desk. Non-nominated names carry None by design — they are not in the queue.
-    rank_by_ticker = {t: i + 1 for i, t in enumerate(ranked_nominated)}
+    # Extend ranking beyond 135 nominees by ranking remaining scored profiles by best_pctl
+    unnominated_scored = [t for t in scored_tickers if t not in all_nominated_map]
+    ranked_unnominated = sorted(unnominated_scored, key=lambda t: (-scored_profiles[t]["best_pctl"], t))
+    all_ranked = ranked_nominated + ranked_unnominated
+    rank_by_ticker = {t: i + 1 for i, t in enumerate(all_ranked)}
+
+    # P3.5: Band Hysteresis
+    rn_set: Set[str] = set()
+    wl_set: Set[str] = set()
+
+    for t in all_ranked:
+        r = rank_by_ticker[t]
+        if r <= 50:
+            rn_set.add(t)
+        elif r <= rn_buffer_rank and t in prev_rn:
+            rn_set.add(t)
+        elif r <= 135:
+            wl_set.add(t)
+        elif r <= book_buffer_rank and t in prev_book:
+            wl_set.add(t)
+
+    book_set = rn_set | wl_set
+    retained_rn = {t for t in rn_set if rank_by_ticker[t] > 50}
+    retained_book = {t for t in wl_set if rank_by_ticker[t] > 135}
+    retained_by_hysteresis = sorted(list(retained_rn | retained_book))
+
+    # Ensure any ticker retained into the book is present in all_nominated_map
+    for t in book_set:
+        if t not in all_nominated_map:
+            p = dict(scored_profiles[t])
+            door_won = _door_won(p)
+            p["nominated_doors"] = [door_won, "HYSTERESIS_RETAINED"]
+            all_nominated_map[t] = p
+
+    # Update nominated pool to reflect the final book (may exceed 135 with hysteresis)
+    nominated_pool = sorted(list(book_set))
+
+    band_transitions = {
+        "entered_rn": sorted(list(rn_set - prev_rn)) if has_previous else [],
+        "left_rn": sorted(list(prev_rn - rn_set)) if has_previous else [],
+        "entered_book": sorted(list(book_set - prev_book)) if has_previous else [],
+        "left_book": sorted(list(prev_book - book_set)) if has_previous else [],
+        "retained_by_hysteresis": retained_by_hysteresis,
+    }
+
+    summary["hysteresis"] = hysteresis_status
+    summary["hysteresis_retained"] = retained_by_hysteresis
+    summary["hysteresis_rn_buffer_rank"] = rn_buffer_rank
+    summary["hysteresis_book_buffer_rank"] = book_buffer_rank
+    summary["band_transitions"] = band_transitions
+    summary["nominated_count"] = len(nominated_pool)
+    summary["nominated_tickers"] = nominated_pool
+    summary["profiles"] = {t: all_nominated_map[t] for t in nominated_pool}
+
+    OUT_JSON.write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     compat_tickers = {}
     for t in all_tickers:
@@ -1366,6 +1458,9 @@ def main():
         "z_method": z_method_chosen,
         "door2_momentum_floor": door2_momentum_floor,
         "scored_count": eligible_count,
+        "hysteresis": hysteresis_status,
+        "hysteresis_retained": retained_by_hysteresis,
+        "band_transitions": band_transitions,
         "band_counts": {
             "research_now": len(rn_set),
             "watchlist": len(wl_set),

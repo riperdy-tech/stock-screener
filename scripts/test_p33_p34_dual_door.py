@@ -69,9 +69,11 @@ def _eval_knife(z_mom: float | None, fct_mom: Dict[str, Any] | None = None, flag
 
 
 def test_momentum_config_has_floor():
-    """scripts/momentum_config.json carries DOOR2_MOMENTUM_FLOOR = -1.5."""
-    cfg_path = Path(__file__).resolve().parent / "momentum_config.json"
-    assert cfg_path.exists(), "momentum_config.json must exist"
+    """scripts/sifter_config.json carries DOOR2_MOMENTUM_FLOOR = -1.5."""
+    cfg_path = Path(__file__).resolve().parent / "sifter_config.json"
+    if not cfg_path.exists():
+        cfg_path = Path(__file__).resolve().parent / "momentum_config.json"
+    assert cfg_path.exists(), "sifter_config.json (or momentum_config.json) must exist"
     data = json.loads(cfg_path.read_text(encoding="utf-8"))
     val = data.get("door2_momentum_floor", data.get("DOOR2_MOMENTUM_FLOOR"))
     assert val == -1.5

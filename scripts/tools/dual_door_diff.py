@@ -121,6 +121,19 @@ def run_sifter(
     mod.OUT_JSON = out_json
     mod.FACTOR_SCORES_COMPAT_JSON = compat_json
 
+    # Config resolution
+    sifter_cfg = SCRIPTS_DIR / "sifter_config.json"
+    if sifter_cfg.exists():
+        if hasattr(mod, "SIFTER_CONFIG_PATH"):
+            mod.SIFTER_CONFIG_PATH = sifter_cfg
+        if hasattr(mod, "MOMENTUM_CONFIG_PATH") and not mod.MOMENTUM_CONFIG_PATH.exists():
+            mod.MOMENTUM_CONFIG_PATH = sifter_cfg
+
+    # Provide previous factor_scores.json from data_dir or committed public/data
+    prev_file = (data_dir if data_dir is not None else ROOT / "public" / "data") / "factor_scores.json"
+    if prev_file.exists():
+        mod.PREVIOUS_FACTOR_SCORES_PATH = prev_file
+
     # Suppress mri_sync snapshot copying to public/data/mri
     mod.sync_mri_snapshot = lambda: None
 
