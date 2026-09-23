@@ -13,7 +13,7 @@
       "space_economy": 53
     }
   },
-  "finished_at": "2026-09-23T16:25:32Z",
+  "finished_at": "2026-09-23T17:44:42Z",
   "invariants": [
     {
       "detail": "stocks.json is 0.0 days old (max 8)",
@@ -28,7 +28,7 @@
       "ok": true
     },
     {
-      "detail": "universe 6947 -> 6949 (0.0% drift, max 10%)",
+      "detail": "universe 6949 -> 6949 (0.0% drift, max 10%)",
       "level": "soft",
       "name": "universe_drift",
       "ok": true
@@ -64,19 +64,31 @@
       "ok": true
     },
     {
-      "detail": "2916 stocks carry a Factor Lab score (min 500)",
+      "detail": "2900 stocks carry a Factor Lab score (min 500)",
       "level": "hard",
       "name": "factor_scored",
       "ok": true
     },
     {
-      "detail": "54 research_now candidates",
+      "detail": "engine=dual_door_dynamic_macro_v2_cluster_guarded",
+      "level": "hard",
+      "name": "factor_engine",
+      "ok": true
+    },
+    {
+      "detail": "discount_rate_source=None (constant fallback until P3.9)",
+      "level": "soft",
+      "name": "discount_rate_source",
+      "ok": false
+    },
+    {
+      "detail": "60 research_now candidates",
       "level": "soft",
       "name": "factor_research_now",
       "ok": true
     },
     {
-      "detail": "2858/2916 scored names carry momentum (98.0% if fct_scored else '0%', min 95.0%)",
+      "detail": "2843/2900 scored names carry momentum (98.0% if fct_scored else '0%', min 95.0%)",
       "level": "soft",
       "name": "momentum_coverage",
       "ok": true
@@ -88,7 +100,7 @@
       "ok": false
     },
     {
-      "detail": "126 reverse-DCF models built",
+      "detail": "133 reverse-DCF models built",
       "level": "soft",
       "name": "valuation_models",
       "ok": true
@@ -113,20 +125,20 @@
     }
   ],
   "ok": true,
-  "run_id": "20260923T162348Z",
+  "run_id": "20260923T174409Z",
   "steps": [
     {
-      "duration_s": 5.6,
+      "duration_s": 3.4,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 65.3,
+      "duration_s": 3.3,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 5.8,
+      "duration_s": 4.6,
       "name": "score_paradigm",
       "returncode": 0
     },
@@ -136,37 +148,32 @@
       "returncode": 0
     },
     {
-      "duration_s": 10.8,
+      "duration_s": 8.9,
       "name": "build_daily_price_history",
       "returncode": 0
     },
     {
-      "duration_s": 0.8,
+      "duration_s": 0.6,
       "name": "build_momentum_state",
       "returncode": 0
     },
     {
-      "duration_s": 2.4,
+      "duration_s": 1.9,
       "name": "score_factors_dual_door",
       "returncode": 0
     },
     {
-      "duration_s": 0.8,
+      "duration_s": 0.9,
       "name": "build_valuation_models",
       "returncode": 0
     },
     {
-      "duration_s": 0.5,
+      "duration_s": 0.4,
       "name": "build_portfolio_plan",
       "returncode": 0
     },
     {
-      "duration_s": 3.0,
-      "name": "build_momo_plan",
-      "returncode": 0
-    },
-    {
-      "duration_s": 7.4,
+      "duration_s": 8.6,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
