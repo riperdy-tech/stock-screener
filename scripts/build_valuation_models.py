@@ -225,6 +225,30 @@ def load_coe_anchor():
         return None, {"discount_rate_source": "constant_fallback", "reason": f"stale_{age_days}d",
                        "path": str(path), "asof": asof_raw, "age_days": age_days}
 
+    # C6: when anchor lacks risk_free.nominal_10y or implied_erp (or sector loadings path fails),
+    # discount_rate_source is "anchor_incomplete_fallback" (not "anchor") with the missing field named
+    risk_free = anchor.get("risk_free")
+    rf_10y = risk_free.get("nominal_10y") if isinstance(risk_free, dict) else None
+    if rf_10y is None or not isinstance(rf_10y, (int, float)):
+        return None, {"discount_rate_source": "anchor_incomplete_fallback",
+                       "reason": "missing_risk_free.nominal_10y",
+                       "missing_field": "risk_free.nominal_10y",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+
+    implied_erp = anchor.get("implied_erp")
+    if implied_erp is None or not isinstance(implied_erp, (int, float)):
+        return None, {"discount_rate_source": "anchor_incomplete_fallback",
+                       "reason": "missing_implied_erp",
+                       "missing_field": "implied_erp",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+
+    sector_loadings = anchor.get("sector_loadings")
+    if not isinstance(sector_loadings, dict) or not sector_loadings:
+        return None, {"discount_rate_source": "anchor_incomplete_fallback",
+                       "reason": "missing_sector_loadings",
+                       "missing_field": "sector_loadings",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+
     return anchor, {"discount_rate_source": "anchor", "reason": "ok",
                      "path": str(path), "asof": asof_raw, "age_days": age_days}
 

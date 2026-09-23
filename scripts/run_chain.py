@@ -220,13 +220,11 @@ def main():
                       f"engine={factor_engine}")
 
         # P3.11 soft: the reverse-DCF discount rate should come from the MRI cost-of-capital
-        # anchor (P3.9), not the hardcoded constant. P3.9 has not landed yet in this phase, so
-        # this is EXPECTED to read soft-false (discount_rate_source is absent) until it does —
-        # soft, never hard, for exactly that reason.
+        # anchor (P3.9), not the hardcoded constant.
         discount_rate_source = factor.get("discount_rate_source")
         add_invariant(invariants, "discount_rate_source", "soft",
                       discount_rate_source == "anchor",
-                      f"discount_rate_source={discount_rate_source} (constant fallback until P3.9)")
+                      f"discount_rate_source={discount_rate_source}")
         research_now = factor.get("band_counts", {}).get("research_now", 0)
         add_invariant(invariants, "factor_research_now", "soft", research_now >= 10,
                       f"{research_now} research_now candidates")
