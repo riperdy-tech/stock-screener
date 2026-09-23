@@ -35,6 +35,9 @@ try:
 except Exception:
     pass
 
+sys.path.append(str(Path(__file__).resolve().parent))
+from industry_taxonomy import get_taxonomy_profile  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "public" / "data"
 STOCKS_JSON = DATA / "stocks.json"
@@ -42,6 +45,7 @@ FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 FUNDAMENTALS_HISTORY_JSON = DATA / "fundamentals_history.json"
 EPS_TRAJECTORY_JSON = DATA / "eps_trajectory.json"
 REVERSE_CONFIG_JSON = Path(__file__).resolve().with_name("reverse_config.json")
+COST_OF_CAPITAL_ANCHOR_JSON = DATA / "mri" / "cost_of_capital_anchor.json"
 OUT_JSON = DATA / "valuation_models.json"
 
 TERMINAL_GROWTH = 0.025
@@ -58,6 +62,23 @@ SECTOR_ALIASES = {
     "Basic Materials": "Materials",
 }
 DEFAULT_WACC = 10.0
+
+# P3.9 (SCR-05): MRI's cost-of-capital anchor -> GICS sector -> its macro id, for the
+# sector_loadings lookup below. Mirrors score_factors_dual_door.py's GICS_TO_MACRO_ID.
+GICS_TO_MACRO_ID = {
+    "Basic Materials": "materials",
+    "Communication Services": "communication_services",
+    "Consumer Cyclical": "consumer_discretionary",
+    "Consumer Defensive": "consumer_staples",
+    "Energy": "energy",
+    "Financial Services": "financials",
+    "Healthcare": "health_care",
+    "Industrials": "industrials",
+    "Real Estate": "real_estate",
+    "Technology": "information_technology",
+    "Utilities": "utilities",
+}
+COST_OF_CAPITAL_ANCHOR_MAX_AGE_DAYS = 45
 
 
 def load_json(path, default=None):
@@ -141,6 +162,96 @@ def growth_evidence(ydata):
     return rev_cagr, fcf_cagr
 
 
+def owner_cf_cagr_5y(ydata):
+    """P3.9 (SCR-05): 5-year CAGR of the owner-earnings base — ni + da - capex per fiscal
+    year, falling back to that year's fcf when any of the three is missing — same up-to-6-
+    fiscal-year / >=4-positive-points shape as growth_evidence()'s revenue/fcf CAGRs. None
+    ("undefined CAGR") when there aren't enough positive points."""
+    years = sorted(int(y) for y in ydata.keys())
+    pts = []
+    for y in years:
+        row = ydata[str(y)]
+        ni_y, da_y, capex_y = num(row.get("net_income")), num(row.get("da")), num(row.get("capex"))
+        v = (ni_y + da_y - capex_y) if None not in (ni_y, da_y, capex_y) else num(row.get("fcf"))
+        if v and v > 0:
+            pts.append((y, v))
+    if len(pts) < 4:
+        return None
+    (ya, va), (yb, vb) = pts[max(0, len(pts) - 6)], pts[-1]
+    return cagr(va, vb, yb - ya)
+
+
+def _parse_mri_date(raw):
+    """MRI writes `asof`/`date` as `YYYY-MM-DD` (or `YYYY-MM-DD HH:MM:SS` in older shapes)."""
+    if not raw:
+        return None
+    for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(raw, fmt).replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+    return None
+
+
+def load_coe_anchor():
+    """MRI's cost-of-capital anchor (P3.9, SCR-05) — see score_factors_dual_door.py's
+    load_coe_anchor() for the full contract; duplicated here since the two scripts share no
+    imports. Returns (anchor_dict_or_None, meta)."""
+    path = COST_OF_CAPITAL_ANCHOR_JSON
+    if not path.exists():
+        return None, {"discount_rate_source": "constant_fallback", "reason": "anchor_missing",
+                       "path": None, "asof": None, "age_days": None}
+    try:
+        anchor = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return None, {"discount_rate_source": "constant_fallback", "reason": f"unparseable:{exc}",
+                       "path": str(path), "asof": None, "age_days": None}
+
+    asof_raw = anchor.get("asof")
+    parsed = _parse_mri_date(asof_raw)
+    now = datetime.now(timezone.utc)
+    age_days = (now - parsed).days if parsed is not None else None
+
+    if anchor.get("degraded") is not False:
+        return None, {"discount_rate_source": "constant_fallback", "reason": "degraded",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+    if parsed is None:
+        return None, {"discount_rate_source": "constant_fallback", "reason": "asof_missing_or_unparseable",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+    if parsed > now:
+        return None, {"discount_rate_source": "constant_fallback", "reason": "future_dated",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+    if age_days > COST_OF_CAPITAL_ANCHOR_MAX_AGE_DAYS:
+        return None, {"discount_rate_source": "constant_fallback", "reason": f"stale_{age_days}d",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+
+    return anchor, {"discount_rate_source": "anchor", "reason": "ok",
+                     "path": str(path), "asof": asof_raw, "age_days": age_days}
+
+
+def resolve_coe_pct(anchor, mgi_subindustry_id, sector, fallback_pct):
+    """Per-name cost of equity (%), P3.9: risk_free.nominal_10y + sector_loading *
+    implied_erp. sector_loadings tries the finer mgi_subindustry_id first, then the coarser
+    GICS_TO_MACRO_ID id, then defaults to a loading of 1.0 with a "coe_default_loading" flag.
+    anchor is None (unusable) -> fallback_pct unchanged, no flag."""
+    if anchor is None:
+        return fallback_pct, None
+    risk_free = (anchor.get("risk_free") or {}).get("nominal_10y")
+    implied_erp = anchor.get("implied_erp")
+    sector_loadings = anchor.get("sector_loadings") or {}
+    if risk_free is None or implied_erp is None:
+        return fallback_pct, None
+
+    loading = sector_loadings.get(mgi_subindustry_id) if mgi_subindustry_id else None
+    if loading is None:
+        loading = sector_loadings.get(GICS_TO_MACRO_ID.get(sector))
+    flag = None
+    if loading is None:
+        loading = 1.0
+        flag = "coe_default_loading"
+    return (risk_free + loading * implied_erp) * 100.0, flag
+
+
 def verdict_line(gap_pts):
     if gap_pts is None:
         return "No growth evidence to compare against — judge the implied rate on its own."
@@ -161,6 +272,17 @@ def main():
     eps_traj = eps_traj.get("tickers", eps_traj) if isinstance(eps_traj, dict) else {}
     wacc_table = (load_json(REVERSE_CONFIG_JSON, {}) or {}).get("sector_wacc", {})
 
+    # P3.9 (SCR-05): the reverse-DCF discount rate — MRI cost-of-capital anchor when fresh and
+    # non-degraded, else the current sector_wacc table (unchanged; also used by score_reverse.py's
+    # ROIC call sites, so that table itself is never touched here).
+    coe_anchor, coe_anchor_meta = load_coe_anchor()
+    print(f"Cost-of-capital anchor: {coe_anchor_meta['discount_rate_source']} "
+          f"(reason={coe_anchor_meta['reason']}, asof={coe_anchor_meta['asof']}, "
+          f"age_days={coe_anchor_meta['age_days']})")
+    if coe_anchor is None:
+        print(f"  WARNING: reverse-DCF discount rate falling back to the sector_wacc constants "
+              f"— MRI cost-of-capital anchor unavailable ({coe_anchor_meta['reason']}).")
+
     eligible = sorted(t for t, e in factor.items() if e.get("fct_band") in ELIGIBLE_BANDS)
     models = {}
     modeled = 0
@@ -170,7 +292,9 @@ def main():
         stock = stocks.get(t) or {}
         mcap = num(stock.get("marketCap"))
         sector = stock.get("sector") or "Unknown"
-        wacc_pct = wacc_table.get(SECTOR_ALIASES.get(sector, sector), DEFAULT_WACC)
+        fallback_wacc_pct = wacc_table.get(SECTOR_ALIASES.get(sector, sector), DEFAULT_WACC)
+        mgi_subindustry_id = get_taxonomy_profile(stock.get("industry"), sector)["mgi_subindustry_id"]
+        wacc_pct, coe_flag = resolve_coe_pct(coe_anchor, mgi_subindustry_id, sector, fallback_wacc_pct)
         wacc = wacc_pct / 100.0
 
         ydata = fundamentals.get(t)
@@ -214,13 +338,26 @@ def main():
 
         rev_cagr, fcf_cagr = growth_evidence(ydata)
         slope = num((eps_traj.get(t) or {}).get("trajectory_slope"))
-        gap_pts = (implied - rev_cagr) * 100 if rev_cagr is not None else None
+
+        # P3.9 (SCR-05): gap on one basis — implied growth vs. the demonstrated 5-year CAGR of
+        # the owner-earnings base itself; only when that's undefined (negative base, too few
+        # points) does the comparison fall back to the revenue CAGR.
+        owner_cf_cagr = owner_cf_cagr_5y(ydata)
+        if owner_cf_cagr is not None:
+            used_cagr, gap_basis = owner_cf_cagr, "owner_cf"
+        elif rev_cagr is not None:
+            used_cagr, gap_basis = rev_cagr, "revenue_fallback"
+        else:
+            used_cagr, gap_basis = None, None
+        gap_pts = (implied - used_cagr) * 100 if used_cagr is not None else None
 
         models[t] = {
             "implied_growth": round(implied, 4),
             "implied_growth_clamped": implied in (G_LO, G_HI),
             "hist_revenue_cagr_5y": round(rev_cagr, 4) if rev_cagr is not None else None,
             "hist_fcf_cagr_5y": round(fcf_cagr, 4) if fcf_cagr is not None else None,
+            "hist_owner_cf_cagr_5y": round(owner_cf_cagr, 4) if owner_cf_cagr is not None else None,
+            "gap_basis": gap_basis,
             "trajectory_slope": slope,
             "expectations_gap_pts": round(gap_pts, 1) if gap_pts is not None else None,
             "verdict": verdict_line(gap_pts),
@@ -229,6 +366,8 @@ def main():
                 "base_cf_kind": base_kind,
                 "fiscal_year": years[-1],
                 "wacc": wacc_pct,
+                "discount_rate_source": coe_anchor_meta["discount_rate_source"],
+                "coe_default_loading": coe_flag == "coe_default_loading",
                 "terminal_growth": TERMINAL_GROWTH,
                 "stage1_years": STAGE1_YEARS,
                 "fade_years": FADE_YEARS,
@@ -245,6 +384,10 @@ def main():
         "eligible_count": len(eligible),
         "modeled_count": modeled,
         "skipped_counts": skipped,
+        # P3.9 (SCR-05): "anchor" or "constant_fallback", stamped loudly alongside each row's
+        # assumptions.discount_rate_source above.
+        "discount_rate_source": coe_anchor_meta["discount_rate_source"],
+        "discount_rate_meta": coe_anchor_meta,
         "tickers": models,
     }
     OUT_JSON.write_text(json.dumps(payload, indent=1, sort_keys=True) + "\n", encoding="utf-8")

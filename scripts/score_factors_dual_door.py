@@ -60,11 +60,16 @@ BATTERY_JSON = DATA / "fundamentals_battery.json"
 EPS_TRAJECTORY_JSON = DATA / "eps_trajectory.json"
 TIER1_SURVIVORS_JSON = DATA / "tier1_hygiene_survivors.json"
 MRI_SNAPSHOT_SECTOR_RANKING_JSON = DATA / "mri" / "current_sector_ranking.json"
+COST_OF_CAPITAL_ANCHOR_JSON = DATA / "mri" / "cost_of_capital_anchor.json"
 OUT_JSON = DATA / "factor_scores_dual_door.json"
 FACTOR_SCORES_COMPAT_JSON = DATA / "factor_scores.json"
 
 # MRI-11: matches MRI's own CURRENT_REGIME_MAX_AGE_DAYS (regime_status.py:18).
 SECTOR_RANKING_MAX_AGE_DAYS = 45
+# P3.9 (SCR-05): the cost-of-capital anchor uses the same 45-day freshness window.
+COST_OF_CAPITAL_ANCHOR_MAX_AGE_DAYS = 45
+# P3.9: the reverse-DCF discount rate before the anchor existed — kept as the fallback constant.
+CONSTANT_FALLBACK_DISCOUNT_RATE = 10.0
 
 Z_CLAMP = 3.0
 # Default stays "winsor": under gaussian_rank z_exp_gap ties do not disappear (they stem from raw gap clamping), failing pre-registered adoption rule.
@@ -492,6 +497,97 @@ def load_sector_ranking() -> Tuple[Dict[str, float], str, Dict[str, Any]]:
         "macro_confidence": macro_confidence, "n_sectors": n_sectors,
     }
     return macro_scores_by_id, reported_regime, meta
+
+
+def load_coe_anchor() -> Tuple[Optional[Dict[str, Any]], Dict[str, Any]]:
+    """MRI's cost-of-capital anchor (P3.9, SCR-05): public/data/mri/cost_of_capital_anchor.json,
+    the committed snapshot mri_sync.py refreshes. Used only when `degraded == false` and `asof`
+    is at most COST_OF_CAPITAL_ANCHOR_MAX_AGE_DAYS old; any other case is a fallback to the
+    constant discount rate, with a reason, never a silent one.
+
+    Returns (anchor_dict_or_None, meta). meta["discount_rate_source"] is "anchor" when the
+    anchor dict is usable, else "constant_fallback".
+    """
+    path = COST_OF_CAPITAL_ANCHOR_JSON
+    if not path.exists():
+        return None, {"discount_rate_source": "constant_fallback", "reason": "anchor_missing",
+                       "path": None, "asof": None, "age_days": None}
+    try:
+        anchor = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return None, {"discount_rate_source": "constant_fallback", "reason": f"unparseable:{exc}",
+                       "path": str(path), "asof": None, "age_days": None}
+
+    asof_raw = anchor.get("asof")
+    parsed = _parse_mri_date(asof_raw)
+    now = datetime.now(timezone.utc)
+    age_days = (now - parsed).days if parsed is not None else None
+
+    if anchor.get("degraded") is not False:
+        return None, {"discount_rate_source": "constant_fallback", "reason": "degraded",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+    if parsed is None:
+        return None, {"discount_rate_source": "constant_fallback", "reason": "asof_missing_or_unparseable",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+    if parsed > now:
+        return None, {"discount_rate_source": "constant_fallback", "reason": "future_dated",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+    if age_days > COST_OF_CAPITAL_ANCHOR_MAX_AGE_DAYS:
+        return None, {"discount_rate_source": "constant_fallback", "reason": f"stale_{age_days}d",
+                       "path": str(path), "asof": asof_raw, "age_days": age_days}
+
+    return anchor, {"discount_rate_source": "anchor", "reason": "ok",
+                     "path": str(path), "asof": asof_raw, "age_days": age_days}
+
+
+def resolve_coe_pct(anchor: Optional[Dict[str, Any]], mgi_subindustry_id: Optional[str],
+                     sector: str) -> Tuple[float, Optional[str]]:
+    """Per-name cost of equity (%), P3.9: risk_free.nominal_10y + sector_loading * implied_erp,
+    from the anchor's own field names. sector_loadings is keyed by both the finer
+    mgi_subindustry_id (e.g. "semiconductors") and the coarser GICS_TO_MACRO_ID id (e.g.
+    "information_technology") — try the finer id first, then the coarser one, then default to
+    a loading of 1.0 and flag it ("coe_default_loading") rather than silently guessing.
+
+    anchor is None (unusable, see load_coe_anchor) -> the constant fallback rate, no flag.
+    """
+    if anchor is None:
+        return CONSTANT_FALLBACK_DISCOUNT_RATE, None
+    risk_free = (anchor.get("risk_free") or {}).get("nominal_10y")
+    implied_erp = anchor.get("implied_erp")
+    sector_loadings = anchor.get("sector_loadings") or {}
+    if risk_free is None or implied_erp is None:
+        return CONSTANT_FALLBACK_DISCOUNT_RATE, None
+
+    loading = sector_loadings.get(mgi_subindustry_id) if mgi_subindustry_id else None
+    if loading is None:
+        loading = sector_loadings.get(GICS_TO_MACRO_ID.get(sector))
+    flag = None
+    if loading is None:
+        loading = 1.0
+        flag = "coe_default_loading"
+    return (risk_free + loading * implied_erp) * 100.0, flag
+
+
+def owner_cf_cagr_5y(ydata: Dict[str, Any], years: List[int]) -> Optional[float]:
+    """Demonstrated 5-year CAGR of the owner-earnings base (P3.9, SCR-05): ni + da - capex per
+    fiscal year, falling back to that year's fcf when any of the three is missing. Mirrors
+    build_valuation_models.py's growth_evidence() (up to 6 fiscal years, >= 4 positive points
+    required) applied to this series instead of revenue. None ("undefined CAGR") when there
+    aren't enough positive points or the span/endpoints don't support one.
+    """
+    pts: List[Tuple[int, float]] = []
+    for y in years:
+        row = ydata.get(str(y), {})
+        ni_y, da_y, capex_y = num(row.get("net_income")), num(row.get("da")), num(row.get("capex"))
+        v = (ni_y + da_y - capex_y) if None not in (ni_y, da_y, capex_y) else num(row.get("fcf"))
+        if v is not None and v > 0:
+            pts.append((y, v))
+    if len(pts) < 4:
+        return None
+    (ya, va), (yb, vb) = pts[max(0, len(pts) - 6)], pts[-1]
+    if yb <= ya or va <= 0 or vb <= 0:
+        return None
+    return (vb / va) ** (1.0 / (yb - ya)) - 1.0
 
 
 def num(v) -> Optional[float]:
@@ -1062,6 +1158,19 @@ def main():
     untradable, untradable_note = tradability.scan(stocks)
     print(f"Tradability: {untradable_note}")
 
+    # P3.9 (SCR-05): the reverse-DCF discount rate — MRI cost-of-capital anchor when fresh and
+    # non-degraded, else the constant fallback (loud, stamped on every row and in the summary).
+    coe_anchor, coe_anchor_meta = load_coe_anchor()
+    print(f"Cost-of-capital anchor: {coe_anchor_meta['discount_rate_source']} "
+          f"(reason={coe_anchor_meta['reason']}, asof={coe_anchor_meta['asof']}, "
+          f"age_days={coe_anchor_meta['age_days']})")
+    if coe_anchor is None:
+        print(f"  WARNING: reverse-DCF discount rate falling back to the "
+              f"{CONSTANT_FALLBACK_DISCOUNT_RATE:.0f}% constant — MRI cost-of-capital anchor "
+              f"unavailable ({coe_anchor_meta['reason']}).", file=sys.stderr)
+    ticker_gap_basis: Dict[str, str] = {}
+    ticker_discount_rate_pct: Dict[str, float] = {}
+
     for t in all_tickers:
         s = stocks[t]
         tax = taxonomy_by_ticker[t]
@@ -1375,8 +1484,24 @@ def main():
             else:
                 owner_earn = (ni + da - capex) if None not in (ni, da, capex) else fcf
                 if owner_earn and owner_earn > 0:
-                    gap = solve_reverse_dcf_gap(owner_earn, mcap, 10.0, hist_cagr)
+                    # P3.9 (SCR-05): gap on one basis — implied growth of the owner-earnings
+                    # base vs. the demonstrated 5-year CAGR of that same base; only when that
+                    # CAGR is undefined (negative base, too few points) does the comparison fall
+                    # back to the revenue CAGR already computed above.
+                    owner_cagr = owner_cf_cagr_5y(ydata, years)
+                    if owner_cagr is not None:
+                        used_cagr, gap_basis = owner_cagr, "owner_cf"
+                    else:
+                        used_cagr, gap_basis = hist_cagr, "revenue_fallback"
+                    coe_pct, coe_flag = resolve_coe_pct(coe_anchor, tax["mgi_subindustry_id"], sector)
+                    if coe_flag:
+                        cur_flags = ticker_flags.setdefault(t, [])
+                        if coe_flag not in cur_flags:
+                            cur_flags.append(coe_flag)
+                    gap = solve_reverse_dcf_gap(owner_earn, mcap, coe_pct, used_cagr)
                     raw["exp_gap"][t] = gap
+                    ticker_gap_basis[t] = gap_basis
+                    ticker_discount_rate_pct[t] = coe_pct
 
     # Standardize All Features via Sector-Neutral Z
     z_method_chosen = globals().get("Z_METHOD", "winsor")
@@ -1618,6 +1743,11 @@ def main():
             "z_revisions": round(z_rev, 3) if z_rev is not None else None,
             "z_value": round(z_val, 3) if z_val is not None else None,
             "z_exp_gap": round(z_gap, 3) if z_gap is not None else None,
+            # P3.9 (SCR-05): stamped only for names whose exp_gap went through the reverse-DCF
+            # branch (banks/REITs are unchanged and never carry these); None is absence, not 0.0.
+            "gap_basis": ticker_gap_basis.get(t),
+            "discount_rate_pct": ticker_discount_rate_pct.get(t),
+            "discount_rate_source": coe_anchor_meta["discount_rate_source"] if t in ticker_discount_rate_pct else None,
             "score_door1": round(d1_score, 3) if d1_score is not None else None,
             "score_door2": round(d2_score, 3) if d2_score is not None else None,
             "door1_pillars_used": d1_pillars_used,
@@ -1936,6 +2066,9 @@ def main():
         "core_quota_total": core_quota_total,
         "sector_ceiling_max": MAX_SECTOR_CEILING,
         "sector_ranking_meta": sector_ranking_meta,
+        # P3.9 (SCR-05): "anchor" or "constant_fallback" — the P3.11 soft invariant reads this.
+        "discount_rate_source": coe_anchor_meta["discount_rate_source"],
+        "discount_rate_meta": coe_anchor_meta,
         "momentum_source": momentum_source,
         "momentum_coverage": momentum_coverage,
         "z_method": z_method_chosen,
@@ -2080,6 +2213,10 @@ def main():
                 "exp_gap": prof.get("z_exp_gap")
             },
             "fct_contributions": _contributions(prof),
+            # P3.9 (SCR-05): None on rows the reverse-DCF exp_gap branch never touched (banks,
+            # REITs, no fundamentals) — not a fabricated 0.0.
+            "gap_basis": prof.get("gap_basis"),
+            "discount_rate_pct": prof.get("discount_rate_pct"),
             "fct_haircuts": None,
             "fct_vol": None,
             "fct_nominated_doors": prof.get("nominated_doors", []),
@@ -2110,6 +2247,11 @@ def main():
         "sector_ranking_date": sector_ranking_meta["date"],
         "sector_ranking_age_days": sector_ranking_meta["age_days"],
         "macro_confidence": sector_ranking_meta["macro_confidence"],
+        # P3.9 (SCR-05): the P3.11 soft invariant (run_chain.py) reads this flat field.
+        "discount_rate_source": coe_anchor_meta["discount_rate_source"],
+        "discount_rate_reason": coe_anchor_meta["reason"],
+        "discount_rate_asof": coe_anchor_meta["asof"],
+        "discount_rate_age_days": coe_anchor_meta["age_days"],
         "momentum_source": momentum_source,
         "momentum_coverage": momentum_coverage,
         "z_method": z_method_chosen,

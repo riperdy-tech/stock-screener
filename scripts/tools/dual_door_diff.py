@@ -148,6 +148,9 @@ def run_sifter(
         mod.EPS_TRAJECTORY_JSON = data_dir / "eps_trajectory.json"
         mod.TIER1_SURVIVORS_JSON = data_dir / "tier1_hygiene_survivors.json"
         mod.MRI_SNAPSHOT_SECTOR_RANKING_JSON = data_dir / "mri" / "current_sector_ranking.json"
+        # P3.9 (SCR-05): only set on modules that carry the constant (pre-P3.9 baseline code
+        # doesn't) — harmless either way since a plain module attribute assignment never fails.
+        mod.COST_OF_CAPITAL_ANCHOR_JSON = data_dir / "mri" / "cost_of_capital_anchor.json"
         mod.MOMENTUM_STATE_JSON = data_dir / "momentum_state.json"
 
     buf_stdout = io.StringIO()
