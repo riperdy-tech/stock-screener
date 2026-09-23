@@ -76,6 +76,7 @@ class DefeatBeta:
     def __init__(self):
         self.latest = {}        # symbol -> {"date","close","volume"}
         self.monthly = {}       # symbol -> [monthly closes, oldest->newest, last 25]
+        self.adv_20d_usd = {}   # symbol -> median(close * volume) over the last 20 sessions
         self.shares = {}        # symbol -> latest shares outstanding
         self.eps_ttm = {}       # symbol -> trailing-twelve-month EPS
         self.profile = {}       # symbol -> {sector, industry, country, name, summary}
@@ -159,6 +160,26 @@ def load_dividends(cutoff, universe=None):
         return None
 
 
+def _compute_adv_20d_usd(con, prices_parquet_path, uni_filter=""):
+    """P3.6b DAT: median(close * volume) over each symbol's last 20 priced sessions in
+    `prices_parquet_path` (the same stock_prices.parquet load() already downloads for
+    `latest`/`monthly` — no new request). Returns {symbol: adv_20d_usd}. A symbol with
+    fewer than 20 priced sessions still gets a median over however many it has; a symbol
+    with none is simply absent (never a fabricated 0.0)."""
+    out = {}
+    for sym, adv in con.execute(f"""
+        WITH ranked AS (
+          SELECT symbol, close, volume,
+                 row_number() OVER (PARTITION BY symbol ORDER BY report_date DESC) rn
+          FROM read_parquet('{prices_parquet_path}')
+          WHERE close IS NOT NULL AND volume IS NOT NULL {uni_filter}
+        )
+        SELECT symbol, median(close * volume) FROM ranked WHERE rn <= 20 GROUP BY symbol
+    """).fetchall():
+        out[sym] = float(adv)
+    return out
+
+
 def load(universe=None):
     """Download + aggregate. Returns a DefeatBeta instance, or None if the
     dataset is stale/unreachable (caller falls back to legacy yfinance path)."""
@@ -203,6 +224,10 @@ def load(universe=None):
             WHERE rn <= 25 GROUP BY symbol
         """).fetchall():
             db.monthly[sym] = [float(x) for x in closes]
+
+        # ADV (P3.6b DAT): hygiene_thresholds.py's liquidity veto stays off; this just makes
+        # the number available in stocks.json metrics for later wiring.
+        db.adv_20d_usd = _compute_adv_20d_usd(con, p, uni_filter)
 
         p = paths["stock_shares_outstanding.parquet"].replace("\\", "/")
         for sym, sh in con.execute(f"""
