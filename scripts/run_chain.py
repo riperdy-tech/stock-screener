@@ -237,10 +237,11 @@ def main():
                 1 for d in factor.get("tickers", {}).values()
                 if d.get("fct_band") != "vetoed" and (d.get("fct_momentum_state") or {}).get("mom_12_1") is not None
             )
+        mom_coverage_pct = f"{(mom_coverage / fct_scored):.1%}" if fct_scored else "0%"
         add_invariant(invariants, "momentum_coverage", "soft",
                       mom_coverage >= 0.95 * fct_scored if fct_scored else False,
                       f"{mom_coverage}/{fct_scored} scored names carry momentum "
-                      f"({(mom_coverage / fct_scored):.1%} if fct_scored else '0%', min 95.0%)")
+                      f"({mom_coverage_pct}, min 95.0%)")
 
         # MRI-11: the sector-quota loader (score_factors_dual_door.load_sector_ranking) fails
         # closed to a neutral quota when it cannot find a usable MRI ranking at all. That state
