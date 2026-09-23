@@ -165,6 +165,40 @@ def _load_door3_config(config_path: Optional[Path] = None) -> Dict[str, float]:
 # judged at all (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24).
 DOOR3_MIN_USABLE_MONTHS = 9
 
+# B3 (PHASE_3_APPROVAL.md): fewer monthly closes than this in the same window and the monthly
+# trend fallback (compute_monthly_trend_ok) can't compute its 10-month average either.
+DOOR3_MONTHLY_TREND_MIN_MONTHS = 10
+
+
+def compute_monthly_trend_ok(
+    closes: Optional[List[float]],
+    regime_shift_down: bool,
+) -> Tuple[Optional[bool], str]:
+    """B3 (PHASE_3_APPROVAL.md): when a Door-3 candidate's `fct_momentum_state` carries no
+    `mom_break` (no daily series to compute it), `door3_eligibility` falls back to this monthly
+    trend test instead of treating the absence as a pass. Uses the same monthly-close window as
+    `compute_trend_continuity` / `score_paradigm.compute_skip_month_return`: closes[-13:-1], the
+    12 monthly closes preceding the current (skipped) month.
+
+    Not ok when `regime_shift_down` is true, OR the latest of those monthly closes is below the
+    10-month simple average of the same monthly closes. Fewer than
+    `DOOR3_MONTHLY_TREND_MIN_MONTHS` usable closes in that window -> (None, "short_history") —
+    not enough data to judge at all, not a pass.
+
+    Returns (ok_or_None, field_used) — field_used names what decided it (for the audit trail:
+    `fct_flag_detail["mom_break_unverified_monthly_trend_ok"]`).
+    """
+    if regime_shift_down:
+        return False, "regime_shift_down"
+    if not isinstance(closes, list):
+        return None, "short_history"
+    window = [c for c in closes[-13:-1] if isinstance(c, (int, float)) and math.isfinite(c)]
+    if len(window) < DOOR3_MONTHLY_TREND_MIN_MONTHS:
+        return None, "short_history"
+    latest_close = window[-1]
+    avg_10m = sum(window[-10:]) / 10.0
+    return (latest_close >= avg_10m), "latest_monthly_close_vs_10m_average"
+
 
 def compute_trend_continuity(
     closes: Optional[List[float]],
@@ -227,6 +261,7 @@ def door3_eligibility(
     jump_share: Optional[float] = None,
     min_usable_months: int = DOOR3_MIN_USABLE_MONTHS,
     max_jump_share: float = 0.75,
+    monthly_trend_ok: Optional[bool] = None,
 ) -> Tuple[bool, Optional[str], List[str]]:
     """P3.14 Door 3 eligibility (PHASE_3_ADDENDUM.md, all required), plus the P3.14b
     trend-continuity rule (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24):
@@ -234,12 +269,28 @@ def door3_eligibility(
     (reason `short_history`); jump_share > `max_jump_share` -> not eligible (reason
     `jump_driven`). Returns (eligible, ineligible_reason, extra_flags) — extra_flags carries
     revisions_missing / adv_missing even when the name is otherwise eligible (an absence rides
-    as a flag, never silently gated)."""
+    as a flag, never silently gated).
+
+    B3 (PHASE_3_APPROVAL.md): `mom_break is None` (no daily data to compute it) is no longer a
+    silent pass. The caller runs `compute_monthly_trend_ok` (the monthly-close fallback check)
+    and passes its result in as `monthly_trend_ok`: None -> not enough monthly history to judge
+    at all (`short_history`); False -> the monthly trend itself says no (`
+    mom_break_unverified_monthly_trend_failed`); True -> eligible, flagged
+    `mom_break_unverified_monthly_trend_ok` so the name is never mistaken for a verified pass.
+    """
     extra_flags: List[str] = []
     if mcap is None or mcap < min_mcap:
         return False, "mcap_below_door3_floor", extra_flags
-    if falling_knife or mom_break is True:
+    if falling_knife:
         return False, "falling_knife_or_mom_break", extra_flags
+    if mom_break is True:
+        return False, "falling_knife_or_mom_break", extra_flags
+    if mom_break is None:
+        if monthly_trend_ok is None:
+            return False, "short_history", extra_flags
+        if not monthly_trend_ok:
+            return False, "mom_break_unverified_monthly_trend_failed", extra_flags
+        extra_flags.append("mom_break_unverified_monthly_trend_ok")
     if usable_months is None or usable_months < min_usable_months:
         return False, "short_history", extra_flags
     if jump_share is not None and jump_share > max_jump_share:
@@ -365,6 +416,20 @@ def _load_altman_sector_overrides(config_path: Optional[Path] = None) -> Dict[st
 # P3.6b: sectors where accrual/manipulation ratios are structurally uninformative (asset
 # managers, BDCs, mortgage REITs, a physical-gold trust) — same exemption Altman already uses.
 FORENSIC_VETO_EXEMPT_SECTORS = {"Financial Services", "Real Estate"}
+
+
+def _resolve_regime_shift_down(fct_mom: Dict[str, Any], flags_list: List[str]) -> bool:
+    """Whether this name's momentum state reports a 10-month-MA regime shift down (the field
+    build_momentum_state.py writes) — the same resolution both the P3.3 falling-knife floor and
+    B3's monthly-trend fallback use: the `regime_shift_down` field, this ticker's own flags
+    list, or the momentum payload's own `flags` list, in that order."""
+    if fct_mom.get("regime_shift_down") is True:
+        return True
+    if "regime_shift_down" in flags_list:
+        return True
+    if isinstance(fct_mom.get("flags"), list) and "regime_shift_down" in fct_mom["flags"]:
+        return True
+    return False
 
 
 DOOR2_MOMENTUM_FLOOR = _load_door2_momentum_floor()
@@ -1704,12 +1769,7 @@ def main():
 
         # P3.3 Door-2 falling-knife floor
         fct_mom = ticker_mom_state.get(t, {})
-        regime_shift_down = bool(fct_mom.get("regime_shift_down") is True)
-        if not regime_shift_down:
-            if "regime_shift_down" in ticker_flags.get(t, []):
-                regime_shift_down = True
-            elif isinstance(fct_mom.get("flags"), list) and "regime_shift_down" in fct_mom["flags"]:
-                regime_shift_down = True
+        regime_shift_down = _resolve_regime_shift_down(fct_mom, ticker_flags.get(t, []))
 
         cur_flags = list(ticker_flags.get(t, []))
         if z_mom_pub is None:
@@ -1949,10 +2009,17 @@ def main():
                 door3_ineligible_reasons.get("universe_momentum_missing", 0) + 1
             continue
         fct_mom = p.get("fct_momentum_state") or {}
+        mom_break = fct_mom.get("mom_break")
+        # B3 (PHASE_3_APPROVAL.md): no daily data to verify mom_break -> the monthly trend
+        # fallback, not a silent pass.
+        monthly_trend_ok, monthly_trend_field = None, None
+        if mom_break is None:
+            rsd = _resolve_regime_shift_down(fct_mom, p.get("fct_flags", []))
+            monthly_trend_ok, monthly_trend_field = compute_monthly_trend_ok(prices.get(t), rsd)
         eligible, reason, extra_flags = door3_eligibility(
             mcap=ticker_mcap.get(t),
             falling_knife="falling_knife" in p.get("fct_flags", []),
-            mom_break=fct_mom.get("mom_break"),
+            mom_break=mom_break,
             z_revisions=p.get("z_revisions"),
             z_quality=p.get("z_quality"),
             quality_pctl25=door3_quality_pctl25,
@@ -1961,6 +2028,7 @@ def main():
             usable_months=fct_mom.get("usable_months"),
             jump_share=fct_mom.get("jump_share"),
             max_jump_share=door3_cfg["DOOR3_MAX_JUMP_SHARE"],
+            monthly_trend_ok=monthly_trend_ok,
         )
         if not eligible:
             door3_ineligible_reasons[reason] = door3_ineligible_reasons.get(reason, 0) + 1
@@ -1968,6 +2036,10 @@ def main():
         for fl in extra_flags:
             if fl not in p["fct_flags"]:
                 p["fct_flags"].append(fl)
+        if "mom_break_unverified_monthly_trend_ok" in extra_flags:
+            p["fct_flag_detail"]["mom_break_unverified_monthly_trend_ok"] = {
+                "field_used": monthly_trend_field,
+            }
         door3_candidates.append({
             "ticker": t, "cluster": p["cluster"], "universe_momentum": univ_mom,
             "mom_12_1": fct_mom.get("mom_12_1"),

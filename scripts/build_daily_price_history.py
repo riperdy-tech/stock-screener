@@ -58,6 +58,12 @@ CHUNK_SIZE = 50
 TARGET_TRADING_DAYS = 400
 LOOKBACK_CALENDAR_DAYS = 620  # ~400 trading days
 
+# B3 (PHASE_3_APPROVAL.md): how many top-universe-momentum names factor_scores.json contributes
+# to the daily universe, so their daily series exists to verify Door 3's mom_break next run
+# instead of falling back to the monthly trend test indefinitely. Bounded — this must never
+# widen the fetch toward the full scored universe (Phase 3 approval review B2).
+DOOR3_DAILY_SEED_COUNT = 60
+
 
 def load_universe(data_dir: Path) -> List[str]:
     """Compile the target ticker universe from factor scores, depth overlay, previous momentum state, and ETFs."""
@@ -65,15 +71,34 @@ def load_universe(data_dir: Path) -> List[str]:
 
     # 1. RN + WL from latest factor_scores.json
     fct_path = data_dir / "factor_scores.json"
+    fct_tickers: Dict[str, Any] = {}
     if fct_path.exists():
         try:
             fct_data = json.loads(fct_path.read_text(encoding="utf-8"))
-            tickers_dict = fct_data.get("tickers", {})
-            for t, info in tickers_dict.items():
+            fct_tickers = fct_data.get("tickers", {})
+            for t, info in fct_tickers.items():
                 if info.get("fct_band") in ("research_now", "watchlist"):
                     universe.add(t)
         except Exception as exc:
             print(f"WARN: could not parse factor_scores.json for universe: {exc}", file=sys.stderr)
+
+    # 1b. B3: the top DOOR3_DAILY_SEED_COUNT names by universe momentum (z_momentum_universe),
+    # bounded, so their daily history exists by the time Door 3 next evaluates mom_break for
+    # them. An absent field is a loud warning, never a silent skip (AGENTS.md #3).
+    momentum_ranked = [
+        (t, info["z_momentum_universe"]) for t, info in fct_tickers.items()
+        if isinstance(info.get("z_momentum_universe"), (int, float))
+    ]
+    if fct_tickers and not momentum_ranked:
+        print(
+            "WARN: factor_scores.json tickers carry no z_momentum_universe field — skipping "
+            "the top-momentum daily-series seed.",
+            file=sys.stderr,
+        )
+    else:
+        momentum_ranked.sort(key=lambda pair: -pair[1])
+        for t, _ in momentum_ranked[:DOOR3_DAILY_SEED_COUNT]:
+            universe.add(t)
 
     # 2. Depth overlay tickers
     overlay_path = data_dir / "depth_overlay.json"

@@ -94,9 +94,71 @@ def test_ineligible_mom_break_true():
     assert eligible is False and reason == "falling_knife_or_mom_break"
 
 
-def test_mom_break_false_or_none_does_not_block():
+def test_mom_break_false_does_not_block():
     assert _elig(mom_break=False)[0] is True
-    assert _elig(mom_break=None)[0] is True
+
+
+# ── B3 (PHASE_3_APPROVAL.md): mom_break is None -> the monthly-trend fallback, not a silent
+# pass. The caller (main()) resolves monthly_trend_ok via compute_monthly_trend_ok and passes
+# it in; _elig's default (monthly_trend_ok=None, meaning "no monthly data either") is
+# overridden per test below. ──────────────────────────────────────────────────────────────────
+
+def test_mom_break_none_with_monthly_trend_ok_is_eligible_with_flag():
+    eligible, reason, flags = _elig(mom_break=None, monthly_trend_ok=True)
+    assert eligible is True and reason is None
+    assert "mom_break_unverified_monthly_trend_ok" in flags
+
+
+def test_mom_break_none_with_monthly_trend_failed_is_ineligible():
+    eligible, reason, _ = _elig(mom_break=None, monthly_trend_ok=False)
+    assert eligible is False and reason == "mom_break_unverified_monthly_trend_failed"
+
+
+def test_mom_break_none_with_monthly_trend_unknown_is_ineligible_short_history():
+    """No mom_break AND not enough monthly closes to fall back on either -> not a silent pass."""
+    eligible, reason, _ = _elig(mom_break=None, monthly_trend_ok=None)
+    assert eligible is False and reason == "short_history"
+
+
+# ── B3: compute_monthly_trend_ok — the monthly-close fallback for a missing mom_break ───────
+
+def test_monthly_trend_ok_regime_shift_down_blocks_regardless_of_closes():
+    ok, field = sfdd.compute_monthly_trend_ok(closes=None, regime_shift_down=True)
+    assert ok is False and field == "regime_shift_down"
+
+
+def test_monthly_trend_ok_short_history_below_10_closes():
+    closes = [100.0] * 8 + [None, None] + [999.0]  # window closes[-13:-1] has only 8 usable
+    ok, field = sfdd.compute_monthly_trend_ok(closes, regime_shift_down=False)
+    assert ok is None and field == "short_history"
+
+
+def test_monthly_trend_ok_none_closes_is_short_history():
+    ok, field = sfdd.compute_monthly_trend_ok(None, regime_shift_down=False)
+    assert ok is None and field == "short_history"
+
+
+def test_monthly_trend_ok_latest_close_above_10m_average_is_ok():
+    # 12 closes, flat at 100 except the latest (window[-1]) at 110 -> above the 10m average.
+    closes = [100.0] * 11 + [110.0] + [999.0]  # window = closes[-13:-1] = first 12 entries
+    ok, field = sfdd.compute_monthly_trend_ok(closes, regime_shift_down=False)
+    assert ok is True and field == "latest_monthly_close_vs_10m_average"
+
+
+def test_monthly_trend_ok_latest_close_below_10m_average_is_not_ok():
+    closes = [100.0] * 11 + [50.0] + [999.0]
+    ok, field = sfdd.compute_monthly_trend_ok(closes, regime_shift_down=False)
+    assert ok is False and field == "latest_monthly_close_vs_10m_average"
+
+
+def test_monthly_trend_ok_uses_only_the_last_10_of_the_12_window_closes():
+    """The 10-month average is over the LAST 10 of the 12 window closes, not all 12 -- an old,
+    very different close at the front of the window must not skew it."""
+    window12 = [1.0, 1.0] + [100.0] * 10  # last 10 are all 100.0
+    closes = window12 + [999.0]  # 13th entry (skipped month) is inert
+    ok, field = sfdd.compute_monthly_trend_ok(closes, regime_shift_down=False)
+    assert ok is True   # latest (100.0) == avg of the last 10 (100.0) -> ok (>=)
+    assert field == "latest_monthly_close_vs_10m_average"
 
 
 def test_ineligible_revisions_negative():

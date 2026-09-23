@@ -507,4 +507,55 @@ def test_daily_universe_is_bounded_not_seeded_from_momentum_state(tmp_path: Path
     assert {"AAA", "BBB", "OLD"} <= universe
     assert "CCC" not in universe
     assert not any(t.startswith("U") and t[1:].isdigit() for t in universe)
+    # factor_scores.json here has no z_momentum_universe field, so the B3 top-momentum seed
+    # (below) contributes nothing -- the universe stays exactly this bounded set.
     assert len(universe) == 3 + len(bdph.ETF_PROXIES)
+
+
+# ── B3 (PHASE_3_APPROVAL.md): top-60-by-universe-momentum daily seed ────────────────────────
+
+def test_daily_universe_seeds_top_60_by_universe_momentum(tmp_path: Path):
+    """factor_scores.json tickers carrying z_momentum_universe contribute their top
+    DOOR3_DAILY_SEED_COUNT (60) by that field -- bounded, never the whole set."""
+    import build_daily_price_history as bdph
+    tickers = {f"M{i}": {"fct_band": "pass", "z_momentum_universe": float(i)} for i in range(100)}
+    (tmp_path / "factor_scores.json").write_text(json.dumps({"tickers": tickers}), encoding="utf-8")
+    universe = set(bdph.load_universe(tmp_path))
+    momentum_seeded = {t for t in universe if t.startswith("M")}
+    assert len(momentum_seeded) == bdph.DOOR3_DAILY_SEED_COUNT == 60
+    # The top 60 by value (M99 down to M40), not an arbitrary 60.
+    assert momentum_seeded == {f"M{i}" for i in range(40, 100)}
+
+
+def test_daily_universe_momentum_seed_bounded_even_with_many_candidates(tmp_path: Path):
+    """The bound holds regardless of how many tickers carry the field (no unbounded growth --
+    Phase 3 approval review B2's concern, applied to this new addition)."""
+    import build_daily_price_history as bdph
+    tickers = {f"M{i}": {"fct_band": "pass", "z_momentum_universe": float(i)} for i in range(5000)}
+    (tmp_path / "factor_scores.json").write_text(json.dumps({"tickers": tickers}), encoding="utf-8")
+    universe = set(bdph.load_universe(tmp_path))
+    momentum_seeded = {t for t in universe if t.startswith("M")}
+    assert len(momentum_seeded) == 60
+
+
+def test_daily_universe_momentum_seed_warns_loudly_when_field_absent(tmp_path: Path, capsys):
+    """An absent z_momentum_universe field is reported loudly, never a silent no-op
+    (AGENTS.md #3: annotate, never silently gate)."""
+    import build_daily_price_history as bdph
+    tickers = {"AAA": {"fct_band": "research_now"}, "BBB": {"fct_band": "pass"}}
+    (tmp_path / "factor_scores.json").write_text(json.dumps({"tickers": tickers}), encoding="utf-8")
+    universe = set(bdph.load_universe(tmp_path))
+    assert "BBB" not in universe  # nothing extra was seeded
+    captured = capsys.readouterr()
+    assert "z_momentum_universe" in captured.err
+    assert "WARN" in captured.err
+
+
+def test_daily_universe_momentum_seed_no_warning_when_no_tickers_at_all(tmp_path: Path, capsys):
+    """An empty/absent factor_scores.json (already warned about by step 1, or simply no file)
+    does not ALSO fire the momentum-seed warning -- nothing to have carried the field."""
+    import build_daily_price_history as bdph
+    universe = set(bdph.load_universe(tmp_path))
+    captured = capsys.readouterr()
+    assert "z_momentum_universe" not in captured.err
+    assert universe == set(bdph.ETF_PROXIES)
