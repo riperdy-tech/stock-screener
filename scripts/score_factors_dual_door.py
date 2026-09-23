@@ -1913,6 +1913,11 @@ def main():
             if "DOUBLE_DOOR_CHAMPION" not in p["nominated_doors"]:
                 p["nominated_doors"].append("DOUBLE_DOOR_CHAMPION")
 
+    # B1 (PHASE_3_APPROVAL.md): Door 1/2's own nomination, captured before Door 3 is merged in
+    # below. Door 1/2 must be ranked and banded on THIS map alone — exactly as if Door 3 did
+    # not exist — so a Door-3 name can never push a Door-1/2 nominee out of its rank or band.
+    door12_nominated_map: Dict[str, Dict[str, Any]] = dict(all_nominated_map)
+
     # ── P3.14: Door 3 "trend leaders" (PHASE_3_ADDENDUM.md) ──────────────────
     door3_cfg = _load_door3_config(sifter_cfg_path)
     already_nominated_set: Set[str] = set(all_nominated_map.keys())
@@ -2117,16 +2122,20 @@ def main():
         bonus = 2.0 if "DOUBLE_DOOR_CHAMPION" in p.get("nominated_doors", []) else 0.0
         return p["best_pctl"] + bonus
 
-    # Nominees ranked by priority_sort_key (1 to 135)
-    ranked_nominated = sorted(nominated_pool, key=priority_sort_key, reverse=True)
+    # B1 (PHASE_3_APPROVAL.md): rank and band Door 1/2 on their OWN nomination
+    # (door12_nominated_map, captured above before Door 3 was merged in) — exactly as before
+    # Door 3 existed. Nominees ranked by priority_sort_key (1 to 135).
+    door12_pool = sorted(door12_nominated_map.keys())
+    ranked_nominated = sorted(door12_pool, key=priority_sort_key, reverse=True)
 
-    # Extend ranking beyond 135 nominees by ranking remaining scored profiles by best_pctl
-    unnominated_scored = [t for t in scored_tickers if t not in all_nominated_map]
+    # Extend ranking beyond the Door-1/2 nominees by ranking remaining scored profiles by
+    # best_pctl (this tail includes Door-3 candidates too — same as before Door 3 existed).
+    unnominated_scored = [t for t in scored_tickers if t not in door12_nominated_map]
     ranked_unnominated = sorted(unnominated_scored, key=lambda t: (-scored_profiles[t]["best_pctl"], t))
     all_ranked = ranked_nominated + ranked_unnominated
     rank_by_ticker = {t: i + 1 for i, t in enumerate(all_ranked)}
 
-    # P3.5: Band Hysteresis
+    # P3.5: Band Hysteresis — Door 1/2 only.
     rn_set: Set[str] = set()
     wl_set: Set[str] = set()
 
@@ -2141,19 +2150,19 @@ def main():
         elif r <= book_buffer_rank and t in prev_book:
             wl_set.add(t)
 
-    # P3.14: Door 3 bands are assigned directly (extra slots beyond the top 50 / top 135, per
-    # PHASE_3_ADDENDUM.md) rather than through the rank-based buffers above. Door 3 has its own
-    # hysteresis rule (door3_hysteresis_retain, already applied to door3_retained) — Door-3
-    # names are excluded from retained_rn/retained_book below so that Door 1/2's own
-    # hysteresis accounting is not conflated with a fresh Door-3 entrant's (unrelated) pctl rank.
-    door3_names_set = set(door3_final)
+    retained_rn = {t for t in rn_set if rank_by_ticker[t] > 50}
+    retained_book = {t for t in wl_set if rank_by_ticker[t] > 135}
+    retained_by_hysteresis = sorted(list(retained_rn | retained_book))
+
+    # P3.14: Door 3 bands are added ON TOP as extra slots (PHASE_3_ADDENDUM.md), never by
+    # displacing a Door-1/2 name from its band — rn_set/wl_set above are already final for
+    # Door 1/2. Door 3 has its own hysteresis rule (door3_hysteresis_retain, already applied to
+    # door3_retained). A name is never in both rn_set and wl_set: research_now wins.
     rn_set |= set(door3_rn_names)
-    wl_set |= (set(door3_wl_names) - rn_set)
+    wl_set |= set(door3_wl_names)
+    wl_set -= rn_set
 
     book_set = rn_set | wl_set
-    retained_rn = {t for t in rn_set if rank_by_ticker[t] > 50 and t not in door3_names_set}
-    retained_book = {t for t in wl_set if rank_by_ticker[t] > 135 and t not in door3_names_set}
-    retained_by_hysteresis = sorted(list(retained_rn | retained_book))
 
     # Ensure any ticker retained into the book is present in all_nominated_map
     for t in book_set:
