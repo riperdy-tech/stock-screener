@@ -547,26 +547,45 @@ def _reband(p):
     return "pass"
 
 
+FCT_LLM_GATE_VERSION = "p3.12"   # SCR-04 mapping version — bump when the mapping rules change.
+
+
 def apply_llm_overlay(results):
     """The Divergence Engine — direction-PRIMARY / quant-GUARDRAIL.
 
     Reads the depth verdicts (public/data/depth_overlay.json) and writes the fct_*_llm family
     onto the factor rows: the depth `direction` sets the band (undervalued -> research_now,
     hold -> monitor, overvalued -> demoted), and a low-quality-overvalued name is hard-vetoed
-    (fct_llm_veto='llm_reject' when direction == overvalued AND the write-up's mean conviction
-    < CONV_VETO).
+    (fct_llm_veto='llm_reject' when direction == overvalued AND conviction < CONV_VETO).
 
     The quant engine stays a hard GUARDRAIL: a quant-vetoed name (not tradable, forensic,
     insolvency, chronic loss) is skipped, so the depth lane can never pull a red-flagged name
     in. Names with no depth verdict, or a NOT_USABLE one, keep no band — silence, never a
     fabricated depth call. STRICT NO-OP when depth_overlay.json is absent.
 
-    Conviction is prose in depth_reports/{T}.json and is parsed only for the veto
-    (scripts/depth_conviction.py). There is NO live-price MoS recompute — `direction` is the
-    frozen producer verdict, so no daily cliff exists for prices to churn across.
+    P3.12 (SCR-04 mapping made honest):
+      - Promotion to research_now (fct_llm="promoted") requires actionable == true AND
+        fct_percentile >= 70 (the monitor floor) AND m >= 10 (mos_vs_base_pct, falling back to
+        mos_vs_median_pct with fct_llm_note="mos_median_fallback") AND thesis_status is not
+        "breached". An undervalued verdict that fails any of those floors is NOT skipped — it
+        lands in watchlist (pctl 90-96.9, fct_llm="promoted_partial"); a row with NO actionable
+        field is one of the floors it can fail (the P1.3 fail-open ends here — C8 of the Phase
+        1 review). A row that carries actionable: false is still skipped entirely, unchanged.
+      - m cannot be resolved (both mos_vs_base_pct and mos_vs_median_pct absent) -> no
+        promotion at all, fct_llm_note="no_mos". m is NEVER defaulted to 0.0.
+      - hold -> monitor always: pctl = clamp(75 + m*0.2, 70, 89).
+      - overvalued -> pass always: pctl = clamp(35 + m*0.5, 0, 69), fct_llm="demoted".
+      - Conviction for the low-quality-overvalued veto reads the overlay row's own
+        conviction_score first; the depth_reports/{T}.json prose parser
+        (scripts/depth_conviction.py) is used only when that field is None.
+      - thesis_status == "breached" (when present) blocks promotion, fct_llm_note=
+        "thesis_breached".
+
+    There is NO live-price MoS recompute — `direction` is the frozen producer verdict, so no
+    daily cliff exists for prices to churn across.
 
     Preserves the fct_percentile_llm / fct_llm_veto / fct_band_llm / fct_llm / fct_llm_verdict
-    output names that lib/desk/rankings.ts reads.
+    output names that lib/desk/rankings.ts reads; adds fct_llm_note and fct_llm_gate_version.
     """
     try:
         ov = (json.loads((DATA / "depth_overlay.json").read_text(encoding="utf-8")) or {}).get("tickers", {})
@@ -588,25 +607,65 @@ def apply_llm_overlay(results):
             continue
         if v.get("actionable") is False:
             continue
-        mos = v.get("mos_vs_median_pct")
-        m = mos if isinstance(mos, (int, float)) else 0.0
-        conv = conv_map.get(t)
+        actionable_true = v.get("actionable") is True
+
+        # m: mos_vs_base_pct first, mos_vs_median_pct as a noted fallback. Never defaulted —
+        # 0.0 is a value, an absent MoS is an absence and blocks any band assignment below.
+        mos_base = v.get("mos_vs_base_pct")
+        mos_median = v.get("mos_vs_median_pct")
+        if isinstance(mos_base, (int, float)):
+            m = mos_base
+            mos_note = None
+        elif isinstance(mos_median, (int, float)):
+            m = mos_median
+            mos_note = "mos_median_fallback"
+        else:
+            m = None
+            mos_note = "no_mos"
+
+        conv = v.get("conviction_score")
+        if not isinstance(conv, (int, float)):
+            conv = conv_map.get(t)
+
         e["fct_llm_verdict"] = {"direction": direction, "size_hint": v.get("size_hint"),
-                                "mos_vs_median_pct": mos, "conviction": conv,
+                                "mos_vs_base_pct": mos_base, "mos_vs_median_pct": mos_median,
+                                "conviction": conv, "thesis_status": v.get("thesis_status"),
                                 "median_iv": v.get("median_iv"), "iv_band_low": v.get("iv_band_low"),
                                 "iv_band_high": v.get("iv_band_high"), "spread_pct": v.get("spread_pct"),
                                 "date": v.get("date"), "scheme": v.get("scheme")}
         e["fct_llm"] = "none"
         e["fct_llm_veto"] = None
-        # DIRECTION drives the band; mos_vs_median_pct only orders WITHIN a band so the site's
-        # percentile-delta stays monotonic. Conviction is NOT in the band (equal-weight rn_depth
-        # is the book) — it gates only the veto below.
+        e["fct_llm_note"] = mos_note
+        e["fct_llm_gate_version"] = FCT_LLM_GATE_VERSION
+
+        if m is None:
+            applied += 1
+            continue   # no_mos: no promotion, no band — never a guessed m.
+
+        # DIRECTION drives the band; m only orders WITHIN a band so the site's percentile-delta
+        # stays monotonic. Conviction is NOT in the band — it gates only the veto below.
         if direction == "undervalued":
-            pctl = clamp(97.0 + m * 0.05, 97.0, 100.0)   # deeper discount ranks higher
-            if e.get("fct_band") != "research_now":
-                e["fct_llm"] = "promoted"
+            thesis_breached = v.get("thesis_status") == "breached"
+            fct_pctl = e.get("fct_percentile")
+            floors_ok = (
+                actionable_true
+                and isinstance(fct_pctl, (int, float)) and fct_pctl >= 70.0
+                and m >= 10.0
+                and not thesis_breached
+            )
+            if floors_ok:
+                pctl_val = clamp(97.0 + m * 0.05, 97.0, 100.0)   # deeper discount ranks higher
+                if e.get("fct_band") != "research_now":
+                    e["fct_llm"] = "promoted"
+            else:
+                pctl_val = clamp(90.0 + m * 0.05, 90.0, 96.9)
+                e["fct_llm"] = "promoted_partial"
+                if thesis_breached:
+                    e["fct_llm_note"] = "thesis_breached"
+                elif mos_note:
+                    e["fct_llm_note"] = mos_note
         elif direction == "overvalued":
-            pctl = clamp(45.0 + m * 0.5, 0.0, LLM_BANDS["research_now"] - 5)   # m negative -> lower
+            pctl_val = clamp(35.0 + m * 0.5, 0.0, 69.0)
             e["fct_llm"] = "demoted"
             # Hard-reject ONLY the low-quality overvalued: no value edge AND no quality edge. A
             # high-conviction overvalued name is a pullback candidate -> watchlist, not a reject.
@@ -614,9 +673,9 @@ def apply_llm_overlay(results):
             if conv is not None and conv < CONV_VETO:
                 e["fct_llm_veto"] = "llm_reject"
         else:  # hold — price inside the model's band, no directional edge
-            pctl = clamp(70.0 + m * 0.5, 25.0, 89.0)
-        e["fct_percentile_llm"] = round(pctl, 1)
-        e["fct_band_llm"] = _reband(pctl)
+            pctl_val = clamp(75.0 + m * 0.2, 70.0, 89.0)
+        e["fct_percentile_llm"] = round(pctl_val, 1)
+        e["fct_band_llm"] = _reband(pctl_val)
         applied += 1
     return applied
 
