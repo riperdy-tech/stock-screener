@@ -1173,22 +1173,24 @@ def evaluate_falling_knife(
 
 def compute_best_pctl(
     score_door1_val: Optional[float], score_door2_val: Optional[float],
-    pctl_d1: float, pctl_d2: float, d2_eligible: bool,
-) -> float:
+    pctl_d1: Optional[float], pctl_d2: Optional[float], d2_eligible: bool,
+) -> Optional[float]:
     """A falling knife (d2_eligible=False) keeps score_door2/pctl_d2 for display, but best_pctl
-    never uses them — it is pctl_d1 alone (or 0.0 if Door 1 didn't score it either)."""
-    if score_door1_val is not None and score_door2_val is not None and d2_eligible:
-        return max(pctl_d1, pctl_d2)
-    if score_door1_val is not None:
-        return pctl_d1
-    if score_door2_val is not None and d2_eligible:
-        return pctl_d2
-    return 0.0
+    never uses them — it is pctl_d1 alone (or None if Door 1 didn't score it either).
+    Returns None if no eligible door scored the name (C2: present door percentiles only)."""
+    candidates = []
+    if score_door1_val is not None and pctl_d1 is not None:
+        candidates.append(pctl_d1)
+    if score_door2_val is not None and pctl_d2 is not None and d2_eligible:
+        candidates.append(pctl_d2)
+    return max(candidates) if candidates else None
 
 
-def is_double_door_champion(pctl_d1: float, pctl_d2: float, d2_eligible: bool) -> bool:
+def is_double_door_champion(pctl_d1: Optional[float], pctl_d2: Optional[float], d2_eligible: bool) -> bool:
     """P3.4: DOUBLE_DOOR_CHAMPION requires both percentiles >= 90 AND d2_eligible (a falling
     knife can never be a champion, even at high raw scores)."""
+    if pctl_d1 is None or pctl_d2 is None:
+        return False
     return pctl_d1 >= 90.0 and pctl_d2 >= 90.0 and d2_eligible
 
 
@@ -1199,7 +1201,9 @@ def champion_bonus(nominated_doors: List[str]) -> float:
 
 def priority_sort_key_for_profile(p: Dict[str, Any]) -> float:
     """RS2 priority-queue ranking key: best_pctl plus the champion bonus."""
-    return p["best_pctl"] + champion_bonus(p.get("nominated_doors", []))
+    best = p.get("best_pctl")
+    val = best if best is not None else -1.0
+    return val + champion_bonus(p.get("nominated_doors", []))
 
 
 def apply_band_hysteresis(
@@ -1609,10 +1613,10 @@ def main():
         rev = num(latest.get("revenue"))
         op = num(latest.get("operating_income"))
         ni = num(latest.get("net_income"))
-        da = num(latest.get("da")) or 0.0
-        capex = num(latest.get("capex")) or 0.0
-        ocf = num(latest.get("ocf")) or (ni + da if ni else None)
-        fcf = num(latest.get("fcf")) or ((ocf - capex) if ocf is not None else None)
+        da = num(latest.get("da"))
+        capex = num(latest.get("capex"))
+        ocf = num(latest.get("ocf")) or ((ni + da) if ni is not None and da is not None else None)
+        fcf = num(latest.get("fcf")) or ((ocf - capex) if ocf is not None and capex is not None else None)
         lt_debt = num(latest.get("lt_debt")) or 0.0
         cash = num(latest.get("cash")) or 0.0
         equity = num(latest.get("equity"))
@@ -1752,6 +1756,7 @@ def main():
                     gap = (hist_cagr - implied_g) * 100.0
                     raw["exp_gap"][t] = max(-15.0, min(15.0, gap))
             else:
+                # C2: None in (ni, da, capex) -> owner_earn falls back to fcf, matching owner_cf_cagr_5y
                 owner_earn = (ni + da - capex) if None not in (ni, da, capex) else fcf
                 if owner_earn and owner_earn > 0:
                     # P3.9 (SCR-05): gap on one basis — implied growth of the owner-earnings
@@ -1928,9 +1933,9 @@ def main():
             "door2_ineligible_reason": d2_ineligible_reason,
             "d2_eligible": d2_eligible,
             "falling_knife_detail": falling_knife_detail,
-            "pctl_d1": 0.0,
-            "pctl_d2": 0.0,
-            "best_pctl": 0.0,
+            "pctl_d1": None,
+            "pctl_d2": None,
+            "best_pctl": None,
             "nominated_doors": [],
             "fct_momentum_state": ticker_mom_state.get(t, {}),
             "fct_flags": cur_flags,
@@ -1945,8 +1950,8 @@ def main():
     all_d2 = sorted([p["score_door2"] for p in scored_profiles.values() if p["score_door2"] is not None])
 
     for p in scored_profiles.values():
-        p["pctl_d1"] = round(get_percentile(p["score_door1"], all_d1), 1) if p["score_door1"] is not None else 0.0
-        p["pctl_d2"] = round(get_percentile(p["score_door2"], all_d2), 1) if p["score_door2"] is not None else 0.0
+        p["pctl_d1"] = round(get_percentile(p["score_door1"], all_d1), 1) if p["score_door1"] is not None else None
+        p["pctl_d2"] = round(get_percentile(p["score_door2"], all_d2), 1) if p["score_door2"] is not None else None
         d2_ok = p.get("d2_eligible", True)
         p["best_pctl"] = compute_best_pctl(p["score_door1"], p["score_door2"], p["pctl_d1"], p["pctl_d2"], d2_ok)
 
@@ -1998,7 +2003,15 @@ def main():
         s1, s2 = p.get("score_door1"), p.get("score_door2")
         d2_ok = p.get("d2_eligible", True)
         if s1 is not None and s2 is not None and d2_ok:
-            return "DOOR_1_COMPOUNDER" if p.get("pctl_d1", 0.0) >= p.get("pctl_d2", 0.0) else "DOOR_2_VALUE_GAP"
+            p1 = p.get("pctl_d1")
+            p2 = p.get("pctl_d2")
+            if p1 is not None and p2 is not None:
+                return "DOOR_1_COMPOUNDER" if p1 >= p2 else "DOOR_2_VALUE_GAP"
+            elif p1 is not None:
+                return "DOOR_1_COMPOUNDER"
+            elif p2 is not None:
+                return "DOOR_2_VALUE_GAP"
+            return "NONE"
         elif s1 is not None:
             return "DOOR_1_COMPOUNDER"
         elif s2 is not None and d2_ok:
@@ -2020,14 +2033,14 @@ def main():
         for c in sec_cand:
             c_by_cluster.setdefault(c["cluster"], []).append(c)
         for cl, cl_list in c_by_cluster.items():
-            cl_list.sort(key=lambda x: -x["best_pctl"])
+            cl_list.sort(key=lambda x: -(x["best_pctl"] if x.get("best_pctl") is not None else -1.0))
 
-        sorted_clusters = sorted(c_by_cluster.keys(), key=lambda cl: -c_by_cluster[cl][0]["best_pctl"])
+        sorted_clusters = sorted(c_by_cluster.keys(), key=lambda cl: -(c_by_cluster[cl][0]["best_pctl"] if c_by_cluster[cl][0].get("best_pctl") is not None else -1.0))
         for cl in sorted_clusters:
             if len(current_sec_picks) >= core_quota:
                 break
             best_in_cl = c_by_cluster[cl][0]
-            if best_in_cl["best_pctl"] >= 75.0:
+            if best_in_cl.get("best_pctl") is not None and best_in_cl["best_pctl"] >= 75.0:
                 door_won = _door_won(best_in_cl)
                 best_in_cl["nominated_doors"].append(door_won)
                 current_sec_picks[best_in_cl["ticker"]] = best_in_cl
@@ -2036,7 +2049,7 @@ def main():
         # Round 2: Fill remaining core slots by pure competitive merit under cluster cap
         remaining_slots = core_quota - len(current_sec_picks)
         merit_pool = [c for c in sec_cand if c["ticker"] not in current_sec_picks]
-        merit_pool.sort(key=lambda x: -x["best_pctl"])
+        merit_pool.sort(key=lambda x: -(x["best_pctl"] if x.get("best_pctl") is not None else -1.0))
 
         for c in merit_pool:
             if remaining_slots <= 0: break
@@ -2055,7 +2068,7 @@ def main():
     # ── 6. Nomination Step B: Global Wildcards with Hard 18% Ceiling ─────────
     wildcard_target = TOTAL_NOMINATION_TARGET - len(core_nominated)
     unnominated = [p for p in scored_profiles.values() if p["ticker"] not in core_nominated]
-    unnominated.sort(key=lambda x: -x["best_pctl"])
+    unnominated.sort(key=lambda x: -(x["best_pctl"] if x.get("best_pctl") is not None else -1.0))
 
     wildcard_nominated: Dict[str, Dict[str, Any]] = {}
     for p in unnominated:
@@ -2317,7 +2330,7 @@ def main():
     # Extend ranking beyond the Door-1/2 nominees by ranking remaining scored profiles by
     # best_pctl (this tail includes Door-3 candidates too — same as before Door 3 existed).
     unnominated_scored = [t for t in scored_tickers if t not in door12_nominated_map]
-    ranked_unnominated = sorted(unnominated_scored, key=lambda t: (-scored_profiles[t]["best_pctl"], t))
+    ranked_unnominated = sorted(unnominated_scored, key=lambda t: (-(scored_profiles[t]["best_pctl"] if scored_profiles[t].get("best_pctl") is not None else -1.0), t))
     all_ranked = ranked_nominated + ranked_unnominated
     rank_by_ticker = {t: i + 1 for i, t in enumerate(all_ranked)}
 
@@ -2382,11 +2395,16 @@ def main():
             band = "pass"
 
         prof = all_nominated_map.get(t, scored_profiles.get(t, {}))
-        best_pctl_val = prof.get("best_pctl", 50.0)
+        # C2: vetoed rows have fct_percentile = None (not 50.0); unvetoed rows without a door score also None
+        if band == "vetoed":
+            pctl_out = None
+        else:
+            raw_pctl = prof.get("best_pctl")
+            pctl_out = round(raw_pctl, 2) if raw_pctl is not None else None
         compat_tickers[t] = {
             "fct_band": band,
-            "fct_composite": round(best_pctl_val, 2),
-            "fct_percentile": round(best_pctl_val, 2),
+            "fct_composite": pctl_out,
+            "fct_percentile": pctl_out,
             "fct_rank": rank_by_ticker.get(t),
             "fct_veto": vetoes.get(t),
             "fct_veto_detail": veto_detail.get(t),

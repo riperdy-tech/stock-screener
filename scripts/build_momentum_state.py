@@ -273,7 +273,7 @@ def compute_daily_metrics(
         if n_days >= 20:
             d_closes = closes[-20:]
             d_vols = volumes[-20:]
-            dollar_vols = [c * v for c, v in zip(d_closes, d_vols) if c > 0 and v >= 0]
+            dollar_vols = [c * v for c, v in zip(d_closes, d_vols) if c > 0 and v is not None and v >= 0]
             if len(dollar_vols) >= 20:
                 item["adv_20d_usd"] = round(float(statistics.median(dollar_vols)), 2)
 

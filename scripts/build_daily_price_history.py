@@ -190,14 +190,14 @@ def parse_yf_download(df: Any, chunk: List[str]) -> Dict[str, Dict[str, List[flo
             if not math.isfinite(close_val) or close_val <= 0:
                 continue
             d_str = pd.Timestamp(idx_ts).date().isoformat()
-            vol_val = 0.0
+            vol_val = None
             if series_vol is not None and idx_ts in series_vol.index:
                 raw_v = series_vol.loc[idx_ts]
                 if isinstance(raw_v, pd.Series):
                     raw_v = raw_v.iloc[0]
                 if math.isfinite(raw_v) and raw_v >= 0:
-                    vol_val = float(raw_v)
-            ticker_data[d_str] = [round(float(close_val), 4), round(vol_val, 2)]
+                    vol_val = round(float(raw_v), 2)
+            ticker_data[d_str] = [round(float(close_val), 4), vol_val]
 
         if ticker_data:
             out[t] = ticker_data
@@ -225,7 +225,7 @@ def detect_split(cached_series: Dict[str, List[float]], new_tail: Dict[str, List
     if len(dates) < 2:
         return False
 
-    vols = [combined[d][1] for d in dates if combined[d][1] > 0]
+    vols = [combined[d][1] for d in dates if combined[d][1] is not None and combined[d][1] > 0]
     med_vol = statistics.median(vols) if vols else 1.0
 
     for i in range(1, len(dates)):
@@ -237,7 +237,7 @@ def detect_split(cached_series: Dict[str, List[float]], new_tail: Dict[str, List
             pct_change = abs(p_curr / p_prev - 1.0)
             if pct_change > 0.40:
                 # Check for volume spike (volume > 2.0x median)
-                if v_curr > 2.0 * med_vol or med_vol <= 0:
+                if v_curr is not None and (v_curr > 2.0 * med_vol or med_vol <= 0):
                     return True
     return False
 

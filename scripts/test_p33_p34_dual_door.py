@@ -136,10 +136,10 @@ def test_knife_keeps_door2_score_and_pctl_but_best_pctl_is_pctl_d1():
     # But best_pctl uses Door 1 only (65.0, NOT 95.0)
     assert p["best_pctl"] == 65.0
 
-    # If score_door1 is None and d2_eligible is False: best_pctl is 0.0 (Door 2 is disqualified
-    # by the knife, so its score can never rescue best_pctl either).
-    best_pctl_no_d1 = sfdd.compute_best_pctl(None, 2.50, 0.0, 95.0, False)
-    assert best_pctl_no_d1 == 0.0
+    # If score_door1 is None and d2_eligible is False: best_pctl is None (Door 2 is disqualified
+    # by the knife, so its score can never rescue best_pctl either; C2: missing is None, not 0.0).
+    best_pctl_no_d1 = sfdd.compute_best_pctl(None, 2.50, None, 95.0, False)
+    assert best_pctl_no_d1 is None
 
 
 def test_contributions_honors_d2_eligible():
