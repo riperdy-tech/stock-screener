@@ -44,7 +44,10 @@ PRICE_HISTORY_JSON = DATA / "price_history.json"
 CIK_MAP_JSON = DATA / "cik_map.json"
 
 sys.path.append(str(Path(__file__).resolve().parent))
-from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, resolve_adv_usd, ADV_ENFORCE, load_adv_enforce
+from hygiene_thresholds import (
+    MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, resolve_adv_usd,
+    ADV_ENFORCE, load_adv_enforce, resolve_market_cap
+)
 import tradability
 
 OUT_SURVIVORS_JSON = DATA / "tier1_hygiene_survivors.json"
@@ -142,7 +145,7 @@ def evaluate_tier1():
     veto_tallies: Dict[str, int] = {}
 
     for sym, s in sorted(stocks.items()):
-        mcap = num(s.get("marketCap"))
+        raw_mcap = num(s.get("marketCap"))
         price = num(s.get("price"))
         vol = num(s.get("volume"))
         sector = s.get("sector") or "Unknown"
@@ -154,9 +157,20 @@ def evaluate_tier1():
         if sym in untradable_map:
             reasons.append(f"NOT_TRADABLE ({untradable_map[sym]})")
 
-        # 1. Market Cap Check
-        if mcap is None or mcap < MIN_MARKET_CAP:
-            reasons.append(f"MARKET_CAP_BELOW_300M (mcap=${(mcap or 0)/1e6:.1f}M)")
+        # 1. Market Cap Check (C11: derive from price * shares when missing or 0)
+        fh = fundamentals.get(sym, {})
+        years = sorted([int(y) for y in fh.keys()]) if fh else []
+        shares_diluted = num(fh.get(str(years[-1]), {}).get("shares_diluted")) if years else None
+        metrics = s.get("metrics") or {}
+        mcap, mcap_derived = resolve_market_cap(raw_mcap, price, shares_diluted, metrics)
+
+        if mcap_derived:
+            flags.append("DATA_FLAG: MCAP_DERIVED")
+
+        if mcap is None:
+            reasons.append("NO_MARKET_CAP_DATA")
+        elif mcap < MIN_MARKET_CAP:
+            reasons.append(f"MARKET_CAP_BELOW_300M (mcap=${mcap/1e6:.1f}M)")
 
         # 2. Price Floor Check
         if price is None or price < MIN_SHARE_PRICE:
@@ -181,9 +195,6 @@ def evaluate_tier1():
 
         # 4. SEC Statutory Reporting Freshness Check (P3.10: period-end basis, not fiscal year)
         has_cik = sym in cik_map
-        fh = fundamentals.get(sym, {})
-        years = sorted([int(y) for y in fh.keys()]) if fh else []
-
         stale_detail = None
         if not years:
             # Check if foreign issuer with alternate reporting
@@ -222,6 +233,7 @@ def evaluate_tier1():
                 "reasons": reasons,
                 "flags": flags,
                 "marketCap": mcap,
+                "mcap_derived": mcap_derived,
                 "price": price,
                 "sector": sector
             }
@@ -235,6 +247,7 @@ def evaluate_tier1():
                 "reasons": [],
                 "flags": flags,
                 "marketCap": mcap,
+                "mcap_derived": mcap_derived,
                 "price": price,
                 "sector": sector,
                 "latest_fy": years[-1] if years else None

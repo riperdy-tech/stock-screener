@@ -62,3 +62,33 @@ def resolve_adv_usd(
     if vol is not None and price is not None:
         return vol * price, "adv_single_day"
     return None, None
+
+
+def resolve_market_cap(
+    raw_mcap: Optional[float],
+    price: Optional[float],
+    shares_diluted: Optional[float] = None,
+    metrics: Optional[dict] = None,
+) -> Tuple[Optional[float], bool]:
+    """C11: market cap 0.0 or missing is an absence, not 'tiny'.
+    Derive market cap = price * latest diluted shares (fundamentals_history shares_diluted,
+    or stocks metrics) when possible, stamped mcap_derived: True.
+    If raw_mcap is present and > 0, return (raw_mcap, False).
+    If derived, return (price * shares, True).
+    If neither exists, return (None, False).
+    """
+    if raw_mcap is not None and raw_mcap > 0:
+        return raw_mcap, False
+
+    if price is not None and price > 0:
+        shares = shares_diluted
+        if (shares is None or shares <= 0) and metrics and isinstance(metrics, dict):
+            for k in ("shares_diluted", "shares", "float"):
+                v = metrics.get(k)
+                if isinstance(v, (int, float)) and v > 0:
+                    shares = float(v)
+                    break
+        if shares is not None and shares > 0:
+            return price * shares, True
+
+    return None, False

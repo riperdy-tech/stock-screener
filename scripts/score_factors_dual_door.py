@@ -42,7 +42,10 @@ DATA = ROOT / "public" / "data"
 sys.path.append(str(Path(__file__).resolve().parent))
 from industry_taxonomy import get_taxonomy_profile, normalize_industry
 from score_paradigm import compute_skip_month_return, compute_high_proximity
-from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, LARGE_CAP_FLAG_ONLY_USD, resolve_adv_usd, ADV_ENFORCE, load_adv_enforce
+from hygiene_thresholds import (
+    MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, LARGE_CAP_FLAG_ONLY_USD,
+    resolve_adv_usd, ADV_ENFORCE, load_adv_enforce, resolve_market_cap
+)
 import depth_conviction
 import tradability
 import peer_paths
@@ -1515,12 +1518,25 @@ def main():
                 cur_flags.append("stale_annual_data")
             ticker_flag_detail.setdefault(t, {})["stale_annual_data"] = stale_annual_data_map[t]
 
-        mcap = num(s.get("marketCap"))
+        fh = fundamentals.get(t, {})
+        years = sorted([int(y) for y in fh.keys()]) if fh else []
+        shares_diluted = num(fh.get(str(years[-1]), {}).get("shares_diluted")) if years else None
+        metrics = s.get("metrics") or {}
+        raw_mcap = num(s.get("marketCap"))
         price = num(s.get("price"))
         vol = num(s.get("volume"))
-        ticker_mcap[t] = mcap
 
-        if not mcap or mcap < MIN_MARKET_CAP:
+        mcap, mcap_derived = resolve_market_cap(raw_mcap, price, shares_diluted, metrics)
+        ticker_mcap[t] = mcap
+        if mcap_derived:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "mcap_derived" not in cur_flags:
+                cur_flags.append("mcap_derived")
+
+        if mcap is None:
+            vetoes[t] = "NO_MARKET_CAP_DATA"
+            continue
+        if mcap < MIN_MARKET_CAP:
             vetoes[t] = "MARKET_CAP_BELOW_300M"
             continue
         if not price or price < MIN_SHARE_PRICE:
@@ -2005,6 +2021,7 @@ def main():
             "fct_flag_detail": ticker_flag_detail.get(t, {}),
             "mid_cycle_window_years": ticker_mid_cycle.get(t, {}).get("window_years") if t in ticker_mid_cycle else None,
             "mid_cycle_years_used": ticker_mid_cycle.get(t, {}).get("years_used") if t in ticker_mid_cycle else None,
+            "mcap_derived": "mcap_derived" in cur_flags,
         }
         scored_profiles[t] = cand_data
 
@@ -2505,6 +2522,7 @@ def main():
             "archetype": prof.get("archetype"),
             "mid_cycle_window_years": prof.get("mid_cycle_window_years"),
             "mid_cycle_years_used": prof.get("mid_cycle_years_used"),
+            "mcap_derived": prof.get("mcap_derived", False),
         }
 
     # Stage 4 of the charter: the depth lane's own view, written alongside the quant bands.
