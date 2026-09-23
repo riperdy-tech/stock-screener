@@ -38,13 +38,13 @@ FUNDAMENTALS_JSON = DATA / "fundamentals_history.json"
 PRICE_HISTORY_JSON = DATA / "price_history.json"
 CIK_MAP_JSON = DATA / "cik_map.json"
 
+sys.path.append(str(Path(__file__).resolve().parent))
+from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR
+
 OUT_SURVIVORS_JSON = DATA / "tier1_hygiene_survivors.json"
 OUT_AUDIT_JSON = DATA / "tier1_hygiene_audit.json"
 
 # Thresholds
-MIN_MARKET_CAP = 300_000_000.0   # $300M
-MIN_SHARE_PRICE = 3.00           # $3.00
-MIN_ADV_DOLLAR = 300_000.0       # $300k/day
 MAX_STALE_MONTHS = 16            # 16 months from fiscal year end (15 months from filing)
 EVAL_YEAR = 2026                 # Current runtime year
 MIN_COMPLIANT_FY = 2024          # Must have filed at least FY2024 by mid-2026

@@ -42,6 +42,7 @@ DATA = ROOT / "public" / "data"
 sys.path.append(str(Path(__file__).resolve().parent))
 from industry_taxonomy import get_taxonomy_profile, normalize_industry
 from score_paradigm import compute_skip_month_return, compute_high_proximity
+from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR
 import depth_conviction
 import tradability
 import peer_paths
@@ -128,6 +129,25 @@ def _load_mid_cycle_config(config_path: Optional[Path] = None) -> Tuple[int, Dic
         "mat_metals_mining": 8,
     })
     return def_yrs, {k: int(v) for k, v in cl_yrs.items()}
+
+
+def _load_veto_switches(config_path: Optional[Path] = None) -> Dict[str, bool]:
+    cfg = _load_sifter_config(config_path)
+    sw = cfg.get("veto_switches", {})
+    return {
+        "altman_z": bool(sw.get("altman_z", cfg.get("enable_veto_altman_z", False))),
+        "beneish_standalone": bool(sw.get("beneish_standalone", cfg.get("enable_veto_beneish_standalone", False))),
+        "no_liquidity_data": bool(sw.get("no_liquidity_data", cfg.get("enable_veto_no_liquidity_data", False))),
+    }
+
+
+def _load_altman_thresholds(config_path: Optional[Path] = None) -> Tuple[float, Dict[str, float]]:
+    p = config_path or Path(__file__).resolve().parent / "reverse_config.json"
+    cfg = load_json(p, {}) if p.exists() else {}
+    st1 = cfg.get("thresholds", {}).get("stage1", {})
+    default_min = float(st1.get("altman_z_min", 1.8))
+    sec_map = {k: float(v) for k, v in st1.get("sector_altman_z_min", {}).items() if not k.startswith("_")}
+    return default_min, sec_map
 
 
 DOOR2_MOMENTUM_FLOOR = _load_door2_momentum_floor()
@@ -568,6 +588,11 @@ def main():
     door2_momentum_floor = float(globals().get("DOOR2_MOMENTUM_FLOOR", _load_door2_momentum_floor(sifter_cfg_path)))
     rn_buffer_rank, book_buffer_rank = _load_hysteresis_ranks(sifter_cfg_path)
     default_cycle_window, cluster_cycle_windows = _load_mid_cycle_config(sifter_cfg_path)
+    veto_switches = globals().get("VETO_SWITCHES", _load_veto_switches(sifter_cfg_path))
+    default_altman_min, sector_altman_map = _load_altman_thresholds()
+    switch_altman = bool(veto_switches.get("altman_z", False))
+    switch_beneish = bool(veto_switches.get("beneish_standalone", False))
+    switch_no_liquidity_data = bool(veto_switches.get("no_liquidity_data", False))
 
     # Read previous factor_scores.json before anything overwrites it (P3.5 band hysteresis)
     prev_factor_raw = None
@@ -748,32 +773,95 @@ def main():
         price = num(s.get("price"))
         vol = num(s.get("volume"))
 
-        if not mcap or mcap < 300e6:
+        if not mcap or mcap < MIN_MARKET_CAP:
             vetoes[t] = "MARKET_CAP_BELOW_300M"
             continue
-        if not price or price < 3.0:
+        if not price or price < MIN_SHARE_PRICE:
             vetoes[t] = "PRICE_BELOW_3"
             continue
-        if vol is not None and (vol * price) < 250e3:
-            vetoes[t] = "ILLIQUID_ADV_BELOW_250K"
+
+        # ADV via hygiene_thresholds.py (P3.6): adv_20d_usd from SCR-10 when present else snapshot flagged adv_single_day, neither -> NO_LIQUIDITY_DATA
+        fct_mom = ticker_mom_state.get(t, {})
+        adv_20d = num(fct_mom.get("adv_20d_usd"))
+        if adv_20d is not None:
+            adv = adv_20d
+        elif vol is not None and price is not None:
+            adv = vol * price
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "adv_single_day" not in cur_flags:
+                cur_flags.append("adv_single_day")
+        else:
+            adv = None
+
+        if adv is None:
+            if switch_no_liquidity_data:
+                vetoes[t] = "NO_LIQUIDITY_DATA"
+                continue
+            else:
+                cur_flags = ticker_flags.setdefault(t, [])
+                if "no_liquidity_data" not in cur_flags:
+                    cur_flags.append("no_liquidity_data")
+        elif adv < MIN_ADV_DOLLAR:
+            vetoes[t] = "ILLIQUID_ADV_BELOW_300K"
             continue
+
         if ind in ("Shell Companies", "Blank Check"):
             vetoes[t] = "NON_OPERATING_SHELL_SPAC"
             continue
 
-        # 2. Hard Forensic & Insolvency Vetoes
+        # 2. Hard Forensic & Insolvency Vetoes (P3.6)
         bat = battery.get(t, {})
         acc = num(bat.get("accruals_ratio"))
         m_score = num(bat.get("m_score"))
-        z_score = num(bat.get("z_score"))
         f_score = num(bat.get("f_score"))
+        net_iss_1y = num(bat.get("net_issuance_1y"))
 
+        # Existing combined forensic veto stays as is for now
         if m_score is not None and m_score > -1.78 and acc is not None and acc > 0.10:
             vetoes[t] = "FORENSIC_MANIPULATION_RISK"
             continue
-        if z_score is not None and z_score < 1.1:
-            vetoes[t] = "INSOLVENCY_DISTRESS_Z_UNDER_1.1"
-            continue
+
+        # Beneish standalone: veto when m_score > -1.78 and all inputs present, flag beneish_unverifiable when inputs missing
+        m_inputs_missing = bat.get("m_score_inputs_missing")
+        beneish_inputs_complete = (isinstance(m_inputs_missing, list) and len(m_inputs_missing) == 0) or (isinstance(m_inputs_missing, (int, float)) and m_inputs_missing == 0)
+        if m_score is not None and beneish_inputs_complete and m_score > -1.78:
+            if switch_beneish:
+                vetoes[t] = "BENEISH_MANIPULATION_RISK"
+                continue
+            else:
+                cur_flags = ticker_flags.setdefault(t, [])
+                if "beneish_manipulation_risk" not in cur_flags:
+                    cur_flags.append("beneish_manipulation_risk")
+        elif not beneish_inputs_complete:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "beneish_unverifiable" not in cur_flags:
+                cur_flags.append("beneish_unverifiable")
+
+        # Altman Z from stocks[t].metrics.zScore with reverse_config sector_altman_z_min / altman_z_min 1.8
+        metrics = s.get("metrics") or {}
+        altman_z = num(metrics.get("zScore"))
+        sector = s.get("sector") or "Unknown"
+        z_min = sector_altman_map.get(sector, default_altman_min)
+        if altman_z is not None and altman_z < z_min:
+            if switch_altman:
+                vetoes[t] = "INSOLVENCY_DISTRESS_ALTMAN_Z"
+                continue
+            else:
+                cur_flags = ticker_flags.setdefault(t, [])
+                if "insolvency_distress_altman_z" not in cur_flags:
+                    cur_flags.append("insolvency_distress_altman_z")
+
+        # Sloan accruals flag (> 0.20)
+        if acc is not None and acc > 0.20:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "heavy_accruals" not in cur_flags:
+                cur_flags.append("heavy_accruals")
+
+        # Issuance flag: net_issuance_1y > 0.10
+        if net_iss_1y is not None and net_iss_1y > 0.10:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "heavy_issuance" not in cur_flags:
+                cur_flags.append("heavy_issuance")
 
         ydata = fundamentals.get(t, {})
         years = sorted([int(y) for y in ydata.keys()])
