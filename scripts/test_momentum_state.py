@@ -489,3 +489,22 @@ def test_split_detection_triggers_full_refetch(tmp_path: Path, monkeypatch):
     # 'refetched' records the ticker
     assert "SPLIT_SYM" in res["refetched"]
     assert res["tickers"]["SPLIT_SYM"][overlap_date][0] == 50.0
+
+
+def test_daily_universe_is_bounded_not_seeded_from_momentum_state(tmp_path: Path):
+    """Phase 3 approval review B2: the daily series universe must not grow to every scored
+    name. It is RN+WL + overlay + ETF proxies + names already in the previous daily file —
+    never the full-universe momentum_state.json."""
+    import build_daily_price_history as bdph
+    (tmp_path / "factor_scores.json").write_text(json.dumps({"tickers": {
+        "AAA": {"fct_band": "research_now"}, "BBB": {"fct_band": "watchlist"},
+        "CCC": {"fct_band": "pass"}}}), encoding="utf-8")
+    (tmp_path / "momentum_state.json").write_text(json.dumps({"tickers": {
+        f"U{i}": {"mom_12_1": 0.1} for i in range(500)}}), encoding="utf-8")
+    (tmp_path / "daily_closes.json").write_text(json.dumps({"tickers": {
+        "OLD": {"2026-09-01": [10.0, 1000]}}}), encoding="utf-8")
+    universe = set(bdph.load_universe(tmp_path))
+    assert {"AAA", "BBB", "OLD"} <= universe
+    assert "CCC" not in universe
+    assert not any(t.startswith("U") and t[1:].isdigit() for t in universe)
+    assert len(universe) == 3 + len(bdph.ETF_PROXIES)

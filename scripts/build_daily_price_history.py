@@ -85,15 +85,18 @@ def load_universe(data_dir: Path) -> List[str]:
         except Exception as exc:
             print(f"WARN: could not parse depth_overlay.json for universe: {exc}", file=sys.stderr)
 
-    # 3. Previous momentum_state.json tickers (exits retain history)
-    mom_path = data_dir / "momentum_state.json"
-    if mom_path.exists():
+    # 3. Tickers already in the previous daily_closes.json (exits retain their history).
+    # NOT momentum_state.json: that file covers every scored name (~6,500), and seeding from
+    # it would turn this bounded daily series into a full-universe 400-day download
+    # (Phase 3 approval review B2).
+    daily_path = data_dir / "daily_closes.json"
+    if daily_path.exists():
         try:
-            mom_data = json.loads(mom_path.read_text(encoding="utf-8"))
-            for t in mom_data.get("tickers", {}).keys():
+            daily_data = json.loads(daily_path.read_text(encoding="utf-8"))
+            for t in (daily_data.get("tickers") or {}).keys():
                 universe.add(t)
         except Exception as exc:
-            print(f"WARN: could not parse momentum_state.json for universe: {exc}", file=sys.stderr)
+            print(f"WARN: could not parse daily_closes.json for universe: {exc}", file=sys.stderr)
 
     return sorted(universe)
 
