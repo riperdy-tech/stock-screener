@@ -42,7 +42,7 @@ DATA = ROOT / "public" / "data"
 sys.path.append(str(Path(__file__).resolve().parent))
 from industry_taxonomy import get_taxonomy_profile, normalize_industry
 from score_paradigm import compute_skip_month_return, compute_high_proximity
-from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, LARGE_CAP_FLAG_ONLY_USD, resolve_adv_usd
+from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, LARGE_CAP_FLAG_ONLY_USD, resolve_adv_usd, ADV_ENFORCE, load_adv_enforce
 import depth_conviction
 import tradability
 import peer_paths
@@ -1506,8 +1506,15 @@ def main():
                 if "no_liquidity_data" not in cur_flags:
                     cur_flags.append("no_liquidity_data")
         elif adv < MIN_ADV_DOLLAR:
-            vetoes[t] = "ILLIQUID_ADV_BELOW_300K"
-            continue
+            adv_enforce = globals().get("ADV_ENFORCE", load_adv_enforce(sifter_cfg_path) if sifter_cfg_path else ADV_ENFORCE)
+            if adv_enforce:
+                vetoes[t] = "ILLIQUID_ADV_BELOW_300K"
+                continue
+            else:
+                cur_flags = ticker_flags.setdefault(t, [])
+                if "below_min_adv" not in cur_flags:
+                    cur_flags.append("below_min_adv")
+                ticker_flag_detail.setdefault(t, {})["below_min_adv"] = round(adv, 2)
 
         if ind in ("Shell Companies", "Blank Check"):
             vetoes[t] = "NON_OPERATING_SHELL_SPAC"

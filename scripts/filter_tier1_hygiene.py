@@ -44,7 +44,7 @@ PRICE_HISTORY_JSON = DATA / "price_history.json"
 CIK_MAP_JSON = DATA / "cik_map.json"
 
 sys.path.append(str(Path(__file__).resolve().parent))
-from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, resolve_adv_usd
+from hygiene_thresholds import MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, resolve_adv_usd, ADV_ENFORCE, load_adv_enforce
 
 OUT_SURVIVORS_JSON = DATA / "tier1_hygiene_survivors.json"
 OUT_AUDIT_JSON = DATA / "tier1_hygiene_audit.json"
@@ -159,7 +159,12 @@ def evaluate_tier1():
         if adv_flag is not None:
             flags.append(f"DATA_FLAG: {adv_flag.upper()}")
         if adv is not None and adv < MIN_ADV_DOLLAR:
-            reasons.append(f"ADV_BELOW_300K (adv=${adv/1e3:.1f}k)")
+            adv_enforced = globals().get("ADV_ENFORCE", ADV_ENFORCE)
+            if adv_enforced:
+                reasons.append(f"ADV_BELOW_300K (adv=${adv/1e3:.1f}k)")
+            else:
+                flags.append("below_min_adv")
+                flags.append(f"below_min_adv: {round(adv, 2)}")
 
         # 4. SEC Statutory Reporting Freshness Check (P3.10: period-end basis, not fiscal year)
         has_cik = sym in cik_map
@@ -221,6 +226,8 @@ def evaluate_tier1():
                 "sector": sector,
                 "latest_fy": years[-1] if years else None
             }
+            if adv is not None and adv < MIN_ADV_DOLLAR:
+                audit_log[sym]["below_min_adv"] = round(adv, 2)
 
     # Preservation Gate Check (P3.10: hard gate — a benchmark name vetoed for any reason other
     # than NOT_TRADABLE is a build-breaking regression, not a warning)

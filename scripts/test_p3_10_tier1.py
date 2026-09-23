@@ -206,7 +206,8 @@ def test_adv_prefers_stocks_metrics_over_momentum_state_and_snapshot(tmp_path, m
     assert "ADVWIDE" in survivors
 
 
-def test_adv_below_300k_from_stocks_metrics_still_vetoes(tmp_path, monkeypatch):
+def test_adv_below_300k_from_stocks_metrics_still_vetoes_when_enforced(tmp_path, monkeypatch):
+    monkeypatch.setattr(fth, "ADV_ENFORCE", True)
     stocks = [_stock("ADVTHIN", vol=1_000_000.0, price=50.0, adv_20d_usd=100_000.0)]
     _setup(tmp_path, monkeypatch, stocks,
            fundamentals_tickers={"ADVTHIN": {"2025": {}}},
@@ -217,6 +218,23 @@ def test_adv_below_300k_from_stocks_metrics_still_vetoes(tmp_path, monkeypatch):
     assert "ADVTHIN" not in survivors
     audit = json.loads((tmp_path / "tier1_hygiene_audit.json").read_text(encoding="utf-8"))
     assert audit["details"]["ADVTHIN"]["primary_reason"] == "ADV_BELOW_300K"
+
+
+def test_adv_below_300k_switch_off_flags_not_vetoed(tmp_path, monkeypatch):
+    """C4: while ADV_ENFORCE is False, name below $300k gets below_min_adv flag and value, no veto."""
+    monkeypatch.setattr(fth, "ADV_ENFORCE", False)
+    stocks = [_stock("ADVTHIN", vol=1_000_000.0, price=50.0, adv_20d_usd=100_000.0)]
+    _setup(tmp_path, monkeypatch, stocks,
+           fundamentals_tickers={"ADVTHIN": {"2025": {}}},
+           period_end={"ADVTHIN": {"2025": _date_months_ago(1)}})
+
+    survivors = fth.evaluate_tier1()
+
+    assert "ADVTHIN" in survivors
+    audit = json.loads((tmp_path / "tier1_hygiene_audit.json").read_text(encoding="utf-8"))
+    assert audit["details"]["ADVTHIN"]["decision"] == "PASS"
+    assert "below_min_adv" in audit["details"]["ADVTHIN"]["flags"]
+    assert audit["details"]["ADVTHIN"].get("below_min_adv") == 100_000.0
 
 
 # ── Benchmark preservation hard gate (P3.10) ─────────────────────────────────

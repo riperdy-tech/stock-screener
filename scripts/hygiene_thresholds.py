@@ -1,5 +1,5 @@
-"""hygiene_thresholds.py — Shared retail hygiene thresholds for Tier 1 and SCR-03b (P3.6)."""
-
+import json
+from pathlib import Path
 from typing import Optional, Tuple
 
 MIN_MARKET_CAP: float = 300_000_000.0   # $300M
@@ -10,6 +10,33 @@ MIN_ADV_DOLLAR: float = 300_000.0       # $300k/day
 # leverage) is mostly built on small caps. At or above this market cap, those checks are a
 # flag in front of the analyst instead of a silent veto — see PHASE_3_QUANT_BOOK.md P3.6b.
 LARGE_CAP_FLAG_ONLY_USD: float = 10_000_000_000.0   # $10B
+
+SIFTER_CONFIG_PATH = Path(__file__).resolve().with_name("sifter_config.json")
+
+
+def load_adv_enforce(config_path: Path = SIFTER_CONFIG_PATH) -> bool:
+    """C4: the $300k liquidity veto switch in sifter_config.json (ADV_ENFORCE).
+    While False, names below $300k get the flag below_min_adv with their value, no veto.
+    """
+    if not config_path.exists():
+        return False
+    try:
+        cfg = json.loads(config_path.read_text(encoding="utf-8"))
+        if "ADV_ENFORCE" in cfg:
+            return bool(cfg["ADV_ENFORCE"])
+        if "adv_enforce" in cfg:
+            return bool(cfg["adv_enforce"])
+        sw = cfg.get("veto_switches", {})
+        if "ADV_ENFORCE" in sw:
+            return bool(sw["ADV_ENFORCE"])
+        if "adv_enforce" in sw:
+            return bool(sw["adv_enforce"])
+    except Exception:
+        pass
+    return False
+
+
+ADV_ENFORCE: bool = load_adv_enforce()
 
 
 def resolve_adv_usd(

@@ -39,6 +39,8 @@
     },
     "all_cluster_median_swing": 0.041
   },
+  "ADV_ENFORCE": false,
+  "_note_adv_enforce": "C4 (PHASE_3_APPROVAL.md, orchestrator ruling 2026-09-24) — switch for the $300k ADV liquidity veto. While false, names below $300k get the flag below_min_adv with their value, no veto. The orchestrator switches it on after measuring the count once the data fills.",
   "veto_switches": {
     "_note": "Switches for new P3.6 forensic and solvency vetoes. All set to false (flag_only) in this commit. P3.6b: altman_z and beneish_standalone are now permanently flag-only in code (see PHASE_3_QUANT_BOOK.md P3.6b) — these two keys are kept at false for the record but no longer gate a veto branch.",
     "altman_z": false,
