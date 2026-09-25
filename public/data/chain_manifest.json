@@ -1,6 +1,6 @@
 {
   "counts": {
-    "stocks": 6953,
+    "stocks": 6957,
     "themes": {
       "ai_compute": 63,
       "cloud_software": 181,
@@ -13,7 +13,7 @@
       "space_economy": 53
     }
   },
-  "finished_at": "2026-09-25T00:11:46Z",
+  "finished_at": "2026-09-25T16:21:01Z",
   "invariants": [
     {
       "detail": "stocks.json is 0.0 days old (max 8)",
@@ -28,13 +28,13 @@
       "ok": true
     },
     {
-      "detail": "universe 6953 -> 6953 (0.0% drift, max 10%)",
+      "detail": "universe 6953 -> 6957 (0.1% drift, max 10%)",
       "level": "soft",
       "name": "universe_drift",
       "ok": true
     },
     {
-      "detail": "6953/6953 stocks carry reverse object (100.0%, min 90%)",
+      "detail": "6957/6957 stocks carry reverse object (100.0%, min 90%)",
       "level": "hard",
       "name": "reverse_coverage",
       "ok": true
@@ -58,13 +58,13 @@
       "ok": true
     },
     {
-      "detail": "6953 paradigm rows vs 6953 stocks",
+      "detail": "6957 paradigm rows vs 6957 stocks",
       "level": "hard",
       "name": "paradigm_coverage",
       "ok": true
     },
     {
-      "detail": "3068 stocks carry a Factor Lab score (min 500)",
+      "detail": "3066 stocks carry a Factor Lab score (min 500)",
       "level": "hard",
       "name": "factor_scored",
       "ok": true
@@ -82,13 +82,13 @@
       "ok": false
     },
     {
-      "detail": "63 research_now candidates",
+      "detail": "59 research_now candidates",
       "level": "soft",
       "name": "factor_research_now",
       "ok": true
     },
     {
-      "detail": "2995/3068 scored names carry momentum (97.6%, min 95.0%)",
+      "detail": "2991/3066 scored names carry momentum (97.6%, min 95.0%)",
       "level": "soft",
       "name": "momentum_coverage",
       "ok": true
@@ -100,7 +100,7 @@
       "ok": false
     },
     {
-      "detail": "132 reverse-DCF models built",
+      "detail": "137 reverse-DCF models built",
       "level": "soft",
       "name": "valuation_models",
       "ok": true
@@ -125,40 +125,40 @@
     }
   ],
   "ok": true,
-  "run_id": "20260925T001050Z",
+  "run_id": "20260925T161853Z",
   "steps": [
     {
-      "duration_s": 3.3,
+      "duration_s": 4.3,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 3.0,
+      "duration_s": 81.2,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 4.8,
+      "duration_s": 5.5,
       "name": "score_paradigm",
       "returncode": 0
     },
     {
-      "duration_s": 1.0,
+      "duration_s": 1.1,
       "name": "filter_tier1_hygiene",
       "returncode": 0
     },
     {
-      "duration_s": 31.8,
+      "duration_s": 22.9,
       "name": "build_daily_price_history",
       "returncode": 0
     },
     {
-      "duration_s": 0.6,
+      "duration_s": 0.9,
       "name": "build_momentum_state",
       "returncode": 0
     },
     {
-      "duration_s": 2.0,
+      "duration_s": 2.7,
       "name": "score_factors_dual_door",
       "returncode": 0
     },
@@ -168,12 +168,12 @@
       "returncode": 0
     },
     {
-      "duration_s": 0.4,
+      "duration_s": 0.6,
       "name": "build_portfolio_plan",
       "returncode": 0
     },
     {
-      "duration_s": 7.8,
+      "duration_s": 7.6,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
