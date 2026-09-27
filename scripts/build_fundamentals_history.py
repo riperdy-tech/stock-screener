@@ -341,7 +341,10 @@ FIELD_SPECS = {
                                  "PaymentsToAcquireOtherProductiveAssets": {"ROP"}},
            # 2026-09-28: years every mechanism above leaves empty are backfilled from the filing's
            # own investing section when it PROVES the total -- see resolve_capex_by_closure.
-           "INVESTING_CLOSURE": True},
+           "INVESTING_CLOSURE": True,
+           # 2026-09-28: a FILLED year is replaced by the row's own proof only under
+           # _replacement_allowed (anchored, specific PP&E lines only, no conflicting filing).
+           "CLOSURE_REPLACES_FILLED": True},
  "operating_income": {"COMBINED": ["OperatingIncomeLoss",
                                    "ProfitLossFromOperatingActivities"],
                       "COMPONENT_SLOTS": []},
@@ -456,9 +459,21 @@ CLOSURE_CAPEX_LINES = frozenset({
     "PaymentsForCapitalImprovements", "PaymentsToDevelopRealEstateAssets",
     "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",                 # ifrs-full
     "PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets",
-    "PurchaseOfExplorationAndEvaluationAssets", "PurchaseOfMiningAssets",
-    "PaymentsForDevelopmentProjectExpenditure", "PaymentsForExplorationAndEvaluationExpenses",
+    "PurchaseOfMiningAssets",
 })
+# REMOVED 2026-09-28 (review of the backfill), now POISON because the grammar leaves them unlisted --
+# ifrs concepts whose meaning depends on the filer's industry, with no filed fact to tell them apart:
+#   PaymentsForDevelopmentProjectExpenditure  IAS 38 capitalized DEVELOPMENT (an intangible): SANG and VS
+#       file IntangibleAssetsUnderDevelopment beside it; VALE uses it for mine projects.
+#   PurchaseOfExplorationAndEvaluationAssets, PaymentsForExplorationAndEvaluationExpenses  IFRS 6 E&E:
+#       exploration capex at ASM/CRML, stream and royalty acquisitions at TFPM (RGLD's us-gaap equivalent is
+#       refused by ACQ-1/ACQ-2), a mis-tag at MDXH (a diagnostics company, 19,658,000).
+#   A subset using any of the three proves nothing (null beats wrong).
+# PropertyPlantAndEquipmentAdditions is a PP&E ROLL-FORWARD TOTAL, not a cash line: it may stand in for
+# the whole capex (CHDN FY2025: 274,900,000 == its 70,200,000 + 204,700,000 face lines) but is never
+# counted BESIDE another capex line -- AN FY2016 "closes" as 244,500,000 cash + 253,200,000 additions =
+# 497,700,000, identically in all three filings that carry the period; L FY2021 482,000,000 + 489,000,000.
+CLOSURE_TOTAL_ONLY_LINES = frozenset({"PropertyPlantAndEquipmentAdditions"})
 # Acquisition of existing property / mineral interests -> the same-family development/improvement
 # lines. ACQ-1: when a closing subset also holds a same-family development line, the acquisition line
 # is the SEPARATELY PRESENTED acquisitions line and is excluded (FANG FY2025: development 3,523M kept,
@@ -466,8 +481,7 @@ CLOSURE_CAPEX_LINES = frozenset({
 # ACQ-2: see _og_acquisition_line_is_additions. Otherwise the line's role is unproven -> null
 # (NNN 937.1M of real-estate acquisitions is not capex; CLDT's lone line may be improvements).
 _OG_DEV = frozenset({"PaymentsToExploreAndDevelopOilAndGasProperties", "PaymentsToAcquireOilAndGasPropertyAndEquipment"})
-_MINING_DEV = frozenset({"PaymentsToAcquireMiningAssets", "PurchaseOfMiningAssets",
-                         "PurchaseOfExplorationAndEvaluationAssets", "PaymentsForDevelopmentProjectExpenditure"})
+_MINING_DEV = frozenset({"PaymentsToAcquireMiningAssets", "PurchaseOfMiningAssets"})
 _RE_DEV = frozenset({"PaymentsForCapitalImprovements", "PaymentsToDevelopRealEstateAssets"})
 CLOSURE_ACQUISITION_LINES = {
     "PaymentsToAcquireOilAndGasProperty": _OG_DEV,
@@ -531,6 +545,16 @@ _CI_ACQUISITION = "CostsIncurredAcquisitionOfOilAndGasProperties"
 _CI_ACQUISITION_PARTS = ("CostsIncurredAcquisitionOfProvedOilAndGasProperties",
                          "CostsIncurredAcquisitionOfUnprovedOilAndGasProperties")
 CLOSURE_MAX_LINES = 24              # meet-in-the-middle over <= 2^12 x 2^12; larger sections stay unproven
+# REPLACEMENT (2026-09-28). A FILLED capex is replaced by the row's own proven total only when the
+# proof ADDS lines of a concept that is PP&E by its own definition. The three generic concepts stay out:
+# beside a PP&E line they are, by construction, some OTHER category -- LTRX FY2025 adds 6,458,000 of
+# "other productive assets" while its gross PP&E moved 11,328,000 -> 11,530,000; TONX FY2025's 295,000,000
+# is a token purchase. None of 387 such lines has a same-value twin elsewhere in its filing that would
+# say what it is, so they cannot be proven PP&E and the shipped value stays.
+CLOSURE_REPLACE_LINES = (CLOSURE_CAPEX_LINES - CLOSURE_TOTAL_ONLY_LINES - {
+    "PaymentsToAcquireOtherProductiveAssets", "PaymentsToAcquireProductiveAssets",
+    "PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets",
+}) | {"PaymentsToAcquireOilAndGasProperty"}      # counted in a proof only via ACQ-2
 CLOSURE_MAX_SOLUTIONS = 20000       # a truncated enumeration cannot show every solution agrees -> unproven
 
 
@@ -644,6 +668,8 @@ def _closure_capex(d):
             return None                    # the line's role is unproven
         if not used:
             return None
+        if len(used) > 1 and CLOSURE_TOTAL_ONLY_LINES & set(used):
+            return None                    # a roll-forward total beside a cash line double counts (AN FY2016)
         results.add((sum(d[c] for c in used), tuple(sorted(used))))
     if len({r[0] for r in results}) != 1:
         return None
@@ -651,7 +677,24 @@ def _closure_capex(d):
     return value, "+".join(tags)
 
 
-def resolve_capex_by_closure(facts, skip_years):
+def _replacement_allowed(proof_lines, shipped, filed_zero_tag):
+    """REPLACEMENT RULE for one filled year. proof_lines: {concept: value} of the lines the row's own
+    proof COUNTED. EVERY counted line must be a CLOSURE_REPLACE_LINES concept -- the anchor included --
+    and the shipped value must be ANCHORED: exactly one counted line equals it (today's figure is a line of
+    the proven face), or it is a zero the filing files under a CLOSURE_REPLACE_LINES concept. A generic
+    anchor is refused because its meaning is unknown: DVN FY2014 ships its "capital expenditures" line
+    (PaymentsToAcquireProductiveAssets, 6,988,000,000) and the proof would add 6,462,000,000 filed as
+    PaymentsToAcquirePropertyPlantAndEquipment that the same filing's ASC 932 acquisition costs (proved
+    5,210,000,000 + unproved 1,177,000,000) show to be the year's property acquisitions."""
+    if any(c not in CLOSURE_REPLACE_LINES for c in proof_lines):
+        return False
+    anchors = [c for c, v in proof_lines.items() if v == shipped]
+    if len(anchors) == 1:
+        return True
+    return not anchors and shipped == 0 and filed_zero_tag in CLOSURE_REPLACE_LINES
+
+
+def resolve_capex_by_closure(facts, skip_years, lines_out=None):
     """{year: {accession: (value, composite_tag, period_end)}} -- every accession that PROVES a ~annual
     period's capex, for fiscal-year bins (int(end[:4]), as every annual series) NOT in skip_years.
 
@@ -695,6 +738,8 @@ def resolve_capex_by_closure(facts, skip_years):
         prior = out.setdefault(year, {}).get(accn)
         if prior is None or end > prior[2]:           # one accession, two periods in a bin: latest end
             out[year][accn] = (proven[0], proven[1], end)
+            if lines_out is not None:
+                lines_out[(accn, end)] = {c: groups[key][c] for c in proven[1].split("+")}
     return out
 
 
@@ -1200,7 +1245,8 @@ def extract_history(facts, ticker=None):
     VOTE_FIELDS = [f for f in series if f not in VOTE_EXCLUDED_FIELDS]
     # INVESTING CLOSURE (capex): proven values for years no FIELD_SPECS mechanism filled. Applied in the
     # row loop below, never through series/raws, so they cannot vote or move another cell.
-    closure = (resolve_capex_by_closure(facts, set(series.get("capex", {})))
+    closure_lines = {}
+    closure = (resolve_capex_by_closure(facts, set(), closure_lines)
                if FIELD_SPECS["capex"].get("INVESTING_CLOSURE") else {})
 
     # WINDOW ANCHOR. A row survives only if it has revenue or total_assets, but the MAX_YEARS
@@ -1322,6 +1368,21 @@ def extract_history(facts, ticker=None):
             row["capex"] = hit[0]
             prov_of["capex"][y] = "closure_sum"
             tag_of["capex"][y] = hit[1]
+        elif (FIELD_SPECS["capex"].get("CLOSURE_REPLACES_FILLED")
+              and hit is not None and row.get("capex") is not None and hit[0] > row["capex"]
+              and _near_ref(hit[2])
+              # no other filing may prove a DIFFERENT figure for the same period (restatements,
+              # re-presentations and coincidental closures disagree across filings: DVN 2015-2018)
+              and all(p[0] == hit[0] for a, p in closure.get(y, {}).items() if p[2] == hit[2])
+              and _replacement_allowed(closure_lines[(chosen, hit[2])], row["capex"],
+                                       tag_of["capex"].get(y) if any(
+                                           c[0] == chosen and c[2] == 0 and _near_ref(c[3])
+                                           for c in raws["capex"].get(y, [])) else None)):
+            row["capex"] = hit[0]
+            prov_of["capex"][y] = "closure_replaced"
+            tag_of["capex"][y] = hit[1]
+            if overrides.get(str(y), {}).pop("capex", None) is not None and not overrides[str(y)]:
+                del overrides[str(y)]
         # Require at least a revenue or assets figure for the year to count
         if row.get("revenue") is None and row.get("total_assets") is None:
             continue
@@ -1334,7 +1395,8 @@ def extract_history(facts, ticker=None):
 
 
 PROV_STATE_CODE = {"primary": "p", "backfill": "b",
-                   "component_sum": "s", "lone_depreciation": "l", "closure_sum": "c"}
+                   "component_sum": "s", "lone_depreciation": "l", "closure_sum": "c",
+                   "closure_replaced": "r"}
 PROV_DERIVED_FIELDS = ("fcf",)   # computed row field, no filed tag -> no provenance
 
 
@@ -1421,7 +1483,8 @@ def encode_provenance(history_out, prov_by_ticker):
                     "overrides[T][year][field] = accn_index (effective state 'o'). "
                     "period_end[T][year] = bin end date."),
         "_states": {"p": "primary", "b": "backfill", "s": "component_sum",
-                    "l": "lone_depreciation", "c": "closure_sum", "o": "accession_override"},
+                    "l": "lone_depreciation", "c": "closure_sum", "r": "closure_replaced",
+                    "o": "accession_override"},
         "_tags": inv_tags,
         "_accns": inv_accns,
         "runs": runs,
@@ -1629,11 +1692,20 @@ def build_ticker_outputs(data, ticker):
     history, prov_bundle = extract_history(facts, ticker)
     if not history:
         return None
+    ttm = ttm_snapshot(facts)
+    # The TTM is built from DURATION_TAGS["capex"] -- the very tag the latest fiscal year's proof has just
+    # shown to be a COMPONENT. Its FY leg is that component, so its capex (and fcf) is withheld: consumers
+    # fall back to the proven FY figure (null beats wrong).
+    if ttm and prov_bundle["states"]["capex"].get(max(history)) == "closure_replaced":
+        ttm["fields"].pop("capex", None)
+        ttm["fields"].pop("fcf", None)
+        if not ttm["fields"]:
+            ttm = None
     return {
         "history": {str(y): row for y, row in sorted(history.items())},
         "prov": prov_bundle or None,
         "battery": compute_battery(history) or None,
-        "ttm": ttm_snapshot(facts) or None,
+        "ttm": ttm or None,
         "qtr": quarterly_snapshot(facts) or None,
     }
 

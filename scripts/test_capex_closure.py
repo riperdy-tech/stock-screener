@@ -133,13 +133,19 @@ def test_gpor_fills_latest_year_and_moves_nothing_else():
     assert old["prov"]["period_end"] == new["prov"]["period_end"]
 
 
-def test_filled_value_is_never_replaced_by_a_proof():
+def test_backfill_alone_never_replaces_a_filled_value():
     # WLFC FY2025 ships PaymentsToAcquirePropertyPlantAndEquipment 31,082,000 while its section proves
-    # 555,661,000 (equipment on lease + PP&E). Backfill only: the shipped value stays.
+    # 555,661,000 (equipment on lease + PP&E). With the replacement rule off, the backfill leaves the shipped
+    # value alone; test_capex_replace.py pins what the replacement rule does with it.
     assert _proofs("WLFC", 2025)["0001018164-26-000041"][0] == 555_661_000
-    new = _build("WLFC", closure=True)
+    saved = bfh.FIELD_SPECS["capex"]["CLOSURE_REPLACES_FILLED"]
+    bfh.FIELD_SPECS["capex"]["CLOSURE_REPLACES_FILLED"] = False
+    try:
+        new = _build("WLFC", closure=True)
+    finally:
+        bfh.FIELD_SPECS["capex"]["CLOSURE_REPLACES_FILLED"] = saved
     assert new["history"]["2025"]["capex"] == 31_082_000
-    assert new["prov"]["states"]["capex"][2025] != "closure_sum"
+    assert new["prov"]["states"]["capex"][2025] not in ("closure_sum", "closure_replaced")
 
 
 def test_fresh_start_stub_is_another_periods_capex():
