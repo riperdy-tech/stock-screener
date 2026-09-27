@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-09-26T12:12:17Z
+Generated: 2026-09-27T12:21:40Z
 Macro flags: ['macro_yield_warning']
 Invested: **88.95%**  |  Cash: **11.05%**  |  Positions: 49
 
