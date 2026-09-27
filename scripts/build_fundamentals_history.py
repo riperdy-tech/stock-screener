@@ -40,6 +40,7 @@ import argparse
 import json
 import math
 import os
+import re
 import statistics
 import sys
 import zipfile
@@ -337,7 +338,10 @@ FIELD_SPECS = {
            # they BACKFILL ONLY the named tickers; ungated they would ship GSAT a capex 1/130th
            # of truth and a matching inflated FCF. Primary vote (DURATION_TAGS["capex"]) unchanged.
            "TICKER_GATED_TAGS": {"PaymentsToAcquireOtherPropertyPlantAndEquipment": {"LLY"},
-                                 "PaymentsToAcquireOtherProductiveAssets": {"ROP"}}},
+                                 "PaymentsToAcquireOtherProductiveAssets": {"ROP"}},
+           # 2026-09-28: years every mechanism above leaves empty are backfilled from the filing's
+           # own investing section when it PROVES the total -- see resolve_capex_by_closure.
+           "INVESTING_CLOSURE": True},
  "operating_income": {"COMBINED": ["OperatingIncomeLoss",
                                    "ProfitLossFromOperatingActivities"],
                       "COMPONENT_SLOTS": []},
@@ -408,6 +412,290 @@ FIELD_SPECS = {
 #                                    no single definition: vendor reproduces WITH leases at 56
 #                                    names, WITHOUT at 23; AZN Borrowings INCLUDES IFRS-16 leases,
 #                                    SAP/NVS EXCLUDE them (all identities exact). Components only.
+
+
+# -- CAPEX BY INVESTING-SECTION CLOSURE (2026-09-28, reviewer design) -----------------------------
+# WHY. 1,616 of 5,603 names (28.8%; local companyfacts.zip of 2026-08-07) ship no latest-FY capex, and
+# 397 of them file their capital-spending line under a concept FIELD_SPECS does not map (oil and gas,
+# real estate, ifrs, "other" PP&E). The same concept is a TOTAL at one filer and a COMPONENT at
+# another: ASC files PaymentsToAcquireOtherProductiveAssets 284,000 against a 121,003,000 investing
+# outflow (the CH-4 GSAT trap again); AR's three standard capex lines leave 150,087,000 of its
+# investing section unexplained. Adding tags to COMBINED would ship both. No tag list and no magnitude
+# rule separates a total from a component. The filing's own investing section does.
+# THE PROOF. For one accession + one ~annual period, the filed investing total must be reproduced
+# EXACTLY (integer equality, no tolerance) by a signed subset of the SAME filing's standard-concept
+# investing lines. companyfacts carries no company-extension concept, so a section that holds an
+# extension line cannot close and stays unproven -> null (null beats wrong). A closing subset is the
+# face of the statement: its capex lines are disjoint (no double count) and complete (no component
+# passes as the total).
+# MEASURED (full universe): 27,469 proven filing-periods; deleting any one face line (104,408 trials)
+# or two (62,974) never proved a different capex. The PP&E roll-forward (dPPE_net + D&A) is NOT a
+# proof: within 2.5% of the proven total in only 10.7% of 18,338 filer-years, and it accepts a known
+# component 2.1% of the time.
+# BACKFILL ONLY: applied inside extract_history's row loop, to a row whose capex every FIELD_SPECS
+# mechanism left null; the value never enters `series` or `raws`, so it cannot vote in the accession
+# rule or move any other cell. It must also sit on the row's own period (_near_ref, 14 days).
+# Every concept below was classified by reading its definition and its use in closing subsets across
+# the universe; an unlisted concept in the investing grammar is POISON (a subset using it proves nothing).
+INVESTING_TOTAL_TAGS = ("NetCashProvidedByUsedInInvestingActivities",
+                        "NetCashProvidedByUsedInInvestingActivitiesContinuingOperations",
+                        "CashFlowsFromUsedInInvestingActivities",
+                        "CashFlowsFromUsedInInvestingActivitiesContinuingOperations")
+# Additions to the filer's own PP&E-type assets: SUMMED. Software and intangibles are NOT here (the
+# field is PP&E purchases, as PaymentsToAcquirePropertyPlantAndEquipment is; separately presented
+# capitalized software stays out, exactly as it does for the primary tag today).
+CLOSURE_CAPEX_LINES = frozenset({
+    "PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets",
+    "PaymentsToAcquireOtherPropertyPlantAndEquipment", "PaymentsToAcquireOtherProductiveAssets",
+    "PaymentsToAcquireMachineryAndEquipment", "PaymentsToAcquireFurnitureAndFixtures",
+    "PaymentsToAcquireBuildings", "PaymentsToAcquireLand", "PaymentsToAcquireLandHeldForUse",
+    "PaymentsForConstructionInProcess", "PaymentsForFlightEquipment", "PaymentsToAcquireEquipmentOnLease",
+    "PropertyPlantAndEquipmentAdditions",
+    "PaymentsToAcquireMiningAssets", "PaymentsToAcquireOilAndGasPropertyAndEquipment",
+    "PaymentsToExploreAndDevelopOilAndGasProperties", "PaymentsToAcquireOilAndGasEquipment",
+    "PaymentsForCapitalImprovements", "PaymentsToDevelopRealEstateAssets",
+    "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",                 # ifrs-full
+    "PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets",
+    "PurchaseOfExplorationAndEvaluationAssets", "PurchaseOfMiningAssets",
+    "PaymentsForDevelopmentProjectExpenditure", "PaymentsForExplorationAndEvaluationExpenses",
+})
+# Acquisition of existing property / mineral interests -> the same-family development/improvement
+# lines. ACQ-1: when a closing subset also holds a same-family development line, the acquisition line
+# is the SEPARATELY PRESENTED acquisitions line and is excluded (FANG FY2025: development 3,523M kept,
+# property acquisitions 5,938M excluded; PR 1,979.6M, CRGY 951.0M -- the companies' own capex bases).
+# ACQ-2: see _og_acquisition_line_is_additions. Otherwise the line's role is unproven -> null
+# (NNN 937.1M of real-estate acquisitions is not capex; CLDT's lone line may be improvements).
+_OG_DEV = frozenset({"PaymentsToExploreAndDevelopOilAndGasProperties", "PaymentsToAcquireOilAndGasPropertyAndEquipment"})
+_MINING_DEV = frozenset({"PaymentsToAcquireMiningAssets", "PurchaseOfMiningAssets",
+                         "PurchaseOfExplorationAndEvaluationAssets", "PaymentsForDevelopmentProjectExpenditure"})
+_RE_DEV = frozenset({"PaymentsForCapitalImprovements", "PaymentsToDevelopRealEstateAssets"})
+CLOSURE_ACQUISITION_LINES = {
+    "PaymentsToAcquireOilAndGasProperty": _OG_DEV,
+    "PaymentsToAcquireMineralRights": _OG_DEV | _MINING_DEV,
+    "PaymentsToAcquireRoyaltyInterestsInMiningProperties": _MINING_DEV,
+    "PaymentsToAcquireTimberlands": frozenset(),
+    "PaymentsToAcquireRealEstate": _RE_DEV, "PaymentsToAcquireCommercialRealEstate": _RE_DEV,
+    "PaymentsToAcquireResidentialRealEstate": _RE_DEV, "PaymentsToAcquireRealEstateHeldForInvestment": _RE_DEV,
+    "PaymentsToAcquireHeldForSaleRealEstate": _RE_DEV, "PaymentsToAcquireAndDevelopRealEstate": _RE_DEV,
+    "PaymentsToAcquireRealEstateAndRealEstateJointVentures": _RE_DEV, "PurchaseOfInvestmentProperty": _RE_DEV,
+}
+# Net lines hide the gross capex inside them: POISON.
+_CLOSURE_POISON_NET = frozenset({"PaymentsForProceedsFromProductiveAssets",
+                                 "PaymentsForProceedsFromRealEstateHeldforinvestment",
+                                 "PaymentsForProceedsFromNuclearFuel", "PaymentsForProceedsFromRemovalCosts",
+                                 "PaymentsForProceedsFromTenantAllowance"})
+# Investing grammar (which concepts may be a line of the section, and their sign). Financing and
+# operating concepts never enter it -- every extra candidate is a chance for a coincidental closure.
+_INV_EXCLUDE = re.compile(
+    r"(Financing|OperatingActivit|^ProceedsFromIssuance|^ProceedsFromRepayment|^RepaymentsOf|^ProceedsFromRelatedPartyDebt|"
+    r"TreasuryS|^PaymentsForOrigination|^PaymentsOf|^PaymentsForRepurchase|^PaymentsToMinority|^PaymentsRelatedToTax|"
+    r"^ProceedsFromPaymentsToMinority|IncurredButNotYetPaid|^PaymentsForRent|^PaymentsForFees|^PaymentsForRestructuring|"
+    r"^PaymentsForLoss|^PaymentsForUnderwriting|^PaymentsForCommissions|^PaymentsForBrokerage|^PaymentsForLegal|"
+    r"^PaymentsForEnvironmental|^PaymentsForPostemployment|^PaymentsForProvision|^PaymentsForPurchaseOfInvestmentOperating|"
+    r"OrRedeemEntitysShares|SoldUnderAgreementsToRepurchase|LoansHeldForSale|LoansHeldforsale)")
+_INV_NET_OUT = re.compile(r"^PaymentsForProceedsFrom")                      # value > 0 = net outflow
+_INV_NET_IN = re.compile(r"^(ProceedsFromPaymentsFor|NetCashProvidedByUsedInInvestingActivitiesDiscontinued|"
+                         r"CashProvidedByUsedInInvestingActivitiesDiscontinued|OtherInflowsOutflowsOfCashClassifiedAsInvesting|"
+                         r"CashFlowsFromUsedInInvestingActivitiesDiscontinued|CashFlowsFromUsedInDecreaseIncrease)")
+_INV_OUT = re.compile(r"^(PaymentsToAcquire|PaymentsForAcquire|PaymentsToDevelop|PaymentsToExplore|PaymentsForCapitalImprovements|"
+                      r"PaymentsForConstructionInProcess|PaymentsForSoftware|PaymentsForFlightEquipment|PaymentsForDeposit|"
+                      r"PaymentsForDerivativeInstrumentInvesting|PaymentsForHedgeInvesting|PaymentsToFundLongtermLoans|"
+                      r"PaymentForAcquisition|PaymentsForPurchaseOf|PurchaseOf|CashFlowsUsedInObtainingControl|"
+                      r"CashAdvancesAndLoansMadeTo|PaymentsForDevelopmentProject|PaymentsForExplorationAndEvaluation|"
+                      r"CashDivestedFromDeconsolidation|PaymentsForContributionsTo|PaymentsForAdvanceTo|"
+                      r"PaymentForContingentConsiderationLiabilityInvesting|PaymentsForInvestment|IncomeTaxesPaidRefundClassifiedAsInvesting|"
+                      r"OtherCashPaymentsToAcquire|PaymentsForLeasingCosts|IncreaseDecreaseInRestrictedCash$|"
+                      r"PropertyPlantAndEquipmentAdditions$|InterestPaidCapitalized$)")
+_INV_IN = re.compile(r"^(ProceedsFrom(Sale|Sales|Maturit|Collection|Divestiture|Disposal|Disposition|Deconsolidation|Liquidation|"
+                     r"Redemption|InsuranceSettlementInvesting|DerivativeInstrumentInvesting|HedgeInvesting|EquityMethodInvestment|"
+                     r"DistributionsReceived|LimitedPartnership|InterestReceived|DividendsReceived|GovernmentGrants|"
+                     r"RealEstateAndRealEstateJointVentures|PrincipalRepaymentsOnLoansAndLeasesHeldForInvestment|LifeInsurancePolicies|"
+                     r"DecommissioningFund|PreviousAcquisition|ReturnOfCapital|IncomeTaxRefundsInvesting|AssetSales|Divestitures)|"
+                     r"CashAcquiredFromAcquisition|CashAcquiredInExcessOfPaymentsToAcquireBusiness|CashFlowsFromLosingControl|"
+                     r"CashReceiptsFromRepaymentOfAdvancesAndLoans|InterestReceivedClassifiedAsInvesting|DividendsReceivedClassifiedAsInvesting|"
+                     r"ReturnOfCapital|RepaymentOfNotesReceivable)")
+# Certainly-not-PP&E investing lines (financial assets, businesses, intangibles/software, other/net).
+_INV_NONCAPEX = re.compile(
+    r"(Securit|Investments?(?!Property)|Business|Subsidiar|Affiliate|JointVenture|EquityMethod|Associates|Loan|"
+    r"LeaseReceivable|LeasesHeldForInvestment|Notes|Receivable|Intangible|Software|InProcessResearch|Derivative|Hedge|"
+    r"LifeInsurance|FederalHomeLoanBank|FederalReserve|CertificatesOfDeposit|DepositsInBanks|InterestBearingDeposits|"
+    r"DepositsWithOtherInstitutions|OtherDeposits|MortgageDeposits|DepositOnLoan|DepositsOnRealEstateAcquisitions|"
+    r"MortgageServicingRights|Crypto|RestrictedCash|RestrictedInvestments|FinancialInstruments|FinancialAssets|"
+    r"Partnership|InterestIn|ContingentConsideration|OtherInvestingActivities|Discontinued|RetainedInterest|"
+    r"ManagementContractRights|PolicyLoans|DelayedTaxExemptExchange|FederalFunds|AgreementsToResell|TrustPreferred|"
+    r"IncomeTaxesPaidRefund|AdvanceTo|LoansMadeTo|CashDivested|PreviousAcquisition|ObtainingControl|LosingControl|"
+    r"CashAcquired|CashReceipts|InterestReceived|DividendsReceived|ReturnOfCapital|ShorttermDeposits|DecommissioningFund|"
+    r"InvestmentProjects|ContributionsTo|OtherInflowsOutflows|InstrumentsOfOtherEntities|InterestEarningAssets|DebtRetirements)")
+_CI_DEVELOPMENT = "CostsIncurredDevelopmentCosts"
+_CI_ACQUISITION = "CostsIncurredAcquisitionOfOilAndGasProperties"
+_CI_ACQUISITION_PARTS = ("CostsIncurredAcquisitionOfProvedOilAndGasProperties",
+                         "CostsIncurredAcquisitionOfUnprovedOilAndGasProperties")
+CLOSURE_MAX_LINES = 24              # meet-in-the-middle over <= 2^12 x 2^12; larger sections stay unproven
+CLOSURE_MAX_SOLUTIONS = 20000       # a truncated enumeration cannot show every solution agrees -> unproven
+
+
+def _investing_sign(concept):
+    """+1 inflow, -1 outflow, 0 = not a line of the investing grammar."""
+    if concept in INVESTING_TOTAL_TAGS or _INV_EXCLUDE.search(concept):
+        return 0
+    if _INV_NET_OUT.match(concept):
+        return -1
+    if _INV_NET_IN.match(concept):
+        return 1
+    if _INV_OUT.match(concept):
+        return -1
+    if _INV_IN.match(concept):
+        return 1
+    return 0
+
+
+def _investing_class(concept):
+    """'capex' | 'acquisition' | 'noncapex' | 'poison' for a concept inside the grammar."""
+    if concept in CLOSURE_CAPEX_LINES:
+        return "capex"
+    if concept in CLOSURE_ACQUISITION_LINES:
+        return "acquisition"
+    if concept in _CLOSURE_POISON_NET:
+        return "poison"
+    if concept.startswith(("ProceedsFrom", "CashAcquired", "CashReceipts", "CashFlowsFromLosingControl",
+                           "InterestReceived", "DividendsReceived", "ReturnOfCapital", "RepaymentOfNotesReceivable")):
+        return "noncapex"                  # inflows are never capex (capex is gross; proceeds are not netted)
+    if _INV_NONCAPEX.search(concept):
+        return "noncapex"
+    return "poison"
+
+
+def _closing_subsets(lines, total):
+    """Every subset of lines [(concept, signed_value)] whose sum == total EXACTLY, as frozensets of
+    concepts. None when the section is too large or the solutions too many to enumerate completely."""
+    n = len(lines)
+    if n > CLOSURE_MAX_LINES:
+        return None
+    half = n // 2
+    left, right = lines[:half], lines[half:]
+
+    def sums(part):
+        out = {}
+        acc = [0] * (1 << len(part))
+        for mask in range(1, 1 << len(part)):
+            low = mask & -mask
+            acc[mask] = acc[mask ^ low] + part[low.bit_length() - 1][1]
+        for mask, s in enumerate(acc):
+            out.setdefault(s, []).append(mask)
+        return out
+
+    sl, sr = sums(left), sums(right)
+    found = []
+    for s, masks in sl.items():
+        other = sr.get(total - s)
+        if not other:
+            continue
+        for ml in masks:
+            for mr in other:
+                found.append(frozenset([left[i][0] for i in range(len(left)) if ml >> i & 1] +
+                                       [right[i][0] for i in range(len(right)) if mr >> i & 1]))
+                if len(found) > CLOSURE_MAX_SOLUTIONS:
+                    return None
+    return found
+
+
+def _og_acquisition_line_is_additions(d, value):
+    """ACQ-2. A PaymentsToAcquireOilAndGasProperty line with no development sibling on the face is the
+    filer's ADDITIONS line only when the SAME accession+period proves development spending inside it:
+    ASC 932 costs incurred show development > 0 and the line exceeds every acquisition dollar incurred.
+    GPOR FY2025: line 527,569,000 vs acquisition costs incurred 83.6M and development 480.4M."""
+    dev = d.get(_CI_DEVELOPMENT)
+    if not isinstance(dev, (int, float)) or dev <= 0:
+        return False
+    acq = d.get(_CI_ACQUISITION)
+    if not isinstance(acq, (int, float)):
+        acq = sum(d.get(c) or 0 for c in _CI_ACQUISITION_PARTS)
+    return value > acq
+
+
+def _closure_capex(d):
+    """Proven capex for one accession+period {concept: value}, as (value, composite_tag) or None."""
+    total_tag = next((c for c in INVESTING_TOTAL_TAGS if c in d), None)
+    if total_tag is None:
+        return None
+    lines = [(c, _investing_sign(c) * v) for c, v in sorted(d.items())
+             if _investing_sign(c) and isinstance(v, (int, float)) and v]
+    solutions = _closing_subsets(lines, d[total_tag])
+    if not solutions:
+        return None
+    results = set()
+    for s in solutions:
+        if any(_investing_class(c) == "poison" for c in s):
+            return None
+        vals = [abs(d[c]) for c in s]
+        if len(vals) != len(set(vals)):
+            return None                    # TWIN: a same-value duplicate stood in for an unseen line (GME FY2025)
+        cap = [c for c in s if _investing_class(c) == "capex"]
+        acq = [c for c in s if _investing_class(c) == "acquisition"]
+        if any(d[c] <= 0 for c in cap + acq):
+            return None
+        used = list(cap)
+        for a in acq:
+            if CLOSURE_ACQUISITION_LINES[a] & set(cap):
+                continue                   # ACQ-1: separately presented acquisitions
+            if a == "PaymentsToAcquireOilAndGasProperty" and _og_acquisition_line_is_additions(d, d[a]):
+                used.append(a)             # ACQ-2
+                continue
+            return None                    # the line's role is unproven
+        if not used:
+            return None
+        results.add((sum(d[c] for c in used), tuple(sorted(used))))
+    if len({r[0] for r in results}) != 1:
+        return None
+    value, tags = min(results, key=lambda r: (len(r[1]), r[1]))
+    return value, "+".join(tags)
+
+
+def resolve_capex_by_closure(facts, skip_years):
+    """{year: {accession: (value, composite_tag, period_end)}} -- every accession that PROVES a ~annual
+    period's capex, for fiscal-year bins (int(end[:4]), as every annual series) NOT in skip_years.
+
+    extract_history applies a proof only from the accession its own vote CHOSE for the row, and only
+    when period_end is within 14 days of the row's period (_near_ref). One filing per row: a later
+    perimeter restatement proves a different company's capex (AIV 2018: the post-separation comparative
+    files OCF 53,486,000 against the row's 396,388,000), and a fresh-start stub or a fiscal-year change
+    is another period's capex (CHRD 2020: period ends 11-19, row 12-31). A concept filed twice with
+    different values in one accession+period voids that accession+period."""
+    groups, conflict = {}, set()
+    for concept, body in facts.items():
+        if not (_investing_sign(concept) or concept in INVESTING_TOTAL_TAGS
+                or concept == _CI_DEVELOPMENT or concept == _CI_ACQUISITION or concept in _CI_ACQUISITION_PARTS):
+            continue
+        for e in body.get("units", {}).get("USD", []):
+            if e.get("form") not in ANNUAL_FORMS:
+                continue
+            start, end, val = e.get("start"), e.get("end"), e.get("val")
+            if not start or not end or val is None:
+                continue
+            try:
+                days = (date.fromisoformat(end) - date.fromisoformat(start)).days
+            except ValueError:
+                continue
+            if not 300 <= days <= 400:
+                continue
+            key = (e.get("accn") or "", start, end)
+            g = groups.setdefault(key, {})
+            if concept in g and g[concept] != val:
+                conflict.add(key)
+            g[concept] = val
+    out = {}
+    for key in sorted(groups):
+        accn, _, end = key
+        year = int(end[:4])
+        if year in skip_years or key in conflict:
+            continue
+        proven = _closure_capex(groups[key])
+        if proven is None:
+            continue
+        prior = out.setdefault(year, {}).get(accn)
+        if prior is None or end > prior[2]:           # one accession, two periods in a bin: latest end
+            out[year][accn] = (proven[0], proven[1], end)
+    return out
 
 
 # CH-9: interest-bearing debt COMPONENTS (instant/balance-sheet). Resolved one tag at a time in
@@ -910,6 +1198,10 @@ def extract_history(facts, ticker=None):
     # Vote-excluded fields (CH-7/CH-9) still get resolved and still receive the chosen accession's
     # correction, but do NOT vote in the accession-coverage rule and cannot form/evict a year-row.
     VOTE_FIELDS = [f for f in series if f not in VOTE_EXCLUDED_FIELDS]
+    # INVESTING CLOSURE (capex): proven values for years no FIELD_SPECS mechanism filled. Applied in the
+    # row loop below, never through series/raws, so they cannot vote or move another cell.
+    closure = (resolve_capex_by_closure(facts, set(series.get("capex", {})))
+               if FIELD_SPECS["capex"].get("INVESTING_CLOSURE") else {})
 
     # WINDOW ANCHOR. A row survives only if it has revenue or total_assets, but the MAX_YEARS
     # truncation runs BEFORE that gate — so a field whose coverage runs past revenue's (an IFRS
@@ -1025,6 +1317,11 @@ def extract_history(facts, ticker=None):
                             # fifth state, layered over base: value came from the chosen accession.
                             overrides.setdefault(str(y), {})[f] = chosen
             row[f] = v
+        hit = closure.get(y, {}).get(chosen) if chosen is not None else None
+        if hit is not None and row.get("capex") is None and _near_ref(hit[2]):
+            row["capex"] = hit[0]
+            prov_of["capex"][y] = "closure_sum"
+            tag_of["capex"][y] = hit[1]
         # Require at least a revenue or assets figure for the year to count
         if row.get("revenue") is None and row.get("total_assets") is None:
             continue
@@ -1037,7 +1334,7 @@ def extract_history(facts, ticker=None):
 
 
 PROV_STATE_CODE = {"primary": "p", "backfill": "b",
-                   "component_sum": "s", "lone_depreciation": "l"}
+                   "component_sum": "s", "lone_depreciation": "l", "closure_sum": "c"}
 PROV_DERIVED_FIELDS = ("fcf",)   # computed row field, no filed tag -> no provenance
 
 
@@ -1124,7 +1421,7 @@ def encode_provenance(history_out, prov_by_ticker):
                     "overrides[T][year][field] = accn_index (effective state 'o'). "
                     "period_end[T][year] = bin end date."),
         "_states": {"p": "primary", "b": "backfill", "s": "component_sum",
-                    "l": "lone_depreciation", "o": "accession_override"},
+                    "l": "lone_depreciation", "c": "closure_sum", "o": "accession_override"},
         "_tags": inv_tags,
         "_accns": inv_accns,
         "runs": runs,
