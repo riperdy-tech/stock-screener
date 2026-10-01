@@ -153,6 +153,37 @@ export function gateReasonsText(reasons?: string[] | null): string {
     return (reasons ?? []).map(gateReasonLabel).join(' · ');
 }
 
+/** Door codes in display order, with the short chip label and the plain-English help sentence. */
+export const DOOR_LABEL: Record<string, string> = {
+    DOOR_1_COMPOUNDER: 'COMPOUNDER',
+    DOOR_2_VALUE_GAP: 'VALUE GAP',
+    DOOR_3_TREND_LEADER: 'TREND LEADER',
+    DOUBLE_DOOR_CHAMPION: 'CHAMPION',
+    GLOBAL_WILDCARD: 'WILDCARD',
+    HYSTERESIS_RETAINED: 'HELD OVER',
+};
+
+export const DOOR_HELP: Record<string, string> = {
+    DOOR_1_COMPOUNDER: 'High quality with rising momentum and estimates',
+    DOOR_2_VALUE_GAP: 'Cheap against its own demonstrated growth',
+    DOOR_3_TREND_LEADER: 'A strong, steady, profitable uptrend',
+    DOUBLE_DOOR_CHAMPION: 'Top 10% through both the compounder and value-gap doors',
+    GLOBAL_WILDCARD: "Won a place outside its sector's quota on overall strength",
+    HYSTERESIS_RETAINED: 'Already on the list; stays until it falls clearly out',
+};
+
+const DOOR_ORDER = Object.keys(DOOR_LABEL);
+
+/** One door code as chip text; unknown codes show lower-cased with `_` as spaces. */
+export const doorLabel = (code: string): string => DOOR_LABEL[code] ?? code.toLowerCase().replace(/_/g, ' ');
+
+/** The row's door codes in display order; unknown codes follow, in their original order. */
+export function orderedDoors(doors: string[] | null | undefined): string[] {
+    const list = doors ?? [];
+    const known = DOOR_ORDER.filter((c) => list.includes(c));
+    return [...known, ...list.filter((c) => !DOOR_ORDER.includes(c))];
+}
+
 /** Quant-screen flags that are warnings on the name (never a gate). */
 export const FORENSIC_WARNINGS: Record<string, string> = {
     insolvency_distress_altman_z: 'Altman Z distress (warning only)',

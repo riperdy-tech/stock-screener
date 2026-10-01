@@ -273,6 +273,18 @@ export interface FactorEntry {
     fct_flags?: string[] | null;
     fct_flag_detail?: Record<string, any> | null;
     fct_nominated_doors?: string[] | null;
+    /** Price-trend facts the screen read; `mom_6m` and `pct_from_52w_high` are fractions (0.90 = +90%). */
+    fct_momentum_state?: {
+        mom_6m?: number | null;
+        pct_from_52w_high?: number | null;
+        above_200dma?: boolean | null;
+        regime_shift_down?: boolean | null;
+        price_asof?: string | null;
+    } | null;
+    door1_pillars_used?: string[] | null;
+    door2_pillars_used?: string[] | null;
+    discount_rate_pct?: number | null;
+    mid_cycle_window_years?: number | null;
     // Stage-5 RS2 LLM overlay (written by score_factors.apply_llm_overlay; absent until verdicts exist)
     fct_band_llm?: string | null;     // LLM-overlay parallel band (additive; quant band stays in fct_band)
     fct_llm?: string | null;          // 'promoted' | 'demoted' | 'none'
@@ -291,9 +303,23 @@ export interface FactorEntry {
     } | null;
 }
 
+export interface BandTransitions {
+    entered_rn: string[];
+    left_rn: string[];
+    entered_book: string[];
+    left_book: string[];
+    retained_by_hysteresis: string[];
+}
+
 export interface FactorScoresPayload {
     generated_at: string;
     engine: string;
+    band_transitions?: BandTransitions | null;
+    sector_quota_source?: string | null;
+    discount_rate_source?: string | null;
+    discount_rate_reason?: string | null;
+    discount_rate_asof?: string | null;
+    door2_momentum_floor?: number | null;
     scored_count: number;
     band_counts: Record<string, number>;
     veto_counts: Record<string, number>;

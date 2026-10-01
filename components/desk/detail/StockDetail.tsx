@@ -14,13 +14,14 @@ import { Rs2AnalysisPanel } from '@/components/Rs2AnalysisPanel';
 import { fetchDepthReport, type DepthReportBundle, type DepthVerdict } from '@/lib/data-service';
 import { headlineFromSamples } from '@/lib/desk/thesis';
 import {
-    DATA_NOTES, FORENSIC_WARNINGS, TONE_COLORS, gapColor, gateReasonsText, isBlocked, sizeTone, verdictTone,
+    DATA_NOTES, DOOR_HELP, FORENSIC_WARNINGS, TONE_COLORS, gapColor, gateReasonsText, isBlocked, orderedDoors, sizeTone, verdictTone,
 } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import { buildRows, type DeskRow } from '@/lib/desk/rankings';
 import { useDeskData } from '@/lib/desk/useDeskData';
 import { Shell } from '../Shell';
 import { useLanguage } from '@/components/LanguageContext';
+import { DoorChip, MovedChip } from '../rankings/cells';
 
 // The keys the dual-door screen writes into `fct_z`.
 const FACTORS: [string, string, string][] = [
@@ -526,10 +527,37 @@ function zToPercentile(z: number): number {
     return Math.round(cdf * 100);
 }
 
+const BAND_NAME: Record<string, string> = {
+    research_now: 'Research now', watchlist: 'Watchlist', monitor: 'Monitor', pass: 'Pass',
+};
+
+const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+
+/** The trend facts the screen read, each piece skipped when the data does not carry it. */
+function momentumFacts(m: NonNullable<DeskRow['fct']['fct_momentum_state']>): string | null {
+    const bits: string[] = [];
+    if (isNum(m.mom_6m)) bits.push(`6-month return ${fmtSignedPct(m.mom_6m * 100)}`);
+    if (isNum(m.pct_from_52w_high)) {
+        bits.push(m.pct_from_52w_high === 0
+            ? 'at its 52-week high'
+            : `${Math.abs(m.pct_from_52w_high * 100).toFixed(1)}% below its 52-week high`);
+    }
+    if (typeof m.above_200dma === 'boolean') bits.push(`${m.above_200dma ? 'above' : 'below'} its 200-day average`);
+    if (m.regime_shift_down === true) bits.push('trend broke down');
+    return bits.length ? bits.join(' · ') : null;
+}
+
 function QuantFilterPanel({ row }: { row: DeskRow }) {
     const { t } = useLanguage();
     const f = row.fct;
     const z = f.fct_z ?? {};
+    const doors = orderedDoors(f.fct_nominated_doors);
+    // A depth-only row carries a placeholder band (no rank, no composite): it is not in today's screen.
+    const inScreen = f.fct_rank != null || f.fct_composite != null;
+    const bandName = !inScreen ? 'Not in the current screen'
+        : f.fct_band ? (BAND_NAME[f.fct_band] ?? f.fct_band.replace(/_/g, ' ')) : null;
+    const mom = f.fct_momentum_state ? momentumFacts(f.fct_momentum_state) : null;
+    const priceAsof = f.fct_momentum_state?.price_asof;
     
     // Only show factors that have active calculations
     const activeFactors = FACTORS.filter(([key]) => z[key] != null);
@@ -537,15 +565,44 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
     return (
         <div className="border-t border-rule-14 pt-5">
             <div className="flex items-baseline justify-between gap-4">
-                <Micro>QUANT FILTER · WHY IT REACHED THE AI&apos;S DESK</Micro>
+                <Micro>WHY IT IS ON THE LIST</Micro>
                 <span className="font-mono text-[11.5px] text-ink">
                     <b>{f.fct_composite != null ? f.fct_composite.toFixed(1) : '—'}</b>
                     {f.fct_rank ? (
                         <span className="text-ink-3"> · rank #{f.fct_rank}</span>
                     ) : (
-                        <span className="text-pos font-semibold"> · Gate Passed</span>
+                        <span className="text-ink-3"> · not ranked</span>
                     )}
                 </span>
+            </div>
+
+            <div className="mt-3 space-y-2">
+                {doors.length > 0 && (
+                    <div className="space-y-1.5">
+                        {doors.map((code) => (
+                            <div key={code} className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                                <DoorChip code={code} />
+                                {DOOR_HELP[code] && <span className="text-[11px] text-ink-3">{DOOR_HELP[code]}</span>}
+                            </div>
+                        ))}
+                    </div>
+                )}
+                {(bandName || row.moved) && (
+                    <div className="flex flex-wrap items-center gap-2 font-mono text-[11.5px] text-ink">
+                        {bandName && (
+                            <span>{bandName}{f.fct_rank != null ? ` · rank #${f.fct_rank}` : ''}</span>
+                        )}
+                        <MovedChip moved={row.moved} />
+                    </div>
+                )}
+                {mom && <p className="text-[11.5px] text-ink-2">{mom}</p>}
+                {priceAsof && <p className="text-[11px] text-ink-3">prices as of {priceAsof}</p>}
+                {isNum(f.mid_cycle_window_years) && (
+                    <p className="text-[11.5px] text-ink-2">Cash flow averaged over the last {f.mid_cycle_window_years} years (cyclical business)</p>
+                )}
+                {isNum(f.discount_rate_pct) && (
+                    <p className="text-[11.5px] text-ink-2">Discount rate {f.discount_rate_pct}%</p>
+                )}
             </div>
 
             <div className="mt-3.5 space-y-2.5">
@@ -664,6 +721,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 promo: 'promoted',
                 vetoed: false,
                 vetoReason: null,
+                moved: null,
                 conviction: d.conviction_score ?? sc?.median_conviction_score ?? null,
                 moat: d.business_quality_moat ?? sc?.median_quality_moat ?? null,
                 kelly: d.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct ?? null,

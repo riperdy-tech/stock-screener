@@ -7,7 +7,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Micro, SectionHead } from '../primitives';
-import { FactorMix, McapCell, PriceCell, StockCell } from './cells';
+import { DoorChips, FactorMix, McapCell, PriceCell, StockCell } from './cells';
 import { isBlocked, sizeTone, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import type { DeskRow } from '@/lib/desk/rankings';
@@ -114,6 +114,7 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                                 {r.fct.fct_composite != null ? r.fct.fct_composite.toFixed(1) : '—'}
                             </span>
                         </div>
+                        <DoorChips row={r} />
                         <div className="mt-2"><FactorMix contributions={r.fct.fct_contributions} width={160} /></div>
                         <div className="mt-2 flex items-baseline justify-between gap-3">
                             <BandChip row={r} />

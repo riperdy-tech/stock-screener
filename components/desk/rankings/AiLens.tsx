@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { Micro, SectionHead } from '../primitives';
 import {
     BandStrip, McapCell, MedianGapCell, PriceCell, PromoLine,
-    QuantFilterCell, SpreadSizeCell, StockCell, VerdictCell,
+    QuantFilterCell, SpreadSizeCell, StockCell, VerdictCell, DoorChips,
     MoatConvictionCell, HalfKellyCell, TriadCell, DeliberationCell,
 } from './cells';
 import { isBlocked, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
@@ -101,6 +101,7 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
                     </span>
                 </div>
             )}
+            <DoorChips row={row} />
 
             <div className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
                 <span className="text-[12px] font-extrabold" style={{ color: blocked ? TONE_COLORS.MUTED : tone.color }}>

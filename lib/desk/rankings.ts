@@ -4,9 +4,13 @@
 // depth (band-direction) verdict when one exists, the reverse-DCF model, and the
 // overlay signals. The lenses only choose ordering and which columns to show.
 
-import type { DepthVerdict, FactorEntry, ValuationModel } from '@/lib/data-service';
+import type { BandTransitions, DepthVerdict, FactorEntry, ValuationModel } from '@/lib/data-service';
 import type { StockInfo } from './useDeskData';
 import { FORENSIC_WARNINGS, isBlocked } from './tone';
+
+export type BandMove = 'entered_rn' | 'left_rn' | 'entered_book' | 'left_book';
+
+const BAND_MOVES: BandMove[] = ['entered_rn', 'left_rn', 'entered_book', 'left_book'];
 
 export interface DeskRow {
     ticker: string;
@@ -27,6 +31,8 @@ export interface DeskRow {
     promo: 'promoted' | 'demoted' | 'none';
     vetoed: boolean;
     vetoReason: string | null;
+    /** Where the name moved between bands in the latest screen run (first match), or null. */
+    moved: BandMove | null;
     /** Institutional Underwriting Contract metrics */
     conviction?: number | null;
     moat?: number | null;
@@ -47,7 +53,7 @@ export interface RankingFilters {
 export const EMPTY_FILTERS: RankingFilters = { search: '', band: 'all', verdict: 'all', sector: 'all', industry: 'all' };
 
 export interface RankingsInput {
-    factor: { tickers: Record<string, FactorEntry> } | null;
+    factor: { tickers: Record<string, FactorEntry>; band_transitions?: BandTransitions | null } | null;
     depth: Record<string, DepthVerdict>;
     valuations: Record<string, ValuationModel>;
     overlay: Record<string, any>;
@@ -83,6 +89,9 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
     const depthTickers = new Set(Object.keys(depth || {}));
     const includedTickers = new Set<string>();
     const rows: DeskRow[] = [];
+    const transitions = factor.band_transitions ?? null;
+    const movedOf = (ticker: string): BandMove | null =>
+        BAND_MOVES.find((k) => transitions?.[k]?.includes(ticker)) ?? null;
 
     // 1. Process factor tickers that have a valid rank OR have an active depth report
     for (const [ticker, fct] of Object.entries(factor.tickers)) {
@@ -107,6 +116,7 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
             promo: 'none',
             vetoed: !!(fct.fct_veto || (fct as any).fct_llm_veto),
             vetoReason: (fct.fct_veto_detail as string) || (fct.fct_veto as string) || null,
+            moved: movedOf(ticker),
             conviction: d?.conviction_score ?? sc?.median_conviction_score ?? null,
             moat: d?.business_quality_moat ?? sc?.median_quality_moat ?? null,
             kelly: d?.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct ?? null,
@@ -142,6 +152,7 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
             promo: 'promoted',
             vetoed: false,
             vetoReason: null,
+            moved: movedOf(ticker),
             conviction: d?.conviction_score ?? sc?.median_conviction_score ?? null,
             moat: d?.business_quality_moat ?? sc?.median_quality_moat ?? null,
             kelly: d?.kelly_fraction_pct ?? sc?.median_kelly_fraction_pct ?? null,
