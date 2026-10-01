@@ -3,8 +3,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // /help — the Stockpeak handbook
 //
-// A dedicated, extensive "bible" that explains everything this site does:
-// how the pipeline works, how every number is computed, what every column
+// A dedicated guide that explains what this site does: how the daily pipeline
+// works, how the screen and the AI analyst reach a verdict, what every label
 // means, and what the system is deliberately NOT doing.
 //
 // Every financial/technical word rendered with <Term> is a hyperlink: click it
@@ -28,7 +28,7 @@ import { APP_VERSION } from '@/lib/changelog';
 import { Section, SubHeading, Callout } from './help-ui';
 import { KoreanHelpBody } from './content-ko';
 import { ChineseHelpBody } from './content-zh';
-import { PipelineDiagram, AiAnalysisFlow } from './WorkflowDiagram';
+import { PipelineDiagram } from './WorkflowDiagram';
 
 type Lang = 'en' | 'ko' | 'zh';
 
@@ -45,29 +45,28 @@ const NAV_GROUPS: NavGroup[] = [
         ],
     },
     {
-        id: 'engine', en: 'The engine', ko: '엔진', zh: '引擎',
+        id: 'engine', en: 'The system', ko: '시스템', zh: '系統',
         items: [
-            { id: 'leaderboard', en: 'Reading the leaderboard', ko: '리더보드 읽는 법', zh: '閱讀排行榜' },
-            { id: 'factors', en: 'The five factors', ko: '다섯 가지 팩터', zh: '五個因子' },
-            { id: 'bands', en: 'Bands, vetoes & haircuts', ko: '등급·베토·할인', zh: '等級·否決·折價' },
-            { id: 'dcf', en: 'The expectations gap', ko: '기대치 격차', zh: '預期落差' },
-            { id: 'lens', en: 'The Lens: quant vs RS2', ko: '렌즈: 퀀트 vs RS2', zh: '鏡頭：量化 vs RS2' },
-            { id: 'rs2', en: 'RS2: the AI second opinion', ko: 'RS2: AI 2차 소견', zh: 'RS2：AI 第二意見' },
+            { id: 'desk', en: 'Reading the desk', ko: '데스크 읽는 법', zh: '如何閱讀研究台' },
+            { id: 'screen', en: 'The quant screen', ko: '퀀트 스크린', zh: '量化篩選' },
+            { id: 'bands', en: 'Bands, vetoes & warnings', ko: '등급, 베토, 경고', zh: '等級、否決與警告' },
+            { id: 'analyst', en: 'The AI analyst', ko: 'AI 애널리스트', zh: 'AI 分析師' },
+            { id: 'gate', en: 'The gate', ko: '게이트', zh: '閘門' },
+            { id: 'relaunch', en: 'What changes at relaunch', ko: '재가동 때 달라지는 것', zh: '重新上線後的變化' },
+            { id: 'macro', en: 'The macro engine', ko: '매크로 엔진', zh: '總體引擎' },
         ],
     },
     {
         id: 'using', en: 'Using the tool', ko: '도구 사용법', zh: '使用工具',
         items: [
             { id: 'track', en: 'Track Record', ko: '트랙 레코드', zh: '績效紀錄' },
-            { id: 'portfolio', en: 'Portfolio & sizing', ko: '포트폴리오·크기', zh: '投資組合·規模' },
-            { id: 'overlays', en: 'Overlay chips & forensics', ko: '오버레이·포렌식', zh: '覆蓋·財報鑑識' },
-            { id: 'themes', en: 'Themes: context, not factors', ko: '테마: 맥락뿐', zh: '主題：只是脈絡' },
+            { id: 'portfolio', en: 'My Portfolio', ko: '내 포트폴리오', zh: '我的投資組合' },
+            { id: 'lenses', en: 'Legacy lenses', ko: '레거시 렌즈', zh: '舊版鏡頭' },
         ],
     },
     {
         id: 'deep', en: 'Deep dive', ko: '심화', zh: '深入',
         items: [
-            { id: 'methodology', en: 'Methodology', ko: '실무자용 방법론', zh: '方法論' },
             { id: 'validation', en: 'How it is validated', ko: '시스템 검증', zh: '如何驗證' },
             { id: 'data', en: 'Where the data comes from', ko: '데이터 출처', zh: '資料來源' },
         ],
@@ -106,129 +105,73 @@ const FAQ_ITEMS: FAQItem[] = [
         q: { en: 'Is this financial advice?', ko: '이것은 재정적 조언인가요?', zh: '這是投資建議嗎？' },
         a: {
             en: 'No. It is a research shortlist with the evidence laid out. Nothing here buys or sells anything, and nothing here is financial advice.',
-            ko: '아니요. 근거를 보여주는 리서치 후보 명단입니다. 여기서는 아무것도 사고팔지 않으며, 어떤 것도 재정적 조언이 아닙니다.',
-            zh: '不是。這是一份攤開證據的研究候選名單。這裡不會買賣任何東西，這裡也不是投資建議。',
+            ko: '아닙니다. 근거를 펼쳐 놓은 리서치 후보 명단입니다. 여기서는 아무것도 사고팔지 않으며, 어떤 것도 재정적 조언이 아닙니다.',
+            zh: '不是。這是攤開證據的研究候選名單。這裡不會買賣任何東西，這裡的任何內容也都不是投資建議。',
         },
     },
     {
-        q: { en: 'Does the site execute trades?', ko: '이 사이트는 실제 매매를 하나요?', zh: '這個網站會實際交易嗎？' },
+        q: { en: 'Does the site execute trades?', ko: '사이트가 거래를 실행하나요?', zh: '這個網站會執行交易嗎？' },
         a: {
-            en: 'Never. Even the paper portfolios are simulated — but honestly, with real prices and real transaction costs.',
-            ko: '절대 아닙니다. 페이퍼 포트폴리오조차 시뮬레이션일 뿐입니다. 다만 정직하게, 실제 가격과 실제 거래비용으로 시뮬레이션됩니다.',
-            zh: '絕對不會。即使是紙上投資組合也只是模擬——但誠實地，以真實價格與真實交易成本模擬。',
+            en: 'Never. The site places no trades. Even the paper books are simulated — but honestly, with real prices and real transaction costs.',
+            ko: '절대 하지 않습니다. 이 사이트는 거래를 하지 않습니다. 페이퍼 북조차 시뮬레이션이지만, 정직하게 실제 가격과 실제 거래비용으로 합니다.',
+            zh: '絕不會。本站不下任何交易單。即使是紙上帳本也是模擬——但誠實地以真實價格與真實交易成本進行。',
         },
     },
     {
-        q: { en: 'Why is the composite ranked by five factors, not more?', ko: '왜 팩터가 다섯 개뿐인가요?', zh: '為什麼綜合評分只用五個因子，不多不少？' },
+        q: { en: 'Why does the AI section show no picks?', ko: 'AI 섹션에 추천 종목이 없는 이유는 무엇인가요?', zh: 'AI 區段為什麼沒有選股？' },
         a: {
-            en: <>Five robust, historically documented factors, equal-weighted on purpose. Adding more tuned factors invites <Term term="overfitting" />, which loses to simple 1/N out of sample.</>,
-            ko: <>견고하고 역사적으로 입증된 다섯 팩터를 의도적으로 동일 가중합니다. 손을 더 많이 댄 팩터는 <Term term="overfitting" />을 불러오며, 이는 표본 외에서 단순 1/N에 집니다.</>,
-            zh: <>五個穩健、有歷史文獻佐證的因子，刻意等權重。加入更多調校過的因子只會招來 <Term term="overfitting" />，在樣本外輸給簡單的 1/N。</>,
+            en: <>The AI analyst is being rebuilt and tested, so there are no new verdicts yet. The verdicts still on record were made by the old analyst, which was ruled invalid, so they are shown as blocked — not as picks. See <Link href="#analyst" className="font-bold text-pos hover:underline">The AI analyst</Link>.</>,
+            ko: <>AI 애널리스트를 재구축하고 테스트하는 중이라 아직 새로운 판단이 없습니다. 기록에 남아 있는 판단은 무효 판정을 받은 옛 애널리스트가 만든 것이어서, 추천 종목이 아니라 막힘으로 표시됩니다. <Link href="#analyst" className="font-bold text-pos hover:underline">AI 애널리스트</Link>를 참조하세요.</>,
+            zh: <>AI 分析師正在重建與測試，所以目前還沒有新的判決。紀錄中仍保留的判決是由已被裁定無效的舊分析師做出的，因此顯示為被擋下——而不是選股。請見<Link href="#analyst" className="font-bold text-pos hover:underline">AI 分析師</Link>。</>,
         },
     },
     {
-        q: { en: 'Why is the suggested plan often ~50% cash?', ko: '왜 추천 계획이 자주 약 50% 현금인가요?', zh: '為什麼建議計畫常保持約 50% 現金？' },
+        q: { en: 'Why are verdicts marked blocked?', ko: '판단이 막힘으로 표시되는 이유는 무엇인가요?', zh: '為什麼有些判決被標為被擋下？' },
         a: {
-            en: <>The value core only buys names with measurable <Term term="edge" /> — priced below demonstrated growth — and refuses to overpay. Cash is a feature: protection and dry powder.</>,
-            ko: <>밸류 코어는 측정 가능한 <Term term="edge" />이 있는 종목(입증된 성장보다 싼 종목)만 사고 과대평가를 거부합니다. 현금은 보호와 탄약이라는 특징입니다.</>,
-            zh: <>價值核心只買有可測量 <Term term="edge" /> 的股票——定價低於已證明成長——並拒絕為昂貴買單。現金是特色：保護與子彈。</>,
+            en: <>A verdict counts only if it passes the gate. Each blocked verdict carries its reasons in plain words, for example &ldquo;made by the old analyst&rdquo; or &ldquo;runs disagree too much&rdquo;. A blocked verdict stays visible as a record. See <Link href="#gate" className="font-bold text-pos hover:underline">The gate</Link>.</>,
+            ko: <>판단은 게이트를 통과해야만 유효합니다. 막힌 판단에는 각각 쉬운 말로 된 이유가 붙습니다. 예를 들어 &ldquo;옛 애널리스트가 만듦&rdquo;이나 &ldquo;실행 간 격차가 너무 큼&rdquo;입니다. 막힌 판단은 기록으로 계속 보입니다. <Link href="#gate" className="font-bold text-pos hover:underline">게이트</Link>를 참조하세요.</>,
+            zh: <>判決必須通過閘門才算數。每個被擋下的判決都附有白話寫出的原因，例如&ldquo;由舊分析師做出&rdquo;或&ldquo;各次執行分歧太大&rdquo;。被擋下的判決仍會作為紀錄保持可見。請見<Link href="#gate" className="font-bold text-pos hover:underline">閘門</Link>。</>,
         },
     },
     {
-        q: { en: 'What do the red chips mean?', ko: '레드칩은 무엇을 뜻하나요?', zh: '紅牌是什麼意思？' },
+        q: { en: 'Why are some sectors not tilted?', ko: '일부 섹터에 틸트가 없는 이유는 무엇인가요?', zh: '為什麼有些類股沒有被傾斜？' },
         a: {
-            en: <>A <Term term="veto" />: automatic disqualification regardless of score. The reason is written on the chip.</>,
-            ko: <><Term term="veto" />입니다. 점수와 무관한 자동 탈락이며 이유가 칩에 적혀 있습니다.</>,
-            zh: <><Term term="veto" />：無論分數都自動取消資格。原因寫在牌上。</>,
+            en: <>The macro engine could give extra shortlist places to sectors that suit the economy, but its sector picking has not proved itself. So the tilt is off, and every sector gets the same <Term term="sector-quota" />, until the engine earns the right.</>,
+            ko: <>매크로 엔진이 경제에 맞는 섹터에 후보 명단 자리를 더 줄 수 있지만, 그 섹터 선택은 아직 검증되지 않았습니다. 그래서 틸트는 꺼져 있고, 엔진이 자격을 증명할 때까지 모든 섹터가 같은 <Term term="sector-quota" />을 받습니다.</>,
+            zh: <>總體引擎可以把更多候選名單名額給適合當前經濟的類股，但它的選類股能力尚未證明自己。所以傾斜被關閉，每個類股都得到相同的<Term term="sector-quota" />，直到引擎證明自己為止。</>,
         },
     },
     {
-        q: { en: 'Why do quant and RS2 disagree?', ko: '왜 퀀트와 RS2가 다른가요?', zh: '為什麼量化引擎和 RS2 會意見不同？' },
+        q: { en: 'Why does a stock stay on the shortlist after its rank slips?', ko: '순위가 밀린 뒤에도 종목이 후보 명단에 남는 이유는 무엇인가요?', zh: '為什麼股票排名下滑後仍留在候選名單上？' },
         a: {
-            en: 'One is pure math over financial statements; the other reads filings with judgment. When they strongly disagree, one of them is wrong — those are the interesting rows. Use the Compare lens.',
-            ko: '하나는 재무제표에 대한 순수 수학이고, 다른 하나는 판단으로 서류를 읽습니다. 강하게 다를 때는 둘 중 하나가 틀린 것입니다. 그런 행이 흥미로운 행입니다. 비교(Compare) 렌즈를 쓰세요.',
-            zh: '一個是對財務報表的純數學，另一個是以判斷閱讀申報文件。當它們強烈分歧時，其中一方是錯的——那些列最有趣。請用比較（Compare）鏡頭。',
+            en: <>That is <Term term="hysteresis" />. A name already on the shortlist stays until it falls clearly out — rank 60 for Research now, rank 150 for the watchlist — so stocks on the cut line do not flicker in and out.</>,
+            ko: <>그것이 <Term term="hysteresis" />입니다. 이미 후보 명단에 있는 종목은 뚜렷하게 밀려날 때까지 남습니다. 지금은 Research Now는 60위, 워치리스트는 150위입니다. 그래서 컷 경계에 있는 종목이 들락날락하지 않습니다.</>,
+            zh: <>這就是<Term term="hysteresis" />。已在候選名單上的名稱，要明顯掉出才會被移除——Research now 現在是第 60 名，觀察清單是第 150 名——所以卡在切線上的股票不會進進出出。</>,
         },
     },
     {
-        q: { en: 'How can I trust the track record?', ko: '트랙 레코드를 어떻게 신뢰하나요?', zh: '績效紀錄為何可信？' },
+        q: { en: 'What do the red chips mean?', ko: '빨간 칩은 무슨 뜻인가요?', zh: '紅色標籤是什麼意思？' },
         a: {
-            en: <>It is forward-logged (<Term term="point-in-time" />), append-only, cannot be edited, includes <Term term="transaction-costs" />, and measures against real benchmarks including delisted names.</>,
-            ko: <>전방 기록(<Term term="point-in-time" />), 추가 전용이며 편집할 수 없고, <Term term="transaction-costs" />을 포함하며, 상장폐지 종목을 포함한 실제 벤치마크와 비교합니다.</>,
-            zh: <>它是前瞻記錄（<Term term="point-in-time" />）、只能附加、無法編輯、包含 <Term term="transaction-costs" />，並與包含已下市股票的實際基準比較。</>,
+            en: <>A <Term term="veto" />: a safety filter removed the stock, whatever else looks good about it. The reason is written on the chip.</>,
+            ko: <><Term term="veto" />입니다. 다른 점이 아무리 좋아 보여도 안전 필터가 그 종목을 제거했다는 뜻입니다. 이유가 칩에 적혀 있습니다.</>,
+            zh: <><Term term="veto" />：不論這檔股票其他方面看起來多好，安全過濾器都把它剔除了。原因寫在標籤上。</>,
         },
     },
-];
-
-const FACTOR_ITEMS = [
     {
-        key: 'value',
-        color: 'text-pos',
-        dot: 'bg-factor-value',
-        name: 'Value',
-        body: (
-            <>
-                Are you paying $1 for $2 of yearly cash earnings, or $2 for $1? Cheap beats expensive on
-                average over time. Measured as the average of four yields — <Term term="fcf-yield" />,
-                {' '}<Term term="owner-earnings" />, <Term term="ebit" />, and <Term term="earnings-yield" /> —
-                each against the stock&apos;s current price. See{' '}
-                <Link href="#methodology" className="font-bold text-pos hover:underline">the methodology</Link>.
-            </>
-        ),
+        q: { en: 'Why do the quant screen and the AI disagree?', ko: '퀀트 스크린과 AI의 판단이 엇갈리는 이유는 무엇인가요?', zh: '為什麼量化篩選和 AI 會意見不同？' },
+        a: {
+            en: 'One is pure math over financial statements and prices; the other is a researcher that reads filings with judgment. When they strongly disagree, one of them may be wrong — those are the interesting rows. Use the Compare lens.',
+            ko: '하나는 재무제표와 주가에 대한 순수한 수학이고, 다른 하나는 제출 서류를 판단력으로 읽는 리서처입니다. 둘이 크게 엇갈리면 한쪽이 틀렸을 수 있으며, 그런 행이 흥미로운 행입니다. Compare 렌즈를 쓰세요.',
+            zh: '一個是對財務報表與價格的純數學；另一個是帶著判斷閱讀申報文件的研究員。兩者強烈分歧時，其中一個可能是錯的——這些就是有趣的列。請使用 Compare 鏡頭。',
+        },
     },
     {
-        key: 'quality',
-        color: 'text-accent',
-        dot: 'bg-factor-quality',
-        name: 'Quality',
-        body: (
-            <>
-                Does the company make real money, consistently, with clean accounting? Combines{' '}
-                <Term term="revenue-quality" />, <Term term="gross-margin" /> stability across several years,
-                {' '}<Term term="accruals" /> (preferring cash-backed earnings), the <Term term="piotroski" />,
-                and <Term term="roic" />. A profitable business with honest books beats a story.
-            </>
-        ),
-    },
-    {
-        key: 'momentum',
-        color: 'text-warn',
-        dot: 'bg-factor-momentum',
-        name: 'Momentum',
-        body: (
-            <>
-                Has the stock been winning over the past year? Winners tend to keep winning for a while. Built
-                from the <Term term="skip-month" /> (the academic 12-month return skipping the last month) and{' '}
-                <Term term="high-proximity" />. See <Term term="reversal" /> for why the last month is skipped.
-            </>
-        ),
-    },
-    {
-        key: 'lowvol',
-        color: 'text-ink-2',
-        dot: 'bg-factor-lowvol',
-        name: 'Low volatility',
-        body: (
-            <>
-                Does the price move calmly or wildly? Calm stocks have historically delivered more return per
-                unit of pain. Measured as the negative of the standard deviation of monthly returns (at least 12
-                observations). The <Term term="annualized-volatility" /> is also exported for{' '}
-                <Term term="kelly" /> sizing.
-            </>
-        ),
-    },
-    {
-        key: 'revisions',
-        color: 'text-neg',
-        dot: 'bg-factor-revisions',
-        name: 'Revisions',
-        body: (
-            <>
-                Are the professional analysts who follow the company raising or cutting their forecasts? Direction
-                of change matters. Built from the normalized <Term term="eps-trajectory" /> slope and a structured
-                {' '}<Term term="estimates" /> score.
-            </>
-        ),
+        q: { en: 'How can I trust the track record?', ko: '트랙 레코드를 어떻게 믿을 수 있나요?', zh: '我怎麼能相信績效紀錄？' },
+        a: {
+            en: <>It is built forward, day by day (<Term term="point-in-time" />), with <Term term="transaction-costs" /> included and benchmarks measured on the same dates. It is still young, and the AI record restarts from zero when the new analyst goes live, so read it as an early scoreboard.</>,
+            ko: <>날마다 앞으로 쌓아 갑니다(<Term term="point-in-time" />). <Term term="transaction-costs" />를 포함하고, 벤치마크는 같은 날짜로 측정합니다. 아직 기록이 짧고, 새 애널리스트가 가동되면 AI 기록은 0에서 다시 시작하므로 초기 점수판으로 읽으세요.</>,
+            zh: <>它是逐日往前建立的（<Term term="point-in-time" />），包含<Term term="transaction-costs" />，且基準以相同日期衡量。它還很年輕，而且新分析師上線時 AI 紀錄會從零重新開始，所以請把它當作早期的計分板。</>,
+        },
     },
 ];
 
@@ -449,21 +392,27 @@ export default function HelpPage() {
                         <Section id="welcome" title="Welcome — what this site is (and is not)" icon={<FlaskConical className="h-5 w-5" />}>
                             <p>
                                 Every day, a computer reads the financial reports and price history of roughly{' '}
-                                <b>6,600 US stocks</b> and ranks them on one leaderboard. Top of the leaderboard = the most
-                                evidence in the stock&apos;s favor. That&apos;s it. This handbook walks through exactly how
-                                that evidence is assembled, what every number and chip on screen means, and what the system
-                                is deliberately <i>not</i> doing.
+                                <b>7,000 US-listed stocks</b> and narrows them to a shortlist of about <b>150</b>. A
+                                separate AI analyst can then study the shortlisted names in depth and say whether each price
+                                looks too low, about right, or too high. This handbook explains how each step works, what
+                                every label on the screen means, and what the system is deliberately <i>not</i> doing.
                             </p>
                             <Callout kind="warn">
                                 <b>Nothing here buys or sells anything, and nothing here is financial advice.</b> It is a
-                                research shortlist with the evidence laid out — a machine for narrowing 6,600 stocks down
-                                to a shortlist worth <i>your</i> research time. Trades are never executed, not even in the
-                                paper portfolios (they are simulated, honestly, with real prices and real costs).
+                                research shortlist with the evidence laid out — a machine for narrowing thousands of stocks
+                                down to a few worth <i>your</i> research time. The site places no trades. Even the paper books
+                                are simulated, honestly, with real prices and real costs.
+                            </Callout>
+                            <Callout kind="info">
+                                <b>Where things stand today:</b> the AI analyst is being rebuilt and tested. Until the new one
+                                passes its tests and goes live, the AI side of the desk shows no new picks. Verdicts from the
+                                old analyst are still on record, and they are shown as blocked, not as picks. See{' '}
+                                <Link href="#analyst" className="font-bold text-pos hover:underline">The AI analyst</Link>.
                             </Callout>
                             <p>
                                 If a word has a <span className="border-b border-dotted border-pos/40 font-semibold text-pos">dotted underline</span>,
-                                it is a <Term term="ticker" />-level technical term — click it to see what it means without
-                                leaving the page. A complete, searchable index of every term lives in the{' '}
+                                it is a technical term — click it to see what it means without leaving the page. A complete,
+                                searchable index of every term lives in the{' '}
                                 <Link href="#glossary" className="font-bold text-pos hover:underline">glossary section</Link>.
                             </p>
                         </Section>
@@ -471,220 +420,332 @@ export default function HelpPage() {
                         {/* Pipeline */}
                         <Section id="pipeline" title="What happens every day — the pipeline" icon={<BookMarked className="h-5 w-5" />}>
                             <p>
-                                Behind the page is an ordered chain of jobs, re-run automatically every day via{' '}
-                                <Term term="github-actions" />. An orchestrator enforces the order and checks data
-                                integrity so stale or partial data can never silently corrupt your rankings.
+                                Behind the page is an ordered chain of jobs that re-runs automatically on a schedule via{' '}
+                                <Term term="github-actions" />. The order is enforced and the data is checked at each step, so
+                                stale or partial data cannot quietly corrupt the shortlist. In plain words:
                             </p>
+                            <ol className="list-decimal space-y-2 pl-5">
+                                <li>
+                                    <b>Data comes in.</b> Company filings from the SEC, prices and analyst forecasts from
+                                    Yahoo Finance, and economic series from <Term term="fred" /> (the Federal Reserve&apos;s
+                                    data service).
+                                </li>
+                                <li>
+                                    <b>Safety filters (&ldquo;Tier-1 hygiene&rdquo;).</b> Stocks nobody could sensibly buy are
+                                    removed: names that cannot be traded, companies that are tiny (under $300 million) or
+                                    priced under $3 a share, thinly traded stocks, shell companies, companies with no usable
+                                    filed fundamentals, companies with chronic losses and heavy debt, and smaller companies
+                                    with strong signs of accounting manipulation. About 3,000 stocks are left to be scored.
+                                </li>
+                                <li>
+                                    <b>The dual-door screen.</b> Each remaining stock is scored through three{' '}
+                                    <Term term="door" />s — compounder, value gap and trend leader — and the best cases go on
+                                    the shortlist.
+                                </li>
+                                <li>
+                                    <b>Bands.</b> The shortlist is split into Research now and Watchlist. Everything else is
+                                    Pass, or Vetoed if a safety filter removed it.
+                                </li>
+                                <li>
+                                    <b>The AI analyst (when it is running).</b> It studies shortlisted names in depth and gives
+                                    each a verdict. It runs on a local computer, not in the cloud.
+                                </li>
+                                <li>
+                                    <b>The gate.</b> A verdict counts only if it passes the gate&apos;s rules. The ones that
+                                    fail stay visible, marked as blocked, with the reasons.
+                                </li>
+                                <li><b>Publish.</b> Verdicts and reports are published to this site.</li>
+                                <li>
+                                    <b>Paper books.</b> Three simulated portfolios follow the shortlist, the AI verdicts and your
+                                    own holdings, every day.
+                                </li>
+                                <li>
+                                    <b>Grading.</b> Each verdict is later checked against what the price actually did.
+                                </li>
+                            </ol>
                             <PipelineDiagram />
-                            <AiAnalysisFlow />
                             <p>
                                 Everything is <Term term="point-in-time" />: each logged signal uses only information that
                                 existed at that moment. That discipline is what makes the track record trustworthy.
                             </p>
                         </Section>
 
-                        {/* Leaderboard */}
-                        <Section id="leaderboard" title="Reading the leaderboard — the Rankings tab" icon={<BookOpen className="h-5 w-5" />}>
+                        {/* Desk */}
+                        <Section id="desk" title="Reading the desk — the three lenses" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
-                                The Rankings tab is a table of the whole universe, ranked by one number: the{' '}
-                                <Term term="composite" />. Here is what every column means.
+                                The desk is the main page. At the top is one switch that decides whose view you see:
                             </p>
                             <ul className="list-disc space-y-2 pl-5">
                                 <li>
-                                    <b>Rank</b> — today&apos;s position on the leaderboard of ~6,600 scored US stocks. #1 has
-                                    the strongest overall evidence right now.
+                                    <b>AI</b> — the AI analyst&apos;s verdicts, sorted into the sections below.
                                 </li>
                                 <li>
-                                    <b>Composite</b> — the one number everything is ranked by (0–100). It blends the five
-                                    factor scores, each measured against the stock&apos;s own <Term term="sector-neutral" />{' '}
-                                    comparison group, then applies safety <Term term="haircut" />s. Higher = more evidence in
-                                    the stock&apos;s favor.
+                                    <b>Quant</b> — the screen&apos;s own ranking: pure math over financial statements and prices,
+                                    with no AI involved.
                                 </li>
                                 <li>
-                                    <b>Factor mix</b> — what is driving the score. A contribution bar shows the share of each
-                                    factor: green = value, blue = quality, amber = momentum, violet = low volatility, pink =
-                                    revisions. Longer segment = bigger contribution.
-                                </li>
-                                <li>
-                                    <b>Band</b> — what the rank means in practice (<Term term="research-now" />,{' '}
-                                    <Term term="watchlist" />, <Term term="monitor" />, <Term term="pass" />). A red chip means
-                                    the stock is <Term term="veto" />ed outright — the reason is written on the chip.
-                                </li>
-                                <li>
-                                    <b>Market cap</b> — <Term term="market-cap" />, the price of the whole company
-                                    (share price × shares).
-                                </li>
-                                <li>
-                                    <b>RS2 rank / stance / conviction / action</b> — the independent AI read. See the{' '}
-                                    <Link href="#rs2" className="font-bold text-pos hover:underline">RS2 section</Link>.
-                                </li>
-                                <li>
-                                    <b>Δ pctl</b> — how much the quant engine and the AI disagree, in percentile points.
-                                    Big gaps are the interesting rows: one of them is wrong.
-                                </li>
-                                <li>
-                                    <b>DCF gap</b> — the <Term term="expectations-gap" />: the growth the price requires vs
-                                    the growth the company has actually delivered. See the{' '}
-                                    <Link href="#dcf" className="font-bold text-pos hover:underline">DCF section</Link>.
+                                    <b>Compare</b> — both side by side, so you can see where they disagree. When they disagree
+                                    strongly, one of them may be wrong, and those rows are the interesting ones.
                                 </li>
                             </ul>
-                            <Callout kind="info">
-                                Click any row for the per-stock detail: the full factor profile, the reverse-DCF read (the
-                                growth the price implies vs what the company has demonstrated), and the RS2 local-LLM
-                                research and verdict.
-                            </Callout>
+                            <SubHeading>The sections of the AI lens</SubHeading>
+                            <ul className="list-disc space-y-2 pl-5">
+                                <li>
+                                    <b>Research now</b> — names whose verdict is <i>undervalued</i> and that are not blocked
+                                    (see <Link href="#gate" className="font-bold text-pos hover:underline">the gate</Link>).
+                                </li>
+                                <li>
+                                    <b>Watchlist</b> — names whose verdict is <i>fair</i> or <i>overvalued</i> and that are not
+                                    blocked.
+                                </li>
+                                <li>
+                                    <b>Blocked by the gate</b> — verdicts on record that fail the rules. They are shown as a
+                                    record, with the reasons, and are never shown as picks.
+                                </li>
+                                <li>
+                                    <b>Awaiting</b> — shortlisted names the analyst has not studied yet.
+                                </li>
+                                <li>
+                                    <b>Vetoed</b> — names removed by a safety filter, and rows where the analyst produced no
+                                    usable verdict (<Term term="not-usable" />).
+                                </li>
+                            </ul>
+                            <SubHeading>The value band strip</SubHeading>
+                            <p>
+                                Next to a verdict you will see a thin strip. The <b>shaded band</b> is the range of values from
+                                the analyst&apos;s runs, the <b>tick</b> is the median (the middle value), and the{' '}
+                                <b>white line</b> is today&apos;s price. If the line sits left of the band, the price is below
+                                every run&apos;s value; inside the band, it is within the range; right of it, above every run.
+                                That is the whole verdict. See <Term term="iv-band" />.
+                            </p>
                         </Section>
 
-                        {/* Factors */}
-                        <Section id="factors" title="The five factors — the ingredients of a score" icon={<BookOpen className="h-5 w-5" />}>
+                        {/* Screen */}
+                        <Section id="screen" title="The quant screen — three doors" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
-                                Each stock is graded on five traits that have historically predicted returns. Crucially,
-                                every grade is <Term term="sector-neutral" /> — a supermarket competes with supermarkets, not
-                                with software companies. Otherwise &ldquo;high momentum&rdquo; would just mean &ldquo;is a
-                                tech stock.&rdquo;
+                                The screen does not blend everything into one score. A company can deserve attention by being
+                                excellent, by being mispriced, or by being in a strong, steady uptrend — and averaging those into
+                                one number describes none of them well. So there are three <Term term="door" />s. A stock needs
+                                to clear only one.
                             </p>
                             <div className="space-y-3">
-                                {FACTOR_ITEMS.map(f => (
-                                    <div key={f.key} className="border border-rule-10 bg-white/5 p-3">
-                                        <p className="flex items-center gap-2 text-sm font-extrabold">
-                                            <span className={`h-2.5 w-2.5  ${f.dot}`} />
-                                            <span className={f.color}>{f.name}</span>
-                                        </p>
-                                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">{f.body}</p>
-                                    </div>
-                                ))}
+                                <div className="border border-rule-10 bg-white/5 p-3">
+                                    <p className="text-sm font-extrabold text-pos">Door 1 — compounder</p>
+                                    <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
+                                        Companies that earn real money, keep growing, are rising in price and are having their
+                                        forecasts raised. It blends <Term term="quality" />, <Term term="momentum" /> and{' '}
+                                        <Term term="revisions" />, with quality counting most.
+                                    </p>
+                                </div>
+                                <div className="border border-rule-10 bg-white/5 p-3">
+                                    <p className="text-sm font-extrabold text-accent">Door 2 — value gap</p>
+                                    <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
+                                        Companies that look cheap against their own demonstrated growth: the price asks for less
+                                        growth than the company has actually delivered (the <Term term="expectations-gap" />),
+                                        and the stock is cheap on its <Term term="value" />. A <b>falling-knife floor</b> keeps
+                                        out names in steep decline, because cheap and still falling is not a bargain yet.
+                                    </p>
+                                </div>
+                                <div className="border border-rule-10 bg-white/5 p-3">
+                                    <p className="text-sm font-extrabold text-warn">Door 3 — trend leaders</p>
+                                    <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
+                                        Strong, steady uptrends that the other two doors would miss — for example a sector-wide
+                                        boom. Up to 20 extra places, with at most 5 per industry group. A candidate must be
+                                        profitable and reasonably large, must not have falling analyst forecasts, and must have
+                                        climbed steadily rather than in one lucky month.
+                                    </p>
+                                </div>
                             </div>
-                            <SubHeading>Why every ingredient counts equally</SubHeading>
+                            <SubHeading>How the doors compete</SubHeading>
                             <p>
-                                Think of judging a <Term term="factor" /> decathlon: you could try to guess which event
-                                matters most, but decades of research show those guesses backfire — the &ldquo;perfect&rdquo;
-                                weights found in past data almost never work on future data. So each of the five ingredients
-                                counts exactly the same (<Term term="equal-weight" />). Boring, humble, and it works better.
-                                The site still <Term term="rank-ic" />-measures each factor&apos;s predictive power every
-                                month as a diagnostic — it just never lets a short sample steer the engine.
+                                Each of the first two doors turns its score into a <Term term="percentile" />, and the better of
+                                the two is what a stock competes on. A <Term term="champion" /> — a stock in the top 10% on both
+                                doors — gets a small bonus of +2, because being excellent and cheap at once is rare. A falling
+                                knife cannot be a champion.
                             </p>
-                            <Callout kind="tip">
-                                A missing factor does not silently wreck a stock: if value, quality, or momentum is missing,
-                                the name is marked <i>insufficient factors</i> rather than scored on partial data. When a
-                                non-essential factor is missing, the remaining weights renormalize so the composite stays
-                                comparable.
-                            </Callout>
+                            <SubHeading>Staying power</SubHeading>
+                            <p>
+                                A name already on the shortlist stays until it falls clearly out. This is called{' '}
+                                <Term term="hysteresis" />: it stays in Research now while its rank is 60 or better, and on the
+                                shortlist while its rank is 150 or better. Without that buffer, stocks sitting on the cut line
+                                would hop in and out with every small price move.
+                            </p>
+                            <SubHeading>Fair comparisons</SubHeading>
+                            <ul className="list-disc space-y-2 pl-5">
+                                <li>
+                                    Most grades are <Term term="sector-neutral" /> — a bank competes with banks, not with
+                                    software companies.
+                                </li>
+                                <li>
+                                    <Term term="momentum" /> is the exception, in a useful way: it is also read across the whole
+                                    market, so a boom that lifts an entire sector stays visible instead of looking ordinary.
+                                </li>
+                                <li>
+                                    For cyclical businesses — oil, gas, mining, shipping and similar — whose cash flow swings with
+                                    the cycle, the screen averages cash flow over several years (<b>8 years</b> for oil, gas and
+                                    mining; <b>3 years</b> for other cyclicals) instead of using one good or bad year.
+                                </li>
+                            </ul>
+                            <SubHeading>Sector tilt is off</SubHeading>
+                            <p>
+                                Every sector gets the same base <Term term="sector-quota" /> of shortlist places. The macro engine
+                                could give extra places to sectors that suit the economy, but its sector picking has not proved
+                                itself, so the tilt is switched off until it does.
+                            </p>
                         </Section>
 
                         {/* Bands */}
-                        <Section id="bands" title="Bands, vetoes & safety haircuts" icon={<BookOpen className="h-5 w-5" />}>
+                        <Section id="bands" title="Bands, vetoes & warnings" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
-                                The composite percentile is cut into four practical buckets, or <Term term="band" />s:
+                                The result of the screen is four <Term term="band" />s:
                             </p>
                             <ul className="list-disc space-y-2 pl-5">
-                                <li><span className="font-extrabold text-pos">RESEARCH NOW</span> — top 3%. Worth your research time today.</li>
-                                <li><span className="font-extrabold text-accent">WATCHLIST</span> — top 10%.</li>
-                                <li><span className="font-extrabold text-warn">MONITOR</span> — top 30%.</li>
-                                <li><span className="text-ink-2">PASS</span> — the rest.</li>
+                                <li><span className="font-extrabold text-pos">RESEARCH NOW</span> — the top of the shortlist, roughly the first 50 to 60 names. Worth your research time today.</li>
+                                <li><span className="font-extrabold text-accent">WATCHLIST</span> — the rest of the shortlist, which holds about 150 names in all.</li>
+                                <li><span className="text-ink-2">PASS</span> — scored, but not shortlisted.</li>
+                                <li><span className="font-extrabold text-neg">VETOED</span> — removed by a safety filter. No band, and the reason is written on the red chip.</li>
                             </ul>
-                            <SubHeading>Vetoes — hard disqualifiers</SubHeading>
+                            <SubHeading>What removes a stock</SubHeading>
                             <p>
-                                Some stocks are disqualified no matter how good the score looks — think of a house with
-                                beautiful photos that failed the structural inspection. A <Term term="veto" /> is applied
-                                before scoring, so a vetoed name gets no composite at all. Reasons include: the reverse
-                                engine&apos;s safety checks (<i>reverse_engine_reject</i>), both forensic alarms firing
-                                together (<Term term="beneish" /> + high <Term term="accruals" />),{' '}
-                                <Term term="dilution" /> from heavy share issuance, or (in the AI lens) a hard avoid/sell
-                                verdict. The reason is written on the red chip.
+                                A <Term term="veto" /> is a hard disqualifier, applied before the doors score anything. The
+                                reasons are: the stock cannot be traded, it is too small or too thinly traded, it has no
+                                usable filed fundamentals, it is a shell company, it has chronic operating losses together
+                                with heavy debt, or it shows two <Term term="forensic" /> red flags at once. The last two apply
+                                only to companies worth under $10 billion.
                             </p>
-                            <SubHeading>Safety haircuts</SubHeading>
+                            <SubHeading>What only warns</SubHeading>
                             <p>
-                                Between the raw score and the final rank, three multiplicative <Term term="haircut" />s are
-                                applied: <b>survivability</b> = 0.7 + 0.3 × (survivability/100); <b>data quality</b> =
-                                min(1, 0.8 + 0.04 × dq); and <b>forensic</b> = 0.85 if a single Beneish or accruals alarm
-                                fired (both firing is a veto, not a haircut). The result is re-ranked, so fragile or
-                                suspicious names drop without being thrown out.
+                                On large companies the forensic tests are <b>warnings</b>: <Term term="beneish" /> (likely
+                                earnings manipulation), <Term term="accruals" /> (profits not backed by cash), Altman Z (a
+                                distress score) and heavy <Term term="dilution" /> from issuing shares. A warning never removes a
+                                stock worth $10 billion or more. On smaller companies a stock is removed only when two red
+                                flags agree. This keeps fast-growing leaders from being thrown out for looking unusual, while
+                                still showing you the warning so you can look closer.
                             </p>
-                        </Section>
-
-                        {/* DCF */}
-                        <Section id="dcf" title="The expectations gap — what the price silently promises" icon={<BookOpen className="h-5 w-5" />}>
+                            <SubHeading>Notes are not warnings</SubHeading>
                             <p>
-                                Every stock price silently makes a promise about future growth. The{' '}
-                                <Term term="reverse-dcf" /> extracts that promise as a number — the <Term term="implied-growth" />{' '}
-                                the market is charging you for — by solving (via <Term term="bisection" />) for the growth
-                                rate that makes a standard <Term term="dcf" /> equal the current price.
+                                Data notes — for example that a stock&apos;s momentum was worked out from monthly prices, or
+                                that its latest annual report is old — describe how a number was built. They say nothing bad
+                                about the company and never remove a stock.
                             </p>
-                            <p>
-                                The <b>DCF gap</b> column compares that promise with reality: <Term term="implied-growth" />{' '}
-                                minus <Term term="demonstrated-growth" /> (the last 5 years of revenue/FCF growth from SEC
-                                filings), in percentage points.
-                            </p>
-                            <ul className="list-disc space-y-2 pl-5">
-                                <li>
-                                    <span className="font-extrabold text-pos">Green / negative</span> — the price promises
-                                    LESS than the company has proven. A potential bargain: you are being paid not to believe
-                                    the growth story.
-                                </li>
-                                <li>
-                                    <span className="font-extrabold text-warn">Amber / positive</span> — the price needs an
-                                    acceleration nobody has demonstrated yet. You have to believe a story.
-                                </li>
-                            </ul>
                             <Callout kind="tip">
-                                The gap is also the <Term term="edge" /> used by the suggested plan: only names priced below
-                                their demonstrated growth have measurable edge, so high-ranked-but-expensive names are
-                                skipped with &ldquo;no Kelly edge.&rdquo;
+                                The principle is <i>annotate, never silently gate</i>: wherever possible a concern is shown as a
+                                flag with its reason, so you can see it, instead of quietly deleting the stock.
                             </Callout>
                         </Section>
 
-                        {/* Lens */}
-                        <Section id="lens" title="The Lens — whose eyes you look through" icon={<BookOpen className="h-5 w-5" />}>
+                        {/* Analyst */}
+                        <Section id="analyst" title="The AI analyst — how a verdict is made" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
-                                At the top of the Rankings tab is one switch that decides whose ranking you see:
+                                A shortlisted name can be studied in depth by an AI analyst — like getting a careful second
+                                opinion. The work is divided so that each part does what it is good at:
                             </p>
                             <ul className="list-disc space-y-2 pl-5">
                                 <li>
-                                    <b>Quant</b> — the deterministic factor engine. Pure math over financial statements and
-                                    prices. No AI involved. This is the original, unchanged view.
+                                    <b>The AI does the research</b> and chooses every valuation input. It runs on a local model
+                                    (<Term term="llm" />), not a cloud service.
                                 </li>
                                 <li>
-                                    <b>RS2 LLM</b> — the local AI analyst&apos;s own list, built by reading each company&apos;s
-                                    actual filings and writing an independent verdict.
+                                    <b>Python does every calculation.</b> An AI is a good analyst but an unreliable calculator,
+                                    so no number is left to its arithmetic.
                                 </li>
                                 <li>
-                                    <b>Compare</b> — both side by side, biggest disagreements first. A disagreement percentile
-                                    (Δ pctl) is computed per name; big gaps are where one engine is wrong.
+                                    <b>Code checks the answer</b> against outside anchors: the professional analysts&apos;
+                                    forecasts and their price-target range (the <Term term="street-fence" />).
                                 </li>
                             </ul>
                             <p>
-                                The AI applies <i>after</i> the quant bands are set: it can promote, demote, or veto names,
-                                producing a parallel ranking. The quant baseline is never overwritten — the two lists are
-                                both shown so you can see where they disagree.
+                                Each stock gets 2 or 3 independent runs, and each run ends in an estimate of what the business
+                                is worth. The <b>verdict</b> is where today&apos;s price sits against the band of those values:
+                                below it means <b>undervalued</b>, inside it means <b>fair</b>, above it means{' '}
+                                <b>overvalued</b>. A wider band means the runs disagreed, and that lowers the suggested size.
+                                See <Term term="iv-band" />.
                             </p>
+                            <Callout kind="warn">
+                                <b>Current state:</b> the analyst is being rebuilt and tested. There are no new verdicts until
+                                it passes its tests and goes live. Every verdict on record today was made by the old analyst.
+                            </Callout>
                         </Section>
 
-                        {/* RS2 */}
-                        <Section id="rs2" title="RS2 — the AI second opinion" icon={<BookOpen className="h-5 w-5" />}>
+                        {/* Gate */}
+                        <Section id="gate" title="The gate — which verdicts count" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
-                                RS2 is a <Term term="llm" /> that reads each company&apos;s actual SEC filings and writes an
-                                independent verdict — like getting a second doctor&apos;s opinion. For every name it produces:
+                                A verdict counts only if it passes the gate. Every verdict is marked{' '}
+                                <Term term="actionable" /> (yes or no), and when the answer is no, the desk gives the{' '}
+                                <Term term="gate-reason" />s in plain words:
                             </p>
                             <ul className="list-disc space-y-2 pl-5">
-                                <li><Term term="stance" /> — undervalued / fair / overvalued (a colored pill).</li>
-                                <li><Term term="conviction" /> — how confident it is, 0–15.</li>
-                                <li><Term term="action" /> — buy / hold / reduce / avoid… an opinion for research, never an order.</li>
+                                <li><b>Made by the old analyst</b> — it was produced before the current rules, by an analyst that was ruled invalid.</li>
+                                <li><b>Runs disagree too much</b> — the runs&apos; values are spread too widely to trust.</li>
+                                <li><b>Only one usable run</b> — a single run cannot show how much the analyst agrees with itself.</li>
+                                <li><b>Outside the analysts&apos; price-target range</b> — the value falls outside the street fence.</li>
+                                <li><b>Implausibly far above the price</b> — the value is so much higher than the price that it is treated as suspect.</li>
+                                <li><b>No analyst price-target range</b> — there is no fence to check the answer against.</li>
+                                <li><b>Analyst data could not be fetched</b> — the lookup failed, so the check could not be made.</li>
+                                <li><b>Mine / oil &amp; gas producer not yet supported</b> — the analyst cannot yet value these properly, so they are blocked from being a buy.</li>
+                                <li><b>Calculator not used</b> — the analyst never used the valuation calculator for its answer.</li>
+                                <li><b>Test run</b> — the row came from a test, not a production run.</li>
+                            </ul>
+                            <p>
+                                A few other technical reasons exist; the desk spells out each one in words. A verdict can have
+                                more than one reason.
+                            </p>
+                            <Callout kind="info">
+                                A blocked verdict is not deleted. It stays visible under <i>Blocked by the gate</i> as a record
+                                of what was said and why it does not count — it is never shown as a pick.
+                            </Callout>
+                        </Section>
+
+                        {/* Relaunch */}
+                        <Section id="relaunch" title="What changes when the new analyst goes live" icon={<BookOpen className="h-5 w-5" />}>
+                            <p>
+                                These four things arrive with the relaunch. They are not live today.
+                            </p>
+                            <ul className="list-disc space-y-2 pl-5">
                                 <li>
-                                    Its own DCF read, whose <Term term="intrinsic-value" /> is anchored to the analyst
-                                    consensus band and de-forwarded to <Term term="present-value" /> — so the{' '}
-                                    <Term term="margin-of-safety" /> measures cheapness <i>today</i>, not a 12-month price target.
+                                    <b>Entry timing.</b> Each verdict says whether it is a &ldquo;buy now&rdquo; or &ldquo;wait for
+                                    momentum&rdquo;, with a stated condition that would flip the call.
+                                </li>
+                                <li>
+                                    <b>Value basis vs momentum basis.</b> A strong, fundamentally backed uptrend can be held at
+                                    half or quarter size even when the analyst&apos;s value is below the price. See{' '}
+                                    <Term term="position-basis" />.
+                                </li>
+                                <li>
+                                    <b>Thesis monitor.</b> Each verdict states its own invalidation rules. They are re-checked
+                                    against current data, and a broken thesis is flagged. See{' '}
+                                    <Term term="thesis-status" />.
+                                </li>
+                                <li>
+                                    <b>Caution for uncovered stocks.</b> A stock that no professional analyst covers gets a
+                                    smaller suggested size and a stricter margin of safety, instead of being treated like a
+                                    covered one.
                                 </li>
                             </ul>
-                            <SubHeading>The AI Research Now gate</SubHeading>
+                        </Section>
+
+                        {/* Macro */}
+                        <Section id="macro" title="The macro engine — the economic backdrop" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
-                                The AI&apos;s Research Now list keys off RS2&apos;s structured signals — margin of safety and
-                                entry timing — in two tiers: <b>deep value</b> (MoS ≥ 30%) earns Research Now at any
-                                conviction; <b>moderate value</b> (MoS ≥ 15%, or a genuine fresh buy) additionally needs
-                                conviction ≥ 9.5. Bearish calls are demoted out of Research Now; a hard avoid/sell is vetoed.
+                                A separate engine reads the state of the US economy and publishes three things:
                             </p>
+                            <ul className="list-disc space-y-2 pl-5">
+                                <li>
+                                    <b>A probability for each economic season.</b> These probabilities are the main output (see{' '}
+                                    <Term term="probability-vector" />). The single season label is only a summary and drives no
+                                    number.
+                                </li>
+                                <li>
+                                    <b>Shock alarms</b> for fear, credit, interest rates, oil, the dollar, jobs and inflation (see{' '}
+                                    <Term term="shock-register" />).
+                                </li>
+                                <li>
+                                    <b>A turbulence-risk flag</b>, which turns on when the fear index is 30 or higher.
+                                </li>
+                            </ul>
                             <p>
-                                When a name leaves the quant Research Now list, RS2 writes an <Term term="exit-review" /> —
-                                a hold/trim/sell call for current holders, shown as an amber &ldquo;LLM EXIT&rdquo; chip.
+                                Its numbers come only from <Term term="fred" />. News is used as context for the story, never as
+                                a number. Its sector picking has not proved itself, so the screen does not use it.
                             </p>
                         </Section>
 
@@ -692,229 +753,107 @@ export default function HelpPage() {
                         <Section id="track" title="Track Record — the honest meter" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
                                 Instead of showing a flattering <Term term="backtest" />, the system{' '}
-                                <Term term="paper-trading" />s its own picks every single day with real prices and real{' '}
-                                <Term term="transaction-costs" />, and the record is append-only — it can never be edited.
-                                If the machine is wrong, this page will say so, publicly and permanently. That&apos;s the point.
+                                <Term term="paper-trading" />s every day with real prices and real{' '}
+                                <Term term="transaction-costs" />. If the system is wrong, this page will say so.
                             </p>
-                            <SubHeading>The portfolios</SubHeading>
+                            <SubHeading>The three books</SubHeading>
                             <ul className="list-disc space-y-2 pl-5">
-                                <li><b className="text-pos">plan</b> — the value core: <Term term="kelly" />-sized, ~50% cash.</li>
-                                <li><b className="text-series-plan2">plan2</b> — the hybrid: value core + <Term term="sleeve" />, ~78% invested, holds the expensive leaders.</li>
-                                <li><b className="text-accent">equal</b> — equal-weighting every Research Now name (pure stock-picking test).</li>
-                                <li><b className="text-ink-2">mine</b> — your saved My Portfolio holdings, <Term term="unitization" />-measured like a fund.</li>
+                                <li>
+                                    <b className="text-accent">Equal-weight</b> — holds every Research now name in equal parts.
+                                    It is the pure stock-picking test, with no AI and no sizing.
+                                </li>
+                                <li>
+                                    <b className="text-pos">AI book</b> — follows the analyst&apos;s verdicts that pass the gate
+                                    (<Term term="rn-depth" />). Its history so far comes from the <b>old</b> analyst, which was
+                                    ruled invalid. It has held only cash since 2026-09-24 because no verdict passes. When the new
+                                    analyst goes live, the AI record restarts from zero and the old history is archived.
+                                </li>
+                                <li>
+                                    <b className="text-ink-2">Mine</b> — your own saved holdings, tracked like a fund (
+                                    <Term term="unitization" />) so that adding money never fakes performance.
+                                </li>
+                            </ul>
+                            <SubHeading>Honest rules</SubHeading>
+                            <ul className="list-disc space-y-2 pl-5">
+                                <li>A trade happens at the <b>first close after the signal</b>, because a signal can only be acted on after it exists.</li>
+                                <li>Costs are included on every trade.</li>
+                                <li>Benchmarks (<Term term="iwm" /> and <Term term="spy" />) use the same dates as the trades.</li>
                             </ul>
                             <SubHeading>How to read it</SubHeading>
                             <ul className="list-disc space-y-2 pl-5">
-                                <li><b>plan vs plan2</b> — if plan2 wins, paying up for quality leaders beat the value discipline this period; if plan wins, the discipline (and cash) paid off.</li>
-                                <li><b>plan vs equal</b> — the sizing machinery adds value if plan beats equal weighting.</li>
-                                <li><b>equal vs IWM</b> — the stock selection itself works if the picks beat the small-cap <Term term="benchmark" />.</li>
-                                <li><b>mine vs plan</b> — your own deviations cost money: that&apos;s the <Term term="behavior-gap" />.</li>
-                                <li><b>&ldquo;Sold too early&rdquo; flags</b> — exits that kept rising. A recurring pattern there means the exit rule needs work.</li>
+                                <li><b>Equal-weight vs IWM</b> — the stock selection works if the picks beat the small-cap <Term term="benchmark" />.</li>
+                                <li><b>AI book vs Equal-weight</b> — the AI analyst earns its keep only if its book beats the plain shortlist.</li>
+                                <li><b>Mine vs the others</b> — your own deviations show up as the <Term term="behavior-gap" />.</li>
                             </ul>
                             <p>
                                 <Term term="sharpe-ratio" /> and <Term term="cagr" /> appear only after enough days of live
-                                data; early on this page is deliberately boring. A what-if overlay lets you re-cost every
-                                trade at your own commission rate to see the drag of fees.
+                                data; early on this page is deliberately boring.
                             </p>
                         </Section>
 
                         {/* Portfolio */}
-                        <Section id="portfolio" title="Portfolio — sizing & the suggested plan" icon={<BookOpen className="h-5 w-5" />}>
+                        <Section id="portfolio" title="My Portfolio — checking your own holdings" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
-                                The Portfolio tab has two very different halves. Read the labels carefully:
+                                The Portfolio tab is for your <b>actual</b> holdings. Each one is checked against the screen&apos;s{' '}
+                                <Term term="band" /> and against the AI verdict, and the result is shown next to it. A holding
+                                whose AI verdict is blocked is shown as blocked — never as a signal. Your holdings also feed the{' '}
+                                <b>Mine</b> book on Track Record.
                             </p>
-                            <SubHeading>My Portfolio (top) — your actual holdings</SubHeading>
-                            <p>
-                                Enter your ACTUAL holdings (saved only in this browser). Each is checked against the model: a
-                                quarter-<Term term="kelly" /> suggested size, an over/under-weight verdict, and loud flags if a
-                                holding is <Term term="veto" />ed or outside coverage. The &ldquo;mine&rdquo; ledger on Track
-                                Record uses these, unitized like a fund.
-                            </p>
-                            <SubHeading>Suggested plan (below) — NOT your portfolio</SubHeading>
-                            <p>
-                                A machine-built allocation from the Research Now list, with a <b>Value core / Hybrid</b> toggle:
-                            </p>
-                            <ul className="list-disc space-y-2 pl-5">
-                                <li>
-                                    <b>Value core (plan)</b> — quarter-Kelly sizing: <Term term="edge" /> = the expectations
-                                    gap closing over ~3 years; risk = <Term term="volatility" />; f = 0.25 × edge/risk²,
-                                    capped 5%. <Term term="forensic" /> flags halve size; GPR 2–3 and insider selling shrink
-                                    it; sector 25% / theme 30% caps; the rest stays <Term term="cash" /> (often ~50%).
-                                </li>
-                                <li>
-                                    <b>Hybrid (plan2)</b> — the same value core PLUS a <Term term="sleeve" /> that buys the
-                                    top-ranked names REGARDLESS of valuation gap (capped ~35% of <Term term="book-value" />),
-                                    so it holds the expensive leaders the core refuses and deploys the idle cash (~78%
-                                    invested). Sleeve rows are tinted pink.
-                                </li>
-                            </ul>
-                            <Callout kind="warn">
-                                Why two? The value core protects you in a bust (it won&apos;t overpay) but lags in a melt-up;
-                                the hybrid captures the leaders but rides them down harder (bigger <Term term="drawdown" />s).
-                                Track Record shows how both actually perform.
-                            </Callout>
-                            <SubHeading>Macro de-risk</SubHeading>
-                            <p>
-                                <Term term="macro-flags" /> are warning lights from <Term term="fred" /> data. If 2+ fire,
-                                every suggested size halves automatically (<Term term="macro-derisk" />) — shown as a loud
-                                amber banner on the tab.
-                            </p>
-                        </Section>
-
-                        {/* Overlays */}
-                        <Section id="overlays" title="Overlay chips & forensic flags" icon={<BookOpen className="h-5 w-5" />}>
-                            <p>
-                                Overlays are context <i>chips</i>, never additive score. They exist to shrink positions, demand
-                                bigger margins of safety, or question your thesis:
-                            </p>
-                            <ul className="list-disc space-y-2 pl-5">
-                                <li>
-                                    <b>GPR 0–3</b> — <Term term="gpr" /> tagged from the company&apos;s actual business profile
-                                    (revenue geography, supply chains, regulation, sanctions). Never a buy/sell signal; at
-                                    level 3 it shrinks position sizes and demands a bigger margin of safety.
-                                </li>
-                                <li>
-                                    <b>▲/▼ INSIDERS</b> — <Term term="informed-demand" />: insiders net-buying while short
-                                    sellers retreat (▲, confirming) or insiders selling into elevated <Term term="short-interest" />{' '}
-                                    (▼, interrogate the thesis). Confirmation or warning only.
-                                </li>
-                            </ul>
-                            <SubHeading>Forensic flags</SubHeading>
-                            <p>
-                                The forensic battery — <Term term="beneish" /> M-score, Sloan <Term term="accruals" />, net
-                                issuance, and the fundamentals battery — produces the <Term term="forensic" /> flags shown on
-                                the plan rows. A single alarm is a 0.85 haircut; the pair firing together is a{' '}
-                                <Term term="veto" />.
-                            </p>
-                        </Section>
-
-                        {/* Themes */}
-                        <Section id="themes" title="Themes — context, never a scoring factor" icon={<BookOpen className="h-5 w-5" />}>
-                            <p>
-                                A <Term term="theme" /> is a market narrative a stock belongs to — AI, semiconductors,
-                                biotech, and so on. Theme membership and scores ride along for <b>orientation</b> and for
-                                <b> crowding warnings</b> (late-cycle theme crowding is a risk signal), but they{' '}
-                                <b>never add to the composite</b>.
-                            </p>
-                            <Callout kind="warn">
-                                This is deliberate: naive theme exposure has historically destroyed value — specialized theme
-                                ETFs average −3.1%/yr (Ben-David et al. 2023). The site won&apos;t let a hot narrative quietly
-                                inflate scores. In the plan, themes are bounded by a 30% theme cap so one hype story can&apos;t
-                                take over the book.
+                            <Callout kind="info">
+                                There is no suggested plan any more. The site no longer builds an allocation for you — the older
+                                Kelly-sized plan books were retired. See <Term term="position-sizing" /> for what size guidance
+                                still exists.
                             </Callout>
                         </Section>
 
-                        {/* Methodology */}
-                        <Section id="methodology" title="Methodology — for practitioners" icon={<BookOpen className="h-5 w-5" />}>
-                            <SubHeading>Scoring pipeline — exact mechanics</SubHeading>
+                        {/* Legacy lenses */}
+                        <Section id="lenses" title="Legacy lenses — older screens kept for reference" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
-                                Universe: every name scored by the reverse engine (~6,600 US listings). Per sub-metric:
-                                <Term term="winsorize" /> at the 1st/99th percentile <i>within sector</i>, then{' '}
-                                <Term term="zscore" /> within sector. Factor z = mean of that factor&apos;s available
-                                sub-metrics. Composite z = weight-renormalized sum over available factors (missing factors
-                                drop out and remaining weights rescale; value, quality, and momentum are <i>required</i> —
-                                a name missing any of them is marked <i>insufficient_factors</i> rather than scored on
-                                partial data).
-                            </p>
-                            <p>
-                                Composite z → cross-sectional <Term term="percentile" /> (0–100) → three multiplicative{' '}
-                                <Term term="haircut" />s (survivability, data quality, forensic) → re-ranked → final
-                                percentile sets the <Term term="band" />: ≥97 research_now, ≥90 watchlist, ≥70 monitor, else pass.
-                            </p>
-                            <SubHeading>Factor construction — sub-metrics and sources</SubHeading>
-                            <p>
-                                <span className="font-extrabold text-pos">Value</span> = mean z of four yields, all
-                                computed from the latest fiscal year of SEC-filed fundamentals against current market cap:
-                                <Term term="fcf-yield" /> (FCF/mcap), <Term term="owner-earnings" /> ((NI + D&amp;A − capex)/mcap),
-                                <Term term="ebit" /> yield (operating income/<Term term="enterprise-value" />), and{' '}
-                                <Term term="earnings-yield" /> (NI/mcap — broadest coverage, rescues filers with missing
-                                capex/D&amp;A/op-income tags).
-                            </p>
-                            <p>
-                                <span className="font-extrabold text-accent">Quality</span> = mean z of: <Term term="revenue-quality" />{' '}
-                                (reverse-engine score), <Term term="gross-margin" /> stability (−stdev across ≥4 fiscal
-                                years), negative <Term term="accruals" /> (−accruals ratio), and <Term term="piotroski" />{' '}
-                                (both from the forensic battery).
-                            </p>
-                            <p>
-                                <span className="font-extrabold text-warn">Momentum</span> = mean z of the{' '}
-                                <Term term="skip-month" /> and <Term term="high-proximity" />. Monthly closes.
-                            </p>
-                            <p>
-                                <span className="font-extrabold text-ink-2">Low volatility</span> = z of −σ(monthly
-                                returns), minimum 12 observations; the <Term term="annualized-volatility" /> is exported per
-                                name and feeds <Term term="kelly" /> sizing.
-                            </p>
-                            <p>
-                                <span className="font-extrabold text-neg">Revisions</span> = mean of two 0–1 parts:
-                                normalized <Term term="eps-trajectory" /> slope (clamp(slope, −1, 1)+1)/2, and analyst
-                                structured score/100 — scaled to 0–100 then re-centred to a z-like scale via (score−50)/25.
-                            </p>
-                            <SubHeading>Weights</SubHeading>
-                            <p>
-                                Equal 0.20 × 5 (scheme <code>equal_weight_robust5</code>). <Term term="rank-ic" /> per factor
-                                is measured monthly but writes a drift <i>diagnostic</i> only — measured IC never steers the
-                                weights (DeMiguel, Garlappi &amp; Uppal 2009: estimated weights rarely beat 1/N out of sample).
-                            </p>
-                            <SubHeading>Reverse DCF — exact method</SubHeading>
-                            <p>
-                                The valuation models solve by <Term term="bisection" /> for the growth rate that makes a
-                                standard DCF equal the CURRENT price — the growth the market is charging you for. The{' '}
-                                <Term term="expectations-gap" /> (shown as &ldquo;DCF gap&rdquo;) = implied growth −
-                                demonstrated growth, where demonstrated = the last 5 years of revenue/FCF growth from SEC
-                                filings, in percentage points. The reverse engine layers archetype classification (A–F) and
-                                survivability/data-quality scoring on top, producing the safety inputs the Factor Lab consumes.
-                            </p>
-                            <SubHeading>Veto rules (exact)</SubHeading>
-                            <p>
-                                <b>reverse_engine_reject</b> = reverse-engine band ∈ {'{'}Excluded, Reject, Reject-tier{'}'}
-                                · <b>forensic_pair</b> = Beneish M-score elevated AND accruals high (single alarm = 0.85
-                                haircut instead) · <b>heavy_issuance</b> = HEAVY_ISSUANCE flag, waived for archetypes E/F
-                                where issuance is the expected financing mode. In the AI lens, a hard avoid/sell verdict is
-                                also a veto (<code>llm_reject</code>).
-                            </p>
-                            <SubHeading>Missing data is null, never silently safe</SubHeading>
-                            <p>
-                                The old placeholder Z/M-scores are gone. If a metric is missing, it is null — and the
-                                scoring pipeline either marks the name insufficient or applies the data-quality haircut.
-                                A gap is never quietly treated as a pass.
+                                The <b>Lenses</b> button opens the older screens: the 100-bagger screen, Reverse, Paradigm and
+                                YouTube. They are kept for reference. They are <b>not</b> the current system, and nothing on the
+                                desk is built from them.
                             </p>
                         </Section>
 
                         {/* Validation */}
                         <Section id="validation" title="How the system is validated" icon={<BookOpen className="h-5 w-5" />}>
-                            <p>
-                                Two independent honesty loops keep the machine honest:
-                            </p>
+                            <p>Three habits keep the system honest:</p>
                             <ul className="list-disc space-y-2 pl-5">
                                 <li>
-                                    <b>Forward-logged signals</b> — every factor signal is logged at the moment it is made (
-                                    <Term term="point-in-time" />, append-only) and later measured against what actually
-                                    happened, including delisted names (no <Term term="survivorship-bias" />).
+                                    <b>Rules before results.</b> Pass/fail rules are written down before the results are seen,
+                                    so they cannot be tuned afterwards to look good (that would be{' '}
+                                    <Term term="overfitting" />).
                                 </li>
                                 <li>
-                                    <b>Paper-traded portfolios</b> — the Track Record page trades plan / plan2 / equal /
-                                    mine daily with real prices and costs, benchmarked against <Term term="iwm" /> and{' '}
-                                    <Term term="spy" />. Returns and <Term term="alpha" /> are public and permanent.
+                                    <b>Grading verdicts.</b> A grader checks each AI verdict against what the price did over
+                                    30, 91, 182 and 365 days, compared with <Term term="iwm" />, <Term term="spy" /> and QQQ. A
+                                    horizon is graded only once it has fully elapsed, and the benchmarks use the same dates as
+                                    the verdict.
+                                </li>
+                                <li>
+                                    <b>Paper books.</b> The{' '}
+                                    <Link href="#track" className="font-bold text-pos hover:underline">Track Record</Link> books
+                                    trade daily with real prices and costs.
                                 </li>
                             </ul>
-                            <p>
-                                Monthly, an IC drift report recalibrates the <Term term="rank-ic" /> diagnostics. The point
-                                of all of this is that the site never gets to grade its own homework: the scoreboard is
-                                forward-looking, real, and uneditable.
-                            </p>
+                            <Callout kind="warn">
+                                <b>No conclusion yet.</b> Every verdict on record today is from the old analyst, so no
+                                conclusion can be drawn from the grading. It will mean something only once valid verdicts from
+                                the new analyst exist and their horizons have elapsed.
+                            </Callout>
                         </Section>
 
                         {/* Data */}
                         <Section id="data" title="Where the data comes from" icon={<BookOpen className="h-5 w-5" />}>
                             <ul className="list-disc space-y-2 pl-5">
-                                <li><Term term="sec-filings" /> — 10 years of as-filed fundamentals via <Term term="company-facts" /> (the ground truth for quality, forensics, and demonstrated growth).</li>
+                                <li><Term term="sec-filings" /> — 10 years of as-filed fundamentals via <Term term="company-facts" /> (the ground truth for quality, forensic warnings and demonstrated growth), kept <Term term="point-in-time" />.</li>
                                 <li><Term term="yahoo-finance" /> — prices, analyst <Term term="estimates" />, and coverage.</li>
-                                <li><Term term="fred" /> — Fed macro series behind the <Term term="macro-flags" />.</li>
+                                <li><Term term="fred" /> — US economic series behind the macro engine.</li>
+                                <li>News — narrative context only. It is never turned into a number.</li>
                             </ul>
                             <p>
-                                The whole pipeline re-runs daily via <Term term="github-actions" />; the IC drift report
-                                recalculates monthly. Paper ledgers persist append-only with transaction costs in bps.
+                                The scoring chain re-runs on a schedule via <Term term="github-actions" />. The AI analyst runs
+                                separately on a local computer.
                             </p>
                         </Section>
                         </>)}
@@ -1000,24 +939,26 @@ export default function HelpPage() {
                             {lang === 'ko' && (
                                 <p>
                                     이 사이트는 리서치 도구입니다. <b>재정적 조언</b>도, <b>거래 봇</b>도, <b>수정 구슬</b>도
-                                    아닙니다. 팩터는 매달 모든 종목이 아니라 수년에 걸쳐 평균적으로 작동합니다. 시스템 자신의
-                                    트랙 레코드는 설계상 정직하고 종종 겸손합니다. 과거 성과 — 페이퍼트레이딩 성과를 포함해 — 는
-                                    미래 결과를 보장하지 않습니다. 직접 리서치하세요.
+                                    아닙니다. 스크린은 수년에 걸쳐 평균적으로 작동하지, 매달 모든 종목에 작동하는 것이 아니며,
+                                    AI 애널리스트는 아직 재구축 중입니다. 시스템 자신의 트랙 레코드는 설계상 정직하고 종종
+                                    겸손해지게 만듭니다. 과거 성과 — 페이퍼트레이딩 성과를 포함해 — 는 미래 결과를 보장하지
+                                    않습니다. 직접 리서치하세요.
                                 </p>
                             )}
                             {lang === 'zh' && (
                                 <p>
-                                    這個網站是研究工具。<b>不是</b>投資建議，<b>不是</b>交易機器人，也<b>不是</b>水晶球。因子是
-                                    以數年為尺度平均運作，而非每個月對每檔股票都有效。系統自身的績效紀錄是設計上誠實、且常令人
-                                    謙卑的。過往表現——包括紙上交易表現——不保證未來結果。請自行研究。
+                                    這個網站是研究工具。它<b>不是</b>投資建議，<b>不是</b>交易機器人，也<b>不是</b>水晶球。篩選是以
+                                    數年為尺度平均運作，而不是每個月對每檔股票都有效，而且 AI 分析師仍在重建中。系統自身的績效紀錄
+                                    是設計上誠實、且常令人謙卑的。過往表現——包括紙上交易表現——不保證未來結果。請自行研究。
                                 </p>
                             )}
                             {lang === 'en' && (
                                 <p>
                                     This site is a research tool. It is <b>not</b> financial advice, <b>not</b> a trading bot, and{' '}
-                                    <b>not</b> a crystal ball. Factors work on average over years, not on every stock every month.
-                                    The system&apos;s own track record is honest and often humbling by design. Past performance —
-                                    including paper-traded performance — does not guarantee future results. Do your own research.
+                                    <b>not</b> a crystal ball. The screen works on average over years, not on every stock every month,
+                                    and the AI analyst is still being rebuilt. The system&apos;s own track record is honest and often
+                                    humbling by design. Past performance — including paper-traded performance — does not guarantee
+                                    future results. Do your own research.
                                 </p>
                             )}
                             <p className="pt-2 text-xs text-ink-2">

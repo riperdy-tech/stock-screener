@@ -2,7 +2,7 @@
 // version button (left of the "?" help button in the Cockpit). Newest first.
 // Keep this in sync with the root CHANGELOG.md.
 
-export const APP_VERSION = '0.2.1';
+export const APP_VERSION = '0.3.0';
 
 export interface ChangelogEntry {
     version: string;
@@ -12,6 +12,19 @@ export interface ChangelogEntry {
 }
 
 export const CHANGELOG: ChangelogEntry[] = [
+    {
+        version: '0.3.0',
+        date: '2026-10-01',
+        title: 'The site now describes the current system',
+        changes: [
+            'The scoring engine is the dual-door screen, now with a third door for trend leaders. The older equal-weight factor model was deleted on 2026-09-22.',
+            'Sector tilt is off. Every sector gets the same share of shortlist places until the macro engine proves it can pick sectors.',
+            'The AI analyst is being rebuilt. Verdicts still on record come from the old analyst, so they are shown as blocked, not as picks.',
+            'The AI paper record restarts from zero when the new analyst goes live; the old history will be archived.',
+            'The Kelly-sized plans and the old LLM overlay are retired.',
+            'The Handbook was rewritten to match: the desk, the three doors, bands and warnings, the AI analyst and its gate, the macro engine, and the track record.',
+        ],
+    },
     {
         version: '0.2.1',
         date: '2026-08-13',

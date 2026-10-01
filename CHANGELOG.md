@@ -3,6 +3,25 @@
 User-facing changes are mirrored in the header version button (Cockpit), sourced
 from `lib/changelog.ts` — keep the two in sync.
 
+## [0.3.0] — 2026-10-01
+
+### The site now describes the current system
+
+**What:** the site's Handbook, workflow diagram and glossary were rewritten for
+the system that exists now.
+
+- **Scoring engine:** the dual-door screen, now with a third door for trend
+  leaders. The older equal-weight factor model was deleted on 2026-09-22.
+- **Sector tilt is off.** Every sector gets the same share of shortlist places
+  until the macro engine proves it can pick sectors.
+- **The AI analyst is being rebuilt.** Verdicts still on record come from the old
+  analyst, so they are shown as blocked, not as picks.
+- **The AI paper record restarts from zero** when the new analyst goes live; the
+  old history will be archived.
+- **Retired:** the Kelly-sized plans and the old LLM overlay.
+- **Handbook:** rewritten — the desk, the three doors, bands and warnings, the AI
+  analyst and its gate, the macro engine, and the track record.
+
 ## [0.2.1] — 2026-08-13
 
 ### Non-tradable names removed from the quant and RS2 lanes

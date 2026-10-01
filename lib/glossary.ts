@@ -17,12 +17,12 @@ export type GlossaryCategory =
     | 'risk'        // volatility / risk
     | 'revisions'   // analyst revisions factor
     | 'valuation'   // DCF & valuation
-    | 'ai'          // RS2 LLM overlay
-    | 'portfolio'   // sizing & the suggested plan
+    | 'ai'          // the AI analyst and its gate
+    | 'portfolio'   // position sizing
     | 'track'       // track record & performance measurement
     | 'data'        // data sources & pipeline
     | 'overlay'     // overlays & forensic flags
-    | 'bands';      // bands & vetoes
+    | 'bands';      // doors, bands & vetoes
 
 export interface TermDef {
     term: string;
@@ -43,12 +43,12 @@ export const CATEGORY_LABELS: Record<GlossaryCategory, string> = {
     risk: 'Risk & volatility',
     revisions: 'Revisions factor',
     valuation: 'Valuation & DCF',
-    ai: 'RS2 / AI',
+    ai: 'AI analyst',
     portfolio: 'Portfolio & sizing',
     track: 'Track record',
     data: 'Data & pipeline',
     overlay: 'Overlays & forensics',
-    bands: 'Bands & vetoes',
+    bands: 'Doors, bands & vetoes',
 };
 
 // Tailwind classes per category, used by the popup badge and glossary chips.
@@ -71,27 +71,27 @@ export const CATEGORY_STYLES: Record<GlossaryCategory, string> = {
 export const GLOSSARY: Record<string, TermDef> = {
     // ── Core concepts ────────────────────────────────────────────────────
     composite: {
-        term: 'Composite score',
+        term: 'Door percentile (composite)',
         category: 'core',
-        plain: 'The single 0–100 number every stock is ranked by.',
+        plain: 'The 0–100 number a stock is ranked by: its better door.',
         definition:
-            'The final grade that puts every stock on one leaderboard. It starts as a blend of the five factor scores (value, quality, momentum, low volatility, revisions), each measured against the stock’s own sector. It is then converted to a percentile (0–100) and reduced by three safety “haircuts” for fragile accounting or missing data. Higher = more evidence in the stock’s favor.',
-        related: ['factor', 'sector-neutral', 'percentile', 'haircut'],
+            'Every stock gets a score from each of the first two doors, and each score is turned into a percentile (0–100). The stock competes on the better of the two, and a champion gets a small bonus when names are put in order. Higher = a stronger case on at least one door. It is a way to order a shortlist, not a price target.',
+        related: ['door', 'champion', 'percentile'],
     },
     factor: {
         term: 'Factor',
         category: 'core',
-        plain: 'A measurable, historically profitable trait of a stock.',
+        plain: 'A measurable trait of a stock that the doors are built from.',
         definition:
-            'A quantifiable characteristic — like being cheap, or profitable, or recently winning — that academic research has shown to predict future returns on average. This site scores five factors: value, quality, momentum, low volatility, and revisions. Think of them as the five events in a decathlon: each is a separate skill, and the composite is the combined result.',
-        related: ['composite', 'value', 'quality', 'momentum'],
+            'A quantifiable characteristic — like being profitable, being cheap, rising analyst forecasts, or recently winning — that research has linked to future returns on average. The screen measures quality, value, the expectations gap, momentum and revisions. The factors are not averaged equally: each door blends the ones it cares about with its own weights.',
+        related: ['door', 'value', 'quality', 'momentum'],
     },
     'sector-neutral': {
         term: 'Sector-neutral',
         category: 'core',
-        plain: 'Every grade is relative to the stock’s own industry group.',
+        plain: 'Grades are relative to the stock’s own industry group.',
         definition:
-            'Each stock is only compared to other companies in the same sector — a supermarket competes with supermarkets, not software companies. Without this, “high momentum” would just mean “is a tech stock,” and “cheap” would just mean “is a bank.” Measuring within a sector keeps the comparisons fair and is why the five factors are computed sector-by-sector.',
+            'Each stock is mostly compared with companies in the same sector — a supermarket competes with supermarkets, not software companies. Without this, “cheap” would just mean “is a bank” and “high momentum” would just mean “is a tech stock.” Quality, value and revisions are measured this way. Momentum is the exception: it is also read against the whole market, so a boom that lifts an entire sector does not look ordinary.',
         related: ['zscore', 'composite'],
     },
     zscore: {
@@ -115,32 +115,16 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'core',
         plain: 'Your position in line, 0–100, among all scored stocks.',
         definition:
-            'A ranking converted to a 0–100 scale: the 98th percentile means the stock scores higher than 98% of the ~6,600-name universe today. Bands are cut directly from percentiles (97+ = Research Now, 90+ = Watchlist, 70+ = Monitor).',
-        related: ['composite', 'band'],
-    },
-    'rank-ic': {
-        term: 'Rank IC',
-        category: 'core',
-        plain: 'A monthly measure of whether each factor actually predicted returns.',
-        definition:
-            'Information Coefficient — the rank correlation between a factor score and the stock’s subsequent return. It is measured every month for each factor as a diagnostic. The engine does NOT let these measurements steer its weights (see equal-weight); it uses them only to check that the factors are still doing their job and to report drift.',
-        related: ['equal-weight', 'backtest', 'out-of-sample'],
-    },
-    'equal-weight': {
-        term: 'Equal weighting (1/N)',
-        category: 'core',
-        plain: 'All five factors count exactly the same, on purpose.',
-        definition:
-            'Each of the five factors contributes an equal 20% to the composite. Decades of research (DeMiguel, Garlappi & Uppal 2009) show that weights estimated from past data almost always overfit — the “perfect” weights found in a backtest rarely survive in future data. A simple, humble 1/N split is one of the hardest things to beat out-of-sample.',
-        related: ['rank-ic', 'overfitting', 'out-of-sample'],
+            'A ranking converted to a 0–100 scale: the 98th percentile means the stock scores higher than 98% of the stocks that were scored. Each door score is turned into a percentile, and a stock competes on the better of its first two.',
+        related: ['composite', 'door'],
     },
     overfitting: {
         term: 'Overfitting',
         category: 'core',
         plain: 'Tuning rules to past data so precisely they break on new data.',
         definition:
-            'The classic quant trap: the more knobs you tune until a backtest looks amazing, the more you are memorizing the past instead of learning a durable pattern. This site deliberately refuses to optimize factor weights precisely because of this. A rule that “would have” made money is worthless if it was reverse-engineered from the same data it is tested on.',
-        related: ['out-of-sample', 'equal-weight', 'backtest'],
+            'The classic quant trap: the more knobs you tune until a backtest looks amazing, the more you are memorizing the past instead of learning a durable pattern. A rule that “would have” made money is worthless if it was reverse-engineered from the same data it is tested on. That is why this site writes its pass/fail rules down before it sees results.',
+        related: ['out-of-sample', 'backtest'],
     },
     'out-of-sample': {
         term: 'Out-of-sample',
@@ -179,7 +163,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'core',
         plain: 'Pretending you knew at the time what you only know in hindsight.',
         definition:
-            'Reconstructing a decision as if the outcome was predictable. The paper-trading system eliminates it: every buy and sell is recorded in real time, before the future happens, and the record is append-only.',
+            'Reconstructing a decision as if the outcome was predictable. The paper books guard against it: every buy and sell is recorded on its own day, before the future happens.',
         related: ['point-in-time', 'paper-trading'],
     },
     'market-cap': {
@@ -197,7 +181,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'value',
         plain: 'Are you paying $1 for $2 of cash earnings, or $2 for $1?',
         definition:
-            'Measures whether a stock is cheap relative to the cash its business actually produces. Built from four yields (free-cash-flow, owner earnings, EBIT, and plain earnings), all measured against the current market price. Cheap beats expensive on average over time — but “cheap” is always judged within the stock’s own sector.',
+            'Measures whether a stock is cheap relative to the cash its business actually produces, always judged within the stock’s own sector. Built from cash-based yields — free cash flow, owner earnings and EBIT (earnings for banks and insurers), each against the price. It is one ingredient of the value-gap door.',
         related: ['fcf-yield', 'owner-earnings', 'enterprise-value'],
     },
     'fcf-yield': {
@@ -287,16 +271,16 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'quality',
         plain: 'A statistical detector of likely earnings manipulation.',
         definition:
-            'A model that scores how likely a company is to have manipulated its earnings, using eight ratios like days-sales-in-receivables and asset quality. An elevated M-score is a forensic alarm; if it fires together with high accruals, the stock is vetoed outright.',
+            'A model that scores how likely a company is to have manipulated its earnings, using eight ratios like days-sales-in-receivables and asset quality. An elevated M-score is a forensic warning. On its own it never removes a stock; a smaller company is removed only when it fires together with high accruals.',
         related: ['forensic', 'accruals', 'veto'],
     },
     forensic: {
-        term: 'Forensic flags',
+        term: 'Forensic warnings',
         category: 'quality',
-        plain: 'Yellow and red cards for suspicious accounting.',
+        plain: 'Yellow and red cards for suspicious accounting or fragile finances.',
         definition:
-            'Warning lights from the forensic battery (Beneish M-score, Sloan accruals, heavy issuance, and more). A single flag applies a 0.85 safety haircut to the score; certain flags firing together are a hard veto. Think of a house with beautiful photos that failed the structural inspection.',
-        related: ['beneish', 'accruals', 'haircut', 'veto'],
+            'Warning lights from the accounting tests: the Beneish M-score (likely earnings manipulation), accruals (profits not backed by cash), Altman Z (distress) and heavy share issuance. On a company worth $10 billion or more these are warnings only — they never remove a stock. On smaller companies a stock is removed only when two red flags agree. Think of a house with beautiful photos that failed the structural inspection.',
+        related: ['beneish', 'accruals', 'veto'],
     },
     roic: {
         term: 'ROIC',
@@ -321,8 +305,8 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'momentum',
         plain: 'Has the stock been winning over the past year?',
         definition:
-            'Winners tend to keep winning for a while. The momentum factor combines the 12-1 skip-month return (the academic-standard 12-month return that skips the most recent month) and 52-week-high proximity. It is the classic, robust “trend” factor.',
-        related: ['skip-month', 'high-proximity'],
+            'Winners tend to keep winning for a while. Momentum combines the 12-1 skip-month return (the academic-standard 12-month return that skips the most recent month) and 52-week-high proximity. It is used by the compounder door, as a falling-knife floor for the value-gap door, and on its own, across the whole market, by the trend-leader door.',
+        related: ['skip-month', 'high-proximity', 'door'],
     },
     'skip-month': {
         term: '12-1 skip-month return',
@@ -348,31 +332,22 @@ export const GLOSSARY: Record<string, TermDef> = {
             'A short-horizon quirk where stocks that rose the most in the most recent month tend to give a little back. It is why momentum is measured over 12 months skipping the last month — so the durable trend is captured without the noisy one-month bounce.',
         related: ['skip-month', 'momentum'],
     },
-
     // ── Risk / low volatility ────────────────────────────────────────────
-    lowvol: {
-        term: 'Low volatility factor',
-        category: 'risk',
-        plain: 'Calm stocks have delivered more return per unit of pain.',
-        definition:
-            'Measures how gently or wildly a stock’s price moves, using the standard deviation of monthly returns (minimum 12 observations). Counterintuitively, calm stocks have historically produced better risk-adjusted returns than volatile ones. It is also why the site exports each stock’s annualized volatility to size positions.',
-        related: ['volatility', 'annualized-volatility'],
-    },
     volatility: {
         term: 'Volatility (σ)',
         category: 'risk',
         plain: 'How much the price swings — the “wildness” of a stock.',
         definition:
-            'The standard deviation of returns. High volatility means the price swings widely in a short time; low volatility means it moves calmly. Sigma (σ) is the Greek letter used as its symbol. Volatility is the “risk” input in position sizing.',
-        related: ['lowvol', 'annualized-volatility', 'kelly'],
+            'The standard deviation of returns. High volatility means the price swings widely in a short time; low volatility means it moves calmly. Sigma (σ) is the Greek letter used as its symbol.',
+        related: ['annualized-volatility'],
     },
     'annualized-volatility': {
         term: 'Annualized volatility',
         category: 'risk',
         plain: 'Monthly swing, scaled up to a one-year number.',
         definition:
-            'Monthly return volatility multiplied by √12 to express it on a yearly scale (monthly σ × square root of 12 months). It is exported per stock and feeds the Kelly position-sizing math in the suggested plan.',
-        related: ['volatility', 'kelly'],
+            'Monthly return volatility multiplied by √12 to express it on a yearly scale (monthly σ × square root of 12 months).',
+        related: ['volatility'],
     },
 
     // ── Revisions factor ─────────────────────────────────────────────────
@@ -381,7 +356,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'revisions',
         plain: 'Are professional analysts raising or cutting their forecasts?',
         definition:
-            'Measures the direction of change in analyst expectations. When analysts raise earnings estimates, the stock tends to keep rising; when they cut, it tends to keep falling. Built from the normalized slope of the EPS trajectory and a structured analyst score.',
+            'Measures the direction of change in analyst expectations. When analysts raise earnings estimates, the stock tends to keep rising; when they cut, it tends to keep falling. It is the smallest ingredient of the compounder door, and a trend leader must not have falling forecasts.',
         related: ['eps', 'estimates', 'eps-trajectory'],
     },
     eps: {
@@ -405,7 +380,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'revisions',
         plain: 'The direction and steepness of the earnings-forecast path.',
         definition:
-            'The slope of EPS forecasts over time — are they climbing, flat, or falling? The revisions factor normalizes this slope to a −1…+1 range and blends it with a structured analyst score, so “improving” and “deteriorating” become comparable numbers.',
+            'The slope of analysts’ forward earnings forecasts over time — are they climbing, flat, or falling? It makes “improving” and “deteriorating” comparable numbers.',
         related: ['revisions', 'eps'],
     },
 
@@ -435,11 +410,11 @@ export const GLOSSARY: Record<string, TermDef> = {
         related: ['reverse-dcf', 'expectations-gap'],
     },
     'expectations-gap': {
-        term: 'Expectations gap (DCF gap)',
+        term: 'Expectations gap',
         category: 'valuation',
         plain: 'The growth the price demands minus the growth the company proved.',
         definition:
-            'Implied growth (from the reverse DCF) minus demonstrated growth (last 5 years of actual revenue/FCF growth from SEC filings), in percentage points. Green/negative = the price demands LESS than the company has proven — a potential bargain. Amber/positive = the price needs an acceleration nobody has demonstrated — you must believe a story.',
+            'Implied growth (from the reverse DCF) minus demonstrated growth (the last 5 years of actual growth in the company’s cash earnings, from SEC filings), in percentage points. Negative = the price demands LESS than the company has proven — a potential bargain. Positive = the price needs an acceleration nobody has demonstrated — you must believe a story. It is one ingredient of the value-gap door.',
         related: ['implied-growth', 'reverse-dcf', 'demonstrated-growth'],
     },
     'demonstrated-growth': {
@@ -447,7 +422,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'valuation',
         plain: 'Growth the company has actually delivered, from the filings.',
         definition:
-            'The last five years of real revenue and free-cash-flow growth taken from SEC filings. It is the ground truth the price’s promise is compared against in the expectations gap.',
+            'The last five years of real growth in the company’s cash earnings, taken from SEC filings (revenue growth is used only when that is not available). It is the ground truth the price’s promise is compared against in the expectations gap.',
         related: ['expectations-gap', 'sec-filings'],
     },
     'intrinsic-value': {
@@ -455,23 +430,23 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'valuation',
         plain: 'What the business is really worth, independent of its price.',
         definition:
-            'An estimate of a company’s true worth based on its future cash-generating ability — the number a DCF produces. The RS2 AI’s intrinsic value is anchored to the analyst consensus band and de-forwarded to present value so the margin of safety measures cheapness today, not a 12-month price target.',
-        related: ['dcf', 'margin-of-safety', 'present-value'],
+            'An estimate of a company’s true worth based on its future cash-generating ability — the number a DCF produces. The AI analyst produces one in each run; the verdict compares today’s price with the range of those values (the value band), not with a single number.',
+        related: ['dcf', 'margin-of-safety', 'iv-band'],
     },
     'margin-of-safety': {
         term: 'Margin of safety',
         category: 'valuation',
-        plain: 'The discount you get: how far below intrinsic value you buy.',
+        plain: 'The discount you get: how far below estimated value you buy.',
         definition:
-            'How much cheaper the price is than the estimated intrinsic value, in percent. A 30% margin of safety means you pay 70 cents for a dollar of estimated value. RS2 uses it (with conviction) as the gate for its Research Now list: deep value (MoS ≥ 30%) earns Research Now at any conviction; moderate value needs conviction ≥ 9.5.',
-        related: ['intrinsic-value', 'conviction'],
+            'How much cheaper the price is than the estimated value, in percent. A 30% margin of safety means you pay 70 cents for a dollar of estimated value. A margin that looks implausibly large is itself a warning sign: the gate blocks a verdict whose value is implausibly far above the price.',
+        related: ['intrinsic-value', 'gate-reason'],
     },
     'cost-of-equity': {
         term: 'Cost of equity',
         category: 'valuation',
         plain: 'The return shareholders require — the discount rate for equity cash.',
         definition:
-            'The minimum annual return investors demand to hold a stock instead of a safer asset. It is the rate used to discount future equity cash flows in the DCF. RS2 discounts one year of cost-of-equity to de-forward its intrinsic value to today.',
+            'The minimum annual return investors demand to hold a stock instead of a safer asset. It is the rate used to discount future equity cash flows in the DCF. The screen takes it from the macro engine’s cost-of-capital anchor (roughly 6.6% for utilities up to 12.6% for chip makers) and, if that anchor is missing or stale, falls back loudly to 10% and records that it did.',
         related: ['dcf', 'present-value'],
     },
     'present-value': {
@@ -491,46 +466,70 @@ export const GLOSSARY: Record<string, TermDef> = {
         related: ['reverse-dcf', 'implied-growth'],
     },
 
-    // ── RS2 / AI ─────────────────────────────────────────────────────────
+    // ── The AI analyst ─────────────────────────────────────────────────────────
     llm: {
         term: 'LLM (large language model)',
         category: 'ai',
-        plain: 'The AI that reads filings and writes independent verdicts.',
+        plain: 'The kind of AI that does the research for the analyst.',
         definition:
-            'The RS2 system runs a local AI (a large language model) that reads each company’s actual SEC filings and produces its own independent analysis — like getting a second doctor’s opinion. Its verdicts create a parallel ranking you can view through the RS2 LLM lens.',
-        related: ['stance', 'conviction', 'action'],
+            'A large language model is an AI that reads and writes text. The analyst runs one on a local computer, not a cloud service. It reads the filings, does the research and chooses every valuation input. It does not do the arithmetic — Python code does every calculation — and code then checks the answer against outside anchors.',
+        related: ['iv-band', 'street-fence', 'actionable'],
     },
-    stance: {
-        term: 'Stance',
+    'iv-band': {
+        term: 'Value band (IV band)',
         category: 'ai',
-        plain: 'The AI’s valuation call: undervalued, fair, or overvalued.',
+        plain: 'The range of values from the analyst’s runs.',
         definition:
-            'RS2’s headline verdict: UNDERVALUED (price looks too low for the evidence), FAIR, or OVERVALUED (price already assumes a lot). Rendered as a colored pill in the rankings.',
-        related: ['llm', 'margin-of-safety'],
+            'Each stock is analysed in 2–3 independent runs, and each run ends in an estimate of what the business is worth. The value band is the range from the lowest to the highest of those estimates; the median is the middle one. The verdict is where today’s price sits against the band: below it = undervalued, inside it = fair, above it = overvalued. On the desk the shaded band is the range, the tick is the median and the white line is the price. A wider band means the runs disagreed, which lowers the suggested size.',
+        related: ['intrinsic-value', 'actionable', 'position-sizing'],
     },
-    conviction: {
-        term: 'Conviction',
+    'not-usable': {
+        term: 'Not usable',
         category: 'ai',
-        plain: 'How confident the AI is in its verdict, 0–15.',
+        plain: 'A row where the analyst produced no usable verdict.',
         definition:
-            'RS2’s self-reported confidence in its own verdict, from 0 (a guess) to 15 (very confident). It matters for the AI Research Now gate: moderate value only earns Research Now if conviction is high enough.',
-        related: ['llm', 'margin-of-safety'],
+            'When the verdict step malfunctions, the row is marked not usable instead of being given a guess. It has no direction, is never shown as a pick, and sits under Vetoed on the AI side of the desk.',
+        related: ['actionable', 'iv-band'],
     },
-    action: {
-        term: 'Action',
+    actionable: {
+        term: 'Actionable',
         category: 'ai',
-        plain: 'What the AI analyst would do with the stock — an opinion, never an order.',
+        plain: 'A verdict that passed every rule of the gate.',
         definition:
-            'The AI’s suggested action (buy / accumulate / hold / reduce / avoid…). It is an opinion for research, not a trade — nothing on this site executes trades. A hard avoid or sell is a veto in the AI lens.',
-        related: ['llm', 'exit-review'],
+            'Every AI verdict carries a yes/no flag called actionable, plus the list of reasons when the answer is no. Only an actionable verdict can appear under Research now or Watchlist on the AI side, or be followed by the AI paper book. A verdict that is not actionable is not deleted: it stays visible, marked as blocked.',
+        related: ['gate-reason', 'street-fence', 'rn-depth'],
     },
-    'exit-review': {
-        term: 'Exit review',
+    'gate-reason': {
+        term: 'Gate reason',
         category: 'ai',
-        plain: 'The AI’s hold/trim/sell call for current holders of a fallen name.',
+        plain: 'The plain-words reason a verdict was blocked.',
         definition:
-            'When a stock drops out of the quant Research Now list, RS2 reviews it for the people who already own it: hold, trim, or sell. Rendered as an amber “LLM EXIT” chip. It is a decision for existing holders, not a new buy case.',
-        related: ['llm', 'action', 'band'],
+            'When a verdict is blocked, the desk says why — for example “made by the old analyst” or “runs disagree too much”. A verdict can have more than one reason. The full list is in the gate section of this handbook.',
+        related: ['actionable', 'street-fence'],
+    },
+    'street-fence': {
+        term: 'Street fence',
+        category: 'ai',
+        plain: 'The analysts’ price-target range, used as an outside check.',
+        definition:
+            'The Street means the professional analysts who follow a company. The street fence is the range of their price targets. Code checks the AI analyst’s answer against it: a value outside the fence is blocked, a verdict with no fence to check against is blocked, and so is one whose value is implausibly far above the price. It is an outside check on the analyst’s own work.',
+        related: ['actionable', 'gate-reason', 'estimates'],
+    },
+    'thesis-status': {
+        term: 'Thesis status',
+        category: 'ai',
+        plain: 'Whether the reasons behind a verdict still hold.',
+        definition:
+            'Each new-analyst verdict states its own invalidation rules — things that, if they happen, mean the thesis is broken. A monitor re-checks those rules against current data. Intact = rules were checked and none fired; breached = at least one fired; unknown = none could be checked. A breached thesis is flagged. This arrives with the relaunch of the analyst.',
+        related: ['actionable', 'position-basis'],
+    },
+    'position-basis': {
+        term: 'Position basis',
+        category: 'ai',
+        plain: 'Whether a stock is held for its value or for its momentum.',
+        definition:
+            'A verdict can carry a basis. Value basis: the case rests on the price being below the value band. Momentum basis: the analyst’s value is below the price, but the stock is in a strong uptrend that its fundamentals back up, so it may be held — at half or quarter size — instead of sold. None: no position is suggested. This arrives with the relaunch of the analyst.',
+        related: ['position-sizing', 'thesis-status'],
     },
 
     // ── Bands & vetoes ───────────────────────────────────────────────────
@@ -539,161 +538,88 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'bands',
         plain: 'A bucket that translates the rank into an action.',
         definition:
-            'Percentile cut into four practical buckets: RESEARCH NOW (top 3%), WATCHLIST (top 10%), MONITOR (top 30%), PASS (the rest). The band is what tells you how much of your time a stock deserves today.',
-        related: ['research-now', 'watchlist', 'percentile'],
+            'The screen puts every stock in one of four bands: RESEARCH NOW (the top of the shortlist), WATCHLIST (the rest of the shortlist), PASS (scored, but not shortlisted) and VETOED (removed by a safety filter). Bands come from a stock’s rank, not from fixed percentage cut-offs, and a name already on the shortlist stays until it falls clearly out.',
+        related: ['research-now', 'watchlist', 'hysteresis'],
     },
     'research-now': {
-        term: 'Research Now',
+        term: 'Research now',
         category: 'bands',
-        plain: 'Top 3% — the shortlist worth your research time today.',
+        plain: 'The top of the shortlist — worth your research time today.',
         definition:
-            'The highest band: the top 3% of scored stocks. In the AI lens, the RS2 Research Now gate adds extra requirements — a real margin of safety, and conviction — so the two lists can differ. It is a research shortlist, never a buy order.',
-        related: ['band', 'watchlist', 'margin-of-safety'],
+            'The highest band: roughly the top 50 to 60 names by priority, including a few trend leaders. It is a research shortlist, never a buy order. On the AI side of the desk a name appears under Research now only when its AI verdict says undervalued and passes the gate.',
+        related: ['band', 'watchlist', 'actionable'],
     },
     watchlist: {
         term: 'Watchlist',
         category: 'bands',
-        plain: 'Top 10% — strong evidence, worth monitoring.',
+        plain: 'The rest of the shortlist — strong evidence, worth watching.',
         definition:
-            'The second band (90th–97th percentile). Strong evidence, just below the Research Now cut. Stocks here are worth watching and often get promoted.',
+            'The second band: the part of the shortlist below Research now (the whole shortlist holds roughly 150 names). Stocks here are worth watching and often move up. On the AI side of the desk, a name appears under Watchlist when its AI verdict is fair or overvalued and passes the gate.',
         related: ['band', 'research-now'],
-    },
-    monitor: {
-        term: 'Monitor',
-        category: 'bands',
-        plain: 'Top 30% — reasonable, but not exceptional evidence.',
-        definition:
-            'The third band (70th–90th percentile). Reasonable scores without standout evidence. Low priority for your research time.',
-        related: ['band'],
     },
     pass: {
         term: 'Pass',
         category: 'bands',
-        plain: 'Everything below the top 30%.',
+        plain: 'Scored, but not on the shortlist.',
         definition:
-            'The default band for the ~70% of stocks that do not reach the top 30%. Not a “bad company” verdict — just not enough evidence to earn your attention today.',
+            'The default band for the stocks that were scored but did not earn a shortlist place. Not a “bad company” verdict — just not enough evidence to earn your attention today.',
         related: ['band'],
     },
     veto: {
         term: 'Veto',
         category: 'bands',
-        plain: 'Automatic disqualification, no matter how good the score looks.',
+        plain: 'A stock removed by a safety filter, no matter how good it looks.',
         definition:
-            'A hard disqualifier applied before scoring: a red chip regardless of composite. Reasons include failing the reverse engine’s safety checks, firing both forensic alarms together (Beneish + accruals), heavy share issuance, or an AI hard avoid/sell. The reason is written on the chip.',
+            'A hard disqualifier. A vetoed stock gets no band and is not analysed. Reasons include: the stock cannot be traded (delisted or halted), it is too small or too thinly traded, it has no usable filed fundamentals, it is a shell company, or — only for companies worth under $10 billion — it has chronic operating losses with heavy debt, or two forensic red flags agree. Larger companies get a warning instead. The reason is written on the red chip.',
         related: ['forensic', 'beneish', 'dilution'],
     },
-    haircut: {
-        term: 'Safety haircut',
+    door: {
+        term: 'Door',
         category: 'bands',
-        plain: 'A multiplicative discount to the score for fragility or missing data.',
+        plain: 'One of three ways a stock can earn a place on the shortlist.',
         definition:
-            'A penalty applied to the composite after ranking: survivability = 0.7 + 0.3×(survivability/100); data quality = min(1, 0.8 + 0.04×data quality); forensic = 0.85 if a single Beneish or accruals alarm fired. Result is re-ranked. A haircut reduces the score; it is not a veto.',
-        related: ['composite', 'veto', 'forensic'],
+            'The screen does not blend everything into one score. A company can earn attention by being excellent, by being mispriced, or by being in a strong steady uptrend — so there are three doors. Door 1, the compounder door, rewards quality, momentum and rising analyst forecasts. Door 2, the value-gap door, rewards cheapness and a price that asks for less growth than the company has delivered. Door 3, the trend-leader door, adds up to 20 extra places for strong, steady uptrends. A stock needs to clear only one door.',
+        related: ['champion', 'sector-quota', 'hysteresis'],
     },
-
+    champion: {
+        term: 'Champion',
+        category: 'bands',
+        plain: 'A stock that is top-tier on both of the first two doors.',
+        definition:
+            'A stock in the top 10% on both the compounder door and the value-gap door. Being both excellent and cheap is rare, so a champion gets a small bonus (+2) when the shortlist is put in order. A stock in steep decline cannot be a champion.',
+        related: ['door', 'composite'],
+    },
+    hysteresis: {
+        term: 'Hysteresis (sticky shortlist)',
+        category: 'bands',
+        plain: 'A name already on the shortlist stays until it falls clearly out.',
+        definition:
+            'Without a buffer, a stock sitting right at the cut line would hop in and out of the shortlist with every small price move. So a name already in Research now stays there while its rank is 60 or better, and a name already on the shortlist stays on it while its rank is 150 or better. Only a clear fall removes it. The shortlist changes less, so it is easier to follow.',
+        related: ['band', 'research-now', 'watchlist'],
+    },
+    'sector-quota': {
+        term: 'Sector quota',
+        category: 'bands',
+        plain: 'How many shortlist places each sector gets.',
+        definition:
+            'The shortlist is spread across sectors so no one industry crowds out the rest. Every sector gets the same base quota. The macro engine could in principle give more places to the sectors that suit the economy — a “tilt” — but its sector picking has not proved itself, so the tilt is switched off and every sector gets the same quota until it does.',
+        related: ['door', 'probability-vector'],
+    },
     // ── Portfolio & sizing ───────────────────────────────────────────────
-    kelly: {
-        term: 'Kelly criterion',
-        category: 'portfolio',
-        plain: 'A formula for the mathematically “right” bet size given an edge.',
-        definition:
-            'A classic money-management formula: bet a fraction of your capital proportional to your edge divided by your variance (f = edge / variance). This site uses quarter-Kelly (0.25 × that), capped at 5% per position — deliberately conservative, because full Kelly is too aggressive for real-world uncertainty.',
-        related: ['edge', 'position-sizing', 'annualized-volatility'],
-    },
-    edge: {
-        term: 'Edge',
-        category: 'portfolio',
-        plain: 'Your expected advantage — here, the expectations gap closing.',
-        definition:
-            'In this system, edge is estimated as the expectations gap closing over roughly three years — the market repricing a stock that is priced below its demonstrated growth. Only names priced BELOW their demonstrated growth have measurable edge, which is why high-ranked-but-expensive names are skipped with “no Kelly edge.”',
-        related: ['expectations-gap', 'kelly'],
-    },
     'position-sizing': {
         term: 'Position sizing',
         category: 'portfolio',
         plain: 'Deciding how much of your capital goes into each stock.',
         definition:
-            'The math that turns a shortlist into a portfolio: quarter-Kelly sizing, capped at 5% per position, halved by forensic flags, shrunk by geopolitical risk and insider selling, and bounded by sector (25%) and theme (30%) caps. The rest stays in cash.',
-        related: ['kelly', 'sector-cap', 'theme-cap'],
-    },
-    'sector-cap': {
-        term: 'Sector cap',
-        category: 'portfolio',
-        plain: 'A ceiling on how much of the book one sector can occupy.',
-        definition:
-            'A risk rule limiting any single sector to 25% of the portfolio, so the plan cannot become a disguised single-industry bet. Theme concentration is similarly capped at 30%.',
-        related: ['position-sizing', 'theme-cap'],
-    },
-    'theme-cap': {
-        term: 'Theme cap',
-        category: 'portfolio',
-        plain: 'A ceiling on how much of the book one hype theme can occupy.',
-        definition:
-            'A risk rule limiting any single theme to 30% of the portfolio. Prevents the plan from piling into one crowded narrative (AI, biotech, etc.) regardless of how many names in it score well.',
-        related: ['position-sizing', 'sector-cap', 'theme'],
-    },
-    cash: {
-        term: 'Cash (in the plan)',
-        category: 'portfolio',
-        plain: 'Un-invested capital — a feature, not a bug.',
-        definition:
-            'The portion of the suggested plan not deployed. The value core deliberately runs ~50% cash because it only buys names with measurable edge and refuses to overpay. Cash is protection: it means you do not have to be right about everything, and you have dry powder when bargains appear.',
-        related: ['edge', 'kelly'],
-    },
-    'book-value': {
-        term: 'Book value',
-        category: 'portfolio',
-        plain: 'The accounting value of the portfolio’s invested capital.',
-        definition:
-            'The cost basis / capital base of the plan. Caps and sleeve sizes are expressed as percentages of book value (e.g., the quality sleeve is capped at ~35% of book).',
-        related: ['sleeve'],
-    },
-    sleeve: {
-        term: 'Quality sleeve',
-        category: 'portfolio',
-        plain: 'The hybrid plan’s extra bucket that buys top names regardless of price.',
-        definition:
-            'Part of the hybrid (plan2) portfolio: on top of the Kelly value core, it buys the top-ranked names REGARDLESS of valuation gap, capped at ~35% of book value. This is how the hybrid holds expensive leaders (TSM, GOOGL, MU) that the value core refuses, and deploys the idle cash. Sleeve rows are tinted pink in the plan table.',
-        related: ['book-value', 'cash', 'plan'],
-    },
-    'macro-derisk': {
-        term: 'Macro de-risk',
-        category: 'portfolio',
-        plain: 'When Fed warning lights fire, every position size halves.',
-        definition:
-            'A rule that watches macro flags built from Fed data. If two or more flags fire at once, every suggested position size is automatically halved to reduce exposure to a deteriorating macro environment.',
-        related: ['macro-flags', 'position-sizing'],
-    },
-    'macro-flags': {
-        term: 'Macro flags',
-        category: 'portfolio',
-        plain: 'Warning lights from Federal Reserve data.',
-        definition:
-            'Signals derived from FRED (Fed) data series — like yield-curve and growth indicators. Shown on the Portfolio tab as “Macro flags: …”; when 2+ fire, macro de-risk halves every size.',
-        related: ['macro-derisk', 'fred'],
-    },
-    plan: {
-        term: 'Plan (value core)',
-        category: 'portfolio',
-        plain: 'The suggested allocation built from the Research Now list.',
-        definition:
-            'A machine-built allocation (NOT your portfolio) from the Research Now list. The value core uses quarter-Kelly sizing, only buys names priced below their demonstrated growth, respects sector/theme caps, and runs ~50% cash. It is decision support — nothing executes trades.',
-        related: ['kelly', 'sleeve', 'cash'],
-    },
-    plan2: {
-        term: 'Plan2 (hybrid)',
-        category: 'portfolio',
-        plain: 'The value core plus a quality sleeve that holds the leaders.',
-        definition:
-            'The hybrid variant: the same Kelly value core, plus a quality sleeve that buys top-ranked names regardless of valuation gap (capped ~35% of book), so it captures the expensive leaders and invests more of the cash (~78% invested). Trade-off: more leader exposure, less value discipline, bigger drawdowns in a bust.',
-        related: ['sleeve', 'plan', 'drawdown'],
+            'The math that turns a shortlist into a portfolio. This site does not give you a portfolio plan. What it does give is a size hint on an AI verdict — quarter, half or full — read off how wide the value band is: the more the runs disagreed, the smaller the suggested size.',
+        related: ['iv-band', 'position-basis'],
     },
     'paper-trading': {
         term: 'Paper trading',
         category: 'track',
         plain: 'Trading with rules but no real money — recorded for real.',
         definition:
-            'The system pretends to buy and sell its own picks every day using real prices and real transaction costs, and the record is append-only and cannot be edited. It is the honest meter: if the machine is wrong, the Track Record page will say so — publicly and permanently.',
+            'The system pretends to buy and sell its own picks every day using real prices and real transaction costs, and keeps the record. It is the honest meter: if the system is wrong, the Track Record page will say so.',
         related: ['transaction-costs', 'out-of-sample', 'track-record'],
     },
     unitization: {
@@ -707,10 +633,10 @@ export const GLOSSARY: Record<string, TermDef> = {
     'behavior-gap': {
         term: 'Behavior gap',
         category: 'track',
-        plain: 'The return you lose by deviating from the plan.',
+        plain: 'The return you lose by deviating from the system.',
         definition:
-            'The difference between what the disciplined model earns and what you actually earn, caused by your own decisions — selling too early, chasing, ignoring exits. On Track Record, “mine lagging plan” is the behavior gap, measured in public with real money.',
-        related: ['track-record', 'mine', 'plan'],
+            'The difference between what the disciplined system earns and what you actually earn, caused by your own decisions — selling too early, chasing, ignoring exits. On Track Record, the Mine book lagging the Equal-weight book is the behavior gap, measured in public.',
+        related: ['track-record', 'unitization'],
     },
     'transaction-costs': {
         term: 'Transaction costs (bps)',
@@ -741,8 +667,8 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'How far the portfolio falls from its peak.',
         definition:
-            'The decline from a portfolio’s all-time high to its lowest subsequent point, in percent. A 30% drawdown means the portfolio lost 30% of its peak value at the worst point. It is the “pain” side of the risk equation — the hybrid (plan2) tends to draw down harder in busts.',
-        related: ['plan2', 'volatility', 'sharpe-ratio'],
+            'The decline from a portfolio’s all-time high to its lowest subsequent point, in percent. A 30% drawdown means the portfolio lost 30% of its peak value at the worst point. It is the “pain” side of the risk equation.',
+        related: ['volatility', 'sharpe-ratio'],
     },
     alpha: {
         term: 'Alpha / excess return',
@@ -779,10 +705,18 @@ export const GLOSSARY: Record<string, TermDef> = {
     'track-record': {
         term: 'Track Record',
         category: 'track',
-        plain: 'The honest, uneditable scoreboard of the system’s own paper trades.',
+        plain: 'The scoreboard of the system’s own paper books.',
         definition:
-            'A tab that paper-trades four portfolios daily (plan, plan2, equal, mine) with real prices and transaction costs, recorded append-only. Instead of a flattering backtest, it is a permanent public record of what the machine actually did — including its mistakes.',
+            'A tab that paper-trades three books every day with real prices and transaction costs: Equal-weight, the AI book and Mine. Instead of a flattering backtest, it is a record of what the system actually did — including its mistakes.',
         related: ['paper-trading', 'behavior-gap', 'alpha'],
+    },
+    'rn-depth': {
+        term: 'AI book (rn_depth)',
+        category: 'track',
+        plain: 'The paper book that follows the AI analyst’s passing verdicts.',
+        definition:
+            'One of the three paper books. It holds equal amounts of every shortlisted name whose AI verdict is undervalued and passes the gate. When no verdict passes, it holds only cash — which has been the case since 2026-09-24. Its history so far comes from the old analyst, which was ruled invalid, so the AI record restarts from zero when the new analyst goes live and the old history is archived.',
+        related: ['actionable', 'track-record', 'paper-trading'],
     },
 
     // ── Data & pipeline ──────────────────────────────────────────────────
@@ -831,31 +765,47 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'data',
         plain: 'The Federal Reserve’s public economic data service.',
         definition:
-            'The Federal Reserve Bank of St. Louis’s free database of US economic series. It supplies the macro series behind the macro flags that trigger de-risking.',
-        related: ['macro-flags', 'macro-derisk'],
+            'The Federal Reserve Bank of St. Louis’s free database of US economic series. It is the only source of numbers for the macro engine’s probabilities and shock alarms. News is used as context only, never as a number.',
+        related: ['probability-vector', 'shock-register'],
+    },
+    'probability-vector': {
+        term: 'Probability vector',
+        category: 'data',
+        plain: 'A probability for each economic “season”, adding up to 100%.',
+        definition:
+            'The macro engine does not just name the current economic season. It publishes a probability for each of five seasons: goldilocks, reflation, tightening, stagflation and recession. These probabilities are the main output. The single season label is only a summary, and it drives no number.',
+        related: ['shock-register', 'fred', 'sector-quota'],
+    },
+    'shock-register': {
+        term: 'Shock register',
+        category: 'data',
+        plain: 'Seven alarms that watch for sudden economic stress.',
+        definition:
+            'Seven alarms: fear (market volatility), credit, interest rates, oil, the dollar, jobs and inflation. Each is read from FRED data only. Beside them is a turbulence-risk flag that turns on when the fear index (the VIX) is 30 or higher.',
+        related: ['probability-vector', 'fred'],
     },
     'github-actions': {
         term: 'GitHub Actions',
         category: 'data',
-        plain: 'The cloud automation that re-runs the whole pipeline daily.',
+        plain: 'The cloud automation that re-runs the data pipeline on a schedule.',
         definition:
-            'A CI/CD service that automatically runs the data fetch, scoring chain, and paper-trading ledgers on a schedule. It also triggers AI analysis jobs when you request them. The entire pipeline re-runs daily, and the IC drift report recalculates monthly.',
+            'A CI/CD service that automatically runs the data fetch, the scoring chain and the paper-trading books on a schedule. The AI analyst runs separately, on a local computer.',
         related: ['pipeline'],
     },
     pipeline: {
         term: 'Pipeline',
         category: 'data',
-        plain: 'The ordered chain of scripts that turns raw data into a ranked list.',
+        plain: 'The ordered chain of steps from raw data to a graded record.',
         definition:
-            'The end-to-end process: fetch fundamentals and prices → build the fundamentals history → run the reverse engine → score factors → build the portfolio plan → measure forward outcomes. An orchestrator enforces the order and data-integrity checks so stale or partial data can never silently corrupt the rankings.',
+            'The end-to-end process: fetch filings, prices and macro data → safety filters → the three-door screen → bands → the AI analyst (when it is running) → the gate → publish to the site → paper books → grading. The scoring part runs in a fixed order with integrity checks, so stale or partial data cannot quietly corrupt the shortlist.',
         related: ['github-actions', 'reverse-engine'],
     },
     'reverse-engine': {
         term: 'Reverse engine',
         category: 'data',
-        plain: 'The first-pass safety and quality engine the factor lab builds on.',
+        plain: 'An earlier safety and quality screen whose scores feed the doors.',
         definition:
-            'The scoring stage that classifies each name’s archetype (A–F), scores survivability and data quality, and computes forensic flags. It also nominates candidates and, together with the reverse-DCF models, produces the safety inputs and demonstrated-growth numbers the Factor Lab consumes.',
+            'The scoring stage that classifies each business type (its archetype), scores how well the company would survive a downturn and how reliable its data is, and builds the reverse-DCF numbers. Its quality and survivability scores reach the screen as inputs, not as a gate.',
         related: ['pipeline', 'reverse-dcf', 'forensic'],
     },
 
@@ -865,8 +815,8 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'overlay',
         plain: 'A 0–3 tag for how exposed a company is to geopolitics.',
         definition:
-            'Geopolitical risk tagged from the company’s actual business profile — revenue geography, supply chains, regulation, sanctions. Never a buy/sell signal: instead, at level 3 it shrinks suggested position sizes and demands a bigger margin of safety.',
-        related: ['overlay', 'position-sizing'],
+            'Geopolitical risk tagged from the company’s actual business profile — revenue geography, supply chains, regulation, sanctions. Shown as a context chip. Never a buy/sell signal and never part of the shortlist ranking.',
+        related: ['overlay'],
     },
     insiders: {
         term: 'Insider buying / selling',
@@ -897,7 +847,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'overlay',
         plain: 'The company printing new shares, which shrinks your ownership slice.',
         definition:
-            'When a company issues new shares, each existing share represents a smaller slice of the pie. Heavy issuance is a forensic flag and can be a hard veto (unless the company’s archetype makes issuance its expected financing mode — like banks and some financials).',
+            'When a company issues new shares, each existing share represents a smaller slice of the pie. Heavy issuance is shown as a forensic warning.',
         related: ['forensic', 'veto'],
     },
     float: {
@@ -911,9 +861,9 @@ export const GLOSSARY: Record<string, TermDef> = {
     overlay: {
         term: 'Overlay',
         category: 'overlay',
-        plain: 'Extra context tags layered on top of the score.',
+        plain: 'Extra context tags layered on top of the ranking.',
         definition:
-            'Non-scoring signals shown as chips: GPR (geopolitical exposure) and ▲/▼ INSIDERS (informed demand). They never add to the composite — they shrink position sizes, demand bigger margins of safety, or question your thesis.',
+            'Non-scoring signals shown as chips: GPR (geopolitical exposure) and ▲/▼ INSIDERS (informed demand). They never change the ranking — they are context for your own thinking.',
         related: ['gpr', 'informed-demand'],
     },
     theme: {
@@ -921,8 +871,8 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'overlay',
         plain: 'A hype category (AI, biotech…) — context, never a scoring factor.',
         definition:
-            'A market narrative a stock belongs to (e.g., AI, semiconductor, biotech). Theme membership rides along for orientation and for crowding warnings, but never adds to the score — naive theme exposure has historically destroyed value (specialized theme ETFs average −3.1%/yr).',
-        related: ['theme-cap', 'composite'],
+            'A market narrative a stock belongs to (e.g., AI, semiconductor, biotech). Theme membership rides along for orientation, but never adds to the score — naive theme exposure has historically destroyed value (specialized theme ETFs average −3.1%/yr).',
+        related: ['overlay'],
     },
 
     // ── Misc / frequently seen ───────────────────────────────────────────
