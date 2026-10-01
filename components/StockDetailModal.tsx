@@ -1,4 +1,4 @@
-import { X, Activity, Sparkles, Layers3, ShieldCheck, Telescope, Youtube, History } from "lucide-react";
+import { X, Activity, Layers3, ShieldCheck, Telescope, Youtube, History } from "lucide-react";
 import { type ParadigmHistoryEvent, type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
 import { useLanguage } from "@/components/LanguageContext";
 import { Rs2AnalysisPanel } from "./Rs2AnalysisPanel";
@@ -10,31 +10,17 @@ import { YoutubeStrategyEvaluation, formatStrategyNumber } from "@/lib/youtube-s
 interface StockDetailModalProps {
     result: ScreeningResult;
     onClose: () => void;
-    onAskGemini?: (ticker: string) => void;
     market?: Market;
     youtubeEvaluation?: YoutubeStrategyEvaluation;
     paradigmHistory?: ParadigmHistoryEvent[];
 }
 
-export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', youtubeEvaluation, paradigmHistory = [] }: StockDetailModalProps) {
+export function StockDetailModal({ result, onClose, market = 'US', youtubeEvaluation, paradigmHistory = [] }: StockDetailModalProps) {
     const { t } = useLanguage();
     const { candidate, reasons, flags, score } = result;
 
     const [isExpanded, setIsExpanded] = useState(false);
     const [activeTab, setActiveTab] = useState<string>("rs2");
-
-    // Password gate for Generate AI Prompt (same protection as the Deepseek flow).
-    const [showAskPw, setShowAskPw] = useState(false);
-    const [askPassword, setAskPassword] = useState("");
-    const [askError, setAskError] = useState("");
-
-    const handleGeneratePrompt = () => {
-        if (askPassword !== "poe") { setAskError("Incorrect password"); return; }
-        setShowAskPw(false);
-        setAskPassword("");
-        setAskError("");
-        onAskGemini && onAskGemini(candidate.symbol);
-    };
 
     const reverse = result.reverse;
     const paradigm = result.paradigm;
@@ -181,41 +167,6 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                         <img src="https://www.google.com/s2/favicons?domain=tradingview.com&sz=32" alt="TV" className="h-4 w-4" />
                                         <span className="text-sm font-bold">TradingView</span>
                                     </a>
-                                    {showAskPw ? (
-                                        <div className="flex items-center gap-2">
-                                            <input
-                                                type="password"
-                                                placeholder="Password"
-                                                value={askPassword}
-                                                onChange={(e) => { setAskPassword(e.target.value); setAskError(""); }}
-                                                onKeyDown={(e) => e.key === 'Enter' && handleGeneratePrompt()}
-                                                autoFocus
-                                                className="w-32 border border-white/15 bg-page px-2 py-2 text-sm font-bold text-ink focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
-                                            />
-                                            <button
-                                                onClick={handleGeneratePrompt}
-                                                className="flex items-center gap-1.5 bg-pos px-3 py-2 text-sm font-extrabold text-surface transition-colors hover:bg-factor-value"
-                                            >
-                                                <Sparkles className="h-4 w-4" /> Generate
-                                            </button>
-                                            <button
-                                                onClick={() => { setShowAskPw(false); setAskPassword(""); setAskError(""); }}
-                                                className="border border-white/15 bg-white/5 px-2 py-2 text-sm font-bold text-ink-2 transition-colors hover:bg-white/10"
-                                            >
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    ) : (
-                                        <button
-                                            onClick={() => setShowAskPw(true)}
-                                            className="flex items-center gap-2 border border-accent/40 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-3 py-2 text-blue-600 transition-all hover:from-blue-500/20 hover:to-purple-500/20 dark:text-accent"
-                                            title="Ask AI about this stock (password required)"
-                                        >
-                                            <Sparkles className="h-4 w-4" />
-                                            <span className="text-sm font-bold">Generate AI Prompt</span>
-                                        </button>
-                                    )}
-                                    {askError && <span className="text-xs font-bold text-neg">{askError}</span>}
                                 </div>
                             </div>
                             <div className={clsx("w-fit  px-3 py-1.5 text-xs font-extrabold tracking-wide", result.passed ? "bg-success/20 text-pos" : "bg-muted text-ink-2")}>
@@ -358,7 +309,7 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                             </div>
                         </nav>
 
-                        {/* RS2 local-LLM research + outcomes (primary analysis surface) */}
+                        {/* RS2 local-LLM research + outcomes (AI verdict) */}
                         <div className={clsx(" border border-rule-10 bg-surface p-3  sm:p-4", activeTab !== "rs2" && "hidden")}>
                             <Rs2AnalysisPanel symbol={candidate.symbol} displayTicker={displayTicker} />
                         </div>
@@ -503,7 +454,6 @@ export function StockDetailModal({ result, onClose, onAskGemini, market = 'US', 
                                     <ReverseStat label="Primary Match" value={youtubeEvaluation.matchedStrategies[0]} />
                                     <ReverseStat label="Matches" value={youtubeEvaluation.matchedStrategies.length} />
                                     <ReverseStat label="Risk Tier" value={youtubeEvaluation.riskTier === 'standard' ? 'Standard' : 'Tiny'} />
-                                    <ReverseStat label="Position Cap" value={youtubeEvaluation.maxPositionSize} />
                                 </div>
                                 <MetricGroupLabel label="Evidence inputs" />
                                 <div className="grid grid-cols-2 gap-3 md:grid-cols-4">

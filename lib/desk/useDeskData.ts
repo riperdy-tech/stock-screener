@@ -11,11 +11,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import {
-    fetchDepthOverlay, fetchFactorScores, fetchMacroState, fetchOverlaySignals,
-    fetchPaperLedgers, fetchPortfolioPlan, fetchPortfolioPlanLlm, fetchStocks,
+    fetchDepthOverlay, fetchFactorScores, fetchOverlaySignals,
+    fetchPaperLedgers, fetchStocks,
     fetchValuationModels,
     type DepthOverlayPayload, type DepthVerdict, type FactorScoresPayload,
-    type MacroStatePayload, type ValuationModel,
+    type ValuationModel,
 } from '@/lib/data-service';
 
 export interface StockInfo {
@@ -57,20 +57,17 @@ export interface StockMetrics {
 export interface DeskData {
     factor: FactorScoresPayload | null;
     valuations: Record<string, ValuationModel>;
-    plan: any | null;
-    planLlm: any | null;
     overlay: Record<string, any>;
     depth: Record<string, DepthVerdict>;
-    depthMeta: { generated_at: string | null; count: number };
+    depthMeta: { generated_at: string | null; count: number; actionable_count: number | null };
     ledgers: any | null;
     stockInfo: Record<string, StockInfo>;
-    macro: MacroStatePayload | null;
 }
 
 const EMPTY: DeskData = {
-    factor: null, valuations: {}, plan: null, planLlm: null, overlay: {},
-    depth: {}, depthMeta: { generated_at: null, count: 0 },
-    ledgers: null, stockInfo: {}, macro: null,
+    factor: null, valuations: {}, overlay: {},
+    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null },
+    ledgers: null, stockInfo: {},
 };
 
 // ── module-level promise cache ────────────────────────────────────────────
@@ -94,16 +91,13 @@ const nz = (v: unknown): number | null =>
     typeof v === 'number' && Number.isFinite(v) && v !== 0 ? v : null;
 
 async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> {
-    const [f, v, p, ov, pl, s, pllm, dp, mc] = await Promise.all([
+    const [f, v, ov, pl, s, dp] = await Promise.all([
         cached('factor', fetchFactorScores),
         cached('valuations', fetchValuationModels),
-        cached('plan', fetchPortfolioPlan),
         cached('overlay', fetchOverlaySignals),
         cached('ledgers', fetchPaperLedgers),
         cached('stocks', () => fetchStocks('US')),
-        cached('planLlm', fetchPortfolioPlanLlm),
         cached('depth', fetchDepthOverlay),
-        cached('macro', fetchMacroState),
     ]);
 
     const stockInfo: Record<string, StockInfo> = {};
@@ -137,14 +131,18 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
     return {
         factor: f,
         valuations: v?.tickers ?? {},
-        plan: p,
-        planLlm: pllm,
         overlay: ov?.tickers ?? {},
         depth: depthPayload?.tickers ?? {},
-        depthMeta: { generated_at: depthPayload?.generated_at ?? null, count: depthPayload?.count ?? 0 },
+        depthMeta: {
+            generated_at: depthPayload?.generated_at ?? null,
+            count: depthPayload?.count ?? 0,
+            // Legacy overlays carry no top-level count: count the passing rows instead.
+            actionable_count: depthPayload == null ? null
+                : depthPayload.actionable_count
+                    ?? Object.values(depthPayload.tickers ?? {}).filter((d) => d.actionable === true).length,
+        },
         ledgers: pl,
         stockInfo,
-        macro: mc,
     };
 }
 

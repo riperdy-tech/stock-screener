@@ -7,7 +7,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Chip, Micro, SectionHead } from '../primitives';
 import { FactorMix } from './cells';
-import { sizeTone, verdictTone } from '@/lib/desk/tone';
+import { isBlocked, sizeTone, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
 import { fmtSignedPct } from '@/lib/desk/format';
 import { rankDelta, whySplit, type CompareSort, type DeskRow } from '@/lib/desk/rankings';
 
@@ -63,6 +63,7 @@ export function CompareLens({ rows, sort, onSort, onOpen }: {
                 const d = rankDelta(r);
                 const tone = verdictTone(r.depth?.direction);
                 const size = sizeTone(r.depth?.size_hint, r.depth?.n_basis);
+                const blocked = isBlocked(r.depth);
                 const agree = d !== null && Math.abs(d) < 8;
                 return (
                     <div
@@ -95,13 +96,13 @@ export function CompareLens({ rows, sort, onSort, onOpen }: {
                         </span>
 
                         <span className="block min-w-0">
-                            <span className="text-[13px] font-extrabold" style={{ color: tone.color }}>{tone.label}</span>
-                            <span className="ml-1.5 text-[11.5px] text-ink-2">· {tone.action}</span>
+                            <span className="text-[13px] font-extrabold" style={{ color: blocked ? TONE_COLORS.MUTED : tone.color }}>{tone.label}</span>
+                            <span className="ml-1.5 text-[11.5px] text-ink-2">· {blocked ? 'BLOCKED' : tone.action}</span>
                             {r.aiRank && <span className="ml-1.5 font-mono text-[11px] text-ink-3">AI #{r.aiRank}</span>}
                             <span className="mt-1 block font-mono text-[11px] text-ink-3">
                                 {fmtSignedPct(r.depth?.mos_vs_median_pct)} median gap
                                 {r.depth?.spread_pct != null && ` · ${r.depth.spread_pct.toFixed(1)}% spread`}
-                                {r.depth?.size_hint && ` → ${size.label}`}
+                                {!blocked && r.depth?.size_hint && ` → ${size.label}`}
                             </span>
                         </span>
 

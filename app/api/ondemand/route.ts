@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     try {
         const { password, ticker } = await req.json();
 
-        if (password !== "poe" && password !== process.env.APP_PASSWORD) {
+        if (!process.env.APP_PASSWORD || password !== process.env.APP_PASSWORD) {
             return NextResponse.json({ error: "Unauthorized: Invalid password" }, { status: 401 });
         }
 

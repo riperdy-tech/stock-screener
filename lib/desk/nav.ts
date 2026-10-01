@@ -33,7 +33,7 @@ export const BOOKS: { key: string; label: string; color: string; width: number }
     // splice in buildCurve. rn_depth's own NAV index restarted at ~100 on
     // 2026-08-25; the splice removes that reset so the account's progress reads
     // unbroken.
-    { key: 'rn_depth', label: 'RS2 AI', color: 'oklch(0.78 0.08 250)', width: 2 },
+    { key: 'rn_depth', label: 'AI (old analyst)', color: 'oklch(0.78 0.08 250)', width: 2 },
     // EQUAL takes the factor-value green (no other solid book line uses it). The
     // plan / plan2 / plan3 lanes (and their AI twins) were retired 2026-08-27 —
     // we no longer benchmark books we do not analyse.
@@ -209,43 +209,6 @@ export function benchReturnPct(series: NavPoint[] | undefined, sym: string, from
     const b = series[end]?.benches?.[sym];
     if (a == null || b == null || a === 0) return null;
     return (b / a - 1) * 100;
-}
-
-/**
- * The standing record shown in the header status strip. The AI record is one
- * continuous account: the retired `equal_llm` history chained into the live
- * `rn_depth` book (which restarted its own NAV index on 2026-08-25), so the
- * headline return compounds both legs. Falls back to whichever single book
- * exists when there is nothing to chain.
- */
-export function standingRecord(ledgers: any, benchSym = 'QQQ'): {
-    key: string; aiPct: number | null; benchSym: string; benchPct: number | null;
-} | null {
-    const books = ledgers?.ledgers;
-    if (!books) return null;
-    const key = books.rn_depth?.nav_series?.length ? 'rn_depth'
-        : books[AI_PREDECESSOR]?.nav_series?.length ? AI_PREDECESSOR
-        : books.equal?.nav_series?.length ? 'equal' : null;
-    if (!key) return null;
-    let series: NavPoint[] = books[key].nav_series;
-    const cumOf = (b: any): number | null =>
-        b?.summary?.cumulative_return_pct ?? seriesReturnPct(b?.nav_series);
-    let aiPct = cumOf(books[key]);
-    if (key === 'rn_depth') {
-        const prior = cumOf(books[AI_PREDECESSOR]);
-        if (prior != null && aiPct != null) {
-            aiPct = ((1 + prior / 100) * (1 + aiPct / 100) - 1) * 100;
-            // Benches are raw closes, so the yardstick spans the same chained
-            // window by simply prepending the predecessor's series.
-            series = [...(books[AI_PREDECESSOR].nav_series as NavPoint[]), ...series];
-        }
-    }
-    return {
-        key,
-        aiPct,
-        benchSym,
-        benchPct: benchReturnPct(series, benchSym),
-    };
 }
 
 /** Group trades by ISO date — the Daily Activity ledger column. */

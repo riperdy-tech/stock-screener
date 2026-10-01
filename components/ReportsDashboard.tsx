@@ -222,59 +222,13 @@ export function ReportsDashboard() {
 
     const handleSelectReport = async (report: any) => {
         setSelectedReport(report);
-        if (report.is_depth && !report.content) {
-            try {
-                const res = await fetch(`/data/depth_reports/${encodeURIComponent(report.ticker.toUpperCase())}.json?t=${Date.now()}`);
-                if (res.ok) {
-                    const bundle = await res.json();
-                    const prose = bundle.samples?.[0]?.report || (bundle.verdict ? `# ${bundle.ticker} Underwriting Contract\n\nStance: ${bundle.verdict.direction}\nMedian Intrinsic Value: $${bundle.verdict.median_iv}\nMargin of Safety: ${bundle.verdict.mos_vs_median_pct}%\n` : 'No report content available.');
-                    setSelectedReport({ ...report, content: prose });
-                }
-            } catch (err) {
-                console.error("Error loading depth report:", err);
-            }
-        }
     };
 
     const fetchReports = async () => {
         setLoading(true);
         try {
-            const [supabaseRes, depthRes] = await Promise.allSettled([
-                supabase.from('ai_reports').select('*').order('created_at', { ascending: false }),
-                fetch(`/data/depth_overlay.json?t=${Date.now()}`).then((r) => r.ok ? r.json() : null)
-            ]);
-
-            const sbData = supabaseRes.status === 'fulfilled' && supabaseRes.value?.data ? supabaseRes.value.data : [];
-            const depthData = depthRes.status === 'fulfilled' ? depthRes.value : null;
-
-            const depthReports: any[] = [];
-            if (depthData && depthData.tickers) {
-                for (const [ticker, d] of Object.entries(depthData.tickers as Record<string, any>)) {
-                    depthReports.push({
-                        id: `depth-${ticker}`,
-                        ticker: ticker,
-                        status: 'completed',
-                        created_at: d.date ? `${d.date}T12:00:00Z` : depthData.generated_at,
-                        is_depth: true,
-                        metadata: {
-                            verdict: {
-                                conviction: d.conviction_score || 10,
-                                action: d.direction === 'undervalued' ? 'BUY' : d.direction === 'overvalued' ? 'AVOID' : 'HOLD',
-                                upside_pct: d.mos_vs_median_pct || 0
-                            },
-                            classification: {
-                                archetype: d.business_quality_moat ? `Moat ★${Number(d.business_quality_moat).toFixed(1)}/5` : 'Charter v3.1 Contract'
-                            },
-                            valuation: {
-                                valuation_status: d.direction ? d.direction.toUpperCase() : 'UNDERVALUED'
-                            }
-                        }
-                    });
-                }
-            }
-
-            // Depth reports newest first, then cloud records
-            setReports([...depthReports, ...sbData]);
+            const supabaseRes = await supabase.from('ai_reports').select('*').order('created_at', { ascending: false });
+            setReports(supabaseRes?.data ?? []);
         } catch (err) {
             console.error("Error fetching reports:", err);
         } finally {
@@ -408,10 +362,10 @@ export function ReportsDashboard() {
                     <div>
                         <h1 className="flex items-center gap-2 text-xl font-extrabold tracking-tight text-ink">
                             <Sparkles className="h-5 w-5 text-accent" />
-                            AI RESEARCH REPOSITORY
+                            Archive — old Ask-AI analyses (DeepSeek, retired)
                         </h1>
-                        <p className="text-xs font-bold uppercase tracking-widest text-ink-2">
-                            Cloud-Stored Deepseek V4.0 Pro Analyses
+                        <p className="text-xs text-ink-3">
+                            These came from a retired analysis lane. They are not current verdicts — see the main desk.
                         </p>
                     </div>
                 </div>

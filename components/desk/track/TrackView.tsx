@@ -66,11 +66,8 @@ function StatCard({ book, llm, title, note, active, onClick }: {
         if (kind === 'count') return String(Math.round(v));
         return v.toFixed(2);
     };
-    const diff = (sl?.cumulative_return_pct != null && s?.cumulative_return_pct != null)
-        ? sl.cumulative_return_pct - s.cumulative_return_pct : null;
-    // The headline figure is the AI book's, falling back to the quant book where
-    // the A/B has not started (mine has no LLM twin).
-    const lead = sl?.cumulative_return_pct ?? s?.cumulative_return_pct;
+    // The headline figure is the quant book's cumulative return.
+    const lead = s?.cumulative_return_pct;
 
     return (
         <button
@@ -80,16 +77,6 @@ function StatCard({ book, llm, title, note, active, onClick }: {
         >
             <div className="flex items-baseline justify-between gap-2">
                 <Micro className={clsx('truncate', active && 'text-ink')}>{title}</Micro>
-                {diff != null && (
-                    // The spread between this book's AI twin and its quant control, in
-                    // percentage points \u2014 the same two columns the table below shows.
-                    <span
-                        className={clsx('shrink-0 font-mono text-[11px]', diff >= 0 ? 'text-pos' : 'text-neg')}
-                        title="Cumulative return of the AI book minus its quant control, in percentage points"
-                    >
-                        AI vs quant {diff >= 0 ? '+' : '\u2212'}{Math.abs(diff).toFixed(1)}pts
-                    </span>
-                )}
             </div>
             <div className={clsx('mt-1.5 font-mono text-[22px] leading-none', pctClass(lead))}>
                 {lead != null ? fmtSignedPct(lead) : '\u2014'}
@@ -103,7 +90,7 @@ function StatCard({ book, llm, title, note, active, onClick }: {
                     <thead>
                         <tr className="text-ink-3">
                             <th className="w-[38%] text-left font-normal" />
-                            <th className="w-[31%] text-right font-normal text-accent">AI</th>
+                            <th className="w-[31%] text-right font-normal text-accent">AI*</th>
                             <th className="w-[31%] text-right font-normal">quant</th>
                         </tr>
                     </thead>
@@ -122,6 +109,7 @@ function StatCard({ book, llm, title, note, active, onClick }: {
                     </tbody>
                 </table>
             )}
+            {book && <div className="mt-1.5 text-[11px] text-ink-3">* AI book since 2026-08-25, old analyst</div>}
         </button>
     );
 }
@@ -134,7 +122,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
     const { t } = useLanguage();
     const [commInput, setCommInput] = useState(DEFAULT_COMM);
     const [ledgerView, setLedgerView] = useState<BookKey>('equal');
-    const [posSource, setPosSource] = useState<'baseline' | 'llm'>('llm');
+    const [posSource, setPosSource] = useState<'baseline' | 'llm'>('baseline');
     const [tradeQuery, setTradeQuery] = useState('');
     // Opens on the AI book against all three benchmarks; the quant books are
     // one click away rather than crowding the first read.
@@ -161,23 +149,6 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
             : books[`${ledgerView}_llm`] ? `${ledgerView}_llm` : ledgerView)
         : ledgerView;
     const active = books[posKey];
-
-    // The AI stat column is the continuous account: rn_depth's live stats, but
-    // with the cumulative return chained through the retired equal_llm history
-    // (rn_depth's own NAV index restarted at 100 on 2026-08-25).
-    const aiEqualBook = useMemo(() => {
-        const rn = books.rn_depth;
-        const el = books.equal_llm;
-        if (!rn) return el;
-        const a = rn.summary?.cumulative_return_pct;
-        const b = el?.summary?.cumulative_return_pct;
-        if (a == null || b == null) return rn;
-        return {
-            ...rn,
-            summary: { ...rn.summary, cumulative_return_pct: ((1 + b / 100) * (1 + a / 100) - 1) * 100 },
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ledgers]);
 
     const holdings = useMemo(() => {
         const h = active?.state?.holdings ?? {};
@@ -218,6 +189,14 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
 
     return (
         <div>
+            <div className="border border-rule-14 px-3 py-2.5 mt-5">
+                <p className="text-[12.5px] leading-snug text-warn">
+                    The AI book follows verdicts that pass the gate. Its history so far comes from the old analyst, which has been
+                    ruled invalid, so it proves nothing either way. Since 2026-09-24 it has held only cash, because no verdict passes
+                    the gate. When the new analyst goes live, the AI record restarts from zero and this history is archived.
+                </p>
+            </div>
+
             {/* Header + what-if costs */}
             <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4 py-7">
                 <div className="max-w-[620px]">
@@ -252,7 +231,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                     <StatCard
                         key={c.key}
                         book={books[c.key]}
-                        llm={c.key === 'equal' ? aiEqualBook : books[`${c.key}_llm`]}
+                        llm={c.key === 'equal' ? books.rn_depth : books[`${c.key}_llm`]}
                         title={c.title}
                         note={c.key === 'mine' && !loggedIn ? 'log in and save a portfolio snapshot' : c.note}
                         active={ledgerView === c.key}
@@ -278,7 +257,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
                     right={
                         <span className="flex items-center gap-2">
                             <Chip active={posSource === 'baseline'} onClick={() => setPosSource('baseline')} className="px-2.5 py-1 text-[11px]">Quant</Chip>
-                            <Chip active={posSource === 'llm'} onClick={() => setPosSource('llm')} className="px-2.5 py-1 text-[11px]">RS2 AI</Chip>
+                            <Chip active={posSource === 'llm'} onClick={() => setPosSource('llm')} className="px-2.5 py-1 text-[11px]">AI (old analyst)</Chip>
                         </span>
                     }
                 />

@@ -20,7 +20,7 @@ const spline = Spline_Sans_Mono({
 
 export const metadata: Metadata = {
     title: "Stockpeak — Institutional Underwriting Desk",
-    description: "Charter v3.1 Institutional Equity Underwriting: Multi-scenario valuation triad, Section 12 institutional contract, and adaptive consensus.",
+    description: "A quant screen narrows the US market to a shortlist; an AI analyst values each name; code checks every verdict before it counts. Research, not investment advice.",
 };
 
 export default function RootLayout({

@@ -12,7 +12,6 @@ import { Shell } from './desk/Shell';
 import { RankingsView, type Lens } from './desk/rankings/RankingsView';
 import { TrackView } from './desk/track/TrackView';
 import { MyPortfolio } from './desk/portfolio/MyPortfolio';
-import { SuggestedPlan } from './desk/portfolio/SuggestedPlan';
 
 type TabId = 'rankings' | 'track' | 'portfolio';
 
@@ -30,8 +29,8 @@ export default function CockpitDashboard() {
     // Every payload (and the private `mine` ledger merge) comes from one cached hook so
     // navigating to a ticker page and back never refetches the 16 MB of static JSON/CSV.
     const {
-        factor, valuations, plan, planLlm, overlay, depth, depthMeta,
-        ledgers, stockInfo, macro, loading, reload, auth,
+        factor, valuations, overlay, depth, depthMeta,
+        ledgers, stockInfo, loading, reload, auth,
     } = useDeskData();
     // THE LENS — RS2 AI verdicts (default), the quant filter that feeds them, or
     // the two side by side. Rankings owns its own filters.
@@ -47,7 +46,7 @@ export default function CockpitDashboard() {
     const [showAuth, setShowAuth] = useState(false);
 
     return (
-        <Shell tab={tab} factor={factor} depthMeta={depthMeta} ledgers={ledgers} loading={loading} onReload={reload}>
+        <Shell tab={tab} factor={factor} depthMeta={depthMeta} loading={loading} onReload={reload}>
             <div className="pt-6">
                 {tab === 'rankings' && (
                     <RankingsView
@@ -72,10 +71,6 @@ export default function CockpitDashboard() {
                             overlay={overlay} stockInfo={stockInfo}
                             onSelect={(t) => openTicker(t, 'port')}
                             user={auth.user} onRequireLogin={() => setShowAuth(true)}
-                        />
-                        <SuggestedPlan
-                            plan={plan} planLlm={planLlm} macro={macro} overlay={overlay}
-                            onOpenTicker={(t) => openTicker(t, 'port')}
                         />
                     </div>
                 )}

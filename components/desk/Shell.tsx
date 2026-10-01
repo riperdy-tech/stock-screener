@@ -12,8 +12,6 @@ import { LanguageToggle } from '@/components/LanguageToggle';
 import { AuthModal } from '@/components/AuthModal';
 import { useAuth } from '@/lib/useAuth';
 import { Micro, Modal } from './primitives';
-import { standingRecord } from '@/lib/desk/nav';
-import { fmtSignedPct } from '@/lib/desk/format';
 
 export type DeskTab = 'rankings' | 'track' | 'portfolio';
 
@@ -66,44 +64,32 @@ export function ChangelogModal({ onClose }: { onClose: () => void }) {
     );
 }
 
-/** Run provenance left, standing paper-trade record right. Mono 10px throughout. */
-export function StatusStrip({ factor, depthMeta, ledgers }: {
+/** Run provenance, mono 11px. */
+export function StatusStrip({ factor, depthMeta }: {
     factor?: { generated_at?: string; scored_count?: number } | null;
-    depthMeta?: { generated_at: string | null; count: number };
-    ledgers?: any;
+    depthMeta?: { generated_at: string | null; count: number; actionable_count?: number | null };
 }) {
-    const record = standingRecord(ledgers);
     const depthDate = (depthMeta?.generated_at ?? '').slice(0, 10);
     const left = [
-        depthDate ? `DEPTH RUN ${depthDate}` : 'DEPTH RUN — PENDING',
-        '3 RUNS PER STOCK',
-        depthMeta?.count ? `${depthMeta.count} ANALYZED` : null,
-        factor?.scored_count ? `${factor.scored_count.toLocaleString('en-US')} QUANT-FILTERED` : null,
+        depthDate ? `AI VERDICTS ${depthDate}` : 'AI VERDICTS — NONE',
+        depthMeta?.count ? `${depthMeta.count} ON RECORD` : null,
+        depthMeta?.actionable_count != null ? `${depthMeta.actionable_count} PASS THE GATE` : null,
+        factor?.scored_count ? `${factor.scored_count.toLocaleString('en-US')} QUANT-SCORED` : null,
     ].filter(Boolean).join(' · ');
 
     return (
         <div className="border-b border-rule-14">
             <div className="mx-auto flex max-w-desk flex-wrap items-center justify-between gap-x-6 gap-y-1 px-5 py-2 sm:px-10">
                 <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2">{left}</span>
-                {record && (
-                    <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2">
-                        AI PICKS{' '}
-                        <span className={clsx('font-semibold', (record.aiPct ?? 0) >= 0 ? 'text-pos' : 'text-neg')}>
-                            {fmtSignedPct(record.aiPct)}
-                        </span>{' '}
-                        VS {record.benchSym} {fmtSignedPct(record.benchPct)}
-                    </span>
-                )}
             </div>
         </div>
     );
 }
 
-export function Shell({ tab, factor, depthMeta, ledgers, loading, onReload, children }: {
+export function Shell({ tab, factor, depthMeta, loading, onReload, children }: {
     tab?: DeskTab | null;
     factor?: any;
-    depthMeta?: { generated_at: string | null; count: number };
-    ledgers?: any;
+    depthMeta?: { generated_at: string | null; count: number; actionable_count?: number | null };
     loading?: boolean;
     onReload?: () => void;
     children: React.ReactNode;
@@ -157,7 +143,7 @@ export function Shell({ tab, factor, depthMeta, ledgers, loading, onReload, chil
                 </div>
             </header>
 
-            <StatusStrip factor={factor} depthMeta={depthMeta} ledgers={ledgers} />
+            <StatusStrip factor={factor} depthMeta={depthMeta} />
 
             <main className="mx-auto max-w-desk px-5 pb-24 sm:px-10 lg:pb-16">{children}</main>
 

@@ -4,17 +4,14 @@ import { useState, useEffect, useMemo, useRef, useCallback, type ReactNode } fro
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
 import { fetchStocks, fetchReverseScores, fetchParadigmScores, fetchParadigmHistory, Market } from "@/lib/data-service";
-import { buildPrompt } from "@/lib/prompt-builder";
 import { ParadigmHistoryEvent, ParadigmResult, ReverseResult, ScreeningResult } from "@/lib/blueprint";
 import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS, ParadigmFilterState, DEFAULT_PARADIGM_FILTERS, PARADIGM_BAND_LABELS } from "./FilterSidebar";
 import { evaluateYoutubeStrategy, matchesYoutubeStrategyFilter, YoutubeStrategyEvaluation, YoutubeStrategyFilter } from "@/lib/youtube-strategy";
-import { supabase } from "@/lib/supabase";
 import { LanguageToggle } from "./LanguageToggle";
 import { LogConsole } from "./LogConsole";
-import { Sparkles, RefreshCw, X, Search, Filter, Copy, Check, Terminal, HelpCircle, Telescope, ShieldCheck, Layers3, Youtube, LayoutGrid, Table2, History, ArrowLeft } from 'lucide-react';
+import { Sparkles, RefreshCw, X, Search, Filter, Terminal, HelpCircle, Telescope, ShieldCheck, Layers3, Youtube, LayoutGrid, Table2, History, ArrowLeft } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
 import clsx from "clsx";
 
 type ScreenMode = '100bagger' | 'reverse' | 'paradigm' | 'youtube';
@@ -225,44 +222,6 @@ export function ScreenerDashboard() {
     const rawResultsRef = useRef<ScreeningResult[]>([]);
     useEffect(() => { rawResultsRef.current = rawResults; }, [rawResults]);
 
-    // AI Review State
-    const [aiModalOpen, setAiModalOpen] = useState(false);
-    const [selectedAiTicker, setSelectedAiTicker] = useState<string | null>(null);
-    const [aiLoading, setAiLoading] = useState(false);
-    const [aiResult, setAiResult] = useState<string | null>(null);
-    
-
-    const [copied, setCopied] = useState(false);
-    const [dsCopied, setDsCopied] = useState(false);
-    
-
-    const copyToClipboard = (text: string) => {
-        if (text) {
-            navigator.clipboard.writeText(text);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
-        }
-    };
-    
-    // Deepseek states
-    const [dsPassword, setDsPassword] = useState("");
-    const [showDsPassword, setShowDsPassword] = useState(false);
-    const [dsLoading, setDsLoading] = useState(false);
-    const [dsResult, setDsResult] = useState<any>(null);
-    const [dsError, setDsError] = useState("");
-    
-    const [backgroundDsTask, setBackgroundDsTask] = useState<{ticker: string, status: 'running' | 'completed' | 'error' | 'success', message?: string} | null>(null);
-
-    // Phase 11d: Batch deep-dive state
-    const [batchN, setBatchN] = useState(25);
-    const [showBatchConfirm, setShowBatchConfirm] = useState(false);
-    const [batchId, setBatchId] = useState<string | null>(null);
-    const [batchProgress, setBatchProgress] = useState<{ completed: number; failed: number; total: number; tickers?: { ticker: string; status: string }[] } | null>(null);
-    const [batchDispatching, setBatchDispatching] = useState(false);
-    const [showBatchPassword, setShowBatchPassword] = useState(false);
-    const [batchStatus, setBatchStatus] = useState<string | null>(null); // user-visible feedback
-    const [selectedTickers, setSelectedTickers] = useState<Set<string>>(new Set());
-
     const toggleYoutubeFilter = (filter: YoutubeStrategyFilter) => {
         setYoutubeFilters(prev => {
             if (filter === "any") return ["any"];
@@ -284,188 +243,6 @@ export function ScreenerDashboard() {
 
         return youtubeFilters.every(filter => matchesYoutubeStrategyFilter(evaluation, filter));
     }, [youtubeFilters]);
-
-    const dismissBatchPanel = (id: string | null = batchId) => {
-        if (id) {
-            try {
-                const dismissed = JSON.parse(localStorage.getItem('dismissedBatchIds') || '[]');
-                const next = Array.isArray(dismissed) ? Array.from(new Set([...dismissed, id])).slice(-50) : [id];
-                localStorage.setItem('dismissedBatchIds', JSON.stringify(next));
-            } catch { /* ignore */ }
-        }
-        setBatchProgress(null);
-        setBatchId(null);
-        setBatchStatus(null);
-    };
-    
-    const handleDeepseekRun = async () => {
-        if (!dsPassword) { setDsError("Please enter password"); return; }
-        setDsLoading(true); setDsError("");
-        setBackgroundDsTask({ ticker: selectedAiTicker || "Unknown", status: 'running' });
-        try {
-            console.log("Starting analysis for:", selectedAiTicker);
-            const res = await fetch("/api/analysis", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    password: dsPassword,
-                    ticker: selectedAiTicker,
-                    prompt: aiResult
-                })
-            });
-
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || `Server error: ${res.status}`);
-
-            if (data.status === 'queued') {
-                // Background worker started
-                setDsLoading(false);
-                setDsPassword("");
-                setShowDsPassword(false);
-                setBackgroundDsTask({ 
-                    ticker: selectedAiTicker || "Unknown", 
-                    status: 'running', 
-                    message: `Deepseek V4.0 Pro is thinking for ${selectedAiTicker}... This may take 2-3 minutes.` 
-                });
-                return;
-            }
-
-            const dsResultData = data;
-            setDsResult(dsResultData);
-            setDsLoading(false);
-            setDsPassword("");
-            setShowDsPassword(false);
-            
-            // Background task update
-            setBackgroundDsTask({ ticker: selectedAiTicker || "Unknown", status: 'success' });
-            
-        } catch (e: any) {
-            console.error("Analysis Error:", e);
-            setDsError(`Connection Error: ${e.message}. (Check if your internet or ad-blocker is blocking the request)`);
-            setDsLoading(false);
-            setBackgroundDsTask({ ticker: selectedAiTicker || "Unknown", status: 'error', message: e.message });
-        } finally {
-            setDsLoading(false);
-        }
-    };
-    
-    const downloadDsResult = () => {
-        if (!dsResult) return;
-        const text = `Date: ${dsResult.timestamp}\nCost: $${dsResult.cost}\n\n${dsResult.content}`;
-        const blob = new Blob([text], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${selectedAiTicker}_deepseek_report.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    };
-    
-    const copyDsResult = () => {
-        if (!dsResult) return;
-        navigator.clipboard.writeText(dsResult.content);
-        setDsCopied(true);
-        setTimeout(() => setDsCopied(false), 2000);
-    };
-
-    // Phase 11d: Batch deep-dive dispatch
-    const handleBatchDispatch = async () => {
-        if (!dsPassword) { setBatchStatus("Enter password first"); return; }
-        setShowBatchConfirm(false);
-        setBatchDispatching(true);
-        setBatchStatus("Dispatching...");
-
-        const topN = selectedTickers.size > 0
-            ? Array.from(selectedTickers)
-            : filteredResults
-                .filter(r => r.reverse && r.reverse.rev_band && r.reverse.rev_band !== 'Excluded')
-                .slice(0, batchN)
-                .map(r => r.candidate.symbol);
-
-        if (topN.length === 0) {
-            setBatchDispatching(false);
-            setBatchStatus("No stocks selected.");
-            return;
-        }
-
-        try {
-            const res = await fetch("/api/analysis/batch", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ tickers: topN, password: dsPassword })
-            });
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || `Server error: ${res.status}`);
-            setBatchId(data.batch_id);
-            setBatchProgress({ completed: 0, failed: 0, total: data.queued });
-            const msg = `Dispatched ${data.queued} analyses${data.skipped ? ` (${data.skipped} skipped - already analyzed)` : ''} - waiting for workers...`;
-            setBatchStatus(msg);
-            setDsPassword("");
-        } catch (e: any) {
-            console.error("Batch dispatch error:", e);
-            setBatchStatus(`Error: ${e.message}`);
-        } finally {
-            setBatchDispatching(false);
-        }
-    };
-
-    // Phase 11d: Batch progress polling
-    useEffect(() => {
-        if (!batchId) return;
-        const poll = async () => {
-            try {
-                const { data, error } = await supabase
-                    .from('ai_reports')
-                    .select('ticker, status')
-                    .eq('batch_id', batchId);
-                if (error) return;
-                const completed = data.filter((r: any) => r.status === 'completed').length;
-                const failed = data.filter((r: any) => r.status === 'error').length;
-                setBatchProgress({ completed, failed, total: data.length, tickers: data });
-            } catch (e) { /* silent */ }
-        };
-        poll();
-        const interval = setInterval(poll, 5000);
-        return () => clearInterval(interval);
-    }, [batchId]);
-
-    // Auto-hide batch panel 8s after completion
-    useEffect(() => {
-        if (!batchId || !batchProgress) return;
-        const done = batchProgress.completed + batchProgress.failed >= batchProgress.total;
-        if (!done) return;
-        const t = setTimeout(() => {
-            dismissBatchPanel(batchId);
-        }, 8000);
-        return () => clearTimeout(t);
-    }, [batchId, batchProgress]);
-
-
-    const handleAiReview = async (result: ScreeningResult) => {
-        const ticker = result.candidate.symbol;
-        setSelectedAiTicker(ticker);
-        setAiModalOpen(true);
-        setAiLoading(true);
-        setAiResult(null);
-        setCopied(false);
-        setDsCopied(false);
-        setDsResult(null);
-        setDsError("");
-        setShowDsPassword(false);
-        
-        try {
-            const prompt = await buildPrompt(ticker, result);
-            setAiResult(prompt);
-        } catch (e: any) {
-            setAiResult("Error: " + e.message);
-        } finally {
-            setAiLoading(false);
-        }
-    };
-
-
 
     // Initial Load (Once on mount)
     useEffect(() => {
@@ -896,7 +673,6 @@ export function ScreenerDashboard() {
 
     const handleStrategySwitch = (id: StrategyId) => {
         setScreenMode(id);
-        setSelectedTickers(new Set());
 
         if (id === 'youtube') {
             setYoutubeFilters(["any"]);
@@ -1020,15 +796,6 @@ export function ScreenerDashboard() {
                 setParadigmFilters={setParadigmFilters}
                 youtubeFilters={youtubeFilters}
                 onYoutubeFilterToggle={toggleYoutubeFilter}
-                batchN={batchN}
-                onBatchNChange={setBatchN}
-                batchDispatching={batchDispatching}
-                batchStatus={batchStatus}
-                onDeepDiveClick={() => {
-                    if (!dsPassword) { setShowBatchPassword(true); return; }
-                    setShowBatchConfirm(true);
-                }}
-                selectedCount={selectedTickers.size}
             />
 
             {/* 2. Main Content Area */}
@@ -1255,55 +1022,6 @@ export function ScreenerDashboard() {
                             ))}
                         </div>
                     </section>
-                    {/* Phase 11d: Batch Progress Bar */}
-                    {screenMode === 'reverse' && batchId && (
-                        <div className="mb-4 border border-pos/40 bg-pos/10 p-4 animate-in fade-in">
-                            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                                <div className="flex items-start gap-3">
-                                    <Sparkles className={clsx("mt-1 h-5 w-5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-pos" : "text-pos animate-pulse")} />
-                                    <div>
-                                        <span className="text-lg font-extrabold text-pos">Batch Deep-Dive</span>
-                                        <span className="mt-1 block text-base text-ink-2 sm:ml-3 sm:inline">
-                                            {batchProgress
-                                                ? `${batchProgress.completed} of ${batchProgress.total} complete${batchProgress.failed > 0 ? ` (${batchProgress.failed} failed)` : ''}`
-                                                : `Waiting for workers...`}
-                                        </span>
-                                    </div>
-                                </div>
-                                <button onClick={() => dismissBatchPanel()} className="w-fit border border-rule-10 px-3.5 py-2 text-base font-bold text-ink-2 transition-colors hover:bg-white/5 hover:text-ink">Dismiss</button>
-                            </div>
-                            {batchProgress && (
-                                <div className="mt-3 grid grid-cols-3 gap-2">
-                                    <BatchMiniStat label="Done" value={batchProgress.completed} />
-                                    <BatchMiniStat label="Failed" value={batchProgress.failed} />
-                                    <BatchMiniStat label="Total" value={batchProgress.total} />
-                                </div>
-                            )}
-                            {batchProgress && (
-                                <div className="mt-3 h-2.5 w-full overflow-hidden bg-white/5">
-                                    <div className="h-full bg-pos transition-all duration-700"
-                                        style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
-                                </div>
-                            )}
-                            {batchProgress?.tickers && (
-                                <div className="mt-3 flex max-h-28 flex-wrap gap-2 overflow-y-auto">
-                                    {batchProgress.tickers.map((t: any) => (
-                                        <span key={t.ticker} className={clsx(
-                                            " px-2.5 py-1.5 font-mono text-base font-bold",
-                                            t.status === 'completed' ? "bg-pos/10 text-pos" :
-                                            t.status === 'error' ? "bg-neg/10 text-neg" :
-                                            "bg-white/5 text-ink-2"
-                                        )}>
-                                            {t.ticker}{t.status === 'completed' ? ' done' : t.status === 'error' ? ' error' : ' pending'}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
-                            {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                <p className="mt-3 text-base font-bold text-pos">All done! Open any stock card to view its report.</p>
-                            )}
-                        </div>
-                    )}
                     <div className="mb-4 border border-rule-10 bg-surface p-4">
                         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                             <div className="min-w-0">
@@ -1556,31 +1274,6 @@ export function ScreenerDashboard() {
                                 <div className="grid grid-cols-1 gap-4 mb-8 lg:grid-cols-2 2xl:grid-cols-3">
                                     {currentData.map((result, i) => (
                                         <div key={result.candidate.symbol} className="relative group/card">
-                                            {/* Selection checkbox - reverse mode only */}
-                                            {screenMode === 'reverse' && (
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        const sym = result.candidate.symbol;
-                                                        setSelectedTickers(prev => {
-                                                            const next = new Set(prev);
-                                                            next.has(sym) ? next.delete(sym) : next.add(sym);
-                                                            return next;
-                                                        });
-                                                    }}
-                                                    className={clsx(
-                                                        "absolute top-2 right-2 z-20 w-6 h-6  border-2 flex items-center justify-center transition-all",
-                                                        selectedTickers.has(result.candidate.symbol)
-                                                            ? "bg-pos border-pos text-surface"
-                                                            : "bg-page border-rule-10 hover:border-emerald-400"
-                                                    )}
-                                                    aria-label={`${selectedTickers.has(result.candidate.symbol) ? 'Deselect' : 'Select'} ${result.candidate.symbol}`}
-                                                >
-                                                    {selectedTickers.has(result.candidate.symbol) && (
-                                                        <Check className="h-3.5 w-3.5" />
-                                                    )}
-                                                </button>
-                                            )}
                                             <StockCard
                                                 result={result}
                                                 onClick={() => setSelectedStock(result)}
@@ -1600,14 +1293,6 @@ export function ScreenerDashboard() {
                                     market={selectedMarket}
                                     screenMode={screenMode}
                                     youtubeEvaluations={youtubeEvaluations}
-                                    selectedTickers={selectedTickers}
-                                    onToggleSelected={(symbol) => {
-                                        setSelectedTickers(prev => {
-                                            const next = new Set(prev);
-                                            next.has(symbol) ? next.delete(symbol) : next.add(symbol);
-                                            return next;
-                                        });
-                                    }}
                                     onOpen={setSelectedStock}
                                 />
                             )}
@@ -1673,343 +1358,9 @@ export function ScreenerDashboard() {
                     result={selectedStock}
                     market={selectedMarket}
                     onClose={() => setSelectedStock(null)}
-                    onAskGemini={(ticker: string) => handleAiReview(selectedStock)}
                     youtubeEvaluation={youtubeEvaluations.get(selectedStock.candidate.symbol)}
                     paradigmHistory={paradigmHistoryBySymbol.get(selectedStock.candidate.symbol)}
                 />
-            )}
-
-            {/* AI Modal Overlay */}
-            {aiModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-end justify-center bg-page animate-in fade-in duration-200 sm:items-center sm:p-3">
-                    <div className="flex h-[94vh] w-full flex-col overflow-hidden -xl border border-rule-14 bg-surface sm:h-[90vh] sm:max-w-[92vw] sm: lg:max-w-5xl">
-                        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-rule-14 bg-white/5 p-3 sm:p-4">
-                            <div className="min-w-0">
-                                <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-ink-2">Research handoff</p>
-                                <h3 className="mt-0.5 text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
-                                    Prompt Exporter: {selectedAiTicker}
-                                </h3>
-                                <p className="mt-1 text-sm leading-relaxed text-ink-2">
-                                    Copy the prepared prompt, open a model, or run the protected Deepseek workflow.
-                                </p>
-                            </div>
-                            <button onClick={() => setAiModalOpen(false)} className="text-ink-2 hover:text-ink shrink-0 ml-2" aria-label="Close AI prompt modal">
-                                <X className="h-5 w-5" />
-                            </button>
-                        </div>
-                        <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-3 sm:p-4">
-                            {aiLoading ? (
-                                <div className="flex flex-col items-center justify-center flex-1 text-ink-2 gap-4">
-                                    <RefreshCw className="h-8 w-8 animate-spin text-accent" />
-                                    <p className="text-base font-medium text-center">Injecting latest real-time statements and building prompt...</p>
-                                </div>
-                            ) : aiResult ? (
-                                <div className="flex min-h-0 flex-1 flex-col gap-3">
-                                    <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-                                        <PromptStat label="Ticker" value={selectedAiTicker || "Unknown"} sub="Active scorecard" />
-                                        <PromptStat label="Prompt" value={`${aiResult.length.toLocaleString()} chars`} sub="Ready to copy" />
-                                        <PromptStat label="Output" value={dsResult ? "Report ready" : "Manual or cloud"} sub={dsResult ? "Deepseek result loaded" : "Choose a model below"} />
-                                    </div>
-                                    <div className="grid min-h-[260px] flex-1 grid-cols-1 gap-3 sm:min-h-[300px]">
-                                        {/* Prompt Box */}
-                                        <div className="relative flex-1 bg-page border border-rule-14 overflow-hidden flex flex-col">
-                                            <div className="flex shrink-0 flex-col gap-2 border-b border-rule-14 bg-white/5 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between">
-                                                <div>
-                                                    <span className="font-mono text-xs font-semibold uppercase tracking-wider text-ink-2">INTEGRATED INVESTMENT ANALYSIS ENGINE v2.0</span>
-                                                    <p className="mt-0.5 text-sm text-ink-2">Prepared analysis packet for valuation, scenarios, risks, and final verdict.</p>
-                                                </div>
-                                                <button
-                                                    onClick={() => copyToClipboard(aiResult!)}
-                                                    className="flex w-full items-center justify-center gap-2 border border-pos/40 bg-pos/10 px-3 py-2 text-sm font-extrabold text-pos transition-colors hover:bg-pos/10 sm:w-auto"
-                                                >
-                                                    {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                                                    {copied ? 'COPIED!' : 'COPY PROMPT'}
-                                                </button>
-                                            </div>
-                                            <textarea
-                                                readOnly
-                                                value={aiResult || ""}
-                                                className="h-full w-full flex-1 resize-none overflow-y-auto bg-transparent p-3 font-mono text-xs leading-6 text-ink-q focus:outline-none focus:ring-0 sm:text-sm"
-                                            />
-                                        </div>
-                                        
-                                        {/* Deepseek Result Box */}
-                                        {dsResult && (
-                                            <div className="relative flex-1 bg-surface border border-accent/40 overflow-hidden flex flex-col">
-                                                <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-accent/40 bg-accent/10 px-3 py-2.5">
-                                                    <span className="font-mono text-xs font-semibold uppercase tracking-wider text-accent">QUANT REPORT</span>
-                                                    <div className="flex items-center gap-3">
-                                                        <div className="flex flex-col">
-                                                            <h1 className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-base font-extrabold tracking-tight text-transparent">
-                                                                QUANT <span className="text-accent">PRO</span>
-                                                            </h1>
-                                                            <div className="flex items-center gap-2">
-                                                                <span className="text-xs font-medium uppercase tracking-widest text-ink-2">Global Terminal</span>
-                                                                <div className="h-1 w-1 bg-green-500 animate-pulse" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button onClick={downloadDsResult} className="flex items-center gap-1 bg-white/5 px-3 py-2 text-sm font-bold hover:bg-white/5">Download .txt</button>
-                                                    <button onClick={copyDsResult} className="flex items-center gap-1 border border-pos/40 bg-pos/10 px-3 py-2 text-sm font-bold text-pos hover:bg-pos/10">
-                                                        {dsCopied ? "Copied" : "Copy Result"}
-                                                    </button>
-                                                </div>
-                                                <div className="flex-1 overflow-y-auto bg-page/40 p-4 sm:p-5">
-                                                    <div className="prose prose-invert prose-blue max-w-none break-words whitespace-pre-wrap font-sans text-sm leading-relaxed text-ink">
-                                                        <ReactMarkdown>
-                                                            {dsResult.content
-                                                                .replace(/^```(markdown|json|text)?/i, '')
-                                                                .replace(/```$/, '')
-                                                                .replace(/\\n/g, '\n')
-                                                                .replace(/\\t/g, '\t')
-                                                                .trim()}
-                                                        </ReactMarkdown>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className="shrink-0 border border-rule-10 bg-white/5 p-3">
-                                        <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-                                            <div>
-                                                <div className="text-xs font-extrabold uppercase tracking-[0.16em] text-ink-2">Choose output path</div>
-                                                <div className="mt-0.5 text-sm font-semibold text-ink">Open a manual model, or run the protected Deepseek workflow.</div>
-                                            </div>
-                                            <div className="text-xs font-bold text-ink-2">Prompt is ready to export</div>
-                                        </div>
-                                        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
-                                            <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#1A73E8]/90 px-3 py-2.5 text-ink transition-all hover:bg-[#1557B0] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64" alt="Gemini" className="h-7 w-7 shrink-0 bg-white p-1" />
-                                            <span className="min-w-0">
-                                                <span className="block text-sm font-extrabold tracking-tight">Gemini</span>
-                                                <span className="mt-0.5 block text-xs font-bold text-ink/80">Open manual chat</span>
-                                            </span>
-                                            </a>
-                                            <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#D97757]/90 px-3 py-2.5 text-ink transition-all hover:bg-[#C26547] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" className="h-7 w-7 shrink-0 bg-white p-1" />
-                                            <span className="min-w-0">
-                                                <span className="block text-sm font-extrabold tracking-tight">Claude</span>
-                                                <span className="mt-0.5 block text-xs font-bold text-ink/80">Open manual chat</span>
-                                            </span>
-                                            </a>
-                                            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#10A37F]/90 px-3 py-2.5 text-ink transition-all hover:bg-[#0E906F] active:scale-95">
-                                            <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" className="h-7 w-7 shrink-0 bg-white p-1" />
-                                            <span className="min-w-0">
-                                                <span className="block text-sm font-extrabold tracking-tight">ChatGPT</span>
-                                                <span className="mt-0.5 block text-xs font-bold text-ink/80">Open manual chat</span>
-                                            </span>
-                                            </a>
-                                            {showDsPassword ? (
-                                                <div className="flex min-h-16 flex-col justify-center gap-2 border border-[#4d6bfe]/40 bg-[#4d6bfe]/20 px-3 py-2.5">
-                                                    <div>
-                                                        <div className="text-xs font-extrabold uppercase tracking-wider text-accent">Protected run</div>
-                                                        <div className="mt-0.5 text-xs font-semibold text-ink-2">Enter the workflow password to generate and save a report.</div>
-                                                    </div>
-                                                    <input type="password" placeholder="Password" value={dsPassword} onChange={(e)=>setDsPassword(e.target.value)} className="w-full border border-white/15 bg-page px-3 py-2 text-sm font-bold text-ink focus:outline-none focus:ring-2 focus:ring-[#4d6bfe]/50" />
-                                                    <div className="grid grid-cols-2 gap-2">
-                                                        <button onClick={() => setShowDsPassword(false)} disabled={dsLoading} className="border border-white/15 bg-white/5 px-3 py-2 text-sm font-bold text-ink/80 transition-colors hover:bg-white/10 disabled:opacity-50">
-                                                            Cancel
-                                                        </button>
-                                                        <button onClick={handleDeepseekRun} disabled={dsLoading} className="bg-[#4d6bfe] px-3 py-2 text-sm font-extrabold text-ink transition-colors hover:bg-[#3b54d1] disabled:opacity-60">
-                                                            {dsLoading ? "Running..." : "Run Deepseek"}
-                                                        </button>
-                                                    </div>
-                                                    {dsError && <span className="border border-danger/30 bg-danger/10 px-3 py-2 text-xs font-bold text-neg">{dsError}</span>}
-                                                </div>
-                                            ) : (
-                                                <button onClick={() => setShowDsPassword(true)} className="flex min-h-16 items-center gap-2.5 border border-white/10 bg-[#4d6bfe]/90 px-3 py-2.5 text-left text-ink transition-all hover:bg-[#3b54d1] active:scale-95">
-                                                <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=64" alt="Deepseek" className="h-7 w-7 shrink-0 bg-white p-1" />
-                                                <span className="min-w-0">
-                                                    <span className="block text-sm font-extrabold tracking-tight">Deepseek V4.0 Pro</span>
-                                                    <span className="mt-0.5 block text-xs font-bold text-ink/80">Run protected workflow</span>
-                                                </span>
-                                                </button>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : null}
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Phase 11d: Batch Password Prompt */}
-            {showBatchPassword && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-page">
-                    <div className="w-full max-w-md animate-in zoom-in-95 border border-rule-10 bg-surface p-6">
-                        <div className="flex items-start gap-3">
-                            <div className="border border-pos/40 bg-pos/10 p-3 text-pos">
-                                <Sparkles className="h-6 w-6" />
-                            </div>
-                            <div className="min-w-0 flex-1">
-                                <div className="mb-2 flex flex-wrap items-center gap-2">
-                                    <span className="border border-pos/40 bg-pos/10 px-2.5 py-1 text-base font-extrabold uppercase tracking-wider text-pos">
-                                        Step 1 of 2
-                                    </span>
-                                </div>
-                                <h3 className="text-2xl font-extrabold tracking-tight">Protected Deep-Dive</h3>
-                                <p className="mt-1 text-base leading-relaxed text-ink-2">Enter the dispatch password before queuing v3.2 analyses.</p>
-                            </div>
-                        </div>
-                        <div className="my-5 grid grid-cols-2 gap-3">
-                            <DialogStat label="Selection" value={selectedTickers.size > 0 ? selectedTickers.size : batchN} />
-                            <DialogStat label="Source" value={selectedTickers.size > 0 ? "Selected" : "Top ranked"} />
-                        </div>
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={dsPassword}
-                            onChange={(e) => setDsPassword(e.target.value)}
-                            className="mb-4 w-full border border-rule-14 bg-white/5 px-3.5 py-3 text-base focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                            onKeyDown={(e) => { if (e.key === 'Enter' && dsPassword) { setShowBatchPassword(false); setShowBatchConfirm(true); } }}
-                        />
-                        <div className="mb-4 border border-pos/40 bg-pos/10 px-3.5 py-3 text-base font-semibold leading-relaxed text-pos">
-                            Nothing is dispatched yet. The next screen shows the final queue count before workers start.
-                        </div>
-                        <div className="flex gap-3">
-                            <button onClick={() => setShowBatchPassword(false)} className="flex-1 border border-rule-14 bg-muted px-3.5 py-3 text-base font-bold text-ink-2 transition-colors hover:bg-white/5">Cancel</button>
-                            <button
-                                onClick={() => { setShowBatchPassword(false); setShowBatchConfirm(true); }}
-                                disabled={!dsPassword}
-                                className="flex-1 bg-accent px-3.5 py-3 text-base font-extrabold text-surface transition-colors hover:bg-accent/80 disabled:opacity-50"
-                            >Continue</button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Phase 11d: Batch Confirm Dialog */}
-            {showBatchConfirm && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-page">
-                    <div className="w-full max-w-lg animate-in zoom-in-95 border border-rule-10 bg-surface p-6">
-                        <div className="flex items-start gap-3">
-                            <div className="border border-pos/40 bg-pos/10 p-3 text-pos">
-                                <Sparkles className="h-6 w-6" />
-                            </div>
-                            <div className="min-w-0 flex-1">
-                                <div className="mb-2 flex flex-wrap items-center gap-2">
-                                    <span className="border border-pos/40 bg-pos/10 px-2.5 py-1 text-base font-extrabold uppercase tracking-wider text-pos">
-                                        Step 2 of 2
-                                    </span>
-                                    <span className="border border-rule-10 bg-white/5 px-2.5 py-1 text-base font-extrabold uppercase tracking-wider text-ink-2">
-                                        Final review
-                                    </span>
-                                </div>
-                                <h3 className="text-2xl font-extrabold tracking-tight">Dispatch Deep-Dive Batch?</h3>
-                                <p className="mt-1 text-base leading-relaxed text-ink-2">
-                            {selectedTickers.size > 0
-                                ? <>This will dispatch <span className="font-bold text-ink">{selectedTickers.size} selected</span> stock(s) for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
-                                : <>This will dispatch the top <span className="font-bold text-ink">{batchN}</span> stocks for v3.2 deep-dive analysis via GitHub Actions. Each takes ~2-3 minutes.</>
-                            }
-                                </p>
-                            </div>
-                        </div>
-                        <div className="my-5 grid grid-cols-3 gap-3">
-                            <DialogStat label="Queued" value={selectedTickers.size > 0 ? selectedTickers.size : batchN} />
-                            <DialogStat label="Runtime" value="2-3m each" />
-                            <DialogStat label="Runner" value="GitHub" />
-                        </div>
-                        <div className="flex gap-3">
-                            <button
-                                onClick={() => setShowBatchConfirm(false)}
-                                className="flex-1 border border-rule-14 bg-muted px-3.5 py-3 text-base font-bold text-ink-2 transition-colors hover:bg-white/5"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                onClick={handleBatchDispatch}
-                                className="flex-1 bg-accent px-3.5 py-3 text-base font-extrabold text-surface transition-colors hover:bg-accent/80"
-                            >
-                                Dispatch {selectedTickers.size > 0 ? selectedTickers.size : batchN}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Phase 11d: Batch Progress Panel */}
-            {batchId && screenMode !== 'reverse' && (
-                <div className="fixed bottom-4 right-4 z-[100] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col gap-3 border border-pos/40 bg-surface p-5 animate-in slide-in-from-bottom-5 sm:bottom-6 sm:right-6">
-                    <div className="flex justify-between items-start gap-4">
-                        <div className="flex items-start gap-3">
-                            <Sparkles className={clsx("h-5 w-5 mt-0.5", batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total ? "text-pos" : "text-pos animate-pulse")} />
-                            <div className="flex flex-col flex-1">
-                                <span className="font-bold text-lg text-ink">Batch Deep-Dive</span>
-                                <span className="text-base text-ink-2 mt-1">
-                                    {batchProgress
-                                        ? (() => {
-                                            const ok = batchProgress.completed;
-                                            const fail = batchProgress.failed;
-                                            const done = ok + fail;
-                                            const total = batchProgress.total;
-                                            if (done < total) return `${done} of ${total} done${fail > 0 ? ` (${fail} failed so far)` : ''}`;
-                                            if (fail === 0) return `All ${total} succeeded`;
-                                            if (ok === 0) return `All ${total} failed`;
-                                            return `${ok} succeeded, ${fail} failed (${total} total)`;
-                                          })()
-                                        : `Waiting for workers... (${batchStatus || ''})`}
-                                </span>
-                                {batchProgress && (
-                                    <div className="mt-3 grid grid-cols-3 gap-2">
-                                        <BatchMiniStat label="Done" value={batchProgress.completed} />
-                                        <BatchMiniStat label="Failed" value={batchProgress.failed} />
-                                        <BatchMiniStat label="Total" value={batchProgress.total} />
-                                    </div>
-                                )}
-                                {batchProgress && (
-                                    <div className="w-full h-2 bg-white/5 mt-2 overflow-hidden">
-                                        <div className="h-full bg-pos transition-all duration-500"
-                                            style={{ width: `${((batchProgress.completed + batchProgress.failed) / batchProgress.total) * 100}%` }} />
-                                    </div>
-                                )}
-                                {batchProgress && batchProgress.completed + batchProgress.failed >= batchProgress.total && (
-                                    <span className="text-base text-pos mt-1.5 font-bold">
-                                        {batchProgress.completed > 0 ? 'Open any stock card to view its report.' : 'No reports generated.'}{' '}Auto-closing in 8s.
-                                    </span>
-                                )}
-                            </div>
-                        </div>
-                        <button onClick={() => dismissBatchPanel()} className="text-ink-2 hover:text-ink shrink-0" title="Dismiss" aria-label="Dismiss batch progress">
-                            <X className="h-5 w-5" />
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {/* Deepseek Task Alert */}
-            {backgroundDsTask && (
-                <div className="fixed bottom-4 right-4 z-[100] flex w-[calc(100vw-2rem)] max-w-[420px] flex-col gap-3 border border-accent/40 bg-surface p-5 animate-in slide-in-from-bottom-5 sm:bottom-6 sm:right-6">
-                    <div className="flex items-start justify-between gap-4">
-                        <div className="flex items-start gap-3">
-                            <Sparkles className={clsx("h-5 w-5 mt-0.5", backgroundDsTask.status === 'running' ? "text-accent animate-pulse" : backgroundDsTask.status === 'error' ? "text-neg" : "text-pos")} />
-                            <div className="min-w-0">
-                                <div className="mb-2 flex flex-wrap items-center gap-2">
-                                    <span className={clsx(
-                                        " border px-2.5 py-1 text-base font-extrabold uppercase tracking-wider",
-                                        backgroundDsTask.status === 'running' && "border-accent/40 bg-accent/10 text-accent",
-                                        backgroundDsTask.status === 'error' && "border-neg/40 bg-neg/10 text-neg",
-                                        backgroundDsTask.status !== 'running' && backgroundDsTask.status !== 'error' && "border-pos/40 bg-pos/10 text-pos",
-                                    )}>
-                                        {backgroundDsTask.status === 'running' ? 'Running' : backgroundDsTask.status === 'error' ? 'Error' : 'Complete'}
-                                    </span>
-                                    <span className="border border-rule-10 bg-white/5 px-2.5 py-1 font-mono text-base font-extrabold text-ink">
-                                        {backgroundDsTask.ticker}
-                                    </span>
-                                </div>
-                                <span className="block truncate text-lg font-bold text-ink" title={backgroundDsTask.ticker}>
-                                    {backgroundDsTask.status === 'running' ? `Analyzing ${backgroundDsTask.ticker}...` : backgroundDsTask.status === 'error' ? `Error analyzing ${backgroundDsTask.ticker}` : `Analysis Complete: ${backgroundDsTask.ticker}`}
-                                </span>
-                                <span className="mt-1 block text-base leading-relaxed text-ink-2">
-                                    {backgroundDsTask.status === 'running' ? 'Deepseek V4.0 Pro is generating report.' : backgroundDsTask.status === 'error' ? backgroundDsTask.message : 'Report saved to scorecard!'}
-                                </span>
-                            </div>
-                        </div>
-                        <button onClick={() => setBackgroundDsTask(null)} className="text-ink-2 hover:text-ink" aria-label="Dismiss analysis status">
-                            <X className="h-5 w-5" />
-                        </button>
-                    </div>
-                </div>
             )}
 
             {/* Help Modal */}
@@ -2181,24 +1532,6 @@ function EmptyStateStat({ label, value }: { label: string; value: string | numbe
     );
 }
 
-function DialogStat({ label, value }: { label: string; value: string | number }) {
-    return (
-        <div className="border border-rule-10 bg-white/5 px-3.5 py-3">
-            <div className="text-base font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
-            <div className="mt-1 truncate font-mono text-lg font-extrabold text-ink" title={String(value)}>{value}</div>
-        </div>
-    );
-}
-
-function BatchMiniStat({ label, value }: { label: string; value: string | number }) {
-    return (
-        <div className="border border-pos/40 bg-pos/10 px-3 py-2">
-            <div className="text-base font-extrabold uppercase tracking-wider text-pos">{label}</div>
-            <div className="mt-0.5 font-mono text-lg font-extrabold text-pos">{value}</div>
-        </div>
-    );
-}
-
 function LoadingResultsState({ title, strategy, view }: { title: string; strategy: string; view: ResultView }) {
     return (
         <div className="border border-rule-10 bg-surface p-5 sm:p-6">
@@ -2241,31 +1574,17 @@ function LoadingResultsState({ title, strategy, view }: { title: string; strateg
     );
 }
 
-function PromptStat({ label, value, sub }: { label: string; value: string; sub: string }) {
-    return (
-        <div className="border border-rule-10 bg-white/5 p-3">
-            <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
-            <div className="mt-0.5 truncate font-mono text-base font-extrabold text-ink" title={value}>{value}</div>
-            <div className="mt-0.5 truncate text-xs font-semibold text-ink-2" title={sub}>{sub}</div>
-        </div>
-    );
-}
-
 function ResultsTable({
     results,
     market,
     screenMode,
     youtubeEvaluations,
-    selectedTickers,
-    onToggleSelected,
     onOpen,
 }: {
     results: ScreeningResult[];
     market: Market;
     screenMode: ScreenMode;
     youtubeEvaluations: Map<string, YoutubeStrategyEvaluation>;
-    selectedTickers: Set<string>;
-    onToggleSelected: (symbol: string) => void;
     onOpen: (result: ScreeningResult) => void;
 }) {
     const pricePrefix = market === 'Korea' ? 'KRW ' : market === 'Taiwan' ? 'NT$' : '$';
@@ -2289,7 +1608,6 @@ function ResultsTable({
                 <table className="w-full min-w-[1240px] border-collapse text-left">
                     <thead className="sticky top-0 z-[1] bg-surface">
                         <tr className="border-b border-rule-10">
-                            {screenMode === 'reverse' && <TableHead className="w-14">Pick</TableHead>}
                             <TableHead>Stock</TableHead>
                             <TableHead>Sector / Industry</TableHead>
                             <TableHead>Paradigm</TableHead>
@@ -2323,26 +1641,6 @@ function ResultsTable({
                                     onClick={() => onOpen(result)}
                                     className="group/row cursor-pointer border-b border-rule-10 transition-colors odd:bg-page hover:bg-primary/[0.06]"
                                 >
-                                    {screenMode === 'reverse' && (
-                                        <td className="px-4 py-3 align-middle">
-                                            <button
-                                                type="button"
-                                                onClick={(event) => {
-                                                    event.stopPropagation();
-                                                    onToggleSelected(symbol);
-                                                }}
-                                                className={clsx(
-                                                    "flex h-8 w-8 items-center justify-center  border-2 transition-all",
-                                                    selectedTickers.has(symbol)
-                                                        ? "border-pos bg-pos text-surface"
-                                                        : "border-rule-10 bg-page hover:border-emerald-400"
-                                                )}
-                                                aria-label={`${selectedTickers.has(symbol) ? 'Deselect' : 'Select'} ${symbol}`}
-                                            >
-                                                {selectedTickers.has(symbol) && <Check className="h-4 w-4" />}
-                                            </button>
-                                        </td>
-                                    )}
                                     <td className="px-4 py-4 align-middle">
                                         <div className="flex min-w-0 items-center gap-3">
                                             <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-rule-10 bg-white/5 font-mono text-lg font-extrabold text-accent transition-colors group-hover/row:border-accent/50 group-hover/row:bg-accent/10">

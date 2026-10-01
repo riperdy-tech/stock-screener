@@ -114,3 +114,67 @@ export function gapColor(gap: number | null | undefined, direction?: Direction |
 }
 
 export const TONE_COLORS = { ACCENT, POS, WARN, NEG, MUTED };
+
+/**
+ * A verdict is a recommendation only when the gate passed it. `actionable ===
+ * false` is a blocked verdict, kept for the record. Legacy rows without the
+ * field are not blocked (fail-open, as before the gate existed).
+ */
+export const isBlocked = (d?: DepthVerdict) => d?.actionable === false;
+
+/** Plain-English labels for the codes in `actionable_reasons`. */
+export const GATE_REASON_LABEL: Record<string, string> = {
+    not_usable: 'no usable run',
+    'pre_v3.1_gates': 'made by the old analyst',
+    pre_valid_analyst: 'made by the old analyst',
+    single_sample: 'only one usable run',
+    fiduciary_fail: 'failed the fiduciary audit',
+    kelly_on_overvalued: 'sizing contradicts the verdict',
+    high_dispersion: 'runs disagree too much',
+    non_production_row: 'test run, not production',
+    mode_instability: 'runs used different methods',
+    outside_street_fence: "outside the analysts' price-target range",
+    mos_beyond_150pct: 'implausibly far above the price',
+    desk_not_used: 'calculator not used',
+    low_effort_rescue: 'rushed valuation',
+    sample_failed: 'a run failed',
+    discovery_failed: 'research step failed',
+    depleting_producer_unsupported: 'mine / oil & gas producer (not yet supported)',
+    depleting_producer_class_unavailable: 'producer type unknown',
+    consensus_data_unavailable: 'analyst data could not be fetched',
+    no_street_fence: 'no analyst price-target range',
+};
+
+/** One reason code as text; unknown codes show as the code with `_` as spaces. */
+export const gateReasonLabel = (code: string): string =>
+    GATE_REASON_LABEL[code] ?? code.replace(/_/g, ' ');
+
+export function gateReasonsText(reasons?: string[] | null): string {
+    return (reasons ?? []).map(gateReasonLabel).join(' · ');
+}
+
+/** Quant-screen flags that are warnings on the name (never a gate). */
+export const FORENSIC_WARNINGS: Record<string, string> = {
+    insolvency_distress_altman_z: 'Altman Z distress (warning only)',
+    forensic_red_flag: 'accruals red flag',
+    beneish_flag: 'Beneish M-score flag',
+    heavy_accruals: 'heavy accruals',
+    heavy_issuance: 'heavy share issuance',
+    loss_making_leveraged: 'loss-making and leveraged',
+    falling_knife: 'falling knife (steep price decline)',
+    stale_annual_data: 'stale annual filing',
+    below_min_adv: 'thin trading volume',
+};
+
+/** Quant-screen flags that only say a data input was missing or approximated. */
+export const DATA_NOTES: Record<string, string> = {
+    momentum_proxy_monthly: 'momentum from monthly prices',
+    no_liquidity_data: 'no volume data yet',
+    beneish_unverifiable: 'Beneish not computable',
+    revisions_missing: 'no estimate revisions',
+    mom_break_unverified_monthly_trend_ok: 'trend-break check on monthly data',
+    adv_missing: 'no volume data',
+    mcap_derived: 'market cap derived',
+    mid_cycle_short_history: 'short history for mid-cycle average',
+    momentum_missing: 'no momentum data',
+};

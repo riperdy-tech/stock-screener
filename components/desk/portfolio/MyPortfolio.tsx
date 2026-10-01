@@ -10,6 +10,7 @@ import { supabase } from '@/lib/supabase';
 import { Micro, SectionHead } from '../primitives';
 import { OverlayChips } from '../rankings/cells';
 import { fmtSignedPct } from '@/lib/desk/format';
+import { gateReasonsText, isBlocked } from '@/lib/desk/tone';
 import {
     loadPortfolio, parseBulkPortfolio, savePortfolio, type Holding,
 } from '@/lib/desk/portfolio';
@@ -90,9 +91,19 @@ export function MyPortfolio({ factor, depth, overlay, stockInfo, onSelect, user,
         }
         // Fire the Update Mine Ledger workflow so the ledger refreshes without a
         // trip to the Actions tab. ~1 min; the daily chain is the fallback.
+        const { data: sess } = await supabase.auth.getSession();
+        const accessToken: string | undefined = sess?.session?.access_token;
+        if (!accessToken) {
+            setSaveStatus('saved ✓ — no session, ledger refresh not started; run Update Mine Ledger manually');
+            setTimeout(() => setSaveStatus(null), 9000);
+            return;
+        }
         setSaveStatus('saved ✓ — starting ledger refresh…');
         try {
-            const r = await fetch('/api/refresh-mine', { method: 'POST' });
+            const r = await fetch('/api/refresh-mine', {
+                method: 'POST',
+                headers: { Authorization: `Bearer ${accessToken}` },
+            });
             const d = await r.json();
             setSaveStatus(d?.ok
                 ? 'saved ✓ — ledger updating (~1 min), then refresh this page'
@@ -127,7 +138,8 @@ export function MyPortfolio({ factor, depth, overlay, stockInfo, onSelect, user,
             // size is now the depth run's own `size_hint`, shown verbatim — the
             // desk never recomputes the spread tiers. It is a tier, not a percent,
             // so the verdict compares direction rather than a target weight.
-            const sizeHint = !vetoed && dv?.direction === 'undervalued' ? (dv.size_hint ?? null) : null;
+            const blocked = isBlocked(dv);
+            const sizeHint = !vetoed && !blocked && dv?.direction === 'undervalued' ? (dv.size_hint ?? null) : null;
             const modelSize = vetoed ? 'NONE' : sizeHint ? sizeHint.toUpperCase() : null;
 
             let verdict: string;
@@ -142,11 +154,14 @@ export function MyPortfolio({ factor, depth, overlay, stockInfo, onSelect, user,
             } else if (!dv) {
                 verdict = 'NO DEPTH RUN'; color = '#c3bfb5';
                 note = 'the AI has not read this name yet';
+            } else if (blocked) {
+                verdict = 'BLOCKED'; color = '#c3bfb5';
+                note = gateReasonsText(dv.actionable_reasons);
             } else if (dv.direction === 'overvalued') {
                 verdict = 'REDUCE'; color = '#cfa14e';
                 note = 'AI says overvalued — every run below the price';
             } else if (dv.direction === 'hold') {
-                verdict = 'HOLD'; color = '#c3bfb5';
+                verdict = 'FAIR'; color = '#c3bfb5';
                 note = 'the price sits inside the band — no edge either way';
             } else if (dv.direction === 'undervalued') {
                 verdict = 'BUY'; color = 'oklch(0.75 0.11 155)';
@@ -203,7 +218,7 @@ export function MyPortfolio({ factor, depth, overlay, stockInfo, onSelect, user,
                 <label className="ml-2 flex items-center gap-2">
                     <Micro>Cash $</Micro>
                     <input
-                        value={cash || ''} onChange={(e) => setCash(parseFloat(e.target.value) || 0)}
+                        value={cash ?? ''} onChange={(e) => setCash(parseFloat(e.target.value) || 0)}
                         type="number" min="0" aria-label="Cash"
                         className={clsx(field, 'w-28')}
                     />

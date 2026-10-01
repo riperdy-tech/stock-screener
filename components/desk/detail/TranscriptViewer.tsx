@@ -1,7 +1,7 @@
 'use client';
 
 // Institutional Consensus Underwriting Memoranda (Charter v3.1)
-// Displays verbatim multi-seed deliberations, research telemetry, and Section 12 machine contracts.
+// Displays verbatim multi-seed deliberations, research telemetry, and machine-readable contracts.
 
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
@@ -51,7 +51,7 @@ export function TranscriptViewer({
                 <div className="flex items-center gap-2">
                     <span className="inline-block w-2 h-2 rounded-full bg-accent" />
                     <Micro className="font-bold uppercase tracking-wider text-ink">
-                        Consensus Underwriting Memoranda (Charter v3.1 Institutional Deliberation)
+                        AI UNDERWRITING RECORD
                     </Micro>
                     <span className="font-mono text-[11px] text-ink-3">
                         · {samples.length} Independent Seed{samples.length === 1 ? '' : 's'} Executed
@@ -123,7 +123,9 @@ export function TranscriptViewer({
                                         </span>
                                     </div>
                                     <p className="mt-3 text-[12.5px] text-ink-2 leading-relaxed">
-                                        This independent sample run was executed by the inference engine with deterministic seed perturbation, but reached the model&apos;s maximum generation context limit during deep chain-of-thought analysis before emitting the final markdown memorandum and Section 12 machine contract.
+                                        {cur.reasons && cur.reasons.length > 0
+                                            ? `Run rejected: ${cur.reasons.join('; ')}.`
+                                            : 'Run rejected by the guards.'}
                                     </p>
                                     <div className="mt-4 flex flex-wrap items-center gap-6 font-mono text-[11px] text-ink-3 border-t border-rule-14 pt-3">
                                         <span>Plausibility Guard: <b className="text-warn">REJECTED (Plausible = False)</b></span>
@@ -180,7 +182,7 @@ export function TranscriptViewer({
                     )}
 
                     <Micro className="mt-2.5 block text-ink-3">
-                        Charter v3.1 Institutional Underwriting Memorandum · Verbatim primary-source evidence, SEC filings citations, and Section 12 execution contract.
+                        AI underwriting record · Verbatim analyst output for this run.
                     </Micro>
                 </div>
             )}

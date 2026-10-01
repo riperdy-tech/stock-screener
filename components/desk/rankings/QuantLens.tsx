@@ -8,7 +8,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Micro, SectionHead } from '../primitives';
 import { FactorMix, McapCell, PriceCell, StockCell } from './cells';
-import { sizeTone, verdictTone } from '@/lib/desk/tone';
+import { isBlocked, sizeTone, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import type { DeskRow } from '@/lib/desk/rankings';
 
@@ -18,7 +18,7 @@ const GRID = 'grid grid-cols-[26px_minmax(180px,300px)_80px_112px_112px_minmax(1
 
 const BAND_LABEL: Record<string, string> = {
     research_now: '■ RSRCH NOW', watchlist: '■ WATCHLIST',
-    monitor: '■ MONITOR', pass: '■ PASS',
+    pass: '■ PASS', vetoed: '■ VETOED',
 };
 
 function BandChip({ row }: { row: DeskRow }) {
@@ -40,11 +40,12 @@ function CompactVerdict({ row }: { row: DeskRow }) {
     if (!d) return <span className="block font-mono text-[11px] text-ink-3">not depth-analyzed</span>;
     const tone = verdictTone(d.direction);
     const size = sizeTone(d.size_hint, d.n_basis);
+    const blocked = isBlocked(d);
     return (
         <span className="block truncate text-[11px]">
-            <span className="font-bold" style={{ color: tone.color }}>{tone.label}</span>
+            <span className="font-bold" style={{ color: blocked ? TONE_COLORS.MUTED : tone.color }}>{tone.label}{blocked ? ' · BLOCKED' : ''}</span>
             {d.mos_vs_median_pct != null && <span className="ml-1.5 font-mono text-ink-2">{fmtSignedPct(d.mos_vs_median_pct)}</span>}
-            {d.size_hint && <span className="ml-1.5 font-mono text-[11px]" style={{ color: size.color }}>{size.label}</span>}
+            {!blocked && d.size_hint && <span className="ml-1.5 font-mono text-[11px]" style={{ color: size.color }}>{size.label}</span>}
         </span>
     );
 }
@@ -60,7 +61,7 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
         <section className="mt-7">
             <SectionHead
                 title="Quant filter"
-                note="five factors, sector-neutral, equal-weighted — this is what feeds the AI's desk"
+                note="Ranked by the dual-door screen: the better of a compounder score and a value-gap score, plus trend leaders."
             />
 
             <div className={clsx(GRID, 'hidden border-b border-rule-18 pb-2 pt-3 lg:grid')}>

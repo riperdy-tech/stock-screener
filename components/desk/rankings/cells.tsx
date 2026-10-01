@@ -5,7 +5,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { scaleBand, bandLabel } from '@/lib/desk/band';
-import { gapColor, sizeTone, verdictTone } from '@/lib/desk/tone';
+import { gapColor, gateReasonsText, isBlocked, sizeTone, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import type { DeskRow } from '@/lib/desk/rankings';
 import { Micro } from '../primitives';
@@ -68,6 +68,21 @@ export function VerdictCell({ row }: { row: DeskRow }) {
 
     const isDivergent = (d.spread_pct != null && d.spread_pct > 25) || d.converged === false;
     const tone = verdictTone(d.direction);
+
+    if (isBlocked(d)) {
+        // A blocked verdict is a record, not a call: muted colour, no action word,
+        // and the plain-English reason where the action would be.
+        const reasons = gateReasonsText(d.actionable_reasons);
+        const blockedLabel = tone.keys.label ? t(tone.keys.label) : tone.label;
+        return (
+            <span className="block min-w-0" title={reasons}>
+                <span className="block text-[13px] font-extrabold leading-tight" style={{ color: TONE_COLORS.MUTED }}>
+                    {blockedLabel} · BLOCKED
+                </span>
+                <span className="mt-0.5 block truncate text-[11px] text-ink-3">{reasons}</span>
+            </span>
+        );
+    }
 
     if (isDivergent && d.direction === 'undervalued') {
         return (
@@ -139,7 +154,7 @@ export function MedianGapCell({ row }: { row: DeskRow }) {
  */
 export function SpreadSizeCell({ row }: { row: DeskRow }) {
     const d = row.depth;
-    if (!d) return <span className="block font-mono text-[12px] text-ink-3">—</span>;
+    if (!d || isBlocked(d)) return <span className="block font-mono text-[12px] text-ink-3">—</span>;
     const size = sizeTone(d.size_hint, d.n_basis);
     const spread = d.spread_pct != null ? `${d.spread_pct.toFixed(1)}%` : 'n/a';
     // A size hint is only meaningful where there is something to buy: a name the
@@ -310,7 +325,7 @@ export function PromoLine({ row, delta }: { row: DeskRow; delta: number | null }
     );
 }
 
-/** Institutional Contract Cells (Charter v3.1 / Section 12) */
+/** Underwriting contract cells */
 
 export function MoatCell({ row }: { row: DeskRow }) {
     const m = row.moat;
@@ -344,7 +359,7 @@ export function ConvictionCell({ row }: { row: DeskRow }) {
 
 export function HalfKellyCell({ row }: { row: DeskRow }) {
     const k = row.kelly;
-    if (k == null) return <span className="font-mono text-[11px] text-ink-3">—</span>;
+    if (k == null || isBlocked(row.depth)) return <span className="font-mono text-[11px] text-ink-3">—</span>;
     const active = k > 0 && row.depth?.direction === 'undervalued';
     return (
         <span className={clsx('block font-mono text-[12px] font-semibold', active ? 'text-pos' : 'text-ink-3')} title="Half-Kelly Portfolio Allocation Limit Cap">

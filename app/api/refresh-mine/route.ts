@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { supabaseAdmin } from "@/lib/supabase";
 
 // Fires the "Update Mine Ledger" workflow (update-mine-ledger.yml) so a portfolio
 // save can rebuild the user's mine ledger without opening the Actions tab. Uses
@@ -8,7 +9,19 @@ import { NextResponse } from "next/server";
 const REPO = "riperdy-tech/stock-screener";
 const WORKFLOW = "update-mine-ledger.yml";
 
-export async function POST() {
+export async function POST(req: Request) {
+    if (!supabaseAdmin) {
+        return NextResponse.json({ ok: false, error: "Supabase not configured" }, { status: 500 });
+    }
+    const auth = req.headers.get("authorization") ?? "";
+    const userToken = auth.startsWith("Bearer ") ? auth.slice(7).trim() : "";
+    if (!userToken) {
+        return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
+    }
+    const { data: userData, error: userErr } = await supabaseAdmin.auth.getUser(userToken);
+    if (userErr || !userData?.user) {
+        return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
+    }
     const token = process.env.GH_PAT || process.env.GITHUB_TOKEN;
     if (!token) {
         return NextResponse.json(

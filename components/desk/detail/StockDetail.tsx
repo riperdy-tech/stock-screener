@@ -1,8 +1,7 @@
 'use client';
 
-// Institutional Stock Description & Underwriting Desk Page (/t/[ticker])
-// Tailor-fitted to Charter v3.1 Institutional Underwriting Contract (Section 12),
-// Valuation Triad (Bear / Market / Base / Bull), and Adaptive Multi-Seed Consensus.
+// Stock detail and AI underwriting record page (/t/[ticker])
+// Valuation Triad (Bear / Market / Base / Bull), multi-run audit, and the gate status.
 
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
@@ -14,19 +13,22 @@ import { TranscriptViewer } from './TranscriptViewer';
 import { Rs2AnalysisPanel } from '@/components/Rs2AnalysisPanel';
 import { fetchDepthReport, type DepthReportBundle, type DepthVerdict } from '@/lib/data-service';
 import { headlineFromSamples } from '@/lib/desk/thesis';
-import { gapColor, sizeTone, verdictTone } from '@/lib/desk/tone';
+import {
+    DATA_NOTES, FORENSIC_WARNINGS, TONE_COLORS, gapColor, gateReasonsText, isBlocked, sizeTone, verdictTone,
+} from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import { buildRows, type DeskRow } from '@/lib/desk/rankings';
 import { useDeskData } from '@/lib/desk/useDeskData';
 import { Shell } from '../Shell';
 import { useLanguage } from '@/components/LanguageContext';
 
+// The keys the dual-door screen writes into `fct_z`.
 const FACTORS: [string, string, string][] = [
-    ['value', 'Value', '#5a9b6d'],
     ['quality', 'Quality', '#6b93c4'],
     ['momentum', 'Momentum', '#cfa14e'],
-    ['lowvol', 'Low vol', '#9a83c2'],
     ['revisions', 'Revisions', '#c2798f'],
+    ['value', 'Value', '#5a9b6d'],
+    ['exp_gap', 'Expectations gap', '#4f8f8a'],
 ];
 
 function DepthStatRow({ row }: { row: DeskRow }) {
@@ -34,9 +36,12 @@ function DepthStatRow({ row }: { row: DeskRow }) {
     const d = row.depth!;
     const size = sizeTone(d.size_hint, d.n_basis);
     const sizable = d.direction === 'undervalued' && !!d.size_hint;
+    const blocked = isBlocked(d);
+    const totalRuns = d.samples_run ?? d.n_basis;
 
     return (
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 border border-rule-14 bg-white/[0.02] p-4 rounded-sm">
+        <div className={clsx('mt-6 grid grid-cols-2 gap-4 border border-rule-14 bg-white/[0.02] p-4 rounded-sm',
+            blocked ? 'sm:grid-cols-3' : 'sm:grid-cols-4')}>
             <div>
                 <Micro className="text-ink-3">Consensus Base IV</Micro>
                 <div className="mt-1 font-mono text-[19px] font-bold text-ink">
@@ -50,33 +55,36 @@ function DepthStatRow({ row }: { row: DeskRow }) {
             <div>
                 <Micro className="text-ink-3">Consensus Spread</Micro>
                 <div className="mt-1 font-mono text-[19px] font-bold text-ink">
-                    {d.spread_pct != null ? `${d.spread_pct.toFixed(1)}%` : '≤ 15%'}
+                    {d.spread_pct != null ? `${d.spread_pct.toFixed(1)}%` : '—'}
                 </div>
                 <div className="mt-0.5 text-[11px] text-ink-3">
-                    {d.spread_pct == null ? 'Single baseline run'
+                    {d.spread_pct == null ? 'not available'
                         : d.spread_pct <= 15 ? 'Tight consensus agreement'
                             : 'Escalated deliberation'}
                 </div>
             </div>
 
-            <div>
-                <Micro className="text-ink-3">Half-Kelly Position Cap</Micro>
-                <div className="mt-1 text-[17px] font-extrabold" style={{ color: sizable ? size.color : '#c3bfb5' }}>
-                    {d.kelly_fraction_pct != null ? `${d.kelly_fraction_pct.toFixed(1)}%` : sizable ? size.label : '0.0%'}
+            {!blocked && (
+                <div>
+                    <Micro className="text-ink-3">Half-Kelly Position Cap</Micro>
+                    <div className="mt-1 text-[17px] font-extrabold" style={{ color: sizable ? size.color : '#c3bfb5' }}>
+                        {d.kelly_fraction_pct != null ? `${d.kelly_fraction_pct.toFixed(1)}%` : sizable ? size.label : '—'}
+                    </div>
+                    <div className="mt-0.5 text-[11px] text-ink-3">
+                        {sizable ? 'Disciplined allocation' : 'Preserve capital (Price > IV)'}
+                    </div>
                 </div>
-                <div className="mt-0.5 text-[11px] text-ink-3">
-                    {sizable ? 'Disciplined allocation' : 'Preserve capital (Price > IV)'}
-                </div>
-            </div>
+            )}
 
             <div>
                 <Micro className="text-ink-3">Guarded Samples</Micro>
                 <div className="mt-1 font-mono text-[19px] font-bold text-ink">
-                    {d.n_basis}<span className="text-[13px] text-ink-3">/{d.samples_run ?? 2}</span>
+                    {d.n_basis ?? '—'}<span className="text-[13px] text-ink-3">/{totalRuns ?? '—'}</span>
                 </div>
                 <div className="mt-0.5 text-[11px] text-ink-3">
-                    {(d.samples_run ?? 2) - d.n_basis === 0 ? '100% passed plausibility'
-                        : `${(d.samples_run ?? 2) - d.n_basis} guarded/filtered`}
+                    {totalRuns == null || d.n_basis == null ? '—'
+                        : totalRuns - d.n_basis === 0 ? '100% passed plausibility'
+                            : `${totalRuns - d.n_basis} guarded/filtered`}
                 </div>
             </div>
         </div>
@@ -101,6 +109,7 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
             plausible: s.plausible,
             hasReport: !!(s.report && s.report.length > 0),
             trigger: s.scorecard?.thesis_invalidation_trigger,
+            reasons: s.reasons,
         }))
         : (d.runs || []);
 
@@ -108,6 +117,7 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
     const spread = d.spread_pct;
     const isTight = spread != null && spread <= 15;
     const isEscalated = n >= 3;
+    const blocked = isBlocked(d);
 
     return (
         <div className="mt-6 border border-rule-18 bg-[#111317] rounded-sm overflow-hidden">
@@ -122,7 +132,7 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
                 <div className="flex items-center gap-2 font-mono text-[11px]">
                     <span className="text-ink-3">Consensus Spread:</span>
                     <span className={clsx('font-bold', isTight ? 'text-pos' : 'text-accent')}>
-                        {spread != null ? `${spread.toFixed(1)}%` : '≤ 15.0%'}
+                        {spread != null ? `${spread.toFixed(1)}%` : '—'}
                     </span>
                     <span className="text-ink-3">
                         {isTight ? '(Early Stop ≤15%)' : isEscalated ? '(Escalated Deliberation n=3)' : '(Single Baseline)'}
@@ -161,7 +171,7 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
                                         <div className="font-mono text-[22px] font-extrabold text-ink">
                                             {fmtMoney(r.iv)}
                                         </div>
-                                        <div className="mt-0.5 font-mono text-[11.5px]" style={{ color: gapColor(mos, d.direction) }}>
+                                        <div className="mt-0.5 font-mono text-[11.5px]" style={{ color: blocked ? TONE_COLORS.MUTED : gapColor(mos, d.direction) }}>
                                             {mos != null ? fmtSignedPct(mos) : '—'} MoS vs Market
                                         </div>
                                     </div>
@@ -171,7 +181,9 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
                                             GUARD INTERCEPT
                                         </div>
                                         <div className="mt-1 text-[10.5px] text-ink-3 leading-tight">
-                                            Output token limit reached before contract emission. Excluded from consensus median.
+                                            {r.reasons && r.reasons.length > 0
+                                                ? `Run rejected: ${r.reasons.join('; ')}.`
+                                                : 'Run rejected by the guards.'} Excluded from consensus median.
                                         </div>
                                     </div>
                                 )}
@@ -200,8 +212,8 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
                                     </div>
                                     <div>
                                         <Micro className="text-[9.5px] text-ink-3">KELLY</Micro>
-                                        <div className="mt-0.5 text-pos font-semibold">
-                                            {r.kelly != null && r.kelly > 0 ? `${r.kelly.toFixed(1)}%` : '0.0%'}
+                                        <div className={clsx('mt-0.5 font-semibold', blocked ? 'text-ink-3' : 'text-pos')}>
+                                            {!blocked && r.kelly != null ? `${r.kelly.toFixed(1)}%` : '—'}
                                         </div>
                                     </div>
                                 </div>
@@ -232,11 +244,10 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
             <div className="bg-white/[0.015] px-5 py-2.5 flex flex-wrap items-center justify-between gap-3 font-mono text-[11.5px] text-ink-2">
                 <div className="flex items-center gap-4">
                     <span>Synthesized Median: <b className="text-ink">{fmtMoney(d.median_iv)}</b></span>
-                    <span>Allocation Tier: <b className="text-pos">{d.size_hint?.toUpperCase() ?? 'FULL'}</b></span>
+                    {!isBlocked(d) && (
+                        <span>Allocation Tier: <b className="text-pos">{d.size_hint?.toUpperCase() ?? '—'}</b></span>
+                    )}
                 </div>
-                <span className="text-ink-3 text-[10.5px]">
-                    Every sample independent · Deterministic seed perturbations · Fiduciary contract audited
-                </span>
             </div>
         </div>
     );
@@ -256,6 +267,7 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
     if (conviction == null && quality == null && !triggers.length) {
         return null;
     }
+    const blocked = isBlocked(d);
 
     return (
         <div className="mt-6 border border-rule-18 bg-[#14171d] rounded-sm overflow-hidden">
@@ -264,7 +276,7 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                 <div className="flex items-center gap-2">
                     <span className="inline-block w-2 h-2 rounded-full bg-accent animate-pulse" />
                     <Micro className="font-bold text-accent uppercase tracking-wider">
-                        Institutional Underwriting Contract (Charter v3.1 · Section 12)
+                        AI UNDERWRITING RECORD
                     </Micro>
                 </div>
                 <div className="font-mono text-[11px] text-ink-3">
@@ -273,7 +285,8 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
             </div>
 
             {/* 4 Quadrants Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-rule-14 border-b border-rule-14">
+            <div className={clsx('grid grid-cols-1 divide-y md:divide-y-0 md:divide-x divide-rule-14 border-b border-rule-14',
+                !blocked && 'md:grid-cols-2')}>
                 {/* Quadrant 1: Conviction & Moat Quality */}
                 <div className="p-5 space-y-4">
                     <div className="flex items-center justify-between border-b border-rule-10 pb-2">
@@ -306,13 +319,10 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                             </div>
                         </div>
                     </div>
-
-                    <div className="text-[11.5px] leading-relaxed text-ink-3 border-t border-rule-10 pt-2.5">
-                        Moat characteristics: High customer switching costs, contracted backlog visibility, and recurring aftermarket service annuities.
-                    </div>
                 </div>
 
-                {/* Quadrant 2: Portfolio Limit & Risk Sizing */}
+                {/* Quadrant 2: Portfolio Limit & Risk Sizing — not shown for a blocked verdict */}
+                {!blocked && (
                 <div className="p-5 space-y-4">
                     <div className="flex items-center justify-between border-b border-rule-10 pb-2">
                         <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-ink-2">
@@ -349,11 +359,13 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                         Downside Hurdle: {bearIv != null ? `Bounded at ${fmtMoney(bearIv)} floor` : 'Passed'}. Sized using fractional Kelly criterion to prevent capital impairment.
                     </div>
                 </div>
+                )}
             </div>
 
             {/* Bottom Row: Quadrants 3 & 4 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-rule-14">
-                {/* Quadrant 3: Capital Deployment Tranches */}
+            <div className={clsx('grid grid-cols-1 divide-y md:divide-y-0 md:divide-x divide-rule-14', !blocked && 'md:grid-cols-2')}>
+                {/* Quadrant 3: Capital Deployment Tranches — not shown for a blocked verdict */}
+                {!blocked && (
                 <div className="p-5 space-y-3">
                     <div className="flex items-center justify-between border-b border-rule-10 pb-2">
                         <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-ink-2">
@@ -366,13 +378,13 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                         <div className="flex items-center justify-between p-2 border border-rule-10 bg-black/20 rounded">
                             <span className="text-ink-2">Tranche 1 (Starter Limit):</span>
                             <span className="font-bold text-ink">
-                                {tranches?.tranche_1_starter != null ? fmtMoney(tranches.tranche_1_starter) : d.median_iv != null ? fmtMoney(d.median_iv * 0.9) : '—'}
+                                {tranches?.tranche_1_starter != null ? fmtMoney(tranches.tranche_1_starter) : '—'}
                             </span>
                         </div>
                         <div className="flex items-center justify-between p-2 border border-rule-10 bg-black/20 rounded">
                             <span className="text-ink-2">Tranche 2 (Core Accumulation):</span>
                             <span className="font-bold text-pos">
-                                {tranches?.tranche_2_core != null ? fmtMoney(tranches.tranche_2_core) : bearIv != null ? fmtMoney(bearIv * 1.15) : '—'}
+                                {tranches?.tranche_2_core != null ? fmtMoney(tranches.tranche_2_core) : '—'}
                             </span>
                         </div>
                         {bullIv != null && (
@@ -383,14 +395,14 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                         )}
                     </div>
                 </div>
+                )}
 
                 {/* Quadrant 4: Thesis Invalidation Triggers */}
                 <div className="p-5 space-y-3">
                     <div className="flex items-center justify-between border-b border-rule-10 pb-2">
                         <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-warn">
-                            Quadrant 4: Thesis Invalidation Triggers
+                            Thesis invalidation triggers
                         </span>
-                        <span className="font-mono text-[11px] text-warn">Mandatory Stop / Exit</span>
                     </div>
 
                     {triggers.length > 0 ? (
@@ -404,7 +416,7 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                         </ul>
                     ) : (
                         <div className="p-2.5 border border-rule-10 bg-black/20 text-[12px] text-ink-3">
-                            No immediate thesis invalidation triggers logged. Re-underwrite on quarterly earnings if operating cash flow deviates &gt; 25%.
+                            No thesis invalidation triggers on record.
                         </div>
                     )}
                 </div>
@@ -427,9 +439,8 @@ function KeyFinancials({ row }: { row: DeskRow }) {
         ? (m.epsTtm / price) * row.info.marketCap : null;
     const cashConv = m?.ocf != null && netIncomeEst != null && netIncomeEst > 0
         ? (m.ocf / netIncomeEst) * 100 : null;
-    const forensicFlag = (row.fct.fct_haircuts ?? {}).forensic;
-    const forensicLabel = forensicFlag != null && forensicFlag < 1
-        ? `Haircut ×${forensicFlag.toFixed(2)}` : 'Clean (No Flags)';
+    const forensicWarnings = (row.fct.fct_flags ?? []).filter((f) => f in FORENSIC_WARNINGS);
+    const dataNotes = (row.fct.fct_flags ?? []).filter((f) => f in DATA_NOTES);
 
     const pts = (v: number | null | undefined, digits = 1) =>
         v == null ? null : `${v.toFixed(digits)}%`;
@@ -447,7 +458,6 @@ function KeyFinancials({ row }: { row: DeskRow }) {
         [t('kfFcf'), fcf != null ? fmtMcap(fcf) : null, fcf != null && fcf < 0 ? 'bad' : undefined],
         ['FCF Yield', pts(fcfYield), fcfYield != null && fcfYield >= 4 ? 'growth' : undefined],
         ['Cash Conversion', pts(cashConv, 0), cashConv != null && cashConv >= 100 ? 'growth' : undefined],
-        ['Forensic Health', forensicLabel, forensicFlag != null && forensicFlag < 1 ? 'warn' : 'growth'],
         [t('kfAltman'), m?.zScore != null ? m.zScore.toFixed(2) : null,
             m?.zScore == null ? undefined : m.zScore >= 3 ? 'growth' : m.zScore < 1.81 ? 'bad' : 'warn'],
         [t('kfInsider'), pts(m?.insiderOwnership, 0)],
@@ -489,8 +499,20 @@ function KeyFinancials({ row }: { row: DeskRow }) {
                 </div>
             )}
 
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+                <span className="text-[11.5px] text-ink-2">Forensic</span>
+                {forensicWarnings.length > 0
+                    ? forensicWarnings.map((f) => <Tag key={f} className="border-warn/50 text-warn">{FORENSIC_WARNINGS[f]}</Tag>)
+                    : <span className="font-mono text-[12px] font-semibold text-pos">No forensic warnings</span>}
+            </div>
+            {dataNotes.length > 0 && (
+                <p className="mt-1.5 text-[11px] leading-relaxed text-ink-3">
+                    Data notes: {dataNotes.map((f) => DATA_NOTES[f]).join(' · ')}
+                </p>
+            )}
+
             <Micro className="mt-2.5 block normal-case tracking-normal text-ink-3">
-                Economic reality &amp; cash conversion metrics. Down-payments credited to customer backlog commitment.
+                Economic reality &amp; cash conversion metrics.
             </Micro>
         </div>
     );
@@ -538,7 +560,7 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
                         return (
                             <div key={key} className="space-y-1">
                                 <div className="flex items-center justify-between text-[11px]">
-                                    <span className="font-medium text-ink-2">{label} Factor</span>
+                                    <span className="font-medium text-ink-2">{label}</span>
                                     <span className="font-mono text-[10.5px] text-ink font-semibold">
                                         {displayBadge}
                                     </span>
@@ -561,7 +583,7 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
 
             <div className="mt-3.5 border-t border-rule-10 pt-2.5">
                 <p className="text-[11px] leading-relaxed text-ink-3">
-                    <strong className="text-ink-2 font-medium">Funnel Purpose:</strong> A quantitative cross-sectional model scans 3,000+ equities to admit top-decile valuation and balance sheet candidates. The AI then underwrites the long-term cash-flow contract and filters out value traps.
+                    The dual-door screen scores about 3,000 stocks that pass basic hygiene. A stock reaches the shortlist through the compounder door, the value-gap door, or the trend-leader door.
                 </p>
             </div>
         </div>
@@ -570,21 +592,25 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
 
 function EvidenceChips({ row, entryDate }: { row: DeskRow; entryDate: string | null }) {
     const gpr = row.overlay?.gpr;
-    const forensic = (row.fct.fct_haircuts ?? {}).forensic;
+    const forensicWarnings = (row.fct.fct_flags ?? []).filter((f) => f in FORENSIC_WARNINGS);
     const demand = row.overlay?.informed_demand;
     const chips: React.ReactNode[] = [];
 
-    chips.push(<Tag key="engine" className="border-accent/40 text-accent font-semibold">CHARTER V3.1 ACTIVE</Tag>);
+    if (row.depth?.gate_version != null) {
+        chips.push(<Tag key="engine" className="border-accent/40 text-accent font-semibold">GATE v{row.depth.gate_version}</Tag>);
+    }
 
     if (gpr?.gpr_level !== undefined) {
         const label = gpr.gpr_level === 0 ? 'GPR 0 — NONE' : `GPR ${gpr.gpr_level} — ${(gpr.channels ?? []).join(', ') || 'FLAGGED'}`;
         chips.push(<Tag key="gpr">{label}</Tag>);
     }
-    chips.push(
-        <Tag key="forensic" className={forensic != null && forensic < 1 ? 'border-warn/50 text-warn' : undefined}>
-            {forensic != null && forensic < 1 ? `FORENSIC HAIRCUT ×${forensic.toFixed(2)}` : 'NO FORENSIC FLAGS'}
-        </Tag>,
-    );
+    if (forensicWarnings.length > 0) {
+        for (const f of forensicWarnings) {
+            chips.push(<Tag key={`forensic-${f}`} className="border-warn/50 text-warn">{FORENSIC_WARNINGS[f]}</Tag>);
+        }
+    } else {
+        chips.push(<Tag key="forensic">No forensic warnings</Tag>);
+    }
     if (demand === 1) chips.push(<Tag key="dem" className="border-pos/40 text-pos">▲ INSIDERS NET-BUYING</Tag>);
     if (demand === -1) chips.push(<Tag key="dem" className="border-neg/40 text-neg">▼ INSIDERS SELLING</Tag>);
     if (row.depth?.date) chips.push(<Tag key="run">UNDERWRITTEN {row.depth.date}</Tag>);
@@ -672,7 +698,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
     const backLabel = from === 'track' ? '← Track Record' : from === 'port' ? '← Portfolio' : `← ${t('detailBack')}`;
 
     const shell = (children: React.ReactNode) => (
-        <Shell tab={null} factor={data.factor} depthMeta={data.depthMeta} ledgers={data.ledgers} loading={data.loading}>
+        <Shell tab={null} factor={data.factor} depthMeta={data.depthMeta} loading={data.loading}>
             {children}
         </Shell>
     );
@@ -690,6 +716,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
     const d = row.depth;
     const tone = verdictTone(d?.direction);
+    const blocked = isBlocked(d);
 
     return shell(
         <div>
@@ -726,29 +753,31 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 </a>
             </div>
 
+            {blocked && (
+                <div className="mt-4 w-full border border-warn px-4 py-3 text-[13px] font-semibold text-warn">
+                    BLOCKED BY THE GATE — {gateReasonsText(d?.actionable_reasons)}. This verdict is kept as a record. It is not a recommendation.
+                </div>
+            )}
+
             {/* Two-Column Grid */}
             <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-[1.45fr_1fr]">
                 <div className="min-w-0 border-rule-14 py-6 lg:border-r lg:pr-8">
                     {/* Institutional Header Tag */}
                     <div className="flex flex-wrap items-center justify-between gap-2">
                         <Micro className="block font-bold uppercase tracking-wider text-accent">
-                            Charter v3.1 Institutional Underwriting · Section 12 Contract
+                            AI UNDERWRITING RECORD
                         </Micro>
-                        {d && (
+                        {d && d.spread_pct != null && (
                             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 font-mono text-[10px] tracking-wide uppercase border border-rule-24 bg-white/[0.03] text-ink-2">
-                                <span className="inline-block w-1.5 h-1.5 rounded-full bg-pos" />
-                                {d.spread_pct != null && d.spread_pct <= 15 ? 'Consensus Verified (≤15% Spread)' : d.samples_run && d.samples_run >= 3 ? 'Escalated Deliberation (n=3)' : 'Depth Baseline Established'}
+                                RUN SPREAD {d.spread_pct.toFixed(1)}%
                             </span>
                         )}
                     </div>
 
                     {/* Stance Hero Headline */}
                     <h1 className="mt-3 flex flex-wrap items-baseline gap-x-3">
-                        <span className="text-[26px] font-extrabold tracking-[.02em]" style={{ color: tone.color }}>
-                            {d?.direction === 'undervalued' ? 'UNDERVALUED COMPOUNDER'
-                                : d?.direction === 'hold' ? 'FAIR VALUE INFRASTRUCTURE'
-                                    : d?.direction === 'overvalued' ? 'OVERVALUED / CAPITAL PRESERVED'
-                                        : tone.keys.label ? t(tone.keys.label) : tone.label}
+                        <span className="text-[26px] font-extrabold tracking-[.02em]" style={{ color: blocked ? TONE_COLORS.MUTED : tone.color }}>
+                            {tone.keys.label ? t(tone.keys.label) : tone.label}
                         </span>
                         {d?.mos_vs_median_pct != null && (
                             <span className="font-mono text-[14px] font-bold text-ink">
@@ -785,13 +814,6 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                     {/* 4-Quadrant Institutional Underwriting Contract */}
                     {d && <InstitutionalContractCard d={d} bundle={bundle} />}
 
-                    {/* Methodological Subline */}
-                    {d && (
-                        <p className="mt-5 text-[11px] leading-relaxed text-ink-3">
-                            Charter v3.1 Institutional Underwriting Standard: Underwritten using non-anchored multi-scenario cash flow modeling, installed-base annuity recognition, and falsifiable operational invalidation triggers. Exit multiples anchored to prevailing macro regime.
-                        </p>
-                    )}
-
                     {/* Thesis Memorandum Headline */}
                     {headline && (
                         <blockquote className="mt-5 border-l-2 border-accent bg-white/[0.03] px-5 py-4">
@@ -801,7 +823,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                             <ul className="space-y-1.5 text-[13.5px] leading-relaxed text-ink-q">
                                 {headline.bullets.map((b, i) => <li key={i}>{b}</li>)}
                             </ul>
-                            {headline.action && (
+                            {!blocked && headline.action && (
                                 <p className="mt-2.5 text-[12.5px] font-semibold text-ink">Action Recommendation: {headline.action}</p>
                             )}
                         </blockquote>
@@ -832,7 +854,8 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
             {/* Earlier Run History */}
             <section className="mt-8 min-w-0 border-t border-rule-22 pt-5">
-                <Micro className="mb-3 block font-semibold text-ink">Historical Research Memoranda</Micro>
+                <Micro className="block font-semibold text-ink">Old pipeline records (retired August 2026)</Micro>
+                <p className="mb-3 mt-1 text-[11px] text-ink-3">Produced by an earlier analyst that is no longer used. Kept as a record.</p>
                 <Rs2AnalysisPanel symbol={row.ticker} displayTicker={row.ticker} hideDepth />
             </section>
         </div>,

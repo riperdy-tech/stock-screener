@@ -4,9 +4,12 @@
 // then whichever lens table is active.
 
 import React, { useMemo, useState } from 'react';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { Chip, Micro } from '../primitives';
 import { useLanguage } from '@/components/LanguageContext';
+import { DESK_NOTICE } from '@/lib/desk/notice';
+import { gateReasonLabel, isBlocked } from '@/lib/desk/tone';
 import { AiLens } from './AiLens';
 import { QuantLens } from './QuantLens';
 import { CompareLens } from './CompareLens';
@@ -24,6 +27,7 @@ const VERDICT_OPTIONS: [string, string][] = [
     ['analyzed', 'Depth underwritten'],
     ['consensus_2', '2-Run Tight Consensus (≤15%)'],
     ['escalated_3', '3-Run Escalated Tiebreaker'],
+    ['blocked', 'Blocked by the gate'],
     ['undervalued', 'Undervalued compounders'],
     ['fair', 'Fair value rails'],
     ['overvalued', 'Overvalued / Preserved'],
@@ -40,8 +44,8 @@ const BAND_OPTIONS: [string, string][] = [
     ['all', 'All bands'],
     ['research_now', 'Research now'],
     ['watchlist', 'Watchlist'],
-    ['monitor', 'Monitor'],
     ['pass', 'Pass'],
+    ['vetoed', 'Vetoed'],
 ];
 
 function Select({ value, onChange, options, label, maxWidth }: {
@@ -93,14 +97,24 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
 
     const depthEntries = Object.values(depth || {});
     const analyzed = depthEntries.length;
-    const researchNowCount = factor?.band_counts?.research_now ?? 0;
+    const researchNowCount = factor?.band_counts?.research_now;
+
+    // Verdicts that pass the gate. Legacy overlays have no `actionable` field, so
+    // there an unblocked undervalued verdict is the actionable one.
+    const actionableCount = depthEntries.filter(d =>
+        d.actionable === true || (d.actionable == null && !isBlocked(d) && d.direction === 'undervalued')).length;
+
+    // Most common gate reasons across the blocked verdicts
+    const reasonCounts = new Map<string, number>();
+    for (const d of depthEntries) {
+        for (const code of d.actionable_reasons ?? []) reasonCounts.set(code, (reasonCounts.get(code) ?? 0) + 1);
+    }
+    const topReasons = Array.from(reasonCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 2);
 
     // Consensus telemetry
-    const twoRunCount = depthEntries.filter(d => (d.samples_run ?? d.n_basis) === 2).length;
-    const threeRunCount = depthEntries.filter(d => (d.samples_run ?? d.n_basis) >= 3).length;
     const spreads = depthEntries.map(d => d.spread_pct).filter((s): s is number => s != null && !isNaN(s));
     const sortedSpreads = [...spreads].sort((a, b) => a - b);
-    const medianSpread = sortedSpreads.length > 0 ? sortedSpreads[Math.floor(sortedSpreads.length / 2)] : 0;
+    const medianSpread = sortedSpreads.length > 0 ? sortedSpreads[Math.floor(sortedSpreads.length / 2)] : null;
     const tightCount = spreads.filter(s => s <= 15).length;
 
     return (
@@ -110,17 +124,20 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                 <div className="flex flex-wrap items-end justify-between gap-4">
                     <div>
                         <div className="flex items-center gap-2">
-                            <span className="inline-block w-2.5 h-2.5 rounded-full bg-pos animate-pulse" />
-                            <span className="font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-pos">
-                                RS2 ENGINE ONLINE · ADAPTIVE 2-ESCALATE ACTIVE
+                            <span className={clsx('font-mono text-[11px] font-bold uppercase tracking-[0.1em]',
+                                actionableCount === 0 ? 'text-warn' : 'text-pos')}>
+                                {actionableCount === 0
+                                    ? 'AI ANALYST: NO VERDICT PASSES THE GATE'
+                                    : `AI ANALYST: ${actionableCount} ACTIONABLE VERDICT${actionableCount === 1 ? '' : 'S'}`}
                             </span>
                         </div>
                         <h1 className="mt-1 text-[23px] font-extrabold tracking-tight text-ink">
                             StockPeak Institutional Underwriting Desk
                         </h1>
                         <p className="mt-1 text-[13px] text-ink-2">
-                            Multi-seed autonomous deliberation, adversarial red-teaming, and institutional installed-base economics.
+                            A quant screen narrows the market to a shortlist; an AI analyst values each name; code checks every verdict before it counts.
                         </p>
+                        {DESK_NOTICE && <p className="mt-1 text-[13px] text-warn">{DESK_NOTICE}</p>}
                     </div>
                 </div>
 
@@ -129,40 +146,47 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                     <div className="border border-rule-18 bg-white/[0.02] p-3 rounded-xs">
                         <Micro className="text-ink-3">SCORED UNIVERSE</Micro>
                         <div className="mt-1 font-mono text-[20px] font-bold text-ink">
-                            {factor?.scored_count ? factor.scored_count.toLocaleString('en-US') : '1,327'}
+                            {factor?.scored_count != null ? factor.scored_count.toLocaleString('en-US') : '—'}
                         </div>
                         <div className="mt-0.5 text-[11px] text-ink-3">
-                            <span className="text-accent font-semibold">{researchNowCount}</span> in primary queue
+                            <span className="text-accent font-semibold">{researchNowCount ?? '—'}</span> on the research-now shortlist
                         </div>
                     </div>
 
                     <div className="border border-rule-18 bg-white/[0.02] p-3 rounded-xs">
-                        <Micro className="text-ink-3">ACTIVE UNDERWRITINGS</Micro>
+                        <Micro className="text-ink-3">AI VERDICTS</Micro>
                         <div className="mt-1 font-mono text-[20px] font-bold text-ink">
-                            {analyzed} <span className="text-[13px] font-normal text-ink-3">TICKERS</span>
+                            {analyzed} <span className="text-[13px] font-normal text-ink-3">ON RECORD</span>
                         </div>
-                        <div className="mt-0.5 text-[11px] text-pos">
-                            100% SEC/Primary audited
+                        <div className="mt-0.5 text-[11px] text-ink-3">
+                            <span className="font-semibold text-ink-2">{actionableCount}</span> pass the gate
                         </div>
                     </div>
 
                     <div className="border border-rule-18 bg-white/[0.02] p-3 rounded-xs">
-                        <Micro className="text-ink-3">CONSENSUS DISTRIBUTION</Micro>
-                        <div className="mt-1 font-mono text-[20px] font-bold text-ink">
-                            {twoRunCount}<span className="text-[13px] font-normal text-ink-3"> (n=2)</span> · {threeRunCount}<span className="text-[13px] font-normal text-ink-3"> (n=3)</span>
-                        </div>
-                        <div className="mt-0.5 text-[11px] text-ink-3">
-                            {analyzed > 0 ? `${Math.round((twoRunCount / (twoRunCount + threeRunCount || 1)) * 100)}% early-stop efficiency` : 'Adaptive deliberation'}
-                        </div>
+                        <Micro className="text-ink-3">WHY BLOCKED</Micro>
+                        {topReasons.length === 0 ? (
+                            <div className="mt-1 font-mono text-[20px] font-bold text-ink">—</div>
+                        ) : (
+                            <div
+                                className="mt-1 font-mono text-[12px] font-bold leading-snug text-ink"
+                                title={topReasons.map(([c, n]) => `${gateReasonLabel(c)} ×${n}`).join(' · ')}
+                            >
+                                {topReasons.map(([c, n]) => (
+                                    <div key={c} className="truncate">{gateReasonLabel(c)} ×{n}</div>
+                                ))}
+                            </div>
+                        )}
+                        <div className="mt-0.5 text-[11px] text-ink-3">most common reasons</div>
                     </div>
 
-                    <div className="border border-rule-18 bg-white/[0.02] p-3 rounded-xs" title="Median valuation spread across runs. Outliers like DXC, BFH, APA reflect turnaround and commodity cycles.">
+                    <div className="border border-rule-18 bg-white/[0.02] p-3 rounded-xs">
                         <Micro className="text-ink-3">MEDIAN VALUATION SPREAD</Micro>
                         <div className="mt-1 font-mono text-[20px] font-bold text-ink">
-                            {medianSpread > 0 ? `${medianSpread.toFixed(1)}%` : '≤ 15.0%'}
+                            {medianSpread != null ? `${medianSpread.toFixed(1)}%` : '—'}
                         </div>
                         <div className="mt-0.5 text-[11px] text-ink-3">
-                            <span className="text-pos font-semibold">{tightCount}/{spreads.length}</span> inside ≤15% target
+                            <span className="font-semibold text-ink-2">{tightCount}/{spreads.length}</span> runs within 15%
                         </div>
                     </div>
                 </div>

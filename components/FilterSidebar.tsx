@@ -1,4 +1,4 @@
-import { Filter, X, HelpCircle, Sparkles } from "lucide-react";
+import { Filter, X, HelpCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
 import { Market } from "@/lib/data-service";
@@ -103,13 +103,6 @@ interface FilterSidebarProps {
     setParadigmFilters?: (f: ParadigmFilterState) => void;
     youtubeFilters?: YoutubeStrategyFilter[];
     onYoutubeFilterToggle?: (f: YoutubeStrategyFilter) => void;
-    // Phase 11d: Deep-Dive controls
-    batchN?: number;
-    onBatchNChange?: (n: number) => void;
-    batchDispatching?: boolean;
-    batchStatus?: string | null;
-    onDeepDiveClick?: () => void;
-    selectedCount?: number;
 }
 
 const YOUTUBE_FILTERS: Array<{ value: YoutubeStrategyFilter; label: string }> = [
@@ -159,7 +152,7 @@ export const STRICT_FILTERS: FilterState = {
     maxFloat: 50,
 };
 
-export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, paradigmFilters, setParadigmFilters, youtubeFilters = ["any"], onYoutubeFilterToggle, batchN, onBatchNChange, batchDispatching, batchStatus, onDeepDiveClick, selectedCount }: FilterSidebarProps) {
+export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResults, market, screenMode, reverseFilters, setReverseFilters, paradigmFilters, setParadigmFilters, youtubeFilters = ["any"], onYoutubeFilterToggle }: FilterSidebarProps) {
     const { t, filterDefs } = useLanguage();
 
     // Local state for Manual Apply
@@ -367,44 +360,6 @@ export function FilterSidebar({ filters, setFilters, isOpen, onClose, totalResul
                                 />
                                 <span className="text-sm font-medium text-ink-2">Nominated only</span>
                             </label>
-                        </Section>
-
-                        {/* Phase 11d: Deep-Dive */}
-                        <Section title="Deep-Dive (v3.2)">
-                            <p className="text-sm text-ink-2 mb-2">Click cards to select stocks, or use N below for top-ranked.</p>
-                            <div className="flex items-center gap-3">
-                                <select
-                                    value={(batchN && [5,10,25].includes(batchN)) ? batchN : 0}
-                                    onChange={(e) => { const v = Number(e.target.value); if (v > 0 && onBatchNChange) onBatchNChange(v); }}
-                                    className="border border-rule-10 bg-white/5 px-3 py-2 text-sm font-bold text-ink focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                                >
-                                    <option value={0}>N</option>
-                                    <option value={5}>5</option>
-                                    <option value={10}>10</option>
-                                    <option value={25}>25</option>
-                                </select>
-                                <input
-                                    type="number"
-                                    min={1} max={30}
-                                    value={batchN || 25}
-                                    onChange={(e) => { const v = parseInt(e.target.value); if (v >= 1 && v <= 30 && onBatchNChange) onBatchNChange(v); }}
-                                    className="w-20 border border-rule-10 bg-white/5 px-2.5 py-2 text-center text-sm font-bold text-ink focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                                />
-                            </div>
-                            <button
-                                onClick={onDeepDiveClick}
-                                disabled={batchDispatching}
-                                className="mt-3 flex w-full items-center justify-center gap-2 bg-accent px-3 py-2 text-sm font-extrabold text-surface transition-all hover:bg-accent/80 active:scale-95 disabled:opacity-50"
-                            >
-                                <Sparkles className="h-4 w-4" />
-                                {batchDispatching ? 'Dispatching...' : selectedCount && selectedCount > 0 ? `Deep-Dive Selected (${selectedCount})` : `Deep-Dive Top ${batchN || 25}`}
-                            </button>
-                            {batchStatus && (
-                                <p className={clsx(
-                                    "text-sm mt-1",
-                                    batchStatus.startsWith("Error") ? "text-neg" : "text-pos"
-                                )}>{batchStatus}</p>
-                            )}
                         </Section>
 
                     </>

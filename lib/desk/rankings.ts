@@ -6,6 +6,7 @@
 
 import type { DepthVerdict, FactorEntry, ValuationModel } from '@/lib/data-service';
 import type { StockInfo } from './useDeskData';
+import { FORENSIC_WARNINGS, isBlocked } from './tone';
 
 export interface DeskRow {
     ticker: string;
@@ -14,7 +15,7 @@ export interface DeskRow {
     depth: DepthVerdict | undefined;
     val: ValuationModel | undefined;
     overlay: any;
-    /** 1..N among depth-analyzed undervalued names, by median gap. Undefined otherwise. */
+    /** 1..N among unblocked undervalued names, by median gap. Undefined otherwise. */
     aiRank?: number;
     /** Percentile points of disagreement carried by the retired conviction overlay, or null. */
     delta: number | null;
@@ -26,7 +27,7 @@ export interface DeskRow {
     promo: 'promoted' | 'demoted' | 'none';
     vetoed: boolean;
     vetoReason: string | null;
-    /** Section 12 Institutional Underwriting Contract metrics */
+    /** Institutional Underwriting Contract metrics */
     conviction?: number | null;
     moat?: number | null;
     kelly?: number | null;
@@ -37,8 +38,8 @@ export interface DeskRow {
 
 export interface RankingFilters {
     search: string;
-    band: string;      // 'all' | research_now | watchlist | monitor | pass
-    verdict: string;   // 'all' | analyzed | undervalued | fair | overvalued | not_usable | promoted | demoted | vetoed | consensus_2 | escalated_3
+    band: string;      // 'all' | research_now | watchlist | pass | vetoed
+    verdict: string;   // 'all' | analyzed | undervalued | fair | overvalued | not_usable | blocked | promoted | demoted | vetoed | consensus_2 | escalated_3
     sector: string;
     industry: string;
 }
@@ -53,7 +54,11 @@ export interface RankingsInput {
     stockInfo: Record<string, StockInfo>;
 }
 
-/** Enriches depth verdict with mark-to-market live price and dynamic Margin of Safety */
+/**
+ * Enriches depth verdict with mark-to-market live price and dynamic Margin of Safety.
+ * The stored `direction` is the verdict and is never re-derived from the live price;
+ * the price the verdict was made at rides along as `verdict_price`.
+ */
 function enrichDepth(rawD: DepthVerdict | undefined, info: StockInfo | undefined): DepthVerdict | undefined {
     if (!rawD) return undefined;
     const livePrice = info?.price && info.price > 0 ? info.price : rawD.price ?? null;
@@ -61,20 +66,11 @@ function enrichDepth(rawD: DepthVerdict | undefined, info: StockInfo | undefined
         ? ((rawD.median_iv - livePrice) / livePrice) * 100
         : rawD.mos_vs_median_pct ?? null;
 
-    let liveDirection = rawD.direction;
-    // A null direction (gate-on-read NOT_USABLE) is an absence, not a verdict to
-    // recompute against — the live price/band comparison must not resurrect one.
-    if (rawD.direction != null && livePrice != null && rawD.iv_band_low != null && rawD.iv_band_high != null) {
-        if (livePrice < rawD.iv_band_low) liveDirection = 'undervalued';
-        else if (livePrice > rawD.iv_band_high) liveDirection = 'overvalued';
-        else liveDirection = 'hold';
-    }
-
     return {
         ...rawD,
         price: livePrice,
         mos_vs_median_pct: liveMos,
-        direction: liveDirection,
+        verdict_price: rawD.price ?? null,
     };
 }
 
@@ -159,9 +155,10 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
     rows.sort((a, b) => (a.fct.fct_rank ?? 1e9) - (b.fct.fct_rank ?? 1e9));
 
     // AI rank: the depth engine has no rank of its own, so the desk ranks the
-    // names it called undervalued by how far the price sits below the median IV.
+    // names it called undervalued (and the gate passed) by how far the price
+    // sits below the median IV.
     rows
-        .filter((r) => r.depth?.direction === 'undervalued')
+        .filter((r) => r.depth?.direction === 'undervalued' && !isBlocked(r.depth))
         .sort((a, b) => (b.depth?.mos_vs_median_pct ?? -1e9) - (a.depth?.mos_vs_median_pct ?? -1e9))
         .forEach((r, i) => { r.aiRank = i + 1; });
 
@@ -169,7 +166,7 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
     // it valued a non-shortlisted name above its price, or it knocked a
     // shortlisted name out by valuing it below the price.
     for (const r of rows) {
-        if (!r.depth) continue;
+        if (!r.depth || isBlocked(r.depth)) continue;
         const shortlisted = r.fct.fct_band === 'research_now';
         if (r.depth.direction === 'undervalued' && !shortlisted) r.promo = 'promoted';
         else if (r.depth.direction === 'overvalued' && shortlisted) r.promo = 'demoted';
@@ -210,6 +207,7 @@ export function applyFilters(rows: DeskRow[], f: RankingFilters): DeskRow[] {
                 case 'fair': if (d !== 'hold') return false; break;
                 case 'overvalued': if (d !== 'overvalued') return false; break;
                 case 'not_usable': if (d !== 'NOT_USABLE') return false; break;
+                case 'blocked': if (!isBlocked(r.depth)) return false; break;
                 case 'promoted': if (r.promo !== 'promoted') return false; break;
                 case 'demoted': if (r.promo !== 'demoted') return false; break;
                 case 'wide_moat': if (r.moat == null || r.moat < 4.0) return false; break;
@@ -227,7 +225,8 @@ export function applyFilters(rows: DeskRow[], f: RankingFilters): DeskRow[] {
 
 export interface AiSections {
     researchNow: DeskRow[];   // price below the whole band — the AI's shortlist
-    watchlist: DeskRow[];     // price inside or above the band
+    watchlist: DeskRow[];     // analyzed and gate-passed, price inside or above the band
+    blocked: DeskRow[];       // verdict on record but failed the gate — not a recommendation
     awaiting: DeskRow[];      // quant shortlist, depth run not done yet
     vetoed: DeskRow[];        // disqualified before the depth run
 }
@@ -240,6 +239,7 @@ export interface AiSections {
 export function aiSections(rows: DeskRow[]): AiSections {
     const researchNow: DeskRow[] = [];
     const watchlist: DeskRow[] = [];
+    const blocked: DeskRow[] = [];
     const awaiting: DeskRow[] = [];
     const vetoed: DeskRow[] = [];
 
@@ -253,12 +253,12 @@ export function aiSections(rows: DeskRow[]): AiSections {
             // silently in the watchlist.
             if (r.depth.direction == null || r.depth.direction === 'NOT_USABLE' || r.depth.status === 'not_usable') {
                 vetoed.push(r);
-            } else if (r.depth.direction === 'undervalued' && r.depth.actionable !== false) {
-                // actionable === false (gated out post-verdict) is excluded from the
-                // shortlist — it falls to watchlist below, alongside the other
-                // depth-analyzed names that are not the AI's pick right now. Rows
-                // without the actionable field (legacy overlays) keep today's
-                // behaviour: actionable !== false is true for undefined too.
+            } else if (isBlocked(r.depth)) {
+                // actionable === false: the verdict failed the gate and is shown
+                // for the record only. Rows without the actionable field (legacy
+                // overlays) are not blocked.
+                blocked.push(r);
+            } else if (r.depth.direction === 'undervalued') {
                 researchNow.push(r);
             } else {
                 watchlist.push(r);
@@ -286,7 +286,9 @@ export function aiSections(rows: DeskRow[]): AiSections {
         return (b.depth?.mos_vs_median_pct ?? -1e9) - (a.depth?.mos_vs_median_pct ?? -1e9);
     });
 
-    return { researchNow, watchlist, awaiting, vetoed };
+    blocked.sort((a, b) => (b.depth?.mos_vs_median_pct ?? -1e9) - (a.depth?.mos_vs_median_pct ?? -1e9));
+
+    return { researchNow, watchlist, blocked, awaiting, vetoed };
 }
 
 export type CompareSort = 'delta' | 'quant' | 'ai';
@@ -326,6 +328,7 @@ export function rankDelta(r: DeskRow): number | null {
 export function whySplit(r: DeskRow): string {
     const d = r.depth?.direction;
     const bits: string[] = [];
+    if (isBlocked(r.depth)) bits.push('verdict blocked by the gate');
     // The median gap is already its own column here, so it only earns a mention
     // when there is no band direction to state instead.
     const gapPct = r.depth?.mos_vs_median_pct;
@@ -335,6 +338,6 @@ export function whySplit(r: DeskRow): string {
     if (d === 'undervalued') bits.push('all runs land above the price');
     else if (d === 'overvalued') bits.push('all runs land below the price');
     else if (d === 'hold') bits.push('the price sits inside the run spread');
-    if (r.fct.fct_haircuts && (r.fct.fct_haircuts as any).forensic < 1) bits.push('forensic haircut applied');
+    if (r.fct.fct_flags?.some((f) => f in FORENSIC_WARNINGS)) bits.push('forensic warning');
     return bits.length ? bits.join(' · ') : 'no single driver — the engines weight the same evidence differently';
 }

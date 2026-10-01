@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { fmtMoney, fmtSignedPct } from '@/lib/desk/format';
-import { verdictTone } from '@/lib/desk/tone';
+import { TONE_COLORS, isBlocked, verdictTone } from '@/lib/desk/tone';
 import { Micro } from '../primitives';
 import { BandChartHero } from './BandChartHero';
 import type { DepthVerdict, DepthReportBundle } from '@/lib/data-service';
@@ -27,6 +27,9 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
     }
 
     const tone = verdictTone(verdict.direction);
+    // A blocked verdict is kept for the record, not recommended: no green on its value or margin.
+    const blocked = isBlocked(verdict);
+    const MUTED = TONE_COLORS.MUTED;
 
     // Dynamic scale bounds with a 10% outer breathing room
     const rawMin = Math.min(bearIv, price, baseIv, bullIv);
@@ -79,9 +82,9 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                     style={{
                         left: `${leftMarginPct}%`,
                         width: `${marginWidthPct}%`,
-                        backgroundColor: price <= baseIv ? 'rgba(74, 222, 128, 0.12)' : 'rgba(248, 113, 113, 0.12)',
-                        borderLeft: `1px dashed ${price <= baseIv ? '#4ade80' : '#f87171'}`,
-                        borderRight: `1px dashed ${price <= baseIv ? '#4ade80' : '#f87171'}`,
+                        backgroundColor: blocked ? 'rgba(211, 207, 197, 0.10)' : price <= baseIv ? 'rgba(74, 222, 128, 0.12)' : 'rgba(248, 113, 113, 0.12)',
+                        borderLeft: `1px dashed ${blocked ? MUTED : price <= baseIv ? '#4ade80' : '#f87171'}`,
+                        borderRight: `1px dashed ${blocked ? MUTED : price <= baseIv ? '#4ade80' : '#f87171'}`,
                     }}
                 />
 
@@ -116,11 +119,14 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
 
                 {/* Base Case IV Marker */}
                 <div
-                    className="absolute top-0 bottom-0 w-[3px] bg-pos flex flex-col items-center justify-start z-20"
-                    style={{ left: `${basePct}%` }}
+                    className={`absolute top-0 bottom-0 w-[3px] flex flex-col items-center justify-start z-20 ${blocked ? '' : 'bg-pos'}`}
+                    style={{ left: `${basePct}%`, ...(blocked ? { backgroundColor: MUTED } : {}) }}
                     title={`Base Intrinsic Value: ${fmtMoney(baseIv)}`}
                 >
-                    <span className="w-3 h-3 bg-pos border border-[#0d0f12] -mt-1 shadow-md rotate-45" />
+                    <span
+                        className={`w-3 h-3 border border-[#0d0f12] -mt-1 shadow-md rotate-45 ${blocked ? '' : 'bg-pos'}`}
+                        style={blocked ? { backgroundColor: MUTED } : undefined}
+                    />
                 </div>
 
                 {/* Current Market Price Marker */}
@@ -149,13 +155,18 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                     <span className="block text-ink-3 text-[10px] uppercase tracking-wider">Market Price</span>
                     <span className="text-[14px] font-bold text-white">{fmtMoney(price)}</span>
                     <span className="block text-[10px] text-ink-2 mt-0.5">Today&apos;s Quote</span>
+                    {verdict.verdict_price != null && (
+                        <span className="block text-[10px] text-ink-3 mt-0.5">
+                            Price at verdict {fmtMoney(verdict.verdict_price)} on {verdict.date ?? '—'}
+                        </span>
+                    )}
                 </div>
 
                 {/* Base Case IV */}
-                <div className="p-2 border border-rule-14 bg-pos/[0.04] rounded">
+                <div className={`p-2 border border-rule-14 rounded ${blocked ? 'bg-white/[0.04]' : 'bg-pos/[0.04]'}`}>
                     <span className="block text-ink-3 text-[10px] uppercase tracking-wider">Base Case IV</span>
-                    <span className="text-[14px] font-bold text-pos">{fmtMoney(baseIv)}</span>
-                    <span className="block text-[10px] text-pos/90 mt-0.5">
+                    <span className={`text-[14px] font-bold ${blocked ? '' : 'text-pos'}`} style={blocked ? { color: MUTED } : undefined}>{fmtMoney(baseIv)}</span>
+                    <span className={`block text-[10px] mt-0.5 ${blocked ? '' : 'text-pos/90'}`} style={blocked ? { color: MUTED } : undefined}>
                         {fmtSignedPct(mosPct)} Margin of Safety
                     </span>
                 </div>
@@ -182,7 +193,7 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                     </span>
                 </div>
                 <div className="text-ink-3 text-[10.5px]">
-                    Contracted visibility floor: Bear Case bounded &gt; {fmtMoney(bearIv)}
+                    Bear case value: {fmtMoney(bearIv)}
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ import {
     QuantFilterCell, SpreadSizeCell, StockCell, VerdictCell,
     MoatConvictionCell, HalfKellyCell, TriadCell, DeliberationCell,
 } from './cells';
-import { verdictTone } from '@/lib/desk/tone';
+import { isBlocked, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
 import { bandLabel } from '@/lib/desk/band';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import { rankDelta, type AiSections, type DeskRow } from '@/lib/desk/rankings';
@@ -73,6 +73,7 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
     const ind = row.info?.industry;
     const n = d?.samples_run ?? d?.n_basis ?? 1;
     const spread = d?.spread_pct;
+    const blocked = isBlocked(d);
 
     return (
         <div
@@ -102,8 +103,8 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
             )}
 
             <div className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
-                <span className="text-[12px] font-extrabold" style={{ color: tone.color }}>
-                    {label}
+                <span className="text-[12px] font-extrabold" style={{ color: blocked ? TONE_COLORS.MUTED : tone.color }}>
+                    {label}{blocked ? ' · BLOCKED' : ''}
                     {d?.mos_vs_median_pct != null && (
                         <span className="ml-1.5 font-mono text-[11px]">({fmtSignedPct(d.mos_vs_median_pct)} MoS)</span>
                     )}
@@ -111,7 +112,7 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
                 <span className="flex items-center gap-2.5 font-mono text-[11px]">
                     {row.moat != null && <span className="text-accent font-semibold">★ {row.moat.toFixed(1)}/5</span>}
                     {row.conviction != null && <span className="text-ink">C:{row.conviction}/15</span>}
-                    {row.kelly != null && row.kelly > 0 && <span className="text-pos font-semibold">{row.kelly.toFixed(1)}% Cap</span>}
+                    {!blocked && row.kelly != null && row.kelly > 0 && <span className="text-pos font-semibold">{row.kelly.toFixed(1)}% Cap</span>}
                 </span>
             </div>
 
@@ -167,7 +168,7 @@ function Section({ title, note, rows, rankOf, onOpen, empty }: {
 
 export function AiLens({ sections, onOpen }: { sections: AiSections; onOpen: (t: string) => void }) {
     const { t } = useLanguage();
-    const { researchNow, watchlist, awaiting, vetoed } = sections;
+    const { researchNow, watchlist, blocked, awaiting, vetoed } = sections;
     return (
         <div>
             <Section
@@ -176,7 +177,7 @@ export function AiLens({ sections, onOpen }: { sections: AiSections; onOpen: (t:
                 rows={researchNow}
                 rankOf={(r) => r.aiRank ?? '—'}
                 onOpen={onOpen}
-                empty="No name currently sits below its whole valuation band."
+                empty="No verdict passes the gate right now."
             />
 
             <Section
@@ -185,8 +186,19 @@ export function AiLens({ sections, onOpen }: { sections: AiSections; onOpen: (t:
                 rows={watchlist}
                 rankOf={(r) => (r.fct.fct_rank ? `q${r.fct.fct_rank}` : '—')}
                 onOpen={onOpen}
-                empty="Nothing on the watchlist."
+                empty="No unblocked verdict on the watchlist."
             />
+
+            {blocked.length > 0 && (
+                <Section
+                    title={t('secBlocked')}
+                    note={`${blocked.length} · ${t('secBlockedNote')}`}
+                    rows={blocked}
+                    rankOf={(r) => (r.fct.fct_rank ? `q${r.fct.fct_rank}` : '—')}
+                    onOpen={onOpen}
+                    empty=""
+                />
+            )}
 
             {awaiting.length > 0 && (
                 <Section

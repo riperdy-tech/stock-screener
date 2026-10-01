@@ -207,7 +207,7 @@ export function YoutubeStrategyDashboard() {
                                 <BarChart3 className="h-7 w-7 text-accent" /> YouTube Strategy Filter
                             </h1>
                             <p className="mt-1 text-base leading-relaxed text-ink-2 max-w-3xl">
-                                Implements the video summary as three independent strategies with the universal EPS-based position-size rule.
+                                Implements the video summary as three independent strategies with the universal EPS-based risk-tier rule.
                                 Negative EPS names are capped at tiny risk sizes before any signal is considered.
                             </p>
                             {lastUpdated && <p className="text-base text-ink-2 mt-2 font-mono">Data last updated: {lastUpdated}</p>}
@@ -379,12 +379,6 @@ export function YoutubeStrategyDashboard() {
                                                 <div className="text-base font-extrabold uppercase tracking-wider text-neg">Primary video signal</div>
                                                 <div className="mt-1 text-lg font-extrabold text-ink">{primaryMatch}</div>
                                             </div>
-                                            <span className={clsx(
-                                                "w-fit  border px-3.5 py-2 text-base font-extrabold uppercase tracking-tight",
-                                                evaluation.riskTier === "standard" ? "bg-pos/10 text-pos border-pos/40" : "bg-neg/10 text-neg border-neg/40"
-                                            )}>
-                                                {evaluation.maxPositionSize}
-                                            </span>
                                         </div>
                                     </div>
 

@@ -270,6 +270,9 @@ export interface FactorEntry {
     fct_vol?: number | null;
     fct_contributions: Record<string, number> | null;
     fct_haircuts: Record<string, number> | null;
+    fct_flags?: string[] | null;
+    fct_flag_detail?: Record<string, any> | null;
+    fct_nominated_doors?: string[] | null;
     // Stage-5 RS2 LLM overlay (written by score_factors.apply_llm_overlay; absent until verdicts exist)
     fct_band_llm?: string | null;     // LLM-overlay parallel band (additive; quant band stays in fct_band)
     fct_llm?: string | null;          // 'promoted' | 'demoted' | 'none'
@@ -294,8 +297,6 @@ export interface FactorScoresPayload {
     scored_count: number;
     band_counts: Record<string, number>;
     veto_counts: Record<string, number>;
-    weights_used: Record<string, number>;
-    weights_calibrated_at?: string;
     tickers: Record<string, FactorEntry>;
 }
 
@@ -331,7 +332,7 @@ async function fetchJson<T>(path: string): Promise<T | null> {
     }
 }
 
-// ── Institutional Underwriting Contract (Charter v3.1 / Section 12) ──────────
+// ── Institutional Underwriting Contract ──────────────────────────────────────
 export interface ReentryTranches {
     tranche_1_starter?: number | null;
     tranche_2_core?: number | null;
@@ -386,13 +387,17 @@ export interface DepthVerdict {
     actionable?: boolean | null;
     actionable_reasons?: string[] | null;
     status?: string | null;
+    verdict_price?: number | null;    // price the analyst saw when it made the verdict (price itself is live)
+    gate_version?: number | null;
+    pack_revision?: number | null;
+    flags?: string[] | null;
     // Present in the shipped payload (band_direction_v1) but previously untyped.
     samples_run?: number | null;      // runs attempted; n_basis = runs that passed the guards
     scheme?: string | null;
     consensus_dir?: string | null;    // run id, e.g. LULU_20260821_155157 — shown on the transcripts header
     backfilled?: boolean;
 
-    // Institutional Underwriting Contract (Charter v3.1 / Section 12)
+    // Institutional Underwriting Contract
     scorecard?: InstitutionalScorecard | null;
     conviction_score?: number | null;       // 1-15 conviction scale
     business_quality_moat?: number | null;  // 1-5 economic moat scale
@@ -416,6 +421,7 @@ export interface DepthVerdict {
         secs?: number | null;
         plausible?: boolean;
         trigger?: string;
+        reasons?: string[] | null;
     }>;
 }
 
@@ -423,6 +429,8 @@ export interface DepthOverlayPayload {
     generated_at: string;
     scheme: string;
     count: number;
+    actionable_count?: number;
+    gate_version?: number | null;
     tickers: Record<string, DepthVerdict>;
 }
 
@@ -513,15 +521,6 @@ export async function fetchValuationModels(): Promise<{ generated_at: string; di
     return fetchJson('/data/valuation_models.json');
 }
 
-export async function fetchPortfolioPlan(): Promise<any | null> {
-    return fetchJson('/data/portfolio_plan.json');
-}
-
-// Parallel LLM-overlay variant for baseline-vs-LLM A/B (null until the orchestrator + run_chain --llm produce it).
-export async function fetchPortfolioPlanLlm(): Promise<any | null> {
-    return fetchJson('/data/portfolio_plan_llm.json');
-}
-
 // ── RS2 local-LLM research + outcomes (public/data/rs2/, published by the local orchestrator) ──
 export interface Rs2RunMeta {
     ts: string;
@@ -564,32 +563,8 @@ export async function fetchRs2Report(ticker: string, ts: string): Promise<Rs2Bun
     return fetchJson<Rs2Bundle>(`/data/rs2/${encodeURIComponent(ticker.toUpperCase())}/${ts}.json`);
 }
 
-export async function fetchOutcomes(): Promise<any | null> {
-    return fetchJson('/data/outcome_backfill.json');
-}
-
-export async function fetchBacktest(): Promise<any | null> {
-    return fetchJson('/data/backtest_results.json');
-}
-
-export async function fetchFactorIc(): Promise<any | null> {
-    return fetchJson('/data/factor_ic.json');
-}
-
 export async function fetchOverlaySignals(): Promise<any | null> {
     return fetchJson('/data/overlay_signals.json');
-}
-
-// FRED-derived macro regime flags (fetch_macro_state.py). Drives the portfolio
-// de-risk notice; absent payload = no flags, never an error state.
-export interface MacroStatePayload {
-    generated_at?: string;
-    series?: Record<string, { value: number | null; as_of: string | null; label: string | null; interpretation: string | null }>;
-    thresholds_used?: Record<string, any>;
-    triggered_flags?: string[];
-}
-export async function fetchMacroState(): Promise<MacroStatePayload | null> {
-    return fetchJson<MacroStatePayload>('/data/macro_state.json');
 }
 
 export async function fetchPaperLedgers(): Promise<any | null> {

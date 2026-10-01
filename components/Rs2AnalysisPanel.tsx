@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import clsx from "clsx";
 import { ExternalLink, ChevronDown } from "lucide-react";
+import { gateReasonsText, isBlocked } from "@/lib/desk/tone";
 import { fetchRs2Index, fetchRs2Report, fetchDepthOverlay, fetchDepthReport, type Rs2RunMeta, type Rs2Bundle, type DepthVerdict, type DepthReportBundle } from "@/lib/data-service";
 
 const humanMethod = (m?: string | null) => {
@@ -126,15 +127,18 @@ function DepthSamplesView({ ticker }: { ticker: string }) {
 }
 
 function DepthVerdictBanner({ v }: { v: DepthVerdict }) {
+    const blocked = isBlocked(v);
     const tone =
+        blocked ? "border-rule-14 bg-white/5 text-ink-2" :
         v.direction === "undervalued" ? "border-pos/40 bg-pos/10 text-pos" :
         v.direction === "overvalued" ? "border-neg/40 bg-neg/10 text-neg" :
         v.direction === "hold" ? "border-warn/40 bg-warn/10 text-warn" :
         "border-rule-14 bg-white/5 text-ink-2";
     const label =
+        blocked ? `BLOCKED BY THE GATE — ${gateReasonsText(v.actionable_reasons)}` :
         v.direction === "undervalued" ? "UNDERVALUED — every run values it above the price" :
         v.direction === "overvalued" ? "OVERVALUED — every run values it below the price" :
-        v.direction === "hold" ? "HOLD — price sits inside the model's uncertainty band" :
+        v.direction === "hold" ? "FAIR — price sits inside the model's uncertainty band" :
         "NOT USABLE — no plausible run";
     return (
         <div className={` border p-3 ${tone}`}>
@@ -148,17 +152,16 @@ function DepthVerdictBanner({ v }: { v: DepthVerdict }) {
                 )}
                 {v.median_iv != null && <span>median <b>${v.median_iv}</b></span>}
                 {v.spread_pct != null && <span>run spread <b>{v.spread_pct}%</b></span>}
-                {v.size_hint && <span>size hint <b>{v.size_hint}</b></span>}
+                {!blocked && v.size_hint && <span>size hint <b>{v.size_hint}</b></span>}
                 {v.conviction_score != null && <span>conviction <b>{v.conviction_score}/15</b></span>}
                 {v.business_quality_moat != null && <span>moat <b>{v.business_quality_moat}/5.0</b></span>}
-                {v.kelly_fraction_pct != null && <span>Kelly <b>{v.kelly_fraction_pct}%</b></span>}
+                {!blocked && v.kelly_fraction_pct != null && <span>Kelly <b>{v.kelly_fraction_pct}%</b></span>}
                 <span>{v.n_basis} plausible run{v.n_basis === 1 ? "" : "s"}</span>
                 {v.date && <span>{v.date}</span>}
             </div>
             <p className="mt-1 text-[11px] leading-snug text-ink-2">
-                Band-direction scheme: the model analyzes the full fact pack in {v.n_basis >= 3 ? "three" : "multiple"} independent
-                runs; the verdict is where today's price sits relative to the whole band of its
-                valuations. Spread sets position size, not pass/fail.
+                The verdict is where the price sat against the band of the runs' values on the verdict date. A verdict counts
+                only if it passes the gate.
             </p>
         </div>
     );
@@ -220,7 +223,7 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
             <div className="border border-dashed border-rule-14 bg-inset p-6 text-center">
                 <div className="text-sm font-extrabold text-ink">No RS2 analysis yet for {displayTicker}</div>
                 <p className="mx-auto mt-1.5 max-w-md text-xs leading-relaxed text-ink-2">
-                    The local RS2 engine analyzes Research-Now and Watchlist names on a weekly / bi-weekly cadence. It hasn't produced a report for this ticker yet.
+                    No report was produced for this ticker.
                 </p>
             </div>
             </div>
@@ -242,6 +245,9 @@ export function Rs2AnalysisPanel({ symbol, displayTicker, hideDepth = false }: {
         <div className="space-y-4">
             {!hideDepth && depthV && <DepthVerdictBanner v={depthV} />}
             {!hideDepth && depthV && <DepthSamplesView ticker={ticker} />}
+            <div className="text-[11px] leading-snug text-ink-3">
+                Old pipeline records (retired August 2026) — kept as a record, not current analysis
+            </div>
             {/* header: ticker + TradingView overview + method */}
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                 <span className="text-lg font-extrabold tracking-tight">{displayTicker}</span>
