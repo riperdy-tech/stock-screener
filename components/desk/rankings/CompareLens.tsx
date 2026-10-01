@@ -6,7 +6,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Chip, Micro, SectionHead } from '../primitives';
-import { DoorChips, FactorMix } from './cells';
+import { FactorMix } from './cells';
 import { isBlocked, sizeTone, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
 import { fmtSignedPct } from '@/lib/desk/format';
 import { rankDelta, whySplit, type CompareSort, type DeskRow } from '@/lib/desk/rankings';
@@ -77,7 +77,6 @@ export function CompareLens({ rows, sort, onSort, onOpen }: {
                         <span className="block min-w-0">
                             <span className="text-[15px] font-extrabold text-ink">{r.ticker}</span>
                             <span className="mt-0.5 block truncate text-[11px] text-ink-2">{r.info?.name ?? ''}</span>
-                            <DoorChips row={r} />
                         </span>
 
                         <span className="block min-w-0 lg:text-right">

@@ -5,9 +5,9 @@
 import React from 'react';
 import clsx from 'clsx';
 import { scaleBand, bandLabel } from '@/lib/desk/band';
-import { DOOR_HELP, doorLabel, gapColor, gateReasonsText, isBlocked, orderedDoors, sizeTone, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
+import { gapColor, gateReasonsText, isBlocked, sizeTone, TONE_COLORS, verdictTone, whyListed } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
-import type { BandMove, DeskRow } from '@/lib/desk/rankings';
+import type { DeskRow } from '@/lib/desk/rankings';
 import { Micro } from '../primitives';
 import { useLanguage } from '@/components/LanguageContext';
 
@@ -183,42 +183,19 @@ export function QuantFilterCell({ row }: { row: DeskRow }) {
     );
 }
 
-const MOVED_CHIP: Record<BandMove, { text: string; className: string }> = {
-    entered_rn: { text: 'NEW TODAY', className: 'border-pos/50 text-pos' },
-    entered_book: { text: 'NEW TODAY', className: 'border-pos/50 text-pos' },
-    left_rn: { text: 'LEFT RESEARCH NOW', className: 'border-warn/50 text-warn' },
-    left_book: { text: 'LEFT THE LIST', className: 'border-warn/50 text-warn' },
-};
-
-const DOOR_CHIP_BASE = 'inline-block rounded-xs border px-1.5 py-0.5 font-mono text-[9.5px] font-bold tracking-wide uppercase';
-
-/** The "moved since the last run" marker; nothing when the name did not move. */
-export function MovedChip({ moved }: { moved: BandMove | null }) {
-    if (!moved) return null;
-    const m = MOVED_CHIP[moved];
-    return <span className={clsx(DOOR_CHIP_BASE, m.className)}>{m.text}</span>;
-}
-
-/** One door as a small chip; the plain-English sentence is the tooltip. */
-export function DoorChip({ code }: { code: string }) {
+/**
+ * The screen's reason for listing a stock, as quiet text under the band: "Value", "Quality + value",
+ * plus "new" when it joined in the latest run. No boxes and no accent colour — the band above it
+ * already carries the emphasis.
+ */
+export function WhyListed({ row, className }: { row: DeskRow; className?: string }) {
+    const why = whyListed(row.fct.fct_nominated_doors);
+    const isNew = row.moved === 'entered_rn' || row.moved === 'entered_book';
+    if (!why && !isNew) return null;
     return (
-        <span
-            className={clsx(DOOR_CHIP_BASE, 'border-rule-24', code === 'DOUBLE_DOOR_CHAMPION' ? 'text-accent' : 'text-ink-2')}
-            title={DOOR_HELP[code]}
-        >
-            {doorLabel(code)}
-        </span>
-    );
-}
-
-/** Door chips and the band-movement marker, shown under the company line. Nothing when both are empty. */
-export function DoorChips({ row }: { row: DeskRow }) {
-    const doors = orderedDoors(row.fct.fct_nominated_doors);
-    if (doors.length === 0 && !row.moved) return null;
-    return (
-        <span className="mt-1 flex flex-wrap items-center gap-1.5">
-            {doors.map((code) => <DoorChip key={code} code={code} />)}
-            <MovedChip moved={row.moved} />
+        <span className={clsx('block text-[11px] text-ink-3', className)} title={why ? `${why.label}: ${why.help}` : undefined}>
+            {why?.label}
+            {isNew && <span className="text-pos">{why ? ' · ' : ''}new</span>}
         </span>
     );
 }
@@ -247,7 +224,6 @@ export function StockCell({ row }: { row: DeskRow }) {
                     </span>
                 )}
             </div>
-            <DoorChips row={row} />
         </span>
     );
 }

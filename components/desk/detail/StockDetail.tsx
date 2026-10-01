@@ -14,14 +14,13 @@ import { Rs2AnalysisPanel } from '@/components/Rs2AnalysisPanel';
 import { fetchDepthReport, type DepthReportBundle, type DepthVerdict } from '@/lib/data-service';
 import { headlineFromSamples } from '@/lib/desk/thesis';
 import {
-    DATA_NOTES, DOOR_HELP, FORENSIC_WARNINGS, TONE_COLORS, gapColor, gateReasonsText, isBlocked, orderedDoors, sizeTone, verdictTone,
+    DATA_NOTES, FORENSIC_WARNINGS, TONE_COLORS, gapColor, gateReasonsText, isBlocked, sizeTone, verdictTone, whyListed,
 } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import { buildRows, type DeskRow } from '@/lib/desk/rankings';
 import { useDeskData } from '@/lib/desk/useDeskData';
 import { Shell } from '../Shell';
 import { useLanguage } from '@/components/LanguageContext';
-import { DoorChip, MovedChip } from '../rankings/cells';
 
 // The keys the dual-door screen writes into `fct_z`.
 const FACTORS: [string, string, string][] = [
@@ -528,36 +527,53 @@ function zToPercentile(z: number): number {
 }
 
 const BAND_NAME: Record<string, string> = {
-    research_now: 'Research now', watchlist: 'Watchlist', monitor: 'Monitor', pass: 'Pass',
+    research_now: 'Research now', watchlist: 'Watchlist', pass: 'Pass', vetoed: 'Vetoed',
 };
 
 const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 
-/** The trend facts the screen read, each piece skipped when the data does not carry it. */
-function momentumFacts(m: NonNullable<DeskRow['fct']['fct_momentum_state']>): string | null {
+/** The price trend in one plain sentence; each piece is skipped when the data does not carry it. */
+function priceTrend(m: NonNullable<DeskRow['fct']['fct_momentum_state']>): string | null {
     const bits: string[] = [];
-    if (isNum(m.mom_6m)) bits.push(`6-month return ${fmtSignedPct(m.mom_6m * 100)}`);
+    if (isNum(m.mom_6m)) bits.push(`${m.mom_6m >= 0 ? 'up' : 'down'} ${Math.abs(m.mom_6m * 100).toFixed(0)}% over 6 months`);
     if (isNum(m.pct_from_52w_high)) {
         bits.push(m.pct_from_52w_high === 0
             ? 'at its 52-week high'
-            : `${Math.abs(m.pct_from_52w_high * 100).toFixed(1)}% below its 52-week high`);
+            : `${Math.abs(m.pct_from_52w_high * 100).toFixed(0)}% below its 52-week high`);
     }
     if (typeof m.above_200dma === 'boolean') bits.push(`${m.above_200dma ? 'above' : 'below'} its 200-day average`);
-    if (m.regime_shift_down === true) bits.push('trend broke down');
-    return bits.length ? bits.join(' · ') : null;
+    if (m.regime_shift_down === true) bits.push('and its uptrend has broken');
+    if (!bits.length) return null;
+    return `Price ${bits.join(', ')}${m.price_asof ? ` (as of ${m.price_asof})` : ''}.`;
 }
+
+const MOVED_TEXT: Record<string, string> = {
+    entered_rn: 'It joined Research now in the latest run.',
+    entered_book: 'It joined the list in the latest run.',
+    left_rn: 'It dropped out of Research now in the latest run.',
+    left_book: 'It left the list in the latest run.',
+};
 
 function QuantFilterPanel({ row }: { row: DeskRow }) {
     const { t } = useLanguage();
     const f = row.fct;
     const z = f.fct_z ?? {};
-    const doors = orderedDoors(f.fct_nominated_doors);
     // A depth-only row carries a placeholder band (no rank, no composite): it is not in today's screen.
     const inScreen = f.fct_rank != null || f.fct_composite != null;
     const bandName = !inScreen ? 'Not in the current screen'
         : f.fct_band ? (BAND_NAME[f.fct_band] ?? f.fct_band.replace(/_/g, ' ')) : null;
-    const mom = f.fct_momentum_state ? momentumFacts(f.fct_momentum_state) : null;
-    const priceAsof = f.fct_momentum_state?.price_asof;
+    const doors = f.fct_nominated_doors ?? [];
+    const why = whyListed(doors);
+    const trend = f.fct_momentum_state ? priceTrend(f.fct_momentum_state) : null;
+    const sentences: string[] = [];
+    if (why) sentences.push(why.label === 'Held over'
+        ? `It is held over: ${why.help}.`
+        : `On the list for ${why.label.toLowerCase()}: ${why.help}.`);
+    if (why && why.label !== 'Held over' && doors.includes('HYSTERESIS_RETAINED')) sentences.push('Its rank has slipped, but not far enough to drop it.');
+    if (doors.includes('GLOBAL_WILDCARD')) sentences.push("It won one of the places open to any sector, beyond its own sector's share.");
+    if (row.moved && MOVED_TEXT[row.moved]) sentences.push(MOVED_TEXT[row.moved]);
+    if (trend) sentences.push(trend);
+    if (isNum(f.mid_cycle_window_years)) sentences.push(`As a cyclical business, its cash flow is averaged over the last ${f.mid_cycle_window_years} years.`);
     
     // Only show factors that have active calculations
     const activeFactors = FACTORS.filter(([key]) => z[key] != null);
@@ -567,43 +583,14 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
             <div className="flex items-baseline justify-between gap-4">
                 <Micro>WHY IT IS ON THE LIST</Micro>
                 <span className="font-mono text-[11.5px] text-ink">
-                    <b>{f.fct_composite != null ? f.fct_composite.toFixed(1) : '—'}</b>
-                    {f.fct_rank ? (
-                        <span className="text-ink-3"> · rank #{f.fct_rank}</span>
-                    ) : (
-                        <span className="text-ink-3"> · not ranked</span>
-                    )}
+                    {bandName ?? '—'}
+                    {f.fct_rank != null && <span className="text-ink-3"> · rank #{f.fct_rank}</span>}
                 </span>
             </div>
 
-            <div className="mt-3 space-y-2">
-                {doors.length > 0 && (
-                    <div className="space-y-1.5">
-                        {doors.map((code) => (
-                            <div key={code} className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-                                <DoorChip code={code} />
-                                {DOOR_HELP[code] && <span className="text-[11px] text-ink-3">{DOOR_HELP[code]}</span>}
-                            </div>
-                        ))}
-                    </div>
-                )}
-                {(bandName || row.moved) && (
-                    <div className="flex flex-wrap items-center gap-2 font-mono text-[11.5px] text-ink">
-                        {bandName && (
-                            <span>{bandName}{f.fct_rank != null ? ` · rank #${f.fct_rank}` : ''}</span>
-                        )}
-                        <MovedChip moved={row.moved} />
-                    </div>
-                )}
-                {mom && <p className="text-[11.5px] text-ink-2">{mom}</p>}
-                {priceAsof && <p className="text-[11px] text-ink-3">prices as of {priceAsof}</p>}
-                {isNum(f.mid_cycle_window_years) && (
-                    <p className="text-[11.5px] text-ink-2">Cash flow averaged over the last {f.mid_cycle_window_years} years (cyclical business)</p>
-                )}
-                {isNum(f.discount_rate_pct) && (
-                    <p className="text-[11.5px] text-ink-2">Discount rate {f.discount_rate_pct}%</p>
-                )}
-            </div>
+            {sentences.length > 0 && (
+                <p className="mt-3 text-[12.5px] leading-relaxed text-ink-2">{sentences.join(' ')}</p>
+            )}
 
             <div className="mt-3.5 space-y-2.5">
                 {activeFactors.length > 0 ? (
@@ -640,7 +627,7 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
 
             <div className="mt-3.5 border-t border-rule-10 pt-2.5">
                 <p className="text-[11px] leading-relaxed text-ink-3">
-                    The dual-door screen scores about 3,000 stocks that pass basic hygiene. A stock reaches the shortlist through the compounder door, the value-gap door, or the trend-leader door.
+                    The dual-door screen scores about 3,000 stocks that pass basic hygiene. A stock reaches the list as a quality business, a value opportunity, or a steady trend.
                 </p>
             </div>
         </div>

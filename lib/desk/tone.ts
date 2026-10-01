@@ -153,35 +153,29 @@ export function gateReasonsText(reasons?: string[] | null): string {
     return (reasons ?? []).map(gateReasonLabel).join(' · ');
 }
 
-/** Door codes in display order, with the short chip label and the plain-English help sentence. */
-export const DOOR_LABEL: Record<string, string> = {
-    DOOR_1_COMPOUNDER: 'COMPOUNDER',
-    DOOR_2_VALUE_GAP: 'VALUE GAP',
-    DOOR_3_TREND_LEADER: 'TREND LEADER',
-    DOUBLE_DOOR_CHAMPION: 'CHAMPION',
-    GLOBAL_WILDCARD: 'WILDCARD',
-    HYSTERESIS_RETAINED: 'HELD OVER',
-};
-
-export const DOOR_HELP: Record<string, string> = {
-    DOOR_1_COMPOUNDER: 'High quality with rising momentum and estimates',
-    DOOR_2_VALUE_GAP: 'Cheap against its own demonstrated growth',
-    DOOR_3_TREND_LEADER: 'A strong, steady, profitable uptrend',
-    DOUBLE_DOOR_CHAMPION: 'Top 10% through both the compounder and value-gap doors',
-    GLOBAL_WILDCARD: "Won a place outside its sector's quota on overall strength",
-    HYSTERESIS_RETAINED: 'Already on the list; stays until it falls clearly out',
-};
-
-const DOOR_ORDER = Object.keys(DOOR_LABEL);
-
-/** One door code as chip text; unknown codes show lower-cased with `_` as spaces. */
-export const doorLabel = (code: string): string => DOOR_LABEL[code] ?? code.toLowerCase().replace(/_/g, ' ');
-
-/** The row's door codes in display order; unknown codes follow, in their original order. */
-export function orderedDoors(doors: string[] | null | undefined): string[] {
-    const list = doors ?? [];
-    const known = DOOR_ORDER.filter((c) => list.includes(c));
-    return [...known, ...list.filter((c) => !DOOR_ORDER.includes(c))];
+/**
+ * Why the screen put a stock on the list, in one or two plain words. The compounder door reads as
+ * "Quality", the value-gap door as "Value", the trend-leader door as "Trend"; a champion is both of
+ * the first two. Wildcard and held-over are how a place was won, not why — they are explained on the
+ * stock page only. Null when the stock was not nominated.
+ */
+export function whyListed(doors: string[] | null | undefined): { label: string; help: string } | null {
+    const d = doors ?? [];
+    const champ = d.includes('DOUBLE_DOOR_CHAMPION');
+    const parts: [string, string][] = [];
+    if (champ || d.includes('DOOR_1_COMPOUNDER')) parts.push(['Quality', 'a high-quality business with rising price and forecasts']);
+    if (champ || d.includes('DOOR_2_VALUE_GAP')) parts.push(['Value', 'cheap against the growth it has already delivered']);
+    if (d.includes('DOOR_3_TREND_LEADER')) parts.push(['Trend', 'a strong, steady, profitable uptrend']);
+    if (parts.length === 0) {
+        return d.includes('HYSTERESIS_RETAINED')
+            ? { label: 'Held over', help: 'already on the list; its rank slipped, but not far enough to drop it' }
+            : null;
+    }
+    const label = parts.map(([l], i) => (i === 0 ? l : l.toLowerCase())).join(' + ');
+    const help = champ
+        ? 'in the top 10% both as a quality business and as a value opportunity, which is rare'
+        : parts.map(([, h]) => h).join('; and ');
+    return { label, help };
 }
 
 /** Quant-screen flags that are warnings on the name (never a gate). */

@@ -7,7 +7,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Micro, SectionHead } from '../primitives';
-import { DoorChips, FactorMix, McapCell, PriceCell, StockCell } from './cells';
+import { FactorMix, McapCell, PriceCell, StockCell, WhyListed } from './cells';
 import { isBlocked, sizeTone, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import type { DeskRow } from '@/lib/desk/rankings';
@@ -61,7 +61,7 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
         <section className="mt-7">
             <SectionHead
                 title="Quant filter"
-                note="Ranked by the dual-door screen: the better of a compounder score and a value-gap score, plus trend leaders."
+                note="A stock gets on the list as a quality business, a value opportunity, or a steady trend. Every sector gets the same number of places for now."
             />
 
             <div className={clsx(GRID, 'hidden border-b border-rule-18 pb-2 pt-3 lg:grid')}>
@@ -91,7 +91,7 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                             {r.fct.fct_composite != null ? r.fct.fct_composite.toFixed(1) : '—'}
                         </span>
                         <FactorMix contributions={r.fct.fct_contributions} />
-                        <BandChip row={r} />
+                        <span className="block min-w-0"><BandChip row={r} /><WhyListed row={r} className="mt-0.5" /></span>
                         <CompactVerdict row={r} />
                         <PriceCell row={r} />
                         <McapCell row={r} />
@@ -114,10 +114,9 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                                 {r.fct.fct_composite != null ? r.fct.fct_composite.toFixed(1) : '—'}
                             </span>
                         </div>
-                        <DoorChips row={r} />
                         <div className="mt-2"><FactorMix contributions={r.fct.fct_contributions} width={160} /></div>
                         <div className="mt-2 flex items-baseline justify-between gap-3">
-                            <BandChip row={r} />
+                            <span className="flex items-baseline gap-2"><BandChip row={r} /><WhyListed row={r} /></span>
                             <span className="font-mono text-[11px] text-ink-2">{fmtMoney(r.info?.price)} · {fmtMcap(r.info?.marketCap)}</span>
                         </div>
                         <div className="mt-1.5"><CompactVerdict row={r} /></div>
