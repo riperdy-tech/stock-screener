@@ -9,18 +9,17 @@ import Link from 'next/link';
 import { Chip, Micro } from '../primitives';
 import { useLanguage } from '@/components/LanguageContext';
 import { DESK_NOTICE } from '@/lib/desk/notice';
-import { gateReasonLabel, isBlocked } from '@/lib/desk/tone';
+import { isBlocked } from '@/lib/desk/tone';
 import { AiLens } from './AiLens';
 import { QuantLens } from './QuantLens';
-import { CompareLens } from './CompareLens';
 import {
-    aiSections, applyFilters, buildRows, compareRows, sectorsOf, industriesOf,
-    type CompareSort, type RankingFilters,
+    aiSections, applyFilters, buildRows, sectorsOf, industriesOf,
+    type RankingFilters,
 } from '@/lib/desk/rankings';
 import type { DepthVerdict, FactorScoresPayload, ValuationModel } from '@/lib/data-service';
 import type { StockInfo } from '@/lib/desk/useDeskData';
 
-export type Lens = 'ai' | 'quant' | 'compare';
+export type Lens = 'ai' | 'quant';
 
 const VERDICT_OPTIONS: [string, string][] = [
     ['all', 'All underwritings'],
@@ -80,7 +79,6 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
 }) {
     const { t } = useLanguage();
     const [filters, setFilters] = useState<RankingFilters>({ search: '', band: 'all', verdict: 'all', sector: 'all', industry: 'all' });
-    const [cmpSort, setCmpSort] = useState<CompareSort>('delta');
     const [limit, setLimit] = useState(100);
 
     const rows = useMemo(
@@ -91,7 +89,6 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const industries = useMemo(() => industriesOf(rows, filters.sector), [rows, filters.sector]);
     const filtered = useMemo(() => applyFilters(rows, filters), [rows, filters]);
     const sections = useMemo(() => aiSections(filtered), [filtered]);
-    const compare = useMemo(() => compareRows(filtered, cmpSort), [filtered, cmpSort]);
 
     const set = (patch: Partial<RankingFilters>) => setFilters((f) => ({ ...f, ...patch }));
 
@@ -104,18 +101,19 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const actionableCount = depthEntries.filter(d =>
         d.actionable === true || (d.actionable == null && !isBlocked(d) && d.direction === 'undervalued')).length;
 
-    // Most common gate reasons across the blocked verdicts
-    const reasonCounts = new Map<string, number>();
-    for (const d of depthEntries) {
-        for (const code of d.actionable_reasons ?? []) reasonCounts.set(code, (reasonCounts.get(code) ?? 0) + 1);
-    }
-    const topReasons = Array.from(reasonCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 2);
-
-    // Consensus telemetry
-    const spreads = depthEntries.map(d => d.spread_pct).filter((s): s is number => s != null && !isNaN(s));
-    const sortedSpreads = [...spreads].sort((a, b) => a - b);
-    const medianSpread = sortedSpreads.length > 0 ? sortedSpreads[Math.floor(sortedSpreads.length / 2)] : null;
-    const tightCount = spreads.filter(s => s <= 15).length;
+    // The funnel: how the whole market narrows to the AI's verdicts. Every count comes from the
+    // published files; a missing count shows "—", never a guess.
+    const bc = factor?.band_counts;
+    const universe = bc ? Object.values(bc).reduce((n: number, v) => n + (typeof v === 'number' ? v : 0), 0) : null;
+    const onList = bc && bc.research_now != null && bc.watchlist != null ? bc.research_now + bc.watchlist : null;
+    const fmtN = (n: number | null | undefined) => (n == null ? '—' : n.toLocaleString('en-US'));
+    const funnel: { n: string; label: string; note?: string }[] = [
+        { n: fmtN(universe), label: 'US stocks checked' },
+        { n: fmtN(factor?.scored_count), label: 'pass the safety filters' },
+        { n: fmtN(onList), label: 'make the list', note: researchNowCount != null ? `${researchNowCount} in Research now` : undefined },
+        { n: fmtN(analyzed), label: 'AI verdicts on record' },
+        { n: fmtN(actionableCount), label: 'pass the gate' },
+    ];
 
     return (
         <div>
@@ -141,55 +139,19 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                     </div>
                 </div>
 
-                {/* 4 Sleek Metric KPI Cards */}
-                <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                    <div className="border border-rule-18 bg-white/[0.02] p-3 rounded-xs">
-                        <Micro className="text-ink-3">SCORED UNIVERSE</Micro>
-                        <div className="mt-1 font-mono text-[20px] font-bold text-ink">
-                            {factor?.scored_count != null ? factor.scored_count.toLocaleString('en-US') : '—'}
-                        </div>
-                        <div className="mt-0.5 text-[11px] text-ink-3">
-                            <span className="text-accent font-semibold">{researchNowCount ?? '—'}</span> on the research-now shortlist
-                        </div>
-                    </div>
-
-                    <div className="border border-rule-18 bg-white/[0.02] p-3 rounded-xs">
-                        <Micro className="text-ink-3">AI VERDICTS</Micro>
-                        <div className="mt-1 font-mono text-[20px] font-bold text-ink">
-                            {analyzed} <span className="text-[13px] font-normal text-ink-3">ON RECORD</span>
-                        </div>
-                        <div className="mt-0.5 text-[11px] text-ink-3">
-                            <span className="font-semibold text-ink-2">{actionableCount}</span> pass the gate
-                        </div>
-                    </div>
-
-                    <div className="border border-rule-18 bg-white/[0.02] p-3 rounded-xs">
-                        <Micro className="text-ink-3">WHY BLOCKED</Micro>
-                        {topReasons.length === 0 ? (
-                            <div className="mt-1 font-mono text-[20px] font-bold text-ink">—</div>
-                        ) : (
-                            <div
-                                className="mt-1 font-mono text-[12px] font-bold leading-snug text-ink"
-                                title={topReasons.map(([c, n]) => `${gateReasonLabel(c)} ×${n}`).join(' · ')}
-                            >
-                                {topReasons.map(([c, n]) => (
-                                    <div key={c} className="truncate">{gateReasonLabel(c)} ×{n}</div>
-                                ))}
-                            </div>
-                        )}
-                        <div className="mt-0.5 text-[11px] text-ink-3">most common reasons</div>
-                    </div>
-
-                    <div className="border border-rule-18 bg-white/[0.02] p-3 rounded-xs">
-                        <Micro className="text-ink-3">MEDIAN VALUATION SPREAD</Micro>
-                        <div className="mt-1 font-mono text-[20px] font-bold text-ink">
-                            {medianSpread != null ? `${medianSpread.toFixed(1)}%` : '—'}
-                        </div>
-                        <div className="mt-0.5 text-[11px] text-ink-3">
-                            <span className="font-semibold text-ink-2">{tightCount}/{spreads.length}</span> runs within 15%
-                        </div>
-                    </div>
-                </div>
+                {/* The funnel: the market narrowing step by step to the AI's verdicts */}
+                <ol className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-5">
+                    {funnel.map((step, i) => (
+                        <li key={step.label} className="relative border-l border-rule-18 pl-3">
+                            <div className="font-mono text-[20px] font-bold leading-none text-ink">{step.n}</div>
+                            <div className="mt-1 text-[12px] text-ink-2">{step.label}</div>
+                            {step.note && <div className="text-[11px] text-ink-3">{step.note}</div>}
+                            {i < funnel.length - 1 && (
+                                <span aria-hidden className="absolute -right-3 top-1 hidden font-mono text-[14px] text-ink-3 sm:inline">→</span>
+                            )}
+                        </li>
+                    ))}
+                </ol>
             </div>
 
             {/* Lens switcher + filters */}
@@ -198,7 +160,6 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                     <Micro className="mr-1">{t('lensLabelDesk')}</Micro>
                     <Chip active={lens === 'ai'} onClick={() => onLens('ai')}>{t('lensAi')}</Chip>
                     <Chip active={lens === 'quant'} onClick={() => onLens('quant')}>{t('lensQuantDesk')}</Chip>
-                    <Chip active={lens === 'compare'} onClick={() => onLens('compare')}>{t('lensCompareDesk')}</Chip>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2">
@@ -230,9 +191,6 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
             {lens === 'ai' && <AiLens sections={sections} onOpen={onOpen} />}
             {lens === 'quant' && (
                 <QuantLens rows={filtered} onOpen={onOpen} limit={limit} onMore={() => setLimit((l) => l + 100)} />
-            )}
-            {lens === 'compare' && (
-                <CompareLens rows={compare} sort={cmpSort} onSort={setCmpSort} onOpen={onOpen} />
             )}
         </div>
     );

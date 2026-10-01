@@ -97,7 +97,7 @@ export function KoreanHelpBody() {
             </Section>
 
             {/* 데스크 */}
-            <Section id="desk" title="데스크 읽는 법 — 세 가지 렌즈" icon={<BookOpen className="h-5 w-5" />}>
+            <Section id="desk" title="데스크 읽는 법 — 두 가지 화면" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
                     데스크는 메인 페이지입니다. 맨 위에는 누구의 관점을 볼지 정하는 스위치가 하나 있습니다.
                 </p>
@@ -108,10 +108,6 @@ export function KoreanHelpBody() {
                     <li>
                         <b>Quant</b> — 스크린 자체의 순위입니다. 재무제표와 주가에 대한 순수한 수학이며 AI는
                         개입하지 않습니다.
-                    </li>
-                    <li>
-                        <b>Compare</b> — 둘을 나란히 놓아 어디서 엇갈리는지 볼 수 있습니다. 크게 엇갈리면 한쪽이
-                        틀렸을 수 있으며, 그런 행이 흥미로운 행입니다.
                     </li>
                 </ul>
                 <SubHeading>AI 렌즈의 섹션</SubHeading>

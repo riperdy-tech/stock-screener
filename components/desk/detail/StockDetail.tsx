@@ -574,6 +574,28 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
     if (row.moved && MOVED_TEXT[row.moved]) sentences.push(MOVED_TEXT[row.moved]);
     if (trend) sentences.push(trend);
     if (isNum(f.mid_cycle_window_years)) sentences.push(`As a cyclical business, its cash flow is averaged over the last ${f.mid_cycle_window_years} years.`);
+
+    // The path this stock took, step by step: safety filters → door → list → AI. Stops at the
+    // first step it did not pass.
+    const path: string[] = [];
+    if (!inScreen) {
+        path.push('Not in the current screen');
+    } else if (row.vetoed) {
+        path.push(`Removed by the safety filters${row.vetoReason ? ` (${row.vetoReason.replace(/_/g, ' ').toLowerCase()})` : ''}`);
+    } else {
+        path.push('Passed the safety filters');
+        const pct = f.fct_percentile;
+        const top = isNum(pct) ? ` — top ${Math.max(1, Math.ceil(100 - pct))}%` : '';
+        path.push(why ? `${why.label}${top}` : 'Not picked by any door');
+        if (bandName) path.push(`${bandName}${f.fct_rank != null ? `, rank #${f.fct_rank}` : ''}`);
+    }
+    const onList = f.fct_band === 'research_now' || f.fct_band === 'watchlist';
+    const d = row.depth;
+    if (d) {
+        path.push(`AI verdict ${d.date ?? ''}: ${isBlocked(d) ? 'blocked by the gate' : verdictTone(d.direction).label.toLowerCase()}`.replace('  ', ' '));
+    } else if (inScreen && !row.vetoed) {
+        path.push(onList ? 'Waiting for the AI analyst' : 'Not queued for the AI');
+    }
     
     // Only show factors that have active calculations
     const activeFactors = FACTORS.filter(([key]) => z[key] != null);
@@ -581,12 +603,17 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
     return (
         <div className="border-t border-rule-14 pt-5">
             <div className="flex items-baseline justify-between gap-4">
-                <Micro>WHY IT IS ON THE LIST</Micro>
-                <span className="font-mono text-[11.5px] text-ink">
-                    {bandName ?? '—'}
-                    {f.fct_rank != null && <span className="text-ink-3"> · rank #{f.fct_rank}</span>}
-                </span>
+                <Micro>HOW IT GOT HERE</Micro>
             </div>
+
+            <ol className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[12px] text-ink">
+                {path.map((step, i) => (
+                    <li key={i} className="flex items-baseline gap-x-2">
+                        {i > 0 && <span aria-hidden className="text-ink-3">→</span>}
+                        <span>{step}</span>
+                    </li>
+                ))}
+            </ol>
 
             {sentences.length > 0 && (
                 <p className="mt-3 text-[12.5px] leading-relaxed text-ink-2">{sentences.join(' ')}</p>
@@ -739,7 +766,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
     const backHref = from === 'track' ? '/?tab=track'
         : from === 'port' ? '/?tab=portfolio'
-            : `/?tab=rankings&lens=${from === 'quant' || from === 'compare' ? from : 'ai'}`;
+            : `/?tab=rankings&lens=${from === 'quant' ? from : 'ai'}`;
     const backLabel = from === 'track' ? '← Track Record' : from === 'port' ? '← Portfolio' : `← ${t('detailBack')}`;
 
     const shell = (children: React.ReactNode) => (

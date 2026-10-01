@@ -89,7 +89,7 @@ export function ChineseHelpBody() {
             </Section>
 
             {/* 研究台 */}
-            <Section id="desk" title="如何閱讀研究台 — 三種鏡頭" icon={<BookOpen className="h-5 w-5" />}>
+            <Section id="desk" title="如何閱讀研究台 — 兩種檢視" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
                     研究台是主頁面。最上方有一個開關，決定你看到誰的觀點：
                 </p>
@@ -99,10 +99,6 @@ export function ChineseHelpBody() {
                     </li>
                     <li>
                         <b>Quant</b> — 篩選本身的排名：對財務報表與價格的純數學，不涉及 AI。
-                    </li>
-                    <li>
-                        <b>Compare</b> — 兩者並排，讓你看到它們在哪裡分歧。當它們強烈分歧時，其中一個可能是錯的，
-                        這些列就是有趣的列。
                     </li>
                 </ul>
                 <SubHeading>AI 鏡頭的區段</SubHeading>

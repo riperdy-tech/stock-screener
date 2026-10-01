@@ -6,7 +6,7 @@
 
 import type { BandTransitions, DepthVerdict, FactorEntry, ValuationModel } from '@/lib/data-service';
 import type { StockInfo } from './useDeskData';
-import { FORENSIC_WARNINGS, isBlocked } from './tone';
+import { isBlocked } from './tone';
 
 export type BandMove = 'entered_rn' | 'left_rn' | 'entered_book' | 'left_book';
 
@@ -302,25 +302,6 @@ export function aiSections(rows: DeskRow[]): AiSections {
     return { researchNow, watchlist, blocked, awaiting, vetoed };
 }
 
-export type CompareSort = 'delta' | 'quant' | 'ai';
-
-/** Compare lens: only names both engines have an opinion on, biggest split first. */
-export function compareRows(rows: DeskRow[], sort: CompareSort): DeskRow[] {
-    const out = rows.filter((r) => r.depth && r.depth.direction !== 'NOT_USABLE');
-    // Size of the split: an explicit rank move where both engines ranked the name,
-    // otherwise how deep into the quant shortlist the AI's rejection reaches.
-    const deltaOf = (r: DeskRow) => {
-        const d = rankDelta(r);
-        if (d !== null) return Math.abs(d);
-        if (r.promo === 'demoted' && r.fct.fct_rank) return Math.max(1, 100 - r.fct.fct_rank);
-        return 0;
-    };
-    if (sort === 'quant') out.sort((a, b) => (a.fct.fct_rank ?? 1e9) - (b.fct.fct_rank ?? 1e9));
-    else if (sort === 'ai') out.sort((a, b) => (a.aiRank ?? 1e9) - (b.aiRank ?? 1e9));
-    else out.sort((a, b) => deltaOf(b) - deltaOf(a));
-    return out;
-}
-
 /**
  * Signed rank move vs the quant filter. Positive = the AI ranks it higher than
  * the math does. Only depth-analyzed names carry an AI rank, so names the AI
@@ -329,26 +310,4 @@ export function compareRows(rows: DeskRow[], sort: CompareSort): DeskRow[] {
 export function rankDelta(r: DeskRow): number | null {
     if (r.aiRank && r.fct.fct_rank) return r.fct.fct_rank - r.aiRank;
     return null;
-}
-
-/**
- * One-line reason the two engines disagree, assembled from what the data knows.
- * The reverse-DCF expectations gap used to open this line; that dataset is
- * retired, so the reason is now built from the band and the quant haircuts.
- */
-export function whySplit(r: DeskRow): string {
-    const d = r.depth?.direction;
-    const bits: string[] = [];
-    if (isBlocked(r.depth)) bits.push('verdict blocked by the gate');
-    // The median gap is already its own column here, so it only earns a mention
-    // when there is no band direction to state instead.
-    const gapPct = r.depth?.mos_vs_median_pct;
-    if (!d && gapPct != null) {
-        bits.push(`median run values it ${Math.abs(gapPct).toFixed(1)}% ${gapPct >= 0 ? 'above' : 'below'} the price`);
-    }
-    if (d === 'undervalued') bits.push('all runs land above the price');
-    else if (d === 'overvalued') bits.push('all runs land below the price');
-    else if (d === 'hold') bits.push('the price sits inside the run spread');
-    if (r.fct.fct_flags?.some((f) => f in FORENSIC_WARNINGS)) bits.push('forensic warning');
-    return bits.length ? bits.join(' · ') : 'no single driver — the engines weight the same evidence differently';
 }

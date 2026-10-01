@@ -160,9 +160,9 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         q: { en: 'Why do the quant screen and the AI disagree?', ko: '퀀트 스크린과 AI의 판단이 엇갈리는 이유는 무엇인가요?', zh: '為什麼量化篩選和 AI 會意見不同？' },
         a: {
-            en: 'One is pure math over financial statements and prices; the other is a researcher that reads filings with judgment. When they strongly disagree, one of them may be wrong — those are the interesting rows. Use the Compare lens.',
-            ko: '하나는 재무제표와 주가에 대한 순수한 수학이고, 다른 하나는 제출 서류를 판단력으로 읽는 리서처입니다. 둘이 크게 엇갈리면 한쪽이 틀렸을 수 있으며, 그런 행이 흥미로운 행입니다. Compare 렌즈를 쓰세요.',
-            zh: '一個是對財務報表與價格的純數學；另一個是帶著判斷閱讀申報文件的研究員。兩者強烈分歧時，其中一個可能是錯的——這些就是有趣的列。請使用 Compare 鏡頭。',
+            en: 'One is pure math over financial statements and prices; the other is a researcher that reads filings with judgment. When they strongly disagree, one of them may be wrong — those are the interesting rows. The AI view shows each stock’s screen rank next to its verdict.',
+            ko: '하나는 재무제표와 주가에 대한 순수한 수학이고, 다른 하나는 제출 서류를 판단력으로 읽는 리서처입니다. 둘이 크게 엇갈리면 한쪽이 틀렸을 수 있으며, 그런 행이 흥미로운 행입니다. AI 화면은 각 종목의 판단 옆에 스크린 순위를 함께 보여 줍니다.',
+            zh: '一個是對財務報表與價格的純數學；另一個是帶著判斷閱讀申報文件的研究員。兩者強烈分歧時，其中一個可能是錯的——這些就是有趣的列。AI 檢視會在每檔股票的判斷旁顯示它的篩選排名。',
         },
     },
     {
@@ -471,7 +471,7 @@ export default function HelpPage() {
                         </Section>
 
                         {/* Desk */}
-                        <Section id="desk" title="Reading the desk — the three lenses" icon={<BookOpen className="h-5 w-5" />}>
+                        <Section id="desk" title="Reading the desk — two views" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
                                 The desk is the main page. At the top is one switch that decides whose view you see:
                             </p>
@@ -482,10 +482,6 @@ export default function HelpPage() {
                                 <li>
                                     <b>Quant</b> — the screen&apos;s own ranking: pure math over financial statements and prices,
                                     with no AI involved.
-                                </li>
-                                <li>
-                                    <b>Compare</b> — both side by side, so you can see where they disagree. When they disagree
-                                    strongly, one of them may be wrong, and those rows are the interesting ones.
                                 </li>
                             </ul>
                             <SubHeading>The sections of the AI lens</SubHeading>

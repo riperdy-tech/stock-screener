@@ -36,12 +36,12 @@ export default function CockpitDashboard() {
     // the two side by side. Rankings owns its own filters.
     const [lens, setLens] = useState<Lens>('ai');
     useEffect(() => {
-        if (urlLens === 'ai' || urlLens === 'quant' || urlLens === 'compare') setLens(urlLens);
+        if (urlLens === 'ai' || urlLens === 'quant') setLens(urlLens);
     }, [urlLens]);
 
     // Ticker pages are routes now, so a detail view is shareable and the browser's
     // own Back button works. `from` tells the page which surface to return to.
-    const openTicker = (ticker: string, from: 'ai' | 'quant' | 'compare' | 'track' | 'port') =>
+    const openTicker = (ticker: string, from: 'ai' | 'quant' | 'track' | 'port') =>
         router.push(`/t/${encodeURIComponent(ticker)}?from=${from}`);
     const [showAuth, setShowAuth] = useState(false);
 
