@@ -22,13 +22,16 @@ import { useDeskData } from '@/lib/desk/useDeskData';
 import { Shell } from '../Shell';
 import { useLanguage } from '@/components/LanguageContext';
 
+// One neutral bar colour: the label says which score it is; colour is kept for good/caution/bad.
+const BAR = 'rgba(242,240,235,.55)';
+
 // The keys the dual-door screen writes into `fct_z`.
 const FACTORS: [string, string, string][] = [
-    ['quality', 'Quality', '#6b93c4'],
-    ['momentum', 'Momentum', '#cfa14e'],
-    ['revisions', 'Revisions', '#c2798f'],
-    ['value', 'Value', '#5a9b6d'],
-    ['exp_gap', 'Expectations gap', '#4f8f8a'],
+    ['quality', 'Quality', BAR],
+    ['momentum', 'Momentum', BAR],
+    ['revisions', 'Revisions', BAR],
+    ['value', 'Value', BAR],
+    ['exp_gap', 'Expectations gap', BAR],
 ];
 
 function DepthStatRow({ row }: { row: DeskRow }) {
@@ -124,14 +127,14 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
             {/* Header */}
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rule-14 bg-white/[0.03] px-5 py-3">
                 <div className="flex items-center gap-2.5">
-                    <span className={clsx('w-2.5 h-2.5 rounded-full animate-pulse', isTight ? 'bg-pos' : isEscalated ? 'bg-accent' : 'bg-ink-3')} />
+                    <span className="w-2.5 h-2.5 rounded-full bg-ink-3" />
                     <Micro className="font-extrabold uppercase tracking-wider text-ink">
                         Multi-Seed Deliberation Audit · {runs.length > 0 ? `${runs.length} Independent Runs Recorded` : `${n} Runs Executed`}
                     </Micro>
                 </div>
                 <div className="flex items-center gap-2 font-mono text-[11px]">
                     <span className="text-ink-3">Consensus Spread:</span>
-                    <span className={clsx('font-bold', isTight ? 'text-pos' : 'text-accent')}>
+                    <span className="font-bold text-ink">
                         {spread != null ? `${spread.toFixed(1)}%` : '—'}
                     </span>
                     <span className="text-ink-3">
@@ -156,7 +159,7 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
                         <div key={r.sample} className="p-4 flex flex-col justify-between hover:bg-white/[0.01] transition-colors">
                             <div>
                                 <div className="flex items-baseline justify-between">
-                                    <span className="font-mono text-[12px] font-bold text-accent uppercase tracking-wider">
+                                    <span className="font-mono text-[12px] font-bold text-ink uppercase tracking-wider">
                                         RUN #{r.sample}
                                     </span>
                                     {r.secs != null && (
@@ -200,7 +203,7 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
                                 <div className="mt-3 grid grid-cols-3 gap-2 border-t border-rule-10 pt-2.5 text-center font-mono text-[11px]">
                                     <div>
                                         <Micro className="text-[9.5px] text-ink-3">MOAT</Micro>
-                                        <div className="mt-0.5 text-accent font-semibold">
+                                        <div className="mt-0.5 text-ink font-semibold">
                                             {r.moat != null ? `★ ${r.moat.toFixed(1)}` : '—'}
                                         </div>
                                     </div>
@@ -274,8 +277,8 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
             {/* Header */}
             <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-rule-14 bg-white/[0.02] px-5 py-3">
                 <div className="flex items-center gap-2">
-                    <span className="inline-block w-2 h-2 rounded-full bg-accent animate-pulse" />
-                    <Micro className="font-bold text-accent uppercase tracking-wider">
+                    <span className="inline-block w-2 h-2 rounded-full bg-ink-3" />
+                    <Micro className="font-bold text-ink uppercase tracking-wider">
                         AI UNDERWRITING RECORD
                     </Micro>
                 </div>
@@ -293,7 +296,7 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                         <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-ink-2">
                             Quadrant 1: Conviction &amp; Moat Quality
                         </span>
-                        <span className="font-mono text-[13px] font-extrabold text-accent">
+                        <span className="font-mono text-[13px] font-extrabold text-ink">
                             {conviction != null ? `${conviction} / 15` : '—'}
                         </span>
                     </div>
@@ -304,14 +307,14 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                             <div className="mt-1 font-mono text-[18px] font-bold text-ink">
                                 {conviction != null ? `${conviction} / 15` : '—'}
                             </div>
-                            <div className="mt-0.5 text-[11px] font-medium text-pos">
+                            <div className="mt-0.5 text-[11px] font-medium text-ink-3">
                                 {conviction != null && conviction >= 12 ? 'High Conviction Core' : conviction != null && conviction >= 9 ? 'Core Underwriting' : 'Underwriting Watch'}
                             </div>
                         </div>
 
                         <div>
                             <span className="block text-[11px] text-ink-3">Economic Moat</span>
-                            <div className="mt-1 font-mono text-[18px] font-bold text-accent">
+                            <div className="mt-1 font-mono text-[18px] font-bold text-ink">
                                 {quality != null ? `★ ${quality} / 5.0` : '—'}
                             </div>
                             <div className="mt-0.5 text-[11px] text-ink-2">
@@ -346,7 +349,7 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
 
                         <div>
                             <span className="block text-[11px] text-ink-3">Payoff Skew</span>
-                            <div className="mt-1 font-mono text-[18px] font-bold text-accent">
+                            <div className="mt-1 font-mono text-[18px] font-bold text-ink">
                                 {skew != null ? `${skew.toFixed(2)}x` : '—'}
                             </div>
                             <div className="mt-0.5 text-[11px] text-ink-3">
@@ -383,14 +386,14 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                         </div>
                         <div className="flex items-center justify-between p-2 border border-rule-10 bg-black/20 rounded">
                             <span className="text-ink-2">Tranche 2 (Core Accumulation):</span>
-                            <span className="font-bold text-pos">
+                            <span className="font-bold text-ink">
                                 {tranches?.tranche_2_core != null ? fmtMoney(tranches.tranche_2_core) : '—'}
                             </span>
                         </div>
                         {bullIv != null && (
                             <div className="flex items-center justify-between p-2 border border-rule-10 bg-black/20 rounded">
                                 <span className="text-ink-3">Exit Review Target:</span>
-                                <span className="font-bold text-accent">{fmtMoney(bullIv)}</span>
+                                <span className="font-bold text-ink">{fmtMoney(bullIv)}</span>
                             </div>
                         )}
                     </div>
@@ -668,7 +671,7 @@ function EvidenceChips({ row, entryDate }: { row: DeskRow; entryDate: string | n
     const chips: React.ReactNode[] = [];
 
     if (row.depth?.gate_version != null) {
-        chips.push(<Tag key="engine" className="border-accent/40 text-accent font-semibold">GATE v{row.depth.gate_version}</Tag>);
+        chips.push(<Tag key="engine" className="border-rule-24 text-ink-2">GATE v{row.depth.gate_version}</Tag>);
     }
 
     if (gpr?.gpr_level !== undefined) {
@@ -803,7 +806,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
                     {/* Prominent Industry Highlight */}
                     {row.info?.industry && row.info.industry !== 'Unknown' && (
-                        <span className="inline-flex items-center gap-1.5 rounded-xs bg-accent/[0.12] border border-accent/35 px-2.5 py-0.5 font-mono text-[11px] font-bold text-accent tracking-wide uppercase">
+                        <span className="inline-flex items-center gap-1.5 rounded-xs border border-rule-24 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-ink-2 tracking-wide uppercase">
                             <span className="text-ink-3 text-[9.5px]">INDUSTRY:</span>
                             {row.info.industry}
                         </span>
@@ -836,7 +839,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 <div className="min-w-0 border-rule-14 py-6 lg:border-r lg:pr-8">
                     {/* Institutional Header Tag */}
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                        <Micro className="block font-bold uppercase tracking-wider text-accent">
+                        <Micro className="block font-bold uppercase tracking-wider text-ink">
                             AI UNDERWRITING RECORD
                         </Micro>
                         {d && d.spread_pct != null && (
@@ -888,8 +891,8 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
                     {/* Thesis Memorandum Headline */}
                     {headline && (
-                        <blockquote className="mt-5 border-l-2 border-accent bg-white/[0.03] px-5 py-4">
-                            <Micro className="mb-2 block text-accent">
+                        <blockquote className="mt-5 border-l-2 border-rule-24 bg-white/[0.03] px-5 py-4">
+                            <Micro className="mb-2 block text-ink-3">
                                 Analyst Deliberation Thesis{headline.sample ? ` · Sample ${headline.sample}` : ''}
                             </Micro>
                             <ul className="space-y-1.5 text-[13.5px] leading-relaxed text-ink-q">

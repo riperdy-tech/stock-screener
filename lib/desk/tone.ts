@@ -91,7 +91,7 @@ export interface SizeTone {
 export function sizeTone(size: DepthVerdict['size_hint'] | null | undefined, nBasis?: number | null): SizeTone {
     switch (size) {
         case 'full':
-            return { label: 'FULL', color: ACCENT, note: 'runs agree tightly — full position' };
+            return { label: 'FULL', color: POS, note: 'runs agree tightly — full position' };
         case 'half':
             return { label: 'HALF', color: WARN, note: 'runs disagree on pace — half position' };
         case 'quarter':

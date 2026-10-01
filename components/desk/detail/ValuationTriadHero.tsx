@@ -64,7 +64,7 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
             {/* Header / Subtitle */}
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-rule-14 pb-3">
                 <div className="flex items-center gap-2">
-                    <span className="inline-block w-2 h-2 rounded-full bg-accent" />
+                    <span className="inline-block w-2 h-2 rounded-full bg-ink-3" />
                     <Micro className="font-bold tracking-wider text-ink uppercase">
                         Valuation Triad & Scenario Distribution
                     </Micro>
@@ -110,11 +110,11 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
 
                 {/* Bull Marker */}
                 <div
-                    className="absolute top-0 bottom-0 w-[2px] bg-accent flex flex-col items-center justify-start z-10"
+                    className="absolute top-0 bottom-0 w-[2px] bg-ink-2 flex flex-col items-center justify-start z-10"
                     style={{ left: `${bullPct}%` }}
                     title={`Bull Case Intrinsic Value: ${fmtMoney(bullIv)}`}
                 >
-                    <span className="w-2.5 h-2.5 rounded-full bg-accent border border-[#0d0f12] -mt-1 shadow-sm" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-ink-2 border border-[#0d0f12] -mt-1 shadow-sm" />
                 </div>
 
                 {/* Base Case IV Marker */}
@@ -172,10 +172,10 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                 </div>
 
                 {/* Bull Case */}
-                <div className="p-2 border border-rule-10 bg-accent/[0.04] rounded">
+                <div className="p-2 border border-rule-10 rounded">
                     <span className="block text-ink-3 text-[10px] uppercase tracking-wider">Bull Case IV</span>
-                    <span className="text-[14px] font-bold text-accent">{fmtMoney(bullIv)}</span>
-                    <span className="block text-[10px] text-accent/90 mt-0.5">
+                    <span className="text-[14px] font-bold text-ink">{fmtMoney(bullIv)}</span>
+                    <span className="block text-[10px] text-ink-3 mt-0.5">
                         {fmtSignedPct(bullUpsidePct)} Expansion
                     </span>
                 </div>
@@ -185,7 +185,7 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
             <div className="mt-3.5 flex flex-wrap items-center justify-between gap-3 border-t border-rule-10 pt-3 text-[11px]">
                 <div className="flex items-center gap-2">
                     <span className="text-ink-3">Asymmetric Payoff Skew:</span>
-                    <span className="font-mono font-bold text-accent text-[12px]">
+                    <span className="font-mono font-bold text-ink text-[12px]">
                         {skew != null ? `${skew.toFixed(2)}x` : '—'}
                     </span>
                     <span className="text-ink-3 text-[10px]">

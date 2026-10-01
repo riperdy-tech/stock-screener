@@ -87,7 +87,7 @@ export function VerdictCell({ row }: { row: DeskRow }) {
     if (isDivergent && d.direction === 'undervalued') {
         return (
             <span className="block min-w-0" title={`Model spread (${d.spread_pct?.toFixed(1)}%) exceeds 25% tolerance. Deliberation unconverged.`}>
-                <span className="block text-[12.5px] font-extrabold leading-tight text-accent">
+                <span className="block text-[12.5px] font-extrabold leading-tight text-warn">
                     DIVERGENT SPREAD
                 </span>
                 <span className="mt-0.5 block truncate text-[10.5px] text-warn font-mono">
@@ -118,17 +118,14 @@ export function MoatConvictionCell({ row }: { row: DeskRow }) {
     const c = row.conviction;
     if (m == null && c == null) return <span className="font-mono text-[11px] text-ink-3">—</span>;
 
-    const isWide = m != null && m >= 4.0;
-    const isHigh = c != null && c >= 12;
-
     return (
         <span className="block font-mono text-[11.5px] leading-tight" title={`Economic Moat: ${m?.toFixed(1) ?? '-'}/5.0 · Conviction: ${c?.toFixed(0) ?? '-'}/15`}>
             <span className="flex items-center gap-1.5">
-                <span className={isWide ? 'text-accent font-semibold' : m != null && m >= 3.0 ? 'text-ink' : 'text-warn'}>
+                <span className="text-ink">
                     ★ {m != null ? m.toFixed(1) : '-'}
                 </span>
                 <span className="text-ink-3">·</span>
-                <span className={isHigh ? 'text-pos font-bold' : c != null && c >= 9 ? 'text-ink' : 'text-ink-3'}>
+                <span className="text-ink">
                     {c != null ? `${c.toFixed(0)}/15` : '-'}
                 </span>
             </span>
@@ -195,7 +192,7 @@ export function WhyListed({ row, className }: { row: DeskRow; className?: string
     return (
         <span className={clsx('block text-[11px] text-ink-3', className)} title={why ? `${why.label}: ${why.help}` : undefined}>
             {why?.label}
-            {isNew && <span className="text-pos">{why ? ' · ' : ''}new</span>}
+            {isNew && <span className="font-semibold text-ink">{why ? ' · ' : ''}new</span>}
         </span>
     );
 }
@@ -212,7 +209,7 @@ export function StockCell({ row }: { row: DeskRow }) {
             <div className="mt-1 flex flex-wrap items-center gap-1.5">
                 {ind && ind !== 'Unknown' && ind !== '—' && (
                     <span
-                        className="inline-block rounded-xs bg-accent/[0.12] border border-accent/30 px-1.5 py-0.5 font-mono text-[9.5px] font-bold text-accent tracking-wide uppercase truncate max-w-[170px]"
+                        className="inline-block rounded-xs border border-rule-24 px-1.5 py-0.5 font-mono text-[9.5px] font-semibold text-ink-2 tracking-wide uppercase truncate max-w-[170px]"
                         title={`Industry: ${ind}`}
                     >
                         {ind}
@@ -248,9 +245,7 @@ export function DeliberationCell({ row }: { row: DeskRow }) {
             <div className="flex items-center gap-1.5">
                 <span className={clsx(
                     'inline-flex items-center gap-1 rounded-xs border px-1.5 py-0.5 font-mono text-[10px] font-bold tracking-tight',
-                    isTight ? 'border-pos/40 bg-pos/[0.1] text-pos'
-                        : isEscalated ? 'border-accent/40 bg-accent/[0.1] text-accent'
-                            : 'border-rule-24 bg-white/[0.02] text-ink-2'
+                    'border-rule-24 bg-white/[0.02] text-ink-2'
                 )}>
                     <span>{n} RUNS</span>
                     {spread != null && (
@@ -260,9 +255,9 @@ export function DeliberationCell({ row }: { row: DeskRow }) {
             </div>
             <div className="mt-0.5 flex items-center gap-1 font-mono text-[9.5px] text-ink-3 truncate">
                 {isTight ? (
-                    <span className="text-pos font-semibold">Consensus (n=2)</span>
+                    <span>Consensus (n=2)</span>
                 ) : isEscalated ? (
-                    <span className="text-accent font-semibold">Escalated (n=3)</span>
+                    <span>Escalated (n=3)</span>
                 ) : (
                     <span>Single seed</span>
                 )}
@@ -283,31 +278,6 @@ export function PriceCell({ row }: { row: DeskRow }) {
 
 export function McapCell({ row }: { row: DeskRow }) {
     return <span className="block text-right font-mono text-[11px] text-ink-2">{fmtMcap(row.info?.marketCap)}</span>;
-}
-
-/** 104×6px stacked factor-mix bar — value/quality/momentum/low-vol/revisions. */
-// Pillars of the dual-door model. `exp_gap` is half of the value door's weight, so omitting it
-// would draw a value name's mix as mostly-missing. `lowvol` is retained for rows written by the
-// retired equal-weight engine; the dual-door model has no low-volatility pillar and simply never
-// emits that key.
-const FACTOR_COLORS: [string, string][] = [
-    ['value', '#5a9b6d'], ['exp_gap', '#4f8f8a'], ['quality', '#6b93c4'],
-    ['momentum', '#cfa14e'], ['lowvol', '#9a83c2'], ['revisions', '#c2798f'],
-];
-
-export function FactorMix({ contributions, width = 104 }: { contributions: Record<string, number> | null; width?: number }) {
-    if (!contributions) return <span className="block font-mono text-[11px] text-ink-3">—</span>;
-    const vals = FACTOR_COLORS.map(([k]) => Math.max(0, contributions[k] ?? 0));
-    const total = vals.reduce((a, b) => a + b, 0);
-    if (total <= 0) return <span className="block font-mono text-[11px] text-ink-3">—</span>;
-    return (
-        <span className="flex" style={{ width, height: 6, background: 'rgba(255,255,255,.12)' }}
-            title={FACTOR_COLORS.map(([k], i) => `${k} ${(vals[i] / total * 100).toFixed(0)}%`).join(' · ')}>
-            {FACTOR_COLORS.map(([k, color], i) => (
-                <span key={k} style={{ width: `${(vals[i] / total) * 100}%`, background: color }} />
-            ))}
-        </span>
-    );
 }
 
 /** Overlay evidence: geopolitical-risk level and informed-demand direction. */
@@ -335,7 +305,7 @@ export function PromoLine({ row, delta }: { row: DeskRow; delta: number | null }
     if (row.promo === 'none' || !row.fct.fct_rank) return null;
     const up = row.promo === 'promoted';
     return (
-        <span className={clsx('mt-1 block font-mono font-semibold text-[11px] uppercase tracking-[.06em]', up ? 'text-accent' : 'text-warn')}>
+        <span className={clsx('mt-1 block font-mono font-semibold text-[11px] uppercase tracking-[.06em]', up ? 'text-pos' : 'text-warn')}>
             {up ? '▲ AI PROMOTED' : '▼ AI DEMOTED'} #{row.fct.fct_rank}
             {delta != null && delta !== 0 ? ` · Δ${Math.abs(delta)}` : ''}
         </span>
@@ -351,7 +321,7 @@ export function MoatCell({ row }: { row: DeskRow }) {
     const isNarrow = m >= 3.0;
     return (
         <span className="block font-mono text-[12px] font-semibold" title={isWide ? 'Wide Moat (Installed Base / High Switching Costs)' : isNarrow ? 'Narrow Moat' : 'Low Barrier / Commodity'}>
-            <span className={isWide ? 'text-accent' : isNarrow ? 'text-ink' : 'text-warn'}>
+            <span className="text-ink">
                 ★ {m.toFixed(1)}
             </span>
             <span className="text-[10px] text-ink-3">/5</span>
@@ -366,7 +336,7 @@ export function ConvictionCell({ row }: { row: DeskRow }) {
     const isCore = c >= 9;
     return (
         <span className="block font-mono text-[12px] font-semibold" title={isHigh ? 'High Conviction Core' : isCore ? 'Standard Underwriting' : 'Speculative / Watch'}>
-            <span className={isHigh ? 'text-pos font-bold' : isCore ? 'text-ink' : 'text-ink-3'}>
+            <span className="text-ink">
                 {c.toFixed(0)}
             </span>
             <span className="text-[10px] text-ink-3">/15</span>
@@ -388,9 +358,8 @@ export function HalfKellyCell({ row }: { row: DeskRow }) {
 export function SkewCell({ row }: { row: DeskRow }) {
     const s = row.skew;
     if (s == null) return <span className="font-mono text-[11px] text-ink-3">—</span>;
-    const isAsymm = s >= 1.5;
     return (
-        <span className={clsx('block font-mono text-[12px] font-semibold', isAsymm ? 'text-accent font-bold' : 'text-ink-2')} title="Asymmetric Payoff Skew (Bull Upside vs Bear Drawdown Risk)">
+        <span className={'block font-mono text-[12px] font-semibold text-ink'} title="Asymmetric Payoff Skew (Bull Upside vs Bear Drawdown Risk)">
             {s.toFixed(2)}x
         </span>
     );

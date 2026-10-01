@@ -44,7 +44,7 @@ function DeskRowView({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNod
             onClick={() => onOpen(row.ticker)}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(row.ticker); } }}
             className={clsx(GRID, 'cursor-pointer border-b border-rule-10 py-3 hover:bg-hover',
-                row.promo === 'promoted' && 'bg-accent/[0.05]')}
+                )}
         >
             <span className="font-mono text-[12px] text-ink-3">{rank}</span>
             <StockCell row={row} />
@@ -82,7 +82,7 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
             onClick={() => onOpen(row.ticker)}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(row.ticker); } }}
             className={clsx('block cursor-pointer border-b border-rule-10 py-3.5 lg:hidden',
-                row.promo === 'promoted' && 'bg-accent/[0.05]')}
+                )}
         >
             <div className="flex items-baseline justify-between gap-3">
                 <span className="min-w-0 truncate">
@@ -96,7 +96,7 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
             {/* Industry Pill Mobile */}
             {ind && ind !== 'Unknown' && ind !== '—' && (
                 <div className="mt-1">
-                    <span className="inline-block rounded-xs bg-accent/[0.12] border border-accent/30 px-1.5 py-0.5 font-mono text-[9.5px] font-bold text-accent tracking-wide uppercase">
+                    <span className="inline-block rounded-xs border border-rule-24 px-1.5 py-0.5 font-mono text-[9.5px] font-semibold text-ink-2 tracking-wide uppercase">
                         {ind}
                     </span>
                 </div>
@@ -110,7 +110,7 @@ function RowCard({ row, rank, onOpen }: { row: DeskRow; rank: React.ReactNode; o
                     )}
                 </span>
                 <span className="flex items-center gap-2.5 font-mono text-[11px]">
-                    {row.moat != null && <span className="text-accent font-semibold">★ {row.moat.toFixed(1)}/5</span>}
+                    {row.moat != null && <span className="text-ink">★ {row.moat.toFixed(1)}/5</span>}
                     {row.conviction != null && <span className="text-ink">C:{row.conviction}/15</span>}
                     {!blocked && row.kelly != null && row.kelly > 0 && <span className="text-pos font-semibold">{row.kelly.toFixed(1)}% Cap</span>}
                 </span>

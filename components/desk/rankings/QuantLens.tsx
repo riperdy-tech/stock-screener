@@ -7,31 +7,27 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Micro, SectionHead } from '../primitives';
-import { FactorMix, McapCell, PriceCell, StockCell, WhyListed } from './cells';
+import { McapCell, PriceCell, StockCell, WhyListed } from './cells';
 import { isBlocked, sizeTone, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import type { DeskRow } from '@/lib/desk/rankings';
 
 // Removing the DCF-gap column freed 170px. Cap STOCK and let the RS2 verdict
 // column take the slack — a 470px name column is not what the space is for.
-const GRID = 'grid grid-cols-[26px_minmax(180px,300px)_80px_112px_112px_minmax(180px,1fr)_70px_56px] items-center gap-x-3';
+const GRID = 'grid grid-cols-[26px_minmax(200px,320px)_64px_140px_minmax(180px,1fr)_70px_56px] items-center gap-x-3';
 
-const BAND_LABEL: Record<string, string> = {
-    research_now: '■ RSRCH NOW', watchlist: '■ WATCHLIST',
-    pass: '■ PASS', vetoed: '■ VETOED',
+// Bands in plain words. Only "Vetoed" carries colour (red = removed); the rest are ranked by weight.
+const BAND_LABEL: Record<string, [string, string, string]> = {
+    research_now: ['Research now', 'font-bold text-ink', 'Top of the list: the strongest names today'],
+    watchlist: ['Watchlist', 'text-ink-2', 'The rest of the list'],
+    pass: ['Pass', 'text-ink-3', 'Scored, but not on the list'],
+    vetoed: ['Vetoed', 'text-neg', 'Removed by the safety filters'],
 };
 
 function BandChip({ row }: { row: DeskRow }) {
-    if (row.vetoed) {
-        return <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-neg">■ VETOED</span>;
-    }
-    const band = row.fct.fct_band ?? 'pass';
-    return (
-        <span className={clsx('font-mono font-semibold text-[11px] uppercase tracking-[.05em]',
-            band === 'research_now' ? 'text-accent' : 'text-ink-3')}>
-            {BAND_LABEL[band] ?? band}
-        </span>
-    );
+    const band = row.vetoed ? 'vetoed' : (row.fct.fct_band ?? 'pass');
+    const [label, cls, help] = BAND_LABEL[band] ?? [band, 'text-ink-3', ''];
+    return <span className={clsx('text-[12px]', cls)} title={help}>{label}</span>;
 }
 
 /** "UNDERVALUED · +37% · FULL" — the depth verdict compressed into one cell. */
@@ -67,10 +63,9 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
             <div className={clsx(GRID, 'hidden border-b border-rule-18 pb-2 pt-3 lg:grid')}>
                 <Micro>#</Micro>
                 <Micro>Stock</Micro>
-                <Micro className="text-right">Composite</Micro>
-                <Micro>Factor mix</Micro>
-                <Micro>Band</Micro>
-                <Micro>RS2 verdict</Micro>
+                <Micro className="text-right" title="How strongly the screen rates it, 0 to 100">Score</Micro>
+                <Micro>On the list?</Micro>
+                <Micro>AI verdict</Micro>
                 <Micro className="text-right">Price</Micro>
                 <Micro className="text-right">Mcap</Micro>
             </div>
@@ -90,7 +85,6 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                         <span className="block text-right font-mono text-[14px] font-semibold text-ink">
                             {r.fct.fct_composite != null ? r.fct.fct_composite.toFixed(1) : '—'}
                         </span>
-                        <FactorMix contributions={r.fct.fct_contributions} />
                         <span className="block min-w-0"><BandChip row={r} /><WhyListed row={r} className="mt-0.5" /></span>
                         <CompactVerdict row={r} />
                         <PriceCell row={r} />
@@ -114,7 +108,6 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                                 {r.fct.fct_composite != null ? r.fct.fct_composite.toFixed(1) : '—'}
                             </span>
                         </div>
-                        <div className="mt-2"><FactorMix contributions={r.fct.fct_contributions} width={160} /></div>
                         <div className="mt-2 flex items-baseline justify-between gap-3">
                             <span className="flex items-baseline gap-2"><BandChip row={r} /><WhyListed row={r} /></span>
                             <span className="font-mono text-[11px] text-ink-2">{fmtMoney(r.info?.price)} · {fmtMcap(r.info?.marketCap)}</span>
