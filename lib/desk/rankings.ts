@@ -6,7 +6,7 @@
 
 import type { BandTransitions, DepthVerdict, FactorEntry, ValuationModel } from '@/lib/data-service';
 import type { StockInfo } from './useDeskData';
-import { isBlocked } from './tone';
+import { isActionable, isBlocked } from './tone';
 
 export type BandMove = 'entered_rn' | 'left_rn' | 'entered_book' | 'left_book';
 
@@ -44,13 +44,38 @@ export interface DeskRow {
 
 export interface RankingFilters {
     search: string;
+    stage: FunnelStage;
     band: string;      // 'all' | research_now | watchlist | pass | vetoed
     verdict: string;   // 'all' | analyzed | undervalued | fair | overvalued | not_usable | blocked | promoted | demoted | vetoed | consensus_2 | escalated_3
     sector: string;
     industry: string;
 }
 
-export const EMPTY_FILTERS: RankingFilters = { search: '', band: 'all', verdict: 'all', sector: 'all', industry: 'all' };
+export const EMPTY_FILTERS: RankingFilters = { search: '', stage: 'all', band: 'all', verdict: 'all', sector: 'all', industry: 'all' };
+
+/** The funnel's steps, widest first. Each step is a subset of the one before it, except that a
+ * verdict can outlive its stock's place on the list. */
+export type FunnelStage = 'all' | 'scored' | 'list' | 'verdict' | 'gate';
+
+export const FUNNEL_STAGES: { id: FunnelStage; label: string }[] = [
+    { id: 'all', label: 'US stocks checked' },
+    { id: 'scored', label: 'pass the safety filters' },
+    { id: 'list', label: 'make the list' },
+    { id: 'verdict', label: 'AI verdicts on record' },
+    { id: 'gate', label: 'pass the gate' },
+];
+
+/** One rule for both the funnel's counts and the list it filters, so the two always agree. */
+export function inStage(r: DeskRow, stage: FunnelStage): boolean {
+    const inScreen = r.fct.fct_rank != null;
+    switch (stage) {
+        case 'all': return true;
+        case 'scored': return inScreen && r.fct.fct_band !== 'vetoed' && !r.vetoed;
+        case 'list': return inScreen && (r.fct.fct_band === 'research_now' || r.fct.fct_band === 'watchlist');
+        case 'verdict': return !!r.depth;
+        case 'gate': return isActionable(r.depth);
+    }
+}
 
 export interface RankingsInput {
     factor: { tickers: Record<string, FactorEntry>; band_transitions?: BandTransitions | null } | null;
@@ -93,11 +118,9 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
     const movedOf = (ticker: string): BandMove | null =>
         BAND_MOVES.find((k) => transitions?.[k]?.includes(ticker)) ?? null;
 
-    // 1. Process factor tickers that have a valid rank OR have an active depth report
+    // 1. Every ticker the screen checked, including the ones the safety filters removed (no rank) -
+    // the funnel's first step lists them all.
     for (const [ticker, fct] of Object.entries(factor.tickers)) {
-        const hasDepth = depthTickers.has(ticker);
-        const hasRank = fct.fct_rank !== null && fct.fct_rank !== undefined;
-        if (!hasRank && !hasDepth) continue;
 
         includedTickers.add(ticker);
         const pl = (fct as any).fct_percentile_llm;
@@ -207,6 +230,7 @@ export function industriesOf(rows: DeskRow[], sector?: string): string[] {
 export function applyFilters(rows: DeskRow[], f: RankingFilters): DeskRow[] {
     const q = f.search.trim().toUpperCase();
     return rows.filter((r) => {
+        if (!inStage(r, f.stage)) return false;
         if (f.band !== 'all' && r.fct.fct_band !== f.band) return false;
         if (f.sector !== 'all' && r.info?.sector !== f.sector) return false;
         if (f.industry && f.industry !== 'all' && r.info?.industry !== f.industry) return false;

@@ -9,12 +9,12 @@ import Link from 'next/link';
 import { Chip, Micro } from '../primitives';
 import { useLanguage } from '@/components/LanguageContext';
 import { DESK_NOTICE } from '@/lib/desk/notice';
-import { isBlocked } from '@/lib/desk/tone';
+import { isActionable } from '@/lib/desk/tone';
 import { AiLens } from './AiLens';
 import { QuantLens } from './QuantLens';
 import {
-    aiSections, applyFilters, buildRows, sectorsOf, industriesOf,
-    type RankingFilters,
+    aiSections, applyFilters, buildRows, sectorsOf, industriesOf, inStage, FUNNEL_STAGES, EMPTY_FILTERS,
+    type FunnelStage, type RankingFilters,
 } from '@/lib/desk/rankings';
 import type { DepthVerdict, FactorScoresPayload, ValuationModel } from '@/lib/data-service';
 import type { StockInfo } from '@/lib/desk/useDeskData';
@@ -78,7 +78,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     onOpen: (ticker: string) => void;
 }) {
     const { t } = useLanguage();
-    const [filters, setFilters] = useState<RankingFilters>({ search: '', band: 'all', verdict: 'all', sector: 'all', industry: 'all' });
+    const [filters, setFilters] = useState<RankingFilters>(EMPTY_FILTERS);
     const [limit, setLimit] = useState(100);
 
     const rows = useMemo(
@@ -93,27 +93,24 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const set = (patch: Partial<RankingFilters>) => setFilters((f) => ({ ...f, ...patch }));
 
     const depthEntries = Object.values(depth || {});
-    const analyzed = depthEntries.length;
     const researchNowCount = factor?.band_counts?.research_now;
 
-    // Verdicts that pass the gate. Legacy overlays have no `actionable` field, so
-    // there an unblocked undervalued verdict is the actionable one.
-    const actionableCount = depthEntries.filter(d =>
-        d.actionable === true || (d.actionable == null && !isBlocked(d) && d.direction === 'undervalued')).length;
+    const actionableCount = depthEntries.filter((d) => isActionable(d)).length;
 
-    // The funnel: how the whole market narrows to the AI's verdicts. Every count comes from the
-    // published files; a missing count shows "—", never a guess.
-    const bc = factor?.band_counts;
-    const universe = bc ? Object.values(bc).reduce((n: number, v) => n + (typeof v === 'number' ? v : 0), 0) : null;
-    const onList = bc && bc.research_now != null && bc.watchlist != null ? bc.research_now + bc.watchlist : null;
-    const fmtN = (n: number | null | undefined) => (n == null ? '—' : n.toLocaleString('en-US'));
-    const funnel: { n: string; label: string; note?: string }[] = [
-        { n: fmtN(universe), label: 'US stocks checked' },
-        { n: fmtN(factor?.scored_count), label: 'pass the safety filters' },
-        { n: fmtN(onList), label: 'make the list', note: researchNowCount != null ? `${researchNowCount} in Research now` : undefined },
-        { n: fmtN(analyzed), label: 'AI verdicts on record' },
-        { n: fmtN(actionableCount), label: 'pass the gate' },
-    ];
+    // The funnel: how the whole market narrows to the AI's verdicts. Counts use the same rule as the
+    // list a click opens (`inStage`), so the number on a step is the number of rows it shows.
+    const funnel = useMemo(() => FUNNEL_STAGES.map((s) => ({
+        ...s,
+        n: rows.filter((r) => inStage(r, s.id)).length,
+        note: s.id === 'list' && researchNowCount != null ? `${researchNowCount} in Research now` : undefined,
+    })), [rows, researchNowCount]);
+    // A step opens the plain list (the AI view groups by verdict, not by step); the active step
+    // clicked again clears the filter.
+    const pickStage = (stage: FunnelStage) => {
+        set({ stage: filters.stage === stage ? 'all' : stage });
+        setLimit(100);
+        onLens('quant');
+    };
 
     return (
         <div>
@@ -142,10 +139,18 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                 {/* The funnel: the market narrowing step by step to the AI's verdicts */}
                 <ol className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-5">
                     {funnel.map((step, i) => (
-                        <li key={step.label} className="relative border-l border-rule-18 pl-3">
-                            <div className="font-mono text-[20px] font-bold leading-none text-ink">{step.n}</div>
-                            <div className="mt-1 text-[12px] text-ink-2">{step.label}</div>
-                            {step.note && <div className="text-[11px] text-ink-3">{step.note}</div>}
+                        <li key={step.id} className="relative">
+                            <button
+                                onClick={() => pickStage(step.id)}
+                                aria-pressed={filters.stage === step.id}
+                                title={filters.stage === step.id ? 'Showing these stocks - click again to show all' : 'Show these stocks'}
+                                className={clsx('block w-full border-l-2 py-0.5 pl-3 text-left transition-colors hover:bg-hover',
+                                    filters.stage === step.id ? 'border-accent' : 'border-rule-18')}
+                            >
+                                <div className="font-mono text-[20px] font-bold leading-none text-ink">{step.n.toLocaleString('en-US')}</div>
+                                <div className={clsx('mt-1 text-[12px]', filters.stage === step.id ? 'text-ink' : 'text-ink-2')}>{step.label}</div>
+                                {step.note && <div className="text-[11px] text-ink-3">{step.note}</div>}
+                            </button>
                             {i < funnel.length - 1 && (
                                 <span aria-hidden className="absolute -right-3 top-1 hidden font-mono text-[14px] text-ink-3 sm:inline">→</span>
                             )}
@@ -163,6 +168,12 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2">
+                    <Select
+                        label="Step"
+                        value={filters.stage}
+                        onChange={(v) => { set({ stage: v as FunnelStage }); setLimit(100); }}
+                        options={FUNNEL_STAGES.map((s) => [s.id, s.id === 'all' ? 'All steps' : s.label] as [string, string])}
+                    />
                     <Select label="Verdict" value={filters.verdict} onChange={(v) => set({ verdict: v })} options={VERDICT_OPTIONS} />
                     <Select label="Quant band" value={filters.band} onChange={(v) => set({ band: v })} options={BAND_OPTIONS} />
                     <Select

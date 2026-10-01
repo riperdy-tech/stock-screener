@@ -122,6 +122,11 @@ export const TONE_COLORS = { ACCENT, POS, WARN, NEG, MUTED };
  */
 export const isBlocked = (d?: DepthVerdict) => d?.actionable === false;
 
+/** A verdict that counts: the gate passed it. Legacy overlays carry no `actionable` field; there an
+ * unblocked undervalued verdict is the actionable one. */
+export const isActionable = (d?: DepthVerdict) =>
+    !!d && (d.actionable === true || (d.actionable == null && d.direction === 'undervalued'));
+
 /** Plain-English labels for the codes in `actionable_reasons`. */
 export const GATE_REASON_LABEL: Record<string, string> = {
     not_usable: 'no usable run',

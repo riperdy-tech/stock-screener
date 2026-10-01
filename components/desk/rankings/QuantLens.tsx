@@ -60,7 +60,7 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
     return (
         <section className="mt-7">
             <SectionHead
-                title="Quant filter"
+                title={`Quant filter · ${rows.length.toLocaleString('en-US')} stocks`}
                 note="A stock gets on the list as a quality business, a value opportunity, or a steady trend. Every sector gets the same number of places for now."
             />
 
@@ -123,6 +123,10 @@ export function QuantLens({ rows, onOpen, limit, onMore }: {
                     </div>
                 </React.Fragment>
             ))}
+
+            {rows.length === 0 && (
+                <p className="border-b border-rule-10 py-5 text-[12px] text-ink-3">No stocks at this step with these filters.</p>
+            )}
 
             {rows.length > limit && (
                 <button onClick={onMore} className="mt-4 font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-ink-2 hover:text-ink">
