@@ -143,14 +143,14 @@ export function ChineseHelpBody() {
                 </p>
                 <div className="space-y-3">
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="text-sm font-extrabold text-pos">第 1 道門 — 複利成長</p>
+                        <p className="text-sm font-extrabold text-pos">第 1 道門 — Quality（品質・複利成長）</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             真正賺錢、持續成長、股價上漲、預測被上調的公司。它混合<Term term="quality" />、
                             <Term term="momentum" />與<Term term="revisions" />，其中品質的比重最大。
                         </p>
                     </div>
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="text-sm font-extrabold text-accent">第 2 道門 — 價值落差</p>
+                        <p className="text-sm font-extrabold text-accent">第 2 道門 — Value（價值・價值落差）</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             相對於自己已證明的成長而顯得便宜的公司：價格要求的成長低於公司實際交出的成績（
                             <Term term="expectations-gap" />），而且這檔股票在<Term term="value" />上便宜。
@@ -158,7 +158,7 @@ export function ChineseHelpBody() {
                         </p>
                     </div>
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="text-sm font-extrabold text-warn">第 3 道門 — 趨勢領頭股</p>
+                        <p className="text-sm font-extrabold text-warn">第 3 道門 — Trend（趨勢・趨勢領頭股）</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             前兩道門會漏掉的強勁而穩定的上升趨勢——例如整個類股的榮景。最多 20 個額外名額，每個產業
                             群組最多 5 個。候選股必須有獲利、規模合理，分析師預測不能在下滑，而且必須是穩定地攀升，

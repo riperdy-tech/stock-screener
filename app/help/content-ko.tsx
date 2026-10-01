@@ -154,7 +154,7 @@ export function KoreanHelpBody() {
                 </p>
                 <div className="space-y-3">
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="text-sm font-extrabold text-pos">Door 1 — 컴파운더</p>
+                        <p className="text-sm font-extrabold text-pos">Door 1 — Quality(퀄리티 · 컴파운더)</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             실제로 돈을 벌고, 계속 성장하고, 주가가 오르고, 전망이 상향되고 있는 기업입니다.{' '}
                             <Term term="quality" />, <Term term="momentum" />, <Term term="revisions" />를 섞으며,
@@ -162,7 +162,7 @@ export function KoreanHelpBody() {
                         </p>
                     </div>
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="text-sm font-extrabold text-accent">Door 2 — 밸류 갭</p>
+                        <p className="text-sm font-extrabold text-accent">Door 2 — Value(밸류 · 밸류 갭)</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             자신이 입증한 성장에 비해 싸 보이는 기업입니다. 가격이 기업이 실제로 달성한 것보다
                             적은 성장을 요구하고(<Term term="expectations-gap" />), 그 종목이{' '}
@@ -171,7 +171,7 @@ export function KoreanHelpBody() {
                         </p>
                     </div>
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="text-sm font-extrabold text-warn">Door 3 — 추세 주도주</p>
+                        <p className="text-sm font-extrabold text-warn">Door 3 — Trend(추세 · 추세 주도주)</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                             다른 두 도어가 놓칠 강하고 꾸준한 상승 추세입니다. 예를 들어 섹터 전체의 붐이 그렇습니다.
                             추가로 최대 20자리, 업종 그룹당 최대 5자리입니다. 후보는 흑자여야 하고 어느 정도 규모가

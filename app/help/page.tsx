@@ -530,7 +530,7 @@ export default function HelpPage() {
                             </p>
                             <div className="space-y-3">
                                 <div className="border border-rule-10 bg-white/5 p-3">
-                                    <p className="text-sm font-extrabold text-pos">Door 1 — compounder</p>
+                                    <p className="text-sm font-extrabold text-pos">Door 1 — Quality (compounder)</p>
                                     <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                                         Companies that earn real money, keep growing, are rising in price and are having their
                                         forecasts raised. It blends <Term term="quality" />, <Term term="momentum" /> and{' '}
@@ -538,7 +538,7 @@ export default function HelpPage() {
                                     </p>
                                 </div>
                                 <div className="border border-rule-10 bg-white/5 p-3">
-                                    <p className="text-sm font-extrabold text-accent">Door 2 — value gap</p>
+                                    <p className="text-sm font-extrabold text-accent">Door 2 — Value (value gap)</p>
                                     <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                                         Companies that look cheap against their own demonstrated growth: the price asks for less
                                         growth than the company has actually delivered (the <Term term="expectations-gap" />),
@@ -547,7 +547,7 @@ export default function HelpPage() {
                                     </p>
                                 </div>
                                 <div className="border border-rule-10 bg-white/5 p-3">
-                                    <p className="text-sm font-extrabold text-warn">Door 3 — trend leaders</p>
+                                    <p className="text-sm font-extrabold text-warn">Door 3 — Trend (trend leaders)</p>
                                     <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
                                         Strong, steady uptrends that the other two doors would miss — for example a sector-wide
                                         boom. Up to 20 extra places, with at most 5 per industry group. A candidate must be
