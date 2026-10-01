@@ -83,8 +83,8 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                         left: `${leftMarginPct}%`,
                         width: `${marginWidthPct}%`,
                         backgroundColor: blocked ? 'rgba(211, 207, 197, 0.10)' : price <= baseIv ? 'rgba(74, 222, 128, 0.12)' : 'rgba(248, 113, 113, 0.12)',
-                        borderLeft: `1px dashed ${blocked ? MUTED : price <= baseIv ? '#4ade80' : '#f87171'}`,
-                        borderRight: `1px dashed ${blocked ? MUTED : price <= baseIv ? '#4ade80' : '#f87171'}`,
+                        borderLeft: `1px dashed ${blocked ? MUTED : price <= baseIv ? TONE_COLORS.POS : TONE_COLORS.NEG}`,
+                        borderRight: `1px dashed ${blocked ? MUTED : price <= baseIv ? TONE_COLORS.POS : TONE_COLORS.NEG}`,
                     }}
                 />
 
@@ -94,18 +94,18 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                     style={{
                         left: `${expansionLeftPct}%`,
                         width: `${expansionWidthPct}%`,
-                        backgroundColor: 'rgba(207, 161, 78, 0.08)',
-                        borderRight: '1px dotted rgba(207, 161, 78, 0.4)',
+                        backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                        borderRight: '1px dotted rgba(255, 255, 255, 0.25)',
                     }}
                 />
 
                 {/* Bear Marker */}
                 <div
-                    className="absolute top-0 bottom-0 w-[2px] bg-neg flex flex-col items-center justify-start z-10"
+                    className={`absolute top-0 bottom-0 w-[2px] ${blocked ? 'bg-off' : 'bg-neg'} flex flex-col items-center justify-start z-10`}
                     style={{ left: `${bearPct}%` }}
                     title={`Bear Case Intrinsic Value: ${fmtMoney(bearIv)}`}
                 >
-                    <span className="w-2.5 h-2.5 rounded-full bg-neg border border-[#0d0f12] -mt-1 shadow-sm" />
+                    <span className={`w-2.5 h-2.5 rounded-full ${blocked ? 'bg-off' : 'bg-neg'} border border-[#0d0f12] -mt-1 shadow-sm`} />
                 </div>
 
                 {/* Bull Marker */}
@@ -144,8 +144,8 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                 {/* Bear Case */}
                 <div className="p-2 border border-rule-10 bg-black/20 rounded">
                     <span className="block text-ink-3 text-[10px] uppercase tracking-wider">Bear Case IV</span>
-                    <span className="text-[14px] font-bold text-neg">{fmtMoney(bearIv)}</span>
-                    <span className="block text-[10px] text-neg/80 mt-0.5">
+                    <span className={`text-[14px] font-bold ${blocked ? 'text-off' : 'text-neg'}`}>{fmtMoney(bearIv)}</span>
+                    <span className={`block text-[10px] mt-0.5 ${blocked ? 'text-off' : 'text-neg/80'}`}>
                         {fmtSignedPct(downsidePct)} vs price
                     </span>
                 </div>
@@ -174,8 +174,8 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                 {/* Bull Case */}
                 <div className="p-2 border border-rule-10 rounded">
                     <span className="block text-ink-3 text-[10px] uppercase tracking-wider">Bull Case IV</span>
-                    <span className="text-[14px] font-bold text-ink">{fmtMoney(bullIv)}</span>
-                    <span className="block text-[10px] text-ink-3 mt-0.5">
+                    <span className={`text-[14px] font-bold ${blocked ? 'text-off' : 'text-pos'}`}>{fmtMoney(bullIv)}</span>
+                    <span className={`block text-[10px] mt-0.5 ${blocked ? 'text-off' : 'text-pos/80'}`}>
                         {fmtSignedPct(bullUpsidePct)} Expansion
                     </span>
                 </div>

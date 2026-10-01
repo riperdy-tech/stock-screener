@@ -14,7 +14,7 @@ import { Rs2AnalysisPanel } from '@/components/Rs2AnalysisPanel';
 import { fetchDepthReport, type DepthReportBundle, type DepthVerdict } from '@/lib/data-service';
 import { headlineFromSamples } from '@/lib/desk/thesis';
 import {
-    DATA_NOTES, FORENSIC_WARNINGS, TONE_COLORS, gapColor, gateReasonsText, isBlocked, sizeTone, verdictTone, whyListed,
+    DATA_NOTES, FAMILY, FORENSIC_WARNINGS, TONE_COLORS, gapColor, gateReasonsText, isBlocked, sizeTone, verdictTone, whyListed,
 } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import { buildRows, type DeskRow } from '@/lib/desk/rankings';
@@ -22,16 +22,13 @@ import { useDeskData } from '@/lib/desk/useDeskData';
 import { Shell } from '../Shell';
 import { useLanguage } from '@/components/LanguageContext';
 
-// One neutral bar colour: the label says which score it is; colour is kept for good/caution/bad.
-const BAR = 'rgba(242,240,235,.55)';
-
 // The keys the dual-door screen writes into `fct_z`.
 const FACTORS: [string, string, string][] = [
-    ['quality', 'Quality', BAR],
-    ['momentum', 'Momentum', BAR],
-    ['revisions', 'Revisions', BAR],
-    ['value', 'Value', BAR],
-    ['exp_gap', 'Expectations gap', BAR],
+    ['quality', 'Quality', FAMILY.quality],
+    ['momentum', 'Momentum', FAMILY.momentum],
+    ['revisions', 'Revisions', FAMILY.revisions],
+    ['value', 'Value', FAMILY.value],
+    ['exp_gap', 'Expectations gap', FAMILY.exp_gap],
 ];
 
 function DepthStatRow({ row }: { row: DeskRow }) {
@@ -70,7 +67,7 @@ function DepthStatRow({ row }: { row: DeskRow }) {
             {!blocked && (
                 <div>
                     <Micro className="text-ink-3">Half-Kelly Position Cap</Micro>
-                    <div className="mt-1 text-[17px] font-extrabold" style={{ color: sizable ? size.color : '#c3bfb5' }}>
+                    <div className="mt-1 text-[17px] font-extrabold" style={{ color: sizable ? size.color : TONE_COLORS.MUTED }}>
                         {d.kelly_fraction_pct != null ? `${d.kelly_fraction_pct.toFixed(1)}%` : sizable ? size.label : '—'}
                     </div>
                     <div className="mt-0.5 text-[11px] text-ink-3">
@@ -907,8 +904,8 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                     <EvidenceChips row={row} entryDate={entryDate} />
 
                     {row.vetoed && (
-                        <p className="mt-4 text-[12px] text-neg">
-                            ■ VETOED — {row.vetoReason ?? 'hard avoid'}. Disqualified prior to depth underwriting.
+                        <p className="mt-4 text-[12px] text-off">
+                            ✕ VETOED — {row.vetoReason ?? 'hard avoid'}. Disqualified prior to depth underwriting.
                         </p>
                     )}
                 </div>

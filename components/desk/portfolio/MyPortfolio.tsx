@@ -10,7 +10,7 @@ import { supabase } from '@/lib/supabase';
 import { Micro, SectionHead } from '../primitives';
 import { OverlayChips } from '../rankings/cells';
 import { fmtSignedPct } from '@/lib/desk/format';
-import { gateReasonsText, isBlocked } from '@/lib/desk/tone';
+import { gateReasonsText, isBlocked, TONE_COLORS } from '@/lib/desk/tone';
 import {
     loadPortfolio, parseBulkPortfolio, savePortfolio, type Holding,
 } from '@/lib/desk/portfolio';
@@ -146,30 +146,30 @@ export function MyPortfolio({ factor, depth, overlay, stockInfo, onSelect, user,
             let note: string;
             let color: string;
             if (!entry) {
-                verdict = 'NO COVERAGE'; color = '#c3bfb5';
+                verdict = 'NO COVERAGE'; color = TONE_COLORS.MUTED;
                 note = 'not in the scored universe';
             } else if (vetoed) {
-                verdict = 'VETOED'; color = '#e2917f';
+                verdict = '✕ VETOED'; color = TONE_COLORS.MUTED;
                 note = `${entry.fct_veto!.replace(/_/g, ' ')} — hard avoid`;
             } else if (!dv) {
-                verdict = 'NO DEPTH RUN'; color = '#c3bfb5';
+                verdict = 'NO DEPTH RUN'; color = TONE_COLORS.MUTED;
                 note = 'the AI has not read this name yet';
             } else if (blocked) {
-                verdict = 'BLOCKED'; color = '#c3bfb5';
+                verdict = 'BLOCKED'; color = TONE_COLORS.MUTED;
                 note = gateReasonsText(dv.actionable_reasons);
             } else if (dv.direction === 'overvalued') {
-                verdict = 'REDUCE'; color = '#cfa14e';
+                verdict = 'REDUCE'; color = TONE_COLORS.NEG;
                 note = 'AI says overvalued — every run below the price';
             } else if (dv.direction === 'hold') {
-                verdict = 'FAIR'; color = '#c3bfb5';
+                verdict = 'FAIR'; color = TONE_COLORS.FAIR;
                 note = 'the price sits inside the band — no edge either way';
             } else if (dv.direction === 'undervalued') {
-                verdict = 'BUY'; color = 'oklch(0.75 0.11 155)';
+                verdict = 'BUY'; color = TONE_COLORS.POS;
                 note = sizeHint
                     ? `every run above the price — model sizes this ${sizeHint}`
                     : 'every run above the price';
             } else {
-                verdict = 'NO PLAUSIBLE RUN'; color = '#c3bfb5';
+                verdict = 'NO PLAUSIBLE RUN'; color = TONE_COLORS.MUTED;
                 note = 'no band was computed for this name';
             }
 

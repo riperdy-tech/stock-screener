@@ -101,6 +101,18 @@ export function ChineseHelpBody() {
                         <b>Quant</b> — 篩選本身的排名：對財務報表與價格的純數學，不涉及 AI。
                     </li>
                 </ul>
+                <SubHeading>顏色說明 — 一種顏色只代表一種意思</SubHeading>
+                <ul className="space-y-1.5 pl-1">
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: 'oklch(0.77 0.13 240)' }}>●</span><span>藍色 — 名單：股票在篩選中走了多遠（Research now 最深）。你選取的項目也以藍色標示。</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#a774d6' }}>●</span><span>紫色 — Quality：高品質的企業，以及支撐它的分數。</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#149c82' }}>●</span><span>藍綠色 — Value：相對已實現的成長而言便宜，以及支撐它的分數。</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#fb9dbb' }}>●</span><span>粉紅色 — Momentum / trend：強勁而穩定的價格趨勢。</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: 'oklch(0.82 0.14 162)' }}>●</span><span>綠色 — 好：低估、獲利、通過閘門的判斷。</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#e8e4da' }}>●</span><span>米白色 — 合理：價格位於價值區間內。</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#db6750' }}>●</span><span>珊瑚色 — 不好：高估、虧損。</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#e2b850' }}>●</span><span>琥珀色 — 警告：需要細看（財報鑑識警告、判斷被擋下的提示、研究台通知）。</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#8a877f' }}>●</span><span>灰色 — 不算數：被擋下判斷的數字、被否決的股票、沒有資料。</span></li>
+                </ul>
                 <SubHeading>AI 鏡頭的區段</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>

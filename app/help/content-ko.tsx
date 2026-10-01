@@ -110,6 +110,18 @@ export function KoreanHelpBody() {
                         개입하지 않습니다.
                     </li>
                 </ul>
+                <SubHeading>색상 안내 — 색 하나에 의미 하나</SubHeading>
+                <ul className="space-y-1.5 pl-1">
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: 'oklch(0.77 0.13 240)' }}>●</span><span>파란색 — 후보 명단: 종목이 스크린을 얼마나 통과했는지(Research now가 가장 진함). 선택한 항목도 파란색으로 표시됩니다.</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#a774d6' }}>●</span><span>보라색 — Quality: 우량한 사업과 그 근거가 되는 점수.</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#149c82' }}>●</span><span>청록색 — Value: 이미 달성한 성장에 비해 싼 종목과 그 근거가 되는 점수.</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#fb9dbb' }}>●</span><span>분홍색 — Momentum / trend: 강하고 꾸준한 주가 추세.</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: 'oklch(0.82 0.14 162)' }}>●</span><span>초록색 — 좋음: 저평가, 수익, 게이트를 통과한 판단.</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#e8e4da' }}>●</span><span>흰색 계열 — 적정: 주가가 가치 밴드 안에 있음.</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#db6750' }}>●</span><span>산호색 — 나쁨: 고평가, 손실.</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#e2b850' }}>●</span><span>호박색 — 경고: 자세히 볼 것(포렌식 경고, 판단이 막혔다는 안내, 데스크 알림).</span></li>
+                    <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#8a877f' }}>●</span><span>회색 — 유효하지 않음: 막힌 판단의 숫자, 베토된 종목, 데이터 없음.</span></li>
+                </ul>
                 <SubHeading>AI 렌즈의 섹션</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>

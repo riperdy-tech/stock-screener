@@ -127,7 +127,7 @@ export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
     // Opens on the AI book against all three benchmarks; the quant books are
     // one click away rather than crowding the first read.
     const [visible, setVisible] = useState<Record<string, boolean>>({
-        rn_depth: true, IWM: true, SPY: true, QQQ: true,
+        equal: true, IWM: true, SPY: true, QQQ: true,
     });
 
     useEffect(() => {

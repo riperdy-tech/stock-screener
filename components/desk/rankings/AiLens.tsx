@@ -228,7 +228,7 @@ export function AiLens({ sections, onOpen }: { sections: AiSections; onOpen: (t:
                                 <span className="ml-1.5 text-[11px] font-normal text-ink-2">{r.info?.name ?? ''}</span>
                             </span>
                             <span className="text-[11.5px] text-ink-2">
-                                <span className="font-bold text-neg">■ VETOED</span>
+                                <span className="font-bold text-off">✕ VETOED</span>
                                 {' · '}{r.vetoReason ?? 'hard avoid'}
                             </span>
                         </div>

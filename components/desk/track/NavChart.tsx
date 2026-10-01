@@ -9,7 +9,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Micro } from '../primitives';
 import {
-    BENCHMARKS, BENCH_STYLE, BOOKS, growthAt, windowReturn,
+    BENCHMARKS, BENCH_DASH, BENCH_STYLE, BOOKS, growthAt, windowReturn,
     type Curve,
 } from '@/lib/desk/nav';
 import { fmtDateShort, fmtIndex, fmtSignedPct } from '@/lib/desk/format';
@@ -128,7 +128,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                             fill="none"
                             stroke={p.color}
                             strokeWidth={p.width}
-                            strokeDasharray={p.dashed ? '4 4' : undefined}
+                            strokeDasharray={p.dashed ? (BENCH_DASH[p.key] ?? '4 4') : undefined}
                             vectorEffect="non-scaling-stroke"
                         />
                     ))}

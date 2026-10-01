@@ -5,8 +5,8 @@
 const alphaFn = (base) => ({ opacityValue }) =>
     opacityValue === undefined ? base.replace(' / <a>', '') : base.replace('<a>', opacityValue);
 
-const ACCENT = alphaFn('oklch(0.78 0.08 250 / <a>)');
-const POS = alphaFn('oklch(0.75 0.11 155 / <a>)');
+const ACCENT = alphaFn('oklch(0.77 0.13 240 / <a>)');
+const POS = alphaFn('oklch(0.82 0.14 162 / <a>)');
 
 module.exports = {
     darkMode: ["class"],
@@ -49,14 +49,21 @@ module.exports = {
                     3: '#c3bfb5',       // tertiary / faint
                     q: '#e0ddd6',       // body-quote
                 },
-                accent: ACCENT,         // AI / brand — desaturated blue
-                pos: POS,               // undervalued, returns, buy
-                warn: '#cfa14e',        // fair, demotions, HALF/QUARTER
-                neg: '#e2917f',         // overvalued, vetoes, sell
+                // One meaning per colour (2026-10 colour system; validated pairwise for normal and
+                // colour-blind vision on the desk surface).
+                accent: ACCENT,         // blue: the list / funnel progress, selection, links-as-controls
+                list2: '#709fbf',       // softer blue: watchlist (second step of the list)
+                pos: POS,               // green: undervalued, gains, good
+                fair: '#e8e4da',        // off-white: fair (neutral midpoint of the verdict)
+                warn: '#e2b850',        // amber: warnings and caution only
+                neg: '#db6750',         // coral: overvalued, losses, bad
+                off: '#8a877f',         // dim grey: doesn't count (blocked, vetoed, no data)
                 link: { DEFAULT: '#a8b4d8', hover: '#c3cce6' },
+                // Why a stock is listed: the door families and the scores inside them.
                 factor: {
-                    value: '#5a9b6d', quality: '#6b93c4', momentum: '#cfa14e',
-                    lowvol: '#9a83c2', revisions: '#c2798f',
+                    quality: '#a774d6', revisions: '#c0a2de',
+                    value: '#149c82', exp_gap: '#72bca8',
+                    momentum: '#fb9dbb',
                 },
                 series: {
                     equal: 'oklch(0.78 0.08 250)', plan: '#e0ddd6', plan2: '#c2798f',
@@ -86,16 +93,16 @@ module.exports = {
                 foreground: '#f2f0eb',
                 border: 'rgba(255,255,255,.14)',
                 input: 'rgba(255,255,255,.24)',
-                ring: 'oklch(0.78 0.08 250)',
+                ring: 'oklch(0.77 0.13 240)',
                 primary: { DEFAULT: ACCENT, foreground: '#1c1e21' },
                 secondary: { DEFAULT: 'rgba(255,255,255,.05)', foreground: '#f2f0eb' },
                 muted: { DEFAULT: 'rgba(255,255,255,.05)', foreground: '#d3cfc5' },
                 popover: { DEFAULT: '#15171a', foreground: '#f2f0eb' },
                 card: { DEFAULT: '#1c1e21', foreground: '#f2f0eb' },
-                destructive: { DEFAULT: '#e2917f', foreground: '#f2f0eb' },
+                destructive: { DEFAULT: '#db6750', foreground: '#f2f0eb' },
                 success: POS,
-                warning: '#cfa14e',
-                danger: '#e2917f',
+                warning: '#e2b850',
+                danger: '#db6750',
             },
             fontFamily: {
                 sans: ['var(--font-hanken)', 'system-ui', 'sans-serif'],

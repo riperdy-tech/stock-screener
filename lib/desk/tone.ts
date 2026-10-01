@@ -21,29 +21,38 @@ export interface VerdictTone {
     keys: { label: Key | null; subline: Key | null; action: Key | null };
 }
 
-const ACCENT = 'oklch(0.78 0.08 250)';
-const POS = 'oklch(0.75 0.11 155)';
-const WARN = '#cfa14e';
-const NEG = '#e2917f';
-const MUTED = '#d3cfc5';
+// One meaning per colour — see tailwind.config.js for the full key.
+const ACCENT = 'oklch(0.77 0.13 240)';  // the list / funnel progress, selection
+const POS = 'oklch(0.82 0.14 162)';     // undervalued, gains, good
+const FAIR = '#e8e4da';                 // fair: the neutral midpoint
+const WARN = '#e2b850';                 // warnings and caution
+const NEG = '#db6750';                  // overvalued, losses, bad
+const MUTED = '#8a877f';                // doesn't count: blocked, vetoed, no data
+
+/** Door / score families: why the screen listed a stock. */
+export const FAMILY = {
+    quality: '#a774d6', revisions: '#c0a2de',
+    value: '#149c82', exp_gap: '#72bca8',
+    momentum: '#fb9dbb',
+} as const;
 
 export function verdictTone(direction: Direction | null | undefined): VerdictTone {
     switch (direction) {
         case 'undervalued':
             return {
-                label: 'UNDERVALUED', color: POS, fill: 'oklch(0.75 0.11 155 / .48)',
+                label: 'UNDERVALUED', color: POS, fill: 'oklch(0.82 0.14 162 / .40)',
                 subline: 'every run above the price', action: 'buy',
                 keys: { label: 'vUndervalued', subline: 'vSubUnder', action: 'actBuy' },
             };
         case 'overvalued':
             return {
-                label: 'OVERVALUED', color: NEG, fill: 'rgba(226,145,127,.44)',
+                label: 'OVERVALUED', color: NEG, fill: 'rgba(219,103,80,.42)',
                 subline: 'every run below the price', action: 'reduce',
                 keys: { label: 'vOvervalued', subline: 'vSubOver', action: 'actReduce' },
             };
         case 'hold':
             return {
-                label: 'FAIR', color: WARN, fill: 'rgba(207,161,78,.44)',
+                label: 'FAIR', color: FAIR, fill: 'rgba(232,228,218,.30)',
                 subline: 'price sits inside the band', action: 'hold',
                 keys: { label: 'vFair', subline: 'vSubFair', action: 'actHold' },
             };
@@ -70,9 +79,9 @@ export function verdictTone(direction: Direction | null | undefined): VerdictTon
  */
 export function heroFill(direction: Direction | null | undefined): string {
     switch (direction) {
-        case 'undervalued': return 'oklch(0.75 0.11 155 / .32)';
-        case 'overvalued': return 'rgba(226,145,127,.3)';
-        case 'hold': return 'rgba(207,161,78,.3)';
+        case 'undervalued': return 'oklch(0.82 0.14 162 / .28)';
+        case 'overvalued': return 'rgba(219,103,80,.3)';
+        case 'hold': return 'rgba(232,228,218,.2)';
         default: return 'rgba(255,255,255,.12)';
     }
 }
@@ -107,13 +116,13 @@ export function sizeTone(size: DepthVerdict['size_hint'] | null | undefined, nBa
 /** Median gap colour: positive = cheap (green), negative = rich (red), FAIR = muted. */
 export function gapColor(gap: number | null | undefined, direction?: Direction | null): string {
     if (gap === null || gap === undefined) return MUTED;
-    if (direction === 'hold') return MUTED;
+    if (direction === 'hold') return FAIR;
     if (gap > 0) return POS;
     if (gap < 0) return NEG;
     return MUTED;
 }
 
-export const TONE_COLORS = { ACCENT, POS, WARN, NEG, MUTED };
+export const TONE_COLORS = { ACCENT, POS, FAIR, WARN, NEG, MUTED };
 
 /**
  * A verdict is a recommendation only when the gate passed it. `actionable ===
@@ -164,23 +173,25 @@ export function gateReasonsText(reasons?: string[] | null): string {
  * the first two. Wildcard and held-over are how a place was won, not why — they are explained on the
  * stock page only. Null when the stock was not nominated.
  */
-export function whyListed(doors: string[] | null | undefined): { label: string; help: string } | null {
+export type Family = 'quality' | 'value' | 'momentum';
+
+export function whyListed(doors: string[] | null | undefined): { label: string; help: string; parts: { family: Family; word: string }[] } | null {
     const d = doors ?? [];
     const champ = d.includes('DOUBLE_DOOR_CHAMPION');
-    const parts: [string, string][] = [];
-    if (champ || d.includes('DOOR_1_COMPOUNDER')) parts.push(['Quality', 'a high-quality business with rising price and forecasts']);
-    if (champ || d.includes('DOOR_2_VALUE_GAP')) parts.push(['Value', 'cheap against the growth it has already delivered']);
-    if (d.includes('DOOR_3_TREND_LEADER')) parts.push(['Trend', 'a strong, steady, profitable uptrend']);
+    const parts: [string, string, Family][] = [];
+    if (champ || d.includes('DOOR_1_COMPOUNDER')) parts.push(['Quality', 'a high-quality business with rising price and forecasts', 'quality']);
+    if (champ || d.includes('DOOR_2_VALUE_GAP')) parts.push(['Value', 'cheap against the growth it has already delivered', 'value']);
+    if (d.includes('DOOR_3_TREND_LEADER')) parts.push(['Trend', 'a strong, steady, profitable uptrend', 'momentum']);
     if (parts.length === 0) {
         return d.includes('HYSTERESIS_RETAINED')
-            ? { label: 'Held over', help: 'already on the list; its rank slipped, but not far enough to drop it' }
+            ? { label: 'Held over', help: 'already on the list; its rank slipped, but not far enough to drop it', parts: [] }
             : null;
     }
     const label = parts.map(([l], i) => (i === 0 ? l : l.toLowerCase())).join(' + ');
     const help = champ
         ? 'in the top 10% both as a quality business and as a value opportunity, which is rare'
         : parts.map(([, h]) => h).join('; and ');
-    return { label, help };
+    return { label, help, parts: parts.map(([w, , f]) => ({ family: f, word: w })) };
 }
 
 /** Quant-screen flags that are warnings on the name (never a gate). */

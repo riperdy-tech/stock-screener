@@ -484,6 +484,18 @@ export default function HelpPage() {
                                     with no AI involved.
                                 </li>
                             </ul>
+                            <SubHeading>Colour key — one meaning per colour</SubHeading>
+                            <ul className="space-y-1.5 pl-1">
+                                <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: 'oklch(0.77 0.13 240)' }}>●</span><span>Blue — the list: how far a stock has come through the screen (strongest for Research now). Also marks what you have selected.</span></li>
+                                <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#a774d6' }}>●</span><span>Violet — Quality: a high-quality business, and the scores behind it.</span></li>
+                                <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#149c82' }}>●</span><span>Teal — Value: cheap against the growth it has delivered, and the scores behind it.</span></li>
+                                <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#fb9dbb' }}>●</span><span>Pink — Momentum / trend: a strong, steady price trend.</span></li>
+                                <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: 'oklch(0.82 0.14 162)' }}>●</span><span>Green — good: undervalued, a gain, a verdict that passes the gate.</span></li>
+                                <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#e8e4da' }}>●</span><span>Off-white — fair: the price sits inside the value band.</span></li>
+                                <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#db6750' }}>●</span><span>Coral — bad: overvalued, a loss.</span></li>
+                                <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#e2b850' }}>●</span><span>Amber — a warning: look closer (forensic warnings, the notice that a verdict is blocked, desk notices).</span></li>
+                                <li className="flex items-baseline gap-2"><span aria-hidden style={{ color: '#8a877f' }}>●</span><span>Grey — does not count: the numbers of a blocked verdict, vetoed stocks, no data.</span></li>
+                            </ul>
                             <SubHeading>The sections of the AI lens</SubHeading>
                             <ul className="list-disc space-y-2 pl-5">
                                 <li>

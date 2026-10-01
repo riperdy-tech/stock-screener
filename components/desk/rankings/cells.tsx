@@ -5,7 +5,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { scaleBand, bandLabel } from '@/lib/desk/band';
-import { gapColor, gateReasonsText, isBlocked, sizeTone, TONE_COLORS, verdictTone, whyListed } from '@/lib/desk/tone';
+import { FAMILY, gapColor, gateReasonsText, isBlocked, sizeTone, TONE_COLORS, verdictTone, whyListed } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import type { DeskRow } from '@/lib/desk/rankings';
 import { Micro } from '../primitives';
@@ -160,7 +160,7 @@ export function SpreadSizeCell({ row }: { row: DeskRow }) {
     return (
         <span className="block font-mono text-[12px] text-ink-2">
             {spread}{' '}
-            <span className="text-[11px] font-semibold" style={{ color: sizable ? size.color : '#c3bfb5' }}>
+            <span className="text-[11px] font-semibold" style={{ color: sizable ? size.color : TONE_COLORS.MUTED }}>
                 → {sizable ? size.label : '—'}
             </span>
         </span>
@@ -190,9 +190,14 @@ export function WhyListed({ row, className }: { row: DeskRow; className?: string
     const isNew = row.moved === 'entered_rn' || row.moved === 'entered_book';
     if (!why && !isNew) return null;
     return (
-        <span className={clsx('block text-[11px] text-ink-3', className)} title={why ? `${why.label}: ${why.help}` : undefined}>
-            {why?.label}
-            {isNew && <span className="font-semibold text-ink">{why ? ' · ' : ''}new</span>}
+        <span className={clsx('flex flex-wrap items-baseline gap-x-2 text-[11px] text-ink-2', className)} title={why ? `${why.label}: ${why.help}` : undefined}>
+            {why && why.parts.length === 0 && <span className="text-ink-3">{why.label}</span>}
+            {why?.parts.map((p) => (
+                <span key={p.family} className="inline-flex items-baseline gap-1">
+                    <span aria-hidden style={{ color: FAMILY[p.family] }}>●</span>{p.word}
+                </span>
+            ))}
+            {isNew && <span className="font-semibold text-accent">new</span>}
         </span>
     );
 }
@@ -280,12 +285,43 @@ export function McapCell({ row }: { row: DeskRow }) {
     return <span className="block text-right font-mono text-[11px] text-ink-2">{fmtMcap(row.info?.marketCap)}</span>;
 }
 
+/** What drives the screen's score, in the door-family colours (legend: FamilyLegend). */
+const MIX_KEYS: (keyof typeof FAMILY)[] = ['quality', 'revisions', 'value', 'exp_gap', 'momentum'];
+
+export function FactorMix({ contributions, width = 104 }: { contributions: Record<string, number> | null | undefined; width?: number }) {
+    if (!contributions) return <span className="block font-mono text-[11px] text-ink-3">—</span>;
+    const vals = MIX_KEYS.map((k) => Math.max(0, contributions[k] ?? 0));
+    const total = vals.reduce((a, b) => a + b, 0);
+    if (total <= 0) return <span className="block font-mono text-[11px] text-ink-3">—</span>;
+    const names: Record<string, string> = { quality: 'quality', revisions: 'revisions', value: 'value', exp_gap: 'expectations gap', momentum: 'momentum' };
+    return (
+        <span className="flex gap-[2px]" style={{ width, height: 6 }}
+            title={MIX_KEYS.map((k, i) => (vals[i] > 0 ? `${names[k]} ${(vals[i] / total * 100).toFixed(0)}%` : null)).filter(Boolean).join(' · ')}>
+            {MIX_KEYS.map((k, i) => vals[i] > 0 && (
+                <span key={k} style={{ width: `${(vals[i] / total) * 100}%`, background: FAMILY[k] }} />
+            ))}
+        </span>
+    );
+}
+
+/** The key for the door-family colours, shown once above any list that uses them. */
+export function FamilyLegend() {
+    const items: [keyof typeof FAMILY, string][] = [['quality', 'Quality'], ['value', 'Value'], ['momentum', 'Momentum / trend']];
+    return (
+        <span className="inline-flex flex-wrap items-baseline gap-x-3 text-[11px] text-ink-2">
+            {items.map(([k, l]) => (
+                <span key={k} className="inline-flex items-baseline gap-1"><span aria-hidden style={{ color: FAMILY[k] }}>●</span>{l}</span>
+            ))}
+        </span>
+    );
+}
+
 /** Overlay evidence: geopolitical-risk level and informed-demand direction. */
 export function OverlayChips({ overlay }: { overlay: any }) {
     if (!overlay) return null;
     const gpr = overlay.gpr;
     const demand = overlay.informed_demand;
-    const gprColor = gpr?.gpr_level >= 3 ? '#e2917f' : gpr?.gpr_level === 2 ? '#cfa14e' : '#d3cfc5';
+    const gprColor = gpr?.gpr_level >= 2 ? TONE_COLORS.WARN : TONE_COLORS.MUTED;
     return (
         <span className="inline-flex items-center gap-2">
             {gpr && gpr.gpr_level !== undefined && (
