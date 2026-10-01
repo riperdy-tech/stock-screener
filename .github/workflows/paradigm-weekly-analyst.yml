@@ -96,6 +96,11 @@ jobs:
           git add public/data/financials/*.json || true
           git add public/data/fundamentals_battery.json || true
           git add public/data/fundamentals_history.json || true
+          # build_fundamentals_history.py also writes these two (since 2026-08-20). They were never
+          # added here, so every weekly rebuild was discarded and the committed copies froze at
+          # 2026-08-20 — read by rs2's briefing, its 10-Q trigger and its thesis monitor.
+          git add public/data/fundamentals_ttm.json || true
+          git add public/data/fundamentals_quarterly.json || true
           git add public/data/cik_map.json || true
           git add public/data/macro_state.json || true
           git add public/data/stocks.json || true
