@@ -9,451 +9,470 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import Link from 'next/link';
-import { BookMarked, FlaskConical } from 'lucide-react';
+import { BookMarked, BookOpen, FlaskConical } from 'lucide-react';
 import { Term } from '@/components/GlossaryTerm';
 import { Section, SubHeading, Callout } from './help-ui';
-import { PipelineDiagram, AiAnalysisFlow } from './WorkflowDiagram';
+import { PipelineDiagram } from './WorkflowDiagram';
 
 export function KoreanHelpBody() {
     return (
         <>
             {/* 소개 */}
-            <Section id="welcome" title="소개 — 이 사이트가 무엇이고(아닌 것)" icon={<FlaskConical className="h-5 w-5" />}>
+            <Section id="welcome" title="소개 — 이 사이트가 무엇이고 무엇이 아닌가" icon={<FlaskConical className="h-5 w-5" />}>
                 <p>
-                    매일 컴퓨터 한 대가 <b>약 6,600개 미국 주식</b>의 재무 보고서와 주가 이력을 읽고 하나의
-                    리더보드에 순위를 매깁니다. 리더보드 상단 = 그 종목에 유리한 근거가 가장 많다는 뜻입니다.
-                    그게 전부입니다. 이 핸드북은 그 근거가 정확히 어떻게 만들어지는지, 화면의 모든 숫자와 칩이
-                    무엇을 뜻하는지, 그리고 이 시스템이 의도적으로 <i>하지 않는</i> 일을 설명합니다.
+                    매일 컴퓨터 한 대가 <b>미국 상장 주식 약 7,000개</b>의 재무 보고서와 주가 이력을 읽고, 약{' '}
+                    <b>150개</b>의 후보 명단으로 좁힙니다. 별도의 AI 애널리스트가 후보 명단의 종목을 깊이 분석해,
+                    각 종목의 가격이 너무 낮은지, 적당한지, 너무 높은지 말해 줄 수 있습니다. 이 핸드북은 각 단계가
+                    어떻게 작동하는지, 화면의 모든 라벨이 무엇을 뜻하는지, 그리고 이 시스템이 의도적으로{' '}
+                    <i>하지 않는</i> 일이 무엇인지 설명합니다.
                 </p>
                 <Callout kind="warn">
-                    <b>여기서는 아무것도 사고팔지 않으며, 어떤 것도 재정적 조언이 아닙니다.</b> 근거를 보여주는
-                    리서치 후보 명단입니다. 즉 6,600개 종목을 <i>당신의</i> 리서치 시간을 쓸 가치가 있는
-                    후보로 좁히는 기계입니다. 페이퍼 포트폴리오에서조차 실제 매매는 일어나지 않습니다(정직하게,
-                    실제 가격과 실제 비용으로 시뮬레이션됩니다).
+                    <b>여기서는 아무것도 사고팔지 않으며, 어떤 것도 재정적 조언이 아닙니다.</b> 근거를 펼쳐 놓은
+                    리서치 후보 명단입니다. 수천 개 종목을 <i>당신의</i> 리서치 시간을 쓸 가치가 있는 소수로 좁히는
+                    기계입니다. 이 사이트는 거래를 하지 않습니다. 페이퍼 북조차 실제 가격과 실제 비용으로 정직하게
+                    시뮬레이션됩니다.
+                </Callout>
+                <Callout kind="info">
+                    <b>현재 상황:</b> AI 애널리스트는 재구축과 테스트가 진행 중입니다. 새 애널리스트가 테스트를 통과해
+                    가동되기 전까지, 데스크의 AI 쪽에는 새로운 추천 종목이 나오지 않습니다. 옛 애널리스트의 판단은
+                    기록에 남아 있으며, 추천 종목이 아니라 막힘으로 표시됩니다.{' '}
+                    <Link href="#analyst" className="font-bold text-pos hover:underline">AI 애널리스트</Link>를 참조하세요.
                 </Callout>
                 <p>
                     <span className="border-b border-dotted border-pos/40 font-semibold text-pos">점선 밑줄</span>이
                     있는 단어는 기술 용어입니다. 클릭하면 페이지를 떠나지 않고 뜻을 볼 수 있습니다. 모든 용어의
-                    검색 가능한 색인은 <Link href="#glossary" className="font-bold text-pos hover:underline">용어 사전 섹션</Link>에
-                    있습니다.
+                    검색 가능한 완전한 색인은{' '}
+                    <Link href="#glossary" className="font-bold text-pos hover:underline">용어 사전 섹션</Link>에 있습니다.
                 </p>
             </Section>
 
             {/* 파이프라인 */}
             <Section id="pipeline" title="매일 무슨 일이 일어나는가 — 파이프라인" icon={<BookMarked className="h-5 w-5" />}>
                 <p>
-                    화면 뒤에는 일련의 명령 체인이 있으며 <Term term="github-actions" />으로 매일 자동 재실행됩니다.
-                    오케스트레이터가 순서를 강제하고 데이터 무결성을 검사해 낡거나 부분적인 데이터가 조용히
-                    순위를 망치지 못하게 합니다.
+                    화면 뒤에는 <Term term="github-actions" />로 일정에 따라 자동 재실행되는, 순서가 정해진 작업
+                    체인이 있습니다. 순서가 강제되고 각 단계에서 데이터가 검사되므로, 낡거나 부분적인 데이터가
+                    후보 명단을 조용히 망가뜨릴 수 없습니다. 쉽게 말하면 다음과 같습니다.
                 </p>
+                <ol className="list-decimal space-y-2 pl-5">
+                    <li>
+                        <b>데이터 유입.</b> SEC의 기업 제출 서류, Yahoo Finance의 주가와 애널리스트 전망,
+                        그리고 <Term term="fred" />(연준의 데이터 서비스)의 경제 시계열입니다.
+                    </li>
+                    <li>
+                        <b>안전 필터(“Tier-1 hygiene”).</b> 아무도 합리적으로 살 수 없는 종목이 제거됩니다. 거래할 수
+                        없는 종목, 작은 기업(3억 달러 미만)이거나 주가가 3달러 미만인 종목, 거래가 얇은 종목, 껍데기
+                        회사, 쓸 만한 제출 재무 데이터가 없는 기업, 만성 적자에 부채가 많은 기업, 그리고 회계 조작
+                        징후가 강한 소형 기업입니다. 채점할 종목이 약 3,000개 남습니다.
+                    </li>
+                    <li>
+                        <b>듀얼 도어 스크린.</b> 남은 각 종목을 세 개의 <Term term="door" /> — 컴파운더, 밸류 갭,
+                        추세 주도주 — 로 채점하고, 가장 좋은 사례가 후보 명단에 오릅니다.
+                    </li>
+                    <li>
+                        <b>등급.</b> 후보 명단을 Research now와 Watchlist로 나눕니다. 나머지는 Pass이고, 안전 필터가
+                        제거했다면 Vetoed입니다.
+                    </li>
+                    <li>
+                        <b>AI 애널리스트(가동 중일 때).</b> 후보 명단 종목을 깊이 분석해 각각에 판단을 내립니다.
+                        클라우드가 아니라 로컬 컴퓨터에서 실행됩니다.
+                    </li>
+                    <li>
+                        <b>게이트.</b> 판단은 게이트의 규칙을 통과해야만 유효합니다. 통과하지 못한 판단은 막힘으로
+                        표시되어, 이유와 함께 계속 보입니다.
+                    </li>
+                    <li><b>게시.</b> 판단과 리포트가 이 사이트에 게시됩니다.</li>
+                    <li>
+                        <b>페이퍼 북.</b> 세 개의 시뮬레이션 포트폴리오가 후보 명단, AI 판단, 그리고 당신의 보유
+                        종목을 매일 따라갑니다.
+                    </li>
+                    <li>
+                        <b>성과 평가.</b> 각 판단은 나중에 실제 주가가 어떻게 움직였는지와 대조해 점검됩니다.
+                    </li>
+                </ol>
                 <PipelineDiagram />
-                <AiAnalysisFlow />
                 <p>
-                    모든 것은 <Term term="point-in-time" />입니다. 각 기록 신호는 그 시점에 존재했던 정보만
+                    모든 것은 <Term term="point-in-time" />입니다. 기록되는 각 신호는 그 시점에 존재했던 정보만
                     사용합니다. 이 원칙이 트랙 레코드를 신뢰할 수 있게 만듭니다.
                 </p>
             </Section>
 
-            {/* 리더보드 */}
-            <Section id="leaderboard" title="리더보드 읽는 법 — Rankings 탭" icon={<BookMarked className="h-5 w-5" />}>
+            {/* 데스크 */}
+            <Section id="desk" title="데스크 읽는 법 — 세 가지 렌즈" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    Rankings 탭은 전체 유니버스를 하나의 숫자, 즉 <Term term="composite" />로 순위를 매긴 표입니다.
-                    각 열의 의미는 다음과 같습니다.
+                    데스크는 메인 페이지입니다. 맨 위에는 누구의 관점을 볼지 정하는 스위치가 하나 있습니다.
                 </p>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b>Rank(순위)</b> — 채점된 약 6,600개 미국 종목 리더보드에서의 오늘 위치. #1이 지금 가장 강한 종합 근거를 가집니다.</li>
                     <li>
-                        <b>Composite(종합 점수)</b> — 모든 것을 순위 매기는 숫자(0–100). 다섯 팩터 점수를 각각{' '}
-                        <Term term="sector-neutral" /> 비교군 내에서 합친 뒤 안전 <Term term="haircut" />을 적용합니다.
-                        높을수록 유리한 근거가 많습니다.
+                        <b>AI</b> — AI 애널리스트의 판단을 아래 섹션으로 나눠 보여 줍니다.
                     </li>
-                    <li><b>Factor mix(팩터 구성)</b> — 이 종목의 점수를 무엇이 만들었는지. 초록=밸류, 파랑=퀄리티, 주황=모멘텀, 보라=저변동성, 분홍=리비전. 길수록 기여가 큽니다.</li>
                     <li>
-                        <b>Band(등급)</b> — 순위의 실질적 의미(<Term term="research-now" />, <Term term="watchlist" />,{' '}
-                        <Term term="monitor" />, <Term term="pass" />). 레드칩은 <Term term="veto" />된 종목입니다. 이유가 칩에 적혀 있습니다.
+                        <b>Quant</b> — 스크린 자체의 순위입니다. 재무제표와 주가에 대한 순수한 수학이며 AI는
+                        개입하지 않습니다.
                     </li>
-                    <li><b>Market cap(시가총액)</b> — <Term term="market-cap" />. 기업 전체의 가격(주가 × 주식 수).</li>
-                    <li><b>RS2 순위 / 스탠스 / 컨빅션 / 액션</b> — 독립적인 AI 판단. <Link href="#rs2" className="font-bold text-pos hover:underline">RS2 섹션</Link> 참조.</li>
-                    <li><b>Δ pctl</b> — 퀀트 엔진과 AI가 백분위 몇 포인트만큼 다른지. 큰 격차가 흥미로운 행입니다. 둘 중 하나는 틀렸다는 뜻입니다.</li>
-                    <li><b>DCF gap</b> — <Term term="expectations-gap" />. 가격이 요구하는 성장률 대비 기업이 실제로 달성한 성장률. <Link href="#dcf" className="font-bold text-pos hover:underline">DCF 섹션</Link> 참조.</li>
+                    <li>
+                        <b>Compare</b> — 둘을 나란히 놓아 어디서 엇갈리는지 볼 수 있습니다. 크게 엇갈리면 한쪽이
+                        틀렸을 수 있으며, 그런 행이 흥미로운 행입니다.
+                    </li>
                 </ul>
-                <Callout kind="info">
-                    아무 행이나 클릭하면 종목 상세를 볼 수 있습니다. 전체 팩터 프로필, 역산 DCF 판단(가격이 암시하는
-                    성장 vs 기업이 입증한 성장), 그리고 RS2 로컬-LLM 리서치와 판단.
-                </Callout>
+                <SubHeading>AI 렌즈의 섹션</SubHeading>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>
+                        <b>Research now</b> — 판단이 <i>저평가</i>이고 막히지 않은 종목입니다(
+                        <Link href="#gate" className="font-bold text-pos hover:underline">게이트</Link> 참조).
+                    </li>
+                    <li>
+                        <b>Watchlist</b> — 판단이 <i>적정</i> 또는 <i>고평가</i>이고 막히지 않은 종목입니다.
+                    </li>
+                    <li>
+                        <b>게이트에 막힘(Blocked by the gate)</b> — 규칙을 통과하지 못한 기록상의 판단입니다.
+                        이유와 함께 기록으로 표시되며, 추천 종목으로는 절대 표시되지 않습니다.
+                    </li>
+                    <li>
+                        <b>대기 중(Awaiting)</b> — 애널리스트가 아직 분석하지 않은 후보 명단 종목입니다.
+                    </li>
+                    <li>
+                        <b>베토(Vetoed)</b> — 안전 필터가 제거한 종목, 그리고 애널리스트가 쓸 만한 판단을 내지 못한
+                        행입니다(<Term term="not-usable" />).
+                    </li>
+                </ul>
+                <SubHeading>가치 밴드 막대</SubHeading>
+                <p>
+                    판단 옆에 가느다란 막대가 보입니다. <b>음영 띠</b>는 애널리스트의 실행들에서 나온 가치의 범위,{' '}
+                    <b>눈금</b>은 중앙값(가운데 값), <b>흰 선</b>은 오늘의 주가입니다. 선이 띠의 왼쪽에 있으면
+                    주가가 모든 실행의 가치보다 낮은 것이고, 띠 안에 있으면 범위 안, 오른쪽에 있으면 모든 실행보다
+                    높은 것입니다. 이것이 판단의 전부입니다. <Term term="iv-band" /> 참조.
+                </p>
             </Section>
 
-            {/* 팩터 */}
-            <Section id="factors" title="다섯 가지 팩터 — 점수의 재료" icon={<BookMarked className="h-5 w-5" />}>
+            {/* 스크린 */}
+            <Section id="screen" title="퀀트 스크린 — 세 개의 도어" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    각 종목은 역사적으로 수익률을 예측해 온 다섯 가지 특성으로 채점됩니다. 핵심적으로, 모든 평가는{' '}
-                    <Term term="sector-neutral" />입니다. 슈퍼마켓은 슈퍼마켓끼리 경쟁하며 소프트웨어 기업과 비교하지
-                    않습니다. 그렇지 않으면 “모멘텀이 높다”가 그냥 “기술주다”가 되어 버립니다.
+                    스크린은 모든 것을 하나의 점수로 섞지 않습니다. 기업은 뛰어나서, 잘못 가격이 매겨져서, 또는
+                    강하고 꾸준한 상승 추세에 있어서 관심을 받을 수 있는데, 이를 하나의 숫자로 평균 내면 어느
+                    쪽도 잘 설명하지 못합니다. 그래서 <Term term="door" />가 세 개 있습니다. 종목은 하나만
+                    통과하면 됩니다.
                 </p>
                 <div className="space-y-3">
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-value" /><span className="text-pos">밸류(Value)</span></p>
+                        <p className="text-sm font-extrabold text-pos">Door 1 — 컴파운더</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
-                            연간 현금이익 1달러당 2달러를 사는가, 2달러당 1달러를 사는가? 장기 평균적으로 저렴한 것이
-                            비싼 것보다 낫습니다. <Term term="fcf-yield" />, <Term term="owner-earnings" />,{' '}
-                            <Term term="ebit" />, <Term term="earnings-yield" /> 네 가지 수익률의 평균으로 측정합니다.
-                            자세한 것은 <Link href="#methodology" className="font-bold text-pos hover:underline">방법론</Link> 참조.
+                            실제로 돈을 벌고, 계속 성장하고, 주가가 오르고, 전망이 상향되고 있는 기업입니다.{' '}
+                            <Term term="quality" />, <Term term="momentum" />, <Term term="revisions" />를 섞으며,
+                            퀄리티의 비중이 가장 큽니다.
                         </p>
                     </div>
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-quality" /><span className="text-accent">퀄리티(Quality)</span></p>
+                        <p className="text-sm font-extrabold text-accent">Door 2 — 밸류 갭</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
-                            기업이 꾸준히 진짜 돈을 벌고, 회계가 깨끗한가? <Term term="revenue-quality" />, 수년간의{' '}
-                            <Term term="gross-margin" /> 안정성, <Term term="accruals" />(현금이 뒷받침된 이익 선호),{' '}
-                            <Term term="piotroski" />, <Term term="roic" />를 결합합니다. 스토리가 아닌, 이익을 내고
-                            회계가 정직한 사업이 이깁니다.
+                            자신이 입증한 성장에 비해 싸 보이는 기업입니다. 가격이 기업이 실제로 달성한 것보다
+                            적은 성장을 요구하고(<Term term="expectations-gap" />), 그 종목이{' '}
+                            <Term term="value" /> 기준으로 저렴합니다. <b>떨어지는 칼날 하한선</b>이 가파르게 하락
+                            중인 종목을 걸러 냅니다. 싸지만 계속 떨어지는 것은 아직 헐값이 아니기 때문입니다.
                         </p>
                     </div>
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-momentum" /><span className="text-warn">모멘텀(Momentum)</span></p>
+                        <p className="text-sm font-extrabold text-warn">Door 3 — 추세 주도주</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
-                            지난 1년간 주가가 이기고 있었나? 이긴 주식은 한동안 계속 이기는 경향이 있습니다.{' '}
-                            <Term term="skip-month" />(학계 표준 12개월 수익률, 최근 달 제외)과 <Term term="high-proximity" />로
-                            구성됩니다. 최근 달을 빼는 이유는 <Term term="reversal" /> 참조.
-                        </p>
-                    </div>
-                    <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-lowvol" /><span className="text-ink-2">저변동성(Low volatility)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
-                            주가가 잔잔하게 움직이는가, 격렬하게 움직이는가? 잔잔한 주식이 역사적으로 고통 대비 더 많은
-                            수익을 냈습니다. 월간 수익률의 표준편차(최소 12개 관측치)의 마이너스로 측정합니다.{' '}
-                            <Term term="annualized-volatility" />는 <Term term="kelly" /> 포지션 크기에도 내보내집니다.
-                        </p>
-                    </div>
-                    <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-revisions" /><span className="text-neg">리비전(Revisions)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
-                            애널리스트들이 전망을 올리고 있는가 내리고 있는가? 방향이 중요합니다. 정규화된{' '}
-                            <Term term="eps-trajectory" /> 기울기와 구조화된 <Term term="estimates" /> 점수로 구성됩니다.
+                            다른 두 도어가 놓칠 강하고 꾸준한 상승 추세입니다. 예를 들어 섹터 전체의 붐이 그렇습니다.
+                            추가로 최대 20자리, 업종 그룹당 최대 5자리입니다. 후보는 흑자여야 하고 어느 정도 규모가
+                            있어야 하며, 애널리스트 전망이 하향되고 있으면 안 되고, 운 좋은 한 달이 아니라 꾸준히
+                            올라 왔어야 합니다.
                         </p>
                     </div>
                 </div>
-                <SubHeading>왜 모든 재료가 똑같이 중요할까</SubHeading>
+                <SubHeading>도어들이 경쟁하는 방식</SubHeading>
                 <p>
-                    <Term term="factor" /> 10종 경기를 심사한다고 생각해 보세요. 어느 종목이 가장 중요한지 추측할 수도
-                    있지만, 수십 년 연구는 그런 추측이 역효과를 낸다고 보여줍니다. 과거 데이터에서 찾은 “완벽한”
-                    가중치는 미래 데이터에서 거의 작동하지 않습니다. 그래서 다섯 재료는 정확히 동일하게 반영됩니다
-                    (<Term term="equal-weight" />). 지루하고 겸손하지만 더 잘 작동합니다. 이 사이트는 여전히 각
-                    팩터의 예측력을 <Term term="rank-ic" />로 매달 진단합니다. 다만 짧은 표본이 엔진을 조종하게
-                    두지는 않습니다.
+                    첫 두 도어는 각각 점수를 <Term term="percentile" />로 바꾸고, 둘 중 더 좋은 쪽이 종목이
+                    경쟁하는 기준이 됩니다. <Term term="champion" /> — 두 도어 모두에서 상위 10%에 드는 종목 — 은
+                    +2의 작은 가산점을 받습니다. 뛰어나면서 동시에 싼 경우는 드물기 때문입니다. 떨어지는 칼날은
+                    챔피언이 될 수 없습니다.
                 </p>
-                <Callout kind="tip">
-                    누락된 팩터가 조용히 종목을 망치지는 않습니다. 밸류·퀄리티·모멘텀 중 하나가 없으면 해당 종목은
-                    부분 데이터로 채점하는 대신 <i>팩터 불충분(insufficient factors)</i>으로 표시됩니다. 필수 아닌
-                    팩터가 없으면 나머지 가중치가 재정규화되어 종합 점수가 비교 가능하게 유지됩니다.
-                </Callout>
-            </Section>
-
-            {/* 등급·베토·할인 */}
-            <Section id="bands" title="등급, 베토 & 안전 할인" icon={<BookMarked className="h-5 w-5" />}>
+                <SubHeading>버티는 힘</SubHeading>
                 <p>
-                    종합 백분위는 네 개의 실용적인 <Term term="band" />로 잘립니다.
+                    이미 후보 명단에 있는 종목은 뚜렷하게 밀려날 때까지 남습니다. 이를{' '}
+                    <Term term="hysteresis" />라고 합니다. 순위가 60위 이내이면 Research now에, 150위 이내이면
+                    후보 명단에 남습니다. 이런 완충이 없으면 컷 경계에 걸린 종목이 작은 가격 변동마다 들락날락할
+                    것입니다.
                 </p>
+                <SubHeading>공정한 비교</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><span className="font-extrabold text-pos">RESEARCH NOW</span> — 상위 3%. 오늘 리서치할 가치가 있습니다.</li>
-                    <li><span className="font-extrabold text-accent">WATCHLIST</span> — 상위 10%.</li>
-                    <li><span className="font-extrabold text-warn">MONITOR</span> — 상위 30%.</li>
-                    <li><span className="text-ink-2">PASS</span> — 나머지.</li>
-                </ul>
-                <SubHeading>베토 — 하드 디스퀄리파이어</SubHeading>
-                <p>
-                    점수가 아무리 좋아도 탈락하는 종목이 있습니다. 사진은 아름다운데 구조검사에서 탈락한 집과
-                    같습니다. <Term term="veto" />는 채점 전에 적용되므로 베토된 종목은 종합 점수가 아예 없습니다.
-                    이유는 역설계 엔진의 안전 검사 탈락(<i>reverse_engine_reject</i>), 재무 포렌식 알람 두 개 동시
-                    발생(<Term term="beneish" /> + 높은 <Term term="accruals" />), <Term term="dilution" />으로 인한
-                    과잉 주식 발행, 또는 (AI 렌즈에서) 강한 회피/매도 판단입니다. 이유가 레드칩에 적혀 있습니다.
-                </p>
-                <SubHeading>안전 할인</SubHeading>
-                <p>
-                    원시 점수와 최종 순위 사이에 세 가지 곱셈 <Term term="haircut" />이 적용됩니다. <b>생존 가능성</b> =
-                    0.7 + 0.3 × (생존가능성/100), <b>데이터 품질</b> = min(1, 0.8 + 0.04 × dq), <b>포렌식</b> =
-                    Beneish 또는 발생액 알람이 하나만 울렸을 때 0.85(둘 다 울리면 할인이 아니라 베토). 결과는 다시
-                    순위가 매겨져, 취약하거나 수상한 종목이 퇴출되지 않고 순위만 내려갑니다.
-                </p>
-            </Section>
-
-            {/* DCF */}
-            <Section id="dcf" title="기대치 격차 — 가격이 조용히 약속하는 것" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    모든 주가는 미래 성장에 대한 약속을 내포합니다. <Term term="reverse-dcf" />가 그 약속을 숫자로
-                    꺼냅니다. 즉 시장이 당신에게 청구하는 <Term term="implied-growth" />를, 표준 <Term term="dcf" />가
-                    현재 가격과 같아지는 성장률을 <Term term="bisection" />으로 풀어서 구합니다.
-                </p>
-                <p>
-                    <b>DCF gap</b> 열은 그 약속을 현실과 비교합니다. <Term term="implied-growth" /> −{' '}
-                    <Term term="demonstrated-growth" />(SEC 제출 기준 최근 5년 매출/FCF 성장), 퍼센트 포인트 단위.
-                </p>
-                <ul className="list-disc space-y-2 pl-5">
-                    <li><span className="font-extrabold text-pos">초록 / 마이너스</span> — 가격이 기업이 입증한 것보다
-                    적은 성장을 약속합니다. 잠재적 저가 매수입니다. 성장 스토리를 믿지 않아도 보상받습니다.</li>
-                    <li><span className="font-extrabold text-warn">주황 / 플러스</span> — 가격이 아무도 입증하지 못한
-                    가속을 요구합니다. 스토리를 믿어야 합니다.</li>
-                </ul>
-                <Callout kind="tip">
-                    격차는 추천 계획이 쓰는 <Term term="edge" />이기도 합니다. 입증된 성장보다 싸게 매겨진 종목만 측정
-                    가능한 엣지를 가지므로, 순위는 높지만 비싼 종목은 “켈리 엣지 없음”으로 건너뜁니다.
-                </Callout>
-            </Section>
-
-            {/* 렌즈 */}
-            <Section id="lens" title="렌즈 — 어떤 눈으로 보는가" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    Rankings 탭 상단의 하나의 스위치가 누구의 순위를 보는지 결정합니다.
-                </p>
-                <ul className="list-disc space-y-2 pl-5">
-                    <li><b>Quant(퀀트)</b> — 결정론적 팩터 엔진. 재무제표와 주가에 대한 순수 수학. AI 없음. 원래의 변하지 않은 화면입니다.</li>
-                    <li><b>RS2 LLM</b> — 로컬 AI 애널리스트의 명단. 각 기업의 실제 서류를 읽고 독립 판단을 씁니다.</li>
-                    <li><b>Compare(비교)</b> — 둘을 나란히, 가장 큰 불일치부터. 종목별 불일치 백분위(Δ pctl)를 계산하며, 큰 격차는 한 엔진이 틀린 곳입니다.</li>
-                </ul>
-                <p>
-                    AI는 퀀트 등급이 설정된 <i>뒤에</i> 적용됩니다. 승격, 강등, 또는 베토를 할 수 있어 별도의 순위가
-                    만들어집니다. 퀀트 기준선은 덮어쓰지 않으므로 두 명단을 모두 볼 수 있습니다.
-                </p>
-            </Section>
-
-            {/* RS2 */}
-            <Section id="rs2" title="RS2 — AI의 두 번째 소견" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    RS2는 <Term term="llm" />으로 각 기업의 실제 SEC 서류를 읽고 독립적인 판단을 씁니다. 두 번째
-                    의사의 소견을 받는 것과 같습니다. 각 종목에 대해 다음을 만듭니다.
-                </p>
-                <ul className="list-disc space-y-2 pl-5">
-                    <li><Term term="stance" /> — 저평가 / 공정 / 과대평가(색깔 알약).</li>
-                    <li><Term term="conviction" /> — 자신의 판단에 대한 확신도, 0–15.</li>
-                    <li><Term term="action" /> — 매수 / 보유 / 축소 / 회피… 리서치용 의견이지 주문이 아닙니다.</li>
                     <li>
-                        자체 DCF 판단. 그 <Term term="intrinsic-value" />는 애널리스트 컨센서스 밴드에 고정되고{' '}
-                        <Term term="present-value" />로 되돌려집니다. 그래서 <Term term="margin-of-safety" />가 12개월
-                        목표가가 아니라 <i>오늘</i>의 저렴함을 측정합니다.
+                        대부분의 평가는 <Term term="sector-neutral" />입니다. 은행은 소프트웨어 기업이 아니라
+                        은행과 경쟁합니다.
+                    </li>
+                    <li>
+                        <Term term="momentum" />는 유용한 방식의 예외입니다. 시장 전체를 기준으로도 읽기 때문에,
+                        섹터 전체를 끌어올리는 붐이 평범해 보이지 않고 그대로 드러납니다.
+                    </li>
+                    <li>
+                        석유·가스·광업·해운처럼 현금흐름이 경기 사이클에 따라 출렁이는 경기순환 기업에는 한 해의 좋거나
+                        나쁜 실적 대신 여러 해의 현금흐름 평균을 씁니다(석유·가스·광업은 <b>8년</b>, 그 밖의 경기순환
+                        기업은 <b>3년</b>).
                     </li>
                 </ul>
-                <SubHeading>AI Research Now 관문</SubHeading>
+                <SubHeading>섹터 틸트는 꺼져 있음</SubHeading>
                 <p>
-                    AI의 Research Now 명단은 RS2의 구조화된 신호 — 안전마진과 진입 타이밍 — 를 기준으로 두 단계로
-                    걸러집니다. <b>딥밸류</b>(MoS ≥ 30%)는 어떤 컨빅션이든 Research Now가 되고, <b>중간 밸류</b>
-                    (MoS ≥ 15%, 또는 진짜 새 매수)는 추가로 컨빅션 ≥ 9.5가 필요합니다. 약세 판단은 Research Now에서
-                    강등되고, 강한 회피/매도는 베토됩니다.
+                    모든 섹터가 같은 기본 <Term term="sector-quota" />, 즉 후보 명단 자리를 받습니다. 매크로
+                    엔진이 경제에 맞는 섹터에 추가 자리를 줄 수 있지만, 섹터 선택이 아직 검증되지 않았으므로
+                    검증될 때까지 틸트는 꺼져 있습니다.
                 </p>
+            </Section>
+
+            {/* 등급 */}
+            <Section id="bands" title="등급, 베토, 경고" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    종목이 퀀트 Research Now 명단을 떠나면 RS2가 <Term term="exit-review" />를 씁니다. 기존 보유자를
-                    위한 보유/축소/매도 판단이며 주황색 “LLM EXIT” 칩으로 표시됩니다.
+                    스크린의 결과는 네 개의 <Term term="band" />입니다.
+                </p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li><span className="font-extrabold text-pos">RESEARCH NOW</span> — 후보 명단의 상위, 대략 처음 50~60개 종목입니다. 오늘 리서치할 가치가 있습니다.</li>
+                    <li><span className="font-extrabold text-accent">WATCHLIST</span> — 후보 명단의 나머지로, 전체 약 150개 종목입니다.</li>
+                    <li><span className="text-ink-2">PASS</span> — 채점은 됐지만 후보 명단에는 없습니다.</li>
+                    <li><span className="font-extrabold text-neg">VETOED</span> — 안전 필터가 제거했습니다. 등급이 없으며, 이유가 레드칩에 적혀 있습니다.</li>
+                </ul>
+                <SubHeading>무엇이 종목을 제거하는가</SubHeading>
+                <p>
+                    <Term term="veto" />는 도어가 무엇이든 채점하기 전에 적용되는 하드 디스퀄리파이어입니다.
+                    이유는 다음과 같습니다. 거래할 수 없음, 너무 작거나 거래가 너무 얇음, 쓸 만한 제출 재무 데이터가
+                    없음, 껍데기 회사, 만성 영업 손실에 과도한 부채가 겹침, 또는{' '}
+                    <Term term="forensic" /> 레드 플래그 두 개가 동시에 나타남. 마지막 두 가지는 시가총액 100억
+                    달러 미만 기업에만 적용됩니다.
+                </p>
+                <SubHeading>경고만 하는 것</SubHeading>
+                <p>
+                    대기업에서는 포렌식 검사가 <b>경고</b>입니다. <Term term="beneish" />(이익조작 가능성),{' '}
+                    <Term term="accruals" />(현금이 뒷받침되지 않는 이익), Altman Z(부실 위험 점수), 그리고 주식
+                    발행으로 인한 심한 <Term term="dilution" />입니다. 경고는 시가총액 100억 달러 이상 종목을
+                    절대 제거하지 않습니다. 더 작은 기업에서는 두 개의 레드 플래그가 일치할 때만 제거됩니다. 이렇게
+                    하면 빠르게 성장하는 선두 기업이 특이해 보인다는 이유로 쫓겨나는 일을 막으면서도, 더 자세히
+                    들여다볼 수 있도록 경고는 계속 보여 줍니다.
+                </p>
+                <SubHeading>메모는 경고가 아님</SubHeading>
+                <p>
+                    데이터 메모 — 예를 들어 종목의 모멘텀이 월간 주가로 계산되었다거나 최신 연간 보고서가 오래되었다는
+                    것 — 는 숫자가 어떻게 만들어졌는지를 설명합니다. 기업에 대해 나쁜 이야기를 하는 것이 아니며,
+                    종목을 제거하지 않습니다.
+                </p>
+                <Callout kind="tip">
+                    원칙은 <i>annotate, never silently gate(주석을 달되, 조용히 걸러 내지 말 것)</i>입니다. 가능한 한
+                    우려 사항은 종목을 조용히 지우는 대신 이유가 달린 플래그로 보여 주어 직접 볼 수 있게 합니다.
+                </Callout>
+            </Section>
+
+            {/* 애널리스트 */}
+            <Section id="analyst" title="AI 애널리스트 — 판단이 만들어지는 방식" icon={<BookOpen className="h-5 w-5" />}>
+                <p>
+                    후보 명단의 종목은 AI 애널리스트가 깊이 분석할 수 있습니다. 신중한 두 번째 소견을 받는 것과
+                    같습니다. 각 부분이 잘하는 일을 하도록 작업이 나뉩니다.
+                </p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>
+                        <b>AI가 리서치를 하고</b> 모든 밸류에이션 입력값을 고릅니다. 클라우드 서비스가 아니라 로컬
+                        모델(<Term term="llm" />)로 실행됩니다.
+                    </li>
+                    <li>
+                        <b>파이썬이 모든 계산을 합니다.</b> AI는 좋은 애널리스트지만 믿을 만한 계산기는 아니므로,
+                        어떤 숫자도 AI의 산술에 맡기지 않습니다.
+                    </li>
+                    <li>
+                        <b>코드가 답을 검증합니다.</b> 외부 앵커, 즉 전문 애널리스트들의 전망과 목표주가 범위(
+                        <Term term="street-fence" />)에 대조합니다.
+                    </li>
+                </ul>
+                <p>
+                    각 종목은 2~3회의 독립적인 실행을 거치고, 각 실행은 사업이 얼마의 가치가 있는지에 대한 추정치로
+                    끝납니다. <b>판단</b>은 오늘의 주가가 그 가치들의 밴드에 대해 어디에 있는가입니다. 밴드 아래이면{' '}
+                    <b>저평가</b>, 안이면 <b>적정</b>, 위이면 <b>고평가</b>입니다. 밴드가 넓다는 것은 실행들의
+                    의견이 엇갈렸다는 뜻이며, 그러면 제안 크기가 작아집니다. <Term term="iv-band" /> 참조.
+                </p>
+                <Callout kind="warn">
+                    <b>현재 상태:</b> 애널리스트는 재구축과 테스트가 진행 중입니다. 테스트를 통과해 가동되기 전까지는
+                    새로운 판단이 없습니다. 오늘 기록에 있는 모든 판단은 옛 애널리스트가 만든 것입니다.
+                </Callout>
+            </Section>
+
+            {/* 게이트 */}
+            <Section id="gate" title="게이트 — 어떤 판단이 유효한가" icon={<BookOpen className="h-5 w-5" />}>
+                <p>
+                    판단은 게이트를 통과해야만 유효합니다. 모든 판단에는 <Term term="actionable" />(예 또는
+                    아니오)이 표시되고, 답이 아니오이면 데스크가 <Term term="gate-reason" />를 쉬운 말로 알려
+                    줍니다.
+                </p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li><b>옛 애널리스트가 만듦</b> — 현재 규칙 이전에, 무효 판정을 받은 애널리스트가 만든 판단입니다.</li>
+                    <li><b>실행 간 격차가 너무 큼</b> — 실행들의 가치가 너무 넓게 퍼져 있어 믿을 수 없습니다.</li>
+                    <li><b>쓸 만한 실행이 하나뿐</b> — 실행 하나로는 애널리스트가 자기 자신과 얼마나 일치하는지 알 수 없습니다.</li>
+                    <li><b>애널리스트 목표주가 범위 밖</b> — 가치가 스트리트 펜스 밖에 있습니다.</li>
+                    <li><b>주가보다 비현실적으로 높음</b> — 가치가 주가보다 너무 높아 의심스러운 것으로 취급됩니다.</li>
+                    <li><b>애널리스트 목표주가 범위 없음</b> — 답을 대조할 펜스가 없습니다.</li>
+                    <li><b>애널리스트 데이터를 가져오지 못함</b> — 조회가 실패해 검증을 할 수 없었습니다.</li>
+                    <li><b>광업 / 석유·가스 생산업체는 아직 미지원</b> — 애널리스트가 아직 이들을 제대로 평가하지 못하므로, 매수로 이어지지 않도록 막습니다.</li>
+                    <li><b>계산기 미사용</b> — 애널리스트가 답을 내면서 밸류에이션 계산기를 쓰지 않았습니다.</li>
+                    <li><b>테스트 실행</b> — 운영 실행이 아니라 테스트에서 나온 행입니다.</li>
+                </ul>
+                <p>
+                    그 밖에도 몇 가지 기술적 이유가 있으며, 데스크는 각각을 말로 풀어 보여 줍니다. 판단 하나에 이유가
+                    둘 이상일 수 있습니다.
+                </p>
+                <Callout kind="info">
+                    막힌 판단은 삭제되지 않습니다. <i>게이트에 막힘</i> 아래에 무엇이 말해졌고 왜 유효하지 않은지의
+                    기록으로 계속 보이며, 추천 종목으로는 절대 표시되지 않습니다.
+                </Callout>
+            </Section>
+
+            {/* 재가동 */}
+            <Section id="relaunch" title="새 애널리스트가 가동되면 달라지는 것" icon={<BookOpen className="h-5 w-5" />}>
+                <p>
+                    이 네 가지는 재가동과 함께 도입됩니다. 오늘은 아직 작동하지 않습니다.
+                </p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>
+                        <b>진입 타이밍.</b> 각 판단은 “지금 매수”인지 “모멘텀을 기다림”인지 말하고, 그 결정을 뒤집을
+                        조건을 명시합니다.
+                    </li>
+                    <li>
+                        <b>가치 기준 vs 모멘텀 기준.</b> 펀더멘털의 뒷받침을 받는 강한 상승 추세는, 애널리스트의
+                        가치가 주가보다 낮더라도 절반 또는 4분의 1 크기로 보유할 수 있습니다.{' '}
+                        <Term term="position-basis" /> 참조.
+                    </li>
+                    <li>
+                        <b>논제 모니터.</b> 각 판단은 자기만의 무효화 규칙을 명시합니다. 이 규칙은 현재 데이터에 대해
+                        다시 점검되고, 논제가 깨지면 표시됩니다. <Term term="thesis-status" /> 참조.
+                    </li>
+                    <li>
+                        <b>미커버 종목에 대한 신중함.</b> 전문 애널리스트가 한 명도 커버하지 않는 종목은 커버되는
+                        종목처럼 다뤄지는 대신, 제안 크기가 더 작고 안전마진 요건이 더 엄격합니다.
+                    </li>
+                </ul>
+            </Section>
+
+            {/* 매크로 */}
+            <Section id="macro" title="매크로 엔진 — 경제 배경" icon={<BookOpen className="h-5 w-5" />}>
+                <p>
+                    별도의 엔진이 미국 경제의 상태를 읽고 세 가지를 게시합니다.
+                </p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>
+                        <b>경제 계절별 확률.</b> 이 확률이 주된 산출물입니다(<Term term="probability-vector" /> 참조).
+                        단일 계절 라벨은 요약일 뿐이며 어떤 숫자도 움직이지 않습니다.
+                    </li>
+                    <li>
+                        <b>쇼크 경보</b>: 공포, 신용, 금리, 유가, 달러, 고용, 인플레이션(
+                        <Term term="shock-register" /> 참조).
+                    </li>
+                    <li>
+                        <b>난기류 리스크 플래그</b>: 공포 지수가 30 이상일 때 켜집니다.
+                    </li>
+                </ul>
+                <p>
+                    이 엔진의 숫자는 오직 <Term term="fred" />에서만 나옵니다. 뉴스는 이야기의 맥락으로만 쓰이고
+                    숫자로는 절대 쓰이지 않습니다. 섹터 선택이 아직 검증되지 않았으므로 스크린은 이를 사용하지
+                    않습니다.
                 </p>
             </Section>
 
             {/* 트랙 레코드 */}
-            <Section id="track" title="트랙 레코드 — 정직한 측정기" icon={<BookMarked className="h-5 w-5" />}>
+            <Section id="track" title="트랙 레코드 — 정직한 측정기" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    아첨하는 <Term term="backtest" /> 대신, 시스템은 매일 자기 추천을 실제 가격과 실제{' '}
-                    <Term term="transaction-costs" />로 <Term term="paper-trading" />하며 기록은 추가 전용이라 편집할
-                    수 없습니다. 기계가 틀렸다면 이 페이지가 공개적으로, 영구적으로 그렇게 말합니다. 그게 핵심입니다.
+                    보기 좋은 <Term term="backtest" />를 보여 주는 대신, 시스템은 실제 가격과 실제{' '}
+                    <Term term="transaction-costs" />으로 매일 <Term term="paper-trading" />을 합니다. 시스템이
+                    틀렸다면 이 페이지가 그렇게 말할 것입니다.
                 </p>
-                <SubHeading>포트폴리오</SubHeading>
+                <SubHeading>세 개의 북</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b className="text-pos">plan</b> — 밸류 코어. <Term term="kelly" /> 크기, 약 50% 현금.</li>
-                    <li><b className="text-series-plan2">plan2</b> — 하이브리드. 밸류 코어 + <Term term="sleeve" />, 약 78% 투자, 비싼 리더 보유.</li>
-                    <li><b className="text-accent">equal</b> — 모든 Research Now 종목을 동일 가중(순수 종목 선정 테스트).</li>
-                    <li><b className="text-ink-2">mine</b> — 당신의 저장된 My Portfolio 보유 종목. <Term term="unitization" />으로 펀드처럼 측정.</li>
+                    <li>
+                        <b className="text-accent">Equal-weight</b> — Research now 종목 전부를 같은 비중으로
+                        보유합니다. AI도 크기 조절도 없는 순수한 종목 선정 테스트입니다.
+                    </li>
+                    <li>
+                        <b className="text-pos">AI 북</b> — 게이트를 통과한 애널리스트 판단을 따릅니다(
+                        <Term term="rn-depth" />). 지금까지의 기록은 무효 판정을 받은 <b>옛</b> 애널리스트의
+                        것입니다. 통과하는 판단이 없어서 2026-09-24 이후 현금만 보유해 왔습니다. 새 애널리스트가
+                        가동되면 AI 기록은 0에서 다시 시작하고 옛 기록은 보관됩니다.
+                    </li>
+                    <li>
+                        <b className="text-ink-2">Mine</b> — 당신이 저장한 보유 종목을 펀드처럼(
+                        <Term term="unitization" />) 추적해, 돈을 더 넣어도 성과가 가짜로 부풀지 않게 합니다.
+                    </li>
+                </ul>
+                <SubHeading>정직한 규칙</SubHeading>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>거래는 <b>신호 이후 첫 종가</b>에 일어납니다. 신호는 존재한 뒤에야 실행할 수 있기 때문입니다.</li>
+                    <li>모든 거래에 비용이 포함됩니다.</li>
+                    <li>벤치마크(<Term term="iwm" />, <Term term="spy" />)는 거래와 같은 날짜를 사용합니다.</li>
                 </ul>
                 <SubHeading>읽는 법</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b>plan vs plan2</b> — plan2가 이기면 이 기간 퀄리티 리더에 돈을 지불하는 것이 밸류 원칙을 이긴 것. plan이 이기면 원칙(과 현금)이 효과가 있었던 것.</li>
-                    <li><b>plan vs equal</b> — plan이 이기면 포지션 크기 기계가 가치를 더한 것.</li>
-                    <li><b>equal vs IWM</b> — 픽이 소형주 <Term term="benchmark" />를 이기면 종목 선정 자체가 작동하는 것.</li>
-                    <li><b>mine vs plan</b> — 당신의 이탈이 돈을 잃게 합니다. 그것이 <Term term="behavior-gap" />입니다.</li>
-                    <li><b>“너무 일찍 판매” 플래그</b> — 팔았는데 계속 오른 종목. 이런 패턴이 반복되면 엑시트 규칙을 고쳐야 합니다.</li>
+                    <li><b>Equal-weight vs IWM</b> — 종목들이 소형주 <Term term="benchmark" />를 이기면 종목 선정이 작동하는 것입니다.</li>
+                    <li><b>AI 북 vs Equal-weight</b> — AI 애널리스트는 자신의 북이 단순 후보 명단을 이길 때에만 밥값을 합니다.</li>
+                    <li><b>Mine vs 나머지</b> — 당신 자신의 이탈은 <Term term="behavior-gap" />로 드러납니다.</li>
                 </ul>
                 <p>
-                    <Term term="sharpe-ratio" />와 <Term term="cagr" />은 충분한 실측 일수가 쌓인 뒤에만 나타납니다.
-                    초기에는 이 페이지가 의도적으로 밋밋합니다. 왓-이프 오버레이로 모든 거래를 당신의 수수료율로
-                    재계산해 수수료의 마찰을 볼 수 있습니다.
+                    <Term term="sharpe-ratio" />, <Term term="cagr" /> 같은 지표는 실시간 데이터가 충분한 일수만큼
+                    쌓인 뒤에야 나타납니다. 초기에는 이 페이지가 일부러 따분합니다.
                 </p>
             </Section>
 
             {/* 포트폴리오 */}
-            <Section id="portfolio" title="포트폴리오 — 크기 조절과 추천 계획" icon={<BookMarked className="h-5 w-5" />}>
+            <Section id="portfolio" title="내 포트폴리오 — 내 보유 종목 점검" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    포트폴리오 탭에는 서로 다른 두 부분이 있습니다. 라벨을 주의 깊게 읽으세요.
+                    Portfolio 탭은 당신의 <b>실제</b> 보유 종목을 위한 곳입니다. 각 보유 종목은 스크린의{' '}
+                    <Term term="band" />와 AI 판단에 대조되고, 결과가 그 옆에 표시됩니다. AI 판단이 막힌 보유
+                    종목은 막힘으로 표시되며, 신호로는 절대 표시되지 않습니다. 보유 종목은 트랙 레코드의{' '}
+                    <b>Mine</b> 북에도 반영됩니다.
                 </p>
-                <SubHeading>My Portfolio(상단) — 당신의 실제 보유</SubHeading>
-                <p>
-                    실제 보유 종목을 입력하세요(이 브라우저에만 저장). 각각을 모델과 대조해 쿼터-<Term term="kelly" />
-                    추천 크기, 과대/과소 비중 판단, 그리고 보유 종목이 <Term term="veto" />되거나 커버리지 밖이면 큰
-                    플래그를 표시합니다. 트랙 레코드의 “mine” 원장은 이것을 펀드처럼 유니타이즈해 사용합니다.
-                </p>
-                <SubHeading>추천 계획(하단) — 당신의 포트폴리오가 아닙니다</SubHeading>
-                <p>
-                    Research Now 명단에서 기계가 만든 배분이며 <b>밸류 코어 / 하이브리드</b> 토글이 있습니다.
-                </p>
-                <ul className="list-disc space-y-2 pl-5">
-                    <li>
-                        <b>밸류 코어(plan)</b> — 쿼터-켈리 크기. <Term term="edge" /> = 약 3년에 걸쳐 기대치 격차가
-                        좁혀지는 것, 리스크 = <Term term="volatility" />, f = 0.25 × 엣지/리스크², 상한 5%.{' '}
-                        <Term term="forensic" /> 플래그가 있으면 반값, GPR 2–3과 내부자 매도가 있으면 축소, 섹터 25% /
-                        테마 30% 상한, 나머지는 <Term term="cash" />(종종 약 50%).
-                    </li>
-                    <li>
-                        <b>하이브리드(plan2)</b> — 같은 밸류 코어에 밸류에이션 격차와 무관하게 최상위 종목을 사는{' '}
-                        <Term term="sleeve" />(<Term term="book-value" />의 약 35% 상한)를 더해 코어가 거부한 비싼
-                        리더를 보유하고 유휴 현금을 굴립니다(약 78% 투자). 슬리브 행은 핑크색입니다.
-                    </li>
-                </ul>
-                <Callout kind="warn">
-                    왜 둘일까? 밸류 코어는 침체에서 당신을 보호하고(과대평가를 사지 않음) 급등장에서는 뒤처집니다.
-                    하이브리드는 리더를 잡지만 더 크게 내려앉습니다(더 큰 <Term term="drawdown" />). 트랙 레코드가 둘의
-                    실제 성과를 보여줍니다.
-                </Callout>
-                <SubHeading>매크로 디리스킹</SubHeading>
-                <p>
-                    <Term term="macro-flags" />는 <Term term="fred" /> 데이터에서 나온 경고등입니다. 2개 이상 켜지면
-                    모든 추천 크기가 자동으로 절반이 됩니다(<Term term="macro-derisk" />). 탭에 큰 주황 배너로 표시됩니다.
-                </p>
-            </Section>
-
-            {/* 오버레이 */}
-            <Section id="overlays" title="오버레이 칩과 재무 포렌식" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    오버레이는 점수에 더해지지 않는 맥락 <i>칩</i>입니다. 포지션을 줄이거나, 더 큰 안전마진을 요구하거나,
-                    논제를 의심하게 합니다.
-                </p>
-                <ul className="list-disc space-y-2 pl-5">
-                    <li>
-                        <b>GPR 0–3</b> — <Term term="gpr" />. 기업의 실제 사업 프로필(매출 지역, 공급망, 규제, 제재)에서
-                        태깅합니다. 매수/매도 신호가 절대 아니며, 레벨 3에서는 포지션을 줄이고 더 큰 안전마진을 요구합니다.
-                    </li>
-                    <li>
-                        <b>▲/▼ INSIDERS</b> — <Term term="informed-demand" />. 공매도 세력이 물러나는 동안 내부자가
-                        순매수(▲, 확인) 또는 높은 <Term term="short-interest" /> 속에서 내부자가 매도(▼, 논제 의심).
-                        확인 또는 경고일 뿐입니다.
-                    </li>
-                </ul>
-                <SubHeading>재무 포렌식 플래그</SubHeading>
-                <p>
-                    재무 포렌식 배터리 — <Term term="beneish" /> M-점수, Sloan <Term term="accruals" />, 순발행, 재무
-                    배터리 — 가 계획 행에 표시되는 <Term term="forensic" /> 플래그를 만듭니다. 단일 알람은 0.85 할인,
-                    둘이 동시에 울리면 <Term term="veto" />입니다.
-                </p>
-            </Section>
-
-            {/* 테마 */}
-            <Section id="themes" title="테마 — 팩터가 아닌 맥락" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    <Term term="theme" />는 종목이 속한 시장 서사입니다(AI, 반도체, 바이오 등). 테마 소속과 점수는{' '}
-                    <b>방향 잡기</b>와 <b>크라우딩(과열) 경고</b>를 위해 함께 보여주지만 <b>종합 점수에 절대 더해지지
-                    않습니다</b>.
-                </p>
-                <Callout kind="warn">
-                    이는 의도적입니다. 순진한 테마 노출은 역사적으로 가치를 파괴했습니다. 전문 테마 ETF는 평균 연 −3.1%
-                    (Ben-David et al. 2023). 이 사이트는 과열 서사가 조용히 점수를 부풀리게 두지 않습니다. 계획에서
-                    테마는 30% 테마 상한으로 제한되어 하나의 과열 스토리가 전체를 차지하지 못하게 합니다.
+                <Callout kind="info">
+                    이제 제안 계획은 없습니다. 사이트는 더 이상 당신을 위한 배분안을 만들지 않으며, 예전의 켈리 방식
+                    크기 조절 계획 북은 폐기되었습니다. 지금도 남아 있는 크기 가이드가 무엇인지는{' '}
+                    <Term term="position-sizing" />를 참조하세요.
                 </Callout>
             </Section>
 
-            {/* 방법론 */}
-            <Section id="methodology" title="방법론 — 실무자용" icon={<BookMarked className="h-5 w-5" />}>
-                <SubHeading>채점 파이프라인 — 정확한 메커니즘</SubHeading>
+            {/* 레거시 렌즈 */}
+            <Section id="lenses" title="레거시 렌즈 — 참고용으로 남겨 둔 옛 스크린" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    유니버스: 역설계 엔진이 채점하는 모든 종목(약 6,600 미국 상장). 각 하위 지표는 <i>섹터 내</i>에서{' '}
-                    <Term term="winsorize" />(1/99백분위) 후 섹터 내 <Term term="zscore" />. 팩터 z = 해당 팩터의
-                    이용 가능한 하위 지표 평균. 종합 z = 이용 가능한 팩터의 가중치 재정규화 합(누락 팩터는 빠지고 남은
-                    가중치가 재조정됩니다. 밸류·퀄리티·모멘텀은 <i>필수</i> — 하나라도 없으면 부분 데이터로 채점하지 않고{' '}
-                    <i>insufficient_factors</i>로 표시).
-                </p>
-                <p>
-                    종합 z → 횡단면 <Term term="percentile" />(0–100) → 세 가지 곱셈 <Term term="haircut" />(생존
-                    가능성, 데이터 품질, 포렌식) → 재순위 → 최종 백분위가 <Term term="band" />를 정합니다. ≥97
-                    research_now, ≥90 watchlist, ≥70 monitor, 그 외 pass.
-                </p>
-                <SubHeading>팩터 구성 — 하위 지표와 출처</SubHeading>
-                <p>
-                    <span className="font-extrabold text-pos">밸류</span> = 네 가지 수익률의 평균 z. 모두 최근
-                    회계연도 SEC 제출 재무 대비 현재 시가총액으로 계산합니다. <Term term="fcf-yield" />(FCF/시총),{' '}
-                    <Term term="owner-earnings" />((순이익 + 감가상각 − 설비투자)/시총), <Term term="ebit" /> 수익률
-                    (영업이익/<Term term="enterprise-value" />), <Term term="earnings-yield" />(순이익/시총 — 커버리지가
-                    가장 넓어 CAPEX·D&amp;A·영업이익 태그가 없는 기업을 구제).
-                </p>
-                <p>
-                    <span className="font-extrabold text-accent">퀄리티</span> = <Term term="revenue-quality" />(역설계
-                    점수), <Term term="gross-margin" /> 안정성(≥4 회계연도 GM의 −표준편차), 마이너스{' '}
-                    <Term term="accruals" />(−발생액 비율), <Term term="piotroski" />(둘 다 포렌식 배터리 출처).
-                </p>
-                <p>
-                    <span className="font-extrabold text-warn">모멘텀</span> = <Term term="skip-month" />과{' '}
-                    <Term term="high-proximity" />의 평균 z. 월간 종가.
-                </p>
-                <p>
-                    <span className="font-extrabold text-ink-2">저변동성</span> = 월간 수익률의 −σ z, 최소 12개
-                    관측치. <Term term="annualized-volatility" />는 종목별로 내보내 <Term term="kelly" /> 크기에
-                    사용됩니다.
-                </p>
-                <p>
-                    <span className="font-extrabold text-neg">리비전</span> = 두 0–1 부분의 평균. 정규화된{' '}
-                    <Term term="eps-trajectory" /> 기울기 (clamp(기울기, −1, 1)+1)/2, 그리고 애널리스트 구조 점수/100
-                    — 0–100으로 스케일 후 (점수−50)/25로 z 유사 척도로 재중심화.
-                </p>
-                <SubHeading>가중치</SubHeading>
-                <p>
-                    동일 0.20 × 5(스킴 <code>equal_weight_robust5</code>). <Term term="rank-ic" />는 매달 측정되지만
-                    드리프트 <i>진단</i>만 기록합니다. 측정 IC는 가중치를 조종하지 않습니다(DeMiguel, Garlappi &amp;
-                    Uppal 2009: 추정 가중치는 표본 외에서 1/N을 거의 이기지 못함).
-                </p>
-                <SubHeading>역산 DCF — 정확한 방법</SubHeading>
-                <p>
-                    밸류에이션 모델은 표준 DCF가 현재 가격과 같아지는 성장률을 <Term term="bisection" />으로 풉니다.
-                    그것이 시장이 청구하는 성장률입니다. <Term term="expectations-gap" />(“DCF gap”으로 표시) = 암묵
-                    성장 − 입증된 성장. 입증 = SEC 제출 기준 최근 5년 매출/FCF 성장, 퍼센트 포인트. 역설계 엔진은 그
-                    위에 아키타입(A–F) 분류와 생존 가능성/데이터 품질 채점을 얹어 팩터 랩이 소비하는 안전 입력을 만듭니다.
-                </p>
-                <SubHeading>베토 규칙(정확)</SubHeading>
-                <p>
-                    <b>reverse_engine_reject</b> = 역설계 등급 ∈ {'{'}Excluded, Reject, Reject-tier{'}'} ·{' '}
-                    <b>forensic_pair</b> = Beneish M-점수 상승 AND 발생액 높음(단일 알람은 0.85 할인) ·{' '}
-                    <b>heavy_issuance</b> = HEAVY_ISSUANCE 플래그, 발행이 예상 자금조달 방식인 아키타입 E/F는 예외.
-                    AI 렌즈에서는 강한 회피/매도 판단도 베토(<code>llm_reject</code>).
-                </p>
-                <SubHeading>누락 데이터는 null — 조용히 안전하지 않음</SubHeading>
-                <p>
-                    옛 플레이스홀더 Z/M 점수는 사라졌습니다. 지표가 없으면 null이며, 채점 파이프라인은 그 종목을
-                    불충분으로 표시하거나 데이터 품질 할인을 적용합니다. 공백이 조용히 합격으로 취급되지 않습니다.
+                    <b>Lenses</b> 버튼은 옛 스크린을 엽니다. 100배 종목(100-bagger) 스크린, Reverse, Paradigm,
+                    YouTube입니다. 참고용으로 남겨 둔 것입니다. 이것들은 현재 시스템이 <b>아니며</b>, 데스크의
+                    어떤 것도 이것으로 만들어지지 않습니다.
                 </p>
             </Section>
 
             {/* 검증 */}
-            <Section id="validation" title="시스템은 어떻게 검증되는가" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    두 개의 독립적인 정직성 루프가 기계를 정직하게 유지합니다.
-                </p>
+            <Section id="validation" title="시스템은 어떻게 검증되는가" icon={<BookOpen className="h-5 w-5" />}>
+                <p>세 가지 습관이 시스템을 정직하게 유지합니다.</p>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>전방 기록 신호</b> — 모든 팩터 신호는 만들어지는 순간 기록되고(<Term term="point-in-time" />,
-                        추가 전용) 나중에 실제로 일어난 일과 측정됩니다. 상장폐지 종목도 포함됩니다(생존자 편향 없음).
+                        <b>결과보다 규칙 먼저.</b> 합격/불합격 규칙은 결과를 보기 전에 적어 두므로, 나중에 보기
+                        좋게 조정할 수 없습니다(그것은 <Term term="overfitting" />이 됩니다).
                     </li>
                     <li>
-                        <b>페이퍼트레이딩 포트폴리오</b> — 트랙 레코드 페이지가 plan / plan2 / equal / mine을 매일 실제
-                        가격과 비용으로 거래하고 <Term term="iwm" />·<Term term="spy" />와 비교합니다. 수익과{' '}
-                        <Term term="alpha" />는 공개적이고 영구적입니다.
+                        <b>판단 채점.</b> 평가기가 각 AI 판단을 30일, 91일, 182일, 365일 동안 주가가 한 움직임과{' '}
+                        <Term term="iwm" />, <Term term="spy" />, QQQ에 견주어 점검합니다. 한 기간은 완전히 지나간
+                        뒤에만 평가되고, 벤치마크는 판단과 같은 날짜를 사용합니다.
+                    </li>
+                    <li>
+                        <b>페이퍼 북.</b>{' '}
+                        <Link href="#track" className="font-bold text-pos hover:underline">트랙 레코드</Link>의 북은
+                        실제 가격과 비용으로 매일 거래합니다.
                     </li>
                 </ul>
-                <p>
-                    매달 IC 드리프트 보고서가 <Term term="rank-ic" /> 진단을 재계산합니다. 요점은 이 사이트가 자기
-                    숙제를 스스로 채점하지 못하게 하는 것입니다. 성적표는 전방 지향적이고 실제이며 편집 불가능합니다.
-                </p>
+                <Callout kind="warn">
+                    <b>아직 결론 없음.</b> 오늘 기록에 있는 모든 판단은 옛 애널리스트의 것이므로, 평가에서 어떤
+                    결론도 끌어낼 수 없습니다. 새 애널리스트의 유효한 판단이 생기고 그 기간이 지나간 뒤에야 의미를
+                    갖게 됩니다.
+                </Callout>
             </Section>
 
             {/* 데이터 */}
-            <Section id="data" title="데이터는 어디서 오는가" icon={<BookMarked className="h-5 w-5" />}>
+            <Section id="data" title="데이터는 어디서 오는가" icon={<BookOpen className="h-5 w-5" />}>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><Term term="sec-filings" /> — <Term term="company-facts" />를 통한 제출 당시 그대로의 10년 재무(퀄리티, 포렌식, 입증된 성장의 기준 사실).</li>
+                    <li><Term term="sec-filings" /> — <Term term="company-facts" />를 통한 제출 당시 그대로의 10년 재무(퀄리티, 포렌식 경고, 입증된 성장의 기준 사실). <Term term="point-in-time" />으로 보관됩니다.</li>
                     <li><Term term="yahoo-finance" /> — 주가, 애널리스트 <Term term="estimates" />, 커버리지.</li>
-                    <li><Term term="fred" /> — <Term term="macro-flags" /> 뒤의 연준 매크로 시계열.</li>
+                    <li><Term term="fred" /> — 매크로 엔진의 바탕이 되는 미국 경제 시계열.</li>
+                    <li>뉴스 — 서사적 맥락일 뿐입니다. 숫자로는 절대 바뀌지 않습니다.</li>
                 </ul>
                 <p>
-                    전체 파이프라인은 <Term term="github-actions" />로 매일 다시 돌고, IC 드리프트 보고서는 매월
-                    재계산됩니다. 페이퍼 원장은 거래비용(bps)과 함께 추가 전용으로 유지됩니다.
+                    채점 체인은 <Term term="github-actions" />로 일정에 따라 다시 실행됩니다. AI 애널리스트는
+                    별도로 로컬 컴퓨터에서 실행됩니다.
                 </p>
             </Section>
         </>

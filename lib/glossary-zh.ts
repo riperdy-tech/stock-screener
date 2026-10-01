@@ -25,35 +25,35 @@ export const CATEGORY_LABELS_ZH: Record<GlossaryCategory, string> = {
     risk: '風險·波動',
     revisions: '財測修正因子',
     valuation: '估值·DCF',
-    ai: 'RS2 / AI',
+    ai: 'AI 分析師',
     portfolio: '投資組合·部位',
     track: '績效紀錄',
     data: '資料·流程',
     overlay: '覆蓋標記·財報鑑識',
-    bands: '等級·否決',
+    bands: '門·等級·否決',
 };
 
 export const GLOSSARY_ZH: Record<string, TermZh> = {
     // ── 核心概念 ──────────────────────────────────────────────────────
     composite: {
-        term: '綜合評分 (Composite score)',
-        plain: '為所有股票排名所用的單一 0–100 數字。',
+        term: '門百分位 (Door percentile / composite)',
+        plain: '用來為股票排名的 0–100 數字：它較強那道門的分數。',
         definition:
-            '把所有股票放上同一張排行榜的最終分數。它由五個因子（價值、品質、動能、低波動、財測修正）的評分合併而成，每個因子都在該股票所屬的類股內衡量，再換算為百分位（0–100），並對脆弱的財務結構或資料缺失套用三項「安全折價」。越高代表支持該股票的證據越多。',
-        related: ['factor', 'sector-neutral', 'percentile', 'haircut'],
+            '每檔股票在前兩道門各得一個分數，每個分數都會換算成百分位（0–100）。股票以兩者中較好的那個來競爭，冠軍股在排定順序時還會得到一點小加分。數字越高 = 至少在一道門上的論據越強。它是替候選名單排序的方式，不是目標價。',
+        related: ['door', 'champion', 'percentile'],
     },
     factor: {
         term: '因子 (Factor)',
-        plain: '一種可衡量、歷史上有助於預測報酬的股票特質。',
+        plain: '股票可衡量的特質，各道門就是用它們組成的。',
         definition:
-            '像「便宜」「獲利佳」「近期上漲」這類可量化的特質，學術研究顯示它們平均而言能預測未來報酬。本站評分五個因子：價值、品質、動能、低波動、財測修正。可以想成十項全能的各單項：每個都是獨立技能，綜合評分是它們的總和。',
-        related: ['composite', 'value', 'quality', 'momentum'],
+            '像獲利佳、便宜、分析師預測上調、近期表現強勢這類可量化的特質，研究顯示它們平均而言與未來報酬相關。本篩選衡量品質、價值、預期落差、動能與財測修正。這些因子不是平均加權：每道門以自己的權重，混合它所重視的因子。',
+        related: ['door', 'value', 'quality', 'momentum'],
     },
     'sector-neutral': {
         term: '類股中性 (Sector-neutral)',
-        plain: '每項評分都與該股票所屬產業的內部比較。',
+        plain: '評分是相對於該股票所屬產業群組來衡量。',
         definition:
-            '每檔股票只和同一類股中的其他公司比較——超市與超市競爭，不與軟體公司比較。若無此機制，「動能高」就只是「是科技股」的意思。在類股內衡量能確保公平，這正是五個因子按類股分別計算的原因。',
+            '每檔股票主要與同一類股的公司比較——超市與超市競爭，不與軟體公司比較。若無此機制，「便宜」就只是「是銀行股」的意思，「動能高」就只是「是科技股」的意思。品質、價值與財測修正都以這種方式衡量。動能是例外：它也會對照整個市場來解讀，因此帶動整個類股的榮景不會顯得平凡。',
         related: ['zscore', 'composite'],
     },
     zscore: {
@@ -74,29 +74,15 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: '百分位 (Percentile)',
         plain: '在全部受評股票中的位置（0–100）。',
         definition:
-            '把排名轉成 0–100 尺度：第 98 百分位代表該股分數高於約 6,600 檔股票中的 98%。等級（Band）直接由百分位切出（97+ = Research Now，90+ = Watchlist，70+ = Monitor）。',
-        related: ['composite', 'band'],
-    },
-    'rank-ic': {
-        term: 'Rank IC（排序資訊係數）',
-        plain: '每月衡量每個因子是否真的預測了報酬。',
-        definition:
-            '因子分數與之後股價報酬之間的排序相關（Information Coefficient）。每個因子每月測量一次作為診斷。引擎不會讓這些測量值主導權重（見「等權重」），只用來確認因子仍在正常運作並回報漂移。',
-        related: ['equal-weight', 'backtest', 'out-of-sample'],
-    },
-    'equal-weight': {
-        term: '等權重 (1/N)',
-        plain: '五個因子刻意各佔 20%。',
-        definition:
-            '每個因子對綜合評分貢獻相同的 20%。數十年的研究（DeMiguel、Garlappi & Uppal 2009）顯示，用歷史資料估算出的權重幾乎都會過擬合——在回測中找到的「完美」權重極少能在未來資料中存活。樸素謙遜的 1/N 是樣本外最難被打敗的方法之一。',
-        related: ['rank-ic', 'overfitting', 'out-of-sample'],
+            '把排名轉成 0–100 尺度：第 98 百分位代表該股分數高於 98% 的受評股票。每道門的分數都會換算成百分位，股票以前兩道門中較好的那個來競爭。',
+        related: ['composite', 'door'],
     },
     overfitting: {
         term: '過擬合 (Overfitting)',
         plain: '把規則調到太貼合過去資料，導致在新資料上失效。',
         definition:
-            '量化交易最典型的陷阱：把旋鈕一路調到回測看起來很棒，其實是在背誦過去，而非學習可持續的模式。本站正是因此刻意拒絕優化因子權重。「事後看起來會賺錢」的規則，若是在測試用的同一份資料上逆向工程出來的，就一文不值。',
-        related: ['out-of-sample', 'equal-weight', 'backtest'],
+            '典型的量化陷阱：把參數調到回測看起來漂亮，你就越是在背誦過去，而不是學到持久的規律。一條靠同一批資料反推出來的規則，即使「本來會」賺錢也毫無價值。這就是本站在看到結果之前，就先寫下通過／不通過規則的原因。',
+        related: ['out-of-sample', 'backtest'],
     },
     'out-of-sample': {
         term: '樣本外 (Out-of-sample)',
@@ -130,7 +116,7 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: '事後諸葛偏誤 (Hindsight bias)',
         plain: '明明事後才知道結果，卻假裝當時就知道。',
         definition:
-            '把決策重新描述成「好像當時就可預測」。紙上模擬系統消除了它：每一筆買賣都在未來發生前即時記錄，且記錄只能附加、無法編輯。',
+            '把一個決策重建成彷彿結果可以預測。紙上帳本就是防範這一點：每一筆買進與賣出都在當天、未來發生之前就被記錄下來。',
         related: ['point-in-time', 'paper-trading'],
     },
     'market-cap': {
@@ -146,7 +132,7 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: '價值因子',
         plain: '是用 $1 買 $2 的現金盈餘，還是用 $2 買 $1？',
         definition:
-            '衡量股價相對於企業實際產生之現金是否便宜。由四種收益率（自由現金流、業主盈餘、EBIT、單純盈餘）構成，都以目前市價為分母。長期平均而言，便宜優於昂貴——但「便宜」總是在同一類股內判斷。',
+            '衡量股價相對於企業實際產生之現金是否便宜，且一律在該股票所屬類股內判斷。由以現金為基礎的收益率構成：自由現金流、業主盈餘與 EBIT（銀行與保險業用盈餘），分別除以股價。它是價值落差門的原料之一。',
         related: ['fcf-yield', 'owner-earnings', 'enterprise-value'],
     },
     'fcf-yield': {
@@ -225,15 +211,15 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: 'Beneish M 分數',
         plain: '以統計偵測盈餘操縱可能性的模型。',
         definition:
-            '用應收帳款天數、資產品質等 8 項比率，衡量企業操縱盈餘的可能性。M 分數偏高是財報鑑識警報；若與高應計項目同時出現，該股會被直接否決。',
+            '用應收帳款天數、資產品質等 8 項比率，衡量企業操縱盈餘可能性的模型。M 分數偏高是財報鑑識警告。單獨出現時絕不會讓股票被剔除；較小的公司只有在它與高應計項目同時出現時才會被剔除。',
         related: ['forensic', 'accruals', 'veto'],
     },
     forensic: {
-        term: '財報鑑識旗標 (Forensic flags)',
-        plain: '針對可疑會計的黃牌與紅牌。',
+        term: '財報鑑識警告 (Forensic warnings)',
+        plain: '針對可疑會計或脆弱財務的黃牌與紅牌。',
         definition:
-            '來自財報鑑識資料庫（Beneish M、Sloan 應計項目、過度發行等）的警示燈。單一旗標會對分數套用 0.85 折價；特定旗標同時出現則為硬性否決。就像照片很美、但結構檢驗沒過的房子。',
-        related: ['beneish', 'accruals', 'haircut', 'veto'],
+            '來自會計檢驗的警示燈：Beneish M 分數（疑似操縱盈餘）、應計項目（獲利沒有現金支撐）、Altman Z（財務困境）與大量發行股票。對市值 100 億美元以上的公司，這些只是警告——絕不會剔除股票。對較小的公司，只有兩個紅旗同時出現時才會被剔除。就像照片很美、但結構檢驗沒過的房子。',
+        related: ['beneish', 'accruals', 'veto'],
     },
     roic: {
         term: 'ROIC（投入資本報酬率）',
@@ -255,8 +241,8 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: '動能因子',
         plain: '過去一年這檔股票是否一直贏？',
         definition:
-            '贏家往往會再贏一陣子。動能因子結合 12-1 跳月報酬（學術標準的 12 個月報酬、排除最近一個月）與 52 週高點接近度。是最經典、穩健的「趨勢」因子。',
-        related: ['skip-month', 'high-proximity'],
+            '贏家往往會再贏一陣子。動能結合 12-1 跳月報酬（學術標準的 12 個月報酬、略過最近一個月）與 52 週高點接近度。複利成長門使用它；價值落差門把它當作避免接落刀的底線；趨勢領頭門則以整個市場為範圍，單獨使用它。',
+        related: ['skip-month', 'high-proximity', 'door'],
     },
     'skip-month': {
         term: '12-1 跳月報酬',
@@ -281,26 +267,19 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
     },
 
     // ── 風險·低波動 ────────────────────────────────────────────────────
-    lowvol: {
-        term: '低波動因子',
-        plain: '波動平穩的股票，歷史上一單位痛苦換來更多報酬。',
-        definition:
-            '以月報酬的標準差（至少 12 個觀察值）衡量股價是平穩還是劇烈波動。反直覺的是，平穩股票歷史上的風險調整後報酬優於劇烈波動者。本站也因此輸出每檔的年度化波動供部位規模使用。',
-        related: ['volatility', 'annualized-volatility'],
-    },
     volatility: {
         term: '波動率 (σ)',
         plain: '價格波動的程度——股票的「狂野度」。',
         definition:
-            '報酬的標準差。高代表短期內大幅擺動，低代表平穩。希臘字母 σ 是它的符號。波動率是部位規模計算中的「風險」輸入。',
-        related: ['lowvol', 'annualized-volatility', 'kelly'],
+            '報酬的標準差。波動度高代表價格在短時間內大幅擺盪；波動度低代表走勢平穩。希臘字母 sigma（σ）是它的符號。',
+        related: ['annualized-volatility'],
     },
     'annualized-volatility': {
         term: '年度化波動率',
         plain: '月波動幅度換算成一年。',
         definition:
-            '月報酬波動率乘以 √12（12 個月的平方根），以一年為尺度表達。本站輸出每檔的這個數字，供建議投資組合中的凱利部位規模使用。',
-        related: ['volatility', 'kelly'],
+            '把月報酬波動度乘以 √12，換算成以年為單位的數字（月 σ × 12 個月的平方根）。',
+        related: ['volatility'],
     },
 
     // ── 財測修正因子 ───────────────────────────────────────────────────
@@ -308,7 +287,7 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: '財測修正因子',
         plain: '追蹤公司的分析師是在上調還是下修預測？',
         definition:
-            '衡量分析師預期的方向性。分析師上調盈餘預估時，股價往往續漲；下修時往往續跌。由標準化的 EPS 軌跡斜率與結構化的分析師評分構成。',
+            '衡量分析師預期變化的方向。分析師上調盈餘預估時，股價往往續漲；下修時往往續跌。它是複利成長門中最小的原料，而趨勢領頭股的預測不能在下滑。',
         related: ['eps', 'estimates', 'eps-trajectory'],
     },
     eps: {
@@ -329,7 +308,7 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: 'EPS 軌跡',
         plain: '盈餘預估路徑的方向與陡峭度。',
         definition:
-            'EPS 預估隨時間的斜率——在上揚、持穩還是下墜。財測修正因子把這個斜率標準化到 −1～+1，再與結構化分析師評分混合，讓「改善中」與「惡化中」變成可比較的數字。',
+            '分析師對未來盈餘預測隨時間的斜率——是在上揚、持平還是下滑？它讓「改善中」與「惡化中」變成可比較的數字。',
         related: ['revisions', 'eps'],
     },
 
@@ -356,38 +335,38 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         related: ['reverse-dcf', 'expectations-gap'],
     },
     'expectations-gap': {
-        term: '預期落差 (Expectations gap / DCF gap)',
+        term: '預期落差 (Expectations gap)',
         plain: '價格要求的成長率減去公司已證明的成長率。',
         definition:
-            '隱含成長率（來自反向 DCF）− 已證明成長率（最近 5 年 SEC 申報的實際營收/FCF 成長），以百分點計。綠色/負值 = 價格要求的成長低於公司已證明——潛在便宜貨。琥珀/正值 = 價格需要無人證明的加速——你必須相信一個故事。',
+            '隱含成長率（來自反向 DCF）減去已證明成長率（來自 SEC 申報、公司現金盈餘最近 5 年的實際成長），以百分點計。負值 = 價格要求的成長低於公司已證明——潛在便宜貨。正值 = 價格需要無人證明過的加速——你必須相信一個故事。它是價值落差門的原料之一。',
         related: ['implied-growth', 'reverse-dcf', 'demonstrated-growth'],
     },
     'demonstrated-growth': {
         term: '已證明成長率 (Demonstrated growth)',
         plain: '公司根據申報文件實際達成的成長。',
         definition:
-            '從 SEC 申報取得的最近 5 年實際營收與自由現金流成長。這是預期落差中用來與價格承諾比較的基準事實。',
+            '來自 SEC 申報、公司現金盈餘最近五年的實際成長（只有在取不到時才改用營收成長）。這是預期落差中用來與價格承諾比較的基準事實。',
         related: ['expectations-gap', 'sec-filings'],
     },
     'intrinsic-value': {
         term: '內在價值 (Intrinsic value)',
         plain: '獨立於股價、企業真正的價值。',
         definition:
-            '以未來現金創造能力為基礎的企業真實價值估計，DCF 產出的數字。RS2 AI 的內在價值錨定於分析師共識區間，並折現回目前價值，讓安全邊際衡量「今天」的便宜程度，而非 12 個月目標價。',
-        related: ['dcf', 'margin-of-safety', 'present-value'],
+            '以未來現金創造能力為基礎的企業真實價值估計——DCF 產出的數字。AI 分析師每次執行都會產出一個；判決是把今天的股價與這些數值的範圍（價值區間）比較，而不是與單一數字比較。',
+        related: ['dcf', 'margin-of-safety', 'iv-band'],
     },
     'margin-of-safety': {
         term: '安全邊際 (Margin of safety)',
-        plain: '你得到的折價：比內在價值低多少買進。',
+        plain: '你得到的折價：比估計價值低多少買進。',
         definition:
-            '價格低於估計內在價值的百分比。30% 的安全邊際表示用 70 分錢買 1 元價值的股票。RS2 用它（搭配信念度）作為 Research Now 名單的門檻：深度價值（MoS ≥ 30%）無論信念度皆入選；中度價值則需要信念度 ≥ 9.5。',
-        related: ['intrinsic-value', 'conviction'],
+            '價格比估計價值便宜多少，以百分比表示。30% 的安全邊際表示用 70 分錢買 1 元估計價值。看起來大得不合理的安全邊際本身就是警訊：閘門會擋下價值高出股價到不合理程度的判決。',
+        related: ['intrinsic-value', 'gate-reason'],
     },
     'cost-of-equity': {
         term: '股權成本 (Cost of equity)',
         plain: '股東要求的報酬——股權現金流的折現率。',
         definition:
-            '投資人為持有股票而非較安全資產所要求的最低年報酬。是 DCF 中折現未來股權現金流所用的比率。RS2 折現一年的股權成本，把內在價值拉回今天。',
+            '投資人為持有股票而非較安全資產所要求的最低年報酬。是 DCF 中折現未來股權現金流所用的比率。本篩選從總體引擎的資金成本錨取得（公用事業約 6.6%，晶片製造商高達 12.6%）；若該錨點缺漏或過期，會明確地改用 10%，並記錄這件事。',
         related: ['dcf', 'present-value'],
     },
     'present-value': {
@@ -405,184 +384,65 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         related: ['reverse-dcf', 'implied-growth'],
     },
 
-    // ── RS2 / AI ───────────────────────────────────────────────────────
+    // ── AI 分析師 ───────────────────────────────────────────────────────
     llm: {
         term: 'LLM（大型語言模型）',
-        plain: '閱讀申報文件並撰寫獨立判斷的 AI。',
+        plain: '替分析師做研究的那類 AI。',
         definition:
-            'RS2 系統以本機 AI（大型語言模型）閱讀每家公司的實際 SEC 申報文件，產出獨立的分析——就像取得第二位醫師的意見。其判斷建立了可透過 RS2 LLM 鏡頭檢視的平行排名。',
-        related: ['stance', 'conviction', 'action'],
-    },
-    stance: {
-        term: '立場 (Stance)',
-        plain: 'AI 的估值判斷：低估、合理、高估。',
-        definition:
-            'RS2 的總結性判斷：UNDERVALUED（價格相對於證據太低）、FAIR（合理）、OVERVALUED（價格已假設很多）。在排名中以彩色藥丸顯示。',
-        related: ['llm', 'margin-of-safety'],
-    },
-    conviction: {
-        term: '信念度 (Conviction)',
-        plain: 'AI 對自己判斷的信心，0–15。',
-        definition:
-            'RS2 對自身判斷的自評信心，從 0（猜測）到 15（非常有信心）。它在 AI Research Now 門檻中很重要：中度價值需要夠高的信念度才入選。',
-        related: ['llm', 'margin-of-safety'],
-    },
-    action: {
-        term: '動作 (Action)',
-        plain: 'AI 分析師會對該股採取的行動——意見，不是委託。',
-        definition:
-            'AI 建議的動作（買進/累積/持有/減碼/迴避…）。是研究用的意見、不是委託單——本站從不執行交易。強烈迴避或賣出在 AI 鏡頭下是否決。',
-        related: ['llm', 'exit-review'],
-    },
-    'exit-review': {
-        term: '出場檢視 (Exit review)',
-        plain: '對已跌出名單股票、給現有持有人的 AI 持有/減碼/賣出判斷。',
-        definition:
-            '當一檔股票跌出量化 Research Now 名單，RS2 會為已持有的人檢視：持有、減碼或賣出。以琥珀色「LLM EXIT」旗標顯示。是給現有持有人的決定，而非新的買進理由。',
-        related: ['llm', 'action', 'band'],
+            '大型語言模型是會閱讀與撰寫文字的 AI。分析師在本機電腦上執行一個，而不是雲端服務。它閱讀申報文件、做研究，並選定每一項估值輸入。它不做算術——所有計算都由 Python 程式碼完成——之後程式碼再拿外部錨點來檢查答案。',
+        related: ['iv-band', 'street-fence', 'actionable'],
     },
 
-    // ── 等級·否決 ──────────────────────────────────────────────────────
+    // ── 門·等級·否決 ──────────────────────────────────────────────────────
     band: {
         term: '等級 (Band)',
         plain: '把排名轉成實際行動的區間。',
         definition:
-            '把百分位切成四個實用區間：RESEARCH NOW（前 3%）、WATCHLIST（前 10%）、MONITOR（前 30%）、PASS（其餘）。等級告訴你今天這檔股票值不值得花時間研究。',
-        related: ['research-now', 'watchlist', 'percentile'],
+            '本篩選把每檔股票放進四個等級之一：RESEARCH NOW（候選名單的頂端）、WATCHLIST（候選名單的其餘部分）、PASS（有評分但不在候選名單）與 VETOED（被安全過濾器剔除）。等級來自股票的排名，而不是固定的百分比切線；已在候選名單上的股票，要明顯掉出才會被移除。',
+        related: ['research-now', 'watchlist', 'hysteresis'],
     },
     'research-now': {
         term: 'Research Now',
-        plain: '前 3%——今天值得你研究時間的候選名單。',
+        plain: '候選名單的頂端——今天值得你花研究時間。',
         definition:
-            '最高等級：受評股票的前 3%。在 AI 鏡頭中，RS2 Research Now 門檻還會加上安全邊際與信念度等額外條件，所以兩份名單可能不同。這是研究候選名單，絕不是買單。',
-        related: ['band', 'watchlist', 'margin-of-safety'],
+            '最高等級：依優先順序大約前 50 到 60 檔，包含少數趨勢領頭股。這是研究候選名單，絕不是買單。在研究台的 AI 一側，只有 AI 判決為低估且通過閘門時，名稱才會出現在 Research now 之下。',
+        related: ['band', 'watchlist', 'actionable'],
     },
     watchlist: {
         term: 'Watchlist（觀察清單）',
-        plain: '前 10%——證據強、值得關注。',
+        plain: '候選名單的其餘部分——證據強、值得關注。',
         definition:
-            '第二級（90–97 百分位）。證據強，略低於 Research Now 的門檻。這裡的股票值得留意，且常會被升級。',
+            '第二級：候選名單中位於 Research now 以下的部分（整份候選名單約 150 檔）。這裡的股票值得留意，且常會被升級。在研究台的 AI 一側，當 AI 判決為合理或高估且通過閘門時，名稱會出現在 Watchlist 之下。',
         related: ['band', 'research-now'],
-    },
-    monitor: {
-        term: 'Monitor（觀察）',
-        plain: '前 30%——合理但不突出的證據。',
-        definition:
-            '第三級（70–90 百分位）。分數合理但無特別之處。研究時間的優先度低。',
-        related: ['band'],
     },
     pass: {
         term: 'Pass（略過）',
-        plain: '未達前 30% 的其餘股票。',
+        plain: '有評分，但不在候選名單上。',
         definition:
-            '約 70% 未進前 30% 的股票獲得的預設等級。不是「爛公司」的意思，只是今天證據不足以爭取你的注意力。',
+            '有評分、但沒有拿到候選名單名額的股票的預設等級。不是「壞公司」的判決——只是證據不足以在今天贏得你的注意。',
         related: ['band'],
     },
     veto: {
         term: '否決 (Veto)',
-        plain: '無論分數多好都自動淘汰。',
+        plain: '無論看起來多好，都被安全過濾器剔除的股票。',
         definition:
-            '在評分前套用的硬性取消資格：不管綜合分數為何的紅牌。原因包括未通過逆向引擎的安全檢查、兩個財報鑑識警報同時響起（Beneish + 高應計）、過度發行股票稀釋股東，或（在 AI 鏡頭中）強烈迴避/賣出。原因寫在紅牌上。',
+            '硬性取消資格。被否決的股票沒有等級，也不會被分析。原因包括：股票無法交易（下市或停牌）、規模太小或成交太清淡、沒有可用的申報基本面、是空殼公司，或——僅限市值低於 100 億美元的公司——有長期營運虧損加上沉重債務，或兩個財報鑑識紅旗同時出現。較大的公司只會得到警告。原因會寫在紅色標籤上。',
         related: ['forensic', 'beneish', 'dilution'],
-    },
-    haircut: {
-        term: '安全折價 (Safety haircut)',
-        plain: '因脆弱或資料缺失，對分數套用的乘法折扣。',
-        definition:
-            '排名後套用到綜合分數的懲罰：存活度 = 0.7 + 0.3×(存活度/100)；資料品質 = min(1, 0.8 + 0.04×資料品質)；財報鑑識 = 若 Beneish 或應計警報僅單獨響起則 0.85。結果重新排名。折價降低分數，但不是否決。',
-        related: ['composite', 'veto', 'forensic'],
     },
 
     // ── 投資組合·部位 ──────────────────────────────────────────────────
-    kelly: {
-        term: '凱利準則 (Kelly criterion)',
-        plain: '在有優勢時，算出數學上「正確」的下注大小的公式。',
-        definition:
-            '經典的資金管理公式：下注比例與你的優勢除以變異數成正比（f = edge / variance）。本站使用四分之一凱利（其值 × 0.25）、上限 5%——刻意保守，因為在真實不確定性下，全額凱利太激進。',
-        related: ['edge', 'position-sizing', 'annualized-volatility'],
-    },
-    edge: {
-        term: '優勢 (Edge)',
-        plain: '你預期的優勢——在此指預期落差收斂。',
-        definition:
-            '在本系統中，優勢估計為預期落差約 3 年內收斂（市場重新評價被低估的股票）。只有定價低於已證明成長的股票才具可測量的優勢，這就是為何排名高但昂貴的股票會被以「無凱利優勢」略過。',
-        related: ['expectations-gap', 'kelly'],
-    },
     'position-sizing': {
         term: '部位規模 (Position sizing)',
         plain: '決定每檔股票投入多少資本。',
         definition:
-            '把候選名單變成投資組合的數學：四分之一凱利規模、單一部位上限 5%、財報鑑識旗標減半、地緣政治風險與內部人賣出時縮小，並受類股（25%）與主題（30%）上限約束。其餘留在現金。',
-        related: ['kelly', 'sector-cap', 'theme-cap'],
-    },
-    'sector-cap': {
-        term: '類股上限 (Sector cap)',
-        plain: '單一類股在投資組合中可佔比重的上限。',
-        definition:
-            '把單一類股限制在投資組合 25% 的風險規則，避免計畫變成變相的單一行業賭注。主題集中度同樣限制在 30%。',
-        related: ['position-sizing', 'theme-cap'],
-    },
-    'theme-cap': {
-        term: '主題上限 (Theme cap)',
-        plain: '單一熱門主題在投資組合中可佔比重的上限。',
-        definition:
-            '把單一主題限制在投資組合 30% 的風險規則。無論有多少股票評分很高，都避免計畫把籌碼全押在單一敘事（AI、生技等）上。',
-        related: ['position-sizing', 'sector-cap', 'theme'],
-    },
-    cash: {
-        term: '現金（計畫內）',
-        plain: '未投入的資本——是特色，不是缺陷。',
-        definition:
-            '建議計畫中未配置的部分。價值核心刻意維持約 50% 現金，因為它只買有可測量優勢的股票、拒絕為昂貴的股票買單。現金是保護：你不必事事都對，而且有子彈等待便宜貨出現。',
-        related: ['edge', 'kelly'],
-    },
-    'book-value': {
-        term: '帳面價值 (Book value)',
-        plain: '投資組合投入資本的會計價值。',
-        definition:
-            '計畫的成本基礎／資本基礎。上限與「資金外衣」（sleeve）的比重都以帳面價值的百分比表達（例如品質資金外衣上限約為帳面價值的 35%）。',
-        related: ['sleeve'],
-    },
-    sleeve: {
-        term: '品質資金外衣 (Quality sleeve)',
-        plain: '混合計畫中的額外區塊——無論估值一律買進頂尖名單。',
-        definition:
-            '混合（plan2）投資組合的一部分：在凱利價值核心之上，無論估值落差，買進排名最高的股票，上限約為帳面價值的 35%。這就是混合計畫持有價值核心拒絕的昂貴領頭股（TSM、GOOGL、MU）並動用閒置現金的方式。外衣列以粉紅色顯示。',
-        related: ['book-value', 'cash', 'plan'],
-    },
-    'macro-derisk': {
-        term: '總體去風險 (Macro de-risk)',
-        plain: '聯準會警示燈亮起時，所有部位規模自動減半。',
-        definition:
-            '監看以聯準會資料建構之總體旗標的規則。兩個以上旗標同時亮起時，所有建議部位規模自動減半，以降低對惡化總體環境的曝險。',
-        related: ['macro-flags', 'position-sizing'],
-    },
-    'macro-flags': {
-        term: '總體旗標 (Macro flags)',
-        plain: '來自聯準會資料的警示燈。',
-        definition:
-            '由 FRED（聯準會）資料衍生的訊號（如殖利率曲線、成長指標）。在投資組合頁顯示為「Macro flags: …」；2 個以上亮起時，總體去風險會讓所有規模減半。',
-        related: ['macro-derisk', 'fred'],
-    },
-    plan: {
-        term: 'Plan（價值核心）',
-        plain: '由 Research Now 名單建構的建議配置。',
-        definition:
-            '由 Research Now 名單機器建構的配置（不是你的投資組合）。價值核心使用四分之一凱利規模，只買定價低於已證明成長的股票，遵守類股/主題上限，並維持約 50% 現金。是決策支援，不執行交易。',
-        related: ['kelly', 'sleeve', 'cash'],
-    },
-    plan2: {
-        term: 'Plan2（混合）',
-        plain: '價值核心加上持有領頭股的品質資金外衣。',
-        definition:
-            '混合變體：同一個凱利價值核心，再加上無論估值落差都買進頂尖股票的品質資金外衣（上限約帳面價值 35%），因此能持有價值核心拒絕的昂貴領頭股，並動用更多閒置現金（約 78% 投入）。取捨：領頭股曝險更多、價值紀律較弱，在衰退中回檔更深。',
-        related: ['sleeve', 'plan', 'drawdown'],
+            '把候選名單變成投資組合的數學。本站不提供投資組合計畫。它提供的是 AI 判決上的部位大小提示——四分之一、一半或全額——依價值區間的寬窄決定：各次執行的分歧越大，建議的部位就越小。',
+        related: ['iv-band', 'position-basis'],
     },
     'paper-trading': {
         term: '紙上交易 (Paper trading)',
         plain: '沒有真錢、但有真規則的交易——記錄卻是真實的。',
         definition:
-            '系統每天以真實價格與真實交易成本模擬買賣自己的選股，且記錄只能附加、無法編輯。這是誠實的量尺：若機器錯了，績效紀錄頁會公開地、永久地承認。',
+            '系統每天以真實價格與真實交易成本，模擬買賣自己的選股並保存紀錄。這是誠實的量尺：若系統錯了，績效紀錄頁會說出來。',
         related: ['transaction-costs', 'out-of-sample', 'track-record'],
     },
     unitization: {
@@ -594,10 +454,10 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
     },
     'behavior-gap': {
         term: '行為落差 (Behavior gap)',
-        plain: '因為偏離計畫而損失的報酬。',
+        plain: '因偏離系統而損失的報酬。',
         definition:
-            '紀律良好的模型賺的報酬與你實際賺的報酬之間的差距，源自你自己的決定——太早賣、追高、忽略出場。在績效紀錄中，「mine 落後 plan」就是行為落差，以真金白銀公開衡量。',
-        related: ['track-record', 'mine', 'plan'],
+            '紀律化系統的所得與你實際所得之間的差距，由你自己的決策造成——太早賣出、追高、無視出場。在績效紀錄中，Mine 帳本落後 Equal-weight 帳本的部分就是行為落差，公開地被衡量。',
+        related: ['track-record', 'unitization'],
     },
     'transaction-costs': {
         term: '交易成本 (bps)',
@@ -624,8 +484,8 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: '回檔 (Drawdown)',
         plain: '投資組合從高點回落多少。',
         definition:
-            '從投資組合歷史高點到其後最低點的下滑百分比。30% 回檔代表最差時點從高點跌了 30%。這是風險的「痛苦」面；混合計畫（plan2）在衰退中往往回檔更深。',
-        related: ['plan2', 'volatility', 'sharpe-ratio'],
+            '投資組合從歷史高點到其後最低點的跌幅，以百分比表示。30% 的回撤代表投資組合在最糟的時點損失了高點價值的 30%。這是風險方程式中「痛苦」的那一面。',
+        related: ['volatility', 'sharpe-ratio'],
     },
     alpha: {
         term: 'Alpha／超額報酬',
@@ -657,9 +517,9 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
     },
     'track-record': {
         term: '績效紀錄 (Track Record)',
-        plain: '系統自身紙上交易誠實且不可編輯的成績單。',
+        plain: '系統自身紙上帳本的成績單。',
         definition:
-            '以真實價格與交易成本每日紙上交易四個投資組合（plan、plan2、equal、mine）並以附加式記錄的頁籤。與其討好人的回測，它是機器實際所做（包括錯誤）的永久公開紀錄。',
+            '以真實價格與交易成本，每天紙上交易三個帳本的頁籤：Equal-weight、AI 帳本與 Mine。與其討好人的回測，它是系統實際所做之事的紀錄——包括它的錯誤。',
         related: ['paper-trading', 'behavior-gap', 'alpha'],
     },
 
@@ -703,28 +563,28 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: 'FRED',
         plain: '聯準會的公開經濟資料服務。',
         definition:
-            '聖路易斯聯準銀行的免費美國經濟序列資料庫，供應觸發去風險之總體旗標背後的總體序列。',
-        related: ['macro-flags', 'macro-derisk'],
+            '聖路易斯聯準銀行的免費美國經濟序列資料庫。它是總體引擎之機率與衝擊警報所用數字的唯一來源。新聞只作為脈絡，絕不轉成數字。',
+        related: ['probability-vector', 'shock-register'],
     },
     'github-actions': {
         term: 'GitHub Actions',
-        plain: '每天重新執行整個流程的雲端自動化。',
+        plain: '依排程重新執行資料流程的雲端自動化。',
         definition:
-            '依排程自動執行資料擷取、評分鏈與紙上交易帳本的 CI/CD 服務，也會在你請求時觸發 AI 分析作業。整個流程每天重跑，IC 漂移報告每月重算。',
+            '依排程自動執行資料擷取、評分鏈與紙上帳本的 CI/CD 服務。AI 分析師則另外在本機電腦上執行。',
         related: ['pipeline'],
     },
     pipeline: {
         term: '流程 (Pipeline)',
-        plain: '把原始資料變成排名表的命令鏈。',
+        plain: '從原始資料到已評分紀錄的有序步驟鏈。',
         definition:
-            '端到端過程：擷取財務與股價 → 建立財務歷史 → 逆向引擎 → 因子評分 → 投資組合計畫 → 前瞻結果衡量。編排器強制執行順序與資料完整性檢查，讓過時或殘缺資料永遠無法悄悄污染排名。',
+            '端到端過程：擷取申報文件、股價與總體資料 → 安全過濾器 → 三道門篩選 → 等級 → AI 分析師（執行時）→ 閘門 → 發布到網站 → 紙上帳本 → 評分。評分部分依固定順序並附帶完整性檢查執行，讓過時或殘缺的資料無法悄悄污染候選名單。',
         related: ['github-actions', 'reverse-engine'],
     },
     'reverse-engine': {
         term: '逆向引擎 (Reverse engine)',
-        plain: '因子實驗室所立足的第一道安全與品質引擎。',
+        plain: '較早期的安全與品質篩選，其分數會供給各道門。',
         definition:
-            '對每檔股票分類其原型（A–F）、評分存活度與資料品質、計算財報鑑識旗標的評分階段，也會提名候選股，並與反向 DCF 模型共同產出因子實驗室所需的安全輸入與已證明成長率。',
+            '分類每家企業的類型（原型）、評分公司撐過衰退的能力與資料的可靠度，並產生反向 DCF 數字的評分階段。它的品質與存活度分數是作為輸入進入篩選，而不是作為閘門。',
         related: ['pipeline', 'reverse-dcf', 'forensic'],
     },
 
@@ -733,8 +593,8 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: 'GPR（地緣政治曝險）',
         plain: '0–3 的地緣政治曝險標記。',
         definition:
-            '依公司實際業務輪廓（營收地域、供應鏈、監管、制裁）標記的地緣政治風險。絕不是買賣訊號：而是第 3 級時縮小建議部位、要求更大的安全邊際。',
-        related: ['overlay', 'position-sizing'],
+            '依公司實際業務輪廓（營收地域、供應鏈、監管、制裁）標記的地緣政治風險。顯示為脈絡標籤。絕不是買賣訊號，也絕不屬於候選名單排名的一部分。',
+        related: ['overlay'],
     },
     insiders: {
         term: '內部人買賣',
@@ -761,7 +621,7 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: '股本稀釋·發行',
         plain: '公司印新股票，稀釋你持有的每一股。',
         definition:
-            '公司發行新股時，每一股佔的餅就越小。過度發行是財報鑑識旗標，也可能是硬性否決（除非該原型以發行為預期的融資方式，如銀行與部分金融股）。',
+            '公司發行新股時，每一股代表的餅就更小。大量發行會顯示為財報鑑識警告。',
         related: ['forensic', 'veto'],
     },
     float: {
@@ -773,17 +633,17 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
     },
     overlay: {
         term: '覆蓋標記 (Overlay)',
-        plain: '疊在分數之上的額外脈絡標籤。',
+        plain: '疊在排名之上的額外脈絡標籤。',
         definition:
-            'GPR（地緣政治曝險）與 ▲/▼ INSIDERS（知情需求）等非計分訊號。它們絕不加入綜合分數——只會縮小部位、要求更大安全邊際，或質疑你的論點。',
+            '以標籤顯示的非計分訊號：GPR（地緣政治曝險）與 ▲/▼ INSIDERS（知情需求）。它們絕不改變排名——只是供你自己思考的脈絡。',
         related: ['gpr', 'informed-demand'],
     },
     theme: {
         term: '主題 (Theme)',
         plain: '熱門類別（AI、生技…）——是脈絡，不是計分因子。',
         definition:
-            '股票所屬的市場敘事（如 AI、半導體、生技）。主題歸屬僅供定向與過熱（crowding）警告之用，絕不加入分數——因為單純追逐主題在歷史上摧毀價值（專業主題 ETF 平均每年 −3.1%）。',
-        related: ['theme-cap', 'composite'],
+            '股票所屬的市場敘事（如 AI、半導體、生技）。主題歸屬僅供定向之用，絕不加入分數——因為單純追逐主題在歷史上摧毀價值（專業主題 ETF 平均每年 −3.1%）。',
+        related: ['overlay'],
     },
 
     // ── 常見用語 ────────────────────────────────────────────────────────
@@ -800,5 +660,104 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         definition:
             '對一檔股票發布預估的賣方分析師數量。覆蓋越多，財測修正因子可讀的上修下修就越多；覆蓋稀少則訊號較少。覆蓋資料來自 Yahoo Finance。',
         related: ['estimates', 'revisions', 'yahoo-finance'],
+    },
+    // ── 新系統詞彙 ──────────────────────────────────────────────────
+    'iv-band': {
+        term: '價值區間 (IV band)',
+        plain: '分析師各次執行所得出的價值範圍。',
+        definition:
+            '每檔股票都經過 2–3 次獨立執行，每次執行都以一個對企業價值的估計作結。價值區間是這些估計從最低到最高的範圍；中位數是中間那一個。判決就是今天的股價相對於區間的位置：低於區間 = 低估，在區間內 = 合理，高於區間 = 高估。在研究台上，有色帶是範圍，刻度是中位數，白線是股價。區間較寬代表各次執行意見分歧，這會讓建議部位變小。',
+        related: ['intrinsic-value', 'actionable', 'position-sizing'],
+    },
+    'not-usable': {
+        term: '無法使用 (Not usable)',
+        plain: '分析師沒有產出可用判決的一列。',
+        definition:
+            '當判決步驟發生故障，該列會被標為無法使用，而不是被硬塞一個猜測。它沒有方向、絕不會被當作選股顯示，並位於研究台 AI 一側的「被否決」之下。',
+        related: ['actionable', 'iv-band'],
+    },
+    actionable: {
+        term: '可執行 (Actionable)',
+        plain: '通過閘門所有規則的判決。',
+        definition:
+            '每個 AI 判決都帶有一個稱為 actionable（可執行）的是／否旗標，答案為否時還會附上原因清單。只有可執行的判決才能出現在 AI 一側的 Research now 或 Watchlist 之下，或被 AI 紙上帳本跟隨。不可執行的判決不會被刪除：它仍然可見，並標示為被擋下。',
+        related: ['gate-reason', 'street-fence', 'rn-depth'],
+    },
+    'gate-reason': {
+        term: '閘門原因 (Gate reason)',
+        plain: '用白話寫出判決被擋下的原因。',
+        definition:
+            '當判決被擋下，研究台會說明原因——例如「由舊分析師做出」或「各次執行分歧太大」。一個判決可以有不只一個原因。完整清單在本手冊的閘門章節。',
+        related: ['actionable', 'street-fence'],
+    },
+    'street-fence': {
+        term: '華爾街圍欄 (Street fence)',
+        plain: '分析師的目標價區間，用作外部檢查。',
+        definition:
+            '華爾街（the Street）指追蹤一家公司的專業分析師。華爾街圍欄就是他們目標價的範圍。程式碼拿 AI 分析師的答案來對照：落在圍欄外的價值會被擋下；沒有圍欄可供核對的判決會被擋下；價值高出股價到不合理程度的判決也會被擋下。這是對分析師自身工作的外部檢查。',
+        related: ['actionable', 'gate-reason', 'estimates'],
+    },
+    'thesis-status': {
+        term: '論點狀態 (Thesis status)',
+        plain: '判決背後的理由是否仍然成立。',
+        definition:
+            '新分析師的每個判決都會寫明自己的失效規則——一旦發生就代表論點已破裂的事。監控程式會拿目前資料重新檢查這些規則。完好（intact）= 規則已檢查且沒有任何一條觸發；破裂（breached）= 至少一條觸發；未知（unknown）= 沒有任何一條能被檢查。論點破裂時會被標記。這隨分析師重新上線而到來。',
+        related: ['actionable', 'position-basis'],
+    },
+    'position-basis': {
+        term: '部位依據 (Position basis)',
+        plain: '持有一檔股票是為了它的價值，還是它的動能。',
+        definition:
+            '判決可以帶有一個依據。價值依據（Value basis）：論據建立在價格低於價值區間。動能依據（Momentum basis）：分析師的價值低於股價，但該股處於有基本面支持的強勁上升趨勢，因此可以——以一半或四分之一的部位——持有而不是賣出。無（None）：不建議任何部位。這隨分析師重新上線而到來。',
+        related: ['position-sizing', 'thesis-status'],
+    },
+    door: {
+        term: '門 (Door)',
+        plain: '股票進入候選名單的三條途徑之一。',
+        definition:
+            '本篩選不會把一切混成單一分數。一家公司可以因為出色、因為被錯誤定價，或因為處於強勁而穩定的上升趨勢而贏得注意——所以有三道門。第 1 道門（複利成長門）獎勵品質、動能與上調的分析師預測。第 2 道門（價值落差門）獎勵便宜，以及價格要求的成長低於公司已交出成績的情況。第 3 道門（趨勢領頭門）為強勁而穩定的上升趨勢增加最多 20 個額外名額。股票只需通過一道門。',
+        related: ['champion', 'sector-quota', 'hysteresis'],
+    },
+    champion: {
+        term: '冠軍股 (Champion)',
+        plain: '在前兩道門都名列前茅的股票。',
+        definition:
+            '在複利成長門與價值落差門都位居前 10% 的股票。既出色又便宜很罕見，所以冠軍股在排定候選名單順序時會得到小加分（+2）。急劇下跌中的股票不能成為冠軍股。',
+        related: ['door', 'composite'],
+    },
+    hysteresis: {
+        term: '遲滯效應（黏性名單）(Hysteresis)',
+        plain: '已在候選名單上的股票，要明顯掉出才會被移除。',
+        definition:
+            '沒有緩衝的話，剛好卡在切線上的股票會隨著每次小幅價格波動進進出出候選名單。所以已在 Research now 的股票，只要排名在 60 名以內就會留在那裡；已在候選名單上的股票，只要排名在 150 名以內就會留在名單上。只有明顯下滑才會被移除。候選名單變動較少，因此更容易追蹤。',
+        related: ['band', 'research-now', 'watchlist'],
+    },
+    'sector-quota': {
+        term: '類股配額 (Sector quota)',
+        plain: '每個類股能分到幾個候選名單名額。',
+        definition:
+            '候選名單分散在各類股之間，避免單一產業排擠其他產業。每個類股都得到相同的基本配額。總體引擎原則上可以把更多名額給適合當前經濟的類股——也就是「傾斜」——但它的選類股能力尚未證明自己，所以傾斜被關閉，每個類股都得到相同配額，直到它證明自己為止。',
+        related: ['door', 'probability-vector'],
+    },
+    'rn-depth': {
+        term: 'AI 帳本 (rn_depth)',
+        plain: '跟隨 AI 分析師通過閘門之判決的紙上帳本。',
+        definition:
+            '三個紙上帳本之一。它等額持有每一檔 AI 判決為低估且通過閘門的候選名單股票。當沒有任何判決通過時，它只持有現金——自 2026-09-24 以來就是這樣。它至今的歷史來自被裁定無效的舊分析師，所以新分析師上線時，AI 紀錄會從零重新開始，舊歷史則歸檔。',
+        related: ['actionable', 'track-record', 'paper-trading'],
+    },
+    'probability-vector': {
+        term: '機率向量 (Probability vector)',
+        plain: '每個經濟「季節」各一個機率，加總為 100%。',
+        definition:
+            '總體引擎不只是說出當前的經濟季節。它為五個季節各發布一個機率：金髮女孩、再通膨、緊縮、停滯性通膨與衰退。這些機率是主要產出。單一的季節標籤只是摘要，不驅動任何數字。',
+        related: ['shock-register', 'fred', 'sector-quota'],
+    },
+    'shock-register': {
+        term: '衝擊警報表 (Shock register)',
+        plain: '監看突發經濟壓力的七個警報。',
+        definition:
+            '七個警報：恐慌（市場波動）、信用、利率、油價、美元、就業與通膨。每一個都只從 FRED 資料讀取。它們旁邊還有一個動盪風險旗標，當恐慌指數（VIX）達到 30 或更高時就會亮起。',
+        related: ['probability-vector', 'fred'],
     },
 };

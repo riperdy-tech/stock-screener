@@ -9,10 +9,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import Link from 'next/link';
-import { BookMarked, FlaskConical } from 'lucide-react';
+import { BookMarked, BookOpen, FlaskConical } from 'lucide-react';
 import { Term } from '@/components/GlossaryTerm';
 import { Section, SubHeading, Callout } from './help-ui';
-import { PipelineDiagram, AiAnalysisFlow } from './WorkflowDiagram';
+import { PipelineDiagram } from './WorkflowDiagram';
 
 export function ChineseHelpBody() {
     return (
@@ -20,18 +20,24 @@ export function ChineseHelpBody() {
             {/* 歡迎 */}
             <Section id="welcome" title="歡迎 — 這個網站是什麼（以及不是什麼）" icon={<FlaskConical className="h-5 w-5" />}>
                 <p>
-                    每天，一台電腦讀取大約 <b>6,600 檔美國股票</b>的財務報告與股價歷史，並在單一排行榜上為它們排名。
-                    排行榜頂端 = 支持該股票的證據最多。就是這樣。本手冊說明這些證據是如何組成的、畫面上每個數字與
-                    旗標的意義，以及這個系統刻意 <i>不做</i> 的事。
+                    每天，一台電腦讀取大約 <b>7,000 檔美國上市股票</b>的財務報告與股價歷史，並把它們縮小到約{' '}
+                    <b>150</b> 檔的候選名單。另有一位 AI 分析師可以深入研究候選名單上的股票，並說出每檔股票的價格
+                    看起來太低、差不多，還是太高。本手冊說明每個步驟如何運作、畫面上每個標籤的意義，以及這個系統刻意{' '}
+                    <i>不做</i> 的事。
                 </p>
                 <Callout kind="warn">
-                    <b>這裡不會買賣任何東西，這裡也不是投資建議。</b>這是一份攤開證據的研究候選名單——一台把 6,600 檔
-                    股票縮小到值得你花 <i>研究時間</i> 的名單的機器。即使是紙上投資組合也不會真的執行交易（它們誠實地，
-                    以真實價格與真實成本模擬）。
+                    <b>這裡不會買賣任何東西，這裡也不是投資建議。</b>這是一份攤開證據的研究候選名單——一台把數千檔
+                    股票縮小到值得 <i>你</i> 花研究時間的少數幾檔的機器。本站不下任何交易單。即使是紙上帳本也是誠實地
+                    以真實價格與真實成本模擬。
+                </Callout>
+                <Callout kind="info">
+                    <b>目前狀況：</b>AI 分析師正在重建與測試。在新分析師通過測試並上線之前，研究台的 AI 一側不會顯示
+                    新的選股。舊分析師的判決仍保留在紀錄中，並顯示為被擋下，而不是選股。請見{' '}
+                    <Link href="#analyst" className="font-bold text-pos hover:underline">AI 分析師</Link>。
                 </Callout>
                 <p>
                     帶有 <span className="border-b border-dotted border-pos/40 font-semibold text-pos">點狀底線</span>的
-                    字是技術詞彙。點擊即可不離開頁面看到解釋。所有詞彙的可搜尋索引在{' '}
+                    字是技術詞彙。點擊即可不離開頁面看到解釋。所有詞彙的完整、可搜尋索引在{' '}
                     <Link href="#glossary" className="font-bold text-pos hover:underline">詞彙表</Link>區段。
                 </p>
             </Section>
@@ -39,389 +45,398 @@ export function ChineseHelpBody() {
             {/* 流程 */}
             <Section id="pipeline" title="每天發生什麼事 — 流程" icon={<BookMarked className="h-5 w-5" />}>
                 <p>
-                    畫面背後是一連串的作業鏈，透過 <Term term="github-actions" /> 每天自動重新執行。編排器強制執行
-                    順序並檢查資料完整性，讓過時或殘缺的資料永遠無法悄悄污染你的排名。
+                    畫面背後是一連串有順序的作業鏈，依排程透過 <Term term="github-actions" /> 自動重新執行。順序是
+                    強制的，每一步都會檢查資料，讓過時或殘缺的資料無法悄悄污染候選名單。用白話來說：
                 </p>
+                <ol className="list-decimal space-y-2 pl-5">
+                    <li>
+                        <b>資料進來。</b>來自 SEC 的公司申報文件、來自 Yahoo Finance 的股價與分析師預測，以及來自{' '}
+                        <Term term="fred" />（聯準會的資料服務）的經濟序列。
+                    </li>
+                    <li>
+                        <b>安全過濾器（「Tier-1 hygiene」）。</b>沒人能合理買進的股票會被剔除：無法交易的股票、規模
+                        很小（低於 3 億美元）或股價低於 3 美元的公司、成交清淡的股票、空殼公司、沒有可用申報基本面的
+                        公司、長期虧損又負債沉重的公司，以及有強烈會計操縱跡象的較小公司。剩下約 3,000 檔股票等待評分。
+                    </li>
+                    <li>
+                        <b>雙門篩選。</b>每檔剩下的股票都以三道<Term term="door" />——複利成長、價值落差與趨勢領頭——
+                        評分，最好的案例進入候選名單。
+                    </li>
+                    <li>
+                        <b>等級。</b>候選名單被分成 Research now 與 Watchlist。其餘是 Pass；若被安全過濾器剔除，則是
+                        Vetoed。
+                    </li>
+                    <li>
+                        <b>AI 分析師（執行時）。</b>它深入研究候選名單上的股票，並給每一檔一個判決。它在本機電腦上
+                        執行，不在雲端。
+                    </li>
+                    <li>
+                        <b>閘門。</b>判決必須通過閘門的規則才算數。沒通過的判決仍然可見，標示為被擋下並附上原因。
+                    </li>
+                    <li><b>發布。</b>判決與報告發布到本站。</li>
+                    <li>
+                        <b>紙上帳本。</b>三個模擬投資組合每天跟隨候選名單、AI 判決與你自己的持股。
+                    </li>
+                    <li>
+                        <b>評分。</b>每個判決之後都會拿股價實際的表現來檢查。
+                    </li>
+                </ol>
                 <PipelineDiagram />
-                <AiAnalysisFlow />
                 <p>
                     一切皆 <Term term="point-in-time" />：每個記錄的訊號只用當下確實存在的資訊。這個紀律正是績效紀錄
                     可信的原因。
                 </p>
             </Section>
 
-            {/* 排行榜 */}
-            <Section id="leaderboard" title="如何閱讀排行榜 — Rankings 分頁" icon={<BookMarked className="h-5 w-5" />}>
+            {/* 研究台 */}
+            <Section id="desk" title="如何閱讀研究台 — 三種鏡頭" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    Rankings 分頁是一張以單一數字——<Term term="composite" />——為整個宇宙排名的表格。各欄的意義如下。
+                    研究台是主頁面。最上方有一個開關，決定你看到誰的觀點：
                 </p>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b>Rank（排名）</b> — 今天在約 6,600 檔受評美股排行榜上的位置。#1 現在擁有最強的整體證據。</li>
                     <li>
-                        <b>Composite（綜合評分）</b> — 用來為一切排名的數字（0–100）。它合併五個因子評分，每個都在
-                        股票自己的 <Term term="sector-neutral" /> 比較組內衡量，再套用安全 <Term term="haircut" />。越高
-                        代表支持該股的證據越多。
+                        <b>AI</b> — AI 分析師的判決，分入下列區段。
                     </li>
-                    <li><b>Factor mix（因子構成）</b> — 是什麼在推動這檔股票的分數。貢獻長條顯示各因子佔比：綠=價值、藍=品質、琥珀=動能、紫=低波動、粉=財測修正。越長代表貢獻越大。</li>
                     <li>
-                        <b>Band（等級）</b> — 排名在實務上的意義（<Term term="research-now" />、<Term term="watchlist" />、
-                        <Term term="monitor" />、<Term term="pass" />）。紅牌代表股票被 <Term term="veto" />——原因寫在牌上。
+                        <b>Quant</b> — 篩選本身的排名：對財務報表與價格的純數學，不涉及 AI。
                     </li>
-                    <li><b>Market cap（市值）</b> — <Term term="market-cap" />。整家公司的價格（股價 × 股數）。</li>
-                    <li><b>RS2 排名 / 立場 / 信念度 / 動作</b> — 獨立的 AI 判斷。見 <Link href="#rs2" className="font-bold text-pos hover:underline">RS2 區段</Link>。</li>
-                    <li><b>Δ pctl</b> — 量化引擎與 AI 相差多少個百分位點。落差大的列最有趣：其中一方錯了。</li>
-                    <li><b>DCF gap</b> — <Term term="expectations-gap" />。價格要求的成長 vs 公司實際達成的成長。見 <Link href="#dcf" className="font-bold text-pos hover:underline">DCF 區段</Link>。</li>
+                    <li>
+                        <b>Compare</b> — 兩者並排，讓你看到它們在哪裡分歧。當它們強烈分歧時，其中一個可能是錯的，
+                        這些列就是有趣的列。
+                    </li>
                 </ul>
-                <Callout kind="info">
-                    點擊任何一列可看個股詳情：完整因子輪廓、反向 DCF 解讀（價格隱含的成長 vs 公司已證明的成長），以及
-                    RS2 本機 LLM 的研究與判斷。
-                </Callout>
+                <SubHeading>AI 鏡頭的區段</SubHeading>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>
+                        <b>Research now</b> — 判決為<i>低估</i>且未被擋下的股票（見{' '}
+                        <Link href="#gate" className="font-bold text-pos hover:underline">閘門</Link>）。
+                    </li>
+                    <li>
+                        <b>Watchlist</b> — 判決為<i>合理</i>或<i>高估</i>且未被擋下的股票。
+                    </li>
+                    <li>
+                        <b>被閘門擋下（Blocked by the gate）</b> — 紀錄中未通過規則的判決。它們連同原因一起作為紀錄
+                        顯示，絕不會被顯示為選股。
+                    </li>
+                    <li>
+                        <b>等待中（Awaiting）</b> — 分析師尚未研究的候選名單股票。
+                    </li>
+                    <li>
+                        <b>被否決（Vetoed）</b> — 被安全過濾器剔除的股票，以及分析師沒有產出可用判決的列（
+                        <Term term="not-usable" />）。
+                    </li>
+                </ul>
+                <SubHeading>價值區間條</SubHeading>
+                <p>
+                    在判決旁邊你會看到一條細條。<b>有色帶</b>是分析師各次執行所得出的價值範圍，<b>刻度</b>是中位數
+                    （中間那個值），<b>白線</b>是今天的股價。如果白線在色帶左邊，股價低於每一次執行的價值；在色帶
+                    內，就在範圍之內；在右邊，則高於每一次執行。這就是判決的全部。請見 <Term term="iv-band" />。
+                </p>
             </Section>
 
-            {/* 因子 */}
-            <Section id="factors" title="五個因子 — 分數的原料" icon={<BookMarked className="h-5 w-5" />}>
+            {/* 篩選 */}
+            <Section id="screen" title="量化篩選 — 三道門" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    每檔股票以五種在歷史上預測過報酬的特質評分。關鍵是，每項評分都是 <Term term="sector-neutral" /> 的——
-                    超市與超市競爭，不與軟體公司比較。否則「動能高」就只是「是科技股」。
+                    篩選不會把一切混成單一分數。一家公司可以因為出色、因為被錯誤定價，或因為處於強勁而穩定的上升
+                    趨勢而值得注意——把這些平均成一個數字，哪一種都描述不好。所以有三道<Term term="door" />。
+                    股票只需通過一道。
                 </p>
                 <div className="space-y-3">
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-value" /><span className="text-pos">價值 (Value)</span></p>
+                        <p className="text-sm font-extrabold text-pos">第 1 道門 — 複利成長</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
-                            是用 $1 買 $2 的年度現金盈餘，還是用 $2 買 $1？長期平均而言，便宜勝過昂貴。以四種收益率——
-                            <Term term="fcf-yield" />、<Term term="owner-earnings" />、<Term term="ebit" />、<Term term="earnings-yield" />——的
-                            平均衡量。見 <Link href="#methodology" className="font-bold text-pos hover:underline">方法論</Link>。
+                            真正賺錢、持續成長、股價上漲、預測被上調的公司。它混合<Term term="quality" />、
+                            <Term term="momentum" />與<Term term="revisions" />，其中品質的比重最大。
                         </p>
                     </div>
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-quality" /><span className="text-accent">品質 (Quality)</span></p>
+                        <p className="text-sm font-extrabold text-accent">第 2 道門 — 價值落差</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
-                            公司是否持續真正賺錢、帳目乾淨？結合 <Term term="revenue-quality" />、數年來 <Term term="gross-margin" />
-                            的穩定性、<Term term="accruals" />（偏好有現金支撐的盈餘）、<Term term="piotroski" /> 與 <Term term="roic" />。
-                            帳目乾淨、真正獲利的生意勝過故事。
+                            相對於自己已證明的成長而顯得便宜的公司：價格要求的成長低於公司實際交出的成績（
+                            <Term term="expectations-gap" />），而且這檔股票在<Term term="value" />上便宜。
+                            <b>下殺刀鋒底線</b>會把急劇下跌的股票擋在外面，因為便宜卻還在下跌，還算不上便宜貨。
                         </p>
                     </div>
                     <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-momentum" /><span className="text-warn">動能 (Momentum)</span></p>
+                        <p className="text-sm font-extrabold text-warn">第 3 道門 — 趨勢領頭股</p>
                         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
-                            過去一年這檔股票是否一直在贏？贏家往往再贏一陣子。由 <Term term="skip-month" />（學術標準的
-                            12 個月報酬、排除最近一個月）與 <Term term="high-proximity" /> 構成。為何排除最近一個月見{' '}
-                            <Term term="reversal" />。
-                        </p>
-                    </div>
-                    <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-lowvol" /><span className="text-ink-2">低波動 (Low volatility)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
-                            價格平穩還是劇烈波動？平穩股票歷史上一單位痛苦換來更多報酬。以月報酬標準差（至少 12 個觀察值）
-                            的負值衡量。<Term term="annualized-volatility" /> 也會輸出供 <Term term="kelly" /> 部位規模使用。
-                        </p>
-                    </div>
-                    <div className="border border-rule-10 bg-white/5 p-3">
-                        <p className="flex items-center gap-2 text-sm font-extrabold"><span className="h-2.5 w-2.5 bg-factor-revisions" /><span className="text-neg">財測修正 (Revisions)</span></p>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-ink-q">
-                            追蹤公司的分析師是在上調還是下修預測？方向很重要。由標準化的 <Term term="eps-trajectory" /> 斜率
-                            與結構化 <Term term="estimates" /> 評分構成。
+                            前兩道門會漏掉的強勁而穩定的上升趨勢——例如整個類股的榮景。最多 20 個額外名額，每個產業
+                            群組最多 5 個。候選股必須有獲利、規模合理，分析師預測不能在下滑，而且必須是穩定地攀升，
+                            而不是靠某一個幸運的月份。
                         </p>
                     </div>
                 </div>
-                <SubHeading>為什麼每個原料都同等重要</SubHeading>
+                <SubHeading>各道門如何競爭</SubHeading>
                 <p>
-                    想像在評判 <Term term="factor" /> 十項全能：你可以試著猜哪個單項最重要，但數十年的研究顯示這種猜測會
-                    反噬——在過去資料中找到的「完美」權重極少能在未來資料中存活。所以五個原料完全等權重（<Term term="equal-weight" />）。
-                    無聊、謙遜，但更有效。本站仍以 <Term term="rank-ic" /> 每月衡量每個因子的預測力作為診斷——只是絕不讓
-                    短樣本主導引擎。
+                    前兩道門各自把分數換算成<Term term="percentile" />，股票以兩者中較好的那個來競爭。
+                    <Term term="champion" />——在兩道門都位居前 10% 的股票——會得到 +2 的小加分，因為同時出色又便宜
+                    很罕見。下殺中的刀鋒不能成為冠軍股。
                 </p>
-                <Callout kind="tip">
-                    缺少的因子不會悄悄毀掉一檔股票：價值、品質或動能任一缺失，該股會被標記為 <i>因子不足</i>，而非用殘缺
-                    資料評分。當非必要因子缺失時，其餘權重會重新正規化，讓綜合分數保持可比。
-                </Callout>
-            </Section>
-
-            {/* 等級·否決·折價 */}
-            <Section id="bands" title="等級、否決與安全折價" icon={<BookMarked className="h-5 w-5" />}>
+                <SubHeading>留在名單上的力量</SubHeading>
                 <p>
-                    綜合百分位切成四個實用區間，即 <Term term="band" />。
+                    已在候選名單上的名稱，要明顯掉出才會被移除。這稱為 <Term term="hysteresis" />：排名在 60 名以內時
+                    留在 Research now，排名在 150 名以內時留在候選名單上。沒有這個緩衝，卡在切線上的股票會隨著每次
+                    小幅價格波動進進出出。
                 </p>
+                <SubHeading>公平的比較</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><span className="font-extrabold text-pos">RESEARCH NOW</span> — 前 3%。今天值得你的研究時間。</li>
-                    <li><span className="font-extrabold text-accent">WATCHLIST</span> — 前 10%。</li>
-                    <li><span className="font-extrabold text-warn">MONITOR</span> — 前 30%。</li>
-                    <li><span className="text-ink-2">PASS</span> — 其餘。</li>
-                </ul>
-                <SubHeading>否決 — 硬性取消資格</SubHeading>
-                <p>
-                    有些股票無論分數多好都無法入選——就像照片很美、但結構檢驗沒過的房子。<Term term="veto" /> 在評分前套用，
-                    所以被否決的股票完全沒有綜合分數。原因包括：逆向引擎安全檢查未過（<i>reverse_engine_reject</i>）、兩個
-                    財報鑑識警報同時響起（<Term term="beneish" /> + 高 <Term term="accruals" />）、因 <Term term="dilution" /> 而
-                    過度發行，或（在 AI 鏡頭中）強烈迴避/賣出。原因寫在紅牌上。
-                </p>
-                <SubHeading>安全折價</SubHeading>
-                <p>
-                    原始分數與最終排名之間套用三個乘法 <Term term="haircut" />。<b>存活度</b> = 0.7 + 0.3×(存活度/100)、
-                    <b>資料品質</b> = min(1, 0.8 + 0.04×資料品質)、<b>財報鑑識</b> = 若 Beneish 或應計警報僅單獨響起則 0.85
-                    （兩者同時是否決而非折價）。結果重新排名，讓脆弱或可疑的股票被降名而非剔除。
-                </p>
-            </Section>
-
-            {/* DCF */}
-            <Section id="dcf" title="預期落差 — 價格悄悄承諾的事" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    每一檔股票的價格都內含對未來成長的承諾。<Term term="reverse-dcf" /> 把那個承諾抽成數字——市場向你要價的{' '}
-                    <Term term="implied-growth" />——方法是以 <Term term="bisection" /> 解出讓標準 <Term term="dcf" /> 等於目前
-                    價格的成長率。
-                </p>
-                <p>
-                    <b>DCF gap</b> 欄把這個承諾與現實比較：<Term term="implied-growth" /> − <Term term="demonstrated-growth" />
-                    （最近 5 年 SEC 申報的營收/FCF 成長），以百分點計。
-                </p>
-                <ul className="list-disc space-y-2 pl-5">
-                    <li><span className="font-extrabold text-pos">綠 / 負值</span> — 價格要求的成長低於公司已證明。潛在便宜貨：
-                    你不必相信成長故事就得到補償。</li>
-                    <li><span className="font-extrabold text-warn">琥珀 / 正值</span> — 價格需要無人證明的加速。你必須相信一個故事。</li>
-                </ul>
-                <Callout kind="tip">
-                    這個落差也是建議計畫所用的 <Term term="edge" />：只有定價低於已證明成長的股票才具可測量的優勢，所以排名
-                    高但昂貴的股票會被以「無凱利優勢」略過。
-                </Callout>
-            </Section>
-
-            {/* 鏡頭 */}
-            <Section id="lens" title="鏡頭 — 你用誰的眼睛看" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    Rankings 頁頂端的單一切換決定你看誰的排名。
-                </p>
-                <ul className="list-disc space-y-2 pl-5">
-                    <li><b>Quant（量化）</b> — 決定論的因子引擎。對財務報表與股價的純數學，沒有 AI。這是最原始、不變的視圖。</li>
-                    <li><b>RS2 LLM</b> — 本機 AI 分析師自己的名單，透過閱讀每家公司的實際申報文件撰寫獨立判斷而建立。</li>
-                    <li><b>Compare（比較）</b> — 兩者並排，落差最大者在前。為每個名字計算差異百分位（Δ pctl）；落差大正是
-                    某一方錯的地方。</li>
-                </ul>
-                <p>
-                    AI 在量化等級設定 <i>之後</i>套用：它可以升級、降級或否決，建立平行排名。量化基準不會被覆寫，因此兩份
-                    名單都看得到，讓你看清它們在哪裡分歧。
-                </p>
-            </Section>
-
-            {/* RS2 */}
-            <Section id="rs2" title="RS2 — AI 的第二意見" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    RS2 是 <Term term="llm" />，閱讀每家公司的實際 SEC 申報文件並撰寫獨立判斷——就像取得第二位醫師的意見。
-                    它為每個名字產出：
-                </p>
-                <ul className="list-disc space-y-2 pl-5">
-                    <li><Term term="stance" /> — 低估 / 合理 / 高估（彩色藥丸）。</li>
-                    <li><Term term="conviction" /> — 它對自己判斷的信心，0–15。</li>
-                    <li><Term term="action" /> — 買進 / 持有 / 減碼 / 迴避…是研究用的意見，不是委託單。</li>
                     <li>
-                        它自己的 DCF 解讀。其 <Term term="intrinsic-value" /> 錨定於分析師共識區間並折現回 <Term term="present-value" />——
-                        因此 <Term term="margin-of-safety" /> 衡量的是「今天」的便宜程度，而非 12 個月目標價。
+                        大多數評分是<Term term="sector-neutral" />——銀行與銀行競爭，不與軟體公司競爭。
+                    </li>
+                    <li>
+                        <Term term="momentum" />是例外，而且是有用的例外：它也會對照整個市場來解讀，因此帶動整個
+                        類股的榮景會保持可見，而不是顯得平凡。
+                    </li>
+                    <li>
+                        對於現金流隨景氣循環波動的週期性企業（石油、天然氣、採礦、航運等），篩選使用多年的現金流平均
+                        （石油、天然氣與採礦為<b>8 年</b>，其他週期性企業為<b>3 年</b>），而不是單一一年的好壞。
                     </li>
                 </ul>
-                <SubHeading>AI Research Now 門檻</SubHeading>
+                <SubHeading>類股傾斜已關閉</SubHeading>
                 <p>
-                    AI 的 Research Now 名單以 RS2 的結構化訊號——安全邊際與進場時機——為門檻，分兩級：<b>深度價值</b>
-                    （MoS ≥ 30%）無論信念度皆入選；<b>中度價值</b>（MoS ≥ 15%，或真正的新買進）還需要信念度 ≥ 9.5。
-                    偏空判斷會被降出 Research Now；強烈迴避/賣出是否決。
+                    每個類股都得到相同的基本<Term term="sector-quota" />，也就是候選名單名額。總體引擎可以把額外
+                    名額給適合當前經濟的類股，但它的選類股能力尚未證明自己，所以傾斜被關閉，直到它證明自己為止。
                 </p>
+            </Section>
+
+            {/* 等級 */}
+            <Section id="bands" title="等級、否決與警告" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    當股票跌出量化 Research Now 名單，RS2 會寫 <Term term="exit-review" />：給現有持有人的持有/減碼/賣出判斷，
-                    以琥珀色「LLM EXIT」旗標顯示。
+                    篩選的結果是四個<Term term="band" />：
+                </p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li><span className="font-extrabold text-pos">RESEARCH NOW</span> — 候選名單的頂端，大約前 50 到 60 檔。今天值得你花研究時間。</li>
+                    <li><span className="font-extrabold text-accent">WATCHLIST</span> — 候選名單的其餘部分，整份名單共約 150 檔。</li>
+                    <li><span className="text-ink-2">PASS</span> — 有評分，但不在候選名單上。</li>
+                    <li><span className="font-extrabold text-neg">VETOED</span> — 被安全過濾器剔除。沒有等級，原因寫在紅色標籤上。</li>
+                </ul>
+                <SubHeading>什麼會剔除一檔股票</SubHeading>
+                <p>
+                    <Term term="veto" />是在各道門評分任何東西之前就套用的硬性取消資格。原因有：股票無法交易、規模太小
+                    或成交太清淡、沒有可用的申報基本面、是空殼公司、有長期營運虧損並伴隨沉重債務，或同時出現兩個
+                    <Term term="forensic" />紅旗。最後兩項只適用於市值低於 100 億美元的公司。
+                </p>
+                <SubHeading>什麼只會警告</SubHeading>
+                <p>
+                    對大型公司，鑑識檢驗是<b>警告</b>：<Term term="beneish" />（疑似操縱盈餘）、
+                    <Term term="accruals" />（獲利沒有現金支撐）、Altman Z（財務困境分數）與因發行股票而造成的大量
+                    <Term term="dilution" />。警告絕不會剔除市值 100 億美元以上的股票。對較小的公司，只有兩個紅旗
+                    同時出現時才會被剔除。這可以避免快速成長的領頭股因為看起來不尋常而被踢出，同時仍把警告顯示給你，
+                    讓你可以仔細看看。
+                </p>
+                <SubHeading>備註不是警告</SubHeading>
+                <p>
+                    資料備註——例如某檔股票的動能是用月股價算出來的，或它最新的年報已經很舊——描述的是一個數字是如何
+                    建立的。它們對公司沒有任何負面的意思，也絕不會剔除股票。
+                </p>
+                <Callout kind="tip">
+                    原則是 <i>annotate, never silently gate（加註，絕不悄悄設卡）</i>：只要可能，疑慮就以附帶原因的旗標
+                    顯示，讓你看得到，而不是悄悄把股票刪掉。
+                </Callout>
+            </Section>
+
+            {/* 分析師 */}
+            <Section id="analyst" title="AI 分析師 — 判決如何產生" icon={<BookOpen className="h-5 w-5" />}>
+                <p>
+                    候選名單上的股票可以由 AI 分析師深入研究——就像取得一份審慎的第二意見。工作被分開，讓每個部分
+                    做它擅長的事：
+                </p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>
+                        <b>AI 負責研究</b>並選定每一項估值輸入。它跑在本機模型（<Term term="llm" />）上，而不是雲端
+                        服務。
+                    </li>
+                    <li>
+                        <b>Python 負責每一項計算。</b>AI 是好分析師，卻是不可靠的計算機，所以沒有任何數字交給它的
+                        算術。
+                    </li>
+                    <li>
+                        <b>程式碼檢查答案</b>，對照外部錨點：專業分析師的預測與他們的目標價範圍（
+                        <Term term="street-fence" />）。
+                    </li>
+                </ul>
+                <p>
+                    每檔股票會獨立執行 2 或 3 次，每次執行都以一個對企業價值的估計作結。<b>判決</b>就是今天的股價
+                    相對於這些價值所構成的區間的位置：低於區間代表<b>低估</b>，在區間內代表<b>合理</b>，高於區間代表
+                    <b>高估</b>。區間較寬代表各次執行意見分歧，這會讓建議部位變小。請見 <Term term="iv-band" />。
+                </p>
+                <Callout kind="warn">
+                    <b>目前狀態：</b>分析師正在重建與測試。在它通過測試並上線之前，沒有新的判決。今天紀錄中的每個判決
+                    都是由舊分析師做出的。
+                </Callout>
+            </Section>
+
+            {/* 閘門 */}
+            <Section id="gate" title="閘門 — 哪些判決算數" icon={<BookOpen className="h-5 w-5" />}>
+                <p>
+                    判決必須通過閘門才算數。每個判決都會標示是否<Term term="actionable" />（是或否），當答案為否時，
+                    研究台會用白話列出<Term term="gate-reason" />：
+                </p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li><b>由舊分析師做出</b> — 它是在現行規則之前、由一位被裁定無效的分析師產生的。</li>
+                    <li><b>各次執行分歧太大</b> — 各次執行的價值分散得太廣，無法信任。</li>
+                    <li><b>只有一次可用的執行</b> — 單一一次執行無法顯示分析師與自己有多一致。</li>
+                    <li><b>超出分析師目標價範圍</b> — 價值落在華爾街圍欄之外。</li>
+                    <li><b>高出股價到不合理的程度</b> — 價值比股價高太多，因此被視為可疑。</li>
+                    <li><b>沒有分析師目標價範圍</b> — 沒有圍欄可以用來核對答案。</li>
+                    <li><b>無法取得分析師資料</b> — 查詢失敗，所以無法進行檢查。</li>
+                    <li><b>採礦／油氣生產商尚未支援</b> — 分析師目前還無法正確評估這些公司，所以它們被擋下，不能成為買進。</li>
+                    <li><b>未使用計算器</b> — 分析師在得出答案時從未使用估值計算器。</li>
+                    <li><b>測試執行</b> — 該列來自測試，而不是正式執行。</li>
+                </ul>
+                <p>
+                    另外還有少數其他技術性原因；研究台會用文字說明每一個。一個判決可以有不只一個原因。
+                </p>
+                <Callout kind="info">
+                    被擋下的判決不會被刪除。它仍會顯示在<i>被閘門擋下</i>之下，作為說過什麼、以及為什麼不算數的紀錄
+                    ——絕不會被顯示為選股。
+                </Callout>
+            </Section>
+
+            {/* 重新上線 */}
+            <Section id="relaunch" title="新分析師上線後有什麼改變" icon={<BookOpen className="h-5 w-5" />}>
+                <p>
+                    這四件事隨著重新上線而到來。它們今天尚未生效。
+                </p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>
+                        <b>進場時機。</b>每個判決都會說明它是「現在買進」還是「等待動能」，並寫明會翻轉這個判斷的條件。
+                    </li>
+                    <li>
+                        <b>價值依據 vs 動能依據。</b>即使分析師的價值低於股價，有基本面支持的強勁上升趨勢仍可以用一半或
+                        四分之一的部位持有。請見 <Term term="position-basis" />。
+                    </li>
+                    <li>
+                        <b>論點監控。</b>每個判決都寫明自己的失效規則。這些規則會拿目前資料重新檢查，論點破裂時會被
+                        標記。請見 <Term term="thesis-status" />。
+                    </li>
+                    <li>
+                        <b>對無人覆蓋股票的謹慎。</b>沒有任何專業分析師覆蓋的股票，會得到較小的建議部位與更嚴格的
+                        安全邊際，而不是被當作有分析師覆蓋的股票看待。
+                    </li>
+                </ul>
+            </Section>
+
+            {/* 總體 */}
+            <Section id="macro" title="總體引擎 — 經濟背景" icon={<BookOpen className="h-5 w-5" />}>
+                <p>
+                    另一個獨立的引擎讀取美國經濟的狀態，並發布三樣東西：
+                </p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>
+                        <b>每個經濟季節的機率。</b>這些機率是主要產出（見 <Term term="probability-vector" />）。單一的
+                        季節標籤只是摘要，不驅動任何數字。
+                    </li>
+                    <li>
+                        針對恐慌、信用、利率、油價、美元、就業與通膨的<b>衝擊警報</b>（見{' '}
+                        <Term term="shock-register" />）。
+                    </li>
+                    <li>
+                        <b>動盪風險旗標</b>，當恐慌指數達到 30 或更高時就會亮起。
+                    </li>
+                </ul>
+                <p>
+                    它的數字只來自 <Term term="fred" />。新聞只作為故事的脈絡，絕不轉成數字。它的選類股能力尚未證明
+                    自己，所以篩選不使用它。
                 </p>
             </Section>
 
             {/* 績效紀錄 */}
-            <Section id="track" title="績效紀錄 — 誠實的量尺" icon={<BookMarked className="h-5 w-5" />}>
+            <Section id="track" title="績效紀錄 — 誠實的量尺" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    與其展示討好人的 <Term term="backtest" />，系統每天以真實價格與真實 <Term term="transaction-costs" />{' '}
-                    <Term term="paper-trading" />自己的選股，且記錄只能附加、無法編輯。若機器錯了，這個頁面會公開地、永久地
-                    承認。這就是重點。
+                    系統不展示討好人的<Term term="backtest" />，而是每天以真實價格與真實的{' '}
+                    <Term term="transaction-costs" />進行<Term term="paper-trading" />。如果系統錯了，這個頁面會說出來。
                 </p>
-                <SubHeading>投資組合</SubHeading>
+                <SubHeading>三個帳本</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b className="text-pos">plan</b> — 價值核心。<Term term="kelly" /> 規模，約 50% 現金。</li>
-                    <li><b className="text-series-plan2">plan2</b> — 混合。價值核心 + <Term term="sleeve" />，約 78% 投入，持有昂貴的領頭股。</li>
-                    <li><b className="text-accent">equal</b> — 對所有 Research Now 股票等權重（純選股測試）。</li>
-                    <li><b className="text-ink-2">mine</b> — 你儲存的 My Portfolio 持股，以 <Term term="unitization" /> 如基金般衡量。</li>
+                    <li>
+                        <b className="text-accent">Equal-weight</b> — 等額持有每一檔 Research now 的股票。這是純粹的選股
+                        測試，沒有 AI，也沒有部位大小調整。
+                    </li>
+                    <li>
+                        <b className="text-pos">AI 帳本</b> — 跟隨通過閘門的分析師判決（
+                        <Term term="rn-depth" />）。它至今的歷史來自被裁定無效的<b>舊</b>分析師。由於沒有任何判決通過，
+                        自 2026-09-24 以來它只持有現金。新分析師上線時，AI 紀錄會從零重新開始，舊歷史則歸檔。
+                    </li>
+                    <li>
+                        <b className="text-ink-2">Mine</b> — 你自己儲存的持股，像基金一樣追蹤（
+                        <Term term="unitization" />），讓追加資金絕不會造成績效假象。
+                    </li>
+                </ul>
+                <SubHeading>誠實的規則</SubHeading>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>交易發生在<b>訊號之後的第一個收盤價</b>，因為訊號只有在存在之後才能據以行動。</li>
+                    <li>每筆交易都包含成本。</li>
+                    <li>基準（<Term term="iwm" />、<Term term="spy" />）使用與交易相同的日期。</li>
                 </ul>
                 <SubHeading>如何解讀</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b>plan vs plan2</b> — plan2 贏代表這期間為品質領頭股付錢勝過價值紀律；plan 贏代表紀律（與現金）有回報。</li>
-                    <li><b>plan vs equal</b> — plan 贏代表部位規模機制有加分。</li>
-                    <li><b>equal vs IWM</b> — 選股本身有效，如果選股贏過小型股 <Term term="benchmark" />。</li>
-                    <li><b>mine vs plan</b> — 你自己的偏離在花錢：那就是 <Term term="behavior-gap" />。</li>
-                    <li><b>「賣太早」旗標</b> — 賣出後繼續上漲的股票。此型態若重複出現，代表出場規則需要修改。</li>
+                    <li><b>Equal-weight vs IWM</b> — 如果選股打敗小型股<Term term="benchmark" />，選股就有效。</li>
+                    <li><b>AI 帳本 vs Equal-weight</b> — 只有當 AI 分析師的帳本打敗單純的候選名單時，它才算物有所值。</li>
+                    <li><b>Mine vs 其他</b> — 你自己的偏離會以<Term term="behavior-gap" />的形式顯現。</li>
                 </ul>
                 <p>
-                    <Term term="sharpe-ratio" /> 與 <Term term="cagr" /> 要等累積夠多天實測資料後才出現；初期此頁刻意平淡。
-                    另有假設式覆蓋可依你自己的費率重新計價，看看手續費的拖累。
+                    <Term term="sharpe-ratio" />、<Term term="cagr" />等指標，要累積足夠天數的實盤資料之後才會出現；
+                    早期這個頁面刻意保持無聊。
                 </p>
             </Section>
 
             {/* 投資組合 */}
-            <Section id="portfolio" title="投資組合 — 部位規模與建議計畫" icon={<BookMarked className="h-5 w-5" />}>
+            <Section id="portfolio" title="我的投資組合 — 檢查你自己的持股" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    投資組合頁有兩個非常不同的部分。請仔細看標籤。
+                    Portfolio 分頁是為你的<b>實際</b>持股而設。每一筆持股都會對照篩選的<Term term="band" />與 AI 判決，
+                    結果顯示在它旁邊。AI 判決被擋下的持股會顯示為被擋下——絕不會顯示為訊號。你的持股也會餵給績效紀錄上的{' '}
+                    <b>Mine</b> 帳本。
                 </p>
-                <SubHeading>My Portfolio（上）— 你的實際持股</SubHeading>
-                <p>
-                    輸入你的實際持股（只存在這個瀏覽器）。每一檔都與模型對照：四分之一 <Term term="kelly" /> 建議規模、
-                    超配/低配判斷，若持股被 <Term term="veto" /> 或在覆蓋之外則有大旗標。績效紀錄中的「mine」帳本即使用這些，
-                    如基金般單位化。
-                </p>
-                <SubHeading>建議計畫（下）— 不是你的投資組合</SubHeading>
-                <p>
-                    由 Research Now 名單機器建構的配置，有 <b>價值核心 / 混合</b> 切換：
-                </p>
-                <ul className="list-disc space-y-2 pl-5">
-                    <li>
-                        <b>價值核心（plan）</b> — 四分之一凱利規模。<Term term="edge" /> = 預期落差約 3 年內收斂，風險 ={' '}
-                        <Term term="volatility" />，f = 0.25 × 優勢/風險²，上限 5%。<Term term="forensic" /> 旗標減半、
-                        GPR 2–3 與內部人賣出時縮小、類股 25% / 主題 30% 上限，其餘留在 <Term term="cash" />（常約 50%）。
-                    </li>
-                    <li>
-                        <b>混合（plan2）</b> — 同一個價值核心，再加上無論估值落差都買進頂尖股票的 <Term term="sleeve" />（上限約
-                        <Term term="book-value" /> 35%），因此能持有核心拒絕的昂貴領頭股並動用閒置現金（約 78% 投入）。
-                        外衣列以粉紅色顯示。
-                    </li>
-                </ul>
-                <Callout kind="warn">
-                    為什麼兩個？價值核心在衰退中保護你（不會為昂貴買單），但在暴漲中落後；混合捕捉領頭股，但回檔更深（更大的{' '}
-                    <Term term="drawdown" />）。績效紀錄顯示兩者實際表現。
-                </Callout>
-                <SubHeading>總體去風險</SubHeading>
-                <p>
-                    <Term term="macro-flags" /> 是來自 <Term term="fred" /> 資料的警示燈。2 個以上亮起時，所有建議規模自動
-                    減半（<Term term="macro-derisk" />）。頁上以醒目的琥珀色橫幅顯示。
-                </p>
-            </Section>
-
-            {/* 覆蓋標記 */}
-            <Section id="overlays" title="覆蓋標記與財報鑑識旗標" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    覆蓋是脈絡 <i>旗標</i>，絕不加進分數。它們縮小部位、要求更大的安全邊際，或質疑你的論點。
-                </p>
-                <ul className="list-disc space-y-2 pl-5">
-                    <li>
-                        <b>GPR 0–3</b> — <Term term="gpr" />。依公司實際業務輪廓（營收地域、供應鏈、監管、制裁）標記。
-                        絕不是買賣訊號；第 3 級時縮小部位、要求更大安全邊際。
-                    </li>
-                    <li>
-                        <b>▲/▼ INSIDERS</b> — <Term term="informed-demand" />。空頭退場期間內部人淨買進（▲，確認），或內部人在
-                        偏高 <Term term="short-interest" /> 中賣出（▼，質疑論點）。只是確認或警告。
-                    </li>
-                </ul>
-                <SubHeading>財報鑑識旗標</SubHeading>
-                <p>
-                    財報鑑識資料庫——<Term term="beneish" /> M 分數、Sloan <Term term="accruals" />、淨發行、財務資料庫——產生
-                    計畫列上顯示的 <Term term="forensic" /> 旗標。單一警報是 0.85 折價；兩者同時是 <Term term="veto" />。
-                </p>
-            </Section>
-
-            {/* 主題 */}
-            <Section id="themes" title="主題 — 是脈絡，不是因子" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    <Term term="theme" /> 是股票所屬的市場敘事（AI、半導體、生技等）。主題歸屬與評分僅供 <b>定向</b> 與{' '}
-                    <b>過熱（crowding）警告</b>，<b>絕不加入綜合分數</b>。
-                </p>
-                <Callout kind="warn">
-                    這是刻意的：單純追逐主題在歷史上摧毀價值——專業主題 ETF 平均每年 −3.1%（Ben-David et al. 2023）。本站不會讓
-                    熱門敘事悄悄灌水分數。在計畫中，主題受 30% 主題上限約束，避免單一過熱故事接管整個組合。
+                <Callout kind="info">
+                    不再有建議計畫。本站不再替你建立配置——舊的凱利規模計畫帳本已經退役。至於目前還剩下哪些部位大小
+                    指引，請見 <Term term="position-sizing" />。
                 </Callout>
             </Section>
 
-            {/* 方法論 */}
-            <Section id="methodology" title="方法論 — 專業人士用" icon={<BookMarked className="h-5 w-5" />}>
-                <SubHeading>評分流程 — 確切機制</SubHeading>
+            {/* 舊版鏡頭 */}
+            <Section id="lenses" title="舊版鏡頭 — 保留供參考的舊篩選" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    宇宙：逆向引擎評分的所有名字（約 6,600 檔美股）。每個子指標在 <i>類股內</i> <Term term="winsorize" />（第
-                    1/99 百分位）後，再在類股內 <Term term="zscore" />。因子 z = 該因子可用子指標的平均。綜合 z = 可用因子
-                    的權重重新正規化總和（缺少的因子退出，其餘權重重新縮放；價值、品質、動能為 <i>必要</i>——缺少任一者
-                    標記為 <i>insufficient_factors</i>，而非用殘缺資料評分）。
-                </p>
-                <p>
-                    綜合 z → 橫截面 <Term term="percentile" />（0–100）→ 三個乘法 <Term term="haircut" />（存活度、資料品質、
-                    財報鑑識）→ 重新排名 → 最終百分位決定 <Term term="band" />：≥97 research_now、≥90 watchlist、≥70 monitor、
-                    其餘 pass。
-                </p>
-                <SubHeading>因子構成 — 子指標與來源</SubHeading>
-                <p>
-                    <span className="font-extrabold text-pos">價值</span> = 四種收益率的平均 z。皆以最近會計年度 SEC 申報
-                    財務除以目前市值計算。<Term term="fcf-yield" />（FCF/市值）、<Term term="owner-earnings" />（(淨利 + 折舊攤銷 −
-                    資本支出)/市值）、<Term term="ebit" /> 收益率（營業利益/<Term term="enterprise-value" />）、<Term term="earnings-yield" />
-                    （淨利/市值——覆蓋最廣，拯救缺少 CAPEX/D&amp;A/營業利益標籤的申報者）。
-                </p>
-                <p>
-                    <span className="font-extrabold text-accent">品質</span> = <Term term="revenue-quality" />（逆向引擎評分）、
-                    <Term term="gross-margin" /> 穩定性（≥4 會計年度 GM 的 −標準差）、負 <Term term="accruals" />（−應計比率）、
-                    <Term term="piotroski" />（兩者皆出自財報鑑識資料庫）。
-                </p>
-                <p>
-                    <span className="font-extrabold text-warn">動能</span> = <Term term="skip-month" /> 與 <Term term="high-proximity" />{' '}
-                    的平均 z。使用月收盤。
-                </p>
-                <p>
-                    <span className="font-extrabold text-ink-2">低波動</span> = 月報酬的 −σ z，至少 12 個觀察值；<Term term="annualized-volatility" />{' '}
-                    輸出供 <Term term="kelly" /> 規模使用。
-                </p>
-                <p>
-                    <span className="font-extrabold text-neg">財測修正</span> = 兩個 0–1 部分的平均：標準化 <Term term="eps-trajectory" />{' '}
-                    斜率（clamp(斜率, −1, 1)+1)/2，與分析師結構評分/100——縮放到 0–100 後以 (分數−50)/25 重新置中為 z 類尺度。
-                </p>
-                <SubHeading>權重</SubHeading>
-                <p>
-                    等權 0.20 × 5（方案 <code>equal_weight_robust5</code>）。<Term term="rank-ic" /> 每月測量但僅記錄漂移{' '}
-                    <i>診斷</i>——測量到的 IC 絕不主導權重（DeMiguel、Garlappi &amp; Uppal 2009：估算權重樣本外極少打敗 1/N）。
-                </p>
-                <SubHeading>反向 DCF — 確切方法</SubHeading>
-                <p>
-                    估值模型以 <Term term="bisection" /> 解出讓標準 DCF 等於目前價格的成長率——市場向你要價的成長。<Term term="expectations-gap" />
-                    （顯示為「DCF gap」）= 隱含成長 − 已證明成長；已證明 = 最近 5 年 SEC 申報的營收/FCF 成長，以百分點計。
-                    逆向引擎在其上疊加原型（A–F）分類與存活度/資料品質評分，產出因子實驗室所需的安全輸入。
-                </p>
-                <SubHeading>否決規則（確切）</SubHeading>
-                <p>
-                    <b>reverse_engine_reject</b> = 逆向引擎等級 ∈ {'{'}Excluded, Reject, Reject-tier{'}'} ·{' '}
-                    <b>forensic_pair</b> = Beneish M 偏高且應計項目偏高（單一警報改為 0.85 折價）· <b>heavy_issuance</b> = HEAVY_ISSUANCE
-                    旗標，原型 E/F 以發行為預期融資方式者豁免。在 AI 鏡頭中，強烈迴避/賣出也是否決（<code>llm_reject</code>）。
-                </p>
-                <SubHeading>缺失資料是 null — 絕不悄悄安全</SubHeading>
-                <p>
-                    舊的佔位 Z/M 分數已移除。指標缺失就是 null，評分流程會把該股標記為不足或套用資料品質折價。空缺永遠不會被
-                    當作合格。
+                    <b>Lenses</b> 按鈕會開啟舊篩選：百倍股（100-bagger）篩選、Reverse、Paradigm 與 YouTube。它們只是
+                    保留供參考。它們<b>不是</b>現行系統，研究台上沒有任何東西是用它們建立的。
                 </p>
             </Section>
 
             {/* 驗證 */}
-            <Section id="validation" title="系統如何被驗證" icon={<BookMarked className="h-5 w-5" />}>
-                <p>
-                    兩個獨立的誠實迴路讓機器保持誠實。
-                </p>
+            <Section id="validation" title="系統如何被驗證" icon={<BookOpen className="h-5 w-5" />}>
+                <p>三個習慣讓系統保持誠實：</p>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>前瞻記錄訊號</b> — 每個因子訊號在產生的當下記錄（<Term term="point-in-time" />、只能附加），日後再與
-                        實際發生的事衡量，包括已下市股票（無 <Term term="survivorship-bias" />）。
+                        <b>先有規則，再有結果。</b>通過／不通過的規則在看到結果之前就寫下，所以事後無法為了好看而調整
+                        （那就會是 <Term term="overfitting" />）。
                     </li>
                     <li>
-                        <b>紙上交易投資組合</b> — 績效紀錄頁每日以真實價格與成本交易 plan / plan2 / equal / mine，與{' '}
-                        <Term term="iwm" />、<Term term="spy" /> 比較。報酬與 <Term term="alpha" /> 公開且永久。
+                        <b>為判決評分。</b>評分器會拿 30、91、182 與 365 天內的股價表現，對照 <Term term="iwm" />、
+                        <Term term="spy" />與 QQQ，檢查每個 AI 判決。一個期間只有在完全過去之後才會被評分，而且基準使用
+                        與判決相同的日期。
+                    </li>
+                    <li>
+                        <b>紙上帳本。</b>
+                        <Link href="#track" className="font-bold text-pos hover:underline">績效紀錄</Link>的帳本每天以真實
+                        價格與成本交易。
                     </li>
                 </ul>
-                <p>
-                    每月，IC 漂移報告重新計算 <Term term="rank-ic" /> 診斷。重點是這網站永遠不能自己批改作業：成績單是前瞻的、
-                    真實的、不可編輯的。
-                </p>
+                <Callout kind="warn">
+                    <b>尚無結論。</b>今天紀錄中的每個判決都來自舊分析師，所以無法從評分中得出任何結論。只有當新分析師的
+                    有效判決存在、且它們的期間已經過去之後，這才會有意義。
+                </Callout>
             </Section>
 
             {/* 資料 */}
-            <Section id="data" title="資料從哪裡來" icon={<BookMarked className="h-5 w-5" />}>
+            <Section id="data" title="資料從哪裡來" icon={<BookOpen className="h-5 w-5" />}>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><Term term="sec-filings" /> — 透過 <Term term="company-facts" /> 的 10 年申報當下原貌財務（品質、鑑識與已證明成長的基準事實）。</li>
-                    <li><Term term="yahoo-finance" /> — 股價、分析師 <Term term="estimates" /> 與覆蓋。</li>
-                    <li><Term term="fred" /> — <Term term="macro-flags" /> 背後的聯準會總體序列。</li>
+                    <li><Term term="sec-filings" /> — 透過 <Term term="company-facts" /> 取得的 10 年申報當下原貌基本面（品質、鑑識警告與已證明成長的基準事實），以 <Term term="point-in-time" /> 方式保存。</li>
+                    <li><Term term="yahoo-finance" /> — 股價、分析師<Term term="estimates" />與覆蓋情況。</li>
+                    <li><Term term="fred" /> — 總體引擎背後的美國經濟序列。</li>
+                    <li>新聞 — 只作為敘事脈絡。絕不轉成數字。</li>
                 </ul>
                 <p>
-                    整個流程透過 <Term term="github-actions" /> 每天重跑，IC 漂移報告每月重算。紙上帳本以交易成本（bps）且只能
-                    附加地保存。
+                    評分鏈依排程透過 <Term term="github-actions" /> 重新執行。AI 分析師則另外在本機電腦上執行。
                 </p>
             </Section>
         </>

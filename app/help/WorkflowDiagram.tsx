@@ -1,29 +1,32 @@
 'use client';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// WorkflowDiagram — visual flow diagrams for the /help handbook.
+// WorkflowDiagram — the visual flow diagram for the /help handbook.
 //
-//   <PipelineDiagram />  — the daily data pipeline drawn as a small DAG:
-//                          parallel inputs → serial scoring spine → parallel
-//                          stages → multiple output destinations.
-//   <AiAnalysisFlow />   — the on-demand "Ask AI" analysis request flow.
+//   <PipelineDiagram />  — the daily pipeline drawn as a small DAG: data sources
+//                          (plus the macro engine as a side input) → safety filters
+//                          → the dual-door screen → bands → the AI analyst → the gate
+//                          → publish → paper books → grading.
 //
-// Both are tri-lingual (English / Korean / Traditional Chinese) and follow the
-// site's language setting via useLanguage(). Stage descriptions embed <Term>
-// glossary links (the same dotted-underline popups used everywhere else on the
-// page). No external diagram library — pure Tailwind + lucide icons.
+// Follows the site's language setting via useLanguage(). Stage
+// descriptions embed <Term> glossary links (the same dotted-underline popups
+// used everywhere else on the page). No external diagram library — pure
+// Tailwind + lucide icons.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { Fragment, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import {
-    Activity, Archive, BadgeCheck, Briefcase, Calculator, ChevronDown, ChevronRight,
-    Cpu, Database, FileText, History, Landmark, LayoutDashboard, LineChart, ShieldCheck, Sparkles,
+    Activity, BadgeCheck, Briefcase, ChevronDown, Cpu, Database, Filter, Gauge, Landmark,
+    Layers, LineChart, ShieldCheck, Sparkles, Upload,
 } from 'lucide-react';
 import { useLanguage } from '@/components/LanguageContext';
 import { Term } from '@/components/GlossaryTerm';
 
 type L = { en: string; ko: string; zh: string };
 type NodeDesc = { en: ReactNode; ko: ReactNode; zh: ReactNode };
+
+const T = (en: string, ko: string, zh: string): L => ({ en, ko, zh });
+const D = (en: ReactNode, ko: ReactNode, zh: ReactNode): NodeDesc => ({ en, ko, zh });
 
 interface FlowNode {
     id: string;
@@ -43,204 +46,173 @@ const SOURCES: FlowNode[] = [
         icon: Landmark,
         accent: 'text-accent',
         badge: 'bg-accent/10 border-accent/40',
-        title: { en: 'SEC Company Facts', ko: 'SEC Company Facts', zh: 'SEC Company Facts' },
-        desc: {
-            en: <>Ten years of <Term term="as-filed" /> fundamentals straight from <Term term="sec-filings" /> — the ground truth behind <Term term="quality" />, <Term term="forensic" /> checks, and <Term term="demonstrated-growth" />.</>,
-            ko: <><Term term="sec-filings" />에서 바로 가져온 <Term term="as-filed" /> 재무 10년치 — <Term term="quality" />, <Term term="forensic" /> 검사, <Term term="demonstrated-growth" />의 기준 사실입니다.</>,
-            zh: <>直接來自 <Term term="sec-filings" /> 的 <Term term="as-filed" /> 財務十年——<Term term="quality" />、<Term term="forensic" /> 檢查與 <Term term="demonstrated-growth" /> 背後的基準事實。</>,
-        },
+        title: T('SEC filings', 'SEC 제출 서류', 'SEC 申報文件'),
+        desc: D(
+            <>Ten years of <Term term="as-filed" /> fundamentals from <Term term="sec-filings" /> — the ground truth behind <Term term="quality" />, <Term term="forensic" /> warnings and <Term term="demonstrated-growth" />.</>,
+            <><Term term="sec-filings" />에서 가져온 10년치 <Term term="as-filed" /> 재무 데이터 — <Term term="quality" />, <Term term="forensic" />, <Term term="demonstrated-growth" />의 기준 사실입니다.</>,
+            <>來自<Term term="sec-filings" />、十年份的<Term term="as-filed" />基本面——是<Term term="quality" />、<Term term="forensic" />與<Term term="demonstrated-growth" />背後的基準事實。</>,
+        ),
     },
     {
         id: 'yf',
         icon: Database,
         accent: 'text-accent',
         badge: 'bg-accent/10 border-accent/40',
-        title: { en: 'Yahoo Finance', ko: '야후 파이낸스', zh: 'Yahoo Finance' },
-        desc: {
-            en: <>Live prices, price history, analyst <Term term="estimates" />, and <Term term="analyst-coverage" /> metadata for every ticker.</>,
-            ko: <>모든 티커의 실시간 주가, 주가 이력, 애널리스트 <Term term="estimates" />, <Term term="analyst-coverage" /> 메타데이터.</>,
-            zh: <>所有代號的即時股價、股價歷史、分析師 <Term term="estimates" /> 與 <Term term="analyst-coverage" /> 元資料。</>,
-        },
+        title: T('Yahoo Finance', 'Yahoo Finance', 'Yahoo Finance'),
+        desc: D(
+            <>Prices, price history and analyst <Term term="estimates" /> for every ticker.</>,
+            <>모든 티커의 주가, 주가 이력, <Term term="estimates" />입니다.</>,
+            <>每檔股票代號的股價、價格歷史與<Term term="estimates" />。</>,
+        ),
     },
     {
         id: 'fred',
         icon: Activity,
         accent: 'text-warn',
         badge: 'bg-warn/10 border-warn/40',
-        title: { en: 'FRED (Fed macro)', ko: 'FRED (연준 매크로)', zh: 'FRED（聯準會總體）' },
-        desc: {
-            en: <>Federal Reserve macro series that feed the <Term term="macro-flags" /> used to trigger <Term term="macro-derisk" />.</>,
-            ko: <><Term term="macro-derisk" />를 촉발하는 데 쓰이는 <Term term="macro-flags" />에 공급되는 연준 매크로 시계열.</>,
-            zh: <>供應觸發 <Term term="macro-derisk" /> 之 <Term term="macro-flags" /> 的聯準會總體序列。</>,
-        },
+        title: T('FRED (Fed macro)', 'FRED (연준 매크로)', 'FRED（聯準會總體資料）'),
+        desc: D(
+            <>Federal Reserve economic series. They feed the macro engine and nothing else.</>,
+            <>연방준비제도의 경제 시계열입니다. 매크로 엔진에만 쓰이고 다른 곳에는 쓰이지 않습니다.</>,
+            <>聯準會的經濟序列。它們只供給總體引擎，不作他用。</>,
+        ),
     },
 ];
 
-// ── Block 2: the serial scoring spine ────────────────────────────────────────
-const SPINE: FlowNode[] = [
+// ── Side input: the macro engine ─────────────────────────────────────────────
+const MACRO: FlowNode = {
+    id: 'macro',
+    icon: Gauge,
+    accent: 'text-warn',
+    badge: 'bg-warn/10 border-warn/40',
+    title: T('Macro engine', '매크로 엔진', '總體引擎'),
+    desc: D(
+        <>Publishes a <Term term="probability-vector" /> for each economic season and <Term term="shock-register" /> alarms. Sector tilt is <b>off</b>: its sector picking has not proved itself, so the screen does not use it.</>,
+        <>경제 계절별 확률(<Term term="probability-vector" />)과 쇼크 경보(<Term term="shock-register" />)를 게시합니다. 섹터 틸트는 <b>꺼져</b> 있습니다. 섹터 선택이 아직 검증되지 않아 스크린이 사용하지 않습니다.</>,
+        <>為每個經濟季節發布一個機率（<Term term="probability-vector" />），並發布衝擊警報（<Term term="shock-register" />）。類股傾斜是<b>關閉</b>的：它的選類股能力尚未證明自己，所以篩選不使用它。</>,
+    ),
+    output: T('probabilities · shock alarms', '확률 · 쇼크 경보', '機率 · 衝擊警報'),
+};
+
+// ── Block 2: the screen and the shortlist ────────────────────────────────────
+const SCREEN: FlowNode[] = [
     {
-        id: 'build-history',
-        icon: History,
+        id: 'tier1',
+        icon: Filter,
         accent: 'text-accent',
         badge: 'bg-accent/10 border-accent/40',
         step: '1',
-        title: { en: 'Build fundamentals history', ko: '재무 이력 구축', zh: '建立財務歷史' },
-        desc: {
-            en: <>Turn raw filings into a clean 10-year <Term term="fundamentals-battery" /> — <Term term="piotroski" /> F-score, Sloan <Term term="accruals" />, a real <Term term="beneish" /> M-score, and net issuance. Missing values stay null; they are never silently treated as safe.</>,
-            ko: <>원시 서류를 깨끗한 10년치 <Term term="fundamentals-battery" />로 변환합니다. <Term term="piotroski" /> F-점수, Sloan <Term term="accruals" />, 실제 <Term term="beneish" /> M-점수, 순발행량. 누락 값은 null로 남으며 조용히 안전하게 취급되지 않습니다.</>,
-            zh: <>把原始申報文件變成乾淨的 10 年 <Term term="fundamentals-battery" />——<Term term="piotroski" /> F 分數、Sloan <Term term="accruals" />、真實 <Term term="beneish" /> M 分數與淨發行。缺失值保持 null，絕不會被悄悄當作安全。</>,
-        },
-        output: { en: 'fundamentals_battery.json', ko: 'fundamentals_battery.json', zh: 'fundamentals_battery.json' },
+        title: T('Tier-1 hygiene', 'Tier-1 위생 필터', 'Tier-1 衛生篩選'),
+        desc: D(
+            <>Removes untradable names, names with no filed fundamentals, chronic losses with heavy debt, and — for smaller companies — forensic manipulation risk. Large companies get a warning instead.</>,
+            <>거래할 수 없는 종목, 제출된 재무 데이터가 없는 종목, 만성 적자와 과도한 부채, 그리고 — 더 작은 기업에 한해 — 재무 포렌식상의 조작 위험을 제거합니다. 대기업은 대신 경고를 받습니다.</>,
+            <>剔除無法交易的股票、沒有申報基本面的股票、長期虧損加上沉重債務，以及——針對較小的公司——財報鑑識上的操縱風險。大型公司則只會得到警告。</>,
+        ),
+        output: T('survivors · vetoes', '통과 종목 · 베토', '倖存股 · 否決'),
     },
     {
-        id: 'reverse',
-        icon: ShieldCheck,
+        id: 'doors',
+        icon: Cpu,
         accent: 'text-pos',
         badge: 'bg-pos/10 border-pos/40',
         step: '2',
-        title: { en: 'Reverse engine', ko: '역설계 엔진', zh: '逆向引擎' },
-        desc: {
-            en: <>A first-pass safety &amp; quality screen: classify the <Term term="reverse-engine" /> archetype (A–F), score survivability and data quality, and compute <Term term="forensic" /> flags. It also writes candidates into an append-only nomination log.</>,
-            ko: <>1차 안전·퀄리티 검사입니다. <Term term="reverse-engine" /> 아키타입(A–F)을 분류하고 생존 가능성·데이터 품질을 채점하며 <Term term="forensic" /> 플래그를 계산합니다. 후보를 추가 전용 지명 로그에도 기록합니다.</>,
-            zh: <>第一道安全與品質檢查：分類 <Term term="reverse-engine" /> 原型（A–F）、評分存活度與資料品質、計算 <Term term="forensic" /> 旗標，並把候選股寫入只能附加的提名日誌。</>,
-        },
-        output: { en: 'safety inputs · nominations', ko: '안전 입력 · 지명', zh: '安全輸入 · 提名' },
+        title: T('Dual-door screen (3 doors)', '듀얼 도어 스크린(도어 3개)', '雙門篩選（3 道門）'),
+        desc: D(
+            <>Compounder, value gap and trend leaders. Each is <Term term="sector-neutral" />, and the better <Term term="door" /> score competes. A <Term term="champion" /> gets a small bonus; a <Term term="hysteresis" /> buffer keeps the shortlist steady.</>,
+            <>컴파운더, 밸류 갭, 추세 주도주. 각각 <Term term="sector-neutral" />이며, 더 좋은 <Term term="door" /> 점수로 경쟁합니다. <Term term="champion" />에게는 작은 가산점이 붙고, <Term term="hysteresis" /> 완충 장치가 후보 명단을 안정시킵니다.</>,
+            <>複利成長、價值落差與趨勢領頭。每一道都是<Term term="sector-neutral" />，並以較好的<Term term="door" />分數來競爭。<Term term="champion" />會得到小加分；<Term term="hysteresis" />緩衝讓候選名單保持穩定。</>,
+        ),
+        output: T('door scores · shortlist', '도어 점수 · 후보 명단', '門分數 · 候選名單'),
     },
     {
-        id: 'factorlab',
-        icon: Cpu,
-        accent: 'text-ink-2',
-        badge: 'bg-white/5 border-rule-24',
+        id: 'bands',
+        icon: Layers,
+        accent: 'text-pos',
+        badge: 'bg-pos/10 border-pos/40',
         step: '3',
-        title: { en: 'Factor Lab', ko: '팩터 랩', zh: '因子實驗室' },
-        desc: {
-            en: <>The heart of the rankings. Every sub-metric is <Term term="winsorize" />d and <Term term="zscore" />d within the stock&apos;s own <Term term="sector-neutral" /> group, averaged into the five <Term term="factor" />s, <Term term="equal-weight" />ed, discounted by safety <Term term="haircut" />s, then cut into <Term term="band" />s — with hard <Term term="veto" />es for disqualifying flags.</>,
-            ko: <>순위의 핵심입니다. 모든 하위 지표는 종목이 속한 <Term term="sector-neutral" /> 그룹 내에서 <Term term="winsorize" />·<Term term="zscore" /> 처리되고 다섯 <Term term="factor" />로 평균되며 <Term term="equal-weight" /> 적용, 안전 <Term term="haircut" /> 할인 후 <Term term="band" />로 잘립니다. 탈락 플래그는 하드 <Term term="veto" />입니다.</>,
-            zh: <>排名的核心。每個子指標都在股票自己的 <Term term="sector-neutral" /> 組內 <Term term="winsorize" />、<Term term="zscore" />，平均成五個 <Term term="factor" />、<Term term="equal-weight" /> 等權、套用安全 <Term term="haircut" /> 折價，再切進 <Term term="band" />——對不合格旗標有硬性 <Term term="veto" />。</>,
-        },
-        output: { en: 'composite · band · rank', ko: '종합 점수 · 등급 · 순위', zh: '綜合評分 · 等級 · 排名' },
+        title: T('Bands', '등급', '等級'),
+        desc: D(
+            <><Term term="research-now" />, <Term term="watchlist" />, <Term term="pass" /> and vetoed — the four <Term term="band" />s, set from rank.</>,
+            <><Term term="research-now" />, <Term term="watchlist" />, <Term term="pass" />, 베토 — 순위로 정해지는 네 개의 <Term term="band" />입니다.</>,
+            <><Term term="research-now" />、<Term term="watchlist" />、<Term term="pass" />與被否決——依排名決定的四個<Term term="band" />。</>,
+        ),
+        output: T('band · rank', '등급 · 순위', '等級 · 排名'),
     },
 ];
 
-// ── Block 3: parallel stages (valuation + AI overlay) ────────────────────────
-const PARALLEL: FlowNode[] = [
+// ── Block 3: the analyst and the gate ────────────────────────────────────────
+const ANALYST: FlowNode[] = [
     {
-        id: 'valuation',
-        icon: Calculator,
-        accent: 'text-teal-400',
-        badge: 'bg-teal-500/10 border-teal-500/30',
-        step: '4',
-        title: { en: 'Valuation models (reverse DCF)', ko: '밸류에이션 모델(역산 DCF)', zh: '估值模型（反向 DCF）' },
-        desc: {
-            en: <>Solve a <Term term="reverse-dcf" /> by <Term term="bisection" /> for the growth the current price already assumes, then compare it with what the company has actually delivered. The result is the <Term term="expectations-gap" /> (DCF gap).</>,
-            ko: <>현재 가격이 이미 가정하는 성장률을 <Term term="bisection" />으로 <Term term="reverse-dcf" />를 풀어 구하고, 기업이 실제로 달성한 것과 비교합니다. 그 결과가 <Term term="expectations-gap" />(DCF gap)입니다.</>,
-            zh: <>用 <Term term="bisection" /> 解 <Term term="reverse-dcf" />，求出目前價格已假設的成長率，再與公司實際達成的比較。結果就是 <Term term="expectations-gap" />（DCF gap）。</>,
-        },
-        output: { en: 'expectations gap', ko: '기대치 격차', zh: '預期落差' },
-    },
-    {
-        id: 'rs2',
+        id: 'analyst',
         icon: Sparkles,
         accent: 'text-accent',
         badge: 'bg-accent/10 border-accent/40',
+        step: '4',
+        title: T('AI analyst (local model)', 'AI 애널리스트(로컬 모델)', 'AI 分析師（本機模型）'),
+        desc: D(
+            <>The AI researches and chooses every input, Python does every calculation, and code checks the answer against outside anchors. 2–3 runs per stock; the verdict is where the price sits against the <Term term="iv-band" />. <b>Paused for rebuild.</b></>,
+            <>AI가 리서치하고 모든 입력값을 고르며, 파이썬이 모든 계산을 하고, 코드가 외부 앵커에 대조해 답을 검증합니다. 종목당 2~3회 실행하며, 판단은 주가가 <Term term="iv-band" />에 대해 어디에 있는가입니다. <b>재구축을 위해 일시 중지됨.</b></>,
+            <>AI 負責研究並選定每一項輸入，Python 做每一項計算，程式碼再拿外部錨點檢查答案。每檔股票執行 2–3 次；判決就是股價相對於<Term term="iv-band" />的位置。<b>因重建而暫停。</b></>,
+        ),
+        output: T('verdict · value band', '판단 · 가치 밴드', '判決 · 價值區間'),
+    },
+    {
+        id: 'gate',
+        icon: ShieldCheck,
+        accent: 'text-warn',
+        badge: 'bg-warn/10 border-warn/40',
         step: '5',
-        title: { en: 'RS2 LLM overlay', ko: 'RS2 LLM 오버레이', zh: 'RS2 LLM 覆蓋' },
-        desc: {
-            en: <>A local <Term term="llm" /> reads each company&apos;s actual filings and writes an independent verdict — <Term term="stance" />, <Term term="conviction" />, <Term term="action" /> — which can promote, demote, or <Term term="veto" /> a name after the quant bands are set.</>,
-            ko: <>로컬 <Term term="llm" />이 각 기업의 실제 서류를 읽고 독립 판단(<Term term="stance" />, <Term term="conviction" />, <Term term="action" />)을 씁니다. 퀀트 등급이 설정된 뒤 종목을 승격·강등·<Term term="veto" />할 수 있습니다.</>,
-            zh: <>本機 <Term term="llm" /> 閱讀每家公司的實際申報文件並撰寫獨立判斷——<Term term="stance" />、<Term term="conviction" />、<Term term="action" />——可在量化等級設定後升級、降級或 <Term term="veto" /> 該股。</>,
-        },
-        output: { en: 'LLM rank · verdict', ko: 'LLM 순위 · 판단', zh: 'LLM 排名 · 判斷' },
+        title: T('Gate', '게이트', '閘門'),
+        desc: D(
+            <>Marks each verdict <Term term="actionable" /> or not, with the <Term term="gate-reason" />s. Blocked verdicts stay visible as a record.</>,
+            <>각 판단에 <Term term="actionable" /> 여부를 표시하고, 이유(<Term term="gate-reason" />)를 붙입니다. 막힌 판단은 기록으로 계속 보입니다.</>,
+            <>為每個判決標示是否<Term term="actionable" />，並附上<Term term="gate-reason" />。被擋下的判決仍會作為紀錄保持可見。</>,
+        ),
+        output: T('actionable · reasons', '실행 가능 · 사유', '可執行 · 原因'),
+    },
+    {
+        id: 'publish',
+        icon: Upload,
+        accent: 'text-accent',
+        badge: 'bg-accent/10 border-accent/40',
+        step: '6',
+        title: T('Publish to the site', '사이트에 게시', '發布到網站'),
+        desc: D(
+            <>Shortlist, verdicts and reports are written to the site&apos;s data and shown on the desk.</>,
+            <>후보 명단, 판단, 리포트가 사이트 데이터에 기록되어 데스크에 표시됩니다.</>,
+            <>候選名單、判決與報告會寫入網站資料，並顯示在研究台上。</>,
+        ),
     },
 ];
 
-// ── Block 4: the plan node ───────────────────────────────────────────────────
-const PLAN_NODE: FlowNode = {
-    id: 'portfolio',
-    icon: Briefcase,
-    accent: 'text-series-plan2',
-    badge: 'bg-white/5 border-rule-24',
-    step: '6',
-    title: { en: 'Portfolio plan', ko: '포트폴리오 계획', zh: '投資組合計畫' },
-    desc: {
-        en: <>Turn the Research Now list into a sized, capped allocation. <Term term="kelly" />-based <Term term="position-sizing" />, <Term term="sector-cap" /> and <Term term="theme-cap" />, <Term term="macro-derisk" />, and exit rules. Decision support only — nothing here executes trades.</>,
-        ko: <>Research Now 명단을 크기가 정해지고 상한이 있는 배분으로 바꿉니다. <Term term="kelly" /> 기반 <Term term="position-sizing" />, <Term term="sector-cap" />·<Term term="theme-cap" />, <Term term="macro-derisk" />, 엑시트 규칙. 결정 지원일 뿐 매매는 일어나지 않습니다.</>,
-        zh: <>把 Research Now 名單變成有規模、有上限的配置。<Term term="kelly" /> 基礎的 <Term term="position-sizing" />、<Term term="sector-cap" /> 與 <Term term="theme-cap" />、<Term term="macro-derisk" /> 與出場規則。只是決策支援——這裡不執行交易。</>,
-    },
-    output: { en: 'suggested plan (plan / plan2)', ko: '추천 계획 (plan / plan2)', zh: '建議計畫（plan / plan2）' },
-};
-
-// ── Block 5: multiple output destinations ────────────────────────────────────
+// ── Block 4: books and grading ───────────────────────────────────────────────
 const OUTPUTS: FlowNode[] = [
     {
-        id: 'rankings',
-        icon: LayoutDashboard,
-        accent: 'text-pos',
-        badge: 'bg-pos/10 border-pos/40',
-        title: { en: 'Rankings / leaderboard', ko: '순위 / 리더보드', zh: '排名 / 排行榜' },
-        desc: {
-            en: <>The <Term term="composite" />, <Term term="band" />, rank, and DCF gap you see on the dashboard, refreshed every run.</>,
-            ko: <>대시보드에서 보는 <Term term="composite" />, <Term term="band" />, 순위, DCF gap. 실행 때마다 갱신됩니다.</>,
-            zh: <>你在儀表板上看到的 <Term term="composite" />、<Term term="band" />、排名與 DCF gap，每次執行都會更新。</>,
-        },
-    },
-    {
-        id: 'plan-out',
+        id: 'books',
         icon: Briefcase,
-        accent: 'text-series-plan2',
-        badge: 'bg-white/5 border-rule-24',
-        title: { en: 'Portfolio plan', ko: '포트폴리오 계획', zh: '投資組合計畫' },
-        desc: {
-            en: <>The <Term term="plan" /> (value core) and <Term term="plan2" /> (hybrid) allocations with sizing, flags, and macro de-risk.</>,
-            ko: <><Term term="plan" />(밸류 코어)과 <Term term="plan2" />(하이브리드) 배분, 크기·플래그·매크로 디리스킹.</>,
-            zh: <><Term term="plan" />（價值核心）與 <Term term="plan2" />（混合）配置，含規模、旗標與總體去風險。</>,
-        },
+        accent: 'text-warn',
+        badge: 'bg-warn/10 border-warn/40',
+        step: '7',
+        title: T('Paper books', '페이퍼 북', '紙上帳本'),
+        desc: D(
+            <>Three books <Term term="paper-trading" /> daily with real <Term term="transaction-costs" />: Equal-weight, the AI book and Mine. The AI book holds only cash until a verdict passes the gate.</>,
+            <>세 개의 북이 매일 <Term term="paper-trading" />을 하며, 실제 <Term term="transaction-costs" />을 반영합니다. Equal-weight, AI 북, Mine. AI 북은 판단이 게이트를 통과할 때까지 현금만 보유합니다.</>,
+            <>三個帳本每天以真實的<Term term="transaction-costs" />進行<Term term="paper-trading" />：Equal-weight、AI 帳本與 Mine。在有判決通過閘門之前，AI 帳本只持有現金。</>,
+        ),
     },
     {
-        id: 'track-out',
+        id: 'grading',
         icon: LineChart,
         accent: 'text-warn',
         badge: 'bg-warn/10 border-warn/40',
-        title: { en: 'Track Record', ko: '트랙 레코드', zh: '績效紀錄' },
-        desc: {
-            en: <>Four portfolios <Term term="paper-trading" /> daily with real <Term term="transaction-costs" />, benchmarked against <Term term="iwm" /> and <Term term="spy" /> — the honest meter.</>,
-            ko: <>네 포트폴리오를 실제 <Term term="transaction-costs" />로 매일 <Term term="paper-trading" />하고 <Term term="iwm" />·<Term term="spy" />와 비교하는 정직한 측정기.</>,
-            zh: <>四個投資組合以真實 <Term term="transaction-costs" /> 每日 <Term term="paper-trading" />，並與 <Term term="iwm" />、<Term term="spy" /> 比較——誠實的量尺。</>,
-        },
+        step: '8',
+        title: T('Grading', '성과 평가', '評分'),
+        desc: D(
+            <>Each verdict is checked against what the price did over 30, 91, 182 and 365 days versus <Term term="iwm" />, <Term term="spy" /> and QQQ.</>,
+            <>각 판단을 30일, 91일, 182일, 365일 동안 주가가 실제로 한 움직임과 <Term term="iwm" />, <Term term="spy" />, QQQ에 견주어 점검합니다.</>,
+            <>每個判決都會拿 30、91、182 與 365 天內的實際股價表現，對照<Term term="iwm" />、<Term term="spy" />與 QQQ 來檢查。</>,
+        ),
     },
-    {
-        id: 'reports-out',
-        icon: FileText,
-        accent: 'text-accent',
-        badge: 'bg-accent/10 border-accent/40',
-        title: { en: 'AI Reports', ko: 'AI 리포츠', zh: 'AI 報告' },
-        desc: {
-            en: <>On-demand <Term term="llm" /> analysis stored in Supabase and shown under <b>/reports</b>.</>,
-            ko: <>요청 시 <Term term="llm" /> 분석을 Supabase에 저장하고 <b>/reports</b>에서 표시합니다.</>,
-            zh: <>按需的 <Term term="llm" /> 分析儲存於 Supabase，並在 <b>/reports</b> 顯示。</>,
-        },
-    },
-    {
-        id: 'logs-out',
-        icon: Archive,
-        accent: 'text-warn',
-        badge: 'bg-warn/10 border-warn/40',
-        title: { en: 'Forward logs → outcomes', ko: '전방 로그 → 성과', zh: '前瞻日誌 → 結果' },
-        desc: {
-            en: <>Every signal and nomination is logged <Term term="point-in-time" /> and later measured against real forward returns — no hindsight, no editing.</>,
-            ko: <>모든 신호와 지명은 <Term term="point-in-time" />으로 기록되고 나중에 실제 전방 수익률과 비교됩니다. 사후 판단도 편집도 없습니다.</>,
-            zh: <>每個訊號與提名都 <Term term="point-in-time" /> 記錄，日後與真實前瞻報酬比較——沒有事後諸葛，沒有編輯。</>,
-        },
-    },
-];
-
-const AI_STEPS: { id: string; title: L; desc: NodeDesc }[] = [
-    { id: 'ask', title: { en: 'Ask AI', ko: 'Ask AI', zh: 'Ask AI' }, desc: { en: <>You click &ldquo;Ask AI&rdquo; on any stock card or detail view.</>, ko: <>종목 카드나 상세 보기에서 &ldquo;Ask AI&rdquo;를 클릭합니다.</>, zh: <>你在任何股票卡片或詳情視圖按 &ldquo;Ask AI&rdquo;。</> } },
-    { id: 'api', title: { en: '/api/analysis', ko: '/api/analysis', zh: '/api/analysis' }, desc: { en: <>queues a pending job in Supabase.</>, ko: <>Supabase에 대기 작업을 등록합니다.</>, zh: <>在 Supabase 排入待處理工作。</> } },
-    { id: 'ci', title: { en: 'GitHub Actions', ko: 'GitHub Actions', zh: 'GitHub Actions' }, desc: { en: <>triggers the AI worker on a runner.</>, ko: <>러너에서 AI 워커를 트리거합니다.</>, zh: <>在執行器上觸發 AI 工作者。</> } },
-    { id: 'llm', title: { en: 'DeepSeek', ko: 'DeepSeek', zh: 'DeepSeek' }, desc: { en: <>reads the full RS2 prompt + the stock&apos;s financials.</>, ko: <>전체 RS2 프롬프트와 종목 재무를 읽습니다.</>, zh: <>讀取完整 RS2 提示詞與股票財務。</> } },
-    { id: 'db', title: { en: 'Supabase', ko: 'Supabase', zh: 'Supabase' }, desc: { en: <>stores the verdict for polling.</>, ko: <>판단을 저장해 조회할 수 있게 합니다.</>, zh: <>儲存判斷供輪詢。</> } },
-    { id: 'reports', title: { en: '/reports', ko: '/reports', zh: '/reports' }, desc: { en: <>shows the finished analysis.</>, ko: <>완성된 분석을 표시합니다.</>, zh: <>顯示完成的分析。</> } },
 ];
 
 // Colored block band + tinted container for each stage group. The color coding
@@ -248,7 +220,7 @@ const AI_STEPS: { id: string; title: L; desc: NodeDesc }[] = [
 // output distinction is obvious without a tiny legend.
 function FlowBlock({ kind, header, lang, children }: {
     kind: 'parallel' | 'serial' | 'output';
-    header: string;
+    header: L;
     lang: 'en' | 'ko' | 'zh';
     children: ReactNode;
 }) {
@@ -282,7 +254,7 @@ function FlowBlock({ kind, header, lang, children }: {
         <div className={`overflow-hidden  border ${cfg.box}`}>
             <div className={`flex items-center gap-2 border-b border-rule-10 px-3 py-2 ${cfg.band} ${cfg.text}`}>
                 <span className={`h-2 w-2  ${cfg.dot}`} />
-                <span className="text-[11px] font-extrabold uppercase tracking-wider">{header}</span>
+                <span className="text-[11px] font-extrabold uppercase tracking-wider">{header[lang]}</span>
                 <span className={`ml-auto  border px-2 py-0.5 text-[11px] font-extrabold uppercase tracking-wider ${cfg.pill}`}>
                     {cfg[lang]}
                 </span>
@@ -298,18 +270,6 @@ function DownConnector() {
             <span className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gradient-to-b from-emerald-400/50 to-emerald-400/10" />
             <span className="relative z-10 flex h-6 w-6 items-center justify-center border border-pos/40 bg-page">
                 <ChevronDown className="h-4 w-4 text-pos" />
-            </span>
-        </div>
-    );
-}
-
-function FanOutConnector() {
-    return (
-        <div className="relative my-1.5 flex h-9 items-center justify-center">
-            <span className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gradient-to-b from-emerald-400/50 to-emerald-400/10" />
-            <span className="absolute left-0 right-0 top-1/2 h-0.5 -translate-y-1/2 bg-gradient-to-r from-transparent via-violet-400/40 to-transparent" />
-            <span className="relative z-10 flex h-6 w-6 items-center justify-center border border-rule-24 bg-page">
-                <ChevronDown className="h-4 w-4 text-ink-2" />
             </span>
         </div>
     );
@@ -360,7 +320,7 @@ export function PipelineDiagram() {
             </div>
 
             {/* 1. Parallel inputs — data sources */}
-            <FlowBlock kind="parallel" header={lang === 'ko' ? '① 병렬 입력 — 데이터 출처' : lang === 'zh' ? '① 平行輸入 — 資料來源' : '① Parallel inputs — data sources'} lang={lang}>
+            <FlowBlock kind="parallel" header={T('① Parallel inputs — data sources', '① 병렬 입력 — 데이터 출처', '① 平行輸入 — 資料來源')} lang={lang}>
                 <div className="grid gap-2.5 sm:grid-cols-3">
                     {SOURCES.map(s => <NodeCard key={s.id} n={s} lang={lang} l={l} />)}
                 </div>
@@ -368,34 +328,34 @@ export function PipelineDiagram() {
 
             <DownConnector />
 
-            {/* 2. Serial spine — the scoring chain */}
-            <FlowBlock kind="serial" header={lang === 'ko' ? '② 직렬 — 채점 체인' : lang === 'zh' ? '② 序列 — 評分鏈' : '② Serial — the scoring chain'} lang={lang}>
+            {/* Side input — the macro engine, read alongside the screen */}
+            <FlowBlock kind="parallel" header={T('Side input — the economic backdrop', '보조 입력 — 경제 배경', '旁路輸入 — 經濟背景')} lang={lang}>
+                <NodeCard n={MACRO} lang={lang} l={l} />
+            </FlowBlock>
+
+            <DownConnector />
+
+            {/* 2. Serial — the screen and the shortlist */}
+            <FlowBlock kind="serial" header={T('② Serial — the screen and the shortlist', '② 직렬 — 스크린과 후보 명단', '② 序列 — 篩選與候選名單')} lang={lang}>
                 <div className="space-y-2.5">
-                    {SPINE.map(s => <NodeCard key={s.id} n={s} lang={lang} l={l} />)}
+                    {SCREEN.map(s => <NodeCard key={s.id} n={s} lang={lang} l={l} />)}
                 </div>
             </FlowBlock>
 
             <DownConnector />
 
-            {/* 3. Parallel stages */}
-            <FlowBlock kind="parallel" header={lang === 'ko' ? '③ 병렬 — 같은 명단의 두 가지 판독' : lang === 'zh' ? '③ 平行 — 同一名單的兩種判讀' : '③ Parallel — two reads of the same list'} lang={lang}>
+            {/* 3. Serial — the analyst, the gate, publishing */}
+            <FlowBlock kind="serial" header={T('③ Serial — the analyst, the gate, publishing', '③ 직렬 — 애널리스트, 게이트, 게시', '③ 序列 — 分析師、閘門、發布')} lang={lang}>
+                <div className="space-y-2.5">
+                    {ANALYST.map(s => <NodeCard key={s.id} n={s} lang={lang} l={l} />)}
+                </div>
+            </FlowBlock>
+
+            <DownConnector />
+
+            {/* 4. Outputs */}
+            <FlowBlock kind="output" header={T('④ Books and grading', '④ 북과 성과 평가', '④ 帳本與評分')} lang={lang}>
                 <div className="grid gap-2.5 sm:grid-cols-2">
-                    {PARALLEL.map(s => <NodeCard key={s.id} n={s} lang={lang} l={l} />)}
-                </div>
-            </FlowBlock>
-
-            <DownConnector />
-
-            {/* 4. Portfolio plan — hero card */}
-            <div className="overflow-hidden border border-rule-24 bg-gradient-to-br from-pink-500/[0.14] to-secondary/10 p-3.5">
-                <NodeCard n={PLAN_NODE} lang={lang} l={l} />
-            </div>
-
-            <FanOutConnector />
-
-            {/* 5. Multiple output destinations */}
-            <FlowBlock kind="output" header={lang === 'ko' ? '④ 여러 출력 목적지' : lang === 'zh' ? '④ 多個輸出目標' : '④ Multiple output destinations'} lang={lang}>
-                <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
                     {OUTPUTS.map(s => <NodeCard key={s.id} n={s} lang={lang} l={l} />)}
                 </div>
             </FlowBlock>
@@ -404,55 +364,13 @@ export function PipelineDiagram() {
             <div className="mt-3 flex flex-wrap gap-2 border-t border-rule-10 pt-3 text-[11px] text-ink-2">
                 <span className="inline-flex items-center gap-1.5">
                     <BadgeCheck className="h-3.5 w-3.5 text-pos" />
-                    {lang === 'ko' ? '전체 체인은 GitHub Actions로 매일 재실행됩니다.' : lang === 'zh' ? '整個流程透過 GitHub Actions 每天重新執行。' : 'The whole chain re-runs daily via GitHub Actions.'}
+                    {lang === 'ko' ? '전체 체인은 GitHub Actions로 매일 재실행됩니다.' : lang === 'zh' ? '整個流程透過 GitHub Actions 每天重新執行。' : 'The scoring chain re-runs on a schedule via GitHub Actions.'}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                     <Activity className="h-3.5 w-3.5 text-warn" />
-                    {lang === 'ko' ? 'IC 드리프트 보고서는 매월 재계산됩니다.' : lang === 'zh' ? 'IC 漂移報告每月重算。' : 'The IC drift report recalculates monthly.'}
+                    {lang === 'ko' ? 'AI 애널리스트는 로컬 컴퓨터에서 실행되며 재구축을 위해 일시 중지되어 있습니다.' : lang === 'zh' ? 'AI 分析師在本機電腦上執行，目前因重建而暫停。' : 'The AI analyst runs on a local computer and is paused for rebuild.'}
                 </span>
             </div>
-        </div>
-    );
-}
-
-export function AiAnalysisFlow() {
-    const { language } = useLanguage();
-    const lang: 'en' | 'ko' | 'zh' = language === 'zh' ? 'zh' : language === 'ko' ? 'ko' : 'en';
-    const l = (x: L) => x[lang];
-
-    return (
-        <div className="border border-rule-10 bg-white/5 p-4">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-[11px] font-extrabold uppercase tracking-wider text-accent">
-                    {lang === 'ko' ? '요청 시 AI 분석 (Ask AI)' : lang === 'zh' ? '按需 AI 分析（Ask AI）' : 'On-demand AI analysis (Ask AI)'}
-                </p>
-                <span className="border border-accent/40 bg-accent/10 px-2 py-0.5 text-[11px] font-extrabold uppercase tracking-wider text-accent">
-                    {lang === 'ko' ? '요청 시' : lang === 'zh' ? '按需' : 'on-demand'}
-                </span>
-            </div>
-            <div className="mt-2.5 flex items-stretch gap-1 overflow-x-auto pb-1">
-                {AI_STEPS.map((s, i) => (
-                    <Fragment key={s.id}>
-                        <div className="flex min-w-[136px] flex-col justify-center border border-rule-10 bg-white/5 p-2">
-                            <span className="text-[11px] font-extrabold uppercase tracking-wider text-ink-2/50">{i + 1}</span>
-                            <span className="mt-0.5 text-[11px] font-extrabold leading-tight text-ink">{l(s.title)}</span>
-                            <span className="mt-0.5 text-[11px] leading-snug text-ink-2">{s.desc[lang]}</span>
-                        </div>
-                        {i < AI_STEPS.length - 1 && (
-                            <span className="flex shrink-0 items-center text-pos">
-                                <ChevronRight className="h-4 w-4" />
-                            </span>
-                        )}
-                    </Fragment>
-                ))}
-            </div>
-            <p className="mt-2 text-[11px] text-ink-3">
-                {lang === 'ko'
-                    ? '딥시크가 전체 RS2 프롬프트와 재무 데이터로 분석을 쓰고, 결과는 AI Reports(/reports)에 표시됩니다.'
-                    : lang === 'zh'
-                        ? 'DeepSeek 依完整 RS2 提示詞與財務資料撰寫分析，結果顯示於 AI Reports（/reports）。'
-                        : 'DeepSeek writes the analysis from the full RS2 prompt + financials; results appear under AI Reports (/reports).'}
-            </p>
         </div>
     );
 }
