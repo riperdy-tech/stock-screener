@@ -385,3 +385,322 @@ def test_2a_3_new_fields_null_when_nothing_filed_and_never_vote():
     for f in ("net_income_incl_nci", "equity_incl_nci", "cash_restricted", "customer_money_assets",
               "customer_money_liabilities", "insurance_reserves"):
         assert f in bfh.VOTE_EXCLUDED_FIELDS
+
+
+# ═════════════════════════════════════════════════════════════════════════════════════════════
+# Follow-up (brief_screener_scope_followup.md, 2026-10-02): items 1-4. Each test below fails on
+# 747def1d54 and passes with the follow-up.
+# ═════════════════════════════════════════════════════════════════════════════════════════════
+
+# ── Item 1: the vote and the bin-end anchor read the pre-fix candidate pools ─────────────────
+
+def _i_end(y, val, end, **kw):
+    d = _i(y, val, **kw)
+    d["end"] = end
+    return d
+
+
+def _d_end(y, val, end, **kw):
+    d = _d(y, val, **kw)
+    d["end"] = end
+    return d
+
+
+def test_item1_period_end_is_the_filings_not_the_scope_ladders():
+    """ProfitLoss (the longer series, the pre-fix vote winner) ends a week after NetIncomeLoss. The bin's
+    period_end is a property of the filings: it stays the pre-fix 12-31, not the ladder rung's 12-24."""
+    us = {"Assets": {"units": {"USD": [_i_end(y, 1_000_000 + y, f"{y}-12-24") for y in YEARS]}},
+          "Revenues": {"units": {"USD": [_d_end(y, 500_000, f"{y}-12-24") for y in YEARS]}},
+          "NetIncomeLoss": {"units": {"USD": [_d_end(y, 90_000, f"{y}-12-24") for y in (2021, 2022)]}},
+          "ProfitLoss": {"units": {"USD": [_d_end(y, 100_000, f"{y}-12-31") for y in YEARS]}},
+          "NetIncomeLossAttributableToNoncontrollingInterest": _flow({y: 10_000 for y in YEARS})}
+    out = _out(_doc(us))
+    pe = _prov(out)["period_end"]["TEST"]
+    assert pe["2022"] == "2022-12-31" and pe["2021"] == "2021-12-31"
+    assert _col(out, "net_income")[2022] == 90_000          # the value is still the parent's
+
+
+def _late_accession_doc(full_tag, late_tag, kind):
+    """`full_tag` (the pre-fix vote winner: the longer series) is filed in every year under the original
+    accession; `late_tag` (the scope ladder's first rung) only for 2022, under a late 10-K/A that also
+    restates 2022 revenue. Pre-fix the original accession wins the 2022 row; the scope fix must not move it."""
+    mk = _flow if kind == "flow" else _inst
+    one = _d if kind == "flow" else _i
+    us = _base_us()
+    us["Revenues"]["units"]["USD"].append(_d(2022, 480_000, accn="late-2022", filed="2023-06-01", form="10-K/A"))
+    us[full_tag] = mk({y: 100_000 for y in YEARS})
+    us[late_tag] = {"units": {"USD": [one(2022, 90_000, accn="late-2022", filed="2023-06-01", form="10-K/A")]}}
+    return us
+
+
+def test_item1_net_income_row_keeps_its_pre_fix_accession():
+    out = _out(_doc(_late_accession_doc("ProfitLoss", "NetIncomeLoss", "flow")))
+    assert _col(out, "revenue")[2022] == 507_000            # the original accession's row (pre-fix vote)
+    assert _col(out, "net_income")[2022] == 90_000          # the rung's value; the chosen accession has no NetIncomeLoss
+
+
+def test_item1_cash_row_keeps_its_pre_fix_accession():
+    out = _out(_doc(_late_accession_doc(CCER, "CashAndCashEquivalentsAtCarryingValue", "inst")))
+    assert _col(out, "revenue")[2022] == 507_000
+    assert _col(out, "cash")[2022] == 90_000
+
+
+def test_item1_equity_row_keeps_its_pre_fix_accession():
+    out = _out(_doc(_late_accession_doc(
+        "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest", "StockholdersEquity", "inst")))
+    assert _col(out, "revenue")[2022] == 507_000
+    assert _col(out, "equity")[2022] == 90_000
+
+
+# ── Item 2: `equity` is the parent's on every rung ──────────────────────────────────────────
+
+SEI = "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+
+
+def _eq(out):
+    return _col(out, "equity"), _section(out, "equity_scope")
+
+
+def test_item2_rung1_us_gaap_stockholders_equity_is_parent():
+    us = _base_us()
+    us["StockholdersEquity"] = _inst({y: 300_000 for y in YEARS})
+    us[SEI] = _inst({y: 320_000 for y in YEARS})
+    eq, sc = _eq(_out(_doc(us)))
+    assert eq == {y: 300_000 for y in YEARS} and sc == {y: "parent" for y in YEARS}
+
+
+def test_item2_rung2_ifrs_equity_attributable_to_owners_of_parent_is_parent():
+    ifrs = {"EquityAttributableToOwnersOfParent": _inst({y: 250_000 for y in YEARS}),
+            "Equity": _inst({y: 270_000 for y in YEARS}),
+            "NoncontrollingInterests": _inst({y: 20_000 for y in YEARS})}
+    eq, sc = _eq(_out(_doc(_base_us(), ifrs)))
+    assert eq == {y: 250_000 for y in YEARS} and sc == {y: "parent" for y in YEARS}
+
+
+def test_item2_rung3_including_nci_tag_minus_minority_interest_is_parent_derived():
+    us = _base_us()
+    us[SEI] = _inst({y: 320_000 for y in YEARS})
+    us["MinorityInterest"] = _inst({y: 20_000 for y in YEARS})
+    us["RedeemableNoncontrollingInterestEquityCarryingAmount"] = _inst({y: 5_000 for y in YEARS})
+    eq, sc = _eq(_out(_doc(us)))
+    assert eq == {y: 300_000 for y in YEARS}                # redeemable NCI is not subtracted (outside the total)
+    assert sc == {y: "parent_derived" for y in YEARS}
+
+
+def test_item2_rung4_ifrs_equity_minus_noncontrolling_interests_is_parent_derived():
+    ifrs = {"Equity": _inst({y: 270_000 for y in YEARS}),
+            "NoncontrollingInterests": _inst({y: 20_000 for y in YEARS})}
+    eq, sc = _eq(_out(_doc(_base_us(), ifrs)))
+    assert eq == {y: 250_000 for y in YEARS} and sc == {y: "parent_derived" for y in YEARS}
+
+
+def test_item2_rung5_ifrs_equity_with_no_element_of_n_is_no_nci_filed():
+    ifrs = {"Equity": _inst({y: 270_000 for y in YEARS})}
+    eq, sc = _eq(_out(_doc(_base_us(), ifrs)))
+    assert eq == {y: 270_000 for y in YEARS} and sc == {y: "no_nci_filed" for y in YEARS}
+
+
+def test_item2_rung6_figure_kept_and_marked_when_an_element_of_n_is_filed_and_nothing_resolves():
+    ifrs = {"Equity": _inst({y: 270_000 for y in YEARS})}
+    us = _base_us()
+    us["RedeemableNoncontrollingInterestEquityCarryingAmount"] = _inst({y: 5_000 for y in YEARS})
+    eq, sc = _eq(_out(_doc(us, ifrs)))
+    assert eq == {y: 270_000 for y in YEARS} and sc == {y: "nci_unknown" for y in YEARS}
+
+
+def test_item2_the_ladder_is_per_year():
+    us = _base_us()
+    us["StockholdersEquity"] = _inst({y: 300_000 for y in range(2020, 2023)})
+    us[SEI] = _inst({y: 320_000 for y in YEARS})
+    us["MinorityInterest"] = _inst({y: 20_000 for y in YEARS})
+    eq, sc = _eq(_out(_doc(us)))
+    assert eq == {y: 300_000 for y in YEARS}
+    assert {y: sc[y] for y in range(2015, 2020)} == {y: "parent_derived" for y in range(2015, 2020)}
+    assert {y: sc[y] for y in range(2020, 2023)} == {y: "parent" for y in range(2020, 2023)}
+
+
+def test_item2_rung3_needs_both_filed_at_the_same_instant():
+    us = _base_us()
+    us[SEI] = _inst({y: 320_000 for y in YEARS})
+    us["MinorityInterest"] = {"units": {"USD": [_i_end(y, 20_000, f"{y}-12-30") for y in YEARS]}}
+    eq, sc = _eq(_out(_doc(us)))
+    # the minority interest is at another date: the including-NCI figure is kept and marked (rung 6)
+    assert eq == {y: 320_000 for y in YEARS} and sc == {y: "nci_unknown" for y in YEARS}
+
+
+def test_item2_equity_incl_nci_takes_ifrs_equity_after_the_us_gaap_tag_and_before_the_sum():
+    ifrs = {"EquityAttributableToOwnersOfParent": _inst({y: 250_000 for y in YEARS}),
+            "Equity": _inst({y: 270_000 for y in YEARS}),
+            "NoncontrollingInterests": _inst({y: 20_000 for y in YEARS})}
+    out = _out(_doc(_base_us(), ifrs))
+    assert _col(out, "equity_incl_nci") == {y: 270_000 for y in YEARS}
+    assert _section(out, "equity_incl_nci_rung") == {y: "ifrs_equity" for y in YEARS}
+    us = _base_us()
+    us[SEI] = _inst({y: 330_000 for y in YEARS})
+    out = _out(_doc(us, ifrs))
+    assert _col(out, "equity_incl_nci") == {y: 330_000 for y in YEARS}      # the us-gaap tag first
+    us = _base_us()
+    us["StockholdersEquity"] = _inst({y: 300_000 for y in YEARS})
+    us["MinorityInterest"] = _inst({y: 20_000 for y in YEARS})
+    out = _out(_doc(us, {"Equity": _inst({y: 321_000 for y in YEARS})}))
+    assert _col(out, "equity_incl_nci") == {y: 321_000 for y in YEARS}      # ahead of parent + minority
+    assert _section(out, "equity_incl_nci_rung") == {y: "ifrs_equity" for y in YEARS}
+
+
+# ── Item 3: a filed zero NCI is evidence of no NCI ──────────────────────────────────────────
+
+def test_item3_zero_minority_interest_is_nci_zero_filed_and_keeps_profit_loss():
+    us = _base_us()
+    us["ProfitLoss"] = _flow({y: 100_000 for y in YEARS})
+    us["MinorityInterest"] = _inst({y: 0 for y in YEARS})
+    out = _out(_doc(us))
+    assert _col(out, "net_income") == {y: 100_000 for y in YEARS}
+    assert _section(out, "ni_scope") == {y: "nci_zero_filed" for y in YEARS}
+    assert _col(out, "net_income_incl_nci") == {y: 100_000 for y in YEARS}
+
+
+def test_item3_non_zero_minority_interest_without_an_income_line_stays_nci_unknown_per_year():
+    us = _base_us()
+    us["ProfitLoss"] = _flow({y: 100_000 for y in YEARS})
+    us["MinorityInterest"] = _inst({y: (0 if y < 2019 else 50_000) for y in YEARS})
+    out = _out(_doc(us))
+    sc = _section(out, "ni_scope")
+    assert {y: sc[y] for y in range(2015, 2019)} == {y: "nci_zero_filed" for y in range(2015, 2019)}
+    assert {y: sc[y] for y in range(2019, 2023)} == {y: "nci_unknown" for y in range(2019, 2023)}
+    assert _col(out, "net_income") == {y: 100_000 for y in YEARS}
+
+
+def test_item3_equity_rungs_read_n_the_same_way():
+    ifrs = {"Equity": _inst({y: 270_000 for y in YEARS})}
+    us = _base_us()
+    us["RedeemableNoncontrollingInterestEquityCarryingAmount"] = _inst({y: 0 for y in YEARS})
+    eq, sc = _eq(_out(_doc(us, ifrs)))
+    assert eq == {y: 270_000 for y in YEARS} and sc == {y: "nci_zero_filed" for y in YEARS}
+
+
+def test_item3_equity_incl_nci_parent_rung_reads_a_filed_zero_as_no_nci():
+    us = _base_us()
+    us["StockholdersEquity"] = _inst({y: 300_000 for y in YEARS})
+    us["RedeemableNoncontrollingInterestEquityCarryingAmount"] = _inst({y: 0 for y in YEARS})
+    out = _out(_doc(us))
+    assert _col(out, "equity_incl_nci") == {y: 300_000 for y in YEARS}
+    assert _section(out, "equity_incl_nci_rung") == {y: "parent_no_nci" for y in YEARS}
+
+
+def test_item3_ttm_incl_nci_window_check_reads_a_filed_zero_as_no_nci():
+    def fixture(mi):
+        us = _ttm_base()
+        us["NetIncomeLoss"] = _ttm_flow(90_000, 50_000, 40_000)
+        us["MinorityInterest"] = {"units": {"USD": [_i(2022, mi), _p("2023-06-30", "2023-06-30", mi, filed="2023-08-01")]}}
+        return us
+    f = _out(_doc(fixture(0)))["ttm"]["fields"]
+    assert f["net_income_incl_nci"] == f["net_income"] == 90_000 + 50_000 - 40_000
+    assert "net_income_incl_nci" not in _out(_doc(fixture(5_000)))["ttm"]["fields"]
+
+
+# ── Item 4: restricted-cash and customer-money sums never add a total to its own part ───────
+
+def _cash_doc(**tags):
+    us = _base_us()
+    for t, v in tags.items():
+        us[t] = _inst({y: v for y in YEARS})
+    return _out(_doc(us))
+
+
+def test_item4_restricted_cash_total_is_not_added_to_its_own_parts():
+    out = _cash_doc(RestrictedCash=10_000, RestrictedCashCurrent=6_000, RestrictedCashNoncurrent=4_000)
+    assert _col(out, "cash_restricted") == {y: 10_000 for y in YEARS}
+    out = _cash_doc(RestrictedCashCurrent=6_000, RestrictedCashNoncurrent=4_000)
+    assert _col(out, "cash_restricted") == {y: 10_000 for y in YEARS}       # the parts when no total is filed
+    out = _cash_doc(RestrictedCashNoncurrent=4_000)
+    assert _col(out, "cash_restricted") == {y: 4_000 for y in YEARS}        # whichever are filed
+
+
+def test_item4_combined_restricted_cash_and_equivalents_element_alone_when_filed_with_its_parts():
+    out = _cash_doc(RestrictedCashAndCashEquivalentsAtCarryingValue=10_000, RestrictedCash=6_000,
+                    RestrictedCashEquivalents=4_000, RestrictedCashAndCashEquivalentsCurrent=7_000,
+                    RestrictedCashAndCashEquivalentsNoncurrent=3_000)
+    assert _col(out, "cash_restricted") == {y: 10_000 for y in YEARS}
+    out = _cash_doc(RestrictedCashAndCashEquivalentsCurrent=7_000, RestrictedCashAndCashEquivalentsNoncurrent=3_000,
+                    RestrictedCash=6_000, RestrictedCashEquivalents=4_000)
+    assert _col(out, "cash_restricted") == {y: 10_000 for y in YEARS}       # alternative (b) before (c)
+    out = _cash_doc(RestrictedCash=6_000, RestrictedCashEquivalentsCurrent=1_000,
+                    RestrictedCashEquivalentsNoncurrent=1_000, RestrictedCashEquivalents=2_000)
+    assert _col(out, "cash_restricted") == {y: 8_000 for y in YEARS}        # (c): [R else parts] + [RE else parts]
+
+
+def test_item4_segregated_cash_family_takes_the_aggregate_else_the_two_regulations():
+    out = _cash_doc(CashSegregatedUnderFederalAndOtherRegulations=5_000,
+                    CashSegregatedUnderCommodityExchangeActRegulation=2_000,
+                    CashSegregatedUnderOtherRegulations=3_000, RestrictedCash=1_000)
+    assert _col(out, "cash_restricted") == {y: 6_000 for y in YEARS}        # restricted family + segregated family
+    out = _cash_doc(CashSegregatedUnderCommodityExchangeActRegulation=2_000,
+                    CashSegregatedUnderOtherRegulations=3_000)
+    assert _col(out, "cash_restricted") == {y: 5_000 for y in YEARS}
+
+
+def test_item4_cash_rung_3_subtracts_the_total_not_the_double_count():
+    out = _cash_doc(**{CCER: 50_000, "RestrictedCash": 10_000, "RestrictedCashCurrent": 6_000,
+                       "RestrictedCashNoncurrent": 4_000})
+    assert _col(out, "cash") == {y: 40_000 for y in YEARS}
+    assert _section(out, "cash_scope") == {y: "derived_minus_restricted" for y in YEARS}
+
+
+def test_item4_securities_segregated_only_filer_is_unresolved_with_its_reason():
+    out = _cash_doc(**{CCER: 50_000, "CashAndSecuritiesSegregatedUnderFederalAndOtherRegulations": 20_000})
+    assert _col(out, "cash") == {y: None for y in YEARS}
+    assert _section(out, "cash_scope") == {y: "cash_unresolved_securities_segregated" for y in YEARS}
+    assert _col(out, "cash_restricted") == {y: None for y in YEARS}         # they left R
+    assert _col(out, "customer_money_assets") == {y: 20_000 for y in YEARS}  # and joined the customer-money assets
+
+
+def test_item4_securities_segregated_with_a_restricted_element_still_lets_rung_3_subtract_the_restricted():
+    out = _cash_doc(**{CCER: 50_000, "RestrictedCash": 10_000,
+                       "CashAndSecuritiesSegregatedUnderFederalAndOtherRegulations": 20_000})
+    assert _col(out, "cash") == {y: 40_000 for y in YEARS}
+    assert _section(out, "cash_scope") == {y: "derived_minus_restricted" for y in YEARS}
+
+
+def test_item4_securities_segregated_family_takes_federal_else_sec_regulation_never_both():
+    out = _cash_doc(CashAndSecuritiesSegregatedUnderFederalAndOtherRegulations=20_000,
+                    CashAndSecuritiesSegregatedUnderSecuritiesExchangeCommissionRegulation=9_000,
+                    FundsHeldForClients=11_000)
+    assert _col(out, "customer_money_assets") == {y: 31_000 for y in YEARS}
+    out = _cash_doc(CashAndSecuritiesSegregatedUnderSecuritiesExchangeCommissionRegulation=9_000)
+    assert _col(out, "customer_money_assets") == {y: 9_000 for y in YEARS}
+
+
+def test_item4_payables_to_customers_in_two_namespaces_counted_once():
+    us = _base_us()
+    us["PayablesToCustomers"] = _inst({y: 17_000 for y in YEARS})
+    us["SettlementLiabilitiesCurrent"] = _inst({y: 19_000 for y in YEARS})
+    srt = {"PayablesToCustomers": _inst({y: 17_000 for y in YEARS})}
+    out = _out(_doc(us, srt=srt))
+    assert _col(out, "customer_money_liabilities") == {y: 36_000 for y in YEARS}
+
+
+def test_item4_assets_held_in_trust_with_its_parts_counted_once():
+    out = _cash_doc(AssetsHeldInTrust=10_000, AssetsHeldInTrustCurrent=6_000, AssetsHeldInTrustNoncurrent=4_000,
+                    FundsHeldForClients=11_000)
+    assert _col(out, "customer_money_assets") == {y: 21_000 for y in YEARS}
+    out = _cash_doc(AssetsHeldInTrustCurrent=6_000, AssetsHeldInTrustNoncurrent=4_000)
+    assert _col(out, "customer_money_assets") == {y: 10_000 for y in YEARS}
+
+
+def test_item4_provenance_records_the_elements_used():
+    out = _cash_doc(RestrictedCash=10_000, RestrictedCashCurrent=6_000, RestrictedCashNoncurrent=4_000,
+                    CashSegregatedUnderFederalAndOtherRegulations=5_000)
+    prov = _prov(out)
+    tags = prov["_tags"]
+    used = {tags[ti] for _, ti, _ in prov["runs"]["TEST"]["cash_restricted"]}
+    assert used == {"RestrictedCash+CashSegregatedUnderFederalAndOtherRegulations"}
+
+
+def test_item2_equity_scope_is_a_provenance_section_the_live_refresh_merges():
+    ifrs = {"Equity": _inst({y: 270_000 for y in YEARS}),
+            "NoncontrollingInterests": _inst({y: 20_000 for y in YEARS})}
+    out = _out(_doc(_base_us(), ifrs))
+    assert "equity_scope" in _prov(out)["_schema"]
+    prov = {}
+    bfh.merge_ticker_provenance(prov, "TEST", out["history"], out["prov"])
+    assert prov["equity_scope"]["TEST"] == {str(y): "parent_derived" for y in YEARS}

@@ -117,7 +117,8 @@ INSTANT_TAGS = {
     "current_liabilities": ["LiabilitiesCurrent", "CurrentLiabilities"],
     "total_liabilities": ["Liabilities"],
     # equity and cash keep their place in the field order; extract_history resolves them by ladder
-    # (EQUITY_LADDER_SPEC, resolve_cash_series — Fixes 1a and 2a), never by a vote over these lists.
+    # (resolve_equity_series, resolve_cash_series — Fixes 1a and 2a), never by a vote over these lists
+    # (the lists still define the vote's candidate pools: vote_raws in extract_history).
     "equity": ["StockholdersEquity",
                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
                "Equity"],
@@ -328,6 +329,11 @@ FIELD_SPECS = {
                           "RevenueFromContractWithCustomerIncludingAssessedTax",
                           "SalesRevenueNet", "Revenue", "RevenueFromContractsWithCustomers"],
              "COMPONENT_SLOTS": []},
+ # Fix 1a follow-up: `net_income` itself is resolved by NI_LADDER, never from this spec. The spec is
+ # kept unchanged ONLY so the accession vote and the bin-end anchor keep reading the candidate pool
+ # the vote read before the scope fix (vote_raws in extract_history): the filing calendar and the
+ # choice of a row's accession are properties of the filings, not of the field's accounting scope.
+ "net_income": {"COMBINED": ["NetIncomeLoss", "ProfitLoss"], "COMPONENT_SLOTS": []},
  "ocf": {"COMBINED": ["NetCashProvidedByUsedInOperatingActivities",
                       "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations",
                       "CashFlowsFromUsedInOperatingActivities",
@@ -511,46 +517,74 @@ NCI_ELEMENTS = ("MinorityInterest", "RedeemableNoncontrollingInterestEquityCarry
                 "RedeemableNoncontrollingInterestEquityFairValue", NCI_LINE_US) + NCI_SPLIT_US + \
                ("NoncontrollingInterests", NCI_LINE_IFRS)
 SE_INCL_NCI = "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
-# `equity` is the parent's: StockholdersEquity first, then the pre-existing tags (now a ladder).
-EQUITY_LADDER_SPEC = {"COMBINED": ["StockholdersEquity", SE_INCL_NCI, "Equity"]}
+# `equity` is the parent's, resolved per year by resolve_equity_series (the equity_scope ladder):
+#   1 us-gaap StockholdersEquity (parent); 2 ifrs EquityAttributableToOwnersOfParent (parent);
+#   3 SE_INCL_NCI - MinorityInterest, same instant, both filed (parent_derived); 4 ifrs Equity -
+#   NoncontrollingInterests, same instant, both filed (parent_derived); 5 SE_INCL_NCI, else ifrs Equity,
+#   where no element of N is filed with a non-zero value (no_nci_filed, or nci_zero_filed when an element
+#   is filed only as 0); 6 the same figure where a non-zero element of N is filed and nothing above
+#   resolves (nci_unknown: kept and marked). Redeemable NCI is NOT subtracted in rung 3: it sits in
+#   temporary equity, outside the including-NCI total (ASC 810-10-45-16; IAS 1.54(q)-(r)).
 # Fix 2a. Since ASU 2016-18 the cash-flow total CashCashEquivalentsRestrictedCash... (CCERCRCE) runs one
 # year-end further back than the balance sheet and used to win the vote; it includes restricted and
 # segregated cash. `cash` is the unrestricted line, resolved per year by this ladder (cash_scope per
 # year in the provenance): 1 CashAndCashEquivalentsAtCarryingValue; 2 ifrs CashAndCashEquivalents;
-# 3 CCERCRCE - sum(R) when an element of R is filed and the difference is >= 0; 4 CCERCRCE when no
-# element of R is filed; else null (`cash_unresolved`).
+# 3 CCERCRCE - cash_restricted when an element of R is filed and the difference is >= 0; 4 CCERCRCE when
+# no element of R is filed; else null (`cash_unresolved`, or `cash_unresolved_securities_segregated`
+# when the only R element filed is a CashAndSecuritiesSegregated... one: it includes securities, so it
+# is not a component of CCERCRCE and cannot be subtracted from it).
 CCERCRCE = "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"
-CASH_RESTRICTED_TAGS = (                                                        # R (closed list)
-    "RestrictedCash", "RestrictedCashCurrent", "RestrictedCashNoncurrent",
-    "RestrictedCashAndCashEquivalentsAtCarryingValue", "RestrictedCashAndCashEquivalentsCurrent",
-    "RestrictedCashAndCashEquivalentsNoncurrent", "RestrictedCashEquivalents",
-    "RestrictedCashEquivalentsCurrent", "RestrictedCashEquivalentsNoncurrent",
-    "CashAndSecuritiesSegregatedUnderFederalAndOtherRegulations",
-    "CashSegregatedUnderFederalAndOtherRegulations",
-    "CashAndSecuritiesSegregatedUnderSecuritiesExchangeCommissionRegulation",
-    "CashSegregatedUnderCommodityExchangeActRegulation", "CashSegregatedUnderOtherRegulations")
-# New instant sums (each null when none of its tags is filed). "srt:" keys are the srt namespace,
-# added to the merged facts under that prefix by build_ticker_outputs.
+# FAMILY RULE (follow-up item 4). R, the customer-money assets and liabilities hold totals next to their
+# own components (RestrictedCash = ...Current + ...Noncurrent; RestrictedCashAndCashEquivalents =
+# RestrictedCash + RestrictedCashEquivalents; AssetsHeldInTrust = ...Current + ...Noncurrent). Within a
+# family the most aggregate element filed at the instant is taken, and an element is never added to its
+# own component. Shapes: a GROUP is an ordered tuple of ALTERNATIVES; an alternative is a tuple of tags,
+# summed over the ones filed (a lone Current or Noncurrent is a figure, not a wrong total); the first
+# alternative with any tag filed wins the group. An ATTEMPT is a tuple of groups summed over the groups
+# that resolve; a FAMILY is a tuple of attempts, the first attempt with any group resolved wins.
+_RCACE = (("RestrictedCashAndCashEquivalentsAtCarryingValue",),
+          ("RestrictedCashAndCashEquivalentsCurrent", "RestrictedCashAndCashEquivalentsNoncurrent"))
+_RC = (("RestrictedCash",), ("RestrictedCashCurrent", "RestrictedCashNoncurrent"))
+_RCE = (("RestrictedCashEquivalents",),
+        ("RestrictedCashEquivalentsCurrent", "RestrictedCashEquivalentsNoncurrent"))
+_SEGREGATED = (("CashSegregatedUnderFederalAndOtherRegulations",),
+               ("CashSegregatedUnderCommodityExchangeActRegulation", "CashSegregatedUnderOtherRegulations"))
+# The two CashAndSecuritiesSegregated... elements include securities: not components of CCERCRCE, so
+# they are customer money held under regulation, not R.
+_SECURITIES_SEGREGATED = (("CashAndSecuritiesSegregatedUnderFederalAndOtherRegulations",),
+                          ("CashAndSecuritiesSegregatedUnderSecuritiesExchangeCommissionRegulation",))
+_TRUST = (("AssetsHeldInTrust",), ("AssetsHeldInTrustCurrent", "AssetsHeldInTrustNoncurrent"))
+RESTRICTED_FAMILY = ((_RCACE,), (_RC, _RCE))                         # R, restricted cash
+SEGREGATED_FAMILY = ((_SEGREGATED,),)                                # R, cash segregated for customers
+SECURITIES_SEGREGATED_FAMILY = ((_SECURITIES_SEGREGATED,),)
+# New instant fields. "srt:" keys are the srt namespace, added to the merged facts under that prefix by
+# build_ticker_outputs (the same concept as the us-gaap element: never added together).
+CUSTOMER_MONEY_ASSETS_FAMILY = (((("FundsHeldForClients",),), (("SettlementAssetsCurrent",),), _TRUST,
+                                 _SECURITIES_SEGREGATED),)
+CUSTOMER_MONEY_LIABILITIES_FAMILY = (((("PayablesToCustomers",), ("srt:PayablesToCustomers",)),
+                                      (("SettlementLiabilitiesCurrent",),)),)
+MONEY_FAMILIES = {"restricted": RESTRICTED_FAMILY, "segregated": SEGREGATED_FAMILY,
+                  "securities_segregated": SECURITIES_SEGREGATED_FAMILY,
+                  "customer_money_assets": CUSTOMER_MONEY_ASSETS_FAMILY,
+                  "customer_money_liabilities": CUSTOMER_MONEY_LIABILITIES_FAMILY}
+# Plain sums (each null when none of its tags is filed); insurance_reserves' three elements are disjoint.
 INSTANT_SUM_FIELDS = {
-    "cash_restricted": CASH_RESTRICTED_TAGS,
-    "customer_money_assets": ("FundsHeldForClients", "SettlementAssetsCurrent",
-                              "AssetsHeldInTrustCurrent", "AssetsHeldInTrustNoncurrent",
-                              "AssetsHeldInTrust"),
-    "customer_money_liabilities": ("PayablesToCustomers", "srt:PayablesToCustomers",
-                                   "SettlementLiabilitiesCurrent"),
     "insurance_reserves": ("LiabilityForFuturePolicyBenefits",
                            "LiabilityForUnpaidClaimsAndClaimsAdjustmentExpense", "UnearnedPremiums"),
 }
 SRT_TAGS = ("PayablesToCustomers",)
 
 
-def _nci_filed_ends(facts):
+def _nci_filed_ends(facts, nonzero_only=False):
     """[(end, form)] of every filed element of N (any form). StockholdersEquityIncludingPortion... counts
-    only where no StockholdersEquity fact of the same end carries the same value."""
+    only where no StockholdersEquity fact of the same end carries the same value (its difference from
+    the parent's equity is then a non-zero NCI). `nonzero_only`: elements filed as 0 do not count.
+    A filed zero NCI is evidence of NO outside holders (a value, not an absence), so the scope decisions
+    ask for the non-zero evidence and tell a filed zero from no element at all."""
     out = []
     for tag in NCI_ELEMENTS:
         for e in facts.get(tag, {}).get("units", {}).get("USD", []):
-            if e.get("end") and e.get("val") is not None:
+            if e.get("end") and e.get("val") is not None and not (nonzero_only and e["val"] == 0):
                 out.append((e["end"], e.get("form")))
     se = {}
     for e in facts.get("StockholdersEquity", {}).get("units", {}).get("USD", []):
@@ -562,9 +596,19 @@ def _nci_filed_ends(facts):
     return out
 
 
-def _nci_filed_years(facts):
-    """Fiscal-year bins (calendar end year, annual forms) in which an element of N is filed."""
-    return {int(end[:4]) for end, form in _nci_filed_ends(facts) if form in ANNUAL_FORMS}
+def _nci_filed_years(facts, nonzero_only=False):
+    """Fiscal-year bins (calendar end year, annual forms) in which an element of N is filed (with a
+    non-zero value when `nonzero_only`)."""
+    return {int(end[:4]) for end, form in _nci_filed_ends(facts, nonzero_only) if form in ANNUAL_FORMS}
+
+
+def _nci_scope_unresolved(y, nci_any, nci_nonzero):
+    """Scope of a ProfitLoss / Equity figure that no parent or derived rung resolved (rungs 5 and 6): an
+    element of N filed with a non-zero value -> nci_unknown (the figure is kept and marked); elements
+    filed only as 0 -> nci_zero_filed (the zero is read as a value: no outside holders); none -> no_nci_filed."""
+    if y in nci_nonzero:
+        return "nci_unknown"
+    return "nci_zero_filed" if y in nci_any else "no_nci_filed"
 
 
 def _nci_line_series(facts, which):
@@ -597,9 +641,10 @@ def resolve_net_income_series(facts):
     override on ProfitLoss and subtracts the NCI line of the same accession (else the NCI series value).
     `incl` is net_income_incl_nci: (series, raws, prov, tags) — ProfitLoss when filed; else a rung-1/2
     parent + the us-gaap/ifrs NCI line when both are filed; else the parent's figure when no element of
-    N is filed that year; else absent.
+    N is filed with a non-zero value that year; else absent. A filed zero NCI is evidence of no outside
+    holders: it leaves rung 5 and the consolidated-equals-parent rule open (`nci_zero_filed`).
     """
-    nci_years = _nci_filed_years(facts)
+    nci_any, nci_nonzero = _nci_filed_years(facts), _nci_filed_years(facts, nonzero_only=True)
     tag_series = {}
     for tag in ("NetIncomeLoss", "ProfitLossAttributableToOwnersOfParent", "ProfitLoss"):
         s, r, _ = annual_duration_series(facts, [tag])
@@ -622,7 +667,7 @@ def resolve_net_income_series(facts):
             else:
                 series[y] = v
                 tags[y] = tag
-                scope[y] = "nci_unknown" if sc == "no_nci_filed" and y in nci_years else sc
+                scope[y] = _nci_scope_unresolved(y, nci_any, nci_nonzero) if sc == "no_nci_filed" else sc
             raws[y] = r.get(y, [])
             prov[y] = "primary" if i == 0 else tags[y]
     # net_income_incl_nci
@@ -640,26 +685,74 @@ def resolve_net_income_series(facts):
             if ns.get(y) is not None:
                 i_series[y], i_raws[y] = v + ns[y], []
                 i_prov[y] = i_tags[y] = tag + "+" + (NCI_LINE_IFRS if w == "ifrs" else NCI_LINE_US)
-            elif y not in nci_years:
+            elif y not in nci_nonzero:
                 i_series[y], i_raws[y] = v, pr.get(y, [])
                 i_prov[y] = i_tags[y] = tag
     return series, raws, prov, tags, scope, derived, (i_series, i_raws, i_prov, i_tags)
 
 
+def _instant_end(raws, y):
+    """The instant a resolved instant year sits at: the latest end among its candidates (the series takes
+    the latest (end, filed) value of the year bin)."""
+    ends = [c[3] for c in raws.get(y, [])]
+    return max(ends) if ends else None
+
+
+def resolve_equity_series(facts):
+    """Follow-up item 2: `equity` is the parent's on every rung, per year (see the ladder above
+    CCERCRCE: StockholdersEquity; ifrs owners of the parent; including-NCI total minus MinorityInterest;
+    ifrs Equity minus NoncontrollingInterests; the figure where no non-zero element of N is filed;
+    the figure kept and marked). A subtraction takes both elements at ONE instant, both filed.
+    Returns (series, raws, prov, tags, scope). A derived year has no single accession (raws empty)."""
+    nci_any, nci_nonzero = _nci_filed_years(facts), _nci_filed_years(facts, nonzero_only=True)
+    t = {tag: annual_instant_series(facts, [tag])[:2] for tag in (
+        "StockholdersEquity", "EquityAttributableToOwnersOfParent", SE_INCL_NCI, "Equity",
+        "MinorityInterest", "NoncontrollingInterests")}
+    series, raws, prov, tags, scope = {}, {}, {}, {}, {}
+
+    def put(y, v, r, p, tag, sc):
+        series[y], raws[y], prov[y], tags[y], scope[y] = v, r, p, tag, sc
+
+    for tag in ("StockholdersEquity", "EquityAttributableToOwnersOfParent"):           # rungs 1, 2
+        s, r = t[tag]
+        for y, v in s.items():
+            if y not in series and v is not None:
+                put(y, v, r.get(y, []), "primary" if tag == "StockholdersEquity" else tag, tag, "parent")
+    for total, nci in ((SE_INCL_NCI, "MinorityInterest"), ("Equity", "NoncontrollingInterests")):   # rungs 3, 4
+        (ts, tr), (ns, nr) = t[total], t[nci]
+        for y, v in ts.items():
+            if y in series or v is None or ns.get(y) is None:
+                continue
+            if _instant_end(tr, y) != _instant_end(nr, y):
+                continue
+            tg = total + "-" + nci
+            put(y, v - ns[y], [], tg, tg, "parent_derived")
+    for tag in (SE_INCL_NCI, "Equity"):                                                # rungs 5, 6
+        s, r = t[tag]
+        for y, v in s.items():
+            if y not in series and v is not None:
+                put(y, v, r.get(y, []), tag, tag, _nci_scope_unresolved(y, nci_any, nci_nonzero))
+    return series, raws, prov, tags, scope
+
+
 def resolve_equity_incl_nci_series(facts):
-    """Fix 1a(b): equity including the NCI. Rungs per year: the incl. tag; else StockholdersEquity +
-    MinorityInterest (+ RedeemableNoncontrollingInterestEquityCarryingAmount when filed), both of the
-    first two required; else StockholdersEquity when no element of N is filed that year; else absent.
-    Returns (series, raws, prov, tags, rung)."""
-    nci_years = _nci_filed_years(facts)
+    """Fix 1a(b): equity including the NCI. Rungs per year: the us-gaap including-NCI tag; ifrs Equity
+    (a consolidated total, `ifrs_equity`); StockholdersEquity + MinorityInterest (+
+    RedeemableNoncontrollingInterestEquityCarryingAmount when filed), both of the first two required;
+    StockholdersEquity when no element of N is filed with a non-zero value that year (a filed zero is
+    evidence of no NCI); else absent. Returns (series, raws, prov, tags, rung)."""
+    nci_nonzero = _nci_filed_years(facts, nonzero_only=True)
     inc, inc_r, _ = annual_instant_series(facts, [SE_INCL_NCI])
+    ife, ife_r, _ = annual_instant_series(facts, ["Equity"])
     se, se_r, _ = annual_instant_series(facts, ["StockholdersEquity"])
     mi, _, _ = annual_instant_series(facts, ["MinorityInterest"])
     rnci, _, _ = annual_instant_series(facts, ["RedeemableNoncontrollingInterestEquityCarryingAmount"])
     series, raws, prov, tags, rung = {}, {}, {}, {}, {}
-    for y in sorted(set(inc) | set(se)):
+    for y in sorted(set(inc) | set(ife) | set(se)):
         if inc.get(y) is not None:
             series[y], raws[y], prov[y], tags[y], rung[y] = inc[y], inc_r.get(y, []), "primary", SE_INCL_NCI, "incl_tag"
+        elif ife.get(y) is not None:
+            series[y], raws[y], prov[y], tags[y], rung[y] = ife[y], ife_r.get(y, []), "Equity", "Equity", "ifrs_equity"
         elif se.get(y) is not None and mi.get(y) is not None:
             total = se[y] + mi[y]
             t = "StockholdersEquity+MinorityInterest"
@@ -667,7 +760,7 @@ def resolve_equity_incl_nci_series(facts):
                 total += rnci[y]
                 t += "+RedeemableNoncontrollingInterestEquityCarryingAmount"
             series[y], raws[y], prov[y], tags[y], rung[y] = total, [], t, t, "parent_plus_minority"
-        elif se.get(y) is not None and y not in nci_years:
+        elif se.get(y) is not None and y not in nci_nonzero:
             series[y], raws[y], prov[y], tags[y], rung[y] = se[y], se_r.get(y, []), "StockholdersEquity", \
                 "StockholdersEquity", "parent_no_nci"
     return series, raws, prov, tags, rung
@@ -689,11 +782,71 @@ def resolve_instant_sum_series(facts, tag_list):
     return series, raws, prov, tags
 
 
-def resolve_cash_series(facts):
-    """Fix 2a: `cash` = the unrestricted line by the cash ladder (see CCERCRCE above).
-    Returns (series, raws, prov, tags, scope); scope[y] is set for every year CCERCRCE or a rung files,
-    `cash_unresolved` (null cell) for a negative rung-3 difference."""
-    restricted = resolve_instant_sum_series(facts, CASH_RESTRICTED_TAGS)[0]
+def _family_tags(family):
+    return {t for attempt in family for group in attempt for alt in group for t in alt}
+
+
+def _family_value(per, y, family):
+    """(value, [tags used]) of a family in year y, or (None, []) when none of it is filed. Within a group
+    the first alternative with any tag filed wins (the most aggregate element: a total is never added to
+    its own component); an attempt sums the groups that resolve; the first attempt that resolves wins.
+    A filed 0 is a value."""
+    for attempt in family:
+        total, used = None, []
+        for group in attempt:
+            for alt in group:
+                parts = [(t, per[t][y]) for t in alt if per.get(t, {}).get(y) is not None]
+                if parts:
+                    v = sum(x for _, x in parts)
+                    total = v if total is None else total + v
+                    used += [t for t, _ in parts]
+                    break
+        if total is not None:
+            return total, used
+    return None, []
+
+
+def resolve_money_fields(facts):
+    """Follow-up item 4: cash_restricted (restricted family + segregated-cash family), customer_money_assets
+    and customer_money_liabilities by the FAMILY rule (see RESTRICTED_FAMILY above), plus the per-year
+    CashAndSecuritiesSegregated... figure (not part of R; it still shows that CCERCRCE cannot be shown as
+    unrestricted). Returns ({field: (series, raws, prov, tags)}, {year: securities_segregated_value}); raws
+    are empty (a summed year has no single accession); the tag string lists the elements used."""
+    per = {t: annual_instant_series(facts, [t])[0]
+           for fam in MONEY_FAMILIES.values() for t in _family_tags(fam)}
+    years = sorted(set().union(*[set(s) for s in per.values()]))
+    out = {f: ({}, {}, {}, {}) for f in ("cash_restricted", "customer_money_assets", "customer_money_liabilities")}
+    securities = {}
+
+    def put(field, y, value, used):
+        series, raws, prov, tags = out[field]
+        series[y], raws[y] = value, []
+        prov[y] = tags[y] = "+".join(used)
+
+    for y in years:
+        rv, ru = _family_value(per, y, RESTRICTED_FAMILY)
+        sv, su = _family_value(per, y, SEGREGATED_FAMILY)
+        if rv is not None or sv is not None:
+            put("cash_restricted", y, sum(v for v in (rv, sv) if v is not None), ru + su)
+        for field, family in (("customer_money_assets", CUSTOMER_MONEY_ASSETS_FAMILY),
+                              ("customer_money_liabilities", CUSTOMER_MONEY_LIABILITIES_FAMILY)):
+            v, u = _family_value(per, y, family)
+            if v is not None:
+                put(field, y, v, u)
+        cv, _ = _family_value(per, y, SECURITIES_SEGREGATED_FAMILY)
+        if cv is not None:
+            securities[y] = cv
+    return out, securities
+
+
+def resolve_cash_series(facts, restricted, securities_segregated):
+    """Fix 2a: `cash` = the unrestricted line by the cash ladder (see CCERCRCE above). `restricted` is the
+    cash_restricted series (R); `securities_segregated` the {year: value} of the CashAndSecuritiesSegregated...
+    family. Returns (series, raws, prov, tags, scope); scope[y] is set for every year CCERCRCE or a rung
+    files: `cash_unresolved` (null cell) for a negative rung-3 difference,
+    `cash_unresolved_securities_segregated` (null cell) when a securities-segregated element is the only
+    restricted-type element filed (it is not a component of CCERCRCE, so it cannot be subtracted, and
+    CCERCRCE cannot be shown as unrestricted)."""
     series, raws, prov, tags, scope = {}, {}, {}, {}, {}
     for i, (tag, sc) in enumerate((("CashAndCashEquivalentsAtCarryingValue", "unrestricted_line"),
                                    ("CashAndCashEquivalents", "ifrs_cash_and_equivalents"))):
@@ -706,15 +859,18 @@ def resolve_cash_series(facts):
     for y, v in s.items():
         if y in series or v is None:
             continue
-        if restricted.get(y) is None:
+        if restricted.get(y) is not None:
+            if v - restricted[y] >= 0:
+                t = CCERCRCE + "-restricted"
+                series[y], raws[y], prov[y], tags[y], scope[y] = v - restricted[y], [], t, t, \
+                    "derived_minus_restricted"
+            else:
+                scope[y] = "cash_unresolved"
+        elif securities_segregated.get(y) is not None:
+            scope[y] = "cash_unresolved_securities_segregated"
+        else:
             series[y], raws[y], prov[y], tags[y], scope[y] = v, r.get(y, []), CCERCRCE, CCERCRCE, \
                 "total_no_restricted_filed"
-        elif v - restricted[y] >= 0:
-            t = CCERCRCE + "-restricted"
-            series[y], raws[y], prov[y], tags[y], scope[y] = v - restricted[y], [], t, t, \
-                "derived_minus_restricted"
-        else:
-            scope[y] = "cash_unresolved"
     return series, raws, prov, tags, scope
 
 
@@ -1179,7 +1335,8 @@ def ttm_snapshot(facts):
         return None
     # Fix 1a(d): consolidated TTM net income on the history's rule (it never sets the snapshot's
     # through/filed): ProfitLoss; else a rung-1/2 parent + its NCI line; else the parent's figure when
-    # no element of N is filed inside the TTM window; else absent.
+    # no element of N is filed with a non-zero value inside the TTM window (a filed zero is evidence of
+    # no NCI); else absent.
     incl = cand_of("ProfitLoss")
     if incl is None:
         for ptag, which in (("NetIncomeLoss", "us"), ("ProfitLossAttributableToOwnersOfParent", "ifrs")):
@@ -1189,7 +1346,7 @@ def ttm_snapshot(facts):
             incl = combine(pc, nci_cand(which), 1)
             if incl is None:
                 lo = (date.fromisoformat(pc["fy_leg_end"]) - timedelta(days=366)).isoformat()
-                if not any(lo <= end <= pc["through"] for end, _ in _nci_filed_ends(facts)):
+                if not any(lo <= end <= pc["through"] for end, _ in _nci_filed_ends(facts, nonzero_only=True)):
                     incl = pc
             break
     if incl is not None:
@@ -1462,14 +1619,15 @@ def extract_history(facts, ticker=None, dei=None):
             series[field], raws[field], wtag = annual_duration_series(facts, tags, unit)
             prov_of[field] = {y: "primary" for y in series[field]}
             tag_of[field] = {y: wtag for y in series[field]}
+    money, securities_segregated = resolve_money_fields(facts)    # item 4: the family-rule fields
     for field, tags in INSTANT_TAGS.items():
         if field == "equity":                                     # Fix 1a: the parent's, by ladder
-            series[field], raws[field], prov_of[field], tag_of[field] = \
-                resolve_instant_field_series(facts, EQUITY_LADDER_SPEC)
+            series[field], raws[field], prov_of[field], tag_of[field], equity_scope = \
+                resolve_equity_series(facts)
             continue
         if field == "cash":                                       # Fix 2a: the unrestricted line
             series[field], raws[field], prov_of[field], tag_of[field], cash_scope = \
-                resolve_cash_series(facts)
+                resolve_cash_series(facts, money["cash_restricted"][0], securities_segregated)
             continue
         series[field], raws[field], wtag = annual_instant_series(facts, tags)
         prov_of[field] = {y: "primary" for y in series[field]}
@@ -1487,6 +1645,8 @@ def extract_history(facts, ticker=None, dei=None):
         tag_of["net_income_incl_nci"] = ni_incl
     series["equity_incl_nci"], raws["equity_incl_nci"], prov_of["equity_incl_nci"], \
         tag_of["equity_incl_nci"], eq_incl_rung = resolve_equity_incl_nci_series(facts)
+    for field, (ms, mr, mp, mt) in money.items():              # the family-rule fields (item 4)
+        series[field], raws[field], prov_of[field], tag_of[field] = ms, mr, mp, mt
     for field, tlist in INSTANT_SUM_FIELDS.items():
         series[field], raws[field], prov_of[field], tag_of[field] = resolve_instant_sum_series(facts, tlist)
     if ticker in DEBT_NULL_TICKERS:                           # declared STOP (NVS): null debt fields
@@ -1496,6 +1656,17 @@ def extract_history(facts, ticker=None, dei=None):
     # Vote-excluded fields (CH-7/CH-9) still get resolved and still receive the chosen accession's
     # correction, but do NOT vote in the accession-coverage rule and cannot form/evict a year-row.
     VOTE_FIELDS = [f for f in series if f not in VOTE_EXCLUDED_FIELDS]
+    # The accession vote and the bin-end anchor read the candidate pools the vote read BEFORE the scope
+    # fixes (follow-up item 1): the filing calendar and the choice of a row's accession are properties of
+    # the filings, not of a field's accounting scope. For net_income, cash and equity those pools are
+    # recomputed as the previous vote resolved them; the per-cell override below still reads the scope
+    # rung's own raws (the chosen accession's candidate of the rung's tag is used when it holds one,
+    # otherwise the rung's value stays).
+    vote_raws = dict(raws)
+    vote_raws["net_income"] = resolve_field_series(
+        facts, FIELD_SPECS["net_income"], ("USD",), ticker, baseline_tags=DURATION_TAGS["net_income"])[1]
+    for f in ("equity", "cash"):
+        vote_raws[f] = annual_instant_series(facts, INSTANT_TAGS[f])[1]
 
     # WINDOW ANCHOR. A row survives only if it has revenue or total_assets, but the MAX_YEARS
     # truncation runs BEFORE that gate — so a field whose coverage runs past revenue's (an IFRS
@@ -1546,7 +1717,7 @@ def extract_history(facts, ticker=None, dei=None):
         # the accession vote.
         end_ref = None
         for f in VOTE_FIELDS:
-            for accn, filed, val, end in raws[f].get(y, []):
+            for accn, filed, val, end in vote_raws[f].get(y, []):
                 if end_ref is None or end > end_ref:
                     end_ref = end
         if end_ref is not None:
@@ -1562,7 +1733,7 @@ def extract_history(facts, ticker=None, dei=None):
 
         accns = {}
         for f in VOTE_FIELDS:
-            for accn, filed, val, end in raws[f].get(y, []):
+            for accn, filed, val, end in vote_raws[f].get(y, []):
                 if not _near_ref(end):
                     continue
                 a = accns.setdefault(accn, {"fields": set(), "filed": ""})
@@ -1644,6 +1815,7 @@ def extract_history(facts, ticker=None, dei=None):
                    "scale_corrected": scale_corrected,
                    "ni_scope": {str(y): s for y, s in ni_scope.items()},
                    "nci_used": nci_used,
+                   "equity_scope": {str(y): s for y, s in equity_scope.items()},
                    "eq_incl_rung": {str(y): r for y, r in eq_incl_rung.items()},
                    "cash_scope": {str(y): s for y, s in cash_scope.items()}}
     return history, prov_bundle
@@ -1678,7 +1850,8 @@ def encode_provenance(history_out, prov_by_ticker):
         return accn_index[accn]
 
     runs, overrides_out, period_end_out, untagged_out, notes_out, scale_out = {}, {}, {}, {}, {}, {}
-    scope_out = {"ni_scope": {}, "nci_subtracted": {}, "equity_incl_nci_rung": {}, "cash_scope": {}}
+    scope_out = {"ni_scope": {}, "nci_subtracted": {}, "equity_scope": {}, "equity_incl_nci_rung": {},
+                 "cash_scope": {}}
     # Index accessions over ALL captured overrides (including cells on year-rows later dropped by
     # the revenue/assets gate) so the _accns table is complete; the overrides MAP below still
     # emits only shipped non-null cells. (Indexing only shipped cells undercounts by the handful
@@ -1745,6 +1918,7 @@ def encode_provenance(history_out, prov_by_ticker):
             notes_out[tk] = tn
         # Fix 1a/2a scope maps, for the years the ticker ships a row for
         for src, dst in (("ni_scope", scope_out["ni_scope"]), ("nci_used", scope_out["nci_subtracted"]),
+                         ("equity_scope", scope_out["equity_scope"]),
                          ("eq_incl_rung", scope_out["equity_incl_nci_rung"]),
                          ("cash_scope", scope_out["cash_scope"])):
             m = {y: v for y, v in sorted((bundle.get(src) or {}).items()) if y in rows}
@@ -1777,12 +1951,24 @@ def encode_provenance(history_out, prov_by_ticker):
                     "ni_scope[T][year] = the rung that resolved net_income (Fix 1a): parent "
                     "(NetIncomeLoss / ifrs owners of the parent), parent_derived (ProfitLoss minus the "
                     "NCI line), no_nci_filed (ProfitLoss, no noncontrolling-interest element filed), "
-                    "nci_unknown (ProfitLoss kept although an NCI element is filed). "
+                    "nci_zero_filed (ProfitLoss; noncontrolling-interest elements are filed only as 0, "
+                    "read as a value: no outside holders), nci_unknown (ProfitLoss kept although a "
+                    "non-zero NCI element is filed). "
                     "nci_subtracted[T][year] = the NCI amount a parent_derived year subtracted. "
-                    "equity_incl_nci_rung[T][year] = incl_tag | parent_plus_minority | parent_no_nci. "
+                    "equity_scope[T][year] = the rung that resolved equity, the parent's on every rung: "
+                    "parent (StockholdersEquity / ifrs EquityAttributableToOwnersOfParent), parent_derived "
+                    "(the including-NCI total minus MinorityInterest, or ifrs Equity minus "
+                    "NoncontrollingInterests, one instant, both filed), no_nci_filed / nci_zero_filed / "
+                    "nci_unknown (the including-NCI total, else ifrs Equity, read as ni_scope reads N: "
+                    "kept and marked, never subtracted). "
+                    "equity_incl_nci_rung[T][year] = incl_tag | ifrs_equity | parent_plus_minority | "
+                    "parent_no_nci. "
                     "cash_scope[T][year] = the rung that resolved cash (Fix 2a): unrestricted_line, "
                     "ifrs_cash_and_equivalents, derived_minus_restricted, total_no_restricted_filed, "
-                    "or cash_unresolved (null cell: restricted elements exceed the cash-flow total)."),
+                    "cash_unresolved (null cell: restricted elements exceed the cash-flow total) or "
+                    "cash_unresolved_securities_segregated (null cell: the only restricted-type element "
+                    "filed is a CashAndSecuritiesSegregated... one, which includes securities and cannot "
+                    "be subtracted from the cash-flow total)."),
         "_states": {"p": "primary", "b": "backfill", "s": "component_sum",
                     "l": "lone_depreciation", "o": "accession_override",
                     "e": "scale_corrected_eps", "c": "scale_corrected_cover"},
@@ -2049,7 +2235,7 @@ def merge_ticker_provenance(prov, ticker, rows, bundle):
     existing tables — appending unseen entries at the end so every other ticker's indices stay
     valid. A ticker with no bundle loses its runs/overrides/period_end entries.
     """
-    scope_sections = ("ni_scope", "nci_subtracted", "equity_incl_nci_rung", "cash_scope")
+    scope_sections = ("ni_scope", "nci_subtracted", "equity_scope", "equity_incl_nci_rung", "cash_scope")
     for section in ("runs", "overrides", "period_end", "untagged_fields", "ladder_notes",
                     "scale_corrected") + scope_sections:
         prov.setdefault(section, {}).pop(ticker, None)
