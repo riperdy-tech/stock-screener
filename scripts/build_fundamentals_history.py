@@ -157,7 +157,8 @@ VOTE_EXCLUDED_FIELDS = ("st_investments", "lt_investments", "sbc",
                         "finance_lease_liability", "operating_lease_liability", "borrowings_total",
                         "goodwill", "intangibles_ex_goodwill", "amortization_intangibles",
                         "net_income_incl_nci", "equity_incl_nci", "cash_restricted",
-                        "customer_money_assets", "customer_money_liabilities", "insurance_reserves")
+                        "customer_money_assets", "customer_money_liabilities", "insurance_reserves",
+                        "eps_diluted", "net_income_available_to_common_diluted", "preferred_dividends")
 
 
 def get_cik_map():
@@ -488,7 +489,23 @@ DURATION_LADDER_SPECS = {
    "AmortisationExpense"],                                      # ifrs-full
    "SIGN_FLIP_TAGS": ["AmortisationIntangibleAssetsOtherThanGoodwill"],
    "REJECT_NEGATIVE": True},
+ # ASC 260 identity fields (brief_rev20_followup.md, S1): annual-duration, resolved per fiscal year by the same
+ # ladder reader and candidate rules, vote-excluded. A filed 0 is a value; a year nothing is filed for is null.
+ # eps_diluted reads the USD/shares unit (ifrs filers in another currency stay uncovered, as for every other
+ # ifrs field); EarningsPerShareBasicAndDiluted is the LAST rung, used only in a year where no diluted figure is
+ # filed, and the year's rung rides in the provenance (`eps_rung`). The share-scale step P-2 keeps its own EPS
+ # read (_filed_diluted_eps), unchanged.
+ "eps_diluted": {"COMBINED": ["EarningsPerShareDiluted",
+                              "DilutedEarningsLossPerShare",                      # ifrs-full
+                              "EarningsPerShareBasicAndDiluted"],
+                 "UNITS": ("USD/shares",)},
+ "net_income_available_to_common_diluted": {"COMBINED": ["NetIncomeLossAvailableToCommonStockholdersDiluted"]},
+ "preferred_dividends": {"COMBINED": ["PreferredStockDividendsIncomeStatementImpact",
+                                      "PreferredStockDividendsAndOtherAdjustments"]},
 }
+# eps_rung[T][year]: which rung of the eps_diluted ladder resolved the cell.
+EPS_RUNG = {"EarningsPerShareDiluted": "diluted", "DilutedEarningsLossPerShare": "ifrs_diluted",
+            "EarningsPerShareBasicAndDiluted": "basic_and_diluted"}
 # The three R17 fields; encode_provenance lists, per ticker, those never tagged in any shipped year.
 R17_FIELDS = ("goodwill", "intangibles_ex_goodwill", "amortization_intangibles")
 
@@ -1640,7 +1657,8 @@ def extract_history(facts, ticker=None, dei=None):
                                          notes=notes_of.setdefault(field, {}) if field in R17_FIELDS else None)
     for field, dspec in DURATION_LADDER_SPECS.items():        # R17 amortization of intangibles
         series[field], raws[field], prov_of[field], tag_of[field] = \
-            resolve_duration_ladder_series(facts, dspec, notes=notes_of.setdefault(field, {}))
+            resolve_duration_ladder_series(facts, dspec, dspec.get("UNITS", ("USD",)),
+                                           notes=notes_of.setdefault(field, {}))
     # Fix 1a(b) / 2a(b): new fields (vote-excluded, so they never choose a row's accession)
     series["net_income_incl_nci"], raws["net_income_incl_nci"], prov_of["net_income_incl_nci"], \
         tag_of["net_income_incl_nci"] = ni_incl
@@ -1818,7 +1836,8 @@ def extract_history(facts, ticker=None, dei=None):
                    "nci_used": nci_used,
                    "equity_scope": {str(y): s for y, s in equity_scope.items()},
                    "eq_incl_rung": {str(y): r for y, r in eq_incl_rung.items()},
-                   "cash_scope": {str(y): s for y, s in cash_scope.items()}}
+                   "cash_scope": {str(y): s for y, s in cash_scope.items()},
+                   "eps_rung": {str(y): EPS_RUNG[t] for y, t in tag_of["eps_diluted"].items()}}
     return history, prov_bundle
 
 
@@ -1852,7 +1871,7 @@ def encode_provenance(history_out, prov_by_ticker):
 
     runs, overrides_out, period_end_out, untagged_out, notes_out, scale_out = {}, {}, {}, {}, {}, {}
     scope_out = {"ni_scope": {}, "nci_subtracted": {}, "equity_scope": {}, "equity_incl_nci_rung": {},
-                 "cash_scope": {}}
+                 "cash_scope": {}, "eps_rung": {}}
     # Index accessions over ALL captured overrides (including cells on year-rows later dropped by
     # the revenue/assets gate) so the _accns table is complete; the overrides MAP below still
     # emits only shipped non-null cells. (Indexing only shipped cells undercounts by the handful
@@ -1921,7 +1940,7 @@ def encode_provenance(history_out, prov_by_ticker):
         for src, dst in (("ni_scope", scope_out["ni_scope"]), ("nci_used", scope_out["nci_subtracted"]),
                          ("equity_scope", scope_out["equity_scope"]),
                          ("eq_incl_rung", scope_out["equity_incl_nci_rung"]),
-                         ("cash_scope", scope_out["cash_scope"])):
+                         ("cash_scope", scope_out["cash_scope"]), ("eps_rung", scope_out["eps_rung"])):
             m = {y: v for y, v in sorted((bundle.get(src) or {}).items()) if y in rows}
             if m:
                 dst[tk] = m
@@ -1969,7 +1988,14 @@ def encode_provenance(history_out, prov_by_ticker):
                     "cash_unresolved (null cell: restricted elements exceed the cash-flow total) or "
                     "cash_unresolved_securities_segregated (null cell: the only restricted-type element "
                     "filed is a CashAndSecuritiesSegregated... one, which includes securities and cannot "
-                    "be subtracted from the cash-flow total)."),
+                    "be subtracted from the cash-flow total). "
+                    "eps_rung[T][year] = the rung that resolved eps_diluted (USD/shares, annual): diluted "
+                    "(us-gaap EarningsPerShareDiluted), ifrs_diluted (ifrs-full DilutedEarningsLossPerShare) or "
+                    "basic_and_diluted (EarningsPerShareBasicAndDiluted, used only in a year where no diluted "
+                    "figure is filed). net_income_available_to_common_diluted (NetIncomeLossAvailableToCommon"
+                    "StockholdersDiluted) and preferred_dividends (PreferredStockDividendsIncomeStatementImpact, "
+                    "else PreferredStockDividendsAndOtherAdjustments) are ladder-resolved like the R17 fields, "
+                    "vote-excluded, with their runs and ladder_notes; a filed 0 is a value."),
         "_states": {"p": "primary", "b": "backfill", "s": "component_sum",
                     "l": "lone_depreciation", "o": "accession_override",
                     "e": "scale_corrected_eps", "c": "scale_corrected_cover"},
@@ -2236,7 +2262,7 @@ def merge_ticker_provenance(prov, ticker, rows, bundle):
     existing tables — appending unseen entries at the end so every other ticker's indices stay
     valid. A ticker with no bundle loses its runs/overrides/period_end entries.
     """
-    scope_sections = ("ni_scope", "nci_subtracted", "equity_scope", "equity_incl_nci_rung", "cash_scope")
+    scope_sections = ("ni_scope", "nci_subtracted", "equity_scope", "equity_incl_nci_rung", "cash_scope", "eps_rung")
     for section in ("runs", "overrides", "period_end", "untagged_fields", "ladder_notes",
                     "scale_corrected") + scope_sections:
         prov.setdefault(section, {}).pop(ticker, None)
