@@ -993,8 +993,117 @@ def quarterly_snapshot(facts):
     return {"quarters": rows} if rows else None
 
 
-def extract_history(facts, ticker=None):
-    """Build {fiscal_year: {field: value}} from a CIK's us-gaap facts."""
+# ── Share-count scale slip, proven from the SAME filing (P-2) ────────────────────────────────
+# A filer can tag its diluted share count in thousands (or millions) with no second filing to
+# contradict it, so the per-period and series defences above never see it. The cell is rescaled
+# only on SEC evidence from the filing that carries it -- never from the vendor's numbers:
+#   1. EPS identity: net income / (filed diluted EPS x shares) is a power of 1000 (band 0.7-1.4);
+#      when it lies in [0.7, 1.4] itself it AFFIRMS the count and nothing else is tried
+#   2. cover page:   dei:EntityCommonStockSharesOutstanding (classes summed) / shares likewise,
+#      only when the EPS identity is missing or inconclusive
+# Anything else is left unchanged. The correction rides as a state on the cell
+# (provenance.scale_corrected: "e" = EPS identity, "c" = cover count); the base provenance runs
+# are untouched.
+SCALE_FIX_KS = (-2, -1, 1, 2)
+SHARES_COVER_TAG = "EntityCommonStockSharesOutstanding"
+
+
+def _scale_k(ratio):
+    """k in SCALE_FIX_KS when ratio lies in [0.7, 1.4] x 1000**k, else None."""
+    if ratio is None or not ratio > 0:
+        return None
+    for k in SCALE_FIX_KS:
+        p = 1000.0 ** k
+        if 0.7 * p <= ratio <= 1.4 * p:
+            return k
+    return None
+
+
+def _rescale(value, k):
+    out = value * 1000 ** k if k > 0 else value / 1000 ** -k
+    if isinstance(value, int) and float(out).is_integer():
+        return int(out)
+    return out
+
+
+def correct_share_scale(shares, net_income, eps_diluted, cover):
+    """(value, state) for one fiscal-year shares_diluted cell; state is None when unchanged."""
+    if not isinstance(shares, (int, float)) or not shares > 0:
+        return shares, None
+    if net_income is not None and net_income != 0 and eps_diluted is not None and eps_diluted != 0:
+        ratio = net_income / (eps_diluted * shares)
+        k = _scale_k(ratio)
+        if k is not None:
+            return _rescale(shares, k), "scale_corrected_eps"
+        if 0.7 <= ratio <= 1.4:
+            return shares, None        # the identity AFFIRMS the count: the cover test does not run
+    if cover is not None and cover > 0:
+        k = _scale_k(cover / shares)
+        if k is not None:
+            return _rescale(shares, k), "scale_corrected_cover"
+    return shares, None
+
+
+def _filed_diluted_eps(facts, accn, near):
+    """The diluted EPS filing `accn` reports for the cell's period, or None (none, or two values)."""
+    vals = set()
+    for e in facts.get("EarningsPerShareDiluted", {}).get("units", {}).get("USD/shares", []):
+        if e.get("accn") != accn or e.get("form") not in ANNUAL_FORMS:
+            continue
+        start, end, val = e.get("start"), e.get("end"), e.get("val")
+        if not start or not end or not isinstance(val, (int, float)):
+            continue
+        try:
+            days = (date.fromisoformat(end) - date.fromisoformat(start)).days
+        except ValueError:
+            continue
+        if 300 <= days <= 400 and near(end):
+            vals.add(val)
+    return vals.pop() if len(vals) == 1 else None
+
+
+def _filing_cover_count(dei, accn):
+    """Cover-page share count of filing `accn`, classes summed, or None."""
+    vals = [e["val"] for e in (dei or {}).get(SHARES_COVER_TAG, {}).get("units", {}).get("shares", [])
+            if e.get("accn") == accn and isinstance(e.get("val"), (int, float))]
+    total = sum(vals)
+    return total if vals and total > 0 else None
+
+
+def latest_shares_cover(dei):
+    """{"val", "date", "filed"} for the latest filing's cover count (classes summed), or None."""
+    ents = [e for e in (dei or {}).get(SHARES_COVER_TAG, {}).get("units", {}).get("shares", [])
+            if e.get("filed") and e.get("accn") and isinstance(e.get("val"), (int, float))]
+    if not ents:
+        return None
+    last = max(ents, key=lambda e: (e["filed"], e.get("end") or ""))
+    same = [e for e in ents if e["accn"] == last["accn"]]
+    total = sum(e["val"] for e in same)
+    if not total > 0:
+        return None
+    return {"val": total, "date": max(e.get("end") or "" for e in same) or None, "filed": last["filed"]}
+
+
+def _shares_cell_accn(cands, value, override_accn, chosen, near):
+    """The accession that carries the shares cell: the override, else the latest filing whose raw
+    value IS the cell, else the row's chosen accession, else the latest near-period candidate."""
+    if override_accn:
+        return override_accn
+    cands = [c for c in cands if near(c[3])]
+    same = [c for c in cands if c[2] == value]
+    if same:
+        return max(same, key=lambda c: c[1])[0]
+    if chosen is not None and any(c[0] == chosen for c in cands):
+        return chosen
+    return max(cands, key=lambda c: c[1])[0] if cands else None
+
+
+def extract_history(facts, ticker=None, dei=None):
+    """Build {fiscal_year: {field: value}} from a CIK's us-gaap facts.
+
+    `dei` (the companyfacts "dei" namespace) is optional: without it the cover-count test of the
+    share-scale correction does not run.
+    """
     series = {}
     raws = {}
     # Provenance captured alongside every field: base state (primary/backfill/component_sum/
@@ -1053,6 +1162,7 @@ def extract_history(facts, ticker=None):
     history = {}
     overrides = {}        # {str(year): {field: chosen_accession}} for accession-vote overrides
     period_end = {}       # {str(year): "YYYY-MM-DD"} bin-end anchor
+    scale_corrected = {}  # {str(year): {"shares_diluted": state}} P-2 share-scale corrections
     for y in years:
         # ── ROW CONSISTENCY (2026-08-08) ────────────────────────────────────────────────
         # Per-field most-recent-wins mixes FILING BASES inside one row: after a divestiture
@@ -1153,18 +1263,31 @@ def extract_history(facts, ticker=None):
         # Require at least a revenue or assets figure for the year to count
         if row.get("revenue") is None and row.get("total_assets") is None:
             continue
+        sh = row.get("shares_diluted")
+        if isinstance(sh, (int, float)) and sh > 0:
+            a = _shares_cell_accn(raws["shares_diluted"].get(y, []), sh,
+                                  overrides.get(str(y), {}).get("shares_diluted"), chosen, _near_ref)
+            if a is not None:
+                eps = _filed_diluted_eps(facts, a, _near_ref)
+                new, state = correct_share_scale(sh, row.get("net_income"), eps,
+                                                 _filing_cover_count(dei, a))
+                if state:
+                    row["shares_diluted"] = new
+                    scale_corrected.setdefault(str(y), {})["shares_diluted"] = state
         ocf, capex = row.get("ocf"), row.get("capex")
         row["fcf"] = (ocf - capex) if (ocf is not None and capex is not None) else None
         history[y] = row
     prov_bundle = {"states": prov_of, "tags": tag_of,
                    "overrides": overrides, "period_end": period_end,
-                   "notes": {f: n for f, n in notes_of.items() if n}}
+                   "notes": {f: n for f, n in notes_of.items() if n},
+                   "scale_corrected": scale_corrected}
     return history, prov_bundle
 
 
 PROV_STATE_CODE = {"primary": "p", "backfill": "b",
                    "component_sum": "s", "lone_depreciation": "l"}
 PROV_DERIVED_FIELDS = ("fcf",)   # computed row field, no filed tag -> no provenance
+SCALE_STATE_CODE = {"scale_corrected_eps": "e", "scale_corrected_cover": "c"}
 
 
 def encode_provenance(history_out, prov_by_ticker):
@@ -1189,7 +1312,7 @@ def encode_provenance(history_out, prov_by_ticker):
             accn_index[accn] = len(accn_index)
         return accn_index[accn]
 
-    runs, overrides_out, period_end_out, untagged_out, notes_out = {}, {}, {}, {}, {}
+    runs, overrides_out, period_end_out, untagged_out, notes_out, scale_out = {}, {}, {}, {}, {}, {}
     # Index accessions over ALL captured overrides (including cells on year-rows later dropped by
     # the revenue/assets gate) so the _accns table is complete; the overrides MAP below still
     # emits only shipped non-null cells. (Indexing only shipped cells undercounts by the handful
@@ -1236,6 +1359,14 @@ def encode_provenance(history_out, prov_by_ticker):
                 ot[y] = inner
         if ot:
             overrides_out[tk] = ot
+        sc = {}
+        for y, fmap in bundle.get("scale_corrected", {}).items():
+            row = rows.get(y, {})
+            inner = {f: SCALE_STATE_CODE[st] for f, st in fmap.items() if row.get(f) is not None}
+            if inner:
+                sc[y] = inner
+        if sc:
+            scale_out[tk] = sc
         pe = {y: d for y, d in bundle["period_end"].items() if y in rows}
         if pe:
             period_end_out[tk] = pe
@@ -1266,9 +1397,13 @@ def encode_provenance(history_out, prov_by_ticker):
                     "ladder_notes[T][field][year] = [{note, tag, value, ...}]: sign_flipped (value = "
                     "the filed negative, shipped as its absolute value), negative_rejected (value = "
                     "the refused negative; the next rung was tried), rung_conflict (a filed 0 on "
-                    "`tag` was kept although later_tag holds later_value > 0)."),
+                    "`tag` was kept although later_tag holds later_value > 0). "
+                    "scale_corrected[T][year][field] = state_code ('e'/'c': the cell was a clean "
+                    "power of 1000 off and was rescaled from the same filing's EPS identity / "
+                    "cover count; base runs unchanged)."),
         "_states": {"p": "primary", "b": "backfill", "s": "component_sum",
-                    "l": "lone_depreciation", "o": "accession_override"},
+                    "l": "lone_depreciation", "o": "accession_override",
+                    "e": "scale_corrected_eps", "c": "scale_corrected_cover"},
         "_tags": inv_tags,
         "_accns": inv_accns,
         "runs": runs,
@@ -1276,6 +1411,7 @@ def encode_provenance(history_out, prov_by_ticker):
         "period_end": period_end_out,
         "untagged_fields": untagged_out,
         "ladder_notes": notes_out,
+        "scale_corrected": scale_out,
     }
 
 
@@ -1475,11 +1611,13 @@ def build_ticker_outputs(data, ticker):
     # Merge namespaces; us-gaap wins on name collisions
     facts = dict(facts_all.get("ifrs-full", {}))
     facts.update(facts_all.get("us-gaap", {}))
-    history, prov_bundle = extract_history(facts, ticker)
+    dei = facts_all.get("dei", {})
+    history, prov_bundle = extract_history(facts, ticker, dei)
     if not history:
         return None
     return {
         "history": {str(y): row for y, row in sorted(history.items())},
+        "cover": latest_shares_cover(dei),
         "prov": prov_bundle or None,
         "battery": compute_battery(history) or None,
         "ttm": ttm_snapshot(facts) or None,
@@ -1520,7 +1658,8 @@ def merge_ticker_provenance(prov, ticker, rows, bundle):
     existing tables — appending unseen entries at the end so every other ticker's indices stay
     valid. A ticker with no bundle loses its runs/overrides/period_end entries.
     """
-    for section in ("runs", "overrides", "period_end", "untagged_fields", "ladder_notes"):
+    for section in ("runs", "overrides", "period_end", "untagged_fields", "ladder_notes",
+                    "scale_corrected"):
         prov.setdefault(section, {}).pop(ticker, None)
     if not bundle:
         return
@@ -1551,6 +1690,9 @@ def merge_ticker_provenance(prov, ticker, rows, bundle):
         prov["untagged_fields"][ticker] = local["untagged_fields"][ticker]
     if ticker in local["ladder_notes"]:
         prov["ladder_notes"][ticker] = local["ladder_notes"][ticker]
+    if local["scale_corrected"].get(ticker):
+        prov["scale_corrected"][ticker] = local["scale_corrected"][ticker]
+        prov.setdefault("_states", {}).update(local["_states"])
 
 
 def refresh_one(ticker, data=None):
@@ -1606,6 +1748,11 @@ def refresh_one(ticker, data=None):
         else:
             tickers.pop(ticker, None)
     hist = docs["history"]
+    covers = hist.setdefault("shares_cover", {})
+    if out["cover"]:
+        covers[ticker] = out["cover"]
+    else:
+        covers.pop(ticker, None)
     if "provenance" in hist:
         merge_ticker_provenance(hist["provenance"], ticker, out["history"], out["prov"])
     elif out["prov"]:
@@ -1661,6 +1808,7 @@ def main():
     ttm_out = {}
     qtr_out = {}
     prov_by_ticker = {}
+    cover_out = {}
     no_entry = 0
     no_history = 0
     processed = 0
@@ -1682,6 +1830,8 @@ def main():
                 no_history += 1
                 continue
             history_out[ticker] = out["history"]
+            if out["cover"]:
+                cover_out[ticker] = out["cover"]
             if out["prov"]:
                 prov_by_ticker[ticker] = out["prov"]
             if out["battery"]:
@@ -1726,7 +1876,8 @@ def main():
     HISTORY_JSON.write_text(json.dumps(
         {"generated_at": generated_at, "source": "SEC companyfacts.zip (annual filings)",
          "_debt_note": debt_note,
-         "provenance": provenance, "tickers": history_out}, sort_keys=True), encoding="utf-8")
+         "provenance": provenance, "shares_cover": cover_out,
+         "tickers": history_out}, sort_keys=True), encoding="utf-8")
     BATTERY_JSON.write_text(json.dumps(
         {"generated_at": generated_at,
          "_note": ("Value-trap battery. f_score: 0-9 (check f_score_checks_available); "
