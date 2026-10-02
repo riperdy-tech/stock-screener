@@ -329,3 +329,49 @@ def test_merge_ticker_provenance_carries_eps_rung():
     stale = _out(_doc(_base_us()))
     bfh.merge_ticker_provenance(prov, "TEST", stale["history"], stale["prov"])      # a refresh drops the old section
     assert "TEST" not in prov["eps_rung"]
+
+
+# ── eps_diluted is exempt from the power-of-1000 scale defences (coordinator ruling, 2026-10-02) ──
+# The defences catch dollar amounts filed in the wrong unit; a per-share figure has no such slip.
+
+def test_eps_a_small_value_among_large_neighbours_keeps_its_filed_value():
+    us = _base_us()
+    vals = {2015: -0.02, 2016: -10.0, 2017: -15.0, 2018: -20.0, 2019: -25.0, 2020: -30.0, 2021: -40.0, 2022: -35.0}
+    us[EPS_US] = _eps(vals)
+    assert _col(_out(_doc(us)), "eps_diluted") == vals              # series normalisation would give 2015 -> -20.0
+
+
+def test_eps_duplicate_filings_resolve_to_the_latest_filed_not_by_a_power_of_1000_tie_break():
+    """Two filings of FY2022 EPS 1000x apart, neither of them the row's chosen accession (revenue and assets come
+    from a third one). The dollar-amount tie-break would keep the value nearest the series; EPS takes the latest filed."""
+    us = _base_us()
+    us["Revenues"]["units"]["USD"].append(_d(2022, 507_000, accn="rev-2022", filed="2023-03-01"))
+    us["Assets"]["units"]["USD"].append(_i(2022, 1_002_022, accn="rev-2022", filed="2023-03-01"))
+    us[EPS_US] = {"units": {"USD/shares": [_d(y, 1.0) for y in range(2015, 2022)] +
+                            [_d(2022, 1.0, accn="eps-a", filed="2023-02-10"),
+                             _d(2022, 0.001, accn="eps-b", filed="2023-06-01", form="10-K/A")]}}
+    assert _col(_out(_doc(us)), "eps_diluted")[2022] == 0.001
+
+
+def test_eps_the_chosen_accessions_figure_is_not_arbitrated_by_scale():
+    """The row's chosen accession files 0.02; a later 10-K/A files 20.0 (the series value). The row loop's
+    power-of-1000 arbitration for dollar amounts would keep the figure nearest the series median (20.0); a
+    per-share cell takes the chosen accession's filed 0.02, like any accession override."""
+    us = _base_us()
+    us[EPS_US] = {"units": {"USD/shares": [_d(y, 20.0) for y in range(2015, 2022)] +
+                            [_d(2022, 0.02),
+                             _d(2022, 20.0, accn="late-2022", filed="2023-06-01", form="10-K/A")]}}
+    out = _out(_doc(us))
+    assert _col(out, "eps_diluted")[2022] == 0.02
+    assert "eps_diluted" in _prov(out)["overrides"]["TEST"]["2022"]
+
+
+def test_the_dollar_amount_fields_keep_the_scale_defence():
+    us = _base_us()
+    us[NIC] = _flow({y: 90_000 for y in range(2016, 2023)})
+    us[NIC]["units"]["USD"].append(_d(2022, 90_000_000, accn="late-2022", filed="2023-06-01", form="10-K/A"))
+    us[PD1] = _flow({y: 1_000 for y in range(2016, 2023)})
+    us[PD1]["units"]["USD"].append(_d(2022, 1_000_000, accn="late-2022", filed="2023-06-01", form="10-K/A"))
+    out = _out(_doc(us))
+    assert _col(out, "net_income_available_to_common_diluted")[2022] == 90_000
+    assert _col(out, "preferred_dividends")[2022] == 1_000

@@ -494,16 +494,20 @@ DURATION_LADDER_SPECS = {
  # eps_diluted reads the USD/shares unit (ifrs filers in another currency stay uncovered, as for every other
  # ifrs field); EarningsPerShareBasicAndDiluted is the LAST rung, used only in a year where no diluted figure is
  # filed, and the year's rung rides in the provenance (`eps_rung`). The share-scale step P-2 keeps its own EPS
- # read (_filed_diluted_eps), unchanged.
+ # read (_filed_diluted_eps), unchanged. NO_SCALE_DEFENCE: the power-of-1000 defences catch dollar amounts filed in
+ # the wrong unit; a per-share figure has no such slip (real values run from cents to hundreds of dollars), so
+ # eps_diluted skips the series normalisation, the duplicate-filing power-of-1000 tie-break and the row loop's
+ # scale arbitration: duplicates of one period resolve to the latest filed.
  "eps_diluted": {"COMBINED": ["EarningsPerShareDiluted",
                               "DilutedEarningsLossPerShare",                      # ifrs-full
                               "EarningsPerShareBasicAndDiluted"],
-                 "UNITS": ("USD/shares",)},
+                 "UNITS": ("USD/shares",), "NO_SCALE_DEFENCE": True},
  "net_income_available_to_common_diluted": {"COMBINED": ["NetIncomeLossAvailableToCommonStockholdersDiluted"]},
  "preferred_dividends": {"COMBINED": ["PreferredStockDividendsIncomeStatementImpact",
                                       "PreferredStockDividendsAndOtherAdjustments"]},
 }
 # eps_rung[T][year]: which rung of the eps_diluted ladder resolved the cell.
+SCALE_EXEMPT_FIELDS = ("eps_diluted",)
 EPS_RUNG = {"EarningsPerShareDiluted": "diluted", "DilutedEarningsLossPerShare": "ifrs_diluted",
             "EarningsPerShareBasicAndDiluted": "basic_and_diluted"}
 # The three R17 fields; encode_provenance lists, per ticker, those never tagged in any shipped year.
@@ -988,7 +992,7 @@ def resolve_duration_ladder_series(facts, spec, unit_keys=("USD",), notes=None):
     reject_neg = bool(spec.get("REJECT_NEGATIVE"))
     series, raws, prov, tags = {}, {}, {}, {}
     for i, tag in enumerate(spec.get("COMBINED") or []):
-        s, r, _ = annual_duration_series(facts, [tag], unit_keys)
+        s, r, _ = annual_duration_series(facts, [tag], unit_keys, not spec.get("NO_SCALE_DEFENCE"))
         for y, v in s.items():
             if v is None:
                 continue
@@ -1097,7 +1101,7 @@ def resolve_field_series(facts, spec, unit_keys=("USD",), ticker=None, baseline_
     return series, raws, prov, tags
 
 
-def annual_duration_series(facts, tags, unit_keys=("USD",)):
+def annual_duration_series(facts, tags, unit_keys=("USD",), scale_defence=True):
     """(fiscal_year -> value, fiscal_year -> [(accn, filed, val), ...]) for ~12-month-duration
     facts from annual filings.
 
@@ -1110,7 +1114,8 @@ def annual_duration_series(facts, tags, unit_keys=("USD",)):
     The second return value carries the WINNING tag's raw per-year candidates with their
     accession ids, so extract_history can assemble each year-row from ONE filing (see the
     row-consistency note there). The resolved series itself is unchanged from the previous
-    behaviour.
+    behaviour. `scale_defence=False` (per-share fields) skips the power-of-1000 tie-break and series
+    normalisation: a period's value is the latest filed.
     """
     candidates = []
     for tag in tags:
@@ -1135,7 +1140,9 @@ def annual_duration_series(facts, tags, unit_keys=("USD",)):
                 best.setdefault(year, []).append((e.get("filed"), val))
                 raw.setdefault(year, []).append((e.get("accn") or "", e.get("filed") or "",
                                                  val, end))
-        if best:
+        if best and not scale_defence:
+            candidates.append(({y: max(c, key=lambda z: z[0] or "")[1] for y, c in best.items()}, raw, tag))
+        elif best:
             # resolve per-period scale contradictions, then normalise the whole series
             prelim = {y: max(c, key=lambda z: z[0] or "")[1] for y, c in best.items()}
             clean = {y: v for y, v in prelim.items()
@@ -1781,7 +1788,9 @@ def extract_history(facts, ticker=None, dei=None):
                 cand = [c for c in raws[f].get(y, [])
                         if c[0] == chosen and _near_ref(c[3])]
                 if cand:
-                    if len({c[2] for c in cand}) > 1:
+                    if f in SCALE_EXEMPT_FIELDS:
+                        av = max(cand, key=lambda c: c[1])[2]
+                    elif len({c[2] for c in cand}) > 1:
                         av = _pick_consistent([(c[1], c[2]) for c in cand], v)
                     else:
                         av = cand[0][2]
@@ -1798,7 +1807,9 @@ def extract_history(facts, ticker=None, dei=None):
                     if av != v and not (av == 0 and v) and not (f in R17_FIELDS and av < 0):
                         _ref = _series_median(series[f])
                         _take = False
-                        if _pow1000_ratio(max(av, v, key=abs), min(av, v, key=abs)) is None:
+                        if f in SCALE_EXEMPT_FIELDS:      # per-share: no scale slip to arbitrate
+                            _take = True
+                        elif _pow1000_ratio(max(av, v, key=abs), min(av, v, key=abs)) is None:
                             _take = True
                         elif _ref and abs(math.log10(max(abs(av), 1e-9) / _ref)) < \
                                      abs(math.log10(max(abs(v), 1e-9) / _ref)):
