@@ -149,7 +149,8 @@ SHARES_UNIT = "shares"
 # wins, and a new-field-only year bin can never evict an existing year-row.
 VOTE_EXCLUDED_FIELDS = ("st_investments", "lt_investments", "sbc",
                         "debt_lt_noncurrent", "debt_current", "short_term_borrowings_separate",
-                        "finance_lease_liability", "operating_lease_liability", "borrowings_total")
+                        "finance_lease_liability", "operating_lease_liability", "borrowings_total",
+                        "goodwill", "intangibles_ex_goodwill", "amortization_intangibles")
 
 
 def get_cik_map():
@@ -438,15 +439,64 @@ INSTANT_FIELD_SPECS = {
  # exact). This is a COMBINED current+noncurrent total — deliberately its own field, NEVER merged
  # into debt_lt_noncurrent/debt_current, and NOT a computed total_debt.
  "borrowings_total": {"COMBINED": ["Borrowings"], "TICKER_ALLOWLIST": {"NVS"}},
+ # R17 (2026-09-30): tangible-equity inputs (instant, USD). Ladders — the first rung to resolve a
+ # year wins it; tags are NEVER summed except the one declared pair. The us-gaap and ifrs-full
+ # namespaces are merged before extraction, so ifrs-full Goodwill is the same key "Goodwill".
+ # intangibles_ex_goodwill rungs, in order: IntangibleAssetsNetExcludingGoodwill, ifrs
+ # IntangibleAssetsOtherThanGoodwill, Finite+Indefinite pair (both required that year), then
+ # FiniteLivedIntangibleAssetsNet alone ("AFTER_PAIRS"). Rung per year is in the provenance tag.
+ # A2: a balance cannot be negative — REJECT_NEGATIVE refuses a negative rung for that year (the
+ # next rung is tried, null if none) and leaves a `negative_rejected` note in the provenance.
+ "goodwill": {"COMBINED": ["Goodwill"], "REJECT_NEGATIVE": True},
+ "intangibles_ex_goodwill": {
+   "COMBINED": ["IntangibleAssetsNetExcludingGoodwill", "IntangibleAssetsOtherThanGoodwill"],
+   "SUM_PAIRS": [("FiniteLivedIntangibleAssetsNet",
+                  "IndefiniteLivedIntangibleAssetsExcludingGoodwill")],
+   "AFTER_PAIRS": ["FiniteLivedIntangibleAssetsNet"],
+   "REJECT_NEGATIVE": True},
 }
 # Declared STOP resolved by allowlist (CH-9 / §4.8): NVS files no LongtermBorrowings and its ifrs
 # Borrowings is a mixed total, so debt_lt_noncurrent stays null and debt_current is SUPPRESSED
 # (its bare 794M current-portion invites a 97%-understated total-debt sum). The verified total ships
 # in borrowings_total instead; leases resolve normally into operating_lease_liability.
 DEBT_NULL_TICKERS = {"NVS"}
+# R17 duration ladder: amortization of acquired intangibles as its own field. The existing `da`
+# field and its component-slot logic are untouched. None stays None — a year the filer does not
+# tag is null, never 0 (a filed 0 is a value).
+# A2 (2026-09-30): the generic cash-flow tag AdjustmentForAmortization is NOT a rung (it is not
+# specific to acquired intangibles — KRYS's negative cell was investment-discount accretion). Signs:
+# SIGN_FLIP_TAGS = the ifrs roll-forward element that presents amortization as a reduction; its
+# negative value ships as the absolute value and a `sign_flipped` note. Any other negative value is
+# refused for that rung (`negative_rejected`; the next rung is tried, null if none).
+DURATION_LADDER_SPECS = {
+ "amortization_intangibles": {"COMBINED": [
+   "AmortizationOfIntangibleAssets", "AmortizationOfAcquiredIntangibleAssets",
+   "FiniteLivedIntangibleAssetsAmortizationExpense",
+   "AmortisationIntangibleAssetsOtherThanGoodwill",             # ifrs-full
+   "AdjustmentsForAmortisationExpense",                         # ifrs-full
+   "AmortisationExpense"],                                      # ifrs-full
+   "SIGN_FLIP_TAGS": ["AmortisationIntangibleAssetsOtherThanGoodwill"],
+   "REJECT_NEGATIVE": True},
+}
+# The three R17 fields; encode_provenance lists, per ticker, those never tagged in any shipped year.
+R17_FIELDS = ("goodwill", "intangibles_ex_goodwill", "amortization_intangibles")
 
 
-def resolve_instant_field_series(facts, spec, ticker=None, unit_keys=("USD",)):
+def _ladder_note(notes, y, note, tag, value, **extra):
+    """R17 provenance note for year y ({year: [ {note, tag, value, ...}, ... ]}); no-op if notes is None."""
+    if notes is not None:
+        notes.setdefault(y, []).append({"note": note, "tag": tag, "value": value, **extra})
+
+
+def _ladder_conflict(notes, series, tags, y, v, tag):
+    """R17 `rung_conflict`: a filed 0 already won year y and this LATER rung holds a positive value.
+    Record, do not resolve — the first rung stays (the ladder rule). No-op unless collecting notes."""
+    if notes is not None and v and v > 0 and series.get(y) == 0 \
+            and not any(n["note"] == "rung_conflict" for n in notes.get(y, [])):
+        _ladder_note(notes, y, "rung_conflict", tags[y], 0, later_tag=tag, later_value=v)
+
+
+def resolve_instant_field_series(facts, spec, ticker=None, unit_keys=("USD",), notes=None):
     """Instant field resolved by CURATED LADDER, not the recency+coverage vote.
 
     COMBINED tags in LIST ORDER: the first tag to cover a year wins it (a total-including-current
@@ -454,6 +504,9 @@ def resolve_instant_field_series(facts, spec, ticker=None, unit_keys=("USD",)):
     component pairs, summed ONLY when BOTH sides are present for the year (a one-sided component is
     a wrong total — CMI finance-lease 2009-2017 noncurrent-only, EXPE/MEDP 2018 lone-0 false-zero).
     A TICKER_ALLOWLIST spec restricts the field to named filers (per-filer-verified totals only).
+    AFTER_PAIRS (R17): tags tried last, one at a time, only for years nothing above resolved.
+    REJECT_NEGATIVE + `notes` (R17/A2): a negative rung is refused for the year (next rung tried) and
+    noted `negative_rejected`; a filed 0 that beats a later positive rung is noted `rung_conflict`.
     Returns (series, raws, prov, tags). provenance is 'primary' for combined[0], else the tag name;
     'pair_sum' for summed years (raws=[] so the accession vote skips them).
     """
@@ -461,11 +514,17 @@ def resolve_instant_field_series(facts, spec, ticker=None, unit_keys=("USD",)):
     if allow is not None and ticker not in allow:
         return {}, {}, {}, {}
     combined = list(spec.get("COMBINED") or [])
+    reject_neg = bool(spec.get("REJECT_NEGATIVE"))
     series, raws, prov, tags = {}, {}, {}, {}
     for i, tag in enumerate(combined):
         s, r, _ = annual_instant_series(facts, [tag], unit_keys)
         for y, v in s.items():
-            if y not in series and v is not None:
+            if y in series:
+                _ladder_conflict(notes, series, tags, y, v, tag)
+            elif v is not None:
+                if reject_neg and v < 0:
+                    _ladder_note(notes, y, "negative_rejected", tag, v)
+                    continue
                 series[y] = v
                 raws[y] = r.get(y, [])
                 prov[y] = "primary" if i == 0 else tag
@@ -474,11 +533,70 @@ def resolve_instant_field_series(facts, spec, ticker=None, unit_keys=("USD",)):
         sa, _, _ = annual_instant_series(facts, [pair[0]], unit_keys)
         sb, _, _ = annual_instant_series(facts, [pair[1]], unit_keys)
         for y in set(sa) & set(sb):                    # BOTH sides mandatory
-            if y not in series and sa[y] is not None and sb[y] is not None:
-                series[y] = sa[y] + sb[y]
+            if sa[y] is None or sb[y] is None:
+                continue
+            pair_tag = pair[0] + "+" + pair[1]
+            total = sa[y] + sb[y]
+            if y in series:
+                _ladder_conflict(notes, series, tags, y, total, pair_tag)
+            elif reject_neg and min(sa[y], sb[y], total) < 0:      # a negative side makes the sum wrong
+                _ladder_note(notes, y, "negative_rejected", pair_tag, total)
+            else:
+                series[y] = total
                 raws[y] = []
                 prov[y] = "pair_sum"
-                tags[y] = pair[0] + "+" + pair[1]
+                tags[y] = pair_tag
+    for tag in spec.get("AFTER_PAIRS") or []:          # R17: last rung, only years nothing above resolved
+        s, r, _ = annual_instant_series(facts, [tag], unit_keys)
+        for y, v in s.items():
+            if y in series:
+                _ladder_conflict(notes, series, tags, y, v, tag)
+            elif v is not None:
+                if reject_neg and v < 0:
+                    _ladder_note(notes, y, "negative_rejected", tag, v)
+                    continue
+                series[y] = v
+                raws[y] = r.get(y, [])
+                prov[y] = tag
+                tags[y] = tag
+    return series, raws, prov, tags
+
+
+def resolve_duration_ladder_series(facts, spec, unit_keys=("USD",), notes=None):
+    """Duration field resolved by CURATED LADDER (R17): COMBINED tags in LIST ORDER, the first tag
+    to resolve a year wins it, tags NEVER summed. Each tag is read alone through
+    annual_duration_series, so the annual-form / 300-400-day / end-year alignment and the scale
+    defences are exactly those of every other duration field. A year no tag resolves is absent
+    (null in the row), never 0. Returns (series, raws, prov, tags) like the instant resolver;
+    provenance is 'primary' for combined[0], else the tag name.
+    A2 signs: a negative value from a SIGN_FLIP_TAGS tag ships as its absolute value (`sign_flipped`
+    note; the row-build loop refuses to restore the negative raw); a negative value from any
+    other tag is refused for the year under REJECT_NEGATIVE (`negative_rejected`, next rung tried).
+    A filed 0 that beats a later positive rung is noted `rung_conflict` (record, do not resolve).
+    """
+    flip = set(spec.get("SIGN_FLIP_TAGS") or [])
+    reject_neg = bool(spec.get("REJECT_NEGATIVE"))
+    series, raws, prov, tags = {}, {}, {}, {}
+    for i, tag in enumerate(spec.get("COMBINED") or []):
+        s, r, _ = annual_duration_series(facts, [tag], unit_keys)
+        for y, v in s.items():
+            if v is None:
+                continue
+            raw = v
+            flipped = v < 0 and tag in flip
+            if flipped:
+                v = -v
+            if y in series:
+                _ladder_conflict(notes, series, tags, y, v, tag)
+            elif reject_neg and v < 0:
+                _ladder_note(notes, y, "negative_rejected", tag, v)
+            else:
+                series[y] = v
+                raws[y] = r.get(y, [])
+                prov[y] = "primary" if i == 0 else tag
+                tags[y] = tag
+                if flipped:
+                    _ladder_note(notes, y, "sign_flipped", tag, raw)
     return series, raws, prov, tags
 
 
@@ -900,9 +1018,14 @@ def extract_history(facts, ticker=None):
         series[field], raws[field], wtag = annual_instant_series(facts, tags)
         prov_of[field] = {y: "primary" for y in series[field]}
         tag_of[field] = {y: wtag for y in series[field]}
+    notes_of = {}         # R17 field -> {year: [ladder notes]}; emitted as provenance `ladder_notes`
     for field, ispec in INSTANT_FIELD_SPECS.items():          # CH-9 debt components (ladder-resolved)
         series[field], raws[field], prov_of[field], tag_of[field] = \
-            resolve_instant_field_series(facts, ispec, ticker)
+            resolve_instant_field_series(facts, ispec, ticker,
+                                         notes=notes_of.setdefault(field, {}) if field in R17_FIELDS else None)
+    for field, dspec in DURATION_LADDER_SPECS.items():        # R17 amortization of intangibles
+        series[field], raws[field], prov_of[field], tag_of[field] = \
+            resolve_duration_ladder_series(facts, dspec, notes=notes_of.setdefault(field, {}))
     if ticker in DEBT_NULL_TICKERS:                           # declared STOP (NVS): null debt fields
         for field in ("debt_lt_noncurrent", "debt_current"):
             series[field], raws[field], prov_of[field], tag_of[field] = {}, {}, {}, {}
@@ -1012,7 +1135,9 @@ def extract_history(facts, ticker=None):
                     # power-of-1000 apart, let the series median decide which sits on the series'
                     # own scale (keeps the correct NHC 2023 sga 21,412,000 over a 21.4T resolved
                     # value; a symmetric band alone would ship the 21.4T).
-                    if av != v and not (av == 0 and v):
+                    # A2: an accession may not put a negative back into an R17 field (a balance or
+                    # amortization is never negative; the ladder already refused/flipped those).
+                    if av != v and not (av == 0 and v) and not (f in R17_FIELDS and av < 0):
                         _ref = _series_median(series[f])
                         _take = False
                         if _pow1000_ratio(max(av, v, key=abs), min(av, v, key=abs)) is None:
@@ -1032,7 +1157,8 @@ def extract_history(facts, ticker=None):
         row["fcf"] = (ocf - capex) if (ocf is not None and capex is not None) else None
         history[y] = row
     prov_bundle = {"states": prov_of, "tags": tag_of,
-                   "overrides": overrides, "period_end": period_end}
+                   "overrides": overrides, "period_end": period_end,
+                   "notes": {f: n for f, n in notes_of.items() if n}}
     return history, prov_bundle
 
 
@@ -1063,7 +1189,7 @@ def encode_provenance(history_out, prov_by_ticker):
             accn_index[accn] = len(accn_index)
         return accn_index[accn]
 
-    runs, overrides_out, period_end_out = {}, {}, {}
+    runs, overrides_out, period_end_out, untagged_out, notes_out = {}, {}, {}, {}, {}
     # Index accessions over ALL captured overrides (including cells on year-rows later dropped by
     # the revenue/assets gate) so the _accns table is complete; the overrides MAP below still
     # emits only shipped non-null cells. (Indexing only shipped cells undercounts by the handful
@@ -1081,6 +1207,10 @@ def encode_provenance(history_out, prov_by_ticker):
             continue
         states, tags = bundle["states"], bundle["tags"]
         rows = history_out[tk]                        # {str(y): row}
+        # R17: which of the three fields the filer never tags in ANY shipped year. [] = all three
+        # are tagged in at least one year; a gap inside a tagged series stays a null cell.
+        untagged_out[tk] = [f for f in R17_FIELDS
+                            if all(row.get(f) is None for row in rows.values())]
         t_runs = {}
         for f in sorted(states):
             if f in PROV_DERIVED_FIELDS:
@@ -1109,6 +1239,13 @@ def encode_provenance(history_out, prov_by_ticker):
         pe = {y: d for y, d in bundle["period_end"].items() if y in rows}
         if pe:
             period_end_out[tk] = pe
+        # A2: R17 ladder notes ({field: {year: [{note, tag, value, ...}]}}) for years the ticker ships
+        # a row for — a `negative_rejected` year can be a null cell, so this is not tied to runs.
+        tn = {f: {str(y): lst for y, lst in sorted(ym.items()) if str(y) in rows}
+              for f, ym in (bundle.get("notes") or {}).items()}
+        tn = {f: ym for f, ym in tn.items() if ym}
+        if tn:
+            notes_out[tk] = tn
 
     inv_tags = [None] * len(tag_index)
     for t, i in tag_index.items():
@@ -1122,7 +1259,14 @@ def encode_provenance(history_out, prov_by_ticker):
                     "a run holds until the next run's first_year, intersected with years present. "
                     "state_code in _states; _tags/_accns are index-addressed. "
                     "overrides[T][year][field] = accn_index (effective state 'o'). "
-                    "period_end[T][year] = bin end date."),
+                    "period_end[T][year] = bin end date. "
+                    "untagged_fields[T] = the R17 fields (goodwill, intangibles_ex_goodwill, "
+                    "amortization_intangibles) the filer never tags in any shipped year; [] = all "
+                    "three tagged; a ticker absent from the map was built before R17. "
+                    "ladder_notes[T][field][year] = [{note, tag, value, ...}]: sign_flipped (value = "
+                    "the filed negative, shipped as its absolute value), negative_rejected (value = "
+                    "the refused negative; the next rung was tried), rung_conflict (a filed 0 on "
+                    "`tag` was kept although later_tag holds later_value > 0)."),
         "_states": {"p": "primary", "b": "backfill", "s": "component_sum",
                     "l": "lone_depreciation", "o": "accession_override"},
         "_tags": inv_tags,
@@ -1130,6 +1274,8 @@ def encode_provenance(history_out, prov_by_ticker):
         "runs": runs,
         "overrides": overrides_out,
         "period_end": period_end_out,
+        "untagged_fields": untagged_out,
+        "ladder_notes": notes_out,
     }
 
 
@@ -1374,7 +1520,7 @@ def merge_ticker_provenance(prov, ticker, rows, bundle):
     existing tables — appending unseen entries at the end so every other ticker's indices stay
     valid. A ticker with no bundle loses its runs/overrides/period_end entries.
     """
-    for section in ("runs", "overrides", "period_end"):
+    for section in ("runs", "overrides", "period_end", "untagged_fields", "ladder_notes"):
         prov.setdefault(section, {}).pop(ticker, None)
     if not bundle:
         return
@@ -1401,6 +1547,10 @@ def merge_ticker_provenance(prov, ticker, rows, bundle):
             for y, fmap in t_over.items()}
     if local["period_end"].get(ticker):
         prov["period_end"][ticker] = local["period_end"][ticker]
+    if ticker in local["untagged_fields"]:
+        prov["untagged_fields"][ticker] = local["untagged_fields"][ticker]
+    if ticker in local["ladder_notes"]:
+        prov["ladder_notes"][ticker] = local["ladder_notes"][ticker]
 
 
 def refresh_one(ticker, data=None):
