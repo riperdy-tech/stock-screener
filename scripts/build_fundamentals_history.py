@@ -43,7 +43,7 @@ import os
 import statistics
 import sys
 import zipfile
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 try:
@@ -80,6 +80,8 @@ DURATION_TAGS = {
                 "Revenue", "RevenueFromContractsWithCustomers"],
     "gross_profit": ["GrossProfit"],
     "operating_income": ["OperatingIncomeLoss", "ProfitLossFromOperatingActivities"],
+    # net_income: the history resolves it by NI_LADDER (Fix 1a); this list still feeds the TTM
+    # freshness bar (newest annual period end), unchanged.
     "net_income": ["NetIncomeLoss", "ProfitLoss",
                    "ProfitLossAttributableToOwnersOfParent"],
     "ocf": ["NetCashProvidedByUsedInOperatingActivities",
@@ -114,6 +116,8 @@ INSTANT_TAGS = {
     "current_assets": ["AssetsCurrent", "CurrentAssets"],
     "current_liabilities": ["LiabilitiesCurrent", "CurrentLiabilities"],
     "total_liabilities": ["Liabilities"],
+    # equity and cash keep their place in the field order; extract_history resolves them by ladder
+    # (EQUITY_LADDER_SPEC, resolve_cash_series — Fixes 1a and 2a), never by a vote over these lists.
     "equity": ["StockholdersEquity",
                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
                "Equity"],
@@ -150,7 +154,9 @@ SHARES_UNIT = "shares"
 VOTE_EXCLUDED_FIELDS = ("st_investments", "lt_investments", "sbc",
                         "debt_lt_noncurrent", "debt_current", "short_term_borrowings_separate",
                         "finance_lease_liability", "operating_lease_liability", "borrowings_total",
-                        "goodwill", "intangibles_ex_goodwill", "amortization_intangibles")
+                        "goodwill", "intangibles_ex_goodwill", "amortization_intangibles",
+                        "net_income_incl_nci", "equity_incl_nci", "cash_restricted",
+                        "customer_money_assets", "customer_money_liabilities", "insurance_reserves")
 
 
 def get_cik_map():
@@ -322,7 +328,6 @@ FIELD_SPECS = {
                           "RevenueFromContractWithCustomerIncludingAssessedTax",
                           "SalesRevenueNet", "Revenue", "RevenueFromContractsWithCustomers"],
              "COMPONENT_SLOTS": []},
- "net_income": {"COMBINED": ["NetIncomeLoss", "ProfitLoss"], "COMPONENT_SLOTS": []},
  "ocf": {"COMBINED": ["NetCashProvidedByUsedInOperatingActivities",
                       "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations",
                       "CashFlowsFromUsedInOperatingActivities",
@@ -480,6 +485,237 @@ DURATION_LADDER_SPECS = {
 }
 # The three R17 fields; encode_provenance lists, per ticker, those never tagged in any shipped year.
 R17_FIELDS = ("goodwill", "intangibles_ex_goodwill", "amortization_intangibles")
+
+# ── Input scope (brief_input_scope_fixes.md, Fixes 1a and 2a, 2026-10-02) ───────────────────────
+# Fix 1a. Under ASC 810 only net income is attributed between the parent and the noncontrolling
+# interests (NCI); EPS (ASC 260) divides the PARENT's net income. us-gaap ProfitLoss is consolidated
+# net income INCLUDING the NCI and used to win the recency+coverage vote whenever its series was the
+# longer one. `net_income` is now the parent's, resolved PER FISCAL YEAR by this scope ladder (the
+# first rung to resolve a year wins it; rungs 3/4 subtract the NCI line; rung 6 keeps ProfitLoss and
+# marks it). ni_scope per year rides in the provenance. A filed 0 is a value: an NCI line of 0
+# resolves rung 3.
+NI_LADDER = (
+    ("NetIncomeLoss", None, "parent"),                                          # 1 us-gaap
+    ("ProfitLossAttributableToOwnersOfParent", None, "parent"),                 # 2 ifrs-full
+    ("ProfitLoss", "us", "parent_derived"),                                     # 3 PL - us-gaap NCI line
+    ("ProfitLoss", "ifrs", "parent_derived"),                                   # 4 PL - ifrs NCI line
+    ("ProfitLoss", None, "no_nci_filed"),                                       # 5 / 6 (nci_unknown)
+)
+NCI_LINE_US = "NetIncomeLossAttributableToNoncontrollingInterest"
+NCI_SPLIT_US = ("NetIncomeLossAttributableToRedeemableNoncontrollingInterest",
+                "NetIncomeLossAttributableToNonredeemableNoncontrollingInterest")
+NCI_LINE_IFRS = "ProfitLossAttributableToNoncontrollingInterests"
+# N, the closed list of noncontrolling-interest elements. StockholdersEquityIncludingPortion... counts
+# only when it differs from StockholdersEquity at the same instant (_nci_filed_ends).
+NCI_ELEMENTS = ("MinorityInterest", "RedeemableNoncontrollingInterestEquityCarryingAmount",
+                "RedeemableNoncontrollingInterestEquityFairValue", NCI_LINE_US) + NCI_SPLIT_US + \
+               ("NoncontrollingInterests", NCI_LINE_IFRS)
+SE_INCL_NCI = "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+# `equity` is the parent's: StockholdersEquity first, then the pre-existing tags (now a ladder).
+EQUITY_LADDER_SPEC = {"COMBINED": ["StockholdersEquity", SE_INCL_NCI, "Equity"]}
+# Fix 2a. Since ASU 2016-18 the cash-flow total CashCashEquivalentsRestrictedCash... (CCERCRCE) runs one
+# year-end further back than the balance sheet and used to win the vote; it includes restricted and
+# segregated cash. `cash` is the unrestricted line, resolved per year by this ladder (cash_scope per
+# year in the provenance): 1 CashAndCashEquivalentsAtCarryingValue; 2 ifrs CashAndCashEquivalents;
+# 3 CCERCRCE - sum(R) when an element of R is filed and the difference is >= 0; 4 CCERCRCE when no
+# element of R is filed; else null (`cash_unresolved`).
+CCERCRCE = "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"
+CASH_RESTRICTED_TAGS = (                                                        # R (closed list)
+    "RestrictedCash", "RestrictedCashCurrent", "RestrictedCashNoncurrent",
+    "RestrictedCashAndCashEquivalentsAtCarryingValue", "RestrictedCashAndCashEquivalentsCurrent",
+    "RestrictedCashAndCashEquivalentsNoncurrent", "RestrictedCashEquivalents",
+    "RestrictedCashEquivalentsCurrent", "RestrictedCashEquivalentsNoncurrent",
+    "CashAndSecuritiesSegregatedUnderFederalAndOtherRegulations",
+    "CashSegregatedUnderFederalAndOtherRegulations",
+    "CashAndSecuritiesSegregatedUnderSecuritiesExchangeCommissionRegulation",
+    "CashSegregatedUnderCommodityExchangeActRegulation", "CashSegregatedUnderOtherRegulations")
+# New instant sums (each null when none of its tags is filed). "srt:" keys are the srt namespace,
+# added to the merged facts under that prefix by build_ticker_outputs.
+INSTANT_SUM_FIELDS = {
+    "cash_restricted": CASH_RESTRICTED_TAGS,
+    "customer_money_assets": ("FundsHeldForClients", "SettlementAssetsCurrent",
+                              "AssetsHeldInTrustCurrent", "AssetsHeldInTrustNoncurrent",
+                              "AssetsHeldInTrust"),
+    "customer_money_liabilities": ("PayablesToCustomers", "srt:PayablesToCustomers",
+                                   "SettlementLiabilitiesCurrent"),
+    "insurance_reserves": ("LiabilityForFuturePolicyBenefits",
+                           "LiabilityForUnpaidClaimsAndClaimsAdjustmentExpense", "UnearnedPremiums"),
+}
+SRT_TAGS = ("PayablesToCustomers",)
+
+
+def _nci_filed_ends(facts):
+    """[(end, form)] of every filed element of N (any form). StockholdersEquityIncludingPortion... counts
+    only where no StockholdersEquity fact of the same end carries the same value."""
+    out = []
+    for tag in NCI_ELEMENTS:
+        for e in facts.get(tag, {}).get("units", {}).get("USD", []):
+            if e.get("end") and e.get("val") is not None:
+                out.append((e["end"], e.get("form")))
+    se = {}
+    for e in facts.get("StockholdersEquity", {}).get("units", {}).get("USD", []):
+        if e.get("end") and e.get("val") is not None:
+            se.setdefault(e["end"], set()).add(e["val"])
+    for e in facts.get(SE_INCL_NCI, {}).get("units", {}).get("USD", []):
+        if e.get("end") and e.get("val") is not None and e["val"] not in se.get(e["end"], ()):
+            out.append((e["end"], e.get("form")))
+    return out
+
+
+def _nci_filed_years(facts):
+    """Fiscal-year bins (calendar end year, annual forms) in which an element of N is filed."""
+    return {int(end[:4]) for end, form in _nci_filed_ends(facts) if form in ANNUAL_FORMS}
+
+
+def _nci_line_series(facts, which):
+    """(series, raws) of the NCI income line for rung 3 ('us') or 4 ('ifrs'). us-gaap: the total line,
+    else (per year) the redeemable + nonredeemable split, BOTH required; raws of a split year hold the
+    per-accession sums of filings that carry both halves for the same end."""
+    if which == "ifrs":
+        s, r, _ = annual_duration_series(facts, [NCI_LINE_IFRS])
+        return s, r
+    s, r, _ = annual_duration_series(facts, [NCI_LINE_US])
+    s, r = dict(s), dict(r)
+    sa, ra, _ = annual_duration_series(facts, [NCI_SPLIT_US[0]])
+    sb, rb, _ = annual_duration_series(facts, [NCI_SPLIT_US[1]])
+    for y in set(sa) & set(sb):
+        if y in s or sa[y] is None or sb[y] is None:
+            continue
+        s[y] = sa[y] + sb[y]
+        bmap = {(c[0], c[3]): c for c in rb.get(y, [])}
+        r[y] = [(c[0], c[1], c[2] + bmap[(c[0], c[3])][2], c[3])
+                for c in ra.get(y, []) if (c[0], c[3]) in bmap]
+    return s, r
+
+
+def resolve_net_income_series(facts):
+    """Fix 1a: `net_income` by the scope ladder, per fiscal year (see NI_LADDER).
+
+    Returns (series, raws, prov, tags, scope, derived, incl). For a rung 3/4 year, series holds the
+    parent's figure (ProfitLoss - NCI line), raws hold ProfitLoss's candidates (they carry the accession
+    for the row vote), and derived[y] = {"pl", "nci", "nci_raws"}: the row builder runs the accession
+    override on ProfitLoss and subtracts the NCI line of the same accession (else the NCI series value).
+    `incl` is net_income_incl_nci: (series, raws, prov, tags) — ProfitLoss when filed; else a rung-1/2
+    parent + the us-gaap/ifrs NCI line when both are filed; else the parent's figure when no element of
+    N is filed that year; else absent.
+    """
+    nci_years = _nci_filed_years(facts)
+    tag_series = {}
+    for tag in ("NetIncomeLoss", "ProfitLossAttributableToOwnersOfParent", "ProfitLoss"):
+        s, r, _ = annual_duration_series(facts, [tag])
+        tag_series[tag] = (s, r)
+    nci_lines = {w: _nci_line_series(facts, w) for w in ("us", "ifrs")}
+    series, raws, prov, tags, scope, derived = {}, {}, {}, {}, {}, {}
+    for i, (tag, nci_w, sc) in enumerate(NI_LADDER):
+        s, r = tag_series[tag]
+        for y, v in s.items():
+            if y in series or v is None:
+                continue
+            if nci_w is not None:
+                ns, nr = nci_lines[nci_w]
+                if ns.get(y) is None:
+                    continue
+                series[y] = v - ns[y]
+                derived[y] = {"pl": v, "nci": ns[y], "nci_raws": nr.get(y, [])}
+                tags[y] = tag + "-" + (NCI_LINE_IFRS if nci_w == "ifrs" else NCI_LINE_US)
+                scope[y] = sc
+            else:
+                series[y] = v
+                tags[y] = tag
+                scope[y] = "nci_unknown" if sc == "no_nci_filed" and y in nci_years else sc
+            raws[y] = r.get(y, [])
+            prov[y] = "primary" if i == 0 else tags[y]
+    # net_income_incl_nci
+    pl_s, pl_r = tag_series["ProfitLoss"]
+    i_series, i_raws, i_prov, i_tags = {}, {}, {}, {}
+    for y, v in pl_s.items():
+        if v is not None:
+            i_series[y], i_raws[y], i_prov[y], i_tags[y] = v, pl_r.get(y, []), "primary", "ProfitLoss"
+    for tag, w in (("NetIncomeLoss", "us"), ("ProfitLossAttributableToOwnersOfParent", "ifrs")):
+        ps, pr = tag_series[tag]
+        ns = nci_lines[w][0]
+        for y, v in ps.items():
+            if y in i_series or v is None:
+                continue
+            if ns.get(y) is not None:
+                i_series[y], i_raws[y] = v + ns[y], []
+                i_prov[y] = i_tags[y] = tag + "+" + (NCI_LINE_IFRS if w == "ifrs" else NCI_LINE_US)
+            elif y not in nci_years:
+                i_series[y], i_raws[y] = v, pr.get(y, [])
+                i_prov[y] = i_tags[y] = tag
+    return series, raws, prov, tags, scope, derived, (i_series, i_raws, i_prov, i_tags)
+
+
+def resolve_equity_incl_nci_series(facts):
+    """Fix 1a(b): equity including the NCI. Rungs per year: the incl. tag; else StockholdersEquity +
+    MinorityInterest (+ RedeemableNoncontrollingInterestEquityCarryingAmount when filed), both of the
+    first two required; else StockholdersEquity when no element of N is filed that year; else absent.
+    Returns (series, raws, prov, tags, rung)."""
+    nci_years = _nci_filed_years(facts)
+    inc, inc_r, _ = annual_instant_series(facts, [SE_INCL_NCI])
+    se, se_r, _ = annual_instant_series(facts, ["StockholdersEquity"])
+    mi, _, _ = annual_instant_series(facts, ["MinorityInterest"])
+    rnci, _, _ = annual_instant_series(facts, ["RedeemableNoncontrollingInterestEquityCarryingAmount"])
+    series, raws, prov, tags, rung = {}, {}, {}, {}, {}
+    for y in sorted(set(inc) | set(se)):
+        if inc.get(y) is not None:
+            series[y], raws[y], prov[y], tags[y], rung[y] = inc[y], inc_r.get(y, []), "primary", SE_INCL_NCI, "incl_tag"
+        elif se.get(y) is not None and mi.get(y) is not None:
+            total = se[y] + mi[y]
+            t = "StockholdersEquity+MinorityInterest"
+            if rnci.get(y) is not None:
+                total += rnci[y]
+                t += "+RedeemableNoncontrollingInterestEquityCarryingAmount"
+            series[y], raws[y], prov[y], tags[y], rung[y] = total, [], t, t, "parent_plus_minority"
+        elif se.get(y) is not None and y not in nci_years:
+            series[y], raws[y], prov[y], tags[y], rung[y] = se[y], se_r.get(y, []), "StockholdersEquity", \
+                "StockholdersEquity", "parent_no_nci"
+    return series, raws, prov, tags, rung
+
+
+def resolve_instant_sum_series(facts, tag_list):
+    """Sum of every listed instant tag filed in the year (each tag's own scale-defended series); a year
+    none of them files is absent (null), never 0. Returns (series, raws, prov, tags); raws are empty
+    (a summed year has no single accession)."""
+    per = [(t, annual_instant_series(facts, [t])[0]) for t in tag_list]
+    series, raws, prov, tags = {}, {}, {}, {}
+    for y in sorted(set().union(*[set(s) for _, s in per])):
+        parts = [(t, s[y]) for t, s in per if s.get(y) is not None]
+        if not parts:
+            continue
+        series[y] = sum(v for _, v in parts)
+        raws[y] = []
+        prov[y] = tags[y] = "+".join(t for t, _ in parts)
+    return series, raws, prov, tags
+
+
+def resolve_cash_series(facts):
+    """Fix 2a: `cash` = the unrestricted line by the cash ladder (see CCERCRCE above).
+    Returns (series, raws, prov, tags, scope); scope[y] is set for every year CCERCRCE or a rung files,
+    `cash_unresolved` (null cell) for a negative rung-3 difference."""
+    restricted = resolve_instant_sum_series(facts, CASH_RESTRICTED_TAGS)[0]
+    series, raws, prov, tags, scope = {}, {}, {}, {}, {}
+    for i, (tag, sc) in enumerate((("CashAndCashEquivalentsAtCarryingValue", "unrestricted_line"),
+                                   ("CashAndCashEquivalents", "ifrs_cash_and_equivalents"))):
+        s, r, _ = annual_instant_series(facts, [tag])
+        for y, v in s.items():
+            if y not in series and v is not None:
+                series[y], raws[y], prov[y], tags[y], scope[y] = v, r.get(y, []), \
+                    ("primary" if i == 0 else tag), tag, sc
+    s, r, _ = annual_instant_series(facts, [CCERCRCE])
+    for y, v in s.items():
+        if y in series or v is None:
+            continue
+        if restricted.get(y) is None:
+            series[y], raws[y], prov[y], tags[y], scope[y] = v, r.get(y, []), CCERCRCE, CCERCRCE, \
+                "total_no_restricted_filed"
+        elif v - restricted[y] >= 0:
+            t = CCERCRCE + "-restricted"
+            series[y], raws[y], prov[y], tags[y], scope[y] = v - restricted[y], [], t, t, \
+                "derived_minus_restricted"
+        else:
+            scope[y] = "cash_unresolved"
+    return series, raws, prov, tags, scope
 
 
 def _ladder_note(notes, y, note, tag, value, **extra):
@@ -834,63 +1070,103 @@ def ttm_snapshot(facts):
                 if e["form"] in ANNUAL_FORMS and 300 <= e["days"] <= 400 and e["end"] > newest_fy_end:
                     newest_fy_end = e["end"]
 
+    def tag_cand(tag):
+        """The TTM candidate of ONE tag (all three legs from it), or None."""
+        entries = duration_entries(tag)
+        ann = [e for e in entries if e["form"] in ANNUAL_FORMS and 300 <= e["days"] <= 400]
+        qtd = [e for e in entries if e["form"] in QUARTERLY_FORMS and 60 <= e["days"] <= 300]
+        if not ann or not qtd:
+            return None
+        # TTM must be FRESHER than the newest annual period: right after a 10-K (no newer
+        # 10-Q yet) the formula would happily emit a TTM through last Q3 — STALER than the
+        # FY the engine already has, silently presented as fresher.
+        if max(e["end"] for e in qtd) <= newest_fy_end:
+            return None
+        ann_med = statistics.median(abs(e["val"]) for e in ann)
+
+        def resolve(rows):
+            # duplicate filings of the SAME period -> scale-consistent pick
+            return _pick_consistent([(r["filed"], r["val"]) for r in rows], ann_med)
+
+        # current leg: YTD row with the latest end (max duration at that end wins the
+        # quarterly-vs-YTD tie; at Q1 they are the same row)
+        end_cur = max(e["end"] for e in qtd)
+        cur_rows = [e for e in qtd if e["end"] == end_cur]
+        dmax = max(e["days"] for e in cur_rows)
+        cur_rows = [e for e in cur_rows if abs(e["days"] - dmax) <= 3]
+        cur = dict(cur_rows[0]); cur["val"] = resolve(cur_rows)
+        # FY leg: latest annual period ending before the current YTD starts, adjacent to it
+        fy_rows = [e for e in ann if e["end"] < cur["start"]]
+        if not fy_rows:
+            return None
+        fy_end = max(e["end"] for e in fy_rows)
+        if not 0 <= (date.fromisoformat(cur["start"]) - date.fromisoformat(fy_end)).days <= 5:
+            return None                        # current YTD does not start right after an FY
+        fy_leg = [e for e in fy_rows if e["end"] == fy_end]
+        fy = dict(fy_leg[0]); fy["val"] = resolve(fy_leg)
+        # prior leg: same YTD span one fiscal year earlier
+        pri_rows = [e for e in qtd
+                    if abs(e["days"] - cur["days"]) <= 14
+                    and 350 <= (date.fromisoformat(cur["end"])
+                                - date.fromisoformat(e["end"])).days <= 380]
+        if not pri_rows:
+            return None
+        pri_end = max(e["end"] for e in pri_rows)
+        pri_rows = [e for e in pri_rows if e["end"] == pri_end]
+        pri = dict(pri_rows[0]); pri["val"] = resolve(pri_rows)
+        # per-leg scale defence: a leg a clean power of 1000 off the annual median is the
+        # same corruption the annual series guards against
+        legs = []
+        for r in (fy, cur, pri):
+            v = r["val"]
+            p = _pow1000_ratio(ann_med, v)
+            legs.append(v * p if p else v)
+        ttm_val = legs[0] + legs[1] - legs[2]
+        return {"val": ttm_val, "through": cur["end"], "filed": cur["filed"],
+                "fy_leg_end": fy_end, "ann_years": len({e["end"][:4] for e in ann}),
+                "pri_end": pri_end}
+
+    cands = {}
+
+    def cand_of(tag):
+        if tag not in cands:
+            cands[tag] = tag_cand(tag)
+        return cands[tag]
+
+    def combine(a, b, sign):
+        """a + sign*b when both legs-triples cover the SAME windows (one rung, never mixed)."""
+        if a is None or b is None:
+            return None
+        if (a["through"], a["fy_leg_end"], a["pri_end"]) != (b["through"], b["fy_leg_end"], b["pri_end"]):
+            return None
+        c = dict(a)
+        c["val"] = a["val"] + sign * b["val"]
+        return c
+
+    def nci_cand(which):
+        if which == "ifrs":
+            return cand_of(NCI_LINE_IFRS)
+        total = cand_of(NCI_LINE_US)
+        return total if total is not None else combine(cand_of(NCI_SPLIT_US[0]), cand_of(NCI_SPLIT_US[1]), 1)
+
     for field in TTM_FIELDS:
         best = None
-        for tag in DURATION_TAGS[field]:
-            entries = duration_entries(tag)
-            ann = [e for e in entries if e["form"] in ANNUAL_FORMS and 300 <= e["days"] <= 400]
-            qtd = [e for e in entries if e["form"] in QUARTERLY_FORMS and 60 <= e["days"] <= 300]
-            if not ann or not qtd:
-                continue
-            # TTM must be FRESHER than the newest annual period: right after a 10-K (no newer
-            # 10-Q yet) the formula would happily emit a TTM through last Q3 — STALER than the
-            # FY the engine already has, silently presented as fresher.
-            if max(e["end"] for e in qtd) <= newest_fy_end:
-                continue
-            ann_med = statistics.median(abs(e["val"]) for e in ann)
-
-            def resolve(rows):
-                # duplicate filings of the SAME period -> scale-consistent pick
-                return _pick_consistent([(r["filed"], r["val"]) for r in rows], ann_med)
-
-            # current leg: YTD row with the latest end (max duration at that end wins the
-            # quarterly-vs-YTD tie; at Q1 they are the same row)
-            end_cur = max(e["end"] for e in qtd)
-            cur_rows = [e for e in qtd if e["end"] == end_cur]
-            dmax = max(e["days"] for e in cur_rows)
-            cur_rows = [e for e in cur_rows if abs(e["days"] - dmax) <= 3]
-            cur = dict(cur_rows[0]); cur["val"] = resolve(cur_rows)
-            # FY leg: latest annual period ending before the current YTD starts, adjacent to it
-            fy_rows = [e for e in ann if e["end"] < cur["start"]]
-            if not fy_rows:
-                continue
-            fy_end = max(e["end"] for e in fy_rows)
-            if not 0 <= (date.fromisoformat(cur["start"]) - date.fromisoformat(fy_end)).days <= 5:
-                continue                       # current YTD does not start right after an FY
-            fy_leg = [e for e in fy_rows if e["end"] == fy_end]
-            fy = dict(fy_leg[0]); fy["val"] = resolve(fy_leg)
-            # prior leg: same YTD span one fiscal year earlier
-            pri_rows = [e for e in qtd
-                        if abs(e["days"] - cur["days"]) <= 14
-                        and 350 <= (date.fromisoformat(cur["end"])
-                                    - date.fromisoformat(e["end"])).days <= 380]
-            if not pri_rows:
-                continue
-            pri_end = max(e["end"] for e in pri_rows)
-            pri_rows = [e for e in pri_rows if e["end"] == pri_end]
-            pri = dict(pri_rows[0]); pri["val"] = resolve(pri_rows)
-            # per-leg scale defence: a leg a clean power of 1000 off the annual median is the
-            # same corruption the annual series guards against
-            legs = []
-            for r in (fy, cur, pri):
-                v = r["val"]
-                p = _pow1000_ratio(ann_med, v)
-                legs.append(v * p if p else v)
-            ttm_val = legs[0] + legs[1] - legs[2]
-            cand = {"val": ttm_val, "through": cur["end"], "filed": cur["filed"],
-                    "fy_leg_end": fy_end, "ann_years": len({e["end"][:4] for e in ann})}
-            if best is None or (cand["through"], cand["ann_years"]) > (best["through"], best["ann_years"]):
-                best = cand
+        if field == "net_income":
+            # Fix 1a(d): the scope ladder; the first rung with a complete triple wins, all three legs
+            # from that rung (a rung missing a leg is skipped for the next)
+            pl = cand_of("ProfitLoss")
+            for cand in (cand_of("NetIncomeLoss"), cand_of("ProfitLossAttributableToOwnersOfParent"),
+                         combine(pl, nci_cand("us"), -1), combine(pl, nci_cand("ifrs"), -1), pl):
+                if cand is not None:
+                    best = cand
+                    break
+        else:
+            for tag in DURATION_TAGS[field]:
+                cand = cand_of(tag)
+                if cand is None:
+                    continue
+                if best is None or (cand["through"], cand["ann_years"]) > (best["through"], best["ann_years"]):
+                    best = cand
         if best is None:
             continue
         out[field] = best["val"]
@@ -901,6 +1177,23 @@ def ttm_snapshot(facts):
                     "fy_leg_end": best["fy_leg_end"]}
     if not out or prov is None:
         return None
+    # Fix 1a(d): consolidated TTM net income on the history's rule (it never sets the snapshot's
+    # through/filed): ProfitLoss; else a rung-1/2 parent + its NCI line; else the parent's figure when
+    # no element of N is filed inside the TTM window; else absent.
+    incl = cand_of("ProfitLoss")
+    if incl is None:
+        for ptag, which in (("NetIncomeLoss", "us"), ("ProfitLossAttributableToOwnersOfParent", "ifrs")):
+            pc = cand_of(ptag)
+            if pc is None:
+                continue
+            incl = combine(pc, nci_cand(which), 1)
+            if incl is None:
+                lo = (date.fromisoformat(pc["fy_leg_end"]) - timedelta(days=366)).isoformat()
+                if not any(lo <= end <= pc["through"] for end, _ in _nci_filed_ends(facts)):
+                    incl = pc
+            break
+    if incl is not None:
+        out["net_income_incl_nci"] = incl["val"]
     ocf, capex = out.get("ocf"), out.get("capex")
     if ocf is not None and capex is not None:
         out["fcf"] = ocf - capex
@@ -922,47 +1215,72 @@ def quarterly_snapshot(facts):
     identity). Same per-period scale resolution as everywhere else. Returns
     {"quarters": [{"end", "revenue", "net_income", "gross_profit", "yoy_revenue",
     "yoy_net_income"}, ...]} oldest->newest, or None."""
-    per_field = {}
-    for field in QTR_FIELDS:
-        best = None
-        for tag in DURATION_TAGS[field]:
-            entries = []
-            for e in facts.get(tag, {}).get("units", {}).get("USD", []):
-                start, end, val = e.get("start"), e.get("end"), e.get("val")
-                if not start or not end or val is None:
-                    continue
+    def tag_q(tag):
+        """{quarter end: single-quarter value} of ONE tag, or None."""
+        entries = []
+        for e in facts.get(tag, {}).get("units", {}).get("USD", []):
+            start, end, val = e.get("start"), e.get("end"), e.get("val")
+            if not start or not end or val is None:
+                continue
+            try:
+                days = (date.fromisoformat(end) - date.fromisoformat(start)).days
+            except ValueError:
+                continue
+            entries.append({"form": e.get("form"), "start": start, "end": end,
+                            "days": days, "val": val, "filed": e.get("filed") or ""})
+        singles = {}
+        for e in entries:
+            if e["form"] in QUARTERLY_FORMS and 60 <= e["days"] <= 120:
+                singles.setdefault(e["end"], []).append((e["filed"], e["val"]))
+        ann = [e for e in entries if e["form"] in ANNUAL_FORMS and 300 <= e["days"] <= 400]
+        if not singles or not ann:
+            return None
+        ann_med = statistics.median(abs(e["val"]) for e in ann)
+        q = {end: _pick_consistent(c, ann_med) for end, c in singles.items()}
+        # derived Q4 = FY − YTD-Q3 (YTD row ending 76-104d before the FY end, same start)
+        ytd3 = {}
+        for e in entries:
+            if e["form"] in QUARTERLY_FORMS and 240 <= e["days"] <= 300:
+                ytd3.setdefault(e["end"], []).append((e["filed"], e["val"], e["start"]))
+        for fy_e in ann:
+            if fy_e["end"] in q:
+                continue
+            for y_end, cands in ytd3.items():
                 try:
-                    days = (date.fromisoformat(end) - date.fromisoformat(start)).days
+                    gap = (date.fromisoformat(fy_e["end"]) - date.fromisoformat(y_end)).days
                 except ValueError:
                     continue
-                entries.append({"form": e.get("form"), "start": start, "end": end,
-                                "days": days, "val": val, "filed": e.get("filed") or ""})
-            singles = {}
-            for e in entries:
-                if e["form"] in QUARTERLY_FORMS and 60 <= e["days"] <= 120:
-                    singles.setdefault(e["end"], []).append((e["filed"], e["val"]))
-            ann = [e for e in entries if e["form"] in ANNUAL_FORMS and 300 <= e["days"] <= 400]
-            if not singles or not ann:
+                if 76 <= gap <= 104 and any(c[2] == fy_e["start"] for c in cands):
+                    yv = _pick_consistent([(c[0], c[1]) for c in cands], ann_med)
+                    q[fy_e["end"]] = fy_e["val"] - yv
+                    break
+        return q
+
+    def combine(a, b, sign):
+        if a is None or b is None:
+            return None
+        return {e: a[e] + sign * b[e] for e in a if e in b}
+
+    per_field = {}
+    for field in QTR_FIELDS:
+        if field == "net_income":
+            # Fix 1a(d): the scope ladder per quarter — the first rung with the quarter wins it
+            pl = tag_q("ProfitLoss")
+            nci_us = combine(tag_q(NCI_SPLIT_US[0]), tag_q(NCI_SPLIT_US[1]), 1) or {}
+            nci_us.update(tag_q(NCI_LINE_US) or {})            # the total line wins its quarters
+            merged = {}
+            for rung in (tag_q("NetIncomeLoss"), tag_q("ProfitLossAttributableToOwnersOfParent"),
+                         combine(pl, nci_us, -1), combine(pl, tag_q(NCI_LINE_IFRS), -1), pl):
+                for e, v in (rung or {}).items():
+                    merged.setdefault(e, v)
+            if merged:
+                per_field[field] = merged
+            continue
+        best = None
+        for tag in DURATION_TAGS[field]:
+            q = tag_q(tag)
+            if q is None:
                 continue
-            ann_med = statistics.median(abs(e["val"]) for e in ann)
-            q = {end: _pick_consistent(c, ann_med) for end, c in singles.items()}
-            # derived Q4 = FY − YTD-Q3 (YTD row ending 76-104d before the FY end, same start)
-            ytd3 = {}
-            for e in entries:
-                if e["form"] in QUARTERLY_FORMS and 240 <= e["days"] <= 300:
-                    ytd3.setdefault(e["end"], []).append((e["filed"], e["val"], e["start"]))
-            for fy_e in ann:
-                if fy_e["end"] in q:
-                    continue
-                for y_end, cands in ytd3.items():
-                    try:
-                        gap = (date.fromisoformat(fy_e["end"]) - date.fromisoformat(y_end)).days
-                    except ValueError:
-                        continue
-                    if 76 <= gap <= 104 and any(c[2] == fy_e["start"] for c in cands):
-                        yv = _pick_consistent([(c[0], c[1]) for c in cands], ann_med)
-                        q[fy_e["end"]] = fy_e["val"] - yv
-                        break
             cand = {"q": q, "latest": max(q), "n": len(q)}
             if best is None or (cand["latest"], cand["n"]) > (best["latest"], best["n"]):
                 best = cand
@@ -1098,6 +1416,23 @@ def _shares_cell_accn(cands, value, override_accn, chosen, near):
     return max(cands, key=lambda c: c[1])[0] if cands else None
 
 
+def _subtract_nci(pl, dv, pl_raws, override_accn, near):
+    """(parent net income, NCI used) for a rung 3/4 year: ProfitLoss as the row arbitration chose it,
+    minus the NCI line of the SAME accession (the override's, else the latest filing whose raw ProfitLoss
+    is that value) when that accession holds one for the period, else the NCI line's series value."""
+    accn = override_accn
+    if accn is None:
+        same = [c for c in pl_raws if c[2] == pl and near(c[3])]
+        accn = max(same, key=lambda c: c[1])[0] if same else None
+    nci = dv["nci"]
+    if accn is not None:
+        cand = [c for c in dv["nci_raws"] if c[0] == accn and near(c[3])]
+        if cand:
+            nci = (_pick_consistent([(c[1], c[2]) for c in cand], dv["nci"])
+                   if len({c[2] for c in cand}) > 1 else cand[0][2])
+    return pl - nci, nci
+
+
 def extract_history(facts, ticker=None, dei=None):
     """Build {fiscal_year: {field: value}} from a CIK's us-gaap facts.
 
@@ -1113,6 +1448,10 @@ def extract_history(facts, ticker=None, dei=None):
     tag_of = {}           # field -> {year: winning_tag}
     for field, tags in DURATION_TAGS.items():
         unit = ("shares",) if field == "shares_diluted" else ("USD",)
+        if field == "net_income":                                 # Fix 1a: scope ladder, not the vote
+            (series[field], raws[field], prov_of[field], tag_of[field],
+             ni_scope, ni_derived, ni_incl) = resolve_net_income_series(facts)
+            continue
         spec = FIELD_SPECS.get(field)
         if spec:
             # `tags` is the ORIGINAL DURATION_TAGS list — it defines the primary winner, so the
@@ -1124,6 +1463,14 @@ def extract_history(facts, ticker=None, dei=None):
             prov_of[field] = {y: "primary" for y in series[field]}
             tag_of[field] = {y: wtag for y in series[field]}
     for field, tags in INSTANT_TAGS.items():
+        if field == "equity":                                     # Fix 1a: the parent's, by ladder
+            series[field], raws[field], prov_of[field], tag_of[field] = \
+                resolve_instant_field_series(facts, EQUITY_LADDER_SPEC)
+            continue
+        if field == "cash":                                       # Fix 2a: the unrestricted line
+            series[field], raws[field], prov_of[field], tag_of[field], cash_scope = \
+                resolve_cash_series(facts)
+            continue
         series[field], raws[field], wtag = annual_instant_series(facts, tags)
         prov_of[field] = {y: "primary" for y in series[field]}
         tag_of[field] = {y: wtag for y in series[field]}
@@ -1135,6 +1482,13 @@ def extract_history(facts, ticker=None, dei=None):
     for field, dspec in DURATION_LADDER_SPECS.items():        # R17 amortization of intangibles
         series[field], raws[field], prov_of[field], tag_of[field] = \
             resolve_duration_ladder_series(facts, dspec, notes=notes_of.setdefault(field, {}))
+    # Fix 1a(b) / 2a(b): new fields (vote-excluded, so they never choose a row's accession)
+    series["net_income_incl_nci"], raws["net_income_incl_nci"], prov_of["net_income_incl_nci"], \
+        tag_of["net_income_incl_nci"] = ni_incl
+    series["equity_incl_nci"], raws["equity_incl_nci"], prov_of["equity_incl_nci"], \
+        tag_of["equity_incl_nci"], eq_incl_rung = resolve_equity_incl_nci_series(facts)
+    for field, tlist in INSTANT_SUM_FIELDS.items():
+        series[field], raws[field], prov_of[field], tag_of[field] = resolve_instant_sum_series(facts, tlist)
     if ticker in DEBT_NULL_TICKERS:                           # declared STOP (NVS): null debt fields
         for field in ("debt_lt_noncurrent", "debt_current"):
             series[field], raws[field], prov_of[field], tag_of[field] = {}, {}, {}, {}
@@ -1163,6 +1517,7 @@ def extract_history(facts, ticker=None, dei=None):
     overrides = {}        # {str(year): {field: chosen_accession}} for accession-vote overrides
     period_end = {}       # {str(year): "YYYY-MM-DD"} bin-end anchor
     scale_corrected = {}  # {str(year): {"shares_diluted": state}} P-2 share-scale corrections
+    nci_used = {}         # {str(year): NCI amount a rung 3/4 subtraction used} (Fix 1a)
     for y in years:
         # ── ROW CONSISTENCY (2026-08-08) ────────────────────────────────────────────────
         # Per-field most-recent-wins mixes FILING BASES inside one row: after a divestiture
@@ -1229,6 +1584,9 @@ def extract_history(facts, ticker=None, dei=None):
         row = {}
         for f in series:
             v = series[f].get(y)
+            dv = ni_derived.get(y) if f == "net_income" else None
+            if dv is not None:
+                v = dv["pl"]       # Fix 1a rung 3/4: the override arbitrates ProfitLoss's candidates
             if chosen is not None and v is not None:
                 cand = [c for c in raws[f].get(y, [])
                         if c[0] == chosen and _near_ref(c[3])]
@@ -1259,6 +1617,9 @@ def extract_history(facts, ticker=None, dei=None):
                             v = av
                             # fifth state, layered over base: value came from the chosen accession.
                             overrides.setdefault(str(y), {})[f] = chosen
+            if dv is not None and v is not None:
+                v, nci_used[str(y)] = _subtract_nci(v, dv, raws[f].get(y, []),
+                                                    overrides.get(str(y), {}).get(f), _near_ref)
             row[f] = v
         # Require at least a revenue or assets figure for the year to count
         if row.get("revenue") is None and row.get("total_assets") is None:
@@ -1280,7 +1641,11 @@ def extract_history(facts, ticker=None, dei=None):
     prov_bundle = {"states": prov_of, "tags": tag_of,
                    "overrides": overrides, "period_end": period_end,
                    "notes": {f: n for f, n in notes_of.items() if n},
-                   "scale_corrected": scale_corrected}
+                   "scale_corrected": scale_corrected,
+                   "ni_scope": {str(y): s for y, s in ni_scope.items()},
+                   "nci_used": nci_used,
+                   "eq_incl_rung": {str(y): r for y, r in eq_incl_rung.items()},
+                   "cash_scope": {str(y): s for y, s in cash_scope.items()}}
     return history, prov_bundle
 
 
@@ -1313,6 +1678,7 @@ def encode_provenance(history_out, prov_by_ticker):
         return accn_index[accn]
 
     runs, overrides_out, period_end_out, untagged_out, notes_out, scale_out = {}, {}, {}, {}, {}, {}
+    scope_out = {"ni_scope": {}, "nci_subtracted": {}, "equity_incl_nci_rung": {}, "cash_scope": {}}
     # Index accessions over ALL captured overrides (including cells on year-rows later dropped by
     # the revenue/assets gate) so the _accns table is complete; the overrides MAP below still
     # emits only shipped non-null cells. (Indexing only shipped cells undercounts by the handful
@@ -1377,6 +1743,13 @@ def encode_provenance(history_out, prov_by_ticker):
         tn = {f: ym for f, ym in tn.items() if ym}
         if tn:
             notes_out[tk] = tn
+        # Fix 1a/2a scope maps, for the years the ticker ships a row for
+        for src, dst in (("ni_scope", scope_out["ni_scope"]), ("nci_used", scope_out["nci_subtracted"]),
+                         ("eq_incl_rung", scope_out["equity_incl_nci_rung"]),
+                         ("cash_scope", scope_out["cash_scope"])):
+            m = {y: v for y, v in sorted((bundle.get(src) or {}).items()) if y in rows}
+            if m:
+                dst[tk] = m
 
     inv_tags = [None] * len(tag_index)
     for t, i in tag_index.items():
@@ -1400,7 +1773,16 @@ def encode_provenance(history_out, prov_by_ticker):
                     "`tag` was kept although later_tag holds later_value > 0). "
                     "scale_corrected[T][year][field] = state_code ('e'/'c': the cell was a clean "
                     "power of 1000 off and was rescaled from the same filing's EPS identity / "
-                    "cover count; base runs unchanged)."),
+                    "cover count; base runs unchanged). "
+                    "ni_scope[T][year] = the rung that resolved net_income (Fix 1a): parent "
+                    "(NetIncomeLoss / ifrs owners of the parent), parent_derived (ProfitLoss minus the "
+                    "NCI line), no_nci_filed (ProfitLoss, no noncontrolling-interest element filed), "
+                    "nci_unknown (ProfitLoss kept although an NCI element is filed). "
+                    "nci_subtracted[T][year] = the NCI amount a parent_derived year subtracted. "
+                    "equity_incl_nci_rung[T][year] = incl_tag | parent_plus_minority | parent_no_nci. "
+                    "cash_scope[T][year] = the rung that resolved cash (Fix 2a): unrestricted_line, "
+                    "ifrs_cash_and_equivalents, derived_minus_restricted, total_no_restricted_filed, "
+                    "or cash_unresolved (null cell: restricted elements exceed the cash-flow total)."),
         "_states": {"p": "primary", "b": "backfill", "s": "component_sum",
                     "l": "lone_depreciation", "o": "accession_override",
                     "e": "scale_corrected_eps", "c": "scale_corrected_cover"},
@@ -1412,6 +1794,7 @@ def encode_provenance(history_out, prov_by_ticker):
         "untagged_fields": untagged_out,
         "ladder_notes": notes_out,
         "scale_corrected": scale_out,
+        **scope_out,
     }
 
 
@@ -1431,18 +1814,23 @@ def compute_battery(history):
 
     battery = {"fiscal_year": y0, "years_available": len(years)}
 
+    # Fix 1a(e): ratios against consolidated totals (ROA, CFO > NI, accruals, TATA) read the
+    # consolidated net income, falling back to the parent's when it is null (one basis, P3).
+    ni_c = c.get("net_income_incl_nci") if c.get("net_income_incl_nci") is not None else c.get("net_income")
+    ni_p = p.get("net_income_incl_nci") if p.get("net_income_incl_nci") is not None else p.get("net_income")
+
     # ── Piotroski F-Score ────────────────────────────────────────────────
     checks = {}
-    roa_c = safe_div(c.get("net_income"), c.get("total_assets"))
-    roa_p = safe_div(p.get("net_income"), p.get("total_assets"))
+    roa_c = safe_div(ni_c, c.get("total_assets"))
+    roa_p = safe_div(ni_p, p.get("total_assets"))
     if roa_c is not None:
         checks["roa_positive"] = roa_c > 0
     if c.get("ocf") is not None:
         checks["cfo_positive"] = c["ocf"] > 0
     if roa_c is not None and roa_p is not None:
         checks["roa_improving"] = roa_c > roa_p
-    if c.get("ocf") is not None and c.get("net_income") is not None:
-        checks["cfo_exceeds_ni"] = c["ocf"] > c["net_income"]
+    if c.get("ocf") is not None and ni_c is not None:
+        checks["cfo_exceeds_ni"] = c["ocf"] > ni_c
     lev_c = safe_div(c.get("lt_debt"), c.get("total_assets"))
     lev_p = safe_div(p.get("lt_debt"), p.get("total_assets"))
     if lev_c is not None and lev_p is not None:
@@ -1466,10 +1854,10 @@ def compute_battery(history):
     battery["f_score_checks_available"] = len(checks)
 
     # ── Sloan accruals ───────────────────────────────────────────────────
-    if all(x is not None for x in (c.get("net_income"), c.get("ocf"),
+    if all(x is not None for x in (ni_c, c.get("ocf"),
                                    c.get("total_assets"), p.get("total_assets"))):
         avg_assets = (c["total_assets"] + p["total_assets"]) / 2
-        battery["accruals_ratio"] = round((c["net_income"] - c["ocf"]) / avg_assets, 4) if avg_assets else None
+        battery["accruals_ratio"] = round((ni_c - c["ocf"]) / avg_assets, 4) if avg_assets else None
     else:
         battery["accruals_ratio"] = None
 
@@ -1545,8 +1933,8 @@ def compute_battery(history):
         lvg_p = (p["lt_debt"] + p["current_liabilities"]) / p["total_assets"]
     ratio("LVGI", safe_div(lvg_c, lvg_p))
     tata = None
-    if all(x is not None for x in (c.get("net_income"), c.get("ocf"), c.get("total_assets"))):
-        tata = (c["net_income"] - c["ocf"]) / c["total_assets"] if c["total_assets"] else None
+    if all(x is not None for x in (ni_c, c.get("ocf"), c.get("total_assets"))):
+        tata = (ni_c - c["ocf"]) / c["total_assets"] if c["total_assets"] else None
     if tata is None:
         missing.append("TATA")
         tata = 0.0  # neutral for the additive term
@@ -1611,6 +1999,9 @@ def build_ticker_outputs(data, ticker):
     # Merge namespaces; us-gaap wins on name collisions
     facts = dict(facts_all.get("ifrs-full", {}))
     facts.update(facts_all.get("us-gaap", {}))
+    for tag in SRT_TAGS:                     # srt elements ride under an "srt:" key (Fix 2a(b))
+        if tag in facts_all.get("srt", {}):
+            facts["srt:" + tag] = facts_all["srt"][tag]
     dei = facts_all.get("dei", {})
     history, prov_bundle = extract_history(facts, ticker, dei)
     if not history:
@@ -1658,8 +2049,9 @@ def merge_ticker_provenance(prov, ticker, rows, bundle):
     existing tables — appending unseen entries at the end so every other ticker's indices stay
     valid. A ticker with no bundle loses its runs/overrides/period_end entries.
     """
+    scope_sections = ("ni_scope", "nci_subtracted", "equity_incl_nci_rung", "cash_scope")
     for section in ("runs", "overrides", "period_end", "untagged_fields", "ladder_notes",
-                    "scale_corrected"):
+                    "scale_corrected") + scope_sections:
         prov.setdefault(section, {}).pop(ticker, None)
     if not bundle:
         return
@@ -1693,6 +2085,9 @@ def merge_ticker_provenance(prov, ticker, rows, bundle):
     if local["scale_corrected"].get(ticker):
         prov["scale_corrected"][ticker] = local["scale_corrected"][ticker]
         prov.setdefault("_states", {}).update(local["_states"])
+    for section in scope_sections:
+        if local[section].get(ticker):
+            prov[section][ticker] = local[section][ticker]
 
 
 def refresh_one(ticker, data=None):
