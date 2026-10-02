@@ -1773,6 +1773,24 @@ def refresh_one(ticker, data=None):
     return 0
 
 
+def _apply_path_overrides(zip_path, data_dir):
+    """Point the build at a companyfacts zip and/or a data directory other than the repo's own.
+
+    The data directory supplies stocks.json and cik_map.json and receives every output file.
+    """
+    global DATA, STOCKS_JSON, ZIP_PATH, CIK_MAP_JSON, HISTORY_JSON, BATTERY_JSON, TTM_JSON, QTR_JSON
+    if zip_path:
+        ZIP_PATH = Path(zip_path)
+    if data_dir:
+        DATA = Path(data_dir)
+        STOCKS_JSON = DATA / "stocks.json"
+        CIK_MAP_JSON = DATA / "cik_map.json"
+        HISTORY_JSON = DATA / "fundamentals_history.json"
+        BATTERY_JSON = DATA / "fundamentals_battery.json"
+        TTM_JSON = DATA / "fundamentals_ttm.json"
+        QTR_JSON = DATA / "fundamentals_quarterly.json"
+
+
 def main():
     parser = argparse.ArgumentParser(description="Build 10y fundamentals + value-trap battery from companyfacts.zip")
     parser.add_argument("--limit", type=int, default=None, help="Process at most N tickers (smoke runs)")
@@ -1780,7 +1798,13 @@ def main():
     parser.add_argument("--refresh-one", type=str, default=None, metavar="TICKER",
                         help="Live-fetch ONE ticker from data.sec.gov and patch its rows in place "
                              "(local-only; never commit the result)")
+    parser.add_argument("--zip", type=str, default=None, metavar="PATH",
+                        help="companyfacts.zip to read (default: <repo>/companyfacts.zip)")
+    parser.add_argument("--data-dir", type=str, default=None, metavar="DIR",
+                        help="directory holding stocks.json and cik_map.json and receiving every "
+                             "output file (default: <repo>/public/data)")
     args = parser.parse_args()
+    _apply_path_overrides(args.zip, args.data_dir)
 
     if args.refresh_one:
         if args.limit or args.tickers:
