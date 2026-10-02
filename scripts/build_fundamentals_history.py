@@ -577,8 +577,9 @@ SRT_TAGS = ("PayablesToCustomers",)
 
 def _nci_filed_ends(facts, nonzero_only=False):
     """[(end, form)] of every filed element of N (any form). StockholdersEquityIncludingPortion... counts
-    only where no StockholdersEquity fact of the same end carries the same value (its difference from
-    the parent's equity is then a non-zero NCI). `nonzero_only`: elements filed as 0 do not count.
+    only where a StockholdersEquity fact of the same end is filed and none carries the same value (its
+    difference from the parent's equity is then a non-zero NCI); filed without StockholdersEquity it is
+    not NCI evidence by itself. `nonzero_only`: elements filed as 0 do not count.
     A filed zero NCI is evidence of NO outside holders (a value, not an absence), so the scope decisions
     ask for the non-zero evidence and tell a filed zero from no element at all."""
     out = []
@@ -591,7 +592,7 @@ def _nci_filed_ends(facts, nonzero_only=False):
         if e.get("end") and e.get("val") is not None:
             se.setdefault(e["end"], set()).add(e["val"])
     for e in facts.get(SE_INCL_NCI, {}).get("units", {}).get("USD", []):
-        if e.get("end") and e.get("val") is not None and e["val"] not in se.get(e["end"], ()):
+        if e.get("end") and e.get("val") is not None and e["end"] in se and e["val"] not in se[e["end"]]:
             out.append((e["end"], e.get("form")))
     return out
 

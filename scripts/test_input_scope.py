@@ -704,3 +704,34 @@ def test_item2_equity_scope_is_a_provenance_section_the_live_refresh_merges():
     prov = {}
     bfh.merge_ticker_provenance(prov, "TEST", out["history"], out["prov"])
     assert prov["equity_scope"]["TEST"] == {str(y): "parent_derived" for y in YEARS}
+
+
+# ── Ruling on Q2: the including-NCI equity tag is NCI evidence only against a StockholdersEquity that differs ──
+
+def test_q2_including_nci_equity_without_stockholders_equity_is_not_nci_evidence():
+    us = _base_us()
+    us[SEI] = _inst({y: 320_000 for y in YEARS})
+    us["ProfitLoss"] = _flow({y: 100_000 for y in YEARS})
+    out = _out(_doc(us))
+    eq, sc = _eq(out)
+    assert eq == {y: 320_000 for y in YEARS} and sc == {y: "no_nci_filed" for y in YEARS}
+    assert _section(out, "ni_scope") == {y: "no_nci_filed" for y in YEARS}
+    assert _col(out, "net_income_incl_nci") == {y: 100_000 for y in YEARS}
+
+
+def test_q2_a_stockholders_equity_that_differs_still_marks_nci():
+    us = _base_us()
+    us[SEI] = _inst({y: 320_000 for y in YEARS})
+    us["StockholdersEquity"] = _inst({y: 300_000 for y in YEARS})
+    us["ProfitLoss"] = _flow({y: 100_000 for y in YEARS})
+    out = _out(_doc(us))
+    assert _section(out, "ni_scope") == {y: "nci_unknown" for y in YEARS}
+    assert _col(out, "net_income_incl_nci") == {y: 100_000 for y in YEARS}      # ProfitLoss is filed: rung 1 of incl
+
+
+def test_q2_ttm_window_ignores_an_including_nci_equity_without_stockholders_equity():
+    us = _ttm_base()
+    us["NetIncomeLoss"] = _ttm_flow(90_000, 50_000, 40_000)
+    us[SEI] = {"units": {"USD": [_i(2022, 320_000), _p("2023-06-30", "2023-06-30", 330_000, filed="2023-08-01")]}}
+    f = _out(_doc(us))["ttm"]["fields"]
+    assert f["net_income_incl_nci"] == f["net_income"] == 90_000 + 50_000 - 40_000
