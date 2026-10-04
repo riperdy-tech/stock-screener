@@ -278,7 +278,11 @@ def main():
 
     print(f"Loaded {len(stocks)} stocks from {STOCKS_JSON}")
 
-    # ── Pre-filter: only tickers with non-empty pdm_themes ───────────────
+    # ── Pre-filter: the tickers this file already covers ──────────────────
+    # Formerly the stocks score_paradigm tagged with a theme (pdm_themes); that lane was retired 2026-10-04
+    # and the field is no longer refreshed. rs2's pack reads this file, so the list is held at the tickers
+    # already in analyst_coverage.json until its universe is decided on purpose.
+    known = set((load_json(ANALYST_COVERAGE_JSON) or {}).keys()) if ANALYST_COVERAGE_JSON.exists() else set()
     candidates = []
     for stock in stocks:
         ticker = stock.get("symbol")
@@ -286,13 +290,12 @@ def main():
             continue
         if args.ticker and ticker != args.ticker:
             continue
-        pdm_themes = stock.get("paradigm", {}).get("pdm_themes", [])
-        if pdm_themes and len(pdm_themes) > 0:
+        if ticker in known:
             candidates.append(stock)
 
     if args.ticker:
         print(f"Filtered to ticker: {args.ticker}")
-    print(f"Candidates (non-empty pdm_themes): {len(candidates)}")
+    print(f"Candidates (tickers already in {ANALYST_COVERAGE_JSON.name}): {len(candidates)}")
 
     if len(candidates) == 0:
         print("No candidates to process. Exiting.")

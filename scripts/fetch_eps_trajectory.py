@@ -203,7 +203,13 @@ def main():
 
     print(f"Loaded {len(stocks)} stocks from {STOCKS_JSON}")
 
-    # ── Identify candidates (tickers with non-empty pdm_themes) ──────────
+    # ── Identify candidates: the tickers this file already covers ─────────
+    # The list used to be the stocks score_paradigm tagged with a theme (pdm_themes). The paradigm lane was
+    # retired 2026-10-04 and fetch_data.py rewrites stock records without that field, so the list would have
+    # shrunk to nothing - and score_factors_dual_door / build_valuation_models / rs2's pack read this file.
+    # Until the universe is decided on purpose (widening it changes Dual Door's revision coverage), it is held
+    # at the tickers already in eps_trajectory.json: the same names as before the retirement.
+    known = set((load_json(EPS_TRAJECTORY_JSON) or {}).keys()) if EPS_TRAJECTORY_JSON.exists() else set()
     candidates = []
     for stock in stocks:
         ticker = stock.get("symbol")
@@ -211,16 +217,13 @@ def main():
             continue
         if args.ticker and ticker != args.ticker:
             continue
-        # Only process tickers that have been tagged with paradigm themes
-        paradigm = stock.get("paradigm", {})
-        pdm_themes = paradigm.get("pdm_themes", [])
-        if not pdm_themes:
+        if ticker not in known:
             continue
         candidates.append(stock)
 
     if args.ticker:
         print(f"Filtered to ticker: {args.ticker}")
-    print(f"Candidates with non-empty pdm_themes: {len(candidates)}")
+    print(f"Candidates (tickers already in {EPS_TRAJECTORY_JSON.name}): {len(candidates)}")
 
     if len(candidates) == 0:
         print("No candidates to process. Exiting.")
