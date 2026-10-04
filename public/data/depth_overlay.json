@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-05T03:11:15.634459",
+ "generated_at": "2026-10-05T04:38:38.063292",
  "scheme": "band_direction_v1",
  "count": 23,
  "actionable_count": 0,
@@ -144,66 +144,914 @@
   },
   "APA": {
    "ticker": "APA",
-   "price": 44.84,
-   "date": "2026-09-18",
-   "model": "rs2-analyst-deep-mtp5",
-   "samples_run": 3,
-   "n_basis": 3,
-   "iv_band_low": 30.0,
-   "iv_band_high": 50.7,
-   "median_iv": 37.5,
-   "spread_pct": 69.0,
-   "flags": [],
-   "pack_revision": 3,
+   "price": 43.68,
+   "date": "2026-10-05",
+   "model": "rs2-analyst-deep-mtp5-v33",
+   "samples_run": 1,
+   "n_basis": 1,
+   "iv_band_low": 87.37,
+   "iv_band_high": 87.37,
+   "median_iv": 87.37,
+   "spread_pct": null,
+   "flags": [
+    "MODE_INSTABILITY",
+    "above_analyst_high_1.55x_cap_1.5x",
+    "desk_input_revisions_4_swing_1.91x"
+   ],
+   "pack_revision": 21,
    "scheme": "band_direction_v1",
+   "m": null,
    "scorecard": {
-    "median_iv": 37.5,
-    "median_bull_iv": 59.4,
-    "median_bear_iv": 13.4,
-    "iv_band_low": 30.0,
-    "iv_band_high": 50.7,
-    "median_conviction_score": 9.5,
-    "median_quality_moat": 2.6,
-    "median_kelly_fraction_pct": 0.0,
-    "asymmetric_payoff_skew": 0.46,
+    "median_iv": 87.37,
+    "base_iv": 87.37,
+    "median_bull_iv": 115.51,
+    "median_bear_iv": 51.44,
+    "iv_band_low": 87.37,
+    "iv_band_high": 87.37,
+    "spread_pct": null,
+    "converged": false,
+    "medoid_sample": 1,
+    "n_basis": 1,
+    "median_conviction_score": 13.0,
+    "median_quality_moat": 3.7,
+    "median_kelly_fraction_pct": 24.75,
+    "asymmetric_payoff_skew": 99.9,
     "reentry_tranches": {
-     "tranche_1_starter": 35.0,
-     "tranche_2_core": 26.0
+     "tranche_1_starter": 43.68,
+     "tranche_2_core": 36.0
     },
     "thesis_invalidation_triggers": [
-     "WTI sustained above $85/bbl for two consecutive quarters (validating the bull case as the new base) combined with APA full-year FCF > $2.0B and net debt < $3.0B, which would re-rate the terminal value above T0 and invalidate the mean-reversion/avoid thesis; OR a major Suriname reserve upgrade (>500M BOE) that structurally re-rates the terminal.",
-     "WTI below $60 for two consecutive quarters AND quarterly production below 410k BOE/d AND net debt rising (de-leveraging reversed)",
-     "APA closes below $27.00 (>=10% below base IV, restoring margin of safety) on non-oil-spike fundamentals, OR reported quarterly FCF/BOE exceeds $15.00 with Brent sustained above $85/bbl, confirming the elevated-oil bull case."
-    ]
+     "TTM net income attributable to common stock falls below $1.5B while U.S. realized oil is above $75/bbl (evidence the ~$500M run-rate cost savings and Permian efficiency are not durable), or FY2027 LOE guidance is raised above $1.65B"
+    ],
+    "base_probability": 0.5,
+    "bull_probability": 0.25,
+    "bear_probability": 0.25,
+    "probabilities_defaulted": false,
+    "base_cf_used": 1.6,
+    "base_cf_basis": "other",
+    "coe_used": 0.0822,
+    "coe_source": "anchor",
+    "coe_adjustment_reason": null,
+    "valuation_frame": "equity",
+    "terminal_method": "gordon",
+    "terminal_multiple_or_g": 0.0236,
+    "fade_years": 3,
+    "stage1_growth_path": [
+     0.25,
+     -0.2,
+     0.02,
+     0.02,
+     0.02
+    ],
+    "years12_ratio": 0.822,
+    "base_to_civ": null,
+    "consensus_implied_value": null,
+    "bull_years12_ratio": 0.652,
+    "bear_years12_ratio": 1.527,
+    "base_shares_ratio": null,
+    "bull_shares_ratio": null,
+    "bear_shares_ratio": null,
+    "desk_frame": null,
+    "desk_net_debt": null,
+    "shares_basis": "vendor",
+    "shares_reason": null,
+    "net_debt_reason": null,
+    "excess_cash_reason": null,
+    "scenario_deviation_reason": null,
+    "bull_bear_anchor": "consensus high/low",
+    "terminal_multiple_reason": null,
+    "interest_addback": null,
+    "wacc_reason": null,
+    "owner_earnings_source": "ttm_ni+vendor_capex",
+    "consensus_reference_status": "not_available",
+    "terminal_g_gap_bp": 0,
+    "terminal_reason": null,
+    "base_window_gap": null,
+    "finite_life_years": null,
+    "cash_flow_life": "perpetual",
+    "cash_flow_life_reason": "FY2025 additions to property and equipment of $2.673B exceeded D&A of $2.304B (PRIMARY P3, filed 2026-02-26), so the reserve stock is being replaced by capex my flows already deduct; 2026 upstream capital guidance $2.07B (PRIMARY P1, 2026-08-05). Price deck: H1-26 realized oil $87.89/bbl vs H1-25 $6",
+    "terminal_ronic": 0.13527699999999998,
+    "terminal_ronic_gap_pts": null,
+    "long_run_facts": {
+     "cycle": null,
+     "cycle_year": null,
+     "cycle_years": [],
+     "e5": null,
+     "oe5": null,
+     "m5": null,
+     "m_tc": null,
+     "m_years": null,
+     "r_tc": 0.167124,
+     "r_years": [
+      2019,
+      2025,
+      7
+     ],
+     "p": 0.625,
+     "g_rev": null,
+     "g_rev_years": null,
+     "terminal_g_basis": "consensus_fallback",
+     "ni_over_oe": 1.307368,
+     "x_over_oe": 1.307368,
+     "nwc_intensity": null,
+     "nwc_years": null,
+     "stub_months": 9.1335,
+     "stamps": [
+      "tangible_equity_partial:2023-2025",
+      "margin_record_not_available",
+      "cycle_not_testable"
+     ],
+     "om_tc": null,
+     "om_trend": null,
+     "om_L": null,
+     "om_years": null,
+     "om_shape": null,
+     "om_basis": null,
+     "om_5": null,
+     "m_long": null,
+     "margin_ratio": null,
+     "stamps_full": [
+      "tangible_equity_partial:2023/2024/2025",
+      "margin_record_not_available",
+      "cycle_not_testable"
+     ]
+    },
+    "working_capital_deducted": null,
+    "base_year_capped": null,
+    "split_after_last_filing": null,
+    "years12_held_by_desk": false,
+    "desk_stamps": [
+     "long_run_base_ratio_x"
+    ],
+    "guidance_deviation_reason": "Next-FY consensus revenue growth of -9.7% (DATA 8) is a one-time normalization of the Hormuz-driven FY2026 spike (H1-26 realized oil $87.89/bbl vs H1-25 $69.72, PRIMARY P1), which my year-1 (+25%) and year-2 (-20%) steps already carry. Applying it again to years 3-5 would imply a decade of structura",
+    "cycle_evidence": "H1-2026 average realized oil price $87.89/bbl vs H1-2025 $69.72/bbl (APA Q2-26 release, PRIMARY P1, 2026-08-05); WTI November contract ~$91.11 on 2026-09-29 [Unconfirmed level]; Brent >$100 on 2026-09-10 [secondary]",
+    "verdict_label": "undervalued",
+    "direction_m": "undervalued",
+    "crux": [
+     {
+      "citations": [
+       {
+        "date": "2026-08-05",
+        "quote": "For full-year 2026, APA is raising its U.S. oil production outlook to 123,000 barrels of oil per day while maintaining U.S. capital at $1.3 billion.",
+        "source": "PRIMARY P1"
+       },
+       {
+        "date": "2026-08-05",
+        "quote": "Lease operating expenses guidance has been lowered by $25 million to $1.5 billion, reflecting ongoing cost savings.",
+        "source": "GUIDANCE"
+       }
+      ],
+      "input": "growth_years_3_5",
+      "reason": "Today's price implies owner cash flow shrinking roughly 35-40%/year through years 3-5 under my structure (and -10.6%/yr over 10 years under the neutral reference), i.e. it treats the next-FY consensus revenue decline of -9.7% as a permanent trend. That decline is the one-time fade of the Hormuz spik"
+     }
+    ],
+    "crux_check": {
+     "valid": true,
+     "reason": null,
+     "entries": [
+      {
+       "input": "growth_years_3_5",
+       "own": 0.020000000000000018,
+       "implied": -0.20219241201380878,
+       "reachable": true,
+       "at_default": false,
+       "citations": [
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "GUIDANCE",
+         "class": "pack_company",
+         "quote_found": true
+        }
+       ],
+       "valid": true,
+       "reason": null
+      }
+     ],
+     "stamps": []
+    },
+    "price_implied": {
+     "coe": {
+      "value": 0.1496815963856379,
+      "reachable": true,
+      "own": 0.0822,
+      "bound": {
+       "low": 0.0524,
+       "high": 0.25,
+       "value_low": 172.67066650955073,
+       "value_high": 27.18991043935616
+      },
+      "side": null,
+      "base_at_value": 43.680000007095614,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       0.14968159599304198,
+       0.14968159677823384
+      ],
+      "stamps": []
+     },
+     "growth_years_3_5": {
+      "value": -0.20219241201380878,
+      "reachable": true,
+      "own": 0.020000000000000018,
+      "bound": {
+       "low": -0.9989999999999999,
+       "high": 9.999999999999998,
+       "value_low": 10.994976953008539,
+       "value_high": 1654728.4802786699
+      },
+      "side": null,
+      "base_at_value": 43.680000020483085,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       -0.22219241269671652,
+       -0.22219241201380874
+      ],
+      "stamps": [],
+      "shift": -0.22219241201380874,
+      "shift_bound": [
+       -1.019,
+       9.98
+      ],
+      "own_path": [
+       0.02,
+       0.02,
+       0.02
+      ]
+     },
+     "fade_years": {
+      "value": null,
+      "reachable": false,
+      "own": 3,
+      "bound": {
+       "low": 0,
+       "high": 60,
+       "value_low": 87.40768387533535,
+       "value_high": 87.5526150073153
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "bracket_years": null,
+      "bracket_values": null
+     },
+     "terminal_g": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0236,
+      "bound": {
+       "low": 0.0,
+       "high": 0.044698999999999996,
+       "value_low": 78.08538144026724,
+       "value_high": 105.14760384587537
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "terminal_ronic": {
+      "value": null,
+      "reachable": false,
+      "own": 0.13527699999999998,
+      "bound": {
+       "low": 0.0822,
+       "high": "unlimited",
+       "value_low": 79.12837350347168,
+       "value_high": 99.80413931591322
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "year2_level": {
+      "value": null,
+      "reachable": false,
+      "own": 1.6,
+      "bound": {
+       "low": null,
+       "high": null,
+       "value_low": null,
+       "value_high": null
+      },
+      "side": null,
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "not_available": "the pack prints no bull2 and bear2 range"
+     }
+    },
+    "momentum_view": "confirming",
+    "entry_timing": "buy_now",
+    "momentum_flip_condition": {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": 0.0,
+     "window_days": 180
+    },
+    "momentum_break_rule": {
+     "metric": "high_52w_distance",
+     "comparator": "<=",
+     "threshold": -0.25,
+     "window_days": 365
+    },
+    "invalidation_rules": [
+     {
+      "metric": "fcf",
+      "comparator": "<=",
+      "threshold": 1.4,
+      "window": "TTM at next reported 10-Q",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "net_issuance_1y",
+      "comparator": ">",
+      "threshold": 0.03,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "mom_6m",
+      "comparator": "<",
+      "threshold": 0.0,
+      "window": "quarterly review",
+      "source": "price_history (SCR-10)"
+     },
+     {
+      "metric": "high_52w_distance",
+      "comparator": "<=",
+      "threshold": -0.25,
+      "window": "quarterly review",
+      "source": "price_history (SCR-10)"
+     }
+    ],
+    "position_basis": "value",
+    "momentum_evidence": null,
+    "desk_calls": 8,
+    "desk_iv_match": true,
+    "desk_reverse_neutral_cagr": -10.59,
+    "coe_minus_anchor": 0.006708,
+    "desk_share_basis_matched": null,
+    "catalysts": [
+     {
+      "date": "2026-08-05",
+      "event": "Q2-26 results (8-K): diluted EPS $2.11 vs $1.67 y/y; FY26 US oil guidance raised to 123,000 bopd at flat $1.3B capital; run-rate savings target raised to ~$500M; LOE guidance cut $25M to $1.5B; Eni partnership on Uruguay OFF-6; Savant acquisition pending",
+      "direction": "bull",
+      "estimates_moved": "current-FY consensus EPS $6.27 (+66.3% y/y, 25 analysts, DATA 8 fetched 2026-10-04)",
+      "scenario": "Sets Base year 1 (+25%) and the locked-in cost base that supports the flat years 3-5 plateau; underpins the crux"
+     },
+     {
+      "date": "2026-09-10",
+      "event": "Hormuz crisis oil spike: Brent from ~$92 (Aug 19) to >$100 (Sep 10) and ~$108 around Sep 14 after tanker attacks and Saudi East-West pipeline shutdown; partial de-escalation late September (WTI Nov ~$91.11 on Sep 29); renewed closure risk reported Sep 30",
+      "direction": "bull",
+      "estimates_moved": "next-FY EPS trend $4.58 now vs $4.21 30 days ago (+7.7% in 90 days, DATA 8)",
+      "scenario": "Base year 1 elevated realizations; resolution timing is the Bear/Bull switch (Bear y2 -35% models the unwind to WTI ~$60-65)"
+     },
+     {
+      "date": "2026-09-16",
+      "event": "Board approved a further 40M-share buyback authorization on top of 19.0M remaining at Jun 30; $0.25 quarterly dividend maintained (exact date Unconfirmed, event confirmed by coverage)",
+      "direction": "bull",
+      "estimates_moved": "no visible change",
+      "scenario": "Per-share accretion in all scenarios (not modeled in the DCF - conservative); supports the Bear floor via equity retirement"
+     },
+     {
+      "date": "2026-09-23",
+      "event": "Sell-side upgrade cluster: Stifel initiated Buy with $62 target; Raymond James lifted target to $54; APA +4.16% that day (secondary sources, exact Stifel date Unconfirmed)",
+      "direction": "bull",
+      "estimates_moved": "price targets raised; no visible consensus EPS change in fetched data",
+      "scenario": "Bull re-rating support only; not used as value evidence"
+     },
+     {
+      "date": "2026-10-04",
+      "event": "Next-FY (FY2027) EPS estimate revision trend: $4.58 now vs $4.12 60 days ago; 7 up / 3 down in last 30 days (DATA 8, yfinance fetch)",
+      "direction": "bull",
+      "estimates_moved": "next-FY EPS +7.7% in 90 days",
+      "scenario": "Supports Bull's milder year-2 fade (-10% vs Base -20%)"
+     }
+    ],
+    "bull_below_price_reason": null,
+    "bear_above_price_reason": "Even the downside clears today's $43.68 because APA's cost base is locked in, not at risk: run-rate savings raised to ~$500M and LOE guidance cut to $1.5B (PRIMARY P1, 2026-08-05), U.S. oil raised to 123,000 bopd at flat $1.3B capital (PRIMARY P1, 2026-08-05), net debt only $3.3B at Q2-26 (P [218 ch",
+    "code_fill_mode": "joint"
    },
-   "conviction_score": 9.5,
-   "business_quality_moat": 2.6,
-   "kelly_fraction_pct": 0.0,
-   "asymmetric_payoff_skew": 0.46,
-   "bull_iv": 59.4,
-   "bear_iv": 13.4,
+   "conviction_score": 13.0,
+   "business_quality_moat": 3.7,
+   "kelly_fraction_pct": 24.75,
+   "asymmetric_payoff_skew": 99.9,
+   "bull_iv": 115.51,
+   "bear_iv": 51.44,
    "reentry_tranches": {
-    "tranche_1_starter": 35.0,
-    "tranche_2_core": 26.0
+    "tranche_1_starter": 43.68,
+    "tranche_2_core": 36.0
    },
    "thesis_invalidation_triggers": [
-    "WTI sustained above $85/bbl for two consecutive quarters (validating the bull case as the new base) combined with APA full-year FCF > $2.0B and net debt < $3.0B, which would re-rate the terminal value above T0 and invalidate the mean-reversion/avoid thesis; OR a major Suriname reserve upgrade (>500M BOE) that structurally re-rates the terminal.",
-    "WTI below $60 for two consecutive quarters AND quarterly production below 410k BOE/d AND net debt rising (de-leveraging reversed)",
-    "APA closes below $27.00 (>=10% below base IV, restoring margin of safety) on non-oil-spike fundamentals, OR reported quarterly FCF/BOE exceeds $15.00 with Brent sustained above $85/bbl, confirming the elevated-oil bull case."
+    "TTM net income attributable to common stock falls below $1.5B while U.S. realized oil is above $75/bbl (evidence the ~$500M run-rate cost savings and Permian efficiency are not durable), or FY2027 LOE guidance is raised above $1.65B"
    ],
    "converged": false,
    "early_stop": false,
-   "mode": "adaptive",
-   "direction": "hold",
+   "mode": "fixed_1",
+   "coe_used": 0.0822,
+   "coe_source": "anchor",
+   "coe_adjustment_reason": null,
+   "valuation_frame": "equity",
+   "terminal_method": "gordon",
+   "terminal_multiple_or_g": 0.0236,
+   "fade_years": 3,
+   "stage1_growth_path": [
+    0.25,
+    -0.2,
+    0.02,
+    0.02,
+    0.02
+   ],
+   "guidance_deviation_reason": "Next-FY consensus revenue growth of -9.7% (DATA 8) is a one-time normalization of the Hormuz-driven FY2026 spike (H1-26 realized oil $87.89/bbl vs H1-25 $69.72, PRIMARY P1), which my year-1 (+25%) and year-2 (-20%) steps already carry. Applying it again to years 3-5 would imply a decade of structura",
+   "cycle_evidence": "H1-2026 average realized oil price $87.89/bbl vs H1-2025 $69.72/bbl (APA Q2-26 release, PRIMARY P1, 2026-08-05); WTI November contract ~$91.11 on 2026-09-29 [Unconfirmed level]; Brent >$100 on 2026-09-10 [secondary]",
+   "verdict_label": "undervalued",
+   "desk_calls": 8,
+   "desk_iv_match": true,
+   "desk_reverse_neutral_cagr": -10.59,
+   "coe_minus_anchor": 0.006708,
+   "desk_share_basis_matched": null,
+   "years12_ratio": 0.822,
+   "base_to_civ": null,
+   "consensus_implied_value": null,
+   "bull_years12_ratio": 0.652,
+   "bear_years12_ratio": 1.527,
+   "base_shares_ratio": null,
+   "bull_shares_ratio": null,
+   "bear_shares_ratio": null,
+   "desk_frame": null,
+   "desk_net_debt": null,
+   "shares_basis": "vendor",
+   "shares_reason": null,
+   "net_debt_reason": null,
+   "excess_cash_reason": null,
+   "scenario_deviation_reason": null,
+   "bull_bear_anchor": "consensus high/low",
+   "terminal_multiple_reason": null,
+   "interest_addback": null,
+   "wacc_reason": null,
+   "owner_earnings_source": "ttm_ni+vendor_capex",
+   "consensus_reference_status": "not_available",
+   "terminal_g_gap_bp": 0,
+   "terminal_reason": null,
+   "base_window_gap": null,
+   "finite_life_years": null,
+   "cash_flow_life": "perpetual",
+   "cash_flow_life_reason": "FY2025 additions to property and equipment of $2.673B exceeded D&A of $2.304B (PRIMARY P3, filed 2026-02-26), so the reserve stock is being replaced by capex my flows already deduct; 2026 upstream capital guidance $2.07B (PRIMARY P1, 2026-08-05). Price deck: H1-26 realized oil $87.89/bbl vs H1-25 $6",
+   "terminal_ronic": 0.13527699999999998,
+   "terminal_ronic_gap_pts": null,
+   "long_run_facts": {
+    "cycle": null,
+    "cycle_year": null,
+    "cycle_years": [],
+    "e5": null,
+    "oe5": null,
+    "m5": null,
+    "m_tc": null,
+    "m_years": null,
+    "r_tc": 0.167124,
+    "r_years": [
+     2019,
+     2025,
+     7
+    ],
+    "p": 0.625,
+    "g_rev": null,
+    "g_rev_years": null,
+    "terminal_g_basis": "consensus_fallback",
+    "ni_over_oe": 1.307368,
+    "x_over_oe": 1.307368,
+    "nwc_intensity": null,
+    "nwc_years": null,
+    "stub_months": 9.1335,
+    "stamps": [
+     "tangible_equity_partial:2023-2025",
+     "margin_record_not_available",
+     "cycle_not_testable"
+    ],
+    "om_tc": null,
+    "om_trend": null,
+    "om_L": null,
+    "om_years": null,
+    "om_shape": null,
+    "om_basis": null,
+    "om_5": null,
+    "m_long": null,
+    "margin_ratio": null,
+    "stamps_full": [
+     "tangible_equity_partial:2023/2024/2025",
+     "margin_record_not_available",
+     "cycle_not_testable"
+    ]
+   },
+   "working_capital_deducted": null,
+   "base_year_capped": null,
+   "years12_held_by_desk": false,
+   "desk_stamps": [
+    "long_run_base_ratio_x"
+   ],
+   "momentum_view": "confirming",
+   "entry_timing": "buy_now",
+   "momentum_flip_condition": {
+    "metric": "mom_6m",
+    "comparator": "<",
+    "threshold": 0.0,
+    "window_days": 180
+   },
+   "momentum_break_rule": {
+    "metric": "high_52w_distance",
+    "comparator": "<=",
+    "threshold": -0.25,
+    "window_days": 365
+   },
+   "invalidation_rules": [
+    {
+     "metric": "fcf",
+     "comparator": "<=",
+     "threshold": 1.4,
+     "window": "TTM at next reported 10-Q",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "net_issuance_1y",
+     "comparator": ">",
+     "threshold": 0.03,
+     "window": "next reported quarter",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": 0.0,
+     "window": "quarterly review",
+     "source": "price_history (SCR-10)"
+    },
+    {
+     "metric": "high_52w_distance",
+     "comparator": "<=",
+     "threshold": -0.25,
+     "window": "quarterly review",
+     "source": "price_history (SCR-10)"
+    }
+   ],
+   "position_basis": "value",
+   "position_basis_declared": "value",
+   "position_basis_votes": {
+    "value": 1
+   },
+   "momentum_evidence": null,
+   "momentum_state": {
+    "price_asof": "2026-09-30 16:50",
+    "mom_12_1": 0.8392,
+    "mom_6m": 0.0434,
+    "mom_1m": 0.0123,
+    "high_52w_distance": 0.0,
+    "high_52w_basis": "monthly proxy (unlabelled by the source)",
+    "above_below_200d_mean": null,
+    "rs_vs_cluster_etf_3m": null,
+    "rs_vs_iwm_3m": null,
+    "realised_vol_60d": null,
+    "regime_shift_up": true,
+    "regime_shift_down": false,
+    "mom_break": null,
+    "mom_z_sector": 0.987,
+    "mom_z_universe": 0.957
+   },
+   "active_shocks_at_verdict": [
+    {
+     "active": true,
+     "age_days": 3,
+     "direction": "up",
+     "intensity": 1.0318335302945385,
+     "measure": "63-trading-day log change, %, signed",
+     "onset_date": "2026-09-28",
+     "peak_date": "2026-09-28",
+     "peak_intensity": 1.0799710858764024,
+     "proxy": false,
+     "reason": null,
+     "series_id": "DCOILWTICO",
+     "severity": 1,
+     "shock_id": "oil_shock",
+     "stale_input": false,
+     "state": "active",
+     "thresholds": {
+      "down": {
+       "severity_1": {
+        "episodes": 10,
+        "percentile": 4.5,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -30.0
+       },
+       "severity_2": {
+        "episodes": 6,
+        "percentile": 2.7,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -40.0
+       }
+      },
+      "up": {
+       "severity_1": {
+        "episodes": 11,
+        "percentile": 94.4,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 30.0
+       },
+       "severity_2": {
+        "episodes": 5,
+        "percentile": 97.9,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 40.0
+       }
+      }
+     },
+     "value": 30.955005908836153,
+     "value_date": "2026-09-29",
+     "values_revised": false
+    }
+   ],
+   "pack_facts_source": "build",
+   "base_cf_reason": null,
+   "catalysts": [
+    {
+     "date": "2026-08-05",
+     "event": "Q2-26 results (8-K): diluted EPS $2.11 vs $1.67 y/y; FY26 US oil guidance raised to 123,000 bopd at flat $1.3B capital; run-rate savings target raised to ~$500M; LOE guidance cut $25M to $1.5B; Eni partnership on Uruguay OFF-6; Savant acquisition pending",
+     "direction": "bull",
+     "estimates_moved": "current-FY consensus EPS $6.27 (+66.3% y/y, 25 analysts, DATA 8 fetched 2026-10-04)",
+     "scenario": "Sets Base year 1 (+25%) and the locked-in cost base that supports the flat years 3-5 plateau; underpins the crux"
+    },
+    {
+     "date": "2026-09-10",
+     "event": "Hormuz crisis oil spike: Brent from ~$92 (Aug 19) to >$100 (Sep 10) and ~$108 around Sep 14 after tanker attacks and Saudi East-West pipeline shutdown; partial de-escalation late September (WTI Nov ~$91.11 on Sep 29); renewed closure risk reported Sep 30",
+     "direction": "bull",
+     "estimates_moved": "next-FY EPS trend $4.58 now vs $4.21 30 days ago (+7.7% in 90 days, DATA 8)",
+     "scenario": "Base year 1 elevated realizations; resolution timing is the Bear/Bull switch (Bear y2 -35% models the unwind to WTI ~$60-65)"
+    },
+    {
+     "date": "2026-09-16",
+     "event": "Board approved a further 40M-share buyback authorization on top of 19.0M remaining at Jun 30; $0.25 quarterly dividend maintained (exact date Unconfirmed, event confirmed by coverage)",
+     "direction": "bull",
+     "estimates_moved": "no visible change",
+     "scenario": "Per-share accretion in all scenarios (not modeled in the DCF - conservative); supports the Bear floor via equity retirement"
+    },
+    {
+     "date": "2026-09-23",
+     "event": "Sell-side upgrade cluster: Stifel initiated Buy with $62 target; Raymond James lifted target to $54; APA +4.16% that day (secondary sources, exact Stifel date Unconfirmed)",
+     "direction": "bull",
+     "estimates_moved": "price targets raised; no visible consensus EPS change in fetched data",
+     "scenario": "Bull re-rating support only; not used as value evidence"
+    },
+    {
+     "date": "2026-10-04",
+     "event": "Next-FY (FY2027) EPS estimate revision trend: $4.58 now vs $4.12 60 days ago; 7 up / 3 down in last 30 days (DATA 8, yfinance fetch)",
+     "direction": "bull",
+     "estimates_moved": "next-FY EPS +7.7% in 90 days",
+     "scenario": "Supports Bull's milder year-2 fade (-10% vs Base -20%)"
+    }
+   ],
+   "bull_below_price_reason": null,
+   "bear_above_price_reason": "Even the downside clears today's $43.68 because APA's cost base is locked in, not at risk: run-rate savings raised to ~$500M and LOE guidance cut to $1.5B (PRIMARY P1, 2026-08-05), U.S. oil raised to 123,000 bopd at flat $1.3B capital (PRIMARY P1, 2026-08-05), net debt only $3.3B at Q2-26 (P [218 ch",
+   "code_fill_mode": "joint",
+   "consensus_data_status": "ok",
+   "input_scope_stamps": [
+    "customer_money_excluded"
+   ],
+   "direction_m": "undervalued",
+   "crux_valid": true,
+   "crux_by_sample": [
+    {
+     "sample": 1,
+     "valid": true,
+     "reason": null,
+     "inputs": [
+      "growth_years_3_5"
+     ],
+     "at_default": false
+    }
+   ],
+   "crux": [
+    {
+     "input": "growth_years_3_5",
+     "own": 0.020000000000000018,
+     "implied": -0.20219241201380878,
+     "at_default": false,
+     "reason": "Today's price implies owner cash flow shrinking roughly 35-40%/year through years 3-5 under my structure (and -10.6%/yr over 10 years under the neutral reference), i.e. it treats the next-FY consensus revenue decline of -9.7% as a permanent trend. That decline is the one-time fade of the Hormuz spik"
+    }
+   ],
+   "price_implied": {
+    "coe": {
+     "value": 0.1496815963856379,
+     "reachable": true,
+     "own": 0.0822,
+     "bound": {
+      "low": 0.0524,
+      "high": 0.25,
+      "value_low": 172.67066650955073,
+      "value_high": 27.18991043935616
+     },
+     "side": null,
+     "base_at_value": 43.680000007095614,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      0.14968159599304198,
+      0.14968159677823384
+     ],
+     "stamps": []
+    },
+    "growth_years_3_5": {
+     "value": -0.20219241201380878,
+     "reachable": true,
+     "own": 0.020000000000000018,
+     "bound": {
+      "low": -0.9989999999999999,
+      "high": 9.999999999999998,
+      "value_low": 10.994976953008539,
+      "value_high": 1654728.4802786699
+     },
+     "side": null,
+     "base_at_value": 43.680000020483085,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      -0.22219241269671652,
+      -0.22219241201380874
+     ],
+     "stamps": [],
+     "shift": -0.22219241201380874,
+     "shift_bound": [
+      -1.019,
+      9.98
+     ],
+     "own_path": [
+      0.02,
+      0.02,
+      0.02
+     ]
+    },
+    "fade_years": {
+     "value": null,
+     "reachable": false,
+     "own": 3,
+     "bound": {
+      "low": 0,
+      "high": 60,
+      "value_low": 87.40768387533535,
+      "value_high": 87.5526150073153
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "bracket_years": null,
+     "bracket_values": null
+    },
+    "terminal_g": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0236,
+     "bound": {
+      "low": 0.0,
+      "high": 0.044698999999999996,
+      "value_low": 78.08538144026724,
+      "value_high": 105.14760384587537
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "terminal_ronic": {
+     "value": null,
+     "reachable": false,
+     "own": 0.13527699999999998,
+     "bound": {
+      "low": 0.0822,
+      "high": "unlimited",
+      "value_low": 79.12837350347168,
+      "value_high": 99.80413931591322
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "year2_level": {
+     "value": null,
+     "reachable": false,
+     "own": 1.6,
+     "bound": {
+      "low": null,
+      "high": null,
+      "value_low": null,
+      "value_high": null
+     },
+     "side": null,
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "not_available": "the pack prints no bull2 and bear2 range"
+    }
+   },
+   "serving": {
+    "provider": "ollama",
+    "model": "rs2-analyst-deep-mtp5-v33",
+    "manifest_sha256": "f0f5ce2dcea334804e13492b2813e74d3294025f5d3b1692524de597fa33ab3e",
+    "system_layer_digest": "sha256:ff033c2519528445a1f2e56a797746524d64bff7d65e5a31612be35d6cbdfc22"
+   },
+   "position_basis_source_sample": 1,
+   "size_components": {
+    "dispersion": {
+     "bucket": "full",
+     "spread_pct": 0.0,
+     "source": "SIZE_BUCKETS"
+    },
+    "mos": {
+     "bucket": "full",
+     "mos_vs_base_pct": 100.0,
+     "source": "mos_vs_base_pct"
+    },
+    "conviction": {
+     "bucket": "full",
+     "conviction_score": 13.0,
+     "source": "scorecard.median_conviction_score"
+    },
+    "risk": {
+     "bucket": "full",
+     "elevated_volatility_ahead": false,
+     "source": "mri_outputs_dir/shock_register.json:risk_flags"
+    }
+   },
+   "reason": "single plausible sample \u2014 direction weak, size capped; mode instability: base IV moved +133.0% since the prior verdict ($37.50 -> $87.37) \u2014 within-run spread cannot see this, so convergence here is not stability",
+   "instability": {
+    "prior_iv": 37.5,
+    "current_iv": 87.37,
+    "delta_pct": 133.0,
+    "unstable": true
+   },
+   "direction": "undervalued",
    "size_hint": "quarter",
-   "mos_vs_median_pct": -16.4,
-   "consensus_dir": "APA_20260918_042658",
+   "mos_vs_median_pct": 100.0,
+   "mos_vs_base_pct": 100.0,
+   "fiduciary_amendments": [],
+   "fiduciary_violations": [],
+   "fiduciary_verdict": "PASS",
+   "consensus_dir": "APA_20261005_033152",
+   "run_source": "orchestrator",
+   "arm": "local",
+   "pack_source": "fresh",
+   "screener_data_commit": "f1f41f1b24c160e92813fa8d22d938c381c45bce",
+   "research_brief_asof": "2026-10-05T03:20:18.109732",
+   "research_brief_age_days": 0.05,
+   "price_asof": "2026-10-02",
+   "price_source": "yfinance",
+   "price_asof_basis": null,
+   "gate_version": 8,
+   "pipeline_commit": "68f3935",
+   "street_fence": {
+    "low": 16.36,
+    "high": 112.73,
+    "n_targets": 25.0,
+    "asof": "2026-10-04",
+    "age_days": 0.1,
+    "source": "enrich",
+    "winsorized": []
+   },
+   "producer_class": {
+    "status": "ok",
+    "depleting": true,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "source": "stocks.csv@f1f41f1b24c160e92813fa8d22d938c381c45bce"
+   },
    "actionable": false,
    "actionable_reasons": [
-    "pre_v3.1_gates",
-    "no_street_fence"
+    "single_sample",
+    "mode_instability",
+    "depleting_producer_unsupported"
    ],
-   "gate_version": null,
    "status": "ok",
    "thesis_status": null,
    "thesis_checks": null,
