@@ -1,0 +1,801 @@
+{
+  "above_threshold": false,
+  "active_shocks_on_date": [
+    "oil_shock"
+  ],
+  "built_at": "2026-10-04T11:44:00.225281+00:00",
+  "composition_id": "9891321cdb5d8eaf",
+  "confidence": 0.03081885394528494,
+  "coverage": 1.0,
+  "data_health_warnings": [
+    "Feature disabled_leading_index_level_z unusable: disabled_feature",
+    "Source USSLIND unusable: discontinued_or_stale",
+    "Source DTWEXB unusable: unusable_stale",
+    "Source TWEXBMTH unusable: unusable_stale"
+  ],
+  "date": "2026-09-01",
+  "deprecations": [
+    "confidence, reported_confidence and raw_confidence are v1 aliases for peakedness * coverage; removed in schema 3. Use coverage and peakedness separately -- neither is a multiplier.",
+    "raw_confidence, dominant_regime, dominant_probability, regime_probabilities, reported_regime and reported_regime_probability are v1 keys kept for one release (P0_0 \u00a71.3.1); use season_posterior, season_headline and season_headline_probability."
+  ],
+  "dimension_feature_contributions": [
+    {
+      "contribution": 0.06566640035298045,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "growth_momentum",
+      "feature_id": "industrial_production_yoy_z",
+      "normalized_value": 0.2188880011766015,
+      "normalized_weight": 0.3,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": 0.2188880011766015,
+      "valid": true,
+      "weight": 0.3
+    },
+    {
+      "contribution": -0.32741309627856713,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "growth_momentum",
+      "feature_id": "payrolls_yoy_z",
+      "normalized_value": -1.0913769875952237,
+      "normalized_weight": 0.3,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": -1.0913769875952237,
+      "valid": true,
+      "weight": 0.3
+    },
+    {
+      "contribution": 0.012272479416787378,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "growth_momentum",
+      "feature_id": "unemployment_6m_change_z",
+      "normalized_value": -0.04908991766714951,
+      "normalized_weight": 0.25,
+      "polarity": "negative",
+      "reason": "ok",
+      "signed_value": 0.04908991766714951,
+      "valid": true,
+      "weight": 0.25
+    },
+    {
+      "contribution": 0.1264474472987859,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "growth_momentum",
+      "feature_id": "initial_claims_level_z",
+      "normalized_value": -0.8429829819919061,
+      "normalized_weight": 0.15,
+      "polarity": "negative",
+      "reason": "ok",
+      "signed_value": 0.8429829819919061,
+      "valid": true,
+      "weight": 0.15
+    },
+    {
+      "contribution": 0.007691981342269534,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "inflation_pressure",
+      "feature_id": "headline_cpi_yoy_z",
+      "normalized_value": 0.015383962684539069,
+      "normalized_weight": 0.5,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": 0.015383962684539069,
+      "valid": true,
+      "weight": 0.5
+    },
+    {
+      "contribution": 0.1543308093759505,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "inflation_pressure",
+      "feature_id": "pce_price_yoy_z",
+      "normalized_value": 0.308661618751901,
+      "normalized_weight": 0.5,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": 0.308661618751901,
+      "valid": true,
+      "weight": 0.5
+    },
+    {
+      "contribution": -0.3728562937827542,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "policy_stance",
+      "feature_id": "fed_funds_level_z",
+      "normalized_value": 0.6524985141198197,
+      "normalized_weight": 0.5714285714285715,
+      "polarity": "negative",
+      "reason": "ok",
+      "signed_value": -0.6524985141198197,
+      "valid": true,
+      "weight": 0.4
+    },
+    {
+      "contribution": 0.08548784789139677,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "policy_stance",
+      "feature_id": "fed_funds_6m_change_z",
+      "normalized_value": -0.1994716450799258,
+      "normalized_weight": 0.4285714285714286,
+      "polarity": "negative",
+      "reason": "ok",
+      "signed_value": 0.1994716450799258,
+      "valid": true,
+      "weight": 0.3
+    },
+    {
+      "contribution": 0.4167980164433788,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "credit_liquidity",
+      "feature_id": "baa_spread_level_z",
+      "normalized_value": -0.8335960328867577,
+      "normalized_weight": 0.5,
+      "polarity": "negative",
+      "reason": "ok",
+      "signed_value": 0.8335960328867577,
+      "valid": true,
+      "weight": 0.35
+    },
+    {
+      "contribution": 0.5791530899880639,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "credit_liquidity",
+      "feature_id": "nfci_level_z",
+      "normalized_value": -1.1583061799761278,
+      "normalized_weight": 0.5,
+      "polarity": "negative",
+      "reason": "ok",
+      "signed_value": 1.1583061799761278,
+      "valid": true,
+      "weight": 0.35
+    },
+    {
+      "contribution": 0.13149284700215624,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "yield_curve",
+      "feature_id": "yield_curve_10y2y_level_z",
+      "normalized_value": 0.13149284700215624,
+      "normalized_weight": 1.0,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": 0.13149284700215624,
+      "valid": true,
+      "weight": 1.0
+    },
+    {
+      "contribution": 0.502899368982155,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "monetary_liquidity",
+      "feature_id": "m2_money_supply_yoy_z",
+      "normalized_value": 0.502899368982155,
+      "normalized_weight": 1.0,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": 0.502899368982155,
+      "valid": true,
+      "weight": 1.0
+    },
+    {
+      "contribution": -0.6050983821661211,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "housing_activity",
+      "feature_id": "housing_starts_yoy_z",
+      "normalized_value": -0.6050983821661211,
+      "normalized_weight": 1.0,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": -0.6050983821661211,
+      "valid": true,
+      "weight": 1.0
+    },
+    {
+      "contribution": 0.7775503410312145,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "real_rates",
+      "feature_id": "real_rate_10y_level_z",
+      "normalized_value": 1.555100682062429,
+      "normalized_weight": 0.5,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": 1.555100682062429,
+      "valid": true,
+      "weight": 0.5
+    },
+    {
+      "contribution": 0.5271718224420712,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "real_rates",
+      "feature_id": "real_rate_10y_6m_change_z",
+      "normalized_value": 1.0543436448841423,
+      "normalized_weight": 0.5,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": 1.0543436448841423,
+      "valid": true,
+      "weight": 0.5
+    },
+    {
+      "contribution": 0.3393022485409487,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "commodity",
+      "feature_id": "oil_wti_yoy_z",
+      "normalized_value": 0.3393022485409487,
+      "normalized_weight": 1.0,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": 0.3393022485409487,
+      "valid": true,
+      "weight": 1.0
+    },
+    {
+      "contribution": 0.39836729074236715,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "dollar",
+      "feature_id": "usd_narrow_yoy_z",
+      "normalized_value": 0.39836729074236715,
+      "normalized_weight": 1.0,
+      "polarity": "positive",
+      "reason": "ok",
+      "signed_value": 0.39836729074236715,
+      "valid": true,
+      "weight": 1.0
+    }
+  ],
+  "dimension_scores": [
+    {
+      "composition_id": "growth_momentum:v1:1990-01-01..",
+      "configured_feature_count": 4,
+      "coverage_ratio": 1.0,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "growth_momentum",
+      "reason": "ok",
+      "score": -0.1230267692100134,
+      "total_configured_weight": 1.0,
+      "used_weight": 1.0,
+      "valid": true,
+      "valid_feature_count": 4
+    },
+    {
+      "composition_id": "inflation_pressure:v1:1990-01-01..",
+      "configured_feature_count": 2,
+      "coverage_ratio": 1.0,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "inflation_pressure",
+      "reason": "ok",
+      "score": 0.16202279071822004,
+      "total_configured_weight": 1.0,
+      "used_weight": 1.0,
+      "valid": true,
+      "valid_feature_count": 2
+    },
+    {
+      "composition_id": "policy_stance:v2:1990-01-01..",
+      "configured_feature_count": 2,
+      "coverage_ratio": 1.0,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "policy_stance",
+      "reason": "ok",
+      "score": -0.28736844589135746,
+      "total_configured_weight": 0.7,
+      "used_weight": 0.7,
+      "valid": true,
+      "valid_feature_count": 2
+    },
+    {
+      "composition_id": "credit_liquidity:v3:1990-01-01..",
+      "configured_feature_count": 2,
+      "coverage_ratio": 1.0,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "credit_liquidity",
+      "reason": "ok",
+      "score": 0.9959511064314428,
+      "total_configured_weight": 0.7,
+      "used_weight": 0.7,
+      "valid": true,
+      "valid_feature_count": 2
+    },
+    {
+      "composition_id": "yield_curve:v1:1990-01-01..",
+      "configured_feature_count": 1,
+      "coverage_ratio": 1.0,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "yield_curve",
+      "reason": "ok",
+      "score": 0.13149284700215624,
+      "total_configured_weight": 1.0,
+      "used_weight": 1.0,
+      "valid": true,
+      "valid_feature_count": 1
+    },
+    {
+      "composition_id": "monetary_liquidity:v1:1990-01-01..",
+      "configured_feature_count": 1,
+      "coverage_ratio": 1.0,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "monetary_liquidity",
+      "reason": "ok",
+      "score": 0.502899368982155,
+      "total_configured_weight": 1.0,
+      "used_weight": 1.0,
+      "valid": true,
+      "valid_feature_count": 1
+    },
+    {
+      "composition_id": "housing_activity:v1:1990-01-01..",
+      "configured_feature_count": 1,
+      "coverage_ratio": 1.0,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "housing_activity",
+      "reason": "ok",
+      "score": -0.6050983821661211,
+      "total_configured_weight": 1.0,
+      "used_weight": 1.0,
+      "valid": true,
+      "valid_feature_count": 1
+    },
+    {
+      "composition_id": "real_rates:v1:2005-09-01..",
+      "configured_feature_count": 2,
+      "coverage_ratio": 1.0,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "real_rates",
+      "reason": "ok",
+      "score": 1.3047221634732855,
+      "total_configured_weight": 1.0,
+      "used_weight": 1.0,
+      "valid": true,
+      "valid_feature_count": 2
+    },
+    {
+      "composition_id": "commodity:v1:1990-01-01..",
+      "configured_feature_count": 1,
+      "coverage_ratio": 1.0,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "commodity",
+      "reason": "ok",
+      "score": 0.3393022485409487,
+      "total_configured_weight": 1.0,
+      "used_weight": 1.0,
+      "valid": true,
+      "valid_feature_count": 1
+    },
+    {
+      "composition_id": "dollar:v1:1990-01-01..",
+      "configured_feature_count": 1,
+      "coverage_ratio": 1.0,
+      "date": "2026-09-01T00:00:00",
+      "dimension_id": "dollar",
+      "reason": "ok",
+      "score": 0.39836729074236715,
+      "total_configured_weight": 1.0,
+      "used_weight": 1.0,
+      "valid": true,
+      "valid_feature_count": 1
+    }
+  ],
+  "disclaimer": "This is an experimental macro regime diagnostic based on structured data. It is not investment advice and does not provide trading, allocation, or portfolio guidance.",
+  "dominant_probability": 0.30230979719049067,
+  "dominant_regime": "goldilocks",
+  "explanation": [
+    "goldilocks is dominant based on stored regime contributions.",
+    "credit_liquidity supported the regime with contribution 0.199.",
+    "policy_stance supported the regime with contribution 0.079.",
+    "inflation_pressure supported the regime with contribution 0.067.",
+    "yield_curve supported the regime with contribution 0.013.",
+    "growth_momentum opposed the regime with contribution -0.037."
+  ],
+  "factors": {
+    "commodity": {
+      "composition_id": "commodity:v1:1990-01-01..",
+      "coverage": 1.0,
+      "reason": "ok",
+      "score": 0.3393022485409487,
+      "valid": true
+    },
+    "credit_liquidity": {
+      "composition_id": "credit_liquidity:v3:1990-01-01..",
+      "coverage": 1.0,
+      "reason": "ok",
+      "score": 0.9959511064314428,
+      "valid": true
+    },
+    "dollar": {
+      "composition_id": "dollar:v1:1990-01-01..",
+      "coverage": 1.0,
+      "reason": "ok",
+      "score": 0.39836729074236715,
+      "valid": true
+    },
+    "growth_momentum": {
+      "composition_id": "growth_momentum:v1:1990-01-01..",
+      "coverage": 1.0,
+      "reason": "ok",
+      "score": -0.1230267692100134,
+      "valid": true
+    },
+    "housing_activity": {
+      "composition_id": "housing_activity:v1:1990-01-01..",
+      "coverage": 1.0,
+      "reason": "ok",
+      "score": -0.6050983821661211,
+      "valid": true
+    },
+    "inflation_pressure": {
+      "composition_id": "inflation_pressure:v1:1990-01-01..",
+      "coverage": 1.0,
+      "reason": "ok",
+      "score": 0.16202279071822004,
+      "valid": true
+    },
+    "monetary_liquidity": {
+      "composition_id": "monetary_liquidity:v1:1990-01-01..",
+      "coverage": 1.0,
+      "reason": "ok",
+      "score": 0.502899368982155,
+      "valid": true
+    },
+    "policy_stance": {
+      "composition_id": "policy_stance:v2:1990-01-01..",
+      "coverage": 1.0,
+      "reason": "ok",
+      "score": -0.28736844589135746,
+      "valid": true
+    },
+    "real_rates": {
+      "composition_id": "real_rates:v1:2005-09-01..",
+      "coverage": 1.0,
+      "reason": "ok",
+      "score": 1.3047221634732855,
+      "valid": true
+    },
+    "yield_curve": {
+      "composition_id": "yield_curve:v1:1990-01-01..",
+      "coverage": 1.0,
+      "reason": "ok",
+      "score": 0.13149284700215624,
+      "valid": true
+    }
+  },
+  "feature_health": [
+    {
+      "enabled": true,
+      "feature_id": "pce_price_yoy_z",
+      "invalid_count": 35,
+      "latest_valid_date": "2026-08-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12}",
+      "series_id": "PCEPI",
+      "usable": true,
+      "valid_count": 777
+    },
+    {
+      "enabled": true,
+      "feature_id": "fed_funds_level_z",
+      "invalid_count": 23,
+      "latest_valid_date": "2026-09-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23}",
+      "series_id": "FEDFUNDS",
+      "usable": true,
+      "valid_count": 844
+    },
+    {
+      "enabled": true,
+      "feature_id": "baa_spread_level_z",
+      "invalid_count": 502,
+      "latest_valid_date": "2026-10-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"missing_raw_value\": 443, \"insufficient_normalization_history\": 59}",
+      "series_id": "BAA10Y",
+      "usable": true,
+      "valid_count": 10129
+    },
+    {
+      "enabled": true,
+      "feature_id": "payrolls_yoy_z",
+      "invalid_count": 35,
+      "latest_valid_date": "2026-09-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12}",
+      "series_id": "PAYEMS",
+      "usable": true,
+      "valid_count": 1018
+    },
+    {
+      "enabled": true,
+      "feature_id": "headline_cpi_yoy_z",
+      "invalid_count": 36,
+      "latest_valid_date": "2026-08-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12, \"missing_raw_value\": 1}",
+      "series_id": "CPIAUCSL",
+      "usable": true,
+      "valid_count": 920
+    },
+    {
+      "enabled": true,
+      "feature_id": "yield_curve_10y2y_level_z",
+      "invalid_count": 611,
+      "latest_valid_date": "2026-10-02T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"missing_raw_value\": 552, \"insufficient_normalization_history\": 59}",
+      "series_id": "T10Y2Y",
+      "usable": true,
+      "valid_count": 12523
+    },
+    {
+      "enabled": true,
+      "feature_id": "unemployment_12m_change_z",
+      "invalid_count": 36,
+      "latest_valid_date": "2026-09-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12, \"missing_raw_value\": 1}",
+      "series_id": "UNRATE",
+      "usable": true,
+      "valid_count": 909
+    },
+    {
+      "enabled": true,
+      "feature_id": "ten_year_yield_level_z",
+      "invalid_count": 779,
+      "latest_valid_date": "2026-10-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"missing_raw_value\": 720, \"insufficient_normalization_history\": 59}",
+      "series_id": "DGS10",
+      "usable": true,
+      "valid_count": 16114
+    },
+    {
+      "enabled": false,
+      "feature_id": "disabled_leading_index_level_z",
+      "invalid_count": 1,
+      "latest_valid_date": null,
+      "reason": "disabled_feature",
+      "reason_counts": "{\"disabled_feature\": 1}",
+      "series_id": "USSLIND",
+      "usable": false,
+      "valid_count": 0
+    },
+    {
+      "enabled": true,
+      "feature_id": "nfci_level_z",
+      "invalid_count": 51,
+      "latest_valid_date": "2026-09-25T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 51}",
+      "series_id": "NFCI",
+      "usable": true,
+      "valid_count": 2857
+    },
+    {
+      "enabled": true,
+      "feature_id": "industrial_production_yoy_z",
+      "invalid_count": 35,
+      "latest_valid_date": "2026-08-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12}",
+      "series_id": "INDPRO",
+      "usable": true,
+      "valid_count": 1257
+    },
+    {
+      "enabled": true,
+      "feature_id": "fed_funds_6m_change_z",
+      "invalid_count": 29,
+      "latest_valid_date": "2026-09-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 6}",
+      "series_id": "FEDFUNDS",
+      "usable": true,
+      "valid_count": 838
+    },
+    {
+      "enabled": true,
+      "feature_id": "unemployment_6m_change_z",
+      "invalid_count": 31,
+      "latest_valid_date": "2026-09-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 7, \"missing_raw_value\": 1}",
+      "series_id": "UNRATE",
+      "usable": true,
+      "valid_count": 914
+    },
+    {
+      "enabled": true,
+      "feature_id": "initial_claims_level_z",
+      "invalid_count": 51,
+      "latest_valid_date": "2026-09-26T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 51}",
+      "series_id": "ICSA",
+      "usable": true,
+      "valid_count": 3066
+    },
+    {
+      "enabled": true,
+      "feature_id": "high_yield_oas_level_z",
+      "invalid_count": 67,
+      "latest_valid_date": "2026-10-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 59, \"missing_raw_value\": 8}",
+      "series_id": "BAMLH0A0HYM2",
+      "usable": true,
+      "valid_count": 829
+    },
+    {
+      "enabled": true,
+      "feature_id": "m2_money_supply_yoy_z",
+      "invalid_count": 35,
+      "latest_valid_date": "2026-08-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12}",
+      "series_id": "M2SL",
+      "usable": true,
+      "valid_count": 777
+    },
+    {
+      "enabled": true,
+      "feature_id": "housing_starts_yoy_z",
+      "invalid_count": 35,
+      "latest_valid_date": "2026-08-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12}",
+      "series_id": "HOUST",
+      "usable": true,
+      "valid_count": 777
+    },
+    {
+      "enabled": true,
+      "feature_id": "real_rate_10y_level_z",
+      "invalid_count": 757,
+      "latest_valid_date": "2026-10-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 503, \"missing_raw_value\": 254}",
+      "series_id": "DFII10",
+      "usable": true,
+      "valid_count": 5439
+    },
+    {
+      "enabled": true,
+      "feature_id": "usd_narrow_yoy_z",
+      "invalid_count": 35,
+      "latest_valid_date": "2026-07-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12}",
+      "series_id": "NNUSBIS",
+      "usable": true,
+      "valid_count": 716
+    },
+    {
+      "enabled": true,
+      "feature_id": "real_rate_10y_6m_change_z",
+      "invalid_count": 1119,
+      "latest_valid_date": "2026-10-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 503, \"insufficient_transform_history\": 362, \"missing_raw_value\": 254}",
+      "series_id": "DFII10",
+      "usable": true,
+      "valid_count": 5077
+    },
+    {
+      "enabled": true,
+      "feature_id": "oil_wti_yoy_z",
+      "invalid_count": 35,
+      "latest_valid_date": "2026-08-01T00:00:00",
+      "reason": "ok",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12}",
+      "series_id": "MCOILWTICO",
+      "usable": true,
+      "valid_count": 453
+    }
+  ],
+  "headline_margin": 0.06621785791583926,
+  "invalid_or_missing_dimensions": [],
+  "parameter_vintage": "none:softmax_v1",
+  "peakedness": 0.03081885394528494,
+  "process_id": "MRI-05",
+  "raw_confidence": 0.03081885394528494,
+  "raw_dominant_probability": 0.30230979719049067,
+  "raw_dominant_regime": "goldilocks",
+  "reasons": [],
+  "recession_probability": 0.11824219153685381,
+  "regime_probabilities": {
+    "goldilocks": 0.30230979719049067,
+    "recession": 0.11824219153685381,
+    "reflation": 0.2360919392746514,
+    "stagflation": 0.16727376239042915,
+    "tightening": 0.17608230960757495
+  },
+  "reported_confidence": 0.03081885394528494,
+  "reported_regime": "goldilocks",
+  "reported_regime_probability": 0.30230979719049067,
+  "schema_version": 2,
+  "scoring_mode": "point_in_time",
+  "season_headline": "goldilocks",
+  "season_headline_probability": 0.30230979719049067,
+  "season_posterior": {
+    "goldilocks": {
+      "calibration_status": "uncalibrated_partition_weight",
+      "probability": 0.30230979719049067
+    },
+    "recession": {
+      "calibration_status": "calibrated_vs_nber",
+      "probability": 0.11824219153685381
+    },
+    "reflation": {
+      "calibration_status": "uncalibrated_partition_weight",
+      "probability": 0.2360919392746514
+    },
+    "stagflation": {
+      "calibration_status": "uncalibrated_partition_weight",
+      "probability": 0.16727376239042915
+    },
+    "tightening": {
+      "calibration_status": "uncalibrated_partition_weight",
+      "probability": 0.17608230960757495
+    }
+  },
+  "source_run_id": "2026-10-04T11:40:19.265154+00:00",
+  "threshold_configured": 0.25,
+  "top_opposing_dimensions": [
+    {
+      "contribution": -0.03690803076300402,
+      "dimension_id": "growth_momentum",
+      "dimension_score": -0.1230267692100134,
+      "normalized_weight": 0.3,
+      "polarity": "positive",
+      "reason": "ok",
+      "transformed_dimension_value": -0.1230267692100134,
+      "weight": 0.3
+    }
+  ],
+  "top_supporting_dimensions": [
+    {
+      "contribution": 0.19919022128628858,
+      "dimension_id": "credit_liquidity",
+      "dimension_score": 0.9959511064314428,
+      "normalized_weight": 0.2,
+      "polarity": "positive",
+      "reason": "ok",
+      "transformed_dimension_value": 0.9959511064314428,
+      "weight": 0.2
+    },
+    {
+      "contribution": 0.07899473311629637,
+      "dimension_id": "policy_stance",
+      "dimension_score": -0.28736844589135746,
+      "normalized_weight": 0.15,
+      "polarity": "reward_near_zero",
+      "reason": "ok",
+      "transformed_dimension_value": 0.5266315541086425,
+      "weight": 0.15
+    },
+    {
+      "contribution": 0.06674430232044498,
+      "dimension_id": "inflation_pressure",
+      "dimension_score": 0.16202279071822004,
+      "normalized_weight": 0.25,
+      "polarity": "penalize_positive_only",
+      "reason": "ok",
+      "transformed_dimension_value": 0.2669772092817799,
+      "weight": 0.25
+    },
+    {
+      "contribution": 0.013149284700215626,
+      "dimension_id": "yield_curve",
+      "dimension_score": 0.13149284700215624,
+      "normalized_weight": 0.1,
+      "polarity": "positive",
+      "reason": "ok",
+      "transformed_dimension_value": 0.13149284700215624,
+      "weight": 0.1
+    }
+  ],
+  "transition_filter": {
+    "applied": true,
+    "reason": "raw_signal_confirmed"
+  },
+  "transition_filter_applied": true,
+  "transition_filter_reason": "raw_signal_confirmed",
+  "valid": true
+}
