@@ -1,6 +1,6 @@
 # Portfolio Plan (v1 — decision support)
 
-Generated: 2026-10-04T13:27:17Z
+Generated: 2026-10-04T15:25:33Z
 Macro flags: ['macro_yield_warning']
 Invested: **89.77%**  |  Cash: **10.23%**  |  Positions: 49
 
@@ -26,8 +26,8 @@ Invested: **89.77%**  |  Cash: **10.23%**  |  Positions: 49
 | 18 | **HOG** | 2.1 | A | 40.95 | 70 | 18 | research_now | - | no_data | 8 | -2.839 | - |
 | 19 | **RHLD** | 2.1 | A | 77.31 | 70 | 19 | research_now | - | no_data | 7 | -3.462 | - |
 | 20 | **AFGB** | 1.5 | None | None | None | 20 | research_now | - | no_data | 4 | - | - |
-| 21 | **VEON** | 1.5 | None | None | None | 21 | research_now | - | no_data | 5 | - | - |
-| 22 | **AFGD** | 1.5 | None | None | None | 22 | research_now | - | no_data | 4 | - | - |
+| 21 | **AFGD** | 1.5 | None | None | None | 21 | research_now | - | no_data | 4 | - | - |
+| 22 | **VEON** | 1.5 | None | None | None | 22 | research_now | - | no_data | 5 | - | - |
 | 23 | **GASS** | 2.4 | C | 47.01 | 80 | 23 | research_now | - | no_data | 7 | -2.21 | - |
 | 24 | **NGVT** | 1.8 | C | 24.31 | 60 | 24 | research_now | - | no_data | 6 | -4.026 | - |
 | 25 | **APA** | 1.5 | None | None | None | 25 | research_now | - | no_data | 5 | - | - |
@@ -38,23 +38,23 @@ Invested: **89.77%**  |  Cash: **10.23%**  |  Positions: 49
 | 30 | **JCAP** | 1.5 | None | None | None | 30 | research_now | - | no_data | 5 | - | - |
 | 31 | **STT** | 2.1 | G | 46.72 | 70 | 31 | research_now | - | no_data | 6 | - | - |
 | 32 | **TWFG** | 2.1 | G | 40.6 | 70 | 32 | research_now | - | no_data | 7 | -2.383 | - |
-| 33 | **BCRX** | 1.05 | B | 58.11 | 70 | 33 | research_now | - | no_data | 6 | -2.187 | HEAVY_ISSUANCE |
-| 34 | **CBL** | 1.8 | H | 32.24 | 60 | 34 | research_now | - | no_data | 6 | - | - |
-| 35 | **ARX** | 2.1 | G | 33.62 | 70 | 35 | research_now | - | no_data | 5 | - | - |
+| 33 | **CBL** | 1.8 | H | 32.24 | 60 | 33 | research_now | - | no_data | 6 | - | - |
+| 34 | **ARX** | 2.1 | G | 33.62 | 70 | 34 | research_now | - | no_data | 5 | - | - |
+| 35 | **BCRX** | 1.05 | B | 58.11 | 70 | 35 | research_now | - | no_data | 6 | -2.187 | HEAVY_ISSUANCE |
 | 36 | **CHA** | 1.95 | A | 73.75 | 65 | 36 | research_now | - | no_data | - | - | - |
 | 37 | **FCNCN** | 1.5 | None | None | None | 37 | research_now | - | no_data | 4 | - | - |
 | 38 | **MA** | 1.8 | B | 76.98 | 80 | 38 | research_now | - | no_data | 8 | -2.539 | - |
 | 39 | **VLRS** | 1.5 | None | None | None | 39 | research_now | - | no_data | 6 | - | - |
 | 40 | **LAMR** | 1.8 | H | 33.85 | 60 | 40 | research_now | - | no_data | 6 | -2.604 | - |
-| 41 | **NUTX** | 2.1 | B | 59.13 | 70 | 41 | research_now | - | no_data | 8 | -2.162 | - |
+| 41 | **TASK** | 1.95 | A | 75.84 | 65 | 41 | research_now | - | no_data | 8 | -2.354 | - |
 | 43 | **KSS** | 1.5 | None | None | None | 43 | research_now | - | no_data | 6 | -2.895 | - |
 | 44 | **NREF** | 2.1 | H | 28.35 | 70 | 44 | research_now | - | no_data | 4 | - | - |
-| 46 | **RNG** | 1.8 | A | 58.93 | 60 | 46 | research_now | - | no_data | 8 | -4.358 | - |
-| 47 | **TASK** | 1.95 | A | 75.84 | 65 | 47 | research_now | - | no_data | 8 | -2.354 | - |
+| 46 | **NUTX** | 2.1 | B | 59.13 | 70 | 46 | research_now | - | no_data | 8 | -2.162 | - |
+| 47 | **RNG** | 1.8 | A | 58.93 | 60 | 47 | research_now | - | no_data | 8 | -4.358 | - |
 | 48 | **GTE** | 1.5 | None | None | None | 48 | research_now | - | no_data | 3 | -3.098 | - |
 | 51 | **LIND** | 1.5 | None | None | None | 51 | research_now | - | no_data | 6 | -2.947 | - |
 | 55 | **LITE** | 2.25 | A | 40.31 | 75 | 55 | research_now | ai_compute | skip | 5 | - | - |
-| 160 | **DELL** | 1.57 | A | 49.02 | 70 | 160 | research_now | ai_compute | high | 7 | -2.152 | - |
+| 159 | **DELL** | 1.57 | A | 49.02 | 70 | 159 | research_now | ai_compute | high | 7 | -2.152 | - |
 
 ## Sector allocation
 - Financial Services: 24.3%

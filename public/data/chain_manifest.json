@@ -3,7 +3,7 @@
     "stocks": 6972,
     "themes": {
       "ai_compute": 63,
-      "cloud_software": 181,
+      "cloud_software": 180,
       "cybersecurity": 63,
       "energy_transition": 149,
       "glp1_metabolic": 49,
@@ -13,7 +13,7 @@
       "space_economy": 53
     }
   },
-  "finished_at": "2026-10-04T13:27:19Z",
+  "finished_at": "2026-10-04T15:25:42Z",
   "invariants": [
     {
       "detail": "stocks.json is 0.0 days old (max 8)",
@@ -76,10 +76,10 @@
       "ok": true
     },
     {
-      "detail": "discount_rate_source=constant_fallback",
+      "detail": "discount_rate_source=anchor",
       "level": "soft",
       "name": "discount_rate_source",
-      "ok": false
+      "ok": true
     },
     {
       "detail": "60 research_now candidates",
@@ -94,10 +94,10 @@
       "ok": true
     },
     {
-      "detail": "sector_quota_source=neutral_fallback (reason=None)",
+      "detail": "sector_quota_source=neutral_no_validated_edge (reason=None)",
       "level": "soft",
       "name": "sector_quota_source",
-      "ok": false
+      "ok": true
     },
     {
       "detail": "142 reverse-DCF models built",
@@ -125,20 +125,20 @@
     }
   ],
   "ok": true,
-  "run_id": "20261004T132639Z",
+  "run_id": "20261004T152354Z",
   "steps": [
     {
-      "duration_s": 2.8,
+      "duration_s": 4.2,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 3.4,
+      "duration_s": 58.3,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 4.7,
+      "duration_s": 4.8,
       "name": "score_paradigm",
       "returncode": 0
     },
@@ -148,32 +148,32 @@
       "returncode": 0
     },
     {
-      "duration_s": 21.4,
+      "duration_s": 26.2,
       "name": "build_daily_price_history",
       "returncode": 0
     },
     {
-      "duration_s": 0.7,
+      "duration_s": 0.8,
       "name": "build_momentum_state",
       "returncode": 0
     },
     {
-      "duration_s": 2.2,
+      "duration_s": 2.5,
       "name": "score_factors_dual_door",
       "returncode": 0
     },
     {
-      "duration_s": 1.2,
+      "duration_s": 1.0,
       "name": "build_valuation_models",
       "returncode": 0
     },
     {
-      "duration_s": 0.4,
+      "duration_s": 0.5,
       "name": "build_portfolio_plan",
       "returncode": 0
     },
     {
-      "duration_s": 2.0,
+      "duration_s": 8.7,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
