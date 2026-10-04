@@ -2,7 +2,7 @@
 
 Verifies:
 1. Synthetic 24-month and 400-day series with known answers for EVERY field.
-2. The 12-1 window equals score_paradigm.compute_skip_month_return (never 10-month).
+2. The 12-1 window equals momentum_math.compute_skip_month_return (never 10-month).
 3. Fields absent when data absent (never 0, never guessed).
 4. The fallback path in score_factors_dual_door.py when momentum_state is missing or stale.
 5. Daily file layout: one ticker per line, sorted tickers, sorted dates.
@@ -28,7 +28,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_daily_price_history as bdph
 import build_momentum_state as bms
 import score_factors_dual_door as sfdd
-from score_paradigm import compute_skip_month_return, compute_high_proximity, compute_raw_return
+from momentum_math import compute_skip_month_return, compute_high_proximity, compute_raw_return
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -158,11 +158,11 @@ def test_synthetic_known_answers_for_every_field(tmp_path: Path):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 2. 12-1 window equals score_paradigm's compute_skip_month_return
+# 2. 12-1 window equals momentum_math's compute_skip_month_return
 # ─────────────────────────────────────────────────────────────────────────────
 
-def test_12_1_window_equals_score_paradigm():
-    """Verify that mom_12_1 uses score_paradigm.compute_skip_month_return, not the 10-month window."""
+def test_12_1_window_equals_momentum_math():
+    """Verify that mom_12_1 uses momentum_math.compute_skip_month_return, not the 10-month window."""
     prices = [10.0 + i * 2.0 for i in range(24)]
     correct_12_1 = compute_skip_month_return(prices)
     old_10_month = prices[-2] / prices[-12] - 1.0
@@ -170,7 +170,7 @@ def test_12_1_window_equals_score_paradigm():
     # Ensure the 12-1 window and the buggy 10-month window actually diverge on this series
     assert correct_12_1 != old_10_month
 
-    # score_paradigm uses closes[-13] to closes[-2]
+    # momentum_math uses closes[-13] to closes[-2]
     expected = (prices[-2] / prices[-13]) - 1.0
     assert correct_12_1 == expected
 

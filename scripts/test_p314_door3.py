@@ -17,7 +17,7 @@ Requirements covered (PHASE_3_ADDENDUM.md P3.14):
 Requirements covered (PHASE_3_ADDENDUM.md P3.14b, orchestrator measurement 2026-09-24):
 7. Trend-continuity eligibility: jump_share = ln(1 + largest single-month return) / ln(1 +
    12-1 return), computed only when 12-1 > 0, from the 11 monthly returns in the t-12 .. t-2
-   window (closes[-13:-1], same data score_paradigm.compute_skip_month_return uses). A name
+   window (closes[-13:-1], same data momentum_math.compute_skip_month_return uses). A name
    with jump_share > DOOR3_MAX_JUMP_SHARE (0.75) is not eligible (reason jump_driven). Fewer
    than 9 usable monthly returns -> not eligible (reason short_history).
 8. Ranking among eligible names: universe momentum score, ties broken by raw mom_12_1

@@ -14,7 +14,7 @@ record what happens. Live books:
              fakes performance. "Did I beat my own system?"
 
   RETIRED (frozen in paper_ledgers.json, no longer computed): plan / plan2 (the
-  portfolio_plan.json Kelly books, retired 2026-08-27), plan3 (momentum sleeve,
+  Kelly plan books, retired 2026-08-27), plan3 (momentum sleeve,
   retired 2026-08-27), and the *_llm overlay lane (plan_llm / plan2_llm /
   equal_llm, retired 2026-08-26 in the depth migration).
 
@@ -51,7 +51,6 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "public" / "data"
 STOCKS_JSON = DATA / "stocks.json"
 FACTOR_SCORES_JSON = DATA / "factor_scores.json"
-PORTFOLIO_PLAN_JSON = DATA / "portfolio_plan.json"
 DEPTH_OVERLAY_JSON = DATA / "depth_overlay.json"             # RS2 depth verdicts — rn_depth ledger targets
 # The old llm_overlay.json / portfolio_plan_llm.json lane (plan_llm/plan2_llm/equal_llm)
 # was RETIRED in the depth migration (2026-08-26); rn_depth is the depth paper book.
@@ -1121,8 +1120,7 @@ def main():
                                "kind": "unevaluated_held", "detail": f"carried: {carried}"})
             return nav_stale
 
-        # plan / plan2 RETIRED 2026-08-27 — no longer computed. build_portfolio_plan.py still
-        # writes portfolio_plan.json for the Portfolio tab's suggested plan, but the plan/plan2
+        # plan / plan2 RETIRED 2026-08-27 — no longer computed. The plan/plan2
         # paper ledgers are frozen in paper_ledgers.json. The live quant book is `equal`.
 
         # A held name the quant engine did not band today is unknown, not demoted.
@@ -1217,7 +1215,7 @@ def main():
         # Surfaced to the user via the ledger's `alerts` block (Supabase -> site
         # banner), NOT by failing the process: this script is the last step of
         # run_chain, whose nonzero exit would skip the daily Commit-and-Push and
-        # discard the whole day's scoring outputs (price_history, paradigm_scores,
+        # discard the whole day's scoring outputs (price_history, factor_scores,
         # ...). The ledgers are already written and mirrored; alerting belongs in
         # the data, where the user actually looks.
         print("  ! held-book alerts recorded (see paper_ledgers.alerts): "

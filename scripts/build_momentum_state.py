@@ -4,12 +4,12 @@ Computes public/data/momentum_state.json with single-source-of-truth momentum me
 for both monthly closes (all universe names) and daily closes (names with daily history).
 
 Monthly Metrics (all scored names with monthly history in price_history.json):
-- mom_12_1: 12-1 skip-month return (via score_paradigm.compute_skip_month_return)
-- mom_6m: 6-month trailing return (via score_paradigm.compute_raw_return)
-- mom_1m: 1-month trailing return (via score_paradigm.compute_raw_return)
-- high_52w_proxy: proximity to 52w high from monthly closes minus 1.0 (via score_paradigm.compute_high_proximity)
+- mom_12_1: 12-1 skip-month return (via momentum_math.compute_skip_month_return)
+- mom_6m: 6-month trailing return (via momentum_math.compute_raw_return)
+- mom_1m: 1-month trailing return (via momentum_math.compute_raw_return)
+- high_52w_proxy: proximity to 52w high from monthly closes minus 1.0 (via momentum_math.compute_high_proximity)
 - mom_accel: cross-sectional rank_1m - rank_12m
-- regime_shift_up / regime_shift_down: 10-month MA rule from score_paradigm.py:714-724
+- regime_shift_up / regime_shift_down: 10-month MA rule (computed below)
 - mom_z_sector: sector-neutral z-score of mom_12_1 (via score_factors_dual_door.sector_neutral_z)
 
 Daily Metrics (when public/data/daily_closes.json has sufficient history):
@@ -46,7 +46,7 @@ SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
-from score_paradigm import (
+from momentum_math import (
     compute_skip_month_return,
     compute_high_proximity,
     compute_raw_return,

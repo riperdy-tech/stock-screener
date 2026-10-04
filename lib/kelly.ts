@@ -1,5 +1,4 @@
-// Client-side mirror of the quarter-Kelly sizing in
-// scripts/build_portfolio_plan.py — keep both in sync.
+// The site's own quarter-Kelly sizing.
 //
 // mu  = expected annual excess return if the expectations gap closes over
 //       ~3 years; ONLY negative gaps (priced below demonstrated growth)

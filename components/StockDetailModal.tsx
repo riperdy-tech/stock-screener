@@ -1,5 +1,5 @@
-import { X, Activity, Layers3, ShieldCheck, Telescope, Youtube, History } from "lucide-react";
-import { type ParadigmHistoryEvent, type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
+import { X, Activity, ShieldCheck, Telescope, Youtube } from "lucide-react";
+import { type ScreeningResult, QUANT_THRESHOLDS } from "@/lib/blueprint";
 import { useLanguage } from "@/components/LanguageContext";
 import { Rs2AnalysisPanel } from "./Rs2AnalysisPanel";
 import { useState, type ReactNode } from "react";
@@ -12,10 +12,9 @@ interface StockDetailModalProps {
     onClose: () => void;
     market?: Market;
     youtubeEvaluation?: YoutubeStrategyEvaluation;
-    paradigmHistory?: ParadigmHistoryEvent[];
 }
 
-export function StockDetailModal({ result, onClose, market = 'US', youtubeEvaluation, paradigmHistory = [] }: StockDetailModalProps) {
+export function StockDetailModal({ result, onClose, market = 'US', youtubeEvaluation }: StockDetailModalProps) {
     const { t } = useLanguage();
     const { candidate, reasons, flags, score } = result;
 
@@ -23,12 +22,6 @@ export function StockDetailModal({ result, onClose, market = 'US', youtubeEvalua
     const [activeTab, setActiveTab] = useState<string>("rs2");
 
     const reverse = result.reverse;
-    const paradigm = result.paradigm;
-    const paradigmBand = paradigm?.pdm_band
-        ? { high: "STRONG", mid: "SOLID", watch: "WATCH", skip: "PASS", no_data: "NO DATA" }[paradigm.pdm_band] || paradigm.pdm_band
-        : "No tag";
-    const paradigmBaselineEvent = paradigmHistory.find(isBaselineParadigmEvent);
-    const paradigmRealHistory = paradigmHistory.filter(event => !isBaselineParadigmEvent(event));
     const youtubePrimary = youtubeEvaluation?.matchedStrategies[0] || "No match";
     const displayTicker = market === 'Korea' ? candidate.symbol.split('.')[0] : market === 'Taiwan' ? candidate.symbol : candidate.symbol.replace(/\.(NS|BO)$/, '');
     const displayName = market === 'Korea' || market === 'Taiwan' ? candidate.name : candidate.name || candidate.symbol;
@@ -45,7 +38,6 @@ export function StockDetailModal({ result, onClose, market = 'US', youtubeEvalua
     const sectionLinks = [
         { id: "rs2", label: "RS2 Analysis" },
         { id: "quant", label: "Quant" },
-        ...(paradigm && (paradigm.pdm_themes?.length > 0 || paradigm.pdm_signal != null) ? [{ id: "paradigm", label: "Paradigm" }] : []),
         ...(youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0 ? [{ id: "youtube", label: "YouTube" }] : []),
         ...(reverse && reverse.rev_band && reverse.rev_band !== 'Excluded' ? [{ id: "reverse", label: "Reverse" }] : []),
     ];
@@ -255,14 +247,7 @@ export function StockDetailModal({ result, onClose, market = 'US', youtubeEvalua
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-                            <SignalOverviewCard
-                                icon={<Layers3 className="h-4 w-4" />}
-                                label="Paradigm"
-                                value={paradigm?.pdm_signal != null ? Math.round(paradigm.pdm_signal) : "n/a"}
-                                detail={paradigm?.pdm_theme_primary || paradigmBand}
-                                tone="purple"
-                            />
+                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
                             <SignalOverviewCard
                                 icon={<ShieldCheck className="h-4 w-4" />}
                                 label="Reverse"
@@ -341,104 +326,6 @@ export function StockDetailModal({ result, onClose, market = 'US', youtubeEvalua
                                 ))}
                             </div>
                         </div>
-
-                        {/* WS1: Paradigm Dimension Breakdown */}
-                        {result.paradigm && (result.paradigm.pdm_themes?.length > 0 || result.paradigm.pdm_signal != null) && (
-                            <div id="scorecard-paradigm" className={clsx("scroll-mt-28  border border-rule-24 bg-white/5] p-3  sm:p-4", activeTab !== "paradigm" && "hidden")}>
-                                <div className="mb-3">
-                                    <SectionHeading
-                                        icon={<Layers3 className="h-4 w-4 text-ink-2" />}
-                                        title="Paradigm Dimension"
-                                        body="Secular-theme fit, momentum, and economics are shown first because they explain the stock's larger market setup."
-                                    />
-                                </div>
-                                <MetricGroupLabel label="Theme rank" />
-                                <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-                                    <ReverseStat label="Signal" value={result.paradigm.pdm_signal != null ? result.paradigm.pdm_signal : 'n/a'} />
-                                    <ReverseStat label="Band" value={result.paradigm.pdm_band || 'n/a'} band={result.paradigm.pdm_band} />
-                                    <ReverseStat label="Primary Theme" value={result.paradigm.pdm_theme_primary || 'n/a'} />
-                                    <ReverseStat label="Rank" value={result.paradigm.pdm_rank != null ? `#${result.paradigm.pdm_rank}` : 'n/a'} />
-                                </div>
-                                <MetricGroupLabel label="Signal drivers" />
-                                <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-                                    <ReverseStat label="Membership" value={result.paradigm.pdm_membership_score != null ? result.paradigm.pdm_membership_score : 'n/a'} />
-                                    <ReverseStat label="Momentum" value={result.paradigm.pdm_momentum_score != null ? result.paradigm.pdm_momentum_score : 'n/a'} />
-                                    <ReverseStat label="Economics Gate" value={result.paradigm.pdm_economics_gate != null ? result.paradigm.pdm_economics_gate : 'n/a'} />
-                                    <ReverseStat label="Confidence" value={result.paradigm.pdm_confidence != null ? result.paradigm.pdm_confidence : 'n/a'} />
-                                </div>
-                                {paradigmBaselineEvent && (
-                                    <div className="mb-3 border border-rule-24 bg-page p-3">
-                                        <div className="mb-2 flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
-                                            <History className="h-4 w-4 text-ink-2" />
-                                            Current baseline
-                                        </div>
-                                        <div className="flex flex-col gap-1 border border-rule-10 bg-white/5 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
-                                            <span className="text-sm font-bold text-ink">
-                                                Entered Paradigm snapshot as {formatParadigmBand(paradigmBaselineEvent.to_band)}.
-                                            </span>
-                                            <span className="font-mono text-xs font-bold text-ink-2">{paradigmBaselineEvent.snapshot_date}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {paradigmRealHistory.length > 0 && (
-                                    <div className="mb-3 border border-rule-24 bg-page p-3">
-                                        <div className="mb-2 flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
-                                            <History className="h-4 w-4 text-ink-2" />
-                                            Recent changes
-                                        </div>
-                                        <div className="space-y-2">
-                                            {paradigmRealHistory.slice(0, 4).map(event => (
-                                                <div key={`${event.run_id}-${event.summary}`} className="flex flex-col gap-1 border border-rule-10 bg-white/5 px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
-                                                    <span className="text-sm font-bold text-ink">{formatParadigmHistoryEvent(event)}</span>
-                                                    <span className="font-mono text-xs font-bold text-ink-2">{event.snapshot_date}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                                {result.paradigm.pdm_themes && result.paradigm.pdm_themes.length > 0 && (
-                                    <div className="mb-3 border border-rule-24 bg-page p-3">
-                                        <div className="mb-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">Matched themes</div>
-                                        <div className="flex flex-wrap gap-1.5">
-                                            {result.paradigm.pdm_themes.map((theme: string) => (
-                                                <span key={theme} className="text-xs font-mono px-2 py-1 bg-white/5 text-ink-2 border border-rule-24">
-                                                    {theme}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                                {result.paradigm.pdm_flags && result.paradigm.pdm_flags.length > 0 && (
-                                    <div className="mb-3 border border-rule-10 bg-page p-3">
-                                        <div className="mb-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">Advisory flags</div>
-                                        <div className="flex flex-wrap gap-1.5">
-                                            {result.paradigm.pdm_flags.map((flag: string) => {
-                                                const isMacro = flag.startsWith('macro_');
-                                                const isAccel = flag === 'accelerating' || flag === 'regime_shift_up';
-                                                const isDecel = flag === 'decelerating' || flag === 'regime_shift_down';
-                                                return (
-                                                    <span key={flag} className={clsx(
-                                                        "text-xs font-mono px-2 py-1  border",
-                                                        isMacro && "bg-neg/10 text-neg border-neg/40",
-                                                        isAccel && "bg-pos/10 text-pos border-pos/40",
-                                                        isDecel && "bg-warn/10 text-warn border-warn/40",
-                                                        !isMacro && !isAccel && !isDecel && "bg-white/5 text-ink-2 border-rule-10",
-                                                    )}>
-                                                        {flag}
-                                                    </span>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                )}
-                                {result.paradigm.pdm_pro && (
-                                    <InsightNote tone="positive" label="Pro" text={result.paradigm.pdm_pro} />
-                                )}
-                                {result.paradigm.pdm_con && (
-                                    <InsightNote tone="caution" label="Con" text={result.paradigm.pdm_con} />
-                                )}
-                            </div>
-                        )}
 
                         {youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0 && (
                             <div id="scorecard-youtube" className={clsx("scroll-mt-28  border border-neg/40 bg-neg/10] p-3  sm:p-4", activeTab !== "youtube" && "hidden")}>
@@ -597,9 +484,8 @@ function StatusCount({ label, value, tone }: { label: string; value: number; ton
     );
 }
 
-function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: ReactNode; label: string; value: string | number; detail: string; tone: "purple" | "emerald" | "sky" | "red" }) {
+function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: ReactNode; label: string; value: string | number; detail: string; tone: "emerald" | "sky" | "red" }) {
     const toneClass = {
-        purple: "border-rule-24 bg-white/5] text-ink-2",
         emerald: "border-pos/40 bg-pos/10 text-pos",
         sky: "border-accent/40 bg-accent/10] text-accent",
         red: "border-neg/40 bg-neg/10] text-neg",
@@ -619,41 +505,6 @@ function SignalOverviewCard({ icon, label, value, detail, tone }: { icon: ReactN
             </div>
         </div>
     );
-}
-
-const paradigmBandLabel: Record<string, string> = {
-    high: "STRONG",
-    mid: "SOLID",
-    watch: "WATCH",
-    skip: "PASS",
-    no_data: "NO DATA",
-};
-
-function isBaselineParadigmEvent(event: ParadigmHistoryEvent) {
-    return Boolean(
-        event.is_baseline ||
-        (
-            event.from_band == null &&
-            event.from_signal == null &&
-            event.from_rank == null &&
-            event.summary?.startsWith("Initial Paradigm")
-        )
-    );
-}
-
-function formatParadigmHistoryEvent(event: ParadigmHistoryEvent) {
-    if (event.event_type === 'band_change') {
-        return `Band ${formatParadigmBand(event.from_band)} -> ${formatParadigmBand(event.to_band)}`;
-    }
-    if (event.event_type === 'theme_change') {
-        return `Theme ${event.from_theme_primary || 'none'} -> ${event.to_theme_primary || 'none'}`;
-    }
-    return `Signal ${event.from_signal ?? 'n/a'} -> ${event.to_signal ?? 'n/a'}`;
-}
-
-function formatParadigmBand(band: string | null) {
-    if (!band) return 'NONE';
-    return paradigmBandLabel[band] || band.toUpperCase();
 }
 
 function selectedMarketLabel(market: Market) {

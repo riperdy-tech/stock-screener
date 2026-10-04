@@ -1,13 +1,13 @@
 "use client";
 
-import { ParadigmHistoryEvent, ScreeningResult } from "@/lib/blueprint";
+import { ScreeningResult } from "@/lib/blueprint";
 import { YoutubeStrategyEvaluation, formatStrategyNumber } from "@/lib/youtube-strategy";
-import { ArrowDownRight, ArrowUpRight, Layers3, ShieldCheck, Telescope, Youtube } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, ShieldCheck, Telescope, Youtube } from "lucide-react";
 import clsx from "clsx";
 import type { ReactNode } from "react";
 import { useLanguage } from "./LanguageContext";
 
-type ScreenMode = '100bagger' | 'reverse' | 'paradigm' | 'youtube';
+type ScreenMode = '100bagger' | 'reverse' | 'youtube';
 
 interface StockCardProps {
     result: ScreeningResult;
@@ -17,30 +17,9 @@ interface StockCardProps {
     market?: 'US' | 'India' | 'Korea' | 'Taiwan';
     screenMode?: ScreenMode;
     youtubeEvaluation?: YoutubeStrategyEvaluation;
-    paradigmHistory?: ParadigmHistoryEvent[];
 }
 
-const paradigmBandLabel: Record<string, string> = {
-    high: "STRONG",
-    mid: "SOLID",
-    watch: "WATCH",
-    skip: "PASS",
-    no_data: "NO DATA",
-};
-
-function isBaselineParadigmEvent(event: ParadigmHistoryEvent) {
-    return Boolean(
-        event.is_baseline ||
-        (
-            event.from_band == null &&
-            event.from_signal == null &&
-            event.from_rank == null &&
-            event.summary?.startsWith("Initial Paradigm")
-        )
-    );
-}
-
-export function StockCard({ result, onClick, index = 0, market = 'US', screenMode = '100bagger', youtubeEvaluation, paradigmHistory = [] }: StockCardProps) {
+export function StockCard({ result, onClick, index = 0, market = 'US', screenMode = '100bagger', youtubeEvaluation }: StockCardProps) {
     const { t } = useLanguage();
     if (!result || !result.candidate) return null;
 
@@ -54,14 +33,9 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
     })}`;
     const revenueGrowth = Number(candidate.revenueGrowth || 0);
     const marketCapLabel = formatCardMarketCap(Number(candidate.marketCap || 0), market);
-    const paradigm = result.paradigm;
     const reverse = result.reverse;
-    const hasParadigm = !!(paradigm?.pdm_themes && paradigm.pdm_themes.length > 0);
-    const paradigmBand = paradigm?.pdm_band || 'no_data';
-    const paradigmLabel = paradigmBandLabel[paradigmBand] || 'NO DATA';
     const hasReverse = !!(reverse && reverse.rev_band && reverse.rev_band !== 'Excluded');
     const hasYoutube = !!(youtubeEvaluation && youtubeEvaluation.matchedStrategies.length > 0);
-    const latestParadigmEvent = paradigmHistory.find(event => !isBaselineParadigmEvent(event));
 
     return (
         <div
@@ -113,47 +87,6 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                     </div>
                 </div>
 
-                <div className="mt-3 border border-rule-24 bg-white/5] p-2.5">
-                    {hasParadigm ? (
-                        <div className="flex items-start gap-2">
-                            <div className="mt-0.5 border border-rule-24 bg-white/5 p-2 text-ink-2">
-                                <Layers3 className="h-4 w-4" />
-                            </div>
-                            <div className="min-w-0 flex-1">
-                                <div className="flex flex-wrap items-center gap-1.5">
-                                    <span className={clsx(
-                                        " px-2.5 py-1 text-xs font-extrabold uppercase",
-                                        paradigmBand === 'high' && "bg-pos/10 text-pos",
-                                        paradigmBand === 'mid' && "bg-accent/10 text-accent",
-                                        paradigmBand === 'watch' && "bg-warn/10 text-warn",
-                                        paradigmBand === 'skip' && "bg-gray-500/20 text-ink-2",
-                                        paradigmBand === 'no_data' && "bg-white/5 text-ink-2",
-                                    )}>
-                                        Paradigm {paradigmLabel}
-                                    </span>
-                                    {paradigm?.pdm_signal != null && (
-                                        <span className="font-mono text-xs font-bold text-accent/90">Sig {Math.round(paradigm.pdm_signal)}</span>
-                                    )}
-                                </div>
-                                <div className="mt-1 truncate font-mono text-xs text-ink-2" title={paradigm?.pdm_themes?.join(', ')}>
-                                    {paradigm?.pdm_theme_primary || paradigm?.pdm_themes?.[0]}
-                                    {paradigm?.pdm_themes && paradigm.pdm_themes.length > 1 ? ` +${paradigm.pdm_themes.length - 1}` : ''}
-                                </div>
-                                {latestParadigmEvent && (
-                                    <div className="mt-1 truncate text-[11px] font-bold text-ink-2" title={formatParadigmHistoryEvent(latestParadigmEvent)}>
-                                        {formatParadigmHistoryEvent(latestParadigmEvent)}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="flex items-center gap-2 text-sm text-ink-2">
-                            <Layers3 className="h-4 w-4 text-ink-2" />
-                            {t('paradigmNoTag')}
-                        </div>
-                    )}
-                </div>
-
                 <div className="mt-2.5 border border-rule-10 bg-white/5 p-2.5">
                     <ActiveLensPanel result={result} screenMode={screenMode} youtubeEvaluation={youtubeEvaluation} />
                 </div>
@@ -175,14 +108,6 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                                 tone={reverse?.rev_band === 'High' ? "success" : reverse?.rev_band === 'Solid' ? "primary" : "muted"}
                             />
                         )}
-                        {hasParadigm && (
-                            <SignalChip
-                                icon={<Layers3 className="h-4 w-4" />}
-                                label="PDM"
-                                value={paradigm?.pdm_signal != null ? `${Math.round(paradigm.pdm_signal)}` : paradigmLabel}
-                                tone={paradigmBand === 'high' ? "success" : paradigmBand === 'mid' ? "primary" : paradigmBand === 'watch' ? "warning" : "muted"}
-                            />
-                        )}
                         {hasYoutube && (
                             <SignalChip
                                 icon={<Youtube className="h-4 w-4" />}
@@ -190,12 +115,6 @@ export function StockCard({ result, onClick, index = 0, market = 'US', screenMod
                                 value={`${youtubeEvaluation.matchedStrategies.length}`}
                                 tone={youtubeEvaluation.riskTier === 'standard' ? "primary" : "warning"}
                             />
-                        )}
-                        {paradigm?.pdm_flags?.some((f: string) => f.startsWith('macro_')) && (
-                            <span className="border border-neg/40 bg-neg/10 px-2.5 py-1 text-xs font-extrabold text-neg">Macro</span>
-                        )}
-                        {paradigm?.pdm_flags?.includes('accelerating') && (
-                            <span className="border border-pos/40 bg-pos/10 px-2.5 py-1 text-xs font-extrabold text-pos">Accel</span>
                         )}
                     </div>
                 </div>
@@ -210,21 +129,6 @@ function formatCardMarketCap(value: number, market: 'US' | 'India' | 'Korea' | '
     if (market === 'Taiwan') return `NT$${(value / 1_000_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}B`;
     if (Math.abs(value) >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}B`;
     return `$${(value / 1_000_000).toLocaleString('en-US', { maximumFractionDigits: 0 })}M`;
-}
-
-function formatParadigmHistoryEvent(event: ParadigmHistoryEvent) {
-    if (event.event_type === 'band_change') {
-        return `${formatParadigmBand(event.from_band)} -> ${formatParadigmBand(event.to_band)}`;
-    }
-    if (event.event_type === 'theme_change') {
-        return `Theme -> ${event.to_theme_primary || 'none'}`;
-    }
-    return `Signal ${event.from_signal ?? 'n/a'} -> ${event.to_signal ?? 'n/a'}`;
-}
-
-function formatParadigmBand(band: string | null) {
-    if (!band) return 'NONE';
-    return paradigmBandLabel[band] || band.toUpperCase();
 }
 
 function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: ScreeningResult; screenMode: ScreenMode; youtubeEvaluation?: YoutubeStrategyEvaluation }) {
@@ -247,28 +151,6 @@ function ActiveLensPanel({ result, screenMode, youtubeEvaluation }: { result: Sc
                     <MiniMetric label="Band" value={reverse.rev_band || 'n/a'} />
                     <MiniMetric label="Arch" value={reverse.rev_archetype || 'n/a'} />
                     <MiniMetric label="Rank" value={reverse.rev_rank != null ? `#${reverse.rev_rank}` : 'n/a'} />
-                </div>
-            </div>
-        );
-    }
-
-    if (screenMode === 'paradigm') {
-        const paradigm = result.paradigm;
-        if (!paradigm?.pdm_themes?.length) {
-            return <EmptyLens icon={<Layers3 className="h-4 w-4" />} label={t('noSecularTheme')} detail={t('noSecularThemeDetail')} />;
-        }
-        return (
-            <div>
-                <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
-                        <Layers3 className="h-4 w-4" /> {t('strategyParadigmTitle')}
-                    </div>
-                    <span className="font-mono text-sm font-extrabold text-ink">{paradigm.pdm_signal != null ? Math.round(paradigm.pdm_signal) : 'n/a'}</span>
-                </div>
-                <div className="mt-3 grid grid-cols-3 gap-2">
-                    <MiniMetric label="Member" value={paradigm.pdm_membership_score ?? 'n/a'} />
-                    <MiniMetric label="Momentum" value={paradigm.pdm_momentum_score ?? 'n/a'} />
-                    <MiniMetric label="Gate" value={paradigm.pdm_economics_gate ?? 'n/a'} />
                 </div>
             </div>
         );

@@ -1,5 +1,5 @@
 @echo off
-REM Run the full scoring chain: macro -> score_reverse -> score_paradigm
+REM Run the full scoring chain: macro -> score_reverse -> sifter
 REM with data-integrity invariants. See scripts/run_chain.py.
 cd /d "%~dp0"
 python scripts\run_chain.py %*

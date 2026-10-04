@@ -39,49 +39,6 @@ export interface ReverseResult {
     rev_route_confidence: string | null;
 }
 
-// WS1-T2a..T8/T9: Paradigm dimension result (from stocks.json paradigm object)
-export interface ParadigmResult {
-    pdm_themes: string[];
-    pdm_theme_primary: string | null;
-    pdm_membership_score: number | null;
-    pdm_momentum_score: number | null;
-    pdm_economics_gate: number | null;
-    pdm_signal: number | null;
-    pdm_band: string | null; // "high" | "mid" | "watch" | "skip" | "no_data"
-    pdm_rank: number | null;
-    pdm_confidence: number | null;
-    pdm_pro: string | null;
-    pdm_con: string | null;
-    pdm_flags: string[];
-}
-
-export interface ParadigmHistoryEvent {
-    run_id: string;
-    snapshot_date: string;
-    is_baseline?: boolean;
-    symbol: string;
-    name?: string | null;
-    event_type: "band_change" | "theme_change" | "signal_change";
-    direction: "upgrade" | "downgrade" | "changed";
-    from_band: string | null;
-    to_band: string | null;
-    from_signal: number | null;
-    to_signal: number | null;
-    from_rank: number | null;
-    to_rank: number | null;
-    from_theme_primary: string | null;
-    to_theme_primary: string | null;
-    themes_added: string[];
-    themes_removed: string[];
-    summary: string;
-}
-
-export interface ParadigmHistoryPayload {
-    last_updated: string | null;
-    snapshot_date: string | null;
-    events: ParadigmHistoryEvent[];
-}
-
 export interface ScreeningMetrics {
     roic: number;
     revenueGrowth: number;
@@ -110,7 +67,6 @@ export interface ScreeningResult {
     financialData?: any;
     Last_Updated?: string;
     reverse?: ReverseResult; // Phase 9: reverse screening engine result
-    paradigm?: ParadigmResult; // WS1-T2..T9: paradigm dimension result
 }
 
 // Phase 1: Quantitative Filters

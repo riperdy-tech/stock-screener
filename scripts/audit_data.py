@@ -1,7 +1,7 @@
 """audit_data.py - plausibility audit over the fetched data artifacts.
 
 Why this exists: chain_manifest's invariants check COVERAGE and REGENERATION -
-did every stock get a reverse object, was paradigm_scores.json written by this
+did every stock get a reverse object, was reverse_scores.json written by this
 run. They never ask whether the numbers inside are possible. A run where every
 foreign ADR's P/S is off by 200x because filing-currency revenue was divided by
 a USD market cap passes all of them and reports green.
@@ -305,7 +305,6 @@ def check_join_integrity(stocks: list[dict]) -> None:
     """Scores keyed on symbols absent from the universe are orphans nothing renders."""
     syms = {r["symbol"] for r in stocks}
     for name, key, min_cov in [("reverse_scores.json", None, 0.90),
-                               ("paradigm_scores.json", None, 0.90),
                                ("factor_scores.json", "tickers", 0.90),
                                ("price_history.json", "prices", 0.85)]:
         doc = load(name)

@@ -817,7 +817,7 @@ export default function HelpPage() {
                         {/* Legacy lenses */}
                         <Section id="lenses" title="Legacy lenses — older screens kept for reference" icon={<BookOpen className="h-5 w-5" />}>
                             <p>
-                                The <b>Lenses</b> button opens the older screens: the 100-bagger screen, Reverse, Paradigm and
+                                The <b>Lenses</b> button opens the older screens: the 100-bagger screen, Reverse and
                                 YouTube. They are kept for reference. They are <b>not</b> the current system, and nothing on the
                                 desk is built from them.
                             </p>

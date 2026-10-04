@@ -96,6 +96,10 @@ def get_git_file_content(repo_root: Path, ref: str, file_rel_path: str = "script
 
 def load_sifter_module(source_code: str, module_name: str, sifter_path: Path) -> types.ModuleType:
     """Compile and load source code into an isolated module instance."""
+    # Historical sifter revisions import their momentum helpers from score_paradigm, which was
+    # retired 2026-10-04; the same functions now live in momentum_math.
+    import momentum_math
+    sys.modules.setdefault("score_paradigm", momentum_math)
     mod = types.ModuleType(module_name)
     mod.__file__ = str(sifter_path.resolve())
     compiled = compile(source_code, mod.__file__, "exec")

@@ -438,7 +438,7 @@ export function KoreanHelpBody() {
             {/* 레거시 렌즈 */}
             <Section id="lenses" title="레거시 렌즈 — 참고용으로 남겨 둔 옛 스크린" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    <b>Lenses</b> 버튼은 옛 스크린을 엽니다. 100배 종목(100-bagger) 스크린, Reverse, Paradigm,
+                    <b>Lenses</b> 버튼은 옛 스크린을 엽니다. 100배 종목(100-bagger) 스크린, Reverse,
                     YouTube입니다. 참고용으로 남겨 둔 것입니다. 이것들은 현재 시스템이 <b>아니며</b>, 데스크의
                     어떤 것도 이것으로 만들어지지 않습니다.
                 </p>

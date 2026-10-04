@@ -1,17 +1,19 @@
 """run_chain.py — enforced scoring chain with data-integrity invariants.
 
-Order: (optional) fetch_macro_state --apply -> score_reverse -> score_paradigm
+Order: (optional) fetch_macro_state --apply -> score_reverse -> filter_tier1_hygiene
+-> build_daily_price_history -> build_momentum_state -> score_factors_dual_door
+-> build_valuation_models -> track_paper_portfolios
 -> invariant checks -> chain_manifest.json + reverse nomination forward log.
 
 Why this exists: the daily fetch regenerates stocks.json WITHOUT re-running
-score_reverse.py, which left the dashboard and the paradigm economics gate on
+score_reverse.py, which left the dashboard and the economics gate on
 stale reverse data (72 of 6,602 stocks merged; May 24 scores under June 7
 prices). This script makes the ordering explicit and fails loudly when any
 artifact is stale, missing, or shrunken.
 
 Usage:
-    python scripts/run_chain.py               # macro -> reverse -> paradigm
-    python scripts/run_chain.py --skip-macro  # offline: reverse -> paradigm
+    python scripts/run_chain.py               # macro -> reverse -> sifter -> ledgers
+    python scripts/run_chain.py --skip-macro  # offline: reverse -> sifter -> ledgers
 
 Exit code: 0 = all steps ran and all HARD invariants passed.
            1 = a step failed or a HARD invariant failed (soft ones only warn).
@@ -34,8 +36,6 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "public" / "data"
 STOCKS_JSON = DATA / "stocks.json"
 REVERSE_SCORES_JSON = DATA / "reverse_scores.json"
-PARADIGM_SCORES_JSON = DATA / "paradigm_scores.json"
-THEME_METRICS_JSON = DATA / "paradigm_theme_metrics.json"
 MANIFEST_JSON = DATA / "chain_manifest.json"
 NOMINATION_LOG_JSONL = DATA / "reverse_nomination_log.jsonl"
 
@@ -43,7 +43,6 @@ NOMINATION_LOG_JSONL = DATA / "reverse_nomination_log.jsonl"
 MIN_REVERSE_COVERAGE = 0.90   # share of stocks that must carry a reverse object
 MIN_NOMINATED = 1             # Stage 9 must nominate at least this many
 MAX_UNIVERSE_DRIFT = 0.10     # vs previous manifest
-MAX_THEME_DRIFT = 0.50        # tagged_count swing vs previous manifest (hot flips are legal but loud)
 MAX_STOCKS_AGE_DAYS = 8       # stocks.json older than this = fetch pipeline broken
 
 
@@ -128,10 +127,7 @@ def main():
                       "FRED macro state fetched" if macro_ok else "macro fetch failed (flags will be stale)")
 
     if not run_step("score_reverse", ["scripts/score_reverse.py"], steps):
-        print("FATAL: score_reverse failed — aborting before paradigm.")
-        ok = False
-    if ok and not run_step("score_paradigm", ["scripts/score_paradigm.py"], steps):
-        print("FATAL: score_paradigm failed.")
+        print("FATAL: score_reverse failed — aborting before the sifter.")
         ok = False
     # Tier 1 hygiene, then the dual-door sifter. These replaced the equal-weight Factor Lab
     # (score_factors.py, retired 2026-09-22): the declared 1/N weights were never the effective
@@ -151,11 +147,8 @@ def main():
     if ok and not run_step("build_valuation_models", ["scripts/build_valuation_models.py"], steps):
         print("FATAL: build_valuation_models failed.")
         ok = False
-    if ok and not run_step("build_portfolio_plan", ["scripts/build_portfolio_plan.py"], steps):
-        print("FATAL: build_portfolio_plan failed.")
-        ok = False
     # (The parallel LLM-overlay plan variant was RETIRED in the depth migration, 2026-08-26;
-    # rn_depth replaced the LLM A/B lane, so build_portfolio_plan --llm is no longer run.)
+    # rn_depth replaced the LLM A/B lane. build_portfolio_plan.py itself was retired 2026-10-04.)
     # P3.11: build_momo_plan removed from the chain — it is diagnostic-only (see its own
     # docstring); its regime throttle is an input to Phase 5, not a step this chain runs.
     if ok and not run_step("track_paper_portfolios", ["scripts/track_paper_portfolios.py"]
@@ -197,14 +190,6 @@ def main():
         ]
         add_invariant(invariants, "nomination_nonempty", "hard", len(nominated) >= MIN_NOMINATED,
                       f"{len(nominated)} stocks nominated (min {MIN_NOMINATED})")
-
-        add_invariant(invariants, "paradigm_scores_regenerated", "hard",
-                      PARADIGM_SCORES_JSON.exists() and PARADIGM_SCORES_JSON.stat().st_mtime >= chain_start,
-                      "paradigm_scores.json written by this run")
-
-        paradigm_scores = load_json(PARADIGM_SCORES_JSON)
-        add_invariant(invariants, "paradigm_coverage", "hard", len(paradigm_scores) >= 0.95 * n_stocks,
-                      f"{len(paradigm_scores)} paradigm rows vs {n_stocks} stocks")
 
         factor_path = DATA / "factor_scores.json"
         factor = load_json(factor_path) if factor_path.exists() else {}
@@ -258,11 +243,6 @@ def main():
                       valuation.get("modeled_count", 0) >= 50,
                       f"{valuation.get('modeled_count', 0)} reverse-DCF models built")
 
-        plan_path = DATA / "portfolio_plan.json"
-        add_invariant(invariants, "portfolio_plan_regenerated", "hard",
-                      plan_path.exists() and plan_path.stat().st_mtime >= chain_start,
-                      "portfolio_plan.json written by this run")
-
         ledgers_path = DATA / "paper_ledgers.json"
         ledgers = load_json(ledgers_path) if ledgers_path.exists() else {}
         today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -295,21 +275,6 @@ def main():
             }, sort_keys=True) + "\n")
         print(f"  Appended {len(log_rows)} factor signals to {factor_log.name}")
 
-        # Theme membership drift vs previous run (hot flips are legal but must be visible)
-        theme_counts = {}
-        if THEME_METRICS_JSON.exists():
-            tm = load_json(THEME_METRICS_JSON).get("themes", {})
-            theme_counts = {tid: m.get("tagged_count") for tid, m in tm.items()}
-            prev_themes = previous_manifest.get("counts", {}).get("themes", {})
-            for tid, count in theme_counts.items():
-                prev = prev_themes.get(tid)
-                if prev and prev > 0 and count is not None:
-                    tdrift = abs(count - prev) / prev
-                    if tdrift > MAX_THEME_DRIFT:
-                        hot_now = tm.get(tid, {}).get("hot")
-                        add_invariant(invariants, f"theme_drift_{tid}", "soft", False,
-                                      f"tagged {prev} -> {count} ({tdrift:.0%}); hot={hot_now}")
-
         # ── Reverse nomination forward log (dated, append-only) ─────────
         snapshot = {
             "run_id": run_id,
@@ -332,7 +297,6 @@ def main():
         "invariants": invariants,
         "counts": {
             "stocks": n_stocks,
-            "themes": theme_counts if ok else {},
         },
     }
     with MANIFEST_JSON.open("w", encoding="utf-8") as f:

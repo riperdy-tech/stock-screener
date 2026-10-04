@@ -1,4 +1,4 @@
-import { type StockCandidate, type ReverseResult, type ParadigmHistoryPayload, type ParadigmResult } from "./blueprint";
+import { type StockCandidate, type ReverseResult } from "./blueprint";
 
 export function formatKoreanWon(n: number, decimals: number = 2) {
     if (Math.abs(n) >= 1e12) return `${(n / 1e12).toLocaleString('en-US', {maximumFractionDigits: decimals})}조원`;
@@ -237,25 +237,6 @@ export async function fetchReverseScores(): Promise<Record<string, ReverseResult
     }
 }
 
-// WS1-T2..T9: Load paradigm dimension results from stocks.json
-export async function fetchParadigmScores(): Promise<Record<string, ParadigmResult>> {
-    try {
-        const response = await fetch(`/data/stocks.json?t=${new Date().getTime()}`);
-        if (!response.ok) return {};
-        const stocks: any[] = await response.json();
-        const result: Record<string, ParadigmResult> = {};
-        for (const stock of stocks) {
-            if (stock.paradigm && stock.symbol) {
-                result[stock.symbol] = stock.paradigm;
-            }
-        }
-        return result;
-    } catch (error) {
-        console.error("Error loading paradigm scores:", error);
-        return {};
-    }
-}
-
 // ── Factor Lab + Decision Cockpit sidecars ─────────────────────────────────
 
 export interface FactorEntry {
@@ -266,7 +247,6 @@ export interface FactorEntry {
     fct_veto: string | null;
     fct_veto_detail?: string | null;  // why, for vetoes that carry a reason (not_tradable)
     fct_z: Record<string, number | null> | null;
-    fct_context?: { theme_score: number | null; theme_primary: string | null; pdm_band: string | null } | null;
     fct_vol?: number | null;
     fct_contributions: Record<string, number> | null;
     fct_haircuts: Record<string, number> | null;
@@ -605,21 +585,4 @@ export async function fetchPaperLedgers(): Promise<any | null> {
         }
     } catch { /* fall through to static backup */ }
     return fetchJson('/data/paper_ledgers.json');
-}
-
-export async function fetchParadigmHistory(): Promise<ParadigmHistoryPayload> {
-    try {
-        const response = await fetch(`/data/paradigm_history.json?t=${new Date().getTime()}`);
-        if (!response.ok) return { last_updated: null, snapshot_date: null, events: [] };
-
-        const payload = await response.json();
-        return {
-            last_updated: payload.last_updated ?? null,
-            snapshot_date: payload.snapshot_date ?? null,
-            events: Array.isArray(payload.events) ? payload.events : [],
-        };
-    } catch (error) {
-        console.error("Error loading paradigm history:", error);
-        return { last_updated: null, snapshot_date: null, events: [] };
-    }
 }

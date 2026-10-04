@@ -3,32 +3,20 @@
 import { useState, useEffect, useMemo, useRef, useCallback, type ReactNode } from "react";
 import { StockDetailModal } from "./StockDetailModal";
 import { StockCard } from "./StockCard";
-import { fetchStocks, fetchReverseScores, fetchParadigmScores, fetchParadigmHistory, Market } from "@/lib/data-service";
-import { ParadigmHistoryEvent, ParadigmResult, ReverseResult, ScreeningResult } from "@/lib/blueprint";
-import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS, ParadigmFilterState, DEFAULT_PARADIGM_FILTERS, PARADIGM_BAND_LABELS } from "./FilterSidebar";
+import { fetchStocks, fetchReverseScores, Market } from "@/lib/data-service";
+import { ReverseResult, ScreeningResult } from "@/lib/blueprint";
+import { FilterSidebar, FilterState, STRICT_FILTERS, DEFAULT_FILTERS, ZERO_BASE_FILTERS, ReverseFilterState, DEFAULT_REVERSE_FILTERS } from "./FilterSidebar";
 import { evaluateYoutubeStrategy, matchesYoutubeStrategyFilter, YoutubeStrategyEvaluation, YoutubeStrategyFilter } from "@/lib/youtube-strategy";
 import { LanguageToggle } from "./LanguageToggle";
 import { LogConsole } from "./LogConsole";
-import { Sparkles, RefreshCw, X, Search, Filter, Terminal, HelpCircle, Telescope, ShieldCheck, Layers3, Youtube, LayoutGrid, Table2, History, ArrowLeft } from 'lucide-react';
+import { Sparkles, RefreshCw, X, Search, Filter, Terminal, HelpCircle, Telescope, ShieldCheck, Youtube, LayoutGrid, Table2, ArrowLeft } from 'lucide-react';
 import { useLanguage } from "./LanguageContext";
 import Link from "next/link";
 import clsx from "clsx";
 
-type ScreenMode = '100bagger' | 'reverse' | 'paradigm' | 'youtube';
+type ScreenMode = '100bagger' | 'reverse' | 'youtube';
 type StrategyId = ScreenMode;
 type ResultView = 'cards' | 'table';
-
-function isParadigmBaselineEvent(event: ParadigmHistoryEvent) {
-    return Boolean(
-        event.is_baseline ||
-        (
-            event.from_band == null &&
-            event.from_signal == null &&
-            event.from_rank == null &&
-            event.summary?.startsWith("Initial Paradigm")
-        )
-    );
-}
 
 const STRATEGY_META: Record<StrategyId, {
     accent: string;
@@ -42,10 +30,6 @@ const STRATEGY_META: Record<StrategyId, {
         accent: 'text-pos border-pos/40 bg-pos/10',
         icon: ShieldCheck,
     },
-    paradigm: {
-        accent: 'text-ink-2 border-rule-24 bg-white/5',
-        icon: Layers3,
-    },
     youtube: {
         accent: 'text-neg border-neg/40 bg-neg/10',
         icon: Youtube,
@@ -54,8 +38,7 @@ const STRATEGY_META: Record<StrategyId, {
 
 function adaptRowsToScreeningResults(
     rawData: any[],
-    reverseScores: Record<string, ReverseResult> = {},
-    paradigmScores: Record<string, ParadigmResult> = {}
+    reverseScores: Record<string, ReverseResult> = {}
 ): ScreeningResult[] {
     return rawData.map(item => {
         // The item is the flat CSV row parsed by data-service.
@@ -109,7 +92,6 @@ function adaptRowsToScreeningResults(
             description: item.description,
             industry: item.industry,
             reverse: reverseScores[sym] || undefined,
-            paradigm: paradigmScores[sym] || undefined,
         };
     }) as unknown as ScreeningResult[];
 }
@@ -184,7 +166,6 @@ function adaptStockJsonRowsToScreeningResults(
             description: item.description,
             industry: item.industry,
             reverse: reverseScores[sym] || undefined,
-            paradigm: item.paradigm || undefined,
         };
     }) as unknown as ScreeningResult[];
 }
@@ -194,7 +175,6 @@ export function ScreenerDashboard() {
     const [loading, setLoading] = useState(true);
 
     const [rawResults, setRawResults] = useState<ScreeningResult[]>([]);
-    const [paradigmHistoryEvents, setParadigmHistoryEvents] = useState<ParadigmHistoryEvent[]>([]);
     const [youtubeResults, setYoutubeResults] = useState<ScreeningResult[]>([]);
     const [youtubeLoading, setYoutubeLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -209,13 +189,8 @@ export function ScreenerDashboard() {
     // Phase 10: Screen mode (mutually exclusive)
     const [screenMode, setScreenMode] = useState<ScreenMode>('100bagger');
     const [reverseFilters, setReverseFilters] = useState<ReverseFilterState>(DEFAULT_REVERSE_FILTERS);
-    const [paradigmFilters, setParadigmFilters] = useState<ParadigmFilterState>(DEFAULT_PARADIGM_FILTERS);
     const [youtubeFilters, setYoutubeFilters] = useState<YoutubeStrategyFilter[]>(["any"]);
     const [strictPassOnly, setStrictPassOnly] = useState(false);
-    const [showParadigmSnapshot, setShowParadigmSnapshot] = useState(false);
-    const [paradigmSnapshotSearch, setParadigmSnapshotSearch] = useState("");
-    const [paradigmSnapshotBand, setParadigmSnapshotBand] = useState("all");
-    const [paradigmSnapshotTheme, setParadigmSnapshotTheme] = useState("all");
     const [resultView, setResultView] = useState<ResultView>('cards');
     
     // Maintain a ref to current rawResults for the setInterval closure
@@ -294,16 +269,11 @@ export function ScreenerDashboard() {
 
             // Phase 9: Load reverse screening engine results
             const reverseScores = market === 'US' ? await fetchReverseScores() : {};
-            // WS1: Load paradigm dimension results
-            const paradigmScores = market === 'US' ? await fetchParadigmScores() : {};
-            const paradigmHistory = market === 'US' ? await fetchParadigmHistory() : { events: [] };
 
-            setRawResults(adaptRowsToScreeningResults(rawData as any[], reverseScores, paradigmScores));
-            setParadigmHistoryEvents(paradigmHistory.events);
+            setRawResults(adaptRowsToScreeningResults(rawData as any[], reverseScores));
         } catch (err) {
             console.error("Failed to load or adapt data:", err);
             setRawResults([]);
-            setParadigmHistoryEvents([]);
         }
         setLoading(false);
     }
@@ -312,11 +282,8 @@ export function ScreenerDashboard() {
         setYoutubeLoading(true);
         try {
             const { data: rawData } = await fetchStocks('US');
-            const [reverseScores, paradigmScores] = await Promise.all([
-                fetchReverseScores().catch(() => ({})),
-                fetchParadigmScores().catch(() => ({})),
-            ]);
-            setYoutubeResults(adaptRowsToScreeningResults(rawData as any[], reverseScores, paradigmScores));
+            const reverseScores = await fetchReverseScores().catch(() => ({}));
+            setYoutubeResults(adaptRowsToScreeningResults(rawData as any[], reverseScores));
         } catch (err) {
             console.error("Failed to load YouTube strategy universe:", err);
             setYoutubeResults([]);
@@ -342,60 +309,6 @@ export function ScreenerDashboard() {
 
     // Filtering Logic
     const filteredResults = useMemo(() => {
-        // WS1-T6+: Paradigm mode — exclusive paradigm filters
-        if (screenMode === 'paradigm') {
-            return rawResults.filter(r => {
-                const p = r.paradigm;
-                // Exclude stocks without paradigm or with no theme tagging
-                if (!p || !p.pdm_themes || p.pdm_themes.length === 0) return false;
-
-                // Band filter
-                if (paradigmFilters.bands.length > 0 && p.pdm_band) {
-                    if (!paradigmFilters.bands.includes(p.pdm_band)) return false;
-                }
-
-                // Theme filter (any-match: stock passes if it shares any selected theme)
-                if (paradigmFilters.themes.length > 0) {
-                    const overlap = p.pdm_themes.some((t: string) => paradigmFilters.themes.includes(t));
-                    if (!overlap) return false;
-                }
-
-                // Industry substring filter
-                if (paradigmFilters.industryQuery.trim()) {
-                    const q = paradigmFilters.industryQuery.trim().toLowerCase();
-                    const ind = (r.candidate.industry || '').toLowerCase();
-                    if (!ind.includes(q)) return false;
-                }
-
-                // Score thresholds
-                if (paradigmFilters.minSignal > 0 && (p.pdm_signal == null || p.pdm_signal < paradigmFilters.minSignal)) return false;
-                if (paradigmFilters.minMembership > 0 && (p.pdm_membership_score == null || p.pdm_membership_score < paradigmFilters.minMembership)) return false;
-                if (paradigmFilters.minMomentum > 0 && (p.pdm_momentum_score == null || p.pdm_momentum_score < paradigmFilters.minMomentum)) return false;
-                if (paradigmFilters.minGate > 0 && (p.pdm_economics_gate == null || p.pdm_economics_gate < paradigmFilters.minGate)) return false;
-
-                // Flag filters
-                const flags = p.pdm_flags || [];
-                if (paradigmFilters.acceleratingOnly && !flags.includes('accelerating')) return false;
-                if (paradigmFilters.bridgedOnly && !flags.includes('gate_bridged_forward')) return false;
-                if (paradigmFilters.multiThemeOnly && p.pdm_themes.length < 2) return false;
-                if (paradigmFilters.macroWarningOnly && !flags.some((f: string) => f.startsWith('macro_'))) return false;
-
-                // Search match (symbol/name)
-                const c = r.candidate;
-                const searchMatch = !search ||
-                    c.symbol.toLowerCase().includes(search.toLowerCase()) ||
-                    c.name.toLowerCase().includes(search.toLowerCase());
-                if (!searchMatch) return false;
-
-                return true;
-            }).sort((a, b) => {
-                // Sort by pdm_signal descending (best opportunities first)
-                const sigA = a.paradigm?.pdm_signal ?? 0;
-                const sigB = b.paradigm?.pdm_signal ?? 0;
-                return sigB - sigA;
-            });
-        }
-
         // Phase 10: Reverse Engine mode — exclusive reverse filters
         if (screenMode === 'reverse') {
             return rawResults.filter(r => {
@@ -510,7 +423,7 @@ export function ScreenerDashboard() {
 
             return true;
         });
-    }, [rawResults, youtubeSourceResults, search, filters, selectedMarket, screenMode, reverseFilters, paradigmFilters, youtubeEvaluations, matchesSelectedYoutubeFilters, strictPassOnly]);
+    }, [rawResults, youtubeSourceResults, search, filters, selectedMarket, screenMode, reverseFilters, youtubeEvaluations, matchesSelectedYoutubeFilters, strictPassOnly]);
 
 
     // Pagination Logic
@@ -519,7 +432,7 @@ export function ScreenerDashboard() {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [search, filters, screenMode, reverseFilters, paradigmFilters, youtubeFilters, selectedMarket, strictPassOnly]);
+    }, [search, filters, screenMode, reverseFilters, youtubeFilters, selectedMarket, strictPassOnly]);
 
     const filteredCount = filteredResults.length;
     const youtubeTotals = useMemo(() => {
@@ -535,7 +448,6 @@ export function ScreenerDashboard() {
     const strategyCounts = useMemo(() => ({
         '100bagger': rawResults.filter(r => r.passed).length,
         reverse: rawResults.filter(r => r.reverse && r.reverse.rev_band && r.reverse.rev_band !== 'Excluded').length,
-        paradigm: rawResults.filter(r => r.paradigm?.pdm_themes && r.paradigm.pdm_themes.length > 0).length,
         youtube: youtubeTotals.any,
     }), [rawResults, youtubeTotals]);
     const isBaseUniverseLoading = loading && rawResults.length === 0;
@@ -549,75 +461,6 @@ export function ScreenerDashboard() {
         });
         return counts;
     }, [rawResults]);
-    const paradigmBandCounts = useMemo(() => {
-        const counts: Record<string, number> = {};
-        rawResults.forEach(r => {
-            const band = r.paradigm?.pdm_band;
-            if (band) counts[band] = (counts[band] || 0) + 1;
-        });
-        return counts;
-    }, [rawResults]);
-    const paradigmBaselineEvents = useMemo(
-        () => paradigmHistoryEvents.filter(isParadigmBaselineEvent),
-        [paradigmHistoryEvents]
-    );
-    const paradigmRealChangeEvents = useMemo(
-        () => paradigmHistoryEvents.filter(event => !isParadigmBaselineEvent(event)),
-        [paradigmHistoryEvents]
-    );
-    const paradigmChangeStats = useMemo(() => ({
-        total: paradigmRealChangeEvents.length,
-        upgrades: paradigmRealChangeEvents.filter(event => event.direction === "upgrade").length,
-        downgrades: paradigmRealChangeEvents.filter(event => event.direction === "downgrade").length,
-        themeChanges: paradigmRealChangeEvents.filter(event => event.event_type === "theme_change").length,
-    }), [paradigmRealChangeEvents]);
-    const paradigmSnapshotThemes = useMemo(() => {
-        const themes = new Set<string>();
-        paradigmBaselineEvents.forEach(event => {
-            const theme = event.to_theme_primary || event.themes_added?.[0];
-            if (theme) themes.add(theme);
-        });
-        return Array.from(themes).sort((a, b) => a.localeCompare(b));
-    }, [paradigmBaselineEvents]);
-    const paradigmSnapshotRows = useMemo(() => {
-        const bandOrder: Record<string, number> = { high: 0, mid: 1, watch: 2 };
-        const query = paradigmSnapshotSearch.trim().toLowerCase();
-
-        return paradigmBaselineEvents
-            .filter(event => {
-                const stock = rawResults.find(result => result.candidate.symbol === event.symbol);
-                const band = event.to_band || stock?.paradigm?.pdm_band || "";
-                const theme = event.to_theme_primary || stock?.paradigm?.pdm_theme_primary || "";
-
-                if (paradigmSnapshotBand !== "all" && band !== paradigmSnapshotBand) return false;
-                if (paradigmSnapshotTheme !== "all" && theme !== paradigmSnapshotTheme) return false;
-                if (!query) return true;
-
-                return (
-                    event.symbol.toLowerCase().includes(query) ||
-                    (event.name || stock?.candidate.name || "").toLowerCase().includes(query) ||
-                    theme.toLowerCase().includes(query)
-                );
-            })
-            .sort((a, b) => {
-                const stockA = rawResults.find(result => result.candidate.symbol === a.symbol);
-                const stockB = rawResults.find(result => result.candidate.symbol === b.symbol);
-                const bandA = a.to_band || stockA?.paradigm?.pdm_band || "watch";
-                const bandB = b.to_band || stockB?.paradigm?.pdm_band || "watch";
-                const bandDelta = (bandOrder[bandA] ?? 9) - (bandOrder[bandB] ?? 9);
-                if (bandDelta !== 0) return bandDelta;
-                return (a.to_rank ?? stockA?.paradigm?.pdm_rank ?? 99999) - (b.to_rank ?? stockB?.paradigm?.pdm_rank ?? 99999);
-            });
-    }, [paradigmBaselineEvents, paradigmSnapshotBand, paradigmSnapshotSearch, paradigmSnapshotTheme, rawResults]);
-    const paradigmHistoryBySymbol = useMemo(() => {
-        const bySymbol = new Map<string, ParadigmHistoryEvent[]>();
-        paradigmHistoryEvents.forEach(event => {
-            const events = bySymbol.get(event.symbol) || [];
-            if (events.length < 5) events.push(event);
-            bySymbol.set(event.symbol, events);
-        });
-        return bySymbol;
-    }, [paradigmHistoryEvents]);
     const strategyMeta = useMemo(() => ({
         '100bagger': {
             ...STRATEGY_META['100bagger'],
@@ -632,13 +475,6 @@ export function ScreenerDashboard() {
             eyebrow: t('strategyReverseEyebrow'),
             description: t('strategyReverseDescription'),
             metricLabel: t('strategyReverseMetric'),
-        },
-        paradigm: {
-            ...STRATEGY_META.paradigm,
-            title: t('strategyParadigmTitle'),
-            eyebrow: t('strategyParadigmEyebrow'),
-            description: t('strategyParadigmDescription'),
-            metricLabel: t('strategyParadigmMetric'),
         },
         youtube: {
             ...STRATEGY_META.youtube,
@@ -658,18 +494,14 @@ export function ScreenerDashboard() {
     const activeStrategy = strategyMeta[screenMode];
     const activeMetric = screenMode === 'reverse'
         ? t('metricComposite')
-        : screenMode === 'paradigm'
-            ? t('metricParadigmSignal')
-            : screenMode === 'youtube'
-                ? t('metricVideoSignal')
-                : t('metric100Score');
+        : screenMode === 'youtube'
+            ? t('metricVideoSignal')
+            : t('metric100Score');
     const activeSummary = screenMode === 'reverse'
         ? t('summaryReverse')
-        : screenMode === 'paradigm'
-            ? t('summaryParadigm')
-            : screenMode === 'youtube'
-                ? t('summaryYoutube')
-                : t('summary100');
+        : screenMode === 'youtube'
+            ? t('summaryYoutube')
+            : t('summary100');
 
     const handleStrategySwitch = (id: StrategyId) => {
         setScreenMode(id);
@@ -701,23 +533,6 @@ export function ScreenerDashboard() {
             ].filter((chip): chip is string => Boolean(chip));
         }
 
-        if (screenMode === 'paradigm') {
-            return [
-                ...searchChip,
-                ...paradigmFilters.bands.map(band => `Band: ${PARADIGM_BAND_LABELS[band] || band}`),
-                ...paradigmFilters.themes.map(theme => `Theme: ${theme}`),
-                paradigmFilters.industryQuery.trim() ? `Industry: ${paradigmFilters.industryQuery.trim()}` : null,
-                paradigmFilters.minSignal > 0 ? `Signal >= ${paradigmFilters.minSignal}` : null,
-                paradigmFilters.minMembership > 0 ? `Membership >= ${paradigmFilters.minMembership}` : null,
-                paradigmFilters.minMomentum > 0 ? `Momentum >= ${paradigmFilters.minMomentum}` : null,
-                paradigmFilters.minGate > 0 ? `Gate >= ${paradigmFilters.minGate}` : null,
-                paradigmFilters.acceleratingOnly ? 'Accelerating' : null,
-                paradigmFilters.macroWarningOnly ? 'Macro warning' : null,
-                paradigmFilters.bridgedOnly ? 'Forward EPS bridge' : null,
-                paradigmFilters.multiThemeOnly ? 'Multi-theme' : null,
-            ].filter((chip): chip is string => Boolean(chip));
-        }
-
         if (screenMode === 'youtube') {
             if (youtubeFilters.includes("any")) return [...searchChip, t('youtubeAny')];
             const labels = youtubeFilters
@@ -739,15 +554,13 @@ export function ScreenerDashboard() {
             filters.minInsiderOwnership > 0 ? `Insider >= ${filters.minInsiderOwnership}%` : null,
             filters.maxFloat < 5000 ? `Float <= ${filters.maxFloat}M` : null,
         ].filter((chip): chip is string => Boolean(chip));
-    }, [screenMode, reverseFilters, paradigmFilters, youtubeFilters, youtubeFilterMeta, filters, selectedMarket, search, t, strictPassOnly]);
+    }, [screenMode, reverseFilters, youtubeFilters, youtubeFilterMeta, filters, selectedMarket, search, t, strictPassOnly]);
     const visibleFilterChips = activeFilterChips.slice(0, 8);
     const hiddenFilterChipCount = Math.max(activeFilterChips.length - visibleFilterChips.length, 0);
     const resetActiveFilters = () => {
         setSearch("");
         if (screenMode === 'reverse') {
             setReverseFilters(DEFAULT_REVERSE_FILTERS);
-        } else if (screenMode === 'paradigm') {
-            setParadigmFilters(DEFAULT_PARADIGM_FILTERS);
         } else if (screenMode === 'youtube') {
             setYoutubeFilters(["any"]);
         } else {
@@ -792,8 +605,6 @@ export function ScreenerDashboard() {
                 screenMode={screenMode}
                 reverseFilters={reverseFilters}
                 setReverseFilters={setReverseFilters}
-                paradigmFilters={paradigmFilters}
-                setParadigmFilters={setParadigmFilters}
                 youtubeFilters={youtubeFilters}
                 onYoutubeFilterToggle={toggleYoutubeFilter}
             />
@@ -911,7 +722,7 @@ export function ScreenerDashboard() {
                                 {t('strategyBoardDesc')}
                             </p>
                         </div>
-                        <div className="grid grid-cols-1 gap-2 pb-1 sm:grid-cols-2 xl:grid-cols-4">
+                        <div className="grid grid-cols-1 gap-2 pb-1 sm:grid-cols-2 xl:grid-cols-3">
                             {(Object.keys(strategyMeta) as StrategyId[]).map((id) => {
                                 const meta = strategyMeta[id];
                                 const Icon = meta.icon;
@@ -978,28 +789,6 @@ export function ScreenerDashboard() {
                                             ? reverseFilters.bands.filter(b => b !== band)
                                             : [...reverseFilters.bands, band];
                                         setReverseFilters({ ...reverseFilters, bands });
-                                    }}
-                                />
-                            ))}
-                            {screenMode === 'paradigm' && [
-                                { id: 'high', label: 'STRONG' },
-                                { id: 'mid', label: 'SOLID' },
-                                { id: 'watch', label: 'WATCH' },
-                                { id: 'skip', label: 'PASS' },
-                                { id: 'no_data', label: 'NO DATA' },
-                            ].map(item => (
-                                <SubCard
-                                    key={item.id}
-                                    label={item.label}
-                                    value={formatCount(paradigmBandCounts[item.id] || 0)}
-                                    detail="Paradigm conviction tier"
-                                    active={paradigmFilters.bands.includes(item.id)}
-                                    tone="purple"
-                                    onClick={() => {
-                                        const bands = paradigmFilters.bands.includes(item.id)
-                                            ? paradigmFilters.bands.filter(b => b !== item.id)
-                                            : [...paradigmFilters.bands, item.id];
-                                        setParadigmFilters({ ...paradigmFilters, bands });
                                     }}
                                 />
                             ))}
@@ -1123,153 +912,6 @@ export function ScreenerDashboard() {
                         </div>
                     ) : (
                         <>
-                            {screenMode === 'paradigm' && (
-                                <div className="mb-4 border border-rule-24 bg-white/5] p-3">
-                                    <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                                        <div>
-                                            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-2">
-                                                <History className="h-4 w-4" />
-                                                Paradigm Monitor
-                                            </div>
-                                            <p className="mt-1 text-xs font-semibold text-ink-2">
-                                                {paradigmChangeStats.total.toLocaleString()} new changes since baseline. {paradigmBaselineEvents.length.toLocaleString()} names in current snapshot.
-                                            </p>
-                                        </div>
-                                        <button
-                                            type="button"
-                                            onClick={() => setShowParadigmSnapshot(value => !value)}
-                                            className="w-full border border-rule-24 bg-white/5 px-3 py-2 text-xs font-extrabold uppercase tracking-wide text-ink-2 transition-colors hover:bg-white/5 sm:w-auto"
-                                        >
-                                            {showParadigmSnapshot ? "Hide Snapshot" : "View Current Snapshot"}
-                                        </button>
-                                    </div>
-
-                                    <div className="mb-3 grid grid-cols-2 gap-2 lg:grid-cols-5">
-                                        <ParadigmMonitorStat label="New Changes" value={paradigmChangeStats.total} tone="purple" />
-                                        <ParadigmMonitorStat label="Upgrades" value={paradigmChangeStats.upgrades} tone="green" />
-                                        <ParadigmMonitorStat label="Downgrades" value={paradigmChangeStats.downgrades} tone="red" />
-                                        <ParadigmMonitorStat label="Theme Changes" value={paradigmChangeStats.themeChanges} tone="blue" />
-                                        <ParadigmMonitorStat label="Snapshot Names" value={paradigmBaselineEvents.length} tone="muted" />
-                                    </div>
-
-                                    {paradigmRealChangeEvents.length > 0 ? (
-                                        <div className="overflow-x-auto border border-rule-10 bg-page">
-                                            <table className="w-full min-w-[760px] text-left text-xs">
-                                                <thead className="border-b border-rule-10 bg-white/5 text-xs uppercase tracking-wider text-ink-2">
-                                                    <tr>
-                                                        <th className="px-3 py-2">Ticker</th>
-                                                        <th className="px-3 py-2">Direction</th>
-                                                        <th className="px-3 py-2">Band</th>
-                                                        <th className="px-3 py-2">Signal / Rank</th>
-                                                        <th className="px-3 py-2">Theme</th>
-                                                        <th className="px-3 py-2">Date</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody className="divide-y divide-border/50">
-                                                    {paradigmRealChangeEvents.slice(0, 12).map(event => (
-                                                        <tr
-                                                            key={`${event.run_id}-${event.symbol}-${event.summary}`}
-                                                            className="cursor-pointer transition-colors hover:bg-white/5"
-                                                            onClick={() => {
-                                                                const match = rawResults.find(result => result.candidate.symbol === event.symbol);
-                                                                if (match) setSelectedStock(match);
-                                                            }}
-                                                        >
-                                                            <td className="px-3 py-2 font-mono font-extrabold text-ink">{event.symbol}</td>
-                                                            <td className="px-3 py-2 font-bold capitalize text-ink-2">{event.direction}</td>
-                                                            <td className="px-3 py-2 font-mono text-ink-2">{`${event.from_band || "n/a"} -> ${event.to_band || "n/a"}`}</td>
-                                                            <td className="px-3 py-2 font-mono text-ink-2">{`${event.from_signal ?? "n/a"} -> ${event.to_signal ?? "n/a"} / #${event.to_rank ?? "n/a"}`}</td>
-                                                            <td className="px-3 py-2 text-ink-2">{event.to_theme_primary || event.from_theme_primary || "n/a"}</td>
-                                                            <td className="px-3 py-2 font-mono text-ink-2">{event.snapshot_date}</td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    ) : (
-                                        <div className="border border-rule-10 bg-page px-3 py-2 text-sm font-semibold text-ink-2">
-                                            Baseline is active. No Paradigm upgrades, downgrades, or theme changes have been recorded since tracking started.
-                                        </div>
-                                    )}
-
-                                    {showParadigmSnapshot && (
-                                        <div className="mt-3 border border-rule-24 bg-page p-3">
-                                            <div className="mb-3 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
-                                                <div>
-                                                    <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">Current Snapshot</div>
-                                                    <p className="mt-1 text-xs font-semibold text-ink-2">
-                                                        Baseline watchlist entries, sorted by band and rank. Showing {paradigmSnapshotRows.length.toLocaleString()} of {paradigmBaselineEvents.length.toLocaleString()}.
-                                                    </p>
-                                                </div>
-                                                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:w-[560px]">
-                                                    <input
-                                                        value={paradigmSnapshotSearch}
-                                                        onChange={(event) => setParadigmSnapshotSearch(event.target.value)}
-                                                        placeholder="Search ticker, name, theme..."
-                                                        className="border border-rule-10 bg-page px-3 py-2 text-xs font-semibold text-ink outline-none focus:border-purple-400"
-                                                    />
-                                                    <select
-                                                        value={paradigmSnapshotBand}
-                                                        onChange={(event) => setParadigmSnapshotBand(event.target.value)}
-                                                        className="border border-rule-10 bg-page px-3 py-2 text-xs font-bold text-ink outline-none focus:border-purple-400"
-                                                    >
-                                                        <option value="all">All bands</option>
-                                                        <option value="high">Strong</option>
-                                                        <option value="mid">Solid</option>
-                                                        <option value="watch">Watch</option>
-                                                    </select>
-                                                    <select
-                                                        value={paradigmSnapshotTheme}
-                                                        onChange={(event) => setParadigmSnapshotTheme(event.target.value)}
-                                                        className="border border-rule-10 bg-page px-3 py-2 text-xs font-bold text-ink outline-none focus:border-purple-400"
-                                                    >
-                                                        <option value="all">All themes</option>
-                                                        {paradigmSnapshotThemes.map(theme => (
-                                                            <option key={theme} value={theme}>{theme}</option>
-                                                        ))}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div className="max-h-80 overflow-auto border border-rule-10">
-                                                <table className="w-full min-w-[760px] text-left text-xs">
-                                                    <thead className="sticky top-0 border-b border-rule-10 bg-white/5 text-xs uppercase tracking-wider text-ink-2">
-                                                        <tr>
-                                                            <th className="px-3 py-2">Ticker</th>
-                                                            <th className="px-3 py-2">Company</th>
-                                                            <th className="px-3 py-2">Band</th>
-                                                            <th className="px-3 py-2">Signal</th>
-                                                            <th className="px-3 py-2">Rank</th>
-                                                            <th className="px-3 py-2">Primary Theme</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody className="divide-y divide-border/50 bg-page">
-                                                        {paradigmSnapshotRows.map(event => {
-                                                            const stock = rawResults.find(result => result.candidate.symbol === event.symbol);
-                                                            const band = event.to_band || stock?.paradigm?.pdm_band || "n/a";
-                                                            return (
-                                                                <tr
-                                                                    key={`${event.run_id}-${event.symbol}-baseline`}
-                                                                    className="cursor-pointer transition-colors hover:bg-white/5"
-                                                                    onClick={() => {
-                                                                        if (stock) setSelectedStock(stock);
-                                                                    }}
-                                                                >
-                                                                    <td className="px-3 py-2 font-mono font-extrabold text-ink">{event.symbol}</td>
-                                                                    <td className="max-w-[240px] truncate px-3 py-2 font-semibold text-ink-2" title={event.name || stock?.candidate.name || ""}>{event.name || stock?.candidate.name || "n/a"}</td>
-                                                                    <td className="px-3 py-2 font-extrabold uppercase text-ink-2">{PARADIGM_BAND_LABELS[band] || band}</td>
-                                                                    <td className="px-3 py-2 font-mono text-ink-2">{event.to_signal ?? stock?.paradigm?.pdm_signal ?? "n/a"}</td>
-                                                                    <td className="px-3 py-2 font-mono text-ink-2">#{event.to_rank ?? stock?.paradigm?.pdm_rank ?? "n/a"}</td>
-                                                                    <td className="px-3 py-2 text-ink-2">{event.to_theme_primary || stock?.paradigm?.pdm_theme_primary || "n/a"}</td>
-                                                                </tr>
-                                                            );
-                                                        })}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
                             {resultView === 'cards' ? (
                                 <div className="grid grid-cols-1 gap-4 mb-8 lg:grid-cols-2 2xl:grid-cols-3">
                                     {currentData.map((result, i) => (
@@ -1282,8 +924,7 @@ export function ScreenerDashboard() {
                                                 market={selectedMarket}
                                                 screenMode={screenMode}
                                                 youtubeEvaluation={youtubeEvaluations.get(result.candidate.symbol)}
-                                                paradigmHistory={paradigmHistoryBySymbol.get(result.candidate.symbol)}
-                                            />
+                                                            />
                                         </div>
                                     ))}
                                 </div>
@@ -1359,7 +1000,6 @@ export function ScreenerDashboard() {
                     market={selectedMarket}
                     onClose={() => setSelectedStock(null)}
                     youtubeEvaluation={youtubeEvaluations.get(selectedStock.candidate.symbol)}
-                    paradigmHistory={paradigmHistoryBySymbol.get(selectedStock.candidate.symbol)}
                 />
             )}
 
@@ -1402,11 +1042,6 @@ export function ScreenerDashboard() {
                             />
                             <HelpCard
                                 index="03"
-                                title={t('helpParadigmTitle')}
-                                body={t('helpParadigmBody')}
-                            />
-                            <HelpCard
-                                index="04"
                                 title={t('helpYoutubeTitle')}
                                 body={t('helpYoutubeBody')}
                             />
@@ -1421,15 +1056,6 @@ export function ScreenerDashboard() {
                                 <StageLine label="6-7" text={t('reverseStage67')} />
                                 <StageLine label="8" text={t('reverseStage8')} />
                                 <StageLine label="9" text={t('reverseStage9')} />
-                            </div>
-                        </div>
-
-                        <div className="mt-6 border border-rule-24 bg-white/5] p-5">
-                            <h3 className="text-lg font-extrabold text-ink-2">{t('paradigmSignalTitle')}</h3>
-                            <div className="mt-3 grid gap-3 text-base leading-relaxed text-ink-2 md:grid-cols-3">
-                                <HelpPillar title={t('paradigmMembershipTitle')} text={t('paradigmMembershipText')} />
-                                <HelpPillar title={t('paradigmMomentumTitle')} text={t('paradigmMomentumText')} />
-                                <HelpPillar title={t('paradigmEconomicsTitle')} text={t('paradigmEconomicsText')} />
                             </div>
                         </div>
 
@@ -1489,36 +1115,11 @@ function StageLine({ label, text }: { label: string; text: string }) {
     );
 }
 
-function HelpPillar({ title, text }: { title: string; text: string }) {
-    return (
-        <div className="border border-rule-24 bg-page p-3">
-            <h4 className="font-extrabold text-ink-2">{title}</h4>
-            <p className="mt-1">{text}</p>
-        </div>
-    );
-}
-
 function SummaryMetric({ label, value }: { label: string; value: string | number }) {
     return (
         <div className="border border-rule-10 bg-white/5 px-3 py-2">
             <div className="text-xs font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
             <div className="mt-0.5 truncate font-mono text-base font-extrabold text-ink" title={String(value)}>{value}</div>
-        </div>
-    );
-}
-
-function ParadigmMonitorStat({ label, value, tone }: { label: string; value: number; tone: "purple" | "green" | "red" | "blue" | "muted" }) {
-    return (
-        <div className={clsx(
-            " border px-3 py-2",
-            tone === "purple" && "border-rule-24 bg-white/5 text-ink-2",
-            tone === "green" && "border-pos/40 bg-pos/10 text-pos",
-            tone === "red" && "border-neg/40 bg-neg/10 text-neg",
-            tone === "blue" && "border-accent/40 bg-accent/10 text-accent",
-            tone === "muted" && "border-rule-10 bg-white/5 text-ink"
-        )}>
-            <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-2">{label}</div>
-            <div className="mt-0.5 font-mono text-base font-extrabold">{value.toLocaleString()}</div>
         </div>
     );
 }
@@ -1610,8 +1211,7 @@ function ResultsTable({
                         <tr className="border-b border-rule-10">
                             <TableHead>Stock</TableHead>
                             <TableHead>Sector / Industry</TableHead>
-                            <TableHead>Paradigm</TableHead>
-                            <TableHead>{screenMode === 'reverse' ? 'Reverse' : screenMode === 'paradigm' ? 'Paradigm Lens' : screenMode === 'youtube' ? 'YouTube' : '100-Bagger'}</TableHead>
+                            <TableHead>{screenMode === 'reverse' ? 'Reverse' : screenMode === 'youtube' ? 'YouTube' : '100-Bagger'}</TableHead>
                             <TableHead>Other Signals</TableHead>
                             <TableHead className="text-right">Price</TableHead>
                             <TableHead className="text-right">Market Cap</TableHead>
@@ -1623,7 +1223,6 @@ function ResultsTable({
                             const c = result.candidate as any;
                             const symbol = c.symbol || '';
                             const ticker = market === 'US' ? symbol.split('.')[0] : symbol;
-                            const paradigm = result.paradigm;
                             const reverse = result.reverse;
                             const youtube = youtubeEvaluations.get(symbol);
                             const hasYoutube = !!(youtube && youtube.matchedStrategies.length > 0);
@@ -1656,20 +1255,6 @@ function ResultsTable({
                                         <div className="max-w-[260px] truncate text-base font-semibold text-ink-2" title={`${c.sector || 'Unknown'} / ${c.industry || result.industry || 'Unknown'}`}>
                                             {c.sector || 'Unknown'} / {c.industry || result.industry || 'Unknown'}
                                         </div>
-                                    </td>
-                                    <td className="px-4 py-4 align-middle">
-                                        {paradigm?.pdm_themes?.length ? (
-                                            <div className="flex min-w-0 flex-col gap-1">
-                                                <TableBadge tone={paradigm.pdm_band === 'high' ? 'success' : paradigm.pdm_band === 'mid' ? 'primary' : paradigm.pdm_band === 'watch' ? 'warning' : 'muted'}>
-                                                    {paradigm.pdm_band?.toUpperCase() || 'THEME'}
-                                                </TableBadge>
-                                                <span className="max-w-[220px] truncate text-base font-mono text-ink-2" title={paradigm.pdm_themes.join(', ')}>
-                                                    {paradigm.pdm_theme_primary || paradigm.pdm_themes[0]}
-                                                </span>
-                                            </div>
-                                        ) : (
-                                            <span className="text-base text-ink-2">No theme</span>
-                                        )}
                                     </td>
                                     <td className="px-4 py-4 align-middle">
                                         <div className="flex min-w-[160px] flex-col gap-1">
@@ -1732,12 +1317,6 @@ function getActiveTableMetric(result: ScreeningResult, screenMode: ScreenMode, y
             value: result.reverse?.rev_composite != null ? String(Math.round(result.reverse.rev_composite)) : 'n/a',
         };
     }
-    if (screenMode === 'paradigm') {
-        return {
-            label: result.paradigm?.pdm_theme_primary || result.paradigm?.pdm_band || 'Paradigm',
-            value: result.paradigm?.pdm_signal != null ? String(Math.round(result.paradigm.pdm_signal)) : 'n/a',
-        };
-    }
     if (screenMode === 'youtube') {
         return {
             label: youtube?.matchedStrategies[0] || 'Video signal',
@@ -1752,7 +1331,6 @@ function getActiveTableMetric(result: ScreeningResult, screenMode: ScreenMode, y
 
 function getTableLensMeta(screenMode: ScreenMode): { label: string; shortLabel: string; tone: 'success' | 'warning' | 'primary' | 'muted' } {
     if (screenMode === 'reverse') return { label: 'Reverse Engine', shortLabel: 'REV', tone: 'success' };
-    if (screenMode === 'paradigm') return { label: 'Paradigm Lens', shortLabel: 'PDM', tone: 'primary' };
     if (screenMode === 'youtube') return { label: 'YouTube Strategy', shortLabel: 'YT', tone: 'warning' };
     return { label: '100-Bagger', shortLabel: '100B', tone: 'primary' };
 }
@@ -1779,11 +1357,10 @@ function TableBadge({ children, tone }: { children: ReactNode; tone: 'success' |
     );
 }
 
-function SubCard({ label, value, detail, active, tone, onClick }: { label: string; value: string | number; detail: string; active: boolean; tone: 'sky' | 'emerald' | 'purple' | 'red'; onClick?: () => void }) {
+function SubCard({ label, value, detail, active, tone, onClick }: { label: string; value: string | number; detail: string; active: boolean; tone: 'sky' | 'emerald' | 'red'; onClick?: () => void }) {
     const toneClass = {
         sky: active ? "border-accent/40 bg-accent/10 text-accent" : "hover:border-accent/40",
         emerald: active ? "border-pos/40 bg-pos/10 text-pos" : "hover:border-pos/40",
-        purple: active ? "border-rule-24 bg-white/5 text-ink-2" : "hover:border-rule-24",
         red: active ? "border-neg/40 bg-neg/10 text-neg" : "hover:border-neg/40",
     }[tone];
 

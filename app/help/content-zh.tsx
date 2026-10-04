@@ -405,7 +405,7 @@ export function ChineseHelpBody() {
             {/* 舊版鏡頭 */}
             <Section id="lenses" title="舊版鏡頭 — 保留供參考的舊篩選" icon={<BookOpen className="h-5 w-5" />}>
                 <p>
-                    <b>Lenses</b> 按鈕會開啟舊篩選：百倍股（100-bagger）篩選、Reverse、Paradigm 與 YouTube。它們只是
+                    <b>Lenses</b> 按鈕會開啟舊篩選：百倍股（100-bagger）篩選、Reverse 與 YouTube。它們只是
                     保留供參考。它們<b>不是</b>現行系統，研究台上沒有任何東西是用它們建立的。
                 </p>
             </Section>

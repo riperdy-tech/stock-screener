@@ -41,7 +41,7 @@ DATA = ROOT / "public" / "data"
 
 sys.path.append(str(Path(__file__).resolve().parent))
 from industry_taxonomy import get_taxonomy_profile, normalize_industry
-from score_paradigm import compute_skip_month_return, compute_high_proximity
+from momentum_math import compute_skip_month_return, compute_high_proximity
 from hygiene_thresholds import (
     MIN_MARKET_CAP, MIN_SHARE_PRICE, MIN_ADV_DOLLAR, LARGE_CAP_FLAG_ONLY_USD,
     resolve_adv_usd, ADV_ENFORCE, load_adv_enforce, resolve_market_cap
@@ -188,7 +188,7 @@ def compute_monthly_trend_ok(
     """B3 (PHASE_3_APPROVAL.md): when a Door-3 candidate's `fct_momentum_state` carries no
     `mom_break` (no daily series to compute it), `door3_eligibility` falls back to this monthly
     trend test instead of treating the absence as a pass. Uses the same monthly-close window as
-    `compute_trend_continuity` / `score_paradigm.compute_skip_month_return`: closes[-13:-1], the
+    `compute_trend_continuity` / `momentum_math.compute_skip_month_return`: closes[-13:-1], the
     12 monthly closes preceding the current (skipped) month.
 
     Not ok when `regime_shift_down` is true, OR the latest of those monthly closes is below the
@@ -216,7 +216,7 @@ def compute_trend_continuity(
     mom_12_1: Optional[float],
 ) -> Dict[str, Optional[int]]:
     """P3.14b: trend-continuity metrics for Door 3, from the same monthly-close window
-    score_paradigm.compute_skip_month_return uses for 12-1 momentum — prices[-13] .. prices[-2],
+    momentum_math.compute_skip_month_return uses for 12-1 momentum — prices[-13] .. prices[-2],
     the 11 monthly returns spanning t-12 .. t-2 (closes[-13:-1], 12 closes -> 11 consecutive
     monthly returns).
 
@@ -1468,7 +1468,7 @@ def main():
                     t_mom["high_52w_proxy"] = round(prox - 1.0, 4)
                     t_flags.append("momentum_proxy_monthly")
         # P3.14b: trend-continuity, from price_history's own monthly closes — the same window
-        # score_paradigm uses for 12-1 — regardless of momentum_source, since momentum_state.json
+        # momentum_math uses for 12-1 — regardless of momentum_source, since momentum_state.json
         # does not carry the underlying monthly closes (PHASE_3_ADDENDUM.md P3.14b).
         trend = compute_trend_continuity(prices.get(t), t_mom.get("mom_12_1"))
         t_mom["jump_share"] = trend["jump_share"]
