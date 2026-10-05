@@ -221,7 +221,7 @@ export interface ClosedTrade {
 }
 
 /** Exits that kept running without us — the postmortem strip. */
-export function soldTooEarly(ledgers: any, books = ['rn_depth', 'equal']): ClosedTrade[] {
+export function soldTooEarly(ledgers: any, books = ['rn_depth', 'equal']): ClosedTrade[] {  // eslint-disable-line @typescript-eslint/no-explicit-any -- raw paper_ledgers.json
     const L = ledgers?.ledgers;
     if (!L) return [];
     const out: ClosedTrade[] = [];

@@ -180,7 +180,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
 export interface DeskStatus {
     factor: FactorScoresPayload | null;
     depth: DepthOverlayPayload | null;
-    ledgers: any | null;
+    ledgers: any | null;  // eslint-disable-line @typescript-eslint/no-explicit-any -- raw paper_ledgers.json
     manifest: ChainManifest | null;
     regime: MriRegime | null;
     anchor: MriCostOfCapital | null;
@@ -225,8 +225,8 @@ export function useDeskStatus(): DeskStatus {
  * depth_outcomes.json for the Track record scoreboard. Shares the module cache, so only the track
  * page fetches it; a failure leaves it null and the page says so instead of showing zeros.
  */
-export function useDepthOutcomes(): { outcomes: any | null; loaded: boolean } {
-    const [state, setState] = useState<{ outcomes: any | null; loaded: boolean }>({ outcomes: null, loaded: false });
+export function useDepthOutcomes(): { outcomes: any | null; loaded: boolean } {  // eslint-disable-line @typescript-eslint/no-explicit-any -- raw depth_outcomes.json
+    const [state, setState] = useState<{ outcomes: any | null; loaded: boolean }>({ outcomes: null, loaded: false });  // eslint-disable-line @typescript-eslint/no-explicit-any -- raw depth_outcomes.json
     useEffect(() => {
         let alive = true;
         const run = () => {
