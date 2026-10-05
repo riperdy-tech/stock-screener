@@ -116,13 +116,13 @@ function Stats({ row, d, blocked }: { row: DeskRow; d: DeskVerdict; blocked: boo
     return (
         <section className="mt-6 min-w-0">
             <div className="grid grid-cols-2 gap-x-4 gap-y-4 border-y border-rule-14 py-3.5 sm:grid-cols-4">
-                {cell(t('statMedianIv').toLowerCase(), money(d.median_iv),
+                {cell(t('pgStatMedian'), money(d.median_iv),
                     mos == null ? DASH : <span style={{ color: mos > 0 ? TONE_COLORS.POS : mos < 0 ? TONE_COLORS.NEG : undefined }}>{fill(t('xMosVs'), { x: signedPct(mos, 0) })}</span>)}
-                {cell(t('statRunSpread').toLowerCase(), d.spread_pct != null ? `${d.spread_pct.toFixed(1)} %` : DASH,
+                {cell(t('pgStatSpread'), d.spread_pct != null ? `${d.spread_pct.toFixed(1)} %` : DASH,
                     d.spread_pct == null ? t('pgOneRunShort') : DASH)}
-                {cell(t('statSizeHint').toLowerCase(), d.size_hint ? size.label : DASH,
+                {cell(t('pgStatSize'), d.size_hint ? size.label : DASH,
                     single ? t('xCapped') : DASH, d.size_hint ? (blocked ? TONE_COLORS.MUTED : size.color) : undefined)}
-                {cell(t('statPlausible').toLowerCase(), fill(t('pgNofM'), { n: d.n_basis ?? DASH, m: d.samples_run ?? DASH }),
+                {cell(t('pgStatUsable'), fill(t('pgNofM'), { n: d.n_basis ?? DASH, m: d.samples_run ?? DASH }),
                     d.converged == null ? DASH : t(d.converged ? 'pgConverged' : 'pgNotConverged'))}
             </div>
             <Grid className="mt-4">
@@ -196,8 +196,9 @@ function ProveWrong({ d }: { d: DeskVerdict }) {
                             <div key={i} className="grid grid-cols-2 gap-x-3 gap-y-1 border-b border-rule-10 py-2 text-[12px] sm:grid-cols-[minmax(0,1.2fr)_90px_minmax(0,1.3fr)_minmax(0,0.9fr)]">
                                 <span className="min-w-0 break-words text-ink">{v.metricMono ? <span className="font-mono">{v.metric}</span> : v.metric}</span>
                                 <span className="min-w-0 break-words font-mono text-ink">{r.comparator ?? DASH} {v.threshold}</span>
-                                <span className="min-w-0 break-words text-ink-2">{v.window ?? DASH}</span>
+                                <span className="min-w-0 break-words text-ink-2"><span className="text-off sm:hidden">{t('pgColWindow')}: </span>{v.window ?? DASH}</span>
                                 <span className={clsx('min-w-0 break-words font-mono', check?.breached ? 'font-semibold text-warn' : 'text-ink-2')}>
+                                    <span className="font-sans text-off sm:hidden">{t('pgColNow')}: </span>
                                     {cur == null ? t('pgUnknownNow') : `${ruleValueText(r.metric, cur)}${check?.breached ? ` ✕ ${t('pgBreached')}` : ''}`}
                                 </span>
                             </div>

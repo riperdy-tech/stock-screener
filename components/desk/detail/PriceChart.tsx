@@ -79,7 +79,7 @@ export function PriceChart({ ticker, d, blocked }: { ticker: string; d: DeskVerd
                 {lo != null && hi != null && (
                     <>
                         <span aria-hidden className="mr-1 inline-block align-middle" style={{ width: 10, height: 7, background: blocked ? 'var(--track-18)' : heroFill(d?.direction), border: `1px solid ${color}` }} />
-                        {fill(t('pgBandLegend'), { range: lo === hi ? heroMoney(lo) : `${heroMoney(lo)}–${heroMoney(hi).slice(1)}` })}
+                        {fill(t('pgBandLegend'), { range: lo === hi ? `$${lo.toFixed(2)}` : `${heroMoney(lo)}–${heroMoney(hi).slice(1)}` })}
                     </>
                 )}
                 {geo.verdictX != null && d?.date && <> {'·'} {fill(t('pgVerdictLegend'), { date: d.date })}</>}

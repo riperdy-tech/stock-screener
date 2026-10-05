@@ -54,15 +54,16 @@ export function BandHero({ d, runIvs, live, atVerdict, blocked }: {
     const sfLowAt = at(g.streetLow);
     const sfHighAt = at(g.streetHigh);
 
-    // Bear/bull labels face inward (toward each other) unless the two lines are close, then outward.
-    const close = bearAt != null && bullAt != null && Math.abs(bearAt - bullAt) < 22;
+    // Bear/bull labels face inward (toward each other). When the two lines are too close for both
+    // labels to fit between them (a phone-width track), the right-hand label drops to a second row.
+    const close = bearAt != null && bullAt != null && Math.abs(bearAt - bullAt) < 46;
     const bearLeft = bearAt != null && bullAt != null ? bearAt <= bullAt : true;
-    const bearFacesRight = close ? !bearLeft : bearLeft;
-    const bullFacesRight = close ? bearLeft : !bearLeft;
-    const sideLabel = (pos: number, facesRight: boolean, text: string, c: string) => (
+    const bearFacesRight = bearLeft;
+    const bullFacesRight = !bearLeft;
+    const sideLabel = (pos: number, facesRight: boolean, text: string, c: string, row: number) => (
         <span
             className="absolute whitespace-nowrap font-mono text-[11px]"
-            style={{ left: `${pos}%`, top: TRACK_TOP + 2, color: c, transform: facesRight ? 'translateX(4px)' : 'translateX(calc(-100% - 4px))' }}
+            style={{ left: `${pos}%`, top: TRACK_TOP + 2 + row * 16, color: c, transform: facesRight ? 'translateX(4px)' : 'translateX(calc(-100% - 4px))' }}
         >
             {text}
         </span>
@@ -116,13 +117,13 @@ export function BandHero({ d, runIvs, live, atVerdict, blocked }: {
                 {bearAt != null && (
                     <>
                         <span className="absolute" style={{ left: `${bearAt}%`, top: TRACK_TOP, height: TRACK_H, borderLeft: '1px dashed var(--neg)' }} />
-                        {sideLabel(bearAt, bearFacesRight, fill(t('hrBear'), { v: d.bear_iv!.toFixed(2) }), 'var(--neg)')}
+                        {sideLabel(bearAt, bearFacesRight, fill(t('hrBear'), { v: d.bear_iv!.toFixed(2) }), 'var(--neg)', close && !bearLeft ? 1 : 0)}
                     </>
                 )}
                 {bullAt != null && (
                     <>
                         <span className="absolute" style={{ left: `${bullAt}%`, top: TRACK_TOP, height: TRACK_H, borderLeft: '1px dashed var(--pos)' }} />
-                        {sideLabel(bullAt, bullFacesRight, fill(t('hrBull'), { v: d.bull_iv!.toFixed(2) }), 'var(--pos)')}
+                        {sideLabel(bullAt, bullFacesRight, fill(t('hrBull'), { v: d.bull_iv!.toFixed(2) }), 'var(--pos)', close && bearLeft ? 1 : 0)}
                     </>
                 )}
 
