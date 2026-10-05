@@ -271,14 +271,14 @@ sup {
 
 /* Desk table (components/desk/rankings/DeskTable.tsx). The 11-column grid of handoff 5.1e; the
    company column takes the slack. Narrower screens drop timing, then pct, then Q M R V G (README 7).
-   Below 640px each row is a stacked card instead (.dk-wide is hidden, .dk-card shown). The column
+   Below 640px each row is a stacked card instead (the sm: classes in DeskTable.tsx). The column
    templates must list exactly the columns each tier shows, because a hidden cell takes no track. */
 .dk-grid {
     display: grid;
     align-items: center;
-    column-gap: 10px;
+    column-gap: 8px;
     /* company price verdict band mos size door chevron */
-    grid-template-columns: minmax(100px, 1fr) 64px 96px 110px 50px 56px 104px 16px;
+    grid-template-columns: minmax(70px, 1fr) 56px 84px minmax(64px, 110px) 46px 52px 92px 14px;
 }
 .dk-timing, .dk-pct, .dk-pillars { display: none; }
 .dk-span-ai { grid-column: span 4; }
@@ -292,18 +292,18 @@ sup {
     .dk-pillars { display: block; }
     .dk-span-sc { grid-column: span 2; }
 }
-@media (min-width: 970px) {
+@media (min-width: 980px) {
     .dk-grid {
         /* + pct */
-        grid-template-columns: minmax(100px, 1fr) 70px 104px 120px 54px 62px 120px 54px 76px 16px;
+        grid-template-columns: minmax(100px, 1fr) 70px 104px 120px 54px 62px 120px 62px 76px 16px;
     }
-    .dk-pct { display: block; }
+    .dk-pct { display: block; white-space: nowrap; }
     .dk-span-sc { grid-column: span 3; }
 }
-@media (min-width: 1050px) {
+@media (min-width: 1060px) {
     .dk-grid {
         /* + timing: the full spec grid */
-        grid-template-columns: minmax(100px, 1fr) 70px 104px 120px 54px 62px 70px 120px 54px 76px 16px;
+        grid-template-columns: minmax(100px, 1fr) 70px 104px 120px 54px 62px 70px 120px 62px 76px 16px;
     }
     .dk-timing { display: block; }
     .dk-span-ai { grid-column: span 5; }

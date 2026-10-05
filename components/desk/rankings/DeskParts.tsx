@@ -87,7 +87,7 @@ const WORD_COLOR: Record<VerdictWord, string> = {
 export function VerdictWordText({ word }: { word: VerdictWord | null }) {
     const { t } = useLanguage();
     if (!word) return <span className="font-mono text-[11px] text-off">{'—'}</span>;
-    return <span className="font-mono text-[11px] font-semibold" style={{ color: WORD_COLOR[word] }}>{t(WORD_KEY[word])}</span>;
+    return <span className="font-mono text-[12px] font-semibold" style={{ color: WORD_COLOR[word] }}>{t(WORD_KEY[word])}</span>;
 }
 
 export const verdictWordKey = (w: VerdictWord) => WORD_KEY[w];

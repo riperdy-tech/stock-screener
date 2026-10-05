@@ -120,7 +120,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
 
             {/* b/c. Funnel and the selected step's panel */}
             <div className="mt-3">
-                <FunnelRow counts={counts} phase={phase} held={held} step={step} onStep={setStep} />
+                <FunnelRow counts={counts} ready={factor != null} phase={phase} held={held} step={step} onStep={setStep} />
                 <FunnelPanel rows={rows} factor={factor} counts={counts} step={step} how={how} onToggle={toggleHow} />
             </div>
 
@@ -181,6 +181,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                 actionableCount={n}
                 queued={counts.queued}
                 filtering={active}
+                loaded={factor != null}
             />
 
             {/* g. Hidden-legacy line (phases A and B) */}

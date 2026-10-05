@@ -52,8 +52,10 @@ function StepButton({ n, label, drop, selected, onSelect }: {
     );
 }
 
-export function FunnelRow({ counts, phase, held, step, onStep }: {
+export function FunnelRow({ counts, ready, phase, held, step, onStep }: {
     counts: FunnelCounts;
+    /** False while factor_scores.json is still loading: every number then reads "—", never a false 0. */
+    ready: boolean;
     phase: DeskPhase | null;
     /** rn_depth open positions; shown under step 5 in phase C only. */
     held: number | null;
@@ -66,8 +68,8 @@ export function FunnelRow({ counts, phase, held, step, onStep }: {
         { s: 1, n: counts.universe, label: t('fnUs'), drop: null },
         { s: 2, n: counts.scored, label: t('fnSafe'), drop: counts.vetoed != null ? fill(t('fnVetoed'), { n: num(counts.vetoed) }) : null },
         { s: 3, n: counts.list, label: t('fnList'), drop: counts.noDoor != null ? fill(t('fnNoDoor'), { n: num(counts.noDoor) }) : null },
-        { s: 4, n: counts.verdicts, label: t('fnVerdicts'), drop: d4 === 'notLive' ? t('fsAnalystNotLive') : d4 ? fill(t('fnQueued'), { n: num(d4.queued) }) : null },
-        { s: 5, n: counts.actionable, label: t('fnGate'), drop: phase === 'C' && held != null ? fill(t('fnHeld'), { n: num(held) }) : null },
+        { s: 4, n: ready ? counts.verdicts : null, label: t('fnVerdicts'), drop: d4 === 'notLive' ? t('fsAnalystNotLive') : d4 ? fill(t('fnQueued'), { n: num(d4.queued) }) : null },
+        { s: 5, n: ready ? counts.actionable : null, label: t('fnGate'), drop: phase === 'C' && held != null ? fill(t('fnHeld'), { n: num(held) }) : null },
     ];
     return (
         <ol className="grid grid-cols-2 items-start gap-y-1 border-b border-rule-10 pb-2 sm:grid-cols-3 min-[900px]:flex min-[900px]:flex-wrap min-[900px]:items-start">

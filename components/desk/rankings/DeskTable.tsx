@@ -20,6 +20,7 @@ import {
 } from '@/lib/desk/rowText';
 import { vetoCodeOf, vetoFallback, vetoKey } from '@/lib/desk/veto';
 import { DATA_NOTES, FORENSIC_WARNINGS, gapColor, gateReasonsText, sizeTone, TONE_COLORS } from '@/lib/desk/tone';
+import { Skel } from '../primitives';
 import { BandStrip } from './cells';
 import { DoorMark, PillarBars, PillarHeader, VerdictWordText } from './DeskParts';
 
@@ -111,7 +112,8 @@ function DeskRowView({ r, open, onToggle }: { r: DeskRow; open: boolean; onToggl
                 className={clsx('cursor-pointer py-2', !open && 'hover:bg-hover')}
             >
                 {/* Wide: the grid */}
-                <div className="dk-grid hidden sm:grid">
+                <div className="hidden sm:block">
+                  <div className="dk-grid">
                     <Company r={r} />
                     <span className="font-mono text-[12px] text-ink">{price != null ? `$${price.toFixed(2)}` : DASH}</span>
                     <VerdictWordText word={word} />
@@ -126,6 +128,7 @@ function DeskRowView({ r, open, onToggle }: { r: DeskRow; open: boolean; onToggl
                     <span className="dk-pct font-mono text-[11px] text-ink-2">{pct ?? DASH}</span>
                     <span className="dk-pillars"><PillarBars z={r.fct.fct_z} /></span>
                     <span aria-hidden className="font-mono text-[11px] text-ink-2">{open ? '▴' : '▾'}</span>
+                  </div>
                 </div>
 
                 {/* Narrow: a stacked card */}
@@ -299,7 +302,7 @@ function DisqualifiedRow({ r }: { r: DeskRow }) {
     );
 }
 
-export function DeskTable({ sections, phase, actionableCount, queued, filtering }: {
+export function DeskTable({ sections, phase, actionableCount, queued, filtering, loaded }: {
     sections: DeskSections;
     phase: 'A' | 'B' | 'C' | null;
     actionableCount: number;
@@ -307,6 +310,8 @@ export function DeskTable({ sections, phase, actionableCount, queued, filtering 
     queued: number | null;
     /** A filter is active: Awaiting then lists every match instead of the first five. */
     filtering: boolean;
+    /** False while the data is still loading: Research now then shows skeleton rows, not the empty-state copy. */
+    loaded: boolean;
 }) {
     const { t } = useLanguage();
     const [open, setOpen] = useState<Set<string>>(new Set());
@@ -363,7 +368,9 @@ export function DeskTable({ sections, phase, actionableCount, queued, filtering 
 
             <section>
                 <SectionHeader title={t('dsRn')} sub={t('dsRnSub')} count={researchNow.length} />
-                {researchNow.length === 0
+                {!loaded
+                    ? <div className="space-y-3 py-4" aria-busy="true"><Skel className="h-4 w-full" /><Skel className="h-4 w-11/12" /><Skel className="h-4 w-10/12" /></div>
+                    : researchNow.length === 0
                     ? <p className="my-3 border border-dashed border-rule-24 px-3.5 py-3 text-[13px] text-ink-2">{emptyRn}</p>
                     : researchNow.map((r) => <DeskRowView key={r.ticker} r={r} open={open.has(r.ticker)} onToggle={() => toggle(r.ticker)} />)}
             </section>
