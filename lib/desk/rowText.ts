@@ -16,6 +16,7 @@ export function livePrice(r: DeskRow): number | null {
 export function topPct(percentile: number | null | undefined): string | null {
     if (percentile == null || !Number.isFinite(percentile)) return null;
     const top = Math.max(0, 100 - percentile);
+    if (top < 0.05) return 'top <0.1 %'; // a percentile of 100 is the best in the universe, never "top 0.0 %"
     return `top ${top < 10 ? top.toFixed(1) : Math.round(top)} %`;
 }
 

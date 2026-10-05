@@ -25,7 +25,7 @@ export function DoorMark({ door }: { door: DoorKind | null }) {
     );
 }
 
-/** Five 7 x 22px bars on the track, centred at 50 %; a missing pillar is a dashed outline. */
+/** Five 7 x 22px bars on the track, centred at 50 %; a missing pillar is an empty track (no outline, so it reads as part of the same set). */
 export function PillarBars({ z }: { z: FactorEntry['fct_z'] | undefined }) {
     const label = PILLARS.map((p) => `${p.letter} ${signedNum(z?.[p.key], 1)}`).join(', ');
     return (
@@ -37,7 +37,7 @@ export function PillarBars({ z }: { z: FactorEntry['fct_z'] | undefined }) {
                         key={p.key}
                         aria-hidden
                         className="relative block bg-track-12"
-                        style={{ width: 7, height: 22, outline: bar ? undefined : '1px dashed var(--off)', outlineOffset: -1, background: bar ? undefined : 'transparent' }}
+                        style={{ width: 7, height: 22 }}
                     >
                         {bar && (
                             <span

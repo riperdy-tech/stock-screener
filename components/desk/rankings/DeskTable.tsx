@@ -287,6 +287,35 @@ function SectionHeader({ title, sub, count }: { title: string; sub: string; coun
     );
 }
 
+/** Group headers and column headers, repeated under every section header so they sit next to the rows
+ *  they label. Wide screens only (cards carry their own labels). */
+function ColumnHeaders() {
+    const { t } = useLanguage();
+    return (
+        <div className="hidden sm:block" role="presentation">
+            <div className="dk-grid pt-1 font-mono text-[11px] text-off">
+                <span />
+                <span className="border-b border-ink pb-0.5 whitespace-nowrap">{t('grpMarket')}</span>
+                <span className="dk-span-ai border-b border-ink pb-0.5 whitespace-nowrap">{t('grpAi')}</span>
+                <span className="dk-span-sc border-b border-ink pb-0.5 whitespace-nowrap">{t('grpScreener')}</span>
+            </div>
+            <div className="dk-grid border-b border-rule-18 pb-1.5 pt-1.5 font-mono text-[11px] text-off">
+                <span className="whitespace-nowrap">{t('colCompany')}</span>
+                <span className="whitespace-nowrap">{t('dkColPrice')}</span>
+                <span className="whitespace-nowrap">{t('dkColVerdict')}</span>
+                <span className="whitespace-nowrap">{t('colIvBand')}</span>
+                <span className="whitespace-nowrap">{t('colMos')}</span>
+                <span className="whitespace-nowrap">{t('colSize')}</span>
+                <span className="dk-timing whitespace-nowrap">{t('colTiming')}</span>
+                <span className="whitespace-nowrap">{t('colDoor')}</span>
+                <span className="dk-pct whitespace-nowrap">{t('colPct')}</span>
+                <span className="dk-pillars"><PillarHeader /></span>
+                <span />
+            </div>
+        </div>
+    );
+}
+
 function DisqualifiedRow({ r }: { r: DeskRow }) {
     const { t } = useLanguage();
     const code = vetoCodeOf({ fct_veto: r.fct.fct_veto, fct_llm_veto: (r.fct as { fct_llm_veto?: string | null }).fct_llm_veto });
@@ -337,42 +366,20 @@ export function DeskTable({ sections, phase, actionableCount, queued, filtering,
     const block = (title: string, sub: string, rows: DeskRow[], list: DeskRow[] = rows) => (
         <section key={title}>
             <SectionHeader title={title} sub={sub} count={rows.length} />
+            <ColumnHeaders />
             {list.map((r) => <DeskRowView key={r.ticker} r={r} open={open.has(r.ticker)} onToggle={() => toggle(r.ticker)} />)}
         </section>
     );
 
     return (
         <div>
-            {/* Group headers and column headers: wide screens only (cards carry their own labels). */}
-            <div className="hidden sm:block" role="presentation">
-                <div className="dk-grid pt-2 font-mono text-[11px] text-off">
-                    <span />
-                    <span className="border-b border-ink pb-0.5 whitespace-nowrap">{t('grpMarket')}</span>
-                    <span className="dk-span-ai border-b border-ink pb-0.5 whitespace-nowrap">{t('grpAi')}</span>
-                    <span className="dk-span-sc border-b border-ink pb-0.5 whitespace-nowrap">{t('grpScreener')}</span>
-                </div>
-                <div className="dk-grid pb-2 pt-1.5 font-mono text-[11px] text-off">
-                    <span className="whitespace-nowrap">{t('colCompany')}</span>
-                    <span className="whitespace-nowrap">{t('dkColPrice')}</span>
-                    <span className="whitespace-nowrap">{t('dkColVerdict')}</span>
-                    <span className="whitespace-nowrap">{t('colIvBand')}</span>
-                    <span className="whitespace-nowrap">{t('colMos')}</span>
-                    <span className="whitespace-nowrap">{t('colSize')}</span>
-                    <span className="dk-timing whitespace-nowrap">{t('colTiming')}</span>
-                    <span className="whitespace-nowrap">{t('colDoor')}</span>
-                    <span className="dk-pct whitespace-nowrap">{t('colPct')}</span>
-                    <span className="dk-pillars"><PillarHeader /></span>
-                    <span />
-                </div>
-            </div>
-
             <section>
                 <SectionHeader title={t('dsRn')} sub={t('dsRnSub')} count={researchNow.length} />
                 {!loaded
                     ? <div className="space-y-3 py-4" aria-busy="true"><Skel className="h-4 w-full" /><Skel className="h-4 w-11/12" /><Skel className="h-4 w-10/12" /></div>
                     : researchNow.length === 0
                     ? <p className="my-3 border border-dashed border-rule-24 px-3.5 py-3 text-[13px] text-ink-2">{emptyRn}</p>
-                    : researchNow.map((r) => <DeskRowView key={r.ticker} r={r} open={open.has(r.ticker)} onToggle={() => toggle(r.ticker)} />)}
+                    : <><ColumnHeaders />{researchNow.map((r) => <DeskRowView key={r.ticker} r={r} open={open.has(r.ticker)} onToggle={() => toggle(r.ticker)} />)}</>}
             </section>
 
             {waiting.length > 0 && block(t('dsWait'), t('dsWaitSub'), waiting)}
@@ -382,6 +389,7 @@ export function DeskTable({ sections, phase, actionableCount, queued, filtering,
             {awaiting.length > 0 && (
                 <section>
                     <SectionHeader title={t('dsAwaiting')} sub={t('dsAwaitingSub')} count={awaiting.length} />
+                    <ColumnHeaders />
                     {awaitingRows.map((r) => <DeskRowView key={r.ticker} r={r} open={open.has(r.ticker)} onToggle={() => toggle(r.ticker)} />)}
                     {awaitingRows.length < awaiting.length && (
                         <button type="button" onClick={() => setAllAwaiting(true)} className="py-3 font-mono text-[12px] text-accent hover:text-ink">
