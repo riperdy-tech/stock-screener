@@ -20,6 +20,7 @@ import {
 } from '@/lib/desk/rowText';
 import { vetoCodeOf, vetoFallback, vetoKey } from '@/lib/desk/veto';
 import { DATA_NOTES, FORENSIC_WARNINGS, gapColor, gateReasonsText, sizeTone, TONE_COLORS } from '@/lib/desk/tone';
+import { useStockHref } from '@/lib/desk/useStockHref';
 import { Skel } from '../primitives';
 import { BandStrip } from './cells';
 import { DoorMark, PillarBars, PillarHeader, VerdictWordText } from './DeskParts';
@@ -56,8 +57,6 @@ function timingText(t: T, v: DeskVerdict): { text: string; tone: 'warn' | 'muted
     }
 }
 
-const TONE_CLASS = { warn: 'text-warn', muted: 'text-off', plain: 'text-ink-2' } as const;
-
 /** Size label and colour. Only an undervalued verdict has a size to read; a blocked one is muted. */
 function sizeCell(v: DeskVerdict | undefined): { text: string; color: string } {
     if (!v || v.direction !== 'undervalued' || !v.size_hint) return { text: DASH, color: TONE_COLORS.MUTED };
@@ -76,15 +75,20 @@ const queueText = (t: T, r: DeskRow) =>
 // ── Row ─────────────────────────────────────────────────────────────────────
 
 function Company({ r }: { r: DeskRow }) {
-    const ind = r.info?.industry;
-    const sub = [r.info?.name, ind && ind !== 'Unknown' && ind !== DASH ? ind : null].filter(Boolean).join(' · ');
+    const name = r.info?.name;
     return (
         <span className="block min-w-0">
             <span className="block truncate text-[13.5px] font-semibold text-ink">{r.ticker}</span>
-            <span className="block truncate text-[11px] text-ink-2" title={sub || undefined}>{sub || DASH}</span>
+            <span className="block truncate text-[11px] text-ink-2" title={name || undefined}>{name || DASH}</span>
         </span>
     );
 }
+
+/** The industry text of a row, or null when it is not stored. */
+const industryOf = (r: DeskRow): string | null => {
+    const ind = r.info?.industry;
+    return ind && ind !== 'Unknown' && ind !== DASH ? ind : null;
+};
 
 function DeskRowView({ r, open, onToggle }: { r: DeskRow; open: boolean; onToggle: () => void }) {
     const { t } = useLanguage();
@@ -94,7 +98,7 @@ function DeskRowView({ r, open, onToggle }: { r: DeskRow; open: boolean; onToggl
     const blocked = !!v && v.actionable !== true;
     const mos = mosCell(r, v);
     const size = sizeCell(v);
-    const timing = v ? timingText(t, v) : { text: DASH, tone: 'plain' as const };
+    const industry = industryOf(r);
     const door = doorOf(r.fct.fct_nominated_doors);
     const pct = topPct(r.fct.fct_percentile);
     const sr = v ? bandSrText(t, v, price) : undefined;
@@ -115,6 +119,7 @@ function DeskRowView({ r, open, onToggle }: { r: DeskRow; open: boolean; onToggl
                 <div className="hidden sm:block">
                   <div className="dk-grid">
                     <Company r={r} />
+                    <span className="dk-ind block min-w-0 truncate text-[11px] text-off" title={industry ?? undefined}>{industry ?? DASH}</span>
                     <span className="font-mono text-[12px] text-ink">{price != null ? `$${price.toFixed(2)}` : DASH}</span>
                     <VerdictWordText word={word} />
                     <span className="block min-w-0">
@@ -123,7 +128,6 @@ function DeskRowView({ r, open, onToggle }: { r: DeskRow; open: boolean; onToggl
                     </span>
                     <span className="font-mono text-[12px]" style={{ color: mos.color }}>{mos.text}</span>
                     <span className="font-mono text-[11px] font-semibold" style={{ color: size.color }}>{size.text}</span>
-                    <span className={clsx('dk-timing font-mono text-[11px] leading-tight', TONE_CLASS[timing.tone])}>{timing.text}</span>
                     <DoorMark door={door} />
                     <span className="dk-pct font-mono text-[11px] text-ink-2">{pct ?? DASH}</span>
                     <span className="dk-pillars"><PillarBars z={r.fct.fct_z} /></span>
@@ -143,6 +147,8 @@ function DeskRowView({ r, open, onToggle }: { r: DeskRow; open: boolean; onToggl
                             <span aria-hidden className="text-[11px] text-ink-2">{open ? '▴' : '▾'}</span>
                         </span>
                     </div>
+                    <span className="mt-0.5 block truncate text-[11px] text-ink-2" title={r.info?.name || undefined}>{r.info?.name || DASH}</span>
+                    {industry && <span className="block truncate text-[11px] text-off" title={industry}>{industry}</span>}
                     <div className="mt-1.5">
                         <BandStrip d={v} price={price} muted={blocked} srText={sr} />
                         <span className="block font-mono text-[11px] text-ink-2">{bandLabel}</span>
@@ -208,6 +214,7 @@ function flagText(code: string): string {
 
 function RowExpand({ r, v }: { r: DeskRow; v: DeskVerdict | undefined }) {
     const { t } = useLanguage();
+    const stockLink = useStockHref();
     const door = doorOf(r.fct.fct_nominated_doors);
     const pct = topPct(r.fct.fct_percentile);
     const bandName = r.fct.fct_band === 'research_now' ? t('bandResearchNow') : r.fct.fct_band === 'watchlist' ? t('bandWatchlist') : (r.fct.fct_band ?? DASH);
@@ -265,7 +272,7 @@ function RowExpand({ r, v }: { r: DeskRow; v: DeskVerdict | undefined }) {
                     <Field label={t('xFlags')}>{flags.length ? flags.map(flagText).join(' · ') : t('xNone')}</Field>
                 </dl>
                 <Link
-                    href={`/t/${encodeURIComponent(r.ticker)}?from=ai`}
+                    href={stockLink(r.ticker)}
                     className="mt-3 inline-block text-[13px] text-accent hover:text-ink"
                 >
                     {t('xOpen')}
@@ -294,19 +301,19 @@ function ColumnHeaders() {
     return (
         <div className="hidden sm:block" role="presentation">
             <div className="dk-grid pt-1 font-mono text-[11px] text-off">
-                <span />
+                <span className="dk-span-co" />
                 <span className="border-b border-ink pb-0.5 whitespace-nowrap">{t('grpMarket')}</span>
                 <span className="dk-span-ai border-b border-ink pb-0.5 whitespace-nowrap">{t('grpAi')}</span>
                 <span className="dk-span-sc border-b border-ink pb-0.5 whitespace-nowrap">{t('grpScreener')}</span>
             </div>
             <div className="dk-grid border-b border-rule-18 pb-1.5 pt-1.5 font-mono text-[11px] text-off">
                 <span className="whitespace-nowrap">{t('colCompany')}</span>
+                <span className="dk-ind whitespace-nowrap">{t('colIndustry')}</span>
                 <span className="whitespace-nowrap">{t('dkColPrice')}</span>
                 <span className="whitespace-nowrap">{t('dkColVerdict')}</span>
                 <span className="whitespace-nowrap">{t('colIvBand')}</span>
                 <span className="whitespace-nowrap">{t('colMos')}</span>
                 <span className="whitespace-nowrap">{t('colSize')}</span>
-                <span className="dk-timing whitespace-nowrap">{t('colTiming')}</span>
                 <span className="whitespace-nowrap">{t('colDoor')}</span>
                 <span className="dk-pct whitespace-nowrap">{t('colPct')}</span>
                 <span className="dk-pillars"><PillarHeader /></span>
@@ -318,12 +325,13 @@ function ColumnHeaders() {
 
 function DisqualifiedRow({ r }: { r: DeskRow }) {
     const { t } = useLanguage();
+    const stockLink = useStockHref();
     const code = vetoCodeOf({ fct_veto: r.fct.fct_veto, fct_llm_veto: (r.fct as { fct_llm_veto?: string | null }).fct_llm_veto });
     const key = code ? vetoKey(code) : null;
     const reason = code ? (key ? t(key) : vetoFallback(code)) : DASH;
     return (
         <div className="border-b border-rule-10 py-2 opacity-70">
-            <Link href={`/t/${encodeURIComponent(r.ticker)}?from=ai`} className="grid grid-cols-[minmax(100px,200px)_minmax(0,1fr)] items-baseline gap-x-3 hover:bg-hover">
+            <Link href={stockLink(r.ticker)} className="grid grid-cols-[minmax(100px,200px)_minmax(0,1fr)] items-baseline gap-x-3 hover:bg-hover">
                 <Company r={r} />
                 <span className="text-[12px] text-ink-2">{fill(t('dsVetoed'), { reason })}</span>
             </Link>
