@@ -11,11 +11,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import {
-    fetchDepthOverlay, fetchFactorScores, fetchOverlaySignals,
+    fetchChainManifest, fetchDepthOverlay, fetchFactorScores, fetchMriCostOfCapital,
+    fetchMriRegime, fetchOverlaySignals,
     fetchPaperLedgers, fetchStocks,
     fetchValuationModels,
-    type DepthOverlayPayload, type DepthVerdict, type FactorScoresPayload,
-    type ValuationModel,
+    type ChainManifest, type DepthOverlayPayload, type DepthVerdict, type FactorScoresPayload,
+    type MriCostOfCapital, type MriRegime, type ValuationModel,
 } from '@/lib/data-service';
 
 export interface StockInfo {
@@ -62,12 +63,19 @@ export interface DeskData {
     depthMeta: { generated_at: string | null; count: number; actionable_count: number | null };
     ledgers: any | null;
     stockInfo: Record<string, StockInfo>;
+    /** Pipeline status files. Each is null when its file did not load; none blocks the page. */
+    manifest: ChainManifest | null;
+    regime: MriRegime | null;
+    anchor: MriCostOfCapital | null;
+    /** Newest per-row quote stamp in stocks.csv ("YYYY-MM-DD HH:mm"), null when none. */
+    pricesAsOf: string | null;
 }
 
 const EMPTY: DeskData = {
     factor: null, valuations: {}, overlay: {},
     depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null },
     ledgers: null, stockInfo: {},
+    manifest: null, regime: null, anchor: null, pricesAsOf: null,
 };
 
 // ── module-level promise cache ────────────────────────────────────────────
@@ -81,23 +89,43 @@ function cached<T>(key: string, loader: () => Promise<T>): Promise<T> {
     return p;
 }
 
+// Hooks that show derived status (the shell) re-read after an invalidation.
+const invalidationListeners = new Set<() => void>();
+
 /** Drop every cached payload so the next load hits the network. */
 export function invalidateDeskCache() {
     cache.clear();
+    invalidationListeners.forEach((fn) => fn());
 }
 
 /** 0 / NaN / undefined all mean "not stored" in the screener CSV. */
 const nz = (v: unknown): number | null =>
     typeof v === 'number' && Number.isFinite(v) && v !== 0 ? v : null;
 
+/** Newest `Last_Updated` stamp among the screener rows; the stamps share one sortable format. */
+function latestQuoteStamp(rows: { lastUpdated?: string }[] | undefined): string | null {
+    let latest: string | null = null;
+    for (const r of rows ?? []) {
+        if (r.lastUpdated && (latest === null || r.lastUpdated > latest)) latest = r.lastUpdated;
+    }
+    return latest;
+}
+
 async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> {
-    const [f, v, ov, pl, s, dp] = await Promise.all([
+    // The status files are optional context: a failure in one resolves to null and never rejects
+    // the bag, so the verdict list still renders.
+    const optional = <T,>(key: string, loader: () => Promise<T | null>) =>
+        cached(key, loader).catch(() => null as T | null);
+    const [f, v, ov, pl, s, dp, manifest, regime, anchor] = await Promise.all([
         cached('factor', fetchFactorScores),
         cached('valuations', fetchValuationModels),
         cached('overlay', fetchOverlaySignals),
         cached('ledgers', fetchPaperLedgers),
         cached('stocks', () => fetchStocks('US')),
         cached('depth', fetchDepthOverlay),
+        optional('manifest', fetchChainManifest),
+        optional('regime', fetchMriRegime),
+        optional('anchor', fetchMriCostOfCapital),
     ]);
 
     const stockInfo: Record<string, StockInfo> = {};
@@ -143,7 +171,54 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         },
         ledgers: pl,
         stockInfo,
+        manifest, regime, anchor,
+        pricesAsOf: latestQuoteStamp(s?.data as { lastUpdated?: string }[] | undefined),
     };
+}
+
+/** What the shell's freshness strip and health drawer read. Raw cached payloads, filled as each arrives. */
+export interface DeskStatus {
+    factor: FactorScoresPayload | null;
+    depth: DepthOverlayPayload | null;
+    ledgers: any | null;
+    manifest: ChainManifest | null;
+    regime: MriRegime | null;
+    anchor: MriCostOfCapital | null;
+    pricesAsOf: string | null;
+}
+
+const EMPTY_STATUS: DeskStatus = {
+    factor: null, depth: null, ledgers: null, manifest: null, regime: null, anchor: null, pricesAsOf: null,
+};
+
+/**
+ * Status for the shell, which renders on pages (like /ondemand) that do not use useDeskData. It
+ * shares the module-level cache with the bag, so on the desk and ticker pages it adds no fetches.
+ * Each file lands independently and a failure leaves that field null.
+ */
+export function useDeskStatus(): DeskStatus {
+    const [status, setStatus] = useState<DeskStatus>(EMPTY_STATUS);
+
+    useEffect(() => {
+        let alive = true;
+        const put = (patch: Partial<DeskStatus>) => { if (alive) setStatus((prev) => ({ ...prev, ...patch })); };
+        const run = () => {
+            cached('factor', fetchFactorScores).then((factor) => put({ factor })).catch(() => { });
+            cached('depth', fetchDepthOverlay).then((depth) => put({ depth })).catch(() => { });
+            cached('ledgers', fetchPaperLedgers).then((ledgers) => put({ ledgers })).catch(() => { });
+            cached('manifest', fetchChainManifest).then((manifest) => put({ manifest })).catch(() => { });
+            cached('regime', fetchMriRegime).then((regime) => put({ regime })).catch(() => { });
+            cached('anchor', fetchMriCostOfCapital).then((anchor) => put({ anchor })).catch(() => { });
+            cached('stocks', () => fetchStocks('US'))
+                .then((s) => put({ pricesAsOf: latestQuoteStamp(s?.data as { lastUpdated?: string }[] | undefined) }))
+                .catch(() => { });
+        };
+        run();
+        invalidationListeners.add(run);
+        return () => { alive = false; invalidationListeners.delete(run); };
+    }, []);
+
+    return status;
 }
 
 /**
