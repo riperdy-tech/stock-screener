@@ -1,12 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 
-// Colors that must support the `/opacity` modifier but are not hex (oklch) are
-// declared in function form so Tailwind can splice the alpha into the slash slot.
-const alphaFn = (base) => ({ opacityValue }) =>
-    opacityValue === undefined ? base.replace(' / <a>', '') : base.replace('<a>', opacityValue);
+// Every semantic colour is a CSS variable (declared in app/globals.css) so the desk's light theme
+// (`.theme-light`, applied on components/desk/Shell.tsx only) can swap them while /admin and the
+// legacy pages keep the dark :root values. Declared in function form so the `/opacity` modifier
+// still works: it is spliced in with color-mix, which also accepts oklch and rgba variables.
+const tok = (name) => ({ opacityValue }) => {
+    if (opacityValue === undefined) return `var(${name})`;
+    const n = Number(opacityValue);
+    const pct = Number.isNaN(n) ? `calc(${opacityValue} * 100%)` : `${Math.round(n * 10000) / 100}%`;
+    return `color-mix(in oklch, var(${name}) ${pct}, transparent)`;
+};
 
-const ACCENT = alphaFn('oklch(0.77 0.13 240 / <a>)');
-const POS = alphaFn('oklch(0.82 0.14 162 / <a>)');
+const ACCENT = tok('--accent');
+const POS = tok('--pos');
 
 module.exports = {
     darkMode: ["class"],
@@ -40,25 +46,25 @@ module.exports = {
                 // Values below are the Aug-24 legibility pass (handoff rev1): the
                 // canvas is lifted off near-black and every grey tier raised, because
                 // the old muted greys were unreadable on real screens.
-                page: '#15171a',        // body
-                surface: '#1c1e21',     // app surface
-                inset: '#202225',       // inset panels, transcript viewers, tooltips
+                page: tok('--page'),        // recessed ground (dark: body; light: README "surf")
+                surface: tok('--surface'),  // app surface (light: README "bg")
+                inset: tok('--inset'),      // inset panels, transcript viewers, tooltips
                 ink: {
-                    DEFAULT: '#f2f0eb', // text primary
-                    2: '#d3cfc5',       // secondary
-                    3: '#c3bfb5',       // tertiary / faint
-                    q: '#e0ddd6',       // body-quote
+                    DEFAULT: tok('--ink'),  // text primary
+                    2: tok('--ink-2'),      // secondary
+                    3: tok('--ink-3'),      // tertiary / faint
+                    q: tok('--ink-q'),      // body-quote
                 },
                 // One meaning per colour (2026-10 colour system; validated pairwise for normal and
                 // colour-blind vision on the desk surface).
                 accent: ACCENT,         // blue: the list / funnel progress, selection, links-as-controls
-                list2: '#709fbf',       // softer blue: watchlist (second step of the list)
+                list2: tok('--list2'),  // softer blue: watchlist (second step of the list)
                 pos: POS,               // green: undervalued, gains, good
-                fair: '#e8e4da',        // off-white: fair (neutral midpoint of the verdict)
-                warn: '#e2b850',        // amber: warnings and caution only
-                neg: '#db6750',         // coral: overvalued, losses, bad
-                off: '#8a877f',         // dim grey: doesn't count (blocked, vetoed, no data)
-                link: { DEFAULT: '#a8b4d8', hover: '#c3cce6' },
+                fair: tok('--fair'),    // neutral midpoint of the verdict
+                warn: tok('--warn'),    // amber: warnings and caution only
+                neg: tok('--neg'),      // coral: overvalued, losses, bad
+                off: tok('--off'),      // dim grey: doesn't count (blocked, vetoed, no data)
+                link: { DEFAULT: tok('--link'), hover: tok('--link-hover') },
                 // Why a stock is listed: the door families and the scores inside them.
                 factor: {
                     quality: '#a774d6', revisions: '#c0a2de',
@@ -74,39 +80,40 @@ module.exports = {
                 // Rules are one step stronger than the first cut so structure still
                 // reads against the lighter canvas. The suffix IS the alpha.
                 rule: {
-                    DEFAULT: 'rgba(255,255,255,.14)',
-                    24: 'rgba(255,255,255,.24)',   // inactive chip / input border
-                    22: 'rgba(255,255,255,.22)',   // header rule
-                    18: 'rgba(255,255,255,.18)',   // table header rule
-                    14: 'rgba(255,255,255,.14)',   // section rules
-                    10: 'rgba(255,255,255,.10)',   // row dividers
+                    DEFAULT: tok('--rule-14'),
+                    24: tok('--rule-24'),   // inactive chip / input border
+                    22: tok('--rule-22'),   // header rule
+                    18: tok('--rule-18'),   // table header rule
+                    14: tok('--rule-14'),   // section rules
+                    10: tok('--rule-10'),   // row dividers
                 },
-                hover: 'rgba(255,255,255,.05)',
+                hover: tok('--hover'),
+                wash: tok('--wash'),
                 track: {
-                    12: 'rgba(255,255,255,.12)',   // every bar / band-strip track
-                    18: 'rgba(255,255,255,.18)',   // cash bar fill
+                    12: tok('--track'),    // every bar / band-strip track
+                    18: tok('--track-18'), // cash bar fill
                 },
 
                 // ── Legacy shadcn aliases, remapped for the migration window.
                 // Removed once every surface is swept (see plan phase 9).
-                background: '#1c1e21',
-                foreground: '#f2f0eb',
-                border: 'rgba(255,255,255,.14)',
-                input: 'rgba(255,255,255,.24)',
-                ring: 'oklch(0.77 0.13 240)',
-                primary: { DEFAULT: ACCENT, foreground: '#1c1e21' },
-                secondary: { DEFAULT: 'rgba(255,255,255,.05)', foreground: '#f2f0eb' },
-                muted: { DEFAULT: 'rgba(255,255,255,.05)', foreground: '#d3cfc5' },
-                popover: { DEFAULT: '#15171a', foreground: '#f2f0eb' },
-                card: { DEFAULT: '#1c1e21', foreground: '#f2f0eb' },
-                destructive: { DEFAULT: '#db6750', foreground: '#f2f0eb' },
+                background: tok('--surface'),
+                foreground: tok('--ink'),
+                border: tok('--rule-14'),
+                input: tok('--rule-24'),
+                ring: tok('--accent'),
+                primary: { DEFAULT: ACCENT, foreground: tok('--surface') },
+                secondary: { DEFAULT: tok('--hover'), foreground: tok('--ink') },
+                muted: { DEFAULT: tok('--hover'), foreground: tok('--ink-2') },
+                popover: { DEFAULT: tok('--page'), foreground: tok('--ink') },
+                card: { DEFAULT: tok('--surface'), foreground: tok('--ink') },
+                destructive: { DEFAULT: tok('--neg'), foreground: tok('--ink') },
                 success: POS,
-                warning: '#e2b850',
-                danger: '#db6750',
+                warning: tok('--warn'),
+                danger: tok('--neg'),
             },
             fontFamily: {
-                sans: ['var(--font-hanken)', 'system-ui', 'sans-serif'],
-                mono: ['var(--font-spline)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+                sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+                mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
             },
             letterSpacing: {
                 // Micro-labels moved 11px/600 — half the old tracking reads better.

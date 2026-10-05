@@ -60,7 +60,7 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
     const expansionWidthPct = Math.abs(bullPct - basePct);
 
     return (
-        <div className="mt-5 border border-rule-18 bg-[#14171d]/90 p-5 rounded-sm">
+        <div className="mt-5 border border-rule-18 bg-page p-5 rounded-sm">
             {/* Header / Subtitle */}
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-rule-14 pb-3">
                 <div className="flex items-center gap-2">
@@ -75,14 +75,14 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
             </div>
 
             {/* Visual Graduated Triad Bar */}
-            <div className="relative mt-8 h-[60px] bg-[#0d0f12] border border-rule-18 rounded overflow-hidden">
+            <div className="relative mt-8 h-[60px] bg-page border border-rule-18 rounded overflow-hidden">
                 {/* Margin of Safety Corridor (Between Price & Base IV) */}
                 <div
                     className="absolute top-0 bottom-0 pointer-events-none transition-all duration-300"
                     style={{
                         left: `${leftMarginPct}%`,
                         width: `${marginWidthPct}%`,
-                        backgroundColor: blocked ? 'rgba(211, 207, 197, 0.10)' : price <= baseIv ? 'rgba(74, 222, 128, 0.12)' : 'rgba(248, 113, 113, 0.12)',
+                        backgroundColor: blocked ? 'color-mix(in oklch, var(--ink-2) 10%, transparent)' : price <= baseIv ? 'color-mix(in oklch, var(--pos) 12%, transparent)' : 'color-mix(in oklch, var(--neg) 12%, transparent)',
                         borderLeft: `1px dashed ${blocked ? MUTED : price <= baseIv ? TONE_COLORS.POS : TONE_COLORS.NEG}`,
                         borderRight: `1px dashed ${blocked ? MUTED : price <= baseIv ? TONE_COLORS.POS : TONE_COLORS.NEG}`,
                     }}
@@ -94,8 +94,8 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                     style={{
                         left: `${expansionLeftPct}%`,
                         width: `${expansionWidthPct}%`,
-                        backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                        borderRight: '1px dotted rgba(255, 255, 255, 0.25)',
+                        backgroundColor: 'color-mix(in oklch, var(--wash) 4%, transparent)',
+                        borderRight: '1px dotted var(--rule-24)',
                     }}
                 />
 
@@ -105,7 +105,7 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                     style={{ left: `${bearPct}%` }}
                     title={`Bear Case Intrinsic Value: ${fmtMoney(bearIv)}`}
                 >
-                    <span className={`w-2.5 h-2.5 rounded-full ${blocked ? 'bg-off' : 'bg-neg'} border border-[#0d0f12] -mt-1 shadow-sm`} />
+                    <span className={`w-2.5 h-2.5 rounded-full ${blocked ? 'bg-off' : 'bg-neg'} border border-page -mt-1 shadow-sm`} />
                 </div>
 
                 {/* Bull Marker */}
@@ -114,7 +114,7 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                     style={{ left: `${bullPct}%` }}
                     title={`Bull Case Intrinsic Value: ${fmtMoney(bullIv)}`}
                 >
-                    <span className="w-2.5 h-2.5 rounded-full bg-ink-2 border border-[#0d0f12] -mt-1 shadow-sm" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-ink-2 border border-page -mt-1 shadow-sm" />
                 </div>
 
                 {/* Base Case IV Marker */}
@@ -124,25 +124,25 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                     title={`Base Intrinsic Value: ${fmtMoney(baseIv)}`}
                 >
                     <span
-                        className={`w-3 h-3 border border-[#0d0f12] -mt-1 shadow-md rotate-45 ${blocked ? '' : 'bg-pos'}`}
+                        className={`w-3 h-3 border border-page -mt-1 shadow-md rotate-45 ${blocked ? '' : 'bg-pos'}`}
                         style={blocked ? { backgroundColor: MUTED } : undefined}
                     />
                 </div>
 
                 {/* Current Market Price Marker */}
                 <div
-                    className="absolute top-0 bottom-0 w-[3px] bg-[#f2f0eb] flex flex-col items-center justify-end z-20"
+                    className="absolute top-0 bottom-0 w-[3px] bg-ink flex flex-col items-center justify-end z-20"
                     style={{ left: `${pricePct}%` }}
                     title={`Market Price: ${fmtMoney(price)}`}
                 >
-                    <span className="w-3 h-3 bg-white border border-[#0d0f12] -mb-1 shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
+                    <span className="w-3 h-3 bg-ink border border-page -mb-1 shadow-[0_0_8px_color-mix(in_oklch,var(--ink)_70%,transparent)]" />
                 </div>
             </div>
 
             {/* Labels below the track */}
             <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-[11px] pt-1">
                 {/* Bear Case */}
-                <div className="p-2 border border-rule-10 bg-black/20 rounded">
+                <div className="p-2 border border-rule-10 bg-page rounded">
                     <span className="block text-ink-3 text-[10px] uppercase tracking-wider">Bear Case IV</span>
                     <span className={`text-[14px] font-bold ${blocked ? 'text-off' : 'text-neg'}`}>{fmtMoney(bearIv)}</span>
                     <span className={`block text-[10px] mt-0.5 ${blocked ? 'text-off' : 'text-neg/80'}`}>
@@ -151,9 +151,9 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                 </div>
 
                 {/* Market Price */}
-                <div className="p-2 border border-rule-18 bg-white/[0.04] rounded">
+                <div className="p-2 border border-rule-18 bg-wash/[0.04] rounded">
                     <span className="block text-ink-3 text-[10px] uppercase tracking-wider">Market Price</span>
-                    <span className="text-[14px] font-bold text-white">{fmtMoney(price)}</span>
+                    <span className="text-[14px] font-bold text-ink">{fmtMoney(price)}</span>
                     <span className="block text-[10px] text-ink-2 mt-0.5">Today&apos;s Quote</span>
                     {verdict.verdict_price != null && (
                         <span className="block text-[10px] text-ink-3 mt-0.5">
@@ -163,7 +163,7 @@ export function ValuationTriadHero({ verdict, bundle, runIvs }: ValuationTriadHe
                 </div>
 
                 {/* Base Case IV */}
-                <div className={`p-2 border border-rule-14 rounded ${blocked ? 'bg-white/[0.04]' : 'bg-pos/[0.04]'}`}>
+                <div className={`p-2 border border-rule-14 rounded ${blocked ? 'bg-wash/[0.04]' : 'bg-pos/[0.04]'}`}>
                     <span className="block text-ink-3 text-[10px] uppercase tracking-wider">Base Case IV</span>
                     <span className={`text-[14px] font-bold ${blocked ? '' : 'text-pos'}`} style={blocked ? { color: MUTED } : undefined}>{fmtMoney(baseIv)}</span>
                     <span className={`block text-[10px] mt-0.5 ${blocked ? '' : 'text-pos/90'}`} style={blocked ? { color: MUTED } : undefined}>

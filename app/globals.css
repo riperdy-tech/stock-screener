@@ -30,6 +30,78 @@
         --rule-10: rgba(255, 255, 255, .10);
         --track: rgba(255, 255, 255, .12);
         --radius: 0px;
+
+        /* Remaining semantic tokens. Every one is a CSS variable so the desk's light theme
+           (.theme-light below) can swap them; tailwind.config.js reads them all from here. */
+        --bg: #1c1e21;
+        --list2: #709fbf;
+        --fair: #e8e4da;
+        --off: #8a877f;
+        --link: #a8b4d8;
+        --link-hover: #c3cce6;
+        --hover: rgba(255, 255, 255, .05);
+        --rule-35: rgba(255, 255, 255, .35);
+        --track-18: rgba(255, 255, 255, .18);
+        --scroll-thumb: rgba(255, 255, 255, .22);
+        --scroll-thumb-hover: rgba(255, 255, 255, .34);
+        /* Series / benchmark line colours (lib/desk/nav.ts). */
+        --bench-iwm: #b9b5ab;
+        --bench-spy: #9a968d;
+        --bench-qqq: #76736c;
+        --bench-dram: #625f59;
+        --bench-soxx: #55524d;
+        /* Base of the faint translucent fills (bg-wash/NN): white on dark, ink on light. */
+        --wash: #ffffff;
+    }
+
+    /* Stockpeak v3 "Institutional Light" (design_handoff_stockpeak_v3 README 3.1). Scoped: it is
+       applied only to the outermost element of components/desk/Shell.tsx, so /admin and the legacy
+       pages keep the dark :root values above. Door and pillar colours do not change. */
+    .theme-light {
+        --bg: #fafbfc;
+        --surface: #fafbfc;      /* the app canvas: README "bg" */
+        --page: #eef1f5;         /* recessed panels (tooltips, transcript viewers): README "surf" */
+        --inset: #eef1f5;        /* README "surf" */
+        --ink: #141a22;
+        --ink-2: #374151;
+        --ink-3: #5b6472;        /* between ink-2 and off; README has no faint tier (see step 1a report) */
+        --ink-q: #1f2933;
+        --accent: oklch(0.50 0.06 245);
+        --list2: oklch(0.50 0.06 245);
+        --pos: oklch(0.50 0.07 165);
+        --warn: oklch(0.55 0.08 80);
+        --neg: oklch(0.52 0.10 35);
+        --fair: #374151;
+        --off: #6b7280;
+        --link: oklch(0.50 0.06 245);
+        --link-hover: #141a22;
+        --rule-24: rgba(20, 26, 34, .24);
+        --rule-22: rgba(20, 26, 34, .22);
+        --rule-18: rgba(20, 26, 34, .18);
+        --rule-14: rgba(20, 26, 34, .14);
+        --rule-10: rgba(20, 26, 34, .10);
+        --rule-35: rgba(20, 26, 34, .35);
+        --track: #e6eaf0;
+        --track-18: #c9d1db;
+        --hover: #eef1f5;
+        --scroll-thumb: rgba(20, 26, 34, .28);
+        --scroll-thumb-hover: rgba(20, 26, 34, .45);
+        --bench-iwm: #4b5563;
+        --bench-spy: #6b7280;
+        --bench-qqq: #8fa3b8;
+        --bench-dram: #aeb8c5;
+        --bench-soxx: #c9d1db;
+        --wash: #141a22;
+        --font-sans: var(--font-instrument);
+        --font-mono: 'Geist Mono', var(--font-spline);
+        color: var(--ink);
+        font-family: var(--font-sans), system-ui, sans-serif;
+    }
+
+    /* The viewport scrollbar belongs to <html>, which is outside .theme-light. */
+    :root:has(.theme-light) {
+        --scroll-thumb: rgba(20, 26, 34, .28);
+        --scroll-thumb-hover: rgba(20, 26, 34, .45);
     }
 
     html {
@@ -39,6 +111,9 @@
     }
 
     body {
+        /* next/font defines --font-hanken / --font-spline on body, so the family tokens live here. */
+        --font-sans: var(--font-hanken);
+        --font-mono: var(--font-spline);
         min-height: 100vh;
         background: var(--page);
         color: var(--ink);
@@ -47,7 +122,7 @@
     }
 
     ::selection {
-        background: oklch(0.77 0.13 240 / 0.3);
+        background: color-mix(in oklch, var(--accent) 30%, transparent);
         color: var(--ink);
     }
 
@@ -72,14 +147,14 @@
 
     /* Range inputs (Track Record window sliders) take the accent. */
     input[type="range"] {
-        accent-color: oklch(0.77 0.13 240);
+        accent-color: var(--accent);
     }
 }
 
 /* Themed thin scrollbars for dark scroll areas (transcript viewers, tables). */
 .scroll-dark {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, .22) #15171a;
+    scrollbar-color: var(--scroll-thumb) var(--page);
 }
 
 .scroll-dark::-webkit-scrollbar {
@@ -88,15 +163,15 @@
 }
 
 .scroll-dark::-webkit-scrollbar-track {
-    background: #15171a;
+    background: var(--page);
 }
 
 .scroll-dark::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, .22);
+    background: var(--scroll-thumb);
 }
 
 .scroll-dark::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, .34);
+    background: var(--scroll-thumb-hover);
 }
 
 /* Global scrollbars follow the same treatment. */
@@ -110,16 +185,16 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, .22);
+    background: var(--scroll-thumb);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, .34);
+    background: var(--scroll-thumb-hover);
 }
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, .22) transparent;
+    scrollbar-color: var(--scroll-thumb) transparent;
 }
 
 /* Raw model output and long transcripts must wrap — never scroll horizontally. */
@@ -147,13 +222,13 @@ sup {
 }
 
 .report-prose a {
-    color: #a8b4d8;
+    color: var(--link);
     text-decoration: underline;
     text-underline-offset: 2px;
 }
 
 .report-prose a:hover {
-    color: #c3cce6;
+    color: var(--link-hover);
 }
 
 .report-prose img {

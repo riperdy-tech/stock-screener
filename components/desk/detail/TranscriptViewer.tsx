@@ -85,7 +85,7 @@ export function TranscriptViewer({
                                             ? 'border-accent bg-accent/15 font-bold text-accent'
                                             : isFailed
                                                 ? 'border-warn/40 bg-warn/[0.03] text-warn/80 hover:border-warn hover:text-warn'
-                                                : 'border-rule-24 bg-white/[0.02] text-ink-2 hover:border-rule-36 hover:text-ink',
+                                                : 'border-rule-24 bg-wash/[0.02] text-ink-2 hover:border-rule-36 hover:text-ink',
                                     )}
                                 >
                                     <div className="flex items-center gap-2">
@@ -173,7 +173,7 @@ export function TranscriptViewer({
                                         </p>
                                     )}
 
-                                    <pre className="scroll-dark wrap-anywhere mt-2 max-h-[460px] min-w-0 overflow-y-auto border border-rule-18 bg-[#0d0f12] px-4 py-3.5 font-mono text-[11px] leading-[1.7] text-ink-q lg:max-h-[520px] lg:px-6 lg:py-5 lg:text-[12px]">
+                                    <pre className="scroll-dark wrap-anywhere mt-2 max-h-[460px] min-w-0 overflow-y-auto border border-rule-18 bg-page px-4 py-3.5 font-mono text-[11px] leading-[1.7] text-ink-q lg:max-h-[520px] lg:px-6 lg:py-5 lg:text-[12px]">
                                         {cur.report}
                                     </pre>
                                 </>

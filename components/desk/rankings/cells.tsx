@@ -41,7 +41,7 @@ export function BandStrip({ row, height = 16, showSubline = true }: {
                     <span className="absolute" style={{ left: `${g.medianAt}%`, top: 2, bottom: 2, width: 1, background: tone.color }} />
                 )}
                 {g.priceAt !== null && (
-                    <span className="absolute" style={{ left: `${g.priceAt}%`, top: 0, bottom: 0, width: 2, background: '#f2f0eb' }} />
+                    <span className="absolute" style={{ left: `${g.priceAt}%`, top: 0, bottom: 0, width: 2, background: 'var(--ink)' }} />
                 )}
             </span>
             {showSubline && (
@@ -250,7 +250,7 @@ export function DeliberationCell({ row }: { row: DeskRow }) {
             <div className="flex items-center gap-1.5">
                 <span className={clsx(
                     'inline-flex items-center gap-1 rounded-xs border px-1.5 py-0.5 font-mono text-[10px] font-bold tracking-tight',
-                    'border-rule-24 bg-white/[0.02] text-ink-2'
+                    'border-rule-24 bg-wash/[0.02] text-ink-2'
                 )}>
                     <span>{n} RUNS</span>
                     {spread != null && (

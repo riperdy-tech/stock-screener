@@ -40,7 +40,7 @@ function DepthStatRow({ row }: { row: DeskRow }) {
     const totalRuns = d.samples_run ?? d.n_basis;
 
     return (
-        <div className={clsx('mt-6 grid grid-cols-2 gap-4 border border-rule-14 bg-white/[0.02] p-4 rounded-sm',
+        <div className={clsx('mt-6 grid grid-cols-2 gap-4 border border-rule-14 bg-wash/[0.02] p-4 rounded-sm',
             blocked ? 'sm:grid-cols-3' : 'sm:grid-cols-4')}>
             <div>
                 <Micro className="text-ink-3">Consensus Base IV</Micro>
@@ -120,9 +120,9 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
     const blocked = isBlocked(d);
 
     return (
-        <div className="mt-6 border border-rule-18 bg-[#111317] rounded-sm overflow-hidden">
+        <div className="mt-6 border border-rule-18 bg-page rounded-sm overflow-hidden">
             {/* Header */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rule-14 bg-white/[0.03] px-5 py-3">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rule-14 bg-wash/[0.03] px-5 py-3">
                 <div className="flex items-center gap-2.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-ink-3" />
                     <Micro className="font-extrabold uppercase tracking-wider text-ink">
@@ -153,7 +153,7 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
                     const isFailed = !r.plausible || r.iv == null;
 
                     return (
-                        <div key={r.sample} className="p-4 flex flex-col justify-between hover:bg-white/[0.01] transition-colors">
+                        <div key={r.sample} className="p-4 flex flex-col justify-between hover:bg-wash/[0.01] transition-colors">
                             <div>
                                 <div className="flex items-baseline justify-between">
                                     <span className="font-mono text-[12px] font-bold text-ink uppercase tracking-wider">
@@ -229,7 +229,7 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
                                 <div className="mt-4 pt-3 border-t border-rule-10">
                                     <button
                                         onClick={() => onSelectSample(i)}
-                                        className="w-full border border-rule-24 bg-white/[0.02] hover:bg-accent/10 hover:border-accent/40 px-2 py-1.5 font-mono text-[10.5px] font-bold text-ink-2 hover:text-accent tracking-wide uppercase transition-colors"
+                                        className="w-full border border-rule-24 bg-wash/[0.02] hover:bg-accent/10 hover:border-accent/40 px-2 py-1.5 font-mono text-[10.5px] font-bold text-ink-2 hover:text-accent tracking-wide uppercase transition-colors"
                                     >
                                         {isFailed ? `View Run #${r.sample} Guard Log ▸` : `Read Run #${r.sample} Memo ▸`}
                                     </button>
@@ -241,7 +241,7 @@ function MultiRunAuditMatrix({ d, bundle, onSelectSample }: {
             </div>
 
             {/* Bottom consensus synthesis strip */}
-            <div className="bg-white/[0.015] px-5 py-2.5 flex flex-wrap items-center justify-between gap-3 font-mono text-[11.5px] text-ink-2">
+            <div className="bg-wash/[0.015] px-5 py-2.5 flex flex-wrap items-center justify-between gap-3 font-mono text-[11.5px] text-ink-2">
                 <div className="flex items-center gap-4">
                     <span>Synthesized Median: <b className="text-ink">{fmtMoney(d.median_iv)}</b></span>
                     {!isBlocked(d) && (
@@ -270,9 +270,9 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
     const blocked = isBlocked(d);
 
     return (
-        <div className="mt-6 border border-rule-18 bg-[#14171d] rounded-sm overflow-hidden">
+        <div className="mt-6 border border-rule-18 bg-page rounded-sm overflow-hidden">
             {/* Header */}
-            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-rule-14 bg-white/[0.02] px-5 py-3">
+            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-rule-14 bg-wash/[0.02] px-5 py-3">
                 <div className="flex items-center gap-2">
                     <span className="inline-block w-2 h-2 rounded-full bg-ink-3" />
                     <Micro className="font-bold text-ink uppercase tracking-wider">
@@ -375,20 +375,20 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                     </div>
 
                     <div className="space-y-2 font-mono text-[12px]">
-                        <div className="flex items-center justify-between p-2 border border-rule-10 bg-black/20 rounded">
+                        <div className="flex items-center justify-between p-2 border border-rule-10 bg-page rounded">
                             <span className="text-ink-2">Tranche 1 (Starter Limit):</span>
                             <span className="font-bold text-ink">
                                 {tranches?.tranche_1_starter != null ? fmtMoney(tranches.tranche_1_starter) : '—'}
                             </span>
                         </div>
-                        <div className="flex items-center justify-between p-2 border border-rule-10 bg-black/20 rounded">
+                        <div className="flex items-center justify-between p-2 border border-rule-10 bg-page rounded">
                             <span className="text-ink-2">Tranche 2 (Core Accumulation):</span>
                             <span className="font-bold text-ink">
                                 {tranches?.tranche_2_core != null ? fmtMoney(tranches.tranche_2_core) : '—'}
                             </span>
                         </div>
                         {bullIv != null && (
-                            <div className="flex items-center justify-between p-2 border border-rule-10 bg-black/20 rounded">
+                            <div className="flex items-center justify-between p-2 border border-rule-10 bg-page rounded">
                                 <span className="text-ink-3">Exit Review Target:</span>
                                 <span className="font-bold text-ink">{fmtMoney(bullIv)}</span>
                             </div>
@@ -415,7 +415,7 @@ function InstitutionalContractCard({ d, bundle }: { d: DepthVerdict; bundle: Dep
                             ))}
                         </ul>
                     ) : (
-                        <div className="p-2.5 border border-rule-10 bg-black/20 text-[12px] text-ink-3">
+                        <div className="p-2.5 border border-rule-10 bg-page text-[12px] text-ink-3">
                             No thesis invalidation triggers on record.
                         </div>
                     )}
@@ -636,7 +636,7 @@ function QuantFilterPanel({ row }: { row: DeskRow }) {
                                         {displayBadge}
                                     </span>
                                 </div>
-                                <div className="h-1.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
+                                <div className="h-1.5 w-full bg-wash/[0.06] rounded-full overflow-hidden">
                                     <div
                                         className="h-full rounded-full transition-all duration-500"
                                         style={{ width: `${pct}%`, backgroundColor: color }}
@@ -811,7 +811,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
                     {/* Sector Badge */}
                     {row.info?.sector && (
-                        <span className="inline-flex items-center gap-1 rounded-xs border border-rule-24 bg-white/[0.02] px-2 py-0.5 font-mono text-[10.5px] text-ink-3 uppercase">
+                        <span className="inline-flex items-center gap-1 rounded-xs border border-rule-24 bg-wash/[0.02] px-2 py-0.5 font-mono text-[10.5px] text-ink-3 uppercase">
                             {row.info.sector}
                         </span>
                     )}
@@ -840,7 +840,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                             AI UNDERWRITING RECORD
                         </Micro>
                         {d && d.spread_pct != null && (
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 font-mono text-[10px] tracking-wide uppercase border border-rule-24 bg-white/[0.03] text-ink-2">
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 font-mono text-[10px] tracking-wide uppercase border border-rule-24 bg-wash/[0.03] text-ink-2">
                                 RUN SPREAD {d.spread_pct.toFixed(1)}%
                             </span>
                         )}
@@ -888,7 +888,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
                     {/* Thesis Memorandum Headline */}
                     {headline && (
-                        <blockquote className="mt-5 border-l-2 border-rule-24 bg-white/[0.03] px-5 py-4">
+                        <blockquote className="mt-5 border-l-2 border-rule-24 bg-wash/[0.03] px-5 py-4">
                             <Micro className="mb-2 block text-ink-3">
                                 Analyst Deliberation Thesis{headline.sample ? ` · Sample ${headline.sample}` : ''}
                             </Micro>

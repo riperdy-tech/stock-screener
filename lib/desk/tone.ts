@@ -21,15 +21,20 @@ export interface VerdictTone {
     keys: { label: Key | null; subline: Key | null; action: Key | null };
 }
 
-// One meaning per colour — see tailwind.config.js for the full key.
-const ACCENT = 'oklch(0.77 0.13 240)';  // the list / funnel progress, selection
-const POS = 'oklch(0.82 0.14 162)';     // undervalued, gains, good
-const FAIR = '#e8e4da';                 // fair: the neutral midpoint
-const WARN = '#e2b850';                 // warnings and caution
-const NEG = '#db6750';                  // overvalued, losses, bad
-const MUTED = '#8a877f';                // doesn't count: blocked, vetoed, no data
+// One meaning per colour — see tailwind.config.js for the full key. The values are CSS variables
+// (app/globals.css), so the same constants render correctly on the dark legacy pages and in the
+// desk's `.theme-light` scope.
+const ACCENT = 'var(--accent)';  // the list / funnel progress, selection
+const POS = 'var(--pos)';        // undervalued, gains, good
+const FAIR = 'var(--fair)';      // fair: the neutral midpoint
+const WARN = 'var(--warn)';      // warnings and caution
+const NEG = 'var(--neg)';        // overvalued, losses, bad
+const MUTED = 'var(--off)';      // doesn't count: blocked, vetoed, no data
 
-/** Door / score families: why the screen listed a stock. */
+/** A translucent fill of a token colour, for band segments. */
+const mix = (token: string, pct: number) => `color-mix(in oklch, var(${token}) ${pct}%, transparent)`;
+
+/** Door / score families: why the screen listed a stock. Same in both themes. */
 export const FAMILY = {
     quality: '#a774d6', revisions: '#c0a2de',
     value: '#149c82', exp_gap: '#72bca8',
@@ -40,31 +45,31 @@ export function verdictTone(direction: Direction | null | undefined): VerdictTon
     switch (direction) {
         case 'undervalued':
             return {
-                label: 'UNDERVALUED', color: POS, fill: 'oklch(0.82 0.14 162 / .40)',
+                label: 'UNDERVALUED', color: POS, fill: mix('--pos', 40),
                 subline: 'every run above the price', action: 'buy',
                 keys: { label: 'vUndervalued', subline: 'vSubUnder', action: 'actBuy' },
             };
         case 'overvalued':
             return {
-                label: 'OVERVALUED', color: NEG, fill: 'rgba(219,103,80,.42)',
+                label: 'OVERVALUED', color: NEG, fill: mix('--neg', 42),
                 subline: 'every run below the price', action: 'reduce',
                 keys: { label: 'vOvervalued', subline: 'vSubOver', action: 'actReduce' },
             };
         case 'hold':
             return {
-                label: 'FAIR', color: FAIR, fill: 'rgba(232,228,218,.30)',
+                label: 'FAIR', color: FAIR, fill: mix('--fair', 30),
                 subline: 'price sits inside the band', action: 'hold',
                 keys: { label: 'vFair', subline: 'vSubFair', action: 'actHold' },
             };
         case 'NOT_USABLE':
             return {
-                label: 'NOT USABLE', color: MUTED, fill: 'rgba(255,255,255,.12)',
+                label: 'NOT USABLE', color: MUTED, fill: 'var(--track)',
                 subline: 'no plausible run', action: '—',
                 keys: { label: 'vNotUsable', subline: 'vSubNone', action: null },
             };
         default:
             return {
-                label: '—', color: MUTED, fill: 'rgba(255,255,255,.12)',
+                label: '—', color: MUTED, fill: 'var(--track)',
                 subline: 'not yet analyzed', action: '—',
                 keys: { label: null, subline: null, action: null },
             };
@@ -79,10 +84,10 @@ export function verdictTone(direction: Direction | null | undefined): VerdictTon
  */
 export function heroFill(direction: Direction | null | undefined): string {
     switch (direction) {
-        case 'undervalued': return 'oklch(0.82 0.14 162 / .28)';
-        case 'overvalued': return 'rgba(219,103,80,.3)';
-        case 'hold': return 'rgba(232,228,218,.2)';
-        default: return 'rgba(255,255,255,.12)';
+        case 'undervalued': return mix('--pos', 28);
+        case 'overvalued': return mix('--neg', 30);
+        case 'hold': return mix('--fair', 20);
+        default: return 'var(--track)';
     }
 }
 

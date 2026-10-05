@@ -103,7 +103,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                             onClick={() => onToggle(s.key)}
                             className={clsx('border px-2.5 py-1 font-mono font-semibold text-[11px] uppercase tracking-[.06em]',
                                 visible[s.key] ? 'border-rule-24' : 'border-rule-24 text-ink-3')}
-                            style={visible[s.key] ? { color: s.color, borderColor: 'rgba(255,255,255,.35)' } : undefined}
+                            style={visible[s.key] ? { color: s.color, borderColor: 'var(--rule-35)' } : undefined}
                         >
                             {visible[s.key] ? '●' : '○'} {s.label}
                         </button>
@@ -119,7 +119,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
             >
                 <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block h-[240px] w-full">
                     {yTicks.map((v, i) => (
-                        <line key={i} x1={0} x2={W} y1={CY(v)} y2={CY(v)} stroke="rgba(255,255,255,.12)" strokeWidth={1} />
+                        <line key={i} x1={0} x2={W} y1={CY(v)} y2={CY(v)} stroke="var(--track)" strokeWidth={1} />
                     ))}
                     {paths.map((p) => (
                         <polyline
@@ -163,7 +163,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                 {hoverIdx !== null && (
                     <>
                         <span
-                            className="pointer-events-none absolute bottom-6 top-0 w-px bg-white/25"
+                            className="pointer-events-none absolute bottom-6 top-0 w-px bg-ink/25"
                             style={{ left: `${hoverFrac * 100}%` }}
                         />
                         <div

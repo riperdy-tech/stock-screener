@@ -116,7 +116,7 @@ export function Stat({ label, value, sub, valueClass, subClass, className, size 
 }
 
 /** Horizontal bar on a square track — factor bars, DCF bars, plan weights. */
-export function Bar({ pct, color, track = 'rgba(255,255,255,.12)', height = 6, className }: {
+export function Bar({ pct, color, track = 'var(--track)', height = 6, className }: {
     pct: number;
     color: string;
     track?: string;

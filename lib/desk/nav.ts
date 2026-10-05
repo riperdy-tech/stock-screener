@@ -34,11 +34,11 @@ export const BOOKS: { key: string; label: string; color: string; width: number }
     // 2026-08-25; the splice removes that reset so the account's progress reads
     // unbroken.
     // The old analyst's book is archived and proves nothing: the 'doesn't count' grey.
-    { key: 'rn_depth', label: 'AI (old analyst)', color: '#8a877f', width: 1.6 },
+    { key: 'rn_depth', label: 'AI (old analyst)', color: 'var(--off)', width: 1.6 },
     // EQUAL holds the list, so it wears the list's blue. MINE is the reader's own book: off-white.
     // The plan / plan2 / plan3 lanes (and their AI twins) were retired 2026-08-27.
-    { key: 'equal', label: 'EQUAL', color: 'oklch(0.77 0.13 240)', width: 2 },
-    { key: 'mine', label: 'MINE', color: '#e8e4da', width: 1.6 },
+    { key: 'equal', label: 'EQUAL', color: 'var(--accent)', width: 2 },
+    { key: 'mine', label: 'MINE', color: 'var(--fair)', width: 1.6 },
 ];
 
 // The retired AI book whose history the rn_depth chart line continues from.
@@ -49,7 +49,7 @@ export const BENCH_DASH: Record<string, string> = { IWM: '6 4', SPY: '2 3', QQQ:
 
 export const BENCH_STYLE: Record<string, string> = {
     // Benchmarks are references, not players: dashed, in neutral greys of different lightness.
-    IWM: '#b9b5ab', SPY: '#9a968d', QQQ: '#76736c', DRAM: '#625f59', SOXX: '#55524d',
+    IWM: 'var(--bench-iwm)', SPY: 'var(--bench-spy)', QQQ: 'var(--bench-qqq)', DRAM: 'var(--bench-dram)', SOXX: 'var(--bench-soxx)',
 };
 
 export interface Curve {
