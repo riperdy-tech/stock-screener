@@ -1,11 +1,11 @@
 'use client';
 
-// Conditional banner under the freshness strip, driven by lib/desk/notice.ts.
+// Conditional banner under the freshness strip, derived by lib/desk/notice.ts from the phase.
 // Warn style per handoff README 3.1: warn mixed 10% into the canvas + a 2px warn left border.
 
 import React from 'react';
 import { useLanguage } from '@/components/LanguageContext';
-import { NOTICE, type NoticeSeverity } from '@/lib/desk/notice';
+import type { DeskNotice, NoticeSeverity } from '@/lib/desk/notice';
 
 const STYLE: Record<NoticeSeverity, { background: string; borderLeftColor: string }> = {
     warn: { background: 'color-mix(in oklch, var(--warn) 10%, var(--bg))', borderLeftColor: 'var(--warn)' },
@@ -13,17 +13,17 @@ const STYLE: Record<NoticeSeverity, { background: string; borderLeftColor: strin
     info: { background: 'var(--inset)', borderLeftColor: 'var(--off)' },
 };
 
-export function NoticeBanner() {
+export function NoticeBanner({ notice }: { notice: DeskNotice | null }) {
     const { t } = useLanguage();
-    if (!NOTICE) return null;
+    if (!notice) return null;
     return (
         <div className="mx-auto max-w-desk px-5 pt-3 sm:px-10">
             <p
                 role="status"
                 className="border-l-2 px-3.5 py-2.5 text-[13.5px] leading-snug text-ink"
-                style={STYLE[NOTICE.severity]}
+                style={STYLE[notice.severity]}
             >
-                {t(NOTICE.messageKey)}
+                {t(notice.messageKey)}
             </p>
         </div>
     );

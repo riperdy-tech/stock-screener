@@ -66,6 +66,8 @@ export interface Freshness {
     verdictAt: string | null;
     verdictStale: boolean;            // phase B/C only
     rebuiltCount: number;
+    /** Rebuilt-analyst rows with `actionable === true`. */
+    actionableCount: number;
     listSize: number | null;          // research_now + watchlist, the book the analyst underwrites
 }
 
@@ -73,6 +75,7 @@ export function computeFreshness(st: StatusInput, now: number): Freshness {
     const tickers = st.depth?.tickers ?? null;
     const phase = tickers ? deskPhase(tickers) : null;
     const rebuiltCount = tickers ? Object.values(tickers).filter(isRebuiltRow).length : 0;
+    const actionableCount = tickers ? Object.values(tickers).filter((r) => isRebuiltRow(r) && r.actionable === true).length : 0;
     const bc = st.factor?.band_counts;
     const listSize = bc && (bc.research_now != null || bc.watchlist != null)
         ? (bc.research_now ?? 0) + (bc.watchlist ?? 0)
@@ -87,6 +90,7 @@ export function computeFreshness(st: StatusInput, now: number): Freshness {
         verdictAt,
         verdictStale: phase !== null && phase !== 'A' && isStale(verdictAt, VERDICT_STALE_MS, now),
         rebuiltCount,
+        actionableCount,
         listSize,
     };
 }

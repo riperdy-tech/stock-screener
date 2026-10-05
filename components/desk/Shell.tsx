@@ -13,6 +13,7 @@ import { useLanguage } from '@/components/LanguageContext';
 import { AuthModal } from '@/components/AuthModal';
 import { useAuth } from '@/lib/useAuth';
 import { computeFreshness, computeHealth } from '@/lib/desk/health';
+import { deskNotice } from '@/lib/desk/notice';
 import { useDeskStatus } from '@/lib/desk/useDeskData';
 import { FreshnessStrip } from './FreshnessStrip';
 import { HealthDrawer } from './HealthDrawer';
@@ -196,7 +197,7 @@ export function Shell({ tab, loading, onReload, children }: {
                 anchor={status.anchor}
                 onOpenHealth={() => setShowHealth(true)}
             />
-            <NoticeBanner />
+            <NoticeBanner notice={deskNotice(fresh.phase, fresh.actionableCount)} />
 
             <main className="mx-auto max-w-desk px-5 pb-8 sm:px-10">{children}</main>
 
