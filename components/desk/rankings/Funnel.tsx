@@ -22,6 +22,7 @@ import { topPct } from '@/lib/desk/rowText';
 import { fill } from '@/lib/desk/text';
 import { vetoFallback, vetoKey } from '@/lib/desk/veto';
 import { gateReasonLabel, GATE_REASON_LABEL } from '@/lib/desk/tone';
+import { useStockHref } from '@/lib/desk/useStockHref';
 import { DoorMark } from './DeskParts';
 
 const DASH = '—';
@@ -212,7 +213,7 @@ function Step2({ c, factor }: { c: FunnelCounts; factor: FactorScoresPayload | n
     );
 }
 
-function plainWords(t: T, r: DeskRow): string {
+export function plainWords(t: T, r: DeskRow): string {
     const door = doorOf(r.fct.fct_nominated_doors);
     const top = topPct(r.fct.fct_percentile);
     switch (door) {
@@ -235,6 +236,7 @@ function plainWords(t: T, r: DeskRow): string {
 
 function Step3({ c, rows }: { c: FunnelCounts; rows: DeskRow[] }) {
     const { t } = useLanguage();
+    const stockLink = useStockHref();
     const [door, setDoor] = useState<Door | 'all'>('all');
     const list = useMemo(() => listRows(rows), [rows]);
     const doors = useMemo(() => countDoors(list), [list]);
@@ -291,7 +293,7 @@ function Step3({ c, rows }: { c: FunnelCounts; rows: DeskRow[] }) {
                         const band = r.fct.fct_band === 'research_now' ? t('bandResearchNow') : t('bandWatchlist');
                         return (
                             <div key={r.ticker} className="grid grid-cols-[70px_minmax(0,1fr)] gap-x-3 gap-y-0.5 border-t border-rule-10 py-1.5 sm:grid-cols-[70px_150px_minmax(0,1fr)_130px]">
-                                <Link href={`/t/${encodeURIComponent(r.ticker)}?from=ai`} className="text-[13px] font-semibold text-ink hover:text-accent">{r.ticker}</Link>
+                                <Link href={stockLink(r.ticker)} className="text-[13px] font-semibold text-ink hover:text-accent">{r.ticker}</Link>
                                 <DoorMark door={doorOf(r.fct.fct_nominated_doors)} />
                                 <span className="col-span-2 text-[12px] text-ink-2 sm:col-span-1">{plainWords(t, r)}</span>
                                 <span className="col-span-2 font-mono text-[11px] text-ink-2 sm:col-span-1">{band}{r.fct.fct_rank != null ? ` #${r.fct.fct_rank}` : ''}</span>
@@ -306,6 +308,7 @@ function Step3({ c, rows }: { c: FunnelCounts; rows: DeskRow[] }) {
 
 function Step4({ c, rows }: { c: FunnelCounts; rows: DeskRow[] }) {
     const { t } = useLanguage();
+    const stockLink = useStockHref();
     const top = useMemo(() => queueRows(rows).slice(0, 3), [rows]);
     const pct = c.list ? (c.verdicts / c.list) * 100 : 0;
     return (
@@ -320,7 +323,7 @@ function Step4({ c, rows }: { c: FunnelCounts; rows: DeskRow[] }) {
                     <p className="font-mono text-[11px] text-off">{t('d4Next')}</p>
                     {top.map((r) => (
                         <div key={r.ticker} className="mt-1.5 flex flex-wrap items-baseline gap-x-3 text-[12px]">
-                            <Link href={`/t/${encodeURIComponent(r.ticker)}?from=ai`} className="w-[70px] text-[13px] font-semibold text-ink hover:text-accent">{r.ticker}</Link>
+                            <Link href={stockLink(r.ticker)} className="w-[70px] text-[13px] font-semibold text-ink hover:text-accent">{r.ticker}</Link>
                             <span className="text-ink-2">{r.info?.name ?? DASH}</span>
                             <span className="font-mono text-[11px] text-off">{r.fct.fct_rank != null ? fill(t('dkQueue'), { rank: r.fct.fct_rank }) : t('dkQueued')}</span>
                         </div>
