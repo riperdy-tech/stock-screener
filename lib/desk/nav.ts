@@ -22,7 +22,8 @@ export interface Trade {
     reason?: string;
 }
 
-export const BENCHMARKS = ['IWM', 'SPY', 'QQQ', 'SOXX', 'DRAM'] as const;
+// QQQ first: it is the benchmark the paper books are judged against (operator ruling 2026-10-06).
+export const BENCHMARKS = ['QQQ', 'SPY', 'IWM', 'SOXX', 'DRAM'] as const;
 
 /** Strategy books, in the order they appear in the chart legend. */
 export const BOOKS: { key: string; color: string; width: number; dash?: string }[] = [

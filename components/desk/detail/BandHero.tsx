@@ -1,8 +1,10 @@
 'use client';
 
-// The stock page's band hero (handoff 5.2.2), 112 px tall: the Street range above a 40 px track, bear
-// and bull as dashed verticals, one 10 px square per usable run, the verdict's band segment, the 2 px
+// The stock page's band hero (handoff 5.2.2), 128 px tall: the Street range above a 40 px track, bear
+// and bull as dashed verticals, one 10 px square per usable run (bottom row of the track), the verdict's band segment, the 2 px
 // price tick, and labels below. One axis over everything it draws (lib/desk/band.ts `makeAxis`).
+// Vertical layout inside the track: bear/bull labels take the top two rows, run squares sit on the
+// bottom row, so a run near the bear or bull line can never sit under its label.
 // The drawing is hidden from screen readers; `aria-label` carries the same facts in a sentence.
 
 import React from 'react';
@@ -12,10 +14,12 @@ import { heroFill, TONE_COLORS, verdictTone } from '@/lib/desk/tone';
 import { heroMoney, heroView, labelAnchor, priceReading } from '@/lib/desk/stockPage';
 import type { DeskVerdict } from '@/lib/desk/verdict';
 
-const H = 112;
+const H = 128;
 const TRACK_TOP = 26;
-const TRACK_H = 40;
-const LABEL_TOP = 70;
+const TRACK_H = 56;
+const LABEL_TOP = 86;
+/** Run squares sit on the bottom row of the track (10 px square, 6 px from the bottom edge). */
+const RUN_TOP = TRACK_TOP + TRACK_H - 10 - 6;
 const LINE_H = 14;
 /** Median and price labels closer than this (percent of the track) would collide: the median label drops to a third line. */
 const COLLIDE = 40;
@@ -63,7 +67,7 @@ export function BandHero({ d, runIvs, live, atVerdict, blocked }: {
     const sideLabel = (pos: number, facesRight: boolean, text: string, c: string, row: number) => (
         <span
             className="absolute whitespace-nowrap font-mono text-[11px]"
-            style={{ left: `${pos}%`, top: TRACK_TOP + 2 + row * 16, color: c, transform: facesRight ? 'translateX(4px)' : 'translateX(calc(-100% - 4px))' }}
+            style={{ left: `${pos}%`, top: TRACK_TOP + 2 + row * 18, color: c, transform: facesRight ? 'translateX(4px)' : 'translateX(calc(-100% - 4px))' }}
         >
             {text}
         </span>
@@ -134,7 +138,7 @@ export function BandHero({ d, runIvs, live, atVerdict, blocked }: {
                         <span
                             key={i}
                             className="absolute"
-                            style={{ left: `${x}%`, top: TRACK_TOP + (TRACK_H - 10) / 2, width: 10, height: 10, marginLeft: -5, background: 'var(--ink-2)' }}
+                            style={{ left: `${x}%`, top: RUN_TOP, width: 10, height: 10, marginLeft: -5, background: 'var(--ink-2)' }}
                         />
                     );
                 })}

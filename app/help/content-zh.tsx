@@ -550,13 +550,13 @@ export function ChineseHelpBody() {
                     </li>
                 </ul>
                 <p>
-                    每個帳本顯示它的報酬、相對 IWM 的表現、最大回撤、勝率、持有中的部位與平均持有期間。報酬與基準比較的下方
+                    每個帳本顯示它的報酬、相對 QQQ 的表現、最大回撤、勝率、持有中的部位與平均持有期間。報酬與基準比較的下方
                     是背後的<Term term="observations" />。<Term term="sharpe-ratio" />與<Term term="cagr" />在觀測數過少時
                     會被隱藏——頁面會寫「n 筆觀測下沒有意義」——因為只有幾週資料的年化比率只是雜訊。
                 </p>
                 <SubHeading>Growth of 100 與帳本</SubHeading>
                 <p>
-                    Growth of 100 把各帳本與基準（<Term term="iwm" />、<Term term="spy" />、QQQ 與其他幾個）從同一個起點
+                    Growth of 100 把各帳本與基準（<Term term="qqq" />、<Term term="spy" />、<Term term="iwm" />與其他幾個）從同一個起點
                     畫出，附有區間選擇器與會為每筆交易重新計算成本的成本假設欄。一條垂直線標示紀錄重置的時點。帳本列出
                     AI 帳本的交易與白話原因（例如「left the ranked list」），沒有交易的日子則顯示為「no changes」。
                 </p>
@@ -568,7 +568,7 @@ export function ChineseHelpBody() {
                 </ul>
                 <SubHeading>如何解讀</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b>對照帳本 vs IWM</b> — 唯有選股打敗小型股<Term term="benchmark" />，選股才算有效。</li>
+                    <li><b>對照帳本 vs QQQ</b> — 唯有選股打敗<Term term="benchmark" />QQQ，選股才算有效。</li>
                     <li><b>AI 帳本 vs 對照帳本</b> — 只有當 AI 分析師的帳本打敗單純的名單時，它才算物有所值。</li>
                     <li><b>我的帳本 vs 其他</b> — 你自己的偏離會以<Term term="behavior-gap" />的形式顯現。</li>
                 </ul>

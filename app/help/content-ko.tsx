@@ -613,7 +613,7 @@ export function KoreanHelpBody() {
                     </li>
                 </ul>
                 <p>
-                    각 북은 수익률, IWM 대비 성과, 최대 낙폭, 승률, 보유 중인 종목, 평균 보유 기간을 보여 줍니다. 수익률과
+                    각 북은 수익률, QQQ 대비 성과, 최대 낙폭, 승률, 보유 중인 종목, 평균 보유 기간을 보여 줍니다. 수익률과
                     벤치마크 비교 아래에는 그 뒤에 있는 <Term term="observations" />가 적힙니다.{' '}
                     <Term term="sharpe-ratio" />와 <Term term="cagr" />는 관측 건수가 너무 적은 동안 숨겨지고, 페이지에는
                     “관측 n건에서는 의미가 없습니다”라고 나옵니다. 몇 주치 데이터로 계산한 연환산 비율은 노이즈이기
@@ -621,7 +621,7 @@ export function KoreanHelpBody() {
                 </p>
                 <SubHeading>Growth of 100과 원장</SubHeading>
                 <p>
-                    Growth of 100은 북과 벤치마크(<Term term="iwm" />, <Term term="spy" />, QQQ 외 몇 가지)를 같은
+                    Growth of 100은 북과 벤치마크(<Term term="qqq" />, <Term term="spy" />, <Term term="iwm" /> 외 몇 가지)를 같은
                     시작점에서 그려 주며, 기간 선택과 모든 거래의 비용을 다시 매기는 비용 가정 입력란이 있습니다. 세로
                     선이 기록 초기화 시점을 표시합니다. 원장은 AI 북의 거래를 쉬운 말의 이유(예: “left the ranked list”)와
                     함께 보여 주고, 거래가 없는 날은 “no changes”로 표시합니다.
@@ -634,7 +634,7 @@ export function KoreanHelpBody() {
                 </ul>
                 <SubHeading>읽는 법</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b>대조군 vs IWM</b> — 종목들이 소형주 <Term term="benchmark" />를 이겨야만 종목 선정이 작동하는 것입니다.</li>
+                    <li><b>대조군 vs QQQ</b> — 종목들이 <Term term="benchmark" />인 QQQ를 이겨야만 종목 선정이 작동하는 것입니다.</li>
                     <li><b>AI 북 vs 대조군</b> — AI 애널리스트는 자신의 북이 단순 명단을 이길 때에만 밥값을 합니다.</li>
                     <li><b>내 북 vs 나머지</b> — 당신 자신의 이탈은 <Term term="behavior-gap" />로 드러납니다.</li>
                 </ul>

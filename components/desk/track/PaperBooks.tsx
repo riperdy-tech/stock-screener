@@ -31,7 +31,7 @@ function StatGrid({ s }: { s: BookStats }) {
         <>
             <div className="mt-4 grid grid-cols-3 gap-x-3 gap-y-5">
                 <Cell label={t('trkReturn')} value={fmtRet(s.returnPct)} sub={obs} className={toneClass(s.returnPct)} />
-                <Cell label={fill(t('trkVsBench'), { bench: 'IWM' })} value={fmtPt(s.excessIwm)} sub={obs} className={toneClass(s.excessIwm)} />
+                <Cell label={fill(t('trkVsBench'), { bench: 'QQQ' })} value={fmtPt(s.excessQqq)} sub={obs} className={toneClass(s.excessQqq)} />
                 <Cell label={t('trkMaxDd')} value={fmtRet(s.maxDrawdown, 1)} className={toneClass(s.maxDrawdown)} />
                 <Cell
                     label={t('trkWinRate')} value={fmtPlainPct(s.winRate)}

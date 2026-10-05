@@ -622,7 +622,7 @@ export function EnglishHelpBody() {
                     </li>
                 </ul>
                 <p>
-                    Each book shows its return, how it did against IWM, its maximum drawdown, win rate, open positions and
+                    Each book shows its return, how it did against QQQ, its maximum drawdown, win rate, open positions and
                     average hold. Under the return and the benchmark comparison is the number of{' '}
                     <Term term="observations" /> behind it. <Term term="sharpe-ratio" /> and <Term term="cagr" /> are
                     hidden while there are too few observations — the page says &ldquo;not meaningful at n
@@ -630,7 +630,7 @@ export function EnglishHelpBody() {
                 </p>
                 <SubHeading>Growth of 100, and the ledger</SubHeading>
                 <p>
-                    Growth of 100 plots the books and the benchmarks (<Term term="iwm" />, <Term term="spy" />, QQQ and a few
+                    Growth of 100 plots the books and the benchmarks (<Term term="qqq" />, <Term term="spy" />, <Term term="iwm" /> and a few
                     more) from the same start, with a window selector and a what-if cost box that re-costs every trade. A vertical
                     rule marks the record reset. The ledger lists the AI book&apos;s trades with a plain reason (for example
                     &ldquo;left the ranked list&rdquo;) and shows days with no trade as &ldquo;no changes&rdquo;.
@@ -643,7 +643,7 @@ export function EnglishHelpBody() {
                 </ul>
                 <SubHeading>How to read it</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
-                    <li><b>Control vs IWM</b> — the stock selection works only if the picks beat the small-cap <Term term="benchmark" />.</li>
+                    <li><b>Control vs QQQ</b> — the stock selection works only if the picks beat the <Term term="benchmark" />, QQQ.</li>
                     <li><b>AI book vs control</b> — the AI analyst earns its keep only if its book beats the plain list.</li>
                     <li><b>My book vs the others</b> — your own deviations show up as the <Term term="behavior-gap" />.</li>
                 </ul>

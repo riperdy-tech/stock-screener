@@ -49,9 +49,9 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
     const [costBps, setCostBps] = useState(DEFAULT_BPS);
     const [open, setOpen] = useState<Record<DrillKey, boolean>>({ holdings: false, closed: false, history: false, early: false });
     const [tradeQuery, setTradeQuery] = useState('');
-    // Opens on the AI book and Control against the three benchmarks; SOXX and DRAM sit behind "+ more".
+    // Opens on the AI book and Control against QQQ, the books' benchmark; SPY and IWM are one click away, SOXX and DRAM sit behind "+ more".
     const [visible, setVisible] = useState<Record<string, boolean>>({
-        rn_depth: true, equal: true, IWM: true, SPY: true, QQQ: true,
+        rn_depth: true, equal: true, QQQ: true, SPY: false, IWM: false,
     });
 
     useEffect(() => {

@@ -491,21 +491,28 @@ export const GLOSSARY_ZH: Record<string, TermZh> = {
         term: 'Alpha／超額報酬',
         plain: '高於市場或基準的報酬。',
         definition:
-            '扣除成本後，投資組合超越其基準（如 IWM 或 SPY）的表現。正 Alpha 代表選股或部位規模有加分；負代表機器（或你的偏離）比直接持有指數更糟。',
-        related: ['benchmark', 'iwm', 'spy'],
+            '扣除成本後，投資組合超越其基準（如 QQQ 或 SPY）的表現。正 Alpha 代表選股或部位規模有加分；負代表機器（或你的偏離）比直接持有指數更糟。',
+        related: ['benchmark', 'qqq', 'spy'],
     },
     benchmark: {
         term: '基準 (Benchmark)',
         plain: '用來比較投資組合的指數。',
         definition:
-            '用來判斷機器是否加值的參考組合，通常是寬基指數。本系統以 IWM（羅素 2000 小型股，最接近其宇宙）與 SPY（標普 500）為基準，可從 NAV 圖表開關。',
-        related: ['iwm', 'spy', 'alpha'],
+            '用來判斷機器是否加值的參考組合，通常是寬基指數。模擬帳本以 QQQ（那斯達克 100）為基準；SPY（標普 500）與 IWM（羅素 2000 小型股）也在 NAV 圖表上，判定評分仍會回報 IWM、SPY 與 QQQ。可從 NAV 圖表開關。',
+        related: ['qqq', 'spy', 'iwm', 'alpha'],
+    },
+    qqq: {
+        term: 'QQQ',
+        plain: 'Invesco QQQ ETF——那斯達克 100。',
+        definition:
+            '那斯達克 100（科技權重高的大型股指數）的 ETF 代理。它是評判模擬帳本的基準，所以落後 QQQ 的帳本，並沒有勝過單純持有指數。',
+        related: ['benchmark', 'spy', 'iwm'],
     },
     iwm: {
         term: 'IWM',
         plain: 'iShares 羅素 2000 ETF——美國小型股。',
         definition:
-            '羅素 2000 小型股指數最常見的 ETF 代理。因為本系統篩選小型與中型股，IWM 是最該被擊敗的基準。',
+            '羅素 2000 小型股指數最常見的 ETF 代理。因為本系統篩選小型與中型股，它保留在圖表上作為第二參考線；模擬帳本則以 QQQ 評判。',
         related: ['benchmark', 'spy'],
     },
     spy: {

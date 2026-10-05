@@ -22,7 +22,7 @@ export const ratiosMeaningful = (observations: number | null | undefined): boole
 /** The `summary` fields of one book, by the names the page uses. */
 export interface BookStats {
     returnPct: number | null;
-    excessIwm: number | null;
+    excessQqq: number | null;
     maxDrawdown: number | null;
     winRate: number | null;
     closedTrades: number | null;
@@ -47,7 +47,7 @@ export function bookStats(book: LedgerBook | null | undefined): BookStats | null
     if (!s) return null;
     return {
         returnPct: s.cumulative_return_pct ?? null,
-        excessIwm: s.excess_vs?.IWM ?? null,
+        excessQqq: s.excess_vs?.QQQ ?? null,
         maxDrawdown: s.max_drawdown_pct ?? null,
         winRate: s.win_rate_pct ?? null,
         closedTrades: s.closed_trades ?? null,

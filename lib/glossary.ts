@@ -669,7 +669,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'Return above what the market or benchmark delivered.',
         definition:
-            'The performance of a portfolio beyond its benchmark (like IWM or SPY), after costs. Positive alpha means the stock-picking or sizing added value; negative means the machine (or your deviations) cost you relative to just owning the index.',
+            'The performance of a portfolio beyond its benchmark (like QQQ or SPY), after costs. Positive alpha means the stock-picking or sizing added value; negative means the machine (or your deviations) cost you relative to just owning the index.',
         related: ['benchmark', 'iwm', 'spy'],
     },
     benchmark: {
@@ -677,15 +677,23 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'The index you compare the portfolios against.',
         definition:
-            'A reference portfolio — typically a broad index — used to judge whether the machine is adding value. This system benchmarks against IWM (Russell 2000 small-cap, its closest universe) and SPY (S&P 500). You can toggle which appear on the NAV chart.',
-        related: ['iwm', 'spy', 'alpha'],
+            'A reference portfolio — typically a broad index — used to judge whether the machine is adding value. The paper books are benchmarked against QQQ (Nasdaq-100). SPY (S&P 500) and IWM (Russell 2000 small-cap) are also on the NAV chart, and verdict grading still reports IWM, SPY and QQQ. You can toggle which appear on the NAV chart.',
+        related: ['qqq', 'spy', 'iwm', 'alpha'],
+    },
+    qqq: {
+        term: 'QQQ',
+        category: 'track',
+        plain: 'The Invesco QQQ ETF — the Nasdaq-100.',
+        definition:
+            'An exchange-traded proxy for the Nasdaq-100, the large technology-heavy index. It is the benchmark the paper books are judged against, so a book that trails QQQ has not beaten simply owning the index.',
+        related: ['benchmark', 'spy', 'iwm'],
     },
     iwm: {
         term: 'IWM',
         category: 'track',
         plain: 'The iShares Russell 2000 ETF — small-cap US stocks.',
         definition:
-            'The most common exchange-traded proxy for the Russell 2000 small-cap index. Because the system screens small and mid caps, IWM is the most relevant benchmark to beat.',
+            'The most common exchange-traded proxy for the Russell 2000 small-cap index. Because the system screens small and mid caps, it stays on the chart as a second reference; the paper books are judged against QQQ.',
         related: ['benchmark', 'spy'],
     },
     spy: {
