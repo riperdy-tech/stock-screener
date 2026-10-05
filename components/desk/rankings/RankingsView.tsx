@@ -8,7 +8,6 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { Chip, Micro } from '../primitives';
 import { useLanguage } from '@/components/LanguageContext';
-import { DESK_NOTICE } from '@/lib/desk/notice';
 import { isActionable, TONE_COLORS } from '@/lib/desk/tone';
 import { AiLens } from './AiLens';
 import { QuantLens } from './QuantLens';
@@ -132,7 +131,6 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                         <p className="mt-1 text-[13px] text-ink-2">
                             A quant screen narrows the market to a shortlist; an AI analyst values each name; code checks every verdict before it counts.
                         </p>
-                        {DESK_NOTICE && <p className="mt-1 text-[13px] text-warn">{DESK_NOTICE}</p>}
                     </div>
                 </div>
 
@@ -146,7 +144,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                                 title={filters.stage === step.id ? 'Showing these stocks - click again to show all' : 'Show these stocks'}
                                 className={clsx('block w-full border-l-[3px] py-0.5 pl-3 text-left transition-colors hover:bg-hover',
                                     filters.stage === step.id && 'bg-hover')}
-                                style={{ borderLeftColor: step.id === 'gate' ? TONE_COLORS.POS : `oklch(0.77 0.13 240 / ${[0.25, 0.45, 0.7, 0.9][i] ?? 1})` }}
+                                style={{ borderLeftColor: step.id === 'gate' ? TONE_COLORS.POS : `color-mix(in oklch, var(--accent) ${([0.25, 0.45, 0.7, 0.9][i] ?? 1) * 100}%, transparent)` }}
                             >
                                 <div className="font-mono text-[20px] font-bold leading-none text-ink">{step.n.toLocaleString('en-US')}</div>
                                 <div className={clsx('mt-1 text-[12px]', filters.stage === step.id ? 'text-ink' : 'text-ink-2')}>{step.label}</div>

@@ -29,7 +29,7 @@ export default function CockpitDashboard() {
     // Every payload (and the private `mine` ledger merge) comes from one cached hook so
     // navigating to a ticker page and back never refetches the 16 MB of static JSON/CSV.
     const {
-        factor, valuations, overlay, depth, depthMeta,
+        factor, valuations, overlay, depth,
         ledgers, stockInfo, loading, reload, auth,
     } = useDeskData();
     // THE LENS — RS2 AI verdicts (default), the quant filter that feeds them, or
@@ -46,7 +46,7 @@ export default function CockpitDashboard() {
     const [showAuth, setShowAuth] = useState(false);
 
     return (
-        <Shell tab={tab} factor={factor} depthMeta={depthMeta} loading={loading} onReload={reload}>
+        <Shell tab={tab} loading={loading} onReload={reload}>
             <div className="pt-6">
                 {tab === 'rankings' && (
                     <RankingsView

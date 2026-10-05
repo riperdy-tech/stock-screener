@@ -770,7 +770,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
     const backLabel = from === 'track' ? '← Track Record' : from === 'port' ? '← Portfolio' : `← ${t('detailBack')}`;
 
     const shell = (children: React.ReactNode) => (
-        <Shell tab={null} factor={data.factor} depthMeta={data.depthMeta} loading={data.loading}>
+        <Shell tab={null} loading={data.loading}>
             {children}
         </Shell>
     );

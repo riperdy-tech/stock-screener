@@ -14,7 +14,7 @@ import { BandChartHero } from '@/components/desk/detail/BandChartHero';
 import { TranscriptViewer } from '@/components/desk/detail/TranscriptViewer';
 import { verdictTone, sizeTone } from '@/lib/desk/tone';
 import {
-    fetchOndemandIndex, fetchOndemandReport, fetchDepthOverlay,
+    fetchOndemandIndex, fetchOndemandReport,
     OndemandIndexPayload, OndemandRequestRow, OndemandQueueRow, DepthReportBundle,
 } from '@/lib/data-service';
 
@@ -144,7 +144,6 @@ export function OndemandReports() {
     const [sel, setSel] = useState<string | null>(null);
     const [bundle, setBundle] = useState<DepthReportBundle | null>(null);
     const [bundleMissing, setBundleMissing] = useState(false);
-    const [depthMeta, setDepthMeta] = useState<{ generated_at: string | null; count: number }>();
     const [queue, setQueue] = useState<OndemandQueueRow[]>([]);
 
     const loadQueue = () => {
@@ -156,8 +155,6 @@ export function OndemandReports() {
 
     useEffect(() => {
         fetchOndemandIndex().then((x) => { setIndex(x); setLoaded(true); });
-        fetchDepthOverlay().then((d) =>
-            setDepthMeta({ generated_at: d?.generated_at ?? null, count: d?.count ?? 0 }));
         loadQueue();
         const iv = setInterval(loadQueue, 20000);
         return () => clearInterval(iv);
@@ -184,7 +181,7 @@ export function OndemandReports() {
         .map((s) => s.iv as number);
 
     return (
-        <Shell tab={null} depthMeta={depthMeta}>
+        <Shell tab={null}>
             <div className="pt-8">
                 <h1 className="text-[16px] font-extrabold uppercase tracking-section">On-Demand Analyses</h1>
                 <Micro className="mt-1 block max-w-2xl text-ink-3">
