@@ -1,10 +1,11 @@
 'use client';
 
 // Mono 11px strip under the masthead: prices as of, book scored, latest verdict, health dot, and
-// (only when the MRI file loaded) the macro chip. A stale stamp turns warn with a leading dot.
+// (only when the MRI file loaded) the macro chip, which links to /macro. A stale stamp turns warn with a leading dot.
 // Handoff README 4.2.
 
 import React from 'react';
+import Link from 'next/link';
 import { useLanguage } from '@/components/LanguageContext';
 import type { MriCostOfCapital, MriRegime } from '@/lib/data-service';
 import { fmtMd, fmtMdHm, pctText, strengthKey, type Freshness, type Health, type HealthLevel } from '@/lib/desk/health';
@@ -51,12 +52,12 @@ export function FreshnessStrip({ fresh, health, regime, anchor, onOpenHealth }: 
                 </button>
 
                 {regime && (
-                    <span className="w-full sm:ml-auto sm:w-auto">
+                    <Link href="/macro" className="w-full hover:text-ink sm:ml-auto sm:w-auto">
                         {t('fsMacro')}: {regime.reported_regime?.replace(/_/g, ' ') ?? '—'}{' '}
                         {pctText(regime.reported_regime_probability, 0)}
                         {strength && <> · {t(strength)}</>}
-                        {' '}· {t('fsCoE')} {pctText(anchor?.implied_cost_of_equity, 2)}
-                    </span>
+                        {' '}· {t('fsCoE')} {pctText(anchor?.implied_cost_of_equity, 2)} ›
+                    </Link>
                 )}
             </div>
         </div>

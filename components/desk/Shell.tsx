@@ -20,8 +20,9 @@ import { HealthDrawer } from './HealthDrawer';
 import { NoticeBanner } from './NoticeBanner';
 import { Micro, Modal } from './primitives';
 
-export type DeskTab = 'rankings' | 'track' | 'portfolio';
+export type DeskTab = 'rankings' | 'track' | 'portfolio' | 'macro';
 
+// The tabs that sit in the mobile bar. Macro is a header link and lives under More on a phone.
 const TABS: { id: DeskTab; key: 'navDesk' | 'navTrackRecord' | 'navPortfolio'; shortKey: 'navDesk' | 'navTrackShort' | 'navPortfolio'; href: string }[] = [
     { id: 'rankings', key: 'navDesk', shortKey: 'navDesk', href: '/?tab=rankings' },
     { id: 'track', key: 'navTrackRecord', shortKey: 'navTrackShort', href: '/track' },
@@ -75,6 +76,57 @@ function MoreMenu() {
                 <div role="menu" className="absolute right-0 top-full z-40 mt-2 w-56 border border-rule-22 bg-surface py-1">
                     <Link role="menuitem" href="/ondemand" onClick={() => setOpen(false)} className={item}>{t('navOndemand')}</Link>
                     <div className="mt-1 border-t border-rule-10 px-3 pb-1 pt-2 font-mono text-[11px] text-off">{t('navArchive')}</div>
+                    {([['/lenses', 'archiveLenses'], ['/reports', 'navReports'], ['/youtube-strategy', 'archiveYoutube']] as const).map(([href, key]) => (
+                        <Link key={href} role="menuitem" href={href} onClick={() => setOpen(false)} className={item}>
+                            {t(key)}
+                            <span className="font-mono text-[11px] text-off">{t('archiveRetired')}</span>
+                        </Link>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
+/** Mobile "More": a menu that opens above the tab bar. Macro lives here, with the pages the header holds. */
+function MobileMore({ active }: { active: boolean }) {
+    const { t } = useLanguage();
+    const [open, setOpen] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!open) return;
+        const onDown = (e: MouseEvent | TouchEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
+        const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
+        document.addEventListener('mousedown', onDown);
+        document.addEventListener('touchstart', onDown);
+        document.addEventListener('keydown', onKey);
+        return () => {
+            document.removeEventListener('mousedown', onDown);
+            document.removeEventListener('touchstart', onDown);
+            document.removeEventListener('keydown', onKey);
+        };
+    }, [open]);
+
+    const item = 'flex items-baseline justify-between gap-4 px-4 py-3 text-[13px] text-ink-2 hover:bg-hover hover:text-ink';
+    return (
+        <div ref={ref} className="relative flex-1">
+            <button
+                type="button"
+                onClick={() => setOpen(!open)}
+                aria-haspopup="menu"
+                aria-expanded={open}
+                aria-label={t('navMoreMenu')}
+                className={clsx('w-full py-3.5 text-center text-[11px]', active ? 'font-bold text-ink' : 'text-ink-2')}
+            >
+                {t('navMore')}
+            </button>
+            {open && (
+                <div role="menu" className="absolute bottom-full right-0 z-40 w-60 max-w-[calc(100vw-16px)] border border-rule-22 bg-surface py-1">
+                    <Link role="menuitem" href="/macro" onClick={() => setOpen(false)} className={clsx(item, active && 'font-semibold text-ink')}>{t('navMacro')}</Link>
+                    <Link role="menuitem" href="/help" onClick={() => setOpen(false)} className={item}>{t('deskHandbook')}</Link>
+                    <Link role="menuitem" href="/ondemand" onClick={() => setOpen(false)} className={item}>{t('navOndemand')}</Link>
+                    <div className="mt-1 border-t border-rule-10 px-4 pb-1 pt-2 font-mono text-[11px] text-off">{t('navArchive')}</div>
                     {([['/lenses', 'archiveLenses'], ['/reports', 'navReports'], ['/youtube-strategy', 'archiveYoutube']] as const).map(([href, key]) => (
                         <Link key={href} role="menuitem" href={href} onClick={() => setOpen(false)} className={item}>
                             {t(key)}
@@ -151,6 +203,7 @@ export function Shell({ tab, loading, onReload, children }: {
                             {TABS.map((x) => (
                                 <NavLink key={x.id} href={x.href} active={tab === x.id}>{t(x.key)}</NavLink>
                             ))}
+                            <NavLink href="/macro" active={tab === 'macro'}>{t('navMacro')}</NavLink>
                             <NavLink href="/help">{t('deskHandbook')}</NavLink>
                         </nav>
                         <MoreMenu />
@@ -220,7 +273,7 @@ export function Shell({ tab, loading, onReload, children }: {
                         {t(x.shortKey)}
                     </Link>
                 ))}
-                <Link href="/help" className="flex-1 py-3.5 text-center text-[11px] text-ink-2">{t('navMore')}</Link>
+                <MobileMore active={tab === 'macro'} />
             </nav>
 
             {showChangelog && <ChangelogModal onClose={() => setShowChangelog(false)} />}

@@ -4,6 +4,7 @@
 // 420px, right side, 1px ink left border; Esc closes; Tab is trapped inside. Handbook README 5.6.
 
 import React, { useCallback, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { useLanguage } from '@/components/LanguageContext';
 import { LEVEL_COLOR } from './FreshnessStrip';
 import { fmtMd, fmtMdHm, type Freshness, type HealthLevel, type PaperAlert, type StatusInput } from '@/lib/desk/health';
@@ -146,7 +147,7 @@ export function HealthDrawer({ status, fresh, onClose }: {
                     </div>
                     <div>
                         <Dot level={mriWarnings === null ? 'off' : mriWarnings > 0 || anchor?.degraded === true ? 'warn' : 'ok'} />{' '}
-                        {t('hdMriWarnings')}: {mriWarnings ?? t('hdMissing')}
+                        <Link href="/macro" onClick={onClose} className="text-accent hover:text-ink">{t('hdMriWarnings')}</Link>: {mriWarnings ?? t('hdMissing')}
                         {anchor?.degraded === true && <span className="text-warn"> · {t('hdMriDegraded')}</span>}
                     </div>
                     <div>
