@@ -1,0 +1,295 @@
+{
+  "ticker": "DDI",
+  "price": 13.31,
+  "date": "2026-10-05",
+  "model": "rs2-analyst-deep-mtp5-v33",
+  "samples_run": 1,
+  "n_basis": 1,
+  "iv_band_low": 37.55,
+  "iv_band_high": 37.55,
+  "median_iv": 37.55,
+  "spread_pct": null,
+  "flags": [
+    "MODE_INSTABILITY",
+    "above_52w_high_2.80x",
+    "above_analyst_high_1.72x_cap_1.5x",
+    "mos_+182pct_beyond_150pct"
+  ],
+  "pack_revision": 21,
+  "scheme": "band_direction_v1",
+  "m": null,
+  "conviction_score": 13.0,
+  "business_quality_moat": 2.9,
+  "kelly_fraction_pct": 24.75,
+  "asymmetric_payoff_skew": 99.9,
+  "bull_iv": 55.5,
+  "bear_iv": 24.28,
+  "reentry_tranches": {
+    "tranche_1_starter": 13.31,
+    "tranche_2_core": 11.25
+  },
+  "thesis_invalidation_triggers": [
+    "Social casino segment revenue declines more than 5% y/y in two consecutive reported quarters (i.e., DDI underperforming the market's own ~-5% decline) or DTC falls below 40% of social casino revenue, or WGames formally withdraws the $11.25/ADS offer with no replacement bid within 60 days"
+  ],
+  "converged": false,
+  "early_stop": false,
+  "mode": "fixed_1",
+  "coe_used": 0.0941,
+  "coe_source": "anchor",
+  "coe_adjustment_reason": null,
+  "valuation_frame": "equity",
+  "terminal_method": "gordon",
+  "terminal_multiple_or_g": 0.0303,
+  "fade_years": 5,
+  "guidance_deviation_reason": null,
+  "verdict_label": "undervalued",
+  "desk_calls": 2,
+  "desk_iv_match": true,
+  "desk_reverse_neutral_cagr": -18.0,
+  "coe_minus_anchor": 0.001222,
+  "desk_share_basis_matched": null,
+  "years12_ratio": 1.002,
+  "base_to_civ": 1.001,
+  "consensus_implied_value": 37.51,
+  "bull_years12_ratio": 1.124,
+  "bear_years12_ratio": 1.002,
+  "base_shares_ratio": null,
+  "bull_shares_ratio": null,
+  "bear_shares_ratio": null,
+  "desk_frame": "equity",
+  "desk_net_debt": null,
+  "shares_basis": "vendor",
+  "shares_reason": null,
+  "net_debt_reason": null,
+  "excess_cash_reason": null,
+  "scenario_deviation_reason": null,
+  "bull_bear_anchor": "consensus high/low",
+  "terminal_multiple_reason": null,
+  "interest_addback": null,
+  "wacc_reason": null,
+  "owner_earnings_source": "fy_ni+fy_capex",
+  "consensus_reference_status": "used",
+  "terminal_g_gap_bp": 0,
+  "terminal_reason": null,
+  "base_window_gap": null,
+  "finite_life_years": null,
+  "cash_flow_life": "perpetual",
+  "terminal_ronic": 1.7850030000000001,
+  "terminal_ronic_gap_pts": null,
+  "working_capital_deducted": null,
+  "base_year_capped": null,
+  "years12_held_by_desk": false,
+  "momentum_view": "confirming",
+  "entry_timing": "buy_now",
+  "momentum_flip_condition": {
+    "metric": "mom_6m",
+    "comparator": "<",
+    "threshold": 0.0,
+    "window_days": 180
+  },
+  "momentum_break_rule": {
+    "metric": "high_52w_distance",
+    "comparator": "<",
+    "threshold": -0.25,
+    "window_days": 365
+  },
+  "invalidation_rules": [
+    {
+      "metric": "revenue_yoy_pct",
+      "comparator": "<",
+      "threshold": -5.0,
+      "window": "two consecutive reported quarters",
+      "source": "fundamentals_quarterly.json"
+    },
+    {
+      "metric": "operating_margin_pct",
+      "comparator": "<",
+      "threshold": 30.0,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+    },
+    {
+      "metric": "high_52w_distance",
+      "comparator": "<",
+      "threshold": -0.25,
+      "window": "next 30 days",
+      "source": "price_history.json (SCR-10)"
+    }
+  ],
+  "position_basis": "value",
+  "position_basis_declared": "value",
+  "momentum_evidence": null,
+  "active_shocks_at_verdict": [
+    {
+      "active": true,
+      "age_days": 3,
+      "direction": "up",
+      "intensity": 1.0318335302945385,
+      "measure": "63-trading-day log change, %, signed",
+      "onset_date": "2026-09-28",
+      "peak_date": "2026-09-28",
+      "peak_intensity": 1.0799710858764024,
+      "proxy": false,
+      "reason": null,
+      "series_id": "DCOILWTICO",
+      "severity": 1,
+      "shock_id": "oil_shock",
+      "stale_input": false,
+      "state": "active",
+      "thresholds": {
+        "down": {
+          "severity_1": {
+            "episodes": 10,
+            "percentile": 4.5,
+            "sample_window": "1986-01..2026-09",
+            "threshold": -30.0
+          },
+          "severity_2": {
+            "episodes": 6,
+            "percentile": 2.7,
+            "sample_window": "1986-01..2026-09",
+            "threshold": -40.0
+          }
+        },
+        "up": {
+          "severity_1": {
+            "episodes": 11,
+            "percentile": 94.4,
+            "sample_window": "1986-01..2026-09",
+            "threshold": 30.0
+          },
+          "severity_2": {
+            "episodes": 5,
+            "percentile": 97.9,
+            "sample_window": "1986-01..2026-09",
+            "threshold": 40.0
+          }
+        }
+      },
+      "value": 30.955005908836153,
+      "value_date": "2026-09-29",
+      "values_revised": false
+    }
+  ],
+  "pack_facts_source": "build",
+  "base_cf_reason": null,
+  "bull_below_price_reason": null,
+  "code_fill_mode": "joint",
+  "consensus_data_status": "ok",
+  "input_scope_stamps": [],
+  "direction_m": "undervalued",
+  "crux_valid": true,
+  "crux": [
+    {
+      "input": "growth_years_3_5",
+      "own": -0.006000000000000005,
+      "implied": -0.6580790672576677,
+      "at_default": true,
+      "reason": "The price implies -65.8%/yr owner-earnings growth in years 3-5 (a collapse to roughly $0.04B by year 5); my Base holds -0.6%/yr per next-FY consensus revenue. The filed Q2-26 record contradicts collapse: DTC mix 15.4% -> 52.4% of social casino revenue converte…"
+    }
+  ],
+  "price_implied": {
+    "coe": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0941,
+      "side": "below"
+    },
+    "growth_years_3_5": {
+      "value": -0.6580790672576677,
+      "reachable": true,
+      "own": -0.006000000000000005,
+      "side": null
+    },
+    "fade_years": {
+      "value": null,
+      "reachable": false,
+      "own": 5,
+      "side": "below"
+    },
+    "terminal_g": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0303,
+      "side": "below"
+    },
+    "terminal_ronic": {
+      "value": null,
+      "reachable": false,
+      "own": 1.7850030000000001,
+      "side": "below"
+    },
+    "year2_level": {
+      "value": null,
+      "reachable": false,
+      "own": 0.11421749999999999,
+      "side": "below"
+    }
+  },
+  "position_basis_source_sample": 1,
+  "size_components": {
+    "dispersion": {
+      "bucket": "full",
+      "spread_pct": 0.0,
+      "source": "SIZE_BUCKETS"
+    },
+    "mos": {
+      "bucket": "full",
+      "mos_vs_base_pct": 182.1,
+      "source": "mos_vs_base_pct"
+    },
+    "conviction": {
+      "bucket": "full",
+      "conviction_score": 13.0,
+      "source": "scorecard.median_conviction_score"
+    },
+    "risk": {
+      "bucket": "full",
+      "elevated_volatility_ahead": false,
+      "source": "mri_outputs_dir/shock_register.json:risk_flags"
+    }
+  },
+  "reason": "single plausible sample — direction weak, size capped; mode instability: base IV moved +138.4% since the prior verdict ($15.75 -> $37.55) — within-run spread cannot see this, so convergence here is not stability",
+  "instability": {
+    "prior_iv": 15.75,
+    "current_iv": 37.55,
+    "delta_pct": 138.4,
+    "unstable": true
+  },
+  "direction": "undervalued",
+  "size_hint": "quarter",
+  "mos_vs_median_pct": 182.1,
+  "mos_vs_base_pct": 182.1,
+  "fiduciary_amendments": [],
+  "fiduciary_violations": [],
+  "fiduciary_verdict": "PASS",
+  "consensus_dir": "DDI_20261005_110307",
+  "run_source": "orchestrator",
+  "arm": "local",
+  "pack_source": "fresh",
+  "screener_data_commit": "62b54e6f732496c3c5355f13b5bed843c5c98537",
+  "research_brief_asof": "2026-10-05T10:52:34.405770",
+  "research_brief_age_days": 0.04,
+  "price_asof": "2026-10-02",
+  "price_source": "yfinance",
+  "price_asof_basis": null,
+  "gate_version": 8,
+  "pipeline_commit": "68f3935",
+  "street_fence": {
+    "low": 5.11,
+    "high": 43.64,
+    "n_targets": 5.0,
+    "asof": "2026-10-05",
+    "age_days": 0.0,
+    "source": "enrich",
+    "winsorized": []
+  },
+  "actionable": false,
+  "actionable_reasons": [
+    "single_sample",
+    "mode_instability",
+    "mos_beyond_150pct"
+  ],
+  "status": "ok",
+  "_fixture_note": "REAL row from the rs2 depth ledger (pack revision 21 = the rebuilt analyst), trimmed (scorecard, long-run facts, catalysts, stage-1 path, per-sample crux, desk stamps removed; numbers/strings otherwise untouched). This is an ACCEPTANCE-TEST row (mode fixed_1, single sample), not a production verdict; it is NOT actionable — see actionable_reasons. Fields actionable/actionable_reasons/status are added by the gate when the overlay is rebuilt. Follow-up fields (watch_items, buy_paused, holding_state, followup_status, thesis_status, entry_timing_now) are not present because the follow-up system is not live yet — see watch_items_example.json for their shape."
+}

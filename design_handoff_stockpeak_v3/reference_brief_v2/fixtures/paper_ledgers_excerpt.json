@@ -1,0 +1,397 @@
+{
+  "_fixture_note": "REAL excerpt of paper_ledgers.json (2026-10-04). Books equal and rn_depth only; plan/plan2/plan3/*_llm books are retired and omitted.",
+  "config": {
+    "benchmark": "IWM",
+    "benchmarks": [
+      "IWM",
+      "SPY",
+      "QQQ",
+      "SOXX",
+      "DRAM"
+    ],
+    "cost_bps": 25,
+    "primary_benchmark": "IWM",
+    "start_nav": 100.0
+  },
+  "inception": "2026-06-12",
+  "last_updated": "2026-10-04T15:25:37Z",
+  "health": {
+    "factor_checked_at": "2026-10-04",
+    "factor_scored_count": 3047
+  },
+  "alerts_first3": [
+    {
+      "date": "2026-09-28",
+      "detail": "stocks.json snapshot 2026-09-29 > as_of 2026-09-28",
+      "kind": "snapshot_ahead",
+      "scope": "prices",
+      "severity": "error"
+    },
+    {
+      "date": "2026-09-29",
+      "detail": "deferred: ['TK', 'VSXY']",
+      "kind": "underfunded",
+      "scope": "equal",
+      "severity": "warn"
+    },
+    {
+      "date": "2026-09-30",
+      "detail": "deferred: ['VSXY']",
+      "kind": "underfunded",
+      "scope": "equal",
+      "severity": "warn"
+    }
+  ],
+  "ledger_keys": [
+    "equal",
+    "equal_llm",
+    "plan",
+    "plan2",
+    "plan2_llm",
+    "plan3",
+    "plan_llm",
+    "rn_depth"
+  ],
+  "books": {
+    "rn_depth": {
+      "summary": {
+        "avg_hold_days": 18.0,
+        "cagr_pct": -12.94,
+        "closed_trades": 52,
+        "cumulative_return_pct": -4.24,
+        "excess_vs": {
+          "DRAM": -14.09,
+          "IWM": 1.68,
+          "QQQ": -9.71,
+          "SOXX": -18.8,
+          "SPY": -4.72
+        },
+        "excess_vs_bench_pct": 1.68,
+        "inception": "2026-06-12",
+        "max_drawdown_pct": -4.4,
+        "observations": 36,
+        "open_positions": 0,
+        "sharpe": -3.37,
+        "total_traded_value": 387.75,
+        "win_rate_pct": 38.5
+      },
+      "state": {
+        "cash": 95.76262188278372,
+        "holdings": {},
+        "units": null
+      },
+      "nav_series_first": {
+        "bench": 299.23,
+        "benches": {
+          "DRAM": 56.24,
+          "IWM": 299.23,
+          "QQQ": 710.72,
+          "SOXX": 514.06,
+          "SPY": 765.91
+        },
+        "date": "2026-08-25",
+        "nav": 99.75,
+        "stale_marks": []
+      },
+      "nav_series_last3": [
+        {
+          "bench": 281.16,
+          "benches": {
+            "DRAM": 61.49,
+            "IWM": 281.16,
+            "QQQ": 748.248,
+            "SOXX": 587.97,
+            "SPY": 768.51
+          },
+          "date": "2026-10-02",
+          "nav": 95.7626,
+          "stale_marks": []
+        },
+        {
+          "bench": 281.52,
+          "benches": {
+            "DRAM": 61.78,
+            "IWM": 281.52,
+            "QQQ": 749.58,
+            "SOXX": 588.9,
+            "SPY": 769.64
+          },
+          "date": "2026-10-03",
+          "nav": 95.7626,
+          "stale_marks": []
+        },
+        {
+          "bench": 281.52,
+          "benches": {
+            "DRAM": 61.78,
+            "IWM": 281.52,
+            "QQQ": 749.58,
+            "SOXX": 588.9,
+            "SPY": 769.64
+          },
+          "date": "2026-10-04",
+          "nav": 95.7626,
+          "stale_marks": []
+        }
+      ],
+      "trades_last4": [
+        {
+          "date": "2026-09-24",
+          "price": 362.89,
+          "reason": "left_rank",
+          "side": "sell",
+          "ticker": "ROP",
+          "value": 2.5131
+        },
+        {
+          "date": "2026-09-24",
+          "price": 208.71,
+          "reason": "left_rank",
+          "side": "sell",
+          "ticker": "SAP",
+          "value": 2.76
+        },
+        {
+          "date": "2026-09-24",
+          "price": 91.71,
+          "reason": "left_rank",
+          "side": "sell",
+          "ticker": "TIGO",
+          "value": 2.7779
+        },
+        {
+          "date": "2026-09-24",
+          "price": 169.8,
+          "reason": "left_rank",
+          "side": "sell",
+          "ticker": "VRSK",
+          "value": 3.0639
+        }
+      ],
+      "closed_last2": [
+        {
+          "entry_date": "2026-08-27",
+          "entry_price": 96.16,
+          "exit_date": "2026-09-24",
+          "exit_price": 91.71,
+          "hold_days": 28,
+          "post_exit_days": null,
+          "post_exit_return_pct": null,
+          "return_pct": -4.87,
+          "ticker": "TIGO"
+        },
+        {
+          "entry_date": "2026-09-09",
+          "entry_price": 177.99,
+          "exit_date": "2026-09-24",
+          "exit_price": 169.8,
+          "hold_days": 15,
+          "post_exit_days": null,
+          "post_exit_return_pct": null,
+          "return_pct": -4.84,
+          "ticker": "VRSK"
+        }
+      ],
+      "exit_pending_sample": {
+        "ACA": "2026-09-08",
+        "ACTG": "2026-09-07"
+      },
+      "last_marks_sample": {
+        "ACA": 145.39,
+        "ACTG": 4.56
+      },
+      "keys": [
+        "closed",
+        "current_date",
+        "dividends",
+        "exit_pending",
+        "last_marks",
+        "nav_series",
+        "prev_day_state",
+        "state",
+        "summary",
+        "trades"
+      ]
+    },
+    "equal": {
+      "summary": {
+        "avg_hold_days": 28.1,
+        "cagr_pct": -16.58,
+        "closed_trades": 197,
+        "cumulative_return_pct": -5.5,
+        "excess_vs": {
+          "DRAM": -0.53,
+          "IWM": -1.83,
+          "QQQ": -9.53,
+          "SOXX": -4.32,
+          "SPY": -9.53
+        },
+        "excess_vs_bench_pct": -1.83,
+        "inception": "2026-06-12",
+        "max_drawdown_pct": -11.41,
+        "observations": 107,
+        "open_positions": 62,
+        "sharpe": -1.07,
+        "total_traded_value": 814.14,
+        "win_rate_pct": 37.6
+      },
+      "state": {
+        "cash": 0.0,
+        "holdings": {
+          "AFGB": {
+            "entry_date": "2026-09-23",
+            "entry_price": 22.04,
+            "shares": 0.06905084766872499
+          },
+          "AFGC": {
+            "entry_date": "2026-09-23",
+            "entry_price": 18.67,
+            "shares": 0.08035827460721348
+          },
+          "AFGD": {
+            "entry_date": "2026-09-23",
+            "entry_price": 21.47,
+            "shares": 0.06969856643594013
+          }
+        },
+        "units": null
+      },
+      "nav_series_first": {
+        "bench": null,
+        "benches": {
+          "DRAM": 65.01,
+          "IWM": 292.255,
+          "QQQ": 720.5482,
+          "SOXX": 595.967,
+          "SPY": 739.844
+        },
+        "date": "2026-06-12",
+        "nav": 99.9,
+        "stale_marks": []
+      },
+      "nav_series_last3": [
+        {
+          "bench": 281.16,
+          "benches": {
+            "DRAM": 61.49,
+            "IWM": 281.16,
+            "QQQ": 748.248,
+            "SOXX": 587.97,
+            "SPY": 768.51
+          },
+          "date": "2026-10-02",
+          "nav": 94.6253,
+          "stale_marks": [
+            "TBPH"
+          ]
+        },
+        {
+          "bench": 281.52,
+          "benches": {
+            "DRAM": 61.78,
+            "IWM": 281.52,
+            "QQQ": 749.58,
+            "SOXX": 588.9,
+            "SPY": 769.64
+          },
+          "date": "2026-10-03",
+          "nav": 94.5276,
+          "stale_marks": [
+            "TBPH"
+          ]
+        },
+        {
+          "bench": 281.52,
+          "benches": {
+            "DRAM": 61.78,
+            "IWM": 281.52,
+            "QQQ": 749.58,
+            "SOXX": 588.9,
+            "SPY": 769.64
+          },
+          "date": "2026-10-04",
+          "nav": 94.4969,
+          "stale_marks": []
+        }
+      ],
+      "trades_last4": [
+        {
+          "date": "2026-10-04",
+          "price": 149.15,
+          "reason": "entered_rank",
+          "side": "buy",
+          "ticker": "FORM",
+          "value": 1.5752
+        },
+        {
+          "date": "2026-10-04",
+          "price": 175.96,
+          "reason": "entered_rank",
+          "side": "buy",
+          "ticker": "STT",
+          "value": 1.5752
+        },
+        {
+          "date": "2026-10-04",
+          "price": 8.06,
+          "reason": "entered_rank",
+          "side": "buy",
+          "ticker": "TASK",
+          "value": 1.5752
+        },
+        {
+          "date": "2026-10-04",
+          "price": 26.27,
+          "reason": "entered_rank",
+          "side": "buy",
+          "ticker": "UMC",
+          "value": 1.5121
+        }
+      ],
+      "closed_last2": [
+        {
+          "entry_date": "2026-09-23",
+          "entry_price": 17.03,
+          "exit_date": "2026-10-04",
+          "exit_price": 17.03,
+          "hold_days": 11,
+          "post_exit_days": null,
+          "post_exit_return_pct": null,
+          "return_pct": -0.25,
+          "ticker": "TBPH"
+        },
+        {
+          "entry_date": "2026-09-30",
+          "entry_price": 14.42,
+          "exit_date": "2026-10-04",
+          "exit_price": 14.84,
+          "hold_days": 4,
+          "post_exit_days": null,
+          "post_exit_return_pct": null,
+          "return_pct": 2.66,
+          "ticker": "TK"
+        }
+      ],
+      "exit_pending_sample": {
+        "AAPL": "2026-09-22",
+        "ABNB": "2026-09-22"
+      },
+      "last_marks_sample": {
+        "AAPL": 337.02,
+        "ABNB": 149.58
+      },
+      "keys": [
+        "closed",
+        "current_date",
+        "dividends",
+        "exit_pending",
+        "last_marks",
+        "nav_series",
+        "prev_day_state",
+        "state",
+        "summary",
+        "trades"
+      ]
+    }
+  }
+}

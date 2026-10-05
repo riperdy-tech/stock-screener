@@ -1,0 +1,225 @@
+{
+  "_fixture_note": "REAL excerpt of depth_outcomes.json (2026-10-05). All graded rows are the OLD invalid analyst; the caveats list is user-facing and must be shown.",
+  "generated_at": "2026-10-05T02:46:52Z",
+  "benchmark_primary": "IWM",
+  "benchmarks": [
+    "IWM",
+    "SPY",
+    "QQQ"
+  ],
+  "caveats": [
+    "Ledger window: 2026-08-21 -> 2026-10-05 (25 distinct verdict dates).",
+    "Regime at report time (Macro Regime Indicator): goldilocks (as of 2026-10-01).",
+    "Repeat verdicts on one name are correlated observations, not independent samples — t-statistics above ignore this overlap and are labelled accordingly; read name-weighted stats first.",
+    "Deduping (B3): 6 cross-ledger duplicate row(s) collapsed into one kept row each (precedence test > production > ondemand > archive; the dropped ledger(s) are recorded on the kept row's `also_in`). 2 graded verdict-horizon(s) are superseded rederivations — kept in `graded`, tagged `superseded_by`, and EXCLUDED from every stat/cut/correlation below.",
+    "Nomination join (factor_signal_log.jsonl, latest run within 10 days on-or-before the verdict date, never after): 0 of 329 graded verdict-horizons joined; reasons for the rest: not_in_signal_log_run=10, pre_P2.3_log_row=319.",
+    "Analyst validity: 0 of 329 graded verdict-horizons come from the valid analyst (depth_gates.FIRST_VALID_PACK_REVISION=None).",
+    "NO CONCLUSION ABOUT THE ANALYST MAY BE DRAWN FROM THESE ROWS."
+  ],
+  "ledger_row_counts": {
+    "archive": 512,
+    "ondemand": 7,
+    "production": 31,
+    "test": 7
+  },
+  "graded_verdict_horizons": 329,
+  "pending_verdict_horizons": 2426,
+  "gradeable_counts_per_horizon": {
+    "182": 0,
+    "30": 327,
+    "365": 0,
+    "60": 0,
+    "91": 0
+  },
+  "per_horizon_30_all": {
+    "inconclusive": false,
+    "mean_excess_iwm_pct": 3.13,
+    "mean_return_pct": -1.63,
+    "median_excess_iwm_pct": 2.24,
+    "n_names": 177,
+    "n_verdicts": 327,
+    "namewt_mean_excess_iwm_pct": 2.98,
+    "namewt_median_excess_iwm_pct": 2.36,
+    "namewt_pct_beat_iwm": 59.9,
+    "pct_beat_iwm": 60.6,
+    "t_stat_excess_iwm_ignoring_overlap": 5.276
+  },
+  "per_horizon_30_cuts_first": [
+    {
+      "buckets": {
+        "NOT_USABLE": {
+          "inconclusive": true,
+          "mean_excess_iwm_pct": 5.88,
+          "mean_return_pct": 0.84,
+          "median_excess_iwm_pct": 5.88,
+          "n_names": 1,
+          "n_verdicts": 2,
+          "namewt_mean_excess_iwm_pct": 5.88,
+          "namewt_median_excess_iwm_pct": 5.88,
+          "namewt_pct_beat_iwm": 100.0,
+          "pct_beat_iwm": 100.0,
+          "t_stat_excess_iwm_ignoring_overlap": null
+        },
+        "hold": {
+          "inconclusive": false,
+          "mean_excess_iwm_pct": 2.22,
+          "mean_return_pct": -2.55,
+          "median_excess_iwm_pct": 1.55,
+          "n_names": 66,
+          "n_verdicts": 82,
+          "namewt_mean_excess_iwm_pct": 2.74,
+          "namewt_median_excess_iwm_pct": 2.9,
+          "namewt_pct_beat_iwm": 60.6,
+          "pct_beat_iwm": 57.3,
+          "t_stat_excess_iwm_ignoring_overlap": 2.546
+        },
+        "overvalued": {
+          "inconclusive": false,
+          "mean_excess_iwm_pct": 3.62,
+          "mean_return_pct": -1.14,
+          "median_excess_iwm_pct": 2.25,
+          "n_names": 115,
+          "n_verdicts": 194,
+          "namewt_mean_excess_iwm_pct": 3.54,
+          "namewt_median_excess_iwm_pct": 2.25,
+          "namewt_pct_beat_iwm": 61.7,
+          "pct_beat_iwm": 62.9,
+          "t_stat_excess_iwm_ignoring_overlap": 4.206
+        },
+        "undervalued": {
+          "inconclusive": false,
+          "mean_excess_iwm_pct": 2.65,
+          "mean_return_pct": -2.09,
+          "median_excess_iwm_pct": 1.7,
+          "n_names": 37,
+          "n_verdicts": 49,
+          "namewt_mean_excess_iwm_pct": 2.33,
+          "namewt_median_excess_iwm_pct": 2.36,
+          "namewt_pct_beat_iwm": 56.8,
+          "pct_beat_iwm": 55.1,
+          "t_stat_excess_iwm_ignoring_overlap": 1.862
+        }
+      },
+      "cut": "direction",
+      "n_missing": 0,
+      "n_total": 327
+    },
+    {
+      "buckets": {
+        "NOT_USABLE|actionable=False": {
+          "inconclusive": true,
+          "mean_excess_iwm_pct": 5.88,
+          "mean_return_pct": 0.84,
+          "median_excess_iwm_pct": 5.88,
+          "n_names": 1,
+          "n_verdicts": 2,
+          "namewt_mean_excess_iwm_pct": 5.88,
+          "namewt_median_excess_iwm_pct": 5.88,
+          "namewt_pct_beat_iwm": 100.0,
+          "pct_beat_iwm": 100.0,
+          "t_stat_excess_iwm_ignoring_overlap": null
+        },
+        "hold|actionable=False": {
+          "inconclusive": false,
+          "mean_excess_iwm_pct": 2.22,
+          "mean_return_pct": -2.55,
+          "median_excess_iwm_pct": 1.55,
+          "n_names": 66,
+          "n_verdicts": 82,
+          "namewt_mean_excess_iwm_pct": 2.74,
+          "namewt_median_excess_iwm_pct": 2.9,
+          "namewt_pct_beat_iwm": 60.6,
+          "pct_beat_iwm": 57.3,
+          "t_stat_excess_iwm_ignoring_overlap": 2.546
+        },
+        "overvalued|actionable=False": {
+          "inconclusive": false,
+          "mean_excess_iwm_pct": 3.62,
+          "mean_return_pct": -1.14,
+          "median_excess_iwm_pct": 2.25,
+          "n_names": 115,
+          "n_verdicts": 194,
+          "namewt_mean_excess_iwm_pct": 3.54,
+          "namewt_median_excess_iwm_pct": 2.25,
+          "namewt_pct_beat_iwm": 61.7,
+          "pct_beat_iwm": 62.9,
+          "t_stat_excess_iwm_ignoring_overlap": 4.206
+        },
+        "undervalued|actionable=False": {
+          "inconclusive": false,
+          "mean_excess_iwm_pct": 2.65,
+          "mean_return_pct": -2.09,
+          "median_excess_iwm_pct": 1.7,
+          "n_names": 37,
+          "n_verdicts": 49,
+          "namewt_mean_excess_iwm_pct": 2.33,
+          "namewt_median_excess_iwm_pct": 2.36,
+          "namewt_pct_beat_iwm": 56.8,
+          "pct_beat_iwm": 55.1,
+          "t_stat_excess_iwm_ignoring_overlap": 1.862
+        }
+      },
+      "cut": "direction x actionable",
+      "n_missing": 0,
+      "n_total": 327
+    }
+  ],
+  "per_horizon_30_spearman": {
+    "conviction": null,
+    "m": null,
+    "mos_vs_base_pct": null,
+    "z_momentum": null
+  },
+  "graded_row_example": {
+    "actionable": false,
+    "actionable_reasons": [
+      "pre_v3.1_gates",
+      "no_street_fence"
+    ],
+    "also_in": [],
+    "analyst_valid": false,
+    "arm": null,
+    "business_quality_moat": null,
+    "cluster": null,
+    "consensus_dir": "GOOG_20260820_094207",
+    "conviction_score": null,
+    "date": "2026-08-21",
+    "direction": "overvalued",
+    "early_stop": null,
+    "entry_date": "2026-08-21",
+    "entry_timing": null,
+    "excess_iwm_pct": 5.88,
+    "excess_qqq_pct": -0.28,
+    "excess_spy_pct": 1.12,
+    "exit_date": "2026-09-18",
+    "fct_band": "research_now",
+    "fct_composite": 92.67,
+    "fct_nominated_doors": null,
+    "fct_rank": 7,
+    "gate_version": null,
+    "horizon_days": 30,
+    "kelly_fraction_pct": null,
+    "ledger_source": "archive",
+    "m": null,
+    "momentum_view": null,
+    "mos_vs_base_pct": null,
+    "mos_vs_median_pct": -8.3,
+    "n_basis": 3,
+    "nomination_engine": "factor_lab_v2_equal",
+    "nomination_reason": "pre_P2.3_log_row",
+    "nomination_run_id": "20260821T220059Z",
+    "pack_revision": null,
+    "position_basis": null,
+    "return_pct": 0.84,
+    "run_source": null,
+    "sector": null,
+    "size_components": null,
+    "size_hint": "full",
+    "spread_pct": 14.8,
+    "superseded_by": null,
+    "ticker": "GOOG",
+    "z_exp_gap": null,
+    "z_momentum": null,
+    "z_value": null
+  }
+}
