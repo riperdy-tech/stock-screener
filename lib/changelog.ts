@@ -2,7 +2,7 @@
 // version button (left of the "?" help button in the Cockpit). Newest first.
 // Keep this in sync with the root CHANGELOG.md.
 
-export const APP_VERSION = '0.3.0';
+export const APP_VERSION = '0.4.0';
 
 export interface ChangelogEntry {
     version: string;
@@ -12,6 +12,21 @@ export interface ChangelogEntry {
 }
 
 export const CHANGELOG: ChangelogEntry[] = [
+    {
+        version: '0.4.0',
+        date: '2026-10-05',
+        title: 'A new light Desk, a Track record page and a Macro page',
+        changes: [
+            'The site has a new light look.',
+            'The Desk is one table under a funnel that shows how the universe narrows to the names the AI analyst has valued. The separate lenses are gone.',
+            'Each stock page is built around the crux: what the price assumes that the analyst does not.',
+            'A new Track record page leads with a scoreboard of graded verdicts, then the paper books.',
+            'A new Macro page shows the macro backdrop the analyst reads, with its cost of capital. It is background, not a call on the market.',
+            "My portfolio now shows the machine's stance on each holding.",
+            'Verdicts from the old analyst are no longer shown on the Desk or in My portfolio. They stay on each stock page as earlier verdicts.',
+            'The Handbook will be brought up to date in the next release.',
+        ],
+    },
     {
         version: '0.3.0',
         date: '2026-10-01',

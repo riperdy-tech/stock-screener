@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Shell } from '@/components/desk/Shell';
 import { Micro } from '@/components/desk/primitives';
+import { useLanguage } from '@/components/LanguageContext';
 import { BandChartHero } from '@/components/desk/detail/BandChartHero';
 import { TranscriptViewer } from '@/components/desk/detail/TranscriptViewer';
 import { verdictTone, sizeTone } from '@/lib/desk/tone';
@@ -139,6 +140,7 @@ function RequestCard({ row, latest, onOpen }: {
 }
 
 export function OndemandReports() {
+    const { t } = useLanguage();
     const [index, setIndex] = useState<OndemandIndexPayload | null>(null);
     const [loaded, setLoaded] = useState(false);
     const [sel, setSel] = useState<string | null>(null);
@@ -211,6 +213,7 @@ export function OndemandReports() {
 
                 {sel && (
                     <section className="mt-10 border-t border-rule-22 pt-6">
+                        <p className="border-l-2 border-off bg-page px-3 py-2 text-[13px] text-ink-2">{t('odBanner')}</p>
                         <div className="flex items-baseline justify-between gap-4">
                             <h2 className="font-mono text-[15px] font-bold text-ink">{sel}</h2>
                             <button onClick={() => setSel(null)} className="font-mono text-[11px] text-ink-2 hover:text-ink">
