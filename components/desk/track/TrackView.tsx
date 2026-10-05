@@ -1,412 +1,327 @@
 'use client';
 
-// Track Record — the public paper-trade record. Chart on top, then the
-// append-only ledger, then the drill-downs (closed trades, full trade history)
-// and the sold-too-early postmortem.
+// Track record: the public paper-trade record. The verdict scoreboard leads (counts before any
+// return), then the three paper books, growth of 100, and the append-only ledger of the AI book
+// with its drill-downs (holdings, closed round trips, full history, sold too early).
 
 import React, { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import clsx from 'clsx';
-import { Chip, Micro, SectionHead } from '../primitives';
+import { Chip, Micro } from '../primitives';
 import { NavChart } from './NavChart';
-import {
-    BENCHMARKS, BOOKS, buildCurve, soldTooEarly, tradesByDate, type Trade,
-} from '@/lib/desk/nav';
-import { fmtDateShort, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
+import { PaperBooks } from './PaperBooks';
+import { ScoreboardView } from './ScoreboardView';
+import { TrackSection } from './trackParts';
 import { useLanguage } from '@/components/LanguageContext';
+import { buildCurve, soldTooEarly, type Trade } from '@/lib/desk/nav';
+import { fmtDateShort, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
+import { stockHref } from '@/lib/desk/stockPage';
+import { fill } from '@/lib/desk/text';
+import {
+    bookStart, cashSince, ledgerRows, reasonFallback, reasonKey, toneClass, fmtPlainPct,
+} from '@/lib/desk/trackBooks';
+import { buildScoreboard } from '@/lib/desk/trackScoreboard';
 
-const COMM_KEY = 'desk.commission';
+const COMM_KEY = 'desk.commission';   // stored as percent per side ("0.25"), as before
 // 25 bps per side is the rate the tracker itself now assumes.
-const DEFAULT_COMM = '0.25';
+const DEFAULT_BPS = '25';
+const BACK = '/track';
 
-// Always compared against the same three: small caps, large caps, tech.
-// SOXX and DRAM stay available as chart lines, but they are not the yardstick.
-const BENCH_ROWS = ['IWM', 'SPY', 'QQQ'] as const;
+type DrillKey = 'holdings' | 'closed' | 'history' | 'early';
 
-type BookKey = 'equal' | 'mine';
-
-// plan / plan2 / plan3 (and their AI twins) retired from Track Record 2026-08-27 —
-// we no longer benchmark books we do not analyse.
-const CARDS: { key: BookKey; title: string; note: string }[] = [
-    { key: 'equal', title: 'Equal-weight', note: 'the pure stock-picking test' },
-    { key: 'mine', title: 'Mine', note: 'your saved portfolio' },
+const DRILLS: { key: DrillKey; label: 'trkLinkHoldings' | 'trkLinkClosed' | 'trkLinkHistory' | 'trkLinkEarly' }[] = [
+    { key: 'holdings', label: 'trkLinkHoldings' },
+    { key: 'closed', label: 'trkLinkClosed' },
+    { key: 'history', label: 'trkLinkHistory' },
+    { key: 'early', label: 'trkLinkEarly' },
 ];
 
-function pctClass(v: number | null | undefined) {
-    if (v == null) return 'text-ink-3';
-    return v > 0 ? 'text-pos' : v < 0 ? 'text-neg' : 'text-ink-2';
-}
-
-/**
- * One strategy book. The RS2-picked twin leads — this desk is AI-first — and the
- * quant book it is measured against sits beside it as the control.
- */
-function StatCard({ book, llm, title, note, active, onClick }: {
-    book: any; llm: any; title: string; note: string;
-    active: boolean; onClick: () => void;
-}) {
-    const s = book?.summary;
-    const sl = llm?.summary;
-    type Kind = 'signed' | 'pct' | 'num' | 'count';
-    // AI column first, quant second.
-    const rows: [string, number | null | undefined, number | null | undefined, Kind][] = [
-        ['Cum', sl?.cumulative_return_pct, s?.cumulative_return_pct, 'signed'],
-        ['CAGR', sl?.cagr_pct, s?.cagr_pct, 'signed'],
-        ['Max DD', sl?.max_drawdown_pct, s?.max_drawdown_pct, 'signed'],
-        ['Sharpe', sl?.sharpe, s?.sharpe, 'num'],
-        ['Win', sl?.win_rate_pct, s?.win_rate_pct, 'pct'],
-        ['Open', sl?.open_positions, s?.open_positions, 'count'],
-        ...BENCH_ROWS.map((b) => [
-            `vs ${b}`, sl?.excess_vs?.[b], s?.excess_vs?.[b], 'signed',
-        ] as [string, number | null | undefined, number | null | undefined, Kind]),
-    ];
-    const cell = (v: number | null | undefined, kind: Kind) => {
-        if (v == null) return '\u2014';
-        if (kind === 'signed') return fmtSignedPct(v);
-        if (kind === 'pct') return `${v.toFixed(1)}%`;
-        if (kind === 'count') return String(Math.round(v));
-        return v.toFixed(2);
-    };
-    // The headline figure is the quant book's cumulative return.
-    const lead = s?.cumulative_return_pct;
-
-    return (
-        <button
-            onClick={onClick}
-            className={clsx('block w-full min-w-0 overflow-hidden border-t border-rule-14 px-3 py-3 text-left',
-                active && 'bg-hover')}
-        >
-            <div className="flex items-baseline justify-between gap-2">
-                <Micro className={clsx('truncate', active && 'text-ink')}>{title}</Micro>
-            </div>
-            <div className={clsx('mt-1.5 font-mono text-[22px] leading-none', pctClass(lead))}>
-                {lead != null ? fmtSignedPct(lead) : '\u2014'}
-            </div>
-            <div className="mt-1 text-[11px] leading-snug text-ink-3">{note}</div>
-
-            {!book && <div className="mt-2 text-[11px] text-ink-3">no ledger yet</div>}
-
-            {book && (
-                <table className="mt-2.5 w-full table-fixed font-mono text-[11px]">
-                    <thead>
-                        <tr className="text-ink-3">
-                            <th className="w-[38%] text-left font-normal" />
-                            <th className="w-[31%] text-right font-normal text-accent">AI*</th>
-                            <th className="w-[31%] text-right font-normal">quant</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {rows.map(([label, ai, quant, kind]) => (
-                            <tr key={label}>
-                                <td className="truncate py-px text-ink-3">{label}</td>
-                                <td className={clsx('py-px text-right', kind === 'signed' ? pctClass(ai) : 'text-ink')}>
-                                    {cell(ai, kind)}
-                                </td>
-                                <td className={clsx('py-px text-right opacity-70', kind === 'signed' ? pctClass(quant) : 'text-ink-2')}>
-                                    {cell(quant, kind)}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
-            {book && <div className="mt-1.5 text-[11px] text-ink-3">* AI book since 2026-08-25, old analyst</div>}
-        </button>
-    );
-}
-
-export function TrackView({ ledgers, loggedIn, onOpenTicker }: {
-    ledgers: any;
+// `ledgers` and `outcomes` are the raw JSON payloads (loosely typed upstream); every read below is
+// through the typed helpers in lib/desk/track*.ts or a null-guarded field access.
+export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading }: {
+    ledgers: any;   // eslint-disable-line @typescript-eslint/no-explicit-any -- raw paper_ledgers.json
+    outcomes: any;  // eslint-disable-line @typescript-eslint/no-explicit-any -- raw depth_outcomes.json
+    outcomesLoaded: boolean;
     loggedIn: boolean;
-    onOpenTicker: (t: string) => void;
+    loading: boolean;
 }) {
     const { t } = useLanguage();
-    const [commInput, setCommInput] = useState(DEFAULT_COMM);
-    const [ledgerView, setLedgerView] = useState<BookKey>('equal');
-    const [posSource, setPosSource] = useState<'baseline' | 'llm'>('baseline');
+    const [costBps, setCostBps] = useState(DEFAULT_BPS);
+    const [open, setOpen] = useState<Record<DrillKey, boolean>>({ holdings: false, closed: false, history: false, early: false });
     const [tradeQuery, setTradeQuery] = useState('');
-    // Opens on the AI book against all three benchmarks; the quant books are
-    // one click away rather than crowding the first read.
+    // Opens on the AI book and Control against the three benchmarks; SOXX and DRAM sit behind "+ more".
     const [visible, setVisible] = useState<Record<string, boolean>>({
-        equal: true, IWM: true, SPY: true, QQQ: true,
+        rn_depth: true, equal: true, IWM: true, SPY: true, QQQ: true,
     });
 
     useEffect(() => {
-        const saved = localStorage.getItem(COMM_KEY);
-        if (saved !== null) setCommInput(saved);
+        try {
+            const saved = localStorage.getItem(COMM_KEY);
+            const pct = saved === null ? NaN : Number.parseFloat(saved);
+            if (Number.isFinite(pct) && pct >= 0) setCostBps(String(Math.round(pct * 100 * 1e4) / 1e4));
+        } catch { /* storage unavailable: keep the default */ }
     }, []);
 
-    const commission = Number.parseFloat(commInput);
-    const commissionPct = Number.isFinite(commission) && commission >= 0 ? commission : 0;
+    const onCostBps = (v: string) => {
+        setCostBps(v);
+        const n = Number.parseFloat(v);
+        if (Number.isFinite(n) && n >= 0) {
+            try { localStorage.setItem(COMM_KEY, String(n / 100)); } catch { /* ignore */ }
+        }
+    };
 
-    const curve = useMemo(() => buildCurve(ledgers, commissionPct), [ledgers, commissionPct]);
-    const early = useMemo(() => soldTooEarly(ledgers), [ledgers]);
+    const bps = Number.parseFloat(costBps);
+    const commissionPct = Number.isFinite(bps) && bps >= 0 ? bps / 100 : 0;
 
     const books = ledgers?.ledgers ?? {};
-    // The AI side of the equal-weight A/B is rn_depth (live depth-verdict book)
-    // since the 2026-08 migration; equal_llm is frozen and only kept for history.
-    const posKey = posSource === 'llm'
-        ? (ledgerView === 'equal' && books.rn_depth ? 'rn_depth'
-            : books[`${ledgerView}_llm`] ? `${ledgerView}_llm` : ledgerView)
-        : ledgerView;
-    const active = books[posKey];
+    const ai = books.rn_depth;
+    const curve = useMemo(() => buildCurve(ledgers, commissionPct), [ledgers, commissionPct]);
+    const early = useMemo(() => soldTooEarly(ledgers), [ledgers]);
+    const board = useMemo(() => buildScoreboard(outcomes), [outcomes]);
+    const rows = useMemo(() => ledgerRows(ai), [ai]);
+    const cash = cashSince(ai);
+    const since = bookStart(ai) ?? ledgers?.inception ?? '—';
 
     const holdings = useMemo(() => {
-        const h = active?.state?.holdings ?? {};
-        const marks = active?.last_marks ?? {};
-        return Object.entries(h).map(([ticker, v]: [string, any]) => {
-            const now = marks[ticker] ?? null;
-            const pl = now != null && v.entry_price ? (now / v.entry_price - 1) * 100 : null;
-            return { ticker, entry_date: v.entry_date, entry_price: v.entry_price, now, pl };
+        const h = ai?.state?.holdings ?? {};
+        const marks = ai?.last_marks ?? {};
+        return Object.entries(h).map(([ticker, v]) => {
+            const x = v as { entry_date?: string; entry_price?: number };
+            const now: number | null = marks[ticker] ?? null;
+            const pl = now != null && x.entry_price ? (now / x.entry_price - 1) * 100 : null;
+            return { ticker, entry_date: x.entry_date, entry_price: x.entry_price, now, pl };
         }).sort((a, b) => (b.pl ?? -1e9) - (a.pl ?? -1e9));
-    }, [active]);
-
-    /** One row per trading day, including the days nothing happened. */
-    const activity = useMemo(() => {
-        const byDate = tradesByDate(active?.trades);
-        const dates = (active?.nav_series ?? []).map((p: any) => p.date).filter(Boolean).reverse();
-        return dates.slice(0, 40).map((date: string) => ({
-            date,
-            trades: byDate.get(date) ?? [],
-        }));
-    }, [active]);
+    }, [ai]);
 
     const closed = useMemo(
-        () => [...(active?.closed ?? [])].sort((a: any, b: any) => (b.exit_date ?? '').localeCompare(a.exit_date ?? '')),
-        [active],
+        () => [...(ai?.closed ?? [])].sort((a: { exit_date?: string }, b: { exit_date?: string }) => (b.exit_date ?? '').localeCompare(a.exit_date ?? '')),
+        [ai],
     );
 
     const tradeRows = useMemo(() => {
         const q = tradeQuery.trim().toUpperCase();
-        const all: Trade[] = [...(active?.trades ?? [])].reverse();
-        return (q ? all.filter((t) => t.ticker?.includes(q) || (t.date ?? '').includes(q)) : all).slice(0, 500);
-    }, [active, tradeQuery]);
+        const all: Trade[] = [...(ai?.trades ?? [])].reverse();
+        return (q ? all.filter((x) => x.ticker?.includes(q) || (x.date ?? '').includes(q)) : all).slice(0, 500);
+    }, [ai, tradeQuery]);
 
     if (!ledgers?.ledgers) {
-        return <p className="py-16 text-[13px] text-ink-2">No paper ledger yet — run the chain once to create one.</p>;
+        return <p className="py-16 text-[13px] text-ink-2">{loading ? t('pgLoading') : t('trkNoLedger')}</p>;
     }
 
-    const heldCount = Object.keys(active?.state?.holdings ?? {}).length;
+    const toggle = (k: DrillKey) => setOpen((o) => ({ ...o, [k]: !o[k] }));
+    const tickerLink = (tk: string, cls?: string) => (
+        <Link href={stockHref(tk, BACK)} className={clsx('font-mono font-semibold text-ink hover:text-accent', cls)}>{tk}</Link>
+    );
+    const reasonText = (code: string | undefined) => {
+        const k = reasonKey(code);
+        return k ? t(k) : reasonFallback(code);
+    };
+    const sideText = (s: string) => (s === 'buy' ? t('trkSideBuy') : s === 'sell' ? t('trkSideSell') : s);
+    const colHead = 'font-mono text-[11px] text-ink-3';
+    const heldNow = holdings.length;
 
     return (
         <div>
-            <div className="border border-rule-14 px-3 py-2.5 mt-5">
-                <p className="text-[12.5px] leading-snug text-warn">
-                    The AI book follows verdicts that pass the gate. Its history so far comes from the old analyst, which has been
-                    ruled invalid, so it proves nothing either way. Since 2026-09-24 it has held only cash, because no verdict passes
-                    the gate. When the new analyst goes live, the AI record restarts from zero and this history is archived.
-                </p>
+            <h1 className="text-[26px] font-semibold leading-tight tracking-head text-ink">{t('trackHeadline')}</h1>
+            <p className="mt-2 text-[14px] text-ink-2">{t('trackSub')}</p>
+
+            {/* TODO(data request): record_epoch. Show unless deskPhase is C AND rn_depth has trades dated after a go-live date; no go-live field exists yet, so always. */}
+            <p
+                role="note"
+                className="mt-5 border-l-2 px-3.5 py-2.5 text-[13.5px] leading-snug text-ink"
+                style={{ background: 'color-mix(in oklch, var(--warn) 10%, var(--bg))', borderLeftColor: 'var(--warn)' }}
+            >
+                {cash ? fill(t('trkBanner'), { date: cash }) : t('trkBannerNoCash')}
+            </p>
+
+            {/* Record switch. Only the archived record has data; the go-live record starts later. */}
+            <div className="mt-5 flex flex-wrap items-baseline gap-x-2.5 gap-y-2">
+                <Chip active className="font-mono text-[11px]" aria-pressed>{t('trkChipArchived')}</Chip>
+                <Chip disabled aria-describedby="golive-note" className="font-mono text-[11px] opacity-60">{t('trkChipGoLive')}</Chip>
+                <span id="golive-note" className="font-mono text-[11px] text-ink-3">({t('trkGoLiveNote')})</span>
+                <span className="font-mono text-[11px] text-ink-2">
+                    {fill(t('trkPaperLine'), { bps: ledgers.config?.cost_bps ?? '—', date: since })}
+                </span>
             </div>
 
-            {/* Header + what-if costs */}
-            <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4 py-7">
-                <div className="max-w-[620px]">
-                    <h1 className="text-[22px] font-bold leading-snug tracking-head text-ink">
-                        {t('trackHeadline')}
-                    </h1>
-                    <p className="mt-2 text-[12.5px] text-ink-2">
-                        {t('trackSub')} Live since {ledgers.inception ?? '—'}.
-                    </p>
-                </div>
-                <div>
-                    <Micro className="block">{t('trackWhatIf')}</Micro>
-                    <div className="mt-1.5 flex items-baseline gap-2 border border-rule-24 px-2.5 py-1">
-                        <input
-                            type="number" min={0} max={1} step={0.05}
-                            value={commInput}
-                            onChange={(e) => { setCommInput(e.target.value); localStorage.setItem(COMM_KEY, e.target.value); }}
-                            aria-label="Commission percent per trade"
-                            className="w-[52px] bg-transparent font-mono text-[12px] font-semibold text-ink outline-none"
-                        />
-                        <Micro className="text-ink-3">{t('trackPerTrade')}</Micro>
-                    </div>
-                    <Micro className="mt-1.5 block text-ink-3">
-                        {((ledgers.config?.cost_bps ?? 10) / 100).toFixed(2)}% baked into the ledger · recosts every trade
-                    </Micro>
-                </div>
-            </div>
+            <ScoreboardView board={board} loaded={outcomesLoaded} />
 
-            {/* Strategy stat band */}
-            <div className="grid grid-cols-1 gap-x-5 border-t border-rule-14 pb-4 sm:grid-cols-2">
-                {CARDS.map((c) => (
-                    <StatCard
-                        key={c.key}
-                        book={books[c.key]}
-                        llm={c.key === 'equal' ? books.rn_depth : books[`${c.key}_llm`]}
-                        title={c.title}
-                        note={c.key === 'mine' && !loggedIn ? 'log in and save a portfolio snapshot' : c.note}
-                        active={ledgerView === c.key}
-                        onClick={() => setLedgerView(c.key)}
-                    />
-                ))}
-            </div>
+            <PaperBooks ledgers={ledgers} loggedIn={loggedIn} />
 
-
-            <NavChart
-                curve={curve}
-                visible={visible}
-                onToggle={(k) => setVisible((v) => ({ ...v, [k]: !v[k] }))}
-                commission={commissionPct}
-                commissionLabel={commInput}
-            />
-
-            {/* THE LEDGER */}
-            <section className="mt-9">
-                <SectionHead
-                    title={t('trackLedger')}
-                    note={`${BOOKS.find((b) => b.key === posKey)?.label ?? posKey} — every position held and every trade made, appended daily`}
-                    right={
-                        <span className="flex items-center gap-2">
-                            <Chip active={posSource === 'baseline'} onClick={() => setPosSource('baseline')} className="px-2.5 py-1 text-[11px]">Quant</Chip>
-                            <Chip active={posSource === 'llm'} onClick={() => setPosSource('llm')} className="px-2.5 py-1 text-[11px]">AI (old analyst)</Chip>
-                        </span>
-                    }
+            <TrackSection title={t('trkGrowthTitle')}>
+                <NavChart
+                    curve={curve}
+                    visible={visible}
+                    onToggle={(k) => setVisible((v) => ({ ...v, [k]: !v[k] }))}
+                    commission={commissionPct}
+                    costBps={costBps}
+                    onCostBps={onCostBps}
+                    // TODO(data request): record_epoch. Pass the go-live date as resetDate once the data carries it.
                 />
+                <Micro className="mt-1 block text-ink-3">
+                    {fill(t('trkCostNote'), { bps: ledgers.config?.cost_bps ?? '—' })}
+                </Micro>
+            </TrackSection>
 
-                {!active ? (
-                    <p className="py-6 text-[12px] text-ink-3">
-                        {ledgerView === 'mine' && !loggedIn
-                            ? 'Log in and save a My Portfolio snapshot to track your own book here.'
-                            : 'This book has no ledger yet.'}
-                    </p>
+            {/* THE LEDGER — AI book */}
+            <TrackSection title={t('trackLedger')} sub={t('trkAiBook')}>
+                {!ai ? (
+                    <p className="mt-4 text-[12px] text-ink-3">—</p>
                 ) : (
-                    <div className="grid grid-cols-1 gap-x-11 lg:grid-cols-[1fr_1.15fr]">
-                        {/* Current holdings */}
-                        <div className="min-w-0 py-5">
-                            <Micro className="block">{t('trackHoldings')} · {heldCount}</Micro>
-                            <div className="mt-3 grid grid-cols-[70px_70px_1fr_1fr_60px] gap-x-3 border-b border-rule-18 pb-2">
-                                <Micro>Ticker</Micro><Micro>Entered</Micro>
-                                <Micro className="text-right">Entry</Micro><Micro className="text-right">Now</Micro>
-                                <Micro className="text-right">P&amp;L</Micro>
+                    <>
+                        <div className="scroll-dark mt-4 max-h-[420px] overflow-y-auto">
+                            <div className={clsx('hidden grid-cols-[110px_70px_80px_100px_1fr] gap-x-3 border-b border-rule-18 pb-2 sm:grid', colHead)}>
+                                <span>{t('trkColDate')}</span><span>{t('trkColSide')}</span><span>{t('trkColTicker')}</span>
+                                <span>{t('trkColPrice')}</span><span>{t('trkColReason')}</span>
                             </div>
-                            {holdings.slice(0, 25).map((h) => (
+                            {rows.map((r, i) => (
                                 <div
-                                    key={h.ticker}
-                                    role="button"
-                                    tabIndex={0}
-                                    onClick={() => onOpenTicker(h.ticker)}
-                                    onKeyDown={(e) => { if (e.key === 'Enter') onOpenTicker(h.ticker); }}
-                                    className="grid cursor-pointer grid-cols-[70px_70px_1fr_1fr_60px] gap-x-3 border-b border-rule-10 py-2 hover:bg-hover"
+                                    key={`${r.date}-${r.trade?.ticker ?? 'none'}-${i}`}
+                                    className="grid grid-cols-[88px_44px_56px_1fr] gap-x-3 gap-y-0.5 border-b border-rule-10 py-2 text-[12.5px] sm:grid-cols-[110px_70px_80px_100px_1fr]"
                                 >
-                                    <span className="font-mono text-[11.5px] font-semibold text-ink">{h.ticker}</span>
-                                    <span className="font-mono text-[11px] text-ink-3">{fmtDateShort(h.entry_date)}</span>
-                                    <span className="text-right font-mono text-[11px] text-ink-2">{fmtMoney(h.entry_price)}</span>
-                                    <span className="text-right font-mono text-[11px] text-ink-2">{fmtMoney(h.now)}</span>
-                                    <span className={clsx('text-right font-mono text-[11px]', pctClass(h.pl))}>
-                                        {h.pl == null ? '—' : fmtSignedPct(h.pl)}
-                                    </span>
+                                    <span className="font-mono text-[11.5px] text-ink-2">{r.date}</span>
+                                    {r.trade ? (
+                                        <>
+                                            <span className="font-mono text-[11.5px] text-ink-2">{sideText(r.trade.side)}</span>
+                                            {tickerLink(r.trade.ticker, 'text-[12px]')}
+                                            <span className="font-mono text-[11.5px] text-ink-2">{fmtMoney(r.trade.price)}</span>
+                                            <span className="col-span-4 text-ink-2 sm:col-span-1">{reasonText(r.trade.reason)}</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span className="font-mono text-[11.5px] text-ink-3">—</span>
+                                            <span /><span />
+                                            <span className="col-span-4 text-ink-3 sm:col-span-1">
+                                                {t('trackNoChanges')} · {r.held} {t('trkHeld')}
+                                            </span>
+                                        </>
+                                    )}
                                 </div>
                             ))}
-                            {holdings.length > 25 && (
-                                <Micro className="mt-2 block text-ink-3">+ {holdings.length - 25} more</Micro>
-                            )}
                         </div>
+                        <Micro className="mt-2 block text-ink-3">
+                            {fill(t('trkAppendOnly'), { n: (ai.nav_series ?? []).length })}
+                        </Micro>
 
-                        {/* Daily activity */}
-                        <div className="min-w-0 py-5">
-                            <Micro className="block">{t('trackActivity')}</Micro>
-                            <div className="scroll-dark mt-3 max-h-[520px] overflow-y-auto">
-                                {activity.map(({ date, trades }: { date: string; trades: Trade[] }) => (
-                                    <div key={date} className="grid grid-cols-[70px_1fr] gap-x-3 border-b border-rule-10 py-2">
-                                        <span className="font-mono text-[11px] text-ink-3">{fmtDateShort(date)}</span>
-                                        <span className="min-w-0">
-                                            {trades.length === 0 ? (
-                                                <span className="text-[11px] text-ink-3">— {t('trackNoChanges')} · {heldCount} {t('trackPositionsHeld')}</span>
-                                            ) : trades.map((t, i) => (
-                                                <span key={i} className="block text-[11px] text-ink-2">
-                                                    <span className={clsx('font-mono font-semibold', t.side === 'buy' ? 'text-pos' : 'text-neg')}>
-                                                        {t.side.toUpperCase()}
-                                                    </span>{' '}
-                                                    <button onClick={() => onOpenTicker(t.ticker)} className="font-semibold text-ink hover:text-accent">
-                                                        {t.ticker}
-                                                    </button>{' '}
-                                                    <span className="font-mono text-ink-3">{fmtMoney(t.price)}</span>
-                                                    {t.reason && <span className="text-ink-3"> · {t.reason}</span>}
+                        <p className="mt-4 font-mono text-[11px] text-accent">
+                            {DRILLS.map((d, i) => (
+                                <React.Fragment key={d.key}>
+                                    {i > 0 && <span className="text-off"> · </span>}
+                                    <button
+                                        type="button"
+                                        onClick={() => toggle(d.key)}
+                                        aria-expanded={open[d.key]}
+                                        className={clsx('hover:text-ink', open[d.key] && 'font-semibold text-ink')}
+                                    >
+                                        {t(d.label)}
+                                    </button>
+                                </React.Fragment>
+                            ))}
+                            <span aria-hidden> ▸</span>
+                        </p>
+
+                        {open.holdings && (
+                            <div className="mt-4 border-t border-rule-10 pt-3">
+                                <Micro className="block">{t('trackHoldings')} · {heldNow}</Micro>
+                                {holdings.length === 0 ? (
+                                    <p className="mt-2 text-[12px] text-ink-3">{t('trkNoHoldings')}</p>
+                                ) : (
+                                    <>
+                                        <div className={clsx('mt-3 grid grid-cols-[64px_repeat(3,minmax(0,1fr))] gap-x-3 border-b border-rule-18 pb-2 sm:grid-cols-[70px_80px_1fr_1fr_70px]', colHead)}>
+                                            <span>{t('trkColTicker')}</span><span className="hidden sm:block">{t('trkColEntered')}</span>
+                                            <span className="text-right">{t('trkColEntry')}</span><span className="text-right">{t('trkColNow')}</span>
+                                            <span className="text-right">{t('trkColPL')}</span>
+                                        </div>
+                                        {holdings.map((h) => (
+                                            <div key={h.ticker} className="grid grid-cols-[64px_repeat(3,minmax(0,1fr))] gap-x-3 border-b border-rule-10 py-2 sm:grid-cols-[70px_80px_1fr_1fr_70px]">
+                                                {tickerLink(h.ticker, 'text-[11.5px]')}
+                                                <span className="hidden font-mono text-[11px] text-ink-3 sm:block">{fmtDateShort(h.entry_date)}</span>
+                                                <span className="text-right font-mono text-[11px] text-ink-2">{fmtMoney(h.entry_price)}</span>
+                                                <span className="text-right font-mono text-[11px] text-ink-2">{fmtMoney(h.now)}</span>
+                                                <span className={clsx('text-right font-mono text-[11px]', toneClass(h.pl))}>{h.pl == null ? '—' : fmtSignedPct(h.pl)}</span>
+                                            </div>
+                                        ))}
+                                    </>
+                                )}
+                            </div>
+                        )}
+
+                        {open.closed && (
+                            <div className="mt-4 border-t border-rule-10 pt-3">
+                                <Micro className="block">
+                                    {t('trackClosed')} · {fill(t('trkClosedNote'), { n: closed.length, w: fmtPlainPct(ai.summary?.win_rate_pct) })}
+                                </Micro>
+                                {closed.length === 0 ? (
+                                    <p className="mt-2 text-[12px] text-ink-3">{t('trkNoClosed')}</p>
+                                ) : (
+                                    <div className="scroll-dark mt-3 max-h-[400px] overflow-y-auto">
+                                        <div className={clsx('hidden grid-cols-[70px_80px_80px_60px_80px_90px] gap-x-3 border-b border-rule-18 pb-2 sm:grid', colHead)}>
+                                            <span>{t('trkColTicker')}</span><span>{t('trkColEntered')}</span><span>{t('trkColExited')}</span>
+                                            <span className="text-right">{t('trkColDays')}</span><span className="text-right">{t('trkReturn')}</span>
+                                            <span className="text-right">{t('trkColPostExit')}</span>
+                                        </div>
+                                        {closed.map((c: { ticker: string; entry_date: string; exit_date: string; hold_days: number; return_pct: number; post_exit_return_pct: number | null }, i: number) => (
+                                            <div key={`${c.ticker}-${c.exit_date}-${i}`} className="grid grid-cols-3 gap-x-3 gap-y-1 border-b border-rule-10 py-2 font-mono text-[11px] sm:grid-cols-[70px_80px_80px_60px_80px_90px]">
+                                                {tickerLink(c.ticker, 'text-[11.5px]')}
+                                                <span className="text-ink-3"><span className="sm:hidden">{t('trkColEntered')} </span>{fmtDateShort(c.entry_date)}</span>
+                                                <span className="text-ink-3"><span className="sm:hidden">{t('trkColExited')} </span>{fmtDateShort(c.exit_date)}</span>
+                                                <span className="text-ink-3 sm:text-right"><span className="sm:hidden">{t('trkColDays')} </span>{c.hold_days}</span>
+                                                <span className={clsx('sm:text-right', toneClass(c.return_pct))}><span className="text-ink-3 sm:hidden">{t('trkReturn')} </span>{fmtSignedPct(c.return_pct)}</span>
+                                                <span className={clsx('sm:text-right', toneClass(c.post_exit_return_pct))}>
+                                                    <span className="text-ink-3 sm:hidden">{t('trkColPostExit')} </span>
+                                                    {c.post_exit_return_pct == null ? '—' : fmtSignedPct(c.post_exit_return_pct)}
                                                 </span>
-                                            ))}
-                                        </span>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
+                                )}
                             </div>
-                            <Micro className="mt-2 block text-ink-3">
-                                Append-only — {(active.nav_series ?? []).length} days on file
-                            </Micro>
-                        </div>
-                    </div>
-                )}
-            </section>
+                        )}
 
-            {/* Closed trades */}
-            {closed.length > 0 && (
-                <section className="mt-8">
-                    <SectionHead title={t('trackClosed')} note={`${closed.length} round trips · win rate ${active?.summary?.win_rate_pct ?? '—'}%`} />
-                    <div className="scroll-dark mt-3 max-h-[400px] overflow-y-auto">
-                        <div className="grid grid-cols-[70px_80px_80px_60px_80px_90px] gap-x-3 border-b border-rule-18 pb-2">
-                            <Micro>Ticker</Micro><Micro>Entered</Micro><Micro>Exited</Micro>
-                            <Micro className="text-right">Days</Micro><Micro className="text-right">Return</Micro>
-                            <Micro className="text-right">Post-exit</Micro>
-                        </div>
-                        {closed.map((c: any, i: number) => (
-                            <div key={`${c.ticker}-${c.exit_date}-${i}`} className="grid grid-cols-[70px_80px_80px_60px_80px_90px] gap-x-3 border-b border-rule-10 py-2">
-                                <button onClick={() => onOpenTicker(c.ticker)} className="text-left font-mono text-[11.5px] font-semibold text-ink hover:text-accent">
-                                    {c.ticker}
-                                </button>
-                                <span className="font-mono text-[11px] text-ink-3">{fmtDateShort(c.entry_date)}</span>
-                                <span className="font-mono text-[11px] text-ink-3">{fmtDateShort(c.exit_date)}</span>
-                                <span className="text-right font-mono text-[11px] text-ink-3">{c.hold_days}</span>
-                                <span className={clsx('text-right font-mono text-[11px]', pctClass(c.return_pct))}>{fmtSignedPct(c.return_pct)}</span>
-                                <span className={clsx('text-right font-mono text-[11px]', pctClass(c.post_exit_return_pct))}>
-                                    {c.post_exit_return_pct == null ? '—' : fmtSignedPct(c.post_exit_return_pct)}
+                        {open.history && (
+                            <div className="mt-4 border-t border-rule-10 pt-3">
+                                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+                                    <Micro>{t('trackHistory')} · {fill(t('trkHistNote'), { n: (ai.trades ?? []).length })}</Micro>
+                                    <input
+                                        value={tradeQuery}
+                                        onChange={(e) => setTradeQuery(e.target.value)}
+                                        placeholder={t('trkFilter')}
+                                        aria-label={t('trkFilterAria')}
+                                        className="w-full border border-rule-24 bg-transparent px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[.06em] text-ink placeholder:text-ink-3 sm:w-[210px]"
+                                    />
+                                </div>
+                                <div className="scroll-dark mt-3 max-h-[360px] overflow-y-auto">
+                                    {tradeRows.map((x, i) => (
+                                        <div key={`${x.ticker}-${x.date}-${i}`} className="grid grid-cols-[88px_44px_56px_1fr] gap-x-3 gap-y-0.5 border-b border-rule-10 py-1.5 sm:grid-cols-[100px_60px_80px_90px_1fr]">
+                                            <span className="font-mono text-[11px] text-ink-3">{x.date}</span>
+                                            <span className="font-mono text-[11px] text-ink-2">{sideText(x.side)}</span>
+                                            {tickerLink(x.ticker, 'text-[11px]')}
+                                            <span className="font-mono text-[11px] text-ink-2">{fmtMoney(x.price)}</span>
+                                            <span className="col-span-4 text-[11px] text-ink-3 sm:col-span-1">{reasonText(x.reason)}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {open.early && (
+                            <div className="mt-4 border-t border-rule-10 pt-3">
+                                <span className="font-mono text-[11px] font-semibold uppercase tracking-[.05em] text-warn">
+                                    {t('trackSoldEarly')} · {early.length}
                                 </span>
+                                <p className="mt-1.5 text-[12px] leading-relaxed text-ink-2">
+                                    {early.length === 0
+                                        ? t('trkNoEarly')
+                                        : `${early.slice(0, 4).map((c) => fill(t('trkEarlyLine'), {
+                                            ticker: c.ticker, ret: fmtSignedPct(c.return_pct),
+                                            post: fmtSignedPct(c.post_exit_return_pct), days: c.post_exit_days,
+                                        })).join(' · ')}. ${t('trkEarlyTail')}`}
+                                </p>
                             </div>
-                        ))}
-                    </div>
-                </section>
-            )}
-
-            {/* Full trade history */}
-            <section className="mt-8">
-                <SectionHead
-                    title={t('trackHistory')}
-                    note={`${(active?.trades ?? []).length} trades on file · latest 500 shown`}
-                    right={
-                        <input
-                            value={tradeQuery}
-                            onChange={(e) => setTradeQuery(e.target.value)}
-                            placeholder="FILTER TICKER OR DATE"
-                            aria-label="Filter trades"
-                            className="w-[180px] border border-rule-24 bg-transparent px-2.5 py-1 font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink placeholder:text-ink-3"
-                        />
-                    }
-                />
-                <div className="scroll-dark mt-3 max-h-[360px] overflow-y-auto">
-                    {tradeRows.map((t, i) => (
-                        <div key={`${t.ticker}-${t.date}-${i}`} className="grid grid-cols-[80px_50px_70px_80px_1fr] gap-x-3 border-b border-rule-10 py-1.5">
-                            <span className="font-mono text-[11px] text-ink-3">{t.date}</span>
-                            <span className={clsx('font-mono text-[11px] font-semibold', t.side === 'buy' ? 'text-pos' : 'text-neg')}>
-                                {t.side.toUpperCase()}
-                            </span>
-                            <button onClick={() => onOpenTicker(t.ticker)} className="text-left font-mono text-[11px] font-semibold text-ink hover:text-accent">
-                                {t.ticker}
-                            </button>
-                            <span className="text-right font-mono text-[11px] text-ink-2">{fmtMoney(t.price)}</span>
-                            <span className="truncate text-[11px] text-ink-3">{t.reason ?? ''}</span>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* Postmortem */}
-            {early.length > 0 && (
-                <div className="mt-8 border-t border-rule-14 pt-4">
-                    <span className="font-mono font-semibold text-[11px] uppercase tracking-[.05em] text-warn">
-                        {t('trackSoldEarly')} · {early.length}
-                    </span>
-                    <p className="mt-1.5 text-[11.5px] leading-relaxed text-ink-2">
-                        {early.slice(0, 4).map((c) => `${c.ticker} exited ${fmtSignedPct(c.return_pct)}, ${fmtSignedPct(c.post_exit_return_pct)} in the ${c.post_exit_days} days after`).join(' · ')}
-                        . A recurring pattern here means the exit rule needs work.
-                    </p>
-                </div>
-            )}
+                        )}
+                    </>
+                )}
+            </TrackSection>
         </div>
     );
 }

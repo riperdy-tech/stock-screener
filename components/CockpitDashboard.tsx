@@ -10,10 +10,9 @@ import { AuthModal } from './AuthModal';
 import { useDeskData } from '@/lib/desk/useDeskData';
 import { Shell } from './desk/Shell';
 import { RankingsView } from './desk/rankings/RankingsView';
-import { TrackView } from './desk/track/TrackView';
 import { MyPortfolio } from './desk/portfolio/MyPortfolio';
 
-type TabId = 'rankings' | 'track' | 'portfolio';
+type TabId = 'rankings' | 'portfolio';
 
 export default function CockpitDashboard() {
     const [tab, setTab] = useState<TabId>('rankings');
@@ -23,7 +22,7 @@ export default function CockpitDashboard() {
     const searchParams = useSearchParams();
     const urlTab = searchParams.get('tab');
     useEffect(() => {
-        if (urlTab === 'rankings' || urlTab === 'track' || urlTab === 'portfolio') setTab(urlTab);
+        if (urlTab === 'rankings' || urlTab === 'portfolio') setTab(urlTab);
     }, [urlTab]);
     // Every payload (and the private `mine` ledger merge) comes from one cached hook so
     // navigating to a ticker page and back never refetches the 16 MB of static JSON/CSV.
@@ -33,7 +32,7 @@ export default function CockpitDashboard() {
     } = useDeskData();
     // Ticker pages are routes now, so a detail view is shareable and the browser's
     // own Back button works. `from` tells the page which surface to return to.
-    const openTicker = (ticker: string, from: 'ai' | 'quant' | 'track' | 'port') =>
+    const openTicker = (ticker: string, from: 'ai' | 'quant' | 'port') =>
         router.push(`/t/${encodeURIComponent(ticker)}?from=${from}`);
     const [showAuth, setShowAuth] = useState(false);
 
@@ -44,14 +43,6 @@ export default function CockpitDashboard() {
                     <RankingsView
                         factor={factor} depth={depth} valuations={valuations}
                         overlay={overlay} stockInfo={stockInfo} ledgers={ledgers}
-                    />
-                )}
-
-                {tab === 'track' && (
-                    <TrackView
-                        ledgers={ledgers}
-                        loggedIn={!!auth.user}
-                        onOpenTicker={(t) => openTicker(t, 'track')}
                     />
                 )}
 

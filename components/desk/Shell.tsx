@@ -24,7 +24,7 @@ export type DeskTab = 'rankings' | 'track' | 'portfolio';
 
 const TABS: { id: DeskTab; key: 'navDesk' | 'navTrackRecord' | 'navPortfolio'; shortKey: 'navDesk' | 'navTrackShort' | 'navPortfolio'; href: string }[] = [
     { id: 'rankings', key: 'navDesk', shortKey: 'navDesk', href: '/?tab=rankings' },
-    { id: 'track', key: 'navTrackRecord', shortKey: 'navTrackShort', href: '/?tab=track' },
+    { id: 'track', key: 'navTrackRecord', shortKey: 'navTrackShort', href: '/track' },
     { id: 'portfolio', key: 'navPortfolio', shortKey: 'navPortfolio', href: '/?tab=portfolio' },
 ];
 
