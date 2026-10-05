@@ -268,3 +268,43 @@ sup {
     font-weight: 600;
     line-height: 1;
 }
+
+/* Desk table (components/desk/rankings/DeskTable.tsx). The 11-column grid of handoff 5.1e; the
+   company column takes the slack. Narrower screens drop timing, then pct, then Q M R V G (README 7).
+   Below 640px each row is a stacked card instead (.dk-wide is hidden, .dk-card shown). The column
+   templates must list exactly the columns each tier shows, because a hidden cell takes no track. */
+.dk-grid {
+    display: grid;
+    align-items: center;
+    column-gap: 10px;
+    /* company price verdict band mos size door chevron */
+    grid-template-columns: minmax(100px, 1fr) 64px 96px 110px 50px 56px 104px 16px;
+}
+.dk-timing, .dk-pct, .dk-pillars { display: none; }
+.dk-span-ai { grid-column: span 4; }
+.dk-span-sc { grid-column: span 1; }
+@media (min-width: 900px) {
+    .dk-grid {
+        column-gap: 12px;
+        /* + Q M R V G */
+        grid-template-columns: minmax(100px, 1fr) 70px 104px 120px 54px 62px 120px 76px 16px;
+    }
+    .dk-pillars { display: block; }
+    .dk-span-sc { grid-column: span 2; }
+}
+@media (min-width: 970px) {
+    .dk-grid {
+        /* + pct */
+        grid-template-columns: minmax(100px, 1fr) 70px 104px 120px 54px 62px 120px 54px 76px 16px;
+    }
+    .dk-pct { display: block; }
+    .dk-span-sc { grid-column: span 3; }
+}
+@media (min-width: 1050px) {
+    .dk-grid {
+        /* + timing: the full spec grid */
+        grid-template-columns: minmax(100px, 1fr) 70px 104px 120px 54px 62px 70px 120px 54px 76px 16px;
+    }
+    .dk-timing { display: block; }
+    .dk-span-ai { grid-column: span 5; }
+}

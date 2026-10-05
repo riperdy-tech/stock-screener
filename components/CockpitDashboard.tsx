@@ -1,6 +1,6 @@
 'use client';
 
-// The desk's home surface: it owns the tab and lens state and hands the cached
+// The desk's home surface: it owns the tab state and hands the cached
 // data bag to whichever view is showing. Every panel lives under components/desk.
 // The four legacy lenses live unchanged at /lenses.
 
@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { AuthModal } from './AuthModal';
 import { useDeskData } from '@/lib/desk/useDeskData';
 import { Shell } from './desk/Shell';
-import { RankingsView, type Lens } from './desk/rankings/RankingsView';
+import { RankingsView } from './desk/rankings/RankingsView';
 import { TrackView } from './desk/track/TrackView';
 import { MyPortfolio } from './desk/portfolio/MyPortfolio';
 
@@ -22,7 +22,6 @@ export default function CockpitDashboard() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const urlTab = searchParams.get('tab');
-    const urlLens = searchParams.get('lens');
     useEffect(() => {
         if (urlTab === 'rankings' || urlTab === 'track' || urlTab === 'portfolio') setTab(urlTab);
     }, [urlTab]);
@@ -32,13 +31,6 @@ export default function CockpitDashboard() {
         factor, valuations, overlay, depth,
         ledgers, stockInfo, loading, reload, auth,
     } = useDeskData();
-    // THE LENS — RS2 AI verdicts (default), the quant filter that feeds them, or
-    // the two side by side. Rankings owns its own filters.
-    const [lens, setLens] = useState<Lens>('ai');
-    useEffect(() => {
-        if (urlLens === 'ai' || urlLens === 'quant') setLens(urlLens);
-    }, [urlLens]);
-
     // Ticker pages are routes now, so a detail view is shareable and the browser's
     // own Back button works. `from` tells the page which surface to return to.
     const openTicker = (ticker: string, from: 'ai' | 'quant' | 'track' | 'port') =>
@@ -51,8 +43,7 @@ export default function CockpitDashboard() {
                 {tab === 'rankings' && (
                     <RankingsView
                         factor={factor} depth={depth} valuations={valuations}
-                        overlay={overlay} stockInfo={stockInfo}
-                        lens={lens} onLens={setLens} onOpen={(t) => openTicker(t, lens)}
+                        overlay={overlay} stockInfo={stockInfo} ledgers={ledgers}
                     />
                 )}
 
