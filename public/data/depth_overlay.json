@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-05T19:42:01.549627",
+ "generated_at": "2026-10-05T23:42:51.685085",
  "scheme": "band_direction_v1",
- "count": 27,
+ "count": 28,
  "actionable_count": 0,
  "gate_version": 8,
  "tickers": {
@@ -9022,67 +9022,919 @@
   },
   "GASS": {
    "ticker": "GASS",
-   "price": 9.33,
-   "date": "2026-09-19",
-   "model": "rs2-analyst-deep-mtp5",
-   "samples_run": 3,
-   "n_basis": 3,
-   "iv_band_low": 13.3,
-   "iv_band_high": 17.15,
-   "median_iv": 13.4,
-   "spread_pct": 28.9,
-   "flags": [],
-   "pack_revision": 3,
+   "price": 9.34,
+   "date": "2026-10-05",
+   "model": "rs2-analyst-deep-mtp5-v33",
+   "samples_run": 1,
+   "n_basis": 1,
+   "iv_band_low": 21.98,
+   "iv_band_high": 21.98,
+   "median_iv": 21.98,
+   "spread_pct": null,
+   "flags": [
+    "MODE_INSTABILITY",
+    "above_52w_high_2.08x",
+    "above_analyst_high_1.73x_cap_1.5x"
+   ],
+   "pack_revision": 21,
    "scheme": "band_direction_v1",
+   "m": null,
    "scorecard": {
-    "median_iv": 13.4,
-    "median_bull_iv": 18.7,
-    "median_bear_iv": 8.7,
-    "iv_band_low": 13.3,
-    "iv_band_high": 17.15,
-    "median_conviction_score": 12.0,
-    "median_quality_moat": 2.7,
-    "median_kelly_fraction_pct": 6.0,
-    "asymmetric_payoff_skew": 5.22,
+    "median_iv": 21.98,
+    "base_iv": 21.98,
+    "median_bull_iv": 24.75,
+    "median_bear_iv": 16.79,
+    "iv_band_low": 21.98,
+    "iv_band_high": 21.98,
+    "spread_pct": null,
+    "converged": false,
+    "medoid_sample": 1,
+    "n_basis": 1,
+    "median_conviction_score": 9.0,
+    "median_quality_moat": 2.3,
+    "median_kelly_fraction_pct": 24.75,
+    "asymmetric_payoff_skew": 99.9,
     "reentry_tranches": {
-     "tranche_1_starter": 9.33,
-     "tranche_2_core": 7.9
+     "tranche_1_starter": 9.34,
+     "tranche_2_core": 8.0
     },
     "thesis_invalidation_triggers": [
-     "A second uninsured vessel total-loss, OR net cash + short-term investments falling below $150M (~$4.00/share) on the balance sheet \u2014 either breach removes the net-cash floor that bounds the downside and invalidates the asset-play thesis.",
-     "Fleet average daily TCE below $9,000 for two consecutive quarters AND rolling 12-month contracted period coverage below 40% of fleet days, or any new debt issuance exceeding $50M, or own-fleet vessel S&P transaction below $12M per vessel",
-     "Blended TCE < $6,500/vessel/day for two consecutive quarters AND remaining contracted revenue falls below $60M (contracted floor broken), OR verified fleet market value re-rated to <$300M (age-mix deterioration eliminating the NAV discount), OR management deploys >$100M of cash on an acquisition/renewal at >$35M/vessel (value-destroying agency event). Any single trigger reduces conviction by 3 points and halts Tranche 2."
-    ]
+     "Fleet-average daily TCE below $12,000 for two consecutive reported quarters (Q2 2026: $15,709 per PRIMARY P1) or quarterly net income below $12M with 2027 contracted coverage disclosed below ~$30M \u2014 i.e. the Hormuz rate premium has collapsed and the contracted floor no longer supports the Base path"
+    ],
+    "base_probability": 0.5,
+    "bull_probability": 0.3,
+    "bear_probability": 0.2,
+    "probabilities_defaulted": false,
+    "base_cf_used": 0.08,
+    "base_cf_basis": "latest_fy",
+    "coe_used": 0.0904,
+    "coe_source": "anchor",
+    "coe_adjustment_reason": null,
+    "valuation_frame": "equity",
+    "terminal_method": "gordon",
+    "terminal_multiple_or_g": 0.0236,
+    "fade_years": 10,
+    "stage1_growth_path": [
+     0.9,
+     -0.57,
+     -0.1,
+     -0.06,
+     -0.04
+    ],
+    "years12_ratio": 0.937,
+    "base_to_civ": null,
+    "consensus_implied_value": null,
+    "bull_years12_ratio": null,
+    "bear_years12_ratio": null,
+    "base_shares_ratio": null,
+    "bull_shares_ratio": null,
+    "bear_shares_ratio": null,
+    "desk_frame": null,
+    "desk_net_debt": null,
+    "shares_basis": "vendor",
+    "shares_reason": null,
+    "net_debt_reason": null,
+    "excess_cash_reason": null,
+    "scenario_deviation_reason": "DEFAULTS scenario levels are not available and the single-analyst consensus (next-FY EPS $1.43) does not resolve the Hormuz outcome, so Bull and Bear year-2 cash flows are set from dated industry evidence. Bull (~$75M): Strait of Hormuz remains closed (shock onset 2026-09-28, DATA 1.6; closure unres",
+    "bull_bear_anchor": "no consensus range (1 analysts)",
+    "terminal_multiple_reason": null,
+    "interest_addback": null,
+    "wacc_reason": null,
+    "owner_earnings_source": null,
+    "consensus_reference_status": "not_available",
+    "terminal_g_gap_bp": 0,
+    "terminal_reason": null,
+    "base_window_gap": null,
+    "finite_life_years": null,
+    "cash_flow_life": "perpetual",
+    "cash_flow_life_reason": "Perpetual: StealthGas owns 26 Panamax LPG carriers that are renewable assets, not a depleting stock \u2014 the company is voluntarily selling older vessels (two sold in H1 2026; Eco Wizard to be sold in damaged condition, PRIMARY P1 filed 2026-09-03) with zero debt and no obligation to replace tonnage, a",
+    "terminal_ronic": 0.0904,
+    "terminal_ronic_gap_pts": null,
+    "long_run_facts": {
+     "cycle": false,
+     "cycle_year": null,
+     "cycle_years": [],
+     "e5": null,
+     "oe5": null,
+     "m5": null,
+     "m_tc": 0.153439,
+     "m_years": [
+      2018,
+      2025,
+      8
+     ],
+     "r_tc": 0.042283999999999995,
+     "r_years": [
+      2018,
+      2025,
+      8
+     ],
+     "p": 0.375,
+     "g_rev": 0.01964,
+     "g_rev_years": [
+      2018,
+      2025,
+      8
+     ],
+     "terminal_g_basis": "revenue_trend",
+     "ni_over_oe": null,
+     "x_over_oe": null,
+     "nwc_intensity": -0.034687,
+     "nwc_years": [
+      2018,
+      2025,
+      8
+     ],
+     "stub_months": 9.1335,
+     "stamps": [],
+     "om_tc": 0.187342,
+     "om_trend": 0.352908,
+     "om_L": 0.31839,
+     "om_years": [
+      2018,
+      2025,
+      8
+     ],
+     "om_shape": "trend",
+     "om_basis": "with_amortization",
+     "om_5": null,
+     "m_long": null,
+     "margin_ratio": null
+    },
+    "working_capital_deducted": null,
+    "base_year_capped": null,
+    "split_after_last_filing": null,
+    "years12_held_by_desk": false,
+    "desk_stamps": [
+     "long_run_on_owner_earnings"
+    ],
+    "guidance_deviation_reason": "Base years 1-5 depart from the single-analyst consensus path (current-FY EPS $1.69 +3.0%, next-FY $1.43 -15.4%; DATA 8 fetched 2026-10-05; one analyst, no company guidance \u2014 no 8-K Item 2.02 found). Year 1 (+90%): includes the one-off Eco Wizard insurance settlement of ~$77M received in 2026 (PRIMAR",
+    "cycle_evidence": "Q2 2026 filed fleet-average TCE $15,709/day (PRIMARY P1, 2026-09-03) vs record VLGC benchmark $290/mt / ~$170k/day in May 2026 (Clarksons via IndexBox, 2026-05-12) with Strait of Hormuz transit ~90% below normal; Drewry (2026): 98 vessel deliveries in 2026 incl. 21 VLGCs \u2014 mid-cycle elevated rates with a dated normalization overhang",
+    "verdict_label": "undervalued",
+    "direction_m": "undervalued",
+    "crux": [
+     {
+      "citations": [
+       {
+        "date": "2026-09-03",
+        "quote": "About 60% of fleet days for the remainder of 2026 are secured on period charters, with total fleet employment days for all periods generating about $90 million (excl. our single JV vessel) in contracted revenues.",
+        "source": "PRIMARY P1"
+       },
+       {
+        "date": "2026-09-03",
+        "quote": "All of the vessels in the fully owned fleet are unencumbered. The Company has paid down all its bank debt since Q3 2025.",
+        "source": "PRIMARY P1"
+       },
+       {
+        "date": "2026-09-03",
+        "quote": "Strong profitability continued for the second quarter, with Net income of $17.3 million corresponding to a basic EPS of $0.46, 8.8% higher than the previous quarter\u2019s $15.9 million but reduced compared to the $20.4 million achieved in the second quarter of 2025.",
+        "source": "PRIMARY P1"
+       }
+      ],
+      "input": "growth_years_3_5",
+      "reason": "The price ($9.34; ~$351M market cap) implies owner cash flow shrinking ~60.4% per year in years 3-5 \u2014 i.e. an operating business worth near zero within five years, below even the company's own filed liquidity of $168.3M cash + short-term investments (2026-06-30) plus ~$77M insurance compensation. My"
+     }
+    ],
+    "crux_check": {
+     "valid": true,
+     "reason": null,
+     "entries": [
+      {
+       "input": "growth_years_3_5",
+       "own": -0.0670023883188896,
+       "implied": -0.6035990450921906,
+       "reachable": true,
+       "at_default": false,
+       "citations": [
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        }
+       ],
+       "valid": true,
+       "reason": null
+      }
+     ],
+     "stamps": []
+    },
+    "price_implied": {
+     "coe": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0904,
+      "bound": {
+       "low": 0.0524,
+       "high": 0.25,
+       "value_low": 37.5630485719825,
+       "value_high": 12.107596461011243
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "growth_years_3_5": {
+      "value": -0.6035990450921906,
+      "reachable": true,
+      "own": -0.0670023883188896,
+      "bound": {
+       "low": -0.9864261025465091,
+       "high": 9.973304965296355,
+       "value_low": 8.151731181165703,
+       "value_high": 177733.2837958982
+      },
+      "side": null,
+      "base_at_value": 9.3400000004052,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       -0.536134995077985,
+       -0.5361349943988024
+      ],
+      "stamps": [],
+      "shift": -0.5361349943988024,
+      "shift_bound": [
+       -0.899,
+       10.04
+      ],
+      "own_path": [
+       -0.1,
+       -0.06,
+       -0.04
+      ]
+     },
+     "fade_years": {
+      "value": null,
+      "reachable": false,
+      "own": 10,
+      "bound": {
+       "low": 0,
+       "high": 60,
+       "value_low": 22.59404909303526,
+       "value_high": 21.917806776679114
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "bracket_years": null,
+      "bracket_values": null
+     },
+     "terminal_g": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0236,
+      "bound": {
+       "low": 0.0,
+       "high": 0.044698999999999996,
+       "value_low": 21.949596869581047,
+       "value_high": 21.997929705044434
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "terminal_ronic": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0904,
+      "bound": {
+       "low": 0.0904,
+       "high": "unlimited",
+       "value_low": 21.97511544755675,
+       "value_high": 23.63936612686229
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "year2_level": {
+      "value": null,
+      "reachable": false,
+      "own": 0.06536,
+      "bound": {
+       "low": null,
+       "high": null,
+       "value_low": null,
+       "value_high": null
+      },
+      "side": null,
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "not_available": "the pack prints no bull2 and bear2 range"
+     }
+    },
+    "momentum_view": "neutral",
+    "entry_timing": "buy_now",
+    "momentum_flip_condition": {
+     "metric": "mom_6m",
+     "comparator": ">",
+     "threshold": 0.0,
+     "window_days": 180
+    },
+    "momentum_break_rule": {
+     "metric": "high_52w_distance",
+     "comparator": "<",
+     "threshold": -25.0,
+     "window_days": 365
+    },
+    "invalidation_rules": [
+     {
+      "metric": "net_income",
+      "comparator": "<=",
+      "threshold": 12.0,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "operating_margin_pct",
+      "comparator": "<=",
+      "threshold": 20.0,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "high_52w_distance",
+      "comparator": "<",
+      "threshold": -25.0,
+      "window": "365d",
+      "source": "market_data"
+     }
+    ],
+    "position_basis": "value",
+    "momentum_evidence": null,
+    "desk_calls": 3,
+    "desk_iv_match": true,
+    "desk_reverse_neutral_cagr": -17.14,
+    "coe_minus_anchor": 0.002759,
+    "desk_share_basis_matched": null,
+    "catalysts": [
+     {
+      "date": "2026-07-07",
+      "event": "Eco Wizard insurance matter settled; ~$77M compensation received; damaged vessel to be sold at no monetary value; liquidity raised to >$250M",
+      "direction": "bull",
+      "estimates_moved": "no visible change (single analyst: FY EPS $1.69 +3%, next-FY $1.43 -15.4%)",
+      "scenario": "Year-1 cash flow in all scenarios (~$77M one-off); liquidity floor under Bear"
+     },
+     {
+      "date": "2026-09-02",
+      "event": "Q2 2026 results: revenue $42.9M, net income $17.3M (~40% margin), EPS $0.46; cash+ST investments $168.3M; zero bank debt since Q3 2025; ~60% of remainder-2026 fleet days contracted generating ~$90M; ~$30M secured for 2027; four new time charters incl. one 2-year",
+      "direction": "bull",
+      "estimates_moved": "no visible change (next-FY EPS $1.43, -4.0% over 90 days, 1 up / 0 down revisions in 30d)",
+      "scenario": "Base path and the contracted revenue floor; confirms zero-debt structure"
+     },
+     {
+      "date": "2026-09-28",
+      "event": "Active oil_shock onset: Strait of Hormuz closure unresolved (Trump rejected 7-day reopening proposal on 2026-09-26); transit volumes ~90% below normal; US LPG exports at record 3.3M bbl/d in April",
+      "direction": "bull",
+      "estimates_moved": "no visible change",
+      "scenario": "Bull engine (sustained disruption, TCE $18-20k/day) and the dated Bear trigger if a deal reopens the Strait"
+     },
+     {
+      "date": "2026-05-12",
+      "event": "Record VLGC spot rates: $290/mt Houston-Chiba, ~$170k/day (Clarksons via IndexBox)",
+      "direction": "bull",
+      "estimates_moved": "no visible change",
+      "scenario": "Sector-directional support for Bull TCE assumption (GASS itself is Panamax; Q2 2026 actual TCE $15,709/day)"
+     },
+     {
+      "date": "2026-01-01",
+      "event": "Drewry 2026 outlook: 98 vessels slated for delivery in 2026 incl. 21 VLGCs; fleet growth surges from 2026; 50-60 shadow-fleet VLGCs could re-enter if Iran sanctions ease",
+      "direction": "bear",
+      "estimates_moved": "consistent with consensus next-FY revenue -5.2%",
+      "scenario": "Bear rate-normalization path (TCE $9-10k/day)"
+     }
+    ],
+    "bull_below_price_reason": null,
+    "bear_above_price_reason": "Even the Bear case values above today's $9.34 price because the downside is floored by the balance sheet and the asset base: zero debt, cash + short-term investments of $168.3M at 2026-06-30 plus ~$77M insurance compensation (PRIMARY P1, 2026-09-03: 'over $250 million currently'), and 26 unencumbere",
+    "code_fill_mode": "joint"
    },
-   "conviction_score": 12.0,
-   "business_quality_moat": 2.7,
-   "kelly_fraction_pct": 6.0,
-   "asymmetric_payoff_skew": 5.22,
-   "bull_iv": 18.7,
-   "bear_iv": 8.7,
+   "conviction_score": 9.0,
+   "business_quality_moat": 2.3,
+   "kelly_fraction_pct": 24.75,
+   "asymmetric_payoff_skew": 99.9,
+   "bull_iv": 24.75,
+   "bear_iv": 16.79,
    "reentry_tranches": {
-    "tranche_1_starter": 9.33,
-    "tranche_2_core": 7.9
+    "tranche_1_starter": 9.34,
+    "tranche_2_core": 8.0
    },
    "thesis_invalidation_triggers": [
-    "A second uninsured vessel total-loss, OR net cash + short-term investments falling below $150M (~$4.00/share) on the balance sheet \u2014 either breach removes the net-cash floor that bounds the downside and invalidates the asset-play thesis.",
-    "Fleet average daily TCE below $9,000 for two consecutive quarters AND rolling 12-month contracted period coverage below 40% of fleet days, or any new debt issuance exceeding $50M, or own-fleet vessel S&P transaction below $12M per vessel",
-    "Blended TCE < $6,500/vessel/day for two consecutive quarters AND remaining contracted revenue falls below $60M (contracted floor broken), OR verified fleet market value re-rated to <$300M (age-mix deterioration eliminating the NAV discount), OR management deploys >$100M of cash on an acquisition/renewal at >$35M/vessel (value-destroying agency event). Any single trigger reduces conviction by 3 points and halts Tranche 2."
+    "Fleet-average daily TCE below $12,000 for two consecutive reported quarters (Q2 2026: $15,709 per PRIMARY P1) or quarterly net income below $12M with 2027 contracted coverage disclosed below ~$30M \u2014 i.e. the Hormuz rate premium has collapsed and the contracted floor no longer supports the Base path"
    ],
    "converged": false,
    "early_stop": false,
-   "mode": "adaptive",
+   "mode": "fixed_1",
+   "coe_used": 0.0904,
+   "coe_source": "anchor",
+   "coe_adjustment_reason": null,
+   "valuation_frame": "equity",
+   "terminal_method": "gordon",
+   "terminal_multiple_or_g": 0.0236,
+   "fade_years": 10,
+   "stage1_growth_path": [
+    0.9,
+    -0.57,
+    -0.1,
+    -0.06,
+    -0.04
+   ],
+   "guidance_deviation_reason": "Base years 1-5 depart from the single-analyst consensus path (current-FY EPS $1.69 +3.0%, next-FY $1.43 -15.4%; DATA 8 fetched 2026-10-05; one analyst, no company guidance \u2014 no 8-K Item 2.02 found). Year 1 (+90%): includes the one-off Eco Wizard insurance settlement of ~$77M received in 2026 (PRIMAR",
+   "cycle_evidence": "Q2 2026 filed fleet-average TCE $15,709/day (PRIMARY P1, 2026-09-03) vs record VLGC benchmark $290/mt / ~$170k/day in May 2026 (Clarksons via IndexBox, 2026-05-12) with Strait of Hormuz transit ~90% below normal; Drewry (2026): 98 vessel deliveries in 2026 incl. 21 VLGCs \u2014 mid-cycle elevated rates with a dated normalization overhang",
+   "verdict_label": "undervalued",
+   "desk_calls": 3,
+   "desk_iv_match": true,
+   "desk_reverse_neutral_cagr": -17.14,
+   "coe_minus_anchor": 0.002759,
+   "desk_share_basis_matched": null,
+   "years12_ratio": 0.937,
+   "base_to_civ": null,
+   "consensus_implied_value": null,
+   "bull_years12_ratio": null,
+   "bear_years12_ratio": null,
+   "base_shares_ratio": null,
+   "bull_shares_ratio": null,
+   "bear_shares_ratio": null,
+   "desk_frame": null,
+   "desk_net_debt": null,
+   "shares_basis": "vendor",
+   "shares_reason": null,
+   "net_debt_reason": null,
+   "excess_cash_reason": null,
+   "scenario_deviation_reason": "DEFAULTS scenario levels are not available and the single-analyst consensus (next-FY EPS $1.43) does not resolve the Hormuz outcome, so Bull and Bear year-2 cash flows are set from dated industry evidence. Bull (~$75M): Strait of Hormuz remains closed (shock onset 2026-09-28, DATA 1.6; closure unres",
+   "bull_bear_anchor": "no consensus range (1 analysts)",
+   "terminal_multiple_reason": null,
+   "interest_addback": null,
+   "wacc_reason": null,
+   "owner_earnings_source": null,
+   "consensus_reference_status": "not_available",
+   "terminal_g_gap_bp": 0,
+   "terminal_reason": null,
+   "base_window_gap": null,
+   "finite_life_years": null,
+   "cash_flow_life": "perpetual",
+   "cash_flow_life_reason": "Perpetual: StealthGas owns 26 Panamax LPG carriers that are renewable assets, not a depleting stock \u2014 the company is voluntarily selling older vessels (two sold in H1 2026; Eco Wizard to be sold in damaged condition, PRIMARY P1 filed 2026-09-03) with zero debt and no obligation to replace tonnage, a",
+   "terminal_ronic": 0.0904,
+   "terminal_ronic_gap_pts": null,
+   "long_run_facts": {
+    "cycle": false,
+    "cycle_year": null,
+    "cycle_years": [],
+    "e5": null,
+    "oe5": null,
+    "m5": null,
+    "m_tc": 0.153439,
+    "m_years": [
+     2018,
+     2025,
+     8
+    ],
+    "r_tc": 0.042283999999999995,
+    "r_years": [
+     2018,
+     2025,
+     8
+    ],
+    "p": 0.375,
+    "g_rev": 0.01964,
+    "g_rev_years": [
+     2018,
+     2025,
+     8
+    ],
+    "terminal_g_basis": "revenue_trend",
+    "ni_over_oe": null,
+    "x_over_oe": null,
+    "nwc_intensity": -0.034687,
+    "nwc_years": [
+     2018,
+     2025,
+     8
+    ],
+    "stub_months": 9.1335,
+    "stamps": [],
+    "om_tc": 0.187342,
+    "om_trend": 0.352908,
+    "om_L": 0.31839,
+    "om_years": [
+     2018,
+     2025,
+     8
+    ],
+    "om_shape": "trend",
+    "om_basis": "with_amortization",
+    "om_5": null,
+    "m_long": null,
+    "margin_ratio": null
+   },
+   "working_capital_deducted": null,
+   "base_year_capped": null,
+   "years12_held_by_desk": false,
+   "desk_stamps": [
+    "long_run_on_owner_earnings"
+   ],
+   "momentum_view": "neutral",
+   "entry_timing": "buy_now",
+   "momentum_flip_condition": {
+    "metric": "mom_6m",
+    "comparator": ">",
+    "threshold": 0.0,
+    "window_days": 180
+   },
+   "momentum_break_rule": {
+    "metric": "high_52w_distance",
+    "comparator": "<",
+    "threshold": -25.0,
+    "window_days": 365
+   },
+   "invalidation_rules": [
+    {
+     "metric": "net_income",
+     "comparator": "<=",
+     "threshold": 12.0,
+     "window": "next reported quarter",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "operating_margin_pct",
+     "comparator": "<=",
+     "threshold": 20.0,
+     "window": "next reported quarter",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "high_52w_distance",
+     "comparator": "<",
+     "threshold": -25.0,
+     "window": "365d",
+     "source": "market_data"
+    }
+   ],
+   "position_basis": "value",
+   "position_basis_declared": "value",
+   "position_basis_votes": {
+    "value": 1
+   },
+   "momentum_evidence": null,
+   "momentum_state": {
+    "price_asof": "2026-09-22 17:51",
+    "mom_12_1": 0.3109,
+    "mom_6m": -0.0613,
+    "mom_1m": 0.0401,
+    "high_52w_distance": -0.0613,
+    "high_52w_basis": "monthly proxy (unlabelled by the source)",
+    "above_below_200d_mean": null,
+    "rs_vs_cluster_etf_3m": null,
+    "rs_vs_iwm_3m": null,
+    "realised_vol_60d": null,
+    "regime_shift_up": true,
+    "regime_shift_down": false,
+    "mom_break": null,
+    "mom_z_sector": 0.542,
+    "mom_z_universe": 0.499
+   },
+   "active_shocks_at_verdict": [
+    {
+     "active": true,
+     "age_days": 3,
+     "direction": "up",
+     "intensity": 1.0318335302945385,
+     "measure": "63-trading-day log change, %, signed",
+     "onset_date": "2026-09-28",
+     "peak_date": "2026-09-28",
+     "peak_intensity": 1.0799710858764024,
+     "proxy": false,
+     "reason": null,
+     "series_id": "DCOILWTICO",
+     "severity": 1,
+     "shock_id": "oil_shock",
+     "stale_input": false,
+     "state": "active",
+     "thresholds": {
+      "down": {
+       "severity_1": {
+        "episodes": 10,
+        "percentile": 4.5,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -30.0
+       },
+       "severity_2": {
+        "episodes": 6,
+        "percentile": 2.7,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -40.0
+       }
+      },
+      "up": {
+       "severity_1": {
+        "episodes": 11,
+        "percentile": 94.4,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 30.0
+       },
+       "severity_2": {
+        "episodes": 5,
+        "percentile": 97.9,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 40.0
+       }
+      }
+     },
+     "value": 30.955005908836153,
+     "value_date": "2026-09-29",
+     "values_revised": false
+    }
+   ],
+   "pack_facts_source": "build",
+   "base_cf_reason": null,
+   "catalysts": [
+    {
+     "date": "2026-07-07",
+     "event": "Eco Wizard insurance matter settled; ~$77M compensation received; damaged vessel to be sold at no monetary value; liquidity raised to >$250M",
+     "direction": "bull",
+     "estimates_moved": "no visible change (single analyst: FY EPS $1.69 +3%, next-FY $1.43 -15.4%)",
+     "scenario": "Year-1 cash flow in all scenarios (~$77M one-off); liquidity floor under Bear"
+    },
+    {
+     "date": "2026-09-02",
+     "event": "Q2 2026 results: revenue $42.9M, net income $17.3M (~40% margin), EPS $0.46; cash+ST investments $168.3M; zero bank debt since Q3 2025; ~60% of remainder-2026 fleet days contracted generating ~$90M; ~$30M secured for 2027; four new time charters incl. one 2-year",
+     "direction": "bull",
+     "estimates_moved": "no visible change (next-FY EPS $1.43, -4.0% over 90 days, 1 up / 0 down revisions in 30d)",
+     "scenario": "Base path and the contracted revenue floor; confirms zero-debt structure"
+    },
+    {
+     "date": "2026-09-28",
+     "event": "Active oil_shock onset: Strait of Hormuz closure unresolved (Trump rejected 7-day reopening proposal on 2026-09-26); transit volumes ~90% below normal; US LPG exports at record 3.3M bbl/d in April",
+     "direction": "bull",
+     "estimates_moved": "no visible change",
+     "scenario": "Bull engine (sustained disruption, TCE $18-20k/day) and the dated Bear trigger if a deal reopens the Strait"
+    },
+    {
+     "date": "2026-05-12",
+     "event": "Record VLGC spot rates: $290/mt Houston-Chiba, ~$170k/day (Clarksons via IndexBox)",
+     "direction": "bull",
+     "estimates_moved": "no visible change",
+     "scenario": "Sector-directional support for Bull TCE assumption (GASS itself is Panamax; Q2 2026 actual TCE $15,709/day)"
+    },
+    {
+     "date": "2026-01-01",
+     "event": "Drewry 2026 outlook: 98 vessels slated for delivery in 2026 incl. 21 VLGCs; fleet growth surges from 2026; 50-60 shadow-fleet VLGCs could re-enter if Iran sanctions ease",
+     "direction": "bear",
+     "estimates_moved": "consistent with consensus next-FY revenue -5.2%",
+     "scenario": "Bear rate-normalization path (TCE $9-10k/day)"
+    }
+   ],
+   "bull_below_price_reason": null,
+   "bear_above_price_reason": "Even the Bear case values above today's $9.34 price because the downside is floored by the balance sheet and the asset base: zero debt, cash + short-term investments of $168.3M at 2026-06-30 plus ~$77M insurance compensation (PRIMARY P1, 2026-09-03: 'over $250 million currently'), and 26 unencumbere",
+   "code_fill_mode": "joint",
+   "consensus_data_status": "ok",
+   "input_scope_stamps": [
+    "customer_money_excluded",
+    "per_share_basis_unverified"
+   ],
+   "direction_m": "undervalued",
+   "crux_valid": true,
+   "crux_by_sample": [
+    {
+     "sample": 1,
+     "valid": true,
+     "reason": null,
+     "inputs": [
+      "growth_years_3_5"
+     ],
+     "at_default": false
+    }
+   ],
+   "crux": [
+    {
+     "input": "growth_years_3_5",
+     "own": -0.0670023883188896,
+     "implied": -0.6035990450921906,
+     "at_default": false,
+     "reason": "The price ($9.34; ~$351M market cap) implies owner cash flow shrinking ~60.4% per year in years 3-5 \u2014 i.e. an operating business worth near zero within five years, below even the company's own filed liquidity of $168.3M cash + short-term investments (2026-06-30) plus ~$77M insurance compensation. My"
+    }
+   ],
+   "price_implied": {
+    "coe": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0904,
+     "bound": {
+      "low": 0.0524,
+      "high": 0.25,
+      "value_low": 37.5630485719825,
+      "value_high": 12.107596461011243
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "growth_years_3_5": {
+     "value": -0.6035990450921906,
+     "reachable": true,
+     "own": -0.0670023883188896,
+     "bound": {
+      "low": -0.9864261025465091,
+      "high": 9.973304965296355,
+      "value_low": 8.151731181165703,
+      "value_high": 177733.2837958982
+     },
+     "side": null,
+     "base_at_value": 9.3400000004052,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      -0.536134995077985,
+      -0.5361349943988024
+     ],
+     "stamps": [],
+     "shift": -0.5361349943988024,
+     "shift_bound": [
+      -0.899,
+      10.04
+     ],
+     "own_path": [
+      -0.1,
+      -0.06,
+      -0.04
+     ]
+    },
+    "fade_years": {
+     "value": null,
+     "reachable": false,
+     "own": 10,
+     "bound": {
+      "low": 0,
+      "high": 60,
+      "value_low": 22.59404909303526,
+      "value_high": 21.917806776679114
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "bracket_years": null,
+     "bracket_values": null
+    },
+    "terminal_g": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0236,
+     "bound": {
+      "low": 0.0,
+      "high": 0.044698999999999996,
+      "value_low": 21.949596869581047,
+      "value_high": 21.997929705044434
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "terminal_ronic": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0904,
+     "bound": {
+      "low": 0.0904,
+      "high": "unlimited",
+      "value_low": 21.97511544755675,
+      "value_high": 23.63936612686229
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "year2_level": {
+     "value": null,
+     "reachable": false,
+     "own": 0.06536,
+     "bound": {
+      "low": null,
+      "high": null,
+      "value_low": null,
+      "value_high": null
+     },
+     "side": null,
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "not_available": "the pack prints no bull2 and bear2 range"
+    }
+   },
+   "serving": {
+    "provider": "ollama",
+    "model": "rs2-analyst-deep-mtp5-v33",
+    "manifest_sha256": "f0f5ce2dcea334804e13492b2813e74d3294025f5d3b1692524de597fa33ab3e",
+    "system_layer_digest": "sha256:ff033c2519528445a1f2e56a797746524d64bff7d65e5a31612be35d6cbdfc22"
+   },
+   "position_basis_source_sample": 1,
+   "size_components": {
+    "dispersion": {
+     "bucket": "full",
+     "spread_pct": 0.0,
+     "source": "SIZE_BUCKETS"
+    },
+    "mos": {
+     "bucket": "full",
+     "mos_vs_base_pct": 135.3,
+     "source": "mos_vs_base_pct"
+    },
+    "conviction": {
+     "bucket": "half",
+     "conviction_score": 9.0,
+     "source": "scorecard.median_conviction_score"
+    },
+    "risk": {
+     "bucket": "full",
+     "elevated_volatility_ahead": false,
+     "source": "mri_outputs_dir/shock_register.json:risk_flags"
+    }
+   },
+   "reason": "single plausible sample \u2014 direction weak, size capped; mode instability: base IV moved +64.0% since the prior verdict ($13.40 -> $21.98) \u2014 within-run spread cannot see this, so convergence here is not stability",
+   "instability": {
+    "prior_iv": 13.4,
+    "current_iv": 21.98,
+    "delta_pct": 64.0,
+    "unstable": true
+   },
    "direction": "undervalued",
-   "size_hint": "half",
-   "mos_vs_median_pct": 43.6,
-   "consensus_dir": "GASS_20260919_131535",
+   "size_hint": "quarter",
+   "mos_vs_median_pct": 135.3,
+   "mos_vs_base_pct": 135.3,
+   "fiduciary_amendments": [],
+   "fiduciary_violations": [],
+   "fiduciary_verdict": "PASS",
+   "consensus_dir": "GASS_20261005_200224",
+   "run_source": "orchestrator",
+   "arm": "local",
+   "pack_source": "fresh",
+   "screener_data_commit": "4638ae7816e62f031cc888db217d28be247410a3",
+   "research_brief_asof": "2026-10-05T19:52:01.886711",
+   "research_brief_age_days": 0.06,
+   "price_asof": "2026-10-02",
+   "price_source": "yfinance",
+   "price_asof_basis": null,
+   "gate_version": 8,
+   "pipeline_commit": "68f3935",
+   "street_fence": {
+    "low": 6.36,
+    "high": 25.45,
+    "n_targets": 1.0,
+    "asof": "2026-10-05",
+    "age_days": 0.1,
+    "source": "enrich",
+    "winsorized": []
+   },
+   "producer_class": {
+    "status": "ok",
+    "depleting": false,
+    "sector": "Industrials",
+    "industry": "Marine Shipping",
+    "source": "stocks.csv@4638ae7816e62f031cc888db217d28be247410a3"
+   },
    "actionable": false,
    "actionable_reasons": [
-    "pre_v3.1_gates",
-    "high_dispersion",
-    "no_street_fence"
+    "single_sample",
+    "mode_instability",
+    "per_share_basis_unverified"
    ],
-   "gate_version": null,
    "status": "ok",
    "thesis_status": null,
    "thesis_checks": null,
@@ -9093,71 +9945,277 @@
   },
   "GSL": {
    "ticker": "GSL",
-   "price": 45.08,
-   "date": "2026-09-19",
-   "model": "rs2-analyst-deep-mtp5",
-   "samples_run": 3,
-   "n_basis": 3,
-   "iv_band_low": 95.0,
-   "iv_band_high": 125.24,
-   "median_iv": 116.1,
-   "spread_pct": 31.8,
+   "price": 45.79,
+   "date": "2026-10-05",
+   "model": "rs2-analyst-deep-mtp5-v33",
+   "samples_run": 1,
+   "n_basis": 0,
+   "iv_band_low": null,
+   "iv_band_high": null,
+   "median_iv": null,
+   "spread_pct": null,
    "flags": [
-    "mos_+158pct_beyond_150pct",
-    "mos_+178pct_beyond_150pct"
+    "desk_less_sample_excluded:1"
    ],
-   "pack_revision": 3,
+   "pack_revision": 21,
    "scheme": "band_direction_v1",
+   "m": null,
    "scorecard": {
-    "median_iv": 116.1,
-    "median_bull_iv": 155.8,
-    "median_bear_iv": 58.0,
-    "iv_band_low": 95.0,
-    "iv_band_high": 125.24,
-    "median_conviction_score": 12.0,
-    "median_quality_moat": 2.7,
-    "median_kelly_fraction_pct": 6.0,
-    "asymmetric_payoff_skew": 7.34,
-    "reentry_tranches": {
-     "tranche_1_starter": 45.0,
-     "tranche_2_core": 34.0
-    },
-    "thesis_invalidation_triggers": [
-     "Total contracted forward revenue falls below $2.2B (from $3.2B), OR two or more firm newbuild charters are cancelled or shortened by charterers, OR FY2027 fleet EBITDA prints below $380M despite 100% 2026 cover.",
-     "Any top-tier charterer defaults on or renegotiates a firm charter >=25% below contracted rate; OR total 2027 revenue-day coverage falls below 75%; OR net leverage exceeds 1.5x after newbuild funding; OR first newbuild delivery slips more than one quarter from Q4 2028 schedule.",
-     "Contracted revenues fall below $2.0B (<2.5x trailing revenue) due to charterer cancellations/renegotiations, OR 1H Adj EBITDA prints below $230M (breach of the contracted visibility floor), OR >3 of the 15 newbuilds slip delivery by >2 quarters, OR annual dividend cut below $2.00/share."
-    ]
+    "median_iv": null,
+    "median_bull_iv": null,
+    "median_bear_iv": null,
+    "iv_band_low": null,
+    "iv_band_high": null,
+    "spread_pct": null,
+    "converged": false,
+    "medoid_sample": null,
+    "n_basis": 0,
+    "median_conviction_score": null,
+    "median_quality_moat": null,
+    "median_kelly_fraction_pct": null,
+    "asymmetric_payoff_skew": null,
+    "reentry_tranches": null,
+    "thesis_invalidation_triggers": [],
+    "base_probability": null,
+    "bull_probability": null,
+    "bear_probability": null,
+    "probabilities_defaulted": true,
+    "base_cf_used": null,
+    "base_cf_basis": null,
+    "coe_used": null,
+    "coe_source": null,
+    "coe_adjustment_reason": null,
+    "valuation_frame": null,
+    "terminal_method": null,
+    "terminal_multiple_or_g": null,
+    "fade_years": null,
+    "stage1_growth_path": null,
+    "guidance_deviation_reason": null,
+    "cycle_evidence": null,
+    "verdict_label": null,
+    "direction_m": null,
+    "crux": null,
+    "crux_check": null,
+    "price_implied": null,
+    "momentum_view": null,
+    "entry_timing": null,
+    "momentum_flip_condition": null,
+    "momentum_break_rule": null,
+    "invalidation_rules": null,
+    "position_basis": null,
+    "momentum_evidence": null,
+    "desk_calls": null,
+    "desk_iv_match": null,
+    "desk_reverse_neutral_cagr": null,
+    "coe_minus_anchor": null,
+    "desk_share_basis_matched": null,
+    "catalysts": null,
+    "bull_below_price_reason": null,
+    "bear_above_price_reason": null,
+    "code_fill_mode": null
    },
-   "conviction_score": 12.0,
-   "business_quality_moat": 2.7,
-   "kelly_fraction_pct": 6.0,
-   "asymmetric_payoff_skew": 7.34,
-   "bull_iv": 155.8,
-   "bear_iv": 58.0,
-   "reentry_tranches": {
-    "tranche_1_starter": 45.0,
-    "tranche_2_core": 34.0
-   },
-   "thesis_invalidation_triggers": [
-    "Total contracted forward revenue falls below $2.2B (from $3.2B), OR two or more firm newbuild charters are cancelled or shortened by charterers, OR FY2027 fleet EBITDA prints below $380M despite 100% 2026 cover.",
-    "Any top-tier charterer defaults on or renegotiates a firm charter >=25% below contracted rate; OR total 2027 revenue-day coverage falls below 75%; OR net leverage exceeds 1.5x after newbuild funding; OR first newbuild delivery slips more than one quarter from Q4 2028 schedule.",
-    "Contracted revenues fall below $2.0B (<2.5x trailing revenue) due to charterer cancellations/renegotiations, OR 1H Adj EBITDA prints below $230M (breach of the contracted visibility floor), OR >3 of the 15 newbuilds slip delivery by >2 quarters, OR annual dividend cut below $2.00/share."
-   ],
+   "conviction_score": null,
+   "business_quality_moat": null,
+   "kelly_fraction_pct": null,
+   "asymmetric_payoff_skew": null,
+   "bull_iv": null,
+   "bear_iv": null,
+   "reentry_tranches": null,
+   "thesis_invalidation_triggers": [],
    "converged": false,
    "early_stop": false,
-   "mode": "adaptive",
-   "direction": "undervalued",
-   "size_hint": "quarter",
-   "mos_vs_median_pct": 157.5,
-   "consensus_dir": "GSL_20260919_151734",
+   "mode": "fixed_1",
+   "coe_used": null,
+   "coe_source": null,
+   "coe_adjustment_reason": null,
+   "valuation_frame": null,
+   "terminal_method": null,
+   "terminal_multiple_or_g": null,
+   "fade_years": null,
+   "stage1_growth_path": null,
+   "guidance_deviation_reason": null,
+   "cycle_evidence": null,
+   "verdict_label": null,
+   "desk_calls": null,
+   "desk_iv_match": null,
+   "desk_reverse_neutral_cagr": null,
+   "coe_minus_anchor": null,
+   "desk_share_basis_matched": null,
+   "years12_ratio": null,
+   "base_to_civ": null,
+   "consensus_implied_value": null,
+   "bull_years12_ratio": null,
+   "bear_years12_ratio": null,
+   "base_shares_ratio": null,
+   "bull_shares_ratio": null,
+   "bear_shares_ratio": null,
+   "desk_frame": null,
+   "desk_net_debt": null,
+   "shares_basis": null,
+   "shares_reason": null,
+   "net_debt_reason": null,
+   "excess_cash_reason": null,
+   "scenario_deviation_reason": null,
+   "bull_bear_anchor": null,
+   "terminal_multiple_reason": null,
+   "interest_addback": null,
+   "wacc_reason": null,
+   "owner_earnings_source": null,
+   "consensus_reference_status": null,
+   "terminal_g_gap_bp": null,
+   "terminal_reason": null,
+   "base_window_gap": null,
+   "finite_life_years": null,
+   "cash_flow_life": null,
+   "cash_flow_life_reason": null,
+   "terminal_ronic": null,
+   "terminal_ronic_gap_pts": null,
+   "long_run_facts": null,
+   "working_capital_deducted": null,
+   "base_year_capped": null,
+   "years12_held_by_desk": null,
+   "desk_stamps": null,
+   "momentum_view": null,
+   "entry_timing": null,
+   "momentum_flip_condition": null,
+   "momentum_break_rule": null,
+   "invalidation_rules": null,
+   "position_basis": "none",
+   "position_basis_declared": null,
+   "position_basis_votes": {},
+   "momentum_evidence": null,
+   "momentum_state": {
+    "price_asof": "2026-09-24 17:05",
+    "mom_12_1": 0.5479,
+    "mom_6m": 0.2672,
+    "mom_1m": 0.0278,
+    "high_52w_distance": 0.0,
+    "high_52w_basis": "monthly proxy (unlabelled by the source)",
+    "above_below_200d_mean": null,
+    "rs_vs_cluster_etf_3m": null,
+    "rs_vs_iwm_3m": null,
+    "realised_vol_60d": null,
+    "regime_shift_up": true,
+    "regime_shift_down": false,
+    "mom_break": null,
+    "mom_z_sector": 0.946,
+    "mom_z_universe": 1.137
+   },
+   "active_shocks_at_verdict": [
+    {
+     "active": true,
+     "age_days": 3,
+     "direction": "up",
+     "intensity": 1.0318335302945385,
+     "measure": "63-trading-day log change, %, signed",
+     "onset_date": "2026-09-28",
+     "peak_date": "2026-09-28",
+     "peak_intensity": 1.0799710858764024,
+     "proxy": false,
+     "reason": null,
+     "series_id": "DCOILWTICO",
+     "severity": 1,
+     "shock_id": "oil_shock",
+     "stale_input": false,
+     "state": "active",
+     "thresholds": {
+      "down": {
+       "severity_1": {
+        "episodes": 10,
+        "percentile": 4.5,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -30.0
+       },
+       "severity_2": {
+        "episodes": 6,
+        "percentile": 2.7,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -40.0
+       }
+      },
+      "up": {
+       "severity_1": {
+        "episodes": 11,
+        "percentile": 94.4,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 30.0
+       },
+       "severity_2": {
+        "episodes": 5,
+        "percentile": 97.9,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 40.0
+       }
+      }
+     },
+     "value": 30.955005908836153,
+     "value_date": "2026-09-29",
+     "values_revised": false
+    }
+   ],
+   "pack_facts_source": "build",
+   "base_cf_reason": null,
+   "catalysts": null,
+   "bull_below_price_reason": null,
+   "bear_above_price_reason": null,
+   "code_fill_mode": null,
+   "consensus_data_status": "ok",
+   "input_scope_stamps": [
+    "customer_money_excluded",
+    "per_share_basis_untested"
+   ],
+   "direction_m": "NOT_USABLE",
+   "crux_valid": null,
+   "crux_by_sample": null,
+   "crux": null,
+   "price_implied": null,
+   "serving": {
+    "provider": "ollama",
+    "model": "rs2-analyst-deep-mtp5-v33",
+    "manifest_sha256": "f0f5ce2dcea334804e13492b2813e74d3294025f5d3b1692524de597fa33ab3e",
+    "system_layer_digest": "sha256:ff033c2519528445a1f2e56a797746524d64bff7d65e5a31612be35d6cbdfc22"
+   },
+   "direction": null,
+   "size_hint": null,
+   "instability": null,
+   "size_components": null,
+   "fiduciary_verdict": "NOT_APPLICABLE",
+   "fiduciary_violations": [],
+   "fiduciary_amendments": [],
+   "reason": "zero plausible complete samples \u2014 malfunction path, not a verdict",
+   "consensus_dir": "GSL_20261005_224438",
+   "run_source": "orchestrator",
+   "arm": "local",
+   "pack_source": "fresh",
+   "screener_data_commit": "8e532a26f02e8442aad519b3b9dbf7456c9be73a",
+   "research_brief_asof": "2026-10-05T22:33:19.914414",
+   "research_brief_age_days": 0.05,
+   "price_asof": "2026-10-02",
+   "price_source": "yfinance",
+   "price_asof_basis": null,
+   "gate_version": 8,
+   "pipeline_commit": "412578d",
+   "street_fence": {
+    "low": 22.73,
+    "high": 94.55,
+    "n_targets": 3.0,
+    "asof": "2026-10-05",
+    "age_days": 0.1,
+    "source": "enrich",
+    "winsorized": []
+   },
+   "producer_class": {
+    "status": "ok",
+    "depleting": false,
+    "sector": "Industrials",
+    "industry": "Marine Shipping",
+    "source": "stocks.csv@8e532a26f02e8442aad519b3b9dbf7456c9be73a"
+   },
    "actionable": false,
    "actionable_reasons": [
-    "pre_v3.1_gates",
-    "high_dispersion",
-    "no_street_fence"
+    "not_usable"
    ],
-   "gate_version": null,
-   "status": "ok",
+   "status": "not_usable",
    "thesis_status": null,
    "thesis_checks": null,
    "entry_timing_now": null,
@@ -14949,6 +16007,963 @@
    "actionable_reasons": [
     "single_sample",
     "outside_street_fence"
+   ],
+   "status": "ok",
+   "thesis_status": null,
+   "thesis_checks": null,
+   "entry_timing_now": null,
+   "thesis_asof": null,
+   "momentum_exit": null,
+   "momentum_exit_reason": null
+  },
+  "GOLD": {
+   "ticker": "GOLD",
+   "price": 42.29,
+   "date": "2026-10-05",
+   "model": "rs2-analyst-deep-mtp5-v33",
+   "samples_run": 1,
+   "n_basis": 1,
+   "iv_band_low": 55.72,
+   "iv_band_high": 55.72,
+   "median_iv": 55.72,
+   "spread_pct": null,
+   "flags": [
+    "desk_share_count_departure_with_reason"
+   ],
+   "pack_revision": 21,
+   "scheme": "band_direction_v1",
+   "m": null,
+   "scorecard": {
+    "median_iv": 55.72,
+    "base_iv": 55.72,
+    "median_bull_iv": 138.53,
+    "median_bear_iv": 28.38,
+    "iv_band_low": 55.72,
+    "iv_band_high": 55.72,
+    "spread_pct": null,
+    "converged": false,
+    "medoid_sample": 1,
+    "n_basis": 1,
+    "median_conviction_score": 8.0,
+    "median_quality_moat": 2.9,
+    "median_kelly_fraction_pct": 24.75,
+    "asymmetric_payoff_skew": 6.92,
+    "reentry_tranches": {
+     "tranche_1_starter": 42.29,
+     "tranche_2_core": 28.38
+    },
+    "thesis_invalidation_triggers": [
+     "Any 8-K or 10-Q disclosure that Tether fails to roll or extend the ~$1.45B of payables/advances or the $1.7B secured-metal lease book (default, forced settlement or non-renewal), a drawdown or cancellation notice on the uncommitted CIBC facility, net equity issuance (net_issuance_1y > 0), or consolidated gross margin below 1.5% in a reported quarter"
+    ],
+    "base_probability": 0.5,
+    "bull_probability": 0.25,
+    "bear_probability": 0.25,
+    "probabilities_defaulted": false,
+    "base_cf_used": 0.103,
+    "base_cf_basis": "owner_earnings_default",
+    "coe_used": 0.0898,
+    "coe_source": "anchor",
+    "coe_adjustment_reason": null,
+    "valuation_frame": "equity",
+    "terminal_method": "gordon",
+    "terminal_multiple_or_g": 0.0375,
+    "fade_years": 5,
+    "stage1_growth_path": [
+     -0.049,
+     0.316,
+     -0.1,
+     -0.08,
+     -0.06
+    ],
+    "years12_ratio": 0.999,
+    "base_to_civ": 1.252,
+    "consensus_implied_value": 44.49,
+    "bull_years12_ratio": 1.0,
+    "bear_years12_ratio": 0.64,
+    "base_shares_ratio": 0.935,
+    "bull_shares_ratio": 0.935,
+    "bear_shares_ratio": 0.935,
+    "desk_frame": "equity",
+    "desk_net_debt": null,
+    "shares_basis": "filed_fy_wa",
+    "shares_reason": "FY2026 filed diluted EPS of $3.02 on net income of $82.3M (PRIMARY P1, 2026-09-03) implies ~27.25M diluted shares, matching the filed weighted-average count 27,262,600 (DATA 6B); DATA 2's vendor count of 29,154,756 is flagged in the pack as 10% from the basic count implied by filed EPS and would und",
+    "net_debt_reason": null,
+    "excess_cash_reason": null,
+    "scenario_deviation_reason": "Bear year-2 CF of $50M is 36% below the consensus-low level ($78M) because consensus does not model a Tether counterparty stress: Gold.com was owed ~$1.45B in payables/advances by Tether at June 30, 2026 against $1.7B of outstanding precious-metal leases (Bloomberg, 2026-09-16), while the only bank ",
+    "bull_bear_anchor": "consensus high/low",
+    "terminal_multiple_reason": null,
+    "interest_addback": null,
+    "wacc_reason": null,
+    "owner_earnings_source": "fy_ni+fy_capex",
+    "consensus_reference_status": "used",
+    "terminal_g_gap_bp": 0,
+    "terminal_reason": null,
+    "base_window_gap": null,
+    "finite_life_years": null,
+    "cash_flow_life": "perpetual",
+    "cash_flow_life_reason": "Perpetual: Gold.com is a precious-metals distribution platform (wholesale dealer, DTC retailer, minter, secured lender) with no depleting reserves or expiring licence; FY2026 capex of $13M against $25.5B revenue (DATA 5) is maintenance-level and inventory/lease collateral are replaced out of working",
+    "terminal_ronic": 0.543292,
+    "terminal_ronic_gap_pts": null,
+    "long_run_facts": {
+     "cycle": false,
+     "cycle_year": null,
+     "cycle_years": [],
+     "e5": 0.08317,
+     "oe5": 0.084937,
+     "m5": 0.007252,
+     "m_tc": 0.006888,
+     "m_years": [
+      2019,
+      2026,
+      8
+     ],
+     "r_tc": 0.543292,
+     "r_years": [
+      2019,
+      2026,
+      8
+     ],
+     "p": 1.0,
+     "g_rev": 0.14249,
+     "g_rev_years": [
+      2019,
+      2026,
+      8
+     ],
+     "terminal_g_basis": "revenue_trend",
+     "ni_over_oe": 0.800793,
+     "x_over_oe": 0.979199,
+     "nwc_intensity": 0.02889,
+     "nwc_years": [
+      2019,
+      2026,
+      8
+     ],
+     "stub_months": 3.1869,
+     "stamps": [
+      "margin_record_pretax"
+     ],
+     "om_tc": 0.00827,
+     "om_trend": 0.006704,
+     "om_L": 0.005249,
+     "om_years": [
+      2019,
+      2026,
+      8
+     ],
+     "om_shape": "swing",
+     "om_basis": "pretax_with_amortization",
+     "om_5": 0.008963,
+     "m_long": 0.005424,
+     "margin_ratio": 0.747982,
+     "stamps_full": [
+      "margin_record_pretax"
+     ]
+    },
+    "working_capital_deducted": [
+     -0.1087,
+     -0.0745,
+     -0.0648,
+     -0.0565,
+     -0.0492
+    ],
+    "base_year_capped": null,
+    "split_after_last_filing": null,
+    "years12_held_by_desk": false,
+    "desk_stamps": [
+     "working_capital_deducted"
+    ],
+    "guidance_deviation_reason": "Base years 3-5 CF growth (-10%/-8%/-6%) sits above next-FY consensus revenue growth (-12.9%) because the notional pass-through top line falls with the gold price (spot $4,184 on 2026-09-30 vs the January 2026 ATH of $5,608.35, TradingEconomics [fetched]) while the fee engine grows: Tether accounted ",
+    "cycle_evidence": "Gold spot $4,184.30 on 2026-09-30 vs all-time high $5,608.35 in January 2026 (TradingEconomics); FY26 Q4 gold ounces sold +51% YoY to 521K with consolidated gross margin at 1.78% for the year (PRIMARY P1, 2026-09-03); consensus revenue -15.9% current FY / -12.9% next FY as gold corrects (DATA 8, fetched 2026-10-05)",
+    "verdict_label": "undervalued",
+    "direction_m": "undervalued",
+    "crux": [
+     {
+      "citations": [
+       {
+        "date": "2026-09-03",
+        "quote": "We saw continued growth in our storage and secured lending businesses during the year. Both businesses carry attractive economics and deepen relationships with customers who may transact across the rest of our platform.",
+        "source": "PRIMARY P1"
+       },
+       {
+        "date": "2026-09-03",
+        "quote": "Completing the acquisition of Sunshine Minting (\"SMI\") in April was a major milestone that significantly expands our total production capacity and creates a clear pathway to capturing additional value and market share globally.",
+        "source": "PRIMARY P1"
+       },
+       {
+        "date": "2026-09-13",
+        "quote": "The partnership with Tether has scaled past what was originally disclosed at launch, with lease positions and storage volumes now at multiples of the initial figures.",
+        "source": "https://finance.yahoo.com/markets/stocks/articles/gold-com-gold-gold-rush-101442314.html"
+       }
+      ],
+      "input": "growth_years_3_5",
+      "reason": "The price implies owner cash flow shrinking ~15%/yr through year 5, i.e. that the fee engine adds nothing as notional revenue declines with the gold correction. My evidence says CF declines materially less than revenue: the $1.7B Tether lease book with Tether as dominant creditor (Bloomberg 2026-09-"
+     }
+    ],
+    "crux_check": {
+     "valid": true,
+     "reason": null,
+     "entries": [
+      {
+       "input": "growth_years_3_5",
+       "own": -0.08014495037265268,
+       "implied": -0.1780527057495187,
+       "reachable": true,
+       "at_default": false,
+       "citations": [
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "https://finance.yahoo.com/markets/stocks/articles/gold-com-gold-gold-rush-101442314.html",
+         "class": "fetched_page_naming_company",
+         "quote_found": true
+        }
+       ],
+       "valid": true,
+       "reason": null
+      }
+     ],
+     "stamps": []
+    },
+    "price_implied": {
+     "coe": {
+      "value": 0.117992237795194,
+      "reachable": true,
+      "own": 0.0898,
+      "bound": {
+       "low": 0.0524,
+       "high": 0.25,
+       "value_low": 144.5325958602106,
+       "value_high": 23.776072339611936
+      },
+      "side": null,
+      "base_at_value": 42.28999999000845,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       0.11799223740259807,
+       0.11799223818778992
+      ],
+      "stamps": []
+     },
+     "growth_years_3_5": {
+      "value": -0.1780527057495187,
+      "reachable": true,
+      "own": -0.08014495037265268,
+      "bound": {
+       "low": -0.9904866300900939,
+       "high": 9.979987856695738,
+       "value_low": 18.12693641618812,
+       "value_high": 37367219.48661947
+      },
+      "side": null,
+      "base_at_value": 42.28999999922069,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       -0.09789048968907446,
+       -0.09789048900865019
+      ],
+      "stamps": [],
+      "shift": -0.09789048934886233,
+      "shift_bound": [
+       -0.899,
+       10.06
+      ],
+      "own_path": [
+       -0.1,
+       -0.08,
+       -0.06
+      ]
+     },
+     "fade_years": {
+      "value": null,
+      "reachable": false,
+      "own": 5,
+      "bound": {
+       "low": 0,
+       "high": 60,
+       "value_low": 71.2141720035134,
+       "value_high": 44.472004997515164
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "bracket_years": null,
+      "bracket_values": null
+     },
+     "terminal_g": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0375,
+      "bound": {
+       "low": 0.0,
+       "high": 0.044698999999999996,
+       "value_low": 45.87394628331915,
+       "value_high": 59.48043138779375
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "terminal_ronic": {
+      "value": null,
+      "reachable": false,
+      "own": 0.543292,
+      "bound": {
+       "low": 0.0898,
+       "high": "unlimited",
+       "value_low": 47.08711009590759,
+       "value_high": 57.39131650484668
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "year2_level": {
+      "value": 0.08786499015490214,
+      "reachable": true,
+      "own": 0.128906148,
+      "bound": {
+       "low": 0.078,
+       "high": 0.2,
+       "value_low": 39.061101662307834,
+       "value_high": 78.99277766756266
+      },
+      "side": null,
+      "base_at_value": 42.28999994641095,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       0.08786499015490214,
+       0.08786499112447102
+      ],
+      "stamps": []
+     }
+    },
+    "momentum_view": "neutral",
+    "entry_timing": "buy_now",
+    "momentum_flip_condition": {
+     "metric": "high_52w_distance",
+     "comparator": ">",
+     "threshold": -0.15,
+     "window_days": 90
+    },
+    "momentum_break_rule": {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": -0.1,
+     "window_days": 180
+    },
+    "invalidation_rules": [
+     {
+      "metric": "gross_margin_pct",
+      "comparator": "<=",
+      "threshold": 1.5,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "net_issuance_1y",
+      "comparator": ">",
+      "threshold": 0,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "mom_6m",
+      "comparator": "<",
+      "threshold": -0.1,
+      "window": "next 180 days",
+      "source": "price_history_scr10"
+     }
+    ],
+    "position_basis": "value",
+    "momentum_evidence": null,
+    "desk_calls": 1,
+    "desk_iv_match": true,
+    "desk_reverse_neutral_cagr": -2.89,
+    "coe_minus_anchor": 0.003134,
+    "desk_share_basis_matched": "filed_fy_wa",
+    "catalysts": [
+     {
+      "date": "2026-09-02",
+      "event": "FY26 results: revenue $25.5B (+132%), NI $82.3M, EPS $3.02, non-GAAP EBITDA $179.8M, $1.00 special dividend; Q4 gold ounces +51% to 521K; Costco vendor relationship confirmed; Tether lease positions scaled past original disclosure",
+      "direction": "bull",
+      "estimates_moved": "no visible change verifiable from fetched pages",
+      "scenario": "Base and Bull: fee-engine growth (storage, secured lending, Costco services) decouples CF from the falling notional top line; Bear: SG&A +46% shows integration costs outpacing gross profit"
+     },
+     {
+      "date": "2026-09-16",
+      "event": "Tether disclosed as dominant creditor on Gold.com: ~$1.5B financing against $1.7B outstanding precious-metal leases; Tether owed ~$1.45B in payables/advances at June 30, 2026 per the annual report (Bloomberg)",
+      "direction": "bear",
+      "estimates_moved": "no visible change",
+      "scenario": "Bear anchor: single-counterparty concentration with an uncommitted bank line; Bull input: the secured-lease engine scales trading volume and fee income"
+     },
+     {
+      "date": "2026-09-29",
+      "event": "Second Amended and Restated Uncommitted Credit Agreement with CIBC: converted to uncommitted revolver payable on demand, capacity cut from $427.5M to $250M, covenants on dividends/buybacks/acquisitions/metal repurchases removed (filed 8-K 2026-10-02)",
+      "direction": "bear",
+      "estimates_moved": "no visible change",
+      "scenario": "Bear: no committed bank liquidity with gold ~25% below January highs; Bull nuance: covenant removals enable more secured-metal leases"
+     },
+     {
+      "date": "2026-10-05",
+      "event": "Gold corrected from January 2026 ATH of $5,608.35 to ~$4,184/oz; consensus reset to current-FY revenue -15.9% and next-FY -12.9% while next-FY EPS is modeled +31.6% to $4.57",
+      "direction": "bear",
+      "estimates_moved": "consensus structurally reset below FY26 actuals (revenue down both years, EPS up next year)",
+      "scenario": "Base: pass-through revenue falls but CF declines less via fee mix and working-capital release; Bear: further gold weakness compresses inventory and lease-collateral values"
+     },
+     {
+      "date": "2026-08-19",
+      "event": "Stock fell -7.8% in one session to $41.84 after a +20.8% run, pre-earnings de-risking amid bullion weakness",
+      "direction": "bear",
+      "estimates_moved": "no visible change",
+      "scenario": "Sentiment only; already reflected in T0 of $42.29"
+     },
+     {
+      "date": "2026-09-18",
+      "event": "CFO Cary Dickson retired, succeeded by Jill Van (EVP & Controller); KPMG appointed auditor succeeding Grant Thornton for FY2027 (filed 8-K)",
+      "direction": "bear",
+      "estimates_moved": "no visible change",
+      "scenario": "Bear: governance/execution friction during integration of five acquisitions in 18 months"
+     }
+    ],
+    "bull_below_price_reason": null,
+    "bear_above_price_reason": null,
+    "code_fill_mode": "joint"
+   },
+   "conviction_score": 8.0,
+   "business_quality_moat": 2.9,
+   "kelly_fraction_pct": 24.75,
+   "asymmetric_payoff_skew": 6.92,
+   "bull_iv": 138.53,
+   "bear_iv": 28.38,
+   "reentry_tranches": {
+    "tranche_1_starter": 42.29,
+    "tranche_2_core": 28.38
+   },
+   "thesis_invalidation_triggers": [
+    "Any 8-K or 10-Q disclosure that Tether fails to roll or extend the ~$1.45B of payables/advances or the $1.7B secured-metal lease book (default, forced settlement or non-renewal), a drawdown or cancellation notice on the uncommitted CIBC facility, net equity issuance (net_issuance_1y > 0), or consolidated gross margin below 1.5% in a reported quarter"
+   ],
+   "converged": false,
+   "early_stop": false,
+   "mode": "fixed_1",
+   "coe_used": 0.0898,
+   "coe_source": "anchor",
+   "coe_adjustment_reason": null,
+   "valuation_frame": "equity",
+   "terminal_method": "gordon",
+   "terminal_multiple_or_g": 0.0375,
+   "fade_years": 5,
+   "stage1_growth_path": [
+    -0.049,
+    0.316,
+    -0.1,
+    -0.08,
+    -0.06
+   ],
+   "guidance_deviation_reason": "Base years 3-5 CF growth (-10%/-8%/-6%) sits above next-FY consensus revenue growth (-12.9%) because the notional pass-through top line falls with the gold price (spot $4,184 on 2026-09-30 vs the January 2026 ATH of $5,608.35, TradingEconomics [fetched]) while the fee engine grows: Tether accounted ",
+   "cycle_evidence": "Gold spot $4,184.30 on 2026-09-30 vs all-time high $5,608.35 in January 2026 (TradingEconomics); FY26 Q4 gold ounces sold +51% YoY to 521K with consolidated gross margin at 1.78% for the year (PRIMARY P1, 2026-09-03); consensus revenue -15.9% current FY / -12.9% next FY as gold corrects (DATA 8, fetched 2026-10-05)",
+   "verdict_label": "undervalued",
+   "desk_calls": 1,
+   "desk_iv_match": true,
+   "desk_reverse_neutral_cagr": -2.89,
+   "coe_minus_anchor": 0.003134,
+   "desk_share_basis_matched": "filed_fy_wa",
+   "years12_ratio": 0.999,
+   "base_to_civ": 1.252,
+   "consensus_implied_value": 44.49,
+   "bull_years12_ratio": 1.0,
+   "bear_years12_ratio": 0.64,
+   "base_shares_ratio": 0.935,
+   "bull_shares_ratio": 0.935,
+   "bear_shares_ratio": 0.935,
+   "desk_frame": "equity",
+   "desk_net_debt": null,
+   "shares_basis": "filed_fy_wa",
+   "shares_reason": "FY2026 filed diluted EPS of $3.02 on net income of $82.3M (PRIMARY P1, 2026-09-03) implies ~27.25M diluted shares, matching the filed weighted-average count 27,262,600 (DATA 6B); DATA 2's vendor count of 29,154,756 is flagged in the pack as 10% from the basic count implied by filed EPS and would und",
+   "net_debt_reason": null,
+   "excess_cash_reason": null,
+   "scenario_deviation_reason": "Bear year-2 CF of $50M is 36% below the consensus-low level ($78M) because consensus does not model a Tether counterparty stress: Gold.com was owed ~$1.45B in payables/advances by Tether at June 30, 2026 against $1.7B of outstanding precious-metal leases (Bloomberg, 2026-09-16), while the only bank ",
+   "bull_bear_anchor": "consensus high/low",
+   "terminal_multiple_reason": null,
+   "interest_addback": null,
+   "wacc_reason": null,
+   "owner_earnings_source": "fy_ni+fy_capex",
+   "consensus_reference_status": "used",
+   "terminal_g_gap_bp": 0,
+   "terminal_reason": null,
+   "base_window_gap": null,
+   "finite_life_years": null,
+   "cash_flow_life": "perpetual",
+   "cash_flow_life_reason": "Perpetual: Gold.com is a precious-metals distribution platform (wholesale dealer, DTC retailer, minter, secured lender) with no depleting reserves or expiring licence; FY2026 capex of $13M against $25.5B revenue (DATA 5) is maintenance-level and inventory/lease collateral are replaced out of working",
+   "terminal_ronic": 0.543292,
+   "terminal_ronic_gap_pts": null,
+   "long_run_facts": {
+    "cycle": false,
+    "cycle_year": null,
+    "cycle_years": [],
+    "e5": 0.08317,
+    "oe5": 0.084937,
+    "m5": 0.007252,
+    "m_tc": 0.006888,
+    "m_years": [
+     2019,
+     2026,
+     8
+    ],
+    "r_tc": 0.543292,
+    "r_years": [
+     2019,
+     2026,
+     8
+    ],
+    "p": 1.0,
+    "g_rev": 0.14249,
+    "g_rev_years": [
+     2019,
+     2026,
+     8
+    ],
+    "terminal_g_basis": "revenue_trend",
+    "ni_over_oe": 0.800793,
+    "x_over_oe": 0.979199,
+    "nwc_intensity": 0.02889,
+    "nwc_years": [
+     2019,
+     2026,
+     8
+    ],
+    "stub_months": 3.1869,
+    "stamps": [
+     "margin_record_pretax"
+    ],
+    "om_tc": 0.00827,
+    "om_trend": 0.006704,
+    "om_L": 0.005249,
+    "om_years": [
+     2019,
+     2026,
+     8
+    ],
+    "om_shape": "swing",
+    "om_basis": "pretax_with_amortization",
+    "om_5": 0.008963,
+    "m_long": 0.005424,
+    "margin_ratio": 0.747982,
+    "stamps_full": [
+     "margin_record_pretax"
+    ]
+   },
+   "working_capital_deducted": [
+    -0.1087,
+    -0.0745,
+    -0.0648,
+    -0.0565,
+    -0.0492
+   ],
+   "base_year_capped": null,
+   "years12_held_by_desk": false,
+   "desk_stamps": [
+    "working_capital_deducted"
+   ],
+   "momentum_view": "neutral",
+   "entry_timing": "buy_now",
+   "momentum_flip_condition": {
+    "metric": "high_52w_distance",
+    "comparator": ">",
+    "threshold": -0.15,
+    "window_days": 90
+   },
+   "momentum_break_rule": {
+    "metric": "mom_6m",
+    "comparator": "<",
+    "threshold": -0.1,
+    "window_days": 180
+   },
+   "invalidation_rules": [
+    {
+     "metric": "gross_margin_pct",
+     "comparator": "<=",
+     "threshold": 1.5,
+     "window": "next reported quarter",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "net_issuance_1y",
+     "comparator": ">",
+     "threshold": 0,
+     "window": "next reported quarter",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": -0.1,
+     "window": "next 180 days",
+     "source": "price_history_scr10"
+    }
+   ],
+   "position_basis": "value",
+   "position_basis_declared": "value",
+   "position_basis_votes": {
+    "value": 1
+   },
+   "momentum_evidence": null,
+   "momentum_state": {
+    "price_asof": "2026-09-22 18:24",
+    "mom_12_1": 0.6698,
+    "mom_6m": -0.0352,
+    "mom_1m": -0.0066,
+    "high_52w_distance": -0.2414,
+    "high_52w_basis": "monthly proxy (unlabelled by the source)",
+    "above_below_200d_mean": null,
+    "rs_vs_cluster_etf_3m": null,
+    "rs_vs_iwm_3m": null,
+    "realised_vol_60d": null,
+    "regime_shift_up": false,
+    "regime_shift_down": false,
+    "mom_break": null,
+    "mom_z_sector": 1.951,
+    "mom_z_universe": 0.047
+   },
+   "active_shocks_at_verdict": [
+    {
+     "active": true,
+     "age_days": 3,
+     "direction": "up",
+     "intensity": 1.0318335302945385,
+     "measure": "63-trading-day log change, %, signed",
+     "onset_date": "2026-09-28",
+     "peak_date": "2026-09-28",
+     "peak_intensity": 1.0799710858764024,
+     "proxy": false,
+     "reason": null,
+     "series_id": "DCOILWTICO",
+     "severity": 1,
+     "shock_id": "oil_shock",
+     "stale_input": false,
+     "state": "active",
+     "thresholds": {
+      "down": {
+       "severity_1": {
+        "episodes": 10,
+        "percentile": 4.5,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -30.0
+       },
+       "severity_2": {
+        "episodes": 6,
+        "percentile": 2.7,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -40.0
+       }
+      },
+      "up": {
+       "severity_1": {
+        "episodes": 11,
+        "percentile": 94.4,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 30.0
+       },
+       "severity_2": {
+        "episodes": 5,
+        "percentile": 97.9,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 40.0
+       }
+      }
+     },
+     "value": 30.955005908836153,
+     "value_date": "2026-09-29",
+     "values_revised": false
+    }
+   ],
+   "pack_facts_source": "build",
+   "base_cf_reason": null,
+   "catalysts": [
+    {
+     "date": "2026-09-02",
+     "event": "FY26 results: revenue $25.5B (+132%), NI $82.3M, EPS $3.02, non-GAAP EBITDA $179.8M, $1.00 special dividend; Q4 gold ounces +51% to 521K; Costco vendor relationship confirmed; Tether lease positions scaled past original disclosure",
+     "direction": "bull",
+     "estimates_moved": "no visible change verifiable from fetched pages",
+     "scenario": "Base and Bull: fee-engine growth (storage, secured lending, Costco services) decouples CF from the falling notional top line; Bear: SG&A +46% shows integration costs outpacing gross profit"
+    },
+    {
+     "date": "2026-09-16",
+     "event": "Tether disclosed as dominant creditor on Gold.com: ~$1.5B financing against $1.7B outstanding precious-metal leases; Tether owed ~$1.45B in payables/advances at June 30, 2026 per the annual report (Bloomberg)",
+     "direction": "bear",
+     "estimates_moved": "no visible change",
+     "scenario": "Bear anchor: single-counterparty concentration with an uncommitted bank line; Bull input: the secured-lease engine scales trading volume and fee income"
+    },
+    {
+     "date": "2026-09-29",
+     "event": "Second Amended and Restated Uncommitted Credit Agreement with CIBC: converted to uncommitted revolver payable on demand, capacity cut from $427.5M to $250M, covenants on dividends/buybacks/acquisitions/metal repurchases removed (filed 8-K 2026-10-02)",
+     "direction": "bear",
+     "estimates_moved": "no visible change",
+     "scenario": "Bear: no committed bank liquidity with gold ~25% below January highs; Bull nuance: covenant removals enable more secured-metal leases"
+    },
+    {
+     "date": "2026-10-05",
+     "event": "Gold corrected from January 2026 ATH of $5,608.35 to ~$4,184/oz; consensus reset to current-FY revenue -15.9% and next-FY -12.9% while next-FY EPS is modeled +31.6% to $4.57",
+     "direction": "bear",
+     "estimates_moved": "consensus structurally reset below FY26 actuals (revenue down both years, EPS up next year)",
+     "scenario": "Base: pass-through revenue falls but CF declines less via fee mix and working-capital release; Bear: further gold weakness compresses inventory and lease-collateral values"
+    },
+    {
+     "date": "2026-08-19",
+     "event": "Stock fell -7.8% in one session to $41.84 after a +20.8% run, pre-earnings de-risking amid bullion weakness",
+     "direction": "bear",
+     "estimates_moved": "no visible change",
+     "scenario": "Sentiment only; already reflected in T0 of $42.29"
+    },
+    {
+     "date": "2026-09-18",
+     "event": "CFO Cary Dickson retired, succeeded by Jill Van (EVP & Controller); KPMG appointed auditor succeeding Grant Thornton for FY2027 (filed 8-K)",
+     "direction": "bear",
+     "estimates_moved": "no visible change",
+     "scenario": "Bear: governance/execution friction during integration of five acquisitions in 18 months"
+    }
+   ],
+   "bull_below_price_reason": null,
+   "bear_above_price_reason": null,
+   "code_fill_mode": "joint",
+   "consensus_data_status": "ok",
+   "input_scope_stamps": [],
+   "direction_m": "undervalued",
+   "crux_valid": true,
+   "crux_by_sample": [
+    {
+     "sample": 1,
+     "valid": true,
+     "reason": null,
+     "inputs": [
+      "growth_years_3_5"
+     ],
+     "at_default": false
+    }
+   ],
+   "crux": [
+    {
+     "input": "growth_years_3_5",
+     "own": -0.08014495037265268,
+     "implied": -0.1780527057495187,
+     "at_default": false,
+     "reason": "The price implies owner cash flow shrinking ~15%/yr through year 5, i.e. that the fee engine adds nothing as notional revenue declines with the gold correction. My evidence says CF declines materially less than revenue: the $1.7B Tether lease book with Tether as dominant creditor (Bloomberg 2026-09-"
+    }
+   ],
+   "price_implied": {
+    "coe": {
+     "value": 0.117992237795194,
+     "reachable": true,
+     "own": 0.0898,
+     "bound": {
+      "low": 0.0524,
+      "high": 0.25,
+      "value_low": 144.5325958602106,
+      "value_high": 23.776072339611936
+     },
+     "side": null,
+     "base_at_value": 42.28999999000845,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      0.11799223740259807,
+      0.11799223818778992
+     ],
+     "stamps": []
+    },
+    "growth_years_3_5": {
+     "value": -0.1780527057495187,
+     "reachable": true,
+     "own": -0.08014495037265268,
+     "bound": {
+      "low": -0.9904866300900939,
+      "high": 9.979987856695738,
+      "value_low": 18.12693641618812,
+      "value_high": 37367219.48661947
+     },
+     "side": null,
+     "base_at_value": 42.28999999922069,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      -0.09789048968907446,
+      -0.09789048900865019
+     ],
+     "stamps": [],
+     "shift": -0.09789048934886233,
+     "shift_bound": [
+      -0.899,
+      10.06
+     ],
+     "own_path": [
+      -0.1,
+      -0.08,
+      -0.06
+     ]
+    },
+    "fade_years": {
+     "value": null,
+     "reachable": false,
+     "own": 5,
+     "bound": {
+      "low": 0,
+      "high": 60,
+      "value_low": 71.2141720035134,
+      "value_high": 44.472004997515164
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "bracket_years": null,
+     "bracket_values": null
+    },
+    "terminal_g": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0375,
+     "bound": {
+      "low": 0.0,
+      "high": 0.044698999999999996,
+      "value_low": 45.87394628331915,
+      "value_high": 59.48043138779375
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "terminal_ronic": {
+     "value": null,
+     "reachable": false,
+     "own": 0.543292,
+     "bound": {
+      "low": 0.0898,
+      "high": "unlimited",
+      "value_low": 47.08711009590759,
+      "value_high": 57.39131650484668
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "year2_level": {
+     "value": 0.08786499015490214,
+     "reachable": true,
+     "own": 0.128906148,
+     "bound": {
+      "low": 0.078,
+      "high": 0.2,
+      "value_low": 39.061101662307834,
+      "value_high": 78.99277766756266
+     },
+     "side": null,
+     "base_at_value": 42.28999994641095,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      0.08786499015490214,
+      0.08786499112447102
+     ],
+     "stamps": []
+    }
+   },
+   "serving": {
+    "provider": "ollama",
+    "model": "rs2-analyst-deep-mtp5-v33",
+    "manifest_sha256": "f0f5ce2dcea334804e13492b2813e74d3294025f5d3b1692524de597fa33ab3e",
+    "system_layer_digest": "sha256:ff033c2519528445a1f2e56a797746524d64bff7d65e5a31612be35d6cbdfc22"
+   },
+   "position_basis_source_sample": 1,
+   "size_components": {
+    "dispersion": {
+     "bucket": "full",
+     "spread_pct": 0.0,
+     "source": "SIZE_BUCKETS"
+    },
+    "mos": {
+     "bucket": "full",
+     "mos_vs_base_pct": 31.8,
+     "source": "mos_vs_base_pct"
+    },
+    "conviction": {
+     "bucket": "half",
+     "conviction_score": 8.0,
+     "source": "scorecard.median_conviction_score"
+    },
+    "risk": {
+     "bucket": "full",
+     "elevated_volatility_ahead": false,
+     "source": "mri_outputs_dir/shock_register.json:risk_flags"
+    }
+   },
+   "reason": "single plausible sample \u2014 direction weak, size capped",
+   "instability": null,
+   "direction": "undervalued",
+   "size_hint": "quarter",
+   "mos_vs_median_pct": 31.8,
+   "mos_vs_base_pct": 31.8,
+   "fiduciary_amendments": [],
+   "fiduciary_violations": [],
+   "fiduciary_verdict": "PASS",
+   "consensus_dir": "GOLD_20261005_214555",
+   "run_source": "orchestrator",
+   "arm": "local",
+   "pack_source": "fresh",
+   "screener_data_commit": "e29c4b2037cb2f4f3ec7a42dc28057ba52a30510",
+   "research_brief_asof": "2026-10-05T21:33:14.605690",
+   "research_brief_age_days": 0.03,
+   "price_asof": "2026-10-02",
+   "price_source": "yfinance",
+   "price_asof_basis": null,
+   "gate_version": 8,
+   "pipeline_commit": "68f3935",
+   "street_fence": {
+    "low": 23.64,
+    "high": 163.64,
+    "n_targets": 5.0,
+    "asof": "2026-10-05",
+    "age_days": 0.0,
+    "source": "enrich",
+    "winsorized": []
+   },
+   "producer_class": {
+    "status": "ok",
+    "depleting": false,
+    "sector": "Financial Services",
+    "industry": "Capital Markets",
+    "source": "stocks.csv@e29c4b2037cb2f4f3ec7a42dc28057ba52a30510"
+   },
+   "actionable": false,
+   "actionable_reasons": [
+    "single_sample"
    ],
    "status": "ok",
    "thesis_status": null,
