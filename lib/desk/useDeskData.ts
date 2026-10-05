@@ -242,6 +242,38 @@ export function useDepthOutcomes(): { outcomes: any | null; loaded: boolean } {
 }
 
 /**
+ * The three files the Macro page reads. Each lands independently; `loaded` flips once that file's
+ * request has settled, so the page can tell "still loading" from "did not load" (null + loaded).
+ */
+export interface MacroData {
+    regime: MriRegime | null;
+    anchor: MriCostOfCapital | null;
+    factor: FactorScoresPayload | null;
+    loaded: { regime: boolean; anchor: boolean; factor: boolean };
+}
+
+export function useMacroData(): MacroData {
+    const [state, setState] = useState<MacroData>({
+        regime: null, anchor: null, factor: null, loaded: { regime: false, anchor: false, factor: false },
+    });
+    useEffect(() => {
+        let alive = true;
+        const settle = <K extends 'regime' | 'anchor' | 'factor'>(key: K, value: MacroData[K]) => {
+            if (alive) setState((prev) => ({ ...prev, [key]: value, loaded: { ...prev.loaded, [key]: true } }));
+        };
+        const run = () => {
+            cached('regime', fetchMriRegime).then((v) => settle('regime', v)).catch(() => settle('regime', null));
+            cached('anchor', fetchMriCostOfCapital).then((v) => settle('anchor', v)).catch(() => settle('anchor', null));
+            cached('factor', fetchFactorScores).then((v) => settle('factor', v)).catch(() => settle('factor', null));
+        };
+        run();
+        invalidationListeners.add(run);
+        return () => { alive = false; invalidationListeners.delete(run); };
+    }, []);
+    return state;
+}
+
+/**
  * Loads (or reuses) every desk payload and merges the signed-in user's private
  * `mine` ledger from Supabase, which lives outside paper_ledgers.json.
  */

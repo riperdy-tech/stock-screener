@@ -545,12 +545,19 @@ export interface MriRegime {
     date?: string | null;
     built_at?: string | null;
     data_health_warnings?: string[] | null;
+    regime_probabilities?: Record<string, number | null> | null;
+    explanation?: string[] | null;
+    active_shocks_on_date?: string[] | null;
+    disclaimer?: string | null;
 }
 
 export interface MriCostOfCapital {
     implied_cost_of_equity?: number | null;
     degraded?: boolean | null;
     asof?: string | null;
+    built_at?: string | null;
+    implied_erp?: number | null;
+    erp_percentile_vs_history?: number | null;
 }
 
 export async function fetchChainManifest(): Promise<ChainManifest | null> {
