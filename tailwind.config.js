@@ -5,7 +5,9 @@
 // legacy pages keep the dark :root values. Declared in function form so the `/opacity` modifier
 // still works: it is spliced in with color-mix, which also accepts oklch and rgba variables.
 const tok = (name) => ({ opacityValue }) => {
-    if (opacityValue === undefined) return `var(${name})`;
+    // No modifier: Tailwind passes `var(--tw-*-opacity, 1)` (or undefined). Emit the bare variable
+    // so the computed colour is exactly the token's own value.
+    if (opacityValue === undefined || /^var\(--tw-[a-z-]*opacity, ?1\)$/.test(opacityValue)) return `var(${name})`;
     const n = Number(opacityValue);
     const pct = Number.isNaN(n) ? `calc(${opacityValue} * 100%)` : `${Math.round(n * 10000) / 100}%`;
     return `color-mix(in oklch, var(${name}) ${pct}, transparent)`;
