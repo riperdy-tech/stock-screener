@@ -4,51 +4,49 @@
 
 import React from 'react';
 import clsx from 'clsx';
-import { scaleBand, bandLabel } from '@/lib/desk/band';
+import { bandGeometry } from '@/lib/desk/rowText';
+import type { DeskVerdict } from '@/lib/desk/verdict';
 import { FAMILY, gapColor, gateReasonsText, isBlocked, sizeTone, TONE_COLORS, verdictTone, whyListed } from '@/lib/desk/tone';
 import { fmtMcap, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import type { DeskRow } from '@/lib/desk/rankings';
 import { Micro } from '../primitives';
 import { useLanguage } from '@/components/LanguageContext';
 
-/** 16px mini band strip: shaded band, median tick, 2px price tick. */
-export function BandStrip({ row, height = 16, showSubline = true }: {
-    row: DeskRow;
-    height?: number;
-    showSubline?: boolean;
+/**
+ * Desk band strip (handoff 5.1e): 12px track, the verdict's band segment (a >= 2px point for a single
+ * run) and a 2px ink price tick that stands 3px proud of the track. `muted` greys the segment for a
+ * blocked verdict. With no band the track stays empty. `srText` is the screen-reader equivalent,
+ * e.g. "$52-58, median 55; price $42.10, below the band"; the drawing itself is hidden from them.
+ */
+export function BandStrip({ d, price, muted = false, srText }: {
+    d: DeskVerdict | undefined;
+    price: number | null;
+    muted?: boolean;
+    srText?: string;
 }) {
-    const d = row.depth;
-    if (!d || d.iv_band_low == null || d.iv_band_high == null) {
-        return <span className="font-mono text-[11px] text-ink-3">—</span>;
-    }
-    const tone = verdictTone(d.direction);
-    const g = scaleBand({ price: d.price, low: d.iv_band_low, high: d.iv_band_high, median: d.median_iv });
-    if (!g.ok) return <span className="font-mono text-[11px] text-ink-3">—</span>;
-
+    const g = d ? bandGeometry(d, price) : null;
+    const tone = verdictTone(d?.direction);
+    const color = muted ? 'var(--off)' : tone.color;
+    const fill = muted ? 'var(--track-18)' : tone.fill;
     return (
-        <span className="block min-w-0">
-            <span className="relative block bg-track-12" style={{ height }}>
+        <span className="relative block" style={{ height: 18 }}>
+            <span aria-hidden className="absolute inset-x-0 bg-track-12" style={{ top: 3, height: 12 }} />
+            {g && (
                 <span
+                    aria-hidden
                     className="absolute"
                     style={{
-                        left: `${g.bandLeft}%`, width: `${g.bandWidth}%`, top: 2, bottom: 2,
-                        background: tone.fill,
-                        borderLeft: `1px solid ${tone.color}`,
-                        borderRight: `1px solid ${tone.color}`,
+                        left: `${g.bandLeft}%`, width: `${g.bandWidth}%`, minWidth: 2, top: 3, height: 12,
+                        background: fill,
+                        borderLeft: `1px solid ${color}`,
+                        borderRight: `1px solid ${color}`,
                     }}
                 />
-                {g.medianAt !== null && (
-                    <span className="absolute" style={{ left: `${g.medianAt}%`, top: 2, bottom: 2, width: 1, background: tone.color }} />
-                )}
-                {g.priceAt !== null && (
-                    <span className="absolute" style={{ left: `${g.priceAt}%`, top: 0, bottom: 0, width: 2, background: '#f2f0eb' }} />
-                )}
-            </span>
-            {showSubline && (
-                <span className="mt-1 block font-mono text-[11px] text-ink-3">
-                    {bandLabel(d.iv_band_low, d.iv_band_high, d.median_iv)}
-                </span>
             )}
+            {g && g.priceAt !== null && (
+                <span aria-hidden className="absolute" style={{ left: `${g.priceAt}%`, top: 0, bottom: 0, width: 2, marginLeft: -1, background: 'var(--ink)' }} />
+            )}
+            {srText && <span className="sr-only">{srText}</span>}
         </span>
     );
 }
@@ -250,7 +248,7 @@ export function DeliberationCell({ row }: { row: DeskRow }) {
             <div className="flex items-center gap-1.5">
                 <span className={clsx(
                     'inline-flex items-center gap-1 rounded-xs border px-1.5 py-0.5 font-mono text-[10px] font-bold tracking-tight',
-                    'border-rule-24 bg-white/[0.02] text-ink-2'
+                    'border-rule-24 bg-wash/[0.02] text-ink-2'
                 )}>
                     <span>{n} RUNS</span>
                     {spread != null && (

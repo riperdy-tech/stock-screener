@@ -3,6 +3,26 @@
 User-facing changes are mirrored in the header version button (Cockpit), sourced
 from `lib/changelog.ts` — keep the two in sync.
 
+## [0.4.0] — 2026-10-05
+
+### A new light Desk, a Track record page and a Macro page
+
+**What:** the site was redesigned (Stockpeak v3, "Institutional Light").
+
+- **New light look.**
+- **The Desk** is one table under a funnel that shows how the universe narrows to
+  the names the AI analyst has valued. The separate lenses are gone.
+- **Stock pages** are built around the crux: what the price assumes that the
+  analyst does not.
+- **Track record** is its own page and leads with a scoreboard of graded verdicts,
+  then the paper books.
+- **Macro** is a new page: the macro backdrop the analyst reads, with its cost of
+  capital. It is background, not a call on the market.
+- **My portfolio** shows the machine's stance on each holding.
+- **Old-analyst verdicts** are no longer shown on the Desk or in My portfolio; they
+  stay on each stock page as earlier verdicts.
+- **Handbook:** rewritten for the new Desk, the crux, the follow-up system, the Track record and Macro pages, with new glossary terms in English, Korean and Chinese.
+
 ## [0.3.0] — 2026-10-01
 
 ### The site now describes the current system

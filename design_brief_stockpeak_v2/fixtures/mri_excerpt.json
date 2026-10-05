@@ -1,0 +1,133 @@
+{
+  "_fixture_note": "REAL excerpts of public/data/mri/*.json (copied from the macro engine). Dimension score list and feature contributions omitted for size.",
+  "current_regime": {
+    "date": "2026-09-01",
+    "dominant_regime": "goldilocks",
+    "dominant_probability": 0.30230979719049067,
+    "confidence": 0.03081885394528494,
+    "reported_regime": "goldilocks",
+    "reported_regime_probability": 0.30230979719049067,
+    "regime_probabilities": {
+      "goldilocks": 0.30230979719049067,
+      "recession": 0.11824219153685381,
+      "reflation": 0.2360919392746514,
+      "stagflation": 0.16727376239042915,
+      "tightening": 0.17608230960757495
+    },
+    "raw_dominant_regime": "goldilocks",
+    "transition_filter_applied": true,
+    "transition_filter_reason": "raw_signal_confirmed",
+    "active_shocks_on_date": [
+      "oil_shock"
+    ],
+    "explanation": [
+      "goldilocks is dominant based on stored regime contributions.",
+      "credit_liquidity supported the regime with contribution 0.199.",
+      "policy_stance supported the regime with contribution 0.079.",
+      "inflation_pressure supported the regime with contribution 0.067.",
+      "yield_curve supported the regime with contribution 0.013.",
+      "growth_momentum opposed the regime with contribution -0.037."
+    ],
+    "data_health_warnings": [
+      "Feature disabled_leading_index_level_z unusable: disabled_feature",
+      "Source USSLIND unusable: discontinued_or_stale",
+      "Source DTWEXB unusable: unusable_stale",
+      "Source TWEXBMTH unusable: unusable_stale"
+    ],
+    "disclaimer": "This is an experimental macro regime diagnostic based on structured data. It is not investment advice and does not provide trading, allocation, or portfolio guidance.",
+    "scoring_mode": "point_in_time",
+    "headline_margin": 0.06621785791583926,
+    "recession_probability": 0.11824219153685381,
+    "built_at": "2026-10-04T11:44:00.225281+00:00"
+  },
+  "dimension_scores": [
+    {
+      "dimension_id": "growth_momentum",
+      "score": -0.1230267692100134,
+      "valid": true,
+      "reason": "ok",
+      "coverage_ratio": 1.0
+    },
+    {
+      "dimension_id": "inflation_pressure",
+      "score": 0.16202279071822004,
+      "valid": true,
+      "reason": "ok",
+      "coverage_ratio": 1.0
+    },
+    {
+      "dimension_id": "policy_stance",
+      "score": -0.28736844589135746,
+      "valid": true,
+      "reason": "ok",
+      "coverage_ratio": 1.0
+    },
+    {
+      "dimension_id": "credit_liquidity",
+      "score": 0.9959511064314428,
+      "valid": true,
+      "reason": "ok",
+      "coverage_ratio": 1.0
+    },
+    {
+      "dimension_id": "yield_curve",
+      "score": 0.13149284700215624,
+      "valid": true,
+      "reason": "ok",
+      "coverage_ratio": 1.0
+    },
+    {
+      "dimension_id": "monetary_liquidity",
+      "score": 0.502899368982155,
+      "valid": true,
+      "reason": "ok",
+      "coverage_ratio": 1.0
+    },
+    {
+      "dimension_id": "housing_activity",
+      "score": -0.6050983821661211,
+      "valid": true,
+      "reason": "ok",
+      "coverage_ratio": 1.0
+    },
+    {
+      "dimension_id": "real_rates",
+      "score": 1.3047221634732855,
+      "valid": true,
+      "reason": "ok",
+      "coverage_ratio": 1.0
+    },
+    {
+      "dimension_id": "commodity",
+      "score": 0.3393022485409487,
+      "valid": true,
+      "reason": "ok",
+      "coverage_ratio": 1.0
+    },
+    {
+      "dimension_id": "dollar",
+      "score": 0.39836729074236715,
+      "valid": true,
+      "reason": "ok",
+      "coverage_ratio": 1.0
+    }
+  ],
+  "cost_of_capital_anchor": {
+    "asof": "2026-10-04",
+    "degraded": false,
+    "implied_erp": 0.0403,
+    "implied_cost_of_equity": 0.0927,
+    "erp_percentile_vs_history": 0.47692307692307695,
+    "erp_source": "implied",
+    "inflation": {
+      "cpi_yoy": 0.0335,
+      "pce_yoy": 0.0342
+    }
+  },
+  "current_sector_ranking_header": {
+    "date": "2026-09-01",
+    "reported_macro_regime": "goldilocks",
+    "macro_confidence": 0.03081885394528494,
+    "disclaimer": "This sector ranking is an experimental macro diagnostic. It is not investment advice and does not provide trading, allocation, portfolio sizing, or security selection guidance. Proxy tickers are reporting references only."
+  }
+}

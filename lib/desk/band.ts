@@ -30,10 +30,16 @@ const EMPTY: BandGeometry = {
     medianAt: null, priceAt: null, runsAt: [],
 };
 
-export function scaleBand({ price, low, high, median, runs }: BandInput, padFrac = 0.08): BandGeometry {
-    if (low == null || high == null || !Number.isFinite(low) || !Number.isFinite(high)) return EMPTY;
+/** A shared axis: the span of `values` with `padFrac` padding each side, and a scaler into 0-100. */
+export interface Axis {
+    axisLo: number;
+    axisHi: number;
+    at: (v: number | null | undefined) => number | null;
+}
 
-    const points = [low, high, ...(price != null && Number.isFinite(price) ? [price] : [])];
+export function makeAxis(values: (number | null | undefined)[], padFrac = 0.08): Axis | null {
+    const points = values.filter((v): v is number => v != null && Number.isFinite(v));
+    if (points.length === 0) return null;
     const lo = Math.min(...points);
     const hi = Math.max(...points);
     const span = hi - lo;
@@ -42,8 +48,18 @@ export function scaleBand({ price, low, high, median, runs }: BandInput, padFrac
     const axisLo = lo - pad;
     const axisHi = hi + pad;
     const width = axisHi - axisLo;
-    const at = (v: number | null | undefined) =>
-        v == null || !Number.isFinite(v) ? null : ((v - axisLo) / width) * 100;
+    return {
+        axisLo, axisHi,
+        at: (v) => (v == null || !Number.isFinite(v) ? null : ((v - axisLo) / width) * 100),
+    };
+}
+
+export function scaleBand({ price, low, high, median, runs }: BandInput, padFrac = 0.08): BandGeometry {
+    if (low == null || high == null || !Number.isFinite(low) || !Number.isFinite(high)) return EMPTY;
+
+    const axis = makeAxis([low, high, price], padFrac);
+    if (!axis) return EMPTY;
+    const { axisLo, axisHi, at } = axis;
 
     const bandLeft = at(low) ?? 0;
     const bandRight = at(high) ?? 0;

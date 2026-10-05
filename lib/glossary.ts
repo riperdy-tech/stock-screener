@@ -51,21 +51,23 @@ export const CATEGORY_LABELS: Record<GlossaryCategory, string> = {
     bands: 'Doors, bands & vetoes',
 };
 
-// Tailwind classes per category, used by the popup badge and glossary chips.
+// Tailwind classes per category, used by the popup badge and glossary chips. One neutral style
+// for every category: on the light desk a colour means one thing, and a category is not a colour.
+const NEUTRAL_CATEGORY = 'border-rule-24 bg-transparent text-ink-2';
 export const CATEGORY_STYLES: Record<GlossaryCategory, string> = {
-    core: 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300',
-    value: 'border-green-500/40 bg-green-500/15 text-green-300',
-    quality: 'border-sky-500/40 bg-sky-500/15 text-sky-300',
-    momentum: 'border-amber-500/40 bg-amber-500/15 text-amber-300',
-    risk: 'border-violet-500/40 bg-violet-500/15 text-violet-300',
-    revisions: 'border-rose-500/40 bg-rose-500/15 text-rose-300',
-    valuation: 'border-teal-500/40 bg-teal-500/15 text-teal-300',
-    ai: 'border-cyan-500/40 bg-cyan-500/15 text-cyan-300',
-    portfolio: 'border-pink-500/40 bg-pink-500/15 text-pink-300',
-    track: 'border-orange-500/40 bg-orange-500/15 text-orange-300',
-    data: 'border-slate-500/40 bg-slate-500/15 text-slate-300',
-    overlay: 'border-purple-500/40 bg-purple-500/15 text-purple-300',
-    bands: 'border-lime-500/40 bg-lime-500/15 text-lime-300',
+    core: NEUTRAL_CATEGORY,
+    value: NEUTRAL_CATEGORY,
+    quality: NEUTRAL_CATEGORY,
+    momentum: NEUTRAL_CATEGORY,
+    risk: NEUTRAL_CATEGORY,
+    revisions: NEUTRAL_CATEGORY,
+    valuation: NEUTRAL_CATEGORY,
+    ai: NEUTRAL_CATEGORY,
+    portfolio: NEUTRAL_CATEGORY,
+    track: NEUTRAL_CATEGORY,
+    data: NEUTRAL_CATEGORY,
+    overlay: NEUTRAL_CATEGORY,
+    bands: NEUTRAL_CATEGORY,
 };
 
 export const GLOSSARY: Record<string, TermDef> = {
@@ -478,9 +480,9 @@ export const GLOSSARY: Record<string, TermDef> = {
     'iv-band': {
         term: 'Value band (IV band)',
         category: 'ai',
-        plain: 'The range of values from the analyst’s runs.',
+        plain: 'The range of values from the analyst’s independent runs.',
         definition:
-            'Each stock is analysed in 2–3 independent runs, and each run ends in an estimate of what the business is worth. The value band is the range from the lowest to the highest of those estimates; the median is the middle one. The verdict is where today’s price sits against the band: below it = undervalued, inside it = fair, above it = overvalued. On the desk the shaded band is the range, the tick is the median and the white line is the price. A wider band means the runs disagreed, which lowers the suggested size.',
+            'The analyst values each stock in independent runs, and each usable run ends in an estimate of what the business is worth. The value band (also called the plausible-value range) runs from the lowest to the highest of those estimates; the median is the middle one. The verdict is where today’s price sits against the whole band: below it, with enough margin = undervalued; inside it = fair; above it, with enough margin = overvalued. How many runs a band rests on is printed on each row (“n of m usable”), never assumed, and with one run the band is a single point. On the desk the shaded band is the range and the dark tick is today’s price. A wider band means the runs disagreed, which lowers the size hint.',
         related: ['intrinsic-value', 'actionable', 'position-sizing'],
     },
     'not-usable': {
@@ -488,7 +490,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'A row where the analyst produced no usable verdict.',
         definition:
-            'When the verdict step malfunctions, the row is marked not usable instead of being given a guess. It has no direction, is never shown as a pick, and sits under Vetoed on the AI side of the desk.',
+            'When the verdict step malfunctions — there is no complete, parseable valuation — the row is marked not usable instead of being given a guess. It has no direction and is never shown as a pick. On the desk it sits under Blocked by the gate, so it stays visible as a record.',
         related: ['actionable', 'iv-band'],
     },
     actionable: {
@@ -496,40 +498,32 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'A verdict that passed every rule of the gate.',
         definition:
-            'Every AI verdict carries a yes/no flag called actionable, plus the list of reasons when the answer is no. Only an actionable verdict can appear under Research now or Watchlist on the AI side, or be followed by the AI paper book. A verdict that is not actionable is not deleted: it stays visible, marked as blocked.',
-        related: ['gate-reason', 'street-fence', 'rn-depth'],
+            'Every verdict carries a yes/no flag called actionable, plus the list of reasons when the answer is no. Only an actionable verdict can appear under Research now, Waiting or No edge today on the desk, or be followed by the AI paper book. A verdict that is not actionable is not deleted: it stays visible under Blocked by the gate. Actionable means a verdict is allowed to count. It does not mean the verdict is right.',
+        related: ['gate', 'blocked', 'gate-reason', 'rn-depth'],
     },
     'gate-reason': {
         term: 'Gate reason',
         category: 'ai',
         plain: 'The plain-words reason a verdict was blocked.',
         definition:
-            'When a verdict is blocked, the desk says why — for example “made by the old analyst” or “runs disagree too much”. A verdict can have more than one reason. The full list is in the gate section of this handbook.',
-        related: ['actionable', 'street-fence'],
+            'When a verdict is blocked, the desk says why — for example “made by the old analyst” or “runs disagree too much”. A verdict can have more than one reason. The full list is in the gate section of this handbook, built from the same wording the desk uses.',
+        related: ['gate', 'actionable', 'street-fence'],
     },
     'street-fence': {
-        term: 'Street fence',
+        term: 'Street range (street fence)',
         category: 'ai',
         plain: 'The analysts’ price-target range, used as an outside check.',
         definition:
-            'The Street means the professional analysts who follow a company. The street fence is the range of their price targets. Code checks the AI analyst’s answer against it: a value outside the fence is blocked, a verdict with no fence to check against is blocked, and so is one whose value is implausibly far above the price. It is an outside check on the analyst’s own work.',
+            'The Street means the professional analysts who follow a company. The Street range — called the street fence in the data — is the range of their price targets. It is a sanity check, not an input to the valuation. Code checks the AI analyst’s answer against it: a value outside the range is blocked, a verdict with no range to check against is blocked, and so is one whose value is implausibly far above the price. On the stock page it is drawn as a bar above the value band.',
         related: ['actionable', 'gate-reason', 'estimates'],
     },
     'thesis-status': {
-        term: 'Thesis status',
+        term: 'Thesis status (intact / breached / unknown)',
         category: 'ai',
-        plain: 'Whether the reasons behind a verdict still hold.',
+        plain: 'Whether the written “what would prove me wrong” conditions still hold.',
         definition:
-            'Each new-analyst verdict states its own invalidation rules — things that, if they happen, mean the thesis is broken. A monitor re-checks those rules against current data. Intact = rules were checked and none fired; breached = at least one fired; unknown = none could be checked. A breached thesis is flagged. This arrives with the relaunch of the analyst.',
-        related: ['actionable', 'position-basis'],
-    },
-    'position-basis': {
-        term: 'Position basis',
-        category: 'ai',
-        plain: 'Whether a stock is held for its value or for its momentum.',
-        definition:
-            'A verdict can carry a basis. Value basis: the case rests on the price being below the value band. Momentum basis: the analyst’s value is below the price, but the stock is in a strong uptrend that its fundamentals back up, so it may be held — at half or quarter size — instead of sold. None: no position is suggested. This arrives with the relaunch of the analyst.',
-        related: ['position-sizing', 'thesis-status'],
+            'Each rebuilt-analyst verdict states its own invalidation rules in advance: checkable conditions that, if they happen, mean the thesis is broken. The stock page lists each rule with its threshold, its window and its current value. Intact = the rules were checked and none has fired; breached = at least one has; unknown = none could be checked. The daily follow-up re-checks the rules; it is built but not live yet, so until it is, a thesis may read unknown.',
+        related: ['follow-up', 'actionable'],
     },
 
     // ── Bands & vetoes ───────────────────────────────────────────────────
@@ -546,7 +540,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'bands',
         plain: 'The top of the shortlist — worth your research time today.',
         definition:
-            'The highest band: roughly the top 50 to 60 names by priority, including a few trend leaders. It is a research shortlist, never a buy order. On the AI side of the desk a name appears under Research now only when its AI verdict says undervalued and passes the gate.',
+            'The highest band: roughly the top 50 to 60 names by priority, including a few trend leaders. It is a research shortlist, never a buy order. The desk section of the same name is narrower: a name appears under Research now only when the analyst’s verdict says undervalued, passes the gate and is not held back.',
         related: ['band', 'watchlist', 'actionable'],
     },
     watchlist: {
@@ -554,8 +548,8 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'bands',
         plain: 'The rest of the shortlist — strong evidence, worth watching.',
         definition:
-            'The second band: the part of the shortlist below Research now (the whole shortlist holds roughly 150 names). Stocks here are worth watching and often move up. On the AI side of the desk, a name appears under Watchlist when its AI verdict is fair or overvalued and passes the gate.',
-        related: ['band', 'research-now'],
+            'The second band: the part of the shortlist below Research now (the whole shortlist holds roughly 150 names). Stocks here are worth watching and often move up. This is the screen’s own band name. It is not a verdict and not a desk section: on the desk, a name whose verdict is fair or overvalued and passes the gate sits under No edge today.',
+        related: ['band', 'research-now', 'no-edge'],
     },
     pass: {
         term: 'Pass',
@@ -570,7 +564,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'bands',
         plain: 'A stock removed by a safety filter, no matter how good it looks.',
         definition:
-            'A hard disqualifier. A vetoed stock gets no band and is not analysed. Reasons include: the stock cannot be traded (delisted or halted), it is too small or too thinly traded, it has no usable filed fundamentals, it is a shell company, or — only for companies worth under $10 billion — it has chronic operating losses with heavy debt, or two forensic red flags agree. Larger companies get a warning instead. The reason is written on the red chip.',
+            'A hard disqualifier. A vetoed stock gets no band and is not analysed. Reasons include: the stock cannot be traded (delisted or halted), it is too small or too thinly traded, it has no usable filed fundamentals, it is a shell company, or — only for companies worth under $10 billion — it has chronic operating losses with heavy debt, or two forensic red flags agree. Larger companies get a warning instead. On the desk a vetoed name sits under Disqualified with its reason written beside it.',
         related: ['forensic', 'beneish', 'dilution'],
     },
     door: {
@@ -611,8 +605,8 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'portfolio',
         plain: 'Deciding how much of your capital goes into each stock.',
         definition:
-            'The math that turns a shortlist into a portfolio. This site does not give you a portfolio plan. What it does give is a size hint on an AI verdict — quarter, half or full — read off how wide the value band is: the more the runs disagreed, the smaller the suggested size.',
-        related: ['iv-band', 'position-basis'],
+            'This site does not give you a portfolio plan. What it gives is a size hint on a verdict — quarter, half or full — set by the most conservative of four buckets: how much the runs disagree, the margin of safety, the analyst’s own conviction, and the macro turbulence flag. A single run is capped at quarter. The stock page also prints an upper bound (a quarter-Kelly cap), which is a ceiling and not a suggestion. The older Kelly-sized plan books were retired.',
+        related: ['iv-band', 'entry-timing'],
     },
     'paper-trading': {
         term: 'Paper trading',
@@ -628,14 +622,14 @@ export const GLOSSARY: Record<string, TermDef> = {
         plain: 'Treating a portfolio like a fund so deposits don’t fake returns.',
         definition:
             'The “mine” ledger is unitized like a mutual fund: adding or removing money changes the number of units, never the unit price. This prevents deposits from inflating returns. It is how your real holdings are measured fairly against the model portfolios.',
-        related: ['track-record', 'mine'],
+        related: ['track-record', 'behavior-gap'],
     },
     'behavior-gap': {
         term: 'Behavior gap',
         category: 'track',
         plain: 'The return you lose by deviating from the system.',
         definition:
-            'The difference between what the disciplined system earns and what you actually earn, caused by your own decisions — selling too early, chasing, ignoring exits. On Track Record, the Mine book lagging the Equal-weight book is the behavior gap, measured in public.',
+            'The difference between what the disciplined system earns and what you actually earn, caused by your own decisions — selling too early, chasing, ignoring exits. On the track record page, My book lagging the control book is the behavior gap, measured in public.',
         related: ['track-record', 'unitization'],
     },
     'transaction-costs': {
@@ -651,16 +645,16 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'Return per unit of risk — how much pain each point of gain cost.',
         definition:
-            'Excess return divided by volatility. It measures reward relative to risk: a higher Sharpe means the strategy earned its return with less violent ups and downs. It only appears on the Track Record page once enough days of live data have accumulated.',
-        related: ['volatility', 'track-record'],
+            'Excess return divided by volatility. It measures reward relative to risk: a higher Sharpe means the strategy earned its return with less violent ups and downs. The track record page hides it until there are enough observations, because on a few weeks of data it is noise.',
+        related: ['volatility', 'observations'],
     },
     cagr: {
         term: 'CAGR',
         category: 'track',
         plain: 'The smoothed annual growth rate of the portfolio.',
         definition:
-            'Compound Annual Growth Rate — the single annual percentage that would take the starting value to the ending value over the whole period, as if growth were perfectly smooth. It lets you compare portfolios on an apples-to-apples yearly basis.',
-        related: ['track-record', 'roic'],
+            'Compound Annual Growth Rate — the single annual percentage that would take the starting value to the ending value over the whole period, as if growth were perfectly smooth. It lets you compare portfolios on a yearly basis. The track record page hides it while the record is too short for an annualised number to mean anything.',
+        related: ['observations', 'roic'],
     },
     drawdown: {
         term: 'Drawdown',
@@ -675,7 +669,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'Return above what the market or benchmark delivered.',
         definition:
-            'The performance of a portfolio beyond its benchmark (like IWM or SPY), after costs. Positive alpha means the stock-picking or sizing added value; negative means the machine (or your deviations) cost you relative to just owning the index.',
+            'The performance of a portfolio beyond its benchmark (like QQQ or SPY), after costs. Positive alpha means the stock-picking or sizing added value; negative means the machine (or your deviations) cost you relative to just owning the index.',
         related: ['benchmark', 'iwm', 'spy'],
     },
     benchmark: {
@@ -683,15 +677,23 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'The index you compare the portfolios against.',
         definition:
-            'A reference portfolio — typically a broad index — used to judge whether the machine is adding value. This system benchmarks against IWM (Russell 2000 small-cap, its closest universe) and SPY (S&P 500). You can toggle which appear on the NAV chart.',
-        related: ['iwm', 'spy', 'alpha'],
+            'A reference portfolio — typically a broad index — used to judge whether the machine is adding value. The paper books are benchmarked against QQQ (Nasdaq-100). SPY (S&P 500) and IWM (Russell 2000 small-cap) are also on the NAV chart, and verdict grading still reports IWM, SPY and QQQ. You can toggle which appear on the NAV chart.',
+        related: ['qqq', 'spy', 'iwm', 'alpha'],
+    },
+    qqq: {
+        term: 'QQQ',
+        category: 'track',
+        plain: 'The Invesco QQQ ETF — the Nasdaq-100.',
+        definition:
+            'An exchange-traded proxy for the Nasdaq-100, the large technology-heavy index. It is the benchmark the paper books are judged against, so a book that trails QQQ has not beaten simply owning the index.',
+        related: ['benchmark', 'spy', 'iwm'],
     },
     iwm: {
         term: 'IWM',
         category: 'track',
         plain: 'The iShares Russell 2000 ETF — small-cap US stocks.',
         definition:
-            'The most common exchange-traded proxy for the Russell 2000 small-cap index. Because the system screens small and mid caps, IWM is the most relevant benchmark to beat.',
+            'The most common exchange-traded proxy for the Russell 2000 small-cap index. Because the system screens small and mid caps, it stays on the chart as a second reference; the paper books are judged against QQQ.',
         related: ['benchmark', 'spy'],
     },
     spy: {
@@ -703,20 +705,20 @@ export const GLOSSARY: Record<string, TermDef> = {
         related: ['benchmark', 'iwm'],
     },
     'track-record': {
-        term: 'Track Record',
+        term: 'Track record',
         category: 'track',
         plain: 'The scoreboard of the system’s own paper books.',
         definition:
-            'A tab that paper-trades three books every day with real prices and transaction costs: Equal-weight, the AI book and Mine. Instead of a flattering backtest, it is a record of what the system actually did — including its mistakes.',
-        related: ['paper-trading', 'behavior-gap', 'alpha'],
+            'A page that paper-trades three books every day with real prices and assumed transaction costs — the AI book, the control book and My book — and grades every verdict on a scoreboard. Instead of a flattering backtest, it is a record of what the system actually did, including its mistakes. It is a paper record over a short period, and not yet proof of anything.',
+        related: ['paper-trading', 'control-book', 'behavior-gap', 'not-yet-proven'],
     },
     'rn-depth': {
         term: 'AI book (rn_depth)',
         category: 'track',
         plain: 'The paper book that follows the AI analyst’s passing verdicts.',
         definition:
-            'One of the three paper books. It holds equal amounts of every shortlisted name whose AI verdict is undervalued and passes the gate. When no verdict passes, it holds only cash — which has been the case since 2026-09-24. Its history so far comes from the old analyst, which was ruled invalid, so the AI record restarts from zero when the new analyst goes live and the old history is archived.',
-        related: ['actionable', 'track-record', 'paper-trading'],
+            'One of the three paper books. It holds equal amounts of every name on the list whose verdict is undervalued and passes the gate — and, once the daily follow-up is live, whose buying is not paused and whose entry timing says buy now. When no verdict passes, it holds only cash. Its history so far comes from the old analyst, which was ruled invalid, so the AI record restarts from zero when the rebuilt analyst goes live and the old history is archived (see Record reset).',
+        related: ['actionable', 'track-record', 'record-reset', 'control-book'],
     },
 
     // ── Data & pipeline ──────────────────────────────────────────────────
@@ -797,7 +799,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'data',
         plain: 'The ordered chain of steps from raw data to a graded record.',
         definition:
-            'The end-to-end process: fetch filings, prices and macro data → safety filters → the three-door screen → bands → the AI analyst (when it is running) → the gate → publish to the site → paper books → grading. The scoring part runs in a fixed order with integrity checks, so stale or partial data cannot quietly corrupt the shortlist.',
+            'The end-to-end chain: the macro backdrop → the screener (safety filters, three doors, bands) → the AI analyst → the gate → the daily follow-up (built, not live yet) → grading and the paper books. Each step hands the next only a data file. The scoring part runs in a fixed order with integrity checks, so stale or partial data cannot quietly corrupt the list.',
         related: ['github-actions', 'reverse-engine'],
     },
     'reverse-engine': {
@@ -866,14 +868,6 @@ export const GLOSSARY: Record<string, TermDef> = {
             'Non-scoring signals shown as chips: GPR (geopolitical exposure) and ▲/▼ INSIDERS (informed demand). They never change the ranking — they are context for your own thinking.',
         related: ['gpr', 'informed-demand'],
     },
-    theme: {
-        term: 'Theme',
-        category: 'overlay',
-        plain: 'A hype category (AI, biotech…) — context, never a scoring factor.',
-        definition:
-            'A market narrative a stock belongs to (e.g., AI, semiconductor, biotech). Theme membership rides along for orientation, but never adds to the score — naive theme exposure has historically destroyed value (specialized theme ETFs average −3.1%/yr).',
-        related: ['overlay'],
-    },
 
     // ── Misc / frequently seen ───────────────────────────────────────────
     ticker: {
@@ -881,7 +875,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'core',
         plain: 'The stock’s trading symbol — e.g., AAPL.',
         definition:
-            'The short exchange symbol used to identify and trade a stock (like AAPL for Apple or TSM for TSMC). It is the primary key of every row in the leaderboard.',
+            'The short exchange symbol used to identify and trade a stock (like AAPL for Apple or TSM for TSMC). It is the key of every row on the desk.',
         related: ['market-cap'],
     },
     'analyst-coverage': {
@@ -891,6 +885,152 @@ export const GLOSSARY: Record<string, TermDef> = {
         definition:
             'The number of sell-side analysts publishing estimates on a stock. More coverage means more forecast revisions for the revisions factor to read; thin coverage means less signal. Coverage data comes from Yahoo Finance.',
         related: ['estimates', 'revisions', 'yahoo-finance'],
+    },
+
+    // ── Stockpeak v3 handbook (step 4b) ─────────────────────────────────
+    crux: {
+        term: 'The crux',
+        category: 'ai',
+        plain: 'The one input the price gets wrong, according to the analyst.',
+        definition:
+            'A buy or sell call has to name the single valuation input that today’s price gets wrong — for example growth in years 3–5 — with the value the price implies, the analyst’s own value, and quotes from the company’s filings that support it. Code checks every quote against the named source. A call that cannot name a valid crux is held at FAIR. The crux explains a verdict; it does not predict anything.',
+        related: ['price-implied', 'gate', 'iv-band'],
+    },
+    'price-implied': {
+        term: 'What the price implies',
+        category: 'valuation',
+        plain: 'The value of an input that would justify today’s price on its own.',
+        definition:
+            'Take one input of the valuation — say, growth in years 3–5 — and ask what value it would need to have for the model to land exactly on today’s price. That is what the price implies for that input. The crux sets it beside the analyst’s own value. If no value of an input, on its own, can explain the price, the stock page says so.',
+        related: ['crux', 'reverse-dcf', 'implied-growth'],
+    },
+    gate: {
+        term: 'The gate',
+        category: 'ai',
+        plain: 'The automatic check that decides whether a verdict may count.',
+        definition:
+            'After a verdict is written, code re-judges it every time the data are rebuilt and marks it actionable (yes or no), with reasons. A verdict that fails is still published and shown — marked blocked, with its reasons — but it can never be a recommendation and never enters the AI paper book. Passing the gate means a verdict is allowed to count. It does not prove the verdict is right.',
+        related: ['actionable', 'blocked', 'gate-reason'],
+    },
+    blocked: {
+        term: 'Blocked',
+        category: 'ai',
+        plain: 'A verdict that failed the gate: kept for the record, never a recommendation.',
+        definition:
+            'Blocked is the opposite of actionable. A blocked verdict is shown in grey with its reasons in plain words, under “Blocked by the gate”. It is never styled like a pick, never counted as one, and never bought by the AI book. Blocked does not mean wrong; it means the system will not stand behind it.',
+        related: ['actionable', 'gate', 'gate-reason'],
+    },
+    waiting: {
+        term: 'Waiting',
+        category: 'ai',
+        plain: 'Cheap on value, but held back for now.',
+        definition:
+            'A desk section for names that pass the gate and are undervalued but are held back: by timing (the analyst says wait for momentum, or avoid), by buying being paused while something is pending, or by follow-up data that is stale. The reason is shown on the row. Waiting is not a sell. The section fills in once the daily follow-up is live.',
+        related: ['buy-paused', 'entry-timing', 'follow-up'],
+    },
+    'no-edge': {
+        term: 'No edge today',
+        category: 'ai',
+        plain: 'A verdict that passes the gate but finds no gap between price and value.',
+        definition:
+            'The desk section for names whose verdict passes the gate and is FAIR (the price sits inside the value band, or the margin is too thin) or overvalued. FAIR is a real answer — the uncertainty contains the price — not a refusal and not a sell signal. It is separate from the screen’s watchlist band.',
+        related: ['iv-band', 'watchlist', 'actionable'],
+    },
+    'buy-paused': {
+        term: 'Buy paused',
+        category: 'ai',
+        plain: 'New buying is on hold while something is pending. Never a sell.',
+        definition:
+            'Set by the daily follow-up while a break condition, a floor event, a re-analysis or an “avoid” timing call is pending against a verdict. If the follow-up data is older than 36 hours or missing, the name is treated as paused, never as buyable. Buy paused never means sell: a held name is removed only by a new verdict. The follow-up is built but not live yet.',
+        related: ['follow-up', 'waiting', 'reanalysis-queued'],
+    },
+    'follow-up': {
+        term: 'Follow-up / What we’re watching',
+        category: 'ai',
+        plain: 'The daily check of each held or candidate name against its own watch-list.',
+        definition:
+            'Every verdict ends with a watch-list of conditions to look for. Each day the follow-up checks every held name and every buy candidate against new filings, news and the value band. It decides only one thing: re-analyse now, or nothing new. It never sells and never changes a verdict itself. “What we’re watching” on the stock page lists the watch items with their evidence. The follow-up is built and in acceptance testing, but not live yet.',
+        related: ['code-floor', 'reanalysis-queued', 'buy-paused', 'thesis-status'],
+    },
+    'code-floor': {
+        term: 'Code floor',
+        category: 'ai',
+        plain: 'Exact signals that always queue a re-analysis, whatever any model says.',
+        definition:
+            'A fixed list the follow-up applies in code, apart from the local model: an earnings release; a filing of the bankruptcy, restatement, delisting or change-of-control kind; a thesis rule that has just become true; a safety-filter veto appearing on a held name; and two closes on the far side of the value band. Any one of them queues a re-analysis.',
+        related: ['follow-up', 'reanalysis-queued'],
+    },
+    'reanalysis-queued': {
+        term: 'Re-analysis queued',
+        category: 'ai',
+        plain: 'Something has moved this name to the front of the analyst’s queue.',
+        definition:
+            'An event — an earnings release, a filing, the price leaving the value band, a thesis rule tripping — has pushed the name to the front of the analyst’s queue. The existing verdict stays in place until a new one replaces it. Every name is also re-analysed at least every 14 days regardless. Re-analysis queued is never a sell signal.',
+        related: ['follow-up', 'code-floor', 'buy-paused'],
+    },
+    'held-carry': {
+        term: 'Held — verdict being re-checked',
+        category: 'ai',
+        plain: 'A held name whose newest verdict failed to process, kept on its last good one.',
+        definition:
+            'If a re-analysis of a name the AI book holds fails to produce a usable verdict, the last good verdict is carried — for at most two failures or 21 days. The desk labels such a name “held — verdict being re-checked”. After that the carry ends.',
+        related: ['follow-up', 'rn-depth'],
+    },
+    'entry-timing': {
+        term: 'Entry timing',
+        category: 'ai',
+        plain: 'The analyst’s timing call, separate from its value call.',
+        definition:
+            'A verdict says whether a name is cheap; entry timing says whether now is the moment: buy now, wait for momentum, or avoid. A waiting name carries a flip condition — what would change the call — and a break rule. The momentum view (confirming, neutral, contradicting) sits beside it. Timing can hold back an undervalued name; it never changes the value verdict.',
+        related: ['waiting', 'iv-band'],
+    },
+    'rebuilt-analyst': {
+        term: 'Old analyst / rebuilt analyst',
+        category: 'ai',
+        plain: 'Which generation of the analyst wrote a verdict.',
+        definition:
+            'The first analyst was ruled invalid and replaced. Its verdicts carry the gate reason “made by the old analyst”, are kept off the desk, and remain on each stock page under verdict history. The rebuilt analyst’s verdicts are stamped with a pack revision and a gate version. Today the rebuilt analyst has started publishing its first verdicts, and none of them passes the gate yet.',
+        related: ['record-reset', 'gate-reason', 'actionable'],
+    },
+    'record-reset': {
+        term: 'Record reset',
+        category: 'track',
+        plain: 'The moment the AI paper record restarts from zero.',
+        definition:
+            'Because the analyst was replaced, the AI book’s record restarts from zero when the rebuilt analyst goes live. The previous record, made by the old analyst, is archived and stays viewable as “Archived record · old analyst”; the new record starts as “Since go-live”. It has not happened yet.',
+        related: ['rn-depth', 'rebuilt-analyst', 'track-record'],
+    },
+    'graded-pending': {
+        term: 'Graded / pending',
+        category: 'track',
+        plain: 'Verdict horizons whose follow-up window has, or has not, fully elapsed.',
+        definition:
+            'Each verdict is graded at 30, 91, 182 and 365 days against the benchmarks. A horizon is graded only after it has fully elapsed; until then it is pending. The scoreboard shows both counts so that a thin sample cannot be mistaken for evidence. Verdicts from the old analyst are graded too, but labelled legacy and inconclusive.',
+        related: ['not-yet-proven', 'track-record', 'benchmark'],
+    },
+    'control-book': {
+        term: 'Control book',
+        category: 'track',
+        plain: 'Every Research now name, no AI — the test of whether the AI adds value.',
+        definition:
+            'An equal-weight paper book of every Research now name, with no AI involved. It is the scientific control: if the AI book cannot beat it, the expensive AI tier adds nothing over arithmetic. (In the data it is called “equal”.)',
+        related: ['rn-depth', 'track-record', 'paper-trading'],
+    },
+    observations: {
+        term: 'Observations',
+        category: 'track',
+        plain: 'How many daily data points a performance number rests on.',
+        definition:
+            'Every return figure on the track record page is printed with the number of daily observations behind it. Annualised ratios such as CAGR and Sharpe on a few weeks of data are noise, so they stay hidden until the count is meaningful.',
+        related: ['cagr', 'sharpe-ratio', 'not-yet-proven'],
+    },
+    'not-yet-proven': {
+        term: 'Not yet proven',
+        category: 'track',
+        plain: 'The system’s own status line about its performance.',
+        definition:
+            'Nothing in this system has been shown to beat the market. The paper records are short, the verdicts graded so far come from the old analyst, and none of the rebuilt analyst’s verdicts passes the gate yet. The site shows counts — graded and pending — rather than a headline, and nothing here should be read as proof.',
+        related: ['graded-pending', 'observations', 'track-record'],
     },
 };
 

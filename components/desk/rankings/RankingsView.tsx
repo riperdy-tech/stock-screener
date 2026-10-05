@@ -1,208 +1,192 @@
 'use client';
 
-// Rankings — the default surface. Intro band + funnel, then the lens switcher,
-// then whichever lens table is active.
+// The Desk (handoff 5.1): gate status line, funnel, step panel, filter row, the sectioned table, the
+// hidden-legacy line. State that should survive reload and back/forward lives in the URL
+// (?step=3&how=1&verdict=…&door=…&sector=…&q=…) next to the shell's own ?tab= param, which is left alone.
 
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
-import Link from 'next/link';
-import { Chip, Micro } from '../primitives';
 import { useLanguage } from '@/components/LanguageContext';
-import { DESK_NOTICE } from '@/lib/desk/notice';
-import { isActionable, TONE_COLORS } from '@/lib/desk/tone';
-import { AiLens } from './AiLens';
-import { QuantLens } from './QuantLens';
-import {
-    aiSections, applyFilters, buildRows, sectorsOf, industriesOf, inStage, FUNNEL_STAGES, EMPTY_FILTERS,
-    type FunnelStage, type RankingFilters,
-} from '@/lib/desk/rankings';
 import type { DepthVerdict, FactorScoresPayload, ValuationModel } from '@/lib/data-service';
 import type { StockInfo } from '@/lib/desk/useDeskData';
+import { buildRows, sectorsOf } from '@/lib/desk/rankings';
+import { deskPhase } from '@/lib/desk/phase';
+import { countHiddenLegacy, deskSections, type DeskSections } from '@/lib/desk/sections';
+import { funnelCounts } from '@/lib/desk/funnel';
+import { DOOR_LABEL_KEY } from '@/lib/desk/doors';
+import {
+    applyDeskFilters, DOOR_FILTERS, filtersActive, NO_FILTERS, parseDeskUrl, VERDICT_WORDS, writeDeskUrl,
+    type DeskFilters, type DeskUrlState, type FunnelStep,
+} from '@/lib/desk/filters';
+import { fill } from '@/lib/desk/text';
+import { DeskTable } from './DeskTable';
+import { verdictWordKey } from './DeskParts';
+import { FunnelPanel, FunnelRow } from './Funnel';
 
-export type Lens = 'ai' | 'quant';
+const sectionTotal = (s: DeskSections) =>
+    s.researchNow.length + s.waiting.length + s.noEdge.length + s.blocked.length + s.awaiting.length + s.disqualified.length;
 
-const VERDICT_OPTIONS: [string, string][] = [
-    ['all', 'All underwritings'],
-    ['analyzed', 'Depth underwritten'],
-    ['consensus_2', '2-Run Tight Consensus (≤15%)'],
-    ['escalated_3', '3-Run Escalated Tiebreaker'],
-    ['blocked', 'Blocked by the gate'],
-    ['undervalued', 'Undervalued compounders'],
-    ['fair', 'Fair value rails'],
-    ['overvalued', 'Overvalued / Preserved'],
-    ['wide_moat', 'Wide Moat (≥4.0/5.0)'],
-    ['high_conviction', 'High Conviction (≥12/15)'],
-    ['asymmetric', 'Asymmetric Payoff (≥1.5x)'],
-    ['promoted', 'AI promoted (Watchlist gem)'],
-    ['demoted', 'AI demoted (Quant avoid)'],
-    ['not_usable', 'No plausible run'],
-    ['vetoed', 'Disqualified / Vetoed'],
-];
-
-const BAND_OPTIONS: [string, string][] = [
-    ['all', 'All bands'],
-    ['research_now', 'Research now'],
-    ['watchlist', 'Watchlist'],
-    ['pass', 'Pass'],
-    ['vetoed', 'Vetoed'],
-];
-
-function Select({ value, onChange, options, label, maxWidth }: {
-    value: string;
-    onChange: (v: string) => void;
-    options: [string, string][];
+/** A chip-styled native select: the visible text is "Label ▾" (or "Label: value ▾"); the invisible select on top does the work. */
+function FilterSelect({ label, value, shown, options, onChange }: {
     label: string;
-    maxWidth?: string;
+    value: string;
+    /** Display text of the current value when it is not 'all'. */
+    shown: string;
+    options: [string, string][];
+    onChange: (v: string) => void;
 }) {
+    const active = value !== 'all';
     return (
-        <select
-            aria-label={label}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            style={maxWidth ? { maxWidth } : undefined}
-            className="border border-rule-24 bg-transparent px-2.5 py-1.5 font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink-2 hover:text-ink focus:text-ink truncate"
-        >
-            {options.map(([v, l]) => <option key={v} value={v} className="bg-page text-ink">{l}</option>)}
-        </select>
+        <label className={clsx(
+            'relative inline-flex items-center border px-2.5 py-1.5 font-mono text-[11px] hover:bg-hover focus-within:outline focus-within:outline-1 focus-within:outline-offset-2 focus-within:outline-accent',
+            active ? 'border-ink text-ink' : 'border-rule-14 text-ink-2',
+        )}>
+            <span aria-hidden>{active ? `${label}: ${shown}` : label} {'▾'}</span>
+            <select
+                aria-label={label}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+            >
+                {options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+            </select>
+        </label>
     );
 }
 
-export function RankingsView({ factor, depth, valuations, overlay, stockInfo, lens, onLens, onOpen }: {
+export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers }: {
     factor: FactorScoresPayload | null;
     depth: Record<string, DepthVerdict>;
     valuations: Record<string, ValuationModel>;
-    overlay: Record<string, any>;
+    overlay: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any -- the untyped overlay-signals payload, passed through to buildRows unchanged
     stockInfo: Record<string, StockInfo>;
-    lens: Lens;
-    onLens: (l: Lens) => void;
-    onOpen: (ticker: string) => void;
+    /** paper_ledgers.json; read only for the "held" figure under funnel step 5 (phase C). */
+    ledgers: { ledgers?: { rn_depth?: { summary?: { open_positions?: number | null } } } } | null;
 }) {
     const { t } = useLanguage();
-    const [filters, setFilters] = useState<RankingFilters>(EMPTY_FILTERS);
-    const [limit, setLimit] = useState(100);
+    const params = useSearchParams();
+    const urlState = useMemo(() => parseDeskUrl(params), [params]);
+    const { step, how } = urlState;
+
+    // The search box types fast: it keeps its own text and writes the URL with replaceState.
+    const [q, setQ] = useState(urlState.filters.q);
+    useEffect(() => { setQ(urlState.filters.q); }, [urlState.filters.q]);
+    const filters: DeskFilters = { ...urlState.filters, q };
+
+    const write = useCallback((next: DeskUrlState, mode: 'push' | 'replace') => {
+        const p = new URLSearchParams(window.location.search);
+        writeDeskUrl(p, next);
+        const qs = p.toString();
+        const url = `${window.location.pathname}${qs ? `?${qs}` : ''}`;
+        if (mode === 'push') window.history.pushState(null, '', url); else window.history.replaceState(null, '', url);
+    }, []);
+
+    const setStep = (s: FunnelStep) => write({ ...urlState, step: s, how: false }, 'push');
+    const toggleHow = () => write({ ...urlState, how: !how }, 'push');
+    const setFilter = (patch: Partial<DeskFilters>) => write({ ...urlState, filters: { ...urlState.filters, ...patch } }, 'push');
+    const clearFilters = () => { setQ(''); write({ ...urlState, filters: NO_FILTERS }, 'push'); };
 
     const rows = useMemo(
         () => buildRows({ factor, depth, valuations, overlay, stockInfo }),
         [factor, depth, valuations, overlay, stockInfo],
     );
     const sectors = useMemo(() => sectorsOf(rows), [rows]);
-    const industries = useMemo(() => industriesOf(rows, filters.sector), [rows, filters.sector]);
-    const filtered = useMemo(() => applyFilters(rows, filters), [rows, filters]);
-    const sections = useMemo(() => aiSections(filtered), [filtered]);
+    const phase = useMemo(() => (Object.keys(depth).length || factor ? deskPhase(depth) : null), [depth, factor]);
+    const counts = useMemo(() => funnelCounts(rows, factor), [rows, factor]);
+    const hiddenLegacy = useMemo(() => countHiddenLegacy(rows), [rows]);
 
-    const set = (patch: Partial<RankingFilters>) => setFilters((f) => ({ ...f, ...patch }));
+    const all = useMemo(() => deskSections(rows), [rows]);
+    const active = filtersActive(filters);
+    const filtered = useMemo(() => (active ? deskSections(applyDeskFilters(rows, filters)) : all),
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- `filters` is rebuilt every render; its parts are listed
+        [rows, all, active, filters.verdict, filters.door, filters.sector, filters.q]);
 
-    const depthEntries = Object.values(depth || {});
-    const researchNowCount = factor?.band_counts?.research_now;
-
-    const actionableCount = depthEntries.filter((d) => isActionable(d)).length;
-
-    // The funnel: how the whole market narrows to the AI's verdicts. Counts use the same rule as the
-    // list a click opens (`inStage`), so the number on a step is the number of rows it shows.
-    const funnel = useMemo(() => FUNNEL_STAGES.map((s) => ({
-        ...s,
-        n: rows.filter((r) => inStage(r, s.id)).length,
-        note: s.id === 'list' && researchNowCount != null ? `${researchNowCount} in Research now` : undefined,
-    })), [rows, researchNowCount]);
-    // A step opens the plain list (the AI view groups by verdict, not by step); the active step
-    // clicked again clears the filter.
-    const pickStage = (stage: FunnelStage) => {
-        set({ stage: filters.stage === stage ? 'all' : stage });
-        setLimit(100);
-        onLens('quant');
-    };
+    const tr = factor?.band_transitions;
+    const entered = tr?.entered_book?.length ?? 0;
+    const left = tr?.left_book?.length ?? 0;
+    const held = ledgers?.ledgers?.rn_depth?.summary?.open_positions ?? null;
+    const n = counts.actionable;
 
     return (
         <div>
-            {/* Executive Cockpit Bar — Intuitive, zero-wordiness institutional header */}
-            <div className="border-b border-rule-14 pb-5 pt-4">
-                <div className="flex flex-wrap items-end justify-between gap-4">
-                    <div>
-                        <div className="flex items-center gap-2">
-                            <span className={clsx('font-mono text-[11px] font-bold uppercase tracking-[0.1em]',
-                                actionableCount === 0 ? 'text-warn' : 'text-pos')}>
-                                {actionableCount === 0
-                                    ? 'AI ANALYST: NO VERDICT PASSES THE GATE'
-                                    : `AI ANALYST: ${actionableCount} ACTIONABLE VERDICT${actionableCount === 1 ? '' : 'S'}`}
-                            </span>
-                        </div>
-                        <h1 className="mt-1 text-[23px] font-extrabold tracking-tight text-ink">
-                            StockPeak Institutional Underwriting Desk
-                        </h1>
-                        <p className="mt-1 text-[13px] text-ink-2">
-                            A quant screen narrows the market to a shortlist; an AI analyst values each name; code checks every verdict before it counts.
-                        </p>
-                        {DESK_NOTICE && <p className="mt-1 text-[13px] text-warn">{DESK_NOTICE}</p>}
-                    </div>
-                </div>
+            {/* a. Gate status line */}
+            {phase !== null && (
+                <p className={clsx('font-mono text-[11px] font-semibold', n > 0 ? 'text-pos' : 'text-warn')}>
+                    <span aria-hidden>{'●'} </span>
+                    {n > 0 ? fill(t(n === 1 ? 'glActionableOne' : 'glActionable'), { n }) : t('glNone')}
+                </p>
+            )}
 
-                {/* The funnel: the market narrowing step by step to the AI's verdicts */}
-                <ol className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-5">
-                    {funnel.map((step, i) => (
-                        <li key={step.id} className="relative">
-                            <button
-                                onClick={() => pickStage(step.id)}
-                                aria-pressed={filters.stage === step.id}
-                                title={filters.stage === step.id ? 'Showing these stocks - click again to show all' : 'Show these stocks'}
-                                className={clsx('block w-full border-l-[3px] py-0.5 pl-3 text-left transition-colors hover:bg-hover',
-                                    filters.stage === step.id && 'bg-hover')}
-                                style={{ borderLeftColor: step.id === 'gate' ? TONE_COLORS.POS : `oklch(0.77 0.13 240 / ${[0.25, 0.45, 0.7, 0.9][i] ?? 1})` }}
-                            >
-                                <div className="font-mono text-[20px] font-bold leading-none text-ink">{step.n.toLocaleString('en-US')}</div>
-                                <div className={clsx('mt-1 text-[12px]', filters.stage === step.id ? 'text-ink' : 'text-ink-2')}>{step.label}</div>
-                                {step.note && <div className="text-[11px] text-ink-3">{step.note}</div>}
-                            </button>
-                            {i < funnel.length - 1 && (
-                                <span aria-hidden className="absolute -right-3 top-1 hidden font-mono text-[14px] text-ink-3 sm:inline">→</span>
-                            )}
-                        </li>
-                    ))}
-                </ol>
+            {/* b/c. Funnel and the selected step's panel */}
+            <div className="mt-3">
+                <FunnelRow counts={counts} ready={factor != null} phase={phase} held={held} step={step} onStep={setStep} />
+                <FunnelPanel rows={rows} factor={factor} counts={counts} step={step} how={how} onToggle={toggleHow} />
             </div>
 
-            {/* Lens switcher + filters */}
-            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-rule-14 py-3">
-                <div className="flex items-center gap-2">
-                    <Micro className="mr-1">{t('lensLabelDesk')}</Micro>
-                    <Chip active={lens === 'ai'} onClick={() => onLens('ai')}>{t('lensAi')}</Chip>
-                    <Chip active={lens === 'quant'} onClick={() => onLens('quant')}>{t('lensQuantDesk')}</Chip>
-                </div>
-
+            {/* d. Filter row */}
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                <span className="bg-ink px-3 py-1.5 font-mono text-[11px] font-semibold text-surface">{t('flDesk')}</span>
                 <div className="flex flex-wrap items-center gap-2">
-                    <Select
-                        label="Step"
-                        value={filters.stage}
-                        onChange={(v) => { set({ stage: v as FunnelStage }); setLimit(100); }}
-                        options={FUNNEL_STAGES.map((s) => [s.id, s.id === 'all' ? 'All steps' : s.label] as [string, string])}
+                    <FilterSelect
+                        label={t('flVerdict')}
+                        value={filters.verdict}
+                        shown={filters.verdict === 'all' ? '' : t(verdictWordKey(filters.verdict))}
+                        options={[['all', t('flAll')], ...VERDICT_WORDS.map((w) => [w, t(verdictWordKey(w))] as [string, string])]}
+                        onChange={(v) => setFilter({ verdict: v as DeskFilters['verdict'] })}
                     />
-                    <Select label="Verdict" value={filters.verdict} onChange={(v) => set({ verdict: v })} options={VERDICT_OPTIONS} />
-                    <Select label="Quant band" value={filters.band} onChange={(v) => set({ band: v })} options={BAND_OPTIONS} />
-                    <Select
-                        label="Sector"
+                    <FilterSelect
+                        label={t('flDoor')}
+                        value={filters.door}
+                        shown={filters.door === 'all' ? '' : t(DOOR_LABEL_KEY[filters.door])}
+                        options={[['all', t('flAll')], ...DOOR_FILTERS.map((d) => [d, t(DOOR_LABEL_KEY[d])] as [string, string])]}
+                        onChange={(v) => setFilter({ door: v as DeskFilters['door'] })}
+                    />
+                    <FilterSelect
+                        label={t('flSector')}
                         value={filters.sector}
-                        onChange={(v) => set({ sector: v, industry: 'all' })}
-                        options={[['all', 'All sectors'], ...sectors.map((s) => [s, s] as [string, string])]}
-                    />
-                    <Select
-                        label="Industry"
-                        value={filters.industry}
-                        onChange={(v) => set({ industry: v })}
-                        maxWidth="170px"
-                        options={[['all', 'All industries'], ...industries.map((ind) => [ind, ind] as [string, string])]}
+                        shown={filters.sector}
+                        options={[['all', t('flAll')], ...sectors.map((s) => [s, s] as [string, string])]}
+                        onChange={(v) => setFilter({ sector: v })}
                     />
                     <input
-                        value={filters.search}
-                        onChange={(e) => set({ search: e.target.value })}
-                        placeholder="SEARCH TICKER OR NAME"
-                        aria-label="Search ticker or name"
-                        className="w-[180px] border border-rule-24 bg-transparent px-2.5 py-1.5 font-mono font-semibold text-[11px] uppercase tracking-[.06em] text-ink placeholder:text-ink-3"
+                        value={q}
+                        onChange={(e) => { setQ(e.target.value); write({ ...urlState, filters: { ...urlState.filters, q: e.target.value } }, 'replace'); }}
+                        placeholder={t('flSearch')}
+                        aria-label={t('flSearch')}
+                        className={clsx('w-[110px] border bg-transparent px-2.5 py-1.5 font-mono text-[11px] text-ink placeholder:text-ink-2 sm:w-[140px]', q.trim() ? 'border-ink' : 'border-rule-14')}
                     />
                 </div>
             </div>
+            {active && (
+                <p className="mt-2 font-mono text-[11px] text-ink-2" role="status">
+                    {fill(t('flShowing'), { k: sectionTotal(filtered), n: sectionTotal(all) })}
+                    {' · '}
+                    <button type="button" onClick={clearFilters} className="text-accent hover:text-ink">{t('flClear')}</button>
+                </p>
+            )}
 
-            {lens === 'ai' && <AiLens sections={sections} onOpen={onOpen} />}
-            {lens === 'quant' && (
-                <QuantLens rows={filtered} onOpen={onOpen} limit={limit} onMore={() => setLimit((l) => l + 100)} />
+            {/* h. Since yesterday: counts only, and only when the screen run moved names */}
+            {entered + left > 0 && (
+                <div className="mt-5 border-l-2 border-rule-24 pl-3">
+                    <p className="text-[13px] font-bold text-ink">{t('syTitle')}</p>
+                    <p className="font-mono text-[11px] text-ink-2">{fill(t('syLine'), { a: entered, b: left })}</p>
+                </div>
+            )}
+
+            {/* e/f. The table and its sections */}
+            <DeskTable
+                sections={filtered}
+                phase={phase}
+                actionableCount={n}
+                queued={counts.queued}
+                filtering={active}
+                loaded={factor != null}
+            />
+
+            {/* g. Hidden-legacy line (phases A and B) */}
+            {(phase === 'A' || phase === 'B') && hiddenLegacy > 0 && (
+                <p className="mt-6 border-t border-rule-10 pt-3 font-mono text-[11px] text-off">{fill(t('dsLegacy'), { n: hiddenLegacy })}</p>
             )}
         </div>
     );

@@ -4,15 +4,19 @@
 // than a chart library, because the
 // spec needs an editorial crosshair, an HTML gridline overlay, square everything
 // and a range-slider window control, none of which a generic chart gives cheaply.
+// Every shown series is re-based to 100 on the same day (lib/desk/nav.ts commonBase), so a book
+// that starts later than the benchmarks is not drawn level with lines that began weeks earlier.
 
 import React, { useMemo, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Micro } from '../primitives';
 import {
-    BENCHMARKS, BENCH_DASH, BENCH_STYLE, BOOKS, growthAt, windowReturn,
+    BENCHMARKS, BENCH_DASH, BENCH_STYLE, BOOKS, commonBase, growthAt, windowReturn,
     type Curve,
 } from '@/lib/desk/nav';
 import { fmtDateShort, fmtIndex, fmtSignedPct } from '@/lib/desk/format';
+import { fill } from '@/lib/desk/text';
+import { useLanguage } from '@/components/LanguageContext';
 
 const W = 640;
 const H = 210;
@@ -20,16 +24,27 @@ const PLOT_H = 170;
 const BASE_Y = 186;   // leaves 24 units under the plot for the date labels
 const MIN_WINDOW = 5; // trading days
 
-export interface SeriesToggle { key: string; label: string; color: string; width: number; dashed?: boolean }
+export interface SeriesToggle { key: string; label: string; color: string; width: number; dash?: string }
 
-export function NavChart({ curve, visible, onToggle, commission, commissionLabel }: {
+/** Benchmarks beyond the three the page compares against sit behind the "+ more" chip. */
+const EXTRA_BENCHES = ['SOXX', 'DRAM'];
+
+const BOOK_LABEL = { rn_depth: 'trkSerAi', equal: 'trkSerControl', mine: 'trkSerMine' } as const;
+
+export function NavChart({ curve, visible, onToggle, commission, costBps, onCostBps, resetDate }: {
     curve: Curve;
     visible: Record<string, boolean>;
     onToggle: (key: string) => void;
+    /** Percent per side (0.25), already parsed; what the curve was re-costed at. */
     commission: number;
-    /** The rate exactly as the reader typed it, so "0.10" does not render as "0.1". */
-    commissionLabel: string;
+    /** The cost box exactly as the reader typed it, in basis points per side. */
+    costBps: string;
+    onCostBps: (v: string) => void;
+    /** Date of a record reset, drawn as a vertical rule. No data field carries one yet, so it is not passed. */
+    resetDate?: string | null;
 }) {
+    const { t } = useLanguage();
+    const [showMore, setShowMore] = useState(false);
     const maxIdx = Math.max(0, curve.dates.length - 1);
     const [range, setRange] = useState<[number, number]>([0, maxIdx]);
     const [hoverIdx, setHoverIdx] = useState<number | null>(null);
@@ -40,20 +55,27 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
     const r1 = Math.min(Math.max(range[1], r0 + MIN_WINDOW), maxIdx);
 
     const all: SeriesToggle[] = useMemo(() => ([
-        ...BOOKS.filter((b) => curve.series[b.key]).map((b) => ({ ...b })),
-        ...BENCHMARKS.filter((b) => curve.series[b]).map((b) => ({
-            key: b, label: b, color: BENCH_STYLE[b], width: 1.2, dashed: true,
+        ...BOOKS.filter((b) => curve.series[b.key]).map((b) => ({
+            key: b.key, label: t(BOOK_LABEL[b.key as keyof typeof BOOK_LABEL]), color: b.color, width: b.width, dash: b.dash,
         })),
-    ]), [curve.series]);
+        ...BENCHMARKS.filter((b) => curve.series[b]).map((b) => ({
+            key: b, label: b, color: BENCH_STYLE[b], width: 1.4, dash: BENCH_DASH[b] ?? '4 4',
+        })),
+    ]), [curve.series, t]);
 
+    // The chips on offer: everything except the extra benchmarks, unless "+ more" is open or one is on.
+    const chips = all.filter((s) => !EXTRA_BENCHES.includes(s.key) || showMore || visible[s.key]);
+    const hasExtras = all.some((s) => EXTRA_BENCHES.includes(s.key));
     const shown = all.filter((s) => visible[s.key]);
+    // One base day for every shown series; each value is that series' level relative to it.
+    const base = commonBase(shown.map((s) => curve.series[s.key]), r0);
 
     // y-domain over the visible series inside the window only, +7% padding.
     const [lo, hi] = useMemo(() => {
         let min = Infinity, max = -Infinity;
         for (const s of shown) {
             for (let i = r0; i <= r1; i++) {
-                const v = growthAt(curve.series[s.key], r0, i);
+                const v = growthAt(curve.series[s.key], base, i);
                 if (v == null) continue;
                 if (v < min) min = v;
                 if (v > max) max = v;
@@ -62,7 +84,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
         if (!Number.isFinite(min) || !Number.isFinite(max)) return [90, 120];
         const pad = Math.max((max - min) * 0.07, 1.2);
         return [min - pad, max + pad];
-    }, [shown, curve.series, r0, r1]);
+    }, [shown, curve.series, r0, r1, base]);
 
     const CX = (i: number) => (r1 === r0 ? 0 : ((i - r0) / (r1 - r0)) * W);
     const CY = (v: number) => BASE_Y - ((v - lo) / (hi - lo)) * PLOT_H;
@@ -71,7 +93,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
         const arr = curve.series[s.key];
         const pts: string[] = [];
         for (let i = r0; i <= r1; i++) {
-            const v = growthAt(arr, r0, i);
+            const v = growthAt(arr, base, i);
             if (v == null) continue;
             pts.push(`${CX(i).toFixed(1)},${CY(v).toFixed(1)}`);
         }
@@ -88,6 +110,13 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
         setHoverIdx(Math.round(r0 + frac * (r1 - r0)));
     };
 
+    // The record-reset rule: the first date on or after `resetDate` inside the window.
+    const resetIdx = (() => {
+        if (!resetDate) return null;
+        const i = curve.dates.findIndex((d) => d >= resetDate);
+        return i >= r0 && i <= r1 && r1 > r0 ? i : null;
+    })();
+
     const hoverFrac = hoverIdx === null || r1 === r0 ? 0 : (hoverIdx - r0) / (r1 - r0);
     const tipShift = hoverFrac < 0.15 ? '0%' : hoverFrac > 0.8 ? '-100%' : '-50%';
 
@@ -96,18 +125,28 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
     return (
         <div className="mt-6">
             <div className="flex flex-wrap items-baseline justify-between gap-x-5 gap-y-3">
-                <div className="flex flex-wrap gap-x-3 gap-y-1.5">
-                    {all.map((s) => (
+                <div className="flex flex-wrap gap-x-2 gap-y-1.5">
+                    {chips.map((s) => (
                         <button
                             key={s.key}
                             onClick={() => onToggle(s.key)}
-                            className={clsx('border px-2.5 py-1 font-mono font-semibold text-[11px] uppercase tracking-[.06em]',
+                            aria-pressed={!!visible[s.key]}
+                            className={clsx('border px-2.5 py-1 font-mono font-semibold text-[11px] tracking-[.04em]',
                                 visible[s.key] ? 'border-rule-24' : 'border-rule-24 text-ink-3')}
-                            style={visible[s.key] ? { color: s.color, borderColor: 'rgba(255,255,255,.35)' } : undefined}
+                            style={visible[s.key] ? { color: s.color, borderColor: 'var(--rule-35)' } : undefined}
                         >
                             {visible[s.key] ? '●' : '○'} {s.label}
                         </button>
                     ))}
+                    {hasExtras && (
+                        <button
+                            onClick={() => setShowMore(!showMore)}
+                            aria-expanded={showMore}
+                            className="border border-rule-24 px-2.5 py-1 font-mono font-semibold text-[11px] tracking-[.04em] text-ink-2 hover:text-ink"
+                        >
+                            {showMore ? t('trkFewer') : t('trkMore')}
+                        </button>
+                    )}
                 </div>
             </div>
 
@@ -119,7 +158,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
             >
                 <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block h-[240px] w-full">
                     {yTicks.map((v, i) => (
-                        <line key={i} x1={0} x2={W} y1={CY(v)} y2={CY(v)} stroke="rgba(255,255,255,.12)" strokeWidth={1} />
+                        <line key={i} x1={0} x2={W} y1={CY(v)} y2={CY(v)} stroke="var(--track)" strokeWidth={1} />
                     ))}
                     {paths.map((p) => (
                         <polyline
@@ -128,7 +167,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                             fill="none"
                             stroke={p.color}
                             strokeWidth={p.width}
-                            strokeDasharray={p.dashed ? (BENCH_DASH[p.key] ?? '4 4') : undefined}
+                            strokeDasharray={p.dash}
                             vectorEffect="non-scaling-stroke"
                         />
                     ))}
@@ -160,10 +199,21 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                     </span>
                 ))}
 
+                {resetIdx !== null && (
+                    <span
+                        className="pointer-events-none absolute bottom-6 top-0 border-l border-dashed border-ink"
+                        style={{ left: `${((resetIdx - r0) / (r1 - r0)) * 100}%` }}
+                    >
+                        <span className="absolute left-1 top-0 whitespace-nowrap font-mono text-[11px] font-semibold text-ink">
+                            {t('trkResetLabel')}
+                        </span>
+                    </span>
+                )}
+
                 {hoverIdx !== null && (
                     <>
                         <span
-                            className="pointer-events-none absolute bottom-6 top-0 w-px bg-white/25"
+                            className="pointer-events-none absolute bottom-6 top-0 w-px bg-ink/25"
                             style={{ left: `${hoverFrac * 100}%` }}
                         />
                         <div
@@ -172,7 +222,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                         >
                             <Micro className="block">{curve.dates[hoverIdx]}</Micro>
                             {shown.map((s) => {
-                                const v = growthAt(curve.series[s.key], r0, hoverIdx);
+                                const v = growthAt(curve.series[s.key], base, hoverIdx);
                                 if (v == null) return null;
                                 return (
                                     <div key={s.key} className="mt-1 flex items-baseline justify-between gap-4 text-[11px]">
@@ -188,7 +238,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
 
             {/* window controls */}
             <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
-                <Micro>Window</Micro>
+                <Micro>{t('trackWindow')}</Micro>
                 <div className="flex gap-2">
                     {([['ALL', maxIdx], ['6M', 126], ['3M', 63], ['1M', 21]] as [string, number][]).map(([label, d]) => (
                         <button
@@ -201,7 +251,7 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                     ))}
                 </div>
                 <label className="flex items-center gap-2">
-                    <Micro>From</Micro>
+                    <Micro>{t('trkFrom')}</Micro>
                     <input
                         type="range" min={0} max={maxIdx} value={r0}
                         onChange={(e) => {
@@ -209,11 +259,11 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                             setRange([Math.min(v, r1 - MIN_WINDOW), r1]);
                         }}
                         className="h-3.5 w-28"
-                        aria-label="Window start"
+                        aria-label={t('trkWindowStart')}
                     />
                 </label>
                 <label className="flex items-center gap-2">
-                    <Micro>To</Micro>
+                    <Micro>{t('trkTo')}</Micro>
                     <input
                         type="range" min={0} max={maxIdx} value={r1}
                         onChange={(e) => {
@@ -221,29 +271,43 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                             setRange([r0, Math.max(v, r0 + MIN_WINDOW)]);
                         }}
                         className="h-3.5 w-28"
-                        aria-label="Window end"
+                        aria-label={t('trkWindowEnd')}
                     />
                 </label>
                 <Micro className="font-mono">
                     {fmtDateShort(curve.dates[r0])} — {fmtDateShort(curve.dates[r1])}
                 </Micro>
+                <label className="flex items-baseline gap-2 sm:ml-auto">
+                    <Micro>{t('trkCostBps')}</Micro>
+                    <input
+                        type="number" min={0} max={100} step={5}
+                        value={costBps}
+                        onChange={(e) => onCostBps(e.target.value)}
+                        aria-label={t('trkCostAria')}
+                        className="w-[56px] border border-rule-24 bg-transparent px-2 py-0.5 font-mono text-[12px] font-semibold text-ink"
+                    />
+                    <Micro className="text-ink-3">{t('trkCostUnit')}</Micro>
+                </label>
             </div>
 
             {/* legend + fee line */}
             <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1.5">
                 {shown.map((s) => {
-                    const end = growthAt(curve.series[s.key], r0, r1);
-                    const ret = windowReturn(curve.series[s.key], r0, r1);
+                    const end = growthAt(curve.series[s.key], base, r1);
+                    const ret = windowReturn(curve.series[s.key], base, r1);
                     return (
                         <span key={s.key} className="font-mono text-[11px] text-ink-2">
-                            <span style={{ color: s.color }}>{s.dashed ? '╌' : '━'} {s.label}</span>{' '}
+                            <span style={{ color: s.color }}>{s.dash ? '╌' : '━'} {s.label}</span>{' '}
                             <span className="text-ink">{end != null ? fmtIndex(end) : '—'}</span>{' '}
-                            <span className={ret != null && ret >= 0 ? 'text-pos' : 'text-neg'}>({fmtSignedPct(ret)})</span>
+                            <span className={ret == null ? 'text-ink-3' : ret >= 0 ? 'text-pos' : 'text-neg'}>({fmtSignedPct(ret)})</span>
                         </span>
                     );
                 })}
             </div>
 
+            <Micro className="mt-3 block text-ink-3">
+                {fill(t('trkRebased'), { date: curve.dates[base] ?? '—' })}
+            </Micro>
             <Micro className="mt-2 block text-ink-3">
                 {(() => {
                     // Ledger trade values are NAV index points, same unit as the
@@ -252,8 +316,8 @@ export function NavChart({ curve, visible, onToggle, commission, commissionLabel
                         .filter((s) => curve.tradedValue[s.key] > 0)
                         .map((s) => `${s.label} −${(curve.tradedValue[s.key] * commission / 100).toFixed(2)}`);
                     return traded.length
-                        ? `Fees at ${commissionLabel}%/trade, in index points: ${traded.join(' · ')}`
-                        : 'Benchmarks only — no trading costs';
+                        ? fill(t('trkFees'), { rate: costBps, list: traded.join(' · ') })
+                        : t('trkBenchOnly');
                 })()}
             </Micro>
         </div>

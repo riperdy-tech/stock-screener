@@ -1,0 +1,75 @@
+{
+  "_fixture_note": "ILLUSTRATIVE, NOT REAL DATA. The follow-up system (DEP-14) is built and in acceptance testing but not live, so no real watch_items have been published yet. This shows the SHAPE of the fields it will add to each depth_overlay row, taken from the work order (PHASE_6_FOLLOWUP.md 'Overlay fields') and, for thesis_checks, from rs2-local thesis_monitor.evaluate_ticker. Company, quotes and numbers below are invented for layout purposes only.",
+  "ticker": "EXMP",
+  "direction": "undervalued",
+  "actionable": true,
+  "holding_state": "own",
+  "hold_carry_ok": false,
+  "carry": null,
+  "governing_consensus_dir": "EXMP_20261020_101500",
+  "followup_status": "ok",
+  "followup_asof": "2026-10-21T06:12:00Z",
+  "buy_paused": false,
+  "buy_paused_reasons": [],
+  "thesis_status": "intact",
+  "entry_timing_now": "buy_now",
+  "thesis_asof": "2026-10-21T06:05:00Z",
+  "thesis_checks": [
+    {
+      "metric": "operating_margin_pct",
+      "comparator": "<",
+      "threshold": 5.0,
+      "window": "two consecutive reported quarters",
+      "source": "fundamentals_quarterly.json",
+      "current_value": 9.4,
+      "breached": false
+    }
+  ],
+  "watch_items": [
+    {
+      "id": "M1",
+      "text": "Backlog conversion: management says at least 60% of year-end backlog converts to revenue within 12 months.",
+      "sample": 1,
+      "status": "reported",
+      "side": "confirm",
+      "quote": "we converted 64% of opening backlog into revenue during the quarter, ahead of our 60% target",
+      "source": "8-K item 2.02 press release",
+      "date": "2026-10-19",
+      "verified": true,
+      "checked_at": "2026-10-21T06:12:00Z"
+    },
+    {
+      "id": "M2",
+      "text": "Dividend maintained and buyback not suspended.",
+      "sample": 1,
+      "status": "not",
+      "side": "break",
+      "quote": null,
+      "source": null,
+      "date": null,
+      "verified": false,
+      "checked_at": "2026-10-21T06:12:00Z"
+    },
+    {
+      "id": "T1",
+      "text": "Thesis-invalidation trigger: full-year sales fall more than 10% year on year.",
+      "sample": 1,
+      "status": "unclear",
+      "side": "break",
+      "quote": "management declined to update full-year guidance pending the strategic review",
+      "source": "company news",
+      "date": "2026-10-20",
+      "verified": false,
+      "checked_at": "2026-10-21T06:12:00Z"
+    }
+  ],
+  "_field_glossary": {
+    "status": "reported = the item's event was found in the day's material; not = checked, nothing found; unclear = ambiguous, a human should look",
+    "side": "break = if it happened, it weakens/breaks the thesis; confirm = if it happened, it supports the thesis",
+    "verified": "true only when code found the quoted text in the named source (>= 8 words, whitespace-insensitive). Unverified quotes must be visibly marked as unverified.",
+    "followup_status": "ok | reanalysis_queued | break_condition_met | unknown (unknown = follow-up data missing/unreadable/older than 36 hours: fail closed)",
+    "buy_paused": "true = no NEW buys while something is pending against the verdict; null = unknown (follow-up data stale) — treat as paused. Never sells anything.",
+    "holding_state": "own = actionable undervalued; do_not_own = actionable hold/overvalued or a substantive gate reason; unusable = a process failure (verdict could not be used) — a held name is carried on its last good verdict for at most 2 failures / 21 days",
+    "thesis_status": "intact | breached | unknown (unknown = no checkable rule, or not enough data)"
+  }
+}

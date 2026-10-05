@@ -17,6 +17,8 @@ export interface DeskRow {
     info: StockInfo | undefined;
     fct: FactorEntry;
     depth: DepthVerdict | undefined;
+    /** `mos_vs_median_pct` exactly as stored in the overlay; `depth.mos_vs_median_pct` is re-marked to the live price. */
+    storedMos: number | null;
     val: ValuationModel | undefined;
     overlay: any;
     /** 1..N among unblocked undervalued names, by median gap. Undefined otherwise. */
@@ -133,6 +135,7 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
             info: stockInfo[ticker],
             fct,
             depth: d,
+            storedMos: depth[ticker]?.mos_vs_median_pct ?? null,
             val: valuations[ticker],
             overlay: overlay[ticker],
             delta: (pl != null && p != null) ? Math.round(pl - p) : null,
@@ -169,6 +172,7 @@ export function buildRows({ factor, depth, valuations, overlay, stockInfo }: Ran
             info: stockInfo[ticker],
             fct: fallbackFct,
             depth: d,
+            storedMos: depth[ticker]?.mos_vs_median_pct ?? null,
             val: valuations[ticker],
             overlay: overlay[ticker],
             delta: null,

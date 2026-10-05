@@ -16,13 +16,17 @@ export function TranscriptViewer({
     bundle,
     activeTab,
     onTabChange,
+    bare = false,
 }: {
     bundle: DepthReportBundle | null;
     activeTab?: number;
     onTabChange?: (tab: number) => void;
+    /** The stock page wraps this in its own disclosure: no header, no rule, always open. */
+    bare?: boolean;
 }) {
     const { t } = useLanguage();
-    const [open, setOpen] = useState(true);
+    const [openState, setOpen] = useState(true);
+    const open = bare || openState;
     const [localTab, setLocalTab] = useState(0);
 
     const tab = activeTab !== undefined ? activeTab : localTab;
@@ -46,8 +50,8 @@ export function TranscriptViewer({
     const isEarlyStop = bundle?.verdict?.early_stop ?? (spread != null && spread <= 15);
 
     return (
-        <section id="transcripts-section" className="mt-8 border-t border-rule-22 pt-5">
-            <div className="flex flex-wrap items-baseline justify-between gap-4">
+        <section id="transcripts-section" className={bare ? 'min-w-0' : 'mt-8 border-t border-rule-22 pt-5'}>
+            {!bare && <div className="flex flex-wrap items-baseline justify-between gap-4">
                 <div className="flex items-center gap-2">
                     <span className="inline-block w-2 h-2 rounded-full bg-accent" />
                     <Micro className="font-bold uppercase tracking-wider text-ink">
@@ -63,13 +67,13 @@ export function TranscriptViewer({
                 >
                     <span>{open ? '▾ HIDE MEMORANDA' : '▸ EXPAND MEMORANDA'}</span>
                 </button>
-            </div>
+            </div>}
 
             {open && (
-                <div className="mt-4">
+                <div className={bare ? undefined : 'mt-4'}>
                     {/* Sample Selector Tabs */}
                     <div className="flex flex-wrap items-center gap-2 border-b border-rule-14 pb-3">
-                        <span className="font-mono text-[10.5px] uppercase tracking-wider text-ink-3 mr-1">
+                        <span className="font-mono text-[11px] uppercase tracking-wider text-ink-3 mr-1">
                             Sample Runs:
                         </span>
                         {samples.map((s, i) => {
@@ -85,20 +89,20 @@ export function TranscriptViewer({
                                             ? 'border-accent bg-accent/15 font-bold text-accent'
                                             : isFailed
                                                 ? 'border-warn/40 bg-warn/[0.03] text-warn/80 hover:border-warn hover:text-warn'
-                                                : 'border-rule-24 bg-white/[0.02] text-ink-2 hover:border-rule-36 hover:text-ink',
+                                                : 'border-rule-24 bg-wash/[0.02] text-ink-2 hover:border-rule-36 hover:text-ink',
                                     )}
                                 >
                                     <div className="flex items-center gap-2">
                                         <span className="font-bold">Run #{s.sample}</span>
                                         {s.iv != null && <span className="font-semibold">{fmtMoney(s.iv)}</span>}
-                                        {isFailed && <span className="text-[10px] text-warn">(Token Limit)</span>}
+                                        {isFailed && <span className="text-[11px] text-warn">(Token Limit)</span>}
                                         {sc?.conviction_score != null && (
-                                            <span className="text-[10px] text-ink-3">
+                                            <span className="text-[11px] text-ink-3">
                                                 · {sc.conviction_score}/15
                                             </span>
                                         )}
                                         {s.secs != null && (
-                                            <span className="text-[10px] text-ink-3">
+                                            <span className="text-[11px] text-ink-3">
                                                 · {Math.round(s.secs / 60)}m
                                             </span>
                                         )}
@@ -106,7 +110,7 @@ export function TranscriptViewer({
                                 </button>
                             );
                         })}
-                        <span className="ml-auto font-mono text-[10.5px] text-ink-3">
+                        <span className="ml-auto font-mono text-[11px] text-ink-3">
                             {isEarlyStop ? 'Stopped early (≤15% spread tolerance satisfied)' : spread != null ? `Escalated run (Spread ${spread.toFixed(1)}%)` : ''}
                         </span>
                     </div>
@@ -173,7 +177,7 @@ export function TranscriptViewer({
                                         </p>
                                     )}
 
-                                    <pre className="scroll-dark wrap-anywhere mt-2 max-h-[460px] min-w-0 overflow-y-auto border border-rule-18 bg-[#0d0f12] px-4 py-3.5 font-mono text-[11px] leading-[1.7] text-ink-q lg:max-h-[520px] lg:px-6 lg:py-5 lg:text-[12px]">
+                                    <pre className="scroll-dark wrap-anywhere mt-2 max-h-[460px] min-w-0 overflow-y-auto border border-rule-18 bg-page px-4 py-3.5 font-mono text-[11px] leading-[1.7] text-ink-q lg:max-h-[520px] lg:px-6 lg:py-5 lg:text-[12px]">
                                         {cur.report}
                                     </pre>
                                 </>

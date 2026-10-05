@@ -523,6 +523,55 @@ export async function fetchFactorScores(): Promise<FactorScoresPayload | null> {
     return fetchJson<FactorScoresPayload>('/data/factor_scores.json');
 }
 
+// ── Pipeline / macro status files (shell freshness strip and health drawer) ──
+export interface ChainInvariant {
+    name: string;
+    level: string;
+    ok: boolean;
+    detail: string;
+}
+
+export interface ChainManifest {
+    ok?: boolean;
+    finished_at?: string | null;
+    run_id?: string | null;
+    invariants?: ChainInvariant[] | null;
+}
+
+export interface MriRegime {
+    reported_regime?: string | null;
+    reported_regime_probability?: number | null;
+    confidence?: number | null;
+    date?: string | null;
+    built_at?: string | null;
+    data_health_warnings?: string[] | null;
+    regime_probabilities?: Record<string, number | null> | null;
+    explanation?: string[] | null;
+    active_shocks_on_date?: string[] | null;
+    disclaimer?: string | null;
+}
+
+export interface MriCostOfCapital {
+    implied_cost_of_equity?: number | null;
+    degraded?: boolean | null;
+    asof?: string | null;
+    built_at?: string | null;
+    implied_erp?: number | null;
+    erp_percentile_vs_history?: number | null;
+}
+
+export async function fetchChainManifest(): Promise<ChainManifest | null> {
+    return fetchJson<ChainManifest>('/data/chain_manifest.json');
+}
+
+export async function fetchMriRegime(): Promise<MriRegime | null> {
+    return fetchJson<MriRegime>('/data/mri/current_regime.json');
+}
+
+export async function fetchMriCostOfCapital(): Promise<MriCostOfCapital | null> {
+    return fetchJson<MriCostOfCapital>('/data/mri/cost_of_capital_anchor.json');
+}
+
 export async function fetchValuationModels(): Promise<{ generated_at: string; disclaimer: string; tickers: Record<string, ValuationModel> } | null> {
     return fetchJson('/data/valuation_models.json');
 }
@@ -571,6 +620,11 @@ export async function fetchRs2Report(ticker: string, ts: string): Promise<Rs2Bun
 
 export async function fetchOverlaySignals(): Promise<any | null> {
     return fetchJson('/data/overlay_signals.json');
+}
+
+// Graded verdict outcomes (written by the depth-outcomes job). Null until the file exists.
+export async function fetchDepthOutcomes(): Promise<any | null> {
+    return fetchJson('/data/depth_outcomes.json');
 }
 
 export async function fetchPaperLedgers(): Promise<any | null> {

@@ -10,11 +10,12 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Shell } from '@/components/desk/Shell';
 import { Micro } from '@/components/desk/primitives';
+import { useLanguage } from '@/components/LanguageContext';
 import { BandChartHero } from '@/components/desk/detail/BandChartHero';
 import { TranscriptViewer } from '@/components/desk/detail/TranscriptViewer';
 import { verdictTone, sizeTone } from '@/lib/desk/tone';
 import {
-    fetchOndemandIndex, fetchOndemandReport, fetchDepthOverlay,
+    fetchOndemandIndex, fetchOndemandReport,
     OndemandIndexPayload, OndemandRequestRow, OndemandQueueRow, DepthReportBundle,
 } from '@/lib/data-service';
 
@@ -139,12 +140,12 @@ function RequestCard({ row, latest, onOpen }: {
 }
 
 export function OndemandReports() {
+    const { t } = useLanguage();
     const [index, setIndex] = useState<OndemandIndexPayload | null>(null);
     const [loaded, setLoaded] = useState(false);
     const [sel, setSel] = useState<string | null>(null);
     const [bundle, setBundle] = useState<DepthReportBundle | null>(null);
     const [bundleMissing, setBundleMissing] = useState(false);
-    const [depthMeta, setDepthMeta] = useState<{ generated_at: string | null; count: number }>();
     const [queue, setQueue] = useState<OndemandQueueRow[]>([]);
 
     const loadQueue = () => {
@@ -156,8 +157,6 @@ export function OndemandReports() {
 
     useEffect(() => {
         fetchOndemandIndex().then((x) => { setIndex(x); setLoaded(true); });
-        fetchDepthOverlay().then((d) =>
-            setDepthMeta({ generated_at: d?.generated_at ?? null, count: d?.count ?? 0 }));
         loadQueue();
         const iv = setInterval(loadQueue, 20000);
         return () => clearInterval(iv);
@@ -184,7 +183,7 @@ export function OndemandReports() {
         .map((s) => s.iv as number);
 
     return (
-        <Shell tab={null} depthMeta={depthMeta}>
+        <Shell tab={null}>
             <div className="pt-8">
                 <h1 className="text-[16px] font-extrabold uppercase tracking-section">On-Demand Analyses</h1>
                 <Micro className="mt-1 block max-w-2xl text-ink-3">
@@ -214,6 +213,7 @@ export function OndemandReports() {
 
                 {sel && (
                     <section className="mt-10 border-t border-rule-22 pt-6">
+                        <p className="border-l-2 border-off bg-page px-3 py-2 text-[13px] text-ink-2">{t('odBanner')}</p>
                         <div className="flex items-baseline justify-between gap-4">
                             <h2 className="font-mono text-[15px] font-bold text-ink">{sel}</h2>
                             <button onClick={() => setSel(null)} className="font-mono text-[11px] text-ink-2 hover:text-ink">

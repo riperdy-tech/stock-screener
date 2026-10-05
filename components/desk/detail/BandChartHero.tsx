@@ -74,7 +74,7 @@ export function BandChartHero({ verdict, runIvs }: { verdict: DepthVerdict; runI
                     />
                 ))}
                 {g.priceAt !== null && (
-                    <span className="absolute" style={{ left: `${g.priceAt}%`, top: 0, bottom: 0, width: 2, background: '#f2f0eb' }} />
+                    <span className="absolute" style={{ left: `${g.priceAt}%`, top: 0, bottom: 0, width: 2, background: 'var(--ink)' }} />
                 )}
             </div>
 

@@ -1,0 +1,338 @@
+{
+  "_fixture_note": "REAL header and 4 real rows from factor_scores.json (2026-10-04). Row keys are the contract; the file has ~7,000 rows.",
+  "header": {
+    "engine": "dual_door_dynamic_macro_v2_cluster_guarded",
+    "generated_at": "2026-10-04T15:25:31Z",
+    "reported_macro_regime": "goldilocks",
+    "sector_quota_source": "neutral_no_validated_edge",
+    "sector_ranking_date": "2026-09-01",
+    "sector_ranking_age_days": 33,
+    "macro_confidence": 0.03081885394528494,
+    "discount_rate_source": "anchor",
+    "discount_rate_reason": "ok",
+    "discount_rate_asof": "2026-10-04",
+    "discount_rate_age_days": 0,
+    "momentum_source": "momentum_state",
+    "momentum_coverage": 2983,
+    "z_method": "winsor",
+    "door2_momentum_floor": -1.5,
+    "scored_count": 3047,
+    "hysteresis": "applied",
+    "hysteresis_retained": [
+      "BFH",
+      "CACC",
+      "ECPG",
+      "GOLD",
+      "HST",
+      "LIND",
+      "LITE",
+      "MCY",
+      "PGR",
+      "PRCH",
+      "PTCT"
+    ],
+    "band_transitions": {
+      "entered_rn": [],
+      "left_rn": [],
+      "entered_book": [
+        "CDNA",
+        "TGT"
+      ],
+      "left_book": [
+        "HRMY",
+        "VLGEA"
+      ],
+      "retained_by_hysteresis": [
+        "BFH",
+        "CACC",
+        "ECPG",
+        "GOLD",
+        "HST",
+        "LIND",
+        "LITE",
+        "MCY",
+        "PGR",
+        "PRCH",
+        "PTCT"
+      ]
+    },
+    "band_counts": {
+      "research_now": 60,
+      "watchlist": 101,
+      "pass": 2886,
+      "vetoed": 3925
+    }
+  },
+  "research_now_example": {
+    "MRP": {
+      "fct_band": "research_now",
+      "fct_composite": 100.0,
+      "fct_percentile": 100.0,
+      "fct_rank": 1,
+      "fct_veto": null,
+      "fct_veto_detail": null,
+      "fct_z": {
+        "quality": 3.029,
+        "momentum": -0.714,
+        "revisions": null,
+        "value": 3.756,
+        "exp_gap": null
+      },
+      "z_momentum_universe": -0.468,
+      "z_momentum_sector_neutral": -0.684,
+      "fct_contributions": {
+        "value": 2.5041,
+        "quality": 1.0097
+      },
+      "gap_basis": null,
+      "discount_rate_pct": null,
+      "fct_haircuts": null,
+      "fct_vol": null,
+      "fct_nominated_doors": [
+        "DOOR_2_VALUE_GAP",
+        "DOUBLE_DOOR_CHAMPION"
+      ],
+      "fct_momentum_state": {
+        "mom_12_1": -0.1277,
+        "mom_6m": -0.1763,
+        "mom_1m": -0.0524,
+        "high_52w_proxy": -0.191,
+        "mom_accel": -0.0762,
+        "mom_z_sector": -0.278,
+        "price_asof": "2026-10-02",
+        "pct_from_52w_high": -0.2314,
+        "above_200dma": false,
+        "dma200_slope_20d": -0.0004,
+        "rs_vs_cluster_etf_3m": -0.0725,
+        "rs_vs_iwm_3m": -0.0999,
+        "adv_20d_usd": 47009599.5,
+        "realised_vol_60d": 0.2727,
+        "mom_break": true,
+        "jump_share": null,
+        "up_months": 5,
+        "usable_months": 11
+      },
+      "fct_flags": [
+        "beneish_unverifiable"
+      ],
+      "fct_flag_detail": {},
+      "falling_knife_detail": null,
+      "d2_eligible": true,
+      "door1_pillars_used": [
+        "quality",
+        "momentum"
+      ],
+      "door2_pillars_used": [
+        "value",
+        "quality"
+      ],
+      "door1_weight_scale": 1.25,
+      "sector": "Real Estate",
+      "cluster": "re_residential",
+      "archetype": "real_estate_reit",
+      "mid_cycle_window_years": null,
+      "mid_cycle_years_used": null,
+      "mcap_derived": false
+    }
+  },
+  "watchlist_example": {
+    "BHC": {
+      "fct_band": "watchlist",
+      "fct_composite": 98.9,
+      "fct_percentile": 98.9,
+      "fct_rank": 65,
+      "fct_veto": null,
+      "fct_veto_detail": null,
+      "fct_z": {
+        "quality": 1.239,
+        "momentum": -0.709,
+        "revisions": null,
+        "value": 2.867,
+        "exp_gap": 1.395
+      },
+      "z_momentum_universe": -0.613,
+      "z_momentum_sector_neutral": -0.531,
+      "fct_contributions": {
+        "value": 1.1468,
+        "exp_gap": 0.558,
+        "quality": 0.2478
+      },
+      "gap_basis": "owner_cf",
+      "discount_rate_pct": 7.38799,
+      "fct_haircuts": null,
+      "fct_vol": null,
+      "fct_nominated_doors": [
+        "DOOR_2_VALUE_GAP"
+      ],
+      "fct_momentum_state": {
+        "mom_12_1": -0.1695,
+        "mom_6m": 0.014,
+        "mom_1m": -0.0051,
+        "high_52w_proxy": -0.1655,
+        "mom_accel": 0.1446,
+        "regime_shift_up": false,
+        "regime_shift_down": false,
+        "mom_z_sector": -0.269,
+        "price_asof": "2026-10-02",
+        "pct_from_52w_high": -0.2658,
+        "above_200dma": true,
+        "dma200_slope_20d": -0.0127,
+        "rs_vs_cluster_etf_3m": 0.187,
+        "rs_vs_iwm_3m": 0.2573,
+        "adv_20d_usd": 10021199.5,
+        "realised_vol_60d": 0.7914,
+        "mom_break": true,
+        "jump_share": null,
+        "up_months": 4,
+        "usable_months": 11
+      },
+      "fct_flags": [
+        "beneish_unverifiable",
+        "insolvency_distress_altman_z"
+      ],
+      "fct_flag_detail": {
+        "insolvency_distress_altman_z": {
+          "altman_z": 0.2430352256085704,
+          "z_min": 1.2,
+          "sector": "Healthcare",
+          "_note": "Altman Z is a warning flag only, never a veto."
+        }
+      },
+      "falling_knife_detail": null,
+      "d2_eligible": true,
+      "door1_pillars_used": [
+        "quality",
+        "momentum"
+      ],
+      "door2_pillars_used": [
+        "value",
+        "exp_gap",
+        "quality"
+      ],
+      "door1_weight_scale": 1.25,
+      "sector": "Healthcare",
+      "cluster": "health_pharma",
+      "archetype": "compounder_general",
+      "mid_cycle_window_years": null,
+      "mid_cycle_years_used": null,
+      "mcap_derived": false
+    }
+  },
+  "vetoed_example": {
+    "AAC-U": {
+      "fct_band": "vetoed",
+      "fct_composite": null,
+      "fct_percentile": null,
+      "fct_rank": null,
+      "fct_veto": "NOT_TRADABLE",
+      "fct_veto_detail": "absent from the exchange listing for 28d",
+      "fct_z": {
+        "quality": null,
+        "momentum": null,
+        "revisions": null,
+        "value": null,
+        "exp_gap": null
+      },
+      "z_momentum_universe": null,
+      "z_momentum_sector_neutral": null,
+      "fct_contributions": null,
+      "gap_basis": null,
+      "discount_rate_pct": null,
+      "fct_haircuts": null,
+      "fct_vol": null,
+      "fct_nominated_doors": [],
+      "fct_momentum_state": {
+        "jump_share": null,
+        "up_months": null,
+        "usable_months": 0
+      },
+      "fct_flags": [],
+      "fct_flag_detail": {},
+      "falling_knife_detail": null,
+      "d2_eligible": true,
+      "door1_pillars_used": [],
+      "door2_pillars_used": [],
+      "door1_weight_scale": null,
+      "sector": "Unknown",
+      "cluster": null,
+      "archetype": null,
+      "mid_cycle_window_years": null,
+      "mid_cycle_years_used": null,
+      "mcap_derived": false
+    }
+  },
+  "trend_leader_example": {
+    "ALNT": {
+      "fct_band": "watchlist",
+      "fct_composite": 95.1,
+      "fct_percentile": 95.1,
+      "fct_rank": 227,
+      "fct_veto": null,
+      "fct_veto_detail": null,
+      "fct_z": {
+        "quality": 0.727,
+        "momentum": 1.483,
+        "revisions": null,
+        "value": 0.049,
+        "exp_gap": null
+      },
+      "z_momentum_universe": 1.354,
+      "z_momentum_sector_neutral": 1.039,
+      "fct_contributions": {
+        "quality": 0.4089,
+        "momentum": 0.5486
+      },
+      "gap_basis": null,
+      "discount_rate_pct": null,
+      "fct_haircuts": null,
+      "fct_vol": null,
+      "fct_nominated_doors": [
+        "DOOR_3_TREND_LEADER",
+        "HYSTERESIS_RETAINED"
+      ],
+      "fct_momentum_state": {
+        "mom_12_1": 1.0452,
+        "mom_6m": 0.5545,
+        "mom_1m": 0.06,
+        "high_52w_proxy": 0.0,
+        "mom_accel": -0.053,
+        "regime_shift_up": true,
+        "regime_shift_down": false,
+        "mom_z_sector": 1.296,
+        "price_asof": "2026-10-02",
+        "pct_from_52w_high": 0.0,
+        "above_200dma": true,
+        "dma200_slope_20d": 0.0698,
+        "rs_vs_cluster_etf_3m": 0.2345,
+        "rs_vs_iwm_3m": 0.3937,
+        "adv_20d_usd": 22984500.0,
+        "realised_vol_60d": 0.6719,
+        "mom_break": false,
+        "jump_share": 0.366987549524329,
+        "up_months": 7,
+        "usable_months": 11
+      },
+      "fct_flags": [
+        "revisions_missing"
+      ],
+      "fct_flag_detail": {},
+      "falling_knife_detail": null,
+      "d2_eligible": true,
+      "door1_pillars_used": [
+        "quality",
+        "momentum"
+      ],
+      "door2_pillars_used": [
+        "value",
+        "quality"
+      ],
+      "door1_weight_scale": 1.25,
+      "sector": "Technology",
+      "cluster": "tech_hardware_systems",
+      "archetype": "compounder_general",
+      "mid_cycle_window_years": null,
+      "mid_cycle_years_used": null,
+      "mcap_derived": false
+    }
+  }
+}
