@@ -40,7 +40,7 @@ const PROBE = 'http://back.invalid';
  */
 export function safeBackPath(from: string | null | undefined): string {
     if (!from) return '/';
-    if (from === 'track') return '/?tab=track';
+    if (from === 'track') return '/track';
     if (from === 'port') return '/?tab=portfolio';
     if (from === 'ai' || from === 'quant') return '/';
     if (from.length > 2000 || !from.startsWith('/') || from.startsWith('//')) return '/';
@@ -57,6 +57,7 @@ export function safeBackPath(from: string | null | undefined): string {
 
 export function backKind(path: string): BackKind {
     const u = new URL(path, PROBE);
+    if (u.pathname === '/track') return 'track';
     if (u.pathname !== '/') return 'other';
     const tab = u.searchParams.get('tab');
     return tab === 'track' ? 'track' : tab === 'portfolio' ? 'portfolio' : 'desk';

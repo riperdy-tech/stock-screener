@@ -11,7 +11,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import {
-    fetchChainManifest, fetchDepthOverlay, fetchFactorScores, fetchMriCostOfCapital,
+    fetchChainManifest, fetchDepthOutcomes, fetchDepthOverlay, fetchFactorScores, fetchMriCostOfCapital,
     fetchMriRegime, fetchOverlaySignals,
     fetchPaperLedgers, fetchStocks,
     fetchValuationModels,
@@ -219,6 +219,26 @@ export function useDeskStatus(): DeskStatus {
     }, []);
 
     return status;
+}
+
+/**
+ * depth_outcomes.json for the Track record scoreboard. Shares the module cache, so only the track
+ * page fetches it; a failure leaves it null and the page says so instead of showing zeros.
+ */
+export function useDepthOutcomes(): { outcomes: any | null; loaded: boolean } {
+    const [state, setState] = useState<{ outcomes: any | null; loaded: boolean }>({ outcomes: null, loaded: false });
+    useEffect(() => {
+        let alive = true;
+        const run = () => {
+            cached('outcomes', fetchDepthOutcomes)
+                .then((outcomes) => { if (alive) setState({ outcomes, loaded: true }); })
+                .catch(() => { if (alive) setState({ outcomes: null, loaded: true }); });
+        };
+        run();
+        invalidationListeners.add(run);
+        return () => { alive = false; invalidationListeners.delete(run); };
+    }, []);
+    return state;
 }
 
 /**

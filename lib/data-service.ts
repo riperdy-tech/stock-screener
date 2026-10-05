@@ -615,6 +615,11 @@ export async function fetchOverlaySignals(): Promise<any | null> {
     return fetchJson('/data/overlay_signals.json');
 }
 
+// Graded verdict outcomes (written by the depth-outcomes job). Null until the file exists.
+export async function fetchDepthOutcomes(): Promise<any | null> {
+    return fetchJson('/data/depth_outcomes.json');
+}
+
 export async function fetchPaperLedgers(): Promise<any | null> {
     // Runtime read from Supabase (written by track_paper_portfolios.py) so a
     // portfolio-snapshot refresh never needs a commit/redeploy. Falls back to the

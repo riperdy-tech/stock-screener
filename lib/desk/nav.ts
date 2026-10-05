@@ -25,30 +25,22 @@ export interface Trade {
 export const BENCHMARKS = ['IWM', 'SPY', 'QQQ', 'SOXX', 'DRAM'] as const;
 
 /** Strategy books, in the order they appear in the chart legend. */
-export const BOOKS: { key: string; label: string; color: string; width: number }[] = [
-    // rn_depth is the live AI book (depth-verdict picks); it replaced the *_llm
-    // overlay lane in the 2026-08 depth migration. On the chart it is shown as
-    // ONE continuous AI record: the retired equal_llm history (inception
-    // 2026-07-05, frozen 2026-08-25) chained into rn_depth's returns — see the
-    // splice in buildCurve. rn_depth's own NAV index restarted at ~100 on
-    // 2026-08-25; the splice removes that reset so the account's progress reads
-    // unbroken.
-    // The old analyst's book is archived and proves nothing: the 'doesn't count' grey.
-    { key: 'rn_depth', label: 'AI (old analyst)', color: 'var(--off)', width: 1.6 },
-    // EQUAL holds the list, so it wears the list's blue. MINE is the reader's own book: off-white.
-    // The plan / plan2 / plan3 lanes (and their AI twins) were retired 2026-08-27.
-    { key: 'equal', label: 'EQUAL', color: 'var(--accent)', width: 2 },
-    { key: 'mine', label: 'MINE', color: 'var(--fair)', width: 1.6 },
+export const BOOKS: { key: string; color: string; width: number; dash?: string }[] = [
+    // rn_depth is the AI book, drawn from its own inception only (no splice of the retired equal_llm
+    // history). Its history so far is the old analyst's; the page says so, the line does not hide it.
+    // Strong solid lines for the two books; labels come from i18n (see NavChart).
+    { key: 'rn_depth', color: 'var(--ink)', width: 2.2 },
+    { key: 'equal', color: 'var(--accent)', width: 2 },
+    { key: 'mine', color: 'var(--ink-3)', width: 1.6, dash: '12 3' },
 ];
 
-// The retired AI book whose history the rn_depth chart line continues from.
-const AI_PREDECESSOR = 'equal_llm';
-
-/** Benchmarks share neutral greys, so each also gets its own dash pattern. */
+/**
+ * Benchmarks are references, not players. Each gets its own hue AND its own dash pattern, so they
+ * stay apart in greyscale too. The hues never reuse pos / neg / warn (green, coral, amber).
+ */
 export const BENCH_DASH: Record<string, string> = { IWM: '6 4', SPY: '2 3', QQQ: '8 3 2 3', SOXX: '1 4', DRAM: '10 6' };
 
 export const BENCH_STYLE: Record<string, string> = {
-    // Benchmarks are references, not players: dashed, in neutral greys of different lightness.
     IWM: 'var(--bench-iwm)', SPY: 'var(--bench-spy)', QQQ: 'var(--bench-qqq)', DRAM: 'var(--bench-dram)', SOXX: 'var(--bench-soxx)',
 };
 
@@ -92,10 +84,7 @@ export function buildCurve(ledgers: any, commissionPct: number | null): Curve {
     const basePct = ((ledgers?.config?.cost_bps as number | undefined) ?? 10) / 100;
     const deltaPct = commissionPct == null ? 0 : commissionPct - basePct;
 
-    // equal_llm is not its own chart line any more, but its history forms the
-    // first leg of the continuous RS2 AI line, so it joins the date axis and
-    // gets a series computed like the others.
-    const curveKeys = [...BOOKS.map((b) => b.key), AI_PREDECESSOR];
+    const curveKeys = BOOKS.map((b) => b.key);
 
     const dateSet = new Set<string>();
     for (const key of curveKeys) {
@@ -126,30 +115,8 @@ export function buildCurve(ledgers: any, commissionPct: number | null): Curve {
         series[key] = arr;
     }
 
-    // Splice the AI record into one continuous line: equal_llm's actual NAV up
-    // to its freeze, then rn_depth's returns scaled so its first point lands on
-    // equal_llm's last — no reset to 100 at the 2026-08-25 handover.
-    const llm = series[AI_PREDECESSOR];
-    const rn = series.rn_depth;
-    if (llm && rn) {
-        const j = rn.findIndex((v) => v != null);
-        // equal_llm's value at (or last before) rn_depth's first mark.
-        let anchor: number | null = null;
-        for (let i = j; i >= 0; i--) if (llm[i] != null) { anchor = llm[i]; break; }
-        if (j >= 0 && anchor != null && rn[j]) {
-            const f = anchor / (rn[j] as number);
-            series.rn_depth = rn.map((v, i) => (v != null ? v * f : llm[i]));
-            tradeCounts.rn_depth = (tradeCounts.rn_depth ?? 0) + (tradeCounts[AI_PREDECESSOR] ?? 0);
-            tradedValue.rn_depth = (tradedValue.rn_depth ?? 0) + (tradedValue[AI_PREDECESSOR] ?? 0);
-        }
-    }
-    // Never a standalone line — either merged above or dropped.
-    delete series[AI_PREDECESSOR];
-    delete tradeCounts[AI_PREDECESSOR];
-    delete tradedValue[AI_PREDECESSOR];
-
     // Benchmarks: raw closes re-based to 100 at their first observation.
-    const benchSource = (books.equal?.nav_series ?? books.equal_llm?.nav_series ?? []) as NavPoint[];
+    const benchSource = (books.equal?.nav_series ?? []) as NavPoint[];
     for (const b of BENCHMARKS) {
         const arr = blank();
         let base: number | null = null;
@@ -184,6 +151,19 @@ export function windowReturn(arr: (number | null)[] | undefined, from: number, t
     const b = lastValue(arr, to);
     if (a == null || b == null || a === 0) return null;
     return (b / a - 1) * 100;
+}
+
+/**
+ * The index every shown series is re-based to: the first one at or after `from` where ALL of them
+ * have a value. Without it a book that starts later than the benchmarks would be re-based on its
+ * own first day and look level with lines that began weeks earlier. Falls back to `from`.
+ */
+export function commonBase(arrs: ((number | null)[] | undefined)[], from: number): number {
+    const live = arrs.filter((a): a is (number | null)[] => !!a);
+    if (live.length === 0) return from;
+    const len = Math.max(...live.map((a) => a.length));
+    for (let i = from; i < len; i++) if (live.every((a) => a[i] != null)) return i;
+    return from;
 }
 
 /** Index level at `i`, re-based to 100 at the start of the visible window. */
@@ -241,7 +221,7 @@ export interface ClosedTrade {
 }
 
 /** Exits that kept running without us — the postmortem strip. */
-export function soldTooEarly(ledgers: any, books = ['rn_depth', 'equal_llm', 'equal']): ClosedTrade[] {
+export function soldTooEarly(ledgers: any, books = ['rn_depth', 'equal']): ClosedTrade[] {
     const L = ledgers?.ledgers;
     if (!L) return [];
     const out: ClosedTrade[] = [];
