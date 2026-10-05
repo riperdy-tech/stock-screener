@@ -21,7 +21,7 @@ from `lib/changelog.ts` — keep the two in sync.
 - **My portfolio** shows the machine's stance on each holding.
 - **Old-analyst verdicts** are no longer shown on the Desk or in My portfolio; they
   stay on each stock page as earlier verdicts.
-- **Handbook:** to be brought up to date in the next release.
+- **Handbook:** rewritten for the new Desk, the crux, the follow-up system, the Track record and Macro pages, with new glossary terms in English, Korean and Chinese.
 
 ## [0.3.0] — 2026-10-01
 

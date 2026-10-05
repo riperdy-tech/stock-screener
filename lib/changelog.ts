@@ -24,7 +24,7 @@ export const CHANGELOG: ChangelogEntry[] = [
             'A new Macro page shows the macro backdrop the analyst reads, with its cost of capital. It is background, not a call on the market.',
             "My portfolio now shows the machine's stance on each holding.",
             'Verdicts from the old analyst are no longer shown on the Desk or in My portfolio. They stay on each stock page as earlier verdicts.',
-            'The Handbook will be brought up to date in the next release.',
+            'The Handbook was rewritten for the new Desk, the crux, the follow-up system, the Track record and Macro pages, with new glossary terms in English, Korean and Chinese.',
         ],
     },
     {
