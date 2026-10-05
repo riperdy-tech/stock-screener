@@ -91,7 +91,7 @@ export function useGlossary() {
 }
 
 /** The visible link wrapper. Renders plain text (not a link) if the key is unknown. */
-export function Term({ term, label }: { term: string; label?: string }) {
+export function Term({ term, label, children }: { term: string; label?: string; children?: React.ReactNode }) {
     const def = lookupTerm(term);
     const { language } = useLanguage();
     const localDef = localDict(language)?.[term];
@@ -102,7 +102,7 @@ export function Term({ term, label }: { term: string; label?: string }) {
 
     if (!def) {
         // Unknown key → graceful fallback to plain text so the page never breaks.
-        return <span className="text-inherit">{label ?? term.replace(/-/g, ' ')}</span>;
+        return <span className="text-inherit">{children ?? label ?? term.replace(/-/g, ' ')}</span>;
     }
 
     return (
@@ -119,12 +119,12 @@ export function Term({ term, label }: { term: string; label?: string }) {
             }}
             className={
                 'glossary-term font-semibold no-underline outline-none transition-colors ' +
-                'border-b border-dotted border-pos/40 pb-px ' +
-                'text-pos hover:text-pos hover:border-emerald-300 ' +
-                'focus-visible:text-pos'
+                'border-b border-dotted border-accent/50 pb-px ' +
+                'text-accent hover:border-ink hover:text-ink ' +
+                'focus-visible:text-ink'
             }
         >
-            {displayName}
+            {children ?? displayName}
         </button>
     );
 }
@@ -200,33 +200,33 @@ function TermPopup({ termKey, def, anchorEl }: {
                 left: pos ? pos.left : -9999,
                 width: pos ? pos.width : POPUP_WIDTH,
             }}
-            className="z-[80] border border-rule-22 bg-page p-3"
+            className="theme-light z-[80] border border-rule-22 bg-page p-3"
             onClick={e => e.stopPropagation()}
         >
             {/* Caret */}
             <span
                 aria-hidden
                 style={pos ? { left: Math.min(pos.width - 14, Math.max(14, anchorEl.getBoundingClientRect().left - pos.left + anchorEl.getBoundingClientRect().width / 2)) } : undefined}
-                className={`absolute h-2.5 w-2.5 rotate-45 border border-rule-10 bg-[#0b1220] ${pos?.above ? 'bottom-[-5px] border-t-0 border-l-0' : 'top-[-5px] border-b-0 border-r-0'}`}
+                className={`absolute h-2.5 w-2.5 rotate-45 border border-rule-22 bg-page ${pos?.above ? 'bottom-[-5px] border-t-0 border-l-0' : 'top-[-5px] border-b-0 border-r-0'}`}
             />
             <div className="flex items-start justify-between gap-2">
                 <div className="flex flex-wrap items-center gap-1.5 pr-4">
-                    <span className={` border px-1.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wider ${CATEGORY_STYLES[def.category]}`}>
+                    <span className={`border px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider ${CATEGORY_STYLES[def.category]}`}>
                         {categoryLabel}
                     </span>
-                    <span className="text-sm font-extrabold leading-tight text-ink">{displayName}</span>
+                    <span className="text-sm font-semibold leading-tight text-ink">{displayName}</span>
                 </div>
                 <button
                     type="button"
                     onClick={close}
                     aria-label="Close definition"
-                    className="shrink-0 border border-rule-10 p-1 text-ink-3 transition-colors hover:bg-white/5 hover:text-ink"
+                    className="shrink-0 border border-rule-14 p-1 text-ink-3 transition-colors hover:bg-hover hover:text-ink"
                 >
                     <X className="h-3 w-3" />
                 </button>
             </div>
 
-            <p className="mt-1.5 text-[11px] font-semibold italic leading-snug text-pos">
+            <p className="mt-1.5 text-[12px] font-semibold italic leading-snug text-ink-2">
                 {localDef?.plain ?? def.plain}
             </p>
             <p className="mt-1.5 text-[12px] leading-relaxed text-ink-q">
@@ -235,7 +235,7 @@ function TermPopup({ termKey, def, anchorEl }: {
 
             {related.length > 0 && (
                 <div className="mt-2.5 flex flex-wrap items-center gap-1.5 border-t border-rule-10 pt-2">
-                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-ink-3">See also</span>
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-off">See also</span>
                     {related.map(({ key, def: rd }) => (
                         <button
                             key={key}
@@ -246,7 +246,7 @@ function TermPopup({ termKey, def, anchorEl }: {
                                 // appears next to what the reader just clicked.
                                 open(key, e.currentTarget as HTMLElement);
                             }}
-                            className="border border-rule-10 bg-white/5 px-1.5 py-0.5 text-[11px] font-bold text-ink-2 transition-colors hover:border-pos/40 hover:text-pos"
+                            className="border border-rule-24 px-1.5 py-0.5 text-[11px] font-semibold text-ink-2 transition-colors hover:border-ink hover:text-ink"
                         >
                             {localDict(language)?.[key]?.term ?? rd.term}
                         </button>
@@ -254,7 +254,7 @@ function TermPopup({ termKey, def, anchorEl }: {
                 </div>
             )}
 
-            <p className="mt-2 text-[11px] text-ink-2/50">
+            <p className="mt-2 text-[11px] text-off">
                 Click anywhere outside or press Esc to close.
             </p>
         </div>,
