@@ -151,7 +151,7 @@ export const GATE_REASON_LABEL: Record<string, string> = {
     kelly_on_overvalued: 'sizing contradicts the verdict',
     high_dispersion: 'runs disagree too much',
     non_production_row: 'test run, not production',
-    mode_instability: 'runs used different methods',
+    mode_instability: 'value jumped since the last verdict',
     outside_street_fence: "outside the analysts' price-target range",
     mos_beyond_150pct: 'implausibly far above the price',
     desk_not_used: 'calculator not used',
@@ -162,6 +162,10 @@ export const GATE_REASON_LABEL: Record<string, string> = {
     depleting_producer_class_unavailable: 'producer type unknown',
     consensus_data_unavailable: 'analyst data could not be fetched',
     no_street_fence: 'no analyst price-target range',
+    directional_without_valid_crux: 'buy/sell call without a verified stated disagreement',
+    nci_share_unmeasured: 'minority-interest share could not be measured',
+    per_share_basis_unverified: 'per-share basis failed the EPS check',
+    input_scope_stamps_missing: 'input-scope proofs missing',
 };
 
 /** One reason code as text; unknown codes show as the code with `_` as spaces. */
