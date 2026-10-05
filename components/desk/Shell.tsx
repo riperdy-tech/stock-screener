@@ -20,7 +20,7 @@ import { HealthDrawer } from './HealthDrawer';
 import { NoticeBanner } from './NoticeBanner';
 import { Micro, Modal } from './primitives';
 
-export type DeskTab = 'rankings' | 'track' | 'portfolio' | 'macro';
+export type DeskTab = 'rankings' | 'track' | 'portfolio' | 'macro' | 'help';
 
 // The tabs that sit in the mobile bar. Macro is a header link and lives under More on a phone.
 const TABS: { id: DeskTab; key: 'navDesk' | 'navTrackRecord' | 'navPortfolio'; shortKey: 'navDesk' | 'navTrackShort' | 'navPortfolio'; href: string }[] = [
@@ -204,7 +204,7 @@ export function Shell({ tab, loading, onReload, children }: {
                                 <NavLink key={x.id} href={x.href} active={tab === x.id}>{t(x.key)}</NavLink>
                             ))}
                             <NavLink href="/macro" active={tab === 'macro'}>{t('navMacro')}</NavLink>
-                            <NavLink href="/help">{t('deskHandbook')}</NavLink>
+                            <NavLink href="/help" active={tab === 'help'}>{t('deskHandbook')}</NavLink>
                         </nav>
                         <MoreMenu />
                         <div className="flex items-baseline gap-1.5 font-mono text-[11px]">
