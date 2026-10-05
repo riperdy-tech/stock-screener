@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-05T13:40:09.522478",
+ "generated_at": "2026-10-05T14:58:11.741710",
  "scheme": "band_direction_v1",
  "count": 26,
  "actionable_count": 0,
@@ -5932,67 +5932,929 @@
   },
   "ECPG": {
    "ticker": "ECPG",
-   "price": 97.33,
-   "date": "2026-09-18",
-   "model": "rs2-analyst-deep-mtp5",
-   "samples_run": 3,
-   "n_basis": 3,
-   "iv_band_low": 120.0,
-   "iv_band_high": 165.0,
-   "median_iv": 128.0,
-   "spread_pct": 37.5,
-   "flags": [],
-   "pack_revision": 3,
+   "price": 95.92,
+   "date": "2026-10-05",
+   "model": "rs2-analyst-deep-mtp5-v33",
+   "samples_run": 1,
+   "n_basis": 1,
+   "iv_band_low": 160.94,
+   "iv_band_high": 160.94,
+   "median_iv": 160.94,
+   "spread_pct": null,
+   "flags": [
+    "MODE_INSTABILITY"
+   ],
+   "pack_revision": 21,
    "scheme": "band_direction_v1",
+   "m": null,
    "scorecard": {
-    "median_iv": 128.0,
-    "median_bull_iv": 190.0,
-    "median_bear_iv": 72.0,
-    "iv_band_low": 120.0,
-    "iv_band_high": 165.0,
-    "median_conviction_score": 12.0,
+    "median_iv": 160.94,
+    "base_iv": 160.94,
+    "median_bull_iv": 220.6,
+    "median_bear_iv": 81.19,
+    "iv_band_low": 160.94,
+    "iv_band_high": 160.94,
+    "spread_pct": null,
+    "converged": false,
+    "medoid_sample": 1,
+    "n_basis": 1,
+    "median_conviction_score": 11.0,
     "median_quality_moat": 3.5,
-    "median_kelly_fraction_pct": 8.0,
-    "asymmetric_payoff_skew": 2.28,
+    "median_kelly_fraction_pct": 24.75,
+    "asymmetric_payoff_skew": 8.46,
     "reentry_tranches": {
      "tranche_1_starter": 96.0,
-     "tranche_2_core": 75.0
+     "tranche_2_core": 81.0
     },
     "thesis_invalidation_triggers": [
-     "Two consecutive quarters of (a) pre-tax ROIC below 9.0% (portfolio no longer earns a spread above the cost of capital), OR (b) cash efficiency margin below 52%, OR (c) a receivables-portfolio (not goodwill/intangible) impairment exceeding $100M; a single receivables impairment above $200M, or US charge-off supply falling below the 10-year historical average for two consecutive quarters, also invalidates the thesis.",
-     "Global collections decline >15% YoY for two consecutive quarters, OR a downward revision of Estimated Remaining Collections (ERC) of more than 10% from the $10.18B (Q2 2026) level, OR net leverage rising above 2.8x \u2014 any single condition invalidates the collections-annuity thesis.",
-     "2026 full-year collections below $2.7B, OR ROIC below 10% for two consecutive quarters, OR leverage above 3.0x, OR fee-based revenue growth below 5% YoY for two consecutive quarters, OR goodwill impairment above $100M"
-    ]
+     "Global collections decline year-over-year in two consecutive reported quarters, or Estimated Remaining Collections falls below $8B (~2.9x annual collections), indicating the purchased annuity base is eroding faster than replenishment"
+    ],
+    "base_probability": 0.45,
+    "bull_probability": 0.3,
+    "bear_probability": 0.25,
+    "probabilities_defaulted": false,
+    "base_cf_used": 0.304,
+    "base_cf_basis": "owner_earnings_default",
+    "coe_used": 0.0898,
+    "coe_source": "anchor",
+    "coe_adjustment_reason": null,
+    "valuation_frame": "equity",
+    "terminal_method": "gordon",
+    "terminal_multiple_or_g": 0.0236,
+    "fade_years": 5,
+    "stage1_growth_path": [
+     0.0559,
+     0.0841,
+     0.014,
+     0.014,
+     0.014
+    ],
+    "years12_ratio": 1.0,
+    "base_to_civ": 1.002,
+    "consensus_implied_value": 160.54,
+    "bull_years12_ratio": 1.18,
+    "bear_years12_ratio": 0.945,
+    "base_shares_ratio": null,
+    "bull_shares_ratio": null,
+    "bear_shares_ratio": null,
+    "desk_frame": "equity",
+    "desk_net_debt": null,
+    "shares_basis": "other",
+    "shares_reason": null,
+    "net_debt_reason": null,
+    "excess_cash_reason": null,
+    "scenario_deviation_reason": "Bull year-2 owner earnings (~$0.42B) sits ~18% above the next-FY consensus high (bull2 $0.357B) because the Bull rests on a sustained credit-cycle tailwind: US consumer delinquencies at ~10-year highs (Bloomberg 2026-02-10), record Q2'26 global collections of $737M (+13% YoY) and raised FY26 EPS gui",
+    "bull_bear_anchor": "consensus high/low",
+    "terminal_multiple_reason": null,
+    "interest_addback": null,
+    "wacc_reason": null,
+    "owner_earnings_source": "ttm_filed",
+    "consensus_reference_status": "used",
+    "terminal_g_gap_bp": 0,
+    "terminal_reason": null,
+    "base_window_gap": null,
+    "finite_life_years": null,
+    "cash_flow_life": "perpetual",
+    "cash_flow_life_reason": "Perpetual \u2014 ECPG's receivable portfolio is a self-replenishing asset base, not a depleting reserve: FY2026 purchase guidance of $1.4-1.5B/yr (PRIMARY P1, filed 2026-08-05) replaces the ~$2.8B/yr collections run-rate, so the $10.18B ERC at Q2'26 is continuously rebuilt; no filed finite term or reserv",
+    "terminal_ronic": 0.09239699999999999,
+    "terminal_ronic_gap_pts": null,
+    "long_run_facts": {
+     "cycle": true,
+     "cycle_year": 2023,
+     "cycle_years": [
+      2016,
+      2022,
+      2023
+     ],
+     "e5": 0.358312,
+     "oe5": 0.361786,
+     "m5": 0.177749,
+     "m_tc": 0.133408,
+     "m_years": [
+      2018,
+      2025,
+      8
+     ],
+     "r_tc": 0.093956,
+     "r_years": [
+      2018,
+      2025,
+      8
+     ],
+     "p": 0.625,
+     "g_rev": 0.018564,
+     "g_rev_years": [
+      2018,
+      2025,
+      8
+     ],
+     "terminal_g_basis": "revenue_trend",
+     "ni_over_oe": 0.991579,
+     "x_over_oe": null,
+     "nwc_intensity": null,
+     "nwc_years": null,
+     "stub_months": 9.1335,
+     "stamps": [
+      "amortization_gap:2024-2025",
+      "tangible_equity_partial:2025",
+      "operating_margin_without_amortization"
+     ],
+     "om_tc": 0.32401,
+     "om_trend": 0.333273,
+     "om_L": 0.354278,
+     "om_years": [
+      2018,
+      2025,
+      8
+     ],
+     "om_shape": "swing",
+     "om_basis": "without_amortization",
+     "om_5": 0.396876,
+     "m_long": 0.129154,
+     "margin_ratio": 0.726609,
+     "stamps_full": [
+      "amortization_gap:2024/2025",
+      "tangible_equity_partial:2025",
+      "operating_margin_without_amortization"
+     ]
+    },
+    "working_capital_deducted": null,
+    "base_year_capped": null,
+    "split_after_last_filing": null,
+    "years12_held_by_desk": true,
+    "desk_stamps": [
+     "years12_held_by_desk"
+    ],
+    "guidance_deviation_reason": null,
+    "cycle_evidence": "US consumer delinquencies rose to 4.8% of household debt in Q4 2025, highest since 2017 (Bloomberg, 2026-02-10); ECPG collection yield at record 65.2% in Q2'26 with 'favorable purchasing conditions continue' and record US purchases of $372M (PRIMARY P1, 2026-08-05) - supply elevated but plateauing, supporting a mid-cycle treatment rather than peak",
+    "verdict_label": "undervalued",
+    "direction_m": "undervalued",
+    "crux": [
+     {
+      "citations": [
+       {
+        "date": "2026-08-05",
+        "quote": "Estimated Remaining Collections (ERC) | $10,178,335 | $9,362,400 | 9%",
+        "source": "PRIMARY P1"
+       },
+       {
+        "date": "2026-08-05",
+        "quote": "Our guidance for portfolio purchasing remains within a range from $1.4 billion to $1.5 billion.",
+        "source": "PRIMARY P1"
+       }
+      ],
+      "input": "growth_years_3_5",
+      "reason": "The market prices ECPG at ~7x forward EPS, which the reverse DCF says implies owner cash flow shrinking ~18%/yr in years 3-5 (a full cyclical bust). I disagree: the company has already bought a multi-year annuity \u2014 ERC of $10.18B (Q2'26) is ~3.6x the ~$2.8B annual collections run-rate, and managemen"
+     }
+    ],
+    "crux_check": {
+     "valid": true,
+     "reason": null,
+     "entries": [
+      {
+       "input": "growth_years_3_5",
+       "own": 0.014000000000000012,
+       "implied": -0.18286376183076425,
+       "reachable": true,
+       "at_default": true,
+       "citations": [
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        }
+       ],
+       "valid": true,
+       "reason": null
+      }
+     ],
+     "stamps": [
+      "crux_at_default"
+     ]
+    },
+    "price_implied": {
+     "coe": {
+      "value": 0.16664317811489104,
+      "reachable": true,
+      "own": 0.0898,
+      "bound": {
+       "low": 0.0524,
+       "high": 0.25,
+       "value_low": 319.42938254149675,
+       "value_high": 69.43816021514795
+      },
+      "side": null,
+      "base_at_value": 95.91999999789076,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       0.16664317772229514,
+       0.16664317850748697
+      ],
+      "stamps": []
+     },
+     "growth_years_3_5": {
+      "value": -0.18286376183076425,
+      "reachable": true,
+      "own": 0.014000000000000012,
+      "bound": {
+       "low": -0.9989999999999999,
+       "high": 9.999999999999998,
+       "value_low": 27.996262026212122,
+       "value_high": 15941.229643085599
+      },
+      "side": null,
+      "base_at_value": 95.91999996223579,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       -0.19686376183076432,
+       -0.19686376114785653
+      ],
+      "stamps": [],
+      "shift": -0.19686376183076432,
+      "shift_bound": [
+       -1.013,
+       9.986
+      ],
+      "own_path": [
+       0.014,
+       0.014,
+       0.014
+      ]
+     },
+     "fade_years": {
+      "value": null,
+      "reachable": false,
+      "own": 5,
+      "bound": {
+       "low": 0,
+       "high": 60,
+       "value_low": 192.46800525741142,
+       "value_high": 182.7200129819345
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "bracket_years": null,
+      "bracket_values": null
+     },
+     "terminal_g": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0236,
+      "bound": {
+       "low": 0.0,
+       "high": 0.044698999999999996,
+       "value_low": 160.3464332247915,
+       "value_high": 162.20205848438798
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "terminal_ronic": {
+      "value": null,
+      "reachable": false,
+      "own": 0.09239699999999999,
+      "bound": {
+       "low": 0.0898,
+       "high": "unlimited",
+       "value_low": 160.13411962066613,
+       "value_high": 185.3997785924515
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "year2_level": {
+      "value": null,
+      "reachable": false,
+      "own": 0.348,
+      "bound": {
+       "low": 0.333,
+       "high": 0.357,
+       "value_low": 154.56702632584054,
+       "value_high": 164.76328256266456
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     }
+    },
+    "momentum_view": "confirming",
+    "entry_timing": "buy_now",
+    "momentum_flip_condition": {
+     "metric": "high_52w_distance",
+     "comparator": "<",
+     "threshold": -25.0,
+     "window_days": 365
+    },
+    "momentum_break_rule": {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": 0.0,
+     "window_days": 180
+    },
+    "invalidation_rules": [
+     {
+      "metric": "revenue_yoy_pct",
+      "comparator": "<=",
+      "threshold": 0.0,
+      "window": "next reported quarter (Q3 2026, Nov 4)",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "operating_margin_pct",
+      "comparator": "<",
+      "threshold": 30.0,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "mom_6m",
+      "comparator": "<",
+      "threshold": 0.0,
+      "window": "next monthly check",
+      "source": "price_history_scr10"
+     }
+    ],
+    "position_basis": "value",
+    "momentum_evidence": null,
+    "desk_calls": 8,
+    "desk_iv_match": true,
+    "desk_reverse_neutral_cagr": -8.11,
+    "coe_minus_anchor": 0.003134,
+    "desk_share_basis_matched": null,
+    "catalysts": [
+     {
+      "date": "2026-05-13",
+      "event": "~$1B refinancing completed ($750M 6.625% senior secured notes due 2031 + EUR325M floating-rate secured notes); $30.5M cost, ~$15M/yr interest savings; no material maturities until 2028",
+      "direction": "bull",
+      "estimates_moved": "supported the May-Sept price-target raise cycle (Truist to $112, Citizens to $115)",
+      "scenario": "Base/Bull: de-risks funding and preserves capacity to keep buying distressed debt at scale"
+     },
+     {
+      "date": "2026-07-22",
+      "event": "Redemption of all $230M 4.00% convertible senior notes due 2029 (settled 2026-09-24; make-whole conversion rate raised 15 to 16 shares per $1,000)",
+      "direction": "bull",
+      "estimates_moved": "no visible change (short-term tape noise of -3.89% on 2026-09-23 washed out by Oct 2)",
+      "scenario": "Base: dilutive overhang removed, capital structure simplified"
+     },
+     {
+      "date": "2026-08-05",
+      "event": "Q2'26 beat: revenue $491.9M (+11.3% YoY), GAAP EPS $2.81 vs $2.67 consensus, record global collections $737M (+13%), collection yield 65.2%; FY26 guidance raised (collections $2.80-2.85B, EPS $13.00-14.00 incl. $1.00 refinancing cost)",
+      "direction": "bull",
+      "estimates_moved": "FY27 consensus EPS +10.5% in 90 days ($13.23 to $14.62); 2 up / 0 down in last 30 days",
+      "scenario": "Base/Bull: validates record collections and opex leverage (expenses +5% vs collections +13%)"
+     },
+     {
+      "date": "2026-09-16",
+      "event": "Fed hiked 25bp to 3.75%-4.00%, first hike since 2023; projections allow another hike this year (oil-driven inflation)",
+      "direction": "bear",
+      "estimates_moved": "no visible change; sell-side commentary turned supportive (Zacks Oct 1)",
+      "scenario": "Base (more delinquencies -> more distressed-debt supply) and Bear (consumer payment stress; a second hike tips probabilities toward Bear)"
+     },
+     {
+      "date": "2026-10-01",
+      "event": "Street sentiment shift: MarketBeat 'Has Doubled - But Its Best Tailwind Won't Last Forever'; Zacks flags +73.8% YTD vs industry -16.2%",
+      "direction": "bear",
+      "estimates_moved": "no visible change",
+      "scenario": "Bear: positioning/sentiment risk into the Nov 4 Q3 print; debate moves to tailwind duration"
+     }
+    ],
+    "bull_below_price_reason": null,
+    "bear_above_price_reason": null,
+    "code_fill_mode": "joint"
    },
-   "conviction_score": 12.0,
+   "conviction_score": 11.0,
    "business_quality_moat": 3.5,
-   "kelly_fraction_pct": 8.0,
-   "asymmetric_payoff_skew": 2.28,
-   "bull_iv": 190.0,
-   "bear_iv": 72.0,
+   "kelly_fraction_pct": 24.75,
+   "asymmetric_payoff_skew": 8.46,
+   "bull_iv": 220.6,
+   "bear_iv": 81.19,
    "reentry_tranches": {
     "tranche_1_starter": 96.0,
-    "tranche_2_core": 75.0
+    "tranche_2_core": 81.0
    },
    "thesis_invalidation_triggers": [
-    "Two consecutive quarters of (a) pre-tax ROIC below 9.0% (portfolio no longer earns a spread above the cost of capital), OR (b) cash efficiency margin below 52%, OR (c) a receivables-portfolio (not goodwill/intangible) impairment exceeding $100M; a single receivables impairment above $200M, or US charge-off supply falling below the 10-year historical average for two consecutive quarters, also invalidates the thesis.",
-    "Global collections decline >15% YoY for two consecutive quarters, OR a downward revision of Estimated Remaining Collections (ERC) of more than 10% from the $10.18B (Q2 2026) level, OR net leverage rising above 2.8x \u2014 any single condition invalidates the collections-annuity thesis.",
-    "2026 full-year collections below $2.7B, OR ROIC below 10% for two consecutive quarters, OR leverage above 3.0x, OR fee-based revenue growth below 5% YoY for two consecutive quarters, OR goodwill impairment above $100M"
+    "Global collections decline year-over-year in two consecutive reported quarters, or Estimated Remaining Collections falls below $8B (~2.9x annual collections), indicating the purchased annuity base is eroding faster than replenishment"
    ],
    "converged": false,
    "early_stop": false,
-   "mode": "adaptive",
+   "mode": "fixed_1",
+   "coe_used": 0.0898,
+   "coe_source": "anchor",
+   "coe_adjustment_reason": null,
+   "valuation_frame": "equity",
+   "terminal_method": "gordon",
+   "terminal_multiple_or_g": 0.0236,
+   "fade_years": 5,
+   "stage1_growth_path": [
+    0.0559,
+    0.0841,
+    0.014,
+    0.014,
+    0.014
+   ],
+   "guidance_deviation_reason": null,
+   "cycle_evidence": "US consumer delinquencies rose to 4.8% of household debt in Q4 2025, highest since 2017 (Bloomberg, 2026-02-10); ECPG collection yield at record 65.2% in Q2'26 with 'favorable purchasing conditions continue' and record US purchases of $372M (PRIMARY P1, 2026-08-05) - supply elevated but plateauing, supporting a mid-cycle treatment rather than peak",
+   "verdict_label": "undervalued",
+   "desk_calls": 8,
+   "desk_iv_match": true,
+   "desk_reverse_neutral_cagr": -8.11,
+   "coe_minus_anchor": 0.003134,
+   "desk_share_basis_matched": null,
+   "years12_ratio": 1.0,
+   "base_to_civ": 1.002,
+   "consensus_implied_value": 160.54,
+   "bull_years12_ratio": 1.18,
+   "bear_years12_ratio": 0.945,
+   "base_shares_ratio": null,
+   "bull_shares_ratio": null,
+   "bear_shares_ratio": null,
+   "desk_frame": "equity",
+   "desk_net_debt": null,
+   "shares_basis": "other",
+   "shares_reason": null,
+   "net_debt_reason": null,
+   "excess_cash_reason": null,
+   "scenario_deviation_reason": "Bull year-2 owner earnings (~$0.42B) sits ~18% above the next-FY consensus high (bull2 $0.357B) because the Bull rests on a sustained credit-cycle tailwind: US consumer delinquencies at ~10-year highs (Bloomberg 2026-02-10), record Q2'26 global collections of $737M (+13% YoY) and raised FY26 EPS gui",
+   "bull_bear_anchor": "consensus high/low",
+   "terminal_multiple_reason": null,
+   "interest_addback": null,
+   "wacc_reason": null,
+   "owner_earnings_source": "ttm_filed",
+   "consensus_reference_status": "used",
+   "terminal_g_gap_bp": 0,
+   "terminal_reason": null,
+   "base_window_gap": null,
+   "finite_life_years": null,
+   "cash_flow_life": "perpetual",
+   "cash_flow_life_reason": "Perpetual \u2014 ECPG's receivable portfolio is a self-replenishing asset base, not a depleting reserve: FY2026 purchase guidance of $1.4-1.5B/yr (PRIMARY P1, filed 2026-08-05) replaces the ~$2.8B/yr collections run-rate, so the $10.18B ERC at Q2'26 is continuously rebuilt; no filed finite term or reserv",
+   "terminal_ronic": 0.09239699999999999,
+   "terminal_ronic_gap_pts": null,
+   "long_run_facts": {
+    "cycle": true,
+    "cycle_year": 2023,
+    "cycle_years": [
+     2016,
+     2022,
+     2023
+    ],
+    "e5": 0.358312,
+    "oe5": 0.361786,
+    "m5": 0.177749,
+    "m_tc": 0.133408,
+    "m_years": [
+     2018,
+     2025,
+     8
+    ],
+    "r_tc": 0.093956,
+    "r_years": [
+     2018,
+     2025,
+     8
+    ],
+    "p": 0.625,
+    "g_rev": 0.018564,
+    "g_rev_years": [
+     2018,
+     2025,
+     8
+    ],
+    "terminal_g_basis": "revenue_trend",
+    "ni_over_oe": 0.991579,
+    "x_over_oe": null,
+    "nwc_intensity": null,
+    "nwc_years": null,
+    "stub_months": 9.1335,
+    "stamps": [
+     "amortization_gap:2024-2025",
+     "tangible_equity_partial:2025",
+     "operating_margin_without_amortization"
+    ],
+    "om_tc": 0.32401,
+    "om_trend": 0.333273,
+    "om_L": 0.354278,
+    "om_years": [
+     2018,
+     2025,
+     8
+    ],
+    "om_shape": "swing",
+    "om_basis": "without_amortization",
+    "om_5": 0.396876,
+    "m_long": 0.129154,
+    "margin_ratio": 0.726609,
+    "stamps_full": [
+     "amortization_gap:2024/2025",
+     "tangible_equity_partial:2025",
+     "operating_margin_without_amortization"
+    ]
+   },
+   "working_capital_deducted": null,
+   "base_year_capped": null,
+   "years12_held_by_desk": true,
+   "desk_stamps": [
+    "years12_held_by_desk"
+   ],
+   "momentum_view": "confirming",
+   "entry_timing": "buy_now",
+   "momentum_flip_condition": {
+    "metric": "high_52w_distance",
+    "comparator": "<",
+    "threshold": -25.0,
+    "window_days": 365
+   },
+   "momentum_break_rule": {
+    "metric": "mom_6m",
+    "comparator": "<",
+    "threshold": 0.0,
+    "window_days": 180
+   },
+   "invalidation_rules": [
+    {
+     "metric": "revenue_yoy_pct",
+     "comparator": "<=",
+     "threshold": 0.0,
+     "window": "next reported quarter (Q3 2026, Nov 4)",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "operating_margin_pct",
+     "comparator": "<",
+     "threshold": 30.0,
+     "window": "next reported quarter",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": 0.0,
+     "window": "next monthly check",
+     "source": "price_history_scr10"
+    }
+   ],
+   "position_basis": "value",
+   "position_basis_declared": "value",
+   "position_basis_votes": {
+    "value": 1
+   },
+   "momentum_evidence": null,
+   "momentum_state": {
+    "price_asof": "2026-10-02 17:11",
+    "mom_12_1": 1.2713,
+    "mom_6m": 0.1589,
+    "mom_1m": 0.0157,
+    "high_52w_distance": -0.0112,
+    "high_52w_basis": "monthly proxy (unlabelled by the source)",
+    "above_below_200d_mean": null,
+    "rs_vs_cluster_etf_3m": null,
+    "rs_vs_iwm_3m": null,
+    "realised_vol_60d": null,
+    "regime_shift_up": true,
+    "regime_shift_down": false,
+    "mom_break": null,
+    "mom_z_sector": 3.0,
+    "mom_z_universe": 1.86
+   },
+   "active_shocks_at_verdict": [
+    {
+     "active": true,
+     "age_days": 3,
+     "direction": "up",
+     "intensity": 1.0318335302945385,
+     "measure": "63-trading-day log change, %, signed",
+     "onset_date": "2026-09-28",
+     "peak_date": "2026-09-28",
+     "peak_intensity": 1.0799710858764024,
+     "proxy": false,
+     "reason": null,
+     "series_id": "DCOILWTICO",
+     "severity": 1,
+     "shock_id": "oil_shock",
+     "stale_input": false,
+     "state": "active",
+     "thresholds": {
+      "down": {
+       "severity_1": {
+        "episodes": 10,
+        "percentile": 4.5,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -30.0
+       },
+       "severity_2": {
+        "episodes": 6,
+        "percentile": 2.7,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -40.0
+       }
+      },
+      "up": {
+       "severity_1": {
+        "episodes": 11,
+        "percentile": 94.4,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 30.0
+       },
+       "severity_2": {
+        "episodes": 5,
+        "percentile": 97.9,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 40.0
+       }
+      }
+     },
+     "value": 30.955005908836153,
+     "value_date": "2026-09-29",
+     "values_revised": false
+    }
+   ],
+   "pack_facts_source": "build",
+   "base_cf_reason": null,
+   "catalysts": [
+    {
+     "date": "2026-05-13",
+     "event": "~$1B refinancing completed ($750M 6.625% senior secured notes due 2031 + EUR325M floating-rate secured notes); $30.5M cost, ~$15M/yr interest savings; no material maturities until 2028",
+     "direction": "bull",
+     "estimates_moved": "supported the May-Sept price-target raise cycle (Truist to $112, Citizens to $115)",
+     "scenario": "Base/Bull: de-risks funding and preserves capacity to keep buying distressed debt at scale"
+    },
+    {
+     "date": "2026-07-22",
+     "event": "Redemption of all $230M 4.00% convertible senior notes due 2029 (settled 2026-09-24; make-whole conversion rate raised 15 to 16 shares per $1,000)",
+     "direction": "bull",
+     "estimates_moved": "no visible change (short-term tape noise of -3.89% on 2026-09-23 washed out by Oct 2)",
+     "scenario": "Base: dilutive overhang removed, capital structure simplified"
+    },
+    {
+     "date": "2026-08-05",
+     "event": "Q2'26 beat: revenue $491.9M (+11.3% YoY), GAAP EPS $2.81 vs $2.67 consensus, record global collections $737M (+13%), collection yield 65.2%; FY26 guidance raised (collections $2.80-2.85B, EPS $13.00-14.00 incl. $1.00 refinancing cost)",
+     "direction": "bull",
+     "estimates_moved": "FY27 consensus EPS +10.5% in 90 days ($13.23 to $14.62); 2 up / 0 down in last 30 days",
+     "scenario": "Base/Bull: validates record collections and opex leverage (expenses +5% vs collections +13%)"
+    },
+    {
+     "date": "2026-09-16",
+     "event": "Fed hiked 25bp to 3.75%-4.00%, first hike since 2023; projections allow another hike this year (oil-driven inflation)",
+     "direction": "bear",
+     "estimates_moved": "no visible change; sell-side commentary turned supportive (Zacks Oct 1)",
+     "scenario": "Base (more delinquencies -> more distressed-debt supply) and Bear (consumer payment stress; a second hike tips probabilities toward Bear)"
+    },
+    {
+     "date": "2026-10-01",
+     "event": "Street sentiment shift: MarketBeat 'Has Doubled - But Its Best Tailwind Won't Last Forever'; Zacks flags +73.8% YTD vs industry -16.2%",
+     "direction": "bear",
+     "estimates_moved": "no visible change",
+     "scenario": "Bear: positioning/sentiment risk into the Nov 4 Q3 print; debate moves to tailwind duration"
+    }
+   ],
+   "bull_below_price_reason": null,
+   "bear_above_price_reason": null,
+   "code_fill_mode": "joint",
+   "consensus_data_status": "ok",
+   "input_scope_stamps": [
+    "customer_money_excluded"
+   ],
+   "direction_m": "undervalued",
+   "crux_valid": true,
+   "crux_by_sample": [
+    {
+     "sample": 1,
+     "valid": true,
+     "reason": null,
+     "inputs": [
+      "growth_years_3_5"
+     ],
+     "at_default": true
+    }
+   ],
+   "crux": [
+    {
+     "input": "growth_years_3_5",
+     "own": 0.014000000000000012,
+     "implied": -0.18286376183076425,
+     "at_default": true,
+     "reason": "The market prices ECPG at ~7x forward EPS, which the reverse DCF says implies owner cash flow shrinking ~18%/yr in years 3-5 (a full cyclical bust). I disagree: the company has already bought a multi-year annuity \u2014 ERC of $10.18B (Q2'26) is ~3.6x the ~$2.8B annual collections run-rate, and managemen"
+    }
+   ],
+   "price_implied": {
+    "coe": {
+     "value": 0.16664317811489104,
+     "reachable": true,
+     "own": 0.0898,
+     "bound": {
+      "low": 0.0524,
+      "high": 0.25,
+      "value_low": 319.42938254149675,
+      "value_high": 69.43816021514795
+     },
+     "side": null,
+     "base_at_value": 95.91999999789076,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      0.16664317772229514,
+      0.16664317850748697
+     ],
+     "stamps": []
+    },
+    "growth_years_3_5": {
+     "value": -0.18286376183076425,
+     "reachable": true,
+     "own": 0.014000000000000012,
+     "bound": {
+      "low": -0.9989999999999999,
+      "high": 9.999999999999998,
+      "value_low": 27.996262026212122,
+      "value_high": 15941.229643085599
+     },
+     "side": null,
+     "base_at_value": 95.91999996223579,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      -0.19686376183076432,
+      -0.19686376114785653
+     ],
+     "stamps": [],
+     "shift": -0.19686376183076432,
+     "shift_bound": [
+      -1.013,
+      9.986
+     ],
+     "own_path": [
+      0.014,
+      0.014,
+      0.014
+     ]
+    },
+    "fade_years": {
+     "value": null,
+     "reachable": false,
+     "own": 5,
+     "bound": {
+      "low": 0,
+      "high": 60,
+      "value_low": 192.46800525741142,
+      "value_high": 182.7200129819345
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "bracket_years": null,
+     "bracket_values": null
+    },
+    "terminal_g": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0236,
+     "bound": {
+      "low": 0.0,
+      "high": 0.044698999999999996,
+      "value_low": 160.3464332247915,
+      "value_high": 162.20205848438798
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "terminal_ronic": {
+     "value": null,
+     "reachable": false,
+     "own": 0.09239699999999999,
+     "bound": {
+      "low": 0.0898,
+      "high": "unlimited",
+      "value_low": 160.13411962066613,
+      "value_high": 185.3997785924515
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "year2_level": {
+     "value": null,
+     "reachable": false,
+     "own": 0.348,
+     "bound": {
+      "low": 0.333,
+      "high": 0.357,
+      "value_low": 154.56702632584054,
+      "value_high": 164.76328256266456
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    }
+   },
+   "serving": {
+    "provider": "ollama",
+    "model": "rs2-analyst-deep-mtp5-v33",
+    "manifest_sha256": "f0f5ce2dcea334804e13492b2813e74d3294025f5d3b1692524de597fa33ab3e",
+    "system_layer_digest": "sha256:ff033c2519528445a1f2e56a797746524d64bff7d65e5a31612be35d6cbdfc22"
+   },
+   "position_basis_source_sample": 1,
+   "size_components": {
+    "dispersion": {
+     "bucket": "full",
+     "spread_pct": 0.0,
+     "source": "SIZE_BUCKETS"
+    },
+    "mos": {
+     "bucket": "full",
+     "mos_vs_base_pct": 67.8,
+     "source": "mos_vs_base_pct"
+    },
+    "conviction": {
+     "bucket": "full",
+     "conviction_score": 11.0,
+     "source": "scorecard.median_conviction_score"
+    },
+    "risk": {
+     "bucket": "full",
+     "elevated_volatility_ahead": false,
+     "source": "mri_outputs_dir/shock_register.json:risk_flags"
+    }
+   },
+   "reason": "single plausible sample \u2014 direction weak, size capped; mode instability: base IV moved +25.7% since the prior verdict ($128.00 -> $160.94) \u2014 within-run spread cannot see this, so convergence here is not stability",
+   "instability": {
+    "prior_iv": 128.0,
+    "current_iv": 160.94,
+    "delta_pct": 25.7,
+    "unstable": true
+   },
    "direction": "undervalued",
    "size_hint": "quarter",
-   "mos_vs_median_pct": 31.5,
-   "consensus_dir": "ECPG_20260918_185404",
+   "mos_vs_median_pct": 67.8,
+   "mos_vs_base_pct": 67.8,
+   "fiduciary_amendments": [],
+   "fiduciary_violations": [],
+   "fiduciary_verdict": "PASS",
+   "consensus_dir": "ECPG_20261005_140039",
+   "run_source": "orchestrator",
+   "arm": "local",
+   "pack_source": "fresh",
+   "screener_data_commit": "e014ea322baaf7a16af8ad1a4e30b2c2d2be1b6d",
+   "research_brief_asof": "2026-10-05T13:52:24.674812",
+   "research_brief_age_days": 0.05,
+   "price_asof": "2026-10-02",
+   "price_source": "yfinance",
+   "price_asof_basis": null,
+   "gate_version": 8,
+   "pipeline_commit": "68f3935",
+   "street_fence": {
+    "low": 50.91,
+    "high": 218.18,
+    "n_targets": 3.0,
+    "asof": "2026-10-05",
+    "age_days": 0.1,
+    "source": "enrich",
+    "winsorized": []
+   },
+   "producer_class": {
+    "status": "ok",
+    "depleting": false,
+    "sector": "Financial Services",
+    "industry": "Credit Services",
+    "source": "stocks.csv@e014ea322baaf7a16af8ad1a4e30b2c2d2be1b6d"
+   },
    "actionable": false,
    "actionable_reasons": [
-    "pre_v3.1_gates",
-    "high_dispersion",
-    "no_street_fence"
+    "single_sample",
+    "mode_instability"
    ],
-   "gate_version": null,
    "status": "ok",
    "thesis_status": null,
    "thesis_checks": null,
