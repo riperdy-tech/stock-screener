@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-05T23:42:51.685085",
+ "generated_at": "2026-10-06T01:11:04.607646",
  "scheme": "band_direction_v1",
  "count": 28,
  "actionable_count": 0,
@@ -10225,64 +10225,930 @@
   },
   "GTE": {
    "ticker": "GTE",
-   "price": 10.47,
-   "date": "2026-09-19",
-   "model": "rs2-analyst-deep-mtp5",
-   "samples_run": 3,
-   "n_basis": 2,
-   "iv_band_low": 12.49,
-   "iv_band_high": 13.96,
-   "median_iv": 13.225000000000001,
-   "spread_pct": 11.8,
-   "flags": [],
-   "pack_revision": 3,
-   "scheme": "band_direction_v1",
-   "scorecard": {
-    "median_iv": 13.225000000000001,
-    "median_bull_iv": 16.9,
-    "median_bear_iv": 6.5,
-    "iv_band_low": 12.49,
-    "iv_band_high": 13.96,
-    "median_conviction_score": 10.0,
-    "median_quality_moat": 1.8,
-    "median_kelly_fraction_pct": 11.8,
-    "asymmetric_payoff_skew": 2.24,
-    "reentry_tranches": {
-     "tranche_1_starter": 10.23,
-     "tranche_2_core": 7.5
-    },
-    "thesis_invalidation_triggers": [
-     "The Maurel & Prom / Gran Tierra Energy CI GmbH Colombia-Ecuador asset sale is terminated or fails to obtain the required Colombian and/or Ecuadorian regulatory approvals and debt/prepayment-facility consents such that it does not close (originally targeted ~Dec 31, 2026), returning GTE to a leveraged standalone E&P - OR net proceeds to shareholders fall materially below ~$300M.",
-     "Termination or non-completion of the Maurel & Prom divestiture (regulatory rejection in Colombia or Ecuador) coupled with inability to re-market the South American portfolio at >= $1.0B EV within 2 quarters, causing pro-forma net cash to GTE to fall below ~$250M (~$6.50/share); OR Canadian PDP NPV10 re-marked down >40% (below ~$95M) on sustained WTI < $55 and Canadian gas < $2.50/MMBtu."
-    ]
-   },
-   "conviction_score": 10.0,
-   "business_quality_moat": 1.8,
-   "kelly_fraction_pct": 11.8,
-   "asymmetric_payoff_skew": 2.24,
-   "bull_iv": 16.9,
-   "bear_iv": 6.5,
-   "reentry_tranches": {
-    "tranche_1_starter": 10.23,
-    "tranche_2_core": 7.5
-   },
-   "thesis_invalidation_triggers": [
-    "The Maurel & Prom / Gran Tierra Energy CI GmbH Colombia-Ecuador asset sale is terminated or fails to obtain the required Colombian and/or Ecuadorian regulatory approvals and debt/prepayment-facility consents such that it does not close (originally targeted ~Dec 31, 2026), returning GTE to a leveraged standalone E&P - OR net proceeds to shareholders fall materially below ~$300M.",
-    "Termination or non-completion of the Maurel & Prom divestiture (regulatory rejection in Colombia or Ecuador) coupled with inability to re-market the South American portfolio at >= $1.0B EV within 2 quarters, causing pro-forma net cash to GTE to fall below ~$250M (~$6.50/share); OR Canadian PDP NPV10 re-marked down >40% (below ~$95M) on sustained WTI < $55 and Canadian gas < $2.50/MMBtu."
-   ],
-   "converged": true,
-   "early_stop": false,
-   "mode": "adaptive",
-   "direction": "undervalued",
-   "size_hint": "full",
-   "mos_vs_median_pct": 26.3,
-   "consensus_dir": "GTE_20260919_173435",
-   "actionable": false,
-   "actionable_reasons": [
-    "pre_v3.1_gates",
+   "price": 10.38,
+   "date": "2026-10-06",
+   "model": "rs2-analyst-deep-mtp5-v33",
+   "samples_run": 1,
+   "n_basis": 1,
+   "iv_band_low": 15.27,
+   "iv_band_high": 15.27,
+   "median_iv": 15.27,
+   "spread_pct": null,
+   "flags": [
     "no_street_fence"
    ],
-   "gate_version": null,
+   "pack_revision": 22,
+   "scheme": "band_direction_v1",
+   "m": null,
+   "scorecard": {
+    "median_iv": 15.27,
+    "base_iv": 15.27,
+    "median_bull_iv": 24.74,
+    "median_bear_iv": 5.58,
+    "iv_band_low": 15.27,
+    "iv_band_high": 15.27,
+    "spread_pct": null,
+    "converged": false,
+    "medoid_sample": 1,
+    "n_basis": 1,
+    "median_conviction_score": 12.0,
+    "median_quality_moat": 1.8,
+    "median_kelly_fraction_pct": 24.75,
+    "asymmetric_payoff_skew": 2.99,
+    "reentry_tranches": {
+     "tranche_1_starter": 10.38,
+     "tranche_2_core": 6.5
+    },
+    "thesis_invalidation_triggers": [
+     "** the Maurel & Prom sale fails to close (Colombia SIC/ANH or Ecuador approval denied, stockholder vote defeated, or buyer financing falls through) **and** Brent unwinds below ~$75 \u2014 leaving GTE a levered 3-country E&P at lower oil (the Bear, ~$5.58); OR the continuing company reports negative FCF in its first full post-close quarter. ```json:underwriting { \"catalysts\": [ {\"date\": \"2026-08-05\", \"event\": \"Definitive SPA: sale of Colombia & Ecuador (all South American assets) to Maurel & Prom for $1.33B; pro-forma PDP NAV ~$12.49/share; purchaser assumes substantially all net liabilities -> debt-free + ~$315M net cash at close\", \"direction\": \"bull\", \"estimates_moved\": \"next-FY revenue reset to ~$124M (-82.3%, a carve-out artifact); next-FY EPS re-modeled toward -$0.03; sell-side target lifted $14.62 -> $17.68 (+20.93%)\", \"scenario\": \"Anchors Base and Bull: the ~$315M one-time cash (Base yr1 base_cf) plus the debt-free continuing Canadian E&P\"}, {\"date\": \"2026-08-04\", \"event\": \"Q2 2026 results: 41,501 BOEPD, net income $25M, adj EBITDA $85M, gross profit/BOE $19.90, OCF $57M, positive FCF; Dawson Clearwater/Mount Head ~67 MMbbl prospective resource report\", \"direction\": \"bull\", \"estimates_moved\": \"no visible next-FY revisions (1-2 analysts)\", \"scenario\": \"Supports the Base recurring-cash level and confirms cash generation ahead of close; the 67 MMbbl is Bull/optionality\"}, {\"date\": \"2026-09-11\", \"event\": \"Consent solicitation launched on $479.353M of 9.75% 2031 notes; amendment lets Maurel & Prom assume the notes at close (>=50% required)\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change\", \"scenario\": \"De-risks a key closing condition, supporting Base probability\"}, {\"date\": \"2026-09-22\", \"event\": \"Consent results: consents from >=50% of principal obtained and not revoked; supplemental indenture executed same day (verified from company release)\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change\", \"scenario\": \"Removes the main creditor hurdle to buyer assumption -> raises Base (deal-closes) probability toward 0.60\"}, {\"date\": \"2026-09-23\", \"event\": \"Definitive proxy statement filed for special meeting of stockholders to approve the Colombia/Ecuador sale\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change\", \"scenario\": \"Keeps the Q3 vote and ~Dec 31, 2026 close on track; stockholder approval is an explicit closing condition\"}, {\"date\": \"2026-10-05\", \"event\": \"Brent ~$101-102 (+55.3% y/y) on Hormuz disruption; OPEC+ quotas unchanged; G7 emergency stockpile release and Aramco deeper Nov discount to Asia cap near-term upside as Hormuz flows recover\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change\", \"scenario\": \"Supports Bull (higher reserve NPV / multiple) but argues against rapid escalation; post-close GTE is WTI/AECO-exposed so Brent sets the multiple, not direct revenue\"} ], \"conviction_score\": 12.0, \"business_quality_moat\": 1.8, \"cycle_evidence\": \"Brent ~$101-102 on 2026-10-05, +55.3% y/y from the Hormuz supply shock, with G7 emergency stockpile release and Aramco's deeper Nov discount to Asia ($5 vs $2 for Oct) capping near-term upside as Hormuz flows recover (tradingeconomics/company release via catalyst brief, 2026-10-05).\", \"momentum_view\": \"confirming\", \"entry_timing\": \"buy_now\", \"position_basis\": \"value\", \"momentum_evidence\": null, \"momentum_flip_condition\": {\"metric\": \"high_52w_distance\", \"comparator\": \"<=\", \"threshold\": -0.15, \"window_days\": 30}, \"momentum_break_rule\": {\"metric\": \"mom_6m\", \"comparator\": \"<\", \"threshold\": 0, \"window_days\": 180}, \"invalidation_rules\": [ {\"metric\": \"fcf\", \"comparator\": \"<\", \"threshold\": 0.0, \"window\": \"first full reported quarter after the ~Dec 31, 2026 closing\", \"source\": \"fundamentals_quarterly.json\"}, {\"metric\": \"mom_6m\", \"comparator\": \"<\", \"threshold\": 0, \"window\": \"next 90 days\", \"source\": \"price_history_scr10\"} ], \"reentry_tranches\": {\"tranche_1_starter\": 10.38, \"tranche_2_core\": 6.50}, \"thesis_invalidation_trigger\": \"The Maurel & Prom sale fails to close (Colombia SIC/ANH or Ecuador regulatory approval denied, stockholder vote defeated, or buyer financing falls through) AND Brent unwinds below ~$75, OR the continuing company reports negative FCF in its first full post-close quarter.\" } ```"
+    ],
+    "base_probability": 0.6,
+    "bull_probability": 0.25,
+    "bear_probability": 0.15,
+    "probabilities_defaulted": false,
+    "base_cf_used": 0.333,
+    "base_cf_basis": "other",
+    "coe_used": 0.0822,
+    "coe_source": "anchor",
+    "coe_adjustment_reason": null,
+    "valuation_frame": "equity",
+    "terminal_method": "gordon",
+    "terminal_multiple_or_g": 0.0236,
+    "fade_years": 5,
+    "stage1_growth_path": [
+     0.0,
+     -0.946,
+     0.02,
+     0.0,
+     -0.02
+    ],
+    "years12_ratio": null,
+    "base_to_civ": null,
+    "consensus_implied_value": null,
+    "bull_years12_ratio": null,
+    "bear_years12_ratio": null,
+    "base_shares_ratio": null,
+    "bull_shares_ratio": null,
+    "bear_shares_ratio": null,
+    "desk_frame": null,
+    "desk_net_debt": null,
+    "shares_basis": "vendor",
+    "shares_reason": null,
+    "net_debt_reason": null,
+    "excess_cash_reason": "PRIMARY P4's ~$315M is the TOTAL post-close net cash position, stated net of the existing cash used to redeem the 2027 notes and pay transaction costs ('After the assumption of substantially all liabilities... redemption by the Company of its 7.750% Senior Notes due 2027... and transaction costs, th",
+    "scenario_deviation_reason": "Each scenario's year-2 cash flow steps down sharply from year 1 because year 1 includes a one-time cash event (Base/Bull: the ~$315M Maurel & Prom net proceeds per PRIMARY P4; Bear: the retained ~$83M pre-deal cash) that does not recur. Year 2 reflects only the recurring owner earnings of the respec",
+    "bull_bear_anchor": "no consensus range (1 analysts)",
+    "terminal_multiple_reason": null,
+    "interest_addback": null,
+    "wacc_reason": null,
+    "owner_earnings_source": "ttm_ni+vendor_capex",
+    "consensus_reference_status": "not_available",
+    "terminal_g_gap_bp": 0,
+    "terminal_reason": "Base terminal_ronic held at the DEFAULTS 8.22% (= COE anchor): no departure is passed on the input. The record's 8-year median return on tangible invested capital is 5.27% (DEFAULTS long_run r_tc=5.2717%, 2018-2025), below the 8.22% cost of equity, but that record was measured on the levered, hedgin",
+    "base_window_gap": null,
+    "finite_life_years": null,
+    "cash_flow_life": "perpetual",
+    "cash_flow_life_reason": "Retained Canadian business (post-deal) has ~44 MMboe 1P reserves (~39% of the 112 MMboe total-company proved per the company's Jan 2026 reserves release) over ~5.3 MMboe/yr production (~8-yr static life), but the filings show the stock is replaced out of capex that my base already deducts: the Jun 3",
+    "terminal_ronic": 0.08220000000000001,
+    "terminal_ronic_gap_pts": null,
+    "long_run_facts": {
+     "cycle": true,
+     "cycle_year": 2023,
+     "cycle_years": [
+      2019,
+      2020,
+      2023
+     ],
+     "e5": null,
+     "oe5": null,
+     "m5": null,
+     "m_tc": 0.036466,
+     "m_years": [
+      2018,
+      2025,
+      8
+     ],
+     "r_tc": 0.052717,
+     "r_years": [
+      2018,
+      2025,
+      8
+     ],
+     "p": 0.375,
+     "g_rev": 0.007437,
+     "g_rev_years": [
+      2018,
+      2025,
+      8
+     ],
+     "terminal_g_basis": "revenue_trend",
+     "ni_over_oe": null,
+     "x_over_oe": null,
+     "nwc_intensity": -0.226884,
+     "nwc_years": [
+      2018,
+      2025,
+      8
+     ],
+     "stub_months": 9.1663,
+     "stamps": [
+      "tangible_equity_partial:2021-2025",
+      "margin_record_pretax"
+     ],
+     "om_tc": 0.119199,
+     "om_trend": -0.08117100000000001,
+     "om_L": -0.390258,
+     "om_years": [
+      2018,
+      2025,
+      8
+     ],
+     "om_shape": "swing",
+     "om_basis": "pretax_with_amortization",
+     "om_5": null,
+     "m_long": null,
+     "margin_ratio": null,
+     "stamps_full": [
+      "tangible_equity_partial:2021/2022/2023/2024/2025",
+      "margin_record_pretax"
+     ]
+    },
+    "working_capital_deducted": null,
+    "base_year_capped": null,
+    "split_after_last_filing": null,
+    "years12_held_by_desk": false,
+    "desk_stamps": [
+     "long_run_on_owner_earnings"
+    ],
+    "guidance_deviation_reason": "The next-FY consensus revenue growth of -82.3% (DATA 8) is a carve-out artifact of the announced sale of the Colombia and Ecuador businesses to Maurel & Prom for $1.33B (PRIMARY P4, Aug 5, 2026), not organic decline: those assets are ~70%+ of revenue and leave the continuing company. The retained Ca",
+    "cycle_evidence": "Brent ~$101-102 on 2026-10-05, +55.3% y/y from the Hormuz supply shock, with G7 emergency stockpile release and Aramco's deeper Nov discount to Asia ($5 vs $2 for Oct) capping near-term upside as Hormuz flows recover (tradingeconomics/company release via catalyst brief, 2026-10-05).",
+    "verdict_label": "undervalued",
+    "direction_m": "undervalued",
+    "crux": [
+     {
+      "citations": [
+       {
+        "date": "2026-08-05",
+        "quote": "Purchaser to Assume Substantially All of the Company's Net Liabilities, Positioning Gran Tierra to be Debt-Free with Significant Cash at Completion",
+        "source": "PRIMARY P4"
+       },
+       {
+        "date": "2026-08-05",
+        "quote": "After the assumption of substantially all liabilities, customary closing adjustments, working capital adjustments, redemption by the Company of its 7.750% Senior Notes due 2027 (the \"2027 Notes\"), and transaction costs, the Company is expected to have total net cash proceeds of approximately $315 mi",
+        "source": "PRIMARY P4"
+       },
+       {
+        "date": "2026-08-05",
+        "quote": "The resource report disclosed in this release speaks to the scale of that opportunity, and Dawson Clearwater and Mount Head will be a focus of our drilling activity in 2027.",
+        "source": "PRIMARY P1"
+       }
+      ],
+      "input": "growth_years_3_5",
+      "reason": "The price implies years 3-5 owner-cash-flow growth of -50.4%/yr (desk price_implied), i.e., the market pays for a continuing company whose cash flow halves every year. My evidence says it is roughly flat (+2%, 0%, -2%): after closing, GTE is 'Debt-Free with Significant Cash at Completion' (PRIMARY P"
+     }
+    ],
+    "crux_check": {
+     "valid": true,
+     "reason": null,
+     "entries": [
+      {
+       "input": "growth_years_3_5",
+       "own": -0.0001333511150627409,
+       "implied": -0.5041437065032424,
+       "reachable": true,
+       "at_default": false,
+       "citations": [
+        {
+         "source": "PRIMARY P4",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P4",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        }
+       ],
+       "valid": true,
+       "reason": null
+      }
+     ],
+     "stamps": []
+    },
+    "price_implied": {
+     "coe": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0822,
+      "bound": {
+       "low": 0.0524,
+       "high": 0.25,
+       "value_low": 20.837045373519686,
+       "value_high": 10.859447940604861
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "growth_years_3_5": {
+      "value": -0.5041437065032424,
+      "reachable": true,
+      "own": -0.0001333511150627409,
+      "bound": {
+       "low": -0.9904866300900939,
+       "high": 9.979987856695738,
+       "value_low": 9.716921693773012,
+       "value_high": 53097.46296146601
+      },
+      "side": null,
+      "base_at_value": 10.380000000370199,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       -0.5038748117582873,
+       -0.503874811077863
+      ],
+      "stamps": [],
+      "shift": -0.5038748114180751,
+      "shift_bound": [
+       -0.979,
+       9.98
+      ],
+      "own_path": [
+       0.02,
+       0.0,
+       -0.02
+      ]
+     },
+     "fade_years": {
+      "value": null,
+      "reachable": false,
+      "own": 5,
+      "bound": {
+       "low": 0,
+       "high": 60,
+       "value_low": 15.425861431439014,
+       "value_high": 15.236238747386446
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "bracket_years": null,
+      "bracket_values": null
+     },
+     "terminal_g": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0236,
+      "bound": {
+       "low": 0.0,
+       "high": 0.044698999999999996,
+       "value_low": 15.25071623733666,
+       "value_high": 15.290255707191113
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "terminal_ronic": {
+      "value": null,
+      "reachable": false,
+      "own": 0.08220000000000001,
+      "bound": {
+       "low": 0.0822,
+       "high": "unlimited",
+       "value_low": 15.271592129158963,
+       "value_high": 16.610218655081052
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "year2_level": {
+      "value": null,
+      "reachable": false,
+      "own": 0.017982000000000015,
+      "bound": {
+       "low": null,
+       "high": null,
+       "value_low": null,
+       "value_high": null
+      },
+      "side": null,
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "not_available": "the pack prints no bull2 and bear2 range"
+     }
+    },
+    "momentum_view": "confirming",
+    "entry_timing": "buy_now",
+    "momentum_flip_condition": {
+     "metric": "high_52w_distance",
+     "comparator": "<=",
+     "threshold": -0.15,
+     "window_days": 30
+    },
+    "momentum_break_rule": {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": 0,
+     "window_days": 180
+    },
+    "invalidation_rules": [
+     {
+      "metric": "fcf",
+      "comparator": "<",
+      "threshold": 0.0,
+      "window": "first full reported quarter after the ~Dec 31, 2026 closing",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "mom_6m",
+      "comparator": "<",
+      "threshold": 0,
+      "window": "next 90 days",
+      "source": "price_history_scr10"
+     }
+    ],
+    "position_basis": "value",
+    "momentum_evidence": null,
+    "desk_calls": 2,
+    "desk_iv_match": true,
+    "desk_reverse_neutral_cagr": -30.13,
+    "coe_minus_anchor": 0.006536,
+    "desk_share_basis_matched": null,
+    "catalysts": [
+     {
+      "date": "2026-08-05",
+      "event": "Definitive SPA: sale of Colombia & Ecuador (all South American assets) to Maurel & Prom for $1.33B; pro-forma PDP NAV ~$12.49/share; purchaser assumes substantially all net liabilities -> debt-free + ~$315M net cash at close",
+      "direction": "bull",
+      "estimates_moved": "next-FY revenue reset to ~$124M (-82.3%, a carve-out artifact); next-FY EPS re-modeled toward -$0.03; sell-side target lifted $14.62 -> $17.68 (+20.93%)",
+      "scenario": "Anchors Base and Bull: the ~$315M one-time cash (Base yr1 base_cf) plus the debt-free continuing Canadian E&P"
+     },
+     {
+      "date": "2026-08-04",
+      "event": "Q2 2026 results: 41,501 BOEPD, net income $25M, adj EBITDA $85M, gross profit/BOE $19.90, OCF $57M, positive FCF; Dawson Clearwater/Mount Head ~67 MMbbl prospective resource report",
+      "direction": "bull",
+      "estimates_moved": "no visible next-FY revisions (1-2 analysts)",
+      "scenario": "Supports the Base recurring-cash level and confirms cash generation ahead of close; the 67 MMbbl is Bull/optionality"
+     },
+     {
+      "date": "2026-09-11",
+      "event": "Consent solicitation launched on $479.353M of 9.75% 2031 notes; amendment lets Maurel & Prom assume the notes at close (>=50% required)",
+      "direction": "bull",
+      "estimates_moved": "no visible change",
+      "scenario": "De-risks a key closing condition, supporting Base probability"
+     },
+     {
+      "date": "2026-09-22",
+      "event": "Consent results: consents from >=50% of principal obtained and not revoked; supplemental indenture executed same day (verified from company release)",
+      "direction": "bull",
+      "estimates_moved": "no visible change",
+      "scenario": "Removes the main creditor hurdle to buyer assumption -> raises Base (deal-closes) probability toward 0.60"
+     },
+     {
+      "date": "2026-09-23",
+      "event": "Definitive proxy statement filed for special meeting of stockholders to approve the Colombia/Ecuador sale",
+      "direction": "bull",
+      "estimates_moved": "no visible change",
+      "scenario": "Keeps the Q3 vote and ~Dec 31, 2026 close on track; stockholder approval is an explicit closing condition"
+     },
+     {
+      "date": "2026-10-05",
+      "event": "Brent ~$101-102 (+55.3% y/y) on Hormuz disruption; OPEC+ quotas unchanged; G7 emergency stockpile release and Aramco deeper Nov discount to Asia cap near-term upside as Hormuz flows recover",
+      "direction": "bull",
+      "estimates_moved": "no visible change",
+      "scenario": "Supports Bull (higher reserve NPV / multiple) but argues against rapid escalation; post-close GTE is WTI/AECO-exposed so Brent sets the multiple, not direct revenue"
+     }
+    ],
+    "bull_below_price_reason": null,
+    "bear_above_price_reason": null,
+    "code_fill_mode": "joint"
+   },
+   "conviction_score": 12.0,
+   "business_quality_moat": 1.8,
+   "kelly_fraction_pct": 24.75,
+   "asymmetric_payoff_skew": 2.99,
+   "bull_iv": 24.74,
+   "bear_iv": 5.58,
+   "reentry_tranches": {
+    "tranche_1_starter": 10.38,
+    "tranche_2_core": 6.5
+   },
+   "thesis_invalidation_triggers": [
+    "** the Maurel & Prom sale fails to close (Colombia SIC/ANH or Ecuador approval denied, stockholder vote defeated, or buyer financing falls through) **and** Brent unwinds below ~$75 \u2014 leaving GTE a levered 3-country E&P at lower oil (the Bear, ~$5.58); OR the continuing company reports negative FCF in its first full post-close quarter. ```json:underwriting { \"catalysts\": [ {\"date\": \"2026-08-05\", \"event\": \"Definitive SPA: sale of Colombia & Ecuador (all South American assets) to Maurel & Prom for $1.33B; pro-forma PDP NAV ~$12.49/share; purchaser assumes substantially all net liabilities -> debt-free + ~$315M net cash at close\", \"direction\": \"bull\", \"estimates_moved\": \"next-FY revenue reset to ~$124M (-82.3%, a carve-out artifact); next-FY EPS re-modeled toward -$0.03; sell-side target lifted $14.62 -> $17.68 (+20.93%)\", \"scenario\": \"Anchors Base and Bull: the ~$315M one-time cash (Base yr1 base_cf) plus the debt-free continuing Canadian E&P\"}, {\"date\": \"2026-08-04\", \"event\": \"Q2 2026 results: 41,501 BOEPD, net income $25M, adj EBITDA $85M, gross profit/BOE $19.90, OCF $57M, positive FCF; Dawson Clearwater/Mount Head ~67 MMbbl prospective resource report\", \"direction\": \"bull\", \"estimates_moved\": \"no visible next-FY revisions (1-2 analysts)\", \"scenario\": \"Supports the Base recurring-cash level and confirms cash generation ahead of close; the 67 MMbbl is Bull/optionality\"}, {\"date\": \"2026-09-11\", \"event\": \"Consent solicitation launched on $479.353M of 9.75% 2031 notes; amendment lets Maurel & Prom assume the notes at close (>=50% required)\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change\", \"scenario\": \"De-risks a key closing condition, supporting Base probability\"}, {\"date\": \"2026-09-22\", \"event\": \"Consent results: consents from >=50% of principal obtained and not revoked; supplemental indenture executed same day (verified from company release)\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change\", \"scenario\": \"Removes the main creditor hurdle to buyer assumption -> raises Base (deal-closes) probability toward 0.60\"}, {\"date\": \"2026-09-23\", \"event\": \"Definitive proxy statement filed for special meeting of stockholders to approve the Colombia/Ecuador sale\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change\", \"scenario\": \"Keeps the Q3 vote and ~Dec 31, 2026 close on track; stockholder approval is an explicit closing condition\"}, {\"date\": \"2026-10-05\", \"event\": \"Brent ~$101-102 (+55.3% y/y) on Hormuz disruption; OPEC+ quotas unchanged; G7 emergency stockpile release and Aramco deeper Nov discount to Asia cap near-term upside as Hormuz flows recover\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change\", \"scenario\": \"Supports Bull (higher reserve NPV / multiple) but argues against rapid escalation; post-close GTE is WTI/AECO-exposed so Brent sets the multiple, not direct revenue\"} ], \"conviction_score\": 12.0, \"business_quality_moat\": 1.8, \"cycle_evidence\": \"Brent ~$101-102 on 2026-10-05, +55.3% y/y from the Hormuz supply shock, with G7 emergency stockpile release and Aramco's deeper Nov discount to Asia ($5 vs $2 for Oct) capping near-term upside as Hormuz flows recover (tradingeconomics/company release via catalyst brief, 2026-10-05).\", \"momentum_view\": \"confirming\", \"entry_timing\": \"buy_now\", \"position_basis\": \"value\", \"momentum_evidence\": null, \"momentum_flip_condition\": {\"metric\": \"high_52w_distance\", \"comparator\": \"<=\", \"threshold\": -0.15, \"window_days\": 30}, \"momentum_break_rule\": {\"metric\": \"mom_6m\", \"comparator\": \"<\", \"threshold\": 0, \"window_days\": 180}, \"invalidation_rules\": [ {\"metric\": \"fcf\", \"comparator\": \"<\", \"threshold\": 0.0, \"window\": \"first full reported quarter after the ~Dec 31, 2026 closing\", \"source\": \"fundamentals_quarterly.json\"}, {\"metric\": \"mom_6m\", \"comparator\": \"<\", \"threshold\": 0, \"window\": \"next 90 days\", \"source\": \"price_history_scr10\"} ], \"reentry_tranches\": {\"tranche_1_starter\": 10.38, \"tranche_2_core\": 6.50}, \"thesis_invalidation_trigger\": \"The Maurel & Prom sale fails to close (Colombia SIC/ANH or Ecuador regulatory approval denied, stockholder vote defeated, or buyer financing falls through) AND Brent unwinds below ~$75, OR the continuing company reports negative FCF in its first full post-close quarter.\" } ```"
+   ],
+   "converged": false,
+   "early_stop": false,
+   "mode": "fixed_1",
+   "coe_used": 0.0822,
+   "coe_source": "anchor",
+   "coe_adjustment_reason": null,
+   "valuation_frame": "equity",
+   "terminal_method": "gordon",
+   "terminal_multiple_or_g": 0.0236,
+   "fade_years": 5,
+   "stage1_growth_path": [
+    0.0,
+    -0.946,
+    0.02,
+    0.0,
+    -0.02
+   ],
+   "guidance_deviation_reason": "The next-FY consensus revenue growth of -82.3% (DATA 8) is a carve-out artifact of the announced sale of the Colombia and Ecuador businesses to Maurel & Prom for $1.33B (PRIMARY P4, Aug 5, 2026), not organic decline: those assets are ~70%+ of revenue and leave the continuing company. The retained Ca",
+   "cycle_evidence": "Brent ~$101-102 on 2026-10-05, +55.3% y/y from the Hormuz supply shock, with G7 emergency stockpile release and Aramco's deeper Nov discount to Asia ($5 vs $2 for Oct) capping near-term upside as Hormuz flows recover (tradingeconomics/company release via catalyst brief, 2026-10-05).",
+   "verdict_label": "undervalued",
+   "desk_calls": 2,
+   "desk_iv_match": true,
+   "desk_reverse_neutral_cagr": -30.13,
+   "coe_minus_anchor": 0.006536,
+   "desk_share_basis_matched": null,
+   "years12_ratio": null,
+   "base_to_civ": null,
+   "consensus_implied_value": null,
+   "bull_years12_ratio": null,
+   "bear_years12_ratio": null,
+   "base_shares_ratio": null,
+   "bull_shares_ratio": null,
+   "bear_shares_ratio": null,
+   "desk_frame": null,
+   "desk_net_debt": null,
+   "shares_basis": "vendor",
+   "shares_reason": null,
+   "net_debt_reason": null,
+   "excess_cash_reason": "PRIMARY P4's ~$315M is the TOTAL post-close net cash position, stated net of the existing cash used to redeem the 2027 notes and pay transaction costs ('After the assumption of substantially all liabilities... redemption by the Company of its 7.750% Senior Notes due 2027... and transaction costs, th",
+   "scenario_deviation_reason": "Each scenario's year-2 cash flow steps down sharply from year 1 because year 1 includes a one-time cash event (Base/Bull: the ~$315M Maurel & Prom net proceeds per PRIMARY P4; Bear: the retained ~$83M pre-deal cash) that does not recur. Year 2 reflects only the recurring owner earnings of the respec",
+   "bull_bear_anchor": "no consensus range (1 analysts)",
+   "terminal_multiple_reason": null,
+   "interest_addback": null,
+   "wacc_reason": null,
+   "owner_earnings_source": "ttm_ni+vendor_capex",
+   "consensus_reference_status": "not_available",
+   "terminal_g_gap_bp": 0,
+   "terminal_reason": "Base terminal_ronic held at the DEFAULTS 8.22% (= COE anchor): no departure is passed on the input. The record's 8-year median return on tangible invested capital is 5.27% (DEFAULTS long_run r_tc=5.2717%, 2018-2025), below the 8.22% cost of equity, but that record was measured on the levered, hedgin",
+   "base_window_gap": null,
+   "finite_life_years": null,
+   "cash_flow_life": "perpetual",
+   "cash_flow_life_reason": "Retained Canadian business (post-deal) has ~44 MMboe 1P reserves (~39% of the 112 MMboe total-company proved per the company's Jan 2026 reserves release) over ~5.3 MMboe/yr production (~8-yr static life), but the filings show the stock is replaced out of capex that my base already deducts: the Jun 3",
+   "terminal_ronic": 0.08220000000000001,
+   "terminal_ronic_gap_pts": null,
+   "long_run_facts": {
+    "cycle": true,
+    "cycle_year": 2023,
+    "cycle_years": [
+     2019,
+     2020,
+     2023
+    ],
+    "e5": null,
+    "oe5": null,
+    "m5": null,
+    "m_tc": 0.036466,
+    "m_years": [
+     2018,
+     2025,
+     8
+    ],
+    "r_tc": 0.052717,
+    "r_years": [
+     2018,
+     2025,
+     8
+    ],
+    "p": 0.375,
+    "g_rev": 0.007437,
+    "g_rev_years": [
+     2018,
+     2025,
+     8
+    ],
+    "terminal_g_basis": "revenue_trend",
+    "ni_over_oe": null,
+    "x_over_oe": null,
+    "nwc_intensity": -0.226884,
+    "nwc_years": [
+     2018,
+     2025,
+     8
+    ],
+    "stub_months": 9.1663,
+    "stamps": [
+     "tangible_equity_partial:2021-2025",
+     "margin_record_pretax"
+    ],
+    "om_tc": 0.119199,
+    "om_trend": -0.08117100000000001,
+    "om_L": -0.390258,
+    "om_years": [
+     2018,
+     2025,
+     8
+    ],
+    "om_shape": "swing",
+    "om_basis": "pretax_with_amortization",
+    "om_5": null,
+    "m_long": null,
+    "margin_ratio": null,
+    "stamps_full": [
+     "tangible_equity_partial:2021/2022/2023/2024/2025",
+     "margin_record_pretax"
+    ]
+   },
+   "working_capital_deducted": null,
+   "base_year_capped": null,
+   "years12_held_by_desk": false,
+   "desk_stamps": [
+    "long_run_on_owner_earnings"
+   ],
+   "momentum_view": "confirming",
+   "entry_timing": "buy_now",
+   "momentum_flip_condition": {
+    "metric": "high_52w_distance",
+    "comparator": "<=",
+    "threshold": -0.15,
+    "window_days": 30
+   },
+   "momentum_break_rule": {
+    "metric": "mom_6m",
+    "comparator": "<",
+    "threshold": 0,
+    "window_days": 180
+   },
+   "invalidation_rules": [
+    {
+     "metric": "fcf",
+     "comparator": "<",
+     "threshold": 0.0,
+     "window": "first full reported quarter after the ~Dec 31, 2026 closing",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": 0,
+     "window": "next 90 days",
+     "source": "price_history_scr10"
+    }
+   ],
+   "position_basis": "value",
+   "position_basis_declared": "value",
+   "position_basis_votes": {
+    "value": 1
+   },
+   "momentum_evidence": null,
+   "momentum_state": {
+    "price_asof": "2026-10-02 17:16",
+    "mom_12_1": 1.8746,
+    "mom_6m": 0.1274,
+    "mom_1m": 0.0588,
+    "high_52w_distance": 0.0,
+    "high_52w_basis": "monthly proxy (unlabelled by the source)",
+    "above_below_200d_mean": null,
+    "rs_vs_cluster_etf_3m": null,
+    "rs_vs_iwm_3m": null,
+    "realised_vol_60d": null,
+    "regime_shift_up": true,
+    "regime_shift_down": false,
+    "mom_break": null,
+    "mom_z_sector": 2.981,
+    "mom_z_universe": 2.31
+   },
+   "active_shocks_at_verdict": [
+    {
+     "active": true,
+     "age_days": 3,
+     "direction": "up",
+     "intensity": 1.0318335302945385,
+     "measure": "63-trading-day log change, %, signed",
+     "onset_date": "2026-09-28",
+     "peak_date": "2026-09-28",
+     "peak_intensity": 1.0799710858764024,
+     "proxy": false,
+     "reason": null,
+     "series_id": "DCOILWTICO",
+     "severity": 1,
+     "shock_id": "oil_shock",
+     "stale_input": false,
+     "state": "active",
+     "thresholds": {
+      "down": {
+       "severity_1": {
+        "episodes": 10,
+        "percentile": 4.5,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -30.0
+       },
+       "severity_2": {
+        "episodes": 6,
+        "percentile": 2.7,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -40.0
+       }
+      },
+      "up": {
+       "severity_1": {
+        "episodes": 11,
+        "percentile": 94.4,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 30.0
+       },
+       "severity_2": {
+        "episodes": 5,
+        "percentile": 97.9,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 40.0
+       }
+      }
+     },
+     "value": 30.955005908836153,
+     "value_date": "2026-09-29",
+     "values_revised": false
+    }
+   ],
+   "pack_facts_source": "build",
+   "base_cf_reason": null,
+   "catalysts": [
+    {
+     "date": "2026-08-05",
+     "event": "Definitive SPA: sale of Colombia & Ecuador (all South American assets) to Maurel & Prom for $1.33B; pro-forma PDP NAV ~$12.49/share; purchaser assumes substantially all net liabilities -> debt-free + ~$315M net cash at close",
+     "direction": "bull",
+     "estimates_moved": "next-FY revenue reset to ~$124M (-82.3%, a carve-out artifact); next-FY EPS re-modeled toward -$0.03; sell-side target lifted $14.62 -> $17.68 (+20.93%)",
+     "scenario": "Anchors Base and Bull: the ~$315M one-time cash (Base yr1 base_cf) plus the debt-free continuing Canadian E&P"
+    },
+    {
+     "date": "2026-08-04",
+     "event": "Q2 2026 results: 41,501 BOEPD, net income $25M, adj EBITDA $85M, gross profit/BOE $19.90, OCF $57M, positive FCF; Dawson Clearwater/Mount Head ~67 MMbbl prospective resource report",
+     "direction": "bull",
+     "estimates_moved": "no visible next-FY revisions (1-2 analysts)",
+     "scenario": "Supports the Base recurring-cash level and confirms cash generation ahead of close; the 67 MMbbl is Bull/optionality"
+    },
+    {
+     "date": "2026-09-11",
+     "event": "Consent solicitation launched on $479.353M of 9.75% 2031 notes; amendment lets Maurel & Prom assume the notes at close (>=50% required)",
+     "direction": "bull",
+     "estimates_moved": "no visible change",
+     "scenario": "De-risks a key closing condition, supporting Base probability"
+    },
+    {
+     "date": "2026-09-22",
+     "event": "Consent results: consents from >=50% of principal obtained and not revoked; supplemental indenture executed same day (verified from company release)",
+     "direction": "bull",
+     "estimates_moved": "no visible change",
+     "scenario": "Removes the main creditor hurdle to buyer assumption -> raises Base (deal-closes) probability toward 0.60"
+    },
+    {
+     "date": "2026-09-23",
+     "event": "Definitive proxy statement filed for special meeting of stockholders to approve the Colombia/Ecuador sale",
+     "direction": "bull",
+     "estimates_moved": "no visible change",
+     "scenario": "Keeps the Q3 vote and ~Dec 31, 2026 close on track; stockholder approval is an explicit closing condition"
+    },
+    {
+     "date": "2026-10-05",
+     "event": "Brent ~$101-102 (+55.3% y/y) on Hormuz disruption; OPEC+ quotas unchanged; G7 emergency stockpile release and Aramco deeper Nov discount to Asia cap near-term upside as Hormuz flows recover",
+     "direction": "bull",
+     "estimates_moved": "no visible change",
+     "scenario": "Supports Bull (higher reserve NPV / multiple) but argues against rapid escalation; post-close GTE is WTI/AECO-exposed so Brent sets the multiple, not direct revenue"
+    }
+   ],
+   "bull_below_price_reason": null,
+   "bear_above_price_reason": null,
+   "code_fill_mode": "joint",
+   "consensus_data_status": "ok",
+   "input_scope_stamps": [
+    "customer_money_excluded"
+   ],
+   "direction_m": "undervalued",
+   "crux_valid": true,
+   "crux_by_sample": [
+    {
+     "sample": 1,
+     "valid": true,
+     "reason": null,
+     "inputs": [
+      "growth_years_3_5"
+     ],
+     "at_default": false
+    }
+   ],
+   "crux": [
+    {
+     "input": "growth_years_3_5",
+     "own": -0.0001333511150627409,
+     "implied": -0.5041437065032424,
+     "at_default": false,
+     "reason": "The price implies years 3-5 owner-cash-flow growth of -50.4%/yr (desk price_implied), i.e., the market pays for a continuing company whose cash flow halves every year. My evidence says it is roughly flat (+2%, 0%, -2%): after closing, GTE is 'Debt-Free with Significant Cash at Completion' (PRIMARY P"
+    }
+   ],
+   "price_implied": {
+    "coe": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0822,
+     "bound": {
+      "low": 0.0524,
+      "high": 0.25,
+      "value_low": 20.837045373519686,
+      "value_high": 10.859447940604861
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "growth_years_3_5": {
+     "value": -0.5041437065032424,
+     "reachable": true,
+     "own": -0.0001333511150627409,
+     "bound": {
+      "low": -0.9904866300900939,
+      "high": 9.979987856695738,
+      "value_low": 9.716921693773012,
+      "value_high": 53097.46296146601
+     },
+     "side": null,
+     "base_at_value": 10.380000000370199,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      -0.5038748117582873,
+      -0.503874811077863
+     ],
+     "stamps": [],
+     "shift": -0.5038748114180751,
+     "shift_bound": [
+      -0.979,
+      9.98
+     ],
+     "own_path": [
+      0.02,
+      0.0,
+      -0.02
+     ]
+    },
+    "fade_years": {
+     "value": null,
+     "reachable": false,
+     "own": 5,
+     "bound": {
+      "low": 0,
+      "high": 60,
+      "value_low": 15.425861431439014,
+      "value_high": 15.236238747386446
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "bracket_years": null,
+     "bracket_values": null
+    },
+    "terminal_g": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0236,
+     "bound": {
+      "low": 0.0,
+      "high": 0.044698999999999996,
+      "value_low": 15.25071623733666,
+      "value_high": 15.290255707191113
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "terminal_ronic": {
+     "value": null,
+     "reachable": false,
+     "own": 0.08220000000000001,
+     "bound": {
+      "low": 0.0822,
+      "high": "unlimited",
+      "value_low": 15.271592129158963,
+      "value_high": 16.610218655081052
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "year2_level": {
+     "value": null,
+     "reachable": false,
+     "own": 0.017982000000000015,
+     "bound": {
+      "low": null,
+      "high": null,
+      "value_low": null,
+      "value_high": null
+     },
+     "side": null,
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "not_available": "the pack prints no bull2 and bear2 range"
+    }
+   },
+   "serving": {
+    "provider": "ollama",
+    "model": "rs2-analyst-deep-mtp5-v33",
+    "manifest_sha256": "f0f5ce2dcea334804e13492b2813e74d3294025f5d3b1692524de597fa33ab3e",
+    "system_layer_digest": "sha256:ff033c2519528445a1f2e56a797746524d64bff7d65e5a31612be35d6cbdfc22"
+   },
+   "position_basis_source_sample": 1,
+   "size_components": {
+    "dispersion": {
+     "bucket": "full",
+     "spread_pct": 0.0,
+     "source": "SIZE_BUCKETS"
+    },
+    "mos": {
+     "bucket": "full",
+     "mos_vs_base_pct": 47.1,
+     "source": "mos_vs_base_pct"
+    },
+    "conviction": {
+     "bucket": "full",
+     "conviction_score": 12.0,
+     "source": "scorecard.median_conviction_score"
+    },
+    "risk": {
+     "bucket": "full",
+     "elevated_volatility_ahead": false,
+     "source": "mri_outputs_dir/shock_register.json:risk_flags"
+    }
+   },
+   "reason": "single plausible sample \u2014 direction weak, size capped",
+   "instability": {
+    "prior_iv": 13.225000000000001,
+    "current_iv": 15.27,
+    "delta_pct": 15.5,
+    "unstable": false
+   },
+   "direction": "undervalued",
+   "size_hint": "quarter",
+   "mos_vs_median_pct": 47.1,
+   "mos_vs_base_pct": 47.1,
+   "fiduciary_amendments": [],
+   "fiduciary_violations": [],
+   "fiduciary_verdict": "PASS",
+   "consensus_dir": "GTE_20261006_000805",
+   "run_source": "orchestrator",
+   "arm": "local",
+   "pack_source": "fresh",
+   "screener_data_commit": "256f95f8c92de32e5649f0af21092ef8652bdde4",
+   "research_brief_asof": "2026-10-05T23:53:20.701040",
+   "research_brief_age_days": 0.05,
+   "price_asof": "2026-10-05",
+   "price_source": "yfinance",
+   "price_asof_basis": null,
+   "gate_version": 8,
+   "pipeline_commit": "412578d",
+   "street_fence": null,
+   "producer_class": {
+    "status": "ok",
+    "depleting": true,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "source": "stocks.csv@256f95f8c92de32e5649f0af21092ef8652bdde4"
+   },
+   "actionable": false,
+   "actionable_reasons": [
+    "single_sample",
+    "depleting_producer_unsupported",
+    "no_street_fence"
+   ],
    "status": "ok",
    "thesis_status": null,
    "thesis_checks": null,
