@@ -9,6 +9,8 @@ import base64
 import pandas as pd
 from datetime import datetime
 
+from issuer_securities import common_tickers_by_cik
+
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -27,7 +29,7 @@ def get_cik_mapping():
         mapping[entry['ticker']] = str(entry['cik_str']).zfill(10)
     return mapping
 
-def download_and_extract_facts(cik_mapping, target_tickers, output_dir="public/data/sec_facts"):
+def download_and_extract_facts(cik_mapping, target_tickers, common_by_cik, output_dir="public/data/sec_facts"):
     url = "https://www.sec.gov/Archives/edgar/daily-index/xbrl/companyfacts.zip"
     logging.info("Downloading companyfacts.zip (this may take a few minutes)...")
     
@@ -43,12 +45,15 @@ def download_and_extract_facts(cik_mapping, target_tickers, output_dir="public/d
     logging.info("Extracting required CIKs...")
     os.makedirs(output_dir, exist_ok=True)
     
+    # Every common ticker of a CIK gets the issuer's metrics (GOOG and GOOGL both); a preferred,
+    # note or unit listed under the same CIK gets none (see issuer_securities.py).
     target_ciks = set()
-    cik_to_ticker = {}
+    cik_to_tickers = {}
     for t in target_tickers:
-        if t in cik_mapping:
-            target_ciks.add(cik_mapping[t])
-            cik_to_ticker[cik_mapping[t]] = t
+        cik = cik_mapping.get(t)
+        if cik is not None and t in common_by_cik[cik]:
+            target_ciks.add(cik)
+            cik_to_tickers.setdefault(cik, []).append(t)
 
     extracted = 0
     with zipfile.ZipFile(zip_path, 'r') as z:
@@ -59,7 +64,7 @@ def download_and_extract_facts(cik_mapping, target_tickers, output_dir="public/d
                 extracted += 1
                 
     logging.info(f"Extracted {extracted} JSON fact files.")
-    return cik_to_ticker
+    return cik_to_tickers
 
 def parse_facts(ticker, cik, input_dir):
     filepath = os.path.join(input_dir, f"CIK{cik}.json")
@@ -176,15 +181,16 @@ def main():
     tickers = [s['symbol'] for s in stocks if '.' not in s['symbol']] # Ignore intl suffixes
     
     cik_mapping = get_cik_mapping()
-    cik_to_ticker = download_and_extract_facts(cik_mapping, tickers)
+    cik_to_tickers = download_and_extract_facts(cik_mapping, tickers, common_tickers_by_cik(cik_mapping, stocks))
     
     sec_data = {}
     output_dir = "public/data/sec_facts"
     
-    for cik, ticker in cik_to_ticker.items():
-        metrics = parse_facts(ticker, cik, output_dir)
+    for cik, cik_tickers in cik_to_tickers.items():
+        metrics = parse_facts(cik_tickers[0], cik, output_dir)
         if metrics:
-            sec_data[ticker] = metrics
+            for ticker in cik_tickers:
+                sec_data[ticker] = {**metrics, "ticker": ticker}
             
     # (sec_momentum.json sidecar removed June 2026 — it had zero consumers;
     # the fields below are merged into stocks.json / stocks.csv instead.)

@@ -49,6 +49,7 @@ from hygiene_thresholds import (
     ADV_ENFORCE, load_adv_enforce, resolve_market_cap
 )
 import tradability
+from issuer_securities import non_common_securities
 
 OUT_SURVIVORS_JSON = DATA / "tier1_hygiene_survivors.json"
 OUT_AUDIT_JSON = DATA / "tier1_hygiene_audit.json"
@@ -130,6 +131,7 @@ def evaluate_tier1():
     fundamentals_ttm = (load_json(FUNDAMENTALS_TTM_JSON, {}) or {}).get("tickers", {})
     momentum_state = (load_json(MOMENTUM_STATE_JSON, {}) or {}).get("tickers", {})
     cik_map = load_json(CIK_MAP_JSON, {}) or {}
+    non_common = non_common_securities(cik_map.get("map") or {}, stocks_data)
 
     total_universe = len(stocks)
     print(f"Loaded {total_universe} stocks from universe database.")
@@ -153,6 +155,13 @@ def evaluate_tier1():
         reasons = []
         flags = []
 
+        # Non-common security: SEC lists it under the common stock's CIK, so the issuer's share
+        # count and per-share figures are not its own. Primary reason; see issuer_securities.py.
+        nc = non_common.get(sym)
+        if nc:
+            reasons.append(f"NON_COMMON_SECURITY (shares CIK {nc['cik']} with "
+                           f"{', '.join(nc['common'])}, which carry the issuer's market cap)")
+
         # 0. Tradability Check
         if sym in untradable_map:
             reasons.append(f"NOT_TRADABLE ({untradable_map[sym]})")
@@ -162,7 +171,10 @@ def evaluate_tier1():
         years = sorted([int(y) for y in fh.keys()]) if fh else []
         shares_diluted = num(fh.get(str(years[-1]), {}).get("shares_diluted")) if years else None
         metrics = s.get("metrics") or {}
-        mcap, mcap_derived = resolve_market_cap(raw_mcap, price, shares_diluted, metrics)
+        if nc:
+            mcap, mcap_derived = None, False   # the SEC share count belongs to the common, never derive from it
+        else:
+            mcap, mcap_derived = resolve_market_cap(raw_mcap, price, shares_diluted, metrics)
 
         if mcap_derived:
             flags.append("DATA_FLAG: MCAP_DERIVED")

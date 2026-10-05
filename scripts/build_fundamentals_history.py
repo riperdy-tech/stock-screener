@@ -54,6 +54,8 @@ except Exception:
 
 import requests
 
+from issuer_securities import non_common_securities
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "public" / "data"
 STOCKS_JSON = DATA / "stocks.json"
@@ -2693,9 +2695,13 @@ def refresh_one(ticker, data=None):
     """
     ticker = ticker.strip().upper()
     if data is None:
-        cik = get_cik_map().get(ticker)
+        cik_map = get_cik_map()
+        cik = cik_map.get(ticker)
         if not cik:
             print(f"FATAL: no CIK for {ticker}")
+            return 2
+        if ticker in non_common_securities(cik_map, json.loads(STOCKS_JSON.read_text(encoding="utf-8"))):
+            print(f"FATAL: {ticker} is a non-common security under CIK{cik} — the issuer's history is not its own")
             return 2
         print(f"Fetching live companyfacts for {ticker} (CIK{cik}) ...")
         try:
@@ -2812,8 +2818,11 @@ def main():
         universe = universe[: args.limit]
 
     cik_map = get_cik_map()
-    targets = {t: f"CIK{cik_map[t]}.json" for t in universe if t in cik_map}
-    print(f"Universe: {len(universe)} tickers | with CIK: {len(targets)}")
+    # Preferreds, notes and units share the common stock's CIK; the issuer's history is not theirs.
+    non_common = non_common_securities(cik_map, stocks)
+    targets = {t: f"CIK{cik_map[t]}.json" for t in universe if t in cik_map and t not in non_common}
+    print(f"Universe: {len(universe)} tickers | with CIK: {len(targets)} | "
+          f"non-common securities excluded: {sum(t in non_common for t in universe)}")
 
     history_out = {}
     battery_out = {}
@@ -2871,6 +2880,7 @@ def main():
         print(f"SUBSET run ({len(targets)} tickers) -> writing {HISTORY_JSON.name} / "
               f"{BATTERY_JSON.name} / {TTM_JSON.name} — production files untouched")
     provenance = encode_provenance(history_out, prov_by_ticker)
+    provenance["non_common_securities"] = {t: non_common[t] for t in sorted(universe) if t in non_common}
     debt_note = (
         "CH-9 debt components (instant, USD): debt_lt_noncurrent + debt_current = interest-bearing "
         "debt EXCLUDING all leases. short_term_borrowings_separate is ADDITIVE only when debt_current "
