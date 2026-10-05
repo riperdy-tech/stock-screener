@@ -50,7 +50,7 @@ export default function CockpitDashboard() {
                     <div className="pb-4">
                         <MyPortfolio
                             factor={factor?.tickers ?? {}} depth={depth}
-                            overlay={overlay} stockInfo={stockInfo}
+                            ledgers={ledgers} stockInfo={stockInfo}
                             onSelect={(t) => openTicker(t, 'port')}
                             user={auth.user} onRequireLogin={() => setShowAuth(true)}
                         />
