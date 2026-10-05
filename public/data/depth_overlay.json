@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-05T14:58:11.741710",
+ "generated_at": "2026-10-05T19:42:01.549627",
  "scheme": "band_direction_v1",
- "count": 26,
+ "count": 27,
  "actionable_count": 0,
  "gate_version": 8,
  "tickers": {
@@ -6865,63 +6865,920 @@
   },
   "ESEA": {
    "ticker": "ESEA",
-   "price": 73.86,
-   "date": "2026-09-18",
-   "model": "rs2-analyst-deep-mtp5",
-   "samples_run": 3,
-   "n_basis": 3,
-   "iv_band_low": 77.0,
-   "iv_band_high": 108.95,
-   "median_iv": 85.0,
-   "spread_pct": 41.5,
-   "flags": [],
-   "pack_revision": 3,
+   "price": 72.42,
+   "date": "2026-10-05",
+   "model": "rs2-analyst-deep-mtp5-v33",
+   "samples_run": 1,
+   "n_basis": 1,
+   "iv_band_low": 267.18,
+   "iv_band_high": 267.18,
+   "median_iv": 267.18,
+   "spread_pct": null,
+   "flags": [
+    "MODE_INSTABILITY",
+    "above_52w_high_3.35x",
+    "above_analyst_high_3.16x_cap_1.5x",
+    "mos_+269pct_beyond_150pct"
+   ],
+   "pack_revision": 21,
    "scheme": "band_direction_v1",
+   "m": null,
    "scorecard": {
-    "median_iv": 92.975,
-    "median_bull_iv": 108.0,
-    "median_bear_iv": 40.0,
-    "iv_band_low": 77.0,
-    "iv_band_high": 108.95,
-    "median_conviction_score": 10.0,
-    "median_quality_moat": 2.1,
-    "median_kelly_fraction_pct": 12.5,
-    "asymmetric_payoff_skew": 1.01,
+    "median_iv": 267.18,
+    "base_iv": 267.18,
+    "median_bull_iv": 312.31,
+    "median_bear_iv": 152.94,
+    "iv_band_low": 267.18,
+    "iv_band_high": 267.18,
+    "spread_pct": null,
+    "converged": false,
+    "medoid_sample": 1,
+    "n_basis": 1,
+    "median_conviction_score": 11.0,
+    "median_quality_moat": 2.9,
+    "median_kelly_fraction_pct": 24.75,
+    "asymmetric_payoff_skew": 99.9,
     "reentry_tranches": {
-     "tranche_1_starter": 72.0,
-     "tranche_2_core": 52.0
+     "tranche_1_starter": 72.42,
+     "tranche_2_core": 60.0
     },
     "thesis_invalidation_triggers": [
-     "Two consecutive quarters of fleet TCE on new fixings below $18,000/day AND 2027 contract coverage falling below 50%, OR a non-deferrable newbuild funding event pushing net debt above $150M."
-    ]
+     "** two consecutive reported quarters with net income below $25M (\u2248 fleet TCEs persistently below ~$18k/day), **or** a common-equity shelf takedown exceeding $30M, **or** Middle East de-escalation accompanied by feeder spot rates below $15k/day for 60+ consecutive days. ```json:underwriting { \"catalysts\": [ {\"date\": \"2026-08-13\", \"event\": \"Q2 2026 results: revenue $56.5M (-1.2% y/y on fewer vessels), net income $33.2M, adjusted EPS $4.70 vs ~$4.24 consensus; TCE $30,306/day (+3% y/y); $0.80 quarterly dividend declared\", \"direction\": \"bull\", \"estimates_moved\": \"next-FY consensus EPS revised up to $15.38 from $14.79 over 90 days (+4.0%)\", \"scenario\": \"anchors Base/Bull year 1-2 cash-flow levels (~$130M FY2026 run-rate confirmed by H1 actuals)\"}, {\"date\": \"2026-08-25\", \"event\": \"Jonathan P (1,740 teu feeder) time-charter extension 24-26 months at $26,000/day from ~Nov 2026 (~$12.7M EBITDA over minimum period); charter coverage rises to ~97%/86%/50% for 2026/2027/2028\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change\", \"scenario\": \"sets the Bear floor for years 1-2 (contracted revenue cannot fall below it) and is core evidence against a 2027 cash-flow collapse\"}, {\"date\": \"2026-09-01\", \"event\": \"Shares +4.1% pre-market to $80.01, above prior 52-week high of $79.67, ahead of Sept 9 ex-dividend date; consensus Strong Buy with average 12-month target ~$88.67\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change (momentum/positioning into ex-date)\", \"scenario\": \"supports momentum_view=confirming; target level disputed in red team, not a valuation input\"}, {\"date\": \"2026-09-09\", \"event\": \"Ex-dividend date for $0.80 quarterly dividend (record Sept 9, payable ~Sept 16)\", \"direction\": \"bear\", \"estimates_moved\": \"n/a - mechanical ~$0.80 (~1%) price adjustment\", \"scenario\": \"explains part of the -4.7% 1-month move; no fundamental content\"}, {\"date\": \"2026-10-01\", \"event\": \"Form F-3 mixed shelf registration for up to $400M (common incl. preferred purchase rights, preferred, debt, warrants, units); proceeds for vessel acquisitions, capex, debt repayment, working capital; filing discloses 12 containerships under construction with deliveries Q3 2027-Q1 2029 (exact filing date unconfirmed: Sept 17 vs Oct 1)\", \"direction\": \"bear\", \"estimates_moved\": \"no visible change; no takedown announced\", \"scenario\": \"Bear: dilution optionality at the top (~80% of market cap) - a common-equity takedown >$30M is an invalidation trigger; Base/Bull: growth funding for the newbuild program without forced dilution\"} ], \"conviction_score\": 11.0, \"business_quality_moat\": 2.9, \"cycle_evidence\": \"Feeder/intermediate TCE $30,306/day in Q2 2026 (+3% y/y) at multi-year highs (company Q2 2026 release, 2026-08-13); feeder orderbook 27.9% of fleet vs higher industry average and idle capacity ~6% (company Q2 2026 earnings materials, 2026-08-14); industry fleet growth 3.8%/7.8%/9.9% in 2026/2027/2028+ (same source); Jonathan P re-fixed at $26,000/day on 2026-08-25 lifting coverage to 97%/86%/50% for 2026/27/28 - a dated pricing + supply indicator supporting a mid-to-late-cycle, not peak, treatment\", \"momentum_view\": \"confirming\", \"entry_timing\": \"buy_now\", \"position_basis\": \"value\", \"momentum_evidence\": null, \"momentum_flip_condition\": {\"metric\": \"high_52w_distance\", \"comparator\": \"<\", \"threshold\": -15.0, \"window_days\": 30}, \"momentum_break_rule\": {\"metric\": \"mom_6m\", \"comparator\": \"<=\", \"threshold\": 0.0, \"window_days\": 90}, \"invalidation_rules\": [ {\"metric\": \"net_income\", \"comparator\": \"<=\", \"threshold\": 0.025, \"window\": \"next reported quarter\", \"source\": \"fundamentals_quarterly.json\"}, {\"metric\": \"net_issuance_1y\", \"comparator\": \">\", \"threshold\": 0.03, \"window\": \"trailing 12 months\", \"source\": \"fundamentals_quarterly.json\"}, {\"metric\": \"mom_6m\", \"comparator\": \"<=\", \"threshold\": 0.0, \"window\": \"90 days\", \"source\": \"scr10_price_facts\"} ], \"reentry_tranches\": {\"tranche_1_starter\": 72.42, \"tranche_2_core\": 60.0}, \"thesis_invalidation_trigger\": \"Two consecutive reported quarters with net income below $25M (approx. fleet TCEs persistently below ~$18k/day), or a common-equity shelf takedown exceeding $30M, or Middle East de-escalation accompanied by feeder spot rates below $15k/day for 60+ consecutive days\" } ```"
+    ],
+    "base_probability": 0.5,
+    "bull_probability": 0.3,
+    "bear_probability": 0.2,
+    "probabilities_defaulted": false,
+    "base_cf_used": 0.137,
+    "base_cf_basis": "other",
+    "coe_used": 0.0904,
+    "coe_source": "anchor",
+    "coe_adjustment_reason": null,
+    "valuation_frame": "equity",
+    "terminal_method": "gordon",
+    "terminal_multiple_or_g": 0.0375,
+    "fade_years": 4,
+    "stage1_growth_path": [
+     -0.05,
+     -0.06,
+     -0.03,
+     0.0,
+     0.02
+    ],
+    "years12_ratio": 0.972,
+    "base_to_civ": null,
+    "consensus_implied_value": null,
+    "bull_years12_ratio": null,
+    "bear_years12_ratio": null,
+    "base_shares_ratio": null,
+    "bull_shares_ratio": null,
+    "bear_shares_ratio": null,
+    "desk_frame": "equity",
+    "desk_net_debt": null,
+    "shares_basis": "vendor",
+    "shares_reason": null,
+    "net_debt_reason": null,
+    "excess_cash_reason": null,
+    "scenario_deviation_reason": null,
+    "bull_bear_anchor": "no consensus range (1 analysts)",
+    "terminal_multiple_reason": null,
+    "interest_addback": null,
+    "wacc_reason": null,
+    "owner_earnings_source": null,
+    "consensus_reference_status": "not_available",
+    "terminal_g_gap_bp": 0,
+    "terminal_reason": "The DEFAULTS ronic of 21.7% extrapolates the 8-year peak-cycle record (r_tc 29.4%) forever; dated evidence says new capital earns less: newbuild prices ~$44M for 2,500-TEU vs a 10-year median/average of ~$36M (Riviera, 2026-03), industry fleet supply grows 3.8%/7.8%/9.9% in 2026/2027/2028+ (company ",
+    "base_window_gap": null,
+    "finite_life_years": null,
+    "cash_flow_life": "perpetual",
+    "cash_flow_life_reason": "Perpetual: vessels (20-25 yr lives) are continuously replaced out of capex \u2014 12 containerships under construction with deliveries Q3 2027-Q1 2029 per the company's AGM results filing of 2026-07-24 (PRIMARY P4); no finite stock or expiring licence; base deducts maintenance capex \u2248 D&A ($28.6M FY2025,",
+    "terminal_ronic": 0.14,
+    "terminal_ronic_gap_pts": 7.75,
+    "long_run_facts": {
+     "cycle": false,
+     "cycle_year": null,
+     "cycle_years": [],
+     "e5": null,
+     "oe5": null,
+     "m5": null,
+     "m_tc": 0.49365299999999995,
+     "m_years": [
+      2018,
+      2025,
+      8
+     ],
+     "r_tc": 0.293693,
+     "r_years": [
+      2018,
+      2025,
+      8
+     ],
+     "p": 0.625,
+     "g_rev": 0.297116,
+     "g_rev_years": [
+      2018,
+      2025,
+      8
+     ],
+     "terminal_g_basis": "revenue_trend",
+     "ni_over_oe": null,
+     "x_over_oe": null,
+     "nwc_intensity": -0.039308,
+     "nwc_years": [
+      2018,
+      2025,
+      8
+     ],
+     "stub_months": 9.1335,
+     "stamps": [],
+     "om_tc": 0.525405,
+     "om_trend": 0.701749,
+     "om_L": 0.6560630000000001,
+     "om_years": [
+      2018,
+      2025,
+      8
+     ],
+     "om_shape": "trend",
+     "om_basis": "with_amortization",
+     "om_5": null,
+     "m_long": null,
+     "margin_ratio": null
+    },
+    "working_capital_deducted": null,
+    "base_year_capped": null,
+    "split_after_last_filing": null,
+    "years12_held_by_desk": false,
+    "desk_stamps": [
+     "long_run_on_owner_earnings"
+    ],
+    "guidance_deviation_reason": null,
+    "cycle_evidence": "Feeder/intermediate TCE $30,306/day in Q2 2026 (+3% y/y) at multi-year highs (company Q2 2026 release, 2026-08-13); feeder orderbook 27.9% of fleet vs higher industry average and idle capacity ~6% (company Q2 2026 earnings materials, 2026-08-14); industry fleet growth 3.8%/7.8%/9.9% in 2026/2027/2028+ (same source); Jonathan P re-fixed at $26,000/day on 2026-08-25 lifting coverage to 97%/86%/50% for 2026/27/28 - a dated pricing + supply indicator supporting a mid-to-late-cycle, not peak, treatment",
+    "verdict_label": "undervalued",
+    "direction_m": "undervalued",
+    "crux": [
+     {
+      "citations": [
+       {
+        "date": "2026-07-24",
+        "quote": "After the delivery of four intermediate and eight feeder containership newbuildings between 2027 and 2029, Euroseas' fleet will consist of 33 vessels with a total carrying capacity of 97,396 teu.",
+        "source": "PRIMARY P4"
+       },
+       {
+        "date": "2026-10-01",
+        "quote": "Euroseas also reports 12 containerships under construction, with deliveries scheduled from the third quarter of 2027 through the first quarter of 2029.",
+        "source": "https://www.stocktitan.net/sec-filings/ESEA/f-3-euroseas-ltd-foreign-issuer-shelf-registration-27c02f3c7cf4.html"
+       },
+       {
+        "date": "2026-08-25",
+        "quote": "time charter contract extension for its 2006-built 1,740 teu feeder containership, M/V Jonathan P, for a minimum period of 24 to a maximum period of 26 months, at the option of the charterer, at a gross daily rate of $26,000",
+        "source": "PRIMARY P2"
+       }
+      ],
+      "input": "growth_years_3_5",
+      "reason": "The price implies owner cash flow decaying ~59%/yr through years 3-5 (from ~$120M in FY2028 to ~$35M by FY2031) \u2014 i.e. TCEs below $10k/day with the fleet intact. Dated evidence contradicts a collapse: the fleet grows +58% teu through Q1 2029 (AGM filing 2026-07-24; F-3 ~2026-10-01) funded by debt an"
+     }
+    ],
+    "crux_check": {
+     "valid": true,
+     "reason": null,
+     "entries": [
+      {
+       "input": "growth_years_3_5",
+       "own": -0.0035458918208939316,
+       "implied": -0.5858912428136296,
+       "reachable": true,
+       "at_default": false,
+       "citations": [
+        {
+         "source": "PRIMARY P4",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "https://www.stocktitan.net/sec-filings/ESEA/f-3-euroseas-ltd-foreign-issuer-shelf-registration-27c02f3c7cf4.html",
+         "class": "fetched_page_naming_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P2",
+         "class": "pack_company",
+         "quote_found": true
+        }
+       ],
+       "valid": true,
+       "reason": null
+      }
+     ],
+     "stamps": []
+    },
+    "price_implied": {
+     "coe": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0904,
+      "bound": {
+       "low": 0.0524,
+       "high": 0.25,
+       "value_low": 793.7791096737161,
+       "value_high": 107.99761977076548
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "growth_years_3_5": {
+      "value": -0.5858912428136296,
+      "reachable": true,
+      "own": -0.0035458918208939316,
+      "bound": {
+       "low": -0.988350410472075,
+       "high": 9.976647428179065,
+       "value_low": 58.672053192589516,
+       "value_high": 23959366.534218296
+      },
+      "side": null,
+      "base_at_value": 72.41999999643166,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       -0.5820440872125949,
+       -0.5820440865327916
+      ],
+      "stamps": [],
+      "shift": -0.5820440868726933,
+      "shift_bound": [
+       -0.969,
+       9.98
+      ],
+      "own_path": [
+       -0.03,
+       0.0,
+       0.02
+      ]
+     },
+     "fade_years": {
+      "value": null,
+      "reachable": false,
+      "own": 4,
+      "bound": {
+       "low": 0,
+       "high": 60,
+       "value_low": 267.80916098778533,
+       "value_high": 263.12298912315646
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "bracket_years": null,
+      "bracket_values": null
+     },
+     "terminal_g": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0375,
+      "bound": {
+       "low": 0.0,
+       "high": 0.044698999999999996,
+       "value_low": 231.70653814936531,
+       "value_high": 280.13126443310586
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "terminal_ronic": {
+      "value": null,
+      "reachable": false,
+      "own": 0.14,
+      "bound": {
+       "low": 0.0904,
+       "high": "unlimited",
+       "value_low": 237.58176756872302,
+       "value_high": 321.03540275211276
+      },
+      "side": "below",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "year2_level": {
+      "value": null,
+      "reachable": false,
+      "own": 0.122341,
+      "bound": {
+       "low": null,
+       "high": null,
+       "value_low": null,
+       "value_high": null
+      },
+      "side": null,
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "not_available": "the pack prints no bull2 and bear2 range"
+     }
+    },
+    "momentum_view": "confirming",
+    "entry_timing": "buy_now",
+    "momentum_flip_condition": {
+     "metric": "high_52w_distance",
+     "comparator": "<",
+     "threshold": -15.0,
+     "window_days": 30
+    },
+    "momentum_break_rule": {
+     "metric": "mom_6m",
+     "comparator": "<=",
+     "threshold": 0.0,
+     "window_days": 90
+    },
+    "invalidation_rules": [
+     {
+      "metric": "net_income",
+      "comparator": "<=",
+      "threshold": 0.025,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "net_issuance_1y",
+      "comparator": ">",
+      "threshold": 0.03,
+      "window": "trailing 12 months",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "mom_6m",
+      "comparator": "<=",
+      "threshold": 0.0,
+      "window": "90 days",
+      "source": "scr10_price_facts"
+     }
+    ],
+    "position_basis": "value",
+    "momentum_evidence": null,
+    "desk_calls": 2,
+    "desk_iv_match": true,
+    "desk_reverse_neutral_cagr": -20.06,
+    "coe_minus_anchor": 0.002759,
+    "desk_share_basis_matched": null,
+    "catalysts": [
+     {
+      "date": "2026-08-13",
+      "event": "Q2 2026 results: revenue $56.5M (-1.2% y/y on fewer vessels), net income $33.2M, adjusted EPS $4.70 vs ~$4.24 consensus; TCE $30,306/day (+3% y/y); $0.80 quarterly dividend declared",
+      "direction": "bull",
+      "estimates_moved": "next-FY consensus EPS revised up to $15.38 from $14.79 over 90 days (+4.0%)",
+      "scenario": "anchors Base/Bull year 1-2 cash-flow levels (~$130M FY2026 run-rate confirmed by H1 actuals)"
+     },
+     {
+      "date": "2026-08-25",
+      "event": "Jonathan P (1,740 teu feeder) time-charter extension 24-26 months at $26,000/day from ~Nov 2026 (~$12.7M EBITDA over minimum period); charter coverage rises to ~97%/86%/50% for 2026/2027/2028",
+      "direction": "bull",
+      "estimates_moved": "no visible change",
+      "scenario": "sets the Bear floor for years 1-2 (contracted revenue cannot fall below it) and is core evidence against a 2027 cash-flow collapse"
+     },
+     {
+      "date": "2026-09-01",
+      "event": "Shares +4.1% pre-market to $80.01, above prior 52-week high of $79.67, ahead of Sept 9 ex-dividend date; consensus Strong Buy with average 12-month target ~$88.67",
+      "direction": "bull",
+      "estimates_moved": "no visible change (momentum/positioning into ex-date)",
+      "scenario": "supports momentum_view=confirming; target level disputed in red team, not a valuation input"
+     },
+     {
+      "date": "2026-09-09",
+      "event": "Ex-dividend date for $0.80 quarterly dividend (record Sept 9, payable ~Sept 16)",
+      "direction": "bear",
+      "estimates_moved": "n/a - mechanical ~$0.80 (~1%) price adjustment",
+      "scenario": "explains part of the -4.7% 1-month move; no fundamental content"
+     },
+     {
+      "date": "2026-10-01",
+      "event": "Form F-3 mixed shelf registration for up to $400M (common incl. preferred purchase rights, preferred, debt, warrants, units); proceeds for vessel acquisitions, capex, debt repayment, working capital; filing discloses 12 containerships under construction with deliveries Q3 2027-Q1 2029 (exact filing date unconfirmed: Sept 17 vs Oct 1)",
+      "direction": "bear",
+      "estimates_moved": "no visible change; no takedown announced",
+      "scenario": "Bear: dilution optionality at the top (~80% of market cap) - a common-equity takedown >$30M is an invalidation trigger; Base/Bull: growth funding for the newbuild program without forced dilution"
+     }
+    ],
+    "bull_below_price_reason": null,
+    "bear_above_price_reason": "Even the downside case clears the price because (a) 86% of 2027 voyage days are already contracted at ~$25-30k/day (charter coverage 97%/86%/50% for 2026/2027/2028 per the Jonathan P announcement, 2026-08-26; PRIMARY P2), (b) the FY2025 balance sheet is net cash ($176M cash vs $198M debt, DATA 6) so",
+    "code_fill_mode": "joint"
    },
-   "conviction_score": 10.0,
-   "business_quality_moat": 2.1,
-   "kelly_fraction_pct": 12.5,
-   "asymmetric_payoff_skew": 1.01,
-   "bull_iv": 108.0,
-   "bear_iv": 40.0,
+   "conviction_score": 11.0,
+   "business_quality_moat": 2.9,
+   "kelly_fraction_pct": 24.75,
+   "asymmetric_payoff_skew": 99.9,
+   "bull_iv": 312.31,
+   "bear_iv": 152.94,
    "reentry_tranches": {
-    "tranche_1_starter": 72.0,
-    "tranche_2_core": 52.0
+    "tranche_1_starter": 72.42,
+    "tranche_2_core": 60.0
    },
    "thesis_invalidation_triggers": [
-    "Two consecutive quarters of fleet TCE on new fixings below $18,000/day AND 2027 contract coverage falling below 50%, OR a non-deferrable newbuild funding event pushing net debt above $150M."
+    "** two consecutive reported quarters with net income below $25M (\u2248 fleet TCEs persistently below ~$18k/day), **or** a common-equity shelf takedown exceeding $30M, **or** Middle East de-escalation accompanied by feeder spot rates below $15k/day for 60+ consecutive days. ```json:underwriting { \"catalysts\": [ {\"date\": \"2026-08-13\", \"event\": \"Q2 2026 results: revenue $56.5M (-1.2% y/y on fewer vessels), net income $33.2M, adjusted EPS $4.70 vs ~$4.24 consensus; TCE $30,306/day (+3% y/y); $0.80 quarterly dividend declared\", \"direction\": \"bull\", \"estimates_moved\": \"next-FY consensus EPS revised up to $15.38 from $14.79 over 90 days (+4.0%)\", \"scenario\": \"anchors Base/Bull year 1-2 cash-flow levels (~$130M FY2026 run-rate confirmed by H1 actuals)\"}, {\"date\": \"2026-08-25\", \"event\": \"Jonathan P (1,740 teu feeder) time-charter extension 24-26 months at $26,000/day from ~Nov 2026 (~$12.7M EBITDA over minimum period); charter coverage rises to ~97%/86%/50% for 2026/2027/2028\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change\", \"scenario\": \"sets the Bear floor for years 1-2 (contracted revenue cannot fall below it) and is core evidence against a 2027 cash-flow collapse\"}, {\"date\": \"2026-09-01\", \"event\": \"Shares +4.1% pre-market to $80.01, above prior 52-week high of $79.67, ahead of Sept 9 ex-dividend date; consensus Strong Buy with average 12-month target ~$88.67\", \"direction\": \"bull\", \"estimates_moved\": \"no visible change (momentum/positioning into ex-date)\", \"scenario\": \"supports momentum_view=confirming; target level disputed in red team, not a valuation input\"}, {\"date\": \"2026-09-09\", \"event\": \"Ex-dividend date for $0.80 quarterly dividend (record Sept 9, payable ~Sept 16)\", \"direction\": \"bear\", \"estimates_moved\": \"n/a - mechanical ~$0.80 (~1%) price adjustment\", \"scenario\": \"explains part of the -4.7% 1-month move; no fundamental content\"}, {\"date\": \"2026-10-01\", \"event\": \"Form F-3 mixed shelf registration for up to $400M (common incl. preferred purchase rights, preferred, debt, warrants, units); proceeds for vessel acquisitions, capex, debt repayment, working capital; filing discloses 12 containerships under construction with deliveries Q3 2027-Q1 2029 (exact filing date unconfirmed: Sept 17 vs Oct 1)\", \"direction\": \"bear\", \"estimates_moved\": \"no visible change; no takedown announced\", \"scenario\": \"Bear: dilution optionality at the top (~80% of market cap) - a common-equity takedown >$30M is an invalidation trigger; Base/Bull: growth funding for the newbuild program without forced dilution\"} ], \"conviction_score\": 11.0, \"business_quality_moat\": 2.9, \"cycle_evidence\": \"Feeder/intermediate TCE $30,306/day in Q2 2026 (+3% y/y) at multi-year highs (company Q2 2026 release, 2026-08-13); feeder orderbook 27.9% of fleet vs higher industry average and idle capacity ~6% (company Q2 2026 earnings materials, 2026-08-14); industry fleet growth 3.8%/7.8%/9.9% in 2026/2027/2028+ (same source); Jonathan P re-fixed at $26,000/day on 2026-08-25 lifting coverage to 97%/86%/50% for 2026/27/28 - a dated pricing + supply indicator supporting a mid-to-late-cycle, not peak, treatment\", \"momentum_view\": \"confirming\", \"entry_timing\": \"buy_now\", \"position_basis\": \"value\", \"momentum_evidence\": null, \"momentum_flip_condition\": {\"metric\": \"high_52w_distance\", \"comparator\": \"<\", \"threshold\": -15.0, \"window_days\": 30}, \"momentum_break_rule\": {\"metric\": \"mom_6m\", \"comparator\": \"<=\", \"threshold\": 0.0, \"window_days\": 90}, \"invalidation_rules\": [ {\"metric\": \"net_income\", \"comparator\": \"<=\", \"threshold\": 0.025, \"window\": \"next reported quarter\", \"source\": \"fundamentals_quarterly.json\"}, {\"metric\": \"net_issuance_1y\", \"comparator\": \">\", \"threshold\": 0.03, \"window\": \"trailing 12 months\", \"source\": \"fundamentals_quarterly.json\"}, {\"metric\": \"mom_6m\", \"comparator\": \"<=\", \"threshold\": 0.0, \"window\": \"90 days\", \"source\": \"scr10_price_facts\"} ], \"reentry_tranches\": {\"tranche_1_starter\": 72.42, \"tranche_2_core\": 60.0}, \"thesis_invalidation_trigger\": \"Two consecutive reported quarters with net income below $25M (approx. fleet TCEs persistently below ~$18k/day), or a common-equity shelf takedown exceeding $30M, or Middle East de-escalation accompanied by feeder spot rates below $15k/day for 60+ consecutive days\" } ```"
    ],
    "converged": false,
    "early_stop": false,
-   "mode": "adaptive",
+   "mode": "fixed_1",
+   "coe_used": 0.0904,
+   "coe_source": "anchor",
+   "coe_adjustment_reason": null,
+   "valuation_frame": "equity",
+   "terminal_method": "gordon",
+   "terminal_multiple_or_g": 0.0375,
+   "fade_years": 4,
+   "stage1_growth_path": [
+    -0.05,
+    -0.06,
+    -0.03,
+    0.0,
+    0.02
+   ],
+   "guidance_deviation_reason": null,
+   "cycle_evidence": "Feeder/intermediate TCE $30,306/day in Q2 2026 (+3% y/y) at multi-year highs (company Q2 2026 release, 2026-08-13); feeder orderbook 27.9% of fleet vs higher industry average and idle capacity ~6% (company Q2 2026 earnings materials, 2026-08-14); industry fleet growth 3.8%/7.8%/9.9% in 2026/2027/2028+ (same source); Jonathan P re-fixed at $26,000/day on 2026-08-25 lifting coverage to 97%/86%/50% for 2026/27/28 - a dated pricing + supply indicator supporting a mid-to-late-cycle, not peak, treatment",
+   "verdict_label": "undervalued",
+   "desk_calls": 2,
+   "desk_iv_match": true,
+   "desk_reverse_neutral_cagr": -20.06,
+   "coe_minus_anchor": 0.002759,
+   "desk_share_basis_matched": null,
+   "years12_ratio": 0.972,
+   "base_to_civ": null,
+   "consensus_implied_value": null,
+   "bull_years12_ratio": null,
+   "bear_years12_ratio": null,
+   "base_shares_ratio": null,
+   "bull_shares_ratio": null,
+   "bear_shares_ratio": null,
+   "desk_frame": "equity",
+   "desk_net_debt": null,
+   "shares_basis": "vendor",
+   "shares_reason": null,
+   "net_debt_reason": null,
+   "excess_cash_reason": null,
+   "scenario_deviation_reason": null,
+   "bull_bear_anchor": "no consensus range (1 analysts)",
+   "terminal_multiple_reason": null,
+   "interest_addback": null,
+   "wacc_reason": null,
+   "owner_earnings_source": null,
+   "consensus_reference_status": "not_available",
+   "terminal_g_gap_bp": 0,
+   "terminal_reason": "The DEFAULTS ronic of 21.7% extrapolates the 8-year peak-cycle record (r_tc 29.4%) forever; dated evidence says new capital earns less: newbuild prices ~$44M for 2,500-TEU vs a 10-year median/average of ~$36M (Riviera, 2026-03), industry fleet supply grows 3.8%/7.8%/9.9% in 2026/2027/2028+ (company ",
+   "base_window_gap": null,
+   "finite_life_years": null,
+   "cash_flow_life": "perpetual",
+   "cash_flow_life_reason": "Perpetual: vessels (20-25 yr lives) are continuously replaced out of capex \u2014 12 containerships under construction with deliveries Q3 2027-Q1 2029 per the company's AGM results filing of 2026-07-24 (PRIMARY P4); no finite stock or expiring licence; base deducts maintenance capex \u2248 D&A ($28.6M FY2025,",
+   "terminal_ronic": 0.14,
+   "terminal_ronic_gap_pts": 7.75,
+   "long_run_facts": {
+    "cycle": false,
+    "cycle_year": null,
+    "cycle_years": [],
+    "e5": null,
+    "oe5": null,
+    "m5": null,
+    "m_tc": 0.49365299999999995,
+    "m_years": [
+     2018,
+     2025,
+     8
+    ],
+    "r_tc": 0.293693,
+    "r_years": [
+     2018,
+     2025,
+     8
+    ],
+    "p": 0.625,
+    "g_rev": 0.297116,
+    "g_rev_years": [
+     2018,
+     2025,
+     8
+    ],
+    "terminal_g_basis": "revenue_trend",
+    "ni_over_oe": null,
+    "x_over_oe": null,
+    "nwc_intensity": -0.039308,
+    "nwc_years": [
+     2018,
+     2025,
+     8
+    ],
+    "stub_months": 9.1335,
+    "stamps": [],
+    "om_tc": 0.525405,
+    "om_trend": 0.701749,
+    "om_L": 0.6560630000000001,
+    "om_years": [
+     2018,
+     2025,
+     8
+    ],
+    "om_shape": "trend",
+    "om_basis": "with_amortization",
+    "om_5": null,
+    "m_long": null,
+    "margin_ratio": null
+   },
+   "working_capital_deducted": null,
+   "base_year_capped": null,
+   "years12_held_by_desk": false,
+   "desk_stamps": [
+    "long_run_on_owner_earnings"
+   ],
+   "momentum_view": "confirming",
+   "entry_timing": "buy_now",
+   "momentum_flip_condition": {
+    "metric": "high_52w_distance",
+    "comparator": "<",
+    "threshold": -15.0,
+    "window_days": 30
+   },
+   "momentum_break_rule": {
+    "metric": "mom_6m",
+    "comparator": "<=",
+    "threshold": 0.0,
+    "window_days": 90
+   },
+   "invalidation_rules": [
+    {
+     "metric": "net_income",
+     "comparator": "<=",
+     "threshold": 0.025,
+     "window": "next reported quarter",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "net_issuance_1y",
+     "comparator": ">",
+     "threshold": 0.03,
+     "window": "trailing 12 months",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "mom_6m",
+     "comparator": "<=",
+     "threshold": 0.0,
+     "window": "90 days",
+     "source": "scr10_price_facts"
+    }
+   ],
+   "position_basis": "value",
+   "position_basis_declared": "value",
+   "position_basis_votes": {
+    "value": 1
+   },
+   "momentum_evidence": null,
+   "momentum_state": {
+    "price_asof": "2026-09-24 17:50",
+    "mom_12_1": 0.3348,
+    "mom_6m": 0.1083,
+    "mom_1m": -0.0472,
+    "high_52w_distance": -0.0727,
+    "high_52w_basis": "monthly proxy (unlabelled by the source)",
+    "above_below_200d_mean": null,
+    "rs_vs_cluster_etf_3m": null,
+    "rs_vs_iwm_3m": null,
+    "realised_vol_60d": null,
+    "regime_shift_up": true,
+    "regime_shift_down": false,
+    "mom_break": null,
+    "mom_z_sector": 0.583,
+    "mom_z_universe": 0.617
+   },
+   "active_shocks_at_verdict": [
+    {
+     "active": true,
+     "age_days": 3,
+     "direction": "up",
+     "intensity": 1.0318335302945385,
+     "measure": "63-trading-day log change, %, signed",
+     "onset_date": "2026-09-28",
+     "peak_date": "2026-09-28",
+     "peak_intensity": 1.0799710858764024,
+     "proxy": false,
+     "reason": null,
+     "series_id": "DCOILWTICO",
+     "severity": 1,
+     "shock_id": "oil_shock",
+     "stale_input": false,
+     "state": "active",
+     "thresholds": {
+      "down": {
+       "severity_1": {
+        "episodes": 10,
+        "percentile": 4.5,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -30.0
+       },
+       "severity_2": {
+        "episodes": 6,
+        "percentile": 2.7,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -40.0
+       }
+      },
+      "up": {
+       "severity_1": {
+        "episodes": 11,
+        "percentile": 94.4,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 30.0
+       },
+       "severity_2": {
+        "episodes": 5,
+        "percentile": 97.9,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 40.0
+       }
+      }
+     },
+     "value": 30.955005908836153,
+     "value_date": "2026-09-29",
+     "values_revised": false
+    }
+   ],
+   "pack_facts_source": "build",
+   "base_cf_reason": null,
+   "catalysts": [
+    {
+     "date": "2026-08-13",
+     "event": "Q2 2026 results: revenue $56.5M (-1.2% y/y on fewer vessels), net income $33.2M, adjusted EPS $4.70 vs ~$4.24 consensus; TCE $30,306/day (+3% y/y); $0.80 quarterly dividend declared",
+     "direction": "bull",
+     "estimates_moved": "next-FY consensus EPS revised up to $15.38 from $14.79 over 90 days (+4.0%)",
+     "scenario": "anchors Base/Bull year 1-2 cash-flow levels (~$130M FY2026 run-rate confirmed by H1 actuals)"
+    },
+    {
+     "date": "2026-08-25",
+     "event": "Jonathan P (1,740 teu feeder) time-charter extension 24-26 months at $26,000/day from ~Nov 2026 (~$12.7M EBITDA over minimum period); charter coverage rises to ~97%/86%/50% for 2026/2027/2028",
+     "direction": "bull",
+     "estimates_moved": "no visible change",
+     "scenario": "sets the Bear floor for years 1-2 (contracted revenue cannot fall below it) and is core evidence against a 2027 cash-flow collapse"
+    },
+    {
+     "date": "2026-09-01",
+     "event": "Shares +4.1% pre-market to $80.01, above prior 52-week high of $79.67, ahead of Sept 9 ex-dividend date; consensus Strong Buy with average 12-month target ~$88.67",
+     "direction": "bull",
+     "estimates_moved": "no visible change (momentum/positioning into ex-date)",
+     "scenario": "supports momentum_view=confirming; target level disputed in red team, not a valuation input"
+    },
+    {
+     "date": "2026-09-09",
+     "event": "Ex-dividend date for $0.80 quarterly dividend (record Sept 9, payable ~Sept 16)",
+     "direction": "bear",
+     "estimates_moved": "n/a - mechanical ~$0.80 (~1%) price adjustment",
+     "scenario": "explains part of the -4.7% 1-month move; no fundamental content"
+    },
+    {
+     "date": "2026-10-01",
+     "event": "Form F-3 mixed shelf registration for up to $400M (common incl. preferred purchase rights, preferred, debt, warrants, units); proceeds for vessel acquisitions, capex, debt repayment, working capital; filing discloses 12 containerships under construction with deliveries Q3 2027-Q1 2029 (exact filing date unconfirmed: Sept 17 vs Oct 1)",
+     "direction": "bear",
+     "estimates_moved": "no visible change; no takedown announced",
+     "scenario": "Bear: dilution optionality at the top (~80% of market cap) - a common-equity takedown >$30M is an invalidation trigger; Base/Bull: growth funding for the newbuild program without forced dilution"
+    }
+   ],
+   "bull_below_price_reason": null,
+   "bear_above_price_reason": "Even the downside case clears the price because (a) 86% of 2027 voyage days are already contracted at ~$25-30k/day (charter coverage 97%/86%/50% for 2026/2027/2028 per the Jonathan P announcement, 2026-08-26; PRIMARY P2), (b) the FY2025 balance sheet is net cash ($176M cash vs $198M debt, DATA 6) so",
+   "code_fill_mode": "joint",
+   "consensus_data_status": "ok",
+   "input_scope_stamps": [
+    "customer_money_excluded"
+   ],
+   "direction_m": "undervalued",
+   "crux_valid": true,
+   "crux_by_sample": [
+    {
+     "sample": 1,
+     "valid": true,
+     "reason": null,
+     "inputs": [
+      "growth_years_3_5"
+     ],
+     "at_default": false
+    }
+   ],
+   "crux": [
+    {
+     "input": "growth_years_3_5",
+     "own": -0.0035458918208939316,
+     "implied": -0.5858912428136296,
+     "at_default": false,
+     "reason": "The price implies owner cash flow decaying ~59%/yr through years 3-5 (from ~$120M in FY2028 to ~$35M by FY2031) \u2014 i.e. TCEs below $10k/day with the fleet intact. Dated evidence contradicts a collapse: the fleet grows +58% teu through Q1 2029 (AGM filing 2026-07-24; F-3 ~2026-10-01) funded by debt an"
+    }
+   ],
+   "price_implied": {
+    "coe": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0904,
+     "bound": {
+      "low": 0.0524,
+      "high": 0.25,
+      "value_low": 793.7791096737161,
+      "value_high": 107.99761977076548
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "growth_years_3_5": {
+     "value": -0.5858912428136296,
+     "reachable": true,
+     "own": -0.0035458918208939316,
+     "bound": {
+      "low": -0.988350410472075,
+      "high": 9.976647428179065,
+      "value_low": 58.672053192589516,
+      "value_high": 23959366.534218296
+     },
+     "side": null,
+     "base_at_value": 72.41999999643166,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      -0.5820440872125949,
+      -0.5820440865327916
+     ],
+     "stamps": [],
+     "shift": -0.5820440868726933,
+     "shift_bound": [
+      -0.969,
+      9.98
+     ],
+     "own_path": [
+      -0.03,
+      0.0,
+      0.02
+     ]
+    },
+    "fade_years": {
+     "value": null,
+     "reachable": false,
+     "own": 4,
+     "bound": {
+      "low": 0,
+      "high": 60,
+      "value_low": 267.80916098778533,
+      "value_high": 263.12298912315646
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "bracket_years": null,
+     "bracket_values": null
+    },
+    "terminal_g": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0375,
+     "bound": {
+      "low": 0.0,
+      "high": 0.044698999999999996,
+      "value_low": 231.70653814936531,
+      "value_high": 280.13126443310586
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "terminal_ronic": {
+     "value": null,
+     "reachable": false,
+     "own": 0.14,
+     "bound": {
+      "low": 0.0904,
+      "high": "unlimited",
+      "value_low": 237.58176756872302,
+      "value_high": 321.03540275211276
+     },
+     "side": "below",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "year2_level": {
+     "value": null,
+     "reachable": false,
+     "own": 0.122341,
+     "bound": {
+      "low": null,
+      "high": null,
+      "value_low": null,
+      "value_high": null
+     },
+     "side": null,
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "not_available": "the pack prints no bull2 and bear2 range"
+    }
+   },
+   "serving": {
+    "provider": "ollama",
+    "model": "rs2-analyst-deep-mtp5-v33",
+    "manifest_sha256": "f0f5ce2dcea334804e13492b2813e74d3294025f5d3b1692524de597fa33ab3e",
+    "system_layer_digest": "sha256:ff033c2519528445a1f2e56a797746524d64bff7d65e5a31612be35d6cbdfc22"
+   },
+   "position_basis_source_sample": 1,
+   "size_components": {
+    "dispersion": {
+     "bucket": "full",
+     "spread_pct": 0.0,
+     "source": "SIZE_BUCKETS"
+    },
+    "mos": {
+     "bucket": "full",
+     "mos_vs_base_pct": 268.9,
+     "source": "mos_vs_base_pct"
+    },
+    "conviction": {
+     "bucket": "full",
+     "conviction_score": 11.0,
+     "source": "scorecard.median_conviction_score"
+    },
+    "risk": {
+     "bucket": "full",
+     "elevated_volatility_ahead": false,
+     "source": "mri_outputs_dir/shock_register.json:risk_flags"
+    }
+   },
+   "reason": "single plausible sample \u2014 direction weak, size capped; mode instability: base IV moved +187.4% since the prior verdict ($92.97 -> $267.18) \u2014 within-run spread cannot see this, so convergence here is not stability",
+   "instability": {
+    "prior_iv": 92.975,
+    "current_iv": 267.18,
+    "delta_pct": 187.4,
+    "unstable": true
+   },
    "direction": "undervalued",
    "size_hint": "quarter",
-   "mos_vs_median_pct": 15.1,
-   "consensus_dir": "ESEA_20260918_203507",
+   "mos_vs_median_pct": 268.9,
+   "mos_vs_base_pct": 268.9,
+   "fiduciary_amendments": [],
+   "fiduciary_violations": [],
+   "fiduciary_verdict": "PASS",
+   "consensus_dir": "ESEA_20261005_151808",
+   "run_source": "orchestrator",
+   "arm": "local",
+   "pack_source": "fresh",
+   "screener_data_commit": "22ef66252ecfa03d6e24589f582349fe39348eaf",
+   "research_brief_asof": "2026-10-05T15:08:35.771693",
+   "research_brief_age_days": 0.06,
+   "price_asof": "2026-10-02",
+   "price_source": "yfinance",
+   "price_asof_basis": null,
+   "gate_version": 8,
+   "pipeline_commit": "68f3935",
+   "street_fence": {
+    "low": 38.64,
+    "high": 169.09,
+    "n_targets": 4.0,
+    "asof": "2026-10-05",
+    "age_days": 0.1,
+    "source": "enrich",
+    "winsorized": []
+   },
+   "producer_class": {
+    "status": "ok",
+    "depleting": false,
+    "sector": "Industrials",
+    "industry": "Marine Shipping",
+    "source": "stocks.csv@22ef66252ecfa03d6e24589f582349fe39348eaf"
+   },
    "actionable": false,
    "actionable_reasons": [
-    "pre_v3.1_gates",
-    "high_dispersion",
-    "no_street_fence"
+    "single_sample",
+    "mode_instability",
+    "outside_street_fence",
+    "mos_beyond_150pct"
    ],
-   "gate_version": null,
    "status": "ok",
    "thesis_status": null,
    "thesis_checks": null,
@@ -7136,64 +7993,1025 @@
   },
   "FLXS": {
    "ticker": "FLXS",
-   "price": 83.13,
-   "date": "2026-09-19",
-   "model": "rs2-analyst-deep-mtp5",
-   "samples_run": 2,
-   "n_basis": 2,
-   "iv_band_low": 105.6,
-   "iv_band_high": 115.0,
-   "median_iv": 110.3,
-   "spread_pct": 8.9,
-   "flags": [],
-   "pack_revision": 3,
+   "price": 88.82,
+   "date": "2026-10-05",
+   "model": "rs2-analyst-deep-mtp5-v33",
+   "samples_run": 1,
+   "n_basis": 1,
+   "iv_band_low": 72.5,
+   "iv_band_high": 72.5,
+   "median_iv": 72.5,
+   "spread_pct": null,
+   "flags": [
+    "MODE_INSTABILITY",
+    "desk_share_count_departure_with_reason",
+    "research_repeats_3_of_11"
+   ],
+   "pack_revision": 21,
    "scheme": "band_direction_v1",
+   "m": null,
    "scorecard": {
-    "median_iv": 110.3,
-    "median_bull_iv": 165.65,
-    "median_bear_iv": 50.98,
-    "iv_band_low": 105.6,
-    "iv_band_high": 115.0,
-    "median_conviction_score": 11.0,
-    "median_quality_moat": 2.4,
-    "median_kelly_fraction_pct": 6.0,
-    "asymmetric_payoff_skew": 2.73,
+    "median_iv": 72.5,
+    "base_iv": 72.5,
+    "median_bull_iv": 86.86,
+    "median_bear_iv": 42.05,
+    "iv_band_low": 72.5,
+    "iv_band_high": 72.5,
+    "spread_pct": null,
+    "converged": false,
+    "medoid_sample": 1,
+    "n_basis": 1,
+    "median_conviction_score": 8.0,
+    "median_quality_moat": 2.3,
+    "median_kelly_fraction_pct": 0.0,
+    "asymmetric_payoff_skew": -0.04,
     "reentry_tranches": {
-     "tranche_1_starter": 79.0,
-     "tranche_2_core": 60.0
+     "tranche_1_starter": 88.82,
+     "tranche_2_core": 42.05
     },
     "thesis_invalidation_triggers": [
-     "GAAP operating margin below 5.0% for two consecutive fiscal quarters, or full-year net sales declining more than 10% YoY, or a dividend cut / cessation of share repurchases",
-     "Adjusted operating margin below 5.0% for two consecutive fiscal quarters AND open-market share repurchases suspended or net share issuance reported (buyback program terminated), OR any single quarter with revenue decline greater than 10% YoY \u2014 indicating the margin/buyback engine has broken rather than cycled."
-    ]
+     "Two consecutive reported quarters with GAAP operating margin below 6.5% (under the low end of the company's own Q1 FY27 guide, PRIMARY P1 2026-08-17) and revenue YoY growth at or below 0%, ending the 11-quarter growth streak"
+    ],
+    "base_probability": 0.5,
+    "bull_probability": 0.25,
+    "bear_probability": 0.25,
+    "probabilities_defaulted": false,
+    "base_cf_used": 0.0219,
+    "base_cf_basis": "other",
+    "coe_used": 0.1004,
+    "coe_source": "anchor",
+    "coe_adjustment_reason": null,
+    "valuation_frame": "equity",
+    "terminal_method": "gordon",
+    "terminal_multiple_or_g": 0.0264,
+    "fade_years": 4,
+    "stage1_growth_path": [
+     0.03,
+     0.1,
+     0.046,
+     0.04,
+     0.03
+    ],
+    "years12_ratio": 0.925,
+    "base_to_civ": null,
+    "consensus_implied_value": null,
+    "bull_years12_ratio": null,
+    "bear_years12_ratio": null,
+    "base_shares_ratio": 0.915,
+    "bull_shares_ratio": 0.915,
+    "bear_shares_ratio": 0.915,
+    "desk_frame": "equity",
+    "desk_net_debt": null,
+    "shares_basis": "vendor",
+    "shares_reason": "SBC is deducted from cash flow (sbc_treatment=deducted_in_cf), so the basic outstanding count of 4,091,741 (DATA 2, vendor quote as of 2026-10-02) is used instead of the desk's diluted default of 4,472,368 to avoid double-counting the economic cost of equity grants.",
+    "net_debt_reason": null,
+    "excess_cash_reason": null,
+    "scenario_deviation_reason": null,
+    "bull_bear_anchor": "no consensus range (1 analysts)",
+    "terminal_multiple_reason": null,
+    "interest_addback": null,
+    "wacc_reason": null,
+    "owner_earnings_source": null,
+    "consensus_reference_status": "not_available",
+    "terminal_g_gap_bp": 0,
+    "terminal_reason": null,
+    "base_window_gap": null,
+    "finite_life_years": null,
+    "cash_flow_life": "perpetual",
+    "cash_flow_life_reason": "Perpetual: Flexsteel is a residential furniture manufacturer with no depleting reserves, licence or concession; replacement capex of $3.94M (~0.9% of sales) in FY2026 (PRIMARY P1, filed 2026-08-17) is already deducted from the base, so nothing is consumed that capex does not replace.",
+    "terminal_ronic": 0.100707,
+    "terminal_ronic_gap_pts": null,
+    "long_run_facts": {
+     "cycle": true,
+     "cycle_year": 2019,
+     "cycle_years": [
+      2019
+     ],
+     "e5": null,
+     "oe5": null,
+     "m5": null,
+     "m_tc": 0.031522,
+     "m_years": [
+      2019,
+      2026,
+      8
+     ],
+     "r_tc": 0.10101399999999999,
+     "r_years": [
+      2019,
+      2026,
+      8
+     ],
+     "p": 0.5,
+     "g_rev": 0.026446,
+     "g_rev_years": [
+      2019,
+      2026,
+      8
+     ],
+     "terminal_g_basis": "revenue_trend",
+     "ni_over_oe": null,
+     "x_over_oe": null,
+     "nwc_intensity": 0.21854800000000002,
+     "nwc_years": [
+      2019,
+      2026,
+      8
+     ],
+     "stub_months": 3.1869,
+     "stamps": [],
+     "om_tc": 0.034079,
+     "om_trend": 0.09082599999999999,
+     "om_L": 0.092666,
+     "om_years": [
+      2019,
+      2026,
+      8
+     ],
+     "om_shape": "swing",
+     "om_basis": "with_amortization",
+     "om_5": null,
+     "m_long": null,
+     "margin_ratio": null
+    },
+    "working_capital_deducted": null,
+    "base_year_capped": null,
+    "split_after_last_filing": null,
+    "years12_held_by_desk": false,
+    "desk_stamps": [
+     "long_run_on_owner_earnings"
+    ],
+    "guidance_deviation_reason": "DEFAULTS cash-flow levels are not available (reference_status not_available), so there is no consensus level to hold; my years 1-2 follow the company's own Q1 FY27 guide \u2014 sales +1-4%, GAAP operating margin 6.5-7% vs 7.5% adjusted in FY26, on Middle East conflict cost inflation (PRIMARY P1, filed 20",
+    "cycle_evidence": "PRIMARY P1 (2026-08-17): 'Consumer demand for furniture remains pressured by weak confidence, affordability constraints, and macroeconomic uncertainty related to the ongoing conflict in the Middle East'; Q3 FY26 orders -2.4% and backlog $79.5M (+1.5% YoY, -3.5% QoQ) per catalyst brief 2026-04-21 (unverified); Zacks furniture industry -15.6% YTD as of 2026-09-28 (news). Mid-cycle treatment: ex-refund adjusted operating margin fell 9.0% to 7.1% in FY26 and the company's own Q1 FY27 guide embeds further compression to 6.5-7% GAAP.",
+    "verdict_label": "overvalued",
+    "direction_m": "overvalued",
+    "crux": [
+     {
+      "citations": [
+       {
+        "date": "2026-08-17",
+        "quote": "The most significant drivers of variability in the financial outlook are consumer demand and logistics and material cost inflation driven by elevated energy prices.",
+        "source": "PRIMARY P1"
+       },
+       {
+        "date": "2026-08-17",
+        "quote": "Consumer demand for furniture remains pressured by weak confidence, affordability constraints, and macroeconomic uncertainty related to the ongoing conflict in the Middle East.",
+        "source": "PRIMARY P1"
+       }
+      ],
+      "input": "coe",
+      "reason": "My discount rate is 10.04% (the COE ANCHOR); the price implies 8.51%, a 153 bp gap. In a regime with rf at 5.24%, CPI 3.35% and an active oil shock, an 8.51% required return means an equity premium of only ~3.3% on a $361M furniture cyclical whose own release names demand weakness and energy-cost in"
+     },
+     {
+      "citations": [
+       {
+        "date": "2026-08-17",
+        "quote": "For the first quarter of fiscal year 2027, the Company expects sales growth of 1% to 4% compared to the prior year quarter and operating margin of 6.5% to 7%.",
+        "source": "PRIMARY P1"
+       },
+       {
+        "date": "2026-08-17",
+        "quote": "Adjusted operating income of $8.2 million or 7.1% of net sales for the fourth quarter and $34.4 million or 7.5% of net sales for the year compared to $10.3 million or 9.0% of net sales in the prior year quarter and $31.3 million or 7.1% of net sales for the prior year.",
+        "source": "PRIMARY P1"
+       }
+      ],
+      "input": "growth_years_3_5",
+      "reason": "My years 3-5 cash-flow growth averages ~+3.9%/yr; the price implies +11.8%/yr, a ~7.9-point gap. The company's own forward statement is sales +1-4% with margin compression to 6.5-7%, next-FY consensus revenue growth is +4.6%, the 8-year revenue CAGR is 2.64%, and ex-items adjusted operating margin j"
+     }
+    ],
+    "crux_check": {
+     "valid": true,
+     "reason": null,
+     "entries": [
+      {
+       "input": "coe",
+       "own": 0.1004,
+       "implied": 0.08510471412499745,
+       "reachable": true,
+       "at_default": true,
+       "citations": [
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        }
+       ],
+       "valid": true,
+       "reason": null
+      },
+      {
+       "input": "growth_years_3_5",
+       "own": 0.03864567300761523,
+       "implied": 0.11791309901635061,
+       "reachable": true,
+       "at_default": false,
+       "citations": [
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        }
+       ],
+       "valid": true,
+       "reason": null
+      }
+     ],
+     "stamps": [
+      "crux_at_default"
+     ]
+    },
+    "price_implied": {
+     "coe": {
+      "value": 0.08510471412499745,
+      "reachable": true,
+      "own": 0.1004,
+      "bound": {
+       "low": 0.0524,
+       "high": 0.25,
+       "value_low": 187.31788855155995,
+       "value_high": 31.273427673072746
+      },
+      "side": null,
+      "base_at_value": 88.82000016611475,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       0.08510471373240153,
+       0.08510471451759338
+      ],
+      "stamps": []
+     },
+     "growth_years_3_5": {
+      "value": 0.11791309901635061,
+      "reachable": true,
+      "own": 0.03864567300761523,
+      "bound": {
+       "low": -0.9942815209351284,
+       "high": 9.992664685313825,
+       "value_low": 14.431801076901266,
+       "value_high": 482502.26759981486
+      },
+      "side": null,
+      "base_at_value": 88.82000001332997,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       0.0792659353537484,
+       0.0792659360356628
+      ],
+      "stamps": [],
+      "shift": 0.07926593569470561,
+      "shift_bound": [
+       -1.029,
+       9.954
+      ],
+      "own_path": [
+       0.046,
+       0.04,
+       0.03
+      ]
+     },
+     "fade_years": {
+      "value": null,
+      "reachable": false,
+      "own": 4,
+      "bound": {
+       "low": 0,
+       "high": 60,
+       "value_low": 72.37757584494162,
+       "value_high": 72.57816476884221
+      },
+      "side": "above",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "bracket_years": null,
+      "bracket_values": null
+     },
+     "terminal_g": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0264,
+      "bound": {
+       "low": 0.0,
+       "high": 0.044698999999999996,
+       "value_low": 72.16620789585252,
+       "value_high": 72.75596417646685
+      },
+      "side": "above",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "terminal_ronic": {
+      "value": null,
+      "reachable": false,
+      "own": 0.100707,
+      "bound": {
+       "low": 0.1004,
+       "high": "unlimited",
+       "value_low": 72.4554393384565,
+       "value_high": 85.31693220381594
+      },
+      "side": "above",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "year2_level": {
+      "value": null,
+      "reachable": false,
+      "own": 0.024812700000000004,
+      "bound": {
+       "low": null,
+       "high": null,
+       "value_low": null,
+       "value_high": null
+      },
+      "side": null,
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": [],
+      "not_available": "the pack prints no bull2 and bear2 range"
+     }
+    },
+    "momentum_view": "contradicting",
+    "entry_timing": "buy_now",
+    "momentum_flip_condition": {
+     "metric": "high_52w_distance",
+     "comparator": "<",
+     "threshold": -0.15,
+     "window_days": 30
+    },
+    "momentum_break_rule": {
+     "metric": "high_52w_distance",
+     "comparator": "<",
+     "threshold": -0.25,
+     "window_days": 30
+    },
+    "invalidation_rules": [
+     {
+      "metric": "operating_margin_pct",
+      "comparator": "<",
+      "threshold": 6.0,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "revenue_yoy_pct",
+      "comparator": "<=",
+      "threshold": 0.0,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "mom_6m",
+      "comparator": "<",
+      "threshold": 0.0,
+      "window": "rolling 180 days",
+      "source": "scr_10_price_facts"
+     }
+    ],
+    "position_basis": "momentum",
+    "momentum_evidence": "PRIMARY P1 (2026-08-17): record adjusted diluted EPS $4.94, 'eleventh consecutive quarter of year-over-year growth', ~$64M FY26 buybacks, dividend increased 25%; DATA 8 (fetched 2026-10-05): next-FY consensus EPS revised +4.7% in 90 days to $6.05, 1 up / 0 down revisions in last 30 days; 4 consecutive quarterly beats per Zacks coverage 2026-09-28. Caveat: the August spike's marginal driver was a one-time 780bps IEEPA refund and the Q1 FY27 guide is down on margin, so the position is small and trend-disciplined.",
+    "desk_calls": 3,
+    "desk_iv_match": true,
+    "desk_reverse_neutral_cagr": 3.26,
+    "coe_minus_anchor": -0.001654,
+    "desk_share_basis_matched": "vendor",
+    "catalysts": [
+     {
+      "date": "2026-08-17",
+      "event": "Q4/FY26 results: record GAAP EPS $6.07, adj EPS $4.94; Q4 GAAP margin 14.2% incl. one-time 780bps IEEPA tariff refund ($9.0M); ex-items adj margin 7.1% vs 9.0%; $62.6M Q4 buybacks; dividend +25%; Q1 FY27 guide sales +1-4%, GAAP op margin 6.5-7%",
+      "direction": "bull",
+      "estimates_moved": "next-FY consensus EPS now $6.05 (+14.4%), revenue $498M (+4.6%) per DATA 8 (1-2 analysts)",
+      "scenario": "Anchors Base year-1 compression and the trend; refund excluded from all scenario flows; capital returns support momentum basis"
+     },
+     {
+      "date": "2026-02-20",
+      "event": "Supreme Court ruled IEEPA tariffs unlawful; ~$170B industry-wide refund pool opened (ruling detail unverified; the $9.0M refund booked by Flexsteel is confirmed in the P1 reconciliation)",
+      "direction": "bull",
+      "estimates_moved": "no visible change (one-off, not modeled in consensus)",
+      "scenario": "Excluded from Base/Bull/Bear flows as one-time; removes forward tariff cost on imports but adds trade-policy uncertainty"
+     },
+     {
+      "date": "2026-04-20",
+      "event": "Q3 FY26: adj EPS $1.14 vs ~$0.89 consensus (+52% surprise); sales +1.0%; orders -2.4%, backlog $79.5M (orders/backlog unverified)",
+      "direction": "bull",
+      "estimates_moved": "beat supported upward revisions; current-FY consensus EPS $5.29 (+7.1%)",
+      "scenario": "Beat supports Base execution premise; declining orders are the Bear's leading indicator of volume pressure"
+     },
+     {
+      "date": "2026-09-28",
+      "event": "Fresh 52-week high of $90; +126.3% YTD vs furniture industry -15.6%; Zacks cites 4 consecutive positive earnings surprises",
+      "direction": "bull",
+      "estimates_moved": "no visible change",
+      "scenario": "Momentum confirmation only; not a valuation input"
+     },
+     {
+      "date": "2026-10-05",
+      "event": "Lytham Partners Fall 2026 Investor Conference: management targets adjusted operating margin >=8% long term vs 7.5% in FY26, continued share gains, ~$50M FCF, no bank debt (article undated; figures unconfirmed)",
+      "direction": "bull",
+      "estimates_moved": "no visible change (long-term target, not a near-term estimate revision)",
+      "scenario": "Bull case terminal-margin premise; depends on productivity and cost mitigation, not refunds"
+     },
+     {
+      "date": "2026-09-15",
+      "event": "Dividend announced Sept 15, ex-date Sept 30 - first payment after the 25% increase to $0.20/quarter (detail unconfirmed; the 25% increase itself is confirmed in P1)",
+      "direction": "bull",
+      "estimates_moved": "no visible change",
+      "scenario": "Capital-return track record supporting the trend; immaterial to flows"
+     }
+    ],
+    "bull_below_price_reason": "The market-implied path I reject: that the one-time 780-bps Q4 IEEPA tariff refund (PRIMARY P1 reconciliation, filed 2026-08-17) and record GAAP EPS of $6.07 are a sustainable run-rate, and that next-FY consensus EPS of $6.05 (+14.4% on +4.6% revenue growth, DATA 8 fetched 2026-10-05, only 1-2 analy",
+    "bear_above_price_reason": null,
+    "code_fill_mode": "joint"
    },
-   "conviction_score": 11.0,
-   "business_quality_moat": 2.4,
-   "kelly_fraction_pct": 6.0,
-   "asymmetric_payoff_skew": 2.73,
-   "bull_iv": 165.65,
-   "bear_iv": 50.98,
+   "conviction_score": 8.0,
+   "business_quality_moat": 2.3,
+   "kelly_fraction_pct": 0.0,
+   "asymmetric_payoff_skew": -0.04,
+   "bull_iv": 86.86,
+   "bear_iv": 42.05,
    "reentry_tranches": {
-    "tranche_1_starter": 79.0,
-    "tranche_2_core": 60.0
+    "tranche_1_starter": 88.82,
+    "tranche_2_core": 42.05
    },
    "thesis_invalidation_triggers": [
-    "GAAP operating margin below 5.0% for two consecutive fiscal quarters, or full-year net sales declining more than 10% YoY, or a dividend cut / cessation of share repurchases",
-    "Adjusted operating margin below 5.0% for two consecutive fiscal quarters AND open-market share repurchases suspended or net share issuance reported (buyback program terminated), OR any single quarter with revenue decline greater than 10% YoY \u2014 indicating the margin/buyback engine has broken rather than cycled."
+    "Two consecutive reported quarters with GAAP operating margin below 6.5% (under the low end of the company's own Q1 FY27 guide, PRIMARY P1 2026-08-17) and revenue YoY growth at or below 0%, ending the 11-quarter growth streak"
    ],
-   "converged": true,
-   "early_stop": true,
-   "mode": "adaptive",
-   "direction": "undervalued",
-   "size_hint": "full",
-   "mos_vs_median_pct": 32.7,
-   "consensus_dir": "FLXS_20260919_113334",
+   "converged": false,
+   "early_stop": false,
+   "mode": "fixed_1",
+   "coe_used": 0.1004,
+   "coe_source": "anchor",
+   "coe_adjustment_reason": null,
+   "valuation_frame": "equity",
+   "terminal_method": "gordon",
+   "terminal_multiple_or_g": 0.0264,
+   "fade_years": 4,
+   "stage1_growth_path": [
+    0.03,
+    0.1,
+    0.046,
+    0.04,
+    0.03
+   ],
+   "guidance_deviation_reason": "DEFAULTS cash-flow levels are not available (reference_status not_available), so there is no consensus level to hold; my years 1-2 follow the company's own Q1 FY27 guide \u2014 sales +1-4%, GAAP operating margin 6.5-7% vs 7.5% adjusted in FY26, on Middle East conflict cost inflation (PRIMARY P1, filed 20",
+   "cycle_evidence": "PRIMARY P1 (2026-08-17): 'Consumer demand for furniture remains pressured by weak confidence, affordability constraints, and macroeconomic uncertainty related to the ongoing conflict in the Middle East'; Q3 FY26 orders -2.4% and backlog $79.5M (+1.5% YoY, -3.5% QoQ) per catalyst brief 2026-04-21 (unverified); Zacks furniture industry -15.6% YTD as of 2026-09-28 (news). Mid-cycle treatment: ex-refund adjusted operating margin fell 9.0% to 7.1% in FY26 and the company's own Q1 FY27 guide embeds further compression to 6.5-7% GAAP.",
+   "verdict_label": "overvalued",
+   "desk_calls": 3,
+   "desk_iv_match": true,
+   "desk_reverse_neutral_cagr": 3.26,
+   "coe_minus_anchor": -0.001654,
+   "desk_share_basis_matched": "vendor",
+   "years12_ratio": 0.925,
+   "base_to_civ": null,
+   "consensus_implied_value": null,
+   "bull_years12_ratio": null,
+   "bear_years12_ratio": null,
+   "base_shares_ratio": 0.915,
+   "bull_shares_ratio": 0.915,
+   "bear_shares_ratio": 0.915,
+   "desk_frame": "equity",
+   "desk_net_debt": null,
+   "shares_basis": "vendor",
+   "shares_reason": "SBC is deducted from cash flow (sbc_treatment=deducted_in_cf), so the basic outstanding count of 4,091,741 (DATA 2, vendor quote as of 2026-10-02) is used instead of the desk's diluted default of 4,472,368 to avoid double-counting the economic cost of equity grants.",
+   "net_debt_reason": null,
+   "excess_cash_reason": null,
+   "scenario_deviation_reason": null,
+   "bull_bear_anchor": "no consensus range (1 analysts)",
+   "terminal_multiple_reason": null,
+   "interest_addback": null,
+   "wacc_reason": null,
+   "owner_earnings_source": null,
+   "consensus_reference_status": "not_available",
+   "terminal_g_gap_bp": 0,
+   "terminal_reason": null,
+   "base_window_gap": null,
+   "finite_life_years": null,
+   "cash_flow_life": "perpetual",
+   "cash_flow_life_reason": "Perpetual: Flexsteel is a residential furniture manufacturer with no depleting reserves, licence or concession; replacement capex of $3.94M (~0.9% of sales) in FY2026 (PRIMARY P1, filed 2026-08-17) is already deducted from the base, so nothing is consumed that capex does not replace.",
+   "terminal_ronic": 0.100707,
+   "terminal_ronic_gap_pts": null,
+   "long_run_facts": {
+    "cycle": true,
+    "cycle_year": 2019,
+    "cycle_years": [
+     2019
+    ],
+    "e5": null,
+    "oe5": null,
+    "m5": null,
+    "m_tc": 0.031522,
+    "m_years": [
+     2019,
+     2026,
+     8
+    ],
+    "r_tc": 0.10101399999999999,
+    "r_years": [
+     2019,
+     2026,
+     8
+    ],
+    "p": 0.5,
+    "g_rev": 0.026446,
+    "g_rev_years": [
+     2019,
+     2026,
+     8
+    ],
+    "terminal_g_basis": "revenue_trend",
+    "ni_over_oe": null,
+    "x_over_oe": null,
+    "nwc_intensity": 0.21854800000000002,
+    "nwc_years": [
+     2019,
+     2026,
+     8
+    ],
+    "stub_months": 3.1869,
+    "stamps": [],
+    "om_tc": 0.034079,
+    "om_trend": 0.09082599999999999,
+    "om_L": 0.092666,
+    "om_years": [
+     2019,
+     2026,
+     8
+    ],
+    "om_shape": "swing",
+    "om_basis": "with_amortization",
+    "om_5": null,
+    "m_long": null,
+    "margin_ratio": null
+   },
+   "working_capital_deducted": null,
+   "base_year_capped": null,
+   "years12_held_by_desk": false,
+   "desk_stamps": [
+    "long_run_on_owner_earnings"
+   ],
+   "momentum_view": "contradicting",
+   "entry_timing": "buy_now",
+   "momentum_flip_condition": {
+    "metric": "high_52w_distance",
+    "comparator": "<",
+    "threshold": -0.15,
+    "window_days": 30
+   },
+   "momentum_break_rule": {
+    "metric": "high_52w_distance",
+    "comparator": "<",
+    "threshold": -0.25,
+    "window_days": 30
+   },
+   "invalidation_rules": [
+    {
+     "metric": "operating_margin_pct",
+     "comparator": "<",
+     "threshold": 6.0,
+     "window": "next reported quarter",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "revenue_yoy_pct",
+     "comparator": "<=",
+     "threshold": 0.0,
+     "window": "next reported quarter",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": 0.0,
+     "window": "rolling 180 days",
+     "source": "scr_10_price_facts"
+    }
+   ],
+   "position_basis": "momentum",
+   "position_basis_declared": "momentum",
+   "position_basis_votes": {
+    "momentum": 1
+   },
+   "momentum_evidence": "PRIMARY P1 (2026-08-17): record adjusted diluted EPS $4.94, 'eleventh consecutive quarter of year-over-year growth', ~$64M FY26 buybacks, dividend increased 25%; DATA 8 (fetched 2026-10-05): next-FY consensus EPS revised +4.7% in 90 days to $6.05, 1 up / 0 down revisions in last 30 days; 4 consecutive quarterly beats per Zacks coverage 2026-09-28. Caveat: the August spike's marginal driver was a one-time 780bps IEEPA refund and the Q1 FY27 guide is down on margin, so the position is small and trend-disciplined.",
+   "momentum_state": {
+    "price_asof": "2026-10-02 18:02",
+    "mom_12_1": 1.5157,
+    "mom_6m": 0.6169,
+    "mom_1m": 0.0493,
+    "high_52w_distance": 0.0,
+    "high_52w_basis": "monthly proxy (unlabelled by the source)",
+    "above_below_200d_mean": null,
+    "rs_vs_cluster_etf_3m": null,
+    "rs_vs_iwm_3m": null,
+    "realised_vol_60d": null,
+    "regime_shift_up": true,
+    "regime_shift_down": false,
+    "mom_break": null,
+    "mom_z_sector": 3.0,
+    "mom_z_universe": 2.463
+   },
+   "active_shocks_at_verdict": [
+    {
+     "active": true,
+     "age_days": 3,
+     "direction": "up",
+     "intensity": 1.0318335302945385,
+     "measure": "63-trading-day log change, %, signed",
+     "onset_date": "2026-09-28",
+     "peak_date": "2026-09-28",
+     "peak_intensity": 1.0799710858764024,
+     "proxy": false,
+     "reason": null,
+     "series_id": "DCOILWTICO",
+     "severity": 1,
+     "shock_id": "oil_shock",
+     "stale_input": false,
+     "state": "active",
+     "thresholds": {
+      "down": {
+       "severity_1": {
+        "episodes": 10,
+        "percentile": 4.5,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -30.0
+       },
+       "severity_2": {
+        "episodes": 6,
+        "percentile": 2.7,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -40.0
+       }
+      },
+      "up": {
+       "severity_1": {
+        "episodes": 11,
+        "percentile": 94.4,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 30.0
+       },
+       "severity_2": {
+        "episodes": 5,
+        "percentile": 97.9,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 40.0
+       }
+      }
+     },
+     "value": 30.955005908836153,
+     "value_date": "2026-09-29",
+     "values_revised": false
+    }
+   ],
+   "pack_facts_source": "build",
+   "base_cf_reason": null,
+   "catalysts": [
+    {
+     "date": "2026-08-17",
+     "event": "Q4/FY26 results: record GAAP EPS $6.07, adj EPS $4.94; Q4 GAAP margin 14.2% incl. one-time 780bps IEEPA tariff refund ($9.0M); ex-items adj margin 7.1% vs 9.0%; $62.6M Q4 buybacks; dividend +25%; Q1 FY27 guide sales +1-4%, GAAP op margin 6.5-7%",
+     "direction": "bull",
+     "estimates_moved": "next-FY consensus EPS now $6.05 (+14.4%), revenue $498M (+4.6%) per DATA 8 (1-2 analysts)",
+     "scenario": "Anchors Base year-1 compression and the trend; refund excluded from all scenario flows; capital returns support momentum basis"
+    },
+    {
+     "date": "2026-02-20",
+     "event": "Supreme Court ruled IEEPA tariffs unlawful; ~$170B industry-wide refund pool opened (ruling detail unverified; the $9.0M refund booked by Flexsteel is confirmed in the P1 reconciliation)",
+     "direction": "bull",
+     "estimates_moved": "no visible change (one-off, not modeled in consensus)",
+     "scenario": "Excluded from Base/Bull/Bear flows as one-time; removes forward tariff cost on imports but adds trade-policy uncertainty"
+    },
+    {
+     "date": "2026-04-20",
+     "event": "Q3 FY26: adj EPS $1.14 vs ~$0.89 consensus (+52% surprise); sales +1.0%; orders -2.4%, backlog $79.5M (orders/backlog unverified)",
+     "direction": "bull",
+     "estimates_moved": "beat supported upward revisions; current-FY consensus EPS $5.29 (+7.1%)",
+     "scenario": "Beat supports Base execution premise; declining orders are the Bear's leading indicator of volume pressure"
+    },
+    {
+     "date": "2026-09-28",
+     "event": "Fresh 52-week high of $90; +126.3% YTD vs furniture industry -15.6%; Zacks cites 4 consecutive positive earnings surprises",
+     "direction": "bull",
+     "estimates_moved": "no visible change",
+     "scenario": "Momentum confirmation only; not a valuation input"
+    },
+    {
+     "date": "2026-10-05",
+     "event": "Lytham Partners Fall 2026 Investor Conference: management targets adjusted operating margin >=8% long term vs 7.5% in FY26, continued share gains, ~$50M FCF, no bank debt (article undated; figures unconfirmed)",
+     "direction": "bull",
+     "estimates_moved": "no visible change (long-term target, not a near-term estimate revision)",
+     "scenario": "Bull case terminal-margin premise; depends on productivity and cost mitigation, not refunds"
+    },
+    {
+     "date": "2026-09-15",
+     "event": "Dividend announced Sept 15, ex-date Sept 30 - first payment after the 25% increase to $0.20/quarter (detail unconfirmed; the 25% increase itself is confirmed in P1)",
+     "direction": "bull",
+     "estimates_moved": "no visible change",
+     "scenario": "Capital-return track record supporting the trend; immaterial to flows"
+    }
+   ],
+   "bull_below_price_reason": "The market-implied path I reject: that the one-time 780-bps Q4 IEEPA tariff refund (PRIMARY P1 reconciliation, filed 2026-08-17) and record GAAP EPS of $6.07 are a sustainable run-rate, and that next-FY consensus EPS of $6.05 (+14.4% on +4.6% revenue growth, DATA 8 fetched 2026-10-05, only 1-2 analy",
+   "bear_above_price_reason": null,
+   "code_fill_mode": "joint",
+   "consensus_data_status": "ok",
+   "input_scope_stamps": [],
+   "direction_m": "overvalued",
+   "crux_valid": true,
+   "crux_by_sample": [
+    {
+     "sample": 1,
+     "valid": true,
+     "reason": null,
+     "inputs": [
+      "coe",
+      "growth_years_3_5"
+     ],
+     "at_default": false
+    }
+   ],
+   "crux": [
+    {
+     "input": "coe",
+     "own": 0.1004,
+     "implied": 0.08510471412499745,
+     "at_default": true,
+     "reason": "My discount rate is 10.04% (the COE ANCHOR); the price implies 8.51%, a 153 bp gap. In a regime with rf at 5.24%, CPI 3.35% and an active oil shock, an 8.51% required return means an equity premium of only ~3.3% on a $361M furniture cyclical whose own release names demand weakness and energy-cost in"
+    },
+    {
+     "input": "growth_years_3_5",
+     "own": 0.03864567300761523,
+     "implied": 0.11791309901635061,
+     "at_default": false,
+     "reason": "My years 3-5 cash-flow growth averages ~+3.9%/yr; the price implies +11.8%/yr, a ~7.9-point gap. The company's own forward statement is sales +1-4% with margin compression to 6.5-7%, next-FY consensus revenue growth is +4.6%, the 8-year revenue CAGR is 2.64%, and ex-items adjusted operating margin j"
+    }
+   ],
+   "price_implied": {
+    "coe": {
+     "value": 0.08510471412499745,
+     "reachable": true,
+     "own": 0.1004,
+     "bound": {
+      "low": 0.0524,
+      "high": 0.25,
+      "value_low": 187.31788855155995,
+      "value_high": 31.273427673072746
+     },
+     "side": null,
+     "base_at_value": 88.82000016611475,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      0.08510471373240153,
+      0.08510471451759338
+     ],
+     "stamps": []
+    },
+    "growth_years_3_5": {
+     "value": 0.11791309901635061,
+     "reachable": true,
+     "own": 0.03864567300761523,
+     "bound": {
+      "low": -0.9942815209351284,
+      "high": 9.992664685313825,
+      "value_low": 14.431801076901266,
+      "value_high": 482502.26759981486
+     },
+     "side": null,
+     "base_at_value": 88.82000001332997,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      0.0792659353537484,
+      0.0792659360356628
+     ],
+     "stamps": [],
+     "shift": 0.07926593569470561,
+     "shift_bound": [
+      -1.029,
+      9.954
+     ],
+     "own_path": [
+      0.046,
+      0.04,
+      0.03
+     ]
+    },
+    "fade_years": {
+     "value": null,
+     "reachable": false,
+     "own": 4,
+     "bound": {
+      "low": 0,
+      "high": 60,
+      "value_low": 72.37757584494162,
+      "value_high": 72.57816476884221
+     },
+     "side": "above",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "bracket_years": null,
+     "bracket_values": null
+    },
+    "terminal_g": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0264,
+     "bound": {
+      "low": 0.0,
+      "high": 0.044698999999999996,
+      "value_low": 72.16620789585252,
+      "value_high": 72.75596417646685
+     },
+     "side": "above",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "terminal_ronic": {
+     "value": null,
+     "reachable": false,
+     "own": 0.100707,
+     "bound": {
+      "low": 0.1004,
+      "high": "unlimited",
+      "value_low": 72.4554393384565,
+      "value_high": 85.31693220381594
+     },
+     "side": "above",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "year2_level": {
+     "value": null,
+     "reachable": false,
+     "own": 0.024812700000000004,
+     "bound": {
+      "low": null,
+      "high": null,
+      "value_low": null,
+      "value_high": null
+     },
+     "side": null,
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": [],
+     "not_available": "the pack prints no bull2 and bear2 range"
+    }
+   },
+   "serving": {
+    "provider": "ollama",
+    "model": "rs2-analyst-deep-mtp5-v33",
+    "manifest_sha256": "f0f5ce2dcea334804e13492b2813e74d3294025f5d3b1692524de597fa33ab3e",
+    "system_layer_digest": "sha256:ff033c2519528445a1f2e56a797746524d64bff7d65e5a31612be35d6cbdfc22"
+   },
+   "position_basis_source_sample": 1,
+   "momentum_eligibility": {
+    "eligible": true,
+    "checks": [
+     {
+      "check": "mom_z_universe",
+      "value": 2.463,
+      "threshold": 0.5,
+      "result": "pass"
+     },
+     {
+      "check": "mom_6m",
+      "value": 0.6169,
+      "threshold": 0.0,
+      "result": "pass"
+     },
+     {
+      "check": "high_52w_distance",
+      "value": 0.0,
+      "threshold": -0.15,
+      "result": "pass"
+     },
+     {
+      "check": "regime_shift_down",
+      "value": false,
+      "threshold": false,
+      "result": "pass"
+     },
+     {
+      "check": "revenue_ttm_yoy",
+      "value": 0.04104762703679432,
+      "threshold": 0.0,
+      "result": "pass"
+     },
+     {
+      "check": "base_iv_to_price",
+      "value": 0.8162575996397209,
+      "threshold": 0.5,
+      "result": "pass"
+     }
+    ],
+    "first_failure": null,
+    "momentum_asof": "2026-10-02 18:02"
+   },
+   "size_components": {
+    "dispersion": {
+     "bucket": "full",
+     "spread_pct": 0.0,
+     "source": "SIZE_BUCKETS"
+    },
+    "mos": {
+     "bucket": "quarter",
+     "mos_vs_base_pct": -18.4,
+     "source": "mos_vs_base_pct",
+     "replaced_by_basis": true
+    },
+    "basis": {
+     "bucket": "quarter",
+     "position_basis": "momentum",
+     "source": "PHASE_4_AMENDMENTS E5b"
+    },
+    "conviction": {
+     "bucket": "half",
+     "conviction_score": 8.0,
+     "source": "scorecard.median_conviction_score"
+    },
+    "risk": {
+     "bucket": "full",
+     "elevated_volatility_ahead": false,
+     "source": "mri_outputs_dir/shock_register.json:risk_flags"
+    }
+   },
+   "reason": "single plausible sample \u2014 direction weak, size capped; mode instability: base IV moved -34.3% since the prior verdict ($110.30 -> $72.50) \u2014 within-run spread cannot see this, so convergence here is not stability",
+   "instability": {
+    "prior_iv": 110.3,
+    "current_iv": 72.5,
+    "delta_pct": -34.3,
+    "unstable": true
+   },
+   "direction": "overvalued",
+   "size_hint": "quarter",
+   "mos_vs_median_pct": -18.4,
+   "mos_vs_base_pct": -18.4,
+   "fiduciary_amendments": [],
+   "fiduciary_violations": [],
+   "fiduciary_verdict": "PASS",
+   "consensus_dir": "FLXS_20261005_170004",
+   "run_source": "orchestrator",
+   "arm": "local",
+   "pack_source": "fresh",
+   "screener_data_commit": "2fff2b325ca962b96617b8c9d6be30a52ceac196",
+   "research_brief_asof": "2026-10-05T16:49:31.484821",
+   "research_brief_age_days": 0.06,
+   "price_asof": "2026-10-02",
+   "price_source": "yfinance",
+   "price_asof_basis": null,
+   "gate_version": 8,
+   "pipeline_commit": "68f3935",
+   "street_fence": {
+    "low": 35.91,
+    "high": 145.45,
+    "n_targets": 2.0,
+    "asof": "2026-10-05",
+    "age_days": 0.1,
+    "source": "enrich",
+    "winsorized": []
+   },
+   "producer_class": {
+    "status": "ok",
+    "depleting": false,
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances",
+    "source": "stocks.csv@2fff2b325ca962b96617b8c9d6be30a52ceac196"
+   },
    "actionable": false,
    "actionable_reasons": [
-    "pre_v3.1_gates",
-    "no_street_fence"
+    "single_sample",
+    "mode_instability"
    ],
-   "gate_version": null,
    "status": "ok",
    "thesis_status": null,
    "thesis_checks": null,
@@ -12181,6 +13999,956 @@
    "actionable": false,
    "actionable_reasons": [
     "single_sample"
+   ],
+   "status": "ok",
+   "thesis_status": null,
+   "thesis_checks": null,
+   "entry_timing_now": null,
+   "thesis_asof": null,
+   "momentum_exit": null,
+   "momentum_exit_reason": null
+  },
+  "FORM": {
+   "ticker": "FORM",
+   "price": 149.15,
+   "date": "2026-10-05",
+   "model": "rs2-analyst-deep-mtp5-v33",
+   "samples_run": 1,
+   "n_basis": 1,
+   "iv_band_low": 28.96,
+   "iv_band_high": 28.96,
+   "median_iv": 28.96,
+   "spread_pct": null,
+   "flags": [],
+   "pack_revision": 21,
+   "scheme": "band_direction_v1",
+   "m": null,
+   "scorecard": {
+    "median_iv": 28.96,
+    "base_iv": 28.96,
+    "median_bull_iv": 36.78,
+    "median_bear_iv": 13.87,
+    "iv_band_low": 28.96,
+    "iv_band_high": 28.96,
+    "spread_pct": null,
+    "converged": false,
+    "medoid_sample": 1,
+    "n_basis": 1,
+    "median_conviction_score": 11.0,
+    "median_quality_moat": 2.9,
+    "median_kelly_fraction_pct": 0.0,
+    "asymmetric_payoff_skew": -0.83,
+    "reentry_tranches": {
+     "tranche_1_starter": 28.96,
+     "tranche_2_core": 13.87
+    },
+    "thesis_invalidation_triggers": [
+     "FY2027 non-GAAP EPS consensus revised above $4.50 (vs $3.79 as of 2026-10-05), or two consecutive quarters of revenue growth above +35% YoY with non-GAAP gross margin above 55% - evidence the company is compounding far faster than its own long-term model ($1.6B revenue / 55% GM / >$5 EPS by 2030, reiterated 2026-07-30) and the price-implied ~+100%/yr growth path is achievable"
+    ],
+    "base_probability": 0.5,
+    "bull_probability": 0.25,
+    "bear_probability": 0.25,
+    "probabilities_defaulted": false,
+    "base_cf_used": 0.103,
+    "base_cf_basis": "owner_earnings_default",
+    "coe_used": 0.1046,
+    "coe_source": "anchor",
+    "coe_adjustment_reason": null,
+    "valuation_frame": "equity",
+    "terminal_method": "gordon",
+    "terminal_multiple_or_g": 0.0375,
+    "fade_years": 5,
+    "stage1_growth_path": [
+     -0.03,
+     0.65,
+     0.24,
+     0.22,
+     0.18
+    ],
+    "years12_ratio": 0.739,
+    "base_to_civ": 0.942,
+    "consensus_implied_value": 30.73,
+    "bull_years12_ratio": 0.759,
+    "bear_years12_ratio": 0.441,
+    "base_shares_ratio": null,
+    "bull_shares_ratio": null,
+    "bear_shares_ratio": null,
+    "desk_frame": "equity",
+    "desk_net_debt": null,
+    "shares_basis": "vendor",
+    "shares_reason": null,
+    "net_debt_reason": null,
+    "excess_cash_reason": null,
+    "scenario_deviation_reason": "Bear year 2 ($88.9M vs DEFAULTS bear2 $183M): AI/HBM capex digestion - FY2027 revenue at the consensus low of $1.049B (DATA 8, 11 analysts, fetched 2026-10-05), non-GAAP gross margin compressing from the Q2 FY2026 record 53.3% (PRIMARY P1, filed 2026-07-29) toward the FY2025 GAAP level of ~39% (PRIM",
+    "bull_bear_anchor": "consensus high/low",
+    "terminal_multiple_reason": null,
+    "interest_addback": null,
+    "wacc_reason": null,
+    "owner_earnings_source": "ttm_filed",
+    "consensus_reference_status": "used",
+    "terminal_g_gap_bp": 0,
+    "terminal_reason": null,
+    "base_window_gap": null,
+    "finite_life_years": null,
+    "cash_flow_life": "perpetual",
+    "cash_flow_life_reason": "Perpetual: FormFactor's probe-card and test-systems business carries no finite reserves, licence or concession term; productive capacity is replaced out of the capex already deducted in the base (FY2025 capex $104M per filed 10-K series; FY2026 cash capex guided at $140-170M on the Q2 FY2026 earning",
+    "terminal_ronic": 0.25717300000000004,
+    "terminal_ronic_gap_pts": null,
+    "long_run_facts": {
+     "cycle": false,
+     "cycle_year": null,
+     "cycle_years": [],
+     "e5": 0.399221,
+     "oe5": 0.310772,
+     "m5": 0.23860099999999998,
+     "m_tc": 0.116356,
+     "m_years": [
+      2018,
+      2025,
+      8
+     ],
+     "r_tc": 0.25717300000000004,
+     "r_years": [
+      2018,
+      2025,
+      8
+     ],
+     "p": 1.0,
+     "g_rev": 0.046338,
+     "g_rev_years": [
+      2018,
+      2025,
+      8
+     ],
+     "terminal_g_basis": "revenue_trend",
+     "ni_over_oe": 1.034601,
+     "x_over_oe": 1.05407,
+     "nwc_intensity": 0.16226,
+     "nwc_years": [
+      2018,
+      2025,
+      8
+     ],
+     "stub_months": 9.2649,
+     "stamps": [],
+     "om_tc": 0.12741,
+     "om_trend": 0.079483,
+     "om_L": 0.075839,
+     "om_years": [
+      2018,
+      2025,
+      8
+     ],
+     "om_shape": "swing",
+     "om_basis": "with_amortization",
+     "om_5": 0.295385,
+     "m_long": 0.06316,
+     "margin_ratio": 0.26471
+    },
+    "working_capital_deducted": [
+     0.0393,
+     0.0285,
+     0.0281,
+     0.026,
+     0.0222
+    ],
+    "base_year_capped": null,
+    "split_after_last_filing": null,
+    "years12_held_by_desk": false,
+    "desk_stamps": [
+     "working_capital_deducted"
+    ],
+    "guidance_deviation_reason": "Base year-1 level $99.9M (-3%) and year-2 level $164.8M (+65%) depart from DEFAULTS ($0.166B/$0.223B) because the reference is built on consensus non-GAAP EPS with an unstated capex assumption, while my declared SBC treatment (deducted_in_cf) values GAAP-based owner earnings = NI + D&A - actual cape",
+    "cycle_evidence": "Q2 FY2026 non-GAAP gross margin 53.3% vs 38.5% a year earlier (PRIMARY P1, filed 2026-07-29); HBM4 demand ramp with 'sustained demand in DDR' per the Q2 transcript (2026-07-30); FY2026 cash capex stepped up to $140-170M for Farmers Branch capacity vs $104M in FY2025 (call 2026-07-30; filed FY2025 capex, DATA 5) - a cyclical upswing with the capacity response already underway; AI memory 'tight supply' per Micron record results (news feed, 2026-10-01)",
+    "verdict_label": "overvalued",
+    "direction_m": "overvalued",
+    "crux": [
+     {
+      "citations": [
+       {
+        "date": "2026-07-29",
+        "quote": "For the third quarter ending September 26, 2026, FormFactor is providing the following outlook*:",
+        "source": "PRIMARY P1"
+       },
+       {
+        "date": "2026-07-29",
+        "quote": "Revenue | $270 million +/- $10 million | \u2014 | $270 million +/- $10 million",
+        "source": "PRIMARY P1"
+       },
+       {
+        "date": "2026-07-30",
+        "quote": "That model calls for revenue of $1.6 billion, non-GAAP gross margin of 55% and non-GAAP earnings per share above $5 by 2030.",
+        "source": "https://www.tipranks.com/news/company-announcements/formfactor-q2-earnings-call-highlights-growth-momentum"
+       },
+       {
+        "date": "2026-07-29",
+        "quote": "Over the past four quarters, FormFactor has grown revenue more than 30%, expanded Non-GAAP gross margin 1,500 basis points, and tripled earnings per share",
+        "source": "PRIMARY P1"
+       }
+      ],
+      "input": "growth_years_3_5",
+      "reason": "The price implies +101.3%/yr cash-flow growth in Base years 3-5 under my structure (neutral reference: +29.1% 10-year CAGR). My evidence caps the path at ~+21%/yr average: Q3 FY2026 is guided to $270M +/- $10M revenue at $0.86 +/- $0.09 non-GAAP EPS (filed 2026-07-29), and the company's own long-ter"
+     }
+    ],
+    "crux_check": {
+     "valid": true,
+     "reason": null,
+     "entries": [
+      {
+       "input": "growth_years_3_5",
+       "own": 0.21307552654291606,
+       "implied": 1.013459902841118,
+       "reachable": true,
+       "at_default": false,
+       "citations": [
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        },
+        {
+         "source": "https://www.tipranks.com/news/company-announcements/formfactor-q2-earnings-call-highlights-growth-momentum",
+         "class": "fetched_page_naming_company",
+         "quote_found": true
+        },
+        {
+         "source": "PRIMARY P1",
+         "class": "pack_company",
+         "quote_found": true
+        }
+       ],
+       "valid": true,
+       "reason": null
+      }
+     ],
+     "stamps": []
+    },
+    "price_implied": {
+     "coe": {
+      "value": null,
+      "reachable": false,
+      "own": 0.1046,
+      "bound": {
+       "low": 0.0524,
+       "high": 0.25,
+       "value_low": 97.29993647317656,
+       "value_high": 13.482961343514944
+      },
+      "side": "above",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "growth_years_3_5": {
+      "value": 1.013459902841118,
+      "reachable": true,
+      "own": 0.21307552654291606,
+      "bound": {
+       "low": -0.9864261025465095,
+       "high": 9.973304965296355,
+       "value_low": 5.812777615676765,
+       "value_high": 1596546.8141524831
+      },
+      "side": null,
+      "base_at_value": 149.15000004618588,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       0.8002815717101717,
+       0.8002815723893542
+      ],
+      "stamps": [],
+      "shift": 0.8002815723893542,
+      "shift_bound": [
+       -1.179,
+       9.76
+      ],
+      "own_path": [
+       0.24,
+       0.22,
+       0.18
+      ]
+     },
+     "fade_years": {
+      "value": 56.33979559015514,
+      "reachable": true,
+      "own": 5,
+      "bound": {
+       "low": 0,
+       "high": 60,
+       "value_low": 54.4830436913597,
+       "value_high": 164.10844179301856
+      },
+      "side": null,
+      "base_at_value": 149.15,
+      "roots_on_grid": 1,
+      "discontinuities": 0,
+      "bracket": [
+       56,
+       57
+      ],
+      "stamps": [],
+      "bracket_years": [
+       56,
+       57
+      ],
+      "bracket_values": [
+       147.81039026375313,
+       151.7527890913402
+      ]
+     },
+     "terminal_g": {
+      "value": null,
+      "reachable": false,
+      "own": 0.0375,
+      "bound": {
+       "low": 0.0,
+       "high": 0.044698999999999996,
+       "value_low": 25.85121025712462,
+       "value_high": 30.039610907364235
+      },
+      "side": "above",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "terminal_ronic": {
+      "value": null,
+      "reachable": false,
+      "own": 0.25717300000000004,
+      "bound": {
+       "low": 0.1046,
+       "high": "unlimited",
+       "value_low": 25.215474477510952,
+       "value_high": 30.903387124217915
+      },
+      "side": "above",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     },
+     "year2_level": {
+      "value": null,
+      "reachable": false,
+      "own": 0.16485149999999996,
+      "bound": {
+       "low": 0.183,
+       "high": 0.258,
+       "value_low": 31.35712683388394,
+       "value_high": 41.2732934938559
+      },
+      "side": "above",
+      "base_at_value": null,
+      "roots_on_grid": 0,
+      "discontinuities": 0,
+      "bracket": null,
+      "stamps": []
+     }
+    },
+    "momentum_view": "contradicting",
+    "entry_timing": "avoid",
+    "momentum_flip_condition": {
+     "metric": "high_52w_distance",
+     "comparator": "<",
+     "threshold": -60.0,
+     "window_days": 365
+    },
+    "momentum_break_rule": {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": 0.0,
+     "window_days": 180
+    },
+    "invalidation_rules": [
+     {
+      "metric": "revenue_yoy_pct",
+      "comparator": "<=",
+      "threshold": 0.0,
+      "window": "next reported quarter",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "gross_margin_pct",
+      "comparator": "<=",
+      "threshold": 45.0,
+      "window": "next reported quarter (non-GAAP GM vs Q2 FY2026 record 53.3%)",
+      "source": "fundamentals_quarterly.json"
+     },
+     {
+      "metric": "mom_6m",
+      "comparator": "<",
+      "threshold": 0.0,
+      "window": "180 days",
+      "source": "SCR-10 price feed (DATA 2.5)"
+     }
+    ],
+    "position_basis": "none",
+    "momentum_evidence": null,
+    "desk_calls": 4,
+    "desk_iv_match": true,
+    "desk_reverse_neutral_cagr": 29.07,
+    "coe_minus_anchor": -0.003544,
+    "desk_share_basis_matched": null,
+    "catalysts": [
+     {
+      "date": "2026-07-29",
+      "event": "Record Q2 FY2026: revenue $258.2M (+31.9% YoY), non-GAAP GM 53.3%, non-GAAP EPS $0.82; Q3 guided to record $270M +/- $10M at $0.86 +/- $0.09 non-GAAP EPS; long-term model reiterated ($1.6B revenue / 55% GM / >$5 EPS by 2030); FY2026 cash capex guided $140-170M for Farmers Branch capacity (call, 2026-07-30)",
+      "direction": "bull",
+      "estimates_moved": "next-FY consensus EPS +35.8% in 90 days ($2.79 to $3.79); 7 up / 0 down in last 30 days (DATA 8, fetched 2026-10-05)",
+      "scenario": "anchors Base year-1/2 levels; the Q3 guide is the floor of the Base path; the capex step-up explains why Base year-1 FCF sits below TTM owner earnings"
+     },
+     {
+      "date": "2026-09-30",
+      "event": "Deutsche Bank initiates coverage at Buy with $200 target, claiming FORM is second source for Nvidia GPU probe cards at TSMC (~20% share, >$0.2B sales by 2028); stock closed +10% at $149.31",
+      "direction": "bull",
+      "estimates_moved": "no visible consensus re-rating yet (pre-initiation 11-analyst average target $127.45, below the price; DB's $200 is the high of the range)",
+      "scenario": "enters Bull case only - the claim appears in no company filing [Unconfirmed]; Base and Bear exclude it"
+     },
+     {
+      "date": "2026-09-30",
+      "event": "CEO sold shares (insider transaction) amid SEMICON West demand buzz; size and plan type not disclosed [Unconfirmed]",
+      "direction": "bear",
+      "estimates_moved": "no visible change",
+      "scenario": "positioning-risk signal carried in Bear; no numeric impact"
+     },
+     {
+      "date": "2026-10-06",
+      "event": "Management participation in the 18th Annual CEO Investor Summit - near-term visibility on customer concentration (two customers >10% of revenue), the long-term model, and potentially the Nvidia relationship",
+      "direction": "bull",
+      "estimates_moved": "no visible change yet (upcoming event)",
+      "scenario": "two-way event risk; company confirmation of the Nvidia claim would upgrade it from [Unconfirmed] to [Actual] and force a Bull probability reweight"
+     },
+     {
+      "date": "2026-10-01",
+      "event": "Micron reported record results with strong guidance driven by AI memory demand and tight supply (news feed)",
+      "direction": "bull",
+      "estimates_moved": "sector-wide support for HBM probe-card demand; no FORM-specific revision visible",
+      "scenario": "supports the Base/Bull DRAM-HBM path; also the cycle-peak watch item that would trigger the Bear digestion scenario if it reverses"
+     }
+    ],
+    "bull_below_price_reason": "The price of $149.15 implies cash-flow growth of roughly +87%/yr in years 3-5 under the desk's neutral structure (and +101%/yr under my lower year-1/2 base), i.e. owner earnings approximately doubling every year through FY2030. No dated company evidence supports that: the company's own long-term mod",
+    "bear_above_price_reason": null,
+    "code_fill_mode": "joint"
+   },
+   "conviction_score": 11.0,
+   "business_quality_moat": 2.9,
+   "kelly_fraction_pct": 0.0,
+   "asymmetric_payoff_skew": -0.83,
+   "bull_iv": 36.78,
+   "bear_iv": 13.87,
+   "reentry_tranches": {
+    "tranche_1_starter": 28.96,
+    "tranche_2_core": 13.87
+   },
+   "thesis_invalidation_triggers": [
+    "FY2027 non-GAAP EPS consensus revised above $4.50 (vs $3.79 as of 2026-10-05), or two consecutive quarters of revenue growth above +35% YoY with non-GAAP gross margin above 55% - evidence the company is compounding far faster than its own long-term model ($1.6B revenue / 55% GM / >$5 EPS by 2030, reiterated 2026-07-30) and the price-implied ~+100%/yr growth path is achievable"
+   ],
+   "converged": false,
+   "early_stop": false,
+   "mode": "fixed_1",
+   "coe_used": 0.1046,
+   "coe_source": "anchor",
+   "coe_adjustment_reason": null,
+   "valuation_frame": "equity",
+   "terminal_method": "gordon",
+   "terminal_multiple_or_g": 0.0375,
+   "fade_years": 5,
+   "stage1_growth_path": [
+    -0.03,
+    0.65,
+    0.24,
+    0.22,
+    0.18
+   ],
+   "guidance_deviation_reason": "Base year-1 level $99.9M (-3%) and year-2 level $164.8M (+65%) depart from DEFAULTS ($0.166B/$0.223B) because the reference is built on consensus non-GAAP EPS with an unstated capex assumption, while my declared SBC treatment (deducted_in_cf) values GAAP-based owner earnings = NI + D&A - actual cape",
+   "cycle_evidence": "Q2 FY2026 non-GAAP gross margin 53.3% vs 38.5% a year earlier (PRIMARY P1, filed 2026-07-29); HBM4 demand ramp with 'sustained demand in DDR' per the Q2 transcript (2026-07-30); FY2026 cash capex stepped up to $140-170M for Farmers Branch capacity vs $104M in FY2025 (call 2026-07-30; filed FY2025 capex, DATA 5) - a cyclical upswing with the capacity response already underway; AI memory 'tight supply' per Micron record results (news feed, 2026-10-01)",
+   "verdict_label": "overvalued",
+   "desk_calls": 4,
+   "desk_iv_match": true,
+   "desk_reverse_neutral_cagr": 29.07,
+   "coe_minus_anchor": -0.003544,
+   "desk_share_basis_matched": null,
+   "years12_ratio": 0.739,
+   "base_to_civ": 0.942,
+   "consensus_implied_value": 30.73,
+   "bull_years12_ratio": 0.759,
+   "bear_years12_ratio": 0.441,
+   "base_shares_ratio": null,
+   "bull_shares_ratio": null,
+   "bear_shares_ratio": null,
+   "desk_frame": "equity",
+   "desk_net_debt": null,
+   "shares_basis": "vendor",
+   "shares_reason": null,
+   "net_debt_reason": null,
+   "excess_cash_reason": null,
+   "scenario_deviation_reason": "Bear year 2 ($88.9M vs DEFAULTS bear2 $183M): AI/HBM capex digestion - FY2027 revenue at the consensus low of $1.049B (DATA 8, 11 analysts, fetched 2026-10-05), non-GAAP gross margin compressing from the Q2 FY2026 record 53.3% (PRIMARY P1, filed 2026-07-29) toward the FY2025 GAAP level of ~39% (PRIM",
+   "bull_bear_anchor": "consensus high/low",
+   "terminal_multiple_reason": null,
+   "interest_addback": null,
+   "wacc_reason": null,
+   "owner_earnings_source": "ttm_filed",
+   "consensus_reference_status": "used",
+   "terminal_g_gap_bp": 0,
+   "terminal_reason": null,
+   "base_window_gap": null,
+   "finite_life_years": null,
+   "cash_flow_life": "perpetual",
+   "cash_flow_life_reason": "Perpetual: FormFactor's probe-card and test-systems business carries no finite reserves, licence or concession term; productive capacity is replaced out of the capex already deducted in the base (FY2025 capex $104M per filed 10-K series; FY2026 cash capex guided at $140-170M on the Q2 FY2026 earning",
+   "terminal_ronic": 0.25717300000000004,
+   "terminal_ronic_gap_pts": null,
+   "long_run_facts": {
+    "cycle": false,
+    "cycle_year": null,
+    "cycle_years": [],
+    "e5": 0.399221,
+    "oe5": 0.310772,
+    "m5": 0.23860099999999998,
+    "m_tc": 0.116356,
+    "m_years": [
+     2018,
+     2025,
+     8
+    ],
+    "r_tc": 0.25717300000000004,
+    "r_years": [
+     2018,
+     2025,
+     8
+    ],
+    "p": 1.0,
+    "g_rev": 0.046338,
+    "g_rev_years": [
+     2018,
+     2025,
+     8
+    ],
+    "terminal_g_basis": "revenue_trend",
+    "ni_over_oe": 1.034601,
+    "x_over_oe": 1.05407,
+    "nwc_intensity": 0.16226,
+    "nwc_years": [
+     2018,
+     2025,
+     8
+    ],
+    "stub_months": 9.2649,
+    "stamps": [],
+    "om_tc": 0.12741,
+    "om_trend": 0.079483,
+    "om_L": 0.075839,
+    "om_years": [
+     2018,
+     2025,
+     8
+    ],
+    "om_shape": "swing",
+    "om_basis": "with_amortization",
+    "om_5": 0.295385,
+    "m_long": 0.06316,
+    "margin_ratio": 0.26471
+   },
+   "working_capital_deducted": [
+    0.0393,
+    0.0285,
+    0.0281,
+    0.026,
+    0.0222
+   ],
+   "base_year_capped": null,
+   "years12_held_by_desk": false,
+   "desk_stamps": [
+    "working_capital_deducted"
+   ],
+   "momentum_view": "contradicting",
+   "entry_timing": "avoid",
+   "momentum_flip_condition": {
+    "metric": "high_52w_distance",
+    "comparator": "<",
+    "threshold": -60.0,
+    "window_days": 365
+   },
+   "momentum_break_rule": {
+    "metric": "mom_6m",
+    "comparator": "<",
+    "threshold": 0.0,
+    "window_days": 180
+   },
+   "invalidation_rules": [
+    {
+     "metric": "revenue_yoy_pct",
+     "comparator": "<=",
+     "threshold": 0.0,
+     "window": "next reported quarter",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "gross_margin_pct",
+     "comparator": "<=",
+     "threshold": 45.0,
+     "window": "next reported quarter (non-GAAP GM vs Q2 FY2026 record 53.3%)",
+     "source": "fundamentals_quarterly.json"
+    },
+    {
+     "metric": "mom_6m",
+     "comparator": "<",
+     "threshold": 0.0,
+     "window": "180 days",
+     "source": "SCR-10 price feed (DATA 2.5)"
+    }
+   ],
+   "position_basis": "none",
+   "position_basis_declared": "none",
+   "position_basis_votes": {
+    "none": 1
+   },
+   "momentum_evidence": null,
+   "momentum_state": {
+    "price_asof": "2026-10-02 17:47",
+    "mom_12_1": 1.7172,
+    "mom_6m": 0.0973,
+    "mom_1m": -0.0011,
+    "high_52w_distance": -0.0674,
+    "high_52w_basis": "monthly proxy (unlabelled by the source)",
+    "above_below_200d_mean": null,
+    "rs_vs_cluster_etf_3m": null,
+    "rs_vs_iwm_3m": null,
+    "realised_vol_60d": null,
+    "regime_shift_up": true,
+    "regime_shift_down": false,
+    "mom_break": null,
+    "mom_z_sector": 2.149,
+    "mom_z_universe": 1.879
+   },
+   "active_shocks_at_verdict": [
+    {
+     "active": true,
+     "age_days": 3,
+     "direction": "up",
+     "intensity": 1.0318335302945385,
+     "measure": "63-trading-day log change, %, signed",
+     "onset_date": "2026-09-28",
+     "peak_date": "2026-09-28",
+     "peak_intensity": 1.0799710858764024,
+     "proxy": false,
+     "reason": null,
+     "series_id": "DCOILWTICO",
+     "severity": 1,
+     "shock_id": "oil_shock",
+     "stale_input": false,
+     "state": "active",
+     "thresholds": {
+      "down": {
+       "severity_1": {
+        "episodes": 10,
+        "percentile": 4.5,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -30.0
+       },
+       "severity_2": {
+        "episodes": 6,
+        "percentile": 2.7,
+        "sample_window": "1986-01..2026-09",
+        "threshold": -40.0
+       }
+      },
+      "up": {
+       "severity_1": {
+        "episodes": 11,
+        "percentile": 94.4,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 30.0
+       },
+       "severity_2": {
+        "episodes": 5,
+        "percentile": 97.9,
+        "sample_window": "1986-01..2026-09",
+        "threshold": 40.0
+       }
+      }
+     },
+     "value": 30.955005908836153,
+     "value_date": "2026-09-29",
+     "values_revised": false
+    }
+   ],
+   "pack_facts_source": "build",
+   "base_cf_reason": null,
+   "catalysts": [
+    {
+     "date": "2026-07-29",
+     "event": "Record Q2 FY2026: revenue $258.2M (+31.9% YoY), non-GAAP GM 53.3%, non-GAAP EPS $0.82; Q3 guided to record $270M +/- $10M at $0.86 +/- $0.09 non-GAAP EPS; long-term model reiterated ($1.6B revenue / 55% GM / >$5 EPS by 2030); FY2026 cash capex guided $140-170M for Farmers Branch capacity (call, 2026-07-30)",
+     "direction": "bull",
+     "estimates_moved": "next-FY consensus EPS +35.8% in 90 days ($2.79 to $3.79); 7 up / 0 down in last 30 days (DATA 8, fetched 2026-10-05)",
+     "scenario": "anchors Base year-1/2 levels; the Q3 guide is the floor of the Base path; the capex step-up explains why Base year-1 FCF sits below TTM owner earnings"
+    },
+    {
+     "date": "2026-09-30",
+     "event": "Deutsche Bank initiates coverage at Buy with $200 target, claiming FORM is second source for Nvidia GPU probe cards at TSMC (~20% share, >$0.2B sales by 2028); stock closed +10% at $149.31",
+     "direction": "bull",
+     "estimates_moved": "no visible consensus re-rating yet (pre-initiation 11-analyst average target $127.45, below the price; DB's $200 is the high of the range)",
+     "scenario": "enters Bull case only - the claim appears in no company filing [Unconfirmed]; Base and Bear exclude it"
+    },
+    {
+     "date": "2026-09-30",
+     "event": "CEO sold shares (insider transaction) amid SEMICON West demand buzz; size and plan type not disclosed [Unconfirmed]",
+     "direction": "bear",
+     "estimates_moved": "no visible change",
+     "scenario": "positioning-risk signal carried in Bear; no numeric impact"
+    },
+    {
+     "date": "2026-10-06",
+     "event": "Management participation in the 18th Annual CEO Investor Summit - near-term visibility on customer concentration (two customers >10% of revenue), the long-term model, and potentially the Nvidia relationship",
+     "direction": "bull",
+     "estimates_moved": "no visible change yet (upcoming event)",
+     "scenario": "two-way event risk; company confirmation of the Nvidia claim would upgrade it from [Unconfirmed] to [Actual] and force a Bull probability reweight"
+    },
+    {
+     "date": "2026-10-01",
+     "event": "Micron reported record results with strong guidance driven by AI memory demand and tight supply (news feed)",
+     "direction": "bull",
+     "estimates_moved": "sector-wide support for HBM probe-card demand; no FORM-specific revision visible",
+     "scenario": "supports the Base/Bull DRAM-HBM path; also the cycle-peak watch item that would trigger the Bear digestion scenario if it reverses"
+    }
+   ],
+   "bull_below_price_reason": "The price of $149.15 implies cash-flow growth of roughly +87%/yr in years 3-5 under the desk's neutral structure (and +101%/yr under my lower year-1/2 base), i.e. owner earnings approximately doubling every year through FY2030. No dated company evidence supports that: the company's own long-term mod",
+   "bear_above_price_reason": null,
+   "code_fill_mode": "joint",
+   "consensus_data_status": "ok",
+   "input_scope_stamps": [
+    "customer_money_excluded"
+   ],
+   "direction_m": "overvalued",
+   "crux_valid": true,
+   "crux_by_sample": [
+    {
+     "sample": 1,
+     "valid": true,
+     "reason": null,
+     "inputs": [
+      "growth_years_3_5"
+     ],
+     "at_default": false
+    }
+   ],
+   "crux": [
+    {
+     "input": "growth_years_3_5",
+     "own": 0.21307552654291606,
+     "implied": 1.013459902841118,
+     "at_default": false,
+     "reason": "The price implies +101.3%/yr cash-flow growth in Base years 3-5 under my structure (neutral reference: +29.1% 10-year CAGR). My evidence caps the path at ~+21%/yr average: Q3 FY2026 is guided to $270M +/- $10M revenue at $0.86 +/- $0.09 non-GAAP EPS (filed 2026-07-29), and the company's own long-ter"
+    }
+   ],
+   "price_implied": {
+    "coe": {
+     "value": null,
+     "reachable": false,
+     "own": 0.1046,
+     "bound": {
+      "low": 0.0524,
+      "high": 0.25,
+      "value_low": 97.29993647317656,
+      "value_high": 13.482961343514944
+     },
+     "side": "above",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "growth_years_3_5": {
+     "value": 1.013459902841118,
+     "reachable": true,
+     "own": 0.21307552654291606,
+     "bound": {
+      "low": -0.9864261025465095,
+      "high": 9.973304965296355,
+      "value_low": 5.812777615676765,
+      "value_high": 1596546.8141524831
+     },
+     "side": null,
+     "base_at_value": 149.15000004618588,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      0.8002815717101717,
+      0.8002815723893542
+     ],
+     "stamps": [],
+     "shift": 0.8002815723893542,
+     "shift_bound": [
+      -1.179,
+      9.76
+     ],
+     "own_path": [
+      0.24,
+      0.22,
+      0.18
+     ]
+    },
+    "fade_years": {
+     "value": 56.33979559015514,
+     "reachable": true,
+     "own": 5,
+     "bound": {
+      "low": 0,
+      "high": 60,
+      "value_low": 54.4830436913597,
+      "value_high": 164.10844179301856
+     },
+     "side": null,
+     "base_at_value": 149.15,
+     "roots_on_grid": 1,
+     "discontinuities": 0,
+     "bracket": [
+      56,
+      57
+     ],
+     "stamps": [],
+     "bracket_years": [
+      56,
+      57
+     ],
+     "bracket_values": [
+      147.81039026375313,
+      151.7527890913402
+     ]
+    },
+    "terminal_g": {
+     "value": null,
+     "reachable": false,
+     "own": 0.0375,
+     "bound": {
+      "low": 0.0,
+      "high": 0.044698999999999996,
+      "value_low": 25.85121025712462,
+      "value_high": 30.039610907364235
+     },
+     "side": "above",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "terminal_ronic": {
+     "value": null,
+     "reachable": false,
+     "own": 0.25717300000000004,
+     "bound": {
+      "low": 0.1046,
+      "high": "unlimited",
+      "value_low": 25.215474477510952,
+      "value_high": 30.903387124217915
+     },
+     "side": "above",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    },
+    "year2_level": {
+     "value": null,
+     "reachable": false,
+     "own": 0.16485149999999996,
+     "bound": {
+      "low": 0.183,
+      "high": 0.258,
+      "value_low": 31.35712683388394,
+      "value_high": 41.2732934938559
+     },
+     "side": "above",
+     "base_at_value": null,
+     "roots_on_grid": 0,
+     "discontinuities": 0,
+     "bracket": null,
+     "stamps": []
+    }
+   },
+   "serving": {
+    "provider": "ollama",
+    "model": "rs2-analyst-deep-mtp5-v33",
+    "manifest_sha256": "f0f5ce2dcea334804e13492b2813e74d3294025f5d3b1692524de597fa33ab3e",
+    "system_layer_digest": "sha256:ff033c2519528445a1f2e56a797746524d64bff7d65e5a31612be35d6cbdfc22"
+   },
+   "position_basis_source_sample": 1,
+   "size_components": {
+    "dispersion": {
+     "bucket": "full",
+     "spread_pct": 0.0,
+     "source": "SIZE_BUCKETS"
+    },
+    "mos": {
+     "bucket": "quarter",
+     "mos_vs_base_pct": -80.6,
+     "source": "mos_vs_base_pct"
+    },
+    "conviction": {
+     "bucket": "full",
+     "conviction_score": 11.0,
+     "source": "scorecard.median_conviction_score"
+    },
+    "risk": {
+     "bucket": "full",
+     "elevated_volatility_ahead": false,
+     "source": "mri_outputs_dir/shock_register.json:risk_flags"
+    }
+   },
+   "reason": "single plausible sample \u2014 direction weak, size capped",
+   "instability": null,
+   "direction": "overvalued",
+   "size_hint": "quarter",
+   "mos_vs_median_pct": -80.6,
+   "mos_vs_base_pct": -80.6,
+   "fiduciary_amendments": [],
+   "fiduciary_violations": [],
+   "fiduciary_verdict": "PASS",
+   "consensus_dir": "FORM_20261005_183245",
+   "run_source": "orchestrator",
+   "arm": "local",
+   "pack_source": "fresh",
+   "screener_data_commit": "d4b2f528caaa36fbe12ff3f08c0a0f009ffd2e90",
+   "research_brief_asof": "2026-10-05T18:19:16.763873",
+   "research_brief_age_days": 0.06,
+   "price_asof": "2026-10-02",
+   "price_source": "yfinance",
+   "price_asof_basis": null,
+   "gate_version": 8,
+   "pipeline_commit": "68f3935",
+   "street_fence": {
+    "low": 29.09,
+    "high": 363.64,
+    "n_targets": 9.0,
+    "asof": "2026-10-05",
+    "age_days": 0.1,
+    "source": "enrich",
+    "winsorized": []
+   },
+   "producer_class": {
+    "status": "ok",
+    "depleting": false,
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials",
+    "source": "stocks.csv@d4b2f528caaa36fbe12ff3f08c0a0f009ffd2e90"
+   },
+   "actionable": false,
+   "actionable_reasons": [
+    "single_sample",
+    "outside_street_fence"
    ],
    "status": "ok",
    "thesis_status": null,
