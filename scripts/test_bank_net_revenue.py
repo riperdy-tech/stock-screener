@@ -3,7 +3,10 @@ InterestIncomeExpenseNet (NII) + NoninterestIncome, in the annual history, the T
 snapshot, and a listed revenue tag is refused for it. Synthetic companyfacts only; no network, no repo files.
 
 What is pinned:
-  * bank_net_revenue_filer: both components with the SAME annual period end, else not a filer;
+  * bank_net_revenue_filer: both components AND one of the lender's income-statement tags
+    (InterestAndDividendIncomeOperating, InterestIncomeOperating, InterestExpenseDeposits), all with the
+    SAME annual period end, else not a filer (an operating company that tags its non-operating interest and
+    other income with the two components keeps its listed revenue);
   * annual history: the sum comes from the CHOSEN accession; the series value stands in when that accession
     lacks the component for the period (and only on the row's own period); a clean power-of-1000 accession
     value is refused; a listed tag is refused for a filer in EVERY year (no mixing) and kept for any other
@@ -28,6 +31,7 @@ bfh = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(bfh)
 
 NII, NONII = "InterestIncomeExpenseNet", "NoninterestIncome"
+STMT = "InterestAndDividendIncomeOperating"
 YEARS = range(2015, 2023)
 
 
@@ -53,7 +57,7 @@ def _doc(us):
     return {"facts": {"us-gaap": us, "ifrs-full": {}}}
 
 
-def _us(nii_years=YEARS, nonii_years=YEARS, listed=True, assets_years=YEARS):
+def _us(nii_years=YEARS, nonii_years=YEARS, listed=True, assets_years=YEARS, stmt_years=YEARS):
     us = {"Assets": _inst({y: 9_000_000 + y for y in assets_years})}
     if listed:
         us["RevenueFromContractWithCustomerExcludingAssessedTax"] = _flow({y: 10_000 + y for y in YEARS})
@@ -61,6 +65,8 @@ def _us(nii_years=YEARS, nonii_years=YEARS, listed=True, assets_years=YEARS):
         us[NII] = _flow({y: 100_000 + 1_000 * (y - 2015) for y in nii_years})
     if nonii_years:
         us[NONII] = _flow({y: 40_000 + 100 * (y - 2015) for y in nonii_years})
+    if stmt_years:
+        us[STMT] = _flow({y: 300_000 + y for y in stmt_years})       # (c): a lender's income statement
     return us
 
 
@@ -88,6 +94,32 @@ def test_filer_needs_both_components_with_the_same_annual_period_end():
     assert bfh.bank_net_revenue_filer(_us(nii_years=(2016, 2018), nonii_years=(2017, 2019))) is False
     one_common = _us(nii_years=(2016, 2018), nonii_years=(2017, 2018))
     assert bfh.bank_net_revenue_filer(one_common) is True
+
+
+def test_operating_company_with_the_components_but_no_statement_tag_is_not_a_filer():
+    us = _us(stmt_years=())                      # ZOOZ / LGL / ILLR / LEXX: (a)+(b) only
+    assert bfh.bank_net_revenue_filer(us) is False
+    out = _out(us, "OPCO")
+    assert _col(out) == {y: 10_000 + y for y in YEARS}                  # the listed revenue, every year
+    assert set(out["prov"]["states"]["revenue"].values()) == {"primary"}
+    assert out["ttm"] is None and out["qtr"] is None
+    # the lender's other statement tags qualify on their own
+    for tag in ("InterestIncomeOperating", "InterestExpenseDeposits"):
+        other = _us(stmt_years=())
+        other[tag] = _flow({y: 5 for y in YEARS})
+        assert bfh.bank_net_revenue_filer(other) is True
+    # InterestAndFeeIncomeLoansAndLeases is NOT a statement tag (ILLR, software, files it)
+    soft = _us(stmt_years=())
+    soft["InterestAndFeeIncomeLoansAndLeases"] = _flow({y: 5 for y in YEARS})
+    assert bfh.bank_net_revenue_filer(soft) is False
+
+
+def test_statement_tag_on_a_different_period_end_does_not_qualify():
+    assert bfh.bank_net_revenue_filer(_us(stmt_years=(2014,))) is False
+    assert bfh.bank_net_revenue_filer(_us(nii_years=(2018,), nonii_years=(2018,), stmt_years=(2019, 2020))) is False
+    assert bfh.bank_net_revenue_filer(_us(nii_years=(2018,), nonii_years=(2018,), stmt_years=(2019, 2018))) is True
+    out = _out(_us(stmt_years=(2014,)))
+    assert _col(out) == {y: 10_000 + y for y in YEARS}
 
 
 def test_filer_ignores_non_annual_facts():
@@ -259,7 +291,8 @@ def _ttm_facts(nii_end="2023-03-31", nonii_end="2023-03-31", nonii_pri="2022-03-
     return {"NetIncomeLoss": _ttm_tag(1000, 300, 200),
             "Revenues": _ttm_tag(9_000, 2_000, 1_900),
             NII: _ttm_tag(400, 110, 100, nii_end),
-            NONII: _ttm_tag(150, 40, 30, nonii_end, nonii_pri)}
+            NONII: _ttm_tag(150, 40, 30, nonii_end, nonii_pri),
+            STMT: {"units": {"USD": [_d(2022, 1)]}}}
 
 
 def test_ttm_revenue_is_the_net_combine_never_a_listed_tag():
@@ -286,7 +319,8 @@ def _q_tag(vals):
 def test_quarterly_revenue_is_the_net_combine_per_quarter():
     facts = {"Revenues": _q_tag({q: 9_000 for q in Q}),
              NII: _q_tag({q: 100 + i for i, q in enumerate(Q)}),
-             NONII: _q_tag({q: 40 + i for i, q in enumerate(Q)})}
+             NONII: _q_tag({q: 40 + i for i, q in enumerate(Q)}),
+             STMT: {"units": {"USD": [_d(2022, 1)]}}}
     snap = bfh.quarterly_snapshot(facts)
     assert [r["revenue"] for r in snap["quarters"]] == [140 + 2 * i for i in range(4)]
     plain = bfh.quarterly_snapshot({"Revenues": facts["Revenues"]})
@@ -296,7 +330,8 @@ def test_quarterly_revenue_is_the_net_combine_per_quarter():
 def test_quarterly_filer_with_no_common_quarter_loses_the_snapshot():
     facts = {"Revenues": _q_tag({q: 9_000 for q in Q}),
              NII: _q_tag({q: 100 for q in Q[:2]}),
-             NONII: _q_tag({q: 40 for q in Q[2:]})}
+             NONII: _q_tag({q: 40 for q in Q[2:]}),
+             STMT: {"units": {"USD": [_d(2022, 1)]}}}
     assert bfh.bank_net_revenue_filer(facts)
     assert bfh.quarterly_snapshot(facts) is None
 

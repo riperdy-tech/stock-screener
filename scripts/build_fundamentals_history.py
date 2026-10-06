@@ -341,8 +341,18 @@ FIELD_SPECS = {
  # GROSS (InterestAndDividendIncomeOperating + noninterest income) in 90, NEITHER in 782: no listed tag
  # carries one meaning across banks. And 215 financials with revenue null in their latest year file both
  # components for it.
- # THE RULE. A filer is a BANK P&L FILER (bank_net_revenue_filer) when some annual period has both
- # components filed with the same period end. For such a filer revenue is, by definition, NET revenue:
+ # THE RULE. A filer is a BANK P&L FILER (bank_net_revenue_filer) when some annual period end has all
+ # three of: (a) InterestIncomeExpenseNet, (b) NoninterestIncome, and (c) at least one of
+ # InterestAndDividendIncomeOperating, InterestIncomeOperating, InterestExpenseDeposits. (a)+(b) alone
+ # are not a bank: ZOOZ, LGL, ILLR and LEXX, operating companies (EV charging, instruments, software,
+ # biotech), tag their NON-operating interest and other income with them, and net-revenue-by-definition
+ # would replace their real revenue with it (ZOOZ FY2025 247,000 -> -4,807,000). (c) is the income
+ # statement of a lender: it excludes all four and keeps the 323 Financial Services / mortgage-REIT
+ # qualifiers plus LC and CASS (bank holding companies); it drops AGNC (null anyway), AROW, ACRE and SACH,
+ # which fall back to the listed tag exactly as before (a missed lender keeping today's value is
+ # acceptable; a wrong number on an operating company is not). The test comes from the filings, never from
+ # the vendor sector. InterestAndFeeIncomeLoansAndLeases was considered and REJECTED as (c): ILLR
+ # (software) files it. For a qualifying filer revenue is, by definition, NET revenue:
  # InterestIncomeExpenseNet + NoninterestIncome (the "total net revenue" of a bank income statement), in
  # the annual history (extract_history), the TTM (ttm_snapshot) and the quarterly snapshot
  # (quarterly_snapshot) alike; a listed tag is REFUSED for it in every year and every output, never mixed
@@ -784,6 +794,10 @@ def resolve_capex_by_closure(facts, skip_years, lines_out=None):
 BANK_NII_TAG = "InterestIncomeExpenseNet"
 BANK_NONII_TAG = "NoninterestIncome"
 BANK_REVENUE_TAG = BANK_NII_TAG + "+" + BANK_NONII_TAG
+# (c) of the filer test: a lender's own income statement. InterestAndFeeIncomeLoansAndLeases is not on
+# this list: ILLR (software) files it.
+BANK_STATEMENT_TAGS = ("InterestAndDividendIncomeOperating", "InterestIncomeOperating",
+                       "InterestExpenseDeposits")
 
 
 def _annual_period_ends(facts, tag):
@@ -805,9 +819,20 @@ def _annual_period_ends(facts, tag):
 
 
 def bank_net_revenue_filer(facts):
-    """True when some annual period has BOTH InterestIncomeExpenseNet and NoninterestIncome filed with
-    the same period end (annual form, 300-400 days, USD)."""
-    return bool(_annual_period_ends(facts, BANK_NII_TAG) & _annual_period_ends(facts, BANK_NONII_TAG))
+    """True when some annual period end (annual form, 300-400 days, USD, the same rule for every tag) has
+    all three of: InterestIncomeExpenseNet, NoninterestIncome, and at least one of
+    InterestAndDividendIncomeOperating, InterestIncomeOperating, InterestExpenseDeposits (a lender's own
+    income statement). The first two alone are filed by operating companies for their NON-operating
+    interest and other income (ZOOZ, LGL, ILLR, LEXX), whose revenue must stay the listed one;
+    InterestAndFeeIncomeLoansAndLeases is not a test (ILLR, software, files it). The test comes from the
+    filings, never from the vendor sector."""
+    ends = _annual_period_ends(facts, BANK_NII_TAG) & _annual_period_ends(facts, BANK_NONII_TAG)
+    if not ends:
+        return False
+    statement = set()
+    for tag in BANK_STATEMENT_TAGS:
+        statement |= _annual_period_ends(facts, tag)
+    return bool(ends & statement)
 
 
 def _bank_component_value(y, series_c, raws_c, chosen, near):
