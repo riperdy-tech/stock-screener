@@ -99,6 +99,46 @@ export type TickerCheck =
     | { kind: 'vetoed'; code: string; detail: string | null }
     | { kind: 'scored'; band: string | null; rank: number | null };
 
+/** One universe-search hit: the symbol, its company name (null when the price file has none) and the screen's verdict on it. */
+export interface UniverseHit { symbol: string; name: string | null; check: TickerCheck }
+
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+
+/**
+ * Finds names in the screened universe by ticker OR company name (the funnel's first two steps list
+ * "every US stock", so "nvidia" must find NVDA). Order: exact ticker, ticker prefix, name starts with,
+ * name contains; at most `limit` hits. A name is matched against the price file's company name, so a
+ * ticker with no price row is still found by its symbol only. Pure; reads the factor header and names.
+ */
+export function searchUniverse(
+    factor: FactorScoresPayload | null,
+    names: Record<string, { name?: string | null }> | null,
+    query: string,
+    limit = 6,
+): UniverseHit[] {
+    const raw = query.trim();
+    if (!raw || !factor) return [];
+    const sym = raw.toUpperCase();
+    const q = norm(raw);
+    const rank = (symbol: string, name: string | null): number => {
+        if (symbol === sym) return 0;
+        if (symbol.startsWith(sym)) return 1;
+        const n = name ? norm(name) : '';
+        if (q && n.startsWith(q)) return 2;
+        if (q && (` ${n}`).includes(` ${q}`)) return 3;   // a word of the name starts with the query
+        if (q.length >= 3 && n.includes(q)) return 4;
+        return -1;
+    };
+    const hits: { r: number; symbol: string; name: string | null }[] = [];
+    for (const symbol of Object.keys(factor.tickers)) {
+        const name = names?.[symbol]?.name ?? null;
+        const r = rank(symbol, name);
+        if (r >= 0) hits.push({ r, symbol, name });
+    }
+    hits.sort((a, b) => a.r - b.r || a.symbol.localeCompare(b.symbol));
+    return hits.slice(0, limit).map((h) => ({ symbol: h.symbol, name: h.name, check: checkTicker(factor, h.symbol)! }));
+}
+
 export function checkTicker(factor: FactorScoresPayload | null, ticker: string): TickerCheck | null {
     const key = ticker.trim().toUpperCase();
     if (!key || !factor) return null;

@@ -11,9 +11,10 @@ import { useLanguage } from '@/components/LanguageContext';
 import type { FactorScoresPayload } from '@/lib/data-service';
 import type { DeskPhase } from '@/lib/desk/phase';
 import type { DeskRow } from '@/lib/desk/rankings';
+import type { StockInfo } from '@/lib/desk/useDeskData';
 import { countDoors, doorOf, DOOR_COLOR, DOOR_LABEL_KEY, DOORS, type Door } from '@/lib/desk/doors';
 import {
-    checkTicker, gateReasonCounts, listRows, queueRows, step4DropOff, vetoGroups,
+    gateReasonCounts, searchUniverse, type UniverseHit, listRows, queueRows, step4DropOff, vetoGroups,
     type FunnelCounts,
 } from '@/lib/desk/funnel';
 import type { FunnelStep } from '@/lib/desk/filters';
@@ -143,19 +144,27 @@ function summaryOf(t: T, step: FunnelStep, c: FunnelCounts, doors: Record<Door, 
 
 // ── Detail pieces ───────────────────────────────────────────────────────────
 
-function TickerSearch({ factor }: { factor: FactorScoresPayload | null }) {
-    const { t } = useLanguage();
-    const [q, setQ] = useState('');
-    const res = checkTicker(factor, q);
-    let line: string | null = null;
-    if (res?.kind === 'unknown') line = fill(t('srchUnknown'), { t: q.trim().toUpperCase() });
-    else if (res?.kind === 'vetoed') {
-        const k = vetoKey(res.code);
-        line = fill(t('dsVetoed'), { reason: `${k ? t(k) : vetoFallback(res.code)}${res.detail ? ` (${res.detail})` : ''}` });
-    } else if (res?.kind === 'scored') {
-        const band = res.band === 'research_now' ? t('bandResearchNow') : res.band === 'watchlist' ? t('bandWatchlist') : t('srchNoDoor');
-        line = fill(t('srchScored'), { band: res.rank != null ? `${band} #${res.rank}` : band });
+function hitLine(t: (k: never) => string, c: UniverseHit['check']): string {
+    const tt = t as unknown as (k: string) => string;
+    if (c.kind === 'vetoed') {
+        const k = vetoKey(c.code);
+        return fill(tt('dsVetoed'), { reason: `${k ? tt(k) : vetoFallback(c.code)}${c.detail ? ` (${c.detail})` : ''}` });
     }
+    if (c.kind === 'scored') {
+        const band = c.band === 'research_now' ? tt('bandResearchNow') : c.band === 'watchlist' ? tt('bandWatchlist') : tt('srchNoDoor');
+        // The rank only means something inside the list (queue position); for a name that cleared no door it is just a score order.
+        const onList = c.band === 'research_now' || c.band === 'watchlist';
+        return fill(tt('srchScored'), { band: onList && c.rank != null ? `${band} #${c.rank}` : band });
+    }
+    return '';
+}
+
+function TickerSearch({ factor, stockInfo }: { factor: FactorScoresPayload | null; stockInfo: Record<string, StockInfo> | null }) {
+    const { t } = useLanguage();
+    const stockLink = useStockHref();
+    const [q, setQ] = useState('');
+    const hits = useMemo(() => searchUniverse(factor, stockInfo, q), [factor, stockInfo, q]);
+    const asked = q.trim().length > 0 && factor != null;
     return (
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
             <input
@@ -165,7 +174,16 @@ function TickerSearch({ factor }: { factor: FactorScoresPayload | null }) {
                 aria-label={t('srchPlaceholder')}
                 className="w-full max-w-[240px] border border-rule-24 bg-surface px-2.5 py-1.5 font-mono text-[12px] text-ink placeholder:text-off sm:w-60"
             />
-            <span role="status" className="font-mono text-[12px] text-ink-2">{line}</span>
+            <div role="status" className="w-full space-y-1 font-mono text-[12px] text-ink-2">
+                {asked && hits.length === 0 && <p>{fill(t('srchUnknown'), { t: q.trim() })}</p>}
+                {hits.map((h) => (
+                    <p key={h.symbol} className="flex flex-wrap items-baseline gap-x-3">
+                        <Link href={stockLink(h.symbol)} className="font-semibold text-accent hover:text-ink">{h.symbol}</Link>
+                        {h.name && <span className="text-ink">{h.name}</span>}
+                        <span>{hitLine(t as unknown as (k: never) => string, h.check)}</span>
+                    </p>
+                ))}
+            </div>
         </div>
     );
 }
@@ -182,18 +200,18 @@ function BarRow({ label, count, max, color }: { label: string; count: number; ma
     );
 }
 
-function Step1({ c, factor }: { c: FunnelCounts; factor: FactorScoresPayload | null }) {
+function Step1({ c, factor, stockInfo }: { c: FunnelCounts; factor: FactorScoresPayload | null; stockInfo: Record<string, StockInfo> | null }) {
     const { t } = useLanguage();
     return (
         <>
             <p className="font-mono text-[12px] text-ink-2">{fill(t('d1Total'), { n: num(c.universe) })}</p>
             <p className="mt-2 font-mono text-[12px] text-ink-2">{t('d1Refresh')}</p>
-            <TickerSearch factor={factor} />
+            <TickerSearch factor={factor} stockInfo={stockInfo} />
         </>
     );
 }
 
-function Step2({ c, factor }: { c: FunnelCounts; factor: FactorScoresPayload | null }) {
+function Step2({ c, factor, stockInfo }: { c: FunnelCounts; factor: FactorScoresPayload | null; stockInfo: Record<string, StockInfo> | null }) {
     const { t } = useLanguage();
     const groups = vetoGroups(factor);
     const max = groups.reduce((m, g) => Math.max(m, g.count), 0);
@@ -208,7 +226,7 @@ function Step2({ c, factor }: { c: FunnelCounts; factor: FactorScoresPayload | n
                 })}
             </div>
             <p className="mt-3 font-mono text-[12px] text-ink-2">{fill(t('d2Total'), { n: num(groups.length ? total : c.vetoed) })}</p>
-            <TickerSearch factor={factor} />
+            <TickerSearch factor={factor} stockInfo={stockInfo} />
         </>
     );
 }
@@ -373,9 +391,10 @@ function Step5({ rows }: { rows: DeskRow[] }) {
 
 // ── The selected step's panel ───────────────────────────────────────────────
 
-export function FunnelPanel({ rows, factor, counts, step, how, onToggle }: {
+export function FunnelPanel({ rows, factor, stockInfo, counts, step, how, onToggle }: {
     rows: DeskRow[];
     factor: FactorScoresPayload | null;
+    stockInfo: Record<string, StockInfo> | null;
     counts: FunnelCounts;
     step: FunnelStep;
     how: boolean;
@@ -404,8 +423,8 @@ export function FunnelPanel({ rows, factor, counts, step, how, onToggle }: {
             </div>
             {how && (
                 <div id="funnel-detail" className="border border-t-0 border-rule-10 px-4 py-3.5">
-                    {step === 1 && <Step1 c={counts} factor={factor} />}
-                    {step === 2 && <Step2 c={counts} factor={factor} />}
+                    {step === 1 && <Step1 c={counts} factor={factor} stockInfo={stockInfo} />}
+                    {step === 2 && <Step2 c={counts} factor={factor} stockInfo={stockInfo} />}
                     {step === 3 && <Step3 c={counts} rows={rows} />}
                     {step === 4 && <Step4 c={counts} rows={rows} />}
                     {step === 5 && <Step5 rows={rows} />}
