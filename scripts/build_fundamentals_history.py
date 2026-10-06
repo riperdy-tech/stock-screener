@@ -329,6 +329,25 @@ FIELD_SPECS = {
   "TICKER_DENY_TAGS": {"DepreciationAndAmortization": {"FIX"},
                        "DepreciationDepletionAndAmortization": {"ABNB"}},
  },
+ # BANK REVENUE IS NET REVENUE (2026-10-06, operator). A bank files no single revenue line, so the listed
+ # tags below mean different things at different banks: at many of them
+ # RevenueFromContractWithCustomerExcludingAssessedTax is only the ASC 606 FEE slice of the income
+ # statement. Measured on the shipped file (screener-publish, 2026-10-06), over financial filers that file
+ # both InterestIncomeExpenseNet (NII) and NoninterestIncome and ship a revenue: 102 ship a revenue below
+ # 0.5x of (NII + noninterest income), only 32 within 2% of it, 14 above it (gross-ish). FXNC FY2025 ships
+ # 14,290,000 against a net revenue of 90,264,000; RF FY2021 104,000,000 against 6,438,000,000. 66 of the
+ # 102 are scored; PEBO is nominated. Where a filer files a listed revenue total AND both components for
+ # the same annual period (companyfacts.zip), the total equals NET (NII + noninterest income) in 385 cases,
+ # GROSS (InterestAndDividendIncomeOperating + noninterest income) in 90, NEITHER in 782: no listed tag
+ # carries one meaning across banks. And 215 financials with revenue null in their latest year file both
+ # components for it.
+ # THE RULE. A filer is a BANK P&L FILER (bank_net_revenue_filer) when some annual period has both
+ # components filed with the same period end. For such a filer revenue is, by definition, NET revenue:
+ # InterestIncomeExpenseNet + NoninterestIncome (the "total net revenue" of a bank income statement), in
+ # the annual history (extract_history), the TTM (ttm_snapshot) and the quarterly snapshot
+ # (quarterly_snapshot) alike; a listed tag is REFUSED for it in every year and every output, never mixed
+ # (an ASC 606 slice in one year beside net revenue in the next would manufacture growth). A year missing
+ # either component is null. Any other filer is untouched; this spec's lists below still serve them.
  "revenue": {"COMBINED": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax",
                           "RevenueFromContractWithCustomerIncludingAssessedTax",
                           "SalesRevenueNet", "Revenue", "RevenueFromContractsWithCustomers"],
@@ -756,6 +775,62 @@ def resolve_capex_by_closure(facts, skip_years, lines_out=None):
             if lines_out is not None:
                 lines_out[(accn, end)] = {c: groups[key][c] for c in proven[1].split("+")}
     return out
+
+
+# -- BANK NET REVENUE (2026-10-06, operator; the measurements sit at FIELD_SPECS["revenue"]) ---------
+# Revenue of a bank P&L filer is InterestIncomeExpenseNet + NoninterestIncome. ONE helper decides who is
+# such a filer, and the annual history, the TTM and the quarterly snapshot all ask it of the same facts,
+# so the three outputs can never disagree about a filer.
+BANK_NII_TAG = "InterestIncomeExpenseNet"
+BANK_NONII_TAG = "NoninterestIncome"
+BANK_REVENUE_TAG = BANK_NII_TAG + "+" + BANK_NONII_TAG
+
+
+def _annual_period_ends(facts, tag):
+    """Period ends of the ~annual (300-400 day) USD facts `tag` files in an annual form."""
+    ends = set()
+    for e in facts.get(tag, {}).get("units", {}).get("USD", []):
+        if e.get("form") not in ANNUAL_FORMS:
+            continue
+        start, end = e.get("start"), e.get("end")
+        if not start or not end or e.get("val") is None:
+            continue
+        try:
+            days = (date.fromisoformat(end) - date.fromisoformat(start)).days
+        except ValueError:
+            continue
+        if 300 <= days <= 400:
+            ends.add(end)
+    return ends
+
+
+def bank_net_revenue_filer(facts):
+    """True when some annual period has BOTH InterestIncomeExpenseNet and NoninterestIncome filed with
+    the same period end (annual form, 300-400 days, USD)."""
+    return bool(_annual_period_ends(facts, BANK_NII_TAG) & _annual_period_ends(facts, BANK_NONII_TAG))
+
+
+def _bank_component_value(y, series_c, raws_c, chosen, near):
+    """One component (NII or noninterest income) of the bank net revenue for the row of fiscal year y,
+    resolved as every other cell of the row: the CHOSEN accession's raw value for the row's own period
+    (`near`) unless it is a clean power of 1000 off the component's resolved series value; else that
+    series value when its period end is the row's period; else None (missing -> the row's revenue is null).
+    The component series and raws come from annual_duration_series and are never put into `series`,
+    `raws` or `vote_raws`: they cannot vote in the accession rule, form or evict a year-row, or move
+    another cell."""
+    v = series_c.get(y)
+    if v is None:
+        return None
+    cand = [c for c in raws_c.get(y, []) if c[0] == chosen and near(c[3])] if chosen is not None else []
+    if cand:
+        av = (_pick_consistent([(c[1], c[2]) for c in cand], v)
+              if len({c[2] for c in cand}) > 1 else cand[0][2])
+        if _pow1000_ratio(max(av, v, key=abs), min(av, v, key=abs)) is None:
+            return av
+    # the series value takes the bin's latest-filed value: it sits on the period of the candidate that
+    # carries it (a scale-corrected value matches no candidate: the bin's latest-filed one)
+    carrying = [c for c in raws_c.get(y, []) if c[2] == v] or raws_c.get(y, [])
+    return v if near(max(carrying, key=lambda c: c[1])[3]) else None
 
 
 # CH-9: interest-bearing debt COMPONENTS (instant/balance-sheet). Resolved one tag at a time in
@@ -1559,6 +1634,7 @@ def ttm_snapshot(facts):
     """
     out = {}
     prov = None
+    bank = bank_net_revenue_filer(facts)       # a bank P&L filer's revenue is NII + noninterest income
 
     def duration_entries(tag):
         entries = []
@@ -1676,6 +1752,9 @@ def ttm_snapshot(facts):
                 if cand is not None:
                     best = cand
                     break
+        elif field == "revenue" and bank:
+            # bank net revenue: both components over the SAME windows, else absent; never a listed tag
+            best = combine(cand_of(BANK_NII_TAG), cand_of(BANK_NONII_TAG), 1)
         else:
             for tag in DURATION_TAGS[field]:
                 cand = cand_of(tag)
@@ -1779,7 +1858,15 @@ def quarterly_snapshot(facts):
         return {e: a[e] + sign * b[e] for e in a if e in b}
 
     per_field = {}
+    bank = bank_net_revenue_filer(facts)       # a bank P&L filer's revenue is NII + noninterest income
     for field in QTR_FIELDS:
+        if field == "revenue" and bank:
+            # bank net revenue per quarter, never a listed tag; no quarter in common -> no revenue, and
+            # the snapshot is None below exactly as for any filer without revenue
+            q = combine(tag_q(BANK_NII_TAG), tag_q(BANK_NONII_TAG), 1)
+            if q:
+                per_field[field] = q
+            continue
         if field == "net_income":
             # Fix 1a(d): the scope ladder per quarter — the first rung with the quarter wins it
             pl = tag_q("ProfitLoss")
@@ -2033,6 +2120,11 @@ def extract_history(facts, ticker=None, dei=None):
         facts, FIELD_SPECS["net_income"], ("USD",), ticker, baseline_tags=DURATION_TAGS["net_income"])[1]
     for f in ("equity", "cash"):
         vote_raws[f] = annual_instant_series(facts, INSTANT_TAGS[f])[1]
+    # BANK NET REVENUE: the two components are resolved here, outside `series`/`raws`/`vote_raws` (as the
+    # capex closure is), and applied in the row loop below; a bank P&L filer's listed revenue is refused.
+    bank_filer = bank_net_revenue_filer(facts)
+    bank_parts = ({t: annual_duration_series(facts, [t], ("USD",))[:2] for t in (BANK_NII_TAG, BANK_NONII_TAG)}
+                  if bank_filer else {})
 
     # WINDOW ANCHOR. A row survives only if it has revenue or total_assets, but the MAX_YEARS
     # truncation runs BEFORE that gate — so a field whose coverage runs past revenue's (an IFRS
@@ -2182,6 +2274,21 @@ def extract_history(facts, ticker=None, dei=None):
             tag_of["capex"][y] = hit[1]
             if overrides.get(str(y), {}).pop("capex", None) is not None and not overrides[str(y)]:
                 del overrides[str(y)]
+        if bank_filer:
+            # The listed revenue the loop above resolved is REFUSED for a bank P&L filer in every year
+            # (an ASC 606 fee slice beside net revenue in the next year would manufacture growth); the
+            # row's revenue is its net revenue, null when either component is missing for the period.
+            nii, nonii = (_bank_component_value(y, *bank_parts[t], chosen, _near_ref)
+                          for t in (BANK_NII_TAG, BANK_NONII_TAG))
+            row["revenue"] = None if nii is None or nonii is None else nii + nonii
+            if overrides.get(str(y), {}).pop("revenue", None) is not None and not overrides[str(y)]:
+                del overrides[str(y)]
+            if row["revenue"] is None:
+                prov_of["revenue"].pop(y, None)
+                tag_of["revenue"].pop(y, None)
+            else:
+                prov_of["revenue"][y] = "bank_net_revenue"
+                tag_of["revenue"][y] = BANK_REVENUE_TAG
         # Require at least a revenue or assets figure for the year to count
         if row.get("revenue") is None and row.get("total_assets") is None:
             continue
@@ -2214,7 +2321,7 @@ def extract_history(facts, ticker=None, dei=None):
 
 PROV_STATE_CODE = {"primary": "p", "backfill": "b",
                    "component_sum": "s", "lone_depreciation": "l", "closure_sum": "c",
-                   "closure_replaced": "r"}
+                   "closure_replaced": "r", "bank_net_revenue": "n"}
 PROV_DERIVED_FIELDS = ("fcf",)   # computed row field, no filed tag -> no provenance
 SCALE_STATE_CODE = {"scale_corrected_eps": "e", "scale_corrected_cover": "v"}   # "c" is closure_sum
 
@@ -2328,6 +2435,8 @@ def encode_provenance(history_out, prov_by_ticker):
                     "[[first_year, tag_index, state_code], ...] RLE over SHIPPED non-null cells; "
                     "a run holds until the next run's first_year, intersected with years present. "
                     "state_code in _states; _tags/_accns are index-addressed. "
+                    "'n' (bank_net_revenue): a bank P&L filer's revenue is InterestIncomeExpenseNet + "
+                    "NoninterestIncome, its tag the composite 'InterestIncomeExpenseNet+NoninterestIncome'. "
                     "overrides[T][year][field] = accn_index (effective state 'o'). "
                     "period_end[T][year] = bin end date. "
                     "untagged_fields[T] = the R17 fields (goodwill, intangibles_ex_goodwill, "
@@ -2370,7 +2479,7 @@ def encode_provenance(history_out, prov_by_ticker):
                     "vote-excluded, with their runs and ladder_notes; a filed 0 is a value."),
         "_states": {"p": "primary", "b": "backfill", "s": "component_sum",
                     "l": "lone_depreciation", "c": "closure_sum", "r": "closure_replaced",
-                    "o": "accession_override",
+                    "n": "bank_net_revenue", "o": "accession_override",
                     "e": "scale_corrected_eps", "v": "scale_corrected_cover"},
         "_tags": inv_tags,
         "_accns": inv_accns,
@@ -2666,6 +2775,8 @@ def merge_ticker_provenance(prov, ticker, rows, bundle):
         prov["runs"][ticker] = {
             f: [[y, remap(tags, tag_pos, local["_tags"][ti]), code] for y, ti, code in seq]
             for f, seq in t_runs.items()}
+        if any(code == "n" for seq in t_runs.values() for _, _, code in seq):
+            prov.setdefault("_states", {}).update(local["_states"])        # the file may predate state "n"
     t_over = local["overrides"].get(ticker)
     if t_over:
         prov["overrides"][ticker] = {
