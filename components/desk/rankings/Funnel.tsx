@@ -14,7 +14,7 @@ import type { DeskRow } from '@/lib/desk/rankings';
 import type { StockInfo } from '@/lib/desk/useDeskData';
 import { countDoors, doorOf, DOOR_COLOR, DOOR_LABEL_KEY, DOORS, type Door } from '@/lib/desk/doors';
 import {
-    gateReasonCounts, searchUniverse, type UniverseHit, listRows, queueRows, step4DropOff, vetoGroups,
+    gateReasonCounts, listRows, queueRows, step4DropOff, vetoGroups,
     type FunnelCounts,
 } from '@/lib/desk/funnel';
 import type { FunnelStep } from '@/lib/desk/filters';
@@ -25,6 +25,7 @@ import { vetoFallback, vetoKey } from '@/lib/desk/veto';
 import { gateReasonLabel, GATE_REASON_LABEL } from '@/lib/desk/tone';
 import { useStockHref } from '@/lib/desk/useStockHref';
 import { DoorMark } from './DeskParts';
+import { UniverseHits } from './UniverseHits';
 
 const DASH = '—';
 const num = (n: number | null | undefined) => (n == null ? DASH : n.toLocaleString('en-US'));
@@ -144,27 +145,9 @@ function summaryOf(t: T, step: FunnelStep, c: FunnelCounts, doors: Record<Door, 
 
 // ── Detail pieces ───────────────────────────────────────────────────────────
 
-function hitLine(t: (k: never) => string, c: UniverseHit['check']): string {
-    const tt = t as unknown as (k: string) => string;
-    if (c.kind === 'vetoed') {
-        const k = vetoKey(c.code);
-        return fill(tt('dsVetoed'), { reason: `${k ? tt(k) : vetoFallback(c.code)}${c.detail ? ` (${c.detail})` : ''}` });
-    }
-    if (c.kind === 'scored') {
-        const band = c.band === 'research_now' ? tt('bandResearchNow') : c.band === 'watchlist' ? tt('bandWatchlist') : tt('srchNoDoor');
-        // The rank only means something inside the list (queue position); for a name that cleared no door it is just a score order.
-        const onList = c.band === 'research_now' || c.band === 'watchlist';
-        return fill(tt('srchScored'), { band: onList && c.rank != null ? `${band} #${c.rank}` : band });
-    }
-    return '';
-}
-
 function TickerSearch({ factor, stockInfo }: { factor: FactorScoresPayload | null; stockInfo: Record<string, StockInfo> | null }) {
     const { t } = useLanguage();
-    const stockLink = useStockHref();
     const [q, setQ] = useState('');
-    const hits = useMemo(() => searchUniverse(factor, stockInfo, q), [factor, stockInfo, q]);
-    const asked = q.trim().length > 0 && factor != null;
     return (
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
             <input
@@ -174,15 +157,8 @@ function TickerSearch({ factor, stockInfo }: { factor: FactorScoresPayload | nul
                 aria-label={t('srchPlaceholder')}
                 className="w-full max-w-[240px] border border-rule-24 bg-surface px-2.5 py-1.5 font-mono text-[12px] text-ink placeholder:text-off sm:w-60"
             />
-            <div role="status" className="w-full space-y-1 font-mono text-[12px] text-ink-2">
-                {asked && hits.length === 0 && <p>{fill(t('srchUnknown'), { t: q.trim() })}</p>}
-                {hits.map((h) => (
-                    <p key={h.symbol} className="flex flex-wrap items-baseline gap-x-3">
-                        <Link href={stockLink(h.symbol)} className="font-semibold text-accent hover:text-ink">{h.symbol}</Link>
-                        {h.name && <span className="text-ink">{h.name}</span>}
-                        <span>{hitLine(t as unknown as (k: never) => string, h.check)}</span>
-                    </p>
-                ))}
+            <div role="status" className="w-full">
+                <UniverseHits factor={factor} stockInfo={stockInfo} query={q} />
             </div>
         </div>
     );

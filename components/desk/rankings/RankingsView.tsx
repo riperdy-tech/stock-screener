@@ -23,6 +23,7 @@ import { fill } from '@/lib/desk/text';
 import { DeskTable } from './DeskTable';
 import { verdictWordKey } from './DeskParts';
 import { FunnelPanel, FunnelRow } from './Funnel';
+import { UniverseHits } from './UniverseHits';
 
 const sectionTotal = (s: DeskSections) =>
     s.researchNow.length + s.waiting.length + s.noEdge.length + s.blocked.length + s.awaiting.length + s.disqualified.length;
@@ -102,6 +103,15 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
         // eslint-disable-next-line react-hooks/exhaustive-deps -- `filters` is rebuilt every render; its parts are listed
         [rows, all, active, filters.verdict, filters.door, filters.sector, filters.q]);
 
+    // Symbols the table already shows for the current filters: the universe hits skip them.
+    const shownTickers = useMemo(() => {
+        const set = new Set<string>();
+        for (const list of [filtered.researchNow, filtered.waiting, filtered.noEdge, filtered.blocked, filtered.awaiting, filtered.disqualified]) {
+            for (const r of list) set.add(r.ticker);
+        }
+        return set;
+    }, [filtered]);
+
     const tr = factor?.band_transitions;
     const entered = tr?.entered_book?.length ?? 0;
     const left = tr?.left_book?.length ?? 0;
@@ -164,6 +174,17 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                     {' · '}
                     <button type="button" onClick={clearFilters} className="text-accent hover:text-ink">{t('flClear')}</button>
                 </p>
+            )}
+
+            {/* Names the table cannot hold (screened, but not on the list and without a verdict, e.g. NVDA) are
+                found by the same search here, so "search a name" works for every US stock, not just the list. */}
+            {q.trim() !== '' && factor != null && (
+                <div className="mt-3 border-l-2 border-rule-24 pl-3">
+                    <p className="font-mono text-[11px] text-ink-2">{t('srchOffList')}</p>
+                    <div className="mt-1.5" role="status">
+                        <UniverseHits factor={factor} stockInfo={stockInfo} query={q} exclude={shownTickers} quietWhenEmpty />
+                    </div>
+                </div>
             )}
 
             {/* h. Since yesterday: counts only, and only when the screen run moved names */}
