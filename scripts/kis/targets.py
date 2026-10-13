@@ -19,6 +19,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 LEDGERS_JSON = ROOT / "public" / "data" / "paper_ledgers.json"
+# Ledgers driven by an unvalidated interim analyst (operator decision 2026-10-13: Gemini, paper only).
+# ledger_weights refuses them, so no KIS_LEDGER setting or manual --ledger can route them to real money.
+PAPER_ONLY_LEDGERS = frozenset({"rn_gemini"})
 
 
 def _from_supabase():
@@ -71,6 +74,9 @@ def ledger_weights(book: dict, ledger_key: str, max_stale_days: int = 5) -> dict
     Raises if the ledger looks stale — trading on old targets is worse than
     skipping a day.
     """
+    if ledger_key in PAPER_ONLY_LEDGERS:
+        raise ValueError(f"ledger {ledger_key!r} is paper-only (unvalidated interim analyst); "
+                         f"it must never be mirrored to a real account")
     ledgers = book.get("ledgers") or {}
     if ledger_key not in ledgers:
         raise KeyError(f"ledger {ledger_key!r} not in book (have: {sorted(ledgers)})")
