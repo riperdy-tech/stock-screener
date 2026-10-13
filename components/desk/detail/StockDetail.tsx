@@ -23,6 +23,7 @@ import { Shell } from '../Shell';
 import { StockLeft } from './StockLeft';
 import { StockRight } from './StockRight';
 import { DASH } from './stockParts';
+import { GeminiPanel } from './GeminiPanel';
 
 const signedOne = (v: number) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).toFixed(1)} %`;
 
@@ -147,6 +148,8 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                     {fu.key ? t(fu.key) : fu.raw}
                 </p>
             )}
+
+            {data.gemini[row.ticker] && <GeminiPanel g={data.gemini[row.ticker]} />}
 
             <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
                 <StockLeft row={row} d={d} mode={mode} bundle={bundle} live={live} atVerdict={atVerdict} blocked={blocked} />

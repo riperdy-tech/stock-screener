@@ -467,6 +467,42 @@ export async function fetchDepthOverlay(): Promise<DepthOverlayPayload | null> {
     return fetchJson<DepthOverlayPayload>('/data/depth_overlay.json');
 }
 
+// ── Interim Gemini verdicts (operator decision 2026-10-13) ───────────────────
+// Paper-only and unvalidated: written by stocks-workspace/baselines/gemini/build_gemini_overlay.py,
+// shown on the stock page and graded by the separate rn_gemini paper book. Never part of depth.
+
+export interface GeminiRange { p10: number | null; p50: number | null; p90: number | null }
+
+export interface GeminiVerdict {
+    ticker: string;
+    run_source: 'gemini_interim';
+    not_for_real_money: true;
+    model: string | null;
+    as_of: string | null;
+    captured_at: string | null;
+    direction: 'undervalued' | 'hold' | 'overvalued' | null;
+    price: number | null;
+    price_date: string | null;
+    fair_value: GeminiRange;
+    mos_vs_median_pct: number | null;
+    prob_beat_sp500_3m: number | null;
+    prob_beat_sp500_12m: number | null;
+    target_period: { label: string | null; period_end: string | null; expected_release_date: string | null };
+    forecast: Record<'revenue' | 'operating_income' | 'net_income', GeminiRange>;
+    data_flags: string[];
+}
+
+export interface GeminiOverlayPayload {
+    generated_at: string;
+    scheme: 'gemini_interim_v1';
+    count: number;
+    tickers: Record<string, GeminiVerdict>;
+}
+
+export async function fetchGeminiOverlay(): Promise<GeminiOverlayPayload | null> {
+    return fetchJson<GeminiOverlayPayload>('/data/gemini_overlay.json');
+}
+
 export async function fetchLegacyDepthReport(ticker: string): Promise<DepthReportBundle | null> {
     return fetchJson<DepthReportBundle>(`/data/depth_reports_legacy/${encodeURIComponent(ticker.toUpperCase())}.json`);
 }

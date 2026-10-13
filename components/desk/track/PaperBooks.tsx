@@ -1,6 +1,6 @@
 'use client';
 
-// The three paper books: AI book (rn_depth), Control (equal) and My book. Returns come after the
+// The paper books: AI book (rn_depth), the interim Gemini book (rn_gemini, when present), Control (equal) and My book. Returns come after the
 // scoreboard on purpose. CAGR and Sharpe stay hidden until a book has MIN_OBS_FOR_RATIOS observations.
 
 import React from 'react';
@@ -75,17 +75,23 @@ export function PaperBooks({ ledgers, loggedIn }: {
     const control = bookStats(books.equal);
     const aiStats = bookStats(ai);
     const mine = bookStats(books.mine);
+    const gemini = bookStats(books.rn_gemini);   // interim, paper-only Gemini book; absent until its first run
     const cash = cashSince(ai);
     // Newest first; error-severity alerts from the last 7 days only (older ones are history).
     const alerts = recentErrorAlerts(ledgers.alerts, Date.now()).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 
     return (
         <TrackSection title={t('trkBooksTitle')}>
-            <div className="mt-5 grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
+            <div className={clsx('mt-5 grid grid-cols-1 gap-x-8 gap-y-8', gemini ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3')}>
                 <Column title={t('trkAiBook')} note={t('trkAiNote')}>
                     {aiStats ? <StatGrid s={aiStats} /> : <p className="mt-4 text-[12px] text-ink-3">—</p>}
                     {cash && <p className="mt-3 font-mono text-[11px] text-ink-2">{fill(t('trkCashSince'), { date: cash })}</p>}
                 </Column>
+                {gemini && (
+                    <Column title={t('trkGeminiBook')} note={t('trkGeminiNote')}>
+                        <StatGrid s={gemini} />
+                    </Column>
+                )}
                 <Column title={t('trkControl')} note={t('trkControlNote')}>
                     {control ? <StatGrid s={control} /> : <p className="mt-4 text-[12px] text-ink-3">—</p>}
                 </Column>
