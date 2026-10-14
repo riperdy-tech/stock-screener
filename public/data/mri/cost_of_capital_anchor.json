@@ -1,22 +1,22 @@
 {
   "anchor_id": "cost_of_capital",
-  "asof": "2026-10-12",
-  "built_at": "2026-10-12T21:39:08.894048+00:00",
+  "asof": "2026-10-13",
+  "built_at": "2026-10-13T21:34:15.574112+00:00",
   "degraded": false,
   "equity_aggregate": {
     "basis": "universe",
-    "coverage_share": 0.7919,
+    "coverage_share": 0.793,
     "path": "data/anchors/equity_aggregate.json",
     "source": "Screener corpus (public/data): market caps from financials/*.json, owner earnings NI+D&A-capex and revenue CAGR from fundamentals_history.json. US-dollar reporters only; share classes collapsed by CIK.",
     "universe_stats": {
-      "collapsed_market_cap_usd_t": 86.83,
-      "constituent_market_cap_usd_t": 68.76,
-      "constituents": 1853,
-      "corpus_market_cap_usd_t": 92.53,
-      "coverage_share": 0.7919,
-      "excluded_non_usd_reporters": 494,
-      "names_with_market_cap": 4950,
-      "share_classes_collapsed": 66
+      "collapsed_market_cap_usd_t": 86.64,
+      "constituent_market_cap_usd_t": 68.71,
+      "constituents": 1846,
+      "corpus_market_cap_usd_t": 92.36,
+      "coverage_share": 0.793,
+      "excluded_non_usd_reporters": 492,
+      "names_with_market_cap": 4937,
+      "share_classes_collapsed": 65
     }
   },
   "erp_basis": "universe",
@@ -37,7 +37,7 @@
   "erp_percentile_vs_history": 0.6461538461538462,
   "erp_source": "implied",
   "implied_cost_of_equity": 0.0976,
-  "implied_erp": 0.0454,
+  "implied_erp": 0.0452,
   "inflation": {
     "cpi_yoy": 0.0335,
     "pce_yoy": 0.0342
@@ -49,25 +49,25 @@
     "degradation_reasons": [],
     "input_dates": {
       "CPIAUCSL": "2026-08-01",
-      "DFII10": "2026-10-08",
-      "DGS10": "2026-10-08",
+      "DFII10": "2026-10-09",
+      "DGS10": "2026-10-09",
       "PCEPI": "2026-08-01",
-      "T10YIE": "2026-10-09",
-      "THREEFYTP10": "2026-10-02"
+      "T10YIE": "2026-10-13",
+      "THREEFYTP10": "2026-10-09"
     },
     "notes": [
       "Cost of EQUITY, not WACC: the downstream cash flow (NI + D&A - capex) is levered and is compared against market cap, so a firm-level WACC would double-count the debt claim.",
-      "erp: solved over a universe aggregate (0.7919 of the collapsed universe's capitalisation), NOT an index. Published as implied_erp / implied_cost_of_equity; market_implied_* stays null.",
-      "erp: implied from 1853 constituents covering 79% of the aggregate's own capitalisation"
+      "erp: solved over a universe aggregate (0.793 of the collapsed universe's capitalisation), NOT an index. Published as implied_erp / implied_cost_of_equity; market_implied_* stays null.",
+      "erp: implied from 1846 constituents covering 79% of the aggregate's own capitalisation"
     ],
     "regime_leg": null,
     "scoring_mode": "point_in_time"
   },
   "risk_free": {
     "breakeven_10y": 0.0233,
-    "nominal_10y": 0.0522,
-    "real_10y": 0.0287,
-    "term_premium": 0.010847
+    "nominal_10y": 0.0524,
+    "real_10y": 0.0291,
+    "term_premium": 0.010729
   },
   "sector_loadings": {
     "banks": 1.018,
