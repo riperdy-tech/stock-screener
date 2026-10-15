@@ -190,6 +190,40 @@ def depth_targets(factor: dict, depth: dict) -> dict:
     return {t: weight for t in names}
 
 
+V4_ENTER, V4_KEEP = 0.90, 0.85      # rs2 AK.91: enter the top decile of the peer group; hold until the rank falls below 0.85 (a turnover buffer)
+
+
+def v4_sleeve_targets(factor: dict, v4: dict, sleeve: str, held=frozenset()) -> dict:
+    """{ticker: weight_pct} for an engine-v2.1 paper sleeve (rs2 SPEC_rebuild AK.91, cross-check 17 option D), equally weighted.
+
+    sleeve "top": peer rank_pct >= 0.90 to enter, a held name kept while >= 0.85.  sleeve "bottom": <= 0.10 to enter, kept while <= 0.15.
+    The producer ranks within family x industry; only paper-actionable rows carry a rank.  The screener's own filters still apply (fct_rank, vetoes).
+    """
+    names = []
+    for ticker, entry in factor.items():
+        if not isinstance(entry, dict) or entry.get("fct_rank") is None or entry.get("fct_veto") or entry.get("fct_llm_veto"):
+            continue
+        v = v4.get(ticker)
+        if not v or v.get("actionable") is not True or not isinstance(v.get("rank_pct"), (int, float)):
+            continue
+        pct = v["rank_pct"]
+        if sleeve == "top":
+            ok = pct >= V4_ENTER or (ticker in held and pct >= V4_KEEP)
+        else:
+            ok = pct <= 1 - V4_ENTER or (ticker in held and pct <= 1 - V4_KEEP)
+        if ok:
+            names.append(ticker)
+    if not names:
+        return {}
+    weight = 100.0 / max(len(names), MIN_EQUAL_NAMES)
+    return {t: weight for t in names}
+
+
+def v4_rule_b_targets(factor: dict, v4: dict) -> dict:
+    """The ORIGINAL paper rule (rule_b_pick: undervalued and paper-actionable) through the rn_depth gate: an audit ledger only (AK.91)."""
+    return depth_targets(factor, {t: dict(v, direction="undervalued" if v.get("rule_b_pick") else None) for t, v in v4.items()})
+
+
 def overlay_gated_empty(depth_raw: dict) -> bool:
     """True when depth_raw is a gate-on-read overlay (carries a top-level
     `gate_version`) that gated every name out (`actionable_count == 0`).
@@ -1067,7 +1101,7 @@ def main():
     # plan / plan2 / plan3 (retired 2026-08-27) and the *_llm lane (retired 2026-08-26)
     # are NO LONGER computed or seeded on new books. Pre-existing books keep their frozen
     # history (setdefault never removes). The live books are `equal` + `rn_depth`.
-    for _k in ("rn_depth", "rn_gemini", "rn_v4"):
+    for _k in ("rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -1183,14 +1217,19 @@ def main():
         # v2.1 FAILED gate 2b (AK.82) and is unpromoted; the operator chose to let a paper book trade it, labelled as such. Same gate and equal
         # weighting as rn_depth, from v4_paper_overlay.json, whose `actionable` is true only when the gate's sole reason is the unpromoted freeze.
         # A separate ledger on purpose: the real-money KIS mirror copies rn_depth, and kis/targets.py refuses rn_v4. Held when the file is missing.
+        # AK.91 (cross-check 17, option D): rn_v4 = the top decile within family x industry; rn_v4_low = the bottom decile (the spread's other leg);
+        # rn_v4_abs = the original rule, an audit ledger.  All three paper only; kis/targets.py refuses all three.
         v4_tk = (load_json(V4_PAPER_OVERLAY_JSON, {}) or {}).get("tickers", {})
-        v4_targets = depth_targets(factor, v4_tk)
         v4_ok = bool(v4_tk) and fct_ok
         v4_why = fct_why if not fct_ok else ("v4_paper_overlay.json missing or empty" if not v4_tk else "")
-        unknown_v4 = {t for t in ledgers["rn_v4"]["state"]["holdings"] if t not in v4_tk}
-        nav_v4, stale_v4 = run_or_hold("rn_v4", v4_targets, "rank", unknown=unknown_v4, source_ok=v4_ok, why=v4_why)
-        finalize_ledger(ledgers["rn_v4"], nav_v4, stale_v4, benches, as_of, book["inception"])
-        backfill_benches(ledgers["rn_v4"])
+        for _name, _tg in (("rn_v4", lambda h: v4_sleeve_targets(factor, v4_tk, "top", h)),
+                           ("rn_v4_low", lambda h: v4_sleeve_targets(factor, v4_tk, "bottom", h)),
+                           ("rn_v4_abs", lambda h: v4_rule_b_targets(factor, v4_tk))):
+            _held = set(ledgers[_name]["state"]["holdings"])
+            _unknown = {t for t in _held if t not in v4_tk}
+            _nav, _stale = run_or_hold(_name, _tg(_held), "rank", unknown=_unknown, source_ok=v4_ok, why=v4_why)
+            finalize_ledger(ledgers[_name], _nav, _stale, benches, as_of, book["inception"])
+            backfill_benches(ledgers[_name])
 
         # ── plan3 · bold (momentum sleeve): RETIRED 2026-08-27 ──────────────────
         # No longer computed. run_plan3_ledger + the kill-switch machinery stay defined
@@ -1232,7 +1271,7 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("equal", "rn_depth", "rn_gemini", "rn_v4"):
+        for name in ("equal", "rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"):
             if not ledgers.get(name, {}).get("nav_series"):
                 continue
             s = ledgers[name]["summary"]

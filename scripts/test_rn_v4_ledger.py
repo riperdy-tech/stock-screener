@@ -1,4 +1,4 @@
-"""rn_v4: engine v2.1's paper book, EXPERIMENTAL and unpromoted (operator decision 2026-10-15; rs2 SPEC_rebuild AK.82, AK.84).
+"""rn_v4 / rn_v4_low / rn_v4_abs: engine v2.1's paper books, EXPERIMENTAL and unpromoted (rs2 SPEC_rebuild AK.82, AK.84, AK.91).
 
 Pins three things:
   * its targets come from v4_paper_overlay.json through the same gate as rn_depth, so only rows the producer marked paper-actionable are held;
@@ -25,15 +25,28 @@ def fct(rank=1, veto=None):
     return {"fct_rank": rank, "fct_band": "watchlist", "fct_veto": veto, "fct_llm_veto": None}
 
 
-def v4(direction, actionable):
-    return {"direction": direction, "actionable": actionable, "paper_only": True, "label": "experimental_unpromoted"}
+def v4(pct, actionable=True, rule_b=False, direction="hold"):
+    return {"direction": direction, "actionable": actionable, "rank_pct": pct, "rule_b_pick": rule_b, "paper_only": True}
 
 
-def test_v4_targets_hold_only_paper_actionable_undervalued_names():
-    f = {"A": fct(1), "B": fct(2), "C": fct(3), "D": fct(4, veto="x"), "E": fct(5)}
-    g = {"A": v4("undervalued", True), "B": v4("undervalued", False), "C": v4("hold", True), "D": v4("undervalued", True),
-         "E": v4("overvalued", True)}
-    assert set(tp.depth_targets(f, g)) == {"A"}            # not paper-actionable, hold/overvalued and vetoed names are all out
+def test_the_top_sleeve_enters_at_the_top_decile_and_keeps_a_held_name_down_to_085():
+    f = {t: fct(i) for i, t in enumerate("ABCDEF", 1)} | {"V": fct(9, veto="x")}
+    g = {"A": v4(0.95), "B": v4(0.87), "C": v4(0.87), "D": v4(0.80), "E": v4(0.99, actionable=False), "F": v4(0.92), "V": v4(0.99)}
+    assert set(tp.v4_sleeve_targets(f, g, "top")) == {"A", "F"}                       # new entries: >= 0.90 only; not-actionable and vetoed out
+    assert set(tp.v4_sleeve_targets(f, g, "top", held={"B", "D"})) == {"A", "F", "B"}  # B held and >= 0.85 stays; D below 0.85 leaves
+
+
+def test_the_bottom_sleeve_mirrors_the_top_with_its_own_buffer():
+    f = {t: fct(i) for i, t in enumerate("ABC", 1)}
+    g = {"A": v4(0.05), "B": v4(0.13), "C": v4(0.20)}
+    assert set(tp.v4_sleeve_targets(f, g, "bottom")) == {"A"}
+    assert set(tp.v4_sleeve_targets(f, g, "bottom", held={"B", "C"})) == {"A", "B"}
+
+
+def test_the_audit_ledger_follows_the_original_rule_only():
+    f = {t: fct(i) for i, t in enumerate("ABC", 1)}
+    g = {"A": v4(0.5, rule_b=True, direction="undervalued"), "B": v4(0.99), "C": v4(0.2, actionable=False, rule_b=False, direction="undervalued")}
+    assert set(tp.v4_rule_b_targets(f, g)) == {"A"}
 
 
 def test_the_v4_overlay_path_is_its_own_file():
@@ -41,15 +54,16 @@ def test_the_v4_overlay_path_is_its_own_file():
     assert tp.V4_PAPER_OVERLAY_JSON != tp.DEPTH_OVERLAY_JSON
 
 
-def test_the_kis_loader_refuses_the_v4_ledger():
-    assert "rn_v4" in kt.PAPER_ONLY_LEDGERS
-    book = {"ledgers": {"rn_v4": {"current_date": date.today().isoformat(), "state": {"cash": 100.0, "holdings": {}}, "last_marks": {}}}}
-    try:
-        kt.ledger_weights(book, "rn_v4")
-    except ValueError as e:
-        assert "paper-only" in str(e)
-    else:
-        raise AssertionError("ledger_weights mirrored rn_v4")
+def test_the_kis_loader_refuses_every_v4_ledger():
+    for name in ("rn_v4", "rn_v4_low", "rn_v4_abs"):
+        assert name in kt.PAPER_ONLY_LEDGERS
+        book = {"ledgers": {name: {"current_date": date.today().isoformat(), "state": {"cash": 100.0, "holdings": {}}, "last_marks": {}}}}
+        try:
+            kt.ledger_weights(book, name)
+        except ValueError as e:
+            assert "paper-only" in str(e)
+        else:
+            raise AssertionError(f"ledger_weights mirrored {name}")
 
 
 def test_the_kis_loader_still_serves_rn_depth():

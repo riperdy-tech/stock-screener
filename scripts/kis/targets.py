@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 LEDGERS_JSON = ROOT / "public" / "data" / "paper_ledgers.json"
 # Ledgers driven by an unvalidated interim analyst (operator decision 2026-10-13: Gemini, paper only).
 # ledger_weights refuses them, so no KIS_LEDGER setting or manual --ledger can route them to real money.
-PAPER_ONLY_LEDGERS = frozenset({"rn_gemini", "rn_v4"})   # rn_v4: engine v2.1, experimental and unpromoted (AK.84)
+PAPER_ONLY_LEDGERS = frozenset({"rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"})   # engine v2.1, experimental and unpromoted (AK.84, AK.91)
 
 
 def _from_supabase():
