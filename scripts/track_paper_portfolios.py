@@ -53,6 +53,7 @@ STOCKS_JSON = DATA / "stocks.json"
 FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 DEPTH_OVERLAY_JSON = DATA / "depth_overlay.json"             # RS2 depth verdicts — rn_depth ledger targets
 GEMINI_OVERLAY_JSON = DATA / "gemini_overlay.json"           # interim Gemini verdicts — rn_gemini ledger targets (paper only)
+V4_PAPER_OVERLAY_JSON = DATA / "v4_paper_overlay.json"       # engine v2.1 shadow verdicts, EXPERIMENTAL and unpromoted — rn_v4 targets (paper only)
 # The old llm_overlay.json / portfolio_plan_llm.json lane (plan_llm/plan2_llm/equal_llm)
 # was RETIRED in the depth migration (2026-08-26); rn_depth is the depth paper book.
 PORTFOLIO_PLAN_MOMO_JSON = DATA / "portfolio_plan_momo.json"  # plan3 momentum sleeve
@@ -1066,7 +1067,7 @@ def main():
     # plan / plan2 / plan3 (retired 2026-08-27) and the *_llm lane (retired 2026-08-26)
     # are NO LONGER computed or seeded on new books. Pre-existing books keep their frozen
     # history (setdefault never removes). The live books are `equal` + `rn_depth`.
-    for _k in ("rn_depth", "rn_gemini"):
+    for _k in ("rn_depth", "rn_gemini", "rn_v4"):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -1178,6 +1179,19 @@ def main():
         finalize_ledger(ledgers["rn_gemini"], nav_gm, stale_gm, benches, as_of, book["inception"])
         backfill_benches(ledgers["rn_gemini"])
 
+        # ── rn_v4: engine v2.1's nightly shadow verdicts, PAPER ONLY, EXPERIMENTAL (operator decision 2026-10-15, rs2 SPEC_rebuild AK.84) ──
+        # v2.1 FAILED gate 2b (AK.82) and is unpromoted; the operator chose to let a paper book trade it, labelled as such. Same gate and equal
+        # weighting as rn_depth, from v4_paper_overlay.json, whose `actionable` is true only when the gate's sole reason is the unpromoted freeze.
+        # A separate ledger on purpose: the real-money KIS mirror copies rn_depth, and kis/targets.py refuses rn_v4. Held when the file is missing.
+        v4_tk = (load_json(V4_PAPER_OVERLAY_JSON, {}) or {}).get("tickers", {})
+        v4_targets = depth_targets(factor, v4_tk)
+        v4_ok = bool(v4_tk) and fct_ok
+        v4_why = fct_why if not fct_ok else ("v4_paper_overlay.json missing or empty" if not v4_tk else "")
+        unknown_v4 = {t for t in ledgers["rn_v4"]["state"]["holdings"] if t not in v4_tk}
+        nav_v4, stale_v4 = run_or_hold("rn_v4", v4_targets, "rank", unknown=unknown_v4, source_ok=v4_ok, why=v4_why)
+        finalize_ledger(ledgers["rn_v4"], nav_v4, stale_v4, benches, as_of, book["inception"])
+        backfill_benches(ledgers["rn_v4"])
+
         # ── plan3 · bold (momentum sleeve): RETIRED 2026-08-27 ──────────────────
         # No longer computed. run_plan3_ledger + the kill-switch machinery stay defined
         # (still exercised by test_plan3_guards.py); main() simply no longer advances the
@@ -1218,7 +1232,7 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("equal", "rn_depth", "rn_gemini"):
+        for name in ("equal", "rn_depth", "rn_gemini", "rn_v4"):
             if not ledgers.get(name, {}).get("nav_series"):
                 continue
             s = ledgers[name]["summary"]
