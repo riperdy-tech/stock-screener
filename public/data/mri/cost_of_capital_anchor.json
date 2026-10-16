@@ -1,21 +1,21 @@
 {
   "anchor_id": "cost_of_capital",
-  "asof": "2026-10-14",
-  "built_at": "2026-10-14T21:34:39.305567+00:00",
+  "asof": "2026-10-15",
+  "built_at": "2026-10-15T21:36:12.335642+00:00",
   "degraded": false,
   "equity_aggregate": {
     "basis": "universe",
-    "coverage_share": 0.7944,
+    "coverage_share": 0.7943,
     "path": "data/anchors/equity_aggregate.json",
     "source": "Screener corpus (public/data): market caps from financials/*.json, owner earnings NI+D&A-capex and revenue CAGR from fundamentals_history.json. US-dollar reporters only; share classes collapsed by CIK.",
     "universe_stats": {
-      "collapsed_market_cap_usd_t": 85.66,
-      "constituent_market_cap_usd_t": 68.05,
-      "constituents": 1854,
-      "corpus_market_cap_usd_t": 91.31,
-      "coverage_share": 0.7944,
-      "excluded_non_usd_reporters": 497,
-      "names_with_market_cap": 4956,
+      "collapsed_market_cap_usd_t": 85.75,
+      "constituent_market_cap_usd_t": 68.11,
+      "constituents": 1853,
+      "corpus_market_cap_usd_t": 91.41,
+      "coverage_share": 0.7943,
+      "excluded_non_usd_reporters": 496,
+      "names_with_market_cap": 4948,
       "share_classes_collapsed": 65
     }
   },
@@ -36,8 +36,8 @@
   "erp_history_source": "Damodaran implied ERP (FCFE), annual 1961-2025",
   "erp_percentile_vs_history": 0.676923076923077,
   "erp_source": "implied",
-  "implied_cost_of_equity": 0.0981,
-  "implied_erp": 0.046,
+  "implied_cost_of_equity": 0.098,
+  "implied_erp": 0.0461,
   "inflation": {
     "cpi_yoy": 0.0372,
     "pce_yoy": 0.0342
@@ -49,43 +49,43 @@
     "degradation_reasons": [],
     "input_dates": {
       "CPIAUCSL": "2026-09-01",
-      "DFII10": "2026-10-13",
-      "DGS10": "2026-10-13",
+      "DFII10": "2026-10-14",
+      "DGS10": "2026-10-14",
       "PCEPI": "2026-08-01",
-      "T10YIE": "2026-10-14",
+      "T10YIE": "2026-10-15",
       "THREEFYTP10": "2026-10-09"
     },
     "notes": [
       "Cost of EQUITY, not WACC: the downstream cash flow (NI + D&A - capex) is levered and is compared against market cap, so a firm-level WACC would double-count the debt claim.",
-      "erp: solved over a universe aggregate (0.7944 of the collapsed universe's capitalisation), NOT an index. Published as implied_erp / implied_cost_of_equity; market_implied_* stays null.",
-      "erp: implied from 1854 constituents covering 79% of the aggregate's own capitalisation"
+      "erp: solved over a universe aggregate (0.7943 of the collapsed universe's capitalisation), NOT an index. Published as implied_erp / implied_cost_of_equity; market_implied_* stays null.",
+      "erp: implied from 1853 constituents covering 79% of the aggregate's own capitalisation"
     ],
     "regime_leg": null,
     "scoring_mode": "point_in_time"
   },
   "risk_free": {
-    "breakeven_10y": 0.0235,
-    "nominal_10y": 0.0521,
-    "real_10y": 0.0288,
+    "breakeven_10y": 0.0232,
+    "nominal_10y": 0.0519,
+    "real_10y": 0.0284,
     "term_premium": 0.010729
   },
   "sector_loadings": {
     "banks": 1.018,
-    "biotech": 1.134,
-    "communication_services": 0.996,
+    "biotech": 1.135,
+    "communication_services": 0.997,
     "consumer_discretionary": 1.225,
-    "consumer_staples": 0.362,
+    "consumer_staples": 0.363,
     "energy": 0.574,
     "financials": 0.843,
     "health_care": 0.532,
-    "homebuilders": 1.126,
+    "homebuilders": 1.127,
     "industrials": 0.867,
     "information_technology": 1.374,
     "materials": 0.852,
-    "oil_gas_ep": 0.83,
+    "oil_gas_ep": 0.831,
     "real_estate": 0.701,
     "semiconductors": 1.738,
-    "software": 1.313,
+    "software": 1.314,
     "utilities": 0.44
   },
   "source_files": [
