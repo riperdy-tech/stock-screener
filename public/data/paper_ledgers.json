@@ -1,20 +1,6 @@
 {
  "alerts": [
   {
-   "date": "2026-10-08",
-   "detail": "stocks.json snapshot 2026-10-09 > as_of 2026-10-08",
-   "kind": "snapshot_ahead",
-   "scope": "prices",
-   "severity": "error"
-  },
-  {
-   "date": "2026-10-08",
-   "detail": "deferred: ['IMOS', 'VLO', 'VSNT']",
-   "kind": "underfunded",
-   "scope": "equal",
-   "severity": "warn"
-  },
-  {
    "date": "2026-10-12",
    "detail": "stocks.json snapshot 2026-10-13 > as_of 2026-10-12",
    "kind": "snapshot_ahead",
@@ -34,6 +20,27 @@
    "kind": "underfunded",
    "scope": "equal",
    "severity": "warn"
+  },
+  {
+   "date": "2026-10-16",
+   "detail": "deferred: ['MBUU', 'MEI', 'PCB', 'WEN']",
+   "kind": "underfunded",
+   "scope": "rn_v4",
+   "severity": "warn"
+  },
+  {
+   "date": "2026-10-16",
+   "detail": "deferred: ['AAON', 'ALGM', 'ALNT', 'AMD', 'AORT', 'APG', 'AXON', 'BB', 'BLKB', 'BRKR', 'BWA', 'CERT', 'CLOV', 'CORT', 'CSW', 'DAVE', 'DNOW', 'DOCS', 'EEFT', 'ELF', 'FIGS', 'GFF', 'GHC', 'GHM', 'GNRC', 'JHX', 'LE', 'MIR', 'MRVL', 'MSM', 'MSTR', 'MTRN', 'NABL', 'NSC', 'OC', 'ONTO', 'OPLN', 'PANW', 'PEN', 'PWR', 'RGEN', 'RVTY', 'RXO', 'SENEA', 'SHOP', 'STGW', 'SWIM', 'TEVA', 'TGT', 'TSLA', 'UNF', 'VCYT', 'VSEC', 'WOR', 'ZBH', 'ZBRA']",
+   "kind": "underfunded",
+   "scope": "rn_v4_low",
+   "severity": "warn"
+  },
+  {
+   "date": "2026-10-16",
+   "detail": "deferred: ['CCNE', 'CFFI', 'INVA', 'MPB', 'RBB', 'WSBF']",
+   "kind": "underfunded",
+   "scope": "rn_v4_abs",
+   "severity": "warn"
   }
  ],
  "config": {
@@ -50,11 +57,11 @@
   "start_nav": 100.0
  },
  "health": {
-  "factor_checked_at": "2026-10-15",
-  "factor_scored_count": 2865
+  "factor_checked_at": "2026-10-16",
+  "factor_scored_count": 2868
  },
  "inception": "2026-06-12",
- "last_updated": "2026-10-15T17:44:07Z",
+ "last_updated": "2026-10-16T00:05:25Z",
  "ledgers": {
   "equal": {
    "closed": [
@@ -2631,9 +2638,53 @@
      "post_exit_return_pct": null,
      "return_pct": -2.52,
      "ticker": "VLO"
+    },
+    {
+     "entry_date": "2026-10-14",
+     "entry_price": 504.5089,
+     "exit_date": "2026-10-16",
+     "exit_price": 507.93,
+     "hold_days": 2,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": 0.43,
+     "ticker": "DELL"
+    },
+    {
+     "entry_date": "2026-10-14",
+     "entry_price": 127.86,
+     "exit_date": "2026-10-16",
+     "exit_price": 124.7,
+     "hold_days": 2,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": -2.72,
+     "ticker": "DINO"
+    },
+    {
+     "entry_date": "2026-10-13",
+     "entry_price": 72.015,
+     "exit_date": "2026-10-16",
+     "exit_price": 65.14,
+     "hold_days": 3,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": -9.77,
+     "ticker": "IMOS"
+    },
+    {
+     "entry_date": "2026-10-13",
+     "entry_price": 13.15,
+     "exit_date": "2026-10-16",
+     "exit_price": 12.48,
+     "hold_days": 3,
+     "post_exit_days": null,
+     "post_exit_return_pct": null,
+     "return_pct": -5.33,
+     "ticker": "NEXA"
     }
    ],
-   "current_date": "2026-10-15",
+   "current_date": "2026-10-16",
    "dividends": [
     {
      "amount": 0.0148,
@@ -2766,7 +2817,7 @@
    },
    "last_marks": {
     "AAPL": 337.02,
-    "AAUC": 19.98,
+    "AAUC": 20.55,
     "ABNB": 149.58,
     "ADSK": 217.15,
     "ADT": 6.3301,
@@ -2776,15 +2827,15 @@
     "AFGD": 22.45,
     "AFGE": 16.81,
     "AGX": 450.46,
-    "AII": 27.575,
+    "AII": 27.7,
     "ALKS": 49.67,
     "ALL": 224.71,
     "AMD": 610.705,
-    "AMT": 181.64,
+    "AMT": 179.4,
     "AMZN": 249.27,
     "ANET": 203.47,
-    "APA": 47.215,
-    "ARX": 19.755,
+    "APA": 47.37,
+    "ARX": 19.75,
     "ATI": 184.18,
     "ATLCP": 23.5,
     "AU": 104.17,
@@ -2792,8 +2843,8 @@
     "AVGO": 354.99,
     "AZN": 163.33,
     "BBUC": 25.6,
-    "BCRX": 8.055,
-    "BFH": 101.22,
+    "BCRX": 8.02,
+    "BFH": 101.31,
     "BIP": 35.7,
     "BLBD": 68.76,
     "BMRN": 62.21,
@@ -2801,7 +2852,7 @@
     "BWMX": 16.6,
     "CAAP": 24.78,
     "CART": 42.96,
-    "CBL": 48.91,
+    "CBL": 48.84,
     "CBOE": 297.525,
     "CDNA": 55.78,
     "CHA": 12.45,
@@ -2809,38 +2860,38 @@
     "CIEN": 321.0,
     "CLS": 361.84,
     "CMI": 550.9,
-    "CMRE": 14.29,
+    "CMRE": 14.28,
     "CPRX": 31.49,
     "CRS": 519.66,
     "CW": 634.99,
     "CYH": 3.0157,
     "DAC": 165.15,
-    "DDI": 13.76,
-    "DEA": 22.285,
-    "DELL": 464.175,
+    "DDI": 13.725,
+    "DEA": 21.99,
+    "DELL": 507.93,
     "DFIN": 47.72,
     "DGII": 83.34,
-    "DINO": 125.2,
+    "DINO": 124.7,
     "DT": 58.51,
-    "DXC": 13.425,
-    "ECO": 90.0351,
-    "ECPG": 101.94,
-    "EFXT": 24.46,
+    "DXC": 13.79,
+    "ECO": 89.18,
+    "ECPG": 102.6,
+    "EFXT": 25.77,
     "ELMD": 41.22,
     "EMBJ": 75.43,
     "ENVA": 173.83,
-    "ESEA": 67.67,
+    "ESEA": 67.45,
     "ESLT": 782.84,
     "EXEL": 56.73,
     "EXPE": 283.52,
     "FCNCN": 22.8819,
     "FIX": 1610.34,
-    "FLXS": 86.94,
+    "FLXS": 86.77,
     "FORM": 126.015,
     "FRO": 53.01,
     "FSM": 11.615,
     "FUTU": 114.31,
-    "GASS": 8.57,
+    "GASS": 8.56,
     "GCMG": 13.05,
     "GD": 343.97,
     "GEV": 951.82,
@@ -2851,45 +2902,45 @@
     "GOOGL": 337.83,
     "GRDN": 41.16,
     "GSAT": 83.4,
-    "GSL": 41.92,
-    "GTE": 10.645,
-    "HAFN": 10.205,
+    "GSL": 42.0,
+    "GTE": 10.61,
+    "HAFN": 10.11,
     "HCI": 192.7868,
     "HCSG": 23.79,
-    "HG": 35.43,
-    "HOG": 27.53,
+    "HG": 35.5,
+    "HOG": 26.96,
     "HRMY": 37.15,
-    "HRTG": 36.46,
+    "HRTG": 36.61,
     "HWM": 254.89,
     "IHS": 8.42,
-    "IMOS": 64.075,
+    "IMOS": 65.14,
     "INCY": 124.64,
     "INSW": 114.75,
     "INVA": 22.2,
     "IRMD": 90.27,
-    "IRWD": 3.7688,
+    "IRWD": 3.77,
     "ISRG": 398.3,
-    "JCAP": 20.68,
+    "JCAP": 20.74,
     "JKHY": 148.33,
     "JLHL": 7.33,
     "KFY": 76.78,
     "KNSA": 76.08,
     "KRT": 52.0925,
     "KRYS": 341.75,
-    "KSS": 22.23,
-    "LAMR": 148.37,
+    "KSS": 22.41,
+    "LAMR": 148.07,
     "LAUR": 36.72,
-    "LFST": 12.43,
-    "LIND": 35.19,
+    "LFST": 12.37,
+    "LIND": 35.47,
     "LITE": 1103.355,
     "LLY": 1150.99,
     "LPG": 54.135,
     "LPL": 3.11,
     "LQDT": 42.72,
-    "MA": 615.65,
+    "MA": 616.32,
     "MAMA": 15.16,
     "MANH": 210.37,
-    "MATX": 235.44,
+    "MATX": 235.57,
     "MCO": 473.85,
     "MCRI": 118.27,
     "MEDP": 617.15,
@@ -2900,91 +2951,91 @@
     "MPWR": 1355.47,
     "MRK": 135.84,
     "MRNA": 185.18,
-    "MRP": 22.16,
+    "MRP": 22.22,
     "MRVL": 265.86,
     "MSGE": 80.18,
     "MU": 940.21,
     "MYRG": 433.01,
     "NBIX": 139.49,
-    "NEM": 113.99,
+    "NEM": 111.56,
     "NESR": 25.38,
-    "NEXA": 12.56,
-    "NGVT": 69.975,
-    "NHC": 243.195,
+    "NEXA": 12.48,
+    "NGVT": 70.54,
+    "NHC": 245.53,
     "NJR": 52.18,
     "NOVT": 166.58,
-    "NREF": 15.2991,
+    "NREF": 15.33,
     "NTR": 75.725,
     "NTRSO": 18.29,
-    "NUTX": 201.566,
+    "NUTX": 200.8,
     "NVS": 142.71,
     "OKTA": 215.08,
     "OPY": 106.6485,
     "PACS": 42.58,
     "PCTY": 143.58,
     "PENG": 60.06,
-    "PGR": 216.44,
+    "PGR": 213.75,
     "PKE": 34.5,
     "PLSE": 52.675,
     "POWL": 211.38,
-    "PRCH": 16.83,
+    "PRCH": 17.57,
     "PRTH": 7.795,
     "PSMT": 177.05,
     "QTWO": 64.485,
     "QUAD": 9.615,
     "REGN": 784.41,
-    "RHLD": 114.57,
+    "RHLD": 117.86,
     "RMBS": 102.96,
     "RMD": 222.3,
-    "RNG": 78.0,
-    "RNR": 342.36,
+    "RNG": 79.94,
+    "RNR": 344.16,
     "ROST": 226.61,
     "SAP": 210.62,
-    "SENEA": 179.785,
+    "SENEA": 176.0,
     "SENEB": 179.2171,
-    "SEZL": 128.61,
+    "SEZL": 132.37,
     "SIMO": 276.53,
-    "SLDE": 26.305,
+    "SLDE": 26.53,
     "SMTC": 171.22,
-    "SN": 193.835,
+    "SN": 193.68,
     "STRL": 700.75,
-    "STRW": 13.1499,
-    "STT": 166.83,
+    "STRW": 12.96,
+    "STT": 167.6,
     "STX": 923.86,
-    "TASK": 8.47,
+    "TASK": 8.52,
     "TBPH": 17.03,
-    "TCBI": 90.67,
+    "TCBI": 90.7,
     "TCBIO": 18.5,
     "TIGR": 4.875,
     "TK": 14.84,
     "TOP": 15.085,
-    "TRN": 25.63,
+    "TRN": 25.47,
     "TSM": 446.57,
-    "TWFG": 24.81,
+    "TWFG": 25.015,
     "TWLO": 299.66,
     "TWST": 159.395,
     "TYL": 332.53,
     "UMBFO": 25.45,
     "UMC": 23.19,
-    "UNIT": 5.895,
+    "UNIT": 6.005,
     "UTHR": 487.61,
-    "UVE": 47.085,
+    "UVE": 46.84,
     "VCYT": 46.32,
     "VEON": 80.6601,
     "VICR": 253.5,
     "VIK": 80.3,
     "VLO": 444.505,
-    "VLRS": 5.935,
+    "VLRS": 5.99,
     "VMI": 497.0,
     "VRTX": 516.34,
     "VSNT": 31.24,
-    "VSXY": 90.38,
+    "VSXY": 88.39,
     "WDC": 473.69,
     "WILC": 33.31,
     "WLKP": 21.29,
     "WTFCN": 25.6,
     "WWD": 403.48,
-    "ZIM": 29.425
+    "ZIM": 29.54
    },
    "nav_series": [
     {
@@ -4661,325 +4712,22 @@
      "date": "2026-10-15",
      "nav": 93.3016,
      "stale_marks": []
+    },
+    {
+     "bench": null,
+     "benches": {
+      "DRAM": 50.14,
+      "IWM": null,
+      "QQQ": 728.95,
+      "SOXX": 519.42,
+      "SPY": 769.6
+     },
+     "date": "2026-10-16",
+     "nav": 93.6695,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 0.4508637954801844,
-    "holdings": {
-     "AAUC": {
-      "entry_date": "2026-10-13",
-      "entry_price": 20.375,
-      "shares": 0.07911439408657989
-     },
-     "AII": {
-      "entry_date": "2026-09-23",
-      "entry_price": 24.97,
-      "shares": 0.055917547837318456
-     },
-     "AMT": {
-      "entry_date": "2026-10-06",
-      "entry_price": 164.78,
-      "shares": 0.008493567920866281
-     },
-     "APA": {
-      "entry_date": "2026-09-23",
-      "entry_price": 43.7,
-      "shares": 0.03183933952944303
-     },
-     "ARX": {
-      "entry_date": "2026-09-23",
-      "entry_price": 19.72,
-      "shares": 0.07702116982189668
-     },
-     "BCRX": {
-      "entry_date": "2026-09-23",
-      "entry_price": 8.57,
-      "shares": 0.17750443387683582
-     },
-     "BFH": {
-      "entry_date": "2026-10-08",
-      "entry_price": 98.87,
-      "shares": 0.015557877565890962
-     },
-     "CBL": {
-      "entry_date": "2026-09-23",
-      "entry_price": 53.06,
-      "shares": 0.028337059747302377
-     },
-     "CMRE": {
-      "entry_date": "2026-09-23",
-      "entry_price": 14.68,
-      "shares": 0.09996041369390139
-     },
-     "DDI": {
-      "entry_date": "2026-09-23",
-      "entry_price": 13.0,
-      "shares": 0.11142604265461264
-     },
-     "DEA": {
-      "entry_date": "2026-10-14",
-      "entry_price": 22.3,
-      "shares": 0.06813390215609118
-     },
-     "DELL": {
-      "entry_date": "2026-10-14",
-      "entry_price": 504.5089,
-      "shares": 0.0030116139042955107
-     },
-     "DINO": {
-      "entry_date": "2026-10-14",
-      "entry_price": 127.86,
-      "shares": 0.011883200516821785
-     },
-     "DXC": {
-      "entry_date": "2026-10-06",
-      "entry_price": 11.83,
-      "shares": 0.1210806043790584
-     },
-     "ECO": {
-      "entry_date": "2026-09-26",
-      "entry_price": 77.9,
-      "shares": 0.015825392239881088
-     },
-     "ECPG": {
-      "entry_date": "2026-10-13",
-      "entry_price": 104.22,
-      "shares": 0.015062487051555546
-     },
-     "EFXT": {
-      "entry_date": "2026-10-13",
-      "entry_price": 27.49,
-      "shares": 0.05863789667202856
-     },
-     "ESEA": {
-      "entry_date": "2026-09-23",
-      "entry_price": 71.57,
-      "shares": 0.02085379271383932
-     },
-     "FLXS": {
-      "entry_date": "2026-09-23",
-      "entry_price": 85.23,
-      "shares": 0.017061240763142214
-     },
-     "FRO": {
-      "entry_date": "2026-10-13",
-      "entry_price": 59.4065,
-      "shares": 0.0271343334401802
-     },
-     "GASS": {
-      "entry_date": "2026-09-23",
-      "entry_price": 9.0,
-      "shares": 0.16652769904537132
-     },
-     "GSL": {
-      "entry_date": "2026-09-23",
-      "entry_price": 44.54,
-      "shares": 0.03352586311541875
-     },
-     "GTE": {
-      "entry_date": "2026-10-02",
-      "entry_price": 10.48,
-      "shares": 0.14038654406346127
-     },
-     "HAFN": {
-      "entry_date": "2026-09-23",
-      "entry_price": 9.1,
-      "shares": 0.14222299023226687
-     },
-     "HG": {
-      "entry_date": "2026-09-23",
-      "entry_price": 33.47,
-      "shares": 0.04384553837330324
-     },
-     "HOG": {
-      "entry_date": "2026-09-23",
-      "entry_price": 25.98,
-      "shares": 0.05675089430285226
-     },
-     "HRTG": {
-      "entry_date": "2026-09-23",
-      "entry_price": 33.07,
-      "shares": 0.04248205279845362
-     },
-     "IHS": {
-      "entry_date": "2026-09-23",
-      "entry_price": 8.42,
-      "shares": 0.18012909107661476
-     },
-     "IMOS": {
-      "entry_date": "2026-10-13",
-      "entry_price": 72.015,
-      "shares": 0.022054499429357197
-     },
-     "IRWD": {
-      "entry_date": "2026-10-06",
-      "entry_price": 3.63,
-      "shares": 0.4236562947654948
-     },
-     "JCAP": {
-      "entry_date": "2026-10-02",
-      "entry_price": 19.51,
-      "shares": 0.0752008888219479
-     },
-     "KSS": {
-      "entry_date": "2026-10-03",
-      "entry_price": 18.81,
-      "shares": 0.07342463259043405
-     },
-     "LAMR": {
-      "entry_date": "2026-09-23",
-      "entry_price": 144.22,
-      "shares": 0.010481293673411697
-     },
-     "LIND": {
-      "entry_date": "2026-10-02",
-      "entry_price": 34.67,
-      "shares": 0.04339584054383346
-     },
-     "MA": {
-      "entry_date": "2026-09-23",
-      "entry_price": 559.92,
-      "shares": 0.0025201128414889685
-     },
-     "MRP": {
-      "entry_date": "2026-09-23",
-      "entry_price": 26.81,
-      "shares": 0.055874753871148264
-     },
-     "NEM": {
-      "entry_date": "2026-10-06",
-      "entry_price": 116.39,
-      "shares": 0.013485477195950382
-     },
-     "NEXA": {
-      "entry_date": "2026-10-13",
-      "entry_price": 13.15,
-      "shares": 0.1210806043790584
-     },
-     "NGVT": {
-      "entry_date": "2026-09-23",
-      "entry_price": 71.75,
-      "shares": 0.020887165575370133
-     },
-     "NHC": {
-      "entry_date": "2026-10-06",
-      "entry_price": 228.27,
-      "shares": 0.006528627161667116
-     },
-     "NREF": {
-      "entry_date": "2026-09-23",
-      "entry_price": 15.81,
-      "shares": 0.09652221917144746
-     },
-     "NUTX": {
-      "entry_date": "2026-09-23",
-      "entry_price": 201.86,
-      "shares": 0.006927277665721774
-     },
-     "PENG": {
-      "entry_date": "2026-10-12",
-      "entry_price": 78.72,
-      "shares": 0.02200096047062512
-     },
-     "PGR": {
-      "entry_date": "2026-10-09",
-      "entry_price": 218.2,
-      "shares": 0.007195398946991142
-     },
-     "PRCH": {
-      "entry_date": "2026-10-03",
-      "entry_price": 17.31,
-      "shares": 0.09080248969568379
-     },
-     "RHLD": {
-      "entry_date": "2026-09-23",
-      "entry_price": 125.59,
-      "shares": 0.012161134846084063
-     },
-     "RNG": {
-      "entry_date": "2026-09-23",
-      "entry_price": 79.23,
-      "shares": 0.019019632084796345
-     },
-     "RNR": {
-      "entry_date": "2026-10-06",
-      "entry_price": 324.42,
-      "shares": 0.004457628665335757
-     },
-     "SENEA": {
-      "entry_date": "2026-09-23",
-      "entry_price": 179.15,
-      "shares": 0.008279036541537017
-     },
-     "SENEB": {
-      "entry_date": "2026-09-09",
-      "entry_price": 193.56,
-      "shares": 0.008116477292402155
-     },
-     "SEZL": {
-      "entry_date": "2026-09-23",
-      "entry_price": 106.89,
-      "shares": 0.01260244076522198
-     },
-     "SLDE": {
-      "entry_date": "2026-09-23",
-      "entry_price": 22.96,
-      "shares": 0.060636703944608066
-     },
-     "STRW": {
-      "entry_date": "2026-09-23",
-      "entry_price": 13.6,
-      "shares": 0.11177003483776722
-     },
-     "STT": {
-      "entry_date": "2026-10-04",
-      "entry_price": 175.96,
-      "shares": 0.008929703879240698
-     },
-     "TASK": {
-      "entry_date": "2026-10-04",
-      "entry_price": 8.06,
-      "shares": 0.18980610630386974
-     },
-     "TRN": {
-      "entry_date": "2026-10-13",
-      "entry_price": 26.225,
-      "shares": 0.05890154690984357
-     },
-     "TWFG": {
-      "entry_date": "2026-09-23",
-      "entry_price": 24.71,
-      "shares": 0.06236911901429414
-     },
-     "UVE": {
-      "entry_date": "2026-09-23",
-      "entry_price": 42.47,
-      "shares": 0.032735740448926604
-     },
-     "VLO": {
-      "entry_date": "2026-10-13",
-      "entry_price": 454.8485,
-      "shares": 0.0035439399701528425
-     },
-     "VLRS": {
-      "entry_date": "2026-09-23",
-      "entry_price": 6.73,
-      "shares": 0.22162254171540985
-     },
-     "VSNT": {
-      "entry_date": "2026-10-09",
-      "entry_price": 30.82,
-      "shares": 0.049406227800472095
-     },
-     "ZIM": {
-      "entry_date": "2026-09-27",
-      "entry_price": 29.19,
-      "shares": 0.05091739940125538
-     }
-    },
-    "units": null
-   },
-   "state": {
     "cash": 1.0970640979015698,
     "holdings": {
      "AAUC": {
@@ -5295,26 +5043,337 @@
     },
     "units": null
    },
-   "summary": {
-    "avg_hold_days": 25.3,
-    "cagr_pct": -18.33,
-    "closed_trades": 234,
-    "cumulative_return_pct": -6.7,
-    "excess_vs": {
-     "DRAM": 18.54,
-     "IWM": -0.38,
-     "QQQ": -7.51,
-     "SOXX": 7.72,
-     "SPY": -10.99
+   "state": {
+    "cash": 2.4341432572457515,
+    "holdings": {
+     "AAUC": {
+      "entry_date": "2026-10-13",
+      "entry_price": 20.375,
+      "shares": 0.07656452266498508
+     },
+     "AII": {
+      "entry_date": "2026-09-23",
+      "entry_price": 24.97,
+      "shares": 0.05547630690286135
+     },
+     "AMT": {
+      "entry_date": "2026-10-06",
+      "entry_price": 164.78,
+      "shares": 0.008421928885963454
+     },
+     "APA": {
+      "entry_date": "2026-09-23",
+      "entry_price": 43.7,
+      "shares": 0.03183933952944303
+     },
+     "ARX": {
+      "entry_date": "2026-09-23",
+      "entry_price": 19.72,
+      "shares": 0.07702116982189668
+     },
+     "BCRX": {
+      "entry_date": "2026-09-23",
+      "entry_price": 8.57,
+      "shares": 0.17750443387683582
+     },
+     "BFH": {
+      "entry_date": "2026-10-08",
+      "entry_price": 98.87,
+      "shares": 0.015113210460841749
+     },
+     "CBL": {
+      "entry_date": "2026-09-23",
+      "entry_price": 53.06,
+      "shares": 0.028337059747302377
+     },
+     "CMRE": {
+      "entry_date": "2026-09-23",
+      "entry_price": 14.68,
+      "shares": 0.09996041369390139
+     },
+     "DDI": {
+      "entry_date": "2026-09-23",
+      "entry_price": 13.0,
+      "shares": 0.11117435776500013
+     },
+     "DEA": {
+      "entry_date": "2026-10-14",
+      "entry_price": 22.3,
+      "shares": 0.06813390215609118
+     },
+     "DXC": {
+      "entry_date": "2026-10-06",
+      "entry_price": 11.83,
+      "shares": 0.11394854099414536
+     },
+     "ECO": {
+      "entry_date": "2026-09-26",
+      "entry_price": 77.9,
+      "shares": 0.015825392239881088
+     },
+     "ECPG": {
+      "entry_date": "2026-10-13",
+      "entry_price": 104.22,
+      "shares": 0.015006466184485008
+     },
+     "EFXT": {
+      "entry_date": "2026-10-13",
+      "entry_price": 27.49,
+      "shares": 0.05863789667202856
+     },
+     "ESEA": {
+      "entry_date": "2026-09-23",
+      "entry_price": 71.57,
+      "shares": 0.02085379271383932
+     },
+     "FLXS": {
+      "entry_date": "2026-09-23",
+      "entry_price": 85.23,
+      "shares": 0.017061240763142214
+     },
+     "GASS": {
+      "entry_date": "2026-09-23",
+      "entry_price": 9.0,
+      "shares": 0.16652769904537132
+     },
+     "GSL": {
+      "entry_date": "2026-09-23",
+      "entry_price": 44.54,
+      "shares": 0.03352586311541875
+     },
+     "GTE": {
+      "entry_date": "2026-10-02",
+      "entry_price": 10.48,
+      "shares": 0.14038654406346127
+     },
+     "HAFN": {
+      "entry_date": "2026-09-23",
+      "entry_price": 9.1,
+      "shares": 0.14222299023226687
+     },
+     "HG": {
+      "entry_date": "2026-09-23",
+      "entry_price": 33.47,
+      "shares": 0.043176945042235446
+     },
+     "HOG": {
+      "entry_date": "2026-09-23",
+      "entry_price": 25.98,
+      "shares": 0.055566987389989164
+     },
+     "HRTG": {
+      "entry_date": "2026-09-23",
+      "entry_price": 33.07,
+      "shares": 0.04195719042365337
+     },
+     "IHS": {
+      "entry_date": "2026-09-23",
+      "entry_price": 8.42,
+      "shares": 0.18012909107661476
+     },
+     "IRWD": {
+      "entry_date": "2026-10-06",
+      "entry_price": 3.63,
+      "shares": 0.4059008604453411
+     },
+     "JCAP": {
+      "entry_date": "2026-10-02",
+      "entry_price": 19.51,
+      "shares": 0.07397288021500975
+     },
+     "KSS": {
+      "entry_date": "2026-10-03",
+      "entry_price": 18.81,
+      "shares": 0.0688150770511202
+     },
+     "LAMR": {
+      "entry_date": "2026-09-23",
+      "entry_price": 144.22,
+      "shares": 0.010310434473589012
+     },
+     "LFST": {
+      "entry_date": "2026-10-15",
+      "entry_price": 12.43,
+      "shares": 0.12276224979398921
+     },
+     "LIND": {
+      "entry_date": "2026-10-02",
+      "entry_price": 34.67,
+      "shares": 0.04339584054383346
+     },
+     "MA": {
+      "entry_date": "2026-09-23",
+      "entry_price": 559.92,
+      "shares": 0.002484787075199223
+     },
+     "MATX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 235.44,
+      "shares": 0.006481204404261323
+     },
+     "MRP": {
+      "entry_date": "2026-09-23",
+      "entry_price": 26.81,
+      "shares": 0.055874753871148264
+     },
+     "NEM": {
+      "entry_date": "2026-10-06",
+      "entry_price": 116.39,
+      "shares": 0.013420117228234073
+     },
+     "NGVT": {
+      "entry_date": "2026-09-23",
+      "entry_price": 71.75,
+      "shares": 0.020887165575370133
+     },
+     "NHC": {
+      "entry_date": "2026-10-06",
+      "entry_price": 228.27,
+      "shares": 0.0062902574594313285
+     },
+     "NREF": {
+      "entry_date": "2026-09-23",
+      "entry_price": 15.81,
+      "shares": 0.09652221917144746
+     },
+     "NUTX": {
+      "entry_date": "2026-09-23",
+      "entry_price": 201.86,
+      "shares": 0.006927277665721774
+     },
+     "PGR": {
+      "entry_date": "2026-10-09",
+      "entry_price": 218.2,
+      "shares": 0.007067820933498437
+     },
+     "PRCH": {
+      "entry_date": "2026-10-03",
+      "entry_price": 17.31,
+      "shares": 0.09080248969568379
+     },
+     "RHLD": {
+      "entry_date": "2026-09-23",
+      "entry_price": 125.59,
+      "shares": 0.012161134846084063
+     },
+     "RNG": {
+      "entry_date": "2026-09-23",
+      "entry_price": 79.23,
+      "shares": 0.019019632084796345
+     },
+     "RNR": {
+      "entry_date": "2026-10-06",
+      "entry_price": 324.42,
+      "shares": 0.004457628665335757
+     },
+     "SENEA": {
+      "entry_date": "2026-09-23",
+      "entry_price": 179.15,
+      "shares": 0.008279036541537017
+     },
+     "SENEB": {
+      "entry_date": "2026-09-09",
+      "entry_price": 193.56,
+      "shares": 0.008116477292402155
+     },
+     "SEZL": {
+      "entry_date": "2026-09-23",
+      "entry_price": 106.89,
+      "shares": 0.0118945584546023
+     },
+     "SLDE": {
+      "entry_date": "2026-09-23",
+      "entry_price": 22.96,
+      "shares": 0.058154691611724076
+     },
+     "SN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 193.835,
+      "shares": 0.007872338664014681
+     },
+     "STRW": {
+      "entry_date": "2026-09-23",
+      "entry_price": 13.6,
+      "shares": 0.11177003483776722
+     },
+     "STT": {
+      "entry_date": "2026-10-04",
+      "entry_price": 175.96,
+      "shares": 0.008929703879240698
+     },
+     "TASK": {
+      "entry_date": "2026-10-04",
+      "entry_price": 8.06,
+      "shares": 0.1806091101353485
+     },
+     "TCBI": {
+      "entry_date": "2026-10-16",
+      "entry_price": 90.7,
+      "shares": 0.01688991096357649
+     },
+     "TRN": {
+      "entry_date": "2026-10-13",
+      "entry_price": 26.225,
+      "shares": 0.05890154690984357
+     },
+     "TWFG": {
+      "entry_date": "2026-09-23",
+      "entry_price": 24.71,
+      "shares": 0.06165897472174131
+     },
+     "UNIT": {
+      "entry_date": "2026-10-16",
+      "entry_price": 6.005,
+      "shares": 0.2551065652616799
+     },
+     "UVE": {
+      "entry_date": "2026-09-23",
+      "entry_price": 42.47,
+      "shares": 0.03248931003178086
+     },
+     "VLRS": {
+      "entry_date": "2026-09-23",
+      "entry_price": 6.73,
+      "shares": 0.22162254171540985
+     },
+     "VSNT": {
+      "entry_date": "2026-10-09",
+      "entry_price": 30.82,
+      "shares": 0.048967962959231816
+     },
+     "VSXY": {
+      "entry_date": "2026-10-16",
+      "entry_price": 88.39,
+      "shares": 0.017331314904360084
+     },
+     "ZIM": {
+      "entry_date": "2026-09-27",
+      "entry_price": 29.19,
+      "shares": 0.05091739940125538
+     }
     },
-    "excess_vs_bench_pct": -0.38,
+    "units": null
+   },
+   "summary": {
+    "avg_hold_days": 25.0,
+    "cagr_pct": -17.26,
+    "closed_trades": 238,
+    "cumulative_return_pct": -6.33,
+    "excess_vs": {
+     "DRAM": 16.54,
+     "IWM": -0.01,
+     "QQQ": -7.5,
+     "SOXX": 6.51,
+     "SPY": -10.35
+    },
+    "excess_vs_bench_pct": -0.01,
     "inception": "2026-06-12",
     "max_drawdown_pct": -11.58,
-    "observations": 118,
-    "open_positions": 62,
-    "sharpe": -1.18,
-    "total_traded_value": 932.11,
-    "win_rate_pct": 36.3
+    "observations": 119,
+    "open_positions": 61,
+    "sharpe": -1.1,
+    "total_traded_value": 942.66,
+    "win_rate_pct": 36.1
    },
    "trades": [
     {
@@ -13900,16 +13959,64 @@
      "side": "buy",
      "ticker": "SN",
      "value": 1.5298
+    },
+    {
+     "date": "2026-10-16",
+     "price": 507.93,
+     "reason": "left_rank",
+     "side": "sell",
+     "ticker": "DELL",
+     "value": 1.5259
+    },
+    {
+     "date": "2026-10-16",
+     "price": 124.7,
+     "reason": "left_rank",
+     "side": "sell",
+     "ticker": "DINO",
+     "value": 1.4781
+    },
+    {
+     "date": "2026-10-16",
+     "price": 65.14,
+     "reason": "left_rank",
+     "side": "sell",
+     "ticker": "IMOS",
+     "value": 1.433
+    },
+    {
+     "date": "2026-10-16",
+     "price": 12.48,
+     "reason": "left_rank",
+     "side": "sell",
+     "ticker": "NEXA",
+     "value": 1.5073
+    },
+    {
+     "date": "2026-10-16",
+     "price": 90.7,
+     "reason": "entered_rank",
+     "side": "buy",
+     "ticker": "TCBI",
+     "value": 1.5358
+    },
+    {
+     "date": "2026-10-16",
+     "price": 6.005,
+     "reason": "entered_rank",
+     "side": "buy",
+     "ticker": "UNIT",
+     "value": 1.5358
+    },
+    {
+     "date": "2026-10-16",
+     "price": 88.39,
+     "reason": "entered_rank",
+     "side": "buy",
+     "ticker": "VSXY",
+     "value": 1.5358
     }
-   ],
-   "underfunded_entrants": {
-    "date": "2026-10-15",
-    "tickers": [
-     "TCBI",
-     "UNIT",
-     "VSXY"
-    ]
-   }
+   ]
   },
   "equal_llm": {
    "closed": [
@@ -36989,7 +37096,7 @@
      "ticker": "VRSK"
     }
    ],
-   "current_date": "2026-10-15",
+   "current_date": "2026-10-16",
    "dividends": [
     {
      "amount": 0.0378,
@@ -37728,6 +37835,19 @@
      "date": "2026-10-15",
      "nav": 95.7626,
      "stale_marks": []
+    },
+    {
+     "bench": null,
+     "benches": {
+      "DRAM": 50.14,
+      "IWM": null,
+      "QQQ": 728.95,
+      "SOXX": 519.42,
+      "SPY": 769.6
+     },
+     "date": "2026-10-16",
+     "nav": 95.7626,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
@@ -37742,22 +37862,22 @@
    },
    "summary": {
     "avg_hold_days": 18.0,
-    "cagr_pct": -11.88,
+    "cagr_pct": -11.79,
     "closed_trades": 52,
     "cumulative_return_pct": -4.24,
     "excess_vs": {
-     "DRAM": 9.34,
+     "DRAM": 6.61,
      "IWM": 4.27,
-     "QQQ": -6.45,
-     "SOXX": -3.46,
-     "SPY": -4.98
+     "QQQ": -6.8,
+     "SOXX": -5.28,
+     "SPY": -4.72
     },
     "excess_vs_bench_pct": 4.27,
     "inception": "2026-06-12",
     "max_drawdown_pct": -4.4,
-    "observations": 47,
+    "observations": 48,
     "open_positions": 0,
-    "sharpe": -2.93,
+    "sharpe": -2.9,
     "total_traded_value": 387.75,
     "win_rate_pct": 38.5
    },
@@ -39934,94 +40054,94 @@
   },
   "rn_gemini": {
    "closed": [],
-   "current_date": "2026-10-15",
+   "current_date": "2026-10-16",
    "dividends": [],
    "exit_pending": {},
    "last_marks": {
-    "AAUC": 19.98,
-    "ACIC": 10.93,
-    "AII": 27.575,
-    "ALL": 239.84,
-    "AMT": 181.64,
-    "ARX": 19.755,
-    "BCRX": 8.055,
-    "BFH": 101.22,
-    "BHC": 6.285,
-    "BIP": 37.065,
-    "BTG": 5.105,
-    "BUD": 81.58,
-    "CBL": 48.91,
-    "CHA": 12.48,
-    "CI": 298.22,
-    "CIM": 8.725,
-    "CMRE": 14.29,
-    "CPA": 131.27,
-    "CWEN": 29.85,
-    "CX": 9.945,
-    "DAC": 158.33,
-    "DAR": 61.4,
-    "DDI": 13.76,
-    "DEA": 22.285,
-    "DEC": 14.6,
-    "DVA": 186.645,
-    "DXC": 13.425,
-    "EAT": 203.4506,
-    "ECPG": 101.94,
-    "EFXT": 24.46,
-    "ESEA": 67.67,
-    "GASS": 8.57,
-    "GOLD": 39.375,
-    "GSL": 41.92,
-    "GTE": 10.645,
-    "HG": 35.43,
-    "HNGE": 105.61,
-    "HRMY": 38.67,
-    "HRTG": 36.46,
-    "IRWD": 3.7688,
-    "JBS": 12.96,
-    "JCAP": 20.68,
-    "MA": 615.65,
-    "MFA": 6.755,
-    "MRP": 22.16,
-    "MSGS": 406.87,
-    "MTCH": 43.2801,
-    "MU": 912.4899,
-    "NJR": 51.44,
-    "NREF": 15.2991,
-    "NUTX": 201.566,
-    "NXT": 82.985,
-    "OPY": 100.97,
-    "PEBO": 36.33,
-    "PGR": 216.44,
-    "PGY": 17.155,
-    "PNRG": 206.3,
-    "PTCT": 61.085,
-    "QUAD": 9.46,
-    "R": 237.69,
-    "RHP": 126.715,
-    "RNG": 78.0,
-    "RNR": 342.36,
-    "RNW": 6.875,
-    "SAH": 64.13,
-    "SEZL": 128.61,
-    "SGU": 12.98,
-    "STRW": 13.1499,
-    "TASK": 8.47,
-    "TLK": 12.79,
-    "TRN": 25.63,
-    "TTAM": 13.54,
-    "TWFG": 24.81,
-    "UFCS": 55.7,
-    "UGI": 37.54,
-    "UVE": 47.085,
-    "VEON": 81.49,
-    "VLGEA": 45.15,
-    "VLRS": 5.935,
+    "AAUC": 20.55,
+    "ACIC": 10.95,
+    "AII": 27.7,
+    "ALL": 239.6,
+    "AMT": 179.4,
+    "ARX": 19.75,
+    "BCRX": 8.02,
+    "BFH": 101.31,
+    "BHC": 6.31,
+    "BIP": 37.27,
+    "BTG": 5.18,
+    "BUD": 79.5,
+    "CBL": 48.84,
+    "CHA": 12.44,
+    "CI": 298.81,
+    "CIM": 8.55,
+    "CMRE": 14.28,
+    "CPA": 133.91,
+    "CWEN": 29.96,
+    "CX": 10.06,
+    "DAC": 158.72,
+    "DAR": 60.87,
+    "DDI": 13.725,
+    "DEA": 21.99,
+    "DEC": 14.43,
+    "DVA": 189.16,
+    "DXC": 13.79,
+    "EAT": 204.91,
+    "ECPG": 102.6,
+    "EFXT": 25.77,
+    "ESEA": 67.45,
+    "GASS": 8.56,
+    "GOLD": 38.72,
+    "GSL": 42.0,
+    "GTE": 10.61,
+    "HG": 35.5,
+    "HNGE": 105.0,
+    "HRMY": 38.27,
+    "HRTG": 36.61,
+    "IRWD": 3.77,
+    "JBS": 12.72,
+    "JCAP": 20.74,
+    "MA": 616.32,
+    "MFA": 6.7,
+    "MRP": 22.22,
+    "MSGS": 404.66,
+    "MTCH": 44.1,
+    "MU": 914.13,
+    "NJR": 51.53,
+    "NREF": 15.33,
+    "NUTX": 200.8,
+    "NXT": 83.45,
+    "OPY": 102.14,
+    "PEBO": 36.62,
+    "PGR": 213.75,
+    "PGY": 17.91,
+    "PNRG": 203.91,
+    "PTCT": 60.99,
+    "QUAD": 9.49,
+    "R": 240.16,
+    "RHP": 122.83,
+    "RNG": 79.94,
+    "RNR": 344.16,
+    "RNW": 6.86,
+    "SAH": 63.51,
+    "SEZL": 132.37,
+    "SGU": 12.92,
+    "STRW": 12.96,
+    "TASK": 8.52,
+    "TLK": 12.78,
+    "TRN": 25.47,
+    "TTAM": 13.07,
+    "TWFG": 25.015,
+    "UFCS": 55.4,
+    "UGI": 37.21,
+    "UVE": 46.84,
+    "VEON": 82.81,
+    "VLGEA": 44.32,
+    "VLRS": 5.99,
     "VSNT": 31.24,
-    "WLKP": 20.95,
-    "WNC": 12.61,
-    "WSE": 12.055,
-    "WTM": 2146.4424
+    "WLKP": 20.84,
+    "WNC": 12.82,
+    "WSE": 12.01,
+    "WTM": 2143.73
    },
    "nav_series": [
     {
@@ -40036,11 +40156,445 @@
      "date": "2026-10-15",
      "nav": 99.75,
      "stale_marks": []
+    },
+    {
+     "bench": null,
+     "benches": {
+      "DRAM": 50.14,
+      "IWM": null,
+      "QQQ": 728.95,
+      "SOXX": 519.42,
+      "SPY": 769.6
+     },
+     "date": "2026-10-16",
+     "nav": 99.8538,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 100.0,
-    "holdings": {},
+    "cash": 5.10702591327572e-14,
+    "holdings": {
+     "AAUC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 19.98,
+      "shares": 0.059434434434434434
+     },
+     "ACIC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 10.93,
+      "shares": 0.1086459286367795
+     },
+     "AII": {
+      "entry_date": "2026-10-15",
+      "entry_price": 27.575,
+      "shares": 0.04306436990027199
+     },
+     "ALL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 239.84,
+      "shares": 0.004951217478318879
+     },
+     "AMT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 181.64,
+      "shares": 0.006537656903765691
+     },
+     "ARX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 19.755,
+      "shares": 0.06011136421159201
+     },
+     "BCRX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.055,
+      "shares": 0.1474239602731223
+     },
+     "BFH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 101.22,
+      "shares": 0.011731871171705197
+     },
+     "BHC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 6.285,
+      "shares": 0.18894192521877487
+     },
+     "BIP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 37.065,
+      "shares": 0.03203831107513827
+     },
+     "BTG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 5.105,
+      "shares": 0.23261508325171398
+     },
+     "BUD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 81.58,
+      "shares": 0.014556263790144644
+     },
+     "CBL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 48.91,
+      "shares": 0.024279288489061544
+     },
+     "CHA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 12.48,
+      "shares": 0.09515224358974358
+     },
+     "CI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 298.22,
+      "shares": 0.003981959627120917
+     },
+     "CIM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.725,
+      "shares": 0.1361031518624642
+     },
+     "CMRE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 14.29,
+      "shares": 0.0831000699790063
+     },
+     "CPA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 131.27,
+      "shares": 0.009046240572865086
+     },
+     "CWEN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 29.85,
+      "shares": 0.0397822445561139
+     },
+     "CX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 9.945,
+      "shares": 0.11940673705379587
+     },
+     "DAC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 158.33,
+      "shares": 0.007500157898061011
+     },
+     "DAR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 61.4,
+      "shares": 0.01934039087947883
+     },
+     "DDI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.76,
+      "shares": 0.08630087209302326
+     },
+     "DEA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 22.285,
+      "shares": 0.05328696432577967
+     },
+     "DEC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 14.6,
+      "shares": 0.08133561643835617
+     },
+     "DVA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 186.645,
+      "shares": 0.006362345629403412
+     },
+     "DXC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.425,
+      "shares": 0.08845437616387336
+     },
+     "EAT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 203.4506,
+      "shares": 0.005836797728785268
+     },
+     "ECPG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 101.94,
+      "shares": 0.011649009221110458
+     },
+     "EFXT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 24.46,
+      "shares": 0.04854865085854456
+     },
+     "ESEA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 67.67,
+      "shares": 0.017548396630707848
+     },
+     "GASS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.57,
+      "shares": 0.13856476079346558
+     },
+     "GOLD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 39.375,
+      "shares": 0.03015873015873016
+     },
+     "GSL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 41.92,
+      "shares": 0.02832776717557252
+     },
+     "GTE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 10.645,
+      "shares": 0.11155472052606859
+     },
+     "HG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 35.43,
+      "shares": 0.03351679367767429
+     },
+     "HNGE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 105.61,
+      "shares": 0.011244200359814412
+     },
+     "HRMY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 38.67,
+      "shares": 0.030708559606930436
+     },
+     "HRTG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 36.46,
+      "shares": 0.03256993965990126
+     },
+     "IRWD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 3.7688,
+      "shares": 0.3150870303544895
+     },
+     "JBS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 12.96,
+      "shares": 0.09162808641975308
+     },
+     "JCAP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 20.68,
+      "shares": 0.05742263056092843
+     },
+     "MA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 615.65,
+      "shares": 0.0019288556809875742
+     },
+     "MFA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 6.755,
+      "shares": 0.1757957068837898
+     },
+     "MRP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 22.16,
+      "shares": 0.05358754512635379
+     },
+     "MSGS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 406.87,
+      "shares": 0.002918622655885172
+     },
+     "MTCH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 43.2801,
+      "shares": 0.02743755213134905
+     },
+     "MU": {
+      "entry_date": "2026-10-15",
+      "entry_price": 912.4899,
+      "shares": 0.0013013842673765485
+     },
+     "NJR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 51.44,
+      "shares": 0.023085147744945567
+     },
+     "NREF": {
+      "entry_date": "2026-10-15",
+      "entry_price": 15.2991,
+      "shares": 0.07761894490525587
+     },
+     "NUTX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 201.566,
+      "shares": 0.005891370568449044
+     },
+     "NXT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 82.985,
+      "shares": 0.014309815026812075
+     },
+     "OPY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 100.97,
+      "shares": 0.011760919084876696
+     },
+     "PEBO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 36.33,
+      "shares": 0.03268648499862373
+     },
+     "PGR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 216.44,
+      "shares": 0.005486508963223064
+     },
+     "PGY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 17.155,
+      "shares": 0.0692218012241329
+     },
+     "PNRG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 206.3,
+      "shares": 0.005756180319922442
+     },
+     "PTCT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 61.085,
+      "shares": 0.019440124416796267
+     },
+     "QUAD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 9.46,
+      "shares": 0.12552854122621562
+     },
+     "R": {
+      "entry_date": "2026-10-15",
+      "entry_price": 237.69,
+      "shares": 0.004996003197442047
+     },
+     "RHP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 126.715,
+      "shares": 0.009371424061871128
+     },
+     "RNG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 78.0,
+      "shares": 0.015224358974358974
+     },
+     "RNR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 342.36,
+      "shares": 0.00346857109475406
+     },
+     "RNW": {
+      "entry_date": "2026-10-15",
+      "entry_price": 6.875,
+      "shares": 0.17272727272727273
+     },
+     "SAH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 64.13,
+      "shares": 0.018517074692031812
+     },
+     "SEZL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 128.61,
+      "shares": 0.009233341108778477
+     },
+     "SGU": {
+      "entry_date": "2026-10-15",
+      "entry_price": 12.98,
+      "shares": 0.0914869029275809
+     },
+     "STRW": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.1499,
+      "shares": 0.09030486923854934
+     },
+     "TASK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.47,
+      "shares": 0.14020070838252655
+     },
+     "TLK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 12.79,
+      "shares": 0.09284597341673183
+     },
+     "TRN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 25.63,
+      "shares": 0.046332422941865
+     },
+     "TTAM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.54,
+      "shares": 0.08770310192023634
+     },
+     "TWFG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 24.81,
+      "shares": 0.047863764611043934
+     },
+     "UFCS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 55.7,
+      "shares": 0.021319569120287252
+     },
+     "UGI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 37.54,
+      "shares": 0.031632924880127866
+     },
+     "UVE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 47.085,
+      "shares": 0.02522034618243602
+     },
+     "VEON": {
+      "entry_date": "2026-10-15",
+      "entry_price": 81.49,
+      "shares": 0.014572340164437356
+     },
+     "VLGEA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 45.15,
+      "shares": 0.02630121816168328
+     },
+     "VLRS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 5.935,
+      "shares": 0.2000842459983151
+     },
+     "VSNT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 31.24,
+      "shares": 0.038012163892445584
+     },
+     "WLKP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 20.95,
+      "shares": 0.05668257756563246
+     },
+     "WNC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 12.61,
+      "shares": 0.09417129262490087
+     },
+     "WSE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 12.055,
+      "shares": 0.09850684363334716
+     },
+     "WTM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 2146.4424,
+      "shares": 0.000553241028037836
+     }
+    },
     "units": null
    },
    "state": {
@@ -40471,20 +41025,20 @@
    },
    "summary": {
     "avg_hold_days": null,
-    "cagr_pct": -0.73,
+    "cagr_pct": -0.42,
     "closed_trades": 0,
-    "cumulative_return_pct": -0.25,
+    "cumulative_return_pct": -0.15,
     "excess_vs": {
-     "DRAM": -0.25,
-     "IWM": -0.25,
-     "QQQ": -0.25,
-     "SOXX": -0.25,
-     "SPY": -0.25
+     "DRAM": -3.3,
+     "IWM": -0.15,
+     "QQQ": -0.49,
+     "SOXX": -1.99,
+     "SPY": 0.11
     },
-    "excess_vs_bench_pct": -0.25,
+    "excess_vs_bench_pct": -0.15,
     "inception": "2026-06-12",
     "max_drawdown_pct": 0.0,
-    "observations": 1,
+    "observations": 2,
     "open_positions": 84,
     "sharpe": null,
     "total_traded_value": 100.0,
@@ -41167,120 +41721,130 @@
   },
   "rn_v4": {
    "closed": [],
-   "current_date": "2026-10-15",
+   "current_date": "2026-10-16",
    "dividends": [],
-   "exit_pending": {},
+   "exit_pending": {
+    "ATKR": "2026-10-16",
+    "CLB": "2026-10-16",
+    "PG": "2026-10-16",
+    "UPS": "2026-10-16"
+   },
    "last_marks": {
-    "ABG": 171.04,
-    "ACEL": 11.19,
-    "ACM": 59.025,
-    "ADBE": 249.9,
-    "AGO": 70.29,
-    "ALLY": 37.71,
-    "ATKR": 94.945,
-    "BANC": 17.245,
-    "BCC": 75.58,
-    "BCML": 31.0,
-    "BELFA": 174.865,
-    "BFH": 101.22,
-    "BKU": 41.78,
-    "BLMN": 9.9,
-    "BRBR": 9.08,
-    "BSX": 43.805,
-    "BUR": 3.275,
-    "BYD": 70.94,
-    "CAL": 13.055,
-    "CCK": 113.345,
-    "CFFN": 8.25,
-    "CLB": 9.6,
-    "CMPR": 76.22,
-    "CNC": 70.7,
-    "COR": 340.245,
-    "CRUS": 107.94,
-    "DECK": 86.52,
-    "DOLE": 13.46,
-    "EG": 380.605,
-    "EGBN": 28.04,
-    "EPAM": 120.765,
-    "EXEL": 62.885,
-    "FHI": 56.43,
-    "FLG": 11.29,
-    "FRST": 15.45,
-    "FSBW": 44.4,
-    "FSUN": 38.24,
-    "GEN": 24.505,
-    "GLRE": 14.66,
-    "GM": 83.56,
-    "GNTX": 21.225,
-    "GPK": 8.755,
-    "GTN": 4.465,
-    "HG": 35.43,
-    "HOG": 27.53,
-    "HON": 207.97,
-    "HOPE": 13.345,
-    "HPQ": 30.765,
-    "HY": 30.17,
-    "IDCC": 324.89,
-    "INGR": 98.22,
-    "INVA": 21.07,
-    "JBI": 4.255,
-    "KMT": 30.44,
-    "KRNY": 9.015,
-    "LDOS": 123.055,
-    "LEA": 121.14,
-    "LKQ": 22.605,
-    "LMAT": 84.06,
-    "LNC": 39.835,
-    "LRN": 82.445,
-    "LULU": 99.08,
-    "M": 24.01,
-    "MBIN": 49.2,
-    "MDXG": 4.7,
-    "MGM": 29.28,
-    "MWA": 21.645,
-    "NATH": 101.95,
-    "NAVI": 9.455,
-    "NECB": 27.74,
-    "NEWT": 11.07,
-    "NGVT": 69.975,
-    "NPB": 15.76,
-    "OLED": 77.38,
-    "OTEX": 25.42,
-    "PAHC": 38.79,
-    "PFSI": 61.42,
-    "PG": 157.83,
-    "PKBK": 32.67,
-    "PKOH": 45.8,
-    "PLAB": 28.195,
-    "PRIM": 72.815,
-    "PRTH": 7.835,
-    "QCOM": 177.065,
-    "RBB": 25.7,
-    "REZI": 16.52,
-    "SBH": 16.72,
-    "SFM": 67.115,
-    "SKYW": 92.525,
-    "SMCI": 34.15,
-    "T": 23.575,
-    "TCMD": 23.03,
-    "TDC": 30.65,
-    "TGLS": 37.525,
-    "TTD": 13.01,
-    "UNFI": 47.58,
-    "UPS": 97.435,
-    "UPWK": 8.6812,
-    "VEL": 14.935,
-    "VITL": 8.6,
-    "VNT": 32.71,
-    "VTOL": 37.67,
-    "VVX": 68.58,
-    "WAFD": 29.365,
-    "WAL": 74.455,
-    "WFRD": 74.45,
-    "WGO": 24.56,
-    "WSBF": 20.0,
-    "WTM": 2146.4424,
-    "YELP": 20.27
+    "ABG": 169.87,
+    "ACEL": 11.06,
+    "ACM": 59.09,
+    "ADBE": 251.67,
+    "AGO": 69.86,
+    "ALLY": 37.73,
+    "ATKR": 94.92,
+    "BANC": 16.98,
+    "BCC": 75.48,
+    "BCML": 30.96,
+    "BDC": 104.22,
+    "BELFA": 176.77,
+    "BFH": 101.31,
+    "BKU": 42.01,
+    "BLMN": 9.93,
+    "BRBR": 8.99,
+    "BSX": 44.14,
+    "BUR": 3.29,
+    "BYD": 69.7,
+    "CAL": 12.24,
+    "CCK": 113.68,
+    "CFFN": 8.18,
+    "CLB": 9.78,
+    "CMPR": 76.72,
+    "CNC": 70.51,
+    "COR": 341.41,
+    "CRUS": 108.4,
+    "DECK": 86.58,
+    "DOLE": 13.41,
+    "EG": 381.35,
+    "EGBN": 28.02,
+    "EPAM": 122.26,
+    "EXEL": 60.99,
+    "FHI": 56.47,
+    "FLG": 11.25,
+    "FRST": 15.44,
+    "FSBW": 44.63,
+    "FSUN": 38.05,
+    "GEN": 24.82,
+    "GLRE": 14.74,
+    "GM": 83.66,
+    "GNTX": 21.11,
+    "GPK": 8.38,
+    "GTN": 4.46,
+    "HG": 35.5,
+    "HOG": 26.96,
+    "HON": 210.5,
+    "HOPE": 13.4,
+    "HPQ": 30.85,
+    "HY": 30.1,
+    "IDCC": 328.06,
+    "INGR": 97.27,
+    "INVA": 20.86,
+    "JBI": 4.22,
+    "KMT": 30.99,
+    "KRNY": 9.01,
+    "LDOS": 124.0,
+    "LEA": 121.49,
+    "LKQ": 22.36,
+    "LMAT": 83.16,
+    "LNC": 40.22,
+    "LRN": 83.18,
+    "LULU": 99.09,
+    "M": 24.22,
+    "MBIN": 48.45,
+    "MBUU": 22.68,
+    "MDXG": 4.68,
+    "MEI": 14.25,
+    "MGM": 29.48,
+    "MWA": 21.65,
+    "NATH": 101.88,
+    "NAVI": 9.56,
+    "NECB": 27.68,
+    "NEWT": 10.59,
+    "NGVT": 70.54,
+    "NPB": 15.62,
+    "OLED": 78.41,
+    "OTEX": 25.83,
+    "PAHC": 37.98,
+    "PCB": 27.6,
+    "PFSI": 61.19,
+    "PG": 157.08,
+    "PKBK": 32.62,
+    "PKOH": 46.19,
+    "PLAB": 28.53,
+    "PRIM": 78.03,
+    "PRTH": 7.82,
+    "QCOM": 172.62,
+    "RBB": 25.76,
+    "REZI": 16.58,
+    "SBH": 17.12,
+    "SFM": 66.63,
+    "SKYW": 93.26,
+    "SMCI": 35.09,
+    "T": 23.5,
+    "TCMD": 23.29,
+    "TDC": 31.26,
+    "TGLS": 37.35,
+    "TTD": 13.13,
+    "UNFI": 48.26,
+    "UPS": 97.83,
+    "UPWK": 8.74,
+    "VEL": 14.81,
+    "VITL": 8.55,
+    "VNT": 33.3,
+    "VTOL": 37.88,
+    "VVX": 68.6,
+    "WAFD": 29.45,
+    "WAL": 74.35,
+    "WEN": 6.44,
+    "WFRD": 75.0,
+    "WGO": 24.66,
+    "WSBF": 19.87,
+    "WTM": 2143.73,
+    "YELP": 20.41
    },
    "nav_series": [
     {
@@ -41295,14 +41859,22 @@
      "date": "2026-10-15",
      "nav": 99.75,
      "stale_marks": []
+    },
+    {
+     "bench": null,
+     "benches": {
+      "DRAM": 50.14,
+      "IWM": null,
+      "QQQ": 728.95,
+      "SOXX": 519.42,
+      "SPY": 769.6
+     },
+     "date": "2026-10-16",
+     "nav": 99.7881,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 100.0,
-    "holdings": {},
-    "units": null
-   },
-   "state": {
     "cash": 1.8052226380405045e-13,
     "holdings": {
      "ABG": {
@@ -41858,25 +42430,586 @@
     },
     "units": null
    },
+   "state": {
+    "cash": 0.14892333386720336,
+    "holdings": {
+     "ABG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 171.04,
+      "shares": 0.005292493670631719
+     },
+     "ACEL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 11.19,
+      "shares": 0.08103826468437729
+     },
+     "ACM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 59.025,
+      "shares": 0.015214687761553733
+     },
+     "ADBE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 249.9,
+      "shares": 0.003572280763818533
+     },
+     "AGO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 70.29,
+      "shares": 0.012869108214002436
+     },
+     "ALLY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 37.71,
+      "shares": 0.0238281447079303
+     },
+     "ATKR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 94.945,
+      "shares": 0.009550984062543387
+     },
+     "BANC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 17.245,
+      "shares": 0.05258441181897256
+     },
+     "BCC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 75.58,
+      "shares": 0.01191091547204836
+     },
+     "BCML": {
+      "entry_date": "2026-10-15",
+      "entry_price": 31.0,
+      "shares": 0.029038627255497742
+     },
+     "BDC": {
+      "entry_date": "2026-10-16",
+      "entry_price": 104.22,
+      "shares": 0.00860476213855915
+     },
+     "BELFA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 174.865,
+      "shares": 0.0050859076756814515
+     },
+     "BFH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 101.22,
+      "shares": 0.008874108181129306
+     },
+     "BKU": {
+      "entry_date": "2026-10-15",
+      "entry_price": 41.78,
+      "shares": 0.021400521300409668
+     },
+     "BLMN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 9.9,
+      "shares": 0.09053735144312287
+     },
+     "BRBR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 9.08,
+      "shares": 0.09986984381257509
+     },
+     "BSX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 43.805,
+      "shares": 0.020367827363620528
+     },
+     "BUR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 3.275,
+      "shares": 0.27326319143775385
+     },
+     "BYD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 70.94,
+      "shares": 0.0127828895097009
+     },
+     "CAL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.055,
+      "shares": 0.06946136972946625
+     },
+     "CCK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 113.345,
+      "shares": 0.007908479062545831
+     },
+     "CFFN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.25,
+      "shares": 0.10990658922129709
+     },
+     "CLB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 9.6,
+      "shares": 0.09446022727272728
+     },
+     "CMPR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 76.22,
+      "shares": 0.011718403282458422
+     },
+     "CNC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 70.7,
+      "shares": 0.012750473689266914
+     },
+     "COR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 340.245,
+      "shares": 0.0026333027732937235
+     },
+     "CRUS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 107.94,
+      "shares": 0.008293689112824817
+     },
+     "DECK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 86.52,
+      "shares": 0.010383875026913954
+     },
+     "DOLE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.46,
+      "shares": 0.06704219983819613
+     },
+     "EG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 380.605,
+      "shares": 0.002357508587466134
+     },
+     "EGBN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 28.04,
+      "shares": 0.03208550677481121
+     },
+     "EPAM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 120.765,
+      "shares": 0.007353475378948226
+     },
+     "EXEL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 62.885,
+      "shares": 0.014420262094588247
+     },
+     "FHI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 56.43,
+      "shares": 0.015920593232339474
+     },
+     "FLG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 11.29,
+      "shares": 0.07991430220712979
+     },
+     "FRST": {
+      "entry_date": "2026-10-15",
+      "entry_price": 15.45,
+      "shares": 0.0582277137195732
+     },
+     "FSBW": {
+      "entry_date": "2026-10-15",
+      "entry_price": 44.4,
+      "shares": 0.020144205687434687
+     },
+     "FSUN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 38.24,
+      "shares": 0.02362775032405283
+     },
+     "GEN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 24.505,
+      "shares": 0.03622223609307857
+     },
+     "GLRE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 14.66,
+      "shares": 0.060992937573284264
+     },
+     "GM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 83.56,
+      "shares": 0.010746305281259983
+     },
+     "GNTX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 21.225,
+      "shares": 0.04258815252630081
+     },
+     "GPK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.755,
+      "shares": 0.10357717667826177
+     },
+     "GTN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 4.465,
+      "shares": 0.20157755601574218
+     },
+     "HG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 35.43,
+      "shares": 0.02532495492479465
+     },
+     "HOG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 27.53,
+      "shares": 0.03293927285936004
+     },
+     "HON": {
+      "entry_date": "2026-10-15",
+      "entry_price": 207.97,
+      "shares": 0.004270954393492684
+     },
+     "HOPE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.345,
+      "shares": 0.0670922313306127
+     },
+     "HPQ": {
+      "entry_date": "2026-10-15",
+      "entry_price": 30.765,
+      "shares": 0.029142168552032742
+     },
+     "HY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 30.17,
+      "shares": 0.029868302319940535
+     },
+     "IDCC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 324.89,
+      "shares": 0.0027404618052496803
+     },
+     "INGR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 98.22,
+      "shares": 0.009232520686399733
+     },
+     "INVA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 21.07,
+      "shares": 0.04303835699184536
+     },
+     "JBI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 4.255,
+      "shares": 0.21304168242422042
+     },
+     "KMT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 30.44,
+      "shares": 0.029010516290100364
+     },
+     "KRNY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 9.015,
+      "shares": 0.09978200886017871
+     },
+     "LDOS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 123.055,
+      "shares": 0.007250289514759759
+     },
+     "LEA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 121.14,
+      "shares": 0.007400081486790766
+     },
+     "LKQ": {
+      "entry_date": "2026-10-15",
+      "entry_price": 22.605,
+      "shares": 0.04011582312843096
+     },
+     "LMAT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 84.06,
+      "shares": 0.010787749010447083
+     },
+     "LNC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 39.835,
+      "shares": 0.022352956236454755
+     },
+     "LRN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 82.445,
+      "shares": 0.010808318103272542
+     },
+     "LULU": {
+      "entry_date": "2026-10-15",
+      "entry_price": 99.08,
+      "shares": 0.009072922593906652
+     },
+     "M": {
+      "entry_date": "2026-10-15",
+      "entry_price": 24.01,
+      "shares": 0.03711956646697812
+     },
+     "MBIN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 49.2,
+      "shares": 0.018431263858093128
+     },
+     "MDXG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 4.7,
+      "shares": 0.19210168799790817
+     },
+     "MGM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 29.28,
+      "shares": 0.030496468786642136
+     },
+     "MWA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 21.645,
+      "shares": 0.041525907613404626
+     },
+     "NATH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 101.95,
+      "shares": 0.008824459165981647
+     },
+     "NAVI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 9.455,
+      "shares": 0.09404141211613076
+     },
+     "NECB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 27.74,
+      "shares": 0.03247962065860586
+     },
+     "NEWT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 11.07,
+      "shares": 0.08191672825819167
+     },
+     "NGVT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 69.975,
+      "shares": 0.012745051032466828
+     },
+     "NPB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 15.76,
+      "shares": 0.05753922473465621
+     },
+     "OLED": {
+      "entry_date": "2026-10-15",
+      "entry_price": 77.38,
+      "shares": 0.011465832162099352
+     },
+     "OTEX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 25.42,
+      "shares": 0.03480588075223423
+     },
+     "PAHC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 38.79,
+      "shares": 0.023377627785980456
+     },
+     "PFSI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 61.42,
+      "shares": 0.014692529822360028
+     },
+     "PG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 157.83,
+      "shares": 0.005745537488552124
+     },
+     "PKBK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 32.67,
+      "shares": 0.0275608798231211
+     },
+     "PKOH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 45.8,
+      "shares": 0.019463864469153717
+     },
+     "PLAB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 28.195,
+      "shares": 0.03151194881984613
+     },
+     "PRIM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 72.815,
+      "shares": 0.011521669868386649
+     },
+     "PRTH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 7.835,
+      "shares": 0.11496622759977111
+     },
+     "QCOM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 177.065,
+      "shares": 0.005121385829035562
+     },
+     "RBB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 25.7,
+      "shares": 0.03490046194993052
+     },
+     "REZI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 16.52,
+      "shares": 0.054224119410748506
+     },
+     "SBH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 16.72,
+      "shares": 0.05251377919568984
+     },
+     "SFM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 67.115,
+      "shares": 0.013492959625247039
+     },
+     "SKYW": {
+      "entry_date": "2026-10-15",
+      "entry_price": 92.525,
+      "shares": 0.009640101863931053
+     },
+     "SMCI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 34.15,
+      "shares": 0.025620857789404674
+     },
+     "T": {
+      "entry_date": "2026-10-15",
+      "entry_price": 23.575,
+      "shares": 0.038256846801285535
+     },
+     "TCMD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 23.03,
+      "shares": 0.03860179904809834
+     },
+     "TDC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 30.65,
+      "shares": 0.028759945611970893
+     },
+     "TGLS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 37.525,
+      "shares": 0.024070572953954757
+     },
+     "TTD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.01,
+      "shares": 0.06847188879133359
+     },
+     "UNFI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 47.58,
+      "shares": 0.018629007456075635
+     },
+     "UPS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 97.435,
+      "shares": 0.009306903903301501
+     },
+     "UPWK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.6812,
+      "shares": 0.10286451943137416
+     },
+     "VEL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 14.935,
+      "shares": 0.0607046522505206
+     },
+     "VITL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.6,
+      "shares": 0.10515039764096024
+     },
+     "VNT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 32.71,
+      "shares": 0.02699807506997628
+     },
+     "VTOL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 37.67,
+      "shares": 0.023733788274292768
+     },
+     "VVX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 68.58,
+      "shares": 0.013105479589361665
+     },
+     "WAFD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 29.365,
+      "shares": 0.03052753479898846
+     },
+     "WAL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 74.455,
+      "shares": 0.012091942163150104
+     },
+     "WFRD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 74.45,
+      "shares": 0.011987145331069468
+     },
+     "WGO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 24.56,
+      "shares": 0.03645725465653731
+     },
+     "WSBF": {
+      "entry_date": "2026-10-15",
+      "entry_price": 20.0,
+      "shares": 0.04524589329794716
+     },
+     "WTM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 2146.4424,
+      "shares": 0.00041937925943575456
+     },
+     "YELP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 20.27,
+      "shares": 0.04404879470015728
+     }
+    },
+    "units": null
+   },
    "summary": {
     "avg_hold_days": null,
-    "cagr_pct": -0.73,
+    "cagr_pct": -0.61,
     "closed_trades": 0,
-    "cumulative_return_pct": -0.25,
+    "cumulative_return_pct": -0.21,
     "excess_vs": {
-     "DRAM": -0.25,
-     "IWM": -0.25,
-     "QQQ": -0.25,
-     "SOXX": -0.25,
-     "SPY": -0.25
+     "DRAM": -3.37,
+     "IWM": -0.21,
+     "QQQ": -0.56,
+     "SOXX": -2.05,
+     "SPY": 0.04
     },
-    "excess_vs_bench_pct": -0.25,
+    "excess_vs_bench_pct": -0.21,
     "inception": "2026-06-12",
     "max_drawdown_pct": 0.0,
-    "observations": 1,
-    "open_positions": 110,
+    "observations": 2,
+    "open_positions": 111,
     "sharpe": null,
-    "total_traded_value": 100.0,
+    "total_traded_value": 101.95,
     "win_rate_pct": null
    },
    "trades": [
@@ -42759,137 +43892,880 @@
      "side": "buy",
      "ticker": "YELP",
      "value": 0.9091
+    },
+    {
+     "date": "2026-10-16",
+     "price": 169.87,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ABG",
+     "value": 0.0016
+    },
+    {
+     "date": "2026-10-16",
+     "price": 59.09,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ACM",
+     "value": 0.0088
+    },
+    {
+     "date": "2026-10-16",
+     "price": 251.67,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ADBE",
+     "value": 0.0142
+    },
+    {
+     "date": "2026-10-16",
+     "price": 69.86,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "AGO",
+     "value": 0.0022
+    },
+    {
+     "date": "2026-10-16",
+     "price": 37.73,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ALLY",
+     "value": 0.0082
+    },
+    {
+     "date": "2026-10-16",
+     "price": 75.48,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BCC",
+     "value": 0.0066
+    },
+    {
+     "date": "2026-10-16",
+     "price": 30.96,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BCML",
+     "value": 0.0066
+    },
+    {
+     "date": "2026-10-16",
+     "price": 176.77,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BELFA",
+     "value": 0.0176
+    },
+    {
+     "date": "2026-10-16",
+     "price": 101.31,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BFH",
+     "value": 0.0086
+    },
+    {
+     "date": "2026-10-16",
+     "price": 42.01,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BKU",
+     "value": 0.0127
+    },
+    {
+     "date": "2026-10-16",
+     "price": 9.93,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BLMN",
+     "value": 0.0105
+    },
+    {
+     "date": "2026-10-16",
+     "price": 44.14,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BSX",
+     "value": 0.0147
+    },
+    {
+     "date": "2026-10-16",
+     "price": 3.29,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BUR",
+     "value": 0.0119
+    },
+    {
+     "date": "2026-10-16",
+     "price": 113.68,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CCK",
+     "value": 0.0104
+    },
+    {
+     "date": "2026-10-16",
+     "price": 8.18,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CFFN",
+     "value": 0.0001
+    },
+    {
+     "date": "2026-10-16",
+     "price": 76.72,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CMPR",
+     "value": 0.0137
+    },
+    {
+     "date": "2026-10-16",
+     "price": 70.51,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CNC",
+     "value": 0.0053
+    },
+    {
+     "date": "2026-10-16",
+     "price": 341.41,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "COR",
+     "value": 0.0109
+    },
+    {
+     "date": "2026-10-16",
+     "price": 108.4,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CRUS",
+     "value": 0.0116
+    },
+    {
+     "date": "2026-10-16",
+     "price": 86.58,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "DECK",
+     "value": 0.0084
+    },
+    {
+     "date": "2026-10-16",
+     "price": 13.41,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "DOLE",
+     "value": 0.0044
+    },
+    {
+     "date": "2026-10-16",
+     "price": 381.35,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "EG",
+     "value": 0.0095
+    },
+    {
+     "date": "2026-10-16",
+     "price": 28.02,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "EGBN",
+     "value": 0.0071
+    },
+    {
+     "date": "2026-10-16",
+     "price": 122.26,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "EPAM",
+     "value": 0.019
+    },
+    {
+     "date": "2026-10-16",
+     "price": 56.47,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FHI",
+     "value": 0.0084
+    },
+    {
+     "date": "2026-10-16",
+     "price": 11.25,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FLG",
+     "value": 0.0046
+    },
+    {
+     "date": "2026-10-16",
+     "price": 15.44,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FRST",
+     "value": 0.0072
+    },
+    {
+     "date": "2026-10-16",
+     "price": 44.63,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FSBW",
+     "value": 0.0124
+    },
+    {
+     "date": "2026-10-16",
+     "price": 38.05,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FSUN",
+     "value": 0.0033
+    },
+    {
+     "date": "2026-10-16",
+     "price": 24.82,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "GEN",
+     "value": 0.0194
+    },
+    {
+     "date": "2026-10-16",
+     "price": 14.74,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "GLRE",
+     "value": 0.0127
+    },
+    {
+     "date": "2026-10-16",
+     "price": 83.66,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "GM",
+     "value": 0.0088
+    },
+    {
+     "date": "2026-10-16",
+     "price": 21.11,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "GNTX",
+     "value": 0.0029
+    },
+    {
+     "date": "2026-10-16",
+     "price": 4.46,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "GTN",
+     "value": 0.0067
+    },
+    {
+     "date": "2026-10-16",
+     "price": 35.5,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HG",
+     "value": 0.0095
+    },
+    {
+     "date": "2026-10-16",
+     "price": 210.5,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HON",
+     "value": 0.0188
+    },
+    {
+     "date": "2026-10-16",
+     "price": 13.4,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HOPE",
+     "value": 0.0115
+    },
+    {
+     "date": "2026-10-16",
+     "price": 30.85,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HPQ",
+     "value": 0.0103
+    },
+    {
+     "date": "2026-10-16",
+     "price": 30.1,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HY",
+     "value": 0.0057
+    },
+    {
+     "date": "2026-10-16",
+     "price": 328.06,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "IDCC",
+     "value": 0.0166
+    },
+    {
+     "date": "2026-10-16",
+     "price": 4.22,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "JBI",
+     "value": 0.0003
+    },
+    {
+     "date": "2026-10-16",
+     "price": 30.99,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "KMT",
+     "value": 0.0241
+    },
+    {
+     "date": "2026-10-16",
+     "price": 9.01,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "KRNY",
+     "value": 0.0073
+    },
+    {
+     "date": "2026-10-16",
+     "price": 124.0,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "LDOS",
+     "value": 0.0147
+    },
+    {
+     "date": "2026-10-16",
+     "price": 121.49,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "LEA",
+     "value": 0.0104
+    },
+    {
+     "date": "2026-10-16",
+     "price": 40.22,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "LNC",
+     "value": 0.0165
+    },
+    {
+     "date": "2026-10-16",
+     "price": 83.18,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "LRN",
+     "value": 0.0158
+    },
+    {
+     "date": "2026-10-16",
+     "price": 99.09,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "LULU",
+     "value": 0.0079
+    },
+    {
+     "date": "2026-10-16",
+     "price": 24.22,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "M",
+     "value": 0.0157
+    },
+    {
+     "date": "2026-10-16",
+     "price": 4.68,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "MDXG",
+     "value": 0.0039
+    },
+    {
+     "date": "2026-10-16",
+     "price": 29.48,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "MGM",
+     "value": 0.0139
+    },
+    {
+     "date": "2026-10-16",
+     "price": 21.65,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "MWA",
+     "value": 0.008
+    },
+    {
+     "date": "2026-10-16",
+     "price": 101.88,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "NATH",
+     "value": 0.0071
+    },
+    {
+     "date": "2026-10-16",
+     "price": 9.56,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "NAVI",
+     "value": 0.0178
+    },
+    {
+     "date": "2026-10-16",
+     "price": 27.68,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "NECB",
+     "value": 0.0058
+    },
+    {
+     "date": "2026-10-16",
+     "price": 70.54,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "NGVT",
+     "value": 0.0151
+    },
+    {
+     "date": "2026-10-16",
+     "price": 78.41,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "OLED",
+     "value": 0.0198
+    },
+    {
+     "date": "2026-10-16",
+     "price": 25.83,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "OTEX",
+     "value": 0.0224
+    },
+    {
+     "date": "2026-10-16",
+     "price": 61.19,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PFSI",
+     "value": 0.0044
+    },
+    {
+     "date": "2026-10-16",
+     "price": 32.62,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PKBK",
+     "value": 0.0064
+    },
+    {
+     "date": "2026-10-16",
+     "price": 46.19,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PKOH",
+     "value": 0.0155
+    },
+    {
+     "date": "2026-10-16",
+     "price": 28.53,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PLAB",
+     "value": 0.0185
+    },
+    {
+     "date": "2026-10-16",
+     "price": 78.03,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PRIM",
+     "value": 0.0725
+    },
+    {
+     "date": "2026-10-16",
+     "price": 7.82,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PRTH",
+     "value": 0.006
+    },
+    {
+     "date": "2026-10-16",
+     "price": 25.76,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "RBB",
+     "value": 0.0099
+    },
+    {
+     "date": "2026-10-16",
+     "price": 16.58,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "REZI",
+     "value": 0.011
+    },
+    {
+     "date": "2026-10-16",
+     "price": 17.12,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SBH",
+     "value": 0.0294
+    },
+    {
+     "date": "2026-10-16",
+     "price": 66.63,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SFM",
+     "value": 0.0012
+    },
+    {
+     "date": "2026-10-16",
+     "price": 93.26,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SKYW",
+     "value": 0.0149
+    },
+    {
+     "date": "2026-10-16",
+     "price": 35.09,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SMCI",
+     "value": 0.0327
+    },
+    {
+     "date": "2026-10-16",
+     "price": 23.5,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "T",
+     "value": 0.0049
+    },
+    {
+     "date": "2026-10-16",
+     "price": 23.29,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "TCMD",
+     "value": 0.018
+    },
+    {
+     "date": "2026-10-16",
+     "price": 31.26,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "TDC",
+     "value": 0.0258
+    },
+    {
+     "date": "2026-10-16",
+     "price": 37.35,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "TGLS",
+     "value": 0.0035
+    },
+    {
+     "date": "2026-10-16",
+     "price": 13.13,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "TTD",
+     "value": 0.0161
+    },
+    {
+     "date": "2026-10-16",
+     "price": 48.26,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "UNFI",
+     "value": 0.0207
+    },
+    {
+     "date": "2026-10-16",
+     "price": 8.74,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "UPWK",
+     "value": 0.0139
+    },
+    {
+     "date": "2026-10-16",
+     "price": 14.81,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "VEL",
+     "value": 0.0002
+    },
+    {
+     "date": "2026-10-16",
+     "price": 8.55,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "VITL",
+     "value": 0.0025
+    },
+    {
+     "date": "2026-10-16",
+     "price": 33.3,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "VNT",
+     "value": 0.0241
+    },
+    {
+     "date": "2026-10-16",
+     "price": 37.88,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "VTOL",
+     "value": 0.0128
+    },
+    {
+     "date": "2026-10-16",
+     "price": 68.6,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "VVX",
+     "value": 0.008
+    },
+    {
+     "date": "2026-10-16",
+     "price": 29.45,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WAFD",
+     "value": 0.0104
+    },
+    {
+     "date": "2026-10-16",
+     "price": 74.35,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WAL",
+     "value": 0.0065
+    },
+    {
+     "date": "2026-10-16",
+     "price": 75.0,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WFRD",
+     "value": 0.0144
+    },
+    {
+     "date": "2026-10-16",
+     "price": 24.66,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WGO",
+     "value": 0.0114
+    },
+    {
+     "date": "2026-10-16",
+     "price": 19.87,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WSBF",
+     "value": 0.0019
+    },
+    {
+     "date": "2026-10-16",
+     "price": 2143.73,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WTM",
+     "value": 0.0066
+    },
+    {
+     "date": "2026-10-16",
+     "price": 20.41,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "YELP",
+     "value": 0.014
+    },
+    {
+     "date": "2026-10-16",
+     "price": 104.22,
+     "reason": "entered_rank",
+     "side": "buy",
+     "ticker": "BDC",
+     "value": 0.899
     }
-   ]
+   ],
+   "underfunded_entrants": {
+    "date": "2026-10-16",
+    "tickers": [
+     "MBUU",
+     "MEI",
+     "PCB",
+     "WEN"
+    ]
+   }
   },
   "rn_v4_abs": {
    "closed": [],
-   "current_date": "2026-10-15",
+   "current_date": "2026-10-16",
    "dividends": [],
-   "exit_pending": {},
+   "exit_pending": {
+    "ACIC": "2026-10-16",
+    "BCML": "2026-10-16",
+    "HOPE": "2026-10-16",
+    "RRBI": "2026-10-16",
+    "TSBK": "2026-10-16"
+   },
    "last_marks": {
-    "ABCB": 79.57,
-    "ACIC": 10.93,
-    "AGO": 70.29,
-    "AIG": 79.03,
-    "ALLY": 37.71,
-    "ASB": 28.875,
-    "AX": 87.66,
-    "BAC": 51.965,
-    "BANC": 17.245,
-    "BANR": 67.265,
-    "BCAL": 21.75,
-    "BCML": 31.0,
-    "BFST": 31.12,
-    "BHRB": 69.2,
-    "BKU": 41.78,
-    "BOH": 66.98,
-    "BUSE": 29.21,
-    "BWB": 20.39,
-    "BWFG": 65.08,
-    "BY": 37.01,
-    "CBNK": 39.11,
-    "CCB": 42.68,
-    "CFFN": 8.25,
-    "CINF": 166.7,
-    "CIVB": 26.87,
-    "CNA": 47.385,
-    "COLB": 28.51,
-    "CPF": 35.91,
+    "ABCB": 79.74,
+    "ACIC": 10.95,
+    "AGO": 69.86,
+    "AIG": 79.12,
+    "ALLY": 37.73,
+    "ASB": 28.84,
+    "AX": 87.52,
+    "BAC": 51.7,
+    "BANC": 16.98,
+    "BANR": 67.34,
+    "BCAL": 21.71,
+    "BCML": 30.96,
+    "BFST": 31.13,
+    "BHRB": 69.75,
+    "BKU": 42.01,
+    "BOH": 67.19,
+    "BPOP": 157.37,
+    "BUSE": 29.26,
+    "BWB": 20.37,
+    "BWFG": 65.17,
+    "BY": 36.9,
+    "C": 122.27,
+    "CBNK": 39.43,
+    "CCB": 42.97,
+    "CCNE": 33.47,
+    "CFFI": 102.73,
+    "CFFN": 8.18,
+    "CINF": 167.22,
+    "CIVB": 26.85,
+    "CNA": 47.31,
+    "COLB": 28.63,
+    "CPF": 36.1,
     "CTBI": 74.43,
-    "CUBI": 74.7099,
-    "CZFS": 78.92,
-    "DCOM": 38.595,
-    "EFSC": 59.18,
-    "EG": 380.605,
-    "EGBN": 28.04,
-    "EIG": 50.12,
-    "FBIZ": 70.02,
-    "FCNCA": 2087.02,
-    "FDBC": 58.6902,
+    "CUBI": 74.35,
+    "CZFS": 79.12,
+    "DCOM": 38.78,
+    "EFSC": 59.27,
+    "EG": 381.35,
+    "EGBN": 28.02,
+    "EIG": 50.45,
+    "FBIZ": 70.08,
+    "FCNCA": 2097.2,
+    "FDBC": 57.84,
     "FG": 19.61,
-    "FHB": 24.87,
-    "FIBK": 34.71,
-    "FISI": 39.13,
-    "FLG": 11.29,
-    "FMAO": 35.02,
-    "FMBH": 49.405,
-    "FNB": 17.19,
-    "FNLC": 33.7627,
-    "FSBW": 44.4,
-    "FSUN": 38.24,
-    "FULT": 22.305,
-    "FVCB": 17.46,
-    "GLRE": 14.66,
-    "HAFC": 30.87,
-    "HBCP": 65.93,
-    "HG": 35.43,
-    "HMN": 45.45,
-    "HOPE": 13.345,
-    "HTB": 46.57,
-    "HTH": 36.66,
-    "HWC": 72.73,
-    "IBOC": 67.74,
-    "ISTR": 28.64,
-    "ITIC": 289.46,
-    "JMSB": 22.77,
-    "JXN": 130.395,
+    "FHB": 24.94,
+    "FIBK": 34.81,
+    "FISI": 39.27,
+    "FLG": 11.25,
+    "FMAO": 35.12,
+    "FMBH": 49.29,
+    "FNB": 17.16,
+    "FNLC": 33.8,
+    "FSBW": 44.63,
+    "FSUN": 38.05,
+    "FULT": 22.35,
+    "FVCB": 17.53,
+    "GLRE": 14.74,
+    "HAFC": 30.94,
+    "HBCP": 65.87,
+    "HG": 35.5,
+    "HMN": 45.75,
+    "HOPE": 13.4,
+    "HTB": 46.49,
+    "HTH": 36.77,
+    "HWC": 73.03,
+    "IBOC": 67.65,
+    "INVA": 20.86,
+    "ISTR": 28.69,
+    "ITIC": 288.15,
+    "JMSB": 22.79,
+    "JXN": 131.56,
     "KMPR": 28.42,
-    "KRNY": 9.015,
-    "L": 109.025,
-    "LNC": 39.835,
-    "MBIN": 49.2,
-    "MBWM": 58.35,
-    "MKL": 1821.46,
-    "MVBF": 29.09,
-    "NAVI": 9.455,
-    "NECB": 27.74,
-    "NPB": 15.76,
-    "NWFL": 33.5,
-    "OBT": 36.885,
-    "OFG": 51.7,
-    "ORRF": 41.5,
-    "PCB": 28.045,
-    "PDLB": 20.1659,
-    "PEBO": 36.33,
-    "PFIS": 67.82,
-    "PFS": 22.185,
-    "PKBK": 32.67,
-    "PNC": 216.73,
-    "PRU": 115.37,
-    "QCRH": 98.66,
-    "RBCAA": 91.745,
-    "RGA": 264.01,
-    "RNR": 342.36,
-    "RRBI": 101.165,
-    "SAFT": 104.02,
-    "SBSI": 30.57,
-    "SHBI": 22.465,
-    "SIGI": 87.42,
-    "SMBC": 69.64,
-    "SPNT": 25.05,
-    "SRCE": 85.53,
-    "SSB": 101.43,
-    "TCBI": 90.67,
-    "TCBX": 41.615,
-    "TFC": 46.705,
+    "KRNY": 9.01,
+    "L": 108.79,
+    "LNC": 40.22,
+    "MBIN": 48.45,
+    "MBWM": 58.32,
+    "MKL": 1824.54,
+    "MPB": 35.97,
+    "MVBF": 29.07,
+    "NAVI": 9.56,
+    "NECB": 27.68,
+    "NPB": 15.62,
+    "NWFL": 33.46,
+    "OBT": 36.73,
+    "OFG": 52.13,
+    "ORRF": 41.49,
+    "PCB": 27.6,
+    "PDLB": 19.95,
+    "PEBO": 36.62,
+    "PFIS": 68.05,
+    "PFS": 22.2,
+    "PKBK": 32.62,
+    "PNC": 214.94,
+    "PRU": 116.35,
+    "QCRH": 98.79,
+    "RBB": 25.76,
+    "RBCAA": 91.76,
+    "RGA": 264.04,
+    "RNR": 344.16,
+    "RRBI": 101.17,
+    "SAFT": 104.0,
+    "SBSI": 30.5,
+    "SHBI": 22.54,
+    "SIGI": 86.21,
+    "SMBC": 69.89,
+    "SPNT": 24.87,
+    "SRCE": 84.33,
+    "SSB": 101.29,
+    "TCBI": 90.7,
+    "TCBX": 41.2,
+    "TFC": 46.57,
     "THFF": 73.73,
-    "TRMK": 44.71,
-    "TSBK": 45.79,
-    "UFCS": 55.7,
-    "UNTY": 55.48,
-    "UPWK": 8.6812,
-    "USCB": 22.18,
-    "UVSP": 40.83,
-    "VEL": 14.935,
-    "VLY": 12.635,
-    "WABC": 60.79,
-    "WAFD": 29.365,
-    "WAL": 74.455,
-    "WASH": 37.12,
-    "WTFC": 143.91,
-    "WTM": 2146.4424,
-    "ZION": 63.14
+    "TRMK": 44.87,
+    "TSBK": 45.38,
+    "UFCS": 55.4,
+    "UNTY": 56.06,
+    "UPWK": 8.74,
+    "USCB": 22.33,
+    "UVSP": 41.05,
+    "VEL": 14.81,
+    "VLY": 12.75,
+    "WABC": 60.9,
+    "WAFD": 29.45,
+    "WAL": 74.35,
+    "WASH": 37.07,
+    "WSBF": 19.87,
+    "WTFC": 143.54,
+    "WTM": 2143.73,
+    "ZION": 63.01
    },
    "nav_series": [
     {
@@ -42904,14 +44780,22 @@
      "date": "2026-10-15",
      "nav": 99.75,
      "stale_marks": []
+    },
+    {
+     "bench": null,
+     "benches": {
+      "DRAM": 50.14,
+      "IWM": null,
+      "QQQ": 728.95,
+      "SOXX": 519.42,
+      "SPY": 769.6
+     },
+     "date": "2026-10-16",
+     "nav": 99.7481,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 100.0,
-    "holdings": {},
-    "units": null
-   },
-   "state": {
     "cash": 0.0,
     "holdings": {
      "ABCB": {
@@ -43527,25 +45411,651 @@
     },
     "units": null
    },
+   "state": {
+    "cash": 0.6979802012855272,
+    "holdings": {
+     "ABCB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 79.57,
+      "shares": 0.010008308103202768
+     },
+     "ACIC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 10.93,
+      "shares": 0.07480539348761868
+     },
+     "AGO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 70.29,
+      "shares": 0.01142374016818478
+     },
+     "AIG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 79.03,
+      "shares": 0.010086735188945761
+     },
+     "ALLY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 37.71,
+      "shares": 0.021151934485804103
+     },
+     "ASB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 28.875,
+      "shares": 0.027672069630700024
+     },
+     "AX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 87.66,
+      "shares": 0.009118629892017697
+     },
+     "BAC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 51.965,
+      "shares": 0.015436411763044269
+     },
+     "BANC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 17.245,
+      "shares": 0.04700014653412184
+     },
+     "BANR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 67.265,
+      "shares": 0.011851239800258224
+     },
+     "BCAL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 21.75,
+      "shares": 0.036760133033136286
+     },
+     "BCML": {
+      "entry_date": "2026-10-15",
+      "entry_price": 31.0,
+      "shares": 0.02637493389740878
+     },
+     "BFST": {
+      "entry_date": "2026-10-15",
+      "entry_price": 31.12,
+      "shares": 0.025636443564066455
+     },
+     "BHRB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 69.2,
+      "shares": 0.011441756102500197
+     },
+     "BKU": {
+      "entry_date": "2026-10-15",
+      "entry_price": 41.78,
+      "shares": 0.018996964726241104
+     },
+     "BOH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 66.98,
+      "shares": 0.011877697397669128
+     },
+     "BPOP": {
+      "entry_date": "2026-10-16",
+      "entry_price": 157.37,
+      "shares": 0.005058571086795548
+     },
+     "BUSE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 29.21,
+      "shares": 0.027274862889589496
+     },
+     "BWB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 20.39,
+      "shares": 0.039178325387795226
+     },
+     "BWFG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 65.08,
+      "shares": 0.012245856807570794
+     },
+     "BY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 37.01,
+      "shares": 0.021627709705945495
+     },
+     "C": {
+      "entry_date": "2026-10-16",
+      "entry_price": 122.27,
+      "shares": 0.006510733065584489
+     },
+     "CBNK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 39.11,
+      "shares": 0.020239981946471943
+     },
+     "CCB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 42.68,
+      "shares": 0.018572550340921312
+     },
+     "CFFN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.25,
+      "shares": 0.09756265136300596
+     },
+     "CINF": {
+      "entry_date": "2026-10-15",
+      "entry_price": 166.7,
+      "shares": 0.004772530128868489
+     },
+     "CIVB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 26.87,
+      "shares": 0.029722997696439057
+     },
+     "CNA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 47.385,
+      "shares": 0.016868790702798325
+     },
+     "COLB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 28.51,
+      "shares": 0.027875043246573132
+     },
+     "CPF": {
+      "entry_date": "2026-10-15",
+      "entry_price": 35.91,
+      "shares": 0.022106994131562013
+     },
+     "CTBI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 74.43,
+      "shares": 0.010722322828824246
+     },
+     "CUBI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 74.7099,
+      "shares": 0.010733859961659566
+     },
+     "CZFS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 78.92,
+      "shares": 0.010086735188945761
+     },
+     "DCOM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 38.595,
+      "shares": 0.020579228678426733
+     },
+     "EFSC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 59.18,
+      "shares": 0.01346486398092439
+     },
+     "EG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 380.605,
+      "shares": 0.0020927297447210927
+     },
+     "EGBN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 28.04,
+      "shares": 0.0284818875142537
+     },
+     "EIG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 50.12,
+      "shares": 0.01581887984438828
+     },
+     "FBIZ": {
+      "entry_date": "2026-10-15",
+      "entry_price": 70.02,
+      "shares": 0.011387877970168218
+     },
+     "FCNCA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 2087.02,
+      "shares": 0.0003805371391137654
+     },
+     "FDBC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 58.6902,
+      "shares": 0.01379776086012083
+     },
+     "FG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 19.61,
+      "shares": 0.040696710257490505
+     },
+     "FHB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 24.87,
+      "shares": 0.03199929784079345
+     },
+     "FIBK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 34.71,
+      "shares": 0.022926242118626507
+     },
+     "FISI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 39.13,
+      "shares": 0.020322446858909823
+     },
+     "FLG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 11.29,
+      "shares": 0.07093888783550122
+     },
+     "FMAO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 35.02,
+      "shares": 0.022723874947306058
+     },
+     "FMBH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 49.405,
+      "shares": 0.016191164295990844
+     },
+     "FNB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 17.19,
+      "shares": 0.04650713800404364
+     },
+     "FNLC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 33.7627,
+      "shares": 0.02361131621743754
+     },
+     "FSBW": {
+      "entry_date": "2026-10-15",
+      "entry_price": 44.4,
+      "shares": 0.017881749678453702
+     },
+     "FSUN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 38.24,
+      "shares": 0.020974046994727696
+     },
+     "FULT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 22.305,
+      "shares": 0.035707493876930146
+     },
+     "FVCB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 17.46,
+      "shares": 0.045525526990837915
+     },
+     "GLRE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 14.66,
+      "shares": 0.054142638273364234
+     },
+     "HAFC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 30.87,
+      "shares": 0.025793874859385543
+     },
+     "HBCP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 65.93,
+      "shares": 0.012115720178372381
+     },
+     "HG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 35.43,
+      "shares": 0.022480633468996866
+     },
+     "HMN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 45.45,
+      "shares": 0.017443988812008496
+     },
+     "HOPE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.345,
+      "shares": 0.0612681117137259
+     },
+     "HTB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 46.57,
+      "shares": 0.017166325836725935
+     },
+     "HTH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 36.66,
+      "shares": 0.021704174276567546
+     },
+     "HWC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 72.73,
+      "shares": 0.010927871945082688
+     },
+     "IBOC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 67.74,
+      "shares": 0.011796932566879359
+     },
+     "ISTR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 28.64,
+      "shares": 0.02781674758276015
+     },
+     "ITIC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 289.46,
+      "shares": 0.0027696078020107194
+     },
+     "JMSB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 22.77,
+      "shares": 0.035018099523887174
+     },
+     "JXN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 130.395,
+      "shares": 0.006066148435310038
+     },
+     "KMPR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 28.42,
+      "shares": 0.02808101647253303
+     },
+     "KRNY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 9.015,
+      "shares": 0.08857519291336169
+     },
+     "L": {
+      "entry_date": "2026-10-15",
+      "entry_price": 109.025,
+      "shares": 0.007335807410142372
+     },
+     "LNC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 39.835,
+      "shares": 0.019842428845086742
+     },
+     "MBIN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 49.2,
+      "shares": 0.016471877980379537
+     },
+     "MBWM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 58.35,
+      "shares": 0.013684199042342056
+     },
+     "MKL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 1821.46,
+      "shares": 0.00043740476402237755
+     },
+     "MVBF": {
+      "entry_date": "2026-10-15",
+      "entry_price": 29.09,
+      "shares": 0.027453129967299233
+     },
+     "NAVI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 9.455,
+      "shares": 0.08347933976458041
+     },
+     "NECB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 27.74,
+      "shares": 0.028831737288633984
+     },
+     "NPB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 15.76,
+      "shares": 0.051092348793174695
+     },
+     "NWFL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 33.5,
+      "shares": 0.02385123993273726
+     },
+     "OBT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 36.885,
+      "shares": 0.021727810730993433
+     },
+     "OFG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 51.7,
+      "shares": 0.015309082834248776
+     },
+     "ORRF": {
+      "entry_date": "2026-10-15",
+      "entry_price": 41.5,
+      "shares": 0.01923505635452853
+     },
+     "PCB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 28.045,
+      "shares": 0.02891530754164452
+     },
+     "PDLB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 20.1659,
+      "shares": 0.0400031322380646
+     },
+     "PEBO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 36.33,
+      "shares": 0.021793077229639236
+     },
+     "PFIS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 67.82,
+      "shares": 0.011727589833201893
+     },
+     "PFS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 22.185,
+      "shares": 0.035948760727449944
+     },
+     "PKBK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 32.67,
+      "shares": 0.0244654349524644
+     },
+     "PNC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 216.73,
+      "shares": 0.003712954722943095
+     },
+     "PRU": {
+      "entry_date": "2026-10-15",
+      "entry_price": 115.37,
+      "shares": 0.00685915331456286
+     },
+     "QCRH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 98.66,
+      "shares": 0.008078373197179762
+     },
+     "RBCAA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 91.745,
+      "shares": 0.008697280821157245
+     },
+     "RGA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 264.01,
+      "shares": 0.003022506014806047
+     },
+     "RNR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 342.36,
+      "shares": 0.0023188705490161227
+     },
+     "RRBI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 101.165,
+      "shares": 0.008082073353626967
+     },
+     "SAFT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 104.02,
+      "shares": 0.007673677770667199
+     },
+     "SBSI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 30.57,
+      "shares": 0.026165983218012747
+     },
+     "SHBI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 22.465,
+      "shares": 0.035406499030585126
+     },
+     "SIGI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 87.42,
+      "shares": 0.00925719160363518
+     },
+     "SMBC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 69.64,
+      "shares": 0.0114188365738931
+     },
+     "SPNT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 25.05,
+      "shares": 0.03208936421991913
+     },
+     "SRCE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 85.53,
+      "shares": 0.009463565613060462
+     },
+     "SSB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 101.43,
+      "shares": 0.007878985962576648
+     },
+     "TCBI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 90.67,
+      "shares": 0.00879892489690616
+     },
+     "TCBX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 41.615,
+      "shares": 0.019370448741490017
+     },
+     "TFC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 46.705,
+      "shares": 0.017136836765071693
+     },
+     "THFF": {
+      "entry_date": "2026-10-15",
+      "entry_price": 73.73,
+      "shares": 0.010824121635011376
+     },
+     "TRMK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 44.71,
+      "shares": 0.01778610403720501
+     },
+     "TSBK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 45.79,
+      "shares": 0.01785592816815183
+     },
+     "UFCS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 55.7,
+      "shares": 0.014405460074898714
+     },
+     "UNTY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 55.48,
+      "shares": 0.014235863149293412
+     },
+     "UPWK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.6812,
+      "shares": 0.09131149749993006
+     },
+     "USCB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 22.18,
+      "shares": 0.03573947551049659
+     },
+     "UVSP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 40.83,
+      "shares": 0.019441229918377316
+     },
+     "VEL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 14.935,
+      "shares": 0.053886731137703495
+     },
+     "VLY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 12.635,
+      "shares": 0.06259313632544225
+     },
+     "WABC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 60.79,
+      "shares": 0.013104474353848749
+     },
+     "WAFD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 29.365,
+      "shares": 0.027098896032237307
+     },
+     "WAL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 74.455,
+      "shares": 0.010733859961659566
+     },
+     "WASH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 37.12,
+      "shares": 0.02152852679118934
+     },
+     "WTFC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 143.91,
+      "shares": 0.005559861280126716
+     },
+     "WTM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 2146.4424,
+      "shares": 0.00037227752009319677
+     },
+     "ZION": {
+      "entry_date": "2026-10-15",
+      "entry_price": 63.14,
+      "shares": 0.01266564812171701
+     }
+    },
+    "units": null
+   },
    "summary": {
     "avg_hold_days": null,
     "cagr_pct": -0.73,
     "closed_trades": 0,
     "cumulative_return_pct": -0.25,
     "excess_vs": {
-     "DRAM": -0.25,
+     "DRAM": -3.41,
      "IWM": -0.25,
-     "QQQ": -0.25,
-     "SOXX": -0.25,
-     "SPY": -0.25
+     "QQQ": -0.6,
+     "SOXX": -2.09,
+     "SPY": 0.0
     },
     "excess_vs_bench_pct": -0.25,
     "inception": "2026-06-12",
-    "max_drawdown_pct": 0.0,
-    "observations": 1,
-    "open_positions": 122,
+    "max_drawdown_pct": -0.0,
+    "observations": 2,
+    "open_positions": 124,
     "sharpe": null,
-    "total_traded_value": 100.0,
+    "total_traded_value": 103.89,
     "win_rate_pct": null
    },
    "trades": [
@@ -44524,118 +47034,1203 @@
      "side": "buy",
      "ticker": "ZION",
      "value": 0.8197
+    },
+    {
+     "date": "2026-10-16",
+     "price": 79.74,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ABCB",
+     "value": 0.0213
+    },
+    {
+     "date": "2026-10-16",
+     "price": 69.86,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "AGO",
+     "value": 0.0145
+    },
+    {
+     "date": "2026-10-16",
+     "price": 79.12,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "AIG",
+     "value": 0.0204
+    },
+    {
+     "date": "2026-10-16",
+     "price": 37.73,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ALLY",
+     "value": 0.0199
+    },
+    {
+     "date": "2026-10-16",
+     "price": 28.84,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ASB",
+     "value": 0.0185
+    },
+    {
+     "date": "2026-10-16",
+     "price": 87.52,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "AX",
+     "value": 0.0182
+    },
+    {
+     "date": "2026-10-16",
+     "price": 51.7,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BAC",
+     "value": 0.0154
+    },
+    {
+     "date": "2026-10-16",
+     "price": 16.98,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BANC",
+     "value": 0.007
+    },
+    {
+     "date": "2026-10-16",
+     "price": 67.34,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BANR",
+     "value": 0.0204
+    },
+    {
+     "date": "2026-10-16",
+     "price": 21.71,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BCAL",
+     "value": 0.018
+    },
+    {
+     "date": "2026-10-16",
+     "price": 31.13,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BFST",
+     "value": 0.0198
+    },
+    {
+     "date": "2026-10-16",
+     "price": 69.75,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BHRB",
+     "value": 0.026
+    },
+    {
+     "date": "2026-10-16",
+     "price": 42.01,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BKU",
+     "value": 0.024
+    },
+    {
+     "date": "2026-10-16",
+     "price": 67.19,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BOH",
+     "value": 0.0221
+    },
+    {
+     "date": "2026-10-16",
+     "price": 29.26,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BUSE",
+     "value": 0.0209
+    },
+    {
+     "date": "2026-10-16",
+     "price": 20.37,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BWB",
+     "value": 0.0187
+    },
+    {
+     "date": "2026-10-16",
+     "price": 65.17,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BWFG",
+     "value": 0.0206
+    },
+    {
+     "date": "2026-10-16",
+     "price": 36.9,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "BY",
+     "value": 0.0171
+    },
+    {
+     "date": "2026-10-16",
+     "price": 39.43,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CBNK",
+     "value": 0.0262
+    },
+    {
+     "date": "2026-10-16",
+     "price": 42.97,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CCB",
+     "value": 0.0251
+    },
+    {
+     "date": "2026-10-16",
+     "price": 8.18,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CFFN",
+     "value": 0.0126
+    },
+    {
+     "date": "2026-10-16",
+     "price": 167.22,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CINF",
+     "value": 0.0221
+    },
+    {
+     "date": "2026-10-16",
+     "price": 26.85,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CIVB",
+     "value": 0.0189
+    },
+    {
+     "date": "2026-10-16",
+     "price": 47.31,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CNA",
+     "value": 0.0182
+    },
+    {
+     "date": "2026-10-16",
+     "price": 28.63,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "COLB",
+     "value": 0.0229
+    },
+    {
+     "date": "2026-10-16",
+     "price": 36.1,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CPF",
+     "value": 0.0238
+    },
+    {
+     "date": "2026-10-16",
+     "price": 74.43,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CTBI",
+     "value": 0.0195
+    },
+    {
+     "date": "2026-10-16",
+     "price": 74.35,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CUBI",
+     "value": 0.0156
+    },
+    {
+     "date": "2026-10-16",
+     "price": 79.12,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "CZFS",
+     "value": 0.0216
+    },
+    {
+     "date": "2026-10-16",
+     "price": 38.78,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "DCOM",
+     "value": 0.0234
+    },
+    {
+     "date": "2026-10-16",
+     "price": 59.27,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "EFSC",
+     "value": 0.0208
+    },
+    {
+     "date": "2026-10-16",
+     "price": 381.35,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "EG",
+     "value": 0.0211
+    },
+    {
+     "date": "2026-10-16",
+     "price": 28.02,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "EGBN",
+     "value": 0.0189
+    },
+    {
+     "date": "2026-10-16",
+     "price": 50.45,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "EIG",
+     "value": 0.0249
+    },
+    {
+     "date": "2026-10-16",
+     "price": 70.08,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FBIZ",
+     "value": 0.0202
+    },
+    {
+     "date": "2026-10-16",
+     "price": 2097.2,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FCNCA",
+     "value": 0.0235
+    },
+    {
+     "date": "2026-10-16",
+     "price": 57.84,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FDBC",
+     "value": 0.0077
+    },
+    {
+     "date": "2026-10-16",
+     "price": 19.61,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FG",
+     "value": 0.0195
+    },
+    {
+     "date": "2026-10-16",
+     "price": 24.94,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FHB",
+     "value": 0.0218
+    },
+    {
+     "date": "2026-10-16",
+     "price": 34.81,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FIBK",
+     "value": 0.0219
+    },
+    {
+     "date": "2026-10-16",
+     "price": 39.27,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FISI",
+     "value": 0.0224
+    },
+    {
+     "date": "2026-10-16",
+     "price": 11.25,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FLG",
+     "value": 0.0166
+    },
+    {
+     "date": "2026-10-16",
+     "price": 35.12,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FMAO",
+     "value": 0.0218
+    },
+    {
+     "date": "2026-10-16",
+     "price": 49.29,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FMBH",
+     "value": 0.0176
+    },
+    {
+     "date": "2026-10-16",
+     "price": 17.16,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FNB",
+     "value": 0.0181
+    },
+    {
+     "date": "2026-10-16",
+     "price": 33.8,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FNLC",
+     "value": 0.0204
+    },
+    {
+     "date": "2026-10-16",
+     "price": 44.63,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FSBW",
+     "value": 0.0237
+    },
+    {
+     "date": "2026-10-16",
+     "price": 38.05,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FSUN",
+     "value": 0.0155
+    },
+    {
+     "date": "2026-10-16",
+     "price": 22.35,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FULT",
+     "value": 0.0212
+    },
+    {
+     "date": "2026-10-16",
+     "price": 17.53,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "FVCB",
+     "value": 0.0228
+    },
+    {
+     "date": "2026-10-16",
+     "price": 14.74,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "GLRE",
+     "value": 0.024
+    },
+    {
+     "date": "2026-10-16",
+     "price": 30.94,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HAFC",
+     "value": 0.0214
+    },
+    {
+     "date": "2026-10-16",
+     "price": 65.87,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HBCP",
+     "value": 0.0188
+    },
+    {
+     "date": "2026-10-16",
+     "price": 35.5,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HG",
+     "value": 0.0211
+    },
+    {
+     "date": "2026-10-16",
+     "price": 45.75,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HMN",
+     "value": 0.0249
+    },
+    {
+     "date": "2026-10-16",
+     "price": 46.49,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HTB",
+     "value": 0.0181
+    },
+    {
+     "date": "2026-10-16",
+     "price": 36.77,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HTH",
+     "value": 0.022
+    },
+    {
+     "date": "2026-10-16",
+     "price": 73.03,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "HWC",
+     "value": 0.0229
+    },
+    {
+     "date": "2026-10-16",
+     "price": 67.65,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "IBOC",
+     "value": 0.0184
+    },
+    {
+     "date": "2026-10-16",
+     "price": 28.69,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ISTR",
+     "value": 0.0209
+    },
+    {
+     "date": "2026-10-16",
+     "price": 288.15,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ITIC",
+     "value": 0.0158
+    },
+    {
+     "date": "2026-10-16",
+     "price": 22.79,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "JMSB",
+     "value": 0.0202
+    },
+    {
+     "date": "2026-10-16",
+     "price": 131.56,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "JXN",
+     "value": 0.0268
+    },
+    {
+     "date": "2026-10-16",
+     "price": 28.42,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "KMPR",
+     "value": 0.0195
+    },
+    {
+     "date": "2026-10-16",
+     "price": 9.01,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "KRNY",
+     "value": 0.0191
+    },
+    {
+     "date": "2026-10-16",
+     "price": 108.79,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "L",
+     "value": 0.0178
+    },
+    {
+     "date": "2026-10-16",
+     "price": 40.22,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "LNC",
+     "value": 0.0274
+    },
+    {
+     "date": "2026-10-16",
+     "price": 48.45,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "MBIN",
+     "value": 0.0071
+    },
+    {
+     "date": "2026-10-16",
+     "price": 58.32,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "MBWM",
+     "value": 0.0191
+    },
+    {
+     "date": "2026-10-16",
+     "price": 1824.54,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "MKL",
+     "value": 0.0209
+    },
+    {
+     "date": "2026-10-16",
+     "price": 29.07,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "MVBF",
+     "value": 0.019
+    },
+    {
+     "date": "2026-10-16",
+     "price": 9.56,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "NAVI",
+     "value": 0.0286
+    },
+    {
+     "date": "2026-10-16",
+     "price": 27.68,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "NECB",
+     "value": 0.0177
+    },
+    {
+     "date": "2026-10-16",
+     "price": 15.62,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "NPB",
+     "value": 0.0123
+    },
+    {
+     "date": "2026-10-16",
+     "price": 33.46,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "NWFL",
+     "value": 0.0185
+    },
+    {
+     "date": "2026-10-16",
+     "price": 36.73,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "OBT",
+     "value": 0.0161
+    },
+    {
+     "date": "2026-10-16",
+     "price": 52.13,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "OFG",
+     "value": 0.0263
+    },
+    {
+     "date": "2026-10-16",
+     "price": 41.49,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ORRF",
+     "value": 0.0193
+    },
+    {
+     "date": "2026-10-16",
+     "price": 27.6,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PCB",
+     "value": 0.0066
+    },
+    {
+     "date": "2026-10-16",
+     "price": 19.95,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PDLB",
+     "value": 0.0108
+    },
+    {
+     "date": "2026-10-16",
+     "price": 36.62,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PEBO",
+     "value": 0.026
+    },
+    {
+     "date": "2026-10-16",
+     "price": 68.05,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PFIS",
+     "value": 0.0223
+    },
+    {
+     "date": "2026-10-16",
+     "price": 22.2,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PFS",
+     "value": 0.0201
+    },
+    {
+     "date": "2026-10-16",
+     "price": 32.62,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PKBK",
+     "value": 0.0183
+    },
+    {
+     "date": "2026-10-16",
+     "price": 214.94,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PNC",
+     "value": 0.0128
+    },
+    {
+     "date": "2026-10-16",
+     "price": 116.35,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "PRU",
+     "value": 0.0264
+    },
+    {
+     "date": "2026-10-16",
+     "price": 98.79,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "QCRH",
+     "value": 0.0206
+    },
+    {
+     "date": "2026-10-16",
+     "price": 91.76,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "RBCAA",
+     "value": 0.0196
+    },
+    {
+     "date": "2026-10-16",
+     "price": 264.04,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "RGA",
+     "value": 0.0196
+    },
+    {
+     "date": "2026-10-16",
+     "price": 344.16,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "RNR",
+     "value": 0.0238
+    },
+    {
+     "date": "2026-10-16",
+     "price": 104.0,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SAFT",
+     "value": 0.0194
+    },
+    {
+     "date": "2026-10-16",
+     "price": 30.5,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SBSI",
+     "value": 0.0176
+    },
+    {
+     "date": "2026-10-16",
+     "price": 22.54,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SHBI",
+     "value": 0.0222
+    },
+    {
+     "date": "2026-10-16",
+     "price": 86.21,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SIGI",
+     "value": 0.0082
+    },
+    {
+     "date": "2026-10-16",
+     "price": 69.89,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SMBC",
+     "value": 0.0224
+    },
+    {
+     "date": "2026-10-16",
+     "price": 24.87,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SPNT",
+     "value": 0.0137
+    },
+    {
+     "date": "2026-10-16",
+     "price": 84.33,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SRCE",
+     "value": 0.0081
+    },
+    {
+     "date": "2026-10-16",
+     "price": 101.29,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "SSB",
+     "value": 0.0184
+    },
+    {
+     "date": "2026-10-16",
+     "price": 90.7,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "TCBI",
+     "value": 0.0198
+    },
+    {
+     "date": "2026-10-16",
+     "price": 41.2,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "TCBX",
+     "value": 0.0114
+    },
+    {
+     "date": "2026-10-16",
+     "price": 46.57,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "TFC",
+     "value": 0.0172
+    },
+    {
+     "date": "2026-10-16",
+     "price": 73.73,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "THFF",
+     "value": 0.0195
+    },
+    {
+     "date": "2026-10-16",
+     "price": 44.87,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "TRMK",
+     "value": 0.0224
+    },
+    {
+     "date": "2026-10-16",
+     "price": 55.4,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "UFCS",
+     "value": 0.0151
+    },
+    {
+     "date": "2026-10-16",
+     "price": 56.06,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "UNTY",
+     "value": 0.028
+    },
+    {
+     "date": "2026-10-16",
+     "price": 8.74,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "UPWK",
+     "value": 0.025
+    },
+    {
+     "date": "2026-10-16",
+     "price": 22.33,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "USCB",
+     "value": 0.025
+    },
+    {
+     "date": "2026-10-16",
+     "price": 41.05,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "UVSP",
+     "value": 0.0239
+    },
+    {
+     "date": "2026-10-16",
+     "price": 14.81,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "VEL",
+     "value": 0.0127
+    },
+    {
+     "date": "2026-10-16",
+     "price": 12.75,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "VLY",
+     "value": 0.0269
+    },
+    {
+     "date": "2026-10-16",
+     "price": 60.9,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WABC",
+     "value": 0.021
+    },
+    {
+     "date": "2026-10-16",
+     "price": 29.45,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WAFD",
+     "value": 0.0219
+    },
+    {
+     "date": "2026-10-16",
+     "price": 74.35,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WAL",
+     "value": 0.0184
+    },
+    {
+     "date": "2026-10-16",
+     "price": 37.07,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WASH",
+     "value": 0.0184
+    },
+    {
+     "date": "2026-10-16",
+     "price": 143.54,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WTFC",
+     "value": 0.0174
+    },
+    {
+     "date": "2026-10-16",
+     "price": 2143.73,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "WTM",
+     "value": 0.0185
+    },
+    {
+     "date": "2026-10-16",
+     "price": 63.01,
+     "reason": "rebalance_rank",
+     "side": "sell",
+     "ticker": "ZION",
+     "value": 0.0178
+    },
+    {
+     "date": "2026-10-16",
+     "price": 157.37,
+     "reason": "entered_rank",
+     "side": "buy",
+     "ticker": "BPOP",
+     "value": 0.7981
+    },
+    {
+     "date": "2026-10-16",
+     "price": 122.27,
+     "reason": "entered_rank",
+     "side": "buy",
+     "ticker": "C",
+     "value": 0.7981
     }
-   ]
+   ],
+   "underfunded_entrants": {
+    "date": "2026-10-16",
+    "tickers": [
+     "CCNE",
+     "CFFI",
+     "INVA",
+     "MPB",
+     "RBB",
+     "WSBF"
+    ]
+   }
   },
   "rn_v4_low": {
    "closed": [],
-   "current_date": "2026-10-15",
+   "current_date": "2026-10-16",
    "dividends": [],
-   "exit_pending": {},
+   "exit_pending": {
+    "AEHR": "2026-10-16",
+    "AIN": "2026-10-16",
+    "ALGT": "2026-10-16",
+    "AMRC": "2026-10-16",
+    "APPS": "2026-10-16",
+    "ARW": "2026-10-16",
+    "ASH": "2026-10-16",
+    "AVAV": "2026-10-16",
+    "BBCP": "2026-10-16",
+    "BKD": "2026-10-16",
+    "BLCO": "2026-10-16",
+    "CCC": "2026-10-16",
+    "CD": "2026-10-16",
+    "CODI": "2026-10-16",
+    "COHU": "2026-10-16",
+    "CRL": "2026-10-16",
+    "CTRN": "2026-10-16",
+    "CWST": "2026-10-16",
+    "CZR": "2026-10-16",
+    "DAN": "2026-10-16",
+    "DAR": "2026-10-16",
+    "DCH": "2026-10-16",
+    "DCO": "2026-10-16",
+    "DRVN": "2026-10-16",
+    "EL": "2026-10-16",
+    "EVCM": "2026-10-16",
+    "FOXF": "2026-10-16",
+    "FTK": "2026-10-16",
+    "HPE": "2026-10-16",
+    "HUT": "2026-10-16",
+    "IART": "2026-10-16",
+    "INTC": "2026-10-16",
+    "JAZZ": "2026-10-16",
+    "JBTM": "2026-10-16",
+    "LUCK": "2026-10-16",
+    "LUV": "2026-10-16",
+    "MAMA": "2026-10-16",
+    "MATW": "2026-10-16",
+    "MCHP": "2026-10-16",
+    "MCS": "2026-10-16",
+    "MUSA": "2026-10-16",
+    "NEOG": "2026-10-16",
+    "NGS": "2026-10-16",
+    "NPKI": "2026-10-16",
+    "NX": "2026-10-16",
+    "OSCR": "2026-10-16",
+    "PDFS": "2026-10-16",
+    "PRGS": "2026-10-16",
+    "RDNT": "2026-10-16",
+    "SAIA": "2026-10-16",
+    "SNPS": "2026-10-16",
+    "SPB": "2026-10-16",
+    "ST": "2026-10-16",
+    "STAA": "2026-10-16",
+    "TAP": "2026-10-16",
+    "TFX": "2026-10-16",
+    "TGTX": "2026-10-16",
+    "TREX": "2026-10-16",
+    "TRNS": "2026-10-16",
+    "TRS": "2026-10-16",
+    "UAA": "2026-10-16",
+    "VREX": "2026-10-16",
+    "VYX": "2026-10-16",
+    "XPO": "2026-10-16",
+    "XPRO": "2026-10-16"
+   },
    "last_marks": {
-    "AEHR": 67.0614,
-    "AIN": 60.36,
-    "AIZ": 280.61,
-    "ALGT": 69.89,
-    "AMRC": 19.65,
-    "APPS": 10.19,
-    "ARW": 214.7325,
-    "ASH": 71.19,
-    "AVAV": 120.32,
-    "BBCP": 8.97,
-    "BBY": 93.73,
-    "BFC": 148.0,
-    "BKD": 10.115,
-    "BLCO": 16.43,
-    "BNY": 141.765,
-    "BWMN": 42.775,
-    "CAVA": 54.57,
-    "CBU": 59.39,
-    "CCC": 7.62,
-    "CD": 6.8,
-    "CHCO": 140.795,
-    "CIEN": 351.625,
-    "CLBK": 10.845,
-    "CODI": 10.67,
-    "COHU": 54.24,
-    "CRL": 307.93,
-    "CTRN": 50.48,
-    "CVBF": 21.795,
-    "CWST": 85.055,
-    "CZR": 29.315,
-    "DAN": 28.17,
-    "DAR": 61.4,
-    "DCH": 5.115,
-    "DCO": 166.79,
-    "DRVN": 11.995,
-    "EL": 106.5,
-    "ESQ": 118.17,
-    "EVCM": 9.57,
-    "FCBC": 48.24,
-    "FFIN": 31.55,
-    "FITB": 50.545,
-    "FMNB": 15.16,
-    "FOXF": 18.32,
+    "AAON": 77.3,
+    "AEHR": 71.49,
+    "AIN": 60.7,
+    "AIZ": 281.87,
+    "ALGM": 32.36,
+    "ALGT": 70.4,
+    "ALNT": 99.13,
+    "AMD": 570.82,
+    "AMRC": 20.09,
+    "AORT": 21.87,
+    "APG": 40.33,
+    "APPS": 10.54,
+    "ARW": 224.26,
+    "ASH": 71.59,
+    "AVAV": 123.22,
+    "AXON": 417.19,
+    "BB": 8.7,
+    "BBCP": 9.12,
+    "BBY": 94.17,
+    "BFC": 146.13,
+    "BKD": 10.09,
+    "BLCO": 16.66,
+    "BLKB": 51.39,
+    "BNY": 137.64,
+    "BRKR": 56.54,
+    "BWA": 58.5,
+    "BWMN": 42.79,
+    "CAVA": 55.4,
+    "CBU": 59.67,
+    "CCC": 7.63,
+    "CD": 6.98,
+    "CERT": 9.66,
+    "CHCO": 140.94,
+    "CIEN": 356.52,
+    "CLBK": 10.82,
+    "CLOV": 4.68,
+    "CODI": 10.62,
+    "COHU": 58.24,
+    "CORT": 113.37,
+    "CRL": 306.24,
+    "CSW": 291.14,
+    "CTRN": 49.94,
+    "CVBF": 21.83,
+    "CWST": 86.5,
+    "CZR": 29.25,
+    "DAN": 28.49,
+    "DAR": 60.87,
+    "DAVE": 369.0,
+    "DCH": 5.1,
+    "DCO": 170.59,
+    "DNOW": 15.02,
+    "DOCS": 31.5,
+    "DRVN": 11.96,
+    "EEFT": 65.54,
+    "EL": 101.59,
+    "ELF": 116.11,
+    "ESQ": 118.95,
+    "EVCM": 9.53,
+    "FCBC": 48.19,
+    "FFIN": 31.59,
+    "FIGS": 19.54,
+    "FITB": 50.35,
+    "FMNB": 15.2,
+    "FOXF": 17.48,
     "FRD": 41.845,
-    "FTK": 24.345,
-    "GABC": 49.38,
-    "HOOD": 102.275,
-    "HPE": 59.0,
-    "HUT": 71.595,
-    "IART": 13.47,
-    "INTC": 94.074,
-    "JAZZ": 214.61,
-    "JBTM": 106.41,
-    "JPM": 335.06,
-    "KNSL": 357.395,
-    "LMND": 44.37,
-    "LUCK": 5.235,
-    "LUV": 40.295,
-    "MAMA": 13.26,
-    "MATW": 19.12,
-    "MCHP": 73.47,
-    "MCS": 28.66,
-    "MKSI": 225.36,
-    "MUSA": 541.88,
-    "NEOG": 12.09,
-    "NGS": 30.7699,
-    "NIC": 163.51,
-    "NPKI": 10.63,
-    "NPO": 276.72,
-    "NTRS": 164.4025,
-    "NX": 18.92,
-    "OSCR": 33.5,
-    "PAYS": 15.32,
-    "PDFS": 41.11,
-    "PLMR": 138.995,
-    "PRGS": 40.515,
-    "PRK": 178.09,
-    "RDNT": 69.92,
-    "SAIA": 339.11,
-    "SBUX": 96.02,
-    "SNPS": 466.435,
-    "SPB": 78.87,
-    "ST": 40.39,
-    "STAA": 22.31,
-    "STC": 52.02,
-    "STT": 166.83,
-    "SYBT": 76.35,
-    "TAP": 39.045,
-    "TBBK": 48.73,
-    "TFIN": 61.9,
-    "TFSL": 16.29,
-    "TFX": 127.065,
-    "TGTX": 55.91,
-    "TOST": 31.735,
-    "TREX": 46.085,
-    "TRNS": 81.64,
-    "TRS": 38.865,
-    "UAA": 4.835,
-    "VREX": 18.39,
-    "VYX": 7.355,
-    "WMT": 118.48,
-    "XPO": 186.27,
-    "XPRO": 15.63
+    "FTK": 24.73,
+    "GABC": 49.53,
+    "GFF": 93.21,
+    "GHC": 1198.75,
+    "GHM": 71.15,
+    "GNRC": 198.4,
+    "HOOD": 103.99,
+    "HPE": 58.63,
+    "HUT": 76.09,
+    "IART": 13.53,
+    "INTC": 95.37,
+    "JAZZ": 214.42,
+    "JBTM": 105.93,
+    "JHX": 25.9,
+    "JPM": 335.53,
+    "KNSL": 357.49,
+    "LE": 10.28,
+    "LMND": 45.86,
+    "LUCK": 5.09,
+    "LUV": 39.34,
+    "MAMA": 13.27,
+    "MATW": 19.28,
+    "MCHP": 74.26,
+    "MCS": 28.33,
+    "MIR": 15.54,
+    "MKSI": 228.52,
+    "MRVL": 241.24,
+    "MSM": 130.7,
+    "MSTR": 151.29,
+    "MTRN": 252.16,
+    "MUSA": 544.73,
+    "NABL": 4.6,
+    "NEOG": 12.13,
+    "NGS": 30.96,
+    "NIC": 164.41,
+    "NPKI": 10.67,
+    "NPO": 283.93,
+    "NSC": 324.83,
+    "NTRS": 165.44,
+    "NX": 19.32,
+    "OC": 113.69,
+    "ONTO": 241.41,
+    "OPLN": 36.98,
+    "OSCR": 33.47,
+    "PANW": 370.27,
+    "PAYS": 15.6,
+    "PDFS": 41.27,
+    "PEN": 320.12,
+    "PLMR": 137.61,
+    "PRGS": 40.87,
+    "PRK": 178.03,
+    "PWR": 642.21,
+    "RDNT": 70.41,
+    "RGEN": 184.17,
+    "RVTY": 154.71,
+    "RXO": 29.06,
+    "SAIA": 341.46,
+    "SBUX": 96.88,
+    "SENEA": 176.0,
+    "SHOP": 178.14,
+    "SNPS": 468.11,
+    "SPB": 78.91,
+    "ST": 41.31,
+    "STAA": 21.84,
+    "STC": 51.99,
+    "STGW": 9.13,
+    "STT": 167.6,
+    "SWIM": 6.25,
+    "SYBT": 76.64,
+    "TAP": 39.03,
+    "TBBK": 49.0,
+    "TEVA": 41.11,
+    "TFIN": 61.89,
+    "TFSL": 16.33,
+    "TFX": 128.22,
+    "TGT": 156.63,
+    "TGTX": 54.37,
+    "TOST": 29.85,
+    "TREX": 46.21,
+    "TRNS": 82.61,
+    "TRS": 38.95,
+    "TSLA": 362.44,
+    "UAA": 4.88,
+    "UNF": 264.83,
+    "VCYT": 44.39,
+    "VREX": 18.47,
+    "VSEC": 161.55,
+    "VYX": 7.56,
+    "WMT": 117.87,
+    "WOR": 63.84,
+    "XPO": 188.83,
+    "XPRO": 15.69,
+    "ZBH": 94.38,
+    "ZBRA": 377.51
    },
    "nav_series": [
     {
@@ -44650,11 +48245,535 @@
      "date": "2026-10-15",
      "nav": 99.75,
      "stale_marks": []
+    },
+    {
+     "bench": null,
+     "benches": {
+      "DRAM": 50.14,
+      "IWM": null,
+      "QQQ": 728.95,
+      "SOXX": 519.42,
+      "SPY": 769.6
+     },
+     "date": "2026-10-16",
+     "nav": 100.2487,
+     "stale_marks": []
     }
    ],
    "prev_day_state": {
-    "cash": 100.0,
-    "holdings": {},
+    "cash": 0.0,
+    "holdings": {
+     "AEHR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 67.0614,
+      "shares": 0.014582773047842546
+     },
+     "AIN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 60.36,
+      "shares": 0.01620180875531127
+     },
+     "AIZ": {
+      "entry_date": "2026-10-15",
+      "entry_price": 280.61,
+      "shares": 0.003485054618404861
+     },
+     "ALGT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 69.89,
+      "shares": 0.013992576569903966
+     },
+     "AMRC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 19.65,
+      "shares": 0.049767998802574466
+     },
+     "APPS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 10.19,
+      "shares": 0.09597067482537666
+     },
+     "ARW": {
+      "entry_date": "2026-10-15",
+      "entry_price": 214.7325,
+      "shares": 0.004554229920811188
+     },
+     "ASH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 71.19,
+      "shares": 0.013737058245126959
+     },
+     "AVAV": {
+      "entry_date": "2026-10-15",
+      "entry_price": 120.32,
+      "shares": 0.008127835575719649
+     },
+     "BBCP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 8.97,
+      "shares": 0.10902354252737884
+     },
+     "BBY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 93.73,
+      "shares": 0.010433598383341387
+     },
+     "BFC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 148.0,
+      "shares": 0.006607710651828299
+     },
+     "BKD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 10.115,
+      "shares": 0.09668227152452676
+     },
+     "BLCO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 16.43,
+      "shares": 0.05952167842182521
+     },
+     "BNY": {
+      "entry_date": "2026-10-15",
+      "entry_price": 141.765,
+      "shares": 0.006898325937083119
+     },
+     "BWMN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 42.775,
+      "shares": 0.022862447141334615
+     },
+     "CAVA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 54.57,
+      "shares": 0.01792085718289515
+     },
+     "CBU": {
+      "entry_date": "2026-10-15",
+      "entry_price": 59.39,
+      "shares": 0.016466428295514198
+     },
+     "CCC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 7.62,
+      "shares": 0.128338737069631
+     },
+     "CD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 6.8,
+      "shares": 0.14381487889273356
+     },
+     "CHCO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 140.795,
+      "shares": 0.00694585160318611
+     },
+     "CIEN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 351.625,
+      "shares": 0.002781204909976788
+     },
+     "CLBK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 10.845,
+      "shares": 0.0901743823393811
+     },
+     "CODI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 10.67,
+      "shares": 0.09165334362423506
+     },
+     "COHU": {
+      "entry_date": "2026-10-15",
+      "entry_price": 54.24,
+      "shares": 0.018029888946729133
+     },
+     "CRL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 307.93,
+      "shares": 0.003175855475174839
+     },
+     "CTRN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 50.48,
+      "shares": 0.019372844224853174
+     },
+     "CVBF": {
+      "entry_date": "2026-10-15",
+      "entry_price": 21.795,
+      "shares": 0.0448699782734842
+     },
+     "CWST": {
+      "entry_date": "2026-10-15",
+      "entry_price": 85.055,
+      "shares": 0.011497750590448394
+     },
+     "CZR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 29.315,
+      "shares": 0.03335975358930882
+     },
+     "DAN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 28.17,
+      "shares": 0.03471569671532084
+     },
+     "DAR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 61.4,
+      "shares": 0.01592738072427668
+     },
+     "DCH": {
+      "entry_date": "2026-10-15",
+      "entry_price": 5.115,
+      "shares": 0.19119084583980217
+     },
+     "DCO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 166.79,
+      "shares": 0.005863308210747576
+     },
+     "DRVN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 11.995,
+      "shares": 0.08152906848441753
+     },
+     "EL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 106.5,
+      "shares": 0.009182546257939796
+     },
+     "ESQ": {
+      "entry_date": "2026-10-15",
+      "entry_price": 118.17,
+      "shares": 0.008275714449272982
+     },
+     "EVCM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 9.57,
+      "shares": 0.10218821070748048
+     },
+     "FCBC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 48.24,
+      "shares": 0.02027241244756609
+     },
+     "FFIN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 31.55,
+      "shares": 0.03099655075976508
+     },
+     "FITB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 50.545,
+      "shares": 0.019347931080632864
+     },
+     "FMNB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 15.16,
+      "shares": 0.06450799317088313
+     },
+     "FOXF": {
+      "entry_date": "2026-10-15",
+      "entry_price": 18.32,
+      "shares": 0.05338106858463909
+     },
+     "FTK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 24.345,
+      "shares": 0.04017010377780194
+     },
+     "GABC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 49.38,
+      "shares": 0.019804398065423008
+     },
+     "HOOD": {
+      "entry_date": "2026-10-15",
+      "entry_price": 102.275,
+      "shares": 0.009561879017067594
+     },
+     "HPE": {
+      "entry_date": "2026-10-15",
+      "entry_price": 59.0,
+      "shares": 0.016575274177467597
+     },
+     "HUT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 71.595,
+      "shares": 0.013659350184657982
+     },
+     "IART": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.47,
+      "shares": 0.07260142364295384
+     },
+     "INTC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 94.074,
+      "shares": 0.010395445888030574
+     },
+     "JAZZ": {
+      "entry_date": "2026-10-15",
+      "entry_price": 214.61,
+      "shares": 0.004556829488237212
+     },
+     "JBTM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 106.41,
+      "shares": 0.009190312719392803
+     },
+     "JPM": {
+      "entry_date": "2026-10-15",
+      "entry_price": 335.06,
+      "shares": 0.0029187046393797773
+     },
+     "KNSL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 357.395,
+      "shares": 0.002736303463872153
+     },
+     "LMND": {
+      "entry_date": "2026-10-15",
+      "entry_price": 44.37,
+      "shares": 0.02204059446631932
+     },
+     "LUCK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 5.235,
+      "shares": 0.18680824765436257
+     },
+     "LUV": {
+      "entry_date": "2026-10-15",
+      "entry_price": 40.295,
+      "shares": 0.02426954154288592
+     },
+     "MAMA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 13.26,
+      "shares": 0.07375121994499156
+     },
+     "MATW": {
+      "entry_date": "2026-10-15",
+      "entry_price": 19.12,
+      "shares": 0.051147551070637454
+     },
+     "MCHP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 73.47,
+      "shares": 0.01331075509011281
+     },
+     "MCS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 28.66,
+      "shares": 0.03412216247280489
+     },
+     "MKSI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 225.36,
+      "shares": 0.004339462089415105
+     },
+     "MUSA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 541.88,
+      "shares": 0.001804719082583945
+     },
+     "NEOG": {
+      "entry_date": "2026-10-15",
+      "entry_price": 12.09,
+      "shares": 0.08088843477837786
+     },
+     "NGS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 30.7699,
+      "shares": 0.03178239696816006
+     },
+     "NIC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 163.51,
+      "shares": 0.005980925793349571
+     },
+     "NPKI": {
+      "entry_date": "2026-10-15",
+      "entry_price": 10.63,
+      "shares": 0.09199822920701675
+     },
+     "NPO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 276.72,
+      "shares": 0.003534045882012822
+     },
+     "NTRS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 164.4025,
+      "shares": 0.00594845684506372
+     },
+     "NX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 18.92,
+      "shares": 0.051688222857853496
+     },
+     "OSCR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 33.5,
+      "shares": 0.02919227392449517
+     },
+     "PAYS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 15.32,
+      "shares": 0.06383428044847181
+     },
+     "PDFS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 41.11,
+      "shares": 0.0237884012763461
+     },
+     "PLMR": {
+      "entry_date": "2026-10-15",
+      "entry_price": 138.995,
+      "shares": 0.0070358011185336754
+     },
+     "PRGS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 40.515,
+      "shares": 0.024137755805765475
+     },
+     "PRK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 178.09,
+      "shares": 0.0054912750658127245
+     },
+     "RDNT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 69.92,
+      "shares": 0.013986572890025575
+     },
+     "SAIA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 339.11,
+      "shares": 0.002883846470085188
+     },
+     "SBUX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 96.02,
+      "shares": 0.010184765428770967
+     },
+     "SNPS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 466.435,
+      "shares": 0.0020966290618641146
+     },
+     "SPB": {
+      "entry_date": "2026-10-15",
+      "entry_price": 78.87,
+      "shares": 0.012399406320154535
+     },
+     "ST": {
+      "entry_date": "2026-10-15",
+      "entry_price": 40.39,
+      "shares": 0.024212457946783564
+     },
+     "STAA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 22.31,
+      "shares": 0.04383420782028634
+     },
+     "STC": {
+      "entry_date": "2026-10-15",
+      "entry_price": 52.02,
+      "shares": 0.018799330574213537
+     },
+     "STT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 166.83,
+      "shares": 0.005861902394476941
+     },
+     "SYBT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 76.35,
+      "shares": 0.012808659809699911
+     },
+     "TAP": {
+      "entry_date": "2026-10-15",
+      "entry_price": 39.045,
+      "shares": 0.0250465149563475
+     },
+     "TBBK": {
+      "entry_date": "2026-10-15",
+      "entry_price": 48.73,
+      "shares": 0.020068565082507456
+     },
+     "TFIN": {
+      "entry_date": "2026-10-15",
+      "entry_price": 61.9,
+      "shares": 0.015798726598878647
+     },
+     "TFSL": {
+      "entry_date": "2026-10-15",
+      "entry_price": 16.29,
+      "shares": 0.06003322139168743
+     },
+     "TFX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 127.065,
+      "shares": 0.007696385129426579
+     },
+     "TGTX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 55.91,
+      "shares": 0.017491346386524564
+     },
+     "TOST": {
+      "entry_date": "2026-10-15",
+      "entry_price": 31.735,
+      "shares": 0.03081585556863363
+     },
+     "TREX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 46.085,
+      "shares": 0.021220379222536362
+     },
+     "TRNS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 81.64,
+      "shares": 0.011978701328645128
+     },
+     "TRS": {
+      "entry_date": "2026-10-15",
+      "entry_price": 38.865,
+      "shares": 0.025162515797519314
+     },
+     "UAA": {
+      "entry_date": "2026-10-15",
+      "entry_price": 4.835,
+      "shares": 0.2022629113693047
+     },
+     "VREX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 18.39,
+      "shares": 0.05317787800275085
+     },
+     "VYX": {
+      "entry_date": "2026-10-15",
+      "entry_price": 7.355,
+      "shares": 0.1329627704242812
+     },
+     "WMT": {
+      "entry_date": "2026-10-15",
+      "entry_price": 118.48,
+      "shares": 0.00825406124637566
+     },
+     "XPO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 186.27,
+      "shares": 0.005250127108340517
+     },
+     "XPRO": {
+      "entry_date": "2026-10-15",
+      "entry_price": 15.63,
+      "shares": 0.06256821346580747
+     }
+    },
     "units": null
    },
    "state": {
@@ -45175,20 +49294,20 @@
    },
    "summary": {
     "avg_hold_days": null,
-    "cagr_pct": -0.73,
+    "cagr_pct": 0.72,
     "closed_trades": 0,
-    "cumulative_return_pct": -0.25,
+    "cumulative_return_pct": 0.25,
     "excess_vs": {
-     "DRAM": -0.25,
-     "IWM": -0.25,
-     "QQQ": -0.25,
-     "SOXX": -0.25,
-     "SPY": -0.25
+     "DRAM": -2.91,
+     "IWM": 0.25,
+     "QQQ": -0.1,
+     "SOXX": -1.59,
+     "SPY": 0.5
     },
-    "excess_vs_bench_pct": -0.25,
+    "excess_vs_bench_pct": 0.25,
     "inception": "2026-06-12",
     "max_drawdown_pct": 0.0,
-    "observations": 1,
+    "observations": 2,
     "open_positions": 102,
     "sharpe": null,
     "total_traded_value": 100.0,
@@ -46011,7 +50130,68 @@
      "ticker": "XPRO",
      "value": 0.9804
     }
-   ]
+   ],
+   "underfunded_entrants": {
+    "date": "2026-10-16",
+    "tickers": [
+     "AAON",
+     "ALGM",
+     "ALNT",
+     "AMD",
+     "AORT",
+     "APG",
+     "AXON",
+     "BB",
+     "BLKB",
+     "BRKR",
+     "BWA",
+     "CERT",
+     "CLOV",
+     "CORT",
+     "CSW",
+     "DAVE",
+     "DNOW",
+     "DOCS",
+     "EEFT",
+     "ELF",
+     "FIGS",
+     "GFF",
+     "GHC",
+     "GHM",
+     "GNRC",
+     "JHX",
+     "LE",
+     "MIR",
+     "MRVL",
+     "MSM",
+     "MSTR",
+     "MTRN",
+     "NABL",
+     "NSC",
+     "OC",
+     "ONTO",
+     "OPLN",
+     "PANW",
+     "PEN",
+     "PWR",
+     "RGEN",
+     "RVTY",
+     "RXO",
+     "SENEA",
+     "SHOP",
+     "STGW",
+     "SWIM",
+     "TEVA",
+     "TGT",
+     "TSLA",
+     "UNF",
+     "VCYT",
+     "VSEC",
+     "WOR",
+     "ZBH",
+     "ZBRA"
+    ]
+   }
   }
  }
 }
