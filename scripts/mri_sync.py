@@ -34,6 +34,11 @@ SNAPSHOT_FILES = (
     "cost_of_capital_anchor.json",
     "long_run_growth_anchor.json",
     "sector_multiple_bands.json",
+    # MRI-12 shock register and the MRI-15 event register's run record (D5, operator 2026-10-22). Optional: a missing
+    # file is skipped. The event register itself is not copied (it grows daily); build_macro_events.py writes the small
+    # per-stock index from it instead.
+    "shock_register.json",
+    "event_register_run.json",
 )
 
 
@@ -61,7 +66,9 @@ def sync_mri_snapshot() -> Optional[Dict[str, Any]]:
         dst = SNAPSHOT_DIR / name
         shutil.copyfile(src, dst)
         try:
-            mri_date = json.loads(src.read_text(encoding="utf-8")).get("date")
+            doc = json.loads(src.read_text(encoding="utf-8"))
+            # the shock register says `asof`, the event register's run record `as_of_date`; the others `date`
+            mri_date = doc.get("date") or doc.get("asof") or doc.get("as_of_date")
         except Exception:
             mri_date = None
         files[name] = {"mri_date": mri_date, "sha256": _sha256(dst)}

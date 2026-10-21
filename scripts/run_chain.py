@@ -151,6 +151,9 @@ def main():
     # rn_depth replaced the LLM A/B lane. build_portfolio_plan.py itself was retired 2026-10-04.)
     # P3.11: build_momo_plan removed from the chain — it is diagnostic-only (see its own
     # docstring); its regime throttle is an input to Phase 5, not a step this chain runs.
+    # MRI-15 display index (operator D5, 2026-10-22): never fatal; a missing MRI register leaves the old index.
+    if ok and not run_step("build_macro_events", ["scripts/build_macro_events.py"], steps):
+        print("WARNING: build_macro_events failed; the stock-page news index was not refreshed.")
     if ok and not run_step("track_paper_portfolios", ["scripts/track_paper_portfolios.py"]
                            + (["--skip-benchmark"] if args.skip_macro else []), steps):
         print("FATAL: track_paper_portfolios failed.")

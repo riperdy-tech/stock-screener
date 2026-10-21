@@ -503,6 +503,49 @@ export async function fetchGeminiOverlay(): Promise<GeminiOverlayPayload | null>
     return fetchJson<GeminiOverlayPayload>('/data/gemini_overlay.json');
 }
 
+// ── MRI news candidates (MRI-15, Stage 1; operator decisions D1/D5 of 2026-10-22) ───────────────
+// A display index built by scripts/build_macro_events.py from MRI's event register. A candidate is a news report,
+// not a confirmed event; its market block says what the market did after it, not whether the news caused it.
+// Nothing here may change a score, rank or verdict.
+
+export interface MacroEventMarket { theme_id: string; result: string; reason: string | null; provisional: boolean }
+export interface MacroEventCompany { ticker: string; benchmark: string | null; result: string; z: number | null; reason: string | null }
+
+export interface MacroEventCandidate {
+    candidate_id: string;
+    title: string | null;
+    onset: string | null;
+    first_available_at: string | null;
+    status: 'open' | 'closed' | null;
+    publisher_count: number | null;
+    corroboration: string | null;
+    classified: boolean;
+    themes: { theme_id: string; direction: string }[];
+    market: MacroEventMarket[];
+    company: MacroEventCompany[];
+    sectors: string[];
+    flags: string[];
+    named_tickers: string[];
+}
+
+export interface MacroEventsPayload {
+    schema_version: 1;
+    register_as_of_date: string | null;
+    register_run_status: string | null;
+    notice: string | null;
+    market_meaning: string | null;
+    candidates: MacroEventCandidate[];
+    named: Record<string, number[]>;
+    peer: Record<string, number[]>;
+    cluster_of: Record<string, string>;
+    sector: Record<string, number[]>;
+}
+
+export async function fetchMacroEvents(): Promise<MacroEventsPayload | null> {
+    const p = await fetchJson<MacroEventsPayload>('/data/mri/macro_events.json');
+    return p && p.schema_version === 1 ? p : null;   // refuse a version this page does not know
+}
+
 export async function fetchLegacyDepthReport(ticker: string): Promise<DepthReportBundle | null> {
     return fetchJson<DepthReportBundle>(`/data/depth_reports_legacy/${encodeURIComponent(ticker.toUpperCase())}.json`);
 }
