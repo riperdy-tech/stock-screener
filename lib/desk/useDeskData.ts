@@ -11,12 +11,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import {
-    fetchChainManifest, fetchDepthOutcomes, fetchDepthOverlay, fetchFactorScores, fetchGeminiOverlay, fetchMriCostOfCapital,
+    fetchChainManifest, fetchDepthOutcomes, fetchDepthOverlay, fetchFactorScores, fetchGeminiOverlay, fetchMacroEvents, fetchMriCostOfCapital,
     fetchMriRegime, fetchOverlaySignals,
     fetchPaperLedgers, fetchStocks,
     fetchValuationModels,
     type ChainManifest, type DepthOverlayPayload, type DepthVerdict, type FactorScoresPayload,
-    type GeminiOverlayPayload, type GeminiVerdict, type MriCostOfCapital, type MriRegime, type ValuationModel,
+    type GeminiOverlayPayload, type GeminiVerdict, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
 } from '@/lib/data-service';
 
 export interface StockInfo {
@@ -63,6 +63,8 @@ export interface DeskData {
     depthMeta: { generated_at: string | null; count: number; actionable_count: number | null };
     /** Interim Gemini verdicts by ticker: paper-only, unvalidated, never part of `depth`. Empty when the file is absent. */
     gemini: Record<string, GeminiVerdict>;
+    /** MRI news candidates index (display only). Null when the file is absent. */
+    macroEvents: MacroEventsPayload | null;
     ledgers: any | null;
     stockInfo: Record<string, StockInfo>;
     /** Pipeline status files. Each is null when its file did not load; none blocks the page. */
@@ -75,7 +77,7 @@ export interface DeskData {
 
 const EMPTY: DeskData = {
     factor: null, valuations: {}, overlay: {},
-    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, gemini: {},
+    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, gemini: {}, macroEvents: null,
     ledgers: null, stockInfo: {},
     manifest: null, regime: null, anchor: null, pricesAsOf: null,
 };
@@ -118,7 +120,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
     // the bag, so the verdict list still renders.
     const optional = <T,>(key: string, loader: () => Promise<T | null>) =>
         cached(key, loader).catch(() => null as T | null);
-    const [f, v, ov, pl, s, dp, manifest, regime, anchor, gm] = await Promise.all([
+    const [f, v, ov, pl, s, dp, manifest, regime, anchor, gm, me] = await Promise.all([
         cached('factor', fetchFactorScores),
         cached('valuations', fetchValuationModels),
         cached('overlay', fetchOverlaySignals),
@@ -129,6 +131,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         optional('regime', fetchMriRegime),
         optional('anchor', fetchMriCostOfCapital),
         optional('gemini', fetchGeminiOverlay),
+        optional('macroEvents', fetchMacroEvents),
     ]);
 
     const stockInfo: Record<string, StockInfo> = {};
@@ -173,6 +176,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
                     ?? Object.values(depthPayload.tickers ?? {}).filter((d) => d.actionable === true).length,
         },
         gemini: (gm as GeminiOverlayPayload | null)?.tickers ?? {},
+        macroEvents: (me as MacroEventsPayload | null) ?? null,
         ledgers: pl,
         stockInfo,
         manifest, regime, anchor,
