@@ -135,6 +135,8 @@ jobs:
           git add public/data/factor_signal_log.jsonl || true
           git add public/data/valuation_models.json || true
           git add public/data/paper_ledgers.json || true
+          # Never commit a mixed stock/Reverse pair.
+          python scripts/check_paired_publication.py
           if git diff --cached --quiet; then
             echo "nothing to commit"
             exit 0
@@ -150,6 +152,8 @@ jobs:
           for i in 1 2 3; do
             git fetch origin main || true
             git merge -X ours --no-edit origin/main || git merge --abort 2>/dev/null || true
+            # Check again after merging concurrent writer updates.
+            python scripts/check_paired_publication.py
             if git push origin main; then
               pushed=true
               break

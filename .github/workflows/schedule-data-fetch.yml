@@ -180,81 +180,7 @@ jobs:
           python scripts/fetch_data.py
           python scripts/refresh_prices.py || echo "::warning::live price overlay skipped — stocks.json keeps the snapshot prices"
 
-      - name: Commit and Push Fetched Data
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-          git add public/data/*.csv || true
-          git add public/data/financials/*.json || true
-          git add public/data/reports/*.json || true
-          git add public/data/stocks.json || true
-          git add public/data/scan.log || true
-          git add public/data/cik_map.json || true
-          git add public/data/fundamentals_battery.json || true
-
-          if git diff --quiet && git diff --staged --quiet; then
-            echo "No fetched-data changes to commit"
-          else
-            git commit -m "Auto-update: Scheduled stock data refresh (fetch)"
-            pushed=false
-            for i in 1 2 3; do
-              echo "Push attempt $i..."
-              git fetch origin main || true
-              git merge -X ours --no-edit origin/main || git merge --abort 2>/dev/null || true
-              if git push origin main; then
-                echo "Push succeeded"
-                pushed=true
-                break
-              fi
-              echo "Push attempt $i failed — re-syncing and retrying in 10s..."
-              sleep 10
-            done
-            if [ "$pushed" != "true" ]; then
-              echo "::error::Fetch push failed after 3 attempts — fetched data was NOT committed."
-              exit 1
-            fi
-          fi
-
-  score:
-    needs: [preflight, fetch]
-    if: needs.preflight.outputs.run == 'true'
-    runs-on: ${{ needs.preflight.outputs.runner }}
-    timeout-minutes: 350
-
-    defaults:
-      run:
-        shell: ${{ needs.preflight.outputs.runner == 'ubuntu-24.04' && 'bash' || 'C:\PROGRA~1\Git\bin\bash.exe --noprofile --norc -eo pipefail {0}' }}
-
-    env:
-      PYTHONUTF8: '1'
-      PYTHONIOENCODING: utf-8
-
-    steps:
-      - name: Checkout Repository (latest main, incl. fetch job's commit)
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Setup Python (GitHub-hosted)
-        if: needs.preflight.outputs.runner == 'ubuntu-24.04'
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Provision Python (self-hosted)
-        if: needs.preflight.outputs.runner != 'ubuntu-24.04'
-        run: |
-          VENV="$(cygpath -u "$RUNNER_TEMP")/venv"
-          python -m venv "$VENV"
-          cygpath -w "$VENV/Scripts" >> "$GITHUB_PATH"
-          "$VENV/Scripts/python" --version
-
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install yfinance==1.5.1 pandas numpy requests finance-datareader supabase python-dotenv lxml html5lib beautifulsoup4 openai duckdb
-
+      # Score first and publish both public JSON assets in one Git commit.
       - name: Run Scoring Chain (price history -> EPS -> reverse -> paradigm)
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
@@ -265,57 +191,67 @@ jobs:
           python scripts/fetch_eps_trajectory.py --apply --max-calls 500
           python scripts/fetch_dividends.py
           python scripts/run_chain.py
-
-      - name: Commit and Push Changes
-        id: push_changes
+      - name: Commit and Push Fetched + Scored Data (one paired commit)
         run: |
+          set -euo pipefail
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
+          # Fail BEFORE committing; score_reverse writes both JSON records.
+          python scripts/check_paired_publication.py
+          git add public/data/*.csv || true
+          git add public/data/financials/*.json || true
+          git add public/data/reports/*.json || true
+          git add public/data/stocks.json
+          git add public/data/scan.log || true
+          git add public/data/cik_map.json || true
+          git add public/data/fundamentals_battery.json || true
+          git add public/data/paradigm_scores.json || true
+          git add public/data/paradigm_theme_metrics.json || true
           git add public/data/price_history.json || true
           git add public/data/price_history_missing.txt || true
           git add public/data/eps_trajectory.json || true
           git add public/data/macro_state.json || true
-          git add public/data/reverse_scores.json || true
+          git add public/data/reverse_scores.json
           git add public/data/chain_manifest.json || true
           git add public/data/reverse_nomination_log.jsonl || true
-          git add public/data/fundamentals_battery.json || true
-          git add public/data/cik_map.json || true
           git add public/data/factor_scores.json || true
           git add public/data/factor_scores_dual_door.json || true
           git add public/data/tier1_hygiene_survivors.json || true
           git add public/data/tier1_hygiene_audit.json || true
           git add public/data/factor_signal_log.jsonl || true
-          git add public/data/daily_closes.json || true
-          git add public/data/momentum_state.json || true
-          git add public/data/mri/ || true
           git add public/data/valuation_models.json || true
+          git add public/data/portfolio_plan.json || true
+          git add public/data/portfolio_report.md || true
           git add public/data/paper_ledgers.json || true
           git add public/data/dividends.json || true
           git add public/data/paradigm_signal_log.jsonl || true
           git add public/data/paradigm_run_log.jsonl || true
+          git add public/data/paradigm_history.json || true
 
-          if git diff --quiet && git diff --staged --quiet; then
-            echo "No changes to commit"
-            echo "changes=false" >> $GITHUB_OUTPUT
+          git add public/data/daily_closes.json || true
+          git add public/data/momentum_state.json || true
+          git add public/data/mri/ || true
+          if git diff --cached --quiet; then
+            echo "No fetched/scored changes to commit"
           else
-            git commit -m "Auto-update: Scheduled stock data refresh"
+            git commit -m "Auto-update: Atomic fetch + score publication"
             pushed=false
             for i in 1 2 3; do
-              echo "Push attempt $i..."
-              git fetch origin main || true
-              git merge -X ours --no-edit origin/main || git merge --abort 2>/dev/null || true
+              echo "Paired push attempt $i..."
+              git fetch origin main
+              git merge -X ours --no-edit origin/main
+              # Concurrent writers can merge only one half of a pair.
+              python scripts/check_paired_publication.py
               if git push origin main; then
-                echo "Push succeeded"
                 pushed=true
                 break
               fi
-              echo "Push attempt $i failed — re-syncing and retrying in 10s..."
+              echo "Push failed; retrying in 10s..."
               sleep 10
             done
             if [ "$pushed" != "true" ]; then
-              echo "::error::Push failed after 3 attempts — run output was NOT committed."
+              echo "::error::Atomic fetch+score push failed."
               exit 1
             fi
-            echo "changes=true" >> $GITHUB_OUTPUT
           fi

@@ -111,6 +111,8 @@ jobs:
           # origin has touched the same file (the cause of the 2026-07 push failures).
           git add public/data/paper_ledgers.json || true
 
+          # Never commit a mixed stock/Reverse pair.
+          python scripts/check_paired_publication.py
           if git diff --quiet && git diff --staged --quiet; then
             echo "No changes to commit"
           else
@@ -127,6 +129,8 @@ jobs:
             for i in 1 2 3; do
               git fetch origin main || true
               git merge -X ours --no-edit origin/main || git merge --abort 2>/dev/null || true
+              # Check again after merging concurrent writer updates.
+              python scripts/check_paired_publication.py
               if git push origin main; then
                 echo "Push succeeded"
                 pushed=true
