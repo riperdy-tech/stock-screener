@@ -97,6 +97,12 @@ def safe_float(val):
         return None
 
 
+def has_usable_eps(entry):
+    """An all-null row may be a stored failure (see the fetch loop), so it is not a reusable cache hit."""
+    return isinstance(entry, dict) and any(
+        safe_float(entry.get(k)) is not None for k in ("next_q_eps", "next_q_plus_1_eps", "next_y_eps"))
+
+
 def extract_eps_estimates(ticker_symbol):
     """
     Fetch forward EPS estimates via yfinance Ticker.earnings_estimate.
@@ -251,7 +257,7 @@ def main():
 
         # Check cache
         cached_entry = trajectory_data.get(ticker)
-        if cached_entry and cached_entry.get("input_hash") == input_hash:
+        if cached_entry and cached_entry.get("input_hash") == input_hash and has_usable_eps(cached_entry):
             cached_hits += 1
             continue
 
@@ -266,9 +272,9 @@ def main():
             print(f"Reached --max-calls limit ({args.max_calls}). Stopping early.")
             break
 
+        fetched += 1  # an attempt spends the budget whether or not it succeeds
         try:
             estimates = extract_eps_estimates(ticker)
-            fetched += 1
 
             next_q_eps = estimates["next_q_eps"]
             next_q_plus_1_eps = estimates["next_q_plus_1_eps"]
@@ -319,18 +325,8 @@ def main():
             errors += 1
             failed += 1
             print(f"  [{idx + 1}/{len(candidates)}] {ticker}: ERROR - {e}")
-            # Record a fallback entry so we don't re-query on next run
-            trajectory_data[ticker] = {
-                "next_q_eps": None,
-                "next_q_plus_1_eps": None,
-                "next_y_eps": None,
-                "trajectory_slope": None,
-                "fetched_at": datetime.now(timezone.utc).strftime(
-                    "%Y-%m-%dT%H:%M:%SZ"
-                ),
-                "source": "yfinance.Ticker.earnings_estimate",
-                "input_hash": input_hash,
-            }
+            # Keep the previous row, if any, and retry next run. A null row stamped with the current
+            # input_hash used to become a permanent cache hit (56 rows stuck since 2026-05-25).
 
         # Rate limit
         time.sleep(RATE_LIMIT_SECONDS)
