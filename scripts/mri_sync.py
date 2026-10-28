@@ -14,7 +14,6 @@ hand.
 
 import hashlib
 import json
-import shutil
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -63,15 +62,20 @@ def sync_mri_snapshot() -> Optional[Dict[str, Any]]:
         src = outputs_dir / name
         if not src.exists():
             continue
+        # One original read owns the snapshot bytes, metadata and source digest.
+        raw = src.read_bytes()
+        source_sha256 = hashlib.sha256(raw).hexdigest()
         dst = SNAPSHOT_DIR / name
-        shutil.copyfile(src, dst)
+        dst.write_bytes(raw)
+        if _sha256(dst) != source_sha256:
+            raise OSError(f"MRI snapshot byte mismatch after copy: {name}")
         try:
-            doc = json.loads(src.read_text(encoding="utf-8"))
+            doc = json.loads(raw.decode("utf-8"))
             # the shock register says `asof`, the event register's run record `as_of_date`; the others `date`
             mri_date = doc.get("date") or doc.get("asof") or doc.get("as_of_date")
         except Exception:
             mri_date = None
-        files[name] = {"mri_date": mri_date, "sha256": _sha256(dst)}
+        files[name] = {"mri_date": mri_date, "sha256": source_sha256}
 
     manifest = {
         "copied_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
