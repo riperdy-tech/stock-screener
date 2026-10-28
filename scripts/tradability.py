@@ -35,7 +35,7 @@ The manual list is never circuit-broken; it is a deliberate human statement.
 
 import json
 import sys
-from datetime import date, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 CONFIG_JSON = Path(__file__).resolve().with_name("not_tradable.json")
@@ -110,7 +110,9 @@ def scan(stocks, cfg=None, today=None):
     only the manual list survives.
     """
     cfg = cfg or load_config()
-    today = today or date.today()
+    # The UTC date, not the machine's local one: a KST PC and a UTC cloud runner scoring at the same instant
+    # must count the same number of days unlisted (3L WO_L4 addendum 2).
+    today = today or datetime.now(timezone.utc).date()
 
     manual, unlisted = {}, {}
     for sym, rec in stocks.items():

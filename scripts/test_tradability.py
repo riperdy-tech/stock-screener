@@ -174,3 +174,28 @@ if __name__ == "__main__":
             print(f"  ERROR {fn.__name__}: {type(e).__name__}: {e}")
     print(f"{len(fns) - failed}/{len(fns)} passed")
     sys.exit(1 if failed else 0)
+
+
+def test_scan_default_today_is_the_utc_date_not_the_machines_local_date(monkeypatch):
+    # A PC in KST at 01:00 on the 6th is still the 5th in UTC, where the cloud runner lives. The day count
+    # behind "absent from the exchange listing for N days" must not depend on which machine scores.
+    class Clock(tr.datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return tr.datetime(2026, 8, 13, 17, 0, tzinfo=tz)   # UTC 08-13
+
+    class LocalDate(date):
+        @classmethod
+        def today(cls):
+            return date(2026, 8, 14)                          # the machine's local date, already the 14th
+
+    monkeypatch.setattr(tr, "datetime", Clock)
+    monkeypatch.setattr(tr, "date", LocalDate, raising=False)  # a local date, if the module ever reads one again
+    u = {f"OK{i}": listed(0) for i in range(50)}                   # a normal universe, so the circuit breaker stays off
+    u["GONE"] = listed(5)                                          # 5 days before 08-13: inside the 5-day grace
+    out, _ = tr.scan(u, CFG)
+    assert "GONE" not in out, out                                  # with the local 14th it is 6 days: untradable
+    monkeypatch.setattr(tr, "datetime", type("Later", (Clock,), {"now": classmethod(
+        lambda cls, tz=None: tr.datetime(2026, 8, 14, 1, 0, tzinfo=tz))}))
+    out, _ = tr.scan(u, CFG)
+    assert "GONE" in out                                           # and on the UTC 14th it is untradable everywhere
