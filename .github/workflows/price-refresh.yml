@@ -135,6 +135,9 @@ jobs:
           git add public/data/factor_signal_log.jsonl || true
           git add public/data/valuation_models.json || true
           git add public/data/paper_ledgers.json || true
+          # The scorer read these; without them its run cannot be replayed (3L WO_L4, 2026-10-29).
+          git add public/data/daily_closes.json || true
+          git add public/data/momentum_state.json || true
           # Never commit a mixed stock/Reverse pair.
           python scripts/check_paired_publication.py
           if git diff --cached --quiet; then
