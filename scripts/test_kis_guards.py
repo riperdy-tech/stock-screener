@@ -280,21 +280,19 @@ def test_liquidate_false_executes_with_confirm_real_only(harness):
 
 
 # ------------------------------------------------------------- G9: zero is a value
-def test_ledger_mark_zero_is_a_zero_value_not_the_entry_price():
+def test_ledger_mark_zero_refuses_the_plan_instead_of_selling_on_a_bad_quote():
+    # AUDIT_R2: a 0.0 mark valued at 0 would give a held name a target weight of 0, a sale
     b = book({"AAA": {"shares": 10, "entry_price": 100.0},
               "BBB": {"shares": 10, "entry_price": 50.0}}, cash=500.0,
              marks={"AAA": 0.0, "BBB": 50.0})
-    t = ledger_weights(b, "rn_depth")
-    assert t["nav"] == 1000.0                       # AAA is worth 0, not 10 x 100
-    assert t["weights"]["AAA"] == 0.0
-    assert t["weights"]["BBB"] == 0.5
-    assert t["source_marks"]["AAA"] == 0.0
+    with pytest.raises(RuntimeError, match=r"mark <= 0: \['AAA'\]"):
+        ledger_weights(b, "rn_depth")
 
 
-def test_ledger_mark_zero_with_no_entry_price_is_still_a_zero_value():
-    b = book({"AAA": {"shares": 10}}, cash=500.0, marks={"AAA": 0.0})
-    t = ledger_weights(b, "rn_depth")
-    assert t["weights"] == {"AAA": 0.0} and t["nav"] == 500.0
+def test_ledger_negative_mark_refuses():
+    b = book({"AAA": {"shares": 10, "entry_price": 100.0}}, cash=500.0, marks={"AAA": -1.0})
+    with pytest.raises(RuntimeError, match="refusing to trade"):
+        ledger_weights(b, "rn_depth")
 
 
 def test_ledger_missing_mark_still_falls_back_to_entry_price():
@@ -302,11 +300,11 @@ def test_ledger_missing_mark_still_falls_back_to_entry_price():
     assert ledger_weights(b, "rn_depth")["weights"] == {"AAA": 1.0}
 
 
-def test_ledger_no_mark_and_no_entry_price_is_excluded(capsys):
+def test_ledger_no_mark_and_no_entry_price_refuses_instead_of_excluding():
+    # it used to be excluded from targets (weight 0), which plans a sale of the held name
     b = book({"AAA": {"shares": 10}, "BBB": {"shares": 10, "entry_price": 50.0}}, cash=500.0)
-    t = ledger_weights(b, "rn_depth")
-    assert set(t["weights"]) == {"BBB"}
-    assert "no mark for ['AAA']" in capsys.readouterr().out
+    with pytest.raises(RuntimeError, match=r"no mark: \['AAA'\]"):
+        ledger_weights(b, "rn_depth")
 
 
 def test_ledger_nonzero_marks_unchanged():

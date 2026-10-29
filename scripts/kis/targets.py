@@ -92,22 +92,28 @@ def ledger_weights(book: dict, ledger_key: str, max_stale_days: int = 5) -> dict
     state = led.get("state") or {}
     cash = float(state.get("cash") or 0)
     marks = led.get("last_marks") or {}
-    values, missing = {}, []
+    values, missing, bad = {}, [], []
     for t, h in (state.get("holdings") or {}).items():
-        # 0.0 is a value, not an absence (G9): only a missing mark falls back to
-        # the entry price, and only a missing entry price leaves the name unmarked.
+        # G9 + fail closed (AUDIT_R2): a missing mark falls back to the entry price, as
+        # before. A mark that is 0 or negative is bad data, not a price: valuing the name
+        # at 0 (or excluding it) would give it a target weight of 0 and plan a sale of a
+        # held position on a bad quote. Either case refuses the plan instead.
         mark = marks.get(t)
         if mark is None:
             mark = h.get("entry_price")
         if mark is None:
             missing.append(t)
             continue
+        if float(mark) <= 0:
+            bad.append(t)
+            continue
         values[t] = float(h["shares"]) * float(mark)
+    if missing or bad:
+        raise RuntimeError(f"ledger {ledger_key!r}: holdings without a usable mark "
+                           f"(no mark: {missing}; mark <= 0: {bad}); refusing to trade")
     nav = cash + sum(values.values())
     if nav <= 0:
         raise RuntimeError(f"ledger {ledger_key!r} NAV <= 0")
-    if missing:
-        print(f"  WARNING: no mark for {missing}; excluded from targets")
     return {
         "weights": {t: v / nav for t, v in values.items()},
         "cash_weight": cash / nav,
