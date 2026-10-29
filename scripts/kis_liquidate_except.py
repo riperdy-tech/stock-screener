@@ -17,6 +17,9 @@ Env: KIS_APP_KEY, KIS_APP_SECRET, KIS_CANO, KIS_ACNT_PRDT_CD (see docs/KIS_SYNC.
 After a manual exit the scheduled sync will re-buy the book on its next run — it
 reconciles to the ledger and has no memory of this script. Set the repo variable
 KIS_HALT=true before running unless that re-buy is what you want.
+
+KIS_HALT fails closed (kis/halt.py): --execute is refused unless KIS_HALT is
+exactly 'false', or --ignore-halt is passed together with --confirm-real.
 """
 
 from __future__ import annotations
@@ -29,6 +32,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from kis.client import KISClient  # noqa: E402
+from kis.halt import kis_halt_state  # noqa: E402
 from sync_kis_portfolio import (  # noqa: E402
     SELL_LIMIT_BUFFER, gh_summary, log_event, resolve_prices, us_market_open,
 )
@@ -105,6 +109,9 @@ def main():
     ap.add_argument("--max-order-usd", type=float,
                     default=float(os.environ.get("KIS_MAX_ORDER_USD", 15000)),
                     help="split any position larger than this across several orders")
+    ap.add_argument("--ignore-halt", action="store_true",
+                    help="trade although KIS_HALT is not 'false'; only valid together "
+                         "with --execute --confirm-real")
     ap.add_argument("--ignore-market-hours", action="store_true",
                     help="local testing only; KIS rejects US orders outside the session")
     args = ap.parse_args()
@@ -117,10 +124,16 @@ def main():
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     print(f"KIS liquidate-except [{run_id}] env={args.env} execute={args.execute}")
     print(f"keep ({len(keep)}): {', '.join(sorted(keep)) or '(none — full liquidation)'}")
-    halt = os.environ.get("KIS_HALT", "").strip().lower() in ("1", "true", "yes")
-    halt_note = ("set — the scheduled sync is stopped" if halt else
-                 "NOT set — the next scheduled sync will re-buy toward the ledger")
-    print(f"KIS_HALT={halt_note}")
+    halt, halt_reason = kis_halt_state()
+    halt_note = (f"halted ({halt_reason}) — the scheduled sync is stopped" if halt else
+                 "'false' — the next scheduled sync will re-buy toward the ledger")
+    print(f"KIS_HALT: {halt_note}")
+    if args.execute and halt:
+        # G1: a halt refuses --execute. Only the explicit pair below overrides it.
+        if not (args.ignore_halt and args.confirm_real):
+            sys.exit(f"refusing --execute: halted ({halt_reason}). To override, pass "
+                     f"--ignore-halt together with --confirm-real.")
+        print("WARNING: --ignore-halt: executing although the halt is set.")
 
     missing = [k for k in ("KIS_APP_KEY", "KIS_APP_SECRET", "KIS_CANO", "KIS_ACNT_PRDT_CD")
                if not os.environ.get(k)]
@@ -220,7 +233,7 @@ def main():
     print("\nLimit orders may not fill immediately. Check the KIS app; unfilled "
           "orders expire at the close.")
     if not halt:
-        print("REMINDER: KIS_HALT is not set — the next scheduled sync will "
+        print("REMINDER: KIS_HALT is 'false' — the next scheduled sync will "
               "reconcile back toward the ledger and re-buy what you just sold.")
 
 

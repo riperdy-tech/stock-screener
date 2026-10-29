@@ -35,6 +35,7 @@ from kis.dd_engine import (  # noqa: E402
 from kis.dd_gate import (  # noqa: E402
     apply_gate, dd_alert_text, dd_log_line, load_dd_states, save_dd_states,
 )
+from kis.halt import kis_halt_state  # noqa: E402
 from kis.notify import (  # noqa: E402
     format_telegram, pnl_suffix, sb_upsert, send_telegram, trades_rows,
 )
@@ -116,6 +117,14 @@ def gh_summary(lines: list[str]):
     if p:
         with open(p, "a", encoding="utf-8") as f:
             f.write("\n".join(lines) + "\n")
+
+
+def gh_output(name: str, value: str):
+    """Step output for later workflow steps (a no-op outside GitHub Actions)."""
+    p = os.environ.get("GITHUB_OUTPUT")
+    if p:
+        with open(p, "a", encoding="utf-8") as f:
+            f.write(f"{name}={value}\n")
 
 
 def plan_table(plan, order_cd) -> list[str]:
@@ -259,15 +268,19 @@ def main():
     print(f"KIS sync [{run_id}] env={args.env} ledger={args.ledger} "
           f"execute={args.execute}")
 
-    # Kill switch: repo variable KIS_HALT (any of 1/true/yes) stops the run
-    # before targets, prices, or any order. Flip it from the GitHub mobile app
-    # (repo Settings -> Secrets and variables -> Variables). Halts paper and
-    # real alike; clear the variable to resume.
-    if os.environ.get("KIS_HALT", "").strip().lower() in ("1", "true", "yes"):
-        log_event({"run_id": run_id, "event": "halted", "reason": "KIS_HALT set"})
+    # Kill switch: repo variable KIS_HALT. FAILS CLOSED (SPEC 3R G1): the run trades
+    # only when KIS_HALT is exactly 'false'; unset, empty or any other value halts,
+    # before targets, prices, probe or any order. Flip it from the GitHub mobile app
+    # (repo Settings -> Secrets and variables -> Variables). Halts paper and real
+    # alike. Rule lives in kis/halt.py.
+    halted, halt_reason = kis_halt_state()
+    if halted:
+        log_event({"run_id": run_id, "event": "halted", "reason": halt_reason})
         gh_summary([f"## KIS sync {run_id}",
-                    "**HALTED** — repo variable KIS_HALT is set; no orders."])
-        print("HALTED: KIS_HALT is set — exiting before any planning/orders.")
+                    f"**HALTED** — {halt_reason}; no orders."])
+        # G8: lets the workflow's "Mark traded" step tell a halted run from a trading one.
+        gh_output("halted", "true")
+        print(f"HALTED: {halt_reason} — exiting before any planning/orders.")
         return
 
     # ---- targets ----

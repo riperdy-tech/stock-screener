@@ -260,10 +260,13 @@ class KISClient:
                     if qty <= 0:
                         continue
                     t = (it.get("ovrs_pdno") or "").strip()
+                    # 0 is a value (G9): only a missing ord_psbl_qty means "all sellable".
+                    sellable = it.get("ord_psbl_qty")
+                    sellable = qty if sellable is None or sellable == "" else float(sellable)
                     rows[t] = {
                         "ticker": t,
                         "shares": qty,
-                        "sellable": float(it.get("ord_psbl_qty") or qty),
+                        "sellable": sellable,
                         "exch_order_cd": (it.get("ovrs_excg_cd") or excg).strip(),
                         "name": (it.get("ovrs_item_name") or "").strip(),
                         "avg_cost": float(it.get("pchs_avg_pric") or 0),

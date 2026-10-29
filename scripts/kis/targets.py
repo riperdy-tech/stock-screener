@@ -94,8 +94,12 @@ def ledger_weights(book: dict, ledger_key: str, max_stale_days: int = 5) -> dict
     marks = led.get("last_marks") or {}
     values, missing = {}, []
     for t, h in (state.get("holdings") or {}).items():
-        mark = marks.get(t) or h.get("entry_price")
-        if not mark:
+        # 0.0 is a value, not an absence (G9): only a missing mark falls back to
+        # the entry price, and only a missing entry price leaves the name unmarked.
+        mark = marks.get(t)
+        if mark is None:
+            mark = h.get("entry_price")
+        if mark is None:
             missing.append(t)
             continue
         values[t] = float(h["shares"]) * float(mark)
