@@ -578,7 +578,8 @@ class KISClient:
         except KISError as e:
             return {"ok": False, "order_no": None, "msg": str(e)}
         if d is None:
-            return {"ok": False, "order_no": None,
+            # No JSON body: the broker may or may not have acted (G3 records it 'unknown').
+            return {"ok": False, "order_no": None, "ambiguous": True,
                     "msg": f"HTTP {r.status_code}: {r.text[:200]}"}
         ok = r.status_code == 200 and d.get("rt_cd") == "0"
         return {"ok": ok,

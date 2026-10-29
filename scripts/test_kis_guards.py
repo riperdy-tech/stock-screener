@@ -7,8 +7,9 @@ call), a fake ledger book, a fake drawdown state store, and a temp log path.
 Run: python -m pytest scripts/test_kis_guards.py -q
 """
 
+import json
 import sys
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import pytest
@@ -17,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import kis_liquidate_except as liq  # noqa: E402
 import sync_kis_portfolio as sync  # noqa: E402
 from kis.client import KISClient  # noqa: E402
+import kis.targets as kis_targets  # noqa: E402
 from kis.halt import kis_halt_state  # noqa: E402
 from kis.targets import ledger_weights  # noqa: E402
 
@@ -76,12 +78,17 @@ def harness(monkeypatch, tmp_path):
     FakeKIS.positions, FakeKIS.orders, FakeKIS.built = [], [], []
     events, telegrams = [], []
     for k in ("KIS_HALT", "KIS_LEDGER", "KIS_ENV", "KIS_DD_DISABLE", "GITHUB_OUTPUT",
-              "GITHUB_STEP_SUMMARY", "NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_SERVICE_KEY"):
+              "GITHUB_STEP_SUMMARY", "NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_SERVICE_KEY",
+              "GITHUB_ACTIONS"):
         monkeypatch.delenv(k, raising=False)
     for k in ("KIS_APP_KEY", "KIS_APP_SECRET", "KIS_CANO", "KIS_ACNT_PRDT_CD"):
         monkeypatch.setenv(k, "fake")
     monkeypatch.setattr(sync, "LOG_PATH", tmp_path / "kis_sync.jsonl")
     monkeypatch.setattr(sync, "EXCHANGE_MAP", tmp_path / "exchange_map.json")
+    monkeypatch.setattr(sync, "JOURNAL_PATH", tmp_path / "kis_order_journal.jsonl")   # G3
+    overlay = tmp_path.parent / (tmp_path.name + "_overlay.json")                  # G4: fresh
+    overlay.write_text(json.dumps({"generated_at": datetime.now(timezone.utc).isoformat()}))
+    monkeypatch.setitem(kis_targets.OVERLAY_FILES, "rn_depth", overlay)
     monkeypatch.setattr(sync, "KISClient", FakeKIS)
     monkeypatch.setattr(liq, "KISClient", FakeKIS)
     monkeypatch.setattr(sync, "us_market_open", lambda now=None: True)
