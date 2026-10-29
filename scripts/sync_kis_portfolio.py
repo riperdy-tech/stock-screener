@@ -28,6 +28,9 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from kis.approval import (  # noqa: E402
+    APPROVED_PLAN_HASH_ENV, EXIT_APPROVAL_REQUIRED, approval_reasons, check_approval,
+)
 from kis.client import EXCD_TO_ORDER, KISClient  # noqa: E402
 from kis.dd_engine import (  # noqa: E402
     apply_flow, decide, initial_state, rebase, reconcile_flow, resume, snapshot,
@@ -36,6 +39,7 @@ from kis.dd_gate import (  # noqa: E402
     apply_gate, dd_alert_text, dd_log_line, load_dd_states, save_dd_states,
 )
 from kis.halt import kis_halt_state  # noqa: E402
+from kis.ledger_policy import ledger_refusals  # noqa: E402
 from kis.journal import (  # noqa: E402
     JournalError, LocalFileJournal, blocked_message, open_entries, plan_hash,
     run_reconcile, send_order,
@@ -266,6 +270,10 @@ def main():
     ap.add_argument("--reconcile-journal", action="store_true",
                     help="resolve open order-journal keys (sending/unknown) against the "
                          "broker's same-day order list; sends no order and exits")
+    ap.add_argument("--approve-plan", default=os.environ.get(APPROVED_PLAN_HASH_ENV, ""),
+                    metavar="HASH",
+                    help="approval for a plan that needs it (G2): the plan hash printed by a "
+                         f"dry run. Defaults to ${APPROVED_PLAN_HASH_ENV}")
     ap.add_argument("--no-wait", action="store_true",
                     help="don't wait for sell fills before buying")
     ap.add_argument("--dd-resume", action="store_true",
@@ -316,6 +324,14 @@ def main():
         gh_output("halted", "true")
         print(f"HALTED: {halt_reason} — exiting before any planning/orders.")
         return
+
+    # G6/G7: which ledgers may be mirrored at all (kis/ledger_policy.py).
+    refusals = ledger_refusals(args.ledger, args.env)
+    if refusals:
+        log_event({"run_id": run_id, "event": "ledger_refused", "env": args.env,
+                   "ledger": args.ledger, "reasons": refusals})
+        gh_summary([f"## KIS sync {run_id}", "**REFUSED** — " + "; ".join(refusals)])
+        sys.exit("refusing: " + "; ".join(refusals))
 
     # G3: an order whose outcome is unknown blocks every later run that would trade.
     journal = make_journal()
@@ -423,9 +439,10 @@ def main():
         sys.exit(f"refusing: no price for any of {len(tickers)} tickers")
 
     # ---- drawdown governor (LIVE per user 2026-07-21; tiers -8/-11/-13, hyst 2) ----
-    # Enforces the max-DD<=15% budget on whatever ledger is mirrored. Fail-open:
-    # a state-store outage trades ungated with a loud alert (KIS_HALT stays the
-    # manual backstop). KIS_DD_DISABLE=true is the emergency bypass.
+    # Enforces the max-DD<=15% budget on whatever ledger is mirrored. It PROPOSES
+    # only (G5): a trip changes the plan, and sells caused by it need the plan's
+    # approval hash like any large sell plan (kis/approval.py). Fail-closed: a
+    # state-store outage halts the run. KIS_DD_DISABLE=true is the emergency bypass.
     nav_now = cash + sum(sh * prices[t] for t, sh in held.items() if t in prices)
 
     # ---- NAV sanity: cross-check against KIS's own total-assets figure -------
@@ -472,10 +489,15 @@ def main():
     else:
         dd_envs, dd_src = load_dd_states()
         if dd_src == "error":
-            msg = ("[KIS·risk] DD state store unreachable — trading UNGATED this run "
-                   "(fail-open); KIS_HALT remains the manual backstop")
-            print(f"  WARNING: {msg}")
+            # G5: with the store down the governor cannot run, so the run halts. It used
+            # to trade ungated with an alert.
+            msg = (f"[KIS·risk] {args.env}: DD state store unreachable — HALTED this run "
+                   f"(fail-closed); no orders, and no drawdown state was written")
+            print(f"  {msg}")
+            log_event({"run_id": run_id, "event": "dd_store_down_halt", "env": args.env})
             send_telegram(msg)
+            gh_summary([f"## KIS sync {run_id} — {args.env}/{args.ledger}", "", f"**HALTED** — {msg}"])
+            sys.exit("refusing: the drawdown state store is unreachable (governor cannot run)")
         else:
             st = (dd_envs or {}).get(args.env)
             fresh = False
@@ -539,7 +561,11 @@ def main():
             # today's fills are then sleeve-internal and cancel out tomorrow.
             st["snap"] = snapshot(cash, held)
             dd_envs = {**(dd_envs or {}), args.env: st}
-            if not save_dd_states(dd_envs):
+            # G5: only an execute run writes governor state. A dry run used to save it
+            # here, so a preview could advance the peak, take the snapshot or latch a halt.
+            if not args.execute:
+                print("  DD: dry run — governor state not saved")
+            elif not save_dd_states(dd_envs):
                 print("  ! DD state save failed (non-fatal; retried next run)", file=sys.stderr)
             print(f"  {dd_log_line(args.env, dd, st)}")
             log_event({"run_id": run_id, "event": "dd_decision", "env": args.env,
@@ -567,12 +593,21 @@ def main():
             plan.warnings.append(
                 f"{o.ticker}: buy suppressed (DD governor gross {dd_gross:.0%})")
         plan.orders = [o for o in plan.orders if o.side == "sell"]
+    # G2/G3: the plan's hash (also the base of every order's idempotency key; run_id[:8] is
+    # the UTC trade date) and whether the plan needs the operator's approval of that hash.
+    plan_h = plan_hash(args.env, args.ledger, run_id[:8],
+                       [(o.side, o.ticker, o.qty) for o in plan.orders])
+    approval_why = approval_reasons(plan, held, tgt["weights"],
+                                    governor_tripped=dd_halted or dd_gross < 1.0)
     print(f"\nNAV ${plan.nav:,.2f} | {len(plan.sells)} sells, {len(plan.buys)} buys, "
           f"turnover {plan.turnover_pct}%")
     for w in plan.warnings:
         print(f"  ! {w}")
     for line in plan_table(plan, order_cd):
         print(line)
+    print(f"plan hash: {plan_h}")
+    for why in approval_why:
+        print(f"  APPROVAL REQUIRED: {why}")
 
     summary = [f"## KIS sync {run_id} — {args.env}/{args.ledger}",
                f"NAV ${plan.nav:,.2f} · cash ${cash:,.2f} · turnover {plan.turnover_pct}% · "
@@ -580,10 +615,14 @@ def main():
                ""] + plan_table(plan, order_cd)
     if plan.warnings:
         summary += ["", "**Warnings**"] + [f"- {w}" for w in plan.warnings]
+    summary += ["", f"plan hash: `{plan_h}`"]
+    if approval_why:
+        summary += ["", "**Approval required**"] + [f"- {w}" for w in approval_why]
 
     log_event({"run_id": run_id, "event": "plan", "env": args.env, "ledger": args.ledger,
                "execute": args.execute, "nav": plan.nav, "cash": cash,
                "turnover_pct": plan.turnover_pct, "warnings": plan.warnings,
+               "plan_hash": plan_h, "approval_required": approval_why,
                "orders": [vars(o) for o in plan.orders]})
 
     if not args.execute:
@@ -597,6 +636,20 @@ def main():
         print("nothing to do")
         gh_summary(summary)
         return
+    if approval_why:
+        approved, detail = check_approval(plan_h, args.approve_plan)
+        if not approved:
+            how = f"re-run with ${APPROVED_PLAN_HASH_ENV}={plan_h} or --approve-plan {plan_h}"
+            log_event({"run_id": run_id, "event": "approval_required", "env": args.env,
+                       "ledger": args.ledger, "plan_hash": plan_h, "reasons": approval_why,
+                       "detail": detail})
+            gh_summary(summary + ["", f"**REFUSED: approval required** — {detail}.", how])
+            print(f"\nREFUSED: this plan needs approval ({detail}). No order sent.\n{how}",
+                  file=sys.stderr)
+            sys.exit(EXIT_APPROVAL_REQUIRED)
+        print(f"approval: {detail}")
+        log_event({"run_id": run_id, "event": "approval_accepted", "plan_hash": plan_h,
+                   "reasons": approval_why})
     if not us_market_open() and not args.ignore_market_hours:
         gh_summary(summary + ["", "SKIPPED: US market closed"])
         sys.exit("US market closed (use --ignore-market-hours to override)")
@@ -604,8 +657,6 @@ def main():
     # ---- execute: sells first ----
     # G3: every order is journaled 'sending' before the call and 'accepted' / 'rejected' /
     # 'unknown' after it. An unknown stops the run: nothing further is sent.
-    plan_h = plan_hash(args.env, args.ledger, run_id[:8],      # run_id[:8] = UTC trade date
-                       [(o.side, o.ticker, o.qty) for o in plan.orders])
     results, stopped = [], None
 
     def send(o, qty, limit):

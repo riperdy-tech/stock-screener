@@ -6,10 +6,11 @@ table and permissions — no schema setup):
 State is kept PER ENV so the paper account's rehearsals never disturb the real
 account's peak/budget.
 
-FAIL-OPEN by design: if the store is unreachable, the sync trades UNGATED for
-that run and alerts loudly — the governor is protection, not a new single
-point of failure; the KIS_HALT variable remains the manual backstop. Nothing
-in here ever raises into the trade path."""
+FAIL-CLOSED (SPEC 3R G5): if the store is unreachable the sync HALTS that run
+(no orders) and alerts; it no longer trades ungated. The governor also only
+PROPOSES: a trip changes the plan, and the sells it causes need the plan's
+approval hash (kis/approval.py). Nothing in here ever raises into the trade
+path; the caller decides what 'error' means."""
 
 from __future__ import annotations
 
@@ -25,7 +26,7 @@ ROW_ID = 2
 
 def load_dd_states():
     """Returns (envs_dict, source) — source: 'supabase' | 'empty' | 'error'.
-    'error' means the store is unreachable: caller fails open + alerts."""
+    'error' means the store is unreachable: caller halts the run (G5)."""
     url = os.environ.get("NEXT_PUBLIC_SUPABASE_URL")
     key = os.environ.get("SUPABASE_SERVICE_KEY")
     if not (url and key):
@@ -84,8 +85,9 @@ def dd_log_line(env: str, dd: dict, state: dict) -> str:
 def dd_alert_text(env: str, dd: dict, execute: bool) -> str:
     txt = f"[KIS·risk] {env}: {dd['action'].upper()} — {dd['reason']}"
     if dd["action"] == "halt":
-        txt += ("\nBook will be liquidated and buys blocked. After review, resume via "
-                "Actions -> KIS Portfolio Sync -> dd_resume=true (peak kept).")
+        txt += ("\nA liquidation PLAN is proposed and buys are blocked; nothing is sold "
+                "until the operator supplies the plan's approval hash (G5). After review, "
+                "resume via Actions -> KIS Portfolio Sync -> dd_resume=true (peak kept).")
     if not execute:
         txt += "\n(dry-run — no orders placed this run)"
     return txt

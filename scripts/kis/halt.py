@@ -19,3 +19,19 @@ def kis_halt_state(environ=None) -> tuple[bool, str]:
     if raw.strip().lower() == "false":
         return False, ""
     return True, f"KIS_HALT={raw!r} is not 'false'"
+
+
+def model_release_blocked_state(environ=None) -> tuple[bool, str]:
+    """G7: the MODEL_RELEASE_BLOCKED repository variable, read in exactly one place.
+
+    Fails closed like kis_halt_state: only 'false' (after strip and lower-case) means the
+    model release is not blocked. Unset, empty or any other value is blocked.
+    Return (blocked, reason). reason is '' when not blocked.
+    """
+    env = os.environ if environ is None else environ
+    if "MODEL_RELEASE_BLOCKED" not in env:
+        return True, "MODEL_RELEASE_BLOCKED unset"
+    raw = env["MODEL_RELEASE_BLOCKED"]
+    if raw.strip().lower() == "false":
+        return False, ""
+    return True, f"MODEL_RELEASE_BLOCKED={raw!r} is not 'false'"

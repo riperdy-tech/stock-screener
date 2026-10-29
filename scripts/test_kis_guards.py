@@ -79,8 +79,11 @@ def harness(monkeypatch, tmp_path):
     events, telegrams = [], []
     for k in ("KIS_HALT", "KIS_LEDGER", "KIS_ENV", "KIS_DD_DISABLE", "GITHUB_OUTPUT",
               "GITHUB_STEP_SUMMARY", "NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_SERVICE_KEY",
-              "GITHUB_ACTIONS"):
+              "GITHUB_ACTIONS", "KIS_APPROVED_PLAN_HASH"):
         monkeypatch.delenv(k, raising=False)
+    # G7: the model release is open in this harness, so rn_depth may be mirrored. Tests of
+    # the blocked case set it themselves (test_kis_ledger_policy.py).
+    monkeypatch.setenv("MODEL_RELEASE_BLOCKED", "false")
     for k in ("KIS_APP_KEY", "KIS_APP_SECRET", "KIS_CANO", "KIS_ACNT_PRDT_CD"):
         monkeypatch.setenv(k, "fake")
     monkeypatch.setattr(sync, "LOG_PATH", tmp_path / "kis_sync.jsonl")
@@ -192,17 +195,8 @@ def test_sync_false_dry_run_sends_nothing(harness):
     assert FakeKIS.orders == []
 
 
-def test_G2_OPEN_CASE_empty_target_while_long_sells_the_whole_book(harness):
-    """SPEC G2's open case, asserted AS IT IS TODAY and not fixed here (WO_R2).
-
-    rn_depth holds nothing (all cash), so its target is empty. With KIS_HALT='false' the
-    mirror sells every held name, because exits are exempt from the turnover cap.
-    When G2 lands, this test must change to expect a refusal and zero orders.
-    """
-    harness("false", ledger_book=book(holdings={}, cash=95.76),
-            positions=[pos("AAA", 100), pos("BBB", 50), pos("CCC", 20)])
-    assert sorted((o[0], o[2], o[3]) for o in FakeKIS.orders) == [
-        ("sell", "AAA", 100), ("sell", "BBB", 50), ("sell", "CCC", 20)]
+# G2: the open case (an empty target while long sells the whole book) was pinned here by
+# WO_R2; WO_R4 closed it. Its replacements are in test_kis_approval.py.
 
 
 # ---------------------------------------------------------- G8: no traded marker
