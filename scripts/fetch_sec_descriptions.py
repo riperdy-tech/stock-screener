@@ -50,9 +50,13 @@ log = logging.getLogger("fetch_sec_descriptions")
 # Mirrors fetch_sec_data.py exactly -- SEC rejects requests without a proper
 # contact-info User-Agent header.
 # ---------------------------------------------------------------------------
-SEC_HEADERS = {
-    "User-Agent": "StockScreener/1.0 (contact@example.com)"
-}
+def sec_headers():
+    """The operator's own name and email, from SEC_USER_AGENT; raises when unset."""
+    ua = os.environ.get("SEC_USER_AGENT", "").strip()
+    if "@" not in ua:
+        raise RuntimeError("SEC_USER_AGENT must be set to your name and email (e.g. 'Jane Doe jane@example.com'); "
+                           "SEC refuses requests without a contact")
+    return {"User-Agent": ua}
 
 SEC_SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik10}.json"
 
@@ -109,8 +113,9 @@ def fetch_submission(cik10):
     Returns the parsed JSON response on success, None on failure.
     """
     url = SEC_SUBMISSIONS_URL.format(cik10=cik10)
+    headers = sec_headers()       # outside the try: a missing contact is a configuration error, not a failed CIK
     try:
-        resp = requests.get(url, headers=SEC_HEADERS, timeout=30)
+        resp = requests.get(url, headers=headers, timeout=30)
         if resp.status_code == 404:
             log.warning("CIK %s: 404 Not Found (no SEC submissions data)", cik10)
             return None

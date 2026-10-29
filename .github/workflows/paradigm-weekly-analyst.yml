@@ -39,6 +39,9 @@ jobs:
           pip install yfinance pandas numpy requests python-dotenv openai finance-datareader lxml html5lib beautifulsoup4
 
       - name: Weekly SEC Refresh (quarterly-changing data; moved from daily)
+        env:
+          # SEC refuses requests without a contact; the SEC scripts raise when this is unset.
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
         run: |
           # 1.4GB companyfacts download feeds quarterly-changing fields —
           # weekly cadence loses nothing vs daily.

@@ -69,7 +69,16 @@ BATTERY_JSON = DATA / "fundamentals_battery.json"
 TTM_JSON = DATA / "fundamentals_ttm.json"
 QTR_JSON = DATA / "fundamentals_quarterly.json"
 
-SEC_HEADERS = {"User-Agent": "StockScreener/1.0 (contact@example.com)"}
+
+def sec_headers():
+    """SEC refuses requests without a contact: the operator's own name and email, from SEC_USER_AGENT."""
+    ua = os.environ.get("SEC_USER_AGENT", "").strip()
+    if "@" not in ua:
+        raise RuntimeError("SEC_USER_AGENT must be set to your name and email (e.g. 'Jane Doe jane@example.com'); "
+                           "SEC refuses requests without a contact")
+    return {"User-Agent": ua}
+
+
 ANNUAL_FORMS = ("10-K", "10-K/A", "20-F", "40-F")
 MAX_YEARS = 12  # keep up to 12 fiscal years
 
@@ -175,7 +184,7 @@ def get_cik_map():
             pass
     print("Fetching SEC CIK mapping ...")
     resp = requests.get("https://www.sec.gov/files/company_tickers.json",
-                        headers=SEC_HEADERS, timeout=60)
+                        headers=sec_headers(), timeout=60)
     resp.raise_for_status()
     mapping = {e["ticker"]: str(e["cik_str"]).zfill(10) for e in resp.json().values()}
     CIK_MAP_JSON.write_text(json.dumps(
@@ -2751,7 +2760,7 @@ SEC_COMPANYFACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json
 
 def fetch_companyfacts_live(cik):
     """One GET against data.sec.gov for one CIK (declared UA). Raises on any HTTP failure."""
-    resp = requests.get(SEC_COMPANYFACTS_URL.format(cik=cik), headers=SEC_HEADERS, timeout=60)
+    resp = requests.get(SEC_COMPANYFACTS_URL.format(cik=cik), headers=sec_headers(), timeout=60)
     resp.raise_for_status()
     return resp.json()
 

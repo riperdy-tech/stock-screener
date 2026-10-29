@@ -14,14 +14,18 @@ from issuer_securities import common_tickers_by_cik
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-SEC_HEADERS = {
-    'User-Agent': 'StockScreener/1.0 (contact@example.com)'
-}
+def sec_headers():
+    """SEC refuses requests without a contact: the operator's own name and email, from SEC_USER_AGENT."""
+    ua = os.environ.get("SEC_USER_AGENT", "").strip()
+    if "@" not in ua:
+        raise RuntimeError("SEC_USER_AGENT must be set to your name and email (e.g. 'Jane Doe jane@example.com'); "
+                           "SEC refuses requests without a contact")
+    return {"User-Agent": ua}
 
 def get_cik_mapping():
     url = "https://www.sec.gov/files/company_tickers.json"
     logging.info("Fetching SEC CIK mapping...")
-    resp = requests.get(url, headers=SEC_HEADERS)
+    resp = requests.get(url, headers=sec_headers())
     resp.raise_for_status()
     data = resp.json()
     mapping = {}
@@ -36,7 +40,7 @@ def download_and_extract_facts(cik_mapping, target_tickers, common_by_cik, outpu
     # Check if we already have it cached locally
     zip_path = "companyfacts.zip"
     if not os.path.exists(zip_path):
-        with requests.get(url, headers=SEC_HEADERS, stream=True) as r:
+        with requests.get(url, headers=sec_headers(), stream=True) as r:
             r.raise_for_status()
             with open(zip_path, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=8192):
