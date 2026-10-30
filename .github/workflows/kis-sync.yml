@@ -86,6 +86,9 @@ on:
         description: "With probe: also send ONE unfillable domestic order to test order permission"
         type: boolean
         default: false
+      approve_plan:
+        description: "Approve a plan that needs it (G2): paste the plan hash a dry run printed. Blank = no approval"
+        default: ""
       as_scheduled:
         description: "PC self-dispatch: behave exactly like the cron (repo vars govern env/execute/ledger; gates active; other inputs ignored)"
         type: boolean
@@ -287,7 +290,11 @@ jobs:
           KIS_MSG_PREFIX: ${{ vars.KIS_MSG_PREFIX || '[KIS·trades]' }}
           # Phone-flippable halt: GitHub app -> repo Settings -> Variables -> KIS_HALT=true
           KIS_HALT: ${{ vars.KIS_HALT || '' }}
-          # Emergency bypass for the drawdown governor (leave unset normally)
+          # G7 (A14, operator 2026-10-30): model-derived ledgers trade only when this is exactly 'false'
+          MODEL_RELEASE_BLOCKED: ${{ vars.MODEL_RELEASE_BLOCKED || '' }}
+          # G2 (A15, operator 2026-10-30): a plan hash approved through the dispatch input; via env, never inline
+          KIS_APPROVED_PLAN_HASH: ${{ inputs.approve_plan }}
+          # Emergency bypass for the drawdown governor (leave unset normally); a plan run with it needs approval (A16)
           KIS_DD_DISABLE: ${{ vars.KIS_DD_DISABLE || '' }}
         run: |
           # Credential selection: explicit, no cross-env fallback, loud on empty.
@@ -339,7 +346,8 @@ jobs:
       # probes, manual dry-runs, or runs whose sync step was gate-skipped — so
       # only actual trading suppresses the rest of the day's ladder.
       - name: Mark traded
-        if: steps.runsync.outcome == 'success' && !inputs.probe && (github.event_name == 'schedule' || inputs.as_scheduled || inputs.execute)
+        # G8 (A3, operator 2026-10-30): a halted run never marks, so it cannot suppress the day's later rungs
+        if: steps.runsync.outcome == 'success' && steps.runsync.outputs.halted != 'true' && !inputs.probe && (github.event_name == 'schedule' || inputs.as_scheduled || inputs.execute)
         run: echo "traded — later ladder arrivals will dedupe-skip today"
 
       - name: Upload run log

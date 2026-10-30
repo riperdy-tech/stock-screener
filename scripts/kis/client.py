@@ -399,10 +399,16 @@ class KISClient:
         # under 통합증거금, so cap at our own funds — this strategy never levers.
         own = bpf("ord_psbl_frcr_amt") + bpf("sll_ruse_psbl_amt")
         kis = bpf("ovrs_ord_psbl_amt")
+        # A8 (operator 2026-10-30): the fallbacks made explicit, same behaviour: own funds, else
+        # KIS's figure (KRW collateral under 통합증거금), else what is withdrawable
         if own > 0 and kis > 0:
             orderable = min(own, kis)
+        elif own != 0:
+            orderable = own
+        elif kis != 0:
+            orderable = kis
         else:
-            orderable = own or kis or withdrawable
+            orderable = withdrawable
         # Hard invariant in normal cash mode: never more than our own money,
         # whatever KIS reports. Deliberately built on `withdrawable`, not
         # `deposit`: money already earmarked for unsettled buys is spoken for,

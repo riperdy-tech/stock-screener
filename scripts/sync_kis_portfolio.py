@@ -484,8 +484,9 @@ def main():
         print("  NAV check: skipped (KIS total assets unavailable)")
 
     dd_gross, dd_halted = 1.0, False
-    if os.environ.get("KIS_DD_DISABLE", "").strip().lower() in ("1", "true", "yes"):
-        print("  DD governor DISABLED via KIS_DD_DISABLE — trading ungated")
+    dd_disabled = os.environ.get("KIS_DD_DISABLE", "").strip().lower() in ("1", "true", "yes")
+    if dd_disabled:
+        print("  DD governor DISABLED via KIS_DD_DISABLE — any order needs approval (A16)")
     else:
         dd_envs, dd_src = load_dd_states()
         if dd_src == "error":
@@ -599,6 +600,9 @@ def main():
                        [(o.side, o.ticker, o.qty) for o in plan.orders])
     approval_why = approval_reasons(plan, held, tgt["weights"],
                                     governor_tripped=dd_halted or dd_gross < 1.0)
+    # A16 (operator 2026-10-30): the governor bypass is routed through approval, not ungated
+    if dd_disabled and plan.orders:
+        approval_why.append("the drawdown governor is disabled (KIS_DD_DISABLE)")
     print(f"\nNAV ${plan.nav:,.2f} | {len(plan.sells)} sells, {len(plan.buys)} buys, "
           f"turnover {plan.turnover_pct}%")
     for w in plan.warnings:

@@ -221,9 +221,7 @@ def test_trading_run_does_not_say_halted(harness, monkeypatch):
     assert not out_file.exists() or "halted" not in out_file.read_text()
 
 
-@pytest.mark.xfail(reason="G8: the 'Mark traded' marker is written by kis-sync.yml, which this "
-                          "work order may not edit. Operator fix: see RR_R2.md", strict=False)
-def test_workflow_mark_traded_step_skips_a_halted_run():
+def test_workflow_mark_traded_step_skips_a_halted_run():                      # A3, operator 2026-10-30
     text = (REPO / ".github" / "workflows" / "kis-sync.yml").read_text(encoding="utf-8")
     step = text.split("- name: Mark traded", 1)[1].split("- name:", 1)[0]
     cond = next(line for line in step.splitlines() if line.strip().startswith("if:"))

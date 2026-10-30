@@ -414,3 +414,35 @@ def test_G5_an_execute_run_still_saves_the_state(harness, dd_state):
     assert len(dd_state.saved) == 1
     st = dd_state.saved[0]["real"]
     assert st["peak_nav"] == 15000.0 and st["snap"]["holdings"] == {"AAA": 50.0}
+
+
+# ===================================================== A16: KIS_DD_DISABLE needs approval (operator 2026-10-30)
+def test_A16_governor_disabled_a_buy_plan_needs_approval(harness, capsys, monkeypatch):
+    monkeypatch.setenv("KIS_DD_DISABLE", "true")
+    with pytest.raises(SystemExit) as e:
+        harness("false", argv=EXEC, **governor_scenario())
+    assert e.value.code == EXIT_APPROVAL_REQUIRED and FakeKIS.orders == []
+    ev = [x for x in harness.events if x["event"] == "approval_required"][0]
+    assert ev["reasons"] == ["the drawdown governor is disabled (KIS_DD_DISABLE)"]
+
+
+def test_A16_governor_disabled_trades_once_its_hash_is_approved(harness, capsys, monkeypatch):
+    monkeypatch.setenv("KIS_DD_DISABLE", "true")
+    h = true_hash(harness, capsys, **governor_scenario())
+    monkeypatch.setenv(APPROVED_PLAN_HASH_ENV, h)
+    harness("false", argv=EXEC, **governor_scenario())
+    assert [o[0] for o in FakeKIS.orders] == ["buy"]
+
+
+# ===================================================== A14/A15: the workflow wiring (operator 2026-10-30)
+def _sync_step_env():
+    text = (Path(__file__).resolve().parent.parent / ".github" / "workflows" / "kis-sync.yml").read_text(encoding="utf-8")
+    return text.split("- name: Run sync", 1)[1].split("run: |", 1)[0]
+
+
+def test_A14_workflow_passes_model_release_blocked():
+    assert "MODEL_RELEASE_BLOCKED: ${{ vars.MODEL_RELEASE_BLOCKED || '' }}" in _sync_step_env()
+
+
+def test_A15_workflow_passes_the_approval_input_through_env():
+    assert f"{APPROVED_PLAN_HASH_ENV}: ${{{{ inputs.approve_plan }}}}" in _sync_step_env()
