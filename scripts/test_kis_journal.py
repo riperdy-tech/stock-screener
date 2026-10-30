@@ -539,6 +539,18 @@ def test_g4_refuses_a_stale_overlay_behind_a_fresh_ledger(overlay):
     assert "depth_overlay.json" in str(e.value) and "2026-10-06" in str(e.value)
 
 
+def test_a12_the_overlay_limit_is_its_own_14_days(overlay):
+    # A12: a fresh ledger with an overlay 13.9 days old passes; 14.1 days refuses; the ledger keeps its 5 days
+    assert kt.OVERLAY_MAX_AGE_DAYS == 14
+    overlay(generated_at=(NOW - timedelta(days=13.9)).isoformat())
+    rep = kt.check_served_freshness(_ledger_book("2026-10-29"), "supabase", "rn_depth", now=NOW)
+    assert rep["overlay_max_age_days"] == 14
+    overlay(generated_at=(NOW - timedelta(days=14.1)).isoformat())
+    with pytest.raises(kt.StaleSourceError) as e:
+        kt.check_served_freshness(_ledger_book("2026-10-29"), "supabase", "rn_depth", now=NOW)
+    assert "limit 14" in str(e.value)
+
+
 def test_g4_accepts_a_generated_key_and_a_z_suffix(overlay):
     overlay(generated="2026-10-28T09:00:00Z")
     rep = kt.check_served_freshness(_ledger_book(), "url", "rn_depth", now=NOW)
@@ -645,3 +657,47 @@ def test_g4_load_ledger_book_records_why_supabase_was_passed_over(tmp_path, monk
     monkeypatch.setattr(requests, "get", lambda *a, **k: OK())
     _, src = kt.load_ledger_book()
     assert src == "supabase" and kt.last_load_notes() == []
+
+
+# ====================================================================== A13: KISClient.daily_orders
+def _ccnl_client(env, pages):
+    from kis.client import KISClient
+    calls = []
+
+    class Fake(KISClient):
+        def __init__(self):
+            self.env, self.cano, self.acnt_prdt_cd = env, "00000000", "01"
+
+        def _get(self, path, tr_id, params, tr_cont=""):
+            calls.append((path, tr_id, dict(params), tr_cont))
+            return pages[len(calls) - 1]
+    c = Fake()
+    c.calls = calls
+    return c
+
+
+def _ccnl_row(**kw):
+    return {"odno": "0001", "pdno": "AAA ", "sll_buy_dvsn_cd": "02", "ft_ord_qty": "10", "ft_ccld_qty": "10",
+            "prcs_stat_name": "완료", "rvse_cncl_dvsn": "00", "ord_dt": "20261029", **kw}
+
+
+def test_a13_daily_orders_reads_the_new_york_day_and_maps_rows():
+    c = _ccnl_client("real", [({"output": [_ccnl_row(), _ccnl_row(odno="0002", pdno="BBB", sll_buy_dvsn_cd="01",
+                                                                  ft_ord_qty="5", ft_ccld_qty="0")]}, "")])
+    rows = c.daily_orders(now=datetime(2026, 10, 30, 2, 0, tzinfo=timezone.utc))   # 22:00 ET on 10-29
+    path, tr_id, params, _ = c.calls[0]
+    assert path.endswith("/inquire-ccnl") and tr_id == "TTTS3035R"
+    assert params["ORD_STRT_DT"] == params["ORD_END_DT"] == "20261029"
+    assert params["PDNO"] == "%" and params["OVRS_EXCG_CD"] == "NASD"
+    assert [(r["ticker"], r["side"], r["qty"], r["order_no"]) for r in rows] == [("AAA", "buy", 10, "0001"),
+                                                                                  ("BBB", "sell", 5, "0002")]
+
+
+def test_a13_daily_orders_paper_uses_the_all_form_and_follows_pages():
+    c = _ccnl_client("paper", [({"output": [_ccnl_row()], "ctx_area_fk200": "F1", "ctx_area_nk200": "N1"}, "M"),
+                               ({"output": [_ccnl_row(odno="0002")]}, "")])
+    rows = c.daily_orders(now=datetime(2026, 10, 29, 16, 30, tzinfo=timezone.utc))
+    assert c.calls[0][1] == "VTTS3035R" and c.calls[0][2]["PDNO"] == "" and c.calls[0][2]["OVRS_EXCG_CD"] == ""
+    assert c.calls[1][2]["CTX_AREA_FK200"] == "F1" and c.calls[1][3] == "N"
+    assert len(rows) == 2
+

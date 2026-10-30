@@ -23,6 +23,9 @@ LEDGERS_JSON = ROOT / "public" / "data" / "paper_ledgers.json"
 # is the age of the verdicts, which the ledger's `current_date` (advanced by every scoring
 # run) does not show. Only ledgers listed here have such a source.
 OVERLAY_FILES = {"rn_depth": ROOT / "public" / "data" / "depth_overlay.json"}
+# A12 (operator 2026-10-30): the overlay's age limit is its intended cadence, not the ledger's daily one. Every monitored
+# name is re-analysed at least every 14 days (SPEC_m3p P4), so a healthy overlay is never older than that.
+OVERLAY_MAX_AGE_DAYS = 14
 # Ledgers driven by an unvalidated interim analyst (operator decision 2026-10-13: Gemini, paper only).
 # ledger_weights refuses them, so no KIS_LEDGER setting or manual --ledger can route them to real money.
 PAPER_ONLY_LEDGERS = frozenset({"rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"})   # engine v2.1, experimental and unpromoted (AK.84, AK.91)
@@ -154,19 +157,22 @@ def _parse_utc(text) -> datetime:
 
 
 def check_served_freshness(book: dict, src: str, ledger_key: str, *, now=None,
-                           max_stale_days: int = 5, notes=()) -> dict:
+                           max_stale_days: int = 5, overlay_max_age_days: float = OVERLAY_MAX_AGE_DAYS,
+                           notes=()) -> dict:
     """G4: age of the target source ACTUALLY read, not of a copy nobody read.
 
     `src` is where load_ledger_book() got the book (supabase | url | local-file). Checks
     the served ledger's `current_date` and, for a ledger with an overlay source
     (OVERLAY_FILES), that overlay's `generated_at`/`generated`. Raises StaleSourceError
-    beyond `max_stale_days`, or when the overlay's age cannot be read (fail closed).
+    beyond `max_stale_days` (the ledger) or `overlay_max_age_days` (the overlay), or when the overlay's age
+    cannot be read (fail closed).
     Returns a report to log: source, ages, and why a higher-priority source was passed over.
     """
     now = now or datetime.now(timezone.utc)
     ledger = (book.get("ledgers") or {}).get(ledger_key) or {}
     as_of = ledger.get("current_date")
     report = {"source": src, "ledger": ledger_key, "max_stale_days": max_stale_days,
+              "overlay_max_age_days": overlay_max_age_days,
               "current_date": as_of, "age_days": None,
               "book_last_updated": book.get("last_updated"),
               "overlay_file": None, "overlay_generated": None, "overlay_age_days": None,
@@ -188,9 +194,9 @@ def check_served_freshness(book: dict, src: str, ledger_key: str, *, now=None,
             report["overlay_generated"] = gen
             report["overlay_age_days"] = round(
                 (now - _parse_utc(gen)).total_seconds() / 86400, 2)
-            if report["overlay_age_days"] > max_stale_days:
+            if report["overlay_age_days"] > overlay_max_age_days:
                 problems.append(f"{overlay.name} was generated {gen}, "
-                                f"{report['overlay_age_days']} days old (limit {max_stale_days})")
+                                f"{report['overlay_age_days']} days old (limit {overlay_max_age_days})")
         except Exception as e:
             problems.append(f"{overlay.name} age unreadable ({type(e).__name__}: {e})")
     report["problems"] = problems

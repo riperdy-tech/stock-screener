@@ -203,8 +203,8 @@ def run_reconcile(journal, client, env: str, today: str | None = None) -> int:
     """Resolve open keys against the broker's same-day order list.
 
     Uses client.daily_orders() -> [{"ticker", "side", "qty", "order_no"}] if the
-    client has it. KISClient has no such method today and none is invented here:
-    the run says so and leaves every key open. Returns 0 when nothing is left open.
+    client has it (KISClient.daily_orders, A13, 2026-10-30); a client without it makes
+    the run say so and leave every key open. Returns 0 when nothing is left open.
     """
     try:
         open_ = open_entries(journal, env)
