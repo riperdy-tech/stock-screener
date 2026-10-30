@@ -1,21 +1,21 @@
 {
   "anchor_id": "cost_of_capital",
   "asof": "2026-10-29",
-  "built_at": "2026-10-29T04:39:41.547131+00:00",
+  "built_at": "2026-10-29T21:34:42.162489+00:00",
   "degraded": false,
   "equity_aggregate": {
     "basis": "universe",
-    "coverage_share": 0.7909,
+    "coverage_share": 0.7885,
     "path": "data/anchors/equity_aggregate.json",
     "source": "Screener corpus (public/data): market caps from financials/*.json, owner earnings NI+D&A-capex and revenue CAGR from fundamentals_history.json. US-dollar reporters only; share classes collapsed by CIK.",
     "universe_stats": {
-      "collapsed_market_cap_usd_t": 85.89,
-      "constituent_market_cap_usd_t": 67.93,
-      "constituents": 1849,
-      "corpus_market_cap_usd_t": 91.27,
-      "coverage_share": 0.7909,
-      "excluded_non_usd_reporters": 497,
-      "names_with_market_cap": 4944,
+      "collapsed_market_cap_usd_t": 85.78,
+      "constituent_market_cap_usd_t": 67.63,
+      "constituents": 1856,
+      "corpus_market_cap_usd_t": 90.68,
+      "coverage_share": 0.7885,
+      "excluded_non_usd_reporters": 500,
+      "names_with_market_cap": 4954,
       "share_classes_collapsed": 65
     }
   },
@@ -36,11 +36,11 @@
   "erp_history_source": "Damodaran implied ERP (FCFE), annual 1961-2025",
   "erp_percentile_vs_history": 0.6923076923076923,
   "erp_source": "implied",
-  "implied_cost_of_equity": 0.0982,
-  "implied_erp": 0.0483,
+  "implied_cost_of_equity": 0.0985,
+  "implied_erp": 0.048,
   "inflation": {
     "cpi_yoy": 0.0372,
-    "pce_yoy": 0.0342
+    "pce_yoy": 0.0365
   },
   "loading_source": "beta_vs_SPY_5y",
   "market_implied_coe": null,
@@ -49,24 +49,24 @@
     "degradation_reasons": [],
     "input_dates": {
       "CPIAUCSL": "2026-09-01",
-      "DFII10": "2026-10-27",
-      "DGS10": "2026-10-27",
-      "PCEPI": "2026-08-01",
-      "T10YIE": "2026-10-28",
+      "DFII10": "2026-10-28",
+      "DGS10": "2026-10-28",
+      "PCEPI": "2026-09-01",
+      "T10YIE": "2026-10-29",
       "THREEFYTP10": "2026-10-23"
     },
     "notes": [
       "Cost of EQUITY, not WACC: the downstream cash flow (NI + D&A - capex) is levered and is compared against market cap, so a firm-level WACC would double-count the debt claim.",
-      "erp: solved over a universe aggregate (0.7909 of the collapsed universe's capitalisation), NOT an index. Published as implied_erp / implied_cost_of_equity; market_implied_* stays null.",
-      "erp: implied from 1849 constituents covering 79% of the aggregate's own capitalisation"
+      "erp: solved over a universe aggregate (0.7885 of the collapsed universe's capitalisation), NOT an index. Published as implied_erp / implied_cost_of_equity; market_implied_* stays null.",
+      "erp: implied from 1856 constituents covering 79% of the aggregate's own capitalisation"
     ],
     "regime_leg": null,
     "scoring_mode": "point_in_time"
   },
   "risk_free": {
-    "breakeven_10y": 0.0238,
-    "nominal_10y": 0.0499,
-    "real_10y": 0.0264,
+    "breakeven_10y": 0.0235,
+    "nominal_10y": 0.0505,
+    "real_10y": 0.0267,
     "term_premium": 0.009358
   },
   "sector_loadings": {
