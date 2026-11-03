@@ -17,6 +17,13 @@ Env: KIS_APP_KEY, KIS_APP_SECRET, KIS_CANO, KIS_ACNT_PRDT_CD (see docs/KIS_SYNC.
 After a manual exit the scheduled sync will re-buy the book on its next run — it
 reconciles to the ledger and has no memory of this script. Set the repo variable
 KIS_HALT=true before running unless that re-buy is what you want.
+
+Order journal (kis/journal.py, SPEC 3R G3): every sell is journaled 'sending' before the call and
+'accepted' / 'rejected' / 'unknown' after it. An unknown stops the run (exit 4) and blocks the next
+--execute until `--reconcile-journal` has resolved it against the broker.
+
+KIS_HALT fails closed (kis/halt.py): --execute is refused unless KIS_HALT is
+exactly 'false', or --ignore-halt is passed together with --confirm-real.
 """
 
 from __future__ import annotations
@@ -29,8 +36,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from kis.client import KISClient  # noqa: E402
+from kis.halt import kis_halt_state  # noqa: E402
+from kis.journal import (  # noqa: E402
+    JournalError, blocked_message, open_entries, plan_hash, run_reconcile, send_order,
+)
 from sync_kis_portfolio import (  # noqa: E402
-    SELL_LIMIT_BUFFER, gh_summary, log_event, resolve_prices, us_market_open,
+    SELL_LIMIT_BUFFER, gh_summary, log_event, make_journal, resolve_prices, us_market_open,
 )
 
 try:
@@ -105,9 +116,25 @@ def main():
     ap.add_argument("--max-order-usd", type=float,
                     default=float(os.environ.get("KIS_MAX_ORDER_USD", 15000)),
                     help="split any position larger than this across several orders")
+    ap.add_argument("--ignore-halt", action="store_true",
+                    help="trade although KIS_HALT is not 'false'; only valid together "
+                         "with --execute --confirm-real")
     ap.add_argument("--ignore-market-hours", action="store_true",
                     help="local testing only; KIS rejects US orders outside the session")
+    ap.add_argument("--reconcile-journal", action="store_true",
+                    help="resolve open order-journal keys (sending/unknown) against the "
+                         "broker's same-day order list; sends no order and exits")
     args = ap.parse_args()
+
+    if args.reconcile_journal:
+        # Read-only (no order), so neither --keep nor the halt applies to it.
+        missing = [k for k in ("KIS_APP_KEY", "KIS_APP_SECRET", "KIS_CANO", "KIS_ACNT_PRDT_CD")
+                   if not os.environ.get(k)]
+        if missing:
+            sys.exit(f"missing env: {', '.join(missing)}")
+        rc_client = KISClient(args.env, os.environ["KIS_APP_KEY"], os.environ["KIS_APP_SECRET"],
+                              os.environ["KIS_CANO"], os.environ["KIS_ACNT_PRDT_CD"])
+        sys.exit(run_reconcile(make_journal(), rc_client, args.env))
 
     keep = parse_keep(args.keep)
     if not keep and not args.keep_none:
@@ -117,10 +144,33 @@ def main():
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     print(f"KIS liquidate-except [{run_id}] env={args.env} execute={args.execute}")
     print(f"keep ({len(keep)}): {', '.join(sorted(keep)) or '(none — full liquidation)'}")
-    halt = os.environ.get("KIS_HALT", "").strip().lower() in ("1", "true", "yes")
-    halt_note = ("set — the scheduled sync is stopped" if halt else
-                 "NOT set — the next scheduled sync will re-buy toward the ledger")
-    print(f"KIS_HALT={halt_note}")
+    halt, halt_reason = kis_halt_state()
+    halt_note = (f"halted ({halt_reason}) — the scheduled sync is stopped" if halt else
+                 "'false' — the next scheduled sync will re-buy toward the ledger")
+    print(f"KIS_HALT: {halt_note}")
+    if args.execute and halt:
+        # G1: a halt refuses --execute. Only the explicit pair below overrides it.
+        if not (args.ignore_halt and args.confirm_real):
+            sys.exit(f"refusing --execute: halted ({halt_reason}). To override, pass "
+                     f"--ignore-halt together with --confirm-real.")
+        print("WARNING: --ignore-halt: executing although the halt is set.")
+
+    # G3: an order whose outcome is unknown blocks --execute until it is reconciled.
+    journal = make_journal()
+    if args.execute:
+        try:
+            blocked = open_entries(journal, args.env)
+        except JournalError as e:
+            sys.exit(f"refusing to execute: {e}")
+        if blocked:
+            log_event({"run_id": run_id, "event": "journal_blocked",
+                       "keys": [e["key"] for e in blocked]})
+            print(blocked_message(blocked), file=sys.stderr)
+            sys.exit(3)
+        if not journal.durable:
+            sys.exit("refusing to execute: the order journal is a local file and this runner "
+                     "is ephemeral, so an unknown order could not block the next run. Wire a "
+                     "durable journal store first (RR_R3).")
 
     missing = [k for k in ("KIS_APP_KEY", "KIS_APP_SECRET", "KIS_CANO", "KIS_ACNT_PRDT_CD")
                if not os.environ.get(k)]
@@ -194,15 +244,30 @@ def main():
         sys.exit("US market is closed (09:30–16:00 ET, weekdays) — KIS would reject "
                  "these orders. Re-run during the session.")
 
-    results, rejects = [], []
+    results, rejects, stopped = [], [], None
+    plan_h = plan_hash(args.env, "liquidate_except", run_id[:8],   # run_id[:8] = UTC trade date
+                       [("sell", o["ticker"], o["qty"]) for o in orders])
+    seen = {}
     for o in orders:
-        r = client.place_order("sell", o["exch"], o["ticker"], o["qty"], o["price"])
-        status = "ok" if r["ok"] else "REJECTED"
+        # A split position yields identical chunks; seq keeps their keys distinct.
+        ident = (o["ticker"], o["qty"], o["price"])
+        seq = seen[ident] = seen.get(ident, -1) + 1
+        r = send_order(journal, client, run_id=run_id, env=args.env, ledger="liquidate_except",
+                       plan_hash_=plan_h, side="sell", exch=o["exch"], ticker=o["ticker"],
+                       qty=o["qty"], limit=o["price"], seq=seq)
+        if r["state"] == "duplicate":
+            print(f"  sell {o['ticker']} x{o['qty']} skipped: key {r['key'][:12]} already accepted")
+            continue
+        status = {"accepted": "ok", "unknown": "UNKNOWN", "not_sent": "NOT SENT"}.get(
+            r["state"], "REJECTED")
         print(f"  sell {o['ticker']} x{o['qty']} @ {o['price']:,.2f} -> {status} "
               f"{r.get('order_no') or ''} {r['msg']}")
         results.append({**o, **r})
         if not r["ok"]:
             rejects.append({"ticker": o["ticker"], "msg": r["msg"]})
+        if r.get("stop"):
+            stopped = r
+            break
 
     ok = sum(1 for r in results if r["ok"])
     print(f"\nplaced {ok}/{len(results)} order(s)")
@@ -215,12 +280,18 @@ def main():
         print("rejected:")
         for r in rejects:
             print(f"  {r['ticker']}: {r['msg']}")
+    if stopped:
+        stop_msg = (f"STOPPED after {stopped['state']} order (key {stopped['key'][:12]}): "
+                    f"{stopped['msg']}. No further orders were sent. Reconcile against the "
+                    f"broker (--reconcile-journal) before the next --execute.")
+        print(stop_msg, file=sys.stderr)
+        sys.exit(4)
     if ok == 0:
         sys.exit(f"every order was rejected; first reason: {rejects[0]['msg']!r}")
     print("\nLimit orders may not fill immediately. Check the KIS app; unfilled "
           "orders expire at the close.")
     if not halt:
-        print("REMINDER: KIS_HALT is not set — the next scheduled sync will "
+        print("REMINDER: KIS_HALT is 'false' — the next scheduled sync will "
               "reconcile back toward the ledger and re-buy what you just sold.")
 
 

@@ -28,6 +28,9 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from kis.approval import (  # noqa: E402
+    APPROVED_PLAN_HASH_ENV, EXIT_APPROVAL_REQUIRED, approval_reasons, check_approval,
+)
 from kis.client import EXCD_TO_ORDER, KISClient  # noqa: E402
 from kis.dd_engine import (  # noqa: E402
     apply_flow, decide, initial_state, rebase, reconcile_flow, resume, snapshot,
@@ -35,11 +38,20 @@ from kis.dd_engine import (  # noqa: E402
 from kis.dd_gate import (  # noqa: E402
     apply_gate, dd_alert_text, dd_log_line, load_dd_states, save_dd_states,
 )
+from kis.halt import kis_halt_state  # noqa: E402
+from kis.ledger_policy import ledger_refusals  # noqa: E402
+from kis.journal import (  # noqa: E402
+    JournalError, LocalFileJournal, blocked_message, open_entries, plan_hash,
+    run_reconcile, send_order,
+)
 from kis.notify import (  # noqa: E402
     format_telegram, pnl_suffix, sb_upsert, send_telegram, trades_rows,
 )
 from kis.reconcile import compute_plan  # noqa: E402
-from kis.targets import ledger_weights, load_ledger_book  # noqa: E402
+from kis.targets import (  # noqa: E402
+    StaleSourceError, check_served_freshness, last_load_notes, ledger_weights,
+    load_ledger_book,
+)
 
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -49,6 +61,7 @@ except Exception:
 ROOT = Path(__file__).resolve().parents[1]
 EXCHANGE_MAP = ROOT / "scripts" / "kis" / "exchange_map.json"
 LOG_PATH = ROOT / "logs" / "kis_sync.jsonl"
+JOURNAL_PATH = ROOT / "logs" / "kis_order_journal.jsonl"   # G3; shared with kis_liquidate_except.py
 
 BUY_LIMIT_BUFFER = 1.003   # limit = last * buffer (marketable limit)
 SELL_LIMIT_BUFFER = 0.997
@@ -104,6 +117,19 @@ def resolve_prices(client: KISClient, tickers: set[str], held_exch: dict) -> tup
     return prices, order_cd
 
 
+def make_journal():
+    """The order journal. Local file only; a remote store would replace this (RR_R3)."""
+    return LocalFileJournal(JOURNAL_PATH)
+
+
+def outcome_text(res: dict) -> str:
+    if res["state"] == "accepted":
+        return f"OK {res['order_no']}"
+    if res["state"] in ("unknown", "not_sent"):
+        return res["msg"]
+    return f"REJECT: {res['msg']}"
+
+
 def log_event(event: dict):
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
     event["ts"] = datetime.now(timezone.utc).isoformat()
@@ -116,6 +142,14 @@ def gh_summary(lines: list[str]):
     if p:
         with open(p, "a", encoding="utf-8") as f:
             f.write("\n".join(lines) + "\n")
+
+
+def gh_output(name: str, value: str):
+    """Step output for later workflow steps (a no-op outside GitHub Actions)."""
+    p = os.environ.get("GITHUB_OUTPUT")
+    if p:
+        with open(p, "a", encoding="utf-8") as f:
+            f.write(f"{name}={value}\n")
 
 
 def plan_table(plan, order_cd) -> list[str]:
@@ -233,6 +267,13 @@ def main():
                     help="read-only account diagnostics (cash rows, KRW seed, "
                          "buying power); places no orders and exits")
     ap.add_argument("--ignore-market-hours", action="store_true")
+    ap.add_argument("--reconcile-journal", action="store_true",
+                    help="resolve open order-journal keys (sending/unknown) against the "
+                         "broker's same-day order list; sends no order and exits")
+    ap.add_argument("--approve-plan", default=os.environ.get(APPROVED_PLAN_HASH_ENV, ""),
+                    metavar="HASH",
+                    help="approval for a plan that needs it (G2): the plan hash printed by a "
+                         f"dry run. Defaults to ${APPROVED_PLAN_HASH_ENV}")
     ap.add_argument("--no-wait", action="store_true",
                     help="don't wait for sell fills before buying")
     ap.add_argument("--dd-resume", action="store_true",
@@ -250,7 +291,7 @@ def main():
                          "the sleeve: +deposit or KRW->USD 환전, -withdrawal or "
                          "USD->KRW. Normally unnecessary — detection is automatic")
     args = ap.parse_args()
-    if not args.ledger.strip():
+    if not args.ledger.strip() and not args.reconcile_journal:
         sys.exit("no ledger: pass --ledger or set KIS_LEDGER (e.g. equal_llm). "
                  "There is deliberately no default — mirroring the wrong book is worse "
                  "than not trading.")
@@ -259,22 +300,85 @@ def main():
     print(f"KIS sync [{run_id}] env={args.env} ledger={args.ledger} "
           f"execute={args.execute}")
 
-    # Kill switch: repo variable KIS_HALT (any of 1/true/yes) stops the run
-    # before targets, prices, or any order. Flip it from the GitHub mobile app
-    # (repo Settings -> Secrets and variables -> Variables). Halts paper and
-    # real alike; clear the variable to resume.
-    if os.environ.get("KIS_HALT", "").strip().lower() in ("1", "true", "yes"):
-        log_event({"run_id": run_id, "event": "halted", "reason": "KIS_HALT set"})
+    if args.reconcile_journal:
+        # Read-only (no order, no target load), so the halt does not apply to it.
+        missing = [k for k in ("KIS_APP_KEY", "KIS_APP_SECRET", "KIS_CANO", "KIS_ACNT_PRDT_CD")
+                   if not os.environ.get(k)]
+        if missing:
+            sys.exit(f"missing env: {', '.join(missing)}")
+        rc_client = KISClient(args.env, os.environ["KIS_APP_KEY"], os.environ["KIS_APP_SECRET"],
+                              os.environ["KIS_CANO"], os.environ["KIS_ACNT_PRDT_CD"])
+        sys.exit(run_reconcile(make_journal(), rc_client, args.env))
+
+    # Kill switch: repo variable KIS_HALT. FAILS CLOSED (SPEC 3R G1): the run trades
+    # only when KIS_HALT is exactly 'false'; unset, empty or any other value halts,
+    # before targets, prices, probe or any order. Flip it from the GitHub mobile app
+    # (repo Settings -> Secrets and variables -> Variables). Halts paper and real
+    # alike. Rule lives in kis/halt.py.
+    halted, halt_reason = kis_halt_state()
+    if halted:
+        log_event({"run_id": run_id, "event": "halted", "reason": halt_reason})
         gh_summary([f"## KIS sync {run_id}",
-                    "**HALTED** — repo variable KIS_HALT is set; no orders."])
-        print("HALTED: KIS_HALT is set — exiting before any planning/orders.")
+                    f"**HALTED** — {halt_reason}; no orders."])
+        # G8: lets the workflow's "Mark traded" step tell a halted run from a trading one.
+        gh_output("halted", "true")
+        print(f"HALTED: {halt_reason} — exiting before any planning/orders.")
         return
+
+    # G6/G7: which ledgers may be mirrored at all (kis/ledger_policy.py).
+    refusals = ledger_refusals(args.ledger, args.env)
+    if refusals:
+        log_event({"run_id": run_id, "event": "ledger_refused", "env": args.env,
+                   "ledger": args.ledger, "reasons": refusals})
+        gh_summary([f"## KIS sync {run_id}", "**REFUSED** — " + "; ".join(refusals)])
+        sys.exit("refusing: " + "; ".join(refusals))
+
+    # G3: an order whose outcome is unknown blocks every later run that would trade.
+    journal = make_journal()
+    if args.execute:
+        try:
+            blocked = open_entries(journal, args.env)
+        except JournalError as e:
+            log_event({"run_id": run_id, "event": "journal_unreadable", "error": str(e)})
+            sys.exit(f"refusing to trade: {e}")
+        if blocked:
+            msg = blocked_message(blocked)
+            log_event({"run_id": run_id, "event": "journal_blocked",
+                       "keys": [e["key"] for e in blocked]})
+            gh_summary([f"## KIS sync {run_id}", f"**REFUSED** — {msg}"])
+            print(msg, file=sys.stderr)
+            sys.exit(3)
+        if not journal.durable:
+            msg = ("refusing to execute: the order journal is a local file and this runner "
+                   "is ephemeral, so an unknown order could not block the next run. Wire a "
+                   "durable journal store first (RR_R3).")
+            log_event({"run_id": run_id, "event": "journal_not_durable"})
+            gh_summary([f"## KIS sync {run_id}", f"**REFUSED** — {msg}"])
+            sys.exit(msg)
 
     # ---- targets ----
     book, src = load_ledger_book()
     tgt = ledger_weights(book, args.ledger)
     print(f"targets: {len(tgt['weights'])} names from {args.ledger!r} "
           f"(source={src}, as_of={tgt['as_of']}, cash_w={tgt['cash_weight']:.2%})")
+    # G4: freshness of the source actually served, and a loud note when it was a fallback.
+    notes = last_load_notes()
+    try:
+        fresh = check_served_freshness(book, src, args.ledger, notes=notes)
+    except StaleSourceError as e:
+        log_event({"run_id": run_id, "event": "stale_source_refused", **e.report})
+        gh_summary([f"## KIS sync {run_id}", f"**REFUSED** — stale target source: {e}"])
+        sys.exit(f"refusing: stale target source: {e}")
+    print(f"  freshness: source={src} current_date={fresh['current_date']} "
+          f"age={fresh['age_days']}d"
+          + (f" | {fresh['overlay_file']} generated {fresh['overlay_generated']} "
+             f"age={fresh['overlay_age_days']}d" if fresh["overlay_file"] else "")
+          + f" (limit {fresh['max_stale_days']}d)")
+    if src != "supabase":
+        why = "; ".join(notes) or "no reason recorded"
+        print(f"  WARNING: targets came from {src!r}, not supabase ({why})")
+        gh_summary([f"## KIS sync {run_id}", f"WARNING: targets from {src!r}, not supabase: {why}"])
+    log_event({"run_id": run_id, "event": "target_source", **fresh})
 
     # ---- account ----
     missing = [k for k in ("KIS_APP_KEY", "KIS_APP_SECRET", "KIS_CANO", "KIS_ACNT_PRDT_CD")
@@ -335,9 +439,10 @@ def main():
         sys.exit(f"refusing: no price for any of {len(tickers)} tickers")
 
     # ---- drawdown governor (LIVE per user 2026-07-21; tiers -8/-11/-13, hyst 2) ----
-    # Enforces the max-DD<=15% budget on whatever ledger is mirrored. Fail-open:
-    # a state-store outage trades ungated with a loud alert (KIS_HALT stays the
-    # manual backstop). KIS_DD_DISABLE=true is the emergency bypass.
+    # Enforces the max-DD<=15% budget on whatever ledger is mirrored. It PROPOSES
+    # only (G5): a trip changes the plan, and sells caused by it need the plan's
+    # approval hash like any large sell plan (kis/approval.py). Fail-closed: a
+    # state-store outage halts the run. KIS_DD_DISABLE=true is the emergency bypass.
     nav_now = cash + sum(sh * prices[t] for t, sh in held.items() if t in prices)
 
     # ---- NAV sanity: cross-check against KIS's own total-assets figure -------
@@ -379,15 +484,21 @@ def main():
         print("  NAV check: skipped (KIS total assets unavailable)")
 
     dd_gross, dd_halted = 1.0, False
-    if os.environ.get("KIS_DD_DISABLE", "").strip().lower() in ("1", "true", "yes"):
-        print("  DD governor DISABLED via KIS_DD_DISABLE — trading ungated")
+    dd_disabled = os.environ.get("KIS_DD_DISABLE", "").strip().lower() in ("1", "true", "yes")
+    if dd_disabled:
+        print("  DD governor DISABLED via KIS_DD_DISABLE — any order needs approval (A16)")
     else:
         dd_envs, dd_src = load_dd_states()
         if dd_src == "error":
-            msg = ("[KIS·risk] DD state store unreachable — trading UNGATED this run "
-                   "(fail-open); KIS_HALT remains the manual backstop")
-            print(f"  WARNING: {msg}")
+            # G5: with the store down the governor cannot run, so the run halts. It used
+            # to trade ungated with an alert.
+            msg = (f"[KIS·risk] {args.env}: DD state store unreachable — HALTED this run "
+                   f"(fail-closed); no orders, and no drawdown state was written")
+            print(f"  {msg}")
+            log_event({"run_id": run_id, "event": "dd_store_down_halt", "env": args.env})
             send_telegram(msg)
+            gh_summary([f"## KIS sync {run_id} — {args.env}/{args.ledger}", "", f"**HALTED** — {msg}"])
+            sys.exit("refusing: the drawdown state store is unreachable (governor cannot run)")
         else:
             st = (dd_envs or {}).get(args.env)
             fresh = False
@@ -451,7 +562,11 @@ def main():
             # today's fills are then sleeve-internal and cancel out tomorrow.
             st["snap"] = snapshot(cash, held)
             dd_envs = {**(dd_envs or {}), args.env: st}
-            if not save_dd_states(dd_envs):
+            # G5: only an execute run writes governor state. A dry run used to save it
+            # here, so a preview could advance the peak, take the snapshot or latch a halt.
+            if not args.execute:
+                print("  DD: dry run — governor state not saved")
+            elif not save_dd_states(dd_envs):
                 print("  ! DD state save failed (non-fatal; retried next run)", file=sys.stderr)
             print(f"  {dd_log_line(args.env, dd, st)}")
             log_event({"run_id": run_id, "event": "dd_decision", "env": args.env,
@@ -479,12 +594,24 @@ def main():
             plan.warnings.append(
                 f"{o.ticker}: buy suppressed (DD governor gross {dd_gross:.0%})")
         plan.orders = [o for o in plan.orders if o.side == "sell"]
+    # G2/G3: the plan's hash (also the base of every order's idempotency key; run_id[:8] is
+    # the UTC trade date) and whether the plan needs the operator's approval of that hash.
+    plan_h = plan_hash(args.env, args.ledger, run_id[:8],
+                       [(o.side, o.ticker, o.qty) for o in plan.orders])
+    approval_why = approval_reasons(plan, held, tgt["weights"],
+                                    governor_tripped=dd_halted or dd_gross < 1.0)
+    # A16 (operator 2026-10-30): the governor bypass is routed through approval, not ungated
+    if dd_disabled and plan.orders:
+        approval_why.append("the drawdown governor is disabled (KIS_DD_DISABLE)")
     print(f"\nNAV ${plan.nav:,.2f} | {len(plan.sells)} sells, {len(plan.buys)} buys, "
           f"turnover {plan.turnover_pct}%")
     for w in plan.warnings:
         print(f"  ! {w}")
     for line in plan_table(plan, order_cd):
         print(line)
+    print(f"plan hash: {plan_h}")
+    for why in approval_why:
+        print(f"  APPROVAL REQUIRED: {why}")
 
     summary = [f"## KIS sync {run_id} — {args.env}/{args.ledger}",
                f"NAV ${plan.nav:,.2f} · cash ${cash:,.2f} · turnover {plan.turnover_pct}% · "
@@ -492,10 +619,14 @@ def main():
                ""] + plan_table(plan, order_cd)
     if plan.warnings:
         summary += ["", "**Warnings**"] + [f"- {w}" for w in plan.warnings]
+    summary += ["", f"plan hash: `{plan_h}`"]
+    if approval_why:
+        summary += ["", "**Approval required**"] + [f"- {w}" for w in approval_why]
 
     log_event({"run_id": run_id, "event": "plan", "env": args.env, "ledger": args.ledger,
                "execute": args.execute, "nav": plan.nav, "cash": cash,
                "turnover_pct": plan.turnover_pct, "warnings": plan.warnings,
+               "plan_hash": plan_h, "approval_required": approval_why,
                "orders": [vars(o) for o in plan.orders]})
 
     if not args.execute:
@@ -509,24 +640,55 @@ def main():
         print("nothing to do")
         gh_summary(summary)
         return
+    if approval_why:
+        approved, detail = check_approval(plan_h, args.approve_plan)
+        if not approved:
+            how = f"re-run with ${APPROVED_PLAN_HASH_ENV}={plan_h} or --approve-plan {plan_h}"
+            log_event({"run_id": run_id, "event": "approval_required", "env": args.env,
+                       "ledger": args.ledger, "plan_hash": plan_h, "reasons": approval_why,
+                       "detail": detail})
+            gh_summary(summary + ["", f"**REFUSED: approval required** — {detail}.", how])
+            print(f"\nREFUSED: this plan needs approval ({detail}). No order sent.\n{how}",
+                  file=sys.stderr)
+            sys.exit(EXIT_APPROVAL_REQUIRED)
+        print(f"approval: {detail}")
+        log_event({"run_id": run_id, "event": "approval_accepted", "plan_hash": plan_h,
+                   "reasons": approval_why})
     if not us_market_open() and not args.ignore_market_hours:
         gh_summary(summary + ["", "SKIPPED: US market closed"])
         sys.exit("US market closed (use --ignore-market-hours to override)")
 
     # ---- execute: sells first ----
-    results = []
+    # G3: every order is journaled 'sending' before the call and 'accepted' / 'rejected' /
+    # 'unknown' after it. An unknown stops the run: nothing further is sent.
+    results, stopped = [], None
+
+    def send(o, qty, limit):
+        res = send_order(journal, client, run_id=run_id, env=args.env, ledger=args.ledger,
+                         plan_hash_=plan_h, side=o.side, exch=order_cd[o.ticker],
+                         ticker=o.ticker, qty=qty, limit=limit)
+        if res["state"] == "duplicate":
+            print(f"  {o.side} {o.ticker} x{qty} skipped: key {res['key'][:12]} already accepted")
+            log_event({"run_id": run_id, "event": "order_skipped_duplicate", "key": res["key"],
+                       "ticker": o.ticker, "side": o.side, "qty": qty})
+        return res
+
     for o in plan.sells:
         limit = o.price * SELL_LIMIT_BUFFER
-        res = client.place_order("sell", order_cd[o.ticker], o.ticker, o.qty, limit)
+        res = send(o, o.qty, limit)
+        if res["state"] == "duplicate":
+            continue
         results.append({**vars(o), **res, "limit": round(limit, 4)})
         print(f"  sell {o.ticker} x{o.qty} @ {limit:.2f}"
-              f"{pnl_suffix(avg_cost.get(o.ticker, 0), limit, o.qty)} -> "
-              f"{'OK ' + str(res['order_no']) if res['ok'] else 'REJECT: ' + res['msg']}")
+              f"{pnl_suffix(avg_cost.get(o.ticker, 0), limit, o.qty)} -> {outcome_text(res)}")
+        if res.get("stop"):
+            stopped = res
+            break
 
     # Wait for sell fills whenever there are sells at all. With buys, this lets proceeds settle
     # to fund them; without buys (a pure exit run), it still confirms the sells cleared. Either
     # way, an unfilled remainder after the window is surfaced below.
-    if plan.sells and not args.no_wait:
+    if plan.sells and not args.no_wait and not stopped:
         remaining = []
         for i in range(FILL_WAIT_ROUNDS):
             time.sleep(FILL_WAIT_SECONDS)
@@ -553,9 +715,12 @@ def main():
     # ---- buys, capped by what KIS will actually let us spend ----
     # Re-read after the sells: filled proceeds show up as 매도대금 재사용 and lift
     # the orderable amount, so this is no longer starved by T+2 settlement.
-    budget = client.usd_funds()["orderable"] if plan.sells else orderable
+    if stopped:
+        buys, budget = [], orderable            # an unknown order ends the run: no buys
+    else:
+        buys, budget = plan.buys, (client.usd_funds()["orderable"] if plan.sells else orderable)
     budget *= 0.995  # fee/slippage headroom
-    for o in plan.buys:
+    for o in buys:
         limit = o.price * BUY_LIMIT_BUFFER
         qty = min(o.qty, int(budget // limit))
         if qty < 1:
@@ -563,12 +728,16 @@ def main():
                             "msg": "skipped: insufficient settled cash"})
             print(f"  buy {o.ticker} skipped (insufficient cash)")
             continue
-        res = client.place_order("buy", order_cd[o.ticker], o.ticker, qty, limit)
+        res = send(o, qty, limit)
+        if res["state"] == "duplicate":
+            continue
         if res["ok"]:
             budget -= qty * limit
         results.append({**vars(o), "qty": qty, **res, "limit": round(limit, 4)})
-        print(f"  buy {o.ticker} x{qty} @ {limit:.2f} -> "
-              f"{'OK ' + str(res['order_no']) if res['ok'] else 'REJECT: ' + res['msg']}")
+        print(f"  buy {o.ticker} x{qty} @ {limit:.2f} -> {outcome_text(res)}")
+        if res.get("stop"):
+            stopped = res
+            break
 
     ok = sum(1 for r in results if r.get("ok"))
     rejects = [r for r in results if not r.get("ok")]
@@ -603,7 +772,19 @@ def main():
     if rejects:
         summary += ["", "**Rejected/skipped**"] + \
                    [f"- {r['side']} {r['ticker']}: {r['msg']}" for r in rejects]
+    if stopped:
+        stop_msg = (f"STOPPED after {stopped['state']} order (key {stopped['key'][:12]}): "
+                    f"{stopped['msg']}. No further orders were sent. Reconcile against the "
+                    f"broker (--reconcile-journal) before the next run.")
+        summary += ["", f"**{stop_msg}**"]
+        try:
+            send_telegram(f"[KIS·risk] {run_id} {args.env}/{args.ledger}: {stop_msg}")
+        except Exception as e:
+            print(f"  stop alert failed (non-fatal): {e}", file=sys.stderr)
     gh_summary(summary)
+    if stopped:
+        print(stop_msg, file=sys.stderr)
+        sys.exit(4)
 
     # A run that intended to trade and placed nothing is a failure, not a no-op.
     # Silence here would let a misprovisioned account look healthy for weeks.

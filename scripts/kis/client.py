@@ -19,7 +19,9 @@ from __future__ import annotations
 
 import json
 import time
+from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import requests
 
@@ -39,6 +41,7 @@ TR = {
     "krw_bal":  {"real": "TTTC8434R", "paper": "VTTC8434R"},
     "krw_buy":  {"real": "TTTC0012U", "paper": "VTTC0012U"},
     "cancel":   {"real": "TTTT1004U", "paper": "VTTT1004U"},
+    "ccnl":     {"real": "TTTS3035R", "paper": "VTTS3035R"},   # A13: 주문체결내역 (order history), read-only
 }
 
 # Quote API exchange codes (EXCD) -> order API exchange codes (OVRS_EXCG_CD)
@@ -260,10 +263,13 @@ class KISClient:
                     if qty <= 0:
                         continue
                     t = (it.get("ovrs_pdno") or "").strip()
+                    # 0 is a value (G9): only a missing ord_psbl_qty means "all sellable".
+                    sellable = it.get("ord_psbl_qty")
+                    sellable = qty if sellable is None or sellable == "" else float(sellable)
                     rows[t] = {
                         "ticker": t,
                         "shares": qty,
-                        "sellable": float(it.get("ord_psbl_qty") or qty),
+                        "sellable": sellable,
                         "exch_order_cd": (it.get("ovrs_excg_cd") or excg).strip(),
                         "name": (it.get("ovrs_item_name") or "").strip(),
                         "avg_cost": float(it.get("pchs_avg_pric") or 0),
@@ -396,10 +402,16 @@ class KISClient:
         # under 통합증거금, so cap at our own funds — this strategy never levers.
         own = bpf("ord_psbl_frcr_amt") + bpf("sll_ruse_psbl_amt")
         kis = bpf("ovrs_ord_psbl_amt")
+        # A8 (operator 2026-10-30): the fallbacks made explicit, same behaviour: own funds, else
+        # KIS's figure (KRW collateral under 통합증거금), else what is withdrawable
         if own > 0 and kis > 0:
             orderable = min(own, kis)
+        elif own != 0:
+            orderable = own
+        elif kis != 0:
+            orderable = kis
         else:
-            orderable = own or kis or withdrawable
+            orderable = withdrawable
         # Hard invariant in normal cash mode: never more than our own money,
         # whatever KIS reports. Deliberately built on `withdrawable`, not
         # `deposit`: money already earmarked for unsettled buys is spoken for,
@@ -523,6 +535,49 @@ class KISClient:
                 break
         return list(out.values())
 
+    def daily_orders(self, now: datetime | None = None) -> list[dict]:
+        """Today's US orders, filled or not: [{ticker, side, qty, order_no, ...}] (A13, read-only).
+
+        "Today" is the New York date (the endpoint's dates are local to the market). Read by
+        kis.journal.run_reconcile to resolve open journal keys. Paper accepts only the
+        all-instruments / all-exchanges form ("" for PDNO and OVRS_EXCG_CD); real reads the
+        whole US with NASD, as balance() and unfilled() do.
+        """
+        now = now or datetime.now(timezone.utc)
+        day = now.astimezone(ZoneInfo("America/New_York")).strftime("%Y%m%d")
+        real = self.env == "real"
+        out: dict[str, dict] = {}
+        fk, nk, tr_cont = "", "", ""
+        for _ in range(10):
+            body, cont = self._get(
+                "/uapi/overseas-stock/v1/trading/inquire-ccnl",
+                TR["ccnl"][self.env],
+                {"CANO": self.cano, "ACNT_PRDT_CD": self.acnt_prdt_cd,
+                 "PDNO": "%" if real else "", "ORD_STRT_DT": day, "ORD_END_DT": day,
+                 "SLL_BUY_DVSN": "00", "CCLD_NCCS_DVSN": "00",
+                 "OVRS_EXCG_CD": "NASD" if real else "", "SORT_SQN": "DS",
+                 "ORD_DT": "", "ORD_GNO_BRNO": "", "ODNO": "",
+                 "CTX_AREA_NK200": nk, "CTX_AREA_FK200": fk},
+                tr_cont=tr_cont)
+            for it in body.get("output", []) or []:
+                key = it.get("odno") or f"{it.get('pdno')}:{len(out)}"
+                out[key] = {
+                    "ticker": (it.get("pdno") or "").strip(),
+                    "side": "sell" if it.get("sll_buy_dvsn_cd") == "01" else "buy",
+                    "qty": int(float(it.get("ft_ord_qty") or 0)),
+                    "filled_qty": float(it.get("ft_ccld_qty") or 0),
+                    "order_no": it.get("odno"),
+                    "status": it.get("prcs_stat_name"),
+                    "reject_reason": it.get("rjct_rson_name") or it.get("rjct_rson"),
+                    "revise_cancel": it.get("rvse_cncl_dvsn"),
+                    "order_date": it.get("ord_dt"),
+                }
+            if cont in ("F", "M"):
+                fk, nk, tr_cont = body.get("ctx_area_fk200", ""), body.get("ctx_area_nk200", ""), "N"
+                continue
+            break
+        return list(out.values())
+
     # ---------- orders ----------
 
     def cancel_order(self, exch_order_cd: str, ticker: str, order_no: str,
@@ -575,7 +630,8 @@ class KISClient:
         except KISError as e:
             return {"ok": False, "order_no": None, "msg": str(e)}
         if d is None:
-            return {"ok": False, "order_no": None,
+            # No JSON body: the broker may or may not have acted (G3 records it 'unknown').
+            return {"ok": False, "order_no": None, "ambiguous": True,
                     "msg": f"HTTP {r.status_code}: {r.text[:200]}"}
         ok = r.status_code == 200 and d.get("rt_cd") == "0"
         return {"ok": ok,
