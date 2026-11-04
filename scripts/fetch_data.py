@@ -217,6 +217,23 @@ def get_session():
 FUND_HIST = {}          # fundamentals_history.json tickers map (SEC companyfacts, weekly)
 EXISTING_DATA_REF = {}  # previous stocks.json rows, keyed by symbol (carry-forward fallback)
 
+# The weekly fetch_sec_data.py writes these quarterly SEC growth figures into financials/{T}.json and
+# stocks.json. The daily run rebuilds both, so it carries them from the cached detail until the next
+# SEC run (they were blanked daily until 2026-11-05: 3,701 names after Sunday, 128 after Monday).
+SEC_GROWTH_KEYS = ("EPS_YoY_Growth", "Prior_Year_TTM_EPS", "Revenue_YoY_Growth", "Consecutive_YoY_EPS_Growth")
+
+
+def carry_sec_growth(detail, cached_detail):
+    """Copy the SEC growth figures from the cached detail into a rebuilt one; returns the figures."""
+    old = (cached_detail or {}).get("Calculated_Metrics") or {}
+    if detail is None:
+        return {k: old.get(k) for k in SEC_GROWTH_KEYS}
+    cm = detail.setdefault("Calculated_Metrics", {})
+    for k in SEC_GROWTH_KEYS:
+        if k not in cm and k in old:
+            cm[k] = old[k]
+    return {k: cm.get(k) for k in SEC_GROWTH_KEYS}
+
 # ── defeatbeta bulk source (Yahoo-quota killer, 2026-07-10) ────────────────────
 # Daily-refreshed parquet mirror of Yahoo data on Hugging Face (verified
 # value-identical vs our cached financials/{T}.json). Names with a fresh price
@@ -998,6 +1015,8 @@ def main():
                     detail['Price'] = result.price or detail.get('Price')
                     patch_live_mcap(detail, result.market_cap)
                 
+            sec_growth = carry_sec_growth(detail, cached_detail)
+
             # 2. APPLY "100-BAGGER" RULES
             screening_result = is_potential_100_bagger(result)
             
@@ -1043,10 +1062,10 @@ def main():
                     "monthlyMa20": detail.get("Calculated_Metrics", {}).get("Monthly_MA_20") if detail else None,
                     "monthlyCloses": detail.get("Monthly_Closes", []) if detail else [],
                     "quarterlyEps": [q.get("BasicEPS") if q.get("BasicEPS") is not None else q.get("DilutedEPS") for q in detail.get("Quarterly_Income_Statement", [])] if detail else [],
-                    "epsYoyGrowth": None,
-                    "revenueYoyGrowth": None,
-                    "previousEpsTtm": None,
-                    "consecutiveGrowth": 0
+                    "epsYoyGrowth": sec_growth["EPS_YoY_Growth"],
+                    "revenueYoyGrowth": sec_growth["Revenue_YoY_Growth"],
+                    "previousEpsTtm": sec_growth["Prior_Year_TTM_EPS"],
+                    "consecutiveGrowth": sec_growth["Consecutive_YoY_EPS_Growth"] if sec_growth["Consecutive_YoY_EPS_Growth"] is not None else 0
                 }
             }
             existing_data[ticker] = result_obj
