@@ -14,10 +14,10 @@ or "absent". The journal is append-only: nothing is ever rewritten.
 
 A key already "accepted" is never sent again.
 
-The store sits behind a two-method interface (append, entries) so a durable remote
-store can replace the local file. Only the local file exists today: on GitHub
-Actions the runner is ephemeral, so LocalFileJournal reports durable=False there
-and the scripts refuse to execute with it (see docs in RR_R3).
+The store sits behind a two-method interface (append, entries). LocalFileJournal is durable on a
+machine that keeps its disk and not on an ephemeral GitHub Actions runner; SupabaseJournal (2026-11-06)
+is the durable remote store the Actions runner uses when the Supabase service key is present
+(sync_kis_portfolio.make_journal). A store that cannot be read or written refuses to trade.
 """
 
 from __future__ import annotations
@@ -102,6 +102,63 @@ class LocalFileJournal:
                 raise JournalError(f"journal line {n} has no key/state ({self.path})")
             out.append(row)
         return out
+
+
+class SupabaseJournal:
+    """Append-only rows in the Supabase table `kis_order_journal` (RR_R3: the durable store that lets an ephemeral Actions runner
+    execute). One row per journal line: the line itself in `entry` (jsonb) plus its key and state; rows are only ever inserted.
+    Any HTTP failure raises JournalError, so a missing table or a dead service refuses to trade (fail closed). Table (created once by
+    the operator in the Supabase SQL editor; the service key cannot create tables):
+
+        create table public.kis_order_journal (id bigint generated always as identity primary key, key text not null,
+            state text not null, entry jsonb not null, created_at timestamptz not null default now());
+        alter table public.kis_order_journal enable row level security;   -- no policies: only the service key reads or writes
+    """
+
+    TABLE = "kis_order_journal"
+
+    def __init__(self, url: str, service_key: str, opener=None):
+        import urllib.request
+        self.base = url.rstrip("/") + "/rest/v1/" + self.TABLE
+        self.headers = {"apikey": service_key, "Authorization": f"Bearer {service_key}", "Content-Type": "application/json"}
+        self._open = opener or urllib.request.urlopen
+
+    @property
+    def durable(self) -> bool:
+        return True
+
+    def _call(self, method, url, body=None, extra=None):
+        import urllib.request
+        req = urllib.request.Request(url, method=method, headers={**self.headers, **(extra or {})},
+                                     data=None if body is None else json.dumps(body).encode("utf-8"))
+        try:
+            with self._open(req, timeout=30) as r:
+                return r.read().decode("utf-8")
+        except Exception as e:  # noqa: BLE001  any failure: the journal cannot be trusted, so callers refuse
+            raise JournalError(f"journal store {self.TABLE} unavailable: {type(e).__name__}: {str(e)[:160]}") from e
+
+    def append(self, entry: dict) -> None:
+        if "key" not in entry or "state" not in entry:
+            raise JournalError("journal entry has no key/state")
+        self._call("POST", self.base, {"key": entry["key"], "state": entry["state"], "entry": entry}, {"Prefer": "return=minimal"})
+
+    def entries(self) -> list[dict]:
+        out, start, page = [], 0, 1000
+        while True:
+            text = self._call("GET", f"{self.base}?select=entry&order=id.asc", None,
+                              {"Range-Unit": "items", "Range": f"{start}-{start + page - 1}"})
+            try:
+                rows = json.loads(text)
+            except ValueError as e:
+                raise JournalError(f"journal store reply is not JSON: {e}") from e
+            for n, r in enumerate(rows, start + 1):
+                e = r.get("entry") if isinstance(r, dict) else None
+                if not isinstance(e, dict) or "key" not in e or "state" not in e:
+                    raise JournalError(f"journal row {n} has no key/state")
+                out.append(e)
+            if len(rows) < page:
+                return out
+            start += page
 
 
 # ------------------------------------------------------------------- queries

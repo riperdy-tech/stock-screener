@@ -41,7 +41,7 @@ from kis.dd_gate import (  # noqa: E402
 from kis.halt import kis_halt_state  # noqa: E402
 from kis.ledger_policy import ledger_refusals  # noqa: E402
 from kis.journal import (  # noqa: E402
-    JournalError, LocalFileJournal, blocked_message, open_entries, plan_hash,
+    JournalError, LocalFileJournal, SupabaseJournal, blocked_message, open_entries, plan_hash,
     run_reconcile, send_order,
 )
 from kis.notify import (  # noqa: E402
@@ -118,7 +118,12 @@ def resolve_prices(client: KISClient, tickers: set[str], held_exch: dict) -> tup
 
 
 def make_journal():
-    """The order journal. Local file only; a remote store would replace this (RR_R3)."""
+    """The order journal (RR_R3). On GitHub Actions with the Supabase service key: the durable SupabaseJournal (fails closed when
+    its table is missing or unreachable). Anywhere else: the local file (durable on a machine that keeps its disk)."""
+    url = os.environ.get("NEXT_PUBLIC_SUPABASE_URL", "").strip()
+    key = os.environ.get("SUPABASE_SERVICE_KEY", "").strip()
+    if os.environ.get("GITHUB_ACTIONS", "").strip().lower() == "true" and url and key:
+        return SupabaseJournal(url, key)
     return LocalFileJournal(JOURNAL_PATH)
 
 

@@ -701,3 +701,59 @@ def test_a13_daily_orders_paper_uses_the_all_form_and_follows_pages():
     assert c.calls[1][2]["CTX_AREA_FK200"] == "F1" and c.calls[1][3] == "N"
     assert len(rows) == 2
 
+
+
+# ================================================================== SupabaseJournal (2026-11-06, RR_R3's durable store)
+class _FakeStore:
+    """An in-memory stand-in for the PostgREST table: records POSTs, serves GETs by Range."""
+
+    def __init__(self, fail=False):
+        self.rows, self.fail, self.calls = [], fail, []
+
+    def __call__(self, req, timeout=None):
+        import io
+        self.calls.append((req.get_method(), req.full_url, dict(req.header_items())))
+        if self.fail:
+            raise OSError("relation kis_order_journal does not exist")
+        if req.get_method() == "POST":
+            self.rows.append(json.loads(req.data.decode("utf-8")))
+            body = b""
+        else:
+            lo, hi = map(int, dict(req.header_items())["Range"].split("-"))
+            body = json.dumps([{"entry": r["entry"]} for r in self.rows[lo:hi + 1]]).encode("utf-8")
+        resp = io.BytesIO(body)
+        resp.__enter__ = lambda *a: resp
+        resp.__exit__ = lambda *a: False
+        return resp
+
+
+def test_supabase_journal_is_durable_and_round_trips_entries_in_order():
+    from kis.journal import SupabaseJournal
+    store = _FakeStore()
+    j = SupabaseJournal("https://x.supabase.co", "svc", opener=store)
+    assert j.durable is True
+    j.append({"key": "k1", "state": "sending", "ticker": "A"})
+    j.append({"key": "k1", "state": "accepted", "order_no": "9"})
+    assert [e["state"] for e in j.entries()] == ["sending", "accepted"]
+    assert store.calls[0][1].endswith("/rest/v1/kis_order_journal")
+
+
+def test_supabase_journal_fails_closed_when_the_table_is_missing():
+    from kis.journal import JournalError, SupabaseJournal
+    j = SupabaseJournal("https://x.supabase.co", "svc", opener=_FakeStore(fail=True))
+    with pytest.raises(JournalError):
+        j.entries()
+    with pytest.raises(JournalError):
+        j.append({"key": "k", "state": "sending"})
+
+
+def test_make_journal_uses_supabase_only_on_actions_with_the_service_key(monkeypatch):
+    import sync_kis_portfolio as sync
+    from kis.journal import LocalFileJournal, SupabaseJournal
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("NEXT_PUBLIC_SUPABASE_URL", "https://x.supabase.co")
+    monkeypatch.setenv("SUPABASE_SERVICE_KEY", "svc")
+    assert isinstance(sync.make_journal(), SupabaseJournal)
+    monkeypatch.delenv("SUPABASE_SERVICE_KEY")
+    j = sync.make_journal()
+    assert isinstance(j, LocalFileJournal) and j.durable is False     # still refuses to execute on Actions
