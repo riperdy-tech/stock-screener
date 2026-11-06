@@ -1,0 +1,629 @@
+{
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 46,
+ "claims_supported": 25,
+ "date": "2026-11-01T16:47:30Z",
+ "family": "operating",
+ "flags": [],
+ "in_code_book": true,
+ "model": "qwen",
+ "no_value_reason": "no usable tax rate in the filings",
+ "qwen_book": "held",
+ "source": "formation 2026-10-30",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in the screener row",
+    "claim": "Enerflex Ltd. (EFXT) is classified in the Oil & Gas Equipment & Services industry within the Energy sector.",
+    "facts": [
+     "S0"
+    ],
+    "quotes": [
+     "industry: Oil & Gas Equipment & Services"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the consolidated balance sheet line items",
+    "claim": "As of Dec. 31, 2025, the company holds Energy Infrastructure (EI) assets in operating leases of $686 (table in millions) and in finance leases receivable of $180 (table in millions) non-current plus $58 (table in millions) current, totalling $238 (table in millions) in finance-lease EI assets.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "EI assets - operating leases | 686 | 713",
+     "EI assets - finance leases receivable | 180 | 189",
+     "Energy infrastructure (\"EI\") assets - finance leases receivable | 58 | 49"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the consolidated income statement",
+    "claim": "For the 12 months ended Dec. 31, 2025, the company reported revenue of $2,571 (table in millions) and cost of goods sold of $1,989 (table in millions), producing a gross margin of $582 (table in millions).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Revenue | $ 2,571 | $ 2,414",
+     "Cost of goods sold (\"COGS\") | 1,989 | 1,910",
+     "Gross margin | 582 | 504"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the balance sheet as a distinct inventory sub-line",
+    "claim": "The company carries work-in-progress inventories of $35 (table in millions) specifically related to EI assets held as finance leases receivable, indicating it constructs EI assets for lease-financing arrangements.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Inventories - work-in-progress (\"WIP\") related to EI assets - finance leases receivable | 35"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the balance sheet; the interpretation that deferred revenue reflects advance payment is standard accounting but not explicitly explained in the evidence",
+    "claim": "Deferred revenue of $355 (table in millions) current and $13 (table in millions) non-current (total $368 (table in millions)) appears on the balance sheet, indicating the company receives payment before it has fully delivered goods or services.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Deferred revenue | 355 | 375",
+     "Deferred revenue | 13 | 11"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the consolidated income statement",
+    "claim": "The company reports equity earnings from associates and joint ventures, which were a loss of $(3) (table in millions) for the 12 months ended Dec. 31, 2025.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Equity earnings from associates and joint ventures | (3) | 0"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cash-flow statement financing section",
+    "claim": "The company finances its EI assets and operations using long-term debt, including the 2027 Notes (repaid $576 (table in millions) in 2025), the 2031 Notes (issued $400 (table in millions) in 2025), a Revolving Credit Facility, and a Term Loan.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Repayment of the 2027 Notes | (576) | (62)",
+     "Issuance of the 2031 Notes | 400 | 0",
+     "Repayment of the Revolving Credit Facility | (3) | (41)",
+     "Repayment of the Term Loan | 0 | (130)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the consolidated income statement",
+    "claim": "Selling, general and administrative expenses were $272 (table in millions) for the 12 months ended Dec. 31, 2025, down from $327 (table in millions) in the prior year.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Selling, general and administrative expenses (\"SG&A\") | 272 | 327"
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated directly in the screener row [S0].",
+    "claim": "Enerflex Ltd. is classified in the Oil & Gas Equipment & Services industry in the Energy sector, is a Canadian company, and had a market capitalisation of 2,885,290,906 at the screener timestamp.",
+    "facts": [
+     "S0"
+    ],
+    "quotes": [
+     "sector: Energy",
+     "industry: Oil & Gas Equipment & Services",
+     "country: Canada",
+     "marketCap: 2885290906"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Consolidated Statements of Financial Position [F1]; the interpretation of the business model is inferred from the line-item labels.",
+    "claim": "The balance sheet is dominated by Energy Infrastructure (EI) assets held under operating leases ($686 million) and finance leases receivable ($180 million), indicating a capital-intensive asset-ownership and leasing business model.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "EI assets - operating leases | 686 | 713",
+     "EI assets - finance leases receivable | 180 | 189"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Consolidated Statements of Earnings [F2].",
+    "claim": "Revenue grew from $2,414 million in FY2024 to $2,571 million in FY2025, and operating income nearly doubled from $173 million to $306 million over the same period.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Revenue | $ 2,571 | $ 2,414",
+     "Operating income | 306 | 173"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Consolidated Statements of Financial Position [F1]; the inference that it reflects acquisitions is standard accounting interpretation.",
+    "claim": "Goodwill of $430 million on the FY2025 balance sheet indicates the company has completed acquisitions that contributed to its current asset base.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Goodwill | 430 | 422"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Consolidated Statements of Cash Flows [F3] and the income statement line item [F2].",
+    "claim": "The company restructured its debt in FY2025, repaying $576 million of 2027 Notes and issuing $400 million of 2031 Notes, while also incurring $42 million in debt extinguishment costs.",
+    "facts": [
+     "F3",
+     "F2"
+    ],
+    "quotes": [
+     "Repayment of the 2027 Notes | (576) | (62)",
+     "Issuance of the 2031 Notes | 400 | 0",
+     "Debt extinguishment costs of the 2027 Notes | 42 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Consolidated Statements of Earnings [F2].",
+    "claim": "Net finance costs rose from $98 million in FY2024 to $120 million in FY2025, and the company recorded a $17 million derecognition and unrealized loss on redemption options in FY2025 versus a $17 million gain in FY2024.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Net finance costs | 120 | 98",
+     "Derecognition and unrealized (loss) gain on redemption options | (17) | 17"
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated directly in the balance sheet (F1); current ratio is computed from those two printed figures.",
+    "claim": "Liquidity is adequate but thin: total current assets of 992 against total current liabilities of 879 (table in millions) give a current ratio of roughly 1.13, with cash and cash equivalents of only 81 (table in millions) at year-end 2025.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total current assets | 992 | 1,041",
+     "Total current liabilities | 879 | 911",
+     "Cash and cash equivalents | $ 81 | $ 92"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Debt and equity figures stated in F1; EBIT and finance costs stated in F2. Coverage ratio is a simple division of two printed figures.",
+    "claim": "Leverage is moderate: long-term debt of 582 (table in millions) against total shareholders' equity of 1,093 (table in millions), and EBIT of 283 (table in millions) covers net finance costs of 120 (table in millions) approximately 2.4 times.",
+    "facts": [
+     "F1",
+     "F2"
+    ],
+    "quotes": [
+     "Long-term debt | 582 | 708",
+     "Total shareholders' equity | 1,093 | 1,049",
+     "Earnings before finance costs and income taxes (\"EBIT\") | 283 | 179",
+     "Net finance costs | 120 | 98"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated directly in the cash flow statement (F3).",
+    "claim": "Operating cash generation is solid and growing: cash provided by operating activities was 345 (table in millions) in 2025, up from 324 (table in millions) in 2024.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Cash provided by operating activities | 345 | 324"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in F3; the one-time nature of the extinguishment cost is inferred from the line-item label and the fact that it was 0 in the prior year.",
+    "claim": "Cash-generation quality is mixed: the 2025 operating cash flow of 345 (table in millions) includes 42 (table in millions) of one-time debt extinguishment costs on the 2027 Notes, and the net working-capital contribution fell sharply from 106 to 19 (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Debt extinguishment costs of the 2027 Notes | 42 | 0",
+     "Net change in working capital and other | 19 | 106"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Cash flows stated in F3; opening and closing long-term debt stated in F1.",
+    "claim": "The company refinanced its 2027 Notes during 2025, repaying 576 (table in millions) and issuing 400 (table in millions) of 2031 Notes, reducing long-term debt from 708 to 582 (table in millions).",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Repayment of the 2027 Notes | (576) | (62)",
+     "Issuance of the 2031 Notes | 400 | 0",
+     "Long-term debt | 582 | 708"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 (balance sheet lease liabilities) and F3 (cash flow items). The combined 40 figure is the sum of two printed numbers.",
+    "claim": "Beyond the 2031 Notes, the company carries 50 (table in millions) of long-term lease liabilities and 22 (table in millions) of current lease liabilities, plus 17 (table in millions) of dividends and 23 (table in millions) of NCIB share repurchases paid in 2025, all of which compete with debt service for cash.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Lease liabilities | 50 | 47",
+     "Lease liabilities | 22 | 22",
+     "Dividends | (17) | (9)",
+     "Shares repurchased - NCIB | (23) | 0"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated directly in F2 and F3.",
+    "claim": "The company returned capital to shareholders in 2025, paying 17 (table in millions) in dividends and repurchasing 23 (table in millions) of NCIB shares, while revenue grew from 2,414 to 2,571 (table in millions) and net earnings doubled from 32 to 64 (table in millions).",
+    "facts": [
+     "F3",
+     "F2"
+    ],
+    "quotes": [
+     "Dividends | (17) | (9)",
+     "Shares repurchased - NCIB | (23) | 0",
+     "Revenue | $ 2,571 | $ 2,414",
+     "Net earnings (loss) | 64 | 32"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in F2 (income statement); the growth is arithmetic from two reported figures.",
+    "claim": "Top-line revenue grew from $2,414 (table in millions) to $2,571 (table in millions) over the 12-month period, representing the primary growth driver.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Revenue | $ 2,571 | $ 2,414"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in F2; the leverage is inferred from the ratio of operating-income growth to revenue growth.",
+    "claim": "Operating income more than doubled, from $173 (table in millions) to $306 (table in millions), while revenue grew only ~6.5%, indicating significant operating leverage.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Operating income | 306 | 173",
+     "Revenue | $ 2,571 | $ 2,414"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in F2; the inference about pricing/mix is not directly supported by any item in the packet.",
+    "claim": "Gross margin expanded from $504 (table in millions) to $582 (table in millions), a $78 increase, while COGS rose from $1,910 to $1,989 (table in millions).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Gross margin | 582 | 504",
+     "Cost of goods sold (\"COGS\") | 1,989 | 1,910"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in F1 (balance sheet) and F3 (cash flow); the net-reduction figure is inferred from the two cash-flow lines.",
+    "claim": "Long-term debt was reduced from $708 (table in millions) to $582 (table in millions), supported by a $576 (table in millions) repayment of the 2027 Notes partially offset by a $400 (table in millions) issuance of 2031 Notes.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Long-term debt | 582 | 708",
+     "Repayment of the 2027 Notes | (576) | (62)",
+     "Issuance of the 2031 Notes | 400 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F2 (EPS and share count) and F3 (dividend and buyback lines); the EPS-amplification mechanism is inferred.",
+    "claim": "The company increased dividends from $9 (table in millions) to $17 (table in millions) and initiated share repurchases of $23 (table in millions), reducing weighted-average basic shares from 124,023,920 to 122,866,038.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Dividends | (17) | (9)",
+     "Shares repurchased - NCIB | (23) | 0",
+     "Weighted average number of shares \u2013 basic | 122,866,038 | 124,023,920"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1; the recurring-revenue interpretation is inferred from the lease classification and is not confirmed by any narrative text in the packet.",
+    "claim": "The installed Energy Infrastructure (EI) asset base\u2014$686 (table in millions) in operating-lease assets and $238 (table in millions) in finance-lease receivables ($180 current + $58 non-current)\u2014represents a recurring-revenue platform, but both categories declined year-over-year.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "EI assets - operating leases | 686 | 713",
+     "EI assets - finance leases receivable | 180 | 189",
+     "Inventories - work-in-progress (\"WIP\") related to EI assets - finance leases receivable | 35"
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "Stated in F3 (cash flow statement); the line items for repayment, issuance, and extinguishment costs are explicitly printed in the financing activities section.",
+    "claim": "Enerflex repaid $576 of its 2027 Notes and issued $400 of 2031 Notes during the year ended Dec. 31, 2025, incurring $42 in debt extinguishment costs, constituting a material debt refinancing.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Repayment of the 2027 Notes | (576) | (62)",
+     "Issuance of the 2031 Notes | 400 | 0",
+     "Debt extinguishment costs of the 2027 Notes | 42 | 0"
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in F2 (net finance costs line), F3 (debt extinguishment costs line), and F1 (long-term debt line); the inference that the 42 is one-time is stated in F3 as a specific item tied to the 2027 Notes",
+    "claim": "Net finance costs rose to 120 from 98 in the prior year even though long-term debt fell from 708 to 582, driven in part by a one-time debt extinguishment cost of 42 on the 2027 Notes.",
+    "facts": [
+     "F2",
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Net finance costs | 120 | 98",
+     "Debt extinguishment costs of the 2027 Notes | 42 | 0",
+     "Long-term debt | 582 | 708"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 (two deferred-revenue lines, current and non-current); the interpretation as a pipeline signal is inferred from the balance-sheet movement",
+    "claim": "Total deferred revenue (current plus non-current) declined from 386 to 368, a reduction of roughly 5%, which may signal a softer future revenue pipeline.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Deferred revenue | 355 | 375",
+     "Deferred revenue | 13 | 11"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in F3 (cash-flow lines) and F1 (cash and current liabilities); the inference about market-access risk is inferred from the refinancing activity shown in F3",
+    "claim": "Cash and cash equivalents fell from 92 to 81, and the company funded the 576 repayment of the 2027 Notes partly through a 400 issuance of 2031 Notes, leaving a net cash burn of 11 for the year.",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Cash and cash equivalents, end of period | $ 81 | $ 92",
+     "Repayment of the 2027 Notes | (576) | (62)",
+     "Issuance of the 2031 Notes | 400 | 0",
+     "Decrease in cash and cash equivalents | (11) | (3)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F2 (other comprehensive income lines and total comprehensive income line); the inference about covenant or sentiment impact is inferred",
+    "claim": "Unrealised FX translation items swung sharply year-over-year: translation of foreign-denominated debt moved from a (51) loss to a 28 gain, and translation of foreign operations moved from a 22 gain to a (12) loss, causing total comprehensive income to swing from 4 to 79.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Unrealized gain (loss) on translation of foreign-denominated debt | 28 | (51)",
+     "Unrealized gain (loss) on translation of financial statements of foreign operations | (12) | 22",
+     "Total comprehensive income (loss) | $ 79 | $ 4"
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [
+   {
+    "basis": "stated in the cited items (F2, F3); no post-cutoff evidence exists to update the point",
+    "claim": "No evidence item became effective after 2026-10-31T01:03:43Z, so the revenue-growth and EI-asset-acquisition point cannot be re-confirmed or altered by newer data.",
+    "facts": [
+     "F2",
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Revenue | $ 2,571 | $ 2,414",
+     "EI assets - operating leases | (96) | (59)"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited items (F1, F3); no post-cutoff evidence exists to update the point",
+    "claim": "No evidence item became effective after 2026-10-31T01:03:43Z, so the deleveraging and maturity-extension point cannot be re-confirmed or altered by newer data.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Long-term debt | 582 | 708",
+     "Repayment of the 2027 Notes | (576) | (62)",
+     "Issuance of the 2031 Notes | 400 | 0"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited items (F2, F3); no post-cutoff evidence exists to update the point",
+    "claim": "No evidence item became effective after 2026-10-31T01:03:43Z, so the EPS-doubling and share-count-reduction point cannot be re-confirmed or altered by newer data.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Earnings (loss) per share \u2013 basic | $ 0.52 | $ 0.26",
+     "Shares repurchased - NCIB | (23) | 0"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited items (F3, F1); no post-cutoff evidence exists to update the point",
+    "claim": "No evidence item became effective after 2026-10-31T01:03:43Z, so the operating-cash-flow-funding point cannot be re-confirmed or altered by newer data.",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Cash provided by operating activities | 345 | 324",
+     "Dividends | (17) | (9)"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited items (F3, F1); no post-cutoff evidence exists to update the point",
+    "claim": "No evidence item became effective after 2026-10-31T01:03:43Z, so the debt-refinancing and extinguishment-cost point cannot be re-confirmed or altered by newer data.",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Debt extinguishment costs of the 2027 Notes | 42 | 0",
+     "Long-term debt | 582 | 708"
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "unresolved_questions": [
+   {
+    "basis": "stated in the cited items (screener label; balance-sheet line items); the business description is absent from the packet",
+    "claim": "What specific products, services, and energy-infrastructure projects does Enerflex design, build, and lease?",
+    "facts": [
+     "S0",
+     "F1"
+    ],
+    "quotes": [
+     "industry: Oil & Gas Equipment & Services",
+     "EI assets - operating leases | 686 | 713"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the magnitude of the line items; no risk narrative is present in the evidence",
+    "claim": "What are the principal risks to Enerflex's business, financial condition, and the EI lease portfolio?",
+    "facts": [
+     "F1",
+     "F2"
+    ],
+    "quotes": [
+     "EI assets - operating leases | 686 | 713",
+     "Goodwill | 430 | 422"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (the two years of figures); the explanatory narrative is absent",
+    "claim": "What management attributes the $133 M increase in operating income (from $173 M to $306 M) and the $32 M increase in net earnings to?",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Operating income | 306 | 173",
+     "Net earnings (loss) | 64 | 32"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited items (the cash-flow lines and the balance-sheet long-term-debt figure); the note terms are not in the packet",
+    "claim": "What are the coupon rate, maturity, covenants, and currency of the 2031 Notes issued to replace the 2027 Notes?",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Repayment of the 2027 Notes | (576) | (62)",
+     "Issuance of the 2031 Notes | 400 | 0",
+     "Debt extinguishment costs of the 2027 Notes | 42 | 0",
+     "Long-term debt | 582 | 708"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (the line-item label and figures); the instrument identity is not in the packet",
+    "claim": "What specific redemption options give rise to the $(17) M derecognition and unrealised loss in 2025 (reversing a $17 M gain in 2024)?",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Derecognition and unrealized (loss) gain on redemption options | (17) | 17",
+     "Derecognition and unrealized loss (gain) on redemption options | 17 | (17)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (the line-item label and figure); the entity identity and rationale are not in the packet",
+    "claim": "What entity is 'NCIB' from which Enerflex repurchased $23 M of shares, and what was the purpose of the repurchase?",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Shares repurchased - NCIB | (23) | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (the line labels and figures); the entity and impairment details are not in the packet",
+    "claim": "Which associates and joint ventures generated the $(3) M equity earnings loss in 2025, and what is the nature of the impairment?",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Equity earnings from associates and joint ventures | (3) | 0",
+     "Equity earnings and impairment of associates and joint ventures | 3 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (the three EI line items); the portfolio detail is not in the packet",
+    "claim": "What is the composition, remaining lease term, and counterparty concentration of the $686 M EI operating-lease portfolio and the $238 M EI finance-lease-receivable portfolio?",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "EI assets - operating leases | 686 | 713",
+     "EI assets - finance leases receivable | 180 | 189",
+     "Energy infrastructure (\"EI\") assets - finance leases receivable | 58 | 49"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "inferred from the gap between the annual-report date and the decision time; no 10-Q is present in the evidence",
+    "claim": "What has been Enerflex's revenue, earnings, and cash position in the first three quarters of 2026?",
+    "facts": [
+     "F2",
+     "F3",
+     "S0"
+    ],
+    "quotes": [
+     "last_listed: 2026-11-01",
+     "Cash and cash equivalents, end of period | $ 81 | $ 92"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "EFXT",
+ "valuation": null,
+ "valued": false
+}
