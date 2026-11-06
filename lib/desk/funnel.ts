@@ -21,11 +21,11 @@ export interface FunnelCounts {
     watchlistBand: number | null;
     /** `band_counts.pass`: scored but cleared no door. */
     noDoor: number | null;
-    /** Rebuilt-analyst verdicts on list names. */
+    /** List names Qwen has read (an analysis that ran), operator 2026-11-06. */
     verdicts: number;
-    /** Rebuilt-analyst rows with `actionable === true`. */
+    /** List names Qwen's analysis gave a value of record. */
     actionable: number;
-    /** List size minus rebuilt verdicts on list names; null while the list size is unknown. */
+    /** List size minus names Qwen has read; null while the list size is unknown. */
     queued: number | null;
 }
 
@@ -33,7 +33,7 @@ export function funnelCounts(rows: DeskRow[], factor: FactorScoresPayload | null
     const bc = factor?.band_counts;
     const list = bc && (bc.research_now != null || bc.watchlist != null)
         ? (bc.research_now ?? 0) + (bc.watchlist ?? 0) : null;
-    const verdicts = rows.filter((r) => onList(r) && rebuiltVerdict(r.depth)).length;
+    const verdicts = rows.filter((r) => onList(r) && r.qwen && r.qwen.analysis !== 'not run').length;
     return {
         universe: factor ? Object.keys(factor.tickers).length : null,
         scored: factor?.scored_count ?? null,
@@ -43,7 +43,7 @@ export function funnelCounts(rows: DeskRow[], factor: FactorScoresPayload | null
         watchlistBand: bc?.watchlist ?? null,
         noDoor: bc?.pass ?? null,
         verdicts,
-        actionable: rows.filter((r) => rebuiltVerdict(r.depth)?.actionable === true).length,
+        actionable: rows.filter((r) => onList(r) && r.qwen?.valued === true).length,
         queued: list == null ? null : list - verdicts,
     };
 }

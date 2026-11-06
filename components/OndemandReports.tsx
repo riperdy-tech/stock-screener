@@ -1,23 +1,16 @@
 'use client';
 
-// On-demand analyses — operator-requested one-shot runs (Telegram /analyze or CLI).
-// These verdicts live in DEDICATED data files (ondemand_index.json / ondemand_reports/)
-// and are deliberately excluded from the rankings, the overlay and the paper
-// portfolios: they exist so any ticker — including quant-screen fails — can be
-// inspected without joining the tracked book.
+// On-demand analyses: a ticker requested here or with Telegram /analyze goes to the Qwen worker on the operator's
+// PC (rs2-local tools/site/qwen_ondemand.py, operator 2026-11-06). Queued requests run before the worker's refresh
+// of the screener's research-now and watchlist names. Each result is the stock page's Qwen panel; this page lists
+// the newest ones. Paper only: on-demand names never join a paper book.
 
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Shell } from '@/components/desk/Shell';
 import { Micro } from '@/components/desk/primitives';
-import { useLanguage } from '@/components/LanguageContext';
-import { BandChartHero } from '@/components/desk/detail/BandChartHero';
-import { TranscriptViewer } from '@/components/desk/detail/TranscriptViewer';
-import { verdictTone, sizeTone } from '@/lib/desk/tone';
-import {
-    fetchOndemandIndex, fetchOndemandReport,
-    OndemandIndexPayload, OndemandRequestRow, OndemandQueueRow, DepthReportBundle,
-} from '@/lib/data-service';
+import Link from 'next/link';
+import { fetchQwenOverlay, type OndemandQueueRow, type QwenOverlayPayload } from '@/lib/data-service';
 
 const money = (v: number | null | undefined) =>
     v == null ? '—' : Math.abs(v) >= 100 ? `$${Math.round(v)}` : `$${v.toFixed(2)}`;
@@ -61,8 +54,8 @@ function RequestForm({ onSubmitted }: { onSubmitted: () => void }) {
         <div className="mt-6 border-t border-rule-22 pt-5">
             <Micro className="font-semibold text-ink">Request an analysis</Micro>
             <Micro className="mt-0.5 block text-ink-3">
-                Runs on the operator&apos;s PC (GPU time, not a cloud call) — picked up within
-                about a minute, verdict in ~1–3 hours.
+                Qwen runs on the operator&apos;s PC (GPU time, not a cloud call): about 20 minutes a name, requests
+                before the list refresh. The result appears on the stock page.
             </Micro>
             <div className="mt-3 flex flex-wrap items-center gap-2">
                 <input
@@ -108,44 +101,27 @@ function QueueStrip({ queue }: { queue: OndemandQueueRow[] }) {
     );
 }
 
-function RequestCard({ row, latest, onOpen }: {
-    row: OndemandRequestRow; latest: boolean; onOpen: (t: string) => void;
-}) {
-    const tone = verdictTone(row.direction);
-    const size = sizeTone(row.size_hint);
+function Row({ ticker, r }: { ticker: string; r: QwenOverlayPayload['tickers'][string] }) {
+    const ran = r.analysis !== 'not run';
     return (
-        <button
-            onClick={() => latest && onOpen(row.ticker)}
-            disabled={!latest}
-            className={clsx(
-                'flex w-full flex-wrap items-baseline gap-x-5 gap-y-1 border-b border-rule-14 px-1 py-3 text-left',
-                latest ? 'hover:bg-track-12' : 'opacity-45 cursor-default',
-            )}
-        >
-            <span className="w-16 font-mono text-[13px] font-bold text-ink">{row.ticker}</span>
-            <Micro className="w-24 font-mono">{row.date ?? '—'}</Micro>
-            <span className="w-28 font-mono text-[11px] font-semibold" style={{ color: tone.color }}>
-                {tone.label}
+        <Link href={`/t/${encodeURIComponent(ticker)}`}
+            className="flex w-full flex-wrap items-baseline gap-x-5 gap-y-1 border-b border-rule-14 px-1 py-3 text-left hover:bg-track-12">
+            <span className="w-16 font-mono text-[13px] font-bold text-ink">{ticker}</span>
+            <Micro className="w-36 font-mono">{r.date.slice(0, 16).replace('T', ' ')}</Micro>
+            <span className={clsx('font-mono text-[11px]', ran ? 'text-ink-2' : 'text-warn')}>
+                {ran ? `${r.claims_supported ?? 0}/${r.claims ?? 0} claims supported` : 'not run'}
             </span>
             <span className="font-mono text-[11.5px] text-ink-q">
-                band {money(row.iv_band_low)}–{money(row.iv_band_high)} vs {money(row.price)}
+                {r.valued ? `value ${money(r.value_base)} (${money(r.value_bear)} to ${money(r.value_bull)})` : (r.no_value_reason ?? 'not valued')}
             </span>
-            {row.spread_pct != null && (
-                <Micro className="font-mono">spread {row.spread_pct}%</Micro>
-            )}
-            <span className="ml-auto font-mono text-[11px]" style={{ color: size.color }}>{size.label}</span>
-            {!latest && <Micro className="w-full text-ink-3">superseded by a newer run</Micro>}
-        </button>
+            <Micro className="ml-auto text-ink-3">{r.source}</Micro>
+        </Link>
     );
 }
 
 export function OndemandReports() {
-    const { t } = useLanguage();
-    const [index, setIndex] = useState<OndemandIndexPayload | null>(null);
+    const [overlay, setOverlay] = useState<QwenOverlayPayload | null>(null);
     const [loaded, setLoaded] = useState(false);
-    const [sel, setSel] = useState<string | null>(null);
-    const [bundle, setBundle] = useState<DepthReportBundle | null>(null);
-    const [bundleMissing, setBundleMissing] = useState(false);
     const [queue, setQueue] = useState<OndemandQueueRow[]>([]);
 
     const loadQueue = () => {
@@ -156,39 +132,24 @@ export function OndemandReports() {
     };
 
     useEffect(() => {
-        fetchOndemandIndex().then((x) => { setIndex(x); setLoaded(true); });
+        fetchQwenOverlay().then((x) => { setOverlay(x); setLoaded(true); });
         loadQueue();
         const iv = setInterval(loadQueue, 20000);
         return () => clearInterval(iv);
     }, []);
 
-    const open = (t: string) => {
-        setSel(t); setBundle(null); setBundleMissing(false);
-        fetchOndemandReport(t).then((b) => { setBundle(b); setBundleMissing(!b); });
-    };
-
-    const requests = index?.requests ?? [];
-    // The list is newest-first; only a ticker's first (newest) row opens the report —
-    // the per-ticker bundle always holds the newest run.
-    const seen = new Set<string>();
-    const rows = requests.map((r) => {
-        const latest = !seen.has(r.ticker);
-        seen.add(r.ticker);
-        return { row: r, latest };
-    });
-
-    const verdict = bundle?.verdict;
-    const runIvs = (bundle?.samples ?? [])
-        .filter((s) => s.iv != null && s.plausible && !s.truncated)
-        .map((s) => s.iv as number);
+    // Worker results (requests and the list refresh), newest first; formation names are on the Track page's books.
+    const rows = Object.entries(overlay?.tickers ?? {})
+        .filter(([, r]) => r.source.startsWith('on request'))
+        .sort(([, a], [, b]) => b.date.localeCompare(a.date));
 
     return (
         <Shell tab={null}>
             <div className="pt-8">
                 <h1 className="text-[16px] font-extrabold uppercase tracking-section">On-Demand Analyses</h1>
                 <Micro className="mt-1 block max-w-2xl text-ink-3">
-                    Operator-requested one-shot runs (any ticker, including quant-screen fails).
-                    Excluded from the rankings, the AI lens and the paper portfolios by design.
+                    Qwen&apos;s reading of any ticker&apos;s SEC filings, on request, plus its rolling refresh of the
+                    screener&apos;s research-now and watchlist names. Paper only; on-demand names never join a paper book.
                 </Micro>
 
                 <RequestForm onSubmitted={loadQueue} />
@@ -198,45 +159,15 @@ export function OndemandReports() {
 
                 {loaded && rows.length === 0 && (
                     <p className="mt-8 text-[12.5px] text-ink-q">
-                        No on-demand analyses yet — request one with the form above, or{' '}
+                        No Qwen analyses on request yet: request one with the form above, or{' '}
                         <span className="font-mono">/analyze TICKER</span> on Telegram.
                     </p>
                 )}
 
                 {rows.length > 0 && (
                     <div className="mt-6 border-t border-rule-22">
-                        {rows.map(({ row, latest }, i) => (
-                            <RequestCard key={`${row.ticker}-${row.consensus_dir ?? i}`} row={row} latest={latest} onOpen={open} />
-                        ))}
+                        {rows.map(([ticker, r]) => <Row key={ticker} ticker={ticker} r={r} />)}
                     </div>
-                )}
-
-                {sel && (
-                    <section className="mt-10 border-t border-rule-22 pt-6">
-                        <p className="border-l-2 border-off bg-page px-3 py-2 text-[13px] text-ink-2">{t('odBanner')}</p>
-                        <div className="flex items-baseline justify-between gap-4">
-                            <h2 className="font-mono text-[15px] font-bold text-ink">{sel}</h2>
-                            <button onClick={() => setSel(null)} className="font-mono text-[11px] text-ink-2 hover:text-ink">
-                                CLOSE ✕
-                            </button>
-                        </div>
-                        {bundleMissing && (
-                            <p className="mt-4 text-[12px] text-warn">
-                                Report not yet published for this run — it lands with the next publish cycle.
-                            </p>
-                        )}
-                        {verdict && (
-                            <>
-                                <Micro className="mt-2 block font-mono">
-                                    {verdict.date ?? ''} · {verdict.model ?? ''} · {bundle?.run ?? ''}
-                                </Micro>
-                                {verdict.iv_band_low != null && (
-                                    <BandChartHero verdict={verdict} runIvs={runIvs} />
-                                )}
-                                <TranscriptViewer bundle={bundle} />
-                            </>
-                        )}
-                    </section>
                 )}
             </div>
         </Shell>

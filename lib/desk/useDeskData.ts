@@ -13,10 +13,11 @@ import { useAuth } from '@/lib/useAuth';
 import {
     fetchChainManifest, fetchDepthOutcomes, fetchDepthOverlay, fetchFactorScores, fetchGeminiOverlay, fetchMacroEvents, fetchMriCostOfCapital,
     fetchMriRegime, fetchOverlaySignals,
-    fetchPaperLedgers, fetchStocks,
+    fetchPaperLedgers, fetchQwenOverlay, fetchStocks,
     fetchValuationModels,
     type ChainManifest, type DepthOverlayPayload, type DepthVerdict, type FactorScoresPayload,
     type GeminiOverlayPayload, type GeminiVerdict, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
+    type QwenOverlayPayload, type QwenOverlayRow,
 } from '@/lib/data-service';
 
 export interface StockInfo {
@@ -63,6 +64,8 @@ export interface DeskData {
     depthMeta: { generated_at: string | null; count: number; actionable_count: number | null };
     /** Interim Gemini verdicts by ticker: paper-only, unvalidated, never part of `depth`. Empty when the file is absent. */
     gemini: Record<string, GeminiVerdict>;
+    /** Qwen's analysis by ticker (qwen_overlay.json, operator 2026-11-06): the Desk's AI column. Empty when the file is absent. */
+    qwen: Record<string, QwenOverlayRow>;
     /** MRI news candidates index (display only). Null when the file is absent. */
     macroEvents: MacroEventsPayload | null;
     ledgers: any | null;
@@ -77,7 +80,7 @@ export interface DeskData {
 
 const EMPTY: DeskData = {
     factor: null, valuations: {}, overlay: {},
-    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, gemini: {}, macroEvents: null,
+    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, gemini: {}, qwen: {}, macroEvents: null,
     ledgers: null, stockInfo: {},
     manifest: null, regime: null, anchor: null, pricesAsOf: null,
 };
@@ -120,7 +123,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
     // the bag, so the verdict list still renders.
     const optional = <T,>(key: string, loader: () => Promise<T | null>) =>
         cached(key, loader).catch(() => null as T | null);
-    const [f, v, ov, pl, s, dp, manifest, regime, anchor, gm, me] = await Promise.all([
+    const [f, v, ov, pl, s, dp, manifest, regime, anchor, gm, me, qw] = await Promise.all([
         cached('factor', fetchFactorScores),
         cached('valuations', fetchValuationModels),
         cached('overlay', fetchOverlaySignals),
@@ -132,6 +135,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         optional('anchor', fetchMriCostOfCapital),
         optional('gemini', fetchGeminiOverlay),
         optional('macroEvents', fetchMacroEvents),
+        optional('qwen', fetchQwenOverlay),
     ]);
 
     const stockInfo: Record<string, StockInfo> = {};
@@ -176,6 +180,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
                     ?? Object.values(depthPayload.tickers ?? {}).filter((d) => d.actionable === true).length,
         },
         gemini: (gm as GeminiOverlayPayload | null)?.tickers ?? {},
+        qwen: (qw as QwenOverlayPayload | null)?.tickers ?? {},
         macroEvents: (me as MacroEventsPayload | null) ?? null,
         ledgers: pl,
         stockInfo,
@@ -188,6 +193,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
 export interface DeskStatus {
     factor: FactorScoresPayload | null;
     depth: DepthOverlayPayload | null;
+    qwen: QwenOverlayPayload | null;
     ledgers: any | null;  // eslint-disable-line @typescript-eslint/no-explicit-any -- raw paper_ledgers.json
     manifest: ChainManifest | null;
     regime: MriRegime | null;
@@ -196,7 +202,7 @@ export interface DeskStatus {
 }
 
 const EMPTY_STATUS: DeskStatus = {
-    factor: null, depth: null, ledgers: null, manifest: null, regime: null, anchor: null, pricesAsOf: null,
+    factor: null, depth: null, qwen: null, ledgers: null, manifest: null, regime: null, anchor: null, pricesAsOf: null,
 };
 
 /**
@@ -213,6 +219,7 @@ export function useDeskStatus(): DeskStatus {
         const run = () => {
             cached('factor', fetchFactorScores).then((factor) => put({ factor })).catch(() => { });
             cached('depth', fetchDepthOverlay).then((depth) => put({ depth })).catch(() => { });
+            cached('qwen', fetchQwenOverlay).then((qwen) => put({ qwen })).catch(() => { });
             cached('ledgers', fetchPaperLedgers).then((ledgers) => put({ ledgers })).catch(() => { });
             cached('manifest', fetchChainManifest).then((manifest) => put({ manifest })).catch(() => { });
             cached('regime', fetchMriRegime).then((regime) => put({ regime })).catch(() => { });

@@ -18,7 +18,6 @@ import {
     type FunnelCounts,
 } from '@/lib/desk/funnel';
 import type { FunnelStep } from '@/lib/desk/filters';
-import { rebuiltVerdict } from '@/lib/desk/verdict';
 import { topPct } from '@/lib/desk/rowText';
 import { fill } from '@/lib/desk/text';
 import { vetoFallback, vetoKey } from '@/lib/desk/veto';
@@ -71,8 +70,8 @@ export function FunnelRow({ counts, ready, phase, held, step, onStep }: {
         { s: 1, n: counts.universe, label: t('fnUs'), drop: null },
         { s: 2, n: counts.scored, label: t('fnSafe'), drop: counts.vetoed != null ? fill(t('fnVetoed'), { n: num(counts.vetoed) }) : null },
         { s: 3, n: counts.list, label: t('fnList'), drop: counts.noDoor != null ? fill(t('fnNoDoor'), { n: num(counts.noDoor) }) : null },
-        { s: 4, n: ready ? counts.verdicts : null, label: t('fnVerdicts'), drop: d4 === 'notLive' ? t('fsAnalystNotLive') : d4 ? fill(t('fnQueued'), { n: num(d4.queued) }) : null },
-        { s: 5, n: ready ? counts.actionable : null, label: t('fnGate'), drop: phase === 'C' && held != null ? fill(t('fnHeld'), { n: num(held) }) : null },
+        { s: 4, n: ready ? counts.verdicts : null, label: t('dqFnRead'), drop: d4 === 'notLive' ? t('fsAnalystNotLive') : d4 ? fill(t('fnQueued'), { n: num(d4.queued) }) : null },
+        { s: 5, n: ready ? counts.actionable : null, label: t('dqFnValued'), drop: phase === 'C' && held != null ? fill(t('dqFnHeld'), { n: num(held) }) : null },
     ];
     return (
         <ol className="grid grid-cols-2 items-start gap-y-1 border-b border-rule-10 pb-2 sm:grid-cols-3 min-[900px]:flex min-[900px]:flex-wrap min-[900px]:items-start">
@@ -123,20 +122,20 @@ function summaryOf(t: T, step: FunnelStep, c: FunnelCounts, doors: Record<Door, 
             };
         case 4:
             return {
-                title: fill(t('sp4Title'), { n: num(c.list) }),
-                sub: t('sp4Sub'),
+                title: fill(t('dqSp4Title'), { n: num(c.list) }),
+                sub: t('dqSp4Sub'),
                 chips: [
-                    <Chip key="u">{fill(t('chUnder'), { n: num(c.verdicts) })}</Chip>,
+                    <Chip key="u">{fill(t('dqChRead'), { n: num(c.verdicts) })}</Chip>,
                     <Chip key="q">{fill(t('fnQueued'), { n: num(c.queued) })}</Chip>,
                 ],
             };
         default: {
-            const blocked = rows.filter((r) => { const v = rebuiltVerdict(r.depth); return !!v && v.actionable !== true; }).length;
+            const notValued = c.verdicts - c.actionable;
             return {
-                title: t('sp5Title'), sub: t('sp5Sub'),
+                title: t('dqSp5Title'), sub: t('dqSp5Sub'),
                 chips: [
-                    <Chip key="p" color="var(--pos)">{fill(t('chPass'), { n: num(c.actionable) })}</Chip>,
-                    <Chip key="b" color="var(--off)">{fill(t('chBlocked'), { n: num(blocked) })}</Chip>,
+                    <Chip key="p" color="var(--pos)">{fill(t('dqChValued'), { n: num(c.actionable) })}</Chip>,
+                    <Chip key="b" color="var(--off)">{fill(t('dqChNotValued'), { n: num(notValued) })}</Chip>,
                 ],
             };
         }

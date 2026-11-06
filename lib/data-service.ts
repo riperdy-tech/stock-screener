@@ -498,6 +498,21 @@ export async function fetchQwenReport(ticker: string): Promise<QwenReport | null
     return fetchJson<QwenReport>(`/data/qwen_reports/${encodeURIComponent(ticker.toUpperCase())}.json`);
 }
 
+/** One name's row in qwen_overlay.json: the report without its claims and valuation detail. */
+export type QwenOverlayRow = Omit<QwenReport, 'ticker' | 'tasks' | 'valuation' | 'authority'>;
+
+export interface QwenOverlayPayload {
+    schema: string;
+    generated_at: string;
+    count: number;
+    valued_count: number;
+    tickers: Record<string, QwenOverlayRow>;
+}
+
+export async function fetchQwenOverlay(): Promise<QwenOverlayPayload | null> {
+    return fetchJson<QwenOverlayPayload>('/data/qwen_overlay.json');
+}
+
 // ── Interim Gemini verdicts (operator decision 2026-10-13) ───────────────────
 // Paper-only and unvalidated: written by stocks-workspace/baselines/gemini/build_gemini_overlay.py,
 // shown on the stock page and graded by the separate rn_gemini paper book. Never part of depth.
