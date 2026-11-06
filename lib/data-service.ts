@@ -467,6 +467,37 @@ export async function fetchDepthOverlay(): Promise<DepthOverlayPayload | null> {
     return fetchJson<DepthOverlayPayload>('/data/depth_overlay.json');
 }
 
+// ── Qwen analysis (operator 2026-11-06: per-stock AI analysis back on the site) ─────────────────
+// Written by rs2-local tools/site/qwen_site.py and published from screener-publish: Qwen (the local model) reads each company's
+// filings; values come from code using Qwen's choices where both of its runs agree. Paper only.
+
+export interface QwenClaim { claim: string | null; support: string | null; facts: string[] | null; quotes: string[] | null; basis: string | null }
+
+export interface QwenReport {
+    ticker: string;
+    date: string;
+    source: string;
+    analysis: string;
+    claims: number | null;
+    claims_supported: number | null;
+    in_code_book: boolean;
+    qwen_book: string | null;
+    flags: string[];
+    valued: boolean;
+    no_value_reason: string | null;
+    family: string | null;
+    value_base?: number; value_bear?: number; value_bull?: number;
+    price_at_publish?: number; upside?: number; far_from_price?: boolean; seeds_agree?: boolean; share_unit_note?: string | null;
+    tasks: Record<string, QwenClaim[]>;
+    valuation: { annotations?: string[]; unknowns?: string[] | null; departures?: { input: string; driver: string; evidence: string[] }[];
+                 evidence?: Record<string, { text: string; kind: string; period: string | null }> } | null;
+    authority: string;
+}
+
+export async function fetchQwenReport(ticker: string): Promise<QwenReport | null> {
+    return fetchJson<QwenReport>(`/data/qwen_reports/${encodeURIComponent(ticker.toUpperCase())}.json`);
+}
+
 // ── Interim Gemini verdicts (operator decision 2026-10-13) ───────────────────
 // Paper-only and unvalidated: written by stocks-workspace/baselines/gemini/build_gemini_overlay.py,
 // shown on the stock page and graded by the separate rn_gemini paper book. Never part of depth.

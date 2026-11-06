@@ -24,6 +24,7 @@ import { StockLeft } from './StockLeft';
 import { StockRight } from './StockRight';
 import { DASH } from './stockParts';
 import { GeminiPanel } from './GeminiPanel';
+import { QwenPanel } from './QwenPanel';
 import { MacroEventsPanel } from './MacroEventsPanel';
 
 const signedOne = (v: number) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).toFixed(1)} %`;
@@ -150,6 +151,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 </p>
             )}
 
+            <QwenPanel ticker={row.ticker} live={live} />
             {data.gemini[row.ticker] && <GeminiPanel g={data.gemini[row.ticker]} />}
             <MacroEventsPanel p={data.macroEvents} ticker={row.ticker} sector={row.info?.sector} />
 
