@@ -51,7 +51,7 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
     const [tradeQuery, setTradeQuery] = useState('');
     // Opens on the AI book and Control against QQQ, the books' benchmark; SPY and IWM are one click away, SOXX and DRAM sit behind "+ more".
     const [visible, setVisible] = useState<Record<string, boolean>>({
-        rn_depth: true, equal: true, QQQ: true, SPY: false, IWM: false,
+        qwen_book: true, code_book: true, rn_depth: false, equal: false, QQQ: true, SPY: true, IWM: false,
     });
 
     useEffect(() => {
@@ -74,7 +74,7 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
     const commissionPct = Number.isFinite(bps) && bps >= 0 ? bps / 100 : 0;
 
     const books = ledgers?.ledgers ?? {};
-    const ai = books.rn_depth;
+    const ai = books.qwen_book ?? books.rn_depth;   // the holdings, trades and history below follow Qwen's book once it exists
     const curve = useMemo(() => buildCurve(ledgers, commissionPct), [ledgers, commissionPct]);
     const early = useMemo(() => soldTooEarly(ledgers), [ledgers]);
     const board = useMemo(() => buildScoreboard(outcomes), [outcomes]);

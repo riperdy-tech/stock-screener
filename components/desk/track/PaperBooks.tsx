@@ -72,6 +72,8 @@ export function PaperBooks({ ledgers, loggedIn }: {
     const { t } = useLanguage();
     const books = ledgers.ledgers ?? {};
     const ai = books.rn_depth;
+    const qwen = bookStats(books.qwen_book);     // operator 2026-11-06: the monthly books, marked daily
+    const code = bookStats(books.code_book);
     const control = bookStats(books.equal);
     const aiStats = bookStats(ai);
     const mine = bookStats(books.mine);
@@ -83,7 +85,17 @@ export function PaperBooks({ ledgers, loggedIn }: {
 
     return (
         <TrackSection title={t('trkBooksTitle')}>
-            <div className={clsx('mt-5 grid grid-cols-1 gap-x-8 gap-y-8', (gemini || v4) ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3')}>
+            <div className={clsx('mt-5 grid grid-cols-1 gap-x-8 gap-y-8', (gemini || v4 || qwen || code) ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3')}>
+                {qwen && (
+                    <Column title={t('trkQwenBook')} note={t('trkQwenNote')}>
+                        <StatGrid s={qwen} />
+                    </Column>
+                )}
+                {code && (
+                    <Column title={t('trkCodeBook')} note={t('trkCodeNote')}>
+                        <StatGrid s={code} />
+                    </Column>
+                )}
                 <Column title={t('trkAiBook')} note={t('trkAiNote')}>
                     {aiStats ? <StatGrid s={aiStats} /> : <p className="mt-4 text-[12px] text-ink-3">—</p>}
                     {cash && <p className="mt-3 font-mono text-[11px] text-ink-2">{fill(t('trkCashSince'), { date: cash })}</p>}

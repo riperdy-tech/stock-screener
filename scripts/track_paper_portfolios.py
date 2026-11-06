@@ -53,6 +53,7 @@ STOCKS_JSON = DATA / "stocks.json"
 FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 DEPTH_OVERLAY_JSON = DATA / "depth_overlay.json"             # RS2 depth verdicts — rn_depth ledger targets
 GEMINI_OVERLAY_JSON = DATA / "gemini_overlay.json"           # interim Gemini verdicts — rn_gemini ledger targets (paper only)
+M3O_BOOKS_JSON = DATA / "m3o_books.json"   # the monthly code book and Qwen's book (rs2-local tools/site/qwen_site.py, published from screener-publish)
 V4_PAPER_OVERLAY_JSON = DATA / "v4_paper_overlay.json"       # engine v2.1 shadow verdicts, EXPERIMENTAL and unpromoted — rn_v4 targets (paper only)
 # The old llm_overlay.json / portfolio_plan_llm.json lane (plan_llm/plan2_llm/equal_llm)
 # was RETIRED in the depth migration (2026-08-26); rn_depth is the depth paper book.
@@ -1101,7 +1102,7 @@ def main():
     # plan / plan2 / plan3 (retired 2026-08-27) and the *_llm lane (retired 2026-08-26)
     # are NO LONGER computed or seeded on new books. Pre-existing books keep their frozen
     # history (setdefault never removes). The live books are `equal` + `rn_depth`.
-    for _k in ("rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"):
+    for _k in ("rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book"):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -1231,6 +1232,22 @@ def main():
             finalize_ledger(ledgers[_name], _nav, _stale, benches, as_of, book["inception"])
             backfill_benches(ledgers[_name])
 
+        # ── code_book / qwen_book: the monthly formation books, marked daily (operator 2026-11-06) ──
+        # code_book = the screener's code-only book (rs2 engine series F); qwen_book = the same slots after Qwen's filing
+        # check (engine series FQ; a slot whose name Qwen flagged is cash). Targets change only at a formation. Held when
+        # m3o_books.json is missing; qwen_book may legitimately hold fewer names than code_book, never an empty set.
+        m3o_raw = load_json(M3O_BOOKS_JSON, {}) or {}
+        m3o_books = m3o_raw.get("books") or {}
+        m3o_ok = bool(m3o_books.get("code_book"))
+        for _name in ("code_book", "qwen_book"):
+            _nav, _stale = run_or_hold(_name, m3o_books.get(_name) or {}, "formation", source_ok=m3o_ok,
+                                       why="m3o_books.json missing or empty")
+            finalize_ledger(ledgers[_name], _nav, _stale, benches, as_of, book["inception"])
+            backfill_benches(ledgers[_name])
+        if m3o_ok:
+            print(f"  · code_book/qwen_book: formation {m3o_raw.get('formation')} "
+                  f"({len(m3o_books.get('code_book') or {})}/{len(m3o_books.get('qwen_book') or {})} names)", file=sys.stderr)
+
         # ── plan3 · bold (momentum sleeve): RETIRED 2026-08-27 ──────────────────
         # No longer computed. run_plan3_ledger + the kill-switch machinery stay defined
         # (still exercised by test_plan3_guards.py); main() simply no longer advances the
@@ -1271,7 +1288,7 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("equal", "rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"):
+        for name in ("equal", "rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book"):
             if not ledgers.get(name, {}).get("nav_series"):
                 continue
             s = ledgers[name]["summary"]

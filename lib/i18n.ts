@@ -2,6 +2,12 @@ export type Language = 'en' | 'ko' | 'zh';
 
 export const TRANSLATIONS = {
     en: {
+        trkQwenBook: "Qwen book",
+        trkQwenNote: "the monthly book after Qwen's filing check · a flagged name is held as cash · paper only",
+        trkCodeBook: "Code book",
+        trkCodeNote: "the monthly code-only book, same names before Qwen's check · paper only",
+        trkSerQwen: "Qwen book",
+        trkSerCode: "Code book",
         pgQwTitle: "Qwen analysis",
         pgQwAsOf: "as of {date} · {source}",
         pgQwValue: "Value {bear} · {base} · {bull} (bear · base · bull) against {price}",
@@ -753,7 +759,7 @@ export const TRANSLATIONS = {
         trkCutTiming: "by entry timing",
         trkCutSize: "by size hint",
         trkBooksTitle: "Paper books",
-        trkAiBook: "AI book",
+        trkAiBook: "AI book (old analyst, stopped)",
         trkAiNote: "follows verdicts that pass the gate",
         trkGeminiBook: "Gemini book (interim)",
         trkGeminiNote: "paper only · follows Gemini's undervalued calls · never real money",
@@ -979,6 +985,12 @@ export const TRANSLATIONS = {
         emptyNoMatch: "No stocks match the current filters.",
     },
     ko: {
+        trkQwenBook: "Qwen 북",
+        trkQwenNote: "Qwen의 공시 점검 후 월간 포트폴리오 · 표시된 종목은 현금 보유 · 모의 투자 전용",
+        trkCodeBook: "코드 북",
+        trkCodeNote: "코드만으로 만든 월간 포트폴리오, Qwen 점검 전 같은 종목 · 모의 투자 전용",
+        trkSerQwen: "Qwen 북",
+        trkSerCode: "코드 북",
         pgQwTitle: "Qwen 분석",
         pgQwAsOf: "{date} 기준 · {source}",
         pgQwValue: "가치 {bear} · {base} · {bull} (약세 · 기준 · 강세), 현재가 {price}",
@@ -1956,6 +1968,12 @@ export const TRANSLATIONS = {
         emptyNoMatch: "현재 필터에 맞는 종목이 없습니다.",
     },
     zh: {
+        trkQwenBook: "Qwen 帳本",
+        trkQwenNote: "經 Qwen 文件檢查後的月度組合 · 被標記的名稱以現金持有 · 僅限模擬",
+        trkCodeBook: "代碼帳本",
+        trkCodeNote: "純代碼的月度組合,Qwen 檢查前的相同名稱 · 僅限模擬",
+        trkSerQwen: "Qwen 帳本",
+        trkSerCode: "代碼帳本",
         pgQwTitle: "Qwen 分析",
         pgQwAsOf: "截至 {date} · {source}",
         pgQwValue: "价值 {bear} · {base} · {bull}（悲观 · 基准 · 乐观），现价 {price}",
