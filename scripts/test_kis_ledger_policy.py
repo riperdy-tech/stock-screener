@@ -22,7 +22,7 @@ from test_kis_guards import FakeKIS, book, harness, pos  # noqa: E402,F401  (har
 BLOCKING = [None, "", "  ", "true", "TRUE", " True ", "1", "yes", "0", "no", "off", "tru", "flase",
             "false.", "'false'", "False!", "blocked"]
 OPEN = ["false", "FALSE", "False", " false ", "\tfalse\n"]
-ALL_MODEL = ["rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"]
+ALL_MODEL = ["rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "qwen_book"]
 
 
 def named(key, holdings=None, cash=5000.0):
@@ -46,7 +46,7 @@ def release(monkeypatch, value):
 
 # ============================================================ the defaults
 def test_defaults_live_in_one_place_each():
-    assert KIS_REAL_LEDGERS == frozenset({"rn_depth"})
+    assert KIS_REAL_LEDGERS == frozenset({"rn_depth", "code_book", "qwen_book"})   # operator 2026-11-06: the formation books
     assert MODEL_DERIVED_LEDGERS == frozenset(ALL_MODEL)
     assert PAPER_ONLY_LEDGERS == frozenset({"rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"})
     assert PAPER_ONLY_LEDGERS <= MODEL_DERIVED_LEDGERS
@@ -194,3 +194,13 @@ def test_G7_the_halt_is_checked_first_and_alone(harness, monkeypatch):
     harness(None, ledger_book=named("rn_depth"),
             argv=argv("real", "rn_depth", "--execute", "--confirm-real"))      # halted: returns, no exit
     assert [x["event"] for x in harness.events] == ["halted"]
+
+
+# ================================================================== the formation books (operator 2026-11-06)
+def test_the_code_book_may_mirror_real_money_and_is_not_model_derived():
+    assert ledger_refusals("code_book", "real", {"MODEL_RELEASE_BLOCKED": "true"}) == []
+
+
+def test_the_qwen_book_is_blocked_while_the_model_release_is_blocked():
+    assert ledger_refusals("qwen_book", "real", {"MODEL_RELEASE_BLOCKED": "true"})
+    assert ledger_refusals("qwen_book", "real", {"MODEL_RELEASE_BLOCKED": "false"}) == []

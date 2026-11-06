@@ -22,7 +22,10 @@ LEDGERS_JSON = ROOT / "public" / "data" / "paper_ledgers.json"
 # G4: the overlay file a mirrored ledger's targets are derived from. Its own `generated_at`
 # is the age of the verdicts, which the ledger's `current_date` (advanced by every scoring
 # run) does not show. Only ledgers listed here have such a source.
-OVERLAY_FILES = {"rn_depth": ROOT / "public" / "data" / "depth_overlay.json"}
+OVERLAY_FILES = {"rn_depth": ROOT / "public" / "data" / "depth_overlay.json",
+                 "code_book": ROOT / "public" / "data" / "m3o_books.json", "qwen_book": ROOT / "public" / "data" / "m3o_books.json"}
+# The formation books change once a month (operator 2026-11-06): their source may be up to one formation cycle plus a week old.
+OVERLAY_MAX_AGE_BY_LEDGER = {"code_book": 40, "qwen_book": 40}
 # A12 (operator 2026-10-30): the overlay's age limit is its intended cadence, not the ledger's daily one. Every monitored
 # name is re-analysed at least every 14 days (SPEC_m3p P4), so a healthy overlay is never older than that.
 OVERLAY_MAX_AGE_DAYS = 14
@@ -186,6 +189,8 @@ def check_served_freshness(book: dict, src: str, ledger_key: str, *, now=None,
             problems.append(f"{src} ledger {ledger_key!r} current_date {as_of} is "
                             f"{report['age_days']} days old (limit {max_stale_days})")
     overlay = OVERLAY_FILES.get(ledger_key)
+    overlay_max_age_days = OVERLAY_MAX_AGE_BY_LEDGER.get(ledger_key, overlay_max_age_days)
+    report["overlay_max_age_days"] = overlay_max_age_days
     if overlay is not None:
         report["overlay_file"] = overlay.name
         try:

@@ -14,10 +14,13 @@ from __future__ import annotations
 
 from kis.halt import model_release_blocked_state
 
-# A6: the only ledgers real money may mirror.
-KIS_REAL_LEDGERS = frozenset({"rn_depth"})
-# A7: ledgers whose targets come from a model; blocked while the model release is blocked.
-MODEL_DERIVED_LEDGERS = frozenset({"rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"})
+# A6: the only ledgers real money may mirror. Operator 2026-11-06: "KIS connected and mimicking paper trading if I wish" adds
+# the monthly formation books (code_book, qwen_book). Being listed only allows a mirror; KIS_LEDGER, KIS_HALT, KIS_AUTO_EXECUTE and
+# KIS_CONFIRM_REAL still decide whether anything trades, and they are the operator's.
+KIS_REAL_LEDGERS = frozenset({"rn_depth", "code_book", "qwen_book"})
+# A7: ledgers whose targets come from a model; blocked while the model release is blocked. qwen_book is Qwen's filing check of
+# the code book, so it is model-derived; code_book is code only.
+MODEL_DERIVED_LEDGERS = frozenset({"rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "qwen_book"})
 
 
 def ledger_refusals(ledger: str, env: str, environ=None) -> list[str]:
