@@ -9,7 +9,7 @@ import requests
 import io
 import math
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone
 import base64
 
 import os
@@ -1038,7 +1038,9 @@ def main():
                 "status": "Pass" if screening_result else "Fail", 
                 "reasons": result.fail_reasons,
                 "failCodes": result.fail_codes,
-                "Last_Updated": datetime.now().strftime("%Y-%m-%d %H:%M"),
+                # UTC, like every other stamp the site reads as zone-less UTC. The self-hosted runner's local clock
+                # (KST) put the snapshot a day ahead of the tracker's UTC as_of every night (snapshot_ahead, 2026-11-07).
+                "Last_Updated": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"),
                 "metrics": {
                     "roic": result.roic,
                     "revenueGrowth": result.revenue_growth_ttm,

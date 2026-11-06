@@ -27,7 +27,7 @@ export default function CockpitDashboard() {
     // Every payload (and the private `mine` ledger merge) comes from one cached hook so
     // navigating to a ticker page and back never refetches the 16 MB of static JSON/CSV.
     const {
-        factor, valuations, overlay, depth,
+        factor, valuations, overlay, depth, qwen,
         ledgers, stockInfo, loading, reload, auth,
     } = useDeskData();
     // Ticker pages are routes now, so a detail view is shareable and the browser's
@@ -42,7 +42,7 @@ export default function CockpitDashboard() {
                 {tab === 'rankings' && (
                     <RankingsView
                         factor={factor} depth={depth} valuations={valuations}
-                        overlay={overlay} stockInfo={stockInfo} ledgers={ledgers}
+                        overlay={overlay} stockInfo={stockInfo} ledgers={ledgers} qwen={qwen}
                     />
                 )}
 

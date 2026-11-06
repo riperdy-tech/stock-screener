@@ -167,6 +167,108 @@ function DeskRowView({ r, open, onToggle }: { r: DeskRow; open: boolean; onToggl
 
 // ── Expand panel ────────────────────────────────────────────────────────────
 
+// ── Qwen row (operator 2026-11-06) ──────────────────────────────────────────
+// The list's names with Qwen's analysis beside them: when it last read the filings, the value of record and the
+// range, the gap to the live price, and how many of its claims the filings support. A value far from the price is
+// shown in warn colour, never hidden; a name it could not value says so. The row opens the stock page.
+
+const usd = (x: number | null | undefined) => (x == null || !Number.isFinite(x) ? DASH : `$${x >= 100 ? x.toFixed(0) : x.toFixed(2)}`);
+
+const fmtMdDate = (iso: string) => iso.slice(5, 10);
+
+function qwenCells(t: T, r: DeskRow) {
+    const q = r.qwen;
+    const price = livePrice(r);
+    if (!q) return { when: t('dqQueued'), whenWarn: false, value: DASH, range: null as string | null, gap: DASH, gapColor: TONE_COLORS.MUTED, claims: DASH };
+    const ran = q.analysis !== 'not run';
+    const upside = q.valued && q.value_base != null && price ? q.value_base / price - 1 : null;
+    return {
+        when: ran ? fmtMdDate(q.date) : t('dqNotRun'),
+        whenWarn: !ran,
+        value: q.valued ? usd(q.value_base) : t('dqNotValued'),
+        range: q.valued ? `${usd(q.value_bear)} to ${usd(q.value_bull)}` : (q.no_value_reason ?? null),
+        gap: upside == null ? DASH : signedPct(upside * 100, 0),
+        gapColor: upside == null ? TONE_COLORS.MUTED : q.far_from_price ? 'var(--warn)' : upside >= 0 ? 'var(--pos)' : 'var(--neg)',
+        claims: q.claims != null ? `${q.claims_supported ?? 0}/${q.claims}` : DASH,
+    };
+}
+
+function QwenColumnHeaders() {
+    const { t } = useLanguage();
+    return (
+        <div className="hidden sm:block" role="presentation">
+            <div className="dk-grid pt-1 font-mono text-[11px] text-off">
+                <span className="dk-span-co" />
+                <span className="border-b border-ink pb-0.5 whitespace-nowrap">{t('grpMarket')}</span>
+                <span className="dk-span-ai border-b border-ink pb-0.5 whitespace-nowrap">{t('dqGrp')}</span>
+                <span className="dk-span-sc border-b border-ink pb-0.5 whitespace-nowrap">{t('grpScreener')}</span>
+            </div>
+            <div className="dk-grid border-b border-rule-18 pb-1.5 pt-1.5 font-mono text-[11px] text-off">
+                <span className="whitespace-nowrap">{t('colCompany')}</span>
+                <span className="dk-ind whitespace-nowrap">{t('colIndustry')}</span>
+                <span className="whitespace-nowrap">{t('dkColPrice')}</span>
+                <span className="whitespace-nowrap">{t('dqColRead')}</span>
+                <span className="whitespace-nowrap">{t('dqColValue')}</span>
+                <span className="whitespace-nowrap">{t('dqColGap')}</span>
+                <span className="whitespace-nowrap">{t('dqColClaims')}</span>
+                <span className="whitespace-nowrap">{t('colDoor')}</span>
+                <span className="dk-pct whitespace-nowrap">{t('colPct')}</span>
+                <span className="dk-pillars"><PillarHeader /></span>
+                <span />
+            </div>
+        </div>
+    );
+}
+
+function QwenRowView({ r }: { r: DeskRow }) {
+    const { t } = useLanguage();
+    const stockLink = useStockHref();
+    const price = livePrice(r);
+    const c = qwenCells(t, r);
+    const industry = industryOf(r);
+    const door = doorOf(r.fct.fct_nominated_doors);
+    const pct = topPct(r.fct.fct_percentile);
+    return (
+        <Link href={stockLink(r.ticker)} className="block border-b border-rule-10 py-2 hover:bg-hover">
+            <div className="hidden sm:block">
+                <div className="dk-grid">
+                    <Company r={r} />
+                    <span className="dk-ind block min-w-0 truncate text-[11px] text-off" title={industry ?? undefined}>{industry ?? DASH}</span>
+                    <span className="font-mono text-[12px] text-ink">{price != null ? `$${price.toFixed(2)}` : DASH}</span>
+                    <span className={clsx('font-mono text-[11px]', c.whenWarn ? 'text-warn' : 'text-ink-2')}>{c.when}</span>
+                    <span className="block min-w-0">
+                        <span className="block font-mono text-[12px] text-ink">{c.value}</span>
+                        {c.range && <span className="block truncate font-mono text-[10.5px] leading-tight text-ink-2" title={c.range}>{c.range}</span>}
+                    </span>
+                    <span className="font-mono text-[12px]" style={{ color: c.gapColor }}>{c.gap}</span>
+                    <span className="font-mono text-[11px] text-ink-2">{c.claims}</span>
+                    <DoorMark door={door} />
+                    <span className="dk-pct font-mono text-[11px] text-ink-2">{pct ?? DASH}</span>
+                    <span className="dk-pillars"><PillarBars z={r.fct.fct_z} /></span>
+                    <span aria-hidden className="font-mono text-[11px] text-ink-2">{'›'}</span>
+                </div>
+            </div>
+            <div className="block sm:hidden">
+                <div className="flex items-baseline justify-between gap-3">
+                    <span className="flex min-w-0 items-baseline gap-2">
+                        <span className="text-[14px] font-semibold text-ink">{r.ticker}</span>
+                        <span className={clsx('font-mono text-[11px]', c.whenWarn ? 'text-warn' : 'text-ink-2')}>{c.when}</span>
+                    </span>
+                    <span className="font-mono text-[12px] text-ink">{price != null ? `$${price.toFixed(2)}` : DASH}</span>
+                </div>
+                <span className="mt-0.5 block truncate text-[11px] text-ink-2" title={r.info?.name || undefined}>{r.info?.name || DASH}</span>
+                <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[11px]">
+                    <span className="text-ink">{c.value}</span>
+                    <span style={{ color: c.gapColor }}>{c.gap}</span>
+                    <span className="text-ink-2">{c.claims}</span>
+                    <DoorMark door={door} />
+                </div>
+                {c.range && <span className="block truncate font-mono text-[10.5px] text-ink-2">{c.range}</span>}
+            </div>
+        </Link>
+    );
+}
+
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
     return (
         <>
@@ -363,13 +465,7 @@ export function DeskTable({ sections, phase, actionableCount, queued, filtering,
     const everything = researchNow.length + waiting.length + noEdge.length + blocked.length + awaiting.length + disqualified.length;
     const awaitingRows = allAwaiting || filtering ? awaiting : awaiting.slice(0, AWAITING_PREVIEW);
 
-    const emptyRn = filtering && everything === 0
-        ? t('dsRnEmptyFiltered')
-        : phase === 'A'
-            ? fill(t('dsRnEmptyA'), { n: queued ?? DASH })
-            : actionableCount === 0
-                ? fill(t('dsRnEmptyB'), { n: queued ?? DASH })
-                : t('dsRnEmptyOpen');
+    const emptyRn = filtering && everything === 0 ? t('dsRnEmptyFiltered') : t('dqRnEmpty');
 
     const block = (title: string, sub: string, rows: DeskRow[], list: DeskRow[] = rows) => (
         <section key={title}>
@@ -382,12 +478,12 @@ export function DeskTable({ sections, phase, actionableCount, queued, filtering,
     return (
         <div>
             <section>
-                <SectionHeader title={t('dsRn')} sub={t('dsRnSub')} count={researchNow.length} />
+                <SectionHeader title={t('dsRn')} sub={t('dqRnSub')} count={researchNow.length} />
                 {!loaded
                     ? <div className="space-y-3 py-4" aria-busy="true"><Skel className="h-4 w-full" /><Skel className="h-4 w-11/12" /><Skel className="h-4 w-10/12" /></div>
                     : researchNow.length === 0
                     ? <p className="my-3 border border-dashed border-rule-24 px-3.5 py-3 text-[13px] text-ink-2">{emptyRn}</p>
-                    : <><ColumnHeaders />{researchNow.map((r) => <DeskRowView key={r.ticker} r={r} open={open.has(r.ticker)} onToggle={() => toggle(r.ticker)} />)}</>}
+                    : <><QwenColumnHeaders />{researchNow.map((r) => <QwenRowView key={r.ticker} r={r} />)}</>}
             </section>
 
             {waiting.length > 0 && block(t('dsWait'), t('dsWaitSub'), waiting)}
@@ -396,9 +492,9 @@ export function DeskTable({ sections, phase, actionableCount, queued, filtering,
 
             {awaiting.length > 0 && (
                 <section>
-                    <SectionHeader title={t('dsAwaiting')} sub={t('dsAwaitingSub')} count={awaiting.length} />
-                    <ColumnHeaders />
-                    {awaitingRows.map((r) => <DeskRowView key={r.ticker} r={r} open={open.has(r.ticker)} onToggle={() => toggle(r.ticker)} />)}
+                    <SectionHeader title={t('dqWl')} sub={t('dqWlSub')} count={awaiting.length} />
+                    <QwenColumnHeaders />
+                    {awaitingRows.map((r) => <QwenRowView key={r.ticker} r={r} />)}
                     {awaitingRows.length < awaiting.length && (
                         <button type="button" onClick={() => setAllAwaiting(true)} className="py-3 font-mono text-[12px] text-accent hover:text-ink">
                             {fill(t('dsShowAll'), { n: awaiting.length })}

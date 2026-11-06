@@ -2,7 +2,7 @@
 // payloads in useDeskStatus; nothing here fetches. Missing data is null/undefined and renders "—";
 // 0 is a value (never `||`-defaulted).
 
-import type { ChainManifest, DepthOverlayPayload, FactorScoresPayload, MriCostOfCapital, MriRegime } from '@/lib/data-service';
+import type { ChainManifest, DepthOverlayPayload, FactorScoresPayload, MriCostOfCapital, MriRegime, QwenOverlayPayload } from '@/lib/data-service';
 import { deskPhase, isRebuiltRow, type DeskPhase } from './phase';
 
 const HOUR = 3_600_000;
@@ -50,6 +50,8 @@ export interface PaperAlert {
 export interface StatusInput {
     factor: FactorScoresPayload | null;
     depth: DepthOverlayPayload | null;
+    /** qwen_overlay.json: when it loads, Qwen is the live analyst (operator 2026-11-06) and its stamp is the verdict stamp. */
+    qwen?: QwenOverlayPayload | null;
     ledgers: { alerts?: PaperAlert[] | null } | null;
     manifest: ChainManifest | null;
     regime: MriRegime | null;
@@ -80,6 +82,21 @@ export function computeFreshness(st: StatusInput, now: number): Freshness {
     const listSize = bc && (bc.research_now != null || bc.watchlist != null)
         ? (bc.research_now ?? 0) + (bc.watchlist ?? 0)
         : null;
+    if (st.qwen) {
+        // Qwen is live: phase C, the stamp is its newest publish, "actionable" is its valued names.
+        return {
+            phase: 'C',
+            pricesAsOf: st.pricesAsOf,
+            pricesStale: isStale(st.pricesAsOf, PRICES_STALE_MS, now),
+            bookScoredAt: st.factor?.generated_at ?? null,
+            bookStale: isStale(st.factor?.generated_at, BOOK_STALE_MS, now),
+            verdictAt: st.qwen.generated_at,
+            verdictStale: isStale(st.qwen.generated_at, VERDICT_STALE_MS, now),
+            rebuiltCount: st.qwen.count,
+            actionableCount: st.qwen.valued_count,
+            listSize,
+        };
+    }
     const verdictAt = st.depth?.generated_at ?? null;
     return {
         phase,

@@ -1263,8 +1263,11 @@ def main():
         # Alerts block: this run's held/underfunded/carried events, plus any recent
         # ones kept for the site banner. Cleared entries older than the window so a
         # one-off stale day stops showing once it recovers.
+        # snapshot_ahead alerts dated before 2026-11-07 were false: fetch_data.py stamped Last_Updated in the
+        # self-hosted runner's local time (KST), a day ahead of the UTC as_of. The stamp is UTC from then on.
         prior = [a for a in (book.get("alerts") or [])
                  if a.get("date") != as_of
+                 and not (a.get("kind") == "snapshot_ahead" and a["date"] < "2026-11-07")
                  and (date.fromisoformat(as_of) - date.fromisoformat(a["date"])).days <= ALERT_RETENTION_DAYS]
         book["alerts"] = prior + alerts
 

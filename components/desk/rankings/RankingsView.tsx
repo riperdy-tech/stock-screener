@@ -8,20 +8,20 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { useLanguage } from '@/components/LanguageContext';
-import type { DepthVerdict, FactorScoresPayload, ValuationModel } from '@/lib/data-service';
+import type { DepthVerdict, FactorScoresPayload, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
 import type { StockInfo } from '@/lib/desk/useDeskData';
 import { buildRows, sectorsOf } from '@/lib/desk/rankings';
 import { deskPhase } from '@/lib/desk/phase';
-import { countHiddenLegacy, deskSections, type DeskSections } from '@/lib/desk/sections';
+import { deskSections, type DeskSections } from '@/lib/desk/sections';
 import { funnelCounts } from '@/lib/desk/funnel';
 import { DOOR_LABEL_KEY } from '@/lib/desk/doors';
 import {
-    applyDeskFilters, DOOR_FILTERS, filtersActive, NO_FILTERS, parseDeskUrl, VERDICT_WORDS, writeDeskUrl,
+    applyDeskFilters, DOOR_FILTERS, filtersActive, NO_FILTERS, parseDeskUrl, writeDeskUrl,
     type DeskFilters, type DeskUrlState, type FunnelStep,
 } from '@/lib/desk/filters';
 import { fill } from '@/lib/desk/text';
 import { DeskTable } from './DeskTable';
-import { verdictWordKey } from './DeskParts';
+
 import { FunnelPanel, FunnelRow } from './Funnel';
 import { UniverseHits } from './UniverseHits';
 
@@ -56,14 +56,16 @@ function FilterSelect({ label, value, shown, options, onChange }: {
     );
 }
 
-export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers }: {
+export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers, qwen }: {
     factor: FactorScoresPayload | null;
     depth: Record<string, DepthVerdict>;
     valuations: Record<string, ValuationModel>;
     overlay: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any -- the untyped overlay-signals payload, passed through to buildRows unchanged
     stockInfo: Record<string, StockInfo>;
-    /** paper_ledgers.json; read only for the "held" figure under funnel step 5 (phase C). */
-    ledgers: { ledgers?: { rn_depth?: { summary?: { open_positions?: number | null } } } } | null;
+    /** paper_ledgers.json; read only for the Qwen book's "held" figure under funnel step 5. */
+    ledgers: { ledgers?: { qwen_book?: { summary?: { open_positions?: number | null } } } } | null;
+    /** qwen_overlay.json tickers: Qwen's analysis beside each list name (operator 2026-11-06). */
+    qwen: Record<string, QwenOverlayRow>;
 }) {
     const { t } = useLanguage();
     const params = useSearchParams();
@@ -73,7 +75,8 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     // The search box types fast: it keeps its own text and writes the URL with replaceState.
     const [q, setQ] = useState(urlState.filters.q);
     useEffect(() => { setQ(urlState.filters.q); }, [urlState.filters.q]);
-    const filters: DeskFilters = { ...urlState.filters, q };
+    // The verdict filter belonged to the old analyst's verdicts; a stale ?verdict= in a saved link is ignored.
+    const filters: DeskFilters = { ...urlState.filters, q, verdict: 'all' };
 
     const write = useCallback((next: DeskUrlState, mode: 'push' | 'replace') => {
         const p = new URLSearchParams(window.location.search);
@@ -89,19 +92,19 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const clearFilters = () => { setQ(''); write({ ...urlState, filters: NO_FILTERS }, 'push'); };
 
     const rows = useMemo(
-        () => buildRows({ factor, depth, valuations, overlay, stockInfo }),
-        [factor, depth, valuations, overlay, stockInfo],
+        () => buildRows({ factor, depth, valuations, overlay, stockInfo }).map((r) => (qwen[r.ticker] ? { ...r, qwen: qwen[r.ticker] } : r)),
+        [factor, depth, valuations, overlay, stockInfo, qwen],
     );
     const sectors = useMemo(() => sectorsOf(rows), [rows]);
-    const phase = useMemo(() => (Object.keys(depth).length || factor ? deskPhase(depth) : null), [depth, factor]);
+    const qwenLive = Object.keys(qwen).length > 0;
+    const phase = useMemo(() => (qwenLive ? 'C' as const : Object.keys(depth).length || factor ? deskPhase(depth) : null), [qwenLive, depth, factor]);
     const counts = useMemo(() => funnelCounts(rows, factor), [rows, factor]);
-    const hiddenLegacy = useMemo(() => countHiddenLegacy(rows), [rows]);
 
     const all = useMemo(() => deskSections(rows), [rows]);
     const active = filtersActive(filters);
     const filtered = useMemo(() => (active ? deskSections(applyDeskFilters(rows, filters)) : all),
         // eslint-disable-next-line react-hooks/exhaustive-deps -- `filters` is rebuilt every render; its parts are listed
-        [rows, all, active, filters.verdict, filters.door, filters.sector, filters.q]);
+        [rows, all, active, filters.door, filters.sector, filters.q]);
 
     // Symbols the table already shows for the current filters: the universe hits skip them.
     const shownTickers = useMemo(() => {
@@ -115,16 +118,17 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const tr = factor?.band_transitions;
     const entered = tr?.entered_book?.length ?? 0;
     const left = tr?.left_book?.length ?? 0;
-    const held = ledgers?.ledgers?.rn_depth?.summary?.open_positions ?? null;
+    const held = ledgers?.ledgers?.qwen_book?.summary?.open_positions ?? null;
     const n = counts.actionable;
+    const newest = Object.values(qwen).reduce((m, r) => (r.analysis !== 'not run' && r.date > m ? r.date : m), '');
 
     return (
         <div>
             {/* a. Gate status line */}
-            {phase !== null && (
-                <p className={clsx('font-mono text-[11px] font-semibold', n > 0 ? 'text-pos' : 'text-warn')}>
+            {factor != null && (
+                <p className={clsx('font-mono text-[11px] font-semibold', counts.verdicts > 0 ? 'text-pos' : 'text-warn')}>
                     <span aria-hidden>{'●'} </span>
-                    {n > 0 ? fill(t(n === 1 ? 'glActionableOne' : 'glActionable'), { n }) : t('glNone')}
+                    {fill(t('dqLine'), { a: counts.verdicts, n: counts.list ?? '—', v: n, d: newest ? newest.slice(5, 10) : '—' })}
                 </p>
             )}
 
@@ -138,13 +142,6 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
             <div className="mt-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
                 <span className="bg-ink px-3 py-1.5 font-mono text-[11px] font-semibold text-surface">{t('flDesk')}</span>
                 <div className="flex flex-wrap items-center gap-2">
-                    <FilterSelect
-                        label={t('flVerdict')}
-                        value={filters.verdict}
-                        shown={filters.verdict === 'all' ? '' : t(verdictWordKey(filters.verdict))}
-                        options={[['all', t('flAll')], ...VERDICT_WORDS.map((w) => [w, t(verdictWordKey(w))] as [string, string])]}
-                        onChange={(v) => setFilter({ verdict: v as DeskFilters['verdict'] })}
-                    />
                     <FilterSelect
                         label={t('flDoor')}
                         value={filters.door}
@@ -205,10 +202,6 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                 loaded={factor != null}
             />
 
-            {/* g. Hidden-legacy line (phases A and B) */}
-            {(phase === 'A' || phase === 'B') && hiddenLegacy > 0 && (
-                <p className="mt-6 border-t border-rule-10 pt-3 font-mono text-[11px] text-off">{fill(t('dsLegacy'), { n: hiddenLegacy })}</p>
-            )}
         </div>
     );
 }
