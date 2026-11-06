@@ -1,18 +1,18 @@
 {
  "disclaimer": "Reverse-DCF expectations models, not price targets. The implied growth rate is what the CURRENT price requires under the stated assumptions; the gap vs demonstrated growth is the conversation starter.",
  "discount_rate_meta": {
-  "age_days": 1,
+  "age_days": 2,
   "asof": "2026-11-04",
   "discount_rate_source": "anchor",
-  "path": "C:\\actions-runner\\_work\\stock-screener\\stock-screener\\public\\data\\mri\\cost_of_capital_anchor.json",
+  "path": "/home/runner/work/stock-screener/stock-screener/public/data/mri/cost_of_capital_anchor.json",
   "reason": "ok"
  },
  "discount_rate_source": "anchor",
- "eligible_count": 161,
- "generated_at": "2026-11-05T17:23:00Z",
- "modeled_count": 153,
+ "eligible_count": 164,
+ "generated_at": "2026-11-06T01:53:46Z",
+ "modeled_count": 155,
  "skipped_counts": {
-  "negative_base_cash_flow": 8
+  "negative_base_cash_flow": 9
  },
  "tickers": {
   "AAUC": {
@@ -23,7 +23,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2973683837,
+    "market_cap": 2844090284,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
@@ -33,10 +33,33 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": 0.1317,
+   "implied_growth": 0.1235,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
+  },
+  "ABG": {
+   "assumptions": {
+    "base_cf": 692800000,
+    "base_cf_kind": "ocf_minus_da_proxy",
+    "coe_default_loading": false,
+    "discount_rate_source": "anchor",
+    "fade_years": 5,
+    "fiscal_year": 2025,
+    "market_cap": 3750351360,
+    "stage1_years": 5,
+    "terminal_growth": 0.025,
+    "wacc": 10.93536
+   },
+   "expectations_gap_pts": -38.9,
+   "gap_basis": "owner_cf",
+   "hist_fcf_cagr_5y": 0.1581,
+   "hist_owner_cf_cagr_5y": 0.2649,
+   "hist_revenue_cagr_5y": 0.2034,
+   "implied_growth": -0.1242,
+   "implied_growth_clamped": false,
+   "trajectory_slope": null,
+   "verdict": "Priced 39pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "ADAM": {
    "assumptions": {
@@ -46,20 +69,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 529185810,
+    "market_cap": 558083313,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": -39.5,
+   "expectations_gap_pts": -38.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2012,
    "hist_owner_cf_cagr_5y": 0.1318,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.2635,
+   "implied_growth": -0.2541,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 40pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 39pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "ADT": {
    "assumptions": {
@@ -69,7 +92,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 7206689670,
+    "market_cap": 7232257981,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
@@ -79,7 +102,7 @@
    "hist_fcf_cagr_5y": 0.0715,
    "hist_owner_cf_cagr_5y": 0.0971,
    "hist_revenue_cagr_5y": -0.0071,
-   "implied_growth": -0.2091,
+   "implied_growth": -0.2085,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 31pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -92,7 +115,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 547391044,
+    "market_cap": 570807254,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
@@ -102,7 +125,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.1499,
+   "implied_growth": -0.1426,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -115,20 +138,43 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1259253437,
+    "market_cap": 1276618257,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 13.8,
+   "expectations_gap_pts": 14.1,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.0137,
-   "implied_growth": 0.1518,
+   "implied_growth": 0.1543,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price demands ~+14pts MORE growth than demonstrated \u2014 must believe in acceleration."
+  },
+  "AMCX": {
+   "assumptions": {
+    "base_cf": 150522000,
+    "base_cf_kind": "owner_earnings",
+    "coe_default_loading": false,
+    "discount_rate_source": "anchor",
+    "fade_years": 5,
+    "fiscal_year": 2025,
+    "market_cap": 348974752,
+    "stage1_years": 5,
+    "terminal_growth": 0.025,
+    "wacc": 9.825330000000001
+   },
+   "expectations_gap_pts": -15.5,
+   "gap_basis": "owner_cf",
+   "hist_fcf_cagr_5y": -0.1725,
+   "hist_owner_cf_cagr_5y": -0.1467,
+   "hist_revenue_cagr_5y": -0.0386,
+   "implied_growth": -0.3016,
+   "implied_growth_clamped": false,
+   "trajectory_slope": null,
+   "verdict": "Priced 15pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "AMN": {
    "assumptions": {
@@ -138,20 +184,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1793198567,
+    "market_cap": 1848969819,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
    },
-   "expectations_gap_pts": 49.3,
+   "expectations_gap_pts": 49.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0131,
    "hist_owner_cf_cagr_5y": -0.2458,
    "hist_revenue_cagr_5y": 0.0267,
-   "implied_growth": 0.2473,
+   "implied_growth": 0.2531,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+49pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+50pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "AMT": {
    "assumptions": {
@@ -161,17 +207,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 90004906991,
+    "market_cap": 90368961645,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 10.1,
+   "expectations_gap_pts": 10.2,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0583,
    "hist_owner_cf_cagr_5y": 0.0261,
    "hist_revenue_cagr_5y": 0.0577,
-   "implied_growth": 0.1272,
+   "implied_growth": 0.1279,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price demands ~+10pts MORE growth than demonstrated \u2014 must believe in acceleration."
@@ -184,7 +230,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 15671223623,
+    "market_cap": 15587139846,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.0087
@@ -194,33 +240,10 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.1162,
+   "implied_growth": -0.1172,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
-  },
-  "ARCB": {
-   "assumptions": {
-    "base_cf": 115658000,
-    "base_cf_kind": "owner_earnings",
-    "coe_default_loading": false,
-    "discount_rate_source": "anchor",
-    "fade_years": 5,
-    "fiscal_year": 2025,
-    "market_cap": 3010903687,
-    "stage1_years": 5,
-    "terminal_growth": 0.025,
-    "wacc": 9.18963
-   },
-   "expectations_gap_pts": 16.6,
-   "gap_basis": "owner_cf",
-   "hist_fcf_cagr_5y": -0.0684,
-   "hist_owner_cf_cagr_5y": -0.0458,
-   "hist_revenue_cagr_5y": 0.064,
-   "implied_growth": 0.1201,
-   "implied_growth_clamped": false,
-   "trajectory_slope": null,
-   "verdict": "Price demands ~+17pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "ARLP": {
    "assumptions": {
@@ -230,17 +253,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3193954753,
+    "market_cap": 3239628667,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.75197
    },
-   "expectations_gap_pts": -50.8,
+   "expectations_gap_pts": -50.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0677,
    "hist_owner_cf_cagr_5y": 0.4067,
    "hist_revenue_cagr_5y": 0.1057,
-   "implied_growth": -0.1009,
+   "implied_growth": -0.0985,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 51pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -253,7 +276,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 4319880050,
+    "market_cap": 4311192591,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
@@ -263,33 +286,33 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.0436,
+   "implied_growth": -0.044,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
   },
-  "ATLO": {
+  "ATLC": {
    "assumptions": {
-    "base_cf": 19975000,
-    "base_cf_kind": "owner_earnings",
+    "base_cf": 628067000,
+    "base_cf_kind": "ocf_minus_da_proxy",
     "coe_default_loading": false,
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 306814093,
+    "market_cap": 1513211235,
     "stage1_years": 5,
     "terminal_growth": 0.025,
-    "wacc": 9.923129999999999
+    "wacc": 9.07227
    },
-   "expectations_gap_pts": 4.3,
+   "expectations_gap_pts": -83.1,
    "gap_basis": "owner_cf",
-   "hist_fcf_cagr_5y": -0.0617,
-   "hist_owner_cf_cagr_5y": 0.001,
-   "hist_revenue_cagr_5y": 0.0041,
-   "implied_growth": 0.0442,
+   "hist_fcf_cagr_5y": 0.5302,
+   "hist_owner_cf_cagr_5y": 0.5256,
+   "hist_revenue_cagr_5y": 0.336,
+   "implied_growth": -0.3051,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced roughly in line with demonstrated growth."
+   "verdict": "Priced 83pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "AVAL": {
    "assumptions": {
@@ -299,7 +322,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2018,
-    "market_cap": 5051424398,
+    "market_cap": 5116718888,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.923129999999999
@@ -309,7 +332,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.1591,
+   "implied_growth": -0.1567,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -322,20 +345,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1947777466,
+    "market_cap": 2110412344,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
    },
-   "expectations_gap_pts": -132.1,
+   "expectations_gap_pts": -130.8,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 1.1789,
-   "implied_growth": -0.1419,
+   "implied_growth": -0.1288,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 132pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 131pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "BDN": {
    "implied_growth": null,
@@ -349,20 +372,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3901656156,
+    "market_cap": 3979476766,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -10.6,
+   "expectations_gap_pts": -10.2,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0559,
    "hist_owner_cf_cagr_5y": -0.2406,
    "hist_revenue_cagr_5y": -0.0188,
-   "implied_growth": -0.3465,
+   "implied_growth": -0.3427,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 11pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 10pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "BHC": {
    "assumptions": {
@@ -372,20 +395,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3003864501,
+    "market_cap": 3121384301,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
    },
-   "expectations_gap_pts": -28.7,
+   "expectations_gap_pts": -28.1,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0336,
    "hist_owner_cf_cagr_5y": 0.001,
    "hist_revenue_cagr_5y": 0.0504,
-   "implied_growth": -0.2862,
+   "implied_growth": -0.2796,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 29pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 28pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "BTG": {
    "assumptions": {
@@ -395,7 +418,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 7028096762,
+    "market_cap": 6750672066,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
@@ -405,7 +428,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": 0.0252,
+   "implied_growth": 0.0181,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -418,17 +441,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 166745823269,
+    "market_cap": 164756999617,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 6.720180000000001
    },
-   "expectations_gap_pts": -30.8,
+   "expectations_gap_pts": -31.0,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0957,
    "hist_owner_cf_cagr_5y": 0.2921,
    "hist_revenue_cagr_5y": 0.0482,
-   "implied_growth": -0.0164,
+   "implied_growth": -0.0183,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 31pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -441,7 +464,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 1028686503,
+    "market_cap": 1256289638,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
@@ -464,7 +487,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3337264853,
+    "market_cap": 3435564691,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.75197
@@ -474,7 +497,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.078,
+   "implied_growth": -0.0731,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -487,17 +510,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3989530317,
+    "market_cap": 4107157647,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -97.1,
+   "expectations_gap_pts": -96.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1388,
    "hist_owner_cf_cagr_5y": 0.8967,
    "hist_revenue_cagr_5y": 0.2643,
-   "implied_growth": -0.0748,
+   "implied_growth": -0.0697,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 97pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -510,20 +533,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 5555637633,
+    "market_cap": 5752815750,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": 30.4,
+   "expectations_gap_pts": 31.1,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0398,
    "hist_owner_cf_cagr_5y": -0.0084,
    "hist_revenue_cagr_5y": 0.0712,
-   "implied_growth": 0.2959,
+   "implied_growth": 0.3029,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+30pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+31pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "CBL": {
    "assumptions": {
@@ -533,66 +556,43 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1498867018,
+    "market_cap": 1537854912,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 2.7,
+   "expectations_gap_pts": 3.1,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.0009,
-   "implied_growth": 0.0279,
+   "implied_growth": 0.0324,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
   },
-  "CF": {
+  "CCSI": {
    "assumptions": {
-    "base_cf": 1403000000,
+    "base_cf": 73027000,
     "base_cf_kind": "owner_earnings",
     "coe_default_loading": false,
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 18112146281,
+    "market_cap": 681320662,
     "stage1_years": 5,
     "terminal_growth": 0.025,
-    "wacc": 9.11139
+    "wacc": 11.37546
    },
-   "expectations_gap_pts": -10.0,
+   "expectations_gap_pts": 16.8,
    "gap_basis": "owner_cf",
-   "hist_fcf_cagr_5y": 0.1434,
-   "hist_owner_cf_cagr_5y": 0.0929,
-   "hist_revenue_cagr_5y": 0.1143,
-   "implied_growth": -0.0072,
+   "hist_fcf_cagr_5y": -0.125,
+   "hist_owner_cf_cagr_5y": -0.1827,
+   "hist_revenue_cagr_5y": 0.0109,
+   "implied_growth": -0.0148,
    "implied_growth_clamped": false,
-   "trajectory_slope": null,
-   "verdict": "Priced 10pts BELOW demonstrated growth \u2014 market expects deceleration."
-  },
-  "CHA": {
-   "assumptions": {
-    "base_cf": 128760000,
-    "base_cf_kind": "owner_earnings",
-    "coe_default_loading": false,
-    "discount_rate_source": "anchor",
-    "fade_years": 5,
-    "fiscal_year": 2025,
-    "market_cap": 2353065579,
-    "stage1_years": 5,
-    "terminal_growth": 0.025,
-    "wacc": 10.93536
-   },
-   "expectations_gap_pts": null,
-   "gap_basis": null,
-   "hist_fcf_cagr_5y": null,
-   "hist_owner_cf_cagr_5y": null,
-   "hist_revenue_cagr_5y": null,
-   "implied_growth": 0.101,
-   "implied_growth_clamped": false,
-   "trajectory_slope": null,
-   "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
+   "trajectory_slope": 1.0,
+   "verdict": "Price demands ~+17pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "CHEF": {
    "assumptions": {
@@ -602,17 +602,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 4542959115,
+    "market_cap": 4643575558,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 6.720180000000001
    },
-   "expectations_gap_pts": -18.0,
+   "expectations_gap_pts": -17.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1948,
    "hist_owner_cf_cagr_5y": 0.3404,
    "hist_revenue_cagr_5y": 0.3014,
-   "implied_growth": 0.1607,
+   "implied_growth": 0.1645,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 18pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -625,20 +625,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 742304161,
+    "market_cap": 733490501,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 53.6,
+   "expectations_gap_pts": 53.4,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0418,
    "hist_owner_cf_cagr_5y": -0.0777,
    "hist_revenue_cagr_5y": 0.1528,
-   "implied_growth": 0.4586,
+   "implied_growth": 0.4561,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+54pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+53pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "CMBT": {
    "assumptions": {
@@ -648,17 +648,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2024,
-    "market_cap": 4863244868,
+    "market_cap": 4950295635,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.75197
    },
-   "expectations_gap_pts": -0.4,
+   "expectations_gap_pts": -0.1,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.0017,
-   "implied_growth": -0.0025,
+   "implied_growth": 0.0005,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -671,20 +671,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1563141457,
+    "market_cap": 1590946739,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -35.6,
+   "expectations_gap_pts": -35.3,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.1378,
-   "implied_growth": -0.2179,
+   "implied_growth": -0.2148,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 36pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 35pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "CON": {
    "assumptions": {
@@ -694,17 +694,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 5457759210,
+    "market_cap": 5554672866,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
    },
-   "expectations_gap_pts": 17.8,
+   "expectations_gap_pts": 18.1,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0479,
    "hist_owner_cf_cagr_5y": -0.0631,
    "hist_revenue_cagr_5y": 0.0785,
-   "implied_growth": 0.1145,
+   "implied_growth": 0.1176,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price demands ~+18pts MORE growth than demonstrated \u2014 must believe in acceleration."
@@ -717,20 +717,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 5702473153,
+    "market_cap": 5955145346,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -45.8,
+   "expectations_gap_pts": -45.0,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.352,
-   "implied_growth": -0.1057,
+   "implied_growth": -0.0981,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 46pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 45pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "CROX": {
    "assumptions": {
@@ -740,20 +740,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 7076178514,
+    "market_cap": 7308690173,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": -54.5,
+   "expectations_gap_pts": -53.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.24,
    "hist_owner_cf_cagr_5y": 0.5474,
    "hist_revenue_cagr_5y": 0.2386,
-   "implied_growth": 0.0021,
+   "implied_growth": 0.0081,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 55pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 54pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "CTVA": {
    "assumptions": {
@@ -763,20 +763,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 7996344502,
+    "market_cap": 8179823565,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
    },
-   "expectations_gap_pts": -22.7,
+   "expectations_gap_pts": -22.3,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1212,
    "hist_owner_cf_cagr_5y": 0.0429,
    "hist_revenue_cagr_5y": 0.0412,
-   "implied_growth": -0.1839,
+   "implied_growth": -0.1799,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 23pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 22pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "CWEN": {
    "assumptions": {
@@ -786,17 +786,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 8351094832,
+    "market_cap": 8807371199,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.1015999999999995
    },
-   "expectations_gap_pts": -13.4,
+   "expectations_gap_pts": -12.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.026,
    "hist_owner_cf_cagr_5y": 0.1009,
    "hist_revenue_cagr_5y": 0.0357,
-   "implied_growth": -0.0329,
+   "implied_growth": -0.0242,
    "implied_growth_clamped": false,
    "trajectory_slope": -0.7476635514018692,
    "verdict": "Priced 13pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -809,20 +809,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2703411889,
+    "market_cap": 2775133892,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -32.8,
+   "expectations_gap_pts": -32.3,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.177,
-   "implied_growth": -0.1506,
+   "implied_growth": -0.146,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 33pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 32pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "DAO": {
    "assumptions": {
@@ -832,17 +832,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2409676846,
+    "market_cap": 2495930675,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 6.720180000000001
    },
-   "expectations_gap_pts": 24.8,
+   "expectations_gap_pts": 25.5,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.1172,
-   "implied_growth": 0.365,
+   "implied_growth": 0.372,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price demands ~+25pts MORE growth than demonstrated \u2014 must believe in acceleration."
@@ -855,20 +855,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 675908968,
+    "market_cap": 681855393,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.825330000000001
    },
-   "expectations_gap_pts": -19.6,
+   "expectations_gap_pts": -19.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0651,
    "hist_owner_cf_cagr_5y": 0.0769,
    "hist_revenue_cagr_5y": 0.0009,
-   "implied_growth": -0.1193,
+   "implied_growth": -0.1177,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 20pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 19pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "DEA": {
    "assumptions": {
@@ -878,17 +878,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1102630724,
+    "market_cap": 1140855289,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": -18.2,
+   "expectations_gap_pts": -17.6,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.0652,
-   "implied_growth": -0.1168,
+   "implied_growth": -0.1111,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 18pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -901,20 +901,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 890234930,
+    "market_cap": 920266115,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.0087
    },
-   "expectations_gap_pts": -55.1,
+   "expectations_gap_pts": -54.4,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.1608,
-   "implied_growth": -0.3899,
+   "implied_growth": -0.3832,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 55pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 54pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "DLTR": {
    "assumptions": {
@@ -924,17 +924,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 26249479863,
+    "market_cap": 27581655038,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 6.720180000000001
    },
-   "expectations_gap_pts": 16.6,
+   "expectations_gap_pts": 17.4,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.1028,
    "hist_owner_cf_cagr_5y": -0.09,
    "hist_revenue_cagr_5y": -0.0533,
-   "implied_growth": 0.0761,
+   "implied_growth": 0.0845,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price demands ~+17pts MORE growth than demonstrated \u2014 must believe in acceleration."
@@ -947,17 +947,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2918579130,
+    "market_cap": 3004842576,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": -27.1,
+   "expectations_gap_pts": -26.6,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.302,
-   "implied_growth": 0.0306,
+   "implied_growth": 0.0356,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 27pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -970,7 +970,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 12131522372,
+    "market_cap": 12118313603,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
@@ -980,7 +980,7 @@
    "hist_fcf_cagr_5y": 0.0009,
    "hist_owner_cf_cagr_5y": 0.0397,
    "hist_revenue_cagr_5y": 0.0339,
-   "implied_growth": -0.0411,
+   "implied_growth": -0.0413,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 8pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -993,20 +993,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 2358490044,
+    "market_cap": 2313403568,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 11.66886
    },
-   "expectations_gap_pts": -18.3,
+   "expectations_gap_pts": -18.7,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.1038,
    "hist_owner_cf_cagr_5y": -0.0894,
    "hist_revenue_cagr_5y": -0.0654,
-   "implied_growth": -0.272,
+   "implied_growth": -0.276,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 18pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 19pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "EAT": {
    "assumptions": {
@@ -1016,43 +1016,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 8728952118,
+    "market_cap": 9157672883,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": -17.1,
+   "expectations_gap_pts": -16.2,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1512,
    "hist_owner_cf_cagr_5y": 0.2431,
    "hist_revenue_cagr_5y": 0.1171,
-   "implied_growth": 0.0721,
+   "implied_growth": 0.081,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 17pts BELOW demonstrated growth \u2014 market expects deceleration."
-  },
-  "ECO": {
-   "assumptions": {
-    "base_cf": 69860967,
-    "base_cf_kind": "ocf_minus_da_proxy",
-    "coe_default_loading": false,
-    "discount_rate_source": "anchor",
-    "fade_years": 5,
-    "fiscal_year": 2025,
-    "market_cap": 3233483482,
-    "stage1_years": 5,
-    "terminal_growth": 0.025,
-    "wacc": 9.18963
-   },
-   "expectations_gap_pts": -0.6,
-   "gap_basis": "revenue_fallback",
-   "hist_fcf_cagr_5y": null,
-   "hist_owner_cf_cagr_5y": null,
-   "hist_revenue_cagr_5y": 0.2337,
-   "implied_growth": 0.2272,
-   "implied_growth_clamped": false,
-   "trajectory_slope": null,
-   "verdict": "Priced roughly in line with demonstrated growth."
+   "verdict": "Priced 16pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "ECPG": {
    "assumptions": {
@@ -1062,20 +1039,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2540670066,
+    "market_cap": 2119452045,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -22.0,
+   "expectations_gap_pts": -25.2,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.1453,
    "hist_owner_cf_cagr_5y": 0.1639,
    "hist_revenue_cagr_5y": 0.0333,
-   "implied_growth": -0.0563,
+   "implied_growth": -0.0878,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 22pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 25pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "EEFT": {
    "assumptions": {
@@ -1085,17 +1062,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2630407632,
+    "market_cap": 2642563857,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 11.37546
    },
-   "expectations_gap_pts": -69.5,
+   "expectations_gap_pts": -69.4,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2274,
    "hist_owner_cf_cagr_5y": 0.6547,
    "hist_revenue_cagr_5y": 0.1132,
-   "implied_growth": -0.0399,
+   "implied_growth": -0.039,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 69pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -1108,7 +1085,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2339491265,
+    "market_cap": 2497004079,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.75197
@@ -1118,7 +1095,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.0659,
+   "implied_growth": -0.0551,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -1131,17 +1108,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 102012866430,
+    "market_cap": 101302798269,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.0087
    },
-   "expectations_gap_pts": 60.7,
+   "expectations_gap_pts": 60.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2563,
    "hist_owner_cf_cagr_5y": -0.2062,
    "hist_revenue_cagr_5y": 0.1837,
-   "implied_growth": 0.4012,
+   "implied_growth": 0.3997,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price demands ~+61pts MORE growth than demonstrated \u2014 must believe in acceleration."
@@ -1149,6 +1126,29 @@
   "ESEA": {
    "implied_growth": null,
    "reason": "negative_base_cash_flow"
+  },
+  "EXEL": {
+   "assumptions": {
+    "base_cf": 803196000,
+    "base_cf_kind": "owner_earnings",
+    "coe_default_loading": false,
+    "discount_rate_source": "anchor",
+    "fade_years": 5,
+    "fiscal_year": 2026,
+    "market_cap": 17751793173,
+    "stage1_years": 5,
+    "terminal_growth": 0.025,
+    "wacc": 10.49526
+   },
+   "expectations_gap_pts": -4.2,
+   "gap_basis": "owner_cf",
+   "hist_fcf_cagr_5y": 0.0928,
+   "hist_owner_cf_cagr_5y": 0.1679,
+   "hist_revenue_cagr_5y": 0.1569,
+   "implied_growth": 0.1257,
+   "implied_growth_clamped": false,
+   "trajectory_slope": null,
+   "verdict": "Priced roughly in line with demonstrated growth."
   },
   "FE": {
    "implied_growth": null,
@@ -1162,17 +1162,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 300369589,
+    "market_cap": 312106344,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": -31.3,
+   "expectations_gap_pts": -30.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2176,
    "hist_owner_cf_cagr_5y": 0.2176,
    "hist_revenue_cagr_5y": -0.0084,
-   "implied_growth": -0.0957,
+   "implied_growth": -0.0886,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 31pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -1185,17 +1185,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2793808056,
+    "market_cap": 2838231304,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
    },
-   "expectations_gap_pts": -31.9,
+   "expectations_gap_pts": -31.6,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.2769,
-   "implied_growth": -0.0422,
+   "implied_growth": -0.0394,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 32pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -1208,20 +1208,43 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 6544864534,
+    "market_cap": 6397432891,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": -10.4,
+   "expectations_gap_pts": -10.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1738,
    "hist_owner_cf_cagr_5y": 0.2277,
    "hist_revenue_cagr_5y": 0.0726,
-   "implied_growth": 0.1234,
+   "implied_growth": 0.1191,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 10pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 11pts BELOW demonstrated growth \u2014 market expects deceleration."
+  },
+  "GASS": {
+   "assumptions": {
+    "base_cf": 84770251,
+    "base_cf_kind": "fcf_fallback",
+    "coe_default_loading": false,
+    "discount_rate_source": "anchor",
+    "fade_years": 5,
+    "fiscal_year": 2025,
+    "market_cap": 311941824,
+    "stage1_years": 5,
+    "terminal_growth": 0.025,
+    "wacc": 9.18963
+   },
+   "expectations_gap_pts": -42.9,
+   "gap_basis": "owner_cf",
+   "hist_fcf_cagr_5y": 0.204,
+   "hist_owner_cf_cagr_5y": 0.204,
+   "hist_revenue_cagr_5y": 0.0361,
+   "implied_growth": -0.2255,
+   "implied_growth_clamped": false,
+   "trajectory_slope": null,
+   "verdict": "Priced 43pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "GCMG": {
    "assumptions": {
@@ -1231,20 +1254,43 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 760410801,
+    "market_cap": 796475284,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -21.4,
+   "expectations_gap_pts": -20.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2123,
    "hist_owner_cf_cagr_5y": 0.2688,
    "hist_revenue_cagr_5y": 0.0533,
-   "implied_growth": 0.0544,
+   "implied_growth": 0.0627,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 21pts BELOW demonstrated growth \u2014 market expects deceleration."
+  },
+  "GCT": {
+   "assumptions": {
+    "base_cf": 137831000,
+    "base_cf_kind": "owner_earnings",
+    "coe_default_loading": false,
+    "discount_rate_source": "anchor",
+    "fade_years": 5,
+    "fiscal_year": 2025,
+    "market_cap": 2066908439,
+    "stage1_years": 5,
+    "terminal_growth": 0.025,
+    "wacc": 11.37546
+   },
+   "expectations_gap_pts": -22.7,
+   "gap_basis": "owner_cf",
+   "hist_fcf_cagr_5y": 0.4115,
+   "hist_owner_cf_cagr_5y": 0.3007,
+   "hist_revenue_cagr_5y": 0.3617,
+   "implied_growth": 0.074,
+   "implied_growth_clamped": false,
+   "trajectory_slope": null,
+   "verdict": "Priced 23pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "GSAT": {
    "assumptions": {
@@ -1254,17 +1300,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 10796517799,
+    "market_cap": 10958472281,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.825330000000001
    },
-   "expectations_gap_pts": -7.1,
+   "expectations_gap_pts": -6.8,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.1627,
-   "implied_growth": 0.0916,
+   "implied_growth": 0.0944,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 7pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -1277,20 +1323,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1417273491,
+    "market_cap": 1446101874,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -45.6,
+   "expectations_gap_pts": -45.2,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": 0.5858,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.2207,
-   "implied_growth": -0.2351,
+   "implied_growth": -0.2315,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 46pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 45pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "GTE": {
    "assumptions": {
@@ -1300,20 +1346,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 329034014,
+    "market_cap": 355569022,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.0087
    },
-   "expectations_gap_pts": -31.2,
+   "expectations_gap_pts": -29.8,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.202,
-   "implied_growth": -0.1098,
+   "implied_growth": -0.0964,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 31pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 30pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "HAE": {
    "assumptions": {
@@ -1323,17 +1369,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 5710789662,
+    "market_cap": 5797233973,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
    },
-   "expectations_gap_pts": 3.7,
+   "expectations_gap_pts": 4.0,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2941,
    "hist_owner_cf_cagr_5y": 0.0682,
    "hist_revenue_cagr_5y": 0.0891,
-   "implied_growth": 0.1054,
+   "implied_growth": 0.108,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -1346,7 +1392,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2024,
-    "market_cap": 5112412572,
+    "market_cap": 5251598898,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
@@ -1356,7 +1402,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.1561,
+   "implied_growth": -0.1514,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -1369,20 +1415,43 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 14398356167,
+    "market_cap": 14793328788,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.49526
    },
-   "expectations_gap_pts": 6.3,
+   "expectations_gap_pts": 6.8,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.6485,
    "hist_owner_cf_cagr_5y": 0.1986,
    "hist_revenue_cagr_5y": 0.3916,
-   "implied_growth": 0.2614,
+   "implied_growth": 0.2668,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price assumes modest acceleration (+6pts above demonstrated)."
+   "verdict": "Price assumes modest acceleration (+7pts above demonstrated)."
+  },
+  "HAS": {
+   "assumptions": {
+    "base_cf": 829900000,
+    "base_cf_kind": "fcf_fallback",
+    "coe_default_loading": false,
+    "discount_rate_source": "anchor",
+    "fade_years": 5,
+    "fiscal_year": 2025,
+    "market_cap": 17004494044,
+    "stage1_years": 5,
+    "terminal_growth": 0.025,
+    "wacc": 10.93536
+   },
+   "expectations_gap_pts": 1.3,
+   "gap_basis": "owner_cf",
+   "hist_fcf_cagr_5y": -0.0049,
+   "hist_owner_cf_cagr_5y": 0.109,
+   "hist_revenue_cagr_5y": -0.0037,
+   "implied_growth": 0.1225,
+   "implied_growth_clamped": false,
+   "trajectory_slope": null,
+   "verdict": "Priced roughly in line with demonstrated growth."
   },
   "HCI": {
    "assumptions": {
@@ -1392,20 +1461,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2374704000,
+    "market_cap": 2519243613,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -60.7,
+   "expectations_gap_pts": -59.7,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.4318,
    "hist_owner_cf_cagr_5y": 0.5124,
    "hist_revenue_cagr_5y": 0.2375,
-   "implied_growth": -0.0945,
+   "implied_growth": -0.0842,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 61pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 60pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "HG": {
    "assumptions": {
@@ -1415,7 +1484,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3677830918,
+    "market_cap": 3672904691,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
@@ -1425,7 +1494,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.2149,
-   "implied_growth": -0.1938,
+   "implied_growth": -0.194,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 41pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -1438,7 +1507,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 9592951316,
+    "market_cap": 9753533411,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
@@ -1448,7 +1517,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": 0.204,
+   "implied_growth": 0.2071,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -1461,20 +1530,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 434426066,
+    "market_cap": 453047677,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.1015999999999995
    },
-   "expectations_gap_pts": 10.9,
+   "expectations_gap_pts": 11.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.28,
    "hist_owner_cf_cagr_5y": -0.0261,
    "hist_revenue_cagr_5y": 0.1396,
-   "implied_growth": 0.0826,
+   "implied_growth": 0.0898,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+11pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+12pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "HOG": {
    "assumptions": {
@@ -1484,20 +1553,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3395365473,
+    "market_cap": 3599867961,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": -46.9,
+   "expectations_gap_pts": -45.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.1688,
    "hist_owner_cf_cagr_5y": 0.449,
    "hist_revenue_cagr_5y": 0.0199,
-   "implied_growth": -0.0204,
+   "implied_growth": -0.0096,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 47pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 46pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "HOV": {
    "assumptions": {
@@ -1507,17 +1576,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 631539724,
+    "market_cap": 658865837,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.461030000000001
    },
-   "expectations_gap_pts": -0.8,
+   "expectations_gap_pts": -0.1,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.105,
    "hist_owner_cf_cagr_5y": 0.0103,
    "hist_revenue_cagr_5y": 0.0491,
-   "implied_growth": 0.002,
+   "implied_growth": 0.0098,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -1530,17 +1599,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1958712418,
+    "market_cap": 2020959066,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.49526
    },
-   "expectations_gap_pts": -72.4,
+   "expectations_gap_pts": -71.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.3717,
    "hist_owner_cf_cagr_5y": 0.5996,
    "hist_revenue_cagr_5y": 0.403,
-   "implied_growth": -0.1248,
+   "implied_growth": -0.1191,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 72pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -1553,17 +1622,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1035356608,
+    "market_cap": 1058766203,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -38.0,
+   "expectations_gap_pts": -37.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0721,
    "hist_owner_cf_cagr_5y": 0.2126,
    "hist_revenue_cagr_5y": 0.0738,
-   "implied_growth": -0.1674,
+   "implied_growth": -0.1635,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 38pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -1576,20 +1645,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 17218795638,
+    "market_cap": 18139308639,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 5.9,
+   "expectations_gap_pts": 6.8,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0239,
    "hist_owner_cf_cagr_5y": -0.0206,
    "hist_revenue_cagr_5y": 0.3043,
-   "implied_growth": 0.038,
+   "implied_growth": 0.0471,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price assumes modest acceleration (+6pts above demonstrated)."
+   "verdict": "Price assumes modest acceleration (+7pts above demonstrated)."
   },
   "IDT": {
    "assumptions": {
@@ -1599,17 +1668,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 2059748055,
+    "market_cap": 2086201203,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.825330000000001
    },
-   "expectations_gap_pts": 15.2,
+   "expectations_gap_pts": 15.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0639,
    "hist_owner_cf_cagr_5y": -0.0272,
    "hist_revenue_cagr_5y": -0.0215,
-   "implied_growth": 0.1252,
+   "implied_growth": 0.1275,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price demands ~+15pts MORE growth than demonstrated \u2014 must believe in acceleration."
@@ -1622,17 +1691,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2858979324,
+    "market_cap": 2869129392,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": -10.4,
+   "expectations_gap_pts": -10.3,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": 0.0587,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.0243,
-   "implied_growth": -0.0794,
+   "implied_growth": -0.0788,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 10pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -1645,20 +1714,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 4454934645,
+    "market_cap": 4643052050,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.825330000000001
    },
-   "expectations_gap_pts": 7.4,
+   "expectations_gap_pts": 8.1,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0727,
    "hist_owner_cf_cagr_5y": 0.0148,
    "hist_revenue_cagr_5y": 0.0836,
-   "implied_growth": 0.0885,
+   "implied_growth": 0.096,
    "implied_growth_clamped": false,
    "trajectory_slope": 0.6325000000000001,
-   "verdict": "Price assumes modest acceleration (+7pts above demonstrated)."
+   "verdict": "Price assumes modest acceleration (+8pts above demonstrated)."
   },
   "ITGR": {
    "assumptions": {
@@ -1668,7 +1737,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 4304572837,
+    "market_cap": 4305422750,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
@@ -1691,7 +1760,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 13557731845,
+    "market_cap": 13879005152,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 6.720180000000001
@@ -1701,7 +1770,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.1967,
+   "implied_growth": -0.1931,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -1714,7 +1783,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1193876921,
+    "market_cap": 1185263055,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
@@ -1724,7 +1793,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.1907,
+   "implied_growth": -0.1919,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -1737,20 +1806,43 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 4842584941,
+    "market_cap": 4998960003,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -16.5,
+   "expectations_gap_pts": -16.0,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.068,
    "hist_owner_cf_cagr_5y": 0.0956,
    "hist_revenue_cagr_5y": 0.0513,
-   "implied_growth": -0.0695,
+   "implied_growth": -0.064,
    "implied_growth_clamped": false,
    "trajectory_slope": 1.0,
-   "verdict": "Priced 17pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 16pts BELOW demonstrated growth \u2014 market expects deceleration."
+  },
+  "KFY": {
+   "assumptions": {
+    "base_cf": 286379000,
+    "base_cf_kind": "owner_earnings",
+    "coe_default_loading": false,
+    "discount_rate_source": "anchor",
+    "fade_years": 5,
+    "fiscal_year": 2026,
+    "market_cap": 4257226949,
+    "stage1_years": 5,
+    "terminal_growth": 0.025,
+    "wacc": 9.18963
+   },
+   "expectations_gap_pts": -12.6,
+   "gap_basis": "owner_cf",
+   "hist_fcf_cagr_5y": 0.0804,
+   "hist_owner_cf_cagr_5y": 0.1455,
+   "hist_revenue_cagr_5y": 0.1006,
+   "implied_growth": 0.0197,
+   "implied_growth_clamped": false,
+   "trajectory_slope": null,
+   "verdict": "Priced 13pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "KIM": {
    "assumptions": {
@@ -1760,17 +1852,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 17010940799,
+    "market_cap": 17196997406,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": -8.0,
+   "expectations_gap_pts": -7.8,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.075,
    "hist_owner_cf_cagr_5y": 0.0704,
    "hist_revenue_cagr_5y": 0.1513,
-   "implied_growth": -0.0097,
+   "implied_growth": -0.0079,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 8pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -1783,20 +1875,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 7164953880,
+    "market_cap": 7552312607,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
    },
-   "expectations_gap_pts": -69.7,
+   "expectations_gap_pts": -68.6,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": 1.8815,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 1.0476,
-   "implied_growth": 0.3509,
+   "implied_growth": 0.3614,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 70pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 69pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "KOD": {
    "implied_growth": null,
@@ -1810,17 +1902,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 15957007912,
+    "market_cap": 16103747376,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": -4.8,
+   "expectations_gap_pts": -4.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0612,
    "hist_owner_cf_cagr_5y": 0.1112,
    "hist_revenue_cagr_5y": 0.0763,
-   "implied_growth": 0.0637,
+   "implied_growth": 0.0653,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -1833,20 +1925,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 5436204200,
+    "market_cap": 5401990342,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
    },
-   "expectations_gap_pts": 20.5,
+   "expectations_gap_pts": 20.4,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.3731,
-   "implied_growth": 0.5784,
+   "implied_growth": 0.577,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+21pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+20pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "LIND": {
    "assumptions": {
@@ -1856,20 +1948,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2087443823,
+    "market_cap": 2199657903,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": -35.2,
+   "expectations_gap_pts": -34.2,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": 0.0505,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.5641,
-   "implied_growth": 0.2121,
+   "implied_growth": 0.2223,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 35pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 34pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "LITE": {
    "assumptions": {
@@ -1879,43 +1971,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 48270315175,
+    "market_cap": 56836765108,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 11.66886
    },
-   "expectations_gap_pts": 76.9,
+   "expectations_gap_pts": 80.7,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0901,
    "hist_owner_cf_cagr_5y": -0.1995,
    "hist_revenue_cagr_5y": 0.1158,
-   "implied_growth": 0.5699,
+   "implied_growth": 0.6076,
    "implied_growth_clamped": false,
    "trajectory_slope": 1.0,
-   "verdict": "Price demands ~+77pts MORE growth than demonstrated \u2014 must believe in acceleration."
-  },
-  "LPG": {
-   "assumptions": {
-    "base_cf": 138399927,
-    "base_cf_kind": "ocf_minus_da_proxy",
-    "coe_default_loading": false,
-    "discount_rate_source": "anchor",
-    "fade_years": 5,
-    "fiscal_year": 2026,
-    "market_cap": 2024904260,
-    "stage1_years": 5,
-    "terminal_growth": 0.025,
-    "wacc": 7.75197
-   },
-   "expectations_gap_pts": -32.6,
-   "gap_basis": "owner_cf",
-   "hist_fcf_cagr_5y": 0.2221,
-   "hist_owner_cf_cagr_5y": 0.3021,
-   "hist_revenue_cagr_5y": 0.0879,
-   "implied_growth": -0.0237,
-   "implied_growth_clamped": false,
-   "trajectory_slope": null,
-   "verdict": "Priced 33pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Price demands ~+81pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "LTH": {
    "implied_growth": null,
@@ -1929,17 +1998,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 576195909292,
+    "market_cap": 586022769946,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -0.2,
+   "expectations_gap_pts": 0.1,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2004,
    "hist_owner_cf_cagr_5y": 0.1833,
    "hist_revenue_cagr_5y": 0.1647,
-   "implied_growth": 0.1809,
+   "implied_growth": 0.1841,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -1952,20 +2021,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 6571883055,
+    "market_cap": 6322787319,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -15.3,
+   "expectations_gap_pts": -16.0,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0143,
    "hist_owner_cf_cagr_5y": 0.305,
    "hist_revenue_cagr_5y": 0.0701,
-   "implied_growth": 0.1521,
+   "implied_growth": 0.145,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 15pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 16pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "MRP": {
    "implied_growth": null,
@@ -1979,20 +2048,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 3588232656,
+    "market_cap": 3733829884,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.825330000000001
    },
-   "expectations_gap_pts": -79.2,
+   "expectations_gap_pts": -78.5,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.7915,
-   "implied_growth": -0.0003,
+   "implied_growth": 0.0068,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 79pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 78pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "MU": {
    "assumptions": {
@@ -2002,20 +2071,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 782333899624,
+    "market_cap": 899741665054,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 13.44882
    },
-   "expectations_gap_pts": -179.2,
+   "expectations_gap_pts": -176.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 1.9871,
    "hist_owner_cf_cagr_5y": 1.8704,
    "hist_revenue_cagr_5y": 0.3689,
-   "implied_growth": 0.0782,
+   "implied_growth": 0.1058,
    "implied_growth_clamped": false,
    "trajectory_slope": 1.0,
-   "verdict": "Priced 179pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 176pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "NBR": {
    "implied_growth": null,
@@ -2029,17 +2098,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 123920731285,
+    "market_cap": 122592157197,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
    },
-   "expectations_gap_pts": -37.5,
+   "expectations_gap_pts": -37.7,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1531,
    "hist_owner_cf_cagr_5y": 0.4352,
    "hist_revenue_cagr_5y": 0.1454,
-   "implied_growth": 0.0597,
+   "implied_growth": 0.0578,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 38pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -2052,20 +2121,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1509800003,
+    "market_cap": 1576019251,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
    },
-   "expectations_gap_pts": 66.2,
+   "expectations_gap_pts": 67.1,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.3169,
    "hist_owner_cf_cagr_5y": -0.256,
    "hist_revenue_cagr_5y": 0.09,
-   "implied_growth": 0.4058,
+   "implied_growth": 0.4147,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+66pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+67pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "NGVT": {
    "assumptions": {
@@ -2075,20 +2144,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2222704362,
+    "market_cap": 2534684094,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
    },
-   "expectations_gap_pts": 34.7,
+   "expectations_gap_pts": 37.0,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0024,
    "hist_owner_cf_cagr_5y": -0.4352,
    "hist_revenue_cagr_5y": -0.0081,
-   "implied_growth": -0.0878,
+   "implied_growth": -0.065,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+35pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+37pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "NRDS": {
    "assumptions": {
@@ -2098,20 +2167,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 742167277,
+    "market_cap": 754932763,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.825330000000001
    },
-   "expectations_gap_pts": -26.8,
+   "expectations_gap_pts": -26.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.5601,
    "hist_owner_cf_cagr_5y": 0.1908,
    "hist_revenue_cagr_5y": 0.2781,
-   "implied_growth": -0.0768,
+   "implied_growth": -0.0737,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 27pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 26pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "NREF": {
    "assumptions": {
@@ -2121,7 +2190,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 307160234,
+    "market_cap": 337219792,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
@@ -2131,33 +2200,10 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": 0.0033,
+   "implied_growth": 0.0194,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
-  },
-  "NTR": {
-   "assumptions": {
-    "base_cf": 2754000000,
-    "base_cf_kind": "owner_earnings",
-    "coe_default_loading": false,
-    "discount_rate_source": "anchor",
-    "fade_years": 5,
-    "fiscal_year": 2025,
-    "market_cap": 34361512849,
-    "stage1_years": 5,
-    "terminal_growth": 0.025,
-    "wacc": 9.11139
-   },
-   "expectations_gap_pts": -23.2,
-   "gap_basis": "owner_cf",
-   "hist_fcf_cagr_5y": 0.0226,
-   "hist_owner_cf_cagr_5y": 0.2186,
-   "hist_revenue_cagr_5y": 0.0516,
-   "implied_growth": -0.0132,
-   "implied_growth_clamped": false,
-   "trajectory_slope": null,
-   "verdict": "Priced 23pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "NUTX": {
    "assumptions": {
@@ -2167,20 +2213,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1336587350,
+    "market_cap": 1405341006,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
    },
-   "expectations_gap_pts": -115.3,
+   "expectations_gap_pts": -114.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.9398,
    "hist_owner_cf_cagr_5y": 1.1277,
    "hist_revenue_cagr_5y": 2.5348,
-   "implied_growth": -0.0253,
+   "implied_growth": -0.0169,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 115pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 114pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "NXT": {
    "assumptions": {
@@ -2190,20 +2236,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 14571060188,
+    "market_cap": 16393210434,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 11.66886
    },
-   "expectations_gap_pts": -90.2,
+   "expectations_gap_pts": -87.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.4111,
    "hist_owner_cf_cagr_5y": 1.0864,
    "hist_revenue_cagr_5y": 0.2438,
-   "implied_growth": 0.184,
+   "implied_growth": 0.2071,
    "implied_growth_clamped": false,
    "trajectory_slope": 1.0,
-   "verdict": "Priced 90pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 88pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "OGE": {
    "assumptions": {
@@ -2213,7 +2259,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 10462401270,
+    "market_cap": 10466536010,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.1015999999999995
@@ -2223,7 +2269,7 @@
    "hist_fcf_cagr_5y": -0.1259,
    "hist_owner_cf_cagr_5y": 1.1827,
    "hist_revenue_cagr_5y": 0.0896,
-   "implied_growth": 0.338,
+   "implied_growth": 0.3381,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 84pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -2236,20 +2282,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 935945064,
+    "market_cap": 983931267,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -18.0,
+   "expectations_gap_pts": -17.1,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0862,
    "hist_owner_cf_cagr_5y": 0.0402,
    "hist_revenue_cagr_5y": 0.0645,
-   "implied_growth": -0.1394,
+   "implied_growth": -0.1307,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 18pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 17pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "OUT": {
    "assumptions": {
@@ -2259,17 +2305,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 5638088642,
+    "market_cap": 5720872118,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 7.6,
+   "expectations_gap_pts": 7.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.232,
    "hist_owner_cf_cagr_5y": 0.0178,
    "hist_revenue_cagr_5y": 0.0818,
-   "implied_growth": 0.0937,
+   "implied_growth": 0.0963,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price assumes modest acceleration (+8pts above demonstrated)."
@@ -2282,20 +2328,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 835639907,
+    "market_cap": 863870996,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 11.37546
    },
-   "expectations_gap_pts": 10.5,
+   "expectations_gap_pts": 11.1,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.3283,
    "hist_owner_cf_cagr_5y": 0.2311,
    "hist_revenue_cagr_5y": 0.2774,
-   "implied_growth": 0.3356,
+   "implied_growth": 0.3425,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+10pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+11pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "PCRX": {
    "assumptions": {
@@ -2305,7 +2351,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1453602999,
+    "market_cap": 1452804816,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.54659
@@ -2315,7 +2361,7 @@
    "hist_fcf_cagr_5y": 0.2835,
    "hist_owner_cf_cagr_5y": -0.0831,
    "hist_revenue_cagr_5y": 0.1123,
-   "implied_growth": 0.0006,
+   "implied_growth": 0.0005,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price assumes modest acceleration (+8pts above demonstrated)."
@@ -2328,17 +2374,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2380759337,
+    "market_cap": 2479608684,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": -2.7,
+   "expectations_gap_pts": -1.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0168,
    "hist_owner_cf_cagr_5y": 0.0326,
    "hist_revenue_cagr_5y": 0.2721,
-   "implied_growth": 0.0061,
+   "implied_growth": 0.0131,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -2351,20 +2397,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 137537686140,
+    "market_cap": 136045832754,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -33.4,
+   "expectations_gap_pts": -33.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2082,
    "hist_owner_cf_cagr_5y": 0.2423,
    "hist_revenue_cagr_5y": 0.155,
-   "implied_growth": -0.0915,
+   "implied_growth": -0.0934,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 33pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 34pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "PGY": {
    "assumptions": {
@@ -2374,20 +2420,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1452838543,
+    "market_cap": 1606609263,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 11.37546
    },
-   "expectations_gap_pts": -60.1,
+   "expectations_gap_pts": -58.2,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": 1.3463,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.674,
-   "implied_growth": 0.0727,
+   "implied_growth": 0.0917,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 60pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 58pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "PK": {
    "assumptions": {
@@ -2397,20 +2443,66 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3206313069,
+    "market_cap": 3414698067,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 42.1,
+   "expectations_gap_pts": 43.3,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.128,
    "hist_owner_cf_cagr_5y": -0.2925,
    "hist_revenue_cagr_5y": 0.2443,
-   "implied_growth": 0.1289,
+   "implied_growth": 0.1403,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+42pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+43pts MORE growth than demonstrated \u2014 must believe in acceleration."
+  },
+  "PMTS": {
+   "assumptions": {
+    "base_cf": 19235000,
+    "base_cf_kind": "owner_earnings",
+    "coe_default_loading": false,
+    "discount_rate_source": "anchor",
+    "fade_years": 5,
+    "fiscal_year": 2025,
+    "market_cap": 328495925,
+    "stage1_years": 5,
+    "terminal_growth": 0.025,
+    "wacc": 9.07227
+   },
+   "expectations_gap_pts": 9.9,
+   "gap_basis": "owner_cf",
+   "hist_fcf_cagr_5y": 0.225,
+   "hist_owner_cf_cagr_5y": -0.0575,
+   "hist_revenue_cagr_5y": 0.1173,
+   "implied_growth": 0.041,
+   "implied_growth_clamped": false,
+   "trajectory_slope": null,
+   "verdict": "Price assumes modest acceleration (+10pts above demonstrated)."
+  },
+  "PNRG": {
+   "assumptions": {
+    "base_cf": 26083000,
+    "base_cf_kind": "owner_earnings",
+    "coe_default_loading": false,
+    "discount_rate_source": "anchor",
+    "fade_years": 5,
+    "fiscal_year": 2025,
+    "market_cap": 300836422,
+    "stage1_years": 5,
+    "terminal_growth": 0.025,
+    "wacc": 9.0087
+   },
+   "expectations_gap_pts": -6.2,
+   "gap_basis": "owner_cf",
+   "hist_fcf_cagr_5y": 0.1204,
+   "hist_owner_cf_cagr_5y": 0.032,
+   "hist_revenue_cagr_5y": 0.2647,
+   "implied_growth": -0.0295,
+   "implied_growth_clamped": false,
+   "trajectory_slope": null,
+   "verdict": "Priced 6pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "PRCH": {
    "assumptions": {
@@ -2420,17 +2512,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2317507247,
+    "market_cap": 2464995314,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -2.2,
+   "expectations_gap_pts": -1.0,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.421,
-   "implied_growth": 0.3985,
+   "implied_growth": 0.4113,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -2443,20 +2535,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1727752538,
+    "market_cap": 1876685919,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 6.720180000000001
    },
-   "expectations_gap_pts": -21.9,
+   "expectations_gap_pts": -20.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0495,
    "hist_owner_cf_cagr_5y": 0.0834,
    "hist_revenue_cagr_5y": 0.0424,
-   "implied_growth": -0.1356,
+   "implied_growth": -0.1225,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 22pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 21pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "PSA": {
    "assumptions": {
@@ -2466,17 +2558,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 62956902517,
+    "market_cap": 64042464821,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 2.0,
+   "expectations_gap_pts": 2.3,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.106,
-   "implied_growth": 0.1261,
+   "implied_growth": 0.1291,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -2489,20 +2581,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 5578251877,
+    "market_cap": 5762049405,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.49526
    },
-   "expectations_gap_pts": -41.8,
+   "expectations_gap_pts": -41.3,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.3537,
-   "implied_growth": -0.0648,
+   "implied_growth": -0.0589,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 42pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 41pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "QUAD": {
    "assumptions": {
@@ -2512,7 +2604,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 394112057,
+    "market_cap": 393093669,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
@@ -2522,7 +2614,7 @@
    "hist_fcf_cagr_5y": -0.1706,
    "hist_owner_cf_cagr_5y": -0.1583,
    "hist_revenue_cagr_5y": -0.0375,
-   "implied_growth": -0.1243,
+   "implied_growth": -0.1248,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -2535,20 +2627,24 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 10377527816,
+    "market_cap": 10820482542,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -10.6,
+   "expectations_gap_pts": -9.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": 0.1517,
    "hist_revenue_cagr_5y": 0.0851,
-   "implied_growth": 0.0453,
+   "implied_growth": 0.0528,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 11pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 10pts BELOW demonstrated growth \u2014 market expects deceleration."
+  },
+  "RCEL": {
+   "implied_growth": null,
+   "reason": "negative_base_cash_flow"
   },
   "RHLD": {
    "assumptions": {
@@ -2558,7 +2654,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 963960588,
+    "market_cap": 1023115796,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
@@ -2568,7 +2664,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.1677,
+   "implied_growth": -0.1572,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -2581,20 +2677,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 9203240621,
+    "market_cap": 9408140019,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 16.3,
+   "expectations_gap_pts": 16.7,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0007,
    "hist_owner_cf_cagr_5y": -0.046,
    "hist_revenue_cagr_5y": 0.3749,
-   "implied_growth": 0.1172,
+   "implied_growth": 0.1211,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+16pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+17pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "RLJ": {
    "assumptions": {
@@ -2604,17 +2700,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1893660109,
+    "market_cap": 1948027262,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 18.7,
+   "expectations_gap_pts": 19.2,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0948,
    "hist_owner_cf_cagr_5y": -0.1268,
    "hist_revenue_cagr_5y": 0.2333,
-   "implied_growth": 0.0607,
+   "implied_growth": 0.0657,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price demands ~+19pts MORE growth than demonstrated \u2014 must believe in acceleration."
@@ -2627,17 +2723,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 6220791800,
+    "market_cap": 6510140587,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 11.37546
    },
-   "expectations_gap_pts": 1.9,
+   "expectations_gap_pts": 2.8,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": 0.5847,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.1627,
-   "implied_growth": 0.1818,
+   "implied_growth": 0.1906,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -2650,17 +2746,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 14341638531,
+    "market_cap": 14291127146,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -41.8,
+   "expectations_gap_pts": -41.9,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.1996,
-   "implied_growth": -0.2186,
+   "implied_growth": -0.2193,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 42pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -2673,17 +2769,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2513649142,
+    "market_cap": 2526408720,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.1015999999999995
    },
-   "expectations_gap_pts": -30.8,
+   "expectations_gap_pts": -30.7,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.076,
-   "implied_growth": -0.2316,
+   "implied_growth": -0.2308,
    "implied_growth_clamped": false,
    "trajectory_slope": -0.4524770551986364,
    "verdict": "Priced 31pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -2700,20 +2796,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 7068389450,
+    "market_cap": 7242412722,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": 39.1,
+   "expectations_gap_pts": 39.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2389,
    "hist_owner_cf_cagr_5y": -0.0563,
    "hist_revenue_cagr_5y": 0.0944,
-   "implied_growth": 0.3349,
+   "implied_growth": 0.3399,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+39pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+40pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "SAH": {
    "assumptions": {
@@ -2723,20 +2819,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1977271076,
+    "market_cap": 2025011488,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": -40.8,
+   "expectations_gap_pts": -40.4,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.3605,
    "hist_owner_cf_cagr_5y": 0.2528,
    "hist_revenue_cagr_5y": 0.0918,
-   "implied_growth": -0.1555,
+   "implied_growth": -0.151,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 41pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 40pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "SAM": {
    "assumptions": {
@@ -2746,20 +2842,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2271988963,
+    "market_cap": 2317461297,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 6.720180000000001
    },
-   "expectations_gap_pts": -16.6,
+   "expectations_gap_pts": -16.3,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1678,
    "hist_owner_cf_cagr_5y": 0.1201,
    "hist_revenue_cagr_5y": 0.025,
-   "implied_growth": -0.0458,
+   "implied_growth": -0.0426,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 17pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 16pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "SCL": {
    "assumptions": {
@@ -2769,17 +2865,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1569263477,
+    "market_cap": 1604696295,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
    },
-   "expectations_gap_pts": 25.1,
+   "expectations_gap_pts": 25.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.1768,
    "hist_owner_cf_cagr_5y": -0.1002,
    "hist_revenue_cagr_5y": 0.0452,
-   "implied_growth": 0.1504,
+   "implied_growth": 0.1546,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price demands ~+25pts MORE growth than demonstrated \u2014 must believe in acceleration."
@@ -2792,20 +2888,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 929245232,
+    "market_cap": 993226031,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 6.720180000000001
    },
-   "expectations_gap_pts": -25.7,
+   "expectations_gap_pts": -24.7,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2043,
    "hist_owner_cf_cagr_5y": 0.2426,
    "hist_revenue_cagr_5y": 0.034,
-   "implied_growth": -0.0149,
+   "implied_growth": -0.004,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 26pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 25pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "SENEB": {
    "assumptions": {
@@ -2815,7 +2911,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1004126447,
+    "market_cap": 1004126430,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 6.720180000000001
@@ -2838,20 +2934,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 5433721988,
+    "market_cap": 4617852971,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -30.4,
+   "expectations_gap_pts": -33.4,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.5026,
-   "implied_growth": 0.1986,
+   "implied_growth": 0.1683,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 30pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 33pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "SGU": {
    "assumptions": {
@@ -2861,17 +2957,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 423428733,
+    "market_cap": 429826932,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.75197
    },
-   "expectations_gap_pts": -26.3,
+   "expectations_gap_pts": -26.0,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.1909,
    "hist_owner_cf_cagr_5y": 0.0418,
    "hist_revenue_cagr_5y": 0.0399,
-   "implied_growth": -0.2208,
+   "implied_growth": -0.2182,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 26pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -2884,7 +2980,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3165713767,
+    "market_cap": 3198543472,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
@@ -2894,33 +2990,10 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.1151,
+   "implied_growth": -0.1134,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
-  },
-  "SM": {
-   "assumptions": {
-    "base_cf": 539000000,
-    "base_cf_kind": "fcf_fallback",
-    "coe_default_loading": false,
-    "discount_rate_source": "anchor",
-    "fade_years": 5,
-    "fiscal_year": 2025,
-    "market_cap": 7316150704,
-    "stage1_years": 5,
-    "terminal_growth": 0.025,
-    "wacc": 9.0087
-   },
-   "expectations_gap_pts": -18.1,
-   "gap_basis": "owner_cf",
-   "hist_fcf_cagr_5y": 0.1803,
-   "hist_owner_cf_cagr_5y": 0.1803,
-   "hist_revenue_cagr_5y": 0.2286,
-   "implied_growth": -0.0011,
-   "implied_growth_clamped": false,
-   "trajectory_slope": null,
-   "verdict": "Priced 18pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "SN": {
    "assumptions": {
@@ -2930,17 +3003,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 30800436550,
+    "market_cap": 30894847258,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": 9.4,
+   "expectations_gap_pts": 9.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2812,
    "hist_owner_cf_cagr_5y": 0.1776,
    "hist_revenue_cagr_5y": 0.1447,
-   "implied_growth": 0.272,
+   "implied_growth": 0.2726,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price assumes modest acceleration (+9pts above demonstrated)."
@@ -2953,17 +3026,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 86379526150,
+    "market_cap": 86743964689,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": -19.4,
+   "expectations_gap_pts": -19.3,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1169,
    "hist_owner_cf_cagr_5y": 0.2134,
    "hist_revenue_cagr_5y": 0.0667,
-   "implied_growth": 0.0193,
+   "implied_growth": 0.02,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 19pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -2976,20 +3049,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 8271938010,
+    "market_cap": 8408417145,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
    },
-   "expectations_gap_pts": 7.2,
+   "expectations_gap_pts": 7.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1121,
    "hist_owner_cf_cagr_5y": 0.0724,
    "hist_revenue_cagr_5y": 0.1297,
-   "implied_growth": 0.1448,
+   "implied_growth": 0.1479,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price assumes modest acceleration (+7pts above demonstrated)."
+   "verdict": "Price assumes modest acceleration (+8pts above demonstrated)."
   },
   "STGW": {
    "assumptions": {
@@ -2999,17 +3072,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2602441220,
+    "market_cap": 2689230007,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.825330000000001
    },
-   "expectations_gap_pts": -7.3,
+   "expectations_gap_pts": -6.7,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1444,
    "hist_owner_cf_cagr_5y": 0.1293,
    "hist_revenue_cagr_5y": 0.2678,
-   "implied_growth": 0.056,
+   "implied_growth": 0.062,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 7pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -3022,17 +3095,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 724533451,
+    "market_cap": 739273705,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": -13.9,
+   "expectations_gap_pts": -13.6,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.1552,
-   "implied_growth": 0.0159,
+   "implied_growth": 0.0194,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 14pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -3045,20 +3118,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 45461521092,
+    "market_cap": 47181055354,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -42.0,
+   "expectations_gap_pts": -41.3,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0703,
    "hist_owner_cf_cagr_5y": 0.2152,
    "hist_revenue_cagr_5y": 0.0357,
-   "implied_growth": -0.2043,
+   "implied_growth": -0.1978,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 42pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 41pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "SWBI": {
    "assumptions": {
@@ -3068,20 +3141,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 629549143,
+    "market_cap": 649726990,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": 19.3,
+   "expectations_gap_pts": 19.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2123,
    "hist_owner_cf_cagr_5y": -0.0865,
    "hist_revenue_cagr_5y": -0.1313,
-   "implied_growth": 0.1066,
+   "implied_growth": 0.1123,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+19pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+20pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "TASK": {
    "assumptions": {
@@ -3091,20 +3164,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 822891059,
+    "market_cap": 791259045,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 11.66886
    },
-   "expectations_gap_pts": -16.0,
+   "expectations_gap_pts": -16.7,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.2078,
    "hist_owner_cf_cagr_5y": 0.1265,
    "hist_revenue_cagr_5y": 0.1988,
-   "implied_growth": -0.0331,
+   "implied_growth": -0.0405,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 16pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 17pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "TGT": {
    "assumptions": {
@@ -3114,43 +3187,43 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 71744812385,
+    "market_cap": 74095800778,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 6.720180000000001
    },
-   "expectations_gap_pts": 6.1,
+   "expectations_gap_pts": 6.6,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0593,
    "hist_owner_cf_cagr_5y": -0.0445,
    "hist_revenue_cagr_5y": 0.0229,
-   "implied_growth": 0.0164,
+   "implied_growth": 0.0217,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price assumes modest acceleration (+6pts above demonstrated)."
+   "verdict": "Price assumes modest acceleration (+7pts above demonstrated)."
   },
-  "TRMD": {
+  "TRGP": {
    "assumptions": {
-    "base_cf": 191300000,
+    "base_cf": 105000000,
     "base_cf_kind": "owner_earnings",
     "coe_default_loading": false,
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3670409252,
+    "market_cap": 61112839586,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.75197
    },
-   "expectations_gap_pts": -13.4,
+   "expectations_gap_pts": 37.5,
    "gap_basis": "owner_cf",
-   "hist_fcf_cagr_5y": 0.1558,
-   "hist_owner_cf_cagr_5y": 0.1564,
-   "hist_revenue_cagr_5y": 0.1238,
-   "implied_growth": 0.0221,
+   "hist_fcf_cagr_5y": -0.0593,
+   "hist_owner_cf_cagr_5y": 0.3257,
+   "hist_revenue_cagr_5y": 0.1557,
+   "implied_growth": 0.7009,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 13pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Price demands ~+38pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "TRN": {
    "assumptions": {
@@ -3160,20 +3233,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2391712173,
+    "market_cap": 2494917786,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -120.2,
+   "expectations_gap_pts": -119.4,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0096,
    "hist_owner_cf_cagr_5y": 1.0184,
    "hist_revenue_cagr_5y": 0.0427,
-   "implied_growth": -0.1832,
+   "implied_growth": -0.1757,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 120pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 119pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "TTAM": {
    "assumptions": {
@@ -3183,20 +3256,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2188511572,
+    "market_cap": 2636538829,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
    },
-   "expectations_gap_pts": -71.2,
+   "expectations_gap_pts": -67.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.3652,
    "hist_owner_cf_cagr_5y": 0.7466,
    "hist_revenue_cagr_5y": 0.0685,
-   "implied_growth": 0.0347,
+   "implied_growth": 0.0678,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 71pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 68pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "TWFG": {
    "assumptions": {
@@ -3206,20 +3279,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 389630083,
+    "market_cap": 381000259,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -99.4,
+   "expectations_gap_pts": -99.8,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.275,
    "hist_owner_cf_cagr_5y": 1.0121,
    "hist_revenue_cagr_5y": 0.1733,
-   "implied_growth": 0.0182,
+   "implied_growth": 0.0143,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 99pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 100pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "UGI": {
    "assumptions": {
@@ -3229,20 +3302,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 8102547603,
+    "market_cap": 8174403550,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 7.1015999999999995
    },
-   "expectations_gap_pts": 6.4,
+   "expectations_gap_pts": 6.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0075,
    "hist_owner_cf_cagr_5y": -0.0555,
    "hist_revenue_cagr_5y": 0.0213,
-   "implied_growth": 0.0083,
+   "implied_growth": 0.0098,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price assumes modest acceleration (+6pts above demonstrated)."
+   "verdict": "Price assumes modest acceleration (+7pts above demonstrated)."
   },
   "UVE": {
    "assumptions": {
@@ -3252,17 +3325,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 1338269543,
+    "market_cap": 1349752645,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -40.1,
+   "expectations_gap_pts": -39.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.9884,
    "hist_owner_cf_cagr_5y": 0.2922,
    "hist_revenue_cagr_5y": 0.0838,
-   "implied_growth": -0.1088,
+   "implied_growth": -0.1073,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 40pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -3275,17 +3348,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 800392477579,
+    "market_cap": 815951966278,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": 7.1,
+   "expectations_gap_pts": 7.5,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.1733,
    "hist_owner_cf_cagr_5y": 0.1268,
    "hist_revenue_cagr_5y": 0.1286,
-   "implied_growth": 0.1979,
+   "implied_growth": 0.2015,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price assumes modest acceleration (+7pts above demonstrated)."
@@ -3298,17 +3371,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 5242402030,
+    "market_cap": 5440722391,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.825330000000001
    },
-   "expectations_gap_pts": 3.7,
+   "expectations_gap_pts": 4.3,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": -0.2001,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": -0.0961,
-   "implied_growth": -0.0594,
+   "implied_growth": -0.0528,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
@@ -3321,7 +3394,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2024,
-    "market_cap": 817304186,
+    "market_cap": 854088602,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
@@ -3331,7 +3404,7 @@
    "hist_fcf_cagr_5y": 0.0964,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.3815,
+   "implied_growth": -0.3727,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -3344,20 +3417,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 27936168148,
+    "market_cap": 28527291042,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 11.37546
    },
-   "expectations_gap_pts": 22.5,
+   "expectations_gap_pts": 22.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": 0.0924,
    "hist_owner_cf_cagr_5y": 0.0039,
    "hist_revenue_cagr_5y": 0.0554,
-   "implied_growth": 0.2286,
+   "implied_growth": 0.2327,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price demands ~+22pts MORE growth than demonstrated \u2014 must believe in acceleration."
+   "verdict": "Price demands ~+23pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "VSNT": {
    "assumptions": {
@@ -3367,7 +3440,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 4584673013,
+    "market_cap": 4644817737,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.825330000000001
@@ -3377,7 +3450,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": -0.2806,
+   "implied_growth": -0.2781,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -3390,17 +3463,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 8540734332,
+    "market_cap": 8690291659,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 10.93536
    },
-   "expectations_gap_pts": 14.5,
+   "expectations_gap_pts": 14.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.1062,
    "hist_owner_cf_cagr_5y": 0.1079,
    "hist_revenue_cagr_5y": 0.039,
-   "implied_growth": 0.2531,
+   "implied_growth": 0.2565,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Price demands ~+15pts MORE growth than demonstrated \u2014 must believe in acceleration."
@@ -3413,43 +3486,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 746666745,
+    "market_cap": 761825723,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.11139
    },
-   "expectations_gap_pts": -4.0,
+   "expectations_gap_pts": -3.7,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0973,
    "hist_owner_cf_cagr_5y": -0.0586,
    "hist_revenue_cagr_5y": 0.0383,
-   "implied_growth": -0.0988,
+   "implied_growth": -0.0953,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced roughly in line with demonstrated growth."
-  },
-  "WLY": {
-   "assumptions": {
-    "base_cf": 313928000,
-    "base_cf_kind": "owner_earnings",
-    "coe_default_loading": false,
-    "discount_rate_source": "anchor",
-    "fade_years": 5,
-    "fiscal_year": 2026,
-    "market_cap": 2578038138,
-    "stage1_years": 5,
-    "terminal_growth": 0.025,
-    "wacc": 9.825330000000001
-   },
-   "expectations_gap_pts": -78.7,
-   "gap_basis": "owner_cf",
-   "hist_fcf_cagr_5y": -0.0582,
-   "hist_owner_cf_cagr_5y": 0.7171,
-   "hist_revenue_cagr_5y": -0.0289,
-   "implied_growth": -0.0702,
-   "implied_growth_clamped": false,
-   "trajectory_slope": null,
-   "verdict": "Priced 79pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "WNC": {
    "assumptions": {
@@ -3459,17 +3509,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 460958349,
+    "market_cap": 471754100,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -53.3,
+   "expectations_gap_pts": -52.9,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0882,
    "hist_owner_cf_cagr_5y": 0.1821,
    "hist_revenue_cagr_5y": 0.0081,
-   "implied_growth": -0.3513,
+   "implied_growth": -0.3467,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 53pts BELOW demonstrated growth \u2014 market expects deceleration."
@@ -3482,7 +3532,7 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2026,
-    "market_cap": 10681888391,
+    "market_cap": 11184110918,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 11.66886
@@ -3492,7 +3542,7 @@
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": null,
-   "implied_growth": 0.1508,
+   "implied_growth": 0.1596,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "No growth evidence to compare against \u2014 judge the implied rate on its own."
@@ -3505,20 +3555,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 5370193436,
+    "market_cap": 5671564790,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.07227
    },
-   "expectations_gap_pts": -31.3,
+   "expectations_gap_pts": -30.4,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.259,
-   "implied_growth": -0.0542,
+   "implied_growth": -0.0447,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Priced 31pts BELOW demonstrated growth \u2014 market expects deceleration."
+   "verdict": "Priced 30pts BELOW demonstrated growth \u2014 market expects deceleration."
   },
   "XHR": {
    "assumptions": {
@@ -3528,20 +3578,20 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 2110140237,
+    "market_cap": 2166529320,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 8.377889999999999
    },
-   "expectations_gap_pts": 9.9,
+   "expectations_gap_pts": 10.3,
    "gap_basis": "owner_cf",
    "hist_fcf_cagr_5y": -0.0417,
    "hist_owner_cf_cagr_5y": -0.0528,
    "hist_revenue_cagr_5y": 0.2387,
-   "implied_growth": 0.046,
+   "implied_growth": 0.0506,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
-   "verdict": "Price assumes modest acceleration (+10pts above demonstrated)."
+   "verdict": "Price demands ~+10pts MORE growth than demonstrated \u2014 must believe in acceleration."
   },
   "ZIM": {
    "assumptions": {
@@ -3551,17 +3601,17 @@
     "discount_rate_source": "anchor",
     "fade_years": 5,
     "fiscal_year": 2025,
-    "market_cap": 3328753208,
+    "market_cap": 3423963727,
     "stage1_years": 5,
     "terminal_growth": 0.025,
     "wacc": 9.18963
    },
-   "expectations_gap_pts": -36.2,
+   "expectations_gap_pts": -35.7,
    "gap_basis": "revenue_fallback",
    "hist_fcf_cagr_5y": null,
    "hist_owner_cf_cagr_5y": null,
    "hist_revenue_cagr_5y": 0.1158,
-   "implied_growth": -0.246,
+   "implied_growth": -0.2409,
    "implied_growth_clamped": false,
    "trajectory_slope": null,
    "verdict": "Priced 36pts BELOW demonstrated growth \u2014 market expects deceleration."
