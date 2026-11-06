@@ -28,19 +28,19 @@
   "sector_ranking_meta": {
     "sector_quota_source": "neutral_no_validated_edge",
     "reason": "ic_not_positive",
-    "path": "/home/runner/work/stock-screener/stock-screener/public/data/mri/current_sector_ranking.json",
+    "path": "C:\\ProgramData\\stocks-mri\\outputs\\current_sector_ranking.json",
     "date": "2026-11-01",
     "age_days": 5,
-    "macro_confidence": 0.05129193314321279,
+    "macro_confidence": 0.05030432818516828,
     "n_sectors": 11
   },
   "discount_rate_source": "anchor",
   "discount_rate_meta": {
     "discount_rate_source": "anchor",
     "reason": "ok",
-    "path": "/home/runner/work/stock-screener/stock-screener/public/data/mri/cost_of_capital_anchor.json",
-    "asof": "2026-11-04",
-    "age_days": 2
+    "path": "C:\\actions-runner\\_work\\stock-screener\\stock-screener\\public\\data\\mri\\cost_of_capital_anchor.json",
+    "asof": "2026-11-05",
+    "age_days": 1
   },
   "momentum_source": "momentum_state",
   "momentum_price_asof": "2026-11-06",
@@ -149,7 +149,6 @@
     "health_pharma": 2,
     "energy_midstream_refining": 2,
     "cons_leisure_dining": 2,
-    "health_services_facilities": 1,
     "def_retail_distribution": 2,
     "health_biotech": 2,
     "health_devices_supplies": 2,
@@ -158,7 +157,7 @@
     "cons_goods_apparel": 1,
     "comm_media_entertainment": 1
   },
-  "door3_eligible_count": 593,
+  "door3_eligible_count": 602,
   "door3_ineligible_reasons": {
     "mom_break_unverified_monthly_trend_failed": 567,
     "profitability_below_pctl25": 83,
@@ -173,11 +172,10 @@
     "adv_below_300k": 1
   },
   "door3_also_trend_leader": [
-    "CHEF",
-    "ECPG",
     "EQNR",
     "LFST",
     "RNG",
+    "SEZL",
     "VSXY"
   ],
   "door3_hysteresis_retained": [
@@ -203,9 +201,9 @@
   "hysteresis_retained": [
     "CROX",
     "DVA",
-    "FSM",
     "GCMG",
     "GTE",
+    "KFY",
     "KIM",
     "LTH",
     "OPY",
@@ -234,6 +232,7 @@
     "entered_book": [
       "AMRX",
       "ATLO",
+      "BJ",
       "CF",
       "ECO",
       "EVR",
@@ -260,9 +259,9 @@
     "retained_by_hysteresis": [
       "CROX",
       "DVA",
-      "FSM",
       "GCMG",
       "GTE",
+      "KFY",
       "KIM",
       "LTH",
       "OPY",
@@ -275,7 +274,7 @@
   },
   "nominated_tickers": [
     "AAUC",
-    "ABG",
+    "ACHC",
     "ADAM",
     "ADT",
     "AII",
@@ -283,7 +282,6 @@
     "AMRX",
     "AMT",
     "APA",
-    "ARLP",
     "ARX",
     "ATLC",
     "ATLO",
@@ -291,6 +289,7 @@
     "BDN",
     "BFH",
     "BHC",
+    "BJ",
     "BTG",
     "BUD",
     "BUUU",
@@ -345,6 +344,7 @@
     "HRMY",
     "HRTG",
     "HST",
+    "HUM",
     "IDT",
     "IHS",
     "IRDM",
@@ -377,8 +377,8 @@
     "NUTX",
     "NXT",
     "OGE",
-    "OPY",
     "OUT",
+    "PAGP",
     "PAYS",
     "PCRX",
     "PEB",
@@ -409,6 +409,7 @@
     "SEZL",
     "SGU",
     "SLDE",
+    "SM",
     "SN",
     "SPG",
     "SSD",
@@ -423,7 +424,6 @@
     "TRN",
     "TTAM",
     "TWFG",
-    "UGI",
     "UVE",
     "V",
     "VEON",
@@ -512,7 +512,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 1.7068364248478383,
+          "altman_z": 1.764428834977548,
           "z_min": 1.8,
           "sector": "Basic Materials",
           "_note": "Altman Z is a warning flag only, never a veto."
@@ -523,11 +523,11 @@
       "mcap_derived": false,
       "cluster_macro_score": null
     },
-    "ABG": {
-      "ticker": "ABG",
-      "sector": "Consumer Cyclical",
-      "industry": "Auto & Truck Dealerships",
-      "cluster": "cons_automotive",
+    "ACHC": {
+      "ticker": "ACHC",
+      "sector": "Healthcare",
+      "industry": "Medical Care Facilities",
+      "cluster": "health_services_facilities",
       "archetype": "compounder_general",
       "mgi_subindustry_id": null,
       "z_quality": 0.721,
@@ -563,7 +563,8 @@
       "pctl_d2": 99.4,
       "best_pctl": 99.4,
       "nominated_doors": [
-        "DOOR_2_VALUE_GAP"
+        "DOOR_1_COMPOUNDER",
+        "GLOBAL_WILDCARD"
       ],
       "fct_momentum_state": {
         "mom_12_1": -0.2656,
@@ -588,10 +589,19 @@
         "usable_months": 11
       },
       "fct_flags": [
+        "momentum_proxy_monthly",
+        "no_liquidity_data",
         "beneish_unverifiable",
-        "revisions_missing"
+        "insolvency_distress_altman_z"
       ],
-      "fct_flag_detail": {},
+      "fct_flag_detail": {
+        "insolvency_distress_altman_z": {
+          "altman_z": 0.42412940566844926,
+          "z_min": 1.2,
+          "sector": "Healthcare",
+          "_note": "Altman Z is a warning flag only, never a veto."
+        }
+      },
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
@@ -637,7 +647,8 @@
       "pctl_d2": 99.4,
       "best_pctl": 99.4,
       "nominated_doors": [
-        "DOOR_2_VALUE_GAP"
+        "DOOR_2_VALUE_GAP",
+        "GLOBAL_WILDCARD"
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.3263,
@@ -657,8 +668,8 @@
         "adv_20d_usd": 6812656.5,
         "realised_vol_60d": 0.429,
         "mom_break": true,
-        "jump_share": 0.7044784492671265,
-        "up_months": 7,
+        "jump_share": null,
+        "up_months": 6,
         "usable_months": 11
       },
       "fct_flags": [
@@ -688,7 +699,7 @@
       "z_value": 2.258,
       "z_exp_gap": 1.454,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.18963,
+      "discount_rate_pct": 9.18298,
       "discount_rate_source": "anchor",
       "score_door1": 0.752,
       "score_door2": 1.757,
@@ -711,13 +722,12 @@
       "pctl_d2": 98.6,
       "best_pctl": 98.6,
       "nominated_doors": [
-        "DOOR_2_VALUE_GAP",
-        "GLOBAL_WILDCARD"
+        "DOOR_2_VALUE_GAP"
       ],
       "fct_momentum_state": {
         "mom_12_1": -0.2903,
-        "mom_6m": 0.336,
-        "mom_1m": 0.6283,
+        "mom_6m": 0.332,
+        "mom_1m": 0.6234,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.3078,
         "regime_shift_up": false,
@@ -743,7 +753,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 0.6941362278672947,
+          "altman_z": 0.6947259852747685,
           "z_min": 1.8,
           "sector": "Industrials",
           "_note": "Altman Z is a warning flag only, never a veto."
@@ -1022,8 +1032,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": -0.0482,
-        "mom_6m": 0.0883,
-        "mom_1m": 0.1904,
+        "mom_6m": 0.0825,
+        "mom_1m": 0.1841,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.2759,
         "regime_shift_up": false,
@@ -1097,8 +1107,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.8769,
-        "mom_6m": 0.1056,
-        "mom_1m": 0.0764,
+        "mom_6m": 0.1267,
+        "mom_1m": 0.097,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.1557,
         "regime_shift_up": true,
@@ -1252,8 +1262,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.6979,
-        "mom_6m": 0.5257,
-        "mom_1m": 0.0061,
+        "mom_6m": 0.5273,
+        "mom_1m": 0.0071,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.4062,
         "mom_z_sector": 2.155,
@@ -1662,7 +1672,7 @@
       "z_value": 2.728,
       "z_exp_gap": 1.133,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 7.54659,
+      "discount_rate_pct": 7.523140000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.842,
       "score_door2": 1.793,
@@ -1717,12 +1727,87 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 0.2634207629974657,
+          "altman_z": 0.2629887338158889,
           "z_min": 1.2,
           "sector": "Healthcare",
           "_note": "Altman Z is a warning flag only, never a veto."
         }
       },
+      "mid_cycle_window_years": null,
+      "mid_cycle_years_used": null,
+      "mcap_derived": false,
+      "cluster_macro_score": null
+    },
+    "BJ": {
+      "ticker": "BJ",
+      "sector": "Consumer Defensive",
+      "industry": "Discount Stores",
+      "cluster": "def_retail_distribution",
+      "archetype": "compounder_general",
+      "mgi_subindustry_id": null,
+      "z_quality": 0.836,
+      "z_momentum": 0.788,
+      "z_momentum_door1": 0.844,
+      "z_momentum_sector_neutral": 0.673,
+      "z_momentum_universe": 0.532,
+      "jump_share": 0.834519454429624,
+      "up_months": 7,
+      "z_revisions": null,
+      "z_value": -0.246,
+      "z_exp_gap": -2.019,
+      "gap_basis": "owner_cf",
+      "discount_rate_pct": 6.688280000000001,
+      "discount_rate_source": "anchor",
+      "score_door1": 0.839,
+      "score_door2": -0.739,
+      "door1_pillars_used": [
+        "quality",
+        "momentum"
+      ],
+      "door2_pillars_used": [
+        "value",
+        "exp_gap",
+        "quality"
+      ],
+      "door1_weight_scale": 1.25,
+      "door2_weight_scale": 1.0,
+      "door1_ineligible_reason": null,
+      "door2_ineligible_reason": null,
+      "d2_eligible": true,
+      "falling_knife_detail": null,
+      "pctl_d1": 92.8,
+      "pctl_d2": 15.8,
+      "best_pctl": 92.8,
+      "nominated_doors": [
+        "DOOR_1_COMPOUNDER"
+      ],
+      "fct_momentum_state": {
+        "mom_12_1": 0.2027,
+        "mom_6m": 0.2847,
+        "mom_1m": 0.0209,
+        "high_52w_proxy": 0.0,
+        "mom_accel": -0.0639,
+        "regime_shift_up": false,
+        "regime_shift_down": false,
+        "mom_z_sector": 0.831,
+        "price_asof": "2026-11-06",
+        "pct_from_52w_high": -0.0138,
+        "above_200dma": true,
+        "dma200_slope_20d": 0.0137,
+        "rs_vs_cluster_etf_3m": 0.0694,
+        "rs_vs_iwm_3m": 0.2325,
+        "adv_20d_usd": 210029444.0,
+        "realised_vol_60d": 0.3163,
+        "mom_break": false,
+        "jump_share": 0.834519454429624,
+        "up_months": 7,
+        "usable_months": 11
+      },
+      "fct_flags": [
+        "beneish_unverifiable",
+        "revisions_missing"
+      ],
+      "fct_flag_detail": {},
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
@@ -1789,8 +1874,8 @@
         "adv_20d_usd": 116161586.0,
         "realised_vol_60d": 0.5085,
         "mom_break": false,
-        "jump_share": 2.043364255864914,
-        "up_months": 6,
+        "jump_share": 47.02265904175961,
+        "up_months": 5,
         "usable_months": 11
       },
       "fct_flags": [
@@ -1822,7 +1907,7 @@
       "z_value": 0.396,
       "z_exp_gap": 1.546,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 6.720180000000001,
+      "discount_rate_pct": 6.688280000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.502,
       "score_door2": 0.825,
@@ -2039,7 +2124,7 @@
       "z_value": 1.577,
       "z_exp_gap": 1.67,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.18963,
+      "discount_rate_pct": 9.18298,
       "discount_rate_source": "anchor",
       "score_door1": 0.692,
       "score_door2": 1.508,
@@ -2058,12 +2143,12 @@
       "door2_ineligible_reason": null,
       "d2_eligible": true,
       "falling_knife_detail": null,
-      "pctl_d1": 86.0,
-      "pctl_d2": 97.7,
-      "best_pctl": 97.7,
+      "pctl_d1": 85.3,
+      "pctl_d2": 97.3,
+      "best_pctl": 97.3,
       "nominated_doors": [
         "DOOR_2_VALUE_GAP",
-        "GLOBAL_WILDCARD"
+        "HYSTERESIS_RETAINED"
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.193,
@@ -2114,7 +2199,7 @@
       "z_value": -0.215,
       "z_exp_gap": -1.158,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 10.93536,
+      "discount_rate_pct": 10.94656,
       "discount_rate_source": "anchor",
       "score_door1": 0.786,
       "score_door2": -0.62,
@@ -2264,7 +2349,7 @@
       "z_value": 1.709,
       "z_exp_gap": -0.913,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 11.37546,
+      "discount_rate_pct": 11.39116,
       "discount_rate_source": "anchor",
       "score_door1": 1.093,
       "score_door2": 0.558,
@@ -2304,15 +2389,12 @@
         "up_months": 6,
         "usable_months": 11
       },
-      "fct_flags": [
-        "momentum_proxy_monthly",
-        "no_liquidity_data"
-      ],
+      "fct_flags": [],
       "fct_flag_detail": {},
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
-      "cluster_macro_score": 0.26356768119420076
+      "cluster_macro_score": 0.2580305294468591
     },
     "CF": {
       "ticker": "CF",
@@ -2431,7 +2513,9 @@
       "pctl_d2": 73.9,
       "best_pctl": 98.1,
       "nominated_doors": [
-        "DOOR_1_COMPOUNDER"
+        "DOOR_1_COMPOUNDER",
+        "GLOBAL_WILDCARD",
+        "DOUBLE_DOOR_CHAMPION"
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.9012,
@@ -2451,27 +2535,25 @@
         "adv_20d_usd": 53706553.0,
         "realised_vol_60d": 0.3723,
         "mom_break": false,
-        "jump_share": 0.4146893100209555,
-        "up_months": 7,
+        "jump_share": 0.5732843379509336,
+        "up_months": 6,
         "usable_months": 11
       },
       "fct_flags": [
-        "beneish_unverifiable",
-        "revisions_missing",
-        "also_trend_leader"
+        "revisions_missing"
       ],
       "fct_flag_detail": {},
-      "mid_cycle_window_years": null,
-      "mid_cycle_years_used": null,
+      "mid_cycle_window_years": 3,
+      "mid_cycle_years_used": 3,
       "mcap_derived": false,
       "cluster_macro_score": null
     },
-    "CLDT": {
-      "ticker": "CLDT",
-      "sector": "Real Estate",
-      "industry": "REIT-Hotel & Motel",
-      "cluster": "re_specialized",
-      "archetype": "real_estate_reit",
+    "CHA": {
+      "ticker": "CHA",
+      "sector": "Consumer Cyclical",
+      "industry": "Restaurants",
+      "cluster": "cons_leisure_dining",
+      "archetype": "compounder_general",
       "mgi_subindustry_id": null,
       "z_quality": 0.091,
       "z_momentum": 2.397,
@@ -2511,8 +2593,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 1.2663,
-        "mom_6m": 0.4015,
-        "mom_1m": 0.0156,
+        "mom_6m": 0.4511,
+        "mom_1m": 0.0515,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.3992,
         "regime_shift_up": true,
@@ -2719,7 +2801,7 @@
       "z_value": 0.743,
       "z_exp_gap": -0.975,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 7.54659,
+      "discount_rate_pct": 7.523140000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.568,
       "score_door2": -0.048,
@@ -2747,8 +2829,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.984,
-        "mom_6m": 0.7547,
-        "mom_1m": 0.0788,
+        "mom_6m": 0.7098,
+        "mom_1m": 0.0511,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.1567,
         "regime_shift_up": true,
@@ -2895,12 +2977,12 @@
       "best_pctl": 97.3,
       "nominated_doors": [
         "DOOR_1_COMPOUNDER",
-        "HYSTERESIS_RETAINED"
+        "GLOBAL_WILDCARD"
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.7712,
-        "mom_6m": 0.3469,
-        "mom_1m": 0.0619,
+        "mom_6m": 0.2997,
+        "mom_1m": 0.0246,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.1883,
         "regime_shift_up": true,
@@ -2944,7 +3026,7 @@
       "z_value": 3.621,
       "z_exp_gap": 0.965,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.11139,
+      "discount_rate_pct": 9.10394,
       "discount_rate_source": "anchor",
       "score_door1": 0.172,
       "score_door2": 1.795,
@@ -3018,7 +3100,7 @@
       "z_value": 0.743,
       "z_exp_gap": 0.519,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 7.1015999999999995,
+      "discount_rate_pct": 7.073599999999999,
       "discount_rate_source": "anchor",
       "score_door1": -0.901,
       "score_door2": 0.303,
@@ -3168,7 +3250,7 @@
       "z_value": -0.588,
       "z_exp_gap": -0.125,
       "gap_basis": "revenue_fallback",
-      "discount_rate_pct": 6.720180000000001,
+      "discount_rate_pct": 6.688280000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.397,
       "score_door2": -0.484,
@@ -3244,7 +3326,7 @@
       "z_value": 1.91,
       "z_exp_gap": 0.792,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.825330000000001,
+      "discount_rate_pct": 9.82518,
       "discount_rate_source": "anchor",
       "score_door1": 1.137,
       "score_door2": 1.324,
@@ -3272,8 +3354,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.4933,
-        "mom_6m": 0.2635,
-        "mom_1m": 0.0354,
+        "mom_6m": 0.2534,
+        "mom_1m": 0.0271,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.2297,
         "regime_shift_up": true,
@@ -3393,7 +3475,7 @@
       "z_value": 2.734,
       "z_exp_gap": 1.17,
       "gap_basis": "revenue_fallback",
-      "discount_rate_pct": 9.0087,
+      "discount_rate_pct": 8.99526,
       "discount_rate_source": "anchor",
       "score_door1": -0.615,
       "score_door2": 1.458,
@@ -3417,7 +3499,7 @@
       "best_pctl": 97.4,
       "nominated_doors": [
         "DOOR_2_VALUE_GAP",
-        "GLOBAL_WILDCARD"
+        "HYSTERESIS_RETAINED"
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.1459,
@@ -3437,7 +3519,7 @@
         "adv_20d_usd": 8870030.0,
         "realised_vol_60d": 0.3002,
         "mom_break": true,
-        "jump_share": 1.7402158717491192,
+        "jump_share": 5.912342933866033,
         "up_months": 4,
         "usable_months": 11
       },
@@ -3448,7 +3530,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 0.491878930876662,
+          "altman_z": 0.49026687823390364,
           "z_min": 1.8,
           "sector": "Energy",
           "_note": "Altman Z is a warning flag only, never a veto."
@@ -3626,7 +3708,7 @@
       "z_value": 3.119,
       "z_exp_gap": 0.827,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 11.66886,
+      "discount_rate_pct": 11.687560000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.883,
       "score_door2": 1.898,
@@ -3654,8 +3736,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": -0.2373,
-        "mom_6m": 0.3145,
-        "mom_1m": 0.374,
+        "mom_6m": 0.3039,
+        "mom_1m": 0.3629,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.4019,
         "regime_shift_up": false,
@@ -3681,7 +3763,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 1.1906375082106635,
+          "altman_z": 1.1852415644858416,
           "z_min": 1.2,
           "sector": "Technology",
           "_note": "Altman Z is a warning flag only, never a veto."
@@ -4086,7 +4168,7 @@
       "z_value": 1.829,
       "z_exp_gap": -2.007,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.0087,
+      "discount_rate_pct": 8.99526,
       "discount_rate_source": "anchor",
       "score_door1": 1.613,
       "score_door2": 0.274,
@@ -4142,7 +4224,7 @@
       "mid_cycle_window_years": 8,
       "mid_cycle_years_used": 8,
       "mcap_derived": false,
-      "cluster_macro_score": 0.34367880392153777
+      "cluster_macro_score": 0.33938769748450237
     },
     "ESEA": {
       "ticker": "ESEA",
@@ -4453,7 +4535,7 @@
       "z_value": 1.141,
       "z_exp_gap": 1.535,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 10.93536,
+      "discount_rate_pct": 10.94656,
       "discount_rate_source": "anchor",
       "score_door1": 1.173,
       "score_door2": 1.283,
@@ -4551,7 +4633,7 @@
       "best_pctl": 97.3,
       "nominated_doors": [
         "DOOR_2_VALUE_GAP",
-        "HYSTERESIS_RETAINED"
+        "DOUBLE_DOOR_CHAMPION"
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.3591,
@@ -4603,7 +4685,7 @@
       "z_value": 0.219,
       "z_exp_gap": 0.736,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 10.93536,
+      "discount_rate_pct": 10.94656,
       "discount_rate_source": "anchor",
       "score_door1": 1.395,
       "score_door2": 0.627,
@@ -4630,8 +4712,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.6247,
-        "mom_6m": 0.4961,
-        "mom_1m": 0.0598,
+        "mom_6m": 0.5478,
+        "mom_1m": 0.0964,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.176,
         "regime_shift_up": true,
@@ -4675,7 +4757,7 @@
       "z_value": 1.166,
       "z_exp_gap": 2.029,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.07227,
+      "discount_rate_pct": 9.06442,
       "discount_rate_source": "anchor",
       "score_door1": 0.515,
       "score_door2": 1.439,
@@ -4886,7 +4968,7 @@
       "mid_cycle_window_years": 8,
       "mid_cycle_years_used": 2,
       "mcap_derived": false,
-      "cluster_macro_score": 0.34367880392153777
+      "cluster_macro_score": 0.33938769748450237
     },
     "HAE": {
       "ticker": "HAE",
@@ -4906,7 +4988,7 @@
       "z_value": 0.69,
       "z_exp_gap": -0.214,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 7.54659,
+      "discount_rate_pct": 7.523140000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.967,
       "score_door2": 0.379,
@@ -4934,8 +5016,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 1.1056,
-        "mom_6m": 1.1205,
-        "mom_1m": 0.2101,
+        "mom_6m": 0.9839,
+        "mom_1m": 0.1321,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.0302,
         "regime_shift_up": true,
@@ -5091,8 +5173,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.4746,
-        "mom_6m": 0.4332,
-        "mom_1m": 0.0209,
+        "mom_6m": 0.4136,
+        "mom_1m": 0.007,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.2819,
         "regime_shift_up": true,
@@ -5103,8 +5185,6 @@
         "usable_months": 11
       },
       "fct_flags": [
-        "momentum_proxy_monthly",
-        "no_liquidity_data",
         "beneish_unverifiable"
       ],
       "fct_flag_detail": {},
@@ -5237,8 +5317,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.4937,
-        "mom_6m": 0.1376,
-        "mom_1m": 0.1283,
+        "mom_6m": 0.1208,
+        "mom_1m": 0.1117,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.0324,
         "regime_shift_up": true,
@@ -5282,7 +5362,7 @@
       "jump_share": 0.45904352453096375,
       "up_months": 7,
       "z_revisions": null,
-      "z_value": 0.11,
+      "z_value": 0.077,
       "z_exp_gap": null,
       "gap_basis": null,
       "discount_rate_pct": null,
@@ -5303,16 +5383,16 @@
       "door2_ineligible_reason": null,
       "d2_eligible": true,
       "falling_knife_detail": null,
-      "pctl_d1": 99.5,
-      "pctl_d2": 84.7,
-      "best_pctl": 99.5,
+      "pctl_d1": 99.4,
+      "pctl_d2": 83.4,
+      "best_pctl": 99.4,
       "nominated_doors": [
         "DOOR_1_COMPOUNDER"
       ],
       "fct_momentum_state": {
         "mom_12_1": 1.3374,
-        "mom_6m": 1.1503,
-        "mom_1m": 0.0573,
+        "mom_6m": 1.053,
+        "mom_1m": 0.0094,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.2298,
         "mom_z_sector": 1.817,
@@ -5356,7 +5436,7 @@
       "z_value": 1.219,
       "z_exp_gap": -0.781,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 7.1015999999999995,
+      "discount_rate_pct": 7.073599999999999,
       "discount_rate_source": "anchor",
       "score_door1": 0.601,
       "score_door2": 0.891,
@@ -5435,7 +5515,7 @@
       "z_value": 1.798,
       "z_exp_gap": 1.623,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 10.93536,
+      "discount_rate_pct": 10.94656,
       "discount_rate_source": "anchor",
       "score_door1": 1.297,
       "score_door2": 1.686,
@@ -5463,8 +5543,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.3177,
-        "mom_6m": 0.4515,
-        "mom_1m": 0.1079,
+        "mom_6m": 0.3741,
+        "mom_1m": 0.0488,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.0057,
         "regime_shift_up": true,
@@ -5511,7 +5591,7 @@
       "z_value": 2.349,
       "z_exp_gap": 0.025,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 10.461030000000001,
+      "discount_rate_pct": 10.46738,
       "discount_rate_source": "anchor",
       "score_door1": -0.949,
       "score_door2": 0.757,
@@ -5565,7 +5645,7 @@
       "mid_cycle_window_years": 3,
       "mid_cycle_years_used": 3,
       "mcap_derived": false,
-      "cluster_macro_score": -0.33275483296787745
+      "cluster_macro_score": -0.33955284601713137
     },
     "HRMY": {
       "ticker": "HRMY",
@@ -5585,7 +5665,7 @@
       "z_value": 2.011,
       "z_exp_gap": 1.534,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 10.49526,
+      "discount_rate_pct": 10.501959999999999,
       "discount_rate_source": "anchor",
       "score_door1": 0.508,
       "score_door2": 1.644,
@@ -5639,7 +5719,7 @@
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
-      "cluster_macro_score": 0.12662011853685295
+      "cluster_macro_score": 0.12266563931205178
     },
     "HRTG": {
       "ticker": "HRTG",
@@ -5779,7 +5859,7 @@
         "adv_20d_usd": 210924944.0,
         "realised_vol_60d": 0.2173,
         "mom_break": false,
-        "jump_share": 0.2379804454201269,
+        "jump_share": 0.27918023352238763,
         "up_months": 9,
         "usable_months": 11
       },
@@ -5793,11 +5873,11 @@
       "mcap_derived": false,
       "cluster_macro_score": null
     },
-    "IDT": {
-      "ticker": "IDT",
-      "sector": "Communication Services",
-      "industry": "Telecom Services",
-      "cluster": "comm_telecom",
+    "HUM": {
+      "ticker": "HUM",
+      "sector": "Healthcare",
+      "industry": "Healthcare Plans",
+      "cluster": "health_services_facilities",
       "archetype": "compounder_general",
       "mgi_subindustry_id": null,
       "z_quality": -0.071,
@@ -5811,7 +5891,7 @@
       "z_value": 0.029,
       "z_exp_gap": -0.702,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.825330000000001,
+      "discount_rate_pct": 7.523140000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.495,
       "score_door2": -0.283,
@@ -5839,8 +5919,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.6559,
-        "mom_6m": 0.526,
-        "mom_1m": 0.024,
+        "mom_6m": 0.5003,
+        "mom_1m": 0.0068,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.3153,
         "regime_shift_up": true,
@@ -5887,7 +5967,7 @@
       "z_value": 2.316,
       "z_exp_gap": 0.282,
       "gap_basis": "revenue_fallback",
-      "discount_rate_pct": 8.377889999999999,
+      "discount_rate_pct": 8.36294,
       "discount_rate_source": "anchor",
       "score_door1": 1.979,
       "score_door2": 1.601,
@@ -5906,9 +5986,9 @@
       "door2_ineligible_reason": null,
       "d2_eligible": true,
       "falling_knife_detail": null,
-      "pctl_d1": 99.8,
-      "pctl_d2": 98.0,
-      "best_pctl": 99.8,
+      "pctl_d1": 99.7,
+      "pctl_d2": 97.8,
+      "best_pctl": 99.7,
       "nominated_doors": [
         "DOOR_1_COMPOUNDER",
         "DOUBLE_DOOR_CHAMPION"
@@ -5931,7 +6011,7 @@
         "adv_20d_usd": 2850185.0,
         "realised_vol_60d": 0.0584,
         "mom_break": false,
-        "jump_share": 0.34459166974399014,
+        "jump_share": 0.39172495719814915,
         "up_months": 7,
         "usable_months": 11
       },
@@ -5971,7 +6051,7 @@
       "z_value": 0.097,
       "z_exp_gap": -0.364,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.825330000000001,
+      "discount_rate_pct": 9.82518,
       "discount_rate_source": "anchor",
       "score_door1": 1.02,
       "score_door2": 0.081,
@@ -6046,7 +6126,7 @@
       "z_value": 0.661,
       "z_exp_gap": -0.236,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 7.54659,
+      "discount_rate_pct": 7.523140000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.774,
       "score_door2": 0.3,
@@ -6264,7 +6344,7 @@
       "z_value": 1.329,
       "z_exp_gap": 0.723,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.18963,
+      "discount_rate_pct": 9.18298,
       "discount_rate_source": "anchor",
       "score_door1": 0.596,
       "score_door2": 1.05,
@@ -6339,7 +6419,7 @@
       "z_value": 0.93,
       "z_exp_gap": 0.633,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.18963,
+      "discount_rate_pct": 9.18298,
       "discount_rate_source": "anchor",
       "score_door1": 1.064,
       "score_door2": 0.925,
@@ -6374,24 +6454,25 @@
         "mom_accel": -0.1404,
         "regime_shift_up": true,
         "regime_shift_down": false,
-        "mom_z_sector": 0.417,
-        "jump_share": 1.2029637510123043,
+        "mom_z_sector": 0.42,
+        "price_asof": "2026-11-06",
+        "pct_from_52w_high": -0.117,
+        "above_200dma": true,
+        "dma200_slope_20d": 0.0133,
+        "rs_vs_cluster_etf_3m": 0.0296,
+        "rs_vs_iwm_3m": 0.0028,
+        "adv_20d_usd": 29681240.0,
+        "realised_vol_60d": 0.2641,
+        "mom_break": false,
+        "jump_share": 1.2029643885056105,
         "up_months": 8,
         "usable_months": 11
       },
       "fct_flags": [
-        "momentum_proxy_monthly",
-        "no_liquidity_data",
         "beneish_unverifiable",
-        "mom_break_unverified_monthly_trend_ok",
-        "revisions_missing",
-        "adv_missing"
+        "revisions_missing"
       ],
-      "fct_flag_detail": {
-        "mom_break_unverified_monthly_trend_ok": {
-          "field_used": "latest_monthly_close_vs_10m_average"
-        }
-      },
+      "fct_flag_detail": {},
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
@@ -6443,8 +6524,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.2435,
-        "mom_6m": 0.0994,
-        "mom_1m": 0.0555,
+        "mom_6m": 0.086,
+        "mom_1m": 0.0426,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.048,
         "regime_shift_up": true,
@@ -6459,7 +6540,7 @@
         "adv_20d_usd": 135887518.0,
         "realised_vol_60d": 0.1887,
         "mom_break": false,
-        "jump_share": 0.508425231007272,
+        "jump_share": 0.5084248015554989,
         "up_months": 7,
         "usable_months": 11
       },
@@ -6518,8 +6599,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 1.0159,
-        "mom_6m": 0.7873,
-        "mom_1m": 0.2883,
+        "mom_6m": 0.7242,
+        "mom_1m": 0.2429,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.0108,
         "regime_shift_up": true,
@@ -6628,7 +6709,7 @@
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
-      "cluster_macro_score": 0.12662011853685295
+      "cluster_macro_score": 0.12266563931205178
     },
     "LAMR": {
       "ticker": "LAMR",
@@ -6722,7 +6803,7 @@
       "z_value": 0.457,
       "z_exp_gap": -0.266,
       "gap_basis": "revenue_fallback",
-      "discount_rate_pct": 7.54659,
+      "discount_rate_pct": 7.523140000000001,
       "discount_rate_source": "anchor",
       "score_door1": 1.184,
       "score_door2": 0.281,
@@ -6749,8 +6830,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 1.4551,
-        "mom_6m": 0.8771,
-        "mom_1m": 0.1812,
+        "mom_6m": 0.8454,
+        "mom_1m": 0.1613,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.0484,
         "regime_shift_up": true,
@@ -6850,7 +6931,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 1.3353370978505645,
+          "altman_z": 1.3765009525005425,
           "z_min": 1.5,
           "sector": "Consumer Cyclical",
           "_note": "Altman Z is a warning flag only, never a veto."
@@ -6979,9 +7060,9 @@
         "HYSTERESIS_RETAINED"
       ],
       "fct_momentum_state": {
-        "mom_12_1": 0.6126,
-        "mom_6m": 0.7676,
-        "mom_1m": 0.1883,
+        "mom_12_1": 0.6153,
+        "mom_6m": 0.4447,
+        "mom_1m": 0.0596,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.0145,
         "regime_shift_up": true,
@@ -6996,7 +7077,7 @@
         "adv_20d_usd": 146795816.0,
         "realised_vol_60d": 0.3154,
         "mom_break": false,
-        "jump_share": 0.4410046021001598,
+        "jump_share": 0.43946605940319033,
         "up_months": 5,
         "usable_months": 11
       },
@@ -7048,15 +7129,15 @@
       "d2_eligible": true,
       "falling_knife_detail": null,
       "pctl_d1": 99.8,
-      "pctl_d2": 67.0,
+      "pctl_d2": 66.5,
       "best_pctl": 99.8,
       "nominated_doors": [
         "DOOR_1_COMPOUNDER"
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.004,
-        "mom_6m": 0.3418,
-        "mom_1m": 0.2216,
+        "mom_6m": 0.3141,
+        "mom_1m": 0.1964,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.2176,
         "regime_shift_up": false,
@@ -7103,7 +7184,7 @@
       "z_value": 0.46,
       "z_exp_gap": 1.028,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.18963,
+      "discount_rate_pct": 9.18298,
       "discount_rate_source": "anchor",
       "score_door1": 0.872,
       "score_door2": 0.595,
@@ -7562,7 +7643,7 @@
       "z_value": 1.033,
       "z_exp_gap": 1.635,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 13.44882,
+      "discount_rate_pct": 13.48572,
       "discount_rate_source": "anchor",
       "score_door1": 0.621,
       "score_door2": 1.055,
@@ -7617,7 +7698,7 @@
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
-      "cluster_macro_score": 0.23044921245475714
+      "cluster_macro_score": 0.22134828282671082
     },
     "NBR": {
       "ticker": "NBR",
@@ -7689,7 +7770,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 0.8114753903729157,
+          "altman_z": 0.8102756245008161,
           "z_min": 1.8,
           "sector": "Energy",
           "_note": "Altman Z is a warning flag only, never a veto."
@@ -7718,7 +7799,7 @@
       "z_value": -0.078,
       "z_exp_gap": 1.6,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.11139,
+      "discount_rate_pct": 9.10394,
       "discount_rate_source": "anchor",
       "score_door1": 1.346,
       "score_door2": 0.893,
@@ -7742,7 +7823,7 @@
       "best_pctl": 99.0,
       "nominated_doors": [
         "DOOR_1_COMPOUNDER",
-        "DOUBLE_DOOR_CHAMPION"
+        "GLOBAL_WILDCARD"
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.4378,
@@ -7762,8 +7843,8 @@
         "adv_20d_usd": 656021927.0,
         "realised_vol_60d": 0.4347,
         "mom_break": false,
-        "jump_share": 0.816693594760441,
-        "up_months": 7,
+        "jump_share": 1.7681918716533573,
+        "up_months": 6,
         "usable_months": 11
       },
       "fct_flags": [
@@ -7793,7 +7874,7 @@
       "z_value": 0.599,
       "z_exp_gap": -1.669,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.11139,
+      "discount_rate_pct": 9.10394,
       "discount_rate_source": "anchor",
       "score_door1": 1.105,
       "score_door2": -0.171,
@@ -7968,9 +8049,9 @@
       "door2_ineligible_reason": null,
       "d2_eligible": true,
       "falling_knife_detail": null,
-      "pctl_d1": 32.3,
-      "pctl_d2": 99.6,
-      "best_pctl": 99.6,
+      "pctl_d1": 35.1,
+      "pctl_d2": 99.7,
+      "best_pctl": 99.7,
       "nominated_doors": [
         "DOOR_2_VALUE_GAP"
       ],
@@ -8023,7 +8104,7 @@
       "z_value": 1.801,
       "z_exp_gap": 1.534,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 7.54659,
+      "discount_rate_pct": 7.523140000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.765,
       "score_door2": 1.561,
@@ -8066,7 +8147,7 @@
         "adv_20d_usd": 26117475.5,
         "realised_vol_60d": 0.5821,
         "mom_break": false,
-        "jump_share": 0.6467003810488322,
+        "jump_share": 0.6596635365707467,
         "up_months": 6,
         "usable_months": 11
       },
@@ -8097,7 +8178,7 @@
       "z_value": 0.309,
       "z_exp_gap": 1.635,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 11.66886,
+      "discount_rate_pct": 11.687560000000001,
       "discount_rate_source": "anchor",
       "score_door1": -0.606,
       "score_door2": 0.535,
@@ -8198,8 +8279,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.0575,
-        "mom_6m": 0.0565,
-        "mom_1m": 0.1254,
+        "mom_6m": 0.0534,
+        "mom_1m": 0.122,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.1826,
         "regime_shift_up": true,
@@ -8365,7 +8446,7 @@
         "adv_20d_usd": 39022470.0,
         "realised_vol_60d": 0.2306,
         "mom_break": false,
-        "jump_share": 0.5769549312173099,
+        "jump_share": 0.48180617865405284,
         "up_months": 7,
         "usable_months": 11
       },
@@ -8374,6 +8455,80 @@
         "revisions_missing"
       ],
       "fct_flag_detail": {},
+      "mid_cycle_window_years": null,
+      "mid_cycle_years_used": null,
+      "mcap_derived": false,
+      "cluster_macro_score": null
+    },
+    "PAGP": {
+      "ticker": "PAGP",
+      "sector": "Energy",
+      "industry": "Oil & Gas Midstream",
+      "cluster": "energy_midstream_refining",
+      "archetype": "compounder_general",
+      "mgi_subindustry_id": null,
+      "z_quality": 0.396,
+      "z_momentum": 0.905,
+      "z_momentum_door1": 0.829,
+      "z_momentum_sector_neutral": 0.661,
+      "z_momentum_universe": 0.724,
+      "jump_share": 0.21218345339583708,
+      "up_months": 9,
+      "z_revisions": null,
+      "z_value": 2.313,
+      "z_exp_gap": 0.035,
+      "gap_basis": "owner_cf",
+      "discount_rate_pct": 7.730619999999999,
+      "discount_rate_source": "anchor",
+      "score_door1": 0.585,
+      "score_door2": 1.019,
+      "door1_pillars_used": [
+        "quality",
+        "momentum"
+      ],
+      "door2_pillars_used": [
+        "value",
+        "exp_gap",
+        "quality"
+      ],
+      "door1_weight_scale": 1.25,
+      "door2_weight_scale": 1.0,
+      "door1_ineligible_reason": null,
+      "door2_ineligible_reason": null,
+      "d2_eligible": true,
+      "falling_knife_detail": null,
+      "pctl_d1": 79.8,
+      "pctl_d2": 93.3,
+      "best_pctl": 93.3,
+      "nominated_doors": [
+        "DOOR_2_VALUE_GAP"
+      ],
+      "fct_momentum_state": {
+        "mom_12_1": 0.5819,
+        "mom_6m": 0.0837,
+        "mom_1m": -0.0102,
+        "high_52w_proxy": -0.0916,
+        "mom_accel": -0.4369,
+        "regime_shift_up": true,
+        "regime_shift_down": false,
+        "mom_z_sector": 0.529,
+        "jump_share": 0.21218345339583708,
+        "up_months": 9,
+        "usable_months": 11
+      },
+      "fct_flags": [
+        "momentum_proxy_monthly",
+        "no_liquidity_data",
+        "beneish_unverifiable",
+        "mom_break_unverified_monthly_trend_ok",
+        "revisions_missing",
+        "adv_missing"
+      ],
+      "fct_flag_detail": {
+        "mom_break_unverified_monthly_trend_ok": {
+          "field_used": "latest_monthly_close_vs_10m_average"
+        }
+      },
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
@@ -8397,7 +8552,7 @@
       "z_value": 0.097,
       "z_exp_gap": -0.102,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 11.37546,
+      "discount_rate_pct": 11.39116,
       "discount_rate_source": "anchor",
       "score_door1": 1.141,
       "score_door2": 0.095,
@@ -8498,8 +8653,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.1717,
-        "mom_6m": 0.428,
-        "mom_1m": 0.4531,
+        "mom_6m": 0.4296,
+        "mom_1m": 0.4547,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.0547,
         "regime_shift_up": true,
@@ -8648,8 +8803,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.0713,
-        "mom_6m": 0.1677,
-        "mom_1m": 0.1332,
+        "mom_6m": 0.1406,
+        "mom_1m": 0.1069,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.1737,
         "regime_shift_up": false,
@@ -8696,7 +8851,7 @@
       "z_value": 1.85,
       "z_exp_gap": 1.635,
       "gap_basis": "revenue_fallback",
-      "discount_rate_pct": 11.37546,
+      "discount_rate_pct": 11.39116,
       "discount_rate_source": "anchor",
       "score_door1": 0.562,
       "score_door2": 1.723,
@@ -8991,7 +9146,7 @@
       "z_value": 0.948,
       "z_exp_gap": 0.788,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 6.720180000000001,
+      "discount_rate_pct": 6.688280000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.292,
       "score_door2": 0.902,
@@ -9034,7 +9189,7 @@
         "adv_20d_usd": 17129642.0,
         "realised_vol_60d": 0.3412,
         "mom_break": true,
-        "jump_share": null,
+        "jump_share": 1.4553826341846015,
         "up_months": 5,
         "usable_months": 11
       },
@@ -9092,8 +9247,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.2319,
-        "mom_6m": 0.1508,
-        "mom_1m": 0.0554,
+        "mom_6m": 0.1381,
+        "mom_1m": 0.0437,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.0394,
         "regime_shift_up": true,
@@ -9135,12 +9290,12 @@
       "z_momentum_sector_neutral": -0.403,
       "z_momentum_universe": -0.446,
       "jump_share": null,
-      "up_months": 4,
+      "up_months": 3,
       "z_revisions": null,
       "z_value": 1.759,
       "z_exp_gap": 1.534,
       "gap_basis": "revenue_fallback",
-      "discount_rate_pct": 10.49526,
+      "discount_rate_pct": 10.501959999999999,
       "discount_rate_source": "anchor",
       "score_door1": 0.28,
       "score_door2": 1.496,
@@ -9185,7 +9340,7 @@
         "realised_vol_60d": 0.4476,
         "mom_break": true,
         "jump_share": null,
-        "up_months": 4,
+        "up_months": 3,
         "usable_months": 11
       },
       "fct_flags": [
@@ -9195,7 +9350,7 @@
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
-      "cluster_macro_score": 0.12662011853685295
+      "cluster_macro_score": 0.12266563931205178
     },
     "QUAD": {
       "ticker": "QUAD",
@@ -9215,7 +9370,7 @@
       "z_value": 1.974,
       "z_exp_gap": -0.486,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.18963,
+      "discount_rate_pct": 9.18298,
       "discount_rate_source": "anchor",
       "score_door1": 1.055,
       "score_door2": 0.858,
@@ -9269,7 +9424,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 1.6221012337952274,
+          "altman_z": 1.6176175735621934,
           "z_min": 1.8,
           "sector": "Industrials",
           "_note": "Altman Z is a warning flag only, never a veto."
@@ -9298,7 +9453,7 @@
       "z_value": 0.384,
       "z_exp_gap": 0.523,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.18963,
+      "discount_rate_pct": 9.18298,
       "discount_rate_source": "anchor",
       "score_door1": 1.443,
       "score_door2": 0.745,
@@ -9341,7 +9496,7 @@
         "adv_20d_usd": 87551053.5,
         "realised_vol_60d": 0.3102,
         "mom_break": false,
-        "jump_share": 0.6817904498195269,
+        "jump_share": 0.42885572991319276,
         "up_months": 5,
         "usable_months": 11
       },
@@ -9351,7 +9506,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 1.6748957998511784,
+          "altman_z": 1.655120044620582,
           "z_min": 1.8,
           "sector": "Industrials",
           "_note": "Altman Z is a warning flag only, never a veto."
@@ -9553,8 +9708,7 @@
       "pctl_d2": 52.8,
       "best_pctl": 99.2,
       "nominated_doors": [
-        "DOOR_1_COMPOUNDER",
-        "GLOBAL_WILDCARD"
+        "DOOR_1_COMPOUNDER"
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.4594,
@@ -9681,7 +9835,7 @@
       "z_value": 0.379,
       "z_exp_gap": 0.562,
       "gap_basis": "revenue_fallback",
-      "discount_rate_pct": 11.37546,
+      "discount_rate_pct": 11.39116,
       "discount_rate_source": "anchor",
       "score_door1": 1.747,
       "score_door2": 0.765,
@@ -9724,8 +9878,8 @@
         "adv_20d_usd": 121093110.0,
         "realised_vol_60d": 0.5116,
         "mom_break": false,
-        "jump_share": 0.38909343737718577,
-        "up_months": 8,
+        "jump_share": 0.3340395025176054,
+        "up_months": 9,
         "usable_months": 11
       },
       "fct_flags": [
@@ -9736,7 +9890,7 @@
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
-      "cluster_macro_score": 0.26356768119420076
+      "cluster_macro_score": 0.2580305294468591
     },
     "RNR": {
       "ticker": "RNR",
@@ -9860,8 +10014,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": -0.0999,
-        "mom_6m": 0.0845,
-        "mom_1m": 0.0117,
+        "mom_6m": 0.0853,
+        "mom_1m": 0.0124,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.1572,
         "regime_shift_up": false,
@@ -9911,7 +10065,7 @@
       "jump_share": 0.24246664135243745,
       "up_months": 9,
       "z_revisions": null,
-      "z_value": 0.74,
+      "z_value": 0.741,
       "z_exp_gap": null,
       "gap_basis": null,
       "discount_rate_pct": null,
@@ -9941,8 +10095,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.5848,
-        "mom_6m": 0.3602,
-        "mom_1m": 0.1576,
+        "mom_6m": 0.3652,
+        "mom_1m": 0.1619,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.0284,
         "regime_shift_up": true,
@@ -9969,7 +10123,7 @@
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
-      "cluster_macro_score": 0.12662011853685295
+      "cluster_macro_score": 0.12266563931205178
     },
     "RUSHB": {
       "ticker": "RUSHB",
@@ -9989,7 +10143,7 @@
       "z_value": 0.081,
       "z_exp_gap": -1.542,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 10.93536,
+      "discount_rate_pct": 10.94656,
       "discount_rate_source": "anchor",
       "score_door1": 1.016,
       "score_door2": -0.422,
@@ -10013,12 +10167,12 @@
       "best_pctl": 97.0,
       "nominated_doors": [
         "DOOR_1_COMPOUNDER",
-        "HYSTERESIS_RETAINED"
+        "GLOBAL_WILDCARD"
       ],
       "fct_momentum_state": {
-        "mom_12_1": 0.5601,
-        "mom_6m": 0.2838,
-        "mom_1m": 0.1503,
+        "mom_12_1": 0.6075,
+        "mom_6m": 0.3568,
+        "mom_1m": 0.0323,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.0278,
         "regime_shift_up": true,
@@ -10033,7 +10187,7 @@
         "adv_20d_usd": 4908406.5,
         "realised_vol_60d": 0.3962,
         "mom_break": false,
-        "jump_share": 0.36974292273190346,
+        "jump_share": 0.34642933049110547,
         "up_months": 9,
         "usable_months": 11
       },
@@ -10064,7 +10218,7 @@
       "z_value": 1.813,
       "z_exp_gap": 1.623,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 10.93536,
+      "discount_rate_pct": 10.94656,
       "discount_rate_source": "anchor",
       "score_door1": -0.058,
       "score_door2": 1.518,
@@ -10087,8 +10241,7 @@
       "pctl_d2": 97.8,
       "best_pctl": 97.8,
       "nominated_doors": [
-        "DOOR_2_VALUE_GAP",
-        "GLOBAL_WILDCARD"
+        "DOOR_2_VALUE_GAP"
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.0259,
@@ -10112,9 +10265,7 @@
         "up_months": 7,
         "usable_months": 11
       },
-      "fct_flags": [
-        "revisions_missing"
-      ],
+      "fct_flags": [],
       "fct_flag_detail": {},
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
@@ -10213,7 +10364,7 @@
       "z_value": 0.006,
       "z_exp_gap": -1.237,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.11139,
+      "discount_rate_pct": 9.10394,
       "discount_rate_source": "anchor",
       "score_door1": 1.018,
       "score_door2": -0.399,
@@ -10257,7 +10408,7 @@
         "adv_20d_usd": 9641321.5,
         "realised_vol_60d": 0.2446,
         "mom_break": false,
-        "jump_share": 0.4348268670806257,
+        "jump_share": 0.4348267169066627,
         "up_months": 8,
         "usable_months": 11
       },
@@ -10286,7 +10437,7 @@
       "z_value": 1.435,
       "z_exp_gap": 1.19,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 6.720180000000001,
+      "discount_rate_pct": 6.688280000000001,
       "discount_rate_source": "anchor",
       "score_door1": 1.467,
       "score_door2": 1.473,
@@ -10368,7 +10519,7 @@
       "z_value": 1.432,
       "z_exp_gap": 1.183,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 6.720180000000001,
+      "discount_rate_pct": 6.688280000000001,
       "discount_rate_source": "anchor",
       "score_door1": 1.426,
       "score_door2": 1.468,
@@ -10395,9 +10546,9 @@
         "DOUBLE_DOOR_CHAMPION"
       ],
       "fct_momentum_state": {
-        "mom_12_1": 0.6265,
-        "mom_6m": 0.0667,
-        "mom_1m": -0.1753,
+        "mom_12_1": 0.3248,
+        "mom_6m": 0.0176,
+        "mom_1m": -0.071,
         "high_52w_proxy": -0.2342,
         "mom_accel": -0.6834,
         "regime_shift_up": false,
@@ -10412,8 +10563,8 @@
         "adv_20d_usd": 0.0,
         "realised_vol_60d": 0.4335,
         "mom_break": true,
-        "jump_share": 0.3861365928175767,
-        "up_months": 8,
+        "jump_share": 0.6678077164452291,
+        "up_months": 7,
         "usable_months": 11
       },
       "fct_flags": [
@@ -10496,12 +10647,14 @@
         "adv_20d_usd": 62128200.0,
         "realised_vol_60d": 0.6255,
         "mom_break": false,
-        "jump_share": 0.7903817494759375,
-        "up_months": 5,
+        "jump_share": 0.5056431861928976,
+        "up_months": 6,
         "usable_months": 11
       },
       "fct_flags": [
-        "beneish_unverifiable"
+        "beneish_unverifiable",
+        "revisions_missing",
+        "also_trend_leader"
       ],
       "fct_flag_detail": {},
       "mid_cycle_window_years": null,
@@ -10527,7 +10680,7 @@
       "z_value": 2.506,
       "z_exp_gap": 0.711,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 7.75197,
+      "discount_rate_pct": 7.730619999999999,
       "discount_rate_source": "anchor",
       "score_door1": 0.903,
       "score_door2": 1.534,
@@ -10569,7 +10722,7 @@
         "rs_vs_cluster_etf_3m": -0.0664,
         "rs_vs_iwm_3m": 0.1061,
         "adv_20d_usd": 354168.5,
-        "realised_vol_60d": 0.1132,
+        "realised_vol_60d": 0.1149,
         "mom_break": false,
         "jump_share": 0.5881129826559984,
         "up_months": 7,
@@ -10619,7 +10772,7 @@
       "d2_eligible": true,
       "falling_knife_detail": null,
       "pctl_d1": 99.9,
-      "pctl_d2": 99.0,
+      "pctl_d2": 99.4,
       "best_pctl": 99.9,
       "nominated_doors": [
         "DOOR_1_COMPOUNDER",
@@ -10655,11 +10808,11 @@
       "mcap_derived": false,
       "cluster_macro_score": null
     },
-    "SN": {
-      "ticker": "SN",
-      "sector": "Consumer Cyclical",
-      "industry": "Furnishings, Fixtures & Appliances",
-      "cluster": "cons_goods_apparel",
+    "SM": {
+      "ticker": "SM",
+      "sector": "Energy",
+      "industry": "Oil & Gas E&P",
+      "cluster": "energy_upstream",
       "archetype": "commodity_cyclical",
       "mgi_subindustry_id": null,
       "z_quality": -0.136,
@@ -10673,7 +10826,7 @@
       "z_value": -0.37,
       "z_exp_gap": -0.112,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 10.93536,
+      "discount_rate_pct": 8.99526,
       "discount_rate_source": "anchor",
       "score_door1": 0.974,
       "score_door2": -0.22,
@@ -10700,9 +10853,9 @@
         "HYSTERESIS_RETAINED"
       ],
       "fct_momentum_state": {
-        "mom_12_1": 1.1067,
-        "mom_6m": 0.8978,
-        "mom_1m": 0.2172,
+        "mom_12_1": 1.1318,
+        "mom_6m": 0.8377,
+        "mom_1m": 0.0769,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.0276,
         "regime_shift_up": true,
@@ -10717,7 +10870,7 @@
         "adv_20d_usd": 252639826.0,
         "realised_vol_60d": 0.3851,
         "mom_break": false,
-        "jump_share": 0.29865723143619033,
+        "jump_share": 0.29398426275344597,
         "up_months": 9,
         "usable_months": 11
       },
@@ -10824,7 +10977,7 @@
       "z_value": 0.166,
       "z_exp_gap": -0.27,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.11139,
+      "discount_rate_pct": 9.10394,
       "discount_rate_source": "anchor",
       "score_door1": 0.684,
       "score_door2": 0.083,
@@ -10925,8 +11078,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.9534,
-        "mom_6m": 0.5692,
-        "mom_1m": 0.0506,
+        "mom_6m": 0.5956,
+        "mom_1m": 0.0683,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.2398,
         "regime_shift_up": true,
@@ -10947,17 +11100,9 @@
       },
       "fct_flags": [
         "beneish_unverifiable",
-        "insolvency_distress_altman_z",
         "revisions_missing"
       ],
-      "fct_flag_detail": {
-        "insolvency_distress_altman_z": {
-          "altman_z": 1.1989098837439847,
-          "z_min": 1.2,
-          "sector": "Communication Services",
-          "_note": "Altman Z is a warning flag only, never a veto."
-        }
-      },
+      "fct_flag_detail": {},
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
@@ -11026,7 +11171,7 @@
         "adv_20d_usd": 543486.5,
         "realised_vol_60d": 0.252,
         "mom_break": false,
-        "jump_share": 0.9634650193348273,
+        "jump_share": 0.9634662226157528,
         "up_months": 6,
         "usable_months": 11
       },
@@ -11131,7 +11276,7 @@
       "z_value": 0.748,
       "z_exp_gap": -1.146,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.18963,
+      "discount_rate_pct": 9.18298,
       "discount_rate_source": "anchor",
       "score_door1": 1.143,
       "score_door2": 0.11,
@@ -11174,7 +11319,7 @@
         "adv_20d_usd": 6799264.5,
         "realised_vol_60d": 0.356,
         "mom_break": false,
-        "jump_share": 0.4613546570447121,
+        "jump_share": 0.42929466982092146,
         "up_months": 6,
         "usable_months": 11
       },
@@ -11205,7 +11350,7 @@
       "z_value": 1.787,
       "z_exp_gap": 0.851,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 11.66886,
+      "discount_rate_pct": 11.687560000000001,
       "discount_rate_source": "anchor",
       "score_door1": 1.416,
       "score_door2": 1.502,
@@ -11233,8 +11378,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": -0.0994,
-        "mom_6m": 0.3318,
-        "mom_1m": 0.1022,
+        "mom_6m": 0.412,
+        "mom_1m": 0.1686,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.3739,
         "regime_shift_up": false,
@@ -11280,7 +11425,7 @@
       "z_value": -0.008,
       "z_exp_gap": -0.62,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 6.720180000000001,
+      "discount_rate_pct": 6.688280000000001,
       "discount_rate_source": "anchor",
       "score_door1": 0.694,
       "score_door2": -0.268,
@@ -11469,28 +11614,28 @@
         "usable_months": 11
       },
       "fct_flags": [
-        "momentum_proxy_monthly",
-        "no_liquidity_data",
+        "forensic_red_flag",
         "beneish_unverifiable",
-        "mom_break_unverified_monthly_trend_ok",
-        "revisions_missing",
-        "adv_missing"
+        "heavy_accruals",
+        "revisions_missing"
       ],
       "fct_flag_detail": {
-        "mom_break_unverified_monthly_trend_ok": {
-          "field_used": "latest_monthly_close_vs_10m_average"
+        "forensic_red_flag": {
+          "accruals": 0.5752,
+          "m_score": null,
+          "reason": "accruals_over_0.20"
         }
       },
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
-      "cluster_macro_score": null
+      "cluster_macro_score": 0.12266563931205178
     },
-    "TRN": {
-      "ticker": "TRN",
-      "sector": "Industrials",
-      "industry": "Railroads",
-      "cluster": "ind_freight_logistics",
+    "TOP": {
+      "ticker": "TOP",
+      "sector": "Financial Services",
+      "industry": "Capital Markets",
+      "cluster": "fin_capital_markets",
       "archetype": "compounder_general",
       "mgi_subindustry_id": null,
       "z_quality": 1.337,
@@ -11504,7 +11649,7 @@
       "z_value": 2.72,
       "z_exp_gap": 1.67,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.18963,
+      "discount_rate_pct": 9.06442,
       "discount_rate_source": "anchor",
       "score_door1": 0.753,
       "score_door2": 2.023,
@@ -11527,7 +11672,7 @@
       "pctl_d2": 99.4,
       "best_pctl": 99.4,
       "nominated_doors": [
-        "DOOR_2_VALUE_GAP",
+        "DOOR_1_COMPOUNDER",
         "GLOBAL_WILDCARD"
       ],
       "fct_momentum_state": {
@@ -11588,7 +11733,7 @@
       "z_value": 0.624,
       "z_exp_gap": 1.6,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.11139,
+      "discount_rate_pct": 9.10394,
       "discount_rate_source": "anchor",
       "score_door1": -0.13,
       "score_door2": 0.983,
@@ -11660,7 +11805,7 @@
       "z_value": 0.86,
       "z_exp_gap": 3.004,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.07227,
+      "discount_rate_pct": 9.06442,
       "discount_rate_source": "anchor",
       "score_door1": 0.675,
       "score_door2": 1.848,
@@ -11855,7 +12000,7 @@
         "adv_20d_usd": 11089337.0,
         "realised_vol_60d": 0.2454,
         "mom_break": false,
-        "jump_share": 0.36917997075731424,
+        "jump_share": 0.36918025043867553,
         "up_months": 6,
         "usable_months": 11
       },
@@ -11909,13 +12054,12 @@
       "pctl_d2": 45.6,
       "best_pctl": 98.7,
       "nominated_doors": [
-        "DOOR_1_COMPOUNDER",
-        "GLOBAL_WILDCARD"
+        "DOOR_1_COMPOUNDER"
       ],
       "fct_momentum_state": {
-        "mom_12_1": 0.063,
-        "mom_6m": 0.3288,
-        "mom_1m": 0.215,
+        "mom_12_1": 0.2441,
+        "mom_6m": 0.3004,
+        "mom_1m": 0.0242,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.1743,
         "regime_shift_up": true,
@@ -11930,8 +12074,8 @@
         "adv_20d_usd": 2860495399.0,
         "realised_vol_60d": 0.222,
         "mom_break": false,
-        "jump_share": 1.4303318960011393,
-        "up_months": 5,
+        "jump_share": 0.6438920225951718,
+        "up_months": 6,
         "usable_months": 11
       },
       "fct_flags": [
@@ -11962,7 +12106,7 @@
       "z_value": 1.363,
       "z_exp_gap": -0.25,
       "gap_basis": "revenue_fallback",
-      "discount_rate_pct": 9.825330000000001,
+      "discount_rate_pct": 9.82518,
       "discount_rate_source": "anchor",
       "score_door1": 1.169,
       "score_door2": 0.722,
@@ -12134,7 +12278,7 @@
       "z_value": 0.242,
       "z_exp_gap": -0.904,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 11.37546,
+      "discount_rate_pct": 11.39116,
       "discount_rate_source": "anchor",
       "score_door1": 1.066,
       "score_door2": 0.02,
@@ -12162,8 +12306,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.1907,
-        "mom_6m": 0.1904,
-        "mom_1m": 0.1277,
+        "mom_6m": 0.1567,
+        "mom_1m": 0.0958,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.0871,
         "regime_shift_up": true,
@@ -12176,7 +12320,7 @@
         "rs_vs_cluster_etf_3m": 0.0913,
         "rs_vs_iwm_3m": 0.1427,
         "adv_20d_usd": 273864648.0,
-        "realised_vol_60d": 0.2296,
+        "realised_vol_60d": 0.2295,
         "mom_break": false,
         "jump_share": 0.8150978468633905,
         "up_months": 6,
@@ -12189,7 +12333,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": -4.100824725072576,
+          "altman_z": -4.230421972048237,
           "z_min": 1.2,
           "sector": "Technology",
           "_note": "Altman Z is a warning flag only, never a veto."
@@ -12198,7 +12342,7 @@
       "mid_cycle_window_years": null,
       "mid_cycle_years_used": null,
       "mcap_derived": false,
-      "cluster_macro_score": 0.26356768119420076
+      "cluster_macro_score": 0.2580305294468591
     },
     "VSNT": {
       "ticker": "VSNT",
@@ -12281,7 +12425,7 @@
       "z_value": -0.175,
       "z_exp_gap": -0.42,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 10.93536,
+      "discount_rate_pct": 10.94656,
       "discount_rate_source": "anchor",
       "score_door1": 1.169,
       "score_door2": -0.211,
@@ -12308,8 +12452,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 1.5095,
-        "mom_6m": 1.1021,
-        "mom_1m": 0.2316,
+        "mom_6m": 1.0997,
+        "mom_1m": 0.2302,
         "high_52w_proxy": 0.0,
         "mom_accel": -0.0301,
         "regime_shift_up": true,
@@ -12322,7 +12466,7 @@
         "rs_vs_cluster_etf_3m": 0.0853,
         "rs_vs_iwm_3m": 0.1645,
         "adv_20d_usd": 139419488.5,
-        "realised_vol_60d": 0.5624,
+        "realised_vol_60d": 0.5634,
         "mom_break": false,
         "jump_share": 0.4535174508968522,
         "up_months": 9,
@@ -12356,7 +12500,7 @@
       "z_value": 3.666,
       "z_exp_gap": 0.023,
       "gap_basis": "owner_cf",
-      "discount_rate_pct": 9.11139,
+      "discount_rate_pct": 9.10394,
       "discount_rate_source": "anchor",
       "score_door1": 0.659,
       "score_door2": 1.573,
@@ -12408,7 +12552,7 @@
         "beneish_unverifiable"
       ],
       "fct_flag_detail": {
-        "below_min_adv": 292319.0
+        "below_min_adv": 281317.5
       },
       "mid_cycle_window_years": 3,
       "mid_cycle_years_used": 3,
@@ -12580,13 +12724,13 @@
       "jump_share": null,
       "up_months": null,
       "z_revisions": null,
-      "z_value": 2.101,
+      "z_value": 2.085,
       "z_exp_gap": null,
       "gap_basis": null,
       "discount_rate_pct": null,
       "discount_rate_source": null,
       "score_door1": null,
-      "score_door2": 1.553,
+      "score_door2": 1.54,
       "door1_pillars_used": [],
       "door2_pillars_used": [
         "value",
@@ -12599,8 +12743,8 @@
       "d2_eligible": true,
       "falling_knife_detail": null,
       "pctl_d1": null,
-      "pctl_d2": 97.9,
-      "best_pctl": 97.9,
+      "pctl_d2": 97.7,
+      "best_pctl": 97.7,
       "nominated_doors": [
         "DOOR_2_VALUE_GAP",
         "GLOBAL_WILDCARD"
@@ -12623,7 +12767,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 0.48760098583127415,
+          "altman_z": 0.4875085158332528,
           "z_min": 1.2,
           "sector": "Technology",
           "_note": "Altman Z is a warning flag only, never a veto."
@@ -12680,8 +12824,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.054,
-        "mom_6m": 0.0647,
-        "mom_1m": 0.1843,
+        "mom_6m": 0.0037,
+        "mom_1m": 0.1165,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.1873,
         "regime_shift_up": true,
@@ -12755,8 +12899,8 @@
       ],
       "fct_momentum_state": {
         "mom_12_1": 0.5188,
-        "mom_6m": 0.3657,
-        "mom_1m": 0.2126,
+        "mom_6m": 0.3326,
+        "mom_1m": 0.1833,
         "high_52w_proxy": 0.0,
         "mom_accel": 0.0022,
         "regime_shift_up": true,
@@ -12858,7 +13002,7 @@
       ],
       "fct_flag_detail": {
         "insolvency_distress_altman_z": {
-          "altman_z": 1.5259292761059635,
+          "altman_z": 1.52871277427997,
           "z_min": 1.8,
           "sector": "Industrials",
           "_note": "Altman Z is a warning flag only, never a veto."
