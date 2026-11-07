@@ -1,0 +1,907 @@
+{
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 70,
+ "claims_supported": 46,
+ "date": "2026-11-07T08:59:00Z",
+ "family": "family_not_built",
+ "flags": [
+  "OGE Energy commenced an at-the-market equity offering program for up to $750,000,000 of common stock, filed via prospectus supplement on October 28, 2026.",
+  "OG&E's Board of Directors named John Laws as Chief Operating Officer of OG&E, effective January 4, 2027.",
+  "OGE Energy's Board of Directors elected Richard (Rick) E. Muncrief as a new director, effective August 1, 2026; he will serve on the Nominating, Corporate Governance and Stewardship Committee and the Audit Committee."
+ ],
+ "in_code_book": false,
+ "model": "qwen",
+ "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "qwen_book": null,
+ "screener_commit": "e06fdedb1328e4a2c9aed0ccb4462f339f2f6c68",
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "Stated explicitly in the 10-K Item 1 Business section.",
+    "claim": "OGE Energy is a holding company whose sole operating subsidiary, OG&E, generates, transmits, distributes and sells retail electric energy in Oklahoma and western Arkansas.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "OGE Energy is a holding company whose primary investment provides electricity in Oklahoma and western Arkansas.",
+     "OG&E, which generates, transmits, distributes and sells electric energy in Oklahoma and western Arkansas and are reported through OGE Energy's electric company business segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 and 10-Q MD&A customer count table.",
+    "claim": "OG&E serves approximately 918,559 retail customers and does not serve wholesale customers in either state.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "OG&E provides retail electric service to approximately 913,000 customers in Oklahoma and western Arkansas throughout a service area that covers 30,000 square miles",
+     "OG&E does not currently serve wholesale customers in either state.",
+     "Number of customers | 918,559"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1.",
+    "claim": "Ninety-two percent of OG&E's 2025 total electric operating revenues came from Oklahoma sales, with the remainder from Arkansas.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "OG&E derived 92 percent of its total electric operating revenues in 2025 from sales in Oklahoma and the remainder from sales in Arkansas."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q MD&A segment table.",
+    "claim": "The company reports two segments: OG&E (Electric Company) and Other operations (the holding company), with OG&E contributing the vast majority of net income.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "OG&E (Electric Company) | $320.9 | $242.9 | $498.9 | $421.6",
+     "Other operations | (4.7) | (11.6) | (16.2) | (20.1)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q MD&A revenue variance table.",
+    "claim": "Weather, measured in cooling and heating degree days, is the largest single driver of quarterly revenue variation.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Increased during the three and nine months ended September 30, 2026 primarily due to a 47 percent and 46 percent increase in cooling degree days, respectively.",
+     "Quantity impacts (primarily weather) (A) | $68.9 | $53.2"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q MD&A revenue variance table.",
+    "claim": "Load growth from new customers and non-residential demand is a secondary, steady revenue driver.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "New customer growth | 6.0 | 11.9",
+     "Non-residential demand and related revenues | 1.2 | 9.0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q MD&A and 10-K rate structure discussion.",
+    "claim": "Regulatory rate reviews and formula-rate riders drive price variance in operating revenues.",
+    "facts": [
+     "P4",
+     "P1"
+    ],
+    "quotes": [
+     "Increased during the three and nine months ended September 30, 2026 primarily due to price variance related to weather and increased recovery through rider mechanisms.",
+     "OG&E's current rate order from the APSC includes a formula rate rider that provides for an annual adjustment to rates if the earned rate of return falls outside of a plus or minus 50 basis point dead-band around the allowed return on equity."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q income statement and 10-K rate structure section.",
+    "claim": "Fuel, purchased power and direct transmission expense is the largest cost line but is substantially recoverable from customers through fuel adjustment clauses, so it does not directly affect earnings.",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "FUEL, PURCHASED POWER AND DIRECT TRANSMISSION EXPENSE | 441.2 | 388.5 | 995.6 | 973.6",
+     "OG&E's standard tariff rates include a cost of service component (including an authorized return on capital) plus a fuel adjustment clause mechanism that allows OG&E to pass through to customers the actual cost of fuel and purchased power."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q income statement.",
+    "claim": "Operating expenses that affect earnings consist of other operation and maintenance, depreciation and amortization, and taxes other than income.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Other operation and maintenance | 137.1 | 143.3 | 412.3 | 392.2",
+     "Depreciation and amortization | 149.2 | 146.7 | 423.7 | 424.7",
+     "Taxes other than income | 26.8 | 25.2 | 82.5 | 82.6"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q income statement and 10-K MD&A.",
+    "claim": "Interest expense is a material cost driven by long-term debt issued to fund capital expenditures.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Interest on long-term debt | 71.7 | 66.4 | 209.6 | 194.4",
+     "Interest expense increased $11.1 million, or 5.2 percent, primarily due to the $350.0 million in senior notes issuance in April 2025 and the full year effect of the issuance of $350.0 million in senior notes in August 2024"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in 10-K MD&A capital expenditure table.",
+    "claim": "The company's 2026\u20132030 capital expenditure plan totals $7,285 million, concentrated in Oklahoma distribution, transmission, and generation reliability and capacity projects.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Total | $1,385 | $1,525 | $1,530 | $1,445 | $1,400 | $7,285",
+     "Oklahoma distribution | 585 | 705 | 725 | 775 | 825 | 3,615",
+     "Transmission (A)(B) | $200 | $310 | $305 | $270 | $240 | $1,325"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 generation mix table.",
+    "claim": "OG&E's generation mix in 2025 was 57% natural gas, 34% coal, and 9% renewable, with fuel costs generally recoverable through fuel adjustment clauses.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Natural gas | 57% | 74% | 75%",
+     "Coal | 34% | 18% | 16%",
+     "Renewable | 9% | 8% | 9%",
+     "Fuel costs are generally recoverable through OG&E's fuel adjustment clauses"
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated directly in the 10-K Item 1 Business section.",
+    "claim": "OG&E is the largest electric company in Oklahoma, serving approximately 913,000 customers across a 30,000 square mile franchised territory in Oklahoma and western Arkansas.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "OG&E was incorporated in 1902 under the laws of the Oklahoma Territory and is the largest electric company in Oklahoma, with a franchised service territory that includes Fort Smith, Arkansas and the surrounding communities.",
+     "OG&E provides retail electric service to approximately 913,000 customers in Oklahoma and western Arkansas throughout a service area that covers 30,000 square miles"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated as company strategy in the 10-Q MD&A (Q3 2026) and 10-K (FY2025).",
+    "claim": "OGE Energy targets consistent consolidated EPS growth of five to seven percent through 2030, supported by expected strong load growth enabled by low customer rates.",
+    "facts": [
+     "P4",
+     "P1"
+    ],
+    "quotes": [
+     "OGE Energy is focused on creating long-term shareholder value by targeting the consistent growth of consolidated earnings per share of five to seven percent through 2030, and consolidated earnings per share in the top half of the range in 2027 and 2028, supported by expected strong load growth enabled by low customer rates and a strategy of investing in lower risk infrastructure projects that improve the economic vitality of the communities it serves in Oklahoma and Arkansas."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in 10-K operating statistics table and 10-Q financial/statistical data.",
+    "claim": "OG&E's system sales grew 5.0% in 2025 to 33.6 million MWh, and customer count grew from 910,464 in Q3 2025 to 918,559 in Q3 2026.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "System sales (Millions of MWh) | 33.6 | 5.0% | 32.0 | 7.7% | 29.7",
+     "Number of customers | 918,559 | 910,464 | 918,559 | 910,464"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated directly in 10-K Item 1.",
+    "claim": "OG&E competes with government-owned, municipally-owned, and rural electric systems, as well as other private utilities, power marketers, and cogenerators; Oklahoma law forbids exclusive franchises.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "OG&E is subject to competition in various degrees from government-owned electric systems, municipally-owned electric systems, rural electric cooperatives and, in certain respects, from other private utilities, power marketers and cogenerators. Oklahoma law forbids the granting of an exclusive franchise to a utility for providing electricity."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated as a risk factor in 10-K Item 1A.",
+    "claim": "OG&E's profitability depends on timely full recovery of costs, including cost of capital, from customers through regulated rates and fuel adjustment clauses.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The profitability of the electric operations is dependent on OG&E's ability to fully recover costs related to providing electricity and power services to its customers in a timely manner.",
+     "OG&E's jurisdictions have fuel adjustment clauses that permit OG&E to recover fuel and purchased power costs through rates without a general rate review, subject to a later determination that such costs were prudently incurred."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q MD&A revenue variance table and degree-day table.",
+    "claim": "OG&E's 2026 Q3 results were driven by a 47 percent increase in cooling degree days versus normal, making weather a significant swing factor in quarterly earnings.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Increased during the three and nine months ended September 30, 2026 primarily due to a 47 percent and 46 percent increase in cooling degree days, respectively.",
+     "Cooling - Actual | 1,897 | 1,288 | 2,761 | 1,886",
+     "Cooling - Normal | 1,265 | 1,265 | 1,828 | 1,828"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K MD&A capital expenditure table (table in millions).",
+    "claim": "OGE Energy plans $7,285 million in capital expenditures from 2026 through 2030, spanning transmission, distribution, generation reliability, generation capacity, and technology.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Total | $1,385 | $1,525 | $1,530 | $1,445 | $1,400 | $7,285"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated as a risk factor in 10-K Item 1A; P1 also notes OG&E's commitment to a balanced energy mix.",
+    "claim": "Advances in distributed generation technologies (fuel cells, microturbines, wind, solar) and Smart Grid-enabled entry of technology companies could erode OG&E's central-station cost advantage.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "It is possible that advances in technologies or changes in regulatory policies will reduce costs of new technology to levels that are equal to or below that of most central station electricity production, which could have a material adverse effect on our results of operations.",
+     "OG&E's widespread use of Smart Grid technology allowing for two-way communications between OG&E and its customers could enable the entry of technology companies into the interface between OG&E and its customers, resulting in unpredictable effects on our current business."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated as a risk factor in 10-K Item 1A.",
+    "claim": "Deregulation or market restructuring could have a significant financial and load-growth impact on OG&E's revenue and affordability of services.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Increased competition resulting from efforts to restructure utility and energy markets or deregulation could have a significant financial and load growth impact on us and consequently impact our revenue and affordability of services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated as a risk factor in 10-K Item 1A.",
+    "claim": "Climate transition and environmental compliance create financial risk, including potential stranded assets, increased capital expenditures, and possible restrictions on fossil-fuel generation.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We are subject to financial risks associated with climate change and the transition to a lower carbon economy.",
+     "If regulations are enacted regarding any of our generating units, as listed in 'Item 2. Properties,' it could potentially result in stranded assets."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 generation mix and fuel cost tables.",
+    "claim": "OG&E's 2025 generation mix was 57% natural gas, 34% coal, and 9% renewable, with total fuel and purchased power cost of 3.502 cents per kilowatt-hour.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Natural gas | 57% | 74% | 75%",
+     "Coal | 34% | 18% | 16%",
+     "Renewable | 9% | 8% | 9%",
+     "Total fuel and purchased power weighted-average cost was 3.502, 3.139 and 2.837 cents per kilowatt-hour in 2025, 2024 and 2023, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-Q MD&A (Q3 2026).",
+    "claim": "OGE Energy updated its target dividend payout ratio to 55 percent to 60 percent in September 2026, continuing to expect EPS growth to exceed dividend growth.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "In September 2026, OGE Energy updated its target dividend payout ratio to 55 percent to 60 percent and continues to expect earnings per share growth to exceed the dividend growth rate to help achieve this target."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in 10-K Item 1 Fuel Supply and Generation section.",
+    "claim": "OG&E participates in the SPP Integrated Marketplace as a centralized dispatch, where its generating units produce output different from customer load requirements, and net fuel and purchased power costs are generally recoverable through fuel adjustment clauses.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The SPP Integrated Marketplace functions as a centralized dispatch, where market participants, including OG&E, submit offers to sell power to the SPP from their resources and bid to purchase power to the SPP for their customers.",
+     "As a result, OG&E's generating units produce output that is different from OG&E's customer load requirements. Net fuel and purchased power costs are generally recoverable through fuel adjustment clauses."
+    ],
+    "support": "quote_not_found"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in the cited items",
+    "claim": "OGE Energy held only $0.2 million in cash and cash equivalents at September 30, 2026, but maintained $867.6 million in net available liquidity under revolving credit agreements, commercial paper borrowings and letters of credit as of December 31, 2025.",
+    "facts": [
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 0.2 | $ 0.2",
+     "Net available liquidity under revolving credit agreements, commercial paper borrowings and letters of credit | $867.6"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited item; the $232.6M figure is inferred by subtraction of the two printed values",
+    "claim": "Total current liabilities of $1,214.8 million exceeded total current assets of $982.2 million at September 30, 2026, producing a working capital deficit of approximately $232.6 million.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total current assets | 982.2 | 857.9",
+     "Total current liabilities | 1,214.8 | 1,094.1"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited item; the 1.06 ratio is inferred by division of the two printed values",
+    "claim": "Long-term debt stood at $5,534.1 million against total stockholders' equity of $5,220.0 million at September 30, 2026, a long-term debt-to-equity ratio of roughly 1.06 to 1.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "LONG-TERM DEBT | 5,534.1 | 5,369.2",
+     "Total stockholders' equity | 5,220.0 | 4,977.3"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "OGE Energy generated $894.1 million in net cash from operating activities in the nine months ended September 30, 2026, up from $752.3 million in the same prior-year period.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided from operating activities | 894.1 | 752.3"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; the $66.8M surplus is inferred as the difference between operating and investing cash flows",
+    "claim": "Net cash used in investing activities was $827.3 million in the nine months ended September 30, 2026, of which $768.0 million was capital expenditures, leaving a modest operating-minus-investing surplus of $66.8 million before financing.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash used in investing activities | (827.3) | (806.8)",
+     "Capital expenditures (less allowance for equity funds used during construction) | (768.0) | (752.7)",
+     "Net cash (used in) provided from financing activities | (66.8) | 54.2"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (fuel pass-through mechanism); the 38% proportion is inferred from the printed figures",
+    "claim": "The quality of operating cash flow is supported by regulated rate recovery: fuel and purchased power costs are largely pass-through via fuel adjustment clauses, and a significant portion of the $2,647.3 million in nine-month operating revenues is recoverable cost rather than margin.",
+    "facts": [
+     "F2",
+     "P4",
+     "P1"
+    ],
+    "quotes": [
+     "Operating revenues | 1,182.8 | 1,045.0 | 2,647.3 | 2,534.3",
+     "FUEL, PURCHASED POWER AND DIRECT TRANSMISSION EXPENSE | 441.2 | 388.5 | 995.6 | 973.6",
+     "the actual cost of fuel used in electric generation and certain purchased power costs are generally recoverable from OG&E's customers through fuel adjustment clauses"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; the $316.0M sum is inferred by addition of the two printed values",
+    "claim": "Long-term debt due within one year rose to $180.9 million at September 30, 2026 from $0.0 million at December 31, 2025, while short-term debt declined to $135.1 million from $292.0 million, for a combined near-term debt obligation of $316.0 million.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Long-term debt due within one year | 180.9 | 0.0",
+     "Short-term debt | 135.1 | 292.0"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "OGE Energy's planned 2026 capital expenditures total $1,385 million (transmission $200M, Oklahoma distribution $585M, Arkansas distribution $45M, generation reliability $245M, generation capacity $180M, technology/fleet/facilities $130M), funded through a combination of operating cash flow, debt issuance, and equity.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Total | $1,385 | $1,525 | $1,530 | $1,445 | $1,400 | $7,285"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "OGE Energy commenced a $750,000,000 at-the-market equity offering programme on October 28, 2026, providing a mechanism to supplement equity capital for its ongoing investment programme.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "shares (the \"Shares\") of the common stock of OGE Energy Corp. (NYSE: OGE) (the \"Company\") having an aggregate sales price of up to $750,000,000 may be offered and sold from time to time"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Total contractual obligations for 2026 are $425.4 million, but after deducting $274.0 million expected to be recovered through fuel adjustment clauses and other regulatory mechanisms, the net obligation is $151.4 million.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Total contractual obligations | $425.4 | $917.6 | $768.0 | $524.1 | $758.6 | $3,393.7",
+     "Amounts recoverable through fuel adjustment clause and other regulatory mechanisms (A) | (274.0) | (173.1) | (158.0) | (149.4) | (149.5) | (904.0)",
+     "Total contractual obligations, net | $151.4 | $744.5 | $610.0 | $374.7 | $609.1 | $2,489.7"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "OGE Energy raised its 2026 full-year earnings guidance to $2.62 to $2.68 per average diluted share (from the original $2.38 to $2.48 range) due to warmer-than-normal weather, assuming normal weather for the remainder of the year.",
+    "facts": [
+     "P4",
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "OGE Energy's consolidated earnings are expected to be in the range of $2.62 to $2.68 per average diluted share",
+     "OGE Energy is projected to earn approximately $494 million to $514 million, or $2.38 to $2.48 per average diluted share, with a midpoint of approximately $504 million, or $2.43 per average diluted share in 2026"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the 10-K strategy section and 2026 outlook assumptions; the 4-6% load growth is a company forecast, not a guarantee.",
+    "claim": "OGE Energy targets consolidated EPS growth of five to seven percent through 2030, supported by expected strong retail load growth of approximately 4 to 6 percent per year.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "OGE Energy creates long-term shareholder value by targeting the consistent growth of consolidated earnings per share of five to seven percent through 2030, and consolidated earnings per share in the top half of the range in 2027 and 2028, supported by expected strong load growth enabled by low customer rates and a strategy of investing in lower risk infrastructure projects that improve the economic vitality of the communities it serves in Oklahoma and Arkansas.",
+     "total retail load growth of approximately 4 to 6 percent"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A capital expenditure table; the figures are company estimates for future years.",
+    "claim": "A $7,285 million (table in millions) capital expenditure program for 2026-2030 drives asset growth and supports the load-growth thesis, with 2026 capex of $1,385 million (table in millions).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The capital investments are customer-focused and targeted to maintain and improve the safety, resiliency and reliability of OG&E's distribution and transmission grid and generation fleet, enhance the ability of OG&E's system to perform during extreme weather events and to serve OG&E's growing customer base."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 10-K business description and MD&A legislative matters; the mechanisms are enacted law as of the filing date.",
+    "claim": "Regulatory cost-recovery mechanisms\u2014fuel adjustment clauses, Oklahoma SB 998 CWIP and 20-year depreciation deferral, and Arkansas Act 373 strategic-investment riders\u2014are essential for the capital program to be accretive to earnings.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "OG&E's standard tariff rates include a cost of service component (including an authorized return on capital) plus a fuel adjustment clause mechanism that allows OG&E to pass through to customers the actual cost of fuel and purchased power.",
+     "This legislation allows rate-regulated retail electric service providers, such as OG&E, to receive CWIP recovery of new natural gas generation capacity, if those proposed generation sources are approved by the OCC under existing statutory review procedures, and sets specific timelines for the OCC to review proposed projects.",
+     "Act 373 enables rate-regulated retail electric providers, such as OG&E, to receive CWIP recovery of \"strategic investments,\" including (i) new electric generating facilities, including transportation and storage facilities for associated fuel, (ii) upgrades, expansions, or fuel conversions of electric generating facilities, including transportation and storage facilities for associated fuel, and (iii) new or upgraded electric transmission facilities, including substations."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated as a strategic focus in the 10-K; no quantitative benchmark or ranking is provided in the evidence.",
+    "claim": "OGE Energy's strategy of maintaining customer rates among the lowest in the country is a stated driver of load growth and competitive positioning against other suppliers.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "maintaining customer rates that are among the lowest rates in the country by continuing to focus on innovation, intellectual curiosity, and execution with excellence"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and 8-K earnings release; the 47%/46% figures are actual degree-day comparisons for the reported periods.",
+    "claim": "Seasonal weather, particularly cooling-degree-day demand in the third quarter, is a significant driver of quarterly earnings variability and contributed to the 2026 year-to-date earnings beat.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Increased during the three and nine months ended September 30, 2026 primarily due to a 47 percent and 46 percent increase in cooling degree days, respectively.",
+     "Due to warmer than normal weather, OGE Energy expects to exceed its original 2026 earnings guidance range."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A operating statistics table; the figures are actual reported customer counts.",
+    "claim": "Customer count growth, from 910,464 at the end of Q3 2025 to 918,559 at the end of Q3 2026, contributes to load and revenue growth.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Number of customers | 918,559 | 910,464 | 918,559 | 910,464"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A capital expenditure table and footnotes; project names are identified but detailed timelines and costs are not broken out in the evidence.",
+    "claim": "New generation capacity projects\u2014Tinker Air Force Base, Horseshoe Lake Units 11 and 12, and Horseshoe Lake Units 13 and 14\u2014will add supply to meet SPP planning reserve margin requirements and support load growth.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Generation capacity projects include the Tinker Air Force Base, Horseshoe Lake Units 11 and 12, and Horseshoe Lake Units 13 and 14 generation projects. Additional generation capacity projects will be included in OG&E's capital plan when final preapproval orders are received."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A; the prior 60-70% target is from the 10-K (P1). The update is a company policy statement.",
+    "claim": "OGE Energy updated its target dividend payout ratio to 55 percent to 60 percent in September 2026 and expects EPS growth to exceed dividend growth, supporting a growing absolute dividend.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "In September 2026, OGE Energy updated its target dividend payout ratio to 55 percent to 60 percent and continues to expect earnings per share growth to exceed the dividend growth rate to help achieve this target."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item",
+    "claim": "OGE Energy commenced an at-the-market equity offering program for up to $750,000,000 of common stock, filed via prospectus supplement on October 28, 2026.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "In connection with the commencement of an equity offering program under which shares (the \"Shares\") of the common stock of OGE Energy Corp. (NYSE: OGE) (the \"Company\") having an aggregate sales price of up to $750,000,000 may be offered and sold from time to time (the \"Offering\"), the Company filed today with the Securities and Exchange Commission (the \"SEC\") a prospectus supplement dated October 28, 2026 (the \"Prospectus Supplement\")."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "OG&E's Board of Directors named John Laws as Chief Operating Officer of OG&E, effective January 4, 2027.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "On October 5, 2026, OG&E's Board of Directors named John Laws as Chief Operating Officer (\"COO\") of OG&E, effective January 4, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "OGE Energy's Board of Directors elected Richard (Rick) E. Muncrief as a new director, effective August 1, 2026; he will serve on the Nominating, Corporate Governance and Stewardship Committee and the Audit Committee.",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "On July 28, 2026, OGE Energy's Board of Directors elected a new director, Richard (Rick) E. Muncrief, effective August 1, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "OGE Energy raised its 2026 full-year earnings guidance to $2.62 to $2.68 per average diluted share, above the original range of $2.38 to $2.48, citing warmer than normal weather.",
+    "facts": [
+     "P4",
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Due to warmer than normal weather, OGE Energy's consolidated earnings are expected to be in the range of $2.62 to $2.68 per average diluted share.",
+     "OGE Energy expects to exceed its original 2026 earnings guidance range. OGE Energy now expects consolidated earnings between $2.62 to $2.68 per average diluted share.",
+     "OGE Energy is projected to earn approximately $494 million to $514 million, or $2.38 to $2.48 per average diluted share, with a midpoint of approximately $504 million, or $2.43 per average diluted share in 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "OGE Energy updated its target dividend payout ratio from 60 percent to 70 percent to 55 percent to 60 percent.",
+    "facts": [
+     "P4",
+     "P1"
+    ],
+    "quotes": [
+     "In September 2026, OGE Energy updated its target dividend payout ratio to 55 percent to 60 percent",
+     "targeting a payout ratio of 60 percent to 70 percent"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Oklahoma SB 998, passed in May 2025 and effective August 29, 2025, allows OG&E to receive CWIP recovery of new natural gas generation capacity and to defer 90 percent of depreciation expense and return on qualified plant investments over a 20-year period.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In May 2025, SB 998 was passed into law and became effective August 29, 2025. This legislation allows rate-regulated retail electric service providers, such as OG&E, to receive CWIP recovery of new natural gas generation capacity, if those proposed generation sources are approved by the OCC under existing statutory review procedures, and sets specific timelines for the OCC to review proposed projects.",
+     "SB 998 also allows utilities to establish a regulatory asset to defer 90 percent of depreciation expense and return associated with qualified plant investments, that are not classified as transmission or new generation, for recovery over an allowed 20-year period in a future rate review filing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Arkansas Act 373, signed into law in March 2025, enables OG&E to receive CWIP recovery of strategic investments including new generation, upgrades, fuel conversions, and new or upgraded transmission facilities.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In March 2025, Act 373 was signed into law by the Governor of Arkansas. Act 373 enables rate-regulated retail electric providers, such as OG&E, to receive CWIP recovery of \"strategic investments,\" including (i) new electric generating facilities, including transportation and storage facilities for associated fuel, (ii) upgrades, expansions, or fuel conversions of electric generating facilities, including transportation and storage facilities for associated fuel, and (iii) new or upgraded electric transmission facilities, including substations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "The \"One Big Beautiful Bill\" was signed into law on July 4, 2025, including significant changes to federal tax law and other regulatory provisions that may impact OGE Energy, such as changes to tax credits for renewables.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On July 4, 2025, the legislation known as the \"One Big Beautiful Bill\" was signed into law, which includes significant changes to federal tax law and other regulatory provisions that may impact the Registrants. The Registrants will consider the legislation's provisions, such as changes to tax credits for renewables, and the potential impact on future investment decisions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "The OCC issued a final order on March 27, 2025, approving the settlement agreement for OG&E's 2023 general rate review and the ALJ report on the remaining one MW issue with one exception.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On March 27, 2025, the OCC issued a final order approving the settlement agreement relating to OG&E's 2023 general rate review and approved the ALJ report on the remaining one MW issue with one exception."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "OGE Energy's Board approved an increase in the quarterly dividend to $0.425 per share from $0.42125 per share, effective with the October 2025 dividend payment.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In 2025, the Board of Directors reviewed a recommendation from management of an increase in the quarterly dividend to $0.425 per share from $0.42125 per share and subsequently approved the recommendation to become effective with the dividend payment in October 2025."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in P2 (risk factor) and P3 (capex table and legislative discussion); the regulatory approval is documented in P3",
+    "claim": "OG&E's profitability depends on timely rate recovery from the OCC, APSC and FERC; failure or delay in rate approval would impair earnings on a $7,285 million five-year capital program.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The Registrants' profitability depends to a large extent on the ability of OG&E to fully recover its costs, including its cost of capital, from its customers in a timely manner, and there may be changes in the regulatory environment that impair its ability to recover costs from its customers.",
+     "If these regulatory commissions do not approve adjustments to the rates OG&E charges, it would not be able to recover the costs associated with its planned extensive investment."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in P4 and P6 (guidance language explicitly ties the raise to weather); seasonality pattern stated in P2 and P4",
+    "claim": "The raised 2026 EPS guidance of $2.62 to $2.68 is explicitly attributed to warmer-than-normal weather; a cooler-than-normal fourth quarter could pull full-year results toward the lower bound or below.",
+    "facts": [
+     "P4",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "Due to warmer than normal weather, OGE Energy's consolidated earnings are expected to be in the range of $2.62 to $2.68 per average diluted share.",
+     "OG&E has significant seasonality in its earnings due to weather on a year-over-year basis.",
+     "Weather conditions directly influence the demand for electric power. In OG&E's service area, demand for power peaks during the hot summer months, with market prices also typically peaking at that time."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in P2 (risk factors) and P1 (generation mix table); the judicial review status is explicitly noted",
+    "claim": "EPA greenhouse-gas rules under judicial review and potential SPP capacity-accreditation changes could impose significant compliance costs or force stranded-asset write-downs on OG&E's coal and gas fleet.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "Rules from the EPA to reduce emissions of greenhouse gases from fossil fuel-fired electric generating units under the Clean Air Act Section 111 were finalized in 2024, but the rules still might change before implementation.",
+     "If regulations are enacted regarding any of our generating units, as listed in 'Item 2. Properties,' it could potentially result in stranded assets.",
+     "Recent environmental regulations may also impact our plan to comply with potential additional changes to the SPP's planning reserve margin and, as further discussed in Note 14, changes to the resource capacity accreditation methodologies for both thermal and renewable resources. Both changes may increase OG&E's generation capacity needs."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P2 (holding company risk factor) and P3 (debt and liquidity data); F1 and F3 provide balance sheet and cash flow confirmation",
+    "claim": "OGE Energy is a pure holding company whose ability to service $9.4 billion in combined debt and pay dividends depends entirely on OG&E's operating cash flow and dividend upstreaming.",
+    "facts": [
+     "P2",
+     "P3",
+     "F1"
+    ],
+    "quotes": [
+     "OGE Energy is a holding company and thus its primary asset is its subsidiary, OG&E. Substantially all of OGE Energy's operations are conducted by this subsidiary. Consequently, OGE Energy's operating cash flow and its ability to pay dividends and service its indebtedness are dependent upon the operating cash flow of OG&E and the payment of funds by OG&E to OGE Energy in the form of dividends.",
+     "At December 31, 2025, OGE Energy and OG&E had outstanding indebtedness and other liabilities of $9.4 billion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (operational risk factor) and P1 (purchased power volumes and SPP participation)",
+    "claim": "OG&E's dependence on third-party coal and natural gas suppliers creates supply-disruption risk that could force spot-market purchases at elevated prices or cause customer outages.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "We are dependent on coal and natural gas for much of our electric generating capacity. We rely on suppliers to deliver coal and natural gas in accordance with short- and long-term contracts.",
+     "Failure or delay by our suppliers and transporters of coal and natural gas could disrupt our ability to deliver electricity and require us to incur additional expenses to meet the needs of our customers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P7 (8-K disclosure of the offering program); share count from F2; price from S0",
+    "claim": "The $750 million at-the-market equity offering program initiated in October 2026 will dilute existing shareholders if fully utilized, reducing per-share earnings and dividend capacity.",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "shares (the 'Shares') of the common stock of OGE Energy Corp. (NYSE: OGE) (the 'Company') having an aggregate sales price of up to $750,000,000 may be offered and sold from time to time"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P2 (SPP risk factor) and P4 (transmission revenue decline attributed to SPP formula rate true-up)",
+    "claim": "Changes in SPP Integrated Marketplace regulation or FERC transmission cost allocation could increase OG&E's cost burden or reduce transmission revenues without corresponding rate relief.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Our revenues, expenses, assets and liabilities may be adversely affected by changes in the organization, operation and regulation of the SPP Integrated Marketplace by the FERC or the SPP.",
+     "These risks include upward pressure on OG&E's rates arising from the potential additional cost allocation to OG&E from transmission projects of others or changes in FERC policies or regulation related to cost responsibility for transmission projects."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (pension risk factor) and P3 (funded status table and contribution amounts); F2 shows the ongoing periodic benefit expense line",
+    "claim": "OG&E's pension plan was underfunded by $53.0 million at year-end 2025, and rising retirements or adverse market returns could increase pension expense and required contributions.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "If the employees who participate in the Pension Plan retire when they become eligible for retirement over the next several years, or if our plan experiences adverse market returns on its investments, or if interest rates materially fall, our pension expense and contributions to the plans could rise substantially over historical levels.",
+     "Funded status at end of year | $(53.0)"
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Stated in P1 and P2 as an open judicial matter; no outcome is given in any evidence item.",
+    "claim": "What will be the final scope, compliance timeline, and capital cost impact on OG&E's coal-fired fleet if the EPA Section 111 rules are upheld, modified, or overturned in the pending judicial review?",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Rules from the EPA to reduce emissions of greenhouse gases from fossil fuel-fired electric generating units under the Clean Air Act Section 111 were finalized in 2024, but the rules still might change before implementation.",
+     "power plant-specific rules are currently under judicial review and could ultimately be upheld, modified, or overturned."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 and P6 as forward-looking guidance; the 10-K for 2026 is not yet in the evidence.",
+    "claim": "Will OGE Energy's full-year 2026 diluted EPS land within the raised guidance range of $2.62 to $2.68, and what will the fourth-quarter contribution be given the significant Q3 weather-driven upside?",
+    "facts": [
+     "P4",
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Due to warmer than normal weather, OGE Energy's consolidated earnings are expected to be in the range of $2.62 to $2.68 per average diluted share.",
+     "OGE Energy now expects consolidated earnings between $2.62 to $2.68 per average diluted share."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P7; no subsequent filings disclosing actual sales are in the evidence.",
+    "claim": "What portion of the $750,000,000 equity offering program will actually be sold, and when, given that the company has no obligation to sell any shares?",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "shares (the \"Shares\") of the common stock of OGE Energy Corp. (NYSE: OGE) (the \"Company\") having an aggregate sales price of up to $750,000,000 may be offered and sold from time to time",
+     "the Company has no obligation to offer and sell any of the Shares in the Offering."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3 as contingent on future regulatory orders; no such orders are in the evidence.",
+    "claim": "Which additional generation capacity projects beyond Tinker Air Force Base and Horseshoe Lake Units 11\u201314 will receive regulatory preapproval and be added to OG&E's capital plan?",
+    "facts": [
+     "P3",
+     "P1"
+    ],
+    "quotes": [
+     "Additional generation capacity projects will be included in OG&E's capital plan when final preapproval orders are received.",
+     "OG&E also issued its 2025 IRP to the OCC and APSC and has filed for and/or received preapproval, in both Oklahoma and Arkansas, of certain generation and capacity investments identified by OG&E's IRP and related request for proposals process."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in P3 as pending SPP action; no notice to construct is in the evidence.",
+    "claim": "What is the final cost, construction timeline, and OG&E cost allocation for the Seminole to Shreveport Transmission Line under the SPP's 2025 Integrated Transmission Plan?",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Capital expenditures associated with the SPP's 2025 Integrated Transmission Plan, including the Seminole to Shreveport Transmission Line that is discussed in Note 14 within \"Item 8. Financial Statements and Supplementary Data,\" will be included in OG&E's capital plan upon final notice to construct acceptances."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 and P3 as uncertain; no grant disbursement data is in the evidence.",
+    "claim": "Which specific Infrastructure Investment and Jobs Act grants awarded to OGE Energy will actually be disbursed, and what project costs will OG&E bear if federal funding does not materialize?",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "We have been awarded grant funds for specific projects through the Infrastructure Investment and Jobs Act, and we plan to pursue additional opportunities available to us under these Acts.",
+     "For awarded grants where funding has not yet been received, there is no guarantee that funding will materialize. We expect to typically be responsible for any project costs not covered by federal funding on further investments related to these Acts although there is no guarantee we will be successful in obtaining any such grants."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 and P3 as a new mechanism beginning September 2025; no rate case has yet incorporated it.",
+    "claim": "What will be the long-term effect on customer rates and OG&E's reported earnings when the SB 998 regulatory asset (deferring 90% of depreciation and return on qualified non-transmission, non-generation plant for 20 years) is recovered in a future rate review?",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "SB 998 also allows utilities to establish a regulatory asset to defer 90 percent of depreciation expense and return associated with qualified plant investments, that are not classified as transmission or new generation, for recovery over an allowed 20-year period in a future rate review filing.",
+     "OG&E began deferring such costs to a regulatory asset in September 2025, as further discussed in Note 1 within \"Item 8. Financial Statements and Supplementary Data.\""
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 as a risk that 'may increase OG&E's generation capacity needs'; the specific MW requirement and cost are not quantified in any evidence item.",
+    "claim": "How many additional MWs of generation capacity will OG&E be required to add under the revised SPP planning reserve margin and resource capacity accreditation methodologies, and what is the associated capital cost?",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "Recent environmental regulations may also impact our plan to comply with potential additional changes to the SPP's planning reserve margin and, as further discussed in Note 14 within \"Item 8. Financial Statements and Supplementary Data,\" changes to the resource capacity accreditation methodologies for both thermal and renewable resources. Both changes may increase OG&E's generation capacity needs.",
+     "OG&E's system control area peak demand was 7,412 MWs on July 30, 2025, and OG&E's load responsibility peak demand was 6,630 MWs on July 30, 2025."
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "OGE",
+ "valuation": null,
+ "valued": false
+}
