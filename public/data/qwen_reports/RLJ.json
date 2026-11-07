@@ -1,0 +1,796 @@
+{
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 60,
+ "claims_supported": 48,
+ "date": "2026-11-07T00:58:28Z",
+ "family": "family_not_built",
+ "flags": [
+  "RLJ completed the 2026 Refinancing Transactions, repaying its 2026 Senior Notes at maturity and restructuring multiple debt instruments including a $569.0 million delayed draw term loan and a new $150.0 million term loan.",
+  "RLJ sold one hotel property for a sales price of $13.2 million during 2026.",
+  "RLJ approved a new share repurchase program to acquire up to $250.0 million of common and preferred shares from May 9, 2026 to May 8, 2027."
+ ],
+ "in_code_book": false,
+ "model": "qwen",
+ "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "qwen_book": null,
+ "screener_commit": "e06fdedb1328e4a2c9aed0ccb4462f339f2f6c68",
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in P1 (10-K Item 1) and P4 (10-Q MD&A)",
+    "claim": "RLJ Lodging Trust is a Maryland REIT that owns premium-branded, focused-service and compact full-service hotels and earns revenue by selling room stays, food and beverage, and ancillary services to guests.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "We are a self-advised and self-administered Maryland real estate investment trust that owns primarily premium-branded, rooms-oriented, high-margin, focused-service and compact full-service hotels located within heart of demand locations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (10-K MD&A, Overview)",
+    "claim": "The company's customers are predominantly transient business and leisure travelers, supplemented by group bookings (10+ rooms) and a smaller extended-stay segment (5+ nights).",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The majority of our customers are transient in nature. Transient business typically represents individual business or leisure travelers.",
+     "Group business is typically defined as a minimum of 10 guestrooms booked together as part of the same piece of business.",
+     "Extended-stay customers are generally defined as those staying five nights or longer."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P3 (10-K MD&A); revenue line items confirmed in F2 (10-Q income statement)",
+    "claim": "Total revenues comprise three streams: room revenue (approximately 81.0% of total in 2025), food and beverage revenue, and other revenue (parking, resort fees, gift shop, guest service fees).",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "Room revenue comprised approximately 81.0% of our total revenues for the year ended December 31, 2025",
+     "Other revenue \u2014 Occupancy and the nature of the hotel property are the main drivers of other ancillary revenue, such as parking fees, resort fees, gift shop sales and other guest service fees."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1, Organizational Structure)",
+    "claim": "The company operates through a UPREIT structure: the Operating Partnership owns the hotels, leases them to TRS subsidiaries, and the TRSs engage independent third-party managers who collect revenue and pay operating costs.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We conduct our business through a traditional umbrella partnership real estate investment trust (\"UPREIT\") structure in which our assets are owned and our business activities are undertaken by the Operating Partnership and its subsidiaries.",
+     "The independent managers operate the hotels, collect hotel operating revenue, pay operating expenses (including the independent managers' management fees) on behalf of the TRSs pursuant to the relevant hotel management agreement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (10-Q MD&A) and P1 (10-K Item 1, Our Hotels)",
+    "claim": "As of June 30, 2026 the portfolio comprised 92 hotel properties with approximately 20,600 rooms in 23 states and the District of Columbia, with 89.3% of properties affiliated with Marriott, Hilton, or Hyatt brands.",
+    "facts": [
+     "P4",
+     "P1"
+    ],
+    "quotes": [
+     "As of June 30, 2026, we owned 92 hotel properties with approximately 20,600 rooms, located in 23 states and the District of Columbia.",
+     "approximately 89.3% of our hotel properties operating under existing relationships with Marriott, Hilton or Hyatt"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (10-K MD&A, Key Indicators) and P4 (10-Q MD&A); Q3 2026 figures from P6",
+    "claim": "Revenue is driven by two primary variables: Occupancy (rooms sold / rooms available) and Average Daily Rate (room revenue / rooms sold); their product is RevPAR.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "RevPAR is the product of ADR and Occupancy.",
+     "Occupancy represents the total number of hotel rooms sold in a given period divided by the total number of rooms available.",
+     "ADR represents the total hotel room revenues divided by the total number of rooms sold in a given period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (10-K MD&A, Principal Factors Affecting Our Results of Operations)",
+    "claim": "Operating costs are predominantly variable with Occupancy (labor, supplies, utilities), while ADR increases mainly add management and franchise fees that are computed as a percentage of revenue.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Most categories of variable operating expenses, including labor costs, fluctuate with changes in Occupancy.",
+     "A base management fee is computed as a percentage of gross hotel revenues.",
+     "A franchise fee is computed as a percentage of room revenue, plus an additional percentage of room revenue for marketing, central reservation systems and other franchisor costs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 (8-K earnings release reconciliation tables) and P3 (10-K MD&A, Key Indicators referencing 'Hotel EBITDA, a non-GAAP financial measure')",
+    "claim": "The company reports its operating performance as a single hotel segment, with 'Consolidated Hotel EBITDA' and 'Comparable Hotel EBITDA' as the principal segment measures, plus small corporate adjustments.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Consolidated Hotel EBITDA | 94,293 | 81,025 | 303,833 | 280,324",
+     "Other corporate adjustments / non-hotel revenue | (6) | (18) | (41) | (53)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1, Seasonality)",
+    "claim": "The lodging business is seasonal, with northeastern properties experiencing lower revenues in winter (Dec\u2013Mar) and Florida properties peaking in Jan\u2013Apr, causing quarterly revenue fluctuations.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The lodging industry is seasonal in nature, which can cause quarterly fluctuations in our revenues. For example, our hotels in the northeastern metropolitan areas experience lower revenues and profits during the winter months of December through March, while our hotels in Florida generally have higher revenues in the months of January through April."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A Risk Factors); the 45.9% total is the sum of the five stated percentages",
+    "claim": "Geographic concentration risk is significant: the top five metro areas (Northern California, Southern California, South Florida, Chicago, Houston) accounted for approximately 45.9% of total rooms as of December 31, 2025.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our hotels located in the Northern California, Southern California, South Florida, Chicago, Illinois, and Houston, Texas metropolitan areas accounted for approximately 13.4%, 11.1%, 9.1%, 6.5% and 5.8%, respectively, of our total number of rooms available for the fiscal year ended December 31, 2025."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P2 (10-K Risk Factors) and F1 (10-Q balance sheet); H1 2026 interest expense from F2 income statement",
+    "claim": "The company's debt load (approximately $2.2 billion at Dec 31, 2025; $2,695,154 thousand net at Jun 30, 2026) generates substantial interest expense that reduces net income available to common shareholders.",
+    "facts": [
+     "P2",
+     "F1",
+     "F2"
+    ],
+    "quotes": [
+     "At December 31, 2025, we had approximately $2.2 billion of outstanding debt.",
+     "Debt, net | 2,695,154 | 2,197,218"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1, Organizational Structure)",
+    "claim": "As a REIT, the company must distribute at least 90% of REIT taxable income to shareholders, limiting internally generated capital available for acquisitions and renovations.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "As a REIT, we generally are not subject to U.S. federal income tax on our income that we distribute to our shareholders as dividends and we are required to distribute 90% of our REIT taxable income (excluding net capital gains) in order to maintain our qualification as a REIT."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in P1 (10-K Item 1 Business)",
+    "claim": "RLJ Lodging Trust is one of the largest U.S. publicly-traded lodging REITs by number of hotels and rooms, owning 93 hotel properties with approximately 20,800 rooms in 23 states and the District of Columbia as of December 31, 2025.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We are one of the largest U.S. publicly-traded lodging REITs in terms of both number of hotels and number of rooms.",
+     "As of December 31, 2025, we owned 93 hotel properties with approximately 20,800 rooms, located in 23 states and the District of Columbia."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1 Business)",
+    "claim": "Approximately 89.3% of RLJ's hotel properties operate under Marriott, Hilton or Hyatt brands, giving the portfolio access to guest loyalty programs, worldwide reservation systems and strong customer awareness.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our hotel properties operate under industry-leading, premium brands, with approximately 89.3% of our hotel properties operating under existing relationships with Marriott, Hilton or Hyatt.",
+     "We believe that utilizing premium brands provides significant advantages because of their guest loyalty programs, worldwide reservation systems, effective product segmentation, global distribution and strong customer awareness."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 (8-K earnings release, Q3 2026)",
+    "claim": "In Q3 2026, comparable RevPAR rose 9.7% to $153.36, comparable Hotel EBITDA grew 17.5% to $93.9 million, and Adjusted EBITDA increased 17.3% to $85.2 million, with the CEO stating the company 'outpacing the industry.'",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Comparable RevPAR of $153.36, an increase of 9.7% over the prior year",
+     "Adjusted EBITDA of $85.2 million increased 17.3%",
+     "we achieved robust RevPAR growth of 9.7%, outpacing the industry, driven by increases in both demand and rate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 (8-K earnings release)",
+    "claim": "Following Q3 2026 outperformance, RLJ raised its full-year 2026 outlook, projecting comparable RevPAR growth of +5.75% to +6.25% and Adjusted FFO per diluted share of $1.47 to $1.51.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Given our third quarter outperformance, strong preliminary results for October, and our expectation that positive trends will carry into the remainder of the year, we are raising our full-year guidance.",
+     "Comparable RevPAR Growth | +5.75% to +6.25%",
+     "Adjusted FFO per diluted share | $1.47 to $1.51"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A Risk Factors)",
+    "claim": "RLJ faces competition from non-traditional accommodations such as online services that market homes, apartments and condominiums as alternatives to hotel rooms, which can pressure occupancy and ADRs.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We face competition from non-traditional accommodations for travelers, such as online services that market homes, apartments and condominiums as an alternative to hotel rooms.",
+     "Our competitors may have an operating model that enables them to offer accommodations at lower rates than we can, which could result in our competitors increasing their Occupancy at our expense and adversely affecting our ADRs."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A Risk Factors)",
+    "claim": "Concentration in three brand families (Marriott, Hilton, Hyatt) covering 83 of 93 properties creates a dependency risk: if a relationship deteriorates, franchise licenses could be terminated or declined for future acquisitions.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "83 of the 93 hotel properties that we owned as of December 31, 2025 were affiliated with brands owned by Marriott, Hilton or Hyatt.",
+     "if our relationship with Marriott, Hilton or Hyatt were to deteriorate or terminate as a result of disputes regarding the management of our hotels or for other reasons, Marriott, Hilton or Hyatt could, under certain circumstances, terminate our current franchise licenses with them or decline to provide franchise licenses for hotels that we may acquire in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A Risk Factors)",
+    "claim": "Geographic concentration in five metropolitan areas (Northern California 13.4%, Southern California 11.1%, South Florida 9.1%, Chicago 6.5%, Houston 5.8% of total rooms) exposes RLJ to localized economic downturns, oversupply, or demand shifts.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our hotels located in the Northern California, Southern California, South Florida, Chicago, Illinois, and Houston, Texas metropolitan areas accounted for approximately 13.4%, 11.1%, 9.1%, 6.5% and 5.8%, respectively, of our total number of rooms available for the fiscal year ended December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A Risk Factors)",
+    "claim": "RLJ depends on independent third-party managers for hotel operations, with 26 properties managed by Aimbridge Hospitality and 21 by Hilton, creating concentration risk in the management layer.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "As of December 31, 2025, all of our hotel properties had individual management agreements, 26 of which were with Aimbridge Hospitality (\"Aimbridge\") and 21 of which were with Hilton.",
+     "if any of our third-party managers, including Aimbridge and/or Hilton, are financially unable or unwilling to perform their obligations pursuant to their management agreements, our ability to find a replacement manager or managers for the impacted hotels could be challenging, costly and time consuming."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A Risk Factors)",
+    "claim": "RLJ faces competition for hotel acquisitions from institutional pension funds, private equity funds, REITs and other parties with substantially greater financial resources, lower cost of capital, and greater market knowledge.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We face competition for the acquisition of hotel properties from institutional pension funds, private equity funds, REITs, hotel companies and other parties who are engaged in the acquisition of hotel properties. Some of these competitors may have substantially greater financial and operational resources and access to capital, a lower cost of capital and/or greater knowledge of the markets in which we seek to invest."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A Risk Factors); counter from P4 (10-Q MD&A)",
+    "claim": "RLJ carried approximately $2.2 billion of debt outstanding at December 31, 2025, with 69.2% of payments fixed or effectively fixed after interest rate swaps, but refinancing risk remains if operating cash flow is insufficient to repay debt at maturity.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "At December 31, 2025, we had approximately $2.2 billion of outstanding debt.",
+     "After taking into consideration the effect of interest rate swaps, 69.2% of our payments are fixed or effectively fixed.",
+     "Because we anticipate that our operating cash flow will be adequate to repay only a portion of our debt at maturity, we expect that we will be required to repay debt through debt refinancings and/or offerings of our securities."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in F1 balance sheet and F3 cash flow statement; the Q3 decline is stated in P6 balance sheet",
+    "claim": "As of June 30, 2026, RLJ held $937,599 in cash and cash equivalents plus $35,768 in restricted cash reserves (table in thousands), a substantial liquidity cushion built largely from new term-loan borrowings during the first half of 2026.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | 937,599 | 410,160",
+     "Restricted cash reserves | 35,768 | 31,901",
+     "Borrowings on Term Loans | 494,000 | 100,000"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 cash flow statement",
+    "claim": "Net cash flow from operating activities for the six months ended June 30, 2026 was $140,812 (table in thousands), up from $117,620 in the prior-year period, reflecting strong hotel-level cash generation before corporate overhead and debt service.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash flow provided by operating activities | 140,812 | 117,620"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and P6 balance sheets; the $569.0M and $150.0M loan sizes are stated in P4",
+    "claim": "Debt net stood at $2,695,154 (table in thousands) at June 30, 2026 against total equity of $2,164,927, implying a debt-to-equity ratio above 1.2x; by September 30, 2026, debt net had fallen to $2,196,326 (table in thousands) as the 2026 Senior Notes were repaid.",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Debt, net | 2,695,154 | 2,197,218",
+     "Total equity | 2,164,927 | 2,182,660",
+     "Debt, net | $2,196,326 | $2,197,218",
+     "Total equity | 2,151,740 | 2,182,660"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P2 Risk Factors",
+    "claim": "After interest rate swaps, 69.2% of RLJ's debt payments are fixed or effectively fixed, limiting but not eliminating interest-rate risk on the roughly $2.2 billion outstanding at year-end 2025.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "After taking into consideration the effect of interest rate swaps, 69.2% of our payments are fixed or effectively fixed.",
+     "At December 31, 2025, we had approximately $2.2 billion of outstanding debt."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 earnings release financial tables",
+    "claim": "Adjusted FFO for the nine months ended September 30, 2026 was $180,040 (table in thousands), up 12.0% from $160,684 in the prior-year period, and Adjusted FFO per diluted common share and unit was $1.19, up 11.2%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Adjusted FFO | $51,994 | $41,103 | 26.5% | $180,040 | $160,684 | 12.0%",
+     "Adjusted FFO Per Diluted Common Share and Unit | $0.34 | $0.27 | 25.9% | $1.19 | $1.07 | 11.2%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 earnings release; the CEO commentary on margin expansion is a direct quote from P6",
+    "claim": "Adjusted EBITDA for the nine months ended September 30, 2026 was $276,415 (table in thousands), up 8.7% year-over-year, with Comparable Hotel EBITDA margin expanding to 28.2% from 27.4%, reflecting the company's stated cost-control discipline alongside 7.0% comparable RevPAR growth.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Adjusted EBITDA | $85,150 | $72,583 | 17.3% | $276,415 | $254,185 | 8.7%",
+     "Comparable Hotel EBITDA Margin | 26.5% | 24.6% | 190 bps | 28.2% | 27.4% | 80 bps",
+     "Comparable RevPAR | $153.36 | $139.82 | 9.7% | $156.51 | $146.21 | 7.0%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 10-Q MD&A significant activities",
+    "claim": "The 2026 Senior Notes matured and were repaid on July 1, 2026, using proceeds from the 2026 Refinancing Transactions, which included a $569.0 million delayed draw term loan (maturity February 2031), a $150.0 million term loan (maturity February 2033), and a recast $600.0 million Revolver (maturity February 2030).",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The completion of the 2026 Refinancing Transactions, which allowed us to repay the 2026 Senior Notes at maturity on July 1, 2026",
+     "The refinancing of a term loan to extend the scheduled maturity to February 2031 and upsize it to a $569.0 million delayed draw term loan, of which $225.0 million was funded in February 2026 and $344.0 million was drawn on June 30, 2026.",
+     "The issuance of a new $150.0 million delayed draw term loan which was fully drawn on June 30, 2026 and matures in February 2033.",
+     "The recast of our $600.0 million Revolver to extend the initial maturity to February 2030."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 Risk Factors; the successful 2026 refinancing is stated in P4",
+    "claim": "RLJ states that its operating cash flow is adequate to repay only a portion of its debt at maturity and that it expects to rely on debt refinancings and/or offerings of securities to meet future maturities.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Because we anticipate that our operating cash flow will be adequate to repay only a portion of our debt at maturity, we expect that we will be required to repay debt through debt refinancings and/or offerings of our securities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 income statement and FFO reconciliation tables",
+    "claim": "For the nine months ended September 30, 2026, net income attributable to common shareholders was $16,627 (table in thousands) while preferred dividends consumed $18,836, producing a GAAP net loss to common shareholders of $(1,711) in Q3 alone, highlighting that GAAP earnings are a poor proxy for distributable cash.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Net (loss) income attributable to common shareholders | $(1,711) | $(10,015) | $16,627 | $9,243",
+     "Preferred dividends | (6,279) | (6,279) | (18,836) | (18,836)"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in P6 earnings release outlook section and CEO commentary",
+    "claim": "The company raised its full-year 2026 outlook to Comparable RevPAR growth of +5.75% to +6.25%, Comparable Hotel EBITDA of $377 million to $383 million, Adjusted EBITDA of $352 million to $358 million, and Adjusted FFO per diluted share of $1.47 to $1.51, citing Q3 outperformance and strong preliminary October results.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Comparable RevPAR Growth | +5.75% to +6.25%",
+     "Comparable Hotel EBITDA | $377M to $383M",
+     "Adjusted EBITDA | $352M to $358M",
+     "Adjusted FFO per diluted share | $1.47 to $1.51",
+     "Given our third quarter outperformance, strong preliminary results for October, and our expectation that positive trends will carry into the remainder of the year, we are raising our full-year guidance."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in P6 (8-K earnings release, Q3 2026 results and CEO commentary); the 9.7% figure is a reported comparable metric, not a forecast.",
+    "claim": "RevPAR growth driven by simultaneous increases in both occupancy and ADR: comparable RevPAR rose 9.7% to $153.36 in Q3 2026, with occupancy up to 75.4% (from 73.1%) and ADR up to $203.35 (from $191.16).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Comparable RevPAR of $153.36, an increase of 9.7% over the prior year",
+     "Comparable ADR | $203.35 | $191.16 | 6.4%",
+     "Comparable Occupancy | 75.4% | 73.1% | 3.1%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 (CEO commentary) and P3 (MD&A discussion of F&B revenue drivers); the tapering capex is inferred from F3 cash flow statement.",
+    "claim": "Ongoing brand conversions and property renovations are generating incremental non-room revenue and RevPAR momentum.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "The ramp of our conversions and renovations provided additional momentum, which contributed to continued growth in non-room revenues.",
+     "The increase in food and beverage revenue was primarily due to increases in banquet and outlet revenue and the ramping up of our recently converted and renovated hotels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 (reported Q3 2026 comparable metrics and CEO commentary); the operating leverage mechanism is inferred from the company's own MD&A explanation of cost structure (P3, P4).",
+    "claim": "Comparable Hotel EBITDA margin expanded 190 basis points to 26.5% in Q3 2026, with EBITDA growing 17.5% versus 9.1% revenue growth, indicating operating leverage.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Comparable Hotel EBITDA Margin of 26.5%, an increase of 190 basis points over the prior year",
+     "This robust top-line growth, combined with our disciplined cost control efforts, allowed us to expand margins and grow Hotel EBITDA at nearly twice the pace of revenues"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 (CEO commentary); the supply-side mechanism is inferred from the company's own MD&A discussion of supply dynamics (P3).",
+    "claim": "A muted new-supply environment is supporting rate and occupancy gains across the portfolio.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Overall, against a backdrop of muted supply, demand continues to be supported by a favorable macro backdrop, including healthy corporate earnings and elevated levels of business investment, and we believe our urban-centric portfolio is well positioned to capture these trends."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (10-K Business section) and P6 (CEO commentary); the concentration percentages are stated in P2 (10-K Risk Factors).",
+    "claim": "The portfolio's concentration in urban markets with multiple demand generators (corporate, government, leisure, group) is a structural growth advantage.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Our hotels are concentrated in markets that we believe exhibit multiple demand generators and attractive long-term growth prospects.",
+     "we believe our urban-centric portfolio is well positioned to capture these trends."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 (2026 significant activities), P6 (outlook exclusion note), and P3 (2025 activities and strategy); the tax constraint is stated in P2.",
+    "claim": "Capital recycling through selective dispositions of lower-return or non-core assets frees capital for redeployment into higher-return opportunities.",
+    "facts": [
+     "P4",
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "The sale of one hotel property for a sales price of $13.2 million.",
+     "Comparable RevPAR and Hotel EBITDA outlooks exclude the seven Chicago Midway assets sold subsequent to the third quarter.",
+     "We may opportunistically and selectively sell hotel properties whose returns appear to have been maximized."
+    ],
+    "support": "quote_not_found"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item (P4, 10-Q MD&A 2026 Significant Activities)",
+    "claim": "RLJ completed the 2026 Refinancing Transactions, repaying its 2026 Senior Notes at maturity and restructuring multiple debt instruments including a $569.0 million delayed draw term loan and a new $150.0 million term loan.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The completion of the 2026 Refinancing Transactions, which allowed us to repay the 2026 Senior Notes at maturity on July 1, 2026",
+     "The refinancing of a term loan to extend the scheduled maturity to February 2031 and upsize it to a $569.0 million delayed draw term loan, of which $225.0 million was funded in February 2026 and $344.0 million was drawn on June 30, 2026",
+     "The issuance of a new $150.0 million delayed draw term loan which was fully drawn on June 30, 2026 and matures in February 2033."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P6, 8-K Q3 2026 earnings release)",
+    "claim": "RLJ sold seven Chicago Midway hotel properties subsequent to the third quarter of 2026.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Comparable RevPAR and Hotel EBITDA outlooks exclude the seven Chicago Midway assets sold subsequent to the third quarter."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the cited item (P4, 10-Q MD&A 2026 Significant Activities)",
+    "claim": "RLJ sold one hotel property for a sales price of $13.2 million during 2026.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The sale of one hotel property for a sales price of $13.2 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P4, 10-Q MD&A 2026 Significant Activities)",
+    "claim": "RLJ approved a new share repurchase program to acquire up to $250.0 million of common and preferred shares from May 9, 2026 to May 8, 2027.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The approval of a new share repurchase program to acquire up to an aggregate of $250.0 million of common and preferred shares from May 9, 2026 to May 8, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P6, 8-K Q3 2026 earnings release, 2026 Outlook section)",
+    "claim": "RLJ raised its full-year 2026 outlook, increasing Comparable RevPAR growth to +5.75% to +6.25%, Comparable Hotel EBITDA to $377M to $383M, Adjusted EBITDA to $352M to $358M, and Adjusted FFO per diluted share to $1.47 to $1.51.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The Company is updating its full-year outlook to incorporate its third quarter outperformance and improved outlook for the fourth quarter.",
+     "Comparable RevPAR Growth | +5.75% to +6.25%",
+     "Comparable Hotel EBITDA | $377M to $383M",
+     "Adjusted EBITDA | $352M to $358M",
+     "Adjusted FFO per diluted share | $1.47 to $1.51"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P3, 10-K MD&A 2025 Significant Activities and Results of Operations)",
+    "claim": "During 2025, RLJ sold three hotel properties for a combined sales price of $73.7 million and recorded a net loss on the sales of approximately $1.5 million.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Sold three hotel properties for a combined sales price of $73.7 million.",
+     "During the year ended December 31, 2025, we sold three hotel properties for a combined sales price of $73.7 million and recorded a net loss on the sales of approximately $1.5 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P3, 10-K MD&A 2025 Significant Activities)",
+    "claim": "During 2025, RLJ refinanced a term loan to increase the loan amount to $300.0 million and extend the initial maturity to April 2028, and used $100.0 million of the incremental proceeds to pay off the Revolver.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Refinanced a term loan to increase the loan amount to $300.0 million and extend the initial maturity to April 2028.",
+     "Paid off the $100.0 million outstanding balance on our Revolver using the incremental $100.0 million in proceeds from the refinanced term loan."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P3, 10-K MD&A 2025 Significant Activities)",
+    "claim": "During 2025, RLJ approved the 2025 Share Repurchase Program for up to $250.0 million of common and preferred shares and repurchased and retired approximately 3.3 million common shares for approximately $28.6 million.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Approved the 2025 Share Repurchase Program to acquire up to an aggregate of $250.0 million of common and preferred shares from May 9, 2025 to May 8, 2026.",
+     "Repurchased and retired approximately 3.3 million common shares for approximately $28.6 million."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in P2 (10-K Risk Factors) and P4 (10-Q MD&A); debt figures confirmed in F1 balance sheet.",
+    "claim": "RLJ carries approximately $2.2 billion of debt as of December 31, 2025, with 69.2% fixed or effectively fixed, and depends on continued access to capital markets for refinancing; a failure to refinance on acceptable terms could force disadvantageous hotel disposals.",
+    "facts": [
+     "P2",
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "At December 31, 2025, we had approximately $2.2 billion of debt outstanding, which could materially and adversely affect our operating performance and put us at a competitive disadvantage.",
+     "After taking into consideration the effect of interest rate swaps, 69.2% of our payments are fixed or effectively fixed.",
+     "If we are unable to refinance our debt on acceptable terms, or at all, we may be forced to dispose of one or more of our hotels on disadvantageous terms, which may result in losses to us and may adversely affect the cash available for distributions to our shareholders."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (10-K Risk Factors); percentages are as printed in the filing.",
+    "claim": "RLJ's hotel portfolio is concentrated in five metropolitan areas\u2014Northern California (13.4%), Southern California (11.1%), South Florida (9.1%), Chicago (6.5%), and Houston (5.8%)\u2014making it particularly susceptible to adverse local economic conditions.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our hotels located in the Northern California, Southern California, South Florida, Chicago, Illinois, and Houston, Texas metropolitan areas accounted for approximately 13.4%, 11.1%, 9.1%, 6.5% and 5.8%, respectively, of our total number of rooms available for the fiscal year ended December 31, 2025.",
+     "we are particularly susceptible to adverse market conditions in these areas, including industry downturns, relocation of businesses, constrained municipal budgets, any oversupply of hotel rooms, criminal activity, political and societal unrest, supply-chain issues, labor-related issues, and inflationary pressures, or a reduction in lodging demand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (10-K Item 1) and P2 (10-K Risk Factors).",
+    "claim": "83 of 93 hotel properties (89.3%) operated as of December 31, 2025 were affiliated with Marriott, Hilton, or Hyatt brands; loss of a franchise license could trigger impairment charges and reduce the value of the affected property.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "83 of the 93 hotel properties that we owned as of December 31, 2025 were affiliated with brands owned by Marriott, Hilton or Hyatt.",
+     "if we were to lose a franchise license, the underlying value of a particular hotel property could decline significantly from the loss of the associated name recognition, marketing support, participation in guest loyalty programs and the centralized reservation system provided by the franchisor, which could require us to recognize an impairment charge on the hotel property."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (10-K Risk Factors).",
+    "claim": "Twelve consolidated and one unconsolidated hotel property are on ground leases; the Wyndham San Diego Bayside ground lease expires in 2029, and if not extended, the property would be turned over to the ground lessor.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "As of December 31, 2025, 12 of our consolidated hotel properties, as well as one unconsolidated hotel property, were on land subject to ground leases.",
+     "Our ground lease at Wyndham San Diego Bayside expires in 2029, and if this lease is not extended, this hotel property would be turned over to the ground lessor."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (10-K Item 1) and P2 (10-K Risk Factors); cash flow figures from F3.",
+    "claim": "As a REIT, RLJ must distribute at least 90% of its taxable income to shareholders, meaning it cannot rely on retained earnings to fund capital improvements and acquisitions and must access external debt or equity capital for ongoing FF&E and renovation needs.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "we are required to distribute 90% of our REIT taxable income (excluding net capital gains) in order to maintain our qualification as a REIT.",
+     "we must distribute annually at least 90% of our REIT taxable income to shareholders in order to maintain our qualification as a REIT. Consequently, we expect to rely upon the availability of debt or equity capital to fund capital improvements and acquisitions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3 (10-K MD&A, 2025 results), P2 (10-K Risk Factors), and P6 (8-K Q3 2026 earnings release).",
+    "claim": "RLJ's investment thesis depends on sustained demand for premium-branded focused-service and compact full-service hotels; the 2025 comparable room revenue decline was attributed to a decrease in international, government, corporate and group travel, and a further demand slowdown would reduce RevPAR and EBITDA.",
+    "facts": [
+     "P3",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The decrease in room revenue from the comparable properties was primarily due to a decrease in international, government, corporate and group travel.",
+     "Our business strategy depends on achieving revenue and net income growth from demand for hotel rooms as part of a strong U.S. and global economy. Any economic slowdown or recession or weaker-than-anticipated growth or political actions and policies could negatively impact demand for our hotel rooms.",
+     "Comparable RevPAR of $153.36, an increase of 9.7% over the prior year"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P6 (8-K Q3 2026 results), F2 (10-Q Q2 2026 income statement), and P4 (10-Q MD&A 2026 significant activities).",
+    "claim": "Q3 2026 net income was only $4,576 (thousands), with a net loss attributable to common shareholders of $(1,711) (thousands), a sharp decline from Q2 2026 net income of $31,328 (thousands), driven in part by the classification of seven Chicago Midway assets as held for sale and elevated interest expense from new term loans drawn in June 2026.",
+    "facts": [
+     "P6",
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Net income of $4.6 million",
+     "Comparable RevPAR and Hotel EBITDA outlooks exclude the seven Chicago Midway assets sold subsequent to the third quarter.",
+     "The refinancing of a term loan to extend the scheduled maturity to February 2031 and upsize it to a $569.0 million delayed draw term loan, of which $225.0 million was funded in February 2026 and $344.0 million was drawn on June 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (10-K Risk Factors).",
+    "claim": "RLJ depends on independent third-party managers to operate all of its hotels, with 26 properties managed by Aimbridge Hospitality and 21 by Hilton as of December 31, 2025; the financial inability or unwillingness of a key manager to perform could disrupt operations of a material portion of the portfolio.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "As of December 31, 2025, all of our hotel properties had individual management agreements, 26 of which were with Aimbridge Hospitality (\"Aimbridge\") and 21 of which were with Hilton.",
+     "if any of our third-party managers, including Aimbridge and/or Hilton, are financially unable or unwilling to perform their obligations pursuant to their management agreements, our ability to find a replacement manager or managers for the impacted hotels could be challenging, costly and time consuming."
+    ],
+    "support": "quote_not_found"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Stated in P6 that the assets were 'sold subsequent to the third quarter,' and the balance sheet shows a held-for-sale line item, but no sale agreement terms are provided.",
+    "claim": "What were the aggregate sale price, the buyer, the closing date, and the resulting gain or loss on the seven Chicago Midway hotel properties classified as held for sale at September 30, 2026?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Comparable RevPAR and Hotel EBITDA outlooks exclude the seven Chicago Midway assets sold subsequent to the third quarter.",
+     "Hotel properties held for sale, net | 105,847",
+     "Liabilities associated with hotel properties held for sale | 5,257"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred by subtraction from the six-month and three-month figures in F2 and the nine-month figure in P6; the Q1 10-Q itself is not provided.",
+    "claim": "What were the standalone Q1 2026 revenues, net income (loss), and operating statistics, given that the six-month and Q2 figures imply a small Q1 loss?",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Net income | 31,328 | 28,631 | 30,979 | 31,803",
+     "Net income (loss) | $4,576 | ($3,798) | 220.5% | $35,555 | $28,005 | 27.0%"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 as completed transactions; specific contractual terms are not reproduced in the provided evidence.",
+    "claim": "What are the specific interest rates, covenant terms, and maturity schedules for the $569.0 million delayed draw term loan, the $150.0 million delayed draw term loan, and the recast $600.0 million Revolver completed in the 2026 Refinancing Transactions?",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The refinancing of a term loan to extend the scheduled maturity to February 2031 and upsize it to a $569.0 million delayed draw term loan, of which $225.0 million was funded in February 2026 and $344.0 million was drawn on June 30, 2026.",
+     "The issuance of a new $150.0 million delayed draw term loan which was fully drawn on June 30, 2026 and matures in February 2033.",
+     "The recast of our $600.0 million Revolver to extend the initial maturity to February 2030."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 as a risk; no subsequent filing in this packet addresses the lease status.",
+    "claim": "Has RLJ initiated or completed renewal negotiations for the ground lease at Wyndham San Diego Bayside, which expires in 2029, and what are the terms or conditions of any renewal?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our ground lease at Wyndham San Diego Bayside expires in 2029, and if this lease is not extended, this hotel property would be turned over to the ground lessor."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 as an approved program; execution data is not present in the provided items.",
+    "claim": "How many shares and at what aggregate cost have been repurchased under the 2026 Share Repurchase Program (approved for up to $250.0 million from May 9, 2026 to May 8, 2027) as of September 30, 2026?",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The approval of a new share repurchase program to acquire up to an aggregate of $250.0 million of common and preferred shares from May 9, 2026 to May 8, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred: the 2026 refinancing introduced new floating-rate debt that would require updated hedges, but the Q3 2026 10-Q notes (which would disclose the current derivative portfolio) are not in this packet.",
+    "claim": "What is the current notional amount, fixed rate, and expiration schedule of the interest rate swap portfolio following the 2026 Refinancing Transactions?",
+    "facts": [
+     "P3",
+     "P4",
+     "F1"
+    ],
+    "quotes": [
+     "Entered into $225.0 million in interest rate swaps as a $150.0 million interest rate swap expired.",
+     "After taking into consideration the effect of interest rate swaps, 69.2% of our payments are fixed or effectively fixed."
+    ],
+    "support": "quote_not_found"
+   }
+  ]
+ },
+ "ticker": "RLJ",
+ "valuation": null,
+ "valued": false
+}
