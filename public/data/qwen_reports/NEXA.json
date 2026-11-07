@@ -1,0 +1,555 @@
+{
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 43,
+ "claims_supported": 29,
+ "date": "2026-11-07T04:03:44Z",
+ "family": "commodity",
+ "flags": [],
+ "in_code_book": false,
+ "model": "qwen",
+ "no_value_reason": "no usable tax rate in the filings",
+ "qwen_book": null,
+ "screener_commit": "e06fdedb1328e4a2c9aed0ccb4462f339f2f6c68",
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in the screener row [S0]",
+    "claim": "Nexa Resources S.A. is classified in the 'Other Industrial Metals & Mining' industry within the Basic Materials sector, headquartered in Luxembourg.",
+    "facts": [
+     "S0"
+    ],
+    "quotes": [
+     "industry: Other Industrial Metals & Mining",
+     "sector: Basic Materials",
+     "country: Luxembourg"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the income statement [F2]",
+    "claim": "Net revenues for the 12 months ended Dec. 31, 2025 were $3,002,055 (table in thousands), up from $2,766,481 (table in thousands) in 2024 and $2,573,233 (table in thousands) in 2023.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Net revenues | $ 3,002,055 | $ 2,766,481 | $ 2,573,233"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the income statement [F2]; the 76% ratio is inferred from the two figures in the same table",
+    "claim": "Cost of sales was $2,289,159 (table in thousands) in 2025, representing roughly 76% of net revenues, and the company also reports a 'Mineral exploration and project evaluation' operating expense of $81,696 (table in thousands).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Cost of sales | (2,289,159) | (2,228,410) | (2,274,357)",
+     "Mineral exploration and project evaluation | (81,696) | (67,976) | (99,612)"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in [F1] and [F3]; the 'capital-intensive mining' characterisation is inferred from the magnitude of these figures together with the industry classification in [S0]",
+    "claim": "Property, plant and equipment stood at $2,433,672 (table in thousands) at Dec. 31, 2025, and the company added $351,869 (table in thousands) of PP&E during the year, consistent with a capital-intensive mining operation.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Property, plant and equipment | 2,433,672 | 2,097,508",
+     "Additions of property, plant and equipment | (351,869) | (259,010) | (310,150)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cash-flow statement [F3]; the interpretation of the mechanism is inferred from standard commodity-offtake accounting",
+    "claim": "The cash-flow statement records changes in fair value of an offtake agreement of $49,254 (table in thousands) and a price cap realized in the offtake agreement of $(5,011) (table in thousands) for 2025, indicating the company sells production under offtake contracts with embedded price caps.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Changes in fair value of offtake agreement | 49,254 | 3,347 | (2,268)",
+     "Price cap realized in offtake agreement | (5,011) | (3,246)"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the balance sheet [F1]; the hedging interpretation is inferred",
+    "claim": "The balance sheet carries 'Confirming payables' of $415,388 (table in thousands) at Dec. 31, 2025, up from $268,175 (table in thousands) a year earlier, consistent with derivative or hedging positions linked to commodity sales.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Confirming payables | 415,388 | 268,175"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2]; the link to the debt balance is inferred from [F1]",
+    "claim": "Financial expenses of $306,496 (table in thousands) in 2025 were the single largest operating expense line and exceeded gross profit of $712,896 (table in thousands) by less than half, making debt servicing a major cost driver.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Financial expenses | (306,496) | (245,828) | (213,473)",
+     "Gross profit | 712,896 | 538,071 | 298,876"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2] and [F1]",
+    "claim": "The company reports 'Share in the results of associates' of $21,143 (table in thousands) in 2025 and holds 'Investments in associates' of $32,274 (table in thousands) on the balance sheet, indicating equity-method stakes in other entities.",
+    "facts": [
+     "F2",
+     "F1"
+    ],
+    "quotes": [
+     "Share in the results of associates | 21,143 | 21,223 | 23,536",
+     "Investments in associates | 32,274 | 29,488"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in [F2]; the link to commodity-price sensitivity is inferred",
+    "claim": "Impairment reversal (loss) of long-lived assets was a gain of $91,706 (table in thousands) in 2025, versus a loss of $(32,870) (table in thousands) in 2024 and $(114,643) (table in thousands) in 2023, showing that asset values are sensitive to commodity-price or project-level assumptions.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Impairment reversal (loss) of long-lived assets | 91,706 | (32,870) | (114,643)"
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the screener row",
+    "claim": "Nexa Resources S.A. is classified in the Other Industrial Metals & Mining industry within the Basic Materials sector, with a market capitalisation of 1576019251 as of 2026-11-06.",
+    "facts": [
+     "S0"
+    ],
+    "quotes": [
+     "industry: Other Industrial Metals & Mining",
+     "marketCap: 1576019251"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the consolidated income statement",
+    "claim": "Net revenues grew from $2,573,233 (table in thousands) in 2023 to $3,002,055 (table in thousands) in 2025, a three-year expansion of roughly 17%.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Net revenues | $ 3,002,055 | $ 2,766,481 | $ 2,573,233"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the consolidated income statement",
+    "claim": "The company swung from a net loss of $(291,810) (table in thousands) in 2023 and $(187,407) (table in thousands) in 2024 to a net income of $223,144 (table in thousands) in 2025, with basic EPS of $1.00.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Net income (loss) for the year | 223,144 | (187,407) | (291,810)",
+     "Basic earnings (losses) per share | $ 1.00 | $ (1.55) | $ (2.20)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the consolidated balance sheet",
+    "claim": "Property, plant and equipment of $2,433,672 (table in thousands) at year-end 2025 is the largest single asset line, reflecting the capital-intensive nature of the mining operation.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Property, plant and equipment | 2,433,672 | 2,097,508"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the consolidated statement of cash flows",
+    "claim": "Net cash provided by operating activities of $364,957 (table in thousands) in 2025 exceeded capital expenditure on property, plant and equipment of $351,869 (table in thousands), indicating the company can fund its capex internally.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 364,957 | 351,385 | 256,198",
+     "Additions of property, plant and equipment | (351,869) | (259,010) | (310,150)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 20-F going concern and liquidity note",
+    "claim": "The company monitors its capital structure primarily through the leverage ratio, defined as net debt to Adjusted EBITDA, and states its objective is to safeguard its ability to continue as a going concern.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company monitors capital mainly using the leverage ratio, calculated as net debt to Adjusted EBITDA.",
+     "The Company's objectives when managing capital are to safeguard its ability to continue as a going concern, so it can continue to provide returns for shareholders and benefits for other stakeholders, and to maintain an optimal capital structure to reduce the cost of capital."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in F1 balance sheet lines",
+    "claim": "Current assets of $1,272,221 (table in thousands) fell short of current liabilities of $1,467,344 (table in thousands) at December 31, 2025, indicating a negative working-capital position.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total current assets | 1,272,221 | 1,207,268",
+     "Total current liabilities | 1,467,344 | 1,145,293"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 balance sheet",
+    "claim": "Cash and cash equivalents declined from $620,537 (table in thousands) at year-end 2024 to $515,871 (table in thousands) at year-end 2025.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 515,871 | $ 620,537"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 balance sheet",
+    "claim": "Non-current loans and financings stood at $1,650,569 (table in thousands) and current loans at $55,415 (table in thousands) at year-end 2025, against total shareholders' equity of $1,289,563 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Loans and financings | 1,650,569 | 1,711,750",
+     "Loans and financings | 55,415 | 50,883",
+     "Total shareholder's equity | 1,289,563 | 1,060,293"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (20-F capital management note)",
+    "claim": "The company monitors its capital structure using a leverage ratio defined as net debt to Adjusted EBITDA.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company monitors capital mainly using the leverage ratio, calculated as net debt to Adjusted EBITDA."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 cash flow statement",
+    "claim": "Net cash provided by operating activities was $364,957 (table in thousands) in 2025, up from $351,385 (table in thousands) in 2024 and $256,198 (table in thousands) in 2023.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 364,957 | 351,385 | 256,198"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 and F2; the one-time nature of the VAT item is evident from its label",
+    "claim": "Operating cash flow of $364,957 (table in thousands) exceeded net income of $223,144 (table in thousands), supported by depreciation and amortization of $288,996 (table in thousands), but included a one-time tax voluntary disclosure (VAT) item of $102,939 (table in thousands).",
+    "facts": [
+     "F3",
+     "F2"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 364,957 | 351,385 | 256,198",
+     "Net income (loss) for the year | 223,144 | (187,407) | (291,810)",
+     "Depreciation and amortization | 288,996 | 330,198 | 310,475",
+     "Tax voluntary disclosure \u2013 VAT discussions | 102,939"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "Additions to property, plant and equipment of $351,869 (table in thousands) consumed the bulk of the $364,957 (table in thousands) in operating cash flow, leaving a thin residual after capex.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Additions of property, plant and equipment | (351,869) | (259,010) | (310,150)",
+     "Net cash provided by operating activities | 364,957 | 351,385 | 256,198"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1",
+    "claim": "Current loans and financings of $55,415 (table in thousands) at year-end 2025 are well covered by cash and cash equivalents of $515,871 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Loans and financings | 55,415 | 50,883",
+     "Cash and cash equivalents | $ 515,871 | $ 620,537"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3; corroborated by F1 loan balances",
+    "claim": "During 2025 the company drew $542,414 (table in thousands) in new loans and financings while repaying $632,856 (table in thousands), indicating active refinancing and a net reduction in outstanding borrowings.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "New loans and financings | 542,414 | 799,439 | 56,408",
+     "Payments of loans and financings | (632,856) | (681,475) | (27,087)"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in F2 as reported figures for three consecutive fiscal years.",
+    "claim": "Net revenues grew from $ 2,573,233 (table in thousands) in 2023 to $ 3,002,055 (table in thousands) in 2025; for this growth to continue, metal sales volumes and/or prices must sustain or increase.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Net revenues | $ 3,002,055 | $ 2,766,481 | $ 2,573,233"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F2; the observation that revenue growth outpaced cost growth is inferred from the two stated line items.",
+    "claim": "Gross profit expanded from 298,876 (table in thousands) in 2023 to 712,896 (table in thousands) in 2025; continuation requires cost of sales to grow more slowly than revenue.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Gross profit | 712,896 | 538,071 | 298,876",
+     "Cost of sales | (2,289,159) | (2,228,410) | (2,274,357)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F2 for all three years; the one-time nature of the impairment reversal is inferred from the sign change and the line-item label.",
+    "claim": "Net income turned positive at 223,144 (table in thousands) in 2025 after losses in 2024 and 2023; the 2025 result includes a 91,706 (table in thousands) impairment reversal, and sustained profitability requires operating income to cover financial expenses of (306,496) (table in thousands) and income tax.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Net income (loss) for the year | 223,144 | (187,407) | (291,810)",
+     "Impairment reversal (loss) of long-lived assets | 91,706 | (32,870) | (114,643)",
+     "Financial expenses | (306,496) | (245,828) | (213,473)"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in F1 (balance sheet) and F3 (cash flow); the link between capex and future revenue is inferred, as no project-level detail is provided.",
+    "claim": "Property, plant and equipment grew from 2,097,508 (table in thousands) at end-2024 to 2,433,672 (table in thousands) at end-2025, with 2025 capex of 351,869 (table in thousands); asset-driven growth requires these additions to generate incremental revenue or cost savings.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Property, plant and equipment | 2,433,672 | 2,097,508",
+     "Additions of property, plant and equipment | (351,869) | (259,010) | (310,150)"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in F3; the inference that a narrow gap constrains self-funding is analytical.",
+    "claim": "Net cash provided by operating activities grew to 364,957 (table in thousands) in 2025 from 256,198 (table in thousands) in 2023, exceeding 2025 capex of 351,869 (table in thousands); self-funded growth requires operating cash flow to remain above capex going forward.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 364,957 | 351,385 | 256,198",
+     "Additions of property, plant and equipment | (351,869) | (259,010) | (310,150)"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in P1; the magnitude of non-current debt is stated in F1. The specific leverage target is not disclosed.",
+    "claim": "The Company states its capital-management objective is to 'safeguard its ability to continue as a going concern' and monitors leverage using 'net debt to Adjusted EBITDA'; for the growth thesis to hold, this ratio must remain within a range that avoids financial distress.",
+    "facts": [
+     "P1",
+     "F1"
+    ],
+    "quotes": [
+     "The Company's objectives when managing capital are to safeguard its ability to continue as a going concern, so it can continue to provide returns for shareholders and benefits for other stakeholders, and to maintain an optimal capital structure to reduce the cost of capital.",
+     "The Company monitors capital mainly using the leverage ratio, calculated as net debt to Adjusted EBITDA."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item (F2, consolidated income statement line item)",
+    "claim": "Nexa Resources recorded an impairment reversal of long-lived assets of $91,706 (table in thousands) in the 12 months ended Dec. 31, 2025, reversing prior-year impairment losses.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Impairment reversal (loss) of long-lived assets | 91,706 | (32,870) | (114,643)"
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in F1 (balance sheet line items); the deficit is arithmetically evident from the two totals.",
+    "claim": "NEXA's current liabilities exceed current assets by roughly $195 million, creating a working-capital deficit that narrows the buffer for short-term obligations.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total current assets | 1,272,221 | 1,207,268",
+     "Total current liabilities | 1,467,344 | 1,145,293"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in F2 (income-statement lines) and F1 (balance-sheet loan lines); the ratio is inferred from those figures.",
+    "claim": "Interest on loans and financings of $306,496K consumes more than half of operating income of $497,971K, leaving limited headroom if commodity prices or volumes soften.",
+    "facts": [
+     "F2",
+     "F1"
+    ],
+    "quotes": [
+     "Financial expenses | (306,496) | (245,828) | (213,473)",
+     "Operating income (loss) | 497,971 | 276,386 | (152,562)",
+     "Loans and financings | 1,650,569 | 1,711,750"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F3 (cash-flow lines) and F1 (cash balance); the near-parity of capex and OCF is inferred from those figures.",
+    "claim": "Capital expenditure of $351,869K nearly equals net operating cash flow of $364,957K, leaving minimal free cash flow and driving the year-end cash decline to $515,871K.",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Additions of property, plant and equipment | (351,869) | (259,010) | (310,150)",
+     "Net cash provided by operating activities | 364,957 | 351,385 | 256,198",
+     "Cash and cash equivalents at the end of the year | 515,871 | 620,537 | 457,259"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F2 (income-statement lines); the materiality of the swing is inferred from the three-year series.",
+    "claim": "FY2025 net income of $223,144K is materially supported by $89,231K of 'other financial items, net', a line that swung from $(147,660K) in 2024, making the return to profitability partly dependent on volatile, non-operating items.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Other financial items, net | 89,231 | (147,660) | 20,622",
+     "Net income (loss) for the year | 223,144 | (187,407) | (291,810)"
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "stated in P1 as the company's monitoring metric; the figure itself is absent from all provided statements",
+    "claim": "What is Nexa's Adjusted EBITDA and resulting net-debt-to-Adjusted-EBITDA leverage ratio for fiscal 2025?",
+    "facts": [
+     "P1",
+     "F1",
+     "F2"
+    ],
+    "quotes": [
+     "The Company monitors capital mainly using the leverage ratio, calculated as net debt to Adjusted EBITDA."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the absence of the business section and the limited screener classification",
+    "claim": "Which specific minerals does Nexa produce, in which countries, and through which operating subsidiaries (including those held through non-controlling interests)?",
+    "facts": [
+     "S0",
+     "F1",
+     "F2"
+    ],
+    "quotes": [
+     "industry: Other Industrial Metals & Mining",
+     "Attributable to non-controlling interests | 286,629"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated as not found in the NOT IN THIS PACKET list",
+    "claim": "What are the principal risk factors Nexa identifies for its operations and financial condition?",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company's objectives when managing capital are to safeguard its ability to continue as a going concern"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and F3 as a line item; the explanatory context is absent",
+    "claim": "What specific long-lived assets were subject to the $91,706 thousand impairment reversal in fiscal 2025, and what triggered the reversal after losses of $32,870 thousand (2024) and $114,643 thousand (2023)?",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Impairment reversal (loss) of long-lived assets | 91,706 | (32,870) | (114,643)",
+     "Impairment (reversal) loss of long-lived assets | (91,706) | 32,870 | 114,643"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in F2 as a single aggregated line; breakdown not provided in the packet",
+    "claim": "What components make up the $89,231 thousand 'Other financial items, net' in fiscal 2025 versus the $(147,660) thousand in fiscal 2024, a swing of over $236 million?",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Other financial items, net | 89,231 | (147,660) | 20,622"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in F3 as a line item; no explanatory text provided",
+    "claim": "What is the nature, jurisdiction and expected resolution of the 'Tax voluntary disclosure \u2013 VAT discussions' item that added $102,939 thousand to operating cash flow in fiscal 2025?",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Tax voluntary disclosure \u2013 VAT discussions | 102,939"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 as a balance-sheet line; definition and drivers not provided in the packet",
+    "claim": "What does the $415,388 thousand 'Confirming payables' balance on the Dec 31, 2025 balance sheet represent, and why did it increase by $147,213 thousand year-over-year?",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Confirming payables | 415,388 | 268,175"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P1 as a stated objective; the actual assessment document is absent; the debt figures are stated in F1",
+    "claim": "Does Nexa provide a specific going-concern or liquidity assessment, including a discussion of the adequacy of its $515,871 thousand cash balance against its $1,705,984 thousand total loans and financings?",
+    "facts": [
+     "P1",
+     "F1"
+    ],
+    "quotes": [
+     "The Company's objectives when managing capital are to safeguard its ability to continue as a going concern, so it can continue to provide returns for shareholders and benefits for other stakeholders"
+    ],
+    "support": "number_not_found"
+   }
+  ]
+ },
+ "ticker": "NEXA",
+ "valuation": null,
+ "valued": false
+}
