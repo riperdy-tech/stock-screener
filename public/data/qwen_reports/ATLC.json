@@ -1,0 +1,832 @@
+{
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 62,
+ "claims_supported": 52,
+ "date": "2026-11-07T01:28:45Z",
+ "family": "financial",
+ "flags": [
+  "Atlanticus completed the acquisition of all outstanding equity interests of Mercury for approximately $166.5 million in cash, adding approximately $3.2 billion in gross credit card receivables and 1.3 million customers.",
+  "Atlanticus completed the sale of its CAR Auto Finance operations (100% of the Auto Finance segment) to an unaffiliated third party for total consideration of approximately $71.2 million, consisting of $56.2 million in cash and a $15.0 million seller note.",
+  "Atlanticus, through subsidiary Mercury Financial, LLC, completed the sale and assignment of the MERCURY word mark and certain related intellectual property rights to an unaffiliated third party for $27.5 million in cash; the underlying consumer credit card receivables remain with the Company."
+ ],
+ "in_code_book": false,
+ "model": "qwen",
+ "no_value_reason": "share count does not reconcile with filed EPS",
+ "qwen_book": null,
+ "screener_commit": "e06fdedb1328e4a2c9aed0ccb4462f339f2f6c68",
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in P1 (10-K Item 1, period 2025-12-31)",
+    "claim": "Atlanticus acts as a program manager, providing a technology platform and products to U.S. lenders (bank partners) who originate consumer credit products; the lenders are then obligated to sell the resulting receivables to Atlanticus at principal amount.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We are principally engaged as a program manager, providing a technology platform and corresponding products and services to lenders in the U.S. to assist those lenders with offering products to consumers.",
+     "These lenders pay us a fee and in most circumstances, the lenders are then obligated to sell us the receivables they generate from these products and services. We acquire these receivables for the principal amount of the loan."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 (10-Q income statement) and P1 (10-K Item 1)",
+    "claim": "The company's revenue is composed of three main lines: consumer loans (interest, finance charges, late fees, merchant fees), fees and related income on earning assets (annual/monthly maintenance fees, cash advance fees), and other revenue (servicing income, service charges).",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "Consumer loans, including past due fees",
+     "Fees and related income on earning assets",
+     "Other revenue"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1) and F2 (10-Q income statement)",
+    "claim": "Loans receivable associated with the private-label and general-purpose credit card platform are carried at fair value, with changes in fair value recognised directly in earnings, making reported net income highly sensitive to management estimates of future cash flows.",
+    "facts": [
+     "P1",
+     "F2"
+    ],
+    "quotes": [
+     "We account for loans receivable associated with our private label credit and general purpose credit card platform using fair value accounting.",
+     "Increase (Decrease) in Fair Value of Loans and Fees Receivable Recorded at Fair Value"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1) and P7 (8-K, period 2026-09-17)",
+    "claim": "The company reported two segments\u2014Credit as a Service (CaaS) and Auto Finance\u2014but sold the entire Auto Finance segment (CAR) on September 17, 2026, eliminating that segment going forward.",
+    "facts": [
+     "P1",
+     "P7"
+    ],
+    "quotes": [
+     "These products and services are reported through two reportable segments, Credit as a Service (\"CaaS\") and Auto Finance.",
+     "CAR comprised 100% of the Company's Auto Finance segment. Following the transaction, Atlanticus will no longer operate an Auto Finance segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 (10-Q balance sheet), F2 (10-Q income statement), and P3 (10-K MD&A)",
+    "claim": "Atlanticus finances its receivables portfolio predominantly through borrowings (notes payable held by VIEs and senior notes), making interest expense the largest single cost line.",
+    "facts": [
+     "F1",
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Notes Payable, net held by VIEs",
+     "Interest expense",
+     "Outstanding notes payable, net of unamortized debt issuance costs and discounts, associated with our private label credit and general purpose credit card platform (including those associated with the Mercury acquisition) increased to $5,788.6 million as of December 31, 2025, from $2,157.8 million as of December 31, 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1)",
+    "claim": "Merchant fees paid by retail partners to Atlanticus enhance the return on private-label receivables, particularly when contractual APRs are low or promotional (e.g., 0% APR offers).",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "For certain of our receivables, we also receive merchant fees from our retail partners that are used to enhance our returns for those receivables.",
+     "These merchant fees often offset the negative impact of the initial acquisition of the underlying receivable."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1)",
+    "claim": "Atlanticus compensates its bank partners monthly for regulatory oversight of the acquired receivables, with compensation based on both a fixed and a variable component tied to receivable performance.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We compensate our bank partners monthly for the regulatory oversight they provide associated with our acquired receivables, the underlying accounts of which they continue to own and service. This compensation is based on both a fixed and variable component dependent on the underlying performance of the acquired receivables (collectively, \"Bank partner fees\")."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (10-K Item 1) and P3 (10-K MD&A)",
+    "claim": "The September 2025 acquisition of Mercury added approximately $3.2 billion in gross credit card receivables and 1.3 million customers, scaling the CaaS segment substantially.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "The total purchase consideration was approximately $166.5 million in cash",
+     "As a result of the acquisition, the Company added approximately $3.2 billion in gross credit card receivables and increased the number of customers served on behalf of our bank partners by 1.3 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 (8-K, period 2026-10-06)",
+    "claim": "On September 30, 2026, Atlanticus sold the MERCURY word mark and related IP for $27.5 million in cash, retaining the underlying consumer credit card receivables and a 12-month royalty-free solicitation licence.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "completed the sale and assignment of the MERCURY word mark and certain related intellectual property rights to an unaffiliated third party for $27.5 million in cash. The transaction did not include the underlying consumer credit card receivables associated with the MERCURY-branded program, which remain with the Company."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P4 (10-Q MD&A, period 2026-06-30)",
+    "claim": "General-purpose credit card offers carry lines of credit from $750 to $12,000, APRs from 19.99% to 36.0%, annual fees from $0 to $175, and monthly maintenance fees from $0 to $15, tailored to each consumer's risk profile.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "These offers have varying lines of credit ranging from $750 to $12,000, annual percentage rates (\"APRs\") ranging from 19.99% to 36.0%, annual fees ranging from $0 to $175 and monthly maintenance fees ranging from $0 to $15."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 (10-Q income statement)",
+    "claim": "Operating expenses for the six months ended June 30, 2026 totalled $288,423 (thousands), dominated by card and loan servicing ($102,781), salaries and benefits ($55,896), and marketing and solicitation ($84,603).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Total operating expenses"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Risk Factors) and P5 (10-Q Risk Factors)",
+    "claim": "The company's receivables portfolio is concentrated in less-than-prime borrowers, and its five largest retail partners accounted for 85% of outstanding private-label credit receivables as of December 31, 2025.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "the majority of our receivables are from borrowers represented by credit risks that regulators classify as less than prime.",
+     "Our five largest retail partners accounted for 85% of our outstanding private label credit receivables as of December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 (10-Q income statement)",
+    "claim": "Net income attributable to common shareholders for the six months ended June 30, 2026 was $89,278 (thousands), or $4.74 per diluted share, up from $56,297 (thousands) or $3.00 per diluted share in the prior-year period.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Net income attributable to common shareholders",
+     "Net income attributable to common shareholders per common share\u2014diluted (in dollars per share)"
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the cited 10-K, 10-Q, and press release",
+    "claim": "Atlanticus positions itself as a financial technology company with over 30 years of operating history, servicing more than $53 billion in consumer loans and over 23 million customers.",
+    "facts": [
+     "P1",
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "Atlanticus is a financial technology company powering more inclusive financial solutions for Everyday Americans.",
+     "servicing over $53 billion in consumer loans over more than 30 years of operating history",
+     "servicing over 23 million customers and more than $53 billion in consumer loans"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K and 10-Q business descriptions",
+    "claim": "Atlanticus differentiates through a proprietary instant decisioning platform enhanced by machine learning that integrates with retail and healthcare point-of-sale infrastructure, enabling credit decisions using hundreds of inputs from multiple sources.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "Our flexible technology solutions allow our bank partners to integrate our paperless process and instant decisioning platform with the existing infrastructure of participating retailers, healthcare providers and other service providers.",
+     "Atlanticus' decisioning platform is enhanced by machine learning, enabling lenders to make fast, sound decisions when it matters most."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K and 10-Q",
+    "claim": "Atlanticus operates through a bank-partner model in which The Bank of Missouri, WebBank, and First Bank and Trust originate card products, and Atlanticus acquires the resulting receivables, providing technology, servicing, and risk management.",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Both private label and general purpose card products are originated by The Bank of Missouri, WebBank and First Bank and Trust (collectively, our \"bank partners\").",
+     "We are principally engaged in providing products and services to lenders in the U.S. for which these lenders pay us a fee and in most circumstances, the lenders are then obligated to sell us the receivables they generate from these products and services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K",
+    "claim": "The September 2025 Mercury acquisition added an established top-25 U.S. credit card program, approximately $3.2 billion in gross credit card receivables, and 1.3 million additional customers, for approximately $166.5 million in cash.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "On September 11, 2025, we closed the acquisition of all outstanding equity interests of Mercury, a leading data- and tech-centric credit card platform utilized by bank partners to provide credit cards to near-prime consumers in the U.S.",
+     "As a result of the acquisition, we added approximately $3.2 billion in gross credit card receivables and increased the number of customers served on behalf of our bank partners by 1.3 million.",
+     "The total purchase consideration was approximately $166.5 million in cash with an opportunity, for the seller, under the purchase agreement to receive earn out payments based on the performance of the acquired receivables over a limited period of time."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited 10-K and 10-Q",
+    "claim": "Private label credit and general purpose credit card receivables grew from $2,724.8 million at December 31, 2024 to $6,953.4 million at December 31, 2025, and stood at $6,891.2 million at June 30, 2026, with Mercury accounting for $3,054.3 million of the June 2026 balance.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Our period-end managed receivables balance for private label credit and general purpose credit card receivables grew to $6,953.4 million at December 31, 2025, from $2,724.8 million at December 31, 2024.",
+     "Our period-end managed receivables balance for private label credit and general purpose credit card receivables grew to $6,891.2 million at June 30, 2026, from $3,046.5 million at June 30, 2025.",
+     "Mercury accounted for $3,054.3 million of the current quarter's receivables."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited 10-K",
+    "claim": "The company's receivables portfolio is concentrated in less-than-prime consumers, a segment the evidence describes as underserved by larger financial institutions.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The majority of our receivables are from borrowers represented by credit risks that regulators classify as less than prime.",
+     "Our services of our bank partners are often extended to consumers who may not have access to financing options with larger financial institutions."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited 10-K risk factors",
+    "claim": "Five largest retail partners accounted for 85% of outstanding private label credit receivables as of December 31, 2025, creating significant concentration risk.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our five largest retail partners accounted for 85% of our outstanding private label credit receivables as of December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K and 10-Q risk factors; balance-sheet figure from F1",
+    "claim": "Atlanticus is substantially dependent on borrowed funds to finance the receivables it purchases, and all financing facilities are of finite duration with financial covenants.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "We finance receivables that we acquire in large part through financing facilities.",
+     "All of our financing facilities are of finite duration (and ultimately will need to be extended or replaced) and contain financial covenants and other conditions that must be fulfilled in order for funding to be available."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K risk factors",
+    "claim": "Proposed and enacted interest-rate-cap legislation poses a direct threat to the pricing model: bipartisan bills in 2025 sought to cap credit card APRs at 10% effective 2031, and in January 2026 the presidential administration proposed a 10% cap for one year.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In February and March 2025, bipartisan legislation was introduced in both the United States Senate and House, respectively, seeking to amend the Truth in Lending Act (\"TILA\") to cap credit card interest rates at 10% effective January 1, 2031.",
+     "in January 2026, the current presidential administration proposed a 10% cap on credit card interest rates for one year."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited 10-K and 10-Q risk factors",
+    "claim": "The 'true lender' doctrine risk means that if courts re-characterize Atlanticus as the true lender rather than the bank partner, receivables could be subject to state usury limits, deemed void in some states, and the company could face fines and borrower class actions.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "If we were re-characterized as a \"true lender\" with respect to the receivables originated by the banks that utilize our technology platform and other services, such receivables could be deemed to be void and unenforceable in some states, the right to collect finance charges could be affected, and we could be subject to fines and penalties from state and federal regulatory agencies as well as claims by borrowers, including class actions by private plaintiffs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 8-K and press release",
+    "claim": "On September 17, 2026, Atlanticus completed the sale of its CAR Auto Finance operations for approximately $71.2 million ($56.2 million cash and a $15.0 million seller note), and following the transaction it no longer operates an Auto Finance segment.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Total consideration to Atlanticus was approximately $71.2 million, consisting of $56.2 million in cash and a $15.0 million seller note.",
+     "Following the transaction, Atlanticus will no longer operate an Auto Finance segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 8-K",
+    "claim": "On September 30, 2026, Atlanticus sold the MERCURY word mark and related IP for $27.5 million in cash while retaining the underlying consumer credit card receivables and receiving a 12-month royalty-free license to solicit new consumers under the MERCURY brand.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "completed the sale and assignment of the MERCURY word mark and certain related intellectual property rights to an unaffiliated third party for $27.5 million in cash.",
+     "The transaction did not include the underlying consumer credit card receivables associated with the MERCURY-branded program, which remain with the Company.",
+     "This royalty-free license continues for a period of 12 months following the sale."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K and 10-Q",
+    "claim": "Atlanticus holds an equity stake in Fintiv Inc., which has sued Apple Inc. and Walmart Inc. for patent infringement claiming losses that could be measured in the billions of dollars; Atlanticus believes it will own over 10% of Fintiv on a diluted basis.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "One of these companies, Fintiv Inc., has sued Apple, Inc. and, Walmart, Inc. for patent infringement.",
+     "The claimed losses sustained by this patent infringement are substantial and could be measured in the billions of dollars.",
+     "We believe on a diluted basis that we will own over 10% of the company."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K and 10-Q",
+    "claim": "General purpose credit card product terms expanded between the 10-K and the Q2 2026 10-Q, with lines of credit increasing from a range of $350 to $5,500 to $750 to $12,000.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "These offers have varying lines of credit ranging from $350 to $5,500, annual percentage rates (\"APRs\") ranging from 19.99% to 36%",
+     "These offers have varying lines of credit ranging from $750 to $12,000, annual percentage rates (\"APRs\") ranging from 19.99% to 36.0%"
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in the cited balance sheet and cash flow statement",
+    "claim": "Atlanticus held $555,215 (table in thousands) in cash and cash equivalents plus $89,965 (table in thousands) in restricted cash at June 30, 2026, for a combined total of $645,180 (table in thousands).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Cash and cash equivalent | $ 555,215 | $ 621,093",
+     "Restricted cash and cash equivalents | 89,965 | 146,314",
+     "Cash and cash equivalents and restricted cash equivalents at end of period | 645,180 | 483,235"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited cash flow statement",
+    "claim": "Net cash provided by operating activities was $563,272 (table in thousands) for the six months ended June 30, 2026, more than double the $264,260 (table in thousands) generated in the prior-year period.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 563,272 | 264,260"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited income statement and cash flow statement",
+    "claim": "Operating cash flow exceeded net income of $94,298 (table in thousands) largely because a $761,804 (table in thousands) non-cash fair-value charge on loans was added back, while an increase in uncollected fees on earning assets of $265,243 (table in thousands) reduced cash relative to recognized revenue.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Net income | $ 94,298 | $ 61,412",
+     "Changes in fair value of loans | 761,804 | 395,122",
+     "Increase in uncollected fees on earning assets | (265,243) | (144,630)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited balance sheet; the ratio is inferred from the printed figures",
+    "claim": "Notes payable held by VIEs of $5,578,882 (table in thousands) and senior notes, net of $692,117 (table in thousands) at June 30, 2026 stood against total equity of $697,476 (table in thousands), meaning interest-bearing debt was roughly nine times equity.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Notes Payable, net held by VIEs | 5,578,882 | 5,818,761",
+     "Senior notes, net | 692,117 | 698,562",
+     "Total equity | 697,476 | 603,830"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-Q risk factors; the H1 2026 borrowing figures are from F3",
+    "claim": "Atlanticus states it is 'Substantially Dependent Upon Borrowed Funds to Fund Receivables We Purchase' and that all financing facilities are of finite duration and must be extended or replaced.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "We Are Substantially Dependent Upon Borrowed Funds to Fund Receivables We Purchase",
+     "All of our financing facilities are of finite duration (and ultimately will need to be extended or replaced) and contain financial covenants and other conditions that must be fulfilled in order for funding to be available."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K MD&A",
+    "claim": "Outstanding notes payable associated with the credit card platform increased to $5,788.6 million as of December 31, 2025, from $2,157.8 million as of December 31, 2024, including $2,847.9 million associated with the Mercury acquisition.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Outstanding notes payable, net of unamortized debt issuance costs and discounts, associated with our private label credit and general purpose credit card platform (including those associated with the Mercury acquisition) increased to $5,788.6 million as of December 31, 2025, from $2,157.8 million as of December 31, 2024.",
+     "This growth, period over period, included notes payable associated with our Mercury acquisition of $2,847.9 million as of December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 10-K MD&A and balance sheet",
+    "claim": "Atlanticus has 9.25% Senior Notes due 2029 and $400.0 million aggregate principal amount of 9.750% Senior Notes due 2030, with senior notes, net of $692,117 (table in thousands) remaining on the June 30, 2026 balance sheet.",
+    "facts": [
+     "P3",
+     "F1"
+    ],
+    "quotes": [
+     "the issuances of 9.25% Senior Notes due 2029 (the \"2029 Senior Notes\") and our issuance of $400.0 million aggregate principal amount of 9.750% Senior Notes due 2030 (the \"2030 Senior Notes\")",
+     "Senior notes, net | 692,117 | 698,562"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited 8-K filings",
+    "claim": "On September 17, 2026 Atlanticus completed the sale of its CAR Auto Finance operations for approximately $71.2 million ($56.2 million in cash and a $15.0 million seller note), and on September 30, 2026 sold the MERCURY word mark for $27.5 million in cash, stating it expects to use the cash proceeds to reduce debt.",
+    "facts": [
+     "P7",
+     "P6"
+    ],
+    "quotes": [
+     "Total consideration to Atlanticus was approximately $71.2 million, consisting of $56.2 million in cash and a $15.0 million seller note.",
+     "Atlanticus expects to use the cash proceeds from the sale to reduce debt and invest in higher-growth product lines.",
+     "completed the sale and assignment of the MERCURY word mark and certain related intellectual property rights to an unaffiliated third party for $27.5 million in cash."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited cash flow statement",
+    "claim": "Total cash and restricted cash decreased by $122,227 (table in thousands) during the six months ended June 30, 2026, ending at $645,180 (table in thousands), driven by net investing outflows of $420,444 (table in thousands) and net financing outflows of $265,055 (table in thousands) that exceeded operating inflows.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net decrease in cash and cash equivalents and restricted cash and cash equivalents | (122,227) | (16,401)",
+     "Net cash used in investing activities | (420,444) | (520,419)",
+     "Net cash (used in) provided by financing activities | (265,055) | 239,758"
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in P1 (10-K) and P5 (10-Q); the dollar figures are management-reported period-end balances.",
+    "claim": "The September 2025 acquisition of Mercury added approximately $3.2 billion in gross credit card receivables and 1.3 million customers, and by June 30, 2026 Mercury accounted for $3,054.3 million of the company's $6,891.2 million managed receivables, making it the single largest source of receivables scale.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "As a result of the acquisition, we added approximately $3.2 billion in gross credit card receivables and increased the number of customers served on behalf of our bank partners by 1.3 million.",
+     "Our period-end managed receivables balance for private label credit and general purpose credit card receivables grew to $6,891.2 million at June 30, 2026, from $3,046.5 million at June 30, 2025. Mercury accounted for $3,054.3 million of the current quarter's receivables."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated as a forward-looking expectation in P3 (10-K MD&A); not yet confirmed by H1 2026 actuals beyond the aggregate receivables figure in P5.",
+    "claim": "Management expects general purpose credit card receivables growth to continue throughout 2026 and to outpace private label credit receivables growth, supported by expanded marketing efforts.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Growth in our general purpose credit card receivables is expected to continue throughout 2026 and to outpace growth in our private label credit receivables as we continue to expand our marketing efforts."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "F2 is an unaudited 10-Q income statement; P3 is management's MD&A explanation. The near-doubling is arithmetic on the reported figures.",
+    "claim": "Total operating revenue and other income for the six months ended June 30, 2026 was $1,423,848 (table in thousands), nearly double the $738,693 (table in thousands) for the same period in 2025, driven primarily by receivables growth from the Mercury acquisition and organic card growth.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Total operating revenue and other income | 744,314 | 393,820 | 1,423,848 | 738,693",
+     "Period-over-period results primarily relate to growth in private label credit and general purpose credit card products, the receivables of which increased to $6,953.4 million as of December 31, 2025, from $2,724.8 million as of December 31, 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "F1 is the unaudited balance sheet; P5 is the 10-Q risk factor. The dependency is explicitly stated by management.",
+    "claim": "The company is substantially dependent on borrowed funds to purchase receivables; Notes Payable net held by VIEs stood at $5,578,882 (table in thousands) at June 30, 2026, and all financing facilities are of finite duration requiring extension or replacement.",
+    "facts": [
+     "F1",
+     "P5"
+    ],
+    "quotes": [
+     "Notes Payable, net held by VIEs | 5,578,882 | 5,818,761",
+     "We finance receivables that we acquire in large part through financing facilities. All of our financing facilities are of finite duration (and ultimately will need to be extended or replaced) and contain financial covenants and other conditions that must be fulfilled in order for funding to be available."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated as a forward-looking expectation in P3 (10-K MD&A); no H1 2026 actuals in this packet confirm the yield uplift yet.",
+    "claim": "Management is enacting product, policy, and pricing changes on the Mercury portfolio of general purpose credit card receivables, expected to result in increased yield and additions to total operating revenue in 2026 and beyond, with full realization taking several quarters.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "we are currently enacting a number of product, policy and pricing changes on the newly acquired portfolio of general purpose credit card receivables. We expect these changes to result in increased yield for this portfolio and result in additions to our Total operating revenue and other income in 2026 and beyond. Certain of the product, policy and pricing changes, and their impact on the acquisition of new receivables, will take several quarters to be fully realized."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 (10-Q MD&A) and P5 (10-Q Risk Factors); the three bank names are explicitly listed.",
+    "claim": "All private label and general purpose card products are originated by three bank partners (The Bank of Missouri, WebBank, and First Bank and Trust), and any termination or regulatory restriction of these relationships would prevent the company from acquiring new receivables.",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Both private label and general purpose card products are originated by The Bank of Missouri, WebBank and First Bank and Trust (collectively, our \"bank partners\").",
+     "Any significant interruption or change of our bank relationships would result in our being unable to acquire new receivables or develop certain other credit products. Unless we were able to timely replace our bank relationships, such an interruption would prevent us from acquiring newly-originated credit card receivables and growing our investments in private label credit and general purpose credit card receivables."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P6 (8-K filed October 8, 2026); the license terms are contractual as described in the filing.",
+    "claim": "On September 30, 2026, the company sold the MERCURY word mark and related IP for $27.5 million in cash while retaining the underlying receivables and a 12-month royalty-free license to solicit new consumers under the mark, extendable up to five additional years for legacy accounts.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "completed the sale and assignment of the MERCURY word mark and certain related intellectual property rights to an unaffiliated third party for $27.5 million in cash. The transaction did not include the underlying consumer credit card receivables associated with the MERCURY-branded program, which remain with the Company.",
+     "This royalty-free license continues for a period of 12 months following the sale. Thereafter, for a period of up to five additional years, Mercury Financial may continue to use the brand to service legacy accounts and satisfy continuing operational, legal and regulatory obligations."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited items (10-K Item 1 and Item 7)",
+    "claim": "Atlanticus completed the acquisition of all outstanding equity interests of Mercury for approximately $166.5 million in cash, adding approximately $3.2 billion in gross credit card receivables and 1.3 million customers.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "On September 11, 2025, we closed the acquisition of all outstanding equity interests of Mercury, a leading data- and tech-centric credit card platform utilized by bank partners to provide credit cards to near-prime consumers in the U.S.",
+     "The total purchase consideration was approximately $166.5 million in cash.",
+     "As a result of the acquisition, the Company added approximately $3.2 billion in gross credit card receivables and increased the number of customers served on behalf of our bank partners by 1.3 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (8-K filed 2026-09-18)",
+    "claim": "Atlanticus completed the sale of its CAR Auto Finance operations (100% of the Auto Finance segment) to an unaffiliated third party for total consideration of approximately $71.2 million, consisting of $56.2 million in cash and a $15.0 million seller note.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "On September 17, 2026, Atlanticus Holdings Corporation, a financial technology company that enables its bank, retail and healthcare partners to offer more inclusive financial services to millions of everyday Americans, announced that it completed the sale of its CAR Auto Finance operations to an unaffiliated third party.",
+     "Total consideration to Atlanticus was approximately $71.2 million, consisting of $56.2 million in cash and a $15.0 million seller note.",
+     "CAR comprised 100% of the Company's Auto Finance segment. Following the transaction, Atlanticus will no longer operate an Auto Finance segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (8-K filed 2026-10-08)",
+    "claim": "Atlanticus, through subsidiary Mercury Financial, LLC, completed the sale and assignment of the MERCURY word mark and certain related intellectual property rights to an unaffiliated third party for $27.5 million in cash; the underlying consumer credit card receivables remain with the Company.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "On September 30, 2026, Atlanticus Holdings Corporation (the \u201cCompany\u201d), through its subsidiary Mercury Financial, LLC, completed the sale and assignment of the MERCURY word mark and certain related intellectual property rights to an unaffiliated third party for $27.5 million in cash.",
+     "The transaction did not include the underlying consumer credit card receivables associated with the MERCURY-branded program, which remain with the Company."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in P2 (10-K Risk Factors, effective 2026-03-16) and P5 (10-Q Risk Factors, effective 2026-08-10); the specific bills and dates are directly quoted.",
+    "claim": "Multiple legislative and executive actions in 2025\u20132026 seek to cap consumer credit interest rates at 10% or at state usury limits, which would directly compress the 19.99%\u201336% APR range Atlanticus charges on its credit card products.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "In February and March 2025, bipartisan legislation was introduced in both the United States Senate and House, respectively, seeking to amend the Truth in Lending Act (\"TILA\") to cap credit card interest rates at 10% effective January 1, 2031.",
+     "Thereafter, in January 2026, the current presidential administration proposed a 10% cap on credit card interest rates for one year.",
+     "Any temporary or permanent implementation of a specific interest rate cap on consumer credit cards or more broadly across all consumer credit products could have a material adverse effect on our business and operations."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P5 (10-Q Risk Factors) and P3 (10-K MD&A); the balance sheet figure is from F1 (10-Q balance sheet, effective 2026-08-10).",
+    "claim": "Atlanticus finances its receivables portfolio almost entirely through finite-duration secured borrowing facilities; notes payable held by VIEs stood at $5,578,882 (thousands) at June 30, 2026, and the company states all facilities must be extended or replaced.",
+    "facts": [
+     "F1",
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "We finance receivables that we acquire in large part through financing facilities. All of our financing facilities are of finite duration (and ultimately will need to be extended or replaced) and contain financial covenants and other conditions that must be fulfilled in order for funding to be available.",
+     "If additional financing facilities are not available in the future on terms we consider acceptable, we will not be able to purchase additional receivables and those receivables may contract in size."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5 (10-Q Risk Factors); the H1 2026 fair-value charge figure is from F2 (10-Q income statement, effective 2026-08-10).",
+    "claim": "The receivables portfolio is concentrated in sub-prime borrowers, and the company warns that economic slowdowns will increase delinquencies and credit losses, with a significant portion of reported income based on management estimates that may not materialize.",
+    "facts": [
+     "P5",
+     "F2"
+    ],
+    "quotes": [
+     "Our portfolio of receivables has limited diversification and primarily originates from consumers whose creditworthiness is considered less than prime.",
+     "During periods of economic slowdown, recession or rapidly rising inflation rates, we generally experience an increase in rates of delinquencies and frequency and severity of credit losses.",
+     "Because a significant portion of our reported income is based on management's estimates of the future performance of receivables, differences between actual and expected performance of the receivables may cause fluctuations in net income."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (10-K Risk Factors, effective 2026-03-16).",
+    "claim": "Five retail partners accounted for 85% of outstanding private label credit receivables at December 31, 2025, creating acute concentration risk if any major partner terminates or reduces its relationship.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our five largest retail partners accounted for 85% of our outstanding private label credit receivables as of December 31, 2025.",
+     "If a significant partner reduces or terminates its relationship with us, these operations' revenue could decline significantly and our operating results and financial condition could be harmed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (10-K Risk Factors), P3 (10-K MD&A), and P5 (10-Q Risk Factors).",
+    "claim": "The Mercury acquisition, completed September 11, 2025 for approximately $166.5 million in cash plus contingent earn-out, is a central growth driver; the company warns it may not realize expected benefits and integration is complex and time-consuming.",
+    "facts": [
+     "P2",
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "Although we expect significant benefits to result from the acquisition of Mercury, we may not actually realize any of them or realize them within the anticipated timeframe.",
+     "The total purchase consideration was approximately $166.5 million in cash with an opportunity, for the seller, under the purchase agreement to receive earn out payments based on the performance of the acquired receivables over a limited period of time.",
+     "The acquisition of Mercury adds an established top 25 credit card program to the suite of programs that Atlanticus manages on behalf of our bank partners."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P2 (10-K Risk Factors) and P5 (10-Q Risk Factors).",
+    "claim": "Atlanticus depends on three bank partners (The Bank of Missouri, WebBank, First Bank and Trust) to originate all private label and general purpose credit card products; a bank or its regulator could terminate or modify the relationship with little or no notice.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "The banks could determine not to continue the relationship for various business reasons, or their regulators could limit their ability to issue credit cards utilizing our technology platform or to originate some or all of the other products that we service or require the banks to modify those products significantly and could do either with little or no notice.",
+     "Any significant interruption or change of our bank relationships would result in our being unable to acquire new receivables or develop certain other credit products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (10-K Risk Factors) and P5 (10-Q Risk Factors); the legal landscape description is directly quoted.",
+    "claim": "If courts or regulators re-characterize Atlanticus as the 'true lender' rather than the bank partners, the receivables could be voided in some states, finance charges uncollectible, and the company exposed to fines, penalties, and class-action litigation.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "If we were re-characterized as a \"true lender\" with respect to the receivables originated by the banks that utilize our technology platform and other services, such receivables could be deemed to be void and unenforceable in some states, the right to collect finance charges could be affected, and we could be subject to fines and penalties from state and federal regulatory agencies as well as claims by borrowers, including class actions by private plaintiffs.",
+     "The case law involving whether an originating lender, on the one hand, or a third party, on the other hand, is the \"true lender\" of a loan is still developing and courts have come to different conclusions and applied different analyses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P7 (8-K and press release, effective 2026-09-18); segment structure from P1 (10-K Item 1).",
+    "claim": "Atlanticus sold its entire Auto Finance segment (CAR) on September 17, 2026 for approximately $71.2 million, eliminating its second reportable segment and concentrating the company entirely in consumer credit cards and private label credit.",
+    "facts": [
+     "P7",
+     "P1"
+    ],
+    "quotes": [
+     "CAR comprised 100% of the Company's Auto Finance segment. Following the transaction, Atlanticus will no longer operate an Auto Finance segment.",
+     "Total consideration to Atlanticus was approximately $71.2 million, consisting of $56.2 million in cash and a $15.0 million seller note.",
+     "Atlanticus expects to use the cash proceeds from the sale to reduce debt and invest in higher-growth product lines."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (10-K Item 1, Fair Value Option section); the H1 2026 figures are from F2 (10-Q income statement, effective 2026-08-10).",
+    "claim": "Fair-value accounting on loans means that a large portion of reported earnings is driven by management's estimates of future cash flows; the H1 2026 charge for changes in fair value of loans was $761,804 (thousands), exceeding total operating revenue and other income for the same period.",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "We value these loans and fee receivables within Changes in fair value of loans on our consolidated statements of income to reflect our best estimate of ongoing economics and cash flows associated with existing consumer accounts including future estimates of finance and fee billings and consumer payment rates typical of the assumptions a market participant would use to calculate fair value.",
+     "Under agreements with our bank partners, we are required to purchase these receivables for amounts that may be in excess of fair value. In these instances, a fair value assessment that is less than the purchase price of the receivable can occur on the date we initially acquire the receivable, resulting in a loss on acquisition of the receivable."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Stated in P2 (10-K Risk Factors, period 2025-12-31) as pending proposals; no subsequent filing in the packet updates their status.",
+    "claim": "What is the status of the proposed 10% credit card interest rate cap and related bills (US S3721, US S3793) as of November 2026, and has any cap been enacted?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "in January 2026, the current presidential administration proposed a 10% cap on credit card interest rates for one year",
+     "US S3721, which would amend TILA to cap interest rates on all consumer credit products at the maximum amount permitted in the state where the customer resides, and US S3793, which would extend the Military Lending Act's 36% military annual percentage rate cap and related protections to all consumers in connection with all consumer credit products subject to only limited exceptions"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3 (10-K MD&A) that the derivative was recorded; F1 (balance sheet) does not break it out separately, so the exact carrying value is not visible in the provided evidence.",
+    "claim": "What is the current fair value of the Mercury contingent consideration (earn-out) derivative liability as of June 30, 2026?",
+    "facts": [
+     "P3",
+     "F1"
+    ],
+    "quotes": [
+     "We have recorded the derivative at fair value calculated using internally-developed estimates."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 (8-K, effective 2026-10-08) and P7 (8-K, effective 2026-09-18); no Q3 2026 financial statements are in the evidence packet.",
+    "claim": "What is the consolidated financial impact (gain or loss, balance sheet changes) of the CAR Auto Finance sale and the MERCURY word mark sale, both completed in Q3 2026?",
+    "facts": [
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "Total consideration to Atlanticus was approximately $71.2 million, consisting of $56.2 million in cash and a $15.0 million seller note.",
+     "completed the sale and assignment of the MERCURY word mark and certain related intellectual property rights to an unaffiliated third party for $27.5 million in cash."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (10-K Risk Factors) as an ongoing legal uncertainty; no filing in the packet reports any specific case filed against Atlanticus or its bank partners.",
+    "claim": "Has any 'true lender' litigation been filed against Atlanticus or its bank partners (The Bank of Missouri, WebBank, First Bank and Trust), and what is the current status of any such proceedings?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If we were re-characterized as a \"true lender\" with respect to the receivables originated by the banks that utilize our technology platform and other services, such receivables could be deemed to be void and unenforceable in some states, the right to collect finance charges could be affected, and we could be subject to fines and penalties from state and federal regulatory agencies as well as claims by borrowers, including class actions by private plaintiffs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1, P3, and P4 as an ongoing matter with no resolution date; no subsequent filing in the packet updates the status.",
+    "claim": "What is the current status and expected timeline of Fintiv Inc.'s patent infringement litigation against Apple, Inc. and Walmart, Inc.?",
+    "facts": [
+     "P1",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Apple has vigorously contested the claims, and we expect it to continue doing so.",
+     "The claimed losses sustained by this patent infringement are substantial and could be measured in the billions of dollars."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (10-K Item 1, Dec 2025) and P4 (10-Q MD&A, June 2026); no filing in the packet explains the timing or rationale for the product-term change.",
+    "claim": "When and for what reason did the maximum general purpose credit card line of credit increase from $5,500 to $12,000, and the minimum increase from $350 to $750?",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "These offers have varying lines of credit ranging from $350 to $5,500, annual percentage rates (\"APRs\") ranging from 19.99% to 36%, annual fees ranging from $0 to $175 and monthly maintenance fees ranging from $0 to $15.",
+     "These offers have varying lines of credit ranging from $750 to $12,000, annual percentage rates (\"APRs\") ranging from 19.99% to 36.0%, annual fees ranging from $0 to $175 and monthly maintenance fees ranging from $0 to $15."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (10-K Risk Factors, period 2025-12-31); the passage is truncated and the full Item 9A is not included in the evidence packet.",
+    "claim": "What was the specific material weakness in internal control over financial reporting identified as of December 31, 2024, and did management conclude it was fully remediated as of December 31, 2025?",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Management assessed the effectiveness of our internal control over financial reporting as of December 31, 2024 and concluded that our internal control over financial reporting was not effective as of December 31, 2024 due to a material weakness"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "ATLC",
+ "valuation": null,
+ "valued": false
+}
