@@ -1,137 +1,170 @@
 {
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 72,
- "claims_supported": 49,
- "date": "2026-11-01T16:47:30Z",
+ "claims": 68,
+ "claims_supported": 37,
+ "date": "2026-11-08T06:41:19Z",
  "family": "commodity",
- "flags": [],
- "in_code_book": true,
+ "flags": [
+  "GSL sold four containerships in 2025: Tasman (5,936 TEU), Akiteta (2,220 TEU), and Keta (2,207 TEU) in Q1 2025 for an aggregate gain of $28.3 million, and Dimitris Y (5,936 TEU) in Q4 2025 for a gain of $17.9 million.",
+  "GSL acquired three 8,586 TEU Korean-built containerships (Lotus A, Koi, Cypress) for an aggregate price of $90.0 million, with two delivered in December 2025 and the third (Cypress) delivered January 9, 2026.",
+  "GSL's Board declared a $0.10 per share increase in the quarterly supplemental dividend, raising the total annualized dividend to $2.50 per Class A common share ($0.625 per quarter), a 19.0% increase."
+ ],
+ "in_code_book": false,
  "model": "qwen",
  "no_value_reason": "diluted share count not filed",
- "qwen_book": "held",
- "source": "formation 2026-10-30",
+ "qwen_book": null,
+ "screener_commit": "1e5d7c07acafe4ed5970f67fba4abd6f8deda60a",
+ "source": "on request (k2_post_smoke)",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated directly in the 20-F Item 4 description of the company.",
+    "basis": "Stated directly in the 20-F Item 4 and Item 5 overview sections.",
     "claim": "GSL owns a fleet of mid-sized and smaller containerships and earns revenue by chartering them out under fixed-rate time charters to container shipping companies.",
     "facts": [
-     "P1"
+     "P1",
+     "P3"
     ],
     "quotes": [
-     "We are a Republic of the Marshall Islands corporation that owns a fleet of mid-sized and smaller containerships which we charter out under fixed-rate charters to reputable container shipping companies."
+     "We are a Republic of the Marshall Islands corporation that owns a fleet of mid-sized and smaller containerships which we charter out under fixed-rate charters to reputable container shipping companies.",
+     "We commenced operations in December 2007 with a business of owning and chartering out containerships under fixed rate charters to container liner companies."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in both P1 (Item 4) and P3 (Item 5 Overview).",
-    "claim": "As of March 12, 2026, the fleet comprised 71 containerships ranging from 2,207 to 11,040 TEU with an aggregate capacity of 423,003 TEU, of which 41 are wide-beam Post-Panamax.",
+    "basis": "Stated in Risk Factors (P2) and the Consolidated Statement of Income (F2, table in $ thousands).",
+    "claim": "Time charter hire is the sole source of operating cash flow; there are no other revenue lines.",
+    "facts": [
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "Payments to us by our charterers under time charters are, and will continue to be, our sole source of operating cash flow.",
+     "Time charter revenue | $ 752,965"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 6-K interim report for the six months ended June 30, 2026 (P4).",
+    "claim": "The company operates and reports in a single operating segment; the CODM reviews results solely by revenue per day and consolidated net income.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The Company's Executive Chairman, Chief Executive Officer and Chief Financial Officer, collectively, who are the Chief Operating Decision Maker (\"CODM\"), review operating results solely by revenue per day and consolidated net income of the fleet and thus the Company has determined that it operates under one operating and reportable segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the MD&A overview (P3) and quantified in the 2025 results discussion.",
+    "claim": "Revenue is driven by the number of vessels in the fleet, their daily charter rates, utilization (days on-hire vs. off-hire), and the terms at which charters are renewed or re-fixed.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "the number of vessels in our fleet and their charter rates;",
+     "the number of days that our vessels are utilized and not subject to drydocking, special surveys, or otherwise are off-hire;",
+     "the terms under which we recharter our vessels once the existing time charters have expired"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in MD&A (P3, in millions) and the income statement (F2, table in $ thousands: 208,426).",
+    "claim": "Vessel operating expenses are the largest cost line, driven by crew, stores, spares, maintenance, insurance, and management fees, and scale with ownership days.",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "Vessel operating expenses, which relate to the operation of the vessels themselves, were $208.4 million for the year ended December 31, 2025 (or 27.2% of operating revenues)",
+     "The average cost per ownership day for the year ended December 31, 2025 was $8,231, compared to $7,670 for the prior year period, up $560 per day, or 7.3%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in MD&A (P3, in millions) and the income statement (F2, table in $ thousands: 121,961).",
+    "claim": "Depreciation and amortization is the second-largest operating expense and rises with fleet additions and drydock capitalization.",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "Depreciation and Amortization was $122.0 million (or 15.9% of operating revenues) for the year ended December 31, 2025, up from $100.0 million (or 14.1% of operating revenues) in 2024. The increase was mainly due to the 13 drydockings completed in 2025 and the addition of the 2024 Acquired Vessels"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in MD&A Liquidity section (P3, in millions) and the income statement (F2, table in $ thousands: 38,966).",
+    "claim": "Interest and other finance expenses are a material non-operating cost, driven by floating-rate debt at SOFR plus a margin, partially hedged by interest rate caps.",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "Interest and other finance expenses for the year ended December 31, 2025 was $39.0 million, down from $40.7 million for the prior year.",
+     "Assuming SOFR of 4.0%, quarterly interest on total gross debt as at December 31, 2025, without taking into account amortization of the premium or the effect of the interest rate caps, would amount to approximately $10.7 million."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the Q2 2026 earnings release (P8), revenue origin table.",
+    "claim": "The fleet is chartered to a concentrated group of major liner operators; Maersk accounted for 29.60% of 1H 2026 revenue, CMA CGM 19.93%, Hapag-Lloyd 18.69%, and MSC 14.05%.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "Denmark (Maersk) | 117.45 | 29.60% | 122.00 | 31.87%",
+     "France (CMA CGM) | 79.07 | 19.93% | 71.14 | 18.59%",
+     "Germany (Hapag Lloyd) | 74.17 | 18.69% | 73.03 | 19.08%",
+     "Switzerland (MSC) | 55.76 | 14.05% | 42.99 | 11.23%"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the income statement footnote (F2, table in $ thousands) and Risk Factors (P2).",
+    "claim": "A significant portion of vessel operating expenses is paid to related-party ship managers (Technomar for technical, Conchart for commercial), creating an embedded cost that is payable regardless of profitability.",
+    "facts": [
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "Vessel operating expenses (include related party vessels operating expenses of $23,817, $21,804 and $19,086 for each of the years ended December 31, 2025, 2024 and 2023, respectively)",
+     "The fees and expenses payable pursuant to our technical and commercial ship management agreements with Technomar and Conchart, respectively, will be payable without regard to our business, results of operation, and financial condition and we have limited rights to terminate our management agreements."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 6-K press releases (P5, P6, P8).",
+    "claim": "GSL is executing a newbuilding program (17 ships, deliveries 4Q28\u20131Q30) that will expand the fleet and revenue base, financed by a $1 billion syndicated loan at SOFR + 1.5%.",
+    "facts": [
+     "P5",
+     "P6",
+     "P8"
+    ],
+    "quotes": [
+     "the Company has agreed a $1 billion syndicated loan facility (the \"New Facility\") bearing an interest rate of SOFR + 1.5% and a duration of seven years. The Company intends to draw on this facility in tranches corresponding to the delivery of each of the 15 newbuildings announced in June of this year",
+     "With these Additional Newbuilds, the Company's newbuilding orderbook is 17 ships.",
+     "Ordered 15 mid-size, ultra-high-reefer, wide-beam, latest generation newbuilds for an aggregate contract price of $1.33 billion, over 75% of which is covered by expected Adj. EBITDA from initial charters"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in 20-F Item 4 (P1) and Item 5 Overview (P3).",
+    "claim": "As of March 12, 2026, the operating fleet comprised 71 containerships ranging from 2,207 to 11,040 TEU with an aggregate capacity of 423,003 TEU, of which 41 are wide-beam Post-Panamax.",
     "facts": [
      "P1",
      "P3"
     ],
     "quotes": [
      "As of March 12, 2026, we owned 71 mid-sized and smaller containerships, ranging from 2,207 to 11,040 TEU, with an aggregate capacity of 423,003 TEU. 41 ships are wide-beam Post-Panamax."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated explicitly in the Risk Factors section of the 20-F.",
-    "claim": "Charter payments from time charters are GSL's sole source of operating cash flow.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Payments to us by our charterers under time charters are, and will continue to be, our sole source of operating cash flow."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the MD&A discussion of 2025 vs. 2024 operating revenues.",
-    "claim": "Operating revenues of $766.5 million in 2025 rose 7.8% year-over-year, driven by higher rates on charter renewals, net fleet additions, a $4.8 million straight-lining effect, and an $8.0 million increase in amortization of intangible liabilities from below-market charters.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The increase in operating revenue was mainly due to (i) the net effect of higher rates on charter renewals (ii) the addition of the 2024 Acquired Vessels, the addition of two of the Newly Acquired Vessels offset by the sale of Tasman, Keta, and Akiteta in the first quarter of 2025 and the sale of Dimitris Y in the fourth quarter of 2025, (iii) a non-cash $4.8 million positive effect from straight lining time charter modifications, and (iv) a non-cash $8.0 million increase in the amortization of intangible liabilities arising from below market charters attached to certain vessel additions offset by an increase in off hire days."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the MD&A revenue discussion.",
-    "claim": "Utilization was 95.6% in 2025, with 1,125 days of offhire and idle time of which 816 were for scheduled drydockings.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "There were 1,125 days of offhire and idle time in the year ended December 31, 2025 of which 816 were for scheduled drydockings, compared to 966 days of offhire and idle time in the prior year of which 807 were for scheduled drydockings."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the MD&A cost discussion.",
-    "claim": "Vessel operating expenses were $208.4 million (27.2% of operating revenues) in 2025, the largest single operating cost, with an average cost per ownership day of $8,231.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Vessel operating expenses, which relate to the operation of the vessels themselves, were $208.4 million for the year ended December 31, 2025 (or 27.2% of operating revenues) compared to $191.4 million for the year ended December 31, 2024 (or 26.9% of operating revenues).",
-     "The average cost per ownership day for the year ended December 31, 2025 was $8,231, compared to $7,670 for the prior year period, up $560 per day, or 7.3%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the MD&A Overview.",
-    "claim": "As of December 31, 2025, the average remaining charter term was 2.7 years on a TEU-weighted basis, and contracted revenue on that basis was $2.24 billion.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "As of December 31, 2025, including the three 8,586 TEU, Korean-built containerships delivered on various dates in December 2025 and the third one, Cypress, on January 9, 2026, and all charters agreed during 2025 and through February 28, 2026, the average remaining term of our charters, to the mid-point of redelivery, including options under our control and other than if a redelivery notice has been received, was 2.7 years on a TEU-weighted basis.",
-     "Contracted revenue on the same basis was $2.24 billion."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the Risk Factors section of the 20-F.",
-    "claim": "All vessels are technically managed by Technomar and commercially managed by Conchart, both owned by the Executive Chairman, with management fees payable regardless of the company's profitability.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "all of our vessels are technically managed by Technomar, a company of which our Executive Chairman is the Founder, Managing Director, and majority beneficial owner, for an annual management fee."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the MD&A Liquidity and Capital Resources section.",
-    "claim": "Interest and other finance expenses were $39.0 million in 2025 on $694.7 million of total debt outstanding, representing a significant recurring cost.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Interest and other finance expenses for the year ended December 31, 2025 was $39.0 million, down from $40.7 million for the prior year.",
-     "As at December 31, 2025, we had $694.7 million of debt outstanding, comprising $311.0 million of secured bank debt collateralized by vessels, $179.4 million of investment grade rated 2027 Secured Notes collateralized by vessels, and $204.3 million under sale and leaseback financing transactions"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the MD&A Liquidity and Capital Resources section.",
-    "claim": "Thirteen drydockings and 27 vessel upgrades were completed in 2025 at a total cost of $62.5 million (excluding associated off-hire revenue loss), representing a recurring periodic capital expenditure.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Thirteen drydockings were completed in 2025 for regulatory reasons and 27 vessel upgrades were completed, the total cost of which, excluding the effect of the associated 816 days of off-hire, was $62.5 million."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the cited item (P1, Item 4A)",
-    "claim": "GSL occupies the mid-sized and smaller containership segment, owning 71 vessels ranging from 2,207 to 11,040 TEU with an aggregate capacity of 423,003 TEU, 41 of which are wide-beam Post-Panamax.",
+    "basis": "stated in P1 (20-F Item 4)",
+    "claim": "GSL operates a fleet of 71 mid-sized and smaller containerships totalling 423,003 TEU, of which 41 are wide-beam Post-Panamax, positioning it as a specialist in the mid-size segment rather than competing in the ultra-large vessel class.",
     "facts": [
      "P1"
     ],
@@ -141,431 +174,114 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P3, Item 5A Overview)",
-    "claim": "Contracted revenue was $2.24 billion on a TEU-weighted mid-point basis with an average remaining charter term of 2.7 years, or $2.77 billion including charterer options at a weighted average of 3.6 years.",
+    "basis": "stated in P8 (Q2 2026 6-K) and P6 (October 2026 6-K)",
+    "claim": "As of June 30, 2026, GSL had 100% contract cover for 2026 and 90% for 2027, with contracted revenue of $3.2 billion on a mid-point basis including newbuildings and $4.1 billion including charterer options, representing a weighted average remaining term of 3.3 to 4.4 years.",
     "facts": [
-     "P3"
+     "P8",
+     "P6"
     ],
     "quotes": [
-     "the average remaining term of our charters, to the mid-point of redelivery, including options under our control and other than if a redelivery notice has been received, was 2.7 years on a TEU-weighted basis. Contracted revenue on the same basis was $2.24 billion.",
-     "Contracted revenue was $2.77 billion, including options under charterers' control and with latest redelivery date, representing a weighted average remaining term of 3.6 years."
+     "100% contract cover for 2026 and 90% for 2027",
+     "Contracted revenue on the same basis was $3.2 billion. Contracted revenue was $4.1 billion, including options under charterers' control and with latest redelivery date, representing a weighted average remaining term of 4.4 years."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (P1, Item 4A); individual charterer names are listed in the fleet table in P1",
-    "claim": "The fleet is chartered under fixed-rate time charters to major container shipping companies including CMA CGM, ZIM, MSC, Hapag-Lloyd, Maersk, COSCO, ONE, OOCL, and RCL.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "we charter out under fixed-rate charters to reputable container shipping companies"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P1, Other Recent Developments)",
-    "claim": "As of July 2025, Moody's maintained a Ba2 corporate family rating, S&P affirmed BB+, Kroll kept BB+, all with stable outlooks, and the 5.69% Senior Secured Notes due 2027 carry a BBB/stable investment-grade rating.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Moody's Investor Service has maintained its Ba2 Corporate Family Rating, with a stable outlook, S&P Global Ratings has affirmed its long-term issuer credit rating of BB+, with a stable outlook, and the Kroll Bond Rating Agency has kept our corporate rating at BB+, with a stable outlook, while also affirming the BBB/stable investment grade rating and outlook for our 5.69% Senior Secured Notes due 2027."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item (P3, Item 5A Operating Revenues discussion)",
-    "claim": "Fleet utilization was 95.6% in 2025 and 96.1% in 2024, with 1,125 offhire days in 2025 of which 816 were for scheduled drydockings.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Utilization for the year ended December 31, 2025 was 95.6% compared to utilization of 96.1% in the prior year.",
-     "There were 1,125 days of offhire and idle time in the year ended December 31, 2025 of which 816 were for scheduled drydockings"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P1, Item 4A)",
-    "claim": "Since the 2018 Poseidon Transaction, GSL acquired 41 additional vessels, including three 8,586 TEU Korean-built containerships purchased for an aggregate price of $90.0 million and delivered in December 2025 and January 2026.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Since the Poseidon Transaction, we have continued to expand our fleet, and have acquired 41 additional vessels; this includes the Newly Acquired Vessels that we agreed to purchase in December 2025 for an aggregate price of $90.0 million, of which two were delivered to us in December 2025 and the last one in January 2026."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited item (P3, Item 5B Liquidity)",
-    "claim": "As of December 31, 2025, GSL held $637.0 million in cash and cash equivalents including restricted cash, time deposits and other instruments, against total debt of $694.7 million.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "As of December 31, 2025, we had $637.0 million in cash and cash equivalents, including restricted cash, time deposits and other instruments.",
-     "As at December 31, 2025, we had $694.7 million of debt outstanding"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P1, Other Recent Developments)",
-    "claim": "The Board increased the quarterly supplemental dividend by $0.10 per share in November 2025, a 19.0% increase in total annualized dividends to $2.50 ($0.625 per quarter), citing sustained market demand and forward fixtures at attractive levels.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our Board of Directors determined that sustained market demand for our fleet and our progress on securing forward fixtures at attractive levels supports a $0.10 per share increase in our quarterly supplemental dividend, amounting to a 19.0% increase in total annualized dividends per share, to $2.50 ($0.625 per quarter)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P2, Risk Factors \u2013 Operational Growth Risk)",
-    "claim": "The container shipping industry is cyclical and volatile; as at December 31, 2025, the global containership orderbook to fleet ratio was 34.5%, weighted heavily towards vessels larger than 10,000 TEU, while idle capacity was 0.8%.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "As at December 31, 2025, idle capacity of the global containership fleet was 0.8%, and the global containership orderbook to fleet ratio was 34.5%, which was weighted heavily towards containerships larger than 10,000 TEU.",
-     "The container shipping industry is cyclical and volatile and our growth and long-term profitability depend mainly upon growth in demand for containerships, the condition of the charter market, and the availability of capital."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P3, Item 5A Overview)",
-    "claim": "Three of 71 containerships have charters that have expired or could expire before the end of H1 2026, and a further six could expire during H2 2026, creating near-term rechartering risk.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The time charters for three of our 71 containerships either have expired or could expire before the end of the first half of 2026, and a further six vessels have charters that could expire during the second half of 2026."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item (P2, Risk Factors \u2013 Risks Relating to Certain of our Related Parties)",
-    "claim": "All vessels are technically managed by Technomar and commercially managed by Conchart, both owned by the Executive Chairman, who also holds approximately 7.9% of Class A common shares, creating potential conflicts of interest.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Our Executive Chairman is the Founder, Managing Director, and majority beneficial owner of Technomar and the sole beneficial owner of Conchart, our third-party technical and commercial ship managers. Our Executive Chairman also beneficially owns approximately 7.9% of our Class A common shares."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P2, Risk Factors); fleet vintages from P1 fleet table",
-    "claim": "The fleet includes vessels built as early as 2000, and the company warns that as the fleet ages it may incur increased operating costs beyond normal inflation, with revenue declining at the end of useful vessel lives.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "As our fleet ages, we may incur increased operating costs beyond normal inflation, which would adversely affect our results of operations. Unless we set aside reserves or are able to borrow funds for vessel replacement, at the end of the useful lives of our vessels our revenue will decline, which would adversely affect our business, results of operations, and financial condition."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited item (P2, Risk Factors \u2013 Risk Factor Summary)",
-    "claim": "Recent actions by the U.S. and China imposing new port fees and related uncertainty in their implementation could have a material adverse effect on GSL's operations and financial results.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Recent actions by the U.S. and China imposing new port fees and related uncertainty in their implementation could have a material adverse effect on our operations and financial results."
-    ],
-    "support": "supported"
-   }
-  ],
-  "financial_health": [
-   {
-    "basis": "stated in P3 (MD&A) and corroborated by F1 balance sheet (table in thousands: 626,988 vs 306,783)",
-    "claim": "GSL had a positive working capital of $320.2 million as of December 31, 2025, with current assets of $627.0 million against current liabilities of $306.8 million.",
-    "facts": [
-     "P3",
-     "F1"
-    ],
-    "quotes": [
-     "As of December 31, 2025, our current assets totaled $627.0 million, while current liabilities totaled $306.8 million, resulting in a positive working capital position of $320.2 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3; components visible in F1 balance sheet",
-    "claim": "GSL held $637.0 million in cash, cash equivalents, restricted cash, time deposits and other instruments as of December 31, 2025.",
-    "facts": [
-     "P3",
-     "F1"
-    ],
-    "quotes": [
-     "As of December 31, 2025, we had $637.0 million in cash and cash equivalents, including restricted cash, time deposits and other instruments."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "debt figure stated in P3; equity from F1 balance sheet (table in thousands)",
-    "claim": "GSL's total debt outstanding was $694.7 million as of December 31, 2025, against total shareholders' equity of 1,801,084 (table in thousands), implying a debt-to-equity ratio of roughly 0.38.",
-    "facts": [
-     "P3",
-     "F1"
-    ],
-    "quotes": [
-     "As at December 31, 2025, we had $694.7 million of debt outstanding"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P3 (MD&A liquidity section)",
-    "claim": "Total debt comprised $311.0 million of secured bank debt, $179.4 million of investment-grade rated 2027 Secured Notes, and $204.3 million under sale and leaseback financing, all at floating rates of SOFR plus a weighted average margin of approximately 2.34%.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "comprising $311.0 million of secured bank debt collateralized by vessels, $179.4 million of investment grade rated 2027 Secured Notes collateralized by vessels, and $204.3 million under sale and leaseback financing transactions, which have floating interest rates at SOFR plus a weighted average margin of approximately 2.34%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F3 cash flow statement (table in thousands)",
-    "claim": "GSL generated $528,299 (table in thousands) of net cash from operating activities in fiscal 2025, up 22.8% from $430,146 (table in thousands) in fiscal 2024.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities | 528,299 | 430,146 | 375,008"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P3 (MD&A overview)",
-    "claim": "Revenue quality is high: all income derives from fixed-rate time charters, contracted revenue on a TEU-weighted mid-point basis was $2.24 billion over an average remaining term of 2.7 years, and fleet utilization was 95.6% in 2025.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "the average remaining term of our charters, to the mid-point of redelivery, including options under our control and other than if a redelivery notice has been received, was 2.7 years on a TEU-weighted basis. Contracted revenue on the same basis was $2.24 billion.",
-     "Due to our charter coverage and nature of our operating and financial costs, our cashflows are predictable and visible, at least in the near to medium term."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in F1 balance sheet (table in thousands)",
-    "claim": "The current portion of long-term debt due within one year was $147,567 (table in thousands) as of December 31, 2025.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
-     "Current portion of long - term debt | 147,567 | 145,276"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "debt amount stated in P3; rating stated in P1 (Item 4, Other Recent Developments)",
-    "claim": "The largest single near-term refinancing event is the $179.4 million of 5.69% Senior Secured Notes due 2027, which carries a BBB/stable investment-grade rating affirmed by Kroll in July 2025.",
-    "facts": [
-     "P3",
-     "P1"
-    ],
-    "quotes": [
-     "affirming the BBB/stable investment grade rating and outlook for our 5.69% Senior Secured Notes due 2027"
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in P3 (MD&A liquidity section)",
-    "claim": "Assuming SOFR of 4.0%, quarterly interest on total gross debt would be approximately $10.7 million, and interest rate caps at a net level of 0.64% through Q4 2026 limit the cost of floating-rate debt.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Assuming SOFR of 4.0%, quarterly interest on total gross debt as at December 31, 2025, without taking into account amortization of the premium or the effect of the interest rate caps, would amount to approximately $10.7 million.",
-     "our interest rate caps automatically transitioned to one-month Compounded SOFR at a net level of 0.64%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 (MD&A liquidity section)",
-    "claim": "GSL was in compliance with all debt covenants as of December 31, 2025, and its credit facilities require maintenance of $20.0 million minimum liquidity at each quarter end on a group basis.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "As of December 31, 2025 and December 31, 2024, we were in compliance with our debt covenants.",
-     "Our credit facilities require that we maintain $20.0 million minimum liquidity at each quarter end on group basis."
-    ],
-    "support": "supported"
-   }
-  ],
-  "growth_thesis": [
-   {
-    "basis": "Stated in P1 (fleet count and acquisition details) and P3 (revenue attribution to new vessels); the financing constraint is stated in P2.",
-    "claim": "GSL grew its fleet from 65 vessels (2021) to 71 vessels (2025) and agreed to purchase 3 additional 8,586 TEU containerships for an aggregate price of $90.0 million in December 2025, continuing a post-Poseidon expansion of 41 vessels since 2018; for this driver to continue, the company must access vessel financing at acceptable terms and find competitively priced secondhand or newbuild ships.",
+    "basis": "stated in P8 (revenue-by-country table) and P1 (fleet charter table)",
+    "claim": "GSL's charterers are exclusively major container liner companies (Maersk, CMA CGM, Hapag-Lloyd, MSC, ZIM, COSCO, OOCL, ONE, RCL), with the top four accounting for approximately 82% of 1H 2026 revenue.",
     "facts": [
      "P1",
+     "P8"
+    ],
+    "quotes": [
+     "Denmark (Maersk) | 117.45 | 29.60%",
+     "France (CMA CGM) | 79.07 | 19.93%",
+     "Germany (Hapag Lloyd) | 74.17 | 18.69%",
+     "Switzerland (MSC) | 55.76 | 14.05%"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P8 (Q2 2026 6-K) and P6 (October 2026 6-K)",
+    "claim": "GSL has ordered 17 newbuildings (15 initial plus 2 option exercises) for an aggregate contract price of approximately $1.49 billion, with deliveries spanning 4Q28 through 1Q30, and the initial charters for the 15 Initial Newbuilds average just over 7 years in duration.",
+    "facts": [
+     "P8",
+     "P6"
+    ],
+    "quotes": [
+     "Ordered 15 mid-size, ultra-high-reefer, wide-beam, latest generation newbuilds for an aggregate contract price of $1.33 billion, over 75% of which is covered by expected Adj. EBITDA from initial charters",
+     "the Company has exercised options to build two additional mid-size, ultra-high-reefer, wide-beam, latest-generation containerships (the \"Additional Newbuilds\") for an aggregate contract price of approximately $163 million"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P5 (October 2026 6-K press release)",
+    "claim": "GSL secured a $1 billion, seven-year syndicated loan facility at SOFR + 1.5% from an 8-bank group, a margin 550bps below what was available to it five years earlier, demonstrating improved access to competitively priced capital.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "a $1 billion syndicated loan facility (the \"New Facility\") bearing an interest rate of SOFR + 1.5% and a duration of seven years",
+     "a margin 550bps below what was available to us just five years ago"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P4 (H1 2026 6-K) and P8 (Q2 2026 6-K)",
+    "claim": "As of June 2026, Moody's upgraded GSL's outlook to positive (maintaining Ba2), S&P maintained BB+ stable, and Kroll maintained BB+ stable while affirming BBB/stable for the 2027 Secured Notes, indicating a trajectory of improving credit standing.",
+    "facts": [
+     "P4",
+     "P8"
+    ],
+    "quotes": [
+     "Moody's Investor Service maintained our Ba2 Corporate Family Rating, and upgraded to a positive outlook from a stable outlook.",
+     "Kroll Bond Rating Agency maintained our corporate credit rating at BB+, with a stable outlook, while also affirming the BBB/stable investment grade rating and stable outlook for our 5.69% Senior Secured Notes due July 15, 2027"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in F2 (20-F income statement), P3 (20-F MD&A), and P8 (Q2 2026 6-K)",
+    "claim": "GSL's net income grew from $353.6 million in 2024 to $416.4 million in 2025, and 1H 2026 net income available to common shareholders was $180.7 million, supporting an annualized dividend of $2.50 per Class A common share.",
+    "facts": [
+     "F2",
      "P3",
+     "P8"
+    ],
+    "quotes": [
+     "Net Income | 416.4 | 353.6 | 304.5",
+     "1H 2026 net income available to common shareholders of $180.7 million, or $5.02 EPS.",
+     "Annualized dividend of $2.50 per Class A Common Share"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in P4 (H1 2026 6-K, utilization table)",
+    "claim": "Fleet utilization improved to 97.4% in 1H 2026 from 95.4% in 1H 2025, driven by fewer planned offhire days for scheduled dry-dock (265 vs 475).",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Utilization | 97.4% | 95.4%",
+     "Planned offhire - scheduled dry-dock | (265) | (475)"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P6 (October 2026 6-K) and P2 (20-F Risk Factors)",
+    "claim": "The operating fleet's average age is 18.4 years (TEU-weighted) as of June 30, 2026, creating increasing maintenance costs and eventual replacement obligations that the newbuilding programme is intended to address.",
+    "facts": [
+     "P6",
      "P2"
     ],
     "quotes": [
-     "we have acquired 41 additional vessels; this includes the Newly Acquired Vessels that we agreed to purchase in December 2025 for an aggregate price of $90.0 million, of which two were delivered to us in December 2025 and the last one in January 2026.",
-     "As of March 12, 2026, we owned 71 mid-sized and smaller containerships, ranging from 2,207 to 11,040 TEU, with an aggregate capacity of 423,003 TEU.",
-     "financing for investment in containerships, whether newbuildings or existing vessels, has been severely limited"
+     "Our operating fleet of 71 containerships as of June 30, 2026, had an average age weighted by TEU capacity of 18.4 years.",
+     "As our fleet ages, we may incur increased operating costs beyond normal inflation, which would adversely affect our results of operations. Unless we set aside reserves or are able to borrow funds for vessel replacement, at the end of the useful lives of our vessels our revenue will decline."
     ],
     "support": "quote_not_found"
    },
    {
-    "basis": "Stated in P3 (revenue figures and attribution); the recharter risk is stated in P2.",
-    "claim": "Operating revenues rose 7.8% in 2025 to $766.5 million, driven mainly by higher rates on charter renewals; for this driver to continue, the container shipping charter market must sustain or improve rates as existing charters roll over, and the company must secure forward fixtures at 'attractive levels.'",
-    "facts": [
-     "P3",
-     "P1"
-    ],
-    "quotes": [
-     "Operating revenues reflect income under fixed rate time charters and were $766.5 million in the year ended December 31, 2025, an increase of $55.4 million, or 7.8%, from operating revenues of $711.1 million for 2024.",
-     "the increase in operating revenue was mainly due to (i) the net effect of higher rates on charter renewals"
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Stated in P3 (contracted revenue figures and terms); the counterparty risk is stated in P2.",
-    "claim": "As of December 31, 2025, GSL had $2.24 billion in contracted revenue on a TEU-weighted average remaining charter term of 2.7 years (or $2.77 billion / 3.6 years including charterer options); for this visibility to persist, charterers (CMA CGM, MSC, Maersk, Hapag-Lloyd, ZIM, etc.) must continue to perform their payment obligations.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "the average remaining term of our charters, to the mid-point of redelivery, including options under our control and other than if a redelivery notice has been received, was 2.7 years on a TEU-weighted basis. Contracted revenue on the same basis was $2.24 billion.",
-     "Contracted revenue was $2.77 billion, including options under charterers' control and with latest redelivery date, representing a weighted average remaining term of 3.6 years.",
-     "We are dependent on our charterers and other counterparties fulfilling their obligations under agreements with us, and their inability or unwillingness to honor these obligations could significantly reduce our revenues and cash flow."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F3 (cash flow figures in thousands) and P3 (cost per day, utilization, off-hire days).",
-    "claim": "Net cash from operating activities grew from $375.0 million (2023) to $430.1 million (2024) to $528.3 million (2025), with utilization at 95.6% and average vessel operating cost per ownership day of $8,231; for this trajectory to continue, utilization must remain above ~95%, crew and maintenance cost inflation must be contained, and drydocking off-hire must not spike.",
-    "facts": [
-     "F3",
-     "P3"
-    ],
-    "quotes": [
-     "Net cash provided by operating activities | 528,299 | 430,146 | 375,008",
-     "The average cost per ownership day for the year ended December 31, 2025 was $8,231, compared to $7,670 for the prior year period, up $560 per day, or 7.3%."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P1 (dividend amounts and Board rationale) and P3 (preferred dividend amount and intent); the caveat is stated in P2.",
-    "claim": "The quarterly Class A dividend was raised to $0.625 per share in Q3 2025 (a 19.0% annualized increase to $2.50), supported by 'sustained market demand for our fleet and our progress on securing forward fixtures at attractive levels'; for the Board to maintain or further raise the dividend, free cash flow after capex and debt service must exceed the ~$22.5 million quarterly common dividend plus $2.4 million preferred dividend.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "Our Board of Directors determined that sustained market demand for our fleet and our progress on securing forward fixtures at attractive levels supports a $0.10 per share increase in our quarterly supplemental dividend, amounting to a 19.0% increase in total annualized dividends per share, to $2.50 ($0.625 per quarter).",
-     "We intend to declare and make quarterly dividend payments amounting to approximately $2.4 million per quarter on our Series B Preferred Shares based on the amount outstanding as of December 31, 2025 on a perpetual basis"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P2 (industry statistics); the segment-specific benefit is inferred from the orderbook skew combined with GSL's fleet size range stated in P1.",
-    "claim": "Global container trade volumes are estimated to have grown by approximately 5.0% in 2025, and idle capacity of the global containership fleet was only 0.8% with an orderbook-to-fleet ratio of 34.5% weighted toward ships larger than 10,000 TEU; for GSL's mid-sized fleet to benefit, demand for sub-10,000 TEU capacity must remain robust and the orderbook skew toward larger vessels must not shift into GSL's segment.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Volumes are estimated to have increased in 2025 by approximately 5.0%.",
-     "As at December 31, 2025, idle capacity of the global containership fleet was 0.8%, and the global containership orderbook to fleet ratio was 34.5%, which was weighted heavily towards containerships larger than 10,000 TEU."
-    ],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in the cited item (F2 income statement, comparative column for 2023)",
-    "claim": "Global Ship Lease recorded an impairment of vessels of $18,830 (table in thousands) in the year ended December 31, 2023.",
-    "facts": [
-     "F2"
-    ],
-    "quotes": [
-     "Impairment of vessels | 0 | 0 | 18,830"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P3 MD&A, Results of Operations)",
-    "claim": "Global Ship Lease sold three vessels (Tasman, Akiteta, Keta) for an aggregate gain of $28.3 million in the first quarter of 2025.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Tasman (5,936 TEU, built 2000), Akiteta (2,220 TEU, built 2002), and Keta (2,207 TEU, built 2003) were sold for an aggregate gain of $28.3 million in the first quarter of 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P3 MD&A, Results of Operations)",
-    "claim": "Global Ship Lease sold vessel Dimitris Y for an aggregate gain of $17.9 million in the fourth quarter of 2025.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Dimitris Y (5,936 TEU, built 2000) was sold for an aggregate gain of $17.9 million in the fourth quarter of 2025."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P3 MD&A, Interest and other finance expenses section)",
-    "claim": "Global Ship Lease entered into a $85.0 million UBS Credit Facility in March 2025 to refinance existing loans, and fully repaid the E.SUN Credit Facility ($5.9 million) in March 2025 and the Macquarie Credit Facility ($17.5 million) and HCOB-CACIB Credit Facility ($46.8 million) in April 2025.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In March 2025, we entered into a loan agreement with UBS AG for $85.0 million (the UBS Credit Facility), to refinance certain of our existing loans.",
-     "During March 2025, we fully repaid the outstanding balance of E.SUN Credit Facility amounting to $5.9 million.",
-     "During April 2025, we fully repaid the outstanding balance of the Macquarie Credit Facility amounting to $17.5 million and the outstanding balance of the HCOB-CACIB Credit Facility amounting to $46.8 million."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P1, Other Recent Developments)",
-    "claim": "Global Ship Lease's Board of Directors declared a $0.10 per share increase in the quarterly supplemental dividend, a 19.0% increase in total annualized dividends per share to $2.50 ($0.625 per quarter).",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Our Board of Directors determined that sustained market demand for our fleet and our progress on securing forward fixtures at attractive levels supports a $0.10 per share increase in our quarterly supplemental dividend, amounting to a 19.0% increase in total annualized dividends per share, to $2.50 ($0.625 per quarter)."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P1, History and Development)",
-    "claim": "Global Ship Lease agreed to purchase three Newly Acquired Vessels for an aggregate price of $90.0 million in December 2025; two were delivered in December 2025 and the last (Cypress) in January 2026.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "this includes the Newly Acquired Vessels that we agreed to purchase in December 2025 for an aggregate price of $90.0 million, of which two were delivered to us in December 2025 and the last one in January 2026."
-    ],
-    "support": "supported"
-   }
-  ],
-  "risks": [
-   {
-    "basis": "Stated in P2 (risk factor) and P3 (MD&A overview); fleet table in P1 confirms charterer concentration.",
-    "claim": "GSL's sole source of operating cash flow is time-charter hire from a concentrated group of container-line charterers (CMA CGM, ZIM, MSC, Hapag-Lloyd, Maersk, COSCO, RCL, ONE, OOCL); if any charterer fails to pay or a charter is terminated, the affected vessel generates no revenue while the company must still cover operating costs and debt service.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "Payments to us by our charterers under time charters are, and will continue to be, our sole source of operating cash flow.",
-     "If we lose a time charter because the charterer is unable to pay us or for any other reason, we may be unable to re-deploy the related vessel on similar terms or at all."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 risk factors; volume figures from P2.",
-    "claim": "The container shipping industry is cyclical; a 34.5% global orderbook-to-fleet ratio (weighted toward vessels larger than 10,000 TEU) and trade-protectionism or geopolitical disruption could compress charter rates and vessel values, undermining GSL's revenue base.",
+    "basis": "stated in P2 (20-F Risk Factors)",
+    "claim": "The container shipping industry is explicitly described as cyclical and volatile, with the global orderbook-to-fleet ratio at 34.5% (weighted toward vessels >10,000 TEU) and idle capacity at 0.8% as of December 31, 2025, creating oversupply risk that could depress charter rates upon contract expiries.",
     "facts": [
      "P2"
     ],
@@ -576,60 +292,514 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 (Liquidity section) and P2 (risk factor). Cap details from P3.",
-    "claim": "GSL carries $694.7 million of debt, of which $311.0 million and $204.3 million are floating-rate (SOFR + margin), exposing quarterly interest expense to SOFR volatility; a sustained rise in SOFR would increase financing costs and reduce free cash flow available for dividends and capex.",
+    "basis": "stated in P2 (20-F Risk Factors) and F2 (20-F income statement footnotes)",
+    "claim": "GSL is dependent on two related-party managers\u2014Technomar (technical) and Conchart (commercial)\u2014both controlled by its Executive Chairman, with fees payable regardless of profitability and limited termination rights, creating a structural conflict of interest.",
     "facts": [
-     "P3",
      "P2"
     ],
     "quotes": [
+     "We are dependent on third parties, some of which are related parties, to manage our vessels and substantial fees will be payable to our ship managers regardless of our profitability.",
+     "Our Executive Chairman is the Founder, Managing Director, and majority beneficial owner of Technomar and the sole beneficial owner of Conchart, our third-party technical and commercial ship managers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (20-F MD&A, Liquidity section)",
+    "claim": "GSL carried $694.7 million of debt outstanding as of December 31, 2025, comprising secured bank debt, investment-grade 2027 Secured Notes, and sale-and-leaseback facilities, with floating rates at SOFR plus a weighted average margin of approximately 2.34%.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "As at December 31, 2025, we had $694.7 million of debt outstanding, comprising $311.0 million of secured bank debt collateralized by vessels, $179.4 million of investment grade rated 2027 Secured Notes collateralized by vessels, and $204.3 million under sale and leaseback financing transactions, which have floating interest rates at SOFR plus a weighted average margin of approximately 2.34%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (20-F Risk Factors)",
+    "claim": "Geopolitical and trade-policy risks\u2014including U.S.\u2013China tariffs, port fees, the Russia\u2013Ukraine war, Middle East conflicts, and potential supply-chain disruptions\u2014are identified as material threats to charterer demand and vessel utilization.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Recent actions by the U.S. and China imposing new port fees and related uncertainty in their implementation could have a material adverse effect on our operations and financial results.",
+     "uncertainty exists regarding the broader global economic impact of changes in tariffs, trade barriers, and embargos, including recently imposed or announced tariffs by the U.S. and the effects of retaliatory tariffs and countermeasures from affected countries, geopolitical events, such as the continuing war between Russia and Ukraine, ongoing disputes between China and Taiwan, deteriorating trade relations between the U.S. and China, and ongoing political unrest and conflicts in the Middle East"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 (October 2026 6-K, Executive Chairman commentary) and P8 (Q2 2026 6-K)",
+    "claim": "GSL's competitive positioning in the mid-size segment is reinforced by its specialization in ultra-high-reefer, fuel-efficient 'ECO' vessels and wide-beam Post-Panamax designs, which are described as increasingly valuable and for which comparable newbuild prices are no longer available in the market for 2029 deliveries.",
+    "facts": [
+     "P6",
+     "P8"
+    ],
+    "quotes": [
+     "By exercising these additional newbuild options, we are very pleased to be growing our exposure to this increasingly valuable vessel class on attractive terms agreed earlier this year and at prices no longer available in the market for comparably specified ships with 2029 deliveries.",
+     "15 mid-size, ultra-high-reefer, wide-beam, latest generation ECO newbuildings"
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in P3 and confirmed by F1 balance sheet figures (table in thousands)",
+    "claim": "As of December 31, 2025, GSL had a positive working capital position of $320.2 million, with current assets of $627.0 million against current liabilities of $306.8 million.",
+    "facts": [
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "As of December 31, 2025, our current assets totaled $627.0 million, while current liabilities totaled $306.8 million, resulting in a positive working capital position of $320.2 million.",
+     "Total current assets | $ 626,988 | $ 301,242",
+     "Total current liabilities | $ 306,783 | $ 264,001"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3; component figures in F1 (table in thousands)",
+    "claim": "As of December 31, 2025, GSL held $637.0 million in cash and cash equivalents including restricted cash, time deposits and other instruments.",
+    "facts": [
+     "P3",
+     "F1"
+    ],
+    "quotes": [
+     "As of December 31, 2025, we had $637.0 million in cash and cash equivalents, including restricted cash, time deposits and other instruments.",
+     "Cash and cash equivalents | $ 273,876 | $ 141,375",
+     "Time deposits | 199,100 | 26,150"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3; equity figure from F1 (table in thousands)",
+    "claim": "As at December 31, 2025, GSL had $694.7 million of debt outstanding comprising $311.0 million secured bank debt, $179.4 million investment-grade 2027 Secured Notes, and $204.3 million sale-and-leaseback financing, against total shareholders' equity of $1,801.1 million.",
+    "facts": [
+     "P3",
+     "F1"
+    ],
+    "quotes": [
      "As at December 31, 2025, we had $694.7 million of debt outstanding, comprising $311.0 million of secured bank debt collateralized by vessels, $179.4 million of investment grade rated 2027 Secured Notes collateralized by vessels, and $204.3 million under sale and leaseback financing transactions, which have floating interest rates at SOFR plus a weighted average margin of approximately 2.34%.",
-     "Volatility of the Secured Overnight Financing Rate (\"SOFR\") could affect our profitability, earnings, and cash flows."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 (risk factors) and F2 (income statement footnote on related-party expenses).",
-    "claim": "All vessels are technically managed by Technomar and commercially managed by Conchart, both owned by the Executive Chairman, who also holds approximately 7.9% of Class A common shares; management fees are payable regardless of profitability and the company has limited termination rights, creating a structural conflict of interest.",
-    "facts": [
-     "P2",
-     "F2"
-    ],
-    "quotes": [
-     "Our Executive Chairman is the Founder, Managing Director, and majority beneficial owner of Technomar and the sole beneficial owner of Conchart, our third-party technical and commercial ship managers.",
-     "The fees and expenses payable pursuant to our technical and commercial ship management agreements with Technomar and Conchart, respectively, will be payable without regard to our business, results of operation, and financial condition and we have limited rights to terminate our management agreements."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 (risk factor); fleet ages from P1 table; acquisition and sale activity from P1 and P3.",
-    "claim": "GSL's fleet includes vessels built as early as 2000; as the fleet ages, operating costs will rise beyond normal inflation, and at the end of useful lives the company must either replace vessels or face revenue decline, requiring substantial capital outlays or new financing.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "As our fleet ages, we may incur increased operating costs beyond normal inflation, which would adversely affect our results of operations. Unless we set aside reserves or are able to borrow funds for vessel replacement, at the end of the useful lives of our vessels our revenue will decline, which would adversely affect our business, results of operations, and financial condition."
+     "Total shareholders' equity | 1,801,084 | 1,463,481"
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "Stated in P2 (risk factor), P1 (dividend history), and P3 (MD&A liquidity section). Payout figures derived from F2 and F3.",
-    "claim": "GSL's dividend is declared at the Board's discretion and is not contractually guaranteed; if operating cash flow declines due to lower charter rates, higher off-hire, or increased capex, the Board may reduce or suspend the common dividend (currently $0.625 per quarter) or the 8.75% preferred dividend.",
+    "basis": "stated in P4 (6-K interim) and P8 (Q2 2026 press release)",
+    "claim": "As of June 2026, GSL's credit ratings were Moody's Ba2 with a positive outlook (upgraded from stable), S&P BB+ with a stable outlook, and Kroll BB+ with a stable outlook; the 5.69% Senior Secured Notes due 2027 carry a BBB/stable investment-grade rating.",
     "facts": [
-     "P2",
-     "P1",
+     "P4",
+     "P8",
+     "P6"
+    ],
+    "quotes": [
+     "Moody's Investor Service maintained our Ba2 Corporate Family Rating, and upgraded to a positive outlook from a stable outlook. Kroll Bond Rating Agency maintained our corporate credit rating at BB+, with a stable outlook, while also affirming the BBB/stable investment grade rating and stable outlook for our 5.69% Senior Secured Notes due July 15, 2027 (the \"2027 Secured Notes\"). In addition, on July 7, 2026, S&P Global issued a press release maintaining our Issuer Credit Rating for GSL of BB+, with a stable outlook."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in F3 (table in thousands) and P3 (table in millions)",
+    "claim": "Net cash provided by operating activities was $528.3 million in 2025, up from $430.1 million in 2024 and $375.0 million in 2023, representing a three-year growth trend.",
+    "facts": [
+     "F3",
      "P3"
     ],
     "quotes": [
-     "We cannot guarantee that our Board of Directors (our \"Board of Directors\") will declare dividends or otherwise return cash to shareholders. We may not have sufficient cash from our operations to enable us to pay dividends on or to redeem our Series B Preferred Shares, and accordingly the Depositary Shares, as the case may be.",
-     "Our Board of Directors determined that sustained market demand for our fleet and our progress on securing forward fixtures at attractive levels supports a $0.10 per share increase in our quarterly supplemental dividend, amounting to a 19.0% increase in total annualized dividends per share, to $2.50 ($0.625 per quarter)."
+     "Net cash provided by operating activities | 528,299 | 430,146 | 375,008",
+     "Net cash provided by operating activities | 528.3 | 430.1 | 375.0"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P4 (6-K interim, table in millions) and P8 (press release)",
+    "claim": "Operating revenue for the six months ended June 30, 2026 was $396.8 million, with utilization of 97.4% versus 95.4% in the prior-year period, and net income available to common shareholders of $180.7 million.",
+    "facts": [
+     "P4",
+     "P8"
+    ],
+    "quotes": [
+     "Total Operating Revenues | 396.8 | 382.8",
+     "Utilization | 97.4% | 95.4%",
+     "Net Income available to Common Shareholders | $180.7 | $214.1"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P2 (risk factors), P3 (MD&A), and P1 (business overview)",
+    "claim": "Revenue is derived from fixed-rate time charters to major container shipping companies, with charter hire paid two weeks or one month in advance; as of December 31, 2025, no charter hire payments were outstanding.",
+    "facts": [
+     "P2",
+     "P3",
+     "P1"
+    ],
+    "quotes": [
+     "Payments to us by our charterers under time charters are, and will continue to be, our sole source of operating cash flow.",
+     "As of December 31, 2025, no charter hire payments were outstanding.",
+     "our cashflows are predictable and visible, at least in the near to medium term"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 (risk factors) and P3 (Liquidity section, drydocking costs).",
-    "claim": "GSL faces evolving environmental and safety regulations (EU ETS, FuelEU Maritime, ballast water management, emissions/decarbonisation rules) that impose incremental compliance costs, potential vessel retrofits (e.g., scrubbers), and could reduce charter demand if regulations make certain vessel types less attractive.",
+    "basis": "stated in P6 (6-K press release, Oct 2026) and P7 (6-K press release, Sept 2026)",
+    "claim": "As of June 30, 2026, contracted revenue including newbuildings was $3.2 billion on a mid-point basis (weighted average remaining term 3.3 years) and $4.1 billion on a latest-redelivery basis (4.4 years).",
+    "facts": [
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "As of June 30, 2026, the average remaining term of the Company's charters, to the mid-point of redelivery, including options under the Company's control and other than if a redelivery notice has been received, including the Initial Newbuilds, was 3.3 years on a TEU-weighted basis. Contracted revenue on the same basis was $3.2 billion. Contracted revenue was $4.1 billion, including options under charterers' control and with latest redelivery date, representing a weighted average remaining term of 4.4 years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 (table in thousands); context from P3",
+    "claim": "The current portion of long-term debt as of December 31, 2025 was $147.6 million (table in thousands: 147,567), representing the nearest-term refinancing need.",
+    "facts": [
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "Current portion of long - term debt | 147,567 | 145,276",
+     "As at December 31, 2025, we had $694.7 million of debt outstanding"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P3 (MD&A) and P4/P8 (ratings references)",
+    "claim": "The $179.4 million 5.69% Senior Secured Notes are due July 15, 2027, representing the next major refinancing event after the current portion.",
+    "facts": [
+     "P3",
+     "P4",
+     "P8"
+    ],
+    "quotes": [
+     "$179.4 million of investment grade rated 2027 Secured Notes collateralized by vessels",
+     "our 5.69% Senior Secured Notes due July 15, 2027 (the \"2027 Secured Notes\")"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5 (6-K press release, Oct 12, 2026)",
+    "claim": "In October 2026, GSL agreed a $1 billion syndicated loan facility at SOFR + 1.5% with a seven-year duration, to be drawn in tranches corresponding to delivery of the 15 Initial Newbuilds scheduled between late 2028 and 2030.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "Global Ship Lease, Inc. (NYSE:GSL) (the \"Company\", Global Ship Lease\" or \"GSL\"), a containership owner and lessor, announced today that it has agreed a $1 billion syndicated loan facility (the \"New Facility\") bearing an interest rate of SOFR + 1.5% and a duration of seven years.",
+     "The Company intends to draw on this facility in tranches corresponding to the delivery of each of the 15 newbuildings announced in June of this year (the \"Initial Newbuilds\"), the scheduled dates for which span from late 2028 through 2030."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in P3 (MD&A, liquidity section)",
+    "claim": "Interest rate caps at a net SOFR level of 0.64% cover approximately $992 million of floating-rate debt through the fourth quarter of 2026, limiting near-term interest cost escalation.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In December 2021, we entered into a USD one-month London Interbank Offered Rate (\"LIBOR\") interest rate cap of 0.75% through fourth quarter of 2026 on $484.1 million of floating rate debt and in February 2022 we entered into USD one-month LIBOR interest rate caps of 0.75% though fourth quarter of 2026 on $507.9 million of floating rate debt to hedge our cash flows.",
+     "on July 1, 2023, our interest rate caps automatically transitioned to one-month Compounded SOFR at a net level of 0.64%."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in F3 (table in thousands), P3 (MD&A), P1 (dividend history), P8 (Q2 2026 press release)",
+    "claim": "GSL paid $76.1 million in Class A common share dividends and $9.5 million in Series B preferred dividends during 2025, and declared a quarterly common dividend of $0.625 per share effective from Q1 2026 (annualized $2.50).",
+    "facts": [
+     "F3",
+     "P3",
+     "P1",
+     "P8"
+    ],
+    "quotes": [
+     "Class A common shares - dividend paid | (76,061) | (58,438) | (53,249)",
+     "We paid dividends of $0.525 per Class A common share for the first and second quarter of 2025, and $0.625 per Class A common share for the third and fourth quarter of 2025. Effective from first quarter of 2026, we expect that our quarterly dividend will be $0.625 per Class A common share.",
+     "Annualized dividend of $2.50 per Class A Common Share"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P3 (MD&A, liquidity section)",
+    "claim": "The company's credit facilities require maintenance of $20.0 million minimum liquidity at each quarter end on a group basis, and as of December 31, 2025 and December 31, 2024, GSL was in compliance with all debt covenants.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our credit facilities require that we maintain $20.0 million minimum liquidity at each quarter end on group basis.",
+     "As of December 31, 2025 and December 31, 2024, we were in compliance with our debt covenants."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the cited items: P8 gives the $1.33B price and 75% EBITDA coverage; P6 gives the $163M for the two additional ships and the 17-ship total; P5 gives the $1B facility terms and tranche structure.",
+    "claim": "GSL has ordered 17 newbuild containerships (15 initial at $1.33 billion plus 2 additional at approximately $163 million) with deliveries spanning 4Q28 through 1Q30, financed by a $1 billion syndicated loan at SOFR + 1.5% drawn in tranches upon delivery.",
+    "facts": [
+     "P5",
+     "P6",
+     "P8"
+    ],
+    "quotes": [
+     "Ordered 15 mid-size, ultra-high-reefer, wide-beam, latest generation newbuilds for an aggregate contract price of $1.33 billion, over 75% of which is covered by expected Adj. EBITDA from initial charters",
+     "the Company has exercised options to build two additional mid-size, ultra-high-reefer, wide-beam, latest-generation containerships (the \"Additional Newbuilds\") for an aggregate contract price of approximately $163 million",
+     "With these Additional Newbuilds, the Company's newbuilding orderbook is 17 ships.",
+     "a $1 billion syndicated loan facility (the \"New Facility\") bearing an interest rate of SOFR + 1.5% and a duration of seven years"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the cited items: P6 and P7 give the June 2026 contracted revenue figures; P3 gives the December 2025 baseline; P8 states the 2026/2027 contract cover percentages.",
+    "claim": "As of June 30, 2026, GSL's contracted revenue was $3.2 billion on a mid-point basis (average remaining term 3.3 years) and $4.1 billion on a latest-redelivery basis (4.4 years), with 100% contract cover for 2026 and 90% for 2027, up from $2.24 billion / $2.77 billion at year-end 2025.",
+    "facts": [
+     "P3",
+     "P6",
+     "P8"
+    ],
+    "quotes": [
+     "the average remaining term of the Company's charters, to the mid-point of redelivery, including options under the Company's control and other than if a redelivery notice has been received, including the Initial Newbuilds, was 3.3 years on a TEU-weighted basis. Contracted revenue on the same basis was $3.2 billion. Contracted revenue was $4.1 billion, including options under charterers' control and with latest redelivery date, representing a weighted average remaining term of 4.4 years.",
+     "100% contract cover for 2026 and 90% for 2027",
+     "the average remaining term of our charters, to the mid-point of redelivery, including options under our control and other than if a redelivery notice has been received, was 2.7 years on a TEU-weighted basis. Contracted revenue on the same basis was $2.24 billion. Contracted revenue was $2.77 billion, including options under charterers' control and with latest redelivery date, representing a weighted average remaining term of 3.6 years."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items: F2 and P3 give the full-year 2025 and 2024 revenue figures and the 7.8% increase; P3 attributes the increase to higher renewal rates; P4 and P8 give the 1H 2026 figure.",
+    "claim": "Operating revenue grew 7.8% year-over-year in 2025 to $766.5 million, driven primarily by higher rates on charter renewals and the addition of new vessels, with 1H 2026 revenue of $396.8 million continuing the trend.",
+    "facts": [
+     "F2",
+     "P3",
+     "P4",
+     "P8"
+    ],
+    "quotes": [
+     "The increase in operating revenue was mainly due to (i) the net effect of higher rates on charter renewals",
+     "were $766.5 million in the year ended December 31, 2025, an increase of $55.4 million, or 7.8%, from operating revenues of $711.1 million for 2024",
+     "1H 2026 operating revenue of $396.8 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items: P5 explicitly states the 550bps improvement and the SOFR + 1.5% margin; P4 and P8 report the rating actions.",
+    "claim": "GSL's cost of debt has fallen materially: the new $1 billion facility at SOFR + 1.5% is described as 550bps below the margin available five years earlier, and Moody's upgraded the outlook to positive while S&P and Kroll maintained BB+ ratings.",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "a margin 550bps below what was available to us just five years ago",
+     "Moody's Investor Service maintained our Ba2 Corporate Family Rating, and upgraded to a positive outlook from a stable outlook.",
+     "S&P Global issued a press release maintaining our Issuer Credit Rating of BB+, with a stable outlook."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the cited items: P4 gives the 1H 2026 and 1H 2025 utilization; P3 and P2 give the industry supply/demand statistics; P2 gives the 5.0% volume growth estimate.",
+    "claim": "Fleet utilization improved to 97.4% in 1H 2026 from 95.4% in 1H 2025, and the global containership market shows 0.8% idle capacity with a 34.5% orderbook-to-fleet ratio, supporting demand for mid-sized vessels.",
+    "facts": [
+     "P4",
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "Utilization | 97.4% | 95.4%",
+     "As at December 31, 2025, idle capacity of the global containership fleet was 0.8%, and the global containership orderbook to fleet ratio was 34.5%, which was weighted heavily towards containerships larger than 10,000 TEU.",
+     "Volumes are estimated to have increased in 2025 by approximately 5.0%."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the cited items: P1 documents the dividend increase and the 19.0% figure; P3 states the expected $0.625 quarterly rate from Q1 2026; P8 reiterates the $2.50 annualized figure.",
+    "claim": "GSL increased its quarterly common dividend to $0.625 per share (annualized $2.50), a 19.0% increase, citing sustained market demand and progress on forward fixtures, and expects to maintain $0.625 per quarter from Q1 2026.",
+    "facts": [
+     "P1",
+     "P3",
+     "P8"
+    ],
+    "quotes": [
+     "Our Board of Directors determined that sustained market demand for our fleet and our progress on securing forward fixtures at attractive levels supports a $0.10 per share increase in our quarterly supplemental dividend, amounting to a 19.0% increase in total annualized dividends per share, to $2.50 ($0.625 per quarter).",
+     "Effective from first quarter of 2026, we expect that our quarterly dividend will be $0.625 per Class A common share.",
+     "Annualized dividend of $2.50 per Class A Common Share"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items: P1 and P2 describe the Technomar/Conchart relationship and the fee structure; F2 quantifies the related-party portion of vessel operating expenses for 2023\u20132025.",
+    "claim": "GSL's operating fleet of 71 vessels (average age 18.4 years, 41 wide-beam Post-Panamax) is managed by related-party managers Technomar and Conchart, whose fees are payable regardless of profitability, creating a fixed cost base that must be covered by charter revenue.",
+    "facts": [
+     "P1",
+     "P2",
+     "F2"
+    ],
+    "quotes": [
+     "all of our vessels are technically managed by Technomar, a company of which our Executive Chairman is the Founder, Managing Director, and majority beneficial owner, for an annual management fee",
+     "The fees and expenses payable pursuant to our technical and commercial ship management agreements with Technomar and Conchart, respectively, will be payable without regard to our business, results of operation, and financial condition and we have limited rights to terminate our management agreements.",
+     "Vessel operating expenses (include related party vessels operating expenses of $23,817, $21,804 and $19,086 for each of the years ended December 31, 2025, 2024 and 2023, respectively)"
+    ],
+    "support": "number_not_found"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "Stated in the cited Q2 2026 earnings release (P8) and confirmed in the October 2026 6-K (P6).",
+    "claim": "GSL ordered 15 mid-size, ultra-high-reefer, wide-beam, latest-generation newbuild containerships for an aggregate contract price of $1.33 billion, with scheduled deliveries from 4Q28 through 1Q30, over 75% of which is covered by expected Adjusted EBITDA from initial charters averaging just over 7 years.",
+    "facts": [
+     "P8",
+     "P6"
+    ],
+    "quotes": [
+     "Ordered 15 mid-size, ultra-high-reefer, wide-beam, latest generation newbuilds for an aggregate contract price of $1.33 billion, over 75% of which is covered by expected Adj. EBITDA from initial charters",
+     "As of June 30, 2026, our fleet also included 15 newbuilding containerships under construction with scheduled deliveries between the fourth quarter of 2028 and the first quarter of 2030 (the \"Initial Newbuilds\")."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the cited 6-K press release (P6).",
+    "claim": "GSL exercised options to build two additional mid-size, ultra-high-reefer, wide-beam, latest-generation containerships for an aggregate contract price of approximately $163 million, bringing its newbuilding orderbook to 17 ships, with deliveries scheduled for 4Q29.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "the Company has exercised options to build two additional mid-size, ultra-high-reefer, wide-beam, latest-generation containerships (the \"Additional Newbuilds\") for an aggregate contract price of approximately $163 million",
+     "With these Additional Newbuilds, the Company's newbuilding orderbook is 17 ships."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the cited 6-K press release (P5).",
+    "claim": "GSL agreed a $1 billion seven-year syndicated loan facility at SOFR + 1.5% with an 8-bank syndicate led by Bank of America, to be drawn in tranches corresponding to delivery of each of the 15 Initial Newbuilds.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "Global Ship Lease, Inc. (NYSE:GSL) (the \"Company\", Global Ship Lease\" or \"GSL\"), a containership owner and lessor, announced today that it has agreed a $1 billion syndicated loan facility (the \"New Facility\") bearing an interest rate of SOFR + 1.5% and a duration of seven years.",
+     "The Company intends to draw on this facility in tranches corresponding to the delivery of each of the 15 newbuildings announced in June of this year (the \"Initial Newbuilds\"), the scheduled dates for which span from late 2028 through 2030."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the cited Q2 2026 earnings release (P8) and H1 2026 6-K (P4).",
+    "claim": "Moody's Investor Service upgraded GSL's Corporate Family Rating outlook from stable to positive, maintaining the Ba2 rating; Kroll Bond Rating Agency maintained BB+ with stable outlook and affirmed BBB/stable for the 5.69% Senior Secured Notes due 2027.",
+    "facts": [
+     "P8",
+     "P4"
+    ],
+    "quotes": [
+     "Moody's Investor Service maintained our Ba2 Corporate Family Rating, and upgraded to a positive outlook from a stable outlook. Kroll Bond Rating Agency maintained our corporate credit rating at BB+, with a stable outlook, while also affirming the BBB/stable investment grade rating and stable outlook for our 5.69% Senior Secured Notes due July 15, 2027 (the \"2027 Secured Notes\")."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in the cited 20-F MD&A (P3) and Item 4 (P1).",
+    "claim": "GSL sold four containerships in 2025: Tasman (5,936 TEU), Akiteta (2,220 TEU), and Keta (2,207 TEU) in Q1 2025 for an aggregate gain of $28.3 million, and Dimitris Y (5,936 TEU) in Q4 2025 for a gain of $17.9 million.",
+    "facts": [
+     "P3",
+     "P1"
+    ],
+    "quotes": [
+     "Tasman (5,936 TEU, built 2000), Akiteta (2,220 TEU, built 2002), and Keta (2,207 TEU, built 2003) were sold for an aggregate gain of $28.3 million in the first quarter of 2025. Dimitris Y (5,936 TEU, built 2000) was sold for an aggregate gain of $17.9 million in the fourth quarter of 2025.",
+     "during May 2025, we agreed to sell an older vessel Dimitris Y (5,936 TEU, built 2000), which was delivered to her new owners on October 13, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited 20-F Item 4 (P1) and MD&A (P3).",
+    "claim": "GSL acquired three 8,586 TEU Korean-built containerships (Lotus A, Koi, Cypress) for an aggregate price of $90.0 million, with two delivered in December 2025 and the third (Cypress) delivered January 9, 2026.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "the Newly Acquired Vessels that we agreed to purchase in December 2025 for an aggregate price of $90.0 million, of which two were delivered to us in December 2025 and the last one in January 2026",
+     "Lotus A and Koi were delivered to our fleet on December 12, 2025, and December 29, 2025, respectively. Cypress was delivered on January 9, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited 20-F Item 4 (P1).",
+    "claim": "GSL's Board declared a $0.10 per share increase in the quarterly supplemental dividend, raising the total annualized dividend to $2.50 per Class A common share ($0.625 per quarter), a 19.0% increase.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our Board of Directors determined that sustained market demand for our fleet and our progress on securing forward fixtures at attractive levels supports a $0.10 per share increase in our quarterly supplemental dividend, amounting to a 19.0% increase in total annualized dividends per share, to $2.50 ($0.625 per quarter)."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Stated in P6 (fleet age), P3 (cost per day figures), and P2 (risk factor language). The counter is stated in P5/P6/P8 (newbuilding orderbook).",
+    "claim": "GSL's fleet has an average age of 18.4 years (TEU-weighted), and per-ownership-day operating costs rose 7.3% year-over-year, creating a structural cost headwind as vessels approach end-of-life.",
+    "facts": [
+     "P6",
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "Our operating fleet of 71 containerships as of June 30, 2026, had an average age weighted by TEU capacity of 18.4 years.",
+     "The average cost per ownership day for the year ended December 31, 2025 was $8,231, compared to $7,670 for the prior year period, up $560 per day, or 7.3%.",
+     "As our fleet ages, we may incur increased operating costs beyond normal inflation, which would adversely affect our results of operations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3 (expiry count), P8 (contract cover percentages), and P2 (risk factor). Counter is stated in P8 and P4 (vessel table showing named charterers and future expiry dates).",
+    "claim": "Nine vessels (three expiring before H1 2026, six during H2 2026) face charter expiry, and rechartering at unprofitable or no rate would directly reduce revenue and cash flow.",
+    "facts": [
+     "P3",
+     "P8",
+     "P2"
+    ],
+    "quotes": [
+     "The time charters for three of our 71 containerships either have expired or could expire before the end of the first half of 2026, and a further six vessels have charters that could expire during the second half of 2026.",
+     "100% contract cover for 2026 and 90% for 2027",
+     "We may be unable to recharter our vessels at profitable rates, if at all, upon their time charter expiry."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in P2 (risk factors section). Counter is stated in P2 (non-competition reference) and F2 (related-party expense disclosure).",
+    "claim": "GSL's technical and commercial ship management is wholly dependent on Technomar and Conchart, both owned by the Executive Chairman, creating a structural conflict of interest and a single-point-of-failure for fleet operations.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We are dependent on third parties, some of which are related parties, to manage our vessels and substantial fees will be payable to our ship managers regardless of our profitability.",
+     "Our Executive Chairman is the Founder, Managing Director, and majority beneficial owner of Technomar and the sole beneficial owner of Conchart, our third-party technical and commercial ship managers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P8 (newbuild order and EBITDA coverage), P6 (additional newbuilds and orderbook), P5 (syndicated facility terms). Counter is stated in P8 (75% EBITDA coverage, 7-year charters), P5 (oversubscribed facility), and P3 ($637.0 million cash).",
+    "claim": "GSL is committing to 17 newbuildings at an aggregate contract price of approximately $1.49 billion ($1.33 billion initial + $163 million additional), with deliveries spanning 4Q28 to 1Q30, creating a large future capital outlay that depends on the $1 billion syndicated facility and ongoing financing access.",
+    "facts": [
+     "P8",
+     "P6",
+     "P5"
+    ],
+    "quotes": [
+     "Ordered 15 mid-size, ultra-high-reefer, wide-beam, latest generation newbuilds for an aggregate contract price of $1.33 billion, over 75% of which is covered by expected Adj. EBITDA from initial charters",
+     "the Company has exercised options to build two additional mid-size, ultra-high-reefer, wide-beam, latest-generation containerships (the \"Additional Newbuilds\") for an aggregate contract price of approximately $163 million",
+     "it has agreed a $1 billion syndicated loan facility (the \"New Facility\") bearing an interest rate of SOFR + 1.5% and a duration of seven years"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated in P2 (risk factors) and P3 (industry context). Counter is stated in P2 (orderbook composition), P3 (5.0% volume growth), and P6 (3.3-year average remaining charter term).",
+    "claim": "The container shipping industry is explicitly cyclical, with a 34.5% global orderbook-to-fleet ratio as of December 2025; a demand shock or oversupply correction could compress charter rates and vessel values simultaneously.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "The container shipping industry is cyclical and volatile and our growth and long-term profitability depend mainly upon growth in demand for containerships, the condition of the charter market, and the availability of capital.",
+     "As at December 31, 2025, idle capacity of the global containership fleet was 0.8%, and the global containership orderbook to fleet ratio was 34.5%, which was weighted heavily towards containerships larger than 10,000 TEU.",
+     "A decrease in the export and/or import of containerized cargo or an increase in trade protectionism may harm our customers' business and, in turn, harm our business, results of operations, and financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (regulatory risk factor) and P3 (scrubber/ballast water cost note). Counter is inferred from P6/P8 (newbuild specifications) and P3 (drydocking cost data).",
+    "claim": "GSL faces escalating environmental and emissions compliance costs under EU ETS, FuelEU Maritime, ballast water rules, and potential scrubber retrofit requirements, which will increase operating expenses over time.",
     "facts": [
      "P2",
      "P3"
@@ -641,243 +811,119 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 (risk factors). Volume data from P2.",
-    "claim": "Geopolitical conflicts (Russia-Ukraine war, China-Taiwan tensions, U.S.-China trade relations, Middle East hostilities including the recent military conflict in Iran) and new U.S.-China port fees could disrupt supply chains, reduce container trade volumes, and impair charterer creditworthiness.",
+    "basis": "Stated in P3 (debt breakdown, caps, cash, working capital) and P2 (debt risk factor). Counter is stated in P3 (caps, cash), P4/P8 (Moody's upgrade), and P5 (new facility margin).",
+    "claim": "GSL carries $694.7 million of debt with floating-rate exposure to SOFR, and while currently in compliance with covenants, a sustained rise in rates or a covenant breach would constrain refinancing and dividend capacity.",
     "facts": [
+     "P3",
      "P2"
     ],
     "quotes": [
-     "uncertainty exists regarding the broader global economic impact of changes in tariffs, trade barriers, and embargos, including recently imposed or announced tariffs by the U.S. and the effects of retaliatory tariffs and countermeasures from affected countries, geopolitical events, such as the continuing war between Russia and Ukraine, ongoing disputes between China and Taiwan, deteriorating trade relations between the U.S. and China, and ongoing political unrest and conflicts in the Middle East, including the recent military conflict in Iran, and other regions throughout the world.",
-     "Recent actions by the U.S. and China imposing new port fees and related uncertainty in their implementation could have a material adverse effect on our operations and financial results."
+     "As at December 31, 2025, we had $694.7 million of debt outstanding, comprising $311.0 million of secured bank debt collateralized by vessels, $179.4 million of investment grade rated 2027 Secured Notes collateralized by vessels, and $204.3 million under sale and leaseback financing transactions, which have floating interest rates at SOFR plus a weighted average margin of approximately 2.34%.",
+     "We have substantial existing indebtedness and may incur more in the future. Our substantial indebtedness could adversely affect our ability to raise additional capital to fund our operations or pursue other business opportunities and may limit our ability to react to changes in the economy or our industry."
     ],
     "support": "supported"
    }
   ],
-  "thesis_change": [
-   {
-    "basis": "stated in P3 and F2; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the 7.8% revenue increase to $766.5 million in 2025 remains as stated in the 20-F.",
-    "facts": [
-     "P3",
-     "F2"
-    ],
-    "quotes": [
-     "Operating revenues reflect income under fixed rate time charters and were $766.5 million in the year ended December 31, 2025, an increase of $55.4 million, or 7.8%, from operating revenues of $711.1 million for 2024."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P3; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the $2.24 billion contracted revenue over 2.7 years (mid-point) and $2.77 billion over 3.6 years (with options) remain as reported.",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Contracted revenue on the same basis was $2.24 billion.",
-     "Contracted revenue was $2.77 billion, including options under charterers' control and with latest redelivery date, representing a weighted average remaining term of 3.6 years."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P1 and P3; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the $0.625 quarterly dividend (annualized $2.50) and 19.0% increase remain as declared.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "Our Board of Directors determined that sustained market demand for our fleet and our progress on securing forward fixtures at attractive levels supports a $0.10 per share increase in our quarterly supplemental dividend, amounting to a 19.0% increase in total annualized dividends per share, to $2.50 ($0.625 per quarter)."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2 and P3; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the approximately 5.0% container trade volume growth in 2025 and 0.8% idle capacity figures remain as cited.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "Volumes are estimated to have increased in 2025 by approximately 5.0%.",
-     "idle capacity of the global containership fleet was 0.8%"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2 and P1; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the dependence on charterer performance and concentration among major operators remain as described.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "Payments to us by our charterers under time charters are, and will continue to be, our sole source of operating cash flow."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P3; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the near-term rechartering exposure of three vessels before H1 2026 and six in H2 2026 remains as stated.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "The time charters for three of our 71 containerships either have expired or could expire before the end of the first half of 2026, and a further six vessels have charters that could expire during the second half of 2026."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in P3; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the $694.7 million debt load and SOFR-plus-2.34% floating-rate structure remain as reported.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "we had $694.7 million of debt outstanding, comprising $311.0 million of secured bank debt collateralized by vessels, $179.4 million of investment grade rated 2027 Secured Notes collateralized by vessels, and $204.3 million under sale and leaseback financing transactions, which have floating interest rates at SOFR plus a weighted average margin of approximately 2.34%."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the Executive Chairman's ownership of Technomar and Conchart and approximately 7.9% Class A stake remain as disclosed.",
-    "facts": [
-     "P2",
-     "F2"
-    ],
-    "quotes": [
-     "Our Executive Chairman is the Founder, Managing Director, and majority beneficial owner of Technomar and the sole beneficial owner of Conchart",
-     "Our Executive Chairman also beneficially owns approximately 7.9% of our Class A common shares."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P3 and P2; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the incremental compliance costs from EU ETS, FuelEU Maritime, ballast water management, and potential scrubber retrofits remain as described.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "In future years there will be incremental costs for compliance with ballast water management regulations and with emission control regulations should we decide, in conjunction with our relevant charter, to retrofit scrubbers on our vessels."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the 34.5% orderbook-to-fleet ratio and 0.8% idle capacity figures remain as cited in the risk factors.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "the global containership orderbook to fleet ratio was 34.5%, which was weighted heavily towards containerships larger than 10,000 TEU"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P3; no newer evidence to alter the point",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the 7.3% rise in average cost per ownership day to $8,231 from $7,670 remains as reported.",
-    "facts": [
-     "P3",
-     "P2"
-    ],
-    "quotes": [
-     "The average cost per ownership day for the year ended December 31, 2025 was $8,231, compared to $7,670 for the prior year period, up $560 per day, or 7.3%."
-    ],
-    "support": "number_not_listed"
-   }
-  ],
+  "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in P1 footnotes (4), (5), (6), (7), (8), (9); the rates are explicitly withheld.",
-    "claim": "What are the actual daily charter rates for the vessels listed at confidential rates in the fleet table?",
+    "basis": "Stated in P5, P6, and P8; the gap is inferred by comparing the stated facility size to the stated contract prices.",
+    "claim": "How will the funding gap between the $1.33 billion aggregate contract price for the 15 Initial Newbuilds plus approximately $163 million for the 2 Additional Newbuilds and the $1 billion syndicated loan facility be financed?",
     "facts": [
-     "P1"
+     "P5",
+     "P6",
+     "P8"
     ],
     "quotes": [
-     "Anthea Y is fixed for 36 months +/- 30 days and is chartered at a confidential rate."
+     "Ordered 15 mid-size, ultra-high-reefer, wide-beam, latest generation newbuilds for an aggregate contract price of $1.33 billion, over 75% of which is covered by expected Adj. EBITDA from initial charters",
+     "announced today that it has agreed a $1 billion syndicated loan facility (the \"New Facility\") bearing an interest rate of SOFR + 1.5% and a duration of seven years",
+     "the Company has exercised options to build two additional mid-size, ultra-high-reefer, wide-beam, latest-generation containerships (the \"Additional Newbuilds\") for an aggregate contract price of approximately $163 million"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated directly in P6.",
+    "claim": "Who will charter the two Additional Newbuilds delivering in 4Q29, and at what daily rates and durations?",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "the Company is in discussions with prospective charterers regarding their employment upon delivery"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in P4, P7, and P8; the absence of a refinancing plan is an inference from the silence of all items.",
+    "claim": "What is the Company's plan to refinance or repay the 5.69% Senior Secured Notes maturing on July 15, 2027?",
+    "facts": [
+     "P4",
+     "P7",
+     "P8"
+    ],
+    "quotes": [
+     "affirming the BBB/stable investment grade rating and stable outlook for our 5.69% Senior Secured Notes due July 15, 2027 (the \"2027 Secured Notes\")"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3; the expiry date is given but no renewal is mentioned.",
-    "claim": "Whether the interest rate caps at a net level of 0.64% that expire in the fourth quarter of 2026 have been renewed or will lapse, exposing the company to higher floating-rate debt costs.",
+    "basis": "Stated in P5 and P8; the absence of per-vessel detail is an inference from the omission.",
+    "claim": "Which specific charterers have contracted for the 15 Initial Newbuilds, and what are the individual daily charter rates and fixed durations?",
+    "facts": [
+     "P5",
+     "P8"
+    ],
+    "quotes": [
+     "Each of these vessels is contracted to commence time charter employment promptly upon delivery.",
+     "The initial charters for the Newbuildings, averaging just over 7 years in duration, de-risk the investment right out of the gate, providing expected adjusted EBITDA equivalent to over 75% of the contracted purchase price within 25% of the ships' expected economic life."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the absence of a Q3 2026 financial filing in the evidence; the last reported period is H1 2026 per P4 and P8.",
+    "claim": "What were the Company's operating revenue, net income, adjusted EBITDA, and cash position for the third quarter and nine months ended September 30, 2026?",
+    "facts": [
+     "P4",
+     "P8"
+    ],
+    "quotes": [
+     "1H 2026 operating revenue of $396.8 million.",
+     "1H 2026 net income available to common shareholders of $180.7 million, or $5.02 EPS."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in P5; the absence of covenant detail is an inference from the press-release format.",
+    "claim": "What are the financial covenants, drawdown conditions, and security package of the $1 billion syndicated loan facility?",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "The Company intends to draw on this facility in tranches corresponding to the delivery of each of the 15 newbuildings announced in June of this year (the \"Initial Newbuilds\"), the scheduled dates for which span from late 2028 through 2030."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5 and P6; the gap is inferred from the explicit limitation in P5 and the absence of any reference to the facility in P6.",
+    "claim": "Does the $1 billion syndicated facility extend to the two Additional Newbuilds, or will those require separate or additional financing?",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "The Company intends to draw on this facility in tranches corresponding to the delivery of each of the 15 newbuildings announced in June of this year (the \"Initial Newbuilds\")",
+     "With these Additional Newbuilds, the Company's newbuilding orderbook is 17 ships."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3; the absence of replacement-hedge information is an inference from the silence of all items.",
+    "claim": "What will happen to the Company's interest-rate hedges when the existing SOFR caps (net level 0.64%) expire in the fourth quarter of 2026, and what replacement protection, if any, is in place?",
     "facts": [
      "P3"
     ],
     "quotes": [
+     "In December 2021, we entered into a USD one-month London Interbank Offered Rate (\"LIBOR\") interest rate cap of 0.75% through fourth quarter of 2026 on $484.1 million of floating rate debt and in February 2022 we entered into USD one-month LIBOR interest rate caps of 0.75% though fourth quarter of 2026 on $507.9 million of floating rate debt to hedge our cash flows.",
      "As a result of the discontinuation of LIBOR, on July 1, 2023, our interest rate caps automatically transitioned to one-month Compounded SOFR at a net level of 0.64%."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3; only the rate and maturity are given, not the full contract terms.",
-    "claim": "What are the full terms, collateral package, financial covenants, and repayment schedule of the $85.0 million UBS Credit Facility entered in March 2025?",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "In March 2025, we entered into a loan agreement with UBS AG for $85.0 million (the UBS Credit Facility), to refinance certain of our existing loans."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 (risk factors) and F2 (income statement line items); the specific fee schedule is in the omitted portions of the 20-F.",
-    "claim": "What are the specific per-vessel or per-year fee rates and termination terms of the Technomar technical management and Conchart commercial management agreements?",
-    "facts": [
-     "P2",
-     "F2"
-    ],
-    "quotes": [
-     "As of the date of this Annual Report, all of our vessels are technically managed by Technomar, a company of which our Executive Chairman is the Founder, Managing Director, and majority beneficial owner, for an annual management fee."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3; the company explicitly defers to future market conditions.",
-    "claim": "What charter rates and durations will the three vessels expiring before the first half of 2026 and six more in the second half of 2026 achieve upon rechartering?",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "The time charters for three of our 71 containerships either have expired or could expire before the end of the first half of 2026, and a further six vessels have charters that could expire during the second half of 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3; compliance is asserted but covenant specifics are in the omitted debt footnote.",
-    "claim": "What specific financial covenants (leverage ratios, minimum liquidity, interest coverage) apply under the company's $694.7 million of outstanding debt as of December 31, 2025?",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "As of December 31, 2025 and December 31, 2024, we were in compliance with our debt covenants."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1 (rating) and P3 (principal amount); full indenture terms are in the omitted exhibits.",
-    "claim": "What are the full terms of the 5.69% Senior Secured Notes due 2027, including the $179.4 million principal, collateral, call/redemption provisions, and covenant package?",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "the Kroll Bond Rating Agency has kept our corporate rating at BB+, with a stable outlook, while also affirming the BBB/stable investment grade rating and outlook for our 5.69% Senior Secured Notes due 2027.",
-     "$179.4 million of investment grade rated 2027 Secured Notes collateralized by vessels"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1 (purchase price) and F3 (cash flow lines); the financing source is not identified.",
-    "claim": "How was the $90.0 million acquisition of the three Newly Acquired Vessels (Lotus A, Koi, Cypress) financed, and what debt or equity was issued to fund the purchase?",
-    "facts": [
-     "P1",
-     "F3"
-    ],
-    "quotes": [
-     "we agreed to purchase in December 2025 for an aggregate price of $90.0 million, of which two were delivered to us in December 2025 and the last one in January 2026"
     ],
     "support": "supported"
    }
