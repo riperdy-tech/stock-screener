@@ -213,6 +213,31 @@ export async function fetchStocks(market: Market = 'US'): Promise<{ data: StockC
     }
 }
 
+/**
+ * The price of record: stocks.json, the file the engine scores and the post-close refresh updates (stocks.csv is written by
+ * the daily fetch only, so its prices can be a session behind). `asof` is the session the refresh priced
+ * (`_meta.price_asof` on the first row); a row carries `price_older_than_asof` (its last bar date) when it could not be
+ * priced for that session. Both fields are absent from files written before 2026-11-12.
+ */
+export interface EnginePrices {
+    asof: string | null;
+    /** When the refresh ran (`_meta.price_refresh_at`). */
+    refreshedAt: string | null;
+    rows: Record<string, { price: number; olderThan: string | null }>;
+}
+
+export async function fetchEnginePrices(): Promise<EnginePrices | null> {
+    const stocks = await fetchJson<{ symbol?: string; price?: number | null; price_older_than_asof?: string | null; _meta?: { price_asof?: string | null; price_refresh_at?: string | null } }[]>('/data/stocks.json');
+    if (!Array.isArray(stocks)) return null;
+    const rows: EnginePrices['rows'] = {};
+    for (const s of stocks) {
+        if (s.symbol && typeof s.price === 'number' && Number.isFinite(s.price) && s.price > 0) {
+            rows[s.symbol] = { price: s.price, olderThan: s.price_older_than_asof ?? null };
+        }
+    }
+    return { asof: stocks[0]?._meta?.price_asof ?? null, refreshedAt: stocks[0]?._meta?.price_refresh_at ?? null, rows };
+}
+
 // Phase 9: Load reverse screening engine results from stocks.json
 export async function fetchReverseScores(): Promise<Record<string, ReverseResult>> {
     try {

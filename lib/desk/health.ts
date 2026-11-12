@@ -10,6 +10,7 @@ const DAY = 24 * HOUR;
 
 // Staleness cadences (step 1a, simplified from the handoff README section 8).
 export const PRICES_STALE_MS = 24 * HOUR;
+export const PRICE_REFRESH_STALE_MS = 72 * HOUR;   // the post-close refresh runs on weekdays: a weekend or a holiday must not warn
 export const BOOK_STALE_MS = 36 * HOUR;
 export const VERDICT_STALE_MS = 14 * DAY;   // only meaningful once the rebuilt analyst is live (phase B/C)
 export const ERROR_ALERT_WINDOW_MS = 7 * DAY;
@@ -57,7 +58,13 @@ export interface StatusInput {
     regime: MriRegime | null;
     anchor: MriCostOfCapital | null;
     pricesAsOf: string | null;
+    /** When the post-close price refresh last ran (stocks.json `_meta.price_refresh_at`); staleness follows it when present. */
+    pricesRefreshedAt?: string | null;
 }
+
+/** The prices are stale when the refresh that wrote them is old (else by the quote stamp). */
+const pricesAreStale = (st: StatusInput, now: number): boolean =>
+    st.pricesRefreshedAt ? isStale(st.pricesRefreshedAt, PRICE_REFRESH_STALE_MS, now) : isStale(st.pricesAsOf, PRICES_STALE_MS, now);
 
 export interface Freshness {
     phase: DeskPhase | null;          // null until the overlay has loaded
@@ -87,7 +94,7 @@ export function computeFreshness(st: StatusInput, now: number): Freshness {
         return {
             phase: 'C',
             pricesAsOf: st.pricesAsOf,
-            pricesStale: isStale(st.pricesAsOf, PRICES_STALE_MS, now),
+            pricesStale: pricesAreStale(st, now),
             bookScoredAt: st.factor?.generated_at ?? null,
             bookStale: isStale(st.factor?.generated_at, BOOK_STALE_MS, now),
             verdictAt: st.qwen.generated_at,
@@ -101,7 +108,7 @@ export function computeFreshness(st: StatusInput, now: number): Freshness {
     return {
         phase,
         pricesAsOf: st.pricesAsOf,
-        pricesStale: isStale(st.pricesAsOf, PRICES_STALE_MS, now),
+        pricesStale: pricesAreStale(st, now),
         bookScoredAt: st.factor?.generated_at ?? null,
         bookStale: isStale(st.factor?.generated_at, BOOK_STALE_MS, now),
         verdictAt,

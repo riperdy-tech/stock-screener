@@ -115,9 +115,14 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
     if (deltaText && !reasons.includes('mode_instability')) glossed.push(deltaText);
     const fu = d ? followupWarning(d) : null;
     const ind = row.info?.industry;
-    const priceNote = live != null && atVerdict != null && Math.abs(live - atVerdict) >= 0.005
+    // The price is the engine's (stocks.json); say which session it is for, and when this name's own last price is older.
+    const sessionNote = live == null || !data.priceSession ? null
+        : row.info?.priceOlderThan
+            ? fill(t('pgPriceOlder'), { at: row.info.priceOlderThan, asof: data.priceSession })
+            : fill(t('pgPriceSession'), { at: data.priceSession });
+    const priceNote = sessionNote ?? (live != null && atVerdict != null && Math.abs(live - atVerdict) >= 0.005
         ? fill(t('pgLiveAsOf'), { at: data.pricesAsOf ? data.pricesAsOf.slice(5, 16) : DASH })
-        : d?.price_asof ? fill(t('pgPriceAsOf'), { at: mmdd(d.price_asof), src: d.price_source ?? DASH }) : null;
+        : d?.price_asof ? fill(t('pgPriceAsOf'), { at: mmdd(d.price_asof), src: d.price_source ?? DASH }) : null);
 
     return shell(
         <div className="pb-6">
