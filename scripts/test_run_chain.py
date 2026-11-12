@@ -97,3 +97,71 @@ def test_round3_helper():
     assert rc.round3(0.0) == 0.0
     assert rc.round3(None) is None
     assert rc.round3("not a number") is None
+
+
+# ── SF4 items 1-2: the chain reads the run's own record (F5, F6) ─────────────────────────
+from datetime import datetime, timezone  # noqa: E402
+
+NOW = datetime(2026, 11, 12, 12, 0, tzinfo=timezone.utc)
+
+
+def _log(tmp_path, lines):
+    p = tmp_path / "scan.log"
+    p.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return p
+
+
+def test_scan_log_takes_the_last_summary_and_bulk_history(tmp_path):
+    p = _log(tmp_path, [
+        "2026-09-11 15:44:39,970 - INFO - defeatbeta loaded: 6543 priced symbols, max price date 2026-09-10.",
+        "2026-09-11 18:00:00,000 - INFO - Scan Complete. Processed 6559. Passed 3. Skipped 0.",
+        "2026-09-17 23:38:45,726 - WARNING - defeatbeta load failed (HTTP Error 404: Not Found) — using legacy yfinance path.",
+        "2026-11-06 18:00:34,762 - INFO - Scan Complete. Processed 6554. Passed 1. Skipped 5501.",
+    ])
+    s = rc.read_scan_log(p)
+    assert (s["processed"], s["skipped"], s["at"]) == (6554, 5501, "2026-11-06 18:00:34")
+
+
+def test_scan_log_missing_or_empty_is_none_not_zero(tmp_path):
+    assert rc.read_scan_log(tmp_path / "nope.log") is None
+    assert rc.read_scan_log(_log(tmp_path, ["nothing here"]))["processed"] is None
+
+
+def test_age_comes_from_rows_last_updated_not_file_mtime():
+    stocks = [{"Last_Updated": "2026-11-10 12:00"}, {"Last_Updated": "2026-11-02 00:00"}, {}]
+    assert rc.newest_last_updated_age_days(stocks, NOW) == 2.0
+    assert rc.newest_last_updated_age_days([{}], NOW) is None      # absence stays absence
+
+
+def _inv(invs, name):
+    return next(i for i in invs if i["name"] == name)
+
+
+def test_mostly_failed_run_fails_hard():
+    invs = []
+    scan = {"processed": 6554, "skipped": 5501, "at": "2026-11-06 18:00:34"}
+    counts = rc.add_fetch_invariants(invs, [{"Last_Updated": "2026-11-12 11:00"}], scan, NOW)
+    inv = _inv(invs, "fetch_skipped_share")
+    assert inv["level"] == "hard" and inv["ok"] is False
+    assert counts["refreshed"] == 1053 and counts["skipped"] == 5501
+
+
+def test_normal_run_passes_and_zero_skipped_is_a_value():
+    invs = []
+    scan = {"processed": 6550, "skipped": 0, "at": "x"}
+    rc.add_fetch_invariants(invs, [{"Last_Updated": "2026-11-12 11:00"}], scan, NOW)
+    assert _inv(invs, "fetch_skipped_share")["ok"] is True
+
+
+def test_no_summary_is_flagged_not_passed():
+    invs = []
+    rc.add_fetch_invariants(invs, [{"Last_Updated": "2026-11-12 11:00"}], None, NOW)
+    inv = _inv(invs, "fetch_skipped_share")
+    assert inv["level"] == "soft" and inv["ok"] is False
+
+
+def test_stale_rows_fail_freshness():
+    invs = []
+    scan = {"processed": 100, "skipped": 0, "at": "x"}
+    rc.add_fetch_invariants(invs, [{"Last_Updated": "2026-10-01 00:00"}], scan, NOW)
+    assert _inv(invs, "stocks_json_fresh")["ok"] is False

@@ -21,6 +21,7 @@ Exit code: 0 = all steps ran and all HARD invariants passed.
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 import time
@@ -38,12 +39,18 @@ STOCKS_JSON = DATA / "stocks.json"
 REVERSE_SCORES_JSON = DATA / "reverse_scores.json"
 MANIFEST_JSON = DATA / "chain_manifest.json"
 NOMINATION_LOG_JSONL = DATA / "reverse_nomination_log.jsonl"
+SCAN_LOG = DATA / "scan.log"
 
 # Invariant thresholds
 MIN_REVERSE_COVERAGE = 0.90   # share of stocks that must carry a reverse object
 MIN_NOMINATED = 1             # Stage 9 must nominate at least this many
 MAX_UNIVERSE_DRIFT = 0.10     # vs previous manifest
-MAX_STOCKS_AGE_DAYS = 8       # stocks.json older than this = fetch pipeline broken
+MAX_STOCKS_AGE_DAYS = 8       # newest row Last_Updated older than this = fetch pipeline broken
+# Share of the scan's names that failed to fetch (fetch_data.py "Skipped M" of "Processed N") above
+# which the run is not published as fresh. Measured over the 178 runs in scan.log (2026-05-04 to
+# 2026-11-11): every normal run is at or below 3.1% (since 2026-07-10 at or below 0.6%), the
+# bad runs start at 13.9% (and reach 83.9%: 5,501 of 6,554 on 2026-11-06). 8% sits in the gap.
+MAX_SKIPPED_SHARE = 0.08
 
 
 def load_json(path):
@@ -65,6 +72,68 @@ def run_step(name, args, steps, env_note=""):
     steps.append({"name": name, "returncode": proc.returncode, "duration_s": duration})
     print(f"=== STEP DONE: {name} rc={proc.returncode} ({duration}s)")
     return proc.returncode == 0
+
+
+def read_scan_log(path):
+    """The last "Scan Complete. Processed N. Passed P. Skipped M." line of fetch_data.py's log.
+    None when the log is missing; the counts are None when it holds no summary (an absence,
+    not a zero)."""
+    try:
+        f = open(path, "rb")
+    except OSError:
+        return None
+    scan = {"processed": None, "skipped": None, "at": None}
+    pat = re.compile(rb"^(\d{4}-\d\d-\d\d \d\d:\d\d:\d\d)\S* .*Scan Complete\. Processed (\d+)\. "
+                     rb"Passed (\d+)\. Skipped (\d+)\.")
+    with f:
+        for line in f:
+            if b"Scan Complete" in line:
+                m = pat.match(line)
+                if m:
+                    scan.update(at=m.group(1).decode(), processed=int(m.group(2)),
+                                skipped=int(m.group(4)))
+    return scan
+
+
+def newest_last_updated_age_days(stocks, now):
+    """Age in days of the newest row `Last_Updated` (UTC "YYYY-MM-DD HH:MM", stamped by
+    fetch_data.py). None when no row carries one."""
+    newest = None
+    for s in stocks:
+        raw = s.get("Last_Updated") if isinstance(s, dict) else None
+        try:
+            t = datetime.strptime(raw[:16], "%Y-%m-%d %H:%M").replace(tzinfo=timezone.utc)
+        except (TypeError, ValueError):
+            continue
+        if newest is None or t > newest:
+            newest = t
+    return None if newest is None else (now - newest).total_seconds() / 86400
+
+
+def add_fetch_invariants(invariants, stocks, scan, now):
+    """Freshness from the rows themselves, and how much of the last scan was refreshed. Returns
+    the counts for the manifest."""
+    age = newest_last_updated_age_days(stocks, now)
+    add_invariant(invariants, "stocks_json_fresh", "soft",
+                  age is not None and age <= MAX_STOCKS_AGE_DAYS,
+                  "no row carries Last_Updated" if age is None else
+                  f"newest row Last_Updated is {age:.1f} days old (max {MAX_STOCKS_AGE_DAYS})")
+    processed = scan.get("processed") if scan else None
+    skipped = scan.get("skipped") if scan else None
+    counts = {"processed": processed, "skipped": skipped,
+              "refreshed": None if processed is None else processed - skipped,
+              "skipped_share": None, "scan_logged_at": scan.get("at") if scan else None,
+              "newest_last_updated_age_days": None if age is None else round(age, 2)}
+    if not processed:
+        add_invariant(invariants, "fetch_skipped_share", "soft", False,
+                      "no 'Scan Complete' line in scan.log: how much of the last scan was refreshed is unknown")
+    else:
+        share = skipped / processed
+        counts["skipped_share"] = round(share, 4)
+        add_invariant(invariants, "fetch_skipped_share", "hard", share <= MAX_SKIPPED_SHARE,
+                      f"last scan ({counts['scan_logged_at']}) refreshed {processed - skipped}, skipped {skipped} "
+                      f"of {processed} ({share:.1%}, max {MAX_SKIPPED_SHARE:.0%})")
+    return counts
 
 
 def add_invariant(invariants, name, level, ok, detail):
@@ -113,10 +182,9 @@ def main():
         print("FATAL: stocks.json missing — run fetch_data.py first.")
         sys.exit(1)
 
-    stocks_age_days = (time.time() - STOCKS_JSON.stat().st_mtime) / 86400
-    add_invariant(invariants, "stocks_json_fresh", "soft",
-                  stocks_age_days <= MAX_STOCKS_AGE_DAYS,
-                  f"stocks.json is {stocks_age_days:.1f} days old (max {MAX_STOCKS_AGE_DAYS})")
+    # Freshness and the scan's refreshed/skipped counts come from the data, not file mtime.
+    fetch_counts = add_fetch_invariants(invariants, load_json(STOCKS_JSON), read_scan_log(SCAN_LOG),
+                                        datetime.now(timezone.utc))
 
     # ── Steps ────────────────────────────────────────────────────────────
     ok = True
@@ -308,6 +376,7 @@ def main():
         "counts": {
             "stocks": n_stocks,
         },
+        "fetch_run": fetch_counts,
         "price_asof": price_asof,
     }
     with MANIFEST_JSON.open("w", encoding="utf-8") as f:
