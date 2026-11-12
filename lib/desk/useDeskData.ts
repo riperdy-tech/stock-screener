@@ -333,17 +333,19 @@ export function useDeskData() {
 
     useEffect(() => { load(); }, [load]);
 
-    // Real-time background sweep listener: polls every 25s + on window focus.
-    // When a new depth run finishes in orchestrate_depth.py and pushes to production,
-    // this immediately catches the new generated_at timestamp and refreshes the desk.
+    // Background listener: polls every 25s + on window focus. It reads the small chain manifest (a few KB), not a data
+    // file, and reloads the desk only when the manifest's run changes, i.e. when a chain run has published new data.
+    const manifestKey = data.manifest?.run_id ?? data.manifest?.finished_at ?? null;
     useEffect(() => {
         let active = true;
         const checkSweepUpdate = async () => {
+            if (loading) return;
             try {
-                const res = await fetch(`/data/depth_overlay.json?t=${Date.now()}`);
+                const res = await fetch(`/data/chain_manifest.json?t=${Date.now()}`);
                 if (!res.ok) return;
                 const fresh = await res.json();
-                if (active && fresh && fresh.generated_at && fresh.generated_at !== data.depthMeta.generated_at) {
+                const key = fresh?.run_id ?? fresh?.finished_at ?? null;
+                if (active && key && key !== manifestKey) {
                     invalidateDeskCache();
                     await load();
                 }
@@ -358,7 +360,7 @@ export function useDeskData() {
             clearInterval(interval);
             window.removeEventListener('focus', onFocus);
         };
-    }, [data.depthMeta.generated_at, load]);
+    }, [manifestKey, loading, load]);
 
     // The private `mine` book is RLS-scoped, so it re-attaches on every auth change.
     useEffect(() => {
