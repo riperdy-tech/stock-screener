@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import { fetchQwenReport, type QwenReport } from '@/lib/data-service';
 import { fmtMoney } from '@/lib/desk/format';
+import { plainNoValueReason } from '@/lib/desk/qwenText';
 import { fill } from '@/lib/desk/text';
 import { DASH } from './stockParts';
 
@@ -59,7 +60,7 @@ export function QwenPanel({ ticker, live, listed }: { ticker: string; live: numb
                 </p>
             ) : (
                 <p className="mt-1 text-[12px] text-ink-2">
-                    {fill(t(q.analysis === 'not run' ? 'pgQwNotRun' : 'pgQwNoValue'), { reason: q.no_value_reason ?? DASH })}
+                    {fill(t(q.analysis === 'not run' ? 'pgQwNotRun' : 'pgQwNoValue'), { reason: plainNoValueReason(q.no_value_reason) ?? DASH })}
                 </p>
             )}
             {q.valued && q.far_from_price && <p className="font-mono text-[11px] text-warn">{t('pgQwFar')}</p>}

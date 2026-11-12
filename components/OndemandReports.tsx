@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import { Shell } from '@/components/desk/Shell';
 import { Micro } from '@/components/desk/primitives';
 import Link from 'next/link';
+import { plainNoValueReason } from '@/lib/desk/qwenText';
 import { fetchQwenOverlay, type OndemandQueueRow, type QwenOverlayPayload } from '@/lib/data-service';
 
 const money = (v: number | null | undefined) =>
@@ -112,7 +113,7 @@ function Row({ ticker, r }: { ticker: string; r: QwenOverlayPayload['tickers'][s
                 {ran ? `${r.claims_supported ?? 0}/${r.claims ?? 0} claims supported` : 'not run'}
             </span>
             <span className="font-mono text-[11.5px] text-ink-q">
-                {r.valued ? `value ${money(r.value_base)} (${money(r.value_bear)} to ${money(r.value_bull)})` : (r.no_value_reason ?? 'not valued')}
+                {r.valued ? `value ${money(r.value_base)} (${money(r.value_bear)} to ${money(r.value_bull)})` : (plainNoValueReason(r.no_value_reason) ?? 'not valued')}
             </span>
             <Micro className="ml-auto text-ink-3">{r.source}</Micro>
         </Link>
