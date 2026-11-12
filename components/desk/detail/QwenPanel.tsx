@@ -8,6 +8,8 @@ import React, { useEffect, useState } from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import { fetchQwenReport, type QwenReport } from '@/lib/data-service';
 import { fmtMoney } from '@/lib/desk/format';
+import { plainNoValueReason } from '@/lib/desk/qwenText';
+import { monthlyBookState, type MonthlyBooksLike } from '@/lib/desk/stockPage';
 import { fill } from '@/lib/desk/text';
 import { DASH } from './stockParts';
 
@@ -22,7 +24,7 @@ const TASK_KEY: Record<(typeof TASKS)[number], string> = {
 const money = (v: number | null | undefined) => (v == null ? DASH : fmtMoney(v));
 const pct = (v: number) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v * 100).toFixed(0)}%`;
 
-export function QwenPanel({ ticker, live }: { ticker: string; live: number | null }) {
+export function QwenPanel({ ticker, live, listed, monthly }: { ticker: string; live: number | null; listed: boolean; monthly: MonthlyBooksLike | null }) {
     const { t } = useLanguage();
     const [q, setQ] = useState<QwenReport | null | undefined>(undefined);
     const [open, setOpen] = useState(false);
@@ -34,8 +36,17 @@ export function QwenPanel({ ticker, live }: { ticker: string; live: number | nul
         return () => { alive = false; };
     }, [ticker]);
 
-    if (!q) return null;
+    if (q === undefined) return null;
+    if (q === null) {
+        return (
+            <section className="mt-4 border-l-2 border-accent px-4 py-3 text-[13px] leading-relaxed text-ink">
+                <b className="font-semibold">{t('pgQwTitle')}</b>
+                <p className="mt-1 text-[12px] text-ink-2">{t(listed ? 'pgQwNone' : 'pgQwNoneOff')}</p>
+            </section>
+        );
+    }
     const price = live ?? q.price_at_publish ?? null;
+    const book = monthlyBookState(monthly, ticker);   // m3o_books.json decides; the row's own book fields are not read
     const upside = q.valued && q.value_base != null && price ? q.value_base / price - 1 : null;
     return (
         <section className="mt-4 border-l-2 border-accent px-4 py-3 text-[13px] leading-relaxed text-ink">
@@ -50,14 +61,19 @@ export function QwenPanel({ ticker, live }: { ticker: string; live: number | nul
                     {upside != null && <span className={upside >= 0 ? ' text-pos' : ' text-neg'}> {pct(upside)}</span>}
                 </p>
             ) : (
-                <p className="mt-1 text-[12px] text-ink-2">{fill(t('pgQwNoValue'), { reason: q.no_value_reason ?? DASH })}</p>
+                <p className="mt-1 text-[12px] text-ink-2">
+                    {fill(t(q.analysis === 'not run' ? 'pgQwNotRun' : 'pgQwNoValue'), { reason: plainNoValueReason(q.no_value_reason) ?? DASH })}
+                </p>
             )}
             {q.valued && q.far_from_price && <p className="font-mono text-[11px] text-warn">{t('pgQwFar')}</p>}
             {q.valued && q.seeds_agree === false && <p className="font-mono text-[11px] text-ink-3">{t('pgQwSeeds')}</p>}
             {q.share_unit_note && <p className="font-mono text-[11px] text-ink-3">{q.share_unit_note}</p>}
 
             <p className="mt-1 text-[12px] text-ink-2">
-                {fill(t('pgQwBook'), { code: q.in_code_book ? t('pgQwYes') : t('pgQwNo'), qwen: q.qwen_book ?? DASH })}
+                {fill(t('pgQwBook'), {
+                    code: book.code == null ? DASH : book.code ? t('pgQwYes') : t('pgQwNo'),
+                    qwen: book.qwen == null ? DASH : book.qwen === 'held' ? t('pgQwYes') : book.qwen === 'cash' ? t('pgQwCash') : t('pgQwNo'),
+                })}
             </p>
             {q.flags.length > 0 && (
                 <ul className="mt-1 list-disc pl-5 text-[12px] text-warn">

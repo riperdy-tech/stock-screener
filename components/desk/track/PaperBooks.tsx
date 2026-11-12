@@ -1,6 +1,6 @@
 'use client';
 
-// The paper books: AI book (rn_depth), the interim Gemini book (rn_gemini, when present), Control (equal) and My book. Returns come after the
+// The paper books: Qwen book and Code book (monthly), the old AI book (rn_depth, stopped), the interim Gemini book (rn_gemini, when present), Control (equal) and My book. Returns come after the
 // scoreboard on purpose. CAGR and Sharpe stay hidden until a book has MIN_OBS_FOR_RATIOS observations.
 
 import React from 'react';
@@ -10,7 +10,7 @@ import { useLanguage } from '@/components/LanguageContext';
 import { recentErrorAlerts } from '@/lib/desk/health';
 import { fill } from '@/lib/desk/text';
 import {
-    bookStats, cashSince, fmtPlainPct, fmtPt, fmtRet, ratiosMeaningful, toneClass,
+    bookStart, bookStats, cashSince, fmtPlainPct, fmtPt, fmtRet, ratiosMeaningful, toneClass,
     type BookStats, type LedgerBook,
 } from '@/lib/desk/trackBooks';
 
@@ -55,11 +55,13 @@ function StatGrid({ s }: { s: BookStats }) {
     );
 }
 
-function Column({ title, note, children }: { title: string; note?: string; children: React.ReactNode }) {
+function Column({ title, note, since, children }: { title: string; note?: string; since?: string | null; children: React.ReactNode }) {
+    const { t } = useLanguage();
     return (
         <div className="min-w-0 border-t-2 border-ink pt-3">
             <h3 className="text-[15px] font-semibold text-ink">{title}</h3>
             {note && <p className="mt-0.5 text-[12px] text-ink-2">{note}</p>}
+            {since && <p className="mt-0.5 font-mono text-[11px] text-ink-3">{fill(t('trkSince'), { date: since })}</p>}
             {children}
         </div>
     );
@@ -87,30 +89,30 @@ export function PaperBooks({ ledgers, loggedIn }: {
         <TrackSection title={t('trkBooksTitle')}>
             <div className={clsx('mt-5 grid grid-cols-1 gap-x-8 gap-y-8', (gemini || v4 || qwen || code) ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3')}>
                 {qwen && (
-                    <Column title={t('trkQwenBook')} note={t('trkQwenNote')}>
+                    <Column title={t('trkQwenBook')} note={t('trkQwenNote')} since={bookStart(books.qwen_book)}>
                         <StatGrid s={qwen} />
                     </Column>
                 )}
                 {code && (
-                    <Column title={t('trkCodeBook')} note={t('trkCodeNote')}>
+                    <Column title={t('trkCodeBook')} note={t('trkCodeNote')} since={bookStart(books.code_book)}>
                         <StatGrid s={code} />
                     </Column>
                 )}
-                <Column title={t('trkAiBook')} note={t('trkAiNote')}>
+                <Column title={t('trkAiBook')} note={t('trkAiNote')} since={bookStart(books.rn_depth)}>
                     {aiStats ? <StatGrid s={aiStats} /> : <p className="mt-4 text-[12px] text-ink-3">—</p>}
                     {cash && <p className="mt-3 font-mono text-[11px] text-ink-2">{fill(t('trkCashSince'), { date: cash })}</p>}
                 </Column>
                 {gemini && (
-                    <Column title={t('trkGeminiBook')} note={t('trkGeminiNote')}>
+                    <Column title={t('trkGeminiBook')} note={t('trkGeminiNote')} since={bookStart(books.rn_gemini)}>
                         <StatGrid s={gemini} />
                     </Column>
                 )}
                 {v4 && (
-                    <Column title={t('trkV4Book')} note={t('trkV4Note')}>
+                    <Column title={t('trkV4Book')} note={t('trkV4Note')} since={bookStart(books.rn_v4)}>
                         <StatGrid s={v4} />
                     </Column>
                 )}
-                <Column title={t('trkControl')} note={t('trkControlNote')}>
+                <Column title={t('trkControl')} note={t('trkControlNote')} since={bookStart(books.equal)}>
                     {control ? <StatGrid s={control} /> : <p className="mt-4 text-[12px] text-ink-3">—</p>}
                 </Column>
                 <Column title={t('trkMyBook')} note={loggedIn && mine ? t('trkMyBookNote') : undefined}>

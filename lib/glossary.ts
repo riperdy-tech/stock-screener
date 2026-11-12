@@ -522,7 +522,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'Whether the written “what would prove me wrong” conditions still hold.',
         definition:
-            'Each rebuilt-analyst verdict states its own invalidation rules in advance: checkable conditions that, if they happen, mean the thesis is broken. The stock page lists each rule with its threshold, its window and its current value. Intact = the rules were checked and none has fired; breached = at least one has; unknown = none could be checked. The daily follow-up re-checks the rules; it is built but not live yet, so until it is, a thesis may read unknown.',
+            'Each rebuilt-analyst verdict states its own invalidation rules in advance: checkable conditions that, if they happen, mean the thesis is broken. The stock page lists each rule with its threshold, its window and its current value. Intact = the rules were checked and none has fired; breached = at least one has; unknown = none could be checked. The daily follow-up would re-check the rules; it is not running, so a thesis may read unknown.',
         related: ['follow-up', 'actionable'],
     },
 
@@ -715,9 +715,9 @@ export const GLOSSARY: Record<string, TermDef> = {
     'rn-depth': {
         term: 'AI book (rn_depth)',
         category: 'track',
-        plain: 'The paper book that follows the AI analyst’s passing verdicts.',
+        plain: 'The paper book that followed the earlier analyst’s passing verdicts. Stopped.',
         definition:
-            'One of the three paper books. It holds equal amounts of every name on the list whose verdict is undervalued and passes the gate — and, once the daily follow-up is live, whose buying is not paused and whose entry timing says buy now. When no verdict passes, it holds only cash. Its history so far comes from the old analyst, which was ruled invalid, so the AI record restarts from zero when the rebuilt analyst goes live and the old history is archived (see Record reset).',
+            'It held equal amounts of every name on the list whose verdict was undervalued and passed the gate. The earlier analyst was stopped in October 2026 after it was ruled invalid, so the book holds only cash and its record allows no conclusion. It is shown on the Track page as the old AI book. It is not the Qwen book, which follows the monthly picks (see Record reset).',
         related: ['actionable', 'track-record', 'record-reset', 'control-book'],
     },
 
@@ -799,7 +799,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'data',
         plain: 'The ordered chain of steps from raw data to a graded record.',
         definition:
-            'The end-to-end chain: the macro backdrop → the screener (safety filters, three doors, bands) → the AI analyst → the gate → the daily follow-up (built, not live yet) → grading and the paper books. Each step hands the next only a data file. The scoring part runs in a fixed order with integrity checks, so stale or partial data cannot quietly corrupt the list.',
+            'The end-to-end chain: the macro backdrop → the screener (safety filters, three doors, bands) → the AI analyst → the gate → the daily follow-up (being rebuilt, not running) → grading and the paper books. The analyst step is Qwen reading filings; the gate belonged to the earlier verdict analyst, which is stopped. Each step hands the next only a data file. The scoring part runs in a fixed order with integrity checks, so stale or partial data cannot quietly corrupt the list.',
         related: ['github-actions', 'reverse-engine'],
     },
     'reverse-engine': {
@@ -941,7 +941,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'New buying is on hold while something is pending. Never a sell.',
         definition:
-            'Set by the daily follow-up while a break condition, a floor event, a re-analysis or an “avoid” timing call is pending against a verdict. If the follow-up data is older than 36 hours or missing, the name is treated as paused, never as buyable. Buy paused never means sell: a held name is removed only by a new verdict. The follow-up is built but not live yet.',
+            'Set by the daily follow-up while a break condition, a floor event, a re-analysis or an “avoid” timing call is pending against a verdict. If the follow-up data is older than 36 hours or missing, the name is treated as paused, never as buyable. Buy paused never means sell: a held name is removed only by a new verdict. The follow-up is being rebuilt and is not running.',
         related: ['follow-up', 'waiting', 'reanalysis-queued'],
     },
     'follow-up': {
@@ -949,7 +949,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'The daily check of each held or candidate name against its own watch-list.',
         definition:
-            'Every verdict ends with a watch-list of conditions to look for. Each day the follow-up checks every held name and every buy candidate against new filings, news and the value band. It decides only one thing: re-analyse now, or nothing new. It never sells and never changes a verdict itself. “What we’re watching” on the stock page lists the watch items with their evidence. The follow-up is built and in acceptance testing, but not live yet.',
+            'Every verdict ends with a watch-list of conditions to look for. Each day the follow-up checks every held name and every buy candidate against new filings, news and the value band. It decides only one thing: re-analyse now, or nothing new. It never sells and never changes a verdict itself. “What we’re watching” on the stock page lists the watch items with their evidence. The follow-up was built in October and never switched on; it is being rebuilt and is not running.',
         related: ['code-floor', 'reanalysis-queued', 'buy-paused', 'thesis-status'],
     },
     'code-floor': {
@@ -987,17 +987,17 @@ export const GLOSSARY: Record<string, TermDef> = {
     'rebuilt-analyst': {
         term: 'Old analyst / rebuilt analyst',
         category: 'ai',
-        plain: 'Which generation of the analyst wrote a verdict.',
+        plain: 'Which generation of the earlier verdict analyst wrote a verdict.',
         definition:
-            'The first analyst was ruled invalid and replaced. Its verdicts carry the gate reason “made by the old analyst”, are kept off the desk, and remain on each stock page under verdict history. The rebuilt analyst’s verdicts are stamped with a pack revision and a gate version. Today the rebuilt analyst has started publishing its first verdicts, and none of them passes the gate yet.',
+            'The first verdict analyst was ruled invalid and replaced. Its verdicts carry the gate reason “made by the old analyst”, are kept off the desk, and remain on each stock page under verdict history. A rebuilt version published a few first verdicts in October, stamped with a pack revision and a gate version, none of which passed the gate. The verdict analyst was then stopped in October 2026. Qwen, which reads filings and does not issue verdicts, is the analyst that is live today.',
         related: ['record-reset', 'gate-reason', 'actionable'],
     },
     'record-reset': {
         term: 'Record reset',
         category: 'track',
-        plain: 'The moment the AI paper record restarts from zero.',
+        plain: 'A planned restart of the AI paper record that did not happen.',
         definition:
-            'Because the analyst was replaced, the AI book’s record restarts from zero when the rebuilt analyst goes live. The previous record, made by the old analyst, is archived and stays viewable as “Archived record · old analyst”; the new record starts as “Since go-live”. It has not happened yet.',
+            'It was planned that the AI book’s record would restart from zero when a rebuilt verdict analyst went live. That analyst was stopped instead, so there was no restart. The old AI book stays on the Track page, labelled as the stopped analyst’s. The Code book and the Qwen book, which began on 6 November 2026, are separate records.',
         related: ['rn-depth', 'rebuilt-analyst', 'track-record'],
     },
     'graded-pending': {
@@ -1029,7 +1029,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'track',
         plain: 'The system’s own status line about its performance.',
         definition:
-            'Nothing in this system has been shown to beat the market. The paper records are short, the verdicts graded so far come from the old analyst, and none of the rebuilt analyst’s verdicts passes the gate yet. The site shows counts — graded and pending — rather than a headline, and nothing here should be read as proof.',
+            'Nothing in this system has been shown to beat the market. The paper records are short, the verdicts graded so far come from the earlier analyst, which was ruled invalid, and Qwen has not been graded on returns. The site shows counts — graded and pending — rather than a headline, and nothing here should be read as proof.',
         related: ['graded-pending', 'observations', 'track-record'],
     },
 };

@@ -13,6 +13,7 @@ import { fmtMoney } from '@/lib/desk/format';
 import { fill } from '@/lib/desk/text';
 import { buildRows, type DeskRow } from '@/lib/desk/rankings';
 import { livePrice } from '@/lib/desk/rowText';
+import { onList } from '@/lib/desk/sections';
 import { gateReasonLabel } from '@/lib/desk/tone';
 import { rebuiltVerdict } from '@/lib/desk/verdict';
 import { useDeskData } from '@/lib/desk/useDeskData';
@@ -114,9 +115,14 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
     if (deltaText && !reasons.includes('mode_instability')) glossed.push(deltaText);
     const fu = d ? followupWarning(d) : null;
     const ind = row.info?.industry;
-    const priceNote = live != null && atVerdict != null && Math.abs(live - atVerdict) >= 0.005
+    // The price is the engine's (stocks.json); say which session it is for, and when this name's own last price is older.
+    const sessionNote = live == null || !data.priceSession ? null
+        : row.info?.priceOlderThan
+            ? fill(t('pgPriceOlder'), { at: row.info.priceOlderThan, asof: data.priceSession })
+            : fill(t('pgPriceSession'), { at: data.priceSession });
+    const priceNote = sessionNote ?? (live != null && atVerdict != null && Math.abs(live - atVerdict) >= 0.005
         ? fill(t('pgLiveAsOf'), { at: data.pricesAsOf ? data.pricesAsOf.slice(5, 16) : DASH })
-        : d?.price_asof ? fill(t('pgPriceAsOf'), { at: mmdd(d.price_asof), src: d.price_source ?? DASH }) : null;
+        : d?.price_asof ? fill(t('pgPriceAsOf'), { at: mmdd(d.price_asof), src: d.price_source ?? DASH }) : null);
 
     return shell(
         <div className="pb-6">
@@ -151,13 +157,13 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 </p>
             )}
 
-            <QwenPanel ticker={row.ticker} live={live} />
+            <QwenPanel ticker={row.ticker} live={live} listed={onList(row)} monthly={data.monthly} />
             {data.gemini[row.ticker] && <GeminiPanel g={data.gemini[row.ticker]} />}
             <MacroEventsPanel p={data.macroEvents} ticker={row.ticker} sector={row.info?.sector} />
 
             <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
                 <StockLeft row={row} d={d} mode={mode} bundle={bundle} live={live} atVerdict={atVerdict} blocked={blocked} />
-                <StockRight row={row} d={d} mode={mode} blocked={blocked} ledgers={data.ledgers} live={live} />
+                <StockRight row={row} d={d} mode={mode} blocked={blocked} ledgers={data.ledgers} live={live} monthly={data.monthly} />
             </div>
         </div>,
     );

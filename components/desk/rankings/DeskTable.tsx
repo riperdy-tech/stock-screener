@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import { useLanguage } from '@/components/LanguageContext';
 import { fmtMcap } from '@/lib/desk/format';
 import { fill } from '@/lib/desk/text';
+import { plainNoValueReason } from '@/lib/desk/qwenText';
 import { doorOf } from '@/lib/desk/doors';
 import { verdictWord } from '@/lib/desk/filters';
 import type { DeskSections } from '@/lib/desk/sections';
@@ -186,7 +187,7 @@ function qwenCells(t: T, r: DeskRow) {
         when: ran ? fmtMdDate(q.date) : t('dqNotRun'),
         whenWarn: !ran,
         value: q.valued ? usd(q.value_base) : t('dqNotValued'),
-        range: q.valued ? `${usd(q.value_bear)} to ${usd(q.value_bull)}` : (q.no_value_reason ?? null),
+        range: q.valued ? `${usd(q.value_bear)} to ${usd(q.value_bull)}` : plainNoValueReason(q.no_value_reason),
         gap: upside == null ? DASH : signedPct(upside * 100, 0),
         gapColor: upside == null ? TONE_COLORS.MUTED : q.far_from_price ? 'var(--warn)' : upside >= 0 ? 'var(--pos)' : 'var(--neg)',
         claims: q.claims != null ? `${q.claims_supported ?? 0}/${q.claims}` : DASH,

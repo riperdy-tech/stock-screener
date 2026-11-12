@@ -11,13 +11,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import {
-    fetchChainManifest, fetchDepthOutcomes, fetchDepthOverlay, fetchFactorScores, fetchGeminiOverlay, fetchMacroEvents, fetchMriCostOfCapital,
+    fetchChainManifest, fetchDepthOutcomes, fetchEnginePrices, fetchDepthOverlay, fetchFactorScores, fetchGeminiOverlay, fetchMacroEvents, fetchMonthlyBooks, fetchMriCostOfCapital,
     fetchMriRegime, fetchOverlaySignals,
     fetchPaperLedgers, fetchQwenOverlay, fetchStocks,
     fetchValuationModels,
-    type ChainManifest, type DepthOverlayPayload, type DepthVerdict, type FactorScoresPayload,
+    type ChainManifest, type DepthOverlayPayload, type EnginePrices, type DepthVerdict, type FactorScoresPayload,
     type GeminiOverlayPayload, type GeminiVerdict, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
-    type QwenOverlayPayload, type QwenOverlayRow,
+    type MonthlyBooksPayload, type QwenOverlayPayload, type QwenOverlayRow,
 } from '@/lib/data-service';
 
 export interface StockInfo {
@@ -29,6 +29,8 @@ export interface StockInfo {
     /** Screener metrics for the Key financials panel. Sparse — roughly 49–99%
      *  populated depending on the field, so every cell there null-guards. */
     metrics: StockMetrics;
+    /** The row's own last price date when it is older than the priced session (stocks.json `price_older_than_asof`), else null. */
+    priceOlderThan: string | null;
 }
 
 /**
@@ -66,6 +68,8 @@ export interface DeskData {
     gemini: Record<string, GeminiVerdict>;
     /** Qwen's analysis by ticker (qwen_overlay.json, operator 2026-11-06): the Desk's AI column. Empty when the file is absent. */
     qwen: Record<string, QwenOverlayRow>;
+    /** The monthly Code and Qwen books of record (m3o_books.json). Null when the file is absent. */
+    monthly: MonthlyBooksPayload | null;
     /** MRI news candidates index (display only). Null when the file is absent. */
     macroEvents: MacroEventsPayload | null;
     ledgers: any | null;
@@ -74,15 +78,17 @@ export interface DeskData {
     manifest: ChainManifest | null;
     regime: MriRegime | null;
     anchor: MriCostOfCapital | null;
-    /** Newest per-row quote stamp in stocks.csv ("YYYY-MM-DD HH:mm"), null when none. */
+    /** The session the prices are for: the engine's price file when it says (`YYYY-MM-DD`), else the newest per-row quote stamp in stocks.csv ("YYYY-MM-DD HH:mm"). Null when none. */
     pricesAsOf: string | null;
+    /** The priced session from the engine's price file only; null when that file did not say. */
+    priceSession: string | null;
 }
 
 const EMPTY: DeskData = {
     factor: null, valuations: {}, overlay: {},
-    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, gemini: {}, qwen: {}, macroEvents: null,
+    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, gemini: {}, qwen: {}, monthly: null, macroEvents: null,
     ledgers: null, stockInfo: {},
-    manifest: null, regime: null, anchor: null, pricesAsOf: null,
+    manifest: null, regime: null, anchor: null, pricesAsOf: null, priceSession: null,
 };
 
 // ── module-level promise cache ────────────────────────────────────────────
@@ -118,12 +124,17 @@ function latestQuoteStamp(rows: { lastUpdated?: string }[] | undefined): string 
     return latest;
 }
 
+/** What the shell shows as "prices as of": the engine's priced session when the file says it, else the newest CSV quote stamp. */
+function priceStamps(csv: { lastUpdated?: string }[] | undefined, ep: EnginePrices | null) {
+    return { pricesAsOf: ep?.asof ?? latestQuoteStamp(csv), pricesRefreshedAt: ep?.refreshedAt ?? null };
+}
+
 async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> {
     // The status files are optional context: a failure in one resolves to null and never rejects
     // the bag, so the verdict list still renders.
     const optional = <T,>(key: string, loader: () => Promise<T | null>) =>
         cached(key, loader).catch(() => null as T | null);
-    const [f, v, ov, pl, s, dp, manifest, regime, anchor, gm, me, qw] = await Promise.all([
+    const [f, v, ov, pl, s, dp, manifest, regime, anchor, gm, me, qw, mb, ep] = await Promise.all([
         cached('factor', fetchFactorScores),
         cached('valuations', fetchValuationModels),
         cached('overlay', fetchOverlaySignals),
@@ -136,6 +147,8 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         optional('gemini', fetchGeminiOverlay),
         optional('macroEvents', fetchMacroEvents),
         optional('qwen', fetchQwenOverlay),
+        optional('monthly', fetchMonthlyBooks),
+        optional('enginePrices', fetchEnginePrices),
     ]);
 
     const stockInfo: Record<string, StockInfo> = {};
@@ -143,7 +156,9 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         if (row.symbol) {
             stockInfo[row.symbol] = {
                 name: row.name, sector: row.sector, industry: row.industry,
-                price: row.price, marketCap: row.marketCap,
+                // The engine's price file wins; the CSV price is kept only for a name it does not carry (or when it did not load).
+                price: ep?.rows[row.symbol]?.price ?? row.price, marketCap: row.marketCap,
+                priceOlderThan: ep?.rows[row.symbol]?.olderThan ?? null,
                 // fetchStocks zero-fills missing numbers; 0 is not a real ratio for
                 // any of these, so it is normalised back to null for the panel.
                 metrics: {
@@ -181,11 +196,13 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         },
         gemini: (gm as GeminiOverlayPayload | null)?.tickers ?? {},
         qwen: (qw as QwenOverlayPayload | null)?.tickers ?? {},
+        monthly: (mb as MonthlyBooksPayload | null) ?? null,
         macroEvents: (me as MacroEventsPayload | null) ?? null,
         ledgers: pl,
         stockInfo,
         manifest, regime, anchor,
-        pricesAsOf: latestQuoteStamp(s?.data as { lastUpdated?: string }[] | undefined),
+        pricesAsOf: priceStamps(s?.data as { lastUpdated?: string }[] | undefined, ep).pricesAsOf,
+        priceSession: ep?.asof ?? null,
     };
 }
 
@@ -199,10 +216,12 @@ export interface DeskStatus {
     regime: MriRegime | null;
     anchor: MriCostOfCapital | null;
     pricesAsOf: string | null;
+    /** When the post-close price refresh last ran, null when the file does not say. */
+    pricesRefreshedAt: string | null;
 }
 
 const EMPTY_STATUS: DeskStatus = {
-    factor: null, depth: null, qwen: null, ledgers: null, manifest: null, regime: null, anchor: null, pricesAsOf: null,
+    factor: null, depth: null, qwen: null, ledgers: null, manifest: null, regime: null, anchor: null, pricesAsOf: null, pricesRefreshedAt: null,
 };
 
 /**
@@ -224,8 +243,11 @@ export function useDeskStatus(): DeskStatus {
             cached('manifest', fetchChainManifest).then((manifest) => put({ manifest })).catch(() => { });
             cached('regime', fetchMriRegime).then((regime) => put({ regime })).catch(() => { });
             cached('anchor', fetchMriCostOfCapital).then((anchor) => put({ anchor })).catch(() => { });
-            cached('stocks', () => fetchStocks('US'))
-                .then((s) => put({ pricesAsOf: latestQuoteStamp(s?.data as { lastUpdated?: string }[] | undefined) }))
+            Promise.all([
+                cached('stocks', () => fetchStocks('US')),
+                cached('enginePrices', fetchEnginePrices).catch(() => null),
+            ])
+                .then(([s, ep]) => put(priceStamps(s?.data as { lastUpdated?: string }[] | undefined, ep)))
                 .catch(() => { });
         };
         run();
@@ -311,17 +333,19 @@ export function useDeskData() {
 
     useEffect(() => { load(); }, [load]);
 
-    // Real-time background sweep listener: polls every 25s + on window focus.
-    // When a new depth run finishes in orchestrate_depth.py and pushes to production,
-    // this immediately catches the new generated_at timestamp and refreshes the desk.
+    // Background listener: polls every 25s + on window focus. It reads the small chain manifest (a few KB), not a data
+    // file, and reloads the desk only when the manifest's run changes, i.e. when a chain run has published new data.
+    const manifestKey = data.manifest?.run_id ?? data.manifest?.finished_at ?? null;
     useEffect(() => {
         let active = true;
         const checkSweepUpdate = async () => {
+            if (loading) return;
             try {
-                const res = await fetch(`/data/depth_overlay.json?t=${Date.now()}`);
+                const res = await fetch(`/data/chain_manifest.json?t=${Date.now()}`);
                 if (!res.ok) return;
                 const fresh = await res.json();
-                if (active && fresh && fresh.generated_at && fresh.generated_at !== data.depthMeta.generated_at) {
+                const key = fresh?.run_id ?? fresh?.finished_at ?? null;
+                if (active && key && key !== manifestKey) {
                     invalidateDeskCache();
                     await load();
                 }
@@ -336,7 +360,7 @@ export function useDeskData() {
             clearInterval(interval);
             window.removeEventListener('focus', onFocus);
         };
-    }, [data.depthMeta.generated_at, load]);
+    }, [manifestKey, loading, load]);
 
     // The private `mine` book is RLS-scoped, so it re-attaches on every auth change.
     useEffect(() => {

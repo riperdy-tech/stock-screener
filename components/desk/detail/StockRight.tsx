@@ -16,7 +16,7 @@ import { onList } from '@/lib/desk/sections';
 import { DATA_NOTES, FAMILY, FORENSIC_WARNINGS, TONE_COLORS } from '@/lib/desk/tone';
 import { vetoCodeOf, vetoFallback, vetoKey } from '@/lib/desk/veto';
 import {
-    bookMembership, keyFinancials, verdictHistory, verdictWordKey, type LedgersLike, type StockMode,
+    bookMembership, keyFinancials, verdictHistory, verdictWordKey, type LedgersLike, type MonthlyBooksLike, type StockMode,
 } from '@/lib/desk/stockPage';
 import type { DeskVerdict } from '@/lib/desk/verdict';
 import { DoorMark } from '../rankings/DeskParts';
@@ -207,9 +207,9 @@ function History({ d }: { d: DeskVerdict | undefined }) {
     );
 }
 
-function Books({ ledgers, ticker, live }: { ledgers: LedgersLike | null; ticker: string; live: number | null }) {
+function Books({ ledgers, ticker, live, monthly }: { ledgers: LedgersLike | null; ticker: string; live: number | null; monthly: MonthlyBooksLike | null }) {
     const { t } = useLanguage();
-    const held = bookMembership(ledgers, ticker, live);
+    const held = bookMembership(ledgers, ticker, live, monthly);
     return (
         <Sec title={t('pgBooks')} className="mt-6">
             {held.length === 0 ? (
@@ -234,13 +234,14 @@ function Books({ ledgers, ticker, live }: { ledgers: LedgersLike | null; ticker:
     );
 }
 
-export function StockRight({ row, d, mode, blocked, ledgers, live }: {
+export function StockRight({ row, d, mode, blocked, ledgers, live, monthly }: {
     row: DeskRow;
     d: DeskVerdict | undefined;
     mode: StockMode;
     blocked: boolean;
     ledgers: LedgersLike | null;
     live: number | null;
+    monthly: MonthlyBooksLike | null;
 }) {
     const { t } = useLanguage();
     // History shows the overlay row whether or not the rebuilt analyst made it (old rows greyed, tagged).
@@ -252,7 +253,7 @@ export function StockRight({ row, d, mode, blocked, ledgers, live }: {
             <Sec title={t('pgChart')} className="mt-6"><PriceChart ticker={row.ticker} d={d} blocked={blocked} /></Sec>
             <KeyFinancialsBlock row={row} />
             <History d={historyRow} />
-            <Books ledgers={ledgers} ticker={row.ticker} live={live} />
+            <Books ledgers={ledgers} ticker={row.ticker} live={live} monthly={monthly} />
         </div>
     );
 }
