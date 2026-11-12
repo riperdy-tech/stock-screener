@@ -415,3 +415,25 @@ def test_main_probe_alone_sends_no_probe_order(harness, monkeypatch):
     monkeypatch.setenv("KIS_PROBE_DOMESTIC_ORDER", "1")
     harness("false", argv=["--env", "paper", "--ledger", "rn_depth", "--probe"])
     assert ProbeKIS.probes == [] and FakeKIS.orders == []
+
+
+# ------------------------------------------- SF4 item 6: --flow takes a number and nothing else
+@pytest.mark.parametrize("raw", ["0 --execute", "0 --execute --confirm-real", "--execute", "nan", "inf",
+                                 "-inf", "1e3", "5; rm -rf", "", " ", "0x10", "1,000", "$5", ".5", "5."])
+def test_flow_rejects_anything_but_a_plain_number(harness, raw):
+    with pytest.raises(SystemExit) as e:
+        harness("false", argv=["--env", "paper", "--ledger", "rn_depth", "--flow", raw])
+    assert e.value.code == 2
+    assert FakeKIS.orders == []
+
+
+@pytest.mark.parametrize("raw,val", [("0", 0.0), ("-500", -500.0), ("250.5", 250.5), ("+12", 12.0),
+                                     ("0.0", 0.0)])
+def test_flow_accepts_a_plain_number(raw, val):
+    assert sync.flow_usd_arg(raw) == val
+
+
+def test_workflow_validates_and_quotes_flow_usd():
+    wf = (REPO / ".github" / "workflows" / "kis-sync.yml").read_text(encoding="utf-8")
+    assert '--flow "$FLOW_USD"' not in wf and "--flow $FLOW_USD" not in wf, "unquoted flag injection"
+    assert "--flow=" in wf and "FLOW_USD" in wf and "=~" in wf

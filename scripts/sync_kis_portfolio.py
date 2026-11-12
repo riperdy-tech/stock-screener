@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from datetime import datetime, timezone
@@ -166,6 +167,14 @@ def plan_table(plan, order_cd) -> list[str]:
     return lines
 
 
+def flow_usd_arg(raw):
+    """--flow value: a plain decimal number (digits, optional sign and fraction) and nothing
+    else, so free text from a dispatch input can never ride in as a second flag."""
+    if not re.fullmatch(r"[+-]?\d+(\.\d+)?", raw):
+        raise argparse.ArgumentTypeError(f"--flow takes a plain number, got {raw!r}")
+    return float(raw)
+
+
 def run_probe(client, execute=False, confirm_real=False):
     """Read-only diagnostics. Answers: is the account KRW-seeded, does it have
     USD, and does KIS think we can actually buy anything? The one exception is
@@ -301,7 +310,7 @@ def main():
     # (see reconcile_flow). Use this to correct a misread, or to force 0 when the
     # detector fires on something that was not a transfer. One-shot on purpose:
     # a repo variable left set would re-apply the same flow every run.
-    ap.add_argument("--flow", type=float, default=float(os.environ.get("KIS_FLOW_USD") or 0),
+    ap.add_argument("--flow", type=flow_usd_arg, default=float(os.environ.get("KIS_FLOW_USD") or 0),
                     help="OVERRIDE the flow detector for this run. USD crossing "
                          "the sleeve: +deposit or KRW->USD 환전, -withdrawal or "
                          "USD->KRW. Normally unnecessary — detection is automatic")

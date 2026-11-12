@@ -325,7 +325,16 @@ jobs:
             [ "${{ inputs.dd_rebase }}" = "true" ] && FLAGS="$FLAGS --dd-rebase"
             # Dispatch-only, deliberately not a repo variable: a variable left
             # set would re-apply the same flow on every subsequent run.
-            [ -n "$FLOW_USD" ] && FLAGS="$FLAGS --flow $FLOW_USD"
+            if [ -n "$FLOW_USD" ]; then
+              # A number only: free text here would be split into extra flags below
+              # (`0 --execute` placed orders without the REAL MONEY phrase). The script
+              # validates again in its argument parser.
+              if ! [[ "$FLOW_USD" =~ ^[+-]?[0-9]+(\.[0-9]+)?$ ]]; then
+                echo "::error::flow_usd must be a plain number (e.g. 0, 250, -500.5); refusing to run."
+                exit 1
+              fi
+              FLAGS="$FLAGS --flow=$FLOW_USD"
+            fi
           fi
           # --confirm-real for a scheduled/as_scheduled real run still gated by the
           # repo variable; for a manual real run the guard step enforced the phrase.
