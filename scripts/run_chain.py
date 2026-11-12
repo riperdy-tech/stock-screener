@@ -75,19 +75,29 @@ def run_step(name, args, steps, env_note=""):
 
 
 def read_scan_log(path):
-    """The last "Scan Complete. Processed N. Passed P. Skipped M." line of fetch_data.py's log.
+    """The last "Scan Complete. Processed N. Passed P. Skipped M." line of fetch_data.py's log,
+    and the state of the bulk source (defeatbeta) from its load lines: the date it last loaded,
+    the date of the first failure after that, and whether its latest event is a failure.
     None when the log is missing; the counts are None when it holds no summary (an absence,
     not a zero)."""
     try:
         f = open(path, "rb")
     except OSError:
         return None
-    scan = {"processed": None, "skipped": None, "at": None}
+    scan = {"processed": None, "skipped": None, "at": None,
+            "bulk_down": False, "bulk_last_ok": None, "bulk_first_fail": None}
     pat = re.compile(rb"^(\d{4}-\d\d-\d\d \d\d:\d\d:\d\d)\S* .*Scan Complete\. Processed (\d+)\. "
                      rb"Passed (\d+)\. Skipped (\d+)\.")
     with f:
         for line in f:
-            if b"Scan Complete" in line:
+            if b"defeatbeta loaded" in line:
+                scan.update(bulk_down=False, bulk_first_fail=None,
+                            bulk_last_ok=line[:10].decode(errors="replace"))
+            elif b"defeatbeta load failed" in line or b"defeatbeta unavailable" in line:
+                if not scan["bulk_down"]:
+                    scan["bulk_first_fail"] = line[:10].decode(errors="replace")
+                scan["bulk_down"] = True
+            elif b"Scan Complete" in line:
                 m = pat.match(line)
                 if m:
                     scan.update(at=m.group(1).decode(), processed=int(m.group(2)),
@@ -118,6 +128,11 @@ def add_fetch_invariants(invariants, stocks, scan, now):
                   age is not None and age <= MAX_STOCKS_AGE_DAYS,
                   "no row carries Last_Updated" if age is None else
                   f"newest row Last_Updated is {age:.1f} days old (max {MAX_STOCKS_AGE_DAYS})")
+    if scan and scan.get("bulk_down"):
+        add_invariant(invariants, "bulk_source_available", "soft", False,
+                      f"bulk source (defeatbeta) unavailable: last loaded {scan.get('bulk_last_ok') or 'never in this log'}, "
+                      f"failing since {scan.get('bulk_first_fail')}; every scan is the slow Yahoo path and the "
+                      f"20-day dollar volume and daily detail rebuild it fills are not refreshed")
     processed = scan.get("processed") if scan else None
     skipped = scan.get("skipped") if scan else None
     counts = {"processed": processed, "skipped": skipped,

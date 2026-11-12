@@ -235,6 +235,11 @@ def carry_sec_growth(detail, cached_detail):
     return {k: cm.get(k) for k in SEC_GROWTH_KEYS}
 
 # ── defeatbeta bulk source (Yahoo-quota killer, 2026-07-10) ────────────────────
+# NOT THE NORMAL PATH TODAY: the dataset has answered HTTP 404 since 2026-09-17 (last good load
+# 2026-09-11), so DBETA is None and every run is the full legacy yfinance scan (about 2.5 h).
+# The code path stays in case the source returns; run_chain.py raises the soft invariant
+# "bulk_source_available" from scan.log while it is down. What only the bulk path fills (the
+# 20-day dollar volume, the daily rebuild of financials/{T}.json) is not refreshed meanwhile.
 # Daily-refreshed parquet mirror of Yahoo data on Hugging Face (verified
 # value-identical vs our cached financials/{T}.json). Names with a fresh price
 # there skip Yahoo entirely except a weekly 1-request .info refresh (analyst /
@@ -953,7 +958,7 @@ def main():
                 pass
             slot_today = (int(hashlib.md5(ticker.encode()).hexdigest(), 16) % 7) == (datetime.now().toordinal() % 7)
 
-            # BULK PATH (defeatbeta): names with a fresh price in the daily HF
+            # BULK PATH (defeatbeta; DEAD since 2026-09-17, see the note above the import): names with a fresh price in the daily HF
             # dataset get everything locally — price/mcap/statements/monthly
             # closes/EPS — so detail is rebuilt DAILY (fresher than the old
             # weekly TTL). Yahoo is touched only on the weekly slot day for the

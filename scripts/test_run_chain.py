@@ -120,6 +120,16 @@ def test_scan_log_takes_the_last_summary_and_bulk_history(tmp_path):
     ])
     s = rc.read_scan_log(p)
     assert (s["processed"], s["skipped"], s["at"]) == (6554, 5501, "2026-11-06 18:00:34")
+    assert s["bulk_down"] is True and s["bulk_last_ok"] == "2026-09-11"
+    assert s["bulk_first_fail"] == "2026-09-17"
+
+
+def test_scan_log_bulk_back_is_not_down(tmp_path):
+    p = _log(tmp_path, [
+        "2026-09-17 23:38:45,726 - WARNING - defeatbeta load failed (HTTP Error 404) — x",
+        "2026-10-01 10:00:00,000 - INFO - defeatbeta loaded: 6500 priced symbols, max price date 2026-09-30.",
+    ])
+    assert rc.read_scan_log(p)["bulk_down"] is False
 
 
 def test_scan_log_missing_or_empty_is_none_not_zero(tmp_path):
@@ -139,7 +149,8 @@ def _inv(invs, name):
 
 def test_mostly_failed_run_fails_hard():
     invs = []
-    scan = {"processed": 6554, "skipped": 5501, "at": "2026-11-06 18:00:34"}
+    scan = {"processed": 6554, "skipped": 5501, "at": "2026-11-06 18:00:34",
+            "bulk_down": False, "bulk_last_ok": None, "bulk_first_fail": None}
     counts = rc.add_fetch_invariants(invs, [{"Last_Updated": "2026-11-12 11:00"}], scan, NOW)
     inv = _inv(invs, "fetch_skipped_share")
     assert inv["level"] == "hard" and inv["ok"] is False
@@ -148,7 +159,8 @@ def test_mostly_failed_run_fails_hard():
 
 def test_normal_run_passes_and_zero_skipped_is_a_value():
     invs = []
-    scan = {"processed": 6550, "skipped": 0, "at": "x"}
+    scan = {"processed": 6550, "skipped": 0, "at": "x", "bulk_down": False,
+            "bulk_last_ok": None, "bulk_first_fail": None}
     rc.add_fetch_invariants(invs, [{"Last_Updated": "2026-11-12 11:00"}], scan, NOW)
     assert _inv(invs, "fetch_skipped_share")["ok"] is True
 
@@ -160,8 +172,11 @@ def test_no_summary_is_flagged_not_passed():
     assert inv["level"] == "soft" and inv["ok"] is False
 
 
-def test_stale_rows_fail_freshness():
+def test_stale_rows_fail_freshness_and_dead_bulk_is_said_out_loud():
     invs = []
-    scan = {"processed": 100, "skipped": 0, "at": "x"}
+    scan = {"processed": 100, "skipped": 0, "at": "x", "bulk_down": True,
+            "bulk_last_ok": "2026-09-11", "bulk_first_fail": "2026-09-17"}
     rc.add_fetch_invariants(invs, [{"Last_Updated": "2026-10-01 00:00"}], scan, NOW)
     assert _inv(invs, "stocks_json_fresh")["ok"] is False
+    bulk = _inv(invs, "bulk_source_available")
+    assert bulk["level"] == "soft" and bulk["ok"] is False and "2026-09-11" in bulk["detail"]

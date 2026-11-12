@@ -1,9 +1,10 @@
 """refresh_prices.py — overlay LIVE yfinance prices onto stocks.json.
 
-Why this exists: the bulk fetch's price source (defeatbeta) is a once-daily EOD
-mirror — every price it serves is yesterday's close, and when its single
-maintainer skips a publish the whole pipeline falls back to a multi-hour legacy
-scan. This script makes price freshness independent of that: batched
+Why this exists: the bulk fetch's price source (defeatbeta) was a once-daily EOD
+mirror — every price it served was yesterday's close, and when its single
+maintainer skipped a publish the whole pipeline fell back to a multi-hour legacy
+scan. That source has been dead since 2026-09-17 (HTTP 404), so the legacy scan is
+now every run, not the fallback; this script's independence from it is the normal case. This script makes price freshness independent of that: batched
 yf.download for the entire universe (~14 requests for ~7k names, minutes, far
 below the per-ticker .info load that used to hit Yahoo's throttle).
 
