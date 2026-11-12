@@ -200,14 +200,11 @@ jobs:
           # Fail BEFORE committing; score_reverse writes both JSON records.
           python scripts/check_paired_publication.py
           git add public/data/*.csv || true
-          git add public/data/financials/*.json || true
-          git add public/data/reports/*.json || true
+          git add public/data/financials
           git add public/data/stocks.json
           git add public/data/scan.log || true
           git add public/data/cik_map.json || true
           git add public/data/fundamentals_battery.json || true
-          git add public/data/paradigm_scores.json || true
-          git add public/data/paradigm_theme_metrics.json || true
           git add public/data/price_history.json || true
           git add public/data/price_history_missing.txt || true
           git add public/data/eps_trajectory.json || true
@@ -221,13 +218,8 @@ jobs:
           git add public/data/tier1_hygiene_audit.json || true
           git add public/data/factor_signal_log.jsonl || true
           git add public/data/valuation_models.json || true
-          git add public/data/portfolio_plan.json || true
-          git add public/data/portfolio_report.md || true
           git add public/data/paper_ledgers.json || true
           git add public/data/dividends.json || true
-          git add public/data/paradigm_signal_log.jsonl || true
-          git add public/data/paradigm_run_log.jsonl || true
-          git add public/data/paradigm_history.json || true
 
           git add public/data/daily_closes.json || true
           git add public/data/momentum_state.json || true
