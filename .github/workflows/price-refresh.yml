@@ -97,14 +97,17 @@ jobs:
             echo "skipped=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          if python scripts/refresh_prices.py; then
-            echo "skipped=false" >> "$GITHUB_OUTPUT"
-          else
-            # exit 3 = coverage below threshold: snapshot preserved, nothing new
-            # to score. Skip the chain rather than re-scoring identical data.
-            echo "::warning::overlay aborted (coverage/rate limits) — no re-score"
-            echo "skipped=true" >> "$GITHUB_OUTPUT"
+          # exit 3 = no completed session found, or coverage below threshold; exit 4 = too few
+          # names carry the session's bar. Either way stocks.json is untouched (snapshot
+          # preserved) and nothing new is scored — but the run goes RED, with the script's own
+          # ABORT line above, not green.
+          rc=0
+          python scripts/refresh_prices.py || rc=$?
+          if [ "$rc" -ne 0 ]; then
+            echo "::error::refresh_prices.py refused (exit $rc) — see its ABORT line above; stocks.json unchanged, no re-score"
+            exit "$rc"
           fi
+          echo "skipped=false" >> "$GITHUB_OUTPUT"
 
       - name: Re-score on closing prices
         if: steps.overlay.outputs.skipped == 'false'
