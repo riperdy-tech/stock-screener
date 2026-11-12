@@ -49,6 +49,7 @@ from hygiene_thresholds import (
 import depth_conviction
 import tradability
 import peer_paths
+from issuer_securities import secondary_share_classes
 from mri_sync import sync_mri_snapshot
 
 STOCKS_JSON = DATA / "stocks.json"
@@ -1327,6 +1328,22 @@ def apply_band_hysteresis(
     return rn_set, wl_set
 
 
+def nomination_exclusions(
+    scored_profiles: Dict[str, Any],
+    ticker_adv: Dict[str, Optional[float]],
+    ticker_mcap: Dict[str, Optional[float]],
+    ticker_to_cik: Dict[str, str],
+    stock_rows: List[Dict[str, Any]],
+) -> Dict[str, Dict[str, Any]]:
+    """Scored names that stay scored and visible but are not nominated: {ticker: {"flag",
+    "detail"}}. A second share class of a company (WO_SF6 part 2) gets `secondary_share_class`,
+    naming the kept class."""
+    out: Dict[str, Dict[str, Any]] = {}
+    for t, d in secondary_share_classes(ticker_to_cik, stock_rows, scored_profiles, ticker_adv, ticker_mcap).items():
+        out[t] = {"flag": "secondary_share_class", "detail": d}
+    return out
+
+
 def main():
     print("=" * 80)
     print("TIER 2 DUAL-DOOR SIFTER (PROD V2 - CLUSTER GUARDRAILS & CORE/SATELLITE)")
@@ -2138,6 +2155,18 @@ def main():
             get_percentile(p["score_door2"], all_d2) if p["score_door2"] is not None else None,
             d2_ok)
 
+    # Names that stay scored but must not take a nomination slot (WO_SF6): the second share class
+    # of a company. Annotated on the row, never vetoed.
+    cik_map_raw = load_json(DATA / "cik_map.json", {}) or {}
+    not_nominated = nomination_exclusions(scored_profiles, ticker_adv, ticker_mcap,
+                                          cik_map_raw.get("map") or {}, list(stocks.values()))
+    for t, d in not_nominated.items():
+        if d["flag"] not in scored_profiles[t]["fct_flags"]:
+            scored_profiles[t]["fct_flags"].append(d["flag"])
+        scored_profiles[t]["fct_flag_detail"][d["flag"]] = d["detail"]
+    print(f"Not nominated (annotated): {len(not_nominated)} "
+          f"({sum(d['flag'] == 'secondary_share_class' for d in not_nominated.values())} secondary share classes)")
+
     # ── 4. Macro Sector Budgeting via MGI (MRI-11 contract) ──────────────────
     macro_scores_by_id, reported_regime, sector_ranking_meta = load_sector_ranking()
     print(f"Sector ranking source: {sector_ranking_meta['sector_quota_source']} "
@@ -2177,6 +2206,8 @@ def main():
     # ── 5. Nomination Step A: Core Sector Floor with Intra-Sector Guardrails ──
     by_sec: Dict[str, List[Dict[str, Any]]] = {}
     for p in scored_profiles.values():
+        if p["ticker"] in not_nominated:
+            continue
         by_sec.setdefault(p["sector"], []).append(p)
 
     core_nominated: Dict[str, Dict[str, Any]] = {}
@@ -2250,7 +2281,8 @@ def main():
 
     # ── 6. Nomination Step B: Global Wildcards with Hard 18% Ceiling ─────────
     wildcard_target = TOTAL_NOMINATION_TARGET - len(core_nominated)
-    unnominated = [p for p in scored_profiles.values() if p["ticker"] not in core_nominated]
+    unnominated = [p for p in scored_profiles.values()
+                   if p["ticker"] not in core_nominated and p["ticker"] not in not_nominated]
     unnominated.sort(key=lambda x: -(x["best_pctl"] if x.get("best_pctl") is not None else -1.0))
 
     wildcard_nominated: Dict[str, Dict[str, Any]] = {}
@@ -2291,6 +2323,8 @@ def main():
     door3_ineligible_reasons: Dict[str, int] = {}
     door3_candidates: List[Dict[str, Any]] = []
     for t in scored_tickers:
+        if t in not_nominated:
+            continue
         p = scored_profiles[t]
         univ_mom = momentum_parts[t][1]
         if univ_mom is None:
@@ -2533,6 +2567,10 @@ def main():
     rn_set, wl_set = apply_band_hysteresis(
         all_ranked, rank_by_ticker, prev_rn, prev_book, rn_buffer_rank, book_buffer_rank,
     )
+    # A name annotated as not nominated keeps its rank but takes no band, whatever its rank or its
+    # previous band (hysteresis would otherwise hold it in the book).
+    rn_set -= set(not_nominated)
+    wl_set -= set(not_nominated)
 
     retained_rn = {t for t in rn_set if rank_by_ticker[t] > 50}
     retained_book = {t for t in wl_set if rank_by_ticker[t] > 135}
