@@ -1285,7 +1285,8 @@ def resolve_total_debt(latest: Dict[str, Any]) -> Tuple[Optional[float], Optiona
       on the stored file the legacy value is over 10x the current leg for 67 of 179 such
       names), else the current figure alone; `debt_partial` either way.
     - neither, legacy `lt_debt` present: that figure, `debt_from_legacy_field`.
-    - nothing: None, `debt_unknown`; the leverage veto cannot be evaluated."""
+    - nothing: None, `debt_unknown`; the leverage veto cannot be evaluated, and the caller takes
+      the debt leg of the enterprise value as zero, flagged."""
     lt = num(latest.get("debt_lt_noncurrent"))
     cur = num(latest.get("debt_current"))
     legacy = num(latest.get("lt_debt"))
@@ -1301,7 +1302,7 @@ def resolve_total_debt(latest: Dict[str, Any]) -> Tuple[Optional[float], Optiona
                                      "noncurrent_from_legacy_lt_debt": False}
     if legacy is not None:
         return legacy, "debt_from_legacy_field", {}
-    return None, "debt_unknown", {"leverage_veto": "not_evaluable"}
+    return None, "debt_unknown", {"leverage_veto": "not_evaluable", "enterprise_value": "debt_taken_as_zero"}
 
 
 def apply_band_hysteresis(
@@ -1759,12 +1760,18 @@ def main():
         fcf = num(latest.get("fcf"))
         if fcf is None and ocf is not None and capex is not None:
             fcf = ocf - capex
-        # F1 (WO_SF1): debt from the current fields; unknown debt or cash leaves the enterprise
-        # value absent (never zero) and rides as a flag.
+        # F1 (WO_SF1): debt from the current fields. A name with NO debt field at all, or no cash
+        # field, keeps an enterprise value computed with that leg taken as zero, and says so in a
+        # flag (coordinator's ruling at the audit, 2026-11-12). Leaving the enterprise value absent
+        # was measured to lift loss-makers: their negative earnings yield dropped out of two
+        # pillars and they rose by over a thousand ranks (876 names carry no debt field; the
+        # builder cannot tell "no debt" from "not filed"). The leg taken as zero is the reading
+        # those names had before this change, so the fix moves only names whose debt is known.
+        # The leverage veto stays not evaluable for them.
         total_debt, debt_flag, debt_detail = resolve_total_debt(latest)
         cash = num(latest.get("cash"))
         equity = num(latest.get("equity"))
-        ev = (mcap + total_debt - cash) if total_debt is not None and cash is not None else None
+        ev = mcap + (total_debt if total_debt is not None else 0.0) - (cash if cash is not None else 0.0)
         if debt_flag is not None:
             cur_flags = ticker_flags.setdefault(t, [])
             if debt_flag not in cur_flags:
@@ -1775,7 +1782,7 @@ def main():
             cur_flags = ticker_flags.setdefault(t, [])
             if "cash_unknown" not in cur_flags:
                 cur_flags.append("cash_unknown")
-            ticker_flag_detail.setdefault(t, {})["cash_unknown"] = {"enterprise_value": "absent"}
+            ticker_flag_detail.setdefault(t, {})["cash_unknown"] = {"enterprise_value": "cash_taken_as_zero"}
 
         # CHRONIC_OPERATING_LOSS_LEVERAGE (P3.6b): a single fiscal year's numbers shouldn't cull
         # a large cap outright — CRWV/NBIS/IREN/CIFR were vetoed on one year of AI-buildout
@@ -1850,7 +1857,7 @@ def main():
             if mid_cycle_fcf is not None and mcap > 0:
                 raw["fcf_yield"][t] = mid_cycle_fcf / mcap
                 raw["owner_yield"][t] = mid_cycle_fcf / mcap
-            if op is not None and ev is not None and ev > 0:
+            if op is not None and ev > 0:
                 raw["ebit_yield"][t] = op / ev
                 raw["roic_proxy"][t] = op / ev
 
@@ -1860,7 +1867,7 @@ def main():
                 raw["fcf_yield"][t] = fcf / mcap
             if None not in (ni, da, capex) and mcap > 0:
                 raw["owner_yield"][t] = (ni + da - capex) / mcap
-            if op is not None and ev is not None and ev > 0:
+            if op is not None and ev > 0:
                 raw["ebit_yield"][t] = op / ev
                 raw["roic_proxy"][t] = op / ev
 
