@@ -250,11 +250,12 @@ def test_liquidate_halted_dry_run_still_plans(harness, capsys):
     assert FakeKIS.orders == []
 
 
-def test_liquidate_ignore_halt_alone_is_not_enough(harness):
+def test_liquidate_ignore_halt_flag_is_gone(harness):
+    # SF4 item 7: the halt has no bypass; the flag is an unrecognised argument.
     with pytest.raises(SystemExit) as e:
         harness(None, positions=[pos("AAA", 10)], module=liq,
                 argv=LIQ_ARGV + ["--execute", "--ignore-halt"])
-    assert "refusing --execute: halted" in str(e.value)
+    assert e.value.code == 2
     assert FakeKIS.orders == []
 
 
@@ -265,11 +266,12 @@ def test_liquidate_confirm_real_alone_is_not_enough(harness):
     assert FakeKIS.orders == []
 
 
-def test_liquidate_ignore_halt_with_confirm_real_overrides(harness, capsys):
-    harness("true", positions=[pos("AAA", 10)], module=liq,
-            argv=LIQ_ARGV + ["--execute", "--ignore-halt", "--confirm-real"])
-    assert [o[:4] for o in FakeKIS.orders] == [("sell", "NASD", "AAA", 10)]
-    assert "--ignore-halt" in capsys.readouterr().out
+def test_liquidate_ignore_halt_with_confirm_real_no_longer_overrides(harness):
+    with pytest.raises(SystemExit) as e:
+        harness("true", positions=[pos("AAA", 10)], module=liq,
+                argv=LIQ_ARGV + ["--execute", "--ignore-halt", "--confirm-real"])
+    assert e.value.code == 2
+    assert FakeKIS.orders == []
 
 
 def test_liquidate_false_executes_with_confirm_real_only(harness):

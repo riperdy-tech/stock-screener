@@ -71,3 +71,56 @@ def test_unsplit_orders_carry_no_split_note():
 def test_exchange_falls_back_to_the_balance_row():
     orders, _ = plan_sells([pos("AAA", 1, exch="NYSE")], set(), PRICES, {}, 15000)
     assert orders[0]["exch"] == "NYSE"
+
+
+# ── SF4 item 7: the halt has no bypass. Every broker call is stubbed; none can be reached. ──
+import types  # noqa: E402
+
+import pytest  # noqa: E402
+
+import kis_liquidate_except as kle  # noqa: E402
+
+
+class _Reached(Exception):
+    """Raised by a stubbed broker entry point: the run got past the halt guard."""
+
+
+def _drive(monkeypatch, argv, halt):
+    monkeypatch.setattr(sys, "argv", ["kis_liquidate_except.py"] + argv)
+    if halt is None:
+        monkeypatch.delenv("KIS_HALT", raising=False)
+    else:
+        monkeypatch.setenv("KIS_HALT", halt)
+    for k in ("KIS_APP_KEY", "KIS_APP_SECRET", "KIS_CANO", "KIS_ACNT_PRDT_CD"):
+        monkeypatch.setenv(k, "dummy-test-value")
+
+    def boom(*a, **k):
+        raise _Reached()
+    monkeypatch.setattr(kle, "KISClient", boom)
+    monkeypatch.setattr(kle, "send_order", boom)
+    monkeypatch.setattr(kle, "make_journal", lambda: types.SimpleNamespace(durable=True))
+    monkeypatch.setattr(kle, "open_entries", lambda j, env: [])
+    kle.main()
+
+
+EXEC = ["--env", "real", "--keep-none", "--execute", "--confirm-real"]
+
+
+def test_ignore_halt_flag_no_longer_exists(monkeypatch, capsys):
+    with pytest.raises(SystemExit) as e:
+        _drive(monkeypatch, EXEC + ["--ignore-halt"], None)
+    assert e.value.code == 2          # argparse: unrecognised argument, nothing ran
+    assert "--ignore-halt" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("halt", [None, "", "true", "0", "no", "off", "falsee", "TRUE"])
+def test_execute_while_halted_is_refused_before_any_broker_call(monkeypatch, halt):
+    with pytest.raises(SystemExit) as e:
+        _drive(monkeypatch, EXEC, halt)
+    assert "refusing --execute: halted" in str(e.value.code)
+    assert "--ignore-halt" not in str(e.value.code)
+
+
+def test_only_exactly_false_gets_past_the_guard(monkeypatch):
+    with pytest.raises(_Reached):
+        _drive(monkeypatch, EXEC, " False ")

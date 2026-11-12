@@ -23,7 +23,7 @@ Order journal (kis/journal.py, SPEC 3R G3): every sell is journaled 'sending' be
 --execute until `--reconcile-journal` has resolved it against the broker.
 
 KIS_HALT fails closed (kis/halt.py): --execute is refused unless KIS_HALT is
-exactly 'false', or --ignore-halt is passed together with --confirm-real.
+exactly 'false'. There is no bypass flag.
 """
 
 from __future__ import annotations
@@ -116,9 +116,6 @@ def main():
     ap.add_argument("--max-order-usd", type=float,
                     default=float(os.environ.get("KIS_MAX_ORDER_USD", 15000)),
                     help="split any position larger than this across several orders")
-    ap.add_argument("--ignore-halt", action="store_true",
-                    help="trade although KIS_HALT is not 'false'; only valid together "
-                         "with --execute --confirm-real")
     ap.add_argument("--ignore-market-hours", action="store_true",
                     help="local testing only; KIS rejects US orders outside the session")
     ap.add_argument("--reconcile-journal", action="store_true",
@@ -149,11 +146,8 @@ def main():
                  "'false' — the next scheduled sync will re-buy toward the ledger")
     print(f"KIS_HALT: {halt_note}")
     if args.execute and halt:
-        # G1: a halt refuses --execute. Only the explicit pair below overrides it.
-        if not (args.ignore_halt and args.confirm_real):
-            sys.exit(f"refusing --execute: halted ({halt_reason}). To override, pass "
-                     f"--ignore-halt together with --confirm-real.")
-        print("WARNING: --ignore-halt: executing although the halt is set.")
+        # G1: a halt refuses --execute. There is no override.
+        sys.exit(f"refusing --execute: halted ({halt_reason}).")
 
     # G3: an order whose outcome is unknown blocks --execute until it is reconciled.
     journal = make_journal()
