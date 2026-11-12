@@ -181,7 +181,7 @@ def test_fundamentals_build_writes_no_rows_for_non_common_securities(tmp_path, m
 
     hist = json.loads((tmp_path / "fundamentals_history.json").read_text(encoding="utf-8"))
     assert sorted(hist["tickers"]) == ["AFG", "GOOG", "GOOGL"]
-    assert hist["provenance"]["cik_map_refresh"] == {"status": "refreshed", "added": 1, "changed": []}
+    assert hist["provenance"]["cik_map_refresh"] == {"status": "refreshed", "added": 1, "changed_not_applied": []}
     assert json.loads((tmp_path / "cik_map.json").read_text(encoding="utf-8"))["map"]["NEWCO"] == "0000000009"
     assert hist["provenance"]["non_common_securities"] == {"AFGB": {"cik": "0000001", "common": ["AFG"]}}
     for fname in ("fundamentals_ttm.json", "fundamentals_quarterly.json", "fundamentals_battery.json"):
