@@ -91,6 +91,7 @@ const REASON_KEYS: Record<string, TKey> = {
     left_rank: 'trkReasonLeft',
     entered_rank: 'trkReasonEntered',
     rebalance_rank: 'trkReasonRebalance',
+    entered_formation: 'trkReasonFormation',
 };
 
 /** Translation key of a known reason code, else null. */

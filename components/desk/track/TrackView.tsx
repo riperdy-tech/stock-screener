@@ -1,8 +1,8 @@
 'use client';
 
-// Track record: the public paper-trade record. The verdict scoreboard leads (counts before any
-// return), then the three paper books, growth of 100, and the append-only ledger of the AI book
-// with its drill-downs (holdings, closed round trips, full history, sold too early).
+// Track record: the public paper-trade record. The earlier analyst's verdict scoreboard leads (counts before any
+// return), then the paper books, growth of 100, and the append-only ledger of the Qwen book (the old
+// AI book when there is no Qwen book) with its drill-downs (holdings, closed round trips, full history, sold too early).
 
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
@@ -18,7 +18,7 @@ import { fmtDateShort, fmtMoney, fmtSignedPct } from '@/lib/desk/format';
 import { stockHref } from '@/lib/desk/stockPage';
 import { fill } from '@/lib/desk/text';
 import {
-    bookStart, cashSince, ledgerRows, reasonFallback, reasonKey, toneClass, fmtPlainPct,
+    bookStart, ledgerRows, reasonFallback, reasonKey, toneClass, fmtPlainPct,
 } from '@/lib/desk/trackBooks';
 import { buildScoreboard } from '@/lib/desk/trackScoreboard';
 
@@ -75,11 +75,12 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
 
     const books = ledgers?.ledgers ?? {};
     const ai = books.qwen_book ?? books.rn_depth;   // the holdings, trades and history below follow Qwen's book once it exists
+    const aiIsQwen = !!books.qwen_book;
     const curve = useMemo(() => buildCurve(ledgers, commissionPct), [ledgers, commissionPct]);
     const early = useMemo(() => soldTooEarly(ledgers), [ledgers]);
     const board = useMemo(() => buildScoreboard(outcomes), [outcomes]);
     const rows = useMemo(() => ledgerRows(ai), [ai]);
-    const cash = cashSince(ai);
+    const monthlyStart = bookStart(books.code_book) ?? bookStart(books.qwen_book);   // the monthly books' first day
     const since = bookStart(ai) ?? ledgers?.inception ?? '—';
 
     const holdings = useMemo(() => {
@@ -125,22 +126,18 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
             <h1 className="text-[26px] font-semibold leading-tight tracking-head text-ink">{t('trackHeadline')}</h1>
             <p className="mt-2 text-[14px] text-ink-2">{t('trackSub')}</p>
 
-            {/* TODO(data request): record_epoch. Show unless deskPhase is C AND rn_depth has trades dated after a go-live date; no go-live field exists yet, so always. */}
             <p
                 role="note"
                 className="mt-5 border-l-2 px-3.5 py-2.5 text-[13.5px] leading-snug text-ink"
                 style={{ background: 'color-mix(in oklch, var(--warn) 10%, var(--bg))', borderLeftColor: 'var(--warn)' }}
             >
-                {cash ? fill(t('trkBanner'), { date: cash }) : t('trkBannerNoCash')}
+                {monthlyStart ? fill(t('trkBanner'), { date: monthlyStart }) : t('trkBannerNoBooks')}
             </p>
 
-            {/* Record switch. Only the archived record has data; the go-live record starts later. */}
             <div className="mt-5 flex flex-wrap items-baseline gap-x-2.5 gap-y-2">
                 <Chip active className="font-mono text-[11px]" aria-pressed>{t('trkChipArchived')}</Chip>
-                <Chip disabled aria-describedby="golive-note" className="font-mono text-[11px] opacity-60">{t('trkChipGoLive')}</Chip>
-                <span id="golive-note" className="font-mono text-[11px] text-ink-3">({t('trkGoLiveNote')})</span>
                 <span className="font-mono text-[11px] text-ink-2">
-                    {fill(t('trkPaperLine'), { bps: ledgers.config?.cost_bps ?? '—', date: since })}
+                    {fill(t('trkPaperLine'), { bps: ledgers.config?.cost_bps ?? '—' })}
                 </span>
             </div>
 
@@ -163,8 +160,8 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
                 </Micro>
             </TrackSection>
 
-            {/* THE LEDGER — AI book */}
-            <TrackSection title={t('trackLedger')} sub={t('trkAiBook')}>
+            {/* THE LEDGER — the Qwen book (the old AI book if there is none) */}
+            <TrackSection title={t('trackLedger')} sub={aiIsQwen ? fill(t('trkLedgerQwen'), { date: since }) : t('trkAiBook')}>
                 {!ai ? (
                     <p className="mt-4 text-[12px] text-ink-3">—</p>
                 ) : (
