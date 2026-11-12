@@ -2,7 +2,7 @@
 
 // The stock page's left column (handoff 5.2): the verdict, the band, the crux, the numbers, the
 // timing, what would prove it wrong, what we are watching, the evidence, the thesis and the run
-// transcripts. A name with no rebuilt verdict gets only its header (AWAITING / VETOED).
+// transcripts. A name with no rebuilt verdict gets only its header (NO VERDICT / VETOED).
 
 import React, { useMemo, useState } from 'react';
 import clsx from 'clsx';
@@ -80,9 +80,9 @@ function Header({ row, d, mode, blocked, bundleRuns }: { row: DeskRow; d: DeskVe
         <div>
             <p className="font-mono text-[11px] tracking-[.03em] text-off">{t('pgKickerNone')}</p>
             <div className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="text-[28px] font-bold leading-tight text-ink-2">{t('dvAwaiting')}</span>
+                <span className="text-[28px] font-bold leading-tight text-ink-2">{t('pgNoVerdict')}</span>
                 <span className="text-[13px] text-ink-2">
-                    {a.listed ? fill(t('pgQueued'), { rank: a.rank ?? DASH }) : t('pgNotOnList')}
+                    {a.listed ? t('pgQwenAbove') : `${t('pgQwenAbove')} · ${t('pgNotOnList')}`}
                 </span>
             </div>
         </div>

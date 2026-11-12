@@ -90,7 +90,7 @@ export function stockSectionKey(row: DeskRow): Key | null {
     return null;
 }
 
-/** `queued · screen rank #14` for a listed name, `not on the list` otherwise. */
+/** Whether the name is on the screener's list. */
 export function awaitingSubline(row: DeskRow): { listed: boolean; rank: number | null } {
     return { listed: onList(row), rank: row.fct.fct_rank ?? null };
 }

@@ -13,6 +13,7 @@ import { fmtMoney } from '@/lib/desk/format';
 import { fill } from '@/lib/desk/text';
 import { buildRows, type DeskRow } from '@/lib/desk/rankings';
 import { livePrice } from '@/lib/desk/rowText';
+import { onList } from '@/lib/desk/sections';
 import { gateReasonLabel } from '@/lib/desk/tone';
 import { rebuiltVerdict } from '@/lib/desk/verdict';
 import { useDeskData } from '@/lib/desk/useDeskData';
@@ -151,7 +152,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 </p>
             )}
 
-            <QwenPanel ticker={row.ticker} live={live} />
+            <QwenPanel ticker={row.ticker} live={live} listed={onList(row)} />
             {data.gemini[row.ticker] && <GeminiPanel g={data.gemini[row.ticker]} />}
             <MacroEventsPanel p={data.macroEvents} ticker={row.ticker} sector={row.info?.sector} />
 
