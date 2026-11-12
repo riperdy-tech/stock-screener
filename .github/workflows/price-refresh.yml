@@ -60,22 +60,20 @@ jobs:
         run: |
           AGE_H=$(python3 - <<'EOF'
           import json, datetime
-          # depth_overlay.json stamps generated_at with datetime.now().isoformat() —
-          # NAIVE local time, no 'Z'. Parse it naive and compare against a naive now()
-          # (handoff §8); the old ts.replace("Z","+00:00") + now(tz=utc) path raises
-          # on a naive/aware mix.
-          ts = json.load(open("public/data/depth_overlay.json"))["generated_at"]
-          dt = datetime.datetime.fromisoformat(ts)
-          print(round((datetime.datetime.now() - dt).total_seconds() / 3600))
+          # qwen_overlay.json (the live overlay; depth_overlay.json is retired) stamps
+          # generated_at in UTC with a trailing 'Z' (e.g. 2026-11-09T15:39:02.204625Z).
+          ts = json.load(open("public/data/qwen_overlay.json"))["generated_at"]
+          dt = datetime.datetime.fromisoformat(ts.replace("Z", "+00:00"))
+          print(round((datetime.datetime.now(datetime.timezone.utc) - dt).total_seconds() / 3600))
           EOF
           )
           echo "overlay age: ${AGE_H}h"
-          # The depth producer refreshes continuously; 36h still fires only when the
+          # The overlay producer refreshes continuously; 36h still fires only when the
           # producer/PC/push has genuinely been down across more than a day.
           if [ "$AGE_H" -gt 36 ]; then
-            echo "::warning::depth_overlay.json is ${AGE_H}h old (>36h)"
+            echo "::warning::qwen_overlay.json is ${AGE_H}h old (>36h)"
             if [ -n "$TG_TOKEN" ]; then
-              curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage"                 -d chat_id="${TG_CHAT}"                 -d text="[RS2 ops] depth_overlay.json is ${AGE_H}h old (>36h) - depth producer/PC/push may be down." >/dev/null
+              curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage"                 -d chat_id="${TG_CHAT}"                 -d text="[RS2 ops] qwen_overlay.json is ${AGE_H}h old (>36h) - overlay producer/PC/push may be down." >/dev/null
               echo "telegram alert sent"
             fi
           fi
