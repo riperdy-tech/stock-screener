@@ -1,5 +1,7 @@
 {
  "_note": "Manual non-tradable list. score_factors_dual_door.py turns every entry into fct_veto='NOT_TRADABLE', which strips the quant band AND (via the existing veto guardrail) blocks the RS2/LLM overlay, so the name can never reach a ledger or a KIS order. This list is for names the exchange listing has not dropped yet — a halt or a pending merger that still shows as listed. Names that LEAVE the NASDAQ/NYSE/AMEX listing are caught automatically via last_listed and do not belong here. Removing an entry lets the name back in on the next chain run.",
+ "operator_excluded_note": "Operator exclusions (WO_SF6): names the operator does not want traded. Unlike tickers above this is NOT a veto: the name stays scored, ranked and visible but takes no nomination slot, no Door 3 slot and no band, and carries the flag operator_excluded. Add \"TICKER\": {\"reason\": \"...\", \"since\": \"YYYY-MM-DD\"} to operator_excluded below; removing an entry lets the name back in on the next scoring run. When two share classes of one company compete for a slot, an excluded class is left out of the comparison.",
+ "operator_excluded": {},
  "grace_days": 5,
  "tickers": {
   "CPRX": {

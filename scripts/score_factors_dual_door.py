@@ -1334,12 +1334,18 @@ def nomination_exclusions(
     ticker_mcap: Dict[str, Optional[float]],
     ticker_to_cik: Dict[str, str],
     stock_rows: List[Dict[str, Any]],
+    operator_excluded: Optional[Dict[str, Dict[str, Any]]] = None,
 ) -> Dict[str, Dict[str, Any]]:
     """Scored names that stay scored and visible but are not nominated: {ticker: {"flag",
-    "detail"}}. A second share class of a company (WO_SF6 part 2) gets `secondary_share_class`,
-    naming the kept class."""
+    "detail"}}. A name in not_tradable.json's operator_excluded gets `operator_excluded` (WO_SF6
+    part 3). A second share class of a company (part 2) gets `secondary_share_class`, naming the
+    kept class; the classes compete only among the scored names the operator has not excluded."""
     out: Dict[str, Dict[str, Any]] = {}
-    for t, d in secondary_share_classes(ticker_to_cik, stock_rows, scored_profiles, ticker_adv, ticker_mcap).items():
+    for t, d in (operator_excluded or {}).items():
+        if t in scored_profiles:
+            out[t] = {"flag": "operator_excluded", "detail": dict(d)}
+    competing = [t for t in scored_profiles if t not in out]
+    for t, d in secondary_share_classes(ticker_to_cik, stock_rows, competing, ticker_adv, ticker_mcap).items():
         out[t] = {"flag": "secondary_share_class", "detail": d}
     return out
 
@@ -2155,17 +2161,19 @@ def main():
             get_percentile(p["score_door2"], all_d2) if p["score_door2"] is not None else None,
             d2_ok)
 
-    # Names that stay scored but must not take a nomination slot (WO_SF6): the second share class
-    # of a company. Annotated on the row, never vetoed.
+    # Names that stay scored but must not take a nomination slot (WO_SF6): the operator's exclusions
+    # and the second share class of a company. Annotated on the row, never vetoed.
     cik_map_raw = load_json(DATA / "cik_map.json", {}) or {}
     not_nominated = nomination_exclusions(scored_profiles, ticker_adv, ticker_mcap,
-                                          cik_map_raw.get("map") or {}, list(stocks.values()))
+                                          cik_map_raw.get("map") or {}, list(stocks.values()),
+                                          tradability.load_config()["operator_excluded"])
     for t, d in not_nominated.items():
         if d["flag"] not in scored_profiles[t]["fct_flags"]:
             scored_profiles[t]["fct_flags"].append(d["flag"])
         scored_profiles[t]["fct_flag_detail"][d["flag"]] = d["detail"]
     print(f"Not nominated (annotated): {len(not_nominated)} "
-          f"({sum(d['flag'] == 'secondary_share_class' for d in not_nominated.values())} secondary share classes)")
+          f"({sum(d['flag'] == 'secondary_share_class' for d in not_nominated.values())} secondary share classes, "
+          f"{sum(d['flag'] == 'operator_excluded' for d in not_nominated.values())} operator excluded)")
 
     # ── 4. Macro Sector Budgeting via MGI (MRI-11 contract) ──────────────────
     macro_scores_by_id, reported_regime, sector_ranking_meta = load_sector_ranking()
