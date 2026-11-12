@@ -22,15 +22,15 @@ def test_union_with_sec_values_winning(tmp_path, monkeypatch):
     cik_map, report = bfh.refresh_cik_map()
     assert cik_map == {"OLD": "0000000001", "BOTH": "0000000002", "NEW": "0000000003"}
     assert json.loads(path.read_text(encoding="utf-8"))["map"] == cik_map
-    assert report["status"] == "refreshed" and report["added"] == 1 and report["changed"] == []
+    assert report["status"] == "refreshed" and report["added"] == 1 and report["changed_not_applied"] == []
 
 
-def test_changed_cik_is_recorded_and_new_value_wins(tmp_path, monkeypatch):
+def test_changed_cik_is_recorded_and_the_stored_value_is_kept(tmp_path, monkeypatch):
     _store(tmp_path, monkeypatch, {"AAA": "0000000001", "BBB": "0000000002"})
     _stub(monkeypatch, {"AAA": "0000000009", "BBB": "0000000002"})
     cik_map, report = bfh.refresh_cik_map()
-    assert cik_map["AAA"] == "0000000009"
-    assert report["changed"] == [{"ticker": "AAA", "old": "0000000001", "new": "0000000009"}]
+    assert cik_map["AAA"] == "0000000001"          # a successor registrant would drop the history
+    assert report["changed_not_applied"] == [{"ticker": "AAA", "old": "0000000001", "new": "0000000009"}]
 
 
 def test_failed_download_keeps_stored_map_and_says_so(tmp_path, monkeypatch, capsys):

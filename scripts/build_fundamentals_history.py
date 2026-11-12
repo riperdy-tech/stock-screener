@@ -203,8 +203,11 @@ def refresh_cik_map():
 
     The cached map used to be returned for as long as the file existed, so a company listed or
     renamed after 2026-06-10 had no CIK and no SEC fundamentals. Stored entries are kept (a ticker
-    SEC no longer lists keeps its CIK); where SEC's CIK differs the SEC value wins and the change
-    is listed in the report. A failed or empty download leaves the stored map untouched and says
+    SEC no longer lists keeps its CIK). Where SEC's CIK differs from the stored one the STORED value
+    is kept and the change is listed in the report as not applied: such a change is usually a
+    successor registrant (a holding-company reorganisation), whose own filings start at the
+    succession, so switching would drop the history the name has today (audit 2026-11-12: 23 such
+    tickers). A human rules on each. A failed or empty download leaves the stored map untouched and says
     so loudly; the build carries on with the stored map, as it did before.
     """
     stored = {}
@@ -223,19 +226,19 @@ def refresh_cik_map():
         print(f"!!! CIK MAP REFRESH FAILED: {status} — {len(stored)} stored entries in use; "
               f"companies listed or renamed since the stored map have NO CIK this build")
         print("!" * 100)
-        return stored, {"status": status, "added": 0, "changed": []}
+        return stored, {"status": status, "added": 0, "changed_not_applied": []}
     changed = [{"ticker": t, "old": stored[t], "new": c}
                for t, c in sorted(fresh.items()) if t in stored and stored[t] != c]
     added = sum(t not in stored for t in fresh)
-    merged = {**stored, **fresh}
+    merged = {**fresh, **stored}
     CIK_MAP_JSON.write_text(json.dumps(
         {"fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
          "map": merged}), encoding="utf-8")
     print(f"CIK map refreshed from SEC: {len(fresh)} listed, {added} added, "
-          f"{len(changed)} changed CIK, {len(merged)} total")
+          f"{len(changed)} with a different CIK at SEC (stored value kept), {len(merged)} total")
     for c in changed:
-        print(f"  CIK changed: {c['ticker']} {c['old']} -> {c['new']}")
-    return merged, {"status": "refreshed", "added": added, "changed": changed}
+        print(f"  CIK differs at SEC, NOT applied: {c['ticker']} stored {c['old']}, SEC {c['new']}")
+    return merged, {"status": "refreshed", "added": added, "changed_not_applied": changed}
 
 
 # ── Scale-error defence ──────────────────────────────────────────────────────────────────────
