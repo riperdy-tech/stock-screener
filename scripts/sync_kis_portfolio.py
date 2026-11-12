@@ -166,9 +166,11 @@ def plan_table(plan, order_cd) -> list[str]:
     return lines
 
 
-def run_probe(client):
+def run_probe(client, execute=False, confirm_real=False):
     """Read-only diagnostics. Answers: is the account KRW-seeded, does it have
-    USD, and does KIS think we can actually buy anything?"""
+    USD, and does KIS think we can actually buy anything? The one exception is
+    the KIS_PROBE_DOMESTIC_ORDER order, which is a real order: it needs the halt
+    open, --execute and --confirm-real, like any other order."""
     out = ["## KIS account probe", ""]
 
     def emit(line=""):
@@ -224,7 +226,15 @@ def run_probe(client):
     emit("      deposit > withdrawable => buys filled but unsettled (매수증거금). "
          "NAV uses deposit; only the buy budget may use withdrawable.")
 
-    if os.environ.get("KIS_PROBE_DOMESTIC_ORDER"):
+    probe_order = bool(os.environ.get("KIS_PROBE_DOMESTIC_ORDER"))
+    if probe_order:
+        probe_halted, probe_halt_reason = kis_halt_state()
+        if probe_halted or not (execute and confirm_real):
+            emit("\ndomestic order probe SKIPPED: it sends a real order, so it needs KIS_HALT "
+                 "exactly 'false' and both --execute and --confirm-real "
+                 f"({probe_halt_reason or 'halt open'}; execute={execute}, confirm_real={confirm_real}).")
+            probe_order = False
+    if probe_order:
         # Places a ₩1,000 limit on 005930 — three orders of magnitude below
         # market, so it cannot fill. Purely to see which error comes back.
         emit("\ndomestic order probe (unfillable ₩1,000 limit on 005930):")
@@ -394,7 +404,7 @@ def main():
                        os.environ["KIS_CANO"], os.environ["KIS_ACNT_PRDT_CD"])
 
     if args.probe:
-        run_probe(client)
+        run_probe(client, execute=args.execute, confirm_real=args.confirm_real)
         return
 
     positions = client.balance()

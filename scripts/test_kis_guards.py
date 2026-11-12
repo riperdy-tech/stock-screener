@@ -353,3 +353,65 @@ def test_sync_with_zero_sellable_places_no_sell(harness):
     harness("false", ledger_book=book(holdings={}, cash=95.76),
             positions=[pos("AAA", 10, sellable=0)])
     assert FakeKIS.orders == []
+
+
+# ------------------------------- SF4 item 8: the domestic probe order needs the guards
+class ProbeKIS(FakeKIS):
+    probes: list = []
+
+    def present_balance_raw(self):
+        return {"output2": [], "output3": {}}
+
+    def krw_balance(self):
+        return {}
+
+    def buying_power(self, *a, **k):
+        return {}
+
+    def domestic_buy_probe(self, *a, **k):
+        ProbeKIS.probes.append(1)
+        return {"rt_cd": "1", "ok": False, "msg": "stub", "order_no": ""}
+
+
+@pytest.fixture
+def probe_env(monkeypatch):
+    ProbeKIS.probes = []
+    monkeypatch.setenv("KIS_PROBE_DOMESTIC_ORDER", "1")
+    return ProbeKIS("paper", "k", "s", "c", "a")
+
+
+@pytest.mark.parametrize("halt", HALTING, ids=lambda v: "UNSET" if v is None else repr(v))
+def test_probe_order_never_goes_while_halted(probe_env, monkeypatch, halt):
+    if halt is None:
+        monkeypatch.delenv("KIS_HALT", raising=False)
+    else:
+        monkeypatch.setenv("KIS_HALT", halt)
+    sync.run_probe(probe_env, execute=True, confirm_real=True)
+    assert ProbeKIS.probes == []
+
+
+@pytest.mark.parametrize("execute,confirm", [(False, False), (True, False), (False, True)])
+def test_probe_order_needs_execute_and_confirm_real(probe_env, monkeypatch, execute, confirm):
+    monkeypatch.setenv("KIS_HALT", "false")
+    sync.run_probe(probe_env, execute=execute, confirm_real=confirm)
+    assert ProbeKIS.probes == []
+
+
+def test_probe_order_default_call_sends_nothing(probe_env, monkeypatch):
+    monkeypatch.setenv("KIS_HALT", "false")
+    sync.run_probe(probe_env)
+    assert ProbeKIS.probes == []
+
+
+def test_probe_order_with_all_three_is_sent(probe_env, monkeypatch):
+    monkeypatch.setenv("KIS_HALT", "false")
+    sync.run_probe(probe_env, execute=True, confirm_real=True)
+    assert ProbeKIS.probes == [1]
+
+
+def test_main_probe_alone_sends_no_probe_order(harness, monkeypatch):
+    ProbeKIS.probes = []
+    monkeypatch.setattr(sync, "KISClient", ProbeKIS)
+    monkeypatch.setenv("KIS_PROBE_DOMESTIC_ORDER", "1")
+    harness("false", argv=["--env", "paper", "--ledger", "rn_depth", "--probe"])
+    assert ProbeKIS.probes == [] and FakeKIS.orders == []
