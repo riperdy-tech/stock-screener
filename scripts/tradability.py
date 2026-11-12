@@ -31,6 +31,10 @@ looks unlisted and this would veto the whole universe. scan() therefore refuses
 to act when more than MAX_UNLISTED_SHARE of the universe reads as unlisted —
 a broken feed disables the automatic path instead of emptying the portfolio.
 The manual list is never circuit-broken; it is a deliberate human statement.
+
+A third key, `operator_excluded` ({TICKER: {"reason", "since"}}), is not a veto: a name the
+operator does not want traded stays scored, ranked and visible, but takes no nomination slot
+and carries the flag `operator_excluded` (score_factors_dual_door.nomination_exclusions).
 """
 
 import json
@@ -49,7 +53,7 @@ def load_config(path=CONFIG_JSON):
     pipeline down — it degrades to 'no manual entries', and the automatic
     listing path keeps working. But a file that EXISTS and fails to parse is
     a typo silently erasing every hand-declared block, so that case is loud."""
-    cfg = {"grace_days": DEFAULT_GRACE_DAYS, "tickers": {}}
+    cfg = {"grace_days": DEFAULT_GRACE_DAYS, "tickers": {}, "operator_excluded": {}}
     path = Path(path)
     if not path.exists():
         return cfg
@@ -66,6 +70,10 @@ def load_config(path=CONFIG_JSON):
     if isinstance(tickers, dict):
         cfg["tickers"] = {str(k).upper(): (v if isinstance(v, dict) else {})
                           for k, v in tickers.items()}
+    excluded = raw.get("operator_excluded")
+    if isinstance(excluded, dict):
+        cfg["operator_excluded"] = {str(k).upper(): (v if isinstance(v, dict) else {})
+                                    for k, v in excluded.items() if not str(k).startswith("_")}
     return cfg
 
 

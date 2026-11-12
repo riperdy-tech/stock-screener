@@ -53,3 +53,45 @@ def non_common_securities(ticker_to_cik: Dict[str, str], stocks: Iterable[Dict[s
         if cik is not None and sym not in common[cik]:
             result[sym] = {"cik": cik, "common": common[cik]}
     return result
+
+
+def secondary_share_classes(
+    ticker_to_cik: Dict[str, str],
+    stocks: Iterable[Dict[str, Any]],
+    scored: Iterable[str],
+    adv: Dict[str, Any],
+    mcap: Dict[str, Any],
+) -> Dict[str, Dict[str, Any]]:
+    """{ticker: {"cik", "kept", "basis"}} for every scored common class that is NOT the one
+    kept for its company. Among the scored common classes of a CIK the kept class has the
+    higher dollar volume (`adv`; a class with no figure loses to one with a figure, and 0.0
+    is a figure), then the larger market cap (`mcap`), then the ticker that sorts first.
+    `basis` says what separated the secondary from the kept class: adv, adv_missing,
+    market_cap or ticker. Classes that are not scored do not compete, so a vetoed better
+    class never removes a scored one."""
+    scored = set(scored)
+    common = common_tickers_by_cik(ticker_to_cik, list(stocks))
+
+    def key(t):
+        a, m = adv.get(t), mcap.get(t)
+        return (a is None, -(a if a is not None else 0.0), m is None, -(m if m is not None else 0.0), t)
+
+    result = {}
+    for cik, tickers in common.items():
+        classes = [t for t in tickers if t in scored]
+        if len(classes) < 2:
+            continue
+        kept = min(classes, key=key)
+        for t in classes:
+            if t == kept:
+                continue
+            ak, at = adv.get(kept), adv.get(t)
+            if ak is None or at is None:
+                basis = "adv_missing" if ak != at else None
+            else:
+                basis = "adv" if ak != at else None
+            if basis is None:
+                mk, mt = mcap.get(kept), mcap.get(t)
+                basis = "market_cap" if mk != mt else "ticker"
+            result[t] = {"cik": cik, "kept": kept, "basis": basis}
+    return result
