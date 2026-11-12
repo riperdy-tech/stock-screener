@@ -174,12 +174,15 @@ def test_fundamentals_build_writes_no_rows_for_non_common_securities(tmp_path, m
     for name in ("DATA", "STOCKS_JSON", "ZIP_PATH", "CIK_MAP_JSON", "HISTORY_JSON",
                  "BATTERY_JSON", "TTM_JSON", "QTR_JSON"):
         monkeypatch.setattr(bfh, name, getattr(bfh, name))          # restored after the test
+    monkeypatch.setattr(bfh, "fetch_sec_cik_map", lambda: {"NEWCO": "0000000009"})   # no network
     monkeypatch.setattr(sys, "argv", ["build_fundamentals_history.py", "--zip", str(zpath),
                                       "--data-dir", str(tmp_path)])
     bfh.main()
 
     hist = json.loads((tmp_path / "fundamentals_history.json").read_text(encoding="utf-8"))
     assert sorted(hist["tickers"]) == ["AFG", "GOOG", "GOOGL"]
+    assert hist["provenance"]["cik_map_refresh"] == {"status": "refreshed", "added": 1, "changed_not_applied": []}
+    assert json.loads((tmp_path / "cik_map.json").read_text(encoding="utf-8"))["map"]["NEWCO"] == "0000000009"
     assert hist["provenance"]["non_common_securities"] == {"AFGB": {"cik": "0000001", "common": ["AFG"]}}
     for fname in ("fundamentals_ttm.json", "fundamentals_quarterly.json", "fundamentals_battery.json"):
         tickers = json.loads((tmp_path / fname).read_text(encoding="utf-8"))["tickers"]
