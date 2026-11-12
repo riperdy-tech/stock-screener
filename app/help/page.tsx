@@ -52,7 +52,7 @@ const NAV_GROUPS: NavGroup[] = [
             { id: 'crux', en: 'The crux', ko: '핵심 쟁점', zh: '關鍵分歧' },
             { id: 'gate', en: 'The gate', ko: '게이트', zh: '閘門' },
             { id: 'followup', en: 'The daily follow-up', ko: '일일 후속 점검', zh: '每日跟進' },
-            { id: 'relaunch', en: 'What changes at go-live', ko: '가동 때 달라지는 것', zh: '上線後的變化' },
+            { id: 'relaunch', en: 'What is live, stopped and next', ko: '가동 때 달라지는 것', zh: '上線後的變化' },
         ],
     },
     {
@@ -86,10 +86,10 @@ const ALL_NAV_IDS = NAV_GROUPS.flatMap(g => g.items.map(i => i.id));
 const STEPS: { id: string; name: L3; sub: L3 }[] = [
     { id: 'macro', name: { en: 'Macro', ko: '매크로', zh: '總體' }, sub: { en: 'the weather', ko: '경제 날씨', zh: '經濟天氣' } },
     { id: 'screen', name: { en: 'Screener', ko: '스크리너', zh: '篩選器' }, sub: { en: 'narrows the market to a list', ko: '시장을 후보 명단으로 좁힘', zh: '把市場縮小成名單' } },
-    { id: 'analyst', name: { en: 'Analyst', ko: '애널리스트', zh: '分析師' }, sub: { en: 'values each name', ko: '종목마다 가치를 평가', zh: '為每檔股票估值' } },
-    { id: 'gate', name: { en: 'Gate', ko: '게이트', zh: '閘門' }, sub: { en: 'checks every verdict', ko: '모든 판정을 점검', zh: '檢查每個判定' } },
-    { id: 'followup', name: { en: 'Follow-up', ko: '후속 점검', zh: '跟進' }, sub: { en: 'watches daily · not live yet', ko: '매일 감시 · 아직 가동 전', zh: '每日關注 · 尚未上線' } },
-    { id: 'track', name: { en: 'Grading', ko: '평가', zh: '評分' }, sub: { en: 'scores every call', ko: '모든 판정을 채점', zh: '為每個判定評分' } },
+    { id: 'analyst', name: { en: 'Analyst', ko: '애널리스트', zh: '分析師' }, sub: { en: 'reads each name', ko: '종목마다 가치를 평가', zh: '為每檔股票估值' } },
+    { id: 'gate', name: { en: 'Gate', ko: '게이트', zh: '閘門' }, sub: { en: 'earlier analyst · stopped', ko: '모든 판정을 점검', zh: '檢查每個判定' } },
+    { id: 'followup', name: { en: 'Follow-up', ko: '후속 점검', zh: '跟進' }, sub: { en: 'watches daily · being rebuilt', ko: '매일 감시 · 아직 가동 전', zh: '每日關注 · 尚未上線' } },
+    { id: 'track', name: { en: 'Grading', ko: '평가', zh: '評分' }, sub: { en: 'scores the record', ko: '모든 판정을 채점', zh: '為每個判定評分' } },
 ];
 
 const UI = {
@@ -134,9 +134,9 @@ const FAQ_ITEMS: FAQItem[] = [
         },
     },
     {
-        q: { en: 'Why is Research now empty?', ko: 'Research now가 비어 있는 이유는 무엇인가요?', zh: 'Research now 為什麼是空的？' },
+        q: { en: 'What is under Research now?', ko: 'Research now가 비어 있는 이유는 무엇인가요?', zh: 'Research now 為什麼是空的？' },
         a: {
-            en: <>Only a verdict that passes <A href="#gate">the gate</A> and says undervalued can sit there. The rebuilt analyst has begun publishing its first verdicts, and none passes the gate yet, so each one is under Blocked by the gate. The names queued for the analyst wait under Awaiting underwriting. See <A href="#relaunch">What changes at go-live</A>.</>,
+            en: <>The screener&apos;s top names by rank, roughly the first 50 to 60, with Qwen&apos;s reading beside each. It is a list of names worth your research time, not a buy list. The earlier verdict analyst, whose verdicts used to place names here, is stopped. See <A href="#relaunch">What is live, stopped and next</A>.</>,
             ko: <>게이트를 통과하고 저평가라고 말하는 판정만 그곳에 놓일 수 있습니다. 재구축된 애널리스트가 첫 판정을 게시하기 시작했지만 아직 게이트를 통과한 것이 없어서, 모두 게이트에 차단됨 아래에 있습니다. 애널리스트를 기다리는 종목은 심사 대기 아래에 있습니다. <A href="#relaunch">가동 때 달라지는 것</A>을 참조하세요.</>,
             zh: <>只有通過<A href="#gate">閘門</A>且判定為低估的判定才能放在那裡。重建後的分析師已開始發布第一批判定，但還沒有任何一個通過閘門，所以每一個都在「被閘門擋下」之下。排隊等候分析師的股票則在「等待承銷評估」之下。請見<A href="#relaunch">上線後的變化</A>。</>,
         },
@@ -200,7 +200,7 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         q: { en: 'How can I trust the track record?', ko: '트랙 레코드를 어떻게 믿을 수 있나요?', zh: '我怎麼能相信績效紀錄？' },
         a: {
-            en: <>You should not treat it as proof yet. It is built forward, day by day (<Term term="point-in-time" />), with <Term term="transaction-costs" /> included and benchmarks measured on the same dates, but it is a short paper record. The AI record restarts from zero when the rebuilt analyst goes live. Read it as an early scoreboard; see <Term term="not-yet-proven" />.</>,
+            en: <>You should not treat it as proof yet. It is built forward, day by day (<Term term="point-in-time" />), with <Term term="transaction-costs" /> included and benchmarks measured on the same dates, but it is a short paper record. The Code and Qwen books began on 6 November 2026, so there is almost nothing to read yet. Read it as an early scoreboard; see <Term term="not-yet-proven" />.</>,
             ko: <>아직은 증거로 여기지 마세요. 날마다 앞으로 쌓아 가고(<Term term="point-in-time" />), <Term term="transaction-costs" />를 포함하며, 벤치마크는 같은 날짜로 측정하지만, 짧은 페이퍼 기록입니다. 재구축된 애널리스트가 가동되면 AI 기록은 0에서 다시 시작합니다. 초기 점수판으로 읽으세요. <Term term="not-yet-proven" />을 참조하세요.</>,
             zh: <>目前不應把它當作證明。它是逐日往前建立的（<Term term="point-in-time" />），包含<Term term="transaction-costs" />，且基準以相同日期衡量，但它是一份短期的紙上紀錄。重建後的分析師上線時，AI 紀錄會從零重新開始。請把它當作早期的計分板；請見<Term term="not-yet-proven" />。</>,
         },
@@ -513,12 +513,12 @@ export default function HelpPage() {
                                     <p>
                                         StockPeak publishes the output of a research system. It is not investment advice, not a
                                         recommendation to buy or sell any security, and not personalised to your circumstances.
-                                        Verdicts are model outputs about whether a price sits above or below a range of estimated
-                                        values; they can be wrong. Track records shown are <b>paper (simulated) portfolios</b>, include
+                                        Qwen&apos;s analyses and values, like the earlier analyst&apos;s verdicts, are model outputs
+                                        built on assumptions; they can be wrong. Track records shown are <b>paper (simulated) portfolios</b>, include
                                         assumed costs, cover a short period, and have not been shown to predict future returns.
                                         Historical macro data are revised data, not point-in-time. The site is not a trading bot and
                                         not a crystal ball: the screen works on average over years, not on every stock every month,
-                                        and none of the rebuilt analyst&apos;s verdicts passes the gate yet. Do your own research; you
+                                        and Qwen&apos;s analysis has not been graded on returns. Do your own research; you
                                         can lose money.
                                     </p>
                                 )}

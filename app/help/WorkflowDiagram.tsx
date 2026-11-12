@@ -53,13 +53,13 @@ const STEPS: Step[] = [
         id: 'analyst',
         title: { en: 'Analyst', ko: '애널리스트', zh: '分析師' },
         desc: {
-            en: <>The AI researches and chooses every input, Python does every calculation, and code checks the answer. The verdict is where the price sits against the <Term term="iv-band">value band</Term>; the <Term term="crux">crux</Term> is the one input the price gets wrong.</>,
+            en: <>Qwen, a local AI, reads each company&apos;s filings and writes claims by topic; code checks each claim against the filing and, where the filings allow, computes a value from Qwen&apos;s choices. Qwen has not been graded on returns.</>,
             ko: <>AI가 리서치하고 모든 입력값을 고르며, 파이썬이 모든 계산을 하고, 코드가 답을 검증합니다. 판정은 주가가 <Term term="iv-band" />에 대해 어디에 있는가이고, <Term term="crux" />은 주가가 틀린 단 하나의 입력값입니다.</>,
             zh: <>AI 負責研究並選定每一項輸入，Python 做每一項計算，程式碼再檢查答案。判定就是股價相對於<Term term="iv-band" />的位置；<Term term="crux" />則是股價錯估的那一個輸入。</>,
         },
-        output: { en: 'verdict · value band · crux', ko: '판정 · 가치 밴드 · 핵심 쟁점', zh: '判定 · 價值區間 · 關鍵分歧' },
+        output: { en: 'analysis · value where computable', ko: '판정 · 가치 밴드 · 핵심 쟁점', zh: '判定 · 價值區間 · 關鍵分歧' },
         status: {
-            text: { en: 'publishing first verdicts · none passes the gate', ko: '첫 판정 게시 중 · 게이트 통과 없음', zh: '正在發布第一批判定 · 無一通過閘門' },
+            text: { en: 'live · analysis on stock pages', ko: '첫 판정 게시 중 · 게이트 통과 없음', zh: '正在發布第一批判定 · 無一通過閘門' },
             warn: true,
         },
     },
@@ -67,7 +67,7 @@ const STEPS: Step[] = [
         id: 'gate',
         title: { en: 'Gate', ko: '게이트', zh: '閘門' },
         desc: {
-            en: <>Marks each verdict <Term term="actionable" /> or not, with the <Term term="gate-reason">gate reasons</Term>. <Term term="blocked">Blocked</Term> verdicts stay visible as a record and are never a recommendation.</>,
+            en: <>Marked each verdict of the earlier analyst <Term term="actionable" /> or not, with the <Term term="gate-reason">gate reasons</Term>. <Term term="blocked">Blocked</Term> verdicts stay visible as a record and are never a recommendation. Stopped with that analyst.</>,
             ko: <>각 판정에 <Term term="actionable" /> 여부를 표시하고 사유(<Term term="gate-reason" />)를 붙입니다. <Term term="blocked" /> 판정은 기록으로 계속 보이며 추천이 아닙니다.</>,
             zh: <>為每個判定標示是否<Term term="actionable" />，並附上<Term term="gate-reason" />。<Term term="blocked" />的判定仍作為紀錄保持可見，絕非建議。</>,
         },
@@ -77,18 +77,18 @@ const STEPS: Step[] = [
         id: 'followup',
         title: { en: 'Follow-up', ko: '후속 점검', zh: '跟進' },
         desc: {
-            en: <>Each day it decides only: re-analyse now, or nothing new. It sets <Term term="buy-paused" /> and a 14-day refresh, and it never sells.</>,
+            en: <>A daily check of held names against new filings and news is being rebuilt. It only asks for a fresh look, and it never sells.</>,
             ko: <>매일 하나만 결정합니다. 지금 재분석할지, 새로운 것이 없는지. <Term term="buy-paused" />과 14일 갱신을 설정하며, 절대 매도하지 않습니다.</>,
             zh: <>每天只決定一件事：現在重新分析，或沒有新消息。它會設定<Term term="buy-paused" />與 14 天的更新，而且絕不賣出。</>,
         },
         output: { en: 'watch items · buy paused · re-analysis queue', ko: '관찰 항목 · 매수 중지 · 재분석 대기열', zh: '觀察項目 · 暫停買進 · 重新分析佇列' },
-        status: { text: { en: 'built · not live yet', ko: '구축됨 · 아직 가동 전', zh: '已建好 · 尚未上線' }, warn: true },
+        status: { text: { en: 'being rebuilt · not running', ko: '구축됨 · 아직 가동 전', zh: '已建好 · 尚未上線' }, warn: true },
     },
     {
         id: 'grading',
         title: { en: 'Grading', ko: '평가', zh: '評分' },
         desc: {
-            en: <>Each verdict is graded at 30, 91, 182 and 365 days against <Term term="iwm" />, <Term term="spy" /> and QQQ. Three paper books — the AI book, the <Term term="control-book" /> and yours — trade daily with real prices and assumed costs.</>,
+            en: <>Two monthly paper books, Code and Qwen, are marked every day against QQQ, <Term term="spy" /> and <Term term="iwm" />, beside the <Term term="control-book" /> and yours, with real prices and assumed costs. The earlier analyst&apos;s verdicts were graded at 30, 91, 182 and 365 days.</>,
             ko: <>각 판정은 30일, 91일, 182일, 365일 뒤 <Term term="iwm" />, <Term term="spy" />, QQQ와 비교해 평가됩니다. 세 개의 페이퍼 북 — AI 북, <Term term="control-book" />, 내 북 — 이 실제 가격과 가정한 비용으로 매일 거래합니다.</>,
             zh: <>每個判定會在 30、91、182 與 365 天後對照<Term term="iwm" />、<Term term="spy" />與 QQQ 評分。三個紙上帳本——AI 帳本、<Term term="control-book" />與你自己的帳本——每天以真實價格與假設成本交易。</>,
         },
@@ -101,7 +101,7 @@ const TEXT = {
     inputs: { en: 'inputs', ko: '입력', zh: '輸入' },
     output: { en: 'hands on', ko: '넘기는 것', zh: '交給下一步' },
     footer: {
-        en: 'Each step hands the next only a data file. The cloud part re-runs on a schedule via GitHub Actions; the AI analyst runs on a local computer.',
+        en: 'Each step hands the next only a data file. The cloud part re-runs on a schedule via GitHub Actions; Qwen runs on a local computer.',
         ko: '각 단계는 다음 단계에 데이터 파일만 넘깁니다. 클라우드 부분은 GitHub Actions로 일정에 따라 재실행되고, AI 애널리스트는 로컬 컴퓨터에서 실행됩니다.',
         zh: '每一步只把一個資料檔交給下一步。雲端部分透過 GitHub Actions 依排程重新執行；AI 分析師則在本機電腦上執行。',
     },

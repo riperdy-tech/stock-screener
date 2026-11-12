@@ -21,9 +21,9 @@ export function EnglishHelpBody() {
                 <p>
                     Stockpeak is a research system published as a website. Every day a computer reads the financial
                     reports and price history of roughly <b>7,000 US-listed stocks</b> and narrows them to a short
-                    list. A separate AI analyst then values the names on that list, one company at a time, and says
-                    whether each price looks too low, about right or too high. This handbook explains how each step
-                    works, what every label on the screen means, and what the system has <i>not</i> proven.
+                    list. A local AI model, Qwen, then reads the filings of the names on that list, one company at a
+                    time, and its analysis appears on each stock page. This handbook explains how each step works, what
+                    every label on the screen means, and what the system has <i>not</i> proven.
                 </p>
                 <Callout kind="warn">
                     <b>Nothing here buys or sells anything, and nothing here is financial advice.</b> It is a research
@@ -35,16 +35,29 @@ export function EnglishHelpBody() {
                     <b>Where things stand today.</b>
                     <ul className="mt-1.5 list-disc space-y-1 pl-5">
                         <li>
-                            The rebuilt AI analyst has started publishing its first verdicts. Each comes from a single
-                            run, and every one is blocked by the gate for now, so nothing sits under Research now. See{' '}
-                            <A href="#analyst">The AI analyst</A> and <A href="#relaunch">What changes at go-live</A>.
+                            The screener picks a monthly book of roughly 50 to 60 stocks. Two paper books follow it from 6
+                            November 2026: the Code book (the screener&apos;s picks alone) and the Qwen book (the same
+                            picks, with a slot held as cash when Qwen&apos;s reading of the filings finds a material
+                            event). Both are simulated; no real money is involved.
                         </li>
                         <li>
-                            The daily follow-up is built but not live, and the AI paper record has not been reset yet.
-                            Real-money mirroring is halted; this site never trades.
+                            Qwen reads the filings of the names on the screener&apos;s list. Its analysis is on each stock
+                            page, with a value only where one can be computed. Many names have no value, and many values
+                            sit far from the market price, so read the analysis before the number. Qwen has not been graded
+                            on returns. See <A href="#analyst">The AI analyst</A>.
                         </li>
                         <li>
-                            Nothing here is proven yet. See <A href="#validation">How it is validated</A>.
+                            The earlier verdict analyst, with its gate and its AI paper book, was stopped in October 2026
+                            after it was ruled invalid. Its record stays on the Track page, labelled as the stopped
+                            analyst&apos;s. See <A href="#relaunch">What is live, stopped and next</A>.
+                        </li>
+                        <li>
+                            A daily follow-up of held names, reading new filings and news, is being rebuilt. It is not
+                            running yet. Real-money mirroring is halted; this site never trades.
+                        </li>
+                        <li>
+                            Nothing here is proven yet. The comparison that matters, whether the Qwen book beats the Code
+                            book, has not been measured. See <A href="#validation">How it is validated</A>.
                         </li>
                     </ul>
                 </Callout>
@@ -76,24 +89,25 @@ export function EnglishHelpBody() {
                         <A href="#screen">The quant screen</A> and <A href="#bands">Bands, vetoes &amp; warnings</A>.
                     </li>
                     <li>
-                        <b>Analyst — values each name.</b> An AI model on a local computer researches one listed company
-                        at a time, about 1 h 45 min each on one GPU. The AI chooses every valuation input, Python does
-                        every calculation, and code checks the result. The output is a verdict against a value band, and
-                        the <Term term="crux">crux</Term> behind it. See <A href="#analyst">The AI analyst</A>.
+                        <b>Analyst — reads each name.</b> Qwen, an AI model on a local computer with one GPU, reads one
+                        listed company&apos;s filings at a time and writes claims by topic; code checks each claim against
+                        the filing. Where the filings allow it, code computes a value from Qwen&apos;s choices. See{' '}
+                        <A href="#analyst">The AI analyst</A>.
                     </li>
                     <li>
-                        <b>Gate — checks every verdict.</b> Code re-judges each verdict. One that fails stays visible,
-                        marked blocked, with the reasons. Verdicts and their gate marks are then published to this site.
-                        See <A href="#gate">The gate</A>.
+                        <b>Gate — the earlier analyst&apos;s check (stopped).</b> Code re-judged each verdict of the earlier
+                        analyst and marked it blocked or not, with the reasons. It stopped with that analyst; its section
+                        is kept as the record. See <A href="#gate">The gate</A>.
                     </li>
                     <li>
-                        <b>Follow-up — watches daily.</b> Each day it checks every held name and buy candidate against
-                        new filings and news and decides only: re-analyse now, or nothing new. It never sells.{' '}
-                        <b>Built, but not live yet.</b> See <A href="#followup">The daily follow-up</A>.
+                        <b>Follow-up — watches daily.</b> A daily check of held names against new filings and news is
+                        being rebuilt. It only ever asks for a fresh look; it never sells.{' '}
+                        <b>Not running yet.</b> See <A href="#followup">The daily follow-up</A>.
                     </li>
                     <li>
-                        <b>Grading — scores every call.</b> Each verdict is later graded against what the price did, and
-                        three paper books follow the machine, a control and your own holdings. See{' '}
+                        <b>Grading — scores the record.</b> Two monthly paper books, Code and Qwen, are marked every day
+                        against benchmarks, beside a control book and your own holdings. The earlier analyst&apos;s verdicts
+                        were graded against later prices; Qwen has not been graded on returns. See{' '}
                         <A href="#track">Track record</A>.
                     </li>
                 </ol>
@@ -113,101 +127,75 @@ export function EnglishHelpBody() {
                         health dot, and the macro read on the right. See <A href="#health">System health</A>.
                     </li>
                     <li>
-                        <b>A notice</b>, when something needs saying. Today it says the rebuilt analyst is publishing
-                        its first verdicts and none passes the gate yet.
+                        <b>A notice</b>, when something needs saying.
                     </li>
                     <li>
-                        <b>The gate line</b> — one sentence on whether any verdict passes the gate.
+                        <b>The status line</b> — one sentence: how many list names Qwen has read, how many have a value,
+                        and the date of the newest reading.
                     </li>
                     <li>
-                        <b>The funnel</b> — five counts: US stocks → pass safety → make the list → AI verdicts → pass
-                        the gate. Clicking a step only <i>selects</i> it: the summary below changes, and &ldquo;show
+                        <b>The funnel</b> — five counts: US stocks → pass safety → make the list → Qwen read → valued.
+                        Clicking a step only <i>selects</i> it: the summary below changes, and &ldquo;show
                         how&rdquo; opens the detail. It does not filter the table. Where a step removes names, its detail
                         panel says why.
                     </li>
                     <li>
-                        <b>One table</b> for every name, in the sections below, with filters for verdict, door, sector
-                        and search. A filter that hides rows always says &ldquo;showing k of n&rdquo;.
+                        <b>One table</b> for the list, in the sections below, with filters for door, sector and search. A filter that hides rows always says &ldquo;showing k of n&rdquo;.
                     </li>
                 </ul>
 
-                <SubHeading>The sections of the table, in order</SubHeading>
+                <SubHeading>The sections of the table</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>Research now</b> — the verdict says undervalued, it passes <A href="#gate">the gate</A>, and
-                        it is not held back. Ranked by margin of safety.
+                        <b>Research now</b> — the screener&apos;s top names, roughly the first 50 to 60, in screen order. It
+                        is a list of names worth your research time, not a buy list.
                     </li>
                     <li>
-                        <b><Term term="waiting" /></b> — undervalued and passing the gate, but held back by timing or by
-                        buying being paused. The reason is shown. This section fills in once the follow-up is live.
+                        <b>Watchlist</b> — the next names on the screener&apos;s list, in screen order. This is the screen&apos;s
+                        own band name; it is not a verdict.
                     </li>
                     <li>
-                        <b><Term term="no-edge" /></b> — passes the gate, and the verdict is FAIR or overvalued. FAIR
-                        is a real answer, not a sell. Overvalued means &ldquo;do not buy&rdquo;.
-                    </li>
-                    <li>
-                        <b>Blocked by the gate</b> — a verdict that fails the gate, or that has no usable run. It is
-                        kept for the record, with its reasons, and is never a recommendation.
-                    </li>
-                    <li>
-                        <b>Awaiting underwriting</b> — on the list, not yet valued by the analyst. Queued by screen
-                        priority. Not a failure.
-                    </li>
-                    <li>
-                        <b>Disqualified</b> — on the list but removed by a safety filter, or rejected by the analyst.
-                        The reason is shown beside it.
+                        <b>Disqualified</b> — on the list but removed by a safety filter. The reason is shown beside it.
                     </li>
                 </ul>
                 <p>
-                    Verdicts from the <Term term="rebuilt-analyst">old analyst</Term> are not shown on the desk; one
-                    quiet line counts them, and each stays on its stock page under verdict history. The screen also has
-                    a band called <Term term="watchlist" />: that is the screen&apos;s own name for the lower part of
-                    the list, and has nothing to do with the sections above.
+                    Qwen&apos;s reading sits beside each name. Verdicts from the <Term term="rebuilt-analyst">earlier analyst</Term> no
+                    longer place names; one quiet line counts them, and each stays on its stock page under verdict history.
                 </p>
 
                 <SubHeading>Reading a row</SubHeading>
                 <p>
-                    Each row shows the company, today&apos;s price, the verdict, the value band, the margin of safety
-                    (MoS, signed: positive means the price is below the median value), the size hint (FULL, HALF or
-                    QUARTER), the timing call (buy now, wait: trend, paused, avoid, or single run), the door that listed
-                    it, how high it ranked on that door, and five small bars for the pillars Q M R V G — quality,
-                    momentum, revisions, value and expectations gap. A bar grows up when the stock is above its sector
-                    peers and down when below. A dashed empty bar means the pillar is <i>missing</i>, not zero.
+                    Each row shows the company, today&apos;s price and the screener&apos;s rank. Qwen&apos;s reading sits beside
+                    it: when it was read, the value and its range where one could be computed (otherwise the reason),
+                    the gap between that value and the price, and how many of Qwen&apos;s claims were checked against the
+                    filings. A large gap is a reason to read the analysis, not a signal: many values sit far from the
+                    price. The screener side shows the door that listed the name, and five small bars for the pillars Q M R V
+                    G — quality, momentum, revisions, value and expectations gap. A bar grows up when the stock is above its
+                    sector peers and down when below. A dashed empty bar means the pillar is <i>missing</i>, not zero.
                 </p>
                 <p>
-                    Click anywhere on a row to open it. The AI analyst column shows the value band, the margin of
-                    safety, the size hint with its four buckets, how many runs were usable and how far they spread, the
-                    timing, the thesis, the verdict&apos;s age and the crux in one line. The screener column shows the
-                    route, band and rank, the pillars, the expectations gap, market cap and flags. A row that is still
-                    awaiting underwriting shows only the screener column. &ldquo;Open full case ›&rdquo; goes to the
-                    stock page.
+                    Opening a name leads to its stock page.
                 </p>
 
-                <SubHeading>The value band strip</SubHeading>
+                <SubHeading>Qwen&apos;s value and range</SubHeading>
                 <p>
-                    Next to a verdict is a thin strip. The <b>shaded band</b> is the range of values from the
-                    analyst&apos;s runs, and the <b>dark tick</b> is today&apos;s price; the label gives the range and
-                    the median (for example &ldquo;$52–58 · MED 55&rdquo;). A tick left of the band means the price is
-                    below every run&apos;s value; inside means it is within the range; right of it means above every
-                    run. With a single run the band is one point. The verdict is where the price sits against the
-                    whole band, and it is frozen at verdict time: the desk never recomputes it from a live price. See{' '}
-                    <Term term="iv-band" />.
+                    Where code can compute a value from Qwen&apos;s choices, the stock page shows a bear, base and bull value
+                    against today&apos;s price. A value far from the price is labelled, because the inputs may be wrong: read
+                    the analysis first. Some companies cannot be valued yet, and the reason is shown instead of a number.
+                    The price shown is the one the screener scored, and it is dated by the trading session it is for.
                 </p>
 
                 <SubHeading>The stock page</SubHeading>
                 <p>
-                    &ldquo;Open full case&rdquo; leads to the page for one name. Its left column holds the verdict and
-                    value band, <A href="#crux">what the price gets wrong</A>, the stats (median value, run spread, size
-                    hint, usable runs), timing, what would prove the verdict wrong, <A href="#followup">what we&apos;re
-                    watching</A> (empty until the follow-up is live: &ldquo;No watch items yet&rdquo;), the evidence and
-                    integrity checks, the analyst&apos;s thesis and the run transcripts. The right column shows how the
-                    stock got on the list, what the price expects, a 400-day price chart, key financials, the verdict
-                    history and which paper books hold it.
+                    The page for one name opens with Qwen&apos;s analysis: when it was read, its claims by topic with how many
+                    were confirmed in the filings, its value where there is one, and whether the Code book and the Qwen
+                    book hold the name. A verdict from the earlier analyst, if the name has one, stays under verdict history.
+                    The right column shows how the stock got on the list, what the price expects, a 400-day price chart, key
+                    financials and which paper books hold it.
                 </p>
                 <p>
-                    Under <b>⋯ → On-demand</b> are verdicts the operator requested on any ticker. They use the same
-                    stock page with a banner: &ldquo;This name is not in the book; it never enters the paper
-                    portfolios.&rdquo;
+                    Under <b>⋯ → On-demand</b> is the request form and the list of Qwen&apos;s readings, each linking to its
+                    stock page.
                 </p>
 
                 <SubHeading>Colour key — one meaning per colour</SubHeading>
@@ -393,10 +381,26 @@ export function EnglishHelpBody() {
             </Section>
 
             {/* Analyst */}
-            <Section id="analyst" title="The AI analyst — how a verdict is made">
+            <Section id="analyst" title="The AI analyst — Qwen today, and the earlier verdict analyst">
+                <Callout kind="info">
+                    <b>Qwen is the analyst that is live today.</b> Qwen is an AI model running on a local computer, not a
+                    cloud service. For each name on the screener&apos;s list it reads the company&apos;s SEC filings and writes
+                    claims by topic, such as business model, financial health, competitive position, growth and risks. Code
+                    checks each claim against the filing text, and the stock page shows how many claims were confirmed. Where
+                    the filings are complete enough, code computes a bear, base and bull value from Qwen&apos;s choices, but
+                    only when two runs of Qwen agree; otherwise no value is shown and the reason is given. A value far from
+                    the price is labelled: read the analysis before the number. Qwen&apos;s analysis is research material,
+                    not a call to buy or sell, and Qwen has not been graded on returns. A name can also be requested on the
+                    On-demand page.
+                </Callout>
+                <Callout kind="warn">
+                    <b>The rest of this section, and the sections on the crux, the gate and the daily follow-up, describe
+                    the design of the earlier verdict analyst.</b> That analyst was stopped in October 2026 after it was ruled
+                    invalid. The text is kept as the record of how its verdicts were made.
+                </Callout>
                 <p>
-                    A name on the list is valued in depth by an AI analyst — like getting a careful second opinion. The
-                    work is divided so that each part does what it is good at:
+                    A name on the list was valued in depth by the earlier AI analyst — like getting a careful second opinion.
+                    The work was divided so that each part did what it is good at:
                 </p>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
@@ -439,15 +443,17 @@ export function EnglishHelpBody() {
                     <Term term="thesis-status" />).
                 </p>
                 <Callout kind="warn">
-                    <b>Current state.</b> The rebuilt analyst passed an acceptance test on companies it had not seen; that
-                    is not a track record. Today it is publishing its first verdicts, each from a single run, and all of them
-                    are blocked by the gate. Verdicts from the old analyst, which was ruled invalid, are kept off the desk.
-                    See <Term term="rebuilt-analyst" />.
+                    <b>Current state.</b> The earlier analyst is stopped. Its verdicts were ruled invalid, they are kept off
+                    the desk, and none of this is a track record. No new verdicts of this kind are being made. See{' '}
+                    <Term term="rebuilt-analyst" />.
                 </Callout>
             </Section>
 
             {/* Crux */}
             <Section id="crux" title="The crux — what the price gets wrong">
+                <Callout kind="warn">
+                    This describes the earlier verdict analyst, which is stopped. Qwen&apos;s analysis does not use a crux.
+                </Callout>
                 <p>
                     A buy or sell call has to name the <b>one input</b> that today&apos;s price gets wrong. That is the{' '}
                     <Term term="crux">crux</Term>. It is what turns &ldquo;the analyst says undervalued&rdquo; into a claim you can
@@ -483,6 +489,9 @@ export function EnglishHelpBody() {
 
             {/* Gate */}
             <Section id="gate" title="The gate — which verdicts count">
+                <Callout kind="warn">
+                    This describes the earlier verdict analyst, which is stopped. No new verdicts pass through the gate.
+                </Callout>
                 <p>
                     After a verdict is written, code re-checks it every time the data are rebuilt. A verdict counts only if
                     it passes <Term term="gate">the gate</Term>. Every verdict is marked <Term term="actionable" /> (yes or
@@ -507,8 +516,9 @@ export function EnglishHelpBody() {
             {/* Follow-up */}
             <Section id="followup" title="The daily follow-up — monitoring never sells">
                 <Callout kind="warn">
-                    <b>Built, but not live yet.</b> It is in acceptance testing. Until it is live there are no watch items,
-                    and each stock page says so.
+                    <b>Being rebuilt; not running yet.</b> The design below was built in October and never switched on. A
+                    new daily follow-up for held names is being built from it, and nothing has run on real data yet. The
+                    steps below are the October design; the rebuilt version will differ in detail.
                 </Callout>
                 <p>
                     Every verdict ends with a watch-list: the things that would matter if they happened. Once the follow-up
@@ -552,47 +562,48 @@ export function EnglishHelpBody() {
             </Section>
 
             {/* Relaunch */}
-            <Section id="relaunch" title="What changes when the new analyst goes live">
+            <Section id="relaunch" title="What is live, stopped and next">
+                <p>Where each part of the system stands on 12 November 2026:</p>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>
+                        <b>Live.</b> The screener and its daily scoring; Qwen&apos;s analysis on the stock pages; and the Code
+                        book and the Qwen book, marked every day on paper from 6 November 2026.
+                    </li>
+                    <li>
+                        <b>Stopped.</b> The earlier verdict analyst and its gate. Its AI paper book holds only cash. Its
+                        record is kept on the Track page, labelled as the stopped analyst&apos;s.
+                    </li>
+                    <li>
+                        <b>Being rebuilt.</b> The <A href="#followup">daily follow-up</A> of held names. It is not running.
+                    </li>
+                    <li>
+                        <b>Off.</b> Real-money mirroring is halted. The site never trades.
+                    </li>
+                    <li>
+                        <b>Next.</b> A new monthly book is formed each month; the next is due on 30 November 2026. Whether
+                        the Qwen book beats the Code book has not been measured, and it cannot be read until the books have
+                        several months of marks.
+                    </li>
+                </ul>
+                <SubHeading>The earlier AI record</SubHeading>
                 <p>
-                    The rebuild reaches the site in three phases. Only the first has started, and no date is promised for
-                    the others.
-                </p>
-                <ol className="list-decimal space-y-2 pl-5">
-                    <li>
-                        <b>Today — first verdicts, none passing.</b> The rebuilt analyst is publishing its first verdicts,
-                        each from a single run. None passes the gate. Research now is empty, the AI book holds only cash,
-                        and old-analyst verdicts are kept off the desk.
-                    </li>
-                    <li>
-                        <b>Baseline fill.</b> The analyst works through the whole list one company at a time, about 1 h 45
-                        min each on one GPU, in screen-priority order, with no ETA promised. Names it has not reached show as
-                        Awaiting underwriting — queued, not failed. New verdicts land in the sections by the normal rules.
-                    </li>
-                    <li>
-                        <b>Steady state.</b> The <A href="#followup">daily follow-up</A> goes live, so every name is
-                        refreshed at least every 14 days and the Waiting, buy-paused and held states fill in. Grading starts
-                        to accumulate.
-                    </li>
-                </ol>
-                <SubHeading>The AI record resets</SubHeading>
-                <p>
-                    At go-live the AI paper record restarts from zero (<Term term="record-reset" />). The old AI record —
-                    made by the old analyst, which was ruled invalid — is archived and stays viewable as &ldquo;Archived
-                    record · old analyst&rdquo;; a fresh record starts as &ldquo;Since go-live&rdquo;. None of this has
-                    happened yet.
+                    The earlier analyst&apos;s record was not reset, because that analyst did not go live again. It stays on
+                    the Track page, labelled as the stopped analyst&apos;s, and it allows no conclusion
+                    (<Term term="record-reset" />).
                 </p>
             </Section>
 
             {/* Track */}
             <Section id="track" title="Track record — the honest meter">
                 <p>
-                    Instead of a flattering <Term term="backtest" />, the system <Term term="paper-trading">paper-trades</Term> every day
-                    with real prices and assumed <Term term="transaction-costs" />, and grades every verdict. If the system
+                    Instead of a flattering <Term term="backtest" />, the system <Term term="paper-trading">paper-trades</Term> its
+                    monthly picks every day with real prices and assumed <Term term="transaction-costs" />. If the system
                     is wrong, this page will say so. Every number on it is paper (simulated) and covers a short period.
                 </p>
-                <SubHeading>The verdict scoreboard</SubHeading>
+                <SubHeading>The earlier analyst&apos;s verdict scoreboard</SubHeading>
                 <p>
-                    It comes first, before any returns. It shows three counts — verdicts graded from the valid analyst,
+                    It comes first, before any returns, and it is the stopped analyst&apos;s record, not Qwen&apos;s: nothing on
+                    this page grades Qwen. It shows three counts — verdicts graded from the valid analyst,
                     verdicts graded from the old analyst (labelled legacy and inconclusive), and verdicts still pending
                     (<Term term="graded-pending" />) — then four horizon tiles (30, 91, 182 and 365 days) with how many are
                     gradeable at each. The method is printed under it: entry is the first close on or after the verdict
@@ -600,21 +611,32 @@ export function EnglishHelpBody() {
                     repeat verdicts on one name are correlated. The data file&apos;s own caveats are shown word for word.
                     While the count from the valid analyst is zero, no average-excess or percent-beat headline is shown.
                 </p>
-                <SubHeading>The record switch</SubHeading>
+                <SubHeading>The banner</SubHeading>
                 <p>
-                    Two chips: &ldquo;Archived record · old analyst&rdquo; and &ldquo;Since go-live&rdquo;. The old AI
-                    history sits under the first, with a banner saying it comes from an analyst ruled invalid. The second
-                    starts empty and stays so until the rebuilt analyst goes live (<Term term="record-reset" />).
+                    A banner at the top says that every book on the page is paper, that the Code book and the Qwen book
+                    began on 6 November 2026 and have run far too short a time to show anything, that Qwen has not been
+                    graded on returns, and that the scoreboard and the old AI book belong to the stopped analyst.
                 </p>
                 <SubHeading>The paper books</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>AI book</b> — follows the verdicts that pass the gate (<Term term="rn-depth" />). It holds only
-                        cash when nothing passes, which is the case today.
+                        <b>Qwen book</b> — the Code book&apos;s picks, with a slot held as cash when Qwen&apos;s reading of the
+                        filings finds a material event. Formed monthly, equal weight per slot.
                     </li>
                     <li>
-                        <b>Control book</b> — every Research now name, with no AI (<Term term="control-book" />). It is the
-                        test of whether the AI adds anything over plain arithmetic.
+                        <b>Code book</b> — the screener&apos;s monthly picks alone, the same names before Qwen&apos;s check.
+                    </li>
+                    <li>
+                        <b>Old AI book (stopped)</b> — followed the earlier analyst&apos;s verdicts that passed the gate
+                        (<Term term="rn-depth" />). It holds only cash.
+                    </li>
+                    <li>
+                        <b>Gemini book (interim)</b> and <b>Code baseline (engine v2.1)</b> — comparison books from October,
+                        paper only. Their picks stopped updating in mid-October.
+                    </li>
+                    <li>
+                        <b>Control book</b> — every Research now name, with no AI (<Term term="control-book" />), since June
+                        2026.
                     </li>
                     <li>
                         <b>My book</b> — your own saved holdings, tracked like a fund (<Term term="unitization" />) so that
@@ -631,9 +653,9 @@ export function EnglishHelpBody() {
                 <SubHeading>Growth of 100, and the ledger</SubHeading>
                 <p>
                     Growth of 100 plots the books and the benchmarks (<Term term="qqq" />, <Term term="spy" />, <Term term="iwm" /> and a few
-                    more) from the same start, with a window selector and a what-if cost box that re-costs every trade. A vertical
-                    rule marks the record reset. The ledger lists the AI book&apos;s trades with a plain reason (for example
-                    &ldquo;left the ranked list&rdquo;) and shows days with no trade as &ldquo;no changes&rdquo;.
+                    more) from the same start, with a window selector and a what-if cost box that re-costs every trade. The ledger
+                    lists the Qwen book&apos;s trades with a plain reason (for example &ldquo;entered at the monthly
+                    formation&rdquo;) and shows days with no trade as &ldquo;no changes&rdquo;.
                 </p>
                 <SubHeading>Honest rules</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
@@ -644,7 +666,7 @@ export function EnglishHelpBody() {
                 <SubHeading>How to read it</SubHeading>
                 <ul className="list-disc space-y-2 pl-5">
                     <li><b>Control vs QQQ</b> — the stock selection works only if the picks beat the <Term term="benchmark" />, QQQ.</li>
-                    <li><b>AI book vs control</b> — the AI analyst earns its keep only if its book beats the plain list.</li>
+                    <li><b>Qwen book vs Code book</b> — Qwen&apos;s filing check earns its keep only if its book beats the Code book. This has not been measured: the books began on 6 November 2026.</li>
                     <li><b>My book vs the others</b> — your own deviations show up as the <Term term="behavior-gap" />.</li>
                 </ul>
                 <Callout kind="info">
@@ -664,16 +686,17 @@ export function EnglishHelpBody() {
                 <ul className="list-disc space-y-2 pl-5">
                     <li><b>NO COVERAGE</b> — the stock is not in the screened universe.</li>
                     <li><b>✕ VETOED · reason</b> — a safety filter removed it.</li>
-                    <li><b>NO ANALYSIS YET</b> — the rebuilt analyst has not valued it.</li>
+                    <li><b>NO ANALYSIS YET</b> — the earlier analyst never valued it.</li>
                     <li><b>BLOCKED · reason</b> — a verdict exists but fails the gate. It is never a signal.</li>
                     <li><b>REDUCE (overvalued)</b>, <b>FAIR</b> and <b>BUY · size</b> — the verdict passes the gate and says overvalued, fair or undervalued.</li>
                     <li><b>NO PLAUSIBLE RUN</b> — no run was usable.</li>
                 </ul>
                 <p>
-                    Stances come from rebuilt-analyst verdicts only. BUY and REDUCE are the machine&apos;s labels on a
+                    Stances come from the earlier analyst&apos;s verdicts, and that analyst is stopped; Qwen&apos;s reading is on
+                    each stock page and is not part of the stance. BUY and REDUCE are the machine&apos;s labels on a
                     research list, never advice to you. Where they exist, the thesis and follow-up status sit beside each
                     holding. The footer gives your total, your cash share, a warning if one sector is over the 25 % rule,
-                    and what the AI book holds today. Your holdings also feed My book on <A href="#track">Track record</A>.
+                    and what the old AI book holds today. Your holdings also feed My book on <A href="#track">Track record</A>.
                 </p>
                 <Callout kind="info">
                     There is no allocation plan on this page. The site does not build a portfolio for you — the older
@@ -707,9 +730,9 @@ export function EnglishHelpBody() {
                         name are treated as correlated, not independent.
                     </li>
                     <li>
-                        <b>A control.</b> The sharpest question is whether the analyst&apos;s opinion adds anything on top of
-                        the screen. The <Term term="control-book" /> exists to answer it: if the AI book cannot beat the plain
-                        list, the expensive tier adds nothing.
+                        <b>A control.</b> The sharpest question is whether Qwen&apos;s reading adds anything on top of the
+                        screen. The Code book and the Qwen book exist to answer it: if the Qwen book cannot beat the Code
+                        book, Qwen&apos;s filing check adds nothing to the picks. That comparison has not been measured.
                     </li>
                     <li>
                         <b>Paper books.</b> The <A href="#track">track record</A> books trade daily with real prices and
@@ -721,9 +744,9 @@ export function EnglishHelpBody() {
                     macro page says so.
                 </p>
                 <Callout kind="warn">
-                    <b>No conclusion yet.</b> <Term term="not-yet-proven" />: every graded verdict so far is from the old
-                    analyst, and none of the rebuilt analyst&apos;s verdicts passes the gate. No conclusion can be drawn
-                    until valid verdicts exist and their horizons have elapsed.
+                    <b>No conclusion yet.</b> <Term term="not-yet-proven" />: every graded verdict so far is from the earlier
+                    analyst, which was ruled invalid, and Qwen has not been graded on returns. No conclusion can be drawn
+                    about either until the monthly books have enough months of marks.
                 </Callout>
             </Section>
 
@@ -738,8 +761,8 @@ export function EnglishHelpBody() {
                 <SubHeading>Two clocks</SubHeading>
                 <p>
                     The scoring chain re-runs in the cloud several times each weekday, with a refresh after the close.
-                    Cloud schedulers can run late, so every file carries its own timestamp. The AI analyst runs separately on
-                    a local computer with one GPU, and produces verdicts on its own clock.
+                    Cloud schedulers can run late, so every file carries its own timestamp. Qwen runs separately on a local
+                    computer with one GPU, and publishes its analysis on its own clock.
                 </p>
                 <SubHeading id="health">System health</SubHeading>
                 <p>
@@ -747,9 +770,10 @@ export function EnglishHelpBody() {
                 </p>
                 <ul className="list-disc space-y-2 pl-5">
                     <li>
-                        <b>Three stamps</b> — <i>prices as of</i>, <i>book scored</i> and <i>latest verdict</i>. A stamp
-                        turns amber with a ● when it is past its expected age: prices after 24 hours, the book after 36
-                        hours, and — once the rebuilt analyst is publishing — the latest verdict after 14 days.
+                        <b>Three stamps</b> — <i>prices as of</i> (the trading session the prices are for), <i>book scored</i> and{' '}
+                        <i>Qwen analysis</i> (its newest publish). A stamp turns amber with a ● when it is past its expected
+                        age: prices when the post-close refresh is more than 3 days old, the book after 36 hours and the
+                        Qwen analysis after 14 days.
                     </li>
                     <li>
                         <b>The health dot</b> — green when all is well. Amber for a stale stamp, a discount rate that did
