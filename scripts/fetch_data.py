@@ -534,15 +534,21 @@ def extract_financial_detail(ticker_symbol, yf_ticker):
             pass  # Some tickers don't have calendar data
 
         monthly_closes = []
+        monthly_months = []
         try:
             hist = yf_ticker.history(period="2y", interval="1mo")
             if not hist.empty and 'Close' in hist.columns:
-                monthly_closes = [float(x) for x in hist['Close'].dropna().tolist()]
+                closes_s = hist['Close'].dropna()
+                monthly_closes = [float(x) for x in closes_s.tolist()]
+                monthly_months = [str(i)[:7] for i in closes_s.index]   # each close's month (YYYY-MM)
         except:
             pass
 
-        return build_financial_detail(ticker_symbol, info, income_stmt, q_income_stmt,
-                                      cash_flow_stmt, bs, next_earnings, monthly_closes)
+        detail = build_financial_detail(ticker_symbol, info, income_stmt, q_income_stmt,
+                                        cash_flow_stmt, bs, next_earnings, monthly_closes)
+        if detail and monthly_months:
+            detail["Monthly_Close_Months"] = monthly_months
+        return detail
     except Exception as e:
         logging.warning(f"Financial detail extraction failed for {ticker_symbol}: {e}")
         return None
@@ -1070,6 +1076,8 @@ def main():
                     "consecutiveGrowth": sec_growth["Consecutive_YoY_EPS_Growth"] if sec_growth["Consecutive_YoY_EPS_Growth"] is not None else 0
                 }
             }
+            if detail and detail.get("Monthly_Close_Months"):
+                result_obj["metrics"]["monthlyCloseMonths"] = list(detail["Monthly_Close_Months"])
             existing_data[ticker] = result_obj
 
             # Save per-ticker financial detail for AI Prompt Exporter

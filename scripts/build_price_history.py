@@ -107,6 +107,8 @@ def main():
 
     # ── Extract monthlyCloses ────────────────────────────────────────────
     prices = {}       # ticker -> cleaned monthly closes list
+    last_month = {}   # ticker -> month (YYYY-MM) of the last close (the live tail), where stocks.json stamps it
+    unconfirmed = {}  # ticker -> months whose element is not a confirmed month-end
     missing = []      # tickers without usable monthlyCloses
 
     for stock in stocks:
@@ -130,6 +132,11 @@ def main():
             continue
 
         prices[ticker] = cleaned
+        stamp = metrics.get("monthlyCloseMonths")
+        if isinstance(stamp, list) and len(stamp) == len(monthly_closes) == len(cleaned):
+            last_month[ticker] = stamp[-1]
+        if metrics.get("monthlyCloseUnconfirmed"):
+            unconfirmed[ticker] = metrics["monthlyCloseUnconfirmed"]
 
     # ── Sort keys for determinism ────────────────────────────────────────
     prices = dict(sorted(prices.items()))
@@ -149,7 +156,11 @@ def main():
         "source": "stocks.json metrics.monthlyCloses (24 monthly closes per ticker)",
         "ticker_count": ticker_count,
         "missing_count": missing_count,
+        "price_asof": ((stocks[0].get("_meta") or {}).get("price_asof")
+                       if stocks and isinstance(stocks[0], dict) else None),
         "prices": prices,
+        "last_month": dict(sorted(last_month.items())),
+        "unconfirmed_month_end": dict(sorted(unconfirmed.items())),
     }
 
     # ── Write price_history.json ─────────────────────────────────────────

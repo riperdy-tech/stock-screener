@@ -162,9 +162,13 @@ def main():
     # ── Post-run invariants (artifact-based, not stdout-parsed) ─────────
     print("\n=== INVARIANTS ".ljust(60, "="))
     n_stocks = None
+    price_asof = None
     if ok:
         stocks = load_json(STOCKS_JSON)
         n_stocks = len(stocks)
+        # the session the prices are the close of (stamped by refresh_prices.py); None = not a completed session's close
+        price_asof = ((stocks[0].get("_meta") or {}).get("price_asof")
+                      if stocks and isinstance(stocks[0], dict) else None)
 
         prev_n = previous_manifest.get("counts", {}).get("stocks")
         if prev_n:
@@ -248,13 +252,16 @@ def main():
 
         ledgers_path = DATA / "paper_ledgers.json"
         ledgers = load_json(ledgers_path) if ledgers_path.exists() else {}
-        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
         # Freshness sentinel repointed plan -> equal 2026-08-27 (the plan book was retired).
-        # `equal` is computed every run, so it is the live book that proves the tracker advanced.
+        # `equal` is the live book that proves the tracker advanced. Rows are keyed by the SESSION
+        # the prices close (not the run date), and the tracker writes none on a session it already
+        # holds or when the benchmark's close for it is not out yet: the row must reach the stamped
+        # session (price_asof); a missing stamp means the tracker deliberately wrote nothing.
         equal_series = ((ledgers.get("ledgers") or {}).get("equal") or {}).get("nav_series") or []
-        ledger_current = bool(equal_series) and equal_series[-1].get("date") == today
-        add_invariant(invariants, "paper_ledger_updated", "hard", ledger_current,
-                      f"paper ledger latest row {equal_series[-1]['date'] if equal_series else 'none'} (expect {today})")
+        latest_row = equal_series[-1].get("date") if equal_series else None
+        ledger_current = bool(price_asof) and bool(latest_row) and latest_row >= price_asof
+        add_invariant(invariants, "paper_ledger_updated", "soft", ledger_current,
+                      f"paper ledger latest row {latest_row or 'none'} (expect >= price session {price_asof or 'none stamped'})")
         mine_series = ((ledgers.get("ledgers") or {}).get("mine") or {}).get("nav_series") or []
         mine_live = bool(mine_series) and mine_series[-1].get("nav") is not None
         add_invariant(invariants, "mine_ledger_active", "soft", mine_live,
@@ -301,6 +308,7 @@ def main():
         "counts": {
             "stocks": n_stocks,
         },
+        "price_asof": price_asof,
     }
     with MANIFEST_JSON.open("w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2, sort_keys=True)

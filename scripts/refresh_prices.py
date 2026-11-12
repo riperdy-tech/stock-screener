@@ -17,9 +17,21 @@ timestamps MIX, so this either overlays >= MIN_COVERAGE of the universe or
 changes nothing at all. A partial overlay is worse than a stale-but-consistent
 snapshot and never happens.
 
+DATED, NOT "LAST BAR": each name's close is read with its bar date. The session this run
+is for is the last COMPLETED New York session at run time, taken from a reference series
+(IWM) fetched with the batch (the repository has no market calendar). The overlay is written
+only when >= MIN_COVERAGE of the names that returned a price carry THAT session's bar;
+otherwise nothing is written and the script exits non-zero. A name whose newest bar is older
+keeps its stored price and gets `price_older_than_asof` (its bar date). The session is
+stamped as `_meta.price_asof` on the first row of stocks.json; track_paper_portfolios.py keys
+its ledger rows by it and run_chain.py copies it into chain_manifest.json. A run before the
+session closes therefore overlays the PREVIOUS close, never an intraday price.
+
 Updates per symbol: price, marketCap (scaled by price ratio — avoids share-count
 drift), and the last monthlyCloses point (momentum's live tail; earlier points
-are dividend-adjusted history and are left alone).
+are dividend-adjusted history and are left alone). When the session is in a later month
+than the series' last element (metrics.monthlyCloseMonths), the series gains a new element
+instead: the old last element becomes that month's last close.
 
 Usage:
     python scripts/refresh_prices.py           # overlay onto public/data/stocks.json
@@ -33,7 +45,7 @@ import json
 import math
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 try:
@@ -46,6 +58,9 @@ STOCKS_JSON = ROOT / "public" / "data" / "stocks.json"
 
 CHUNK = 250          # tickers per yf.download call
 MIN_COVERAGE = 0.90  # below this the overlay aborts and the file is untouched
+REF_SYMBOL = "IWM"   # reference series: its last completed bar names the session
+WINDOW_DAYS = 14     # bars requested before the session: covers the last close of the prior month
+CLOSE_BUFFER = timedelta(minutes=30)  # a bar dated today is final this long after 16:00 New York
 
 # Yahoo rate-limits BURSTS, not volume: threads=True fires one HTTP request per
 # ticker as fast as possible and dies with YFRateLimitError within a few hundred
@@ -66,31 +81,46 @@ def _is_rate_limit(exc: Exception) -> bool:
     return "RateLimit" in s or "Too Many Requests" in s or "429" in s
 
 
-def fetch_live_prices(symbols: list[str]) -> dict[str, float]:
-    """Paced last-close prices. Returns {symbol: price} for every hit."""
+def last_completed_session(bar_dates: list[str], now: datetime | None = None) -> str | None:
+    """Newest bar date that is a finished session at `now` (UTC): any date before today in
+    New York, or today's once 16:00 New York plus CLOSE_BUFFER has passed (an early close
+    only makes this later than needed). None when no bar qualifies."""
+    from zoneinfo import ZoneInfo
+    now_ny = (now or datetime.now(timezone.utc)).astimezone(ZoneInfo("America/New_York"))
+    today = now_ny.date().isoformat()
+    closed_today = now_ny >= now_ny.replace(hour=16, minute=0, second=0, microsecond=0) + CLOSE_BUFFER
+    done = [d for d in bar_dates if d < today or (d == today and closed_today)]
+    return max(done) if done else None
+
+
+def fetch_bars(symbols: list[str], start: str, end: str) -> dict[str, list[tuple[str, float]]]:
+    """Paced daily bars, start inclusive / end exclusive. Returns {symbol: [(date, close)]}
+    oldest first, for every symbol with at least one bar."""
     import yfinance as yf
-    out: dict[str, float] = {}
+    out: dict[str, list[tuple[str, float]]] = {}
+
+    def bars_of(col):
+        return [(str(idx)[:10], p) for idx, v in col.dropna().items() if (p := num(float(v)))]
+
     n_chunks = (len(symbols) - 1) // CHUNK + 1
     for i in range(0, len(symbols), CHUNK):
         chunk = symbols[i:i + CHUNK]
         got = 0
         for attempt in range(len(BACKOFFS) + 1):
             try:
-                df = yf.download(" ".join(chunk), period="5d", interval="1d",
+                df = yf.download(" ".join(chunk), start=start, end=end, interval="1d",
                                  auto_adjust=False, progress=False, threads=False)
                 closes = df["Close"] if "Close" in df else df
                 if hasattr(closes, "columns"):        # multi-ticker frame
                     for sym in closes.columns:
-                        col = closes[sym].dropna()
-                        p = num(float(col.iloc[-1])) if len(col) else None
-                        if p:
-                            out[str(sym)] = p
+                        bars = bars_of(closes[sym])
+                        if bars:
+                            out[str(sym)] = bars
                             got += 1
                 elif len(chunk) == 1:                  # single-ticker series
-                    col = closes.dropna()
-                    p = num(float(col.iloc[-1])) if len(col) else None
-                    if p:
-                        out[chunk[0]] = p
+                    bars = bars_of(closes)
+                    if bars:
+                        out[chunk[0]] = bars
                         got = 1
                 # a chunk that "succeeds" but prices almost nothing is a silent
                 # rate-limit (yfinance eats per-ticker errors) — back off and retry
@@ -113,6 +143,62 @@ def fetch_live_prices(symbols: list[str]) -> dict[str, float]:
     return out
 
 
+def month_end_close(prior_month: str, bars: list[tuple[str, float]], daily: dict | None) -> float | None:
+    """Last close of `prior_month` (YYYY-MM) for a name rolling into a later month: from its
+    daily series when that series reaches into a later month, else from this run's bars when
+    they do. None when neither shows the month ended."""
+    for series in (sorted((daily or {}).items()), bars):
+        if any(d[:7] > prior_month for d, _ in series):
+            in_month = [c for d, c in series if d[:7] == prior_month]
+            if in_month:
+                return in_month[-1]
+    return None
+
+
+def _month_index(month: str) -> int:
+    return int(month[:4]) * 12 + int(month[5:7]) - 1
+
+
+def roll_monthly(metrics: dict, session: str, p_new: float, bars: list[tuple[str, float]],
+                 daily: dict | None) -> str:
+    """Write the session price into the monthly series. Returns what happened:
+    'overwrite' (same month: the live tail moves), 'roll' (new month: a new element),
+    'stamp' (series had no month stamps: tail overwritten as before, stamped now),
+    'gap' (series is more than one month behind: left alone for the next rebuild)."""
+    closes = metrics["monthlyCloses"]
+    month = session[:7]
+    months = metrics.get("monthlyCloseMonths")
+    if not (isinstance(months, list) and len(months) == len(closes)):
+        closes[-1] = round(p_new, 4)
+        top = _month_index(month)
+        metrics["monthlyCloseMonths"] = [f"{(top - k) // 12}-{(top - k) % 12 + 1:02d}"
+                                         for k in range(len(closes) - 1, -1, -1)]
+        return "stamp"
+    last = months[-1]
+    if month <= last:
+        closes[-1] = round(p_new, 4)
+        return "overwrite"
+    if _month_index(month) - _month_index(last) > 1:
+        return "gap"
+    end = month_end_close(last, bars, daily)
+    unconfirmed = [m for m in (metrics.get("monthlyCloseUnconfirmed") or []) if m != last]
+    if end is not None:
+        closes[-1] = round(end, 4)
+    else:
+        unconfirmed.append(last)   # the old live tail stays: its month is not a confirmed month-end
+    closes.append(round(p_new, 4))
+    months.append(month)
+    if unconfirmed:
+        metrics["monthlyCloseUnconfirmed"] = unconfirmed
+    else:
+        metrics.pop("monthlyCloseUnconfirmed", None)
+    return "roll"
+
+
+def _now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--dry-run", action="store_true", help="report coverage, write nothing")
@@ -124,7 +210,21 @@ def main():
     symbols = [r["symbol"] for r in rows if isinstance(r, dict) and r.get("symbol")]
     print(f"universe: {len(symbols)} symbols from {path.name}")
 
-    live = fetch_live_prices(symbols)
+    now = _now()
+    today = now.date()
+    ref = fetch_bars([REF_SYMBOL], (today - timedelta(days=WINDOW_DAYS)).isoformat(),
+                     (today + timedelta(days=1)).isoformat()).get(REF_SYMBOL, [])
+    session = last_completed_session([d for d, _ in ref], now)
+    if not session:
+        print(f"ABORT: no completed session found in the {REF_SYMBOL} reference bars — "
+              f"stocks.json left untouched")
+        sys.exit(3)
+    d_session = date.fromisoformat(session)
+    print(f"session this run prices: {session} (last completed New York session)")
+
+    bars = fetch_bars(symbols, (d_session - timedelta(days=WINDOW_DAYS)).isoformat(),
+                      (d_session + timedelta(days=1)).isoformat())
+    live = {s: b[-1][1] for s, b in bars.items()}
     coverage = len(live) / len(symbols) if symbols else 0
     print(f"live prices: {len(live)} / {len(symbols)} ({coverage:.1%})")
 
@@ -135,17 +235,47 @@ def main():
               f"stocks.json left untouched (consistent snapshot preserved)")
         sys.exit(3)
 
+    # All or nothing on the DATE: never a mix of two sessions in one file.
+    on_dates: dict[str, int] = {}
+    for s in live:
+        d = bars[s][-1][0]
+        on_dates[d] = on_dates.get(d, 0) + 1
+    on_session = on_dates.get(session, 0)
+    share = on_session / len(live)
+    by_date = ", ".join(f"{d}: {n}" for d, n in sorted(on_dates.items(), reverse=True))
+    print(f"bar dates of the {len(live)} priced names ({session} expected): {by_date}")
+    if share < MIN_COVERAGE:
+        print(f"ABORT: only {on_session}/{len(live)} names ({share:.1%}) carry the {session} bar, "
+              f"< {MIN_COVERAGE:.0%} — stocks.json left untouched (never a mix of two dates)")
+        sys.exit(4)
+
     if args.dry_run:
         sample = [(s, live[s]) for s in list(live)[:5]]
         print(f"dry run — no write. sample: {sample}")
         return
 
-    updated = big_moves = 0
+    daily = None
+    daily_path = path.parent / "daily_closes.json"
+    if daily_path.exists():
+        try:
+            daily = (json.loads(daily_path.read_text(encoding="utf-8")).get("tickers") or {})
+        except Exception as e:
+            print(f"  daily_closes.json unreadable ({e}) — month-ends come from this run's bars only",
+                  file=sys.stderr)
+
+    updated = big_moves = older = 0
+    month_acts: dict[str, int] = {}
     for r in rows:
         sym = r.get("symbol") if isinstance(r, dict) else None
         p_new = live.get(sym)
         if not p_new:
             continue
+        if bars[sym][-1][0] != session:
+            # Its newest bar is older than the file's session: keep the stored price and say so.
+            r["price_older_than_asof"] = bars[sym][-1][0]
+            older += 1
+            continue
+        r.pop("price_older_than_asof", None)
         p_old = num(r.get("price"))
         r["price"] = round(p_new, 4)
         if p_old:
@@ -155,20 +285,27 @@ def main():
             mc = num(r.get("marketCap"))
             if mc:
                 r["marketCap"] = round(mc * ratio)
-        closes = (r.get("metrics") or {}).get("monthlyCloses")
+        metrics = r.get("metrics") or {}
+        closes = metrics.get("monthlyCloses")
         if isinstance(closes, list) and closes:
-            closes[-1] = round(p_new, 4)   # live tail; adjusted history untouched
+            act = roll_monthly(metrics, session, p_new, bars[sym],
+                               (daily or {}).get(sym) if isinstance(daily, dict) else None)
+            month_acts[act] = month_acts.get(act, 0) + 1
         updated += 1
 
-    meta = {"price_refresh_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "price_refresh_coverage": round(coverage, 4)}
+    meta = {"price_refresh_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "price_refresh_coverage": round(coverage, 4),
+            "price_asof": session,
+            "price_asof_names": on_session,
+            "price_older_names": older}
     # stocks.json is a bare list; stash the marker on the first row's namespace-safe key
     if rows and isinstance(rows[0], dict):
         rows[0].setdefault("_meta", {}).update(meta)
 
     path.write_text(json.dumps(rows, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"wrote {path.name}: {updated} prices overlaid, "
-          f"{big_moves} moved >25% (check if unusually many)")
+    print(f"wrote {path.name}: {updated} prices overlaid at {session}, {older} older-bar names kept "
+          f"their stored price, {big_moves} moved >25% (check if unusually many); "
+          f"monthly series: {month_acts or 'none touched'}")
 
 
 if __name__ == "__main__":
