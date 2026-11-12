@@ -183,14 +183,59 @@ def get_cik_map():
         except (OSError, json.JSONDecodeError):
             pass
     print("Fetching SEC CIK mapping ...")
-    resp = requests.get("https://www.sec.gov/files/company_tickers.json",
-                        headers=sec_headers(), timeout=60)
-    resp.raise_for_status()
-    mapping = {e["ticker"]: str(e["cik_str"]).zfill(10) for e in resp.json().values()}
+    mapping = fetch_sec_cik_map()
     CIK_MAP_JSON.write_text(json.dumps(
         {"fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
          "map": mapping}), encoding="utf-8")
     return mapping
+
+
+def fetch_sec_cik_map():
+    """SEC's ticker file as ticker -> 10-digit CIK string."""
+    resp = requests.get("https://www.sec.gov/files/company_tickers.json",
+                        headers=sec_headers(), timeout=60)
+    resp.raise_for_status()
+    return {e["ticker"]: str(e["cik_str"]).zfill(10) for e in resp.json().values()}
+
+
+def refresh_cik_map():
+    """Every build: SEC's ticker file laid over the stored map. Returns (map, report).
+
+    The cached map used to be returned for as long as the file existed, so a company listed or
+    renamed after 2026-06-10 had no CIK and no SEC fundamentals. Stored entries are kept (a ticker
+    SEC no longer lists keeps its CIK); where SEC's CIK differs the SEC value wins and the change
+    is listed in the report. A failed or empty download leaves the stored map untouched and says
+    so loudly; the build carries on with the stored map, as it did before.
+    """
+    stored = {}
+    if CIK_MAP_JSON.exists():
+        try:
+            stored = json.loads(CIK_MAP_JSON.read_text(encoding="utf-8")).get("map") or {}
+        except (OSError, json.JSONDecodeError):
+            stored = {}
+    try:
+        fresh = fetch_sec_cik_map()
+        if not fresh:
+            raise RuntimeError("SEC ticker file was empty")
+    except Exception as exc:
+        status = f"FAILED, stored map kept ({type(exc).__name__}: {exc})"
+        print("!" * 100)
+        print(f"!!! CIK MAP REFRESH FAILED: {status} — {len(stored)} stored entries in use; "
+              f"companies listed or renamed since the stored map have NO CIK this build")
+        print("!" * 100)
+        return stored, {"status": status, "added": 0, "changed": []}
+    changed = [{"ticker": t, "old": stored[t], "new": c}
+               for t, c in sorted(fresh.items()) if t in stored and stored[t] != c]
+    added = sum(t not in stored for t in fresh)
+    merged = {**stored, **fresh}
+    CIK_MAP_JSON.write_text(json.dumps(
+        {"fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+         "map": merged}), encoding="utf-8")
+    print(f"CIK map refreshed from SEC: {len(fresh)} listed, {added} added, "
+          f"{len(changed)} changed CIK, {len(merged)} total")
+    for c in changed:
+        print(f"  CIK changed: {c['ticker']} {c['old']} -> {c['new']}")
+    return merged, {"status": "refreshed", "added": added, "changed": changed}
 
 
 # ── Scale-error defence ──────────────────────────────────────────────────────────────────────
@@ -2962,7 +3007,7 @@ def main():
     if args.limit:
         universe = universe[: args.limit]
 
-    cik_map = get_cik_map()
+    cik_map, cik_refresh = refresh_cik_map()
     # Preferreds, notes and units share the common stock's CIK; the issuer's history is not theirs.
     non_common = non_common_securities(cik_map, stocks)
     targets = {t: f"CIK{cik_map[t]}.json" for t in universe if t in cik_map and t not in non_common}
@@ -3025,6 +3070,7 @@ def main():
         print(f"SUBSET run ({len(targets)} tickers) -> writing {HISTORY_JSON.name} / "
               f"{BATTERY_JSON.name} / {TTM_JSON.name} — production files untouched")
     provenance = encode_provenance(history_out, prov_by_ticker)
+    provenance["cik_map_refresh"] = cik_refresh
     provenance["non_common_securities"] = {t: non_common[t] for t in sorted(universe) if t in non_common}
     debt_note = (
         "CH-9 debt components (instant, USD): debt_lt_noncurrent + debt_current = interest-bearing "
