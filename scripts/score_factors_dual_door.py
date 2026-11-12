@@ -1253,6 +1253,57 @@ def priority_sort_key_for_profile(p: Dict[str, Any]) -> float:
     return val + champion_bonus(p.get("nominated_doors", []))
 
 
+def rank_key_for_profile(p: Dict[str, Any]) -> Tuple[float, float, str]:
+    """F10 (WO_SF1): ascending sort key for the priority ranking of Door 1/2 names. The door
+    percentiles are rounded to one decimal for display (pctl_d1, pctl_d2, best_pctl), and ranking
+    on the rounded value let the alphabet decide the research_now cut. Rank on the UNROUNDED
+    best percentile (best_pctl_raw) plus the champion bonus; remaining ties are broken by the
+    higher of the name's eligible door scores, then by ticker. The cut itself, the bonus, the
+    quotas and the buffers are unchanged."""
+    best = p.get("best_pctl_raw")
+    prio = (best if best is not None else -1.0) + champion_bonus(p.get("nominated_doors", []))
+    scores = []
+    if p.get("score_door1") is not None:
+        scores.append(p["score_door1"])
+    if p.get("score_door2") is not None and p.get("d2_eligible", True):
+        scores.append(p["score_door2"])
+    best_score = max(scores) if scores else float("-inf")
+    return (-prio, -best_score, p["ticker"])
+
+
+def resolve_total_debt(latest: Dict[str, Any]) -> Tuple[Optional[float], Optional[str], Dict[str, Any]]:
+    """F1 (WO_SF1): total interest-bearing debt for the enterprise value and the leverage veto,
+    from the builder's current fields (debt_lt_noncurrent + debt_current, leases excluded; see
+    `_debt_note` in fundamentals_history.json). `lt_debt` is the retired field. Returns
+    (total_debt or None, flag or None, detail). A real 0.0 is a value; absence is never zero.
+
+    - both present: their sum, no flag.
+    - only debt_lt_noncurrent: that figure alone, `debt_partial` (the current portion is small
+      where both are filed: median 6% of the noncurrent figure, zero for 8%).
+    - only debt_current: the legacy `lt_debt` stands in for the missing noncurrent leg when it
+      exists (the builder's new field is null for a filer whose legacy field holds the balance:
+      on the stored file the legacy value is over 10x the current leg for 67 of 179 such
+      names), else the current figure alone; `debt_partial` either way.
+    - neither, legacy `lt_debt` present: that figure, `debt_from_legacy_field`.
+    - nothing: None, `debt_unknown`; the leverage veto cannot be evaluated."""
+    lt = num(latest.get("debt_lt_noncurrent"))
+    cur = num(latest.get("debt_current"))
+    legacy = num(latest.get("lt_debt"))
+    if lt is not None and cur is not None:
+        return lt + cur, None, {}
+    if lt is not None:
+        return lt, "debt_partial", {"missing_leg": "debt_current"}
+    if cur is not None:
+        if legacy is not None:
+            return legacy + cur, "debt_partial", {"missing_leg": "debt_lt_noncurrent",
+                                                  "noncurrent_from_legacy_lt_debt": True}
+        return cur, "debt_partial", {"missing_leg": "debt_lt_noncurrent",
+                                     "noncurrent_from_legacy_lt_debt": False}
+    if legacy is not None:
+        return legacy, "debt_from_legacy_field", {}
+    return None, "debt_unknown", {"leverage_veto": "not_evaluable"}
+
+
 def apply_band_hysteresis(
     all_ranked: List[str], rank_by_ticker: Dict[str, int], prev_rn: Set[str], prev_book: Set[str],
     rn_buffer_rank: int, book_buffer_rank: int, rn_cutoff: int = 50, book_cutoff: int = 135,
@@ -1701,18 +1752,37 @@ def main():
         ni = num(latest.get("net_income"))
         da = num(latest.get("da"))
         capex = num(latest.get("capex"))
-        ocf = num(latest.get("ocf")) or ((ni + da) if ni is not None and da is not None else None)
-        fcf = num(latest.get("fcf")) or ((ocf - capex) if ocf is not None and capex is not None else None)
-        lt_debt = num(latest.get("lt_debt")) or 0.0
-        cash = num(latest.get("cash")) or 0.0
+        # A filed 0.0 is a value: derive ocf / fcf only when the field is absent (not via `or`).
+        ocf = num(latest.get("ocf"))
+        if ocf is None and ni is not None and da is not None:
+            ocf = ni + da
+        fcf = num(latest.get("fcf"))
+        if fcf is None and ocf is not None and capex is not None:
+            fcf = ocf - capex
+        # F1 (WO_SF1): debt from the current fields; unknown debt or cash leaves the enterprise
+        # value absent (never zero) and rides as a flag.
+        total_debt, debt_flag, debt_detail = resolve_total_debt(latest)
+        cash = num(latest.get("cash"))
         equity = num(latest.get("equity"))
-        ev = mcap + lt_debt - cash
+        ev = (mcap + total_debt - cash) if total_debt is not None and cash is not None else None
+        if debt_flag is not None:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if debt_flag not in cur_flags:
+                cur_flags.append(debt_flag)
+            if debt_detail:
+                ticker_flag_detail.setdefault(t, {})[debt_flag] = debt_detail
+        if cash is None:
+            cur_flags = ticker_flags.setdefault(t, [])
+            if "cash_unknown" not in cur_flags:
+                cur_flags.append("cash_unknown")
+            ticker_flag_detail.setdefault(t, {})["cash_unknown"] = {"enterprise_value": "absent"}
 
         # CHRONIC_OPERATING_LOSS_LEVERAGE (P3.6b): a single fiscal year's numbers shouldn't cull
         # a large cap outright — CRWV/NBIS/IREN/CIFR were vetoed on one year of AI-buildout
         # capex. Same large-cap rule as the forensic vetoes: veto only below the flag-only
         # floor; at or above it, flag with the raw numbers for the analyst.
-        if fcf is not None and fcf < 0 and op is not None and op < 0 and lt_debt > 1e9:
+        if fcf is not None and fcf < 0 and op is not None and op < 0 \
+                and total_debt is not None and total_debt > 1e9:
             if mcap < LARGE_CAP_FLAG_ONLY_USD:
                 vetoes[t] = "CHRONIC_OPERATING_LOSS_LEVERAGE"
                 continue
@@ -1720,7 +1790,7 @@ def main():
             if "loss_making_leveraged" not in cur_flags:
                 cur_flags.append("loss_making_leveraged")
             ticker_flag_detail.setdefault(t, {})["loss_making_leveraged"] = {
-                "fcf": fcf, "operating_income": op, "lt_debt": lt_debt,
+                "fcf": fcf, "operating_income": op, "total_debt": total_debt,
             }
 
         eligible_count += 1
@@ -1780,7 +1850,7 @@ def main():
             if mid_cycle_fcf is not None and mcap > 0:
                 raw["fcf_yield"][t] = mid_cycle_fcf / mcap
                 raw["owner_yield"][t] = mid_cycle_fcf / mcap
-            if op is not None and ev > 0:
+            if op is not None and ev is not None and ev > 0:
                 raw["ebit_yield"][t] = op / ev
                 raw["roic_proxy"][t] = op / ev
 
@@ -1790,7 +1860,7 @@ def main():
                 raw["fcf_yield"][t] = fcf / mcap
             if None not in (ni, da, capex) and mcap > 0:
                 raw["owner_yield"][t] = (ni + da - capex) / mcap
-            if op is not None and ev > 0:
+            if op is not None and ev is not None and ev > 0:
                 raw["ebit_yield"][t] = op / ev
                 raw["roic_proxy"][t] = op / ev
 
@@ -2034,6 +2104,7 @@ def main():
             "pctl_d1": None,
             "pctl_d2": None,
             "best_pctl": None,
+            "best_pctl_raw": None,
             "nominated_doors": [],
             "fct_momentum_state": ticker_mom_state.get(t, {}),
             "fct_flags": cur_flags,
@@ -2053,6 +2124,12 @@ def main():
         p["pctl_d2"] = round(get_percentile(p["score_door2"], all_d2), 1) if p["score_door2"] is not None else None
         d2_ok = p.get("d2_eligible", True)
         p["best_pctl"] = compute_best_pctl(p["score_door1"], p["score_door2"], p["pctl_d1"], p["pctl_d2"], d2_ok)
+        # F10 (WO_SF1): the unrounded twin of best_pctl, used only by rank_key_for_profile.
+        p["best_pctl_raw"] = compute_best_pctl(
+            p["score_door1"], p["score_door2"],
+            get_percentile(p["score_door1"], all_d1) if p["score_door1"] is not None else None,
+            get_percentile(p["score_door2"], all_d2) if p["score_door2"] is not None else None,
+            d2_ok)
 
     # ── 4. Macro Sector Budgeting via MGI (MRI-11 contract) ──────────────────
     macro_scores_by_id, reported_regime, sector_ranking_meta = load_sector_ranking()
@@ -2425,21 +2502,23 @@ def main():
         "door3_hysteresis_retained": sorted(door3_retained),
     }
 
-    # Priority Queue Ranking for RS2 Local (P3.4: bonus 2.0)
-    def priority_sort_key(t: str) -> float:
+    # Priority Queue Ranking for RS2 Local (P3.4: bonus 2.0). F10 (WO_SF1): ranked by
+    # rank_key_for_profile (unrounded best percentile + bonus, then the higher door score, then
+    # the ticker), not by the one-decimal best_pctl with the alphabet as the tie-break.
+    def priority_rank_key(t: str) -> Tuple[float, float, str]:
         p = all_nominated_map.get(t, scored_profiles[t])
-        return priority_sort_key_for_profile(p)
+        return rank_key_for_profile(p)
 
     # B1 (PHASE_3_APPROVAL.md): rank and band Door 1/2 on their OWN nomination
     # (door12_nominated_map, captured above before Door 3 was merged in) — exactly as before
     # Door 3 existed. Nominees ranked by priority_sort_key (1 to 135).
     door12_pool = sorted(door12_nominated_map.keys())
-    ranked_nominated = sorted(door12_pool, key=priority_sort_key, reverse=True)
+    ranked_nominated = sorted(door12_pool, key=priority_rank_key)
 
     # Extend ranking beyond the Door-1/2 nominees by ranking remaining scored profiles by
     # best_pctl (this tail includes Door-3 candidates too — same as before Door 3 existed).
     unnominated_scored = [t for t in scored_tickers if t not in door12_nominated_map]
-    ranked_unnominated = sorted(unnominated_scored, key=lambda t: (-(scored_profiles[t]["best_pctl"] if scored_profiles[t].get("best_pctl") is not None else -1.0), t))
+    ranked_unnominated = sorted(unnominated_scored, key=lambda t: rank_key_for_profile(scored_profiles[t]))
     all_ranked = ranked_nominated + ranked_unnominated
     rank_by_ticker = {t: i + 1 for i, t in enumerate(all_ranked)}
 
