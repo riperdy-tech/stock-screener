@@ -33,6 +33,11 @@ are dividend-adjusted history and are left alone). When the session is in a late
 than the series' last element (metrics.monthlyCloseMonths), the series gains a new element
 instead: the old last element becomes that month's last close.
 
+Liquidity: the same download carries volume. Per name, metrics.adv_20d_usd is the median of
+close x volume over its last ADV_SESSIONS completed sessions (adv_20d_sessions: how many it had,
+adv_20d_asof: the bar date the window ends on). Fewer than ADV_MIN_SESSIONS sessions: no figure,
+adv_20d_reason says why, and a figure stored earlier is left as it was. A zero volume is a value.
+
 Usage:
     python scripts/refresh_prices.py           # overlay onto public/data/stocks.json
     python scripts/refresh_prices.py --dry-run # fetch + report coverage, write nothing
@@ -43,6 +48,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import statistics
 import sys
 import time
 from datetime import date, datetime, timedelta, timezone
@@ -60,6 +66,9 @@ CHUNK = 250          # tickers per yf.download call
 MIN_COVERAGE = 0.90  # below this the overlay aborts and the file is untouched
 REF_SYMBOL = "IWM"   # reference series: its last completed bar names the session
 WINDOW_DAYS = 14     # bars requested before the session: covers the last close of the prior month
+ADV_WINDOW_DAYS = 45  # calendar days of bars for the 20-session dollar volume (holidays included)
+ADV_SESSIONS = 20
+ADV_MIN_SESSIONS = 10
 CLOSE_BUFFER = timedelta(minutes=30)  # a bar dated today is final this long after 16:00 New York
 
 # Yahoo rate-limits BURSTS, not volume: threads=True fires one HTTP request per
@@ -93,11 +102,17 @@ def last_completed_session(bar_dates: list[str], now: datetime | None = None) ->
     return max(done) if done else None
 
 
-def fetch_bars(symbols: list[str], start: str, end: str) -> dict[str, list[tuple[str, float]]]:
+def fetch_bars(symbols: list[str], start: str, end: str,
+               volumes: dict | None = None) -> dict[str, list[tuple[str, float]]]:
     """Paced daily bars, start inclusive / end exclusive. Returns {symbol: [(date, close)]}
-    oldest first, for every symbol with at least one bar."""
+    oldest first, for every symbol with at least one bar. When `volumes` is given, the same
+    download also fills it: {symbol: {date: volume}} for the dates that have a close."""
     import yfinance as yf
     out: dict[str, list[tuple[str, float]]] = {}
+
+    def volumes_of(vcol, bars):
+        have = {str(idx)[:10]: float(v) for idx, v in vcol.dropna().items()}
+        return {d: have[d] for d, _ in bars if d in have and math.isfinite(have[d]) and have[d] >= 0}
 
     def bars_of(col):
         return [(str(idx)[:10], p) for idx, v in col.dropna().items() if (p := num(float(v)))]
@@ -111,17 +126,22 @@ def fetch_bars(symbols: list[str], start: str, end: str) -> dict[str, list[tuple
                 df = yf.download(" ".join(chunk), start=start, end=end, interval="1d",
                                  auto_adjust=False, progress=False, threads=False)
                 closes = df["Close"] if "Close" in df else df
+                vols = df["Volume"] if volumes is not None and "Volume" in df else None
                 if hasattr(closes, "columns"):        # multi-ticker frame
                     for sym in closes.columns:
                         bars = bars_of(closes[sym])
                         if bars:
                             out[str(sym)] = bars
                             got += 1
+                            if vols is not None and sym in vols:
+                                volumes[str(sym)] = volumes_of(vols[sym], bars)
                 elif len(chunk) == 1:                  # single-ticker series
                     bars = bars_of(closes)
                     if bars:
                         out[chunk[0]] = bars
                         got = 1
+                        if vols is not None:
+                            volumes[chunk[0]] = volumes_of(vols, bars)
                 # a chunk that "succeeds" but prices almost nothing is a silent
                 # rate-limit (yfinance eats per-ticker errors) — back off and retry
                 if got < len(chunk) * 0.5 and attempt < len(BACKOFFS):
@@ -141,6 +161,19 @@ def fetch_bars(symbols: list[str], start: str, end: str) -> dict[str, list[tuple
         print(f"  chunk {i // CHUNK + 1}/{n_chunks}: cumulative {len(out)} priced")
         time.sleep(CHUNK_PAUSE)
     return out
+
+
+def adv_20d(bars: list[tuple[str, float]], vols: dict | None) -> tuple[float | None, int, str | None]:
+    """Median of close x volume over the last ADV_SESSIONS bars that carry a volume. Returns
+    (figure, sessions used, date of the last session). The figure is None below
+    ADV_MIN_SESSIONS; a zero volume is a value, so the figure can be 0.0."""
+    used = [(d, c * vols[d]) for d, c in bars if vols and d in vols][-ADV_SESSIONS:]
+    if not used:
+        return None, 0, None
+    n, asof = len(used), used[-1][0]
+    if n < ADV_MIN_SESSIONS:
+        return None, n, asof
+    return round(statistics.median(v for _, v in used), 2), n, asof
 
 
 def month_end_close(prior_month: str, bars: list[tuple[str, float]], daily: dict | None) -> float | None:
@@ -222,8 +255,9 @@ def main():
     d_session = date.fromisoformat(session)
     print(f"session this run prices: {session} (last completed New York session)")
 
-    bars = fetch_bars(symbols, (d_session - timedelta(days=WINDOW_DAYS)).isoformat(),
-                      (d_session + timedelta(days=1)).isoformat())
+    vols: dict[str, dict] = {}
+    bars = fetch_bars(symbols, (d_session - timedelta(days=ADV_WINDOW_DAYS)).isoformat(),
+                      (d_session + timedelta(days=1)).isoformat(), volumes=vols)
     live = {s: b[-1][1] for s, b in bars.items()}
     coverage = len(live) / len(symbols) if symbols else 0
     print(f"live prices: {len(live)} / {len(symbols)} ({coverage:.1%})")
@@ -264,12 +298,27 @@ def main():
                   file=sys.stderr)
 
     updated = big_moves = older = 0
+    adv_set = adv_short = 0
     month_acts: dict[str, int] = {}
     for r in rows:
         sym = r.get("symbol") if isinstance(r, dict) else None
         p_new = live.get(sym)
         if not p_new:
             continue
+        if sym in vols:
+            figure, n_sess, adv_asof = adv_20d(bars[sym], vols[sym])
+            if n_sess:
+                if not isinstance(r.get("metrics"), dict):
+                    r["metrics"] = {}
+                m = r["metrics"]
+                m["adv_20d_sessions"], m["adv_20d_asof"] = n_sess, adv_asof
+                if figure is not None:
+                    m["adv_20d_usd"] = figure
+                    m.pop("adv_20d_reason", None)
+                    adv_set += 1
+                else:
+                    m["adv_20d_reason"] = "fewer_than_10_sessions"
+                    adv_short += 1
         if bars[sym][-1][0] != session:
             # Its newest bar is older than the file's session: keep the stored price and say so.
             r["price_older_than_asof"] = bars[sym][-1][0]
@@ -305,7 +354,8 @@ def main():
     path.write_text(json.dumps(rows, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"wrote {path.name}: {updated} prices overlaid at {session}, {older} older-bar names kept "
           f"their stored price, {big_moves} moved >25% (check if unusually many); "
-          f"monthly series: {month_acts or 'none touched'}")
+          f"monthly series: {month_acts or 'none touched'}; 20-day dollar volume: "
+          f"{adv_set} figures, {adv_short} names under {ADV_MIN_SESSIONS} sessions")
 
 
 if __name__ == "__main__":
