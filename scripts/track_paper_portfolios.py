@@ -21,10 +21,16 @@ record what happens. Live books:
 Mechanics: trade-on-change only (buy on entry to the target set, sell on
 exit; held positions drift). 10 bps transaction cost per side. Marks come
 from stocks.json prices (fresh from the daily fetch); missing marks carry
-the last price and are flagged stale. Benchmark IWM via one yfinance call.
+the last price and are flagged stale. Benchmarks are the closes of the SAME session.
 
-Idempotent per date: re-running the same day rewinds to the day's opening
-state and replays it, so CI re-runs can't double-trade.
+A row is keyed by the SESSION DATE of the prices it marks (stocks.json
+`_meta.price_asof`, stamped by refresh_prices.py), not by the run date. A run writes
+a row only for a completed session newer than the ledger's last row, with the
+benchmark's close for that session; a run on intraday prices (no valid stamp), on
+a session already recorded, or without the benchmark's close writes none. New rows
+carry `price_session`; rows written before 2026-11-12 do not (they are keyed by UTC
+run date, and weekend rows repeat Friday). Per-user `mine` ledgers may re-run their
+own session (idempotent: same-date rerun rewinds to the day's opening state).
 
 Usage:
     python scripts/track_paper_portfolios.py                 # as of today
@@ -346,6 +352,8 @@ def price_is_stale(ticker):
 
     Degrades to "fresh" when the metadata is absent (test fixtures, older files).
     """
+    if ticker in price_asof_holder.get("older", ()):
+        return True   # refresh_prices.py: its newest bar is older than the file's session
     snap = price_asof_holder.get("snapshot_date")
     if not snap:
         return False
@@ -889,23 +897,6 @@ def run_mine_ledger(ledger, snapshot, prices, as_of):
     return nav_pu, stale
 
 
-def fetch_benchmarks():
-    """Latest close for each benchmark ETF -> {sym: price|None}."""
-    out = {b: None for b in BENCHMARKS}
-    try:
-        import yfinance as yf
-        for b in BENCHMARKS:
-            try:
-                hist = yf.Ticker(b).history(period="5d", interval="1d")
-                if hist is not None and not hist.empty:
-                    out[b] = round(float(hist["Close"].dropna().iloc[-1]), 4)
-            except Exception as e:
-                print(f"  {b} fetch failed: {e}", file=sys.stderr)
-    except Exception as e:
-        print(f"  benchmark fetch failed: {e}", file=sys.stderr)
-    return out
-
-
 bench_hist_holder = {}  # {sym: {date: close}} fetched once per run for backfill
 
 
@@ -1004,11 +995,42 @@ def backfill_post_exit(ledger, prices, as_of):
                 c["post_exit_days"] = elapsed
 
 
+def price_session(stocks):
+    """(session, why): the completed session the prices in stocks.json are the close of, from
+    the `_meta.price_asof` stamp refresh_prices.py writes only after its all-or-nothing date
+    check. (None, reason) when there is no stamp, or when a fetch wrote rows after the stamp
+    (its prices are intraday or of another date): such a file has no session to key a row by."""
+    meta = stocks[0].get("_meta") if stocks and isinstance(stocks[0], dict) else None
+    meta = meta if isinstance(meta, dict) else {}
+    asof, at = meta.get("price_asof"), meta.get("price_refresh_at")
+    if not asof or not at:
+        return None, "stocks.json carries no price_asof stamp (prices are not a completed session's close)"
+    newest_fetch = max((str(s["Last_Updated"])[:16] for s in stocks
+                        if isinstance(s, dict) and s.get("Last_Updated")), default="")
+    if newest_fetch > str(at).replace("T", " ")[:16]:
+        return None, (f"rows were fetched ({newest_fetch}) after the price_asof stamp ({at}); "
+                      f"prices are not that session's close")
+    return str(asof)[:10], None
+
+
+def ledger_row_due(ledger, as_of, rewrite_same_session=False):
+    """A row for `as_of` may be written only when it is newer than the ledger's last row. A
+    ledger may re-run its own session (mine) only when that last row was itself keyed by the
+    session; a row written before session keys existed is never rewritten."""
+    rows = ledger.get("nav_series") or []
+    if not rows:
+        return True
+    last = rows[-1]
+    d = str(last.get("date"))[:10]
+    return as_of > d or (rewrite_same_session and as_of == d and last.get("price_session") == as_of)
+
+
 def finalize_ledger(led, nav, stale, benches, as_of, inception):
     """Append today's NAV point, backfill post-exit marks, recompute summary."""
     led["nav_series"].append({"date": as_of, "nav": round(nav, 4) if nav is not None else None,
                               "bench": benches.get(PRIMARY_BENCHMARK),  # back-compat (IWM)
-                              "benches": benches, "stale_marks": stale})
+                              "benches": benches, "stale_marks": stale,
+                              "price_session": as_of})
     backfill_post_exit(led, prices_holder.get("prices", {}), as_of)
     led["summary"] = compute_summary(led["nav_series"], led["trades"], led["closed"], inception)
     led["summary"]["open_positions"] = len(led["state"]["holdings"])
@@ -1040,6 +1062,8 @@ def process_user_mine_ledgers(prices, benches, as_of):
         stored = existing[0]["data"] if existing else None
         led = stored["ledger"] if stored and "ledger" in stored else empty_ledger()
         inception = (stored or {}).get("inception") or as_of
+        if not ledger_row_due(led, as_of, rewrite_same_session=True):
+            continue
         nav, stale = run_mine_ledger(led, snap, prices, as_of)
         finalize_ledger(led, nav, stale, benches, as_of, inception)
         backfill_benches(led)  # late-added benchmarks -> full record
@@ -1072,6 +1096,12 @@ def main():
 
     stocks_path = Path(args.stocks_json) if args.stocks_json else STOCKS_JSON
     stocks = load_json(stocks_path, [])
+    if not args.as_of:
+        session, why = price_session(stocks)
+        if session is None:
+            print(f"Paper ledgers: no row written - {why}", file=sys.stderr)
+            return
+        as_of = session   # the row is keyed by the session its prices are the close of
     prices = {s["symbol"]: s.get("price") for s in stocks if s.get("symbol")}
     prices_holder["prices"] = prices
     # Price freshness: modal Last_Updated date == the date this scan ran; anything
@@ -1081,6 +1111,8 @@ def main():
     snapshot_date = (collections.Counter(asof_map.values()).most_common(1)[0][0]
                      if asof_map else None)
     price_asof_holder["asof"] = asof_map
+    price_asof_holder["older"] = {s["symbol"] for s in stocks
+                                  if isinstance(s, dict) and s.get("symbol") and s.get("price_older_than_asof")}
     price_asof_holder["snapshot_date"] = snapshot_date
     if snapshot_date:
         behind = sum(1 for d in asof_map.values() if d < snapshot_date)
@@ -1116,14 +1148,26 @@ def main():
     book["config"]["start_nav"] = START_NAV
     ledgers = book["ledgers"]
 
-    benches = {b: None for b in BENCHMARKS} if args.skip_benchmark else fetch_benchmarks()
     bench_hist_holder["hist"] = {} if args.skip_benchmark else fetch_benchmark_history(book["inception"])
+    # Benchmarks are the closes OF THE SESSION the book is marked at, never the latest bar.
+    benches = {b: (bench_hist_holder["hist"].get(b) or {}).get(as_of) for b in BENCHMARKS}
+    if not args.skip_benchmark and benches.get(PRIMARY_BENCHMARK) is None:
+        print(f"Paper ledgers: no row written - no {PRIMARY_BENCHMARK} close for session {as_of} yet",
+              file=sys.stderr)
+        return
 
     # ── global ledgers: plan / plan2 / equal (identical for every user) ──
     # Skipped under --mine-only so an on-demand mine refresh never re-stamps the
     # global ledgers with stale prices (that produced frozen NAV tails). The
     # global book is left exactly as loaded; only the daily/weekly chain advances it.
-    if not args.mine_only:
+    global_due = ledger_row_due(ledgers["equal"], as_of)
+    if not args.mine_only and not global_due:
+        print(f"  · global ledgers: session {as_of} is already recorded - no row written", file=sys.stderr)
+        # heartbeat only (controlTower and the takeover route read book.last_updated); no row, no trade
+        book["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        save_ledgers_to_supabase(book)
+    if not args.mine_only and global_due:
         factor_raw = load_json(FACTOR_SCORES_JSON, {}) or {}
         factor = factor_raw.get("tickers", {})
         fct_ok, fct_why = factor_healthy(factor_raw, book, as_of)
@@ -1284,8 +1328,9 @@ def main():
         if my_snapshot and my_snapshot.get("saved_at"):
             my_snapshot["saved_at_date"] = my_snapshot["saved_at"][:10]
         mine = book["ledgers"].setdefault("mine", empty_ledger())
-        nav_mine, stale_mine = run_mine_ledger(mine, my_snapshot, prices, as_of)
-        finalize_ledger(mine, nav_mine, stale_mine, benches, as_of, book["inception"])
+        if ledger_row_due(mine, as_of, rewrite_same_session=True):
+            nav_mine, stale_mine = run_mine_ledger(mine, my_snapshot, prices, as_of)
+            finalize_ledger(mine, nav_mine, stale_mine, benches, as_of, book["inception"])
         LEDGERS_JSON.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n", encoding="utf-8")
         mine_note = "local mine ledger (dev, no Supabase env)"
 
