@@ -513,6 +513,22 @@ export async function fetchQwenOverlay(): Promise<QwenOverlayPayload | null> {
     return fetchJson<QwenOverlayPayload>('/data/qwen_overlay.json');
 }
 
+/**
+ * The monthly books of record (m3o_books.json, written with the Qwen files): ticker -> weight per book. A name in `code_book`
+ * but not in `qwen_book` is a slot Qwen's filing check turned into cash.
+ */
+export interface MonthlyBooksPayload {
+    schema?: string;
+    formation?: string;
+    generated_at?: string;
+    slots?: number;
+    books?: { code_book?: Record<string, number>; qwen_book?: Record<string, number> };
+}
+
+export async function fetchMonthlyBooks(): Promise<MonthlyBooksPayload | null> {
+    return fetchJson<MonthlyBooksPayload>('/data/m3o_books.json');
+}
+
 // ── Interim Gemini verdicts (operator decision 2026-10-13) ───────────────────
 // Paper-only and unvalidated: written by stocks-workspace/baselines/gemini/build_gemini_overlay.py,
 // shown on the stock page and graded by the separate rn_gemini paper book. Never part of depth.

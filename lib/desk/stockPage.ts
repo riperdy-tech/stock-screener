@@ -431,21 +431,43 @@ export interface LedgersLike {
     ledgers?: Record<string, { state?: { holdings?: Record<string, { entry_date?: string | null; entry_price?: number | null } | undefined> } } | undefined>;
 }
 
-export interface BookHolding { book: 'rn_depth' | 'equal' | 'mine'; labelKey: Key; entryDate: string | null; entryPrice: number | null; pnlPct: number | null }
+export interface BookHolding { book: 'qwen_book' | 'code_book' | 'rn_depth' | 'equal' | 'mine'; labelKey: Key; entryDate: string | null; entryPrice: number | null; pnlPct: number | null }
 
 const BOOKS: { book: BookHolding['book']; labelKey: Key }[] = [
+    { book: 'qwen_book', labelKey: 'bkQwen' }, { book: 'code_book', labelKey: 'bkCode' },
     { book: 'rn_depth', labelKey: 'bkAi' }, { book: 'equal', labelKey: 'bkControl' }, { book: 'mine', labelKey: 'bkMine' },
 ];
 
-/** The books that hold the name now, with entry date, entry price and P&L against the live price. */
-export function bookMembership(ledgers: LedgersLike | null | undefined, ticker: string, live: number | null): BookHolding[] {
+/** The slice of m3o_books.json the page reads (see MonthlyBooksPayload). */
+export interface MonthlyBooksLike { books?: { code_book?: Record<string, number>; qwen_book?: Record<string, number> } }
+
+/**
+ * Where the name sits in the monthly books, read from m3o_books.json whatever the Qwen row's source: `code` is whether the
+ * Code book holds it; `qwen` is `held`, `cash` (a Code book slot Qwen's filing check turned into cash) or `none`.
+ * Null for both when the file did not load.
+ */
+export function monthlyBookState(monthly: MonthlyBooksLike | null | undefined, ticker: string): { code: boolean | null; qwen: 'held' | 'cash' | 'none' | null } {
+    const b = monthly?.books;
+    if (!b?.code_book || !b.qwen_book) return { code: null, qwen: null };
+    const inCode = ticker in b.code_book;
+    return { code: inCode, qwen: ticker in b.qwen_book ? 'held' : inCode ? 'cash' : 'none' };
+}
+
+/**
+ * The books that hold the name now, with entry date, entry price and P&L against the live price. The two monthly books are
+ * decided by m3o_books.json when it loaded (the ledger then supplies entry date and price); else by the ledger alone.
+ */
+export function bookMembership(ledgers: LedgersLike | null | undefined, ticker: string, live: number | null, monthly?: MonthlyBooksLike | null): BookHolding[] {
     const out: BookHolding[] = [];
+    const m = monthlyBookState(monthly, ticker);
     for (const { book, labelKey } of BOOKS) {
         const h = ledgers?.ledgers?.[book]?.state?.holdings?.[ticker];
-        if (!h) continue;
-        const entryPrice = isNum(h.entry_price) ? h.entry_price : null;
+        const inMonthly = book === 'code_book' ? m.code : book === 'qwen_book' ? (m.qwen == null ? null : m.qwen === 'held') : null;
+        if (inMonthly === false || (inMonthly == null && !h)) continue;
+        const ep = h?.entry_price;
+        const entryPrice = isNum(ep) ? ep : null;
         out.push({
-            book, labelKey, entryDate: h.entry_date ?? null, entryPrice,
+            book, labelKey, entryDate: h?.entry_date ?? null, entryPrice,
             pnlPct: live != null && entryPrice != null && entryPrice > 0 ? (live / entryPrice - 1) * 100 : null,
         });
     }

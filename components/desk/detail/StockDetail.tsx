@@ -152,13 +152,13 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 </p>
             )}
 
-            <QwenPanel ticker={row.ticker} live={live} listed={onList(row)} />
+            <QwenPanel ticker={row.ticker} live={live} listed={onList(row)} monthly={data.monthly} />
             {data.gemini[row.ticker] && <GeminiPanel g={data.gemini[row.ticker]} />}
             <MacroEventsPanel p={data.macroEvents} ticker={row.ticker} sector={row.info?.sector} />
 
             <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
                 <StockLeft row={row} d={d} mode={mode} bundle={bundle} live={live} atVerdict={atVerdict} blocked={blocked} />
-                <StockRight row={row} d={d} mode={mode} blocked={blocked} ledgers={data.ledgers} live={live} />
+                <StockRight row={row} d={d} mode={mode} blocked={blocked} ledgers={data.ledgers} live={live} monthly={data.monthly} />
             </div>
         </div>,
     );
