@@ -340,3 +340,23 @@ def test_a_run_with_no_new_session_still_stamps_the_heartbeat(tmp_path, monkeypa
     again = _ledger_run(tmp_path, monkeypatch, _stocks(), iwm)
     assert _equal_dates(again) == ["2026-11-10"]
     assert again["last_updated"] > "2026-01-01"
+
+
+def test_the_small_price_file_holds_the_same_prices_and_stamp_as_stocks_json(tmp_path, monkeypatch):
+    rows = _rows()
+    old = {r["symbol"] for r in rows[:5]}
+    path, _, code, _ = _run(tmp_path, monkeypatch, rows, _bars(rows, "2026-11-10", older=old),
+                            "2026-11-11T01:36:00")
+    assert code is None
+    out = json.loads(path.read_text(encoding="utf-8"))
+    small = json.loads((tmp_path / "prices.json").read_text(encoding="utf-8"))
+    assert small["asof"] == out[0]["_meta"]["price_asof"] == "2026-11-10"
+    assert small["refreshed_at"] == out[0]["_meta"]["price_refresh_at"]
+    assert small["prices"] == {r["symbol"]: [r["price"], r.get("price_older_than_asof")] for r in out}
+    assert sum(1 for v in small["prices"].values() if v[1] is not None) == 5
+
+
+def test_a_refused_batch_writes_no_small_price_file(tmp_path, monkeypatch):
+    rows = _rows()
+    _, _, code, _ = _run(tmp_path, monkeypatch, rows, _bars(rows, "2026-11-09"), "2026-11-11T01:36:00")
+    assert code == 4 and not (tmp_path / "prices.json").exists()

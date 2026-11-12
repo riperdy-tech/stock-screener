@@ -353,6 +353,13 @@ def main():
         rows[0].setdefault("_meta", {}).update(meta)
 
     path.write_text(json.dumps(rows, ensure_ascii=False) + "\n", encoding="utf-8")
+    # The site's price file: stocks.json is about 28 MB, too large for a browser to load for one column.
+    # Same prices, same session stamp, written in the same run; the site reads this for prices.
+    # Per symbol: [price, the bar date when it is older than the session, else null].
+    small = {"asof": session, "refreshed_at": meta["price_refresh_at"],
+             "prices": {r["symbol"]: [r["price"], r.get("price_older_than_asof")]
+                        for r in rows if isinstance(r, dict) and r.get("symbol") and num(r.get("price"))}}
+    (path.parent / "prices.json").write_text(json.dumps(small, separators=(",", ":")) + chr(10), encoding="utf-8")
     print(f"wrote {path.name}: {updated} prices overlaid at {session}, {older} older-bar names kept "
           f"their stored price, {big_moves} moved >25% (check if unusually many); "
           f"monthly series: {month_acts or 'none touched'}; 20-day dollar volume: "

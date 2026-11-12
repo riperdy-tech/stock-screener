@@ -227,15 +227,17 @@ export interface EnginePrices {
 }
 
 export async function fetchEnginePrices(): Promise<EnginePrices | null> {
-    const stocks = await fetchJson<{ symbol?: string; price?: number | null; price_older_than_asof?: string | null; _meta?: { price_asof?: string | null; price_refresh_at?: string | null } }[]>('/data/stocks.json');
-    if (!Array.isArray(stocks)) return null;
+    // prices.json is written by the post-close refresh in the same run as stocks.json (same prices, same session stamp).
+    // It is the small file for the browser: stocks.json itself is about 28 MB.
+    const f = await fetchJson<{ asof?: string | null; refreshed_at?: string | null; prices?: Record<string, [number, string | null]> }>('/data/prices.json');
+    if (!f || typeof f !== 'object' || !f.prices) return null;
     const rows: EnginePrices['rows'] = {};
-    for (const s of stocks) {
-        if (s.symbol && typeof s.price === 'number' && Number.isFinite(s.price) && s.price > 0) {
-            rows[s.symbol] = { price: s.price, olderThan: s.price_older_than_asof ?? null };
+    for (const [symbol, v] of Object.entries(f.prices)) {
+        if (Array.isArray(v) && typeof v[0] === 'number' && Number.isFinite(v[0]) && v[0] > 0) {
+            rows[symbol] = { price: v[0], olderThan: v[1] ?? null };
         }
     }
-    return { asof: stocks[0]?._meta?.price_asof ?? null, refreshedAt: stocks[0]?._meta?.price_refresh_at ?? null, rows };
+    return { asof: f.asof ?? null, refreshedAt: f.refreshed_at ?? null, rows };
 }
 
 // Phase 9: Load reverse screening engine results from stocks.json
