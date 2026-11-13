@@ -266,13 +266,21 @@ def resolve_coe_pct(anchor, mgi_subindustry_id, sector, fallback_pct):
     if risk_free is None or implied_erp is None:
         return fallback_pct, None
 
-    loading = sector_loadings.get(mgi_subindustry_id) if mgi_subindustry_id else None
+    adjusted_loadings = anchor.get("sector_loadings_adjusted") or {}
+    loading_id = mgi_subindustry_id
+    loading = sector_loadings.get(loading_id) if loading_id else None
     if loading is None:
-        loading = sector_loadings.get(GICS_TO_MACRO_ID.get(sector))
+        loading_id = GICS_TO_MACRO_ID.get(sector)
+        loading = sector_loadings.get(loading_id)
     flag = None
     if loading is None:
         loading = 1.0
         flag = "coe_default_loading"
+    elif adjusted_loadings.get(loading_id) is not None:
+        # B7: the MRI publishes the adjusted loading; the screener never computes it.
+        loading = adjusted_loadings[loading_id]
+    else:
+        flag = "loading_raw_fallback"  # anchor without the adjusted field, or without this id: raw, stamped
     return (risk_free + loading * implied_erp) * 100.0, flag
 
 
@@ -392,6 +400,7 @@ def main():
                 "wacc": wacc_pct,
                 "discount_rate_source": coe_anchor_meta["discount_rate_source"],
                 "coe_default_loading": coe_flag == "coe_default_loading",
+                "loading_raw_fallback": coe_flag == "loading_raw_fallback",
                 "terminal_growth": TERMINAL_GROWTH,
                 "stage1_years": STAGE1_YEARS,
                 "fade_years": FADE_YEARS,
