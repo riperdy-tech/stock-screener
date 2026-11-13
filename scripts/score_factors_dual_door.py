@@ -290,8 +290,8 @@ def door3_eligibility(
     condition: raw roic_proxy > 0 (the company earns a positive return on capital) AND the
     existing sector-neutral z >= 25th pct. Reason `unprofitable` when roic_proxy <= 0.
     Returns (eligible, ineligible_reason, extra_flags) — extra_flags carries
-    revisions_missing / adv_missing even when the name is otherwise eligible (an absence rides
-    as a flag, never silently gated).
+    revisions_missing / revisions_negative / adv_missing even when the name is otherwise
+    eligible (an absence rides as a flag, never silently gated; so does a negative revisions z).
 
     B3 (PHASE_3_APPROVAL.md): `mom_break is None` (no daily data to compute it) is no longer a
     silent pass. The caller runs `compute_monthly_trend_ok` (the monthly-close fallback check)
@@ -328,7 +328,10 @@ def door3_eligibility(
     if z_revisions is None:
         extra_flags.append("revisions_missing")
     elif z_revisions < 0:
-        return False, "revisions_negative", extra_flags
+        # WO_DS3 item 3 (2026-11-13): a flag, no longer a refusal. The input is not a revision
+        # (WO_DS1 B5: the year's EPS estimate against one quarter's, in dollars per share), and a
+        # threshold annotates, never silently gates.
+        extra_flags.append("revisions_negative")
     # R2: profitability floor requires raw roic_proxy > 0 AND sector-neutral z >= 25th pct
     if raw_roic_proxy is None or roic_proxy_z is None or roic_proxy_pctl25 is None:
         return False, "no_profitability_data", extra_flags
@@ -1108,7 +1111,8 @@ def apply_llm_overlay(results):
 # (clamped to [-1, 1]): not a change in estimates. On the stored file it was +1.0 for 145 of the
 # 333 scored names that had it, ranked with the dollar level of EPS per share at +0.85, and existed
 # for 12% of Door-1 names. Quality and momentum keep their 0.45 : 0.35 ratio, the formula 88% of
-# names already had. z_revisions is still computed and published; Door 3's rule on it is unchanged.
+# names already had. z_revisions is still computed and published; Door 3 flags a negative value
+# (`revisions_negative`, WO_DS3 item 3) and no longer refuses on it.
 DOOR1_BASE_WEIGHTS = {"quality": 0.45, "momentum": 0.35}
 DOOR2_BASE_WEIGHTS = {"value": 0.40, "exp_gap": 0.40, "quality": 0.20}
 
