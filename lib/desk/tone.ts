@@ -222,6 +222,7 @@ export const DATA_NOTES: Record<string, string> = {
     no_liquidity_data: 'no volume data yet',
     beneish_unverifiable: 'Beneish not computable',
     revisions_missing: 'no estimate revisions',
+    revisions_negative: 'EPS estimate figure below zero (a level, not a revision)',
     mom_break_unverified_monthly_trend_ok: 'trend-break check on monthly data',
     adv_missing: 'no volume data',
     mcap_derived: 'market cap derived',
