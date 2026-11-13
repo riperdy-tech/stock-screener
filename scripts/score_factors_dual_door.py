@@ -158,6 +158,8 @@ def _load_door3_config(config_path: Optional[Path] = None) -> Dict[str, float]:
     return {
         "DOOR3_SLOTS": int(d3.get("DOOR3_SLOTS", 20)),
         "DOOR3_RN_SLOTS": int(d3.get("DOOR3_RN_SLOTS", 5)),
+        # WO_DS3 item 2: a previous research_now Door-3 name keeps its slot to this rank.
+        "DOOR3_RN_KEEP_RANK": int(d3.get("DOOR3_RN_KEEP_RANK", 8)),
         "DOOR3_CLUSTER_CAP": int(d3.get("DOOR3_CLUSTER_CAP", 5)),
         "DOOR3_MIN_MCAP": float(d3.get("DOOR3_MIN_MCAP", 2_000_000_000.0)),
         # C10 (PHASE_3_APPROVAL.md): renamed from DOOR3_QUALITY_MIN_PCTL — the quality pillar
@@ -421,6 +423,26 @@ def door3_hysteresis_retain(
         if r is not None and r <= max_rank:
             retained.append(t)
     return retained
+
+
+def split_door3_bands(
+    ranked: List[str], prev_rn: Set[str], rn_slots: int, keep_rank: int,
+) -> Tuple[List[str], List[str]]:
+    """WO_DS3 item 2: Door 3's research_now / watchlist split with a keep band. `ranked` is Door
+    3's names in `_door3_rank_key` order (rank 1 = index 0); `prev_rn` the Door-3 names that were
+    research_now on the previous published list. A previous name keeps its slot while it ranks
+    within `keep_rank`; the remaining slots fill from the top. Always `rn_slots` names (or all of
+    them when Door 3 has fewer). A previous name that is not in `ranked` any more holds nothing.
+    With no previous list this is the top `rn_slots`, as before. Returns (rn_names, wl_names),
+    both in rank order."""
+    rn = [t for t in ranked[:keep_rank] if t in prev_rn][:rn_slots]
+    for t in ranked:
+        if len(rn) >= rn_slots:
+            break
+        if t not in rn:
+            rn.append(t)
+    rn_set = set(rn)
+    return [t for t in ranked if t in rn_set], [t for t in ranked if t not in rn_set]
 
 
 def _load_veto_switches(config_path: Optional[Path] = None) -> Dict[str, bool]:
@@ -1405,6 +1427,7 @@ def main():
         prev_rn = set()
         prev_book = set()
         prev_door3: Set[str] = set()
+        prev_door3_rn: Set[str] = set()
     else:
         has_previous = True
         hysteresis_status = "applied"
@@ -1414,6 +1437,8 @@ def main():
         # P3.14: previous Door-3 names, for the Door-3 hysteresis rule below.
         prev_door3 = {t for t, d in prev_tickers.items()
                       if "DOOR_3_TREND_LEADER" in (d.get("fct_nominated_doors") or [])}
+        # WO_DS3 item 2: the Door-3 names that held a research_now slot, for split_door3_bands.
+        prev_door3_rn = {t for t in prev_door3 if prev_tickers[t].get("fct_band") == "research_now"}
 
     sync_result = sync_mri_snapshot()
     if sync_result is None:
@@ -2453,8 +2478,11 @@ def main():
             "ticker": t,
         }),
     )
-    door3_rn_names = door3_final_ranked[:door3_cfg["DOOR3_RN_SLOTS"]]
-    door3_wl_names = door3_final_ranked[door3_cfg["DOOR3_RN_SLOTS"]:]
+    # WO_DS3 item 2: a previous research_now Door-3 name keeps its slot to DOOR3_RN_KEEP_RANK.
+    door3_rn_names, door3_wl_names = split_door3_bands(
+        door3_final_ranked, prev_door3_rn, door3_cfg["DOOR3_RN_SLOTS"], door3_cfg["DOOR3_RN_KEEP_RANK"],
+    )
+    door3_rn_kept = sorted(set(door3_rn_names) - set(door3_final_ranked[:door3_cfg["DOOR3_RN_SLOTS"]]))
 
     door3_by_cluster: Dict[str, int] = {}
     for t in door3_final:
@@ -2562,6 +2590,7 @@ def main():
         # P3.14: Door 3 "trend leaders" (PHASE_3_ADDENDUM.md).
         "door3_count": len(door3_final),
         "door3_rn_count": len(door3_rn_names),
+        "door3_rn_kept": door3_rn_kept,
         "door3_by_cluster": door3_by_cluster,
         "door3_eligible_count": len(door3_candidates),
         "door3_ineligible_reasons": door3_ineligible_reasons,

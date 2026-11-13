@@ -48,6 +48,7 @@ def test_door3_config_defaults():
     assert cfg == {
         "DOOR3_SLOTS": 20,
         "DOOR3_RN_SLOTS": 5,
+        "DOOR3_RN_KEEP_RANK": 8,
         "DOOR3_CLUSTER_CAP": 5,
         "DOOR3_MIN_MCAP": 2_000_000_000.0,
         "DOOR3_PROFITABILITY_MIN_PCTL": 25.0,
