@@ -48,6 +48,7 @@ def test_door3_config_defaults():
     assert cfg == {
         "DOOR3_SLOTS": 20,
         "DOOR3_RN_SLOTS": 5,
+        "DOOR3_RN_KEEP_RANK": 8,
         "DOOR3_CLUSTER_CAP": 5,
         "DOOR3_MIN_MCAP": 2_000_000_000.0,
         "DOOR3_PROFITABILITY_MIN_PCTL": 25.0,
@@ -163,9 +164,19 @@ def test_monthly_trend_ok_uses_only_the_last_10_of_the_12_window_closes():
     assert field == "latest_monthly_close_vs_10m_average"
 
 
-def test_ineligible_revisions_negative():
-    eligible, reason, _ = _elig(z_revisions=-0.01)
-    assert eligible is False and reason == "revisions_negative"
+def test_revisions_negative_is_eligible_with_flag():
+    """WO_DS3 item 3 (2026-11-13): a negative revisions z no longer refuses a name. The input is
+    not a revision (WO_DS1 B5), and a threshold annotates, never silently gates: the name is
+    eligible and carries the flag `revisions_negative`."""
+    eligible, reason, flags = _elig(z_revisions=-0.01)
+    assert eligible is True and reason is None
+    assert flags == ["revisions_negative"]
+
+
+def test_revisions_negative_does_not_hide_a_later_refusal():
+    """The flag is not a pass: the tests after it still refuse (here profitability)."""
+    eligible, reason, flags = _elig(z_revisions=-2.0, raw_roic_proxy=-0.05)
+    assert eligible is False and reason == "unprofitable"
 
 
 def test_eligible_revisions_zero_is_not_negative():

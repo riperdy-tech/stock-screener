@@ -161,7 +161,16 @@ def test_b1_door3_never_demotes_door12_nominee_and_band_counts_are_real(tmp_path
     # ── Reproduce the bug on the pre-fix baseline (sanity check on the fixture itself) ──
     b_book = {t for t, p in b_compat["tickers"].items() if p["fct_band"] in ("research_now", "watchlist")}
     w_book = {t for t, p in w_compat["tickers"].items() if p["fct_band"] in ("research_now", "watchlist")}
-    rescued = sorted(w_book - b_book)
+    w_door3 = {t for t, p in w_compat["tickers"].items()
+               if "DOOR_3_TREND_LEADER" in p["fct_nominated_doors"]}
+    # WO_DS3 item 3 (2026-11-13): the baseline ref refuses a Door-3 candidate whose revisions z is
+    # negative (144 names on this fixture); the working tree flags it instead. So the working
+    # tree's Door 3 fills more of its 20 slots here (12 names, not 5), and those extra Door-3
+    # names are in the working book and not in the baseline's. The Door-1/2 side of the book
+    # (`rescued`, `lost`) and the Door-3 side (`door3_added`) are therefore asserted apart, each
+    # by exact name.
+    rescued = sorted((w_book - b_book) - w_door3)
+    door3_added = sorted((w_book - b_book) & w_door3)
     lost = sorted(b_book - w_book)
 
     # The old code displaced these 5 genuine Door-1/2 nominees (ranks 131-135 of the pure
@@ -172,11 +181,18 @@ def test_b1_door3_never_demotes_door12_nominee_and_band_counts_are_real(tmp_path
     # working tree without it. On this fixture that alone moves one name each way (OTH_8_5 in,
     # OTH_6_6 out) besides the five the B1 fix rescues.
     assert rescued == ["OTH_7_5", "OTH_8_1", "OTH_8_2", "OTH_8_3", "OTH_8_4", "OTH_8_5"]
-    assert lost == ["OTH_6_6"]
-    # The fix still never displaces a Door-1/2 nominee: the name lost ranks outside the working
-    # tree's own Door-1/2 top 135.
-    for t in lost:
+    # WO_DS3 item 3: OTH_6_6 (the name B5 moved out of the Door-1/2 top 135) and six ceiling-
+    # excluded Technology names have a negative revisions z. The baseline held OTH_6_6 as a
+    # Door-1/2 nominee; the working tree holds all seven as Door-3 names, flagged, on top of the
+    # Door-1/2 book. Nothing the baseline held is missing from the working book.
+    assert door3_added == ["TECH_15", "TECH_16", "TECH_17", "TECH_18", "TECH_19", "TECH_20"]
+    assert lost == []
+    # The fix still never displaces a Door-1/2 nominee: every one of those seven ranks outside
+    # the working tree's own Door-1/2 top 135 (Door 3 adds slots, it takes no Door-1/2 rank).
+    for t in door3_added + ["OTH_6_6"]:
+        assert t in w_door3
         assert w_compat["tickers"][t]["fct_rank"] > 135
+        assert "revisions_negative" in w_compat["tickers"][t]["fct_flags"]
 
     # ── The fix's own invariants, on the current working tree ──
     for t in rescued:
