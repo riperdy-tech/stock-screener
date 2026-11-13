@@ -138,6 +138,13 @@ def _load_hysteresis_ranks(config_path: Optional[Path] = None) -> Tuple[int, int
     return int(rn_buf), int(book_buf)
 
 
+def _load_sector_floor_keep_points(config_path: Optional[Path] = None) -> float:
+    """WO_DS3 item 4: percentile points by which a previous sector-floor fill is favoured in its
+    sector's core pass (see core_slot_key). Absent from the config -> 0.0, no allowance."""
+    cfg = _load_sifter_config(config_path)
+    return float(cfg.get("sector_floor_keep_points", 0.0))
+
+
 def _load_mid_cycle_config(config_path: Optional[Path] = None) -> Tuple[int, Dict[str, int]]:
     cfg = _load_sifter_config(config_path)
     mc = cfg.get("mid_cycle_window", {})
@@ -1308,6 +1315,85 @@ def rank_key_for_profile(p: Dict[str, Any]) -> Tuple[float, float, str]:
     return (-prio, -best_score, p["ticker"])
 
 
+def previous_floor_fills(prev_tickers: Dict[str, Any]) -> Set[str]:
+    """WO_DS3 item 4: the names that were sector-floor fills on the previous published list: a
+    Door-1/2 nominee of its sector's core quota (not a wildcard, not band-retained) whose best
+    percentile was below that list's wildcard cut (the lowest best percentile among its
+    wildcards), i.e. a name the list held only because of the sector floor. No wildcards on the
+    previous list -> nobody."""
+    def doors(d: Dict[str, Any]) -> List[str]:
+        return d.get("fct_nominated_doors") or []
+
+    wild = [d["fct_percentile"] for d in prev_tickers.values()
+            if "GLOBAL_WILDCARD" in doors(d) and d.get("fct_percentile") is not None]
+    if not wild:
+        return set()
+    cut = min(wild)
+    return {
+        t for t, d in prev_tickers.items()
+        if ("DOOR_1_COMPOUNDER" in doors(d) or "DOOR_2_VALUE_GAP" in doors(d))
+        and "GLOBAL_WILDCARD" not in doors(d) and "HYSTERESIS_RETAINED" not in doors(d)
+        and d.get("fct_percentile") is not None and d["fct_percentile"] < cut
+    }
+
+
+def core_slot_key(p: Dict[str, Any], prev_floor_fills: Set[str], keep_points: float) -> Tuple[float, float, str]:
+    """WO_DS3 item 4: the sort key of a sector's core pass. rank_key_for_profile, except that a
+    previous floor fill sorts as if its best percentile were `keep_points` higher: it keeps its
+    slot while it is within that many points of the sector-mate that would take it. Used only to
+    choose a sector's core names; the ranking, the wildcards and the bands use the plain key."""
+    k = rank_key_for_profile(p)
+    if p["ticker"] in prev_floor_fills:
+        return (k[0] - keep_points, k[1], k[2])
+    return k
+
+
+def select_sector_core(sec_cand: List[Dict[str, Any]], core_quota: int, sort_key) -> List[Dict[str, Any]]:
+    """Nomination Step A for one sector: its core picks, in pick order (the cluster pass, then
+    merit under the cluster cap). `sort_key` is rank_key_for_profile, or core_slot_key with the
+    previous floor fills. Reads the candidates, changes nothing."""
+    # Intra-Sector Cluster Guardrail: max 35% per cluster
+    max_per_cluster = max(2, int(math.ceil(core_quota * 0.35)))
+    cluster_counts: Dict[str, int] = {}
+    current_sec_picks: Dict[str, Dict[str, Any]] = {}
+
+    # Round 1: Cluster Diversification Pass
+    # Guarantee that distinct strategic clusters with qualified candidates (>= 75th pctl) get 1 slot
+    c_by_cluster: Dict[str, List[Dict[str, Any]]] = {}
+    for c in sec_cand:
+        c_by_cluster.setdefault(c["cluster"], []).append(c)
+    # WO_DS1 B3.4: the nomination sorts use the priority ranking's key (rank_key_for_profile:
+    # unrounded best percentile, then the higher door score, then ticker), not the one-decimal
+    # best_pctl with the alphabet as the tie-break. No name carries the champion tag yet at
+    # this point, so the key adds no bonus here.
+    for cl, cl_list in c_by_cluster.items():
+        cl_list.sort(key=sort_key)
+
+    sorted_clusters = sorted(c_by_cluster.keys(), key=lambda cl: sort_key(c_by_cluster[cl][0]))
+    for cl in sorted_clusters:
+        if len(current_sec_picks) >= core_quota:
+            break
+        best_in_cl = c_by_cluster[cl][0]
+        if best_in_cl.get("best_pctl") is not None and best_in_cl["best_pctl"] >= 75.0:
+            current_sec_picks[best_in_cl["ticker"]] = best_in_cl
+            cluster_counts[cl] = cluster_counts.get(cl, 0) + 1
+
+    # Round 2: Fill remaining core slots by pure competitive merit under cluster cap
+    remaining_slots = core_quota - len(current_sec_picks)
+    merit_pool = [c for c in sec_cand if c["ticker"] not in current_sec_picks]
+    merit_pool.sort(key=sort_key)
+
+    for c in merit_pool:
+        if remaining_slots <= 0: break
+        cl = c["cluster"]
+        if cluster_counts.get(cl, 0) < max_per_cluster:
+            current_sec_picks[c["ticker"]] = c
+            cluster_counts[cl] = cluster_counts.get(cl, 0) + 1
+            remaining_slots -= 1
+
+    return list(current_sec_picks.values())
+
+
 def resolve_total_debt(latest: Dict[str, Any]) -> Tuple[Optional[float], Optional[str], Dict[str, Any]]:
     """F1 (WO_SF1): total interest-bearing debt for the enterprise value and the leverage veto,
     from the builder's current fields (debt_lt_noncurrent + debt_current, leases excluded; see
@@ -1397,6 +1483,7 @@ def main():
     door2_momentum_floor = float(globals().get("DOOR2_MOMENTUM_FLOOR", _load_door2_momentum_floor(sifter_cfg_path)))
     momentum_universe_weight = float(globals().get("MOMENTUM_UNIVERSE_WEIGHT", _load_momentum_universe_weight(sifter_cfg_path)))
     rn_buffer_rank, book_buffer_rank = _load_hysteresis_ranks(sifter_cfg_path)
+    sector_floor_keep_points = _load_sector_floor_keep_points(sifter_cfg_path)
     default_cycle_window, cluster_cycle_windows = _load_mid_cycle_config(sifter_cfg_path)
     veto_switches = globals().get("VETO_SWITCHES", _load_veto_switches(sifter_cfg_path))
     default_altman_min, sector_altman_map = _load_altman_thresholds()
@@ -1428,6 +1515,7 @@ def main():
         prev_book = set()
         prev_door3: Set[str] = set()
         prev_door3_rn: Set[str] = set()
+        prev_floor_fills: Set[str] = set()
     else:
         has_previous = True
         hysteresis_status = "applied"
@@ -1439,6 +1527,8 @@ def main():
                       if "DOOR_3_TREND_LEADER" in (d.get("fct_nominated_doors") or [])}
         # WO_DS3 item 2: the Door-3 names that held a research_now slot, for split_door3_bands.
         prev_door3_rn = {t for t in prev_door3 if prev_tickers[t].get("fct_band") == "research_now"}
+        # WO_DS3 item 4: the previous list's sector-floor fills, for core_slot_key.
+        prev_floor_fills = previous_floor_fills(prev_tickers)
 
     sync_result = sync_mri_snapshot()
     if sync_result is None:
@@ -2279,56 +2369,24 @@ def main():
             return "DOOR_2_VALUE_GAP"
         return "NONE"
 
+    # WO_DS3 item 4: a previous floor fill keeps its sector slot while it is within
+    # sector_floor_keep_points of the sector-mate that would take it (core_slot_key). The names
+    # that hold a slot only by that allowance are listed in the summary (sector_floor_kept).
+    sector_floor_kept: List[str] = []
     for sec, core_quota in core_sector_quotas.items():
         sec_cand = by_sec.get(sec, [])
         if not sec_cand: continue
 
-        # Intra-Sector Cluster Guardrail: max 35% per cluster
-        max_per_cluster = max(2, int(math.ceil(core_quota * 0.35)))
-        cluster_counts: Dict[str, int] = {}
-        current_sec_picks: Dict[str, Dict[str, Any]] = {}
+        sec_picks = select_sector_core(
+            sec_cand, core_quota, lambda c: core_slot_key(c, prev_floor_fills, sector_floor_keep_points))
+        plain_picks = {c["ticker"] for c in select_sector_core(sec_cand, core_quota, rank_key_for_profile)}
 
-        # Round 1: Cluster Diversification Pass
-        # Guarantee that distinct strategic clusters with qualified candidates (>= 75th pctl) get 1 slot
-        c_by_cluster: Dict[str, List[Dict[str, Any]]] = {}
-        for c in sec_cand:
-            c_by_cluster.setdefault(c["cluster"], []).append(c)
-        # WO_DS1 B3.4: the nomination sorts use the priority ranking's key (rank_key_for_profile:
-        # unrounded best percentile, then the higher door score, then ticker), not the one-decimal
-        # best_pctl with the alphabet as the tie-break. No name carries the champion tag yet at
-        # this point, so the key adds no bonus here.
-        for cl, cl_list in c_by_cluster.items():
-            cl_list.sort(key=rank_key_for_profile)
-
-        sorted_clusters = sorted(c_by_cluster.keys(), key=lambda cl: rank_key_for_profile(c_by_cluster[cl][0]))
-        for cl in sorted_clusters:
-            if len(current_sec_picks) >= core_quota:
-                break
-            best_in_cl = c_by_cluster[cl][0]
-            if best_in_cl.get("best_pctl") is not None and best_in_cl["best_pctl"] >= 75.0:
-                door_won = _door_won(best_in_cl)
-                best_in_cl["nominated_doors"].append(door_won)
-                current_sec_picks[best_in_cl["ticker"]] = best_in_cl
-                cluster_counts[cl] = cluster_counts.get(cl, 0) + 1
-
-        # Round 2: Fill remaining core slots by pure competitive merit under cluster cap
-        remaining_slots = core_quota - len(current_sec_picks)
-        merit_pool = [c for c in sec_cand if c["ticker"] not in current_sec_picks]
-        merit_pool.sort(key=rank_key_for_profile)
-
-        for c in merit_pool:
-            if remaining_slots <= 0: break
-            cl = c["cluster"]
-            if cluster_counts.get(cl, 0) < max_per_cluster:
-                door_won = _door_won(c)
-                c["nominated_doors"].append(door_won)
-                current_sec_picks[c["ticker"]] = c
-                cluster_counts[cl] = cluster_counts.get(cl, 0) + 1
-                remaining_slots -= 1
-
-        for t, c in current_sec_picks.items():
-            core_nominated[t] = c
+        for c in sec_picks:
+            c["nominated_doors"].append(_door_won(c))
+            core_nominated[c["ticker"]] = c
             sector_running_counts[sec] = sector_running_counts.get(sec, 0) + 1
+            if c["ticker"] not in plain_picks:
+                sector_floor_kept.append(c["ticker"])
 
     # ── 6. Nomination Step B: Global Wildcards with Hard 18% Ceiling ─────────
     wildcard_target = TOTAL_NOMINATION_TARGET - len(core_nominated)
@@ -2591,6 +2649,9 @@ def main():
         "door3_count": len(door3_final),
         "door3_rn_count": len(door3_rn_names),
         "door3_rn_kept": door3_rn_kept,
+        # WO_DS3 item 4.
+        "sector_floor_keep_points": sector_floor_keep_points,
+        "sector_floor_kept": sorted(sector_floor_kept),
         "door3_by_cluster": door3_by_cluster,
         "door3_eligible_count": len(door3_candidates),
         "door3_ineligible_reasons": door3_ineligible_reasons,
