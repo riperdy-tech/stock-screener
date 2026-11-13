@@ -168,8 +168,15 @@ def test_b1_door3_never_demotes_door12_nominee_and_band_counts_are_real(tmp_path
     # Door-1/2 order) once Door-3's ceiling-excluded Technology names were merged into the same
     # ranked pool. This is a fixed, deterministic fixture (no randomness) so the exact names are
     # asserted directly.
-    assert rescued == ["OTH_7_5", "OTH_8_1", "OTH_8_2", "OTH_8_3", "OTH_8_4"]
-    assert lost == []  # the fix never drops a name the old code kept
+    # WO_DS1 B5 (2026-11-13): the baseline ref scores Door 1 with the revisions input and the
+    # working tree without it. On this fixture that alone moves one name each way (OTH_8_5 in,
+    # OTH_6_6 out) besides the five the B1 fix rescues.
+    assert rescued == ["OTH_7_5", "OTH_8_1", "OTH_8_2", "OTH_8_3", "OTH_8_4", "OTH_8_5"]
+    assert lost == ["OTH_6_6"]
+    # The fix still never displaces a Door-1/2 nominee: the name lost ranks outside the working
+    # tree's own Door-1/2 top 135.
+    for t in lost:
+        assert w_compat["tickers"][t]["fct_rank"] > 135
 
     # ── The fix's own invariants, on the current working tree ──
     for t in rescued:

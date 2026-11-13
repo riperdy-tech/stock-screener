@@ -1095,15 +1095,21 @@ def apply_llm_overlay(results):
 # band hysteresis, extracted out of main() so tests call this production code directly instead
 # of re-implementing the logic inline. ───────────────────────────────────────────────────────
 
-DOOR1_BASE_WEIGHTS = {"quality": 0.45, "momentum": 0.35, "revisions": 0.20}
+# B5 (WO_DS1, 2026-11-13): no "revisions" weight. The input was eps_trajectory.json's
+# trajectory_slope, which compares the year's EPS estimate with one quarter's in dollars per share
+# (clamped to [-1, 1]): not a change in estimates. On the stored file it was +1.0 for 145 of the
+# 333 scored names that had it, ranked with the dollar level of EPS per share at +0.85, and existed
+# for 12% of Door-1 names. Quality and momentum keep their 0.45 : 0.35 ratio, the formula 88% of
+# names already had. z_revisions is still computed and published; Door 3's rule on it is unchanged.
+DOOR1_BASE_WEIGHTS = {"quality": 0.45, "momentum": 0.35}
 DOOR2_BASE_WEIGHTS = {"value": 0.40, "exp_gap": 0.40, "quality": 0.20}
 
 
 def score_door1(
-    z_qual: Optional[float], z_mom: Optional[float], z_rev: Optional[float],
+    z_qual: Optional[float], z_mom: Optional[float],
 ) -> Tuple[Optional[float], List[str], Optional[float], Optional[str]]:
-    """Door 1 (Secular Compounders): requires z_qual AND z_mom; revisions optional, and the
-    weights renormalise over whichever pillars are present (no `else 0.0` imputation). Returns
+    """Door 1 (Secular Compounders): requires z_qual AND z_mom, weighted 0.45 : 0.35 and
+    renormalised to sum to one (weight_scale 1.25). Returns
     (score, pillars_used, weight_scale, ineligible_reason)."""
     if z_qual is None or z_mom is None:
         missing = []
@@ -1112,10 +1118,6 @@ def score_door1(
         if z_mom is None:
             missing.append("missing_z_momentum")
         return None, [], None, "_and_".join(missing)
-    if z_rev is not None:
-        score = (DOOR1_BASE_WEIGHTS["quality"] * z_qual + DOOR1_BASE_WEIGHTS["momentum"] * z_mom
-                 + DOOR1_BASE_WEIGHTS["revisions"] * z_rev)
-        return score, ["quality", "momentum", "revisions"], 1.0, None
     present_w = DOOR1_BASE_WEIGHTS["quality"] + DOOR1_BASE_WEIGHTS["momentum"]
     scale = round(1.0 / present_w, 4)
     score = (DOOR1_BASE_WEIGHTS["quality"] / present_w) * z_qual + (DOOR1_BASE_WEIGHTS["momentum"] / present_w) * z_mom
@@ -2070,8 +2072,8 @@ def main():
         sec = tax["sector"]
         cluster = tax["cluster"]
 
-        # Door 1: Secular Compounders (requires z_qual AND z_mom; revisions optional)
-        d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(z_qual, z_mom, z_rev)
+        # Door 1: Secular Compounders (requires z_qual AND z_mom)
+        d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(z_qual, z_mom)
 
         # Door 2: Value / Expectations Gap (requires z_val; z_gap and z_qual optional)
         d2_score, d2_pillars_used, d2_weight_scale, d2_ineligible_reason = score_door2(z_val, z_gap, z_qual)
