@@ -1,9 +1,12 @@
 {
   "above_threshold": false,
-  "active_shocks_on_date": null,
-  "built_at": "2026-11-11T21:33:06.190622+00:00",
+  "active_shocks_on_date": [
+    "oil_shock"
+  ],
+  "active_shocks_register_date": "2026-10-30",
+  "built_at": "2026-11-12T21:33:40.859422+00:00",
   "composition_id": "9891321cdb5d8eaf",
-  "confidence": 0.051154947050122246,
+  "confidence": 0.05176662944046828,
   "coverage": 1.0,
   "data_health_warnings": [
     "Feature disabled_leading_index_level_z unusable: disabled_feature",
@@ -136,15 +139,15 @@
       "weight": 0.35
     },
     {
-      "contribution": 0.2911282756539613,
+      "contribution": 0.3011006548964214,
       "date": "2026-11-01T00:00:00",
       "dimension_id": "credit_liquidity",
       "feature_id": "nfci_level_z",
-      "normalized_value": -0.5822565513079226,
+      "normalized_value": -0.6022013097928428,
       "normalized_weight": 0.5,
       "polarity": "negative",
       "reason": "ok",
-      "signed_value": 0.5822565513079226,
+      "signed_value": 0.6022013097928428,
       "valid": true,
       "weight": 0.35
     },
@@ -287,7 +290,7 @@
       "date": "2026-11-01T00:00:00",
       "dimension_id": "credit_liquidity",
       "reason": "ok",
-      "score": 0.8729982522155322,
+      "score": 0.8829706314579922,
       "total_configured_weight": 0.7,
       "used_weight": 0.7,
       "valid": true,
@@ -373,11 +376,11 @@
     }
   ],
   "disclaimer": "This is an experimental macro regime diagnostic based on structured data. It is not investment advice and does not provide trading, allocation, or portfolio guidance.",
-  "dominant_probability": 0.29639799940194783,
+  "dominant_probability": 0.297141145689906,
   "dominant_regime": "goldilocks",
   "explanation": [
     "goldilocks is dominant based on stored regime contributions.",
-    "credit_liquidity supported the regime with contribution 0.175.",
+    "credit_liquidity supported the regime with contribution 0.177.",
     "growth_momentum supported the regime with contribution 0.088.",
     "policy_stance supported the regime with contribution 0.066.",
     "inflation_pressure supported the regime with contribution 0.024.",
@@ -395,7 +398,7 @@
       "composition_id": "credit_liquidity:v3:1990-01-01..",
       "coverage": 1.0,
       "reason": "ok",
-      "score": 0.8729982522155322,
+      "score": 0.8829706314579922,
       "valid": true
     },
     "dollar": {
@@ -506,7 +509,7 @@
       "invalid_count": 37,
       "latest_valid_date": "2026-09-01T00:00:00",
       "reason": "ok",
-      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 13, \"missing_raw_value\": 1}",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12, \"missing_raw_value\": 1, \"missing_base_month\": 1}",
       "series_id": "CPIAUCSL",
       "usable": true,
       "valid_count": 921
@@ -528,7 +531,7 @@
       "invalid_count": 37,
       "latest_valid_date": "2026-09-01T00:00:00",
       "reason": "ok",
-      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 13, \"missing_raw_value\": 1}",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 12, \"missing_raw_value\": 1, \"missing_base_month\": 1}",
       "series_id": "UNRATE",
       "usable": true,
       "valid_count": 909
@@ -537,12 +540,12 @@
       "enabled": true,
       "feature_id": "ten_year_yield_level_z",
       "invalid_count": 780,
-      "latest_valid_date": "2026-11-09T00:00:00",
+      "latest_valid_date": "2026-11-10T00:00:00",
       "reason": "ok",
       "reason_counts": "{\"missing_raw_value\": 721, \"insufficient_normalization_history\": 59}",
       "series_id": "DGS10",
       "usable": true,
-      "valid_count": 16140
+      "valid_count": 16141
     },
     {
       "enabled": false,
@@ -559,12 +562,12 @@
       "enabled": true,
       "feature_id": "nfci_level_z",
       "invalid_count": 51,
-      "latest_valid_date": "2026-10-30T00:00:00",
+      "latest_valid_date": "2026-11-06T00:00:00",
       "reason": "ok",
       "reason_counts": "{\"insufficient_normalization_history\": 51}",
       "series_id": "NFCI",
       "usable": true,
-      "valid_count": 2862
+      "valid_count": 2863
     },
     {
       "enabled": true,
@@ -594,7 +597,7 @@
       "invalid_count": 31,
       "latest_valid_date": "2026-10-01T00:00:00",
       "reason": "ok",
-      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 7, \"missing_raw_value\": 1}",
+      "reason_counts": "{\"insufficient_normalization_history\": 23, \"insufficient_transform_history\": 6, \"missing_raw_value\": 1, \"missing_base_month\": 1}",
       "series_id": "UNRATE",
       "usable": true,
       "valid_count": 915
@@ -603,23 +606,23 @@
       "enabled": true,
       "feature_id": "initial_claims_level_z",
       "invalid_count": 51,
-      "latest_valid_date": "2026-10-31T00:00:00",
+      "latest_valid_date": "2026-11-07T00:00:00",
       "reason": "ok",
       "reason_counts": "{\"insufficient_normalization_history\": 51}",
       "series_id": "ICSA",
       "usable": true,
-      "valid_count": 3071
+      "valid_count": 3072
     },
     {
       "enabled": true,
       "feature_id": "high_yield_oas_level_z",
       "invalid_count": 67,
-      "latest_valid_date": "2026-11-09T00:00:00",
+      "latest_valid_date": "2026-11-11T00:00:00",
       "reason": "ok",
       "reason_counts": "{\"insufficient_normalization_history\": 59, \"missing_raw_value\": 8}",
       "series_id": "BAMLH0A0HYM2",
       "usable": true,
-      "valid_count": 856
+      "valid_count": 857
     },
     {
       "enabled": true,
@@ -647,12 +650,12 @@
       "enabled": true,
       "feature_id": "real_rate_10y_level_z",
       "invalid_count": 758,
-      "latest_valid_date": "2026-11-09T00:00:00",
+      "latest_valid_date": "2026-11-10T00:00:00",
       "reason": "ok",
       "reason_counts": "{\"insufficient_normalization_history\": 503, \"missing_raw_value\": 255}",
       "series_id": "DFII10",
       "usable": true,
-      "valid_count": 5465
+      "valid_count": 5466
     },
     {
       "enabled": true,
@@ -669,12 +672,12 @@
       "enabled": true,
       "feature_id": "real_rate_10y_6m_change_z",
       "invalid_count": 1120,
-      "latest_valid_date": "2026-11-09T00:00:00",
+      "latest_valid_date": "2026-11-10T00:00:00",
       "reason": "ok",
       "reason_counts": "{\"insufficient_normalization_history\": 503, \"insufficient_transform_history\": 362, \"missing_raw_value\": 255}",
       "series_id": "DFII10",
       "usable": true,
-      "valid_count": 5103
+      "valid_count": 5104
     },
     {
       "enabled": true,
@@ -688,7 +691,7 @@
       "valid_count": 455
     }
   ],
-  "headline_margin": 0.02982116610551877,
+  "headline_margin": 0.02989593546610353,
   "invalid_or_missing_dimensions": [
     {
       "coverage_ratio": 0.0,
@@ -698,63 +701,63 @@
     }
   ],
   "parameter_vintage": "none:softmax_v1",
-  "peakedness": 0.051154947050122246,
+  "peakedness": 0.05176662944046828,
   "process_id": "MRI-05",
-  "raw_confidence": 0.051154947050122246,
-  "raw_dominant_probability": 0.29639799940194783,
+  "raw_confidence": 0.05176662944046828,
+  "raw_dominant_probability": 0.297141145689906,
   "raw_dominant_regime": "goldilocks",
   "reasons": [
-    "shock_register_no_row_for_date"
+    "shock_register_row_from_earlier_date:2026-10-30"
   ],
-  "recession_probability": 0.08469679938767243,
+  "recession_probability": 0.0842764653817381,
   "regime_probabilities": {
-    "goldilocks": 0.29639799940194783,
-    "recession": 0.08469679938767243,
-    "reflation": 0.26657683329642906,
-    "stagflation": 0.14212680590802235,
-    "tightening": 0.21020156200592835
+    "goldilocks": 0.297141145689906,
+    "recession": 0.0842764653817381,
+    "reflation": 0.2672452102238025,
+    "stagflation": 0.141656704615846,
+    "tightening": 0.20968047408870738
   },
-  "reported_confidence": 0.051154947050122246,
+  "reported_confidence": 0.05176662944046828,
   "reported_regime": "goldilocks",
-  "reported_regime_probability": 0.29639799940194783,
+  "reported_regime_probability": 0.297141145689906,
   "schema_version": 2,
   "scoring_mode": "point_in_time",
   "season_headline": "goldilocks",
-  "season_headline_probability": 0.29639799940194783,
+  "season_headline_probability": 0.297141145689906,
   "season_posterior": {
     "goldilocks": {
       "calibration_status": "uncalibrated_partition_weight",
-      "probability": 0.29639799940194783
+      "probability": 0.297141145689906
     },
     "recession": {
       "calibration_status": "calibrated_vs_nber",
-      "probability": 0.08469679938767243
+      "probability": 0.0842764653817381
     },
     "reflation": {
       "calibration_status": "uncalibrated_partition_weight",
-      "probability": 0.26657683329642906
+      "probability": 0.2672452102238025
     },
     "stagflation": {
       "calibration_status": "uncalibrated_partition_weight",
-      "probability": 0.14212680590802235
+      "probability": 0.141656704615846
     },
     "tightening": {
       "calibration_status": "uncalibrated_partition_weight",
-      "probability": 0.21020156200592835
+      "probability": 0.20968047408870738
     }
   },
-  "source_run_id": "2026-11-11T21:31:08.240715+00:00",
+  "source_run_id": "2026-11-12T21:31:36.297266+00:00",
   "threshold_configured": 0.25,
   "top_opposing_dimensions": [],
   "top_supporting_dimensions": [
     {
-      "contribution": 0.17459965044310644,
+      "contribution": 0.17659412629159843,
       "dimension_id": "credit_liquidity",
-      "dimension_score": 0.8729982522155322,
+      "dimension_score": 0.8829706314579922,
       "normalized_weight": 0.2,
       "polarity": "positive",
       "reason": "ok",
-      "transformed_dimension_value": 0.8729982522155322,
+      "transformed_dimension_value": 0.8829706314579922,
       "weight": 0.2
     },
     {

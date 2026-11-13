@@ -1,19 +1,19 @@
 {
   "counts": {
-    "stocks": 7034
+    "stocks": 7039
   },
   "fetch_run": {
-    "newest_last_updated_age_days": 0.49,
-    "processed": 6548,
-    "refreshed": 6548,
-    "scan_logged_at": "2026-11-13 00:57:54",
+    "newest_last_updated_age_days": 0.01,
+    "processed": 6549,
+    "refreshed": 6549,
+    "scan_logged_at": "2026-11-14 00:58:57",
     "skipped": 0,
     "skipped_share": 0.0
   },
-  "finished_at": "2026-11-13T03:39:39Z",
+  "finished_at": "2026-11-13T16:20:57Z",
   "invariants": [
     {
-      "detail": "newest row Last_Updated is 0.5 days old (max 8)",
+      "detail": "newest row Last_Updated is 0.0 days old (max 8)",
       "level": "soft",
       "name": "stocks_json_fresh",
       "ok": true
@@ -25,7 +25,7 @@
       "ok": false
     },
     {
-      "detail": "last scan (2026-11-13 00:57:54) refreshed 6548, skipped 0 of 6548 (0.0%, max 8%)",
+      "detail": "last scan (2026-11-14 00:58:57) refreshed 6549, skipped 0 of 6549 (0.0%, max 8%)",
       "level": "hard",
       "name": "fetch_skipped_share",
       "ok": true
@@ -37,13 +37,13 @@
       "ok": true
     },
     {
-      "detail": "universe 7034 -> 7034 (0.0% drift, max 10%)",
+      "detail": "universe 7034 -> 7039 (0.1% drift, max 10%)",
       "level": "soft",
       "name": "universe_drift",
       "ok": true
     },
     {
-      "detail": "7034/7034 stocks carry reverse object (100.0%, min 90%)",
+      "detail": "7039/7039 stocks carry reverse object (100.0%, min 90%)",
       "level": "hard",
       "name": "reverse_coverage",
       "ok": true
@@ -79,7 +79,7 @@
       "ok": true
     },
     {
-      "detail": "58 research_now candidates",
+      "detail": "60 research_now candidates",
       "level": "soft",
       "name": "factor_research_now",
       "ok": true
@@ -97,7 +97,7 @@
       "ok": true
     },
     {
-      "detail": "153 reverse-DCF models built",
+      "detail": "152 reverse-DCF models built",
       "level": "soft",
       "name": "valuation_models",
       "ok": true
@@ -117,25 +117,25 @@
   ],
   "ok": true,
   "price_asof": "2026-11-12",
-  "run_id": "20261113T033843Z",
+  "run_id": "20261113T161909Z",
   "steps": [
     {
-      "duration_s": 2.7,
+      "duration_s": 4.2,
       "name": "fetch_macro_state",
       "returncode": 0
     },
     {
-      "duration_s": 2.3,
+      "duration_s": 54.1,
       "name": "score_reverse",
       "returncode": 0
     },
     {
-      "duration_s": 1.3,
+      "duration_s": 1.1,
       "name": "filter_tier1_hygiene",
       "returncode": 0
     },
     {
-      "duration_s": 38.0,
+      "duration_s": 36.6,
       "name": "build_daily_price_history",
       "returncode": 0
     },
@@ -145,22 +145,22 @@
       "returncode": 0
     },
     {
-      "duration_s": 1.8,
+      "duration_s": 2.4,
       "name": "score_factors_dual_door",
       "returncode": 0
     },
     {
-      "duration_s": 1.0,
+      "duration_s": 0.8,
       "name": "build_valuation_models",
       "returncode": 0
     },
     {
-      "duration_s": 0.0,
+      "duration_s": 0.4,
       "name": "build_macro_events",
       "returncode": 0
     },
     {
-      "duration_s": 7.2,
+      "duration_s": 6.5,
       "name": "track_paper_portfolios",
       "returncode": 0
     }
