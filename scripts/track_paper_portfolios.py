@@ -67,6 +67,7 @@ PORTFOLIO_PLAN_MOMO_JSON = DATA / "portfolio_plan_momo.json"  # plan3 momentum s
 MY_PORTFOLIO_JSON = DATA / "my_portfolio.json"
 LEDGERS_JSON = DATA / "paper_ledgers.json"
 DIVIDENDS_JSON = DATA / "dividends.json"
+RISK_STATE_JSON = DATA / "mri" / "risk_state.json"            # the MRI's risk dial; its month_decision block drives equal_dial (paper only)
 
 # Ex-dividend calendar for the run, {ticker: [[ex_date, per_share_amount], ...]}.
 # Stashed module-side so the credit step can reach it without threading the arg
@@ -476,7 +477,7 @@ def rewind_or_advance(ledger, as_of):
         ledger["current_date"] = as_of
 
 
-def run_target_ledger(ledger, targets, prices, as_of, reason_prefix, unknown=frozenset()):
+def run_target_ledger(ledger, targets, prices, as_of, reason_prefix, unknown=frozenset(), before_trades=None):
     """plan/equal ledgers: trade-on-change toward a {ticker: weight_pct} target set.
 
     `unknown` = held names the upstream engine did not evaluate this run. They are
@@ -494,6 +495,8 @@ def run_target_ledger(ledger, targets, prices, as_of, reason_prefix, unknown=fro
     """
     rewind_or_advance(ledger, as_of)
     credit_dividends(ledger, as_of)  # pay holders before today's rebalance
+    if before_trades is not None:    # equal_dial only: its resize runs on the rewound, dividend-credited state
+        targets = before_trades(ledger, targets)
     held = set(ledger["state"]["holdings"])
     target_set = set(targets)
     leavers = held - target_set - set(unknown)
@@ -582,6 +585,104 @@ def run_target_ledger(ledger, targets, prices, as_of, reason_prefix, unknown=fro
 
     nav, stale = portfolio_value(ledger, prices)
     return nav, stale
+
+
+# ── equal_dial: `equal`'s rule at the MRI's month-decision gross (operator 2026-11-13, PAPER ONLY) ──────────
+# The gross is the share of the book's value its targets add up to: 1.0 when the month's dial is full, 0.5 when
+# half, the rest cash. The MRI owns the decision (risk_state.json, block month_decision); this book only reads it.
+DIAL_LEDGER = "equal_dial"
+DIAL_GROSS = {"full": 1.0, "half": 0.5}
+DIAL_STALE_DAYS = 7   # a risk_state.json whose as-of is older than this, before the session, is not read
+
+
+def load_risk_state(path=None):
+    """The parsed risk_state.json, or None when the file is absent, unreadable or not a JSON object
+    (a bad file must not stop the other ledgers; the book then keeps its gross, code kept_no_file)."""
+    try:
+        doc = load_json(path or RISK_STATE_JSON, None)
+    except (OSError, ValueError):
+        return None
+    return doc if isinstance(doc, dict) else None
+
+
+def read_dial_decision(risk_state, session):
+    """(decision, code): decision is {month, dial, decided_on} when this session may take the month's
+    decision; otherwise None and the fixed code saying why not. Never a guess."""
+    if risk_state is None:
+        return None, "kept_no_file"
+    md = risk_state.get("month_decision")
+    if not isinstance(md, dict) or md.get("dial") not in DIAL_GROSS:
+        return None, "kept_no_decision"
+    try:
+        age = (date.fromisoformat(session) - date.fromisoformat(str(risk_state.get("asof"))[:10])).days
+    except ValueError:
+        return None, "kept_stale_file"      # no readable as-of: the file's age cannot be shown
+    if age > DIAL_STALE_DAYS:
+        return None, "kept_stale_file"
+    if md.get("month") != session[:7]:
+        return None, "kept_month_mismatch"
+    return {"month": md["month"], "dial": md["dial"], "decided_on": md.get("decided_on")}, "decided"
+
+
+def dial_resize(ledger, prices, as_of, old_gross, new_gross):
+    """Resize every held position by new/old gross at today's marks, at the book's normal cost per side.
+    Sells part of each holding to cash going down; buys back with the cash the book has going up. A
+    position without a fresh mark is not traded. Not an exit: no closed round trip, exit_pending untouched.
+    Returns the row's dial_note_detail (or None)."""
+    ratio = new_gross / old_gross
+    reason = f"dial_resize_{old_gross}_to_{new_gross}"
+    plans, skipped = [], []
+    for t in sorted(ledger["state"]["holdings"]):
+        p, stale = mark_price(t, prices, ledger)
+        if p is None or stale:
+            skipped.append(t)
+            continue
+        plans.append((t, p, ledger["state"]["holdings"][t]["shares"] * p))
+    detail = {}
+    if ratio < 1:
+        for t, p, value in plans:
+            trim(ledger, t, p, value * (1 - ratio), as_of, reason)
+    else:
+        wants = [(t, p, value * (ratio - 1) / cost_factor()) for t, p, value in plans]
+        need = sum(w for _, _, w in wants)
+        scale = min(1.0, ledger["state"]["cash"] / need) if need > 0 else 1.0
+        if scale < 1.0:
+            detail["buyback_cash_limited"] = True
+        for t, p, want in wants:
+            top_up(ledger, t, p, want * scale, as_of, reason)
+    if skipped:
+        detail["not_resized_stale_mark"] = skipped
+    return detail or None
+
+
+def run_dial_ledger(ledger, targets, prices, as_of, reason_prefix, risk_state, unknown=frozenset(), note_out=None):
+    """equal_dial: take the month's decision if this session may, resize on a change of gross, then run
+    `equal`'s own target pass (run_target_ledger) with every target weight times the gross."""
+    out = note_out if note_out is not None else {}
+
+    def before(led, tg):
+        state = led["state"]
+        prev = state.get("dial_state")
+        old_gross = prev["gross"] if prev else 1.0
+        detail = None
+        if prev and prev["month"] == as_of[:7]:
+            note, gross = "kept_month_already_decided", old_gross
+        else:
+            dec, code = read_dial_decision(risk_state, as_of)
+            if dec is None:
+                note, gross = (code, old_gross) if prev else ("initial_full", 1.0)
+                detail = None if prev else {"cause": code}
+            else:
+                gross = DIAL_GROSS[dec["dial"]]
+                note = "decided"
+                state["dial_state"] = {"month": dec["month"], "dial": dec["dial"], "gross": gross,
+                                       "decided_on": dec["decided_on"], "read_at_session": as_of}
+                if gross != old_gross:
+                    detail = dial_resize(led, prices, as_of, old_gross, gross)
+        out.update({"gross": gross, "dial_note": note, "dial_note_detail": detail})
+        return {t: w * gross for t, w in tg.items()}
+
+    return run_target_ledger(ledger, targets, prices, as_of, reason_prefix, unknown=unknown, before_trades=before)
 
 
 def hold_ledger(ledger, prices, as_of):
@@ -1134,7 +1235,7 @@ def main():
     # plan / plan2 / plan3 (retired 2026-08-27) and the *_llm lane (retired 2026-08-26)
     # are NO LONGER computed or seeded on new books. Pre-existing books keep their frozen
     # history (setdefault never removes). The live books are `equal` + `rn_depth`.
-    for _k in ("rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book"):
+    for _k in ("rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book", DIAL_LEDGER):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -1178,7 +1279,7 @@ def main():
             guard_tripped.append(f"factor_scores: {fct_why}")
 
         def run_or_hold(name, targets, prefix, unknown=frozenset(), source_ok=True, why="",
-                        allow_empty_targets=False):
+                        allow_empty_targets=False, runner=run_target_ledger):
             """Trade only when the source that defines this target set is healthy."""
             led = ledgers[name]
             ok, reason = (source_ok, why) if not source_ok else targets_healthy(
@@ -1190,7 +1291,7 @@ def main():
                 if reason not in guard_tripped:
                     guard_tripped.append(reason)
                 return hold_ledger(led, prices, as_of)
-            nav_stale = run_target_ledger(led, targets, prices, as_of, prefix, unknown=unknown)
+            nav_stale = runner(led, targets, prices, as_of, prefix, unknown=unknown)
             uf = led.get("underfunded_entrants")
             if uf and uf.get("date") == as_of:
                 alerts.append({"date": as_of, "severity": "warn", "scope": name,
@@ -1213,6 +1314,23 @@ def main():
                                        unknown=unknown_quant, source_ok=fct_ok, why=fct_why)
         finalize_ledger(ledgers["equal"], nav_eq, stale_eq, benches, as_of, book["inception"])
         backfill_benches(ledgers["equal"])  # late-added benchmarks -> full record
+
+        # ── equal_dial: `equal`'s targets at the MRI's month-decision gross, PAPER ONLY (operator 2026-11-13) ──
+        # Same targets, grace, costs and stale-mark handling as `equal` (run_target_ledger); only the gross differs.
+        # Every row carries gross and dial_note. kis/targets.py refuses this id; it is on no real-money list.
+        dial_out = {}
+        unknown_dial = {t for t in ledgers[DIAL_LEDGER]["state"]["holdings"] if not evaluated_quant(factor.get(t))}
+        nav_dl, stale_dl = run_or_hold(
+            DIAL_LEDGER, {t: eq_weight for t in research}, "rank", unknown=unknown_dial, source_ok=fct_ok, why=fct_why,
+            runner=lambda led, tg, px, ao, pf, unknown: run_dial_ledger(
+                led, tg, px, ao, pf, load_risk_state(), unknown=unknown, note_out=dial_out))
+        finalize_ledger(ledgers[DIAL_LEDGER], nav_dl, stale_dl, benches, as_of, book["inception"])
+        _held_gross = (ledgers[DIAL_LEDGER]["state"].get("dial_state") or {}).get("gross", 1.0)
+        ledgers[DIAL_LEDGER]["nav_series"][-1].update(
+            {"gross": dial_out.get("gross", _held_gross), "dial_note": dial_out.get("dial_note", "held_source_unhealthy")})
+        if dial_out.get("dial_note_detail"):
+            ledgers[DIAL_LEDGER]["nav_series"][-1]["dial_note_detail"] = dial_out["dial_note_detail"]
+        backfill_benches(ledgers[DIAL_LEDGER])
 
         # ── LLM-overlay variants (plan_llm / plan2_llm / equal_llm): RETIRED ──
         # The old conviction/MoS LLM A/B lane (fed by portfolio_plan_llm.json +
@@ -1336,7 +1454,7 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("equal", "rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book"):
+        for name in ("equal", DIAL_LEDGER, "rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book"):
             if not ledgers.get(name, {}).get("nav_series"):
                 continue
             s = ledgers[name]["summary"]

@@ -38,6 +38,9 @@ SNAPSHOT_FILES = (
     # per-stock index from it instead.
     "shock_register.json",
     "event_register_run.json",
+    # The MRI's shadow risk dial. Its month_decision block drives the screener's one paper-only book, equal_dial
+    # (operator 2026-11-13). The document's date key is `asof`.
+    "risk_state.json",
 )
 
 

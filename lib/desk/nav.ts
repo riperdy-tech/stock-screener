@@ -35,6 +35,8 @@ export const BOOKS: { key: string; color: string; width: number; dash?: string }
     { key: 'code_book', color: 'var(--accent)', width: 2.2, dash: '8 3' },
     { key: 'rn_depth', color: 'var(--ink)', width: 1.6 },
     { key: 'equal', color: 'var(--accent)', width: 2 },
+    // equal_dial (operator 2026-11-13): paper only, Equal's rule at the MRI risk dial's gross
+    { key: 'equal_dial', color: 'var(--accent)', width: 1.6, dash: '3 3' },
     { key: 'mine', color: 'var(--ink-3)', width: 1.6, dash: '12 3' },
 ];
 

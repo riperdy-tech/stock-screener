@@ -37,8 +37,8 @@ export interface BookStats {
 export interface LedgerBook {
     summary?: Record<string, any> | null; // eslint-disable-line @typescript-eslint/no-explicit-any -- summary is an untyped JSON object
     trades?: Trade[] | null;
-    nav_series?: { date?: string }[] | null;
-    state?: { holdings?: Record<string, { entry_date?: string }> | null } | null;
+    nav_series?: { date?: string; gross?: number | null }[] | null;
+    state?: { holdings?: Record<string, { entry_date?: string }> | null; dial_state?: { month?: string; dial?: string; gross?: number } | null } | null;
     closed?: { entry_date?: string; exit_date?: string }[] | null;
 }
 
@@ -63,6 +63,15 @@ export function bookStats(book: LedgerBook | null | undefined): BookStats | null
 export function bookStart(book: LedgerBook | null | undefined): string | null {
     const d = (book?.nav_series ?? []).map((p) => p.date?.slice(0, 10)).filter((x): x is string => !!x);
     return d.length > 0 ? d.reduce((a, b) => (a < b ? a : b)) : null;
+}
+
+/** equal_dial only: the gross on the newest row and the month decision the book holds; null when no row carries a gross. */
+export function dialNow(book: LedgerBook | null | undefined): { grossPct: number; month: string | null; dial: 'full' | 'half' | null } | null {
+    const rows = book?.nav_series ?? [];
+    const g = rows.length ? rows[rows.length - 1].gross : null;
+    if (typeof g !== 'number' || !Number.isFinite(g)) return null;
+    const d = book?.state?.dial_state;
+    return { grossPct: Math.round(g * 100), month: d?.month ?? null, dial: d?.dial === 'full' || d?.dial === 'half' ? d.dial : null };
 }
 
 /** The newest trade (last in file order among the newest date), or null. */

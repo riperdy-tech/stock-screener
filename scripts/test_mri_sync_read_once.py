@@ -14,6 +14,8 @@ import mri_sync
 
 
 class TestMRISnapshotReadOnce(unittest.TestCase):
+    real_snapshot_files = mri_sync.SNAPSHOT_FILES   # before setUp patches it
+
     def setUp(self):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
@@ -119,6 +121,16 @@ class TestMRISnapshotReadOnce(unittest.TestCase):
             with self.assertRaisesRegex(OSError, "byte mismatch"):
                 mri_sync.sync_mri_snapshot()
         self.assertFalse(self.manifest_path.exists())
+
+    def test_risk_state_is_allow_listed_and_its_asof_becomes_the_manifest_date(self):
+        # the dial's document dates itself with `asof` (equal_dial reads the copy under public/data/mri/)
+        self.assertIn("risk_state.json", type(self).real_snapshot_files)
+        raw = b'{"asof":"2026-11-12","month_decision":{"month":"2026-11","dial":"half"}}\n'
+        (self.originals / "risk_state.json").write_bytes(raw)
+        with patch.object(mri_sync, "SNAPSHOT_FILES", ("risk_state.json",)):
+            manifest = mri_sync.sync_mri_snapshot()
+        self.assertEqual((self.snapshot / "risk_state.json").read_bytes(), raw)
+        self.assertEqual(manifest["files"]["risk_state.json"]["mri_date"], "2026-11-12")
 
 
 if __name__ == "__main__":

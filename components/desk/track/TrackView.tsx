@@ -51,7 +51,7 @@ export function TrackView({ ledgers, outcomes, outcomesLoaded, loggedIn, loading
     const [tradeQuery, setTradeQuery] = useState('');
     // Opens on the AI book and Control against QQQ, the books' benchmark; SPY and IWM are one click away, SOXX and DRAM sit behind "+ more".
     const [visible, setVisible] = useState<Record<string, boolean>>({
-        qwen_book: true, code_book: true, rn_depth: false, equal: false, QQQ: true, SPY: true, IWM: false,
+        qwen_book: true, code_book: true, rn_depth: false, equal: false, equal_dial: false, QQQ: true, SPY: true, IWM: false,
     });
 
     useEffect(() => {

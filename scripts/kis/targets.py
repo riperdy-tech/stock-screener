@@ -31,7 +31,7 @@ OVERLAY_MAX_AGE_BY_LEDGER = {"code_book": 40, "qwen_book": 40}
 OVERLAY_MAX_AGE_DAYS = 14
 # Ledgers driven by an unvalidated interim analyst (operator decision 2026-10-13: Gemini, paper only).
 # ledger_weights refuses them, so no KIS_LEDGER setting or manual --ledger can route them to real money.
-PAPER_ONLY_LEDGERS = frozenset({"rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"})   # engine v2.1, experimental and unpromoted (AK.84, AK.91)
+PAPER_ONLY_LEDGERS = frozenset({"rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "equal_dial"})   # engine v2.1, experimental and unpromoted (AK.84, AK.91); equal_dial = equal at the MRI risk dial's gross, paper only (operator 2026-11-13)
 
 
 # G4: why a higher-priority source was passed over in the last load_ledger_book() call.

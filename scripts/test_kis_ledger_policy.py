@@ -48,8 +48,18 @@ def release(monkeypatch, value):
 def test_defaults_live_in_one_place_each():
     assert KIS_REAL_LEDGERS == frozenset({"rn_depth", "code_book", "qwen_book"})   # operator 2026-11-06: the formation books
     assert MODEL_DERIVED_LEDGERS == frozenset(ALL_MODEL)
-    assert PAPER_ONLY_LEDGERS == frozenset({"rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs"})
-    assert PAPER_ONLY_LEDGERS <= MODEL_DERIVED_LEDGERS
+    assert PAPER_ONLY_LEDGERS == frozenset({"rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "equal_dial"})
+    # equal_dial is quant-only (the MRI dial on equal's targets), so it is paper-only but not model-derived
+    assert PAPER_ONLY_LEDGERS - {"equal_dial"} <= MODEL_DERIVED_LEDGERS
+
+
+def test_equal_dial_is_paper_only_and_on_no_real_money_list():
+    assert "equal_dial" in PAPER_ONLY_LEDGERS
+    assert "equal_dial" not in KIS_REAL_LEDGERS and "equal_dial" not in MODEL_DERIVED_LEDGERS
+    assert any("allow-list" in r for r in ledger_refusals("equal_dial", "real", {}))
+    from kis.targets import ledger_weights
+    with pytest.raises(ValueError, match="paper-only"):
+        ledger_weights(named("equal_dial"), "equal_dial")
 
 
 # ================================================================== G6

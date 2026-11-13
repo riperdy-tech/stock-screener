@@ -1,6 +1,6 @@
 'use client';
 
-// The paper books: Qwen book and Code book (monthly), the old AI book (rn_depth, stopped), the interim Gemini book (rn_gemini, when present), Control (equal) and My book. Returns come after the
+// The paper books: Qwen book and Code book (monthly), the old AI book (rn_depth, stopped), the interim Gemini book (rn_gemini, when present), Equal + risk dial (equal_dial, paper only, when present), Control (equal) and My book. Returns come after the
 // scoreboard on purpose. CAGR and Sharpe stay hidden until a book has MIN_OBS_FOR_RATIOS observations.
 
 import React from 'react';
@@ -10,7 +10,7 @@ import { useLanguage } from '@/components/LanguageContext';
 import { recentErrorAlerts } from '@/lib/desk/health';
 import { fill } from '@/lib/desk/text';
 import {
-    bookStart, bookStats, cashSince, fmtPlainPct, fmtPt, fmtRet, ratiosMeaningful, toneClass,
+    bookStart, bookStats, cashSince, dialNow, fmtPlainPct, fmtPt, fmtRet, ratiosMeaningful, toneClass,
     type BookStats, type LedgerBook,
 } from '@/lib/desk/trackBooks';
 
@@ -81,13 +81,15 @@ export function PaperBooks({ ledgers, loggedIn }: {
     const mine = bookStats(books.mine);
     const gemini = bookStats(books.rn_gemini);   // interim, paper-only Gemini book; absent until its first run
     const v4 = bookStats(books.rn_v4);           // engine v2.1, paper-only, experimental and unpromoted (failed gate 2b); absent until its first run
+    const dialBook = bookStats(books.equal_dial);   // paper only; absent until its first run
+    const dial = dialNow(books.equal_dial);
     const cash = cashSince(ai);
     // Newest first; error-severity alerts from the last 7 days only (older ones are history).
     const alerts = recentErrorAlerts(ledgers.alerts, Date.now()).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 
     return (
         <TrackSection title={t('trkBooksTitle')}>
-            <div className={clsx('mt-5 grid grid-cols-1 gap-x-8 gap-y-8', (gemini || v4 || qwen || code) ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3')}>
+            <div className={clsx('mt-5 grid grid-cols-1 gap-x-8 gap-y-8', (gemini || v4 || qwen || code || dialBook) ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3')}>
                 {qwen && (
                     <Column title={t('trkQwenBook')} note={t('trkQwenNote')} since={bookStart(books.qwen_book)}>
                         <StatGrid s={qwen} />
@@ -110,6 +112,18 @@ export function PaperBooks({ ledgers, loggedIn }: {
                 {v4 && (
                     <Column title={t('trkV4Book')} note={t('trkV4Note')} since={bookStart(books.rn_v4)}>
                         <StatGrid s={v4} />
+                    </Column>
+                )}
+                {dialBook && (
+                    <Column title={t('trkDialBook')} note={t('trkDialNote')} since={bookStart(books.equal_dial)}>
+                        <StatGrid s={dialBook} />
+                        {dial && (
+                            <p className="mt-3 font-mono text-[11px] text-ink-2">
+                                {dial.month && dial.dial
+                                    ? fill(t('trkDialNow'), { pct: dial.grossPct, month: dial.month, dial: t(dial.dial === 'full' ? 'trkDialFull' : 'trkDialHalf') })
+                                    : fill(t('trkDialNoDecision'), { pct: dial.grossPct })}
+                            </p>
+                        )}
                     </Column>
                 )}
                 <Column title={t('trkControl')} note={t('trkControlNote')} since={bookStart(books.equal)}>

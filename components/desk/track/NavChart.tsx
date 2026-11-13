@@ -29,7 +29,7 @@ export interface SeriesToggle { key: string; label: string; color: string; width
 /** Benchmarks beyond the three the page compares against sit behind the "+ more" chip. */
 const EXTRA_BENCHES = ['SOXX', 'DRAM'];
 
-const BOOK_LABEL = { qwen_book: 'trkSerQwen', code_book: 'trkSerCode', rn_depth: 'trkSerAi', equal: 'trkSerControl', mine: 'trkSerMine' } as const;
+const BOOK_LABEL = { qwen_book: 'trkSerQwen', code_book: 'trkSerCode', rn_depth: 'trkSerAi', equal: 'trkSerControl', equal_dial: 'trkSerDial', mine: 'trkSerMine' } as const;
 
 export function NavChart({ curve, visible, onToggle, commission, costBps, onCostBps, resetDate }: {
     curve: Curve;
