@@ -113,7 +113,8 @@ def _row(adv, cap=5e9):
 
 
 def test_the_scorer_nominates_one_class_and_annotates_the_other(tmp_path, monkeypatch):
-    stocks = {"AAA": {**_row(0.0), "symbol": "AAA"}, "AAB": {**_row(50e6), "symbol": "AAB"}}
+    # both classes are above the $300k floor (it is enforced since 2026-11-13), so the class rule is what is tested
+    stocks = {"AAA": {**_row(1e6), "symbol": "AAA"}, "AAB": {**_row(50e6), "symbol": "AAB"}}
     rows = _run_scorer(tmp_path, monkeypatch, stocks, {"AAA": "1", "AAB": "1"})
     assert rows["AAB"]["fct_band"] in ("research_now", "watchlist")
     assert rows["AAA"]["fct_band"] == "pass" and rows["AAA"]["fct_veto"] is None

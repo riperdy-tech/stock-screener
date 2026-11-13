@@ -9,13 +9,13 @@ import filter_tier1_hygiene as fth
 import score_factors_dual_door as sfdd
 
 
-def test_sifter_config_has_adv_enforce_false():
-    """C4: sifter_config.json has explicit switch ADV_ENFORCE: false."""
+def test_sifter_config_has_adv_enforce_on():
+    """C4: sifter_config.json has the explicit switch ADV_ENFORCE. Switched on 2026-11-13, once every name had a figure."""
     cfg_path = Path(__file__).resolve().parent / "sifter_config.json"
     cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
     assert "ADV_ENFORCE" in cfg
-    assert cfg["ADV_ENFORCE"] is False
-    assert ht.load_adv_enforce(cfg_path) is False
+    assert cfg["ADV_ENFORCE"] is True
+    assert ht.load_adv_enforce(cfg_path) is True
 
 
 def test_tier1_honors_adv_enforce_switch(tmp_path, monkeypatch):
