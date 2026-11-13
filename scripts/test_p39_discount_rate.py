@@ -28,8 +28,8 @@ def _iso_date(days_ago: int = 0) -> str:
     return (datetime.now(timezone.utc) - timedelta(days=days_ago)).strftime("%Y-%m-%d")
 
 
-def _anchor(asof=None, degraded=False, risk_free=0.05, implied_erp=0.04, loadings=None):
-    return {
+def _anchor(asof=None, degraded=False, risk_free=0.05, implied_erp=0.04, loadings=None, adjusted=None):
+    anchor = {
         "asof": asof if asof is not None else _iso_date(0),
         "degraded": degraded,
         "risk_free": {"nominal_10y": risk_free},
@@ -39,6 +39,9 @@ def _anchor(asof=None, degraded=False, risk_free=0.05, implied_erp=0.04, loading
             "semiconductors": 1.735,
         },
     }
+    if adjusted is not None:
+        anchor["sector_loadings_adjusted"] = adjusted
+    return anchor
 
 
 def _write(path: Path, data: dict):
@@ -113,7 +116,7 @@ def test_sfdd_resolve_coe_uses_finer_mgi_subindustry_id_first():
     })
     pct, flag = sfdd.resolve_coe_pct(anchor, "semiconductors", "Technology")
     assert pct == pytest.approx((0.05 + 1.735 * 0.04) * 100.0)
-    assert flag is None
+    assert flag == "loading_raw_fallback"  # raw-only anchor (no adjusted field)
 
 
 def test_sfdd_resolve_coe_falls_back_to_gics_macro_id():
@@ -124,7 +127,7 @@ def test_sfdd_resolve_coe_falls_back_to_gics_macro_id():
     # not "software") -> falls through to GICS_TO_MACRO_ID["Technology"] = "information_technology".
     pct, flag = sfdd.resolve_coe_pct(anchor, None, "Technology")
     assert pct == pytest.approx((0.05 + 1.373 * 0.04) * 100.0)
-    assert flag is None
+    assert flag == "loading_raw_fallback"  # raw-only anchor (no adjusted field)
 
 
 def test_sfdd_resolve_coe_defaults_loading_when_sector_has_none():
@@ -225,7 +228,7 @@ def test_bvm_resolve_coe_matches_sfdd_math():
     anchor = _anchor(risk_free=0.05, implied_erp=0.04, loadings={"semiconductors": 1.735})
     pct, flag = bvm.resolve_coe_pct(anchor, "semiconductors", "Technology", fallback_pct=11.0)
     assert pct == pytest.approx((0.05 + 1.735 * 0.04) * 100.0)
-    assert flag is None
+    assert flag == "loading_raw_fallback"  # raw-only anchor (no adjusted field)
 
 
 def test_bvm_resolve_coe_missing_loading_defaults_and_flags():
@@ -390,3 +393,55 @@ def test_anchor_wired_end_to_end_through_dual_door_diff(tmp_path):
     assert compat2["tickers"]["TECH"]["gap_basis"] == "owner_cf"
     assert compat2["tickers"]["BANK"]["discount_rate_pct"] is None
     assert compat2["tickers"]["BANK"]["gap_basis"] is None
+
+
+# ── ruling B7: the adjusted loading is read when the anchor publishes it ─────────────────────
+
+_RAW = {"information_technology": 1.4, "semiconductors": 1.8}
+_ADJ = {"information_technology": 1.27, "semiconductors": 1.5}  # published by the MRI; never computed here
+
+
+@pytest.mark.parametrize("resolve", [
+    lambda a, mgi, sec: sfdd.resolve_coe_pct(a, mgi, sec),
+    lambda a, mgi, sec: bvm.resolve_coe_pct(a, mgi, sec, fallback_pct=11.0),
+])
+def test_resolve_coe_reads_the_adjusted_loading_without_a_stamp(resolve):
+    anchor = _anchor(loadings=_RAW, adjusted=_ADJ)
+    pct, flag = resolve(anchor, "semiconductors", "Technology")
+    assert pct == pytest.approx((0.05 + 1.5 * 0.04) * 100.0)
+    assert flag is None
+    pct, flag = resolve(anchor, None, "Technology")  # coarser id
+    assert pct == pytest.approx((0.05 + 1.27 * 0.04) * 100.0)
+    assert flag is None
+
+
+@pytest.mark.parametrize("resolve", [
+    lambda a, mgi, sec: sfdd.resolve_coe_pct(a, mgi, sec),
+    lambda a, mgi, sec: bvm.resolve_coe_pct(a, mgi, sec, fallback_pct=11.0),
+])
+def test_resolve_coe_without_an_adjusted_field_uses_raw_and_stamps(resolve):
+    anchor = _anchor(loadings=_RAW)  # an anchor published before the field existed
+    pct, flag = resolve(anchor, "semiconductors", "Technology")
+    assert pct == pytest.approx((0.05 + 1.8 * 0.04) * 100.0)
+    assert flag == "loading_raw_fallback"
+
+
+@pytest.mark.parametrize("resolve", [
+    lambda a, mgi, sec: sfdd.resolve_coe_pct(a, mgi, sec),
+    lambda a, mgi, sec: bvm.resolve_coe_pct(a, mgi, sec, fallback_pct=11.0),
+])
+def test_resolve_coe_with_one_adjusted_id_missing_uses_raw_for_that_id_only(resolve):
+    anchor = _anchor(loadings=_RAW, adjusted={"information_technology": 1.27})
+    pct, flag = resolve(anchor, "semiconductors", "Technology")
+    assert pct == pytest.approx((0.05 + 1.8 * 0.04) * 100.0)
+    assert flag == "loading_raw_fallback"
+    pct, flag = resolve(anchor, None, "Technology")
+    assert pct == pytest.approx((0.05 + 1.27 * 0.04) * 100.0)
+    assert flag is None
+
+
+def test_sfdd_a_zero_adjusted_loading_is_a_value():
+    anchor = _anchor(loadings={"semiconductors": 1.8}, adjusted={"semiconductors": 0.0})
+    pct, flag = sfdd.resolve_coe_pct(anchor, "semiconductors", "Technology")
+    assert pct == pytest.approx(5.0)
+    assert flag is None

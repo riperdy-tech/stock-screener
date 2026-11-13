@@ -102,24 +102,24 @@ def test_winsor_default_unchanged():
 
 def test_door1_ineligible_without_qual_or_mom():
     """Door 1 requires z_qual AND z_mom. If either is missing, Door 1 is ineligible."""
-    d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(None, 1.0, 0.5)
+    d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(None, 1.0)
     assert d1_score is None
     assert d1_ineligible_reason == "missing_z_quality"
     assert d1_pillars_used == []
     assert d1_weight_scale is None
 
-    d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(1.0, None, 0.5)
+    d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(1.0, None)
     assert d1_score is None
     assert d1_ineligible_reason == "missing_z_momentum"
     assert d1_pillars_used == []
     assert d1_weight_scale is None
 
-    d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(None, None, 0.5)
+    d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(None, None)
     assert d1_score is None
     assert d1_ineligible_reason == "missing_z_quality_and_missing_z_momentum"
     assert d1_pillars_used == []
 
-    d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(1.0, 1.0, None)
+    d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(1.0, 1.0)
     assert d1_score is not None
     assert d1_ineligible_reason is None
     assert d1_pillars_used == ["quality", "momentum"]
@@ -136,14 +136,14 @@ def test_door2_ineligible_without_val():
 
 
 def test_pillar_missing_renormalised_weights():
-    """Pillar missing results in exact renormalisation over present weights, no 0.0 imputation."""
-    # Door 1: revisions missing -> weights 0.45/0.80 and 0.35/0.80
+    """Door 1's two weights renormalise to sum to one (WO_DS1 B5: revisions is out of Door 1)."""
+    # Door 1: weights 0.45/0.80 and 0.35/0.80
     z_qual, z_mom = 1.6, 0.8
     w_qual, w_mom = 0.45 / 0.80, 0.35 / 0.80
     expected_d1 = w_qual * z_qual + w_mom * z_mom
     assert pytest.approx(w_qual + w_mom) == 1.0
 
-    d1_score, d1_pillars_used, d1_weight_scale, _ = score_door1(z_qual, z_mom, None)
+    d1_score, d1_pillars_used, d1_weight_scale, _ = score_door1(z_qual, z_mom)
     assert d1_score == pytest.approx(expected_d1)
     assert d1_pillars_used == ["quality", "momentum"]
     assert d1_weight_scale == 1.25
@@ -252,7 +252,7 @@ def test_degenerate_pillar_handling():
 def test_complete_pillar_scores_identical_without_unit_variance():
     """When unit-variance is disabled, complete-pillar names have unchanged (raw) scores."""
     z_q, z_m, z_r, z_v, z_g = 1.2, 0.8, -0.4, 1.5, 0.5
-    baseline_d1 = 0.45 * z_q + 0.35 * z_m + 0.20 * z_r
+    baseline_d1 = (0.45 * z_q + 0.35 * z_m) / 0.80   # WO_DS1 B5: revisions is out of Door 1
     baseline_d2 = 0.40 * z_v + 0.40 * z_g + 0.20 * z_q
 
     # standardize_pillar_value passes raw values through unchanged when use_unit_variance=False.
@@ -263,11 +263,11 @@ def test_complete_pillar_scores_identical_without_unit_variance():
     std_g = standardize_pillar_value(z_g, 1.0234, degenerate=False, use_unit_variance=False)
     assert (std_q, std_m, std_r, std_v, std_g) == (z_q, z_m, z_r, z_v, z_g)
 
-    d1_score, d1_pillars_used, d1_weight_scale, _ = score_door1(std_q, std_m, std_r)
+    d1_score, d1_pillars_used, d1_weight_scale, _ = score_door1(std_q, std_m)
     d2_score, _, _, _ = score_door2(std_v, std_g, std_q)
 
     assert d1_score == pytest.approx(baseline_d1)
-    assert d1_pillars_used == ["quality", "momentum", "revisions"]
-    assert d1_weight_scale == 1.0
+    assert d1_pillars_used == ["quality", "momentum"]
+    assert d1_weight_scale == 1.25
     assert d2_score == pytest.approx(baseline_d2)
 

@@ -26,7 +26,7 @@ def test_effective_weights_keys_and_values():
     ew_live_d1 = {k: round(v / total_d1, 4) for k, v in sfdd.DOOR1_BASE_WEIGHTS.items()}
     ew_live_d2 = {k: round(v / total_d2, 4) for k, v in sfdd.DOOR2_BASE_WEIGHTS.items()}
 
-    assert ew_live_d1 == {"quality": 0.45, "momentum": 0.35, "revisions": 0.20}
+    assert ew_live_d1 == {"quality": 0.5625, "momentum": 0.4375}   # WO_DS1 B5: revisions is out of Door 1
     assert ew_live_d2 == {"value": 0.40, "exp_gap": 0.40, "quality": 0.20}
 
     # Check sum of live weights is 1.0

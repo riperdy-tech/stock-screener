@@ -14,11 +14,11 @@ import run_chain as rc
 
 
 def test_hysteresis_config_buffers():
-    """Verify sifter_config.json carries hysteresis_rn_rank=60 and hysteresis_book_rank=150."""
+    """Verify sifter_config.json carries hysteresis_rn_rank=100 (WO_DS1, 2026-11-13; was 60) and hysteresis_book_rank=150."""
     cfg_path = SCRIPTS_DIR / "sifter_config.json"
     assert cfg_path.exists(), "sifter_config.json must exist"
     rn_buf, book_buf = sfdd._load_hysteresis_ranks(cfg_path)
-    assert rn_buf == 60
+    assert rn_buf == 100
     assert book_buf == 150
 
 

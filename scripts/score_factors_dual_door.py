@@ -694,13 +694,21 @@ def resolve_coe_pct(anchor: Optional[Dict[str, Any]], mgi_subindustry_id: Option
     if risk_free is None or implied_erp is None:
         return CONSTANT_FALLBACK_DISCOUNT_RATE, None
 
-    loading = sector_loadings.get(mgi_subindustry_id) if mgi_subindustry_id else None
+    adjusted_loadings = anchor.get("sector_loadings_adjusted") or {}
+    loading_id = mgi_subindustry_id
+    loading = sector_loadings.get(loading_id) if loading_id else None
     if loading is None:
-        loading = sector_loadings.get(GICS_TO_MACRO_ID.get(sector))
+        loading_id = GICS_TO_MACRO_ID.get(sector)
+        loading = sector_loadings.get(loading_id)
     flag = None
     if loading is None:
         loading = 1.0
         flag = "coe_default_loading"
+    elif adjusted_loadings.get(loading_id) is not None:
+        # B7: the MRI publishes the adjusted loading; the screener never computes it.
+        loading = adjusted_loadings[loading_id]
+    else:
+        flag = "loading_raw_fallback"  # anchor without the adjusted field, or without this id: raw, stamped
     return (risk_free + loading * implied_erp) * 100.0, flag
 
 
@@ -1095,15 +1103,21 @@ def apply_llm_overlay(results):
 # band hysteresis, extracted out of main() so tests call this production code directly instead
 # of re-implementing the logic inline. ───────────────────────────────────────────────────────
 
-DOOR1_BASE_WEIGHTS = {"quality": 0.45, "momentum": 0.35, "revisions": 0.20}
+# B5 (WO_DS1, 2026-11-13): no "revisions" weight. The input was eps_trajectory.json's
+# trajectory_slope, which compares the year's EPS estimate with one quarter's in dollars per share
+# (clamped to [-1, 1]): not a change in estimates. On the stored file it was +1.0 for 145 of the
+# 333 scored names that had it, ranked with the dollar level of EPS per share at +0.85, and existed
+# for 12% of Door-1 names. Quality and momentum keep their 0.45 : 0.35 ratio, the formula 88% of
+# names already had. z_revisions is still computed and published; Door 3's rule on it is unchanged.
+DOOR1_BASE_WEIGHTS = {"quality": 0.45, "momentum": 0.35}
 DOOR2_BASE_WEIGHTS = {"value": 0.40, "exp_gap": 0.40, "quality": 0.20}
 
 
 def score_door1(
-    z_qual: Optional[float], z_mom: Optional[float], z_rev: Optional[float],
+    z_qual: Optional[float], z_mom: Optional[float],
 ) -> Tuple[Optional[float], List[str], Optional[float], Optional[str]]:
-    """Door 1 (Secular Compounders): requires z_qual AND z_mom; revisions optional, and the
-    weights renormalise over whichever pillars are present (no `else 0.0` imputation). Returns
+    """Door 1 (Secular Compounders): requires z_qual AND z_mom, weighted 0.45 : 0.35 and
+    renormalised to sum to one (weight_scale 1.25). Returns
     (score, pillars_used, weight_scale, ineligible_reason)."""
     if z_qual is None or z_mom is None:
         missing = []
@@ -1112,10 +1126,6 @@ def score_door1(
         if z_mom is None:
             missing.append("missing_z_momentum")
         return None, [], None, "_and_".join(missing)
-    if z_rev is not None:
-        score = (DOOR1_BASE_WEIGHTS["quality"] * z_qual + DOOR1_BASE_WEIGHTS["momentum"] * z_mom
-                 + DOOR1_BASE_WEIGHTS["revisions"] * z_rev)
-        return score, ["quality", "momentum", "revisions"], 1.0, None
     present_w = DOOR1_BASE_WEIGHTS["quality"] + DOOR1_BASE_WEIGHTS["momentum"]
     scale = round(1.0 / present_w, 4)
     score = (DOOR1_BASE_WEIGHTS["quality"] / present_w) * z_qual + (DOOR1_BASE_WEIGHTS["momentum"] / present_w) * z_mom
@@ -2070,8 +2080,8 @@ def main():
         sec = tax["sector"]
         cluster = tax["cluster"]
 
-        # Door 1: Secular Compounders (requires z_qual AND z_mom; revisions optional)
-        d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(z_qual, z_mom, z_rev)
+        # Door 1: Secular Compounders (requires z_qual AND z_mom)
+        d1_score, d1_pillars_used, d1_weight_scale, d1_ineligible_reason = score_door1(z_qual, z_mom)
 
         # Door 2: Value / Expectations Gap (requires z_val; z_gap and z_qual optional)
         d2_score, d2_pillars_used, d2_weight_scale, d2_ineligible_reason = score_door2(z_val, z_gap, z_qual)
@@ -2254,10 +2264,14 @@ def main():
         c_by_cluster: Dict[str, List[Dict[str, Any]]] = {}
         for c in sec_cand:
             c_by_cluster.setdefault(c["cluster"], []).append(c)
+        # WO_DS1 B3.4: the nomination sorts use the priority ranking's key (rank_key_for_profile:
+        # unrounded best percentile, then the higher door score, then ticker), not the one-decimal
+        # best_pctl with the alphabet as the tie-break. No name carries the champion tag yet at
+        # this point, so the key adds no bonus here.
         for cl, cl_list in c_by_cluster.items():
-            cl_list.sort(key=lambda x: -(x["best_pctl"] if x.get("best_pctl") is not None else -1.0))
+            cl_list.sort(key=rank_key_for_profile)
 
-        sorted_clusters = sorted(c_by_cluster.keys(), key=lambda cl: -(c_by_cluster[cl][0]["best_pctl"] if c_by_cluster[cl][0].get("best_pctl") is not None else -1.0))
+        sorted_clusters = sorted(c_by_cluster.keys(), key=lambda cl: rank_key_for_profile(c_by_cluster[cl][0]))
         for cl in sorted_clusters:
             if len(current_sec_picks) >= core_quota:
                 break
@@ -2271,7 +2285,7 @@ def main():
         # Round 2: Fill remaining core slots by pure competitive merit under cluster cap
         remaining_slots = core_quota - len(current_sec_picks)
         merit_pool = [c for c in sec_cand if c["ticker"] not in current_sec_picks]
-        merit_pool.sort(key=lambda x: -(x["best_pctl"] if x.get("best_pctl") is not None else -1.0))
+        merit_pool.sort(key=rank_key_for_profile)
 
         for c in merit_pool:
             if remaining_slots <= 0: break
@@ -2291,7 +2305,7 @@ def main():
     wildcard_target = TOTAL_NOMINATION_TARGET - len(core_nominated)
     unnominated = [p for p in scored_profiles.values()
                    if p["ticker"] not in core_nominated and p["ticker"] not in not_nominated]
-    unnominated.sort(key=lambda x: -(x["best_pctl"] if x.get("best_pctl") is not None else -1.0))
+    unnominated.sort(key=rank_key_for_profile)
 
     wildcard_nominated: Dict[str, Dict[str, Any]] = {}
     for p in unnominated:

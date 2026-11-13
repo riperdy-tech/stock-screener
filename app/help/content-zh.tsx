@@ -265,8 +265,8 @@ export function ChineseHelpBody() {
                 </p>
                 <div className="space-y-3">
                     <DoorCard color={FAMILY.quality} title="第 1 道門 — Quality（品質・複利成長）">
-                        真正賺錢、持續成長、股價上漲、預測被上調的公司。它混合<Term term="quality" />、
-                        <Term term="momentum" />與<Term term="revisions" />，其中品質的比重最大。
+                        真正賺錢、持續成長、股價上漲的公司。它混合<Term term="quality" />與
+                        <Term term="momentum" />，其中品質的比重最大。
                     </DoorCard>
                     <DoorCard color={FAMILY.value} title="第 2 道門 — Value（價值・價值落差）">
                         相對於自己已證明的成長而顯得便宜的公司：價格要求的成長低於公司實際交出的成績（
