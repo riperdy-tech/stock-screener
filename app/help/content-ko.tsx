@@ -293,8 +293,8 @@ export function KoreanHelpBody() {
                 </p>
                 <div className="space-y-3">
                     <DoorCard color={FAMILY.quality} title="Door 1 — Quality(퀄리티 · 컴파운더)">
-                        실제로 돈을 벌고, 계속 성장하고, 주가가 오르고, 전망이 상향되고 있는 기업입니다.{' '}
-                        <Term term="quality" />, <Term term="momentum" />, <Term term="revisions" />를 섞으며,
+                        실제로 돈을 벌고, 계속 성장하고, 주가가 오르고 있는 기업입니다.{' '}
+                        <Term term="quality" />와 <Term term="momentum" />을 섞으며,
                         퀄리티의 비중이 가장 큽니다.
                     </DoorCard>
                     <DoorCard color={FAMILY.value} title="Door 2 — Value(밸류 · 밸류 갭)">

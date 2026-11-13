@@ -285,9 +285,8 @@ export function EnglishHelpBody() {
                 </p>
                 <div className="space-y-3">
                     <DoorCard color={FAMILY.quality} title="Door 1 — Quality (compounder)">
-                        Companies that earn real money, keep growing, are rising in price and are having their forecasts
-                        raised. It blends <Term term="quality" />, <Term term="momentum" /> and{' '}
-                        <Term term="revisions" />, with quality counting most.
+                        Companies that earn real money, keep growing and are rising in price. It blends{' '}
+                        <Term term="quality" /> and <Term term="momentum" />, with quality counting most.
                     </DoorCard>
                     <DoorCard color={FAMILY.value} title="Door 2 — Value (value gap)">
                         Companies that look cheap against their own demonstrated growth: the price asks for less growth
