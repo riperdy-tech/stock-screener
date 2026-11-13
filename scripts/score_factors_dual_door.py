@@ -2254,10 +2254,14 @@ def main():
         c_by_cluster: Dict[str, List[Dict[str, Any]]] = {}
         for c in sec_cand:
             c_by_cluster.setdefault(c["cluster"], []).append(c)
+        # WO_DS1 B3.4: the nomination sorts use the priority ranking's key (rank_key_for_profile:
+        # unrounded best percentile, then the higher door score, then ticker), not the one-decimal
+        # best_pctl with the alphabet as the tie-break. No name carries the champion tag yet at
+        # this point, so the key adds no bonus here.
         for cl, cl_list in c_by_cluster.items():
-            cl_list.sort(key=lambda x: -(x["best_pctl"] if x.get("best_pctl") is not None else -1.0))
+            cl_list.sort(key=rank_key_for_profile)
 
-        sorted_clusters = sorted(c_by_cluster.keys(), key=lambda cl: -(c_by_cluster[cl][0]["best_pctl"] if c_by_cluster[cl][0].get("best_pctl") is not None else -1.0))
+        sorted_clusters = sorted(c_by_cluster.keys(), key=lambda cl: rank_key_for_profile(c_by_cluster[cl][0]))
         for cl in sorted_clusters:
             if len(current_sec_picks) >= core_quota:
                 break
@@ -2271,7 +2275,7 @@ def main():
         # Round 2: Fill remaining core slots by pure competitive merit under cluster cap
         remaining_slots = core_quota - len(current_sec_picks)
         merit_pool = [c for c in sec_cand if c["ticker"] not in current_sec_picks]
-        merit_pool.sort(key=lambda x: -(x["best_pctl"] if x.get("best_pctl") is not None else -1.0))
+        merit_pool.sort(key=rank_key_for_profile)
 
         for c in merit_pool:
             if remaining_slots <= 0: break
@@ -2291,7 +2295,7 @@ def main():
     wildcard_target = TOTAL_NOMINATION_TARGET - len(core_nominated)
     unnominated = [p for p in scored_profiles.values()
                    if p["ticker"] not in core_nominated and p["ticker"] not in not_nominated]
-    unnominated.sort(key=lambda x: -(x["best_pctl"] if x.get("best_pctl") is not None else -1.0))
+    unnominated.sort(key=rank_key_for_profile)
 
     wildcard_nominated: Dict[str, Dict[str, Any]] = {}
     for p in unnominated:
