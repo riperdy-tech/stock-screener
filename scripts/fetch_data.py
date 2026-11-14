@@ -234,6 +234,17 @@ def carry_sec_growth(detail, cached_detail):
             cm[k] = old[k]
     return {k: cm.get(k) for k in SEC_GROWTH_KEYS}
 
+ADV_STAMP_KEYS = ("adv_20d_sessions", "adv_20d_asof", "adv_20d_reason")
+
+
+def carry_adv_stamps(prev_metrics, adv_usd):
+    """The stamps refresh_prices.py writes beside adv_20d_usd. metrics is rebuilt each run, so they would be lost;
+    they describe the figure they were written with, so they ride only while that same figure is carried."""
+    prev = prev_metrics or {}
+    if prev.get("adv_20d_usd") != adv_usd:
+        return {}
+    return {k: prev[k] for k in ADV_STAMP_KEYS if k in prev}
+
 # ── defeatbeta bulk source (Yahoo-quota killer, 2026-07-10) ────────────────────
 # NOT THE NORMAL PATH TODAY: the dataset has answered HTTP 404 since 2026-09-17 (last good load
 # 2026-09-11), so DBETA is None and every run is the full legacy yfinance scan (about 2.5 h).
@@ -1081,6 +1092,7 @@ def main():
                     "consecutiveGrowth": sec_growth["Consecutive_YoY_EPS_Growth"] if sec_growth["Consecutive_YoY_EPS_Growth"] is not None else 0
                 }
             }
+            result_obj["metrics"].update(carry_adv_stamps((EXISTING_DATA_REF.get(ticker) or {}).get("metrics"), result.adv_20d_usd))
             if detail and detail.get("Monthly_Close_Months"):
                 result_obj["metrics"]["monthlyCloseMonths"] = list(detail["Monthly_Close_Months"])
             existing_data[ticker] = result_obj
