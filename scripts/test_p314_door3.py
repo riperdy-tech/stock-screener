@@ -416,13 +416,13 @@ def test_ties_missing_mom_12_1_sorts_after_present_values():
 # ── RN / watchlist split (top DOOR3_RN_SLOTS -> research_now, rest -> watchlist) ─────────────
 
 def test_rn_split_top_slots_only():
-    """Mirrors the main()-level slicing: door3_final_ranked[:RN_SLOTS] -> RN, rest -> WL."""
+    """The live split (split_door3_bands, as main() calls it) with no previous list: the top
+    RN_SLOTS of the rank order -> RN, rest -> WL."""
     momentum_by_ticker = {f"T{i}": float(20 - i) for i in range(8)}
-    door3_final = list(momentum_by_ticker.keys())
-    ranked = sorted(door3_final, key=lambda t: (-momentum_by_ticker[t], t))
+    cands = [{"ticker": t, "universe_momentum": m} for t, m in momentum_by_ticker.items()]
+    ranked = [c["ticker"] for c in sorted(cands, key=sfdd._door3_rank_key)]
     rn_slots = 5
-    rn_names = ranked[:rn_slots]
-    wl_names = ranked[rn_slots:]
+    rn_names, wl_names = sfdd.split_door3_bands(ranked, set(), rn_slots, 25)
     assert rn_names == ["T0", "T1", "T2", "T3", "T4"]
     assert wl_names == ["T5", "T6", "T7"]
     assert set(rn_names) & set(wl_names) == set()

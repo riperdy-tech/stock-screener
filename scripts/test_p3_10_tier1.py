@@ -19,6 +19,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import filter_tier1_hygiene as fth  # noqa: E402
 import score_factors_dual_door as sfdd  # noqa: E402
+from live_sifter_fixture import run_live_sifter  # noqa: E402
 
 
 def _stock(symbol, mcap=1e9, price=50.0, vol=1_000_000, sector="Technology",
@@ -271,21 +272,27 @@ def test_benchmark_all_present_and_clean_does_not_exit(tmp_path, monkeypatch):
 
 
 # ── SCR-03b: alternate_reporting_unverified veto_detail (score_factors_dual_door.py) ────────
-# Mirrors the one-line stamp added next to score_factors_dual_door.py's NO_FUNDAMENTAL_HISTORY
-# veto (same pattern test_p36_forensic_solvency.py uses for the rest of that file's gates).
+# Runs the live sifter's main() on one name that has no fundamentals_history entry.
 
-def _no_fundamental_history_veto_detail(ticker, years, alternate_reporting_tickers):
-    if years:
-        return None
-    return "alternate_reporting_unverified" if ticker in alternate_reporting_tickers else None
-
-
-def test_alternate_reporting_ticker_gets_specific_veto_detail():
-    assert _no_fundamental_history_veto_detail("FOREIGN", [], {"FOREIGN"}) == "alternate_reporting_unverified"
+def _no_fundamentals_row(tmp_path, monkeypatch, alternate_reporting):
+    stocks = {"NOFUND": {"symbol": "NOFUND", "sector": "Technology", "industry": "Software-Application",
+                         "marketCap": 5e9, "price": 50.0, "volume": 2_000_000,
+                         "metrics": {"adv_20d_usd": 50_000_000.0}}}
+    tier1 = {"survivor_tickers": ["NOFUND"], "alternate_reporting": alternate_reporting}
+    compat, _ = run_live_sifter(tmp_path, monkeypatch, stocks, tier1_survivors=tier1)
+    return compat["tickers"]["NOFUND"]
 
 
-def test_plain_no_fundamentals_ticker_gets_no_veto_detail():
-    assert _no_fundamental_history_veto_detail("NODATA", [], set()) is None
+def test_alternate_reporting_ticker_gets_specific_veto_detail(tmp_path, monkeypatch):
+    row = _no_fundamentals_row(tmp_path, monkeypatch, ["NOFUND"])
+    assert row["fct_veto"] == "NO_FUNDAMENTAL_HISTORY"
+    assert row["fct_veto_detail"] == "alternate_reporting_unverified"
+
+
+def test_plain_no_fundamentals_ticker_gets_no_veto_detail(tmp_path, monkeypatch):
+    row = _no_fundamentals_row(tmp_path, monkeypatch, [])
+    assert row["fct_veto"] == "NO_FUNDAMENTAL_HISTORY"
+    assert row["fct_veto_detail"] is None
 
 
 # ── P3.10b: stale_annual_data rides through to score_factors_dual_door.py's fct_flags ───────
