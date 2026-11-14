@@ -655,6 +655,40 @@ def dial_resize(ledger, prices, as_of, old_gross, new_gross):
     return detail or None
 
 
+def dial_resize_late(ledger, prices, as_of, pending, gross):
+    """Resize the holdings a resize skipped on a stale mark (`pending`: {ticker: ratio owed}) once their mark is
+    fresh, by the stored ratio at today's marks and the book's normal cost, trims first and then buy-backs
+    limited by cash as in dial_resize. `gross` is the book's gross now. A holding that left the book owes
+    nothing. Returns (what is still pending, the row's detail for the late pass)."""
+    keep, trims, buys, detail = {}, [], [], {}
+    for t in sorted(pending):
+        h = ledger["state"]["holdings"].get(t)
+        if h is None:
+            continue
+        p, stale = mark_price(t, prices, ledger)
+        if p is None or stale:
+            keep[t] = pending[t]
+            continue
+        ratio = pending[t]
+        item = (t, p, h["shares"] * p, ratio, f"dial_resize_late_{gross / ratio}_to_{gross}")
+        (trims if ratio < 1 else buys).append(item)
+    for t, p, value, ratio, reason in trims:
+        trim(ledger, t, p, value * (1 - ratio), as_of, reason)
+    wants = [(t, p, value * (ratio - 1) / cost_factor(), reason) for t, p, value, ratio, reason in buys]
+    need = sum(w for _, _, w, _ in wants)
+    scale = min(1.0, ledger["state"]["cash"] / need) if need > 0 else 1.0
+    if scale < 1.0:
+        detail["buyback_cash_limited"] = True
+    for t, p, want, reason in wants:
+        top_up(ledger, t, p, want * scale, as_of, reason)
+    done = sorted(t for t, *_ in trims + buys)
+    if done:
+        detail["resized_late"] = done
+    if keep:
+        detail["still_pending"] = sorted(keep)
+    return keep, detail
+
+
 def run_dial_ledger(ledger, targets, prices, as_of, reason_prefix, risk_state, unknown=frozenset(), note_out=None):
     """equal_dial: take the month's decision if this session may, resize on a change of gross, then run
     `equal`'s own target pass (run_target_ledger) with every target weight times the gross."""
@@ -664,6 +698,9 @@ def run_dial_ledger(ledger, targets, prices, as_of, reason_prefix, risk_state, u
         state = led["state"]
         prev = state.get("dial_state")
         old_gross = prev["gross"] if prev else 1.0
+        pending, late_detail = {}, {}
+        if prev and prev.get("pending_resize"):
+            pending, late_detail = dial_resize_late(led, prices, as_of, dict(prev["pending_resize"]), old_gross)
         detail = None
         if prev and prev["month"] == as_of[:7]:
             note, gross = "kept_month_already_decided", old_gross
@@ -679,10 +716,30 @@ def run_dial_ledger(ledger, targets, prices, as_of, reason_prefix, risk_state, u
                                        "decided_on": dec["decided_on"], "read_at_session": as_of}
                 if gross != old_gross:
                     detail = dial_resize(led, prices, as_of, old_gross, gross)
+                    for t in (detail or {}).get("not_resized_stale_mark", ()):
+                        owed = pending.get(t, 1.0) * (gross / old_gross)
+                        if abs(owed - 1.0) < 1e-12:
+                            pending.pop(t, None)
+                        else:
+                            pending[t] = owed
+        if state.get("dial_state") is not None:
+            if pending:
+                state["dial_state"]["pending_resize"] = pending
+            else:
+                state["dial_state"].pop("pending_resize", None)
+        if late_detail:
+            detail = {**(detail or {}), **late_detail}
         out.update({"gross": gross, "dial_note": note, "dial_note_detail": detail})
         return {t: w * gross for t, w in tg.items()}
 
-    return run_target_ledger(ledger, targets, prices, as_of, reason_prefix, unknown=unknown, before_trades=before)
+    result = run_target_ledger(ledger, targets, prices, as_of, reason_prefix, unknown=unknown, before_trades=before)
+    owed = (ledger["state"].get("dial_state") or {}).get("pending_resize")
+    if owed:
+        for t in [t for t in owed if t not in ledger["state"]["holdings"]]:
+            del owed[t]                                   # sold on this row: nothing is owed any more
+        if not owed:
+            del ledger["state"]["dial_state"]["pending_resize"]
+    return result
 
 
 def hold_ledger(ledger, prices, as_of):

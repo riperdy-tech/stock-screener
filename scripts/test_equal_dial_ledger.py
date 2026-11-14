@@ -211,3 +211,110 @@ def test_risk_state_loader_reads_a_file_and_returns_none_when_absent(tmp_path):
     assert tp.load_risk_state(p) is None
     p.write_text('{"asof": "2026-11-12"}', encoding="utf-8")
     assert tp.load_risk_state(p) == {"asof": "2026-11-12"}
+
+
+# ── a holding skipped at a resize (stale mark) is resized on a later fresh row ────────────────────────────
+
+def late_trades(led, session):
+    return [x for x in led["trades"] if x["date"] == session]
+
+
+def test_skipped_holding_is_resized_by_its_stored_ratio_on_the_next_fresh_row():
+    led = tp.empty_ledger()
+    run(led, "2026-10-30", None)
+    sh = led["state"]["holdings"]["C"]["shares"]
+    tp.price_asof_holder["older"] = {"C"}
+    run(led, "2026-11-02", risk())
+    assert led["state"]["holdings"]["C"]["shares"] == sh
+    assert led["state"]["dial_state"]["pending_resize"] == {"C": 0.5}
+    tp.price_asof_holder.clear()                                   # C's mark is fresh again
+    _, _, out = run(led, "2026-11-03", risk())
+    assert out["dial_note"] == "kept_month_already_decided"
+    assert led["state"]["holdings"]["C"]["shares"] == pytest.approx(sh * 0.5)
+    rows = late_trades(led, "2026-11-03")
+    assert [(x["ticker"], x["side"], x["reason"]) for x in rows] == [("C", "sell", "dial_resize_late_1.0_to_0.5")]
+    assert out["dial_note_detail"] == {"resized_late": ["C"]}
+    assert "pending_resize" not in led["state"]["dial_state"]
+    assert led["state"]["cash"] / nav_of(led) == pytest.approx(0.5, abs=0.003)
+    assert len(led["closed"]) == 0, "a late resize is not a closed round trip"
+
+
+def test_still_stale_holding_stays_pending_and_is_listed():
+    led = tp.empty_ledger()
+    run(led, "2026-10-30", None)
+    sh = led["state"]["holdings"]["C"]["shares"]
+    tp.price_asof_holder["older"] = {"C"}
+    run(led, "2026-11-02", risk())
+    _, _, out = run(led, "2026-11-03", risk())
+    assert led["state"]["holdings"]["C"]["shares"] == sh
+    assert led["state"]["dial_state"]["pending_resize"] == {"C": 0.5}
+    assert out["dial_note_detail"] == {"still_pending": ["C"]}
+    assert late_trades(led, "2026-11-03") == []
+
+
+def test_pending_holding_that_left_the_book_is_dropped_from_the_map():
+    led = tp.empty_ledger()
+    run(led, "2026-10-30", None)
+    tp.price_asof_holder["older"] = {"C"}
+    run(led, "2026-11-02", risk())
+    without_c = targets([n for n in NAMES if n != "C"])
+    run(led, "2026-11-03", risk(), tg=without_c)                    # first miss: C is held one more run
+    assert led["state"]["dial_state"]["pending_resize"] == {"C": 0.5}
+    run(led, "2026-11-04", risk(), tg=without_c)                    # second miss: C is sold
+    assert "C" not in led["state"]["holdings"]
+    assert "pending_resize" not in led["state"]["dial_state"]
+    assert [x["reason"] for x in led["trades"] if x["ticker"] == "C" and x["date"] == "2026-11-04"] == ["left_rank"]
+
+
+def test_half_then_full_while_pending_cancels_and_never_trades_the_skipped_holding():
+    led = tp.empty_ledger()
+    run(led, "2026-10-30", None)
+    sh = led["state"]["holdings"]["C"]["shares"]
+    tp.price_asof_holder["older"] = {"C"}
+    run(led, "2026-11-02", risk())
+    assert led["state"]["dial_state"]["pending_resize"] == {"C": 0.5}
+    _, _, out = run(led, "2026-12-01", risk(month="2026-12", dial="full", asof="2026-12-01"))
+    assert "pending_resize" not in led["state"]["dial_state"]       # 0.5 x 2.0 = 1.0: nothing is owed
+    assert led["state"]["holdings"]["C"]["shares"] == sh
+    assert all(x["ticker"] != "C" for x in led["trades"] if x["date"] > "2026-10-30")
+    assert out["dial_note_detail"]["not_resized_stale_mark"] == ["C"]
+
+
+def test_two_changes_in_the_same_direction_multiply_the_pending_ratio():
+    led = tp.empty_ledger()
+    run(led, "2026-10-30", None)
+    tp.price_asof_holder["older"] = {"C"}
+    run(led, "2026-11-02", risk())                                  # full -> half: C owes 0.5
+    led["state"]["dial_state"]["gross"] = 1.0                       # as if the book were full again and the month new
+    run(led, "2026-12-01", risk(month="2026-12", dial="half", asof="2026-12-01"))
+    assert led["state"]["dial_state"]["pending_resize"] == {"C": 0.25}
+
+
+def test_a_skipped_buyback_is_bought_later_with_the_cash_the_book_has():
+    led = tp.empty_ledger()
+    run(led, "2026-10-30", None)
+    run(led, "2026-11-02", risk())                                  # everything at half
+    sh = led["state"]["holdings"]["C"]["shares"]
+    tp.price_asof_holder["older"] = {"C"}
+    run(led, "2026-12-01", risk(month="2026-12", dial="full", asof="2026-12-01"))
+    assert led["state"]["dial_state"]["pending_resize"] == {"C": 2.0}
+    tp.price_asof_holder.clear()
+    _, _, out = run(led, "2026-12-02", risk(month="2026-12", dial="full", asof="2026-12-01"))
+    assert led["state"]["holdings"]["C"]["shares"] > sh
+    rows = late_trades(led, "2026-12-02")
+    assert [(x["ticker"], x["side"], x["reason"]) for x in rows] == [("C", "buy", "dial_resize_late_0.5_to_1.0")]
+    # the buy-back is still limited by cash: the seven others took theirs first, the 25 bps cost leaves C a little short
+    assert out["dial_note_detail"] == {"resized_late": ["C"], "buyback_cash_limited": True}
+    assert "pending_resize" not in led["state"]["dial_state"]
+
+
+def test_late_resize_run_twice_on_the_same_session_writes_nothing_new():
+    led = tp.empty_ledger()
+    run(led, "2026-10-30", None)
+    tp.price_asof_holder["older"] = {"C"}
+    run(led, "2026-11-02", risk())
+    tp.price_asof_holder.clear()
+    run(led, "2026-11-03", risk())
+    snap = copy.deepcopy((led["state"], led["trades"], led["closed"]))
+    run(led, "2026-11-03", risk())
+    assert (led["state"], led["trades"], led["closed"]) == snap
