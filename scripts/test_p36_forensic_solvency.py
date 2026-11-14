@@ -407,21 +407,9 @@ def test_chronic_loss_vetoes_small_cap(tmp_path, monkeypatch):
     assert res["veto"] == "CHRONIC_OPERATING_LOSS_LEVERAGE"
 
 
-@pytest.mark.xfail(strict=True, reason="live detail names the debt key `total_debt` (WO_SF1 F1: debt now "
-                   "debt_lt_noncurrent + debt_current); the old copy asserted `lt_debt`. The scorer is not changed here.")
-def test_chronic_loss_flags_large_cap_instead_of_vetoing(tmp_path, monkeypatch):
-    # CRWV/NBIS/IREN/CIFR-shaped case: one year of AI-buildout losses on a leveraged
-    # balance sheet, but the name is a large cap -> flag, not a cull.
-    res = _eval_chronic_loss(tmp_path, monkeypatch, fcf=-500.0, op=-300.0, lt_debt=3e9, mcap=LARGE * 4)
-    assert res["veto"] is None
-    assert res["flags"] == ["loss_making_leveraged"]
-    d = res["detail"]["loss_making_leveraged"]
-    assert d == {"fcf": -500.0, "operating_income": -300.0, "lt_debt": 3e9}
-
-
-
 def test_chronic_loss_large_cap_flag_detail_as_the_live_scorer_writes_it(tmp_path, monkeypatch):
-    # The same case as above with the live key name (`total_debt`), so the veto, flag and figures stay covered.
+    # CRWV/NBIS/IREN/CIFR-shaped case: one year of AI-buildout losses on a leveraged balance sheet, but the name
+    # is a large cap -> flag, not a cull. The detail carries `total_debt` (the debt fix retired `lt_debt`).
     res = _eval_chronic_loss(tmp_path, monkeypatch, fcf=-500.0, op=-300.0, lt_debt=3e9, mcap=LARGE * 4)
     assert res["veto"] is None
     assert res["flags"] == ["loss_making_leveraged"]
