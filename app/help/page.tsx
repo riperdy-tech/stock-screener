@@ -144,17 +144,17 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         q: { en: 'Why are verdicts marked blocked?', ko: '판정이 차단됨으로 표시되는 이유는 무엇인가요?', zh: '為什麼有些判定被標為被擋下？' },
         a: {
-            en: <>A verdict counts only if it passes the gate. Each blocked verdict carries its reasons in plain words, for example &ldquo;only one usable run&rdquo; or &ldquo;runs disagree too much&rdquo;. Blocked does not mean wrong; it means the system will not stand behind it. A blocked verdict stays visible as a record. See <A href="#gate">The gate</A>.</>,
-            ko: <>판정은 게이트를 통과해야만 유효합니다. 차단된 판정에는 각각 쉬운 말로 된 이유가 붙습니다. 예를 들어 &ldquo;쓸 만한 실행이 하나뿐&rdquo;이나 &ldquo;실행 간 격차가 너무 큼&rdquo;입니다. 차단됨은 틀렸다는 뜻이 아니라 시스템이 보증하지 않는다는 뜻입니다. 차단된 판정은 기록으로 계속 보입니다. <A href="#gate">게이트</A>를 참조하세요.</>,
-            zh: <>判定必須通過閘門才算數。每個被擋下的判定都附有白話寫出的原因，例如&ldquo;只有一次可用的執行&rdquo;或&ldquo;各次執行分歧太大&rdquo;。被擋下不代表錯了，而是代表系統不為它背書。被擋下的判定仍會作為紀錄保持可見。請見<A href="#gate">閘門</A>。</>,
+            en: <>This is about the earlier verdict analyst, which is stopped. One of its verdicts counted only if it passed the gate. Each blocked verdict carries its reasons in plain words, for example &ldquo;only one usable run&rdquo; or &ldquo;runs disagree too much&rdquo;. Blocked does not mean wrong; it means the system will not stand behind it. A blocked verdict stays visible as a record. See <A href="#gate">The gate</A>.</>,
+            ko: <>이 질문은 중단된 이전 판정 애널리스트에 관한 것입니다. 그 판정은 게이트를 통과해야만 유효했습니다. 차단된 판정에는 각각 쉬운 말로 된 이유가 붙습니다. 예를 들어 &ldquo;쓸 만한 실행이 하나뿐&rdquo;이나 &ldquo;실행 간 격차가 너무 큼&rdquo;입니다. 차단됨은 틀렸다는 뜻이 아니라 시스템이 보증하지 않는다는 뜻입니다. 차단된 판정은 기록으로 계속 보입니다. <A href="#gate">게이트</A>를 참조하세요.</>,
+            zh: <>這個問題談的是已停止運作的先前判定分析師。它的判定必須通過閘門才算數。每個被擋下的判定都附有白話寫出的原因，例如&ldquo;只有一次可用的執行&rdquo;或&ldquo;各次執行分歧太大&rdquo;。被擋下不代表錯了，而是代表系統不為它背書。被擋下的判定仍會作為紀錄保持可見。請見<A href="#gate">閘門</A>。</>,
         },
     },
     {
         q: { en: 'What does “No edge today” mean? Is it a sell?', ko: '“오늘은 우위 없음”은 무슨 뜻인가요? 매도인가요?', zh: '「今日無優勢」是什麼意思？是賣出嗎？' },
         a: {
-            en: <>No. It means the verdict passed the gate and found no gap: the price sits inside the <Term term="iv-band" />, or the margin is too thin to call. FAIR is a real answer, not a refusal and not a sell signal. An overvalued verdict also sits there, and it means &ldquo;do not buy&rdquo;, not &ldquo;sell&rdquo;. See <Term term="no-edge" />.</>,
-            ko: <>아닙니다. 판정이 게이트를 통과했고 격차를 찾지 못했다는 뜻입니다. 주가가 <Term term="iv-band" /> 안에 있거나, 안전마진이 너무 얇아 판단할 수 없습니다. FAIR는 거절도 매도 신호도 아닌 실제 답입니다. 고평가 판정도 그곳에 놓이며, 이는 &ldquo;매도&rdquo;가 아니라 &ldquo;사지 말라&rdquo;는 뜻입니다. <Term term="no-edge" />를 참조하세요.</>,
-            zh: <>不是。它表示判定通過了閘門，但看不出差距：價格位於<Term term="iv-band" />之內，或安全邊際太薄無法下判斷。FAIR 是真正的答案，不是拒絕，也不是賣出訊號。高估的判定也放在那裡，意思是「不要買進」，而不是「賣出」。請見<Term term="no-edge" />。</>,
+            en: <>This is about the earlier verdict analyst, which is stopped. No. It means the verdict passed the gate and found no gap: the price sits inside the <Term term="iv-band" />, or the margin is too thin to call. FAIR is a real answer, not a refusal and not a sell signal. An overvalued verdict also sits there, and it means &ldquo;do not buy&rdquo;, not &ldquo;sell&rdquo;. See <Term term="no-edge" />.</>,
+            ko: <>이 질문은 중단된 이전 판정 애널리스트에 관한 것입니다. 아닙니다. 판정이 게이트를 통과했고 격차를 찾지 못했다는 뜻입니다. 주가가 <Term term="iv-band" /> 안에 있거나, 안전마진이 너무 얇아 판단할 수 없습니다. FAIR는 거절도 매도 신호도 아닌 실제 답입니다. 고평가 판정도 그곳에 놓이며, 이는 &ldquo;매도&rdquo;가 아니라 &ldquo;사지 말라&rdquo;는 뜻입니다. <Term term="no-edge" />를 참조하세요.</>,
+            zh: <>這個問題談的是已停止運作的先前判定分析師。不是。它表示判定通過了閘門，但看不出差距：價格位於<Term term="iv-band" />之內，或安全邊際太薄無法下判斷。FAIR 是真正的答案，不是拒絕，也不是賣出訊號。高估的判定也放在那裡，意思是「不要買進」，而不是「賣出」。請見<Term term="no-edge" />。</>,
         },
     },
     {
@@ -184,9 +184,9 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         q: { en: 'What if the screen and the analyst disagree?', ko: '스크린과 애널리스트의 판정이 엇갈리면 어떻게 되나요?', zh: '如果篩選和分析師意見不同怎麼辦？' },
         a: {
-            en: 'They are two independent opinions. One is pure math over financial statements and prices; the other is a researcher that reads filings with judgement. A row on the desk opens to show both side by side. When they strongly disagree, one of them may be wrong — those are the interesting rows. The one rule the analyst cannot break: a safety veto is never overridden.',
-            ko: '둘은 독립된 두 개의 의견입니다. 하나는 재무제표와 주가에 대한 순수한 수학이고, 다른 하나는 공시를 판단력으로 읽는 리서처입니다. 데스크의 행을 열면 둘을 나란히 볼 수 있습니다. 둘이 크게 엇갈리면 한쪽이 틀렸을 수 있으며, 그런 행이 흥미로운 행입니다. 애널리스트가 깰 수 없는 규칙이 하나 있습니다. 안전 베토는 절대 뒤집히지 않습니다.',
-            zh: '兩者是兩個獨立的意見。一個是對財務報表與價格的純數學；另一個是帶著判斷閱讀申報文件的研究員。研究台上展開一列就能並排看到兩者。兩者強烈分歧時，其中一個可能是錯的——這些就是有趣的列。分析師有一條不能打破的規則：安全否決絕不會被推翻。',
+            en: 'They are two separate readings. One is pure math over financial statements and prices; the other is Qwen, a local AI model that reads the filings. The analysis it writes is on each stock page and does not place names on the list. When the two strongly disagree, one of them may be wrong — those are the interesting names. A safety veto is never overridden.',
+            ko: '둘은 서로 다른 두 개의 분석입니다. 하나는 재무제표와 주가에 대한 순수한 수학이고, 다른 하나는 공시를 읽는 로컬 AI 모델 Qwen입니다. Qwen의 분석은 각 종목 페이지에 있으며 종목을 목록에 올리지는 않습니다. 둘이 크게 엇갈리면 한쪽이 틀렸을 수 있으며, 그런 종목이 흥미로운 종목입니다. 안전 베토는 절대 뒤집히지 않습니다.',
+            zh: '兩者是兩種各自獨立的分析。一個是對財務報表與價格的純數學；另一個是 Qwen，一個在本機運行、閱讀申報文件的 AI 模型。Qwen 的分析在每檔股票的頁面上，不會決定哪些股票進入名單。兩者強烈分歧時，其中一個可能是錯的——這些就是有趣的股票。安全否決絕不會被推翻。',
         },
     },
     {

@@ -482,7 +482,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'The range of values from the analyst’s independent runs.',
         definition:
-            'The analyst values each stock in independent runs, and each usable run ends in an estimate of what the business is worth. The value band (also called the plausible-value range) runs from the lowest to the highest of those estimates; the median is the middle one. The verdict is where today’s price sits against the whole band: below it, with enough margin = undervalued; inside it = fair; above it, with enough margin = overvalued. How many runs a band rests on is printed on each row (“n of m usable”), never assumed, and with one run the band is a single point. On the desk the shaded band is the range and the dark tick is today’s price. A wider band means the runs disagreed, which lowers the size hint.',
+            'This describes the earlier verdict analyst, which is stopped. The analyst values each stock in independent runs, and each usable run ends in an estimate of what the business is worth. The value band (also called the plausible-value range) runs from the lowest to the highest of those estimates; the median is the middle one. The verdict is where today’s price sits against the whole band: below it, with enough margin = undervalued; inside it = fair; above it, with enough margin = overvalued. How many runs a band rests on is printed on each row (“n of m usable”), never assumed, and with one run the band is a single point. On the desk the shaded band is the range and the dark tick is today’s price. A wider band means the runs disagreed, which lowers the size hint.',
         related: ['intrinsic-value', 'actionable', 'position-sizing'],
     },
     'not-usable': {
@@ -498,7 +498,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'A verdict that passed every rule of the gate.',
         definition:
-            'Every verdict carries a yes/no flag called actionable, plus the list of reasons when the answer is no. Only an actionable verdict can appear under Research now, Waiting or No edge today on the desk, or be followed by the AI paper book. A verdict that is not actionable is not deleted: it stays visible under Blocked by the gate. Actionable means a verdict is allowed to count. It does not mean the verdict is right.',
+            'This describes the earlier verdict analyst, which is stopped. Every verdict carries a yes/no flag called actionable, plus the list of reasons when the answer is no. Only an actionable verdict can appear under Research now, Waiting or No edge today on the desk, or be followed by the AI paper book. A verdict that is not actionable is not deleted: it stays visible under Blocked by the gate. Actionable means a verdict is allowed to count. It does not mean the verdict is right.',
         related: ['gate', 'blocked', 'gate-reason', 'rn-depth'],
     },
     'gate-reason': {
@@ -605,7 +605,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'portfolio',
         plain: 'Deciding how much of your capital goes into each stock.',
         definition:
-            'This site does not give you a portfolio plan. What it gives is a size hint on a verdict — quarter, half or full — set by the most conservative of four buckets: how much the runs disagree, the margin of safety, the analyst’s own conviction, and the macro turbulence flag. A single run is capped at quarter. The stock page also prints an upper bound (a quarter-Kelly cap), which is a ceiling and not a suggestion. The older Kelly-sized plan books were retired.',
+            'This describes the earlier verdict analyst, which is stopped. This site does not give you a portfolio plan. What it gives is a size hint on a verdict — quarter, half or full — set by the most conservative of four buckets: how much the runs disagree, the margin of safety, the analyst’s own conviction, and the macro turbulence flag. A single run is capped at quarter. The stock page also prints an upper bound (a quarter-Kelly cap), which is a ceiling and not a suggestion. The older Kelly-sized plan books were retired.',
         related: ['iv-band', 'entry-timing'],
     },
     'paper-trading': {
@@ -909,7 +909,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'The automatic check that decides whether a verdict may count.',
         definition:
-            'After a verdict is written, code re-judges it every time the data are rebuilt and marks it actionable (yes or no), with reasons. A verdict that fails is still published and shown — marked blocked, with its reasons — but it can never be a recommendation and never enters the AI paper book. Passing the gate means a verdict is allowed to count. It does not prove the verdict is right.',
+            'This describes the earlier verdict analyst, which is stopped. After a verdict is written, code re-judges it every time the data are rebuilt and marks it actionable (yes or no), with reasons. A verdict that fails is still published and shown — marked blocked, with its reasons — but it can never be a recommendation and never enters the AI paper book. Passing the gate means a verdict is allowed to count. It does not prove the verdict is right.',
         related: ['actionable', 'blocked', 'gate-reason'],
     },
     blocked: {
@@ -917,7 +917,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'A verdict that failed the gate: kept for the record, never a recommendation.',
         definition:
-            'Blocked is the opposite of actionable. A blocked verdict is shown in grey with its reasons in plain words, under “Blocked by the gate”. It is never styled like a pick, never counted as one, and never bought by the AI book. Blocked does not mean wrong; it means the system will not stand behind it.',
+            'This describes the earlier verdict analyst, which is stopped. Blocked is the opposite of actionable. A blocked verdict is shown in grey with its reasons in plain words, under “Blocked by the gate”. It is never styled like a pick, never counted as one, and never bought by the AI book. Blocked does not mean wrong; it means the system will not stand behind it.',
         related: ['actionable', 'gate', 'gate-reason'],
     },
     waiting: {
@@ -925,7 +925,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'Cheap on value, but held back for now.',
         definition:
-            'A desk section for names that pass the gate and are undervalued but are held back: by timing (the analyst says wait for momentum, or avoid), by buying being paused while something is pending, or by follow-up data that is stale. The reason is shown on the row. Waiting is not a sell. The section fills in once the daily follow-up is live.',
+            'This describes the earlier verdict analyst, which is stopped. A desk section for names that pass the gate and are undervalued but are held back: by timing (the analyst says wait for momentum, or avoid), by buying being paused while something is pending, or by follow-up data that is stale. The reason is shown on the row. Waiting is not a sell. The section fills in once the daily follow-up is live.',
         related: ['buy-paused', 'entry-timing', 'follow-up'],
     },
     'no-edge': {
@@ -933,7 +933,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'A verdict that passes the gate but finds no gap between price and value.',
         definition:
-            'The desk section for names whose verdict passes the gate and is FAIR (the price sits inside the value band, or the margin is too thin) or overvalued. FAIR is a real answer — the uncertainty contains the price — not a refusal and not a sell signal. It is separate from the screen’s watchlist band.',
+            'This describes the earlier verdict analyst, which is stopped. The desk section for names whose verdict passes the gate and is FAIR (the price sits inside the value band, or the margin is too thin) or overvalued. FAIR is a real answer — the uncertainty contains the price — not a refusal and not a sell signal. It is separate from the screen’s watchlist band.',
         related: ['iv-band', 'watchlist', 'actionable'],
     },
     'buy-paused': {
@@ -957,7 +957,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'Exact signals that always queue a re-analysis, whatever any model says.',
         definition:
-            'A fixed list the follow-up applies in code, apart from the local model: an earnings release; a filing of the bankruptcy, restatement, delisting or change-of-control kind; a thesis rule that has just become true; a safety-filter veto appearing on a held name; and two closes on the far side of the value band. Any one of them queues a re-analysis.',
+            'This is part of the daily follow-up, which is being rebuilt and is not running. A fixed list the follow-up applies in code, apart from the local model: an earnings release; a filing of the bankruptcy, restatement, delisting or change-of-control kind; a thesis rule that has just become true; a safety-filter veto appearing on a held name; and two closes on the far side of the value band. Any one of them queues a re-analysis.',
         related: ['follow-up', 'reanalysis-queued'],
     },
     'reanalysis-queued': {
@@ -965,7 +965,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'Something has moved this name to the front of the analyst’s queue.',
         definition:
-            'An event — an earnings release, a filing, the price leaving the value band, a thesis rule tripping — has pushed the name to the front of the analyst’s queue. The existing verdict stays in place until a new one replaces it. Every name is also re-analysed at least every 14 days regardless. Re-analysis queued is never a sell signal.',
+            'This is part of the daily follow-up, which is being rebuilt and is not running. An event — an earnings release, a filing, the price leaving the value band, a thesis rule tripping — has pushed the name to the front of the analyst’s queue. The existing verdict stays in place until a new one replaces it. Every name is also re-analysed at least every 14 days regardless. Re-analysis queued is never a sell signal.',
         related: ['follow-up', 'code-floor', 'buy-paused'],
     },
     'held-carry': {
@@ -973,7 +973,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'A held name whose newest verdict failed to process, kept on its last good one.',
         definition:
-            'If a re-analysis of a name the AI book holds fails to produce a usable verdict, the last good verdict is carried — for at most two failures or 21 days. The desk labels such a name “held — verdict being re-checked”. After that the carry ends.',
+            'This is part of the daily follow-up, which is being rebuilt and is not running. If a re-analysis of a name the AI book holds fails to produce a usable verdict, the last good verdict is carried — for at most two failures or 21 days. The desk labels such a name “held — verdict being re-checked”. After that the carry ends.',
         related: ['follow-up', 'rn-depth'],
     },
     'entry-timing': {
@@ -981,7 +981,7 @@ export const GLOSSARY: Record<string, TermDef> = {
         category: 'ai',
         plain: 'The analyst’s timing call, separate from its value call.',
         definition:
-            'A verdict says whether a name is cheap; entry timing says whether now is the moment: buy now, wait for momentum, or avoid. A waiting name carries a flip condition — what would change the call — and a break rule. The momentum view (confirming, neutral, contradicting) sits beside it. Timing can hold back an undervalued name; it never changes the value verdict.',
+            'This describes the earlier verdict analyst, which is stopped. A verdict says whether a name is cheap; entry timing says whether now is the moment: buy now, wait for momentum, or avoid. A waiting name carries a flip condition — what would change the call — and a break rule. The momentum view (confirming, neutral, contradicting) sits beside it. Timing can hold back an undervalued name; it never changes the value verdict.',
         related: ['waiting', 'iv-band'],
     },
     'rebuilt-analyst': {
