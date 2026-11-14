@@ -1,19 +1,19 @@
 {
   "anchor_id": "cost_of_capital",
-  "asof": "2026-11-12",
-  "built_at": "2026-11-12T21:34:21.396705+00:00",
+  "asof": "2026-11-13",
+  "built_at": "2026-11-13T21:34:11.801032+00:00",
   "degraded": false,
   "equity_aggregate": {
     "basis": "universe",
-    "coverage_share": 0.7886,
+    "coverage_share": 0.7884,
     "path": "data/anchors/equity_aggregate.json",
     "source": "Screener corpus (public/data): market caps from financials/*.json, owner earnings NI+D&A-capex and revenue CAGR from fundamentals_history.json. US-dollar reporters only; share classes collapsed by CIK.",
     "universe_stats": {
-      "collapsed_market_cap_usd_t": 84.45,
-      "constituent_market_cap_usd_t": 66.59,
+      "collapsed_market_cap_usd_t": 83.86,
+      "constituent_market_cap_usd_t": 66.11,
       "constituents": 1856,
-      "corpus_market_cap_usd_t": 89.49,
-      "coverage_share": 0.7886,
+      "corpus_market_cap_usd_t": 88.92,
+      "coverage_share": 0.7884,
       "excluded_non_usd_reporters": 502,
       "names_with_market_cap": 4958,
       "share_classes_collapsed": 65
@@ -34,63 +34,87 @@
     "start": "1961-12-31"
   },
   "erp_history_source": "Damodaran implied ERP (FCFE), annual 1961-2025",
-  "erp_percentile_vs_history": 0.7230769230769231,
+  "erp_percentile_vs_history": 0.7076923076923077,
   "erp_source": "implied",
-  "implied_cost_of_equity": 0.0996,
-  "implied_erp": 0.0498,
+  "implied_cost_of_equity": 0.1,
+  "implied_erp": 0.049,
   "inflation": {
     "cpi_yoy": null,
     "pce_yoy": 0.0365
   },
+  "loading_adjustment": {
+    "method": "blume",
+    "weight_one": 0.33,
+    "weight_raw": 0.67
+  },
   "loading_source": "beta_vs_SPY_5y",
   "market_implied_coe": null,
   "market_implied_erp": null,
-  "oldest_leg_age_days": 72,
+  "oldest_leg_age_days": 73,
   "provenance": {
     "degradation_reasons": [
       "inflation: CPIAUCSL yoy unavailable"
     ],
     "input_dates": {
       "CPIAUCSL": "2026-10-01",
-      "DFII10": "2026-11-10",
-      "DGS10": "2026-11-10",
+      "DFII10": "2026-11-12",
+      "DGS10": "2026-11-12",
       "PCEPI": "2026-09-01",
-      "T10YIE": "2026-11-10",
+      "T10YIE": "2026-11-12",
       "THREEFYTP10": "2026-11-06",
-      "sector_proxy_prices": "2026-11-12"
+      "sector_proxy_prices": "2026-11-13"
     },
     "notes": [
       "Cost of EQUITY, not WACC: the downstream cash flow (NI + D&A - capex) is levered and is compared against market cap, so a firm-level WACC would double-count the debt claim.",
-      "erp: solved over a universe aggregate (0.7886 of the collapsed universe's capitalisation), NOT an index. Published as implied_erp / implied_cost_of_equity; market_implied_* stays null.",
+      "erp: solved over a universe aggregate (0.7884 of the collapsed universe's capitalisation), NOT an index. Published as implied_erp / implied_cost_of_equity; market_implied_* stays null.",
       "erp: implied from 1856 constituents covering 79% of the aggregate's own capitalisation"
     ],
     "regime_leg": null,
     "scoring_mode": "point_in_time"
   },
   "risk_free": {
-    "breakeven_10y": 0.022,
-    "nominal_10y": 0.0498,
-    "real_10y": 0.0278,
+    "breakeven_10y": 0.0224,
+    "nominal_10y": 0.051,
+    "real_10y": 0.0286,
     "term_premium": 0.008738
   },
   "sector_loadings": {
-    "banks": 1.0,
+    "banks": 0.999,
     "biotech": 1.142,
     "communication_services": 0.986,
     "consumer_discretionary": 1.216,
-    "consumer_staples": 0.351,
+    "consumer_staples": 0.35,
     "energy": 0.552,
     "financials": 0.835,
-    "health_care": 0.528,
-    "homebuilders": 1.116,
+    "health_care": 0.527,
+    "homebuilders": 1.115,
     "industrials": 0.866,
-    "information_technology": 1.388,
+    "information_technology": 1.389,
     "materials": 0.84,
-    "oil_gas_ep": 0.8,
+    "oil_gas_ep": 0.799,
     "real_estate": 0.691,
-    "semiconductors": 1.759,
+    "semiconductors": 1.76,
     "software": 1.311,
     "utilities": 0.431
+  },
+  "sector_loadings_adjusted": {
+    "banks": 0.999,
+    "biotech": 1.095,
+    "communication_services": 0.991,
+    "consumer_discretionary": 1.145,
+    "consumer_staples": 0.565,
+    "energy": 0.7,
+    "financials": 0.889,
+    "health_care": 0.683,
+    "homebuilders": 1.077,
+    "industrials": 0.91,
+    "information_technology": 1.261,
+    "materials": 0.893,
+    "oil_gas_ep": 0.865,
+    "real_estate": 0.793,
+    "semiconductors": 1.509,
+    "software": 1.208,
+    "utilities": 0.619
   },
   "source_files": [
     "config/phase_b_sources.yaml",
