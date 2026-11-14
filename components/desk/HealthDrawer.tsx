@@ -106,7 +106,7 @@ export function HealthDrawer({ status, fresh, onClose }: {
                 <Section title={t('hdAnalyst')}>
                     <Row label={t('hdState')}>
                         {fresh.phase === null ? '—'
-                            : phaseA ? <span className="text-warn">{t('hdStateNotLive')}</span> : t('hdStateLive')}
+                            : phaseA ? <span className="text-warn">{t('hdStateNotLive')}</span> : (fresh.qwenLoaded ? t('hdStateQwen') : t('hdStateDepth'))}
                     </Row>
                     <Row label={t('hdBaseline')}>
                         {fresh.phase === null ? '—' : `${fresh.rebuiltCount} of ${fresh.listSize ?? '—'}`}
@@ -151,7 +151,7 @@ export function HealthDrawer({ status, fresh, onClose }: {
                         {anchor?.degraded === true && <span className="text-warn"> · {t('hdMriDegraded')}</span>}
                     </div>
                     <div>
-                        <Dot level="off" /> {t('hdFollowup')}: {fresh.phase === 'C' ? t('hdOk') : t('hdNotLive')}
+                        <Dot level="off" /> {t('hdFollowup')}: {t('hdFollowupNotRunning')}
                     </div>
                 </Section>
             </aside>

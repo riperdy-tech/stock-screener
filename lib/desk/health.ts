@@ -77,6 +77,8 @@ export interface Freshness {
     rebuiltCount: number;
     /** Rebuilt-analyst rows with `actionable === true`. */
     actionableCount: number;
+    /** True when Qwen's analysis file is loaded (the numbers above are Qwen's); false when they come from depth rows. */
+    qwenLoaded: boolean;
     listSize: number | null;          // research_now + watchlist, the book the analyst underwrites
 }
 
@@ -101,6 +103,7 @@ export function computeFreshness(st: StatusInput, now: number): Freshness {
             verdictStale: isStale(st.qwen.generated_at, VERDICT_STALE_MS, now),
             rebuiltCount: st.qwen.count,
             actionableCount: st.qwen.valued_count,
+            qwenLoaded: true,
             listSize,
         };
     }
@@ -115,6 +118,7 @@ export function computeFreshness(st: StatusInput, now: number): Freshness {
         verdictStale: phase !== null && phase !== 'A' && isStale(verdictAt, VERDICT_STALE_MS, now),
         rebuiltCount,
         actionableCount,
+        qwenLoaded: false,
         listSize,
     };
 }

@@ -176,10 +176,10 @@ export function MacroPage() {
                                     {tilt.state === 'unknown' && (loaded.factor ? t('mcTiltUnknown') : DASH)}
                                 </li>
                                 {MACRO_STATIC_USES.turbulenceFlagOn && (
-                                    <li><b className="font-mono text-[11px] text-ink">{t('mcOn')}</b> · {t('mcTurbulence')}</li>
+                                    <li><b className="font-mono text-[11px] text-ink">{t('mcInfo')}</b> · {t('mcTurbulence')}</li>
                                 )}
                                 {MACRO_STATIC_USES.regimeFactsOn && (
-                                    <li><b className="font-mono text-[11px] text-ink">{t('mcOn')}</b> · {t('mcRegimeFacts')}</li>
+                                    <li><b className="font-mono text-[11px] text-ink">{t('mcInfo')}</b> · {t('mcRegimeFacts')}</li>
                                 )}
                             </ul>
                             <p className="mt-4 font-mono text-[11px] leading-relaxed text-off">{regime?.disclaimer ?? DASH}</p>

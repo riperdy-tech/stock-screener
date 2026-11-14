@@ -260,12 +260,13 @@ export function EnglishHelpBody() {
                         pick sectors. Every sector gets the same <Term term="sector-quota" />.
                     </li>
                     <li>
-                        <b>On: the turbulence flag.</b> It turns on when the fear index (VIX) is 30 or higher, and it
-                        feeds the size hint.
+                        <b>Information only: the turbulence flag.</b> It turns on when the fear index (VIX) is 30 or
+                        higher. It is shown for information; no real-money book or position size reads it.
                     </li>
                     <li>
-                        <b>On: the regime as dated facts.</b> The analyst is told the regime as a dated fact, not as a
-                        forecast.
+                        <b>Information only: the regime as dated facts.</b> The regime is shown as a dated fact, not as
+                        a forecast. One paper-only book, the Equal book at the risk dial&apos;s month decision, follows
+                        the dial; no real-money book does.
                     </li>
                 </ul>
                 <Callout kind="info">
