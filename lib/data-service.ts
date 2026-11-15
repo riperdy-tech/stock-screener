@@ -624,6 +624,11 @@ export interface OpusVerdict {
     checks: Record<string, unknown>;
     data_flags: string[];
     captured_at: string | null;
+    /** The second read with news (plan step G), on BUY and WATCH names only: it may lower the verdict, never raise it. */
+    deep?: {
+        checked_on: string; verdict_before: string; verdict_after: string; downgraded: boolean;
+        note: string; source_url: string | null;
+    } | null;
 }
 
 export interface OpusOverlayPayload {

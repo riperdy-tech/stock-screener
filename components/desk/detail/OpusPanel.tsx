@@ -7,7 +7,7 @@
 import React from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import type { OpusVerdict } from '@/lib/data-service';
-import { opusFlagText, opusGap, opusMarketView, opusMoney, opusNoCallText } from '@/lib/desk/opusText';
+import { OPUS_VERDICT_KEY, opusFlagText, opusGap, opusMarketView, opusMoney, opusNoCallText } from '@/lib/desk/opusText';
 import { signedPct } from '@/lib/desk/rowText';
 import { fill } from '@/lib/desk/text';
 import { TONE_COLORS } from '@/lib/desk/tone';
@@ -70,6 +70,19 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
                     <span className="text-ink-2">{fill(t('pgOpusNoCallWhy'), { reason: reason ?? DASH })}</span>
                 )}
             </div>
+            {o.deep && (
+                <p className={`mt-1 text-[12px] ${o.deep.downgraded ? 'text-warn' : 'text-ink-2'}`}>
+                    <b className="font-semibold">
+                        {fill(t(o.deep.downgraded ? 'opDeepDown' : 'opDeepKept'), {
+                            date: o.deep.checked_on,
+                            before: has(OPUS_VERDICT_KEY, o.deep.verdict_before) ? t(OPUS_VERDICT_KEY[o.deep.verdict_before]) : o.deep.verdict_before,
+                        })}
+                    </b>{' '}{o.deep.note}
+                    {o.deep.source_url && (
+                        <>{' '}<a href={o.deep.source_url} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-ink">{t('opDeepSource')}</a></>
+                    )}
+                </p>
+            )}
             <p className="mt-1.5 font-mono text-[13px] text-ink">
                 {fill(t('opPgHead'), { value: money(o.value?.median), price: money(o.price), date: o.price_date ?? DASH })}
                 {' · '}
