@@ -217,10 +217,20 @@ function opusCells(t: T, r: DeskRow) {
         sub: rng ? fill(t('opValCode'), { value: opusMoney(median, cur) }) : valued ? t('opValCodeOnly') : null,
         gap: gap == null ? DASH : signedPct(gap * 100, 0),
         gapColor: gap == null ? TONE_COLORS.MUTED : gap >= 0 ? 'var(--pos)' : 'var(--neg)',
+        ...analystCells(o, livePrice(r)),
     };
 }
 
-/** The three OPUS grid cells; hidden below 1024px, where OpusLine carries them instead (app/globals.css .dk-op*). */
+/** The analysts' mean target and its gap to the live price (only when it is in the price currency). */
+function analystCells(o: NonNullable<DeskRow['opus']>, price: number | null) {
+    const a = o.analyst;
+    if (a == null || a.target_mean == null) return { an: DASH, anGap: null as string | null };
+    const cur = a.currency ?? o.currency;
+    const g = cur === o.currency ? opusGap(a.target_mean, price) : null;
+    return { an: opusMoney(a.target_mean, cur), anGap: g == null ? null : signedPct(g * 100, 0) };
+}
+
+/** The four CLAUDE grid cells; hidden below 1024px, where OpusLine carries them instead (app/globals.css .dk-op*). */
 function OpusGridCells({ c }: { c: ReturnType<typeof opusCells> }) {
     return (
         <>
@@ -230,6 +240,10 @@ function OpusGridCells({ c }: { c: ReturnType<typeof opusCells> }) {
                 {c?.sub && <span className="block truncate font-mono text-[10.5px] leading-tight text-ink-2" title={c.sub}>{c.sub}</span>}
             </span>
             <span className="dk-opc font-mono text-[12px]" style={{ color: c?.gapColor ?? TONE_COLORS.MUTED }}>{c?.gap ?? DASH}</span>
+            <span className="dk-opc min-w-0">
+                <span className="block truncate font-mono text-[12px] text-ink">{c?.an ?? DASH}</span>
+                {c?.anGap && <span className="block truncate font-mono text-[10.5px] leading-tight text-ink-2">{c.anGap}</span>}
+            </span>
         </>
     );
 }
@@ -244,6 +258,11 @@ function OpusLine({ c, className }: { c: ReturnType<typeof opusCells>; className
             <span className="text-ink">{c?.value ?? DASH}</span>
             <span style={{ color: c?.gapColor ?? TONE_COLORS.MUTED }}>{c?.gap ?? DASH}</span>
             {c?.sub && <span className="truncate text-[10.5px] text-ink-2">{c.sub}</span>}
+            <span>
+                <span className="text-off">{t('opColAnalysts')}</span>{' '}
+                <span className="text-ink">{c?.an ?? DASH}</span>
+                {c?.anGap && <span className="text-ink-2">{' '}{c.anGap}</span>}
+            </span>
         </div>
     );
 }
@@ -270,6 +289,7 @@ function QwenColumnHeaders() {
                 <span className="dk-opc whitespace-nowrap">{t('opColVerdict')}</span>
                 <span className="dk-opc whitespace-nowrap">{t('dqColValue')}</span>
                 <span className="dk-opc whitespace-nowrap">{t('dqColGap')}</span>
+                <span className="dk-opc whitespace-nowrap">{t('opColAnalysts')}</span>
                 <span className="whitespace-nowrap">{t('colDoor')}</span>
                 <span className="dk-pct whitespace-nowrap">{t('colPct')}</span>
                 <span className="dk-pillars"><PillarHeader /></span>

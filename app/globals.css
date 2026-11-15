@@ -317,29 +317,29 @@ sup {
         grid-template-columns: minmax(100px, 1fr) minmax(110px, 1.2fr) 70px 104px 120px 54px 62px 120px 62px 76px 16px;
     }
 }
-/* The research-now and watchlist rows (.dk-op) add three OPUS cells after Qwen's claims (operator 2026-11-15).
-   Below 1024px the cells are hidden, the grid is the one above, and one OPUS line sits under each row (.dk-opl).
-   From 1024px the cells take three tracks; pct waits until 1280px to make room. */
+/* The research-now and watchlist rows (.dk-op) add four CLAUDE cells after Qwen's claims (operator 2026-11-15).
+   Below 1024px the cells are hidden, the grid is the one above, and one CLAUDE line sits under each row (.dk-opl).
+   From 1024px the cells take four tracks; pct and the Q M R V G pillars wait until 1280px to make room. */
 .dk-opc { display: none; }
 .dk-opl { display: flex; }
 @media (min-width: 1024px) {
     .dk-opc { display: block; }
     .dk-opl { display: none; }
-    .dk-span-op { grid-column: span 3; }
+    .dk-span-op { grid-column: span 4; }
     .dk-grid.dk-op {
         column-gap: 8px;
-        /* company industry price read value gap claims | opus verdict value gap | door pillars chevron */
-        grid-template-columns: minmax(90px, 1fr) minmax(80px, 1fr) 56px 60px minmax(64px, 110px) 46px 48px 58px minmax(64px, 104px) 48px 92px 76px 14px;
+        /* company industry price read value gap claims | claude verdict value gap analysts | door chevron */
+        grid-template-columns: minmax(90px, 1fr) minmax(80px, 1fr) 56px 60px minmax(64px, 110px) 46px 48px 58px minmax(64px, 104px) 48px 60px 92px 14px;
     }
-    .dk-op .dk-pct { display: none; }
-    .dk-op .dk-span-sc { grid-column: span 2; }
+    .dk-op .dk-pct, .dk-op .dk-pillars { display: none; }
+    .dk-op .dk-span-sc { grid-column: span 1; }
 }
 @media (min-width: 1280px) {
     .dk-grid.dk-op {
-        column-gap: 12px;
-        /* + pct */
-        grid-template-columns: minmax(90px, 1fr) minmax(90px, 1.2fr) 64px 64px 112px 54px 54px 62px 104px 54px 100px 56px 76px 16px;
+        column-gap: 10px;
+        /* + pct + pillars */
+        grid-template-columns: minmax(90px, 1fr) minmax(90px, 1.2fr) 64px 64px 104px 54px 54px 62px 104px 54px 60px 92px 56px 76px 16px;
     }
-    .dk-op .dk-pct { display: block; }
+    .dk-op .dk-pct, .dk-op .dk-pillars { display: block; }
     .dk-op .dk-span-sc { grid-column: span 3; }
 }

@@ -633,6 +633,12 @@ export interface OpusVerdict {
         reasons: string[]; one_line: string;
         events: { fact: string | null; date: string | null; source_url: string | null }[];
     } | null;
+    /** The analysts' consensus target (fetch_analyst_targets.py), shown beside Claude's view only; never shown to the
+     *  analyst or the reviewer. Absent or null when the name has none. */
+    analyst?: {
+        target_mean: number; target_median: number | null; target_low: number | null; target_high: number | null;
+        analysts: number | null; rating: string | null; currency: string | null;
+    } | null;
 }
 
 export interface OpusOverlayPayload {
@@ -644,6 +650,9 @@ export interface OpusOverlayPayload {
     model: string;
     count: number;
     verdict_counts: Record<OpusVerdictCode, number>;
+    /** Where and when the analysts' targets were read; absent in files written before they were added. */
+    analyst_source?: string;
+    analyst_as_of?: string;
     tickers: Record<string, OpusVerdict>;
 }
 
