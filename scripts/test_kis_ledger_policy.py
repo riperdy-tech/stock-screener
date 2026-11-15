@@ -48,7 +48,7 @@ def release(monkeypatch, value):
 def test_defaults_live_in_one_place_each():
     assert KIS_REAL_LEDGERS == frozenset({"rn_depth", "code_book", "qwen_book"})   # operator 2026-11-06: the formation books
     assert MODEL_DERIVED_LEDGERS == frozenset(ALL_MODEL)
-    assert PAPER_ONLY_LEDGERS == frozenset({"rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "equal_dial"})
+    assert PAPER_ONLY_LEDGERS == frozenset({"rn_gemini", "rn_opus", "rn_v4", "rn_v4_low", "rn_v4_abs", "equal_dial"})
     # equal_dial is quant-only (the MRI dial on equal's targets), so it is paper-only but not model-derived
     assert PAPER_ONLY_LEDGERS - {"equal_dial"} <= MODEL_DERIVED_LEDGERS
 
