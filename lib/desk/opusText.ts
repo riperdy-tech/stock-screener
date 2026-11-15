@@ -77,6 +77,7 @@ const FLAG_KEY = {
     net_buybacks_dilution_floored_at_zero: 'opFlBuybacks', spread_undefined_zero_median: 'opFlSpreadUndef',
     non_usd_unhandled: 'opFlNonUsd', entity_mismatch_suspected: 'opFlEntity',
     downgraded_by_deep_report: 'opFlDeep',
+    verdict_depends_on_rate: 'opFlRate',
 } as const;
 
 /** A data flag in plain words; an unknown code shows as it is. */
