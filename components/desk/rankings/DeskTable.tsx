@@ -25,7 +25,7 @@ import { useStockHref } from '@/lib/desk/useStockHref';
 import { Skel } from '../primitives';
 import { BandStrip } from './cells';
 import { DoorMark, OpusChip, PillarBars, PillarHeader, VerdictWordText } from './DeskParts';
-import { opusGap, opusMoney, opusNoCallText } from '@/lib/desk/opusText';
+import { opusClaudeRange, opusGap, opusMoney, opusNoCallText, opusRangeEnds } from '@/lib/desk/opusText';
 
 const DASH = '—';
 const AWAITING_PREVIEW = 5;
@@ -196,20 +196,25 @@ function qwenCells(t: T, r: DeskRow) {
 }
 
 // ── Opus cells (operator 2026-11-15) ────────────────────────────────────────
-// The Opus valuation beside Qwen's: the verdict chip, the median value with the three runs' low to high, and the gap
-// to the live price. A name with no row shows dashes; a no-call shows its chip, dashes, and its reason as the title.
+// Claude's view beside Qwen's: the verdict chip (the final one), Claude's fair-value range from the review with the
+// code's median beneath it (the code's median alone when there is no range), and the gap of the range's midpoint (else
+// the median) to the live price. A name with no row shows dashes; a no-call shows its chip, dashes, and its reason as
+// the title.
 
 function opusCells(t: T, r: DeskRow) {
     const o = r.opus;
     if (!o) return null;
     const cur = o.currency;
-    const valued = o.verdict !== 'NO_CALL' && o.value?.median != null;
-    const gap = valued ? opusGap(o.value.median, livePrice(r)) : null;
+    const noCall = o.verdict === 'NO_CALL';
+    const median = o.value?.median ?? null;
+    const rng = noCall ? null : opusClaudeRange(o);
+    const valued = !noCall && (rng != null || median != null);
+    const gap = valued ? opusGap(rng ? (rng[0] + rng[1]) / 2 : median, livePrice(r)) : null;
     return {
         o,
-        title: o.verdict === 'NO_CALL' ? (opusNoCallText(t, o.no_call_reason) ?? undefined) : undefined,
-        value: valued ? opusMoney(o.value.median, cur) : DASH,
-        range: valued && (o.value.low != null || o.value.high != null) ? `${opusMoney(o.value.low, cur)} to ${opusMoney(o.value.high, cur)}` : null,
+        title: noCall ? (opusNoCallText(t, o.no_call_reason) ?? undefined) : undefined,
+        value: rng ? opusRangeEnds(rng, cur).join(' – ') : valued ? opusMoney(median, cur) : DASH,
+        sub: rng ? fill(t('opValCode'), { value: opusMoney(median, cur) }) : valued ? t('opValCodeOnly') : null,
         gap: gap == null ? DASH : signedPct(gap * 100, 0),
         gapColor: gap == null ? TONE_COLORS.MUTED : gap >= 0 ? 'var(--pos)' : 'var(--neg)',
     };
@@ -221,8 +226,8 @@ function OpusGridCells({ c }: { c: ReturnType<typeof opusCells> }) {
         <>
             <span className="dk-opc">{c ? <OpusChip o={c.o} title={c.title} /> : <span className="font-mono text-[11px] text-off">{DASH}</span>}</span>
             <span className="dk-opc min-w-0">
-                <span className="block font-mono text-[12px] text-ink">{c?.value ?? DASH}</span>
-                {c?.range && <span className="block truncate font-mono text-[10.5px] leading-tight text-ink-2" title={c.range}>{c.range}</span>}
+                <span className="block truncate font-mono text-[12px] text-ink" title={c?.value}>{c?.value ?? DASH}</span>
+                {c?.sub && <span className="block truncate font-mono text-[10.5px] leading-tight text-ink-2" title={c.sub}>{c.sub}</span>}
             </span>
             <span className="dk-opc font-mono text-[12px]" style={{ color: c?.gapColor ?? TONE_COLORS.MUTED }}>{c?.gap ?? DASH}</span>
         </>
@@ -238,7 +243,7 @@ function OpusLine({ c, className }: { c: ReturnType<typeof opusCells>; className
             {c ? <OpusChip o={c.o} title={c.title} /> : <span className="text-off">{DASH}</span>}
             <span className="text-ink">{c?.value ?? DASH}</span>
             <span style={{ color: c?.gapColor ?? TONE_COLORS.MUTED }}>{c?.gap ?? DASH}</span>
-            {c?.range && <span className="truncate text-[10.5px] text-ink-2">{c.range}</span>}
+            {c?.sub && <span className="truncate text-[10.5px] text-ink-2">{c.sub}</span>}
         </div>
     );
 }

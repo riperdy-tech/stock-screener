@@ -20,11 +20,23 @@ const has = <M extends object>(m: M, k: string | null | undefined): k is Extract
     k != null && Object.prototype.hasOwnProperty.call(m, k);
 
 /** A per-share amount in the price currency: a dollar sign only when the file says USD. */
-export function opusMoney(v: number | null | undefined, cur: string | null): string {
+export function opusMoney(v: number | null | undefined, cur: string | null, digits = 2): string {
     if (v == null || !Number.isFinite(v)) return DASH;
-    const n = v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const n = v.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
     if (cur === 'USD') return `$${n}`;
     return cur ? `${n} ${cur}` : n;
+}
+
+/** Claude's fair-value range from the review, when it carries two finite numbers; else null. */
+export function opusClaudeRange(o: Pick<OpusVerdict, 'review'>): [number, number] | null {
+    const r = o.review?.fair_value_range;
+    return Array.isArray(r) && r.length === 2 && Number.isFinite(r[0]) && Number.isFinite(r[1]) ? [r[0], r[1]] : null;
+}
+
+/** The range's two ends in the price currency: whole units when both are whole numbers, else cents. */
+export function opusRangeEnds(r: [number, number], cur: string | null): [string, string] {
+    const digits = Number.isInteger(r[0]) && Number.isInteger(r[1]) ? 0 : 2;
+    return [opusMoney(r[0], cur, digits), opusMoney(r[1], cur, digits)];
 }
 
 /** Value over price minus one, as a fraction; null when either is missing or the price is not positive. */
