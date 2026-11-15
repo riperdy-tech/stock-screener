@@ -72,6 +72,10 @@ export function OpusPanel({ o, analystAsOf }: { o: OpusVerdict; analystAsOf?: st
     const anVsClaude = an && rng && (an.currency ?? o.currency) === o.currency && an.target_mean > 0
         ? Math.round(((rng[0] + rng[1]) / 2 / an.target_mean - 1) * 100) : null;
     const rv = o.review ?? null;
+    // Spec v1.3: the company's own required return and the value either side of it, when the file carries both.
+    const rate = o.rate ?? null;
+    const sens = o.sensitivity ?? null;
+    const ratePct = (v: number | null | undefined) => (v == null ? DASH : `${(v * 100).toFixed(1)}%`);
 
     return (
         <section className="mt-4 border-l-2 border-rule-14 px-4 py-3 text-[13px] leading-relaxed text-ink">
@@ -143,6 +147,16 @@ export function OpusPanel({ o, analystAsOf }: { o: OpusVerdict; analystAsOf?: st
                     ? fill(t('opPgCode'), { median: money(o.value?.median), low: money(o.value?.low), high: money(o.value?.high), spread: pct(o.spread_pct) })
                     : fill(t('opPgRange'), { low: money(o.value?.low), high: money(o.value?.high), spread: pct(o.spread_pct) })}
             </p>
+            {rate && sens && (
+                <p className="font-mono text-[11px] text-ink-3">
+                    {fill(t(rate.source === 'sector_only' ? 'opRateLineSector' : 'opRateLine'), {
+                        mid: ratePct(rate.ke_mid), beta: rate.beta_used == null ? DASH : rate.beta_used.toFixed(2), weeks: rate.weeks ?? DASH,
+                        low: ratePct(rate.ke_low), vLow: money(sens.value_at_ke_low), high: ratePct(rate.ke_high), vHigh: money(sens.value_at_ke_high),
+                        sector: ratePct(rate.ke_sector), vSector: money(sens.value_at_ke_sector),
+                    })}
+                    {!sens.holds_across_band && <span className="text-warn">{' '}{t('opRateShifts')}</span>}
+                </p>
+            )}
             <p className="mt-1 font-mono text-[12px] text-ink-2">{fill(t('pgOpusMethod'), { method })}</p>
             {scenarios.length > 0 && (
                 <table className="mt-2 font-mono text-[12px] text-ink-2">

@@ -639,6 +639,17 @@ export interface OpusVerdict {
         target_mean: number; target_median: number | null; target_low: number | null; target_high: number | null;
         analysts: number | null; rating: string | null; currency: string | null;
     } | null;
+    /** Spec v1.3: the required return from the company's own share-price record (beta on SPY, blended 2/3 with the
+     *  sector loading), with the value at one point either side and at the old sector rate. Absent in older files. */
+    rate?: {
+        beta_own: number | null; weeks: number | null; beta_prior: number | null; beta_used: number | null;
+        source: 'own_blended' | 'sector_only' | null;
+        ke_low: number | null; ke_mid: number | null; ke_high: number | null; ke_sector: number | null;
+    } | null;
+    sensitivity?: {
+        value_at_ke_low: number | null; value_at_ke_high: number | null; value_at_ke_sector: number | null;
+        verdict_at_ke_low: OpusVerdictCode; verdict_at_ke_high: OpusVerdictCode; holds_across_band: boolean;
+    } | null;
 }
 
 export interface OpusOverlayPayload {
