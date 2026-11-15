@@ -592,6 +592,56 @@ export async function fetchGeminiOverlay(): Promise<GeminiOverlayPayload | null>
     return fetchJson<GeminiOverlayPayload>('/data/gemini_overlay.json');
 }
 
+// ── Opus valuation verdicts (stocks-workspace/baselines/opus/SPEC.md v1, section 3d) ─────────────
+// Paper-only: written by stocks-workspace/baselines/opus/build_opus_overlay.py, shown on the stock page and graded by
+// the separate rn_opus paper book. The model supplies inputs; code does the arithmetic. Never part of depth.
+
+export type OpusVerdictCode = 'BUY' | 'WATCH' | 'AVOID' | 'NO_CALL';
+
+export interface OpusVerdict {
+    ticker: string;
+    run_source: 'opus_v1';
+    not_for_real_money: true;
+    verdict: OpusVerdictCode;
+    /** BUY -> undervalued, WATCH -> hold, AVOID -> overvalued, NO_CALL -> null. */
+    direction: 'undervalued' | 'hold' | 'overvalued' | null;
+    no_call_reason: string | null;
+    price: number | null;
+    price_date: string | null;
+    currency: string | null;
+    /** Per listed share, price currency, across the three runs. */
+    value: { median: number | null; low: number | null; high: number | null };
+    value_to_price: number | null;
+    spread_pct: number | null;
+    alpha_pts: number | null;
+    ke: number | null;
+    method: string | null;
+    runs: number;
+    run_verdicts: string[];
+    /** From the median run. */
+    scenarios: { name: string; probability: number | null; value: number | null }[];
+    market_view: string | null;
+    checks: Record<string, unknown>;
+    data_flags: string[];
+    captured_at: string | null;
+}
+
+export interface OpusOverlayPayload {
+    scheme: 'opus_v1';
+    run_source: 'opus_v1';
+    not_for_real_money: true;
+    generated_at: string;
+    spec_version: string;
+    model: string;
+    count: number;
+    verdict_counts: Record<OpusVerdictCode, number>;
+    tickers: Record<string, OpusVerdict>;
+}
+
+export async function fetchOpusOverlay(): Promise<OpusOverlayPayload | null> {
+    return fetchJson<OpusOverlayPayload>('/data/opus_overlay.json');
+}
+
 // ── MRI news candidates (MRI-15, Stage 1; operator decisions D1/D5 of 2026-10-22) ───────────────
 // A display index built by scripts/build_macro_events.py from MRI's event register. A candidate is a news report,
 // not a confirmed event; its market block says what the market did after it, not whether the news caused it.
