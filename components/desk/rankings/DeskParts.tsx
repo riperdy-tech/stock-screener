@@ -4,12 +4,14 @@
 // Colour is never the only signal: every state also carries a word or a glyph.
 
 import React from 'react';
+import clsx from 'clsx';
 import { DOOR_COLOR, DOOR_LABEL_KEY, type DoorKind } from '@/lib/desk/doors';
 import type { VerdictWord } from '@/lib/desk/filters';
+import { opusChip } from '@/lib/desk/opusText';
 import { PILLARS, pillarBar, signedNum } from '@/lib/desk/rowText';
 import { FAMILY, TONE_COLORS } from '@/lib/desk/tone';
 import { useLanguage } from '@/components/LanguageContext';
-import type { FactorEntry } from '@/lib/data-service';
+import type { FactorEntry, OpusVerdict } from '@/lib/data-service';
 
 /** 7px colour square + door name (mono 11px, ink-2). No bordered chip. `held over` has no colour. */
 export function DoorMark({ door }: { door: DoorKind | null }) {
@@ -91,3 +93,18 @@ export function VerdictWordText({ word }: { word: VerdictWord | null }) {
 }
 
 export const verdictWordKey = (w: VerdictWord) => WORD_KEY[w];
+
+/** The Opus verdict as a bordered chip in its colour (BUY good, WATCH caution, AVOID bad, no call muted). */
+export function OpusChip({ o, large = false, title }: { o: Pick<OpusVerdict, 'verdict'>; large?: boolean; title?: string }) {
+    const { t } = useLanguage();
+    const c = opusChip(t, o);
+    return (
+        <span
+            title={title}
+            className={clsx('inline-block whitespace-nowrap border font-mono font-semibold leading-none', large ? 'px-2 py-1 text-[13px]' : 'px-1.5 py-0.5 text-[10.5px]')}
+            style={{ color: c.color, borderColor: c.color }}
+        >
+            {c.text}
+        </span>
+    );
+}

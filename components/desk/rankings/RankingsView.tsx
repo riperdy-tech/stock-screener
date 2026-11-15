@@ -8,18 +8,19 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { useLanguage } from '@/components/LanguageContext';
-import type { DepthVerdict, FactorScoresPayload, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
-import type { StockInfo } from '@/lib/desk/useDeskData';
+import type { DepthVerdict, FactorScoresPayload, OpusVerdict, OpusVerdictCode, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
+import type { DeskData, StockInfo } from '@/lib/desk/useDeskData';
 import { buildRows, sectorsOf } from '@/lib/desk/rankings';
 import { deskPhase } from '@/lib/desk/phase';
 import { deskSections, type DeskSections } from '@/lib/desk/sections';
 import { funnelCounts } from '@/lib/desk/funnel';
 import { DOOR_LABEL_KEY } from '@/lib/desk/doors';
 import {
-    applyDeskFilters, DOOR_FILTERS, filtersActive, NO_FILTERS, parseDeskUrl, writeDeskUrl,
+    applyDeskFilters, DOOR_FILTERS, filtersActive, NO_FILTERS, OPUS_FILTERS, parseDeskUrl, writeDeskUrl,
     type DeskFilters, type DeskUrlState, type FunnelStep,
 } from '@/lib/desk/filters';
 import { fill } from '@/lib/desk/text';
+import { OPUS_VERDICT_KEY } from '@/lib/desk/opusText';
 import { DeskTable } from './DeskTable';
 
 import { FunnelPanel, FunnelRow } from './Funnel';
@@ -56,7 +57,27 @@ function FilterSelect({ label, value, shown, options, onChange }: {
     );
 }
 
-export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers, qwen }: {
+/** "Opus valued … · 11 BUY · …" from the file's own totals; each count sets the Opus filter. */
+function OpusSummary({ m, onPick }: { m: NonNullable<DeskData['opusMeta']>; onPick: (v: OpusVerdictCode) => void }) {
+    const { t } = useLanguage();
+    const vc: Partial<Record<OpusVerdictCode, number>> = m.verdict_counts ?? {};
+    const valued = vc.BUY != null && vc.WATCH != null && vc.AVOID != null ? vc.BUY + vc.WATCH + vc.AVOID : '—';
+    const pick = (k: OpusVerdictCode, key: 'opLineBuy' | 'opLineWatch' | 'opLineAvoid' | 'opLineNoCall') => (
+        <button type="button" onClick={() => onPick(k)} className="text-accent hover:text-ink">{fill(t(key), { n: vc[k] ?? '—' })}</button>
+    );
+    return (
+        <p className="mt-1 font-mono text-[11px] font-semibold text-ink-2">
+            {fill(t('opLine'), { v: valued, n: m.count ?? '—', d: m.generated_at ? m.generated_at.slice(0, 10) : '—' })}
+            {' · '}{pick('BUY', 'opLineBuy')}
+            {' · '}{pick('WATCH', 'opLineWatch')}
+            {' · '}{pick('AVOID', 'opLineAvoid')}
+            {' · '}{pick('NO_CALL', 'opLineNoCall')}
+            {' · '}{t('opLinePaper')}
+        </p>
+    );
+}
+
+export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers, qwen, opus, opusMeta }: {
     factor: FactorScoresPayload | null;
     depth: Record<string, DepthVerdict>;
     valuations: Record<string, ValuationModel>;
@@ -66,6 +87,10 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     ledgers: { ledgers?: { qwen_book?: { summary?: { open_positions?: number | null } } } } | null;
     /** qwen_overlay.json tickers: Qwen's analysis beside each list name (operator 2026-11-06). */
     qwen: Record<string, QwenOverlayRow>;
+    /** opus_overlay.json tickers: the Opus valuation beside each list name (paper only). */
+    opus: Record<string, OpusVerdict>;
+    /** The Opus file's own totals for the summary line; null when the file is absent. */
+    opusMeta: DeskData['opusMeta'];
 }) {
     const { t } = useLanguage();
     const params = useSearchParams();
@@ -92,8 +117,10 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const clearFilters = () => { setQ(''); write({ ...urlState, filters: NO_FILTERS }, 'push'); };
 
     const rows = useMemo(
-        () => buildRows({ factor, depth, valuations, overlay, stockInfo }).map((r) => (qwen[r.ticker] ? { ...r, qwen: qwen[r.ticker] } : r)),
-        [factor, depth, valuations, overlay, stockInfo, qwen],
+        () => buildRows({ factor, depth, valuations, overlay, stockInfo })
+            .map((r) => (qwen[r.ticker] ? { ...r, qwen: qwen[r.ticker] } : r))
+            .map((r) => (opus[r.ticker] ? { ...r, opus: opus[r.ticker] } : r)),
+        [factor, depth, valuations, overlay, stockInfo, qwen, opus],
     );
     const sectors = useMemo(() => sectorsOf(rows), [rows]);
     const qwenLive = Object.keys(qwen).length > 0;
@@ -104,7 +131,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const active = filtersActive(filters);
     const filtered = useMemo(() => (active ? deskSections(applyDeskFilters(rows, filters)) : all),
         // eslint-disable-next-line react-hooks/exhaustive-deps -- `filters` is rebuilt every render; its parts are listed
-        [rows, all, active, filters.door, filters.sector, filters.q]);
+        [rows, all, active, filters.door, filters.sector, filters.opus, filters.q]);
 
     // Symbols the table already shows for the current filters: the universe hits skip them.
     const shownTickers = useMemo(() => {
@@ -131,6 +158,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                     {fill(t('dqLine'), { a: counts.verdicts, n: counts.list ?? '—', v: n, d: newest ? newest.slice(5, 10) : '—' })}
                 </p>
             )}
+            {opusMeta && <OpusSummary m={opusMeta} onPick={(v) => setFilter({ opus: v })} />}
 
             {/* b/c. Funnel and the selected step's panel */}
             <div className="mt-3">
@@ -155,6 +183,13 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                         shown={filters.sector}
                         options={[['all', t('flAll')], ...sectors.map((s) => [s, s] as [string, string])]}
                         onChange={(v) => setFilter({ sector: v })}
+                    />
+                    <FilterSelect
+                        label={t('flOpus')}
+                        value={filters.opus}
+                        shown={filters.opus === 'all' ? '' : t(OPUS_VERDICT_KEY[filters.opus])}
+                        options={[['all', t('flAll')], ...OPUS_FILTERS.map((o) => [o, t(OPUS_VERDICT_KEY[o])] as [string, string])]}
+                        onChange={(v) => setFilter({ opus: v as DeskFilters['opus'] })}
                     />
                     <input
                         value={q}

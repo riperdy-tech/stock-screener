@@ -24,7 +24,8 @@ import { DATA_NOTES, FORENSIC_WARNINGS, gapColor, gateReasonsText, sizeTone, TON
 import { useStockHref } from '@/lib/desk/useStockHref';
 import { Skel } from '../primitives';
 import { BandStrip } from './cells';
-import { DoorMark, PillarBars, PillarHeader, VerdictWordText } from './DeskParts';
+import { DoorMark, OpusChip, PillarBars, PillarHeader, VerdictWordText } from './DeskParts';
+import { opusGap, opusMoney, opusNoCallText } from '@/lib/desk/opusText';
 
 const DASH = '—';
 const AWAITING_PREVIEW = 5;
@@ -194,17 +195,66 @@ function qwenCells(t: T, r: DeskRow) {
     };
 }
 
+// ── Opus cells (operator 2026-11-15) ────────────────────────────────────────
+// The Opus valuation beside Qwen's: the verdict chip, the median value with the three runs' low to high, and the gap
+// to the live price. A name with no row shows dashes; a no-call shows its chip, dashes, and its reason as the title.
+
+function opusCells(t: T, r: DeskRow) {
+    const o = r.opus;
+    if (!o) return null;
+    const cur = o.currency;
+    const valued = o.verdict !== 'NO_CALL' && o.value?.median != null;
+    const gap = valued ? opusGap(o.value.median, livePrice(r)) : null;
+    return {
+        o,
+        title: o.verdict === 'NO_CALL' ? (opusNoCallText(t, o.no_call_reason) ?? undefined) : undefined,
+        value: valued ? opusMoney(o.value.median, cur) : DASH,
+        range: valued && (o.value.low != null || o.value.high != null) ? `${opusMoney(o.value.low, cur)} to ${opusMoney(o.value.high, cur)}` : null,
+        gap: gap == null ? DASH : signedPct(gap * 100, 0),
+        gapColor: gap == null ? TONE_COLORS.MUTED : gap >= 0 ? 'var(--pos)' : 'var(--neg)',
+    };
+}
+
+/** The three OPUS grid cells; hidden below 1024px, where OpusLine carries them instead (app/globals.css .dk-op*). */
+function OpusGridCells({ c }: { c: ReturnType<typeof opusCells> }) {
+    return (
+        <>
+            <span className="dk-opc">{c ? <OpusChip o={c.o} title={c.title} /> : <span className="font-mono text-[11px] text-off">{DASH}</span>}</span>
+            <span className="dk-opc min-w-0">
+                <span className="block font-mono text-[12px] text-ink">{c?.value ?? DASH}</span>
+                {c?.range && <span className="block truncate font-mono text-[10.5px] leading-tight text-ink-2" title={c.range}>{c.range}</span>}
+            </span>
+            <span className="dk-opc font-mono text-[12px]" style={{ color: c?.gapColor ?? TONE_COLORS.MUTED }}>{c?.gap ?? DASH}</span>
+        </>
+    );
+}
+
+/** The Opus cells as one labelled line: under the grid row from 640 to 1023px, and in the narrow card. */
+function OpusLine({ c, className }: { c: ReturnType<typeof opusCells>; className: string }) {
+    const { t } = useLanguage();
+    return (
+        <div className={clsx('flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[11px]', className)}>
+            <span className="text-off">{t('opGrp')}</span>
+            {c ? <OpusChip o={c.o} title={c.title} /> : <span className="text-off">{DASH}</span>}
+            <span className="text-ink">{c?.value ?? DASH}</span>
+            <span style={{ color: c?.gapColor ?? TONE_COLORS.MUTED }}>{c?.gap ?? DASH}</span>
+            {c?.range && <span className="truncate text-[10.5px] text-ink-2">{c.range}</span>}
+        </div>
+    );
+}
+
 function QwenColumnHeaders() {
     const { t } = useLanguage();
     return (
         <div className="hidden sm:block" role="presentation">
-            <div className="dk-grid pt-1 font-mono text-[11px] text-off">
+            <div className="dk-grid dk-op pt-1 font-mono text-[11px] text-off">
                 <span className="dk-span-co" />
                 <span className="border-b border-ink pb-0.5 whitespace-nowrap">{t('grpMarket')}</span>
                 <span className="dk-span-ai border-b border-ink pb-0.5 whitespace-nowrap">{t('dqGrp')}</span>
+                <span className="dk-opc dk-span-op border-b border-ink pb-0.5 whitespace-nowrap">{t('opGrp')}</span>
                 <span className="dk-span-sc border-b border-ink pb-0.5 whitespace-nowrap">{t('grpScreener')}</span>
             </div>
-            <div className="dk-grid border-b border-rule-18 pb-1.5 pt-1.5 font-mono text-[11px] text-off">
+            <div className="dk-grid dk-op border-b border-rule-18 pb-1.5 pt-1.5 font-mono text-[11px] text-off">
                 <span className="whitespace-nowrap">{t('colCompany')}</span>
                 <span className="dk-ind whitespace-nowrap">{t('colIndustry')}</span>
                 <span className="whitespace-nowrap">{t('dkColPrice')}</span>
@@ -212,6 +262,9 @@ function QwenColumnHeaders() {
                 <span className="whitespace-nowrap">{t('dqColValue')}</span>
                 <span className="whitespace-nowrap">{t('dqColGap')}</span>
                 <span className="whitespace-nowrap">{t('dqColClaims')}</span>
+                <span className="dk-opc whitespace-nowrap">{t('opColVerdict')}</span>
+                <span className="dk-opc whitespace-nowrap">{t('dqColValue')}</span>
+                <span className="dk-opc whitespace-nowrap">{t('dqColGap')}</span>
                 <span className="whitespace-nowrap">{t('colDoor')}</span>
                 <span className="dk-pct whitespace-nowrap">{t('colPct')}</span>
                 <span className="dk-pillars"><PillarHeader /></span>
@@ -226,13 +279,14 @@ function QwenRowView({ r }: { r: DeskRow }) {
     const stockLink = useStockHref();
     const price = livePrice(r);
     const c = qwenCells(t, r);
+    const op = opusCells(t, r);
     const industry = industryOf(r);
     const door = doorOf(r.fct.fct_nominated_doors);
     const pct = topPct(r.fct.fct_percentile);
     return (
         <Link href={stockLink(r.ticker)} className="block border-b border-rule-10 py-2 hover:bg-hover">
             <div className="hidden sm:block">
-                <div className="dk-grid">
+                <div className="dk-grid dk-op">
                     <Company r={r} />
                     <span className="dk-ind block min-w-0 truncate text-[11px] text-off" title={industry ?? undefined}>{industry ?? DASH}</span>
                     <span className="font-mono text-[12px] text-ink">{price != null ? `$${price.toFixed(2)}` : DASH}</span>
@@ -243,11 +297,13 @@ function QwenRowView({ r }: { r: DeskRow }) {
                     </span>
                     <span className="font-mono text-[12px]" style={{ color: c.gapColor }}>{c.gap}</span>
                     <span className="font-mono text-[11px] text-ink-2">{c.claims}</span>
+                    <OpusGridCells c={op} />
                     <DoorMark door={door} />
                     <span className="dk-pct font-mono text-[11px] text-ink-2">{pct ?? DASH}</span>
                     <span className="dk-pillars"><PillarBars z={r.fct.fct_z} /></span>
                     <span aria-hidden className="font-mono text-[11px] text-ink-2">{'›'}</span>
                 </div>
+                <OpusLine c={op} className="dk-opl mt-1" />
             </div>
             <div className="block sm:hidden">
                 <div className="flex items-baseline justify-between gap-3">
@@ -265,6 +321,7 @@ function QwenRowView({ r }: { r: DeskRow }) {
                     <DoorMark door={door} />
                 </div>
                 {c.range && <span className="block truncate font-mono text-[10.5px] text-ink-2">{c.range}</span>}
+                <OpusLine c={op} className="mt-1 flex" />
             </div>
         </Link>
     );
