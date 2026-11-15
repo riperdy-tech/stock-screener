@@ -41,7 +41,7 @@ function checkBool(v: unknown): boolean | null {
     return null;
 }
 
-export function OpusPanel({ o }: { o: OpusVerdict }) {
+export function OpusPanel({ o, analystAsOf }: { o: OpusVerdict; analystAsOf?: string }) {
     const { t } = useLanguage();
     // Values are per listed share in the price currency; a dollar sign only when the file says USD.
     const money = (v: number | null | undefined) => opusMoney(v, o.currency);
@@ -66,6 +66,11 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
     const ends = rng ? opusRangeEnds(rng, o.currency) : null;
     const gap = opusGap(rng ? (rng[0] + rng[1]) / 2 : o.value?.median, o.price);
     const view = o.market_view ? opusMarketView(t, o.market_view) : null;
+    // The analysts' consensus target, for comparison only (never shown to the analyst or the reviewer).
+    const an = o.analyst?.target_mean != null ? o.analyst : null;
+    const anMoney = (v: number | null | undefined) => opusMoney(v, an?.currency ?? o.currency);
+    const anVsClaude = an && rng && (an.currency ?? o.currency) === o.currency && an.target_mean > 0
+        ? Math.round(((rng[0] + rng[1]) / 2 / an.target_mean - 1) * 100) : null;
     const rv = o.review ?? null;
 
     return (
@@ -124,6 +129,15 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
                     {fill(t('opPgGap'), { gap: gap == null ? DASH : signedPct(gap * 100, 0) })}
                 </span>
             </p>
+            {an && (
+                <p className="text-[12px] text-ink-2">
+                    {fill(t('opAnLine'), {
+                        n: an.analysts ?? DASH, date: analystAsOf ?? DASH, mean: anMoney(an.target_mean),
+                        low: anMoney(an.target_low), high: anMoney(an.target_high),
+                    })}
+                    {anVsClaude != null && <>{' '}{anVsClaude === 0 ? t('opAnSame') : fill(t(anVsClaude > 0 ? 'opAnAbove' : 'opAnBelow'), { x: Math.abs(anVsClaude) })}</>}
+                </p>
+            )}
             <p className="font-mono text-[11px] text-ink-3">
                 {rng
                     ? fill(t('opPgCode'), { median: money(o.value?.median), low: money(o.value?.low), high: money(o.value?.high), spread: pct(o.spread_pct) })

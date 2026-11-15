@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useLanguage } from '@/components/LanguageContext';
 import { fetchDepthReport, type DepthReportBundle } from '@/lib/data-service';
 import { fmtMoney } from '@/lib/desk/format';
+import { opusMoney } from '@/lib/desk/opusText';
 import { fill } from '@/lib/desk/text';
 import { buildRows, type DeskRow } from '@/lib/desk/rankings';
 import { livePrice } from '@/lib/desk/rowText';
@@ -116,6 +117,8 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
     if (deltaText && !reasons.includes('mode_instability')) glossed.push(deltaText);
     const fu = d ? followupWarning(d) : null;
     const ind = row.info?.industry;
+    const op = data.opus[row.ticker];
+    const anTarget = op?.analyst?.target_mean != null ? opusMoney(op.analyst.target_mean, op.analyst.currency ?? op.currency) : null;
     // The price is the engine's (stocks.json); say which session it is for, and when this name's own last price is older.
     const sessionNote = live == null || !data.priceSession ? null
         : row.info?.priceOlderThan
@@ -137,6 +140,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
                 <span className="flex-1" />
                 <span className="font-mono text-[18px] font-semibold text-ink">{live != null ? fmtMoney(live) : DASH}</span>
                 {priceNote && <span className="font-mono text-[11px] text-ink-2">{priceNote}</span>}
+                {anTarget && <span className="font-mono text-[11px] text-ink-2">{fill(t('opAnHeader'), { v: anTarget })}</span>}
                 <a
                     href={`https://www.tradingview.com/symbols/${encodeURIComponent(row.ticker)}/`}
                     target="_blank" rel="noopener noreferrer"
@@ -160,7 +164,7 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
             <QwenPanel ticker={row.ticker} live={live} listed={onList(row)} monthly={data.monthly} />
             {data.gemini[row.ticker] && <GeminiPanel g={data.gemini[row.ticker]} />}
-            {data.opus[row.ticker] && <OpusPanel o={data.opus[row.ticker]} />}
+            {data.opus[row.ticker] && <OpusPanel o={data.opus[row.ticker]} analystAsOf={data.opusMeta?.analyst_as_of} />}
             <MacroEventsPanel p={data.macroEvents} ticker={row.ticker} sector={row.info?.sector} />
 
             <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">

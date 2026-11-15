@@ -69,7 +69,7 @@ export interface DeskData {
     /** Opus valuation verdicts by ticker (opus_overlay.json, SPEC opus_v1): paper-only, never part of `depth`. Empty when the file is absent. */
     opus: Record<string, OpusVerdict>;
     /** The Opus file's own totals, for the Desk's summary line. Null when the file is absent. */
-    opusMeta: Pick<OpusOverlayPayload, 'generated_at' | 'count' | 'verdict_counts'> | null;
+    opusMeta: Pick<OpusOverlayPayload, 'generated_at' | 'count' | 'verdict_counts' | 'analyst_as_of'> | null;
     /** Qwen's analysis by ticker (qwen_overlay.json, operator 2026-11-06): the Desk's AI column. Empty when the file is absent. */
     qwen: Record<string, QwenOverlayRow>;
     /** The monthly Code and Qwen books of record (m3o_books.json). Null when the file is absent. */
@@ -202,7 +202,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         },
         gemini: (gm as GeminiOverlayPayload | null)?.tickers ?? {},
         opus: (op as OpusOverlayPayload | null)?.tickers ?? {},
-        opusMeta: opusPayload ? { generated_at: opusPayload.generated_at, count: opusPayload.count, verdict_counts: opusPayload.verdict_counts } : null,
+        opusMeta: opusPayload ? { generated_at: opusPayload.generated_at, count: opusPayload.count, verdict_counts: opusPayload.verdict_counts, analyst_as_of: opusPayload.analyst_as_of } : null,
         qwen: (qw as QwenOverlayPayload | null)?.tickers ?? {},
         monthly: (mb as MonthlyBooksPayload | null) ?? null,
         macroEvents: (me as MacroEventsPayload | null) ?? null,
