@@ -632,8 +632,8 @@ export function EnglishHelpBody() {
                     </li>
                     <li>
                         <b>Gemini book (interim)</b> and <b>Code baseline (engine v2.1)</b> — comparison books from October,
-                        paper only. Their picks stopped updating in mid-October. The <b>Opus book (paper)</b> holds the BUY
-                        names of the Opus valuation run (an outside model reads pinned filings three times; code does the
+                        paper only. Their picks stopped updating in mid-October. The <b>Claude book (paper)</b> holds the BUY
+                        names of the Claude valuation run (an outside model reads pinned filings three times; code does the
                         arithmetic) at equal weight, paper only, and is not yet graded on returns.
                     </li>
                     <li>
