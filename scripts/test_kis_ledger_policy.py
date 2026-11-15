@@ -22,7 +22,7 @@ from test_kis_guards import FakeKIS, book, harness, pos  # noqa: E402,F401  (har
 BLOCKING = [None, "", "  ", "true", "TRUE", " True ", "1", "yes", "0", "no", "off", "tru", "flase",
             "false.", "'false'", "False!", "blocked"]
 OPEN = ["false", "FALSE", "False", " false ", "\tfalse\n"]
-ALL_MODEL = ["rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "qwen_book"]
+ALL_MODEL = ["rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "qwen_book", "rn_opus"]
 
 
 def named(key, holdings=None, cash=5000.0):
@@ -214,3 +214,12 @@ def test_the_code_book_may_mirror_real_money_and_is_not_model_derived():
 def test_the_qwen_book_is_blocked_while_the_model_release_is_blocked():
     assert ledger_refusals("qwen_book", "real", {"MODEL_RELEASE_BLOCKED": "true"})
     assert ledger_refusals("qwen_book", "real", {"MODEL_RELEASE_BLOCKED": "false"}) == []
+
+
+# ================================================================== the Opus paper book (SPEC opus_v1, point 5)
+def test_the_opus_book_is_model_derived_and_never_on_the_real_list():
+    assert "rn_opus" in MODEL_DERIVED_LEDGERS and "rn_opus" not in KIS_REAL_LEDGERS
+    for env in ("real", "paper"):
+        assert any("model release is blocked" in r
+                   for r in ledger_refusals("rn_opus", env, {"MODEL_RELEASE_BLOCKED": "true"}))
+    assert any("allow-list" in r for r in ledger_refusals("rn_opus", "real", {"MODEL_RELEASE_BLOCKED": "false"}))
