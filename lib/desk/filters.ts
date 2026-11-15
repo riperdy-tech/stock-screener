@@ -1,6 +1,7 @@
 // Desk filters and the URL state of the Desk (?step=3&how=1&verdict=…&door=…&sector=…&q=…).
 // Pure functions, no React. The router's other params (tab, …) are never touched here.
 
+import type { OpusVerdictCode } from '@/lib/data-service';
 import type { DeskRow } from './rankings';
 import { doorOf, type DoorKind } from './doors';
 import { isNotUsable, rebuiltVerdict } from './verdict';
@@ -10,6 +11,8 @@ export type VerdictWord = 'undervalued' | 'fair' | 'overvalued' | 'not_usable' |
 
 export const VERDICT_WORDS: VerdictWord[] = ['undervalued', 'fair', 'overvalued', 'not_usable', 'blocked', 'awaiting'];
 export const DOOR_FILTERS: DoorKind[] = ['compounder', 'value_gap', 'double', 'trend', 'held_over'];
+/** The Opus verdicts the Opus filter offers; a name with no Opus row matches none of them. */
+export const OPUS_FILTERS: OpusVerdictCode[] = ['BUY', 'WATCH', 'AVOID', 'NO_CALL'];
 
 /**
  * The verdict word a row shows. Null for a row that has no verdict and is not awaiting one
@@ -27,13 +30,14 @@ export interface DeskFilters {
     verdict: VerdictWord | 'all';
     door: DoorKind | 'all';
     sector: string;   // 'all' or an exact sector name
+    opus: OpusVerdictCode | 'all';
     q: string;
 }
 
-export const NO_FILTERS: DeskFilters = { verdict: 'all', door: 'all', sector: 'all', q: '' };
+export const NO_FILTERS: DeskFilters = { verdict: 'all', door: 'all', sector: 'all', opus: 'all', q: '' };
 
 export const filtersActive = (f: DeskFilters): boolean =>
-    f.verdict !== 'all' || f.door !== 'all' || f.sector !== 'all' || f.q.trim() !== '';
+    f.verdict !== 'all' || f.door !== 'all' || f.sector !== 'all' || f.opus !== 'all' || f.q.trim() !== '';
 
 export function applyDeskFilters(rows: DeskRow[], f: DeskFilters): DeskRow[] {
     const q = f.q.trim().toUpperCase();
@@ -41,6 +45,7 @@ export function applyDeskFilters(rows: DeskRow[], f: DeskFilters): DeskRow[] {
         if (f.verdict !== 'all' && verdictWord(r) !== f.verdict) return false;
         if (f.door !== 'all' && doorOf(r.fct.fct_nominated_doors) !== f.door) return false;
         if (f.sector !== 'all' && r.info?.sector !== f.sector) return false;
+        if (f.opus !== 'all' && r.opus?.verdict !== f.opus) return false;
         if (q && !r.ticker.includes(q) && !(r.info?.name ?? '').toUpperCase().includes(q)) return false;
         return true;
     });
@@ -64,6 +69,7 @@ export function parseDeskUrl(p: { get(name: string): string | null }): DeskUrlSt
     const step = (Number.isInteger(n) && n >= 1 && n <= 5 ? n : DEFAULT_STEP) as FunnelStep;
     const verdict = p.get('verdict') as VerdictWord | null;
     const door = p.get('door') as DoorKind | null;
+    const opus = p.get('opus') as OpusVerdictCode | null;
     return {
         step,
         how: p.get('how') === '1',
@@ -71,6 +77,7 @@ export function parseDeskUrl(p: { get(name: string): string | null }): DeskUrlSt
             verdict: verdict && VERDICT_WORDS.includes(verdict) ? verdict : 'all',
             door: door && DOOR_FILTERS.includes(door) ? door : 'all',
             sector: p.get('sector') || 'all',
+            opus: opus && OPUS_FILTERS.includes(opus) ? opus : 'all',
             q: p.get('q') ?? '',
         },
     };
@@ -84,5 +91,6 @@ export function writeDeskUrl(params: URLSearchParams, s: DeskUrlState): void {
     put('verdict', s.filters.verdict === 'all' ? null : s.filters.verdict);
     put('door', s.filters.door === 'all' ? null : s.filters.door);
     put('sector', s.filters.sector === 'all' ? null : s.filters.sector);
+    put('opus', s.filters.opus === 'all' ? null : s.filters.opus);
     put('q', s.filters.q.trim() === '' ? null : s.filters.q);
 }

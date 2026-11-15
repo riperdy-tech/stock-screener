@@ -16,10 +16,11 @@ import { deskSections, type DeskSections } from '@/lib/desk/sections';
 import { funnelCounts } from '@/lib/desk/funnel';
 import { DOOR_LABEL_KEY } from '@/lib/desk/doors';
 import {
-    applyDeskFilters, DOOR_FILTERS, filtersActive, NO_FILTERS, parseDeskUrl, writeDeskUrl,
+    applyDeskFilters, DOOR_FILTERS, filtersActive, NO_FILTERS, OPUS_FILTERS, parseDeskUrl, writeDeskUrl,
     type DeskFilters, type DeskUrlState, type FunnelStep,
 } from '@/lib/desk/filters';
 import { fill } from '@/lib/desk/text';
+import { OPUS_VERDICT_KEY } from '@/lib/desk/opusText';
 import { DeskTable } from './DeskTable';
 
 import { FunnelPanel, FunnelRow } from './Funnel';
@@ -108,7 +109,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const active = filtersActive(filters);
     const filtered = useMemo(() => (active ? deskSections(applyDeskFilters(rows, filters)) : all),
         // eslint-disable-next-line react-hooks/exhaustive-deps -- `filters` is rebuilt every render; its parts are listed
-        [rows, all, active, filters.door, filters.sector, filters.q]);
+        [rows, all, active, filters.door, filters.sector, filters.opus, filters.q]);
 
     // Symbols the table already shows for the current filters: the universe hits skip them.
     const shownTickers = useMemo(() => {
@@ -159,6 +160,13 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                         shown={filters.sector}
                         options={[['all', t('flAll')], ...sectors.map((s) => [s, s] as [string, string])]}
                         onChange={(v) => setFilter({ sector: v })}
+                    />
+                    <FilterSelect
+                        label={t('flOpus')}
+                        value={filters.opus}
+                        shown={filters.opus === 'all' ? '' : t(OPUS_VERDICT_KEY[filters.opus])}
+                        options={[['all', t('flAll')], ...OPUS_FILTERS.map((o) => [o, t(OPUS_VERDICT_KEY[o])] as [string, string])]}
+                        onChange={(v) => setFilter({ opus: v as DeskFilters['opus'] })}
                     />
                     <input
                         value={q}
