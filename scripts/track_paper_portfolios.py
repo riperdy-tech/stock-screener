@@ -59,6 +59,7 @@ STOCKS_JSON = DATA / "stocks.json"
 FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 DEPTH_OVERLAY_JSON = DATA / "depth_overlay.json"             # RS2 depth verdicts — rn_depth ledger targets
 GEMINI_OVERLAY_JSON = DATA / "gemini_overlay.json"           # interim Gemini verdicts — rn_gemini ledger targets (paper only)
+OPUS_OVERLAY_JSON = DATA / "opus_overlay.json"               # Opus valuation verdicts (SPEC opus_v1) — rn_opus ledger targets (paper only)
 M3O_BOOKS_JSON = DATA / "m3o_books.json"   # the monthly code book and Qwen's book (rs2-local tools/site/qwen_site.py, published from screener-publish)
 V4_PAPER_OVERLAY_JSON = DATA / "v4_paper_overlay.json"       # engine v2.1 shadow verdicts, EXPERIMENTAL and unpromoted — rn_v4 targets (paper only)
 # The old llm_overlay.json / portfolio_plan_llm.json lane (plan_llm/plan2_llm/equal_llm)
@@ -1292,7 +1293,7 @@ def main():
     # plan / plan2 / plan3 (retired 2026-08-27) and the *_llm lane (retired 2026-08-26)
     # are NO LONGER computed or seeded on new books. Pre-existing books keep their frozen
     # history (setdefault never removes). The live books are `equal` + `rn_depth`.
-    for _k in ("rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book", DIAL_LEDGER):
+    for _k in ("rn_depth", "rn_gemini", "rn_opus", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book", DIAL_LEDGER):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -1433,6 +1434,19 @@ def main():
         finalize_ledger(ledgers["rn_gemini"], nav_gm, stale_gm, benches, as_of, book["inception"])
         backfill_benches(ledgers["rn_gemini"])
 
+        # ── rn_opus: the Opus valuation run's BUY names (direction "undervalued"), PAPER ONLY (SPEC opus_v1) ──
+        # Built exactly as rn_gemini: same gate, same equal weighting, held when opus_overlay.json is missing or
+        # empty. A separate ledger; kis/ledger_policy.py lists it as model-derived, and it is on no real-money list.
+        opus_tk = (load_json(OPUS_OVERLAY_JSON, {}) or {}).get("tickers", {})
+        opus_targets = depth_targets(factor, opus_tk)
+        opus_ok = bool(opus_tk) and fct_ok
+        opus_why = fct_why if not fct_ok else ("opus_overlay.json missing or empty" if not opus_tk else "")
+        unknown_opus = {t for t in ledgers["rn_opus"]["state"]["holdings"] if t not in opus_tk}
+        nav_op, stale_op = run_or_hold("rn_opus", opus_targets, "rank", unknown=unknown_opus,
+                                       source_ok=opus_ok, why=opus_why)
+        finalize_ledger(ledgers["rn_opus"], nav_op, stale_op, benches, as_of, book["inception"])
+        backfill_benches(ledgers["rn_opus"])
+
         # ── rn_v4: engine v2.1's nightly shadow verdicts, PAPER ONLY, EXPERIMENTAL (operator decision 2026-10-15, rs2 SPEC_rebuild AK.84) ──
         # v2.1 FAILED gate 2b (AK.82) and is unpromoted; the operator chose to let a paper book trade it, labelled as such. Same gate and equal
         # weighting as rn_depth, from v4_paper_overlay.json, whose `actionable` is true only when the gate's sole reason is the unpromoted freeze.
@@ -1511,7 +1525,7 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("equal", DIAL_LEDGER, "rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book"):
+        for name in ("equal", DIAL_LEDGER, "rn_depth", "rn_gemini", "rn_opus", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book"):
             if not ledgers.get(name, {}).get("nav_series"):
                 continue
             s = ledgers[name]["summary"]
