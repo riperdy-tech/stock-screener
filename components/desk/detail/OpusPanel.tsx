@@ -7,7 +7,7 @@
 import React from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import type { OpusVerdict } from '@/lib/data-service';
-import { OPUS_VERDICT_KEY, opusFlagText, opusGap, opusMarketView, opusMoney, opusNoCallText } from '@/lib/desk/opusText';
+import { OPUS_VERDICT_KEY, opusClaudeRange, opusFlagText, opusGap, opusMarketView, opusMoney, opusNoCallText, opusRangeEnds } from '@/lib/desk/opusText';
 import { signedPct } from '@/lib/desk/rowText';
 import { fill } from '@/lib/desk/text';
 import { TONE_COLORS } from '@/lib/desk/tone';
@@ -61,7 +61,10 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
     const method = o.method == null ? DASH : has(METHOD_KEY, o.method) ? t(METHOD_KEY[o.method]) : o.method;
     const scenarios = o.scenarios ?? [];
     const reason = o.verdict === 'NO_CALL' ? opusNoCallText(t, o.no_call_reason) : null;
-    const gap = opusGap(o.value?.median, o.price);
+    // Claude's range from the review leads when there is one (gap from its midpoint); else the code's value, as before.
+    const rng = opusClaudeRange(o);
+    const ends = rng ? opusRangeEnds(rng, o.currency) : null;
+    const gap = opusGap(rng ? (rng[0] + rng[1]) / 2 : o.value?.median, o.price);
     const view = o.market_view ? opusMarketView(t, o.market_view) : null;
     const rv = o.review ?? null;
 
@@ -113,14 +116,18 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
                 </div>
             )}
             <p className="mt-1.5 font-mono text-[13px] text-ink">
-                {fill(t('opPgHead'), { value: money(o.value?.median), price: money(o.price), date: o.price_date ?? DASH })}
+                {ends
+                    ? fill(t('opPgHeadRange'), { low: ends[0], high: ends[1], price: money(o.price), date: o.price_date ?? DASH })
+                    : fill(t('opPgHead'), { value: money(o.value?.median), price: money(o.price), date: o.price_date ?? DASH })}
                 {' · '}
                 <span style={{ color: gap == null ? TONE_COLORS.MUTED : gap >= 0 ? 'var(--pos)' : 'var(--neg)' }}>
                     {fill(t('opPgGap'), { gap: gap == null ? DASH : signedPct(gap * 100, 0) })}
                 </span>
             </p>
             <p className="font-mono text-[11px] text-ink-3">
-                {fill(t('opPgRange'), { low: money(o.value?.low), high: money(o.value?.high), spread: pct(o.spread_pct) })}
+                {rng
+                    ? fill(t('opPgCode'), { median: money(o.value?.median), low: money(o.value?.low), high: money(o.value?.high), spread: pct(o.spread_pct) })
+                    : fill(t('opPgRange'), { low: money(o.value?.low), high: money(o.value?.high), spread: pct(o.spread_pct) })}
             </p>
             <p className="mt-1 font-mono text-[12px] text-ink-2">{fill(t('pgOpusMethod'), { method })}</p>
             {scenarios.length > 0 && (
