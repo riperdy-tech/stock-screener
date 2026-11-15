@@ -7,11 +7,13 @@
 import React from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import type { OpusVerdict } from '@/lib/data-service';
-import { fmtMoney } from '@/lib/desk/format';
+import { opusFlagText, opusGap, opusMarketView, opusMoney, opusNoCallText } from '@/lib/desk/opusText';
+import { signedPct } from '@/lib/desk/rowText';
 import { fill } from '@/lib/desk/text';
+import { TONE_COLORS } from '@/lib/desk/tone';
+import { OpusChip } from '../rankings/DeskParts';
 import { DASH } from './stockParts';
 
-const VERDICT_KEY = { BUY: 'pgOpusBuy', WATCH: 'pgOpusWatch', AVOID: 'pgOpusAvoid', NO_CALL: 'pgOpusNoCall' } as const;
 const METHOD_KEY = {
     fcf_dcf: 'pgOpusMFcf', normalized_earnings: 'pgOpusMEarn', excess_return: 'pgOpusMExcess',
     affo: 'pgOpusMAffo', sum_of_parts: 'pgOpusMParts',
@@ -38,15 +40,8 @@ function checkBool(v: unknown): boolean | null {
 
 export function OpusPanel({ o }: { o: OpusVerdict }) {
     const { t } = useLanguage();
-    const cur = o.currency;
     // Values are per listed share in the price currency; a dollar sign only when the file says USD.
-    const money = (v: number | null | undefined) => {
-        if (v == null) return DASH;
-        if (cur === 'USD') return fmtMoney(v);
-        const n = v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        return cur ? `${n} ${cur}` : n;
-    };
-    const ratio = (v: number | null | undefined) => (v == null ? DASH : `${v.toFixed(2)}×`);
+    const money = (v: number | null | undefined) => opusMoney(v, o.currency);
     const pct = (v: number | null | undefined) => (v == null ? DASH : `${v.toFixed(1)}%`);
     const prob = (v: number | null | undefined) => (v == null ? DASH : `${Math.round(v * 100)}%`);
 
@@ -62,26 +57,30 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
     }
     const method = o.method == null ? DASH : has(METHOD_KEY, o.method) ? t(METHOD_KEY[o.method]) : o.method;
     const scenarios = o.scenarios ?? [];
+    const reason = o.verdict === 'NO_CALL' ? opusNoCallText(t, o.no_call_reason) : null;
+    const gap = opusGap(o.value?.median, o.price);
+    const view = o.market_view ? opusMarketView(t, o.market_view) : null;
 
     return (
         <section className="mt-4 border-l-2 border-rule-14 px-4 py-3 text-[13px] leading-relaxed text-ink">
-            <div className="flex flex-wrap items-baseline gap-x-3">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                 <b className="font-semibold">{t('pgOpusTitle')}</b>
-                <span className="font-semibold">{has(VERDICT_KEY, o.verdict) ? t(VERDICT_KEY[o.verdict]) : (o.verdict ?? DASH)}</span>
+                <OpusChip o={o} large title={reason ?? undefined} />
                 {o.verdict === 'NO_CALL' && (
-                    <span className="text-ink-2">{fill(t('pgOpusNoCallWhy'), { reason: o.no_call_reason ?? DASH })}</span>
+                    <span className="text-ink-2">{fill(t('pgOpusNoCallWhy'), { reason: reason ?? DASH })}</span>
                 )}
-                <span className="font-mono text-[11px] text-ink-3">
-                    {fill(t('pgOpusPrice'), { price: money(o.price), date: o.price_date ?? DASH })}
-                </span>
             </div>
-            <p className="mt-1 font-mono text-[12px] text-ink-2">
-                {fill(t('pgOpusValue'), {
-                    median: money(o.value?.median), low: money(o.value?.low), high: money(o.value?.high),
-                    vtp: ratio(o.value_to_price), spread: pct(o.spread_pct),
-                })}
+            <p className="mt-1.5 font-mono text-[13px] text-ink">
+                {fill(t('opPgHead'), { value: money(o.value?.median), price: money(o.price), date: o.price_date ?? DASH })}
+                {' · '}
+                <span style={{ color: gap == null ? TONE_COLORS.MUTED : gap >= 0 ? 'var(--pos)' : 'var(--neg)' }}>
+                    {fill(t('opPgGap'), { gap: gap == null ? DASH : signedPct(gap * 100, 0) })}
+                </span>
             </p>
-            <p className="font-mono text-[12px] text-ink-2">{fill(t('pgOpusMethod'), { method })}</p>
+            <p className="font-mono text-[11px] text-ink-3">
+                {fill(t('opPgRange'), { low: money(o.value?.low), high: money(o.value?.high), spread: pct(o.spread_pct) })}
+            </p>
+            <p className="mt-1 font-mono text-[12px] text-ink-2">{fill(t('pgOpusMethod'), { method })}</p>
             {scenarios.length > 0 && (
                 <table className="mt-2 font-mono text-[12px] text-ink-2">
                     <thead>
@@ -102,7 +101,16 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
                     </tbody>
                 </table>
             )}
-            {o.market_view && <p className="mt-2 text-[12px] text-ink-2">{fill(t('pgOpusView'), { view: o.market_view })}</p>}
+            {view ? (
+                <dl className="mt-2 text-[12px]">
+                    {view.map(([label, text]) => (
+                        <React.Fragment key={label}>
+                            <dt className="font-mono text-[11px] text-ink-3">{label}</dt>
+                            <dd className="mb-1 text-ink-2">{text}</dd>
+                        </React.Fragment>
+                    ))}
+                </dl>
+            ) : o.market_view && <p className="mt-2 text-[12px] text-ink-2">{fill(t('pgOpusView'), { view: o.market_view })}</p>}
             <p className={`mt-1 font-mono text-[11px] ${failed.length > 0 ? 'text-warn' : 'text-ink-3'}`}>
                 {failed.length > 0 ? fill(t('pgOpusChecksFailed'), { checks: failed.join(', ') }) : t('pgOpusChecksNone')}
             </p>
@@ -110,9 +118,10 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
                 <p className="font-mono text-[11px] text-ink-3">{fill(t('pgOpusChecksOther'), { checks: unread.join(', ') })}</p>
             )}
             {(o.data_flags ?? []).length > 0 && (
-                <p className="font-mono text-[11px] text-warn">{fill(t('pgOpusFlags'), { flags: o.data_flags.join(', ') })}</p>
+                <p className="font-mono text-[11px] text-warn">{fill(t('pgOpusFlags'), { flags: o.data_flags.map((f) => opusFlagText(t, f)).join(' · ') })}</p>
             )}
-            <p className="mt-1 text-[12px] text-ink-3">{t('pgOpusNote')}</p>
+            <p className="mt-1 text-[12px] text-ink-3">{fill(t('opPgNotSeen'), { date: o.price_date ?? DASH })}</p>
+            <p className="text-[12px] text-ink-3">{t('pgOpusNote')}</p>
         </section>
     );
 }

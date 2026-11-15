@@ -56,6 +56,32 @@ export function opusNoCallText(t: T, raw: string | null | undefined): string | n
     return out.join('; ');
 }
 
+const FLAG_KEY = {
+    wide_spread: 'opFlWide', buy_not_unanimous: 'opFlBuyNotAll', runs_differ: 'opFlRunsDiffer',
+    share_count_mismatch: 'opFlShares', minority_interest_material: 'opFlMinority', foreign_filer: 'opFlForeign',
+    trailing_stale_over_200d: 'opFlStale', reported_since_latest_filing: 'opFlReported',
+    balance_sheet_incomplete: 'opFlBalance', data_not_ok: 'opFlData', terminal_growth_capped: 'opFlGrowthCap',
+    value_floored_at_zero: 'opFlFloored', terminal_value_zero: 'opFlTvZero',
+    net_buybacks_dilution_floored_at_zero: 'opFlBuybacks', spread_undefined_zero_median: 'opFlSpreadUndef',
+    non_usd_unhandled: 'opFlNonUsd', entity_mismatch_suspected: 'opFlEntity',
+} as const;
+
+/** A data flag in plain words; an unknown code shows as it is. */
+export const opusFlagText = (t: T, code: string): string => (has(FLAG_KEY, code) ? t(FLAG_KEY[code]) : code);
+
+const VIEW_LABEL = {
+    price_implies: 'opMvPrice', where_i_differ: 'opMvDiffer', fair_price_requires: 'opMvFair', my_view: 'opMvMine',
+} as const;
+
+/** `market_view` split into its two labelled parts ("price_implies: … | where_i_differ: …", or the blind arm's
+ *  "fair_price_requires: … | my_view: …"); null when it does not have that form, and the caller shows it as it is. */
+export function opusMarketView(t: T, s: string): [string, string][] | null {
+    const m = /^\s*(price_implies|fair_price_requires)\s*:\s*([\s\S]*?)\s*\|\s*(where_i_differ|my_view)\s*:\s*([\s\S]*)$/.exec(s);
+    if (!m) return null;
+    const label = (k: string) => t(VIEW_LABEL[k as keyof typeof VIEW_LABEL]);
+    return [[label(m[1]), m[2]], [label(m[3]), m[4].trim()]];
+}
+
 /** The verdict chip's word and colour; an unknown verdict shows raw and muted. */
 export function opusChip(t: T, o: Pick<OpusVerdict, 'verdict'>): { text: string; color: string } {
     return has(OPUS_VERDICT_KEY, o.verdict)
