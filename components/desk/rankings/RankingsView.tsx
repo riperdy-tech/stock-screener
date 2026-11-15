@@ -8,8 +8,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { useLanguage } from '@/components/LanguageContext';
-import type { DepthVerdict, FactorScoresPayload, OpusVerdict, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
-import type { StockInfo } from '@/lib/desk/useDeskData';
+import type { DepthVerdict, FactorScoresPayload, OpusVerdict, OpusVerdictCode, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
+import type { DeskData, StockInfo } from '@/lib/desk/useDeskData';
 import { buildRows, sectorsOf } from '@/lib/desk/rankings';
 import { deskPhase } from '@/lib/desk/phase';
 import { deskSections, type DeskSections } from '@/lib/desk/sections';
@@ -57,7 +57,27 @@ function FilterSelect({ label, value, shown, options, onChange }: {
     );
 }
 
-export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers, qwen, opus }: {
+/** "Opus valued … · 11 BUY · …" from the file's own totals; each count sets the Opus filter. */
+function OpusSummary({ m, onPick }: { m: NonNullable<DeskData['opusMeta']>; onPick: (v: OpusVerdictCode) => void }) {
+    const { t } = useLanguage();
+    const vc: Partial<Record<OpusVerdictCode, number>> = m.verdict_counts ?? {};
+    const valued = vc.BUY != null && vc.WATCH != null && vc.AVOID != null ? vc.BUY + vc.WATCH + vc.AVOID : '—';
+    const pick = (k: OpusVerdictCode, key: 'opLineBuy' | 'opLineWatch' | 'opLineAvoid' | 'opLineNoCall') => (
+        <button type="button" onClick={() => onPick(k)} className="text-accent hover:text-ink">{fill(t(key), { n: vc[k] ?? '—' })}</button>
+    );
+    return (
+        <p className="mt-1 font-mono text-[11px] font-semibold text-ink-2">
+            {fill(t('opLine'), { v: valued, n: m.count ?? '—', d: m.generated_at ? m.generated_at.slice(0, 10) : '—' })}
+            {' · '}{pick('BUY', 'opLineBuy')}
+            {' · '}{pick('WATCH', 'opLineWatch')}
+            {' · '}{pick('AVOID', 'opLineAvoid')}
+            {' · '}{pick('NO_CALL', 'opLineNoCall')}
+            {' · '}{t('opLinePaper')}
+        </p>
+    );
+}
+
+export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers, qwen, opus, opusMeta }: {
     factor: FactorScoresPayload | null;
     depth: Record<string, DepthVerdict>;
     valuations: Record<string, ValuationModel>;
@@ -69,6 +89,8 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     qwen: Record<string, QwenOverlayRow>;
     /** opus_overlay.json tickers: the Opus valuation beside each list name (paper only). */
     opus: Record<string, OpusVerdict>;
+    /** The Opus file's own totals for the summary line; null when the file is absent. */
+    opusMeta: DeskData['opusMeta'];
 }) {
     const { t } = useLanguage();
     const params = useSearchParams();
@@ -136,6 +158,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                     {fill(t('dqLine'), { a: counts.verdicts, n: counts.list ?? '—', v: n, d: newest ? newest.slice(5, 10) : '—' })}
                 </p>
             )}
+            {opusMeta && <OpusSummary m={opusMeta} onPick={(v) => setFilter({ opus: v })} />}
 
             {/* b/c. Funnel and the selected step's panel */}
             <div className="mt-3">
