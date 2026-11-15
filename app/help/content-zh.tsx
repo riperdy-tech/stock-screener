@@ -565,7 +565,8 @@ export function ChineseHelpBody() {
                     </li>
                     <li>
                         <b>Gemini 帳本（暫行）</b>與<b>代碼基準（引擎 v2.1）</b> — 10 月起的對照帳本，僅限紙上。它們的選股在
-                        10 月中旬停止更新。
+                        10 月中旬停止更新。<b>Opus 帳本（模擬）</b>以等權重持有 Opus 估值運行（外部模型三次閱讀固定的申報文件，
+                        計算由代碼完成）的買進名單，僅限紙上，尚未以報酬評分。
                     </li>
                     <li>
                         <b>對照帳本</b> — 不含 AI，持有每一檔 Research now 的股票（<Term term="control-book" />），
