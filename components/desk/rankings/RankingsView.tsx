@@ -8,7 +8,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { useLanguage } from '@/components/LanguageContext';
-import type { DepthVerdict, FactorScoresPayload, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
+import type { DepthVerdict, FactorScoresPayload, OpusVerdict, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
 import type { StockInfo } from '@/lib/desk/useDeskData';
 import { buildRows, sectorsOf } from '@/lib/desk/rankings';
 import { deskPhase } from '@/lib/desk/phase';
@@ -56,7 +56,7 @@ function FilterSelect({ label, value, shown, options, onChange }: {
     );
 }
 
-export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers, qwen }: {
+export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers, qwen, opus }: {
     factor: FactorScoresPayload | null;
     depth: Record<string, DepthVerdict>;
     valuations: Record<string, ValuationModel>;
@@ -66,6 +66,8 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     ledgers: { ledgers?: { qwen_book?: { summary?: { open_positions?: number | null } } } } | null;
     /** qwen_overlay.json tickers: Qwen's analysis beside each list name (operator 2026-11-06). */
     qwen: Record<string, QwenOverlayRow>;
+    /** opus_overlay.json tickers: the Opus valuation beside each list name (paper only). */
+    opus: Record<string, OpusVerdict>;
 }) {
     const { t } = useLanguage();
     const params = useSearchParams();
@@ -92,8 +94,10 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const clearFilters = () => { setQ(''); write({ ...urlState, filters: NO_FILTERS }, 'push'); };
 
     const rows = useMemo(
-        () => buildRows({ factor, depth, valuations, overlay, stockInfo }).map((r) => (qwen[r.ticker] ? { ...r, qwen: qwen[r.ticker] } : r)),
-        [factor, depth, valuations, overlay, stockInfo, qwen],
+        () => buildRows({ factor, depth, valuations, overlay, stockInfo })
+            .map((r) => (qwen[r.ticker] ? { ...r, qwen: qwen[r.ticker] } : r))
+            .map((r) => (opus[r.ticker] ? { ...r, opus: opus[r.ticker] } : r)),
+        [factor, depth, valuations, overlay, stockInfo, qwen, opus],
     );
     const sectors = useMemo(() => sectorsOf(rows), [rows]);
     const qwenLive = Object.keys(qwen).length > 0;
