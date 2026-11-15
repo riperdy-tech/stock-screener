@@ -28,6 +28,9 @@ const CHECK = {
     reported_since_latest_filing: { bad: true, key: 'pgOpusCReported' },
 } as const;
 
+const RV_SOUND = { sound: 'opRvSound', partly_sound: 'opRvPartly', unsound: 'opRvUnsound' } as const;
+const RV_VIEW = { about_right: 'opRvAbout', too_low: 'opRvLow', too_high: 'opRvHigh', not_meaningful: 'opRvNoMeaning' } as const;
+
 const has = <T extends object>(m: T, k: string | null | undefined): k is Extract<keyof T, string> =>
     k != null && Object.prototype.hasOwnProperty.call(m, k);
 
@@ -60,6 +63,7 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
     const reason = o.verdict === 'NO_CALL' ? opusNoCallText(t, o.no_call_reason) : null;
     const gap = opusGap(o.value?.median, o.price);
     const view = o.market_view ? opusMarketView(t, o.market_view) : null;
+    const rv = o.review ?? null;
 
     return (
         <section className="mt-4 border-l-2 border-rule-14 px-4 py-3 text-[13px] leading-relaxed text-ink">
@@ -70,18 +74,43 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
                     <span className="text-ink-2">{fill(t('pgOpusNoCallWhy'), { reason: reason ?? DASH })}</span>
                 )}
             </div>
-            {o.deep && (
-                <p className={`mt-1 text-[12px] ${o.deep.downgraded ? 'text-warn' : 'text-ink-2'}`}>
-                    <b className="font-semibold">
-                        {fill(t(o.deep.downgraded ? 'opDeepDown' : 'opDeepKept'), {
-                            date: o.deep.checked_on,
-                            before: has(OPUS_VERDICT_KEY, o.deep.verdict_before) ? t(OPUS_VERDICT_KEY[o.deep.verdict_before]) : o.deep.verdict_before,
+            {rv && (
+                <div className="mt-1.5 text-[12px] text-ink-2">
+                    <p>
+                        <b className="font-semibold text-ink">{fill(t('opRvHead'), { date: rv.checked_on })}</b>{' '}
+                        {rv.change !== 'same' && (
+                            <span className={rv.change === 'raised' || rv.change === 'from_no_call' ? 'text-pos' : 'text-warn'}>
+                                {fill(t('opRvMoved'), { before: has(OPUS_VERDICT_KEY, rv.code_verdict) ? t(OPUS_VERDICT_KEY[rv.code_verdict]) : rv.code_verdict })}{' '}
+                            </span>
+                        )}
+                        {rv.one_line}
+                    </p>
+                    <p className="font-mono text-[11px] text-ink-3">
+                        {fill(t('opRvJudged'), {
+                            sound: has(RV_SOUND, rv.soundness) ? t(RV_SOUND[rv.soundness]) : rv.soundness,
+                            view: has(RV_VIEW, rv.value_view) ? t(RV_VIEW[rv.value_view]) : rv.value_view,
                         })}
-                    </b>{' '}{o.deep.note}
-                    {o.deep.source_url && (
-                        <>{' '}<a href={o.deep.source_url} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-ink">{t('opDeepSource')}</a></>
+                        {rv.fair_value_range && <>{' · '}{fill(t('opRvRange'), { low: money(rv.fair_value_range[0]), high: money(rv.fair_value_range[1]) })}</>}
+                    </p>
+                    {rv.reasons.length > 0 && (
+                        <ul className="mt-1 list-disc pl-4">
+                            {rv.reasons.map((r, i) => <li key={i}>{r}</li>)}
+                        </ul>
                     )}
-                </p>
+                    {rv.events.length > 0 && (
+                        <ul className="mt-1 font-mono text-[11px] text-ink-3">
+                            {rv.events.map((e, i) => (
+                                <li key={i}>
+                                    {e.date ?? DASH}{' · '}{e.fact ?? DASH}
+                                    {e.source_url && /^https?:\/\//.test(e.source_url) && (
+                                        <>{' '}<a href={e.source_url} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-ink">{t('opDeepSource')}</a></>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                    <p className="mt-1.5 font-mono text-[11px] text-ink-3">{t('opRvCode')}</p>
+                </div>
             )}
             <p className="mt-1.5 font-mono text-[13px] text-ink">
                 {fill(t('opPgHead'), { value: money(o.value?.median), price: money(o.price), date: o.price_date ?? DASH })}

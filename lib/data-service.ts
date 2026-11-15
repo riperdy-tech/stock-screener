@@ -624,10 +624,14 @@ export interface OpusVerdict {
     checks: Record<string, unknown>;
     data_flags: string[];
     captured_at: string | null;
-    /** The second read with news (plan step G), on BUY and WATCH names only: it may lower the verdict, never raise it. */
-    deep?: {
-        checked_on: string; verdict_before: string; verdict_after: string; downgraded: boolean;
-        note: string; source_url: string | null;
+    /** The reviewing analyst's read (spec v1.2): it judges whether the analysis is fair and sound and gives the verdict,
+     *  which may be above or below `code_verdict`, the verdict the simple rule gave from the code's value. */
+    review?: {
+        checked_on: string; code_verdict: string; verdict: string;
+        change: 'raised' | 'lowered' | 'same' | 'to_no_call' | 'from_no_call';
+        soundness: string; value_view: string; fair_value_range: [number, number] | null;
+        reasons: string[]; one_line: string;
+        events: { fact: string | null; date: string | null; source_url: string | null }[];
     } | null;
 }
 
