@@ -111,9 +111,12 @@ export function OpusPanel({ o }: { o: OpusVerdict }) {
                     ))}
                 </dl>
             ) : o.market_view && <p className="mt-2 text-[12px] text-ink-2">{fill(t('pgOpusView'), { view: o.market_view })}</p>}
-            <p className={`mt-1 font-mono text-[11px] ${failed.length > 0 ? 'text-warn' : 'text-ink-3'}`}>
-                {failed.length > 0 ? fill(t('pgOpusChecksFailed'), { checks: failed.join(', ') }) : t('pgOpusChecksNone')}
-            </p>
+            {/* A no-call with no checks on file says nothing about checks: "none failed" would be a claim the file does not make. */}
+            {o.checks != null && (
+                <p className={`mt-1 font-mono text-[11px] ${failed.length > 0 ? 'text-warn' : 'text-ink-3'}`}>
+                    {failed.length > 0 ? fill(t('pgOpusChecksFailed'), { checks: failed.join(', ') }) : t('pgOpusChecksNone')}
+                </p>
+            )}
             {unread.length > 0 && (
                 <p className="font-mono text-[11px] text-ink-3">{fill(t('pgOpusChecksOther'), { checks: unread.join(', ') })}</p>
             )}
