@@ -1,6 +1,6 @@
 'use client';
 
-// The paper books: Qwen book and Code book (monthly), the old AI book (rn_depth, stopped), the interim Gemini book (rn_gemini, when present), Equal + risk dial (equal_dial, paper only, when present), Control (equal) and My book. Returns come after the
+// The paper books: Qwen book and Code book (monthly), the old AI book (rn_depth, stopped), the interim Gemini book (rn_gemini, when present), the Opus book (rn_opus, when present), Equal + risk dial (equal_dial, paper only, when present), Control (equal) and My book. Returns come after the
 // scoreboard on purpose. CAGR and Sharpe stay hidden until a book has MIN_OBS_FOR_RATIOS observations.
 
 import React from 'react';
@@ -80,6 +80,7 @@ export function PaperBooks({ ledgers, loggedIn }: {
     const aiStats = bookStats(ai);
     const mine = bookStats(books.mine);
     const gemini = bookStats(books.rn_gemini);   // interim, paper-only Gemini book; absent until its first run
+    const opus = bookStats(books.rn_opus);       // paper-only Opus book (SPEC opus_v1); absent until its first run
     const v4 = bookStats(books.rn_v4);           // engine v2.1, paper-only, experimental and unpromoted (failed gate 2b); absent until its first run
     const dialBook = bookStats(books.equal_dial);   // paper only; absent until its first run
     const dial = dialNow(books.equal_dial);
@@ -89,7 +90,7 @@ export function PaperBooks({ ledgers, loggedIn }: {
 
     return (
         <TrackSection title={t('trkBooksTitle')}>
-            <div className={clsx('mt-5 grid grid-cols-1 gap-x-8 gap-y-8', (gemini || v4 || qwen || code || dialBook) ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3')}>
+            <div className={clsx('mt-5 grid grid-cols-1 gap-x-8 gap-y-8', (gemini || opus || v4 || qwen || code || dialBook) ? 'md:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3')}>
                 {qwen && (
                     <Column title={t('trkQwenBook')} note={t('trkQwenNote')} since={bookStart(books.qwen_book)}>
                         <StatGrid s={qwen} />
@@ -107,6 +108,11 @@ export function PaperBooks({ ledgers, loggedIn }: {
                 {gemini && (
                     <Column title={t('trkGeminiBook')} note={t('trkGeminiNote')} since={bookStart(books.rn_gemini)}>
                         <StatGrid s={gemini} />
+                    </Column>
+                )}
+                {opus && (
+                    <Column title={t('trkOpusBook')} note={t('trkOpusNote')} since={bookStart(books.rn_opus)}>
+                        <StatGrid s={opus} />
                     </Column>
                 )}
                 {v4 && (
