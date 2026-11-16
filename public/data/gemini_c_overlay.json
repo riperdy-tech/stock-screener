@@ -1,8 +1,8 @@
 {
- "count": 3,
+ "count": 4,
  "effort": "high",
- "generated_at": "2026-11-16T09:23:52Z",
- "model": "claude-opus-5-5",
+ "generated_at": "2026-11-16T09:27:44Z",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -108,13 +108,34 @@
    "valued": true,
    "verdict": "BUY",
    "verdict_reason": "price below the bear value"
+  },
+  "VLRS": {
+   "analysis": "complete",
+   "claims": 85,
+   "claims_supported": 82,
+   "date": "2026-11-16T09:15:10Z",
+   "family": "operating",
+   "flags": [
+    "Volaris and Viva entered into a Business Combination Agreement under which Viva will merge with and into Volaris as the surviving entity, with pre-Merger Viva and Volaris shareholders holding approximately 48% and 50% of the Combined Company's capital stock (and approximately 2% held in treasury), and both companies' shareholders have approved the transaction while required regulatory approvals remain pending.",
+    "At general ordinary and general extraordinary shareholders' meetings, Volaris shareholders approved the resignation of Andrew S. Broderick from the Board of Directors, the appointment of Barron E. Steele as a proprietary director effective until the Merger Agreement with Grupo Viva Aerob\u00fas is entered into, and the ratification of Brian H. Franke as Chairman and the Board's independent members on the same conditional term.",
+    "Through its subsidiary Volaris Opco, Volaris terminated its coalition agreement for the SpinPremia loyalty program with Lealtad Mercadotecnia y Conocimientos Agregados, S.A.P.I. de C.V., a subsidiary of FEMSA."
+   ],
+   "in_code_book": false,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
   }
  },
  "valued_count": 2,
  "verdict_counts": {
   "AVOID": 1,
   "BUY": 1,
-  "NO_CALL": 1,
+  "NO_CALL": 2,
   "WATCH": 0
  },
  "verdict_rule": "BUY: price below the bear value. WATCH: from the bear to the base value. AVOID: above the base value. NO_CALL: not valued."
