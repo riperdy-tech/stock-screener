@@ -1,11 +1,32 @@
 {
- "count": 6,
+ "count": 7,
  "effort": "high",
- "generated_at": "2026-11-16T09:40:09Z",
- "model": "gemini-4-hydrogen-high",
+ "generated_at": "2026-11-16T09:41:17Z",
+ "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
+  "DAO": {
+   "analysis": "complete",
+   "claims": 102,
+   "claims_supported": 99,
+   "date": "2026-11-16T09:34:04Z",
+   "family": "operating",
+   "flags": [
+    "Youdao and NetEase Group have both approved extending the maturity of the NetEase revolving loan Facility, including loans already drawn under it, to March 31, 2030.",
+    "The Group repaid US$15.0 million under the NetEase Facility up to March 31, 2026.",
+    "Youdao ceased its Academic AST Business to comply with PRC regulatory requirements; that business accounted for approximately 25.0% of 2021 net revenues."
+   ],
+   "in_code_book": false,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "debt_unavailable",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "debt_unavailable"
+  },
   "MRP": {
    "analysis": "complete",
    "claims": 93,
@@ -197,7 +218,7 @@
  "verdict_counts": {
   "AVOID": 2,
   "BUY": 1,
-  "NO_CALL": 3,
+  "NO_CALL": 4,
   "WATCH": 0
  },
  "verdict_rule": "BUY: price below the bear value. WATCH: from the bear to the base value. AVOID: above the base value. NO_CALL: not valued."
