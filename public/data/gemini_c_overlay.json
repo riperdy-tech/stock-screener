@@ -1,7 +1,7 @@
 {
- "count": 52,
+ "count": 53,
  "effort": "high",
- "generated_at": "2026-11-16T16:45:07Z",
+ "generated_at": "2026-11-16T16:56:08Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1193,6 +1193,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
+  "PRCH": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 96,
+   "claims_supported": 88,
+   "date": "2026-11-16T16:45:19Z",
+   "family": "operating",
+   "flags": [
+    "Homeowners of America Holding Corporation and Porch Insurance Reciprocal Exchange entered into a definitive Purchase Agreement to acquire Allied Trust Insurance Company, Allied Underwriters LLC, and Lonestar Lagniappe Reinsurance Holdings, LLC, with up to $20.0 million at closing and up to $50.0 million in deferred payments optionally payable in Porch common stock.",
+    "Porch and the Reciprocal entered into an at-the-market Distribution Agreement with StoneX Financial Inc. under which the Reciprocal may sell up to 10 million existing shares and Porch may issue and sell up to 5 million shares at a 1.5% sales commission, pursuant to a registration statement filed the same day.",
+    "Porch formed Porch Reciprocal Exchange and sold its legacy homeowners insurance carrier, Homeowners of America, to the Reciprocal for approximately $105 million less $58 million of prior surplus note obligations, financed by a surplus note bringing total surplus notes held by Porch to approximately $106 million, alongside the transfer of 18.3 million Porch shares."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "no usable tax rate in the filings",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no usable tax rate in the filings"
+  },
   "RHLD": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -1637,7 +1660,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 8,
-  "NO_CALL": 29,
+  "NO_CALL": 30,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
