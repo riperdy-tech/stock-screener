@@ -1,7 +1,7 @@
 {
- "count": 31,
+ "count": 32,
  "effort": "high",
- "generated_at": "2026-11-16T13:25:25Z",
+ "generated_at": "2026-11-16T13:33:39Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -71,6 +71,49 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
+  "BTSG": {
+   "alpha_pts": -56.25086969958313,
+   "analysis": "complete",
+   "claims": 105,
+   "claims_supported": 104,
+   "date": "2026-11-16T13:25:46Z",
+   "equity_value": 1703921198.1808538,
+   "family": "operating",
+   "far_from_price": true,
+   "filed_shares": 219774000.0,
+   "flags": [
+    "BrightSpring completed the divestiture of its Community Living business on March 30, 2026. The business had been sold under a January 17, 2025 agreement for $835 million, subject to adjustments. The 2026 cash flow statement shows proceeds from the sale of discontinued operations of 810,908 and a gain on the sale of 101,845 (table in thousands).",
+    "On October 30, 2026 the company reported third quarter 2026 results and raised its full year 2026 Revenue and Adjusted EBITDA guidance. This included Pharmacy Segment Revenue of $14,000 million to $14,200 million.",
+    "During the nine months ended September 30, 2026 the company repaid long-term debt of (332,300) (table in thousands). Reported leverage fell to 1.79x at September 30, 2026 from 2.15x at June 30, 2026."
+   ],
+   "in_code_book": false,
+   "ke": 0.08358973472633485,
+   "market_cap_at_publish": 14169694026,
+   "model": "claude-opus-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 71.21,
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "seed_base": {
+    "1000": 7.7530608633453175,
+    "3000": 7.7530608633453175
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": -0.8797489067121473,
+   "value_base": 7.7530608633453175,
+   "value_bear": 7.149087270746866,
+   "value_bull": 9.020193255597857,
+   "value_per_filed_share": {
+    "base": 7.7530608633453175,
+    "bear": 7.149087270746866,
+    "bull": 9.020193255597857
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -56.3 points a year against the required return over 3 years"
   },
   "BWLP": {
    "alpha_pts": null,
@@ -1040,9 +1083,9 @@
    "verdict_reason": "expected return +52.9 points a year against the required return over 3 years"
   }
  },
- "valued_count": 16,
+ "valued_count": 17,
  "verdict_counts": {
-  "AVOID": 10,
+  "AVOID": 11,
   "BUY": 4,
   "NO_CALL": 15,
   "WATCH": 2
