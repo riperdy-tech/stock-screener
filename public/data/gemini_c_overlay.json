@@ -1,11 +1,52 @@
 {
- "count": 36,
+ "count": 52,
  "effort": "high",
- "generated_at": "2026-11-16T14:25:45Z",
+ "generated_at": "2026-11-16T16:45:07Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
+  "ADT": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 86,
+   "claims_supported": 77,
+   "date": "2026-11-16T15:09:32Z",
+   "family": "operating",
+   "flags": [
+    "ADT entered into a definitive Merger Agreement to be acquired by Thrive Holdings (through Abode Parent, LLC and Abode Merger Sub, Inc.) in an all-cash transaction for $10.00 per share, valuing ADT at approximately $7.6 billion in equity value and $15.3 billion in enterprise value, after which ADT will become privately held and delisted from the New York Stock Exchange.",
+    "In consideration of the pending acquisition by Thrive Holdings, ADT stated it is not providing financial guidance and withdrew previously issued guidance.",
+    "ADT acquired Origin Wireless, Inc. (Origin AI), a provider of AI-enabled presence detection and ambient sensing technology, for $170 million in cash, making Origin AI an indirect wholly owned subsidiary."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "diluted share count not filed",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "diluted share count not filed"
+  },
+  "AII": {
+   "alpha_pts": null,
+   "analysis": "not run",
+   "claims": null,
+   "claims_supported": null,
+   "date": "2026-11-16T14:38:23Z",
+   "family": null,
+   "flags": [],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/2007587/000200758726000136/R4.htm",
+   "qwen_book": null,
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/2007587/000200758726000136/R4.htm"
+  },
   "AMD": {
    "alpha_pts": -66.96262806721846,
    "analysis": "complete",
@@ -48,6 +89,70 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -67.0 points a year against the required return over 3 years"
+  },
+  "APA": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 103,
+   "claims_supported": 94,
+   "date": "2026-11-16T14:26:00Z",
+   "family": "commodity",
+   "flags": [
+    "APA completed its acquisition of Callon Petroleum Company in an all-stock transaction valued at approximately $4.5 billion, inclusive of Callon's debt, acquiring approximately 120,000 net acres in the Delaware Basin and 25,000 net acres in the Midland Basin.",
+    "APA recorded $1.1 billion of impairments, comprising $796 million of oil and gas property impairments in the North Sea following new regulatory guidelines and obligations in the U.K., a $315 million impairment of U.S. oil and gas properties held-for-sale, and $18 million of inventory impairments.",
+    "APA recorded $44 million of impairments, including $18 million of non-operated proved oil and gas property in Egypt, approximately $18 million related to the sale of a U.S. office building, $1 million for GPT facilities in Egypt, and $7 million of inventory impairments in the North Sea."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
+  "BCRX": {
+   "alpha_pts": null,
+   "analysis": "not run",
+   "claims": null,
+   "claims_supported": null,
+   "date": "2026-11-16T15:22:03Z",
+   "family": null,
+   "flags": [],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/882796/000117184326007097/0001171843-26-007097.txt",
+   "qwen_book": null,
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/882796/000117184326007097/0001171843-26-007097.txt"
+  },
+  "BHC": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 113,
+   "claims_supported": 105,
+   "date": "2026-11-16T16:04:02Z",
+   "family": "operating",
+   "flags": [
+    "Bausch Health recorded 1,426 (table in millions, USD) in goodwill impairments during the nine months ended Sep. 30, 2026.",
+    "Bausch Health announced a plan to separate its Bausch + Lomb eye health business into an independent publicly traded entity, and completion remains subject to targeted debt leverage ratios and required approvals.",
+    "A wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb in an initial public offering, and Bausch Health indirectly holds 310,449,643 common shares representing approximately 87% of Bausch + Lomb's outstanding common shares as of October 21, 2026."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "no usable tax rate in the filings",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no usable tax rate in the filings"
   },
   "BTG": {
    "alpha_pts": null,
@@ -161,6 +266,49 @@
    "verdict": "NO_CALL",
    "verdict_reason": "implied borrowing cost outside the allowed range"
   },
+  "CF": {
+   "alpha_pts": 11.589582569777,
+   "analysis": "complete",
+   "claims": 96,
+   "claims_supported": 95,
+   "date": "2026-11-16T16:17:26Z",
+   "equity_value": 27621732088.65345,
+   "family": "commodity",
+   "far_from_price": false,
+   "filed_shares": 162200000.0,
+   "flags": [
+    "Vice President and Corporate Controller and Chief Accounting Officer Richard A. Hoker informed the Company of his intention to retire effective as of March 3, 2027.",
+    "The Company formed the Blue Point One joint venture, Blue Point Number One, LLC, with JERA (35% ownership) and Mitsui (25% ownership), holding 40% ownership, to construct a low-carbon ammonia production facility estimated to cost approximately $3.7 billion.",
+    "The Blue Point One joint venture executed agreements, including a long-term supply agreement, with a subsidiary of Linde plc to design, construct, own, operate and maintain an air separation unit at the Blue Point complex."
+   ],
+   "in_code_book": false,
+   "ke": 0.09359484864903855,
+   "market_cap_at_publish": 18298779112,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": null,
+   "price_at_publish": 125.09,
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "seed_base": {
+    "1000": 170.29427921487948,
+    "3000": 170.29427921487948
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": 0.5094849727181869,
+   "value_base": 170.29427921487948,
+   "value_bear": 154.00799193782464,
+   "value_bull": 182.29764323785074,
+   "value_per_filed_share": {
+    "base": 170.29427921487948,
+    "bear": 154.00799193782464,
+    "bull": 182.29764323785074
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +11.6 points a year against the required return over 3 years"
+  },
   "CMRE": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -270,6 +418,49 @@
    "verdict": "AVOID",
    "verdict_reason": "expected return -29.7 points a year against the required return over 3 years"
   },
+  "CRTO": {
+   "alpha_pts": -2.7695609637328005,
+   "analysis": "complete",
+   "claims": 92,
+   "claims_supported": 87,
+   "date": "2026-11-16T14:38:52Z",
+   "equity_value": 916198148.235174,
+   "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 54792540.0,
+   "flags": [
+    "Criteo announced a cross-border conversion to transfer its legal domicile from France to Luxembourg and replace its American Depositary Shares with ordinary shares directly listed on Nasdaq, and subsequently existed under Luxembourg law with Ordinary Shares listed on Nasdaq.",
+    "Lux Criteo entered into a Merger Agreement and Common Draft Terms of Cross-Border Merger with its wholly owned Delaware subsidiary U.S. Criteo to transfer its legal domicile to the United States, filed a registration statement, and intends to list common stock on the NYSE under the ticker CRTO.",
+    "Criteo's largest customer, which accounted for 5% of total revenue in 2025, notified the company that it would curtail the scope of future services commencing on that date."
+   ],
+   "in_code_book": false,
+   "ke": 0.09826177079828693,
+   "market_cap_at_publish": 887336418,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": null,
+   "price_at_publish": 18.03,
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "seed_base": {
+    "1000": 16.721220593810287,
+    "3000": 15.3812730087874
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": 0.03252625458586089,
+   "value_base": 16.721220593810287,
+   "value_bear": 14.149939190969992,
+   "value_bull": 19.20795671963356,
+   "value_per_filed_share": {
+    "base": 16.721220593810287,
+    "bear": 14.149939190969992,
+    "bull": 19.20795671963356
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -2.8 points a year against the required return over 3 years"
+  },
   "DAO": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -292,6 +483,24 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "debt_unavailable"
+  },
+  "DXC": {
+   "alpha_pts": null,
+   "analysis": "not run",
+   "claims": null,
+   "claims_supported": null,
+   "date": "2026-11-16T15:09:00Z",
+   "family": null,
+   "flags": [],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1688568/000168856826000089/0001688568-26-000089.txt",
+   "qwen_book": null,
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1688568/000168856826000089/0001688568-26-000089.txt"
   },
   "ESEA": {
    "alpha_pts": null,
@@ -338,6 +547,49 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "implied borrowing cost outside the allowed range"
+  },
+  "FLXS": {
+   "alpha_pts": -11.919218479067109,
+   "analysis": "complete",
+   "claims": 90,
+   "claims_supported": 85,
+   "date": "2026-11-16T15:22:56Z",
+   "equity_value": 290700006.08912635,
+   "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 5456000.0,
+   "flags": [
+    "During the quarter ended March 31, 2025, Flexsteel recorded a pre-tax non-cash asset impairment charge of $14.1 million on the right-of-use asset for its leased Mexicali, Mexico facility.",
+    "On July 31, 2025, a U.S. presidential executive order increased the country-specific tariff under IEEPA on goods imported from Vietnam from 10% to 20%, affecting Flexsteel's seating and case goods sourced from Vietnam.",
+    "Beginning in October 2025, substantially all seating products Flexsteel sources from Vietnam and manufactures in Mexico became subject to a 25% tariff under Section 232, superseding the previously applicable IEEPA tariffs."
+   ],
+   "in_code_book": false,
+   "ke": 0.10561377144436315,
+   "market_cap_at_publish": 311440456,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": null,
+   "price_at_publish": 74.83,
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "seed_base": {
+    "1000": 48.32130690953788,
+    "3000": 53.280792904898526
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": -0.0665952335713047,
+   "value_base": 53.280792904898526,
+   "value_bear": 48.28522989899309,
+   "value_bull": 57.728641021472576,
+   "value_per_filed_share": {
+    "base": 53.280792904898526,
+    "bear": 48.28522989899309,
+    "bull": 57.728641021472576
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -11.9 points a year against the required return over 3 years"
   },
   "GASS": {
    "alpha_pts": 45.11455968234577,
@@ -471,6 +723,49 @@
    "verdict": "NO_CALL",
    "verdict_reason": "the latest annual report's figures are not in SEC's company facts yet"
   },
+  "HCI": {
+   "alpha_pts": 35.15276995608217,
+   "analysis": "complete",
+   "claims": 99,
+   "claims_supported": 96,
+   "date": "2026-11-16T15:49:41Z",
+   "equity_value": 5687393357.161284,
+   "family": "financial",
+   "far_from_price": true,
+   "filed_shares": 12878000.0,
+   "flags": [
+    "Hurricane Isaias made landfall in Florida near Destin, resulting in an estimated consolidated pre-tax net loss of approximately $15.0 million.",
+    "HCI Group completed its share repurchase program, repurchasing 504,330 shares of common stock for $80 million.",
+    "HCI Group\u2019s new catastrophe reinsurance programs took effect, reducing ceded reinsurance costs."
+   ],
+   "in_code_book": false,
+   "ke": 0.0934350225480369,
+   "market_cap_at_publish": 2378859459,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": null,
+   "price_at_publish": 191.37,
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "seed_base": {
+    "1000": 399.42083907113283,
+    "3000": 441.6363843113282
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": 1.390806794257653,
+   "value_base": 441.6363843113282,
+   "value_bear": 426.8058764682469,
+   "value_bull": 456.46689215440955,
+   "value_per_filed_share": {
+    "base": 441.6363843113282,
+    "bear": 426.8058764682469,
+    "bull": 456.46689215440955
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +35.2 points a year against the required return over 3 years"
+  },
   "HG": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -493,6 +788,42 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "net income basis does not reconcile with filed EPS"
+  },
+  "HOG": {
+   "alpha_pts": null,
+   "analysis": "not run",
+   "claims": null,
+   "claims_supported": null,
+   "date": "2026-11-16T15:37:52Z",
+   "family": null,
+   "flags": [],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/793952/000079395226000065/0000793952-26-000065.txt",
+   "qwen_book": null,
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/793952/000079395226000065/0000793952-26-000065.txt"
+  },
+  "HRTG": {
+   "alpha_pts": null,
+   "analysis": "not run",
+   "claims": null,
+   "claims_supported": null,
+   "date": "2026-11-16T15:21:38Z",
+   "family": null,
+   "flags": [],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1598665/000119312526451363/R4.htm",
+   "qwen_book": null,
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1598665/000119312526451363/R4.htm"
   },
   "IHS": {
    "alpha_pts": 45.63351928090727,
@@ -579,6 +910,24 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -29.6 points a year against the required return over 3 years"
+  },
+  "JCAP": {
+   "alpha_pts": null,
+   "analysis": "not run",
+   "claims": null,
+   "claims_supported": null,
+   "date": "2026-11-16T15:07:32Z",
+   "family": null,
+   "flags": [],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/2046042/000110465926099334/0001104659-26-099334.txt",
+   "qwen_book": null,
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/2046042/000110465926099334/0001104659-26-099334.txt"
   },
   "KFY": {
    "alpha_pts": 7.382475947065897,
@@ -844,6 +1193,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
+  "RHLD": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 84,
+   "claims_supported": 74,
+   "date": "2026-11-16T15:38:36Z",
+   "family": "financial",
+   "flags": [
+    "Resolute Holdings was originally formed as a Delaware corporation.",
+    "GPGI Holdings' previously outstanding Exchangeable Notes were exchanged for shares of GPGI Class A common stock and extinguished.",
+    "GPGI completed the Spin-Off by distributing all shares of Resolute Holdings common stock on a pro rata basis to holders of GPGI Class A Common Stock of record, and Resolute Holdings began regular-way trading on The Nasdaq Stock Market LLC under the ticker RHLD."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
   "SEZL": {
    "alpha_pts": -20.53190311237114,
    "analysis": "complete",
@@ -886,6 +1258,29 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -20.5 points a year against the required return over 3 years"
+  },
+  "SGU": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 91,
+   "claims_supported": 89,
+   "date": "2026-11-16T16:32:52Z",
+   "family": "operating",
+   "flags": [
+    "On October 15, 2026, Star Group, L.P. declared a quarterly distribution of $0.1975 per common unit for the fiscal fourth quarter ended September 30, 2026, with a record date of October 26, 2026 and a payment date of November 4, 2026.",
+    "On Aug. 05, 2026, Star filed its Form 10-Q and announced fiscal 2026 third quarter results reporting total revenue of $358.1 million, a 17.2 percent year-over-year increase, and a net loss of $28.0 million.",
+    "On February 28, 2026, the United States launched a joint military operation with Israel against Iran, after which NYMEX home heating oil costs rose from $2.67 per gallon on February 27, 2026 to a peak of $4.61 on March 20, 2026, increasing Star's hedging costs and seasonal net working capital needs."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "debt is filed but interest expense is not",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "debt is filed but interest expense is not"
   },
   "SLDE": {
    "alpha_pts": null,
@@ -952,6 +1347,29 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -28.1 points a year against the required return over 3 years"
+  },
+  "STRW": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 97,
+   "claims_supported": 95,
+   "date": "2026-11-16T14:55:21Z",
+   "family": "family_not_built",
+   "flags": [
+    "The Company closed on its Corporate Credit Facility with availability up to $300 million, comprising a $100 million term loan and a $200 million revolving line of credit, and used proceeds to refinance existing secured bank debt.",
+    "The Company retired Bond Series A, Bond Series C, and Bond Series D, recording (189,245) (table in thousands) in bond retirement cash outflows and recognizing a $24.6 million foreign currency transaction loss.",
+    "Following an earlier purchase contract, the Company completed the acquisition of a hospital campus near Kansas City, Missouri for $10.4 million funded from the balance sheet, adding it to an existing master lease at initial annual base rents of $1.04 million."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "STT": {
    "alpha_pts": null,
@@ -1215,11 +1633,11 @@
    "verdict_reason": "expected return +52.9 points a year against the required return over 3 years"
   }
  },
- "valued_count": 19,
+ "valued_count": 23,
  "verdict_counts": {
-  "AVOID": 11,
-  "BUY": 6,
-  "NO_CALL": 17,
+  "AVOID": 13,
+  "BUY": 8,
+  "NO_CALL": 29,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
