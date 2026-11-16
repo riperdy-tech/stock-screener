@@ -1,7 +1,7 @@
 {
- "count": 7,
+ "count": 8,
  "effort": "high",
- "generated_at": "2026-11-16T09:41:17Z",
+ "generated_at": "2026-11-16T09:52:11Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -26,6 +26,47 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "debt_unavailable"
+  },
+  "GEO": {
+   "analysis": "complete",
+   "claims": 146,
+   "claims_supported": 141,
+   "date": "2026-11-16T09:41:45Z",
+   "equity_value": 3996094098.556896,
+   "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 139723000.0,
+   "flags": [
+    "GEO sold its Adelanto Complex in Adelanto, California to the United States, through the Department of Homeland Security, for an aggregate purchase price of $950,000,000. The sale closed at signing, and GEO anticipates approximately $705 million in net proceeds.",
+    "The Board approved an increase in the share repurchase authorization from $500 million to $1.25 billion, effective through December 31, 2029.",
+    "GEO entered into an Amended and Restated Credit Agreement. It keeps revolving commitments at $550.0 million, extends revolver maturity to July 14, 2031, and raises the Incremental Amount to $750.0 million."
+   ],
+   "in_code_book": false,
+   "market_cap_at_publish": 4281584735,
+   "model": "claude-opus-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 32.53,
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "seed_base": {
+    "1000": 28.825777224915075,
+    "3000": 28.600116649062045
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": -0.06667873091693088,
+   "value_base": 28.600116649062045,
+   "value_bear": 28.269377591014127,
+   "value_bull": 29.253592495455266,
+   "value_per_filed_share": {
+    "base": 28.600116649062045,
+    "bear": 28.269377591014127,
+    "bull": 29.253592495455266
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "price above the base value"
   },
   "MRP": {
    "analysis": "complete",
@@ -214,9 +255,9 @@
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
   }
  },
- "valued_count": 3,
+ "valued_count": 4,
  "verdict_counts": {
-  "AVOID": 2,
+  "AVOID": 3,
   "BUY": 1,
   "NO_CALL": 4,
   "WATCH": 0
