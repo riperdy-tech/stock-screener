@@ -1,0 +1,1774 @@
+{
+ "alpha_pts": -66.96262806721846,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 131,
+ "claims_supported": 126,
+ "date": "2026-11-16T10:48:47Z",
+ "equity_value": 55319077165.47369,
+ "family": "operating",
+ "far_from_price": true,
+ "filed_shares": 1636000000.0,
+ "flags": [
+  "AMD closed a public offering of $4.75 billion of senior notes in four tranches, and long-term debt, net rose to 7,079 from 2,348 (table in millions) between Dec. 27, 2025 and Sep. 26, 2026.",
+  "AMD repaid in full the $875 million of its 4.212% Senior Notes at maturity.",
+  "AMD entered into definitive agreements to acquire Taalas Inc. and World Labs Technologies, Inc.; closing is expected in the fourth fiscal quarter, subject to approvals."
+ ],
+ "in_code_book": false,
+ "ke": 0.11114375453902048,
+ "market_cap_at_publish": 875905019996,
+ "model": "claude-opus-5-5",
+ "no_value_reason": null,
+ "price_at_publish": 534.06,
+ "qwen_book": null,
+ "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+ "seed_base": {
+  "1000": 33.81361684931154,
+  "3000": 33.81361684931154
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in the 10-K Item 1 and the 10-Q MD&A",
+    "claim": "AMD sells semiconductors (AI accelerators, CPUs, GPUs, APUs, DPUs, AI NICs, FPGAs, adaptive SoCs, semi-custom SoCs) and reports three segments: Data Center, Client and Gaming, and Embedded.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "Our three reportable segments are:",
+     "the Data Center segment, which primarily includes AI accelerators, CPUs for servers, GPUs, APUs, DPUs, AI NICs, FPGAs and SoC products for data centers"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Item 1",
+    "claim": "Besides product sales, AMD may sell or license parts of its IP portfolio, and an All Other category sits outside the reportable segments.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "From time to time, the Company may also sell or license portions of its IP portfolio.",
+     "In addition to these reportable segments, we have an All Other category, which is not a reportable segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q segment table and MD&A",
+    "claim": "Data Center is the largest segment: Q3 2026 net revenue of $8,546 versus $4,341 a year earlier, and nine-month revenue of $21,039 out of a $35,166 total (table in millions).",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "The increase in both periods was primarily driven by strong demand for our AMD EPYC processors and AMD Instinct GPUs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A and the Q3 2026 earnings slides",
+    "claim": "Data Center customers named in the filings include large hyperscalers, OEMs and ODMs. The Q3 2026 slides name Anthropic, Meta, Microsoft, OpenAI and Oracle Cloud Infrastructure as running workloads on Helios rack-scale solutions.",
+    "facts": [
+     "P3",
+     "P7"
+    ],
+    "quotes": [
+     "Demand for our data center AI GPU products was strong as large hyperscale customers, OEMs and ODMs deployed our AMD Instinct MI350X Series GPUs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A and the 10-Q cash flow statement",
+    "claim": "AMD signed a product purchase agreement for OpenAI to deploy 6 gigawatts of AMD GPUs. It issued OpenAI a warrant for up to 160 million shares that vests on purchase milestones, and the warrant produced a non-cash impact of 1,179 (table in millions) in the nine months of 2026.",
+    "facts": [
+     "P3",
+     "F3"
+    ],
+    "quotes": [
+     "In October 2025, we entered into a product purchase agreement with OpenAI OpCo, LLC, (OpenAI) to deploy 6 gigawatts of AMD GPUs, with the deployment of the first gigawatt of capacity powered by our AMD Instinct MI450 series products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Item 1 and the 10-Q segment table",
+    "claim": "Client revenue comes from Ryzen CPUs and APUs for PCs, sold mainly through OEMs and distributors. Q3 2026 Client revenue was 2,949 versus 2,750 a year earlier (table in millions).",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "The Client market encompasses the global personal computing ecosystem, including desktop and notebook PCs sold primarily through OEMs, distributors and select direct customers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K/A explanatory note",
+    "claim": "2025 Client revenue growth was driven by a 15% rise in processor unit shipments and a 31% rise in processor ASP, according to the corrected 10-K/A. The original 10-K had transposed these two figures.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "primarily driven by a 15% increase in unit shipments of processors and a 31% increase in average selling price of processors"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the Q3 2026 release and the 10-K risk factors",
+    "claim": "Gaming revenue depends on semi-custom console SoCs and Radeon GPUs. Q3 2026 Gaming revenue was $773 million, down 40% year-over-year.",
+    "facts": [
+     "P7",
+     "P2"
+    ],
+    "quotes": [
+     "Gaming business revenue was $773 million, down 40% year-over-year, due to lower semi-custom and graphics revenue.",
+     "The success of our semi-custom SoC products in our Client and Gaming segment is dependent on securing customers for our semi-custom design pipeline and consumer market conditions, including the success of game console systems and next generation consoles for Sony and Microsoft."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the Q3 2026 release",
+    "claim": "Embedded sells CPUs, APUs, FPGAs, SOMs and adaptive SoCs to end markets such as aerospace and defense, automotive, communications and industrial. Q3 2026 Embedded revenue was $1.1 billion, up 29%.",
+    "facts": [
+     "P7",
+     "P1"
+    ],
+    "quotes": [
+     "Embedded segment revenue was $1.1 billion, up 29% year-over-year, led by growth in aerospace and defense, automotive, communications and industrial end markets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors",
+    "claim": "Revenue is concentrated in a small number of customers.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We depend on a small number of customers for a substantial portion of our business and we expect that a small number of customers will continue to account for a significant part of our revenue and receivables in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A",
+    "claim": "Most revenue is international: international sales were 67% of net revenue in 2025 and 66% in 2024.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "International sales as a percentage of net revenue were 67% in 2025 and 66% in 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors",
+    "claim": "AMD is fabless. Third-party foundries make all of its wafers, and TSMC produces all wafers at 7 nm or smaller.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We utilize third-party wafer foundries to fabricate the silicon wafers for all of our products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "Product mix drives gross margin. Q3 2026 gross margin was 54% versus 52%, helped by higher Data Center revenue.",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "Gross margin for the three months ended September 26, 2026 was 54% compared to gross margin of 52% for the prior year period, a 2 percentage point increase primarily driven by a favorable product mix, including higher Data Center segment revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors",
+    "claim": "Memory prices are a cost driver; the 10-K reports an industry-wide memory shortage that has raised memory prices.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For example, there is currently an industry-wide memory shortage as the demand for such components has outpaced supply."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q income statement and the 10-K MD&A",
+    "claim": "R&D is the largest operating expense and is rising: Q3 2026 R&D was 2,803 versus 2,139 a year earlier (table in millions). The 10-K attributes R&D growth to AI-related headcount.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "The increase was primarily due to higher employee-related costs from an increase in headcount in support of our continued focus on our AI strategy."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q income statement, segment table and release footnote",
+    "claim": "Acquisition-related amortization is a recurring cost recorded outside the segments: Q3 2026 showed 257 in cost of sales and 277 in operating expenses (table in millions), and the All Other loss was (1,076).",
+    "facts": [
+     "F2",
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "All Other category primarily includes certain expenses and credits that are not allocated to any of the operating segments, such as amortization of acquisition-related intangibles, employee stock-based compensation expense, and acquisition-related and other costs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A",
+    "claim": "Export controls affect both revenue and costs: AMD recorded about $800 million of MI308 inventory and related charges in Q2 2025 because of US export restrictions on China.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "During the second quarter of fiscal year 2025, the Company recorded approximately $800 million of inventory and related charges on AMD Instinct MI308 Data Center GPU products due to new U.S. export restrictions on certain semiconductors to China."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "AMD also commits to buy GPU cloud compute capacity from CSPs, which it may place with or assign to third parties. This creates obligations beyond direct chip sales.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Under our cloud compute capacity arrangements, we have committed, and expect to continue to commit in the future, to purchase GPU compute capacity from cloud service providers (CSPs) either to the extent it is not successfully placed with third-party customers, or for capacity we reserved and may sell or assign to third parties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A",
+    "claim": "Revenue is seasonal and has historically been higher in the second half of the year.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Historically, our net revenue has been generally higher in the second half of the year than in the first half of the year, although market conditions and product transitions could impact these trends."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in P4",
+    "claim": "Data Center net revenue was $8.5 billion in the quarter ended September 26, 2026, up 97% from $4.3 billion a year earlier.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Data Center net revenue of $8.5 billion for the three months ended September 26, 2026 increased by 97%, compared to net revenue of $4.3 billion for the prior year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Data Center operating income was $2.9 billion in the quarter, compared with $1.1 billion a year earlier.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Data Center operating income was $2.9 billion for the three months ended September 26, 2026, compared to operating income of $1.1 billion for the prior year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Gross margin rose to 54% from 52%, which the company attributes to product mix, including higher Data Center revenue.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Gross margin for the three months ended September 26, 2026 was 54% compared to gross margin of 52% for the prior year period, a 2 percentage point increase primarily driven by a favorable product mix, including higher Data Center segment revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7 (earnings slides)",
+    "claim": "The company names several large AI developers and cloud providers as running workloads on its first Helios rack-scale solutions.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Anthropic, Meta, Microsoft, OpenAI and Oracle Cloud Infrastructure are running models and workloads on the first AMD Helios rackscale solutions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 and P1",
+    "claim": "AMD has a multiyear product purchase agreement with OpenAI to deploy 6 gigawatts of AMD GPUs, starting with MI450 series products.",
+    "facts": [
+     "P3",
+     "P1"
+    ],
+    "quotes": [
+     "In October 2025, we entered into a product purchase agreement with OpenAI OpCo, LLC, (OpenAI) to deploy 6 gigawatts of AMD GPUs, with the deployment of the first gigawatt of capacity powered by our AMD Instinct MI450 series products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "The OpenAI deal included a warrant for up to 160 million AMD shares at $0.01 per share, vesting on GPU purchase milestones and stock price targets.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Concurrent with the agreement, we issued to OpenAI a warrant to purchase up to an aggregate of 160 million shares of AMD\u2019s common stock at an exercise price of $0.01 per share."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3; the link to the competitive arrangements is inferred from P3 and P4",
+    "claim": "The nine-month 2026 cash flow statement shows a non-cash impact of warrants issued to customers of 1,179 (table in millions), against 0 a year earlier.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Non-cash impact of warrants issued to customers, net | 1,179 | 0"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P7",
+    "claim": "Client business revenue was $2.9 billion, up 7%, driven by Ryzen mobile processors.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Client business revenue was $2.9 billion, up 7% year-over-year, driven by sales of AMD Ryzen\u2122 mobile processors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "The corrected 2025 disclosure attributes Client revenue growth of 51% to a 15% increase in processor units and a 31% increase in processor average selling price.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Client net revenue of $10.6 billion in 2025 increased by 51%, compared to net revenue of $7.1 billion in 2024, primarily driven by a 15% increase in unit shipments of processors and a 31% increase in average selling price of processors, reflecting strong demand for AMD desktop and mobile Ryzen processors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7",
+    "claim": "Gaming revenue fell to $773 million, down 40%, on lower semi-custom and graphics revenue.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Gaming business revenue was $773 million, down 40% year-over-year, due to lower semi-custom and graphics revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7",
+    "claim": "Embedded revenue was $1.1 billion, up 29%, across several industrial end markets.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Embedded segment revenue was $1.1 billion, up 29% year-over-year, led by growth in aerospace and defense, automotive, communications and industrial end markets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "figures stated in F2; the competitive link is inferred",
+    "claim": "Research and development expense rose to 2,803 from 2,139 (table in millions) in the quarter.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Research and development | 2,803 | 2,139 | 7,728 | 5,761"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (management belief)",
+    "claim": "The company positions itself as a full-stack AI supplier across compute, networking, systems and software.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We believe that AI systems will require not only powerful chips, but also full-stack innovation across compute, networking, systems architecture and software."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "AMD agreed to acquire Taalas and World Labs to strengthen model research, inference and future super intelligence hardware, software and systems; closing remains subject to approvals.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "In August and September 2026, we entered into definitive agreements to acquire Taalas Inc. and World Labs Technologies, Inc. to strengthen our model research and inference capabilities and development of future super intelligence (SI) hardware, software and systems."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7 as a management expectation",
+    "claim": "Management expects growth to accelerate as Helios and Venice production scales.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "we expect growth to accelerate further in the fourth quarter as we scale Helios and \u2018Venice\u2019 production"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "The company names Nvidia's data center GPU position, financial resources and proprietary software ecosystem as a competitive threat.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Similarly, Nvidia Corporation (Nvidia) leverages its market position in data center GPU, financial resources, and proprietary software ecosystem to promote its systems and influences customers who do business with us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "The company names Intel's aggressive pricing and incentives to AMD customers as a threat.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For example, Intel Corporation (Intel) uses its microprocessor market position to price its products aggressively and target our customers and channel partners with special incentives."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "The Nvidia partnership with and investment in Intel is flagged as a possible source of more competition and pricing pressure.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For example, in September 2025, Nvidia announced a partnership and investment in Intel to partner on new data center and client platform products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P5",
+    "claim": "Arm-based architectures are named as a threat across consumer, commercial and data center markets.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "Some competitors are pursuing alternative computing architectures, such as Arm, which could grow the Arm ecosystem and increase competition in consumer, commercial and data center markets, reducing demand for our products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2; P5 carries a similar statement framed around SI workloads",
+    "claim": "Customers developing their own AI chips are named as potential competitors.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Additionally, we may encounter competition from customers who internally develop products to support similar AI workloads to those supported by ours."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "The company depends on a small number of customers for a substantial part of its revenue and receivables.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We depend on a small number of customers for a substantial portion of our business and we expect that a small number of customers will continue to account for a significant part of our revenue and receivables in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "AMD relies on TSMC for all wafers at its most advanced nodes, which concentrates its manufacturing dependence.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We rely on Taiwan Semiconductor Manufacturing Company Limited (TSMC) for the production of all wafers for microprocessor and GPU products at 7 nanometer (nm) or smaller nodes, and we rely primarily on GLOBALFOUNDRIES Inc. (GF) for wafers for microprocessor and GPU products manufactured at process nodes larger than 7 nm."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3; P5 keeps export controls as a named risk",
+    "claim": "US export restrictions led to about $800 million of MI308 inventory and related charges in Q2 fiscal 2025.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "During the second quarter of fiscal year 2025, the Company recorded approximately $800 million of inventory and related charges on AMD Instinct MI308 Data Center GPU products due to new U.S. export restrictions on certain semiconductors to China."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (as of the 10-K)",
+    "claim": "An industry-wide memory shortage is named as a risk to supply and gross margin.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For example, there is currently an industry-wide memory shortage as the demand for such components has outpaced supply."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "AI demand depends on customers' data center buildouts, and construction delays could shift the timing of demand.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In addition, construction delays in the scheduled buildout of data centers could impact the timing of customer demand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4; P5 lists guarantees and leases as a risk",
+    "claim": "To support the ecosystem, AMD has taken on data center leases, cloud capacity commitments and guarantees of commercial partners' lease and debt obligations.",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "We entered into data center leases which we expect to assign or sublease to commercial partners, and provided credit support to certain commercial partners in the form of guarantees of their lease and debt obligations in the event of their default."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "stated in F1",
+    "claim": "Cash and cash equivalents were 7,404 and short-term investments 8,372 at September 26, 2026 (table in millions), up from 5,539 and 5,013 at December 27, 2025.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 7,404 | $ 5,539",
+     "Short-term investments | 8,372 | 5,013"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Management reports cash, cash equivalents and short-term investments of $15.8 billion, compared to $10.6 billion at the prior year end.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "As of September 26, 2026, our cash, cash equivalents and short-term investments were $15.8 billion compared to $10.6 billion as of December 27, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1",
+    "claim": "Total current assets of 39,471 exceeded total current liabilities of 14,486 (table in millions).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total current assets | 39,471 | 26,947",
+     "Total current liabilities | 14,486 | 9,455"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1",
+    "claim": "Long-term debt, net rose to 7,079 from 2,348, while the current portion of long-term debt fell to 0 from 874 (table in millions).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Long-term debt, net | 7,079 | 2,348",
+     "Current portion of long-term debt, net | 0 | 874"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7",
+    "claim": "Total debt was $7,079 at Q3 2026, up from $3,226 in Q2 2026 (figures in $ millions per the release tables).",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Total debt | $7,079 | $3,226 | $3,220 | $7,079 | $3,220"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from F1 line items; no ratio computed",
+    "claim": "Debt is small next to total stockholders' equity of 68,389 (table in millions), though equity includes goodwill of 25,470 and acquisition-related intangibles of 15,101.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total stockholders\u2019 equity | 68,389 | 62,999",
+     "Goodwill | 25,470 | 25,126",
+     "Acquisition-related intangibles, net | 15,101 | 16,705"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P10 and P4",
+    "claim": "In August 2026 AMD issued $4.75 billion of unsecured senior notes in four tranches, with the earliest tranche of $1.25 billion maturing in 2029.",
+    "facts": [
+     "P10",
+     "P4"
+    ],
+    "quotes": [
+     "The Notes are the Company\u2019s general unsecured senior obligations.",
+     "In August 2026, we issued $4.75 billion in aggregate principal amount of senior notes, with proceeds intended for general corporate purposes, including the repayment of debt."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4; F3 line label differs",
+    "claim": "The $875 million 4.212% Senior Notes were repaid in full at maturity in September 2026.",
+    "facts": [
+     "P4",
+     "F3"
+    ],
+    "quotes": [
+     "We also repaid in full the $875 million aggregate principal amount of our 4.212% Senior Notes as the notes matured in September 2026.",
+     "Repayments of Commercial Paper | (875) | (950)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from F1 current portion line",
+    "claim": "No current portion of long-term debt is reported at September 26, 2026, so the evidence shows no debt falling due within the balance-sheet current period.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Current portion of long-term debt, net | 0 | 874"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 as a forward-looking expectation",
+    "claim": "Management expects cash, investments, operating cash flow, the revolving credit facility and the commercial paper program to fund operations and commitments over the next 12 months and beyond.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "the expectation that AMD\u2019s cash, cash equivalents, short-term investments and cash flows from operations along with our revolving credit facility and our commercial paper program will be sufficient to fund AMD\u2019s operations, capital expenditures, commitments and strategic activities over the next 12 months and beyond;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3 and P4",
+    "claim": "Operating cash flow from continuing operations was 6,523 for the nine months, versus 4,189 a year earlier (table in millions).",
+    "facts": [
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "Cash Provided by (Used in) Operating Activity, Continuing Operation, Total | 6,523 | 4,189",
+     "During the nine months ended September 26, 2026, we generated $6.5 billion of cash from operating activities and we returned $221 million to stockholders through the repurchase of common stock under our stock repurchase program (Repurchase Program)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "Capital expenditures rose to (1,845) from (752) for the nine months (table in millions).",
+    "facts": [
+     "F3",
+     "P7"
+    ],
+    "quotes": [
+     "Purchases of property and equipment | (1,845) | (752)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7",
+    "claim": "Free cash flow, a non-GAAP measure, was $4,678 for the nine months versus $3,437, but only $554 in Q3 2026 versus $1,558 in Q2 2026 and $1,530 in Q3 2025 ($ millions per release tables).",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Free cash flow (3) | $554 | $1,558 | $1,530 | $4,678 | $3,437"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred by comparing P7 and F2 figures",
+    "claim": "Q3 2026 free cash flow of $554 was far below Q3 net income of $2,428 ($ millions), indicating weak cash conversion that quarter.",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "Free cash flow (3) | $554 | $1,558 | $1,530 | $4,678 | $3,437",
+     "Net income | $ 2,428 | $ 1,243 | $ 6,108 | $ 2,824"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "Working capital absorbed cash: receivables (2,894), inventories (3,543) and prepaid and other assets (2,061), largely offset by an accounts payable inflow of 4,483 (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Accounts receivable, net | (2,894) | (7)",
+     "Inventories | (3,543) | (1,579)",
+     "Prepaid expenses and other assets | (2,061) | (259)",
+     "Accounts payable | 4,483 | 998"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1",
+    "claim": "Accounts payable rose to 7,756 from 2,929 and inventories to 11,463 from 7,920 (table in millions).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Accounts payable | 7,756 | 2,929",
+     "Inventories | 11,463 | 7,920"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "Net income includes sizeable non-cash items: a warrant charge of 1,179 added back, investment gains of (616) and deferred taxes of (427) deducted, and stock-based compensation of 1,513 added back (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Non-cash impact of warrants issued to customers, net | 1,179 | 0",
+     "Gains from long-term investments, net | (616) | (61)",
+     "Deferred income taxes | (427) | 18",
+     "Stock-based compensation | 1,513 | 1,152"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2",
+    "claim": "Q3 2026 net income was supported by an income tax benefit of (555), while other income (expense), net was (902) (table in millions).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Income tax provision (benefit) | (555) | 153 | (65) | (558)",
+     "Other income (expense), net | (902) | 82 | (139) | 219"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2; comparison inferred",
+    "claim": "Interest expense rose to (62) in Q3 2026 from (37), and to (136) for the nine months from (95) (table in millions); it stays small next to operating income of 2,832 in Q3.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Interest expense | (62) | (37) | (136) | (95)",
+     "Operating Income (Loss), Total | 2,832 | 1,270 | 6,298 | 1,942"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "Cash paid for stock repurchases for tax withholding was (1,836), far above program repurchases of (221) for the nine months (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Stock repurchases for tax withholding on employee equity plans | (1,836) | (447)",
+     "Repurchases of common stock | (221) | (1,316)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F3",
+    "claim": "Financing inflow from debt and commercial paper issuance was 4,726, which made financing activities a net source of 1,983 (table in millions).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Proceeds from debt and commercial paper issuance, net of issuance costs | 4,726 | 2,441",
+     "Net cash provided by (used in) financing activities of continuing operations | 1,983 | (103)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F1 and F3",
+    "claim": "Lease obligations grew: long-term operating lease liabilities rose to 1,837 from 625, and right-of-use assets obtained for new leases were 1,498 (table in millions).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Long-term operating lease liabilities | 1,837 | 625",
+     "Right-of-Use Asset Obtained in Exchange for Operating Lease Liability | 1,498 | 275"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P5",
+    "claim": "AMD has taken on commitments beyond its reported debt, including cloud compute capacity purchases and guarantees of commercial partners' lease and debt obligations.",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "We entered into data center leases which we expect to assign or sublease to commercial partners, and provided credit support to certain commercial partners in the form of guarantees of their lease and debt obligations in the event of their default.",
+     "\u2022We may be required to satisfy financial obligations under guarantees, leases and other commercial commitments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4; the cash impact is inferred",
+    "claim": "Agreements to acquire Taalas and World Labs are expected to close in the fourth quarter of fiscal 2026, which is a potential near-term use of cash.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The acquisitions are expected to close in the fourth quarter of fiscal year 2026, subject to regulatory approvals and customary closing conditions."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "stated in P4 segment table and MD&A text",
+    "claim": "Data Center is the main growth driver: Q3 2026 segment revenue was $8,546 versus $4,341 a year earlier (table in millions), an increase of 97%.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "Data Center net revenue of $8.5 billion for the three months ended September 26, 2026 increased by 97%, compared to net revenue of $4.3 billion for the prior year period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P7",
+    "claim": "The Data Center increase came from demand for EPYC CPUs and Instinct GPUs, including the launch of the MI450 Series. Continued growth requires that demand to persist.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "The increase in both periods was primarily driven by strong demand for our AMD EPYC processors and AMD Instinct GPUs.",
+     "Data Center segment revenue was a record $8.5 billion, up 97% year-over-year, driven by strong demand for AMD EPYC\u2122 processors and the launch of AMD Instinct\u2122 MI450 Series GPUs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 risk factors",
+    "claim": "Condition: AI customers must be able to secure data center capacity, energy and capital. The 10-K names shortfalls and build-out delays as risks to demand.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Some customers in AI markets may be unable to secure access to internal and external infrastructure, including availability of sufficient data center capacity or energy for the buildout of data centers that use our products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3",
+    "claim": "The OpenAI agreement to deploy 6 gigawatts of AMD GPUs, starting with MI450, is a named demand source.",
+    "facts": [
+     "P3",
+     "P1"
+    ],
+    "quotes": [
+     "In October 2025, we entered into a product purchase agreement with OpenAI OpCo, LLC, (OpenAI) to deploy 6 gigawatts of AMD GPUs, with the deployment of the first gigawatt of capacity powered by our AMD Instinct MI450 series products."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3, P4 and F3",
+    "claim": "Condition for the OpenAI driver: OpenAI must meet GPU purchase milestones. The related warrant for up to 160 million shares had a non-cash impact of 1,179 in nine-month 2026 operating cash flow adjustments (table in millions).",
+    "facts": [
+     "P3",
+     "P4",
+     "F3"
+    ],
+    "quotes": [
+     "The warrant shares will vest in tranches based on certain AMD Instinct GPU purchase milestones by OpenAI, or its affiliates, or indirectly through third parties, and achievement of specified AMD stock price targets and stock performance.",
+     "The warrant liability is dependent on our estimate of customers' total probable purchases which requires judgment."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Condition: a small number of customers must keep buying, because AMD depends on a few customers for a substantial part of revenue.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We depend on a small number of customers for a substantial portion of our business and we expect that a small number of customers will continue to account for a significant part of our revenue and receivables in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7 CEO quote and slides",
+    "claim": "Rack-scale Helios and 'Venice' production are management's stated near-term growth drivers. Named AI customers are running workloads on the first Helios systems.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Demand for our Instinct and EPYC products continued to strengthen, and we expect growth to accelerate further in the fourth quarter as we scale Helios and \u2018Venice\u2019 production.",
+     "Anthropic, Meta, Microsoft, OpenAI and Oracle Cloud Infrastructure are running models and workloads on the first AMD Helios rackscale solutions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and F2",
+    "claim": "Product mix toward Data Center lifted gross margin to 54% from 52%. Operating income rose to 2,832 from 1,270 (table in millions).",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "Gross margin for the three months ended September 26, 2026 was 54% compared to gross margin of 52% for the prior year period, a 2 percentage point increase primarily driven by a favorable product mix, including higher Data Center segment revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7 CFO quote and P4 segment table",
+    "claim": "Management describes operating leverage as Data Center scales. Data Center operating income was $2,882 versus $1,074 (table in millions).",
+    "facts": [
+     "P7",
+     "P4"
+    ],
+    "quotes": [
+     "demonstrating the significant operating leverage in our business model as our Data Center business drives scale"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Condition for margin and supply: memory supply must be adequate and costs reasonable. The 10-K reports an industry-wide memory shortage.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For example, there is currently an industry-wide memory shortage as the demand for such components has outpaced supply."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "Condition: third-party foundries, chiefly TSMC for advanced nodes, must supply enough wafers to meet growing demand.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We rely on Taiwan Semiconductor Manufacturing Company Limited (TSMC) for the production of all wafers for microprocessor and GPU products at 7 nanometer (nm) or smaller nodes, and we rely primarily on GLOBALFOUNDRIES Inc. (GF) for wafers for microprocessor and GPU products manufactured at process nodes larger than 7 nm."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3. P5 lists export controls among current risk factors.",
+    "claim": "Condition: export controls must not block shipments. In 2025, MI308 restrictions caused about $800 million of inventory and related charges.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "During the second quarter of fiscal year 2025, the Company recorded approximately $800 million of inventory and related charges on AMD Instinct MI308 Data Center GPU products due to new U.S. export restrictions on certain semiconductors to China."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7 and P4",
+    "claim": "Embedded is a secondary driver: Q3 revenue was $1,109 versus $857 (table in millions), up 29%. Continuation requires demand in its end markets to hold.",
+    "facts": [
+     "P7",
+     "P4"
+    ],
+    "quotes": [
+     "Embedded segment revenue was $1.1 billion, up 29% year-over-year, led by growth in aerospace and defense, automotive, communications and industrial end markets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P7 and P4",
+    "claim": "Client grew modestly to $2,949 from $2,750 (table in millions), up 7%. Gaming fell 40%, which offsets part of the growth.",
+    "facts": [
+     "P7",
+     "P4"
+    ],
+    "quotes": [
+     "Client business revenue was $2.9 billion, up 7% year-over-year, driven by sales of AMD Ryzen\u2122 mobile processors.",
+     "Gaming business revenue was $773 million, down 40% year-over-year, due to lower semi-custom and graphics revenue."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in F3, F1 and P7 other data",
+    "claim": "Growth is absorbing working capital. Nine-month 2026 cash flow shows inventories at (3,543) and accounts receivable at (2,894), partly offset by accounts payable of 4,483 (table in millions).",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P4, P10 and F1",
+    "claim": "Growth is partly funded with debt: AMD issued $4.75 billion of senior notes in August 2026, and long-term debt rose to 7,079 from 2,348 (table in millions).",
+    "facts": [
+     "P4",
+     "P10",
+     "F1"
+    ],
+    "quotes": [
+     "In August 2026, we issued $4.75 billion in aggregate principal amount of senior notes, with proceeds intended for general corporate purposes, including the repayment of debt."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Ecosystem commitments support growth but add exposure. AMD commits to buy GPU cloud capacity that is not placed with third parties and provides lease and debt guarantees.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Under our cloud compute capacity arrangements, we have committed, and expect to continue to commit in the future, to purchase GPU compute capacity from cloud service providers (CSPs) either to the extent it is not successfully placed with third-party customers, or for capacity we reserved and may sell or assign to third parties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Pending acquisitions of Taalas and World Labs are meant to add model research and inference capability. They are expected to close in Q4 2026, subject to approvals.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "The acquisitions are expected to close in the fourth quarter of fiscal year 2026, subject to regulatory approvals and customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 line items",
+    "claim": "Q3 2026 net income growth was helped by an income tax benefit of (555) despite other expense of (902) (table in millions). Bottom-line growth therefore does not track operating growth alone.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited items P10 and P4, with the balance sheet change shown in F1",
+    "claim": "AMD closed a public offering of $4.75 billion of senior notes in four tranches, and long-term debt, net rose to 7,079 from 2,348 (table in millions) between Dec. 27, 2025 and Sep. 26, 2026.",
+    "facts": [
+     "P10",
+     "P4",
+     "F1"
+    ],
+    "quotes": [
+     "closed its public offering (the \u201cOffering\u201d) of $4.75 billion aggregate principal amount of senior notes",
+     "In August 2026, we issued $4.75 billion in aggregate principal amount of senior notes, with proceeds intended for general corporate purposes, including the repayment of debt."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item P4",
+    "claim": "AMD repaid in full the $875 million of its 4.212% Senior Notes at maturity.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "We also repaid in full the $875 million aggregate principal amount of our 4.212% Senior Notes as the notes matured in September 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item P4",
+    "claim": "AMD entered into definitive agreements to acquire Taalas Inc. and World Labs Technologies, Inc.; closing is expected in the fourth fiscal quarter, subject to approvals.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "In August and September 2026, we entered into definitive agreements to acquire Taalas Inc. and World Labs Technologies, Inc. to strengthen our model research and inference capabilities and development of future super intelligence (SI) hardware, software and systems.",
+     "The acquisitions are expected to close in the fourth quarter of fiscal year 2026, subject to regulatory approvals and customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item P9",
+    "claim": "Director Joe Householder retired from the Board, and KC McClure succeeded him as Chair of the Audit and Finance Committee.",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "On August 17, 2026, Mr. Joe Householder provided Advanced Micro Devices, Inc. (the \u201cCompany\u201d) with notice of his intention to retire from the Company\u2019s Board of Directors (the \u201cBoard\u201d) effective as of August 19, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item P9",
+    "claim": "The Board appointed Tim Ryan as an independent director.",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "In connection with Mr. Householder\u2019s retirement, on August 19, 2026, the Board appointed Mr. Tim Ryan as a member of the Board effective as of August 19, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited earnings release P7 and consistent with F2",
+    "claim": "AMD announced third quarter 2026 results: revenue $13.4 billion, gross margin 54%, operating income $2.8 billion, net income $2.4 billion and diluted EPS $1.46.",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "Third quarter revenue was $13.4 billion, gross margin was 54%, operating income was $2.8 billion, net income was $2.4 billion and diluted earnings per share was $1.46."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items P7 and P4; the launch date is not printed",
+    "claim": "AMD launched AMD Instinct MI450 Series GPUs, which it cites as a driver of record Data Center revenue of $8.5 billion, up 97% year over year.",
+    "facts": [
+     "P7",
+     "P4"
+    ],
+    "quotes": [
+     "Data Center segment revenue was a record $8.5 billion, up 97% year-over-year, driven by strong demand for AMD EPYC\u2122 processors and the launch of AMD Instinct\u2122 MI450 Series GPUs."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the F3 line item compared with the P3 statement; P4 describes the warrant liability estimate",
+    "claim": "Warrants issued to customers began to affect reported results in 2026: F3 shows a non-cash impact of 1,179 (table in millions) for nine months versus 0 a year earlier, while the 10-K said the warrant had no 2025 impact.",
+    "facts": [
+     "F3",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Non-cash impact of warrants issued to customers, net",
+     "None of the warrant shares met the vesting or exercise conditions and the warrant had no impact to our financial statements for the year ended December 27, 2025.",
+     "The warrant liability is dependent on our estimate of customers' total probable purchases which requires judgment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4; the balance sheet and cash flow figures are from F1 and F3",
+    "claim": "AMD entered into data center leases and gave guarantees of commercial partners' lease and debt obligations; long-term operating lease liabilities rose to 1,837 from 625 (table in millions), with 1,498 of right-of-use assets obtained in nine months.",
+    "facts": [
+     "P4",
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "We entered into data center leases which we expect to assign or sublease to commercial partners, and provided credit support to certain commercial partners in the form of guarantees of their lease and debt obligations in the event of their default."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item P6",
+    "claim": "AMD filed a 10-K/A correcting transposed Client ASP and unit shipment changes in MD&A; the corrected figures are a 15% unit increase and a 31% ASP increase.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "primarily driven by a 15% increase in unit shipments of processors and a 31% increase in average selling price of processors",
+     "Except as described above, this Amendment does not amend, update or change any other items or disclosures contained in the Original Filing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item P3",
+    "claim": "AMD entered into a product purchase agreement with OpenAI to deploy 6 gigawatts of AMD GPUs and issued OpenAI a warrant for up to 160 million shares at $0.01 per share.",
+    "facts": [
+     "P3",
+     "P1"
+    ],
+    "quotes": [
+     "In October 2025, we entered into a product purchase agreement with OpenAI OpCo, LLC, (OpenAI) to deploy 6 gigawatts of AMD GPUs, with the deployment of the first gigawatt of capacity powered by our AMD Instinct MI450 series products.",
+     "Concurrent with the agreement, we issued to OpenAI a warrant to purchase up to an aggregate of 160 million shares of AMD\u2019s common stock at an exercise price of $0.01 per share."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item P3",
+    "claim": "AMD completed the acquisition of ZT Systems for $3.2 billion in cash and 8.3 million shares.",
+    "facts": [
+     "P3",
+     "P1"
+    ],
+    "quotes": [
+     "In March 2025, we completed the acquisition of ZT Systems for $3.2 billion in cash and 8.3 million shares of our common stock."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3; the payment line is from F3",
+    "claim": "AMD sold the ZT Manufacturing Business to Sanmina for $2.4 billion in cash, subject to adjustments, plus 1.2 million Sanmina shares; F3 shows a 243 (table in millions) working capital adjustment payment in 2026.",
+    "facts": [
+     "P3",
+     "F3"
+    ],
+    "quotes": [
+     "We retained select intellectual property and employees associated with the design operations (ZT Design Business), and in October 2025, we sold the ZT data center infrastructure manufacturing business (ZT Manufacturing Business) to Sanmina Corporation (Sanmina) for $2.4 billion in cash, subject to certain purchase price adjustments, and 1.2 million shares of Sanmina common stock."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item P3",
+    "claim": "AMD recorded about $800 million of MI308 inventory and related charges due to U.S. export restrictions, then reversed about $360 million in the fourth quarter of fiscal 2025 after licensed shipments began.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "During the second quarter of fiscal year 2025, the Company recorded approximately $800 million of inventory and related charges on AMD Instinct MI308 Data Center GPU products due to new U.S. export restrictions on certain semiconductors to China.",
+     "During the fourth quarter of fiscal year 2025, we began shipping products and reversed approximately $360 million of the inventory and related charges recorded earlier in the year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item P3",
+    "claim": "An IRS approval of reasonable cause relief led AMD to release uncertain tax positions, producing an $853 million tax benefit in 2025.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "an $853 million benefit related to the release of uncertain tax positions pertaining to the reasonable cause relief for dual consolidated losses approved by the Internal Revenue Service (IRS) in April 2025"
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Dependence is stated in the 10-K risk factors. The receivables rise is printed in F1. Linking the receivables rise to concentration is inferred.",
+    "claim": "AMD depends on a small number of customers for a substantial part of its revenue and receivables. Accounts receivable rose to 9,209 from 6,315 (table in millions) between Dec. 27, 2025 and Sep. 26, 2026.",
+    "facts": [
+     "P2",
+     "F1",
+     "P7"
+    ],
+    "quotes": [
+     "We depend on a small number of customers for a substantial portion of our business and we expect that a small number of customers will continue to account for a significant part of our revenue and receivables in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The warrant terms are stated in P3, the judgment in P4 and the cash-flow add-back in F3. Effects on future earnings are inferred from P4's forward-looking statement list.",
+    "claim": "The warrant issued to OpenAI covers up to 160 million shares at $0.01 per share. Warrants issued to customers produced a non-cash impact of 1,179 (table in millions) in the nine months to Sep. 26, 2026, and the warrant liability rests on management judgment.",
+    "facts": [
+     "P3",
+     "P4",
+     "F3"
+    ],
+    "quotes": [
+     "Concurrent with the agreement, we issued to OpenAI a warrant to purchase up to an aggregate of 160 million shares of AMD\u2019s common stock at an exercise price of $0.01 per share.",
+     "The warrant liability is dependent on our estimate of customers' total probable purchases which requires judgment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The figures are printed in F2. Any link to warrant fair-value changes is not stated and would be inference.",
+    "claim": "Q3 2026 other income (expense), net was (902), against 82 a year earlier (table in millions). This lowered pre-tax income relative to operating income of 2,832.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The arrangements are stated in P4 and the lease figures are printed in F1 and F3. The size of the guarantees is not given.",
+    "claim": "AMD took on cloud compute capacity commitments, data center leases it expects to assign or sublease, and guarantees of commercial partners' lease and debt obligations.",
+    "facts": [
+     "P4",
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "We entered into data center leases which we expect to assign or sublease to commercial partners, and provided credit support to certain commercial partners in the form of guarantees of their lease and debt obligations in the event of their default."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1, P4 and P10. Interest figures are printed in F2.",
+    "claim": "Long-term debt, net rose to 7,079 from 2,348 (table in millions) after AMD issued $4.75 billion of senior notes in August 2026.",
+    "facts": [
+     "F1",
+     "P4",
+     "P10",
+     "F2"
+    ],
+    "quotes": [
+     "In August 2026, we issued $4.75 billion in aggregate principal amount of senior notes, with proceeds intended for general corporate purposes, including the repayment of debt."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The figures are printed in P7, F1 and F3. The write-down mechanism is described in the P3 critical accounting estimates. Applying it to the current build is inferred.",
+    "claim": "Working capital absorbed cash in Q3 2026. Free cash flow was $554 against $1,530 a year earlier, and inventories rose to 11,463 from 7,920 (table in millions).",
+    "facts": [
+     "P7",
+     "F1",
+     "F3",
+     "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the P3 10-K MD&A. The P5 10-Q risk factor heading now also covers national-security-based regulations.",
+    "claim": "U.S. export restrictions led to approximately $800 million of MI308 inventory and related charges in Q2 2025. Officials also expect a 15% share of licensed MI308 China revenue.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "U.S. government officials have expressed an expectation that the U.S. government will receive 15% of the revenue generated from licensed MI308 sales to China; however, to date, the U.S. government has not published a regulation establishing such requirement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the P7 release and the P4 segment table.",
+    "claim": "Client and Gaming revenue fell 8% year over year in Q3 2026. Within it, Gaming revenue of $773 million fell 40%.",
+    "facts": [
+     "P7",
+     "P4"
+    ],
+    "quotes": [
+     "Gaming business revenue was $773 million, down 40% year-over-year, due to lower semi-custom and graphics revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K and 10-Q risk factors. The counter figures come from P4 and P7.",
+    "claim": "AMD cites intense competition, including Nvidia's market position and software ecosystem and the Nvidia\u2013Intel partnership announced in September 2025.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Similarly, Nvidia Corporation (Nvidia) leverages its market position in data center GPU, financial resources, and proprietary software ecosystem to promote its systems and influences customers who do business with us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors. Whether the shortage persists at T is not stated.",
+    "claim": "AMD discloses an industry-wide memory shortage that has raised memory prices.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "For example, there is currently an industry-wide memory shortage as the demand for such components has outpaced supply."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors. The counter comes from the P7 CEO quote.",
+    "claim": "AMD relies on TSMC for all wafers at 7 nm or smaller nodes for its microprocessor and GPU products.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We rely on Taiwan Semiconductor Manufacturing Company Limited (TSMC) for the production of all wafers for microprocessor and GPU products at 7 nanometer (nm) or smaller nodes, and we rely primarily on GLOBALFOUNDRIES Inc. (GF) for wafers for microprocessor and GPU products manufactured at process nodes larger than 7 nm."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors. The counter is a forward-looking statement in the P7 release.",
+    "claim": "Customers' data center buildout delays or lack of capital could delay or reduce demand for AI accelerators.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "In addition, construction delays in the scheduled buildout of data centers could impact the timing of customer demand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 and P5 risk factors. The goodwill test result is stated in P3.",
+    "claim": "AMD agreed to acquire Taalas and World Labs, and goodwill stood at 25,470 (table in millions) on Sep. 26, 2026.",
+    "facts": [
+     "P4",
+     "F1",
+     "P5"
+    ],
+    "quotes": [
+     "The acquisitions are expected to close in the fourth quarter of fiscal year 2026, subject to regulatory approvals and customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the P6 explanatory note.",
+    "claim": "AMD filed a 10-K/A to correct transposed ASP and unit-shipment percentages in its Client MD&A disclosure.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Except as described above, this Amendment does not amend, update or change any other items or disclosures contained in the Original Filing."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The figures are printed in F2. The cause of the benefit is not stated in the evidence.",
+    "claim": "Q3 2026 net income was supported by an income tax benefit of (555), against a provision of 153 a year earlier (table in millions).",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "The increase in net income was primarily driven by higher operating income."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Inferred from the statements; the 10-Q MD&A names warrants as a new critical estimate but the packet does not break down the other income line.",
+    "claim": "What drove Other income (expense), net of (902) in the latest quarter, versus 82 a year earlier, and how much of it was the 1,179 nine-month non-cash warrant impact (tables in millions)?",
+    "facts": [
+     "F2",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "Non-cash impact of warrants issued to customers, net",
+     "The warrant liability is dependent on our estimate of customers' total probable purchases which requires judgment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated for fiscal 2025 in the 10-K MD&A; the 2026 status is not in the packet.",
+    "claim": "How many of the up to 160 million OpenAI warrant shares had met vesting or exercise conditions by the latest quarter end?",
+    "facts": [
+     "P3",
+     "F3"
+    ],
+    "quotes": [
+     "None of the warrant shares met the vesting or exercise conditions and the warrant had no impact to our financial statements for the year ended December 27, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the income statement figures; no explanation appears in the packet.",
+    "claim": "Why did AMD record an income tax benefit of (555) on pre-tax income of 1,868 in the latest quarter (table in millions)?",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Income tax provision (benefit)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the cash flow statement and the release's free cash flow row.",
+    "claim": "Why was quarterly free cash flow $554, against $1,558 in the prior quarter and $1,530 a year earlier, given nine-month receivables use of (2,894) and inventory use of (3,543) (table in millions)?",
+    "facts": [
+     "P7",
+     "F3"
+    ],
+    "quotes": [
+     "Free cash flow (3) | $554 | $1,558 | $1,530 | $4,678 | $3,437"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred; the packet gives the balances but no composition.",
+    "claim": "What do inventories of 11,463, up from 7,920 (table in millions), consist of, and are they tied to specific product ramps?",
+    "facts": [
+     "F1",
+     "P8"
+    ],
+    "quotes": [
+     "Inventories | 11,463 | 7,920"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A; the amounts sit in notes that are not in the packet.",
+    "claim": "How large are the cloud compute capacity commitments, data center leases and guarantees of partners' lease and debt obligations, given long-term operating lease liabilities of 1,837 against 625 (table in millions)?",
+    "facts": [
+     "P4",
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "We entered into data center leases which we expect to assign or sublease to commercial partners, and provided credit support to certain commercial partners in the form of guarantees of their lease and debt obligations in the event of their default."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A; no terms are given.",
+    "claim": "What are the consideration and funding for the Taalas and World Labs acquisitions, and have they closed?",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "The acquisitions are expected to close in the fourth quarter of fiscal year 2026, subject to regulatory approvals and customary closing conditions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The outlook section is cut from the packet; only qualitative statements remain.",
+    "claim": "What revenue and gross margin figures does AMD's fourth-quarter outlook give?",
+    "facts": [
+     "P7",
+     "P8"
+    ],
+    "quotes": [
+     "Our fourth-quarter outlook reflects accelerating revenue and earnings growth, driven by strong demand across our Data Center portfolio."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The cause is stated in the release; whether it persists is not addressed.",
+    "claim": "Is the Gaming decline to $773 million, down 40%, caused by a semi-custom console cycle or by a lasting change?",
+    "facts": [
+     "P7",
+     "P4"
+    ],
+    "quotes": [
+     "Gaming business revenue was $773 million, down 40% year-over-year, due to lower semi-custom and graphics revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from balance sheet changes; the equity note is not in the packet.",
+    "claim": "Were the treasury shares carried at (7,079) retired or reissued, given issued shares fell from 1,695 to 1,640 and treasury stock is now 0 (table in millions)?",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Treasury stock, at cost (shares held: \u2014 and 65)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated as of the February 2026 10-K; its later status is not in the packet.",
+    "claim": "Has the U.S. government formalized the expected 15% revenue share on licensed MI308 sales to China, and how does it affect results?",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "U.S. government officials have expressed an expectation that the U.S. government will receive 15% of the revenue generated from licensed MI308 sales to China; however, to date, the U.S. government has not published a regulation establishing such requirement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The risk is stated in the 10-K; the specific concentration figures are not in the packet.",
+    "claim": "Which customers account for the receivables of 9,209, up from 6,315 (table in millions), and what share of revenue do they represent?",
+    "facts": [
+     "P2",
+     "F1"
+    ],
+    "quotes": [
+     "We depend on a small number of customers for a substantial portion of our business and we expect that a small number of customers will continue to account for a significant part of our revenue and receivables in the future."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A and the cash flow statement; the current status is not given.",
+    "claim": "Has any of the up to $450 million Sanmina contingent consideration been earned, and what was behind the (243) working capital payment?",
+    "facts": [
+     "P3",
+     "F3"
+    ],
+    "quotes": [
+     "We are eligible to receive additional contingent cash consideration of up to $450 million from Sanmina to the extent certain conditions are met.",
+     "Payment for working capital adjustment on divestiture"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "AMD",
+ "upside": -0.936843520812649,
+ "valuation": {
+  "annotations": [
+   "ytd_outside_record: rev_growth.y1 0.4431"
+  ],
+  "departures": [
+   {
+    "driver": "backlog",
+    "evidence": [
+     "P1.s55",
+     "P3.s42",
+     "P7.s16"
+    ],
+    "input": "rev_growth.y2"
+   },
+   {
+    "driver": "mix",
+    "evidence": [
+     "P4.s24",
+     "P7.s17",
+     "P7.s105"
+    ],
+    "input": "op_margin.y2"
+   },
+   {
+    "driver": "capex_program",
+    "evidence": [
+     "F3",
+     "P7.s97"
+    ],
+    "input": "capex"
+   }
+  ],
+  "directions": {
+   "capex": "up",
+   "fade_years": "none",
+   "long_run_op_margin": "none",
+   "normalized.margin": "none",
+   "normalized.rev_growth": "none",
+   "op_margin.y1": "none",
+   "op_margin.y2": "up",
+   "rev_growth.y1": "none",
+   "rev_growth.y2": "up",
+   "terminal_g": "none",
+   "terminal_ronic": "none"
+  },
+  "evidence": {
+   "F3": {
+    "kind": "statement",
+    "period": "2026-09-26",
+    "text": "Condensed Consolidated Statements of Cash Flows - USD ($) $ in Millions | 9 Months Ended\nSep. 26, 2026 | Sep. 27, 2025 | Dec. 27, 2025 | Dec. 28, 2024\nCash flows from operating activities:\nNet income | $ 6,108 | $ 2,824\nIncome from discontinued operations, net of tax | (3) | (175)\nAdjustments to reconcile net income to net cash provided by operating activities:\nDepreciation and amortization | 666 | 556\nAmortization of acquisition-related intangibles | 1,629 | 1,697\nStock-based compensation | 1,513 | 1,152\nGains from long-term investments, net | (616) | (61)\nNon-cash impact of warrants issued to customers, net | 1,179 | 0\nDeferred income taxes | (427) | 18\nRecovery of inventory loss at contract manufacturer | 0 | (67)\nOther | 105 | 90\nChanges in operating assets and liabilities:\nAccounts receivable, net | (2,894) | (7)\nInventories | (3,543) | (1,579)\nPrepaid expenses and other assets | (2,061) | (259)\nAccounts payable | 4,483 | 998\nAccrued and other liabilities | 384 | (998)\nCash Provided by (Used in) Operating Activity, Continuing Operation, Total | 6,523 | 4,189\nCash Provided by (Used in) Operating Activity, Discontinued Operation | 0 | 920\nNet cash provided by operating activities of continuing operations | 6,523 | 5,109\nCash flows from investing activities:\nPurchases of property and equipment | (1,845) | (752)\nPurchases of short-term investments | (6,754) | (2,110)\nProceeds from maturity of short-term investments | 3,044 | 982\nProceeds from sale of short-term investments | 366 | 66\nPurchases of long-term investments | (1,082) | (432)\nAcquisitions, net of cash acquired | (129) | (1,716)\nPayment for (Proceeds from) Other Investing Activity | (15) | 0\nNet cash used in investing activities of continuing operations | (6,415) | (3,962)\nPurchases of property and equipment | (30)\nPayment for working capital adjustment on divestiture | (243) | 0\nNet cash used in investing activities of discontinued operations | (243) | (30)\nNet cash used in investing activities | (6,658) | (3,992)\nCash flows from financing activities:\nProceeds from debt and commercial paper issuance, net of issuance costs | 4,726 | 2,441\nRepayments of Commercial Paper | (875) | (950)\nProceeds from sales of common stock through employee equity plans | 210 | 169\nRepurchases of common stock | (221) | (1,316)\nStock repurchases for tax withholding on employee equity plans | (1,836) | (447)\nProceeds from (Payment for) Other Financing Activity | (21) | 0\nNet cash provided by (used in) financing activities of continuing operations | 1,983 | (103)\nNet increase in cash, cash equivalents and restricted cash | 1,848 | 1,014\nCash, cash equivalents and restricted cash at beginning of period | $ 5,556 | $ 3,811\nCash, cash equivalents and restricted cash at end of period | 7,404 | 4,825\nSupplemental cash flow information:\nIncome Tax Paid, after Refund Received | 833 | 818\nNon-cash investing and financing activities:\nPurchases of property and equipment, accrued but not paid | 505 | 153\nStock Issued During Period, Value, Treasury Stock Reissued | 860\nAsset Acquisition, Contingent Consideration, Liability | 361\nRight-of-Use Asset Obtained in Exchange for Operating Lease Liability | 1,498 | 275\nReconciliation of cash, cash equivalents and restricted cash\nCash and cash equivalents | 7,404 | 4,808\nRestricted cash included in Prepaid expenses and other current assets | 0 | 17\nCash, cash equivalents and restricted cash at end of period | $ 7,404 | $ 4,825"
+   },
+   "P1.s55": {
+    "kind": "annual_section",
+    "period": "2025-12-27",
+    "text": "In October 2025, we entered into a product purchase agreement with OpenAI OpCo, LLC, (OpenAI) to deploy 6 gigawatts of AMD GPUs, with the deployment of the first gigawatt of capacity powered by our AMD Instinct MI450 series products."
+   },
+   "P3.s42": {
+    "kind": "annual_section",
+    "period": "2025-12-27",
+    "text": "In October 2025, we entered into a product purchase agreement with OpenAI OpCo, LLC, (OpenAI) to deploy 6 gigawatts of AMD GPUs, with the deployment of the first gigawatt of capacity powered by our AMD Instinct MI450 series products."
+   },
+   "P4.s24": {
+    "kind": "quarterly_section",
+    "period": "2026-09-26",
+    "text": "Gross margin for the three months ended September 26, 2026 was 54% compared to gross margin of 52% for the prior year period, a 2 percentage point increase primarily driven by a favorable product mix, including higher Data Center segment revenue."
+   },
+   "P7.s105": {
+    "kind": "release",
+    "period": "2026-11-03",
+    "text": "12 | | Q3 2026 FINANCIAL RESULTS \u2013 November 3, 2026 Q3 2026 Segment Results $ in millions Q3\u201926 Q3\u201925 Y/Y Q2\u201926 Q/Q Data Center Net Revenue $8,546 $4,341 Up 97% $6,718 Up 27% Operating Income $2,882 $1,074 Up 168% $2,103 Up 37% Client & Gaming Net Revenue $3,722 $4,048 Down 8% $3,841 Down 3% Operating Income $573 $867 Down 34% $582 Down 2% Embedded Net Revenue $1,109 $857 Up 29% $977 Up 14% Operating Income $453 $283 Up 60% $386 Up 17%"
+   },
+   "P7.s16": {
+    "kind": "release",
+    "period": "2026-11-03",
+    "text": "With our leadership product portfolio and deep customer and supply chain relationships, we are confident in our ability to sustain very strong revenue growth and expanding profitability over the coming years.\u201d"
+   },
+   "P7.s17": {
+    "kind": "release",
+    "period": "2026-11-03",
+    "text": "\u201cThird quarter revenue grew 45% year-over-year to a record $13.4 billion, while non-GAAP earnings per share grew 74%, demonstrating the significant operating leverage in our business model as our Data Center business drives scale,\u201d said Jean Hu, AMD executive vice president, chief financial officer and treasurer."
+   },
+   "P7.s97": {
+    "kind": "release",
+    "period": "2026-11-03",
+    "text": "Capital expenditures | $648 | $808 | $258 | $1,845 | $752"
+   }
+  },
+  "neutral": {
+   "capex": [
+    0.023607467983335906,
+    0.023607467983335906,
+    0.023607467983335906,
+    0.023607467983335906,
+    0.023607467983335906
+   ],
+   "fade_years": 10,
+   "long_run_op_margin": 0.09016452658163897,
+   "normalized.margin": 0.09016452658163897,
+   "normalized.rev_growth": 0.0375,
+   "op_margin.y1": 0.1790934425297162,
+   "op_margin.y2": 0.09016452658163897,
+   "rev_growth.y1": 0.44306290779268753,
+   "rev_growth.y2": 0.0375,
+   "terminal_g": 0.0375,
+   "terminal_ronic": 0.11114375453902048
+  },
+  "numbers": {
+   "capex": [
+    0.02811859464765149,
+    0.02811859464765149,
+    0.02811859464765149,
+    0.02811859464765149,
+    0.02811859464765149
+   ],
+   "fade_years": 10,
+   "long_run_op_margin": 0.09016452658163897,
+   "normalized.margin": 0.09016452658163897,
+   "normalized.rev_growth": 0.0375,
+   "op_margin.y1": 0.1790934425297162,
+   "op_margin.y2": 0.10664280146655504,
+   "rev_growth.y1": 0.44306290779268753,
+   "rev_growth.y2": 0.24014134740574533,
+   "terminal_g": 0.0375,
+   "terminal_ronic": 0.11114375453902048
+  },
+  "of_record": {},
+  "options": {
+   "capex": "record_last",
+   "fade_years": 10,
+   "long_run_op_margin": [
+    "normalized",
+    0
+   ],
+   "normalized.margin": [
+    "persist",
+    0
+   ],
+   "normalized.rev_growth": "anchor",
+   "op_margin.y1": "ytd",
+   "op_margin.y2": "last",
+   "rev_growth.y1": "ytd",
+   "rev_growth.y2": "record_median",
+   "terminal_g": "anchor",
+   "terminal_ronic": "no_growth_value"
+  },
+  "reverts": [],
+  "unknowns": [
+   "The numeric fourth-quarter 2026 outlook was cut from the earnings release, so no sentence gives a revenue or margin guidance figure for year 1. Management states only that growth is expected to accelerate in the fourth quarter.",
+   "The packet does not show the revenue timing or value of the 6 gigawatt OpenAI GPU agreement beyond the first gigawatt.",
+   "The fair value of the warrant liability for customer warrants is not given, nor the cause of the $902 million other expense in the third quarter.",
+   "The packet does not quantify the cloud compute capacity commitments, data center leases and guarantees of commercial partners' obligations.",
+   "The purchase prices of the pending Taalas and World Labs acquisitions are not disclosed in the evidence.",
+   "One other 8-K (0000002488-26-000121) was trimmed out of the packet, so its content is unknown."
+  ],
+  "year": 3
+ },
+ "value_base": 33.81361684931154,
+ "value_bear": 30.91713984841412,
+ "value_bull": 35.47975217442235,
+ "value_per_filed_share": {
+  "base": 33.81361684931154,
+  "bear": 30.91713984841412,
+  "bull": 35.47975217442235
+ },
+ "valued": true,
+ "verdict": "AVOID",
+ "verdict_reason": "expected return -67.0 points a year against the required return over 3 years"
+}
