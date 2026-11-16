@@ -1,7 +1,7 @@
 {
- "count": 81,
+ "count": 82,
  "effort": "high",
- "generated_at": "2026-11-16T23:32:59Z",
+ "generated_at": "2026-11-16T23:42:25Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -2055,6 +2055,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "preferred stock is not filed for every year needed"
   },
+  "SPH": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 123,
+   "claims_supported": 120,
+   "date": "2026-11-16T23:33:25Z",
+   "family": "operating",
+   "flags": [
+    "The latest fiscal fourth-quarter results include a goodwill impairment of the natural gas and electricity business of 7,900 (table scale not stated).",
+    "In the latest fiscal fourth quarter, equity in losses and impairment charges for investments in unconsolidated affiliates was 23,091 (table scale not stated), versus 6,519 a year earlier.",
+    "The Partnership recorded an other-than-temporary impairment of $9,595 on its Independence Hydrogen investment, writing it down to an estimated fair value of $21,589."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "a required figure is not filed (capex or working capital)"
+  },
   "SSD": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -2499,7 +2522,7 @@
  "verdict_counts": {
   "AVOID": 19,
   "BUY": 10,
-  "NO_CALL": 48,
+  "NO_CALL": 49,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
