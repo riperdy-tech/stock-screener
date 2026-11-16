@@ -1,7 +1,7 @@
 {
- "count": 55,
+ "count": 56,
  "effort": "high",
- "generated_at": "2026-11-16T17:22:59Z",
+ "generated_at": "2026-11-16T17:34:24Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1239,6 +1239,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no usable tax rate in the filings"
   },
+  "PYPL": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 80,
+   "claims_supported": 77,
+   "date": "2026-11-16T17:23:11Z",
+   "family": "operating",
+   "flags": [
+    "PayPal announced a strategic reorganization of its business and executive leadership team expected to deliver at least $1.5 billion in gross annualized run-rate savings.",
+    "Management implemented a global workforce reduction to simplify operations by removing organizational layers and increasing spans of control, resulting in restructuring charges of $152 million and expected annualized employee-related cost savings of approximately $340 million.",
+    "PayPal recorded net losses and impairments on strategic investments that drove other income (expense), net to (240) (table in millions) compared with 111 (table in millions) in the prior-year nine-month period, with net losses on strategic investments of 181 (table in millions) in operating cash flow adjustments."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "some filed figures are years older than the latest annual report"
+  },
   "RHLD": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -1706,7 +1729,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 8,
-  "NO_CALL": 32,
+  "NO_CALL": 33,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
