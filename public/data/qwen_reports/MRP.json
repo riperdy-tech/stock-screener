@@ -1,342 +1,296 @@
 {
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 100,
- "claims_supported": 69,
- "date": "2026-11-01T16:47:30Z",
+ "claims": 84,
+ "claims_supported": 71,
+ "date": "2026-11-15T18:29:22Z",
  "family": "family_not_built",
- "flags": [],
- "in_code_book": true,
+ "flags": [
+  "Millrose completed its Spin-Off from Lennar and began trading on the NYSE under the symbol MRP.",
+  "Millrose acquired approximately 25,000 homesites from Rausch for approximately $859 million in cash.",
+  "Millrose funded $494.5 million in land banking capital for New Home's acquisition of Landsea, acquiring 4,186 homesites in $522.8 million of land assets."
+ ],
+ "in_code_book": false,
  "model": "qwen",
  "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
- "qwen_book": "held",
- "source": "formation 2026-10-30",
+ "qwen_book": null,
+ "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+ "source": "screener list refresh",
  "tasks": {
   "business_model": [
    {
-    "basis": "Stated in P1 (10-K Item 1) and P3 (10-K Item 7 MD&A)",
-    "claim": "Millrose purchases and develops residential land and sells finished homesites to homebuilders via option contracts, earning recurring monthly option fee payments as its primary revenue.",
+    "basis": "Stated in the 10-K Item 1 Business description",
+    "claim": "Millrose purchases and develops residential land and sells finished homesites to homebuilders by way of option contracts with predetermined costs and takedown schedules.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "Millrose purchases and develops residential land and sells finished homesites to homebuilders by way of option contracts with predetermined costs and takedown schedules.",
-     "In return the Company earns income on our homesites under option contracts through recurring option fees paid by our counterparties through the term of the applicable option contract."
+     "Millrose purchases and develops residential land and sells finished homesites to homebuilders by way of option contracts with predetermined costs and takedown schedules."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 (10-K Item 1) and shown in F2 (10-Q income statement, table in thousands)",
-    "claim": "A secondary revenue source is development loan income earned on outstanding loan balances secured by residential property.",
+    "basis": "Stated in the 10-K Item 1 Business description",
+    "claim": "Millrose has one reportable segment that derives revenue primarily from its portfolio of homesites under option contracts, with a lesser amount from development loans.",
     "facts": [
-     "P1",
+     "P1"
+    ],
+    "quotes": [
+     "We have one reportable segment that derives revenue primarily from our portfolio of homesites under option contracts. To a lesser extent, we earn interest income on the outstanding loan balance of development loans secured by residential property."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q condensed consolidated statements of operations",
+    "claim": "Option fee revenues, the primary revenue line, were $209,480 (table in thousands) for Q3 2026 and $590,180 (table in thousands) for the nine months ended September 30, 2026, up from $170,326 (table in thousands) and $391,491 (table in thousands) in the prior-year periods.",
+    "facts": [
      "F2"
     ],
     "quotes": [
-     "To a lesser extent, we also provide development loans secured by property intended for residential use.",
-     "Development loan income | 1,453 | 7,918 | 11,081 | 10,535"
+     "Option fee revenues | $ 209,480 | $ 170,326 | $ 590,180 | $ 391,491"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 (10-K Item 1) and P3 (10-K Item 7 MD&A)",
-    "claim": "Millrose has one reportable segment that derives revenue primarily from its portfolio of homesites under option contracts.",
+    "basis": "Stated in the 10-Q income statement and 10-K business description",
+    "claim": "Development loan income, a secondary revenue source, was $1,524 (table in thousands) for Q3 2026 and $12,605 (table in thousands) for the nine months ended September 30, 2026.",
     "facts": [
-     "P1",
-     "P3"
+     "F2",
+     "P1"
     ],
     "quotes": [
-     "We have one reportable segment that derives revenue primarily from our portfolio of homesites under option contracts.",
-     "We have a single operating and reportable segment in accordance with GAAP and our operations are conducted in the United States."
+     "Development loan income | 1,524 | 8,934 | 12,605 | 19,469",
+     "To a lesser extent, we also provide development loans secured by property intended for residential use."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4 (10-Q MD&A) and P6 (Q3 2026 earnings release)",
-    "claim": "Revenue is driven by the Invested Capital balance multiplied by a weighted average yield, with the total portfolio yield at 9.3% as of September 30, 2026.",
+    "basis": "Stated in the 10-Q income statement and MD&A",
+    "claim": "Beginning in 2026, Millrose added income from preferred instruments as a new revenue line, recording $996 (table in thousands) for the nine months ended September 30, 2026.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Income from preferred instruments | 996",
+     "the Company provided acquisition funding of $170.6 million to support Dream Finders' acquisition of Beazer Homes USA, Inc."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and reflected on the Q3 2026 balance sheet as 'Single-family residential properties, net' of $332,651 (table in thousands)",
+    "claim": "During Q3 2026, Millrose acquired 1,233 single-family residential properties from Lennar for approximately $333 million, introducing a new single-family rental asset class on the balance sheet.",
+    "facts": [
+     "P4",
+     "F1"
+    ],
+    "quotes": [
+     "During the third quarter of 2026, the Company acquired 1,233 single-family residential properties from Lennar for approximately $333 million, inclusive of acquisition costs and capitalized property costs, which was financed with borrowings of approximately $213 million under our SFR Secured Credit Facility and cash on hand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A and 10-Q income statement",
+    "claim": "The primary operating expense is the Management Fee paid to Kennedy Lewis, calculated as 1.25% of Tangible Assets, which was $30,264 (table in thousands) for Q3 2026 and $88,325 (table in thousands) for the nine months ended September 30, 2026.",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "The Management Fee is calculated as 1.25% of Tangible Assets (as defined in the Management Agreement).",
+     "Management fee expense | 30,264 | 25,895 | 88,325 | 59,959"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q income statement and balance sheet",
+    "claim": "Interest expense on debt obligations was $47,093 (table in thousands) for Q3 2026 and $126,319 (table in thousands) for the nine months ended September 30, 2026, representing the largest non-operating cost.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Interest expense | (47,093) | (43,748) | (126,319) | (56,569)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Item 1 Business description",
+    "claim": "The takedown price for each homesite equals the sum of the total land acquisition cost and the predetermined development budget funded by Millrose, and takedown proceeds are recycled into new land acquisitions.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "the homebuilder \"takes down,\" i.e., acquires, the homesite from us based on a pre-negotiated price equal to the sum of (i) the total land acquisition cost, and (ii) the predetermined budget that Millrose funds in connection with the development of the property."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors and Q3 2026 earnings press release",
+    "claim": "Lennar is Millrose's largest counterparty, but as of Q3 2026 the company had expanded to 22 homebuilder and developer relationships, with approximately 42% of the asset base invested outside the Lennar Master Program Agreement.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Lennar is currently our largest counterparty and our business was initially formed to engage in land bank transactions with Lennar as well as potential Lennar Related Ventures and Other Counterparties.",
+     "With the completion of the Dream Finders financing, approximately 42% of our asset base is now invested outside the Lennar Master Program Agreement"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A Invested Capital table and Q3 2026 earnings release",
+    "claim": "The total portfolio weighted average annualized yield was 9.3% as of September 30, 2026, with 8.5% for the Lennar Master Program Agreement and 10.8% for Other Agreements.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "Invested Capital is a non-GAAP financial measure that represents the balance on which monthly cash option fees are paid by counterparties.",
+     "Weighted Average Yield as of September 30, 2026 (5) | 8.5% | 10.8% | 9.3%",
      "Total portfolio weighted average annualized yield was 9.3% as of September 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 (10-K Item 1) and P4 (10-Q MD&A)",
-    "claim": "The business model recycles capital: takedown proceeds from homesite sales are redeployed into new land acquisitions and development funding, sustaining the revenue base without requiring new external equity.",
+    "basis": "Stated in the 10-K MD&A Components of Results of Operations",
+    "claim": "Option contracts are accounted for under ASC 842 Leases, meaning Millrose transfers elements of control of the homesites to counterparties during the option period.",
     "facts": [
-     "P1",
-     "P4",
-     "P6"
+     "P3"
     ],
     "quotes": [
-     "As fully developed homesites are sold by Millrose, capital is recycled into future land acquisitions for homebuilders, providing counterparties with durable access to community growth.",
-     "During the three months ended June 30, 2026, we funded $566 million for land acquisition and development and received $590 million in net takedown proceeds under the Master Program Agreement"
+     "The Company accounts for these contracts under ASC 842 Leases because the Company transfers elements of control of the homesites to the counterparties during the option contract period."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 (10-K Item 1)",
-    "claim": "The takedown price a homebuilder pays is the sum of the land acquisition cost Millrose paid and the predetermined development budget Millrose funded.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "The takedown price associated with each property is the sum of the acquisition price of the property that Millrose paid and the predetermined budget that Millrose has funded in connection with the development of the property."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P3 (10-K Item 7) and P4 (10-Q MD&A); amounts from F2 (10-Q income statement, table in thousands)",
-    "claim": "The primary operating cost is the Management Fee paid to Kennedy Lewis Land and Residential Advisors LLC, calculated as 1.25% of Tangible Assets.",
-    "facts": [
-     "P3",
-     "P4",
-     "F2"
-    ],
-    "quotes": [
-     "The Management Fee is calculated as 1.25% of Tangible Assets (as defined in the Management Agreement).",
-     "Management fee expense | 29,909 | 21,960 | 58,061 | 34,064"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in F2 (10-Q income statement, table in thousands) and P3 (10-K Item 7 MD&A)",
-    "claim": "Interest expense is a significant cost, driven by the company's debt structure including revolving credit facilities, delayed draw term loans, and senior notes.",
-    "facts": [
-     "F2",
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Interest expense | (40,014) | (10,285) | (79,226) | (12,821)",
-     "Other income and expense for the year ended December 31, 2025 includes (i) interest expense for the Credit Agreements and Senior Notes of $91.8 million"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 (10-Q MD&A) and P6 (Q3 2026 earnings release)",
-    "claim": "Millrose's counterparty base expanded from Lennar alone at Spin-Off to 19 counterparties as of June 30, 2026 and 22 as of the Q3 2026 earnings release, with Lennar remaining the largest single counterparty.",
+    "basis": "Stated in the 10-Q MD&A Properties section and 10-Q balance sheet",
+    "claim": "As of September 30, 2026, the portfolio comprised 156,729 homesites across 834 communities in 30 states, with homesites under option contracts valued at $9,902,361 (table in thousands) on the balance sheet.",
     "facts": [
      "P4",
-     "P6"
+     "F1"
     ],
     "quotes": [
-     "As of June 30, 2026, we had 143,771 homesites with 19 counterparties, which were included in 73 separate pools",
-     "Expanded Counterparty Base to 22 Homebuilder and Developer Relationships and Redeployed $1.3 Billion in Land Acquisitions and Development Funding Across the Portfolio"
+     "As of September 30, 2026, homesite assets consisted of 834 properties (also known as communities) in 30 states across the United States, totaling approximately 156,729 homesites, with an approximate aggregate value of $9.9 billion of homesites under option contracts."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 (10-K Item 1) and P4 (10-Q MD&A)",
-    "claim": "95% of Millrose's invested capital is pooled under Multiparty Cross Agreements, which create cross-termination rights that protect against counterparty walk-away on individual communities.",
+    "basis": "Stated in the 10-Q MD&A Invested Capital activity table",
+    "claim": "In Q3 2026, Millrose generated $813,681 (table in thousands) in takedown proceeds and redeployed $1,260,082 (table in thousands) in land acquisition and development funding, for a net increase in Invested Capital of $446,401 (table in thousands) to $9,245,400 (table in thousands).",
     "facts": [
-     "P1",
      "P4"
     ],
     "quotes": [
-     "As of December 31, 2025, 96% of our portfolio investment balance was pooled under these pooling arrangements.",
-     "As of June 30, 2026, 95% of our invested capital balance was pooled under pooling arrangements, of which 100% was pooled under the Master Program Agreement."
+     "Takedown Proceeds (3) | (620,867) | (192,814) | (813,681)",
+     "Land Acquisition and Development Funding (4) | 545,731 | 714,351 | 1,260,082",
+     "Invested Capital as of September 30, 2026 | $5,874,229 | $3,371,171 | $9,245,400"
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "Stated in P1 (10-K Item 1)",
-    "claim": "Millrose intends to elect REIT status for U.S. federal income tax purposes beginning with the taxable year ended December 31, 2025, with operations conducted through taxable REIT subsidiaries (TRSs).",
+    "basis": "Stated in the 10-K Item 1 Business and MD&A",
+    "claim": "Millrose is externally managed by Kennedy Lewis Land and Residential Advisors LLC under a Management Agreement entered into February 7, 2025, and all personnel are employed by the Manager or its affiliates.",
     "facts": [
-     "P1"
+     "P1",
+     "P3"
     ],
     "quotes": [
-     "We intend to elect to be treated as a REIT for U.S. federal income tax purposes beginning with our taxable year ended December 31, 2025.",
-     "Millrose and MPH Parent made a joint election to treat MPH Parent as a TRS of Millrose. Accordingly, MPH Parent will be subject to full entity-level taxation in connection with its business operations."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6 (Q3 2026 earnings release)",
-    "claim": "Subsequent to Q3 2026, Millrose completed $1.1 billion of capital support in connection with Dream Finders Homes' acquisition of Beazer Homes, and acquired 1,233 completed single-family homes from Lennar for approximately $333 million.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Subsequent to Quarter End, Completed $1.1 Billion of Capital Support in Connection with Dream Finders Homes' Acquisition of Beazer Homes",
-     "Millrose acquired an initial portfolio of 1,233 completed single-family homes from Lennar across 18 states for an aggregate cost basis of approximately $333 million"
+     "We are externally managed and advised by our Manager, Kennedy Lewis Land and Residential Advisors LLC, pursuant to the Management Agreement between Millrose and KL entered into on February 7, 2025.",
+     "All personnel are employed by the Manager or an affiliate of the Manager, and their salaries are paid by the Manager or affiliate, as relevant; therefore, we do not record personnel-related expenses, including salaries, benefits, and share-based compensation for any employees."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "stated in the 10-K Business section",
-    "claim": "Millrose operates a self-funding recycled-capital homesite option platform that continuously redeploy takedown proceeds into new land acquisitions, distinguishing it from traditional private-market land banks.",
+    "basis": "Stated in the 10-K Business section as a core design principle of the platform",
+    "claim": "Millrose differentiates itself from traditional land banking through a self-funding capital recycling model in which takedown proceeds are continuously redeployed into new land acquisitions without re-initiating external capital raising.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Unlike private-market, traditional land bank solutions, we continuously recycle our capital to fund land acquisition and development for our counterparties on a consistent basis, rather than returning takedown proceeds to our external investors and re-initiating the capital raising process."
+     "Unlike private-market, traditional land bank solutions, we continuously recycle our capital to fund land acquisition and development for our counterparties on a consistent basis, rather than returning takedown proceeds to our external investors and re-initiating the capital raising process.",
+     "This perpetual self-funding recurring process provides us with the ability to generate cash that is then recycled back into future properties, even during periods of market downturn or periods of depressed market conditions."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K and Q3 2026 earnings release",
-    "claim": "As of September 30, 2026, Millrose held 156,729 homesites across 834 communities in 30 states, up from 142,139 homesites in 933 properties at December 31, 2025.",
+    "basis": "Stated in the 10-Q MD&A and the Q3 2026 earnings release",
+    "claim": "As of September 30, 2026, Millrose operated 156,729 homesites across 834 communities in 30 states with an aggregate value of $9.9 billion in homesites under option contracts, representing substantial scale for a company less than two years old.",
     "facts": [
-     "P1",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "As of December 31, 2025, we had 142,139 homesites in 933 properties (also known as communities) across 30 states.",
+     "As of September 30, 2026, homesite assets consisted of 834 properties (also known as communities) in 30 states across the United States, totaling approximately 156,729 homesites, with an approximate aggregate value of $9.9 billion of homesites under option contracts.",
      "Millrose ended the quarter with 156,729 homesites across 834 communities in 30 states as of September 30, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K MD&A and Q2 2026 10-Q MD&A",
-    "claim": "The portfolio's aggregate homesite value grew from approximately $8.9 billion at December 31, 2025 to approximately $9.6 billion at June 30, 2026.",
+    "basis": "Stated in the 10-Q MD&A Invested Capital table and the Q3 2026 earnings release",
+    "claim": "Millrose's weighted average portfolio yield was 9.3% as of September 30, 2026, with the Lennar Master Program Agreement segment at 8.5% and Other Agreements at 10.8%, and the company reported a sixth consecutive quarterly increase in AFFO to $0.80 per share.",
     "facts": [
-     "P3",
-     "P4"
-    ],
-    "quotes": [
-     "As of December 31, 2025, our homesite assets consisted of 933 properties (also known as communities) in 30 states across the United States, totaling approximately 142,139 homesites, with an approximate aggregate value of $8.9 billion of homesites under option contracts.",
-     "As of June 30, 2026, our homesite assets consisted of 877 properties (also known as communities) in 30 states across the United States, totaling approximately 143,771 homesites, with an approximate aggregate value of $9.6 billion of homesites under option contracts."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in 10-K, Q2 10-Q, and Q3 earnings release",
-    "claim": "Millrose expanded its counterparty base from 15 at year-end 2025 to 22 homebuilder and developer relationships by Q3 2026, reducing dependence on any single builder.",
-    "facts": [
-     "P3",
      "P4",
      "P6"
     ],
     "quotes": [
-     "As of December 31, 2025, we had 142,139 homesites with 15 counterparties which were included in 66 separate pools, in accordance with the applicable Multiparty Cross Agreements.",
-     "As of June 30, 2026, we had 143,771 homesites with 19 counterparties, which were included in 73 separate pools, in accordance with the applicable Multiparty Cross Agreements.",
+     "Total portfolio weighted average annualized yield was 9.3% as of September 30, 2026.",
+     "Third Quarter AFFO of $0.80 Per Share, the Sixth Consecutive Quarterly AFFO Increase; Raises Fourth Quarter AFFO Outlook to $0.82 to $0.84 Per Share"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the CEO quote in the Q3 2026 earnings release and the headline",
+    "claim": "Millrose has expanded its counterparty base to 22 homebuilder and developer relationships, with approximately 42% of its asset base now invested outside the Lennar Master Program Agreement following the Dream Finders/Beazer Homes transaction.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "With the completion of the Dream Finders financing, approximately 42% of our asset base is now invested outside the Lennar Master Program Agreement, reflecting what Millrose has always been: a comprehensive capital solutions platform for the homebuilding industry.",
      "Expanded Counterparty Base to 22 Homebuilder and Developer Relationships and Redeployed $1.3 Billion in Land Acquisitions and Development Funding Across the Portfolio"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the Q3 2026 earnings release",
-    "claim": "Approximately 42% of Millrose's asset base was invested outside the Lennar Master Program Agreement as of Q3 2026, reflecting diversification away from its original parent.",
+    "basis": "Stated in the 10-Q MD&A Recent Transactions section",
+    "claim": "Millrose entered its first multifamily land banking partnership with JPI (a subsidiary of Sumitomo Forestry Co., Ltd.) and acquired 1,233 single-family residential rental properties from Lennar for approximately $333 million, diversifying beyond its core single-family homesite option platform.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "With the completion of the Dream Finders financing, approximately 42% of our asset base is now invested outside the Lennar Master Program Agreement, reflecting what Millrose has always been: a comprehensive capital solutions platform for the homebuilding industry."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in 10-K MD&A, Q2 10-Q MD&A, and Q3 earnings release",
-    "claim": "The total portfolio weighted average annualized yield was 9.2% at both December 31, 2025 and June 30, 2026, and rose to 9.3% at September 30, 2026.",
-    "facts": [
-     "P3",
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "On a total portfolio basis, the weighted average yield was 9.2% as of December 31, 2025.",
-     "On a total portfolio basis, the weighted average yield was 9.2% as of June 30, 2026.",
-     "Total portfolio weighted average annualized yield was 9.3% as of September 30, 2026."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the Q3 2026 earnings release",
-    "claim": "Millrose reported a record Q3 2026 net income of $130.0 million ($0.78 per share) and AFFO of $0.80 per share, the sixth consecutive quarterly AFFO increase.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Net income attributable to Millrose common shareholders of $130.0 million, or $0.78 per share.",
-     "Third Quarter AFFO of $0.80 Per Share, the Sixth Consecutive Quarterly AFFO Increase"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Business section",
-    "claim": "Millrose's proprietary technology platform, a land banking data warehouse and ERP system, is a stated core differentiator enabling fast due diligence and high-volume transaction processing across geographies.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "Core to our value offering is our technology platform, a proprietary land banking data warehouse and enterprise resource planning (ERP) system developed and deployed by our Manager.",
-     "Our technology uniquely empowers us to perform fast, accurate due diligence, process a high volume of transactions, and manage assets across diverse geographies."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the Q2 10-Q MD&A and 10-K Business section",
-    "claim": "As of June 30, 2026, 95% of Millrose's invested capital was pooled under Multiparty Cross Agreements, creating cross-termination protection that allows the company to sell pooled assets to third parties if a counterparty walks away.",
-    "facts": [
-     "P4",
-     "P1"
-    ],
-    "quotes": [
-     "As of June 30, 2026, 95% of our invested capital balance was pooled under pooling arrangements, of which 100% was pooled under the Master Program Agreement.",
-     "This helps protect Millrose against counterparty decisions not to purchase particular properties that have declined in value by enabling Millrose to sell to third parties, free of counterparty purchase options, other properties in the pool that may have increased in value."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the Q3 2026 earnings release",
-    "claim": "In Q3 2026 Millrose launched a single-family rental pilot, acquiring 1,233 completed homes from Lennar for approximately $333 million, and subsequently completed $1.1 billion of capital support for Dream Finders Homes' acquisition of Beazer Homes.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Millrose acquired an initial portfolio of 1,233 completed single-family homes from Lennar across 18 states for an aggregate cost basis of approximately $333 million",
-     "Subsequent to Quarter End, Completed $1.1 Billion of Capital Support in Connection with Dream Finders Homes' Acquisition of Beazer Homes"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in 8-K filings and Q2 10-Q",
-    "claim": "Millrose maintained access to capital markets by issuing $1.0 billion of senior notes in two tranches (6.500% due 2029 and 6.750% due 2031) in October 2026 and entering a new credit agreement in March 2026 with a $1.335 billion revolving facility.",
-    "facts": [
-     "P8",
      "P4"
     ],
     "quotes": [
-     "the Company completed the offer and sale (the \"Offering\") of $1.0 billion aggregate principal amount of senior notes in two separate tranches",
-     "On March 25, 2026, the Company entered into the Credit Agreement (as defined below) that provides for (i) a four-year Revolving Credit Facility (as defined below) with commitments in an aggregate amount of $1.335 billion"
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in 8-K filings and Q3 earnings release",
-    "claim": "In September 2026 the Board declared a quarterly dividend of $0.79 per share, and in October 2026 authorized a $250 million share repurchase program, signaling confidence in sustained cash generation.",
-    "facts": [
-     "P9",
-     "P6"
-    ],
-    "quotes": [
-     "the Company's Board of Directors declared a quarterly cash dividend of $0.79 per share on the Company's Class A common stock and Class B common stock",
-     "the Company's Board of Directors authorized a new $250 million share repurchase program"
+     "The land banking facility represents the Company's first multifamily land banking partnership, under which it will acquire and fund development of homesites and execute option agreements with JPI during the development period.",
+     "During the third quarter of 2026, the Company acquired 1,233 single-family residential properties from Lennar for approximately $333 million, inclusive of acquisition costs and capitalized property costs, which was financed with borrowings of approximately $213 million under our SFR Secured Credit Facility and cash on hand."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Risk Factors",
-    "claim": "Lennar remains Millrose's largest counterparty, and the company's business was initially formed around the Lennar relationship, creating concentration risk.",
+    "basis": "Stated in the 10-K Risk Factors section",
+    "claim": "Millrose's competitive position is threatened by its continued reliance on Lennar as its largest counterparty, with Lennar holding exclusive Founder's Rights including Enforcement Rights that allow it to compel sales and stop all monthly option payments on all properties if Millrose refuses to sell.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Lennar is currently our largest counterparty and our business was initially formed to engage in land bank transactions with Lennar as well as potential Lennar Related Ventures and Other Counterparties."
+     "Lennar is currently our largest counterparty and our business was initially formed to engage in land bank transactions with Lennar as well as potential Lennar Related Ventures and Other Counterparties.",
+     "If we refuse to sell homesites to Lennar after it exercises a purchase option, Lennar has an Enforcement Right by which it can compel us to sell and, if we fail to comply within a ten-day cure period, Lennar may immediately stop all monthly option payments on all properties covered by the Lennar Agreements without penalty or breach."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Risk Factors and MD&A",
-    "claim": "The portfolio is geographically concentrated, with approximately 50% of property assets in California, Florida, and Texas, exposing Millrose to regional housing-market and environmental risks.",
+    "basis": "Stated in the 10-K Risk Factors section",
+    "claim": "Millrose's recycled capital business model is contingent on counterparties electing to exercise their land purchase options; they are under no obligation to do so and may decline in a significant market downturn, forcing Millrose to bear the cost of construction and resale to third parties.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "our counterparties are under no obligation to exercise their land purchase options and purchase the homesites, and they may decline to exercise them in the event of a significant downturn in the market.",
+     "The price for which we can sell homes to third parties may be significantly less than the amounts of our investments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K Risk Factors and MD&A Properties section",
+    "claim": "Millrose's portfolio is geographically concentrated, with approximately 50% of property assets in three states (California, Florida, Texas) and approximately 41% in Florida and Texas alone, increasing exposure to localized market fluctuations.",
     "facts": [
      "P2",
      "P3"
@@ -348,342 +302,313 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Risk Factors",
-    "claim": "Counterparties are under no obligation to exercise their land purchase options and may decline to do so in a significant market downturn, which would strand Millrose's capital in undeveloped or partially developed land.",
+    "basis": "Stated in the 10-K Risk Factors section",
+    "claim": "Millrose's ability to obtain additional debt financing is constrained by a Debt-to-Equity Ratio Limit requiring Lennar's prior approval if the combined ratio exceeds 1:1, which may restrict its ability to fund growth or provide capital to counterparties.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "our counterparties are under no obligation to exercise their land purchase options and purchase the homesites, and they may decline to exercise them in the event of a significant downturn in the market."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Risk Factors",
-    "claim": "Lennar holds exclusive Founder's Rights, including a Capital Priority Right that limits the amount of capital Millrose can deploy to counterparties other than Lennar, and an Enforcement Right that can compel Millrose to sell homesites and stop all option payments if Millrose refuses.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Lennar's Capital Priority Right limits the amount of capital Millrose has available for transactions with counterparties other than Lennar or Lennar Related Ventures",
-     "If we refuse to sell homesites to Lennar after it exercises a purchase option, Lennar has an Enforcement Right by which it can compel us to sell and, if we fail to comply within a ten-day cure period, Lennar may immediately stop all monthly option payments on all properties covered by the Lennar Agreements without penalty or breach."
+     "Under the Lennar Agreements, Millrose may not enter into third-party financing arrangements that would cause the combined debt-to-equity ratio of Millrose and its affiliates to exceed 1:1 without Lennar's prior approval.",
+     "Lennar's Capital Priority Right limits the amount of capital Millrose has available for transactions with counterparties other than Lennar or Lennar Related Ventures, which may make it difficult to provide our homesite option platform to such counterparties."
     ],
     "support": "quote_not_found"
    },
    {
-    "basis": "stated in the 10-K Risk Factors",
-    "claim": "Millrose has not obtained independent appraisals or fairness opinions for its real estate assets, including those acquired in the Spin-Off and the Rausch Transaction.",
+    "basis": "Stated in the 10-K Risk Factors and Business sections",
+    "claim": "Millrose is a recently formed company with limited operating history as an independent entity, having been incorporated on March 19, 2024 and spun off from Lennar on February 7, 2025, giving investors a limited basis to evaluate its standalone performance.",
     "facts": [
-     "P2"
+     "P2",
+     "P1"
     ],
     "quotes": [
-     "We have not obtained independent appraisals or valuations for our real estate assets, including the assets acquired in the Spin-Off and the Rausch Transaction."
+     "Millrose was incorporated as a Maryland corporation on March 19, 2024 and its Class A Common Stock was listed on the NYSE on February 7, 2025 at the time of the Spin-Off from Lennar.",
+     "Because we have limited operating history as an independent public company, you have a limited basis upon which to evaluate our ability to achieve our business objectives and perform as a standalone and separate business."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Risk Factors",
-    "claim": "The Lennar Agreements restrict Millrose from entering third-party financing that would cause a combined debt-to-equity ratio exceeding 1:1 without Lennar's prior approval, potentially constraining growth financing.",
+    "basis": "Stated in the 10-Q Condensed Consolidated Balance Sheets (table in thousands)",
+    "claim": "Millrose's total assets grew to $10,555,895 (table in thousands) as of September 30, 2026 from $9,258,107 (table in thousands) at December 31, 2025, driven by new homesite investments, the Dream Finders preferred instruments, and single-family residential property acquisitions, while debt obligations increased to $3,127,456 (table in thousands) from $2,112,062 (table in thousands).",
     "facts": [
-     "P2"
+     "F1"
     ],
-    "quotes": [
-     "Under the Lennar Agreements, Millrose may not enter into third-party financing arrangements that would cause the combined debt-to-equity ratio of Millrose and its affiliates to exceed 1:1 without Lennar's prior approval."
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Risk Factors",
-    "claim": "Millrose is a recently formed company with limited operating history, having been incorporated in March 2024 and spun off from Lennar in February 2025, limiting the basis for evaluating its standalone performance.",
+    "basis": "Stated in the 10-K Business and Risk Factors sections",
+    "claim": "Millrose's 96% portfolio pooling under Multiparty Cross Agreements is intended to spread risk across geographies and communities, but the pooling decisions were made solely by Lennar before Millrose had independent management, and the composition may not reflect standard market practices.",
     "facts": [
+     "P1",
      "P2"
     ],
     "quotes": [
-     "We are a recently formed company with limited operating history, and you have a limited basis on which to evaluate our ability to achieve our business objectives or to perform as a standalone and separate business."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Risk Factors",
-    "claim": "If Lennar or another major counterparty enters bankruptcy, key agreements such as the Master Program Agreement may become unenforceable, and Lennar's bankruptcy would likely have a severe adverse impact on Millrose's business.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "If we or any of our major counterparties, including Lennar, enter into bankruptcy, key agreements such as the Master Program Agreement or the Master Option Agreement may become unenforceable.",
-     "Given the significance of our agreements with Lennar to our operations, if Lennar entered into bankruptcy it would likely have a severe adverse impact on our business and could force us into bankruptcy unless we are able to quickly establish relationships with other Lennar Related Ventures or additional counterparties."
+     "As of December 31, 2025, 96% of our portfolio investment balance was pooled under these pooling arrangements.",
+     "These pools were structured primarily for diversity across geographies, communities, and home types, but the selection and pooling decisions were made solely by Lennar, with input from Kennedy Lewis, before we had independent management."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated in the cited item (8-K earnings release balance sheet)",
-    "claim": "Millrose held $64,535 (table in thousands) in cash as of September 30, 2026, up from $35,046 (table in thousands) at December 31, 2025.",
+    "basis": "Stated in F1 balance sheet and P4 MD&A; the $1.385 billion figure is the post-accordion commitment amount.",
+    "claim": "Cash on hand at September 30, 2026 was $64,535 (table in thousands), a modest buffer relative to total assets of $10,555,895 (table in thousands), but the company had access to an undrawn revolving credit facility with commitments of $1.385 billion after a September 2026 accordion increase.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Cash | 64,535 | 35,046"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the cited item (10-Q MD&A)",
-    "claim": "The new Credit Agreement effective March 25, 2026 provides a four-year revolving credit facility of $1.335 billion, a $500 million DDTL available in year one, and an uncommitted accordion up to $2.5 billion total.",
-    "facts": [
+     "F1",
      "P4"
     ],
     "quotes": [
-     "a four-year Revolving Credit Facility (as defined below) with commitments in an aggregate amount of $1.335 billion, (ii) a DDTL Credit Facility (as defined below) in an aggregate amount of $500 million that may be utilized during the first year following the Effective Date (as defined below), and (iii) an uncommitted accordion feature that allows the Company to seek additional loan commitments under the Credit Agreement in the future, subject to an aggregate maximum commitment amount of $2.5 billion"
+     "Cash | 64,535 | 35,046",
+     "under which the Company exercised the accordion feature under the Credit Agreement to increase the aggregate amount of commitments of the Revolving Credit Facility by $50 million to $1.385 billion."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (8-K earnings release balance sheet)",
-    "claim": "As of September 30, 2026, total debt obligations, net were $3,127,456 (table in thousands) plus a $210,596 (table in thousands) single-family residential secured credit facility, against total stockholders' equity of $5,850,915 (table in thousands).",
+    "basis": "Stated in F1 balance sheet and P2 risk factors.",
+    "claim": "Total debt obligations net of $3,127,456 (table in thousands) plus the SFR secured credit facility of $210,596 (table in thousands) give total leverage of approximately $3.34 billion against stockholders' equity of $5,850,915 (table in thousands), a debt-to-equity ratio well below the 1:1 cap imposed by the Lennar Agreements.",
     "facts": [
-     "P6"
+     "F1",
+     "P2"
     ],
     "quotes": [
      "Debt obligations, net | 3,127,456 | 2,112,062",
-     "Single-family residential secured credit facility | 210,596 | \u2014",
-     "Total stockholders' equity | 5,850,915 | 5,856,262"
+     "Single-family residential secured credit facility, net | 210,596 | 0",
+     "Total stockholders' equity | 5,850,915 | 5,856,262",
+     "Under the Lennar Agreements, Millrose may not enter into third-party financing arrangements that would cause the combined debt-to-equity ratio of Millrose and its affiliates to exceed 1:1 without Lennar's prior approval."
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "stated in the cited item (10-K Risk Factors)",
-    "claim": "Under the Lennar Agreements, Millrose may not enter third-party financing that would cause its combined debt-to-equity ratio to exceed 1:1 without Lennar's prior approval.",
+    "basis": "Stated in F2 income statement and P4 Invested Capital table.",
+    "claim": "Recurring option fee revenue for the nine months ended September 30, 2026 was $590,180 (table in thousands), generated on a total Invested Capital balance of $9,245,400 (table in thousands) at a weighted average yield of 9.3%.",
     "facts": [
-     "P1"
+     "F2",
+     "P4"
     ],
     "quotes": [
-     "Millrose may not enter into third-party financing arrangements that would cause the combined debt-to-equity ratio of Millrose and its affiliates to exceed 1:1 without Lennar's prior approval."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in the cited item (8-K earnings release income statement)",
-    "claim": "Net income attributable to common stockholders was $130,002 (table in thousands) for the third quarter of 2026, or $0.78 per share, and $378,767 (table in thousands) for the nine months ended September 30, 2026, or $2.28 per share.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Net income attributable to Millrose Properties, Inc. common stockholders | $130,002",
-     "Basic earnings per share of Class A and Class B common stock | $0.78",
-     "Net income attributable to Millrose Properties, Inc. common stockholders | $378,767",
-     "Basic earnings per share of Class A and Class B common stock | $2.28"
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "stated in the cited item (8-K earnings release)",
-    "claim": "AFFO was $133,519 (table in thousands) or $0.80 per share for Q3 2026, described as the sixth consecutive quarterly increase, with Q4 2026 AFFO outlook raised to $0.82 to $0.84 per share.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "AFFO attributable to Millrose Properties, Inc. common stockholders | $133,519",
-     "AFFO basic earnings per share of Class A and Class B common stock | $0.80",
-     "Third Quarter AFFO of $0.80 Per Share, the Sixth Consecutive Quarterly AFFO Increase; Raises Fourth Quarter AFFO Outlook to $0.82 to $0.84 Per Share"
+     "Option fee revenues | $ 209,480 | $ 170,326 | $ 590,180 | $ 391,491",
+     "Total Invested Capital as of September 30, 2026 | $5,874,229 | $3,371,171 | $9,245,400",
+     "Weighted Average Yield as of September 30, 2026 (5) | 8.5% | 10.8% | 9.3%"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item (8-K earnings release Invested Capital table)",
-    "claim": "The total portfolio weighted average annualized yield was 9.3% on invested capital of $9,245,400 (table in thousands) as of September 30, 2026, with an implied quarterly income run rate of $221 million.",
+    "basis": "Stated in F3 cash flow statement; the 86% ratio is inferred by dividing takedowns by total operating cash flow.",
+    "claim": "Net cash from operating activities for the nine months ended September 30, 2026 was $2,558,409 (table in thousands), of which $2,196,771 (table in thousands) was takedown proceeds from homesite sales\u2014meaning approximately 86% of operating cash flow was capital recycling rather than recurring fee income.",
     "facts": [
-     "P6"
+     "F3"
     ],
     "quotes": [
-     "Weighted Average Yield as of September 30, 2026 (5) | 8.5% | 10.8% | 9.3%",
-     "Total Invested Capital as of September 30, 2026 | $5,874,229 | $3,371,171 | $9,245,400",
-     "Implied Quarterly Income Run Rate as of September 30, 2026 (6) | $128 | 93 | $221"
+     "Net cash flows from operating activities | 2,558,409 | 2,535,829",
+     "Takedowns of homesites under option contracts, net of builder deposit credits | 2,196,771 | 2,224,076"
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "stated in the cited item (8-K earnings release Invested Capital activity table)",
-    "claim": "In Q3 2026, Millrose funded $1,260,082 (table in thousands) for land acquisition and development while receiving $813,681 (table in thousands) in net takedown proceeds, demonstrating continuous capital recycling.",
+    "basis": "Stated in P6 earnings release and AFFO reconciliation tables.",
+    "claim": "Third-quarter 2026 AFFO was $133,519 (table in thousands), or $0.80 per share, marking the sixth consecutive quarterly AFFO increase; nine-month AFFO was $386,996 (table in thousands), or $2.33 per share.",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Takedown Proceeds (3) | (620,867) | (192,814) | (813,681)",
-     "Land Acquisition and Development Funding (4) | 545,731 | 714,351 | 1,260,082"
+     "Third Quarter AFFO of $0.80 Per Share, the Sixth Consecutive Quarterly AFFO Increase",
+     "AFFO attributable to Millrose Properties, Inc. common stockholders | $133,519 | $122,498",
+     "AFFO attributable to Millrose Properties, Inc. common stockholders | $386,996 | $302,292"
     ],
-    "support": "number_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in the cited items (10-K Business section; 8-K Item 1.01)",
-    "claim": "Unsecured senior notes outstanding as of October 2026 comprise $1.25 billion of 6.375% notes due 2030, $750 million of 6.25% notes due 2032, $500.0 million of 6.500% notes due 2029, and $500.0 million of 6.750% notes due 2031.",
+    "basis": "Stated in P6 and P9; the 98% ratio is inferred by dividing $131.2M by $133.5M.",
+    "claim": "The quarterly dividend declared in September 2026 was $0.79 per share ($131.2 million total), representing an approximate 98% payout of Q3 AFFO of $133.5 million, leaving minimal retained earnings to fund organic growth from operations.",
+    "facts": [
+     "P6",
+     "P9"
+    ],
+    "quotes": [
+     "On September 23, 2026, Millrose declared a quarterly dividend of $131.2 million, or $0.79 per share of Class A and Class B common stock.",
+     "Adjusted Funds From Operations (AFFO): $133.5 million, or $0.80 per share."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in P8 (8-K on notes), P1 (10-K business section), and P4 (10-Q MD&A).",
+    "claim": "The nearest major debt maturity is the $500.0 million 6.500% senior notes due October 15, 2029; the four-year revolving credit facility entered March 25, 2026 matures approximately March 2030, coinciding with the $1.25 billion 6.375% notes due 2030.",
+    "facts": [
+     "P8",
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "The 2029 Notes mature on October 15, 2029 and the 2031 Notes mature on October 15, 2031.",
+     "On August 7, 2025, we issued $1.25 billion aggregate principal amount of 6.375% senior notes due 2030",
+     "a four-year Revolving Credit Facility (as defined below) with commitments in an aggregate amount of $1.335 billion"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P8 (8-K), P10 (8-K pricing announcement), and P4 (10-Q MD&A).",
+    "claim": "The company demonstrated capital market access in 2026 by completing a $1.0 billion private senior notes offering in October 2026 (two tranches: $500M at 6.500% due 2029 and $500M at 6.750% due 2031) and has an uncommitted accordion feature allowing the credit agreement commitments to be raised to an aggregate maximum of $2.5 billion.",
+    "facts": [
+     "P8",
+     "P10",
+     "P4"
+    ],
+    "quotes": [
+     "On October 6, 2026, Millrose Properties, Inc. (\"Millrose\" or the \"Company\") completed the offer and sale (the \"Offering\") of $1.0 billion aggregate principal amount of senior notes in two separate tranches, one consisting of $500.0 million aggregate principal amount of 6.500% senior notes due 2029 (the \"2029 Notes\") and the other consisting of $500.0 million aggregate principal amount of 6.750% senior notes due 2031 (the \"2031 Notes\" and, together with the 2029 Notes, the \"Notes\").",
+     "an uncommitted accordion feature that allows the Company to seek additional loan commitments under the Credit Agreement in the future, subject to an aggregate maximum commitment amount of $2.5 billion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (10-K) and P8/P10 (8-K filings on 2026 offering).",
+    "claim": "Total outstanding senior notes across four tranches amount to $3.0 billion ($1.25B 6.375% due 2030, $750M 6.25% due 2032, $500M 6.500% due 2029, $500M 6.750% due 2031), with the 2030 and 2032 tranches issued in 2025 to refinance the DDTL Credit Facility that had been used for the New Home/Landsea acquisition.",
     "facts": [
      "P1",
-     "P8"
+     "P8",
+     "P10"
     ],
     "quotes": [
-     "On August 7, 2025, we issued $1.25 billion aggregate principal amount of 6.375% senior notes due 2030",
-     "On September 11, 2025, we issued $750 million aggregate principal amount of 6.25% senior notes due 2032",
-     "the Company completed the offer and sale (the \"Offering\") of $1.0 billion aggregate principal amount of senior notes in two separate tranches, one consisting of $500.0 million aggregate principal amount of 6.500% senior notes due 2029 (the \"2029 Notes\") and the other consisting of $500.0 million aggregate principal amount of 6.750% senior notes due 2031"
+     "On August 7, 2025, we issued $1.25 billion aggregate principal amount of 6.375% senior notes due 2030, using the net proceeds therefrom to repay $500 million principal amount outstanding under the DDTL Credit Facility and $450 million principal amount outstanding under the Revolving Credit Facility",
+     "On September 11, 2025, we issued $750 million aggregate principal amount of 6.25% senior notes due 2032, using the net proceeds therefrom to repay the entire $500 million remaining principal amount outstanding under the DDTL Credit Facility",
+     "The 2029 Notes bear interest at a rate of 6.500% per annum and the 2031 Notes bear interest at a rate of 6.750% per annum."
     ],
-    "support": "quote_not_found"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in the cited items (10-Q MD&A; 10-K Business section)",
-    "claim": "The four-year revolving credit facility under the March 2026 Credit Agreement matures in approximately March 2030, and the prior DDTL Credit Facility was terminated and repaid in full on September 11, 2025.",
+    "basis": "Stated in P4 MD&A and F1 balance sheet.",
+    "claim": "The SFR Secured Credit Facility, entered September 30, 2026, provides up to $235.0 million in commitments (expandable to $1.0 billion) to finance the company's new single-family residential rental property portfolio, with $213.1 million outstanding at quarter-end.",
     "facts": [
      "P4",
-     "P1"
+     "F1"
     ],
     "quotes": [
-     "On March 25, 2026, the Company entered into the Credit Agreement (as defined below) that provides for (i) a four-year Revolving Credit Facility",
-     "On September 11, 2025, the DDTL Credit Agreement was terminated and all obligations thereunder were repaid in full."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (8-K earnings release CEO commentary and headline)",
-    "claim": "Approximately 42% of Millrose's asset base was invested outside the Lennar Master Program Agreement as of Q3 2026, with the counterparty base expanded to 22 homebuilder and developer relationships.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "approximately 42% of our asset base is now invested outside the Lennar Master Program Agreement",
-     "Expanded Counterparty Base to 22 Homebuilder and Developer Relationships"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited items (8-K Item 8.01; 8-K earnings release)",
-    "claim": "Millrose declared a quarterly dividend of $0.79 per share (approximately $131.2 million) on September 23, 2026, and the Board authorized a $250 million share repurchase program in October 2026.",
-    "facts": [
-     "P9",
-     "P6",
-     "P7"
-    ],
-    "quotes": [
-     "the Company's Board of Directors declared a quarterly cash dividend of $0.79 per share on the Company's Class A common stock and Class B common stock, payable on October 15, 2026",
-     "the Company's Board of Directors authorized a new $250 million share repurchase program of the Company's Class A common stock, par value $0.01 per share"
+     "The SFR Secured Credit Facility provides for a revolving credit facility with commitments in an aggregate amount of up to $235.0 million. Lenders may agree to (a) increase the aggregate commitments up to $1.0 billion, or (b) make advances in excess of the committed amount but not to exceed a total outstanding balance of $1.0 billion.",
+     "As of September 30, 2026, the Company had $213.1 million of outstanding borrowings under the SFR Secured Credit Facility.",
+     "Single-family residential secured credit facility, net | 210,596 | 0"
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in P6 (press release narrative and invested-capital table) and P4 (10-Q MD&A invested-capital table); the risk of non-exercise is stated in P2 (10-K Risk Factors).",
-    "claim": "The recycled-capital model\u2014takedown proceeds from homesite sales are redeployed into new land acquisitions and development\u2014drives revenue growth; in Q3 2026 Millrose funded $1,260,082 (table in thousands) of new land acquisition and development while receiving $813,681 (table in thousands) in net takedown proceeds, and for the model to continue, counterparties must keep exercising their purchase options on schedule.",
+    "basis": "Stated in P4 MD&A and F3 cash flow statement; the contingency is stated in P2 Risk Factors.",
+    "claim": "The core growth engine is capital recycling: takedown proceeds from homesite sales are redeployed into new land acquisitions and development funding, compounding the invested capital base.",
     "facts": [
-     "P6",
-     "P4"
+     "P4",
+     "F3",
+     "P6"
     ],
     "quotes": [
-     "Millrose produces recurring cash flow through contractual monthly cash option payments with continuous capital redeployment of homesite sale proceeds.",
-     "Land Acquisition and Development Funding (4) | 545,731 | 714,351 | 1,260,082"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P6 (press release headline and CEO quote); the Capital Priority Right constraint is stated in P2 (10-K Risk Factors).",
-    "claim": "Counterparty diversification beyond Lennar is a key growth driver: the counterparty base expanded to 22 homebuilder and developer relationships, and approximately 42% of the asset base is now invested outside the Lennar Master Program Agreement; for this to continue, Millrose must attract and retain new homebuilder partners willing to commit non-refundable option deposits and multi-year takedown schedules.",
-    "facts": [
-     "P6",
-     "P2"
-    ],
-    "quotes": [
-     "Expanded Counterparty Base to 22 Homebuilder and Developer Relationships and Redeployed $1.3 Billion in Land Acquisitions and Development Funding Across the Portfolio",
-     "approximately 42% of our asset base is now invested outside the Lennar Master Program Agreement"
+     "During the three months ended September 30, 2026, we funded $545.7 million for land acquisition and development and received $620.9 million in net takedown proceeds under the Master Program Agreement at a weighted average yield of 8.5%.",
+     "Takedowns of homesites under option contracts, net of builder deposit credits | 2,196,771 | 2,224,076",
+     "Millrose received $596 million in net cash proceeds from homesite sales to Lennar and redeployed $546 million into new land acquisitions and development funding."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P3 (10-K properties table), P4 (10-Q properties narrative), and P6 (press release portfolio highlights and balance sheet).",
-    "claim": "Portfolio scale is growing: homesites increased from 142,139 at December 31, 2025 to 156,729 at September 30, 2026, and total takedown prices rose from $16,055,507,707 to $16,260,668,220 over the same period; for this growth to continue, Millrose must maintain a pipeline of new land acquisitions funded by its revolving credit facility, DDTL, and senior notes.",
+    "basis": "Stated in P3 and P4 Invested Capital tables; counterparty count stated in P6 earnings release headline.",
+    "claim": "Counterparty diversification beyond Lennar is a key growth driver: Other Agreements Invested Capital grew from $2,367,642 (thousands) at Dec 31, 2025 to $3,371,171 (thousands) at Sep 30, 2026, and the counterparty base expanded to 22 homebuilders and developers.",
     "facts": [
      "P3",
      "P4",
      "P6"
     ],
     "quotes": [
-     "Millrose ended the quarter with 156,729 homesites across 834 communities in 30 states as of September 30, 2026.",
-     "As of December 31, 2025, we had 142,139 homesites in 933 properties (also known as communities) across 30 states."
+     "Total Invested Capital as of December 31, 2025 | $6,102,037 | $2,367,642 | $8,469,679",
+     "Total Invested Capital as of September 30, 2026 | $5,874,229 | $3,371,171 | $9,245,400",
+     "Expanded Counterparty Base to 22 Homebuilder and Developer Relationships and Redeployed $1.3 Billion in Land Acquisitions and Development Funding Across the Portfolio"
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "Stated in P6 (press release and invested-capital table), P4 (10-Q invested-capital table), and P3 (10-K invested-capital table); interest expense figures from P2 (10-K income statement) and P6 (8-K financial tables).",
-    "claim": "The total portfolio weighted average annualized yield held at 9.2% through Q2 2026 and ticked up to 9.3% as of September 30, 2026, with the Other Agreements yield at 10.8%; for revenue growth to outpace the growing interest expense (which reached $47,093 (table in thousands) in Q3 2026), new acquisitions must be underwritten at yields at or above the current blended rate.",
+    "basis": "Stated in P4 MD&A Properties section and P3 MD&A Properties section.",
+    "claim": "Invested Capital and homesite count are scaling: total Invested Capital reached $9,245,400 (thousands) and homesite assets grew to 156,729 homesites across 834 communities in 30 states as of September 30, 2026, up from $8,469,679 (thousands) and 142,139 homesites at December 31, 2025.",
     "facts": [
-     "P6",
      "P4",
      "P3"
     ],
     "quotes": [
-     "Total portfolio weighted average annualized yield was 9.3% as of September 30, 2026.",
-     "Weighted Average Yield as of June 30, 2026 (5) | 8.5% | 10.6% | 9.2%"
+     "Total Invested Capital as of September 30, 2026 | $5,874,229 | $3,371,171 | $9,245,400",
+     "homesite assets consisted of 834 properties (also known as communities) in 30 states across the United States, totaling approximately 156,729 homesites",
+     "As of December 31, 2025, our homesite assets consisted of 933 properties (also known as communities) in 30 states across the United States, totaling approximately 142,139 homesites"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated in P6 (press release and AFFO reconciliation table) and P9 (dividend 8-K); the distribution-in-excess line is from P6 (balance sheet) and F1 (balance sheet).",
-    "claim": "AFFO per share has increased for six consecutive quarters, reaching $0.80 in Q3 2026 versus $0.74 in the prior-year quarter, and the company raised its Q4 2026 AFFO outlook to $0.82\u2013$0.84 per share; for this trajectory to continue, option-fee revenue growth must outpace the combined growth in management fees, interest expense, and dividends.",
+    "basis": "Stated in P4 MD&A Recent Transactions; balance sheet line items in F1 confirm recognition (Single-family residential properties, net: $332,651; Preferred instruments, net: $170,670, table in thousands).",
+    "claim": "New product lines\u2014single-family residential rental properties, preferred instruments, and multifamily land banking\u2014diversify revenue beyond the core option-fee model.",
+    "facts": [
+     "P4",
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "During the third quarter of 2026, the Company acquired 1,233 single-family residential properties from Lennar for approximately $333 million, inclusive of acquisition costs and capitalized property costs",
+     "Total funding provided by the Company to Dream Finders was approximately $1.068 billion.",
+     "The land banking facility represents the Company's first multifamily land banking partnership"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 earnings release headline and P9 8-K dividend announcement; interest expense figures from F2 income statement.",
+    "claim": "AFFO has grown for six consecutive quarters, with Q3 2026 AFFO of $0.80 per share and raised Q4 2026 guidance to $0.82\u2013$0.84 per share, supporting a growing dividend ($0.79/share declared) and a new $250 million share repurchase program.",
     "facts": [
      "P6",
      "P9"
     ],
     "quotes": [
      "Third Quarter AFFO of $0.80 Per Share, the Sixth Consecutive Quarterly AFFO Increase; Raises Fourth Quarter AFFO Outlook to $0.82 to $0.84 Per Share",
-     "the Company's Board of Directors declared a quarterly cash dividend of $0.79 per share on the Company's Class A common stock and Class B common stock"
+     "the Company's Board of Directors declared a quarterly cash dividend of $0.79 per share on the Company's Class A common stock and Class B common stock",
+     "the Company's Board of Directors authorized a new $250 million share repurchase program"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P6 (press release portfolio highlights and balance sheet); the preferred instrument income line appears in the P6 income statement table.",
-    "claim": "Millrose is diversifying into new asset classes: it acquired 1,233 completed single-family rental homes for approximately $333 million (funded with approximately $120 million of balance-sheet capital and $213 million of limited-recourse secured financing) and introduced preferred instruments on its balance sheet ($170,670 (table in thousands) at September 30, 2026); for these to contribute to growth, they must generate returns above the company's cost of capital without adding material credit or operational risk.",
+    "basis": "Stated in P8 8-K (notes offering), P4 MD&A (credit agreement and SFR facility), and P10 8-K (pricing); debt figures from F1 balance sheet.",
+    "claim": "Access to capital markets and debt capacity enables continued growth: Millrose issued $1.0 billion of senior notes in October 2026, entered a new $1.385 billion revolving credit facility (with accordion to $2.5 billion), and established a $235.0 million SFR Secured Credit Facility expandable to $1.0 billion.",
     "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Millrose acquired an initial portfolio of 1,233 completed single-family homes from Lennar across 18 states for an aggregate cost basis of approximately $333 million, funded with approximately $120 million of balance sheet capital, net of $213 million of limited-recourse secured financing.",
-     "Single-family residential properties | 332,651 | \u2014"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P4 (10-Q MD&A describing the new credit agreement), P8 (8-K describing the completed notes offering), and P10 (8-K describing the pricing); the debt-to-equity cap is stated in P2 (10-K Risk Factors).",
-    "claim": "Access to capital markets is a precondition for growth: Millrose entered a new credit agreement on March 25, 2026 providing a $1.335 billion revolving facility, a $500 million DDTL, and an accordion up to $2.5 billion, and completed a $1.0 billion two-tranche senior notes offering (6.500% due 2029 and 6.750% due 2031) on October 6, 2026; for the growth strategy to continue, the company must maintain investment-grade or near-investment-grade access to unsecured debt at rates below the portfolio yield.",
-    "facts": [
-     "P4",
      "P8",
+     "P4",
      "P10"
     ],
     "quotes": [
-     "a four-year Revolving Credit Facility (as defined below) with commitments in an aggregate amount of $1.335 billion, (ii) a DDTL Credit Facility (as defined below) in an aggregate amount of $500 million that may be utilized during the first year following the Effective Date (as defined below), and (iii) an uncommitted accordion feature that allows the Company to seek additional loan commitments under the Credit Agreement in the future, subject to an aggregate maximum commitment amount of $2.5 billion",
-     "the Company completed the offer and sale (the \"Offering\") of $1.0 billion aggregate principal amount of senior notes in two separate tranches, one consisting of $500.0 million aggregate principal amount of 6.500% senior notes due 2029 (the \"2029 Notes\") and the other consisting of $500.0 million aggregate principal amount of 6.750% senior notes due 2031"
+     "Millrose Properties, Inc. (\"Millrose\" or the \"Company\") completed the offer and sale (the \"Offering\") of $1.0 billion aggregate principal amount of senior notes in two separate tranches",
+     "the Company exercised the accordion feature under the Credit Agreement to increase the aggregate amount of commitments of the Revolving Credit Facility by $50 million to $1.385 billion",
+     "the SFR Secured Credit Facility provides for a revolving credit facility with commitments in an aggregate amount of up to $235.0 million. Lenders may agree to (a) increase the aggregate commitments up to $1.0 billion"
     ],
     "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P4 Invested Capital table and P6 earnings release; yield is a non-GAAP measure calculated by management.",
+    "claim": "The weighted average yield on the total portfolio is 9.3% as of September 30, 2026, with Other Agreements earning 10.8% versus 8.5% for the Lennar Master Program Agreement, providing a yield-accretive diversification benefit.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Weighted Average Yield as of September 30, 2026 (5) | 8.5% | 10.8% | 9.3%",
+     "Total portfolio weighted average annualized yield was 9.3% as of September 30, 2026."
+    ],
+    "support": "supported"
    }
   ],
   "material_events": [
    {
     "basis": "stated in the cited item",
-    "claim": "Millrose Properties completed its Spin-Off from Lennar, becoming an independent publicly traded company listed on the NYSE under the symbol MRP, receiving approximately $5.5 billion in land assets and approximately $1.0 billion in cash from Lennar.",
+    "claim": "Millrose completed its Spin-Off from Lennar and began trading on the NYSE under the symbol MRP.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "The Spin-Off was completed on February 7, 2025, at which time we became an independent, publicly traded company and our Class A common stock was listed on the New York Stock Exchange under the symbol \"MRP\".",
-     "In connection with the Spin-Off, we received a contribution from Lennar of approximately $5.5 billion in land assets, representing approximately 87,000 homesites, and cash of approximately $1.0 billion, which included $585 million of cash deposit liabilities related to option contracts with Lennar."
+     "The Spin-Off was completed on February 7, 2025, at which time we became an independent, publicly traded company and our Class A common stock was listed on the New York Stock Exchange under the symbol \u201cMRP\u201d."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Millrose acquired approximately 25,000 homesites through the acquisition of 100% of RCH Holdings, Inc. (parent of Rausch) for approximately $859 million in cash.",
+    "claim": "Millrose acquired approximately 25,000 homesites from Rausch for approximately $859 million in cash.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
      "On February 10, 2025, we acquired approximately 25,000 homesites through the acquisition of 100% of the outstanding stock of RCH Holdings, Inc., a newly formed parent holding company of Rausch, for approximately $859 million in cash, which is net of option deposits funded by Lennar and other holdbacks."
@@ -692,35 +617,32 @@
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Millrose funded land banking capital of $494.5 million to support New Home's acquisition of Landsea, acquiring a portfolio of 4,186 homesites in land assets valued at $522.8 million.",
+    "claim": "Millrose funded $494.5 million in land banking capital for New Home's acquisition of Landsea, acquiring 4,186 homesites in $522.8 million of land assets.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "On June 25, 2025, New Home completed the acquisition of Landsea and we funded land banking capital of $494.5 million at closing, acquiring a portfolio of homesites, subject to option agreements with New Home.",
-     "As a result of the transaction, we acquired $522.8 million in land assets, consisting of 4,186 homesites, for $494.5 million in cash, which is net of deposits of $28.3 million related to the option contracts."
+     "On June 25, 2025, New Home completed the acquisition of Landsea and we funded land banking capital of $494.5 million at closing, acquiring a portfolio of homesites, subject to option agreements with New Home."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Millrose entered into a DDTL Credit Agreement providing a delayed draw term loan facility with commitments of $1.0 billion, scheduled to mature on June 23, 2026.",
+    "claim": "Millrose entered into a $1.0 billion delayed draw term loan facility (DDTL Credit Facility), which was terminated and repaid in full on September 11, 2025.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "on June 24, 2025, Millrose entered into the DDTL Credit Agreement that provided for a delayed draw term loan facility (the \"DDTL Credit Facility\") with commitments in the aggregate amount of $1.0 billion that was scheduled to mature on June 23, 2026."
+     "on June 24, 2025, Millrose entered into the DDTL Credit Agreement that provided for a delayed draw term loan facility (the \u201cDDTL Credit Facility\u201d) with commitments in the aggregate amount of $1.0 billion that was scheduled to mature on June 23, 2026.",
+     "On September 11, 2025, the DDTL Credit Agreement was terminated and all obligations thereunder were repaid in full."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Millrose issued $1.25 billion aggregate principal amount of 6.375% senior notes due 2030, using proceeds to repay $500 million under the DDTL Credit Facility and $450 million under the Revolving Credit Facility.",
+    "claim": "Millrose issued $1.25 billion aggregate principal amount of 6.375% senior notes due 2030.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
      "On August 7, 2025, we issued $1.25 billion aggregate principal amount of 6.375% senior notes due 2030, using the net proceeds therefrom to repay $500 million principal amount outstanding under the DDTL Credit Facility and $450 million principal amount outstanding under the Revolving Credit Facility, and the remainder was used for general corporate purposes."
@@ -729,10 +651,9 @@
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Millrose issued $750 million aggregate principal amount of 6.25% senior notes due 2032, using proceeds to repay the remaining $500 million outstanding under the DDTL Credit Facility.",
+    "claim": "Millrose issued $750 million aggregate principal amount of 6.25% senior notes due 2032, using proceeds to repay the remaining $500 million DDTL Credit Facility balance.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
      "On September 11, 2025, we issued $750 million aggregate principal amount of 6.25% senior notes due 2032, using the net proceeds therefrom to repay the entire $500 million remaining principal amount outstanding under the DDTL Credit Facility, and related expenses."
@@ -741,31 +662,18 @@
    },
    {
     "basis": "stated in the cited item",
-    "claim": "The DDTL Credit Agreement was terminated and all obligations thereunder were repaid in full.",
+    "claim": "Lennar completed an Exchange Offer, exchanging 33,298,754 shares of Millrose Class A Common Stock for 8,049,594 shares of Lennar Class A common stock, leaving Lennar with a de minimis stake.",
     "facts": [
-     "P1",
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "On September 11, 2025, the DDTL Credit Agreement was terminated and all obligations thereunder were repaid in full."
+     "On November 26, 2025, Lennar announced the results of the Exchange Offer through which Lennar accepted an aggregate of 8,049,594 shares of Lennar Class A common stock in exchange for 33,298,754 shares of Class A Common Stock of Millrose. The Exchange Offer was completed on November 28, 2025."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Lennar completed an Exchange Offer in which it exchanged 33,298,754 shares of Millrose Class A Common Stock for 8,049,594 shares of Lennar Class A common stock, reducing Lennar's ownership to a de minimis amount.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "Lennar accepted an aggregate of 8,049,594 shares of Lennar Class A common stock in exchange for 33,298,754 shares of Class A Common Stock of Millrose. The Exchange Offer was completed on November 28, 2025. As a result, Lennar now owns a de minimis amount of Common Stock following the completion of the Exchange Offer."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item",
-    "claim": "Millrose entered into a new Credit Agreement providing a four-year Revolving Credit Facility of $1.335 billion, a DDTL Credit Facility of $500 million, and an uncommitted accordion feature up to $2.5 billion in aggregate maximum commitments.",
+    "claim": "Millrose entered into a new Credit Agreement providing a $1.335 billion four-year Revolving Credit Facility, a $500 million DDTL Credit Facility, and an accordion feature up to $2.5 billion aggregate.",
     "facts": [
      "P4"
     ],
@@ -776,366 +684,287 @@
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Millrose received a payoff of approximately $284 million related to one of its development loans with an unaffiliated third party, settling all outstanding principal, accrued interest, and fees.",
+    "claim": "Millrose amended its Credit Agreement (Amendment No. 1) to reduce the loan interest rate by 0.25% per annum.",
     "facts": [
      "P4"
     ],
     "quotes": [
-     "On April 1, 2026, the Company received a payoff of approximately $284 million related to one of its development loans with an unaffiliated third party. The payment settled all outstanding principal, accrued interest, and fees associated with the loan."
+     "On August 5, 2026, the Company entered into Amendment No. 1 to the Credit Agreement. The Credit Agreement was amended pursuant to Amendment No.1 to, among other things, reduce the rate at which the loans bear interest by 0.25% per annum."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Millrose completed the offer and sale of $1.0 billion aggregate principal amount of senior notes in two tranches: $500.0 million of 6.500% senior notes due 2029 and $500.0 million of 6.750% senior notes due 2031.",
+    "claim": "Millrose exercised the accordion feature to increase its Revolving Credit Facility by $50 million to $1.385 billion.",
     "facts": [
-     "P8",
-     "P10"
+     "P4"
     ],
     "quotes": [
-     "On October 6, 2026, Millrose Properties, Inc. (\"Millrose\" or the \"Company\") completed the offer and sale (the \"Offering\") of $1.0 billion aggregate principal amount of senior notes in two separate tranches, one consisting of $500.0 million aggregate principal amount of 6.500% senior notes due 2029 (the \"2029 Notes\") and the other consisting of $500.0 million aggregate principal amount of 6.750% senior notes due 2031 (the \"2031 Notes\" and, together with the 2029 Notes, the \"Notes\")."
+     "On September 21, 2026, the Company and the guarantors entered into the Commitment and Acceptance, by and among the Company, the guarantors, JPMorgan Chase Bank, N.A., as administrative agent for the lenders, and Flagstar Bank, N.A., under which the Company exercised the accordion feature under the Credit Agreement to increase the aggregate amount of commitments of the Revolving Credit Facility by $50 million to $1.385 billion."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the cited item",
-    "claim": "Millrose's Board of Directors declared a quarterly cash dividend of $0.79 per share on Class A and Class B common stock, totaling approximately $131.2 million, payable October 15, 2026.",
+    "basis": "stated in the cited items",
+    "claim": "Millrose provided approximately $1.068 billion in total capital support for Dream Finders' acquisition of Beazer Homes, including a $170.6 million preferred instrument in Q3 2026 and a subsequent $896.9 million (comprising a $316.9 million preferred instrument net of OID and $580.0 million in homesite acquisitions).",
     "facts": [
-     "P9",
+     "P4",
      "P6"
     ],
     "quotes": [
-     "On September 23, 2026, the Company's Board of Directors declared a quarterly cash dividend of $0.79 per share on the Company's Class A common stock and Class B common stock, payable on October 15, 2026, to stockholders of record as of the close of business on October 5, 2026.",
-     "Millrose declared a quarterly dividend of $131.2 million, or $0.79 per share of Class A and Class B common stock."
+     "During the third quarter of 2026, the Company provided acquisition funding of $170.6 million to support Dream Finders' acquisition of Beazer Homes USA, Inc. (\u201cBeazer Homes\u201d).",
+     "Subsequent to the third quarter of 2026, upon the completion of Dream Finders' acquisition of Beazer Homes, the Company provided an additional $896.9 million funding through the purchase of a preferred instrument issued by Dream Finders for $316.9 million, net of original issue discount, and through the acquisition of homesites subject to option agreements with Dream Finders for $580.0 million. Total funding provided by the Company to Dream Finders was approximately $1.068 billion.",
+     "Subsequent to Quarter End, Completed $1.1 Billion of Capital Support in Connection with Dream Finders Homes\u2019 Acquisition of Beazer Homes"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Millrose closed its first multifamily land banking partnership with JPI (a subsidiary of Sumitomo Forestry Co., Ltd.) and Kennedy Lewis Investment Management.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "On July 30, 2026, the Company announced the closing of the first acquisition in a new land banking facility established by JPI, a premier developer of multifamily communities and subsidiary of Sumitomo Forestry Co., Ltd., and Kennedy Lewis Investment Management, to fund Class A multifamily land acquisition and development across JPI\u2019s target markets."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Millrose's Board of Directors authorized a new $250 million share repurchase program of the Company's Class A common stock.",
+    "claim": "Millrose acquired 1,233 single-family residential properties from Lennar for approximately $333 million during Q3 2026, financed with ~$213 million under the SFR Secured Credit Facility and cash.",
     "facts": [
-     "P7",
-     "P6"
+     "P4"
     ],
     "quotes": [
-     "On October 26, 2026, the Company's Board of Directors authorized a new $250 million share repurchase program of the Company's Class A common stock, par value $0.01 per share."
+     "During the third quarter of 2026, the Company acquired 1,233 single-family residential properties from Lennar for approximately $333 million, inclusive of acquisition costs and capitalized property costs, which was financed with borrowings of approximately $213 million under our SFR Secured Credit Facility and cash on hand."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "Subsequent to September 30, 2026, Millrose completed $1.1 billion of capital support in connection with Dream Finders Homes' acquisition of Beazer Homes.",
+    "claim": "Millrose entered into the SFR Secured Credit Facility with commitments up to $235.0 million (expandable to $1.0 billion), with $213.1 million outstanding as of September 30, 2026.",
     "facts": [
-     "P6"
+     "P4"
     ],
     "quotes": [
-     "Subsequent to Quarter End, Completed $1.1 Billion of Capital Support in Connection with Dream Finders Homes' Acquisition of Beazer Homes"
+     "On September 30, 2026, certain subsidiaries of the Company entered into the SFR Secured Credit Facility. The SFR Secured Credit Facility provides for a revolving credit facility with commitments in an aggregate amount of up to $235.0 million. Lenders may agree to (a) increase the aggregate commitments up to $1.0 billion, or (b) make advances in excess of the committed amount but not to exceed a total outstanding balance of $1.0 billion. As of September 30, 2026, the Company had $213.1 million of outstanding borrowings under the SFR Secured Credit Facility."
     ],
     "support": "supported"
    },
    {
     "basis": "stated in the cited item",
-    "claim": "During the third quarter of 2026, Millrose acquired an initial portfolio of 1,233 completed single-family homes from Lennar across 18 states for an aggregate cost basis of approximately $333 million, funded with approximately $120 million of balance sheet capital net of $213 million of limited-recourse secured financing.",
+    "claim": "Millrose completed a $1.0 billion private offering of senior notes: $500.0 million of 6.500% notes due 2029 and $500.0 million of 6.750% notes due 2031.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "On October 6, 2026, Millrose Properties, Inc. (\u201cMillrose\u201d or the \u201cCompany\u201d) completed the offer and sale (the \u201cOffering\u201d) of $1.0 billion aggregate principal amount of senior notes in two separate tranches, one consisting of $500.0 million aggregate principal amount of 6.500% senior notes due 2029 (the \u201c2029 Notes\u201d) and the other consisting of $500.0 million aggregate principal amount of 6.750% senior notes due 2031 (the \u201c2031 Notes\u201d and, together with the 2029 Notes, the \u201cNotes\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Millrose's Board of Directors authorized a new $250 million share repurchase program for its Class A common stock.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "On October 26, 2026, the Company's Board of Directors authorized a new $250 million share repurchase program of the Company\u2019s Class A common stock, par value $0.01 per share."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Millrose raised its fourth quarter 2026 AFFO outlook to $0.82 to $0.84 per share, following a record Q3 AFFO of $0.80 per share (the sixth consecutive quarterly AFFO increase).",
     "facts": [
      "P6"
     ],
     "quotes": [
-     "Millrose acquired an initial portfolio of 1,233 completed single-family homes from Lennar across 18 states for an aggregate cost basis of approximately $333 million, funded with approximately $120 million of balance sheet capital, net of $213 million of limited-recourse secured financing."
+     "Third Quarter AFFO of $0.80 Per Share, the Sixth Consecutive Quarterly AFFO Increase; Raises Fourth Quarter AFFO Outlook to $0.82 to $0.84 Per Share",
+     "Raising guidance for year-end 2026 Adjusted Funds from Operations (AFFO) quarterly run rate to a range of $0.82 to $0.84 per share."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Millrose declared a quarterly cash dividend of $0.79 per share (approximately $131.2 million), paid on October 15, 2026.",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "On September 23, 2026, the Company\u2019s Board of Directors declared a quarterly cash dividend of $0.79 per share on the Company\u2019s Class A common stock and Class B common stock, payable on October 15, 2026, to stockholders of record as of the close of business on October 5, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Millrose entered into agreements with Lennar to acquire 620 additional single-family residential properties for approximately $150.3 million, with an expected net investment of approximately $50 million after anticipated asset-level limited recourse financing.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "The Company has entered into agreements with Lennar to acquire 620 additional single-family residential properties for an aggregate purchase price of approximately $150.3 million, with an expected net investment of approximately $50 million after anticipated asset-level limited recourse financing."
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Stated in P2 (risk factor) and P6 (CEO commentary in earnings release); the 42% figure is a direct quote from the Q3 2026 earnings release.",
-    "claim": "Millrose's revenue and cash flow remain heavily dependent on Lennar, with approximately 58% of the asset base still under the Lennar Master Program Agreement as of Q3 2026, creating a single-counterparty concentration that could impair the recurring option-fee income model if Lennar reduces or ceases takedowns.",
+    "basis": "stated in P6 (earnings release) and P2 (10-K risk factors); the 42% figure is a management statement in the CEO quote",
+    "claim": "Approximately 58% of Millrose's asset base remains invested under the Lennar Master Program Agreement, creating heavy counterparty concentration despite diversification efforts.",
     "facts": [
-     "P2",
-     "P6"
+     "P6",
+     "P2"
     ],
     "quotes": [
-     "Lennar is currently our largest counterparty and our business was initially formed to engage in land bank transactions with Lennar as well as potential Lennar Related Ventures and Other Counterparties.",
-     "approximately 42% of our asset base is now invested outside the Lennar Master Program Agreement"
+     "With the completion of the Dream Finders financing, approximately 42% of our asset base is now invested outside the Lennar Master Program Agreement",
+     "Lennar is currently our largest counterparty and our business was initially formed to engage in land bank transactions with Lennar as well as potential Lennar Related Ventures and Other Counterparties."
     ],
     "support": "number_not_listed"
    },
    {
-    "basis": "Stated in P2 risk factor; pooling data from P3 and P4.",
-    "claim": "The recycled-capital business model depends on counterparties voluntarily exercising purchase options; in a significant housing downturn, counterparties could decline to exercise, locking up capital and halting the takedown-proceeds recycling that funds new acquisitions.",
+    "basis": "stated in P2 (10-K risk factors), Item 1A",
+    "claim": "The recycled-capital business model depends on counterparties electing to exercise their land purchase options; in a significant housing downturn, counterparties may decline to exercise, halting capital recycling.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "our counterparties are under no obligation to exercise their land purchase options and purchase the homesites, and they may decline to exercise them in the event of a significant downturn in the market"
+     "The continued sustainability of Millrose's recycled capital business model, which is intended to generally provide Millrose with reliable, consistent and uninterrupted access to capital, is contingent on our counterparties electing to exercise their land purchase options.",
+     "our counterparties are under no obligation to exercise their land purchase options and purchase the homesites, and they may decline to exercise them in the event of a significant downturn in the market."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2, F1, F3, and P6 financial statements; the six-fold comparison is inferred from the printed figures.",
-    "claim": "Interest expense has grown more than six-fold year-over-year (from $12,821 thousand for the six months ended June 30, 2025 to $79,226 thousand for the six months ended June 30, 2026) and reached $126,319 thousand for the nine months ended September 30, 2026, while cash on the balance sheet was only $34,171 thousand at June 30, 2026, reflecting rapidly rising debt service from the senior notes and credit facilities.",
+    "basis": "stated in P3 (10-K MD&A, Properties section) and P2 (10-K risk factors)",
+    "claim": "Roughly 50% of Millrose's property assets are concentrated in California, Florida, and Texas, with about 41% in Florida and Texas alone, exposing the portfolio to regional market and environmental shocks.",
     "facts": [
-     "F2",
-     "F1",
-     "P6"
-    ],
-    "quotes": [
-     "Interest expense | (40,014) | (10,285) | (79,226) | (12,821)",
-     "Cash | 34,171 | 35,046",
-     "Interest expense | (47,093) | (43,748) | (126,319) | (56,569)"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P2 risk factor section describing the Founder's Rights Agreement.",
-    "claim": "Lennar's Enforcement Rights under the Founder's Rights Agreement allow it to immediately stop all monthly option payments on all properties covered by the Lennar Agreements without penalty or breach if Millrose fails to comply with a purchase-option exercise within a ten-day cure period, creating a unilateral cash-flow disruption tool.",
-    "facts": [
+     "P3",
      "P2"
     ],
     "quotes": [
-     "Lennar may immediately stop all monthly option payments on all properties covered by the Lennar Agreements without penalty or breach"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 (MD&A properties section) and P2 (risk factors).",
-    "claim": "Approximately 51% of Millrose's property assets are concentrated in California, Florida, and Texas, exposing the portfolio to correlated regional downturns in housing demand, interest rates, or environmental events (e.g., hurricanes in Florida, wildfires in California).",
-    "facts": [
-     "P4",
-     "P2"
-    ],
-    "quotes": [
-     "Approximately 51% of the property assets are concentrated in three states (California, Florida, Texas)",
+     "Approximately 50% of the property assets are concentrated in three states (California, Florida, Texas) and approximately 41% are located in two strong housing market states: Florida and Texas",
      "Our Real Estate Portfolio is concentrated in three states (California, Florida and Texas), with a substantial portion located in Florida and Texas. This geographic concentration may increase our exposure to market fluctuations and environmental risks"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 risk factor; asset values from P1 and F1/P6 balance sheets.",
-    "claim": "Millrose has not obtained independent appraisals or valuations for its real estate assets, including those acquired in the Spin-Off from Lennar (~$5.5 billion) and the Rausch Transaction (~$859 million), meaning the carrying values on the balance sheet may not reflect current market values.",
+    "basis": "stated in P2 (10-K risk factors); the $9,902,361 figure is from F1 balance sheet (table in thousands)",
+    "claim": "Millrose has not obtained independent appraisals or valuations for its real estate assets, including those acquired in the Spin-Off and the Rausch Transaction, so the carrying values on the balance sheet lack third-party validation.",
+    "facts": [
+     "P2",
+     "F1"
+    ],
+    "quotes": [
+     "We have not obtained independent appraisals or valuations for our real estate assets, including the assets acquired in the Spin-Off and the Rausch Transaction.",
+     "As a result, we cannot assure you that the values assigned to our real estate assets are accurate."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K risk factors), under the heading 'Any exercise by Lennar of its Enforcement Rights...'",
+    "claim": "Lennar's Enforcement Rights allow it to compel Millrose to sell homesites and, upon non-compliance within ten days, to stop all monthly option payments on all Lennar-covered properties without penalty, creating severe cash-flow pressure.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If we refuse to sell homesites to Lennar after it exercises a purchase option, Lennar has an Enforcement Right by which it can compel us to sell and, if we fail to comply within a ten-day cure period, Lennar may immediately stop all monthly option payments on all properties covered by the Lennar Agreements without penalty or breach.",
+     "This could significantly reduce our cash flow and jeopardize our ability to maintain working capital and make required distributions to qualify as a REIT."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in P2 (10-K risk factors); the 42% and 22-counterparty figures are from P6",
+    "claim": "If Lennar or another major counterparty enters bankruptcy, the Master Program Agreement and Master Option Agreement may become unenforceable, potentially eliminating Millrose's primary revenue source.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If we or any of our major counterparties, including Lennar, enter into bankruptcy, key agreements such as the Master Program Agreement or the Master Option Agreement may become unenforceable.",
+     "Given the significance of our agreements with Lennar to our operations, if Lennar entered into bankruptcy it would likely have a severe adverse impact on our business and could force us into bankruptcy unless we are able to quickly establish relationships with other Lennar Related Ventures or additional counterparties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "F1 balance sheet (table in thousands); P2 risk factors; P1 10-K Business section for the 1:1 ratio; P4 MD&A for the accordion and SFR facility; P6 for the $0.8 billion takedown proceeds and $250 million repurchase",
+    "claim": "Millrose carries $3,127,456 (table in thousands) of debt obligations plus $210,596 (table in thousands) under the SFR Secured Credit Facility, with a contractual 1:1 debt-to-equity ceiling under the Lennar Agreements that constrains additional borrowing.",
+    "facts": [
+     "F1",
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "our ability to obtain additional debt financing is subject to the Debt-to-Equity Ratio Limit, which may restrict the level of financing we can obtain.",
+     "Millrose may not enter into third-party financing arrangements that would cause the combined debt-to-equity ratio of Millrose and its affiliates to exceed 1:1 without Lennar's prior approval."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 (10-Q MD&A); the $170,670 preferred instruments figure is from F1 balance sheet (table in thousands)",
+    "claim": "Millrose provided approximately $1.068 billion in total funding to Dream Finders for the Beazer Homes acquisition, creating a new large single-counterparty exposure outside the Lennar relationship.",
+    "facts": [
+     "P4",
+     "F1"
+    ],
+    "quotes": [
+     "Total funding provided by the Company to Dream Finders was approximately $1.068 billion.",
+     "Subsequent to the third quarter of 2026, upon the completion of Dream Finders' acquisition of Beazer Homes, the Company provided an additional $896.9 million funding through the purchase of a preferred instrument issued by Dream Finders for $316.9 million, net of original issue discount, and through the acquisition of homesites subject to option agreements with Dream Finders for $580.0 million."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in P4 (10-Q MD&A, Residential Rental Properties section); balance sheet figures from F1 (table in thousands)",
+    "claim": "Millrose entered a new single-family rental property business in Q3 2026 by acquiring 1,233 homes for approximately $333 million, an untested business line that departs from the core homesite option platform.",
+    "facts": [
+     "P4",
+     "F1"
+    ],
+    "quotes": [
+     "During the third quarter of 2026, the Company acquired 1,233 single-family residential properties from Lennar for approximately $333 million, inclusive of acquisition costs and capitalized property costs, which was financed with borrowings of approximately $213 million under our SFR Secured Credit Facility and cash on hand.",
+     "The Company has entered into agreements with Lennar to acquire 620 additional single-family residential properties for an aggregate purchase price of approximately $150.3 million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K risk factors) and P1 (10-K Business); the six consecutive AFFO increases and outlook are from P6 (earnings release)",
+    "claim": "Millrose has a limited operating history as an independent public company, having spun off from Lennar on February 7, 2025, providing investors a limited basis to evaluate standalone performance.",
     "facts": [
      "P2",
      "P1"
     ],
     "quotes": [
-     "We have not obtained independent appraisals or valuations for our real estate assets, including the assets acquired in the Spin-Off and the Rausch Transaction.",
-     "we received a contribution from Lennar of approximately $5.5 billion in land assets, representing approximately 87,000 homesites"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6 (Q3 2026 earnings release, Portfolio Highlights section).",
-    "claim": "Millrose entered a new single-family rental business line in Q3 2026, acquiring 1,233 completed homes for approximately $333 million with $213 million of limited-recourse secured financing, a fundamentally different asset class and revenue model (rental income vs. option fees) that introduces operational, credit, and market risks not previously present in the platform.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Millrose acquired an initial portfolio of 1,233 completed single-family homes from Lennar across 18 states for an aggregate cost basis of approximately $333 million, funded with approximately $120 million of balance sheet capital, net of $213 million of limited-recourse secured financing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 risk factor; debt and equity figures from F1 and P6 balance sheets.",
-    "claim": "Under the Lennar Agreements, Millrose is restricted from entering third-party financing that would cause its combined debt-to-equity ratio to exceed 1:1 without Lennar's prior approval, a covenant that could constrain the company's ability to raise additional capital for growth or to weather a revenue shock.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Under the Lennar Agreements, Millrose may not enter into third-party financing arrangements that would cause the combined debt-to-equity ratio of Millrose and its affiliates to exceed 1:1 without Lennar's prior approval."
+     "We are a recently formed company with limited operating history, and you have a limited basis on which to evaluate our ability to achieve our business objectives or to perform as a standalone and separate business.",
+     "The financial information included in this Form 10-K for the periods prior to the Spin-Off do not reflect the financial condition, results of operations or cash flows that we probably would have achieved as a separate, publicly-traded company during the pre-Spin-Off periods"
     ],
     "support": "supported"
    }
   ],
-  "thesis_change": [
-   {
-    "basis": "stated in P2 (10-K Risk Factors, effective 2026-03-03)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the earlier point that counterparties are under no obligation to exercise their land purchase options remains as stated in P2.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "our counterparties are under no obligation to exercise their land purchase options and purchase the homesites, and they may decline to exercise them in the event of a significant downturn in the market"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P6 (8-K earnings release, effective 2026-10-28)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the $1.1 billion capital support for Dream Finders Homes' acquisition of Beazer Homes, completed subsequent to Q3 2026, remains as described in P6.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Subsequent to Quarter End, Completed $1.1 Billion of Capital Support in Connection with Dream Finders Homes' Acquisition of Beazer Homes"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P6 (8-K earnings release, effective 2026-10-28)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the single-family rental pilot of 1,233 homes acquired from Lennar for approximately $333 million, funded with approximately $120 million of balance sheet capital net of $213 million of limited-recourse secured financing, remains as described in P6.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Millrose acquired an initial portfolio of 1,233 completed single-family homes from Lennar across 18 states for an aggregate cost basis of approximately $333 million, funded with approximately $120 million of balance sheet capital, net of $213 million of limited-recourse secured financing"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P3 (10-K MD&A, effective 2026-03-03) and P6 (8-K earnings release, effective 2026-10-28)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; Total Invested Capital of $8,469,679 (thousands) at Dec 31, 2025 and $9,245,400 (thousands) at Sept 30, 2026, with Other Agreements growing from $2,367,642 (thousands) to $3,371,171 (thousands), remains as stated.",
-    "facts": [
-     "P3",
-     "P6"
-    ],
-    "quotes": [
-     "Total Invested Capital as of December 31, 2025 | $6,102,037 | $2,367,642 | $8,469,679",
-     "Total Invested Capital as of September 30, 2026 | $5,874,229 | $3,371,171 | $9,245,400"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P4 (10-Q MD&A, effective 2026-08-06) and P8 (8-K, effective 2026-10-08)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the March 2026 credit agreement providing a $1.335 billion revolving facility, $500 million DDTL, and accordion up to $2.5 billion, plus the $1.0 billion senior notes offering closed in October 2026, remain as described.",
-    "facts": [
-     "P4",
-     "P8"
-    ],
-    "quotes": [
-     "a four-year Revolving Credit Facility (as defined below) with commitments in an aggregate amount of $1.335 billion, (ii) a DDTL Credit Facility (as defined below) in an aggregate amount of $500 million",
-     "an uncommitted accordion feature that allows the Company to seek additional loan commitments under the Credit Agreement in the future, subject to an aggregate maximum commitment amount of $2.5 billion",
-     "completed the offer and sale (the \"Offering\") of $1.0 billion aggregate principal amount of senior notes in two separate tranches"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2 (10-K Risk Factors, effective 2026-03-03)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the Lennar Agreements' restriction that Millrose may not enter into third-party financing causing combined debt-to-equity to exceed 1:1 without Lennar's prior approval remains as stated in P2.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Millrose may not enter into third-party financing arrangements that would cause the combined debt-to-equity ratio of Millrose and its affiliates to exceed 1:1 without Lennar's prior approval"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P6 (8-K earnings release, effective 2026-10-28)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; AFFO of $0.80 per share in Q3 2026 (sixth consecutive quarterly increase) and raised Q4 2026 AFFO outlook to $0.82 to $0.84 per share remain as stated in P6.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Third Quarter AFFO of $0.80 Per Share, the Sixth Consecutive Quarterly AFFO Increase; Raises Fourth Quarter AFFO Outlook to $0.82 to $0.84 Per Share"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P4 (10-Q MD&A, effective 2026-08-06)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; approximately 51% of property assets concentrated in California, Florida, and Texas as of June 30, 2026 remains as stated in P4.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Approximately 51% of the property assets are concentrated in three states (California, Florida, Texas)"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2 (10-K Risk Factors, effective 2026-03-03) and P6 (8-K earnings release, effective 2026-10-28)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the risk that the recycled-capital model breaks if counterparties decline to exercise options during a housing downturn remains as stated in P2 and P6.",
-    "facts": [
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "The continued sustainability of Millrose's recycled capital business model, which is intended to generally provide Millrose with reliable, consistent and uninterrupted access to capital, is contingent on our counterparties electing to exercise their land purchase options."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2 (10-K Risk Factors, effective 2026-03-03)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; Lennar's Enforcement Rights allowing it to compel sales and stop all monthly option payments upon non-compliance remain as stated in P2.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Lennar has an Enforcement Right by which it can compel us to sell and, if we fail to comply within a ten-day cure period, Lennar may immediately stop all monthly option payments on all properties covered by the Lennar Agreements without penalty or breach"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2 (10-K Risk Factors, effective 2026-03-03)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the risk that Lennar bankruptcy could render the Master Program Agreement and Master Option Agreement unenforceable, eliminating Millrose's primary revenue source, remains as stated in P2.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "if Lennar entered into bankruptcy it would likely have a severe adverse impact on our business and could force us into bankruptcy unless we are able to quickly establish relationships with other Lennar Related Ventures or additional counterparties"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2 (10-K Risk Factors, effective 2026-03-03) and P4 (10-Q MD&A, effective 2026-08-06)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; approximately 51% of property assets concentrated in California, Florida, and Texas as of June 30, 2026, exposing the portfolio to region-specific risks, remains as stated in P4 and P2.",
-    "facts": [
-     "P2",
-     "P4"
-    ],
-    "quotes": [
-     "Our Real Estate Portfolio is concentrated in three states (California, Florida and Texas), with a substantial portion located in Florida and Texas. This geographic concentration may increase our exposure to market fluctuations and environmental risks"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P6 (8-K earnings release, effective 2026-10-28)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the single-family rental pilot with 1,233 completed homes as a new, untested business line departing from the asset-light model remains as stated in P6.",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Millrose acquired an initial portfolio of 1,233 completed single-family homes from Lennar across 18 states for an aggregate cost basis of approximately $333 million"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in P2 (10-K Risk Factors, effective 2026-03-03); figures from F1 (10-Q balance sheet, effective 2026-08-06)",
-    "claim": "No evidence became effective after 2026-10-31T01:03:43Z; the 1:1 debt-to-equity constraint from the Lennar Agreements, combined with current debt levels, may limit growth financing without Lennar approval, remains as stated in P2, F1, and P6.",
-    "facts": [
-     "P2",
-     "F1",
-     "P6"
-    ],
-    "quotes": [
-     "Millrose may not enter into third-party financing arrangements that would cause the combined debt-to-equity ratio of Millrose and its affiliates to exceed 1:1 without Lennar's prior approval"
-    ],
-    "support": "number_not_listed"
-   }
-  ],
+  "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in P2 (10-K Risk Factors) as an explicit gap.",
-    "claim": "Whether the values assigned to Millrose's real estate assets, including those acquired in the Spin-Off and the Rausch Transaction, are accurate",
+    "basis": "Stated directly in P2 Risk Factors",
+    "claim": "The fair value of Millrose's real estate assets, including those acquired in the Spin-Off and the Rausch Transaction, has not been independently appraised",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "We have not obtained independent appraisals or valuations for our real estate assets, including the assets acquired in the Spin-Off and the Rausch Transaction."
+     "We have not obtained independent appraisals or fairness opinions as to the value of our real estate assets, including those acquired in the Spin-Off from Lennar and in the Rausch Transaction."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 (10-K Risk Factors).",
-    "claim": "Whether material environmental conditions exist on Millrose's land assets acquired in the Spin-Off and the Rausch Transaction",
+    "basis": "Stated directly in P2 Risk Factors",
+    "claim": "The environmental condition of Millrose's real estate assets acquired in the Spin-Off and the Rausch Transaction is unverified because Phase I reports have not been obtained for all properties",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "We have not obtained Phase I or similar environmental reports from independent consultants for our real estate assets, including those acquired in the Spin-Off and the Rausch Transaction."
+     "We have not obtained Phase I or similar environmental reports from independent consultants for our real estate assets, including those acquired in the Spin-Off from Lennar and in the Rausch Transaction."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "Stated in P2 (10-K Risk Factors) as a structural dependency.",
-    "claim": "Whether Millrose's counterparties will continue to exercise their land purchase options in the event of a significant market downturn",
+    "basis": "Stated directly in P2 Risk Factors",
+    "claim": "Whether Millrose's counterparties will continue to exercise their land purchase options in a market downturn, which is essential to the recycled capital model, is uncertain",
     "facts": [
      "P2"
     ],
@@ -1145,19 +974,8 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 (10-K Risk Factors) as a limitation of the negotiation process.",
-    "claim": "Whether the terms of the Lennar Agreements and Management Agreement are consistent with market standards and in Millrose's best interests",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "we did not independently confirm that their terms were consistent with market standards."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 (10-K Risk Factors); diversification progress noted in P6 (Q3 2026 earnings release).",
-    "claim": "Whether Lennar will continue to offer Millrose additional business opportunities and referrals of Lennar Related Ventures",
+    "basis": "Stated directly in P2 Risk Factors; the 42% figure is from P6/P7",
+    "claim": "Whether Lennar will continue to provide new business opportunities to Millrose under the Lennar Agreements, which have no expiration date but impose no obligation on Lennar to transact",
     "facts": [
      "P2"
     ],
@@ -1167,8 +985,52 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 (10-K Business section) as an intent, not a confirmed election.",
-    "claim": "Whether Millrose will successfully elect to be treated as a REIT for U.S. federal income tax purposes beginning with its taxable year ended December 31, 2025",
+    "basis": "Stated directly in P2 Risk Factors",
+    "claim": "Whether the Master Program Agreement, Master Option Agreement, and other key counterparty agreements would survive a bankruptcy filing by Millrose or a major counterparty such as Lennar",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "If we or any of our major counterparties, including Lennar, enter into bankruptcy, key agreements such as the Master Program Agreement or the Master Option Agreement may become unenforceable."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2 Risk Factors",
+    "claim": "The extent to which Lennar's Capital Priority Right limits Millrose's ability to deploy capital to counterparties other than Lennar or Lennar Related Ventures",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Lennar's Capital Priority Right limits the amount of capital Millrose has available for transactions with counterparties other than Lennar or Lennar Related Ventures, which may make it difficult to provide our homesite option platform to such counterparties."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P4 MD&A; the 620-property agreement is also in P4",
+    "claim": "The long-term performance and viability of Millrose's newly acquired single-family residential rental properties, which represent a new business line outside the core homesite option platform",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "During the third quarter of 2026, the Company acquired 1,233 single-family residential properties from Lennar for approximately $333 million, inclusive of acquisition costs and capitalized property costs, which was financed with borrowings of approximately $213 million under our SFR Secured Credit Facility and cash on hand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 MD&A; full terms referenced in Notes 6 and 18 which are not included in this evidence packet",
+    "claim": "The specific terms, covenants, and risk profile of the preferred instruments issued to Dream Finders in connection with the Beazer Homes acquisition, including the $896.9 million post-quarter-end funding",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Subsequent to the third quarter of 2026, upon the completion of Dream Finders' acquisition of Beazer Homes, the Company provided an additional $896.9 million funding through the purchase of a preferred instrument issued by Dream Finders for $316.9 million, net of original issue discount, and through the acquisition of homesites subject to option agreements with Dream Finders for $580.0 million."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated as intent in P1; the 24.8% effective tax rate in P3 suggests entity-level taxation through TRSs is still in effect",
+    "claim": "Whether Millrose successfully completed its REIT election for the taxable year ended December 31, 2025, as intended",
     "facts": [
      "P1"
     ],
@@ -1178,71 +1040,25 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 (10-K Risk Factors) as a structural risk of the Founder's Rights Agreement.",
-    "claim": "Whether Lennar will exercise its Enforcement Rights to compel Millrose to sell homesites and stop all monthly option payments in a dispute over option exercises",
+    "basis": "Stated in P1 Business section and P3 MD&A",
+    "claim": "Whether and when Millrose will fund the remaining portion of the up-to-$700 million land banking capital commitment to New Home for the Landsea acquisition, of which $494.5 million was funded at closing",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "we entered into a commitment with the New Home Company (\"New Home\") for Millrose to provide land banking capital of up to $700 million to support New Home's acquisition of Landsea Homes (\"Landsea\")."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in P2 Risk Factors; the balance sheet figures are from F1",
+    "claim": "Whether the 1:1 debt-to-equity ratio limit in the Lennar Agreements will constrain Millrose's ability to pursue additional debt financing for growth initiatives",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "Lennar may immediately stop all monthly option payments on all properties covered by the Lennar Agreements without penalty or breach."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 (10-K Risk Factors); performance data in P4 (10-Q MD&A) provides partial but not definitive evidence.",
-    "claim": "Whether the homesites acquired from Rausch in geographies where Lennar had not historically operated will perform comparably to Lennar-originated homesites",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "The homesites that we acquired from Rausch are located in some U.S. geographies where Lennar had not historically operated prior to the Rausch Transaction."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6 (Q3 2026 earnings release) with no further detail in the packet.",
-    "claim": "What are the specific terms, option structure, and expected yield of the $1.1 billion capital support completed in connection with Dream Finders Homes' acquisition of Beazer Homes",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Subsequent to Quarter End, Completed $1.1 Billion of Capital Support in Connection with Dream Finders Homes' Acquisition of Beazer Homes"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6 (Q3 2026 earnings release) with limited detail.",
-    "claim": "Whether Millrose's single-family rental pilot of 1,233 completed homes will generate sustainable returns and whether it will be expanded",
-    "facts": [
-     "P6"
-    ],
-    "quotes": [
-     "Millrose acquired an initial portfolio of 1,233 completed single-family homes from Lennar across 18 states for an aggregate cost basis of approximately $333 million, funded with approximately $120 million of balance sheet capital, net of $213 million of limited-recourse secured financing."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 (10-Q MD&A) and referenced in P8 (8-K regarding the Notes); full agreement not in evidence.",
-    "claim": "What are the full terms, covenants, and pricing of the new Credit Agreement entered into on March 25, 2026, including the $1.335 billion Revolving Credit Facility, the $500 million DDTL Credit Facility, and the $2.5 billion accordion feature",
-    "facts": [
-     "P4",
-     "P8"
-    ],
-    "quotes": [
-     "a four-year Revolving Credit Facility (as defined below) with commitments in an aggregate amount of $1.335 billion, (ii) a DDTL Credit Facility (as defined below) in an aggregate amount of $500 million that may be utilized during the first year following the Effective Date (as defined below), and (iii) an uncommitted accordion feature that allows the Company to seek additional loan commitments under the Credit Agreement in the future, subject to an aggregate maximum commitment amount of $2.5 billion"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from F1 (balance sheet) and P6 (Q3 earnings) showing the accumulating deficit; P9 confirms the latest dividend rate.",
-    "claim": "Whether Millrose's dividend policy is sustainable given that distributions have exceeded net income, as reflected in the growing 'Distribution in excess of net income' equity account",
-    "facts": [
-     "F1",
-     "P6",
-     "P9"
-    ],
-    "quotes": [
-     "Distribution in excess of net income | (23,740) | (18,485)"
+     "Under the Lennar Agreements, Millrose may not enter into third-party financing arrangements that would cause the combined debt-to-equity ratio of Millrose and its affiliates to exceed 1:1 without Lennar's prior approval."
     ],
     "support": "supported"
    }

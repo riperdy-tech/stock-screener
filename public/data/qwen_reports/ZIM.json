@@ -1,34 +1,37 @@
 {
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 76,
- "claims_supported": 52,
- "date": "2026-11-01T16:47:30Z",
- "equity_value": 25227976024.041466,
+ "claims": 68,
+ "claims_supported": 57,
+ "date": "2026-11-16T00:08:41Z",
+ "equity_value": 17193354842.5188,
  "family": "commodity",
  "far_from_price": true,
  "filed_shares": 120515854.0,
  "flags": [
-  "The 2M Alliance, ZIM's previous strategic shipping alliance, terminated in January 2025."
+  "ZIM entered into a Merger Agreement with Hapag-Lloyd AG on February 16, 2026, under which Merger Sub (Norazia (Israel) Ltd.) will merge with and into ZIM, making ZIM a wholly owned subsidiary of Hapag-Lloyd AG, with merger consideration of $35.00 per ordinary share and a termination fee of $150,000,000.",
+  "The Israeli Government Companies Authority (GCA) determined to cease handling the pending application for approval of the requested changes in the Special State Share, which had been submitted in March 2026, after Hapag-Lloyd and FIMI failed to submit a detailed revised proposal by the GCA's deadline; Hapag-Lloyd stated it intends to submit a revised proposal.",
+  "ZIM raised its full-year 2026 guidance, increasing expected Adjusted EBITDA from between $2.0 billion and $2.4 billion to between $2.7 billion and $3.0 billion, and Adjusted EBIT from between $700 million and $1.1 billion to between $1.4 billion and $1.7 billion, citing continued strong market demand and favorable momentum in freight rates."
  ],
- "in_code_book": true,
- "market_cap_at_publish": 3372141660,
+ "in_code_book": false,
+ "market_cap_at_publish": 3539843858,
  "model": "qwen",
  "no_value_reason": null,
- "price_at_publish": 27.95,
- "qwen_book": "not bought: Qwen flagged a material event",
+ "price_at_publish": 29.34,
+ "qwen_book": null,
+ "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
  "seed_base": {
-  "1000": 209.33325522500522,
-  "3000": 209.33325522500522
+  "1000": 142.66467250457188,
+  "3000": 142.66467250457188
  },
  "seeds_agree": true,
  "share_unit_note": null,
- "source": "formation 2026-10-30",
+ "source": "screener list refresh",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in P1 (Item 4.B Business Overview) and F2 (income statement line item)",
-    "claim": "ZIM is a global container liner shipping company that earns revenue primarily from transporting cargo in containers across international trade routes.",
+    "basis": "stated in the cited item (P1, Item 4.B Business Overview)",
+    "claim": "ZIM is a global container liner shipping company that transports cargo in containers via its fleet of vessels, with leadership positions in niche trade lanes.",
     "facts": [
      "P1"
     ],
@@ -38,20 +41,19 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P1 (Item 4.B)",
-    "claim": "ZIM serves approximately 30,500 customers worldwide, with its 10 largest customers representing about 12% of freight revenues and its 50 largest about 27%.",
+    "basis": "stated in the cited item (P1, Item 4.B)",
+    "claim": "ZIM serves approximately 30,500 customers, with its 10 largest customers representing approximately 12% of freight revenues and its 50 largest representing approximately 27%.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "We have a highly diverse and global customer base with approximately 30,500 customers (which considers each of our customer entities separately, including in instances where the entity is a subsidiary or branch of another customer, or on a non-consolidated basis) using our services.",
-     "In 2025, our 10 largest customers represented approximately 12% of our freight revenues and our 50 largest customers represented approximately 27% of our freight revenues."
+     "We have a highly diverse and global customer base with approximately 30,500 customers (which considers each of our customer entities separately, including in instances where the entity is a subsidiary or branch of another customer, or on a non-consolidated basis) using our services."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
    },
    {
-    "basis": "stated in P1 (Item 4.B)",
-    "claim": "ZIM's operations are organized across five geographic trade zones: Transpacific (43.0%), Intra-Asia (21.2%), Atlantic (13.5%), Latin America (14.4%), and Cross Suez (7.9%) of TEUs carried.",
+    "basis": "stated in the cited item (P1, Item 4.B)",
+    "claim": "ZIM's operations are spread across five geographic trade zones by carried TEUs: Transpacific (43.0%), Intra-Asia (21.2%), Latin America (14.4%), Atlantic (13.5%), and Cross Suez (7.9%).",
     "facts": [
      "P1"
     ],
@@ -61,222 +63,271 @@
     "support": "supported"
    },
    {
-    "basis": "stated in P3 (Item 5, Factors affecting our results of operations)",
-    "claim": "ZIM's revenue is driven by two primary variables: the volume of cargo carried (TEUs) and the average freight rate per TEU, both of which are subject to significant market volatility.",
+    "basis": "stated in the cited item (P3, Item 5 \u2013 Factors affecting our results of operations)",
+    "claim": "ZIM's revenue is driven by the volume of TEUs carried multiplied by the average freight rate per TEU, both of which are volatile and influenced by global trade conditions.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "The volume of cargo that we carry affects our income and profitability from voyages and related services and varies significantly between voyages that depart from, or return to, a port of origin.",
-     "Freight rates are largely established by the freight market and we have a limited influence over these rates."
+     "We measure our performance in terms of the volume of cargo we carry in a certain period in 20-foot equivalent units carried, or TEUs carried.",
+     "Average freight rate per TEU is calculated as revenues from containerized cargo during a certain period, divided by total TEUs carried during that period."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P1 (Item 4.B) and P3 (Item 5, Vessel charter portfolio)",
-    "claim": "ZIM chartered-in approximately 86.4% of its TEU capacity and 87.5% of its 128 vessels as of December 31, 2025, owning only 16 vessels, making it highly exposed to charter-market rates.",
+    "basis": "stated in the cited items (P3 narrative; F2 income statement, table in millions)",
+    "claim": "In 2025, ZIM carried 3,663 thousand TEUs and generated income from voyages and related services of $6,904.2 (table in millions), down from 3,751 thousand TEUs and $8,427.4 (table in millions) in 2024.",
     "facts": [
-     "P1"
+     "P3",
+     "F2"
     ],
     "quotes": [
-     "As of December 31, 2025, we operated a fleet of 128 vessels and chartered-in approximately 86.4% of our TEU capacity and 87.5% of the vessels in our fleet.",
-     "on December 31, 2025, we owned a total of 16 vessels of our operated fleet, including one vessel we already previously owned prior to these acquisitions"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P3 (Item 5, Factors affecting our operating expenses and costs of services)",
-    "claim": "ZIM's operating expenses and cost of services in FY2025 were dominated by cargo handling (47.1%), bunker/fuel (25.7%), and port/canal expenses (11.4%).",
-    "facts": [
-     "P3"
-    ],
-    "quotes": [
-     "Cargo handling accounted for 47.1%, 44.6% and 43.0% of our operating expenses and cost of services for the years ended December 31, 2025, 2024 and 2023.",
-     "Our bunker expenses accounted for 25.7%, 28.5% and 28.3% of our operating expenses and cost of services for the years ended December 31, 2025, 2024 and 2023, respectively.",
-     "Our port (including canal) expenses accounted for 11.4%, 10.2% and 12.9% of our operating expenses and cost of services for the years ended December 31, 2025, 2024 and 2023, respectively."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in P1 (Item 4.B)",
-    "claim": "In addition to container shipping, ZIM operates 13 chartered car carrier vessels westbound from Asia and runs asset-light logistics subsidiaries providing land transportation, customs brokerage, LCL, project cargo, and air freight in multiple countries.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In addition to containerized cargo, we also transport vehicles (such as cars, buses and trucks) via dedicated car carrier vessels westbound from Asia, and primarily from China, Japan and South Korea. Currently, we charter thirteen car carrier vessels",
-     "These subsidiaries, which we operate, among others, in China, Canada, Brazil, India, Singapore, Hong Kong and the U.S, are asset-light and provide services such as land transportation, custom brokerage, LCL, project cargo and air freight services."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in F2 (income statement) and P3 (Item 5 Overview)",
-    "claim": "ZIM's FY2025 income from voyages and related services was $6,904.2 (table in millions), a decline from $8,427.4 (table in millions) in FY2024, reflecting lower freight rates despite roughly stable volumes.",
-    "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "Income from voyages and related services | $ 6,904.2 | $ 8,427.4 | $ 5,162.2",
      "In the years ended December 31, 2025, 2024 and 2023, we carried 3,663 thousand, 3,751 thousand and 3,281 thousand TEUs for our customers worldwide, respectively."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in P3 (Item 5, citing Alphaliner data)",
-    "claim": "ZIM expects global container ship capacity to grow 3.7% in 2026 while demand is projected to increase only 2.5%, creating a supply-demand imbalance that pressures freight rates.",
+    "basis": "stated in the cited item (P3, Item 5)",
+    "claim": "Cargo handling expenses (stevedoring, terminal, repositioning, inland transport) are the largest cost component, at 47.1% of operating expenses and cost of services in 2025.",
     "facts": [
      "P3"
     ],
     "quotes": [
-     "According to Alphaliner, global container ship capacity is expected to increase by 3.7% in 2026, with deliveries of 1.4 million TEUs out of a vessel order book of 11.3 million TEU, while demand for shipping services is projected to increase only by 2.5%."
+     "Cargo handling accounted for 47.1%, 44.6% and 43.0% of our operating expenses and cost of services for the years ended December 31, 2025, 2024 and 2023."
     ],
-    "support": "quote_not_found"
+    "support": "supported"
    },
    {
-    "basis": "stated in F2 (income statement)",
-    "claim": "ZIM's net profit for FY2025 was $481.5 (table in millions) attributable to owners, with basic EPS of $3.98, a sharp decline from $2,147.7 (table in millions) and $17.84 EPS in FY2024.",
+    "basis": "stated in the cited item (P3, Item 5)",
+    "claim": "Bunker expenses (fuel and marine LNG) are the second-largest cost component, at 25.7% of operating expenses in 2025, and are sensitive to volatile fuel prices.",
     "facts": [
-     "F2"
+     "P3"
     ],
     "quotes": [
-     "Owners of the Company | 479.2 | 2,147.7 | (2,695.6)",
-     "Basic earnings (loss) per 1 ordinary share | $ 3.98 | $ 17.84 | $ (22.42)"
+     "Our bunker expenses accounted for 25.7%, 28.5% and 28.3% of our operating expenses and cost of services for the years ended December 31, 2025, 2024 and 2023, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P1, Item 4.B)",
+    "claim": "ZIM charters in 86.4% of its TEU capacity and 87.5% of its 128-vessel fleet, making its cost structure heavily dependent on time-charter hire rates rather than vessel ownership.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "As of December 31, 2025, we operated a fleet of 128 vessels and chartered-in approximately 86.4% of our TEU capacity and 87.5% of the vessels in our fleet."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P1, Item 4.B)",
+    "claim": "In addition to container shipping, ZIM operates thirteen chartered car carrier vessels transporting vehicles westbound from Asia to ports in Europe, Central America, and South America.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Currently, we charter thirteen car carrier vessels and we serve ports in Europe (both North Europe and the Mediterranean), Central America and both coasts of South America."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the cited item (P1, Item 4.B)",
+    "claim": "ZIM operates asset-light logistics subsidiaries (land transportation, customs brokerage, LCL, project cargo, air freight) in China, Canada, Brazil, India, Singapore, Hong Kong, and the U.S., with approximately 17% of TEUs utilizing additional land transportation.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Out of ZIM's total volume in the twelve months ended December 31, 2025, approximately 17% of our TEUs carried utilized additional elements of land transportation."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P3, Item 5 \u2013 Seasonality)",
+    "claim": "ZIM's revenue is seasonal, typically higher in Q3 and Q4 due to pre-holiday consumer-goods shipments from Asia to North America, while operating expenses remain relatively fixed.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our income from voyages and related services are typically higher in the third and fourth quarters than the first and second quarters due to increased shipping of consumer goods from manufacturing centers in Asia to North America in anticipation of the major holiday period in Western countries."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P2, Item 3.D Risk Factors)",
+    "claim": "Freight rates are highly volatile: the SCFI index moved from 2,505 points on January 1, 2025 to 1,300 on April 1, 2025, then 2,000 on June 1, 2025, and 1,400 on December 31, 2025.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "on January 1, 2025, the comprehensive Shanghai (Export) Containerized Freight Index (SCFI) started with 2,505 points, then dropped to 1,300 points on April 1, 2025, increased again to 2,000 points on June 1, 2025 and dropped back to 1,400 on December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P3, Item 5)",
+    "claim": "Port and canal expenses (berthing, tug, sanitary services, Panama/Suez transit fees) accounted for 11.4% of operating expenses in 2025.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Our port (including canal) expenses accounted for 11.4%, 10.2% and 12.9% of our operating expenses and cost of services for the years ended December 31, 2025, 2024 and 2023, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (P3, Item 5)",
+    "claim": "Personnel expenses (salaries, commissions, incentives in both operating and G&A) totaled $523.6 million in 2025, up from $496.8 million in 2024 and $428.3 million in 2023.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Personnel expenses, which comprise salaries, commissions and related expenses (including incentives) in both operating expenses and general and administrative expenses, totaled $523.6 million $496.8 million and $428.3 million for the years ended December 31, 2025, 2024 and 2023, respectively."
     ],
     "support": "supported"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated in the cited item (P1), with market-share figures attributed to PIERS and CTS.",
-    "claim": "ZIM holds self-described leadership positions in niche container shipping markets, with market shares of 6.6%, 7.5%, 10.1% and 8.7% in four named trade lanes.",
+    "basis": "Stated in the 20-F Item 4 Business Overview as the company's own characterization of its strategy.",
+    "claim": "ZIM positions itself as holding leadership in niche container shipping markets where it has distinct competitive advantages.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "leadership positions in niche markets where we believe we have distinct competitive advantages that allow us to maximize our market position and profitability",
-     "Mediterranean to U.S. East Coast & Gulf t lane (Atlantic trade zone) where we maintain a 6.6% market share, (2) Far East to Mediterranean & Black Sea (Cross Suez trade zone), 7.5% market share, (3) Far East (not including the Indian subcontinent) to U.S. East Coast & Gulf (Pacific trade zone), 10.1% market share and (4) West Coast South America to USEC, 8.7% market share"
+     "We are a global container liner shipping company with leadership positions in niche markets where we believe we have distinct competitive advantages that allow us to maximize our market position and profitability."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P1), with the industry benchmark attributed to the Alphaliner December 2025 Report.",
-    "claim": "ZIM chartered-in approximately 86.4% of its TEU capacity and 87.5% of its 128-vessel fleet, far above the industry average of 37.6% chartered-in vessels reported by Alphaliner.",
+    "basis": "Stated in the 20-F, attributed to Port Import/Export Reporting Service (PIERS) and Container Trade Statistics (CTS).",
+    "claim": "ZIM holds specific market shares in four niche lanes: 6.6% (Mediterranean to U.S. East Coast & Gulf), 7.5% (Far East to Mediterranean & Black Sea), 10.1% (Far East to U.S. East Coast & Gulf), and 8.7% (West Coast South America to USEC).",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "we operated a fleet of 128 vessels and chartered-in approximately 86.4% of our TEU capacity and 87.5% of the vessels in our fleet",
-     "according to Alphaliner, the industry average of chartered-in vessels is approximately 37.6% of the fleets as of the end of 2025"
+     "(1) Mediterranean to U.S. East Coast & Gulf t lane (Atlantic trade zone) where we maintain a 6.6% market share, (2) Far East to Mediterranean & Black Sea (Cross Suez trade zone), 7.5% market share, (3) Far East (not including the Indian subcontinent) to U.S. East Coast & Gulf (Pacific trade zone), 10.1% market share and (4) West Coast South America to USEC, 8.7% market share"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P1).",
-    "claim": "ZIM operates a global network of 56 weekly lines calling over 300 ports in more than 90 countries, serving approximately 30,500 customers, with its top 10 customers representing only 12% of freight revenues.",
+    "basis": "Stated in the 20-F Item 4 Business Overview.",
+    "claim": "As of December 31, 2025, ZIM operated a global network of 56 weekly lines calling over 300 ports and delivering cargo to and from more than 90 countries, with a container fleet capacity exceeding 708,000 TEUs.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "we operated a global network of 56 weekly lines, calling over 300 ports, delivering cargo to and from more than 90 countries",
-     "We have a highly diverse and global customer base with approximately 30,500 customers",
-     "our 10 largest customers represented approximately 12% of our freight revenues and our 50 largest customers represented approximately 27% of our freight revenues"
+     "As of December 31, 2025, we operated a global network of 56 weekly lines, calling over 300 ports, delivering cargo to and from more than 90 countries.",
+     "our current container fleet capacity exceeds 708,000 TEUs"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P1).",
-    "claim": "ZIM replaced its 2M Alliance agreement (terminated January 2025) with a strategic collaboration with MSC effective February 2025, covering Asia-U.S. East Coast and Gulf Coast services of approximately 23,000 weekly TEUs.",
+    "basis": "Stated in the 20-F, with the industry comparison attributed to the Alphaliner December 2025 Report.",
+    "claim": "ZIM chartered-in approximately 86.4% of its TEU capacity and 87.5% of its 128 vessels, far above the industry average of approximately 37.6% for chartered-in vessels.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "new strategic operational cooperation with MSC on the transpacific trade and replacing the previous agreement with the 2M Alliance (an alliance which terminated in January 2025)",
-     "In September 2024, we entered into a strategic collaboration with MSC, which became effective in February 2025, replacing our previous agreement with the 2M Alliance which terminated in January 2025. The new agreement covers services on the Asia-U.S. East Coast and the Asia-U.S. Gulf Coast and approximately 23,000 weekly TEUs."
+     "As of December 31, 2025, we operated a fleet of 128 vessels and chartered-in approximately 86.4% of our TEU capacity and 87.5% of the vessels in our fleet.",
+     "For comparison, according to Alphaliner, the industry average of chartered-in vessels is approximately 37.6% of the fleets as of the end of 2025"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P1).",
-    "claim": "ZIM differentiates its fleet with ten 15,000 TEU and eighteen 8,000-class TEU LNG dual-fuel container vessels chartered on a long-term basis, and in April 2025 committed to ten new-built 11,500 TEU LNG dual-fuel vessels for approximately $2.3 billion with deliveries in 2027\u20132028.",
+    "basis": "Stated in the 20-F Item 4 Business Overview.",
+    "claim": "ZIM's fleet includes ten 15,000 TEU and eighteen 8,000-class TEU LNG dual-fuel container vessels chartered on a long-term basis, and in April 2025 it entered into a charter for ten new-built 11,500 TEU LNG dual-fuel vessels for approximately $2.3 billion with deliveries between 2027 and 2028.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "Our fleet includes ten 15,000 TEU and eighteen uniquely designed 8,000-class TEU LNG (liquified natural gas dual-fuel) container vessels which we charter on a long-term basis",
+     "Our fleet includes ten 15,000 TEU and eighteen uniquely designed 8,000-class TEU LNG (liquified natural gas dual-fuel) container vessels which we charter on a long-term basis.",
      "In April 2025, we entered into a charter agreement of ten new-built 11,500 TEUs LNG dual-fuel container vessels, for a total consideration of approximately $2.3 billion, with expected deliveries between 2027 and 2028."
     ],
     "support": "number_not_found"
    },
    {
-    "basis": "Stated in the cited item (F2), the audited consolidated income statements.",
-    "claim": "ZIM's 2025 revenue of $6,904.2 (table in millions) declined 18% from $8,427.4 (table in millions) in 2024, and net income fell from $2,153.8 (table in millions) to $481.5 (table in millions), reflecting easing freight rates.",
+    "basis": "Stated in the 20-F Item 4 Business Overview.",
+    "claim": "ZIM's customer base comprises approximately 30,500 customers, with its 10 largest representing only 12% of freight revenues and its 50 largest 27%, indicating low customer concentration.",
     "facts": [
-     "F2"
+     "P1"
     ],
     "quotes": [
-     "Income from voyages and related services | $ 6,904.2 | $ 8,427.4 | $ 5,162.2",
-     "Profit (loss) for the year | 481.5 | 2,153.8 | (2,687.9)"
+     "We have a highly diverse and global customer base with approximately 30,500 customers",
+     "In 2025, our 10 largest customers represented approximately 12% of our freight revenues and our 50 largest customers represented approximately 27% of our freight revenues."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P3), the 20-F Item 5 reconciliation tables.",
-    "claim": "ZIM's 2025 Adjusted EBITDA was $2,170.9 million and Adjusted EBIT was $884.8 million, with an Adjusted EBIT margin of 12.8%, down from 30.3% in 2024.",
+    "basis": "Stated in the 20-F Item 4 Business Overview.",
+    "claim": "ZIM replaced its 2M Alliance agreement (terminated January 2025) with a strategic collaboration with MSC effective February 2025 covering Asia-U.S. East Coast and Gulf Coast services of approximately 23,000 weekly TEUs, and also maintains cooperation with Hapag-Lloyd on the cross-Atlantic service and with ONE for slot selling.",
     "facts": [
-     "P3"
+     "P1"
     ],
     "quotes": [
-     "our Adjusted EBITDA was $2,170.9 million, $3,691.8 million and $1,049.3 million, respectively",
-     "Adjusted EBIT | $884.8 | $2,549.3 | $(422.4)",
-     "Adjusted EBIT margin(3) | 12.8% | 30.3% | (8.2)%"
+     "In September 2024, we entered into a strategic collaboration with MSC, which became effective in February 2025, replacing our previous agreement with the 2M Alliance which terminated in January 2025. The new agreement covers services on the Asia-U.S. East Coast and the Asia-U.S. Gulf Coast and approximately 23,000 weekly TEUs."
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (P1, P2).",
-    "claim": "In February 2026, ZIM entered into a Merger Agreement with Hapag-Lloyd AG under which Merger Sub will merge into ZIM, making it a wholly owned subsidiary of Hapag-Lloyd AG, with a merger consideration of $35.00 per ordinary share and a delisting from NYSE.",
+    "basis": "Stated in the 20-F Item 4 and Item 3.D Risk Factors.",
+    "claim": "In February 2026, ZIM entered into a Merger Agreement with Hapag-Lloyd AG under which Merger Sub will merge into ZIM, making it a wholly owned subsidiary of Hapag-Lloyd, with a merger consideration of $35.00 per ordinary share; the transaction is subject to numerous closing conditions and has an Outside Date of February 17, 2027 (extendable to June 30, 2027).",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "In February 2026 we have entered into a Merger Agreement with Hapag-Lloyd AG, which, if consummated, will include the delisting of all our ordinary shares from NYSE",
-     "Merger Sub will merge with and into us, so that we will continue as the surviving corporation in the Merger and a wholly owned subsidiary of Parent",
-     "our shareholders will not receive any of the Merger Consideration of $35.00 per ordinary share"
+     "In February 2026 we have entered into a Merger Agreement with Hapag-Lloyd AG, which, if consummated, will include the delisting of all our ordinary shares from NYSE.",
+     "the consummation of the Merger is subject to a number of conditions, and there can be no assurance that the Merger will be completed in a timely manner or at all."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in the 6-K filed September 30, 2026, describing a letter received from the GCA on September 29, 2026.",
+    "claim": "In September 2026, the Israeli Government Companies Authority (GCA) ceased handling ZIM's pending application for Special State Share approval in connection with the Hapag-Lloyd merger, because Hapag-Lloyd and FIMI failed to submit a detailed revised proposal by the GCA's deadline.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "the GCA has determined to cease handling the pending application for approval of the requested changes in the special state share, which was submitted for its approval back in March 2026"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P2).",
-    "claim": "If ZIM terminates the Merger Agreement to pursue a superior proposal or enters an acquisition within 18 months of termination, it must pay Hapag-Lloyd AG a termination fee of $150,000,000 in cash.",
+    "basis": "Stated in the 20-F Item 3.D Risk Factors.",
+    "claim": "The State of Israel holds a Special State Share that imposes restrictions including maintaining a minimum fleet of 11 fully owned seaworthy vessels, requiring a majority Israeli board and Israeli CEO, and granting veto power over share transfers above 35%.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "we would be required to pay Hapag-Lloyd AG a termination fee of $150,000,000 in cash",
-     "we will be required to pay to Parent a termination fee of $150 million"
+     "The State of Israel holds a Special State Share in us, which imposes certain restrictions on our operations and gives the Israeli government veto power over transfers of certain assets and share ownership above certain thresholds, and the State of Israel may not provide the required approval for the Merger"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P2).",
-    "claim": "The State of Israel holds a Special State Share in ZIM that requires the company to remain incorporated in Israel, maintain a minimum fleet of 11 fully owned seaworthy vessels, have a majority Israeli board and Israeli CEO, and obtain Israeli government consent for any share transfer conferring 35% or more of issued share capital.",
+    "basis": "Stated as a risk factor in the 20-F; the company acknowledges the competitive threat without quantifying specific rivals' advantages.",
+    "claim": "ZIM faces competitive threats from larger rivals: the 20-F states that certain large competitors may be better positioned with greater financial resources to offer more attractive schedules, services and rates.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "The State of Israel holds a Special State Share in us, which imposes certain limitations on our operating and managing activities",
-     "to remain incorporated and registered in the State of Israel with its headquarters and principal office domiciled in Israel",
-     "to maintain a minimal fleet of 11 seaworthy vessels that are fully owned by us, at least three of which must be capable of carrying general cargo",
-     "at least a majority of our board of directors, including the chairperson, to be Israeli citizens",
-     "prior written consent from the State of Israel for any transfer or issuance of shares that confers possession of 35% or more of our issued share capital"
+     "Certain of our large competitors may be better positioned and have greater financial resources than us and may therefore be able to offer more attractive schedules, services and rates, which could negatively affect our market position and financial performance."
     ],
-    "support": "number_not_found"
+    "support": "supported"
    },
    {
-    "basis": "Stated in the cited items (P2, P3), referencing the SCFI index.",
-    "claim": "The SCFI freight index dropped from 2,505 points on January 1, 2025 to 1,400 points on December 31, 2025, illustrating the severe freight-rate normalization ZIM faced in 2025.",
+    "basis": "Stated in the 20-F Item 3.D Risk Factors.",
+    "claim": "Unlike some competitors, ZIM does not own or hold substantial investments in terminals, limiting its ability to respond to congestion and port and inland accessibility issues.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Unlike some of our competitors, we do not own or hold substantial investments in terminals, therefore our ability to respond to congestion and port and inland accessibility is limited."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in both the 20-F Risk Factors and Item 5, citing the SCFI index.",
+    "claim": "Freight rate volatility is a material competitive threat: the SCFI dropped from 2,505 points on January 1, 2025 to 1,300 on April 1, 2025, rose to 2,000 on June 1, 2025, and fell back to 1,400 on December 31, 2025.",
     "facts": [
      "P2",
      "P3"
@@ -287,8 +338,19 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P3), attributed to Alphaliner.",
-    "claim": "Global container ship capacity is expected to grow 3.7% in 2026 (1.4 million TEUs from an order book of 11.3 million TEU) while demand is projected to grow only 2.5%, creating a supply-demand imbalance that pressures freight rates.",
+    "basis": "Stated in the 20-F Item 3.D Risk Factors as an ongoing condition.",
+    "claim": "Geopolitical disruptions, including continued Houthi attacks on the Red Sea forcing rerouting to longer routes, the Russia-Ukraine war, and Middle East conflicts, create ongoing operational cost pressures and demand uncertainty for ZIM.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "the continued Yemeni Houthis' attacks on ships in the Red Sea that forced most ocean carriers to reroute some of their vessels to alternative, longer and more expensive routes"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 20-F Item 5, attributed to Alphaliner.",
+    "claim": "Global container ship capacity is expected to increase by 3.7% in 2026 while demand is projected to increase only 2.5%, implying a supply-demand imbalance that could pressure freight rates.",
     "facts": [
      "P3"
     ],
@@ -298,139 +360,95 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited item (P2) as a risk factor.",
-    "claim": "ZIM faces competitive pressure from larger carriers: the 20-F warns that certain large competitors may be better positioned with greater financial resources and may offer more attractive schedules, services and rates.",
+    "basis": "Stated in the 20-F Item 5 and the consolidated income statement (F2).",
+    "claim": "ZIM carried 3,663 thousand TEUs in 2025 and generated $481.5 million in net income, with Adjusted EBITDA of $2,170.9 million, down from $2,153.8 million net income and $3,691.8 million Adjusted EBITDA in 2024.",
     "facts": [
-     "P2"
+     "F2",
+     "P3"
     ],
     "quotes": [
-     "Certain of our large competitors may be better positioned and have greater financial resources than us and may therefore be able to offer more attractive schedules, services and rates, which could negatively impact our market position and financial performance."
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Stated in the cited items (P1, P2).",
-    "claim": "Ongoing geopolitical disruptions, including continued Houthi attacks in the Red Sea, the Russia-Ukraine war, and Middle East conflicts, force vessels onto longer and more expensive routes and add uncertainty to ZIM's operations.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "the continued Yemeni Houthis' attacks on ships in the Red Sea that forced most ocean carriers to reroute some of their vessels to alternative, longer and more expensive routes",
-     "We continue to adjust our operations in response to the effects of global and regional geopolitical and economic events, including the continuous Houthi attacks on the Red Sea, the Russia-Ukraine wars the instable climate in the Middle-East, and other recent geopolitical trends."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (P2) as a risk factor.",
-    "claim": "Unlike some competitors, ZIM does not own or hold substantial investments in terminals, limiting its ability to respond to port congestion and inland accessibility issues.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "Unlike some of our competitors, we do not own or hold substantial investments in terminals, therefore our ability to respond to congestion and port and inland accessibility is limited."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the cited item (P2) as a risk factor.",
-    "claim": "U.S. and China port-fee regulations on non-local carriers and foreign-built vessels are currently suspended until the last quarter of 2026, but if resumed would significantly increase ZIM's operating expenses.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "The U.S. and China have adopted new regulations which impose port fees on non-local carriers and foreign-built vessels. These regulations are currently suspended until the last quarter of 2026, however, if resumed, will significantly increase our operating expenses, and we may be unable to recover them from our customers or at all."
+     "In the years ended December 31, 2025, 2024 and 2023, we carried 3,663 thousand, 3,751 thousand and 3,281 thousand TEUs for our customers worldwide, respectively.",
+     "our net income (loss) was $481.5 million, $2,153.8 million and $(2,687.9) million, respectively, and our Adjusted EBITDA was $2,170.9 million, $3,691.8 million and $1,049.3 million, respectively."
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "stated directly in the 20-F balance sheet and cash flow statement",
-    "claim": "ZIM held $1,051.7 (table in millions) in cash and cash equivalents at December 31, 2025, down from $1,314.7 (table in millions) at December 31, 2024.",
-    "facts": [
-     "F1",
-     "F3"
-    ],
-    "quotes": [
-     "Cash and cash equivalents | 1,051.7 | 1,314.7"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in the 20-F balance sheet",
-    "claim": "Total current assets of $2,630.6 (table in millions) exceeded total current liabilities of $2,134.1 (table in millions) at December 31, 2025, indicating a positive working-capital position.",
+    "basis": "Stated directly in the 20-F consolidated balance sheet (F1).",
+    "claim": "ZIM held $1,051.7 (table in millions) in cash and cash equivalents plus $735.1 (table in millions) in current other investments at 31 December 2025, giving total current assets of $2,630.6 (table in millions) against total current liabilities of $2,134.1 (table in millions).",
     "facts": [
      "F1"
     ],
     "quotes": [
+     "Cash and cash equivalents | 1,051.7 | 1,314.7",
+     "Other investments | 735.1 | 800.4",
      "Total current assets | 2,630.6 | 3,260.9",
      "Total current liabilities | 2,134.1 | 2,611.2"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated directly in the 20-F balance sheet",
-    "claim": "Total liabilities of $6,982.5 (table in millions) exceeded total equity of $4,025.6 (table in millions) at December 31, 2025, reflecting a leveraged balance sheet.",
+    "basis": "Stated directly in the 20-F balance sheet (F1); the charter-in percentage is stated in P1.",
+    "claim": "Total liabilities of $6,982.5 (table in millions) exceeded total equity of $4,025.6 (table in millions) at 31 December 2025, with lease liabilities ($4,551.6 non-current and $1,096.5 current, table in millions) constituting the dominant obligation, while borrowings were minimal at $47.2 and $42.9 (table in millions) respectively.",
     "facts": [
      "F1"
     ],
     "quotes": [
      "Total liabilities | 6,982.5 | 7,346.8",
-     "Total equity | 4,025.6 | 4,042.7"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in the 20-F balance sheet; the IFRS 16 accounting treatment is described in P3",
-    "claim": "Lease liabilities (non-current $4,551.6 and current $1,096.5, table in millions) accounted for the overwhelming majority of ZIM's $6,982.5 (table in millions) total liabilities.",
-    "facts": [
-     "F1"
-    ],
-    "quotes": [
+     "Total equity | 4,025.6 | 4,042.7",
      "Lease liabilities | 4,551.6 | 4,600.6",
-     "Lease liabilities | 1,096.5 | 1,321.7"
+     "Lease liabilities | 1,096.5 | 1,321.7",
+     "Loans and other liabilities | 47.2 | 59.9",
+     "Loans and other liabilities | 42.9 | 47.8"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated directly in the 20-F cash flow statement; revenue figures from F2",
-    "claim": "ZIM generated $2,299.5 (table in millions) in net cash from operating activities in 2025, a 39% decline from $3,752.7 (table in millions) in 2024.",
+    "basis": "Stated directly in the 20-F cash flow statement (F3) and income statement (F2).",
+    "claim": "Net cash generated from operating activities was $2,299.5 (table in millions) in 2025, down from $3,752.7 (table in millions) in 2024, reflecting the decline in profitability from $2,153.8 to $481.5 (table in millions) in profit for the year.",
     "facts": [
-     "F3"
+     "F3",
+     "F2"
     ],
     "quotes": [
-     "Net cash generated from operating activities | 2,299.5 | 3,752.7 | 1,020.0"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated directly in the 20-F cash flow statement; the 56% proportion is inferred from the two printed figures",
-    "claim": "Depreciation and amortisation of $1,286.1 (table in millions) represented 56% of the $2,299.5 (table in millions) operating cash flow, indicating that cash generation is heavily dependent on the non-cash add-back of a large D&A charge.",
-    "facts": [
-     "F3"
-    ],
-    "quotes": [
-     "Depreciation and amortization | 1,286.1 | 1,142.5 | 1,471.8"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated directly in the 20-F income and cash flow statements",
-    "claim": "Net income of $481.5 (table in millions) was roughly one-fifth of operating cash flow of $2,299.5 (table in millions), bridged mainly by $1,286.1 (table in millions) of D&A and $357.5 (table in millions) of net finance expenses.",
-    "facts": [
-     "F2",
-     "F3"
-    ],
-    "quotes": [
-     "Profit (loss) for the year | 481.5 | 2,153.8 | (2,687.9)",
-     "Net finance expenses | (357.5) | (322.3) | (304.5)"
+     "Net cash generated from operating activities | 2,299.5 | 3,752.7 | 1,020.0",
+     "Profit (loss) for the year | $ 481.5 | $ 2,153.8 | $ (2,687.9)"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated directly in the 20-F balance sheet and cash flow statement; the adequacy of coverage is inferred",
-    "claim": "Current lease liabilities of $1,096.5 (table in millions) and current loans of $42.9 (table in millions) represent the nearest-term refinancing need, largely fundable from the $1,051.7 (table in millions) cash on hand plus ongoing operating cash flow.",
+    "basis": "Stated in the 20-F cash flow statement (F3) and income statement (F2); the IFRS 16 mechanism is described in P3.",
+    "claim": "Operating cash flow of $2,299.5 (table in millions) in 2025 was nearly five times net income of $481.5 (table in millions), driven primarily by $1,286.1 (table in millions) of depreciation and amortisation, indicating that the bulk of cash generation is a non-cash add-back rather than incremental earnings.",
+    "facts": [
+     "F3",
+     "F2"
+    ],
+    "quotes": [
+     "Net cash generated from operating activities | 2,299.5 | 3,752.7 | 1,020.0",
+     "Depreciation and amortization | 1,286.1 | 1,142.5 | 1,471.8",
+     "Profit (loss) for the year | $ 481.5 | $ 2,153.8 | $ (2,687.9)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated directly in the 20-F cash flow statement (F3).",
+    "claim": "Net cash used in financing activities was $2,433.3 (table in millions) in 2025, comprising $1,439.6 (table in millions) for repayment of lease liabilities and borrowings, $474.3 (table in millions) of interest paid, and $515.6 (table in millions) of dividends to owners, resulting in a net decrease in cash of $267.1 (table in millions) for the year.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash used in financing activities | (2,433.3) | (3,131.4) | (2,892.9)",
+     "Repayment of lease liabilities and borrowings | (1,439.6) | (2,082.6) | (1,713.1)",
+     "Interest paid | (474.3) | (465.6) | (380.7)",
+     "Dividend paid to owners of the company | (515.6) | (579.2) | (769.2)",
+     "Net change in cash and cash equivalents | (267.1) | 398.1 | (96.4)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 20-F balance sheet (F1) and cash flow statement (F3); the newbuild commitment is stated in P1.",
+    "claim": "Current lease liabilities of $1,096.5 (table in millions) and current loans of $42.9 (table in millions) represent the near-term refinancing burden, which is comfortably covered by the $1,051.7 (table in millions) of cash and cash equivalents held at year-end 2025 before considering any further operating inflows.",
     "facts": [
      "F1",
      "F3"
@@ -438,24 +456,14 @@
     "quotes": [
      "Lease liabilities | 1,096.5 | 1,321.7",
      "Loans and other liabilities | 42.9 | 47.8",
-     "Cash and cash equivalents | 1,051.7 | 1,314.7"
+     "Cash and cash equivalents | 1,051.7 | 1,314.7",
+     "Cash and cash equivalents at the end of the year | $ 1,051.7 | $ 1,314.7 | $ 921.5"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated directly in the 20-F Item 4 business overview",
-    "claim": "85.7% of ZIM's chartered-in vessels are under leases with remaining duration exceeding one year (91.5% in TEU terms), meaning the bulk of lease obligations are locked in and do not require near-term refinancing.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "85.7% of our chartered-in vessels are under leases having a remaining charter duration of more than one year (or 91.5% in terms of TEU capacity for container vessels)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated directly in the 20-F Item 4 business overview",
-    "claim": "ZIM committed to approximately $2.3 billion for ten new-built 11,500 TEU LNG dual-fuel vessels with deliveries between 2027 and 2028, a material future cash obligation that will increase lease liabilities upon delivery.",
+    "basis": "Stated in the 20-F Item 4 Business Overview (P1).",
+    "claim": "In April 2025 ZIM entered into a charter agreement for ten new-built 11,500 TEU LNG dual-fuel container vessels for a total consideration of approximately $2.3 billion, with expected deliveries between 2027 and 2028, representing a major future lease obligation that will increase the company's debt base.",
     "facts": [
      "P1"
     ],
@@ -465,104 +473,231 @@
     "support": "supported"
    },
    {
-    "basis": "stated directly in the 20-F cash flow statement",
-    "claim": "In 2025, ZIM used $2,433.3 (table in millions) in financing activities, comprising $1,439.6 (table in millions) of lease and borrowing repayments and $515.6 (table in millions) of dividends to owners, resulting in a net cash decrease of $267.1 (table in millions).",
+    "basis": "Stated in the 6-K press release of 6 October 2026 (P5); the risks are described in P2.",
+    "claim": "For full-year 2026, ZIM raised its guidance to Adjusted EBITDA of between $2.7 billion and $3.0 billion and Adjusted EBIT of between $1.4 billion and $1.7 billion, a 30% increase in Adjusted EBITDA midpoint versus the prior August 2026 guidance, indicating expected continued strong cash generation to service debt.",
     "facts": [
-     "F3"
+     "P5"
     ],
     "quotes": [
-     "Net cash used in financing activities | (2,433.3) | (3,131.4) | (2,892.9)",
-     "Repayment of lease liabilities and borrowings | (1,439.6) | (2,082.6) | (1,713.1)",
-     "Dividend paid to owners of the company | (515.6) | (579.2) | (769.2)",
-     "Net change in cash and cash equivalents | (267.1) | 398.1 | (96.4)"
+     "ZIM now expects to generate Adjusted EBITDA of between $2.7 billion and $3.0 billion and Adjusted EBIT of between $1.4 billion and $1.7 billion for the full year 2026, compared with its previous guidance of Adjusted EBITDA between $2.0 billion and $2.4 billion and Adjusted EBIT between $700 million and $1.1 billion.",
+     "The midpoint of the updated full year 2026 guidance represents an increase of 30% in Adjusted EBITDA and 72% in Adjusted EBIT compared with previous guidance provided on August 19, 2026."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated directly in the 20-F Item 4 and balance sheet",
-    "claim": "ZIM chartered-in 86.4% of its TEU capacity and 87.5% of its 128-vessel fleet, owning only 16 vessels, which makes its cost structure and refinancing profile highly sensitive to charter-market conditions.",
+    "basis": "Stated in the 6-K Q2 2026 earnings release (P7); the termination fee is stated in P2.",
+    "claim": "In Q2 2026, ZIM generated $386m of free cash flow and reported revenues of $1.78bn (up 9% y-o-y) and adjusted EBITDA of $491m (up 4% y-o-y), demonstrating that the company's cash generation remained robust into 2026.",
     "facts": [
-     "P1",
-     "F1"
+     "P7"
     ],
     "quotes": [
-     "As of December 31, 2025, we operated a fleet of 128 vessels and chartered-in approximately 86.4% of our TEU capacity and 87.5% of the vessels in our fleet.",
-     "Vessels | $ 5,801.7 | $ 5,733.0"
+     "Generated $386m of Free Cash Flow in Q2",
+     "Revenues for the second quarter were $1.78bn, a year-over-year increase of 9%.",
+     "Adjusted EBITDA for the second quarter was $491m, a year-over-year increase of 4%."
     ],
-    "support": "supported"
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 20-F risk factors (P2), the 6-K of 30 September 2026 (P6), and the 20-F Item 4 (P1).",
+    "claim": "The pending merger with Hapag-Lloyd AG, announced in February 2026 at $35.00 per ordinary share, remains subject to closing conditions including regulatory approvals and the Special State Share release; as of September 2026, the Israeli Government Companies Authority ceased handling the special state share application, creating uncertainty over the merger timeline.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "In February 2026 we have entered into a Merger Agreement with Hapag-Lloyd AG, which, if consummated, will include the delisting of all our ordinary shares from NYSE.",
+     "the GCA has determined to cease handling the pending application for approval of the requested changes in the special state share, which was submitted for its approval back in March 2026",
+     "our shareholders will not receive any of the Merger Consideration of $35.00 per ordinary share"
+    ],
+    "support": "quote_not_found"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated in P1 as a factual description of the agreement; revenue and volume figures from F2 and P3.",
-    "claim": "The MSC strategic collaboration, effective February 2025 and covering approximately 23,000 weekly TEUs on the Asia-U.S. East Coast and Asia-U.S. Gulf Coast, is a growth driver replacing the terminated 2M Alliance.",
+    "basis": "Stated in P5 (company guidance release, Oct 6 2026) and P7 (Q2 2026 earnings release, Aug 19 2026); SCFI and Alphaliner data stated in P3 (20-F).",
+    "claim": "ZIM raised full-year 2026 Adjusted EBITDA guidance to $2.7 billion\u2013$3.0 billion on the basis of 'continued strong market demand and favorable momentum in freight rates,' implying freight rates must remain elevated through H2 2026 for the guidance to be met.",
     "facts": [
-     "P1"
+     "P5",
+     "P7"
     ],
     "quotes": [
-     "In September 2024, we entered into a strategic collaboration with MSC, which became effective in February 2025, replacing our previous agreement with the 2M Alliance which terminated in January 2025. The new agreement covers services on the Asia-U.S. East Coast and the Asia-U.S. Gulf Coast and approximately 23,000 weekly TEUs."
+     "ZIM now expects to generate Adjusted EBITDA of between $2.7 billion and $3.0 billion and Adjusted EBIT of between $1.4 billion and $1.7 billion for the full year 2026, compared with its previous guidance of Adjusted EBITDA between $2.0 billion and $2.4 billion and Adjusted EBIT between $700 million and $1.1 billion.",
+     "Average freight rate per TEU in the second quarter was $1,590, a year-over-year increase of 8%."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 as a signed charter agreement; supply-demand projection from P3 citing Alphaliner.",
-    "claim": "Ten new-built 11,500 TEU LNG dual-fuel container vessels chartered in April 2025 for approximately $2.3 billion, with deliveries expected between 2027 and 2028, represent a committed capacity expansion.",
+    "basis": "Stated in P1 (20-F, citing PIERS and CTS data) and P7 (Q2 2026 release headline).",
+    "claim": "Transpacific trade accounts for 43.0% of ZIM's carried TEUs and the company holds a 10.1% market share in the Far East to U.S. East Coast & Gulf lane, so continued U.S.\u2013China and U.S.\u2013Asia trade flows are necessary for this dominant revenue source to persist.",
     "facts": [
-     "P1"
+     "P1",
+     "P7"
     ],
     "quotes": [
-     "In April 2025, we entered into a charter agreement of ten new-built 11,500 TEUs LNG dual-fuel container vessels, for a total consideration of approximately $2.3 billion, with expected deliveries between 2027 and 2028."
+     "Transpacific (43.0%)",
+     "Far East (not including the Indian subcontinent) to U.S. East Coast & Gulf (Pacific trade zone), 10.1% market share",
+     "Benefiting from its Leading Transpacific Position"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 with attribution to PIERS and CTS data.",
-    "claim": "ZIM's leadership positions in niche trade lanes, including a 10.1% market share on Far East to U.S. East Coast & Gulf and 7.5% on Far East to Mediterranean & Black Sea, are a growth driver dependent on maintaining competitive advantage in underserved routes.",
+    "basis": "Stated in P1 (20-F, citing Alphaliner December 2025 Report) and P3 (20-F risk discussion).",
+    "claim": "ZIM charters in 86.4% of its TEU capacity versus an industry average of 37.6%, which must remain a net advantage: the charter market must stay accessible at predictable rates so ZIM can add or shed capacity without incurring unaffordable fixed costs in a freight downturn.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "we chartered-in approximately 86.4% of our TEU capacity and 87.5% of the vessels in our fleet",
+     "the industry average of chartered-in vessels is approximately 37.6% of the fleets as of the end of 2025",
+     "our costs associated with chartering vessels are unpredictable and could be, in certain circumstances, high even when the freight market is in a downward trend"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P1 (20-F, Item 4.B Business Overview).",
+    "claim": "ZIM's strategic collaboration with MSC, effective February 2025, covers approximately 23,000 weekly TEUs on Asia\u2013U.S. East Coast and Gulf Coast services; this growth driver requires the agreement to remain in force and regulatory conditions to permit continued slot-sharing.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "(3) Far East (not including the Indian subcontinent) to U.S. East Coast & Gulf (Pacific trade zone), 10.1% market share and (4) West Coast South America to USEC, 8.7% market share, in each case according to the Port Import/Export Reporting Service (PIERS) and Container Trade Statistics (\"CTS\")."
+     "the new agreement covers services on the Asia-U.S. East Coast and the Asia-U.S. Gulf Coast and approximately 23,000 weekly TEUs",
+     "replacing our previous agreement with the 2M Alliance which terminated in January 2025"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P1 (20-F, citing PIERS and CTS).",
+    "claim": "ZIM holds market shares of 6.6% to 10.1% in four identified niche lanes (Mediterranean\u2013USEC, Far East\u2013Med/Black Sea, Far East\u2013USEC & Gulf, West Coast SA\u2013USEC), and this advantage requires that no better-resourced competitor enter and displace ZIM in these underserved markets.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "we maintain a 6.6% market share",
+     "7.5% market share",
+     "10.1% market share",
+     "8.7% market share"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 as a factual event; conditions and risks detailed in P2.",
-    "claim": "The pending merger with Hapag-Lloyd AG at $35.00 per ordinary share, entered in February 2026, is a transformation event whose completion is subject to shareholder approval, regulatory clearances, and the Special State Share Release by the State of Israel.",
+    "basis": "Stated in P7 (Q2 2026 release) and P3 (20-F, Item 5).",
+    "claim": "Q2 2026 carried volume of 922 thousand TEUs was up 3% year-over-year, reversing the full-year 2025 decline to 3,663 thousand TEUs from 3,751 thousand in 2024; continued volume growth requires global trade demand to outpace ZIM's stable operated capacity.",
+    "facts": [
+     "P7",
+     "P3"
+    ],
+    "quotes": [
+     "Carried volume in the second quarter was 922 thousand TEUs, a year-over-year increase of 3%.",
+     "In the years ended December 31, 2025, 2024 and 2023, we carried 3,663 thousand, 3,751 thousand and 3,281 thousand TEUs for our customers worldwide, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (20-F, Item 4.B); no separate financial breakdown provided.",
+    "claim": "ZIM charges a premium over base freight rates for specialized cargo (refrigerated, liquid, over-dimensional, hazardous), which must continue to grow as a share of total TEUs to sustain above-average margins in a commoditized market.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "we charge a premium over the base freight rate for handling specialized cargo, such as refrigerated, liquid, over-dimensional, or hazardous cargo, which require more complex handling and more costly equipment and are generally subject to greater risk of damage",
+     "We focus on growing the specialized cargo transportation portion of our business."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P1 (20-F, Item 4.B and Item 5).",
+    "claim": "ZIM operates ten 15,000 TEU and eighteen 8,000-class TEU LNG dual-fuel vessels and has contracted for ten new-built 11,500 TEU LNG dual-fuel vessels at approximately $2.3 billion (deliveries 2027\u20132028); this fuel advantage requires tightening environmental regulation (ETS, FuelEU Maritime) to maintain its competitive edge and reliable LNG supply.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "ten 15,000 TEU and eighteen uniquely designed 8,000-class TEU LNG (liquified natural gas dual-fuel) container vessels which we charter on a long-term basis",
+     "ten new-built 11,500 TEUs LNG dual-fuel container vessels, for a total consideration of approximately $2.3 billion, with expected deliveries between 2027 and 2028"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 (20-F risk factors, Item 3.D) and P6 (6-K, Sept 30 2026).",
+    "claim": "The pending merger with Hapag-Lloyd AG at $35.00 per share provides a price floor and integration synergy expectation, but the Israeli GCA ceased handling the Special State Share application in September 2026; for the merger to close, Hapag-Lloyd must submit a revised, fully detailed proposal and obtain Israeli government approval before the Outside Date of February 17, 2027 (extendable to June 30, 2027).",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "the Merger Consideration of $35.00 per ordinary share",
+     "the GCA has determined to cease handling the pending application for approval of the requested changes in the special state share",
+     "Hapag-Lloyd informed the Company that it intends to submit a revised proposal and seek approval from the GCA and the State of Israel in connection with the special state share and the pending merger transaction."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1 (20-F, Item 4.B); no financial quantification provided.",
+    "claim": "ZIM's digital and technology platform (GenAI CoE, ZIMonitor, myZIM, Draft B/L, ZIMGuard, and a CVC portfolio of ten+ startups) is positioned to reduce operating costs and improve customer retention, but the evidence does not quantify the revenue or cost impact of these initiatives.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In 2024 we launched an inhouse Generative Artificial Intelligence Center of Excellence (GenAI CoE) aimed to develop, implement and improve new and automated working processes for the benefit of our customers and to improve efficiency of internal processes",
+     "ZIMGuard, an artificial intelligence-based internal tool designed to detect possible misdeclarations of dangerous cargo in real-time"
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in P1 and P2",
+    "claim": "ZIM entered into a Merger Agreement with Hapag-Lloyd AG on February 16, 2026, under which Merger Sub (Norazia (Israel) Ltd.) will merge with and into ZIM, making ZIM a wholly owned subsidiary of Hapag-Lloyd AG, with merger consideration of $35.00 per ordinary share and a termination fee of $150,000,000.",
     "facts": [
      "P1",
      "P2"
     ],
     "quotes": [
-     "In February 2026 we have entered into a Merger Agreement with Hapag-Lloyd AG, which, if consummated, will include the delisting of all our ordinary shares from NYSE."
+     "In February 2026 we have entered into a Merger Agreement with Hapag-Lloyd AG, which, if consummated, will include the delisting of all our ordinary shares from NYSE.",
+     "the Agreement and Plan of Merger we entered with Hapag-Lloyd AG, a German stock corporation (Aktiengesellschaft) (the \"Parent\" or \"Hapag-Lloyd AG\") incorporated under the laws of Germany, and Norazia (Israel) Ltd., a company organized under the laws of the State of Israel and a direct or indirect wholly owned Subsidiary of Parent (\"Merger Sub\") on February 16, 2026, pursuant to which Merger Sub will merge with and into us, so that we will continue as the surviving corporation in the Merger and a wholly owned subsidiary of Parent.",
+     "our shareholders will not receive any of the Merger Consideration of $35.00 per ordinary share",
+     "we would be required to pay Hapag-Lloyd AG a termination fee of $150,000,000 in cash"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 citing Clarksons Platou Shipbrokers; ZIM's fleet count stated in P1.",
-    "claim": "ZIM's car carrier operations, comprising thirteen chartered vessels serving Europe, Central America, and South America, are positioned to benefit from an estimated 7% increase in global car carrier fleet capacity during 2026.",
+    "basis": "stated in P6",
+    "claim": "The Israeli Government Companies Authority (GCA) determined to cease handling the pending application for approval of the requested changes in the Special State Share, which had been submitted in March 2026, after Hapag-Lloyd and FIMI failed to submit a detailed revised proposal by the GCA's deadline; Hapag-Lloyd stated it intends to submit a revised proposal.",
     "facts": [
-     "P1"
+     "P6"
     ],
     "quotes": [
-     "According to Clarksons Platou Shipbrokers market review as of January 2026, the car carrier fleet growth is estimated to continue during 2026, with an anticipated increase of approximately 7% capacity by year end."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "Stated in P1 as a description of ongoing programs; no quantified impact provided.",
-    "claim": "ZIM's digital and technology investments, including the GenAI Center of Excellence launched in 2024, ZIMonitor, myZIM, Draft B/L, ZIMGuard, and a corporate venture capital portfolio of ten-plus technology companies, are positioned to improve operational efficiency and create adjacent revenue streams.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In 2024 we launched an inhouse Generative Artificial Intelligence Center of Excellence (GenAI CoE) aimed to develop, implement and improve new and automated working processes for the benefit of our customers and to improve efficiency of internal processes."
+     "the GCA has determined to cease handling the pending application for approval of the requested changes in the special state share, which was submitted for its approval back in March 2026",
+     "Hapag-Lloyd informed the Company that it intends to submit a revised proposal and seek approval from the GCA and the State of Israel in connection with the special state share and the pending merger transaction."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 as a factual description of Q4 2025 transactions.",
-    "claim": "Q4 2025 chartering of twenty-four vessels (twenty at 3,000-5,000 TEUs and four at approximately 9,000 TEUs) with charter periods of 3 to 5 years and redeliveries from end of 2026 to 2028 provides near-term capacity flexibility.",
+    "basis": "stated in P5",
+    "claim": "ZIM raised its full-year 2026 guidance, increasing expected Adjusted EBITDA from between $2.0 billion and $2.4 billion to between $2.7 billion and $3.0 billion, and Adjusted EBIT from between $700 million and $1.1 billion to between $1.4 billion and $1.7 billion, citing continued strong market demand and favorable momentum in freight rates.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "ZIM now expects to generate Adjusted EBITDA of between $2.7 billion and $3.0 billion and Adjusted EBIT of between $1.4 billion and $1.7 billion for the full year 2026, compared with its previous guidance of Adjusted EBITDA between $2.0 billion and $2.4 billion and Adjusted EBIT between $700 million and $1.1 billion.",
+     "The midpoint of the updated full year 2026 guidance represents an increase of 30% in Adjusted EBITDA and 72% in Adjusted EBIT compared with previous guidance provided on August 19, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "ZIM entered into a charter agreement for ten new-built 11,500 TEU LNG dual-fuel container vessels for a total consideration of approximately $2.3 billion, with expected deliveries between 2027 and 2028.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "In April 2025, we entered into a charter agreement of ten new-built 11,500 TEUs LNG dual-fuel container vessels, for a total consideration of approximately $2.3 billion, with expected deliveries between 2027 and 2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1",
+    "claim": "During the last quarter of 2025, ZIM entered into several chartering transactions for twenty-four vessels (twenty of approximately 3,000 to 5,000 TEUs and four of approximately 9,000 TEUs) with charter periods of 3 to 5 years and expected redeliveries as early as the end of 2026 to 2028.",
     "facts": [
      "P1"
     ],
@@ -572,367 +707,148 @@
     "support": "number_not_found"
    }
   ],
-  "material_events": [
-   {
-    "basis": "stated in the cited item (P1 and P2), filed as part of the 20-F annual report effective 2026-03-10",
-    "claim": "ZIM entered into a Merger Agreement with Hapag-Lloyd AG on February 16, 2026, under which a wholly owned subsidiary of Hapag-Lloyd will merge with and into ZIM, making ZIM a wholly owned subsidiary of Hapag-Lloyd AG, with merger consideration of $35.00 per ordinary share; consummation is subject to shareholder approval, regulatory approvals, and Special State Share release.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "In February 2026 we have entered into a Merger Agreement with Hapag-Lloyd AG, which, if consummated, will include the delisting of all our ordinary shares from NYSE.",
-     "pursuant to which Merger Sub will merge with and into us, so that we will continue as the surviving corporation in the Merger and a wholly owned subsidiary of Parent.",
-     "our shareholders will not receive any of the Merger Consideration of $35.00 per ordinary share"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P1 and P3)",
-    "claim": "The 2M Alliance, ZIM's previous strategic shipping alliance, terminated in January 2025.",
-    "facts": [
-     "P1",
-     "P3"
-    ],
-    "quotes": [
-     "replacing our previous agreement with the 2M Alliance which terminated in January 2025"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P1)",
-    "claim": "In September 2024, ZIM entered into a strategic collaboration with MSC, effective February 2025, covering services on the Asia-U.S. East Coast and Asia-U.S. Gulf Coast and approximately 23,000 weekly TEUs, replacing the terminated 2M Alliance.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In September 2024, we entered into a strategic collaboration with MSC, which became effective in February 2025, replacing our previous agreement with the 2M Alliance which terminated in January 2025.",
-     "The new agreement covers services on the Asia-U.S. East Coast and the Asia-U.S. Gulf Coast and approximately 23,000 weekly TEUs."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the cited item (P1)",
-    "claim": "In April 2025, ZIM entered into a charter agreement for ten new-built 11,500 TEU LNG dual-fuel container vessels for a total consideration of approximately $2.3 billion, with expected deliveries between 2027 and 2028.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In April 2025, we entered into a charter agreement of ten new-built 11,500 TEUs LNG dual-fuel container vessels, for a total consideration of approximately $2.3 billion, with expected deliveries between 2027 and 2028."
-    ],
-    "support": "number_not_found"
-   },
-   {
-    "basis": "stated in the cited item (P1)",
-    "claim": "During the last quarter of 2025, ZIM entered into several chartering transactions for twenty-four vessels (twenty in the 3,000 to 5,000 TEU range and four at approximately 9,000 TEUs) with charter periods of 3 to 5 years and expected redeliveries from end of 2026 to 2028.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In addition, during the last quarter of 2025, we entered into several chartering transactions with respect to twenty-four vessels, twenty of which range from approximately 3,000 to 5,000 TEUs, and four are approximately 9,000 TEUs, with charter periods ranging from 3 to 5 years and expected redeliveries as early as the end of 2026 to 2028."
-    ],
-    "support": "number_not_found"
-   }
-  ],
   "risks": [
    {
-    "basis": "Stated in P2 (Risk Factors \u2013 Risks related to the Merger Agreement)",
-    "claim": "ZIM's pending merger with Hapag-Lloyd AG may fail to close by the Outside Date, triggering a $150,000,000 termination fee and leaving ZIM as a standalone company with disrupted operations and diverted management attention.",
+    "basis": "Stated directly in the 6-K filed September 30, 2026 (P6) and in the 20-F risk factors (P2).",
+    "claim": "The Israeli Government Companies Authority has ceased handling ZIM's application for Special State Share approval required for the Hapag-Lloyd merger, because no detailed revised proposal was submitted by the GCA's deadline.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "the GCA has determined to cease handling the pending application for approval of the requested changes in the special state share, which was submitted for its approval back in March 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 20-F risk factors (P2); the Q2 2026 counter-evidence is from P7.",
+    "claim": "The pending Hapag-Lloyd merger may not be completed, in which case ZIM shareholders will not receive the $35.00 per share Merger Consideration and the company may owe a $150,000,000 termination fee under certain circumstances.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "under certain circumstances we would be required to pay Hapag-Lloyd AG a termination fee of $150,000,000 in cash."
+     "If the conditions are not satisfied or waived in a timely manner and the Merger is not completed, our shareholders will not receive any of the Merger Consideration of $35.00 per ordinary share.",
+     "we would be required to pay Hapag-Lloyd AG a termination fee of $150,000,000 in cash"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P1 (Item 4.A \u2013 History and development)",
-    "claim": "If the Hapag-Lloyd merger is consummated, all ZIM ordinary shares will be delisted from the NYSE, eliminating public market access for shareholders.",
+    "basis": "Stated in the 20-F income statement (F2) and MD&A (P3); counter-evidence from P5 and P7.",
+    "claim": "ZIM's revenue and profit are highly cyclical: full-year 2025 revenue fell to $6,904.2 million (from $8,427.4 million in 2024) and net income fell to $481.5 million (from $2,153.8 million), driven by SCFI dropping from 2,505 to 1,400 points over the course of 2025.",
     "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "which, if consummated, will include the delisting of all our ordinary shares from NYSE"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1 (Business Overview) and P3 (Vessel charter portfolio section)",
-    "claim": "ZIM chartered-in 86.4% of its TEU capacity and 87.5% of its 128-vessel fleet, making it highly exposed to charter market rate increases and vessel availability, with costs that remain fixed even when freight rates decline.",
-    "facts": [
-     "P1",
+     "F2",
      "P3"
     ],
     "quotes": [
-     "we operated a fleet of 128 vessels and chartered-in approximately 86.4% of our TEU capacity and 87.5% of the vessels in our fleet"
+     "Profit (loss) for the year | $ 481.5 | $ 2,153.8 | $ (2,687.9)",
+     "on January 1, 2025, the comprehensive Shanghai (Export) Containerized Freight Index (SCFI) started with 2,505 points, then dropped to 1,300 points on April 1, 2025, increased again to 2,000 points on June 1, 2025 and dropped back to 1,400 on December 31, 2025"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in F2 (Income Statement) and P3 (Alphaliner data, Item 5)",
-    "claim": "ZIM's income from voyages declined from $8,427.4 (table in millions) in 2024 to $6,904.2 (table in millions) in 2025, and global container capacity is expected to grow 3.7% in 2026 versus only 2.5% demand growth, pressuring freight rates and margins further.",
+    "basis": "Stated in the 20-F Business Overview (P1) and Risk Factors (P2).",
+    "claim": "ZIM chartered-in 86.4% of its TEU capacity and 87.5% of its vessels, making it highly sensitive to charter-market fluctuations; charter costs are unpredictable and may remain high even when freight rates decline.",
     "facts": [
-     "F2",
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "we chartered-in approximately 86.4% of our TEU capacity and 87.5% of the vessels in our fleet",
+     "We charter-in most of our fleet, which makes us more sensitive to fluctuations in the charter market, and as a result of our dependency on the vessel charter market, our costs associated with chartering vessels are unpredictable and could be, in certain circumstances, high even when the freight market is in a downward trend"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in the 20-F Risk Factors (P2). No quantification of the fee impact is provided in the evidence.",
+    "claim": "U.S. and China port-fee regulations on non-local carriers and foreign-built vessels are suspended until the last quarter of 2026; if resumed, they would significantly increase ZIM's operating expenses, which the company may be unable to pass on to customers.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The U.S. and China have adopted new regulations which impose port fees on non-local carriers and foreign-built vessels. These regulations are currently suspended until the last quarter of 2026, however, if resumed, will significantly increase our operating expenses, and we may be unable to recover them from our customers or at all."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 20-F MD&A (P3), citing Alphaliner. Counter-evidence from P5 (raised guidance) and P7 (Q2 2026 results).",
+    "claim": "Global container ship capacity is expected to grow 3.7% in 2026 (1.4 million TEU deliveries from an 11.3 million TEU order book) while demand is projected to grow only 2.5%, creating structural oversupply pressure on freight rates.",
+    "facts": [
      "P3"
     ],
     "quotes": [
      "global container ship capacity is expected to increase by 3.7% in 2026, with deliveries of 1.4 million TEUs out of a vessel order book of 11.3 million TEU, while demand for shipping services is projected to increase only by 2.5%"
     ],
     "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 (Risk Factors \u2013 regulatory developments)",
-    "claim": "U.S. and China port-fee regulations on non-local carriers and foreign-built vessels, currently suspended, are set to resume in the last quarter of 2026, which would significantly increase ZIM's operating expenses if costs cannot be passed to customers.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "These regulations are currently suspended until the last quarter of 2026, however, if resumed, will significantly increase our operating expenses, and we may be unable to recover them from our customers or at all."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 (Risk Factors) and P1 (Business Overview \u2013 geopolitical references)",
-    "claim": "Ongoing Houthi attacks on the Red Sea, the Israel-Iran conflict, and broader Middle East instability force ZIM to reroute vessels to longer, more expensive paths, increasing bunker consumption, transit times, and war-risk insurance premiums.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
-     "the continued Yemeni Houthis' attacks on ships in the Red Sea that forced most ocean carriers to reroute some of their vessels to alternative, longer and more expensive routes"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 (Risk Factors \u2013 Special State Share section)",
-    "claim": "The State of Israel's Special State Share imposes operational restrictions including a minimum fleet of 11 owned vessels, Israeli citizenship requirements for the CEO and board majority, and veto power over share transfers above 35%, limiting strategic flexibility and creating a condition to the Hapag-Lloyd merger.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "to maintain a minimal fleet of 11 seaworthy vessels that are fully owned by us"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 (Risk Factors \u2013 management and employee interests)",
-    "claim": "ZIM is experiencing labor interruptions from disagreements between management and unionized employees during the pending merger, which could escalate to work stoppages or strikes disrupting shipping operations.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "we are experiencing labor interruptions as a result of disagreements between management and unionized employees"
-    ],
-    "support": "supported"
    }
   ],
-  "thesis_change": [
-   {
-    "basis": "Stated in P1 (20-F Item 4, effective 2026-03-10); no newer evidence contradicts.",
-    "claim": "The MSC collaboration (effective February 2025, ~23,000 weekly TEUs), cross-Atlantic restructuring with Hapag-Lloyd, and ONE slot-selling cooperation remain in force as described; no post-2026-10-31 evidence alters or terminates these agreements.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In September 2024, we entered into a strategic collaboration with MSC, which became effective in February 2025, replacing our previous agreement with the 2M Alliance which terminated in January 2025."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P1 (20-F Item 4, effective 2026-03-10); no newer evidence contradicts.",
-    "claim": "ZIM's niche-lane market shares (6.6% Med\u2013USEC, 7.5% FE\u2013Med/Black Sea, 10.1% FE\u2013USEC, 8.7% W. Coast SA\u2013USEC) and its ~30,500-customer base are unchanged by any post-2026-10-31 evidence.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "we maintain a 6.6% market share"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P1 (20-F Item 4, effective 2026-03-10); no newer evidence contradicts.",
-    "claim": "The GenAI CoE (launched 2024), ZIMonitor, myZIM platform, and CVC portfolio of at least ten technology investments remain described as active; no post-2026-10-31 evidence indicates termination or material change.",
-    "facts": [
-     "P1"
-    ],
-    "quotes": [
-     "In 2024 we launched an inhouse Generative Artificial Intelligence Center of Excellence (GenAI CoE) aimed to develop, implement and improve new and automated working processes"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P1 and P2 (20-F, effective 2026-03-10); no newer evidence contradicts.",
-    "claim": "The Hapag-Lloyd merger, if consummated, will delist ZIM's ordinary shares from the NYSE; no post-2026-10-31 evidence indicates the merger has closed, been terminated, or been amended.",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "which, if consummated, will include the delisting of all our ordinary shares from NYSE"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in F2 (20-F income statement) and P3 (20-F Item 5), both effective 2026-03-10; no newer evidence contradicts.",
-    "claim": "Income from voyages fell from $8,427.4 million (2024) to $6,904.2 million (2025) and net income fell from $2,153.8 million to $481.5 million; no post-2026-10-31 evidence revises these figures.",
-    "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "Income from voyages and related services | $ 6,904.2 | $ 8,427.4 | $ 5,162.2"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P1 and F1 (20-F, effective 2026-03-10); no newer evidence contradicts.",
-    "claim": "With 86.4% of TEU capacity chartered-in and total lease liabilities of $4,551.6 million (non-current) plus $1,096.5 million (current), ZIM's cost base remains largely inflexible; no post-2026-10-31 evidence changes the charter mix or liability levels.",
-    "facts": [
-     "P1",
-     "F1"
-    ],
-    "quotes": [
-     "we chartered-in approximately 86.4% of our TEU capacity and 87.5% of the vessels in our fleet"
-    ],
-    "support": "quote_not_found"
-   },
-   {
-    "basis": "Stated in P2 (20-F Risk Factors, effective 2026-03-10); no newer evidence contradicts or updates the suspension timeline.",
-    "claim": "U.S. and China port fees on non-local carriers remain suspended until the last quarter of 2026; if resumed, they would significantly increase ZIM's operating expenses and may not be recoverable from customers. No post-2026-10-31 evidence indicates a change in suspension status.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "These regulations are currently suspended until the last quarter of 2026, however, if resumed, will significantly increase our operating expenses, and we may be unable to recover them from our customers or at all."
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P2 and P3 (20-F, effective 2026-03-10); no newer evidence contradicts.",
-    "claim": "Houthi Red Sea attacks, Middle East military conflicts, and the Russia-Ukraine war continue to force rerouting to longer, more expensive routes and create demand uncertainty; no post-2026-10-31 evidence indicates resolution or escalation.",
-    "facts": [
-     "P2",
-     "P3"
-    ],
-    "quotes": [
-     "the continued Yemeni Houthis' attacks on ships in the Red Sea that forced most ocean carriers to reroute some of their vessels to alternative, longer and more expensive routes"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P2 (20-F Risk Factors, effective 2026-03-10); no newer evidence contradicts.",
-    "claim": "ZIM is experiencing labor interruptions from disagreements between management and unionized employees, with risk of work stoppages or strikes; no post-2026-10-31 evidence indicates resolution or escalation.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "we are experiencing labor interruptions as a result of disagreements between management and unionized employees"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "Stated in P2 (20-F Risk Factors, effective 2026-03-10); no newer evidence contradicts.",
-    "claim": "The State of Israel's Special State Share gives the Israeli government veto power over the Hapag-Lloyd merger (35%+ share transfer requires prior written consent), and there is no assurance the Special State Share Release will be obtained; no post-2026-10-31 evidence indicates approval has been granted or denied.",
-    "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "There is no assurance that the Special State Share Release will be obtained, in a timely manner or at all, or under which conditions."
-    ],
-    "support": "number_not_listed"
-   }
-  ],
+  "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Stated in P2 (20-F Risk Factors, Item 3.D), which lists all closing conditions and explicitly disclaims assurance of completion",
-    "claim": "Whether the Hapag-Lloyd merger will be consummated by the Outside Date, entitling ZIM shareholders to the Merger Consideration of $35.00 per ordinary share",
+    "basis": "Stated in P6 (6-K dated September 30, 2026) that the GCA ceased handling the application; stated in P2 that approval is a closing condition",
+    "claim": "Whether the Israeli Government Companies Authority will approve the Special State Share release required for the Hapag-Lloyd merger to close",
     "facts": [
-     "P2"
+     "P2",
+     "P6"
     ],
     "quotes": [
-     "There can be no assurance that the Merger will be completed in a timely manner or at all.",
-     "our shareholders will not receive any of the Merger Consideration of $35.00 per ordinary share"
+     "the GCA has determined to cease handling the pending application for approval of the requested changes in the special state share",
+     "Hapag-Lloyd informed the Company that it intends to submit a revised proposal and seek approval from the GCA and the State of Israel in connection with the special state share and the pending merger transaction."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 (20-F Risk Factors), which describes the Special State Share mechanism and the FIMI arrangement while explicitly noting no assurance of outcome",
-    "claim": "Whether the State of Israel will grant the Special State Share Release required to complete the Hapag-Lloyd merger",
+    "basis": "Stated in P2 as a closing condition; P6 shows the Israeli regulatory process stalled as of September 30, 2026",
+    "claim": "Whether the Hapag-Lloyd merger will be consummated by the Outside Date or extended to June 30, 2027",
     "facts": [
-     "P2"
+     "P2",
+     "P6"
     ],
     "quotes": [
-     "There is no assurance that the Special State Share Release will be obtained, in a timely manner or at all, or under which conditions.",
-     "Hapag-Lloyd AG has agreed to use reasonable best efforts to obtain an irrevocable and perpetual release of us from all rights and obligations relating to the Special State Share"
+     "If the closing conditions are not satisfied or waived and the Merger is not consummated by the February 17, 2027, or if extended, by June 30, 2027 (the \"Outside Date\"), either we, or Hapag-Lloyd AG, may, under certain circumstances, choose not to proceed with the Merger."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the absence of any interim filing in the evidence packet and the screener timestamp confirming the company is still publicly listed and trading",
-    "claim": "What ZIM's revenue, net income, cash position and fleet deployment were during the period from January 2026 through November 2026, as no interim financial filing is available after the 20-F for the year ended December 31, 2025",
+    "basis": "Stated in P5 as company guidance; P7 provides Q2 2026 actuals and the original lower guidance",
+    "claim": "Whether ZIM will achieve its raised full-year 2026 Adjusted EBITDA guidance of $2.7 billion to $3.0 billion",
     "facts": [
-     "S0",
-     "F1",
-     "F2",
-     "F3"
+     "P5",
+     "P7"
     ],
     "quotes": [
-     "price as-of (Last_Updated, zone not stated): 2026-11-01 21:00",
-     "Profit (loss) for the year | $ 481.5 | $ 2,153.8 | $ (2,687.9)"
+     "ZIM now expects to generate Adjusted EBITDA of between $2.7 billion and $3.0 billion and Adjusted EBIT of between $1.4 billion and $1.7 billion for the full year 2026",
+     "2H'26 Expected to Significantly Exceed 1H'26 Results"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 (20-F Risk Factors), which identifies the regulations, their suspension timeline, and the potential cost impact",
-    "claim": "Whether the U.S. and China port fee regulations on non-local carriers and foreign-built vessels will be resumed in the last quarter of 2026, which would significantly increase ZIM's operating expenses",
+    "basis": "Stated in P7 (August 19, 2026 6-K) as expectation; actual amount depends on final 2026 net income not yet reported",
+    "claim": "What the actual 2026 dividend per share will be, given the policy of distributing 30\u201350% of annual net income",
     "facts": [
-     "P2"
-    ],
-    "quotes": [
-     "These regulations are currently suspended until the last quarter of 2026, however, if resumed, will significantly increase our operating expenses, and we may be unable to recover them from our customers or at all."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P1 (20-F Item 4.B Business Overview) as a completed charter agreement with specified delivery window",
-    "claim": "Whether the ten new-built 11,500 TEU LNG dual-fuel container vessels will be delivered between 2027 and 2028 as contracted under the April 2025 charter agreement",
-    "facts": [
+     "P7",
      "P1"
     ],
     "quotes": [
-     "In April 2025, we entered into a charter agreement of ten new-built 11,500 TEUs LNG dual-fuel container vessels, for a total consideration of approximately $2.3 billion, with expected deliveries between 2027 and 2028."
+     "Policy: distribute between 30-50% of annual net income",
+     "Based on its current full year 2026 guidance, the Company expects to distribute dividends to shareholders on account of 2026 results in accordance with its existing dividend policy."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P2 (20-F Risk Factors) as a current, ongoing condition at the time of filing",
-    "claim": "The current status, scope and potential financial impact of the labor interruptions caused by disagreements between ZIM management and its unionized employees during the pendency of the Hapag-Lloyd merger",
+    "basis": "Inferred from absence of Q3 2026 filing in the packet; P7 (August 19, 2026) only covers Q2 2026",
+    "claim": "What were ZIM's actual Q3 2026 revenues, net income, Adjusted EBITDA, and TEUs carried",
     "facts": [
-     "P2"
+     "P7",
+     "P5"
     ],
     "quotes": [
-     "we are experiencing labor interruptions as a result of disagreements between management and unionized employees",
-     "Disputes with our unionized employees may result in work stoppage, strikes and time-consuming litigation."
+     "Revenues for the second quarter were $1.78bn, a year-over-year increase of 9%.",
+     "Carried volume in the second quarter was 922 thousand TEUs, a year-over-year increase of 3%."
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from P2's explicit risk factor about loss of operational agreements combined with P1's description of the specific partnerships in place as of the 20-F date",
-    "claim": "Whether ZIM's operational partnerships with MSC (transpacific, approximately 23,000 weekly TEUs), Hapag-Lloyd (cross-Atlantic restructuring) and ONE (slot selling on ZGT) will survive the pending merger with Hapag-Lloyd AG",
-    "facts": [
-     "P1",
-     "P2"
-    ],
-    "quotes": [
-     "loss of current customers and business partners, including the termination of operational agreements for the joint operation of services with other competitors",
-     "new strategic operational cooperation with MSC on the transpacific trade and replacing the previous agreement with the 2M Alliance"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P2 (20-F Risk Factors) as a contractual obligation under the Merger Agreement",
-    "claim": "Whether ZIM will be required to pay Hapag-Lloyd AG a termination fee of $150,000,000 if the merger is terminated under specific conditions",
+    "basis": "Stated in P2 as a contractual obligation under the Merger Agreement",
+    "claim": "Whether the $150,000,000 termination fee will be triggered if the Hapag-Lloyd merger is not consummated",
     "facts": [
      "P2"
     ],
@@ -940,64 +856,39 @@
      "we would be required to pay Hapag-Lloyd AG a termination fee of $150,000,000 in cash"
     ],
     "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 (6-K dated September 30, 2026); the content and timing of the revised proposal are not disclosed",
+    "claim": "What the revised proposal for post-closing operations of ZIM's business, to be submitted by Hapag-Lloyd and FIMI to the GCA, will entail",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Hapag-Llyod and FIMI indicated their intention to submit a revised proposal for the post-closing operations of Company's business, but since no such detailed revised proposal was submitted to the GCA by the deadline previously set by the GCA for responses to the GCA's information request"
+    ],
+    "support": "supported"
    }
   ]
  },
  "ticker": "ZIM",
- "upside": 6.481291881445297,
+ "upside": 3.85709413528567,
  "valuation": {
-  "annotations": [
-   "held_at_record: rev_growth.y1 model 0.0000 valued at 0.0375",
-   "held_at_record: op_margin.y1 model 0.1472 valued at 0.2999"
-  ],
-  "departures": [
-   {
-    "driver": "cycle_downturn",
-    "evidence": [
-     "P3.s61",
-     "P3.s24"
-    ],
-    "input": "rev_growth.y1"
-   },
-   {
-    "driver": "cycle_downturn",
-    "evidence": [
-     "F2",
-     "P3.s61"
-    ],
-    "input": "op_margin.y1"
-   }
-  ],
+  "annotations": [],
+  "departures": [],
   "directions": {
    "capex": "none",
    "fade_years": "none",
    "long_run_op_margin": "none",
    "normalized.margin": "none",
    "normalized.rev_growth": "none",
-   "op_margin.y1": "down",
+   "op_margin.y1": "none",
    "op_margin.y2": "none",
-   "rev_growth.y1": "down",
+   "rev_growth.y1": "none",
    "rev_growth.y2": "none",
    "terminal_g": "none",
    "terminal_ronic": "none"
   },
-  "evidence": {
-   "F2": {
-    "kind": "statement",
-    "period": "2025-12-31",
-    "text": "CONSOLIDATED INCOME STATEMENTS - USD ($) $ in Millions | 12 Months Ended\nDec. 31, 2025 | Dec. 31, 2024 | Dec. 31, 2023\nProfit or loss [abstract]\nIncome from voyages and related services | $ 6,904.2 | $ 8,427.4 | $ 5,162.2\nCost of voyages and related services:\nOperating expenses and cost of services | (4,460.8) | (4,513.2) | (3,885.1)\nDepreciation | (1,259.5) | (1,130.2) | (1,449.8)\nImpairment reversal (loss) of assets | 137.0 | (2,034.9)\nGross profit (loss) | 1,320.9 | 2,784.0 | (2,207.6)\nOther operating income | 43.4 | 46.6 | 14.4\nOther operating expenses | (1.5) | (0.8) | (29.3)\nGeneral and administrative expenses | (336.3) | (296.1) | (280.7)\nShare of loss of associates | (10.5) | (6.4) | (7.8)\nResults from operating activities | 1,016.0 | 2,527.3 | (2,511.0)\nFinance income | 133.1 | 149.2 | 142.2\nFinance expenses | (490.6) | (471.5) | (446.7)\nNet finance expenses | (357.5) | (322.3) | (304.5)\nProfit (loss) before income taxes | 658.5 | 2,205.0 | (2,815.5)\nIncome taxes | (177.0) | (51.2) | 127.6\nProfit (loss) for the year | 481.5 | 2,153.8 | (2,687.9)\nAttributable to:\nOwners of the Company | 479.2 | 2,147.7 | (2,695.6)\nNon-controlling interests | 2.3 | 6.1 | 7.7\nProfit (loss) for the year | $ 481.5 | $ 2,153.8 | $ (2,687.9)\nEarnings (loss) per share (US$)\nBasic earnings (loss) per 1 ordinary share | $ 3.98 | $ 17.84 | $ (22.42)\nDiluted earnings (loss) per 1 ordinary share | $ 3.98 | $ 17.82 | $ (22.42)"
-   },
-   "P3.s24": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Container freight rates were generally lower than in 2024, indicating easing rates for much of the year, though volatility persisted due to ongoing political risks, including continues Red Sea crisis."
-   },
-   "P3.s61": {
-    "kind": "annual_section",
-    "period": "2025-12-31",
-    "text": "Charter hire rates in 2025 have moderately increased with similar charter periods on average compared to 2024 In addition, according to Alphaliner, global container ship capacity is expected to increase by 3.7% in 2026, with deliveries of 1.4 million TEUs out of a vessel order book of 11.3 million TEU, while demand for shipping services is projected to increase only by 2.5%."
-   }
-  },
+  "evidence": {},
   "neutral": {
    "capex": [
     0.04334906963943532,
@@ -1007,15 +898,15 @@
     0.04334906963943532
    ],
    "fade_years": 10,
-   "long_run_op_margin": 0.29989083228516505,
-   "normalized.margin": 0.29989083228516505,
+   "long_run_op_margin": 0.2235238176952606,
+   "normalized.margin": 0.2235238176952606,
    "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.29989083228516505,
-   "op_margin.y2": 0.29989083228516505,
+   "op_margin.y1": 0.2235238176952606,
+   "op_margin.y2": 0.2235238176952606,
    "rev_growth.y1": 0.0375,
    "rev_growth.y2": 0.0375,
    "terminal_g": 0.0375,
-   "terminal_ronic": 0.07741504600441138
+   "terminal_ronic": 0.08046763789268883
   },
   "numbers": {
    "capex": [
@@ -1026,30 +917,17 @@
     0.04334906963943532
    ],
    "fade_years": 10,
-   "long_run_op_margin": 0.29989083228516505,
-   "normalized.margin": 0.29989083228516505,
+   "long_run_op_margin": 0.2235238176952606,
+   "normalized.margin": 0.2235238176952606,
    "normalized.rev_growth": 0.0375,
-   "op_margin.y1": 0.14715680310535617,
-   "op_margin.y2": 0.29989083228516505,
-   "rev_growth.y1": 0.0,
+   "op_margin.y1": 0.2235238176952606,
+   "op_margin.y2": 0.2235238176952606,
+   "rev_growth.y1": 0.0375,
    "rev_growth.y2": 0.0375,
    "terminal_g": 0.0375,
-   "terminal_ronic": 0.07741504600441138
+   "terminal_ronic": 0.08046763789268883
   },
-  "of_record": {
-   "op_margin.y1": {
-    "model": 0.14715680310535617,
-    "model_option": "p25",
-    "record": 0.29989083228516505,
-    "record_option": "median"
-   },
-   "rev_growth.y1": {
-    "model": 0.0,
-    "model_option": "zero",
-    "record": 0.0375,
-    "record_option": "anchor"
-   }
-  },
+  "of_record": {},
   "options": {
    "capex": "pooled",
    "fade_years": 10,
@@ -1058,32 +936,30 @@
     0
    ],
    "normalized.margin": [
-    "median",
+    "persist",
     0
    ],
    "normalized.rev_growth": "anchor",
-   "op_margin.y1": "p25",
-   "op_margin.y2": "median",
-   "rev_growth.y1": "zero",
+   "op_margin.y1": "persist",
+   "op_margin.y2": "persist",
+   "rev_growth.y1": "anchor",
    "rev_growth.y2": "anchor",
    "terminal_g": "anchor",
    "terminal_ronic": "no_growth_value"
   },
   "reverts": [],
   "unknowns": [
-   "No 10-Q filing is available for year 1, so no partial-year actuals exist to inform the year-1 revenue or margin.",
-   "No forward guidance on revenue, margins, or capital expenditure is provided in the 20-F or any other filing in this packet.",
-   "The outcome and timing of the Hapag-Lloyd merger (Outside Date February 17, 2027, extendable to June 30, 2027) is uncertain and would fundamentally alter the standalone operating picture."
+   "No explicit full-year revenue growth figure is stated; the year-1 revenue growth input relies on the reported second-quarter revenue increase and qualitative drivers."
   ],
   "year": 3
  },
- "value_base": 209.33325522500522,
- "value_bear": 201.99342046075992,
- "value_bull": 213.49112156308124,
+ "value_base": 142.66467250457188,
+ "value_bear": 138.1791186585438,
+ "value_bull": 145.05696788912016,
  "value_per_filed_share": {
-  "base": 209.33325522500522,
-  "bear": 201.99342046075992,
-  "bull": 213.49112156308124
+  "base": 142.66467250457188,
+  "bear": 138.1791186585438,
+  "bull": 145.05696788912016
  },
  "valued": true
 }

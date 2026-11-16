@@ -1,0 +1,880 @@
+{
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 68,
+ "claims_supported": 49,
+ "date": "2026-11-12T18:30:55Z",
+ "family": "family_not_built",
+ "flags": [
+  "CoreCivic sold four detention facilities containing 7,187 beds to the federal government (DHS) for gross proceeds of $2.2 billion, generating a $1.8 billion aggregate gain on sale of real estate assets, during the third quarter of 2026.",
+  "CoreCivic entered into a $500.0 million accelerated share repurchase agreement with a financial institution, with an initial delivery of approximately 12.4 million shares expected.",
+  "The Board of Directors authorized an additional $500.0 million for share repurchases, increasing the aggregate repurchase authorization from up to $1.2 billion to up to $1.7 billion."
+ ],
+ "in_code_book": false,
+ "model": "qwen",
+ "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "qwen_book": null,
+ "screener_commit": "5f31f8480a944d124efa85c752f5ffc903d6138b",
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in the 10-K Item 1 Business section",
+    "claim": "CoreCivic provides corrections, detention, and residential reentry services to federal, state, and local government agencies, and is the nation's largest owner of partnership correctional, detention, and residential reentry facilities.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We are a diversified government solutions company with the scale and experience needed to solve tough government challenges in flexible, cost-effective ways.",
+     "Our customers primarily consist of federal, state, and local government agencies.",
+     "We are the nation's largest owner of partnership correctional, detention, and residential reentry facilities and one of the largest operators of such facilities in the United States."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A overview",
+    "claim": "As of September 30, 2026, the company reports three operating segments: CoreCivic Residential (64 facilities, ~72,000 beds), CoreCivic Services (mail-order pharmacy, transportation, electronic monitoring), and CoreCivic Properties (five properties, ~8,000 beds).",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "As of September 30, 2026, through our CoreCivic Residential segment, we operated 64 correctional, detention, and reentry facilities, 56 of which we owned or controlled via a long-term lease, with a total design capacity of approximately 72,000 beds.",
+     "Through our CoreCivic Services segment, we provided mail order pharmacy services to over 600 correctional facilities, including correctional facilities owned or operated by CoreCivic, across 32 states, as well as transportation and electronic monitoring and case management services.",
+     "through our CoreCivic Properties segment, we owned five properties held for lease to government agencies, with a total design capacity of approximately 8,000 beds."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in both the 10-K and 10-Q",
+    "claim": "In the Residential segment, CoreCivic is compensated at a per diem rate based on actual or minimum guaranteed occupancy levels, meaning revenue scales directly with the number of individuals housed.",
+    "facts": [
+     "P1",
+     "P5"
+    ],
+    "quotes": [
+     "we are compensated for providing bed capacity and correctional, detention, and residential reentry services at a per diem rate based upon actual or minimum guaranteed occupancy levels.",
+     "Through our CoreCivic Safety and CoreCivic Community segments, we are compensated for providing bed capacity and correctional, detention, and residential reentry services at a per diem rate based upon actual or minimum guaranteed occupancy levels."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the Q3 2026 earnings release and 10-K",
+    "claim": "Federal customers (primarily ICE, USMS, and BOP) generated 53% of total revenue in Q3 2026, making federal immigration and criminal detention policy a dominant revenue driver.",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "The federal customers in our Residential segment generated 53% and 55% of our total revenue for the three months ended September 30, 2026 and 2025, respectively",
+     "Federal correctional and detention authorities primarily consist of ICE, the United States Marshals Service, or USMS, and the Federal Bureau of Prisons, or BOP."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the Q3 2026 earnings release",
+    "claim": "Occupancy rose to 84.0% in Q3 2026 from 76.7% in the prior year quarter, driven by activation of four previously idle facilities and higher federal/state populations across the Residential portfolio.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Occupancy increases to 84.0% in the third quarter of 2026 from 76.7% in the prior year quarter",
+     "The increases in Diluted EPS and Adjusted Diluted EPS compared with the prior year quarter resulted from continued occupancy increases at previously idle facilities resulting from new contract awards in the CoreCivic Residential segment"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A",
+    "claim": "Approximately 62% of CoreCivic's operating expenses consist of salaries and benefits, making labor the dominant cost driver and the cost structure substantially fixed relative to revenue.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "Approximately 62% of our operating expenses consist of salaries and benefits.",
+     "While a substantial portion of our cost structure is fixed, a substantial portion of our revenue is generated under facility ownership and management contracts that specify per diem payments based upon daily or minimum guaranteed occupancy levels."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the 10-K Business and Risk Factors sections",
+    "claim": "Facility contracts typically run one to five years with multiple renewal options, but government agencies can terminate at any time without cause, and contracts are subject to annual or bi-annual legislative appropriations.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Our customer contracts for providing bed capacity and correctional, detention, and residential reentry services in our CoreCivic Safety and CoreCivic Community segments typically have terms of one to five years and contain multiple renewal options.",
+     "Most of our facility contracts also contain clauses that allow the government agency to terminate the contract at any time without cause, and our facility contracts are generally subject to annual or bi-annual legislative appropriations of funds."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the 8-K filings and Q3 2026 earnings release; gain figure from the 10-Q income statement (table in thousands)",
+    "claim": "In Q3 2026, CoreCivic sold four detention facilities containing 7,187 beds to DHS for gross proceeds of $2.2 billion, generating a net gain on sale of $1,770,664 (table in thousands), and continued to manage the sold facilities under existing ICE management contracts.",
+    "facts": [
+     "P6",
+     "P10",
+     "F2"
+    ],
+    "quotes": [
+     "Sold four detention facilities containing 7,187 beds for gross proceeds of $2.2 billion",
+     "the Company sold to Buyer its 1,033-bed Midwest Regional Reception Center in Leavenworth, Kansas (the \"Midwest Facility\") and certain related assets for an aggregate purchase price of approximately $238.4 million",
+     "the Company sold to Buyer its 1,600-bed Prairie Correctional Facility in Appleton, Minnesota (the \"Prairie Facility\") and certain related assets for an aggregate purchase price of approximately $495.6 million",
+     "We continue to manage the four facilities we sold to DHS under the existing management contracts with ICE."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and Q3 2026 earnings release",
+    "claim": "The CoreCivic Services segment, which includes the Clinical Solutions Pharmacy (CSP) acquisition completed April 1, 2026, provides mail-order pharmacy services to over 600 correctional facilities across 32 states, transportation services via TransCor, and electronic monitoring via Recovery Monitoring Solutions.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "Through our CoreCivic Services segment, we provided mail order pharmacy services to over 600 correctional facilities, including correctional facilities owned or operated by CoreCivic, across 32 states, as well as transportation and electronic monitoring and case management services.",
+     "The increase in net operating income in this segment was primarily attributable to the acquisition of CSP on April 1, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and 10-K MD&A",
+    "claim": "The number of individuals under ICE contracts increased by approximately 8,100 (80.1%) from the beginning of 2025 through September 30, 2026, driven by the One Big Beautiful Bill Act ($75 billion in mandatory ICE funding) and presidential executive orders on immigration enforcement.",
+    "facts": [
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "The number of people we care for under contracts with ICE has increased by approximately 8,100 individuals, or 80.1%, from the beginning of 2025 through September 30, 2026.",
+     "OBBBA appropriates a total of $75 billion in mandatory funding to ICE for immigration enforcement activities and to increase detention capacity."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the 10-Q MD&A (P5)",
+    "claim": "CoreCivic is the nation's largest owner of partnership correctional, detention, and residential reentry facilities and one of the largest operators in the United States, operating 64 facilities with approximately 72,000 beds as of September 30, 2026.",
+    "facts": [
+     "P5"
+    ],
+    "quotes": [
+     "We are the nation's largest owner of partnership correctional, detention, and residential reentry facilities and one of the largest operators of such facilities in the United States.",
+     "As of September 30, 2026, through our CoreCivic Residential segment, we operated 64 correctional, detention, and reentry facilities, 56 of which we owned or controlled via a long-term lease, with a total design capacity of approximately 72,000 beds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Business section (P1)",
+    "claim": "The contract renewal rate for owned or long-term-leased properties in the Safety and Community segments was approximately 97% over the five years ended December 31, 2025.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "the contract renewal rate for properties we owned or controlled via long-term lease in these segments was approximately 97% over the five years ended December 31, 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 8-K earnings release (P6) and 10-Q MD&A (P5)",
+    "claim": "Federal customers in the Residential segment generated 53% of total revenue in Q3 2026, and the number of people cared for under ICE contracts increased by approximately 8,100 individuals, or 80.1%, from the beginning of 2025 through September 30, 2026.",
+    "facts": [
+     "P6",
+     "P5"
+    ],
+    "quotes": [
+     "The federal customers in our Residential segment generated 53% and 55% of our total revenue for the three months ended September 30, 2026 and 2025, respectively",
+     "The number of people we care for under contracts with ICE has increased by approximately 8,100 individuals, or 80.1%, from the beginning of 2025 through September 30, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 8-K earnings release (P6)",
+    "claim": "Occupancy in the Residential segment increased to 84.0% in Q3 2026 from 76.7% in the prior year quarter, driven by activation of four previously idle facilities expected to generate total annual revenue of approximately $320.0 million once fully activated.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Occupancy increases to 84.0% in the third quarter of 2026 from 76.7% in the prior year quarter",
+     "These four facilities are expected to generate total annual revenue of approximately $320.0 million once fully activated."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 8-K earnings release (P6) and 8-K purchase agreements (P10)",
+    "claim": "CoreCivic sold four detention facilities containing 7,187 beds to the federal government for gross proceeds of $2.2 billion, generating a $1.77 billion gain on sale, and continues to manage the sold facilities under existing ICE contracts.",
+    "facts": [
+     "P6",
+     "P10"
+    ],
+    "quotes": [
+     "Sold four detention facilities containing 7,187 beds for gross proceeds of $2.2 billion",
+     "Gain on sale of real estate assets, net | $1,770.7 million",
+     "The Company currently expects to continue to manage the Midwest Facility under the existing management contract with U.S. Immigration & Customs Enforcement"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the 10-K Risk Factors (P2)",
+    "claim": "Threat: Government agencies can terminate facility contracts at any time without cause, and 35 contracts generating $688.1 million, or 31% of total 2025 revenue, were scheduled to expire on or before December 31, 2026.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Governmental agencies typically may terminate a facility contract at any time without cause or use the possibility of termination to negotiate a lower per diem rate.",
+     "The aggregate revenue earned during the year ended December 31, 2025 for the 35 contracts with scheduled maturity dates, notwithstanding contractual renewal options, on or before December 31, 2026 was $688.1 million, or 31% of total revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Risk Factors (P2)",
+    "claim": "Threat: ICE has expanded use of non-traditional detention capacity including military bases, soft-sided facilities, BOP facilities, state and local facilities, warehouse-based real estate, and acquired its own real estate, which could divert occupancy from CoreCivic facilities.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "ICE has increased its use of military bases (domestically and at Guantanamo Bay), soft-sided facilities, idled or under-utilized facilities owned and operated by the BOP, facilities owned by state and local government agencies, international options, and has most recently proposed using warehouse-based real estate, and has acquired certain real estate assets for use in ICE detention."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Risk Factors (P2)",
+    "claim": "Threat: Proposed California legislation AB1633 would impose an annual tax equal to 50% of gross receipts of private detention facility operators beginning January 1, 2027, if enacted.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "recently proposed legislation in California, Assembly Bill 1633, or AB1633, would impose an annual tax equal to 50% of the gross receipts of private detention facility operators beginning on January 1, 2027, if enacted into law"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Risk Factors (P2)",
+    "claim": "Threat: Legislation has been passed in California, Colorado, New Jersey, Maryland, Illinois, Oregon, and Washington prohibiting state and local agencies from contracting to detain immigrants in ICE custody, restricting CoreCivic's ability to serve ICE through state and local contract vehicles.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Legislation has been passed in California, Colorado, and New Jersey, where we operate detention facilities, as well as Maryland, Illinois, Oregon and Washington, that prohibits state and local agencies from contracting to detain immigrants in ICE custody."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Risk Factors (P2) and MD&A (P3)",
+    "claim": "Threat: Government shutdowns and budgetary pressures have caused payment delays and forced CoreCivic to accept contract term reductions; in Q4 2025, DHS requested budgetary savings and CoreCivic proposed reducing the term of four management contracts by one year.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "due to the most recent government shutdown, we continue to experience delays in payments from our federal customers and due to newly added approval requirements of certain invoices by DHS",
+     "in response to a request from DHS to provide the agency with budgetary savings, we proposed to reduce the term of four management contracts by one year, which the agency accepted"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the 10-K Risk Factors (P2) and MD&A (P3)",
+    "claim": "Threat: The Dilley Facility experience demonstrates that ICE can terminate a major contract after nearly ten years of operation, and the facility was idle from August 2024 to March 2025 before operations resumed under an amended agreement.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "On June 10, 2024, we received notice from ICE of its intent to terminate the IGSA for services at the 2,400-bed Dilley Facility effective August 9, 2024.",
+     "We did not operate the Dilley Facility from August 9, 2024 until the resumption of operations at the facility on March 5, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Risk Factors (P2) and 10-Q MD&A (P5)",
+    "claim": "Threat: Community opposition and litigation can delay or prevent facility activation; the City of Leavenworth filed a lawsuit over a Special Use Permit for the Midwest Facility, and a non-governmental organization and detainee filed suit over a business license at the California City Facility.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "The City of Leavenworth has filed a lawsuit alleging that a SUP is required to activate our Midwest Regional Reception Center in Leavenworth, Kansas, which has resulted in a delay in the intake process.",
+     "A non-governmental organization and a detainee have filed a lawsuit alleging that a business license must be obtained to operate the facility and seeks injunctive relief that would include operational interruption at the facility."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the 10-K MD&A (P3)",
+    "claim": "CoreCivic's ownership of 56 of 64 operated facilities provides a competitive advantage in replacing lost business, as the company can offer the same beds to new or existing customers more rapidly than management-only operators.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "We believe that owning the facilities in which we provide management services enables us to more rapidly replace business lost compared with managed-only facilities, since we can offer the same beds to new and existing customers and, with customer consent, may have more flexibility in moving our existing populations to facilities with available capacity."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A (P5) and 8-K earnings release (P6)",
+    "claim": "CoreCivic's new CoreCivic Services segment, including the April 2026 acquisition of Clinical Solutions Pharmacy, provides mail order pharmacy services to over 600 correctional facilities across 32 states and generated $9.6 million net operating income in Q3 2026 versus $1.1 million in the prior year quarter.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "Through our CoreCivic Services segment, we provided mail order pharmacy services to over 600 correctional facilities, including correctional facilities owned or operated by CoreCivic, across 32 states",
+     "Net operating income in the CoreCivic Services segment increased $8.5 million, to $9.6 million in the third quarter of 2026 from $1.1 million in the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Risk Factors (P2)",
+    "claim": "Threat: Resistance to privatization of correctional facilities from labor unions, prison reform organizations, and activists, combined with potential future executive orders, could restrict the federal government's ability to contract with private operators.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Privatization of correctional, detention, and residential reentry facilities has not achieved complete acceptance by either government agencies or the public at large.",
+     "It is possible future administrations could issue executive orders restricting the use of private correctional and detention facilities by the federal government."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A (P5) and 10-K MD&A (P3)",
+    "claim": "As of September 30, 2026, CoreCivic had four idle correctional facilities containing approximately 5,500 beds operated with a core staffing complement, down from five facilities with approximately 7,000 beds as of December 31, 2025, reflecting ongoing activation activity.",
+    "facts": [
+     "P5",
+     "P3"
+    ],
+    "quotes": [
+     "As of September 30, 2026, we had four idle correctional facilities containing approximately 5,500 beds that are operated with a core staffing complement to remain currently available",
+     "As of December 31, 2025, we had five idle correctional facilities containing approximately 7,000 beds"
+    ],
+    "support": "number_not_found"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated directly in the 10-Q balance sheet (F1) and corroborated by the Q3 earnings release (F6).",
+    "claim": "CoreCivic held $547,229 in cash and cash equivalents and $14,414 in restricted cash as of September 30, 2026, up sharply from $97,929 and $14,517 respectively at December 31, 2025, driven by proceeds from facility sales.",
+    "facts": [
+     "F1",
+     "F6"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $ 547,229 | $ 97,929",
+     "We used a portion of the net proceeds after income taxes and transaction costs, amounting to $1.6 billion, to repay over $700.0 million of debt and to make a payment of $500.0 million under an ASR."
+    ],
+    "support": "unknown_fact_id"
+   },
+   {
+    "basis": "Stated directly in the 10-Q balance sheet (F1); the ratio is inferred by dividing the two printed figures.",
+    "claim": "Total current assets of $1,213,296 exceeded total current liabilities of $504,256 as of September 30, 2026, implying a current ratio above 2.4x.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total current assets | 1,213,296 | 611,087",
+     "Total current liabilities | 504,256 | 368,874"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the Q3 earnings release (F6); the long-term debt figures are from the 10-Q balance sheet (F1).",
+    "claim": "Net debt to Adjusted EBITDA (trailing twelve months) declined to (0.1)x as of September 30, 2026 from 2.5x as of September 30, 2025, reflecting repayment of over $700 million of debt from facility sale proceeds.",
+    "facts": [
+     "F6",
+     "F1"
+    ],
+    "quotes": [
+     "Repaid over $700 million of debt, resulting in a reduction in leverage (net debt to Adjusted EBITDA) to (0.1)x from 2.5x as of September 30, 2026 and 2025, respectively, using the trailing twelve months",
+     "Long-term debt, net | 616,394 | 1,205,037"
+    ],
+    "support": "unknown_fact_id"
+   },
+   {
+    "basis": "Stated directly in the 10-Q cash flow statement (F3).",
+    "claim": "Net cash used in operating activities was $(266,625) for the nine months ended September 30, 2026, a swing from $194,971 provided in the same period of 2025, primarily because the $1,770,664 one-time gain on sale of real estate assets was deducted and receivables grew by $121,034.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by (used in) operating activities | (266,625) | 194,971",
+     "Gain on sale of real estate assets, net | (1,770,664) | (2,461) | (1,770,664) | (2,461)",
+     "Accounts receivable, prepaid expenses and other assets | (121,034) | (55,063)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the Q3 earnings release and guidance table (F6).",
+    "claim": "Recurring cash-generation capacity is reflected in Q3 2026 Adjusted EBITDA of $117.8 million (up 32.6% year-over-year) and full-year 2026 Adjusted EBITDA guidance of $442.5 million to $445.5 million, which excludes the one-time $1,770,664 gain on sale.",
+    "facts": [
+     "F6"
+    ],
+    "quotes": [
+     "Adjusted EBITDA | $117.8 million | 32.6%",
+     "Adjusted EBITDA | $442.5 million to $445.5 million"
+    ],
+    "support": "unknown_fact_id"
+   },
+   {
+    "basis": "Stated in the 10-Q balance sheet (F1) and cash flow statement (F3); the credit facility draw is from F3 financing activities.",
+    "claim": "The current portion of long-term debt maturing within one year was only $6,720 as of September 30, 2026, and total debt (current plus long-term) of $623,114 is less than combined cash and restricted cash of $561,643 plus the company's ability to draw on its credit facility.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Current portion of long-term debt | 6,720 | 15,701",
+     "Long-term debt, net | 616,394 | 1,205,037",
+     "Proceeds from issuance of debt and borrowings from credit facility | 465,000 | 175,000"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 8-K filed November 4, 2026 (P7) and the 8-K filed August 7, 2026 (P9).",
+    "claim": "The company has approximately $755.8 million remaining under its Board-authorized share repurchase program after the $500 million ASR, indicating management's confidence that recurring cash flow can support continued capital returns alongside operations.",
+    "facts": [
+     "P7",
+     "P9"
+    ],
+    "quotes": [
+     "Including the Additional Authorization, the Company has approximately $755.8 million remaining under the current Board authorized share repurchase plan.",
+     "the Company will repurchase an aggregate of $500.0 million of the Company's common stock, par value $0.01 per share (the \"Common Stock\") as part of its existing capacity of $755.8 million"
+    ],
+    "support": "number_not_found"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in P5 and P6 as actual population growth and revenue mix; the non-traditional capacity risk is stated in P2 Risk Factors.",
+    "claim": "Federal immigration enforcement demand, driven by ICE, is the primary growth engine: ICE populations under CoreCivic contracts rose 80.1% (approximately 8,100 individuals) from the beginning of 2025 through September 30, 2026, and federal customers in the Residential segment generated 53% of total revenue in Q3 2026.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "The number of people we care for under contracts with ICE has increased by approximately 8,100 individuals, or 80.1%, from the beginning of 2025 through September 30, 2026.",
+     "The federal customers in our Residential segment generated 53% and 55% of our total revenue for the three months ended September 30, 2026 and 2025, respectively, increasing $71.3 million, or 22.2%, during the three months ended September 30, 2026 compared with the same period in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5 (funding amounts and dates) and P2 (non-traditional capacity risk).",
+    "claim": "For the ICE-driven growth to continue, federal immigration enforcement policy and dedicated funding must remain in place: OBBBA appropriates $75 billion to ICE and the Secure America Act secures an approximate $70 billion for DHS through September 30, 2029, but the evidence notes that ICE may use alternative capacity and that future administrations could restrict private detention.",
+    "facts": [
+     "P5",
+     "P2"
+    ],
+    "quotes": [
+     "OBBBA appropriates a total of $75 billion in mandatory funding to ICE for immigration enforcement activities and to increase detention capacity.",
+     "On June 10, 2026, President Trump signed into law an approximate $70 billion budget reconciliation bill, the \"Secure America Act\", which secures total funding to DHS for ICE and Customs and Border Protection, or CBP, through September 30, 2029.",
+     "ICE, the federal executive agency under the direction of DHS, has recently expanded its methods for physical detention by utilizing non-traditional detention capacity and by obtaining ownership of non-traditional facilities, and such methods could have an adverse impact on our business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5 and P6 as actual contract signings and forward-looking revenue estimates.",
+    "claim": "Activation of previously idle facilities is a discrete growth driver: during 2025 CoreCivic signed contracts to activate five idle facilities, and in Q3 2026 entered a new management contract to activate the 1,600-bed Appleton Detention Facility; the four facilities under activation (West Tennessee, California City, Diamondback, Midwest) are expected to generate approximately $320.0 million in total annual revenue once fully activated.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "During 2025, ICE began to utilize additional bed capacity in our portfolio at facilities with existing contracts, we signed new contracts to activate five previously idled facilities during 2025, and we signed an additional contract to activate our previously idled Appleton Detention Facility in Appleton, Minnesota, or the Appleton Facility, formerly known as the Prairie Correctional Facility, in the third quarter of 2026.",
+     "These four facilities are expected to generate total annual revenue of approximately $320.0 million once fully activated."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5 and P6 as active litigation with specific legal risks.",
+    "claim": "For idle facility activation to proceed without delay, pending legal impediments must be resolved: the City of Leavenworth is litigating over a Special Use Permit for the Midwest Facility, and a non-governmental organization and a detainee have filed a lawsuit alleging a business license is required at the California City Facility.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "The City of Leavenworth has filed a lawsuit alleging that a Special Use Permit, or SUP, is required to activate the facility, which has resulted in a delay in the intake process.",
+     "A non-governmental organization and a detainee have filed a lawsuit alleging that a business license must be obtained to operate the facility and seeks injunctive relief that would include operational interruption at the facility."
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "Stated in P6 (Q3 earnings release) and P10 (8-K purchase agreements) as completed transactions with specific prices and terms.",
+    "claim": "Sale of owned detention facilities to the federal government is a new and significant growth and capital-recycling driver: in Q3 2026 CoreCivic sold four detention facilities containing 7,187 beds for gross proceeds of $2.2 billion, generating a $1,770.7 million gain on sale, and continues to manage the sold facilities under existing management contracts with ICE.",
+    "facts": [
+     "P6",
+     "P10"
+    ],
+    "quotes": [
+     "Sold four detention facilities containing 7,187 beds for gross proceeds of $2.2 billion",
+     "The Company currently expects to continue to manage the Midwest Facility under the existing management contract with U.S. Immigration & Customs Enforcement, a federal law enforcement agency under the Department of Homeland Security (\"ICE\"), although the terms of the management contract may be modified to reflect the change in ownership.",
+     "ICE has the ability to terminate the management contracts for non-appropriation of funds or for convenience."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P10 (contract terms and termination rights) and P2 (risk factor on post-sale investment and operational risk).",
+    "claim": "For the facility-sale model to continue, DHS/ICE must prefer to own detention real estate rather than lease or use non-traditional capacity, and CoreCivic must retain the post-sale management contracts, which ICE can terminate at any time for convenience or non-appropriation of funds.",
+    "facts": [
+     "P10",
+     "P2"
+    ],
+    "quotes": [
+     "ICE has the ability to terminate the management contracts for non-appropriation of funds or for convenience.",
+     "If we were to sell one of our owned facilities to a governmental customer, such as ICE, we may be unable to invest the proceeds from the sale in one or more properties that yield as much cash flow as the property sold."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 as actual Q3 2026 vs Q3 2025 occupancy; the fixed-cost structure is stated in P2.",
+    "claim": "Occupancy expansion across the Residential portfolio is a key operating lever: occupancy increased to 84.0% in Q3 2026 from 76.7% in Q3 2025, and the evidence attributes the increase to activation of four facilities and higher federal and state populations across the remaining portfolio.",
+    "facts": [
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "Occupancy levels in our Residential segment increased to 84.0% in the third quarter of 2026 from 76.7% in the third quarter of 2025.",
+     "While a substantial portion of our cost structure is fixed, a substantial portion of our revenue is generated under facility ownership and management contracts that specify per diem payments based upon daily or minimum guaranteed occupancy levels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 as a stated driver of revenue growth; the countervailing pressure is stated in P2.",
+    "claim": "Per diem rate increases are a contributing growth factor: the evidence identifies per diem increases, alongside increased occupancy, as the primary drivers of the 22.2% year-over-year increase in federal Residential segment revenue in Q3 2026.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "The increase in federal revenue was primarily a result of increased occupancy at numerous facilities, particularly those where we have contracts with ICE, and per diem increases."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 as an actual acquisition with Q3 2026 operating results.",
+    "claim": "The acquisition of Clinical Solutions Pharmacy (CSP) on April 1, 2026 diversifies growth into a Services segment that provides mail order pharmacy services to over 600 correctional facilities across 32 states, generating $9.6 million in net operating income in Q3 2026 versus $1.1 million in the prior year quarter.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "CSP, a newly acquired subsidiary that provides mail order pharmacy services to over 600 correctional facilities, including correctional facilities owned or operated by CoreCivic, across 32 states.",
+     "Net operating income in the CoreCivic Services segment increased $8.5 million, to $9.6 million in the third quarter of 2026 from $1.1 million in the prior year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3 (10-K) as actual contracts and inmate counts; the state legislation risk is stated in P2.",
+    "claim": "State and county government expansion is a secondary growth channel: CoreCivic holds management contracts with Montana (caring for 361 inmates at Saguaro and 239 at Tallahatchie as of December 31, 2025), has leased facilities to Oklahoma, New Mexico, and Kentucky, and is in discussions with several state and county agencies experiencing staffing challenges.",
+    "facts": [
+     "P3",
+     "P5"
+    ],
+    "quotes": [
+     "As of December 31, 2025, we cared for 361 inmates from the state of Montana at our Saguaro facility under this management contract, along with another similar contract with the state of Montana that was entered into during the fourth quarter of 2023.",
+     "We have been in discussions with several state and county government agencies that have experienced challenges in staffing their public-sector facilities and are seeking solutions from the private sector."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P7 (8-K Board authorization), P9 (ASR 8-K), and F1 (balance sheet share count change).",
+    "claim": "Capital allocation through share repurchases amplifies per-share growth: in Q3 2026 CoreCivic entered a $500.0 million accelerated share repurchase agreement, the Board expanded the repurchase authorization by an additional $500.0 million (totaling $1.7 billion), and approximately $755.8 million remained under the plan; shares outstanding fell from 100,051 thousand to 86,498 thousand between December 31, 2025 and September 30, 2026.",
+    "facts": [
+     "P6",
+     "P7",
+     "F1",
+     "P9"
+    ],
+    "quotes": [
+     "the Board of Directors of the Company (the \"Board\") authorized an increase (the \"Additional Authorization\") to its existing share repurchase program pursuant to which the Company may purchase up to an additional $500.0 million in shares of the Company's outstanding common stock",
+     "the aggregate authorization under the Company's repurchase program increased from up to $1.2 billion shares of Common Stock to up to $1.7 billion shares of Common Stock",
+     "the Company has approximately $755.8 million remaining under the current Board authorized share repurchase plan"
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited items (8-K earnings release and 8-K on facility purchase agreements)",
+    "claim": "CoreCivic sold four detention facilities containing 7,187 beds to the federal government (DHS) for gross proceeds of $2.2 billion, generating a $1.8 billion aggregate gain on sale of real estate assets, during the third quarter of 2026.",
+    "facts": [
+     "P6",
+     "P10"
+    ],
+    "quotes": [
+     "Sold four detention facilities containing 7,187 beds for gross proceeds of $2.2 billion",
+     "The sale of four detention facilities to the federal government during the third quarter generated total gross proceeds of $2.2 billion and a $1.8 billion aggregate gain on sale of real estate assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (8-K Item 8.01)",
+    "claim": "CoreCivic entered into a $500.0 million accelerated share repurchase agreement with a financial institution, with an initial delivery of approximately 12.4 million shares expected.",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "On August 7, 2026, the Company entered into an accelerated share repurchase agreement (the \"ASR Agreement\") with a financial institution (the \"Dealer\"). Under the ASR Agreement, the Company will repurchase an aggregate of $500.0 million of the Company's common stock, par value $0.01 per share (the \"Common Stock\") as part of its existing capacity of $755.8 million under the Company's recently announced expanded share repurchase program",
+     "The Company will make a payment of $500 million to the Dealer on August 10, 2026 and expects to receive an initial delivery of approximately 12.4 million shares of Common Stock from the Dealer, pursuant to the ASR Agreement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (8-K Item 8.01)",
+    "claim": "The Board of Directors authorized an additional $500.0 million for share repurchases, increasing the aggregate repurchase authorization from up to $1.2 billion to up to $1.7 billion.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "On November 3, 2026, the Board of Directors of the Company (the \"Board\") authorized an increase (the \"Additional Authorization\") to its existing share repurchase program pursuant to which the Company may purchase up to an additional $500.0 million in shares of the Company's outstanding common stock, par value $0.01 per share (\"Common Stock\"). As a result of the Additional Authorization, the aggregate authorization under the Company's repurchase program increased from up to $1.2 billion shares of Common Stock to up to $1.7 billion shares of Common Stock."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (8-K Item 5.02)",
+    "claim": "Patrick D. Swindle stepped down as President and CEO due to health reasons, and Lucibeth N. Mayberry, previously Executive Vice President and Chief Strategy Officer, was appointed President and CEO effective the same date.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "Patrick D. Swindle, the Company's President and Chief Executive Officer (\"CEO\"), has stepped down as President and CEO and resigned from his position on the Company's Board of Directors (the \"Board\"), effective as of September 24, 2026 (the \"Transition Date\"), due to health reasons.",
+     "Lucibeth N. Mayberry, who most recently served as the Company's Executive Vice President and Chief Strategy Officer, has been appointed as President and CEO of the Company, effective as of the Transition Date."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-Q MD&A and 8-K earnings release)",
+    "claim": "CoreCivic acquired Clinical Solutions Pharmacy (CSP), adding mail order pharmacy services to over 600 correctional facilities across 32 states to its CoreCivic Services segment.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "the acquisition on April 1, 2026 of Clinical Solutions Pharmacy (CSP) in the CoreCivic Services segment",
+     "CSP, a newly acquired subsidiary that provides mail order pharmacy services to over 600 correctional facilities, including correctional facilities owned or operated by CoreCivic, across 32 states"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K Risk Factors and MD&A)",
+    "claim": "ICE notified CoreCivic of its intent to terminate the IGSA for services at the 2,400-bed Dilley Facility, effective August 9, 2024, ending nearly ten years of operation.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "On June 10, 2024, we received notice from ICE of its intent to terminate the IGSA for services at the 2,400-bed Dilley Facility effective August 9, 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K MD&A)",
+    "claim": "CoreCivic announced resumption of operations at the 2,400-bed Dilley Immigration Processing Center under an amended IGSA expiring in March 2030, with activation completed in September 2025.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "On March 5, 2025, we announced that we had agreed under an amendment to an intergovernmental service agreement, or IGSA, to resume operations and care for up to 2,400 individuals at the 2,400-bed Dilley Immigration Processing Center in Dilley, Texas, or the Dilley Facility.",
+     "Activation of the Dilley Facility was completed in September 2025."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "stated in P2 (10-K Risk Factors), with renewal-rate counter from P1 (10-K Business)",
+    "claim": "35 facility contracts representing $688.1 million (31% of 2025 total revenue) are scheduled to expire on or before December 31, 2026, of which 13 have no renewal options.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "35 of our facility contracts with the customers listed under \"Business \u2013 Facility Portfolio\" are currently scheduled to expire on or before December 31, 2026 but have renewal options (22), or are currently scheduled to expire on or before December 31, 2026 and have no renewal options (13).",
+     "The aggregate revenue earned during the year ended December 31, 2025 for the 35 contracts with scheduled maturity dates, notwithstanding contractual renewal options, on or before December 31, 2026 was $688.1 million, or 31% of total revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Risk Factors); uncertainty of enactment is also stated in the same passage",
+    "claim": "Proposed California Assembly Bill 1633 would impose an annual tax equal to 50% of gross receipts on private detention facility operators in California beginning January 1, 2027.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "recently proposed legislation in California, Assembly Bill 1633, or AB1633, would impose an annual tax equal to 50% of the gross receipts of private detention facility operators beginning on January 1, 2027, if enacted into law."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P10 (8-K) and P6 (8-K earnings release); counter from P1 (renewal rate) and P3/P5 (OBBBA funding)",
+    "claim": "After selling four detention facilities containing 7,187 beds to DHS for $2.2 billion, CoreCivic continues to manage them under existing ICE contracts that ICE can terminate for non-appropriation of funds or for convenience.",
+    "facts": [
+     "P6",
+     "P10"
+    ],
+    "quotes": [
+     "Sold four detention facilities containing 7,187 beds for gross proceeds of $2.2 billion",
+     "ICE has the ability to terminate the management contracts for non-appropriation of funds or for convenience.",
+     "We continue to manage the four facilities we sold to DHS under the existing management contracts with ICE. Although we and ICE have not yet modified the management contracts for these facilities to reflect the change in ownership, the range of our guidance incorporates our best estimate of the financial impact of the change in ownership."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Risk Factors); cash position from F1 (10-Q balance sheet)",
+    "claim": "Due to the most recent government shutdown, CoreCivic continues to experience delays in payments from federal customers, compounded by newly added DHS approval requirements for certain invoices.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "due to the most recent government shutdown, we continue to experience delays in payments from our federal customers and due to newly added approval requirements of certain invoices by DHS."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Risk Factors); counter from P5 (10-Q MD&A), P6 (8-K earnings release), and P3 (10-K MD&A)",
+    "claim": "ICE has expanded use of non-traditional detention capacity (military bases, soft-sided facilities, warehouse-based real estate, BOP facilities) and acquired its own real estate assets, which could divert occupancy from CoreCivic facilities.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "ICE has increased its use of military bases (domestically and at Guantanamo Bay), soft-sided facilities, idled or under-utilized facilities owned and operated by the BOP, facilities owned by state and local government agencies, international options, and has most recently proposed using warehouse-based real estate, and has acquired certain real estate assets for use in ICE detention."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Risk Factors); counter from P1 (10-K Business) and P6 (8-K earnings release)",
+    "claim": "Legislation in California, Colorado, New Jersey, Maryland, Illinois, Oregon, and Washington prohibits state and local agencies from contracting to detain immigrants in ICE custody, restricting the customer base for CoreCivic's detention facilities in those states.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Legislation has been passed in California, Colorado, and New Jersey, where we operate detention facilities, as well as Maryland, Illinois, Oregon and Washington, that prohibits state and local agencies from contracting to detain immigrants in ICE custody."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P8 (8-K); counter from P6 (8-K earnings release) and P7 (8-K)",
+    "claim": "CEO Patrick Swindle stepped down effective September 24, 2026 due to health reasons, with Lucibeth Mayberry appointed as President and CEO and added to the Board.",
+    "facts": [
+     "P8"
+    ],
+    "quotes": [
+     "Patrick D. Swindle, the Company's President and Chief Executive Officer (\"CEO\"), has stepped down as President and CEO and resigned from his position on the Company's Board of Directors (the \"Board\"), effective as of September 24, 2026 (the \"Transition Date\"), due to health reasons."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "stated in P6 (8-K earnings release, November 4, 2026)",
+    "claim": "Whether ICE will acquire additional detention facilities from CoreCivic beyond the four already sold in Q3 2026",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "we have been in discussions with ICE about the potential acquisition of additional detention facilities from us. These discussions are in preliminary stages, and we can provide no assurance that any additional facility sales will occur."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 (8-K earnings release) and P10 (8-K, August 4, 2026)",
+    "claim": "What the modified management contract terms will be for the four facilities sold to DHS, now that ownership has changed",
+    "facts": [
+     "P6",
+     "P10"
+    ],
+    "quotes": [
+     "Although we and ICE have not yet modified the management contracts for these facilities to reflect the change in ownership, the range of our guidance incorporates our best estimate of the financial impact of the change in ownership.",
+     "The Company currently expects to continue to manage the Midwest Facility under the existing management contract with U.S. Immigration & Customs Enforcement, a federal law enforcement agency under the Department of Homeland Security (\"ICE\"), although the terms of the management contract may be modified to reflect the change in ownership."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A, period 2025-12-31, effective 2026-02-23)",
+    "claim": "Whether California Assembly Bill 1633, which would impose a 50% tax on gross receipts of private detention operators in California, will be enacted into law",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "recently proposed legislation in California, Assembly Bill 1633, or AB1633, would impose an annual tax equal to 50% of the gross receipts of private detention facility operators beginning on January 1, 2027, if enacted into law"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P3 (10-K Item 7 MD&A, period 2025-12-31, effective 2026-02-23)",
+    "claim": "Whether the California City Detention Facility will obtain a favorable ruling in the business license lawsuit seeking injunctive relief",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "A non-governmental organization and a detainee have filed a lawsuit alleging that a business license must be obtained to operate the facility and seeks injunctive relief that would include operational interruption at the facility."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P9 (8-K, August 7, 2026)",
+    "claim": "What the final number of shares repurchased and any cash adjustment will be at settlement of the $500 million ASR Agreement",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "The final settlement of the transaction under the ASR Agreement is scheduled to occur prior to the end of the second quarter of 2027.",
+     "The final number of shares to be repurchased by the Company will be based on the average of the daily volume-weighted average price of the Common Stock during the term of the ASR Agreement, less a discount and subject to adjustments pursuant to the ASR Agreement."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A, period 2025-12-31, effective 2026-02-23)",
+    "claim": "Which of the 35 facility contracts scheduled to expire on or before December 31, 2026 will be renewed, re-bid, or terminated, and on what terms",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "35 of our facility contracts with the customers listed under \"Business \u2013 Facility Portfolio\" are currently scheduled to expire on or before December 31, 2026 but have renewal options (22), or are currently scheduled to expire on or before December 31, 2026 and have no renewal options (13)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A, period 2025-12-31, effective 2026-02-23)",
+    "claim": "When CoreCivic will receive the delayed payments from federal customers due to the most recent government shutdown and new DHS invoice approval requirements",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "due to the most recent government shutdown, we continue to experience delays in payments from our federal customers and due to newly added approval requirements of certain invoices by DHS"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (10-K Item 1A, period 2025-12-31, effective 2026-02-23); the Q3 2026 10-Q (P5) does not specifically address this facility's contract status",
+    "claim": "Whether a long-term management contract for the 300-bed Elizabeth Detention Center in New Jersey has been awarded by ICE following the series of short-term extensions",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Our management contract at the Elizabeth Detention Center has continued under numerous short-term extensions, including most recently through February 28, 2026, with an additional extension option through March 31, 2026. We continue to discuss the terms of a long-term contract with ICE, but can provide no assurance that we will be awarded a new contract, or that ICE will continue to sign extensions."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6 (8-K earnings release, November 4, 2026) and P10 (8-K, August 4, 2026); the remaining two sales are not detailed in the provided evidence",
+    "claim": "The identities, bed counts, and purchase prices of the two detention facilities sold to DHS in Q3 2026 other than the Midwest Regional Reception Center and the Prairie Correctional Facility",
+    "facts": [
+     "P6",
+     "P10"
+    ],
+    "quotes": [
+     "Sold four detention facilities containing 7,187 beds for gross proceeds of $2.2 billion"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "inferred from the NOT IN THIS PACKET note indicating quarterly_risk_factors for 0001193125-26-449151 were not found",
+    "claim": "What updated risk factors CoreCivic disclosed for the third quarter of 2026 that differ from or expand upon the 2025 10-K risk factors",
+    "facts": [
+     "P5",
+     "P2"
+    ],
+    "quotes": [
+     "Readers are cautioned not to place undue reliance on these forward-looking statements, which speak only as of the date hereof."
+    ],
+    "support": "number_not_listed"
+   }
+  ]
+ },
+ "ticker": "CXW",
+ "valuation": null,
+ "valued": false
+}
