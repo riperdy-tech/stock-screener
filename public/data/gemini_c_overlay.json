@@ -1,7 +1,7 @@
 {
- "count": 74,
+ "count": 75,
  "effort": "high",
- "generated_at": "2026-11-16T19:49:40Z",
+ "generated_at": "2026-11-16T20:00:58Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -311,6 +311,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "implied borrowing cost outside the allowed range"
+  },
+  "CBL": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 102,
+   "claims_supported": 94,
+   "date": "2026-11-16T19:49:51Z",
+   "family": "family_not_built",
+   "flags": [
+    "CBL emerged from bankruptcy and adopted fresh start accounting.",
+    "The foreclosure process for Alamance Crossing East was completed; the property had an outstanding loan balance of $41.1 million prior to completion.",
+    "Southpark Mall entered loan default, was placed into receivership, and was deconsolidated, with CBL recording a $33.9 million gain on deconsolidation and reporting an outstanding loan balance of $48.3 million at year-end."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "CF": {
    "alpha_pts": 11.589582569777,
@@ -2278,7 +2301,7 @@
  "verdict_counts": {
   "AVOID": 16,
   "BUY": 10,
-  "NO_CALL": 44,
+  "NO_CALL": 45,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
