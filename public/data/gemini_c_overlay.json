@@ -1,7 +1,7 @@
 {
- "count": 36,
+ "count": 37,
  "effort": "high",
- "generated_at": "2026-11-16T14:25:45Z",
+ "generated_at": "2026-11-16T14:38:11Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -48,6 +48,29 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -67.0 points a year against the required return over 3 years"
+  },
+  "APA": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 103,
+   "claims_supported": 94,
+   "date": "2026-11-16T14:26:00Z",
+   "family": "commodity",
+   "flags": [
+    "APA completed its acquisition of Callon Petroleum Company in an all-stock transaction valued at approximately $4.5 billion, inclusive of Callon's debt, acquiring approximately 120,000 net acres in the Delaware Basin and 25,000 net acres in the Midland Basin.",
+    "APA recorded $1.1 billion of impairments, comprising $796 million of oil and gas property impairments in the North Sea following new regulatory guidelines and obligations in the U.K., a $315 million impairment of U.S. oil and gas properties held-for-sale, and $18 million of inventory impairments.",
+    "APA recorded $44 million of impairments, including $18 million of non-operated proved oil and gas property in Egypt, approximately $18 million related to the sale of a U.S. office building, $1 million for GPT facilities in Egypt, and $7 million of inventory impairments in the North Sea."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
   },
   "BTG": {
    "alpha_pts": null,
@@ -1219,7 +1242,7 @@
  "verdict_counts": {
   "AVOID": 11,
   "BUY": 6,
-  "NO_CALL": 17,
+  "NO_CALL": 18,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
