@@ -1,7 +1,7 @@
 {
- "count": 61,
+ "count": 62,
  "effort": "high",
- "generated_at": "2026-11-16T18:06:01Z",
+ "generated_at": "2026-11-16T18:13:23Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -722,6 +722,29 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -4.5 points a year against the required return over 3 years"
+  },
+  "GRDN": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 111,
+   "claims_supported": 109,
+   "date": "2026-11-16T18:06:19Z",
+   "family": "operating",
+   "flags": [
+    "Guardian reported third quarter 2026 results and raised FY 2026 guidance: revenue to $1.44 billion - $1.46 billion from $1.43 billion - $1.45 billion, and Adjusted EBITDA to $136 million - $138 million from $129 million - $131 million.",
+    "Guardian completed the acquisition of Wellness Concepts, a long-term care pharmacy in Virginia's Shenandoah Valley region.",
+    "Guardian completed the acquisition of certain assets of Nautilus, which previously served assisted living communities across 14 states, and moved the acquired resident base to 18 existing Guardian pharmacies."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
   },
   "GSL": {
    "alpha_pts": null,
@@ -1884,7 +1907,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 10,
-  "NO_CALL": 36,
+  "NO_CALL": 37,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
