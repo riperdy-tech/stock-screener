@@ -1,7 +1,7 @@
 {
- "count": 39,
+ "count": 40,
  "effort": "high",
- "generated_at": "2026-11-16T14:55:08Z",
+ "generated_at": "2026-11-16T15:07:20Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1037,6 +1037,29 @@
    "verdict": "AVOID",
    "verdict_reason": "expected return -28.1 points a year against the required return over 3 years"
   },
+  "STRW": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 97,
+   "claims_supported": 95,
+   "date": "2026-11-16T14:55:21Z",
+   "family": "family_not_built",
+   "flags": [
+    "The Company closed on its Corporate Credit Facility with availability up to $300 million, comprising a $100 million term loan and a $200 million revolving line of credit, and used proceeds to refinance existing secured bank debt.",
+    "The Company retired Bond Series A, Bond Series C, and Bond Series D, recording (189,245) (table in thousands) in bond retirement cash outflows and recognizing a $24.6 million foreign currency transaction loss.",
+    "Following an earlier purchase contract, the Company completed the acquisition of a hospital campus near Kansas City, Missouri for $10.4 million funded from the balance sheet, adding it to an existing master lease at initial annual base rents of $1.04 million."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "STT": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -1303,7 +1326,7 @@
  "verdict_counts": {
   "AVOID": 12,
   "BUY": 6,
-  "NO_CALL": 19,
+  "NO_CALL": 20,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
