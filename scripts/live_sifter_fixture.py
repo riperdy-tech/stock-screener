@@ -3,6 +3,7 @@ flags or detail without keeping a copy of the scorer's logic. Not a test file.""
 import contextlib
 import io
 import json
+from datetime import datetime, timezone
 
 import score_factors_dual_door as sfdd
 
@@ -19,7 +20,10 @@ def run_live_sifter(tmp_path, monkeypatch, stocks, fundamentals=None, battery=No
         "fundamentals_battery.json": {"tickers": battery or {}},
     }
     if momentum_state is not None:
-        files["momentum_state.json"] = {"asof": "2026-11-13T00:00:00Z", "tickers": momentum_state}
+        # Dated now: the scorer treats a momentum file older than 3 days as stale and ignores it, so a fixed date
+        # made every test that supplies momentum fail from the fourth day on (found 2026-11-16).
+        files["momentum_state.json"] = {"asof": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                                        "tickers": momentum_state}
     if tier1_survivors is not None:
         files["tier1_hygiene_survivors.json"] = tier1_survivors
     for name, payload in files.items():
