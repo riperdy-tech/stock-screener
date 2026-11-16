@@ -28,8 +28,9 @@ const pct = (v: number) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v * 10
 /** `gemini` shows the same panel for Gemini's report (gemini_c_reports): its title and notes, its verdict and reason on top, no Qwen book line. */
 export function QwenPanel({ ticker, live, listed, monthly, gemini = false }: { ticker: string; live: number | null; listed: boolean; monthly: MonthlyBooksLike | null; gemini?: boolean }) {
     const { t } = useLanguage();
-    const [q, setQ] = useState<(QwenReport & { verdict?: string; verdict_reason?: string }) | null | undefined>(undefined);
+    const [q, setQ] = useState<(QwenReport & { verdict?: string; verdict_reason?: string; model?: string }) | null | undefined>(undefined);
     const [open, setOpen] = useState(false);
+    const m = (q?.model ?? '').includes('claude') ? 'Claude Opus' : 'Gemini';   // the gemini_c files hold both arms; the report says which
 
     useEffect(() => {
         let alive = true;
@@ -43,7 +44,7 @@ export function QwenPanel({ ticker, live, listed, monthly, gemini = false }: { t
     if (q === null) {
         return (
             <section className="mt-4 border-l-2 border-accent px-4 py-3 text-[13px] leading-relaxed text-ink">
-                <b className="font-semibold">{t(gemini ? 'pgGcTitle' : 'pgQwTitle')}</b>
+                <b className="font-semibold">{fill(t(gemini ? 'pgGcTitle' : 'pgQwTitle'), { m })}</b>
                 <p className="mt-1 text-[12px] text-ink-2">{t(listed ? 'pgQwNone' : 'pgQwNoneOff')}</p>
             </section>
         );
@@ -54,7 +55,7 @@ export function QwenPanel({ ticker, live, listed, monthly, gemini = false }: { t
     return (
         <section className="mt-4 border-l-2 border-accent px-4 py-3 text-[13px] leading-relaxed text-ink">
             <div className="flex flex-wrap items-baseline gap-x-3">
-                <b className="font-semibold">{t(gemini ? 'pgGcTitle' : 'pgQwTitle')}</b>
+                <b className="font-semibold">{fill(t(gemini ? 'pgGcTitle' : 'pgQwTitle'), { m })}</b>
                 {gemini && q.verdict && <OpusChip o={{ verdict: q.verdict as OpusVerdictCode }} />}
                 <span className="font-mono text-[11px] text-ink-3">{fill(t('pgQwAsOf'), { date: q.date.slice(0, 10), source: q.source })}</span>
             </div>
@@ -67,11 +68,11 @@ export function QwenPanel({ ticker, live, listed, monthly, gemini = false }: { t
                 </p>
             ) : (
                 <p className="mt-1 text-[12px] text-ink-2">
-                    {fill(t(q.analysis === 'not run' ? (gemini ? 'pgGcNotRun' : 'pgQwNotRun') : 'pgQwNoValue'), { reason: plainNoValueReason(q.no_value_reason) ?? DASH })}
+                    {fill(t(q.analysis === 'not run' ? (gemini ? 'pgGcNotRun' : 'pgQwNotRun') : 'pgQwNoValue'), { reason: plainNoValueReason(q.no_value_reason) ?? DASH, m })}
                 </p>
             )}
             {q.valued && q.far_from_price && <p className="font-mono text-[11px] text-warn">{t('pgQwFar')}</p>}
-            {q.valued && q.seeds_agree === false && <p className="font-mono text-[11px] text-ink-3">{t(gemini ? 'pgGcSeeds' : 'pgQwSeeds')}</p>}
+            {q.valued && q.seeds_agree === false && <p className="font-mono text-[11px] text-ink-3">{fill(t(gemini ? 'pgGcSeeds' : 'pgQwSeeds'), { m })}</p>}
             {q.share_unit_note && <p className="font-mono text-[11px] text-ink-3">{q.share_unit_note}</p>}
 
             {!gemini && <p className="mt-1 text-[12px] text-ink-2">
@@ -106,7 +107,7 @@ export function QwenPanel({ ticker, live, listed, monthly, gemini = false }: { t
                     ))}
                     {(q.valuation?.unknowns ?? []).length > 0 && (
                         <div>
-                            <b className="text-[12px] font-semibold">{t(gemini ? 'pgGcUnknowns' : 'pgQwUnknowns')}</b>
+                            <b className="text-[12px] font-semibold">{fill(t(gemini ? 'pgGcUnknowns' : 'pgQwUnknowns'), { m })}</b>
                             <ul className="mt-1 list-disc pl-5 text-[12px] text-ink-2">
                                 {(q.valuation?.unknowns ?? []).map((u, i) => <li key={i}>{u}</li>)}
                             </ul>
@@ -114,7 +115,7 @@ export function QwenPanel({ ticker, live, listed, monthly, gemini = false }: { t
                     )}
                 </div>
             )}
-            <p className="mt-2 text-[12px] text-ink-3">{t(gemini ? 'pgGcNote' : 'pgQwNote')}</p>
+            <p className="mt-2 text-[12px] text-ink-3">{fill(t(gemini ? 'pgGcNote' : 'pgQwNote'), { m })}</p>
         </section>
     );
 }

@@ -110,14 +110,14 @@ export function OpusChip({ o, large = false, title }: { o: Pick<OpusVerdict, 've
     );
 }
 
-/** The AI verdict chip with a small source mark beside it: G for Gemini, C for Claude (the tooltip names it in full). */
+/** The AI verdict chip with a small source mark beside it: G for Gemini, O for Claude Opus (both read the filings), C for Claude's valuation (the tooltip names it in full). */
 export function AiChip({ a, title }: { a: { verdict: OpusVerdict['verdict']; source: AiSource }; title?: string }) {
     const { t } = useLanguage();
     return (
         <>
             <OpusChip o={a} title={title} />
-            <span className="ml-1 font-mono text-[9px] text-ink-3" title={t(a.source === 'gemini' ? 'gcSrcGemini' : 'gcSrcClaude')}>
-                {a.source === 'gemini' ? 'G' : 'C'}
+            <span className="ml-1 font-mono text-[9px] text-ink-3" title={t(a.source === 'gemini' ? 'gcSrcGemini' : a.source === 'opus' ? 'gcSrcOpus' : 'gcSrcClaude')}>
+                {a.source === 'gemini' ? 'G' : a.source === 'opus' ? 'O' : 'C'}
             </span>
         </>
     );

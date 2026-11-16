@@ -5,10 +5,11 @@
 import type { OpusVerdictCode } from '@/lib/data-service';
 import type { DeskRow } from './rankings';
 
-export type AiSource = 'gemini' | 'claude';
+/** gemini and opus: the filings read (gemini_c files; the row's model says which); claude: Claude's valuation (opus_overlay). */
+export type AiSource = 'gemini' | 'opus' | 'claude';
 
 export function aiVerdict(r: Pick<DeskRow, 'geminiC' | 'opus'>): { verdict: OpusVerdictCode; source: AiSource } | null {
-    if (r.geminiC && r.geminiC.analysis !== 'not run') return { verdict: r.geminiC.verdict, source: 'gemini' };
+    if (r.geminiC && r.geminiC.analysis !== 'not run') return { verdict: r.geminiC.verdict, source: (r.geminiC.model ?? '').includes('claude') ? 'opus' : 'gemini' };
     if (r.opus) return { verdict: r.opus.verdict, source: 'claude' };
     return null;
 }

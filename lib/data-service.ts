@@ -543,13 +543,14 @@ export async function fetchQwenOverlay(): Promise<QwenOverlayPayload | null> {
 // ── Gemini analysis (Gemini doing the Qwen job, name by name; files may be absent at first) ─────────
 // gemini_c_overlay.json rows and gemini_c_reports/<TICKER>.json have the Qwen shapes plus a verdict and its reason.
 
-export interface GeminiCReport extends QwenReport { verdict: OpusVerdictCode; verdict_reason: string }
+/** `model` says which arm read the filings (a Gemini or a Claude Opus model id). */
+export interface GeminiCReport extends QwenReport { verdict: OpusVerdictCode; verdict_reason: string; model?: string }
 
 export async function fetchGeminiCReport(ticker: string): Promise<GeminiCReport | null> {
     return fetchJson<GeminiCReport>(`/data/gemini_c_reports/${encodeURIComponent(ticker.toUpperCase())}.json`);
 }
 
-export type GeminiCRow = QwenOverlayRow & { verdict: OpusVerdictCode; verdict_reason: string };
+export type GeminiCRow = QwenOverlayRow & { verdict: OpusVerdictCode; verdict_reason: string; model?: string };
 
 export interface GeminiCOverlayPayload {
     schema: string;
