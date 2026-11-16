@@ -1,7 +1,7 @@
 {
- "count": 51,
+ "count": 52,
  "effort": "high",
- "generated_at": "2026-11-16T16:32:40Z",
+ "generated_at": "2026-11-16T16:45:07Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1259,6 +1259,29 @@
    "verdict": "AVOID",
    "verdict_reason": "expected return -20.5 points a year against the required return over 3 years"
   },
+  "SGU": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 91,
+   "claims_supported": 89,
+   "date": "2026-11-16T16:32:52Z",
+   "family": "operating",
+   "flags": [
+    "On October 15, 2026, Star Group, L.P. declared a quarterly distribution of $0.1975 per common unit for the fiscal fourth quarter ended September 30, 2026, with a record date of October 26, 2026 and a payment date of November 4, 2026.",
+    "On Aug. 05, 2026, Star filed its Form 10-Q and announced fiscal 2026 third quarter results reporting total revenue of $358.1 million, a 17.2 percent year-over-year increase, and a net loss of $28.0 million.",
+    "On February 28, 2026, the United States launched a joint military operation with Israel against Iran, after which NYMEX home heating oil costs rose from $2.67 per gallon on February 27, 2026 to a peak of $4.61 on March 20, 2026, increasing Star's hedging costs and seasonal net working capital needs."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "debt is filed but interest expense is not",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "debt is filed but interest expense is not"
+  },
   "SLDE": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -1614,7 +1637,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 8,
-  "NO_CALL": 28,
+  "NO_CALL": 29,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
