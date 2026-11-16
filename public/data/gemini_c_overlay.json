@@ -1,7 +1,7 @@
 {
- "count": 75,
+ "count": 76,
  "effort": "high",
- "generated_at": "2026-11-16T20:00:58Z",
+ "generated_at": "2026-11-16T20:12:56Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -153,6 +153,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/882796/000117184326007097/0001171843-26-007097.txt"
+  },
+  "BFH": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 96,
+   "claims_supported": 89,
+   "date": "2026-11-16T20:01:11Z",
+   "family": "financial",
+   "flags": [
+    "Bread Financial completed its bank merger, creating a larger, simplified bank structure.",
+    "Bread Financial received a credit ratings upgrade from Moody's to Ba1 from Ba2.",
+    "Bread Financial launched and priced an underwritten public offering of 5,000,000 depositary shares representing its 9.375% Series C Preferred Stock and entered into an underwriting agreement for up to 5,750,000 depositary shares (including an option for up to 750,000 additional depositary shares), with expected net proceeds of approximately $120,162,500."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "preferred stock filed without its dividends",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "preferred stock filed without its dividends"
   },
   "BHC": {
    "alpha_pts": null,
@@ -2301,7 +2324,7 @@
  "verdict_counts": {
   "AVOID": 16,
   "BUY": 10,
-  "NO_CALL": 45,
+  "NO_CALL": 46,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
