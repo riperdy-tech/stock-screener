@@ -11,12 +11,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import {
-    fetchChainManifest, fetchDepthOutcomes, fetchEnginePrices, fetchDepthOverlay, fetchFactorScores, fetchGeminiCOverlay, fetchGeminiOverlay, fetchMacroEvents, fetchMonthlyBooks, fetchMriCostOfCapital,
+    fetchChainManifest, fetchDepthOutcomes, fetchEnginePrices, fetchDepthOverlay, fetchFactorScores, fetchGeminiCOverlay, fetchMacroEvents, fetchMonthlyBooks, fetchMriCostOfCapital,
     fetchMriRegime, fetchOverlaySignals,
     fetchOpusOverlay, fetchPaperLedgers, fetchQwenOverlay, fetchStocks,
     fetchValuationModels,
     type ChainManifest, type DepthOverlayPayload, type EnginePrices, type DepthVerdict, type FactorScoresPayload,
-    type GeminiCOverlayPayload, type GeminiCRow, type GeminiOverlayPayload, type GeminiVerdict, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
+    type GeminiCOverlayPayload, type GeminiCRow, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
     type MonthlyBooksPayload, type OpusOverlayPayload, type OpusVerdict, type QwenOverlayPayload, type QwenOverlayRow,
 } from '@/lib/data-service';
 
@@ -64,8 +64,6 @@ export interface DeskData {
     overlay: Record<string, any>;
     depth: Record<string, DepthVerdict>;
     depthMeta: { generated_at: string | null; count: number; actionable_count: number | null };
-    /** Interim Gemini verdicts by ticker: paper-only, unvalidated, never part of `depth`. Empty when the file is absent. */
-    gemini: Record<string, GeminiVerdict>;
     /** Opus valuation verdicts by ticker (opus_overlay.json, SPEC opus_v1): paper-only, never part of `depth`. Empty when the file is absent. */
     opus: Record<string, OpusVerdict>;
     /** The Opus file's own totals, for the Desk's summary line. Null when the file is absent. */
@@ -94,7 +92,7 @@ export interface DeskData {
 
 const EMPTY: DeskData = {
     factor: null, valuations: {}, overlay: {},
-    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, gemini: {}, opus: {}, opusMeta: null, qwen: {}, geminiC: {}, geminiCMeta: null, monthly: null, macroEvents: null,
+    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, opus: {}, opusMeta: null, qwen: {}, geminiC: {}, geminiCMeta: null, monthly: null, macroEvents: null,
     ledgers: null, stockInfo: {},
     manifest: null, regime: null, anchor: null, pricesAsOf: null, priceSession: null,
 };
@@ -142,7 +140,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
     // the bag, so the verdict list still renders.
     const optional = <T,>(key: string, loader: () => Promise<T | null>) =>
         cached(key, loader).catch(() => null as T | null);
-    const [f, v, ov, pl, s, dp, manifest, regime, anchor, gm, op, me, qw, gc, mb, ep] = await Promise.all([
+    const [f, v, ov, pl, s, dp, manifest, regime, anchor, op, me, qw, gc, mb, ep] = await Promise.all([
         cached('factor', fetchFactorScores),
         cached('valuations', fetchValuationModels),
         cached('overlay', fetchOverlaySignals),
@@ -152,7 +150,6 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         optional('manifest', fetchChainManifest),
         optional('regime', fetchMriRegime),
         optional('anchor', fetchMriCostOfCapital),
-        optional('gemini', fetchGeminiOverlay),
         optional('opus', fetchOpusOverlay),
         optional('macroEvents', fetchMacroEvents),
         optional('qwen', fetchQwenOverlay),
@@ -206,7 +203,6 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
                 : depthPayload.actionable_count
                     ?? Object.values(depthPayload.tickers ?? {}).filter((d) => d.actionable === true).length,
         },
-        gemini: (gm as GeminiOverlayPayload | null)?.tickers ?? {},
         opus: (op as OpusOverlayPayload | null)?.tickers ?? {},
         opusMeta: opusPayload ? { generated_at: opusPayload.generated_at, count: opusPayload.count, verdict_counts: opusPayload.verdict_counts, analyst_as_of: opusPayload.analyst_as_of } : null,
         qwen: (qw as QwenOverlayPayload | null)?.tickers ?? {},

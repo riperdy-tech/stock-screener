@@ -25,7 +25,6 @@ import { Shell } from '../Shell';
 import { StockLeft } from './StockLeft';
 import { StockRight } from './StockRight';
 import { DASH } from './stockParts';
-import { GeminiPanel } from './GeminiPanel';
 import { OpusPanel } from './OpusPanel';
 import { QwenPanel } from './QwenPanel';
 import { MacroEventsPanel } from './MacroEventsPanel';
@@ -164,7 +163,6 @@ export function StockDetail({ ticker, from }: { ticker: string; from?: string })
 
             {data.geminiC[row.ticker] && <QwenPanel gemini ticker={row.ticker} live={live} listed={onList(row)} monthly={null} />}
             <QwenPanel ticker={row.ticker} live={live} listed={onList(row)} monthly={data.monthly} />
-            {data.gemini[row.ticker] && <GeminiPanel g={data.gemini[row.ticker]} />}
             {data.opus[row.ticker] && <OpusPanel o={data.opus[row.ticker]} analystAsOf={data.opusMeta?.analyst_as_of} />}
             <MacroEventsPanel p={data.macroEvents} ticker={row.ticker} sector={row.info?.sector} />
 
