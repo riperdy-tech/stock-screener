@@ -1,8 +1,8 @@
 {
- "count": 2,
+ "count": 3,
  "effort": "high",
- "generated_at": "2026-11-16T09:14:40Z",
- "model": "gemini-4-hydrogen-high",
+ "generated_at": "2026-11-16T09:23:52Z",
+ "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -67,12 +67,53 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "price above the base value"
+  },
+  "TRMD": {
+   "analysis": "complete",
+   "claims": 105,
+   "claims_supported": 100,
+   "date": "2026-11-16T09:14:05Z",
+   "equity_value": 5354302084.1779375,
+   "family": "commodity",
+   "far_from_price": false,
+   "filed_shares": 100100000.0,
+   "flags": [
+    "TORM published its Q3 2026 results. Net profit for the quarter was USD 199m, against USD 78m in the same period of 2025.",
+    "TORM announced a dividend distribution with its Q3 2026 results. The key figures table shows a Q3 2026 dividend per share of 1.35 (USD).",
+    "In Q3 2026 TORM sold two older vessels, TORM Venture and TORM Laura. After these sales its fleet comprised 95 vessels, excluding vessels on order."
+   ],
+   "in_code_book": false,
+   "market_cap_at_publish": 3769238559,
+   "model": "claude-opus-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 36.68,
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "seed_base": {
+    "1000": 53.489531310468905,
+    "3000": 53.489531310468905
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": 0.42052618860995206,
+   "value_base": 53.489531310468905,
+   "value_bear": 51.456977836484434,
+   "value_bull": 53.84242130764543,
+   "value_per_filed_share": {
+    "base": 53.489531310468905,
+    "bear": 51.456977836484434,
+    "bull": 53.84242130764543
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "price below the bear value"
   }
  },
- "valued_count": 1,
+ "valued_count": 2,
  "verdict_counts": {
   "AVOID": 1,
-  "BUY": 0,
+  "BUY": 1,
   "NO_CALL": 1,
   "WATCH": 0
  },
