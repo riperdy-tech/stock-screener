@@ -521,8 +521,16 @@ export interface QwenReport {
     authority: string;
 }
 
+/** A report's file name for a ticker. A ticker that is a Windows device name cannot be committed from the machine that
+ *  publishes these files, so its report is published with a trailing underscore (rs2-local tools/site site_stem). */
+const WINDOWS_RESERVED = /^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/;
+export function reportStem(ticker: string): string {
+    const t = ticker.toUpperCase();
+    return WINDOWS_RESERVED.test(t) ? `${t}_` : t;
+}
+
 export async function fetchQwenReport(ticker: string): Promise<QwenReport | null> {
-    return fetchJson<QwenReport>(`/data/qwen_reports/${encodeURIComponent(ticker.toUpperCase())}.json`);
+    return fetchJson<QwenReport>(`/data/qwen_reports/${encodeURIComponent(reportStem(ticker))}.json`);
 }
 
 /** One name's row in qwen_overlay.json: the report without its claims and valuation detail. */
@@ -547,7 +555,7 @@ export async function fetchQwenOverlay(): Promise<QwenOverlayPayload | null> {
 export interface GeminiCReport extends QwenReport { verdict: OpusVerdictCode; verdict_reason: string; model?: string }
 
 export async function fetchGeminiCReport(ticker: string): Promise<GeminiCReport | null> {
-    return fetchJson<GeminiCReport>(`/data/gemini_c_reports/${encodeURIComponent(ticker.toUpperCase())}.json`);
+    return fetchJson<GeminiCReport>(`/data/gemini_c_reports/${encodeURIComponent(reportStem(ticker))}.json`);
 }
 
 export type GeminiCRow = QwenOverlayRow & { verdict: OpusVerdictCode; verdict_reason: string; model?: string };
