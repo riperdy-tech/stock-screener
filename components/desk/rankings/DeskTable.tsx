@@ -236,7 +236,8 @@ function analystCells(o: NonNullable<DeskRow['opus']>, price: number | null) {
 function aiCells(t: T, r: DeskRow) {
     const c = opusCells(t, r);
     const g = r.geminiC;
-    if (!g || aiVerdict(r)?.source !== 'gemini') return c;
+    const src = aiVerdict(r)?.source;
+    if (!g || !src || src === 'claude') return c;   // gemini and opus rows are both the filings read
     const price = livePrice(r);
     const upside = g.valued && g.value_base != null && price ? g.value_base / price - 1 : null;
     return {
