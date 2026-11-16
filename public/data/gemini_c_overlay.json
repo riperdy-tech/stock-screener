@@ -1,8 +1,8 @@
 {
- "count": 59,
+ "count": 60,
  "effort": "high",
- "generated_at": "2026-11-16T17:49:03Z",
- "model": "gemini-4-hydrogen-high",
+ "generated_at": "2026-11-16T17:58:03Z",
+ "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -1061,6 +1061,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no usable growth anchor for this company"
   },
+  "KSS": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 126,
+   "claims_supported": 117,
+   "date": "2026-11-16T17:49:09Z",
+   "family": "operating",
+   "flags": [
+    "Kohl's received tariff refunds of approximately $150 million in the second quarter, of which approximately $100 million was recognized within gross margin.",
+    "Kohl's raised its full-year outlook to include the IEEPA tariff refunds. Adjusted diluted EPS guidance moved to $1.80 to $2.40, from the earlier range of $1.00 to $1.60.",
+    "Kohl's announced it is restarting share repurchases of up to $100 million under its existing $3 billion authorization."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "debt is filed but interest expense is not",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "debt is filed but interest expense is not"
+  },
   "MATX": {
    "alpha_pts": -0.6855319773707735,
    "analysis": "complete",
@@ -1838,7 +1861,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 10,
-  "NO_CALL": 34,
+  "NO_CALL": 35,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
