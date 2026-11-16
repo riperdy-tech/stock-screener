@@ -1,7 +1,7 @@
 {
- "count": 63,
+ "count": 64,
  "effort": "high",
- "generated_at": "2026-11-16T18:14:40Z",
+ "generated_at": "2026-11-16T18:23:55Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1745,6 +1745,29 @@
    "verdict": "AVOID",
    "verdict_reason": "expected return -47.8 points a year against the required return over 3 years"
   },
+  "TLN": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 124,
+   "claims_supported": 108,
+   "date": "2026-11-16T18:14:58Z",
+   "family": "operating",
+   "flags": [
+    "Talen completed the Cornerstone Acquisition of the Waterford, Darby and Lawrenceburg gas plants, agreed for an aggregate purchase price of $3.45 billion, and the nine-month cash flow shows a Cornerstone Acquisition, net outflow of (2,569) (table in millions).",
+    "A Talen subsidiary (TEM) closed a capacity monetization that sold rights to approximately $1.5 billion of future PJM capacity cash flows, and the net proceeds of $1.3 billion were used to fund accelerated share repurchases.",
+    "The Board upsized the share repurchase program from $1.5 billion to an aggregate remaining capacity of $3 billion."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "no usable tax rate in the filings",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no usable tax rate in the filings"
+  },
   "TRMD": {
    "alpha_pts": 14.20820508642631,
    "analysis": "complete",
@@ -1925,7 +1948,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 10,
-  "NO_CALL": 38,
+  "NO_CALL": 39,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
