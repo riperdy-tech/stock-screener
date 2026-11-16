@@ -1,7 +1,7 @@
 {
- "count": 83,
+ "count": 84,
  "effort": "high",
- "generated_at": "2026-11-16T23:51:21Z",
+ "generated_at": "2026-11-16T23:59:42Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1122,6 +1122,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/793952/000079395226000065/0000793952-26-000065.txt"
+  },
+  "HOV": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 120,
+   "claims_supported": 118,
+   "date": "2026-11-16T23:51:50Z",
+   "family": "operating",
+   "flags": [
+    "HOV acquired a controlling interest in a previously unconsolidated Kingdom of Saudi Arabia joint venture (HOV Global), whose results are consolidated from the first quarter of fiscal 2026; the nine-month results include a $26.8 million gain on consolidation of joint ventures.",
+    "HOV issued $900.0 million of senior notes and used the proceeds with cash on hand to redeem all outstanding senior secured notes and pay off its secured term loan facility.",
+    "Fiscal 2025 results reflected a loss on extinguishment of debt totaling $33.1 million."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "operating income for the latest year is not filed under a standard tag",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "operating income for the latest year is not filed under a standard tag"
   },
   "HRTG": {
    "alpha_pts": null,
@@ -2545,7 +2568,7 @@
  "verdict_counts": {
   "AVOID": 19,
   "BUY": 10,
-  "NO_CALL": 50,
+  "NO_CALL": 51,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
