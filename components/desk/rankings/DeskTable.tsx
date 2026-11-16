@@ -13,6 +13,7 @@ import { fill } from '@/lib/desk/text';
 import { plainNoValueReason } from '@/lib/desk/qwenText';
 import { doorOf } from '@/lib/desk/doors';
 import { verdictWord } from '@/lib/desk/filters';
+import { aiVerdict } from '@/lib/desk/aiVerdict';
 import type { DeskSections } from '@/lib/desk/sections';
 import type { DeskRow } from '@/lib/desk/rankings';
 import { rebuiltVerdict, type DeskVerdict } from '@/lib/desk/verdict';
@@ -24,7 +25,7 @@ import { DATA_NOTES, FORENSIC_WARNINGS, gapColor, gateReasonsText, sizeTone, TON
 import { useStockHref } from '@/lib/desk/useStockHref';
 import { Skel } from '../primitives';
 import { BandStrip } from './cells';
-import { DoorMark, OpusChip, PillarBars, PillarHeader, VerdictWordText } from './DeskParts';
+import { AiChip, DoorMark, PillarBars, PillarHeader, VerdictWordText } from './DeskParts';
 import { opusClaudeRange, opusGap, opusMoney, opusNoCallText, opusRangeEnds } from '@/lib/desk/opusText';
 
 const DASH = '—';
@@ -230,11 +231,30 @@ function analystCells(o: NonNullable<DeskRow['opus']>, price: number | null) {
     return { an: opusMoney(a.target_mean, cur), anGap: g == null ? null : signedPct(g * 100, 0) };
 }
 
-/** The four CLAUDE grid cells; hidden below 1024px, where OpusLine carries them instead (app/globals.css .dk-op*). */
-function OpusGridCells({ c }: { c: ReturnType<typeof opusCells> }) {
+/** The AI cells of a row: Claude's, with the value and the gap replaced by Gemini's when the row's AI verdict is Gemini's
+ *  (so the chip and the value beside it always come from the same analysis). The analysts' target stays as it is. */
+function aiCells(t: T, r: DeskRow) {
+    const c = opusCells(t, r);
+    const g = r.geminiC;
+    if (!g || aiVerdict(r)?.source !== 'gemini') return c;
+    const price = livePrice(r);
+    const upside = g.valued && g.value_base != null && price ? g.value_base / price - 1 : null;
+    return {
+        an: c?.an ?? DASH, anGap: c?.anGap ?? null,
+        title: g.verdict_reason,
+        value: g.valued ? usd(g.value_base) : DASH,
+        sub: g.valued ? `${usd(g.value_bear)} to ${usd(g.value_bull)}` : plainNoValueReason(g.no_value_reason),
+        gap: upside == null ? DASH : signedPct(upside * 100, 0),
+        gapColor: upside == null ? TONE_COLORS.MUTED : g.far_from_price ? 'var(--warn)' : upside >= 0 ? 'var(--pos)' : 'var(--neg)',
+    };
+}
+
+/** The four AI grid cells; hidden below 1024px, where OpusLine carries them instead (app/globals.css .dk-op*). */
+function OpusGridCells({ c, r }: { c: ReturnType<typeof aiCells>; r: DeskRow }) {
+    const ai = aiVerdict(r);
     return (
         <>
-            <span className="dk-opc">{c ? <OpusChip o={c.o} title={c.title} /> : <span className="font-mono text-[11px] text-off">{DASH}</span>}</span>
+            <span className="dk-opc">{ai ? <AiChip a={ai} title={c?.title} /> : <span className="font-mono text-[11px] text-off">{DASH}</span>}</span>
             <span className="dk-opc min-w-0">
                 <span className="block truncate font-mono text-[12px] text-ink" title={c?.value}>{c?.value ?? DASH}</span>
                 {c?.sub && <span className="block truncate font-mono text-[10.5px] leading-tight text-ink-2" title={c.sub}>{c.sub}</span>}
@@ -249,12 +269,13 @@ function OpusGridCells({ c }: { c: ReturnType<typeof opusCells> }) {
 }
 
 /** The Opus cells as one labelled line: under the grid row from 640 to 1023px, and in the narrow card. */
-function OpusLine({ c, className }: { c: ReturnType<typeof opusCells>; className: string }) {
+function OpusLine({ c, r, className }: { c: ReturnType<typeof aiCells>; r: DeskRow; className: string }) {
     const { t } = useLanguage();
+    const ai = aiVerdict(r);
     return (
         <div className={clsx('flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[11px]', className)}>
             <span className="text-off">{t('opGrp')}</span>
-            {c ? <OpusChip o={c.o} title={c.title} /> : <span className="text-off">{DASH}</span>}
+            {ai ? <AiChip a={ai} title={c?.title} /> : <span className="text-off">{DASH}</span>}
             <span className="text-ink">{c?.value ?? DASH}</span>
             <span style={{ color: c?.gapColor ?? TONE_COLORS.MUTED }}>{c?.gap ?? DASH}</span>
             {c?.sub && <span className="truncate text-[10.5px] text-ink-2">{c.sub}</span>}
@@ -304,7 +325,7 @@ function QwenRowView({ r }: { r: DeskRow }) {
     const stockLink = useStockHref();
     const price = livePrice(r);
     const c = qwenCells(t, r);
-    const op = opusCells(t, r);
+    const op = aiCells(t, r);
     const industry = industryOf(r);
     const door = doorOf(r.fct.fct_nominated_doors);
     const pct = topPct(r.fct.fct_percentile);
@@ -322,13 +343,13 @@ function QwenRowView({ r }: { r: DeskRow }) {
                     </span>
                     <span className="font-mono text-[12px]" style={{ color: c.gapColor }}>{c.gap}</span>
                     <span className="font-mono text-[11px] text-ink-2">{c.claims}</span>
-                    <OpusGridCells c={op} />
+                    <OpusGridCells c={op} r={r} />
                     <DoorMark door={door} />
                     <span className="dk-pct font-mono text-[11px] text-ink-2">{pct ?? DASH}</span>
                     <span className="dk-pillars"><PillarBars z={r.fct.fct_z} /></span>
                     <span aria-hidden className="font-mono text-[11px] text-ink-2">{'›'}</span>
                 </div>
-                <OpusLine c={op} className="dk-opl mt-1" />
+                <OpusLine c={op} r={r} className="dk-opl mt-1" />
             </div>
             <div className="block sm:hidden">
                 <div className="flex items-baseline justify-between gap-3">
@@ -346,7 +367,7 @@ function QwenRowView({ r }: { r: DeskRow }) {
                     <DoorMark door={door} />
                 </div>
                 {c.range && <span className="block truncate font-mono text-[10.5px] text-ink-2">{c.range}</span>}
-                <OpusLine c={op} className="mt-1 flex" />
+                <OpusLine c={op} r={r} className="mt-1 flex" />
             </div>
         </Link>
     );

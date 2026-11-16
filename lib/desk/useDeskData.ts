@@ -11,12 +11,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/useAuth';
 import {
-    fetchChainManifest, fetchDepthOutcomes, fetchEnginePrices, fetchDepthOverlay, fetchFactorScores, fetchGeminiOverlay, fetchMacroEvents, fetchMonthlyBooks, fetchMriCostOfCapital,
+    fetchChainManifest, fetchDepthOutcomes, fetchEnginePrices, fetchDepthOverlay, fetchFactorScores, fetchGeminiCOverlay, fetchGeminiOverlay, fetchMacroEvents, fetchMonthlyBooks, fetchMriCostOfCapital,
     fetchMriRegime, fetchOverlaySignals,
     fetchOpusOverlay, fetchPaperLedgers, fetchQwenOverlay, fetchStocks,
     fetchValuationModels,
     type ChainManifest, type DepthOverlayPayload, type EnginePrices, type DepthVerdict, type FactorScoresPayload,
-    type GeminiOverlayPayload, type GeminiVerdict, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
+    type GeminiCOverlayPayload, type GeminiCRow, type GeminiOverlayPayload, type GeminiVerdict, type MacroEventsPayload, type MriCostOfCapital, type MriRegime, type ValuationModel,
     type MonthlyBooksPayload, type OpusOverlayPayload, type OpusVerdict, type QwenOverlayPayload, type QwenOverlayRow,
 } from '@/lib/data-service';
 
@@ -72,6 +72,10 @@ export interface DeskData {
     opusMeta: Pick<OpusOverlayPayload, 'generated_at' | 'count' | 'verdict_counts' | 'analyst_as_of'> | null;
     /** Qwen's analysis by ticker (qwen_overlay.json, operator 2026-11-06): the Desk's AI column. Empty when the file is absent. */
     qwen: Record<string, QwenOverlayRow>;
+    /** Gemini's analysis by ticker (gemini_c_overlay.json): the Qwen row plus a verdict. Empty when the file is absent. */
+    geminiC: Record<string, GeminiCRow>;
+    /** The Gemini file's own totals, for the Desk's summary line. Null when the file is absent. */
+    geminiCMeta: Pick<GeminiCOverlayPayload, 'generated_at' | 'count' | 'valued_count' | 'verdict_counts'> | null;
     /** The monthly Code and Qwen books of record (m3o_books.json). Null when the file is absent. */
     monthly: MonthlyBooksPayload | null;
     /** MRI news candidates index (display only). Null when the file is absent. */
@@ -90,7 +94,7 @@ export interface DeskData {
 
 const EMPTY: DeskData = {
     factor: null, valuations: {}, overlay: {},
-    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, gemini: {}, opus: {}, opusMeta: null, qwen: {}, monthly: null, macroEvents: null,
+    depth: {}, depthMeta: { generated_at: null, count: 0, actionable_count: null }, gemini: {}, opus: {}, opusMeta: null, qwen: {}, geminiC: {}, geminiCMeta: null, monthly: null, macroEvents: null,
     ledgers: null, stockInfo: {},
     manifest: null, regime: null, anchor: null, pricesAsOf: null, priceSession: null,
 };
@@ -138,7 +142,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
     // the bag, so the verdict list still renders.
     const optional = <T,>(key: string, loader: () => Promise<T | null>) =>
         cached(key, loader).catch(() => null as T | null);
-    const [f, v, ov, pl, s, dp, manifest, regime, anchor, gm, op, me, qw, mb, ep] = await Promise.all([
+    const [f, v, ov, pl, s, dp, manifest, regime, anchor, gm, op, me, qw, gc, mb, ep] = await Promise.all([
         cached('factor', fetchFactorScores),
         cached('valuations', fetchValuationModels),
         cached('overlay', fetchOverlaySignals),
@@ -152,6 +156,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         optional('opus', fetchOpusOverlay),
         optional('macroEvents', fetchMacroEvents),
         optional('qwen', fetchQwenOverlay),
+        optional('geminiC', fetchGeminiCOverlay),
         optional('monthly', fetchMonthlyBooks),
         optional('enginePrices', fetchEnginePrices),
     ]);
@@ -187,6 +192,7 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
 
     const depthPayload = dp as DepthOverlayPayload | null;
     const opusPayload = op as OpusOverlayPayload | null;
+    const geminiCPayload = gc as GeminiCOverlayPayload | null;
     return {
         factor: f,
         valuations: v?.tickers ?? {},
@@ -204,6 +210,8 @@ async function loadBag(): Promise<Omit<DeskData, 'ledgers'> & { ledgers: any }> 
         opus: (op as OpusOverlayPayload | null)?.tickers ?? {},
         opusMeta: opusPayload ? { generated_at: opusPayload.generated_at, count: opusPayload.count, verdict_counts: opusPayload.verdict_counts, analyst_as_of: opusPayload.analyst_as_of } : null,
         qwen: (qw as QwenOverlayPayload | null)?.tickers ?? {},
+        geminiC: geminiCPayload?.tickers ?? {},
+        geminiCMeta: geminiCPayload ? { generated_at: geminiCPayload.generated_at, count: geminiCPayload.count, valued_count: geminiCPayload.valued_count, verdict_counts: geminiCPayload.verdict_counts } : null,
         monthly: (mb as MonthlyBooksPayload | null) ?? null,
         macroEvents: (me as MacroEventsPayload | null) ?? null,
         ledgers: pl,

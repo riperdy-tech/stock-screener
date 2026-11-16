@@ -540,6 +540,34 @@ export async function fetchQwenOverlay(): Promise<QwenOverlayPayload | null> {
     return fetchJson<QwenOverlayPayload>('/data/qwen_overlay.json');
 }
 
+// ── Gemini analysis (Gemini doing the Qwen job, name by name; files may be absent at first) ─────────
+// gemini_c_overlay.json rows and gemini_c_reports/<TICKER>.json have the Qwen shapes plus a verdict and its reason.
+
+export interface GeminiCReport extends QwenReport { verdict: OpusVerdictCode; verdict_reason: string }
+
+export async function fetchGeminiCReport(ticker: string): Promise<GeminiCReport | null> {
+    return fetchJson<GeminiCReport>(`/data/gemini_c_reports/${encodeURIComponent(ticker.toUpperCase())}.json`);
+}
+
+export type GeminiCRow = QwenOverlayRow & { verdict: OpusVerdictCode; verdict_reason: string };
+
+export interface GeminiCOverlayPayload {
+    schema: string;
+    generated_at: string;
+    model: string;
+    effort: string;
+    count: number;
+    valued_count: number;
+    verdict_counts: Record<OpusVerdictCode, number>;
+    verdict_rule: string;
+    note: string;
+    tickers: Record<string, GeminiCRow>;
+}
+
+export async function fetchGeminiCOverlay(): Promise<GeminiCOverlayPayload | null> {
+    return fetchJson<GeminiCOverlayPayload>('/data/gemini_c_overlay.json');
+}
+
 /**
  * The monthly books of record (m3o_books.json, written with the Qwen files): ticker -> weight per book. A name in `code_book`
  * but not in `qwen_book` is a slot Qwen's filing check turned into cash.

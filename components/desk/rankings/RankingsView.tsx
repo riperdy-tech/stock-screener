@@ -8,7 +8,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { useLanguage } from '@/components/LanguageContext';
-import type { DepthVerdict, FactorScoresPayload, OpusVerdict, OpusVerdictCode, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
+import type { DepthVerdict, FactorScoresPayload, GeminiCRow, OpusVerdict, OpusVerdictCode, QwenOverlayRow, ValuationModel } from '@/lib/data-service';
 import type { DeskData, StockInfo } from '@/lib/desk/useDeskData';
 import { buildRows, sectorsOf } from '@/lib/desk/rankings';
 import { deskPhase } from '@/lib/desk/phase';
@@ -16,7 +16,7 @@ import { deskSections, type DeskSections } from '@/lib/desk/sections';
 import { funnelCounts } from '@/lib/desk/funnel';
 import { DOOR_LABEL_KEY } from '@/lib/desk/doors';
 import {
-    applyDeskFilters, DOOR_FILTERS, filtersActive, NO_FILTERS, OPUS_FILTERS, parseDeskUrl, writeDeskUrl,
+    AI_FILTERS, applyDeskFilters, DOOR_FILTERS, filtersActive, NO_FILTERS, parseDeskUrl, writeDeskUrl,
     type DeskFilters, type DeskUrlState, type FunnelStep,
 } from '@/lib/desk/filters';
 import { fill } from '@/lib/desk/text';
@@ -57,7 +57,30 @@ function FilterSelect({ label, value, shown, options, onChange }: {
     );
 }
 
-/** "Opus valued … · 11 BUY · …" from the file's own totals; each count sets the Opus filter. */
+/** The AI filter: four real checkboxes (BUY, WATCH, AVOID, no call) that can be ticked together; none ticked filters nothing. */
+function AiFilter({ value, onChange }: { value: OpusVerdictCode[]; onChange: (v: OpusVerdictCode[]) => void }) {
+    const { t } = useLanguage();
+    const active = value.length > 0;
+    return (
+        <fieldset className={clsx('inline-flex flex-wrap items-center gap-x-3 gap-y-1 border px-2.5 py-1.5 font-mono text-[11px]', active ? 'border-ink text-ink' : 'border-rule-14 text-ink-2')}>
+            <legend className="sr-only">{t('flAi')}</legend>
+            <span aria-hidden>{t('flAi')}</span>
+            {AI_FILTERS.map((v) => (
+                <label key={v} className="inline-flex cursor-pointer items-center gap-1 hover:text-ink focus-within:outline focus-within:outline-1 focus-within:outline-offset-2 focus-within:outline-accent">
+                    <input
+                        type="checkbox"
+                        checked={value.includes(v)}
+                        onChange={(e) => onChange(AI_FILTERS.filter((x) => (x === v ? e.target.checked : value.includes(x))))}
+                        className="m-0 accent-[var(--accent)]"
+                    />
+                    {t(OPUS_VERDICT_KEY[v])}
+                </label>
+            ))}
+        </fieldset>
+    );
+}
+
+/** "Opus valued … · 11 BUY · …" from the file's own totals; each count sets the AI filter. */
 function OpusSummary({ m, onPick }: { m: NonNullable<DeskData['opusMeta']>; onPick: (v: OpusVerdictCode) => void }) {
     const { t } = useLanguage();
     const vc: Partial<Record<OpusVerdictCode, number>> = m.verdict_counts ?? {};
@@ -77,7 +100,25 @@ function OpusSummary({ m, onPick }: { m: NonNullable<DeskData['opusMeta']>; onPi
     );
 }
 
-export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers, qwen, opus, opusMeta }: {
+/** "Gemini analysed … · 11 BUY · …" from the file's own totals; each count sets the AI filter. */
+function GeminiCSummary({ m, onPick }: { m: NonNullable<DeskData['geminiCMeta']>; onPick: (v: OpusVerdictCode) => void }) {
+    const { t } = useLanguage();
+    const vc: Partial<Record<OpusVerdictCode, number>> = m.verdict_counts ?? {};
+    const pick = (k: OpusVerdictCode, key: 'opLineBuy' | 'opLineWatch' | 'opLineAvoid' | 'opLineNoCall') => (
+        <button type="button" onClick={() => onPick(k)} className="text-accent hover:text-ink">{fill(t(key), { n: vc[k] ?? '—' })}</button>
+    );
+    return (
+        <p className="mt-1 font-mono text-[11px] font-semibold text-ink-2">
+            {fill(t('gcLine'), { n: m.count ?? '—', v: m.valued_count ?? '—', d: m.generated_at ? m.generated_at.slice(0, 10) : '—' })}
+            {' · '}{pick('BUY', 'opLineBuy')}
+            {' · '}{pick('WATCH', 'opLineWatch')}
+            {' · '}{pick('AVOID', 'opLineAvoid')}
+            {' · '}{pick('NO_CALL', 'opLineNoCall')}
+        </p>
+    );
+}
+
+export function RankingsView({ factor, depth, valuations, overlay, stockInfo, ledgers, qwen, opus, opusMeta, geminiC, geminiCMeta }: {
     factor: FactorScoresPayload | null;
     depth: Record<string, DepthVerdict>;
     valuations: Record<string, ValuationModel>;
@@ -91,6 +132,10 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     opus: Record<string, OpusVerdict>;
     /** The Opus file's own totals for the summary line; null when the file is absent. */
     opusMeta: DeskData['opusMeta'];
+    /** gemini_c_overlay.json tickers: Gemini's analysis and verdict beside each list name. Empty when the file is absent. */
+    geminiC: Record<string, GeminiCRow>;
+    /** The Gemini file's own totals for the summary line; null when the file is absent. */
+    geminiCMeta: DeskData['geminiCMeta'];
 }) {
     const { t } = useLanguage();
     const params = useSearchParams();
@@ -119,8 +164,9 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const rows = useMemo(
         () => buildRows({ factor, depth, valuations, overlay, stockInfo })
             .map((r) => (qwen[r.ticker] ? { ...r, qwen: qwen[r.ticker] } : r))
-            .map((r) => (opus[r.ticker] ? { ...r, opus: opus[r.ticker] } : r)),
-        [factor, depth, valuations, overlay, stockInfo, qwen, opus],
+            .map((r) => (opus[r.ticker] ? { ...r, opus: opus[r.ticker] } : r))
+            .map((r) => (geminiC[r.ticker] ? { ...r, geminiC: geminiC[r.ticker] } : r)),
+        [factor, depth, valuations, overlay, stockInfo, qwen, opus, geminiC],
     );
     const sectors = useMemo(() => sectorsOf(rows), [rows]);
     const qwenLive = Object.keys(qwen).length > 0;
@@ -131,7 +177,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
     const active = filtersActive(filters);
     const filtered = useMemo(() => (active ? deskSections(applyDeskFilters(rows, filters)) : all),
         // eslint-disable-next-line react-hooks/exhaustive-deps -- `filters` is rebuilt every render; its parts are listed
-        [rows, all, active, filters.door, filters.sector, filters.opus, filters.q]);
+        [rows, all, active, filters.door, filters.sector, filters.ai.join(','), filters.q]);
 
     // Symbols the table already shows for the current filters: the universe hits skip them.
     const shownTickers = useMemo(() => {
@@ -158,7 +204,8 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                     {fill(t('dqLine'), { a: counts.verdicts, n: counts.list ?? '—', v: n, d: newest ? newest.slice(5, 10) : '—' })}
                 </p>
             )}
-            {opusMeta && <OpusSummary m={opusMeta} onPick={(v) => setFilter({ opus: v })} />}
+            {opusMeta && <OpusSummary m={opusMeta} onPick={(v) => setFilter({ ai: [v] })} />}
+            {geminiCMeta && <GeminiCSummary m={geminiCMeta} onPick={(v) => setFilter({ ai: [v] })} />}
 
             {/* b/c. Funnel and the selected step's panel */}
             <div className="mt-3">
@@ -184,13 +231,7 @@ export function RankingsView({ factor, depth, valuations, overlay, stockInfo, le
                         options={[['all', t('flAll')], ...sectors.map((s) => [s, s] as [string, string])]}
                         onChange={(v) => setFilter({ sector: v })}
                     />
-                    <FilterSelect
-                        label={t('flOpus')}
-                        value={filters.opus}
-                        shown={filters.opus === 'all' ? '' : t(OPUS_VERDICT_KEY[filters.opus])}
-                        options={[['all', t('flAll')], ...OPUS_FILTERS.map((o) => [o, t(OPUS_VERDICT_KEY[o])] as [string, string])]}
-                        onChange={(v) => setFilter({ opus: v as DeskFilters['opus'] })}
-                    />
+                    <AiFilter value={filters.ai} onChange={(v) => setFilter({ ai: v })} />
                     <input
                         value={q}
                         onChange={(e) => { setQ(e.target.value); write({ ...urlState, filters: { ...urlState.filters, q: e.target.value } }, 'replace'); }}

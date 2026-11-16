@@ -12,6 +12,7 @@ import { PILLARS, pillarBar, signedNum } from '@/lib/desk/rowText';
 import { FAMILY, TONE_COLORS } from '@/lib/desk/tone';
 import { useLanguage } from '@/components/LanguageContext';
 import type { FactorEntry, OpusVerdict } from '@/lib/data-service';
+import type { AiSource } from '@/lib/desk/aiVerdict';
 
 /** 7px colour square + door name (mono 11px, ink-2). No bordered chip. `held over` has no colour. */
 export function DoorMark({ door }: { door: DoorKind | null }) {
@@ -106,5 +107,18 @@ export function OpusChip({ o, large = false, title }: { o: Pick<OpusVerdict, 've
         >
             {c.text}
         </span>
+    );
+}
+
+/** The AI verdict chip with a small source mark beside it: G for Gemini, C for Claude (the tooltip names it in full). */
+export function AiChip({ a, title }: { a: { verdict: OpusVerdict['verdict']; source: AiSource }; title?: string }) {
+    const { t } = useLanguage();
+    return (
+        <>
+            <OpusChip o={a} title={title} />
+            <span className="ml-1 font-mono text-[9px] text-ink-3" title={t(a.source === 'gemini' ? 'gcSrcGemini' : 'gcSrcClaude')}>
+                {a.source === 'gemini' ? 'G' : 'C'}
+            </span>
+        </>
     );
 }
