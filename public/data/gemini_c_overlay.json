@@ -1,7 +1,7 @@
 {
- "count": 46,
+ "count": 47,
  "effort": "high",
- "generated_at": "2026-11-16T15:37:39Z",
+ "generated_at": "2026-11-16T15:38:25Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -679,6 +679,24 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "net income basis does not reconcile with filed EPS"
+  },
+  "HOG": {
+   "alpha_pts": null,
+   "analysis": "not run",
+   "claims": null,
+   "claims_supported": null,
+   "date": "2026-11-16T15:37:52Z",
+   "family": null,
+   "flags": [],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/793952/000079395226000065/0000793952-26-000065.txt",
+   "qwen_book": null,
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/793952/000079395226000065/0000793952-26-000065.txt"
   },
   "HRTG": {
    "alpha_pts": null,
@@ -1464,7 +1482,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 6,
-  "NO_CALL": 25,
+  "NO_CALL": 26,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
