@@ -1,11 +1,32 @@
 {
- "count": 1,
+ "count": 2,
  "effort": "high",
- "generated_at": "2026-11-16T09:03:03Z",
+ "generated_at": "2026-11-16T09:14:40Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
+  "MRP": {
+   "analysis": "complete",
+   "claims": 93,
+   "claims_supported": 88,
+   "date": "2026-11-16T09:03:30Z",
+   "family": "family_not_built",
+   "flags": [
+    "Millrose completed its Spin-Off from Lennar through a distribution of approximately 80% of its Common Stock, listed its Class A common stock on the NYSE under the symbol MRP, received approximately $5.5 billion in land assets and approximately $1.0 billion in cash, and entered into a Revolving Credit Agreement up to $1.335 billion.",
+    "Millrose acquired approximately 25,000 homesites by purchasing 100% of the outstanding stock of RCH Holdings, Inc., parent holding company of Rausch, for approximately $859 million in cash net of option deposits and holdbacks.",
+    "In connection with the New Home transaction, Millrose entered into the DDTL Credit Agreement providing a delayed draw term loan facility with commitments in the aggregate amount of $1.0 billion."
+   ],
+   "in_code_book": false,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "SEZL": {
    "analysis": "complete",
    "claims": 95,
@@ -52,7 +73,7 @@
  "verdict_counts": {
   "AVOID": 1,
   "BUY": 0,
-  "NO_CALL": 0,
+  "NO_CALL": 1,
   "WATCH": 0
  },
  "verdict_rule": "BUY: price below the bear value. WATCH: from the bear to the base value. AVOID: above the base value. NO_CALL: not valued."
