@@ -1,7 +1,7 @@
 {
- "count": 64,
+ "count": 65,
  "effort": "high",
- "generated_at": "2026-11-16T18:23:55Z",
+ "generated_at": "2026-11-16T18:33:40Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -857,6 +857,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "net income basis does not reconcile with filed EPS"
+  },
+  "HNRG": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 137,
+   "claims_supported": 132,
+   "date": "2026-11-16T18:24:12Z",
+   "family": "operating",
+   "flags": [
+    "Hallador and Turtle Creek entered into a KLIM senior secured term loan facility of $600 million, with $550 million funded at closing; debt, net rose to 525,965 from 29,678 (table in thousands).",
+    "Texas Capital Bank debt was repaid from KLIM proceeds (100,200, table in thousands), and a Q3 2026 loss on extinguishment of debt of (5,717,000) was recorded.",
+    "Hallador entered into an Asset Purchase Agreement with Energy World Corporation Ltd. to acquire about 460 MW of Siemens turbine equipment for $350.0 million."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "implied borrowing cost outside the allowed range",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "implied borrowing cost outside the allowed range"
   },
   "HOG": {
    "alpha_pts": null,
@@ -1948,7 +1971,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 10,
-  "NO_CALL": 39,
+  "NO_CALL": 40,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
