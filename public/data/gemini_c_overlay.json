@@ -1,7 +1,7 @@
 {
- "count": 73,
+ "count": 74,
  "effort": "high",
- "generated_at": "2026-11-16T19:36:26Z",
+ "generated_at": "2026-11-16T19:49:40Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1659,6 +1659,49 @@
    "verdict": "NO_CALL",
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
   },
+  "RNG": {
+   "alpha_pts": -100.0,
+   "analysis": "complete",
+   "claims": 87,
+   "claims_supported": 82,
+   "date": "2026-11-16T19:36:39Z",
+   "equity_value": -373287377.77607983,
+   "family": "operating",
+   "far_from_price": true,
+   "filed_shares": 91214000.0,
+   "flags": [
+    "RingCentral released $544.9 million of the valuation allowance against its U.S. deferred tax assets, resulting in a non-cash tax benefit of (544,861) (table in thousands) on the cash flow statement.",
+    "RingCentral issued 650,000 (table in thousands) of long-term debt, paid (609,065) (table in thousands) to settle convertible notes, repurchased (261,375) (table in thousands) of senior notes, and reduced gross debt to approximately $1 billion.",
+    "RingCentral's Board of Directors approved a quarterly cash dividend of $0.125 per share of outstanding capital stock, payable on November 20, 2026 to stockholders of record on November 6, 2026."
+   ],
+   "in_code_book": false,
+   "ke": 0.11114375453902048,
+   "market_cap_at_publish": 6367466035,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": null,
+   "price_at_publish": 75.39,
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "seed_base": {
+    "1000": -4.912593861893272,
+    "3000": 19.408027787462352
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": -1.0586241647343282,
+   "value_base": -4.092435128117173,
+   "value_bear": -7.935171902984372,
+   "value_bull": -1.6797079117779274,
+   "value_per_filed_share": {
+    "base": -4.092435128117173,
+    "bear": -7.935171902984372,
+    "bull": -1.6797079117779274
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -100.0 points a year against the required return over 3 years"
+  },
   "RNR": {
    "alpha_pts": 24.317275280220212,
    "analysis": "complete",
@@ -2231,9 +2274,9 @@
    "verdict_reason": "expected return +52.9 points a year against the required return over 3 years"
   }
  },
- "valued_count": 29,
+ "valued_count": 30,
  "verdict_counts": {
-  "AVOID": 15,
+  "AVOID": 16,
   "BUY": 10,
   "NO_CALL": 44,
   "WATCH": 4
