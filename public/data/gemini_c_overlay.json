@@ -1,7 +1,7 @@
 {
- "count": 68,
+ "count": 69,
  "effort": "high",
- "generated_at": "2026-11-16T19:00:55Z",
+ "generated_at": "2026-11-16T19:09:42Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1265,6 +1265,49 @@
    "verdict": "NO_CALL",
    "verdict_reason": "minority interests take too large a share of income"
   },
+  "MO": {
+   "alpha_pts": 2.6978284689968826,
+   "analysis": "complete",
+   "claims": 120,
+   "claims_supported": 107,
+   "date": "2026-11-16T19:01:14Z",
+   "equity_value": 143026291890.0827,
+   "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 1683000000.0,
+   "flags": [
+    "Altria's Board authorized a $1 billion expansion of the existing share repurchase program, and the expanded program now expires at the end of 2027.",
+    "Altria entered an extension agreement that extends the expiration of its $3.0 billion senior unsecured revolving credit agreement.",
+    "The Board raised the regular quarterly dividend by 4.7%, and the current annualized rate is $4.44 per share."
+   ],
+   "in_code_book": false,
+   "ke": 0.0779318907508762,
+   "market_cap_at_publish": 130812677054,
+   "model": "claude-opus-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 78.64,
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "seed_base": {
+    "1000": 84.93854548984784,
+    "3000": 70.27738906307947
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": 0.09336721112313051,
+   "value_base": 84.98294229951438,
+   "value_bear": 80.59756933848992,
+   "value_bull": 88.21084346345656,
+   "value_per_filed_share": {
+    "base": 84.98294229951438,
+    "bear": 80.59756933848992,
+    "bull": 88.21084346345656
+   },
+   "valued": true,
+   "verdict": "WATCH",
+   "verdict_reason": "expected return +2.7 points a year against the required return over 3 years (BUY needs 4 or more)"
+  },
   "MPC": {
    "alpha_pts": 6.220136280044278,
    "analysis": "analysis_incomplete",
@@ -2056,12 +2099,12 @@
    "verdict_reason": "expected return +52.9 points a year against the required return over 3 years"
   }
  },
- "valued_count": 26,
+ "valued_count": 27,
  "verdict_counts": {
   "AVOID": 14,
   "BUY": 10,
   "NO_CALL": 42,
-  "WATCH": 2
+  "WATCH": 3
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
 }
