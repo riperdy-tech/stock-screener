@@ -1,7 +1,7 @@
 {
- "count": 47,
+ "count": 48,
  "effort": "high",
- "generated_at": "2026-11-16T15:38:25Z",
+ "generated_at": "2026-11-16T15:49:30Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1084,6 +1084,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
+  "RHLD": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 84,
+   "claims_supported": 74,
+   "date": "2026-11-16T15:38:36Z",
+   "family": "financial",
+   "flags": [
+    "Resolute Holdings was originally formed as a Delaware corporation.",
+    "GPGI Holdings' previously outstanding Exchangeable Notes were exchanged for shares of GPGI Class A common stock and extinguished.",
+    "GPGI completed the Spin-Off by distributing all shares of Resolute Holdings common stock on a pro rata basis to holders of GPGI Class A Common Stock of record, and Resolute Holdings began regular-way trading on The Nasdaq Stock Market LLC under the ticker RHLD."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
   "SEZL": {
    "alpha_pts": -20.53190311237114,
    "analysis": "complete",
@@ -1482,7 +1505,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 6,
-  "NO_CALL": 26,
+  "NO_CALL": 27,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
