@@ -80,6 +80,7 @@ export function PaperBooks({ ledgers, loggedIn }: {
     const aiStats = bookStats(ai);
     const mine = bookStats(books.mine);
     const gemini = bookStats(books.rn_gemini);   // interim, paper-only Gemini book; absent until its first run
+    const opusWatch = bookStats(books.rn_opus_watch);   // paper-only: the same run's WATCH names; absent until its first run
     const opus = bookStats(books.rn_opus);       // paper-only Opus book (SPEC opus_v1); absent until its first run
     const v4 = bookStats(books.rn_v4);           // engine v2.1, paper-only, experimental and unpromoted (failed gate 2b); absent until its first run
     const dialBook = bookStats(books.equal_dial);   // paper only; absent until its first run
@@ -113,6 +114,11 @@ export function PaperBooks({ ledgers, loggedIn }: {
                 {opus && (
                     <Column title={t('trkOpusBook')} note={t('trkOpusNote')} since={bookStart(books.rn_opus)}>
                         <StatGrid s={opus} />
+                    </Column>
+                )}
+                {opusWatch && (
+                    <Column title={t('trkOpusWatchBook')} note={t('trkOpusWatchNote')} since={bookStart(books.rn_opus_watch)}>
+                        <StatGrid s={opusWatch} />
                     </Column>
                 )}
                 {v4 && (

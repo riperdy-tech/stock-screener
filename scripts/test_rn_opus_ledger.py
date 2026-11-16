@@ -119,6 +119,21 @@ def test_the_other_books_are_identical_with_and_without_the_opus_file(tmp_path, 
     b = _run(tmp_path / "b", monkeypatch, "2026-11-10", overlay())
     assert set(a["ledgers"]) == set(b["ledgers"])
     for name in a["ledgers"]:
-        if name != "rn_opus":
+        if name not in ("rn_opus", "rn_opus_watch"):
             assert a["ledgers"][name] == b["ledgers"][name], name
     assert _opus(a)["state"]["holdings"] == {} and _opus(b)["state"]["holdings"] != {}
+
+
+# ── rn_opus_watch: the WATCH names of the same file (operator 2026-11-16) ─────────────────────────────
+
+def test_the_watch_book_holds_only_the_watch_name_and_the_buy_book_is_unchanged(tmp_path, monkeypatch):
+    book = _run(tmp_path, monkeypatch, "2026-11-10", overlay())
+    assert set(book["ledgers"]["rn_opus_watch"]["state"]["holdings"]) == {"TESTB"}
+    assert set(_opus(book)["state"]["holdings"]) == {"TESTA"}
+
+
+def test_the_watch_book_holds_when_the_file_is_missing(tmp_path, monkeypatch):
+    book = _run(tmp_path, monkeypatch, "2026-11-10", overlay())
+    held = copy.deepcopy(book["ledgers"]["rn_opus_watch"]["state"]["holdings"])
+    book = _run(tmp_path, monkeypatch, "2026-11-11", None)
+    assert book["ledgers"]["rn_opus_watch"]["state"]["holdings"] == held

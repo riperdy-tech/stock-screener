@@ -20,7 +20,7 @@ from kis.halt import model_release_blocked_state
 KIS_REAL_LEDGERS = frozenset({"rn_depth", "code_book", "qwen_book"})
 # A7: ledgers whose targets come from a model; blocked while the model release is blocked. qwen_book is Qwen's filing check of
 # the code book, so it is model-derived; code_book is code only. rn_opus = the Opus valuation run's BUY names (SPEC opus_v1, paper only).
-MODEL_DERIVED_LEDGERS = frozenset({"rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "qwen_book", "rn_opus"})
+MODEL_DERIVED_LEDGERS = frozenset({"rn_depth", "rn_gemini", "rn_v4", "rn_v4_low", "rn_v4_abs", "qwen_book", "rn_opus", "rn_opus_watch"})
 
 
 def ledger_refusals(ledger: str, env: str, environ=None) -> list[str]:

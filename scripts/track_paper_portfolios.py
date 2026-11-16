@@ -1293,7 +1293,7 @@ def main():
     # plan / plan2 / plan3 (retired 2026-08-27) and the *_llm lane (retired 2026-08-26)
     # are NO LONGER computed or seeded on new books. Pre-existing books keep their frozen
     # history (setdefault never removes). The live books are `equal` + `rn_depth`.
-    for _k in ("rn_depth", "rn_gemini", "rn_opus", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book", DIAL_LEDGER):
+    for _k in ("rn_depth", "rn_gemini", "rn_opus", "rn_opus_watch", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book", DIAL_LEDGER):
         book["ledgers"].setdefault(_k, empty_ledger())  # add to pre-existing books
     book["ledgers"].pop("mine", None)  # mine is per-user now (user_mine_ledgers)
     book.setdefault("config", {})["benchmarks"] = BENCHMARKS
@@ -1447,6 +1447,18 @@ def main():
         finalize_ledger(ledgers["rn_opus"], nav_op, stale_op, benches, as_of, book["inception"])
         backfill_benches(ledgers["rn_opus"])
 
+        # ── rn_opus_watch: the same run's WATCH names, PAPER ONLY (operator 2026-11-16: track the watch list too) ──
+        # A measurement of the WATCH verdict beside the BUY book, built through the same gate and weighting: the
+        # WATCH rows are handed to depth_targets as its buy direction. Held when the file is missing or empty.
+        watch_tk = {t: dict(r, direction="undervalued") for t, r in opus_tk.items()
+                    if isinstance(r, dict) and r.get("verdict") == "WATCH"}
+        watch_targets = depth_targets(factor, watch_tk)
+        unknown_watch = {t for t in ledgers["rn_opus_watch"]["state"]["holdings"] if t not in opus_tk}
+        nav_ow, stale_ow = run_or_hold("rn_opus_watch", watch_targets, "rank", unknown=unknown_watch,
+                                       source_ok=opus_ok, why=opus_why)
+        finalize_ledger(ledgers["rn_opus_watch"], nav_ow, stale_ow, benches, as_of, book["inception"])
+        backfill_benches(ledgers["rn_opus_watch"])
+
         # ── rn_v4: engine v2.1's nightly shadow verdicts, PAPER ONLY, EXPERIMENTAL (operator decision 2026-10-15, rs2 SPEC_rebuild AK.84) ──
         # v2.1 FAILED gate 2b (AK.82) and is unpromoted; the operator chose to let a paper book trade it, labelled as such. Same gate and equal
         # weighting as rn_depth, from v4_paper_overlay.json, whose `actionable` is true only when the gate's sole reason is the unpromoted freeze.
@@ -1525,7 +1537,7 @@ def main():
 
     print(f"Paper ledgers @ {as_of}{' (--mine-only)' if args.mine_only else ''}:")
     if not args.mine_only:
-        for name in ("equal", DIAL_LEDGER, "rn_depth", "rn_gemini", "rn_opus", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book"):
+        for name in ("equal", DIAL_LEDGER, "rn_depth", "rn_gemini", "rn_opus", "rn_opus_watch", "rn_v4", "rn_v4_low", "rn_v4_abs", "code_book", "qwen_book"):
             if not ledgers.get(name, {}).get("nav_series"):
                 continue
             s = ledgers[name]["summary"]
