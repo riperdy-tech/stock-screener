@@ -1,7 +1,7 @@
 {
- "count": 82,
+ "count": 83,
  "effort": "high",
- "generated_at": "2026-11-16T23:42:25Z",
+ "generated_at": "2026-11-16T23:51:21Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -2299,6 +2299,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no usable tax rate in the filings"
   },
+  "TPC": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 126,
+   "claims_supported": 117,
+   "date": "2026-11-16T23:42:49Z",
+   "family": "family_not_built",
+   "flags": [
+    "The company completed a refinancing of its senior notes and an amendment and restatement of its revolving credit facility, recognizing a one-time loss on extinguishment of debt of $51.4 million, which included a $35.6 million cash redemption premium.",
+    "The company settled its obligations under its defined benefit pension plan and recorded a one-time non-cash charge of $33.8 million.",
+    "In its earnings release, the company raised its full-year adjusted EPS guidance to $5.90 to $6.10, up from $5.15 to $5.45."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "TRMD": {
    "alpha_pts": 14.20820508642631,
    "analysis": "complete",
@@ -2522,7 +2545,7 @@
  "verdict_counts": {
   "AVOID": 19,
   "BUY": 10,
-  "NO_CALL": 49,
+  "NO_CALL": 50,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
