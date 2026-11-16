@@ -1,7 +1,7 @@
 {
- "count": 49,
+ "count": 50,
  "effort": "high",
- "generated_at": "2026-11-16T16:03:49Z",
+ "generated_at": "2026-11-16T16:17:16Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -130,6 +130,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/882796/000117184326007097/0001171843-26-007097.txt"
+  },
+  "BHC": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 113,
+   "claims_supported": 105,
+   "date": "2026-11-16T16:04:02Z",
+   "family": "operating",
+   "flags": [
+    "Bausch Health recorded 1,426 (table in millions, USD) in goodwill impairments during the nine months ended Sep. 30, 2026.",
+    "Bausch Health announced a plan to separate its Bausch + Lomb eye health business into an independent publicly traded entity, and completion remains subject to targeted debt leverage ratios and required approvals.",
+    "A wholly owned subsidiary of Bausch Health sold 35,000,000 common shares of Bausch + Lomb in an initial public offering, and Bausch Health indirectly holds 310,449,643 common shares representing approximately 87% of Bausch + Lomb's outstanding common shares as of October 21, 2026."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "no usable tax rate in the filings",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no usable tax rate in the filings"
   },
   "BTG": {
    "alpha_pts": null,
@@ -1548,7 +1571,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 7,
-  "NO_CALL": 27,
+  "NO_CALL": 28,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
