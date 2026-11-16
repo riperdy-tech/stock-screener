@@ -1,8 +1,8 @@
 {
- "count": 72,
+ "count": 73,
  "effort": "high",
- "generated_at": "2026-11-16T19:26:23Z",
- "model": "claude-opus-5-5",
+ "generated_at": "2026-11-16T19:36:26Z",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -108,6 +108,29 @@
    "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
    "qwen_book": null,
    "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
+  "ARX": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 88,
+   "claims_supported": 86,
+   "date": "2026-11-16T19:25:48Z",
+   "family": "financial",
+   "flags": [
+    "Accelerant entered into a definitive Agreement and Plan of Merger with affiliates of Thoma Bravo under which each Class A and Class B common share will be converted into the right to receive $20.25 in cash, plus a potential ticking amount of $0.00333 per share per day, after which the company would become private and delist from the New York Stock Exchange.",
+    "The 40-day go-shop period under the Merger Agreement expired without Accelerant receiving any alternative acquisition proposals from any third party.",
+    "Accelerant announced that it will not provide guidance for the fourth quarter of 2026 or the full year of 2026 and will not host an earnings conference call for its third-quarter results due to the pending transaction."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
    "source": "screener list refresh",
    "valued": false,
    "verdict": "NO_CALL",
@@ -2212,7 +2235,7 @@
  "verdict_counts": {
   "AVOID": 15,
   "BUY": 10,
-  "NO_CALL": 43,
+  "NO_CALL": 44,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
