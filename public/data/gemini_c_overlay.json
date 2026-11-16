@@ -1,7 +1,7 @@
 {
- "count": 60,
+ "count": 61,
  "effort": "high",
- "generated_at": "2026-11-16T17:58:03Z",
+ "generated_at": "2026-11-16T18:06:01Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -524,6 +524,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "debt_unavailable"
+  },
+  "EMR": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 126,
+   "claims_supported": 113,
+   "date": "2026-11-16T17:58:22Z",
+   "family": "operating",
+   "flags": [
+    "Emerson entered a pricing agreement for a public offering of \u20ac750,000,000 of 4.000% Notes due 2032. It expects net proceeds of approximately \u20ac744.5 million, to be used primarily to repay commercial paper borrowings.",
+    "Emerson declared a 7% increase in its quarterly cash dividend, to $0.595 per share.",
+    "Emerson published an initial fiscal 2027 outlook. It assumes ~$2.5B of share repurchases and ~$1.3B of dividends and gives adjusted EPS of ~$7.25."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "operating income for the latest year is not filed under a standard tag",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "operating income for the latest year is not filed under a standard tag"
   },
   "ESEA": {
    "alpha_pts": null,
@@ -1861,7 +1884,7 @@
  "verdict_counts": {
   "AVOID": 13,
   "BUY": 10,
-  "NO_CALL": 35,
+  "NO_CALL": 36,
   "WATCH": 2
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
