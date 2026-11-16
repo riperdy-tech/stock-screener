@@ -1,8 +1,8 @@
 {
- "count": 8,
+ "count": 9,
  "effort": "high",
- "generated_at": "2026-11-16T09:52:11Z",
- "model": "claude-opus-5-5",
+ "generated_at": "2026-11-16T09:53:55Z",
+ "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -26,6 +26,27 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "debt_unavailable"
+  },
+  "ESEA": {
+   "analysis": "complete",
+   "claims": 105,
+   "claims_supported": 104,
+   "date": "2026-11-16T09:40:38Z",
+   "family": "commodity",
+   "flags": [
+    "Euroseas announced the sale of its feeder containership M/V Evridiki G, and the vessel no longer appears among the 20 container carriers on the water in the filing's fleet profile.",
+    "Euroseas announced a new time charter contract for its feeder containership M/V EM Corfu at a TCE rate of $62,500 per day following its prior $28,000 per day charter.",
+    "Euroseas filed a Registration Statement on Form F-3 with the SEC."
+   ],
+   "in_code_book": false,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "qwen_book": null,
+   "screener_commit": "5e8517207b333bd8f05baee491e5c60da4d801cb",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "some filed figures are years older than the latest annual report"
   },
   "GEO": {
    "analysis": "complete",
@@ -259,7 +280,7 @@
  "verdict_counts": {
   "AVOID": 3,
   "BUY": 1,
-  "NO_CALL": 4,
+  "NO_CALL": 5,
   "WATCH": 0
  },
  "verdict_rule": "BUY: price below the bear value. WATCH: from the bear to the base value. AVOID: above the base value. NO_CALL: not valued."
