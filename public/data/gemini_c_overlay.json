@@ -1,7 +1,7 @@
 {
- "count": 76,
+ "count": 77,
  "effort": "high",
- "generated_at": "2026-11-16T20:12:56Z",
+ "generated_at": "2026-11-16T20:24:54Z",
  "model": "gemini-4-hydrogen-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1268,6 +1268,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "debt is filed but interest expense is not"
   },
+  "LAMR": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 99,
+   "claims_supported": 96,
+   "date": "2026-11-16T20:13:08Z",
+   "family": "family_not_built",
+   "flags": [
+    "Lamar Media Corp. and its special purpose subsidiaries entered into the Eighth Amendment to the Receivables Financing Agreement, extending the maturity date of the Accounts Receivable Securitization Program to October 1, 2029 and providing additional flexibility for eligibility of certain receivables.",
+    "Lamar updated its 2026 guidance issued in August 2026, raising expected full-year diluted AFFO per share to between $8.87 and $8.97 and expecting full-year diluted earnings per share between $6.01 and $6.04.",
+    "Lamar announced third quarter 2026 operating results, reporting net revenues of $624.5 million (a 6.6% increase), net income of $165.0 million (a 14.5% increase), and Adjusted EBITDA of $306.9 million (a 9.3% increase)."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "gemini-4-hydrogen-high",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "MA": {
    "alpha_pts": -4.9137665307394025,
    "analysis": "complete",
@@ -2324,7 +2347,7 @@
  "verdict_counts": {
   "AVOID": 16,
   "BUY": 10,
-  "NO_CALL": 46,
+  "NO_CALL": 47,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
