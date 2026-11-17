@@ -1,11 +1,11 @@
 {
- "count": 102,
+ "count": 103,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T07:20:47Z",
- "list_covered": 100,
+ "generated_at": "2026-11-17T07:20:49Z",
+ "list_covered": 101,
  "list_names": 161,
- "model": "claude-sonnet-5-5-high",
+ "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -2279,6 +2279,27 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
+  "PNRG": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 63,
+   "claims_supported": 61,
+   "date": "2026-11-17T07:16:10Z",
+   "family": "commodity",
+   "flags": [
+    "The company amended its borrowing base agreement with Citibank, N.A., cutting the borrowing base from $115,000,000 to $105,000,000. It reported no outstanding borrowings under the credit facility through the filing date."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "some filed figures are years older than the latest annual report"
+  },
   "PRCH": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -3145,7 +3166,7 @@
  "verdict_counts": {
   "AVOID": 23,
   "BUY": 13,
-  "NO_CALL": 61,
+  "NO_CALL": 62,
   "WATCH": 5
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
