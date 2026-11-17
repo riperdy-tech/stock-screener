@@ -1,9 +1,9 @@
 {
- "count": 105,
+ "count": 106,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T07:31:36Z",
- "list_covered": 103,
+ "generated_at": "2026-11-17T07:38:02Z",
+ "list_covered": 104,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -2279,6 +2279,49 @@
    "verdict": "NO_CALL",
    "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=200 https://www.sec.gov/Archives/edgar/data/791963/000162828026071942/0001628280-26-071942.txt larger than 80000000 bytes"
   },
+  "OVV": {
+   "alpha_pts": -10.625173435477292,
+   "analysis": "complete",
+   "claims": 73,
+   "claims_supported": 64,
+   "date": "2026-11-17T07:31:48Z",
+   "equity_value": 12787928362.032566,
+   "family": "commodity",
+   "far_from_price": false,
+   "filed_shares": 259700000.0,
+   "flags": [
+    "Ovintiv recorded impairments of 1,485 (table in millions) in the nine months ended Sep. 30, 2026, none of it in the third quarter. The 10-Q MD&A describes non-cash ceiling test impairments of $1,154 million after tax.",
+    "Ovintiv closed the sale of its Anadarko assets for about $2.8 billion and recognized a pre-tax loss of $337 million on the divestiture.",
+    "Ovintiv closed its acquisition of NuVista Energy Ltd., a cash and stock transaction valued at about $2.8 billion."
+   ],
+   "in_code_book": false,
+   "ke": 0.08492083045154347,
+   "market_cap_at_publish": 17191941810,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 63.98,
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "seed_base": {
+    "1000": 49.24115657309421,
+    "3000": 48.24605059967003
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": -0.25616730772121166,
+   "value_base": 49.24115657309421,
+   "value_bear": 39.41897562743455,
+   "value_bull": 49.95152637027776,
+   "value_per_filed_share": {
+    "base": 49.24115657309421,
+    "bear": 39.41897562743455,
+    "bull": 49.95152637027776
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -10.6 points a year against the required return over 3 years"
+  },
   "PEB": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -3208,9 +3251,9 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 41,
+ "valued_count": 42,
  "verdict_counts": {
-  "AVOID": 23,
+  "AVOID": 24,
   "BUY": 13,
   "NO_CALL": 64,
   "WATCH": 5
