@@ -1,9 +1,9 @@
 {
- "count": 159,
+ "count": 160,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T19:26:29Z",
- "list_covered": 153,
+ "generated_at": "2026-11-17T19:32:14Z",
+ "list_covered": 154,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -3226,6 +3226,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
+  "PGR": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 69,
+   "claims_supported": 64,
+   "date": "2026-11-17T19:26:43Z",
+   "family": "financial",
+   "flags": [
+    "Progressive issued $1.5 billion of senior notes in the first quarter of 2026, which raised its debt and total capital.",
+    "In the first nine months of 2026 Progressive repurchased 7.7 million common shares at a total cost of $1.6 billion.",
+    "Progressive paid its annual variable common share dividend in 2026. Cash dividends paid in the nine months were 8,088 (table in millions), against 2,812 a year earlier."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "preferred stock is not filed for every year needed",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "preferred stock is not filed for every year needed"
+  },
   "PGY": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -4758,7 +4781,7 @@
  "verdict_counts": {
   "AVOID": 32,
   "BUY": 19,
-  "NO_CALL": 102,
+  "NO_CALL": 103,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
