@@ -1,7 +1,7 @@
 {
- "count": 85,
+ "count": 86,
  "effort": "high",
- "generated_at": "2026-11-17T00:09:05Z",
+ "generated_at": "2026-11-17T00:17:06Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -112,6 +112,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
+  "ARLP": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 112,
+   "claims_supported": 106,
+   "date": "2026-11-17T00:09:33Z",
+   "family": "commodity",
+   "flags": [
+    "ARLP completed the acquisition of general partner and limited partner interests in AllDale III & IV for approximately $206.2 million, adding control of approximately 48,500 net royalty acres.",
+    "The AllDale III & IV acquisition was funded partly by a new $150.0 million term loan at Alliance Minerals and by revolving credit facility borrowings.",
+    "ARLP decided to cease longwall production at the Mettiki complex and moved the mine to continuous mining units."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "a required figure is not filed (capex or working capital)"
   },
   "ARX": {
    "alpha_pts": null,
@@ -2611,7 +2634,7 @@
  "verdict_counts": {
   "AVOID": 20,
   "BUY": 10,
-  "NO_CALL": 51,
+  "NO_CALL": 52,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
