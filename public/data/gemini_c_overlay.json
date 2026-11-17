@@ -1,9 +1,9 @@
 {
- "count": 96,
+ "count": 98,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T03:09:52Z",
- "list_covered": 94,
+ "generated_at": "2026-11-17T03:27:26Z",
+ "list_covered": 96,
  "list_names": 161,
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -1667,6 +1667,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
+  "LFST": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 116,
+   "claims_supported": 113,
+   "date": "2026-11-17T03:19:30Z",
+   "family": "family_not_built",
+   "flags": [
+    "LifeStance reported third quarter 2026 revenue of $455.9 million and raised its full year 2026 outlook, with revenue guidance raised to $1.741 billion to $1.761 billion.",
+    "The company entered into an underwriting agreement for a secondary offering of 45,000,000 shares sold entirely by selling stockholders, and the company purchased 2,000,000 of those shares from the underwriters; the offering closed on November 12, 2026.",
+    "The company entered into an underwriting agreement for a secondary offering of 22,250,000 shares sold by selling stockholders and agreed to purchase 2,000,000 of those shares from the underwriter; the offering closed on September 11, 2026."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "LPG": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -2082,6 +2105,49 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -18.3 points a year against the required return over 3 years"
+  },
+  "OGE": {
+   "alpha_pts": -18.18997678392315,
+   "analysis": "complete",
+   "claims": 117,
+   "claims_supported": 95,
+   "date": "2026-11-17T03:10:04Z",
+   "equity_value": 6003572924.767588,
+   "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 202500000.0,
+   "flags": [
+    "OGE Energy raised its 2026 earnings guidance to $2.62 to $2.68 per average diluted share, above the original 10-K range of $2.38 to $2.48, citing warmer than normal weather.",
+    "OGE Energy started an equity offering program, including forward sale arrangements, for common stock with an aggregate sales price of up to $750,000,000. Actual sales are at the company's discretion.",
+    "OG&E's board named John Laws, currently Chief Commercial Officer, as OG&E Chief Operating Officer, effective January 4, 2027."
+   ],
+   "in_code_book": false,
+   "ke": 0.0809891083669027,
+   "market_cap_at_publish": 10658790525,
+   "model": "claude-opus-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 51.56,
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "seed_base": {
+    "1000": 29.64727370255599,
+    "3000": 34.3770593378379
+   },
+   "seeds_agree": false,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": -0.43674914046895696,
+   "value_base": 29.64727370255599,
+   "value_bear": 29.53842400325038,
+   "value_bull": 29.83062093080749,
+   "value_per_filed_share": {
+    "base": 29.64727370255599,
+    "bear": 29.53842400325038,
+    "bull": 29.83062093080749
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -18.2 points a year against the required return over 3 years"
   },
   "OPY": {
    "alpha_pts": null,
@@ -2963,11 +3029,11 @@
    "verdict_reason": "expected return +52.9 points a year against the required return over 3 years"
   }
  },
- "valued_count": 39,
+ "valued_count": 40,
  "verdict_counts": {
-  "AVOID": 22,
+  "AVOID": 23,
   "BUY": 13,
-  "NO_CALL": 57,
+  "NO_CALL": 58,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
