@@ -2,10 +2,10 @@
  "count": 167,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-17T23:48:55Z",
+ "generated_at": "2026-11-17T23:53:27Z",
  "list_covered": 161,
  "list_names": 161,
- "model": "gemini-4-hydrogen-high",
+ "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -2502,21 +2502,26 @@
   },
   "JCAP": {
    "alpha_pts": null,
-   "analysis": "not run",
-   "claims": null,
-   "claims_supported": null,
-   "date": "2026-11-16T15:07:32Z",
-   "family": null,
-   "flags": [],
+   "analysis": "complete",
+   "claims": 65,
+   "claims_supported": 60,
+   "date": "2026-11-17T23:48:07Z",
+   "family": "financial",
+   "flags": [
+    "The company's financing subsidiary issued $100 million of additional 8.250% Senior Notes due 2030. Proceeds are meant to repay part of the revolving credit facility, with any remainder for general corporate purposes.",
+    "The company's $300 million 2026 senior unsecured notes matured and were paid off using the revolving credit facility. This was repayment at maturity, not a default.",
+    "The company completed the purchase of a credit card receivables portfolio from Bluestem for a net price of $196.3 million. It estimated remaining collections on the portfolio at $295.6 million."
+   ],
    "in_code_book": false,
    "ke": null,
-   "model": "gemini-4-hydrogen-high",
-   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/2046042/000110465926099334/0001104659-26-099334.txt",
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "share count does not reconcile with filed EPS",
    "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
    "source": "screener list refresh",
    "valued": false,
    "verdict": "NO_CALL",
-   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/2046042/000110465926099334/0001104659-26-099334.txt"
+   "verdict_reason": "share count does not reconcile with filed EPS"
   },
   "KFY": {
    "alpha_pts": 7.003520266094704,
