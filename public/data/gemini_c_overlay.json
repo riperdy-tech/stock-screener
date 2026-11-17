@@ -1,9 +1,9 @@
 {
- "count": 134,
+ "count": 135,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T13:49:24Z",
- "list_covered": 128,
+ "generated_at": "2026-11-17T13:55:15Z",
+ "list_covered": 129,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -1425,6 +1425,29 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -11.1 points a year against the required return over 3 years"
+  },
+  "FTDR": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 61,
+   "claims_supported": 57,
+   "date": "2026-11-17T13:49:39Z",
+   "family": "financial",
+   "flags": [
+    "Frontdoor announced a new $1 Billion share repurchase authorization approved by its Board, saying the current authorization should be completed in November.",
+    "Frontdoor raised its full-year 2026 outlook to revenue of $2.205 billion to $2.215 billion and Adjusted EBITDA of $590 million to $600 million.",
+    "The Vice President, Chief Accounting Officer and Controller gave notice of her resignation, effective in September 2026. The company said it was not the result of any disagreement. The CFO took over principal accounting officer duties until a successor is appointed."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no usable growth anchor for this company",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no usable growth anchor for this company"
   },
   "GASS": {
    "alpha_pts": 46.742282117246255,
@@ -4045,7 +4068,7 @@
  "verdict_counts": {
   "AVOID": 28,
   "BUY": 16,
-  "NO_CALL": 84,
+  "NO_CALL": 85,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
