@@ -1,9 +1,9 @@
 {
- "count": 131,
+ "count": 132,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T13:36:47Z",
- "list_covered": 125,
+ "generated_at": "2026-11-17T13:37:18Z",
+ "list_covered": 126,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -268,6 +268,24 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/882796/000117184326007097/0001171843-26-007097.txt"
+  },
+  "BDN": {
+   "alpha_pts": null,
+   "analysis": "not run",
+   "claims": null,
+   "claims_supported": null,
+   "date": "2026-11-17T13:37:02Z",
+   "family": null,
+   "flags": [],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "packet refused: http.client.IncompleteRead: IncompleteRead(210143 bytes read)",
+   "qwen_book": null,
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "packet refused: http.client.IncompleteRead: IncompleteRead(210143 bytes read)"
   },
   "BFH": {
    "alpha_pts": null,
@@ -3963,7 +3981,7 @@
  "verdict_counts": {
   "AVOID": 27,
   "BUY": 16,
-  "NO_CALL": 82,
+  "NO_CALL": 83,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
