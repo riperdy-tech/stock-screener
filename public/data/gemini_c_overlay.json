@@ -1,9 +1,9 @@
 {
- "count": 161,
+ "count": 162,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T19:37:45Z",
- "list_covered": 155,
+ "generated_at": "2026-11-17T22:43:15Z",
+ "list_covered": 156,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -1649,6 +1649,28 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -11.1 points a year against the required return over 3 years"
+  },
+  "FSM": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 49,
+   "claims_supported": 42,
+   "date": "2026-11-17T22:38:58Z",
+   "family": "commodity",
+   "flags": [
+    "Senegal's Ministry of Mines and Geology issued a Notice of Admissibility for the Diamba Sud Exploitation Permit application. The company expects the Government's internal approval for the final permit to be completed in the fourth quarter.",
+    "The company acquired the Bambadji Project in Senegal, where first drilling results at Kabewest were reported."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "a required figure is not filed (capex or working capital)"
   },
   "FTDR": {
    "alpha_pts": null,
@@ -4804,7 +4826,7 @@
  "verdict_counts": {
   "AVOID": 32,
   "BUY": 19,
-  "NO_CALL": 104,
+  "NO_CALL": 105,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
