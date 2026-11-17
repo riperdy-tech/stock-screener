@@ -1,11 +1,11 @@
 {
- "count": 101,
+ "count": 102,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T07:15:51Z",
- "list_covered": 99,
+ "generated_at": "2026-11-17T07:20:47Z",
+ "list_covered": 100,
  "list_names": 161,
- "model": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5-high",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
@@ -400,6 +400,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "diluted share count not filed"
+  },
+  "BUUU": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 68,
+   "claims_supported": 67,
+   "date": "2026-11-17T07:15:28Z",
+   "family": "operating",
+   "flags": [
+    "The company completed the acquisition of a 60% equity interest in Brightray, a prefabricated modular data center provider. This was after the fiscal year end, and Brightray's results are not in the FY2026 financial statements.",
+    "The company completed a first closing of a private placement of Purchaser Units, with gross proceeds of US$10,000,000.",
+    "A 10-for-1 forward subdivision of Class A and Class B ordinary shares was approved by the board and became effective, and the shares began trading on a split-adjusted basis."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5-high",
+   "no_value_reason": "no positive earnings base",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no positive earnings base"
   },
   "BWLP": {
    "alpha_pts": null,
@@ -3122,7 +3145,7 @@
  "verdict_counts": {
   "AVOID": 23,
   "BUY": 13,
-  "NO_CALL": 60,
+  "NO_CALL": 61,
   "WATCH": 5
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
