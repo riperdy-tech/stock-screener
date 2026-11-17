@@ -1,7 +1,7 @@
 {
- "count": 87,
+ "count": 88,
  "effort": "high",
- "generated_at": "2026-11-17T00:27:51Z",
+ "generated_at": "2026-11-17T00:36:59Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1489,6 +1489,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
+  "LPG": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 119,
+   "claims_supported": 115,
+   "date": "2026-11-17T00:28:13Z",
+   "family": "commodity",
+   "flags": [
+    "The company completed the sales of the VLGCs Captain John NP and Clermont, receiving total net proceeds of $167.4 million.",
+    "The board declared an irregular cash dividend of $1.25 per share totaling $53.7 million, payable on or about November 24, 2026.",
+    "The company repaid $16.0 million plus accrued interest related to the Clermont under the 2026 Debt Facility's revolver."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "some filed figures are years older than the latest annual report"
+  },
   "MA": {
    "alpha_pts": -4.9137665307394025,
    "analysis": "complete",
@@ -2657,7 +2680,7 @@
  "verdict_counts": {
   "AVOID": 20,
   "BUY": 10,
-  "NO_CALL": 53,
+  "NO_CALL": 54,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
