@@ -1,9 +1,9 @@
 {
- "count": 150,
+ "count": 151,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T18:31:03Z",
- "list_covered": 144,
+ "generated_at": "2026-11-17T18:36:47Z",
+ "list_covered": 145,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -3210,6 +3210,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
   },
+  "RHP": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 63,
+   "claims_supported": 57,
+   "date": "2026-11-17T18:31:17Z",
+   "family": "family_not_built",
+   "flags": [
+    "A subsidiary of the company completed the purchase of the Grande Lakes Orlando resort (a JW Marriott and a Ritz-Carlton hotel) for an aggregate price of approximately $1.38 billion.",
+    "The company closed an underwritten public offering of 5,865,000 common shares at $117.00 per share, with net proceeds of approximately $658 million.",
+    "The company's issuers sold $700 million of 6.250% senior notes due 2035 to fund part of the Grande Lakes Orlando purchase."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "RLJ": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -4471,7 +4494,7 @@
  "verdict_counts": {
   "AVOID": 29,
   "BUY": 18,
-  "NO_CALL": 97,
+  "NO_CALL": 98,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
