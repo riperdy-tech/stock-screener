@@ -1,7 +1,7 @@
 {
- "count": 86,
+ "count": 87,
  "effort": "high",
- "generated_at": "2026-11-17T00:17:06Z",
+ "generated_at": "2026-11-17T00:27:51Z",
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
@@ -1946,6 +1946,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "some filed figures are years older than the latest annual report"
   },
+  "RCEL": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 134,
+   "claims_supported": 128,
+   "date": "2026-11-17T00:17:45Z",
+   "family": "family_not_built",
+   "flags": [
+    "In the FY2025 10-K, the auditor and management reported substantial doubt about the company's ability to continue as a going concern. They cited debt service obligations, historical negative cash flows and recurring losses.",
+    "In the Q3 2026 10-Q, management concluded that substantial doubt about going concern no longer exists. The credit facility was reclassified to long-term and appears as $45,476 (table in thousands) at September 30, 2026.",
+    "The company entered a five-year Perceptive credit facility of up to $60 million. It drew $50 million at closing and repaid its prior debt, leaving net proceeds of approximately $6.0 million."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-opus-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "RHLD": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -2634,7 +2657,7 @@
  "verdict_counts": {
   "AVOID": 20,
   "BUY": 10,
-  "NO_CALL": 52,
+  "NO_CALL": 53,
   "WATCH": 4
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
