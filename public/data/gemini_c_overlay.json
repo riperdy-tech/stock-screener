@@ -1,9 +1,9 @@
 {
- "count": 91,
+ "count": 92,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T02:25:36Z",
- "list_covered": 89,
+ "generated_at": "2026-11-17T02:33:42Z",
+ "list_covered": 90,
  "list_names": 161,
  "model": "claude-opus-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -161,6 +161,49 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
+  "ASX": {
+   "alpha_pts": -55.05273347981519,
+   "analysis": "complete",
+   "claims": 117,
+   "claims_supported": 97,
+   "date": "2026-11-17T02:25:48Z",
+   "equity_value": 12776242265.45697,
+   "family": "operating",
+   "far_from_price": true,
+   "filed_shares": 4429553000.0,
+   "flags": [
+    "The company obtained control over EugenLight Technologies in January 2026.",
+    "In 2024 the company completed the acquisition of 100% shareholdings of ASEPCAYMAN and CHE.",
+    "GAPT's acquisition of a 16.48% shareholding of Hong Kong United Ascend Holdings Limited was completed in September 2024."
+   ],
+   "in_code_book": false,
+   "ke": 0.11164375453902048,
+   "market_cap_at_publish": 78479242506,
+   "model": "claude-opus-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 35.55,
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "seed_base": {
+    "1000": 0.2522595346591944,
+    "3000": 3.18577714564175
+   },
+   "seeds_agree": false,
+   "share_unit_note": "filed shares 4,429,553,000 against 2,207,573,629 quoted (x0.498); values are per quoted share",
+   "source": "screener list refresh",
+   "upside": -0.8372022733975779,
+   "value_base": 5.7874591807161035,
+   "value_bear": 0.4640202185175109,
+   "value_bull": 6.248868504175096,
+   "value_per_filed_share": {
+    "base": 2.884318635640429,
+    "bear": 0.23125556859969038,
+    "bull": 3.114273002272583
+   },
+   "valued": true,
+   "verdict": "AVOID",
+   "verdict_reason": "expected return -55.1 points a year against the required return over 3 years"
   },
   "BCRX": {
    "alpha_pts": null,
@@ -2788,9 +2831,9 @@
    "verdict_reason": "expected return +52.9 points a year against the required return over 3 years"
   }
  },
- "valued_count": 36,
+ "valued_count": 37,
  "verdict_counts": {
-  "AVOID": 21,
+  "AVOID": 22,
   "BUY": 11,
   "NO_CALL": 55,
   "WATCH": 4
