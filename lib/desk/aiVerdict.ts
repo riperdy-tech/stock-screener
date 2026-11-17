@@ -6,12 +6,18 @@
 import type { OpusVerdictCode } from '@/lib/data-service';
 import type { DeskRow } from './rankings';
 
-/** gemini and opus: the filings read (gemini_c files; the row's model says which); claude: Claude's valuation (opus_overlay). */
-export type AiSource = 'gemini' | 'opus' | 'claude';
+/** gemini, opus and sonnet: the filings read (gemini_c files; the row's model says which); claude: Claude's valuation (opus_overlay). */
+export type AiSource = 'gemini' | 'opus' | 'sonnet' | 'claude';
+
+/** Which arm read the filings, from the row's model id: Claude Sonnet, Claude Opus, else Gemini. */
+export function readSource(model: string | undefined): AiSource {
+    const m = model ?? '';
+    return m.includes('sonnet') ? 'sonnet' : m.includes('claude') ? 'opus' : 'gemini';
+}
 
 export function aiVerdict(r: Pick<DeskRow, 'geminiC' | 'opus'>): { verdict: OpusVerdictCode; source: AiSource } | null {
     const read = r.geminiC && r.geminiC.analysis !== 'not run'
-        ? { verdict: r.geminiC.verdict, source: ((r.geminiC.model ?? '').includes('claude') ? 'opus' : 'gemini') as AiSource }
+        ? { verdict: r.geminiC.verdict, source: readSource(r.geminiC.model) }
         : null;
     const quick = r.opus ? { verdict: r.opus.verdict, source: 'claude' as AiSource } : null;
     if (read && read.verdict !== 'NO_CALL') return read;
