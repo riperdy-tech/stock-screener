@@ -1,9 +1,9 @@
 {
- "count": 130,
+ "count": 131,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T13:31:01Z",
- "list_covered": 124,
+ "generated_at": "2026-11-17T13:36:47Z",
+ "list_covered": 125,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -2628,6 +2628,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=200 https://www.sec.gov/Archives/edgar/data/791963/000162828026071942/0001628280-26-071942.txt larger than 80000000 bytes"
   },
+  "OUT": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 71,
+   "claims_supported": 68,
+   "date": "2026-11-17T13:31:17Z",
+   "family": "family_not_built",
+   "flags": [
+    "The board declared a quarterly cash dividend of $0.33 per share on common stock, announced with third-quarter 2026 results.",
+    "With second-quarter 2026 results, the company announced a 10% increase in its quarterly dividend to $0.33 per share.",
+    "In the nine months ended September 30, 2026 the company borrowed 500.0 (table in millions) of long-term debt and repaid 650.0 (table in millions), and recorded a loss on extinguishment of debt of 1.4 (table in millions). Short-term debt of 100.0 (table in millions) was outstanding at quarter end versus 0.0 at year-end 2025."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "OVV": {
    "alpha_pts": -10.625173435477292,
    "analysis": "complete",
@@ -3940,7 +3963,7 @@
  "verdict_counts": {
   "AVOID": 27,
   "BUY": 16,
-  "NO_CALL": 81,
+  "NO_CALL": 82,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
