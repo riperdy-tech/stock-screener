@@ -1,9 +1,9 @@
 {
- "count": 103,
+ "count": 104,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T07:20:49Z",
- "list_covered": 101,
+ "generated_at": "2026-11-17T07:25:23Z",
+ "list_covered": 102,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -1710,6 +1710,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no usable growth anchor for this company"
   },
+  "KOD": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 52,
+   "claims_supported": 39,
+   "date": "2026-11-17T07:21:08Z",
+   "family": "family_not_built",
+   "flags": [
+    "The company's latest quarterly report states substantial doubt about its ability to continue as a going concern. It reported cash and cash equivalents of $88.7 million at quarter end. The prior annual report carried the same doubt.",
+    "After the quarter end, Kodiak raised aggregate net proceeds of $69 million from common stock sales under its at-the-market equity offering facility.",
+    "Kodiak announced that the primary endpoints were met for both Zenkuda and tabirafusp-ted (KSI-501) in the Phase 3 DAYBREAK wet AMD study."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "KSS": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -3166,7 +3189,7 @@
  "verdict_counts": {
   "AVOID": 23,
   "BUY": 13,
-  "NO_CALL": 62,
+  "NO_CALL": 63,
   "WATCH": 5
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
