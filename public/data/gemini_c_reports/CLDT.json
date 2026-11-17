@@ -1,0 +1,769 @@
+{
+ "alpha_pts": null,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 60,
+ "claims_supported": 54,
+ "date": "2026-11-17T08:08:12Z",
+ "family": "family_not_built",
+ "flags": [
+  "The company acquired a portfolio of six hotels. The nine-month cash flow statement shows 92,458 (table in thousands) paid for acquisition of hotel properties, and the revolving credit facility balance is 65,000 (table in thousands) at quarter-end.",
+  "The Board of Trustees appointed a new trustee, William P. (Liam) Brown, a retired Marriott Group President, effective immediately."
+ ],
+ "in_code_book": false,
+ "ke": null,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "qwen_book": null,
+ "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in the 10-K Item 1 overview",
+    "claim": "The company is an internally managed hotel REIT that invests in upscale extended-stay and premium-branded select-service hotels. At the last 10-K date it owned 33 hotels with 5,021 rooms in 15 states and the District of Columbia.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company is internally-managed and invests primarily in upscale extended-stay and premium-branded select-service hotels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 (structure) and P4 (TRS taxation); the consolidated-revenue point is inferred from the elimination statement",
+    "claim": "The REIT does not run its hotels. It leases each hotel to a taxable REIT subsidiary lessee, and third-party managers operate them day to day. Lease revenue is eliminated in consolidation, so consolidated revenue is hotel-level operating revenue.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "To maintain our qualification as a REIT, the Company cannot operate its hotels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Item 1",
+    "claim": "The company reports no segment breakdown: it treats all hotels as one industry segment.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We evaluate all of our hotels as a single industry segment because all of our hotels have similar economic characteristics and provide similar services to similar types of customers."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A revenue table and text",
+    "claim": "What it sells is mainly hotel rooms. In the third quarter, room revenue was $83,339 (table in thousands) of $90,921 (table in thousands) total revenue, or 91.7% of the total. The rest is food and beverage and other revenue such as parking and meeting rooms.",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "Since all of our hotels are select-service or limited-service hotels, room revenue is the primary revenue source"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 for extended-stay and all-suite hotels only",
+    "claim": "The customers described for its extended-stay and all-suite hotels are mainly business travelers: short-term transient guests and people on extended assignments or corporate relocations.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "principal customer base includes business travelers, whether short-term transient travelers or those on extended assignments and corporate relocations"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q table; the inconsistency is noted from comparing the 10-Q text with the table",
+    "claim": "Room revenue moves with occupancy and average daily rate, which together make RevPAR. In the third quarter, same-property RevPAR rose 8.3%. Occupancy was 83.0% against 79.1% a year earlier, and ADR was $194.45 against $188.58.",
+    "facts": [
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "RevPAR, ADR and Occupancy are hotel industry measures commonly used to evaluate operating performance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "Buying and selling hotels is a second revenue driver. A six-hotel portfolio acquired during the year contributed $7.2 million of third-quarter revenue, and total revenue was $90.9 million, up $12.5 million.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "We acquired a portfolio of six hotels on March 3, 2026, which were located in Paducah, KY, Joplin, MO, and Effingham, IL."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A",
+    "claim": "Disposals reduce revenue. The prior-year revenue decline was attributed mainly to selling seven hotels, with total revenue down $22.1 million to $295.1 million.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The decrease in total revenue primarily was related to the decrease in revenue from the sales of seven hotels"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the income statement and the 10-Q MD&A",
+    "claim": "The largest cost block is hotel operating expenses. They were 50,105 (table in thousands) of 76,538 (table in thousands) total operating expenses in the third quarter, and room expense was the largest line at 18,004 (table in thousands). The increase was attributed to the acquired hotels and inflation.",
+    "facts": [
+     "F2",
+     "P4"
+    ],
+    "quotes": [
+     "Room expenses, which are the most significant component of hotel operating expenses"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and the income statement; the rate shown applies only to the rows visible",
+    "claim": "Some costs scale with revenue through fees. In the third quarter, franchise and marketing fees were 7,230 (table in thousands) and management fees paid to related parties were 3,064 (table in thousands). Base management fees are a percentage of gross room revenue, and the management table shows 3.0% and an incentive fee cap of 1.0% for the hotels listed.",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "Base management fees are calculated as a percentage of the hotel's gross room revenue."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 and P1",
+    "claim": "One related-party manager runs the whole portfolio. IHM, owned by the Chairman and CEO, managed all 33 hotels at the last 10-K date, so a large share of hotel operating costs and fees flows to an affiliate. The company lists this as a concentration and conflict-of-interest risk.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "As of December 31, 2025, IHM managed all 33 of our hotels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items; the fixed-cost behaviour is inferred",
+    "claim": "Below the hotel level, costs include depreciation (16,053, table in thousands), property taxes, ground rent and insurance (5,486, table in thousands), and interest expense (6,805, table in thousands) in the third quarter. Debt was $408.2 million at about 5.87%, and the term loan and revolver carry floating rates.",
+    "facts": [
+     "F2",
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "Interest expense on our term loan and revolving credit facility is based on floating interest rates.",
+     "As of September 30, 2026, we have total debt of $408.2 million at a weighted-average interest rate of approximately 5.87%."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "figures stated in P4 and P6; the operating-leverage explanation is inferred",
+    "claim": "Revenue grew faster than hotel operating costs in the third quarter, which widened margins. Total revenue rose 16.0% and hotel operating expenses rose 13.8%. Management reported gross operating profit margin of 45 percent, up 110 basis points, and credits expense management.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "through aggressive expense management, especially with regard to labor and productivity"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K; the caveat is inferred",
+    "claim": "Demand is seasonal: the company expects lower revenue, operating income and cash flow in the first and fourth quarters and higher in the second and third.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Generally, we expect that we will have lower revenue, operating income and cash flow in the first and fourth quarters and higher revenue, operating income and cash flow in the second and third quarters."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "figures stated in F3; the funding link is inferred from timing and from P4's description of how acquisitions may be funded",
+    "claim": "Cash from hotels funds distributions and part of growth. Nine-month operating cash flow was 67,812 (table in thousands), against distributions of 14,485 to common and 5,962 to preferred holders (table in thousands). Acquisitions of 92,458 (table in thousands) coincided with 100,000 (table in thousands) of revolver borrowings, and a REIT must pay out at least 90% of taxable income.",
+    "facts": [
+     "F3",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "we must distribute at least 90% of our REIT taxable income"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release market table",
+    "claim": "Revenue is geographically concentrated. Silicon Valley hotels were 18% of last-twelve-month EBITDA, and their third-quarter RevPAR was $174, up 23%, so that market is a large swing factor.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the cited item",
+    "claim": "The company is a hotel REIT focused on upscale extended-stay and premium-branded select-service hotels. At the 2025 year-end it owned 33 hotels with 5,021 rooms in 15 states and the District of Columbia.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The Company is internally-managed and invests primarily in upscale extended-stay and premium-branded select-service hotels."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "figures stated in the cited items; the comparison with the industry is inferred from them",
+    "claim": "In the latest quarter same-property RevPAR rose 8.3% on occupancy of 83.0% (79.1% a year earlier). U.S. industry RevPAR rose 7.1%, so the portfolio did somewhat better than the industry that quarter.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Smith Travel Research reported that U.S. lodging industry RevPAR increased 7.1% for the three months ended September 30, 2026, with RevPAR up 8.2% in July 2026, up 2.0% in August 2026 and up 11.0% in September 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Hotel margins widened in the latest quarter. Adjusted Hotel EBITDA margin rose 190 basis points to 39 percent and gross operating profit margin reached 45 percent. Management credits expense control, especially labor and productivity.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Adjusted Hotel EBITDA margins rose 190 basis points to 39 percent in the 2026 third quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "figures stated; the lower-RevPAR comparison is inferred from two stated figures",
+    "claim": "Acquisition is the main way the portfolio has grown. A six-hotel portfolio added $7.2 million of third-quarter revenue, and its RevPAR was $132, up 10 percent. The nine-month cash flow shows acquisition of hotel properties of 92,458 (table in thousands). The same-property set is now 39 hotels.",
+    "facts": [
+     "P4",
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "RevPAR for the recently acquired six-hotel portfolio jumped 10 percent to $132, easily besting underwriting expectations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; the concentration risk is inferred",
+    "claim": "Performance is led by a few markets. Silicon Valley is 18% of last-twelve-month EBITDA and its RevPAR rose 23%. Some Northeast markets were flat to down in the same period, with Greater New York at (1)% and Coastal Northeast at (3)%. Management says Silicon Valley demand 'meaningfully increases EBITDA and FFO'.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Accelerating demand at our four Silicon Valley hotels meaningfully increases EBITDA and FFO."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "All 33 hotels were managed by one company, IHM, which is 100% owned by the Chairman and CEO. The filing names this concentration and the resulting conflicts of interest as threats.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "The management of the hotels in our portfolio is currently concentrated in one hotel management company.",
+     "As of December 31, 2025, IHM managed all 33 of our hotels."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "The filing describes a highly competitive industry. Rivals include larger buyers with more resources, and competition for guests can lower occupancy, ADR and RevPAR.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The lodging industry is highly competitive.",
+     "Some of these entities have substantially greater financial and operational resources than we have or may be willing to use higher leverage."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "figures stated in the cited items; the link between borrowing and the acquisitions is inferred from the cash flow statement",
+    "claim": "Leverage has risen to fund growth. The revolving credit facility went from zero to 65,000 (table in thousands). The leverage ratio was 23.2% against 20.1 percent at the 2025 year-end. Total debt is $408.2 million at about 5.87%. The term loan and revolver carry floating rates.",
+    "facts": [
+     "F1",
+     "P4",
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "As of September 30, 2026, we have total debt of $408.2 million at a weighted-average interest rate of approximately 5.87%.",
+     "Interest expense on our term loan and revolving credit facility is based on floating interest rates."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited items; the persistence risk is inferred",
+    "claim": "Lodging demand is cyclical, and the current industry strength may not last. The company lists cyclicality as a risk. Industry RevPAR fell 0.3% in the 2025 10-K year and rose 7.1% in the latest quarter.",
+    "facts": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "The cyclical nature of the lodging industry may adversely affect the return on our investments."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Reliance on franchise brands is a dependency. Franchisors can impose costly upgrades or cancel licenses, and the loss of a license can damage a hotel's value.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "The loss of a franchise license could have a material adverse effect on the operations or the underlying value of the affected hotel because of the loss of associated name recognition, marketing support and centralized reservation systems provided by the franchisor."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "A development project is under way: the Home2 Portland, Maine hotel, carried at 4,540 (table in thousands) on the balance sheet. Management expects it to open in 2028. The filing lists development timing and cost risks.",
+    "facts": [
+     "P6",
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Looking a bit further out on the timeline, our Home2 Portland, Maine development will open in 2028 and immediately be accretive.",
+     "Hotel development is subject to timing, cost, and other risks."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Balance sheet figures are stated in F1; the funding mechanism is inferred from the cash flow statement (F3).",
+    "claim": "Cash on hand fell and the revolver is now drawn. Cash and cash equivalents were 14,021 (table in thousands) at Sep. 30, 2026 against 24,435 at Dec. 31, 2025, with restricted cash of 8,416. The revolving credit facility balance was 65,000, against 0 at year-end.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 and P1; the cause of the rise is inferred from F1 and F3.",
+    "claim": "Leverage rose during 2026 but stayed inside the range the company says it keeps. The leverage ratio was 23.2% at Sep. 30, 2026, against approximately 20.1 percent at Dec. 31, 2025. Total debt was $408.2 million at a weighted-average rate of approximately 5.87%.",
+    "facts": [
+     "P4",
+     "P1"
+    ],
+    "quotes": [
+     "As of September 30, 2026, we have total debt of $408.2 million at a weighted-average interest rate of approximately 5.87%.",
+     "Over the past several years, we have maintained a leverage ratio between the low 20s and the low 50s."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet figures from F1; floating-rate statement from the 10-K risk factors (P2).",
+    "claim": "The debt mix is secured mortgage debt, an unsecured term loan and the revolver, and the last two carry floating rates. Carrying values at Sep. 30, 2026 were mortgage debt, net 141,652, unsecured term loan, net 197,877 and revolver 65,000 (table in thousands). Total liabilities were 466,251, against 392,332 at year-end.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "Interest expense on our term loan and revolving credit facility is based on floating interest rates."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in F3; the driver is inferred from the MD&A revenue discussion (P4); seasonality is stated in P1.",
+    "claim": "Cash from operations rose year on year and covered property improvements. Net cash provided by operating activities was 67,812 for the nine months, against 51,826 a year earlier (table in thousands). Improvements and additions to hotel properties were 16,797, against 20,427.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Line items are stated in F3; the funding link is inferred from their size and timing.",
+    "claim": "Shareholder returns and the acquisition were funded from different sources. Operating cash flow went to distributions of 14,485 on common shares and units, 5,962 on preferred shares and repurchases of 9,476. The acquisition of hotel properties cost 92,458 and was funded alongside revolver borrowings of 100,000 against repayments of 35,000 (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in F3; the quality reading is inferred.",
+    "claim": "Cash generation is high relative to reported earnings because of non-cash charges. Net income was 11,370 for the nine months, while operating cash flow was 67,812. The gap includes depreciation and amortization of 46,370, share-based compensation of 4,559 and a 7,895 inflow from accounts payable and accrued expenses (against 2,596 a year earlier).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in F2, F3 and P6; the interest-cover reading is inferred and no ratio is computed.",
+    "claim": "Earnings cover interest, and the cash-flow measure the company reports improved. Operating income was 31,336 against interest expense of 19,909 for the nine months, with cash paid for interest of 17,717 (table in thousands). Adjusted FFO attributable to common share and unit holders was 22,944 for Q3 and 56,648 for the nine months.",
+    "facts": [
+     "F2",
+     "F3",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash flow lines are stated in F3 and the 2025 revolver in P3; the absence of maturity data is a gap in the excerpts.",
+    "claim": "The evidence gives no maturity dates for the mortgage debt, term loan or revolver, so the debt due in the near term cannot be stated. What it does show is that the company refinanced in 2025 (a 200,000 term loan borrowing against 140,000 repaid, and a new unsecured revolver) and that no mortgage repayments occurred in the 2026 nine months.",
+    "facts": [
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "The loss in 2025 was related to the Company entering into a new unsecured revolving credit facility and the write-off of unamortized deferred financing fees from the prior facility."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors (P2) and the earnings release (P6); the link to near-term maturities is not shown.",
+    "claim": "The ways the company says it could meet debt falling due are cash flow, borrowings, refinancing or asset sales, and its own risk factors name sales on disadvantageous terms as the fallback. Management describes the balance sheet as in great condition, and guidance assumes no additional acquisitions, dispositions, debt or equity issuance.",
+    "facts": [
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "If we are unable to refinance our debt on acceptable terms, we may be forced to dispose of hotel properties on disadvantageous terms, potentially resulting in losses.",
+     "No additional acquisitions, dispositions, debt or equity issuance."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the 10-Q MD&A (P4). The industry comparison is also stated there.",
+    "claim": "Same-property RevPAR growth is the main driver of Q3 revenue: RevPAR rose 8.3% as occupancy reached 83.0% (from 79.1%) and ADR reached $194.45 (from $188.58), in a quarter when U.S. industry RevPAR rose 7.1%.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Smith Travel Research reported that U.S. lodging industry RevPAR increased 7.1% for the three months ended September 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Management expectation stated in P4. The 2025 industry decline is stated in P3. The link between the two is inferred.",
+    "claim": "For RevPAR growth to continue, U.S. industry demand must keep rising. Management expects this for the rest of 2026, but industry RevPAR fell 0.3% in 2025.",
+    "facts": [
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "We expect that during the remainder of 2026, lodging industry RevPAR will continue to increase."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4, F3 and P6. That the uplift fades is inferred from the timing of the March purchase.",
+    "claim": "The six-hotel portfolio acquired in 2026 is a second driver. It contributed $7.2 million of Q3 revenue, cash paid for hotel acquisitions was 92,458 (table in thousands), and the portfolio's RevPAR rose 10 percent to $132.",
+    "facts": [
+     "P4",
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "the acquisition of six hotels in 2026, which contributed $7.2 million of revenue during the three months ended September 30, 2026",
+     "RevPAR for the recently acquired six-hotel portfolio jumped 10 percent to $132, easily besting underwriting expectations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Debt and leverage figures are stated in P4. The guidance assumption is stated in P6. The revolver draw is shown in F1. The funding link is inferred.",
+    "claim": "Further acquisition-led growth needs capital capacity. Total debt was $408.2 million at about 5.87% with leverage at 23.2%, but the current guidance assumes no further acquisitions or financing.",
+    "facts": [
+     "P4",
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "As of September 30, 2026, we have total debt of $408.2 million at a weighted-average interest rate of approximately 5.87%.",
+     "No additional acquisitions, dispositions, debt or equity issuance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Margins and management's attribution are stated in P6. The cost increase is stated in P4. The condition for continuation is inferred.",
+    "claim": "Margin expansion adds to earnings growth: GOP margin rose to 45% from 44% and Adjusted Hotel EBITDA margin rose to 39% from 37%. Management credits expense management.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "through aggressive expense management, especially with regard to labor and productivity"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 (RevPAR table and management quote). The market-concentration risk is inferred.",
+    "claim": "Silicon Valley demand is a concentrated driver. The four hotels there, 18% of LTM EBITDA, grew RevPAR 23% to $174. Continued growth requires that demand to persist.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Accelerating demand at our four Silicon Valley hotels meaningfully increases EBITDA and FFO."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Share counts and repurchase cash flow are stated in F1 and F3. Management's capacity statement is in P6. The per-share effect is inferred.",
+    "claim": "Share repurchases support per-share growth. Common shares outstanding fell to 46,570,867 from 47,708,587, repurchases were 9,476 (table in thousands) in nine months, and management cites balance sheet capacity for buybacks.",
+    "facts": [
+     "F1",
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Our balance sheet is in great condition, so we can add value via acquisitions and/or repurchasing shares."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash flow figures are stated in F3. The role as a funding source is inferred.",
+    "claim": "Operating cash flow was 67,812 (table in thousands) for nine months versus 51,826 a year earlier. It funds capex, development and distributions, so these depend on cash flow staying strong.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Opening year and accretion claim are management statements in P6. The balance sheet amount is in F1. The risks are stated in P2.",
+    "claim": "The Home2 Portland, Maine development is a longer-dated driver. It carries 4,540 (table in thousands) of investment so far, and management says it will open in 2028. It must be completed on time and on budget.",
+    "facts": [
+     "F1",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "Looking a bit further out on the timeline, our Home2 Portland, Maine development will open in 2028 and immediately be accretive.",
+     "We cannot provide assurance that development projects will be completed on time or within budget."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in P4 (date and portfolio); cash amount stated in F3 and F1; the link to revolver funding is inferred",
+    "claim": "The company acquired a portfolio of six hotels. The nine-month cash flow statement shows 92,458 (table in thousands) paid for acquisition of hotel properties, and the revolving credit facility balance is 65,000 (table in thousands) at quarter-end.",
+    "facts": [
+     "P4",
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "We acquired a portfolio of six hotels on March 3, 2026, which were located in Paducah, KY, Joplin, MO, and Effingham, IL."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P3",
+    "claim": "The company sold one hotel in Billerica, MA. The sale is described as reducing revenue in the 2026 comparison periods.",
+    "facts": [
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "We sold one hotel located in Billerica, MA on December 23, 2025."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in P7",
+    "claim": "The Board of Trustees appointed a new trustee, William P. (Liam) Brown, a retired Marriott Group President, effective immediately.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "On September 10, 2026, the board of trustees (the \u201cBoard of Trustees\u201d) of Chatham Lodging Trust (the \u201cCompany\u201d), upon the recommendation of the Nominating and Corporate Governance Committee, appointed Mr. William P. (Liam) Brown to the Board of Trustees, effective immediately."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Balance-sheet and debt figures are stated in F1 and P4; the rupture mechanism is inferred from the risk-factor language in P2.",
+    "claim": "Borrowing rose and cash fell in 2026: the revolver balance is $65,000 (table in thousands) against 0 at Dec 31, 2025, cash dropped to $14,021 from $24,435, and total debt is $408.2 million at about 5.87%. Floating-rate debt could squeeze cash if rates or earnings turn.",
+    "facts": [
+     "F1",
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "As of September 30, 2026, we have total debt of $408.2 million at a weighted-average interest rate of approximately 5.87%.",
+     "Interest expense on our term loan and revolving credit facility is based on floating interest rates."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "RevPAR and seasonality facts are stated in P4, P3 and P1; the reversal risk is inferred.",
+    "claim": "The Q3 2026 improvement leans on a strong industry rebound: same-property RevPAR rose 8.3% while industry RevPAR rose 7.1%, after FY2025 same-property RevPAR fell 0.1%. If industry demand fades or seasonality bites, revenue and margins could revert.",
+    "facts": [
+     "P4",
+     "P3",
+     "P1"
+    ],
+    "quotes": [
+     "We expect that during the remainder of 2026, lodging industry RevPAR will continue to increase.",
+     "Generally, we expect that we will have lower revenue, operating income and cash flow in the first and fourth quarters and higher revenue, operating income and cash flow in the second and third quarters."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Concentration and conflict risk are stated in P2 and P1; any impact is inferred.",
+    "claim": "All 33 hotels at Dec 31, 2025 were managed by IHM, which is owned by the CEO, so a problem at IHM or a conflict over terms would hit operations broadly. The 10-K flags this concentration and conflict risk.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "As of December 31, 2025, IHM managed all 33 of our hotels."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Guidance and nine-month figures are stated in P6 and F2; the gap between them is an inference and the cause is not stated.",
+    "claim": "Full-year 2026 guidance for net income (loss) to common shares is $(0.4)M - $0.7M, a range that looks low against nine-month net income attributable to common shareholders of $5,198 (table in thousands). GAAP earnings to common holders are thin, and the company says it does not undertake to update guidance.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "Net income (loss) to common shares | $(0.4)M - $0.7M",
+     "The company provides guidance but does not undertake to update it for any developments in its business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Spend and performance are stated in F3 and P6; the risk factor is stated in P2; the effect on results is inferred.",
+    "claim": "Expansion adds execution risk: the company spent 92,458 (table in thousands) on hotel acquisitions in nine months of 2026 and has a Home2 Portland, Maine development under way. The 10-K lists development timing and cost risks.",
+    "facts": [
+     "F3",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "Hotel development is subject to timing, cost, and other risks.",
+     "RevPAR for the recently acquired six-hotel portfolio jumped 10 percent to $132, easily besting underwriting expectations."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Balance and rate figures are stated in the cited items; the repayment plan is not in the excerpts, so the question is inferred.",
+    "claim": "What are the maturities, floating-rate exposure and covenant headroom of the debt after the revolver went from zero to $65,000 (table in thousands), with total debt of $408.2 million at about 5.87%, and how will the revolver balance be repaid or refinanced?",
+    "facts": [
+     "F1",
+     "F3",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "As of September 30, 2026, we have total debt of $408.2 million at a weighted-average interest rate of approximately 5.87%.",
+     "Interest expense on our term loan and revolving credit facility is based on floating interest rates."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The cash outflow and revenue contribution are stated; the total price, net operating income and any non-cash consideration are not in the excerpts, so the question is inferred.",
+    "claim": "What was the total price and consideration for the six-hotel portfolio acquired earlier this year, given 92,458 (table in thousands) of cash paid for acquisitions and $7.2 million of third-quarter revenue from those hotels?",
+    "facts": [
+     "F3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We acquired a portfolio of six hotels on March 3, 2026, which were located in Paducah, KY, Joplin, MO, and Effingham, IL."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Both sets of figures are stated in the items; the reason for the difference is not, so this is inferred from comparing them.",
+    "claim": "Full-year guidance for net income to common shares of $(0.4)M to $0.7M, and RevPAR of $145 to $146, sit below the nine-month results of 5,198 (table in thousands) and RevPAR of $149; what explains the gap, and is it a different hotel basis, seasonality or conservatism?",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Net income (loss) to common shares | $(0.4)M - $0.7M",
+     "RevPAR | $145 - $146"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The figures are stated in the items; the cause and persistence of the demand are not, so the question is inferred.",
+    "claim": "Is the third-quarter RevPAR acceleration, led by Silicon Valley (18% of LTM EBITDA, RevPAR up 23% to $174) and an industry RevPAR rise of 7.1%, durable, or driven by temporary demand?",
+    "facts": [
+     "P3",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "RevPAR for the four Silicon Valley hotels accelerated 23 percent to $174."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The 10-K states that IHM managed all hotels as of year-end 2025; the arrangement for the 2026 acquisitions is not in the excerpts, so this is inferred.",
+    "claim": "Do the six acquired hotels sit under IHM, the CEO-owned manager, and what explains management fees paid to related parties of 3,064 (table in thousands) against 2,600 a year earlier, up 17.8%?",
+    "facts": [
+     "F2",
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "The management of the hotels in our portfolio is currently concentrated in one hotel management company."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Repurchase and share-count figures are stated; future priorities are not, so the question is inferred.",
+    "claim": "How will capital be allocated between buybacks, acquisitions and debt reduction, given 9,476 (table in thousands) of share repurchases, common shares down to 46,570,867 from 47,708,587, and guidance that assumes no further acquisitions or issuance?",
+    "facts": [
+     "F1",
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "Our balance sheet is in great condition, so we can add value via acquisitions and/or repurchasing shares.",
+     "No additional acquisitions, dispositions, debt or equity issuance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Spend and opening-year figures are stated; the full budget and the basis for 'accretive' are not, so the question is inferred.",
+    "claim": "What is the total budget, funding source and timing risk of the Home2 Portland, Maine development, of which 4,540 (table in thousands) is on the balance sheet and 3,762 was spent in the nine months?",
+    "facts": [
+     "F1",
+     "F3",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "Hotel development is subject to timing, cost, and other risks.",
+     "Looking a bit further out on the timeline, our Home2 Portland, Maine development will open in 2028 and immediately be accretive."
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "CLDT",
+ "valuation": null,
+ "valued": false,
+ "verdict": "NO_CALL",
+ "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+}

@@ -1,9 +1,9 @@
 {
- "count": 111,
+ "count": 112,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T08:08:01Z",
- "list_covered": 109,
+ "generated_at": "2026-11-17T08:13:49Z",
+ "list_covered": 110,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -624,6 +624,28 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "share count does not reconcile with filed EPS"
+  },
+  "CLDT": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 60,
+   "claims_supported": 54,
+   "date": "2026-11-17T08:08:12Z",
+   "family": "family_not_built",
+   "flags": [
+    "The company acquired a portfolio of six hotels. The nine-month cash flow statement shows 92,458 (table in thousands) paid for acquisition of hotel properties, and the revolving credit facility balance is 65,000 (table in thousands) at quarter-end.",
+    "The Board of Trustees appointed a new trustee, William P. (Liam) Brown, a retired Marriott Group President, effective immediately."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "CMRE": {
    "alpha_pts": null,
@@ -3429,7 +3451,7 @@
  "verdict_counts": {
   "AVOID": 25,
   "BUY": 15,
-  "NO_CALL": 66,
+  "NO_CALL": 67,
   "WATCH": 5
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
