@@ -1,14 +1,37 @@
 {
- "count": 133,
+ "count": 134,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T13:44:23Z",
- "list_covered": 127,
+ "generated_at": "2026-11-17T13:49:24Z",
+ "list_covered": 128,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
  "schema": "gemini_c_site_v1",
  "tickers": {
+  "AAUC": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 63,
+   "claims_supported": 59,
+   "date": "2026-11-17T13:44:38Z",
+   "family": "commodity",
+   "flags": [
+    "Allied Gold announced that first gold was poured at its Kurmuk Mine in Ethiopia, which it calls its newest producing mine.",
+    "With its Q3 2026 results, Allied Gold reported that ore had been introduced into the plant at Kurmuk and that the mine was in production, with a ramp-up expected through year-end.",
+    "Allied Gold stated that shareholder returns are expected to include a base dividend and a normal course issuer bid for up to 10% of the public float, subject to TSX approval and described as previously disclosed."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
   "ADT": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -4022,7 +4045,7 @@
  "verdict_counts": {
   "AVOID": 28,
   "BUY": 16,
-  "NO_CALL": 83,
+  "NO_CALL": 84,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."

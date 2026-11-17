@@ -1,0 +1,742 @@
+{
+ "alpha_pts": null,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 63,
+ "claims_supported": 59,
+ "date": "2026-11-17T13:44:38Z",
+ "family": "commodity",
+ "flags": [
+  "Allied Gold announced that first gold was poured at its Kurmuk Mine in Ethiopia, which it calls its newest producing mine.",
+  "With its Q3 2026 results, Allied Gold reported that ore had been introduced into the plant at Kurmuk and that the mine was in production, with a ramp-up expected through year-end.",
+  "Allied Gold stated that shareholder returns are expected to include a base dividend and a normal course issuer bid for up to 10% of the public float, subject to TSX approval and described as previously disclosed."
+ ],
+ "in_code_book": false,
+ "ke": null,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+ "qwen_book": null,
+ "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "Inferred from the production and sales table and the per-ounce revenue metric. The filings shown do not state in words that revenue is gold sales.",
+    "claim": "Allied Gold mines gold, and its revenue follows the ounces it sells at market prices. In the third quarter it produced 91,195 ounces and sold 92,532 ounces.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "The Company produced 91,195 ounces of gold during the quarter"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the quarterly production table and the first-gold release.",
+    "claim": "Output comes from three producing mines, Sadiola, Bonikro and Agbaou, which produced 42,291, 28,644 and 20,260 ounces in the third quarter. A fourth mine, Kurmuk in Ethiopia, has just poured its first gold.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "first gold was poured at its Kurmuk Mine"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the per-mine tables and the table of contents. The segment note text was omitted.",
+    "claim": "The company reports results mine by mine (Sadiola, Bonikro, Agbaou), and the interim financial statements contain an operating segments note. What the reportable segments are is not shown in the packet.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "3 | OPERATING SEGMENTS | 9"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated figures in the MD&A tables. The causal link is inferred.",
+    "claim": "Realised gold price is the main revenue driver. Average revenue per ounce for at-market sales was $4,293 against $3,468 a year earlier in the third quarter, and $4,480 against $3,146 over nine months. Nine-month ounces sold fell to 286,380 from 304,722, yet nine-month revenue rose to $1,118,480 from $904,004 (revenue table in thousands).",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Average revenue per ounce for at-market sales(1)* | $4,293 | $3,468 | $4,480 | $3,146"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the MD&A table. The margin interpretation is inferred.",
+    "claim": "Unit costs rose in the third quarter compared with a year earlier. Cost of sales per ounce sold was $2,416 against $2,087, cash costs were $2,181 against $1,911, and all-in sustaining costs were $2,378 against $2,092.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Cash Costs(1) | $2,181 | $1,911 | $2,050 | $1,834"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Mine-level costs are stated. The mix effect is inferred.",
+    "claim": "Costs differ widely by mine. Third-quarter all-in sustaining cost per ounce was $2,876 at Sadiola, $1,670 at Bonikro and $2,384 at Agbaou. Management calls Kurmuk its lowest-cost operation, so its ramp-up should lower the blended cost.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "Bonikro Gold Mine | 28,644 | 30,094 | $1,747 | $1,411 | $1,670"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the income statement.",
+    "claim": "In 2025 revenue was 1,331,824 against 730,382, cost of sales excluding depreciation was 753,539, and gross profit was 506,542 (table in thousands). General and administrative expense was 120,794 (table in thousands). The main cost lines are mine operating costs, then administration.",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Revenue | $ 1,331,824 | $ 730,382"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the income statement. The tax mechanism is inferred.",
+    "claim": "Income taxes take most of the pre-tax profit. In 2025 earnings before income tax were 237,353, current tax was (175,001), deferred tax was (59,045), and net earnings were only 3,307 (table in thousands).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [
+     "Net earnings (loss) | 3,307 | (119,551)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Line items are stated. The mechanism is inferred from the line names.",
+    "claim": "Part of the funding comes from streaming arrangements. The 2025 cash flow includes 181,250 of proceeds from streaming arrangements and 16,395 of non-cash revenue from stream arrangements (table in thousands). The balance sheet carries deferred revenue of 329,373 (table in thousands).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [
+     "Proceeds from streaming arrangements | 181,250 | 170,950"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement.",
+    "claim": "The business is capital intensive. In 2025 operating cash flow was 513,979, additions to mineral property, plant and equipment were (408,136), and equity offerings raised 206,390 (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash generated from operating activities | 513,979 | 110,814"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated as management expectations in the releases.",
+    "claim": "Management expects revenue growth mainly from volume. It expects consolidated production of 400,000 to 435,000 ounces in 2026, rising to 615,000 to 670,000 in 2027 as Kurmuk ramps up, and plans a base dividend starting in 2027.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Returns are expected to include a base dividend starting in 2027"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated attribution lines. Which mines are partly owned is not shown.",
+    "claim": "Some mines are not wholly owned. Earnings attributable to non-controlling interests were 55,154 in 2025 and 27,410 over nine months in the current year. A share of mine profit therefore goes to minority holders (table in thousands).",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "Non-controlling interests | 55,154 | (3,919)"
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "Stated in the income statement; the mechanism is inferred.",
+    "claim": "Scale grew sharply in the latest fiscal year: revenue was 1,331,824 against 730,382 the year before, and gross profit was 506,542 against 220,234 (table in thousands, USD).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the statement; the mechanism is inferred from the line items.",
+    "claim": "Little of the gross profit reached shareholders: net earnings were only 3,307, after current income tax expense of 175,001 and deferred income tax expense of 59,045. The loss attributable to shareholders was (51,847). Tax burden and non-controlling interests are a drag on returns (table in thousands, USD).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the interim MD&A and results release.",
+    "claim": "Production is rising at the three operating mines. Third-quarter production was 91,195 ounces against 87,020 a year earlier, and nine-month production was 284,640 against 262,077. The company says the fourth quarter is expected to be its highest-producing quarter of the year.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "the fourth quarter is expected to be the Company\u2019s highest-producing quarter of the year"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated; the price-taker reading is inferred.",
+    "claim": "Margins rest on the gold price. In the third quarter AISC was $2,378 per ounce sold against average revenue per ounce for at-market sales of $4,293. A year earlier AISC was $2,092 against $3,468. The company's cost per ounce rose, and the spread held because the realized price rose more.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Cost figures are stated; the weak-point reading is inferred.",
+    "claim": "Cost position differs by mine. In the third quarter Sadiola, the largest producer by ounces, had AISC of $2,876 per ounce sold. Bonikro had $1,670 and Agbaou $2,384. Management refers to a return to more normal operations at Sadiola, which suggests that mine is the weak point in the cost position.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "a return to more normalized operations at Sadiola"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the company releases; these are management expectations.",
+    "claim": "Kurmuk is the main source of expected competitive improvement. First gold was poured and the mine is now in production. Management calls it the lowest-cost operation in the portfolio and guides consolidated production for next year to 615,000 to 670,000 ounces, about 54% above the midpoint of the current-year outlook.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "As the lowest-cost operation in the portfolio, Kurmuk is expected to drive a disproportionate increase in cash flow relative to production.",
+     "The mine is now in production and will ramp up into the end of the year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated as a management target.",
+    "claim": "The company targets a longer-term step up to about 800,000 ounces a year by 2029, driven by the Sadiola expansion. The packet gives no evidence on how this would be funded or delivered.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Intercepts are stated in the release; the implication is inferred.",
+    "claim": "Exploration at Kurmuk points to possible mine-life extension. Drill hole ASDD227 at Ashashire returned 13.86 metres at 10.07 g/t gold. The company says the objective is to sustain about 300,000 ounces a year beyond the first four years.",
+    "facts": [
+     "P5",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the cash flow statement and balance sheet; the funding reading is inferred.",
+    "claim": "Operations largely funded the growth spending in the latest fiscal year. Net cash from operating activities was 513,979 against additions to mineral property, plant and equipment of 408,136. Cash rose to 479,777 from 224,994, and proceeds from offerings were also 206,390 (table in thousands, USD).",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet; the packet contains no interim balance sheet.",
+    "claim": "Near-term balance sheet pressure is a threat. At year end, current liabilities of 988,564 exceeded current assets of 763,709. They included a derivative financial liability of 167,260, income tax payable of 177,122 and borrowings of 154,312 (table in thousands, USD).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the cash flow and balance sheet lines; the terms are not in the packet.",
+    "claim": "Streaming arrangements supplied cash but add obligations. Proceeds from streaming arrangements were 181,250, and non-current deferred revenue rose to 329,373 from 164,540 (table in thousands, USD).",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Amounts are stated; the threat reading is inferred.",
+    "claim": "Government and legal matters weigh on cash. The company paid 42,198 for settlement of Mali matters, after 68,000 the year before (table in thousands, USD). The third-quarter adjustment for contingencies, legal and other was 12,953 (table in thousands).",
+    "facts": [
+     "F3",
+     "P1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the interim MD&A; the predictability concern is inferred from the stated purpose.",
+    "claim": "The company reviewed its resource models and mining design parameters, with adjustments on mining selectivity and dilution. This indicates a need to improve short-term operational predictability.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "These adjustments were intended to strengthen ore control practices and improve short-term operational predictability."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in F1; the comparison of the totals is read directly from the printed lines.",
+    "claim": "Cash rose to 479,777 (table in thousands of USD) from 224,994 at the prior year-end. Total current assets were 763,709, below total current liabilities of 988,564 at the 40-F balance sheet date.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total current liabilities"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1; the reading of the mechanism is inferred from the line items.",
+    "claim": "Three current liability lines grew sharply: derivative financial liability was 167,260 against 2,594 a year earlier, income tax payable was 177,122 against 72,060, and borrowings were 154,312 against 96,356 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Income tax payable"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1; the comparison is read from the printed totals without new calculations.",
+    "claim": "Total liabilities were 1,619,000 against total equity of 504,679 and total assets of 2,123,679, up from 903,557, 416,297 and 1,319,854 a year earlier (table in thousands). Liabilities grew much faster than equity.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Total liabilities"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the absence of a non-current borrowings line in F1; the notes that would confirm it are not in the packet.",
+    "claim": "Financial debt on the balance sheet is shown only as current borrowings of 154,312 (96,356 a year earlier). No non-current borrowings line is printed. Lease obligations are 2,999 current and 12,463 non-current (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Borrowings"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balances are stated in F1; the mechanism is inferred from the cash flow line 'Non-cash revenue from stream arrangements' in F3.",
+    "claim": "Non-current deferred revenue was 329,373 against 164,540 a year earlier (table in thousands). Deferred and contingent consideration is 30,117 current and 44,906 non-current. These are sizeable obligations outside bank debt.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Deferred revenue"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F3.",
+    "claim": "Net cash from operating activities was 513,979 against 110,814 the year before. Cash spent on additions to mineral property, plant and equipment was 408,136, and net cash used in investing was 432,067 (table in thousands). Operating cash flow covered investing outflow with a net increase in cash of 266,769.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash generated from operating activities"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Amounts stated in F3; the quality judgment is inferred from the line's placement and from the deferred revenue balance in F1.",
+    "claim": "Part of operating cash flow comes from stream financing: proceeds from streaming arrangements of 181,250 (170,950 a year earlier) are inside operating cash flow before working capital of 561,513 (table in thousands). Operating cash flow from sales alone is therefore lower than the headline.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Proceeds from streaming arrangements"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in F1, F2 and F3; the timing logic is inferred.",
+    "claim": "Cash taxes paid were 33,321 against an income tax expense of 234,046, and the Mali settlement cost 42,198 in cash (table in thousands). Net earnings were only 3,307. Taxes accrued but unpaid flatter operating cash flow, and the income tax payable balance rose to 177,122.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Income tax paid",
+     "Settlement of Mali matters"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F3.",
+    "claim": "Growth spending was partly funded by equity: proceeds from offerings were 206,390 (162,117 the year before) against offering transaction costs of 10,083, and net financing cash flow was 184,857 (table in thousands). A dividend of 9,085 was paid to non-controlling interests.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Proceeds from offerings"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Amounts stated in F1; the coverage comparison is inferred, and the debt terms are not in the evidence.",
+    "claim": "On refinancing, the packet shows 154,312 of current borrowings (table in thousands) against cash of 479,777, so year-end cash exceeded debt due within a year. The packet does not give maturity dates, facility terms or covenants for the debt.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [
+     "Borrowings"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P1; the interpretation of the tax effect is inferred.",
+    "claim": "The latest interim report shows continued profitability, with nine-month revenue of $1,118,480, gross profit excluding DDA of $534,855 and net earnings of $35,460 (table in thousands). Net earnings are small next to revenue because of a large current income tax expense.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Current income tax expense"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P2 as forward-looking management expectation; no outcome is in the evidence.",
+    "claim": "Management expects the Kurmuk mine, which has poured first gold, to drive a significant increase in production and free cash flow. It lists a base dividend from 2027 and a normal course issuer bid among the capital allocation priorities. This is a management expectation, not a result.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "and is expected to drive a significant increase in production and free cash flow."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the cited items as company expectations.",
+    "claim": "Kurmuk, the newest mine in Ethiopia, has poured first gold. The company targets 25,000 to 35,000 gold ounces there in 2026 and 240,000 to 270,000 in 2027. This is the main new source of volume in the evidence.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Kurmuk is targeting production of 25,000 to 35,000 gold ounces in 2026, increasing sequentially month over month to 55,000 to 65,000 gold ounces in the first quarter of 2027, 240,000 to 270,000 gold ounces for full-year 2027 and approximately 300,000 gold ounces in 2028."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2026-11-09 release; whether the milestones are met is not shown.",
+    "claim": "For the Kurmuk ramp-up to continue, the remaining power supply infrastructure must be completed and the full haulage fleet mobilized in November, and recoveries must rise to design levels by early 2027.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "As the installation of the remaining power supply infrastructure completes this month, providing full power thereafter, and the full haulage fleet mobilizes (also expected this month), the Company anticipates a significant ramp-up to reach commercial production by the end of the year and nameplate capacity early in 2027.",
+     "Recoveries are expected to increase progressively through the end of 2026 and reach design levels by early 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2026-11-04 release; the arithmetic of the components is the company's own.",
+    "claim": "Company-wide production is guided to rise from 400,000 to 435,000 gold ounces in 2026 to 615,000 to 670,000 in 2027, about 54% above the midpoint of the 2026 outlook. For this to hold, the operating mines must stay at 375,000 to 400,000 ounces and Kurmuk must deliver its 240,000 to 270,000.",
+    "facts": [
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "total production is forecast to increase to 615,000 to 670,000 ounces, approximately 54% above the midpoint of the 2026 production outlook"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Production figures are stated in the cited items. The need for Sadiola to normalize is stated by the company.",
+    "claim": "The operating mines are producing more. Third-quarter production was 91,195 ounces against 87,020 a year earlier, and nine-month production was 284,640 against 262,077. Bonikro rose to 28,644 from 21,953 while Agbaou fell to 20,260 from 22,893. Continued growth needs a return to more normalized operations at Sadiola and continued momentum at the CDI Complex.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "a return to more normalized operations at Sadiola"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated as a company target; the conditions beyond those named are inferred from the absence of detail.",
+    "claim": "A longer-term driver is Sadiola's expansion. The company targets about 800,000 gold ounces a year of sustainable production by 2029. This needs the Sadiola expansion to be completed and continued growth at the CDI Complex.",
+    "facts": [
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "Beyond 2027, the Company is targeting approximately 800,000 gold ounces per year of sustainable production by 2029 driven by Sadiola\u2019s expansion."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the statements and the interim report; the split of the revenue change between price and volume is not given for the full year and is inferred only for 2026.",
+    "claim": "Revenue and gross profit grew sharply in 2025: revenue was 1,331,824 against 730,382 and gross profit 506,542 against 220,234 (table in thousands). In 2026, nine-month revenue was 1,118,480 against 904,004 (table in thousands). The higher gold price is a visible part of this, since average revenue per ounce for at-market sales was $4,293 in the third quarter against $3,468 and $4,480 for nine months against $3,146. Continued growth in revenue needs gold prices to stay high.",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 2025 financial statements; the reading of how the funding works is inferred from the line items.",
+    "claim": "Growth is being funded by much higher operating cash flow plus outside capital. Net cash generated from operating activities was 513,979 against 110,814, and additions to mineral property, plant and equipment were 408,136 (table in thousands). Financing added 206,390 from offerings and 181,250 from streaming arrangements (table in thousands). To continue, operating cash flow must keep covering heavy investment.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Objectives are stated by the company. Whether they are met is not shown.",
+    "claim": "Exploration at Kurmuk aims to lengthen mine life and keep output near 300,000 ounces a year beyond the first four years. This requires drilling results to turn into added mineral inventory.",
+    "facts": [
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "Recent exploration results at Ashashire, Dish Mountain and the Tsenge Trend, reported on October 6, 2026, continue to advance the objective of sustaining average annual production of approximately 300,000 gold ounces beyond the initial first four years of operations, as well as increasing mine life and overall mineral inventory."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the cited statements; the link between tax and earnings is inferred from the line items.",
+    "claim": "Earnings are turning positive but depend on keeping costs and taxes in check. Attributable net earnings for nine months were $8,050 (thousands) against a loss of $(28,203), and current income tax expense was $(185,363) against $(75,551). In 2025, net earnings were 3,307 against a loss of (119,551) (table in thousands).",
+    "facts": [
+     "P1",
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item (company press release, 6-K)",
+    "claim": "Allied Gold announced that first gold was poured at its Kurmuk Mine in Ethiopia, which it calls its newest producing mine.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "first gold was poured at its Kurmuk Mine (\u201cKurmuk\u201d) in Ethiopia"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (company results release, 6-K)",
+    "claim": "With its Q3 2026 results, Allied Gold reported that ore had been introduced into the plant at Kurmuk and that the mine was in production, with a ramp-up expected through year-end.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "The mine is now in production and will ramp up into the end of the year."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; the original announcement date is not in the evidence",
+    "claim": "Allied Gold stated that shareholder returns are expected to include a base dividend and a normal course issuer bid for up to 10% of the public float, subject to TSX approval and described as previously disclosed.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Returns are expected to include a base dividend starting in 2027 and a normal course issuer bid for up to 10% of the public float, subject to TSX approval, as previously disclosed."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Inferred from the F1 balance sheet and F3 cash flow statement; no filing text on liquidity risk is in the packet.",
+    "claim": "At year-end 2025 current liabilities of 988,564 exceeded current assets of 763,709 (table in thousands). Current liabilities included a derivative financial liability of 167,260, income tax payable of 177,122 and borrowings of 154,312.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P3 (outlook and weighting); the risk to the range is inferred.",
+    "claim": "The 2026 production outlook of 400,000 to 435,000 ounces is weighted to the fourth quarter. It depends on Kurmuk contributing 25,000 to 35,000 ounces and on a Sadiola return to normal operations. Nine-month production was 284,640 ounces.",
+    "facts": [
+     "P3",
+     "P2"
+    ],
+    "quotes": [
+     "the fourth quarter is expected to be the Company\u2019s highest-producing quarter of the year."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Timeline stated in P2 and P4; the delay risk is inferred from items still described as pending.",
+    "claim": "The growth case rests on Kurmuk ramping up. First gold has been poured, but the remaining power supply infrastructure and the full haulage fleet were still to be completed in November. Commercial production is targeted by year-end, with nameplate capacity and design recoveries in early 2027.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "Recoveries are expected to increase progressively through the end of 2026 and reach design levels by early 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in the P1 table; the margin-squeeze mechanism is inferred.",
+    "claim": "Unit costs rose year over year. In Q3, AISC was $2,378 per ounce sold against $2,092 a year earlier. Revenue per ounce for at-market sales was $4,293 against $3,468.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in F2 and F3; the link to continuing regulatory risk is inferred.",
+    "claim": "The tax burden and Mali legacy matters weigh heavily on earnings and cash. 2025 current income tax expense was 175,001 against 87,517, and Mali settlement payments of 42,198 and 68,000 are shown in operating cash flow (table in thousands). Net earnings were only 3,307 on pre-tax earnings of 237,353.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Figures stated in F1, F2 and F3; the underlying instrument is not identified in the evidence.",
+    "claim": "The derivative financial liability rose to 167,260 from 2,594 (table in thousands). The 2025 loss on revaluation of financial instruments was 69,391.",
+    "facts": [
+     "F1",
+     "F2",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Figures stated in F1 and F3; the effect on future cash flow is inferred.",
+    "claim": "Operating cash flow of 513,979 includes proceeds from streaming arrangements of 181,250 (table in thousands). Deferred revenue grew to 329,373 from 164,540.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "stated in P2 and P4 as management expectations; whether they are met is not in the evidence",
+    "claim": "Will Kurmuk reach commercial production by the end of 2026 and produce the targeted 25,000 to 35,000 ounces in 2026, with 55,000 to 65,000 ounces in Q1 2027? First gold was poured on Nov 9, 2026, but ramp-up still depends on remaining power infrastructure and the haulage fleet.",
+    "facts": [
+     "P2",
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "the Company anticipates a significant ramp-up to reach commercial production by the end of the year and nameplate capacity early in 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the Dec 31, 2025 balance sheet; the interim balance sheet is omitted from the excerpt",
+    "claim": "How have the large current liabilities at Dec 31, 2025 changed since year-end? Current liabilities of 988,564 (table in thousands) exceeded current assets of 763,709, with a derivative financial liability of 167,260 and income tax payable of 177,122. The Sept 30, 2026 balance sheet is not in the packet.",
+    "facts": [
+     "F1",
+     "P1"
+    ],
+    "quotes": [
+     "Total current liabilities | 988,564 | 485,003"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 for the figures; the cost trajectory is a management expectation, not shown by the evidence",
+    "claim": "Will per-ounce costs fall back once Sadiola normalizes and Kurmuk adds low-cost ounces? Q3 2026 AISC was $2,378 per ounce sold versus $2,092 a year earlier, while cost of sales per ounce rose to $2,416 from $2,087.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "Total | 91,195 | 92,532 | $2,416 | $2,181 | $2,378"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the 2025 cash flow statement and balance sheet; the stream terms are not in the packet",
+    "claim": "How much of 2025 operating cash flow came from non-recurring stream proceeds, and how repeatable is it? Net earnings were 3,307 (table in thousands) against operating cash flow of 513,979, and operating cash flow includes proceeds from streaming arrangements of 181,250 while deferred revenue stood at 329,373.",
+    "facts": [
+     "F2",
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Proceeds from streaming arrangements | 181,250 | 170,950"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2; the amount, timing and approval are not given",
+    "claim": "When will the base dividend start, at what amount, and will TSX approve the normal course issuer bid for up to 10% of the public float? The release says returns are expected, subject to TSX approval, with the dividend starting in 2027.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "Returns are expected to include a base dividend starting in 2027 and a normal course issuer bid for up to 10% of the public float, subject to TSX approval, as previously disclosed."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the adjusted earnings reconciliation; the causes are not given in the excerpt",
+    "claim": "What drove Q3 2026 other losses of 28,826 (table in thousands), and are the related transaction and business development costs of 13,467 and contingencies, legal and other of 12,953 one-off? The excerpt gives no composition.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Other losses | (28,826) | (4,363) | (37,551) | (21,856)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the cash flow statement; the contingencies text is omitted",
+    "claim": "Are further cash settlements of Mali matters expected? Cash flow shows settlements of 42,198 (table in thousands) in 2025 and 68,000 in 2024, but the contingencies section is not in the packet.",
+    "facts": [
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "Settlement of Mali matters | (42,198) | (68,000)"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "AAUC",
+ "valuation": null,
+ "valued": false,
+ "verdict": "NO_CALL",
+ "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+}
