@@ -1,40 +1,51 @@
 {
- "alpha_pts": null,
+ "alpha_pts": 18.664450220855947,
  "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": 64,
- "claims_supported": 61,
- "date": "2026-11-17T12:40:21Z",
+ "claims": 90,
+ "claims_supported": 90,
+ "date": "2026-11-17T23:28:29Z",
+ "equity_value": 3223798793.85443,
  "family": "operating",
+ "far_from_price": false,
+ "filed_shares": 34700000.0,
  "flags": [
-  "The company recorded impairment charges of $173.8 million, up from $3.9 million the year before.",
-  "Sonic acquired Harley-Davidson dealerships for its Powersports Segment, expected to add about $100 million of annualized revenue.",
-  "A cybersecurity incident at CDK Global suspended systems the company used. The company estimates it cut reported pre-tax income by about $47.2 million."
+  "Sonic acquired five Harley-Davidson dealerships in April 2026, which the company expects to add about $100 million of annualized revenue to its Powersports Segment.",
+  "The company recorded impairment charges of approximately $173.8 million in 2025, mainly on indefinite-lived franchise assets in the Franchised Dealerships Segment.",
+  "The Board approved a quarterly cash dividend of $0.41 per share, payable January 15, 2027 to holders of record on December 15, 2026."
  ],
  "in_code_book": false,
- "ke": null,
+ "ke": 0.10608180622416283,
+ "market_cap_at_publish": 1837843936,
  "model": "claude-sonnet-5-5",
- "no_value_reason": "debt is filed but interest expense is not",
+ "no_value_reason": null,
+ "price_at_publish": 58.13,
  "qwen_book": null,
- "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
- "source": "screener list refresh",
+ "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+ "seed_base": {
+  "1000": 92.90486437620837,
+  "3000": 92.90486437620837
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
+ "source": "on request (no-call fix rerun)",
  "tasks": {
   "business_model": [
    {
-    "basis": "stated in the 10-K Item 1 and repeated in the 10-Q MD&A",
-    "claim": "Sonic is a US automotive retailer that reports three segments: Franchised Dealerships, EchoPark (pre-owned specialty retail) and Powersports.",
+    "basis": "stated in the cited items (P4 overview; P1 describes the same three segments)",
+    "claim": "Sonic is one of the largest U.S. automotive retailers. It reports three segments (Franchised Dealerships, EchoPark, Powersports) and operated 108, 18 and 20 stores respectively at the latest quarter-end.",
     "facts": [
      "P1",
      "P4"
     ],
     "quotes": [
-     "we had three reportable segments as of December 31, 2025: (1) the Franchised Dealerships Segment; (2) the EchoPark Segment; and (3) the Powersports Segment"
+     "As of September 30, 2026, we operated 108 stores in the Franchised Dealerships Segment, 18 stores in the EchoPark Segment and 20 stores in the Powersports Segment."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1",
-    "claim": "In 2025 the Franchised Dealerships Segment generated about 85.0% of total revenue, EchoPark about 13.7% and Powersports about 1.3%. Earnings therefore depend mostly on the franchised dealerships.",
+    "basis": "stated in P1 (Item 1)",
+    "claim": "The Franchised Dealerships Segment generates most of the revenue: about 85.0% of total revenue in the last full year, against 13.7% for EchoPark and 1.3% for Powersports.",
     "facts": [
      "P1"
     ],
@@ -44,8 +55,8 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q income statement",
-    "claim": "Revenue comes from five lines. For the nine months to Sep. 30, 2026 these were new vehicles $5,204,200, used vehicles $3,980,500, wholesale vehicles $222,400, parts/service/collision repair $1,590,100 and finance, insurance and other (F&I) $614,100, against total revenues of $11,611,300 (all table in thousands). Vehicle sales are the largest lines.",
+    "basis": "stated in the F2 income statement; the magnitude comparison is the analyst's reading of the printed figures",
+    "claim": "Revenue comes from four main lines. In the latest nine months these were new vehicles 5,204,200, used vehicles 3,980,500, parts/service/collision repair 1,590,100 and F&I 614,100, out of total revenues of 11,611,300 (table in thousands).",
     "facts": [
      "F2"
     ],
@@ -53,66 +64,140 @@
     "support": "supported"
    },
    {
-    "basis": "stated in 10-K MD&A and the 10-Q income statement",
-    "claim": "Customers are mainly retail consumers ('guests') who buy vehicles and services. A small fleet new-vehicle business sells to companies. Nine-month fleet new-vehicle revenue was 65,800 against retail new-vehicle revenue of 5,138,400 (table in thousands).",
+    "basis": "stated in P3; the figures are from the F2 member lines",
+    "claim": "Customers are mainly retail consumers. The company says its new-vehicle strategy focuses on retail rather than fleet sales, and fleet new vehicle revenue is small next to retail new vehicle revenue (65,800 vs 5,138,400, table in thousands, latest nine months).",
     "facts": [
-     "P3",
-     "F2"
+     "F2",
+     "P3"
     ],
     "quotes": [
-     "New vehicle revenues include the sale of new vehicles, including new powersports vehicles, to retail customers, as well as the sale of fleet vehicles to businesses for use in their operations."
+     "Our new vehicle sales strategy focuses on our retail new vehicle sales (as opposed to fleet new vehicle sales)"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K, with the cost comparison read from the 10-Q income statement",
-    "claim": "The Franchised Dealerships Segment sells new and used vehicles, runs service and parts departments, and arranges financing and aftermarket products. Service and parts work, including manufacturer warranty repairs, can be done only at franchised dealerships. Management says Fixed Operations carry a higher gross margin than vehicle sales.",
+    "basis": "stated in P2 and P1",
+    "claim": "New vehicle sales are the largest revenue component and feed the higher-margin businesses. The new vehicle mix is mostly luxury and mid-line import brands, about 86% of new vehicle revenue in the last full year.",
     "facts": [
-     "P1",
-     "P3",
-     "F2"
+     "P2",
+     "P1"
     ],
     "quotes": [
-     "Each of our franchised dealerships offers a fully integrated service and parts department.",
-     "Our Fixed Operations sales carry a higher gross margin than new and used vehicle sales and generally are not as sensitive to economic conditions as new or used vehicle sales."
+     "New vehicle sales are the largest component of our total revenue and lead to sales of higher-margin products and services such as finance, insurance, vehicle protection products and other aftermarket products, and parts and service operations.",
+     "approximately 86% of our total new vehicle revenue was generated by luxury and mid-line import dealerships"
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K Item 1; the absence of a cost line is inferred from the layout of the 10-Q income statement",
-    "claim": "F&I is a commission business. Sonic arranges third-party financing, extended warranties, service contracts and insurance and earns a commission. It accounted for $614,100 of nine-month revenue (table in thousands), and the income statement shows no cost of sales for it.",
-    "facts": [
-     "P1",
-     "F2"
-    ],
-    "quotes": [
-     "We also offer our guests the opportunity to purchase extended warranties, service contracts and other aftermarket products from third-party providers whereby we earn a commission for arranging the contract sale."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K Item 1 and Item 1A",
-    "claim": "The new-vehicle mix is concentrated in luxury and mid-line import brands, which management says typically have higher operating margins and more stable Fixed Operations. In 2025 luxury was 63%, mid-line import 23% and domestic 14% of franchised new-vehicle revenue.",
+    "basis": "stated in P1 (Item 1)",
+    "claim": "The company earns F&I income as commissions and fees for arranging third-party financing, warranties, service contracts and insurance, not by providing these products itself.",
     "facts": [
      "P1"
     ],
     "quotes": [
-     "For 2025, approximately 86% of our total new vehicle revenue was generated by luxury and mid-line import dealerships, which typically have higher operating margins, more stable Fixed Operations departments, lower associate turnover and lower inventory levels than other brand categories."
+     "Each sale of a new or used vehicle gives us an opportunity to provide our guests with third-party financing and insurance options and earn financing fees and insurance and other aftermarket product commissions."
     ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K store table",
-    "claim": "Revenue is geographically concentrated. Texas was 26.2% and California 24.6% of 2025 total revenue.",
+    "basis": "stated in P4",
+    "claim": "Same-store F&I gross profit per retail unit in the franchised segment was $2,630 in the latest quarter, up 2%.",
     "facts": [
-     "P1"
+     "P4"
     ],
-    "quotes": [],
+    "quotes": [
+     "Same store F&I gross profit per retail unit increased $63 per unit, or 2%, to $2,630 per unit during the three months ended September 30, 2026"
+    ],
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-K risk factors",
-    "claim": "Franchise agreements with manufacturers are a core dependency. Without them Sonic cannot buy new vehicles or advertise as an authorized factory service centre. This is also why warranty work stays with franchised dealers.",
+    "basis": "stated in P1 and P4",
+    "claim": "Fixed Operations (parts, service, collision repair) is a steadier, higher-margin business. Same-store Fixed Operations revenue grew 1% in the latest quarter and 3% over nine months, with gross margin of 51.4% in the quarter.",
+    "facts": [
+     "P1",
+     "P4"
+    ],
+    "quotes": [
+     "Our Fixed Operations sales carry a higher gross margin than new and used vehicle sales and generally are not as sensitive to economic conditions as new or used vehicle sales.",
+     "driven primarily by increased service capacity as a result of additional technician headcount, and higher parts and labor costs that were passed along to consumers"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P6",
+    "claim": "EchoPark sells used vehicles through pre-owned specialty retail stores and arranges F&I, with no customer-facing repair services. Its latest-quarter revenue was $596.0 million, up 14%, on 22% higher retail used unit volume. Segment income was $2.0 million, down from $2.6 million a year earlier.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "The EchoPark Segment sells used cars and light trucks and arranges third-party F&I product sales for our guests in pre-owned vehicle specialty retail locations and does not offer customer-facing Fixed Operations services."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1 and P8; the annualized revenue figure is a company expectation",
+    "claim": "The Powersports Segment sells new and used motorcycles, personal watercraft and all-terrain vehicles, plus service and F&I. It is small (1.3% of revenue in the last full year) but growing by acquisition: five Harley-Davidson dealerships bought in April are expected to add about $100 million of annualized revenue.",
+    "facts": [
+     "P1",
+     "P8"
+    ],
+    "quotes": [
+     "is expected to add approximately $100 million in annualized revenue to Sonic's Powersports Segment"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4",
+    "claim": "Franchised-segment new vehicle revenue is driven by unit volume and gross profit per unit. Same-store retail new vehicle revenue fell 7% in the latest quarter on a 7% drop in units, and new vehicle days' supply rose to 65 from 51.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Same store retail new vehicle revenue decreased 7% during the three months ended September 30, 2026, driven by a 7% decrease in retail new vehicle unit sales volume."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6; the figures are from F2",
+    "claim": "Segment mix shifts offset each other. The CEO says growth in EchoPark and Powersports offset declines in Franchised Dealerships. Latest-quarter revenue was 3,988,800 against 3,973,800 a year earlier, while net income was 41,100 against 46,800 (table in thousands).",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "revenue and gross profit growth in our EchoPark and Powersports segments offset declines in our Franchised Dealerships segment"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in F2 and P6; the 75.6% figure is printed in P6",
+    "claim": "The largest operating cost is SG&A. In the latest quarter SG&A of 466,800 against gross profit of 617,500 (table in thousands) was 75.6% of gross profit. Management treats SG&A as a percent of gross profit as a key control metric.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Focus on controllable selling, general and administrative (SG&A) expenses to maintain structural improvement in SG&A leverage as a percent of gross profit"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2; the figures are from F1 and F2",
+    "claim": "Inventory is largely financed with floor plan borrowings, so interest cost is a direct cost of carrying vehicles. Floor plan interest expense was 64,700 in the latest nine months against 62,200 a year earlier. Floor plan non-trade notes payable were 2,076,800 against inventories of 2,443,000 (table in thousands).",
+    "facts": [
+     "F1",
+     "F2",
+     "P2"
+    ],
+    "quotes": [
+     "Floor Plan Financing arrangements allow us to borrow money to buy a particular new vehicle from the manufacturer or a used vehicle on trade-in or at auction and pay off the loan when we sell that particular vehicle."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (risk factors)",
+    "claim": "The franchise model depends on manufacturers. Each dealership operates under a franchise agreement, and without it the company cannot obtain new vehicles or act as an authorized factory service center.",
     "facts": [
      "P2"
     ],
@@ -122,167 +207,87 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "New-vehicle profit depends on unit volume and gross profit per unit. In the 10-Q, same-store franchised retail new-vehicle gross profit fell 7% in the quarter and 13% over nine months. Management attributes this to price competition from higher available inventory and higher invoice costs.",
+    "basis": "stated in F3; the inventory link is the analyst's inference from the printed lines",
+    "claim": "Cash flow is tied to inventory. Operating cash flow was (14,500) in the latest nine months, with a (415,400) inventory change. The company spent 142,000 on share repurchases and 38,200 on dividends in that period (table in thousands).",
     "facts": [
-     "P4"
+     "F3"
     ],
-    "quotes": [
-     "Retail new vehicle gross profit decreased 7% and 13% during the three and nine months ended September 30, 2026, respectively, due primarily to increased price competition as a result of increasing levels of available inventory and higher inventory invoice costs, which combined to drive lower retail new vehicle gross profit per unit."
-    ],
+    "quotes": [],
     "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-K risk factors; the revenue figure is from the 10-Q",
-    "claim": "Used-vehicle profit depends on how inventory is sourced. Sonic gets much of its used inventory from trade-ins through its appraisal system, which it calls generally more profitable than buying at auction. Used vehicles brought in $3,980,500 of nine-month revenue (table in thousands).",
-    "facts": [
-     "P2",
-     "F2"
-    ],
-    "quotes": [
-     "We obtain a significant percentage of our used vehicle inventory through our proprietary trade-in appraisal system as this sourcing outlet is generally more profitable and more convenient for our guests and potential guests."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A and the earnings release",
-    "claim": "EchoPark sells pre-owned vehicles and F&I only, with no customer-facing service. Its Q3 2026 growth is volume-led but profit is flat to lower. Retail used unit sales rose 22% to 19,923, while reported segment income was $2.0 million against $2.6 million a year earlier.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The EchoPark Segment sells used cars and light trucks and arranges third-party F&I product sales for our guests in pre-owned vehicle specialty retail locations and does not offer customer-facing Fixed Operations services.",
-     "Reported EchoPark Segment income of $2.0 million, as compared to $2.6 million in the prior year period, a 23% decrease year-over-year"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A and the earnings release; the 14-location comparison is from the 10-K",
-    "claim": "Powersports (motorcycles, personal watercraft, all-terrain vehicles) is the smallest but growing segment. By Sep. 30, 2026 it had 46 franchises at 20 locations, up from 14 locations at year-end 2025 (per the 10-K), after April 2026 Harley-Davidson acquisitions the company estimates will add about $100 million of annualized revenue.",
-    "facts": [
-     "P4",
-     "P6",
-     "P1"
-    ],
-    "quotes": [
-     "The Powersports Segment consists of 46 franchises at 20 locations (16 full-service dealerships and four authorized retail outlets) in five states."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q income statement and the earnings release; SG&A components are named only in the release's chart labels",
-    "claim": "Selling, general and administrative (SG&A) expense is the largest operating cost after vehicle cost of sales. It was $1,338,400 against gross profit of $1,832,400 for nine months 2026 (table in thousands). Management targets SG&A as a percentage of gross profit, and Q3 2026 total reported SG&A was 75.6% of gross profit.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "Focus on controllable selling, general and administrative (SG&A) expenses to maintain structural improvement in SG&A leverage as a percent of gross profit (compared to high 70% range prior to 2020)"
-    ],
-    "support": "number_not_listed"
-   },
-   {
-    "basis": "stated in the 10-Q MD&A",
-    "claim": "Fixed Operations revenue growth depends on service capacity and pricing. Same-store Fixed Operations revenue rose 1% in the quarter and 3% over nine months, attributed to added technician headcount and higher parts and labor costs passed on to consumers.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Same store Fixed Operations revenue increased 1% and 3% during the three and nine months ended September 30, 2026, respectively, driven primarily by increased service capacity as a result of additional technician headcount, and higher parts and labor costs that were passed along to consumers."
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the balance sheet, income statement and 10-K risk factors",
-    "claim": "Vehicle inventory is financed by floor plan borrowings, which adds a financing cost. At Sep. 30, 2026 inventories were $2,443,000, funded in part by floor plan notes of $2,076,800 non-trade and $211,200 trade (balance sheet in thousands). Nine-month floor plan interest expense was $64,700.",
-    "facts": [
-     "F1",
-     "F2",
-     "P2"
-    ],
-    "quotes": [
-     "we are dependent to a significant extent on our ability to finance our new and certain of our used vehicle inventory under the Floor Plan Facilities"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "stated in the 10-Q income statement and the 10-K MD&A",
-    "claim": "Reported profit is also moved by non-operating items such as impairments. Nine-month 2025 results included asset impairment charges of $173,800, mostly on franchise assets. Nine-month 2026 net income was $159,400 against $71,800, so the year-on-year gain partly reflects this absent charge.",
-    "facts": [
-     "F2",
-     "P3"
-    ],
-    "quotes": [
-     "Impairment charges were approximately $173.8 million and $3.9 million in 2025 and 2024, respectively."
-    ],
-    "support": "number_not_listed"
    }
   ],
   "competitive_position": [
    {
-    "basis": "Stated in the cited items (company self-description and store counts).",
-    "claim": "Sonic describes itself as one of the largest U.S. automotive retailers by revenue. At December 31, 2025 it ran 111 Franchised Dealerships stores, 18 EchoPark stores and 14 Powersports stores. By September 30, 2026 the counts were 108, 18 and 20.",
+    "basis": "stated in P4 (company's own description; the ranking is self-reported)",
+    "claim": "Sonic describes itself as one of the largest U.S. automotive retailers. At the latest quarter-end it ran 108 Franchised Dealerships stores, 18 EchoPark stores and 20 Powersports stores.",
     "facts": [
-     "P1",
      "P4"
     ],
     "quotes": [
-     "We are one of the largest automotive retailers in the United States"
+     "We are one of the largest automotive retailers in the U.S. (as measured by reported total revenue)."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the earnings release and the income statement.",
-    "claim": "Third-quarter 2026 consolidated revenue and gross profit were all-time quarterly records, but growth was marginal. The 10-Q income statement shows revenue of $3,988,800 against $3,973,800 (table in thousands).",
+    "basis": "stated in P6; F2 shows the same revenue and gross profit figures",
+    "claim": "Third-quarter revenue and gross profit were company records, but growth was almost flat year over year.",
     "facts": [
      "P6",
      "F2"
     ],
     "quotes": [
-     "All-time record quarterly total revenues of $4.0 billion, up 0.4% year-over-year",
-     "all-time quarterly record total gross profit of $617.5 million, up 0.3% year-over-year"
+     "All-time record quarterly total revenues of $4.0 billion, up 0.4% year-over-year; all-time quarterly record total gross profit of $617.5 million, up 0.3% year-over-year"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items; the SG&A mechanism is inferred from the F2 line items.",
-    "claim": "Earnings fell despite record revenue. Q3 2026 reported net income was $41.1 million, down 12%, and diluted EPS was $1.28.",
+    "basis": "stated in P6; direction confirmed by F2 (SG&A and operating income lines)",
+    "claim": "Profit fell even as revenue edged up: third-quarter net income was down year over year, and reported SG&A was a high share of gross profit.",
     "facts": [
      "P6",
      "F2"
     ],
     "quotes": [
-     "Reported net income in the third quarter was $41.1 million, down 12% year-over-year ($1.28 earnings per diluted share, down 4% year-over-year)"
+     "Reported net income in the third quarter was $41.1 million, down 12% year-over-year"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K.",
-    "claim": "Revenue is concentrated in the Franchised Dealerships segment, which was about 85.0% of 2025 revenue. EchoPark was about 13.7%, down from 15.0% in 2024, and Powersports was a small remainder.",
+    "basis": "stated by the CEO in P6",
+    "claim": "Diversification across segments is management's stated source of resilience: EchoPark and Powersports growth offset declines in the Franchised Dealerships segment.",
     "facts": [
-     "P1"
+     "P6"
     ],
     "quotes": [
-     "In 2025, Franchised Dealerships Segment revenue represented approximately 85.0% of total revenue (compared to 83.9% in 2024).",
-     "In 2025, EchoPark Segment revenue represented approximately 13.7% of total revenue (compared to 15.0% in 2024)."
+     "revenue and gross profit growth in our EchoPark and Powersports segments offset declines in our Franchised Dealerships segment"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K; the margin benefit is management's belief.",
-    "claim": "The franchised brand mix is tilted to luxury and mid-line import brands. Management says these typically carry higher operating margins, more stable Fixed Operations and lower inventory levels, which is a stated source of advantage.",
+    "basis": "stated in P4",
+    "claim": "The core Franchised Dealerships segment lost volume in new vehicles: same-store retail new vehicle revenue fell 7% in the quarter on a 7% fall in units.",
     "facts": [
-     "P1"
+     "P4"
     ],
     "quotes": [
-     "For 2025, approximately 86% of our total new vehicle revenue was generated by luxury and mid-line import dealerships, which typically have higher operating margins, more stable Fixed Operations departments, lower associate turnover and lower inventory levels than other brand categories."
+     "Same store retail new vehicle revenue decreased 7% during the three months ended September 30, 2026, driven by a 7% decrease in retail new vehicle unit sales volume."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cited items; the slowdown comparison is from the outlook bullet in P6.",
-    "claim": "Fixed Operations (parts and service) is a steady, high-margin franchised strength. Same-store gross margin was 51.4% in Q3 2026 and revenue grew 1% in the quarter and 3% over nine months. Management says this business is less economically sensitive than vehicle sales.",
+    "basis": "stated in P4",
+    "claim": "New vehicle pricing pressure is a stated threat: more available inventory and higher invoice costs are driving price competition. The segment's new vehicle days' supply was about 65 days versus 51 a year earlier.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "due primarily to increased price competition as a result of increasing levels of available inventory and higher inventory invoice costs"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P4 and P1",
+    "claim": "Fixed Operations (parts, service, collision repair) is a steadier, higher-margin profit source: same-store revenue grew 1% in the quarter and 3% over nine months, and same-store gross margin was 51.4% in the quarter.",
     "facts": [
      "P4",
      "P1"
@@ -294,197 +299,261 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-Q MD&A.",
-    "claim": "The core franchised new-vehicle business is under pressure. Q3 same-store retail new vehicle revenue fell 7% on a 7% drop in unit volume, and new-vehicle inventory days' supply rose to 65 days from 51 days.",
+    "basis": "stated in P1",
+    "claim": "The brand mix is tilted to luxury and mid-line import brands, which the company says have higher operating margins and more stable service departments.",
     "facts": [
-     "P4"
+     "P1"
     ],
     "quotes": [
-     "Same store retail new vehicle revenue decreased 7% during the three months ended September 30, 2026, driven by a 7% decrease in retail new vehicle unit sales volume.",
-     "approximately 65 days as of September 30, 2026, compared to 51 days as of September 30, 2025",
-     "due primarily to increased price competition as a result of increasing levels of available inventory and higher inventory invoice costs"
+     "For 2025, approximately 86% of our total new vehicle revenue was generated by luxury and mid-line import dealerships, which typically have higher operating margins, more stable Fixed Operations departments, lower associate turnover and lower inventory levels than other brand categories."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factor and the earnings release outlook.",
-    "claim": "Per-unit vehicle margin normalization is a named threat. The 10-K says gross profit per unit has trended down since the pandemic peak and may keep falling. Management nonetheless raised its FY2026 new vehicle gross profit per unit outlook range.",
-    "facts": [
-     "P2",
-     "P6"
-    ],
-    "quotes": [
-     "If gross profit per unit continues to decline, as we anticipate it may, it could adversely affect our business and results of operation.",
-     "Anticipate new vehicle GPU in the $3,050 to $3,100 per unit range for FY 2026 (previously $2,850 to $3,000)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the earnings release and 10-Q MD&A.",
-    "claim": "EchoPark is growing quickly but earning little. Q3 revenue was $596.0 million, up 14%, and retail used units were up 22%, yet segment income fell to $2.0 million from $2.6 million, a 23% decrease.",
-    "facts": [
-     "P6",
-     "P4"
-    ],
-    "quotes": [
-     "EchoPark Segment revenues of $596.0 million, up 14% year-over-year",
-     "Reported EchoPark Segment income of $2.0 million, as compared to $2.6 million in the prior year period, a 23% decrease year-over-year"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-Q and earnings release; the 1.3% share is in P1.",
-    "claim": "Powersports is a small but expanding third leg. It grew to 20 locations after an April 2026 acquisition, and Q3 segment income was $7.9 million, up 1%.",
-    "facts": [
-     "P4",
-     "P6"
-    ],
-    "quotes": [
-     "The Powersports Segment consists of 46 franchises at 20 locations (16 full-service dealerships and four authorized retail outlets) in five states.",
-     "Segment income of $7.9 million, up 1%, and adjusted EBITDA* of $10.5 million, up 4%"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors.",
-    "claim": "A named structural threat is direct-to-consumer selling by manufacturers and new entrants. The 10-K says franchised dealers' role in that transaction type is unclear.",
+    "basis": "stated in P2",
+    "claim": "Manufacturer dependence is a named threat: new vehicle sales are concentrated in luxury and mid-line import brands, and the company is significantly dependent on manufacturer relationships.",
     "facts": [
      "P2"
     ],
     "quotes": [
-     "In addition, certain automobile manufacturers have expressed interest in or begun selling directly to customers.",
-     "Tesla, Inc. has been challenging state dealer franchise laws in many states with mixed results"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in the 10-K risk factors and business section.",
-    "claim": "Sonic depends on manufacturers for its franchises, supply and acquisition approvals. Its franchise agreements are not exclusive and can be terminated or not renewed.",
-    "facts": [
-     "P2",
-     "P1"
-    ],
-    "quotes": [
+     "Our new vehicle sales operations are comprised primarily of luxury and mid-line import brands, which exposes us to manufacturer concentration risks.",
      "As a result, we are significantly dependent on our relationships with the manufacturers."
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in the statements; the funding mechanism is inferred from the cash flow statement.",
-    "claim": "Financial flexibility is tighter in 2026. Nine-month operating cash flow was (14,500) against 500,500 a year earlier (tables in thousands). Inventories rose to 2,443,000 from 2,012,900 (table in thousands), and the 10-K says available capital is limited to debt-agreement liquidity and operating cash flows.",
+    "basis": "stated in P1 market table (Texas 26.2%, California 24.6% of total revenue); the combination is my reading of the table, not stated in the item",
+    "claim": "Revenue is geographically concentrated: Texas and California together were roughly half of total revenue in the latest annual report.",
     "facts": [
-     "F1",
-     "F3",
+     "P1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6",
+    "claim": "EchoPark, the used-vehicle specialty retail segment, is growing quickly: third-quarter revenue was up 14% on retail units up 22%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "EchoPark Segment revenues of $596.0 million, up 14% year-over-year"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P6; mechanism from P4",
+    "claim": "EchoPark's growth has not yet lifted its profit: reported segment income fell to $2.0 million from $2.6 million, a 23% drop.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Reported EchoPark Segment income of $2.0 million, as compared to $2.6 million in the prior year period, a 23% decrease year-over-year"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P1, P4 and P8 (the $100 million is a company estimate)",
+    "claim": "Powersports is being expanded by acquisition: locations rose from 14 at year-end to 20, and five Harley-Davidson dealerships bought in April were expected to add about $100 million of annualized revenue.",
+    "facts": [
+     "P1",
+     "P4",
+     "P8"
+    ],
+    "quotes": [
+     "expected to add approximately $100 million in annualized revenue to Sonic's Powersports Segment"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2 (risk factor); the 10-Q says there were no material changes to risk factors (P5)",
+    "claim": "Direct-to-consumer and technology entrants are named competitive threats to the dealership model.",
+    "facts": [
      "P2"
     ],
     "quotes": [
-     "The amount of capital presently available to us is limited to the liquidity available under our existing debt agreements and cash flows generated through operating activities."
+     "Tesla, Inc. has been challenging state dealer franchise laws in many states with mixed results",
+     "we may ultimately be at a competitive disadvantage in marketing, selling, financing and servicing vehicles"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2",
+    "claim": "The company says it has no purchasing cost advantage from scale, and that vehicle gross profit per unit has trended down as inventory has become more available.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "We do not have any cost advantage in purchasing new vehicles from manufacturers due to economies of scale or otherwise.",
+     "has trended downwards as inventory, particularly for new vehicles, has become more readily available"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in P2; figures from F1 and F3 (tables in thousands)",
+    "claim": "The business depends on floor plan financing, and nine-month operating cash flow turned negative as inventory built, so financing capacity is part of the competitive position.",
+    "facts": [
+     "P2",
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "we are dependent to a significant extent on our ability to finance our new and certain of our used vehicle inventory"
     ],
     "support": "supported"
    }
   ],
   "financial_health": [
    {
-    "basis": "Stated in the balance sheet (F1); the comparison of current assets with current liabilities is inferred from those lines.",
-    "claim": "Liquidity is thin on the balance sheet. Cash is only 10,700 (table in thousands), up from 6,300 at year-end. Current liabilities of 3,249,800 now exceed current assets of 3,089,800, whereas at year-end current assets of 2,832,500 exceeded current liabilities of 2,597,900.",
+    "basis": "Stated in the balance sheet and cash flow statement.",
+    "claim": "Cash on hand is small: 10,700 (table in thousands of dollars) at the latest balance sheet date, against 6,300 at the prior year-end and 89,400 at the end of the year-earlier nine-month period.",
     "facts": [
-     "F1"
+     "F1",
+     "F3"
     ],
-    "quotes": [
-     "Cash and cash equivalents | $ 10,700 | $ 6,300"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Balances and days' supply are stated in F1 and P4; the link between inventory growth and floor plan growth is inferred from both rising together.",
-    "claim": "Floor plan financing grew with inventory. Non-trade floor plan notes are 2,076,800 (up from 1,748,100) and trade floor plan notes are 211,200 (up from 184,600). Inventories rose to 2,443,000 from 2,012,900, and new vehicle days' supply in the Franchised Dealerships Segment was 65 days against 51 a year earlier.",
+    "basis": "Figures stated in the balance sheet; the floor plan matching is inferred from the balance sheet lines and the cited description of floor plan financing.",
+    "claim": "Current liabilities now exceed current assets: total current assets were 3,089,800 against total current liabilities of 3,249,800 (table in thousands). At the prior year-end current assets of 2,832,500 exceeded current liabilities of 2,597,900.",
     "facts": [
-     "F1",
-     "P4",
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors; the 10-Q says there were no material changes to those risk factors (P5).",
+    "claim": "Floor plan financing is how inventory is funded: the company borrows to buy a vehicle and repays the loan when that vehicle is sold.",
+    "facts": [
      "P2"
     ],
     "quotes": [
-     "On a trailing quarter cost of sales basis, our reported Franchised Dealerships Segment new vehicle inventory days\u2019 supply was approximately 65 days as of September 30, 2026, compared to 51 days as of September 30, 2025.",
      "Floor Plan Financing arrangements allow us to borrow money to buy a particular new vehicle from the manufacturer or a used vehicle on trade-in or at auction and pay off the loan when we sell that particular vehicle."
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in the balance sheet (F1); the shift toward current maturities is read directly from the lines.",
-    "claim": "Debt outside floor plan is large and a bigger share is now short-term. Long-term debt is 1,556,400 (against 1,563,000 at year-end), but current maturities of long-term debt rose to 193,300 from 52,400. Finance lease liabilities are 120,900 current (up from 19,200) and 286,200 non-current. Total stockholders' equity is 1,061,500.",
+    "basis": "Stated in the balance sheet; the comparison to equity is a reading of the printed lines, not a computed ratio.",
+    "claim": "Corporate debt outside floor plan is large: long-term debt of 1,556,400 plus current maturities of 193,300 (table in thousands). Finance lease liabilities add 120,900 current and 286,200 noncurrent, and operating lease liabilities add 247,700 noncurrent.",
     "facts": [
      "F1"
     ],
-    "quotes": [
-     "Current maturities of long-term debt | 193,300 | 52,400",
-     "Long-Term Debt | 1,556,400 | 1,563,000"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Figures are stated in F2 and F3; the comparison of interest with operating income is inferred.",
-    "claim": "Interest costs absorb a large part of operating profit. For the nine months, floor plan interest was 64,700 (against 62,200) and other net interest was 89,200 (against 82,500), versus operating income of 376,700 (against 244,300). Cash paid for interest was 136,600 (against 127,200).",
+    "basis": "Stated in the balance sheet. Which instruments mature is not in the packet.",
+    "claim": "Debt falling due within a year has risen: current maturities of long-term debt were 193,300 against 52,400 at the prior year-end, and the current portion of finance lease liability was 120,900 against 19,200 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet. The link to repurchases is inferred from the cash flow statement.",
+    "claim": "Equity was little changed at 1,061,500 against 1,068,100 at the prior year-end (table in thousands). Retained earnings rose to 1,602,000 from 1,481,100, but treasury stock grew to (1,463,300) from (1,321,300).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash flow figures are stated. The days' supply link (P4) is an inference.",
+    "claim": "Operating cash flow was negative over the nine months: (14,500) against 500,500 a year earlier (table in thousands), even though net income was 159,400.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement; the quality judgment is inferred.",
+    "claim": "Earnings are not turning into operating cash this year: net income of 159,400 compares with operating cash flow of (14,500). Non-cash add-backs are modest, with depreciation and amortization of property and equipment at 99,500 and stock-based compensation at 17,900.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement.",
+    "claim": "Spending outran operating cash. Purchases of land, property and equipment were 223,700 against 112,600 a year earlier, and purchases of businesses were 169,300 against 440,300. Net investing outflow was (329,700) (table in thousands).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Printed figures are stated. The inconsistency is inferred from the printed totals and balance sheet.",
+    "claim": "The funding gap was met through financing: net financing inflow was 348,600 (table in thousands), including proceeds from long-term debt of 190,000. The company also paid 142,000 for treasury stock (44,100 a year earlier) and 38,200 in dividends.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the income and cash flow statements. No coverage ratio is computed.",
+    "claim": "Interest is a heavy fixed call on earnings: nine-month floor plan interest expense was 64,700 and other net interest expense was 89,200, against operating income of 376,700 (table in thousands). Cash interest paid was 136,600 against 127,200 a year earlier.",
     "facts": [
      "F2",
      "F3"
     ],
-    "quotes": [
-     "Interest expense, other, net | (30,600) | (27,500) | (89,200) | (82,500)"
-    ],
+    "quotes": [],
     "support": "supported"
    },
    {
-    "basis": "Stated in the cash flow statement (F3); the explanation of the swing is inferred from the working-capital lines.",
-    "claim": "Operating cash flow was negative for the nine months at (14,500), against 500,500 a year earlier, even though net income rose to 159,400 from 71,800. The swing is mainly an inventory build: inventories used (415,400) of cash against a 62,100 inflow a year earlier.",
+    "basis": "Stated in the income statement.",
+    "claim": "Profit is the main source for servicing debt, and recent quarterly earnings are softer. Third-quarter net income was 41,100 against 46,800 a year earlier, while nine-month net income was 159,400 against 71,800 (table in thousands).",
+    "facts": [
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement. Terms of the new debt are not in the packet.",
+    "claim": "Short-term refinancing has so far been met with new term debt and repayments. The company issued 190,000 of long-term debt and made 59,800 of principal payments and repurchases of long-term debt, against 101,400 a year earlier. Revolver borrowings of 40,400 were fully repaid by 40,400 (table in thousands).",
     "facts": [
      "F3"
     ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors; the 10-Q says there were no material changes to those risk factors.",
+    "claim": "The company says its available capital is limited to existing debt facilities and operating cash flow, and that its dealership assets are pledged. This may limit alternative borrowing to meet maturities.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
     "quotes": [
-     "Net cash provided by (used in) operating activities | (14,500) | 500,500"
+     "The amount of capital presently available to us is limited to the liquidity available under our existing debt agreements and cash flows generated through operating activities.",
+     "Our ability to obtain additional sources of financing may be limited by the fact that substantially all of the assets of our dealerships are pledged to secure the indebtedness under the Credit Facilities and the Silo Floor Plan Facilities (as defined below)."
     ],
     "support": "supported"
    },
    {
-    "basis": "Line items are stated in F3; the funding interpretation is inferred.",
-    "claim": "Quality of cash generation is weak this period. Cash did not cover investment and shareholder returns. Purchases of land, property and equipment were 223,700 (against 112,600), purchases of businesses 169,300, treasury stock purchases 142,000 (against 44,100) and dividends 38,200. Proceeds from long-term debt of 190,000 were raised, and cash ended at 10,700 against 89,400 a year earlier.",
+    "basis": "Stated in the earnings release.",
+    "claim": "Shareholder distributions continue alongside the cash needs: the Board approved a quarterly cash dividend of $0.41 per share.",
     "facts": [
-     "F3"
+     "P6"
     ],
     "quotes": [
-     "Purchases of treasury stock | (142,000) | (44,100)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Amounts are stated in F1 and F3, and the capital-limit statement in P2 (from the 10-K, with the 10-Q noting no material change in risk factors); the view that new debt is the way maturities were met is inferred.",
-    "claim": "Near-term refinancing need is visible in current maturities of long-term debt of 193,300 and current finance lease liabilities of 120,900. The cash flow statement shows 190,000 of long-term debt issued in the period, and revolver borrowings and repayments of 40,400 each. The company says its capital is limited to existing debt agreements and operating cash flow, and that its dealership assets are pledged.",
-    "facts": [
-     "F1",
-     "F3",
-     "P2"
-    ],
-    "quotes": [
-     "The amount of capital presently available to us is limited to the liquidity available under our existing debt agreements and cash flows generated through operating activities."
+     "Sonic\u2019s Board of Directors approved a quarterly cash dividend of $0.41 per share, payable on January 15, 2027 to all stockholders of record on December 15, 2026"
     ],
     "support": "supported"
    }
   ],
   "growth_thesis": [
    {
-    "basis": "Stated by management in P6; revenue figures from F2.",
-    "claim": "In the third quarter, growth in EchoPark and Powersports offset declines in the Franchised Dealerships segment, leaving consolidated revenue only slightly above the prior year (3,988,800 against 3,973,800, table in thousands; up 0.4%). Continued consolidated growth requires the two growing segments to keep outpacing the franchised decline.",
-    "facts": [
-     "F2",
-     "P6"
-    ],
-    "quotes": [
-     "revenue and gross profit growth in our EchoPark and Powersports segments offset declines in our Franchised Dealerships segment"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6 and P4.",
-    "claim": "EchoPark unit volume is a growth driver: retail used unit sales were 19,923, up 22%, with segment revenue of $596.0 million, up 14%. This requires continued retail demand and an inventory build to support it.",
+    "basis": "Stated in the cited items (8-K earnings release and 10-Q MD&A).",
+    "claim": "EchoPark is the clearest volume-led growth driver: Q3 retail used unit sales rose 22% to 19,923 and segment revenue rose 14% to $596.0 million, with record Q3 segment gross profit of $58.9 million.",
     "facts": [
      "P6",
      "P4"
@@ -496,97 +565,94 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in P6; the interpretation that volume is not yet converting to income is inferred from the stated segment income and F&I per-unit decline.",
-    "claim": "EchoPark profit conversion is the unproven condition: segment income was $2.0 million against $2.6 million a year earlier, a 23% decrease, despite higher volume. Growth in profit requires per-unit gross profit and SG&A leverage to stop eroding.",
+    "basis": "Figures stated in the cited items; the condition is inferred from the gap between volume growth and income.",
+    "claim": "For EchoPark growth to continue, it must translate into profit and keep a supply of quality used inventory: Q3 segment income was $2.0 million versus $2.6 million a year earlier, and same-market combined retail used and F&I gross profit per unit fell 12% to $2,979.",
     "facts": [
      "P6",
-     "P4"
-    ],
-    "quotes": [
-     "Reported EchoPark Segment income of $2.0 million, as compared to $2.6 million in the prior year period, a 23% decrease year-over-year"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P6 and P1; no figures for the cost or timing of expansion are given.",
-    "claim": "EchoPark's footprint is still being extended: a new Orlando market and a brand campaign are announced, and the long-term plan targets 90% U.S. population coverage at maturity. This requires capital and new markets to reach acceptable returns.",
-    "facts": [
-     "P6",
-     "P1"
-    ],
-    "quotes": [
-     "we are excited to announce our new EchoPark brand campaign and Orlando market opening in the coming weeks",
-     "we plan to continue to enhance our nationwide EchoPark distribution network to reach 90% of the U.S. population at maturity"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P8, P4, P1 and P6; the link from store count to segment growth is inferred.",
-    "claim": "Powersports is growing through acquisitions: five Harley-Davidson dealerships bought in April 2026 are expected to add about $100 million of annualized revenue, and the segment went from 14 stores at year-end 2025 to 20 at September 30, 2026. This requires smooth integration and continued deal availability.",
-    "facts": [
-     "P8",
      "P4",
+     "P2"
+    ],
+    "quotes": [
+     "Reported EchoPark Segment income of $2.0 million, as compared to $2.6 million in the prior year period, a 23% decrease year-over-year",
+     "Same market combined retail used vehicle and F&I gross profit per unit decreased $396 per unit, or 12%, to $2,979 for the three months ended September 30, 2026",
+     "A reduction in the availability of, or access to, sources of desirable, high-quality used vehicle inventory could have a material adverse effect on our business, sales and results of operations at all of our locations."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Counts and the revenue estimate are stated in the cited items; the dependence on further acquisitions is inferred.",
+    "claim": "Powersports is growing by acquisition: locations rose from 14 at year-end 2025 to 20 at September 30, 2026, including April 2026 Harley-Davidson purchases estimated at $100 Million of annualized revenue. Q3 segment income of $7.9 million was up only 1%.",
+    "facts": [
      "P1",
-     "P6"
+     "P4",
+     "P6",
+     "F3"
     ],
     "quotes": [
-     "is expected to add approximately $100 million in annualized revenue to Sonic's Powersports Segment",
-     "Powersports Segment Achieved Record Unit Sales Volume At The 86th Annual Sturgis Motorcycle Rally, Driving All-Time Record Quarterly Segment Revenues And Segment Income"
+     "The Powersports Segment consists of 41 franchises at 14 locations (11 full-service dealerships and three authorized retail outlets) in three states.",
+     "The Powersports Segment consists of 46 franchises at 20 locations (16 full-service dealerships and four authorized retail outlets) in five states.",
+     "Includes Five Harley-Davidson Dealerships And One Authorized Retail Outlet Acquired In April 2026, Estimated To Generate $100 Million In Annualized Revenues.",
+     "Segment income of $7.9 million, up 1%"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4 and P6.",
-    "claim": "Franchised fixed operations (parts and service) is a steadier but slowing driver: same store revenue rose 1% in the quarter and 3% for nine months, and management now guides FY 2026 same store fixed operations gross profit growth to 2% - 3%, down from mid single digit. Continuation requires technician headcount growth and cost pass-through to customers.",
+    "basis": "Stated in the cited items; the condition that technician capacity keep growing is stated in the MD&A drivers.",
+    "claim": "Franchised Fixed Operations (parts and service) is a steady but slowing contributor: same-store Fixed Operations revenue rose 1% in Q3 and 3% over nine months, and company parts, service and collision revenue was 543,300 (table in thousands) versus 533,900 in the quarter. Management now expects full-year same-store gross profit growth of 2% - 3%.",
     "facts": [
      "P4",
-     "P6"
+     "P6",
+     "F2"
     ],
     "quotes": [
      "Same store Fixed Operations revenue increased 1% and 3% during the three and nine months ended September 30, 2026, respectively",
-     "Expect same store fixed operations gross profit growth between 2% - 3% in FY 2026 (previously mid single digit percentage growth), implies 1% to 3% growth in Q4 2026"
+     "Expect same store fixed operations gross profit growth between 2% - 3% in FY 2026 (previously mid single digit percentage growth)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4 and P6.",
-    "claim": "Franchised F&I is a stable contributor rather than a growth engine: same store F&I revenue was flat, with a 2% rise in gross profit per retail unit, to $2,630, offset by lower unit volume. It holds only if per-unit profit offsets declining retail units.",
+    "basis": "Stated in the cited items; the condition on inventory discipline is inferred from the stated range and the used inventory risk factor.",
+    "claim": "Franchised used vehicles add growth: same-store retail used revenue rose 7% in Q3 and 6% over nine months on unit volume up 3% and 4%. Management raised its used vehicle gross profit per unit outlook to $1,450 to $1,500 for FY 2026.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "Same store F&I revenue remained flat during both the three and nine months ended September 30, 2026, respectively",
-     "Expect F&I GPU in the $2,600 to $2,700 per unit range for FY 2026, implies $2,550 to $2,650 per unit range in Q4 2026"
+     "Same store retail used vehicle revenue increased 7% and 6% during the three and nine months ended September 30, 2026, respectively",
+     "We generally focus on maintaining Franchised Dealerships Segment used vehicle inventory days\u2019 supply in the 25- to 35-day range"
     ],
     "support": "supported"
    },
    {
-    "basis": "Stated in P4.",
-    "claim": "Franchised used vehicles are growing in revenue but not in profit per unit: same store retail used revenue rose 7% in the quarter on a 3% unit increase, while gross profit per unit fell 3% to $1,506. This requires used-unit growth to continue without further per-unit erosion.",
-    "facts": [
-     "P4"
-    ],
-    "quotes": [
-     "Same store retail used vehicle revenue increased 7% and 6% during the three and nine months ended September 30, 2026, respectively"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Stated in P4 and P6.",
-    "claim": "Franchised new-vehicle sales are the drag the other drivers must offset: same store retail new revenue fell 7% in the quarter on a 7% fall in units, and new-vehicle days' supply rose to 65 from 51. Any recovery requires affordability and inventory pressure to ease.",
+    "basis": "Stated in the cited items; the offsetting dynamic is stated by the CEO.",
+    "claim": "The Franchised Dealerships new vehicle base is a headwind that the other segments must keep offsetting: same-store retail new vehicle revenue fell 7% in Q3 and new vehicle days' supply rose to 65 from 51.",
     "facts": [
      "P4",
-     "P6"
+     "P6",
+     "F2"
     ],
     "quotes": [
-     "Same store retail new vehicle revenue decreased 7% during the three months ended September 30, 2026, driven by a 7% decrease in retail new vehicle unit sales volume."
+     "Same store retail new vehicle revenue decreased 7% during the three months ended September 30, 2026, driven by a 7% decrease in retail new vehicle unit sales volume.",
+     "revenue and gross profit growth in our EchoPark and Powersports segments offset declines in our Franchised Dealerships segment"
     ],
     "support": "supported"
    },
    {
-    "basis": "Figures stated in F3 and F1; the link between inventory build and negative operating cash flow is inferred.",
-    "claim": "Acquisition and capex growth is being financed with debt, not operating cash: operating activities used cash of (14,500) in nine months against 500,500 a year earlier (table in thousands), while purchases of businesses were (169,300) and long-term debt proceeds were 190,000. Continued expansion requires access to financing and floor plan lines.",
+    "basis": "Figures stated in the cited items; the link between buybacks and EPS is inferred.",
+    "claim": "Per-share growth is supported by a shrinking share count: Q3 net income was $41.1 million, down 12%, while diluted EPS was $1.28 versus $1.33, down 4%. Weighted diluted shares were 32,200 versus 35,100 (table in thousands), and nine-month treasury stock purchases were 142,000 versus 44,100.",
+    "facts": [
+     "P6",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Reported net income in the third quarter was $41.1 million, down 12% year-over-year ($1.28 earnings per diluted share, down 4% year-over-year)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in the cited statements; the dependence on financing is stated in the risk factor and inferred from the cash flows.",
+    "claim": "Continued expansion depends on financing: nine-month operating cash flow was (14,500) versus 500,500 (table in thousands), with inventory build, acquisitions and capital spending of 223,700 funded partly by 190,000 of new long-term debt.",
     "facts": [
      "F3",
      "F1",
@@ -598,47 +664,26 @@
     "support": "supported"
    },
    {
-    "basis": "Figures stated in F2, F3 and P6; the attribution of the EPS gap to buybacks is inferred from the share-count change.",
-    "claim": "Share repurchases are supporting per-share results: diluted weighted shares were 32,200 against 35,100 (table in thousands) and treasury stock purchases were (142,000) against (44,100) in nine months. Third-quarter diluted EPS fell 4% while net income fell 12%. Continuation requires cash for buybacks while operating cash flow is negative.",
+    "basis": "Figures stated in the statements; the base-effect reading is inferred from the prior-year impairment charge.",
+    "claim": "Reported nine-month earnings growth is mainly a base effect, not an operating driver: operating income was 376,700 versus 244,300 (table in thousands), and the prior-year period included asset impairment charges of 173,800.",
     "facts": [
      "F2",
      "F3",
-     "P6"
-    ],
-    "quotes": [
-     "Reported net income in the third quarter was $41.1 million, down 12% year-over-year ($1.28 earnings per diluted share, down 4% year-over-year)"
-    ],
-    "support": "supported"
-   },
-   {
-    "basis": "Inferred from the F2 and F3 line items and the third-quarter decline stated in P6.",
-    "claim": "The large nine-month earnings increase is mainly a base effect: net income was 159,400 against 71,800 (table in thousands), but the prior-year period included asset impairment charges of 173,800, while the third quarter alone showed net income down. It is not evidence of an accelerating operating trend.",
-    "facts": [
-     "F2",
-     "F3",
-     "P6"
-    ],
-    "quotes": [],
-    "support": "supported"
-   }
-  ],
-  "material_events": [
-   {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "The company recorded impairment charges of $173.8 million, up from $3.9 million the year before.",
-    "facts": [
      "P3"
     ],
     "quotes": [
      "Impairment charges were approximately $173.8 million and $3.9 million in 2025 and 2024, respectively."
     ],
     "support": "supported"
-   },
+   }
+  ],
+  "material_events": [
    {
-    "basis": "stated in the Q2 2026 earnings release",
-    "claim": "Sonic acquired Harley-Davidson dealerships for its Powersports Segment, expected to add about $100 million of annualized revenue.",
+    "basis": "stated in the cited items",
+    "claim": "Sonic acquired five Harley-Davidson dealerships in April 2026, which the company expects to add about $100 million of annualized revenue to its Powersports Segment.",
     "facts": [
-     "P8"
+     "P8",
+     "P6"
     ],
     "quotes": [
      "Previously announced acquisition of Space Coast Harley-Davidson, Treasure Coast Harley-Davidson, Falcons Fury Harley-Davidson, Raging Bull Harley-Davidson, and San Diego Harley-Davidson in April 2026 is expected to add approximately $100 million in annualized revenue to Sonic's Powersports Segment"
@@ -646,21 +691,34 @@
     "support": "supported"
    },
    {
-    "basis": "stated in the cited 10-K MD&A",
-    "claim": "A cybersecurity incident at CDK Global suspended systems the company used. The company estimates it cut reported pre-tax income by about $47.2 million.",
+    "basis": "stated in the cited items",
+    "claim": "The company recorded impairment charges of approximately $173.8 million in 2025, mainly on indefinite-lived franchise assets in the Franchised Dealerships Segment.",
     "facts": [
-     "P3"
+     "P3",
+     "F2"
     ],
     "quotes": [
-     "We estimate the disruption from the CDK outage negatively impacted reported income before taxes by approximately $47.2 million during 2024 which includes approximately $13.4 million in additional compensation expenses incurred as a result of the incident."
+     "Impairment charges were approximately $173.8 million and $3.9 million in 2025 and 2024, respectively."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "The Board approved a quarterly cash dividend of $0.41 per share, payable January 15, 2027 to holders of record on December 15, 2026.",
+    "facts": [
+     "P6",
+     "P7"
+    ],
+    "quotes": [
+     "Sonic\u2019s Board of Directors approved a quarterly cash dividend of $0.41 per share, payable on January 15, 2027 to all stockholders of record on December 15, 2026"
     ],
     "support": "supported"
    }
   ],
   "risks": [
    {
-    "basis": "Balance sheet and cash flow figures are stated in F1 and F3. The funding-dependence mechanism is inferred, with the dependence stated in P2.",
-    "claim": "At Sep. 30, 2026 cash was 10,700 (table in thousands) and current liabilities of 3,249,800 (table in thousands) exceeded current assets of 3,089,800 (table in thousands). Nine-month operating cash flow was (14,500) versus 500,500 a year earlier, so the company depends on floor plan and other financing for inventory.",
+    "basis": "Figures are stated in the cited statements. The liquidity-stress mechanism is inferred from them and from the 10-K risk factor.",
+    "claim": "Operating cash flow turned negative as inventory built, working capital is thin, and cash is small. A pinch in inventory financing would hit quickly.",
     "facts": [
      "F1",
      "F3",
@@ -672,38 +730,36 @@
     "support": "supported"
    },
    {
-    "basis": "The figures and cause are stated in P4. The counter is stated in P4 and P6. The margin-erosion path is inferred.",
-    "claim": "Franchised Dealerships new vehicle inventory days' supply rose to 65 days from 51 a year earlier, and retail new vehicle gross profit fell 7% in the quarter and 13% over nine months. Management attributes this to price competition from rising inventory, which could erode the core segment's margins.",
+    "basis": "Declines and days' supply are stated in the 10-Q MD&A. The pressure on capital is inferred.",
+    "claim": "Franchised Dealerships, the core segment, is weakening. Same-store retail new vehicle gross profit fell 7% in the quarter and 13% over nine months, while new vehicle days' supply rose to 65 days from 51 days.",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
-     "On a trailing quarter cost of sales basis, our reported Franchised Dealerships Segment new vehicle inventory days\u2019 supply was approximately 65 days as of September 30, 2026, compared to 51 days as of September 30, 2025.",
-     "due primarily to increased price competition as a result of increasing levels of available inventory and higher inventory invoice costs",
-     "Retail new vehicle gross profit per unit remained flat at $3,000 per unit during the three months ended September 30, 2026."
+     "Retail new vehicle gross profit decreased 7% and 13% during the three and nine months ended September 30, 2026, respectively"
     ],
     "support": "supported"
    },
    {
-    "basis": "Segment income and per-unit changes are stated in P6 and P4. The implication for the growth thesis is inferred.",
-    "claim": "EchoPark, the segment management calls a strategic growth opportunity, reported Q3 segment income of $2.0 million versus $2.6 million a year earlier, a 23% decrease, even as unit volume grew. Same-market combined retail used and F&I gross profit per unit fell 12%.",
+    "basis": "Segment results are stated in the earnings release and 10-Q MD&A. The profit-conversion risk is inferred.",
+    "claim": "EchoPark volume growth is not yet turning into profit. Segment income fell to $2.0 million from $2.6 million even as retail used unit sales rose 22%.",
     "facts": [
      "P6",
      "P4"
     ],
     "quotes": [
-     "Reported EchoPark Segment income of $2.0 million, as compared to $2.6 million in the prior year period, a 23% decrease year-over-year",
-     "The higher days\u2019 supply as of September 30, 2026, reflected a deliberate increase in inventory levels to support higher retail unit sales."
+     "Reported EchoPark Segment income of $2.0 million, as compared to $2.6 million in the prior year period, a 23% decrease year-over-year"
     ],
     "support": "supported"
    },
    {
-    "basis": "Cash flow and maturity figures are stated in F3 and F1. The leverage-headroom reading is inferred.",
-    "claim": "Over nine months the company spent (142,000) on treasury stock, (223,700) on property and equipment and (169,300) on businesses (table in thousands), while operating cash flow was (14,500) and it issued 190,000 of long-term debt. Current maturities of long-term debt were 193,300 versus 52,400 at year-end 2025.",
+    "basis": "Figures are stated in the statements. The earnings pressure is inferred.",
+    "claim": "Interest costs are rising against a larger debt load and heavy capital deployment. Q3 pre-tax income fell to 57,500 from 71,200.",
     "facts": [
-     "F3",
+     "F2",
      "F1",
+     "F3",
      "P2"
     ],
     "quotes": [
@@ -712,77 +768,268 @@
     "support": "supported"
    },
    {
-    "basis": "Stated in the 10-K risk factors (P2) and business section (P1). The Q3 10-Q (P5) reports no change. This is a generic risk with no evidence it is occurring.",
-    "claim": "Each franchised dealership operates under a manufacturer franchise or dealer agreement. Termination or non-renewal, or unfavorable renewal terms, would cut off new vehicle supply and service authorization.",
+    "basis": "The industry estimate is stated in the 10-Q. The link to company results is inferred.",
+    "claim": "The 2026 industry outlook is softer. Management expects new vehicle industry volume between 15.8 million and 16.2 million vehicles, and it describes a challenging consumer affordability environment.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "We currently estimate the 2026 new vehicle industry volume will be between 15.8 million vehicles (a decrease of 3% compared to 2025) and 16.2 million vehicles (a decrease of 1% compared to 2025)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The 10-K risk factor states it. No event is shown.",
+    "claim": "Dependence on manufacturer franchise agreements is a standing risk. A termination or non-renewal would cut off vehicle supply and service rights at the affected dealerships.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "Our operations may be adversely affected if one or more of our manufacturer franchise or dealer agreements is terminated or not renewed."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [
+   {
+    "basis": "The task states that no items became effective after the earlier analysis time.",
+    "claim": "No evidence became effective after the earlier analysis, so nothing in the packet shows whether this point has moved. The cited items are the same ones the earlier point rested on.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses EchoPark unit volume as a growth driver. The packet cannot show any change from the earlier point.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses EchoPark profit conversion. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses the EchoPark footprint extension. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses Powersports acquisition-led growth. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "P8",
+     "P4",
+     "P1",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses franchised fixed operations growth or the guidance for it. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses franchised F&I. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses franchised used vehicle revenue and per-unit profit. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses franchised new vehicle sales or inventory days' supply. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses how acquisitions and capital spending are financed. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "F3",
+     "F1",
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses the effect of share repurchases on per-share results. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "F2",
+     "F3",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses the base effect behind the nine-month earnings increase. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "F2",
+     "F3",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses liquidity or reliance on floor plan financing. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "F1",
+     "F3",
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses new vehicle inventory pressure or margin erosion in the franchised segment. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses EchoPark segment income or per-unit profit. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The task states that no newer items exist.",
+    "claim": "No newer evidence addresses cash deployment or debt maturities. The packet cannot show whether the earlier point has changed.",
+    "facts": [
+     "F3",
+     "F1",
+     "P2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P5, which became effective before the earlier analysis; no newer items exist.",
+    "claim": "No newer evidence addresses the manufacturer franchise agreement risk. The latest quarterly risk-factor item reports no material changes from the annual filing, but that item predates the earlier analysis.",
     "facts": [
      "P1",
      "P2",
      "P5"
     ],
     "quotes": [
-     "We cannot guarantee that any of our existing franchise and dealer agreements will be renewed or that the terms and conditions of such renewals will be favorable to us.",
-     "We believe that we will continue to be able to renew at expiration all of our existing franchise and dealer agreements."
+     "There have been no material changes in our risk factors from those included in \u201cItem 1A. Risk Factors\u201d in our Annual Report on Form 10-K for the year ended December 31, 2025."
     ],
     "support": "supported"
    }
   ],
-  "thesis_change": [],
   "unresolved_questions": [
    {
-    "basis": "Figures are stated in the cited statements; the link between inventory and cash flow is inferred from the line items.",
-    "claim": "Nine-month operating cash flow was (14,500) (table in thousands) against 500,500 a year earlier, with inventories using (415,400). Will the inventory build and the 65 days' new vehicle supply (51 a year earlier) unwind, and how will that be funded?",
+    "basis": "Inferred from the cash flow and balance sheet figures; the filing's own explanation is not in the packet.",
+    "claim": "Nine-month operating cash flow was (14,500) against 500,500 a year earlier. Does the (415,400) inventory outflow reverse, or does it reflect a lasting working-capital build? (table in thousands)",
     "facts": [
-     "F1",
      "F3",
-     "P4"
+     "F1"
     ],
     "quotes": [
-     "On a trailing quarter cost of sales basis, our reported Franchised Dealerships Segment new vehicle inventory days\u2019 supply was approximately 65 days as of September 30, 2026, compared to 51 days as of September 30, 2025."
+     "Inventories | (415,400) | 62,100"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from comparing the balance sheet movement with the cash flow line; no cited item explains the difference.",
-    "claim": "The non-trade floor plan balance rose to 2,076,800 from 1,748,100 (table in thousands), while the cash flow statement shows net repayments of (438,700) on that line. What explains the gap (acquired floor plan, non-cash items, or classification)?",
+    "basis": "Inferred from comparing F1 and F3; the filing does not explain it in the packet.",
+    "claim": "The floor plan non-trade line is printed as net repayments of (438,700), yet the balance sheet liability rose. The financing line items as printed also do not appear to add to the 348,600 total. Are the signs in this extract wrong?",
     "facts": [
-     "F1",
-     "F3"
+     "F3",
+     "F1"
     ],
     "quotes": [
-     "Net (repayments) borrowings on notes payable - floor plan - non-trade"
+     "Net (repayments) borrowings on notes payable - floor plan - non-trade | (438,700) | 229,200",
+     "Notes payable - floor plan - non-trade | 2,076,800 | 1,748,100"
     ],
     "support": "supported"
    },
    {
-    "basis": "Balance sheet amounts are stated; the cause of the reclassification is not given in the cited items.",
-    "claim": "Current maturities of long-term debt rose to 193,300 from 52,400, and the current finance lease liability to 120,900 from 19,200 (table in thousands). What are these obligations and how will they be refinanced or repaid?",
+    "basis": "Inferred from balance sheet line changes; no maturity detail is in the packet.",
+    "claim": "Current maturities of long-term debt and current finance lease liabilities both rose sharply. How will they be refinanced or repaid, and what drove the finance lease change? (table in thousands)",
     "facts": [
-     "F1",
-     "F3"
+     "F1"
     ],
     "quotes": [
-     "Current maturities of long-term debt"
+     "Current maturities of long-term debt | 193,300 | 52,400",
+     "Finance Lease, Liability, Current | 120,900 | 19,200"
     ],
     "support": "supported"
    },
    {
-    "basis": "Both the guidance and the 10-Q discussion are stated in the cited items; whether guidance is met cannot be known yet.",
-    "claim": "Franchised retail new vehicle gross profit fell 7% in the quarter and 13% over nine months, yet the outlook was raised to $3,050 to $3,100 new vehicle GPU. Can the implied Q4 range of $3,000 to $3,200 be met with 65 days' supply and price competition?",
+    "basis": "Stated in the cited items; the link between the two is an inference.",
+    "claim": "Franchised new vehicle days' supply rose to 65 from 51 while management raised its new vehicle gross-profit-per-unit outlook. Will Q4 pricing hold, given the stated price competition?",
     "facts": [
      "P4",
      "P6"
     ],
     "quotes": [
+     "On a trailing quarter cost of sales basis, our reported Franchised Dealerships Segment new vehicle inventory days\u2019 supply was approximately 65 days as of September 30, 2026, compared to 51 days as of September 30, 2025.",
      "Anticipate new vehicle GPU in the $3,050 to $3,100 per unit range for FY 2026 (previously $2,850 to $3,000), implies $3,000 to $3,200 per unit in Q4 2026"
     ],
     "support": "supported"
    },
    {
-    "basis": "Results and drivers are stated in the cited items; future profit conversion is not addressed.",
-    "claim": "EchoPark retail used unit volume grew 22% in the quarter, but reported segment income was $2.0 million against $2.6 million a year earlier. Will volume growth convert to segment profit, given F&I gross profit per unit fell 15%?",
+    "basis": "Stated in the cited items; the future outcome is not in the evidence.",
+    "claim": "EchoPark retail used unit volume grew 22% but segment income fell. Does the segment's volume growth turn into profit growth, particularly after the Orlando opening?",
     "facts": [
-     "P4",
-     "P6"
+     "P6",
+     "P4"
     ],
     "quotes": [
      "Reported EchoPark Segment income of $2.0 million, as compared to $2.6 million in the prior year period, a 23% decrease year-over-year"
@@ -790,34 +1037,135 @@
     "support": "supported"
    },
    {
-    "basis": "Repurchase and share count figures are stated; the remaining authorization at September 30, 2026 is not in the packet.",
-    "claim": "Treasury stock purchases were (142,000) in nine months against (44,100) a year earlier (table in thousands), and diluted weighted shares fell to 32,800 from 34,800. How much repurchase authorization remains at September 30, 2026, and how does buyback pace fit with negative operating cash flow?",
+    "basis": "Inferred from F3; the repurchase authorization remaining at Sep. 30, 2026 is not in the packet.",
+    "claim": "Treasury stock purchases were 142,000 for nine months while operating cash flow was negative. Were the buybacks funded by new debt, and does this pace continue? (table in thousands)",
     "facts": [
-     "F2",
-     "F3",
-     "P1"
+     "F3"
     ],
     "quotes": [
-     "As of December 31, 2025, our total remaining share repurchase authorization was approximately $169.9 million."
+     "Purchases of treasury stock | (142,000) | (44,100)"
     ],
     "support": "supported"
    },
    {
-    "basis": "Inferred from the mismatch between the label dates and counts and the share row in the same item.",
-    "claim": "The balance sheet treasury stock line carries a label citing 33,476,159 shares at September 30, 2018 and 32,290,493 at December 31, 2017, while the share row shows 50,828,146 and 48,588,384. Which share counts and dates are correct for the 2026 period?",
+    "basis": "Inferred; the purchase price allocation is not in the packet.",
+    "claim": "What did the April 2026 Harley-Davidson acquisitions cost and contribute, and how do they relate to the Powersports growth in the quarter? (table in thousands)",
+    "facts": [
+     "P6",
+     "F3"
+    ],
+    "quotes": [
+     "** Includes Five Harley-Davidson Dealerships And One Authorized Retail Outlet Acquired In April 2026, Estimated To Generate $100 Million In Annualized Revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from comparing two lines within F1.",
+    "claim": "The balance sheet treasury stock label cites share counts and dates from 2018 and 2017 and differs from the separate treasury share figure. Which share count is correct for the period?",
     "facts": [
      "F1"
     ],
     "quotes": [
-     "Treasury stock, at cost; 33,476,159 Class A common stock shares held at September 30, 2018 and 32,290,493 Class A common stock shares held at December 31, 2017"
+     "33,476,159 Class A common stock shares held at September 30, 2018"
     ],
-    "support": "number_not_listed"
+    "support": "supported"
    }
   ]
  },
  "ticker": "SAH",
- "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "debt is filed but interest expense is not"
+ "upside": 0.754119993926639,
+ "valuation": {
+  "annotations": [],
+  "departures": [],
+  "directions": {
+   "capex": "none",
+   "fade_years": "none",
+   "long_run_op_margin": "none",
+   "normalized.margin": "none",
+   "normalized.rev_growth": "none",
+   "op_margin.y1": "none",
+   "op_margin.y2": "none",
+   "rev_growth.y1": "none",
+   "rev_growth.y2": "none",
+   "terminal_g": "none",
+   "terminal_ronic": "none"
+  },
+  "evidence": {},
+  "neutral": {
+   "capex": [
+    -0.015197910697128064,
+    -0.015197910697128064,
+    -0.015197910697128064,
+    -0.015197910697128064,
+    -0.015197910697128064
+   ],
+   "fade_years": 10,
+   "long_run_op_margin": 0.026862409927601444,
+   "normalized.margin": 0.026862409927601444,
+   "normalized.rev_growth": 0.0375,
+   "op_margin.y1": 0.032442534427669596,
+   "op_margin.y2": 0.026862409927601444,
+   "rev_growth.y1": 0.0291607207750193,
+   "rev_growth.y2": 0.0375,
+   "terminal_g": 0.0375,
+   "terminal_ronic": 0.09470698114440773
+  },
+  "numbers": {
+   "capex": [
+    -0.015197910697128064,
+    -0.015197910697128064,
+    -0.015197910697128064,
+    -0.015197910697128064,
+    -0.015197910697128064
+   ],
+   "fade_years": 10,
+   "long_run_op_margin": 0.026862409927601444,
+   "normalized.margin": 0.026862409927601444,
+   "normalized.rev_growth": 0.0375,
+   "op_margin.y1": 0.032442534427669596,
+   "op_margin.y2": 0.026862409927601444,
+   "rev_growth.y1": 0.0291607207750193,
+   "rev_growth.y2": 0.0375,
+   "terminal_g": 0.0375,
+   "terminal_ronic": 0.09470698114440773
+  },
+  "of_record": {},
+  "options": {
+   "capex": "pooled",
+   "fade_years": 10,
+   "long_run_op_margin": [
+    "normalized",
+    0
+   ],
+   "normalized.margin": [
+    "persist",
+    0
+   ],
+   "normalized.rev_growth": "anchor",
+   "op_margin.y1": "ytd",
+   "op_margin.y2": "persist",
+   "rev_growth.y1": "ytd",
+   "rev_growth.y2": "anchor",
+   "terminal_g": "anchor",
+   "terminal_ronic": "no_growth_value"
+  },
+  "reverts": [],
+  "unknowns": [
+   "The visible text of the FY 2026 outlook (P6.s86) gives per-unit gross profit, fixed operations gross profit growth and F&I targets, but no company revenue guidance for year 1. Its remaining text is cut off, so revenue guidance cannot be confirmed.",
+   "The evidence does not say whether the third quarter 2026 operating margin, which is lower than the nine-month figure, will continue into year 1 and year 2.",
+   "Capital expenditure guidance is not visible in the evidence."
+  ],
+  "year": 3
+ },
+ "value_base": 92.90486437620837,
+ "value_bear": 85.95413068633862,
+ "value_bull": 99.44499757603536,
+ "value_per_filed_share": {
+  "base": 92.90486437620837,
+  "bear": 85.95413068633862,
+  "bull": 99.44499757603536
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +18.7 points a year against the required return over 3 years"
 }
