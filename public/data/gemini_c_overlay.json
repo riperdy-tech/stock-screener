@@ -2,7 +2,7 @@
  "count": 167,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-17T23:35:01Z",
+ "generated_at": "2026-11-17T23:40:55Z",
  "list_covered": 161,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
@@ -2215,22 +2215,47 @@
    "verdict_reason": "some filed figures are years older than the latest annual report"
   },
   "HRTG": {
-   "alpha_pts": null,
-   "analysis": "not run",
-   "claims": null,
-   "claims_supported": null,
-   "date": "2026-11-16T15:21:38Z",
-   "family": null,
-   "flags": [],
+   "alpha_pts": 44.190575733057514,
+   "analysis": "complete",
+   "claims": 67,
+   "claims_supported": 63,
+   "date": "2026-11-17T23:35:25Z",
+   "equity_value": 2842244455.838243,
+   "family": "financial",
+   "far_from_price": true,
+   "filed_shares": 30949899.0,
+   "flags": [
+    "The Board established a new share repurchase program of up to $50.0 million of common stock. It starts when the existing program expires.",
+    "The company repurchased 1,101,508 shares of common stock at a cost of $27.9 million in 2026, reducing shares outstanding.",
+    "Third-quarter results absorbed $15.8 million of pre-tax catastrophe losses, including $9.1 million from Hurricanes Lala and Lowell. The prior-year quarter had none."
+   ],
    "in_code_book": false,
-   "ke": null,
-   "model": "gemini-4-hydrogen-high",
-   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1598665/000119312526451363/R4.htm",
+   "ke": 0.09390305732783658,
+   "market_cap_at_publish": 1002464764,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 33.83,
    "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "seed_base": {
+    "1000": 91.83372313551793,
+    "3000": 91.83372313551793
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
    "source": "screener list refresh",
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1598665/000119312526451363/R4.htm"
+   "upside": 1.8352562183804029,
+   "value_base": 91.83372313551793,
+   "value_bear": 76.66398546088101,
+   "value_bull": 114.15574258838828,
+   "value_per_filed_share": {
+    "base": 91.83372313551793,
+    "bear": 76.66398546088101,
+    "bull": 114.15574258838828
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +44.2 points a year against the required return over 3 years"
   },
   "HST": {
    "alpha_pts": null,
@@ -5027,11 +5052,11 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 61,
+ "valued_count": 62,
  "verdict_counts": {
   "AVOID": 34,
-  "BUY": 21,
-  "NO_CALL": 106,
+  "BUY": 22,
+  "NO_CALL": 105,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."

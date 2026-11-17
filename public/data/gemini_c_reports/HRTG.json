@@ -1,22 +1,958 @@
 {
- "alpha_pts": null,
- "analysis": "not run",
+ "alpha_pts": 44.190575733057514,
+ "analysis": "complete",
  "authority": "diagnostic: paper only, not investment advice",
- "claims": null,
- "claims_supported": null,
- "date": "2026-11-16T15:21:38Z",
- "family": null,
- "flags": [],
+ "claims": 67,
+ "claims_supported": 63,
+ "date": "2026-11-17T23:35:25Z",
+ "equity_value": 2842244455.838243,
+ "family": "financial",
+ "far_from_price": true,
+ "filed_shares": 30949899.0,
+ "flags": [
+  "The Board established a new share repurchase program of up to $50.0 million of common stock. It starts when the existing program expires.",
+  "The company repurchased 1,101,508 shares of common stock at a cost of $27.9 million in 2026, reducing shares outstanding.",
+  "Third-quarter results absorbed $15.8 million of pre-tax catastrophe losses, including $9.1 million from Hurricanes Lala and Lowell. The prior-year quarter had none."
+ ],
  "in_code_book": false,
- "ke": null,
- "model": "gemini-4-hydrogen-high",
- "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1598665/000119312526451363/R4.htm",
+ "ke": 0.09390305732783658,
+ "market_cap_at_publish": 1002464764,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": null,
+ "price_at_publish": 33.83,
  "qwen_book": null,
+ "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+ "seed_base": {
+  "1000": 91.83372313551793,
+  "3000": 91.83372313551793
+ },
+ "seeds_agree": true,
+ "share_unit_note": null,
  "source": "screener list refresh",
- "tasks": {},
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in the 10-K Item 1 business description",
+    "claim": "Heritage is a property and casualty insurance holding company. It sells mainly personal and commercial residential property insurance through its insurance subsidiaries.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "is a super-regional property and casualty insurance holding company that primarily provides personal and commercial residential insurance through our insurance company subsidiaries"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Item 1",
+    "claim": "The company reports a single operating and reporting segment, so the evidence gives no segment-level revenue or cost split.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We conduct our operations as a single operating and reporting segment."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the supplemental information table of the quarterly MD&A",
+    "claim": "The book is mostly personal residential. In the latest quarterly report, personal residential had 335,909 policies and 1,157,426 of premiums in force (table in thousands). Commercial residential had 3,228 policies and 232,126 of premiums in force (table in thousands).",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Item 1 and Item 1A",
+    "claim": "Heritage sells through independent agents and controls underwriting and claims in-house, as a vertically integrated insurer.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "We write personal and commercial insurance policies through a network of independent agents.",
+     "We are vertically integrated and control or manage substantially all aspects of insurance underwriting, customer service, financial reporting and actuarial analysis, distribution and claims processing and adjusting."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the income statement and the 10-K MD&A definitions",
+    "claim": "Revenue is mainly net premiums earned, meaning gross premiums earned less premiums ceded to reinsurers. For the nine months, gross premiums earned were 1,057,497, ceded premiums were (451,089) and net premiums earned were 606,408, against total revenues of 646,095 (table in thousands).",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Net premiums earned reflect gross premiums earned less ceded premiums during the period."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the quarterly MD&A",
+    "claim": "Premium volume is currently shrinking at the top line. In the third quarter, gross premiums written fell 3.1% to $322.8 million from $333.2 million, because lower commercial residential premiums outweighed personal lines growth.",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "primarily reflecting lower commercial residential premiums, partially offset by growth in personal lines"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the supplemental table and MD&A",
+    "claim": "Commercial residential premiums in force fell (16.1)% while personal residential rose 0.2%, so mix and competition in the commercial line are a key revenue driver.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "primarily due to commercial residential premium reductions resulting from competitive pricing pressure"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A",
+    "claim": "Rate changes reach earnings slowly, which is why they drive revenue with a lag. The company says a rate change can take up to twenty-four months to be fully earned.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "it can take up to twenty-four months for the complete impact of a rate change to be fully earned in our financial statements"
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the quarterly MD&A and earnings release",
+    "claim": "Reinsurance is the largest revenue offset and a major swing factor. Third-quarter ceded premiums fell 11.8% to $147.2 million from $166.8 million, and the ceded premium ratio was 41.7%.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "The reduction in ceded premiums reflected a full quarter of savings driven by the improved pricing of the Company\u2019s June 2026 catastrophe excess of loss program as well as the decrease in the northeast net quota share program, which was effective December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K and balance sheet",
+    "claim": "The reinsurance program mixes several coverage types and sits on the balance sheet as large prepaid and recoverable balances. Prepaid reinsurance premiums were 383,966 and reinsurance recoverable was 218,885 (table in thousands).",
+    "facts": [
+     "P1",
+     "F1"
+    ],
+    "quotes": [
+     "Our reinsurance program includes excess of loss, quota share, per risk and facultative coverage."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the quarterly MD&A",
+    "claim": "Investment income is a secondary revenue stream. Third-quarter net investment income rose 17.3% to $11.4 million from $9.7 million, on a larger invested asset base.",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "Net investment income increased 17.3% to $11.4 million from $9.7 million in the third quarter of 2025, reflecting growth in invested assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K MD&A and the income statement",
+    "claim": "Other revenue is small and fee-based. It is mainly policy and pay-plan fees, and was 7,923 for the nine months (table in thousands).",
+    "facts": [
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "Other revenue is primarily comprised of policy and pay-plan fees"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the income statement and earnings release",
+    "claim": "Losses and loss adjustment expenses are the largest cost. For the nine months they were 234,045 of total expenses of 442,198 (table in thousands), and the net loss ratio was 38.6%.",
+    "facts": [
+     "F2",
+     "P7"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors and earnings release",
+    "claim": "Catastrophe exposure is a key cost driver because nearly all in-force premium is in coastal states. Third-quarter results absorbed $15.8 million of pre-tax catastrophe losses, with none in the prior-year quarter.",
+    "facts": [
+     "P2",
+     "P7"
+    ],
+    "quotes": [
+     "nearly all of our premium in force related to business in coastal states"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the quarterly MD&A",
+    "claim": "Prior-year reserve development has been flattering costs, and management expects that to fade. Third-quarter favorable development was $14.0 million, against $5.0 million in the prior-year quarter.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "this level of favorable net loss development is not expected to continue in the future the Company expects favorable net loss development to moderate as loss reserves now more closely reflect the current claims environment"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the income statement footnote and the 10-K MD&A",
+    "claim": "Acquisition and administrative costs are shown net of ceding commission income from reinsurers. For the nine months, policy acquisition costs were 135,959 and G&A was 72,194 (table in thousands), net of $33.9 million of ceding commission income in acquisition costs.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "We earn ceding commissions on our net quota share reinsurance contract and certain other reinsurance contracts, which are reported as a reduction to policy acquisition costs and general and administrative expenses"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release",
+    "claim": "Underwriting profitability is high. The third-quarter combined ratio was 73.0%, made up of a 39.6% loss ratio and a 33.4% expense ratio.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "A combined ratio under 100% generally reflects profitable underwriting results."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated management plan in the quarterly MD&A",
+    "claim": "Management plans to grow into new geographies, including Texas on an excess and surplus lines basis.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Leverage infrastructure and capabilities to foster future growth, which includes our entry to the State of Texas on an excess and surplus lines basis."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the 10-K Item 1 business description",
+    "claim": "Heritage describes itself as a vertically integrated, super-regional residential property insurer. It controls or manages underwriting, distribution, claims and adjusting in-house, which it presents as a differentiator.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We are vertically integrated and control or manage substantially all aspects of insurance underwriting, customer service, financial reporting and actuarial analysis, distribution and claims processing and adjusting."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Item 1 business description",
+    "claim": "The company has meaningful scale: it ranked in the top 31 homeowners writers nationwide for 2024, with 357,275 policies in force and $1.4 billion of annualized premium at year-end.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "For the year 2024, we ranked in the top 31 writers of homeowners\u2019 insurance business nationwide."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the earnings release and the income statement",
+    "claim": "Underwriting profitability is a core strength. The third-quarter net combined ratio was flat year over year, and net income rose slightly despite higher catastrophe losses.",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "Net combined ratio was relatively flat at 73.0%, compared with 72.9% in the prior-year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A, which gives $14.0 million of favorable development in the quarter",
+    "claim": "Management says favorable reserve development, which flattered recent results, is expected to moderate.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "the Company expects favorable net loss development to moderate as loss reserves now more closely reflect the current claims environment"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated by management in the 10-Q and 10-K",
+    "claim": "Management says rates are adequate in nearly all open territories. This supports the underwriting-discipline position, and it is the basis for the managed growth strategy.",
+    "facts": [
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "Our rates are now adequate in nearly all of our territories which are currently open for new business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A",
+    "claim": "A lower reinsurance cost is helping net revenue. The catastrophe reinsurance program was placed with higher coverage at a lower total and risk-adjusted cost, and ceded premiums fell.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "We successfully completed the placement of our catastrophe excess of loss reinsurance program with higher coverage levels than the prior-year while achieving a lower total and risk-adjusted cost."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release and the balance sheet",
+    "claim": "The balance sheet and capital position have strengthened, which supports ratings and underwriting capacity.",
+    "facts": [
+     "P7",
+     "F1"
+    ],
+    "quotes": [
+     "Book value per share of $20.22, up 23.4% from year-end 2025 and 42.9% from the prior-year quarter.",
+     "Debt-to-capital ratio improved to 10.5% from 15.3% in the prior-year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K",
+    "claim": "Financial strength ratings are in place and the KBRA outlook is stable. The insurance subsidiaries report statutory surplus above the minimum levels required by regulators and rating agencies.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "The KBRA outlook for each entity listed above is stable.",
+     "The surplus for each of our insurance subsidiaries is in excess of the minimum capital levels required by our insurance regulators and our ratings agencies."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q and the income statement",
+    "claim": "The top line is shrinking in the quarter. Gross premiums written fell, driven by Florida commercial residential, where competition is intense and in-force premium dropped.",
+    "facts": [
+     "P4",
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "The Florida commercial residential market remains highly competitive, and management continues to emphasize underwriting discipline and adequate profitability by writing business that meets Heritage\u2019s pricing and risk standards."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q and the earnings release",
+    "claim": "Personal residential policy count is declining, but premium per policy is rising. Growth in other states is offsetting a decline in Florida personal lines premium.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "A reduction in Florida personal lines in-force premiums was more than offset by personal lines growth in other states."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K and 10-Q MD&A",
+    "claim": "The company is pursuing managed growth and geographic expansion, including entry into Texas on an excess and surplus lines basis. It reported strong new business production late in the prior year.",
+    "facts": [
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Leverage infrastructure and capabilities to foster future growth, which includes our entry to the State of Texas on an excess and surplus lines basis.",
+     "New business premium production for the fourth quarter of 2025 increased over 60% compared to new business production for the fourth quarter of 2024."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors and 10-Q",
+    "claim": "Catastrophe exposure is a persistent threat because nearly all premium is in coastal states. Third-quarter results absorbed catastrophe losses, and the company says its risk factors are unchanged.",
+    "facts": [
+     "P2",
+     "P4",
+     "P5"
+    ],
+    "quotes": [
+     "As of December 31, 2025, nearly all of our premium in force related to business in coastal states, which are especially subject to adverse weather conditions such as hurricanes, tropical storms, and winter storms."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors, with balance sheet figures",
+    "claim": "The company depends on reinsurers and the Florida Hurricane Catastrophe Fund, which creates counterparty and availability risk.",
+    "facts": [
+     "P2",
+     "F1"
+    ],
+    "quotes": [
+     "To the extent that our reinsurers are unable to meet the obligations they assume under our reinsurance agreements, we remain liable for the entire insured loss."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors. The 10-K also gives about 25% of voluntary personal lines policies from eight agency networks in Item 1, versus 23% in Item 1A.",
+    "claim": "Competitive pressure is a named threat. Some rivals have greater financial resources, larger agency networks and more name recognition, and the company relies on independent agents.",
+    "facts": [
+     "P2",
+     "P1"
+    ],
+    "quotes": [
+     "Some of these competitors have greater financial resources, larger agency networks and greater name recognition than we do.",
+     "We write personal and commercial insurance policies through a network of independent agents."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in the balance sheet and the 10-Q MD&A.",
+    "claim": "Liquidity is substantial. Cash and cash equivalents were 532,098 (table in thousands) at the latest quarter-end, against 559,274 at year-end, and total investments were 854,656. Management puts cash and invested assets at $1.4 billion, up 8.8% from year-end.",
+    "facts": [
+     "F1",
+     "P4"
+    ],
+    "quotes": [
+     "Cash and invested assets totaled $1.4 billion at quarter-end, up 8.8% from December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release and the balance sheet.",
+    "claim": "Financial leverage is low and falling. Long-term debt, net was 70,432 (table in thousands) against 78,428 at year-end and stockholders' equity of 599,141. The company reports a debt-to-capital ratio of 10.5%, improved from 15.3% a year earlier.",
+    "facts": [
+     "F1",
+     "P7"
+    ],
+    "quotes": [
+     "Debt-to-capital ratio improved to 10.5% from 15.3% in the prior-year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Read directly from the balance sheet. The reading that these items differ in nature from borrowings is inferred.",
+    "claim": "Most liabilities are insurance obligations, not borrowings. Total liabilities were 1,663,681 (table in thousands), of which unpaid losses and loss adjustment expenses were 459,875 and unearned premiums were 708,385. Long-term debt, net was only 70,432.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement. The comparison with net income is inferred from the same statement.",
+    "claim": "Cash generation is solid. Operating cash flow for nine months was 176,170 (table in thousands), up from 168,432. It was above net income of 149,317, and capital spending was small at 2,632.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The line items are stated. The reading of working-capital timing is inferred from the cash flow statement.",
+    "claim": "The quality of operating cash flow depends partly on reinsurance and reserve timing. Reinsurance payable rose by 106,342 (table in thousands), which adds to operating cash until it is paid. Reinsurance recoverable fell by 99,703 and unpaid losses fell by 119,602, and prepaid reinsurance premiums used 76,927. These swings are much smaller than the prior-year 360,749 recoverable change and 393,103 reserve change.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A. The link to cash is inferred.",
+    "claim": "Earnings carry a reserve-release tailwind that management expects to fade. Net favorable prior-year loss development was $14.0 million in the quarter. Management says this level is not expected to continue and expects favorable development to moderate.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Net favorable prior-year loss development was $14.0 million in the third quarter of 2026, compared with $5.0 million in the prior-year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement.",
+    "claim": "Nine-month cash uses were mainly investing and shareholder returns. Net cash used in investing was (159,893) (table in thousands), with fixed maturity purchases of (280,700) against sales and maturities of 112,116. Financing used (43,474), including treasury stock purchases of (26,253). Cash, cash equivalents and restricted cash fell by (27,197).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release.",
+    "claim": "Capital returns are ongoing and funded from cash flow. The company repurchased 1,101,508 shares for $27.9 million this year, and $34.1 million remained under the current authorization. A new program of up to $50.0 million runs through the end of next year.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "On October 28, 2026, the Board of Directors established a new share repurchase program to commence upon the expiration of the existing program on December 31, 2026, for the purpose of repurchasing up to an aggregate of $50.0 million of common stock through December 31, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The repayment and cash figures are stated. The ability to meet debt is inferred.",
+    "claim": "The evidence gives no debt maturity schedule, so near-term refinancing needs cannot be stated. Recorded repayments in the nine months were small (repayment of loan agreement (5,500), term loan principal (2,812); table in thousands) against cash of 532,098 and operating cash flow of 176,170. Combined statutory surplus of the insurance subsidiaries was $392.5 million at year-end.",
+    "facts": [
+     "F1",
+     "F3",
+     "P1"
+    ],
+    "quotes": [
+     "combined statutory surplus for our three insurance company subsidiaries of $392.5 million"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K risk factors and the 10-Q MD&A.",
+    "claim": "The main contingent liquidity risk is a severe catastrophe. Management has placed its catastrophe reinsurance program with higher coverage, but the risk factors warn that a very severe event or series of events could exceed reinsurance protection.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "We successfully completed the placement of our catastrophe excess of loss reinsurance program with higher coverage levels than the prior-year while achieving a lower total and risk-adjusted cost.",
+     "an especially severe catastrophe or series of catastrophes could exceed our reinsurance protection and may have a material adverse impact on our results of operations and financial condition."
+    ],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the cited 10-Q MD&A; the condition is inferred from the treaty-year statement.",
+    "claim": "Lower reinsurance cost is lifting net premiums earned even though gross premiums are shrinking. Third-quarter ceded premiums fell 11.8% to $147.2 million, and net premiums earned rose 5.4% to $205.6 million. For this to continue, the cheaper catastrophe program must stay in force and gross earned premium must not fall further.",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "This should also favorably impact the ceded premium through the remainder of the treaty year ending May 31, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated by management in the cited 10-Q; the conditions are inferred from the stated mechanism.",
+    "claim": "Rate adequacy and better Florida claim costs support margins. For the quarter, net losses and LAE were $81.4 million and the net loss ratio was 39.6%. Continued margin support requires rates to stay adequate and litigation-related claim costs in Florida to stay low.",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "Our rates are now adequate in nearly all of our territories which are currently open for new business."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited 10-Q MD&A.",
+    "claim": "Reserve releases boosted recent earnings, and management says this will not continue at the same level. Favorable prior-year development was $14.0 million in the third quarter against $5.0 million a year earlier. Earnings growth therefore has to come from other sources.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "this level of favorable net loss development is not expected to continue in the future"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items; the condition is inferred from the offsetting premium trends.",
+    "claim": "Personal lines growth outside Florida is the volume driver, and it must outpace the commercial residential decline. Total premiums-in-force fell 2.8%, with commercial residential down 16.1% to $232,126 (table in thousands). Personal residential premiums-in-force were up 0.2%.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "A reduction in Florida personal lines in-force premiums was more than offset by personal lines growth in other states."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "Stated as an initiative; its effect on results is not quantified.",
+    "claim": "Entering Texas on an excess and surplus lines basis is a planned geographic growth lever. The evidence shows no premium contribution from it yet.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "Leverage infrastructure and capabilities to foster future growth, which includes our entry to the State of Texas on an excess and surplus lines basis."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited 10-Q MD&A; the balance sheet figures are from the statements.",
+    "claim": "Investment income is growing with the invested asset base. Net investment income rose 17.3% to $11.4 million from $9.7 million. Continued growth requires the asset base to keep growing and the portfolio to hold up.",
+    "facts": [
+     "P4",
+     "F2",
+     "F1"
+    ],
+    "quotes": [
+     "Net investment income increased 17.3% to $11.4 million from $9.7 million in the third quarter of 2025, reflecting growth in invested assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited earnings release; the condition is inferred.",
+    "claim": "Share repurchases add to per-share growth. Third-quarter diluted EPS rose 5.5% to $1.72 against net income up only 1.4%, aided by a 4.0% reduction in diluted shares. This requires continued capital generation and use of the new $50.0 million program.",
+    "facts": [
+     "P7",
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Earnings per share increased 5.5% to $1.72 per diluted share in the third quarter, as compared to $1.63 per diluted share in the prior-year quarter, aided by a 4.0% reduction in diluted shares outstanding."
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item (8-K earnings release)",
+    "claim": "The Board established a new share repurchase program of up to $50.0 million of common stock. It starts when the existing program expires.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "On October 28, 2026, the Board of Directors established a new share repurchase program to commence upon the expiration of the existing program on December 31, 2026, for the purpose of repurchasing up to an aggregate of $50.0 million of common stock through December 31, 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (8-K earnings release)",
+    "claim": "The company repurchased 1,101,508 shares of common stock at a cost of $27.9 million in 2026, reducing shares outstanding.",
+    "facts": [
+     "P7"
+    ],
+    "quotes": [
+     "Repurchased 1,101,508 shares of common stock at a cost of $27.9 million in 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-Q MD&A)",
+    "claim": "Third-quarter results absorbed $15.8 million of pre-tax catastrophe losses, including $9.1 million from Hurricanes Lala and Lowell. The prior-year quarter had none.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Third quarter results absorbed $15.8 million of pre-tax catastrophe losses, including $9.1 million from Hurricanes Lala and Lowell"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-Q MD&A)",
+    "claim": "The company completed placement of its catastrophe excess of loss reinsurance program with higher coverage levels and a lower total and risk-adjusted cost than the prior year.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "We successfully completed the placement of our catastrophe excess of loss reinsurance program with higher coverage levels than the prior-year while achieving a lower total and risk-adjusted cost."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "stated in the risk factor and the 10-Q MD&A; the severity of any future event is not stated",
+    "claim": "Catastrophe exposure is concentrated in coastal states, and Q3 2026 already absorbed $15.8 million of pre-tax catastrophe losses against none in the prior-year quarter.",
+    "facts": [
+     "P2",
+     "P4"
+    ],
+    "quotes": [
+     "As of December 31, 2025, nearly all of our premium in force related to business in coastal states, which are especially subject to adverse weather conditions such as hurricanes, tropical storms, and winter storms.",
+     "Third quarter results absorbed $15.8 million of pre-tax catastrophe losses"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A (moderation) and the 10-K risk factor (reserve uncertainty); the size of any future change is not stated",
+    "claim": "Recent earnings were helped by favorable prior-year reserve development of $14.0 million in Q3, which management says will not continue at this level. Reserves are also estimates that could prove inadequate.",
+    "facts": [
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "this level of favorable net loss development is not expected to continue in the future",
+     "Because of the inherent uncertainties in the reserving process, we cannot be certain that our reserves will be adequate to cover our actual losses and loss adjustment expenses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and the earnings release",
+    "claim": "Premium volume is shrinking because of Florida commercial residential competition. Gross premiums written fell 3.1% to $322.8 million, and commercial residential premiums-in-force were down (16.1)%.",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "The Florida commercial residential market remains highly competitive"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and the 10-K risk factor; the renewal outlook is inferred, not stated",
+    "claim": "Net premiums earned grew 5.4% in Q3 because ceded premiums fell, not because gross premiums grew, so the margin benefit depends on reinsurance pricing that resets after the current treaty year.",
+    "facts": [
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "Net premiums earned increased 5.4% to $205.6 million from $195.1 million in the prior-year quarter, driven by lower ceded premiums more than offsetting the decrease in gross earned premiums.",
+     "The cost of reinsurance is subject to prevailing market conditions beyond our control"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the earnings release; the weakness of the growth is inferred from the comparison of net income and EPS growth rates",
+    "claim": "Per-share earnings growth leans partly on buybacks. Q3 net income rose 1.4% while diluted EPS rose 5.5%, aided by a 4.0% reduction in diluted shares.",
+    "facts": [
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "Earnings per share increased 5.5% to $1.72 per diluted share in the third quarter, as compared to $1.63 per diluted share in the prior-year quarter, aided by a 4.0% reduction in diluted shares outstanding."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the balance sheet and the 10-K risk factor; no specific reinsurer problem is stated",
+    "claim": "Reinsurance recoverables of $218,885 (table in thousands) depend on reinsurers' ability and willingness to pay. The company remains liable for the full insured loss if they cannot.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "To the extent that our reinsurers are unable to meet the obligations they assume under our reinsurance agreements, we remain liable for the entire insured loss."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Stated in the cited items (management expects favorable development to moderate); the size of the effect is not given.",
+    "claim": "Favorable prior-year loss development was $14.0 million in the third quarter versus $5.0 million a year earlier, and management expects it to moderate. How much will the loss ratio rise as it does?",
+    "facts": [
+     "P4",
+     "P7"
+    ],
+    "quotes": [
+     "Net favorable prior-year loss development was $14.0 million in the third quarter of 2026, compared with $5.0 million in the prior-year quarter."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cited items for the decline and its cause; any future trend is not stated.",
+    "claim": "Commercial residential premiums-in-force fell (16.1)%. Will Florida competitive pressure ease, or will this keep shrinking total premiums-in-force?",
+    "facts": [
+     "P4",
+     "P7",
+     "P3"
+    ],
+    "quotes": [
+     "The Florida commercial residential market remains highly competitive, and management continues to emphasize underwriting discipline and adequate profitability by writing business that meets Heritage\u2019s pricing and risk standards."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the stated decline and the stated growth intentions; no growth target or Texas premium figure is given.",
+    "claim": "Gross premiums written fell 3.1% to $322.8 million, while management says it is pursuing managed growth and entry to Texas. When will growth initiatives turn written premium positive?",
+    "facts": [
+     "P4",
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "We anticipate growing our portfolio during 2026 while maintaining our disciplined underwriting standards."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Authorization sizes are stated; actual pace and use of the authorizations are not.",
+    "claim": "A new share repurchase program of up to $50.0 million was authorized, with $34.1 million left under the current one. How fast will the company repurchase shares compared with accumulating capital or funding growth?",
+    "facts": [
+     "P7",
+     "F3"
+    ],
+    "quotes": [
+     "On October 28, 2026, the Board of Directors established a new share repurchase program to commence upon the expiration of the existing program on December 31, 2026, for the purpose of repurchasing up to an aggregate of $50.0 million of common stock through December 31, 2027.",
+     "As of September 30, 2026, the Company had $34.1 million remaining under the existing authorization."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred; the filings describe the new program only qualitatively.",
+    "claim": "The new catastrophe excess of loss program has higher coverage levels at a lower cost, but its limit and retention are not given. The prior program carried an aggregate limit of $3.75 billion. How large is the new limit, and what loss is retained?",
+    "facts": [
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "We successfully completed the placement of our catastrophe excess of loss reinsurance program with higher coverage levels than the prior-year while achieving a lower total and risk-adjusted cost.",
+     "In total, for the period from June 1, 2025 through May 31, 2026, we have purchased an aggregate limit of $3.75 billion of catastrophe reinsurance coverage for Heritage P&C, Zephyr, and NBIC, for multiple catastrophic events."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Balance sheet figures are stated; the cause of the move is inferred from the unrealized loss line in the income statement.",
+    "claim": "Accumulated other comprehensive loss widened to (33,243) from (10,555) (table in thousands) as fixed maturities were carried below amortized cost. Will the unrealized losses reverse or be realized?",
+    "facts": [
+     "F1",
+     "F2"
+    ],
+    "quotes": [
+     "Accumulated other comprehensive loss, net of taxes | (33,243) | (10,555)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the cash flow and balance sheet lines; the split between recurring and run-off cash is not given.",
+    "claim": "Operating cash flow of 176,170 (table in thousands) included 99,703 collected on reinsurance recoverables, offset by a (119,602) decline in unpaid losses. How much of operating cash flow is recurring rather than run-off of past catastrophe claims?",
+    "facts": [
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "Reinsurance recoverable on paid and unpaid claims | 99,703 | 360,749"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred; the surplus figure is stated only for year-end 2025 and dividend capacity is not stated.",
+    "claim": "Only year-end statutory surplus of $392.5 million for the insurance subsidiaries is given. What is the statutory surplus now, and how much can be paid up to the holding company for buybacks?",
+    "facts": [
+     "P1",
+     "F1"
+    ],
+    "quotes": [
+     "As of December 31, 2025, we had stockholders\u2019 equity of $505.3 million and combined statutory surplus for our three insurance company subsidiaries of $392.5 million."
+    ],
+    "support": "supported"
+   }
+  ]
+ },
  "ticker": "HRTG",
- "valuation": null,
- "valued": false,
- "verdict": "NO_CALL",
- "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1598665/000119312526451363/R4.htm"
+ "upside": 1.8352562183804029,
+ "valuation": {
+  "annotations": [],
+  "departures": [
+   {
+    "driver": "record_persistence",
+    "evidence": [
+     "F1",
+     "P7.s13",
+     "V0"
+    ],
+    "input": "book_growth.y1"
+   },
+   {
+    "driver": "record_persistence",
+    "evidence": [
+     "P7.s12",
+     "F2",
+     "V0"
+    ],
+    "input": "roe.y1"
+   }
+  ],
+  "directions": {
+   "book_growth.y1": "up",
+   "book_growth.y2": "none",
+   "fade_years": "none",
+   "long_run_roe": "none",
+   "normalized.book_growth": "none",
+   "normalized.roe": "none",
+   "roe.y1": "up",
+   "roe.y2": "none",
+   "terminal_g": "none"
+  },
+  "evidence": {
+   "F1": {
+    "kind": "statement",
+    "period": "2026-09-30",
+    "text": "Condensed Consolidated Balance Sheets - USD ($) $ in Thousands | Sep. 30, 2026 | Dec. 31, 2025\nASSETS\nFixed maturities, available-for-sale, at fair value (amortized cost of $895,936 and $726,774) | $ 852,630 | $ 713,237\nEquity securities, at fair value, (cost $816 and $1,064) | 816 | 1,064\nOther investments, net | 1,210 | 1,285\nTotal investments | 854,656 | 715,586\nCash and cash equivalents | 532,098 | 559,274\nRestricted cash | 13,286 | 13,307\nAccrued investment income | 7,125 | 6,556\nPremiums receivable, net | 87,931 | 95,331\nReinsurance recoverable on paid and unpaid claims, net of allowance for credit losses of $175 | 218,885 | 318,588\nPrepaid reinsurance premiums | 383,966 | 307,039\nDeferred income tax asset, net | 15,128 | 5,855\nIncome taxes receivable, net | 571 | 0\nDeferred policy acquisition costs, net | 64,852 | 64,544\nProperty and equipment, net | 26,402 | 28,254\nRight-of-use lease asset, finance | 10,773 | 12,598\nRight-of-use lease asset, operating | 5,852 | 4,878\nIntangibles, net | 25,651 | 30,189\nOther assets | 15,646 | 33,823\nTotal Assets | 2,262,822 | 2,195,822\nLIABILITIES AND STOCKHOLDERS' EQUITY\nUnpaid losses and loss adjustment expenses | 459,875 | 579,477\nUnearned premiums | 708,385 | 707,923\nReinsurance payable | 339,143 | 232,801\nLong-term debt, net | 70,432 | 78,428\nAdvance premiums | 26,776 | 19,164\nIncome taxes payable, net | 0 | 4,282\nAccrued compensation | 8,703 | 8,844\nLease liability, finance | 13,612 | 15,587\nLease liability, operating | 6,073 | 5,800\nAccounts payable and other liabilities | 30,682 | 38,265\nTotal Liabilities | 1,663,681 | 1,690,571\nCommitments and contingencies (Note 17)\nStockholders\u2019 Equity:\nCommon stock, $0.0001 par value, 50,000,000 shares authorized, 43,071,733 shares issued and 29,632,416 outstanding at September 30, 2026 and 43,171,585 shares issued and 30,833,776 outstanding at December 31, 2025 | 3 | 3\nAdditional paid-in capital | 360,888 | 365,736\nAccumulated other comprehensive loss, net of taxes | (33,243) | (10,555)\nTreasury stock, at cost, 13,439,317 shares at September 30, 2026 and 12,337,809 shares at December 31, 2025 | (161,074) | (133,183)\nRetained earnings | 432,567 | 283,250\nTotal Stockholders' Equity | 599,141 | 505,251\nTotal Liabilities and Stockholders' Equity | $ 2,262,822 | $ 2,195,822"
+   },
+   "F2": {
+    "kind": "statement",
+    "period": "2026-09-30",
+    "text": "Condensed Consolidated Statements of Operations and Other Comprehensive Income (Unaudited) - USD ($) $ in Thousands | 3 Months Ended | 9 Months Ended\nSep. 30, 2026 | Sep. 30, 2025 | Sep. 30, 2026 | Sep. 30, 2025\nREVENUES:\nGross premiums written | $ 322,778 | $ 333,160 | $ 1,057,965 | $ 1,100,125\nChange in gross unearned premiums | 30,003 | 28,801 | (468) | (30,742)\nGross premiums earned | 352,781 | 361,961 | 1,057,497 | 1,069,383\nCeded premiums | (147,190) | (166,829) | (451,089) | (477,901)\nNet premiums earned | 205,591 | 195,132 | 606,408 | 591,482\nNet investment income | 11,361 | 9,686 | 31,823 | 27,295\nNet realized (losses) gains on debt securities and other investments | (38) | 2,746 | (59) | 2,746\nOther revenue | 2,327 | 4,895 | 7,923 | 10,490\nTotal revenues | 219,241 | 212,459 | 646,095 | 632,013\nEXPENSES:\nLosses and loss adjustment expenses | 81,391 | 74,766 | 234,045 | 249,793\nPolicy acquisition costs, net of ceding commission income | [1] | 45,114 | 45,182 | 135,959 | 134,143\nGeneral and administrative expenses, net of ceding commission income | [2] | 23,506 | 22,345 | 72,194 | 70,604\nTotal expenses | 150,011 | 142,293 | 442,198 | 454,540\nOperating income | 69,230 | 70,166 | 203,897 | 177,473\nInterest expense, net | 1,515 | 1,850 | 4,983 | 6,157\nIncome before income taxes | 67,715 | 68,316 | 198,914 | 171,316\nIncome tax expense | 16,591 | 17,895 | 49,597 | 42,397\nNet income (loss) | 51,124 | 50,421 | 149,317 | 128,919\nOTHER COMPREHENSIVE (LOSS) INCOME\nChange in net unrealized (losses) gains on investments | (23,421) | 6,009 | (29,859) | 20,557\nReclassification adjustment for net realized investment (gains) losses | 57 | (5) | 78 | (5)\nIncome tax benefits (expense) related to items of other comprehensive income | 5,567 | (1,428) | 7,093 | (4,886)\nTotal comprehensive income | $ 33,327 | $ 54,997 | $ 126,629 | $ 144,585\nWeighted average shares outstanding\nBasic (in shares) | 29,727,529 | 30,962,464 | 30,141,881 | 30,888,169\nDiluted (in shares) | 29,784,837 | 31,021,780 | 30,200,528 | 30,947,450\nEarnings per share\nBasic (in dollars per share) | $ 1.72 | $ 1.63 | $ 4.95 | $ 4.17\nDiluted (in dollars per share) | $ 1.72 | $ 1.63 | $ 4.94 | $ 4.17\n[1] | Policy acquisition costs include $11.5 million and $33.9 million of ceding commission income for the three and nine months ended September 30, 2026 and $12.7 million and $37.5 million of ceding commission income for the three and nine months ended September 30, 2025.\n[2] | General and administrative expenses include $3.8 million and $11.2 million of ceding commission income for the three and nine months ended September 30, 2026 and $4.2 million and $12.4 million of ceding commission income for the three and nine months ended September 30, 2025."
+   },
+   "P7.s12": {
+    "kind": "release",
+    "period": "2026-10-28",
+    "text": "Annualized return on equity of 35.1% for the third quarter of 2026 and 36.1% year to date, with stockholders\u2019 equity at September 30, 2026 up 37.0% from September 30, 2025."
+   },
+   "P7.s13": {
+    "kind": "release",
+    "period": "2026-10-28",
+    "text": "Book value per share of $20.22, up 23.4% from year-end 2025 and 42.9% from the prior-year quarter."
+   },
+   "V0": {
+    "kind": "code_base",
+    "period": "2025-12-31",
+    "text": "[V0] Measured by code from the filings (not a forecast). Base fiscal year ended 2025-12-31.\nFiled return-on-equity record (income to common over opening common equity): min -0.4500, p25 -0.1689, median 0.2794, p75 0.3458, max 0.6726, last 0.6726.\nCommon book equity at the end of the base year 505,251,000; income to common in the base year 195,594,000.\nFiled yearly growth of book equity (consecutive fiscal years): 2021-12-31 -0.2245, 2022-12-31 -0.6180, 2023-12-31 0.6810, 2024-12-31 0.3201, 2025-12-31 0.7375.\nCost of equity 0.0939 (risk-free 0.0515, long-run growth anchor 0.0375, loading 0.889, equity premium 0.0477).\nMENU (option and the number code uses; the first option is the record-neutral one).\nbook_growth.y1, book_growth.y2, normalized.book_growth: neutral 0.0375; record_median 0.3201; last 0.7375; anchor 0.0375; guidance\nroe.y1, roe.y2: median 0.2794; p25 -0.1689; p75 0.3458; last 0.6726; guidance\nnormalized.anchor and long_run_roe.anchor: median 0.2794; p25 -0.1689; p75 0.3458; last 0.6726; long_run_roe.anchor also normalized (the normalized number)\nnormalized.step and long_run_roe.step (points added to the anchor): 0, -3, -2, -1, -0.5, 0.5, 1, 2, 3\nnormalized.year: 3, 4, 5\nfade_years (years from year 6 to the long run): 10, 5, 15, 20\nterminal_g: neutral 0.0375; anchor 0.0375; half_anchor 0.0187; zero 0.0000; decline not available\nDeparture keys: book_growth.y1, book_growth.y2, roe.y1, roe.y2, normalized.roe, normalized.book_growth, long_run_roe, fade_years, terminal_g.\nDrivers: pricing, volume, mix, cost_program, capex_program, guidance, backlog, cycle_recovery, cycle_downturn, competition, regulation, secular_decline, return_to_growth, record_persistence.\nGuidance metrics: book_growth, roe."
+   }
+  },
+  "neutral": {
+   "book_growth.y1": 0.0375,
+   "book_growth.y2": 0.0375,
+   "fade_years": 10,
+   "long_run_roe": 0.2793671690575631,
+   "normalized.book_growth": 0.0375,
+   "normalized.roe": 0.2793671690575631,
+   "roe.y1": 0.2793671690575631,
+   "roe.y2": 0.2793671690575631,
+   "terminal_g": 0.0375
+  },
+  "numbers": {
+   "book_growth.y1": 0.3201334664971853,
+   "book_growth.y2": 0.0375,
+   "fade_years": 10,
+   "long_run_roe": 0.2793671690575631,
+   "normalized.book_growth": 0.0375,
+   "normalized.roe": 0.2793671690575631,
+   "roe.y1": 0.34575202802219185,
+   "roe.y2": 0.2793671690575631,
+   "terminal_g": 0.0375
+  },
+  "of_record": {},
+  "options": {
+   "book_growth.y1": "record_median",
+   "book_growth.y2": "neutral",
+   "fade_years": 10,
+   "long_run_roe": [
+    "normalized",
+    0
+   ],
+   "normalized.book_growth": "neutral",
+   "normalized.roe": [
+    "median",
+    0
+   ],
+   "roe.y1": "p75",
+   "roe.y2": "median",
+   "terminal_g": "neutral"
+  },
+  "reverts": [],
+  "unknowns": [
+   "Full-year 2026 results are not in the evidence; the nine-month figures are the latest.",
+   "The filings say favorable prior-year reserve development is expected to moderate, but they do not say by how much.",
+   "The evidence does not show how much of the 2026 return came from low catastrophe losses versus lasting underwriting margin.",
+   "Future buyback pace beyond the new $50.0 million program, and 2027 and later book growth, are not stated.",
+   "The evidence does not say when a hurricane season or a reinsurance-cost cycle would pull returns back toward the record median."
+  ],
+  "year": 3
+ },
+ "value_base": 91.83372313551793,
+ "value_bear": 76.66398546088101,
+ "value_bull": 114.15574258838828,
+ "value_per_filed_share": {
+  "base": 91.83372313551793,
+  "bear": 76.66398546088101,
+  "bull": 114.15574258838828
+ },
+ "valued": true,
+ "verdict": "BUY",
+ "verdict_reason": "expected return +44.2 points a year against the required return over 3 years"
 }
