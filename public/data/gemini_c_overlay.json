@@ -1,9 +1,9 @@
 {
- "count": 121,
+ "count": 122,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T12:40:07Z",
- "list_covered": 119,
+ "generated_at": "2026-11-17T12:46:29Z",
+ "list_covered": 120,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -2921,6 +2921,29 @@
    "verdict": "BUY",
    "verdict_reason": "expected return +23.9 points a year against the required return over 3 years"
   },
+  "SAH": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 64,
+   "claims_supported": 61,
+   "date": "2026-11-17T12:40:21Z",
+   "family": "operating",
+   "flags": [
+    "The company recorded impairment charges of $173.8 million, up from $3.9 million the year before.",
+    "Sonic acquired Harley-Davidson dealerships for its Powersports Segment, expected to add about $100 million of annualized revenue.",
+    "A cybersecurity incident at CDK Global suspended systems the company used. The company estimates it cut reported pre-tax income by about $47.2 million."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "debt is filed but interest expense is not",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "debt is filed but interest expense is not"
+  },
   "SEZL": {
    "alpha_pts": -21.8909098198875,
    "analysis": "complete",
@@ -3698,7 +3721,7 @@
  "verdict_counts": {
   "AVOID": 25,
   "BUY": 16,
-  "NO_CALL": 74,
+  "NO_CALL": 75,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
