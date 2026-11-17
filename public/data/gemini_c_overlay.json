@@ -1,9 +1,9 @@
 {
- "count": 149,
+ "count": 150,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T18:23:52Z",
- "list_covered": 143,
+ "generated_at": "2026-11-17T18:31:03Z",
+ "list_covered": 144,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -3828,6 +3828,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no usable tax rate in the filings"
   },
+  "TOP": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 71,
+   "claims_supported": 71,
+   "date": "2026-11-17T18:24:08Z",
+   "family": "operating",
+   "flags": [
+    "Nasdaq notified the company that it no longer met the minimum bid price requirement for continued listing. The company later reported that it regained compliance and the matter is closed.",
+    "The private placement of units (Class A shares plus warrants) closed, with gross proceeds of $80 million before offering expenses.",
+    "The company issued shares on exercise of the amended warrants after entering into warrant amendment agreements with holders."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "some filed figures are years older than the latest annual report"
+  },
   "TPC": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -4448,7 +4471,7 @@
  "verdict_counts": {
   "AVOID": 29,
   "BUY": 18,
-  "NO_CALL": 96,
+  "NO_CALL": 97,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
