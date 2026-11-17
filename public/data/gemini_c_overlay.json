@@ -1,9 +1,9 @@
 {
- "count": 160,
+ "count": 161,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T19:32:14Z",
- "list_covered": 154,
+ "generated_at": "2026-11-17T19:37:45Z",
+ "list_covered": 155,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -1537,6 +1537,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "operating income for the latest year is not filed under a standard tag"
+  },
+  "EQNR": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 74,
+   "claims_supported": 63,
+   "date": "2026-11-17T19:32:29Z",
+   "family": "commodity",
+   "flags": [
+    "Equinor entered into an agreement to acquire 87.71% of the Class A shares of Lackawanna Energy Center, a gas-fired power plant in Pennsylvania. It will be accounted for as an equity-method joint venture in the Power segment. The item does not say the deal has closed.",
+    "Equinor has agreed to sell its remaining 20% interest in the Peregrino field in Brazil. Completion is expected in the fourth quarter of 2026 or the first quarter of 2027, subject to approvals.",
+    "A transaction involving Equinor's non-operated interests in Bandurria Sur and Bajo del Toro closed in the second quarter of 2026. The fair value of the consideration was USD 1,425 million, and a pre-tax gain of USD 467 million was recognised in E&P International as Other Income."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "a required figure is not filed (capex or working capital)"
   },
   "ESEA": {
    "alpha_pts": null,
@@ -4781,7 +4804,7 @@
  "verdict_counts": {
   "AVOID": 32,
   "BUY": 19,
-  "NO_CALL": 103,
+  "NO_CALL": 104,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
