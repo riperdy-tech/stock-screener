@@ -31,6 +31,7 @@ test('aiVerdict: Gemini over Claude, Claude alone, neither', () => {
     assert.deepEqual(aiVerdict(rows[2]), { verdict: 'WATCH', source: 'gemini' });
     assert.equal(aiVerdict(rows[4]), null);
     assert.equal(aiVerdict({ geminiC: { verdict: 'WATCH', analysis: 'complete', model: 'claude-opus-5-5' } } as unknown as DeskRow)?.source, 'opus');
+    assert.equal(aiVerdict({ geminiC: { verdict: 'WATCH', analysis: 'complete', model: 'claude-sonnet-5-5' } } as unknown as DeskRow)?.source, 'sonnet');
     assert.deepEqual(aiVerdict(row('FFF', 'BUY', 'NOT_RUN')), { verdict: 'BUY', source: 'claude' });   // a refused Gemini run hides nothing
     assert.deepEqual(aiVerdict(row('GGG', 'WATCH', 'NO_CALL')), { verdict: 'WATCH', source: 'claude' });   // a no call from the read hides nothing
     assert.deepEqual(aiVerdict(row('HHH', 'NO_CALL', 'NO_CALL')), { verdict: 'NO_CALL', source: 'gemini' });   // both no call: the read's

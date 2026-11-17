@@ -30,7 +30,7 @@ export function QwenPanel({ ticker, live, listed, monthly, gemini = false }: { t
     const { t } = useLanguage();
     const [q, setQ] = useState<(QwenReport & { verdict?: string; verdict_reason?: string; model?: string }) | null | undefined>(undefined);
     const [open, setOpen] = useState(false);
-    const m = (q?.model ?? '').includes('claude') ? 'Claude Opus' : 'Gemini';   // the gemini_c files hold both arms; the report says which
+    const m = (q?.model ?? '').includes('sonnet') ? 'Claude Sonnet' : (q?.model ?? '').includes('claude') ? 'Claude Opus' : 'Gemini';   // the gemini_c files hold both arms; the report says which
 
     useEffect(() => {
         let alive = true;
