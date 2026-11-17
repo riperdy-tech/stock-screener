@@ -1,9 +1,9 @@
 {
- "count": 147,
+ "count": 148,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T18:12:24Z",
- "list_covered": 141,
+ "generated_at": "2026-11-17T18:17:41Z",
+ "list_covered": 142,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -3451,6 +3451,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "preferred stock is not filed for every year needed"
   },
+  "SM": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 62,
+   "claims_supported": 59,
+   "date": "2026-11-17T18:12:43Z",
+   "family": "commodity",
+   "flags": [
+    "SM Energy completed its merger with Civitas, issuing 124 million shares to Civitas holders. This was SM acquiring Civitas, not an acquisition of SM.",
+    "SM completed the South Texas Divestiture. After the final post-closing settlement, total net cash proceeds were $894 million.",
+    "SM redeemed all of its 6.625% Senior Notes due 2027 for $416,791,000 (voluntary redemption, not a default)."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "a required figure is not filed (capex or working capital)"
+  },
   "SMTI": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -4402,7 +4425,7 @@
  "verdict_counts": {
   "AVOID": 29,
   "BUY": 18,
-  "NO_CALL": 94,
+  "NO_CALL": 95,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
