@@ -1,9 +1,9 @@
 {
- "count": 116,
+ "count": 117,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T08:38:04Z",
- "list_covered": 114,
+ "generated_at": "2026-11-17T08:44:21Z",
+ "list_covered": 115,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -1608,6 +1608,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "operating income for the latest year is not filed under a standard tag"
+  },
+  "HRMY": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 78,
+   "claims_supported": 65,
+   "date": "2026-11-17T08:38:17Z",
+   "family": "operating",
+   "flags": [
+    "The company announced a CEO succession. Dr. Dayno will retire as President and CEO and leave the board at year-end, and COO Peter Anastasiou will succeed him on the next day.",
+    "US patent approval for the licensed MSN patents triggered a $25.0 million milestone payment, which the company expects to pay in the fourth quarter of 2026.",
+    "The FDA accepted the Pitolisant GR NDA for full review and a target PDUFA date has been set."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "some filed figures are years older than the latest annual report"
   },
   "HRTG": {
    "alpha_pts": null,
@@ -3563,7 +3586,7 @@
  "verdict_counts": {
   "AVOID": 25,
   "BUY": 15,
-  "NO_CALL": 70,
+  "NO_CALL": 71,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
