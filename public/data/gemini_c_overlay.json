@@ -1,9 +1,9 @@
 {
- "count": 143,
+ "count": 144,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T17:49:57Z",
- "list_covered": 137,
+ "generated_at": "2026-11-17T17:55:23Z",
+ "list_covered": 138,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -3825,6 +3825,29 @@
    "verdict": "BUY",
    "verdict_reason": "expected return +6.3 points a year against the required return over 3 years"
   },
+  "TWFG": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 64,
+   "claims_supported": 59,
+   "date": "2026-11-17T17:50:12Z",
+   "family": "operating",
+   "flags": [
+    "The Company entered an Amended and Restated Credit Agreement with PNC Bank as administrative agent. It provides a $125,000,000 revolving credit facility plus an uncommitted accordion for an additional $75,000,000. It amends and restates the earlier credit agreement.",
+    "The Chief Accounting Officer resigned. The CFO took over the Chief Accounting Officer role in addition to her CFO position.",
+    "During the first nine months of 2026 the Company repurchased Class A common stock for 42,857 (table in thousands), against 0 in the prior-year period. This was the largest financing outflow in the period."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "minority interests take too large a share of income",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "minority interests take too large a share of income"
+  },
   "UGI": {
    "alpha_pts": 1.7580779965120308,
    "analysis": "complete",
@@ -4290,7 +4313,7 @@
  "verdict_counts": {
   "AVOID": 29,
   "BUY": 17,
-  "NO_CALL": 91,
+  "NO_CALL": 92,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
