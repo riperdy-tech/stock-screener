@@ -1,9 +1,9 @@
 {
- "count": 162,
+ "count": 163,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T22:43:15Z",
- "list_covered": 156,
+ "generated_at": "2026-11-17T22:49:16Z",
+ "list_covered": 157,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -31,6 +31,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
+  "ADAM": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 63,
+   "claims_supported": 59,
+   "date": "2026-11-17T22:43:37Z",
+   "family": "family_not_built",
+   "flags": [
+    "The company reported a third-quarter 2026 GAAP loss per share of $1.89, with book value per share of $7.93, down 21.9% from the prior quarter.",
+    "The company completed a public offering of $90 million of 9.600% Senior Notes due 2031.",
+    "The company issued $90.0 million of 9.250% Senior Notes due 2031 in an underwritten public offering and received $86.6 million in net proceeds."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "ADT": {
    "alpha_pts": null,
@@ -4826,7 +4849,7 @@
  "verdict_counts": {
   "AVOID": 32,
   "BUY": 19,
-  "NO_CALL": 105,
+  "NO_CALL": 106,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."

@@ -1,0 +1,813 @@
+{
+ "alpha_pts": null,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 63,
+ "claims_supported": 59,
+ "date": "2026-11-17T22:43:37Z",
+ "family": "family_not_built",
+ "flags": [
+  "The company reported a third-quarter 2026 GAAP loss per share of $1.89, with book value per share of $7.93, down 21.9% from the prior quarter.",
+  "The company completed a public offering of $90 million of 9.600% Senior Notes due 2031.",
+  "The company issued $90.0 million of 9.250% Senior Notes due 2031 in an underwritten public offering and received $86.6 million in net proceeds."
+ ],
+ "in_code_book": false,
+ "ke": null,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+ "qwen_book": null,
+ "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in the 10-K business description",
+    "claim": "Adamas Trust is an internally managed mortgage REIT. It invests mainly in residential mortgage assets (Agency RMBS, residential loans including business purpose loans, non-Agency RMBS) and also some multi-family assets. It also originates business purpose loans through its subsidiary Constructive.",
+    "facts": [
+     "P1",
+     "S0"
+    ],
+    "quotes": [
+     "Through our wholly-owned subsidiary, Constructive, we also originate business purpose loans for residential real estate investors."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K; the Q3 2026 release still presents two reportable segments",
+    "claim": "The company reports two segments, investment portfolio and Constructive. The investment portfolio generates most revenue and income.",
+    "facts": [
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "We operate in two segments: investment portfolio and Constructive.",
+     "We derive the substantial portion of our revenues and income from our investment portfolio."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K description; figures are from the 10-Q income statement",
+    "claim": "The investment portfolio earns interest income, net income (loss) from real estate and other income. Interest income is the main line. It was 527,692 (table in thousands) for the nine months ended Sep. 30, 2026. Interest expense was 380,275 (table in thousands), leaving net interest income of 147,417 (table in thousands).",
+    "facts": [
+     "P1",
+     "F2"
+    ],
+    "quotes": [
+     "Our investment portfolio, which includes primarily mortgage-related residential assets, generates revenues, including interest income, net income (loss) from real estate and other income, for us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the release table; the table's column headings were partly omitted, so mapping the 1.68% and 1.55% figures to Agency and single-family credit is inferred from column order",
+    "claim": "The Q3 2026 release shows the spread business in one quarter. Yield on average interest earning assets was 5.95% and average financing cost was (4.55)%, giving a net interest spread of 1.40%. The Agency segment's spread was 1.68% and the single-family credit segment's was 1.55%.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the balance sheet, release and 10-K; the link between leverage and magnified results is inferred from the risk factors",
+    "claim": "Assets are mostly Agency RMBS and residential loans, funded largely with short-term repurchase agreements and securitization debt. At Sep. 30, 2026, investment securities available for sale were 7,343,161 (table in thousands), residential loans 4,788,939 (table in thousands), repurchase agreements and warehouse facilities 7,460,119 (table in thousands), and collateralized debt obligations 3,791,951 (table in thousands). The company reported a Company Economic Recourse Leverage Ratio of 4.8x.",
+    "facts": [
+     "F1",
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "Our leveraged Agency RMBS portfolio is a core component of our single-family investment strategy and is primarily comprised of Agency fixed-rate RMBS and Agency ARMs, the principal and interest of which are guaranteed by Fannie Mae or Freddie Mac."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K, the income statement and the release",
+    "claim": "Constructive earns revenue by originating business purpose loans to residential real estate investors and selling them. It also supplies loans to the investment portfolio. Mortgage banking activities, net was 10,856 (table in thousands) in Q3 2026 and 42,394 (table in thousands) for nine months. Loan origination costs were 4,198 (table in thousands) in the quarter and 13,070 (table in thousands) for nine months. Constructive originated $405.8 million of loans in Q3.",
+    "facts": [
+     "P1",
+     "F2",
+     "P7"
+    ],
+    "quotes": [
+     "Constructive represents the mortgage origination business conducted by Constructive, a business purpose loan lender specializing in rental and transitional loans for real estate investors, which generates revenues from the origination and sale of loans."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated for the acquisition and the figures; linking the cost increase to consolidation is inferred from timing",
+    "claim": "Constructive became wholly owned in July 2025 when the company bought the remaining 50% interest. The 9-month comparison therefore includes more Constructive activity in 2026. Loan origination costs were 3,788 (table in thousands) in the 2025 nine-month period against 13,070 (table in thousands) in 2026. General and administrative expenses rose to 74,363 (table in thousands) from 47,549 (table in thousands).",
+    "facts": [
+     "P1",
+     "F2"
+    ],
+    "quotes": [
+     "On July 15, 2025, we completed the acquisition of the remaining 50% interest in Constructive that was not previously owned by us."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the income statement, the 10-K risk factors and the release",
+    "claim": "Most assets are carried at fair value through earnings, so reported results swing with interest rates and spreads. In Q3 2026 unrealized (losses) gains, net was (471,875) (table in thousands) and gains on derivative instruments, net was 298,961 (table in thousands). Net (loss) income was (162,130) (table in thousands), and book value per share was $7.93, down 21.9% quarter-over-quarter.",
+    "facts": [
+     "F2",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "We have experienced and may experience in the future increased volatility in our GAAP results of operations as we have elected fair value option for the majority of our investments."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated by the CEO in the release; the offsetting mechanism is inferred",
+    "claim": "Management uses hedges, including short TBA positions, to reduce its exposure to Agency spread and convexity risk. The derivative gains in 2026 are part of how the company manages the rate sensitivity of its leveraged assets.",
+    "facts": [
+     "P6",
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "we proactively managed spread and convexity risks in our Agency securities portfolio through short TBA positions, lowering net Agency exposure."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the financial statements and the 10-K",
+    "claim": "Real estate is a small, loss-making part of the business. Net loss from real estate was (7,651) (table in thousands) for nine months, with rental income of 35,871 (table in thousands). The company says it completed the wind-down of its multi-family joint venture equity investments in 2025, and real estate, net fell to 439,590 (table in thousands) from 553,496 (table in thousands).",
+    "facts": [
+     "F2",
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "We completed the wind-down of our multi-family joint venture equity investments during the year ended December 31, 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 8-K, the income statement and the 10-K",
+    "claim": "Other funding and distribution costs include senior unsecured notes issued in public offerings. One of $90 million at 9.600% was issued in August 2026. Preferred stock dividends were 35,311 (table in thousands) for nine months. As a REIT the company generally avoids federal income tax on REIT taxable income it distributes.",
+    "facts": [
+     "P9",
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "completed the issuance and sale of $90 million aggregate principal amount of its 9.600% Senior Notes due 2031",
+     "Accordingly, we do not expect to be subject to U.S. federal income tax on our REIT taxable income that we currently distribute to our stockholders if certain asset, income, distribution and ownership tests and record keeping requirements are fulfilled."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the 10-K Item 1",
+    "claim": "Adamas is an internally managed mortgage REIT with two segments: an investment portfolio and Constructive, a business purpose loan originator that gives it proprietary asset sourcing.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "We operate in two segments: investment portfolio and Constructive."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Constructive is an established origination platform. It operates in 48 states, originated $405.8 million of loans in Q3 2026, and has $7.4 billion of cumulative originations since 2017.",
+    "facts": [
+     "P1",
+     "P7"
+    ],
+    "quotes": [
+     "Constructive is a business purpose loan originator that operates in 48 states.",
+     "Constructive originated $405.8 million of business purpose loans in the quarter"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the Q3 2026 release segment table; the offset is inferred from the reconciliation lines",
+    "claim": "Constructive's earnings contribution is thin. In Q3 2026 it earned mortgage banking income of 10,856 (table in thousands), but its segment loss before income tax was (1,896) (table in thousands).",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Total Constructive segment loss from operations before income tax"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the balance sheet and 10-K; the balance-sheet comparison is inferred",
+    "claim": "The balance sheet is large and Agency-heavy, with total assets of 13,524,175 (table in thousands) at September 30, 2026, including investment securities available for sale of 7,343,161 (table in thousands). At December 31, 2025, 63% of the investment portfolio was Agency RMBS.",
+    "facts": [
+     "F1",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "and 63% was comprised of Agency RMBS"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the income statement and the earnings release adjusted-spread table",
+    "claim": "The company's lending franchise earns a positive but narrow spread. Q3 2026 net interest income was 48,797 (table in thousands), against 36,586 (table in thousands) a year earlier. The earnings release shows a yield on average interest earning assets of 5.95% and a net interest spread of 1.40%.",
+    "facts": [
+     "F2",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 8-K; the competitive-cost reading is inferred",
+    "claim": "Unsecured funding is expensive. In August 2026 the company issued $90 million of 9.600% Senior Notes due 2031, ranking alongside its earlier 9.125%, 9.875% and 9.250% senior notes. This is a cost-of-capital disadvantage and a source of dependence on capital markets.",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "The Notes were issued at 100% of the principal amount, bear interest at a rate equal to 9.600% per year"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "threat stated in the 10-K risk factors; the figures are stated in the balance sheet and release",
+    "claim": "A main named threat is financing and margin risk. The company funds itself heavily with repurchase agreements and warehouse facilities (7,460,119, table in thousands) and reports a Company Economic Recourse Leverage Ratio of 4.8x.",
+    "facts": [
+     "F1",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "The repurchase agreements that we use to finance our investments may require us to provide additional collateral, which could reduce our liquidity and harm our financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the release and income statement; the mechanism is inferred from the line items",
+    "claim": "Reported book value is sensitive to rates and Agency valuations. In Q3 2026 the company reported a loss per share of $1.89, and book value per share fell 21.9% to $7.93. Management attributed the decline to rising rates and lower Agency valuations.",
+    "facts": [
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "The third quarter presented a challenging market environment, with the rise in interest rates and volatility resulting in a decline in adjusted book value primarily driven by lower valuations for our Agency mortgage securities."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated by management; effectiveness is inferred from the derivative gains line",
+    "claim": "Management uses TBA short positions to cut Agency exposure when markets are volatile. Net TBAs were (1,843,625) (table in thousands) at September 30, 2026, and the CEO said the shorts had been significantly reduced since quarter-end.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "we proactively managed spread and convexity risks in our Agency securities portfolio through short TBA positions, lowering net Agency exposure."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "metrics stated in the release; the risk is stated in the 10-K",
+    "claim": "The business purpose loan book carries reported credit metrics that management presents as strong: a BPL-Rental portfolio of $2.6 billion in unpaid principal balance, with average FICO of 751, average LTV of 70% and average DSCR of 1.35x.",
+    "facts": [
+     "P7",
+     "P2"
+    ],
+    "quotes": [
+     "BPL-Rental portfolio grew to $2.6 billion in UPB, supported by strong credit fundamentals, including average FICO of 751, average LTV of 70% and average DSCR of 1.35x"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K; no independent evidence in the packet",
+    "claim": "Management claims a competitive advantage only in markets with operational barriers to entry, and the company names competition for assets as a risk.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "In particular, we seek investment opportunities in markets where we believe we have a competitive advantage due to operational barriers to entry.",
+     "Competition may prevent us from acquiring assets on favorable terms or at all."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the release and balance sheet; the GAAP-versus-EAD contrast is inferred",
+    "claim": "Common dividends are being maintained: the Q3 2026 dividend was $0.30 per share, and management says earnings available for distribution fully covered it. Accumulated deficit widened to (1,574,072) (table in thousands) from (1,408,647) (table in thousands) at year-end.",
+    "facts": [
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "earnings available for distribution that fully covered our recently increased dividend"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K and balance sheet; the rotation direction is stated by management",
+    "claim": "The company is shrinking its multi-family and real estate exposure while expanding single-family credit and Agency assets. Real estate, net fell to 439,590 (table in thousands) from 553,496 (table in thousands) in nine months.",
+    "facts": [
+     "F1",
+     "P3"
+    ],
+    "quotes": [
+     "We completed the wind-down of our multi-family joint venture equity investments during the year ended December 31, 2025."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Cash balances are stated in F1. 'Substantial liquidity' is management's own characterization in P6.",
+    "claim": "Liquidity: cash and cash equivalents were 262,360 at September 30, 2026, up from 210,333 at December 31, 2025 (balance sheet, table in thousands). The CEO describes liquidity as 'substantial'.",
+    "facts": [
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "Cash and cash equivalents | $262,360 | $210,333",
+     "supported by solid credit performance, substantial liquidity"
+    ],
+    "support": "quote_not_found"
+   },
+   {
+    "basis": "The ratios are stated in P6 and P3. The liability and equity totals are stated in F1.",
+    "claim": "Leverage is high. Total liabilities were 12,251,195 against total equity of 1,272,900 (table in thousands). Management reports a Company Economic Recourse Leverage Ratio of 4.8x and a Portfolio ratio of 4.4x, versus 5.0x and 4.7x at December 31, 2025.",
+    "facts": [
+     "F1",
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Company Economic Recourse Leverage Ratio (1) of 4.8x; Portfolio Economic Recourse Leverage Ratio (1) of 4.4x."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1, F2 and P6. The causal explanation is the CEO's, in P6.",
+    "claim": "Equity was eroded in 2026. Company's stockholders' equity fell to 1,276,151 from 1,426,922 at year-end (table in thousands). Book value per share was $7.93, down 21.9% quarter-over-quarter, after a third-quarter net loss to common stockholders of 170,983 (thousands).",
+    "facts": [
+     "F1",
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Book value per share of $7.93, down 21.9% quarter-over-quarter;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in F3. The reading of the non-cash adjustments is inferred from the reconciliation lines.",
+    "claim": "Cash generation is positive but lower than a year earlier. Operating cash flow for the nine months was 52,131,000, versus 71,959,000, in a period with a net loss of 22,512,000 (cash flow statement in dollars).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net cash provided by operating activities | 52,131,000 | 71,959,000"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash flow lines are stated in F3. The comparison is inferred.",
+    "claim": "Cash returned to holders exceeded operating cash flow. Dividends paid on common stock were 66,520,000 and on preferred stock 35,364,000, against operating cash flow of 52,131,000 (nine months, dollars).",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The amounts are stated in F3. The reversibility is inferred from how variation margin works.",
+    "claim": "The quality of cash flow is mixed. Investing cash flow included net variation margin received on derivatives of 360,509,000, versus 104,379,000 paid a year earlier. Such margin flows depend on market moves and can reverse.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [
+     "Net variation margin received (paid) for derivative instruments | 360,509,000 | (104,379,000)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The balance is stated in F1 and the risk language in P2. The inference is that the short reset terms create rollover exposure.",
+    "claim": "Refinancing and rollover exposure is concentrated in short-term secured funding. Repurchase agreements and warehouse facilities were 7,460,119 (table in thousands). Some borrowings reset in as little as 30 days, and lenders can demand extra collateral if asset values fall.",
+    "facts": [
+     "F1",
+     "P2"
+    ],
+    "quotes": [
+     "At the same time, certain of our borrowings provide for a payment reset period of as short as 30 days.",
+     "The repurchase agreements that we use to finance our investments may require us to provide additional collateral, which could reduce our liquidity and harm our financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F3, F1, P3 and P9. The absence of earlier unsecured maturities is inferred from the P9 list.",
+    "claim": "The company has been extending its unsecured debt. In the nine months it issued senior unsecured notes (net proceeds 173,130,000) and repaid 100,000,000. The 2026 Senior Notes were redeemed at par in February 2026, and $90 million of 9.600% Senior Notes due 2031 were issued in August 2026. Senior unsecured notes were 434,607 at September 30, 2026 (table in thousands).",
+    "facts": [
+     "F3",
+     "F1",
+     "P3",
+     "P9"
+    ],
+    "quotes": [
+     "In February 2026, the Company redeemed its 2026 Senior Notes at 100% of the $100.0 million principal amount plus accrued but unpaid interest to, but excluding, the redemption date, for a total payment of $101.5 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 and F3. The link between sales and paydown is inferred.",
+    "claim": "Real estate debt is being reduced by asset sales. Mortgages payable on real estate fell to 274,923 from 332,131 (table in thousands), with net proceeds from real estate sales of 183,781,000 and net payments on mortgages payable of 58,119,000 (dollars).",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in F1 and F3. The market-access dependence is inferred.",
+    "claim": "Collateralized debt obligations were 3,791,951, up from 3,511,802 (table in thousands), and are the securitization funding of loans. In the nine months the company issued 1,279,617,000 of new CDOs and repaid 847,957,000, so this funding is being refreshed through the securitization market.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Figures are stated in the cited statements. The causal link to leverage is inferred from the balance sheet and the interest lines.",
+    "claim": "Net interest income is growing on a larger, leveraged balance sheet: Q3 2026 total net interest income was 48,797 against 36,586 a year earlier (table in thousands), while repurchase agreements and warehouse facilities rose to 7,460,119 from 6,753,417 at year-end (table in thousands). For this to continue, the funded asset base must keep expanding and asset yields must stay above financing costs.",
+    "facts": [
+     "F1",
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "reflecting continued portfolio expansion"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Acquisition and balance figures are stated. The condition on valuations is inferred from the CEO commentary and the Q3 loss.",
+    "claim": "Agency RMBS expansion is a growth driver: investment securities available for sale were 7,343,161 at Sep 30, 2026 against 6,904,781 at Dec 31, 2025 (table in thousands), and Q3 acquisitions included $1.2 billion of Agency investments. Continuing requires stable Agency valuations and spreads, with the short TBA positions used to limit book-value swings.",
+    "facts": [
+     "F1",
+     "P7",
+     "P6"
+    ],
+    "quotes": [
+     "$1.2 billion of Agency investments and $390.1 million of business purpose loans",
+     "Since quarter-end, we have significantly reduced these TBA short positions reflecting our view of receding Agency spread tail risks."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Origination volumes and the expectation of earnings growth are stated. The loan balance link is inferred from the balance sheet.",
+    "claim": "Business purpose loan origination through Constructive feeds the credit portfolio: Constructive originated $405.8 million in Q3, and the company acquired $390.1 million of business purpose loans. Continuing requires borrower credit to hold up and loan demand to persist.",
+    "facts": [
+     "P7",
+     "P3",
+     "F1"
+    ],
+    "quotes": [
+     "Constructive originated $405.8 million of business purpose loans in the quarter",
+     "establishes a scalable origination platform that we expect will support sustained earnings growth over time"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the income statement. The partial-comparison caveat comes from the 10-K date of full consolidation.",
+    "claim": "Mortgage banking income from Constructive adds to earnings: 42,394 for the nine months of 2026 against 14,103 for the nine months of 2025 (table in thousands). Constructive was consolidated only from July 2025, so that comparison is partial. Continuing requires origination and loan-sale volumes to hold up and sale gains to exceed origination costs.",
+    "facts": [
+     "F2",
+     "P3",
+     "P6"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Issuance and cash flow figures are stated. The condition is inferred from the funding structure and the risk factors.",
+    "claim": "Access to term funding supports growth: the company sold $90 million of 9.600% Senior Notes due 2031 in August 2026, and the nine-month cash flow shows 1,279,617,000 of CDO proceeds (printed in dollars). Continuing requires securitization and unsecured markets to stay open at costs below asset yields.",
+    "facts": [
+     "P9",
+     "F3",
+     "F1"
+    ],
+    "quotes": [
+     "$90 million aggregate principal amount of its 9.600% Senior Notes due 2031"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the release. The condition on coverage is inferred.",
+    "claim": "Earnings available for distribution (EAD) is the stated basis for the dividend: EAD per common share was $0.30, up 25% year-over-year, and the declared Q3 dividend was $0.30 per share. Continuing requires EAD to stay at or above the dividend.",
+    "facts": [
+     "P6",
+     "P7",
+     "F2"
+    ],
+    "quotes": [
+     "earnings available for distribution that fully covered our recently increased dividend"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated. The link to capital reallocation is from the 10-K strategy text and is partly inferred.",
+    "claim": "Shrinking the real estate portfolio reduces a drag on results: the net loss from real estate was (2,761) in Q3 2026 against (3,878) a year earlier, and real estate, net fell to 439,590 from 553,496 (all in thousands). Continuing requires further disposals and no new impairments.",
+    "facts": [
+     "F1",
+     "F2",
+     "P3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "stated in the cited item (earnings release)",
+    "claim": "The company reported a third-quarter 2026 GAAP loss per share of $1.89, with book value per share of $7.93, down 21.9% from the prior quarter.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "GAAP basic loss per share of $1.89;",
+     "Book value per share of $7.93, down 21.9% quarter-over-quarter;"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (8-K)",
+    "claim": "The company completed a public offering of $90 million of 9.600% Senior Notes due 2031.",
+    "facts": [
+     "P9"
+    ],
+    "quotes": [
+     "completed the issuance and sale of $90 million aggregate principal amount of its 9.600% Senior Notes due 2031"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K MD&A, subsequent-event text)",
+    "claim": "The company issued $90.0 million of 9.250% Senior Notes due 2031 in an underwritten public offering and received $86.6 million in net proceeds.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In January 2026, we completed the issuance of $90.0 million of our 9.250% Senior Notes due 2031 in an underwritten public offering, receiving $86.6 million in net proceeds."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item (10-K MD&A)",
+    "claim": "The company redeemed its 2026 Senior Notes at 100% of the $100.0 million principal amount, for a total payment of $101.5 million.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "In February 2026, the Company redeemed its 2026 Senior Notes at 100% of the $100.0 million principal amount plus accrued but unpaid interest to, but excluding, the redemption date, for a total payment of $101.5 million."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-Q MD&A and earnings release)",
+    "claim": "Late in Q3 2026 the company added TBA short positions to reduce its net Agency exposure, and management says it has since significantly reduced them.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "TBA short positions we added late in the third quarter to reduce our net exposure on Agency securities",
+     "Since quarter-end, we have significantly reduced these TBA short positions reflecting our view of receding Agency spread tail risks."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items (10-K)",
+    "claim": "The company completed the acquisition of the remaining 50% interest in Constructive, its business purpose loan originator, and consolidated it from Q3 2025.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "On July 15, 2025, we completed the acquisition of the remaining 50% interest in Constructive that was not previously owned by us."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item; the payment date is not in the excerpt",
+    "claim": "The company declared a third-quarter 2026 common dividend of $0.30 per share, a 15.4% annualized yield on the September 30, 2026 closing price.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Declared third quarter common stock dividend of $0.30 per share, representing a 15.4% annualized yield (3);"
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "Balance sheet figures and the risk-factor wording are stated in the items. That they link to a possible liquidity strain is inferred.",
+    "claim": "Repurchase and warehouse borrowings of 7,460,119 (table in thousands) are large against cash and cash equivalents of 262,360 (table in thousands), and the company reports a Company Economic Recourse Leverage Ratio of 4.8x. The risk factors say falling asset values can force extra collateral postings that drain liquidity.",
+    "facts": [
+     "F1",
+     "P2",
+     "P6"
+    ],
+    "quotes": [
+     "The repurchase agreements that we use to finance our investments may require us to provide additional collateral, which could reduce our liquidity and harm our financial condition.",
+     "Company Economic Recourse Leverage Ratio (1) of 4.8x"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release, 10-K and income statement. The thesis-break framing is inferred.",
+    "claim": "Book value per share fell to $7.93, down 21.9% quarter-over-quarter, from $9.60 at the end of 2025, with a Q3 net loss attributable to common stockholders of (170,983) (table in thousands). This undercuts the earlier narrative of earnings growth and rising book value.",
+    "facts": [
+     "P6",
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "Book value per share of $7.93, down 21.9% quarter-over-quarter;",
+     "GAAP book value per share as of December 31, 2025 increased 3.4% to $9.60"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Cash flow figures and management's coverage claim are stated. The sustainability concern is inferred from comparing them.",
+    "claim": "Dividends paid on common stock over nine months, 66,520,000, exceeded net cash provided by operating activities of 52,131,000, and the company declared a $0.30 per share common dividend for Q3. The GAAP loss raises the question of how long payouts can be sustained if non-GAAP earnings and GAAP results diverge.",
+    "facts": [
+     "F3",
+     "P6"
+    ],
+    "quotes": [
+     "earnings available for distribution that fully covered our recently increased dividend"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Reduction of the shorts is stated by management. The exposure effect is inferred.",
+    "claim": "Net TBA positions of (1,843,625) (table in thousands) were short at quarter-end to hedge Agency exposure, and management says it has since significantly reduced them. Less hedging could leave book value more exposed if spreads or rates move against the Agency portfolio again.",
+    "facts": [
+     "P4",
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "Since quarter-end, we have significantly reduced these TBA short positions reflecting our view of receding Agency spread tail risks."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Note terms and balances are stated. The squeeze is inferred.",
+    "claim": "The company issued $90 million of 9.600% senior notes in August 2026, and senior unsecured notes now carry 434,607 (table in thousands). Net interest income was down 2.8% quarter-over-quarter, so costly unsecured funding could squeeze spreads.",
+    "facts": [
+     "P9",
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "bear interest at a rate equal to 9.600% per year"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Share and risk wording are stated in the 10-K. The 21% is a year-end 2025 figure, not a Q3 2026 one.",
+    "claim": "Business purpose loans were about 21% of the investment portfolio at year-end 2025, and the 10-K says they are directly exposed to default and foreclosure losses. Constructive originations keep this exposure growing.",
+    "facts": [
+     "P2",
+     "P7"
+    ],
+    "quotes": [
+     "Business purpose loans are directly exposed to losses resulting from default and foreclosure."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Risk wording is stated. Any current relevance is inferred and weak.",
+    "claim": "The risk factors list financial covenants in the company's financing arrangements, which a business downturn could cause it to breach. No breach is reported in the evidence.",
+    "facts": [
+     "P2",
+     "P5"
+    ],
+    "quotes": [
+     "Negative impacts on our business may cause us to default on certain financial covenants contained in our financing arrangements."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Book value figures and the quoted management statement are stated in P6. The absence of any post-quarter book value is inferred from the packet.",
+    "claim": "Has book value per share recovered or fallen further since 30 September 2026? The release reports a sharp quarterly drop and says the short TBA hedges were largely cut after quarter-end. The evidence gives no book value after the balance sheet date.",
+    "facts": [
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "Since quarter-end, we have significantly reduced these TBA short positions reflecting our view of receding Agency spread tail risks."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The net TBA figure and management's description are stated in P6 and P4. The post-quarter position is not disclosed, which is inferred.",
+    "claim": "How large are the net short TBA positions now, and what did they gain or lose after quarter-end? At 30 September they were a large net short. Management says they were cut, but neither the size of the cut nor its result is given.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "As market volatility intensified in the quarter, we proactively managed spread and convexity risks in our Agency securities portfolio through short TBA positions, lowering net Agency exposure."
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Dividend, EAD and loss per share are stated in P6, F2 and P3. Whether the dividend is sustainable is an open question and not stated in the evidence.",
+    "claim": "Can the raised common dividend be maintained if book value stays lower? The dividend rose from the 2025 level and was just covered by non-GAAP earnings available for distribution (EAD), while GAAP results were a large loss and book value fell. The evidence does not show the dividend declared for the next quarter.",
+    "facts": [
+     "P6",
+     "P3",
+     "F2"
+    ],
+    "quotes": [
+     "earnings available for distribution that fully covered our recently increased dividend"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Balance sheet and leverage figures are stated in F1 and P6. The liquidity detail is missing because the 10-Q liquidity text was cut. The lack of margin call data is inferred.",
+    "claim": "How much margin or collateral pressure did the Q3 rate rise create, and what unencumbered liquidity remained? Repo and warehouse funding is large relative to equity and leverage is high. The packet gives only a general statement of 'substantial liquidity'.",
+    "facts": [
+     "F1",
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "The repurchase agreements that we use to finance our investments may require us to provide additional collateral, which could reduce our liquidity and harm our financial condition."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in F2 and F3. Their causes are not given in the packet. Any link between the two is inferred.",
+    "claim": "What drove the 57,754 of nine-month 'Other income' and the swing to a (32,840) charge for non-controlling interests? Third-quarter amounts were small, so the nine-month totals came mostly from earlier quarters, and the packet does not explain either item.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Other income | 3,183 | 1,479 | 57,754 | 5,644"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Segment results are stated in P6. Whether profitability will improve is not determinable from the evidence.",
+    "claim": "Is the Constructive origination segment profitable at scale? In Q3 and for nine months it reported a loss before tax despite sizeable mortgage banking income, with origination costs and allocated expenses offsetting it.",
+    "facts": [
+     "P6",
+     "P3"
+    ],
+    "quotes": [
+     "Total Constructive segment loss from operations before income tax | $(1,896) | $(1,898)"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The management statement and figures are stated in P6, F3 and P4. The missing delinquency data is inferred from the omitted sections.",
+    "claim": "How are the credit assets actually performing? Management describes credit as solid, but the packet has no delinquency, loss-severity or foreclosure statistics. Transfers of loans to real estate owned and the valuation drops on residential loans cannot be assessed from this evidence.",
+    "facts": [
+     "P6",
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "solid credit performance"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Offering terms are stated in P9 and P10. The balance and spread are in F1 and P6. The over-allotment outcome is not stated.",
+    "claim": "What is the cumulative cost of the unsecured notes issued in 2026, and was the over-allotment option on the August 2026 offering used? The new notes carry a high coupon, and the corporate/other segment shows a negative spread.",
+    "facts": [
+     "P9",
+     "P10",
+     "F1",
+     "P6"
+    ],
+    "quotes": [
+     "The Notes were issued at 100% of the principal amount, bear interest at a rate equal to 9.600% per year"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "ADAM",
+ "valuation": null,
+ "valued": false,
+ "verdict": "NO_CALL",
+ "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+}
