@@ -1,9 +1,9 @@
 {
- "count": 140,
+ "count": 141,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T14:26:30Z",
- "list_covered": 134,
+ "generated_at": "2026-11-17T17:37:48Z",
+ "list_covered": 135,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -2172,6 +2172,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
+  "LIND": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 78,
+   "claims_supported": 68,
+   "date": "2026-11-17T17:32:04Z",
+   "family": "operating",
+   "flags": [
+    "A Lindblad subsidiary signed a purchase agreement and acquired a 60% controlling interest in White Desert, PNR Airways and Echo Charlie for about $61 million in cash plus about $6 million for balance-sheet cash. The 10-Q states the aggregate cash price as approximately $66.6 million.",
+    "The company forced conversion of all 62,000 outstanding Series A Convertible Preferred shares into 9.0 million common shares. The September 30, 2026 balance sheet shows no Series A shares outstanding.",
+    "The company issued $675.0 million of 7.00% senior secured notes due 2030 and used the proceeds mainly to repay its prior 9.00% and 6.75% senior secured notes. The same transaction raised the revolving credit facility availability to $60.0 million."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no usable tax rate in the filings",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no usable tax rate in the filings"
+  },
   "LPG": {
    "alpha_pts": null,
    "analysis": "complete",
@@ -4221,7 +4244,7 @@
  "verdict_counts": {
   "AVOID": 29,
   "BUY": 17,
-  "NO_CALL": 88,
+  "NO_CALL": 89,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
