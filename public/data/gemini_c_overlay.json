@@ -1,9 +1,9 @@
 {
- "count": 137,
+ "count": 138,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T14:08:36Z",
- "list_covered": 131,
+ "generated_at": "2026-11-17T14:14:08Z",
+ "list_covered": 132,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -971,6 +971,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "no usable tax rate in the filings"
+  },
+  "DAC": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 69,
+   "claims_supported": 63,
+   "date": "2026-11-17T14:08:51Z",
+   "family": "commodity",
+   "flags": [
+    "Danaos announced in a 6-K that it is exploring a carve-out and sale of a minority stake in its dry bulk segment, with a possible equity placement and listing in the Norwegian market. It has mandated investment banks, and the filing says no transaction is assured.",
+    "Danaos entered into additional JOLCO financing arrangements for six operating container vessels. They are accounted for as failed sale-leasebacks and financing arrangements, so the vessels stay on the balance sheet and the proceeds are recorded as financing liabilities.",
+    "Certain container vessels' time charters were ended early under termination agreements. This produced a $5.1 million gain recorded in voyage expenses, because bunkers were retained on redelivery at no consideration."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "some filed figures are years older than the latest annual report",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "some filed figures are years older than the latest annual report"
   },
   "DAO": {
    "alpha_pts": null,
@@ -4132,7 +4155,7 @@
  "verdict_counts": {
   "AVOID": 29,
   "BUY": 16,
-  "NO_CALL": 86,
+  "NO_CALL": 87,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
