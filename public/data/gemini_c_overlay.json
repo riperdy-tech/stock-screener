@@ -1,9 +1,9 @@
 {
- "count": 119,
+ "count": 120,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T08:56:41Z",
- "list_covered": 117,
+ "generated_at": "2026-11-17T12:34:19Z",
+ "list_covered": 118,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -2219,6 +2219,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
+  "MSGE": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 66,
+   "claims_supported": 64,
+   "date": "2026-11-17T12:27:58Z",
+   "family": "operating",
+   "flags": [
+    "The Company announced a non-binding memorandum of understanding with the Penn Station Master Developer. It contemplates transferring the Infosys Theater at Madison Square Garden to the Master Developer and is subject to binding Developer Agreements.",
+    "The income statement shows an impairment of long-lived assets of 13,782 (table in thousands) in the three months ended Sep. 30, 2025. None was recorded in the three months ended Sep. 30, 2026.",
+    "The 10-K reports restructuring charges of 13,986 (table in thousands) for Fiscal Year 2026, up from the prior year."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "a required figure is not filed (capex or working capital)"
+  },
   "MSGK": {
    "alpha_pts": -71.8272797442937,
    "analysis": "complete",
@@ -3632,7 +3655,7 @@
  "verdict_counts": {
   "AVOID": 25,
   "BUY": 15,
-  "NO_CALL": 73,
+  "NO_CALL": 74,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
