@@ -1,9 +1,9 @@
 {
- "count": 113,
+ "count": 114,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T08:20:28Z",
- "list_covered": 111,
+ "generated_at": "2026-11-17T08:26:22Z",
+ "list_covered": 112,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -1080,6 +1080,49 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1688568/000168856826000089/0001688568-26-000089.txt"
+  },
+  "ECPG": {
+   "alpha_pts": 2.110706253520897,
+   "analysis": "complete",
+   "claims": 64,
+   "claims_supported": 57,
+   "date": "2026-11-17T08:20:40Z",
+   "equity_value": 2651805837.6313214,
+   "family": "financial",
+   "far_from_price": false,
+   "filed_shares": 23534000.0,
+   "flags": [
+    "Encore issued a notice calling all outstanding 4.00% Convertible Senior Notes due 2029 for redemption. The nine-month cash flow statement shows a payment to settle convertible senior notes of 367,855 (table in thousands).",
+    "In the nine months ended September 30, 2026 the company shows a debt refinancing. It took in 1,128,676 from senior secured notes and repaid 983,540 of senior secured notes (table in thousands), and it recorded a loss on extinguishment of debt of 30,533 (table in thousands).",
+    "In its third quarter earnings release the company raised its full-year 2026 guidance for portfolio purchases, collections and EPS. The new EPS range is $15.50 to $16.00 per share."
+   ],
+   "in_code_book": false,
+   "ke": 0.09390305732783658,
+   "market_cap_at_publish": 2216840382,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 106.24,
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "seed_base": {
+    "1000": 112.67977554310026,
+    "3000": 112.67977554310026
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
+   "source": "screener list refresh",
+   "upside": 0.19620964105629568,
+   "value_base": 112.67977554310026,
+   "value_bear": 111.60801359622744,
+   "value_bull": 113.06917749258773,
+   "value_per_filed_share": {
+    "base": 112.67977554310026,
+    "bear": 111.60801359622744,
+    "bull": 113.06917749258773
+   },
+   "valued": true,
+   "verdict": "WATCH",
+   "verdict_reason": "expected return +2.1 points a year against the required return over 3 years (BUY needs 4 or more)"
   },
   "EEFT": {
    "alpha_pts": 13.243502881935814,
@@ -3470,12 +3513,12 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 45,
+ "valued_count": 46,
  "verdict_counts": {
   "AVOID": 25,
   "BUY": 15,
   "NO_CALL": 68,
-  "WATCH": 5
+  "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
 }
