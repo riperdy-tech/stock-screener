@@ -1,9 +1,9 @@
 {
- "count": 152,
+ "count": 153,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T18:42:36Z",
- "list_covered": 146,
+ "generated_at": "2026-11-17T18:49:25Z",
+ "list_covered": 147,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -1146,6 +1146,29 @@
    "valued": true,
    "verdict": "BUY",
    "verdict_reason": "expected return +32.7 points a year against the required return over 3 years"
+  },
+  "DEA": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 73,
+   "claims_supported": 66,
+   "date": "2026-11-17T18:42:50Z",
+   "family": "family_not_built",
+   "flags": [
+    "Easterly acquired a 297,713 leased square foot campus of three operating properties in Glen Allen, Virginia, leased primarily to the Commonwealth of Virginia.",
+    "Easterly filed a prospectus supplement for its existing at-the-market equity program that permits contingent forward transactions. $214,982,308 of capacity remained available at that date.",
+    "Easterly received full repayment of the $35.6 million Bedford construction loan, including accrued interest, ahead of its scheduled maturity."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "DEC": {
    "alpha_pts": null,
@@ -4517,7 +4540,7 @@
  "verdict_counts": {
   "AVOID": 29,
   "BUY": 18,
-  "NO_CALL": 99,
+  "NO_CALL": 100,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
