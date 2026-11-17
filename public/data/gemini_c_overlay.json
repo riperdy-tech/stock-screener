@@ -1,9 +1,9 @@
 {
- "count": 126,
+ "count": 127,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T13:11:27Z",
- "list_covered": 120,
+ "generated_at": "2026-11-17T13:11:48Z",
+ "list_covered": 121,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -1105,6 +1105,24 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "debt is filed but interest expense is not"
+  },
+  "DMLP": {
+   "alpha_pts": null,
+   "analysis": "not run",
+   "claims": null,
+   "claims_supported": null,
+   "date": "2026-11-17T13:11:43Z",
+   "family": null,
+   "flags": [],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1172358/000143774926035295/R4.htm",
+   "qwen_book": null,
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1172358/000143774926035295/R4.htm"
   },
   "DXC": {
    "alpha_pts": null,
@@ -3833,7 +3851,7 @@
  "verdict_counts": {
   "AVOID": 26,
   "BUY": 16,
-  "NO_CALL": 78,
+  "NO_CALL": 79,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
