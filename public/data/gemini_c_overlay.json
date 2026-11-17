@@ -1,9 +1,9 @@
 {
- "count": 129,
+ "count": 130,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T13:25:03Z",
- "list_covered": 123,
+ "generated_at": "2026-11-17T13:31:01Z",
+ "list_covered": 124,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -49,6 +49,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/2007587/000200758726000136/R4.htm"
+  },
+  "ALX": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 63,
+   "claims_supported": 50,
+   "date": "2026-11-17T13:25:19Z",
+   "family": "family_not_built",
+   "flags": [
+    "Alexander's completed the sale of its Rego Park I property for $235,500,000 and recorded a financial statement gain of $148,002,000.",
+    "Alexander's and Bloomberg signed a lease amendment giving Bloomberg a rent abatement of $56,809,000 for April 1, 2026 to December 1, 2026, which cuts the tenant fund by the same amount.",
+    "Kohl's terminated its lease at the Rego Park shopping center and paid the remaining $25,100,000 of a $29,000,000 termination payment."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "AMD": {
    "alpha_pts": -66.11007673538587,
@@ -3917,7 +3940,7 @@
  "verdict_counts": {
   "AVOID": 27,
   "BUY": 16,
-  "NO_CALL": 80,
+  "NO_CALL": 81,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
