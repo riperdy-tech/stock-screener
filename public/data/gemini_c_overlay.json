@@ -1,9 +1,9 @@
 {
- "count": 164,
+ "count": 165,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T22:55:14Z",
- "list_covered": 158,
+ "generated_at": "2026-11-17T23:02:46Z",
+ "list_covered": 159,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -161,6 +161,29 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -66.1 points a year against the required return over 3 years"
+  },
+  "AMT": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 86,
+   "claims_supported": 72,
+   "date": "2026-11-17T22:55:34Z",
+   "family": "family_not_built",
+   "flags": [
+    "AMT delivered notices terminating its Strategic Collocation Agreement and related agreements with DISH, a U.S. customer that had been in default since January.",
+    "DISH, an AMT customer, filed for chapter 11 bankruptcy relief. AMT continues to seek relief for DISH's non-compliance. This is a customer's bankruptcy, not AMT's.",
+    "AMT recorded impairment charges related to DISH of $17.5 million in the nine months ended September 30, 2026."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "APA": {
    "alpha_pts": null,
@@ -4872,7 +4895,7 @@
  "verdict_counts": {
   "AVOID": 32,
   "BUY": 19,
-  "NO_CALL": 107,
+  "NO_CALL": 108,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
