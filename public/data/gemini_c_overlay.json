@@ -2,7 +2,7 @@
  "count": 167,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-17T23:40:55Z",
+ "generated_at": "2026-11-17T23:47:23Z",
  "list_covered": 161,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
@@ -1438,22 +1438,47 @@
    "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
   },
   "DXC": {
-   "alpha_pts": null,
-   "analysis": "not run",
-   "claims": null,
-   "claims_supported": null,
-   "date": "2026-11-16T15:09:00Z",
-   "family": null,
-   "flags": [],
+   "alpha_pts": 32.4916893316823,
+   "analysis": "complete",
+   "claims": 73,
+   "claims_supported": 71,
+   "date": "2026-11-17T23:41:14Z",
+   "equity_value": 5662133489.540818,
+   "family": "operating",
+   "far_from_price": true,
+   "filed_shares": 178650000.0,
+   "flags": [
+    "The President of Global Infrastructure Services resigned, and Paul J. Taylor was appointed President, DXC.",
+    "DXC recognized a litigation judgment against TCS. The gain was $168 million in other income, and cash proceeds were $214 million.",
+    "DXC recorded a one-time impairment of transition and transformation costs tied to a customer contract modification, with a related one-time acceleration of software amortization. The amount of the impairment is not stated."
+   ],
    "in_code_book": false,
-   "ke": null,
-   "model": "gemini-4-hydrogen-high",
-   "no_value_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1688568/000168856826000089/0001688568-26-000089.txt",
+   "ke": 0.11164375453902048,
+   "market_cap_at_publish": 2277645387,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": null,
+   "price_at_publish": 14.65,
    "qwen_book": null,
+   "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
+   "seed_base": {
+    "1000": 30.527238771848786,
+    "3000": 31.694002180469177
+   },
+   "seeds_agree": true,
+   "share_unit_note": null,
    "source": "screener list refresh",
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "packet refused: qwen_c.sec_store.FetchFailed: fetch failed: status=503 https://www.sec.gov/Archives/edgar/data/1688568/000168856826000089/0001688568-26-000089.txt"
+   "upside": 1.4859591935857477,
+   "value_base": 31.694002180469177,
+   "value_bear": 30.360910288837943,
+   "value_bull": 32.716745511085044,
+   "value_per_filed_share": {
+    "base": 31.694002180469177,
+    "bear": 30.360910288837943,
+    "bull": 32.716745511085044
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +32.5 points a year against the required return over 3 years"
   },
   "ECO": {
    "alpha_pts": null,
@@ -5052,11 +5077,11 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 62,
+ "valued_count": 63,
  "verdict_counts": {
   "AVOID": 34,
-  "BUY": 22,
-  "NO_CALL": 105,
+  "BUY": 23,
+  "NO_CALL": 104,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
