@@ -1,0 +1,821 @@
+{
+ "alpha_pts": null,
+ "analysis": "complete",
+ "authority": "diagnostic: paper only, not investment advice",
+ "claims": 63,
+ "claims_supported": 55,
+ "date": "2026-11-17T08:44:32Z",
+ "family": "commodity",
+ "flags": [
+  "The nine months to Sep. 30, 2026 include an impairment of long-lived assets of 20,323 (table in thousands). The statements show none for the third quarter or the prior-year nine months.",
+  "The Board approved a share repurchase program of up to $35.0 million. Repurchases are discretionary, and no amount bought so far is shown.",
+  "After Grey Rock affiliates distributed shares to their limited partners, the Company ceased to be an NYSE \"controlled company\". The Board also added two independent directors, and the Company will rely on a one-year transition exemption for two committees."
+ ],
+ "in_code_book": false,
+ "ke": null,
+ "model": "claude-sonnet-5-5",
+ "no_value_reason": "a required figure is not filed (capex or working capital)",
+ "qwen_book": null,
+ "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+ "source": "screener list refresh",
+ "tasks": {
+  "business_model": [
+   {
+    "basis": "stated in the 10-K Business and MD&A sections",
+    "claim": "Granite Ridge earns revenue from its interests in oil and natural gas production, which it holds through operated partnerships and traditional non-operated assets in six U.S. basins.",
+    "facts": [
+     "P1",
+     "P3"
+    ],
+    "quotes": [
+     "We derive our revenues from our interests in the sale of oil and natural gas production.",
+     "Granite Ridge is a scaled energy company which aims to provide shareholders with exposure similar to energy private equity through operated partnerships and traditional non-operated assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-K Item 1",
+    "claim": "In operated partnerships the company supplies most of the capital and keeps control of development, while a private operator runs the assets and earns an economic interest after return hurdles are met. Traditional non-operated assets are minority interests in wells that third-party operators propose, drill and operate.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Typically, we structure these transactions to have an economic interest in the wells that benefits the operator after certain return hurdles are met to incentivize and align the operator with our interest.",
+     "Our non-operated asset base is built by investing in minority interests which give us a right to participate on a proportionate basis alongside third-party operators who propose, drill, and operate the assets."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in 10-K Items 1 and 1A",
+    "claim": "The company does not sell its production directly. Operating partners market it to energy marketing companies, refineries and their affiliates. Oil is priced off spot oil markets and natural gas mostly on first-of-month index or daily spot prices.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "We generally rely on our operating partners to market and sell our production.",
+     "Our oil production is expected to be sold at prices tied to the spot oil markets.",
+     "which operating partners market on our behalf to energy marketing companies, refineries, and their affiliates"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from the single revenue line in the income statement and the basin descriptions; no segment note is in the packet",
+    "claim": "The evidence gives no separate reporting segments. The income statement shows one revenue line, oil and natural gas sales. The filings describe the portfolio by basin: Permian, Eagle Ford, Bakken, Haynesville, DJ and Appalachian.",
+    "facts": [
+     "F2",
+     "P1"
+    ],
+    "quotes": [
+     "We hold assets in the Permian (Delaware and Midland basins), Eagle Ford, Bakken, Haynesville, Denver-Julesburg (\u201cDJ\u201d) and Appalachian basins (collectively, our \u201cProperties\u201d)."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q income statement and MD&A",
+    "claim": "Revenue depends on production volume and realized prices. In Q3 2026 oil and natural gas sales were 177,205 (table in thousands) against 112,671 a year earlier, up 57%. Oil revenue rose 60%, from a 17% increase in production and a 37% increase in realized prices before settled derivatives.",
+    "facts": [
+     "F2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Revenues are a function of production, the prevailing market price at the time of sale, oil quality, and transportation costs to market.",
+     "Our oil and natural gas sales for the three months ended September 30, 2026 increased 57% from the same period in 2025.",
+     "Oil revenues for the three months ended September 30, 2026 increased by 60% compared to the same period in 2025, driven by a 17% increase in production and a 37% increase in realized prices, excluding the effect of settled commodity derivatives."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and the earnings release",
+    "claim": "Daily production grew to 34,641 Boe per day in Q3 2026 from 31,925 a year earlier, which the company attributes to drilling success and acquisitions of net revenue interests.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Production from oil and gas properties increased as a result of drilling success and the acquisition of additional net revenue interests.",
+     "Grew daily production 9% to 34,641 barrels of oil equivalent (\u201cBoe\u201d) per day (55% oil), from 31,925 Boe per day for the third quarter of 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in MD&A; the oil share comes from the quoted sales table",
+    "claim": "Revenue is weighted toward oil, so oil prices move results more than natural gas prices. Oil sales were 147,219 (table in thousands) of total revenues of 177,205 in Q3 2026.",
+    "facts": [
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "Because our oil and natural gas revenues are heavily weighted toward oil, we are more significantly impacted by changes in oil prices than by changes in the price of natural gas."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q and 10-K; the link to the net loss is inferred from the income statement lines",
+    "claim": "Commodity hedges are part of the model and can reduce reported earnings when prices rise. In Q3 2026 settled derivatives cut the realized oil price by $9.15 per barrel. The loss on commodity derivatives was (52,698) (table in thousands), which helped turn operating income of 59,260 into a net loss of (10,051).",
+    "facts": [
+     "F2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "Our settled derivatives decreased our realized oil price per barrel by $9.15 for the three months ended September 30, 2026 and increased our realized oil price per barrel by $0.02 for the three months ended September 30, 2025.",
+     "while to the extent future commodity price outlook increases between measurement periods, we will have mark-to-market losses."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and 10-K MD&A",
+    "claim": "The main operating costs are lease operating expenses, production and ad valorem taxes, depletion and accretion, and G&A. Lease operating expenses were 30,050 (table in thousands) in Q3 2026, or $9.43 per Boe against $8.03 a year earlier. Management cites more wells, saltwater disposal costs, equipment rentals and contract labor.",
+    "facts": [
+     "F2",
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "The increase was primarily due to additional wells successfully drilled and completed, increased saltwater disposal costs as a result of higher water cuts and flowback operations, surface equipment rentals, and contract labor.",
+     "In general, the production taxes we pay correlate to the changes in oil and natural gas revenues."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K and 10-Q; the impairment figure is from the 10-Q income statement",
+    "claim": "Depletion is a large non-cash cost because capitalized acquisition and development costs are expensed on a units-of-production basis. It was 64,223 (table in thousands) in Q3 2026, or $20.15 per Boe.",
+    "facts": [
+     "F2",
+     "P3",
+     "P4"
+    ],
+    "quotes": [
+     "As a \u201csuccessful efforts\u201d company, we capitalize all costs associated with our acquisition and successful development efforts and allocate these costs to each unit of production using the units of production method."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the 10-K MD&A; the quarterly figures are from the 10-Q income statement",
+    "claim": "G&A includes overhead and annual service fees under the MSA with the Manager. It was 10,233 (table in thousands) in Q3 2026 against 6,988 a year earlier.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "General and administrative expenses include overhead, including payroll and benefits for our corporate staff, management and annual service fees under the MSA, audit and other professional fees and legal compliance."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "quote stated in the 10-K; the 2026 comparison is read from the 10-Q income statement",
+    "claim": "Debt-funded growth adds interest cost. Net interest expense was (11,902) (table in thousands) in Q3 2026 against (6,069) a year earlier. The company issued $350.0 million of 8.875% senior unsecured notes in November 2025 and also has a revolving credit facility.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "The increase in interest expense was primarily due to a higher average outstanding balance on the revolving credit facility, as well as the issuance of $350.0 million aggregate principal amount of 8.875% senior unsecured notes in November 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "figures stated in the 10-Q cash flow statement; the quoted management view is from the Q2 release",
+    "claim": "The model is capital-intensive and reinvests heavily. In the first nine months of 2026, operating cash flow was 201,612 (table in thousands), capital expenditures were 205,465, acquisitions were 43,465 and dividends were 43,483. Net borrowings on credit facilities were 80,000 (165,000 proceeds less 85,000 repayments).",
+    "facts": [
+     "F3",
+     "P9"
+    ],
+    "quotes": [
+     "2026 is the final year in which we expect to invest ahead of cash flow"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the 10-K Items 1 and 1A",
+    "claim": "Results depend on third-party operators, and revenue is concentrated in a few of them. The loss of a major operator could hurt revenues in the short term.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The loss of any such operator could adversely affect revenues attributable to the Company\u2019s assets in the short term.",
+     "The success of our business operations depends on the timing of drilling activities and success of our third-party operators."
+    ],
+    "support": "supported"
+   }
+  ],
+  "competitive_position": [
+   {
+    "basis": "stated in the cited item (the company's own description)",
+    "claim": "Granite Ridge positions itself as a scaled company that combines operated partnerships with traditional non-operated assets across six U.S. basins. The stated aim is energy private equity-like exposure through a diversified portfolio.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Granite Ridge is a scaled energy company which aims to provide shareholders with exposure similar to energy private equity through operated partnerships and traditional non-operated assets."
+    ],
+    "support": "number_not_found"
+   },
+   {
+    "basis": "stated in the cited items (company statements, not independent evidence)",
+    "claim": "Management calls the Operated Partnership platform its principal differentiator. In these partnerships the company funds most of the capital and keeps control over what is drilled and when, and a new partner (Arete Creek) was added in the third quarter release.",
+    "facts": [
+     "P9",
+     "P1",
+     "P6"
+    ],
+    "quotes": [
+     "Our Operated Partnership platform remains our principal differentiator.",
+     "In these partnerships, we account for a significant majority of the capital at risk, so we have significant control over acquisition costs and strategy, development costs, timing and rig schedules, and well design.",
+     "Arete Creek spud its first well under our partnership in October, and we expect it to run one rig in 2027."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items",
+    "claim": "Scale is growing. Third quarter daily production rose 9% to 34,641 Boe per day from 31,925, and nine-month oil and natural gas sales rose 32% from the prior-year period.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "Grew daily production 9% to 34,641 barrels of oil equivalent (\u201cBoe\u201d) per day (55% oil), from 31,925 Boe per day for the third quarter of 2025.",
+     "Our oil and natural gas sales for the nine months ended September 30, 2026 increased 32% from the same period in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items; the link between the hedges and the loss is inferred from the line items",
+    "claim": "Revenue was lifted by higher oil prices, but the hedge book gave back part of it. Settled derivatives cut the realized oil price by $9.15 per barrel in the third quarter, and the derivative loss of (52,698) (table in thousands) helped turn the quarter to a net loss.",
+    "facts": [
+     "P4",
+     "F2",
+     "P6"
+    ],
+    "quotes": [
+     "Our settled derivatives decreased our realized oil price per barrel by $9.15 for the three months ended September 30, 2026",
+     "Reported net loss of $10.1 million, or $0.08 net loss per share"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Unit operating costs rose. Third quarter lease operating expense was $9.43 per Boe against $8.03 a year earlier, up 27% in total. The company cites more wells, saltwater disposal from higher water cuts, equipment rentals and contract labor.",
+    "facts": [
+     "P4"
+    ],
+    "quotes": [
+     "Lease operating expenses were $30.1 million ($9.43 per Boe) for the three months ended September 30, 2026, an increase of 27% from $23.6 million ($8.03 per Boe) during the same period in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited items for the ratio; the interest comparison is read directly from the income statement",
+    "claim": "The company emphasizes a low-leverage profile and reports net debt of 1.3x trailing adjusted EBITDAX. Interest expense is still up sharply, at (11,902) in the third quarter against (6,069) a year earlier (table in thousands).",
+    "facts": [
+     "P6",
+     "P1",
+     "F2"
+    ],
+    "quotes": [
+     "Net Debt to Trailing Twelve Months Adjusted EBITDAX (non-GAAP) of 1.3x.",
+     "We focus on success as measured by total shareholder returns, which we seek to balance with a low leverage profile."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "figures stated in the statement; the 'ahead of cash flow' reading is partly inferred by comparing line items",
+    "claim": "Investment is running ahead of internally generated cash. Nine-month operating cash flow was 201,612 (table in thousands) against capital expenditures of (205,465) and acquisitions of (43,465). Management says it expects 2026 to be the final year of investing ahead of cash flow.",
+    "facts": [
+     "F3",
+     "P9"
+    ],
+    "quotes": [
+     "2026 is the final year in which we expect to invest ahead of cash flow"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors",
+    "claim": "A named threat is dependence on third-party operators and counterparties. The company has little influence over operator decisions, and its receivables are concentrated in a limited number of operating partners.",
+    "facts": [
+     "P2"
+    ],
+    "quotes": [
+     "As a non-operator, our development of successful operations relies extensively on third parties, which could have a material adverse effect on our results of operation.",
+     "We are subject to credit risk due to the relative concentration of our oil and natural gas receivables with a limited number"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the cited item",
+    "claim": "Competition is named as a threat. The company says it targets asset classes and deal sizes where competition is reduced, yet the industry remains intensely competitive, and some rivals have substantially greater resources.",
+    "facts": [
+     "P1"
+    ],
+    "quotes": [
+     "Although we focus on a target asset class and transaction size where we believe competition and costs are reduced as compared to the broader oil and natural gas industry, the overall industry remains intensely competitive."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "impairment and well counts stated in the statements; the link to competitive position is inferred",
+    "claim": "Reserve replacement and asset quality are named threats. Impairments of 20,323 (table in thousands) were recorded in the nine months. Net producing wells fell to 227.98 from 235.27 even as production grew.",
+    "facts": [
+     "F2",
+     "P4",
+     "P2"
+    ],
+    "quotes": [
+     "Our future success depends on our ability to replace reserves that our operators produce."
+    ],
+    "support": "supported"
+   }
+  ],
+  "financial_health": [
+   {
+    "basis": "Stated in the balance sheet line items; the comparison between totals is inferred.",
+    "claim": "Cash rose to 42,718 (table in thousands) from 14,846 at the prior year-end. Total current assets of 167,714 (table in thousands) were still below total current liabilities of 185,867 (table in thousands).",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-K MD&A; the staleness is inferred from the later cash flow statement.",
+    "claim": "At the prior year-end the company reported $339.5 million of liquidity: $324.7 million of committed revolver availability plus $14.8 million of cash. The latest revolver balance and availability are not in the evidence.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "We had $339.5 million of liquidity as of December 31, 2025, consisting of $324.7 million of committed borrowing availability under the Credit Agreement and $14.8 million of cash on hand."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings releases.",
+    "claim": "Net debt to trailing-twelve-month Adjusted EBITDAX (non-GAAP) was 1.3x at the latest quarter, against 1.4x a quarter earlier. Third-quarter Adjusted EBITDAX was $107.3 million.",
+    "facts": [
+     "P6",
+     "P9"
+    ],
+    "quotes": [
+     "Net Debt to Trailing Twelve Months Adjusted EBITDAX (non-GAAP) of 1.3x.",
+     "Net Debt to Trailing Twelve Months Adjusted EBITDAX (non-GAAP) of 1.4x."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the balance sheet; the cause of the equity decline is inferred from the retained earnings line, net loss and dividends.",
+    "claim": "Debt on the balance sheet is a current portion of 35,000 and long-term debt, net, of 424,327 (table in thousands), up from 17,500 and 367,832 at the prior year-end. Total liabilities were 720,156 against stockholders' equity of 539,339 (table in thousands), which fell from 605,760.",
+    "facts": [
+     "F1"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The interest figures are stated in the 10-Q. The explanation comes from the 10-K, which covers the prior year, and is applied here by inference.",
+    "claim": "Net interest expense for the nine months was 33,295 against 16,998 a year earlier (table in thousands). The 10-K ties the rise in interest cost to a higher revolver balance and the issue of $350.0 million of 8.875% senior unsecured notes.",
+    "facts": [
+     "F2",
+     "P3"
+    ],
+    "quotes": [
+     "the issuance of $350.0 million aggregate principal amount of 8.875% senior unsecured notes in November 2025"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures are stated in the statements; the causes are partly inferred.",
+    "claim": "Operating cash flow for the nine months was 201,612 against 231,914 a year earlier (table in thousands), although oil and natural gas sales rose to 454,742 from 344,821 (table in thousands).",
+    "facts": [
+     "F3",
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the cash flow statement; the reading that disposals and borrowing funded the shortfall is inferred.",
+    "claim": "Operating cash flow did not cover investment plus the dividend. Operating cash flow of 201,612 compares with capital expenditures of 205,465, acquisitions of 43,465 and dividends of 43,483 (table in thousands). Asset sale proceeds of 30,324 and equity investment sale proceeds of 15,412, plus borrowing of 165,000 against repayments of 85,000, bridged the gap, and cash rose by 27,872.",
+    "facts": [
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Line items are stated in the cash flow statement; the interpretation is inferred.",
+    "claim": "Cash generation is weaker than the headline net loss suggests, but part of the earnings drag is non-cash. The net loss of (27,086) includes a non-cash unrealized derivative loss of 56,248, impairments of 20,323 and depletion and accretion of 171,868 (table in thousands). A receivables increase of (39,543) used cash.",
+    "facts": [
+     "F3",
+     "F2"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q MD&A and balance sheet; the cash drain mechanism is inferred.",
+    "claim": "Hedges are costing cash at current prices. Settled derivatives cut the realized oil price by $10.50 per barrel in the nine months, and derivative liabilities of 27,959 current and 11,470 long-term (table in thousands) sit on the balance sheet against derivative assets of only 139 and 740.",
+    "facts": [
+     "P4",
+     "F1"
+    ],
+    "quotes": [
+     "Our settled derivatives decreased our realized oil price per barrel by $10.50 for the nine months ended September 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Amounts are stated; the amortization reading is inferred, and the funding sources come from the 10-K statement of expected funding.",
+    "claim": "Debt falling due within a year is a current portion of 35,000 (table in thousands), double the 17,500 at the prior year-end. The cash flow statement shows repayments of senior unsecured notes of 8,750, so part of the notes appears to amortize. The repayment schedule is not in the evidence.",
+    "facts": [
+     "F1",
+     "F3"
+    ],
+    "quotes": [],
+    "support": "supported"
+   },
+   {
+    "basis": "The revolver maturity is stated in part; the notes' timing is inferred from their name.",
+    "claim": "The latest maturity terms in the evidence are an amended Credit Agreement whose maturity is the earliest of November 5, 2029 or an earlier trigger date, and the 8.875% notes, which the 10-K calls the 2029 Senior Notes. No large maturity is shown within the next year beyond the current portion above.",
+    "facts": [
+     "P3"
+    ],
+    "quotes": [
+     "extend the maturity date to the earliest to occur of (A) November 5, 2029 or (B) the date that is ninety-one days prior to"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated by management in the releases; no reconciliation to audited cash flow is in the packet.",
+    "claim": "Management expects the funding gap to close next year and says free cash flow should cover the dividend, but competing uses of cash remain. The total capital expenditure guidance is $345 to $385 million. A quarterly dividend of $0.11 per share continues, and a new buyback of up to $35.0 million was approved.",
+    "facts": [
+     "P6",
+     "P9"
+    ],
+    "quotes": [
+     "2026 is the final year in which we expect to invest ahead of cash flow",
+     "at current strip prices we expect adjusted free cash flow to comfortably cover the dividend and grow our business"
+    ],
+    "support": "number_not_listed"
+   }
+  ],
+  "growth_thesis": [
+   {
+    "basis": "Stated in the cited items (reported production and the company's own explanation). The conditions are inferred from the stated mechanism.",
+    "claim": "Production growth is the first driver: daily production rose 9% to 34,641 Boe per day in the third quarter from 31,925 a year earlier. Annual guidance is 34,000 - 35,000 Boe per day.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "Grew daily production 9% to 34,641 barrels of oil equivalent",
+     "Production from oil and gas properties increased as a result of drilling success and the acquisition of additional net revenue interests."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P4 (prices and revenue change). The condition on prices holding is inferred.",
+    "claim": "Higher oil prices drove the revenue step-up. Third-quarter oil and natural gas sales rose 57%, with average NYMEX oil at $87.12 against $65.78 a year earlier. For this to continue, oil prices must stay near current levels or volumes must keep rising.",
+    "facts": [
+     "P4",
+     "F2"
+    ],
+    "quotes": [
+     "Our oil and natural gas sales for the three months ended September 30, 2026 increased 57% from the same period in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures stated in F3. The funding relationship is inferred from comparing cash flow lines. The 2027 expectation is management's own statement in P9.",
+    "claim": "Growth is funded by reinvesting cash flow plus borrowing. In the nine months, operating cash flow was 201,612 (table in thousands), against capital expenditures of 205,465 and acquisitions of 43,465. Credit facility borrowings were 165,000 against repayments of 85,000. For growth to continue, credit access must remain available until cash flow covers spending.",
+    "facts": [
+     "F3",
+     "P9"
+    ],
+    "quotes": [
+     "2026 is the final year in which we expect to invest ahead of cash flow"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Ratio stated in P6, balances stated in F1. The link to funding capacity is inferred.",
+    "claim": "Leverage must stay moderate to keep funding growth. Net debt to trailing twelve months Adjusted EBITDAX was 1.3x, with long-term debt, net of 424,327 (table in thousands) and a current portion of 35,000 (table in thousands).",
+    "facts": [
+     "P6",
+     "F1"
+    ],
+    "quotes": [
+     "Net Debt to Trailing Twelve Months Adjusted EBITDAX (non-GAAP) of 1.3x."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in P6 and P2. No production contribution from this partner is quantified in the evidence.",
+    "claim": "The operated partnership platform is a stated growth driver. A new partner, Arete Creek, spud its first well in October and is expected to run one rig in 2027. For this to deliver, the operator must execute the development plan the company controls.",
+    "facts": [
+     "P6",
+     "P2"
+    ],
+    "quotes": [
+     "Arete Creek spud its first well under our partnership in October, and we expect it to run one rig in 2027.",
+     "The success of these partnerships is contingent upon the third-party operators\u2019 ability to effectively implement our development plans."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "The expectation is management's statement in P6, not verified. The hedge cost is stated in P4.",
+    "claim": "Management expects the roll-off of lower-priced 2026 hedges to lift 2027 results. Settled derivatives cut the realized oil price by $9.15 per barrel in the third quarter, and Adjusted EBITDAX was $107.3 million. This holds only if the hedge book rolls off as described.",
+    "facts": [
+     "P6",
+     "P4"
+    ],
+    "quotes": [
+     "In 2027, the roll-off of our lower-priced 2026 hedges, anticipated production growth and a higher oil weighting build on that record without relying on today\u2019s oil prices",
+     "Our settled derivatives decreased our realized oil price per barrel by $9.15 for the three months ended September 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Figures and causes stated in P4 and P6. The margin condition is inferred.",
+    "claim": "Margins must hold for production growth to turn into cash. Lease operating expense per Boe rose to $9.43 from $8.03 in the third quarter, an increase of 27% in total lease operating expense. Updated guidance for lease operating expense is $9.25 - $9.75 per Boe.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Lease operating expenses were $30.1 million ($9.43 per Boe) for the three months ended September 30, 2026, an increase of 27% from $23.6 million ($8.03 per Boe) during the same period in 2025."
+    ],
+    "support": "supported"
+   }
+  ],
+  "material_events": [
+   {
+    "basis": "Stated in the income statement and cash flow statement; the cause is not in the excerpts.",
+    "claim": "The nine months to Sep. 30, 2026 include an impairment of long-lived assets of 20,323 (table in thousands). The statements show none for the third quarter or the prior-year nine months.",
+    "facts": [
+     "F2",
+     "F3"
+    ],
+    "quotes": [
+     "Impairments of long-lived assets | 0 | 0 | 20,323 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 10-Q risk factor and the earnings release.",
+    "claim": "The Board approved a share repurchase program of up to $35.0 million. Repurchases are discretionary, and no amount bought so far is shown.",
+    "facts": [
+     "P5",
+     "P6"
+    ],
+    "quotes": [
+     "On November 4, 2026, our Board of Directors approved a share repurchase program."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the 8-K (Item 8.01) and the 10-Q risk factor.",
+    "claim": "After Grey Rock affiliates distributed shares to their limited partners, the Company ceased to be an NYSE \"controlled company\". The Board also added two independent directors, and the Company will rely on a one-year transition exemption for two committees.",
+    "facts": [
+     "P8",
+     "P5"
+    ],
+    "quotes": [
+     "Accordingly, the Company ceased to be a \u201ccontrolled company\u201d within the meaning of Section 303A of the NYSE Listed Company Manual as of such date."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the earnings release.",
+    "claim": "The Board declared a regular quarterly dividend of $0.11 per share after quarter end. It is payable in December to holders of record in late November.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "Subsequent to quarter end, the Company\u2019s Board of Directors declared a regular quarterly dividend of $0.11 per share payable on December 14, 2026 to shareholders of record as of November 27, 2026."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated in the CEO comments in the earnings release.",
+    "claim": "The Company announced a new partner, Arete Creek Resources, for its Operated Partnership platform. Arete Creek spud its first well under the partnership in October.",
+    "facts": [
+     "P6"
+    ],
+    "quotes": [
+     "We are also announcing a new partner to our Operated Partnership platform."
+    ],
+    "support": "supported"
+   }
+  ],
+  "risks": [
+   {
+    "basis": "stated in the income statement, MD&A and release; the 2027 benefit is management's own statement",
+    "claim": "Commodity hedges are costing the company cash and earnings while oil prices are high. Nine-month derivative losses were (111,733) (table in thousands), settled derivatives cut the realized oil price by $10.50 per barrel, and current derivative liabilities reached 27,959 (table in thousands). Hedges therefore cap the benefit of higher prices.",
+    "facts": [
+     "F1",
+     "F2",
+     "P4",
+     "P3"
+    ],
+    "quotes": [
+     "Our settled derivatives decreased our realized oil price per barrel by $10.50 for the nine months ended September 30, 2026"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "inferred from cash flow statement figures; covenant risk language is stated in the 10-K risk factors",
+    "claim": "Spending is running ahead of operating cash flow and is being funded with borrowings. Nine-month operating cash flow was 201,612 (table in thousands), against capital expenditures of 205,465, acquisitions of 43,465 and dividends of 43,483. Credit facility borrowings were 165,000. Interest expense, net rose to (33,295) from (16,998).",
+    "facts": [
+     "F3",
+     "F2",
+     "F1",
+     "P2",
+     "P9"
+    ],
+    "quotes": [
+     "Lower oil and natural gas prices may limit our ability to comply with the covenants under any credit facilities (or other debt instruments) and/or limit our ability to access borrowing availability thereunder, which is dependent on many factors including the value of our proved reserves."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K risk factors; the figures come from the statements",
+    "claim": "A fall in oil or gas prices could cause further property writedowns. The company took an impairment of 20,323 (table in thousands) in the nine months to September 30, 2026 and 44,654 (table in thousands) for full-year 2025.",
+    "facts": [
+     "F2",
+     "P2",
+     "P3"
+    ],
+    "quotes": [
+     "A substantial or extended decline in oil or natural gas prices, could result in future impairments of our proved oil and natural gas properties."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-K Item 1 and Item 1A",
+    "claim": "Revenue depends on third-party operators, with some concentration. Operator D accounted for 26% of revenues in the 10-K's operator table, and the company says losing a major operator could hurt revenue in the short term.",
+    "facts": [
+     "P1",
+     "P2"
+    ],
+    "quotes": [
+     "The loss of any such operator could adversely affect revenues attributable to the Company\u2019s assets in the short term."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated in the 10-Q MD&A and the guidance table; the margin effect is inferred",
+    "claim": "Lease operating costs per Boe are rising. For the nine months they were $9.74 versus $7.10, and the quarter was $9.43 versus $8.03. This squeezes margins if prices fall.",
+    "facts": [
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Lease operating expenses were $89.7 million ($9.74 per Boe) for the nine months ended September 30, 2026, an increase of 50% from $60.0 million ($7.10 per Boe) during the same period in 2025."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "stated by management in the releases; the risk is inferred from the gap between spending and cash flow",
+    "claim": "The thesis that 2027 brings free cash flow that covers the dividend depends on hedge roll-off, production growth and execution. The company says 2026 is the last year it invests ahead of cash flow. The 9-month net loss was (27,086) (table in thousands), and a $35.0 million buyback was added alongside the dividend.",
+    "facts": [
+     "P6",
+     "P9",
+     "F2",
+     "P5"
+    ],
+    "quotes": [
+     "2026 is the final year in which we expect to invest ahead of cash flow"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "stated in the 10-Q risk factors and the 8-K",
+    "claim": "Governance protections are weaker for now. The company is no longer a NYSE controlled company after the Grey Rock affiliate distribution, but it is relying on a one-year transition exemption for committee independence.",
+    "facts": [
+     "P5",
+     "P8"
+    ],
+    "quotes": [
+     "Accordingly, during the transition period, our stockholders may not have the same protections afforded to stockholders of companies that are subject to all of the corporate governance requirements of the NYSE."
+    ],
+    "support": "supported"
+   }
+  ],
+  "thesis_change": [],
+  "unresolved_questions": [
+   {
+    "basis": "Inferred from the realized-price discussion, the balance sheet and the CEO comment. Hedge volumes and strikes are not in the excerpts.",
+    "claim": "How large and at what prices is the commodity hedge book that cost $9.15 per barrel in Q3 settlements and carries 27,959 current and 11,470 long-term derivative liabilities (table in thousands), and how much of it rolls off in 2027?",
+    "facts": [
+     "F1",
+     "P4",
+     "P6"
+    ],
+    "quotes": [
+     "Our settled derivatives decreased our realized oil price per barrel by $9.15 for the three months ended September 30, 2026",
+     "at current strip prices we expect adjusted free cash flow to comfortably cover the dividend and grow our business"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the cash flow statement and management statements. No 2027 guidance appears in the evidence.",
+    "claim": "Will the company reach the free cash flow inflection management describes for 2027? In the first nine months of 2026, operating cash flow of 201,612 was below capital expenditures of 205,465 plus acquisitions of 43,465 (table in thousands).",
+    "facts": [
+     "F3",
+     "P6",
+     "P9"
+    ],
+    "quotes": [
+     "2026 is the final year in which we expect to invest ahead of cash flow"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated amount in the income statement. The cause is not in the evidence.",
+    "claim": "Which properties were impaired for 20,323 in the nine months of 2026 (table in thousands), and why did no further impairment appear in Q3 while oil prices were higher?",
+    "facts": [
+     "F2",
+     "F3",
+     "P3"
+    ],
+    "quotes": [
+     "Impairments of long-lived assets | 0 | 0 | 20,323 | 0"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from balance sheet and cash flow lines. The debt terms are omitted.",
+    "claim": "What drives the current portion of long-term debt of 35,000, up from 17,500 (table in thousands), including the 8,750 repaid on senior notes? What are the revolver balance and remaining availability at September 30, 2026?",
+    "facts": [
+     "F1",
+     "F3",
+     "P3",
+     "P6"
+    ],
+    "quotes": [
+     "Net Debt to Trailing Twelve Months Adjusted EBITDAX (non-GAAP) of 1.3x."
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Inferred from the cash flow statement and the operating table. The sale details are omitted.",
+    "claim": "What assets were sold for 30,324 of proceeds (table in thousands), and why did net producing wells fall to 227.98 from 235.27 while daily production rose?",
+    "facts": [
+     "F3",
+     "P4"
+    ],
+    "quotes": [
+     "Net Producing Wells at Period-End: | 227.98 | 235.27 | 227.98 | 235.27"
+    ],
+    "support": "supported"
+   },
+   {
+    "basis": "Stated that one rig is expected in 2027, but the capital amount is not given.",
+    "claim": "How much capital is committed to the new Arete Creek operated partnership, and how does it fit into the 2026 capital guidance of $345 - $385 and the 2027 plan?",
+    "facts": [
+     "P6",
+     "P1"
+    ],
+    "quotes": [
+     "we provide the majority of the capital, and we control what gets drilled and when"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "The MD&A names the driver, but its size is not stated.",
+    "claim": "How large are the minimum volume commitment delinquencies in lease operating expenses, and will LOE per Boe, which was $9.74 for nine months, stay inside the 2026 guidance range?",
+    "facts": [
+     "P4",
+     "P6",
+     "F2"
+    ],
+    "quotes": [
+     "recognition of minimum volume commitment delinquencies"
+    ],
+    "support": "number_not_listed"
+   },
+   {
+    "basis": "Stated in the 10-Q and 8-K. Post-distribution holders and the MSA status are not stated.",
+    "claim": "Who now holds the shares distributed by Grey Rock affiliates on August 19, 2026, and does that change trading float, governance or the Manager arrangement (MSA)?",
+    "facts": [
+     "P5",
+     "P8",
+     "P2",
+     "S0"
+    ],
+    "quotes": [
+     "Grey Rock Investment Partners and its affiliates no longer hold a majority of the voting power of our outstanding common stock"
+    ],
+    "support": "supported"
+   }
+  ]
+ },
+ "ticker": "GRNT",
+ "valuation": null,
+ "valued": false,
+ "verdict": "NO_CALL",
+ "verdict_reason": "a required figure is not filed (capex or working capital)"
+}

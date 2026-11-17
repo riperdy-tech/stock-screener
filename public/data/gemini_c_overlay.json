@@ -1,9 +1,9 @@
 {
- "count": 117,
+ "count": 118,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T08:44:21Z",
- "list_covered": 115,
+ "generated_at": "2026-11-17T08:49:51Z",
+ "list_covered": 116,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -1409,6 +1409,29 @@
    "valued": false,
    "verdict": "NO_CALL",
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
+  },
+  "GRNT": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 63,
+   "claims_supported": 55,
+   "date": "2026-11-17T08:44:32Z",
+   "family": "commodity",
+   "flags": [
+    "The nine months to Sep. 30, 2026 include an impairment of long-lived assets of 20,323 (table in thousands). The statements show none for the third quarter or the prior-year nine months.",
+    "The Board approved a share repurchase program of up to $35.0 million. Repurchases are discretionary, and no amount bought so far is shown.",
+    "After Grey Rock affiliates distributed shares to their limited partners, the Company ceased to be an NYSE \"controlled company\". The Board also added two independent directors, and the Company will rely on a one-year transition exemption for two committees."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "a required figure is not filed (capex or working capital)"
   },
   "GSAT": {
    "alpha_pts": null,
@@ -3586,7 +3609,7 @@
  "verdict_counts": {
   "AVOID": 25,
   "BUY": 15,
-  "NO_CALL": 71,
+  "NO_CALL": 72,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
