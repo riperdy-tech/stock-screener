@@ -1,9 +1,9 @@
 {
- "count": 118,
+ "count": 119,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T08:49:51Z",
- "list_covered": 116,
+ "generated_at": "2026-11-17T08:56:41Z",
+ "list_covered": 117,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -2746,6 +2746,29 @@
    "verdict": "NO_CALL",
    "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
   },
+  "RLJ": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 70,
+   "claims_supported": 66,
+   "date": "2026-11-17T08:50:02Z",
+   "family": "family_not_built",
+   "flags": [
+    "RLJ completed its 2026 refinancing transactions, which let it repay the 2026 Senior Notes at maturity.",
+    "In 2026 RLJ sold eight hotel properties in two separate transactions for a combined sales price of approximately $123.2 million.",
+    "After the third quarter, RLJ sold seven Chicago Midway assets, and its outlook excludes them."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "no valuation route for this kind of company yet (real estate, pre-profit biotech)"
+  },
   "RNG": {
    "alpha_pts": -100.0,
    "analysis": "complete",
@@ -3609,7 +3632,7 @@
  "verdict_counts": {
   "AVOID": 25,
   "BUY": 15,
-  "NO_CALL": 72,
+  "NO_CALL": 73,
   "WATCH": 6
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
