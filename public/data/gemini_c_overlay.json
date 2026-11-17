@@ -1,9 +1,9 @@
 {
- "count": 109,
+ "count": 110,
  "effort": "high",
  "fill_complete": false,
- "generated_at": "2026-11-17T07:55:44Z",
- "list_covered": 107,
+ "generated_at": "2026-11-17T08:01:49Z",
+ "list_covered": 108,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
  "note": "Gemini reading of SEC filings in the place of the local model; values per share from code using Gemini's choices, where both seeds agree. Paper only, not investment advice.",
@@ -204,6 +204,29 @@
    "valued": true,
    "verdict": "AVOID",
    "verdict_reason": "expected return -53.5 points a year against the required return over 3 years"
+  },
+  "AVAL": {
+   "alpha_pts": null,
+   "analysis": "complete",
+   "claims": 74,
+   "claims_supported": 64,
+   "date": "2026-11-17T07:55:55Z",
+   "family": "operating",
+   "flags": [
+    "Banco de Bogot\u00e1's sale of its Panama subsidiary MFG to BAC was completed after all regulatory authorizations were received. MFG's results are presented as a discontinued operation.",
+    "Banco de Bogot\u00e1 announced the acquisition of Ita\u00fa's retail banking operations in Colombia and Panama. The announcement said the deal was pending regulatory approval.",
+    "Grupo Aval announced that its subsidiary Corficolombiana received a court order dismissing the case under its Deferred Prosecution Agreement with the U.S. Department of Justice, closing the U.S. proceedings covered by the agreement."
+   ],
+   "in_code_book": false,
+   "ke": null,
+   "model": "claude-sonnet-5-5",
+   "no_value_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)",
+   "qwen_book": null,
+   "screener_commit": "138266a300336bd8e26990fb97ef2bed9518a2e5",
+   "source": "screener list refresh",
+   "valued": false,
+   "verdict": "NO_CALL",
+   "verdict_reason": "too little filed history (fewer than 3 fiscal years, or no revenue in SEC's company facts)"
   },
   "BCRX": {
    "alpha_pts": null,
@@ -3363,7 +3386,7 @@
  "verdict_counts": {
   "AVOID": 24,
   "BUY": 15,
-  "NO_CALL": 65,
+  "NO_CALL": 66,
   "WATCH": 5
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
