@@ -66,7 +66,7 @@ def _run(tmp_path, monkeypatch, session, opus):
               "tickers": {t: dict(fct(i + 1), fct_band="research_now") for i, t in enumerate(NAMES)}}
     (d / "factor_scores.json").write_text(json.dumps(factor), encoding="utf-8")
     monkeypatch.setattr(tp, "FACTOR_SCORES_JSON", d / "factor_scores.json")
-    for name in ("DEPTH_OVERLAY_JSON", "GEMINI_OVERLAY_JSON", "M3O_BOOKS_JSON", "V4_PAPER_OVERLAY_JSON",
+    for name in ("DEPTH_OVERLAY_JSON", "GEMINI_OVERLAY_JSON", "GEMINI_C_OVERLAY_JSON", "M3O_BOOKS_JSON", "V4_PAPER_OVERLAY_JSON",
                  "DIVIDENDS_JSON", "MY_PORTFOLIO_JSON", "RISK_STATE_JSON"):
         monkeypatch.setattr(tp, name, d / f"absent_{name}.json")
     op = d / "opus_overlay.json"
@@ -137,3 +137,29 @@ def test_the_watch_book_holds_when_the_file_is_missing(tmp_path, monkeypatch):
     held = copy.deepcopy(book["ledgers"]["rn_opus_watch"]["state"]["holdings"])
     book = _run(tmp_path, monkeypatch, "2026-11-11", None)
     assert book["ledgers"]["rn_opus_watch"]["state"]["holdings"] == held
+
+
+# ── the books follow the filings read once it covers the list (operator 2026-11-16) ──
+
+def _read(complete, rows):
+    return {"fill_complete": complete, "tickers": rows}
+
+
+def test_before_the_fill_is_complete_the_books_follow_claudes_valuation_alone():
+    o = overlay()["tickers"]
+    read = _read(False, {"TESTD": {"analysis": "complete", "verdict": "BUY", "model": "m"}})
+    assert tp.ai_verdicts(o, read) is o and tp.ai_verdicts(o, {}) is o and tp.ai_verdicts(o, None) is o
+
+
+def test_after_the_fill_the_reads_verdict_replaces_claudes_and_a_no_call_or_a_refusal_does_not():
+    o = overlay()["tickers"]                              # TESTA BUY, TESTB WATCH, TESTC NO_CALL, TESTD AVOID
+    read = _read(True, {"TESTA": {"analysis": "complete", "verdict": "AVOID", "model": "m"},      # the read overrules a BUY
+                        "TESTB": {"analysis": "complete", "verdict": "NO_CALL", "model": "m"},    # no call: Claude's WATCH stays
+                        "TESTC": {"analysis": "complete", "verdict": "BUY", "model": "m"},        # the read values what Claude could not
+                        "TESTD": {"analysis": "not run", "verdict": "BUY", "model": "m"}})        # refused: Claude's AVOID stays
+    v = tp.ai_verdicts(o, read)
+    assert {t: r["verdict"] for t, r in v.items()} == {"TESTA": "AVOID", "TESTB": "WATCH", "TESTC": "BUY", "TESTD": "AVOID"}
+    assert v["TESTC"]["direction"] == "undervalued" and v["TESTC"]["not_for_real_money"] is True and v["TESTB"] is o["TESTB"]
+    f = {t: fct(i + 1) for i, t in enumerate(NAMES)}
+    assert set(tp.depth_targets(f, v)) == {"TESTC"}       # the BUY book now holds the read's BUY, not Claude's
+    assert o["TESTA"]["verdict"] == "BUY"                 # the input rows are not changed

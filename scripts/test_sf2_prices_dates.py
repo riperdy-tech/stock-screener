@@ -236,7 +236,7 @@ def _ledger_run(tmp_path, monkeypatch, stocks, iwm):
     d.mkdir(exist_ok=True)
     sp = d / "stocks.json"
     sp.write_text(json.dumps(stocks), encoding="utf-8")
-    for name in ("FACTOR_SCORES_JSON", "DEPTH_OVERLAY_JSON", "GEMINI_OVERLAY_JSON", "M3O_BOOKS_JSON",
+    for name in ("FACTOR_SCORES_JSON", "DEPTH_OVERLAY_JSON", "GEMINI_OVERLAY_JSON", "GEMINI_C_OVERLAY_JSON", "M3O_BOOKS_JSON",
                  "V4_PAPER_OVERLAY_JSON", "DIVIDENDS_JSON", "MY_PORTFOLIO_JSON"):
         monkeypatch.setattr(tp, name, d / f"absent_{name}.json")
     monkeypatch.setattr(tp, "LEDGERS_JSON", d / "paper_ledgers.json")

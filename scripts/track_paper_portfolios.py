@@ -59,6 +59,7 @@ STOCKS_JSON = DATA / "stocks.json"
 FACTOR_SCORES_JSON = DATA / "factor_scores.json"
 DEPTH_OVERLAY_JSON = DATA / "depth_overlay.json"             # RS2 depth verdicts — rn_depth ledger targets
 GEMINI_OVERLAY_JSON = DATA / "gemini_overlay.json"           # interim Gemini verdicts — rn_gemini ledger targets (paper only)
+GEMINI_C_OVERLAY_JSON = DATA / "gemini_c_overlay.json"       # the filings read by Gemini and Claude Opus (rs2-local gemini_ondemand): the Claude books follow it once it covers the list
 OPUS_OVERLAY_JSON = DATA / "opus_overlay.json"               # Opus valuation verdicts (SPEC opus_v1) — rn_opus ledger targets (paper only)
 M3O_BOOKS_JSON = DATA / "m3o_books.json"   # the monthly code book and Qwen's book (rs2-local tools/site/qwen_site.py, published from screener-publish)
 V4_PAPER_OVERLAY_JSON = DATA / "v4_paper_overlay.json"       # engine v2.1 shadow verdicts, EXPERIMENTAL and unpromoted — rn_v4 targets (paper only)
@@ -170,6 +171,28 @@ MIN_EQUAL_NAMES = 8      # #8 concentration floor: equal-weight over max(count, 
 # Same MIN_EQUAL_NAMES concentration floor as the quant equal sleeve: a panel that
 # shrinks to a handful of names leaves the remainder in cash instead of
 # concentrating the whole book into them.
+
+
+AI_DIRECTION = {"BUY": "undervalued", "WATCH": "hold", "AVOID": "overvalued"}
+
+
+def ai_verdicts(opus_tk: dict, read: dict) -> dict:
+    """The verdict rows the Claude books (rn_opus, rn_opus_watch) follow.
+
+    Until the filings read has covered the list (its file says `fill_complete`), Claude's valuation rows exactly as
+    they are. From then on (operator 2026-11-16: "have the claude paper book track gemini's after the full run
+    completes"), per name: the read's verdict when the read ran and gives BUY, WATCH or AVOID, else Claude's row.
+    It is the site's rule for the AI filter (lib/desk/aiVerdict.ts): a read that did not run or ended in no call
+    never replaces a verdict Claude's valuation has. Paper only.
+    """
+    if not isinstance(read, dict) or read.get("fill_complete") is not True:
+        return opus_tk
+    out = dict(opus_tk)
+    for t, r in (read.get("tickers") or {}).items():
+        if isinstance(r, dict) and r.get("analysis") != "not run" and r.get("verdict") in AI_DIRECTION:
+            out[t] = {"verdict": r["verdict"], "direction": AI_DIRECTION[r["verdict"]], "run_source": "filings_read",
+                      "model": r.get("model"), "not_for_real_money": True}
+    return out
 
 
 def depth_targets(factor: dict, depth: dict) -> dict:
@@ -1437,7 +1460,8 @@ def main():
         # ── rn_opus: the Opus valuation run's BUY names (direction "undervalued"), PAPER ONLY (SPEC opus_v1) ──
         # Built exactly as rn_gemini: same gate, same equal weighting, held when opus_overlay.json is missing or
         # empty. A separate ledger; kis/ledger_policy.py lists it as model-derived, and it is on no real-money list.
-        opus_tk = (load_json(OPUS_OVERLAY_JSON, {}) or {}).get("tickers", {})
+        opus_tk = ai_verdicts((load_json(OPUS_OVERLAY_JSON, {}) or {}).get("tickers", {}),
+                              load_json(GEMINI_C_OVERLAY_JSON, {}) or {})
         opus_targets = depth_targets(factor, opus_tk)
         opus_ok = bool(opus_tk) and fct_ok
         opus_why = fct_why if not fct_ok else ("opus_overlay.json missing or empty" if not opus_tk else "")
