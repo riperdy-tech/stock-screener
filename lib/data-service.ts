@@ -528,19 +528,35 @@ export interface QwenReport {
 }
 
 export interface DecidedQuote { id: string; quote: string }
-export type DecidedInputKey = 'rev_growth' | 'op_margin' | 'long_run_op_margin' | 'terminal_growth' | 'fade_years' | 'return_on_new_investment_long_run' | 'capex_to_revenue';
+/** A key of `inputs` this page knows (operating, financial). Any other key is shown too, under its humanised name. */
+export type DecidedInputKey = 'rev_growth' | 'op_margin' | 'long_run_op_margin' | 'roe' | 'book_growth' | 'long_run_roe' | 'terminal_growth' | 'fade_years'
+    | 'return_on_new_investment_long_run' | 'capex_to_revenue';
+
+/** A yes/no/unclear answer with the AI's sentence (situation.tax_rate_representative, debt_level_representative). */
+export interface DecidedAnswer { answer?: string | null; why?: string | null }
+
+/** A checked amount the AI read from the filings (decided_value._checked_item): `amount` in the filing's currency units. */
+export interface DecidedAmount { printed?: number; scale?: string; amount?: number | null; what?: string | null; quotes?: DecidedQuote[]; sign?: string | null }
 
 /** One run of the decided method: the inputs the AI set, why, and what code made of them. Values are per filed share. */
 export interface DecidedRun {
-    situation?: { cyclical?: string | null; margin_position?: string | null; base_year_representative?: string | null; why?: string | null };
-    inputs?: { rev_growth?: number[]; op_margin?: number[]; long_run_op_margin?: number; terminal_growth?: number; fade_years?: number;
-               return_on_new_investment_long_run?: number; capex_to_revenue?: number };
-    ranges?: { long_run_op_margin?: [number, number]; rev_growth_y3?: [number, number]; terminal_growth?: [number, number] };
+    /** Operating: cyclical, margin_position, tax_rate_representative, debt_level_representative; financial: institution, roe_position, capital_constrained; real estate: property_business. */
+    situation?: { cyclical?: string | null; margin_position?: string | null; base_year_representative?: string | null; why?: string | null;
+                  institution?: string | null; roe_position?: string | null; capital_constrained?: string | null; property_business?: string | null;
+                  tax_rate_representative?: DecidedAnswer | null; debt_level_representative?: DecidedAnswer | null; [key: string]: unknown };
+    inputs?: Record<string, unknown>;
+    ranges?: Record<string, unknown>;
     risks?: { risk?: string; input_hit?: string; bear_value?: number | number[] | null }[];
     confidence?: string | null;
-    reasons?: Partial<Record<DecidedInputKey, { why?: string | null; quotes?: DecidedQuote[]; quotes_given?: number }>>;
+    reasons?: Record<string, { why?: string | null; quotes?: DecidedQuote[]; quotes_given?: number } | undefined>;
     flags?: string[];
     values?: { bear?: number; base?: number; bull?: number };
+    /** Operating v2: what the AI took out of the base year (decided_value.adjust_base). */
+    adjustments?: { cash_not_free?: DecidedAmount | null; base_year_one_offs?: DecidedAmount[] | null } | null;
+    /** Real estate (decided_real_estate.ffo_check): the company's reported FFO against code's derivation. */
+    real_estate?: { property_business?: string | null; ffo?: {
+        status?: string; reported?: { value?: number; per?: string; what?: string | null; quotes?: DecidedQuote[] } | null;
+        derived_after_preferred?: number | null; per_share_divisor?: number | null; gap_after_preferred?: number | null } | null } | null;
 }
 
 export interface DecidedValuation {
