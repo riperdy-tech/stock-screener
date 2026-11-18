@@ -108,7 +108,7 @@ export function VerdictCard({ geminiC, opus, live, priceDate, target }: {
     if (read && geminiC?.valued && geminiC.far_from_price) warnings.push(t('pgQwFar'));
     if (read && geminiC?.valued && geminiC.seeds_agree === false) warnings.push(fill(t('pgGcSeeds'), { m }));
     if (ai?.source === 'claude' && opus?.sensitivity && !opus.sensitivity.holds_across_band) warnings.push(t('opRateShifts'));
-    const cyclical = geminiC?.family === 'commodity' && ours != null && ours.kind === 'scenarios';
+    const cyclical = geminiC?.family === 'commodity' && !geminiC?.decided && ours != null && ours.kind === 'scenarios';
 
     const oursUp = ours ? upside(ours.base, live) : null;
     const anUp = target && target.comparable ? upside(target.mean, live) : null;
