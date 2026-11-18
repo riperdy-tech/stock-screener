@@ -4,7 +4,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import type { DecidedRun, DecidedValuation } from '../data-service';
-import { inputRows, inputText, lossLine, oldDefaultsValue, parseFlag, pct1, pctList, riskInputKey, riskValue, runSeeds, taxLine, withRange } from './decidedText';
+import { inputRows, inputText, lossLine, mergedRisks, oldDefaultsValue, parseFlag, pct1, pctList, riskInputKey, riskValue, runSeeds, taxLine, withRange } from './decidedText';
 
 const run = (g: number): DecidedRun => ({
     inputs: { rev_growth: [g, 0.05, 0.04, 0.03, 0.02], op_margin: [0.2, 0.19, 0.18, 0.17, 0.16], long_run_op_margin: 0.15, terminal_growth: 0.025, fade_years: 8,
@@ -29,9 +29,9 @@ test('pctList: comma list, empty is a dash', () => {
 });
 
 test('withRange: the figure with its low to high, or the figure alone', () => {
-    assert.equal(withRange(0.15, [0.1, 0.2]), '15.0% (10.0% to 20.0%)');
+    assert.equal(withRange(0.15, [0.1, 0.2]), '15.0% (low 10.0% to high 20.0%)');
     assert.equal(withRange(0.15, undefined), '15.0%');
-    assert.equal(withRange(undefined, [0.1, 0.2]), '— (10.0% to 20.0%)');
+    assert.equal(withRange(undefined, [0.1, 0.2]), '— (low 10.0% to high 20.0%)');
 });
 
 test('runSeeds: numeric order, so run 1 is the lower seed whatever the key order', () => {
@@ -49,8 +49,8 @@ test('oldDefaultsValue: the quoted value wins, 0 counts, else the plain one, els
 test('inputText: each input in its unit', () => {
     const r = run(0.03);
     assert.equal(inputText('rev_growth', r), '3.0%, 5.0%, 4.0%, 3.0%, 2.0%');
-    assert.equal(inputText('long_run_op_margin', r), '15.0% (10.0% to 20.0%)');
-    assert.equal(inputText('terminal_growth', r), '2.5% (1.5% to 3.3%)');
+    assert.equal(inputText('long_run_op_margin', r), '15.0% (low 10.0% to high 20.0%)');
+    assert.equal(inputText('terminal_growth', r), '2.5% (low 1.5% to high 3.3%)');
     assert.equal(inputText('fade_years', r), '8');
     assert.equal(inputText('capex_to_revenue', r), '12.0%');
     assert.equal(inputText('fade_years', undefined), '—');
@@ -105,4 +105,16 @@ test('lossLine: needs a label; the explanation is optional', () => {
     assert.deepEqual(lossLine({ loss_record: { label: 'x' } }), { label: 'x', explanation: '' });
     assert.equal(lossLine({ loss_record: { label: null, explanation: 'unexplained' } }), null);
     assert.equal(lossLine({}), null);
+});
+
+test('mergedRisks: one entry per risk text, marked with the runs that named it and what each said', () => {
+    const d = dec();
+    d.runs['1000'].risks = [{ risk: 'Demand falls', input_hit: 'rev_growth', bear_value: 0.01 }, { risk: 'Costs rise', input_hit: 'op_margin', bear_value: 0.1 }];
+    d.runs['3000'].risks = [{ risk: ' Demand falls ', input_hit: 'rev_growth', bear_value: 0.02 }, { risk: 'A new rival', input_hit: 'capex_to_revenue', bear_value: 0.2 }, { risk: '' }];
+    assert.deepEqual(mergedRisks(d), [
+        { risk: 'Demand falls', runs: [{ run: 0, input: 'rev_growth', value: 0.01 }, { run: 1, input: 'rev_growth', value: 0.02 }] },
+        { risk: 'Costs rise', runs: [{ run: 0, input: 'op_margin', value: 0.1 }] },
+        { risk: 'A new rival', runs: [{ run: 1, input: 'capex_to_revenue', value: 0.2 }] },
+    ]);
+    assert.deepEqual(mergedRisks(dec()), []);
 });

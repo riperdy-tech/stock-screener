@@ -8,7 +8,7 @@ import React from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import type { DecidedValuation, OpusVerdictCode, QwenReport } from '@/lib/data-service';
 import { fmtMoney } from '@/lib/desk/format';
-import { inputRows, lossLine, oldDefaultsValue, parseFlag, pct1, riskInputKey, riskValue, runSeeds, taxLine } from '@/lib/desk/decidedText';
+import { inputRows, lossLine, mergedRisks, oldDefaultsValue, parseFlag, pct1, riskInputKey, riskValue, runSeeds, taxLine } from '@/lib/desk/decidedText';
 import { fill } from '@/lib/desk/text';
 import { OpusChip } from '../rankings/DeskParts';
 import { DASH } from './stockParts';
@@ -26,6 +26,7 @@ export function DecidedSection({ q, d, price }: { q: QwenReport & { verdict?: st
     const old = oldDefaultsValue(d);
     const tax = taxLine(q);
     const loss = lossLine(q);
+    const risks = mergedRisks(d);
     const flags = (d.flags ?? []).map(parseFlag);
 
     return (
@@ -90,14 +91,19 @@ export function DecidedSection({ q, d, price }: { q: QwenReport & { verdict?: st
                 ))}
             </div>
 
-            {(runs[0]?.risks ?? []).length > 0 && (
+            {risks.length > 0 && (
                 <div className="mt-3">
                     <b className="text-[12px] font-semibold">{t('dcRisks')}</b>
                     <ul className="mt-1 list-disc space-y-1 pl-5 text-[12px] text-ink-2">
-                        {(runs[0]?.risks ?? []).map((r, i) => {
-                            const k = riskInputKey(r.input_hit);
-                            return <li key={i} className="break-words">{fill(t('dcRiskLine'), { risk: r.risk ?? DASH, input: k ? t(k) : r.input_hit ?? DASH, v: riskValue(r.input_hit, r.bear_value) })}</li>;
-                        })}
+                        {risks.map((r, i) => (
+                            <li key={i} className="break-words">
+                                {r.risk}
+                                {r.runs.map((x) => {
+                                    const k = riskInputKey(x.input);
+                                    return <span key={x.run} className="block font-mono text-[11px] text-ink-3">{fill(t('dcRiskRun'), { run: runNo(x.run), input: k ? t(k) : x.input ?? DASH, v: riskValue(x.input, x.value) })}</span>;
+                                })}
+                            </li>
+                        ))}
                     </ul>
                 </div>
             )}

@@ -13,10 +13,10 @@ export const pct1 = (v: unknown): string => (isNum(v) ? fmtPct(v, 1) : '—');
 /** A list of fractions → "3.5%, 5.0%, 4.0%"; an empty or missing list is "—". */
 export const pctList = (v: unknown): string => (Array.isArray(v) && v.length > 0 ? v.map(pct1).join(', ') : '—');
 
-/** "40.0% (33.0% to 46.0%)": a figure with its range; no range, no parenthesis. */
+/** "40.0% (low 33.0% to high 46.0%)": a figure with its range; no range, no parenthesis. */
 export function withRange(v: unknown, range: unknown): string {
     const base = pct1(v);
-    return Array.isArray(range) && isNum(range[0]) && isNum(range[1]) ? `${base} (${pct1(range[0])} to ${pct1(range[1])})` : base;
+    return Array.isArray(range) && isNum(range[0]) && isNum(range[1]) ? `${base} (low ${pct1(range[0])} to high ${pct1(range[1])})` : base;
 }
 
 /** The runs in seed order: ["1000", "3000"]. The first is "run 1", the second "run 2". */
@@ -77,6 +77,20 @@ export function riskValue(input: string | undefined, v: unknown): string {
 /** The label key of the input a risk hits; null for a name the page does not know (shown as the raw text). */
 export const riskInputKey = (input: string | undefined) =>
     (input && Object.prototype.hasOwnProperty.call(INPUT_LABEL, input) ? INPUT_LABEL[input as DecidedInputKey] : null);
+
+/** The risks of both runs as one list, one entry per risk text; each entry says which runs named it and what that run says (input, bear value). */
+export function mergedRisks(d: DecidedValuation): { risk: string; runs: { run: number; input: string | undefined; value: unknown }[] }[] {
+    const out: { risk: string; runs: { run: number; input: string | undefined; value: unknown }[] }[] = [];
+    runSeeds(d).forEach((s, i) => {
+        for (const r of d.runs[s]?.risks ?? []) {
+            const text = (r.risk ?? '').trim();
+            if (text === '') continue;
+            const e = out.find((x) => x.risk === text) ?? (out.push({ risk: text, runs: [] }), out[out.length - 1]);
+            e.runs.push({ run: i, input: r.input_hit, value: r.bear_value });
+        }
+    });
+    return out;
+}
 
 // ── flags ────────────────────────────────────────────────────────────────────
 
