@@ -2,7 +2,7 @@
  "count": 167,
  "effort": "high",
  "fill_complete": true,
- "generated_at": "2026-11-18T00:04:57Z",
+ "generated_at": "2026-11-18T00:12:43Z",
  "list_covered": 161,
  "list_names": 161,
  "model": "claude-sonnet-5-5",
@@ -4767,27 +4767,47 @@
    "verdict_reason": "a required figure is not filed (capex or working capital)"
   },
   "VEON": {
-   "alpha_pts": null,
+   "alpha_pts": 18.431496897962614,
    "analysis": "complete",
-   "claims": 76,
-   "claims_supported": 69,
-   "date": "2026-11-17T19:20:28Z",
+   "claims": 97,
+   "claims_supported": 76,
+   "date": "2026-11-18T00:05:23Z",
+   "equity_value": 8689081395.298586,
    "family": "operating",
+   "far_from_price": false,
+   "filed_shares": 1794000000.0,
    "flags": [
-    "The Cohen Circle business combination closed and Kyivstar Group listed on Nasdaq. VEON recognized a listing expense of US$162 million and its stake in Kyivstar Group fell to 89.6%.",
-    "The sale of the Pakistan tower business (Deodar) to Engro Corp was completed and control transferred. The income statement shows a gain on disposal of subsidiaries for 2025.",
-    "The Islamabad High Court issued an adverse ruling in the PMCL Deodar tax case. VEON reclassified the risk as probable and recognized an additional tax expense of US$122 million in Q2 2025."
+    "The Cohen Circle business combination closed and Kyivstar Group listed on Nasdaq. VEON's stake in it fell from 100% to 89.6%, and VEON booked a listing expense of US$162 million.",
+    "Management previously concluded there was substantial doubt about going concern. In the FY2025 20-F it concluded that significant doubt no longer exists, citing regained capital-markets access and new financing. This is a lifted doubt, not a new one.",
+    "The sale of the Pakistan tower business (Deodar) to Engro Corp was completed. A gain of USD 489 million is cited for it in the second quarter of 2025."
    ],
    "in_code_book": false,
-   "ke": null,
+   "ke": 0.09846177079828694,
+   "market_cap_at_publish": 5435902494,
    "model": "claude-sonnet-5-5",
-   "no_value_reason": "a required figure is not filed (capex or working capital)",
+   "no_value_reason": null,
+   "price_at_publish": 78.94,
    "qwen_book": null,
    "screener_commit": "c11d60fc02dd794e7de6a1f1d58b97de3498a8a4",
-   "source": "screener list refresh",
-   "valued": false,
-   "verdict": "NO_CALL",
-   "verdict_reason": "a required figure is not filed (capex or working capital)"
+   "seed_base": {
+    "1000": 4.162188033383232,
+    "3000": 4.843412148995867
+   },
+   "seeds_agree": false,
+   "share_unit_note": "filed shares 1,794,000,000 against 68,861,192 quoted (x0.0384); values are per quoted share",
+   "source": "on request (no-call fix rerun)",
+   "upside": 0.598461599502448,
+   "value_base": 126.18255866472325,
+   "value_bear": 117.48154109085466,
+   "value_bull": 133.02308006005651,
+   "value_per_filed_share": {
+    "base": 4.843412148995867,
+    "bear": 4.509430854973467,
+    "bull": 5.105979850762449
+   },
+   "valued": true,
+   "verdict": "BUY",
+   "verdict_reason": "expected return +18.4 points a year against the required return over 3 years"
   },
   "VG": {
    "alpha_pts": null,
@@ -5141,11 +5161,11 @@
    "verdict_reason": "expected return +53.3 points a year against the required return over 3 years"
   }
  },
- "valued_count": 66,
+ "valued_count": 67,
  "verdict_counts": {
   "AVOID": 34,
-  "BUY": 25,
-  "NO_CALL": 101,
+  "BUY": 26,
+  "NO_CALL": 100,
   "WATCH": 7
  },
  "verdict_rule": "Expected value = the bear, base and bull values weighted by the valuation's probabilities. BUY: its return over 3 years is 4 points a year or more above the required return, in both runs. WATCH: above zero. AVOID: zero or less. NO_CALL: not valued."
